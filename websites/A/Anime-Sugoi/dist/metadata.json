@@ -14,17 +14,11 @@
 	},
 	"url": "www.anime-sugoi.com",
 	"regExp": "([a-z0-9-]+[.])*anime-sugoi[.]com[/]",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://i.imgur.com/DfHT5E8.png",
 	"thumbnail": "https://i.imgur.com/3wTOxd0.jpg",
 	"color": "#ff6666",
 	"category": "anime",
-	"tags": [
-		"anime-sugoi",
-		"anime",
-		"videos",
-		"free",
-		"thai"
-	],
+	"tags": ["anime-sugoi", "anime", "videos", "free", "thai"],
 	"iframe": true
 }

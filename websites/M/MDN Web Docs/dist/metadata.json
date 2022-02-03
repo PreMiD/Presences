@@ -11,16 +11,10 @@
 		"nl": "De webdocumenten van MDN, hier vind je JS-documenten en meer..."
 	},
 	"url": "developer.mozilla.org",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/SmC65Yu.png",
 	"thumbnail": "https://i.imgur.com/TkKC4bK.png",
 	"color": "#84d4f4",
 	"category": "other",
-	"tags": [
-		"dev",
-		"javascript",
-		"mozilla",
-		"css",
-		"html"
-	]
+	"tags": ["dev", "javascript", "mozilla", "css", "html"]
 }

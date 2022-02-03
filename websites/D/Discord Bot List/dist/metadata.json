@@ -11,14 +11,10 @@
 		"nl": "Discord Bot List is een lijst van discord bots."
 	},
 	"url": "discordbotlist.com",
-	"version": "1.2.14",
+	"version": "1.2.15",
 	"logo": "https://i.imgur.com/Nh2SWRD.png",
 	"thumbnail": "https://i.imgur.com/s9urIYH.png",
 	"color": "#10C0E7",
 	"category": "other",
-	"tags": [
-		"discord",
-		"bot",
-		"discord-bot-list"
-	]
+	"tags": ["discord", "bot", "discord-bot-list"]
 }

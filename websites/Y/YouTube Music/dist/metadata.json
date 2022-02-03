@@ -25,15 +25,12 @@
 		"vi_VN": "Một dịch vụ phát nhạc mới với các album, đĩa đơn, video, bản remix, và các tiết mục trực tiếp chính thức và hơn nữa cho Android, iOS và máy tính. Tất cả đều tại đây."
 	},
 	"url": "music.youtube.com",
-	"version": "2.8.7",
+	"version": "2.8.8",
 	"logo": "https://i.imgur.com/31gvH2b.png",
 	"thumbnail": "https://i.imgur.com/iQ8MA50.png",
 	"color": "#E40813",
 	"category": "music",
-	"tags": [
-		"audio",
-		"music"
-	],
+	"tags": ["audio", "music"],
 	"settings": [
 		{
 			"id": "timestamps",

@@ -20,20 +20,13 @@
 		"nl": "Kahoot! is een op games gebaseerd platform dat leren geweldig maakt voor miljoenen mensen over de hele wereld.",
 		"vi_VN": "Kahoot! là nền tảng trò chơi khiến việc học tập trở nên tuyệt vời cho hàng triệu người trên khắp thế giới."
 	},
-	"url": [
-		"kahoot.it",
-		"play.kahoot.it"
-	],
-	"version": "2.0.10",
+	"url": ["kahoot.it", "play.kahoot.it"],
+	"version": "2.0.11",
 	"logo": "https://i.imgur.com/GkXv1zy.jpg",
 	"thumbnail": "https://i.imgur.com/3DGbV8e.png",
 	"color": "#8A5CD7",
 	"category": "games",
-	"tags": [
-		"games",
-		"qna",
-		"fun"
-	],
+	"tags": ["games", "qna", "fun"],
 	"settings": [
 		{
 			"id": "lang",

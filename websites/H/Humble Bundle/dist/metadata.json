@@ -11,13 +11,10 @@
 	},
 	"url": "www.humblebundle.com",
 	"regExp": "([a-z0-9-]+[.])*humblebundle[.]com[/]",
-	"version": "1.2.10",
+	"version": "1.2.11",
 	"logo": "https://i.imgur.com/BOUZiVY.png",
 	"thumbnail": "https://i.imgur.com/nLBIlpU.png",
 	"color": "#cc2929",
 	"category": "games",
-	"tags": [
-		"codes",
-		"steam"
-	]
+	"tags": ["codes", "steam"]
 }

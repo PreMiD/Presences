@@ -12,15 +12,10 @@
 	},
 	"url": "www.wikihow.com",
 	"regExp": "([a-z0-9|-]+[.])*wikihow[.]com[/]",
-	"version": "1.3.13",
+	"version": "1.3.14",
 	"logo": "https://i.imgur.com/yY2L00N.png",
 	"thumbnail": "https://i.imgur.com/YlrRdTn.png",
 	"color": "#BFFF00",
 	"category": "other",
-	"tags": [
-		"wiki",
-		"life-hacks",
-		"tutorial",
-		"how-to"
-	]
+	"tags": ["wiki", "life-hacks", "tutorial", "how-to"]
 }

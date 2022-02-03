@@ -10,14 +10,10 @@
 		"nl": "Archief van gratis downloadbare lettertypen. Blader door alfabetische lijst, stijl, auteur of populariteit."
 	},
 	"url": "www.dafont.com",
-	"version": "1.3.11",
+	"version": "1.3.12",
 	"logo": "https://i.imgur.com/PScrApw.png",
 	"thumbnail": "https://i.imgur.com/OTjFjMj.jpg",
 	"color": "#eb4034",
 	"category": "other",
-	"tags": [
-		"fonts",
-		"design",
-		"text"
-	]
+	"tags": ["fonts", "design", "text"]
 }

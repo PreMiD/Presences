@@ -13,11 +13,8 @@
 		"ga_IE": "Feidhmíonn Wikidata mar stóráil lárnach sonraí struchtúrtha do thionscadail Wikimedia. De bharr sonraí a struchtúrú i bhformáid atá inléite ag meaisín tá sé níos éasca comhaid a fheiceáil, a chuardach, a chur in eagar, a choimeadú, a úsáid agus a athúsáid.",
 		"nl": "Wikidata fungeert als centrale opslag van gestructureerde gegevens voor Wikimedia-projecten. Door gegevens in een machineleesbaar formaat te structureren, wordt het gemakkelijker om bestanden te bekijken, doorzoeken, bewerken, beheren, gebruiken en hergebruiken."
 	},
-	"url": [
-		"www.wikidata.org",
-		"test.wikidata.org"
-	],
-	"version": "1.0.12",
+	"url": ["www.wikidata.org", "test.wikidata.org"],
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/lxJ9vQI.png",
 	"thumbnail": "https://i.imgur.com/iDhgTZS.png",
 	"color": "#f9f9f9",

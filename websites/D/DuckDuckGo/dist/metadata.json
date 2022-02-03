@@ -11,16 +11,12 @@
 		"vi_VN": "Công ty bảo mật Internet giúp bạn nắm kiểm soát về thông tin cá nhân của mình trên mạng, không cần đánh đổi bất cứ thứ gì."
 	},
 	"url": "duckduckgo.com",
-	"version": "1.2.14",
+	"version": "1.2.15",
 	"logo": "https://i.imgur.com/zl3jobl.png",
 	"thumbnail": "https://i.imgur.com/VlPQGur.png",
 	"color": "#FF5900",
 	"category": "other",
-	"tags": [
-		"internet",
-		"browing",
-		"search"
-	],
+	"tags": ["internet", "browing", "search"],
 	"settings": [
 		{
 			"id": "homepageMessage",

@@ -12,21 +12,13 @@
 		"zh_CN": "让听广播变得容易! 来自德国，法国和奥地利所有地区的广播电台。",
 		"nl": "Luisteren naar de radio gemakkelijk gemaakt. Radiostations uit alle regio's van Duitsland, Frankrijk en Oostenrijk."
 	},
-	"url": [
-		"radiome.de",
-		"radiome.at",
-		"radiome.fr"
-	],
-	"version": "2.0.3",
+	"url": ["radiome.de", "radiome.at", "radiome.fr"],
+	"version": "2.0.4",
 	"logo": "https://i.imgur.com/Fm5zIJW.png",
 	"thumbnail": "https://i.imgur.com/fym06a7.png",
 	"color": "#67e350",
 	"category": "music",
-	"tags": [
-		"radio",
-		"music",
-		"stream"
-	],
+	"tags": ["radio", "music", "stream"],
 	"settings": [
 		{
 			"id": "lang",

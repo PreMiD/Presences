@@ -13,16 +13,12 @@
 	},
 	"url": "animelon.com",
 	"regExp": "([a-z0-9-]+[.])*animelon([.][a-z]+)+[/]",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/5gunVuc.png",
 	"thumbnail": "https://i.imgur.com/sT2xcZP.jpg",
 	"color": "#D34344",
 	"category": "videos",
-	"tags": [
-		"anime",
-		"videos",
-		"movies"
-	],
+	"tags": ["anime", "videos", "movies"],
 	"iframe": true,
 	"settings": [
 		{

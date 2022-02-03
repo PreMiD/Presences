@@ -14,13 +14,10 @@
 		"nl": "DLive.tv is de grootste live streaming community op blockchain die wordt aangedreven door Lino blockchain."
 	},
 	"url": "dlive.tv",
-	"version": "2.2.10",
+	"version": "2.2.11",
 	"logo": "https://i.imgur.com/pScqtTz.png",
 	"thumbnail": "https://i.imgur.com/JLYXbc7.png",
 	"color": "#ffd300",
 	"category": "videos",
-	"tags": [
-		"video",
-		"livestream"
-	]
+	"tags": ["video", "livestream"]
 }

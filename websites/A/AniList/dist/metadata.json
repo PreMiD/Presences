@@ -16,14 +16,10 @@
 		"vi_VN": "AniList: Theo dõi, tìm kiếm, chia sẻ Anime & Manga - Đăng ký ngay hôm nay!"
 	},
 	"url": "anilist.co",
-	"version": "1.4.16",
+	"version": "1.4.17",
 	"logo": "https://i.imgur.com/fqyhsZ5.png",
 	"thumbnail": "https://i.imgur.com/ooIBlD5.jpg",
 	"color": "#02A9FF",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"manga",
-		"list"
-	]
+	"tags": ["anime", "manga", "list"]
 }

@@ -11,14 +11,10 @@
 	},
 	"url": "www.curseforge.com",
 	"regExp": "([a-z0-9-]+[.])*curseforge[.]com[/]",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/3V6FWir.png",
 	"thumbnail": "https://i.imgur.com/IClUTAu.png",
 	"color": "#f16725",
 	"category": "games",
-	"tags": [
-		"mods",
-		"plugins",
-		"curseforge"
-	]
+	"tags": ["mods", "plugins", "curseforge"]
 }

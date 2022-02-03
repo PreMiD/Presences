@@ -12,16 +12,12 @@
 	},
 	"url": "javx.net",
 	"regExp": "([a-z0-9-]+[.])*javx([.][a-z]+)+[/]",
-	"version": "1.1.6",
+	"version": "1.1.7",
 	"logo": "https://i.imgur.com/0Jwz0Ct.png",
 	"thumbnail": "https://i.imgur.com/9UFz4Bl.png",
 	"color": "#262626",
 	"category": "videos",
-	"tags": [
-		"jav",
-		"porn",
-		"nsfw"
-	],
+	"tags": ["jav", "porn", "nsfw"],
 	"iframe": true,
 	"iFrameRegExp": "([a-z0-9-]+[.])*ijav.tv/play/([a-z0-9-])+"
 }

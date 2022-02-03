@@ -9,17 +9,11 @@
 		"en": "Play Minigames, Factions, Skyblock, Prison, Survival and much more on Minecraft Central!",
 		"nl": "Speel Minigames, Factions, Skyblock, Prison, Survival en nog veel meer op Minecraft Central!"
 	},
-	"url": [
-		"mccentral.org",
-		"buy.mccentral.org"
-	],
-	"version": "1.0.11",
+	"url": ["mccentral.org", "buy.mccentral.org"],
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/W7XIUCd.png",
 	"thumbnail": "https://i.imgur.com/yTWQ5RJ.png",
 	"color": "#da8a00",
 	"category": "games",
-	"tags": [
-		"minecraft",
-		"mccentral"
-	]
+	"tags": ["minecraft", "mccentral"]
 }

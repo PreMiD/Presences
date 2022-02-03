@@ -10,14 +10,10 @@
 		"vi_VN": "Thông báo người dùng mới. Cảnh báo giao dịch. Các công việc được lên kế hoạch. Bot cộng đồng. Các truy vấn SQL. Công cụ nội bộ. Tạo dựng bất cả những gì bạn muốn với JavaScript và API."
 	},
 	"url": "autocode.com",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/KNLjAwu.jpg",
 	"thumbnail": "https://i.imgur.com/iojaJvv.jpg",
 	"color": "#ffffff",
 	"category": "other",
-	"tags": [
-		"code",
-		"ide",
-		"editor"
-	]
+	"tags": ["code", "ide", "editor"]
 }

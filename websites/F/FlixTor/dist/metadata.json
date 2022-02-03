@@ -11,13 +11,10 @@
 		"nl": "FlixTor is een volledig geautomatiseerde video zoekmachine."
 	},
 	"url": "flixtor.to",
-	"version": "2.2.12",
+	"version": "2.2.13",
 	"logo": "https://i.imgur.com/FIXyNZo.png",
 	"thumbnail": "https://i.imgur.com/iaHbvZ7.png",
 	"color": "#1d3343",
 	"category": "videos",
-	"tags": [
-		"video",
-		"media"
-	]
+	"tags": ["video", "media"]
 }

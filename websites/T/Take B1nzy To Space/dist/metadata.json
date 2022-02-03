@@ -10,15 +10,10 @@
 		"nl": "Reis door de ruimte terwijl je naar geweldige muziek luistert op een website die is ontwikkeld door voormalige Discord-medewerkers en Senior Ratelimiter B1nzy!"
 	},
 	"url": "takeb1nzyto.space",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/ej5mly9.png",
 	"thumbnail": "https://i.imgur.com/Zf7Dl4W.png",
 	"color": "#060A22",
 	"category": "music",
-	"tags": [
-		"music",
-		"media",
-		"space",
-		"b1nzy"
-	]
+	"tags": ["music", "media", "space", "b1nzy"]
 }

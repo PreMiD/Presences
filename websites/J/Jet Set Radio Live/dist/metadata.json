@@ -16,15 +16,12 @@
 		"nl": "Yo! Je hebt toch van Jet Set Radio gehoord? Het is alleen het populairste radiostation dat rechtstreeks uit Tokio komt! Stem af. Zet aan. Jetset Radiooo !!!"
 	},
 	"url": "jetsetradio.live",
-	"version": "2.1.9",
+	"version": "2.1.10",
 	"logo": "https://i.imgur.com/ZiIN6t9.png",
 	"thumbnail": "https://i.imgur.com/TmgNbn4.jpg",
 	"color": "#FFE222",
 	"category": "music",
-	"tags": [
-		"music",
-		"radio"
-	],
+	"tags": ["music", "radio"],
 	"settings": [
 		{
 			"id": "song",

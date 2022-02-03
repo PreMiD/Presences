@@ -12,15 +12,10 @@
 	},
 	"url": "slither.io",
 	"regExp": "([a-z0-9-]+[.])*slither[.]io[/]",
-	"version": "1.6.10",
+	"version": "1.6.11",
 	"logo": "https://i.imgur.com/1afZuaP.png",
 	"thumbnail": "https://i.imgur.com/PeahIhY.png",
 	"color": "#319c2c",
 	"category": "games",
-	"tags": [
-		"io-game",
-		"games",
-		"snake",
-		"ranks"
-	]
+	"tags": ["io-game", "games", "snake", "ranks"]
 }

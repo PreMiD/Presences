@@ -14,13 +14,10 @@
 		"vi_VN": "Nền tảng cung cấp hoạt hình hoàn toàn miễn phí."
 	},
 	"url": "ani.gamer.com.tw",
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/24VLERu.png",
 	"thumbnail": "https://i.imgur.com/atthc8l.png",
 	"color": "#58bec9",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"videos"
-	]
+	"tags": ["anime", "videos"]
 }

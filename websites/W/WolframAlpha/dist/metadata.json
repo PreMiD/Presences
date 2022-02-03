@@ -10,18 +10,11 @@
 		"fr": "Calculez des réponses en utilisant la technologie de pointe et la base de connaissances de Wolfram, auxquelles des millions d'étudiants et de professionnels font confiance. Pour les mathématiques, les sciences, la nutrition,...",
 		"nl": "Bereken antwoorden met behulp van Wolfram's baanbrekende technologie en kennisdatabase, waarop miljoenen studenten en professionals vertrouwen. Voor wiskunde, wetenschap, voeding,..."
 	},
-	"url": [
-		"www.wolframalpha.com",
-		"products.wolframalpha.com"
-	],
-	"version": "1.0.8",
+	"url": ["www.wolframalpha.com", "products.wolframalpha.com"],
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/vrmnHwZ.png",
 	"thumbnail": "https://i.imgur.com/M8EhvsC.png",
 	"color": "#c24802",
 	"category": "other",
-	"tags": [
-		"wolframalpha",
-		"wiki",
-		"wolfram"
-	]
+	"tags": ["wolframalpha", "wiki", "wolfram"]
 }

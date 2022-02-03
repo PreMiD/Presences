@@ -11,16 +11,11 @@
 		"nl": "Dizimag is de populairste website in Turkije, u kunt er TV-series en films bekijken."
 	},
 	"url": "dizimag2.org",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/ioA6fNx.png",
 	"thumbnail": "https://i.imgur.com/EnLqRkt.png",
 	"color": "#bac510",
 	"category": "videos",
-	"tags": [
-		"dizimag",
-		"video",
-		"tv-series",
-		"turkish"
-	],
+	"tags": ["dizimag", "video", "tv-series", "turkish"],
 	"iframe": true
 }

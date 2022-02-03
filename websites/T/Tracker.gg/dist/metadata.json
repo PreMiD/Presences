@@ -9,21 +9,13 @@
 		"en": "Tracker Network provides stats, global and regional leaderboards and much more to gamers around the world.",
 		"de": "Tracker Network bietet Spielern auf der ganzen Welt Statistiken, globale und regionale Bestenlisten und vieles mehr."
 	},
-	"url": [
-		"tracker.gg",
-		"fortnitetracker.com",
-		"thetrackernetwork.com"
-	],
-	"version": "1.0.1",
+	"url": ["tracker.gg", "fortnitetracker.com", "thetrackernetwork.com"],
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/WjiUlSb.png",
 	"thumbnail": "https://i.imgur.com/sRio2Rr.png",
 	"color": "#e2263c",
 	"category": "games",
-	"tags": [
-		"tracker",
-		"games",
-		"stats"
-	],
+	"tags": ["tracker", "games", "stats"],
 	"settings": [
 		{
 			"id": "buttons",

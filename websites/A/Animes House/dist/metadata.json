@@ -14,15 +14,11 @@
 		"vi_VN": "Một trong những trang xem anime thoải mái nhất Brazil."
 	},
 	"url": "animeshouse.net",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"logo": "https://i.imgur.com/dv1nn7J.png",
 	"thumbnail": "https://i.imgur.com/1YqKDfY.png",
 	"color": "#079ac7",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"animes",
-		"animeshouse"
-	],
+	"tags": ["anime", "animes", "animeshouse"],
 	"iframe": true
 }

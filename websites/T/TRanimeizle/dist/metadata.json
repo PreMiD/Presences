@@ -10,18 +10,12 @@
 		"tr": "TRanimeizle, anime izleyebileceğiniz bir Türk servisidir.",
 		"nl": "TRanimeizle is een Turkse anime-website om online animaties te zoeken en te bekijken."
 	},
-	"url": [
-		"www.tranimeizle.net",
-		"tranimeizle.net"
-	],
-	"version": "1.0.7",
+	"url": ["www.tranimeizle.net", "tranimeizle.net"],
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/TsLirN4.jpg",
 	"thumbnail": "https://i.imgur.com/tvxzX3S.png",
 	"color": "#eb0254",
 	"category": "anime",
-	"tags": [
-		"turkish",
-		"anime"
-	],
+	"tags": ["turkish", "anime"],
 	"iframe": true
 }

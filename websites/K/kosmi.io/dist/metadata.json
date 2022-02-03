@@ -9,17 +9,11 @@
 		"en": "Online Hangouts Made Easy.",
 		"nl": "Online Hangouts gemakkelijk gemaakt."
 	},
-	"url": [
-		"app.kosmi.io",
-		"kosmi.io"
-	],
-	"version": "1.0.10",
+	"url": ["app.kosmi.io", "kosmi.io"],
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/RdGpMdg.png",
 	"thumbnail": "https://i.imgur.com/ZzMzc1l.png",
 	"color": "#322484",
 	"category": "videos",
-	"tags": [
-		"streaming",
-		"video"
-	]
+	"tags": ["streaming", "video"]
 }

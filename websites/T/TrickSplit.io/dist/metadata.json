@@ -10,15 +10,11 @@
 		"nl": "Alternatieve Agar.io-website, met verschillende modi."
 	},
 	"url": "tricksplit.io",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/JdlCrl8.png",
 	"thumbnail": "https://i.imgur.com/UshRMAY.png",
 	"color": "#ABCF44",
 	"category": "games",
-	"tags": [
-		"agario",
-		"game",
-		"miniclip"
-	],
+	"tags": ["agario", "game", "miniclip"],
 	"iframe": true
 }

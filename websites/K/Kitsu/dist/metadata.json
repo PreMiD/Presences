@@ -10,14 +10,10 @@
 		"nl": "Deel anime- en manga-ervaringen, ontvang aanbevelingen en kijk wat vrienden kijken of lezen."
 	},
 	"url": "kitsu.io",
-	"version": "1.3.12",
+	"version": "1.3.13",
 	"logo": "https://i.imgur.com/LlascQj.png",
 	"thumbnail": "https://i.imgur.com/0yjRrph.png",
 	"color": "#FD755C",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"manga",
-		"list"
-	]
+	"tags": ["anime", "manga", "list"]
 }

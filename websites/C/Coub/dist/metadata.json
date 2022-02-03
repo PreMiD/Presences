@@ -19,17 +19,12 @@
 		"vi_VN": "Coub là trang web chia sẻ video trực tuyến. Nó cho phép người dùng tạo và chia sẻ video lặp lại lên tới mười giây, sử dụng các video có sẵn tại YouTube, Vimeo, hoặc tệp riêng của họ"
 	},
 	"url": "coub.com",
-	"version": "2.0.11",
+	"version": "2.0.12",
 	"logo": "https://i.imgur.com/HRAGMzw.png",
 	"thumbnail": "https://i.imgur.com/8P8RhcZ.png",
 	"color": "#0084FF",
 	"category": "videos",
-	"tags": [
-		"socials",
-		"music",
-		"video",
-		"media"
-	],
+	"tags": ["socials", "music", "video", "media"],
 	"settings": [
 		{
 			"id": "lang",

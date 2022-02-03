@@ -12,13 +12,10 @@
 		"nl": "Controleer elke software op uw veiligheid"
 	},
 	"url": "www.virustotal.com",
-	"version": "1.4.12",
+	"version": "1.4.13",
 	"logo": "https://i.imgur.com/QPKWLTc.png",
 	"thumbnail": "https://i.imgur.com/HE2xzdF.png",
 	"color": "#397eff",
 	"category": "other",
-	"tags": [
-		"safety",
-		"virus-check"
-	]
+	"tags": ["safety", "virus-check"]
 }

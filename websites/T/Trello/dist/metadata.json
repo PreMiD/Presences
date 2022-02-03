@@ -15,18 +15,12 @@
 		"blog.trello.com",
 		"developers.trello.com"
 	],
-	"version": "2.1.16",
+	"version": "2.1.17",
 	"logo": "https://i.imgur.com/Yncl9Qc.png",
 	"thumbnail": "https://i.imgur.com/YnAyvct.png",
 	"color": "#0080cb",
 	"category": "other",
-	"tags": [
-		"projects",
-		"board",
-		"card",
-		"list",
-		"management"
-	],
+	"tags": ["projects", "board", "card", "list", "management"],
 	"settings": [
 		{
 			"id": "displayPrivateBoards",

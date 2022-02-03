@@ -25,17 +25,12 @@
 	},
 	"url": "music.amazon.com",
 	"regExp": "music[.]amazon([.][a-z]+)+[/]",
-	"version": "2.1.3",
+	"version": "2.1.4",
 	"logo": "https://i.imgur.com/AUKbzxX.png",
 	"thumbnail": "https://i.imgur.com/htSGR6k.png",
 	"color": "#21293C",
 	"category": "music",
-	"tags": [
-		"amazon-music",
-		"music",
-		"amazon",
-		"media"
-	],
+	"tags": ["amazon-music", "music", "amazon", "media"],
 	"settings": [
 		{
 			"id": "lang",

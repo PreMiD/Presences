@@ -9,15 +9,10 @@
 		"en": "Get driving directions, a live traffic map & road alerts."
 	},
 	"url": "www.waze.com",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/H814ZfW.png",
 	"thumbnail": "https://i.imgur.com/t1HF0dC.png",
 	"color": "#33ccff",
 	"category": "other",
-	"tags": [
-		"navigation",
-		"waze",
-		"live",
-		"map"
-	]
+	"tags": ["navigation", "waze", "live", "map"]
 }

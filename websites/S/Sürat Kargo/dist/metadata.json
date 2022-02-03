@@ -10,20 +10,11 @@
 		"tr": "Sürat Kargo, Türkiye'de hizmet veren bir kargo şirketi",
 		"nl": "Sürat Kargo, koeriersbedrijf dat diensten verleent in Turkije."
 	},
-	"url": [
-		"suratkargo.com.tr",
-		"www.suratkargo.com.tr"
-	],
-	"version": "1.0.7",
+	"url": ["suratkargo.com.tr", "www.suratkargo.com.tr"],
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/CBsEtCf.png",
 	"thumbnail": "https://i.imgur.com/B7H16MR.png",
 	"color": "#e33d2f",
 	"category": "other",
-	"tags": [
-		"surat",
-		"delivery",
-		"shipping",
-		"turkish",
-		"turkey"
-	]
+	"tags": ["surat", "delivery", "shipping", "turkish", "turkey"]
 }

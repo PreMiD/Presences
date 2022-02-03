@@ -13,18 +13,12 @@
 	},
 	"url": "bladefm.com.au",
 	"regExp": "([a-z0-9-]+[.])*(bladefm[.]com[.]au)[/]",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/Sjj3gx6.png",
 	"thumbnail": "https://i.imgur.com/DWa62sw.png",
 	"color": "#203391",
 	"category": "music",
-	"tags": [
-		"music",
-		"radio",
-		"blade",
-		"bladeradio",
-		"bladefm"
-	],
+	"tags": ["music", "radio", "blade", "bladeradio", "bladefm"],
 	"settings": [
 		{
 			"id": "timestamp",

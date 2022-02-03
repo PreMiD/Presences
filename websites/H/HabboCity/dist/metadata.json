@@ -16,14 +16,10 @@
 		"habbocity.fr",
 		"www.habbocity.fr"
 	],
-	"version": "1.1.15",
+	"version": "1.1.16",
 	"logo": "https://i.imgur.com/IC0Md4k.png",
 	"thumbnail": "https://i.imgur.com/plMx986.png",
 	"color": "#FFEE51",
 	"category": "games",
-	"tags": [
-		"habbocity",
-		"french",
-		"habbo"
-	]
+	"tags": ["habbocity", "french", "habbo"]
 }

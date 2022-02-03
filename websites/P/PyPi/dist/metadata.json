@@ -10,15 +10,10 @@
 		"nl": "De Python Package Index (PyPI) is een opslagplaats van software voor de programmeertaal Python."
 	},
 	"url": "pypi.org",
-	"version": "1.4.11",
+	"version": "1.4.12",
 	"logo": "https://i.imgur.com/PWiUxFD.png",
 	"thumbnail": "https://i.imgur.com/asXjia1.jpg",
 	"color": "#ebcc34",
 	"category": "other",
-	"tags": [
-		"developing",
-		"modules",
-		"packages",
-		"coding"
-	]
+	"tags": ["developing", "modules", "packages", "coding"]
 }

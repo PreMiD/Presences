@@ -13,15 +13,12 @@
 		"vi_VN": "Altearn là hiệp hội phi lợi nhuận nhằm mục đích phát triển và áp dụng các giải pháp và sự kiện dành cho giáo dục, khoa học và nhận thức."
 	},
 	"url": "altearn.xyz",
-	"version": "1.1.10",
+	"version": "1.1.11",
 	"logo": "https://i.imgur.com/FXRVkUd.png",
 	"thumbnail": "https://i.imgur.com/dWA3LHB.png",
 	"color": "#888888",
 	"category": "other",
-	"tags": [
-		"community",
-		"altearn"
-	],
+	"tags": ["community", "altearn"],
 	"settings": [
 		{
 			"id": "privacy",

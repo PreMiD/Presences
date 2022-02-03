@@ -14,17 +14,11 @@
 		"nl": "Deze presence is alleen voor WIMS' standaard thema. WIMS is een multifunctioneel server-project ontworpen voor wiskundige oefeningen. Download het nu om mensen te laten zien hoe hard je aan je opdrachten werkt.",
 		"ga_IE": "Tá an láithreacht seo do théama réamhshocraithe WIMS. Is tionscadal freastalaí ilchuspóireach é WIMS atá deartha le haghaidh cleachtaí matamaitice. Faigh é anois chun a thaispeáint do dhaoine cé chomh deacair agus atá tú ag obair ar do thascanna."
 	},
-	"url": [
-		"wims-schaersvoorde.nl",
-		"85.148.206.56"
-	],
-	"version": "2.3.14",
+	"url": ["wims-schaersvoorde.nl", "85.148.206.56"],
+	"version": "2.3.15",
 	"logo": "https://i.imgur.com/E9FdAjM.png",
 	"thumbnail": "https://i.imgur.com/OLvrsMo.png",
 	"color": "#f4f8d7",
 	"category": "other",
-	"tags": [
-		"general",
-		"school"
-	]
+	"tags": ["general", "school"]
 }

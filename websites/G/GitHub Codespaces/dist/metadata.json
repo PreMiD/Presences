@@ -12,16 +12,12 @@
 	},
 	"url": "github.dev",
 	"regExp": "(.*[.])?github.dev",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/JWaYQC8.png",
 	"thumbnail": "https://i.imgur.com/fLQ6JLS.png",
 	"color": "#000000",
 	"category": "other",
-	"tags": [
-		"programming",
-		"sharing",
-		"coding"
-	],
+	"tags": ["programming", "sharing", "coding"],
 	"settings": [
 		{
 			"id": "details",

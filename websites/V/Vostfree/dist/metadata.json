@@ -10,17 +10,12 @@
 		"fr": "Téléchargez et regardez vos animes en ligne. Regardez des animes VF et VOSTFR en ligne, anime vf en ddl gratuitement."
 	},
 	"url": "vostfree.tv",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/Tnk23WJ.png",
 	"thumbnail": "https://i.imgur.com/6VcA6dN.png",
 	"color": "#1b1c1d",
 	"category": "anime",
-	"tags": [
-		"vostfree",
-		"streaming",
-		"anime",
-		"french"
-	],
+	"tags": ["vostfree", "streaming", "anime", "french"],
 	"iframe": true,
 	"settings": [
 		{

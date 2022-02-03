@@ -12,13 +12,10 @@
 		"ga_IE": "Is é VVVVID do theilifís phearsantaithe ar líne go hiomlán saor in aisce."
 	},
 	"url": "www.vvvvid.it",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/XwEUxO4.png",
 	"thumbnail": "https://i.imgur.com/2sLyOmP.png",
 	"color": "#ffffff",
 	"category": "videos",
-	"tags": [
-		"videos",
-		"anime"
-	]
+	"tags": ["videos", "anime"]
 }

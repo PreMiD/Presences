@@ -11,16 +11,10 @@
 		"vi_VN": "Thử và cải thiện tốc độ đánh máy của bạn với các trò chơi đánh máy miễn phí của chúng tôi."
 	},
 	"url": "10fastfingers.com",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/OE0fMrX.png",
 	"thumbnail": "https://i.imgur.com/Z8sPB3q.png",
 	"color": "#082333",
 	"category": "other",
-	"tags": [
-		"wordsperminute",
-		"wpm",
-		"typing",
-		"typing-test",
-		"type-test"
-	]
+	"tags": ["wordsperminute", "wpm", "typing", "typing-test", "type-test"]
 }

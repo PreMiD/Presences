@@ -11,17 +11,12 @@
 		"nl": "Viu levert inhoud in verschillende genres van de belangrijkste inhoudleveranciers van Azië met ondertitels in de lokale taal, evenals originele productieseries onder het 'Viu Original'-initiatief."
 	},
 	"url": "www.viu.com",
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/IyPu6Yf.png",
 	"thumbnail": "https://i.imgur.com/ThcGMw3.png",
 	"color": "#ffbf00",
 	"category": "videos",
-	"tags": [
-		"viu",
-		"drama",
-		"anime",
-		"movie"
-	],
+	"tags": ["viu", "drama", "anime", "movie"],
 	"settings": [
 		{
 			"id": "lang",
@@ -44,10 +39,7 @@
 			"title": "Viu Logo",
 			"value": 0,
 			"icon": "fas fa-paint-roller",
-			"values": [
-				"Normal",
-				"With Text"
-			]
+			"values": ["Normal", "With Text"]
 		}
 	]
 }

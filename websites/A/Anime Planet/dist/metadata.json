@@ -12,15 +12,12 @@
 		"vi_VN": "Giới thiệu những bộ anime và manga mới, đánh giá và hơn nữa! Theo dõi những gì bạn đã xem trong chính danh sách anime và manga của riêng bạn và gặp gỡ những người bạn mới."
 	},
 	"url": "www.anime-planet.com",
-	"version": "1.1.12",
+	"version": "1.1.13",
 	"logo": "https://i.imgur.com/0qpwOvt.jpg",
 	"thumbnail": "https://i.imgur.com/lYQlABH.png",
 	"color": "#ec554a",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"anime-planet"
-	],
+	"tags": ["anime", "anime-planet"],
 	"iframe": true,
 	"settings": [
 		{

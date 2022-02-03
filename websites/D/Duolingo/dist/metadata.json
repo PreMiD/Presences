@@ -42,14 +42,10 @@
 	},
 	"url": "www.duolingo.com",
 	"regExp": "(www|(\\w{2}-)?\\w{2})\\.duolingo\\.(com|cn)",
-	"version": "2.0.3",
+	"version": "2.0.4",
 	"logo": "https://i.imgur.com/YKAf42L.png",
 	"thumbnail": "https://i.imgur.com/M3nbjZJ.png",
 	"color": "#58cc02",
 	"category": "other",
-	"tags": [
-		"education",
-		"games",
-		"languages"
-	]
+	"tags": ["education", "games", "languages"]
 }

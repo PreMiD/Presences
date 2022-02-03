@@ -10,17 +10,11 @@
 		"ga_IE": "Is webcomic de rómánsaíocht, searbhas, matamaitic agus teanga é XKCD.",
 		"nl": "XKCD is een webcomic over romantiek, sarcasme, wiskunde en taal."
 	},
-	"url": [
-		"xkcd.com",
-		"www.xkcd.com"
-	],
-	"version": "1.0.9",
+	"url": ["xkcd.com", "www.xkcd.com"],
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/4FWzJpV.png",
 	"thumbnail": "https://i.imgur.com/sdVsYvZ.png",
 	"color": "#FFFFFF",
 	"category": "other",
-	"tags": [
-		"xkcd",
-		"comic"
-	]
+	"tags": ["xkcd", "comic"]
 }

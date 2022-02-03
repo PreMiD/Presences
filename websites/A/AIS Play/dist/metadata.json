@@ -12,14 +12,11 @@
 		"vi_VN": "AIS Play là dịch vụ phát trực tuyến của Thái Lan cung cấp các sê-ri, truyền hình, anime và nhiều hơn nữa."
 	},
 	"url": "aisplay.ais.co.th",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/HQs4uPj.png",
 	"thumbnail": "https://i.imgur.com/ZYS9jRi.png",
 	"color": "#B0B72A",
 	"category": "videos",
-	"tags": [
-		"video",
-		"media"
-	],
+	"tags": ["video", "media"],
 	"iframe": true
 }

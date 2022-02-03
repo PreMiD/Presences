@@ -16,20 +16,12 @@
 		"en": "Watch newest movies as Full HD in our website. The best website to watch films when it comes to quality.",
 		"nl": "Bekijk de nieuwste films in Full HD op onze website. De beste website om films te kijken als het om kwaliteit gaat."
 	},
-	"url": [
-		"imdbfilmizle.com",
-		"www.imdbfilmizle.com"
-	],
-	"version": "1.0.10",
+	"url": ["imdbfilmizle.com", "www.imdbfilmizle.com"],
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/cIr56HO.png",
 	"thumbnail": "https://i.imgur.com/RdOXsqx.png",
 	"color": "#FFDB4C",
 	"category": "videos",
-	"tags": [
-		"filmler",
-		"film-izle",
-		"dizi",
-		"dizi-izle"
-	],
+	"tags": ["filmler", "film-izle", "dizi", "dizi-izle"],
 	"iframe": true
 }

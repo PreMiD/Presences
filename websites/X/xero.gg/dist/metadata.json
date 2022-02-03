@@ -11,16 +11,12 @@
 		"nl": "xero.gg is een website Player- en Clan-database voor een privéserver van het spel S4 League."
 	},
 	"url": "xero.gg",
-	"version": "1.1.11",
+	"version": "1.1.12",
 	"logo": "https://i.imgur.com/opZJy1Y.png",
 	"thumbnail": "https://i.imgur.com/zQcNcIm.png",
 	"color": "#428DE3",
 	"category": "games",
-	"tags": [
-		"s4league",
-		"games",
-		"database"
-	],
+	"tags": ["s4league", "games", "database"],
 	"settings": [
 		{
 			"id": "showchat",

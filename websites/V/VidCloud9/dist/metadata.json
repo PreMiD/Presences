@@ -11,15 +11,12 @@
 		"nl": "VidCloud9 is een geweldige plek om shows te vinden die je hebt gemist of films die je graag wilt zien."
 	},
 	"url": "vidcloud9.com",
-	"version": "2.0.15",
+	"version": "2.0.16",
 	"logo": "https://i.imgur.com/AEOuBRB.png",
 	"thumbnail": "https://i.imgur.com/IeqotZd.png",
 	"color": "#00050C",
 	"category": "videos",
-	"tags": [
-		"watch-movies",
-		"vidcloud9"
-	],
+	"tags": ["watch-movies", "vidcloud9"],
 	"iframe": true,
 	"settings": [
 		{

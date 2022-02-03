@@ -10,17 +10,11 @@
 		"nl": "Blockbench is een boxy 3D modeleditor.",
 		"vi_VN": "Blockbench là công cụ chỉnh sửa mô hình 3D khối lập phương."
 	},
-	"url": [
-		"www.blockbench.net",
-		"web.blockbench.net"
-	],
-	"version": "1.1.4",
+	"url": ["www.blockbench.net", "web.blockbench.net"],
+	"version": "1.1.5",
 	"logo": "https://i.imgur.com/isuRsRF.png",
 	"thumbnail": "https://i.imgur.com/A4LQrtg.png",
 	"color": "#1E93D9",
 	"category": "other",
-	"tags": [
-		"3d",
-		"modelling"
-	]
+	"tags": ["3d", "modelling"]
 }

@@ -28,20 +28,12 @@
 		"developer.apple.com",
 		"www.icloud.com"
 	],
-	"version": "2.2.3",
+	"version": "2.2.4",
 	"logo": "https://i.imgur.com/rBAusA5.png",
 	"thumbnail": "https://i.imgur.com/D5b7fQ5.jpg",
 	"color": "#606C80",
 	"category": "other",
-	"tags": [
-		"apple",
-		"iphone",
-		"ipad",
-		"imac",
-		"eletronics",
-		"store",
-		"icloud"
-	],
+	"tags": ["apple", "iphone", "ipad", "imac", "eletronics", "store", "icloud"],
 	"settings": [
 		{
 			"id": "lang",
@@ -52,10 +44,7 @@
 			"title": "Icon",
 			"icon": "fad fa-icons",
 			"value": 0,
-			"values": [
-				"Normal",
-				"Rainbow"
-			]
+			"values": ["Normal", "Rainbow"]
 		},
 		{
 			"id": "timeElapsed",

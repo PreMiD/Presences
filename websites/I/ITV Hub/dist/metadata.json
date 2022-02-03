@@ -9,18 +9,11 @@
 		"en": "Watch live and past ITV TV shows",
 		"nl": "Bekijk live en eerdere ITV-tv-shows"
 	},
-	"url": [
-		"www.itv.com",
-		"itv.com"
-	],
-	"version": "1.4.11",
+	"url": ["www.itv.com", "itv.com"],
+	"version": "1.4.12",
 	"logo": "https://i.imgur.com/5PShoo9.png",
 	"thumbnail": "https://i.imgur.com/WRttRBO.png",
 	"color": "#2ABEC9",
 	"category": "videos",
-	"tags": [
-		"itv",
-		"itv-hub",
-		"itv-player"
-	]
+	"tags": ["itv", "itv-hub", "itv-player"]
 }

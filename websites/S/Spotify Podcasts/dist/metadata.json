@@ -5,9 +5,7 @@
 		"id": "241278257335500811"
 	},
 	"service": "Spotify Podcasts",
-	"altnames": [
-		"스포티파이 팟캐스트"
-	],
+	"altnames": ["스포티파이 팟캐스트"],
 	"description": {
 		"en": "Music for everyone. Note: Only podcasts and site info! To show normal songs use the Spotify x Discord connection.",
 		"nl": "Muziek voor iedereen. Let op: Alleen podcasts en pagina informatie! Om normale liedjes te laten zien gebruik de Spotify x Discord connectie.",
@@ -25,15 +23,12 @@
 		"support.spotify.com",
 		"podcasters.spotify.com"
 	],
-	"version": "2.2.7",
+	"version": "2.2.8",
 	"logo": "https://i.imgur.com/q3tKDRA.png",
 	"thumbnail": "https://i.imgur.com/AzNhQ4j.png",
 	"color": "#1ed760",
 	"category": "music",
-	"tags": [
-		"audio",
-		"podcast"
-	],
+	"tags": ["audio", "podcast"],
 	"settings": [
 		{
 			"id": "lang",

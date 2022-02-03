@@ -10,15 +10,12 @@
 		"nl": "Radiooooo - De muzikale tijdmachine."
 	},
 	"url": "radiooooo.com",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/EktlHNP.png",
 	"thumbnail": "https://i.imgur.com/AT7vWm9.jpg",
 	"color": "#108cb4",
 	"category": "music",
-	"tags": [
-		"music",
-		"radio"
-	],
+	"tags": ["music", "radio"],
 	"settings": [
 		{
 			"id": "lang",

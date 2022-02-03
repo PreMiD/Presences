@@ -10,15 +10,12 @@
 		"nl": "Hou je van games zoals Player Unknown's Battlegrounds (PUBG), Fortnite of Apex Legends? Speel dit gratis 2d battle royale io spel in je browser!"
 	},
 	"url": "surviv.io",
-	"version": "1.3.13",
+	"version": "1.3.14",
 	"logo": "https://i.imgur.com/85KSQGS.png",
 	"thumbnail": "https://i.imgur.com/eTT4eEI.png",
 	"color": "#83AF50",
 	"category": "games",
-	"tags": [
-		"games",
-		"battleroyale"
-	],
+	"tags": ["games", "battleroyale"],
 	"settings": [
 		{
 			"id": "broadcasttc",

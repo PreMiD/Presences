@@ -11,21 +11,11 @@
 		"sk": "Internetová televízia MALL.TV ponúka vlastné seriály, relácie a kopec známých tvárí na jednom mieste. Sledujte nás. MALL.TV. Vždy je čo objavovať.",
 		"nl": "MALL.TV biedt zijn eigen series, shows, geselecteerde films en vele bekende gezichten op één plek."
 	},
-	"url": [
-		"www.mall.tv",
-		"sk.mall.tv"
-	],
-	"version": "1.0.8",
+	"url": ["www.mall.tv", "sk.mall.tv"],
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/0WHU4T5.png",
 	"thumbnail": "https://i.imgur.com/pwksPCw.png",
 	"color": "#C70716",
 	"category": "videos",
-	"tags": [
-		"mall",
-		"tv",
-		"internetova",
-		"televize",
-		"televizia",
-		"video"
-	]
+	"tags": ["mall", "tv", "internetova", "televize", "televizia", "video"]
 }

@@ -10,13 +10,10 @@
 		"nl": "Durarara!! fan gemeenschap, DOLLARS chatroom."
 	},
 	"url": "drrr.com",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/8E6QIMT.png",
 	"thumbnail": "https://i.imgur.com/h4NdSYG.png",
 	"color": "#696969",
 	"category": "socials",
-	"tags": [
-		"anime",
-		"socials"
-	]
+	"tags": ["anime", "socials"]
 }

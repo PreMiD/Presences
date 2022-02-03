@@ -11,13 +11,10 @@
 	},
 	"url": "www.tumblr.com",
 	"regExp": "([a-z0-9-]+[.])*tumblr[.]com[/]",
-	"version": "1.2.10",
+	"version": "1.2.11",
 	"logo": "https://i.imgur.com/AE5bq1T.png",
 	"thumbnail": "https://i.imgur.com/FZ3Zrxb.png",
 	"color": "#395976",
 	"category": "other",
-	"tags": [
-		"gifs",
-		"pics"
-	]
+	"tags": ["gifs", "pics"]
 }

@@ -35,15 +35,10 @@
 		"scp-sandbox-3.wikidot.com",
 		"www.scpwiki.com"
 	],
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/sZutlAu.png",
 	"thumbnail": "https://i.imgur.com/el9c68A.png",
 	"color": "#BB0011",
 	"category": "other",
-	"tags": [
-		"fiction",
-		"horror",
-		"reading",
-		"wiki"
-	]
+	"tags": ["fiction", "horror", "reading", "wiki"]
 }

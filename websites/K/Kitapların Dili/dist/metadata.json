@@ -11,14 +11,10 @@
 		"nl": "Kitapların Dili is een website waar u gratis audioboeken kunt vinden en ernaar kunt luisteren!"
 	},
 	"url": "kitaplarindili.ga",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/vVYzTFE.png",
 	"thumbnail": "https://i.imgur.com/roLAe64.png",
 	"color": "#d32028",
 	"category": "other",
-	"tags": [
-		"audio",
-		"books",
-		"turkish"
-	]
+	"tags": ["audio", "books", "turkish"]
 }

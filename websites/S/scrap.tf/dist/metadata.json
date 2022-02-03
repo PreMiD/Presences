@@ -9,15 +9,10 @@
 		"en": "ScrapTF is the largest bot-based TF2 item trading, raffle, and auction website. Buy and sell hats, keys, unusuals, stranges, skins, and more."
 	},
 	"url": "scrap.tf",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/36tsgMq.png",
 	"thumbnail": "https://i.imgur.com/Cg9uKcz.png",
 	"color": "#e74c3c",
 	"category": "other",
-	"tags": [
-		"steam",
-		"tf2",
-		"trading",
-		"price"
-	]
+	"tags": ["steam", "tf2", "trading", "price"]
 }

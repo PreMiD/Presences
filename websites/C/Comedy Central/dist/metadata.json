@@ -11,16 +11,10 @@
 		"vi_VN": "Xem các bộ phim Comedy Central mới nhất như South Park, The Daily Show và hơn nữa."
 	},
 	"url": "www.cc.com",
-	"version": "1.2.13",
+	"version": "1.2.14",
 	"logo": "https://i.imgur.com/NJ6Ezno.png",
 	"thumbnail": "https://i.imgur.com/wIrv2wD.png",
 	"color": "#f8ba00",
 	"category": "videos",
-	"tags": [
-		"comedy-central",
-		"cc",
-		"video",
-		"tv",
-		"movies"
-	]
+	"tags": ["comedy-central", "cc", "video", "tv", "movies"]
 }

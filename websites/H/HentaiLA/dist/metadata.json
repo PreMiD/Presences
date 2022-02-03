@@ -10,16 +10,11 @@
 		"es": "HentaiLa el mejor sitio para ver hentai en Latinoamérica. Tenemos hidrógeno sin censura separado en géneros y categorías."
 	},
 	"url": "hentaila.com",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/h2Jxbzn.png",
 	"thumbnail": "https://i.imgur.com/YnzudeZ.png",
 	"color": "#EA4C89",
 	"category": "other",
-	"tags": [
-		"hentai",
-		"spanish",
-		"subtitle",
-		"nsfw"
-	],
+	"tags": ["hentai", "spanish", "subtitle", "nsfw"],
 	"iframe": true
 }

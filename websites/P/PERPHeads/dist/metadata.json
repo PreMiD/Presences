@@ -11,13 +11,10 @@
 	},
 	"url": "perpheads.com",
 	"regExp": "([a-z0-9-]+[.])*perpheads[.]com[/]",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/Zbr5ofa.png",
 	"thumbnail": "https://i.imgur.com/xeeFig2.png",
 	"color": "#FFA500",
 	"category": "games",
-	"tags": [
-		"garrysmod",
-		"perpheads"
-	]
+	"tags": ["garrysmod", "perpheads"]
 }

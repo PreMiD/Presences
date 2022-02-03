@@ -17,14 +17,11 @@
 	},
 	"url": "kissasian.li",
 	"regExp": "kissasian([.][a-z]+)+[/]",
-	"version": "3.0.5",
+	"version": "3.0.6",
 	"logo": "https://i.imgur.com/B8evsEL.png",
 	"thumbnail": "https://i.imgur.com/AG3nCsQ.png",
 	"color": "#f5d80b",
 	"category": "videos",
-	"tags": [
-		"asian",
-		"drama"
-	],
+	"tags": ["asian", "drama"],
 	"iframe": true
 }

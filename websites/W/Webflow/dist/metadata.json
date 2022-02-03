@@ -20,13 +20,10 @@
 		"experts.webflow.com",
 		"forum.webflow.com"
 	],
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/tU15qL1.png",
 	"thumbnail": "https://i.imgur.com/fCSFzpr.png",
 	"color": "#4353FF",
 	"category": "other",
-	"tags": [
-		"website",
-		"development"
-	]
+	"tags": ["website", "development"]
 }

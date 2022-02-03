@@ -10,13 +10,10 @@
 		"nl": "Speedrunning leaderboards, bronnen, forums en meer!"
 	},
 	"url": "www.speedrun.com",
-	"version": "1.2.10",
+	"version": "1.2.11",
 	"logo": "https://i.imgur.com/MExOoiX.png",
 	"thumbnail": "https://i.imgur.com/jsMsjMk.png",
 	"color": "#c6a24c",
 	"category": "games",
-	"tags": [
-		"speed",
-		"run"
-	]
+	"tags": ["speed", "run"]
 }

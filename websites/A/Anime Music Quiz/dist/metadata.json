@@ -13,17 +13,10 @@
 		"vi_VN": "Anime Music Quiz là nền tảng game cho phép bạn bè tranh đấu với nhau về kiến thức âm nhạc anime."
 	},
 	"url": "animemusicquiz.com",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"logo": "https://i.imgur.com/oaRshoy.png",
 	"thumbnail": "https://i.imgur.com/8tXZEqG.png",
 	"color": "#DF6975",
 	"category": "games",
-	"tags": [
-		"amq",
-		"anime-music-quiz",
-		"anime",
-		"music",
-		"quiz",
-		"games"
-	]
+	"tags": ["amq", "anime-music-quiz", "anime", "music", "quiz", "games"]
 }

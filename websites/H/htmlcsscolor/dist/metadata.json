@@ -10,13 +10,10 @@
 		"nl": "De ultieme kleurencollectie!"
 	},
 	"url": "www.htmlcsscolor.com",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/Kk099mM.png",
 	"thumbnail": "https://i.imgur.com/qCP9Sxb.png",
 	"color": "#93C54B",
 	"category": "other",
-	"tags": [
-		"colors",
-		"editor"
-	]
+	"tags": ["colors", "editor"]
 }

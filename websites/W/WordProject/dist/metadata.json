@@ -9,16 +9,12 @@
 		"en": "The Holy Bible International - in the major languages of the world"
 	},
 	"url": "www.wordproject.org",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/mydYezY.png",
 	"thumbnail": "https://i.imgur.com/QteJu92.png",
 	"color": "#aa2023",
 	"category": "other",
-	"tags": [
-		"bible",
-		"bible-verses",
-		"audio-bible"
-	],
+	"tags": ["bible", "bible-verses", "audio-bible"],
 	"settings": [
 		{
 			"id": "buttons",

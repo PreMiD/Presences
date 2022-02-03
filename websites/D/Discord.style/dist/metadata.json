@@ -9,15 +9,12 @@
 		"en": "Online library for finding and sharing free Discord Templates. Upload your own Discord Template and collect votes!"
 	},
 	"url": "www.discord.style",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/1wKlRwf.png",
 	"thumbnail": "https://i.imgur.com/pigr2GZ.jpg",
 	"color": "#1f2131",
 	"category": "socials",
-	"tags": [
-		"discord",
-		"discord-templates"
-	],
+	"tags": ["discord", "discord-templates"],
 	"settings": [
 		{
 			"id": "timestamp",

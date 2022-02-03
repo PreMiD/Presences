@@ -10,17 +10,11 @@
 		"ga_IE": "Vanis.io cluiche ilimreora saor in aisce.",
 		"nl": "Vanis.io een gratis spel voor meerdere spelers."
 	},
-	"url": [
-		"vanis.io",
-		"skins.vanis.io"
-	],
-	"version": "1.0.8",
+	"url": ["vanis.io", "skins.vanis.io"],
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/V8Cerrx.png",
 	"thumbnail": "https://i.imgur.com/bNZOUoi.png",
 	"color": "#ce3239",
 	"category": "games",
-	"tags": [
-		"game",
-		"multiplayer"
-	]
+	"tags": ["game", "multiplayer"]
 }

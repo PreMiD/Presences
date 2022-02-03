@@ -10,14 +10,10 @@
 		"nl": "MSPFA is een website die wordt gebruikt voor het hosten van webcomics, meestal in de stijl van de strips op mspaintadventures.com, maar niet uitsluitend."
 	},
 	"url": "mspfa.com",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/GWzbcj0.png",
 	"thumbnail": "https://i.imgur.com/UhTbTSy.png",
 	"color": "#00FF2D",
 	"category": "other",
-	"tags": [
-		"webcomic",
-		"comic",
-		"mspfa"
-	]
+	"tags": ["webcomic", "comic", "mspfa"]
 }

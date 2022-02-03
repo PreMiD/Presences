@@ -11,16 +11,12 @@
 		"vi_VN": "Nhà cung cấp beatmap không chính thức #1 Beat Saber!"
 	},
 	"url": "beatsaver.com",
-	"version": "2.1.5",
+	"version": "2.1.6",
 	"logo": "https://i.imgur.com/1dBCcdI.png",
 	"thumbnail": "https://i.imgur.com/BpXZEqW.png",
 	"color": "#FF0090",
 	"category": "games",
-	"tags": [
-		"beatsaver",
-		"beatsaber",
-		"gaming"
-	],
+	"tags": ["beatsaver", "beatsaber", "gaming"],
 	"settings": [
 		{
 			"id": "time",

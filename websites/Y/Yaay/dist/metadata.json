@@ -12,14 +12,10 @@
 		"nl": "Yaay, nieuwe Turkse sociale media met veel functies!"
 	},
 	"url": "yaay.com.tr",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/KbcxoIV.png",
 	"thumbnail": "https://i.imgur.com/mgHnMIf.png",
 	"color": "#0076f6",
 	"category": "socials",
-	"tags": [
-		"social",
-		"media",
-		"turkish"
-	]
+	"tags": ["social", "media", "turkish"]
 }

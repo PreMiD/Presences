@@ -22,21 +22,13 @@
 		"zh_CN": "Roblox的使命是通过游戏将世界融合在一起。",
 		"vi_VN": "Nhiệm vụ của Roblox là đem thế giới lại gần nhau qua trò chơi."
 	},
-	"url": [
-		"www.roblox.com",
-		"web.roblox.com",
-		"devforum.roblox.com"
-	],
-	"version": "2.6.3",
+	"url": ["www.roblox.com", "web.roblox.com", "devforum.roblox.com"],
+	"version": "2.6.4",
 	"logo": "https://i.imgur.com/75dFVYB.png",
 	"thumbnail": "https://i.imgur.com/pufi4q1.png",
 	"color": "#1b1d1e",
 	"category": "games",
-	"tags": [
-		"game",
-		"community",
-		"gaming"
-	],
+	"tags": ["game", "community", "gaming"],
 	"settings": [
 		{
 			"id": "images",

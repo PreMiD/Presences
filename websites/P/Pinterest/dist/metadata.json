@@ -12,12 +12,10 @@
 	},
 	"url": "www.pinterest.com",
 	"regExp": "([a-z0-9-]+[.])*pinterest([.][a-z]+)+[/]",
-	"version": "1.3.11",
+	"version": "1.3.12",
 	"logo": "https://i.imgur.com/DiUTf7t.png",
 	"thumbnail": "https://i.imgur.com/7a04Cps.jpg",
 	"color": "#cc2127",
 	"category": "other",
-	"tags": [
-		"pinterest"
-	]
+	"tags": ["pinterest"]
 }

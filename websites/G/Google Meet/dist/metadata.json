@@ -13,14 +13,10 @@
 	},
 	"url": "meet.google.com",
 	"regExp": "meet[.]google([.][a-z]+)+[/]",
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/LyrRnRS.png",
 	"thumbnail": "https://i.imgur.com/6BRZ63d.png",
 	"color": "#308574",
 	"category": "socials",
-	"tags": [
-		"google",
-		"meet",
-		"video"
-	]
+	"tags": ["google", "meet", "video"]
 }

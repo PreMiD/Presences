@@ -20,13 +20,10 @@
 		"nl": "StopotS, het stop spel op het internet. Speel dit populaire spel gratis en zonder downloads."
 	},
 	"url": "stopots.com",
-	"version": "1.2.15",
+	"version": "1.2.16",
 	"logo": "https://i.imgur.com/ciqA1gc.png",
 	"thumbnail": "https://i.imgur.com/Bg869KE.png",
 	"color": "#FFBE55",
 	"category": "games",
-	"tags": [
-		"stopots",
-		"games"
-	]
+	"tags": ["stopots", "games"]
 }

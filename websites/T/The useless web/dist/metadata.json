@@ -79,13 +79,10 @@
 		"www.theuselessweb.com",
 		"theuselessweb.com"
 	],
-	"version": "1.2.10",
+	"version": "1.2.11",
 	"logo": "https://i.imgur.com/YeXjpVB.jpg",
 	"thumbnail": "https://i.imgur.com/G9tV2NS.png",
 	"color": "#ae3484",
 	"category": "other",
-	"tags": [
-		"random",
-		"fun"
-	]
+	"tags": ["random", "fun"]
 }

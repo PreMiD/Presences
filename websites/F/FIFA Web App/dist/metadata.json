@@ -11,15 +11,10 @@
 	},
 	"url": "www.easports.com",
 	"regExp": "([a-z0-9-]+[.])*easports[.]com[/]([a-z0-9]+)[/]fifa[/]ultimate-team[/]web-app[/]",
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/uXThlTp.png",
 	"thumbnail": "https://i.imgur.com/UxPGmuo.png",
 	"color": "#FFFFFF",
 	"category": "games",
-	"tags": [
-		"fifa",
-		"web-app",
-		"fut20",
-		"fifa-ultimate-team"
-	]
+	"tags": ["fifa", "web-app", "fut20", "fifa-ultimate-team"]
 }

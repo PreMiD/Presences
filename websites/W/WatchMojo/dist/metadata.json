@@ -11,16 +11,12 @@
 		"nl": "Top 10-lijsten voor muziek, tv, film en videogames."
 	},
 	"url": "watchmojo.com",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/zQetOPX.jpg",
 	"thumbnail": "https://i.imgur.com/X2KmnaF.jpg",
 	"color": "#01ffff",
 	"category": "videos",
-	"tags": [
-		"top10",
-		"video",
-		"media"
-	],
+	"tags": ["top10", "video", "media"],
 	"iframe": true,
 	"settings": [
 		{

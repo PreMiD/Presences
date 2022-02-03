@@ -21,15 +21,10 @@
 	},
 	"url": "en.akinator.com",
 	"regExp": "([a-z0-9-]+[.])*akinator[.]com[/]",
-	"version": "1.3.13",
+	"version": "1.3.14",
 	"logo": "https://i.imgur.com/mQreXyR.png",
 	"thumbnail": "https://i.imgur.com/CPWBwGM.png",
 	"color": "#0000ff",
 	"category": "games",
-	"tags": [
-		"akinator",
-		"guessing",
-		"game",
-		"fun"
-	]
+	"tags": ["akinator", "guessing", "game", "fun"]
 }

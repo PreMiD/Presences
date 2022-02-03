@@ -10,12 +10,10 @@
 		"nl": "Een online opslagplaats voor fanfictie geïnspireerd door My Little Pony Friendship is Magic."
 	},
 	"url": "www.fimfiction.net",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/DctO7hH.png",
 	"thumbnail": "https://i.imgur.com/eEIiwDO.png",
 	"color": "#cc3355",
 	"category": "other",
-	"tags": [
-		"stories"
-	]
+	"tags": ["stories"]
 }

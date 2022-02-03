@@ -12,20 +12,11 @@
 		"de": "Hacking und Informationssicherheit Learning-Plattform",
 		"nl": "Root Me is een platform voor iedereen om kennis in computerbeveiliging en hacking te testen en te verbeteren."
 	},
-	"url": [
-		"root-me.org",
-		"www.root-me.org"
-	],
-	"version": "1.2.16",
+	"url": ["root-me.org", "www.root-me.org"],
+	"version": "1.2.17",
 	"logo": "https://i.imgur.com/RqcY9ZL.png",
 	"thumbnail": "https://i.imgur.com/jD8QJKf.png",
 	"color": "#191C22",
 	"category": "other",
-	"tags": [
-		"hack",
-		"hacking",
-		"challenge",
-		"ctf",
-		"capture-the-flag"
-	]
+	"tags": ["hack", "hacking", "challenge", "ctf", "capture-the-flag"]
 }

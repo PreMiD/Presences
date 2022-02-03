@@ -11,14 +11,11 @@
 	},
 	"url": "kisscartoon.nz",
 	"regExp": "([a-z0-9-]+[.])*kisscartoon([.][a-z]+)+[/]",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/RDkTKRh.png",
 	"thumbnail": "https://i.imgur.com/48Y2kFC.png",
 	"color": "#f5d80b",
 	"category": "videos",
-	"tags": [
-		"cartoon",
-		"kiss"
-	],
+	"tags": ["cartoon", "kiss"],
 	"iframe": true
 }

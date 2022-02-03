@@ -10,20 +10,11 @@
 		"nl": "Het streamingplatform dat heel HBO bundelt met nog meer films en tv-series, plus nieuwe Max Originals.",
 		"vi_VN": "Nền tảng phát trực tuyến đem tất cả của HBO với nhiều phim và chương trình truyền hình hơn nữa, thêm các bộ Max Originals."
 	},
-	"url": [
-		"hbomax.com",
-		"www.hbomax.com",
-		"play.hbomax.com",
-		"help.hbomax.com"
-	],
-	"version": "2.0.7",
+	"url": ["hbomax.com", "www.hbomax.com", "play.hbomax.com", "help.hbomax.com"],
+	"version": "2.0.8",
 	"logo": "https://i.imgur.com/UxH7DDE.png",
 	"thumbnail": "https://i.imgur.com/d1bktD4.jpg",
 	"color": "#c600ff",
 	"category": "videos",
-	"tags": [
-		"originals",
-		"streaming-platform",
-		"hulu-bundle"
-	]
+	"tags": ["originals", "streaming-platform", "hulu-bundle"]
 }

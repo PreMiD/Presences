@@ -9,16 +9,12 @@
 		"en": "The official website of RedBull"
 	},
 	"url": "www.redbull.com",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/BOh9UD4.png",
 	"thumbnail": "https://i.imgur.com/2ED5pB7.png",
 	"color": "#db0a41",
 	"category": "videos",
-	"tags": [
-		"redbull",
-		"tv",
-		"live"
-	],
+	"tags": ["redbull", "tv", "live"],
 	"settings": [
 		{
 			"id": "buttons",

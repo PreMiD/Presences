@@ -12,15 +12,12 @@
 		"nl": "Koop veel producten met 80% korting."
 	},
 	"url": "www.wish.com",
-	"version": "1.4.15",
+	"version": "1.4.16",
 	"logo": "https://i.imgur.com/SMaNfT2.png",
 	"thumbnail": "https://i.imgur.com/R7AkWiP.png",
 	"color": "#48c0eb",
 	"category": "other",
-	"tags": [
-		"shopping",
-		"shop"
-	],
+	"tags": ["shopping", "shop"],
 	"settings": [
 		{
 			"id": "items",
@@ -33,10 +30,7 @@
 			"title": "Language",
 			"icon": "fas fa-language",
 			"value": 0,
-			"values": [
-				"English",
-				"German"
-			]
+			"values": ["English", "German"]
 		}
 	]
 }

@@ -19,18 +19,11 @@
 		"en": "A powerful API containing data of all cosmetics, daily shop, news and more!",
 		"nl": "Een krachtige API met gegevens van alle cosmetica, dagwinkels, nieuws en meer!"
 	},
-	"url": [
-		"dash.fortnite-api.com",
-		"fortnite-api.com"
-	],
-	"version": "5.4.12",
+	"url": ["dash.fortnite-api.com", "fortnite-api.com"],
+	"version": "5.4.13",
 	"logo": "https://i.imgur.com/uhKW8e0.png",
 	"thumbnail": "https://i.imgur.com/VnUZjuQ.png",
 	"color": "#8A96E9",
 	"category": "other",
-	"tags": [
-		"fortnite",
-		"fortnite-api",
-		"fortniteapi"
-	]
+	"tags": ["fortnite", "fortnite-api", "fortniteapi"]
 }

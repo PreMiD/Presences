@@ -20,15 +20,10 @@
 		"vi_VN": "alltheflavors.com và trang web cung cấp các công thức và nguyên liệu có thể tự làm."
 	},
 	"url": "alltheflavors.com",
-	"version": "1.4.11",
+	"version": "1.4.12",
 	"logo": "https://i.imgur.com/y9Bj4mt.png",
 	"thumbnail": "https://i.imgur.com/ncLBJMx.png",
 	"color": "#FF6347",
 	"category": "other",
-	"tags": [
-		"food",
-		"diy",
-		"tutorial",
-		"recipes"
-	]
+	"tags": ["food", "diy", "tutorial", "recipes"]
 }

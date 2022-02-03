@@ -16,14 +16,10 @@
 		"nl": "Gewoon lichte romans! Huis van alle lichte romans"
 	},
 	"url": "justlightnovels.com",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/O2Xalve.png",
 	"thumbnail": "https://i.imgur.com/KWY5wqt.png",
 	"color": "#0000ff",
 	"category": "other",
-	"tags": [
-		"light-novels",
-		"reading",
-		"free"
-	]
+	"tags": ["light-novels", "reading", "free"]
 }

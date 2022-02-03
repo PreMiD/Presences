@@ -12,18 +12,11 @@
 		"nl": "YabancıDiziizlesene is een online site voor het bekijken van series en films die de mogelijkheid biedt om 1080p te bekijken."
 	},
 	"url": "yabancidiziizlesene.com",
-	"version": "1.1.14",
+	"version": "1.1.15",
 	"logo": "https://i.imgur.com/vypcMxL.png",
 	"thumbnail": "https://i.imgur.com/2PnNeRa.png",
 	"color": "#FFCC74",
 	"category": "videos",
-	"tags": [
-		"diziay",
-		"yabancı",
-		"dizi",
-		"series",
-		"movie",
-		"video"
-	],
+	"tags": ["diziay", "yabancı", "dizi", "series", "movie", "video"],
 	"iframe": true
 }

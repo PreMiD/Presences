@@ -10,18 +10,11 @@
 		"tr": "n11.com, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir.",
 		"nl": "n11.com is een populaire winkelwebsite in Turkije."
 	},
-	"url": [
-		"www.n11.com",
-		"urun.n11.com"
-	],
-	"version": "1.2.11",
+	"url": ["www.n11.com", "urun.n11.com"],
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/mmVwCu6.png",
 	"thumbnail": "https://i.imgur.com/YoXHGYK.png",
 	"color": "#bb2025",
 	"category": "other",
-	"tags": [
-		"n11",
-		"shopping",
-		"turkish"
-	]
+	"tags": ["n11", "shopping", "turkish"]
 }

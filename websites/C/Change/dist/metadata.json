@@ -23,12 +23,10 @@
 		"vi_VN": "Thay đổi thế giới"
 	},
 	"url": "www.change.org",
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/BwMtgWb.jpg",
 	"thumbnail": "https://i.imgur.com/bjNVk3Z.png",
 	"color": "#FF0000",
 	"category": "other",
-	"tags": [
-		"votes"
-	]
+	"tags": ["votes"]
 }

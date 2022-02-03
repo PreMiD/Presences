@@ -11,13 +11,10 @@
 	},
 	"url": "app.gitbook.com",
 	"regExp": "([a-z0-9-]+)[.]gitbook[.]io|app[.]gitbook[.]com",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/1h1N9Rp.png",
 	"thumbnail": "https://i.imgur.com/vw0wuC1.png",
 	"color": "#3884FF",
 	"category": "other",
-	"tags": [
-		"documentation",
-		"collaboration"
-	]
+	"tags": ["documentation", "collaboration"]
 }

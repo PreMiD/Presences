@@ -8,19 +8,11 @@
 	"description": {
 		"en": "Interactive Courses for Software Developers"
 	},
-	"url": [
-		"educative.io",
-		"www.educative.io"
-	],
-	"version": "1.0.5",
+	"url": ["educative.io", "www.educative.io"],
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/vYEoDm5.png",
 	"thumbnail": "https://i.imgur.com/VOUPf7V.png",
 	"color": "#5553ff",
 	"category": "other",
-	"tags": [
-		"learning",
-		"coding",
-		"programming",
-		"educative"
-	]
+	"tags": ["learning", "coding", "programming", "educative"]
 }

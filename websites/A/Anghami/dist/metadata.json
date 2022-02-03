@@ -14,14 +14,10 @@
 		"vi_VN": "Tất cả những bài hát bạn yêu thích, tất cả sự tự do bạn cần. Ả Rập và Quốc tế tất cả tại một nơi"
 	},
 	"url": "play.anghami.com",
-	"version": "1.2.18",
+	"version": "1.2.19",
 	"logo": "https://i.imgur.com/hfJSnzq.png",
 	"thumbnail": "https://i.imgur.com/61ks2yh.png",
 	"color": "#d3369f",
 	"category": "music",
-	"tags": [
-		"subscription-based",
-		"music",
-		"region-restricted"
-	]
+	"tags": ["subscription-based", "music", "region-restricted"]
 }

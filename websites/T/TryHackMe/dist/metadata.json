@@ -10,13 +10,10 @@
 		"nl": "TryHackMe haalt de pijn uit het leren en onderwijzen van cyberbeveiliging."
 	},
 	"url": "tryhackme.com",
-	"version": "1.1.12",
+	"version": "1.1.13",
 	"logo": "https://i.imgur.com/gqL7pDD.png",
 	"thumbnail": "https://i.imgur.com/jojxLOU.png",
 	"color": "#343C42",
 	"category": "other",
-	"tags": [
-		"security",
-		"games"
-	]
+	"tags": ["security", "games"]
 }

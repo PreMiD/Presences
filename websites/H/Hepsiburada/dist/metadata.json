@@ -10,18 +10,11 @@
 		"tr": "Hepsiburada, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir.",
 		"nl": "Hepsiburada is een populaire winkelwebsite in Turkije."
 	},
-	"url": [
-		"www.hepsiburada.com",
-		"hepsiburada.com"
-	],
-	"version": "1.2.12",
+	"url": ["www.hepsiburada.com", "hepsiburada.com"],
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/5AozcKg.png",
 	"thumbnail": "https://i.imgur.com/WnZo2SR.png",
 	"color": "#ff6000",
 	"category": "other",
-	"tags": [
-		"hepsiburada",
-		"shopping",
-		"turkish"
-	]
+	"tags": ["hepsiburada", "shopping", "turkish"]
 }

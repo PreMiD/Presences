@@ -11,16 +11,10 @@
 		"nl": "Onze missie: spelers versterken"
 	},
 	"url": "hypixelstudios.com",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/ThI2LFZ.jpg",
 	"thumbnail": "https://i.imgur.com/DVmrFaP.jpg",
 	"color": "#15243A",
 	"category": "games",
-	"tags": [
-		"hytale",
-		"riot",
-		"games",
-		"hypixel",
-		"studios"
-	]
+	"tags": ["hytale", "riot", "games", "hypixel", "studios"]
 }

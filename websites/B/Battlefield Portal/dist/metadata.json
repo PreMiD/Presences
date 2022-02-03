@@ -10,17 +10,12 @@
 		"vi_VN": "Battlefield Portal là nền tảng nơi bạn khám phá các trận đấu bất ngờ và thay đổi luật lệ của chiến tranh. Tham gia các chế độ tuỳ chọn hoặc tự xây dựng trải nghiệm của riêng mình bằng các công cụ đa năng."
 	},
 	"url": "portal.battlefield.com",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/kEnCDvm.png",
 	"thumbnail": "https://i.imgur.com/3WooHwa.png",
 	"color": "#FF2C10",
 	"category": "games",
-	"tags": [
-		"battlefield2042",
-		"portal",
-		"rules-editor",
-		"battlefield"
-	],
+	"tags": ["battlefield2042", "portal", "rules-editor", "battlefield"],
 	"settings": [
 		{
 			"id": "block",

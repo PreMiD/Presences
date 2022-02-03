@@ -10,13 +10,10 @@
 		"nl": "Welkomstafbeeldingen, moderatie, wereldwijde niveaus, logboeken, muziek van hoge kwaliteit en nog veel meer!"
 	},
 	"url": "www.probot.io",
-	"version": "1.4.5",
+	"version": "1.4.6",
 	"logo": "https://i.imgur.com/Oq9jXbz.png",
 	"thumbnail": "https://i.imgur.com/98zTh1t.png",
 	"color": "#450F40",
 	"category": "other",
-	"tags": [
-		"bot",
-		"discord"
-	]
+	"tags": ["bot", "discord"]
 }

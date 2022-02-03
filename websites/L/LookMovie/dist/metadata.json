@@ -10,13 +10,10 @@
 		"nl": "Bekijk gratis alle nieuwe en oude films online in HD-kwaliteit en ondertitels."
 	},
 	"url": "lookmovie.io",
-	"version": "1.2.16",
+	"version": "1.2.17",
 	"logo": "https://i.imgur.com/vlSumUl.png",
 	"thumbnail": "https://i.imgur.com/nseTbMZ.png",
 	"color": "#ffcc00",
 	"category": "videos",
-	"tags": [
-		"lookmovie",
-		"streaming"
-	]
+	"tags": ["lookmovie", "streaming"]
 }

@@ -12,19 +12,12 @@
 		"nl": "AniTurk is een online site voor het bekijken van anime.",
 		"vi_VN": "AniTürk là trang web xem anime trực tuyến."
 	},
-	"url": [
-		"www.aniturk.net",
-		"aniturk.net"
-	],
-	"version": "1.0.14",
+	"url": ["www.aniturk.net", "aniturk.net"],
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/xg4r7tM.png",
 	"thumbnail": "https://i.imgur.com/0VdI8Mq.png",
 	"color": "#ff31cb",
 	"category": "videos",
-	"tags": [
-		"anime",
-		"türk",
-		"aniturk"
-	],
+	"tags": ["anime", "türk", "aniturk"],
 	"iframe": true
 }

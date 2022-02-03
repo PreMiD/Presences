@@ -12,14 +12,10 @@
 		"vi_VN": "OneDrive là dịch vụ lưu trữ đám mây và chia sẻ của Microsoft."
 	},
 	"url": "onedrive.live.com",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/waSBaVe.png",
 	"thumbnail": "https://i.imgur.com/sXm35kV.png",
 	"color": "#0078d4",
 	"category": "other",
-	"tags": [
-		"onedrive",
-		"microsoft",
-		"office"
-	]
+	"tags": ["onedrive", "microsoft", "office"]
 }

@@ -16,15 +16,10 @@
 		"nl": "FanFiction | laat je fantasie de vrije loop"
 	},
 	"url": "www.fanfiction.net",
-	"version": "1.2.10",
+	"version": "1.2.11",
 	"logo": "https://i.imgur.com/bKSkTgk.png",
 	"thumbnail": "https://i.imgur.com/5dQGIS1.png",
 	"color": "#0000FF",
 	"category": "other",
-	"tags": [
-		"fanfics",
-		"story",
-		"entertainment",
-		"reading"
-	]
+	"tags": ["fanfics", "story", "entertainment", "reading"]
 }

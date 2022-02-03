@@ -12,15 +12,12 @@
 		"vi_VN": "Google Fonts là dịch vụ của Google, cung cấp hơn 1000 bộ phông miễn phí cho các dự án Android và CSS."
 	},
 	"url": "fonts.google.com",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/l1S996y.png",
 	"thumbnail": "https://i.imgur.com/lVved9l.png",
 	"color": "#ff5756",
 	"category": "other",
-	"tags": [
-		"google",
-		"fonts"
-	],
+	"tags": ["google", "fonts"],
 	"settings": [
 		{
 			"id": "showButton",

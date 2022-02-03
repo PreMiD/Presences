@@ -12,13 +12,10 @@
 	},
 	"url": "eggsy.xyz",
 	"regExp": "eggsy[.]xyz(?![/]projects[/]premid[/]custom-status)",
-	"version": "1.2.13",
+	"version": "1.2.14",
 	"logo": "https://i.imgur.com/MziDVWO.png",
 	"thumbnail": "https://i.imgur.com/jy5yr4h.png",
 	"color": "#212121",
 	"category": "other",
-	"tags": [
-		"eggsy",
-		"premid"
-	]
+	"tags": ["eggsy", "premid"]
 }

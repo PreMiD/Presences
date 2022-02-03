@@ -10,12 +10,10 @@
 		"nl": "Docker Hub is een dienst van Docker om container images te vinden en te delen met je team."
 	},
 	"url": "hub.docker.com",
-	"version": "1.1.12",
+	"version": "1.1.13",
 	"logo": "https://i.imgur.com/xr2Gulz.png",
 	"thumbnail": "https://i.imgur.com/n3Ox5DQ.png",
 	"color": "#099CEC",
 	"category": "other",
-	"tags": [
-		"docker"
-	]
+	"tags": ["docker"]
 }

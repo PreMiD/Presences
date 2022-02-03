@@ -11,17 +11,12 @@
 		"nl": "iQIYI is 's werelds toonaangevende website voor het online streamen van films en video's en biedt tv-drama's, films, variétéshows, animaties en andere inhoud van hoge kwaliteit."
 	},
 	"url": "www.iq.com",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"logo": "https://i.imgur.com/gehI1mg.png",
 	"thumbnail": "https://i.imgur.com/4PESzW3.png",
 	"color": "#0BBE06",
 	"category": "videos",
-	"tags": [
-		"iqiyi",
-		"drama",
-		"anime",
-		"movie"
-	],
+	"tags": ["iqiyi", "drama", "anime", "movie"],
 	"settings": [
 		{
 			"id": "lang",
@@ -50,10 +45,7 @@
 			"title": "Logo",
 			"value": 0,
 			"icon": "fas fa-paint-roller",
-			"values": [
-				"Normal",
-				"No background"
-			]
+			"values": ["Normal", "No background"]
 		}
 	]
 }

@@ -13,13 +13,10 @@
 	},
 	"url": "bs.to",
 	"regExp": "([a-z0-9-]+[.])*bs[.]to[/]",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/vgjlpJn.png",
 	"thumbnail": "https://i.imgur.com/dmPF4us.jpg",
 	"color": "#ffffff",
 	"category": "videos",
-	"tags": [
-		"german",
-		"videos"
-	]
+	"tags": ["german", "videos"]
 }

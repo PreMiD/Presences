@@ -12,13 +12,10 @@
 	},
 	"url": "bandcamp.com",
 	"regExp": "([a-z0-9-]+[.])*bandcamp([.][a-z]+)+[/]",
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/FozA4oY.png",
 	"thumbnail": "https://i.imgur.com/OcNBvvP.png",
 	"color": "#61929c",
 	"category": "music",
-	"tags": [
-		"music",
-		"albums"
-	]
+	"tags": ["music", "albums"]
 }

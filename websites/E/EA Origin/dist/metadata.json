@@ -9,16 +9,12 @@
 		"en": "Get great PC and Mac games on Origin. Play the latest RPGs, shooters, Sims games & more."
 	},
 	"url": "www.origin.com",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/y98b3oj.png",
 	"thumbnail": "https://i.imgur.com/fyEfBmo.png",
 	"color": "#f15a23",
 	"category": "games",
-	"tags": [
-		"origin",
-		"ea",
-		"gaming"
-	],
+	"tags": ["origin", "ea", "gaming"],
 	"settings": [
 		{
 			"id": "time",

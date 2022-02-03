@@ -11,14 +11,10 @@
 		"nl": "ekşi sözlük is een collaboratief hypertext-'woordenboek', gebaseerd op het concept van websites die zijn opgebouwd uit bijdragen van gebruikers."
 	},
 	"url": "eksisozluk.com",
-	"version": "1.1.10",
+	"version": "1.1.11",
 	"logo": "https://i.imgur.com/wGmQ6dB.png",
 	"thumbnail": "https://i.imgur.com/QLHVxVT.png",
 	"color": "#82c24a",
 	"category": "other",
-	"tags": [
-		"eksi",
-		"sozluk",
-		"turkish"
-	]
+	"tags": ["eksi", "sozluk", "turkish"]
 }

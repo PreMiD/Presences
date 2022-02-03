@@ -10,19 +10,13 @@
 		"de": "Die Joyn GmbH ist ein deutsches Gemeinschaftsunternehmen der Medienkonzerne ProSiebenSat.1 Media und Discovery, das sich mit Streaming-Media-Produkten beschäftigt.",
 		"nl": "Joyn GmbH is een Duitse joint venture van de mediagroepen ProSiebenSat.1 Media en Discovery, die zich bezighoudt met streaming mediaproducten."
 	},
-	"url": [
-		"www.joyn.de",
-		"joyn.de"
-	],
-	"version": "1.2.11",
+	"url": ["www.joyn.de", "joyn.de"],
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/SrAaJDz.jpg",
 	"thumbnail": "https://i.imgur.com/W0qRCZk.png",
 	"color": "#000",
 	"category": "videos",
-	"tags": [
-		"streaming",
-		"joyn"
-	],
+	"tags": ["streaming", "joyn"],
 	"settings": [
 		{
 			"id": "lang",

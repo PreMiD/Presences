@@ -11,16 +11,10 @@
 		"nl": "NSFW Porno Beeld bord draait op Gelbooru"
 	},
 	"url": "realbooru.com",
-	"version": "1.2.10",
+	"version": "1.2.11",
 	"logo": "https://i.imgur.com/g09SOs0.png",
 	"thumbnail": "https://i.imgur.com/m41BGlq.png",
 	"color": "#171717",
 	"category": "other",
-	"tags": [
-		"nsfw",
-		"porn",
-		"gelbooru",
-		"imageboard",
-		"images"
-	]
+	"tags": ["nsfw", "porn", "gelbooru", "imageboard", "images"]
 }

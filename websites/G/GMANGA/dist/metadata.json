@@ -8,21 +8,13 @@
 	"description": {
 		"en": "GMANGA - An interactive site that aims to provide more options for translating manga chapters to Arabic."
 	},
-	"url": [
-		"gmanga.org",
-		"gmanga.io",
-		"gmanga.me"
-	],
-	"version": "1.0.6",
+	"url": ["gmanga.org", "gmanga.io", "gmanga.me"],
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/HITNgFU.png",
 	"thumbnail": "https://i.imgur.com/mVR71z8.png",
 	"color": "#428bca",
 	"category": "anime",
-	"tags": [
-		"manga",
-		"manhwa",
-		"manhua"
-	],
+	"tags": ["manga", "manhwa", "manhua"],
 	"settings": [
 		{
 			"id": "timestamp",
@@ -40,10 +32,7 @@
 			"id": "logo",
 			"title": "Icon",
 			"icon": "fab fa-discord",
-			"values": [
-				"Light",
-				"Dark"
-			],
+			"values": ["Light", "Dark"],
 			"value": 0
 		}
 	]

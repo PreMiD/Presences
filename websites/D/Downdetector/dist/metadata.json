@@ -10,13 +10,10 @@
 		"nl": "Real-time probleem- en uitvalbewaking"
 	},
 	"url": "downdetector.com",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/ba5AI1b.png",
 	"thumbnail": "https://i.imgur.com/Qy1lbXE.png",
 	"color": "#FF160A",
 	"category": "other",
-	"tags": [
-		"status",
-		"monitoring"
-	]
+	"tags": ["status", "monitoring"]
 }

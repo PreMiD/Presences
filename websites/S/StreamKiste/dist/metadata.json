@@ -12,16 +12,12 @@
 	},
 	"url": "streamkiste.tv",
 	"regExp": "([a-z0-9-]+[.])*streamkiste([.][a-z]+)+[/]",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/bdGvqBo.png",
 	"thumbnail": "https://i.imgur.com/TrhRNwT.jpg",
 	"color": "#4DB8C9",
 	"category": "videos",
-	"tags": [
-		"movie",
-		"video",
-		"media"
-	],
+	"tags": ["movie", "video", "media"],
 	"iframe": true,
 	"settings": [
 		{

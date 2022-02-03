@@ -16,17 +16,12 @@
 		"www.komoot.es",
 		"www.komoot.nl"
 	],
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/G8vn23a.png",
 	"thumbnail": "https://i.imgur.com/mbb326e.png",
 	"color": "#FFFFFF",
 	"category": "other",
-	"tags": [
-		"planner",
-		"bike",
-		"bicycle",
-		"walk"
-	],
+	"tags": ["planner", "bike", "bicycle", "walk"],
 	"settings": [
 		{
 			"id": "timeElapsed",

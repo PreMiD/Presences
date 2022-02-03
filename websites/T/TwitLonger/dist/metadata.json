@@ -10,13 +10,10 @@
 		"nl": "Als je teveel praat voor Twitter."
 	},
 	"url": "www.twitlonger.com",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/Sl7M64D.png",
 	"thumbnail": "https://i.imgur.com/Fx8VNFk.png",
 	"color": "#428BCA",
 	"category": "other",
-	"tags": [
-		"twitter",
-		"micro-blogging"
-	]
+	"tags": ["twitter", "micro-blogging"]
 }
