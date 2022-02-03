@@ -79,21 +79,21 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Answering question:";
 			presenceData.smallImageKey = "writing";
-			presenceData.state = (
-				document.querySelector("div[role=textbox]") as HTMLInputElement
+			presenceData.state = document.querySelector<HTMLDivElement>(
+				"div[role=textbox]"
 			).textContent;
 		}
 	} else if (page.includes("/app/ask")) {
 		presenceData.details = "Searching for a question:";
 		presenceData.smallImageKey = "search";
-		presenceData.state = (
-			document.querySelector("input[type=search]") as HTMLInputElement
+		presenceData.state = document.querySelector<HTMLInputElement>(
+			"input[type=search]"
 		).value;
 	} else if (page.includes("/question/add")) {
 		presenceData.smallImageKey = "writing";
 		presenceData.details = "Writing a question:";
-		presenceData.state = (
-			document.querySelector("textarea[name=task_content]") as HTMLInputElement
+		presenceData.state = document.querySelector<HTMLTextAreaElement>(
+			"textarea[name=task_content]"
 		).value;
 	} else if (page.includes("/app/profile")) {
 		presenceData.details = "Viewing profile:";
@@ -111,18 +111,14 @@ presence.on("UpdateData", async () => {
 
 	if (
 		document.querySelector("div.brn-attachment-grabber-container > textarea") &&
-		(
-			document.querySelector(
-				"div.brn-attachment-grabber-container > textarea"
-			) as HTMLInputElement
+		document.querySelector<HTMLTextAreaElement>(
+			"div.brn-attachment-grabber-container > textarea"
 		).value !== ""
 	) {
 		presenceData.smallImageKey = "writing";
 		presenceData.details = "Writing a question:";
-		presenceData.state = (
-			document.querySelector(
-				"div.brn-attachment-grabber-container > textarea"
-			) as HTMLInputElement
+		presenceData.state = document.querySelector<HTMLTextAreaElement>(
+			"div.brn-attachment-grabber-container > textarea"
 		).value;
 	}
 
