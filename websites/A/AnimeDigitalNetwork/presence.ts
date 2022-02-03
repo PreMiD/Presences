@@ -55,11 +55,11 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else if (document.location.pathname.includes("video") && !video) {
-		const titles = document.querySelector(
+		const titles = document.querySelector<HTMLMetaElement>(
 			'meta[property="og:image"]'
-		) as HTMLMetaElement;
+		);
 		presenceData.largeImageKey =
-			titles.content.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
+			titles?.content?.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
 		if (
 			document.querySelector(
 				"#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
