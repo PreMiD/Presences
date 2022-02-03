@@ -8,8 +8,10 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo"
 		},
 		path = document.location.pathname,
-		privacy = await presence.getSetting<boolean>("privacy"),
-		buttons = await presence.getSetting<boolean>("buttons");
+		[privacy, buttons] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("buttons")
+		]);
 	if (!privacy) {
 		if (path === "/") {
 			search = document.querySelector("#tags");
