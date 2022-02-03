@@ -22,9 +22,5 @@
 	"thumbnail": "https://i.imgur.com/tA7kbca.png",
 	"color": "#18B3E2",
 	"category": "videos",
-	"tags": [
-		"vimeo",
-		"video",
-		"media"
-	]
+	"tags": ["vimeo", "video", "media"]
 }

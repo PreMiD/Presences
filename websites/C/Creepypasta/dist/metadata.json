@@ -14,14 +14,7 @@
 	"thumbnail": "https://i.imgur.com/ZlvL1BP.png",
 	"color": "#dd3333",
 	"category": "other",
-	"tags": [
-		"creepy",
-		"story",
-		"stories",
-		"spooky",
-		"scary",
-		"literature"
-	],
+	"tags": ["creepy", "story", "stories", "spooky", "scary", "literature"],
 	"settings": [
 		{
 			"id": "time",

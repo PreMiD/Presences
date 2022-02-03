@@ -16,10 +16,7 @@
 	"thumbnail": "https://i.imgur.com/qoVAM68.jpg",
 	"color": "#353b45",
 	"category": "socials",
-	"tags": [
-		"furry",
-		"nsfw"
-	],
+	"tags": ["furry", "nsfw"],
 	"settings": [
 		{
 			"id": "browse",

@@ -17,9 +17,5 @@
 	"thumbnail": "https://i.imgur.com/VFnKuxl.png",
 	"color": "#FF7D00",
 	"category": "other",
-	"tags": [
-		"lexx",
-		"bot",
-		"discord"
-	]
+	"tags": ["lexx", "bot", "discord"]
 }

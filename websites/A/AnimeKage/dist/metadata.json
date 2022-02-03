@@ -20,9 +20,6 @@
 	"thumbnail": "https://i.imgur.com/0pir8CX.png",
 	"color": "#2bb4ba",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"videos"
-	],
+	"tags": ["anime", "videos"],
 	"iframe": true
 }

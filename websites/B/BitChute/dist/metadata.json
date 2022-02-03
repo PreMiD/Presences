@@ -15,12 +15,7 @@
 	"thumbnail": "https://i.imgur.com/9L0dyfo.png",
 	"color": "#ffa500",
 	"category": "videos",
-	"tags": [
-		"bitchute",
-		"video",
-		"yt-alt",
-		"nsfw"
-	],
+	"tags": ["bitchute", "video", "yt-alt", "nsfw"],
 	"settings": [
 		{
 			"id": "privacy",

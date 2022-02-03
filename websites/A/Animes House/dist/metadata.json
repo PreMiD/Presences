@@ -19,10 +19,6 @@
 	"thumbnail": "https://i.imgur.com/1YqKDfY.png",
 	"color": "#079ac7",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"animes",
-		"animeshouse"
-	],
+	"tags": ["anime", "animes", "animeshouse"],
 	"iframe": true
 }

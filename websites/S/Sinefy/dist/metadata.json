@@ -16,10 +16,7 @@
 	"thumbnail": "https://i.imgur.com/UgFuRve.png",
 	"color": "#fdc516",
 	"category": "videos",
-	"tags": [
-		"video",
-		"turkish"
-	],
+	"tags": ["video", "turkish"],
 	"iframe": true,
 	"settings": [
 		{

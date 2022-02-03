@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/PksjgBn.jpg",
 	"color": "#666666",
 	"category": "other",
-	"tags": [
-		"shopping",
-		"clothing"
-	]
+	"tags": ["shopping", "clothing"]
 }

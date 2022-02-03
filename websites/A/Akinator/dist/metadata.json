@@ -26,10 +26,5 @@
 	"thumbnail": "https://i.imgur.com/CPWBwGM.png",
 	"color": "#0000ff",
 	"category": "games",
-	"tags": [
-		"akinator",
-		"guessing",
-		"game",
-		"fun"
-	]
+	"tags": ["akinator", "guessing", "game", "fun"]
 }

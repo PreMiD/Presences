@@ -23,10 +23,5 @@
 	"thumbnail": "https://i.imgur.com/9sHEdj2.png",
 	"color": "#3297E9",
 	"category": "other",
-	"tags": [
-		"gifs",
-		"searchgifs",
-		"sharegifs",
-		"memes"
-	]
+	"tags": ["gifs", "searchgifs", "sharegifs", "memes"]
 }

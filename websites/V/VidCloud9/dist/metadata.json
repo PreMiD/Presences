@@ -16,10 +16,7 @@
 	"thumbnail": "https://i.imgur.com/IeqotZd.png",
 	"color": "#00050C",
 	"category": "videos",
-	"tags": [
-		"watch-movies",
-		"vidcloud9"
-	],
+	"tags": ["watch-movies", "vidcloud9"],
 	"iframe": true,
 	"settings": [
 		{

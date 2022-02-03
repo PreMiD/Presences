@@ -22,10 +22,7 @@
 	"thumbnail": "https://i.imgur.com/01bTk7A.png",
 	"color": "#161616",
 	"category": "anime",
-	"tags": [
-		"manga",
-		"reading"
-	],
+	"tags": ["manga", "reading"],
 	"settings": [
 		{
 			"id": "showHistory",
@@ -68,10 +65,7 @@
 			"title": "[Global] Logo",
 			"icon": "fas fa-bookmark",
 			"value": 0,
-			"values": [
-				"Nuvem",
-				"Livro"
-			]
+			"values": ["Nuvem", "Livro"]
 		}
 	]
 }

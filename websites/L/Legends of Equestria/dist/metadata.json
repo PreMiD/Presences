@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/lvYtzNm.png",
 	"color": "#FF0000",
 	"category": "games",
-	"tags": [
-		"games",
-		"social"
-	]
+	"tags": ["games", "social"]
 }

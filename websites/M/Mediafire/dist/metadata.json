@@ -20,11 +20,5 @@
 	"thumbnail": "https://i.imgur.com/DwfSIyG.jpg",
 	"color": "#FF0000",
 	"category": "other",
-	"tags": [
-		"mediafire",
-		"media",
-		"fire",
-		"download",
-		"storage"
-	]
+	"tags": ["mediafire", "media", "fire", "download", "storage"]
 }

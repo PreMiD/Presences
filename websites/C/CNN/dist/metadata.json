@@ -10,18 +10,13 @@
 		"nl": "Cable News Network is een multinationaal, op nieuws gebaseerd betaalt televisiekanaal met hoofdkantoor in Atlanta. Het is eigendom van CNN Worldwide, een onderdeel van de WarnerMedia News & Sports-divisie van AT&T's WarnerMedia.",
 		"vi_VN": "Cable News Network là kênh truyền hình cung cấp tin tức trả phí đa quốc gia trụ sở tại Atlanta. Nó được sở hữu bởi CNN Worldwide, một đơn vị của WarnerMedia News & Sports trong WarnerMedia thuộc AT&T."
 	},
-	"url": [
-		"edition.cnn.com",
-		"us.cnn.com"
-	],
+	"url": ["edition.cnn.com", "us.cnn.com"],
 	"version": "1.0.9",
 	"logo": "https://i.imgur.com/BVSUjL7.png",
 	"thumbnail": "https://i.imgur.com/xAufghg.png",
 	"color": "#CC1417",
 	"category": "other",
-	"tags": [
-		"news"
-	],
+	"tags": ["news"],
 	"settings": [
 		{
 			"id": "privacy",
@@ -34,10 +29,7 @@
 			"title": "Icon",
 			"icon": "fad fa-icons",
 			"value": 0,
-			"values": [
-				"Red",
-				"Transparent"
-			]
+			"values": ["Red", "Transparent"]
 		},
 		{
 			"id": "timeElapsed",

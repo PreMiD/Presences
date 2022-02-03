@@ -15,11 +15,5 @@
 	"thumbnail": "https://i.imgur.com/Q1bzBtD.png",
 	"color": "#D3D3D3",
 	"category": "games",
-	"tags": [
-		"games",
-		"retro",
-		"wiki",
-		"research",
-		"cut-contents"
-	]
+	"tags": ["games", "retro", "wiki", "research", "cut-contents"]
 }

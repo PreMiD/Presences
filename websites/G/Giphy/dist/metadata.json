@@ -20,9 +20,5 @@
 	"thumbnail": "https://i.imgur.com/Vtg6NxY.png",
 	"color": "#00FF00",
 	"category": "other",
-	"tags": [
-		"gif",
-		"editor",
-		"creator"
-	]
+	"tags": ["gif", "editor", "creator"]
 }

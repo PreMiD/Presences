@@ -9,21 +9,13 @@
 		"en": "Free vanity links for you discord servers, bots and templates!",
 		"nl": "Gratis vanity-links voor je Discord servers, bots en templates!"
 	},
-	"url": [
-		"dsc.gg",
-		"docs.dsc.gg"
-	],
+	"url": ["dsc.gg", "docs.dsc.gg"],
 	"version": "1.0.4",
 	"logo": "https://i.imgur.com/YCpohJW.png",
 	"thumbnail": "https://i.imgur.com/8fkvFDo.png",
 	"color": "#738adb",
 	"category": "socials",
-	"tags": [
-		"link-shortener",
-		"discord-link-shortener",
-		"vanity-urls",
-		"dscgg"
-	],
+	"tags": ["link-shortener", "discord-link-shortener", "vanity-urls", "dscgg"],
 	"settings": [
 		{
 			"id": "timestamp",

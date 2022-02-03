@@ -21,11 +21,6 @@
 	"thumbnail": "https://i.imgur.com/5TNqcl6.png",
 	"color": "#581919",
 	"category": "other",
-	"tags": [
-		"charity",
-		"folding",
-		"foldinghome",
-		"foldingathome"
-	],
+	"tags": ["charity", "folding", "foldinghome", "foldingathome"],
 	"iframe": true
 }

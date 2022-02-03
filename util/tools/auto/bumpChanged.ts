@@ -5,9 +5,11 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join, normalize, resolve, sep } from "node:path";
 import { coerce, inc } from "semver";
 import debug from "debug";
+import axios from "axios";
 
-const log = debug("SyntaxEnforcer");
-debug.enable("SyntaxEnforcer*");
+const log = debug("BumpChanged");
+debug.enable("BumpChanged*");
+
 /**
  * Executes a shell command and return it as a Promise.
  * @param cmd {string[]}
@@ -43,58 +45,38 @@ const readFile = (path: string): string =>
 		writeFileSync(jsonPath, JSON.stringify(data, null, "\t"), {
 			encoding: "utf8"
 		}),
-	increaseSemver = async (filesToBump: string[]): Promise<void> => {
-		console.time("semver_bump_time");
-
-		if (filesToBump.length === 0) return;
-
-		for (const [i, dir] of filesToBump.entries()) {
-			// Normalize the path and seperate it on OS specific seperator
-			const normalizedPath = normalize(dir).split(sep);
-
-			// Pop off the presence/iframe.ts/metadata.json
-			normalizedPath.at(-1) === "metadata.json"
-				? normalizedPath.splice(normalizedPath.length - 2, 2)
-				: normalizedPath.pop();
-
-			filesToBump[i] = normalizedPath.join(sep);
-		}
-
-		const directory = [...new Set(filesToBump)];
-
-		for (const path of directory) {
-			console.log(path);
-
+	increaseSemver = async (changedPresenceFiles: string[]): Promise<void> => {
+		for (const path of changedPresenceFiles) {
 			// Normalize the path and seperate it on OS specific seperator
 			const normalizedPath = resolve(normalize(path)).split(sep),
 				metadataPath = join(normalizedPath.join(sep), "dist", "metadata.json"),
-				metadata = readJson<Metadata>(metadataPath);
+				metadata = readJson<Metadata>(metadataPath),
+				apiVersion = (
+					await axios.post<{
+						data: {
+							presences: [{ metadata: { version: string } }];
+						};
+					}>("https://api.premid.app/v3", {
+						query: `{
+							presences(service: "${metadata.service}") {
+								metadata {
+									version
+								}
+							}
+						}`
+					})
+				).data.data.presences[0]?.metadata.version;
 
-			if (metadata && metadata.version) {
+			if (metadata.version === apiVersion) {
 				const newVersion = inc(coerce(metadata.version), "patch");
 				writeJson({ ...metadata, version: newVersion }, metadataPath);
+				console.log(path);
 			}
 		}
-
-		console.timeEnd("semver_bump_time");
 	},
 	// Main function that calls the other functions above
 	main = async (): Promise<void> => {
-		if (!process.env.GITHUB_ACTIONS) {
-			console.log(
-				"\nPlease note that this script is ONLY supposed to run on a CI environment\n"
-			);
-		}
-
-		log.extend("Lint")("Prettifying files");
-
-		await execShellCommand(["yarn", "lint"]);
-
-		log.extend("MS")("Sorting metadata files");
-
-		await execShellCommand(["yarn", "ms"]);
-
-		log.extend("SemVer")("Bumping versions");
+		log("Bumping versions...");
 
 		// Use Git to check what files have changed after TypeScript compilation
 		const changedPresenceFiles = (
@@ -108,8 +90,23 @@ const readFile = (path: string): string =>
 					file.includes("metadata.json")
 			);
 
-		await increaseSemver(changedPresenceFiles);
+		if (changedPresenceFiles.length === 0) return;
 
+		for (const [i, dir] of changedPresenceFiles.entries()) {
+			// Normalize the path and seperate it on OS specific seperator
+			const normalizedPath = normalize(dir).split(sep);
+
+			// Pop off the presence/iframe.ts/metadata.json
+			normalizedPath.at(-1) === "metadata.json"
+				? normalizedPath.splice(normalizedPath.length - 2, 2)
+				: normalizedPath.pop();
+
+			changedPresenceFiles[i] = normalizedPath.join(sep);
+		}
+
+		await increaseSemver([...new Set(changedPresenceFiles)]);
+
+		log("Bumped versions in all changed files");
 		// Exit with the designated exit code to ensure the CI action fails or succeeds
 		process.exit();
 	};

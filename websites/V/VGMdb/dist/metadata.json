@@ -15,13 +15,7 @@
 	"thumbnail": "https://i.imgur.com/n3L2Bom.png",
 	"color": "#B90000",
 	"category": "music",
-	"tags": [
-		"video",
-		"game",
-		"music",
-		"database",
-		"album"
-	],
+	"tags": ["video", "game", "music", "database", "album"],
 	"settings": [
 		{
 			"id": "cover",

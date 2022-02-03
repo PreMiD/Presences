@@ -14,11 +14,7 @@
 	"thumbnail": "https://i.imgur.com/fyEfBmo.png",
 	"color": "#f15a23",
 	"category": "games",
-	"tags": [
-		"origin",
-		"ea",
-		"gaming"
-	],
+	"tags": ["origin", "ea", "gaming"],
 	"settings": [
 		{
 			"id": "time",

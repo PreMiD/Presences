@@ -20,11 +20,5 @@
 	"thumbnail": "https://i.imgur.com/YM0LnMd.png",
 	"color": "#512da8",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"manga",
-		"images",
-		"random",
-		"nsfw"
-	]
+	"tags": ["anime", "manga", "images", "random", "nsfw"]
 }

@@ -16,11 +16,7 @@
 	"thumbnail": "https://i.imgur.com/4Q65GWB.jpg",
 	"color": "#e74c3c",
 	"category": "anime",
-	"tags": [
-		"animesonline",
-		"videos",
-		"anime"
-	],
+	"tags": ["animesonline", "videos", "anime"],
 	"iframe": true,
 	"settings": [
 		{

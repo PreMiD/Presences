@@ -15,10 +15,5 @@
 	"thumbnail": "https://i.imgur.com/asXjia1.jpg",
 	"color": "#ebcc34",
 	"category": "other",
-	"tags": [
-		"developing",
-		"modules",
-		"packages",
-		"coding"
-	]
+	"tags": ["developing", "modules", "packages", "coding"]
 }

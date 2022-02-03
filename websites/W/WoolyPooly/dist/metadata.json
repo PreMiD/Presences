@@ -19,10 +19,5 @@
 	"thumbnail": "https://i.imgur.com/RVtEVMf.png",
 	"color": "#3d89f5",
 	"category": "other",
-	"tags": [
-		"crypto",
-		"mining",
-		"blockchain",
-		"network"
-	]
+	"tags": ["crypto", "mining", "blockchain", "network"]
 }

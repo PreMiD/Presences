@@ -20,8 +20,5 @@
 	"thumbnail": "https://i.imgur.com/xsz3eWv.png",
 	"color": "#d7a664",
 	"category": "games",
-	"tags": [
-		"minecraft",
-		"forge"
-	]
+	"tags": ["minecraft", "forge"]
 }

@@ -19,9 +19,5 @@
 	"thumbnail": "https://i.imgur.com/mhwloZI.png",
 	"color": "#ffc925",
 	"category": "music",
-	"tags": [
-		"prambors",
-		"music",
-		"radio"
-	]
+	"tags": ["prambors", "music", "radio"]
 }

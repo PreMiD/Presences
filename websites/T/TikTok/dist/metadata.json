@@ -26,11 +26,7 @@
 	"thumbnail": "https://i.imgur.com/QAxUXB4.png",
 	"color": "#000000",
 	"category": "socials",
-	"tags": [
-		"tiktok",
-		"video",
-		"social"
-	],
+	"tags": ["tiktok", "video", "social"],
 	"settings": [
 		{
 			"id": "lang",

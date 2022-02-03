@@ -10,19 +10,11 @@
 		"en": "Teknobuk is a technology blog, just like Webtekno ve ShiftDelete.Net.",
 		"nl": "Teknobuk is een technologieblog, net als Webtekno ve ShiftDelete.Net."
 	},
-	"url": [
-		"www.teknobuk.com",
-		"teknobuk.com"
-	],
+	"url": ["www.teknobuk.com", "teknobuk.com"],
 	"version": "1.2.13",
 	"logo": "https://i.imgur.com/QK47Q4Y.png",
 	"thumbnail": "https://i.imgur.com/CngdOQf.png",
 	"color": "#FABD1B",
 	"category": "other",
-	"tags": [
-		"log",
-		"blog",
-		"technology",
-		"turkish"
-	]
+	"tags": ["log", "blog", "technology", "turkish"]
 }

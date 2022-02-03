@@ -21,8 +21,5 @@
 	"thumbnail": "https://i.imgur.com/Kne85nE.png",
 	"color": "#f6ce16",
 	"category": "games",
-	"tags": [
-		"minecraft",
-		"sponge"
-	]
+	"tags": ["minecraft", "sponge"]
 }

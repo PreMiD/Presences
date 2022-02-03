@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/XFCwrCc.png",
 	"color": "#FFE500",
 	"category": "other",
-	"tags": [
-		"cliffsnotes",
-		"study",
-		"help"
-	]
+	"tags": ["cliffsnotes", "study", "help"]
 }

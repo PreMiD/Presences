@@ -16,12 +16,7 @@
 	"thumbnail": "https://i.imgur.com/ThcGMw3.png",
 	"color": "#ffbf00",
 	"category": "videos",
-	"tags": [
-		"viu",
-		"drama",
-		"anime",
-		"movie"
-	],
+	"tags": ["viu", "drama", "anime", "movie"],
 	"settings": [
 		{
 			"id": "lang",
@@ -44,10 +39,7 @@
 			"title": "Viu Logo",
 			"value": 0,
 			"icon": "fas fa-paint-roller",
-			"values": [
-				"Normal",
-				"With Text"
-			]
+			"values": ["Normal", "With Text"]
 		}
 	]
 }

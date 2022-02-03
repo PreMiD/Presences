@@ -22,8 +22,5 @@
 	"thumbnail": "https://i.imgur.com/eEb3Dy7.png",
 	"color": "#ED1A37",
 	"category": "videos",
-	"tags": [
-		"shows",
-		"movies"
-	]
+	"tags": ["shows", "movies"]
 }

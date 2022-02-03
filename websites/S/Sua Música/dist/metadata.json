@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/PBwEkYp.jpg",
 	"color": "#1d94ca",
 	"category": "music",
-	"tags": [
-		"music",
-		"radio",
-		"community"
-	]
+	"tags": ["music", "radio", "community"]
 }

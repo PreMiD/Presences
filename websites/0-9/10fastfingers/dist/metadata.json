@@ -16,11 +16,5 @@
 	"thumbnail": "https://i.imgur.com/Z8sPB3q.png",
 	"color": "#082333",
 	"category": "other",
-	"tags": [
-		"wordsperminute",
-		"wpm",
-		"typing",
-		"typing-test",
-		"type-test"
-	]
+	"tags": ["wordsperminute", "wpm", "typing", "typing-test", "type-test"]
 }

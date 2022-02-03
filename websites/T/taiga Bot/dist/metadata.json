@@ -17,9 +17,5 @@
 	"thumbnail": "https://i.imgur.com/B8rnRpx.png",
 	"color": "#ff006d",
 	"category": "other",
-	"tags": [
-		"discord",
-		"bot",
-		"taiga"
-	]
+	"tags": ["discord", "bot", "taiga"]
 }

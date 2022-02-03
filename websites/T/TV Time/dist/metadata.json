@@ -25,9 +25,5 @@
 	"thumbnail": "https://i.imgur.com/9Uc9myA.png",
 	"color": "#FDDF39",
 	"category": "other",
-	"tags": [
-		"tvtime",
-		"movies",
-		"shows"
-	]
+	"tags": ["tvtime", "movies", "shows"]
 }

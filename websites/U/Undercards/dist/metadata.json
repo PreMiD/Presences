@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/D9bWiXU.png",
 	"color": "#FF0000",
 	"category": "games",
-	"tags": [
-		"game",
-		"card",
-		"turn-based"
-	]
+	"tags": ["game", "card", "turn-based"]
 }

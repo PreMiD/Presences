@@ -15,11 +15,5 @@
 	"thumbnail": "https://i.imgur.com/EytuDmf.png",
 	"color": "#00b640",
 	"category": "other",
-	"tags": [
-		"fundraiser",
-		"donate",
-		"donation",
-		"fundraising",
-		"charity"
-	]
+	"tags": ["fundraiser", "donate", "donation", "fundraising", "charity"]
 }

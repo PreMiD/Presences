@@ -15,10 +15,6 @@
 	"thumbnail": "https://i.imgur.com/N8CRfMJ.png",
 	"color": "#FF0050",
 	"category": "videos",
-	"tags": [
-		"streaming",
-		"video",
-		"media"
-	],
+	"tags": ["streaming", "video", "media"],
 	"iframe": true
 }

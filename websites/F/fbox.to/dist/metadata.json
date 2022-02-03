@@ -14,10 +14,7 @@
 	"thumbnail": "https://i.imgur.com/bCuViFL.png",
 	"color": "#565c67",
 	"category": "videos",
-	"tags": [
-		"movies",
-		"stream"
-	],
+	"tags": ["movies", "stream"],
 	"iframe": true,
 	"settings": [
 		{

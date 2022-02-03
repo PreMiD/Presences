@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/AvUP9R2.png",
 	"color": "#FF8D00",
 	"category": "games",
-	"tags": [
-		"overwatch",
-		"games",
-		"database"
-	]
+	"tags": ["overwatch", "games", "database"]
 }

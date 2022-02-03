@@ -14,11 +14,7 @@
 	"thumbnail": "https://i.imgur.com/n0olPse.png",
 	"color": "#1E1E40",
 	"category": "socials",
-	"tags": [
-		"profiles",
-		"social-media",
-		"links"
-	],
+	"tags": ["profiles", "social-media", "links"],
 	"settings": [
 		{
 			"id": "timestamp",

@@ -16,8 +16,5 @@
 	"thumbnail": "https://i.imgur.com/en2ygta.png",
 	"color": "#3D92D0",
 	"category": "other",
-	"tags": [
-		"pictures",
-		"nsfw"
-	]
+	"tags": ["pictures", "nsfw"]
 }

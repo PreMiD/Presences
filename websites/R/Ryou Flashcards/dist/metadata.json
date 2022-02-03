@@ -15,10 +15,5 @@
 	"thumbnail": "https://i.imgur.com/tWNhZxF.png",
 	"color": "#4C8FFB",
 	"category": "other",
-	"tags": [
-		"japanese",
-		"language",
-		"learning",
-		"education"
-	]
+	"tags": ["japanese", "language", "learning", "education"]
 }

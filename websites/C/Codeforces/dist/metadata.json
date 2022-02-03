@@ -15,10 +15,5 @@
 	"thumbnail": "https://i.imgur.com/RtnvUCl.png",
 	"color": "#1381f6",
 	"category": "other",
-	"tags": [
-		"coding",
-		"competition",
-		"education",
-		"technology"
-	]
+	"tags": ["coding", "competition", "education", "technology"]
 }

@@ -19,11 +19,7 @@
 	"thumbnail": "https://i.imgur.com/aTmmCpt.png",
 	"color": "#33abe0",
 	"category": "socials",
-	"tags": [
-		"telegram",
-		"message",
-		"social"
-	],
+	"tags": ["telegram", "message", "social"],
 	"settings": [
 		{
 			"id": "name",

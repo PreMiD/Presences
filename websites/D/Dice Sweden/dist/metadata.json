@@ -15,9 +15,7 @@
 	"thumbnail": "https://i.imgur.com/PFWnovQ.png",
 	"color": "#000",
 	"category": "games",
-	"tags": [
-		"gaming"
-	],
+	"tags": ["gaming"],
 	"settings": [
 		{
 			"id": "buttons",

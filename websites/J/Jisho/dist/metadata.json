@@ -15,11 +15,5 @@
 	"thumbnail": "https://i.imgur.com/Kk2NUkd.png",
 	"color": "#0bba17",
 	"category": "other",
-	"tags": [
-		"japanese",
-		"english",
-		"dictionary",
-		"translator",
-		"language"
-	]
+	"tags": ["japanese", "english", "dictionary", "translator", "language"]
 }

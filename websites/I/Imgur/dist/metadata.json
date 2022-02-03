@@ -25,9 +25,5 @@
 	"thumbnail": "https://i.imgur.com/vTLBJYm.jpg",
 	"color": "#89c624",
 	"category": "other",
-	"tags": [
-		"images",
-		"memes",
-		"gif"
-	]
+	"tags": ["images", "memes", "gif"]
 }

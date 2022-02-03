@@ -15,11 +15,7 @@
 	"thumbnail": "https://i.imgur.com/n8AgY7d.jpg",
 	"color": "#f5313f",
 	"category": "videos",
-	"tags": [
-		"turkish",
-		"series",
-		"movie"
-	],
+	"tags": ["turkish", "series", "movie"],
 	"settings": [
 		{
 			"id": "showImages",

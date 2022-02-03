@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/g3hrWth.png",
 	"color": "#FF0084",
 	"category": "socials",
-	"tags": [
-		"flickr",
-		"image"
-	]
+	"tags": ["flickr", "image"]
 }

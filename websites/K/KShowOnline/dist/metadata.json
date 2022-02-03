@@ -16,10 +16,6 @@
 	"thumbnail": "https://i.imgur.com/aeinr6l.png",
 	"color": "#0070C3",
 	"category": "videos",
-	"tags": [
-		"video",
-		"media",
-		"kpop"
-	],
+	"tags": ["video", "media", "kpop"],
 	"iframe": true
 }

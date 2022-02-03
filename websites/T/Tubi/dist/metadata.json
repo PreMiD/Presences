@@ -21,9 +21,5 @@
 	"thumbnail": "https://i.imgur.com/44Esu8y.png",
 	"color": "#F12C7B",
 	"category": "videos",
-	"tags": [
-		"tubi",
-		"video",
-		"media"
-	]
+	"tags": ["tubi", "video", "media"]
 }

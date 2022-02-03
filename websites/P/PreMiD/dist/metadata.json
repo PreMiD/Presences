@@ -47,11 +47,7 @@
 	"thumbnail": "https://i.imgur.com/OYxIOZ8.png",
 	"color": "#7289DA",
 	"category": "other",
-	"tags": [
-		"discord",
-		"web-service",
-		"inception"
-	],
+	"tags": ["discord", "web-service", "inception"],
 	"settings": [
 		{
 			"id": "lang",

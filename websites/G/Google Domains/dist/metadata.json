@@ -22,9 +22,7 @@
 	"thumbnail": "https://i.imgur.com/5EXKSHI.png",
 	"color": "#FCBC03",
 	"category": "other",
-	"tags": [
-		"domain"
-	],
+	"tags": ["domain"],
 	"settings": [
 		{
 			"id": "domain",

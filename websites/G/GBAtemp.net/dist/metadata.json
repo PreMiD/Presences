@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/zVdZt56.png",
 	"color": "#7692aa",
 	"category": "games",
-	"tags": [
-		"games",
-		"hacking",
-		"community"
-	]
+	"tags": ["games", "hacking", "community"]
 }

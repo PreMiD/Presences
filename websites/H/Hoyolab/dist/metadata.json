@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/oPFkbqC.png",
 	"color": "#2d2f33",
 	"category": "games",
-	"tags": [
-		"games",
-		"forum",
-		"genshin"
-	]
+	"tags": ["games", "forum", "genshin"]
 }

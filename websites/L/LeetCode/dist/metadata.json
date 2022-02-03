@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/LHKxFlb.png",
 	"color": "#f1a21a",
 	"category": "other",
-	"tags": [
-		"technology",
-		"education",
-		"developer"
-	]
+	"tags": ["technology", "education", "developer"]
 }

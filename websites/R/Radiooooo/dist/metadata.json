@@ -15,10 +15,7 @@
 	"thumbnail": "https://i.imgur.com/AT7vWm9.jpg",
 	"color": "#108cb4",
 	"category": "music",
-	"tags": [
-		"music",
-		"radio"
-	],
+	"tags": ["music", "radio"],
 	"settings": [
 		{
 			"id": "lang",

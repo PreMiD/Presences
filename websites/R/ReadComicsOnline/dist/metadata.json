@@ -14,10 +14,7 @@
 	"thumbnail": "https://i.imgur.com/EuVcqxz.png",
 	"color": "#6a0722",
 	"category": "other",
-	"tags": [
-		"comics",
-		"online-reader"
-	],
+	"tags": ["comics", "online-reader"],
 	"settings": [
 		{
 			"id": "buttons",

@@ -15,11 +15,5 @@
 	"thumbnail": "https://i.imgur.com/BwWCTIf.png",
 	"color": "#3D5DFF",
 	"category": "games",
-	"tags": [
-		"game",
-		"defly",
-		"multiplayer",
-		"defly-io",
-		"browser-game"
-	]
+	"tags": ["game", "defly", "multiplayer", "defly-io", "browser-game"]
 }

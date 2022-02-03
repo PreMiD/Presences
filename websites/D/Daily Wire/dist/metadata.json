@@ -15,9 +15,7 @@
 	"thumbnail": "https://i.imgur.com/4eXamxn.png",
 	"color": "#000",
 	"category": "other",
-	"tags": [
-		"news"
-	],
+	"tags": ["news"],
 	"settings": [
 		{
 			"id": "timeElapsed",

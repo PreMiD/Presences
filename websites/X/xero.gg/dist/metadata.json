@@ -16,11 +16,7 @@
 	"thumbnail": "https://i.imgur.com/zQcNcIm.png",
 	"color": "#428DE3",
 	"category": "games",
-	"tags": [
-		"s4league",
-		"games",
-		"database"
-	],
+	"tags": ["s4league", "games", "database"],
 	"settings": [
 		{
 			"id": "showchat",

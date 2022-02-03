@@ -15,7 +15,5 @@
 	"thumbnail": "https://i.imgur.com/DSNnMk5.png",
 	"color": "#FF0000",
 	"category": "videos",
-	"tags": [
-		"video"
-	]
+	"tags": ["video"]
 }

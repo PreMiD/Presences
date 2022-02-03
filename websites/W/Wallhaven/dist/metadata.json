@@ -16,14 +16,7 @@
 	"thumbnail": "https://i.imgur.com/QV6vAk6.jpg",
 	"color": "#0E6288",
 	"category": "other",
-	"tags": [
-		"anime",
-		"general",
-		"wallpaper",
-		"wallhaven",
-		"wh",
-		"whcc"
-	],
+	"tags": ["anime", "general", "wallpaper", "wallhaven", "wh", "whcc"],
 	"settings": [
 		{
 			"id": "buttons",
