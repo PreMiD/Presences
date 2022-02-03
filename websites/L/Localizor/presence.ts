@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			"div.col-lg-6 div.text-center h3"
 		).innerText;
 		if (gameImage !== "null") presenceData.largeImageKey = gameImage;
-		presenceData.buttons = presenceData.buttons = [
+		presenceData.buttons = [
 			{
 				label: "View Game",
 				url: document.URL
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelectorAll<HTMLAnchorElement>(
 			"div.card-body.pt-2.pb-2 a.active"
 		)[1].textContent;
-		presenceData.buttons = presenceData.buttons = [
+		presenceData.buttons = [
 			{
 				label: "View Game Activity",
 				url: document.URL
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 				"div.og-multi-select__content__selection"
 			).textContent
 		}`;
-		presenceData.buttons = presenceData.buttons = [
+		presenceData.buttons = [
 			{
 				label: "View Game",
 				url: document.URL.split("/translate").join("")
