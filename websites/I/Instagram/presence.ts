@@ -7,19 +7,23 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo"
 		},
-		settings = await getSettings(),
+		[privacySetting, elapsedTimeSetting, postImageSetting] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("elapsedTime"),
+			presence.getSetting<boolean>("postImage")
+		]),
 		{ pathname } = window.location,
 		path = pathname.split("/"),
 		profileName = document.querySelector("div.XBGH5 h2");
 
-	if (settings.elapsedTime) presenceData.startTimestamp = timestamp;
+	if (elapsedTimeSetting) presenceData.startTimestamp = timestamp;
 
 	if (!path[1]) presenceData.details = "Viewing the Homepage";
 	else if (pathname.startsWith("/stories")) {
 		const time = document.querySelector("time.BPyeS.Nzb55"),
 			video = document.querySelector("video");
 
-		presenceData.details = settings.privacy
+		presenceData.details = privacySetting
 			? "Viewing a Story"
 			: `Viewing ${path[2]}'s Story`;
 
@@ -29,7 +33,7 @@ presence.on("UpdateData", async () => {
 			);
 		}
 
-		if (!settings.privacy && video && video.duration) {
+		if (!privacySetting && video && video.duration) {
 			const timestamps = presence.getTimestampsfromMedia(video);
 
 			presenceData.startTimestamp = timestamps[0];
@@ -55,7 +59,7 @@ presence.on("UpdateData", async () => {
 			);
 
 		presenceData.details =
-			settings.privacy || !profileName
+			privacySetting || !profileName
 				? "Viewing a Post"
 				: `Viewing ${profileName}'s Post`;
 
@@ -65,7 +69,7 @@ presence.on("UpdateData", async () => {
 			);
 		}
 
-		if (!settings.privacy && settings.postImage && image && image.src)
+		if (!privacySetting && postImageSetting && image && image.src)
 			presenceData.largeImageKey = await getShortURL(image.src);
 
 		presenceData.buttons = [
@@ -87,7 +91,7 @@ presence.on("UpdateData", async () => {
 		const profilePicture =
 			document.querySelector<HTMLImageElement>("img._6q-tv");
 
-		presenceData.details = `Viewing a Profile${settings.privacy ? "" : ":"}`;
+		presenceData.details = `Viewing a Profile${privacySetting ? "" : ":"}`;
 		presenceData.state = `${
 			document.querySelector("div.QGPIr h1")?.textContent ?? "Unknown"
 		} (@${profileName.textContent})`;
@@ -104,13 +108,13 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (document.querySelector("div.QY4Ed.P0xOK input.focus-visible")) {
-		presenceData.details = settings.privacy ? "Searching" : "Searching:";
+		presenceData.details = privacySetting ? "Searching" : "Searching:";
 		presenceData.state = document.querySelector<HTMLInputElement>(
 			"div.QY4Ed.P0xOK input.focus-visible"
 		)?.value;
 	}
 
-	if (settings.privacy) {
+	if (privacySetting) {
 		delete presenceData.state;
 		delete presenceData.endTimestamp;
 		delete presenceData.buttons;
@@ -158,22 +162,4 @@ async function getShortURL(url: string) {
 		presence.error(err);
 		return url;
 	}
-}
-
-async function getSettings() {
-	const settings = await Promise.all([
-			await presence.getSetting<boolean>("privacy"),
-			await presence.getSetting<boolean>("elapsedTime"),
-			await presence.getSetting<boolean>("postImage")
-		]),
-		names = ["privacy", "elapsedTime", "postImage"],
-		obj: {
-			[key in typeof names[number]]?: boolean;
-		} = {};
-
-	names.forEach((name, i) => {
-		obj[name] = settings[i];
-	});
-
-	return obj;
 }
