@@ -15,14 +15,14 @@ presence.on("UpdateData", async () => {
 	if (!privacy) {
 		if (path === "/") {
 			search = document.querySelector("#tags");
-			if (search.value !== "") {
+			if (search.value) {
 				presenceData.details = "Searching For:";
 				presenceData.state = search.value;
 			} else presenceData.details = "Viewing the homepage";
 		} else if (path.includes("posts")) {
 			search = document.querySelector("#tags");
 			if (
-				search.value !== "" &&
+				search.value &&
 				search.value !==
 					document.querySelector<HTMLInputElement>("#tags_query").value
 			) {
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 			}
 			if (buttons) {
 				if (
-					(search.value !== "" &&
+					(search.value &&
 						search.value !==
 							document.querySelector<HTMLInputElement>("#tags_query").value) ||
 					document.location.href.includes("/posts?tags=")
