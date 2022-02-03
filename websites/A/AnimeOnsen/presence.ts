@@ -15,7 +15,7 @@ const presence = new Presence({
 		clientId: "826806766033174568"
 	}),
 	[, page] = window.location.pathname.split("/"),
-	$ = (selectors: string) => document.querySelectorAll(selectors),
+	$ = (selectors: string) => document.querySelector(selectors),
 	initEpoch = Date.now(),
 	rpaImage = {
 		general: {
@@ -36,11 +36,14 @@ presence.info("PreMiD extension has loaded");
 
 function updateData() {
 	if (page === "watch") {
-		const player = <HTMLVideoElement>$("video#ao-video")[0],
-			title = $('meta[name="ao-api-malsync-title"]')[0].getAttribute("value"),
+		const player = <HTMLVideoElement>$("div.ao-player-media video"),
+			title = $("span.ao-player-metadata-title").textContent,
 			episode = Number(
-				$('meta[name="ao-api-malsync-episode"]')[0].getAttribute("value")
+				$('meta[name="ao-content-episode"]').getAttribute("content")
 			),
+			[currentEpisodeOption] = (<HTMLSelectElement>(
+				$("select.ao-player-metadata-episode")
+			)).selectedOptions,
 			{ paused, currentTime: progress, duration } = player,
 			snowflake = presence.getTimestamps(progress, duration);
 		playerData = {
@@ -51,7 +54,7 @@ function updateData() {
 			},
 			title,
 			episode,
-			episodeName: "",
+			episodeName: currentEpisodeOption.textContent,
 			playbackState: paused ? "paused" : "playing"
 		};
 		if (document.body.contains(player) && !pageLoaded) pageLoaded = true;
@@ -71,11 +74,8 @@ presence.on("UpdateData", () => {
 	switch (page) {
 		case "watch": {
 			const { title, episode, episodeName, playbackState, time } = playerData,
-				episodeUrl = new URL("https://animeonsen.xyz/watch");
-			episodeUrl.searchParams.append(
-				"v",
-				new URL(window.location.href).searchParams.get("v")
-			);
+				episodeUrl = new URL(window.location.href);
+			episodeUrl.searchParams.set("episode", episode.toString());
 			episodeUrl.searchParams.append("ep", episode.toString());
 			presenceData = {
 				...presenceData,
@@ -85,11 +85,31 @@ presence.on("UpdateData", () => {
 					playbackState[0].toUpperCase() + playbackState.substring(1)
 				}`,
 				details: title,
-				state: `Episode ${episode}${episodeName ? ` - ${episodeName}` : ""}`,
+				state: episodeName || "",
 				startTimestamp: time.snowflake[0],
 				endTimestamp: time.snowflake[1],
 				buttons: [{ label: "Watch", url: episodeUrl.href }]
 			};
+			break;
+		}
+		case "genre": {
+			const genre = $("div.content-result span i").textContent;
+			presenceData.details = `Genre: ${genre}`;
+			presenceData.smallImageKey = rpaImage.general.browse;
+			presenceData.smallImageText = "Browsing";
+			break;
+		}
+		case "genres": {
+			presenceData.details = "Genres";
+			presenceData.smallImageKey = rpaImage.general.browse;
+			presenceData.smallImageText = "Browsing";
+			break;
+		}
+		case "details": {
+			const title = $('div.title span[lang="en"]').textContent;
+			presenceData.details = `Viewing ${title}`;
+			presenceData.smallImageKey = rpaImage.general.browse;
+			presenceData.smallImageText = "Details";
 			break;
 		}
 		case "search": {
@@ -104,16 +124,10 @@ presence.on("UpdateData", () => {
 			presenceData.smallImageText = "Account Page";
 			break;
 		}
-		case "about": {
-			presenceData.details = "Reading";
+		case "statistics": {
+			presenceData.details = "Viewing Statistics";
 			presenceData.smallImageKey = rpaImage.general.read;
-			presenceData.smallImageText = "About Page";
-			break;
-		}
-		case "cookies": {
-			presenceData.details = "Reading";
-			presenceData.smallImageKey = rpaImage.general.read;
-			presenceData.smallImageText = "Cookies Page";
+			presenceData.smallImageText = "Reading";
 			break;
 		}
 		default:
