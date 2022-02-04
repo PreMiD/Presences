@@ -225,24 +225,15 @@ presence.on("UpdateData", async () => {
                         const year = (title.nextElementSibling.firstElementChild as HTMLAnchorElement).innerText
 
                         if (path[4]) switch (path[4]) {
-                            case "ratings": pd.details = `Viewing friends' ratings of ${title.innerText}, ${year}`; break;
-                            case "reviews": pd.details = `Viewing friends' reviews of ${title.innerText}, ${year}`; break;
-                            case "lists": pd.details = `Viewing friends' lists that include ${title.innerText}, ${year}`; break;
+                            case "ratings": pd.details = "Viewing friends' ratings of..."; break;
+                            case "reviews": pd.details = "Viewing friends' reviews of..."; break;
+                            case "lists": pd.details = "Viewing friends' lists that include..."; break;
+                            case "fans": pd.details = "Viewing friends who are fans of..."; break;
+                            case "likes": pd.details = "Viewing friends who have liked..."; break;
 
-                            case "fans":
-                                pd.details = "Viewing friends who are fans of...";
-                                pd.state = `${title.innerText}, ${year}`;
+                        } else pd.details = "Viewing friends who have seen...";
 
-                                break;
-
-                            case "likes":
-                                pd.details = "Viewing friends who have liked...";
-                                pd.state = `${title.innerText}, ${year}`;
-
-                                break;
-
-                        } else pd.details = "Viewing friends who have seen..."; pd.state = `${title.innerText}, ${year}`;
-
+                        pd.state = `${title.innerText}, ${year}`
                         pd.largeImageKey = getImageURLByAlt(clarifyString(title.innerText));
                         pd.smallImageKey = "final";
 
