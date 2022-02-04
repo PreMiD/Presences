@@ -23,7 +23,7 @@ let pathName: { hostname: string; subject: string; question: string };
 
 function setPathName() {
 	if (
-		document.location.hostname === "brainly.id" ||
+		document.location.hostname === "brainly.co.id" ||
 		document.location.hostname === "brainly.ro"
 	) {
 		pathNameLocalize.forEach((item, index) => {
@@ -79,16 +79,14 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Answering question:";
 			presenceData.smallImageKey = "writing";
-			presenceData.state = document.querySelector<HTMLDivElement>(
-				"div[role=textbox]"
-			).textContent;
+			presenceData.state =
+				document.querySelector<HTMLDivElement>("div[role=textbox]").textContent;
 		}
 	} else if (page.includes("/app/ask")) {
 		presenceData.details = "Searching for a question:";
 		presenceData.smallImageKey = "search";
-		presenceData.state = document.querySelector<HTMLInputElement>(
-			"input[type=search]"
-		).value;
+		presenceData.state =
+			document.querySelector<HTMLInputElement>("input[type=search]").value;
 	} else if (page.includes("/question/add")) {
 		presenceData.smallImageKey = "writing";
 		presenceData.details = "Writing a question:";
