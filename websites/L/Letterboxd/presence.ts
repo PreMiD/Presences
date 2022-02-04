@@ -106,14 +106,14 @@ presence.on("UpdateData", async () => {
         }
 
         case "films": {
-            if (path[1]) switch(path[1]) {
+            if (path[1]) switch (path[1]) {
                 case "upcoming": pd.details = "Viewing upcoming films"; break;
                 case "popular": pd.details = "Viewing popular films"; break;
                 case "genre": pd.details = `Viewing ${path[2] ? path[2] : "unknown"} films`; break;
                 case "decade": pd.details = `Viewing films from the ${path[2] ? path[2] : "unknown"}`
 
             } else pd.details = "Viewing films";
-            
+
             if (!pd.details) pd.details = "Viewing films";
 
             break;
@@ -192,6 +192,18 @@ presence.on("UpdateData", async () => {
                         break;
                     }
 
+                    case "stats": {
+                        const name = document.getElementsByClassName("yir-member-subtitle")[0].lastElementChild as HTMLAnchorElement;
+                        const pfp = (name.previousElementSibling.firstElementChild as HTMLImageElement).src;
+
+                        pd.details = `Viewing ${name.innerText}'s statistics`;
+                        pd.largeImageKey = pfp;
+                        pd.smallImageKey = "final";
+                        pd.buttons = [{ label: `View ${name.innerText}'s stats`, url: window.location.href }]
+
+                        break;
+                    }
+
                     case "list": {
                         const title = (document.getElementsByClassName("title-1 prettify")[0] as HTMLHeadingElement).innerText
                         const name = (document.getElementsByClassName("name")[0]
@@ -262,7 +274,9 @@ presence.on("UpdateData", async () => {
                     }
                 }
 
-                if (["watchlist", "films", "activity", "blocked", "followers", "following", "tags", "likes", "lists"]
+                if (["watchlist", "films", "activity",
+                    "blocked", "followers", "following",
+                    "tags", "likes", "lists"]
                     .includes(path[1])) {
                     const name = (document.getElementsByClassName("title-3")[0]
                         .firstElementChild as HTMLAnchorElement).innerText
