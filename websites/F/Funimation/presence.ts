@@ -1,13 +1,13 @@
 const presence = new Presence({
 		clientId: "640161890059812865"
 	}),
-	strings = presence.getStrings({
+	getStrings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let prevTitle: string, prevEpisode: string;
+let prevTitle: string, prevEpisode: string, strings: Awaited<typeof getStrings>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -16,6 +16,8 @@ presence.on("UpdateData", async () => {
 		},
 		showPoster = await presence.getSetting("poster"),
 		video = document.querySelector<HTMLVideoElement>("video.vjs-tech");
+
+	strings ??= await getStrings;
 
 	if (location.pathname.includes("/v/") && video) {
 		const poster = document.querySelector<HTMLElement>(".vjs-poster"),
@@ -35,9 +37,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
-		presenceData.smallImageText = video.paused
-			? (await strings).pause
-			: (await strings).play;
+		presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestampsfromMedia(video);
 
