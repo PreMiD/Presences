@@ -20,5 +20,11 @@
         "films",
         "network"
     ],
-    "category": "socials"
+    "category": "socials",
+    "settings": [{
+        "id": "show_buttons",
+        "title": "Show buttons",
+        "value": true, 
+        "values": [ true, false ]
+    }]
 }
