@@ -74,27 +74,14 @@ presence.on("UpdateData", async () => {
             break;
         }
 
+        case "actor":
         case "director": {
             const name = (document.getElementsByClassName("title-1 prettify")[0] as HTMLHeadingElement)
-                .innerText.replace("FILMS DIRECTED BY\n", "");
+                .innerText.replace(path[0] == "director" ? "FILMS DIRECTED BY\n" : "FILMS STARRING\n", "");
             const pfp = ((document.getElementsByClassName("avatar person-image image-loaded")[0] as HTMLDivElement)
                 .firstElementChild as HTMLImageElement).src;
 
-            pd.details = "Viewing director: " + name;
-            pd.largeImageKey = pfp;
-            pd.smallImageKey = "final";
-            pd.buttons = [{ label: "View " + name, url: window.location.href }]
-
-            break;
-        }
-
-        case "actor": {
-            const name = (document.getElementsByClassName("title-1 prettify")[0] as HTMLHeadingElement)
-                .innerText.replace("FILMS STARRING\n", "");
-            const pfp = ((document.getElementsByClassName("avatar person-image image-loaded")[0] as HTMLDivElement)
-                .firstElementChild as HTMLImageElement).src;
-
-            pd.details = "Viewing actor: " + name;
+            pd.details = `Viewing ${path[0] == "director" ? "director" : "actor"}: ${name}`;
             pd.largeImageKey = pfp;
             pd.smallImageKey = "final";
             pd.buttons = [{ label: "View " + name, url: window.location.href }]
