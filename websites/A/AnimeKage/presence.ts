@@ -64,11 +64,8 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = title.textContent;
 
-			air = document.querySelector(
-				"body > div:nth-child(2) > div > div > div > div > div > div > div > div:nth-child(3) > div > div.row > div:nth-child(3) > div"
-			);
-
-			presenceData.state = `Aired on: ${air.textContent}`;
+			air = document.querySelector("div > div.row > div:nth-child(3)");
+			presenceData.state = `Aired on: ${air?.textContent?.trim()}`;
 
 			if (paused) {
 				delete presenceData.startTimestamp;
