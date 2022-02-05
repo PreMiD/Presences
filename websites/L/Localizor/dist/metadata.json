@@ -9,12 +9,15 @@
 		"en": "Localizor is an innovative crowd translation platform built to translate your game with the help of your own and our community"
 	},
 	"url": "www.localizor.com",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/b7Go6NC.png",
 	"thumbnail": "https://i.imgur.com/WQkfFet.png",
 	"color": "#000000",
 	"category": "other",
-	"tags": ["translation", "game"],
+	"tags": [
+		"translation",
+		"game"
+	],
 	"settings": [
 		{
 			"id": "time",
