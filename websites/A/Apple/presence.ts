@@ -445,7 +445,14 @@ presence.on("UpdateData", async () => {
 			presenceData.details = strings.shopBag;
 			presenceData.state = strings.shopBagSummary.replace(
 				"{0}",
-				!summary ? "$0" : summary
+				!summary
+					? "$0"
+					: summary.replace(
+							document.querySelector(
+								"div.rs-summary-value span.nowrap span[aria-hidden='true']"
+							)?.textContent ?? "/mo.",
+							""
+					  )
 			);
 		} else {
 			presenceData.details = "Shop";
