@@ -43,9 +43,10 @@ presence.on("UpdateData", async () => {
 				)
 				.src.replace("medium", "large");
 		} else if (artwork === 2) {
-			presenceData.largeImageKey = document
-				.querySelector('meta[property="og:image"]')
-				.getAttribute("content");
+			// Meta tags can't be used due to how the page is loaded
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"div.asset-image > picture > img"
+			).src;
 		} else {
 			presenceData.smallImageKey = "artwork";
 			presenceData.smallImageText = "Viewing artwork";
