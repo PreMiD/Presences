@@ -171,60 +171,99 @@ presence.on("UpdateData", async () => {
 			}
 
 			case "film": {
-				if (path[2]) {
-					const title = document.getElementsByClassName("contextual-title")[0]
-							.firstElementChild.firstElementChild
-							.nextElementSibling as HTMLAnchorElement,
-						year = (
-							title.nextElementSibling.firstElementChild as HTMLAnchorElement
-						).innerText;
+				if (path[1]) {
+					switch (path[1]) {
+						default: {
+							if (path[2]) {
+								if (path[2] === "trailer") {
+									const header = document.getElementById(
+											"featured-film-header"
+										),
+										title = clarifyString(
+											(header.firstElementChild as HTMLElement).innerText
+										);
 
-					switch (path[2]) {
-						case "members":
-							presenceData.details = `Viewing people who have seen ${title.innerText}, ${year}`;
-							break;
-						case "fans":
-							presenceData.details = `Viewing fans of ${title.innerText}, ${year}`;
-							break;
-						case "likes":
-							presenceData.details = `Viewing people who have liked ${title.innerText}, ${year}`;
-							break;
-						case "ratings":
-							presenceData.details = `Viewing ratings of ${title.innerText}, ${year}`;
-							break;
-						case "reviews":
-							presenceData.details = `Viewing reviews of ${title.innerText}, ${year}`;
-							break;
-						case "lists":
-							presenceData.details = `Viewing lists that include ${title.innerText}, ${year}`;
-							break;
+									presenceData.details = "Viewing the trailer of...";
+									presenceData.state = `${title}, ${
+										(
+											header.lastElementChild.firstElementChild
+												.firstElementChild as HTMLAnchorElement
+										).innerText
+									}`;
+									presenceData.largeImageKey = getImageURLByAlt(title);
+									presenceData.smallImageKey = "final";
+									// eslint-disable-next-line no-undefined
+									presenceData.startTimestamp = undefined;
+									presenceData.buttons = [
+										{ label: "Watch trailer", url: window.location.href }
+									];
+								} else {
+									const title = document.getElementsByClassName(
+											"contextual-title"
+										)[0].firstElementChild.firstElementChild
+											.nextElementSibling as HTMLAnchorElement,
+										year = (
+											title.nextElementSibling
+												.firstElementChild as HTMLAnchorElement
+										).innerText;
+
+									switch (path[2]) {
+										case "members":
+											presenceData.details = `Viewing people who have seen ${title.innerText}, ${year}`;
+											break;
+										case "fans":
+											presenceData.details = `Viewing fans of ${title.innerText}, ${year}`;
+											break;
+										case "likes":
+											presenceData.details = `Viewing people who have liked ${title.innerText}, ${year}`;
+											break;
+										case "ratings":
+											presenceData.details = `Viewing ratings of ${title.innerText}, ${year}`;
+											break;
+										case "reviews":
+											presenceData.details = `Viewing reviews of ${title.innerText}, ${year}`;
+											break;
+										case "lists":
+											presenceData.details = `Viewing lists that include ${title.innerText}, ${year}`;
+											break;
+									}
+
+									presenceData.buttons = generateButtonText(
+										presenceData.details
+									);
+									presenceData.largeImageKey = getImageURLByAlt(
+										clarifyString(title.innerText)
+									);
+									presenceData.smallImageKey = "final";
+								}
+							} else {
+								const header = document.getElementById("featured-film-header"),
+									title = clarifyString(
+										(header.firstElementChild as HTMLElement).innerText
+									);
+
+								presenceData.details = `${title}, ${
+									(
+										header.lastElementChild.firstElementChild
+											.firstElementChild as HTMLAnchorElement
+									).innerText
+								}`;
+								presenceData.state = `By ${
+									(
+										header.lastElementChild.lastElementChild
+											.firstElementChild as HTMLSpanElement
+									).innerText
+								}`;
+								presenceData.buttons = [
+									{ label: `View ${title}`, url: window.location.href }
+								];
+								presenceData.largeImageKey = getImageURLByAlt(title);
+								presenceData.smallImageKey = "final";
+								break;
+							}
+						}
 					}
-
-					presenceData.buttons = generateButtonText(presenceData.details);
-					presenceData.largeImageKey = getImageURLByAlt(
-						clarifyString(title.innerText)
-					);
-					presenceData.smallImageKey = "final";
-				} else if (path[1]) {
-					const header = (tag: string) =>
-							document
-								.getElementById("featured-film-header")
-								.getElementsByTagName(tag),
-						title = clarifyString((header("h1")[0] as HTMLElement).innerText);
-
-					presenceData.details = `${title}, ${
-						(header("a")[0] as HTMLElement).innerText
-					}`;
-					presenceData.state = `By ${
-						(header("a")[1] as HTMLElement).innerText
-					}`;
-					presenceData.buttons = [
-						{ label: `View ${title}`, url: window.location.href }
-					];
-					presenceData.largeImageKey = getImageURLByAlt(title);
-					presenceData.smallImageKey = "final";
 				}
-
 				break;
 			}
 
