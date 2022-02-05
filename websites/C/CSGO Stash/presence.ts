@@ -14,16 +14,16 @@ presence.on("UpdateData", () => {
 			document.title.lastIndexOf("-") - 1
 		),
 		path = document.location.pathname,
-		priceLeft = document.querySelector(
+		priceLeft = document.querySelector<HTMLSpanElement>(
 			"#prices > div:nth-child(2) > a > span.pull-left"
 		),
-		priceRight = document.querySelector(
+		priceRight = document.querySelector<HTMLSpanElement>(
 			"#prices > div:nth-child(2) > a > span.pull-right"
 		),
-		priceMiddle = document.querySelector(
+		priceMiddle = document.querySelector<HTMLAnchorElement>(
 			"a.btn.btn-default.market-button-item"
 		),
-		steamPrice = document.querySelector(
+		steamPrice = document.querySelector<HTMLSpanElement>(
 			"div.col-md-6.col-md-6-collapse-top-margin > div:nth-child(2) > a > span.pull-right"
 		),
 		middleImage = document.querySelector<HTMLImageElement>(
