@@ -8,6 +8,15 @@ const presence = new Presence({
 
 let details = "";
 
+function generateButtonText(text: string): [ButtonData] {
+	return [
+		{
+			label: text.replace("Viewing", "View"),
+			url: window.location.href
+		}
+	];
+}
+
 function clarifyString(str: string) {
 	return str
 		.replaceAll(String.fromCharCode(160), " ")
@@ -32,34 +41,34 @@ presence.on("UpdateData", async () => {
 	const path = document.location.pathname.slice(1).split("/");
 	path.pop();
 
-	const pd: PresenceData = {
+	const presenceData: PresenceData = {
 		largeImageKey: "final",
-		startTimestamp: Date.now(),
-		buttons: [{ label: "View", url: window.location.href }]
+		startTimestamp: Date.now()
 	};
 
 	if (path[0]) {
 		switch (path[0]) {
 			case "lists":
-				pd.details = "Viewing all lists";
+				presenceData.details = "Viewing all lists";
+				presenceData.buttons = generateButtonText(presenceData.details);
 				break;
 			case "members":
-				pd.details = "Viewing all members";
+				presenceData.details = "Viewing all members";
+				presenceData.buttons = generateButtonText(presenceData.details);
 				break;
 			case "journal":
-				pd.details = "Viewing the journal";
+				presenceData.details = "Viewing the journal";
+				presenceData.buttons = generateButtonText(presenceData.details);
 				break;
 			case "search":
-				pd.details = `Searching for ${path[1].replaceAll("+", " ")}`;
+				presenceData.details = `Searching for ${path[1].replaceAll("+", " ")}`;
 				break;
 
 			case "settings": {
 				const smallPFP = getImageURLByAlt(user);
 
-				pd.details = "Changing their settings";
-				pd.smallImageKey = smallPFP;
-				// eslint-disable-next-line no-undefined
-				pd.buttons = undefined;
+				presenceData.details = "Changing their settings";
+				presenceData.smallImageKey = smallPFP;
 
 				break;
 			}
@@ -67,10 +76,8 @@ presence.on("UpdateData", async () => {
 			case "list": {
 				const smallPFP = getImageURLByAlt(user);
 
-				pd.details = "Creating a list";
-				pd.smallImageKey = smallPFP;
-				// eslint-disable-next-line no-undefined
-				pd.buttons = undefined;
+				presenceData.details = "Creating a list";
+				presenceData.smallImageKey = smallPFP;
 
 				break;
 			}
@@ -78,10 +85,8 @@ presence.on("UpdateData", async () => {
 			case "invitations": {
 				const smallPFP = getImageURLByAlt(user);
 
-				pd.details = "Viewing their invitations";
-				pd.smallImageKey = smallPFP;
-				// eslint-disable-next-line no-undefined
-				pd.buttons = undefined;
+				presenceData.details = "Viewing their invitations";
+				presenceData.smallImageKey = smallPFP;
 
 				break;
 			}
@@ -104,12 +109,12 @@ presence.on("UpdateData", async () => {
 						).firstElementChild as HTMLImageElement
 					).src;
 
-				pd.details = `Viewing ${
+				presenceData.details = `Viewing ${
 					path[0] === "director" ? "director" : "actor"
 				}: ${name}`;
-				pd.largeImageKey = pfp;
-				pd.smallImageKey = "final";
-				pd.buttons = [{ label: `View ${name}`, url: window.location.href }];
+				presenceData.largeImageKey = pfp;
+				presenceData.smallImageKey = "final";
+				presenceData.buttons = generateButtonText(presenceData.details);
 
 				break;
 			}
@@ -121,19 +126,19 @@ presence.on("UpdateData", async () => {
 					).innerText,
 					smallPFP = getImageURLByAlt(name);
 
-				pd.smallImageKey = smallPFP;
-				pd.smallImageText = name;
+				presenceData.smallImageKey = smallPFP;
+				presenceData.smallImageText = name;
 
 				if (path[1]) {
 					switch (path[1]) {
 						case "you":
-							pd.details = "Viewing personal activity";
+							presenceData.details = "Viewing personal activity";
 							break;
 						case "incoming":
-							pd.details = "Viewing incoming activity";
+							presenceData.details = "Viewing incoming activity";
 							break;
 					}
-				} else pd.details = "Viewing all activity";
+				} else presenceData.details = "Viewing all activity";
 
 				break;
 			}
@@ -142,22 +147,25 @@ presence.on("UpdateData", async () => {
 				if (path[1]) {
 					switch (path[1]) {
 						case "upcoming":
-							pd.details = "Viewing upcoming films";
+							presenceData.details = "Viewing upcoming films";
 							break;
 						case "popular":
-							pd.details = "Viewing popular films";
+							presenceData.details = "Viewing popular films";
 							break;
 						case "genre":
-							pd.details = `Viewing ${path[2] ? path[2] : "unknown"} films`;
+							presenceData.details = `Viewing ${
+								path[2] ? path[2] : "unknown"
+							} films`;
 							break;
 						case "decade":
-							pd.details = `Viewing films from the ${
+							presenceData.details = `Viewing films from the ${
 								path[2] ? path[2] : "unknown"
 							}`;
 					}
-				} else pd.details = "Viewing films";
+				} else presenceData.details = "Viewing films";
 
-				if (!pd.details) pd.details = "Viewing films";
+				if (!presenceData.details) presenceData.details = "Viewing films";
+				presenceData.buttons = generateButtonText(presenceData.details);
 
 				break;
 			}
@@ -173,27 +181,30 @@ presence.on("UpdateData", async () => {
 
 					switch (path[2]) {
 						case "members":
-							pd.details = `Viewing people who have seen ${title.innerText}, ${year}`;
+							presenceData.details = `Viewing people who have seen ${title.innerText}, ${year}`;
 							break;
 						case "fans":
-							pd.details = `Viewing fans of ${title.innerText}, ${year}`;
+							presenceData.details = `Viewing fans of ${title.innerText}, ${year}`;
 							break;
 						case "likes":
-							pd.details = `Viewing people who have liked ${title.innerText}, ${year}`;
+							presenceData.details = `Viewing people who have liked ${title.innerText}, ${year}`;
 							break;
 						case "ratings":
-							pd.details = `Viewing ratings of ${title.innerText}, ${year}`;
+							presenceData.details = `Viewing ratings of ${title.innerText}, ${year}`;
 							break;
 						case "reviews":
-							pd.details = `Viewing reviews of ${title.innerText}, ${year}`;
+							presenceData.details = `Viewing reviews of ${title.innerText}, ${year}`;
 							break;
 						case "lists":
-							pd.details = `Viewing lists that include ${title.innerText}, ${year}`;
+							presenceData.details = `Viewing lists that include ${title.innerText}, ${year}`;
 							break;
 					}
 
-					pd.largeImageKey = getImageURLByAlt(clarifyString(title.innerText));
-					pd.smallImageKey = "final";
+					presenceData.buttons = generateButtonText(presenceData.details);
+					presenceData.largeImageKey = getImageURLByAlt(
+						clarifyString(title.innerText)
+					);
+					presenceData.smallImageKey = "final";
 				} else if (path[1]) {
 					const header = (tag: string) =>
 							document
@@ -201,11 +212,17 @@ presence.on("UpdateData", async () => {
 								.getElementsByTagName(tag),
 						title = clarifyString((header("h1")[0] as HTMLElement).innerText);
 
-					pd.details = `${title}, ${(header("a")[0] as HTMLElement).innerText}`;
-					pd.state = `By ${(header("a")[1] as HTMLElement).innerText}`;
-					pd.buttons = [{ label: `View ${title}`, url: window.location.href }];
-					pd.largeImageKey = getImageURLByAlt(title);
-					pd.smallImageKey = "final";
+					presenceData.details = `${title}, ${
+						(header("a")[0] as HTMLElement).innerText
+					}`;
+					presenceData.state = `By ${
+						(header("a")[1] as HTMLElement).innerText
+					}`;
+					presenceData.buttons = [
+						{ label: `View ${title}`, url: window.location.href }
+					];
+					presenceData.largeImageKey = getImageURLByAlt(title);
+					presenceData.smallImageKey = "final";
 				}
 
 				break;
@@ -215,28 +232,33 @@ presence.on("UpdateData", async () => {
 				if (path[1]) {
 					switch (path[1]) {
 						case "watchlist":
-							pd.details = "Viewing their watchlist";
+							presenceData.details = "Viewing their watchlist";
+							presenceData.buttons = generateButtonText(presenceData.details);
 							break;
 						case "lists":
-							pd.details = "Viewing their lists";
+							presenceData.details = "Viewing their lists";
+							presenceData.buttons = generateButtonText(presenceData.details);
 							break;
 						case "likes":
-							pd.details = "Viewing their liked films";
+							presenceData.details = "Viewing their liked films";
+							presenceData.buttons = generateButtonText(presenceData.details);
 							break;
 						case "following":
-							pd.details = "Viewing who they've followed";
+							presenceData.details = "Viewing who they've followed";
+							presenceData.buttons = generateButtonText(presenceData.details);
 							break;
 						case "followers":
-							pd.details = "Viewing their followers";
+							presenceData.details = "Viewing their followers";
 							break;
 						case "blocked":
-							pd.details = "Viewing who they've blocked";
+							presenceData.details = "Viewing who they've blocked";
 							break;
 
 						case "activity": {
-							if (path[2])
-								pd.details = "Viewing who they've followed's activity";
-							else pd.details = "Viewing their activity";
+							if (path[2]) {
+								presenceData.details =
+									"Viewing who they've followed's activity";
+							} else presenceData.details = "Viewing their activity";
 
 							break;
 						}
@@ -246,16 +268,30 @@ presence.on("UpdateData", async () => {
 								if (path[2]) {
 									switch (path[2]) {
 										case "reviews":
-											pd.details = "Viewing their reviews";
+											presenceData.details = "Viewing their reviews";
+											presenceData.buttons = generateButtonText(
+												presenceData.details
+											);
 											break;
 										case "ratings":
-											pd.details = "Viewing their ratings";
+											presenceData.details = "Viewing their ratings";
+											presenceData.buttons = generateButtonText(
+												presenceData.details
+											);
 											break;
 										case "diary":
-											pd.details = "Viewing their diary";
+											presenceData.details = "Viewing their diary";
+											presenceData.buttons = generateButtonText(
+												presenceData.details
+											);
 											break;
 									}
-								} else pd.details = "Viewing their films";
+								} else {
+									presenceData.details = "Viewing their films";
+									presenceData.buttons = generateButtonText(
+										presenceData.details
+									);
+								}
 							}
 							break;
 
@@ -263,16 +299,28 @@ presence.on("UpdateData", async () => {
 							if (path[2]) {
 								switch (path[2]) {
 									case "diary":
-										pd.details = "Viewing their diary tags";
+										presenceData.details = "Viewing their diary tags";
+										presenceData.buttons = generateButtonText(
+											presenceData.details
+										);
 										break;
 									case "reviews":
-										pd.details = "Viewing their tagged reviews";
+										presenceData.details = "Viewing their tagged reviews";
+										presenceData.buttons = generateButtonText(
+											presenceData.details
+										);
 										break;
 									case "lists":
-										pd.details = "Viewing their tagged lists";
+										presenceData.details = "Viewing their tagged lists";
+										presenceData.buttons = generateButtonText(
+											presenceData.details
+										);
 										break;
 								}
-							} else pd.details = "Viewing their tagged films";
+							} else {
+								presenceData.details = "Viewing their tagged films";
+								presenceData.buttons = generateButtonText(presenceData.details);
+							}
 
 							break;
 						}
@@ -281,13 +329,13 @@ presence.on("UpdateData", async () => {
 							const name = document.getElementsByClassName(
 								"yir-member-subtitle"
 							)[0].lastElementChild as HTMLAnchorElement;
-							pd.details = `Viewing ${name.innerText}'s statistics`;
-							pd.largeImageKey = (
+							presenceData.details = `Viewing ${name.innerText}'s statistics`;
+							presenceData.largeImageKey = (
 								name.previousElementSibling
 									.firstElementChild as HTMLImageElement
 							).src;
-							pd.smallImageKey = "final";
-							pd.buttons = [
+							presenceData.smallImageKey = "final";
+							presenceData.buttons = [
 								{
 									label: `View ${name.innerText}'s stats`,
 									url: window.location.href
@@ -309,10 +357,11 @@ presence.on("UpdateData", async () => {
 								).innerText,
 								smallPFP = getImageURLByAlt(name);
 
-							pd.details = `Viewing the list ${title}`;
-							pd.state = `By ${name}`;
-							pd.smallImageKey = smallPFP;
-							pd.smallImageText = name;
+							presenceData.details = `Viewing the list ${title}`;
+							presenceData.buttons = generateButtonText(presenceData.details);
+							presenceData.state = `By ${name}`;
+							presenceData.smallImageKey = smallPFP;
+							presenceData.smallImageText = name;
 
 							break;
 						}
@@ -330,35 +379,35 @@ presence.on("UpdateData", async () => {
 							if (path[4]) {
 								switch (path[4]) {
 									case "ratings":
-										pd.details = "Viewing friends' ratings of...";
+										presenceData.details = "Viewing friends' ratings of...";
 										break;
 									case "reviews":
-										pd.details = "Viewing friends' reviews of...";
+										presenceData.details = "Viewing friends' reviews of...";
 										break;
 									case "lists":
-										pd.details = "Viewing friends' lists that include...";
+										presenceData.details =
+											"Viewing friends' lists that include...";
 										break;
 									case "fans":
-										pd.details = "Viewing friends who are fans of...";
+										presenceData.details = "Viewing friends who are fans of...";
 										break;
 									case "likes":
-										pd.details = "Viewing friends who have liked...";
+										presenceData.details = "Viewing friends who have liked...";
 										break;
 								}
-							} else pd.details = "Viewing friends who have seen...";
+							} else presenceData.details = "Viewing friends who have seen...";
 
-							pd.state = `${title.innerText}, ${year}`;
-							pd.largeImageKey = getImageURLByAlt(
+							presenceData.state = `${title.innerText}, ${year}`;
+							presenceData.largeImageKey = getImageURLByAlt(
 								clarifyString(title.innerText)
 							);
-							pd.smallImageKey = "final";
+							presenceData.smallImageKey = "final";
 
 							break;
 						}
 
 						case "film": {
 							const title = clarifyString(
-									// Once again...
 									(
 										document.getElementsByClassName("film-title-wrapper")[0]
 											.firstElementChild as HTMLAnchorElement
@@ -378,14 +427,14 @@ presence.on("UpdateData", async () => {
 									}
 								).innerText;
 
-							pd.details = `Review of ${title}`;
-							pd.state = `By ${rater} (${rating})`;
-							pd.buttons = [
+							presenceData.details = `Review of ${title}`;
+							presenceData.state = `By ${rater} (${rating})`;
+							presenceData.buttons = [
 								{ label: "View review", url: window.location.href }
 							];
-							pd.largeImageKey = getImageURLByAlt(title);
-							pd.smallImageKey = getImageURLByAlt(rater);
-							pd.smallImageText = rater;
+							presenceData.largeImageKey = getImageURLByAlt(title);
+							presenceData.smallImageKey = getImageURLByAlt(rater);
+							presenceData.smallImageText = rater;
 
 							break;
 						}
@@ -411,40 +460,45 @@ presence.on("UpdateData", async () => {
 							smallPFP = getImageURLByAlt(name);
 
 						if (path[0] !== user && path[0] !== user.toLowerCase()) {
-							pd.details = pd.details
+							presenceData.details = presenceData.details
 								.replace("their", `${name}'s`)
 								.replace("they've", `${name} has`);
 						}
 
-						pd.smallImageKey = smallPFP;
-						pd.smallImageText = name;
+						presenceData.smallImageKey = smallPFP;
+						presenceData.smallImageText = name;
 					}
 				} else {
 					const name = (
 						document.getElementsByClassName("title-1")[0] as HTMLHeadingElement
 					).innerText;
 					// I could use the get image func but ID is available so its fine (smaller loop (I think))
-					pd.details = `Viewing ${
+					presenceData.details = `Viewing ${
 						path[0] === user ? "their own" : `${name}'s`
 					} profile`;
-					pd.state = `(${path[0] === user ? `${name}/${path[0]}` : path[0]})`;
-					pd.largeImageKey = (
+					presenceData.state = `(${
+						path[0] === user ? `${name}/${path[0]}` : path[0]
+					})`;
+					presenceData.largeImageKey = (
 						document.getElementById("avatar-zoom")
 							.previousElementSibling as HTMLImageElement
 					).src;
-					pd.smallImageKey = "final";
-					pd.buttons = [{ label: `View ${name}`, url: window.location.href }];
+					presenceData.smallImageKey = "final";
+					presenceData.buttons = [
+						{ label: `View ${name}`, url: window.location.href }
+					];
 
 					break;
 				}
 		}
-	} else pd.details = "At home";
+	} else presenceData.details = "At home";
 
-	// eslint-disable-next-line no-undefined
-	if (!(await presence.getSetting("show_buttons"))) pd.buttons = undefined;
+	if (!(await presence.getSetting("show_buttons")))
+		// eslint-disable-next-line no-undefined
+		presenceData.buttons = undefined;
 
-	if (details !== pd.details) {
-		presence.setActivity(pd);
-		({ details } = pd);
+	if (details !== presenceData.details) {
+		presence.setActivity(presenceData);
+		({ details } = presenceData);
 	}
 });
