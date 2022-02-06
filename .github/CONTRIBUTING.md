@@ -1,4 +1,4 @@
-# Contrubutions
+# Contributions
 
 As an open-sourced project, we welcome contributions with open arms. 
 

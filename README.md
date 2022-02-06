@@ -3,7 +3,7 @@
     <h1>PreMiD Presences</h1>
 </div>
 
-This repository contains the source code of all presences that are available in PreMiD Store. 
+This repository contains the source code of all the presences that are available in the [PreMiD Store](http://premid.app/store). 
 
 
 ## Documentation
@@ -18,4 +18,4 @@ Before contributing to the repository, we strongly recommend you to read our [gu
 
 
 ## Support and Questions
-If you have a question or a problem, reach out to us by joining our [Discord](https://discord.premid.app) and ask your question in [#presence-dev](https://discord.com/channels/493130730549805057/607524579874832446)
+If you have a question or a problem, reach out to us by joining our [Discord server](https://discord.premid.app) and ask your question in [#presence-dev](https://discord.com/channels/493130730549805057/607524579874832446)
