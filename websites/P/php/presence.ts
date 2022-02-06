@@ -6,7 +6,7 @@ const presence = new Presence({
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 // eslint-disable-next-line no-console
-console.log("Presence Started...");
+console.log("%c[PreMID PHP]", "color:green;", "Presence Started...");
 presence.on("UpdateData", async () => {
 	if (document.location.hostname === "www.php.net" || "php.net") {
 		presenceData.startTimestamp = browsingTimestamp;
