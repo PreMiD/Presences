@@ -5,18 +5,26 @@
 		"id": "239381559482777600"
 	},
 	"service": "MangaLife",
-	"altnames": ["Manga4Life"],
+	"altnames": [
+		"Manga4Life"
+	],
 	"description": {
 		"en": "MangaLife: Read free manga online."
 	},
-	"url": ["www.manga4life.com", "manga4life.com"],
+	"url": [
+		"www.manga4life.com",
+		"manga4life.com"
+	],
 	"regExp": "([a-z0-9]+[.])?manga4life[.]com",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/mJTwQxZ.png",
 	"thumbnail": "https://i.imgur.com/7R0tE9U.png",
 	"color": "#6cabdf",
 	"category": "anime",
-	"tags": ["anime", "manga"],
+	"tags": [
+		"anime",
+		"manga"
+	],
 	"settings": [
 		{
 			"id": "privacy",
