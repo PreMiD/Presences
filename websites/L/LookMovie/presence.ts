@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "lm"
 		},
-		video: HTMLVideoElement = document.querySelector("#video_player"),
+		video = document.querySelector<HTMLVideoElement>("#video_player"),
 		videoDur = document.querySelector(
 			"#video_player > div.vjs-control-bar > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display"
 		);
