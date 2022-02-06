@@ -17,8 +17,6 @@
 	"thumbnail": "https://i.imgur.com/gz0tYlg.png",
 	"color": "#9b403f",
 	"category": "anime",
-	"tags": [
-		"anime"
-	],
+	"tags": ["anime"],
 	"iframe": true
 }

@@ -17,9 +17,5 @@
 	"thumbnail": "https://i.imgur.com/VozjgCY.png",
 	"color": "#141210",
 	"category": "socials",
-	"tags": [
-		"medium",
-		"social",
-		"stories"
-	]
+	"tags": ["medium", "social", "stories"]
 }

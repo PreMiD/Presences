@@ -18,23 +18,12 @@
 		"nl": "Anime Wie? is een site waar je anime kunt bekijken met Turkse ondertiteling en manga kunt lezen.",
 		"vi_VN": "AnimeWho? là trang web nơi bạn có thể xem anime phụ đề Thổ Nhĩ Kì & đọc manga."
 	},
-	"url": [
-		"www.animewho.com",
-		"animewho.com"
-	],
+	"url": ["www.animewho.com", "animewho.com"],
 	"version": "1.0.9",
 	"logo": "https://i.imgur.com/y0RA8SX.jpg",
 	"thumbnail": "https://i.imgur.com/HmLMCzv.png",
 	"color": "#fc0043",
 	"category": "anime",
-	"tags": [
-		"animewho",
-		"anime",
-		"video",
-		"manga",
-		"turkce",
-		"izle",
-		"oku"
-	],
+	"tags": ["animewho", "anime", "video", "manga", "turkce", "izle", "oku"],
 	"iframe": true
 }

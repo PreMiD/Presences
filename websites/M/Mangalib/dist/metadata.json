@@ -16,10 +16,5 @@
 	"thumbnail": "https://i.imgur.com/0U4JNOJ.png",
 	"color": "#ff8c00",
 	"category": "other",
-	"tags": [
-		"manga",
-		"mangalib",
-		"read",
-		"anime"
-	]
+	"tags": ["manga", "mangalib", "read", "anime"]
 }

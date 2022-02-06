@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/7afQb5o.png",
 	"color": "#FFEE00",
 	"category": "other",
-	"tags": [
-		"education",
-		"learning",
-		"college"
-	]
+	"tags": ["education", "learning", "college"]
 }

@@ -30,9 +30,5 @@
 	"thumbnail": "https://i.imgur.com/dJnnzqd.png",
 	"color": "#2e3340",
 	"category": "other",
-	"tags": [
-		"partner",
-		"translation",
-		"projects"
-	]
+	"tags": ["partner", "translation", "projects"]
 }

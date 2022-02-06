@@ -14,10 +14,7 @@
 	"thumbnail": "https://i.imgur.com/WFMYlxq.png",
 	"color": "#0095c3",
 	"category": "other",
-	"tags": [
-		"seas",
-		"mrbeast"
-	],
+	"tags": ["seas", "mrbeast"],
 	"settings": [
 		{
 			"id": "count",

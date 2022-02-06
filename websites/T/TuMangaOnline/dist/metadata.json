@@ -9,17 +9,11 @@
 		"en": "Read manga online.",
 		"nl": "Lees manga online."
 	},
-	"url": [
-		"lectortmo.com",
-		"tmocommunity.com"
-	],
+	"url": ["lectortmo.com", "tmocommunity.com"],
 	"version": "1.2.11",
 	"logo": "https://i.imgur.com/1CYkKgl.png",
 	"thumbnail": "https://i.imgur.com/SKXMHAG.png",
 	"color": "#3366cc",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"manga"
-	]
+	"tags": ["anime", "manga"]
 }

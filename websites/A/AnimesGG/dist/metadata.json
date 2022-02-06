@@ -16,10 +16,7 @@
 	"thumbnail": "http://i.imgur.com/Mw0gNnG.png",
 	"color": "#f59f16",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"streaming"
-	],
+	"tags": ["anime", "streaming"],
 	"settings": [
 		{
 			"id": "fullName",

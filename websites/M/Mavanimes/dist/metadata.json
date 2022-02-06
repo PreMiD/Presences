@@ -15,13 +15,6 @@
 	"thumbnail": "https://i.imgur.com/oeUAnJ2.png",
 	"color": "#0f61b8",
 	"category": "anime",
-	"tags": [
-		"mavanime",
-		"mavanimes",
-		"vostfr",
-		"anime",
-		"streaming",
-		"french"
-	],
+	"tags": ["mavanime", "mavanimes", "vostfr", "anime", "streaming", "french"],
 	"iframe": true
 }

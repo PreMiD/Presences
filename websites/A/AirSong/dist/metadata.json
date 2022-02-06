@@ -15,11 +15,7 @@
 	"thumbnail": "https://i.imgur.com/Xr5RBAm.png",
 	"color": "#0094CB",
 	"category": "music",
-	"tags": [
-		"audio",
-		"server",
-		"streaming"
-	],
+	"tags": ["audio", "server", "streaming"],
 	"settings": [
 		{
 			"id": "songDetail",
@@ -40,11 +36,7 @@
 			"title": "Show timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": 1,
-			"values": [
-				"Off",
-				"Time Left",
-				"Time Elapsed"
-			]
+			"values": ["Off", "Time Left", "Time Elapsed"]
 		}
 	]
 }

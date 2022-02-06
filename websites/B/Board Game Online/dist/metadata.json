@@ -27,8 +27,5 @@
 	"thumbnail": "https://i.imgur.com/QTDzIqh.png",
 	"color": "#EF3A26",
 	"category": "games",
-	"tags": [
-		"entertainment",
-		"board-games"
-	]
+	"tags": ["entertainment", "board-games"]
 }

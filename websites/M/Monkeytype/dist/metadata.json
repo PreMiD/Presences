@@ -15,19 +15,11 @@
 		"en": "A minimalistic, customisable typing website. Test yourself in various modes, track your progress and improve your typing speed.",
 		"nl": "Een minimalistische, aanpasbare typewebsite. Test jezelf in verschillende modi, houd je voortgang bij en verbeter je typsnelheid."
 	},
-	"url": [
-		"www.monkeytype.com",
-		"monkeytype.com"
-	],
+	"url": ["www.monkeytype.com", "monkeytype.com"],
 	"version": "2.0.8",
 	"logo": "https://i.imgur.com/OnkMhFB.png",
 	"thumbnail": "https://i.imgur.com/HH1UVqD.png",
 	"color": "#383200",
 	"category": "games",
-	"tags": [
-		"typing",
-		"game",
-		"test",
-		"keyboard"
-	]
+	"tags": ["typing", "game", "test", "keyboard"]
 }

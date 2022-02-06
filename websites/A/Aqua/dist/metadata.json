@@ -17,14 +17,7 @@
 	"thumbnail": "https://i.imgur.com/y1Uot2b.png",
 	"color": "#2980b9",
 	"category": "music",
-	"tags": [
-		"radio",
-		"aqua",
-		"audio",
-		"stream",
-		"music",
-		"discord"
-	],
+	"tags": ["radio", "aqua", "audio", "stream", "music", "discord"],
 	"settings": [
 		{
 			"id": "changedetails",

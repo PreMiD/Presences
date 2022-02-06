@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/ojmsp7f.png",
 	"color": "#20f856",
 	"category": "other",
-	"tags": [
-		"discordjs",
-		"discord",
-		"guide"
-	]
+	"tags": ["discordjs", "discord", "guide"]
 }

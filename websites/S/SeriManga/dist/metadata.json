@@ -16,8 +16,5 @@
 	"thumbnail": "https://i.imgur.com/BYGkJwg.png",
 	"color": "#2d2f33",
 	"category": "anime",
-	"tags": [
-		"manga",
-		"manhwa"
-	]
+	"tags": ["manga", "manhwa"]
 }

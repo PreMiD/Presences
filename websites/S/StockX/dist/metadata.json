@@ -14,12 +14,7 @@
 	"thumbnail": "https://i.imgur.com/uQh3Mx3.png",
 	"color": "#15A25D",
 	"category": "other",
-	"tags": [
-		"stock",
-		"market",
-		"sneakers",
-		"electronic"
-	],
+	"tags": ["stock", "market", "sneakers", "electronic"],
 	"settings": [
 		{
 			"id": "price",

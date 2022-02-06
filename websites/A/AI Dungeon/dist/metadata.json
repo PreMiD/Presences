@@ -18,9 +18,5 @@
 	"thumbnail": "https://i.imgur.com/LOh8Cbf.png",
 	"color": "#484848",
 	"category": "games",
-	"tags": [
-		"games",
-		"adventure",
-		"action"
-	]
+	"tags": ["games", "adventure", "action"]
 }

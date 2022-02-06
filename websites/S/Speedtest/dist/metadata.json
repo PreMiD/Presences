@@ -18,11 +18,7 @@
 	"thumbnail": "https://i.imgur.com/JXIDlOL.png",
 	"color": "#141526",
 	"category": "other",
-	"tags": [
-		"speed",
-		"test",
-		"speedtest"
-	],
+	"tags": ["speed", "test", "speedtest"],
 	"settings": [
 		{
 			"id": "showISP",

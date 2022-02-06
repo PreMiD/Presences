@@ -5,9 +5,7 @@
 		"id": "368399721494216706"
 	},
 	"service": "Chia Sẻ Nhạc",
-	"altnames": [
-		"Chiasenhac"
-	],
+	"altnames": ["Chiasenhac"],
 	"description": {
 		"en": "High-fidelity music sharing and ranking community",
 		"vi_VN": "Cộng đồng chia sẻ nhạc chất lượng cao và xếp hạng âm nhạc trực tuyến"
@@ -19,15 +17,7 @@
 	"thumbnail": "https://i.imgur.com/Fz3UUv1.png",
 	"color": "#FB5B49",
 	"category": "music",
-	"tags": [
-		"chia",
-		"se",
-		"nhac",
-		"music",
-		"high",
-		"quality",
-		"fidelity"
-	],
+	"tags": ["chia", "se", "nhac", "music", "high", "quality", "fidelity"],
 	"settings": [
 		{
 			"id": "timestamps",

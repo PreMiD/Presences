@@ -15,10 +15,5 @@
 	"thumbnail": "https://i.imgur.com/4Zzi2Lv.png",
 	"color": "#0DF675",
 	"category": "music",
-	"tags": [
-		"radio",
-		"worldwide",
-		"global",
-		"media"
-	]
+	"tags": ["radio", "worldwide", "global", "media"]
 }

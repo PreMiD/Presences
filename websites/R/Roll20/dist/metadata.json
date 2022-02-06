@@ -22,11 +22,7 @@
 	"thumbnail": "https://i.imgur.com/NfgSJAF.png",
 	"color": "#af1f8e",
 	"category": "games",
-	"tags": [
-		"dungeons",
-		"dragons",
-		"dnd"
-	],
+	"tags": ["dungeons", "dragons", "dnd"],
 	"settings": [
 		{
 			"id": "hideDetails",

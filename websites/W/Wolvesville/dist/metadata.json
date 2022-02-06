@@ -60,12 +60,7 @@
 	"thumbnail": "https://i.imgur.com/s5NhKcP.png",
 	"color": "#FF4181",
 	"category": "games",
-	"tags": [
-		"werewolf",
-		"online",
-		"wov",
-		"wwo"
-	],
+	"tags": ["werewolf", "online", "wov", "wwo"],
 	"settings": [
 		{
 			"id": "privacy",
@@ -102,11 +97,7 @@
 			"title": "Icon",
 			"icon": "fad fa-images",
 			"value": 0,
-			"values": [
-				"Normal",
-				"No Background",
-				"Full Text Logo"
-			]
+			"values": ["Normal", "No Background", "Full Text Logo"]
 		}
 	]
 }

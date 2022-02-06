@@ -5,9 +5,7 @@
 		"id": "251801168689364992"
 	},
 	"service": "Odysee",
-	"altnames": [
-		"LBRY"
-	],
+	"altnames": ["LBRY"],
 	"description": {
 		"en": "Web frontend for LBRY. LBRY does to publishing, what Bitcoin did to money.",
 		"nl": "Web frontend voor LBRY. LBRY doet met publiceren, wat Bitcoin met geld deed."
@@ -18,10 +16,7 @@
 	"thumbnail": "https://i.imgur.com/wztxWp5.jpg",
 	"color": "#0a070d",
 	"category": "videos",
-	"tags": [
-		"video",
-		"media"
-	],
+	"tags": ["video", "media"],
 	"settings": [
 		{
 			"id": "buttons",

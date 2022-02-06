@@ -25,11 +25,7 @@
 	"thumbnail": "https://i.imgur.com/Gk23OEd.jpg",
 	"color": "#0dc143",
 	"category": "socials",
-	"tags": [
-		"whatsapp",
-		"social",
-		"media"
-	],
+	"tags": ["whatsapp", "social", "media"],
 	"settings": [
 		{
 			"id": "showRecipient",

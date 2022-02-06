@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/AJS6zcg.png",
 	"color": "#F43E37",
 	"category": "other",
-	"tags": [
-		"podcasts",
-		"media"
-	]
+	"tags": ["podcasts", "media"]
 }

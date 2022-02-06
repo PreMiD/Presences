@@ -16,11 +16,7 @@
 	"thumbnail": "https://i.imgur.com/CvdIcM8.png",
 	"color": "#212121",
 	"category": "music",
-	"tags": [
-		"upbeat",
-		"radio",
-		"upbeatradio"
-	],
+	"tags": ["upbeat", "radio", "upbeatradio"],
 	"settings": [
 		{
 			"id": "sInfo",

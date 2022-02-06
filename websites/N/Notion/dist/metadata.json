@@ -14,12 +14,7 @@
 	"thumbnail": "https://i.imgur.com/3T5c3AS.png",
 	"color": "#000000",
 	"category": "other",
-	"tags": [
-		"notion",
-		"notetaking",
-		"document",
-		"management"
-	],
+	"tags": ["notion", "notetaking", "document", "management"],
 	"settings": [
 		{
 			"id": "title",

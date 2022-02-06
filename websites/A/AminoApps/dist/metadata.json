@@ -18,9 +18,5 @@
 	"thumbnail": "https://i.imgur.com/3bOMfHi.png",
 	"color": "#00FFA2",
 	"category": "socials",
-	"tags": [
-		"social",
-		"aminoapps",
-		"community"
-	]
+	"tags": ["social", "aminoapps", "community"]
 }

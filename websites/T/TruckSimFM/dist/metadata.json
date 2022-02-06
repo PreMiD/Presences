@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/i4Q6yaC.png",
 	"color": "#5398ee",
 	"category": "music",
-	"tags": [
-		"radio",
-		"ets2",
-		"ats"
-	]
+	"tags": ["radio", "ets2", "ats"]
 }

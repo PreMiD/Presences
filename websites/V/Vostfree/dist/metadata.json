@@ -15,12 +15,7 @@
 	"thumbnail": "https://i.imgur.com/6VcA6dN.png",
 	"color": "#1b1c1d",
 	"category": "anime",
-	"tags": [
-		"vostfree",
-		"streaming",
-		"anime",
-		"french"
-	],
+	"tags": ["vostfree", "streaming", "anime", "french"],
 	"iframe": true,
 	"settings": [
 		{

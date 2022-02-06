@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/IClUTAu.png",
 	"color": "#f16725",
 	"category": "games",
-	"tags": [
-		"mods",
-		"plugins",
-		"curseforge"
-	]
+	"tags": ["mods", "plugins", "curseforge"]
 }

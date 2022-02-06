@@ -16,8 +16,5 @@
 	"thumbnail": "https://i.imgur.com/qu30NON.png",
 	"color": "#6963b7",
 	"category": "games",
-	"tags": [
-		"rocket-league",
-		"trading"
-	]
+	"tags": ["rocket-league", "trading"]
 }

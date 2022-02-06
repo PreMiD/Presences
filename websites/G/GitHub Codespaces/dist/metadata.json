@@ -17,11 +17,7 @@
 	"thumbnail": "https://i.imgur.com/fLQ6JLS.png",
 	"color": "#000000",
 	"category": "other",
-	"tags": [
-		"programming",
-		"sharing",
-		"coding"
-	],
+	"tags": ["programming", "sharing", "coding"],
 	"settings": [
 		{
 			"id": "details",

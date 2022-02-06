@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/N9d5Phg.png",
 	"color": "#12121E",
 	"category": "videos",
-	"tags": [
-		"video",
-		"stream"
-	]
+	"tags": ["video", "stream"]
 }

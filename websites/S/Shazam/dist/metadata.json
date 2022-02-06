@@ -21,10 +21,7 @@
 	"thumbnail": "https://i.imgur.com/D9XlK8N.png",
 	"color": "#00AFFF",
 	"category": "music",
-	"tags": [
-		"songs",
-		"music"
-	],
+	"tags": ["songs", "music"],
 	"settings": [
 		{
 			"id": "song",

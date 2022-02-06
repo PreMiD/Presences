@@ -29,12 +29,7 @@
 	"thumbnail": "https://i.imgur.com/JOE2SVg.png",
 	"color": "#FDA217",
 	"category": "other",
-	"tags": [
-		"speed-test",
-		"market",
-		"hardware",
-		"software"
-	],
+	"tags": ["speed-test", "market", "hardware", "software"],
 	"settings": [
 		{
 			"id": "search",

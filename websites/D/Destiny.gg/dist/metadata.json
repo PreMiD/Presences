@@ -15,12 +15,5 @@
 	"thumbnail": "https://i.imgur.com/UAGQHuC.png",
 	"color": "#568FCA",
 	"category": "socials",
-	"tags": [
-		"english",
-		"streamer",
-		"streaming",
-		"twitch",
-		"youtube",
-		"live"
-	]
+	"tags": ["english", "streamer", "streaming", "twitch", "youtube", "live"]
 }

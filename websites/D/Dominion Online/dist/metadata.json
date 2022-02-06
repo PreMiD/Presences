@@ -14,9 +14,5 @@
 	"thumbnail": "https://i.imgur.com/VS6HVeg.jpg",
 	"color": "#468c01",
 	"category": "games",
-	"tags": [
-		"card",
-		"game",
-		"dominion"
-	]
+	"tags": ["card", "game", "dominion"]
 }

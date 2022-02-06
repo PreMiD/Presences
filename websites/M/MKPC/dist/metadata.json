@@ -22,10 +22,5 @@
 	"thumbnail": "https://i.imgur.com/LZwSRDe.jpeg",
 	"color": "#FF001B",
 	"category": "games",
-	"tags": [
-		"game",
-		"mario",
-		"kart",
-		"retro"
-	]
+	"tags": ["game", "mario", "kart", "retro"]
 }

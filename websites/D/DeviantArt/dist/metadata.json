@@ -25,14 +25,7 @@
 	"thumbnail": "https://i.imgur.com/zW8OMC7.png",
 	"color": "#05cc47",
 	"category": "other",
-	"tags": [
-		"art",
-		"fandom",
-		"drawing",
-		"creative",
-		"literature",
-		"deviation"
-	],
+	"tags": ["art", "fandom", "drawing", "creative", "literature", "deviation"],
 	"settings": [
 		{
 			"id": "chatChannelNames",

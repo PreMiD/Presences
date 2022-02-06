@@ -18,11 +18,7 @@
 	"thumbnail": "https://i.imgur.com/sT2xcZP.jpg",
 	"color": "#D34344",
 	"category": "videos",
-	"tags": [
-		"anime",
-		"videos",
-		"movies"
-	],
+	"tags": ["anime", "videos", "movies"],
 	"iframe": true,
 	"settings": [
 		{

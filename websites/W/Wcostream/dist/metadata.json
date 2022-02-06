@@ -14,11 +14,7 @@
 	"thumbnail": "https://i.imgur.com/q82HBPT.png",
 	"color": "#FFCE39",
 	"category": "videos",
-	"tags": [
-		"anime",
-		"cartoon",
-		"streaming"
-	],
+	"tags": ["anime", "cartoon", "streaming"],
 	"iframe": true,
 	"settings": [
 		{

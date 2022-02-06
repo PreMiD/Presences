@@ -8,21 +8,11 @@
 	"description": {
 		"en": "Read Comics and Novels on Reaper Scans."
 	},
-	"url": [
-		"reaperscans.com",
-		"www.reaperscans.com"
-	],
+	"url": ["reaperscans.com", "www.reaperscans.com"],
 	"version": "1.0.6",
 	"logo": "https://i.imgur.com/tPMtbjL.png",
 	"thumbnail": "https://i.imgur.com/AzryXJa.jpg",
 	"color": "#6E3CAA",
 	"category": "other",
-	"tags": [
-		"comic",
-		"scanlation",
-		"manga",
-		"manhua",
-		"manhwa",
-		"novel"
-	]
+	"tags": ["comic", "scanlation", "manga", "manhua", "manhwa", "novel"]
 }

@@ -18,19 +18,13 @@
 		"nl": "Tidal is een muziekstreamdienst met een zeer hoge geluidskwaliteit.",
 		"vi_VN": "Tidal là dịch vụ phát nhạc với chất lượng âm thanh rất cao."
 	},
-	"url": [
-		"listen.tidal.com",
-		"tidal.com"
-	],
+	"url": ["listen.tidal.com", "tidal.com"],
 	"version": "3.1.3",
 	"logo": "https://i.imgur.com/i9pIvqR.png",
 	"thumbnail": "https://i.imgur.com/xNeJ8oq.png",
 	"color": "#000000",
 	"category": "music",
-	"tags": [
-		"tidal",
-		"music"
-	],
+	"tags": ["tidal", "music"],
 	"settings": [
 		{
 			"id": "lang",

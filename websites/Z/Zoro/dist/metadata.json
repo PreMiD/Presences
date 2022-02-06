@@ -14,10 +14,7 @@
 	"thumbnail": "https://i.imgur.com/T0O1fqU.png",
 	"color": "#cae962",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"stream"
-	],
+	"tags": ["anime", "stream"],
 	"iframe": true,
 	"settings": [
 		{

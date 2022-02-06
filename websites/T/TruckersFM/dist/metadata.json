@@ -21,12 +21,5 @@
 	"thumbnail": "https://i.imgur.com/vMj6Rcz.png",
 	"color": "#C82372",
 	"category": "music",
-	"tags": [
-		"tfm",
-		"truckersmp",
-		"radio",
-		"music",
-		"ets2",
-		"ats"
-	]
+	"tags": ["tfm", "truckersmp", "radio", "music", "ets2", "ats"]
 }

@@ -10,20 +10,12 @@
 		"nl": "Blkom - Arabische website om anime met Arabische ondertiteling te bekijken en te downloaden en het laatste nieuws over anime te krijgen.",
 		"vi_VN": "Blkom - Trang web Ả Rập để tải các bộ anime phụ đề Tiếng Ả Rập là theo dõi các tin tức mới nhất về anime."
 	},
-	"url": [
-		"blkom.com",
-		"animeblkom.net",
-		"www.blkom.com",
-		"www.animeblkom.net"
-	],
+	"url": ["blkom.com", "animeblkom.net", "www.blkom.com", "www.animeblkom.net"],
 	"version": "1.0.10",
 	"logo": "https://i.imgur.com/PfvR7jD.png",
 	"thumbnail": "https://i.imgur.com/skws0oS.png",
 	"color": "#FF6161",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"streaming"
-	],
+	"tags": ["anime", "streaming"],
 	"iframe": true
 }

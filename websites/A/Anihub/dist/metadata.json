@@ -22,11 +22,7 @@
 	"thumbnail": "https://i.imgur.com/ehkk7qZ.png",
 	"color": "#1997C6",
 	"category": "anime",
-	"tags": [
-		"video",
-		"media",
-		"anime"
-	],
+	"tags": ["video", "media", "anime"],
 	"settings": [
 		{
 			"id": "customPaths",

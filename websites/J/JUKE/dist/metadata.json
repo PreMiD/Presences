@@ -21,13 +21,5 @@
 	"thumbnail": "https://i.imgur.com/kVj50nG.png",
 	"color": "#38af85",
 	"category": "music",
-	"tags": [
-		"juke",
-		"talpa",
-		"radio",
-		"music",
-		"muziek",
-		"free",
-		"gratis"
-	]
+	"tags": ["juke", "talpa", "radio", "music", "muziek", "free", "gratis"]
 }

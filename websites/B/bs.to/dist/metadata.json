@@ -18,8 +18,5 @@
 	"thumbnail": "https://i.imgur.com/dmPF4us.jpg",
 	"color": "#ffffff",
 	"category": "videos",
-	"tags": [
-		"german",
-		"videos"
-	]
+	"tags": ["german", "videos"]
 }

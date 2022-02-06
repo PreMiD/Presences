@@ -29,11 +29,7 @@
 	"thumbnail": "https://i.imgur.com/gcBDsYj.png",
 	"color": "#E1306C",
 	"category": "socials",
-	"tags": [
-		"photos",
-		"images",
-		"media"
-	],
+	"tags": ["photos", "images", "media"],
 	"settings": [
 		{
 			"id": "privacy",

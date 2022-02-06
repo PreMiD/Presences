@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/5OmbMhc.png",
 	"color": "#fcdb05",
 	"category": "other",
-	"tags": [
-		"coding",
-		"programming",
-		"code"
-	]
+	"tags": ["coding", "programming", "code"]
 }

@@ -16,10 +16,5 @@
 	"thumbnail": "https://i.imgur.com/Y8UI0wf.jpg",
 	"color": "#9ed2de",
 	"category": "other",
-	"tags": [
-		"world",
-		"hideaway",
-		"hide",
-		"travel"
-	]
+	"tags": ["world", "hideaway", "hide", "travel"]
 }

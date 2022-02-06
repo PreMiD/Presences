@@ -15,7 +15,7 @@ const presence = new Presence({
 		clientId: "826806766033174568"
 	}),
 	[, page] = window.location.pathname.split("/"),
-	$ = (selectors: string) => document.querySelector(selectors),
+	qs = document.querySelector.bind(document),
 	initEpoch = Date.now(),
 	rpaImage = {
 		general: {
@@ -24,34 +24,32 @@ const presence = new Presence({
 			read: "icon-g-read",
 			search: "icon-g-search"
 		},
-		player: {
-			play: "icon-p-play",
-			pause: "icon-p-pause"
-		}
-	};
+		player: { play: "icon-p-play", pause: "icon-p-pause" }
+	},
+	toProperCase = (str: string) =>
+		str
+			.split("")
+			.map((char, i) => (i === 0 ? char.toUpperCase() : char))
+			.join("");
 let playerData: PlayerData,
 	pageLoaded = false;
 
 presence.info("PreMiD extension has loaded");
 
 function updateData() {
-	if (page === "watch") {
-		const player = <HTMLVideoElement>$("div.ao-player-media video"),
-			title = $("span.ao-player-metadata-title").textContent,
+	if (/^watch$/i.test(page)) {
+		const player = <HTMLVideoElement>qs("div.ao-player-media video"),
+			title = qs("span.ao-player-metadata-title").textContent,
 			episode = Number(
-				$('meta[name="ao-content-episode"]').getAttribute("content")
+				qs('meta[name="ao-content-episode"]').getAttribute("content")
 			),
 			[currentEpisodeOption] = (<HTMLSelectElement>(
-				$("select.ao-player-metadata-episode")
+				qs("select.ao-player-metadata-episode")
 			)).selectedOptions,
 			{ paused, currentTime: progress, duration } = player,
 			snowflake = presence.getTimestamps(progress, duration);
 		playerData = {
-			time: {
-				progress,
-				duration,
-				snowflake
-			},
+			time: { progress, duration, snowflake },
 			title,
 			episode,
 			episodeName: currentEpisodeOption.textContent,
@@ -64,36 +62,34 @@ setInterval(updateData, 1e3);
 
 presence.on("UpdateData", () => {
 	if (!pageLoaded) return;
-	let presenceData: PresenceData = {
+	const presenceData: PresenceData = {
 		largeImageKey: "main-logo",
 		smallImageKey: rpaImage.general.browse,
 		smallImageText: "Browsing",
 		details: "Browsing",
 		startTimestamp: initEpoch
 	};
-	switch (page) {
+	switch (page.toLowerCase()) {
 		case "watch": {
 			const { title, episode, episodeName, playbackState, time } = playerData,
 				episodeUrl = new URL(window.location.href);
 			episodeUrl.searchParams.set("episode", episode.toString());
 			episodeUrl.searchParams.append("ep", episode.toString());
-			presenceData = {
-				...presenceData,
-				smallImageKey:
-					rpaImage.player[playbackState === "paused" ? "pause" : "play"],
-				smallImageText: `Watching - ${
-					playbackState[0].toUpperCase() + playbackState.substring(1)
-				}`,
-				details: title,
-				state: episodeName || "",
-				startTimestamp: time.snowflake[0],
-				endTimestamp: time.snowflake[1],
-				buttons: [{ label: "Watch", url: episodeUrl.href }]
-			};
+
+			if (playbackState === "paused")
+				presenceData.smallImageKey = rpaImage.player.pause;
+			else presenceData.smallImageKey = rpaImage.player.play;
+
+			presenceData.smallImageText = `Watching - ${toProperCase(playbackState)}`;
+			presenceData.details = title;
+			presenceData.state = episodeName || "";
+			presenceData.startTimestamp = time.snowflake[0];
+			presenceData.endTimestamp = time.snowflake[1];
+			presenceData.buttons = [{ label: "Watch", url: episodeUrl.href }];
 			break;
 		}
 		case "genre": {
-			const genre = $("div.content-result span i").textContent;
+			const genre = qs("div.content-result span i").textContent;
 			presenceData.details = `Genre: ${genre}`;
 			presenceData.smallImageKey = rpaImage.general.browse;
 			presenceData.smallImageText = "Browsing";
@@ -106,7 +102,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "details": {
-			const title = $('div.title span[lang="en"]').textContent;
+			const title = qs('div.title span[lang="en"]').textContent;
 			presenceData.details = `Viewing ${title}`;
 			presenceData.smallImageKey = rpaImage.general.browse;
 			presenceData.smallImageText = "Details";

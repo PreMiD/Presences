@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/HicKlV4.png",
 	"color": "#1a1a1a",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"video",
-		"streaming"
-	]
+	"tags": ["anime", "video", "streaming"]
 }

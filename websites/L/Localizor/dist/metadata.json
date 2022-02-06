@@ -14,10 +14,7 @@
 	"thumbnail": "https://i.imgur.com/WQkfFet.png",
 	"color": "#000000",
 	"category": "other",
-	"tags": [
-		"translation",
-		"game"
-	],
+	"tags": ["translation", "game"],
 	"settings": [
 		{
 			"id": "time",

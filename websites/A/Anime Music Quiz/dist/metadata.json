@@ -18,12 +18,5 @@
 	"thumbnail": "https://i.imgur.com/8tXZEqG.png",
 	"color": "#DF6975",
 	"category": "games",
-	"tags": [
-		"amq",
-		"anime-music-quiz",
-		"anime",
-		"music",
-		"quiz",
-		"games"
-	]
+	"tags": ["amq", "anime-music-quiz", "anime", "music", "quiz", "games"]
 }

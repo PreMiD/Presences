@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/PknGVGT.png",
 	"color": "#FF9900",
 	"category": "other",
-	"tags": [
-		"technology",
-		"linux",
-		"ubuntu"
-	]
+	"tags": ["technology", "linux", "ubuntu"]
 }

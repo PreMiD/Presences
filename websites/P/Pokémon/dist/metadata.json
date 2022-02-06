@@ -24,10 +24,7 @@
 	"thumbnail": "https://i.imgur.com/WBJfQkW.jpg",
 	"color": "#ffcb05",
 	"category": "games",
-	"tags": [
-		"pokémon",
-		"pokémontv"
-	],
+	"tags": ["pokémon", "pokémontv"],
 	"settings": [
 		{
 			"id": "pdexID",

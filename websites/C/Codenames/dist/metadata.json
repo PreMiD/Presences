@@ -16,12 +16,7 @@
 	"thumbnail": "https://i.imgur.com/vihPw8r.jpg",
 	"color": "#fcd611",
 	"category": "games",
-	"tags": [
-		"spymasters",
-		"agents",
-		"operatives",
-		"boardgame"
-	],
+	"tags": ["spymasters", "agents", "operatives", "boardgame"],
 	"settings": [
 		{
 			"id": "buttons",

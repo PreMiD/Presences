@@ -16,9 +16,6 @@
 	"thumbnail": "https://i.imgur.com/5N7oOem.png",
 	"color": "#9C27B0",
 	"category": "games",
-	"tags": [
-		"games",
-		"meme-police"
-	],
+	"tags": ["games", "meme-police"],
 	"iframe": true
 }

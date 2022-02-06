@@ -18,10 +18,7 @@
 	"thumbnail": "https://i.imgur.com/dWA3LHB.png",
 	"color": "#888888",
 	"category": "other",
-	"tags": [
-		"community",
-		"altearn"
-	],
+	"tags": ["community", "altearn"],
 	"settings": [
 		{
 			"id": "privacy",

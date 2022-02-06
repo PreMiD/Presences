@@ -12,20 +12,12 @@
 		"nl": "AnizmTV is een website waarmee u ondertitelde anime kunt bekijken met uitzendingen van hoge kwaliteit en actuele afleveringen.",
 		"vi_VN": "AnizmTV là trang web giúp bạn xem anime phụ đề mới nhất với chất lượng cao."
 	},
-	"url": [
-		"www.anizm.net",
-		"anizm.net"
-	],
+	"url": ["www.anizm.net", "anizm.net"],
 	"version": "1.0.13",
 	"logo": "https://i.imgur.com/TZZcyOQ.png",
 	"thumbnail": "https://i.imgur.com/o4P1a0J.png",
 	"color": "#fc9003",
 	"category": "videos",
-	"tags": [
-		"anime",
-		"türk",
-		"anizm",
-		"anizmtv"
-	],
+	"tags": ["anime", "türk", "anizm", "anizmtv"],
 	"iframe": true
 }

@@ -14,9 +14,5 @@
 	"thumbnail": "https://i.imgur.com/TDjianL.png",
 	"color": "#32f597",
 	"category": "socials",
-	"tags": [
-		"forum",
-		"social",
-		"drama"
-	]
+	"tags": ["forum", "social", "drama"]
 }

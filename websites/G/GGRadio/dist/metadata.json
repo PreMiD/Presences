@@ -15,13 +15,7 @@
 	"thumbnail": "https://i.imgur.com/7pjD8sv.png",
 	"color": "#ff6101",
 	"category": "music",
-	"tags": [
-		"radio",
-		"esport",
-		"minecraft",
-		"ets2",
-		"gg"
-	],
+	"tags": ["radio", "esport", "minecraft", "ets2", "gg"],
 	"settings": [
 		{
 			"id": "sInfo",

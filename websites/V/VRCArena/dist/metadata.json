@@ -16,11 +16,7 @@
 	"thumbnail": "https://i.imgur.com/F7iayRw.png",
 	"color": "#5f3d8a",
 	"category": "other",
-	"tags": [
-		"vrchat",
-		"vr",
-		"games"
-	],
+	"tags": ["vrchat", "vr", "games"],
 	"settings": [
 		{
 			"id": "privacy",

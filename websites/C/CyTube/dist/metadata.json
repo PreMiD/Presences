@@ -15,10 +15,6 @@
 	"thumbnail": "https://i.imgur.com/kKZRocg.png",
 	"color": "#263144",
 	"category": "videos",
-	"tags": [
-		"video",
-		"music",
-		"media"
-	],
+	"tags": ["video", "music", "media"],
 	"iframe": true
 }

@@ -16,12 +16,6 @@
 	"thumbnail": "https://i.imgur.com/R1psydE.jpg",
 	"color": "#061A25",
 	"category": "videos",
-	"tags": [
-		"lol",
-		"leagueoflegends",
-		"esport",
-		"riot",
-		"riotgames"
-	],
+	"tags": ["lol", "leagueoflegends", "esport", "riot", "riotgames"],
 	"iframe": true
 }

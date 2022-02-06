@@ -15,14 +15,7 @@
 	"thumbnail": "https://i.imgur.com/bDLIxDm.jpg",
 	"color": "#FFFFFF",
 	"category": "socials",
-	"tags": [
-		"google",
-		"photos",
-		"images",
-		"videos",
-		"storage",
-		"share"
-	],
+	"tags": ["google", "photos", "images", "videos", "storage", "share"],
 	"settings": [
 		{
 			"id": "albumname",

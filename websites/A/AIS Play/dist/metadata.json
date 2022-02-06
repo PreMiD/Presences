@@ -17,9 +17,6 @@
 	"thumbnail": "https://i.imgur.com/ZYS9jRi.png",
 	"color": "#B0B72A",
 	"category": "videos",
-	"tags": [
-		"video",
-		"media"
-	],
+	"tags": ["video", "media"],
 	"iframe": true
 }

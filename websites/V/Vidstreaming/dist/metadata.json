@@ -16,11 +16,7 @@
 	"thumbnail": "https://i.imgur.com/xRsdose.png",
 	"color": "#ff9200",
 	"category": "anime",
-	"tags": [
-		"anime",
-		"video",
-		"streaming"
-	],
+	"tags": ["anime", "video", "streaming"],
 	"iframe": true,
 	"settings": [
 		{

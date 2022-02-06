@@ -18,10 +18,6 @@
 	"thumbnail": "https://i.imgur.com/G8um9Ng.png",
 	"color": "#14161d",
 	"category": "videos",
-	"tags": [
-		"video",
-		"tvshows",
-		"turkish"
-	],
+	"tags": ["video", "tvshows", "turkish"],
 	"iframe": true
 }

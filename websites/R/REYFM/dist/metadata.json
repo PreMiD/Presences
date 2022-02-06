@@ -10,20 +10,13 @@
 		"nl": "Beste muziek-app voor hitlijsten, rap en gaming. Luister non-stop gratis naar meer dan 15 muziekstreams. De beste en nieuwste muziek alleen voor jou!",
 		"de": "Beste Musik App für Charts, Rap und Gaming. Kostenlos Radio hören mit 15+ Musik-Streams. Höre auf verschiedenen Musik-Channels deinen Lieblingssound – täglich neu zusammengestellt von unseren Musikenthusiasten."
 	},
-	"url": [
-		"www.reyfm.de",
-		"status.reyfm.de"
-	],
+	"url": ["www.reyfm.de", "status.reyfm.de"],
 	"version": "1.2.8",
 	"logo": "https://i.imgur.com/hNoHWQK.png",
 	"thumbnail": "https://i.imgur.com/G9lihv1.png",
 	"color": "#cd6ef4",
 	"category": "music",
-	"tags": [
-		"radio",
-		"reyfm",
-		"music"
-	],
+	"tags": ["radio", "reyfm", "music"],
 	"settings": [
 		{
 			"id": "sInfo",

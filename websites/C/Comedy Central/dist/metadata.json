@@ -16,11 +16,5 @@
 	"thumbnail": "https://i.imgur.com/wIrv2wD.png",
 	"color": "#f8ba00",
 	"category": "videos",
-	"tags": [
-		"comedy-central",
-		"cc",
-		"video",
-		"tv",
-		"movies"
-	]
+	"tags": ["comedy-central", "cc", "video", "tv", "movies"]
 }

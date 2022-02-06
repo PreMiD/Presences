@@ -22,10 +22,7 @@
 	"thumbnail": "https://i.imgur.com/sISR62A.jpg",
 	"color": "#00a3ff",
 	"category": "socials",
-	"tags": [
-		"facebook",
-		"messenger"
-	],
+	"tags": ["facebook", "messenger"],
 	"settings": [
 		{
 			"id": "message",

@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/Yygo8FE.png",
 	"color": "#2F5782",
 	"category": "other",
-	"tags": [
-		"encyclopedia",
-		"informations",
-		"wiki"
-	]
+	"tags": ["encyclopedia", "informations", "wiki"]
 }

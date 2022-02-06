@@ -18,18 +18,12 @@
 		"zh_TW": "bilibili是大陸知名的具有彈幕功能的影片串流網站，這裡有最即時的動漫新番，最棒的ACG氛圍，最有創意的實況主。大家可以在這裡找到許多歡樂。",
 		"vi_VN": "bilibili được biết đến là nền tảng video của Trung Quốc. Tại đây có những hoạt hình mới nhất, không khí ACG tốt nhất, các nhà sáng tạo nhất. Ai cũng có thể tìm thấy niềm vui tại đây."
 	},
-	"url": [
-		"bilibili.com",
-		"biligame.com"
-	],
+	"url": ["bilibili.com", "biligame.com"],
 	"regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com[/]",
 	"version": "2.3.7",
 	"logo": "https://i.imgur.com/w7q6IS0.png",
 	"thumbnail": "https://i.imgur.com/wKnEEei.jpg",
 	"color": "#05acff",
 	"category": "anime",
-	"tags": [
-		"video",
-		"anime"
-	]
+	"tags": ["video", "anime"]
 }

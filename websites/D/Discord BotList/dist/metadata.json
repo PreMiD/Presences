@@ -11,21 +11,13 @@
 		"fr": "discord-botlist.eu - votre liste de robots Discord! Nous vous donnons la possibilité d'appliquer votre bot et de donner à votre bot une page sur notre site Web.",
 		"nl": "discord-botlist.eu - uw Discord Bot Lijst! Wij geven je de mogelijkheid om je bot aan te melden en je bot een pagina te geven op onze website."
 	},
-	"url": [
-		"docs.discord-botlist.eu",
-		"discord-botlist.eu"
-	],
+	"url": ["docs.discord-botlist.eu", "discord-botlist.eu"],
 	"version": "1.0.10",
 	"logo": "https://i.imgur.com/V8TuIHR.jpg",
 	"thumbnail": "https://i.imgur.com/utk2huo.png",
 	"color": "#3563ed",
 	"category": "other",
-	"tags": [
-		"discord",
-		"botlist",
-		"list",
-		"discord-botlist"
-	],
+	"tags": ["discord", "botlist", "list", "discord-botlist"],
 	"settings": [
 		{
 			"id": "buttons",

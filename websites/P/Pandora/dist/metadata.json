@@ -26,8 +26,5 @@
 	"thumbnail": "https://i.imgur.com/fRQo8Vc.png",
 	"color": "#224099",
 	"category": "music",
-	"tags": [
-		"music",
-		"audio"
-	]
+	"tags": ["music", "audio"]
 }

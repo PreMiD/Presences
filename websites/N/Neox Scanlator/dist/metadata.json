@@ -17,10 +17,5 @@
 	"thumbnail": "https://i.imgur.com/ljNKCp1.png",
 	"color": "#079ac7",
 	"category": "other",
-	"tags": [
-		"manga",
-		"scan",
-		"neox",
-		"scanlator"
-	]
+	"tags": ["manga", "scan", "neox", "scanlator"]
 }

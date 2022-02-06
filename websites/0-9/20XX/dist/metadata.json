@@ -17,13 +17,7 @@
 	"thumbnail": "https://i.imgur.com/ok9ArGU.jpg",
 	"color": "#9AD1FD",
 	"category": "games",
-	"tags": [
-		"20xx",
-		"game",
-		"multiplayer",
-		"moba",
-		"browser"
-	],
+	"tags": ["20xx", "game", "multiplayer", "moba", "browser"],
 	"iframe": true,
 	"settings": [
 		{

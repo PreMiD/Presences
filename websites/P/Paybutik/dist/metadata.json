@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/afOnttt.png",
 	"color": "#eb8242",
 	"category": "other",
-	"tags": [
-		"other",
-		"payment",
-		"service"
-	]
+	"tags": ["other", "payment", "service"]
 }

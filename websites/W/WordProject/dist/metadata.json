@@ -14,11 +14,7 @@
 	"thumbnail": "https://i.imgur.com/QteJu92.png",
 	"color": "#aa2023",
 	"category": "other",
-	"tags": [
-		"bible",
-		"bible-verses",
-		"audio-bible"
-	],
+	"tags": ["bible", "bible-verses", "audio-bible"],
 	"settings": [
 		{
 			"id": "buttons",

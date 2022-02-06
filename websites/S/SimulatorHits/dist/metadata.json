@@ -17,11 +17,7 @@
 		"de": "Ihr Nummer-1-Hit-Simulationsradio",
 		"sv_SE": "Din nummer 1 träffsimuleringsradio"
 	},
-	"url": [
-		"simulatorhits.com",
-		"panel.simulatorhits.com",
-		"simulatorhits.dev"
-	],
+	"url": ["simulatorhits.com", "panel.simulatorhits.com", "simulatorhits.dev"],
 	"version": "2.0.4",
 	"logo": "https://i.imgur.com/txJayic.jpg",
 	"thumbnail": "https://i.imgur.com/IEYKig2.png",

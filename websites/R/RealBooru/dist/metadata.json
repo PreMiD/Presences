@@ -16,11 +16,5 @@
 	"thumbnail": "https://i.imgur.com/m41BGlq.png",
 	"color": "#171717",
 	"category": "other",
-	"tags": [
-		"nsfw",
-		"porn",
-		"gelbooru",
-		"imageboard",
-		"images"
-	]
+	"tags": ["nsfw", "porn", "gelbooru", "imageboard", "images"]
 }

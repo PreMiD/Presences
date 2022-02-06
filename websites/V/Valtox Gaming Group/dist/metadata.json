@@ -17,12 +17,5 @@
 	"thumbnail": "https://i.imgur.com/voX96Tr.png",
 	"color": "#ff0000",
 	"category": "games",
-	"tags": [
-		"vtc",
-		"ets2",
-		"ats",
-		"minecraft",
-		"fivem",
-		"gtav"
-	]
+	"tags": ["vtc", "ets2", "ats", "minecraft", "fivem", "gtav"]
 }

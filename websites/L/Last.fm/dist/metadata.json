@@ -21,11 +21,7 @@
 	"thumbnail": "https://i.imgur.com/AWs9C6r.png",
 	"color": "#E31B23",
 	"category": "music",
-	"tags": [
-		"song",
-		"music",
-		"artist"
-	],
+	"tags": ["song", "music", "artist"],
 	"settings": [
 		{
 			"id": "timestamps",

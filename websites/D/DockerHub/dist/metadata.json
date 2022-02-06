@@ -15,7 +15,5 @@
 	"thumbnail": "https://i.imgur.com/n3Ox5DQ.png",
 	"color": "#099CEC",
 	"category": "other",
-	"tags": [
-		"docker"
-	]
+	"tags": ["docker"]
 }

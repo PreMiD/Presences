@@ -14,11 +14,7 @@
 	"thumbnail": "https://i.imgur.com/S5p9Pwj.png",
 	"color": "#558e9c",
 	"category": "games",
-	"tags": [
-		"justdance",
-		"dance",
-		"gaming"
-	],
+	"tags": ["justdance", "dance", "gaming"],
 	"settings": [
 		{
 			"id": "time",

@@ -21,10 +21,5 @@
 	"thumbnail": "https://i.imgur.com/IuULwTC.png",
 	"color": "#80F5D2",
 	"category": "videos",
-	"tags": [
-		"games",
-		"social",
-		"videos",
-		"streaming"
-	]
+	"tags": ["games", "social", "videos", "streaming"]
 }

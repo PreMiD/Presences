@@ -30,12 +30,7 @@
 	"thumbnail": "https://i.imgur.com/htSGR6k.png",
 	"color": "#21293C",
 	"category": "music",
-	"tags": [
-		"amazon-music",
-		"music",
-		"amazon",
-		"media"
-	],
+	"tags": ["amazon-music", "music", "amazon", "media"],
 	"settings": [
 		{
 			"id": "lang",
