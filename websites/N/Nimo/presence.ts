@@ -22,6 +22,17 @@ const presence = new Presence({
 				viewTheir: "twitch.viewTheir",
 				channelSettings: "twitch.channelSettings",
 				followList: "twitch.followList",
+				channelAnaly: "twitch.channelAnaly",
+				streamSum: "twitch.streamSum",
+				dashboard: "twitch.dashboard",
+				dashboardManage: "twitch.dashboardManage",
+				achievements: "twitch.achievements",
+				camp: "twitch.camp",
+				campBasic: "twitch.campBasic",
+				campSetup: "twitch.campSetup",
+				viewFollow: "twitch.viewFollow",
+				activity: "twitch.activity",
+				colls: "twitch.colls",
 				esport: "twitch.esports",
 				searchingFor: "general.searchFor",
 				searchingSomething: "general.searchSomething",
@@ -112,10 +123,46 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = strings.browse;
 		presenceData.details = strings.browse;
 		if (!privacy) {
+			delete presenceData.smallImageKey;
+			delete presenceData.smallImageText;
 			presenceData.details = strings.viewTheir;
 			presenceData.state = strings.channelSettings;
-			if (pathname.includes("/my-subscribe"))
+			if (pathname.includes("/streamercamp")) {
+				presenceData.details = strings.camp;
+				presenceData.smallImageKey = "reading";
+				presenceData.smallImageText = strings.browse;
+				delete presenceData.state;
+				if (pathname.includes("/quickstart"))
+					presenceData.state = strings.campBasic;
+				else if (pathname.includes("/resources"))
+					presenceData.state = strings.campSetup;
+			} else if (pathname.includes("/home"))
+				presenceData.state = strings.dashboard;
+			else if (pathname.includes("/my-subscribe")) {
+				presenceData.details = strings.viewFollow;
+				delete presenceData.state;
+			} else if (pathname.includes("/followers"))
 				presenceData.state = strings.followList;
+			else if (pathname.includes("/channel-analytics"))
+				presenceData.state = strings.channelAnaly;
+			else if (pathname.includes("/live-end"))
+				presenceData.state = strings.streamSum;
+			else if (
+				pathname.includes("/stream-manager") ||
+				pathname.includes("/live-preview") ||
+				pathname.includes("/stream-targets") ||
+				pathname.includes("/stream-url")
+			) {
+				presenceData.details = strings.dashboardManage;
+				delete presenceData.state;
+			} else if (
+				pathname.includes("/anchor-level") ||
+				pathname.includes("/my-growth")
+			)
+				presenceData.state = strings.achievements;
+			else if (pathname.includes("/fans-club"))
+				presenceData.state = strings.activity;
+			else if (pathname.includes("/video")) presenceData.state = strings.colls;
 		}
 	} else if (title && streamer) {
 		if (vidTimer) {
