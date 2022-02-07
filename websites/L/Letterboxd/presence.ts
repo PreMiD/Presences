@@ -533,8 +533,7 @@ presence.on("UpdateData", async () => {
 	} else presenceData.details = "At home";
 
 	if (!(await presence.getSetting("show_buttons")))
-		// eslint-disable-next-line no-undefined
-		presenceData.buttons = undefined;
+		delete presenceData.buttons;
 
 	if (details !== presenceData.details) {
 		presence.setActivity(presenceData);
