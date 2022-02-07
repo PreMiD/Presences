@@ -153,7 +153,7 @@ presence.on("UpdateData", () => {
 			presenceData.largeImageKey = middleImage.src;
 			presenceData.buttons = [{ label: "View Item", url: document.URL }];
 		}
-	} else if (path.indexOf("google-search") > -1) {
+	} else if (path.includes("google-search")) {
 		presenceData.details = "Searching for:";
 		presenceData.state = document.querySelector(
 			"span.gcsc-find-more-on-google-query"
