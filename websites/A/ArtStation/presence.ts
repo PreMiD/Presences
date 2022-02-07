@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "artstation",
 			startTimestamp: browsingTimestamp
 		},
-		[, shortTitle] = document.title.split(/-(.+)/),
+		shortTitle = document.title.split(/-(.+)/)[1],
 		[image, artwork, button, time] = await Promise.all([
 			presence.getSetting<boolean>("image"),
 			presence.getSetting<number>("artwork"),
