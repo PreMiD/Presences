@@ -532,8 +532,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else presenceData.details = "At home";
 
-	if (!(await presence.getSetting("show_buttons")))
-		delete presenceData.buttons;
+	if (!(await presence.getSetting("show_buttons"))) delete presenceData.buttons;
 
 	if (details !== presenceData.details) {
 		presence.setActivity(presenceData);
