@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
 			if (!privacy) {
 				presenceData.details = vidDetail
 					.replace("%title%", title)
-					.replace("%streamer%", streamer);
+					.replace("%uploader%", streamer);
 				presenceData.state = vidState
 					.replace("%title%", title)
 					.replace("%uploader%", streamer);
