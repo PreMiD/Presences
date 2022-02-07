@@ -2,17 +2,21 @@ const presence = new Presence({
 	clientId: "687070418804408445" //The client ID of the Application created at https://discordapp.com/developers/applications
 });
 
-let details: HTMLInputElement, state: HTMLInputElement, currentState: string;
+let details: string, state: string, currentState: string;
 
 presence.on("UpdateData", async () => {
 	if (!document.title.includes("Explore live radio by rotating")) {
-		details = document.querySelector("._title_165lg_36"); // which radio we're tuning right now
-		state = document.querySelector("._subtitle_165lg_43"); // the state where the radio serves
+		details =
+			document.querySelector("._title_165lg_36")?.textContent ??
+			"Unknown Radio"; // which radio we're tuning right now
+		state =
+			document.querySelector("._subtitle_165lg_43")?.textContent ??
+			"Unknown State/Country"; // the state where the radio serves
 
 		const elapsed = Math.floor(Date.now() / 1000),
 			presenceData: PresenceData = {
-				details: details.textContent,
-				state: state.textContent,
+				details,
+				state,
 				largeImageKey: "bigglobe",
 				startTimestamp: elapsed
 			};
@@ -24,8 +28,8 @@ presence.on("UpdateData", async () => {
 				// currently playing
 				presenceData.smallImageKey = "statusplay";
 				presenceData.smallImageText = "Playing";
-				presenceData.details = details.textContent;
-				presenceData.state = state.textContent;
+				presenceData.details = details;
+				presenceData.state = state;
 				presenceData.startTimestamp = elapsed;
 			} else if (currentState === "loading") {
 				// currently loading
