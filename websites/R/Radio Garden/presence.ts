@@ -37,6 +37,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Tuning";
 				presenceData.details = "Tuning";
 				delete presenceData.startTimestamp;
+				delete presenceData.state;
 			} else if (currentState === "play") {
 				// currently stopped
 				presenceData.smallImageKey = "statusstop";
