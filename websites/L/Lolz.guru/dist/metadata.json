@@ -4,7 +4,7 @@
     "name": "Livixx",
     "id": "502948927809781763"
   },
-  "service": "lolz.guru",
+  "service": "Lolz.guru",
   "description": {
     "en": "LZT (lolzteam) - a forum about games, ways to earn and giveaways",
     "ru": "LZT (lolzteam, лолзтим) - форум об играх, способы заработка и раздачи"
@@ -18,10 +18,10 @@
   "color": "#23a86d",
   "category": "other",
   "tags": [
-    "Forum",
-    "LZT",
-    "Games",
-    "Giveaways"
+    "forum",
+    "lzt",
+    "games",
+    "giveaways"
   ],
   "settings": [
     {
