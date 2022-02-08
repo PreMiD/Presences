@@ -105,13 +105,15 @@ presence.on("UpdateData", async () => {
 				break;
 
 			default:
-				presenceData.details = "Main page";
+				presenceData.details = (await strings).viewMainPage;
 				break;
 		}
 	}
 	if (host === "docs.juniper.bot") {
 		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.details = document.title;
+		presenceData.details = document.querySelector(
+			"body > div.md-container > main > div > div.md-content > article > h1"
+		).textContent;
 		presenceData.state = "docs.juniper.bot";
 		presenceData.smallImageKey = "list";
 	}
