@@ -1,30 +1,30 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "Red Bull",
-  "author": {
-    "name": "वाह्य",
-    "id": "819696394180100106"
-  },
-  "category": "videos",
-  "logo": "https://i.imgur.com/BOh9UD4.png",
-  "thumbnail": "https://i.imgur.com/2ED5pB7.png",
-  "version": "1.0.3",
-  "color": "#db0a41",
-  "tags": [
-    "redbull",
-    "tv",
-    "live"
-  ],
-  "url": "www.redbull.com",
-  "description": {
-    "en": "The official website of RedBull"
-  },
-  "settings": [
-    {
-      "id": "buttons",
-      "title": "Show Buttons",
-      "icon": "fas fa-compress-arrows-alt",
-      "value": true
-    }
-  ]
+	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"author": {
+		"name": "वाह्य",
+		"id": "819696394180100106"
+	},
+	"service": "Red Bull",
+	"description": {
+		"en": "The official website of RedBull"
+	},
+	"url": "www.redbull.com",
+	"version": "1.0.7",
+	"logo": "https://i.imgur.com/BOh9UD4.png",
+	"thumbnail": "https://i.imgur.com/2ED5pB7.png",
+	"color": "#db0a41",
+	"category": "videos",
+	"tags": [
+		"redbull",
+		"tv",
+		"live"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
 }

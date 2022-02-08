@@ -1,67 +1,51 @@
 const presence = new Presence({
-    clientId: "842112189618978897"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
-function getTime(list: string[]): number {
-  let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--)
-    ret += parseInt(list[index]) * 60 ** index;
-
-  return ret;
-}
-
-function getTimestamps(audioDuration: string): Array<number> {
-  const splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+		clientId: "842112189618978897"
+	}),
+	strings = presence.getStrings({
+		play: "presence.playback.playing",
+		pause: "presence.playback.paused"
+	});
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-      largeImageKey: "applemusic-logo"
-    },
-    playerCheck = document.querySelector(
-      ".web-chrome-playback-controls__playback-btn[disabled]"
-    )
-      ? false
-      : true;
-  if (playerCheck) {
-    const title = document
-        .querySelector(
-          ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
-        )
-        ?.textContent.trim(),
-      author = document
-        .querySelector(
-          ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
-        )
-        ?.textContent.split("—")[0],
-      audioTime = document.querySelector(
-        ".web-chrome-playback-lcd__time-end"
-      ).textContent,
-      paused = document.querySelector(
-        ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
-      )
-        ? true
-        : false;
+	const presenceData: PresenceData = {
+			largeImageKey: "applemusic-logo"
+		},
+		audio = document.querySelector<HTMLAudioElement>(
+			"audio#apple-music-player"
+		);
 
-    data.details = title;
-    data.state = author;
-    data.smallImageKey = paused ? "pause" : "play";
-    data.smallImageText = paused ? (await strings).pause : (await strings).play;
-    [data.startTimestamp, data.endTimestamp] = getTimestamps(audioTime);
+	if (audio?.title) {
+		const timestamp = document.querySelector<HTMLInputElement>(
+				"input[aria-valuenow][aria-valuemax]"
+			),
+			paused = audio.paused || audio.readyState <= 2;
 
-    if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-    }
+		presenceData.details = navigator.mediaSession.metadata.title;
+		presenceData.state = navigator.mediaSession.metadata.artist;
 
-    presence.setActivity(data);
-  } else presence.clearActivity();
+		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageText = paused
+			? (await strings).pause
+			: (await strings).play;
+
+		presenceData.largeImageKey =
+			navigator.mediaSession.metadata.artwork[0].src.replace(
+				/[0-9]{1,2}x[0-9]{1,2}bb/,
+				"1024x1024"
+			);
+
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(
+				Number(timestamp.ariaValueNow),
+				Number(timestamp.ariaValueMax)
+			);
+
+		if (paused) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
+
+		if (!presenceData.details) presence.clearActivity();
+		else presence.setActivity(presenceData);
+	} else presence.clearActivity();
 });

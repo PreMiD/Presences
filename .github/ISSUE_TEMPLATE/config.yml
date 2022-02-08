@@ -3,6 +3,3 @@ contact_links:
   - name: Official Discord Server
     url: https://discord.premid.app
     about: If you are experiencing issues with your PreMiD, go to our support in our Discord server.
-  - name: Feature Requests & Presence Requests
-    url: https://github.com/PreMiD/Presences/discussions
-    about: Suggestions for new presences or feature requests should be on Discussions

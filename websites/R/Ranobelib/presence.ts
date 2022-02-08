@@ -1,578 +1,562 @@
 const presence = new Presence({
-  clientId: "743233111097081886"
+	clientId: "743233111097081886"
 });
 
 // Timestamp
 function getTimeStamp() {
-  return Math.floor(Date.now() / 1000);
+	return Math.floor(Date.now() / 1000);
 }
 
 // Variables
 let Routes: string[],
-  Queries: { [key: string]: string | string[] },
-  DiscussionTitle: string,
-  DiscussionAuthor: string,
-  NewsTitle: string,
-  PeopleName: string,
-  TeamName: string,
-  UserName: string,
-  BookmarkType: string,
-  BookmarkSize: string;
+	Queries: { [key: string]: string | string[] },
+	DiscussionTitle: string,
+	DiscussionAuthor: string,
+	NewsTitle: string,
+	peopleName: string,
+	teamName: string,
+	UserName: string,
+	BookmarkType: string,
+	BookmarkSize: string;
 
 presence.on("UpdateData", async () => {
-  // Presence Data
-  const data: PresenceData = {
-    largeImageKey: "ranobelib_large"
-  };
+	// Presence Data
+	const presenceData: PresenceData = {
+		largeImageKey: "ranobelib_large"
+	};
 
-  // Setup Routes & Query
-  Routes = document.location.href
-    .replace(document.location.search, "")
-    .split("/")
-    .splice(3);
-  Queries = Object.fromEntries(
-    document.location.search
-      .slice(1)
-      .split("&")
-      .map((k, _i, a) => {
-        const item: string[] = k.replace(/\[(.*?)\]+/g, "").split("="),
-          Keys = a
-            .map((i) => i.replace(/\[(.*?)\]+/g, "").split("="))
-            .filter((i) => i[0] === item[0]),
-          Values = Keys.map((i) => i[1]);
+	// Setup Routes & Query
+	Routes = document.location.href
+		.replace(document.location.search, "")
+		.split("/")
+		.splice(3);
+	Queries = Object.fromEntries(
+		document.location.search
+			.slice(1)
+			.split("&")
+			.map((k, _i, a) => {
+				const item: string[] = k.replace(/\[(.*?)\]+/g, "").split("="),
+					Keys = a
+						.map(i => i.replace(/\[(.*?)\]+/g, "").split("="))
+						.filter(i => i[0] === item[0]);
 
-        if (Keys.length === 1) return item;
-        else return [item[0], Values];
-      })
-  );
+				if (Keys.length === 1) return item;
+				else return [item[0], Keys.map(i => i[1])];
+			})
+	);
 
-  // Website Pages
-  if (Routes[0] === "") {
-    // Homepage
-    data.smallImageText = "reading";
-    data.smallImageKey = "search";
-    data.details = "Главная";
-    data.startTimestamp = 0;
+	// Website Pages
+	if (Routes[0] === "") {
+		// Homepage
+		presenceData.smallImageText = "reading";
+		presenceData.smallImageKey = "search";
+		presenceData.details = "Главная";
+		presenceData.startTimestamp = 0;
 
-    // Page Section
-    if (Queries.section === "my-updates") data.state = "Мои обновления";
-    else data.state = "Все обновления";
-  } else if (Routes[0] === "manga-list") {
-    // List of mangas
-    data.smallImageText = "reading";
-    data.smallImageKey = "search";
-    data.details = "Каталог ранобэ";
+		// Page Section
+		if (Queries.section === "my-updates") presenceData.state = "Мои обновления";
+		else presenceData.state = "Все обновления";
+	} else if (Routes[0] === "manga-list") {
+		// List of mangas
+		presenceData.smallImageText = "reading";
+		presenceData.smallImageKey = "search";
+		presenceData.details = "Каталог ранобэ";
 
-    if (!Array.isArray(Queries.types)) Queries.types = [Queries.types];
+		if (!Array.isArray(Queries.types)) Queries.types = [Queries.types];
 
-    // Search Types
-    if (Queries.types && Queries.types.length === 1) {
-      // Types size === 1
-      switch (Queries.types[0]) {
-        case "10":
-          data.state = "Ищет японское ранобэ";
-          break;
-        case "11":
-          data.state = "Ищет корейское ранобэ";
-          break;
-        case "12":
-          data.state = "Ищет китайское ранобэ";
-          break;
-        case "13":
-          data.state = "Ищет английское ранобэ";
-          break;
-        case "14":
-          data.state = "Ищет авторские";
-          break;
-        case "9":
-          data.state = "Ищет фанфики";
-          break;
-        default:
-          data.state = "Ищет ранобэ";
-          break;
-      }
-    } else if (Queries.types && Queries.types.length > 1) {
-      // Types size > 1
-      const mangas: string[] = [];
+		// Search Types
+		if (Queries.types && Queries.types.length === 1) {
+			// Types size === 1
+			switch (Queries.types[0]) {
+				case "10":
+					presenceData.state = "Ищет японское ранобэ";
+					break;
+				case "11":
+					presenceData.state = "Ищет корейское ранобэ";
+					break;
+				case "12":
+					presenceData.state = "Ищет китайское ранобэ";
+					break;
+				case "13":
+					presenceData.state = "Ищет английское ранобэ";
+					break;
+				case "14":
+					presenceData.state = "Ищет авторские";
+					break;
+				case "9":
+					presenceData.state = "Ищет фанфики";
+					break;
+				default:
+					presenceData.state = "Ищет ранобэ";
+					break;
+			}
+		} else if (Queries.types && Queries.types.length > 1) {
+			// Types size > 1
+			const mangas: string[] = [];
 
-      Queries.types.sort().forEach((item) => {
-        switch (item) {
-          case "10":
-            mangas.push("Японское");
-            break;
-          case "11":
-            mangas.push("Корейское");
-            break;
-          case "12":
-            mangas.push("Китайское");
-            break;
-          case "13":
-            mangas.push("Английское");
-            break;
-          case "14":
-            mangas.push("Авторские");
-            break;
-          case "9":
-            mangas.push("Фанфики");
-            break;
-          default:
-            mangas.push("Ранобэ");
-            break;
-        }
-      });
+			Queries.types.sort().forEach(item => {
+				switch (item) {
+					case "10":
+						mangas.push("Японское");
+						break;
+					case "11":
+						mangas.push("Корейское");
+						break;
+					case "12":
+						mangas.push("Китайское");
+						break;
+					case "13":
+						mangas.push("Английское");
+						break;
+					case "14":
+						mangas.push("Авторские");
+						break;
+					case "9":
+						mangas.push("Фанфики");
+						break;
+					default:
+						mangas.push("Ранобэ");
+						break;
+				}
+			});
 
-      data.state = `Ищет: ${mangas.join(", ")}`;
-    } else data.state = "Ищет Ранобэ";
-  } else if (Routes[0] === "forum") {
-    // Forum page
-    data.details = "Форум";
+			presenceData.state = `Ищет: ${mangas.join(", ")}`;
+		} else presenceData.state = "Ищет Ранобэ";
+	} else if (Routes[0] === "forum") {
+		// Forum page
+		presenceData.details = "Форум";
 
-    // Subpages of forums
-    if (Routes[1] === "") {
-      // Main forum page
-      data.smallImageText = "Читает";
-      data.smallImageKey = "reading";
+		// Subpages of forums
+		if (Routes[1] === "") {
+			// Main forum page
+			presenceData.smallImageText = "Читает";
+			presenceData.smallImageKey = "reading";
 
-      if (Queries.subscription) data.state = "Мои подписки";
+			if (Queries.subscription) presenceData.state = "Мои подписки";
 
-      if (Queries.user_id) data.state = "Мои темы";
+			if (Queries.user_id) presenceData.state = "Мои темы";
 
-      switch (Queries.category) {
-        case "all":
-          data.state = "Все категории";
-          break;
-        case "1":
-          data.state = "Баги и проблемы";
-          break;
-        case "2":
-          data.state = "Предложения для сайта";
-          break;
-        case "3":
-          data.state = "Поиск тайтлов";
-          break;
-        case "4":
-          data.state = "Поиск кадров";
-          break;
-        case "5":
-          data.state = "Обсуждение Манги";
-          break;
-        case "6":
-          data.state = "Обсуждение Аниме";
-          break;
-        case "7":
-          data.state = "Обсуждение Ранобэ";
-          break;
-        case "8":
-          data.state = "Видеоигры";
-          break;
-        case "9":
-          data.state = "Переводчикам";
-          break;
-        case "10":
-          data.state = "Как переводить мангу";
-          break;
-        case "11":
-          data.state = "Как рисовать мангу";
-          break;
-        case "12":
-          data.state = "Общение";
-          break;
-        case "13":
-          data.state = "Другое";
-          break;
-      }
-    } else if (Routes[1] === "discussion-create") {
-      // Discussion create
-      data.smallImageText = "Пишет";
-      data.smallImageKey = "writing";
-      data.state = "Создает новую тему";
-    } else if (Routes[1] === "discussion") {
-      // Discussion page
-      if (Routes[2] && !Routes[3]) {
-        // Opened discussion
-        data.smallImageText = "Читает";
-        data.smallImageKey = "reading";
+			switch (Queries.category) {
+				case "all":
+					presenceData.state = "Все категории";
+					break;
+				case "1":
+					presenceData.state = "Баги и проблемы";
+					break;
+				case "2":
+					presenceData.state = "Предложения для сайта";
+					break;
+				case "3":
+					presenceData.state = "Поиск тайтлов";
+					break;
+				case "4":
+					presenceData.state = "Поиск кадров";
+					break;
+				case "5":
+					presenceData.state = "Обсуждение Манги";
+					break;
+				case "6":
+					presenceData.state = "Обсуждение Аниме";
+					break;
+				case "7":
+					presenceData.state = "Обсуждение Ранобэ";
+					break;
+				case "8":
+					presenceData.state = "Видеоигры";
+					break;
+				case "9":
+					presenceData.state = "Переводчикам";
+					break;
+				case "10":
+					presenceData.state = "Как переводить мангу";
+					break;
+				case "11":
+					presenceData.state = "Как рисовать мангу";
+					break;
+				case "12":
+					presenceData.state = "Общение";
+					break;
+				case "13":
+					presenceData.state = "Другое";
+					break;
+			}
+		} else if (Routes[1] === "discussion-create") {
+			// Discussion create
+			presenceData.smallImageText = "Пишет";
+			presenceData.smallImageKey = "writing";
+			presenceData.state = "Создает новую тему";
+		} else if (Routes[1] === "discussion") {
+			// Discussion page
+			if (Routes[2] && !Routes[3]) {
+				// Opened discussion
+				presenceData.smallImageText = "Читает";
+				presenceData.smallImageKey = "reading";
 
-        const titleElement = document.querySelector(
-            ".discussion .discussion__title"
-          ),
-          authorElement = document.querySelector(
-            ".discussion .discussion-creator__username"
-          );
+				const titleElement = document.querySelector(
+						".discussion .discussion__title"
+					),
+					authorElement = document.querySelector(
+						".discussion .discussion-creator__username"
+					);
 
-        DiscussionTitle = titleElement && titleElement.textContent;
-        DiscussionAuthor = authorElement && authorElement.textContent;
+				DiscussionTitle = titleElement && titleElement.textContent;
+				DiscussionAuthor = authorElement && authorElement.textContent;
 
-        if (DiscussionAuthor && DiscussionTitle)
-          data.state = `Тема: ${DiscussionTitle}| Автор: ${DiscussionAuthor}`;
-      } else if (Routes[3] && Routes[3] === "edit") {
-        // Editor discussion
-        data.smallImageText = "Пишет";
-        data.smallImageKey = "writing";
+				if (DiscussionAuthor && DiscussionTitle)
+					presenceData.state = `Тема: ${DiscussionTitle}| Автор: ${DiscussionAuthor}`;
+			} else if (Routes[3] && Routes[3] === "edit") {
+				// Editor discussion
+				presenceData.smallImageText = "Пишет";
+				presenceData.smallImageKey = "writing";
 
-        data.state = DiscussionTitle
-          ? `Редактирует тему: ${DiscussionTitle}`
-          : "Редактирует тему";
-      }
-    }
-  } else if (Routes[0] === "faq") {
-    // Faq page
+				presenceData.state = DiscussionTitle
+					? `Редактирует тему: ${DiscussionTitle}`
+					: "Редактирует тему";
+			}
+		}
+	} else if (Routes[0] === "faq") {
+		// Faq page
 
-    if (Routes[1] === "article") {
-      // Faq Editor
+		if (Routes[1] === "article") {
+			// Faq Editor
 
-      data.details = "Faq";
-      data.smallImageText = "Редактирует";
-      data.smallImageKey = "writing";
-      data.state = `Редактирует: ${Queries.article} вопрос`;
-    } else {
-      // Faq Sections
-      data.details = "Faq";
-      data.smallImageText = "Читает";
-      data.smallImageKey = "reading";
+			presenceData.details = "Faq";
+			presenceData.smallImageText = "Редактирует";
+			presenceData.smallImageKey = "writing";
+			presenceData.state = `Редактирует: ${Queries.article} вопрос`;
+		} else {
+			// Faq Sections
+			presenceData.details = "Faq";
+			presenceData.smallImageText = "Читает";
+			presenceData.smallImageKey = "reading";
 
-      switch (Queries.section) {
-        case "1":
-          data.state = "Ранобэ";
-          break;
-        case "2":
-          data.state = "Общие вопросы";
-          break;
-        case "3":
-          data.state = "Профиль пользователя";
-          break;
-        case "4":
-          data.state = "Чтение ранобэ";
-          break;
-        case "5":
-          data.state = "Комментарии";
-          break;
-        case "6":
-          data.state = "Мини-чат";
-          break;
-        case "7":
-          data.state = "Решение проблем";
-          break;
-        case "8":
-          data.state = "Правила";
-          break;
-        case "9":
-          data.state = "Форум";
-          break;
-      }
-    }
-  } else if (Routes[0] === "news") {
-    // News page
-    data.details = "Новости";
-    data.smallImageText = "Читает";
-    data.smallImageKey = "reading";
+			switch (Queries.section) {
+				case "1":
+					presenceData.state = "Ранобэ";
+					break;
+				case "2":
+					presenceData.state = "Общие вопросы";
+					break;
+				case "3":
+					presenceData.state = "Профиль пользователя";
+					break;
+				case "4":
+					presenceData.state = "Чтение ранобэ";
+					break;
+				case "5":
+					presenceData.state = "Комментарии";
+					break;
+				case "6":
+					presenceData.state = "Мини-чат";
+					break;
+				case "7":
+					presenceData.state = "Решение проблем";
+					break;
+				case "8":
+					presenceData.state = "Правила";
+					break;
+				case "9":
+					presenceData.state = "Форум";
+					break;
+			}
+		}
+	} else if (Routes[0] === "news") {
+		// News page
+		presenceData.details = "Новости";
+		presenceData.smallImageText = "Читает";
+		presenceData.smallImageKey = "reading";
 
-    if (Routes[1]) {
-      // Opened News
-      const titleElement = document.querySelector(".news__title");
-      NewsTitle = titleElement && titleElement.textContent;
+		if (Routes[1]) {
+			// Opened News
+			const titleElement = document.querySelector(".news__title");
+			NewsTitle = titleElement && titleElement.textContent;
 
-      if (NewsTitle) data.state = NewsTitle;
-    } else {
-      // News List
-      data.details = "Новости";
-      data.smallImageText = "Читает";
-      data.smallImageKey = "reading";
-      data.state = "Список новостей";
-    }
-  } else if (Routes[0] === "notification") {
-    // Notification list
-    data.details = "Уведомления";
-    data.smallImageText = "Читает";
-    data.smallImageKey = "reading";
+			if (NewsTitle) presenceData.state = NewsTitle;
+		} else {
+			// News List
+			presenceData.details = "Новости";
+			presenceData.smallImageText = "Читает";
+			presenceData.smallImageKey = "reading";
+			presenceData.state = "Список новостей";
+		}
+	} else if (Routes[0] === "notification") {
+		// Notification list
+		presenceData.details = "Уведомления";
+		presenceData.smallImageText = "Читает";
+		presenceData.smallImageKey = "reading";
 
-    switch (Queries.type) {
-      case "chapter":
-        data.state = "Главы";
-        break;
-      case "comments":
-        data.state = "Комментарии";
-        break;
-      case "message":
-        data.state = "Сообщения";
-        break;
-      case "friend":
-        data.state = "Заявки в друзья";
-        break;
-      case "other":
-        data.state = "Другое";
-        break;
-      case "all":
-        data.state = "Все";
-        break;
-    }
-  } else if (Routes[0] === "contact-us") {
-    // Contact page
-    data.details = "Контакты";
-    data.smallImageText = "Пишет";
-    data.smallImageKey = "writing";
-    data.state = "info@mangalib.me";
-  } else if (Routes[0] === "messages") {
-    // Messages page
-    data.details = "Личные сообщения";
-    data.smallImageText = "Пишет";
-    data.smallImageKey = "writing";
-    data.startTimestamp = getTimeStamp();
-  } else if (Routes[0] === "people") {
-    // Authors (Moderation) page
+		switch (Queries.type) {
+			case "chapter":
+				presenceData.state = "Главы";
+				break;
+			case "comments":
+				presenceData.state = "Комментарии";
+				break;
+			case "message":
+				presenceData.state = "Сообщения";
+				break;
+			case "friend":
+				presenceData.state = "Заявки в друзья";
+				break;
+			case "other":
+				presenceData.state = "Другое";
+				break;
+			case "all":
+				presenceData.state = "Все";
+				break;
+		}
+	} else if (Routes[0] === "contact-us") {
+		// Contact page
+		presenceData.details = "Контакты";
+		presenceData.smallImageText = "Пишет";
+		presenceData.smallImageKey = "writing";
+		presenceData.state = "info@mangalib.me";
+	} else if (Routes[0] === "messages") {
+		// Messages page
+		presenceData.details = "Личные сообщения";
+		presenceData.smallImageText = "Пишет";
+		presenceData.smallImageKey = "writing";
+		presenceData.startTimestamp = getTimeStamp();
+	} else if (Routes[0] === "people") {
+		// Authors (Moderation) page
 
-    if (Routes[1] === "create") {
-      data.details = "Добавляет автора";
-      data.smallImageText = "Добавляет автора";
-      data.smallImageKey = "writing";
+		if (Routes[1] === "create") {
+			presenceData.details = "Добавляет автора";
+			presenceData.smallImageText = "Добавляет автора";
+			presenceData.smallImageKey = "writing";
 
-      const name = <HTMLInputElement>document.getElementById("name");
+			peopleName = (<HTMLInputElement>document.getElementById("name")).value;
 
-      PeopleName = name.value;
+			if (peopleName.length > 1) presenceData.state = peopleName;
+			else presenceData.state = "Имя автора не задано";
+		}
+	} else if (Routes[0] === "team") {
+		// Team page
 
-      if (PeopleName.length > 1) data.state = PeopleName;
-      else data.state = "Имя автора не задано";
-    }
-  } else if (Routes[0] === "team") {
-    // Team page
+		if (Routes[1] === "create") {
+			// Create New Team
+			presenceData.details = "Добавляет команду";
+			presenceData.smallImageText = "Добавляет команду";
+			presenceData.smallImageKey = "writing";
 
-    if (Routes[1] === "create") {
-      // Create New Team
-      data.details = "Добавляет команду";
-      data.smallImageText = "Добавляет команду";
-      data.smallImageKey = "writing";
+			teamName = (<HTMLInputElement>document.getElementById("name")).value;
 
-      const name = <HTMLInputElement>document.getElementById("name");
+			if (teamName.length > 1) presenceData.state = teamName;
+			else presenceData.state = "Имя команды не задано";
+		} else if (!Routes[2]) {
+			// Main Team Page
+			presenceData.details = "Команда перевода";
+			presenceData.smallImageText = "Смотрит переводчика";
+			presenceData.smallImageKey = "reading";
 
-      TeamName = name.value;
+			const title = document.querySelector(".team-profile__name");
 
-      if (TeamName.length > 1) data.state = TeamName;
-      else data.state = "Имя команды не задано";
-    } else {
-      // Others
+			teamName = title && title.textContent.replace("редактировать", "");
 
-      if (!Routes[2]) {
-        // Main Team Page
-        data.details = "Команда перевода";
-        data.smallImageText = "Смотрит переводчика";
-        data.smallImageKey = "reading";
+			if (teamName) presenceData.state = teamName;
+		} else if (Routes[2] === "edit") {
+			presenceData.details = "Команда перевода";
+			presenceData.smallImageText = "Редактирует переводчика";
+			presenceData.smallImageKey = "writing";
 
-        const title = document.querySelector(".team-profile__name");
+			switch (Queries.section) {
+				case "info":
+					presenceData.state = "Редактирует информацию команды";
+					break;
+				case "users":
+					presenceData.state = "Редактирует участников команды";
+					break;
+			}
+		}
+	} else if (Routes[0] === "moderation") {
+		// Moderation page
 
-        TeamName = title && title.textContent.replace("редактировать", "");
+		presenceData.details = "Модерация";
+		presenceData.smallImageText = "Управляет сайтом";
+		presenceData.smallImageKey = "reading";
 
-        if (TeamName) data.state = TeamName;
-      } else if (Routes[2] === "edit") {
-        data.details = "Команда перевода";
-        data.smallImageText = "Редактирует переводчика";
-        data.smallImageKey = "writing";
+		if (!Routes[1]) presenceData.state = "Модерация глав";
+		else if (Routes[1] === "manga") {
+			if (Routes[2] === "rejected") presenceData.state = "Отклоненные ранобэ";
+			else presenceData.state = "Модерация ранобэ";
+		} else if (Routes[1] === "manga-edit")
+			presenceData.state = "Изменения ранобэ";
+		else if (Routes[1] === "author") presenceData.state = "Новые Авторы";
+		else if (Routes[1] === "publisher")
+			presenceData.state = "Новые Издательства";
+		else if (Routes[1] === "comments")
+			presenceData.state = "Жалобы на комментарии";
+		else if (Routes[1] === "forum-posts")
+			presenceData.state = "Жалобы на форуме";
+		else if (Routes[1] === "comments-list") {
+			if (Routes[2] === "all") presenceData.state = "Список комментариев";
+			else if (Routes[2] === "sticky")
+				presenceData.state = "Закрепленные комментарии";
+		} else if (Routes[1] === "ban-list") presenceData.state = "Баны";
+		else if (Routes[1] === "other") presenceData.state = "Другое";
+	} else if (Routes[0] === "user") {
+		// User page
+		presenceData.smallImageText = "Смотрит профиль пользователя";
+		presenceData.smallImageKey = "reading";
 
-        switch (Queries.section) {
-          case "info":
-            data.state = "Редактирует информацию команды";
-            break;
-          case "users":
-            data.state = "Редактирует участников команды";
-            break;
-        }
-      }
-    }
-  } else if (Routes[0] === "moderation") {
-    // Moderation page
+		const username = document.querySelector(".profile-user__username span");
 
-    data.details = "Модерация";
-    data.smallImageText = "Управляет сайтом";
-    data.smallImageKey = "reading";
+		UserName = username && username.textContent;
 
-    if (!Routes[1]) data.state = "Модерация глав";
-    else if (Routes[1] === "manga") {
-      if (Routes[2] === "rejected") data.state = "Отклоненные ранобэ";
-      else data.state = "Модерация ранобэ";
-    } else if (Routes[1] === "manga-edit") data.state = "Изменения ранобэ";
-    else if (Routes[1] === "author") data.state = "Новые Авторы";
-    else if (Routes[1] === "publisher") data.state = "Новые Издательства";
-    else if (Routes[1] === "comments") data.state = "Жалобы на комментарии";
-    else if (Routes[1] === "forum-posts") data.state = "Жалобы на форуме";
-    else if (Routes[1] === "comments-list") {
-      if (Routes[2] === "all") data.state = "Список комментариев";
-      else if (Routes[2] === "sticky") data.state = "Закрепленные комментарии";
-    } else if (Routes[1] === "ban-list") data.state = "Баны";
-    else if (Routes[1] === "other") data.state = "Другое";
-  } else if (Routes[0] === "user") {
-    // User page
-    data.smallImageText = "Смотрит профиль пользователя";
-    data.smallImageKey = "reading";
+		if (UserName) presenceData.details = `Профиль:${UserName}`;
 
-    const username = document.querySelector(".profile-user__username span");
+		if (Routes[1] === "content") {
+			presenceData.details = "Мои добавления";
+			presenceData.smallImageText = "Пишет";
+			presenceData.smallImageKey = "writing";
+			presenceData.startTimestamp = 0;
 
-    UserName = username && username.textContent;
+			if (!Routes[2]) presenceData.state = "Добавленные тайтлы";
+			else if (Routes[2] === "moderation")
+				presenceData.state = "Тайтлы на модерации";
+			else if (Routes[2] === "rejected")
+				presenceData.state = "Тайтлы не прошедшие модерацию";
+			else if (Routes[2] === "chapters")
+				presenceData.state = "Главы на модерации";
+		} else if (Routes[1] === "edit") {
+			presenceData.details = "Мои настройки";
+			presenceData.smallImageText = "Настраивает";
+			presenceData.smallImageKey = "writing";
+			presenceData.startTimestamp = 0;
 
-    if (UserName) data.details = `Профиль:${UserName}`;
+			switch (Queries.section) {
+				case "info":
+					presenceData.state = "Информация";
+					break;
+				case "site-settings":
+					presenceData.state = "Настройки сайта";
+					break;
+				case "notifications":
+					presenceData.state = "Уведомления";
+					break;
+				case "password":
+					presenceData.state = "Безопасность";
+					break;
+			}
+		} else if (!Routes[2]) {
+			// Main user page
+			const size = document.querySelector(
+					".bookmark-menu .menu__item.is-active .bookmark-menu__label"
+				),
+				title = document.querySelector(
+					".bookmark-menu .menu__item.is-active .bookmark-menu__name"
+				);
 
-    if (Routes[1] === "content") {
-      data.details = "Мои добавления";
-      data.smallImageText = "Пишет";
-      data.smallImageKey = "writing";
-      data.startTimestamp = 0;
+			BookmarkSize = size && size.textContent;
+			BookmarkType =
+				title &&
+				title.textContent.charAt(0).toUpperCase() + title.textContent.slice(1);
 
-      if (!Routes[2]) data.state = "Добавленные тайтлы";
-      else if (Routes[2] === "moderation") data.state = "Тайтлы на модерации";
-      else if (Routes[2] === "rejected")
-        data.state = "Тайтлы не прошедшие модерацию";
-      else if (Routes[2] === "chapters") data.state = "Главы на модерации";
-    } else if (Routes[1] === "edit") {
-      data.details = "Мои настройки";
-      data.smallImageText = "Настраивает";
-      data.smallImageKey = "writing";
-      data.startTimestamp = 0;
+			presenceData.details = `Закладки ${UserName}`;
+			presenceData.state = `${BookmarkType.trim()}: ${BookmarkSize}`;
+			presenceData.smallImageText = "Читает";
+			presenceData.smallImageKey = "reading";
+			presenceData.startTimestamp = 0;
+		} else if (Routes[2] === "comment") {
+			presenceData.details = `Профиль: ${UserName}`;
+			let commentType;
 
-      switch (Queries.section) {
-        case "info":
-          data.state = "Информация";
-          break;
-        case "site-settings":
-          data.state = "Настройки сайта";
-          break;
-        case "notifications":
-          data.state = "Уведомления";
-          break;
-        case "password":
-          data.state = "Безопасность";
-          break;
-      }
-    } else {
-      if (!Routes[2]) {
-        // Main user page
-        const size = document.querySelector(
-            ".bookmark-menu .menu__item.is-active .bookmark-menu__label"
-          ),
-          title = document.querySelector(
-            ".bookmark-menu .menu__item.is-active .bookmark-menu__name"
-          );
+			if (Queries.comment_type === "manga")
+				commentType = "Комментарии к ранобэ";
+			else if (Queries.comment_type === "chapter")
+				commentType = "Комментарии к главам";
+			else if (Queries.comment_type === "post")
+				commentType = "Комментарии к новостям";
+			else commentType = "Все комментарии";
 
-        BookmarkSize = size && size.textContent;
-        BookmarkType =
-          title &&
-          title.textContent.charAt(0).toUpperCase() +
-            title.textContent.slice(1);
+			presenceData.state = commentType;
+		} else if (Routes[2] === "following") {
+			presenceData.details = `Профиль: ${UserName}`;
+			presenceData.state = "Список друзей";
+		} else if (Routes[2] === "mutual-friends") {
+			presenceData.details = `Профиль: ${UserName}`;
+			presenceData.state = "Общие друзья";
+		} else if (Routes[2] === "ignore") {
+			presenceData.details = `Профиль: ${UserName}`;
+			presenceData.state = "Игнор-лист";
+		} else if (Routes[2] === "ban") {
+			presenceData.details = "Мой профиль";
+			presenceData.state = "История банов";
+		}
+	} else if (Routes[0] === "manga") {
+		// Manga page
 
-        data.details = `Закладки ${UserName}`;
-        data.state = `${BookmarkType.trim()}: ${BookmarkSize}`;
-        data.smallImageText = "Читает";
-        data.smallImageKey = "reading";
-        data.startTimestamp = 0;
-      } else if (Routes[2] === "comment") {
-        data.details = `Профиль: ${UserName}`;
-        let commentType;
+		if (Routes[1] === "create") {
+			// create new manga
+			presenceData.details = "Добавляет ранобэ";
+			presenceData.smallImageText = "Пишет";
+			presenceData.smallImageKey = "writing";
 
-        if (Queries.comment_type === "manga")
-          commentType = "Комментарии к ранобэ";
-        else if (Queries.comment_type === "chapter")
-          commentType = "Комментарии к главам";
-        else if (Queries.comment_type === "post")
-          commentType = "Комментарии к новостям";
-        else commentType = "Все комментарии";
+			const title = <HTMLInputElement>document.getElementById("rus_name");
 
-        data.state = commentType;
-      } else if (Routes[2] === "following") {
-        data.details = `Профиль: ${UserName}`;
-        data.state = "Список друзей";
-      } else if (Routes[2] === "mutual-friends") {
-        data.details = `Профиль: ${UserName}`;
-        data.state = "Общие друзья";
-      } else if (Routes[2] === "ignore") {
-        data.details = `Профиль: ${UserName}`;
-        data.state = "Игнор-лист";
-      } else if (Routes[2] === "ban") {
-        data.details = "Мой профиль";
-        data.state = "История банов";
-      }
-    }
-  } else if (Routes[0] === "manga") {
-    // Manga page
+			if (title.value.length > 1) presenceData.state = title.value;
+			else presenceData.state = "Имя ранобэ не задано";
+		} else if (Routes[2] === "edit") {
+			// edit
+			presenceData.smallImageText = "Редактирует";
+			presenceData.smallImageKey = "writing";
 
-    if (Routes[1] === "create") {
-      // create new manga
-      data.details = "Добавляет ранобэ";
-      data.smallImageText = "Пишет";
-      data.smallImageKey = "writing";
+			const title = document.querySelector(".section__header .breadcrumb a");
 
-      const title = <HTMLInputElement>document.getElementById("rus_name");
+			presenceData.details = title.textContent;
 
-      if (title.value.length > 1) data.state = title.value;
-      else data.state = "Имя ранобэ не задано";
-    } else {
-      if (Routes[2] === "edit") {
-        // edit
-        data.smallImageText = "Редактирует";
-        data.smallImageKey = "writing";
+			switch (Queries.section) {
+				case "media-edit":
+					presenceData.state = "Редактирование";
+					break;
+				case "changes":
+					presenceData.state = "Список изменений";
+					break;
+				case "related-items":
+					presenceData.state = "Связанные тайтлы";
+					break;
+			}
+		} else if (Routes[2] === "bulk-create") {
+			// bulk create
+			presenceData.details = "Добавляет главы";
+			presenceData.smallImageText = "Добавляет";
+			presenceData.smallImageKey = "uploading";
 
-        const title = document.querySelector(".section__header .breadcrumb a");
+			const title = document.querySelector(".section__header .breadcrumb a");
 
-        data.details = title.textContent;
+			presenceData.state = `Ранобэ: ${title.textContent}`;
+		} else if (Routes[2] === "add-chapter") {
+			// add chapter
+			presenceData.details = "Добавляет главу";
+			presenceData.smallImageText = "Добавляет";
+			presenceData.smallImageKey = "uploading";
 
-        switch (Queries.section) {
-          case "media-edit":
-            data.state = "Редактирование";
-            break;
-          case "changes":
-            data.state = "Список изменений";
-            break;
-          case "related-items":
-            data.state = "Связанные тайтлы";
-            break;
-        }
-      } else if (Routes[2] === "bulk-create") {
-        // bulk create
-        data.details = "Добавляет главы";
-        data.smallImageText = "Добавляет";
-        data.smallImageKey = "uploading";
+			const title = document.querySelector(".section__header .breadcrumb a");
 
-        const title = document.querySelector(".section__header .breadcrumb a");
+			presenceData.state = `Ранобэ: ${title.textContent}`;
+		} else {
+			presenceData.details = "Редактирует главу";
+			presenceData.smallImageText = "Пишет";
+			presenceData.smallImageKey = "writing";
 
-        data.state = `Ранобэ: ${title.textContent}`;
-      } else if (Routes[2] === "add-chapter") {
-        // add chapter
-        data.details = "Добавляет главу";
-        data.smallImageText = "Добавляет";
-        data.smallImageKey = "uploading";
+			const title = document.querySelector(".section__header .breadcrumb a");
 
-        const title = document.querySelector(".section__header .breadcrumb a");
+			presenceData.state = `Ранобэ: ${title.textContent}`;
+		}
+	} else if (document.querySelector(".reader")) {
+		presenceData.details = "Читает ранобэ";
+		presenceData.state = document.title.split(" ").slice(2, -4).join(" ");
+		presenceData.smallImageText = "Читает";
+		presenceData.smallImageKey = "reading";
+		presenceData.startTimestamp = getTimeStamp();
+	} else {
+		const { title } = document;
 
-        data.state = `Ранобэ: ${title.textContent}`;
-      } else {
-        data.details = "Редактирует главу";
-        data.smallImageText = "Пишет";
-        data.smallImageKey = "writing";
+		presenceData.details = "Смотрит ранобэ";
+		presenceData.state = title.split("/")[0].split(" ").slice(1).join(" ");
+		presenceData.smallImageText = "Читает";
+		presenceData.smallImageKey = "reading";
+	}
 
-        const title = document.querySelector(".section__header .breadcrumb a");
-
-        data.state = `Ранобэ: ${title.textContent}`;
-      }
-    }
-  } else {
-    // Others
-    const ReaderMode = document.querySelector(".reader");
-
-    if (ReaderMode) {
-      const titleArray: Array<string> = document.title.split(" "),
-        mangaName = titleArray.slice(2, -4).join(" ");
-
-      data.details = "Читает ранобэ";
-      data.state = mangaName;
-      data.smallImageText = "Читает";
-      data.smallImageKey = "reading";
-      data.startTimestamp = getTimeStamp();
-    } else {
-      const { title } = document,
-        mangaName: string = title.split("/")[0].split(" ").slice(1).join(" ");
-
-      data.details = "Смотрит ранобэ";
-      data.state = mangaName;
-      data.smallImageText = "Читает";
-      data.smallImageKey = "reading";
-    }
-  }
-
-  presence.setActivity(data, true);
+	presence.setActivity(presenceData, true);
 });
