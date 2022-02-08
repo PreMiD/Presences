@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "Livixx",
+    "id": "502948927809781763"
+  },
+  "service": "lolz.guru",
+  "description": {
+    "en": "LZT (lolzteam) - a forum about games, ways to earn and giveaways",
+    "ru": "LZT (lolzteam, лолзтим) - форум об играх, способы заработка и раздачи"
+  },
+  "url": [
+    "lolz.guru"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/du58qsy.jpg",
+  "thumbnail": "https://i.imgur.com/7yywlIW.jpg",
+  "color": "#23a86d",
+  "category": "other",
+  "tags": [
+    "Forum",
+    "LZT",
+    "Games",
+    "Giveaways"
+  ],
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    }
+  ]
+}
