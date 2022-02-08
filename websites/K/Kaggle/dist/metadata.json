@@ -1,0 +1,43 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.6",
+    "author": {
+        "name": "sryo",
+        "id": "467693206226862080"
+    },
+    "service": "Kaggle",
+    "description": {
+        "en": "Kaggle, a subsidiary of Google LLC, is an online community of data scientists and machine learning practitioners"
+    },
+    "url": "www.kaggle.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/qJ7v097.png",
+    "thumbnail": "https://i.imgur.com/eSW27Tu.png",
+    "color": "#20beff",
+    "category": "other",
+    "tags": [
+        "data-scientist",
+        "machine-learning",
+        "learning",
+        "competition"
+    ],
+    "settings": [
+		{
+			"id": "time",
+			"title": "Show Timestamps",
+			"icon": "fas fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"id": "images",
+			"title": "Show Images",
+			"icon": "fas fa-images",
+			"value": true
+		}
+	]
+}
