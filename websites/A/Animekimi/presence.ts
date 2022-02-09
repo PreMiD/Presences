@@ -45,135 +45,136 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp
 		};
 	let movie, episode;
-	switch (true) {
-		case pathArray[3].includes("?s="):
-			presenceData.details = "กำลังค้นหา";
-			presenceData.state = (
-				document.querySelector(".content.rigth.csearch > header > h1")
-					?.textContent ?? "ไม่พบสิ่งที่คุณกำลังค้นหา"
-			)
-				.split("ผลการค้นหา:")
-				.pop();
-			presenceData.smallImageKey = "search";
-			break;
-		case pathArray[3] === "genre":
-			presenceData.details = "ประเภท";
-			presenceData.state = title;
-			break;
-		case pathArray[3] === "catalog":
-			presenceData.details = "หมวดหมู่";
-			presenceData.state = title;
-			break;
-		case pathArray[3] === "category":
-			presenceData.details = "หมวดหมู่";
-			presenceData.state = title;
-			break;
-		case pathArray[3] === "tag":
-			presenceData.details = "รวมอนิเมะ";
-			presenceData.state = title.split("รวมอนิเมะ").pop();
-			break;
-		case pathArray[3] === "release":
-			presenceData.details = "ปี";
-			presenceData.state = title;
-			break;
-		case pathArray[3] === "movies":
-			presenceData.details = "เดอะมูฟวี่";
-			presenceData.state = titlemovies;
-			if (titlemovies === "มูฟวี่") {
-				const movieinfo = titlemovies.split(/(เดอะ)?(มูฟวี่)/);
-				movie = movieinfo.pop();
-				if (movie === "ซับไทย")
-					movie = movie.replace((Sub = "ซับไทย"), "").trim();
-				else if (movie === "พากย์ไทย")
-					movie = movie.replace((Sub = "พากย์ไทย"), "").trim();
-				movie = `เดอะมูฟวี่ ${movie} ${Sub}`;
-				if (privacy) presenceData.details = movie;
-				else if (!privacy) {
-					presenceData.state = movie;
-					[presenceData.details] = movieinfo;
-				}
-			}
-			presenceData.smallImageKey = video.paused ? "pause" : "playing";
-			presenceData.smallImageText = video.paused
-				? (await strings).pause
-				: (await strings).play;
-			if (!video.paused) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					Math.floor(video.current),
-					Math.floor(video.duration)
-				);
-			}
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "ดูเดอะมูฟวี่",
-						url: document.location.href.replace(/#\d+/, "")
+	if (pathArray[3].includes("?s=")) {
+		presenceData.details = "กำลังค้นหา";
+		presenceData.state = (
+			document.querySelector(".content.rigth.csearch > header > h1")
+				?.textContent ?? "ไม่พบสิ่งที่คุณกำลังค้นหา"
+		)
+			.split("ผลการค้นหา:")
+			.pop();
+		presenceData.smallImageKey = "search";
+	} else {
+		switch (pathArray[3]) {
+			case "genre":
+				presenceData.details = "ประเภท";
+				presenceData.state = title;
+				break;
+			case "catalog":
+				presenceData.details = "หมวดหมู่";
+				presenceData.state = title;
+				break;
+			case "category":
+				presenceData.details = "หมวดหมู่";
+				presenceData.state = title;
+				break;
+			case "tag":
+				presenceData.details = "รวมอนิเมะ";
+				presenceData.state = title.split("รวมอนิเมะ").pop();
+				break;
+			case "release":
+				presenceData.details = "ปี";
+				presenceData.state = title;
+				break;
+			case "movies":
+				presenceData.details = "เดอะมูฟวี่";
+				presenceData.state = titlemovies;
+				if (titlemovies === "มูฟวี่") {
+					const movieinfo = titlemovies.split(/(เดอะ)?(มูฟวี่)/);
+					movie = movieinfo.pop();
+					if (movie === "ซับไทย")
+						movie = movie.replace((Sub = "ซับไทย"), "").trim();
+					else if (movie === "พากย์ไทย")
+						movie = movie.replace((Sub = "พากย์ไทย"), "").trim();
+					movie = `เดอะมูฟวี่ ${movie} ${Sub}`;
+					if (privacy) presenceData.details = movie;
+					else if (!privacy) {
+						presenceData.state = movie;
+						[presenceData.details] = movieinfo;
 					}
-				];
-			} else {
-				delete presenceData.startTimestamp;
-				delete presenceData.endTimestamp;
-			}
-			break;
-		case pathArray[3] === "anime":
-			if (path) {
-				const ep =
-					document.querySelector(
-						"#single > div.content > div.sheader > div.data > h1"
-					)?.textContent ?? "ไม่ทราบชื่อตอน";
-				presenceData.startTimestamp = browsingTimestamp;
-				presenceData.details = "เลือกตอน";
-				presenceData.state = `${ep.split("ตอนที่")[0]}`;
-			} else {
-				delete presenceData.startTimestamp;
-				delete presenceData.endTimestamp;
-			}
-			break;
-		case pathArray[3] === "ep":
-			if (playvdo.includes("ตอนที่")) {
-				const info = playvdo.split("ตอนที่");
-				episode = info.pop();
-				if (episode === "ซับไทย")
-					episode = episode.replace((Sub = "ซับไทย"), "").trim();
-				else if (episode === "พากย์ไทย")
-					episode = episode.replace((Sub = "พากย์ไทย"), "").trim();
-				episode = `ตอนที่ ${episode}`;
-				if (privacy) presenceData.details = episode;
-				else if (!privacy) {
-					presenceData.state = episode;
-					[presenceData.details] = info;
 				}
-			} else {
-				let info;
-				if (playvdo === "ซับไทย") info = playvdo.replace("ซับไทย", "").trim();
-				else if (playvdo === "พากย์ไทย")
-					info = playvdo.replace("พากย์ไทย", "").trim();
-				episode = "กำลังดู";
-				presenceData.state = info;
-				presenceData.details = episode;
-			}
-			presenceData.smallImageKey = video.paused ? "pause" : "playing";
-			presenceData.smallImageText = video.paused
-				? (await strings).pause
-				: (await strings).play;
-			if (!video.paused) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					Math.floor(video.current),
-					Math.floor(video.duration)
-				);
-			}
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "ดูอนิเมะ",
-						url: document.location.href.replace(/#\d+/, "")
+				presenceData.smallImageKey = video.paused ? "pause" : "playing";
+				presenceData.smallImageText = video.paused
+					? (await strings).pause
+					: (await strings).play;
+				if (!video.paused) {
+					[, presenceData.endTimestamp] = presence.getTimestamps(
+						Math.floor(video.current),
+						Math.floor(video.duration)
+					);
+				}
+				if (buttons) {
+					presenceData.buttons = [
+						{
+							label: "ดูเดอะมูฟวี่",
+							url: document.location.href.replace(/#\d+/, "")
+						}
+					];
+				} else {
+					delete presenceData.startTimestamp;
+					delete presenceData.endTimestamp;
+				}
+				break;
+			case "anime":
+				if (path) {
+					const ep =
+						document.querySelector(
+							"#single > div.content > div.sheader > div.data > h1"
+						)?.textContent ?? "ไม่ทราบชื่อตอน";
+					presenceData.startTimestamp = browsingTimestamp;
+					presenceData.details = "เลือกตอน";
+					presenceData.state = `${ep.split("ตอนที่")[0]}`;
+				} else {
+					delete presenceData.startTimestamp;
+					delete presenceData.endTimestamp;
+				}
+				break;
+			case "ep":
+				if (playvdo.includes("ตอนที่")) {
+					const info = playvdo.split("ตอนที่");
+					episode = info.pop();
+					if (episode === "ซับไทย")
+						episode = episode.replace((Sub = "ซับไทย"), "").trim();
+					else if (episode === "พากย์ไทย")
+						episode = episode.replace((Sub = "พากย์ไทย"), "").trim();
+					episode = `ตอนที่ ${episode}`;
+					if (privacy) presenceData.details = episode;
+					else if (!privacy) {
+						presenceData.state = episode;
+						[presenceData.details] = info;
 					}
-				];
-			}
-			break;
-		default:
-			presenceData.details = "อนิเมะอัพเดตล่าสุด";
-			break;
+				} else {
+					let info;
+					if (playvdo === "ซับไทย") info = playvdo.replace("ซับไทย", "").trim();
+					else if (playvdo === "พากย์ไทย")
+						info = playvdo.replace("พากย์ไทย", "").trim();
+					episode = "กำลังดู";
+					presenceData.state = info;
+					presenceData.details = episode;
+				}
+				presenceData.smallImageKey = video.paused ? "pause" : "playing";
+				presenceData.smallImageText = video.paused
+					? (await strings).pause
+					: (await strings).play;
+				if (!video.paused) {
+					[, presenceData.endTimestamp] = presence.getTimestamps(
+						Math.floor(video.current),
+						Math.floor(video.duration)
+					);
+				}
+				if (buttons) {
+					presenceData.buttons = [
+						{
+							label: "ดูอนิเมะ",
+							url: document.location.href.replace(/#\d+/, "")
+						}
+					];
+				}
+				break;
+			default:
+				presenceData.details = "อนิเมะอัพเดตล่าสุด";
+				break;
+		}
 	}
 	if (!time) {
 		delete presenceData.startTimestamp;
