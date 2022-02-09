@@ -24,17 +24,16 @@ function clarifyString(str: string) {
 }
 
 function getImageURLByAlt(alt: string) {
-	const imgs = document.getElementsByTagName("img");
-
-	for (let i = 0; i < imgs.length; i++)
-		if (imgs[i].alt === alt) return imgs[i].src;
+	return Array.from(document.getElementsByTagName("img")).find(
+		img => img.alt === alt
+	)?.src;
 }
 
 function filterIterable<T extends Element>(
 	itr: HTMLCollectionOf<T>,
 	fnc: (val: T, ind?: number) => boolean
 ) {
-	for (let i = 0; i < itr.length; i++) if (fnc(itr[i], i)) return itr[i];
+	return Array.from(itr).find((element, ind) => fnc(element, ind));
 }
 
 presence.on("UpdateData", async () => {
@@ -192,8 +191,7 @@ presence.on("UpdateData", async () => {
 									}`;
 									presenceData.largeImageKey = getImageURLByAlt(title);
 									presenceData.smallImageKey = "final";
-									// eslint-disable-next-line no-undefined
-									presenceData.startTimestamp = undefined;
+									delete presenceData.startTimestamp;
 									presenceData.buttons = [
 										{ label: "Watch trailer", url: window.location.href }
 									];
