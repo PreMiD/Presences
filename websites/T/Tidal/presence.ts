@@ -20,7 +20,12 @@ presence.on("UpdateData", async () => {
 	if (!document.querySelector("#footerPlayer"))
 		return presence.setActivity({ largeImageKey: "logo" });
 
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
+	const [newLang, timestamps, cover, buttons] = await Promise.all([
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("timestamps"),
+		presence.getSetting<boolean>("cover"),
+		presence.getSetting<boolean>("buttons")
+	]);
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -56,6 +61,13 @@ presence.on("UpdateData", async () => {
 		'div[data-test="left-column-footer-player"] > div:nth-child(2) > div:nth-child(2) > span > span > span'
 	).textContent;
 
+	if (cover) {
+		presenceData.largeImageKey =
+			navigator.mediaSession.metadata.artwork[0].src.replace(
+				"160x160",
+				"640x640"
+			);
+	}
 	if (currentTimeSec > 0 || !paused) {
 		presenceData.endTimestamp =
 			Date.now() +
@@ -81,13 +93,14 @@ presence.on("UpdateData", async () => {
 
 		delete presenceData.endTimestamp;
 	}
-
-	presenceData.buttons = [
-		{
-			label: (await strings).viewSong,
-			url: songTitle.href
-		}
-	];
-
+	if (buttons) {
+		presenceData.buttons = [
+			{
+				label: (await strings).viewSong,
+				url: songTitle.href
+			}
+		];
+	}
+	if (!timestamps) delete presenceData.endTimestamp;
 	presence.setActivity(presenceData);
 });

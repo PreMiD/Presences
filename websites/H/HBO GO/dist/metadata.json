@@ -21,9 +21,11 @@
 		"hbogo.pl",
 		"hbogo.cz",
 		"hbogo.sk",
-		"www.hbogoasia.my"
+		"www.hbogoasia.my",
+		"www.hbogoasia.id",
+		"www.hbogoasia.ph"
 	],
-	"version": "2.2.18",
+	"version": "2.2.19",
 	"logo": "https://i.imgur.com/TTHQtBH.png",
 	"thumbnail": "https://i.imgur.com/vvAp3GI.png",
 	"color": "#011921",
