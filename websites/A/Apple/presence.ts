@@ -438,15 +438,31 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Shop";
 			presenceData.state = strings.shopRefurbished;
 		} else if (urlpath[num] === "bag") {
-			const summary = document.querySelector(
-				"div.rs-summary-value"
-			)?.textContent;
+			let summary = document.querySelector("div.rs-summary-value")?.textContent;
+
+			const perMonth = document.querySelector(
+				"div.rs-summary-value span.nowrap span.visuallyhidden"
+			);
+
+			if (!summary) summary = "$0";
+			else {
+				summary = summary.replace(
+					document.querySelector(
+						"div.rs-summary-value span.nowrap span[aria-hidden='true']"
+					)?.textContent ?? "/mo.",
+					""
+				);
+
+				if (perMonth) {
+					summary = summary.replace(
+						perMonth.textContent,
+						` ${perMonth.textContent}`
+					);
+				}
+			}
 
 			presenceData.details = strings.shopBag;
-			presenceData.state = strings.shopBagSummary.replace(
-				"{0}",
-				!summary ? "$0" : summary
-			);
+			presenceData.state = strings.shopBagSummary.replace("{0}", summary);
 		} else {
 			presenceData.details = "Shop";
 			presenceData.state = strings.other;
