@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/") presenceData.details = "Browsing Homepage";
 	else if (pathname === "/list") presenceData.details = "Viewing Followed List";
 	else if (pathname.startsWith("/comic")) {
-		if (!document.querySelector(".images-reader-container")) {
+		if (document.querySelector(".images-reader-container")) {
 			const infoReader = document.querySelector(".info-reader-container"),
 				imageReader = document.querySelector(".images-reader-container");
 			if (infoReader) {
