@@ -9,10 +9,7 @@
     "en": "LZT (lolzteam) - a forum about games, ways to earn and giveaways",
     "ru": "LZT (lolzteam, лолзтим) - форум об играх, способы заработка и раздачи"
   },
-  "url": [
-    "lolz.guru",
-    "www.lolz.guru"
-  ],
+  "url": "lolz.guru",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/du58qsy.jpg",
   "thumbnail": "https://i.imgur.com/7yywlIW.jpg",
