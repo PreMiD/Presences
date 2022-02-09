@@ -18,13 +18,17 @@ presence.on("UpdateData", async () => {
 			const destination = location.pathname.split("/")[2].split("-")[0];
 			// decodes the url to display the accents correctly
 			const decodedDestination = decodeURI(destination);
-			presenceData.details = "Search hosting in :"
+			presenceData.details = "Search hosting in :";
 			presenceData.state = `${decodedDestination}`;
 		}
 		if (document.location.pathname.includes("/experiences")) {
-			presenceData.details = "Search an experience"
+			presenceData.details = "Search an experience";
 		}
-	} else {
+	} else if (document.location.pathname.includes("/experiences/")) {
+    const experience = document.querySelector("div._b8stb0 > span > h1._fecoyn4")?.textContent;
+    presenceData.details = "Viewing experience : ";
+    presenceData.state = `${experience}`
+  } else {
 		presenceData.details = "Viewing homepage"
 	}
 

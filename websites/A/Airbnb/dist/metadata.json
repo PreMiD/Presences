@@ -11,13 +11,8 @@
 		"de": "Airbnb ist ein kostenpflichtiger gemeinschaftlicher Plattformdienst zur Vermietung von Unterkünften von Privatpersonen, Hotelunternehmen und Investoren in Mietimmobilien.",
 		"ru": "Airbnb - это платное сообщество-платформа для сдачи жилья в аренду от частных лиц, гостиничных предприятий и инвесторов в арендную недвижимость."
 	},
-	"url": [
-		"www.airbnb.com",
-		"www.airbnb.fr",
-		"www.airbnb.de",
-		"www.airbnb.ru",
-		"www.airbnb.jp"
-	],
+	"url": "www.airbnb.com",
+  "regExp": "([a-z0-9-]+[.])*airbnb([.][a-z]+)",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/kZWZ7Nh.png",
 	"thumbnail": "https://i.imgur.com/Z3hGFOx.png",
