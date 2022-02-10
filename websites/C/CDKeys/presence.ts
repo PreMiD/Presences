@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "940892975502856232"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let search: HTMLInputElement, title: HTMLElement, title2: HTMLElement;
+let search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -15,9 +15,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Searching for:";
 		presenceData.state = search.value;
 		presenceData.smallImageKey = "search";
-	} else if (page === "/") {
-		presenceData.details = "Homepage";
-	} else if (
+	} else if (page === "/") presenceData.details = "Homepage";
+	else if (
 		document.querySelector("#maincontent > div.page-title-wrapper > h1 > span")
 	) {
 		presenceData.details = document.querySelector(
