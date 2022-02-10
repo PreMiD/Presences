@@ -16,9 +16,9 @@ presence.on("UpdateData", async () => {
 			"#video_player > div.vjs-control-bar > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display"
 		);
 	if (video && videoDur) {
-		const titles = document.querySelector(
+		const titles = document.querySelector<HTMLMetaElement>(
 				'meta[property="og:title"]'
-			) as HTMLMetaElement,
+			),
 			videoDuration = presence.timestampFromFormat(
 				document.querySelector(
 					"#video_player > div.vjs-control-bar > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display"
