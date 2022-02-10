@@ -21,6 +21,12 @@ presence.on("UpdateData", async () => {
 		title = document.querySelector("title").textContent.trim();
 		presenceData.details = "Reading:";
 		presenceData.state = title;
+		presenceData.buttons = [
+			{
+				label: "Read along",
+				url: document.URL
+			}
+		]
 	} else if (document.location.pathname.includes("/stats")) {
 		presenceData.smallImageKey = "read";
 		presenceData.details = "Viewing Statistics";
