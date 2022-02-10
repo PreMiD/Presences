@@ -7,13 +7,10 @@
 	"service": "HVNC",
 	"description": {
 		"en": "HVNC is a free, high-quality, ad-free, uncensored English R18 Manga reading site.",
-		"pt_BR": "HVNC é um site de leitura de mangá em inglês R18 gratuito, de alta qualidade, sem anúncios e sem censura.",
-		"nl": "HVNC is een gratis, hoogwaardige, advertentievrije, ongecensureerde Engelse R18 Manga-leessite.",
 		"vi": "HVNC là trang đọc truyện Manga R18 tiếng Anh miễn phí, chất lượng cao, không có quảng cáo, không bị kiểm duyệt."
 	},
 	"url": [
 		"hentai.fakku.cc",
-		"manga.fakku.cc"
 	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/VlB7zdS.png",
