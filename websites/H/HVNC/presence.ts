@@ -33,9 +33,12 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/upload")) {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Adding Archives...";
-	} else if (document.location.pathname.includes("/categories/")) {
+	} else if (document.location.pathname.startsWith("/config/categories/")) {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Editing Category...";
+	} else if (document.location.pathname.includes("/config")) {
+		presenceData.smallImageKey = "sett";
+		presenceData.details = "Configuring...";
 	} else if (document.location.pathname.includes("/batch")) {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Running Batch Operations...";
