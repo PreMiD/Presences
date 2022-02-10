@@ -5,7 +5,6 @@ const presence = new Presence({
 let title;
 const viewString = "Viewing ",
 	torrentString = "'s torrents";
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
