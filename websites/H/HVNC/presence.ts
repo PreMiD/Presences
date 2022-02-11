@@ -3,6 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title;
+let edit;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -11,20 +12,31 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (new URLSearchParams(window.location.search).has("q")) {
+		const searchstr = document.querySelector("input").value;
+		const page = document
+			.querySelector("a[class='paginate_button current']")
+			.textContent.trim();
 		presenceData.details = "Searching For:";
-		presenceData.state = document.querySelector("input").value;
+		presenceData.state = searchstr + " - Page " + page;
 		presenceData.smallImageKey = "search";
-	} else if (document.location.pathname === "/")
-		presenceData.details = "Viewing home page";
-	else if (document.location.pathname.includes("/reader")) {
+	} else if (document.location.pathname === "/") {
+		const page = document
+			.querySelector("a[class='paginate_button current']")
+			.textContent.trim();
+		presenceData.details = "Viewing Homepage";
+		presenceData.state = "Page " + page;
+	} else if (document.location.pathname.includes("/reader")) {
 		presenceData.smallImageKey = "read";
 		title = document.querySelector("title").textContent.trim();
+		const page = document
+			.querySelector("span[class='current-page']")
+			.textContent.trim();
 		presenceData.details = "Reading:";
-		presenceData.state = title;
+		presenceData.state = title + " - Page " + page;
 		presenceData.buttons = [
 			{
 				label: "Read along",
-				url: document.URL
+				url: document.URL + "&p=" + page
 			}
 		];
 	} else if (document.location.pathname.includes("/stats")) {
@@ -50,8 +62,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Running Batch Operations...";
 	} else if (document.location.pathname.startsWith("/edit")) {
 		presenceData.smallImageKey = "sett";
-		h2 = document.querySelector("h2").textContent.trim();
-		presenceData.details = h2;
+		edit = document.querySelector("h2").textContent.trim();
+		presenceData.details = edit;
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
