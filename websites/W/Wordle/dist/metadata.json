@@ -8,7 +8,10 @@
 	"description": {
 		"en": "Guess the hidden word in 6 tries. A new puzzle is available each day."
 	},
-	"url": "www.nytimes.com",
+	"url": [
+		"www.nytimes.com",
+		"www.powerlanguage.co.uk"
+	],
 	"version": "1.1.0",
 	"logo": "https://i.imgur.com/N19NFSF.png",
 	"thumbnail": "https://i.imgur.com/2nENqtm.png",
