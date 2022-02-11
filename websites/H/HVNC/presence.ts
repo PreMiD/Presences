@@ -3,7 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title;
-let edit;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -61,8 +60,8 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Running Batch Operations...";
 	} else if (document.location.pathname.startsWith("/edit")) {
+		const edit = document.querySelector("h2").textContent.trim();
 		presenceData.smallImageKey = "sett";
-		edit = document.querySelector("h2").textContent.trim();
 		presenceData.details = edit;
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
