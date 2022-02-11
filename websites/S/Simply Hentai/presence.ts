@@ -1,44 +1,41 @@
 const presence = new Presence({
-  clientId: "608043966285348944"
+	clientId: "608043966285348944"
 });
 let lastPlaybackState = null,
-  reading,
-  browsingStamp = Math.floor(Date.now() / 1000);
+	reading,
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState !== reading) {
-  lastPlaybackState = reading;
-  browsingStamp = Math.floor(Date.now() / 1000);
+	lastPlaybackState = reading;
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {};
+	const presenceData: PresenceData = {};
 
-  reading =
-    document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
+	reading =
+		document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
 
-  if (reading) {
-    const [a, b] = document.querySelectorAll<HTMLElement>(
-        ".margin-bottom-12 h1 a"
-      ),
-      page = (
-        document.querySelector(".page-jump.text-center") as HTMLInputElement
-      ).value;
+	if (reading) {
+		const [a, b] = document.querySelectorAll<HTMLElement>(
+			".margin-bottom-12 h1 a"
+		);
 
-    presenceData.details = a.innerText;
-    presenceData.state = `${b.innerText} [Page: ${page}]`;
-    presenceData.largeImageKey = "lg";
-    presenceData.startTimestamp = browsingStamp;
-  } else {
-    const presenceData: PresenceData = {
-      largeImageKey: "lg"
-    };
+		presenceData.details = a.textContent;
+		presenceData.state = `${b.textContent} [Page: ${
+			document.querySelector<HTMLInputElement>(".page-jump.text-center").value
+		}]`;
+		presenceData.largeImageKey = "lg";
+		presenceData.startTimestamp = browsingTimestamp;
+	} else {
+		const presenceData: PresenceData = {
+			largeImageKey: "lg"
+		};
 
-    presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
-  }
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = browsingTimestamp;
+	}
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

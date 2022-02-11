@@ -2,6 +2,7 @@ name: Syntax Enforcer
 on:
   schedule:
     - cron: 0 0 */3 * *
+  workflow_dispatch:
 jobs:
   qa:
     name: Syntax Enforcer
@@ -11,15 +12,11 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v2
       - name: Use Node.js 16
-        uses: actions/setup-node@v2.4.1
+        uses: actions/setup-node@v2.5.1
         with:
           node-version: 16
-      - name: Restore CI Cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
-      - name: Prep SE
+          cache: "yarn"
+      - name: Install dependencies
         run: yarn
       - name: Start SE
         run: |
@@ -40,10 +37,10 @@ jobs:
             git config --local user.email "${GITHUB_EMAIL}";
             git config --local user.name "${GITHUB_USER}";
             git checkout -b semid/qa/`date +%F-%H-%M`;
-            git commit -sam "♻️ Refactoring";
-            hub pull-request -b "PreMiD:main" -p -m "🤖 Semi-weekly SE" -m "*beep boop* I've prettified and refactored some Presences...";
+            git commit -sam "refactor: run syntax enforcer";
+            hub pull-request -b "PreMiD:main" -p -m "refactor: semi-weekly SE" -m "*beep boop* I've prettified and refactored some Presences and sorted all metadata files...";
           fi
         env:
           GITHUB_USER: SeMiD
-          GITHUB_EMAIL: contact@premid.app
+          GITHUB_EMAIL: semid@premid.app
           GITHUB_TOKEN: ${{ secrets.AUTOMERGE }}
