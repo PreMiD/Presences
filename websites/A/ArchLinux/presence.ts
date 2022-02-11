@@ -12,15 +12,13 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp
 	};
 
-	type dt = {
+	const archData: {
 		[hostName: string]: {
 			[webPath: string]: {
 				[data: string]: string;
-			};
-		};
-	};
-
-	const archData: dt = {
+			}
+		}
+	} = {
 		"archlinux.org": {
 			"": {
 				details: "Browsing the home page",
