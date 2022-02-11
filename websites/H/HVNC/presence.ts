@@ -48,6 +48,10 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/batch")) {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Running Batch Operations...";
+	} else if (document.location.pathname.startsWith("/edit")) {
+		presenceData.smallImageKey = "sett";
+		h2 = document.querySelector("h2").textContent.trim();
+		presenceData.details = h2;
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
