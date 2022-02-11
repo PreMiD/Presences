@@ -5,6 +5,7 @@ const presence = new Presence({
 	hostName = location.hostname,
 	webPath = location.pathname,
 	path1 = webPath.split("/")[1];
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "arch",
