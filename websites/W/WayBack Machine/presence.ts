@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp
 		},
 		page = window.location.pathname,
-		buttons = await presence.getSetting<boolean>("buttons");
+		buttons = await presence.getSetting<boolean>("buttons"),
+		pageSplit = page.split("/");
 
 	if (page === "/") {
 		search = document.querySelector(
@@ -41,12 +42,11 @@ presence.on("UpdateData", async () => {
 				}
 			];
 		}
-		if (page.includes("*")) {
+		if (page.includes("*"))
 			presenceData.details = document.location.href.replace(/http.*\*\//gm, "");
-		} else {
+		else
 			presenceData.details = document.location.href.replace(/http.*\/\//gm, "");
-		}
-		let pageSplit = page.split("/");
+
 		presenceData.state = `${pageSplit[2].substring(
 			6,
 			8
