@@ -7,7 +7,8 @@ const presence = new Presence({
 		return document.querySelector(query)?.textContent;
 	},
 	getEpisode = (query: string): string | undefined => {
-		return document.querySelector(query)?.textContent.split("-E")[1];
+		return document.querySelector(query)?.textContent.split("E")[1]
+			.replace(/- Bstation/gi, "");
 	};
 
 presence.on("UpdateData", async () => {
