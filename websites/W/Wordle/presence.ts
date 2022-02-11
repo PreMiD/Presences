@@ -8,7 +8,7 @@ const presence = new Presence({
 	);
 
 presence.on("UpdateData", async () => {
-	if (document.location.pathname.startsWith("/wordle")) {
+	if (document.location.pathname.includes("/wordle")) {
 		const presenceData: PresenceData = {
 				largeImageKey: "logo",
 				startTimestamp: browsingTimestamp
