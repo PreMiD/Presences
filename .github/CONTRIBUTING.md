@@ -2,8 +2,6 @@
 
 As an open-sourced project, we welcome contributions with open arms. 
 
-> You should ensure you read the entirety of this document before contributing to the repository. We require the following rules for good practice. 
-
 ## Issues 
 Issues are designed for tracking bugs, feature requests and service requets by using their associated templates. The content of each field should be detiailed thoroughly before being submitted. 
 

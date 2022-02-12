@@ -8,8 +8,7 @@ This repository contains the source code of all the presences that are available
 
 ## Documentation
 
-We made a documentation to make your development process a little bit better and faster. You can read it [here](https://docs.premid.app/dev/presence).
-
+We have a documentation website to make the development process a little bit easier and faster. You can check it out it [here](https://docs.premid.app/dev/presence).
 
 
 ## Contributing
