@@ -4,7 +4,8 @@ const presence = new Presence({
 	user = document.cookie
 		.split(";")
 		.find(val => val.startsWith("letterboxd"))
-		.split("=")[1];
+		.split("=")[1],
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let details = "";
 
