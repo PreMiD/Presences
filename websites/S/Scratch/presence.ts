@@ -247,11 +247,12 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Viewing page:";
 		presenceData.state = "Scratch JR";
 	}
-	if (window.location.hostname.toLowerCase().includes("donationpay.org")) {
-		if (window.location.pathname.toLowerCase().includes("/scratchfoundation")) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Donate";
-		}
+	if (
+		window.location.hostname.toLowerCase().includes("donationpay.org") &&
+		window.location.pathname.toLowerCase().includes("/scratchfoundation")
+	) {
+		presenceData.details = "Viewing page:";
+		presenceData.state = "Donate";
 	}
 	if (
 		window.location.hostname.toLowerCase().includes("scratched.gse.harvard.edu")

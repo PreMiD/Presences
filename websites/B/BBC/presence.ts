@@ -447,38 +447,36 @@ presence.on("UpdateData", async () => {
 		} else if (path.includes("/leaderboard")) {
 			presenceData.details = strings.viewPage;
 			presenceData.state = title;
-		} else if (path.includes("/av/")) {
-			if (VideoMedia.duration) {
-				const [startTimestamp, endTimestamp] = presence.getTimestamps(
-					VideoMedia.currentTime,
-					VideoMedia.duration
-				);
+		} else if (path.includes("/av/") && VideoMedia.duration) {
+			const [startTimestamp, endTimestamp] = presence.getTimestamps(
+				VideoMedia.currentTime,
+				VideoMedia.duration
+			);
 
-				presenceData.details = title;
-				presenceData.state = document.querySelector(
-					"span.qa-status-date-output"
-				)?.textContent;
+			presenceData.details = title;
+			presenceData.state = document.querySelector(
+				"span.qa-status-date-output"
+			)?.textContent;
 
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+			presenceData.startTimestamp = startTimestamp;
+			presenceData.endTimestamp = endTimestamp;
 
-				presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
-				presenceData.smallImageText = VideoMedia.paused
-					? strings.pause
-					: strings.play;
+			presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
+			presenceData.smallImageText = VideoMedia.paused
+				? strings.pause
+				: strings.play;
 
-				if (VideoMedia.paused) {
-					delete presenceData.startTimestamp;
-					delete presenceData.endTimestamp;
-				}
-
-				presenceData.buttons = [
-					{
-						label: strings.watchVideo,
-						url: document.baseURI
-					}
-				];
+			if (VideoMedia.paused) {
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
 			}
+
+			presenceData.buttons = [
+				{
+					label: strings.watchVideo,
+					url: document.baseURI
+				}
+			];
 		}
 	} else if (path.includes("/weather")) {
 		presenceData.largeImageKey = "bbcweather_logo";

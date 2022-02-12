@@ -54,7 +54,7 @@ const updateCallback = {
 				(currentPath[1] === "index.php"
 					? getURLParam("title")
 					: currentPath.slice(1).join("/")
-				).replace(/_/g, " ")
+				).replaceAll("_", " ")
 			);
 		};
 
@@ -109,7 +109,7 @@ const updateCallback = {
 		return (
 			details[
 				[...document.querySelector("body").classList]
-					.filter(v => /ns--?\d/.test(v))[0]
+					.find(v => /ns--?\d/.test(v))
 					.slice(3)
 			] || "Viewing a page"
 		);

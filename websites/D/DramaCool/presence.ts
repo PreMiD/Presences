@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
-		{ pathname } = document.location;
+		{ pathname, search } = document.location;
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -74,9 +74,7 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (pathname.includes("/search")) {
 		presenceData.details = (await strings).searchFor;
-		presenceData.state = document.location.search.includes("movies")
-			? "Movies"
-			: "Stars";
+		presenceData.state = search.includes("movies") ? "Movies" : "Stars";
 
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = (await strings).searching;

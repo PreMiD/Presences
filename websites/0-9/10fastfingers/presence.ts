@@ -90,9 +90,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state =
 			document.querySelector(".row > h2").lastChild.nodeValue;
 	} else if (document.location.pathname.includes("/top1000/")) {
-		const lang = document.location.pathname.split("/");
 		presenceData.details = "Doing the top 1000 typing test:";
-		presenceData.state = `In ${lang[lang.length - 3]}`;
+		presenceData.state = `In ${document.location.pathname.split("/").at(-3)}`;
 	} else {
 		switch (document.location.pathname) {
 			case "/email_settings":

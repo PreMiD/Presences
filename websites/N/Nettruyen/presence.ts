@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = tmp.querySelector("a").textContent;
 			presenceData.state = `Đang đọc: ${tmp
 				.querySelector("span")
-				.textContent.substr(2)}`;
+				.textContent.slice(2)}`;
 		}
 	} else presenceData.details = "Đang xem trang chủ...";
 	presenceData.startTimestamp = browsingTimestamp;

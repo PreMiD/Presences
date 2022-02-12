@@ -98,16 +98,15 @@ presence.on("UpdateData", async () => {
 
 		if (title.length > 128) title = `${title.slice(0, 120)}...`;
 
-		const selectValue = document.querySelector(
-			"#single-page-select"
-		) as HTMLSelectElement;
 		presenceData.details = title;
 		presenceData.state = `Reading page ${document.location.hash.replace(
 			"#",
 			""
-		)} of ${selectValue.options[selectValue.options.length - 1].textContent} (${
-			validateReaderUrl.exec(document.location.pathname)[1]
-		})`;
+		)} of ${
+			(
+				document.querySelector("#single-page-select") as HTMLSelectElement
+			).options.at(-1).textContent
+		} (${validateReaderUrl.exec(document.location.pathname)[1]})`;
 		presenceData.buttons = [
 			{ label: "View Page", url: document.location.href }
 		];

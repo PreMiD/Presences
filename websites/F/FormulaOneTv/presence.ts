@@ -6,7 +6,7 @@ const presence = new Presence({ clientId: "916438450952097834" }),
 	});
 
 function getEpochInMs(): number {
-	return Math.floor(+new Date() / 1000);
+	return Math.floor(Date.now() / 1000);
 }
 
 function parseTimeToMilliseconds(length: string): number {
@@ -37,7 +37,7 @@ async function setWatchingVideoActivity(presenceData: PresenceData) {
 
 		const [currentTime, videoLength] = document
 			.querySelector(".bmpui-container-wrapper")
-			.getElementsByClassName("bmpui-ui-playbacktimelabel");
+			.querySelectorAll(".bmpui-ui-playbacktimelabel");
 
 		if (videoLength && currentTime) {
 			presenceData.endTimestamp =

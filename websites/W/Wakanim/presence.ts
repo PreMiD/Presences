@@ -11,7 +11,7 @@ const presence = new Presence({
 function capitalize(str: string): string {
 	const text = str.toLowerCase().split(" ");
 	for (let i = 0; i < text.length; i++)
-		text[i] = text[i].charAt(0).toUpperCase() + text[i].substr(1);
+		text[i] = text[i].charAt(0).toUpperCase() + text[i].slice(1);
 
 	return text.join(" ");
 }

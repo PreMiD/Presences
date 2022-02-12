@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			largeImageKey: "fbox_logo"
 		},
-		{ pathname } = document.location,
+		{ pathname, href } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (pathname === "/") presenceData.details = "Browsing";
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Series",
-					url: document.location.href
+					url: href
 				}
 			];
 		}
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Movie",
-					url: document.location.href
+					url: href
 				}
 			];
 		}

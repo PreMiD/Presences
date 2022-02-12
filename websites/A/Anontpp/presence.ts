@@ -48,44 +48,43 @@ presence.on("UpdateData", async () => {
 	};
 
 	/* Browsing Info */
-	if (showBrowseInfo) if (path === "/") presenceData.details = "Browsing";
+	if (showBrowseInfo && path === "/") presenceData.details = "Browsing";
 
 	/* Video Info */
-	if (showVideoInfo) {
-		if (video) {
-			const state = (
-				document.querySelector("#infotitle") as HTMLElement
-			).textContent.split("\n");
-			if (getElement("#episodetitle") !== "Feature Film") {
-				// Show Logic
-				presenceData.details = "Watching Show";
-				try {
-					presenceData.state = `${state[0]} (${state[1]})`;
-					await parseVideo();
-				} catch {
-					// deepscan
-				}
-			} else {
-				// Movie Logic
-				presenceData.details = "Watching Movie";
-				try {
-					[presenceData.state] = state;
-					await parseVideo();
-				} catch {
-					// deepscan
-				}
+	if (showVideoInfo && video) {
+		const state = (
+			document.querySelector("#infotitle") as HTMLElement
+		).textContent.split("\n");
+		if (getElement("#episodetitle") !== "Feature Film") {
+			// Show Logic
+			presenceData.details = "Watching Show";
+			try {
+				presenceData.state = `${state[0]} (${state[1]})`;
+				await parseVideo();
+			} catch {
+				// deepscan
+			}
+		} else {
+			// Movie Logic
+			presenceData.details = "Watching Movie";
+			try {
+				[presenceData.state] = state;
+				await parseVideo();
+			} catch {
+				// deepscan
 			}
 		}
 	}
 
 	/* Search Info */
-	if (showSearchInfo) {
-		if (getElement("#indextitle").split("\n")[0] === "Search Results") {
-			presenceData.details = "Searching for";
-			presenceData.state = (
-				document.querySelector("input") as HTMLInputElement
-			).value;
-		}
+	if (
+		showSearchInfo &&
+		getElement("#indextitle").split("\n")[0] === "Search Results"
+	) {
+		presenceData.details = "Searching for";
+		presenceData.state = (
+			document.querySelector("input") as HTMLInputElement
+		).value;
 	}
 
 	if (presenceData.details) {

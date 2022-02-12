@@ -37,8 +37,8 @@ presence.on("UpdateData", async () => {
 					.querySelector("div.BH-menu > ul.BH-menuE > li > a[title]")
 					.getAttribute("title");
 				presenceData.details = title;
-				presenceData.state = document.getElementsByClassName(
-					"c-post__header__title"
+				presenceData.state = document.querySelectorAll(
+					".c-post__header__title"
 				)[0].textContent;
 				presence.setActivity(presenceData);
 				presenceData.smallImageKey = "reading";

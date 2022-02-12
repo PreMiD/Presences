@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "exxen"
 	};
-	if (document.location.pathname.indexOf("watch") > -1) {
+	if (document.location.pathname.includes("watch")) {
 		const video: HTMLVideoElement = document.querySelector(".rmp-video"),
 			episodeName = document.querySelector(".content-name").textContent,
 			episode = episodeName.split(".Bölüm")[0].split(" ")[
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = (await strings).browsing;
-		if (document.location.pathname.indexOf("detail") > -1)
+		if (document.location.pathname.includes("detail"))
 			presenceData.state = document.querySelector(".title").textContent;
 	}
 	presence.setActivity(presenceData);

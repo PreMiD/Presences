@@ -50,8 +50,7 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-	const { host } = location,
-		path = location.pathname.replace(/\/?$/, "/"),
+	const path = location.pathname.replace(/\/?$/, "/"),
 		showSearch = await presence.getSetting<boolean>("search"),
 		showTimestamps = await presence.getSetting<boolean>("timestamp");
 
@@ -117,7 +116,7 @@ presence.on("UpdateData", async () => {
 
 	if (path.includes("/UserRun/")) {
 		presenceData.details = "Viewing Performance Report...";
-		presenceData.state = `${path.split("/").slice(-2)[0]} - ${getElement(
+		presenceData.state = `${path.split("/").at(-2)} - ${getElement(
 			".pg-head-toption-post"
 		)}`;
 	}

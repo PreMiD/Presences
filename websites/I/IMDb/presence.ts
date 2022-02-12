@@ -14,11 +14,11 @@ presence.on("UpdateData", async () => {
 		},
 		url = document.URL;
 	if (url.includes("/videoplayer/")) {
-		const [video] = document.getElementsByTagName("video"),
+		const [video] = document.querySelectorAll("video"),
 			title = document.querySelectorAll("h1.title")[0].textContent;
 		presenceData.details = title;
 		presenceData.state = (
-			document.getElementsByClassName("primary-relation-name")[0] as HTMLElement
+			document.querySelectorAll(".primary-relation-name")[0] as HTMLElement
 		).textContent;
 		presenceData.largeImageKey = "large_img";
 		presenceData.smallImageKey = video.paused ? "paused" : "playing";

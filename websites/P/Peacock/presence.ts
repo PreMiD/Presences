@@ -20,8 +20,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp,
 		endTimestamp;
 
-	const { href } = window.location,
-		path = window.location.pathname,
+	const { href, pathname: path } = window.location,
 		presenceData: PresenceData = {
 			largeImageKey: "peacock",
 			details

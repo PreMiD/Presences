@@ -34,8 +34,8 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 
 		presenceData.details = (
-			document.getElementsByClassName(
-				"Textstyle__VideoMetaDataTitle-sc-2ihbn2-17"
+			document.querySelectorAll(
+				".Textstyle__VideoMetaDataTitle-sc-2ihbn2-17"
 			) as HTMLCollection
 		)[0].textContent;
 		title2 = document.querySelector("#player");
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 			.replace(/[0-9]/g, "");
 		presenceData.state = titles.content
 			.slice(-titles.content.replace(/[^0-9.]/g, "").length + 21)
-			.replace(/,/g, ":")
+			.replaceAll(",", ":")
 			.replace("Seizoen", "S")
 			.replace("aflevering", ":E")
 			.replace(/\s/g, "");

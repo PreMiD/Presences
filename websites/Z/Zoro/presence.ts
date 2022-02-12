@@ -25,7 +25,6 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (pathname === "/" || pathname === "/home")
@@ -81,19 +80,17 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLHeadingElement>("h2.film-name");
 			presenceData.details = "In a room";
 			if (filmName) presenceData.state = `Watching ${filmName.textContent}`;
-			if (data) {
-				if (!data.paused) {
-					[, presenceData.endTimestamp] = presence.getTimestamps(
-						data.currTime,
-						data.duration
-					);
-				}
+			if (data && !data.paused) {
+				[, presenceData.endTimestamp] = presence.getTimestamps(
+					data.currTime,
+					data.duration
+				);
 			}
 			if (buttons) {
 				presenceData.buttons = [
 					{
 						label: "Join Room",
-						url: document.location.href
+						url: href
 					}
 				];
 			}
@@ -107,19 +104,17 @@ presence.on("UpdateData", async () => {
 			);
 		if (title) presenceData.details = title.textContent;
 		if (episode) presenceData.state = `Episode ${episode.textContent}`;
-		if (data) {
-			if (!data.paused) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					data.currTime,
-					data.duration
-				);
-			}
+		if (data && !data.paused) {
+			[, presenceData.endTimestamp] = presence.getTimestamps(
+				data.currTime,
+				data.duration
+			);
 		}
 		if (buttons) {
 			presenceData.buttons = [
 				{
 					label: "Watch Episode",
-					url: document.location.href
+					url: href
 				}
 			];
 		}
@@ -140,7 +135,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Check Synopsis",
-						url: document.location.href
+						url: href
 					}
 				];
 			}

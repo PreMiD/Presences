@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing the homepage";
 	else if (document.location.pathname.startsWith("/search")) {
 		presenceData.details = "Searching...";
-		presenceData.state = document.location.search.substr(3);
+		presenceData.state = document.location.search.slice(3);
 	} else if (document.location.pathname.startsWith("/package/")) {
 		presenceData.details = "Viewing a package";
 		presenceData.state = "Fetching...";
@@ -18,10 +18,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `${document.location.pathname.split("/")[2]}/${
 				document.location.pathname.split("/")[3]
 			}`;
-		} else [, , presenceData.state] = document.location.pathname.split("/");
+		} else presenceData.state = document.location.pathname.split("/")[2];
 	} else if (document.location.pathname.startsWith("/~")) {
 		presenceData.details = "Viewing a profile...";
-		presenceData.state = document.location.pathname.substr(3);
+		presenceData.state = document.location.pathname.slice(3);
 	}
 	presence.setActivity(presenceData);
 });

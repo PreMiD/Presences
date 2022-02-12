@@ -25,7 +25,7 @@ presence.on("UpdateData", () => {
 				).alt
 			} repl`;
 			presenceData.state = `${path.split("/").filter(elm => elm !== "")[1]}${
-				window.location.hash ? ` - ${window.location.hash.substr(1)}` : ""
+				window.location.hash ? ` - ${window.location.hash.slice(1)}` : ""
 			}`;
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 		}
@@ -63,7 +63,7 @@ presence.on("UpdateData", () => {
 			default:
 				presenceData.state = `${postType
 					.charAt(0)
-					.toUpperCase()}${postType.substr(1)}${
+					.toUpperCase()}${postType.slice(1)}${
 					postElement ? ` : ${postElement.textContent}` : ""
 				}`;
 				break;

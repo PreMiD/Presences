@@ -2,7 +2,7 @@ const iframe = new iFrame();
 let videos: HTMLCollectionOf<HTMLVideoElement>;
 
 iframe.on("UpdateData", async () => {
-	videos = document.getElementsByTagName("video");
+	videos = document.querySelectorAll("video");
 
 	if (videos.length > 0) {
 		const [video] = videos;

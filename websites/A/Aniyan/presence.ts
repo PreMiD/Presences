@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			),
 			presenceData: PresenceData = {
-				details: videoTitle.innerText,
-				state: episode.innerText,
+				details: videoTitle.textContent,
+				state: episode.textContent,
 				largeImageKey: "lg",
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
@@ -58,8 +58,8 @@ presence.on("UpdateData", async () => {
 				endTimestamp
 			};
 
-		presenceData.details = videoTitle.innerText;
-		presenceData.state = episode.innerText;
+		presenceData.details = videoTitle.textContent;
+		presenceData.state = episode.textContent;
 		presenceData.startTimestamp = browsingTimestamp;
 
 		if (video.paused) {

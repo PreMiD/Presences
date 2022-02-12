@@ -92,12 +92,12 @@ presence.on("UpdateData", () => {
 			).textContent;
 		}
 	} else if (document.location.pathname.includes("/profile/")) {
-		const priceEls = document.getElementsByClassName(
-			"GH1-container UserProfileName-name"
+		const priceEls = document.querySelectorAll(
+			".GH1-container.UserProfileName-name"
 		);
-		for (let i = 0; i < priceEls.length; i++) {
+		for (const priceEl of priceEls) {
 			presenceData.details = "Viewing a profile:";
-			presenceData.state = priceEls[i].textContent;
+			presenceData.state = priceEl.textContent;
 		}
 	} else if (document.location.pathname.includes("/games")) {
 		presenceData.details = "Viewing Page:";

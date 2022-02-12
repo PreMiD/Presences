@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-	const path = window.location.hash.substr(1),
+	const path = window.location.hash.slice(1),
 		presenceData: PresenceData = {
 			largeImageKey: "icon"
 		};

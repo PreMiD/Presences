@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "autocode"
 		},
-		{ pathname } = window.location,
+		{ pathname, hostname } = window.location,
 		path = pathname.split("/").slice(1);
 
 	if (pathname.includes("/snippet")) {
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 				.querySelector("h1.snippet-title.h3")
 				.textContent.trim();
 		} else presenceData.details = "Looking for Snippets";
-		presenceData.state = `${window.location.hostname}/${path[0]}`;
+		presenceData.state = `${hostname}/${path[0]}`;
 		presenceData.smallImageKey = "snippet";
 	} else if (pathname.includes("/app")) {
 		if (path.length >= 3) {
@@ -30,12 +30,12 @@ presence.on("UpdateData", async () => {
 				.querySelector("h1.jumbo")
 				.textContent.trim();
 		} else presenceData.details = "Looking for Apps";
-		presenceData.state = `${window.location.hostname}/${path[0]}`;
+		presenceData.state = `${hostname}/${path[0]}`;
 		presenceData.smallImageKey = "apps";
 	} else if (pathname.includes("/lib")) {
 		if (path.length >= 3) presenceData.details = `Reading ${path[1]} docs`;
 		else presenceData.details = "Looking for Docs";
-		presenceData.state = `${window.location.hostname}/${path[0]}`;
+		presenceData.state = `${hostname}/${path[0]}`;
 		presenceData.smallImageKey = "lib";
 	} else if (pathname.includes("/p/")) {
 		const filename = document.querySelector("div.filename")

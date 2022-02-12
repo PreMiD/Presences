@@ -11,7 +11,7 @@ function capitalize(string: string) {
 }
 
 presence.on("UpdateData", () => {
-	const { pathname } = window.location,
+	const { pathname, hostname } = window.location,
 		presenceData: PresenceData = {};
 
 	let details: string,
@@ -19,7 +19,7 @@ presence.on("UpdateData", () => {
 		smallImageKey: string,
 		smallImageText: string;
 
-	switch (window.location.hostname) {
+	switch (hostname) {
 		case "wanikani.com":
 		case "www.wanikani.com": {
 			switch (pathname) {
@@ -149,7 +149,7 @@ presence.on("UpdateData", () => {
 						document.querySelector(".mnemonic-content") as HTMLElement
 					).textContent;
 					if (textDescription.length >= 50)
-						textDescription = `${textDescription.substr(0, 50)}...`;
+						textDescription = `${textDescription.substring(0, 50)}...`;
 
 					details = `Browsing ${capitalize(type)}`;
 					state = `${

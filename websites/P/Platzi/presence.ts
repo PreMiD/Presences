@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viendo el perfil de";
 
 		if (
-			[...document.querySelectorAll(".SingleTab")].find(
+			[...document.querySelectorAll(".SingleTab")].some(
 				tab => tab.textContent === "Mi Portafolio"
 			)
 		)
@@ -237,11 +237,11 @@ presence.on("UpdateData", async () => {
 			if (activeCategory !== "") presenceData.details = activeCategory;
 
 			if (!categoriesEventListener) {
-				learningPaths.forEach(learningPath => {
+				for (const learningPath of learningPaths) {
 					learningPath.addEventListener("mouseover", () =>
 						setPresenceFromEvent(learningPath.querySelector("h2").textContent)
 					);
-				});
+				}
 				categoriesEventListener = true;
 			}
 		}

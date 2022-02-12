@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "loritta",
-		startTimestamp: new Date().getTime()
+		startTimestamp: Date.now()
 	};
 
 presence.on("UpdateData", () => {

@@ -10,9 +10,9 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.location.hostname.includes("itch.io")) {
-		const { pathname } = document.location;
+		const { pathname, hostname } = document.location;
 
-		if (document.location.hostname.split(".")[0] !== "itch") {
+		if (hostname.split(".")[0] !== "itch") {
 			if (pathname === "/") {
 				presenceData.details = "Viewing Developer Profile";
 				presenceData.state = document.title.replace(" - itch.io", "");

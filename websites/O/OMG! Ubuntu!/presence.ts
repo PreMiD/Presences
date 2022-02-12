@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 		header = document
 			.querySelector("div.u--box.content-container > div.loop > header > h2")
 			?.lastChild.textContent.trim()
-			.replace(/“|”/g, ""),
+			.replaceAll("“|”", ""),
 		articleHeader =
 			document.querySelector("div.post__hero > div.u--box > header > h1")
 				?.textContent ||
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = "Searching";
 		presenceData.state =
-			decodeURI(location.search).replace("?s=", "").replace(/\+/g, " ") ||
+			decodeURI(location.search).replace("?s=", "").replaceAll("+", " ") ||
 			"Unknown Search";
 	} else if (page.includes("/") && articleHeader) {
 		presenceData.details = "Reading an article:";

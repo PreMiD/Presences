@@ -25,7 +25,6 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname, href } = location,
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (document.querySelector("ul.search-main-menu.active")) {
@@ -60,7 +59,7 @@ presence.on("UpdateData", async () => {
 			category
 				? category.textContent
 				: ""
-		} ${location.hostname.endsWith(".com") ? "Manhwas" : "Mangas"}`;
+		} ${hostname.endsWith(".com") ? "Manhwas" : "Mangas"}`;
 		if (order) presenceData.state = `Ordered By ${order.textContent}`;
 		presenceData.smallImageText = presenceData.smallImageKey = "looking";
 	} else if (
@@ -92,7 +91,7 @@ presence.on("UpdateData", async () => {
 					}
 				];
 			}
-		} else if (location.hash) {
+		} else if (hash) {
 			presenceData.details = title.textContent;
 			if (data && data.writing) {
 				presenceData.state = data.details;

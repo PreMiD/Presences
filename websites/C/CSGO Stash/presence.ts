@@ -143,16 +143,19 @@ presence.on("UpdateData", () => {
 			presenceData.buttons = [{ label: "View Graffiti", url: document.URL }];
 		}
 	} else if (path.startsWith("/item")) {
-		if (path === "/items") {
-			presenceData.details = "Browsing items";
-			presenceData.smallImageKey = "items";
-			presenceData.smallImageText = "Viewing items";
-		} else {
-			presenceData.details = `Viewing item: ${shortTitle}`;
-			presenceData.state = `Steam price: ${steamPrice.textContent}`;
-			presenceData.largeImageKey = middleImage.src;
-			presenceData.buttons = [{ label: "View Item", url: document.URL }];
-		}
+		presenceData.details = `Viewing item: ${shortTitle}`;
+		presenceData.state = `Steam price:
+    ${
+			document.querySelector(
+				"body > div.container.main-content > div.row.text-center > div.col-md-8.col-widen > div > div:nth-child(2) > div.col-md-6.col-md-6-collapse-top-margin > div:nth-child(2) > a > span.pull-right"
+			).textContent
+		}`;
+		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+			"body > div.container.main-content > div.row.text-center > div.col-md-8.col-widen > div > div:nth-child(2) > div:nth-child(1) > img"
+		).src;
+		presenceData.smallImageKey = "logo";
+		presenceData.smallImageText = "CS:GO Stash";
+		presenceData.buttons = [{ label: "View Item", url: document.URL }];
 	} else if (path.includes("google-search")) {
 		presenceData.details = "Searching for:";
 		presenceData.state = document.querySelector(

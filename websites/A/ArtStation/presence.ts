@@ -64,112 +64,87 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Surfing the marketplace";
 	else if (document.location.pathname.startsWith("/studios"))
 		presenceData.details = "Visiting studios";
-	else if (document.location.href.indexOf("/jobs") > -1) {
+	else if (document.location.href.includes("/jobs")) {
 		presenceData.details = "Viewing jobs";
 		presenceData.state = document
 			.querySelector('meta[property="og:title"]')
 			.getAttribute("content");
 		presenceData.smallImageKey = "searchjob";
 		presenceData.smallImageText = "Viewing jobs";
-	} else if (document.location.pathname.startsWith("/blogs")) {
-		if (document.location.pathname === "/blogs")
-			presenceData.details = "Reading blogs";
-		else {
-			presenceData.details = "Reading a blog";
-			presenceData.state = shortTitle;
-		}
-	} else if (document.location.pathname.startsWith("/contests")) {
-		if (document.location.pathname === "/contests")
-			presenceData.details = "Looking for challenges";
-		else {
-			presenceData.details = "Viewing a challenge";
-			presenceData.state = shortTitle;
-		}
-	} else if (document.location.pathname === "/podcast")
-		presenceData.details = "Finding a podcast";
-	else if (document.location.pathname === "/guides")
-		presenceData.details = "Looking for guides";
-	else if (document.location.pathname.startsWith("/learning")) {
-		presenceData.details = "Learning";
-		presenceData.smallImageKey = "learning";
-		presenceData.smallImageText = "Learning";
-		if (
-			document.location.href.includes("/courses") ||
-			document.location.href.includes("/playlists")
-		) {
-			presenceData.details = "Viewing a course:";
-			presenceData.state =
-				document.querySelector("h1[class='h3 mb0']").textContent;
-			const playlist = document.querySelector<HTMLImageElement>(
-				'li > a[class~="is-active"] > img'
-			);
-			if (playlist) presenceData.largeImageKey = playlist.src;
-
-			delete presenceData.startTimestamp;
-			const paused = document.querySelector(
-				"button.vjs-play-control.vjs-control.vjs-button.vjs-paused"
-			);
-			if (!paused) {
-				presenceData.endTimestamp =
-					Date.now() / 1000 +
-					presence.timestampFromFormat(
-						document
-							.querySelector("div.vjs-duration-display")
-							.textContent.slice(14)
-					) -
-					presence.timestampFromFormat(
-						document
-							.querySelector("div.vjs-current-time-display")
-							.textContent.slice(13)
-					);
-			}
-			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused ? "Paused" : "Playing";
-			presenceData.buttons = [{ label: "View Course", url: document.URL }];
-		} else if (document.location.href.includes("/series")) {
-			presenceData.details = "Viewing a series";
-			presenceData.largeImageKey = document
-				.querySelector<HTMLDivElement>("div.series-page-header")
-				.style.backgroundImage.split("url")[1]
-				.replace('("', "")
-				.replace('")', "");
-			presenceData.state = shortTitle;
-			presenceData.buttons = [{ label: "View Series", url: document.URL }];
-		} else if (document.location.href.includes("/instructors")) {
-			presenceData.details = "Viewing an instructor";
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				"div.instructor-page.ng-star-inserted > div.container > div > div > img"
-			).src;
-			presenceData.state = shortTitle;
-			presenceData.buttons = [{ label: "View Instructor", url: document.URL }];
-		}
-	} else if (document.location.href.indexOf("settings") > -1)
-		presenceData.details = "Changing settings";
-	else if (document.location.href.indexOf("profile/edit") > -1) {
-		presenceData.details = "Editing profile";
-		presenceData.smallImageKey = "editprofile";
-		presenceData.smallImageText = "Editing profile";
-	} else if (document.location.href.indexOf("project/new") > -1) {
-		presenceData.details = "Uploading an artwork";
-		presenceData.smallImageKey = "upload";
-		presenceData.smallImageText = "Uploading artwork";
-	} else if (document.location.hostname === "magazine.artstation.com") {
-		presenceData.details = "Reading magazines";
+	} else if (document.location.pathname === "/blogs")
+		presenceData.details = "Reading blogs";
+	else if (document.location.pathname.startsWith("/blogs")) {
+		presenceData.details = "Reading a blog";
 		presenceData.state = shortTitle;
-	} else if (document.location.hostname === "www.artstation.com") {
-		presenceData.details = "Exploring artworks";
-		presenceData.smallImageKey = "artwork";
-		presenceData.smallImageText = "Exploring artworks";
+	} else if (document.location.pathname === "/contests")
+		presenceData.details = "Looking for challenges";
+	else if (document.location.pathname.startsWith("/contests")) {
+		presenceData.details = "Viewing a challenge";
+		presenceData.state = shortTitle;
 	} else {
-		presenceData.details = "Viewing a portfolio";
-		presenceData.state = document
-			.querySelector('meta[property="og:title"]')
-			.getAttribute("content");
-		presenceData.largeImageKey = document
-			.querySelector("head > meta[name=image]")
-			.getAttribute("content");
-		presenceData.smallImageKey = "portfolio";
-		presenceData.smallImageText = "Viewing portfolio";
+		switch (document.location.pathname) {
+			case "/podcast": {
+				presenceData.details = "Finding a podcast";
+				break;
+			}
+			case "/guides": {
+				presenceData.details = "Looking for guides";
+				break;
+			}
+			case "/learning": {
+				presenceData.details = "Learning";
+				presenceData.smallImageKey = "learning";
+				presenceData.smallImageText = "Learning";
+
+				break;
+			}
+			default:
+				if (document.location.href.includes("courses")) {
+					presenceData.details = "Viewing a course";
+					presenceData.state = shortTitle;
+					presenceData.smallImageKey = "learning";
+					presenceData.smallImageText = "Learning";
+				} else if (document.location.href.includes("series")) {
+					presenceData.details = "Viewing a series";
+					presenceData.state = shortTitle;
+					presenceData.smallImageKey = "learning";
+					presenceData.smallImageText = "Learning";
+				} else if (document.location.href.includes("instructors")) {
+					presenceData.details = "Viewing an instructor";
+					presenceData.state = shortTitle;
+					presenceData.smallImageKey = "learning";
+					presenceData.smallImageText = "Learning";
+				} else if (document.location.href.includes("playlists")) {
+					presenceData.details = "Viewing a playlist";
+					presenceData.state = shortTitle;
+					presenceData.smallImageKey = "learning";
+					presenceData.smallImageText = "Learning";
+				} else if (document.location.href.includes("settings"))
+					presenceData.details = "Changing settings";
+				else if (document.location.href.includes("profile/edit")) {
+					presenceData.details = "Editing profile";
+					presenceData.smallImageKey = "editprofile";
+					presenceData.smallImageText = "Editing profile";
+				} else if (document.location.href.includes("project/new")) {
+					presenceData.details = "Uploading an artwork";
+					presenceData.smallImageKey = "upload";
+					presenceData.smallImageText = "Uploading artwork";
+				} else if (document.location.hostname === "magazine.artstation.com") {
+					presenceData.details = "Reading magazines";
+					presenceData.state = shortTitle;
+				} else if (document.location.hostname === "www.artstation.com") {
+					presenceData.details = "Exploring artworks";
+					presenceData.smallImageKey = "artwork";
+					presenceData.smallImageText = "Exploring artworks";
+				} else {
+					presenceData.details = "Viewing a portfolio of:";
+					presenceData.state = document
+						.querySelector('meta[property="og:site_name"]')
+						.getAttribute("content");
+					presenceData.smallImageKey = "portfolio";
+					presenceData.smallImageText = "Viewing portfolio";
+				}
+		}
 	}
 	if (!image) presenceData.largeImageKey = "logo";
 	if (!button) delete presenceData.buttons;

@@ -29,7 +29,7 @@ presence.on("UpdateData", () => {
 				e => e.textContent
 			),
 			maxEp = getByXpath("//*[@id='wContainer']//*[@class='wEp']", e =>
-				e.nextSibling.textContent.substr(1).trim()
+				e.nextSibling.textContent.slice(1).trim()
 			),
 			lang = getByXpath(
 				"//*[@id='wContainer']//*[@class='wLanguage']",

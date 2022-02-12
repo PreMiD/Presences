@@ -29,15 +29,13 @@ function getAuthorString(): string {
 			return `${authorsArray
 				.slice(0, authorsArray.length - 1)
 				.map(a => a.textContent)
-				.join(", ")} - ${
-				authorsArray[authorsArray.length - 1].textContent
-			} (${year})`;
+				.join(", ")} - ${authorsArray.at(-1).textContent} (${year})`;
 		} else {
 			//* Build output string
 			return `${authorsArray
 				.slice(0, authorsArray.length - 1)
 				.map(a => a.textContent)
-				.join(", ")} - ${authorsArray[authorsArray.length - 1].textContent}`;
+				.join(", ")} - ${authorsArray.at(-1).textContent}`;
 		}
 	} else {
 		return (

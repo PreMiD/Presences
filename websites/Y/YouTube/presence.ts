@@ -312,25 +312,23 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = "yt_lg";
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 			delete presenceData.endTimestamp;
-		} else if (buttons) {
-			if (!unlistedVideo) {
-				presenceData.buttons = [
-					{
-						label: live ? strings.watchStreamButton : strings.watchVideoButton,
-						url: document.URL.includes("/watch?v=")
-							? document.URL.split("&")[0]
-							: `https://www.youtube.com/watch?v=${videoId}`
-					},
-					{
-						label: strings.viewChannelButton,
-						url: (
-							document.querySelector(
-								"#top-row > ytd-video-owner-renderer > a"
-							) as HTMLLinkElement
-						).href
-					}
-				];
-			}
+		} else if (buttons && !unlistedVideo) {
+			presenceData.buttons = [
+				{
+					label: live ? strings.watchStreamButton : strings.watchVideoButton,
+					url: document.URL.includes("/watch?v=")
+						? document.URL.split("&")[0]
+						: `https://www.youtube.com/watch?v=${videoId}`
+				},
+				{
+					label: strings.viewChannelButton,
+					url: (
+						document.querySelector(
+							"#top-row > ytd-video-owner-renderer > a"
+						) as HTMLLinkElement
+					).href
+				}
+			];
 		}
 		if (!time) {
 			delete presenceData.startTimestamp;
@@ -373,7 +371,7 @@ presence.on("UpdateData", async () => {
 			if (
 				document.querySelector("#author-text.ytd-backstage-post-renderer") &&
 				document.title
-					.substr(0, document.title.lastIndexOf(" - YouTube"))
+					.substring(0, document.title.lastIndexOf(" - YouTube"))
 					.includes(
 						document
 							.querySelector("#author-text.ytd-backstage-post-renderer")
@@ -387,7 +385,7 @@ presence.on("UpdateData", async () => {
 			} else if (
 				document.querySelector("#text.ytd-channel-name") &&
 				document.title
-					.substr(0, document.title.lastIndexOf(" - YouTube"))
+					.substring(0, document.title.lastIndexOf(" - YouTube"))
 					.includes(
 						document.querySelector("#text.ytd-channel-name").textContent
 					)
@@ -396,14 +394,14 @@ presence.on("UpdateData", async () => {
 			//get channel name from website's title
 			else if (
 				/\(([^)]+)\)/.test(
-					document.title.substr(0, document.title.lastIndexOf(" - YouTube"))
+					document.title.substring(0, document.title.lastIndexOf(" - YouTube"))
 				)
 			) {
 				user = document.title
-					.substr(0, document.title.lastIndexOf(" - YouTube"))
+					.substring(0, document.title.lastIndexOf(" - YouTube"))
 					.replace(/\(([^)]+)\)/, "");
 			} else {
-				user = document.title.substr(
+				user = document.title.substring(
 					0,
 					document.title.lastIndexOf(" - YouTube")
 				);
@@ -514,7 +512,7 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 		} else if (document.location.pathname.includes("/intl")) {
 			presenceData.details = strings.readAbout;
-			presenceData.state = document.title.substr(
+			presenceData.state = document.title.substring(
 				0,
 				document.title.lastIndexOf(" - YouTube")
 			);

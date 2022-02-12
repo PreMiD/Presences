@@ -10,7 +10,7 @@ iframe.on("UpdateData", async () => {
 		season = document.querySelector(
 			"div.episode-selector.episode-selector-container > h3"
 		),
-		video: HTMLVideoElement = document.querySelector("video");
+		video = document.querySelector<HTMLVideoElement>("video");
 
 	if (video) {
 		videoMessage = {
@@ -26,7 +26,7 @@ iframe.on("UpdateData", async () => {
 
 	if (title.textContent.includes("Bölüm")) {
 		const titleArr = title.textContent.split("."),
-			epTitle = `${titleArr[0].charAt(titleArr[0].length - 1)}.${titleArr[1]}`;
+			epTitle = `${titleArr[0].at(-1)}.${titleArr[1]}`;
 
 		iframe.send({
 			video: {

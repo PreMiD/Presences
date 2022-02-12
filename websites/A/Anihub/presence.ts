@@ -4,7 +4,7 @@ const presence = new Presence({
 function NotFound(): boolean {
 	const q = document.querySelector("#content>div>div>h1");
 	if (window.location.pathname === "/404") return true;
-	else if (q) if (q.textContent === "Página não encontrada!") return true;
+	else if (q && q.textContent === "Página não encontrada!") return true;
 	return false;
 }
 enum PathNames {
@@ -87,12 +87,12 @@ presence.on("UpdateData", async () => {
 		let timestamps: number[] = [];
 		if (animeNameEP) {
 			value[0] = animeNameEP.textContent.replace(
-				animeNameEP.textContent.match(/ - \d+/g).slice(-1)[0],
+				animeNameEP.textContent.match(/ - \d+/g).at(-1),
 				""
 			);
 			[value[1]] = animeNameEP.textContent
 				.match(/ - \d+/g)
-				.slice(-1)[0]
+				.at(-1)
 				.match(/\d+/g);
 		}
 		if (video && !isNaN(video.duration)) {
@@ -166,7 +166,7 @@ presence.on("UpdateData", async () => {
 			pathName.includes("/editar") &&
 			selfUsername &&
 			username.textContent.toLowerCase() ===
-				selfUsername.getAttribute("href").split("/").slice(-1)[0].toLowerCase()
+				selfUsername.getAttribute("href").split("/").at(-1).toLowerCase()
 		)
 			title[0] = "Editando Perfil";
 		title[1] = username ? username.textContent : "...";
@@ -185,8 +185,7 @@ presence.on("UpdateData", async () => {
 		(await presence.getSetting<boolean>(SettingsId.showForum)) &&
 		!NotFound()
 	) {
-		const [Thread] = document.getElementsByClassName("thread"),
-			NonThread = document.querySelector("#main>article>div>h1>b");
+		const [Thread] = document.querySelectorAll(".thread");
 		if (pathName.split("/").join("") === PathNames.forum.split("/").join("")) {
 			presenceData.details = "Fórum";
 			if (await presence.getSetting<boolean>(SettingsId.showForumCategory)) {
@@ -224,9 +223,10 @@ presence.on("UpdateData", async () => {
 		} else if (!pathName.endsWith(PathNames.newTopic)) {
 			presenceData.details = "Fórum";
 			if (await presence.getSetting<boolean>(SettingsId.showForumCategory)) {
-				presenceData.state = `Categoria: ${NonThread.childNodes[
-					NonThread.childNodes.length - 1
-				].textContent.replace(/^\s+|\s+$/g, "")}`;
+				presenceData.state = `Categoria: ${document
+					.querySelector("#main>article>div>h1>b")
+					.childNodes.at(-1)
+					.textContent.replace(/^\s+|\s+$/g, "")}`;
 				presenceData.smallImageKey = ResourceNames.search;
 			}
 		} else {
@@ -249,18 +249,16 @@ presence.on("UpdateData", async () => {
 		(await presence.getSetting<boolean>(SettingsId.showSocial)) &&
 		!NotFound()
 	) {
-		presenceData.details = isNaN(parseInt(pathName.split("/").slice(-1)[0]))
+		presenceData.details = isNaN(parseInt(pathName.split("/").at(-1)))
 			? "Visualizando Publicações"
 			: "Visualizando Postagem";
 		if (
-			!isNaN(parseInt(pathName.split("/").slice(-1)[0])) &&
+			!isNaN(parseInt(pathName.split("/").at(-1))) &&
 			(await presence.getSetting<boolean>(SettingsId.showSocialTitle))
 		) {
 			presenceData.details += ":";
 			presenceData.state = document.querySelector("head>title").textContent;
-			presenceData.smallImageText = `Post Id: ${
-				pathName.split("/").slice(-1)[0]
-			}`;
+			presenceData.smallImageText = `Post Id: ${pathName.split("/").at(-1)}`;
 		}
 		presenceData.smallImageKey = ResourceNames.reading;
 	} else if (
@@ -272,28 +270,32 @@ presence.on("UpdateData", async () => {
 		const animeName = document.querySelector("h1>b"),
 			modal = document.querySelector("div.modal-header>h1"),
 			selected = document.querySelector("a.p1.din.router-link-exact-active");
-		document.querySelectorAll("div.aniinfos>span").forEach(item => {
+		for (const item of document.querySelectorAll("div.aniinfos>span")) {
 			if (item.previousElementSibling.textContent.includes("Gêneros")) {
 				presenceData.smallImageKey = ResourceNames.search;
 				presenceData.smallImageText = item.textContent;
 			}
-		});
-
-		if (await presence.getSetting<boolean>(SettingsId.showAnimeReview)) {
-			if (modal && modal.textContent.toLowerCase().includes("resenha")) {
-				selected &&
-				(await presence.getSetting<boolean>(SettingsId.showAnimeSelection))
-					? (presenceData.details = `Criando Resenha - ${selected.textContent}:`)
-					: (presenceData.details = "Criando Resenha:");
-			}
 		}
-		if (await presence.getSetting<boolean>(SettingsId.showAnimeTrailer)) {
-			if (modal && modal.textContent.toLowerCase().includes("trailer")) {
-				selected &&
-				(await presence.getSetting<boolean>(SettingsId.showAnimeSelection))
-					? (presenceData.details = `Assistindo Trailer - ${selected.textContent}:`)
-					: (presenceData.details = "Assistindo Trailer:");
-			}
+
+		if (
+			(await presence.getSetting<boolean>(SettingsId.showAnimeReview)) &&
+			modal &&
+			modal.textContent.toLowerCase().includes("resenha")
+		) {
+			selected &&
+			(await presence.getSetting<boolean>(SettingsId.showAnimeSelection))
+				? (presenceData.details = `Criando Resenha - ${selected.textContent}:`)
+				: (presenceData.details = "Criando Resenha:");
+		}
+		if (
+			(await presence.getSetting<boolean>(SettingsId.showAnimeTrailer)) &&
+			modal &&
+			modal.textContent.toLowerCase().includes("trailer")
+		) {
+			selected &&
+			(await presence.getSetting<boolean>(SettingsId.showAnimeSelection))
+				? (presenceData.details = `Assistindo Trailer - ${selected.textContent}:`)
+				: (presenceData.details = "Assistindo Trailer:");
 		}
 		if (!presenceData.details) {
 			selected &&
@@ -317,12 +319,12 @@ presence.on("UpdateData", async () => {
 		const value = ["...", "..."];
 		if (animeNameEP) {
 			value[0] = animeNameEP.textContent.replace(
-				animeNameEP.textContent.match(/ - \d+/g).slice(-1)[0],
+				animeNameEP.textContent.match(/ - \d+/g).at(-1),
 				""
 			);
 			[value[1]] = animeNameEP.textContent
 				.match(/ - \d+/g)
-				.slice(-1)[0]
+				.at(-1)
 				.match(/\d+/g);
 		}
 		presenceData.details = !(await presence.getSetting<boolean>(
@@ -380,16 +382,16 @@ presence.on("UpdateData", async () => {
 				],
 				customPaths = await presence.getSetting<string>("customPaths"),
 				pathsFromCustom = [customPaths.toLowerCase().replace(/[\s\n]+/g, "")];
-			pathsAndStrings.forEach((item: string) => {
+			for (const item of pathsAndStrings) {
 				const splitItem = item.split("=");
 				if (
 					pathName.startsWith(splitItem[0]) &&
-					pathsFromCustom.indexOf(splitItem[0]) !== -1
+					pathsFromCustom.includes(splitItem[0])
 				)
 					[, presenceData.details] = splitItem;
-				if (pathName === "/" && pathsFromCustom.indexOf("/") !== -1)
+				if (pathName === "/" && pathsFromCustom.includes("/"))
 					presenceData.details = "Início";
-			});
+			}
 		} finally {
 			DefaultPresence();
 		}

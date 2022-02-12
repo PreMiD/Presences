@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname } = document.location;
 
-	if (pathname === "/" && window.location.search.substr(0, 2) === "?s") {
+	if (pathname === "/" && window.location.search.substring(0, 2) === "?s") {
 		const urlParams = new URLSearchParams(window.location.search),
 			nsfw = urlParams.get("adult");
 		presenceData.details = "Searching:";

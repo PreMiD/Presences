@@ -24,8 +24,8 @@ presence.on("UpdateData", async () => {
 		startTimestamp,
 		endTimestamp;
 
-	const { href } = window.location,
-		path = window.location.pathname;
+	const { href, pathname } = window.location,
+		path = pathname;
 
 	if (href !== oldUrl) {
 		oldUrl = href;
