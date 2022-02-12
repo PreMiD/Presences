@@ -6,8 +6,6 @@ const presence = new Presence({
 		.find(val => val.startsWith("letterboxd"))
 		.split("=")[1];
 
-let details = "";
-
 function generateButtonText(text: string): [ButtonData] {
 	return [
 		{
@@ -532,8 +530,5 @@ presence.on("UpdateData", async () => {
 
 	if (!(await presence.getSetting("show_buttons"))) delete presenceData.buttons;
 
-	if (details !== presenceData.details) {
-		presence.setActivity(presenceData);
-		({ details } = presenceData);
-	}
+	presence.setActivity(presenceData);
 });
