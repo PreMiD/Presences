@@ -1,21 +1,23 @@
 const presence = new Presence({
-	clientId: "543380687466528772"
-}),
+		clientId: "543380687466528772"
+	}),
 	browsingStamp = Math.floor(Date.now() / 1000),
 	urlpath = document.location.pathname.split("/"),
 	getElement = (query: string): string | undefined => {
 		return document.querySelector(query)?.textContent;
 	},
 	getEpisode = (query: string): string | undefined => {
-		return document.querySelector(query)?.textContent.split("E")[1]
+		return document
+			.querySelector(query)
+			?.textContent.split("E")[1]
 			.replace(/- Bstation/gi, "");
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon",
-		details: "Idle"
-	},
+			largeImageKey: "icon",
+			details: "Idle"
+		},
 		path = document.location.pathname.toLowerCase();
 
 	// Main Site
