@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "941298758598164481"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let search: HTMLInputElement, title: HTMLElement, title2: HTMLElement;
+let search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
