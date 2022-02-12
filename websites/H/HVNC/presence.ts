@@ -57,9 +57,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Configuring...";
 	} else if (document.location.pathname.includes("/batch")) {
-		progress = document
-			.querySelector("div[id='progress']")
-			.textContent.trim();
+		progress = document.querySelector("div[id='progress']").textContent.trim();
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Running Batch Operations...";
 		presenceData.state = progress;
