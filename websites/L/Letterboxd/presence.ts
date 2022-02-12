@@ -4,7 +4,8 @@ const presence = new Presence({
 	user = document.cookie
 		.split(";")
 		.find(val => val.startsWith("letterboxd"))
-		.split("=")[1];
+		.split("=")[1],
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function generateButtonText(text: string): [ButtonData] {
 	return [
@@ -40,7 +41,7 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 		largeImageKey: "final",
-		startTimestamp: Date.now()
+		startTimestamp: browsingTimestamp
 	};
 
 	if (path[0]) {
