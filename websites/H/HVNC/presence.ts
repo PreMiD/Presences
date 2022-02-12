@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "941317056589086730"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title;
+let title, searchstr, page, edit;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -11,15 +11,15 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (new URLSearchParams(window.location.search).has("q")) {
-		const searchstr = document.querySelector("input").value;
-		const page = document
+		searchstr = document.querySelector("input").value;
+		page = document
 			.querySelector("a[class='paginate_button current']")
 			.textContent.trim();
 		presenceData.details = "Searching For:";
 		presenceData.state = searchstr + " - Page " + page;
 		presenceData.smallImageKey = "search";
 	} else if (document.location.pathname === "/") {
-		const page = document
+		page = document
 			.querySelector("a[class='paginate_button current']")
 			.textContent.trim();
 		presenceData.details = "Viewing Homepage";
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/reader")) {
 		presenceData.smallImageKey = "read";
 		title = document.querySelector("title").textContent.trim();
-		const page = document
+		page = document
 			.querySelector("span[class='current-page']")
 			.textContent.trim();
 		presenceData.details = "Reading:";
@@ -60,8 +60,8 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Running Batch Operations...";
 	} else if (document.location.pathname.startsWith("/edit")) {
-		const edit = document.querySelector("h2").textContent.trim();
 		presenceData.smallImageKey = "sett";
+		edit = document.querySelector("h2").textContent.trim();
 		presenceData.details = edit;
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
