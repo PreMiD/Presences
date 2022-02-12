@@ -16,14 +16,14 @@ presence.on("UpdateData", async () => {
 			.querySelector("a[class='paginate_button current']")
 			.textContent.trim();
 		presenceData.details = "Searching For:";
-		presenceData.state = "${searchstr} - Page ${page}";
+		presenceData.state = `${searchstr} - Page ${page}`;
 		presenceData.smallImageKey = "search";
 	} else if (document.location.pathname === "/") {
 		page = document
 			.querySelector("a[class='paginate_button current']")
 			.textContent.trim();
 		presenceData.details = "Viewing Homepage";
-		presenceData.state = "Page ${page}";
+		presenceData.state = `Page ${page}`;
 	} else if (document.location.pathname.includes("/reader")) {
 		presenceData.smallImageKey = "read";
 		title = document.querySelector("title").textContent.trim();
@@ -31,11 +31,11 @@ presence.on("UpdateData", async () => {
 			.querySelector("span[class='current-page']")
 			.textContent.trim();
 		presenceData.details = "Reading:";
-		presenceData.state = "${title} - Page ${page}";
+		presenceData.state = `${title} - Page ${page}`;
 		presenceData.buttons = [
 			{
 				label: "Read along",
-				url: "${document.URL}&p=${page}"
+				url: `${document.URL}&p=${page}`
 			}
 		];
 	} else if (document.location.pathname.includes("/stats")) {
