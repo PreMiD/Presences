@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 		largeImageKey: "final",
-		startTimestamp: Date.now()
+		startTimestamp: browsingTimestamp
 	};
 
 	if (path[0]) {
