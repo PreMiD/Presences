@@ -1,8 +1,13 @@
+// TODO: Check Telegram classic version if it can be improved
+// TODO: Create new function for Telegram version K (React)
+// TODO: Create new function for Telegram version Z (Native)
+
 const presence = new Presence({
 	clientId: "664595715242197008"
 });
 
-presence.on("UpdateData", async () => {
+async function legacyVer() {
+	// for classic version, tested on 0.7.0 and still works fine
 	const path = document.location.href,
 		showName = await presence.getSetting<boolean>("name"),
 		presenceData: PresenceData = {
@@ -33,7 +38,18 @@ presence.on("UpdateData", async () => {
 				: `Reading ${messages.length} message${
 						messages.length > 1 ? "s" : ""
 				  }.`;
-	} else presenceData.details = "Logging in..";
+	} else if (
+		document.getElementsByClassName("im_history_not_selected_wrap").length > 0
+	)
+		presenceData.details = "Logged in";
+	else presenceData.details = "Logging in..";
+	return presenceData;
+}
 
+presence.on("UpdateData", async () => {
+	let presenceData;
+	if (document.location.href.includes("legacy=1"))
+		// if web client is the classic version
+		presenceData = await legacyVer();
 	presence.setActivity(presenceData);
 });
