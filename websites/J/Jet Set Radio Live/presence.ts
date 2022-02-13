@@ -5,14 +5,10 @@ const presence = new Presence({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
 	}),
-	getTimestamps = (videoTime: number, videoDuration: number): number[] => {
-		const startTime = Date.now();
-		return [
-			Math.floor(startTime / 1000),
-			Math.floor(startTime / 1000) - videoTime + videoDuration
-		];
-	},
 	stationIDMap: { [key: string]: string } = {
+		olliolliworld: "OlliOlli World",
+		spacechannel5: "Space Channel 5",
+		live: "Jet Set Radio Live",
 		outerspace: "Outer Space",
 		classic: "Classic",
 		future: "Future",
@@ -36,11 +32,14 @@ const presence = new Presence({
 		silvagunner: "SilvaGunner x JSR",
 		futuregeneration: "Future Generation",
 		jetmashradio: "Jet Mash Radio",
+		memoriesoftokyoto: "Memories of Tokyo-to",
+		tokyotofuture: "Sounds of Tokyo-to Future",
 		crazytaxi: "Crazy Taxi",
 		ollieking: "Ollie King",
 		toejamandearl: "Toe Jam & Earl",
 		hover: "Hover",
 		butterflies: "Butterflies",
+		lethalleagueblaze: "Lethal League Blace",
 		bonafidebloom: "BonafideBloom",
 		djchidow: "DJ Chidow",
 		verafx: "VeraFX",
@@ -76,12 +75,9 @@ presence.on("UpdateData", async () => {
 		) {
 			if (await presence.getSetting<boolean>("song"))
 				presenceData.details = songName.textContent;
-			if (await presence.getSetting<boolean>("timestamp")) {
+			if (await presence.getSetting<boolean>("timestamp") && isFinite(audio.duration)) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					getTimestamps(
-						Math.floor(audio.currentTime),
-						Math.floor(audio.duration)
-					);
+					presence.getTimestampsfromMedia(audio);
 			}
 			presenceData.smallImageKey = "play";
 			presenceData.smallImageText = (await strings).play;
