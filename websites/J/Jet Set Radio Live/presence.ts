@@ -75,7 +75,10 @@ presence.on("UpdateData", async () => {
 		) {
 			if (await presence.getSetting<boolean>("song"))
 				presenceData.details = songName.textContent;
-			if (await presence.getSetting<boolean>("timestamp") && isFinite(audio.duration)) {
+			if (
+				(await presence.getSetting<boolean>("timestamp")) &&
+				isFinite(audio.duration)
+			) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(audio);
 			}
