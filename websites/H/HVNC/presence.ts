@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "941317056589086730"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title, searchstr, page, edit, progress;
+let title, searchstr, page, edit, progress, upload;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -48,8 +48,10 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Viewing Logs";
 	} else if (document.location.pathname.includes("/upload")) {
+		upload = document.querySelector<HTMLDivElement>(".bar").style.width;
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Adding Archives...";
+		presenceData.state = upload;
 	} else if (document.location.pathname.startsWith("/config/categories/")) {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Editing Category...";
@@ -62,8 +64,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Running Batch Operations...";
 		presenceData.state = progress;
 	} else if (document.location.pathname.startsWith("/edit")) {
-		presenceData.smallImageKey = "sett";
 		edit = document.querySelector("h2").textContent.trim();
+		presenceData.smallImageKey = "sett";
 		presenceData.details = edit;
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
