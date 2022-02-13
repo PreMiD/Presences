@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "941317056589086730"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title, searchstr, page, edit, progress, upload;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -11,31 +10,32 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (new URLSearchParams(window.location.search).has("q")) {
-		searchstr = document.querySelector("input").value;
-		page = document
-			.querySelector("a[class='paginate_button current']")
-			.textContent.trim();
 		presenceData.details = "Searching For:";
-		presenceData.state = `${searchstr} - Page ${page}`;
+		presenceData.state = `${
+			document.querySelector("input").value
+		} - Page ${document
+			.querySelector("a[class='paginate_button current']")
+			.textContent.trim()}`;
 		presenceData.smallImageKey = "search";
 	} else if (document.location.pathname === "/") {
-		page = document
-			.querySelector("a[class='paginate_button current']")
-			.textContent.trim();
 		presenceData.details = "Viewing Homepage";
-		presenceData.state = `Page ${page}`;
+		presenceData.state = `Page ${document
+			.querySelector("a[class='paginate_button current']")
+			.textContent.trim()}`;
 	} else if (document.location.pathname.includes("/reader")) {
 		presenceData.smallImageKey = "read";
-		title = document.querySelector("title").textContent.trim();
-		page = document
-			.querySelector("span[class='current-page']")
-			.textContent.trim();
 		presenceData.details = "Reading:";
-		presenceData.state = `${title} - Page ${page}`;
+		presenceData.state = `${document
+			.querySelector("title")
+			.textContent.trim()} - Page ${document
+			.querySelector("span[class='current-page']")
+			.textContent.trim()}`;
 		presenceData.buttons = [
 			{
 				label: "Read along",
-				url: `${document.URL}&p=${page}`
+				url: `${document.URL}&p=${document
+					.querySelector("span[class='current-page']")
+					.textContent.trim()}`
 			}
 		];
 	} else if (document.location.pathname.includes("/stats")) {
@@ -48,10 +48,10 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Viewing Logs";
 	} else if (document.location.pathname.includes("/upload")) {
-		upload = document.querySelector<HTMLDivElement>(".bar").style.width;
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Adding Archives...";
-		presenceData.state = upload;
+		presenceData.state =
+			document.querySelector<HTMLDivElement>(".bar").style.width;
 	} else if (document.location.pathname.startsWith("/config/categories/")) {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Editing Category...";
@@ -59,14 +59,14 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Configuring...";
 	} else if (document.location.pathname.includes("/batch")) {
-		progress = document.querySelector("div[id='progress']").textContent.trim();
 		presenceData.smallImageKey = "sett";
 		presenceData.details = "Running Batch Operations...";
-		presenceData.state = progress;
+		presenceData.state = document
+			.querySelector("div[id='progress']")
+			.textContent.trim();
 	} else if (document.location.pathname.startsWith("/edit")) {
-		edit = document.querySelector("h2").textContent.trim();
 		presenceData.smallImageKey = "sett";
-		presenceData.details = edit;
+		presenceData.details = document.querySelector("h2").textContent.trim();
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
