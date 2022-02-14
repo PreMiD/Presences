@@ -53,14 +53,14 @@ async function kVer(): Promise<PresenceData> {
 			largeImageKey: "telegram"
 		},
 		showName: boolean = await presence.getSetting<boolean>("name"),
-		textArea: HTMLCollection = document.getElementsByClassName(
-			"input-message-input"
-		),
-		messagesCount: number = document.getElementsByClassName("message").length,
 		activeChatDetails = document.querySelector(
 			"#column-center > div.chats-container > div.chat > div.sidebar-header > div.chat-info-container > div.chat-info > div.person > div.content > div.top > div.user-title > span.peer-title"
 		);
 	if (activeChatDetails) {
+		const textArea: HTMLCollection = document.getElementsByClassName(
+				"input-message-input"
+			),
+			messagesCount: number = document.getElementsByClassName("message").length;
 		if (showName) {
 			presenceData.details = "Talking to this user:";
 			presenceData.state = activeChatDetails.textContent;
@@ -88,10 +88,12 @@ async function zVer(): Promise<PresenceData> {
 		showName: boolean = await presence.getSetting<boolean>("name"),
 		activeChatDetails: Element = document.querySelector(
 			"#MiddleColumn > div.messages-layout > div.MiddleHeader > div.Transition.slide-fade > div.Transition__slide--active > div.chat-info-wrapper > div.ChatInfo > div.info > div.title > h3"
-		),
-		textArea: HTMLElement = document.getElementById("editable-message-text"),
-		messagesCount: number = document.getElementsByClassName("Message").length;
-	if (document.getElementsByClassName("ChatInfo").length > 0) {
+		);
+	if (activeChatDetails) {
+		const textArea: HTMLElement = document.getElementById(
+				"editable-message-text"
+			),
+			messagesCount: number = document.getElementsByClassName("Message").length;
 		if (showName) {
 			presenceData.details = "Talking to this user:";
 			presenceData.state = activeChatDetails.textContent;
