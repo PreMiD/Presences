@@ -47,7 +47,7 @@ const presence = new Presence({
 	},
 	coverUrls: Record<string, string> = {};
 
-function fetchSeries(): Promise<string> {
+function fetchCover(): Promise<string> {
 	return new Promise(resolve => {
 		fetch(
 			`https://comet.api.hbo.com/express-content/${
@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
 					}/tileburnedin?size=1024x1024`;
 				} else {
 					const episodeId = location.pathname.match(/:episode:([^:]+)/)[1];
-					coverUrls[episodeId] ??= await fetchSeries();
+					coverUrls[episodeId] ??= await fetchCover();
 
 					presenceData.largeImageKey = coverUrls[episodeId];
 				}
