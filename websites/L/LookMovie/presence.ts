@@ -1,55 +1,65 @@
 const presence = new Presence({
-		clientId: "760588725494218844"
+		clientId: "934789855962083359"
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing"
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "lm"
 		},
-		video: HTMLVideoElement = document.querySelector("video");
-
-	if (video && !isNaN(video.duration)) {
-		if (document.location.pathname.includes("/shows/view")) {
-			presenceData.details = `${
-				document.querySelector(".watch-heading > h1 > span").previousSibling
-					.textContent
-			}(${document.querySelector(".watch-heading > h1 > span").textContent})`;
-			presenceData.state = `${
-				document.querySelector(".seasons-switcher > span").textContent
-			} ${document.querySelector(".episodes-switcher > span").textContent}`;
-		} else if (document.location.pathname.includes("/movies/view")) {
-			presenceData.details = document.querySelector(
-				".watch-heading > h1 > span"
-			).previousSibling.textContent;
-			presenceData.state = document.querySelector(
-				".watch-heading > h1 > span"
-			).textContent;
+		video = document.querySelector<HTMLVideoElement>("#video_player"),
+		videoDur = document.querySelector(
+			"#video_player > div.vjs-control-bar > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display"
+		);
+	if (video && videoDur) {
+		const titles = document.querySelector<HTMLMetaElement>(
+				'meta[property="og:title"]'
+			),
+			videoDuration = presence.timestampFromFormat(
+				document.querySelector(
+					"#video_player > div.vjs-control-bar > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display"
+				).textContent
+			),
+			videoCurrent = presence.timestampFromFormat(
+				document.querySelector(
+					"#video_player > div.vjs-control-bar > div.vjs-current-time.vjs-time-control.vjs-control > span.vjs-current-time-display"
+				).textContent
+			),
+			videoPaused = video.className;
+		if (document.location.pathname.includes("/s/")) {
+			presenceData.details = titles.content
+				.replace("Watch show", "")
+				.replace("on lookmovie for free in 1080p High Definition", "");
+		} else if (document.location.pathname.includes("/m/")) {
+			presenceData.details = titles.content
+				.replace("Watch movie", "")
+				.replace("on lookmovie in 1080p high definition", "");
 		}
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
-		presenceData.smallImageText = video.paused
+		presenceData.smallImageKey = videoPaused.includes("vjs-paused")
+			? "pause"
+			: "play";
+		presenceData.smallImageText = videoPaused.includes("vjs-paused")
 			? (await strings).pause
 			: (await strings).play;
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestamps(
-				Math.floor(video.currentTime),
-				Math.floor(video.duration)
+				Math.floor(videoCurrent),
+				Math.floor(videoDuration)
 			);
 
-		if (video.paused) {
+		if (videoPaused.includes("vjs-paused")) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-
-		presence.setActivity(presenceData, !video.paused);
 	} else {
 		presenceData.details = (await strings).browsing;
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = (await strings).browsing;
-		presence.setActivity(presenceData);
 	}
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
