@@ -80,11 +80,40 @@ async function kVer(): Promise<PresenceData> {
 	return presenceData;
 }
 
+async function zVer(): Promise<PresenceData> {
+	// for Z version (Telegram WebZ 1.33.4)
+	const presenceData: PresenceData = {
+			largeImageKey: "telegram"
+		},
+		showName: boolean = await presence.getSetting<boolean>("name"),
+		activeChatDetails: Element = document.querySelector(
+			"#MiddleColumn > div.messages-layout > div.MiddleHeader > div.Transition.slide-fade > div.Transition__slide--active > div.chat-info-wrapper > div.ChatInfo > div.info > div.title > h3"
+		),
+		textArea: HTMLElement = document.getElementById("editable-message-text"),
+		messagesCount: number = document.getElementsByClassName("Message").length;
+	if (document.getElementsByClassName("ChatInfo").length > 0) {
+		if (showName) {
+			presenceData.details = "Talking to this user:";
+			presenceData.state = activeChatDetails.textContent;
+		} else presenceData.details = "Talking to someone";
+		presenceData.smallImageKey =
+			textArea && textArea.textContent.length > 0 ? "writing" : "reading";
+		presenceData.smallImageText =
+			textArea && textArea.textContent.length > 0
+				? "Typing a message"
+				: `Reading ${messagesCount} message${messagesCount > 1 ? "s" : ""}`;
+	} else if (document.getElementById("middle-column-bg"))
+		presenceData.details = "Logged in";
+	else presenceData.details = "Logging in...";
+	return presenceData;
+}
+
 presence.on("UpdateData", async () => {
 	let presenceData;
 	if (document.location.href.includes("legacy=1"))
 		// if web client is the classic version
 		presenceData = await legacyVer();
 	else if (document.location.href.includes("/k/")) presenceData = await kVer();
+	else if (document.location.href.includes("/z/")) presenceData = await zVer();
 	presence.setActivity(presenceData);
 });
