@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		details: "Search host",
 		largeImageKey: "airbnb-big",
 		startTimestamp: browsingTimestamp
-	}
+	};
 
 	if (document.location.pathname.includes("/s/")) {
 		// search
@@ -25,11 +25,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Search an experience";
 		}
 	} else if (document.location.pathname.includes("/experiences/")) {
-    const experience = document.querySelector("div._b8stb0 > span > h1._fecoyn4")?.textContent;
-    presenceData.details = "Viewing experience : ";
-    presenceData.state = `${experience}`
-  } else {
-		presenceData.details = "Viewing homepage"
+		const experience = document.querySelector(
+			"div._b8stb0 > span > h1._fecoyn4"
+		)?.textContent;
+		presenceData.details = "Viewing experience : ";
+		presenceData.state = `${experience}`;
+	} else {
+		presenceData.details = "Viewing homepage";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
