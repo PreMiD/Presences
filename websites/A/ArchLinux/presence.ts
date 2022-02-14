@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	{ pathname, hostname } = document.location,
-	path1 = webPath.split("/")[1];
+	path1 = pathname.split("/")[1];
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -11,8 +11,8 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp
 		},
 		archData: {
-			[hostName: string]: {
-				[webPath: string]: {
+			[hostname: string]: {
+				[pathname: string]: {
 					[data: string]: string;
 				};
 			};
@@ -164,16 +164,16 @@ presence.on("UpdateData", async () => {
 			}
 		};
 
-	if (hostName in archData && path1 in archData[hostName]) {
-		presenceData.details = archData[hostName][path1].details;
-		if (archData[hostName][path1].state) {
+	if (hostname in archData && path1 in archData[hostname]) {
+		presenceData.details = archData[hostname][path1].details;
+		if (archData[hostname][path1].state) {
 			presenceData.state = document
-				.getElementsByTagName(archData[hostName][path1].state)
+				.getElementsByTagName(archData[hostname][path1].state)
 				.item(0)
 				.innerHTML.replace(/&amp;/g, "&")
 				.split(" / ")[0];
 		}
-	} else presenceData.details = archData[hostName][""].details;
+	} else presenceData.details = archData[hostname][""].details;
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
