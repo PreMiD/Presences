@@ -15,98 +15,88 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector("input").value;
 		presenceData.smallImageKey = "search";
 	} else if (document.location.pathname === "/") {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = "Đang duyệt trang chủ";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "surf";
 	} else if (document.location.pathname.startsWith("/tacgia=")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = `Đang xem danh sách truyện của tác giả ${document
 			.querySelectorAll("span[itemprop='name']")[2]
 			.textContent.trim()}`;
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 	} else if (document.location.pathname.startsWith("/char=")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = `Đang xem danh sách truyện có nhân vật ${document
 			.querySelectorAll("span[itemprop='name']")[2]
 			.textContent.trim()}`;
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 	} else if (document.location.pathname.startsWith("/doujin=")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = `Đang xem danh sách truyện là doujin ${document
 			.querySelectorAll("span[itemprop='name']")[2]
 			.textContent.trim()}`;
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 	} else if (document.location.pathname.startsWith("/dang-tien-hanh.html")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = "Đang xem danh sách truyện Đang tiến hành";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 	} else if (document.location.pathname.startsWith("/dang-tien-hanh.html")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = "Đang xem danh sách truyện Đang tiến hành";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 	} else if (document.location.pathname.startsWith("/danh-sach.html")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = "Đang xem danh sách truyện";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 	} else if (document.location.pathname.startsWith("/chap-moi.html")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = "Đang xem danh sách truyện Có chap mới";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 	} else if (document.location.pathname.startsWith("/nhom-dich.html")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = "Đang xem danh sách nhóm dịch";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 	} else if (document.location.pathname.startsWith("/da-hoan-thanh.html")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = "Đang xem danh sách truyện Đã hoàn thành";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
@@ -168,21 +158,19 @@ presence.on("UpdateData", async () => {
 				.textContent.trim();
 			presenceData.smallImageKey = "chater";
 		} else {
-			if (document.location.search.includes("page")) 
+			if (document.location.search.includes("page"))
 				page = new URLSearchParams(document.location.search).get("page");
-			 else 
-				page = "1";
-			
+			else page = "1";
+
 			presenceData.details = `Đang xem danh sách tin nhắn`;
 			presenceData.state = `Trang ${page}`;
 			presenceData.smallImageKey = "chat";
 		}
 	} else if (document.location.pathname.startsWith("/forum/mail.php")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = "Đang xem hộp thư";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "chat";
@@ -239,11 +227,10 @@ presence.on("UpdateData", async () => {
 		];
 		presenceData.smallImageKey = "xem";
 	} else if (document.location.pathname.startsWith("/g/")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = `Đang xem danh sách truyện của nhóm "${document
 			.querySelectorAll("span[itemprop='name']")[2]
 			.textContent.trim()}"`;
@@ -270,15 +257,12 @@ presence.on("UpdateData", async () => {
 			namekey = keyword.get("name");
 			doukey = keyword.get("dou");
 			charkey = keyword.get("char");
-			if (namekey.length === 0) 
-				namekey = "Trống";
-			
-			if (doukey.length === 0) 
-				doukey = "Trống";
-			
-			if (charkey.length === 0) 
-				charkey = "Trống";
-			
+			if (namekey.length === 0) namekey = "Trống";
+
+			if (doukey.length === 0) doukey = "Trống";
+
+			if (charkey.length === 0) charkey = "Trống";
+
 			keystr = new URLSearchParams(document.location.search).getAll("tag[]");
 			type keytest = {
 				[key: string]: string;
@@ -462,19 +446,16 @@ presence.on("UpdateData", async () => {
 					matched => keynum[matched]
 				);
 			presenceData.state = `Từ khóa: ${namekey} - Doujin: ${doukey} - Nhân vật: ${charkey} - Thể loại: ${keystr}`;
-			} else 
-			presenceData.state = "Đang nhập dữ liệu tìm kiếm...";
-		
+		} else presenceData.state = "Đang nhập dữ liệu tìm kiếm...";
 	} else if (document.location.pathname.startsWith("/forum/nhan_tin.php")) {
 		presenceData.details = "Đang nhắn tin...";
 		presenceData.state = document.querySelector("h3").textContent.trim();
 		presenceData.smallImageKey = "chater";
 	} else if (document.location.pathname.startsWith("/forum/mail.php")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = "Đang xem hộp thư...";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "chat";
@@ -499,11 +480,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Trong trang quản trị truyện...";
 		presenceData.smallImageKey = "up";
 	} else if (document.location.pathname.startsWith("/bookmark-list.php")) {
-		if (document.location.search.includes("page")) 
+		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		 else 
-			page = "1";
-		
+		else page = "1";
+
 		presenceData.details = "Đang xem danh sách truyện đang theo dõi";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "mark";
