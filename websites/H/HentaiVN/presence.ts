@@ -162,7 +162,7 @@ presence.on("UpdateData", async () => {
 				page = new URLSearchParams(document.location.search).get("page");
 			else page = "1";
 
-			presenceData.details = `Đang xem danh sách tin nhắn`;
+			presenceData.details = "Đang xem danh sách tin nhắn";
 			presenceData.state = `Trang ${page}`;
 			presenceData.smallImageKey = "chat";
 		}
