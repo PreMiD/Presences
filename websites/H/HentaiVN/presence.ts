@@ -2,7 +2,13 @@ const presence = new Presence({
 		clientId: "942782020055089192"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let page, keyword, namekey, doukey, charkey, keystr, largebox;
+let page = "1",
+	keyword,
+	namekey,
+	doukey,
+	charkey,
+	keystr,
+	largebox;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -17,7 +23,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname === "/") {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = "Đang duyệt trang chủ";
 		presenceData.state = `Trang ${page}`;
@@ -25,7 +30,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/tacgia=")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = `Đang xem danh sách truyện của tác giả ${document
 			.querySelectorAll("span[itemprop='name']")[2]
@@ -35,7 +39,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/char=")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = `Đang xem danh sách truyện có nhân vật ${document
 			.querySelectorAll("span[itemprop='name']")[2]
@@ -45,7 +48,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/doujin=")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = `Đang xem danh sách truyện là doujin ${document
 			.querySelectorAll("span[itemprop='name']")[2]
@@ -55,7 +57,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/dang-tien-hanh.html")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = "Đang xem danh sách truyện Đang tiến hành";
 		presenceData.state = `Trang ${page}`;
@@ -63,7 +64,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/dang-tien-hanh.html")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = "Đang xem danh sách truyện Đang tiến hành";
 		presenceData.state = `Trang ${page}`;
@@ -71,7 +71,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/danh-sach.html")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = "Đang xem danh sách truyện";
 		presenceData.state = `Trang ${page}`;
@@ -79,7 +78,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/chap-moi.html")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = "Đang xem danh sách truyện Có chap mới";
 		presenceData.state = `Trang ${page}`;
@@ -87,7 +85,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/nhom-dich.html")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = "Đang xem danh sách nhóm dịch";
 		presenceData.state = `Trang ${page}`;
@@ -95,7 +92,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/da-hoan-thanh.html")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = "Đang xem danh sách truyện Đã hoàn thành";
 		presenceData.state = `Trang ${page}`;
@@ -160,7 +156,6 @@ presence.on("UpdateData", async () => {
 		} else {
 			if (document.location.search.includes("page"))
 				page = new URLSearchParams(document.location.search).get("page");
-			else page = "1";
 
 			presenceData.details = "Đang xem danh sách tin nhắn";
 			presenceData.state = `Trang ${page}`;
@@ -169,7 +164,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/forum/mail.php")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = "Đang xem hộp thư";
 		presenceData.state = `Trang ${page}`;
@@ -229,7 +223,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/g/")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = `Đang xem danh sách truyện của nhóm "${document
 			.querySelectorAll("span[itemprop='name']")[2]
@@ -454,7 +447,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/forum/mail.php")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = "Đang xem hộp thư...";
 		presenceData.state = `Trang ${page}`;
@@ -482,7 +474,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/bookmark-list.php")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
-		else page = "1";
 
 		presenceData.details = "Đang xem danh sách truyện đang theo dõi";
 		presenceData.state = `Trang ${page}`;
