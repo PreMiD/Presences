@@ -61,13 +61,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Đang xem danh sách truyện Đang tiến hành";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
-	} else if (document.location.pathname.startsWith("/dang-tien-hanh.html")) {
-		if (document.location.search.includes("page"))
-			page = new URLSearchParams(document.location.search).get("page");
-
-		presenceData.details = "Đang xem danh sách truyện Đang tiến hành";
-		presenceData.state = `Trang ${page}`;
-		presenceData.smallImageKey = "list";
 	} else if (document.location.pathname.startsWith("/danh-sach.html")) {
 		if (document.location.search.includes("page"))
 			page = new URLSearchParams(document.location.search).get("page");
@@ -161,13 +154,6 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Trang ${page}`;
 			presenceData.smallImageKey = "chat";
 		}
-	} else if (document.location.pathname.startsWith("/forum/mail.php")) {
-		if (document.location.search.includes("page"))
-			page = new URLSearchParams(document.location.search).get("page");
-
-		presenceData.details = "Đang xem hộp thư";
-		presenceData.state = `Trang ${page}`;
-		presenceData.smallImageKey = "chat";
 	} else if (document.location.pathname.startsWith("/forum/donate.php")) {
 		presenceData.details = `Đang ${document
 			.querySelector("title")
