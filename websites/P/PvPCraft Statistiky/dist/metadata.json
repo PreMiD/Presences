@@ -12,8 +12,7 @@
   ],
   "service": "PvPCraft Statistiky",
   "description": {
-    "en": "The center of all player statistics and rankings throughout PvPCraft Public API",
-    "cs": "Centrum všech hráčských statistik a žebříčků skrz PvPCraft Public API"
+    "en": "The center of all player statistics and rankings throughout PvPCraft Public API"
   },
   "url": "stats.pvpcraft.cz",
   "version": "1.0.0",
