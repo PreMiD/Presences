@@ -58,6 +58,7 @@
 		"no-undefined": "error",
 		"no-eq-null": "error",
 		"@typescript-eslint/array-type": ["error", { "default": "array" }],
+		"@typescript-eslint/no-unused-vars": "error",
 		"prettier/prettier": "error",
 		"arrow-body-style": "off",
 		"prefer-arrow-callback": "off",
