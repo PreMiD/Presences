@@ -1,12 +1,13 @@
 // TODO: Check Telegram classic version if it can be improved
-// TODO: Create new function for Telegram version K (React)
+// BUG: "Writing" status doesn't work on classic
+// TODO: Test K version
 // TODO: Create new function for Telegram version Z (Native)
 
 const presence = new Presence({
 	clientId: "664595715242197008"
 });
 
-async function legacyVer() {
+async function legacyVer(): Promise<PresenceData> {
 	// for classic version, tested on 0.7.0 and still works fine
 	const path = document.location.href,
 		showName = await presence.getSetting<boolean>("name"),
@@ -46,10 +47,44 @@ async function legacyVer() {
 	return presenceData;
 }
 
+async function kVer(): Promise<PresenceData> {
+	// for K version (Telegram WebK alpha 1.1.0 (103))
+	const presenceData: PresenceData = {
+			largeImageKey: "telegram"
+		},
+		showName: boolean = await presence.getSetting<boolean>("name"),
+		textArea: HTMLCollection = document.getElementsByClassName(
+			"input-message-input"
+		),
+		messagesCount: number = document.getElementsByClassName("message").length,
+		activeChatDetails = document.querySelector(
+			"#column-center > div.chats-container > div.chat > div.sidebar-header > div.chat-info-container > div.chat-info > div.person > div.content > div.top > div.user-title > span.peer-title"
+		);
+	if (activeChatDetails) {
+		if (showName) {
+			presenceData.details = "Talking to this user:";
+			presenceData.state = activeChatDetails.textContent;
+		} else presenceData.details = "Talking to someone";
+		presenceData.smallImageKey =
+			textArea[0].textContent.length > 1 ? "writing" : "reading";
+		presenceData.smallImageText =
+			textArea[0].textContent.length > 1
+				? "Typing a message"
+				: `Reading ${messagesCount} message${messagesCount > 1 ? "s" : ""}`;
+	} else if (
+		document.getElementsByClassName("chat-background-item is-visible")[0]
+			.childElementCount < 1
+	)
+		presenceData.details = "Logged in";
+	else presenceData.details = "Logging in...";
+	return presenceData;
+}
+
 presence.on("UpdateData", async () => {
 	let presenceData;
 	if (document.location.href.includes("legacy=1"))
 		// if web client is the classic version
 		presenceData = await legacyVer();
+	else if (document.location.href.includes("/k/")) presenceData = await kVer();
 	presence.setActivity(presenceData);
 });
