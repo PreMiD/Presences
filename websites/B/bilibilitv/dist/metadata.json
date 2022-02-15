@@ -1,24 +1,29 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.6",
 	"author": {
-		"name": "Eason",
-		"id": "462456154266796032"
+		"name": "Few",
+		"id": "717681325565280336"
 	},
-	"service": "bilibilitv",
+	"service": "Bilibilitv",
 	"description": {
 		"en": "bilibili.tv is an ad-free anime streaming website.",
+		"th": "bilibili.tv เป็นเว็บไซต์สตรีมมิ่งอนิเมะที่ไม่มีโฆษณา",
 		"vi_VN": "bilibili.tv là nền tảng xem anime trực tuyến không có quảng cáo."
 	},
 	"url": [
 		"www.bilibili.tv",
 		"studio.bilibili.tv"
 	],
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/BY7MROC.png",
 	"thumbnail": "https://i.imgur.com/eMifMYk.png",
 	"color": "#2e62ff",
 	"category": "anime",
 	"tags": [
-		"anime"
+		"anime",
+		"bilibili",
+		"videos",
+		"free",
+		"thai"
 	]
 }
