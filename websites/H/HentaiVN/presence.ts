@@ -14,99 +14,134 @@ presence.on("UpdateData", async () => {
 	const inURL = new URLSearchParams(document.location.search),
 		inPath = document.location.pathname,
 		inQuery = document.location.search,
+		select = document.querySelector,
+		selectAll = document.querySelectorAll,
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		};
 
-	if (inURL.has("key")) {
-		presenceData.details = "Đang tìm kiếm:";
-		presenceData.state = document.querySelector("input").value;
+	if (inPath.startsWith("/tim-kiem-truyen.html") && inURL.has("key")) {
+		presenceData.details = "Đang tìm kiếm từ khóa:";
+		presenceData.state = select("input").value;
 		presenceData.smallImageKey = "search";
+		presenceData.largeImageKey = "home";
+	} else if (inPath.startsWith("/tim-kiem-tac-gia.html") && inURL.has("key")) {
+		presenceData.details = "Đang tìm kiếm truyện của tác giả:";
+		presenceData.state = select("input").value;
+		presenceData.smallImageKey = "search";
+		presenceData.largeImageKey = "home";
+	} else if (
+		inPath.startsWith("/tim-kiem-doujinshi.html") &&
+		inURL.has("key")
+	) {
+		presenceData.details = "Đang tìm kiếm truyện là Doujin của:";
+		presenceData.state = select("input").value;
+		presenceData.smallImageKey = "search";
+		presenceData.largeImageKey = "home";
+	} else if (inPath.startsWith("/tim-kiem-charater.html") && inURL.has("key")) {
+		presenceData.details = "Đang tìm kiếm truyện có nhân vật:";
+		presenceData.state = select("input").value;
+		presenceData.smallImageKey = "search";
+		presenceData.largeImageKey = "home";
 	} else if (document.location.pathname === "/") {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
 		presenceData.details = "Đang duyệt trang chủ";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "surf";
+		presenceData.largeImageKey = "home";
 	} else if (inQuery.includes("id")) {
 		presenceData.details = document
 			.querySelector("div[class='box-title']")
 			.textContent.trim()
 			.split("FORUM\n/\nQuay về item của bạn\n/\n")[1];
 		presenceData.smallImageKey = "kho";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/tacgia=")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
-		presenceData.details = `Đang xem danh sách truyện của tác giả ${document
-			.querySelectorAll("span[itemprop='name']")[2]
-			.textContent.trim()}`;
+		presenceData.details = `Đang xem danh sách truyện của tác giả ${selectAll(
+			"span[itemprop='name']"
+		)[2].textContent.trim()}`;
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/char=")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
-		presenceData.details = `Đang xem danh sách truyện có nhân vật ${document
-			.querySelectorAll("span[itemprop='name']")[2]
-			.textContent.trim()}`;
+		presenceData.details = `Đang xem danh sách truyện có nhân vật ${selectAll(
+			"span[itemprop='name']"
+		)[2].textContent.trim()}`;
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/doujin=")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
-		presenceData.details = `Đang xem danh sách truyện là doujin ${document
-			.querySelectorAll("span[itemprop='name']")[2]
-			.textContent.trim()}`;
+		presenceData.details = `Đang xem danh sách truyện là doujin của ${selectAll(
+			"span[itemprop='name']"
+		)[2].textContent.trim()}`;
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/dang-tien-hanh.html")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
 		presenceData.details = "Đang xem danh sách truyện Đang tiến hành";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/danh-sach.html")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
 		presenceData.details = "Đang xem danh sách truyện";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/chap-moi.html")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
 		presenceData.details = "Đang xem danh sách truyện Có chap mới";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/nhom-dich.html")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
 		presenceData.details = "Đang xem danh sách nhóm dịch";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/da-hoan-thanh.html")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
 		presenceData.details = "Đang xem danh sách truyện Đã hoàn thành";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/top-member.php")) {
 		presenceData.details = "Đang xem Bảng xếp hạng thành viên";
 		presenceData.smallImageKey = "top";
+		presenceData.largeImageKey = "admin";
 	} else if (inPath.startsWith("/top-waifu-tuan.php")) {
 		presenceData.details = "Đang xem Bảng xếp hạng Waifu Tuần";
 		presenceData.smallImageKey = "top";
+		presenceData.largeImageKey = "admin";
 	} else if (inPath.startsWith("/top-waifu.php")) {
 		presenceData.details = "Đang xem Bảng xếp hạng Waifu";
 		presenceData.smallImageKey = "top";
+		presenceData.largeImageKey = "admin";
 	} else if (inPath.startsWith("/top-waifu-idol.php")) {
 		presenceData.details = "Đang xem Bảng xếp hạng Waifu Idol";
 		presenceData.smallImageKey = "top";
+		presenceData.largeImageKey = "admin";
 	} else if (inPath.startsWith("/forum/user-")) {
 		presenceData.details = "Đang xem tường Forum thành viên";
 		presenceData.state = document
 			.querySelector("h1[itemprop='name']")
 			.textContent.trim();
 		presenceData.smallImageKey = "tuongfr";
+		presenceData.largeImageKey = "forum";
 		presenceData.buttons = [
 			{
 				label: `Xem tường ${document
@@ -117,41 +152,49 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (inPath.startsWith("/user-")) {
 		presenceData.details = "Đang xem tường Truyện thành viên";
-		presenceData.state = document.querySelector("h2").textContent.trim();
+		presenceData.state = select("h2").textContent.trim();
 		presenceData.smallImageKey = "tuongtr";
+		presenceData.largeImageKey = "truyen";
 		presenceData.buttons = [
 			{
-				label: `Xem tường ${document.querySelector("h2").textContent.trim()}`,
+				label: `Xem tường ${select("h2").textContent.trim()}`,
 				url: document.URL
 			}
 		];
 	} else if (inPath.startsWith("/forum/edit_pass.php")) {
 		presenceData.details = "Đang đổi mật khẩu...";
 		presenceData.smallImageKey = "pass";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/avatar/profile.php")) {
 		presenceData.details = "Đang đổi thông tin tài khoản...";
 		presenceData.smallImageKey = "info";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/forum/edit_chuky.php")) {
 		presenceData.details = "Đang đổi chữ kí...";
 		presenceData.smallImageKey = "chuky";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/forum/edit_avatar.php")) {
 		presenceData.details = "Đang đổi avatar...";
 		presenceData.smallImageKey = "avt";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/forum/reply.php")) {
 		presenceData.details = "Đang xem trả lời bình luận trong Forum...";
 		presenceData.smallImageKey = "bell";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/inbox.php")) {
 		if (inQuery.includes("user")) {
 			presenceData.details = document
 				.querySelector("div[class='bar-title']")
 				.textContent.trim();
 			presenceData.smallImageKey = "chater";
+			presenceData.largeImageKey = "home";
 		} else {
 			if (inQuery.includes("page")) page = inURL.get("page");
 
 			presenceData.details = "Đang xem danh sách tin nhắn";
 			presenceData.state = `Trang ${page}`;
 			presenceData.smallImageKey = "chat";
+			presenceData.largeImageKey = "home";
 		}
 	} else if (inPath.startsWith("/forum/donate.php")) {
 		presenceData.details = `Đang ${document
@@ -163,17 +206,19 @@ presence.on("UpdateData", async () => {
 			.querySelector("b")
 			.textContent.trim()}`;
 		presenceData.smallImageKey = "money";
+		presenceData.largeImageKey = "forum";
 	} else if (
 		!inPath.startsWith("/forum/t") &&
 		inPath.includes("-xem-truyen-")
 	) {
-		presenceData.details = `Đang đọc truyện "${document
-			.querySelectorAll("span[itemprop='name']")[2]
-			.textContent.trim()}"`;
-		presenceData.state = document
-			.querySelectorAll("span[itemprop='name']")[3]
-			.textContent.trim();
+		presenceData.details = `Đang đọc truyện "${selectAll(
+			"span[itemprop='name']"
+		)[2].textContent.trim()}"`;
+		presenceData.state = selectAll(
+			"span[itemprop='name']"
+		)[3].textContent.trim();
 		presenceData.smallImageKey = "doc";
+		presenceData.largeImageKey = "truyen";
 		presenceData.buttons = [
 			{
 				label: "Đọc cùng",
@@ -184,9 +229,9 @@ presence.on("UpdateData", async () => {
 		!inPath.startsWith("/forum/t") &&
 		inPath.includes("-doc-truyen-")
 	) {
-		presenceData.details = `Đang xem thông tin truyện "${document
-			.querySelectorAll("span[itemprop='name']")[2]
-			.textContent.trim()}"`;
+		presenceData.details = `Đang xem thông tin truyện "${selectAll(
+			"span[itemprop='name']"
+		)[2].textContent.trim()}"`;
 		presenceData.buttons = [
 			{
 				label: "Xem truyện",
@@ -194,10 +239,11 @@ presence.on("UpdateData", async () => {
 			}
 		];
 		presenceData.smallImageKey = "xem";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/forum/t")) {
-		presenceData.details = `Đang xem topic "${document
-			.querySelectorAll("span[itemprop='name']")[3]
-			.textContent.trim()}"`;
+		presenceData.details = `Đang xem topic "${selectAll(
+			"span[itemprop='name']"
+		)[3].textContent.trim()}"`;
 		presenceData.buttons = [
 			{
 				label: "Xem topic",
@@ -205,14 +251,16 @@ presence.on("UpdateData", async () => {
 			}
 		];
 		presenceData.smallImageKey = "xem";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/g/")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
-		presenceData.details = `Đang xem danh sách truyện của nhóm "${document
-			.querySelectorAll("span[itemprop='name']")[2]
-			.textContent.trim()}"`;
+		presenceData.details = `Đang xem danh sách truyện của nhóm "${selectAll(
+			"span[itemprop='name']"
+		)[2].textContent.trim()}"`;
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
+		presenceData.largeImageKey = "truyen";
 	} else if (document.location.pathname === "/forum/") {
 		presenceData.details = "Đang duyệt forum";
 		presenceData.smallImageKey = "surf";
@@ -221,14 +269,17 @@ presence.on("UpdateData", async () => {
 			.querySelector("b")
 			.textContent.trim()}`;
 		presenceData.smallImageKey = "surf";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/forum/c")) {
-		largebox = document.querySelector("title").textContent.trim();
+		largebox = select("title").textContent.trim();
 		largebox = largebox.substring(0, largebox.indexOf("-"));
 		presenceData.details = `Đang duyệt danh mục ${largebox}`;
 		presenceData.smallImageKey = "surf";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/forum/search-plus.php")) {
 		presenceData.details = "Đang tìm kiếm truyện nâng cao";
 		presenceData.smallImageKey = "search";
+		presenceData.largeImageKey = "home";
 		if (inQuery.includes("search")) {
 			keystr = inURL.getAll("tag[]");
 			namekey = `Từ khóa: ${inURL.get("name")} - `;
@@ -428,65 +479,83 @@ presence.on("UpdateData", async () => {
 		} else presenceData.state = "Đang nhập dữ liệu tìm kiếm...";
 	} else if (inPath.startsWith("/forum/nhan_tin.php")) {
 		presenceData.details = "Đang nhắn tin...";
-		presenceData.state = document.querySelector("h3").textContent.trim();
+		presenceData.state = select("h3").textContent.trim();
 		presenceData.smallImageKey = "chater";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/forum/mail.php")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
 		presenceData.details = "Đang xem hộp thư...";
 		presenceData.state = `Trang ${page}`;
+		presenceData.largeImageKey = "home";
 		presenceData.smallImageKey = "chat";
 	} else if (inPath.startsWith("/forum/free-market.php")) {
 		presenceData.details = "Đang lướt chợ tự do...";
 		presenceData.smallImageKey = "shop";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/forum/shop.php")) {
 		presenceData.details = "Đang lướt shop...";
 		presenceData.smallImageKey = "shop";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/forum/user_item.php")) {
 		presenceData.details = "Đang xem kho đồ cá nhân...";
 		presenceData.smallImageKey = "kho";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/forum/search_member.php")) {
 		presenceData.details = "Đang tìm kiếm thành viên...";
 		presenceData.smallImageKey = "search";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/forum/member.php")) {
 		presenceData.details = "Đang xem danh sách thành viên...";
 		presenceData.smallImageKey = "surf";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/admin/admin.php")) {
 		presenceData.details = "Trong trang quản trị truyện...";
 		presenceData.smallImageKey = "up";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/bookmark-list.php")) {
 		if (inQuery.includes("page")) page = inURL.get("page");
 
 		presenceData.details = "Đang xem danh sách truyện đang theo dõi";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "mark";
+		presenceData.largeImageKey = "truyen";
 	} else if (inPath.startsWith("/forum/huyhieu.php")) {
 		presenceData.details = "Đang xem phòng trưng bày huy hiệu";
 		presenceData.smallImageKey = "huyhieu";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/forum/my_waifu.php")) {
 		presenceData.details = "Đang xem danh sách waifu cá nhân";
 		presenceData.smallImageKey = "waifu";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/forum/home_waifu.php")) {
 		presenceData.details = "Đang lướt shop nhà waifu...";
 		presenceData.smallImageKey = "shop";
+		presenceData.largeImageKey = "forum";
 	} else if (inPath.startsWith("/register.php")) {
 		presenceData.details = "Đang đăng ký tài khoản...";
 		presenceData.smallImageKey = "notlog";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/login.php")) {
 		presenceData.details = "Đang đăng nhập...";
 		presenceData.smallImageKey = "notlog";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/forgot-password.php")) {
 		presenceData.details = "Đang lấy lại mật khẩu...";
 		presenceData.smallImageKey = "notlog";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/notification-reply.php")) {
 		presenceData.details = "Đang xem trả lời bình luận trong cổng truyện...";
 		presenceData.smallImageKey = "chater";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/notification-comment.php")) {
 		presenceData.details = "Đang xem bình luận trong cổng truyện...";
 		presenceData.smallImageKey = "bell";
+		presenceData.largeImageKey = "home";
 	} else if (inPath.startsWith("/forum/new_topic.php")) {
 		presenceData.details = "Đang tạo chủ đề mới...";
 		presenceData.smallImageKey = "topic";
+		presenceData.largeImageKey = "forum";
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
