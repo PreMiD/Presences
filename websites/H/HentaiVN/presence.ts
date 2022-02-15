@@ -11,8 +11,8 @@ let page = "1",
 	largebox;
 
 presence.on("UpdateData", async () => {
-	const inURL = new URLSearchParams(document.location.search);
-	const inPath = document.location.pathname;
+	const inURL = new URLSearchParams(document.location.search),
+		inPath = document.location.pathname;
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp
