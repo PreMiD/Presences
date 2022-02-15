@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
 	} else if (document.location.pathname.includes("/profile/")) {
 		presenceData.details = "Kouká na profil:";
 		presenceData.state = (
-			document.querySelector("span.player-nick") as HTMLElement
+			document.querySelector<HTMLSpanElement>("span.player-nick")
 		).textContent;
 	} else if (document.location.hostname === "stats.pvpcraft.cz") {
 		presenceData.details = "Hledá hráče:";
