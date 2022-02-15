@@ -3,7 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let page = "1",
-	keyword,
 	namekey,
 	doukey,
 	charkey,
