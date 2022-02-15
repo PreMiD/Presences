@@ -36,7 +36,6 @@ const presence = new Presence({
 let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
-
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: elapsed
@@ -63,13 +62,16 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("profilePic"),
 			presence.getSetting<boolean>("buttons")
 		]),
-		title = getElement("#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div:nth-child(1) > div"),
-		streamer = getElement("#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div:nth-child(1) > a.user-name > span"),
-		game = getElement("#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div.channel-infos > div > span > a"),
+		title = getElement(
+			"#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div:nth-child(1) > div"
+		),
+		streamer = getElement(
+			"#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div:nth-child(1) > a.user-name > span"
+		),
+		game = getElement(
+			"#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div.channel-infos > div > span > a"
+		),
 		vidTimer = getElement("div.time > div.duration");
-		const currentVidTimer = getElement("div.time > div.current-time");
-
-		
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
@@ -87,12 +89,19 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.browse;
 		if (!privacy) {
 			presenceData.details = strings.viewCategory;
-			if (document.querySelector("#layout-content > div > div.views-game-info > div.game-info > div.game-name") != null) {
-				presenceData.state = document.querySelector("#layout-content > div > div.views-game-info > div.game-info > div.game-name").textContent;
+			if (
+				document.querySelector(
+					"#layout-content > div > div.views-game-info > div.game-info > div.game-name"
+				) !== null
+			) {
+				presenceData.state = document.querySelector(
+					"#layout-content > div > div.views-game-info > div.game-info > div.game-name"
+				).textContent;
 			} else {
-				presenceData.state = document.querySelector("#layout-content > div > div > h2").textContent;
+				presenceData.state = document.querySelector(
+					"#layout-content > div > div > h2"
+				).textContent;
 			}
-			
 		}
 	} else if (pathname.startsWith("/browse")) {
 		presenceData.details = strings.searchingSomething;
@@ -102,7 +111,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = strings.searchingFor;
 			presenceData.state = document.querySelector(".tab-current").textContent;
 		}
-	}	else if (pathname.startsWith("/studio")) {
+	} else if (pathname.startsWith("/studio")) {
 		presenceData.details = strings.searchingSomething;
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = strings.search;
@@ -110,7 +119,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = strings.searchingFor;
 			presenceData.state = document.querySelector(".username").textContent;
 		}
-	}	else if (pathname.startsWith("/following")) {
+	} else if (pathname.startsWith("/following")) {
 		presenceData.details = strings.viewFollow;
 		presenceData.smallImageKey = "follow";
 		presenceData.smallImageText = strings.viewFollow;
@@ -126,21 +135,21 @@ presence.on("UpdateData", async () => {
 			if (pathname.includes("/dashboard"))
 				presenceData.state = strings.dashboard;
 		}
-	} else if (pathname.startsWith("/vods") || streamer && title) {
+	} else if (pathname.startsWith("/vods") || (streamer && title)) {
 		if (vidTimer) {
-			let paused = false
-			if (document.querySelector(".playback-btn") != null) paused = true
+			let paused = false;
+			if (document.querySelector(".playback-btn") !== null) paused = true;
 
-			let titleVod = document.querySelector(".video-info > .video-title").textContent;
-			let streamerVod = document.querySelector("#layout-content > div > div.view-main-content > div.user-box > div.components-profile-card > div.components-profile-card-center > span.components-profile-card-center-top > a").textContent;
-
-			console.log(vidTimer)
-			const timeElapsed = presence.timestampFromFormat(
-					currentVidTimer
+			const titleVod = document.querySelector(
+					".video-info > .video-title"
+				).textContent,
+				streamerVod = document.querySelector(
+					"#layout-content > div > div.view-main-content > div.user-box > div.components-profile-card > div.components-profile-card-center > span.components-profile-card-center-top > a"
+				).textContent,
+				timeElapsed = presence.timestampFromFormat(
+					getElement("div.time > div.current-time")
 				),
-				duration = presence.timestampFromFormat(
-					vidTimer
-				);
+				duration = presence.timestampFromFormat(vidTimer);
 			if (!privacy) {
 				presenceData.details = vidDetail
 					.replace("%title%", titleVod)
@@ -186,12 +195,14 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document
 					.querySelector<HTMLImageElement>(
 						"#layout-content > div > div.view-main-content > div.user-box > div.components-profile-card > a > img"
-					).src.replace("w240", "w600");
+					)
+					.src.replace("w240", "w600");
 			} else {
 				presenceData.largeImageKey = document
 					.querySelector<HTMLImageElement>(
 						"#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div:nth-child(1) > a.components-profile-card-image > div > div.components-avatar-image-container > img"
-					).src.replace("w240", "w600");
+					)
+					.src.replace("w240", "w600");
 			}
 		}
 	}
