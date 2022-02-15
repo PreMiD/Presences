@@ -28,7 +28,7 @@
 		"@types/debug": "^4.1.7",
 		"@types/glob": "^7.1.4",
 		"@types/json-to-ast": "^2.1.2",
-		"@types/node": "^16.11.24",
+		"@types/node": "^16.11.25",
 		"@types/prettier": "^2.4.4",
 		"@types/semver": "^7.3.8",
 		"@typescript-eslint/eslint-plugin": "^5.12.0",
