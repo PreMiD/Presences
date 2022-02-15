@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	user = document.cookie
 		.split(";")
-		.find(val => val.startsWith("letterboxd"))
+		.find(val => val.trim().startsWith("letterboxd"))
 		.split("=")[1],
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
