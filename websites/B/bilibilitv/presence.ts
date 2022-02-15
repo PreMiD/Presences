@@ -22,23 +22,24 @@ presence.on("UpdateData", async () => {
 
 	// Main Site
 
-	if (path === "/en") {
+	if (path === "/en" || path === "/vi" || path === "/th" || path === "/id") {
 		presenceData.smallImageKey = "idle";
 		presenceData.details = "Currently browsing";
 		presenceData.state = "Homepage";
-	} else if (path.startsWith("/en/play")) {
+	} else if (path.search("/play") > -1) {
 		presenceData.smallImageKey = "play";
 		presenceData.smallImageText = "Watching a show";
-		presenceData.details = getElement("h1.video-info__title");
-		presenceData.state = `Episode ${getEpisode("title")}`;
+		const nameandep = document.querySelectorAll("span.breadcrumb__item-text");
+		presenceData.details = `${(nameandep)[0]?.textContent}`;
+		presenceData.state = `${(nameandep)[1]?.textContent}`;
 		presenceData.startTimestamp = browsingStamp;
 		presenceData.buttons = [
 			{
 				label: "Watch this show",
-				url: `https://www.bilibili.tv/en/play/${urlpath[3]}`
+				url: `https://www.bilibili.tv/${urlpath[1]}/play/${urlpath[3]}`
 			}
 		];
-	} else if (path.startsWith("/en/video")) {
+	} else if (path.search("/video") > -1) {
 		presenceData.smallImageKey = "play";
 		presenceData.smallImageText = "Watching a video";
 		presenceData.details = getElement("h1.video-info__title");
@@ -47,31 +48,36 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Watch this video",
-				url: `https://www.bilibili.tv/en/video/${urlpath[3]}`
+				url: `https://www.bilibili.tv/${urlpath[1]}/video/${urlpath[3]}`
 			}
 		];
-	} else if (path.startsWith("/en/space")) {
+	} else if (path.search("/space") > -1) {
 		presenceData.smallImageText = "Viewing Space";
 		presenceData.details = `Viewing ${getElement("h1.user-title")}`;
 		presenceData.state = getElement("p.user-data__number");
 		presenceData.buttons = [
 			{
 				label: "View this creator",
-				url: `https://www.bilibili.tv/en/space/${urlpath[3]}`
+				url: `https://www.bilibili.tv/${urlpath[1]}/space/${urlpath[3]}`
 			}
 		];
-	} else if (path.startsWith("/en/index")) {
+	} else if (path.search("/index") > -1) {
 		presenceData.details = "Finding a show";
 		presenceData.state = "Index";
-	} else if (path.startsWith("/en/popular")) {
+	} else if (path.search("/popular") > -1) {
 		presenceData.details = "Finding popular videos";
 		presenceData.state = "Videos";
-	} else if (path.startsWith("/en/history")) {
+	} else if (path.search("/history") > -1) {
 		presenceData.details = "Looking at their history";
 		presenceData.state = "History";
-	} else if (path.startsWith("/en/download")) {
+	} else if (path.search("/download") > -1) {
 		presenceData.details = "App Download";
 		presenceData.state = "Download";
+	} else if (path.search("/search-result") > -1) {
+		const urlParams = new URLSearchParams(window.location.search);
+		const myParam = urlParams.get('q');
+		presenceData.details = "Search Result";
+		presenceData.state = `Finding: ${myParam}`;
 	}
 
 	// Studio
