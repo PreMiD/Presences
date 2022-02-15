@@ -28,7 +28,12 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${
 			document.querySelector("div._b8stb0 > span > h1._fecoyn4")?.textContent
 		}`;
-	} else presenceData.details = "Viewing homepage";
+	} else if (document.location.pathname.includes("/rooms/")) {
+    presenceData.details = "Viewing room : ";
+		presenceData.state = `${
+			document.querySelector("div._b8stb0 > span._1n81at5 > h1")?.textContent
+		}`;
+  } else presenceData.details = "Viewing homepage";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
