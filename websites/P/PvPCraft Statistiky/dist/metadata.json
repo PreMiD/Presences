@@ -4,12 +4,6 @@
     "name": "GGGEDR",
     "id": "535708984959827978"
   },
-  "contributors": [
-    {
-      "name": "GGGEDR",
-      "id": "535708984959827978"
-    }
-  ],
   "service": "PvPCraft Statistiky",
   "description": {
     "en": "The center of all player statistics and rankings throughout PvPCraft Public API"
