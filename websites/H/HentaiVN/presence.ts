@@ -223,12 +223,18 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Đang tìm kiếm truyện nâng cao";
 		presenceData.smallImageKey = "search";
 		if (document.location.search.includes("search")) {
-			keyword = new URLSearchParams(document.location.search);
-			namekey = keyword.get("name") || "Trống";
-			doukey = keyword.get("dou") || "Trống";
-			charkey = keyword.get("char") || "Trống";
-
 			keystr = inURL.getAll("tag[]");
+			namekey = `Từ khóa: ${inURL.get("name")} - `;
+			doukey = `Doujin: ${inURL.get("dou")} - `;
+			charkey = `Nhân vật: ${inURL.get("char")} - `;
+			if (namekey.length === 12) namekey = "";
+
+			if (doukey.length === 11) doukey = "";
+
+			if (charkey.length === 13) charkey = "";
+
+			if (keystr.length === 0) keystr = "";
+
 			type keytest = {
 				[key: string]: string;
 			};
@@ -410,7 +416,8 @@ presence.on("UpdateData", async () => {
 					/\b(?:3|5|116|203|20|21|249|131|127|22|279|277|115|130|257|251|24|25|133|23|32|267|27|28|29|30|254|33|248|31|242|241|39|101|129|34|35|271|100|36|120|210|38|2|275|269|40|262|268|132|212|104|105|253|41|260|42|44|4|43|45|245|125|46|123|243|47|48|108|259|37|202|50|51|206|52|106|56|264|53|55|247|57|58|102|80|122|59|60|61|244|62|26|280|99|110|265|63|64|273|114|65|119|124|126|121|113|263|66|67|103|205|1|201|68|272|69|211|71|70|209|72|204|276|73|98|258|117|207|134|74|75|87|88|246|118|77|76|79|78|82|213|84|278|83|81|85|250|86|266|91|89|109|90|252|256|92|274|111|93|261|107|208|95|270|94|112|96|97|128)\b/gi,
 					matched => keynum[matched]
 				);
-			presenceData.state = `Từ khóa: ${namekey} - Doujin: ${doukey} - Nhân vật: ${charkey} - Thể loại: ${keystr}`;
+			keystr = `Thể loại: ${keystr}`;
+			presenceData.state = `${namekey}${doukey}${charkey}${keystr}`;
 		} else presenceData.state = "Đang nhập dữ liệu tìm kiếm...";
 	} else if (inPath.startsWith("/forum/nhan_tin.php")) {
 		presenceData.details = "Đang nhắn tin...";
