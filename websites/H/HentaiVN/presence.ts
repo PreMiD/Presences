@@ -12,11 +12,11 @@ let page = "1",
 
 presence.on("UpdateData", async () => {
 	const inURL = new URLSearchParams(document.location.search),
-		inPath = document.location.pathname;
-	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
-	};
+		inPath = document.location.pathname,
+		presenceData: PresenceData = {
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp
+		};
 
 	if (inURL.has("key")) {
 		presenceData.details = "Đang tìm kiếm:";
