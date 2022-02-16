@@ -44,13 +44,32 @@ const presence = new Presence({
 		"sesame-workshop": "Sesame Workshop",
 		"looney-tunes": "Looney Tunes",
 		crunchyroll: "Crunchyroll Collection"
-	};
+	},
+	coverUrls: Record<string, string> = {};
+
+function fetchCover(): Promise<string> {
+	return new Promise(resolve => {
+		fetch(
+			`https://comet.api.hbo.com/express-content/${
+				location.pathname.split("/")[2]
+			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`
+		)
+			.then(x => x.json())
+			.then(x =>
+				resolve(
+					`https://artist.api.cdn.hbo.com/images/${
+						x[0].body.references.series.match(/series:([^:]+)/)[1]
+					}/tileburnedin?size=1024x1024`
+				)
+			);
+	});
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "lg"
 		},
-		video: HTMLVideoElement = document.querySelector("video"),
+		video = document.querySelector("video"),
 		path = document.location.pathname;
 
 	let titles, hasEpisode, timestamps, pageSlug;
@@ -86,6 +105,23 @@ presence.on("UpdateData", async () => {
 					? (await strings).pause
 					: (await strings).play
 			});
+
+			if (
+				[":episode:", ":feature:"].some(x => location.pathname.includes(x)) &&
+				(await presence.getSetting<boolean>("cover"))
+			) {
+				if (location.pathname.includes(":feature:")) {
+					presenceData.largeImageKey = `https://artist.api.cdn.hbo.com/images/${
+						location.pathname.match(/:feature:([^:]+)/)[1]
+					}/tileburnedin?size=1024x1024`;
+				} else {
+					const episodeId = location.pathname.match(/:episode:([^:]+)/)[1];
+					coverUrls[episodeId] ??= await fetchCover();
+
+					presenceData.largeImageKey = coverUrls[episodeId];
+				}
+			}
+
 			if (!video.paused) {
 				Object.assign(presenceData, {
 					startTimestamp: timestamps[0],
