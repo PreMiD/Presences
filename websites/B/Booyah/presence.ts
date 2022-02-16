@@ -5,9 +5,6 @@ let elapsed = Math.floor(Date.now() / 1000),
 const presence = new Presence({
 		clientId: "943158612090568745"
 	}),
-	getElement = (query: string): string | undefined => {
-		return document.querySelector(query)?.textContent;
-	},
 	getStrings = async () => {
 		return presence.getStrings(
 			{
@@ -62,16 +59,16 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("profilePic"),
 			presence.getSetting<boolean>("buttons")
 		]),
-		title = getElement(
+		title = document.querySelector(
 			"#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div:nth-child(1) > div"
-		),
-		streamer = getElement(
+		)?.textContent,
+		streamer = document.querySelector(
 			"#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div:nth-child(1) > a.user-name > span"
-		),
-		game = getElement(
+		)?.textContent,
+		game = document.querySelector(
 			"#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div.channel-infos > div > span > a"
-		),
-		vidTimer = getElement("div.time > div.duration");
+		)?.textContent,
+		vidTimer = document.querySelector("div.time > div.duration")?.textContent;
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
@@ -146,7 +143,7 @@ presence.on("UpdateData", async () => {
 					"#layout-content > div > div.view-main-content > div.user-box > div.components-profile-card > div.components-profile-card-center > span.components-profile-card-center-top > a"
 				).textContent,
 				timeElapsed = presence.timestampFromFormat(
-					getElement("div.time > div.current-time")
+					document.querySelector("div.time > div.current-time")?.textContent
 				),
 				duration = presence.timestampFromFormat(vidTimer);
 			if (!privacy) {
