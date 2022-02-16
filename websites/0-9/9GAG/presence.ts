@@ -41,6 +41,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document
 				.querySelector("title")
 				.textContent.split("9GAG ")[1];
+		} else if (document.location.pathname.includes("/top")) {
+			presenceData.details = "Viewing top gags";
 		} else if (document.location.pathname.includes("/u/")) {
 			presenceData.details = "Viewing Profile:";
 			presenceData.state = `${
