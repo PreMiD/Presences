@@ -223,12 +223,12 @@ presence.on("UpdateData", async () => {
 		!pathname.startsWith("/forum/t") &&
 		pathname.includes("-xem-truyen-")
 	) {
-		presenceData.details = `Đang đọc truyện "${document
+		presenceData.details = "Đang đọc truyện...";
+		presenceData.state = `${document
 			.querySelectorAll("span[itemprop='name']")[2]
-			.textContent.trim()}"`;
-		presenceData.state = document
+			.textContent.trim()} - ${document
 			.querySelectorAll("span[itemprop='name']")[3]
-			.textContent.trim();
+			.textContent.trim()}`;
 		presenceData.smallImageKey = "doc";
 		presenceData.largeImageKey = "truyen";
 		presenceData.buttons = [
@@ -241,9 +241,10 @@ presence.on("UpdateData", async () => {
 		!pathname.startsWith("/forum/t") &&
 		pathname.includes("-doc-truyen-")
 	) {
-		presenceData.details = `Đang xem thông tin truyện "${document
+		presenceData.details = "Đang xem thông tin truyện...";
+		presenceData.state = `${document
 			.querySelectorAll("span[itemprop='name']")[2]
-			.textContent.trim()}"`;
+			.textContent.trim()}`;
 		presenceData.buttons = [
 			{
 				label: "Xem truyện",
