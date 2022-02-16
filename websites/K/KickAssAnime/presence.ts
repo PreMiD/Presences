@@ -111,9 +111,7 @@ presence.on("UpdateData", async () => {
 		checkIfMovie();
 		if (playback && !isNaN(duration)) {
 			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused
-				? (await strings).pause
-				: (await strings).play;
+			presenceData.smallImageText = paused ? strings.pause : strings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
 			currentAnimeTitle =
@@ -131,11 +129,11 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: (await strings).watchEpisode,
+							label: strings.watchEpisode,
 							url: document.URL
 						},
 						{
-							label: (await strings).viewSeries,
+							label: strings.viewSeries,
 							url: document.URL.replace(document.URL.split("/")[5], "")
 						}
 					];
@@ -152,11 +150,11 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: (await strings).watchEpisode,
+							label: strings.watchEpisode,
 							url: document.URL
 						},
 						{
-							label: (await strings).viewMovie,
+							label: strings.viewMovie,
 							url: document.URL.replace(document.URL.split("/")[5], "")
 						}
 					];
@@ -186,11 +184,11 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: (await strings).watchEpisode,
+							label: strings.watchEpisode,
 							url: document.URL
 						},
 						{
-							label: (await strings).viewSeries,
+							label: strings.viewSeries,
 							url: document.URL.replace(document.URL.split("/")[5], "")
 						}
 					];
@@ -201,11 +199,11 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: (await strings).watchEpisode,
+							label: strings.watchEpisode,
 							url: document.URL
 						},
 						{
-							label: (await strings).viewMovie,
+							label: strings.viewMovie,
 							url: document.URL.replace(document.URL.split("/")[5], "")
 						}
 					];
@@ -237,7 +235,7 @@ presence.on("UpdateData", async () => {
 		if (buttons) {
 			presenceData.buttons = [
 				{
-					label: (await strings).viewSeries,
+					label: strings.viewSeries,
 					url: document.URL
 				}
 			];
