@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 			if (
 				document.querySelector(
 					"#layout-content > div > div.views-game-info > div.game-info > div.game-name"
-				) !== null
+				)
 			) {
 				presenceData.state = document.querySelector(
 					"#layout-content > div > div.views-game-info > div.game-info > div.game-name"
