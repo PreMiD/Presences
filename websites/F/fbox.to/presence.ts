@@ -32,8 +32,8 @@ presence.on("UpdateData", async () => {
 		const title: HTMLHeadingElement = document.querySelector(
 				"#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
 			),
-			season: HTMLSpanElement = document.querySelector(".value"),
-			episode: HTMLAnchorElement = document.querySelector("a.active");
+			season = document.querySelector<HTMLSpanElement>(".value"),
+			episode = document.querySelector<HTMLAnchorElement>("a.active");
 		if (title) presenceData.details = title.textContent;
 		if (season) {
 			presenceData.state = season.textContent.split("-")[0].trim();
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname === "/user/watchlist")
 		presenceData.details = "Checking Watchlist";
 	else {
-		const genre: HTMLHeadingElement = document.querySelector("section.bl h1");
+		const genre = document.querySelector<HTMLHeadingElement>("section.bl h1");
 		if (genre) {
 			presenceData.details = genre.textContent;
 			presenceData.smallImageKey = "search";
