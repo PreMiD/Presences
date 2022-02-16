@@ -286,14 +286,15 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = "home";
 		if (document.location.search.includes("search")) {
 			keystr = searchParams.getAll("tag[]");
-			namekey = `Từ khóa: ${searchParams.get("name")} - `;
-			doukey = `Doujin: ${searchParams.get("dou")} - `;
-			charkey = `Nhân vật: ${searchParams.get("char")} - `;
-			if (namekey.length === 12) namekey = "";
-
-			if (doukey.length === 11) doukey = "";
-
-			if (charkey.length === 13) charkey = "";
+			namekey = searchParams.get("name")
+				? `Từ khóa: ${searchParams.get("name")}`
+				: (namekey = "");
+			doukey = searchParams.get("dou")
+				? `Doujin: ${searchParams.get("dou")}`
+				: (doukey = "");
+			charkey = searchParams.get("char")
+				? `Nhân vật: ${searchParams.get("char")}`
+				: (charkey = "");
 
 			type keytest = {
 				[key: string]: string;
@@ -476,9 +477,8 @@ presence.on("UpdateData", async () => {
 					new RegExp(`\\b(?:${Object.keys(keynum).join("|")})\\b`, "g"),
 					(matched: string | number) => keynum[matched]
 				);
-			if (keystr.length === 0) keystr = "";
-			else keystr = `Thể loại: ${keystr}`;
-			presenceData.state = `${namekey}${doukey}${charkey}${keystr} - Trang ${page}`;
+			keystr = keystr ? `Từ khóa: ${keystr}` : (keystr = "");
+			presenceData.state = `${namekey} - ${charkey} - ${doukey} - ${keystr} - Trang ${page}`;
 		} else presenceData.state = "Đang nhập dữ liệu tìm kiếm...";
 	} else if (pathname.startsWith("/forum/nhan_tin.php")) {
 		presenceData.details = "Đang nhắn tin...";
