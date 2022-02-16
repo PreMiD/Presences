@@ -60,11 +60,12 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "kho";
 		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/forum/quote.php")) {
-		presenceData.details = `Đang t${
+		presenceData.details = "Đang trả lời bình luận";
+		presenceData.state = `Bình luận${
 			document
 				.querySelector("div[class='box-title']")
 				.textContent.trim()
-				.split("FORUM\n/\nQuay về topic\n/\nT")[1]
+				.split("FORUM\n/\nQuay về topic\n/\nTrả lời kèm trích dẫn")[1]
 		}`;
 		presenceData.smallImageKey = "bell";
 		presenceData.largeImageKey = "forum";
