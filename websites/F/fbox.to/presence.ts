@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 
 	if (pathname === "/home") presenceData.details = "Browsing";
 	else if (pathname.startsWith("/series/")) {
-		const title: HTMLHeadingElement = document.querySelector(
+		const title = document.querySelector<HTMLHeadingElement>(
 				"#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
 			),
 			season = document.querySelector<HTMLSpanElement>(".value"),
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (pathname.startsWith("/movie/")) {
-		const title: HTMLHeadingElement = document.querySelector(
+		const title = document.querySelector<HTMLHeadingElement>(
 			"#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
 		);
 		if (title) presenceData.details = title.textContent;
