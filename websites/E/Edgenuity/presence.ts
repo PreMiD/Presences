@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "705454018343862362"
+	clientId: "943391951611396106"
 });
 
 let courseName: HTMLElement,
