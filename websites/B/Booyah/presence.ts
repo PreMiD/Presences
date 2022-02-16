@@ -42,8 +42,6 @@ presence.on("UpdateData", async () => {
 			showTimestamps,
 			newLang,
 			privacy,
-			vidDetail,
-			vidState,
 			streamDetail,
 			streamState,
 			profilePic,
@@ -52,8 +50,6 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<string>("vidDetail"),
-			presence.getSetting<string>("vidState"),
 			presence.getSetting<string>("streamDetail"),
 			presence.getSetting<string>("streamState"),
 			presence.getSetting<boolean>("profilePic"),
@@ -136,10 +132,7 @@ presence.on("UpdateData", async () => {
 		if (vidTimer) {
 			let paused = !!document.querySelector(".playback-btn");
 
-			const titleVod = document.querySelector(
-					".video-info > .video-title"
-				).textContent,
-				streamerVod = document.querySelector(
+			const streamerVod = document.querySelector(
 					"#layout-content > div > div.view-main-content > div.user-box > div.components-profile-card > div.components-profile-card-center > span.components-profile-card-center-top > a"
 				).textContent,
 				timeElapsed = presence.timestampFromFormat(
@@ -147,11 +140,14 @@ presence.on("UpdateData", async () => {
 				),
 				duration = presence.timestampFromFormat(vidTimer);
 			if (!privacy) {
-				presenceData.details = vidDetail
-					.replace("%title%", titleVod)
+				presenceData.details = streamDetail
+					.replace(
+						"%title%",
+						document.querySelector(".video-info > .video-title").textContent
+					)
 					.replace("%uploader%", streamerVod);
-				presenceData.state = vidState
-					.replace("%title%", titleVod)
+				presenceData.state = streamDetail
+					.replace("%title%", streamerVod)
 					.replace("%uploader%", streamerVod);
 
 				delete presenceData.startTimestamp;
