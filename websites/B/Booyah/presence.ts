@@ -137,8 +137,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname.startsWith("/vods") || (streamer && title)) {
 		if (vidTimer) {
-			let paused = false;
-			if (document.querySelector(".playback-btn") !== null) paused = true;
+			let paused = document.querySelector(".playback-btn") !== null;
 
 			const titleVod = document.querySelector(
 					".video-info > .video-title"
