@@ -2,23 +2,21 @@ const presence = new Presence({
 		clientId: "942782020055089192"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let page = "1",
-	namekey,
-	doukey,
-	charkey,
-	keystr,
-	largebox;
+let namekey, doukey, charkey, keystr, largebox;
 
 presence.on("UpdateData", async () => {
 	const { pathname, search } = document.location,
 		searchParams = new URLSearchParams(search),
+		page = searchParams.get("page") || "1",
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp
 		};
 
 	if (pathname.startsWith("/tim-kiem-truyen.html") && searchParams.has("key")) {
 		presenceData.details = "Đang tìm kiếm từ khóa:";
-		presenceData.state = document.querySelector("input").value;
+		presenceData.state = `${
+			document.querySelector("input").value
+		} - Trang ${page}`;
 		presenceData.smallImageKey = "search";
 		presenceData.largeImageKey = "home";
 	} else if (
@@ -26,7 +24,9 @@ presence.on("UpdateData", async () => {
 		searchParams.has("key")
 	) {
 		presenceData.details = "Đang tìm kiếm truyện của tác giả:";
-		presenceData.state = document.querySelector("input").value;
+		presenceData.state = `${
+			document.querySelector("input").value
+		} - Trang ${page}`;
 		presenceData.smallImageKey = "search";
 		presenceData.largeImageKey = "home";
 	} else if (
@@ -34,7 +34,9 @@ presence.on("UpdateData", async () => {
 		searchParams.has("key")
 	) {
 		presenceData.details = "Đang tìm kiếm truyện là Doujin của:";
-		presenceData.state = document.querySelector("input").value;
+		presenceData.state = `${
+			document.querySelector("input").value
+		} - Trang ${page}`;
 		presenceData.smallImageKey = "search";
 		presenceData.largeImageKey = "home";
 	} else if (
@@ -42,13 +44,10 @@ presence.on("UpdateData", async () => {
 		searchParams.has("key")
 	) {
 		presenceData.details = "Đang tìm kiếm truyện có nhân vật:";
-		presenceData.state = document.querySelector("input").value;
+		presenceData.state = `${searchParams.get("key")} - Trang ${page}`;
 		presenceData.smallImageKey = "search";
 		presenceData.largeImageKey = "home";
 	} else if (pathname === "/") {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = "Đang duyệt trang chủ";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "surf";
@@ -61,9 +60,6 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "kho";
 		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/tacgia=")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = `Đang xem danh sách truyện của tác giả ${document
 			.querySelectorAll("span[itemprop='name']")[2]
 			.textContent.trim()}`;
@@ -71,9 +67,6 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "list";
 		presenceData.largeImageKey = "truyen";
 	} else if (pathname.startsWith("/char=")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = `Đang xem danh sách truyện có nhân vật ${document
 			.querySelectorAll("span[itemprop='name']")[2]
 			.textContent.trim()}`;
@@ -81,9 +74,6 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "list";
 		presenceData.largeImageKey = "truyen";
 	} else if (pathname.startsWith("/doujin=")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = `Đang xem danh sách truyện là doujin của ${document
 			.querySelectorAll("span[itemprop='name']")[2]
 			.textContent.trim()}`;
@@ -91,41 +81,26 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "list";
 		presenceData.largeImageKey = "truyen";
 	} else if (pathname.startsWith("/dang-tien-hanh.html")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = "Đang xem danh sách truyện Đang tiến hành";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 		presenceData.largeImageKey = "truyen";
 	} else if (pathname.startsWith("/danh-sach.html")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = "Đang xem danh sách truyện";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 		presenceData.largeImageKey = "truyen";
 	} else if (pathname.startsWith("/chap-moi.html")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = "Đang xem danh sách truyện Có chap mới";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 		presenceData.largeImageKey = "truyen";
 	} else if (pathname.startsWith("/nhom-dich.html")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = "Đang xem danh sách nhóm dịch";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
 		presenceData.largeImageKey = "truyen";
 	} else if (pathname.startsWith("/da-hoan-thanh.html")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = "Đang xem danh sách truyện Đã hoàn thành";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "list";
@@ -190,6 +165,9 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = "home";
 	} else if (pathname.startsWith("/forum/reply.php")) {
 		presenceData.details = "Đang xem trả lời bình luận trong Forum...";
+		presenceData.state = `Trang ${
+			Number(searchParams.get("start")) / 20 + 1 || "1"
+		}`;
 		presenceData.smallImageKey = "bell";
 		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/inbox.php")) {
@@ -200,9 +178,6 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "chater";
 			presenceData.largeImageKey = "home";
 		} else {
-			if (document.location.search.includes("page"))
-				page = searchParams.get("page");
-
 			presenceData.details = "Đang xem danh sách tin nhắn";
 			presenceData.state = `Trang ${page}`;
 			presenceData.smallImageKey = "chat";
@@ -255,9 +230,12 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "xem";
 		presenceData.largeImageKey = "truyen";
 	} else if (pathname.startsWith("/forum/t")) {
-		presenceData.details = `Đang xem topic "${document
+		presenceData.details = "Đang xem topic ";
+		presenceData.state = `${document
 			.querySelectorAll("span[itemprop='name']")[3]
-			.textContent.trim()}"`;
+			.textContent.trim()} - Trang ${
+			Number(searchParams.get("reply")) / 10 + 1 || "1"
+		}`;
 		presenceData.buttons = [
 			{
 				label: "Xem topic",
@@ -267,9 +245,6 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "xem";
 		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/g/")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = `Đang xem danh sách truyện của nhóm "${document
 			.querySelectorAll("span[itemprop='name']")[2]
 			.textContent.trim()}"`;
@@ -284,6 +259,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Đang duyệt box ${document
 			.querySelector("b")
 			.textContent.trim()}`;
+		presenceData.state = `Trang ${
+			Number(searchParams.get("start")) / 20 + 1 || "1"
+		}`;
 		presenceData.smallImageKey = "surf";
 		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/forum/c")) {
@@ -490,7 +468,7 @@ presence.on("UpdateData", async () => {
 				);
 			if (keystr.length === 0) keystr = "";
 			else keystr = `Thể loại: ${keystr}`;
-			presenceData.state = `${namekey}${doukey}${charkey}${keystr}`;
+			presenceData.state = `${namekey}${doukey}${charkey}${keystr} - Trang ${page}`;
 		} else presenceData.state = "Đang nhập dữ liệu tìm kiếm...";
 	} else if (pathname.startsWith("/forum/nhan_tin.php")) {
 		presenceData.details = "Đang nhắn tin...";
@@ -498,9 +476,6 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "chater";
 		presenceData.largeImageKey = "home";
 	} else if (pathname.startsWith("/forum/mail.php")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = "Đang xem hộp thư...";
 		presenceData.state = `Trang ${page}`;
 		presenceData.largeImageKey = "home";
@@ -530,15 +505,16 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "up";
 		presenceData.largeImageKey = "home";
 	} else if (pathname.startsWith("/bookmark-list.php")) {
-		if (document.location.search.includes("page"))
-			page = searchParams.get("page");
-
 		presenceData.details = "Đang xem danh sách truyện đang theo dõi";
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "mark";
 		presenceData.largeImageKey = "truyen";
 	} else if (pathname.startsWith("/forum/huyhieu.php")) {
 		presenceData.details = "Đang xem phòng trưng bày huy hiệu";
+		presenceData.smallImageKey = "huyhieu";
+		presenceData.largeImageKey = "home";
+	} else if (pathname.startsWith("/forum/my_huyhieu.php")) {
+		presenceData.details = "Đang xem phòng trưng bày huy hiệu cá nhân";
 		presenceData.smallImageKey = "huyhieu";
 		presenceData.largeImageKey = "home";
 	} else if (pathname.startsWith("/forum/my_waifu.php")) {
@@ -563,10 +539,12 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = "home";
 	} else if (pathname.startsWith("/notification-reply.php")) {
 		presenceData.details = "Đang xem trả lời bình luận trong cổng truyện...";
+		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "chater";
 		presenceData.largeImageKey = "home";
 	} else if (pathname.startsWith("/notification-comment.php")) {
 		presenceData.details = "Đang xem bình luận trong cổng truyện...";
+		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "bell";
 		presenceData.largeImageKey = "home";
 	} else if (pathname.startsWith("/forum/new_topic.php")) {
