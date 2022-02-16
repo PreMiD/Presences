@@ -1,10 +1,10 @@
 const presence = new Presence({
 		clientId: "802964241179082822"
 	}),
-	nextEpisodeElement = document.querySelector(
+	nextEpisodeElement = document.querySelector<HTMLDivElement>(
 		"div#sidebar-anime-info > div.border.rounded.mb-3.p-3:nth-child(2) > div:nth-child(1) > a.ka-url-wrapper"
 	),
-	previousEpisodeElement = document.querySelector(
+	previousEpisodeElement = document.querySelector<HTMLDivElement>(
 		"div#sidebar-anime-info > div.border.rounded.mb-3.p-3:nth-child(2) > div:nth-child(2) > a.ka-url-wrapper"
 	);
 
@@ -115,7 +115,9 @@ presence.on("UpdateData", async () => {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
 			currentAnimeTitle =
-				document.querySelector("a.ka-url-wrapper").textContent;
+				document.querySelector<HTMLAnchorElement>(
+					"a.ka-url-wrapper"
+				).textContent;
 			[, currentAnimeEpisode] = document.location.pathname
 				.split("/")[3]
 				.split("-");
@@ -141,7 +143,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.largeImageKey = cover
 					? document
-							.querySelector<HTMLElement>("div.info-header")
+							.querySelector<HTMLDivElement>("div.info-header")
 							.style.backgroundImage.match(/"(.*)"/)[1]
 					: "kaa";
 			} else {
@@ -170,7 +172,9 @@ presence.on("UpdateData", async () => {
 			}
 		} else {
 			currentAnimeTitle =
-				document.querySelector("a.ka-url-wrapper").textContent;
+				document.querySelector<HTMLAnchorElement>(
+					"a.ka-url-wrapper"
+				).textContent;
 			[, currentAnimeEpisode] = document.location.pathname
 				.split("/")[3]
 				.split("-");
@@ -222,7 +226,8 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.includes("/anime/") &&
 		document.location.pathname.includes("/episode") === false
 	) {
-		currentAnimeTitle = document.querySelector("h1.title").textContent;
+		currentAnimeTitle =
+			document.querySelector<HTMLHeadingElement>("h1.title").textContent;
 		presenceData.details = "Looking at:";
 		presenceData.state = `${currentAnimeTitle}`;
 		presenceData.smallImageKey = "searching";
