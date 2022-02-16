@@ -59,6 +59,15 @@ presence.on("UpdateData", async () => {
 			.split("FORUM\n/\nQuay về item của bạn\n/\n")[1];
 		presenceData.smallImageKey = "kho";
 		presenceData.largeImageKey = "forum";
+	} else if (pathname.startsWith("/forum/quote.php")) {
+		presenceData.details = `Đang t${
+			document
+				.querySelector("div[class='box-title']")
+				.textContent.trim()
+				.split("FORUM\n/\nQuay về topic\n/\nT")[1]
+		}`;
+		presenceData.smallImageKey = "bell";
+		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/tacgia=")) {
 		presenceData.details = `Đang xem danh sách truyện của tác giả ${document
 			.querySelectorAll("span[itemprop='name']")[2]
