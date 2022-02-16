@@ -213,6 +213,7 @@ presence.on("UpdateData", async () => {
 			.querySelector("title")
 			.textContent.trim()}`;
 		presenceData.smallImageKey = "donate";
+		presenceData.largeImageKey = "admin";
 	} else if (pathname.startsWith("/forum/yen.php")) {
 		presenceData.details = `Đang chuyển tiền cho thành viên ${document
 			.querySelector("b")
@@ -278,6 +279,7 @@ presence.on("UpdateData", async () => {
 	} else if (pathname === "/forum/") {
 		presenceData.details = "Đang duyệt forum";
 		presenceData.smallImageKey = "surf";
+		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/forum/f")) {
 		presenceData.details = `Đang duyệt box ${document
 			.querySelector("b")
