@@ -111,13 +111,13 @@ presence.on("UpdateData", async () => {
     checkIfMovie();
     if (playback && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
+      presenceData.smallImageText = paused ? strings.pause : strings.play;
       [presenceData.startTimestamp, presenceData.endTimestamp] =
         presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
       currentAnimeTitle =
-        document.querySelector("a.ka-url-wrapper").textContent;
+        document.querySelector<HTMLAnchorElement>(
+          "a.ka-url-wrapper"
+        ).textContent;
       [, currentAnimeEpisode] = document.location.pathname
         .split("/")[3]
         .split("-");
@@ -131,11 +131,11 @@ presence.on("UpdateData", async () => {
         if (buttons) {
           presenceData.buttons = [
             {
-              label: (await strings).watchEpisode,
+              label: strings.watchEpisode,
               url: document.URL
             },
             {
-              label: (await strings).viewSeries,
+              label: strings.viewSeries,
               url: document.URL.replace(document.URL.split("/")[5], "")
             }
           ];
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
 
         presenceData.largeImageKey = cover
           ? document
-              .querySelector<HTMLElement>("div.info-header")
+              .querySelector<HTMLDivElement>("div.info-header")
               .style.backgroundImage.match(/"(.*)"/)[1]
           : "kaa";
       } else {
@@ -152,11 +152,11 @@ presence.on("UpdateData", async () => {
         if (buttons) {
           presenceData.buttons = [
             {
-              label: (await strings).watchEpisode,
+              label: strings.watchEpisode,
               url: document.URL
             },
             {
-              label: (await strings).viewMovie,
+              label: strings.viewMovie,
               url: document.URL.replace(document.URL.split("/")[5], "")
             }
           ];
@@ -172,7 +172,9 @@ presence.on("UpdateData", async () => {
       }
     } else {
       currentAnimeTitle =
-        document.querySelector("a.ka-url-wrapper").textContent;
+        document.querySelector<HTMLAnchorElement>(
+          "a.ka-url-wrapper"
+        ).textContent;
       [, currentAnimeEpisode] = document.location.pathname
         .split("/")[3]
         .split("-");
@@ -186,11 +188,11 @@ presence.on("UpdateData", async () => {
         if (buttons) {
           presenceData.buttons = [
             {
-              label: (await strings).watchEpisode,
+              label: strings.watchEpisode,
               url: document.URL
             },
             {
-              label: (await strings).viewSeries,
+              label: strings.viewSeries,
               url: document.URL.replace(document.URL.split("/")[5], "")
             }
           ];
@@ -201,11 +203,11 @@ presence.on("UpdateData", async () => {
         if (buttons) {
           presenceData.buttons = [
             {
-              label: (await strings).watchEpisode,
+              label: strings.watchEpisode,
               url: document.URL
             },
             {
-              label: (await strings).viewMovie,
+              label: strings.viewMovie,
               url: document.URL.replace(document.URL.split("/")[5], "")
             }
           ];
@@ -224,46 +226,47 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/anime/") &&
     document.location.pathname.includes("/episode") === false
   ) {
-    currentAnimeTitle = document.querySelector("h1.title").textContent;
+    currentAnimeTitle =
+      document.querySelector<HTMLHeadingElement>("h1.title").textContent;
     presenceData.details = "Looking at:";
     presenceData.state = `${currentAnimeTitle}`;
     presenceData.smallImageKey = "searching";
     presenceData.largeImageKey = cover
       ? document
-          .querySelector<HTMLElement>("div.poster")
+          .querySelector<HTMLDivElement>("div.poster")
           .style.backgroundImage.match(/"(.*)"/)[1]
       : "kaa";
 
     if (buttons) {
       presenceData.buttons = [
         {
-          label: (await strings).viewSeries,
+          label: strings.viewSeries,
           url: document.URL
         }
       ];
     }
   } else if (document.location.pathname.includes("anime-list")) {
-    presenceData.details = "Looking at:";
+    presenceData.details = "Looking at";
     presenceData.state = "Anime List";
     presenceData.smallImageKey = "searching";
   } else if (document.location.pathname.includes("new-season")) {
-    presenceData.details = "Looking at:";
+    presenceData.details = "Looking at";
     presenceData.state = "New Season";
     presenceData.smallImageKey = "searching";
   } else if (document.location.pathname.includes("favorites")) {
-    presenceData.details = "Looking at:";
+    presenceData.details = "Looking at";
     presenceData.state = "Their Favorites";
     presenceData.smallImageKey = "searching";
   } else if (document.location.pathname.includes("watched")) {
-    presenceData.details = "Looking at:";
+    presenceData.details = "Looking at";
     presenceData.state = "Watch History";
     presenceData.smallImageKey = "searching";
   } else if (document.location.pathname === "/") {
-    presenceData.details = "Looking at:";
+    presenceData.details = "Looking at";
     presenceData.state = "Home Page";
     presenceData.smallImageKey = "searching";
   } else {
-    presenceData.details = "Looking at:";
+    presenceData.details = "Looking at";
     presenceData.state = "An Unsupported Page";
   }
 
