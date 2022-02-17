@@ -1,46 +1,46 @@
 const presence = new Presence({
-    clientId: "794408060847390760"
-  }),
-  strings = presence.getStrings({
-    playing: "presence.playback.playing",
-    paused: "presence.playback.paused",
-    browsing: "presence.activity.browsing",
-    episode: "presence.media.info.episode"
-  }),
-  browsingTimestamp = Math.floor(Date.now() / 1000);
+		clientId: "794408060847390760"
+	}),
+	strings = presence.getStrings({
+		playing: "presence.playback.playing",
+		paused: "presence.playback.paused",
+		browsing: "presence.activity.browsing",
+		episode: "presence.media.info.episode"
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "exxen"
-  };
-  if (document.location.pathname.indexOf("watch") > -1) {
-    const video: HTMLVideoElement = document.querySelector(".rmp-video"),
-      episodeName = document.querySelector(".content-name").textContent,
-      episode = episodeName.split(".Bölüm")[0].split(" ")[
-        episodeName.split(".Bölüm")[0].split(" ").length - 1
-      ],
-      [startTimestamp, endTimestamp] = presence.getTimestamps(
-        video.currentTime,
-        video.duration
-      );
-    presenceData.details = episodeName
-      .replace(`${episode}.Bölüm`, "")
-      .replace(`Episode ${episode}`, "");
-    presenceData.state = (await strings).episode.replace("{0}", episode);
-    if (!video.paused) {
-      presenceData.smallImageKey = "playing";
-      presenceData.smallImageText = (await strings).playing;
-      presenceData.startTimestamp = startTimestamp;
-      presenceData.endTimestamp = endTimestamp;
-    } else {
-      presenceData.smallImageKey = "paused";
-      presenceData.smallImageText = (await strings).paused;
-    }
-  } else {
-    presenceData.startTimestamp = browsingTimestamp;
-    presenceData.details = (await strings).browsing;
-    if (document.location.pathname.indexOf("detail") > -1)
-      presenceData.state = document.querySelector(".title").textContent;
-  }
-  presence.setActivity(presenceData);
+	const presenceData: PresenceData = {
+		largeImageKey: "exxen"
+	};
+	if (document.location.pathname.indexOf("watch") > -1) {
+		const video: HTMLVideoElement = document.querySelector(".rmp-video"),
+			episodeName = document.querySelector(".content-name").textContent,
+			episode = episodeName.split(".Bölüm")[0].split(" ")[
+				episodeName.split(".Bölüm")[0].split(" ").length - 1
+			],
+			[startTimestamp, endTimestamp] = presence.getTimestamps(
+				video.currentTime,
+				video.duration
+			);
+		presenceData.details = episodeName
+			.replace(`${episode}.Bölüm`, "")
+			.replace(`Episode ${episode}`, "");
+		presenceData.state = (await strings).episode.replace("{0}", episode);
+		if (!video.paused) {
+			presenceData.smallImageKey = "playing";
+			presenceData.smallImageText = (await strings).playing;
+			presenceData.startTimestamp = startTimestamp;
+			presenceData.endTimestamp = endTimestamp;
+		} else {
+			presenceData.smallImageKey = "paused";
+			presenceData.smallImageText = (await strings).paused;
+		}
+	} else {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = (await strings).browsing;
+		if (document.location.pathname.indexOf("detail") > -1)
+			presenceData.state = document.querySelector(".title").textContent;
+	}
+	presence.setActivity(presenceData);
 });
