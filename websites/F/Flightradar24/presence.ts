@@ -39,11 +39,11 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	const [elapsed, buttons, images, left] = await Promise.all([
+	const [elapsed, buttons, images, timeLeft] = await Promise.all([
 			presence.getSetting<boolean>("elapsed"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("images"),
-			presence.getSetting<boolean>("left")
+			presence.getSetting<boolean>("timeLeft")
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
@@ -688,7 +688,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!elapsed) delete presenceData.startTimestamp;
-	if (!left) delete presenceData.endTimestamp;
+	if (!timeLeft) delete presenceData.endTimestamp;
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);

@@ -34,7 +34,7 @@
 			"value": true
 		},
 		{
-			"id": "left",
+			"id": "timeLeft",
 			"title": "Show Time Left",
 			"icon": "fas fa-stopwatch",
 			"value": true
