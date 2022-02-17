@@ -77,7 +77,9 @@ presence.on("UpdateData", async () => {
 									document.querySelector(".airport-name").textContent
 								}`;
 								presenceData.state =
-									document.querySelector<HTMLElement>(".btn.active").innerText;
+									document.querySelector<HTMLAnchorElement>(
+										".btn.active"
+									).innerText;
 								presenceData.buttons = [
 									{
 										label: "View Airport",
@@ -92,7 +94,9 @@ presence.on("UpdateData", async () => {
 									document.querySelector(".airline-name").textContent
 								}`;
 								presenceData.state =
-									document.querySelector<HTMLElement>(".btn.active").innerText;
+									document.querySelector<HTMLAnchorElement>(
+										".btn.active"
+									).innerText;
 								presenceData.buttons = [
 									{
 										label: "View Airline",
@@ -456,9 +460,10 @@ presence.on("UpdateData", async () => {
 							presenceData.smallImageKey = document.querySelector(
 								"svg[class^='active']"
 							).id;
-							presenceData.smallImageText = document.querySelector<HTMLElement>(
-								"svg[class^='active']"
-							).dataset.tooltipValue;
+							presenceData.smallImageText =
+								document.querySelector<HTMLOrSVGImageElement>(
+									"svg[class^='active']"
+								).dataset.tooltipValue;
 							if (
 								document.querySelector(".flight-progress.appear") &&
 								document.querySelector(
