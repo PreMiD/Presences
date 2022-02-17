@@ -48,6 +48,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `${
 				document.querySelector("title").textContent.split(" - 9GAG")[0]
 			} - ${document.querySelector("a[class='selected']").textContent}`;
+			presenceData.largeImageKey = document.querySelector("img").src;
 		} else if (
 			document.querySelector(
 				"#container > div.page > div.main-wrap > div.profile > section > header > h2"
@@ -65,6 +66,9 @@ presence.on("UpdateData", async () => {
 			);
 
 			presenceData.details = "Viewing gag:";
+			presenceData.largeImageKey = document.querySelector<HTMLLinkElement>(
+				"link[rel='image_src']"
+			).href;
 			if (title.textContent.length > 128)
 				presenceData.state = `${title.textContent.substring(0, 125)}...`;
 			else presenceData.state = title.textContent;
