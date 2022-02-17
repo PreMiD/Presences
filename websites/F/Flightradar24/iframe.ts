@@ -1,45 +1,22 @@
 const iframe = new iFrame();
-let total: string,
-	elapsed: string,
-	isPlaying: boolean,
-	currentTime: number,
-	duration: number,
-	paused: boolean;
 
 if (document.location.href.includes("player.blubrry.com")) {
 	iframe.on("UpdateData", async () => {
-		if (document.querySelector(".sm2-inline-duration.time-total")) {
-			total = document.querySelector(
-				".sm2-inline-duration.time-total"
-			).textContent;
-		}
-		if (document.querySelector(".time-elapsed"))
-			elapsed = document.querySelector(".time-elapsed").textContent;
-
-		if (document.querySelector("i.is-playing")) isPlaying = true;
-		else isPlaying = false;
-
 		iframe.send({
-			elapsed,
-			total,
-			isPlaying
+			elapsed: document.querySelector(".time-elapsed")?.textContent,
+			total: document.querySelector(".sm2-inline-duration.time-total")
+				?.textContent,
+			isPlaying: Boolean(document.querySelector("i.is-playing"))
 		});
 	});
 }
 
 if (document.location.href.includes("www.youtube.com")) {
 	iframe.on("UpdateData", async () => {
-		if (document.querySelector("video.video-stream.html5-main-video")) {
-			({ currentTime } = document.querySelector<HTMLVideoElement>(
+		const { currentTime, duration, paused } =
+			document.querySelector<HTMLVideoElement>(
 				"video.video-stream.html5-main-video"
-			));
-			({ duration } = document.querySelector<HTMLVideoElement>(
-				"video.video-stream.html5-main-video"
-			));
-			({ paused } = document.querySelector<HTMLVideoElement>(
-				"video.video-stream.html5-main-video"
-			));
-		}
+			);
 
 		iframe.send({
 			currentTime,
