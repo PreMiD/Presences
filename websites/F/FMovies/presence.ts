@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 				.querySelector("meta[property='og:image']")
 				.getAttribute("content");
 		}
-		if (iFrameData && !iFrameData.paused) {
+		if (!iFrameData?.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestamps(
 				iFrameData.currTime,
 				iFrameData.duration
