@@ -52,13 +52,6 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Trang ${page}`;
 		presenceData.smallImageKey = "surf";
 		presenceData.largeImageKey = "home";
-	} else if (document.location.search.includes("id")) {
-		presenceData.details = document
-			.querySelector("div[class='box-title']")
-			.textContent.trim()
-			.split("FORUM\n/\nQuay về item của bạn\n/\n")[1];
-		presenceData.smallImageKey = "kho";
-		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/forum/quote.php")) {
 		presenceData.details = "Đang trả lời bình luận";
 		presenceData.state = `Bình luận${
@@ -68,6 +61,13 @@ presence.on("UpdateData", async () => {
 				.split("FORUM\n/\nQuay về topic\n/\nTrả lời kèm trích dẫn")[1]
 		}`;
 		presenceData.smallImageKey = "bell";
+		presenceData.largeImageKey = "forum";
+	} else if (document.location.search.includes("id")) {
+		presenceData.details = document
+			.querySelector("div[class='box-title']")
+			.textContent.trim()
+			.split("FORUM\n/\nQuay về item của bạn\n/\n")[1];
+		presenceData.smallImageKey = "kho";
 		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/tacgia=")) {
 		presenceData.details = `Đang xem danh sách truyện của tác giả ${document
@@ -273,7 +273,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Đang duyệt forum";
 		presenceData.smallImageKey = "surf";
 		presenceData.largeImageKey = "forum";
-	} else if (pathname.startsWith("/forum/f")) {
+	} else if (
+		pathname.startsWith("/forum/f") &&
+		pathname.indexOf(".html") === 1
+	) {
 		presenceData.details = `Đang duyệt box ${document
 			.querySelector("b")
 			.textContent.trim()}`;
