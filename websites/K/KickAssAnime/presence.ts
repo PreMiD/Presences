@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover")
 		]);
 
-	if (oldLang !== newLang || strings) {
+	if (oldLang !== newLang) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
