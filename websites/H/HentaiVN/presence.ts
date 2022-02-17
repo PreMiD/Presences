@@ -136,7 +136,9 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document
 			.querySelector("h1[itemprop='name']")
 			.textContent.trim();
-		presenceData.smallImageKey = "tuongfr";
+		presenceData.smallImageKey = document.querySelector<HTMLLinkElement>(
+			"link[rel='image_src']"
+		).href;
 		presenceData.largeImageKey = "forum";
 		presenceData.buttons = [
 			{
@@ -149,7 +151,9 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/user-")) {
 		presenceData.details = "Đang xem tường Truyện thành viên";
 		presenceData.state = document.querySelector("h2").textContent.trim();
-		presenceData.smallImageKey = "tuongtr";
+		presenceData.smallImageKey = document.querySelector<HTMLLinkElement>(
+			"link[rel='image_src']"
+		).href;
 		presenceData.largeImageKey = "truyen";
 		presenceData.buttons = [
 			{
@@ -216,7 +220,9 @@ presence.on("UpdateData", async () => {
 			.querySelectorAll("span[itemprop='name']")[3]
 			.textContent.trim()}`;
 		presenceData.smallImageKey = "doc";
-		presenceData.largeImageKey = "truyen";
+		presenceData.largeImageKey = document.querySelector<HTMLLinkElement>(
+			"link[rel='image_src']"
+		).href;
 		presenceData.buttons = [
 			{
 				label: "Đọc cùng",
@@ -238,7 +244,9 @@ presence.on("UpdateData", async () => {
 			}
 		];
 		presenceData.smallImageKey = "xem";
-		presenceData.largeImageKey = "truyen";
+		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+			"img[rel='image_src']"
+		).src;
 	} else if (pathname.startsWith("/forum/t")) {
 		presenceData.details = "Đang xem topic ";
 		presenceData.state = `${document
@@ -477,8 +485,8 @@ presence.on("UpdateData", async () => {
 					new RegExp(`\\b(?:${Object.keys(keynum).join("|")})\\b`, "g"),
 					(matched: string | number) => keynum[matched]
 				);
-			keystr = keystr ? `Từ khóa: ${keystr} - ` : (keystr = "");
-			presenceData.state = `${namekey} - ${charkey} - ${doukey} - ${keystr}Trang ${page}`;
+			keystr = keystr ? `Từ khóa: ${keystr}` : (keystr = "");
+			presenceData.state = `${namekey} - ${charkey} - ${doukey} - ${keystr} - Trang ${page}`;
 		} else presenceData.state = "Đang nhập dữ liệu tìm kiếm...";
 	} else if (pathname.startsWith("/forum/nhan_tin.php")) {
 		presenceData.details = "Đang nhắn tin...";
