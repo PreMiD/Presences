@@ -278,12 +278,9 @@ presence.on("UpdateData", async () => {
 					else if (document.location.pathname === "/blog/avtalk-podcast/")
 						presenceData.details = "Viewing Podcast";
 					else if (document.querySelector("iframe.blubrryplayer")) {
-						presenceData.details = document
+						[presenceData.details, presenceData.state] = document
 							.querySelector(".elementor-heading-title.elementor-size-default")
-							.textContent.split(":")[0];
-						presenceData.state = document
-							.querySelector(".elementor-heading-title.elementor-size-default")
-							.textContent.split(":")[1];
+							.textContent.split(":");
 						if (player.isPlaying) {
 							presenceData.smallImageKey = "playing";
 							presenceData.smallImageText = "Playing";
