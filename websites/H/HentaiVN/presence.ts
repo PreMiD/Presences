@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 		}`;
 		presenceData.smallImageKey = "bell";
 		presenceData.largeImageKey = "forum";
-	} else if (document.location.search.includes("id")) {
+	} else if (searchParams.has("id")) {
 		presenceData.details = document
 			.querySelector("div[class='box-title']")
 			.textContent.trim()
