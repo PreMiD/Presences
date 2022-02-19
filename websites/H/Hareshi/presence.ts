@@ -16,7 +16,6 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "hareshi",
 			startTimestamp: browsingTimestamp
 		};
-	console.log(pathArray);
 	if (document.location.hostname === "www.hareshi.net") {
 		switch (pathArray[3]) {
 			case "browse":
