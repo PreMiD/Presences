@@ -2,7 +2,22 @@ const presence = new Presence({
 		clientId: "941627291304329226"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let search: HTMLInputElement;
+let cached: Record<string, unknown>;
+
+async function fetchShowTitle() {
+	if (
+		!cached ||
+		Number(window.location.href.split("/")[4]) !== Number(cached.id)
+	) {
+		const fetched = await fetch(
+			`https://www.videoland.com/api/v3/titles/${
+				window.location.href.split("/")[4]
+			}/details`
+		).then(x => x.json());
+		cached = fetched;
+		return fetched;
+	} else return cached;
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -13,7 +28,7 @@ presence.on("UpdateData", async () => {
 
 	if (page === "/") presenceData.details = "Bekijkt de homepagina";
 	else if (page.includes("zoeken")) {
-		search = document.querySelector("#search");
+		const search = document.querySelector<HTMLInputElement>("#search");
 		presenceData.smallImageKey = "search";
 		if (search.value) {
 			presenceData.details = "Zoekt voor:";
@@ -29,22 +44,18 @@ presence.on("UpdateData", async () => {
 		).content;
 	} else if (page.includes("/player/")) {
 		delete presenceData.startTimestamp;
-		const f = await fetch(
-			`https://www.videoland.com/api/v3/titles/${
-				window.location.href.split("/")[4]
-			}/details`
-		).then(x => x.json());
-		presenceData.details = await f.showTitle;
-		if (f.name.includes("-")) {
+		const fetched = await fetchShowTitle();
+		presenceData.details = await fetched.showTitle;
+		if (fetched.name.includes("-")) {
 			presenceData.state =
-				f.name
+				fetched.name
 					.split("-")[0]
-					.replace(f.showTitle, "S")
+					.replace(fetched.showTitle, "S")
 					.replace(".", ":E")
-					.replace(" ", "") + f.name.split("-")[1];
+					.replace(" ", "") + fetched.name.split("-")[1];
 		} else {
-			presenceData.state = f.name
-				.replace(f.showTitle, "S")
+			presenceData.state = fetched.name
+				.replace(fetched.showTitle, "S")
 				.replace(".", ":E")
 				.replace(" ", "");
 		}
@@ -53,9 +64,8 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "pause";
 			presenceData.smallImageText = "Gepauzeerd";
 		} else {
-			presenceData.endTimestamp = presence.getTimestamps(
-				document.querySelector("video").currentTime,
-				document.querySelector("video").duration
+			presenceData.endTimestamp = presence.getTimestampsfromMedia(
+				document.querySelector("video")
 			)[1];
 			presenceData.smallImageKey = "play";
 			presenceData.smallImageText = "Aan het afspelen";
