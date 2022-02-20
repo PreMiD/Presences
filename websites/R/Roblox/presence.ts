@@ -26,6 +26,7 @@ let profileName,
 
 presence.on("UpdateData", async () => {
   const buttons = await presence.getSetting("buttons"),
+		imagesEnabled = await presence.getSetting<boolean>("images"),
     presenceData: PresenceData = {
       details: "Unknown page",
       largeImageKey: "lg"
@@ -97,7 +98,7 @@ presence.on("UpdateData", async () => {
         profileId = Id;
       };
 
-      presenceData.largeImageKey = profileImg ? profileImg : "lg";
+      presenceData.largeImageKey = imagesEnabled ? profileImg : "lg";
 
       if (buttons) {
         presenceData.buttons = [
@@ -165,7 +166,7 @@ presence.on("UpdateData", async () => {
   
         presenceData.details = groupName.innerText;
         presenceData.state = `Tab: ${groupTab.innerText}`;
-        presenceData.largeImageKey = groupImage.src;
+        presenceData.largeImageKey = imagesEnabled ? groupImage.src : "lg";
   
         if (buttons) {
           presenceData.buttons = [
@@ -221,7 +222,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = `Game: ${gameName.innerText}`;
       presenceData.state = `Tab: ${gameTab.innerText}`;
-      presenceData.largeImageKey = gameImage ? gameImage : "lg";
+      presenceData.largeImageKey = imagesEnabled ? gameImage : "lg";
       presenceData.startTimestamp = browsingStamp;
 
       if (buttons) {
@@ -248,7 +249,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = searchResult;
       } else if (itemImage) {
         presenceData.details = "Looking at Catalog Item:"
-        presenceData.largeImageKey = itemImage.src,
+        presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg",
         presenceData.state = itemName.innerText;
 
         if (buttons) {
@@ -277,7 +278,7 @@ presence.on("UpdateData", async () => {
       const itemImage = <HTMLImageElement>(document.querySelector("span.thumbnail-span img"));
 
       presenceData.details = "Looking at Bundle:"
-      presenceData.largeImageKey = itemImage ? itemImage.src : "lg",
+      presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg",
       presenceData.state = itemName.innerText;
       presenceData.startTimestamp = browsingStamp;
 
@@ -369,7 +370,7 @@ presence.on("UpdateData", async () => {
       const itemImage = <HTMLImageElement>(document.querySelector("span.thumbnail-span img"));
 
       presenceData.details = "Looking at Badge:"
-      presenceData.largeImageKey = itemImage ? itemImage.src : "lg",
+      presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg",
       presenceData.state = itemName.innerText;
 
       if (buttons) {
@@ -385,7 +386,7 @@ presence.on("UpdateData", async () => {
       const itemImage = <HTMLImageElement>(document.querySelector("span.thumbnail-span img"));
 
       presenceData.details = "Looking at Asset:"
-      presenceData.largeImageKey = itemImage ? itemImage.src : "lg",
+      presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg",
       presenceData.state = itemName.innerText;
 
       if (buttons) {
@@ -401,7 +402,7 @@ presence.on("UpdateData", async () => {
       const itemImage = <HTMLImageElement>(document.querySelector("span.thumbnail-span img"));
 
       presenceData.details = "Looking at Gamepass:"
-      presenceData.largeImageKey = itemImage ? itemImage.src : "lg",
+      presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg",
       presenceData.state = itemName.innerText;
 
       if (buttons) {
@@ -511,7 +512,7 @@ presence.on("UpdateData", async () => {
       const user = document.querySelector(".username").innerHTML;
 			const image = <HTMLImageElement>(document.querySelector(".user-profile-avatar img"));
       presenceData.state = `Browsing ${user}'s Profile`;
-			presenceData.largeImageKey = image.src;
+			presenceData.largeImageKey = imagesEnabled ? image.src : dfLgImage;
 
       if (buttons) {
         presenceData.buttons = [
@@ -621,7 +622,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = `Looking at ${talentUserData[1]}'s Profile`;
         presenceData.startTimestamp = browsingStamp;
       }
-      presenceData.largeImageKey = `https://www.roblox.com/Thumbs/Avatar.ashx?x=420&y=420&userid=${Id}`
+      presenceData.largeImageKey = imagesEnabled ? `https://www.roblox.com/Thumbs/Avatar.ashx?x=420&y=420&userid=${Id}` : dfLgImage;
 
       if (buttons) {
         presenceData.buttons = [
