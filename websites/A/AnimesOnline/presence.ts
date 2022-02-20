@@ -87,20 +87,18 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "reading";
 		if (cover) {
 			const name = document.querySelector(
-				"#single > div.content.right > div.sheader > div.data > h1"
-			).textContent;
-			const ccover = document.querySelector<HTMLImageElement>(
-				"#single > div.content.right > div.sheader > div.poster > img"
-			).src;
+					"#single > div.content.right > div.sheader > div.data > h1"
+				).textContent,
+				ccover = document.querySelector<HTMLImageElement>(
+					"#single > div.content.right > div.sheader > div.poster > img"
+				).src;
 			if (
 				getCookie("PMD_prevACover") !== ccover &&
 				getCookie("PMD_prevAName") !== name
 			) {
 				setCookie("PMD_prevAName", `${name}`, 1);
 				setCookie("PMD_prevACover", `${ccover}`, 1);
-			} else {
-				presenceData.largeImageKey = `${getCookie("PMD_prevACover")}`;
-			}
+			} else presenceData.largeImageKey = `${getCookie("PMD_prevACover")}`;
 		}
 	} else if (
 		path.pathname.includes("episodio") ||
@@ -115,9 +113,8 @@ presence.on("UpdateData", async () => {
 				cover &&
 				getCookie("PMD_prevAName") ===
 					document.querySelector("#info > h1").textContent.split(" - ")[0]
-			) {
+			)
 				presenceData.largeImageKey = `${getCookie("PMD_prevACover")}`;
-			}
 		} else if (
 			document.querySelector("#info > h2")?.textContent.includes("Sinopse")
 		) {
