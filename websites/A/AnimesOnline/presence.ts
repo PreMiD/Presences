@@ -21,8 +21,8 @@ const presence = new Presence({
 			if (val.indexOf(name) === 0) output = val.substring(name.length);
 		});
 		return output;
-		};
-	
+	};
+
 let video = {
 	current: 0,
 	duration: 0,
@@ -39,8 +39,8 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const [time, buttons, cover] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
-		presence.getSetting<boolean>("buttons"),
-		presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("cover")
 		]),
 		playvdo =
 			document.querySelector("#info > h1")?.textContent ?? "desconhecido",
@@ -84,18 +84,22 @@ presence.on("UpdateData", async () => {
 		presenceData.details =
 			document.querySelector("div.data > h1")?.textContent ?? "desconhecido";
 		presenceData.state = "Selecionando um episódio";
-		presenceData.smallImageKey = "reading"
+		presenceData.smallImageKey = "reading";
 		if (cover) {
-			const name = document.querySelector("#single > div.content.right > div.sheader > div.data > h1").textContent
-			const ccover = document
-			.querySelector<HTMLImageElement>(
+			const name = document.querySelector(
+				"#single > div.content.right > div.sheader > div.data > h1"
+			).textContent;
+			const ccover = document.querySelector<HTMLImageElement>(
 				"#single > div.content.right > div.sheader > div.poster > img"
-			).src
-			if (getCookie("PMD_prevACover") !== ccover && getCookie("PMD_prevAName") !== name) {
+			).src;
+			if (
+				getCookie("PMD_prevACover") !== ccover &&
+				getCookie("PMD_prevAName") !== name
+			) {
 				setCookie("PMD_prevAName", `${name}`, 1);
 				setCookie("PMD_prevACover", `${ccover}`, 1);
 			} else {
-				presenceData.largeImageKey = `${getCookie("PMD_prevACover")}`
+				presenceData.largeImageKey = `${getCookie("PMD_prevACover")}`;
 			}
 		}
 	} else if (
@@ -107,8 +111,12 @@ presence.on("UpdateData", async () => {
 			const info = playvdo.split("- Episódio" || "Episódio");
 			[presenceData.details] = info;
 			presenceData.state = `Episódio ${info.pop()}`;
-			if (cover && (getCookie("PMD_prevAName") === document.querySelector("#info > h1").textContent.split(" - ")[0])) {
-			presenceData.largeImageKey = `${getCookie("PMD_prevACover")}`
+			if (
+				cover &&
+				getCookie("PMD_prevAName") ===
+					document.querySelector("#info > h1").textContent.split(" - ")[0]
+			) {
+				presenceData.largeImageKey = `${getCookie("PMD_prevACover")}`;
 			}
 		} else if (
 			document.querySelector("#info > h2")?.textContent.includes("Sinopse")
@@ -118,10 +126,13 @@ presence.on("UpdateData", async () => {
 				document.querySelector(
 					"#single > div.content.right > div.sheader > div.data > h1"
 				)?.textContent ?? "desconhecido";
-				cover ? presenceData.largeImageKey = `${document
-					.querySelector<HTMLImageElement>(
-						"#single > div.content.right > div.sheader > div.poster > img"
-					).src}` : null
+			cover
+				? (presenceData.largeImageKey = `${
+						document.querySelector<HTMLImageElement>(
+							"#single > div.content.right > div.sheader > div.poster > img"
+						).src
+				  }`)
+				: null;
 		} else {
 			presenceData.details = playvdo;
 			presenceData.state = "Assistir Anime";
