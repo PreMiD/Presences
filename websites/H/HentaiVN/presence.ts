@@ -298,13 +298,13 @@ presence.on("UpdateData", async () => {
 		if (document.location.search.includes("search")) {
 			keystr = searchParams.getAll("tag[]");
 			namekey = searchParams.get("name")
-				? `Từ khóa: ${searchParams.get("name")}`
+				? `Từ khóa: ${searchParams.get("name")} - `
 				: (namekey = "");
 			doukey = searchParams.get("dou")
-				? `Doujin: ${searchParams.get("dou")}`
+				? `Doujin: ${searchParams.get("dou")} - `
 				: (doukey = "");
 			charkey = searchParams.get("char")
-				? `Nhân vật: ${searchParams.get("char")}`
+				? `Nhân vật: ${searchParams.get("char")} - `
 				: (charkey = "");
 
 			type keytest = {
@@ -488,8 +488,8 @@ presence.on("UpdateData", async () => {
 					new RegExp(`\\b(?:${Object.keys(keynum).join("|")})\\b`, "g"),
 					(matched: string | number) => keynum[matched]
 				);
-			keystr = keystr ? `Từ khóa: ${keystr}` : (keystr = "");
-			presenceData.state = `${namekey} - ${charkey} - ${doukey} - ${keystr} - Trang ${page}`;
+			keystr = keystr ? `Từ khóa: ${keystr} - ` : (keystr = "");
+			presenceData.state = `${namekey}${charkey}${doukey}${keystr}Trang ${page}`;
 		} else presenceData.state = "Đang nhập dữ liệu tìm kiếm...";
 	} else if (pathname.startsWith("/forum/nhan_tin.php")) {
 		presenceData.details = "Đang nhắn tin...";
