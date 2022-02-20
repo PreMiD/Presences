@@ -8,20 +8,47 @@ let user: HTMLElement,
 	search: HTMLElement;
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-		largeImageKey: "9gag",
-		startTimestamp: browsingTimestamp
-	};
+	const sections = [
+			"u",
+			"gag",
+			"hot",
+			"trending",
+			"fresh",
+			"tag",
+			"search",
+			"settings",
+			"interest",
+			"top"
+		],
+		presenceData: PresenceData = {
+			largeImageKey: "9gag",
+			startTimestamp: browsingTimestamp
+		};
 
 	if (document.location.hostname === "9gag.com") {
 		if (document.location.pathname === "/")
 			presenceData.details = "Viewing home page";
+		else if (!sections.includes(document.location.pathname.split("/")[1])) {
+			presenceData.details = `Viewing section: ${
+				document.querySelector("h2").textContent
+			}`;
+		} else if (document.location.pathname.includes("/settings")) {
+			presenceData.details = `Settings: ${
+				document.querySelector("h2").textContent
+			}`;
+		} else if (document.location.pathname.includes("/interest")) {
+			presenceData.details = "Viewing interest:";
+			presenceData.state = document
+				.querySelector("title")
+				.textContent.split("9GAG ")[1];
+		} else if (document.location.pathname.includes("/top"))
+			presenceData.details = "Viewing top gags";
 		else if (document.location.pathname.includes("/u/")) {
-			user = document.querySelector(
-				"#container > div.page > div.main-wrap > div > section > header > h2"
-			);
-			presenceData.details = "Viewing user:";
-			presenceData.state = user.textContent;
+			presenceData.details = "Viewing Profile:";
+			presenceData.state = `${
+				document.querySelector("title").textContent.split(" - 9GAG")[0]
+			} - ${document.querySelector("a[class='selected']").textContent}`;
+			presenceData.largeImageKey = document.querySelector("img").src;
 		} else if (
 			document.querySelector(
 				"#container > div.page > div.main-wrap > div.profile > section > header > h2"
@@ -39,6 +66,9 @@ presence.on("UpdateData", async () => {
 			);
 
 			presenceData.details = "Viewing gag:";
+			presenceData.largeImageKey = document.querySelector<HTMLLinkElement>(
+				"link[rel='image_src']"
+			).href;
 			if (title.textContent.length > 128)
 				presenceData.state = `${title.textContent.substring(0, 125)}...`;
 			else presenceData.state = title.textContent;

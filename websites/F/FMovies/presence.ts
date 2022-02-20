@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "861567034706100234"
+		clientId: "943521983730171966"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -19,7 +19,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "fbox_logo"
+			largeImageKey: "logo"
 		},
 		{ pathname } = document.location,
 		[buttons, image] = await Promise.all([
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 				.querySelector("meta[property='og:image']")
 				.getAttribute("content");
 		}
-		if (iFrameData && !iFrameData.paused) {
+		if (!iFrameData?.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestamps(
 				iFrameData.currTime,
 				iFrameData.duration

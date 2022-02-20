@@ -38,8 +38,7 @@ presence.on("UpdateData", async () => {
 			)?.textContent ?? "ไม่ทราบชื่อ",
 		playvdo =
 			document.querySelector("#info > h1")?.textContent ?? "ไม่ทราบชื่อเรื่อง",
-		path = document.location.toString(),
-		pathArray = path.split("/"),
+		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: "site",
 			startTimestamp: browsingTimestamp
@@ -54,6 +53,9 @@ presence.on("UpdateData", async () => {
 			.split("ผลการค้นหา:")
 			.pop();
 		presenceData.smallImageKey = "search";
+	} else if (!privacy && (pathArray[4] === "page" || pathArray[5] === "page")) {
+		presenceData.details = `หน้า ${pathArray[pathArray.indexOf("page") + 1]}`;
+		presenceData.state = title;
 	} else {
 		switch (pathArray[3]) {
 			case "genre":
@@ -116,7 +118,7 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 			case "anime":
-				if (path) {
+				if (pathArray[4] !== "page") {
 					const ep =
 						document.querySelector(
 							"#single > div.content > div.sheader > div.data > h1"
@@ -124,10 +126,8 @@ presence.on("UpdateData", async () => {
 					presenceData.startTimestamp = browsingTimestamp;
 					presenceData.details = "เลือกตอน";
 					presenceData.state = `${ep.split("ตอนที่")[0]}`;
-				} else {
-					delete presenceData.startTimestamp;
-					delete presenceData.endTimestamp;
-				}
+				} else presenceData.details = "อนิเมะอัพเดตล่าสุด";
+
 				break;
 			case "ep":
 				if (playvdo.includes("ตอนที่")) {
