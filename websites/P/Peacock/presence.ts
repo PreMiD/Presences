@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 			if (title) {
 				presenceData.details = title.textContent;
 				if (path.includes("/watch/playback/playlist"))
-					presenceData.details += "Playlist";
+					presenceData.details += " Playlist";
 			}
 
 			presenceData.smallImageKey = live
