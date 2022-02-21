@@ -14,10 +14,10 @@ presence.on("UpdateData", () => {
 	else if (path.startsWith("/featured"))
 		presenceData.details = "Browsing featured mangas";
 	else if (path.startsWith("/manga_list")) {
-		if (path.indexOf("all") > -1) presenceData.details = "Browsing all mangas";
-		else if (path.indexOf("hot") > -1)
+		if (path.includes("all")) presenceData.details = "Browsing all mangas";
+		else if (path.includes("hot"))
 			presenceData.details = "Browsing hottest mangas";
-		else if (path.indexOf("updated") > -1)
+		else if (path.includes("updated"))
 			presenceData.details = "Browsing updated mangas";
 	} else if (path.startsWith("/favorited"))
 		presenceData.details = "Viewing favorited mangas";

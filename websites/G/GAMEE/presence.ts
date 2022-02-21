@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "gamee_logo",
 			startTimestamp: timer
 		},
-		{ pathname } = location,
-		[, , IDs] = pathname.split("/");
+		{ pathname, href } = document.location,
+		IDs = pathname.split("/")[2];
 
 	if (pathname === "/") presenceData.details = "Viewing homepage";
 	else if (pathname.includes("/prizes"))
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: `View ${name.textContent}'s profile`,
-				url: location.href
+				url: href
 			}
 		];
 	} else if (pathname.includes(`/game/${IDs}`)) {

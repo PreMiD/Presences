@@ -9,7 +9,7 @@ const presence = new Presence({
 
 // Pre-declare variable
 let radioStation = "",
-	startTimeStamp = new Date().getTime();
+	startTimeStamp = Date.now();
 
 presence.on("UpdateData", async () => {
 	// code
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 
 	// In Radio
 	if (
-		(document.getElementById("stream-player") as HTMLElement).style.display ===
+		(document.querySelector("#stream-player") as HTMLElement).style.display ===
 		"block"
 	) {
 		const [codeChannel] = document
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			// This logic make timestamp can't changed.
 			if (codeChannel !== radioStation) {
 				radioStation = codeChannel;
-				startTimeStamp = new Date().getTime();
+				startTimeStamp = Date.now();
 			}
 
 			presenceData.details = `Listening to ${radioStation} channel.`;
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 			// If pause
 			if (codeChannel !== "___PAUSED___") {
 				radioStation = "___PAUSED___";
-				startTimeStamp = new Date().getTime();
+				startTimeStamp = Date.now();
 			}
 
 			presenceData.details = "Paused.";

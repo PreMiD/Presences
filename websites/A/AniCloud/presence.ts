@@ -97,103 +97,177 @@ presence.on("UpdateData", async () => {
 		}
 
 		//Obere Reiter
-	} else if (page === "/animes") {
-		presenceData.details = pages[page];
-		presenceData.state = `Sortiert nach: ${
-			(
-				document.querySelector(
-					"#wrapper > div.container.marginBottom > div.seriesListNavigation > strong"
-				) as HTMLElement
-			).textContent
-		}`;
-	} else if (page === "/beliebte-animes") {
-		presenceData.state = `${
-			(document.querySelector("title") as HTMLElement).textContent.split("|")[0]
-		}`;
-	} else if (page === "/support/anleitung") {
-		presenceData.details = pages[page];
-		presenceData.state = "Die Anleitung";
-	} else if (page.includes("/search")) {
-		presenceData.details = "Sucht nach:";
-		presenceData.state = `${
-			(
-				document.querySelector(
-					"#wrapper > div.container > div.pageTitle.searchResultsPageTitle > h2 > strong"
-				) as HTMLElement
-			).textContent
-		}`;
-	} else if (page === "/animekalender") {
-		presenceData.details = pages[page];
-		presenceData.state = `${
-			(
-				document.querySelector(
-					"#wrapper > div.container > div.seriesWishListHeader > div.row > div.col-md-4 > small"
-				) as HTMLElement
-			).textContent
-		}`;
-	} else if (page === "/zufall") presenceData.details = pages[page];
-	else if (page === "/random") presenceData.details = pages[page];
-	// UNTERE REITER
-	else if (page === "/neu") presenceData.details = pages[page];
-	else if (page === "/support/regeln") presenceData.details = pages[page];
-	else if (page === "/dmca") presenceData.details = pages[page];
-	else if (page === "/animewuensche") presenceData.details = pages[page];
-	//Sign In & Sign Up
-	else if (page === "/login") presenceData.details = pages[page];
-	else if (page === "/registrierung") presenceData.details = pages[page];
-	//User Leiste
-	else if (page === "/account") presenceData.details = pages[page];
-	else if (page.startsWith("/user/profil/")) {
-		presenceData.details = "Betrachtet ein Profil";
-		presenceData.state = `${
-			(document.querySelector("h1") as HTMLElement).textContent
-		}`;
-		presenceData.smallImageKey = "user";
-		presenceData.smallImageText = `${
-			(
-				document.querySelector(
-					"#userDetails > div > div > div:nth-child(3) > div"
-				) as HTMLElement
-			).textContent
-		}`;
-	} else if (page === "/account/nachrichten")
-		presenceData.details = pages[page];
-	else if (page === "/account/notifications")
-		presenceData.details = pages[page];
-	else if (page === "/account/support") presenceData.details = pages[page];
-	else if (page === "/account/watchlist") presenceData.details = pages[page];
-	else if (page === "/account/subscribed") presenceData.details = pages[page];
-	else if (page === "/account/settings") presenceData.details = pages[page];
-	//MORE PROFILE SETTINGS --
-	//BUGGY 1.0.5 ??
-	else if (page.startsWith("/support/fragen"))
-		presenceData.details = pages[page];
-	else if (page === "/support") presenceData.details = pages[page];
-	else if (page === "/edit:information") presenceData.details = pages[page];
-	else if (page.startsWith("/katalog/")) {
-		presenceData.details = `Betrachtet Animes mit ${
-			(
-				document.querySelector(
-					"#wrapper > div.container.marginBottom > div.pageTitle > h1 > strong"
-				) as HTMLElement
-			).textContent
-		}`;
-	} else if (page.startsWith("/support/frage/")) {
-		presenceData.details = `Frage von ${
-			(document.querySelector("h5") as HTMLElement).textContent
-		}`;
-		presenceData.state = `${
-			(document.querySelector("h1") as HTMLElement).textContent
-		}`;
-	} else if (page.startsWith("/genre/")) {
-		presenceData.details = `Sucht nach ${
-			(
-				document.querySelector(
-					"#wrapper > div.container.marginBottom > div.seriesListSection > div.pageTitle.pageCenter.homeTitle > h1"
-				) as HTMLElement
-			).textContent
-		}`;
-	} else presenceData.details = "Befindet sich auf einer Unbekannte Seite";
+	} else {
+		switch (page) {
+			case "/animes": {
+				presenceData.details = pages[page];
+				presenceData.state = `Sortiert nach: ${
+					(
+						document.querySelector(
+							"#wrapper > div.container.marginBottom > div.seriesListNavigation > strong"
+						) as HTMLElement
+					).textContent
+				}`;
+
+				break;
+			}
+			case "/beliebte-animes": {
+				presenceData.state = `${
+					(document.querySelector("title") as HTMLElement).textContent.split(
+						"|"
+					)[0]
+				}`;
+
+				break;
+			}
+			case "/support/anleitung": {
+				presenceData.details = pages[page];
+				presenceData.state = "Die Anleitung";
+
+				break;
+			}
+			default:
+				if (page.includes("/search")) {
+					presenceData.details = "Sucht nach:";
+					presenceData.state = `${
+						(
+							document.querySelector(
+								"#wrapper > div.container > div.pageTitle.searchResultsPageTitle > h2 > strong"
+							) as HTMLElement
+						).textContent
+					}`;
+				} else {
+					switch (page) {
+						case "/animekalender": {
+							presenceData.details = pages[page];
+							presenceData.state = `${
+								(
+									document.querySelector(
+										"#wrapper > div.container > div.seriesWishListHeader > div.row > div.col-md-4 > small"
+									) as HTMLElement
+								).textContent
+							}`;
+
+							break;
+						}
+						case "/zufall": {
+							presenceData.details = pages[page];
+							break;
+						}
+						case "/random": {
+							presenceData.details = pages[page];
+							break;
+						}
+						case "/neu": {
+							presenceData.details = pages[page];
+							break;
+						}
+						case "/support/regeln": {
+							presenceData.details = pages[page];
+							break;
+						}
+						case "/dmca": {
+							presenceData.details = pages[page];
+							break;
+						}
+						case "/animewuensche": {
+							presenceData.details = pages[page];
+							break;
+						}
+						case "/login": {
+							presenceData.details = pages[page];
+							break;
+						}
+						case "/registrierung": {
+							presenceData.details = pages[page];
+							break;
+						}
+						case "/account": {
+							presenceData.details = pages[page];
+							break;
+						}
+						default:
+							if (page.startsWith("/user/profil/")) {
+								presenceData.details = "Betrachtet ein Profil";
+								presenceData.state = `${
+									(document.querySelector("h1") as HTMLElement).textContent
+								}`;
+								presenceData.smallImageKey = "user";
+								presenceData.smallImageText = `${
+									(
+										document.querySelector(
+											"#userDetails > div > div > div:nth-child(3) > div"
+										) as HTMLElement
+									).textContent
+								}`;
+							} else {
+								switch (page) {
+									case "/account/nachrichten": {
+										presenceData.details = pages[page];
+										break;
+									}
+									case "/account/notifications": {
+										presenceData.details = pages[page];
+										break;
+									}
+									case "/account/support": {
+										presenceData.details = pages[page];
+										break;
+									}
+									case "/account/watchlist": {
+										presenceData.details = pages[page];
+										break;
+									}
+									case "/account/subscribed": {
+										presenceData.details = pages[page];
+										break;
+									}
+									case "/account/settings": {
+										presenceData.details = pages[page];
+										break;
+									}
+									default:
+										if (page.startsWith("/support/fragen"))
+											presenceData.details = pages[page];
+										else if (page === "/support")
+											presenceData.details = pages[page];
+										else if (page === "/edit:information")
+											presenceData.details = pages[page];
+										else if (page.startsWith("/katalog/")) {
+											presenceData.details = `Betrachtet Animes mit ${
+												(
+													document.querySelector(
+														"#wrapper > div.container.marginBottom > div.pageTitle > h1 > strong"
+													) as HTMLElement
+												).textContent
+											}`;
+										} else if (page.startsWith("/support/frage/")) {
+											presenceData.details = `Frage von ${
+												(document.querySelector("h5") as HTMLElement)
+													.textContent
+											}`;
+											presenceData.state = `${
+												(document.querySelector("h1") as HTMLElement)
+													.textContent
+											}`;
+										} else if (page.startsWith("/genre/")) {
+											presenceData.details = `Sucht nach ${
+												(
+													document.querySelector(
+														"#wrapper > div.container.marginBottom > div.seriesListSection > div.pageTitle.pageCenter.homeTitle > h1"
+													) as HTMLElement
+												).textContent
+											}`;
+										} else {
+											presenceData.details =
+												"Befindet sich auf einer Unbekannte Seite";
+										}
+								}
+							}
+					}
+				}
+		}
+	}
 
 	if (presenceData.details && presenceData.state)
 		presence.setActivity(presenceData);

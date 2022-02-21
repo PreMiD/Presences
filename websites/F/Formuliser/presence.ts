@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp
 	};
 
-	formula = document.getElementById("formula") as HTMLInputElement;
+	formula = document.querySelector("#formula") as HTMLInputElement;
 
 	formulaName =
 		document.querySelector("span#elements-body > details > summary") ??

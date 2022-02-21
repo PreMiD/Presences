@@ -23,19 +23,19 @@ async function getData() {
 
 		userCount = null;
 
-		document.querySelectorAll("div").forEach(el => {
+		for (const el of document.querySelectorAll("div")) {
 			if (el.className.startsWith("userListColumn")) {
 				userCount = parseInt(
 					el.querySelector("h2").textContent.split("(")[1].split(")")[0]
 				);
 			}
-		});
+		}
 
 		inCall = userCount !== null;
 
 		if (roomName && joinedRoomName !== roomName) {
 			joinedRoomName = roomName;
-			joinedRoomTimestamp = new Date().getTime();
+			joinedRoomTimestamp = Date.now();
 		}
 	} else {
 		roomName = null;
@@ -45,16 +45,16 @@ async function getData() {
 
 	if (inCall) {
 		if (await presence.getSetting<boolean>("readNotificationBar")) {
-			document.querySelectorAll("div").forEach(el => {
+			for (const el of document.querySelectorAll("div")) {
 				if (el.className.startsWith("notificationsBar")) {
 					userState = el.textContent;
 					inCall = false;
-					return;
+					continue;
 				}
-			});
+			}
 		}
 
-		document.querySelectorAll("section").forEach(el => {
+		for (const el of document.querySelectorAll("section")) {
 			if (el.className.startsWith("actionsbar")) {
 				userState = el.querySelector("i.icon-bbb-desktop")
 					? "screen"
@@ -72,14 +72,14 @@ async function getData() {
 					? "headphones"
 					: "disconnected";
 			}
-		});
+		}
 	} else {
-		document.querySelectorAll("div").forEach(el => {
+		for (const el of document.querySelectorAll("div")) {
 			if (el.className.startsWith("spinner")) {
 				userState = "Joining session...";
-				return;
+				continue;
 			}
-		});
+		}
 		if (document.querySelector("#room_access_code"))
 			userState = "Entering the room passcode";
 		else if (document.querySelector(".form-control.join-form"))
@@ -112,9 +112,7 @@ presence.on("UpdateData", async () => {
 			: userState,
 		details: roomName ? roomName : userState,
 		state: inCall ? `${userCount} users` : roomName ? userState : null,
-		startTimestamp: joinedRoomTimestamp
-			? joinedRoomTimestamp
-			: new Date().getTime()
+		startTimestamp: joinedRoomTimestamp ? joinedRoomTimestamp : Date.now()
 	};
 
 	if (!presenceData.details) delete presenceData.details;

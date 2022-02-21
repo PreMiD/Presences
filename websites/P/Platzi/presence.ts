@@ -237,11 +237,11 @@ presence.on("UpdateData", async () => {
 			if (activeCategory !== "") presenceData.details = activeCategory;
 
 			if (!categoriesEventListener) {
-				learningPaths.forEach(learningPath => {
+				for (const learningPath of learningPaths) {
 					learningPath.addEventListener("mouseover", () =>
 						setPresenceFromEvent(learningPath.querySelector("h2").textContent)
 					);
-				});
+				}
 				categoriesEventListener = true;
 			}
 		}

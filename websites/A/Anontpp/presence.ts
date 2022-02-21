@@ -35,39 +35,38 @@ presence.on("UpdateData", async () => {
 	strings ??= await newStrings;
 
 	if (elapsed) presenceData.startTimestamp = elapsed;
-	if (showBrowseInfo) if (path === "/") presenceData.details = "Browsing";
+	if (showBrowseInfo && path === "/") presenceData.details = "Browsing";
 
-	if (showVideoInfo) {
-		if (video) {
-			const state = Array.from(
-					document.querySelector<HTMLElement>("#infotitle").childNodes
-				).flatMap(node => node.textContent.trim() || []),
-				status = video.paused ? "pause" : "play";
+	if (showVideoInfo && video) {
+		const state = Array.from(
+				document.querySelector<HTMLElement>("#infotitle").childNodes
+			).flatMap(node => node.textContent.trim() || []),
+			status = video.paused ? "pause" : "play";
 
-			presenceData.smallImageKey = status;
-			presenceData.smallImageText = strings[status];
-			if (status === "play") {
-				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					presence.getTimestamps(video.currentTime, video.duration);
-			}
+		presenceData.smallImageKey = status;
+		presenceData.smallImageText = strings[status];
+		if (status === "play") {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(video.currentTime, video.duration);
+		}
 
-			if (getElement("#episodetitle") !== "Feature Film") {
-				presenceData.details = "Watching Show";
-				presenceData.state = `${state[0]} (${state[1]})`;
-			} else {
-				presenceData.details = "Watching Movie";
-				[presenceData.state] = state;
-			}
+		if (getElement("#episodetitle") !== "Feature Film") {
+			presenceData.details = "Watching Show";
+			presenceData.state = `${state[0]} (${state[1]})`;
+		} else {
+			presenceData.details = "Watching Movie";
+			[presenceData.state] = state;
 		}
 	}
 
 	/* Search Info */
-	if (showSearchInfo) {
-		if (getElement("#indextitle").split("\n")[0] === "Search Results") {
-			presenceData.details = "Searching for";
-			presenceData.state =
-				document.querySelector<HTMLInputElement>("input").value;
-		}
+	if (
+		showSearchInfo &&
+		getElement("#indextitle").split("\n")[0] === "Search Results"
+	) {
+		presenceData.details = "Searching for";
+		presenceData.state =
+			document.querySelector<HTMLInputElement>("input").value;
 	}
 
 	if (presenceData.details) {

@@ -33,9 +33,9 @@ presence.on("UpdateData", async () => {
 			}`;
 		} else if (document.querySelector("[class^='chip']")) {
 			let filters = "";
-			document.querySelectorAll("[class^='chip']").forEach(function (element) {
+			for (const element of document.querySelectorAll("[class^='chip']"))
 				filters += `${element.textContent.slice(0, -2)},`;
-			});
+
 			presenceData.state = `${filters.slice(0, -1)}`;
 		}
 	} else if (document.location.pathname.includes("/leaderboard")) {

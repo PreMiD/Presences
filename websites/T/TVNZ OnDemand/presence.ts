@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
 	} else if (document.location.pathname.includes("/1-news-special")) {
 		presenceData.details = "Watching a live 1 NEWS Special";
 		presenceData.state =
-			document.getElementsByClassName("Hero-title")[1].textContent;
+			document.querySelectorAll(".Hero-title")[1].textContent;
 		presenceData.smallImageKey = "one";
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 	} else if (
@@ -49,7 +49,7 @@ presence.on("UpdateData", () => {
 		}
 
 		presenceData.state =
-			document.getElementsByClassName("Player-title")[0].textContent;
+			document.querySelectorAll(".Player-title")[0].textContent;
 
 		if (paused) {
 			presenceData.details = "Watching a show";
@@ -63,7 +63,7 @@ presence.on("UpdateData", () => {
 	} else if (document.location.pathname.includes("/shows/")) {
 		presenceData.details = "Viewing a show";
 		presenceData.state =
-			document.getElementsByClassName("Hero-title")[1].textContent;
+			document.querySelectorAll(".Hero-title")[1].textContent;
 	} else if (
 		document.URL === "https://www.tvnz.co.nz/categories/my-favourites"
 	) {
@@ -73,7 +73,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Browsing a category";
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 		presenceData.state =
-			document.getElementsByClassName("PageHeader-title")[0].textContent;
+			document.querySelectorAll(".PageHeader-title")[0].textContent;
 	} else if (
 		document.location.pathname.includes("/manage-profiles") ||
 		document.location.pathname.includes("/add-profile")
@@ -84,29 +84,45 @@ presence.on("UpdateData", () => {
 	else if (document.location.pathname.includes("/search")) {
 		presenceData.details = "Searching shows";
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-	} else if (document.URL === "https://www.tvnz.co.nz/livetv")
-		presenceData.details = "Viewing the Live TV guide";
-	else if (document.URL === "https://www.tvnz.co.nz/livetv/tvnz-1") {
-		presenceData.details = "Watching TVNZ 1 Live";
-		presenceData.smallImageKey = "one";
-		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-		presenceData.state =
-			document.getElementsByClassName("Player-title")[0].textContent;
-	} else if (document.URL === "https://www.tvnz.co.nz/livetv/tvnz-2") {
-		presenceData.details = "Watching TVNZ 2 Live";
-		presenceData.smallImageKey = "two";
-		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-		presenceData.state =
-			document.getElementsByClassName("Player-title")[0].textContent;
-	} else if (document.URL === "https://www.tvnz.co.nz/livetv/tvnz-duke") {
-		presenceData.details = "Watching TVNZ Duke Live";
-		presenceData.smallImageKey = "duke";
-		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-		presenceData.state =
-			document.getElementsByClassName("Player-title")[0].textContent;
-	} else if (document.location.pathname.includes("/one-news")) {
-		presenceData.details = "Browsing 1 NEWS";
-		presenceData.smallImageKey = "one";
+	} else {
+		switch (document.URL) {
+			case "https://www.tvnz.co.nz/livetv": {
+				presenceData.details = "Viewing the Live TV guide";
+				break;
+			}
+			case "https://www.tvnz.co.nz/livetv/tvnz-1": {
+				presenceData.details = "Watching TVNZ 1 Live";
+				presenceData.smallImageKey = "one";
+				presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+				presenceData.state =
+					document.querySelectorAll(".Player-title")[0].textContent;
+
+				break;
+			}
+			case "https://www.tvnz.co.nz/livetv/tvnz-2": {
+				presenceData.details = "Watching TVNZ 2 Live";
+				presenceData.smallImageKey = "two";
+				presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+				presenceData.state =
+					document.querySelectorAll(".Player-title")[0].textContent;
+
+				break;
+			}
+			case "https://www.tvnz.co.nz/livetv/tvnz-duke": {
+				presenceData.details = "Watching TVNZ Duke Live";
+				presenceData.smallImageKey = "duke";
+				presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+				presenceData.state =
+					document.querySelectorAll(".Player-title")[0].textContent;
+
+				break;
+			}
+			default:
+				if (document.location.pathname.includes("/one-news")) {
+					presenceData.details = "Browsing 1 NEWS";
+					presenceData.smallImageKey = "one";
+				}
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

@@ -14,43 +14,40 @@ function getMillisecondsFromString(timeString: string): number {
 }
 
 function isPodcast(): boolean {
-	return !!document.getElementsByClassName("track__podcast")[0];
+	return !!document.querySelectorAll(".track__podcast")[0];
 }
 
 setInterval(async () => {
 	const startedAt =
 			Date.now() -
 			getMillisecondsFromString(
-				(document.getElementsByClassName("progress__left")[0] as HTMLElement)
+				(document.querySelectorAll(".progress__left")[0] as HTMLElement)
 					.textContent
 			),
 		playing =
-			document.getElementsByClassName("player-controls__btn_pause").length ===
-			2;
+			document.querySelectorAll(".player-controls__btn_pause").length === 2;
 
 	let artists;
 	if (isPodcast()) {
-		artists = (
-			document.getElementsByClassName("track__podcast")[0] as HTMLElement
-		).textContent;
+		artists = (document.querySelectorAll(".track__podcast")[0] as HTMLElement)
+			.textContent;
 	} else {
-		artists = (
-			document.getElementsByClassName("track__artists")[0] as HTMLElement
-		).textContent;
+		artists = (document.querySelectorAll(".track__artists")[0] as HTMLElement)
+			.textContent;
 	}
 
 	presenceData = {
 		largeImageKey: "og-image",
 		smallImageKey: playing ? "play" : "pause",
 		smallImageText: playing ? (await strings).playing : (await strings).pause,
-		details: (document.getElementsByClassName("track__title")[0] as HTMLElement)
+		details: (document.querySelectorAll(".track__title")[0] as HTMLElement)
 			.textContent,
 		state: artists,
 		startTimestamp: startedAt,
 		endTimestamp:
 			startedAt +
 			getMillisecondsFromString(
-				(document.getElementsByClassName("progress__right")[0] as HTMLElement)
+				(document.querySelectorAll(".progress__right")[0] as HTMLElement)
 					.textContent
 			)
 	};
@@ -62,7 +59,7 @@ setInterval(async () => {
 }, 1000);
 
 presence.on("UpdateData", () => {
-	if (document.getElementsByClassName("track__title").length !== 0)
+	if (document.querySelectorAll(".track__title").length !== 0)
 		presence.setActivity(presenceData);
 	else presence.setActivity();
 });

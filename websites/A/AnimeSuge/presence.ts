@@ -84,27 +84,46 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Searching: "${search.get("keyword")}"`;
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = "Searching";
-	} else if (page === "/faq") {
-		presenceData.details = pages[page];
-		presenceData.state = "Reading";
-	} else if (page === "/contact") {
-		presenceData.details = pages[page];
-		presenceData.state = "Reading";
-	} else if (page === "/user/settings") {
-		presenceData.details = pages[page];
-		presenceData.state = "Changing";
-	} else if (page === "/user/watchlist") {
-		const list = search.get("folder");
-		presenceData.details = pages[page];
-		presenceData.state = `At folder: ${list}`;
-		if (list === null)
-			presenceData.state = "Looking at all animes in the watch list";
-	} else if (page === "/user/import") {
-		presenceData.details = pages[page];
-		presenceData.state = "Importing!";
 	} else {
-		presenceData.details = "Looking at an unknown page";
-		presenceData.state = "Unknown";
+		switch (page) {
+			case "/faq": {
+				presenceData.details = pages[page];
+				presenceData.state = "Reading";
+
+				break;
+			}
+			case "/contact": {
+				presenceData.details = pages[page];
+				presenceData.state = "Reading";
+
+				break;
+			}
+			case "/user/settings": {
+				presenceData.details = pages[page];
+				presenceData.state = "Changing";
+
+				break;
+			}
+			case "/user/watchlist": {
+				const list = search.get("folder");
+				presenceData.details = pages[page];
+				presenceData.state = `At folder: ${list}`;
+				if (list === null)
+					presenceData.state = "Looking at all animes in the watch list";
+
+				break;
+			}
+			case "/user/import": {
+				presenceData.details = pages[page];
+				presenceData.state = "Importing!";
+
+				break;
+			}
+			default: {
+				presenceData.details = "Looking at an unknown page";
+				presenceData.state = "Unknown";
+			}
+		}
 	}
 	if (presenceData.details && presenceData.state)
 		presence.setActivity(presenceData);
