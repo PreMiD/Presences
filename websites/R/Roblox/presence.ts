@@ -176,8 +176,7 @@ presence.on("UpdateData", async () => {
 				}
 			}
 		} else if (pathname.includes("/search/groups")) {
-			const searchURL = new URL(href),
-				searchResult = searchURL.searchParams.get("keyword");
+			const searchResult = new URL(href).searchParams.get("keyword");
 
 			presenceData.details = "Searching for a group:";
 			presenceData.state = searchResult;
@@ -188,8 +187,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing games...";
 			delete presenceData.state;
 
-			const searchURL = new URL(href),
-				searchResult = searchURL.searchParams.get("Keyword");
+			const searchResult = new URL(href).searchParams.get("Keyword");
 
 			if (searchResult) {
 				presenceData.details = "Searching for a game: ";
@@ -228,8 +226,7 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		} else if (pathname.includes("/catalog")) {
-			const searchURL = new URL(href),
-				searchResult = searchURL.searchParams.get("Keyword");
+			const searchResult = new URL(href).searchParams.get("Keyword");
 
 			presenceData.details = "Current page:";
 			presenceData.state = "Catalog";
@@ -293,8 +290,7 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		} else if (pathname.includes("/search/users")) {
-			const searchURL = new URL(href),
-				searchResult = searchURL.searchParams.get("keyword");
+			const searchResult = new URL(href).searchParams.get("keyword");
 
 			presenceData.details = "Searching for an user:";
 			presenceData.state = searchResult;
@@ -318,8 +314,7 @@ presence.on("UpdateData", async () => {
 						.textContent
 				}`;
 			} else if (developTabs === "Library") {
-				const searchURL = new URL(href),
-					searchResult = searchURL.searchParams.get("Keyword");
+				const searchResult = new URL(href).searchParams.get("Keyword");
 
 				if (searchResult) {
 					presenceData.details = `Searching at ${developTabs} for: `;
@@ -583,8 +578,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = dfLgImage;
 
 		if (pathname.includes("/search")) {
-			const searchURL = new URL(href),
-				searchResult = searchURL.searchParams.get("query");
+			const searchResult = new URL(href).searchParams.get("query");
 			if (pathname.includes("/creators")) {
 				if (searchResult)
 					presenceData.state = `Searching for Creator: ${searchResult}`;
