@@ -36,6 +36,36 @@ presence.on(
 	}
 );
 
+if (
+	getCookie("PMD_prevACover") !==
+		document.querySelector<HTMLImageElement>(
+			"#single > div.content.right > div.sheader > div.poster > img"
+		).src &&
+	getCookie("PMD_prevAName") !==
+		document.querySelector(
+			"#single > div.content.right > div.sheader > div.data > h1"
+		).textContent
+) {
+	setCookie(
+		"PMD_prevAName",
+		`${
+			document.querySelector(
+				"#single > div.content.right > div.sheader > div.data > h1"
+			).textContent
+		}`,
+		1
+	);
+	setCookie(
+		"PMD_prevACover",
+		`${
+			document.querySelector<HTMLImageElement>(
+				"#single > div.content.right > div.sheader > div.poster > img"
+			).src
+		}`,
+		1
+	);
+}
+
 presence.on("UpdateData", async () => {
 	const [time, buttons, cover] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
@@ -85,21 +115,8 @@ presence.on("UpdateData", async () => {
 			document.querySelector("div.data > h1")?.textContent ?? "desconhecido";
 		presenceData.state = "Selecionando um episódio";
 		presenceData.smallImageKey = "reading";
-		if (cover) {
-			const name = document.querySelector(
-					"#single > div.content.right > div.sheader > div.data > h1"
-				).textContent,
-				ccover = document.querySelector<HTMLImageElement>(
-					"#single > div.content.right > div.sheader > div.poster > img"
-				).src;
-			if (
-				getCookie("PMD_prevACover") !== ccover &&
-				getCookie("PMD_prevAName") !== name
-			) {
-				setCookie("PMD_prevAName", `${name}`, 1);
-				setCookie("PMD_prevACover", `${ccover}`, 1);
-			} else presenceData.largeImageKey = `${getCookie("PMD_prevACover")}`;
-		}
+		if (cover && getCookie("PMD_prevACover"))
+			presenceData.largeImageKey = `${getCookie("PMD_prevACover")}`;
 	} else if (
 		path.pathname.includes("episodio") ||
 		path.pathname.match(/(\W|^)filmes(\W\w|$)/)
