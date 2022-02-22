@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"author": {
+		"name": "Anto",
+		"id": "295527621603885058"
+	},
+	"service": "AnimeTrain",
+	"description": {
+		"tr": "AnimeTrain, türkçe altyazılı anime izleyebileceğiniz bir site.",
+		"en": "AnimeTrain is a site where you can watch anime with Turkish subtitles.",
+		"nl": "AnimeTrain is een site waar je anime kunt kijken met Turkse ondertitels."
+	},
+	"url": "animetrain.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/IcaSbEw.png",
+	"thumbnail": "https://i.imgur.com/IcaSbEw.png",
+	"color": "#3398b9",
+	"category": "videos",
+	"tags": [
+		"türk",
+		"anime",
+		"video"
+	],
+	"iframe": true
+}
