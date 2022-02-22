@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 			},
 			{
 				label: (await strings).anime,
-				url: `https://www.turkanime.net/${animePage}`
+				url: `https://animetrain.net/${animePage}`
 			}
 		];
 	} else if (window.location.pathname.startsWith("/anime/") && animeTitle) {
