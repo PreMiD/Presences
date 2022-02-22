@@ -88,15 +88,16 @@ presence.on("UpdateData", async () => {
 		else if (path.includes("marketplace"))
 			presenceData.state = "Browsing the marketplace";
 	} else if (path.startsWith("/search")) presenceData.details = "Searching...";
-	else if (path.startsWith("/forums")) {
-		if (path.includes("forumdisplay") || path.includes("showthread")) {
-			if (path.includes("forumdisplay"))
-				presenceData.details = "Viewing a forum:";
-			else if (path.includes("showthread"))
-				presenceData.details = "Viewing a thread:";
-			else presenceData.details = "Browsing the forum";
-			presenceData.state = shortTitle;
-		}
+	else if (
+		path.startsWith("/forums") &&
+		(path.includes("forumdisplay") || path.includes("showthread"))
+	) {
+		if (path.includes("forumdisplay"))
+			presenceData.details = "Viewing a forum:";
+		else if (path.includes("showthread"))
+			presenceData.details = "Viewing a thread:";
+		else presenceData.details = "Browsing the forum";
+		presenceData.state = shortTitle;
 	}
 	presence.setActivity(presenceData);
 });

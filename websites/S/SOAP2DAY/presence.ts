@@ -2,22 +2,21 @@ const presence = new Presence({
 		clientId: "828549761376059441"
 	}),
 	getAction = (): string => {
-		if (window.location.href.indexOf("movielist") !== -1) return "movielist";
-		else if (window.location.href.indexOf("sportlist") !== -1)
-			return "sportlist";
-		else if (window.location.href.indexOf("tvlist") !== -1) return "tvlist";
-		else if (window.location.href.indexOf("Tczo") !== -1) return "tvshow";
-		else if (window.location.href.indexOf("Mczo") !== -1) return "movie";
-		else if (window.location.href.indexOf("Sczo") !== -1) return "sport";
-		else if (window.location.href.indexOf("faq") !== -1) return "faq";
-		else if (window.location.href.indexOf("Eczo") !== -1) return "tv";
+		if (window.location.href.includes("movielist")) return "movielist";
+		else if (window.location.href.includes("sportlist")) return "sportlist";
+		else if (window.location.href.includes("tvlist")) return "tvlist";
+		else if (window.location.href.includes("Tczo")) return "tvshow";
+		else if (window.location.href.includes("Mczo")) return "movie";
+		else if (window.location.href.includes("Sczo")) return "sport";
+		else if (window.location.href.includes("faq")) return "faq";
+		else if (window.location.href.includes("Eczo")) return "tv";
 		else return "home";
 	},
 	getText = (text: string): string => {
-		return document.getElementsByClassName(text)[0].textContent.trim();
+		return document.querySelectorAll(text)[0].textContent.trim();
 	},
 	getStatus = (): string => {
-		const element = document.getElementById("t3").textContent.trim();
+		const element = document.querySelector("#t3").textContent.trim();
 		if (element === "") return "Loading";
 		else return element;
 	},
@@ -47,7 +46,7 @@ presence.on("UpdateData", async () => {
 
 		if (pauseFlag) {
 			[, watchStamp] = presence.getTimestampsfromMedia(
-				document.getElementsByTagName("video")[0]
+				document.querySelectorAll("video")[0]
 			);
 			if (!isNaN(watchStamp)) pauseFlag = true;
 			presenceData = {

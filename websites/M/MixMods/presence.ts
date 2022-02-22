@@ -39,10 +39,10 @@ presence.on("UpdateData", async () => {
 
 				break;
 		}
-	} else if (document.getElementsByClassName("label-info breadcrumbs")[0]) {
+	} else if (document.querySelectorAll(".label-info.breadcrumbs")[0]) {
 		presenceData.details = "Visualizando um post:";
-		presenceData.state = document.getElementsByClassName(
-			"post-title entry-title"
+		presenceData.state = document.querySelectorAll(
+			".post-title.entry-title"
 		)[0].textContent;
 
 		presenceData.smallImageKey = "user";

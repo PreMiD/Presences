@@ -251,7 +251,7 @@ presence.on("UpdateData", async () => {
 
 	if (videoMetadata) {
 		const videoElement = document.querySelector("video"),
-			{ currentEpisode, id, seasons, title } = videoMetadata;
+			{ currentEpisode, id, seasons, title, boxart } = videoMetadata;
 
 		if (!videoElement) return;
 
@@ -259,8 +259,8 @@ presence.on("UpdateData", async () => {
 		const { paused } = videoElement;
 
 		if (cover) {
-			presenceData.largeImageKey = videoMetadata.boxart
-				? await getShortURL(videoMetadata.boxart)
+			presenceData.largeImageKey = boxart
+				? await getShortURL(boxart)
 				: largeImage;
 		}
 

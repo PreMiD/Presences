@@ -19,21 +19,19 @@ async function Resource(ResourceSelected: ResourceNames): Promise<string> {
 	return value;
 }
 function getPagination(pagN: number): number[] {
-	const pagination = document.getElementsByClassName("pagination")[pagN];
+	const pagination = document.querySelectorAll(".pagination")[pagN];
 	let current = 1,
 		max = 1;
 	if (pagination) {
-		current = parseInt(
-			pagination.getElementsByClassName("active")[0].textContent
-		);
-		pagination.childNodes.forEach(item => {
+		current = parseInt(pagination.querySelectorAll(".active")[0].textContent);
+		for (const item of pagination.childNodes) {
 			if (
 				item.nodeName === "LI" &&
 				!isNaN(parseInt(item.textContent)) &&
 				parseInt(item.textContent) > max
 			)
 				max = parseInt(item.textContent);
-		});
+		}
 	}
 	return [current, max];
 }
@@ -42,7 +40,7 @@ presence.on("UpdateData", async () => {
 	const pathName = window.location.pathname,
 		notfound =
 			window.location.pathname === "/404" ||
-			document.getElementsByClassName("notfound").length !== 0,
+			document.querySelectorAll(".notfound").length !== 0,
 		presenceData: PresenceData = {
 			largeImageKey: await Resource(ResourceNames.logo)
 		};
@@ -52,10 +50,10 @@ presence.on("UpdateData", async () => {
 		let lancamentos = "...";
 		const qlancamentos = document.querySelectorAll("div.leflist > div");
 		if (qlancamentos.length > 0) {
-			qlancamentos.forEach(item => {
+			for (const item of qlancamentos) {
 				if (item.className.includes("activedlanca"))
 					lancamentos = item.textContent;
-			});
+			}
 		}
 		presenceData.details = "Início";
 		presenceData.state = `Lançamentos: ${lancamentos}`;
@@ -75,10 +73,10 @@ presence.on("UpdateData", async () => {
 			"div.multiselect>div>div>span>span"
 		);
 		if (GenerosN.length > 0) {
-			GenerosN.forEach(item => {
+			for (const item of GenerosN) {
 				if (Generos.length === 0) Generos += item.textContent;
 				else Generos += `, ${item.textContent}`;
-			});
+			}
 		}
 		presenceData.state = `Gêneros: ${!Generos.trim() ? "Todos" : Generos}`;
 		presenceData.startTimestamp = browsingTimestamp;
@@ -142,11 +140,11 @@ presence.on("UpdateData", async () => {
 		const qgender = document.querySelector("div.mtop>span");
 		let gender = "";
 		if (qgender) {
-			qgender.childNodes.forEach(item => {
-				if (item.textContent === "Gêneros:") return;
+			for (const item of qgender.childNodes) {
+				if (item.textContent === "Gêneros:") continue;
 				if (gender !== "") gender += ", ";
 				gender += item.textContent.replace(/^\s+|\s+$/g, "");
-			});
+			}
 		}
 		if (gender !== "") {
 			presenceData.smallImageKey = await Resource(ResourceNames.search);
@@ -220,35 +218,31 @@ presence.on("UpdateData", async () => {
 	}
 	if (
 		(await presence.getSetting<boolean>("showHistory")) &&
-		document.getElementsByClassName("historicob").length !== 0
+		document.querySelectorAll(".historicob").length !== 0 &&
+		parseInt(
+			document
+				.querySelectorAll(".historicob")[0]
+				.parentElement.style.width.replace("%", "")
+		) !== 0
 	) {
-		if (
-			parseInt(
-				document
-					.getElementsByClassName("historicob")[0]
-					.parentElement.style.width.replace("%", "")
-			) !== 0
-		) {
-			let hSession;
-			document.querySelectorAll("div.selecths").forEach(item => {
-				if (item.classList[item.classList.length - 1].includes("selecths"))
-					hSession = `${item.childNodes[0].textContent} ${item.childNodes[1].textContent}`;
-			});
-			const qUser = document.querySelector("#menu>li>ul>a");
-			let user = qUser
-				? (qUser as HTMLLinkElement).href.split("/").slice(-1)[0]
-				: "...";
-			presenceData.details = "Vizualizando Histórico:";
-			presenceData.state = `${document
-				.getElementsByClassName("activmancap")[0]
-				.textContent.replace(/^\s+|\s+$/g, "")} - ${hSession} - Página ${
-				getPagination(0)[0]
-			}/${getPagination(0)[1]}`;
-			if (!(await presence.getSetting<boolean>("showUserName")))
-				user = "👁‍🗨👁‍🗨";
-			presenceData.smallImageKey = await Resource(ResourceNames.history);
-			presenceData.smallImageText = `Username: ${user}`;
+		let hSession;
+		for (const item of document.querySelectorAll("div.selecths")) {
+			if (item.classList[item.classList.length - 1].includes("selecths"))
+				hSession = `${item.childNodes[0].textContent} ${item.childNodes[1].textContent}`;
 		}
+		const qUser = document.querySelector("#menu>li>ul>a");
+		let user = qUser
+			? (qUser as HTMLLinkElement).href.split("/").slice(-1)[0]
+			: "...";
+		presenceData.details = "Vizualizando Histórico:";
+		presenceData.state = `${document
+			.querySelectorAll(".activmancap")[0]
+			.textContent.replace(/^\s+|\s+$/g, "")} - ${hSession} - Página ${
+			getPagination(0)[0]
+		}/${getPagination(0)[1]}`;
+		if (!(await presence.getSetting<boolean>("showUserName"))) user = "👁‍🗨👁‍🗨";
+		presenceData.smallImageKey = await Resource(ResourceNames.history);
+		presenceData.smallImageText = `Username: ${user}`;
 	}
 	if (!presenceData.details) presence.setActivity();
 	else presence.setActivity(presenceData);

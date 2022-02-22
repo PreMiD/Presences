@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: elapsed
 		},
-		{ pathname } = document.location,
+		{ pathname, href } = document.location,
 		[
 			showTimestamps,
 			newLang,
@@ -87,8 +87,8 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	if (document.location.href !== prevUrl) {
-		prevUrl = document.location.href;
+	if (href !== prevUrl) {
+		prevUrl = href;
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 

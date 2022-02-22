@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(
 					Number(
 						document
-							.getElementById("map_tpll_command")
+							.querySelector("#map_tpll_command")
 							.textContent.replace("/tpll ", "")
 							.split(" ")[0]
 					) * 10
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(
 					Number(
 						document
-							.getElementById("map_tpll_command")
+							.querySelector("#map_tpll_command")
 							.textContent.replace("/tpll ", "")
 							.split(" ")[1]
 					) * 10

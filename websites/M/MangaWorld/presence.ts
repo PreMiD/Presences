@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 		searchParams = new URLSearchParams(
 			decodeURIComponent(document.location.search)
 				.replace("?", "")
-				.replace(/-/g, " ")
+				.replaceAll("-", " ")
 		);
 
 	/* Homepage */

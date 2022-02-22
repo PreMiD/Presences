@@ -152,19 +152,31 @@ presence.on("UpdateData", async function () {
 				];
 			}
 		} else presenceData.state = "Other";
-	} else if (urlpath[1] === "interactive")
-		presenceData.details = "Interactive Article";
-	else if (urlpath[1] === "account") {
-		presenceData.details = "Account";
-		if (urlpath[2] === "register" && !setting.privacy)
-			presenceData.state = "Register";
-		else if (urlpath[2] === "confirm" && !setting.privacy)
-			presenceData.state = "Confirming E-Mail";
-		else if (urlpath[2] === "settings" && !setting.privacy)
-			presenceData.state = "Settings";
-	} else if (urlpath[1] === "newsletters")
-		presenceData.details = "Browsing Newsletters";
-	else presenceData.details = "Other";
+	} else {
+		switch (urlpath[1]) {
+			case "interactive": {
+				presenceData.details = "Interactive Article";
+				break;
+			}
+			case "account": {
+				presenceData.details = "Account";
+				if (urlpath[2] === "register" && !setting.privacy)
+					presenceData.state = "Register";
+				else if (urlpath[2] === "confirm" && !setting.privacy)
+					presenceData.state = "Confirming E-Mail";
+				else if (urlpath[2] === "settings" && !setting.privacy)
+					presenceData.state = "Settings";
+
+				break;
+			}
+			case "newsletters": {
+				presenceData.details = "Browsing Newsletters";
+				break;
+			}
+			default:
+				presenceData.details = "Other";
+		}
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

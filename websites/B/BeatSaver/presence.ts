@@ -47,24 +47,20 @@ presence.on("UpdateData", async () => {
 			}
 		}
 		if (
-			document
-				.getElementsByClassName("badge badge-pill badge-danger mr-2")
-				.item(0)
+			document.querySelectorAll(".badge.badge-pill.badge-danger.mr-2").item(0)
 		) {
 			presenceData.smallImageKey = "showauto";
 			presenceData.smallImageText = "Made by a bot";
 		}
 		presenceData.details = document
-			.getElementsByClassName("card-header d-flex")
+			.querySelectorAll(".card-header.d-flex")
 			.item(0)
 			.childNodes.item(0).textContent;
 		if (presenceData.details === "") presenceData.details = "<NO NAME>";
 
 		presenceData.state = `Uploaded by ${
 			document
-				.getElementsByClassName(
-					"list-group-item d-flex justify-content-between"
-				)
+				.querySelectorAll(".list-group-item.d-flex.justify-content-between")
 				.item(0)
 				.children.item(0).textContent
 		}`;
@@ -76,9 +72,7 @@ presence.on("UpdateData", async () => {
 			{
 				label: "View Uploader's Profile",
 				url: `https://beatsaver.com${document
-					.getElementsByClassName(
-						"list-group-item d-flex justify-content-between"
-					)
+					.querySelectorAll(".list-group-item.d-flex.justify-content-between")
 					.item(0)
 					.getAttribute("href")}`
 			}

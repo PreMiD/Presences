@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 			) as HTMLElement,
 			fixedSearching =
 				searching && searching.textContent !== ""
-					? searching.textContent.replace(/"/g, "").replace(" Sonuçları", "")
+					? searching.textContent.replaceAll('"', "").replace(" Sonuçları", "")
 					: "Belirsiz";
 
 		presenceData.details = "Bir şey arıyor:";

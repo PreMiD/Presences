@@ -77,18 +77,42 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Registering";
 	else if (page.includes("/settings")) {
 		presenceData.details = "Viewing:";
-		if (page === "/settings/general") presenceData.state = "General Settings";
-		else if (page === "/settings/friends") presenceData.state = "Their Friends";
-		else if (page === "/settings/quests") presenceData.state = "Quests";
-		else if (page === "/settings/favs") presenceData.state = "Favs";
-		else if (page === "/settings/contact")
-			presenceData.state = "Contact Settings";
-		else if (page === "/settings/accounts")
-			presenceData.state = "Soicial Settings";
-		else if (page === "/settings/purchases")
-			presenceData.state = "My Purchases";
-		else if (page === "/settings/password")
-			presenceData.state = "Password Settings";
+		switch (page) {
+			case "/settings/general": {
+				presenceData.state = "General Settings";
+				break;
+			}
+			case "/settings/friends": {
+				presenceData.state = "Their Friends";
+				break;
+			}
+			case "/settings/quests": {
+				presenceData.state = "Quests";
+				break;
+			}
+			case "/settings/favs": {
+				presenceData.state = "Favs";
+				break;
+			}
+			case "/settings/contact": {
+				presenceData.state = "Contact Settings";
+				break;
+			}
+			case "/settings/accounts": {
+				presenceData.state = "Soicial Settings";
+				break;
+			}
+			case "/settings/purchases": {
+				presenceData.state = "My Purchases";
+				break;
+			}
+			case "/settings/password":
+				{
+					presenceData.state = "Password Settings";
+					// No default
+				}
+				break;
+		}
 	} else if (page.includes("/games/")) {
 		title = document.querySelector(
 			"#content-canvas > section.game-header.clearfix > h1"

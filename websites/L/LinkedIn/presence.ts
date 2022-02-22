@@ -282,7 +282,7 @@ presence.on("UpdateData", async () => {
 							"div.application-outlet > div.authentication-outlet > div > div:nth-child(2) > main > div:first-child > section > div > h1 > span"
 						)
 						.textContent.trim()
-						.replace(/<!---->/g, "")
+						.replaceAll("<!---->", "")
 				)}.`;
 			} else {
 				presenceData.details = "Browsing Groups:";

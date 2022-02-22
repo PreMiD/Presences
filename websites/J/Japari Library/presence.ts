@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing revision history of:";
 
 		if (title2Result.includes("_"))
-			presenceData.state = title2Result.replace(/_/g, " ");
+			presenceData.state = title2Result.replaceAll("_", " ");
 		else presenceData.state = title2Result;
 	} else if (
 		actionResult === "edit" &&
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Editing a page:";
 
 		if (title2Result.includes("_"))
-			presenceData.state = title2Result.replace(/_/g, " ");
+			presenceData.state = title2Result.replaceAll("_", " ");
 		else presenceData.state = title2Result;
 	} else if (
 		actionResult === "formedit" &&
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Form editing a page:";
 
 		if (title2Result.includes("_"))
-			presenceData.state = title2Result.replace(/_/g, " ");
+			presenceData.state = title2Result.replaceAll("_", " ");
 		else presenceData.state = title2Result;
 	}
 

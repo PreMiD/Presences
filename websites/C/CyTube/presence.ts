@@ -74,9 +74,8 @@ function service(service: string): Match {
 		imageKey: "cytube_service_uk"
 	};
 
-	Object.keys(matches).forEach(key => {
+	for (const key of Object.keys(matches))
 		service.includes(key) && (returnMatch = matches[key]);
-	});
 
 	return returnMatch;
 }
@@ -111,7 +110,7 @@ presence.on("UpdateData", async () => {
 		const currentService: Match = service(data.site);
 
 		presenceData.details = `Watching ${document
-			.getElementById("currenttitle")
+			.querySelector("#currenttitle")
 			.textContent.replace("Currently Playing:", "")}
             - ${currentService.display}`;
 
@@ -136,16 +135,16 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path.includes("/r/")) {
-		presenceData.state = `${document.getElementById("motd").textContent} - /r/${
+		presenceData.state = `${document.querySelector("#motd").textContent} - /r/${
 			path.split("r/")[0]
 		}`;
 		if (
 			document.body.className.includes("chatOnly") ||
-			!document.getElementById("videowrap")
+			!document.querySelector("#videowrap")
 		) {
 			presenceData.details = "Chatting";
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-		} else if (!document.getElementById("videowrap").querySelector("video")) {
+		} else if (!document.querySelector("#videowrap").querySelector("video")) {
 			presenceData.details = "Waiting to Start";
 			presenceData.smallImageKey = "presence_playback_waiting";
 			presenceData.smallImageText = "Waiting";
@@ -153,7 +152,7 @@ presence.on("UpdateData", async () => {
 
 			if (iFrameResponse?.site) setVideo(iFrameResponse);
 		} else {
-			const video = document.getElementById("videowrap").querySelector("video");
+			const video = document.querySelector("#videowrap").querySelector("video");
 
 			setVideo({
 				audio: false,
