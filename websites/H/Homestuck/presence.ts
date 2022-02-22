@@ -5,13 +5,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
-	};
-
-	let pathStr = document.location.pathname;
-	let pathArr = pathStr.split("/");
-	console.log(pathStr);
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp
+		},
+		pathStr = document.location.pathname,
+		pathArr = pathStr.split("/");
 	switch (pathArr[1]) {
 		case "":
 			presenceData.details = "Viewing home page";
@@ -24,17 +22,15 @@ presence.on("UpdateData", async () => {
 		case "jailbreak":
 			presenceData.details = "Reading Jailbreak";
 			presenceData.smallImageKey = "mspa";
-			if (!pathArr[2]) {
-				presenceData.state = "Page 1 of 134";
-			} else {
-				presenceData.state = "Page " + pathArr[2] + " of 134";
-			}
+			if (!pathArr[2]) presenceData.state = "Page 1 of 134";
+			else presenceData.state = `Page ${pathArr[2]} of 134`;
+
 			presenceData.smallImageText =
 				document.getElementsByTagName("h2")[0].textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com` + pathStr
+					url: `https://www.homestuck.com${pathStr}`
 				}
 			];
 			break;
@@ -42,17 +38,15 @@ presence.on("UpdateData", async () => {
 		case "bard-quest":
 			presenceData.details = "Reading Bard Quest";
 			presenceData.smallImageKey = "mspa";
-			if (!pathArr[2]) {
-				presenceData.state = "Page 1 of 47";
-			} else {
-				presenceData.state = "Page " + pathArr[2] + " of 47";
-			}
+			if (!pathArr[2]) presenceData.state = "Page 1 of 47";
+			else presenceData.state = `Page ${pathArr[2]} of 47`;
+
 			presenceData.smallImageText =
 				document.getElementsByTagName("h2")[0].textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com` + pathStr
+					url: `https://www.homestuck.com${pathStr}`
 				}
 			];
 			break;
@@ -60,17 +54,15 @@ presence.on("UpdateData", async () => {
 		case "problem-sleuth":
 			presenceData.details = "Reading Problem Sleuth";
 			presenceData.smallImageKey = "mspa";
-			if (!pathArr[2]) {
-				presenceData.state = "Page 1 of 1674";
-			} else {
-				presenceData.state = "Page " + pathArr[2] + " of 1674";
-			}
+			if (!pathArr[2]) presenceData.state = "Page 1 of 1674";
+			else presenceData.state = `Page ${pathArr[2]} of 1674`;
+
 			presenceData.smallImageText =
 				document.getElementsByTagName("h2")[0].textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com` + pathStr
+					url: `https://www.homestuck.com${pathStr}`
 				}
 			];
 			break;
@@ -78,17 +70,15 @@ presence.on("UpdateData", async () => {
 		case "ryanquest":
 			presenceData.details = "Reading Ryanquest";
 			presenceData.smallImageKey = "ryan";
-			if (!pathArr[2]) {
-				presenceData.state = "Page 1 of 15";
-			} else {
-				presenceData.state = "Page " + pathArr[2] + " of 15";
-			}
+			if (!pathArr[2]) presenceData.state = "Page 1 of 15";
+			else presenceData.state = `Page ${pathArr[2]} of 15`;
+
 			presenceData.smallImageText =
 				document.getElementsByTagName("h2")[0].textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com` + pathStr
+					url: `https://www.homestuck.com${pathStr}`
 				}
 			];
 			break;
@@ -96,16 +86,14 @@ presence.on("UpdateData", async () => {
 		case "sweet-bro-and-hella-jeff":
 			presenceData.details = "Reading Sweet Bro and Hella Jeff";
 			presenceData.smallImageKey = "hellajeff";
-			if (!pathArr[2]) {
-				presenceData.state = "Page 1 of 54";
-			} else {
-				presenceData.state = "Page " + pathArr[2] + " of 54";
-			}
+			if (!pathArr[2]) presenceData.state = "Page 1 of 54";
+			else presenceData.state = `Page ${pathArr[2]} of 54`;
+
 			presenceData.smallImageText = "I WARNED YOU ABOUT STAIRS BRO!!!!";
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com` + pathStr
+					url: `https://www.homestuck.com${pathStr}`
 				}
 			];
 			break;
@@ -113,17 +101,15 @@ presence.on("UpdateData", async () => {
 		case "beta":
 			presenceData.details = "Reading Homestuck (BETA)";
 			presenceData.smallImageKey = "mspa";
-			if (!pathArr[2]) {
-				presenceData.state = "Page 1 of 8";
-			} else {
-				presenceData.state = "Page " + pathArr[2] + " of 8";
-			}
+			if (!pathArr[2]) presenceData.state = "Page 1 of 8";
+			else presenceData.state = `Page ${pathArr[2]} of 8`;
+
 			presenceData.smallImageText =
 				document.getElementsByTagName("h2")[0].textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com` + pathStr
+					url: `https://www.homestuck.com${pathStr}`
 				}
 			];
 			break;
@@ -131,11 +117,8 @@ presence.on("UpdateData", async () => {
 		case "story":
 			presenceData.details = "Reading Homestuck";
 			presenceData.smallImageKey = "mspa";
-			if (!pathArr[2]) {
-				presenceData.state = "Page 1 of 8130";
-			} else {
-				presenceData.state = "Page " + pathArr[2] + " of 8130";
-			}
+			if (!pathArr[2]) presenceData.state = "Page 1 of 8130";
+			else presenceData.state = `Page ${pathArr[2]} of 8130`;
 
 			if (document.getElementsByTagName("h2")[0]) {
 				presenceData.smallImageText =
@@ -147,7 +130,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com` + pathStr
+					url: `https://www.homestuck.com${pathStr}`
 				}
 			];
 			break;
@@ -159,40 +142,39 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Making the choice";
 			switch (pathArr[2]) {
 				case "prologue":
-					if (!pathArr[3]) {
-						presenceData.state = "Viewing epilogue content";
-					} else {
-						presenceData.state = "Prologue Chapter " + pathArr[3] + " of 3";
+					if (!pathArr[3]) presenceData.state = "Viewing epilogue content";
+					else {
+						presenceData.state = `Prologue Chapter ${pathArr[3]} of 3`;
 						presenceData.buttons = [
 							{
 								label: "Read Along",
-								url: `https://www.homestuck.com` + pathStr
+								url: `https://www.homestuck.com${pathStr}`
 							}
 						];
 					}
 					presenceData.smallImageText = "It starts with a crack.";
 					break;
 				case "meat":
-					presenceData.state = "Meat Chapter " + pathArr[3] + " of 44";
+					presenceData.state = `Meat Chapter ${pathArr[3]} of 44`;
 					presenceData.smallImageKey = "meat";
 					presenceData.smallImageText =
 						"Meat was definitely the right choice, you think, as grease drips down your chin.";
 					presenceData.buttons = [
 						{
 							label: "Read Along",
-							url: `https://www.homestuck.com` + pathStr
+							url: `https://www.homestuck.com${pathStr}`
 						}
 					];
 					break;
 				case "candy":
-					presenceData.state = "Candy Chapter " + pathArr[3] + " of 41";
+					presenceData.state = `Candy Chapter ${pathArr[3]} of 41`;
 					presenceData.smallImageKey = "candy";
 					presenceData.smallImageText =
 						"Candy was definitely the right choice, John thinks, as he munches thoughtfully on a strawberry swirl mint.";
 					presenceData.buttons = [
 						{
 							label: "Read Along",
-							url: `https://www.homestuck.com` + pathStr
+							url: `https://www.homestuck.com${pathStr}`
 						}
 					];
 					break;
@@ -221,19 +203,18 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "mspa";
 				presenceData.smallImageText =
 					document.getElementsByTagName("h2")[0].textContent;
-			} else if (pathArr[2] == "list") {
+			} else if (pathArr[2] === "list")
 				presenceData.details = "Viewing extras list";
-			} else {
-				presenceData.details = "Viewing extra " + pathArr[2] + " of 40";
+			else {
+				presenceData.details = `Viewing extra ${pathArr[2]} of 40`;
 				presenceData.smallImageKey = "mspa";
 				if (document.getElementsByTagName("h2")[0].textContent.length <= 128) {
 					presenceData.smallImageText =
 						document.getElementsByTagName("h2")[0].textContent;
 				} else {
-					presenceData.smallImageText =
-						document
-							.getElementsByTagName("h2")[0]
-							.textContent.substring(0, 124) + "...";
+					presenceData.smallImageText = `${document
+						.getElementsByTagName("h2")[0]
+						.textContent.substring(0, 124)}...`;
 				}
 			}
 			break;
