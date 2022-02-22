@@ -8,9 +8,9 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = document.location;
+		{ pathname, search } = document.location;
 
-	if (pathname === "/" && document.location.search.substr(0, 2) === "?q") {
+	if (pathname === "/" && search.substr(0, 2) === "?q") {
 		presenceData.details = "Searching:";
 		presenceData.state = document.querySelector(".caption").textContent;
 		presenceData.smallImageKey = "search";

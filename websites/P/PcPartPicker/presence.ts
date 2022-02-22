@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "pcpartpicker_logo_",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = document.location;
+		{ pathname, href } = document.location;
 
 	if (pathname === "/") presenceData.details = "Browsing Home Page";
 	else if (pathname.startsWith("/guide/")) {
@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Browse Guide",
-				url: document.location.href
+				url: href
 			}
 		];
 	} else if (pathname.startsWith("/b/")) {
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Build",
-				url: document.location.href
+				url: href
 			}
 		];
 	} else if (pathname.startsWith("/product/")) {
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Look at product",
-				url: document.location.href
+				url: href
 			}
 		];
 	} else if (pathname.startsWith("/products/")) {
@@ -69,14 +69,14 @@ presence.on("UpdateData", async () => {
 						.join(" ")
 						.replace(/\b\w/g, c => c.toUpperCase())}`; // Capitalize first char of every word
 	} else if (pathname.startsWith("/user/")) {
-		const [, , username, section = ""] = pathname.split("/");
-		presenceData.details = `Viewing ${username}'s ${
+		const section = pathname.split("'/")[3];
+		presenceData.details = `Viewing ${pathname.split("/")[2]}'s ${
 			section === "" ? "profile" : section
 		}`;
 		presenceData.buttons = [
 			{
 				label: "View User",
-				url: document.location.href
+				url: href
 			}
 		];
 	} else if (pathname.startsWith("/list/")) {
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Thread",
-					url: document.location.href
+					url: href
 				}
 			];
 		}
@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Trends",
-				url: document.location.href
+				url: href
 			}
 		];
 	} else if (pathname.startsWith("/builds/"))

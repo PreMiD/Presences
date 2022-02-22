@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 				tag && tag.textContent !== ""
 					? tag.textContent
 							.split(" ")
-							[tag.textContent.split(" ").length - 1].replace(/"/g, "")
+							[tag.textContent.split(" ").length - 1].replaceAll('"', "")
 					: null || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
@@ -87,7 +87,10 @@ presence.on("UpdateData", async () => {
 				searchingFor && searchingFor.textContent !== ""
 					? searchingFor.textContent
 							.split(" ")
-							[searchingFor.textContent.split(" ").length - 1].replace(/"/g, "")
+							[searchingFor.textContent.split(" ").length - 1].replaceAll(
+								'"',
+								""
+							)
 					: null || "Belirsiz",
 			smallImageKey: "search",
 			startTimestamp: Math.floor(Date.now() / 1000)

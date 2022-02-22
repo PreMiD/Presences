@@ -42,8 +42,8 @@ presence.on("UpdateData", async () => {
 
 	if (path === "/index.php") {
 		// Note that I (EGGSY) didn't work on this part, I don't know if it's working on the main site but I'm sure it doesn't work on Spanish version.
-		const newTopic = document.getElementsByClassName("firstHeading")[0]
-			? document.getElementsByClassName("firstHeading")[0].textContent
+		const newTopic = document.querySelectorAll(".firstHeading")[0]
+			? document.querySelectorAll(".firstHeading")[0].textContent
 			: null;
 
 		return presence.setActivity({

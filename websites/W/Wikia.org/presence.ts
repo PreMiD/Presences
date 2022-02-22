@@ -53,10 +53,22 @@ const updateCallback = {
 
 		*/
 
-			if (currentPath[0] === "") presenceData.details = "On the index page";
-			else if (currentPath[0] === "signin") presenceData.details = "Signing in";
-			else if (currentPath[0] === "register")
-				presenceData.details = "Registering an account";
+			switch (currentPath[0]) {
+				case "": {
+					presenceData.details = "On the index page";
+					break;
+				}
+				case "signin": {
+					presenceData.details = "Signing in";
+					break;
+				}
+				case "register":
+					{
+						presenceData.details = "Registering an account";
+						// No default
+					}
+					break;
+			}
 		} else if (currentPath.includes("wiki")) {
 			/*
 
@@ -78,7 +90,7 @@ const updateCallback = {
 				actionResult = (): string =>
 					getURLParam("action") || getURLParam("veaction") || mwConfig.wgAction,
 				titleFromURL = (): string => {
-					return decodeURIComponent(mwConfig.wgPageName.replace(/_/g, " "));
+					return decodeURIComponent(mwConfig.wgPageName.replaceAll("_", " "));
 				},
 				title = document.querySelector("h1")
 					? document.querySelector("h1").textContent.trim()
@@ -135,8 +147,8 @@ const updateCallback = {
 							Portal: "Viewing a portal",
 							"Portal talk": "Viewing a portal talk page"
 						},
-						canonicalNamespace = mwConfig.wgCanonicalNamespace.replace(
-							/_/g,
+						canonicalNamespace = mwConfig.wgCanonicalNamespace.replaceAll(
+							"_",
 							" "
 						);
 					return (

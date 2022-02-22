@@ -139,8 +139,8 @@ presence.on("UpdateData", () => {
 		};
 	} else {
 		try {
-			const e = document.getElementById(
-					"PreMiD_Salem_Out"
+			const e = document.querySelector(
+					"#PreMiD_Salem_Out"
 				) as HTMLTextAreaElement,
 				info = JSON.parse(e.textContent);
 			if (oldState.page !== info.page) elapsed = Math.round(Date.now() / 1000);

@@ -11,7 +11,7 @@ function capitalize(string: string) {
 }
 
 presence.on("UpdateData", () => {
-	const { pathname } = window.location,
+	const { hostname, pathname } = window.location,
 		presenceData: PresenceData = {};
 
 	let details: string,
@@ -19,7 +19,7 @@ presence.on("UpdateData", () => {
 		smallImageKey: string,
 		smallImageText: string;
 
-	switch (window.location.hostname) {
+	switch (hostname) {
 		case "wanikani.com":
 		case "www.wanikani.com": {
 			switch (pathname) {

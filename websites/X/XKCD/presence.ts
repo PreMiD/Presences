@@ -31,7 +31,7 @@ presence.on("UpdateData", () => {
 				.split("xkcd.com/")[1]
 				.split("/")[0]
 		}`;
-		presenceData.state = document.getElementById("ctitle").textContent;
+		presenceData.state = document.querySelector("#ctitle").textContent;
 	} else presenceData.details = "Browsing XKCD";
 
 	presence.setActivity(presenceData);

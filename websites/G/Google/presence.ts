@@ -45,24 +45,46 @@ presence.on("UpdateData", async () => {
 		if (!searchTab) {
 			presenceData.details = `Searching for ${homepageInput.value}`;
 			presenceData.state = document.querySelector("#result-stats").textContent;
-		} else if (searchTab === "isch") {
-			presenceData.details = "Google Images";
-			presenceData.state = `Searching for ${imgInput.value}`;
-		} else if (searchTab === "vid") {
-			presenceData.details = "Google Videos";
-			presenceData.state = `Searching for ${pageInput.value}`;
-		} else if (searchTab === "nws") {
-			presenceData.details = "Google News";
-			presenceData.state = `Searching for ${pageInput.value}`;
-		} else if (searchTab === "bks") {
-			presenceData.details = "Google Books";
-			presenceData.state = `Searching for ${pageInput.value}`;
-		} else if (searchTab === "fin") {
-			presenceData.details = "Google Finance";
-			presenceData.state = `Searching for ${pageInput.value}`;
-		} else if (searchTab === "pers") {
-			presenceData.details = "Google Personal";
-			presenceData.state = `Searching for ${pageInput.value}`;
+		} else {
+			switch (searchTab) {
+				case "isch": {
+					presenceData.details = "Google Images";
+					presenceData.state = `Searching for ${imgInput.value}`;
+
+					break;
+				}
+				case "vid": {
+					presenceData.details = "Google Videos";
+					presenceData.state = `Searching for ${pageInput.value}`;
+
+					break;
+				}
+				case "nws": {
+					presenceData.details = "Google News";
+					presenceData.state = `Searching for ${pageInput.value}`;
+
+					break;
+				}
+				case "bks": {
+					presenceData.details = "Google Books";
+					presenceData.state = `Searching for ${pageInput.value}`;
+
+					break;
+				}
+				case "fin": {
+					presenceData.details = "Google Finance";
+					presenceData.state = `Searching for ${pageInput.value}`;
+
+					break;
+				}
+				case "pers": {
+					presenceData.details = "Google Personal";
+					presenceData.state = `Searching for ${pageInput.value}`;
+
+					break;
+				}
+				// No default
+			}
 		}
 	}
 

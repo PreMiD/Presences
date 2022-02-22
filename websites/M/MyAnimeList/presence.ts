@@ -39,16 +39,15 @@ presence.on("UpdateData", async () => {
 		};
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.startsWith("/clubs.php")) {
-		if (document.getElementsByClassName("normal_header")[1]) {
+		if (document.querySelectorAll(".normal_header")[1]) {
 			const presenceData: PresenceData = {
 				details: "Viewing an club",
-				state: document.getElementsByClassName("h1")[0].textContent,
+				state: document.querySelectorAll(".h1")[0].textContent,
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);
 		} else if (
-			document.getElementsByClassName("h1-title")[0].textContent ===
-			"Invitations"
+			document.querySelectorAll(".h1-title")[0].textContent === "Invitations"
 		) {
 			const presenceData: PresenceData = {
 				details: "Viewing club Invitations",
@@ -56,7 +55,7 @@ presence.on("UpdateData", async () => {
 			};
 			presence.setActivity(presenceData);
 		} else if (
-			document.getElementsByClassName("h1-title")[0].textContent === "My Clubs"
+			document.querySelectorAll(".h1-title")[0].textContent === "My Clubs"
 		) {
 			const presenceData: PresenceData = {
 				details: "Viewing my clubs",
@@ -103,13 +102,13 @@ presence.on("UpdateData", async () => {
 		} else {
 			const presenceData: PresenceData = {
 				details: "Viewing an article",
-				state: document.getElementsByClassName("title")[0].textContent,
+				state: document.querySelectorAll(".title")[0].textContent,
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);
 		}
 	} else if (document.location.pathname.startsWith("/people")) {
-		if (document.getElementsByClassName("h1")[0].textContent === "People") {
+		if (document.querySelectorAll(".h1")[0].textContent === "People") {
 			const presenceData: PresenceData = {
 				details: "Viewing peoples",
 				largeImageKey: "lg-mal"
@@ -119,14 +118,14 @@ presence.on("UpdateData", async () => {
 			const presenceData: PresenceData = {
 				details: "Viewing a person",
 				state: document
-					.getElementsByClassName("title-name")[0]
+					.querySelectorAll(".title-name")[0]
 					.textContent.replace(/(<([^>]+)>)/gi, ""),
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);
 		}
 	} else if (document.location.pathname.startsWith("/character")) {
-		if (document.getElementsByClassName("h1")[0].textContent === "Characters") {
+		if (document.querySelectorAll(".h1")[0].textContent === "Characters") {
 			const presenceData: PresenceData = {
 				details: "Looking for characters",
 				largeImageKey: "lg-mal"
@@ -136,7 +135,7 @@ presence.on("UpdateData", async () => {
 			const presenceData: PresenceData = {
 				details: "Viewing an character",
 				state: document
-					.getElementsByClassName("normal_header")[2]
+					.querySelectorAll(".normal_header")[2]
 					.textContent.replace(/(<([^>]+)>)/gi, ""),
 				largeImageKey: "lg-mal"
 			};
@@ -165,12 +164,12 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.startsWith("/anime")) {
 		// TODO: The if loop to check if thhe user is really on the page of an anime is currently always true for some reason which results in the presence going away when the user is for example in the anime directory
-		if (document.getElementsByClassName("js-anime-edit-info-button")[0]) {
+		if (document.querySelectorAll(".js-anime-edit-info-button")[0]) {
 			const presenceData: PresenceData = {
 				details: "Viewing an anime",
 				state:
-					document.getElementsByClassName("header-right")[0].parentNode
-						.childNodes[1].textContent,
+					document.querySelectorAll(".header-right")[0].parentNode.childNodes[1]
+						.textContent,
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);
@@ -183,12 +182,12 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.startsWith("/manga")) {
 		// TODO: The if loop to check if thhe user is really on the page of an anime is currently always true for some reason which results in the presence going away when the user is for example in the anime directory
-		if (document.getElementsByClassName("js-manga-edit-info-button")[0]) {
+		if (document.querySelectorAll(".js-manga-edit-info-button")[0]) {
 			const presenceData: PresenceData = {
 				details: "Viewing a manga",
 				state:
-					document.getElementsByClassName("header-right")[0].parentNode
-						.childNodes[1].textContent,
+					document.querySelectorAll(".header-right")[0].parentNode.childNodes[1]
+						.textContent,
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);

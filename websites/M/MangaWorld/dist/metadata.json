@@ -17,10 +17,10 @@
 		"nl": "Bekijk onze MangaWorld-site om je favoriete Manga in het Italiaans en helemaal gratis te lezen."
 	},
 	"url": [
-		"mangaworld.io",
-		"www.mangaworld.io"
+		"mangaworld.in",
+		"www.mangaworld.in"
 	],
-	"version": "3.0.7",
+	"version": "3.0.9",
 	"logo": "https://i.imgur.com/y53UAth.png",
 	"thumbnail": "https://i.imgur.com/rALkJMV.png",
 	"color": "#EE6C4D",

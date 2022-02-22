@@ -14,9 +14,9 @@ presence.on("UpdateData", async () => {
 		},
 		url = window.location.href;
 	if (url.includes("/watch/")) {
-		const [video] = document.getElementsByTagName("video");
+		const [video] = document.querySelectorAll("video");
 		presenceData.details =
-			document.getElementsByClassName("meta-data-title")[0].textContent;
+			document.querySelectorAll(".meta-data-title")[0].textContent;
 		presenceData.largeImageKey = "large_img";
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused

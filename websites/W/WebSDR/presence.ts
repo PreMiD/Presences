@@ -17,15 +17,15 @@ let frequency: string,
 
 function updateMode(): void {
 	let i = 0;
-	Array.from(
+	for (const node of Array.from(
 		document.querySelector("div.ctl > form > div.buttonrow").children
-	).forEach(node => {
+	)) {
 		if ((node as HTMLElement).style.background !== "") {
 			mode = i;
-			return;
+			continue;
 		}
 		i++;
-	});
+	}
 	return;
 }
 
@@ -37,43 +37,66 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp
 	};
 
-	if (document.location.pathname === "/") {
-		if (!intHandle) intHandle = setInterval(updateMode, 1000);
+	switch (document.location.pathname) {
+		case "/": {
+			if (!intHandle) intHandle = setInterval(updateMode, 1000);
 
-		frequency = (
-			document.querySelector(
-				"div.ctl > form > span > input"
-			) as HTMLInputElement
-		).value;
+			frequency = (
+				document.querySelector(
+					"div.ctl > form > span > input"
+				) as HTMLInputElement
+			).value;
 
-		presenceData.details = `${frequency} ${modes[mode]}`;
+			presenceData.details = `${frequency} ${modes[mode]}`;
 
-		if (document.getElementById("recbutton").textContent === "stop")
-			presenceData.state = strings.record;
-		else if (
-			(document.getElementById("mutecheckbox") as HTMLInputElement).checked ===
-			true
-		)
-			presenceData.state = strings.mute;
-		else presenceData.state = strings.listen;
-	} else if (document.location.pathname === "/wspr/") {
-		presenceData.details = "WSPR Map";
-		presenceData.state = strings.view;
-	} else if (document.location.pathname === "/chirps/") {
-		presenceData.details = "Chirp Signals";
-		presenceData.state = strings.view;
-	} else if (document.location.pathname === "/chirps/article/") {
-		presenceData.details = "Chirp Signal Article";
-		presenceData.state = strings.read;
-	} else if (document.location.pathname === "/fullday/") {
-		presenceData.details = "Full Day Waterfall";
-		presenceData.state = strings.view;
-	} else if (document.location.pathname === "/oldnews.html") {
-		presenceData.details = "Old News";
-		presenceData.state = strings.read;
-	} else if (document.location.pathname === "/qrt.html") {
-		presenceData.details = "History";
-		presenceData.state = strings.read;
+			if (document.querySelector("#recbutton").textContent === "stop")
+				presenceData.state = strings.record;
+			else if (
+				(document.querySelector("#mutecheckbox") as HTMLInputElement)
+					.checked === true
+			)
+				presenceData.state = strings.mute;
+			else presenceData.state = strings.listen;
+
+			break;
+		}
+		case "/wspr/": {
+			presenceData.details = "WSPR Map";
+			presenceData.state = strings.view;
+
+			break;
+		}
+		case "/chirps/": {
+			presenceData.details = "Chirp Signals";
+			presenceData.state = strings.view;
+
+			break;
+		}
+		case "/chirps/article/": {
+			presenceData.details = "Chirp Signal Article";
+			presenceData.state = strings.read;
+
+			break;
+		}
+		case "/fullday/": {
+			presenceData.details = "Full Day Waterfall";
+			presenceData.state = strings.view;
+
+			break;
+		}
+		case "/oldnews.html": {
+			presenceData.details = "Old News";
+			presenceData.state = strings.read;
+
+			break;
+		}
+		case "/qrt.html": {
+			presenceData.details = "History";
+			presenceData.state = strings.read;
+
+			break;
+		}
+		// No default
 	}
 
 	if (!presenceData.details) presence.setActivity();
