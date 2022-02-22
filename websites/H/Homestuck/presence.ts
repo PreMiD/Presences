@@ -25,8 +25,7 @@ presence.on("UpdateData", async () => {
 			if (!pathArr[2]) presenceData.state = "Page 1 of 134";
 			else presenceData.state = `Page ${pathArr[2]} of 134`;
 
-			presenceData.smallImageText =
-				document.querySelector("h2").textContent;
+			presenceData.smallImageText = document.querySelector("h2").textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
@@ -41,8 +40,7 @@ presence.on("UpdateData", async () => {
 			if (!pathArr[2]) presenceData.state = "Page 1 of 47";
 			else presenceData.state = `Page ${pathArr[2]} of 47`;
 
-			presenceData.smallImageText =
-				document.querySelector("h2").textContent;
+			presenceData.smallImageText = document.querySelector("h2").textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
@@ -57,8 +55,7 @@ presence.on("UpdateData", async () => {
 			if (!pathArr[2]) presenceData.state = "Page 1 of 1674";
 			else presenceData.state = `Page ${pathArr[2]} of 1674`;
 
-			presenceData.smallImageText =
-				document.querySelector("h2").textContent;
+			presenceData.smallImageText = document.querySelector("h2").textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
@@ -73,8 +70,7 @@ presence.on("UpdateData", async () => {
 			if (!pathArr[2]) presenceData.state = "Page 1 of 15";
 			else presenceData.state = `Page ${pathArr[2]} of 15`;
 
-			presenceData.smallImageText =
-				document.querySelector("h2").textContent;
+			presenceData.smallImageText = document.querySelector("h2").textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
@@ -104,8 +100,7 @@ presence.on("UpdateData", async () => {
 			if (!pathArr[2]) presenceData.state = "Page 1 of 8";
 			else presenceData.state = `Page ${pathArr[2]} of 8`;
 
-			presenceData.smallImageText =
-				document.querySelector("h2").textContent;
+			presenceData.smallImageText = document.querySelector("h2").textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
@@ -120,10 +115,9 @@ presence.on("UpdateData", async () => {
 			if (!pathArr[2]) presenceData.state = "Page 1 of 8130";
 			else presenceData.state = `Page ${pathArr[2]} of 8130`;
 
-			if (document.querySelector("h2")) {
-				presenceData.smallImageText =
-					document.querySelector("h2").textContent;
-			} else {
+			if (document.querySelector("h2"))
+				presenceData.smallImageText = document.querySelector("h2").textContent;
+			else {
 				presenceData.smallImageText =
 					document.querySelector("title").textContent;
 			}
@@ -201,8 +195,7 @@ presence.on("UpdateData", async () => {
 			if (!pathArr[2]) {
 				presenceData.details = "Viewing extra 1 of 40";
 				presenceData.smallImageKey = "mspa";
-				presenceData.smallImageText =
-					document.querySelector("h2").textContent;
+				presenceData.smallImageText = document.querySelector("h2").textContent;
 			} else if (pathArr[2] === "list")
 				presenceData.details = "Viewing extras list";
 			else {
