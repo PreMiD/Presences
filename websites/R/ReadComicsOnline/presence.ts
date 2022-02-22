@@ -15,8 +15,7 @@ const presence = new Presence({
 	getCookie = (name: string) => {
 		const nameEQ = `${name}=`,
 			ca = document.cookie.split(";");
-		for (let i = 0; i < ca.length; i++) {
-			let c = ca[i];
+		for (let c of ca) {
 			while (c.charAt(0) === " ") c = c.substring(1, c.length);
 
 			if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
@@ -29,7 +28,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "rco_logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = location,
+		{ pathname, href } = location,
 		input = document.querySelector<HTMLInputElement>("input#keyword"),
 		buttons = await presence.getSetting<boolean>("buttons"),
 		cookies = await presence.getSetting<boolean>("cookies");
@@ -152,7 +151,7 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "Read Comic",
-									url: location.href
+									url: href
 								},
 								{
 									label: "Check Description",
@@ -169,7 +168,7 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Check Description",
-								url: location.href
+								url: href
 							}
 						];
 					}

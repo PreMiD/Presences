@@ -248,8 +248,8 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/genre")) {
 			const parts = document.location.href.split("/");
 
-			presenceData.state = `Genre: ${parts[parts.length - 2].replace(
-				/%20/g,
+			presenceData.state = `Genre: ${parts[parts.length - 2].replaceAll(
+				"%20",
 				" "
 			)}`;
 
@@ -270,8 +270,8 @@ presence.on("UpdateData", async () => {
 			const parts = document.location.href.split("/");
 
 			presenceData.state = parts[parts.length - 2]
-				.replace(/%20/g, " ")
-				.replace(/%26/g, "&");
+				.replaceAll("%20", " ")
+				.replaceAll("%26", "&");
 
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (document.location.pathname.includes("/macos")) {

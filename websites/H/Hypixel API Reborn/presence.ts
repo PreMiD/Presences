@@ -11,7 +11,7 @@ presence.on("UpdateData", () => {
 	if (route.length === 1 || route[1] === "")
 		presenceData.details = "Browsing the main page...";
 	else if (route[1] === "docs") {
-		[, , presenceData.smallImageKey] = route;
+		presenceData.smallImageKey = route[2];
 		presenceData.smallImageText = `${route[2].replace(/^[a-z]/i, c =>
 			c.toUpperCase()
 		)} - ${Number(route[3][0]) ? `v${route[3]}` : `${route[3]}`}`;

@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 		if (pathname.startsWith("/manga/") && pathname.includes("-mh")) {
 			const [pathsplitted] = pathname.split("/").slice(-1);
 			if (!pathsplitted.includes("-mh")) {
-				const e = document.getElementById("capitulos-3") as HTMLSelectElement;
+				const e = document.querySelector("#capitulos-3") as HTMLSelectElement;
 
 				presenceData.details = document.querySelector("h1 a").textContent;
 				presenceData.state = `Capítulo ${pathsplitted.split("#")[0]} - Pg ${

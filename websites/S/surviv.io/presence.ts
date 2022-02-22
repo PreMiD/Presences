@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 		},
 		broadcasttc = await presence.getSetting<boolean>("broadcasttc"),
 		active =
-			window.getComputedStyle(document.getElementById("start-menu-wrapper"))
+			window.getComputedStyle(document.querySelector("#start-menu-wrapper"))
 				.display === "none";
 	presenceData.startTimestamp = browsingTimestamp;
 

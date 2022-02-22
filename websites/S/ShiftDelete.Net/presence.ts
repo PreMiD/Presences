@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 				details: "Bir şey arıyor:",
 				state:
 					searchingFor && searchingFor.textContent
-						? searchingFor.textContent.replace(/"/g, "")
+						? searchingFor.textContent.replaceAll('"', "")
 						: "Belirsiz",
 				smallImageKey: "search",
 				startTimestamp: Math.floor(Date.now() / 1000)

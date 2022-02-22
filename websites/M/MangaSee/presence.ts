@@ -10,16 +10,14 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = document.location;
+		{ pathname, search } = document.location;
 	if (pathname === "/") presenceData.details = "Viewing the Homepage";
 	else if (
 		pathname === "/search/" &&
 		window.location.search.substr(0, 1) === "?"
 	) {
 		presenceData.details = "Searching: ";
-		presenceData.state = new URLSearchParams(document.location.search).get(
-			"name"
-		);
+		presenceData.state = new URLSearchParams(search).get("name");
 		presenceData.smallImageKey = "search";
 	} else if (pathname === "/directory/" || pathname === "/search/")
 		presenceData.details = "Browsing all manga";

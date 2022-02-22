@@ -2,6 +2,7 @@ const iframe = new iFrame();
 let videos: HTMLCollectionOf<HTMLVideoElement>;
 
 iframe.on("UpdateData", async () => {
+	// eslint-disable-next-line unicorn/prefer-query-selector
 	videos = document.getElementsByTagName("video");
 
 	if (videos.length > 0) {

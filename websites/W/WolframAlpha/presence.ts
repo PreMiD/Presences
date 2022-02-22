@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector("._9CcbX").textContent;
 		presenceData.smallImageKey = "search";
 	} else if (path.includes("/examples")) {
-		const title = document.getElementById("page-title").textContent;
+		const title = document.querySelector("#page-title").textContent;
 
 		presenceData.details = "Viewing Page:";
 		presenceData.state = "Examples page";

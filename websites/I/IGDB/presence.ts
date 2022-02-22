@@ -11,12 +11,11 @@ presence.on("UpdateData", () => {
 		path = document.location.pathname;
 	if (path === "/discover") presenceData.details = "Discovering games";
 	else if (path.startsWith("/games")) {
-		if (path.indexOf("coming_soon") > -1)
+		if (path.includes("coming_soon"))
 			presenceData.details = "Viewing future games";
-		else if (path.indexOf("recently_released") > -1)
+		else if (path.includes("recently_released"))
 			presenceData.details = "Viewing recently released games";
-		else if (path.indexOf("new") > -1)
-			presenceData.details = "Adding a new game";
+		else if (path.includes("new")) presenceData.details = "Adding a new game";
 		else {
 			delete presenceData.largeImageKey;
 			presenceData.details = `Viewing: ${document.title}`;

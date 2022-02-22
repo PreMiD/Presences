@@ -89,32 +89,46 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing the Xbox Community";
 		if (document.location.href.includes("esports"))
 			presenceData.details = "Reading about Xbox Esports";
-	} else if (document.location.hostname === "account.xbox.com") {
-		//My Xbox
-		presenceData.details = "Viewing their profile";
-		if (document.location.href.includes("gamertag=")) {
-			const [splitString] = document.title.split("|");
-			presenceData.details = `Viewing profile: ${splitString}`;
-		}
-	} else if (document.location.hostname === "support.xbox.com") {
-		//Support
-		presenceData.details = "Viewing Xbox Support";
-		if (document.location.href.includes("help")) {
-			const [splitString] = document.title.split("|");
-			presenceData.state = splitString;
-		}
-	} else if (document.location.hostname === "news.xbox.com") {
-		//Xbox Wire
-		presenceData.details = "Viewing news from Xbox Wire";
-		if (document.title.includes("-")) {
-			const [splitString] = document.title.split("|");
-			presenceData.state = splitString;
-		}
 	} else {
-		//Other
-		presenceData.details = "Browsing the website";
-		presenceData.state = `Page: ${document.title}`;
-		if (document.location.pathname.length < 8) presenceData.state = "Homepage";
+		switch (document.location.hostname) {
+			case "account.xbox.com": {
+				//My Xbox
+				presenceData.details = "Viewing their profile";
+				if (document.location.href.includes("gamertag=")) {
+					const [splitString] = document.title.split("|");
+					presenceData.details = `Viewing profile: ${splitString}`;
+				}
+
+				break;
+			}
+			case "support.xbox.com": {
+				//Support
+				presenceData.details = "Viewing Xbox Support";
+				if (document.location.href.includes("help")) {
+					const [splitString] = document.title.split("|");
+					presenceData.state = splitString;
+				}
+
+				break;
+			}
+			case "news.xbox.com": {
+				//Xbox Wire
+				presenceData.details = "Viewing news from Xbox Wire";
+				if (document.title.includes("-")) {
+					const [splitString] = document.title.split("|");
+					presenceData.state = splitString;
+				}
+
+				break;
+			}
+			default: {
+				//Other
+				presenceData.details = "Browsing the website";
+				presenceData.state = `Page: ${document.title}`;
+				if (document.location.pathname.length < 8)
+					presenceData.state = "Homepage";
+			}
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

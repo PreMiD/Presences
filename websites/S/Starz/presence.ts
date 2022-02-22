@@ -22,8 +22,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "starz-logo"
 		},
-		{ href } = window.location,
-		path = window.location.pathname;
+		{ href, pathname: path } = window.location;
 
 	if (href !== oldUrl) {
 		oldUrl = href;

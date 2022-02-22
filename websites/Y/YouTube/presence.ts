@@ -312,25 +312,23 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = "yt_lg";
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 			delete presenceData.endTimestamp;
-		} else if (buttons) {
-			if (!unlistedVideo) {
-				presenceData.buttons = [
-					{
-						label: live ? strings.watchStreamButton : strings.watchVideoButton,
-						url: document.URL.includes("/watch?v=")
-							? document.URL.split("&")[0]
-							: `https://www.youtube.com/watch?v=${videoId}`
-					},
-					{
-						label: strings.viewChannelButton,
-						url: (
-							document.querySelector(
-								"#top-row > ytd-video-owner-renderer > a"
-							) as HTMLLinkElement
-						).href
-					}
-				];
-			}
+		} else if (buttons && !unlistedVideo) {
+			presenceData.buttons = [
+				{
+					label: live ? strings.watchStreamButton : strings.watchVideoButton,
+					url: document.URL.includes("/watch?v=")
+						? document.URL.split("&")[0]
+						: `https://www.youtube.com/watch?v=${videoId}`
+				},
+				{
+					label: strings.viewChannelButton,
+					url: (
+						document.querySelector(
+							"#top-row > ytd-video-owner-renderer > a"
+						) as HTMLLinkElement
+					).href
+				}
+			];
 		}
 		if (!time) {
 			delete presenceData.startTimestamp;

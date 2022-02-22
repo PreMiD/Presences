@@ -26,12 +26,13 @@ presence.on("UpdateData", async function () {
 			document.location.hostname === "www.snipes.ch"
 		)
 			num = num + urlpNum;
-		if (document.querySelector("a.b-refinements-category-link.active")) {
-			if (urlpath[num + 1]) {
-				presenceData.state = document
-					.querySelector("a.b-refinements-category-link.active")
-					.getAttribute("data-name");
-			}
+		if (
+			document.querySelector("a.b-refinements-category-link.active") &&
+			urlpath[num + 1]
+		) {
+			presenceData.state = document
+				.querySelector("a.b-refinements-category-link.active")
+				.getAttribute("data-name");
 		}
 		if (setShowButtons) {
 			presenceData.buttons = [

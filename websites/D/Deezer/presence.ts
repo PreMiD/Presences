@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
 				presence.timestampFromFormat(currentTime),
 				presence.timestampFromFormat(duration)
 			),
-			[, , , , , albumId] = albumLink.href.split("/");
+			albumId = albumLink.href.split("/")[5];
 
 		if (
 			document
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 			const [podcastLink] = document.querySelector<HTMLAnchorElement>(
 					"div.marquee-content"
 				).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
-				[, , , , , podcastId] = podcastLink.href.split("/");
+				podcastId = podcastLink.href.split("/")[5];
 			[presenceData.state, presenceData.details] = document
 				.querySelector("div.marquee-content")
 				.textContent.split(" · ");
