@@ -1,0 +1,43 @@
+{
+    "author": {
+      "name": "callum",
+      "id": "784589656334794785"
+    },
+    "service": "Melody",
+    "description": {
+      "en": "Melody is online ad-free radio station that broadcasts around the globe 24/7."
+    },
+    "url": "itsmelody.pw",
+    "version": "1.0.0",
+    "logo": "https://itsmelody.pw/img/logo.png",
+    "thumbnail": "https://xo.wtf/WbsLfrVN",
+    "color": "#000305",
+    "tags": [
+      "music",
+      "radio",
+      "melody"
+    ],
+    "category": "music",
+    "settings": [
+      {
+        "id": "timestamp",
+        "title": "Show Timestamp",
+        "icon": "fas fa-history",
+        "value": true
+      },
+      {
+        "id": "details",
+        "title": "Change Line #1 (Song Details)",
+        "icon": "fas fa-music",
+        "value": "Streaming to %listeners% listeners",
+        "placeholder": "%listeners%"
+      },
+      {
+        "id": "state",
+        "title": "Change Line #2 (Presenter Details)",
+        "icon": "fas fa-microphone",
+        "value": "%songText%",
+        "placeholder": "%artist% - %song%"
+      }
+    ]
+  }
