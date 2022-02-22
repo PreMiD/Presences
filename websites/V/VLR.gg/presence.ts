@@ -27,18 +27,18 @@ presence.on("UpdateData", async () => {
   /*Clear title in important pages*/
   if (title.textContent.includes("Valorant esports coverage | VLR.gg")) {
     presenceData.details = "On home";
-    presenceData.state = "";
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/threads")) {
 
   /*Main pages*/
     presenceData.details = "Browsing threads";
-    presenceData.state = "";
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/matches")) {
     presenceData.details = "Browsing matches";
-    presenceData.state = "";
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/events")) {
     presenceData.details = "Browsing events";
-    presenceData.state = "";
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/rankings")) {
     presenceData.details = "Viewing rankings";
     presenceData.state = rankinginfo.textContent.replace(
@@ -47,14 +47,14 @@ presence.on("UpdateData", async () => {
     );
   } else if (document.location.pathname.includes("/stats")) {
     presenceData.details = "Viewing statistics";
-    presenceData.state = "";
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/user")) {
     presenceData.details =
       "Viewing" + title.textContent.replace("Profile | VLR.gg", "") + "profile";
-    presenceData.state = "";
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/settings")) {
     presenceData.details = "Viewing settings";
-    presenceData.state = "";
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/event")) {
 
   /*Show event name and logo*/
