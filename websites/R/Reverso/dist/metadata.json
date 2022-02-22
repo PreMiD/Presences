@@ -17,12 +17,15 @@
 	},
 	"url": "www.reverso.net",
 	"regExp": "([a-z0-9-_]+)[.]reverso[.]net",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/jRvhga7.png",
 	"thumbnail": "https://i.imgur.com/CpzjkaP.png",
 	"color": "#0970ac",
 	"category": "other",
-	"tags": ["translate", "reverso"],
+	"tags": [
+		"translate",
+		"reverso"
+	],
 	"settings": [
 		{
 			"id": "stamp",
