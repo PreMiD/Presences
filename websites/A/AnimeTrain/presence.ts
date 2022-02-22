@@ -13,7 +13,7 @@ const presence = new Presence({ clientId: "944881674481713192" }),
     watching: "general.watching",
     episode: "general.episode",
     watchEpisode: "general.buttonViewEpisode",
-    anime: "general.anime",
+    anime: "general.anime"
   });
 
 let video: Video;
@@ -23,7 +23,6 @@ presence.on("iFrameData", (msg: Video) => {
 });
 
 presence.on("UpdateData", async () => {
-  // const title = document.querySelector("#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(1) > a")?.textContent.trim() || null
   const title =
     document.querySelector('h1[class="title"]')?.textContent || null;
   const episode =
@@ -32,7 +31,7 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
       largeImageKey: "logo", //(await strings).watching}
-      details: `${(await strings).watching}	 ${title}`,
+      details: `${(await strings).watching}	 ${title}`
     },
     page = location.href || document.URL;
 
@@ -41,12 +40,12 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       {
         label: (await strings).watchEpisode,
-        url: document.URL.split("&")[0],
+        url: document.URL.split("&")[0]
       },
       {
         label: (await strings).anime,
-        url: page,
-      },
+        url: page
+      }
     ];
   } else {
     //Aranıyor
