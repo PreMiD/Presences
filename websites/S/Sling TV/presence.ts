@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 		endTimestamp;
 	/* eslint-enable no-one-time-vars/no-one-time-vars */
 
-	const { href } = window.location,
+	const { href, pathname } = window.location,
 		presenceData: PresenceData = {
 			details,
 			state,
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 
 	presenceData.startTimestamp = elapsed;
 
-	if (window.location.pathname.includes("/watch")) {
+	if (pathname.includes("/watch")) {
 		video = document.querySelector(".bitmovinplayer-container video");
 		if (video) {
 			title = document.querySelector("title");

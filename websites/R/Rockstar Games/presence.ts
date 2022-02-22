@@ -24,18 +24,33 @@ presence.on("UpdateData", async () => {
 		else if (pathname.startsWith("/games/")) {
 			presenceData.details = "Browsing Games";
 			presenceData.state = document.querySelector("head > title").textContent;
-		} else if (pathname === "/reddeadonline") {
-			presenceData.details = "Browsing Games";
-			presenceData.state = "Read Dead Redemption Online";
-		} else if (pathname === "/GTAOnline") {
-			presenceData.details = "Browsing Games";
-			presenceData.state = "Grand Theft Auto Online";
-		} else if (pathname === "/videos") presenceData.details = "Browsing Videos";
-		else if (pathname.startsWith("/videos/")) {
-			presenceData.details = "Browsing Videos";
-			presenceData.state = document.querySelector("head > title").textContent;
-		} else if (pathname === "/downloads")
-			presenceData.details = "Browsing Downloads";
+		} else {
+			switch (pathname) {
+				case "/reddeadonline": {
+					presenceData.details = "Browsing Games";
+					presenceData.state = "Read Dead Redemption Online";
+
+					break;
+				}
+				case "/GTAOnline": {
+					presenceData.details = "Browsing Games";
+					presenceData.state = "Grand Theft Auto Online";
+
+					break;
+				}
+				case "/videos": {
+					presenceData.details = "Browsing Videos";
+					break;
+				}
+				default:
+					if (pathname.startsWith("/videos/")) {
+						presenceData.details = "Browsing Videos";
+						presenceData.state =
+							document.querySelector("head > title").textContent;
+					} else if (pathname === "/downloads")
+						presenceData.details = "Browsing Downloads";
+			}
+		}
 	}
 
 	if (
@@ -62,18 +77,36 @@ presence.on("UpdateData", async () => {
 		else if (pathname.startsWith("/games/")) {
 			presenceData.details = "Browsing Games";
 			presenceData.state = document.querySelector("head > title").textContent;
-		} else if (pathname === "/crews")
-			presenceData.details = "Browsing Social Club Crews";
-		else if (pathname === "/jobs")
-			presenceData.details = "Browsing Social Club Jobs";
-		else if (pathname === "/photos")
-			presenceData.details = "Browsing Social Club Photos";
-		else if (pathname === "/videos")
-			presenceData.details = "Browsing Social Club Videos";
-		else if (pathname === "/events")
-			presenceData.details = "Browsing Social Club Events";
-		else if (pathname === "/rockstar-games-launcher")
-			presenceData.details = "Browsing Rockstar's Game Launcher";
+		} else {
+			switch (pathname) {
+				case "/crews": {
+					presenceData.details = "Browsing Social Club Crews";
+					break;
+				}
+				case "/jobs": {
+					presenceData.details = "Browsing Social Club Jobs";
+					break;
+				}
+				case "/photos": {
+					presenceData.details = "Browsing Social Club Photos";
+					break;
+				}
+				case "/videos": {
+					presenceData.details = "Browsing Social Club Videos";
+					break;
+				}
+				case "/events": {
+					presenceData.details = "Browsing Social Club Events";
+					break;
+				}
+				case "/rockstar-games-launcher":
+					{
+						presenceData.details = "Browsing Rockstar's Game Launcher";
+						// No default
+					}
+					break;
+			}
+		}
 	}
 
 	if (

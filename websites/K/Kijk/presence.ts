@@ -33,10 +33,8 @@ presence.on("UpdateData", async () => {
 	if (page.includes("/films/video/")) {
 		delete presenceData.startTimestamp;
 
-		presenceData.details = (
-			document.getElementsByClassName(
-				"Textstyle__VideoMetaDataTitle-sc-2ihbn2-17"
-			) as HTMLCollection
+		presenceData.details = document.querySelectorAll(
+			".Textstyle__VideoMetaDataTitle-sc-2ihbn2-17"
 		)[0].textContent;
 		title2 = document.querySelector("#player");
 		if (title2.className.includes("paused")) {
@@ -69,7 +67,7 @@ presence.on("UpdateData", async () => {
 			.replace(/[0-9]/g, "");
 		presenceData.state = titles.content
 			.slice(-titles.content.replace(/[^0-9.]/g, "").length + 21)
-			.replace(/,/g, ":")
+			.replaceAll(",", ":")
 			.replace("Seizoen", "S")
 			.replace("aflevering", ":E")
 			.replace(/\s/g, "");

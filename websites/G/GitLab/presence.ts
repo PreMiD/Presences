@@ -28,74 +28,115 @@ presence.on("UpdateData", async () => {
 			if (document.location.pathname === "/explore/snippets")
 				presenceData.details = "Exploring Snippets";
 			else presenceData.details = "Exploring projects";
-		} else if (document.location.pathname === "/dashboard/groups")
-			presenceData.details = "Viewing Groups";
-		else if (document.location.pathname === "/dashboard/activity")
-			presenceData.details = "Viewing Activity";
-		else if (document.location.pathname === "/dashboard/milestones")
-			presenceData.details = "Viewing Milestones";
-		else if (document.location.pathname === "/dashboard/snippets")
-			presenceData.details = "Viewing Snippets";
-		else if (document.location.pathname === "/-/operations/environments")
-			presenceData.details = "Viewing Environments";
-		else if (document.location.pathname === "/-/operations")
-			presenceData.details = "Viewing Operations";
-		else if (document.location.pathname === "/-/security")
-			presenceData.details = "Viewing Security";
-		else if (document.location.pathname === "/dashboard/issues")
-			presenceData.details = "Viewing Issuses";
-		else if (document.location.pathname === "/dashboard/merge_requests")
-			presenceData.details = "Viewing Merge Requests";
-		else if (document.location.pathname === "/dashboard/todos")
-			presenceData.details = "Viewing TODOS";
-		else if (document.location.pathname === "/help")
-			presenceData.details = "Viewing Help";
-		else if (document.location.pathname === "/users/sign_in")
-			presenceData.details = "Signning in or Registering";
-		else if (document.location.pathname === "/search") {
-			title = document.querySelector(
-				"#dashboard_search"
-			) as HTMLTextAreaElement;
-			presenceData.details = "Searching";
-			presenceData.state = title.textContent;
-			presenceData.smallImageKey = "search";
-			presenceData.smallImageText = "Searching";
 		} else {
-			title = document.querySelector(
-				"body > div.layout-page.page-with-contextual-sidebar > div.content-wrapper > div.alert-wrapper > nav > div > div > ul > li:nth-child(2) > a > span"
-			) as HTMLTextAreaElement;
-			owner = document.querySelector(
-				"body > div.layout-page.page-with-contextual-sidebar > div.content-wrapper > div.alert-wrapper > nav > div > div > ul > li:nth-child(1) > a"
-			) as HTMLTextAreaElement;
-			if (
-				(presenceprivate as HTMLTextAreaElement).title.startsWith(
-					"Private -"
-				) &&
-				lock
-			) {
-				presenceData.details = "Viewing a Private Presence";
-				presenceData.state = "or Private Group";
-			} else if (title && owner) {
-				presenceData.details = title.textContent;
-				presenceData.state = owner.textContent;
-			} else if (title === null && owner) {
-				presenceData.details = owner.textContent;
-				presenceData.state = "My Respository";
-			} else if (title === null && owner === null) {
-				owner = document.querySelector(
-					"#content-body > div.user-profile > div.cover-block.user-cover-block > div.profile-header > div.user-info > p > span:nth-child(1)"
-				) as HTMLTextAreaElement;
-				presenceData.details = "Viewing:";
-				presenceData.state = owner.textContent;
-			} else presenceData.details = "Viewing Unknown";
+			switch (document.location.pathname) {
+				case "/dashboard/groups": {
+					presenceData.details = "Viewing Groups";
+					break;
+				}
+				case "/dashboard/activity": {
+					presenceData.details = "Viewing Activity";
+					break;
+				}
+				case "/dashboard/milestones": {
+					presenceData.details = "Viewing Milestones";
+					break;
+				}
+				case "/dashboard/snippets": {
+					presenceData.details = "Viewing Snippets";
+					break;
+				}
+				case "/-/operations/environments": {
+					presenceData.details = "Viewing Environments";
+					break;
+				}
+				case "/-/operations": {
+					presenceData.details = "Viewing Operations";
+					break;
+				}
+				case "/-/security": {
+					presenceData.details = "Viewing Security";
+					break;
+				}
+				case "/dashboard/issues": {
+					presenceData.details = "Viewing Issuses";
+					break;
+				}
+				case "/dashboard/merge_requests": {
+					presenceData.details = "Viewing Merge Requests";
+					break;
+				}
+				case "/dashboard/todos": {
+					presenceData.details = "Viewing TODOS";
+					break;
+				}
+				case "/help": {
+					presenceData.details = "Viewing Help";
+					break;
+				}
+				case "/users/sign_in": {
+					presenceData.details = "Signning in or Registering";
+					break;
+				}
+				case "/search": {
+					title = document.querySelector(
+						"#dashboard_search"
+					) as HTMLTextAreaElement;
+					presenceData.details = "Searching";
+					presenceData.state = title.textContent;
+					presenceData.smallImageKey = "search";
+					presenceData.smallImageText = "Searching";
+
+					break;
+				}
+				default: {
+					title = document.querySelector(
+						"body > div.layout-page.page-with-contextual-sidebar > div.content-wrapper > div.alert-wrapper > nav > div > div > ul > li:nth-child(2) > a > span"
+					) as HTMLTextAreaElement;
+					owner = document.querySelector(
+						"body > div.layout-page.page-with-contextual-sidebar > div.content-wrapper > div.alert-wrapper > nav > div > div > ul > li:nth-child(1) > a"
+					) as HTMLTextAreaElement;
+					if (
+						(presenceprivate as HTMLTextAreaElement).title.startsWith(
+							"Private -"
+						) &&
+						lock
+					) {
+						presenceData.details = "Viewing a Private Presence";
+						presenceData.state = "or Private Group";
+					} else if (title && owner) {
+						presenceData.details = title.textContent;
+						presenceData.state = owner.textContent;
+					} else if (title === null && owner) {
+						presenceData.details = owner.textContent;
+						presenceData.state = "My Respository";
+					} else if (title === null && owner === null) {
+						owner = document.querySelector(
+							"#content-body > div.user-profile > div.cover-block.user-cover-block > div.profile-header > div.user-info > p > span:nth-child(1)"
+						) as HTMLTextAreaElement;
+						presenceData.details = "Viewing:";
+						presenceData.state = owner.textContent;
+					} else presenceData.details = "Viewing Unknown";
+				}
+			}
 		}
 	} else if (window.location.hostname === "about.gitlab.com") {
-		if (document.location.pathname === "/")
-			presenceData.details = "Viewing Home Page";
-		else if (document.location.pathname === "/stages-devops-lifecycle/")
-			presenceData.details = "Viewing DevOps Lifecycle";
-		else if (document.location.pathname === "/services/")
-			presenceData.details = "Viewing Profesional Services";
+		switch (document.location.pathname) {
+			case "/": {
+				presenceData.details = "Viewing Home Page";
+				break;
+			}
+			case "/stages-devops-lifecycle/": {
+				presenceData.details = "Viewing DevOps Lifecycle";
+				break;
+			}
+			case "/services/":
+				{
+					presenceData.details = "Viewing Profesional Services";
+					// No default
+				}
+				break;
+		}
 		title = document.querySelector(
 			"body > div.wrapper.gitlab-ee-page > div.image-title > div > div > h1"
 		);

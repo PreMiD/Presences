@@ -517,22 +517,20 @@ presence.on("UpdateData", async () => {
 		} else if (path.includes("/leaderboard")) {
 			presenceData.details = strings.viewPage;
 			presenceData.state = title;
-		} else if (path.includes("/av/")) {
-			if (VideoMedia.duration) {
-				presenceData.details = title;
-				presenceData.state = document.querySelector(
-					"span.qa-status-date-output"
-				)?.textContent;
+		} else if (path.includes("/av/") && VideoMedia.duration) {
+			presenceData.details = title;
+			presenceData.state = document.querySelector(
+				"span.qa-status-date-output"
+			)?.textContent;
 
-				handleVideo();
+			handleVideo();
 
-				presenceData.buttons = [
-					{
-						label: strings.watchVideo,
-						url: document.baseURI
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: strings.watchVideo,
+					url: document.baseURI
+				}
+			];
 		}
 	} else if (path.includes("/weather")) {
 		presenceData.details = strings.browse;

@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		else if (document.location.pathname.includes("/search")) {
 			presenceData.details = "🔎 Searching for:";
 			presenceData.state = `🔗 ${
-				document.getElementById("searchBar")?.getAttribute("value") || "Nothing"
+				document.querySelector("#searchBar")?.getAttribute("value") || "Nothing"
 			}`;
 			presenceData.smallImageKey = "search";
 			presenceData.buttons = [
@@ -42,63 +42,88 @@ presence.on("UpdateData", async () => {
 					url: document.location.href
 				}
 			];
-		} else if (document.location.pathname === "/developers/about") {
-			presenceData.state = "💻 Developer";
-			presenceData.buttons = [
-				{
-					label: "View Page",
-					url: document.location.href
+		} else {
+			switch (document.location.pathname) {
+				case "/developers/about": {
+					presenceData.state = "💻 Developer";
+					presenceData.buttons = [
+						{
+							label: "View Page",
+							url: document.location.href
+						}
+					];
+
+					break;
 				}
-			];
-		} else if (document.location.pathname === "/developers/dashboard") {
-			presenceData.details = "Viewing ⚙️ dashboard";
-			presenceData.state = "🖥️ Developer";
-		} else if (document.location.pathname === "/dashboard") {
-			presenceData.details = "Viewing ⚙️ dashboard";
-			presenceData.state = "🔗 Links";
-		} else if (document.location.pathname.includes("/dashboard/l/")) {
-			const [, link] = document.location.pathname.split("/dashboard/l/");
-			presenceData.details = `Editing 🔗 ${link} link`;
-			presenceData.state = `🏓 Tab: ${
-				location.href.includes("#tab")
-					? location.href.replace(
-							`https://dsc.gg/dashboard/l/${link}#tab=`,
-							" "
-					  )
-					: "basic"
-			}`;
-			presenceData.buttons = [
-				{
-					label: "Visit Link",
-					url: `https://dsc.gg/${link}`
+				case "/developers/dashboard": {
+					presenceData.details = "Viewing ⚙️ dashboard";
+					presenceData.state = "🖥️ Developer";
+
+					break;
 				}
-			];
-		} else if (document.location.pathname === "/legal/privacy")
-			presenceData.state = "📜 Privacy Policy";
-		else if (document.location.pathname === "/legal/tos")
-			presenceData.state = "📖 Terms of Service";
+				case "/dashboard": {
+					presenceData.details = "Viewing ⚙️ dashboard";
+					presenceData.state = "🔗 Links";
+
+					break;
+				}
+				default:
+					if (document.location.pathname.includes("/dashboard/l/")) {
+						const [, link] = document.location.pathname.split("/dashboard/l/");
+						presenceData.details = `Editing 🔗 ${link} link`;
+						presenceData.state = `🏓 Tab: ${
+							location.href.includes("#tab")
+								? location.href.replace(
+										`https://dsc.gg/dashboard/l/${link}#tab=`,
+										" "
+								  )
+								: "basic"
+						}`;
+						presenceData.buttons = [
+							{
+								label: "Visit Link",
+								url: `https://dsc.gg/${link}`
+							}
+						];
+					} else if (document.location.pathname === "/legal/privacy")
+						presenceData.state = "📜 Privacy Policy";
+					else if (document.location.pathname === "/legal/tos")
+						presenceData.state = "📖 Terms of Service";
+			}
+		}
 	} else if (document.location.hostname === "docs.dsc.gg") {
-		if (document.location.pathname === "/") {
-			presenceData.details = "Viewing 📑 Documentation";
-			presenceData.state = `🌐 Content: ${
-				location.href.includes("#")
-					? location.href.replace("https://docs.dsc.gg/#", " ")
-					: "📧 Introduction"
-			}`;
-		} else if (document.location.pathname === "/endpoints") {
-			presenceData.details = "Viewing 🔗 endpoints";
-			presenceData.state = `🌐 Content: ${
-				location.href.includes("#")
-					? location.href.replace("https://docs.dsc.gg/endpoints#", " ")
-					: "None"
-			}`;
-		} else if (document.location.pathname === "/widgets") {
-			presenceData.details = "Viewing 🖼️ widgets";
-			presenceData.state = `🌐 Content: ${
-				location.href.includes("#")
-					? location.href.replace("https://docs.dsc.gg/widgets#", " ")
-					: "None"
-			}`;
+		switch (document.location.pathname) {
+			case "/": {
+				presenceData.details = "Viewing 📑 Documentation";
+				presenceData.state = `🌐 Content: ${
+					location.href.includes("#")
+						? location.href.replace("https://docs.dsc.gg/#", " ")
+						: "📧 Introduction"
+				}`;
+
+				break;
+			}
+			case "/endpoints": {
+				presenceData.details = "Viewing 🔗 endpoints";
+				presenceData.state = `🌐 Content: ${
+					location.href.includes("#")
+						? location.href.replace("https://docs.dsc.gg/endpoints#", " ")
+						: "None"
+				}`;
+
+				break;
+			}
+			case "/widgets": {
+				presenceData.details = "Viewing 🖼️ widgets";
+				presenceData.state = `🌐 Content: ${
+					location.href.includes("#")
+						? location.href.replace("https://docs.dsc.gg/widgets#", " ")
+						: "None"
+				}`;
+
+				break;
+			}
+			// No default
 		}
 	}
 

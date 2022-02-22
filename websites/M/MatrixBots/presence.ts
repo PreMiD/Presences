@@ -31,22 +31,39 @@ presence.on("UpdateData", async () => {
 		).singleNodeValue.textContent;
 		presenceData.smallImageText = "Browsing Bot";
 		presenceData.smallImageKey = "browsing";
-	} else if (matrixPage === "/me") {
-		presenceData.details = "Watching Profile:";
-		presenceData.state = document.getElementsByTagName("h1")[0].textContent;
-	} else if (matrixPage === "/add") {
-		presenceData.details = "Adding Bot";
-		presenceData.smallImageKey = "writing";
-		presenceData.smallImageText = "Writing Text";
-	} else if (matrixPage === "/staff") {
-		presenceData.details = "Viewing:";
-		presenceData.state = "Staff Page";
-	} else if (matrixPage === "/admin") {
-		presenceData.details = "Viewing:";
-		presenceData.state = "Admin Page";
-	} else if (matrixPage.includes("/api")) {
-		presenceData.details = "Viewing:";
-		presenceData.state = "API";
+	} else {
+		switch (matrixPage) {
+			case "/me": {
+				presenceData.details = "Watching Profile:";
+				presenceData.state = document.querySelectorAll("h1")[0].textContent;
+
+				break;
+			}
+			case "/add": {
+				presenceData.details = "Adding Bot";
+				presenceData.smallImageKey = "writing";
+				presenceData.smallImageText = "Writing Text";
+
+				break;
+			}
+			case "/staff": {
+				presenceData.details = "Viewing:";
+				presenceData.state = "Staff Page";
+
+				break;
+			}
+			case "/admin": {
+				presenceData.details = "Viewing:";
+				presenceData.state = "Admin Page";
+
+				break;
+			}
+			default:
+				if (matrixPage.includes("/api")) {
+					presenceData.details = "Viewing:";
+					presenceData.state = "API";
+				}
+		}
 	}
 
 	if (!presenceData.details) presence.setActivity();

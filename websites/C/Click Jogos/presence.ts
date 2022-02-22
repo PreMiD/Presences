@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.details = "Jogando:";
 			presenceData.state =
-				document.getElementsByClassName("game-header-title")[0].textContent;
+				document.querySelectorAll(".game-header-title")[0].textContent;
 		}
 	}
 

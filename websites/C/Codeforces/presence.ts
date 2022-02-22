@@ -44,12 +44,12 @@ presence.on("UpdateData", async () => {
 
 		case "contests": {
 			if (path.includes("with")) {
-				const [, , , user] = path.split("/");
+				const user = path.split("/")[3];
 
 				presenceData.details = "Viewing";
 				presenceData.state = `Participated contest of ${user}`;
 			} else if (path.includes("writer")) {
-				const [, , , user] = path.split("/");
+				const user = path.split("/")[3];
 
 				presenceData.details = "Viewing Problemsetting";
 				presenceData.state = `Contests of ${user}`;
@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".title")
 					.textContent.trim();
 			} else if (path.includes("participant")) {
-				const [, , , , user] = path.split("/");
+				const user = path.split("/")[4];
 
 				presenceData.details = `Viewing ${user}'s submissions`;
 				presenceData.state = document.querySelector(".left").textContent;
@@ -371,7 +371,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		case "submissions": {
-			const [, , user] = path.split("/");
+			const user = path.split("/")[2];
 
 			presenceData.details = "Viewing";
 			presenceData.state = `${user}'s submissions`;

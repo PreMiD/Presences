@@ -21,10 +21,10 @@ presence.on("UpdateData", async () => {
 				document.querySelector("#songname").textContent
 			} ${document.querySelector("#songsubname").textContent}`;
 			presenceData.state = `${(
-				document.getElementById("difficultyselect") as HTMLSelectElement
+				document.querySelector("#difficultyselect") as HTMLSelectElement
 			).value.replace("Plus", "+")} (${
 				(
-					document.getElementById("difficultyselect") as HTMLSelectElement
+					document.querySelector("#difficultyselect") as HTMLSelectElement
 				).selectedOptions.item(0).textContent
 			})`;
 			presenceData.buttons = [

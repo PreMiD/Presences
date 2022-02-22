@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 			.firstElementChild.textContent.replace(" - ALTERNATE", "");
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestampsfromMedia(
-				document.getElementById("in-game_video") as HTMLVideoElement
+				document.querySelector("#in-game_video") as HTMLVideoElement
 			);
 		if (cover) {
 			presenceData.largeImageKey = (

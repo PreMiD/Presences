@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 
 	if (currentCount) {
 		presenceData.details = `$${
-			document.getElementById("totalTrees")?.textContent
+			document.querySelector("#totalTrees")?.textContent
 		}`;
 		presenceData.state = "Currently Donated";
 	} else {

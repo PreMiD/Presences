@@ -1036,7 +1036,7 @@ presence.on("UpdateData", () => {
 			// Domain: https://wiki.nexusmods.com/
 			let wikiTitle;
 			try {
-				wikiTitle = document.getElementById("firstHeading").textContent;
+				wikiTitle = document.querySelector("#firstHeading").textContent;
 
 				if (parseInt(wikiTitle) > 128)
 					wikiTitle = `${wikiTitle.substring(0, 125)}...`;
@@ -1053,7 +1053,7 @@ presence.on("UpdateData", () => {
 			let forumTitle;
 			try {
 				forumTitle = document
-					.getElementsByTagName("title")[0]
+					.querySelectorAll("title")[0]
 					.textContent.replace(" - The Nexus Forums", "")
 					.replace("The Nexus Forums", "");
 
@@ -1073,7 +1073,7 @@ presence.on("UpdateData", () => {
 			// Get game title if available.
 			let gameTitle;
 			try {
-				gameTitle = document.getElementsByClassName("game-name")[0].textContent;
+				gameTitle = document.querySelectorAll(".game-name")[0].textContent;
 
 				if (parseInt(gameTitle) > 128)
 					gameTitle = `${gameTitle.substring(0, 125)}...`;
@@ -1084,7 +1084,7 @@ presence.on("UpdateData", () => {
 			// Get page title if available.
 			let pageTitle: string;
 			try {
-				pageTitle = document.getElementsByTagName("H1")[0].textContent;
+				pageTitle = document.querySelectorAll("H1")[0].textContent;
 
 				if (parseInt(pageTitle) > 128)
 					pageTitle = `${pageTitle.substring(0, 125)}...`;

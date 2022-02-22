@@ -31,24 +31,41 @@ presence.on("UpdateData", () => {
 	};
 
 	if (document.location.hostname === "simulatorhits.com") {
-		if (document.location.pathname === "/schedule") {
-			presenceData.details = "Viewing Schedule";
-			presenceData.smallImageKey = "reading";
-		} else if (document.location.pathname === "/news") {
-			presenceData.details = "Reading News";
-			presenceData.smallImageKey = "reading";
-		} else if (document.location.pathname === "/about/meet-the-team") {
-			presenceData.details = "Viewing Staff Team";
-			presenceData.smallImageKey = "reading";
-		} else if (document.location.pathname === "/request") {
-			presenceData.details = "Making a Request";
-			presenceData.smallImageKey = "writing";
-		} else if (document.location.pathname === "/streamers") {
-			presenceData.details = "Viewing Streamers";
-			presenceData.smallImageKey = "reading";
-		} else {
-			presenceData.details = title;
-			presenceData.state = artist;
+		switch (document.location.pathname) {
+			case "/schedule": {
+				presenceData.details = "Viewing Schedule";
+				presenceData.smallImageKey = "reading";
+
+				break;
+			}
+			case "/news": {
+				presenceData.details = "Reading News";
+				presenceData.smallImageKey = "reading";
+
+				break;
+			}
+			case "/about/meet-the-team": {
+				presenceData.details = "Viewing Staff Team";
+				presenceData.smallImageKey = "reading";
+
+				break;
+			}
+			case "/request": {
+				presenceData.details = "Making a Request";
+				presenceData.smallImageKey = "writing";
+
+				break;
+			}
+			case "/streamers": {
+				presenceData.details = "Viewing Streamers";
+				presenceData.smallImageKey = "reading";
+
+				break;
+			}
+			default: {
+				presenceData.details = title;
+				presenceData.state = artist;
+			}
 		}
 	}
 

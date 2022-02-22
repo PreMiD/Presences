@@ -53,62 +53,103 @@ presence.on("UpdateData", async () => {
 	else if (paths[0] === "store") {
 		if (paths[1] === "family" && paths[2] === "create")
 			presenceData.details = "Creating family";
-		if (paths[1] === "paymentmethods")
-			presenceData.details = "Viewing payment methods";
-		else if (paths[1] === "myplayactivity")
-			presenceData.details = "Viewing my activity";
-		else if (paths[1] === "search") {
-			const q = query.get("q");
-			presenceData.details = `Searching${q ? ` for ${q}` : ""}`;
-		} else if (paths[1] === "account") {
-			if (!paths[2] || paths[2] === "rewards")
-				presenceData.details = "Viewing rewards";
-			else if (paths[2] === "orderhistory")
-				presenceData.details = "Viewing order hystory";
-			else if (paths[2] === "family") presenceData.details = "Viewing family";
-			else if (paths[2] === "subscriptions")
-				presenceData.details = "Viewing subscriptions";
-		} else if (paths[1] === "apps") {
-			if (!paths[2]) presenceData.details = "Browsing for apps";
-			else if (paths[2] === "top")
-				presenceData.details = "Browsing for the TOP apps";
-			else if (paths[2] === "new")
-				presenceData.details = "Browsing for the new apps";
-			else if (paths[2] === "details") {
-				if (query.get("id")) {
-					const body = document.querySelector<HTMLDivElement>(
-							"body > div#fcxH9b > div.WpDbMd > c-wiz > div.T4LgNb > div.ZfcPIb > div.UTg3hd > div.JNury > main.LXrl4c > c-wiz > c-wiz > div.oQ6oV"
-						),
-						logo = body?.querySelector<HTMLImageElement>(
-							"div.hkhL9e > div.xSyT2c > img.T75of"
-						)?.src,
-						name = body?.querySelector<HTMLSpanElement>(
-							"div.D0ZKYe > div.rlnrKc > div.sIskre > c-wiz > h1.AHFaub > span"
-						).textContent;
-
-					if (logo) presenceData.largeImageKey = await getShortURL(logo);
-
-					presenceData.details = `Viewing ${name ? name : "app"}`;
-					presenceData.buttons = [
-						{
-							label: "View app",
-							url: await getShortURL(document.location.href)
-						}
-					];
-				}
-			} else if (paths[2] === "category") {
-				let msg = "Browsing for apps";
-				if (paths[3].startsWith("GAME_")) {
-					msg = `Browsing for ${paths[3]
-						.replace("GAME_", "")
-						.replace("_", " ")
-						.toLowerCase()} games`;
-				}
-				if (appCategories[paths[3]]) msg = appCategories[paths[3]];
-				if (paths[3] === "GAME") msg = "Browsing for games";
-
-				presenceData.details = msg ?? "Browsing for apps";
+		switch (paths[1]) {
+			case "paymentmethods": {
+				presenceData.details = "Viewing payment methods";
+				break;
 			}
+			case "myplayactivity": {
+				presenceData.details = "Viewing my activity";
+				break;
+			}
+			case "search": {
+				const q = query.get("q");
+				presenceData.details = `Searching${q ? ` for ${q}` : ""}`;
+
+				break;
+			}
+			case "account": {
+				if (!paths[2] || paths[2] === "rewards")
+					presenceData.details = "Viewing rewards";
+				else {
+					switch (paths[2]) {
+						case "orderhistory": {
+							presenceData.details = "Viewing order hystory";
+							break;
+						}
+						case "family": {
+							presenceData.details = "Viewing family";
+							break;
+						}
+						case "subscriptions":
+							{
+								presenceData.details = "Viewing subscriptions";
+								// No default
+							}
+							break;
+					}
+				}
+				break;
+			}
+			case "apps": {
+				if (!paths[2]) presenceData.details = "Browsing for apps";
+				else {
+					switch (paths[2]) {
+						case "top": {
+							presenceData.details = "Browsing for the TOP apps";
+							break;
+						}
+						case "new": {
+							presenceData.details = "Browsing for the new apps";
+							break;
+						}
+						case "details": {
+							if (query.get("id")) {
+								const body = document.querySelector<HTMLDivElement>(
+										"body > div#fcxH9b > div.WpDbMd > c-wiz > div.T4LgNb > div.ZfcPIb > div.UTg3hd > div.JNury > main.LXrl4c > c-wiz > c-wiz > div.oQ6oV"
+									),
+									logo = body?.querySelector<HTMLImageElement>(
+										"div.hkhL9e > div.xSyT2c > img.T75of"
+									)?.src,
+									name = body?.querySelector<HTMLSpanElement>(
+										"div.D0ZKYe > div.rlnrKc > div.sIskre > c-wiz > h1.AHFaub > span"
+									).textContent;
+
+								if (logo) presenceData.largeImageKey = await getShortURL(logo);
+
+								presenceData.details = `Viewing ${name ? name : "app"}`;
+								presenceData.buttons = [
+									{
+										label: "View app",
+										url: await getShortURL(document.location.href)
+									}
+								];
+							}
+
+							break;
+						}
+						case "category": {
+							let msg = "Browsing for apps";
+							if (paths[3].startsWith("GAME_")) {
+								msg = `Browsing for ${paths[3]
+									.replace("GAME_", "")
+									.replace("_", " ")
+									.toLowerCase()} games`;
+							}
+							if (appCategories[paths[3]]) msg = appCategories[paths[3]];
+							if (paths[3] === "GAME") msg = "Browsing for games";
+
+							presenceData.details = msg ?? "Browsing for apps";
+
+							break;
+						}
+						// No default
+					}
+				}
+
+				break;
+			}
+			// No default
 		}
 	}
 

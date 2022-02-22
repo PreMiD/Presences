@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 		const titleSplit = document.title.split("›").map(s => s.trim());
 
 		presenceData.details = "| Übersicht";
-		[, , presenceData.state] = titleSplit;
+		presenceData.state = titleSplit[2];
 	} else if (document.location.pathname === "/static/calendar") {
 		presenceData.details = "| Kalendar";
 		presenceData.state = "Schaut sich die neuen Releases an";
@@ -54,11 +54,9 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.includes("/anime") &&
 		document.location.pathname.includes("/watch")
 	) {
-		const titleSplit = document.title.split("›").map(s => s.trim()),
-			[, , animeName, episode] = titleSplit;
-
-		presenceData.details = `| schaut ${animeName}`;
-		presenceData.state = episode;
+		const titleSplit = document.title.split("›").map(s => s.trim());
+		presenceData.details = `| schaut ${titleSplit[2]}`;
+		presenceData.state = titleSplit[3];
 
 		if (videoData) {
 			presenceData.smallImageKey = videoData.paused ? "pause" : "play";
