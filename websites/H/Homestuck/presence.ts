@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 			else presenceData.state = `Page ${pathArr[2]} of 134`;
 
 			presenceData.smallImageText =
-				document.getElementsByTagName("h2")[0].textContent;
+				document.querySelector("h2").textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 			else presenceData.state = `Page ${pathArr[2]} of 47`;
 
 			presenceData.smallImageText =
-				document.getElementsByTagName("h2")[0].textContent;
+				document.querySelector("h2").textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 			else presenceData.state = `Page ${pathArr[2]} of 1674`;
 
 			presenceData.smallImageText =
-				document.getElementsByTagName("h2")[0].textContent;
+				document.querySelector("h2").textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 			else presenceData.state = `Page ${pathArr[2]} of 15`;
 
 			presenceData.smallImageText =
-				document.getElementsByTagName("h2")[0].textContent;
+				document.querySelector("h2").textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 			else presenceData.state = `Page ${pathArr[2]} of 8`;
 
 			presenceData.smallImageText =
-				document.getElementsByTagName("h2")[0].textContent;
+				document.querySelector("h2").textContent;
 			presenceData.buttons = [
 				{
 					label: "Read Along",
@@ -120,12 +120,12 @@ presence.on("UpdateData", async () => {
 			if (!pathArr[2]) presenceData.state = "Page 1 of 8130";
 			else presenceData.state = `Page ${pathArr[2]} of 8130`;
 
-			if (document.getElementsByTagName("h2")[0]) {
+			if (document.querySelector("h2")) {
 				presenceData.smallImageText =
-					document.getElementsByTagName("h2")[0].textContent;
+					document.querySelector("h2").textContent;
 			} else {
 				presenceData.smallImageText =
-					document.getElementsByTagName("title")[0].textContent;
+					document.querySelector("title").textContent;
 			}
 			presenceData.buttons = [
 				{
@@ -202,18 +202,18 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing extra 1 of 40";
 				presenceData.smallImageKey = "mspa";
 				presenceData.smallImageText =
-					document.getElementsByTagName("h2")[0].textContent;
+					document.querySelector("h2").textContent;
 			} else if (pathArr[2] === "list")
 				presenceData.details = "Viewing extras list";
 			else {
 				presenceData.details = `Viewing extra ${pathArr[2]} of 40`;
 				presenceData.smallImageKey = "mspa";
-				if (document.getElementsByTagName("h2")[0].textContent.length <= 128) {
+				if (document.querySelector("h2").textContent.length <= 128) {
 					presenceData.smallImageText =
-						document.getElementsByTagName("h2")[0].textContent;
+						document.querySelector("h2").textContent;
 				} else {
 					presenceData.smallImageText = `${document
-						.getElementsByTagName("h2")[0]
+						.querySelector("h2")
 						.textContent.substring(0, 124)}...`;
 				}
 			}
