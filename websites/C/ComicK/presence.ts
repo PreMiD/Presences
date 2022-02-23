@@ -8,12 +8,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "large",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = document.location;
+		{ pathname, href } = document.location;
 
 	if (pathname === "/") presenceData.details = "Browsing Homepage";
 	else if (pathname === "/list") presenceData.details = "Viewing Followed List";
 	else if (pathname.startsWith("/comic")) {
-		if (!document.querySelector(".images-reader-container")) {
+		if (document.querySelector(".images-reader-container")) {
 			const infoReader = document.querySelector(".info-reader-container"),
 				imageReader = document.querySelector(".images-reader-container");
 			if (infoReader) {
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Chapter",
-					url: document.location.href
+					url: href
 				}
 			];
 		} else {
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Check Description",
-						url: document.location.href
+						url: href
 					}
 				];
 			}
@@ -64,14 +64,36 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 		}
-	} else if (pathname === "/ranking")
-		presenceData.details = "Looking at rankings";
-	else if (pathname === "/comment_list")
-		presenceData.details = "Looking at comment list";
-	else if (pathname === "/settings") presenceData.details = "Settings";
-	else if (pathname === "/languages") presenceData.details = "Languages";
-	else if (pathname === "/privacy") presenceData.details = "Privacy POlicy";
-	else if (pathname === "/install_app") presenceData.details = "ComicK App";
+	} else {
+		switch (pathname) {
+			case "/ranking": {
+				presenceData.details = "Looking at rankings";
+				break;
+			}
+			case "/comment_list": {
+				presenceData.details = "Looking at comment list";
+				break;
+			}
+			case "/settings": {
+				presenceData.details = "Settings";
+				break;
+			}
+			case "/languages": {
+				presenceData.details = "Languages";
+				break;
+			}
+			case "/privacy": {
+				presenceData.details = "Privacy POlicy";
+				break;
+			}
+			case "/install_app":
+				{
+					presenceData.details = "ComicK App";
+					// No default
+				}
+				break;
+		}
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

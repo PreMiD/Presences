@@ -24,9 +24,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp,
 		endTimestamp;
 
-	const { href } = window.location,
-		path = window.location.pathname;
-
+	const { href, pathname: path } = window.location;
 	if (href !== oldUrl) {
 		oldUrl = href;
 		elapsed = Math.floor(Date.now() / 1000);

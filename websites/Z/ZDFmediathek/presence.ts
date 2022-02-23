@@ -35,23 +35,21 @@ presence.on("UpdateData", async () => {
 						"div.item.livetv-item.js-livetv-scroller-cell.m-active-done.m-activated-done.m-activated.m-active h2[class='visuallyhidden']"
 					)
 					.textContent.replace(/ {2}/g, " ")
-					.replace(/ im Livestream/g, "")
-					.replace(/ Livestream/g, ""),
-				videoInfoResults = document.getElementsByClassName(
-					"zdfplayer-teaser-title"
-				);
+					.replaceAll(" im Livestream", "")
+					.replaceAll(" Livestream", ""),
+				videoInfoResults = document.querySelectorAll(".zdfplayer-teaser-title");
 
 			let videoInfoTag = null;
-			for (let i = 0; i < videoInfoResults.length; i++) {
+			for (const videoInfoResult of videoInfoResults) {
 				if (
-					videoInfoResults[i].textContent
+					videoInfoResult.textContent
 						.toLowerCase()
 						.includes(` ${mediathekLivechannel.toLowerCase()} `) ||
-					videoInfoResults[i].textContent
+					videoInfoResult.textContent
 						.toLowerCase()
 						.includes(`>${mediathekLivechannel.toLowerCase()}<`)
 				) {
-					videoInfoTag = videoInfoResults[i].textContent;
+					videoInfoTag = videoInfoResult.textContent;
 					break;
 				}
 			}

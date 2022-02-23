@@ -17,79 +17,96 @@ presence.on("UpdateData", () => {
 	) {
 		presenceData.details = "Editing a pen";
 		presenceData.state = `${
-			document.getElementById("editable-title-span").textContent
+			document.querySelector("#editable-title-span").textContent
 		} by ${
 			document
-				.getElementsByClassName("ItemTitle_ownerLink-tMhWC")[0]
+				.querySelectorAll(".ItemTitle_ownerLink-tMhWC")[0]
 				.textContent.split("<")[0]
 		}`;
 	} else if (window.location.pathname.includes("/collection/")) {
 		presenceData.details = `Looking at collection ${
-			document.getElementById("collection-name").textContent
+			document.querySelector("#collection-name").textContent
 		}`;
-		if (document.getElementById("collection-desc").textContent === "") {
+		if (document.querySelector("#collection-desc").textContent === "") {
 			presenceData.state = `Collection by ${
 				document
-					.getElementsByClassName("content-author")[0]
+					.querySelectorAll(".content-author")[0]
 					.textContent.split("\n")[0]
 			}`;
 		} else {
 			presenceData.state =
-				document.getElementById("collection-desc").textContent;
+				document.querySelector("#collection-desc").textContent;
 		}
 	} else if (window.location.pathname.includes("/topic/")) {
 		presenceData.details = `Looking at topic ${
-			document.getElementsByClassName("Topics_topicTitle-3OfJU")[0].textContent
+			document.querySelectorAll(".Topics_topicTitle-3OfJU")[0].textContent
 		}`;
-		[, , , presenceData.state] = document
-			.getElementsByClassName("Topics_topicDescription-2CNwF")[0]
-			.textContent.split("\n");
+		presenceData.state = document
+			.querySelectorAll(".Topics_topicDescription-2CNwF")[0]
+			.textContent.split("\n")[3];
 	} else if (window.location.pathname.includes("/tv/")) {
 		presenceData.details = `Watching ${document
-			.getElementsByClassName("collection-details")[0]
+			.querySelectorAll(".collection-details")[0]
 			.textContent.replace("From “", "")
 			.replace("”", "")} on Codepen TV`;
 		presenceData.state = `${
-			document.getElementsByClassName("item-title")[0].textContent
-		} ${document.getElementsByClassName("pen-author")[0].textContent}`;
+			document.querySelectorAll(".item-title")[0].textContent
+		} ${document.querySelectorAll(".pen-author")[0].textContent}`;
 	} else if (
 		window.location.pathname.includes("/project/") ||
 		window.location.pathname.includes("/project/")
 	) {
 		presenceData.details = "Editing a project";
 		presenceData.state = `${
-			document.getElementById("editable-title-span").textContent
+			document.querySelector("#editable-title-span").textContent
 		} by ${
 			document
-				.getElementsByClassName("ItemTitle_ownerLink-tMhWC")[0]
+				.querySelectorAll(".ItemTitle_ownerLink-tMhWC")[0]
 				.textContent.split("<")[0]
 		}`;
-	} else if (window.location.pathname === "/write/") {
-		presenceData.details = "Making a post";
-		if ((document.getElementById("title") as HTMLInputElement).value === "")
-			presenceData.state = "Thinking about what the title should be.";
-		else {
-			presenceData.state = (
-				document.getElementById("title") as HTMLInputElement
-			).value;
-		}
-	} else if (window.location.pathname === "/") {
-		presenceData.details = "On the home page";
-		presenceData.state = "Looking at code snippets.";
-	} else if (window.location.pathname === "/dashboard/") {
-		presenceData.details = "On dashboard";
-		presenceData.state = "Admiring their own pens.";
-	} else if (window.location.pathname.includes("/search/")) {
-		presenceData.details = "Searching for pens";
-		presenceData.state = `Looking for ${location.search.replace("?q=", "")}`;
-	} else if (!document.getElementsByClassName("title-header")[0]) {
-		presenceData.details = "Looking at page";
-		presenceData.state = document.title;
 	} else {
-		presenceData.details = "Looking at page";
-		[presenceData.state] = document
-			.getElementsByClassName("title-header")[0]
-			.textContent.split("\n");
+		switch (window.location.pathname) {
+			case "/write/": {
+				presenceData.details = "Making a post";
+				if ((document.querySelector("#title") as HTMLInputElement).value === "")
+					presenceData.state = "Thinking about what the title should be.";
+				else {
+					presenceData.state = (
+						document.querySelector("#title") as HTMLInputElement
+					).value;
+				}
+
+				break;
+			}
+			case "/": {
+				presenceData.details = "On the home page";
+				presenceData.state = "Looking at code snippets.";
+
+				break;
+			}
+			case "/dashboard/": {
+				presenceData.details = "On dashboard";
+				presenceData.state = "Admiring their own pens.";
+
+				break;
+			}
+			default:
+				if (window.location.pathname.includes("/search/")) {
+					presenceData.details = "Searching for pens";
+					presenceData.state = `Looking for ${location.search.replace(
+						"?q=",
+						""
+					)}`;
+				} else if (!document.querySelectorAll(".title-header")[0]) {
+					presenceData.details = "Looking at page";
+					presenceData.state = document.title;
+				} else {
+					presenceData.details = "Looking at page";
+					[presenceData.state] = document
+						.querySelectorAll(".title-header")[0]
+						.textContent.split("\n");
+				}
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

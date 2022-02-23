@@ -22,8 +22,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ href } = window.location,
-		path = window.location.pathname;
+		{ href, pathname: path } = window.location;
 
 	if (href !== oldUrl) oldUrl = href;
 
@@ -87,13 +86,13 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (path.includes("/live")) {
 		vidMdTl = document
-			.getElementsByClassName("video__player-area")[0]
+			.querySelectorAll(".video__player-area")[0]
 			.querySelector("h1");
 		presenceData.smallImageKey = "live";
 		presenceData.smallImageText = (await strings).live;
 		presenceData.details = "Watching WCBS Live";
 		presenceData.state = document
-			.getElementsByClassName("video__player-area")[0]
+			.querySelectorAll(".video__player-area")[0]
 			.querySelector("span.subTitle").textContent;
 
 		if (path.includes("/cbsn/")) {

@@ -23,7 +23,7 @@ function newStats(): void {
 			totalListeners = data.all_listeners;
 			const channelList: string[] = data.sequence,
 				channelArray: Channel[] = [];
-			channelList.forEach(channel => {
+			for (const channel of channelList) {
 				channelArray.push({
 					id: channel,
 					name: "",
@@ -33,8 +33,8 @@ function newStats(): void {
 					timeStart: "",
 					timeEnd: ""
 				});
-			});
-			channelArray.forEach(channel => {
+			}
+			for (const channel of channelArray) {
 				const channelData = data.channels[`${channel.id}`];
 				channel.name = channelData.name;
 				channel.listeners = channelData.listeners;
@@ -42,7 +42,7 @@ function newStats(): void {
 				channel.artist = channelData.now.artist;
 				channel.timeStart = channelData.now.time.start;
 				channel.timeEnd = channelData.now.time.end;
-			});
+			}
 			channels = channelArray;
 		});
 }

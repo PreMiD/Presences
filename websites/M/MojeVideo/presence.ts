@@ -11,11 +11,11 @@ presence.on("UpdateData", async () => {
 });
 
 function RefreshData() {
-	if (document.getElementById("video-comment")) {
-		const mvTime = document.getElementById("mv-tm"),
+	if (document.querySelector("#video-comment")) {
+		const mvTime = document.querySelector("#mv-tm"),
 			[mvCaptionH1] = document
-				.getElementById("video-comment")
-				.getElementsByTagName("h1"),
+				.querySelector("#video-comment")
+				.querySelectorAll("h1"),
 			videoName = mvCaptionH1 ? mvCaptionH1.textContent : "Unknown video";
 
 		if (mvTime) {
@@ -26,7 +26,8 @@ function RefreshData() {
 			presenceData.state = videoName;
 		}
 		presenceData.smallImageKey =
-			document.getElementById("mv-pl").style.visibility !== "visible"
+			document.querySelector<HTMLElement>("#mv-pl").style.visibility !==
+			"visible"
 				? "mvplaying"
 				: "mvpaused";
 	} else {
@@ -48,8 +49,7 @@ function RefreshData() {
 				extraPageNumber = 0;
 			const urlPieces = actualUrl.split("/");
 
-			for (let i = 0; i < urlPieces.length; i++) {
-				const urlPiece = urlPieces[i];
+			for (const urlPiece of urlPieces) {
 				if (urlPiece.includes("strana_")) {
 					extraPageNumber = parseInt(urlPiece.replace("strana_", "")) || 0;
 					extraPageNumber++;

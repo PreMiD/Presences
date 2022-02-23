@@ -30,7 +30,6 @@ presence.on("UpdateData", async () => {
 		);
 		title2 = titles.props.pageProps.initialMovies[0].title;
 		title = document.querySelector("#player");
-
 		if (buttons) {
 			presenceData.buttons = [
 				{

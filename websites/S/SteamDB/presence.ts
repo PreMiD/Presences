@@ -19,22 +19,22 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Viewing Realtime Stream";
 					presenceData.smallImageKey = "users";
 					presenceData.smallImageText = `Users: ${
-						document.getElementById("js-realtime-users").textContent
+						document.querySelector("#js-realtime-users").textContent
 					}`;
 					if (
 						!document
-							.getElementById("js-realtime-log")
+							.querySelector("#js-realtime-log")
 							.children.item(0)
 							.children.item(0)
 							.textContent.includes("Connection opened, listening for changes…")
 					) {
 						[, presenceData.state] = document
-							.getElementById("js-realtime-log")
+							.querySelector("#js-realtime-log")
 							.children.item(0)
 							.textContent.split("—");
 						if (
 							document
-								.getElementById("js-realtime-log")
+								.querySelector("#js-realtime-log")
 								.children.item(0)
 								.children.item(2) !== null
 						) {
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 								{
 									label: "View Changelist",
 									url: `${document.location.origin}${document
-										.getElementById("js-realtime-log")
+										.querySelector("#js-realtime-log")
 										.children.item(0)
 										.children.item(2)
 										.getAttribute("href")}`
@@ -58,30 +58,30 @@ presence.on("UpdateData", async () => {
 				case "graph":
 					presenceData.details = "Viewing Steam Charts";
 					if (
-						(document.getElementById("js-tag-select") as HTMLSelectElement)
+						(document.querySelector("#js-tag-select") as HTMLSelectElement)
 							.textContent !== "0"
 					) {
 						presenceData.state = `Filter: ${
-							(document.getElementById("js-tag-select") as HTMLSelectElement)
+							(document.querySelector("#js-tag-select") as HTMLSelectElement)
 								.options[
-								(document.getElementById("js-tag-select") as HTMLSelectElement)
+								(document.querySelector("#js-tag-select") as HTMLSelectElement)
 									.selectedIndex
 							].text
 						}`;
 					}
 					if (
-						(document.getElementById("js-category-select") as HTMLSelectElement)
+						(document.querySelector("#js-category-select") as HTMLSelectElement)
 							.textContent !== "0"
 					) {
 						presenceData.state = `Filter: ${
 							(
-								document.getElementById(
-									"js-category-select"
+								document.querySelector(
+									"#js-category-select"
 								) as HTMLSelectElement
 							).options[
 								(
-									document.getElementById(
-										"js-category-select"
+									document.querySelector(
+										"#js-category-select"
 									) as HTMLSelectElement
 								).selectedIndex
 							].text
@@ -89,13 +89,13 @@ presence.on("UpdateData", async () => {
 					}
 					if (
 						(
-							document.getElementById("table-apps_filter").firstElementChild
+							document.querySelector("#table-apps_filter").firstElementChild
 								.firstElementChild as HTMLInputElement
 						).value !== ""
 					) {
 						presenceData.state = `Search: ${
 							(
-								document.getElementById("table-apps_filter").firstElementChild
+								document.querySelector("#table-apps_filter").firstElementChild
 									.firstElementChild as HTMLInputElement
 							).textContent
 						}`;
@@ -121,22 +121,20 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Viewing Calculator";
 						if (accountValue === 0) {
 							presenceData.state = `${
-								document.getElementsByClassName("player-name").item(0)
-									.textContent
+								document.querySelectorAll(".player-name").item(0).textContent
 							} (${
 								document
-									.getElementsByClassName("number-price")
+									.querySelectorAll(".number-price")
 									.item(0)
 									.textContent.split(">")[2]
 									.split("<")[0]
 							})`;
 						} else if (accountValue === 1) {
 							presenceData.state = `${
-								document.getElementsByClassName("player-name").item(0)
-									.textContent
+								document.querySelectorAll(".player-name").item(0).textContent
 							} (${
 								document
-									.getElementsByClassName("number-price-lowest")
+									.querySelectorAll(".number-price-lowest")
 									.item(0)
 									.textContent.split(">")[2]
 									.split("<")[0]
@@ -236,7 +234,7 @@ presence.on("UpdateData", async () => {
 					} else {
 						presenceData.details = "Viewing Blog Post";
 						presenceData.state =
-							document.getElementById("blog-post-title").textContent;
+							document.querySelector("#blog-post-title").textContent;
 						presenceData.buttons = [
 							{
 								label: "View Page",
@@ -283,13 +281,13 @@ presence.on("UpdateData", async () => {
 					else presenceData.details = "Viewing Package Price Changes";
 					if (
 						(
-							document.getElementById("DataTables_Table_0_filter")
+							document.querySelector("#DataTables_Table_0_filter")
 								.firstElementChild.firstElementChild as HTMLInputElement
 						).value !== ""
 					) {
 						presenceData.state = `Search: ${
 							(
-								document.getElementById("DataTables_Table_0_filter")
+								document.querySelector("#DataTables_Table_0_filter")
 									.firstElementChild.firstElementChild as HTMLInputElement
 							).value
 						}`;
@@ -321,13 +319,13 @@ presence.on("UpdateData", async () => {
 					}`;
 					if (
 						(
-							document.getElementById("table-apps_filter").firstElementChild
+							document.querySelector("#table-apps_filter").firstElementChild
 								.firstElementChild as HTMLInputElement
 						).value !== ""
 					) {
 						presenceData.state = `Search: ${
 							(
-								document.getElementById("table-apps_filter").firstElementChild
+								document.querySelector("#table-apps_filter").firstElementChild
 									.firstElementChild as HTMLInputElement
 							).value
 						}`;
@@ -345,13 +343,13 @@ presence.on("UpdateData", async () => {
 						];
 						if (
 							(
-								document.getElementById("table-apps_filter").firstElementChild
+								document.querySelector("#table-apps_filter").firstElementChild
 									.firstElementChild as HTMLInputElement
 							).value !== ""
 						) {
 							presenceData.state = `Search: ${
 								(
-									document.getElementById("table-apps_filter").firstElementChild
+									document.querySelector("#table-apps_filter").firstElementChild
 										.firstElementChild as HTMLInputElement
 								).value
 							}`;
@@ -492,15 +490,15 @@ presence.on("UpdateData", async () => {
 					else if (document.location.pathname.includes("/mostfollowed/")) {
 						presenceData.details = "Browsing Most Followed Upcoming Games";
 						if (
-							(document.getElementById("js-tag-select") as HTMLSelectElement)
+							(document.querySelector("#js-tag-select") as HTMLSelectElement)
 								.textContent !== "0"
 						) {
 							presenceData.state = `Filter: ${
-								(document.getElementById("js-tag-select") as HTMLSelectElement)
+								(document.querySelector("#js-tag-select") as HTMLSelectElement)
 									.options[
 									(
-										document.getElementById(
-											"js-tag-select"
+										document.querySelector(
+											"#js-tag-select"
 										) as HTMLSelectElement
 									).selectedIndex
 								].text
@@ -509,15 +507,15 @@ presence.on("UpdateData", async () => {
 					} else {
 						presenceData.details = "Browsing Upcoming Games";
 						if (
-							(document.getElementById("js-tag-select") as HTMLSelectElement)
+							(document.querySelector("#js-tag-select") as HTMLSelectElement)
 								.textContent !== "0"
 						) {
 							presenceData.state = `Filter: ${
-								(document.getElementById("js-tag-select") as HTMLSelectElement)
+								(document.querySelector("#js-tag-select") as HTMLSelectElement)
 									.options[
 									(
-										document.getElementById(
-											"js-tag-select"
+										document.querySelector(
+											"#js-tag-select"
 										) as HTMLSelectElement
 									).selectedIndex
 								].text
@@ -537,32 +535,32 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Browsing Most Followed Games";
 							if (
 								(
-									document.getElementById("table-apps_filter").firstElementChild
+									document.querySelector("#table-apps_filter").firstElementChild
 										.firstElementChild as HTMLInputElement
 								).value !== ""
 							) {
 								presenceData.state = `Search: ${
 									(
-										document.getElementById("table-apps_filter")
+										document.querySelector("#table-apps_filter")
 											.firstElementChild.firstElementChild as HTMLInputElement
 									).value
 								}`;
 							} else if (
 								(
-									document.getElementById(
-										"js-category-select"
+									document.querySelector(
+										"#js-category-select"
 									) as HTMLSelectElement
 								).textContent !== "0"
 							) {
 								presenceData.state = `Filter: ${
 									(
-										document.getElementById(
-											"js-category-select"
+										document.querySelector(
+											"#js-category-select"
 										) as HTMLSelectElement
 									).options[
 										(
-											document.getElementById(
-												"js-category-select"
+											document.querySelector(
+												"#js-category-select"
 											) as HTMLSelectElement
 										).selectedIndex
 									].text
@@ -573,13 +571,13 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Browsing Most Wishlisted Games";
 							if (
 								(
-									document.getElementById("table-apps_filter").firstElementChild
+									document.querySelector("#table-apps_filter").firstElementChild
 										.firstElementChild as HTMLInputElement
 								).value !== ""
 							) {
 								presenceData.state = `Search: ${
 									(
-										document.getElementById("table-apps_filter")
+										document.querySelector("#table-apps_filter")
 											.firstElementChild.firstElementChild as HTMLInputElement
 									).value
 								}`;
@@ -590,13 +588,13 @@ presence.on("UpdateData", async () => {
 								presenceData.details = "Browsing Top Rated Apps";
 								if (
 									(
-										document.getElementById("table-apps_filter")
+										document.querySelector("#table-apps_filter")
 											.firstElementChild.firstElementChild as HTMLInputElement
 									).value !== ""
 								) {
 									presenceData.state = `Search: ${
 										(
-											document.getElementById("table-apps_filter")
+											document.querySelector("#table-apps_filter")
 												.firstElementChild.firstElementChild as HTMLInputElement
 										).value
 									}`;
@@ -605,13 +603,13 @@ presence.on("UpdateData", async () => {
 								presenceData.details = "Browsing Top Rated Games";
 								if (
 									(
-										document.getElementById("table-apps_filter")
+										document.querySelector("#table-apps_filter")
 											.firstElementChild.firstElementChild as HTMLInputElement
 									).value !== ""
 								) {
 									presenceData.state = `Search: ${
 										(
-											document.getElementById("table-apps_filter")
+											document.querySelector("#table-apps_filter")
 												.firstElementChild.firstElementChild as HTMLInputElement
 										).value
 									}`;
@@ -628,18 +626,18 @@ presence.on("UpdateData", async () => {
 						case "releases":
 							presenceData.details = "Viewing Game Release Summary";
 							if (
-								(document.getElementById("js-tag-select") as HTMLSelectElement)
+								(document.querySelector("#js-tag-select") as HTMLSelectElement)
 									.textContent !== "0"
 							) {
 								presenceData.state = `Filter: ${
 									(
-										document.getElementById(
-											"js-tag-select"
+										document.querySelector(
+											"#js-tag-select"
 										) as HTMLSelectElement
 									).options[
 										(
-											document.getElementById(
-												"js-tag-select"
+											document.querySelector(
+												"#js-tag-select"
 											) as HTMLSelectElement
 										).selectedIndex
 									].text
@@ -668,19 +666,19 @@ presence.on("UpdateData", async () => {
 					if (document.location.pathname.includes("/history/")) {
 						presenceData.details = "Viewing Upcoming & previous sales";
 						presenceData.state = `Next Sale: ${
-							document.getElementsByClassName("sale-name").item(0).textContent
+							document.querySelectorAll(".sale-name").item(0).textContent
 						}`;
 					} else {
 						presenceData.details = "Browsing Sales";
 						if (
 							(
-								document.getElementById("DataTables_Table_0_filter")
+								document.querySelector("#DataTables_Table_0_filter")
 									.firstElementChild.firstElementChild as HTMLInputElement
 							).value !== ""
 						) {
 							presenceData.state = `Search: ${
 								(
-									document.getElementById("DataTables_Table_0_filter")
+									document.querySelector("#DataTables_Table_0_filter")
 										.firstElementChild.firstElementChild as HTMLInputElement
 								).value
 							}`;
@@ -699,20 +697,20 @@ presence.on("UpdateData", async () => {
 					switch (document.querySelector("a.tabnav-tab.selected").textContent) {
 						case "Apps":
 							presenceData.state = `${
-								(document.getElementById("inputQuery-app") as HTMLInputElement)
+								(document.querySelector("#inputQuery-app") as HTMLInputElement)
 									.value
 							} Type: ${
-								(document.getElementById("inputType") as HTMLSelectElement)
+								(document.querySelector("#inputType") as HTMLSelectElement)
 									.options[
-									(document.getElementById("inputType") as HTMLSelectElement)
+									(document.querySelector("#inputType") as HTMLSelectElement)
 										.selectedIndex
 								].value
 							} Category: ${
-								(document.getElementById("inputCategory") as HTMLSelectElement)
+								(document.querySelector("#inputCategory") as HTMLSelectElement)
 									.options[
 									(
-										document.getElementById(
-											"inputCategory"
+										document.querySelector(
+											"#inputCategory"
 										) as HTMLSelectElement
 									).selectedIndex
 								].textContent
@@ -720,13 +718,13 @@ presence.on("UpdateData", async () => {
 							break;
 						case "Packages":
 							if (
-								(document.getElementById("inputQuery-sub") as HTMLInputElement)
+								(document.querySelector("#inputQuery-sub") as HTMLInputElement)
 									.value
 							) {
 								presenceData.state = `Search: ${
 									(
-										document.getElementById(
-											"inputQuery-sub"
+										document.querySelector(
+											"#inputQuery-sub"
 										) as HTMLInputElement
 									).value
 								}`;
@@ -734,12 +732,12 @@ presence.on("UpdateData", async () => {
 							break;
 						case "Bundles":
 							if (
-								document.getElementById("inputQuery-bundle") as HTMLInputElement
+								document.querySelector("#inputQuery-bundle") as HTMLInputElement
 							) {
 								presenceData.state = `Search: ${
 									(
-										document.getElementById(
-											"inputQuery-bundle"
+										document.querySelector(
+											"#inputQuery-bundle"
 										) as HTMLInputElement
 									).value
 								}`;
@@ -747,28 +745,28 @@ presence.on("UpdateData", async () => {
 							break;
 						case "App Keys":
 							presenceData.state = `${
-								(document.getElementById("inputType2") as HTMLSelectElement)
+								(document.querySelector("#inputType2") as HTMLSelectElement)
 									.options[
-									(document.getElementById("inputType2") as HTMLSelectElement)
+									(document.querySelector("#inputType2") as HTMLSelectElement)
 										.selectedIndex
 								].textContent
 							} ${
-								(document.getElementById("inputKeyName") as HTMLSelectElement)
+								(document.querySelector("#inputKeyName") as HTMLSelectElement)
 									.options[
-									(document.getElementById("inputKeyName") as HTMLSelectElement)
+									(document.querySelector("#inputKeyName") as HTMLSelectElement)
 										.selectedIndex
 								].textContent
 							} ${
-								(document.getElementById("inputOperator") as HTMLSelectElement)
+								(document.querySelector("#inputOperator") as HTMLSelectElement)
 									.options[
 									(
-										document.getElementById(
-											"inputOperator"
+										document.querySelector(
+											"#inputOperator"
 										) as HTMLSelectElement
 									).selectedIndex
 								].textContent
 							} ${
-								(document.getElementById("inputKeyValue") as HTMLInputElement)
+								(document.querySelector("#inputKeyValue") as HTMLInputElement)
 									.value
 							} Raw: ${
 								(
@@ -780,64 +778,63 @@ presence.on("UpdateData", async () => {
 							break;
 						case "Package Keys":
 							presenceData.state = `${
-								(document.getElementById("inputKeyName2") as HTMLSelectElement)
+								(document.querySelector("#inputKeyName2") as HTMLSelectElement)
 									.options[
 									(
-										document.getElementById(
-											"inputKeyName2"
+										document.querySelector(
+											"#inputKeyName2"
 										) as HTMLSelectElement
 									).selectedIndex
 								].textContent
 							} ${
-								(document.getElementById("inputOperator2") as HTMLSelectElement)
+								(document.querySelector("#inputOperator2") as HTMLSelectElement)
 									.options[
 									(
-										document.getElementById(
-											"inputOperator2"
+										document.querySelector(
+											"#inputOperator2"
 										) as HTMLSelectElement
 									).selectedIndex
 								].textContent
 							} ${
-								(document.getElementById("inputKeyValue2") as HTMLInputElement)
+								(document.querySelector("#inputKeyValue2") as HTMLInputElement)
 									.value
 							}`;
 							break;
 						case "Patch Notes":
 							presenceData.state = `${
 								(
-									document.getElementById(
-										"patchnotes_query"
+									document.querySelector(
+										"#patchnotes_query"
 									) as HTMLInputElement
 								).value
 							} AppID: ${
 								(
-									document.getElementById(
-										"patchnotes_appid"
+									document.querySelector(
+										"#patchnotes_appid"
 									) as HTMLInputElement
 								).textContent || "All"
 							}`;
 							break;
 					}
-					if (document.getElementById("table-sortable_filter")) {
-						if (
+					if (
+						document.querySelector("#table-sortable_filter") &&
+						(
+							document.querySelector("#table-sortable_filter").firstElementChild
+								.firstElementChild as HTMLInputElement
+						).value !== ""
+					) {
+						presenceData.state = `Search: ${
 							(
-								document.getElementById("table-sortable_filter")
+								document.querySelector("#table-sortable_filter")
 									.firstElementChild.firstElementChild as HTMLInputElement
-							).value !== ""
-						) {
-							presenceData.state = `Search: ${
-								(
-									document.getElementById("table-sortable_filter")
-										.firstElementChild.firstElementChild as HTMLInputElement
-								).value
-							}`;
-						}
+							).value
+						}`;
 					}
 					break;
 				case "tokendumper":
 					presenceData.details = "Viewing Token Dumper";
 					presenceData.state = `${
-						document.getElementById("stats").textContent.split(" ")[0]
+						document.querySelector("#stats").textContent.split(" ")[0]
 					} Users Contributed`;
 					break;
 				case "keys":
@@ -854,7 +851,7 @@ presence.on("UpdateData", async () => {
 		case "steamstat.us":
 			presenceData.details = "Viewing Steam Status";
 			presenceData.state = `${
-				document.getElementById("online").textContent
+				document.querySelector("#online").textContent
 			} users online`;
 			break;
 	}

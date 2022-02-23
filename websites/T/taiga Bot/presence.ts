@@ -4,10 +4,10 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function getRow(row: number) {
-	const metas = document.getElementsByTagName("meta");
-	for (let i = 0; i < metas.length; i++) {
-		if (metas[i].getAttribute("property") === `premid:row${row}`)
-			return metas[i].getAttribute("content");
+	const metas = document.querySelectorAll("meta");
+	for (const meta of metas) {
+		if (meta.getAttribute("property") === `premid:row${row}`)
+			return meta.getAttribute("content");
 	}
 	return;
 }

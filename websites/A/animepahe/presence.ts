@@ -51,7 +51,7 @@ class AnimeStorage {
 			this.list[title] = {
 				id: parseInt(
 					(
-						document.getElementsByClassName("modal-body")[1].lastElementChild
+						document.querySelectorAll(".modal-body")[1].lastElementChild
 							.lastElementChild as HTMLAnchorElement
 					).href.split("/a/")[1]
 				),
@@ -125,7 +125,7 @@ function parseInfo(dom: HTMLParagraphElement[]) {
 		let title = entry.children[0].textContent.slice(0, -1);
 		const [, secondChild] = entry.childNodes;
 
-		if (title.indexOf(" ") !== -1) {
+		if (title.includes(" ")) {
 			title = title
 				.split(" ")
 				.map(e => uncapitalize(e))
@@ -211,7 +211,7 @@ presence.on("UpdateData", async () => {
 								// viewing anime/time season
 								presenceData.details = `${viewing} Anime ${strings.timeSeason}:`;
 								presenceData.state =
-									document.getElementsByTagName("h1")[0].textContent;
+									document.querySelectorAll("h1")[0].textContent;
 								presenceData.smallImageKey = "presence_browsing_time";
 								presenceData.smallImageText = strings.browse;
 							}
@@ -225,26 +225,24 @@ presence.on("UpdateData", async () => {
 								// viewing a misc. category (eg. Airing, TV, etc)
 								presenceData.details = strings.viewCategory;
 
-								const heading =
-									document.getElementsByTagName("h1")[0].textContent;
-								presenceData.state =
-									heading.indexOf(" ") !== -1
-										? heading
-												.split(" ")
-												.map(s => capitalize(s))
-												.join(" ")
-										: capitalize(heading);
+								const heading = document.querySelectorAll("h1")[0].textContent;
+								presenceData.state = heading.includes(" ")
+									? heading
+											.split(" ")
+											.map(s => capitalize(s))
+											.join(" ")
+									: capitalize(heading);
 								presenceData.smallImageKey = "presence_browsing_all";
 								presenceData.smallImageText = strings.browse;
 							} else {
 								// viewing specific
 								const info = parseInfo(
-										document.getElementsByClassName("anime-info")[0]
+										document.querySelectorAll(".anime-info")[0]
 											.children as unknown as HTMLParagraphElement[]
 									),
 									title =
-										document.getElementsByClassName("title-wrapper")[0]
-											.children[1].textContent,
+										document.querySelectorAll(".title-wrapper")[0].children[1]
+											.textContent,
 									listing = (() => {
 										const links = info.external_links as HTMLAnchorElement[];
 
@@ -304,14 +302,14 @@ presence.on("UpdateData", async () => {
 		case "play":
 			{
 				const movie: boolean =
-						document.getElementsByClassName("anime-status")[0].firstElementChild
+						document.querySelectorAll(".anime-status")[0].firstElementChild
 							.textContent === "Movie",
 					title =
-						document.getElementsByClassName("theatre-info")[0].children[1]
+						document.querySelectorAll(".theatre-info")[0].children[1]
 							.children[1].textContent,
 					episode = parseInt(
 						document
-							.getElementById("episodeMenu")
+							.querySelector("#episodeMenu")
 							.textContent.split("Episode ")[1]
 							.replace(/^\s+|\s+$/g, "")
 					);
@@ -368,7 +366,7 @@ presence.on("UpdateData", async () => {
 			break;
 		default: {
 			presenceData.details = strings.viewPage;
-			presenceData.state = document.getElementsByTagName("h1")[0].textContent;
+			presenceData.state = document.querySelectorAll("h1")[0].textContent;
 		}
 	}
 	presence.setActivity(presenceData, playback);

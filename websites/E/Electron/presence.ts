@@ -7,12 +7,12 @@ function parseQueryString(queryString?: string) {
 
 	const params: { [queryKey: string]: string } = {},
 		queries = queryString.split("&");
-	queries.forEach((indexQuery: string) => {
+	for (const indexQuery in queries) {
 		const indexPair = indexQuery.split("=");
 		params[decodeURIComponent(indexPair[0])] = decodeURIComponent(
 			indexPair.length > 1 ? indexPair[1] : ""
 		);
-	});
+	}
 	return params;
 }
 
@@ -54,49 +54,62 @@ presence.on("UpdateData", async () => {
 			presenceData.details = document.querySelector(
 				"span.f0-light.mr-3.mr-lg-4"
 			).textContent;
-		} else if (route[2] === "tutorial") {
-			if (!route[3]) {
-				presenceData.details = document.querySelector(
-					"h4.f3-light.docs-breadcrumbs"
-				).textContent;
-			} else {
-				presenceData.details = "Docs / Guides";
-				presenceData.state = document
-					.querySelector("title")
-					.textContent.replace(" | Electron", "");
-			}
-		} else if (route[2] === "api") {
-			if (!route[3]) {
-				presenceData.details = document.querySelector(
-					"h4.f3-light.docs-breadcrumbs"
-				).textContent;
-			} else if (route[3] === "structures") {
-				if (!route[4]) {
-					presenceData.details = document.querySelector(
-						"h4.f3-light.docs-breadcrumbs"
-					).textContent;
-				} else {
-					presenceData.details = "Docs / API Structures";
-					presenceData.state = document
-						.querySelector("title")
-						.textContent.replace(" | Electron", "");
+		} else {
+			switch (route[2]) {
+				case "tutorial": {
+					if (!route[3]) {
+						presenceData.details = document.querySelector(
+							"h4.f3-light.docs-breadcrumbs"
+						).textContent;
+					} else {
+						presenceData.details = "Docs / Guides";
+						presenceData.state = document
+							.querySelector("title")
+							.textContent.replace(" | Electron", "");
+					}
+
+					break;
 				}
-			} else {
-				presenceData.details = "Docs / API";
-				presenceData.state = document
-					.querySelector("title")
-					.textContent.replace(" | Electron", "");
-			}
-		} else if (route[2] === "development") {
-			if (!route[3]) {
-				presenceData.details = document.querySelector(
-					"h4.f3-light.docs-breadcrumbs"
-				).textContent;
-			} else {
-				presenceData.details = "Docs / Development";
-				presenceData.state = document
-					.querySelector("title")
-					.textContent.replace(" | Electron", "");
+				case "api": {
+					if (!route[3]) {
+						presenceData.details = document.querySelector(
+							"h4.f3-light.docs-breadcrumbs"
+						).textContent;
+					} else if (route[3] === "structures") {
+						if (!route[4]) {
+							presenceData.details = document.querySelector(
+								"h4.f3-light.docs-breadcrumbs"
+							).textContent;
+						} else {
+							presenceData.details = "Docs / API Structures";
+							presenceData.state = document
+								.querySelector("title")
+								.textContent.replace(" | Electron", "");
+						}
+					} else {
+						presenceData.details = "Docs / API";
+						presenceData.state = document
+							.querySelector("title")
+							.textContent.replace(" | Electron", "");
+					}
+
+					break;
+				}
+				case "development": {
+					if (!route[3]) {
+						presenceData.details = document.querySelector(
+							"h4.f3-light.docs-breadcrumbs"
+						).textContent;
+					} else {
+						presenceData.details = "Docs / Development";
+						presenceData.state = document
+							.querySelector("title")
+							.textContent.replace(" | Electron", "");
+					}
+
+					break;
+				}
+				// No default
 			}
 		}
 	} else if (document.location.pathname.includes("/blog")) {

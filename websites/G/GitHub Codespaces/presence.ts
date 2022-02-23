@@ -497,7 +497,7 @@ presence.on("UpdateData", async () => {
 			smallImageText: "GitHub Codespaces"
 		},
 		activeTab = document.querySelector(".tab.active"),
-		editorMode = document.getElementById("status.editor.mode");
+		editorMode = document.querySelector("#status.editor.mode");
 
 	// Preparing Screen
 	if (document.querySelector(".vscs-splash-screen-steps-pane")) {
@@ -536,29 +536,29 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = lastFileChange;
 		presenceData.largeImageKey = largeImageKey ? largeImageKey.image : "txt";
 		presenceData.details = (await presence.getSetting<string>("details"))
-			.replace(/%file%/g, filename)
-			.replace(/%path%/g, filepath)
-			.replace(/%folder%/g, filepath.split("/").reverse()[1])
-			.replace(
-				/%ext%/g,
+			.replaceAll("%file%", filename)
+			.replaceAll("%path%", filepath)
+			.replaceAll("%folder%", filepath.split("/").reverse()[1])
+			.replaceAll(
+				"%ext%",
 				(largeImageKey ? largeImageKey.image : "txt").toUpperCase()
 			)
-			.replace(/%workspace%/g, workspace || "N/A")
-			.replace(
-				/%workspaceOrFolder%/g,
+			.replaceAll("%workspace%", workspace || "N/A")
+			.replaceAll(
+				"%workspaceOrFolder%",
 				workspace || filepath.split("/").reverse()[1]
 			);
 		presenceData.state = (await presence.getSetting<string>("state"))
-			.replace(/%file%/g, filename)
-			.replace(/%path%/g, filepath)
-			.replace(/%folder%/g, filepath.split("/").reverse()[1])
-			.replace(
-				/%ext%/g,
+			.replaceAll("%file%", filename)
+			.replaceAll("%path%", filepath)
+			.replaceAll("%folder%", filepath.split("/").reverse()[1])
+			.replaceAll(
+				"%ext%",
 				(largeImageKey ? largeImageKey.image : "txt").toUpperCase()
 			)
-			.replace(/%workspace%/g, workspace || "N/A")
-			.replace(
-				/%workspaceOrFolder%/g,
+			.replaceAll("%workspace%", workspace || "N/A")
+			.replaceAll(
+				"%workspaceOrFolder%",
 				workspace || filepath.split("/").reverse()[1]
 			);
 	} else if (!editorMode) {

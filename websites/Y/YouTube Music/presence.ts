@@ -51,7 +51,10 @@ function getAuthorString(): string {
 	}
 }
 
-let prevCover: [number, string] = null;
+let prevMetadata: {
+	title: string;
+	startedAt: number;
+};
 
 presence.on("UpdateData", async () => {
 	const title = document.querySelector<HTMLElement>(
@@ -99,6 +102,7 @@ presence.on("UpdateData", async () => {
 					: repeatMode === "ALL"
 					? "Playlist on loop"
 					: "Playing",
+				startTimestamp: prevMetadata?.startedAt,
 				endTimestamp
 			};
 
@@ -111,8 +115,6 @@ presence.on("UpdateData", async () => {
 			];
 		}
 
-		if (!timestamps) delete presenceData.endTimestamp;
-
 		if (buttons) {
 			presenceData.buttons = [
 				{
@@ -122,18 +124,16 @@ presence.on("UpdateData", async () => {
 			];
 		}
 
-		if (video.paused) {
+		if (video.paused || !timestamps) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
 
-		if (cover) {
-			prevCover ??= [Date.now(), presenceData.largeImageKey];
-			if (prevCover[1] !== presenceData.largeImageKey) {
-				if (Date.now() - prevCover[0] < 20_000)
-					presenceData.largeImageKey = "ytm_lg";
-				else prevCover = [Date.now(), presenceData.largeImageKey];
-			}
+		if (!prevMetadata || prevMetadata.title !== title) {
+			prevMetadata = {
+				title,
+				startedAt: Date.now() / 1000
+			};
 		}
 
 		presence.setActivity(presenceData);

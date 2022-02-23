@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			const region = [
 					...document.querySelectorAll<HTMLAnchorElement>(".region-btn")
 				]
-					.filter(e => e.classList.contains("active"))[0]
+					.find(e => e.classList.contains("active"))
 					.pathname?.slice(1),
 				station =
 					document.querySelector<HTMLSpanElement>(".song-name")?.textContent;
