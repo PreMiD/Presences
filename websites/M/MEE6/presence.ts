@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 		search = document.querySelector<HTMLInputElement>(
 			"body > header > div.csh-wrapper > form > span > input"
 		);
-		if (search.textContent !== "") {
+		if (!search.textContent) {
 			presenceData.details = "Helpdesk searching for:";
 			presenceData.state = search.value;
 			presenceData.smallImageKey = "searching";
