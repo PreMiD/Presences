@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else {
 		presenceData.details = document.title;
-		presenceData.state = `by ${document.location.hostname.split(".")[0]}`;
+		presenceData.state = `by ${hostname.split(".")[0]}`;
 		if (image && pageIcon) presenceData.largeImageKey = pageIcon.href;
 		presenceData.buttons = [
 			{ label: "View Page", url: document.location.origin }
