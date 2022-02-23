@@ -2,14 +2,11 @@ const presence = new Presence({
 		clientId: "939236497985536070"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: HTMLElement;
-
-let rankinginfo: HTMLElement;
-
-let teamicon: HTMLImageElement;
-let eventicon: HTMLImageElement;
-
-let playername: HTMLElement;
+let title: HTMLElement,
+	rankinginfo: HTMLElement,
+	teamicon: HTMLImageElement,
+	eventicon: HTMLImageElement,
+	playername: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	title = document.querySelector("head > title");
