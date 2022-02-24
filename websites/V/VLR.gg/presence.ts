@@ -2,14 +2,11 @@ const presence = new Presence({
 		clientId: "939236497985536070"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: HTMLElement;
-
-let rankinginfo: HTMLElement;
-
-let teamicon: HTMLImageElement;
-let eventicon: HTMLImageElement;
-
-let playername: HTMLElement;
+let title: HTMLElement,
+	rankinginfo: HTMLElement,
+	teamicon: HTMLImageElement,
+	eventicon: HTMLImageElement,
+	playername: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	title = document.querySelector("head > title");
@@ -29,8 +26,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "On home";
 		delete presenceData.state;
 	} else if (document.location.pathname.includes("/threads")) {
-
-	/*Main pages*/
+		/*Main pages*/
 		presenceData.details = "Browsing threads";
 		delete presenceData.state;
 	} else if (document.location.pathname.includes("/matches")) {
@@ -58,8 +54,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing settings";
 		delete presenceData.state;
 	} else if (document.location.pathname.includes("/event")) {
-
-	/*Show event name and logo*/
+		/*Show event name and logo*/
 		presenceData.details = "Viewing event";
 		presenceData.state = title.textContent;
 		presenceData.state = title.textContent.replace(
@@ -68,8 +63,7 @@ presence.on("UpdateData", async () => {
 		);
 		presenceData.largeImageKey = eventicon.src;
 	} else if (document.location.pathname.includes("/team")) {
-
-	/*Show team logo*/
+		/*Show team logo*/
 		presenceData.details = "Viewing team page";
 		presenceData.state = title.textContent.replace(
 			": Valorant Team Profile | VLR.gg",
@@ -77,8 +71,7 @@ presence.on("UpdateData", async () => {
 		);
 		presenceData.largeImageKey = teamicon.src;
 	} else if (document.location.pathname.includes("/player")) {
-
-	/*Viewing player's page*/
+		/*Viewing player's page*/
 		presenceData.details = "Viewing player's page";
 		presenceData.state = `${title.textContent.replace(
 			": Valorant Player Profile | VLR.gg",
