@@ -1,7 +1,4 @@
-// TODO: Check Telegram classic version if it can be improved
 // BUG: "Writing" status doesn't work on classic
-// TODO: Test K version
-// TODO: Test Z version
 
 const presence = new Presence({
 	clientId: "664595715242197008"
@@ -56,8 +53,8 @@ async function kVer(): Promise<PresenceData> {
 			"#column-center > div.chats-container > div.chat > div.sidebar-header > div.chat-info-container > div.chat-info > div.person > div.content > div.top > div.user-title > span.peer-title"
 		);
 	if (activeChatDetails) {
-		const textArea: HTMLCollection = document.getElementsByClassName(
-				"input-message-input"
+		const textArea: HTMLElement = document.querySelector(
+				".input-message-input"
 			),
 			messagesCount: number = document.getElementsByClassName("message").length,
 			statusSpan: HTMLElement = document.querySelector(
@@ -70,9 +67,9 @@ async function kVer(): Promise<PresenceData> {
 			presenceData.state = activeChatDetails.textContent;
 		} else presenceData.details = "Talking to someone";
 		presenceData.smallImageKey =
-			textArea[0].textContent.length > 1 ? "writing" : "reading";
+			textArea?.textContent.length > 1 ? "writing" : "reading";
 		presenceData.smallImageText =
-			textArea[0].textContent.length > 1
+			textArea?.textContent.length > 1
 				? "Typing a message"
 				: `Reading ${messagesCount} message${messagesCount > 1 ? "s" : ""}`;
 	} else if (
