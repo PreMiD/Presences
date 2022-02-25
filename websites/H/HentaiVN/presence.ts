@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "bell";
 		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/inbox.php")) {
-		if (document.location.search.includes("user")) {
+		if (searchParams.has("user")) {
 			presenceData.details = document
 				.querySelector("div[class='bar-title']")
 				.textContent.trim();
@@ -295,7 +295,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Đang tìm kiếm truyện nâng cao";
 		presenceData.smallImageKey = "search";
 		presenceData.largeImageKey = "home";
-		if (document.location.search.includes("search")) {
+		if (searchParams.has("search")) {
 			keystr = searchParams.getAll("tag[]");
 			namekey = searchParams.get("name")
 				? `Từ khóa: ${searchParams.get("name")} - `
