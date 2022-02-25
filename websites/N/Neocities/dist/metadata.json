@@ -10,12 +10,17 @@
 	},
 	"url": "neocities.org",
 	"regExp": "([a-z0-9-_]+[.])?neocities[.]org",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/NQ9JwPd.png",
 	"thumbnail": "https://i.imgur.com/fH9vMF7.png",
 	"color": "#F59C32",
 	"category": "socials",
-	"tags": ["website", "hosting", "neocities", "html"],
+	"tags": [
+		"website",
+		"hosting",
+		"neocities",
+		"html"
+	],
 	"settings": [
 		{
 			"id": "image",
