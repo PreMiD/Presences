@@ -1,5 +1,3 @@
-// BUG: "Writing" status doesn't work on classic
-
 const presence = new Presence({
 	clientId: "664595715242197008"
 });
@@ -67,9 +65,9 @@ async function kVer(): Promise<PresenceData> {
 			presenceData.state = activeChatDetails.textContent;
 		} else presenceData.details = "Talking to someone";
 		presenceData.smallImageKey =
-			textArea?.textContent.length > 1 ? "writing" : "reading";
+			textArea?.textContent.length >= 1 ? "writing" : "reading";
 		presenceData.smallImageText =
-			textArea?.textContent.length > 1
+			textArea?.textContent.length >= 1
 				? "Typing a message"
 				: `Reading ${messagesCount} message${messagesCount > 1 ? "s" : ""}`;
 	} else if (
@@ -103,9 +101,9 @@ async function zVer(): Promise<PresenceData> {
 			presenceData.state = activeChatDetails.textContent;
 		} else presenceData.details = "Talking to someone";
 		presenceData.smallImageKey =
-			textArea && textArea.textContent.length > 0 ? "writing" : "reading";
+			textArea && textArea.textContent.length >= 1 ? "writing" : "reading";
 		presenceData.smallImageText =
-			textArea && textArea.textContent.length > 0
+			textArea && textArea.textContent.length >= 1
 				? "Typing a message"
 				: `Reading ${messagesCount} message${messagesCount > 1 ? "s" : ""}`;
 	} else if (document.getElementById("middle-column-bg"))
