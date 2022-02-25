@@ -9,8 +9,7 @@ const presence = new Presence({
 
 async function legacyVer(): Promise<PresenceData> {
 	// for classic version, tested on 0.7.0 and still works fine
-	const path = document.location.href,
-		showName = await presence.getSetting<boolean>("name"),
+	const showName = await presence.getSetting<boolean>("name"),
 		presenceData: PresenceData = {
 			largeImageKey: "telegram"
 		},
@@ -22,10 +21,11 @@ async function legacyVer(): Promise<PresenceData> {
 		const textArea: HTMLElement = document.querySelector(
 				"div.composer_rich_textarea"
 			),
-			messages: NodeList = document.querySelectorAll("div.im_message_body");
+			messages: NodeList = document.querySelectorAll("div.im_message_body"),
+			statusSpan: HTMLElement = document.querySelector(".tg_head_peer_status");
 		if (showName) {
 			presenceData.details = `Talking to this ${
-				path.includes("p=@") || path.includes("p=u") ? "user" : "group"
+				statusSpan?.textContent.includes("member") ? "group" : "user"
 			}:`;
 			presenceData.state = title.textContent;
 		} else presenceData.details = "Talking to someone";
@@ -59,9 +59,14 @@ async function kVer(): Promise<PresenceData> {
 		const textArea: HTMLCollection = document.getElementsByClassName(
 				"input-message-input"
 			),
-			messagesCount: number = document.getElementsByClassName("message").length;
+			messagesCount: number = document.getElementsByClassName("message").length,
+			statusSpan: HTMLElement = document.querySelector(
+				"div.content > div.bottom > div.info > span.i18n"
+			);
 		if (showName) {
-			presenceData.details = "Talking to this user:";
+			presenceData.details = `Talking to this ${
+				statusSpan?.textContent.includes("member") ? "group" : "user"
+			}:`;
 			presenceData.state = activeChatDetails.textContent;
 		} else presenceData.details = "Talking to someone";
 		presenceData.smallImageKey =
@@ -92,9 +97,12 @@ async function zVer(): Promise<PresenceData> {
 		const textArea: HTMLElement = document.getElementById(
 				"editable-message-text"
 			),
-			messagesCount: number = document.getElementsByClassName("Message").length;
+			messagesCount: number = document.getElementsByClassName("Message").length,
+			statusSpan: HTMLElement = document.querySelector("span.status");
 		if (showName) {
-			presenceData.details = "Talking to this user:";
+			presenceData.details = `Talking to this ${
+				statusSpan?.textContent.includes("member") ? "group" : "user"
+			}:`;
 			presenceData.state = activeChatDetails.textContent;
 		} else presenceData.details = "Talking to someone";
 		presenceData.smallImageKey =
