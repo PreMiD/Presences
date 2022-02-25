@@ -1,7 +1,7 @@
 // TODO: Check Telegram classic version if it can be improved
 // BUG: "Writing" status doesn't work on classic
 // TODO: Test K version
-// TODO: Create new function for Telegram version Z (Native)
+// TODO: Test Z version
 
 const presence = new Presence({
 	clientId: "664595715242197008"
@@ -19,11 +19,10 @@ async function legacyVer(): Promise<PresenceData> {
 		);
 
 	if (title && title.textContent) {
-		const textArea: HTMLTextAreaElement = document.querySelector(
-				"body > div.page_wrap > div.im_page_wrap.clearfix > div > div.im_history_col_wrap.noselect.im_history_loaded > div.im_history_selected_wrap > div > div.im_bottom_panel_wrap > div.im_send_panel_wrap.noselect > div > div > div > form > div.im_send_field_wrap.hasselect > textarea"
+		const textArea: HTMLElement = document.querySelector(
+				"div.composer_rich_textarea"
 			),
 			messages: NodeList = document.querySelectorAll("div.im_message_body");
-
 		if (showName) {
 			presenceData.details = `Talking to this ${
 				path.includes("p=@") || path.includes("p=u") ? "user" : "group"
