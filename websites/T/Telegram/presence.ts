@@ -30,17 +30,17 @@ function setPresenceData(
 }
 
 presence.on("UpdateData", async () => {
-	const showName: boolean = await presence.getSetting<boolean>("name");
+	const showName: boolean = await presence.getSetting<boolean>("name"); // presence settings
 	let presenceData: PresenceData = {
 			largeImageKey: "telegram"
-		},
-		isLoggedIn: boolean,
-		activeChatDetails: HTMLElement,
-		textArea: HTMLElement,
-		messagesCount: number,
-		statusSpan: HTMLElement;
+		}, // default PresenceData
+		isLoggedIn: boolean, // determine if logged in or still logging in
+		activeChatDetails: HTMLElement, // details of current active chat
+		textArea: HTMLElement, // text area where user input message, for writing indicator
+		messagesCount: number, // total message count inside active chat
+		statusSpan: HTMLElement; // additional details of active chat, just below activeChatDetails, to determine if active chat is group or user
 	if (document.location.href.includes("legacy=1"))
-		// if web client is the classic version
+		// Telegram Web version 0.7.0
 		(activeChatDetails = document.querySelector(
 			"body > div.page_wrap > div:nth-child(1) > div > div > div.tg_head_main_wrap > div > div.tg_head_peer_title_wrap > a > div > span.tg_head_peer_title"
 		)),
@@ -51,6 +51,7 @@ presence.on("UpdateData", async () => {
 			(messagesCount = document.querySelectorAll("div.im_message_body").length),
 			(statusSpan = document.querySelector(".tg_head_peer_status"));
 	else if (document.location.href.includes("/k/")) {
+		// Telegram WebK 1.2.0 (113)
 		(activeChatDetails = document.querySelector(
 			"#column-center > div.chats-container > div.chat > div.sidebar-header > div.chat-info-container > div.chat-info > div.person > div.content > div.top > div.user-title > span.peer-title"
 		)),
@@ -63,6 +64,7 @@ presence.on("UpdateData", async () => {
 				"div.content > div.bottom > div.info > span.i18n"
 			));
 	} else if (document.location.href.includes("/z/")) {
+		// Telegram WebZ 1.35.1
 		(activeChatDetails = document.querySelector(
 			"#MiddleColumn > div.messages-layout > div.MiddleHeader > div.Transition.slide-fade > div.Transition__slide--active > div.chat-info-wrapper > div.ChatInfo > div.info > div.title > h3"
 		)),
