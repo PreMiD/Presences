@@ -30,10 +30,10 @@ function setPresenceData(
 }
 
 presence.on("UpdateData", async () => {
+	const showName: boolean = await presence.getSetting<boolean>("name");
 	let presenceData: PresenceData = {
 			largeImageKey: "telegram"
 		},
-		showName: boolean,
 		isLoggedIn: boolean,
 		activeChatDetails: HTMLElement,
 		textArea: HTMLElement,
@@ -41,10 +41,9 @@ presence.on("UpdateData", async () => {
 		statusSpan: HTMLElement;
 	if (document.location.href.includes("legacy=1"))
 		// if web client is the classic version
-		(showName = await presence.getSetting<boolean>("name")),
-			(activeChatDetails = document.querySelector(
-				"body > div.page_wrap > div:nth-child(1) > div > div > div.tg_head_main_wrap > div > div.tg_head_peer_title_wrap > a > div > span.tg_head_peer_title"
-			)),
+		(activeChatDetails = document.querySelector(
+			"body > div.page_wrap > div:nth-child(1) > div > div > div.tg_head_main_wrap > div > div.tg_head_peer_title_wrap > a > div > span.tg_head_peer_title"
+		)),
 			(isLoggedIn =
 				document.getElementsByClassName("im_history_not_selected_wrap")
 					?.length > 0),
@@ -52,10 +51,9 @@ presence.on("UpdateData", async () => {
 			(messagesCount = document.querySelectorAll("div.im_message_body").length),
 			(statusSpan = document.querySelector(".tg_head_peer_status"));
 	else if (document.location.href.includes("/k/")) {
-		(showName = await presence.getSetting<boolean>("name")),
-			(activeChatDetails = document.querySelector(
-				"#column-center > div.chats-container > div.chat > div.sidebar-header > div.chat-info-container > div.chat-info > div.person > div.content > div.top > div.user-title > span.peer-title"
-			)),
+		(activeChatDetails = document.querySelector(
+			"#column-center > div.chats-container > div.chat > div.sidebar-header > div.chat-info-container > div.chat-info > div.person > div.content > div.top > div.user-title > span.peer-title"
+		)),
 			(isLoggedIn =
 				document.getElementsByClassName("chat-background-item is-visible")[0]
 					?.childElementCount < 1),
@@ -65,10 +63,9 @@ presence.on("UpdateData", async () => {
 				"div.content > div.bottom > div.info > span.i18n"
 			));
 	} else if (document.location.href.includes("/z/")) {
-		(showName = await presence.getSetting<boolean>("name")),
-			(activeChatDetails = document.querySelector(
-				"#MiddleColumn > div.messages-layout > div.MiddleHeader > div.Transition.slide-fade > div.Transition__slide--active > div.chat-info-wrapper > div.ChatInfo > div.info > div.title > h3"
-			)),
+		(activeChatDetails = document.querySelector(
+			"#MiddleColumn > div.messages-layout > div.MiddleHeader > div.Transition.slide-fade > div.Transition__slide--active > div.chat-info-wrapper > div.ChatInfo > div.info > div.title > h3"
+		)),
 			(isLoggedIn = !!document.getElementById("middle-column-bg")),
 			(textArea = document.getElementById("editable-message-text")),
 			(messagesCount = document.getElementsByClassName("Message").length),
@@ -76,7 +73,15 @@ presence.on("UpdateData", async () => {
 	}
 	presenceData = {
 		...presenceData,
-		...setPresenceData(presenceData, showName, activeChatDetails, isLoggedIn, textArea, messagesCount, statusSpan)
+		...setPresenceData(
+			presenceData,
+			showName,
+			activeChatDetails,
+			isLoggedIn,
+			textArea,
+			messagesCount,
+			statusSpan
+		)
 	};
 
 	presence.setActivity(presenceData);
