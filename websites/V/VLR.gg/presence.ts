@@ -1,20 +1,14 @@
 const presence = new Presence({
 		clientId: "939236497985536070"
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: HTMLElement,
-	rankinginfo: HTMLElement,
-	teamicon: HTMLImageElement,
-	eventicon: HTMLImageElement,
-	playername: HTMLElement;
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+		title: HTMLElement = document.querySelector("head > title"),
+		rankinginfo: HTMLElement = document.querySelector(".wf-tmp-h .normal"),
+		teamicon: HTMLImageElement = document.querySelector(".wf-avatar.team-header-logo img"),
+		eventicon: HTMLImageElement = document.querySelector(".wf-avatar.event-header-thumb img"),
+		playername: HTMLElement = document.querySelector(".player-real-name.ge-text-light");
 
 presence.on("UpdateData", async () => {
-	title = document.querySelector("head > title");
-	rankinginfo = document.querySelector(".wf-tmp-h .normal");
-	teamicon = document.querySelector(".wf-avatar.team-header-logo img");
-	eventicon = document.querySelector(".wf-avatar.event-header-thumb img");
-	playername = document.querySelector(".player-real-name.ge-text-light");
-
 	const presenceData: PresenceData = {
 		largeImageKey: "vlr",
 		details: "Browsing page",
