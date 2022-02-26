@@ -8,21 +8,26 @@ async function legacyVer(): Promise<PresenceData> {
 		presenceData: PresenceData = {
 			largeImageKey: "telegram"
 		},
-		title = document.querySelector(
+		activeChatDetails = document.querySelector(
 			"body > div.page_wrap > div:nth-child(1) > div > div > div.tg_head_main_wrap > div > div.tg_head_peer_title_wrap > a > div > span.tg_head_peer_title"
-		);
+		),
+		isLoggedIn: boolean =
+			document.getElementsByClassName("im_history_not_selected_wrap")?.length >
+			0;
 
-	if (title && title.textContent) {
+	if (activeChatDetails && activeChatDetails.textContent) {
 		const textArea: HTMLElement = document.querySelector(
 				"div.composer_rich_textarea"
 			),
-			messages: NodeList = document.querySelectorAll("div.im_message_body"),
+			messagesCount: NodeList = document.querySelectorAll(
+				"div.im_message_body"
+			),
 			statusSpan: HTMLElement = document.querySelector(".tg_head_peer_status");
 		if (showName) {
 			presenceData.details = `Talking to this ${
 				statusSpan?.textContent.includes("member") ? "group" : "user"
 			}:`;
-			presenceData.state = title.textContent;
+			presenceData.state = activeChatDetails.textContent;
 		} else presenceData.details = "Talking to someone";
 
 		presenceData.smallImageKey =
@@ -30,13 +35,10 @@ async function legacyVer(): Promise<PresenceData> {
 		presenceData.smallImageText =
 			textArea.textContent.length >= 1
 				? "Typing a message."
-				: `Reading ${messages.length} message${
-						messages.length > 1 ? "s" : ""
+				: `Reading ${messagesCount.length} message${
+						messagesCount.length > 1 ? "s" : ""
 				  }.`;
-	} else if (
-		document.getElementsByClassName("im_history_not_selected_wrap").length > 0
-	)
-		presenceData.details = "Logged in";
+	} else if (isLoggedIn) presenceData.details = "Logged in";
 	else presenceData.details = "Logging in..";
 	return presenceData;
 }
@@ -49,8 +51,11 @@ async function kVer(): Promise<PresenceData> {
 		showName: boolean = await presence.getSetting<boolean>("name"),
 		activeChatDetails = document.querySelector(
 			"#column-center > div.chats-container > div.chat > div.sidebar-header > div.chat-info-container > div.chat-info > div.person > div.content > div.top > div.user-title > span.peer-title"
-		);
-	if (activeChatDetails) {
+		),
+		isLoggedIn: boolean =
+			document.getElementsByClassName("chat-background-item is-visible")[0]
+				?.childElementCount < 1;
+	if (activeChatDetails && activeChatDetails.textContent) {
 		const textArea: HTMLElement = document.querySelector(
 				".input-message-input"
 			),
@@ -70,11 +75,7 @@ async function kVer(): Promise<PresenceData> {
 			textArea?.textContent.length >= 1
 				? "Typing a message"
 				: `Reading ${messagesCount} message${messagesCount > 1 ? "s" : ""}`;
-	} else if (
-		document.getElementsByClassName("chat-background-item is-visible")[0]
-			.childElementCount < 1
-	)
-		presenceData.details = "Logged in";
+	} else if (isLoggedIn) presenceData.details = "Logged in";
 	else presenceData.details = "Logging in...";
 	return presenceData;
 }
@@ -87,8 +88,9 @@ async function zVer(): Promise<PresenceData> {
 		showName: boolean = await presence.getSetting<boolean>("name"),
 		activeChatDetails: Element = document.querySelector(
 			"#MiddleColumn > div.messages-layout > div.MiddleHeader > div.Transition.slide-fade > div.Transition__slide--active > div.chat-info-wrapper > div.ChatInfo > div.info > div.title > h3"
-		);
-	if (activeChatDetails) {
+		),
+		isLoggedIn: boolean = !!(document.getElementById("middle-column-bg"));
+	if (activeChatDetails.textContent) {
 		const textArea: HTMLElement = document.getElementById(
 				"editable-message-text"
 			),
@@ -106,8 +108,7 @@ async function zVer(): Promise<PresenceData> {
 			textArea && textArea.textContent.length >= 1
 				? "Typing a message"
 				: `Reading ${messagesCount} message${messagesCount > 1 ? "s" : ""}`;
-	} else if (document.getElementById("middle-column-bg"))
-		presenceData.details = "Logged in";
+	} else if (isLoggedIn) presenceData.details = "Logged in";
 	else presenceData.details = "Logging in...";
 	return presenceData;
 }
