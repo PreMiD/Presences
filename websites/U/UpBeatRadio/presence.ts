@@ -121,13 +121,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing the";
 			presenceData.state = `${type} members`;
 			presenceData.smallImageKey = "reading";
-		}else if (document.location.pathname.includes("/News.List")) {
-			presenceData.details = "Viewing the";
-			presenceData.state = "articles list";
-			presenceData.smallImageKey = "reading";
 		} else if (document.querySelector(".bigTitle")) {
 			let type = document.querySelector(".bigTitle").textContent.toLowerCase();
 			if (type === "faq's") type = "FAQ's";
+			if (type === "all media") type = "Articles List";
 			presenceData.details = "Viewing the";
 			presenceData.state = type;
 			presenceData.smallImageKey = "reading";
