@@ -9,11 +9,20 @@
 		"nl": "Videoland. Weet wat speelt.",
 		"en": "Videoland. Know what's going on."
 	},
-	"url": ["videoland.com", "www.videoland.com"],
-	"version": "1.0.0",
+	"url": [
+		"videoland.com",
+		"www.videoland.com"
+	],
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/0cFQK8O.png",
 	"thumbnail": "https://i.imgur.com/E9XoF0u.png",
 	"color": "#ff0000",
 	"category": "videos",
-	"tags": ["nl", "dutch", "nederlands", "kijk", "video"]
+	"tags": [
+		"nl",
+		"dutch",
+		"nederlands",
+		"kijk",
+		"video"
+	]
 }
