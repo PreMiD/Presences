@@ -9,20 +9,26 @@
 		"nl": "Kijk opent je ogen",
 		"en": "Kijk opens your eyes."
 	},
-	"url": [
-		"kijk.nl",
-		"www.kijk.nl"
-	],
-	"version": "1.0.8",
+	"url": ["kijk.nl", "www.kijk.nl"],
+	"version": "1.1.0",
 	"logo": "https://i.imgur.com/LSOqk1G.png",
 	"thumbnail": "https://i.imgur.com/vBQdKP7.jpg",
 	"color": "#ff0000",
 	"category": "videos",
-	"tags": [
-		"nl",
-		"dutch",
-		"nederlands",
-		"kijk",
-		"video"
+	"tags": ["nl", "dutch", "nederlands", "kijk", "video"],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"if": { "privacy": false },
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
 	]
 }
