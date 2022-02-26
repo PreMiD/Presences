@@ -90,12 +90,23 @@ presence.on("UpdateData", async () => {
 				}
 			];
 		} else {
+			const id2 = document
+				.querySelector(
+					"#app > div.tiktok-ywuvyb-DivBodyContainer.etsvyce0 > div.tiktok-w4ewjk-DivShareLayoutV2.epodnl40 > div > div.tiktok-1g04lal-DivShareLayoutHeader-StyledDivShareLayoutHeaderV2.epodnl42 > div.tiktok-1gk89rh-DivShareInfo.e198b7gd2 > div.tiktok-1hdrv89-DivShareTitleContainer.e198b7gd3 > h2"
+				)
+				.textContent.trim();
 			presenceData.details = (await strings).viewProfile;
-			presenceData.state = `${document
-				.querySelector(".share-sub-title")
-				?.textContent.trim()} (@${document
-				.querySelector(".share-title")
-				?.textContent.trim()})`;
+			presenceData.state = `@(${id2}) ${
+				JSON.parse(
+					document
+						.querySelector("#sigi-persisted-data")
+						.innerHTML.slice(0, -486)
+						.replace("window['SIGI_STATE']=", "")
+				).UserModule.users[id2].nickname
+			}`;
+			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+				'meta[property="og:image"]'
+			).content;
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewProfile,
