@@ -12,18 +12,19 @@ let translatePageTitle: HTMLElement | null,
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		details: "Unknown page",
-		largeImageKey: "crowdin",
-		startTimestamp: browsingTimestamp
-	};
+			details: "Unknown page",
+			largeImageKey: "crowdin",
+			startTimestamp: browsingTimestamp
+		},
+		{ pathname, host } = document.location;
 
-	switch (document.location.host) {
+	switch (host) {
 		case "support.crowdin.com": {
-			if (!document.location.pathname || document.location.pathname === "/")
+			if (!pathname || pathname === "/")
 				presenceData.details = "On the main support page";
 			else if (
-				document.location.pathname.includes("/api/v2/") ||
-				document.location.pathname.includes("/enterprise/api/")
+				pathname.includes("/api/v2/") ||
+				pathname.includes("/enterprise/api/")
 			) {
 				const activeLabel = Array.from(document.querySelectorAll("label")).find(
 					c => c.className?.includes("active")
@@ -44,7 +45,7 @@ presence.on("UpdateData", () => {
 						}
 					];
 				}
-			} else if (document.location.pathname.includes("/search")) {
+			} else if (pathname.includes("/search")) {
 				presenceData.details = "Searching support";
 				presenceData.state = (
 					document.querySelector(
@@ -68,9 +69,9 @@ presence.on("UpdateData", () => {
 		}
 		case "store.crowdin.com": {
 			presenceData.details = "Browsing the store";
-			if (!document.location.pathname || document.location.pathname === "/")
+			if (!pathname || pathname === "/")
 				presenceData.details = "On the main store page";
-			else if (document.location.pathname.includes("/collections/")) {
+			else if (pathname.includes("/collections/")) {
 				const isApp = !!document.querySelector(".product-single__title");
 				presenceData.details = isApp ? "Viewing app" : "Browsing apps";
 				presenceData.state =
@@ -86,7 +87,7 @@ presence.on("UpdateData", () => {
 						}
 					];
 				}
-			} else if (document.location.pathname.includes("/search")) {
+			} else if (pathname.includes("/search")) {
 				presenceData.details = "Searching the store";
 				presenceData.state = (
 					document.querySelector(".search__input") as HTMLInputElement | null
@@ -99,16 +100,15 @@ presence.on("UpdateData", () => {
 		case "status.crowdin.com": {
 			// TODO add incident page (when they have an incident to report lol)
 			presenceData.details = "Viewing Crowdin's status";
-			if (document.location.pathname === "/subscribe")
+			if (pathname === "/subscribe")
 				presenceData.details = "Subscribing to status reports";
 
 			break;
 		}
 		case "blog.crowdin.com": {
 			presenceData.smallImageKey = "reading";
-			if (document.location.pathname === "/")
-				presenceData.details = "Browsing the blog";
-			else if (document.location.pathname.includes("/tag/")) {
+			if (pathname === "/") presenceData.details = "Browsing the blog";
+			else if (pathname.includes("/tag/")) {
 				presenceData.details = "Viewing tag";
 				presenceData.state = document
 					.querySelector(".text-center.home-bg.home-bg--tags")
@@ -119,7 +119,7 @@ presence.on("UpdateData", () => {
 						url: document.URL
 					}
 				];
-			} else if (document.location.pathname.includes("/search")) {
+			} else if (pathname.includes("/search")) {
 				presenceData.details = "Searching the blog";
 				presenceData.state = (
 					document.querySelector(".form-control") as HTMLInputElement | null
@@ -142,15 +142,11 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		default:
-			if (
-				(document.location.pathname === "/" || !document.location.pathname) &&
-				document.location.host === "crowdin.com"
-			)
+			if ((pathname === "/" || !pathname) && host === "crowdin.com")
 				presenceData.details = "Website Home";
 			else if (
-				document.location.pathname.includes("/project/") ||
-				(document.location.host !== "crowdin.com" &&
-					document.location.pathname === "/")
+				pathname.includes("/project/") ||
+				(host !== "crowdin.com" && pathname === "/")
 			) {
 				translateProject =
 					document.querySelector(
@@ -168,26 +164,32 @@ presence.on("UpdateData", () => {
 						url: document.URL
 					}
 				];
-				if (document.location.pathname.includes("activity_stream"))
+				if (pathname.includes("activity_stream"))
 					presenceData.state = "Viewing activity";
-				else if (document.location.pathname.includes("reports"))
+				else if (pathname.includes("reports"))
 					presenceData.state = "Viewing reports";
-				else if (document.location.pathname.includes("discussions"))
+				else if (pathname.includes("discussions"))
 					presenceData.state = "Viewing discussions";
-				else if (document.location.pathname.includes("tasks"))
+				else if (pathname.includes("tasks"))
 					presenceData.state = "Viewing tasks";
 				else {
 					presenceData.state =
 						translatePageTitle?.textContent || "Viewing project home";
 				}
-			} else if (document.location.pathname.includes("/translate")) {
+			} else if (
+				pathname.includes("/translate") ||
+				pathname.includes("/proofread")
+			) {
 				translatingFile = document.querySelector(".file-name");
 				translatingLanguage = document.querySelector(
 					".language-name-wrapper.text-overflow"
 				);
 				translateProject = document.querySelector("title");
 
-				presenceData.details = `Translating ${translatingFile?.textContent}`;
+				if (pathname.includes("/proofread"))
+					presenceData.details = `Proofreading ${translatingFile?.textContent}`;
+				else
+					presenceData.details = `Translating ${translatingFile?.textContent}`;
 				presenceData.state = `${translateProject?.textContent
 					.split("-")[1]
 					?.trim()} (${translatingLanguage?.textContent})`;
@@ -198,11 +200,11 @@ presence.on("UpdateData", () => {
 						url: document.URL
 					}
 				];
-			} else if (document.location.pathname.includes("/profile")) {
+			} else if (pathname.includes("/profile")) {
 				profileName = document.querySelector(".username.s-margin-bottom");
 				profileNickname = document.querySelector(".user-login");
 
-				if (document.location.pathname.includes("/activity")) {
+				if (pathname.includes("/activity")) {
 					presenceData.details = "Viewing activity";
 					presenceData.state = `${profileName?.textContent}${
 						profileNickname ? ` - ${profileNickname.textContent}` : ""
@@ -218,7 +220,7 @@ presence.on("UpdateData", () => {
 						profileNickname ? ` - ${profileNickname.textContent}` : ""
 					}`;
 				}
-			} else if (document.location.pathname.includes("/projects")) {
+			} else if (pathname.includes("/projects")) {
 				presenceData.details = "Exploring projects";
 				presenceData.state =
 					document.querySelector("#showcase_current").parentElement
@@ -226,13 +228,13 @@ presence.on("UpdateData", () => {
 						? document.querySelector("#showcase_current")?.textContent
 						: document.querySelector(".active")?.textContent;
 				presenceData.smallImageKey = "search";
-			} else if (document.location.pathname.includes("/resources")) {
+			} else if (pathname.includes("/resources")) {
 				presenceData.details = "Viewing resources";
 				presenceData.state = (
 					document.querySelector(".active") as HTMLLIElement | null
 				)?.textContent;
 			} else {
-				switch (document.location.pathname) {
+				switch (pathname) {
 					case "/release-notes": {
 						presenceData.details = "Reading release notes";
 						presenceData.state = (
@@ -259,7 +261,7 @@ presence.on("UpdateData", () => {
 						break;
 					}
 					default:
-						if (document.location.pathname.includes("/page/")) {
+						if (pathname.includes("/page/")) {
 							presenceData.details = "Reading page";
 							presenceData.state =
 								document.querySelector(".text-center > h1")?.textContent ??
@@ -275,13 +277,13 @@ presence.on("UpdateData", () => {
 									url: document.URL
 								}
 							];
-						} else if (document.location.pathname.includes("/pricing"))
+						} else if (pathname.includes("/pricing"))
 							presenceData.details = "Viewing pricing";
-						else if (document.location.pathname.includes("/enterprise"))
+						else if (pathname.includes("/enterprise"))
 							presenceData.details = "Viewing enterprise";
-						else if (document.location.pathname.includes("/contacts"))
+						else if (pathname.includes("/contacts"))
 							presenceData.details = "Contacting Crowdin";
-						else if (document.location.pathname.includes("/feature-request"))
+						else if (pathname.includes("/feature-request"))
 							presenceData.details = "Viewing feature requests";
 				}
 			}
