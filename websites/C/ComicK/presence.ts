@@ -48,14 +48,14 @@ presence.on("UpdateData", async () => {
 					url: href
 				},
 				{
-					label: "Check Description",
+					label: "Read Description",
 					url: href.split(/(.+)[\\/]/)[1]
 				}
 			];
 		} else {
 			const title = document.querySelector<HTMLHeadingElement>("h1");
 			if (title) {
-				presenceData.details = "Checking Description";
+				presenceData.details = "Reading Description";
 				presenceData.state = title.textContent;
 				if (image) {
 					presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 				}
 				presenceData.buttons = [
 					{
-						label: "Check Description",
+						label: "Read Description",
 						url: href
 					}
 				];
