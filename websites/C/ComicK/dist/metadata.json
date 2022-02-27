@@ -25,7 +25,7 @@
 	"settings": [
 		{
 			"id": "image",
-			"title": "Show Manga Cover",
+			"title": "Show Image",
 			"icon": "fad fa-images",
 			"value": true
 		},
