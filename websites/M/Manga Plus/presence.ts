@@ -11,18 +11,18 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp
 		},
 		{ pathname } = document.location,
-		MangaURL = document.querySelector<HTMLAnchorElement>(
+		mangaURL = document.querySelector<HTMLAnchorElement>(
 			"#app div.Navigation-module_detailContainer_1aDk8 > a"
 		),
-		MangaChapter = document.querySelector<HTMLParagraphElement>(
+		mangaChapter = document.querySelector<HTMLParagraphElement>(
 			"#app > div > div > div > div > div > div > p"
 		),
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	// So that the script would stop throwing errors when the navigator collapses
-	if (MangaURL?.href !== cacheMangaURL) cacheMangaURL = MangaURL.href;
-	if (MangaChapter?.textContent !== cacheMangaChapter)
-		cacheMangaChapter = MangaChapter.textContent;
+	if (mangaURL?.href !== cacheMangaURL) cacheMangaURL = mangaURL.href;
+	if (mangaChapter?.textContent !== cacheMangaChapter)
+		cacheMangaChapter = mangaChapter.textContent;
 
 	if (pathname.startsWith("/updates"))
 		presenceData.details = "Browsing lastest updates";
