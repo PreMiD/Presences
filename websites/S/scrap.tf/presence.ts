@@ -364,7 +364,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Viewing ${title}`;
 		} else {
 			presenceData.details = "Item Trading";
-			presenceData.state = "Viewing item pricelist");
+			presenceData.state = "Viewing item pricelist";
 			presenceData.smallImageKey = "items";
 		}
 	} else if (
