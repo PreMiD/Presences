@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/unusuals")) {
 			presenceData.state = "Trading with Unusuals";
 			presenceData.smallImageKey = "unusuals";
-		else if (document.location.pathname.includes("/incinerator"))
+		} else if (document.location.pathname.includes("/incinerator"))
 			presenceData.state = "Incinerating Items FOR FREE!";
 		else if (document.location.pathname.includes("/all"))
 			presenceData.state = "Choosing items from the entire backpack";
