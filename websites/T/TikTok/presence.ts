@@ -63,8 +63,8 @@ presence.on("UpdateData", async () => {
 		if (pageType === "video") {
 			//Video
 			const time = document
-				.querySelectorAll('[class*="-DivSeekBarTimeContainer"]')[0]
-				.innerHTML.split(`\/`);
+				.querySelectorAll(`[class*="-DivSeekBarTimeContainer"]`)[0]
+				.innerHTML.split(`/`);
 
 			delete presenceData.startTimestamp;
 			presenceData.details =
@@ -81,11 +81,12 @@ presence.on("UpdateData", async () => {
 				!document.querySelector(
 					"#app > div.tiktok-19fglm-DivBodyContainer.etsvyce0 > div.tiktok-7t2h2f-DivBrowserModeContainer.e1xqvjno0 > div.tiktok-5uccoo-DivVideoContainer.e1xqvjno27 > svg.tiktok-i8t918-SvgPlayIcon.e1xqvjno10"
 				)
-			)
+			) {
 				[, presenceData.endTimestamp] = presence.getTimestamps(
 					presence.timestampFromFormat(time[0]),
 					presence.timestampFromFormat(time[1])
 				);
+			}
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewTikTok,
