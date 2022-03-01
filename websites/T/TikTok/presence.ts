@@ -41,11 +41,30 @@ presence.on("UpdateData", async () => {
 		presenceData.state = state;
 	} else if (page.startsWith("@")) {
 		//User
-
+		if (document.querySelector("#BreadcrumbList")) {
+			presenceData.state = JSON.parse(
+				document.querySelector("#BreadcrumbList").innerHTML
+			).itemListElement[1].item.name.replace("| TikTok", "");
+		} else {
+			const id2 = document
+				.querySelector(
+					"#app > div.tiktok-ywuvyb-DivBodyContainer.etsvyce0 > div.tiktok-w4ewjk-DivShareLayoutV2.epodnl40 > div > div.tiktok-1g04lal-DivShareLayoutHeader-StyledDivShareLayoutHeaderV2.epodnl42 > div.tiktok-1gk89rh-DivShareInfo.e198b7gd2 > div.tiktok-1hdrv89-DivShareTitleContainer.e198b7gd3 > h2"
+				)
+				.textContent.trim();
+			presenceData.state = `@(${id2}) ${
+				JSON.parse(
+					document
+						.querySelector("#sigi-persisted-data")
+						.innerHTML.slice(0, -486)
+						.replace("window['SIGI_STATE']=", "")
+				).UserModule.users[id2].nickname
+			}`;
+		}
 		if (pageType === "video") {
 			//Video
-
-			const video = document.querySelector<HTMLVideoElement>(".video-player");
+			const time = document
+				.querySelectorAll('[class*="-DivSeekBarTimeContainer"]')[0]
+				.innerHTML.split(`\/`);
 
 			delete presenceData.startTimestamp;
 			presenceData.details =
@@ -53,13 +72,20 @@ presence.on("UpdateData", async () => {
 					?.firstElementChild?.textContent ??
 				document.querySelector(".tt-video-meta-caption")?.firstElementChild
 					?.textContent;
-			presenceData.state = `@${
-				document.querySelector(".user-username")?.textContent ??
-				document.querySelector(".author-uniqueId")?.textContent
-			}`;
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
-			if (!video.paused)
-				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+			presenceData.smallImageKey = document.querySelector(
+				"#app > div.tiktok-19fglm-DivBodyContainer.etsvyce0 > div.tiktok-7t2h2f-DivBrowserModeContainer.e1xqvjno0 > div.tiktok-5uccoo-DivVideoContainer.e1xqvjno27 > svg.tiktok-i8t918-SvgPlayIcon.e1xqvjno10"
+			)
+				? "pause"
+				: "play";
+			if (
+				!document.querySelector(
+					"#app > div.tiktok-19fglm-DivBodyContainer.etsvyce0 > div.tiktok-7t2h2f-DivBrowserModeContainer.e1xqvjno0 > div.tiktok-5uccoo-DivVideoContainer.e1xqvjno27 > svg.tiktok-i8t918-SvgPlayIcon.e1xqvjno10"
+				)
+			)
+				[, presenceData.endTimestamp] = presence.getTimestamps(
+					presence.timestampFromFormat(time[0]),
+					presence.timestampFromFormat(time[1])
+				);
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewTikTok,
@@ -74,9 +100,6 @@ presence.on("UpdateData", async () => {
 			//Live
 			delete presenceData.startTimestamp;
 			presenceData.details = document.querySelector(".live-title")?.textContent;
-			presenceData.state = `@${
-				document.querySelector(".user-uniqueId")?.textContent
-			}`;
 			presenceData.smallImageKey = "live";
 
 			presenceData.buttons = [
@@ -90,20 +113,7 @@ presence.on("UpdateData", async () => {
 				}
 			];
 		} else {
-			const id2 = document
-				.querySelector(
-					"#app > div.tiktok-ywuvyb-DivBodyContainer.etsvyce0 > div.tiktok-w4ewjk-DivShareLayoutV2.epodnl40 > div > div.tiktok-1g04lal-DivShareLayoutHeader-StyledDivShareLayoutHeaderV2.epodnl42 > div.tiktok-1gk89rh-DivShareInfo.e198b7gd2 > div.tiktok-1hdrv89-DivShareTitleContainer.e198b7gd3 > h2"
-				)
-				.textContent.trim();
-			presenceData.details = (await strings).viewProfile;
-			presenceData.state = `@(${id2}) ${
-				JSON.parse(
-					document
-						.querySelector("#sigi-persisted-data")
-						.innerHTML.slice(0, -486)
-						.replace("window['SIGI_STATE']=", "")
-				).UserModule.users[id2].nickname
-			}`;
+			presenceData.details = await strings.viewProfile;
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 				'meta[property="og:image"]'
 			).content;
