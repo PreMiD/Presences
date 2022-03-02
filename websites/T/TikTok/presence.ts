@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 		if (pageType === "video") {
 			//Video
 			const time = document
-				.querySelectorAll(`[class*="-DivSeekBarTimeContainer"]`)[0]
+				.querySelector('[class*="-DivSeekBarTimeContainer"]')
 				.innerHTML.split(`/`);
 
 			delete presenceData.startTimestamp;
