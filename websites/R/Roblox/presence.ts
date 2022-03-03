@@ -89,9 +89,7 @@ presence.on("UpdateData", async () => {
 						`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${
 							pathname.split("/")[2]
 						}&size=420x420&format=Png`
-					).then(function (response) {
-						return response.json();
-					});
+					).then(response => response.json());;
 					profileImg = req.data[0].imageUrl;
 					profileId = Id;
 				}
@@ -210,9 +208,7 @@ presence.on("UpdateData", async () => {
 						`https://thumbnails.roblox.com/v1/places/gameicons?placeIds=${
 							pathname.split("/")[2]
 						}&size=512x512&format=Png`
-					).then(function (response) {
-						return response.json();
-					});
+					).then(response => response.json());
 					gameImage = req.data[0].imageUrl;
 					gameId = Id;
 				}
@@ -410,8 +406,8 @@ presence.on("UpdateData", async () => {
 					);
 
 				presenceData.details = "Looking at Asset:";
-				(presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg"),
-					(presenceData.state = itemName.textContent);
+				presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
+				presenceData.state = itemName.textContent;
 
 				if (buttons) {
 					presenceData.buttons = [
@@ -430,8 +426,8 @@ presence.on("UpdateData", async () => {
 					);
 
 				presenceData.details = "Looking at Gamepass:";
-				(presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg"),
-					(presenceData.state = itemName.textContent);
+				presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
+				presenceData.state = itemName.textContent;
 
 				if (buttons) {
 					presenceData.buttons = [
@@ -624,9 +620,7 @@ presence.on("UpdateData", async () => {
 					];
 					const req = await fetch(
 						`https://users.roblox.com/v1/users/${Id}`
-					).then(function (response) {
-						return response.json();
-					});
+					).then(response => response.json());
 					talentUserData = [Id, req.name ? req.name : talentUserData[1]];
 				}
 				if (!talentUserData[1]) presenceData.state = "Browsing Profile";
