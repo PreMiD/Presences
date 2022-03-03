@@ -39,7 +39,6 @@ presence.on("UpdateData", () => {
 			presenceData.state = `${
 				pathname.split("/").filter(elm => elm !== "")[1]
 			}${window.location.hash ? ` - ${window.location.hash.slice(1)}` : ""}`;
-			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 		}
 	} else if (pathname.startsWith("/notifications"))
 		presenceData.details = "Viewing notifications";
