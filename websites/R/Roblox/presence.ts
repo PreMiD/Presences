@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 						`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${
 							pathname.split("/")[2]
 						}&size=420x420&format=Png`
-					).then(response => response.json());;
+					).then(response => response.json());
 					profileImg = req.data[0].imageUrl;
 					profileId = Id;
 				}
