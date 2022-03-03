@@ -50,11 +50,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = `${
 			document.querySelector<HTMLInputElement>(
 				"input[data-cy='new-repl-language-input']"
-			).value.length === 0
-				? "No languages chosen"
-				: document.querySelector<HTMLInputElement>(
-						"input[data-cy='new-repl-language-input']"
-				  ).value
+			).value || "No languages chosen"
 		}`;
 	} else if (pathname.startsWith("/repls")) {
 		const repls = document.querySelector<HTMLDivElement>(
