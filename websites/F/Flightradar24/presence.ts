@@ -76,10 +76,13 @@ presence.on("UpdateData", async () => {
 								presenceData.details = `Viewing ${
 									document.querySelector(".airport-name").textContent
 								}`;
-								presenceData.state =
-									document.querySelector<HTMLAnchorElement>(
-										".btn.active"
-									).innerText;
+								presenceData.state = document.querySelector<HTMLAnchorElement>(
+									".btn.active"
+								).childNodes[2]
+									? document.querySelector<HTMLAnchorElement>(".btn.active")
+											.childNodes[2].textContent
+									: document.querySelector<HTMLAnchorElement>(".btn.active")
+											.textContent;
 								presenceData.buttons = [
 									{
 										label: "View Airport",
@@ -93,10 +96,13 @@ presence.on("UpdateData", async () => {
 								presenceData.details = `Viewing ${
 									document.querySelector(".airline-name").textContent
 								}`;
-								presenceData.state =
-									document.querySelector<HTMLAnchorElement>(
-										".btn.active"
-									).innerText;
+								presenceData.state = document.querySelector<HTMLAnchorElement>(
+									".btn.active"
+								).childNodes[2]
+									? document.querySelector<HTMLAnchorElement>(".btn.active")
+											.childNodes[2].textContent
+									: document.querySelector<HTMLAnchorElement>(".btn.active")
+											.textContent;
 								presenceData.buttons = [
 									{
 										label: "View Airline",
@@ -125,19 +131,16 @@ presence.on("UpdateData", async () => {
 										"Flight history for aircraft -",
 										"Aircraft"
 									)}`;
-								if (images) {
-									if (document.querySelector(".img-responsive")) {
-										if (
-											document.querySelector<HTMLImageElement>(
-												".img-responsive"
-											).src !== ""
-										) {
-											presenceData.largeImageKey =
-												document.querySelector<HTMLImageElement>(
-													".img-responsive"
-												).src;
-										}
-									}
+								if (
+									images &&
+									document.querySelector(".img-responsive") &&
+									document.querySelector<HTMLImageElement>(".img-responsive")
+										.src !== ""
+								) {
+									presenceData.largeImageKey =
+										document.querySelector<HTMLImageElement>(
+											".img-responsive"
+										).src;
 								}
 								presenceData.buttons = [
 									{
@@ -172,19 +175,16 @@ presence.on("UpdateData", async () => {
 										"Flight history for aircraft -",
 										"Aircraft"
 									)}`;
-								if (images) {
-									if (document.querySelector(".img-responsive")) {
-										if (
-											document.querySelector<HTMLImageElement>(
-												".img-responsive"
-											).src !== ""
-										) {
-											presenceData.largeImageKey =
-												document.querySelector<HTMLImageElement>(
-													".img-responsive"
-												).src;
-										}
-									}
+								if (
+									images &&
+									document.querySelector(".img-responsive") &&
+									document.querySelector<HTMLImageElement>(".img-responsive")
+										.src !== ""
+								) {
+									presenceData.largeImageKey =
+										document.querySelector<HTMLImageElement>(
+											".img-responsive"
+										).src;
 								}
 								presenceData.buttons = [
 									{
@@ -271,122 +271,137 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Viewing App Integration";
 					break;
 				case "blog":
-					if (document.location.pathname === "/blog/")
-						presenceData.details = "Browsing Blog Posts";
-					else if (document.location.pathname === "/blog/newsletter/")
-						presenceData.details = "Viewing Newsletter";
-					else if (document.location.pathname === "/blog/avtalk-podcast/")
-						presenceData.details = "Viewing Podcast";
-					else if (document.querySelector("iframe.blubrryplayer")) {
-						[presenceData.details, presenceData.state] = document
-							.querySelector(".elementor-heading-title.elementor-size-default")
-							.textContent.split(":");
-						if (player.isPlaying) {
-							presenceData.smallImageKey = "playing";
-							presenceData.smallImageText = "Playing";
-							presenceData.endTimestamp =
-								Math.floor(Date.now() / 1000) +
-								(presence.timestampFromFormat(player.total) -
-									presence.timestampFromFormat(player.elapsed));
-						} else {
-							presenceData.smallImageKey = "paused";
-							presenceData.smallImageText = "Paused";
+					switch (document.location.pathname) {
+						case "/blog/": {
+							presenceData.details = "Browsing Blog Posts";
+							break;
 						}
-					} else if (
-						document.querySelector(
-							"h1.elementor-heading-title.elementor-size-default > i.fas.fa-video"
-						)
-					) {
-						let timestamps: number[];
-						if (video.duration !== 0) {
-							timestamps = presence.getTimestamps(
-								video.currentTime,
-								video.duration
-							);
-						} else if (document.querySelector("video")) {
-							timestamps = presence.getTimestampsfromMedia(
-								document.querySelector<HTMLMediaElement>("video")
-							);
-						} else {
-							presenceData.details = "Viewing Blog Post";
-							presenceData.state = document.querySelector(
-								"h1.elementor-heading-title.elementor-size-default"
-							).textContent;
-							presenceData.buttons = [
-								{
-									label: "View Page",
-									url: document.location.href
-								}
-							];
+						case "/blog/newsletter/": {
+							presenceData.details = "Viewing Newsletter";
+							break;
 						}
-						presenceData.details = "Watching Video";
-						presenceData.state = document
-							.querySelector(
-								"h1.elementor-heading-title.elementor-size-default"
-							)
-							.textContent.replace("Video: ", "");
-						if (video.duration !== 0) {
-							presenceData.buttons = [
-								{
-									label: "View Page",
-									url: document.location.href
-								},
-								{
-									label: "Watch Video",
-									url: `https://www.youtube.com/watch?v=${
-										document
-											.querySelector<HTMLVideoElement>("iframe.elementor-video")
-											.src.split("/")[4]
-											.split("?")[0]
-									}`
-								}
-							];
-						} else if (document.querySelector("video")) {
-							presenceData.buttons = [
-								{
-									label: "View Page",
-									url: document.location.href
-								},
-								{
-									label: "Watch Video",
-									url: document.querySelector<HTMLMetaElement>(
-										"meta[itemprop='url']"
-									).content
-								}
-							];
+						case "/blog/avtalk-podcast/": {
+							presenceData.details = "Viewing Podcast";
+							break;
 						}
-						if (video.duration !== 0) {
-							if (video.paused) {
-								presenceData.smallImageKey = "paused";
-								presenceData.smallImageText = "Paused";
+						default:
+							if (document.querySelector("iframe.blubrryplayer")) {
+								[presenceData.details, presenceData.state] = document
+									.querySelector(
+										".elementor-heading-title.elementor-size-default"
+									)
+									.textContent.split(":");
+								if (player.isPlaying) {
+									presenceData.smallImageKey = "playing";
+									presenceData.smallImageText = "Playing";
+									presenceData.endTimestamp =
+										Math.floor(Date.now() / 1000) +
+										(presence.timestampFromFormat(player.total) -
+											presence.timestampFromFormat(player.elapsed));
+								} else {
+									presenceData.smallImageKey = "paused";
+									presenceData.smallImageText = "Paused";
+								}
+							} else if (
+								document.querySelector(
+									"h1.elementor-heading-title.elementor-size-default > i.fas.fa-video"
+								)
+							) {
+								let timestamps: number[];
+								if (video.duration !== 0) {
+									timestamps = presence.getTimestamps(
+										video.currentTime,
+										video.duration
+									);
+								} else if (document.querySelector("video")) {
+									timestamps = presence.getTimestampsfromMedia(
+										document.querySelector<HTMLMediaElement>("video")
+									);
+								} else {
+									presenceData.details = "Viewing Blog Post";
+									presenceData.state = document.querySelector(
+										"h1.elementor-heading-title.elementor-size-default"
+									).textContent;
+									presenceData.buttons = [
+										{
+											label: "View Page",
+											url: document.location.href
+										}
+									];
+								}
+								presenceData.details = "Watching Video";
+								presenceData.state = document
+									.querySelector(
+										"h1.elementor-heading-title.elementor-size-default"
+									)
+									.textContent.replace("Video: ", "");
+								if (video.duration !== 0) {
+									presenceData.buttons = [
+										{
+											label: "View Page",
+											url: document.location.href
+										},
+										{
+											label: "Watch Video",
+											url: `https://www.youtube.com/watch?v=${
+												document
+													.querySelector<HTMLVideoElement>(
+														"iframe.elementor-video"
+													)
+													.src.split("/")[4]
+													.split("?")[0]
+											}`
+										}
+									];
+								} else if (document.querySelector("video")) {
+									presenceData.buttons = [
+										{
+											label: "View Page",
+											url: document.location.href
+										},
+										{
+											label: "Watch Video",
+											url: document.querySelector<HTMLMetaElement>(
+												"meta[itemprop='url']"
+											).content
+										}
+									];
+								}
+								if (video.duration !== 0) {
+									if (video.paused) {
+										presenceData.smallImageKey = "paused";
+										presenceData.smallImageText = "Paused";
+									} else {
+										presenceData.smallImageKey = "playing";
+										presenceData.smallImageText = "Playing";
+										presenceData.startTimestamp = timestamps[0];
+										presenceData.endTimestamp = timestamps[1];
+									}
+								} else if (document.querySelector("video")) {
+									if (
+										document.querySelector<HTMLMediaElement>("video").paused
+									) {
+										presenceData.smallImageKey = "paused";
+										presenceData.smallImageText = "Paused";
+									} else {
+										presenceData.smallImageKey = "playing";
+										presenceData.smallImageText = "Playing";
+										presenceData.startTimestamp = timestamps[0];
+										presenceData.endTimestamp = timestamps[1];
+									}
+								}
 							} else {
-								presenceData.smallImageKey = "playing";
-								presenceData.smallImageText = "Playing";
-								presenceData.startTimestamp = timestamps[0];
-								presenceData.endTimestamp = timestamps[1];
+								presenceData.details = "Viewing Blog Post";
+								presenceData.state = document.querySelector(
+									"h1.elementor-heading-title.elementor-size-default"
+								).textContent;
+								presenceData.buttons = [
+									{
+										label: "View Page",
+										url: document.location.href
+									}
+								];
 							}
-						} else if (document.querySelector("video")) {
-							if (document.querySelector<HTMLMediaElement>("video").paused) {
-								presenceData.smallImageKey = "paused";
-								presenceData.smallImageText = "Paused";
-							} else {
-								presenceData.smallImageKey = "playing";
-								presenceData.smallImageText = "Playing";
-								presenceData.startTimestamp = timestamps[0];
-								presenceData.endTimestamp = timestamps[1];
-							}
-						}
-					} else {
-						presenceData.details = "Viewing Blog Post";
-						presenceData.state = document.querySelector(
-							"h1.elementor-heading-title.elementor-size-default"
-						).textContent;
-						presenceData.buttons = [
-							{
-								label: "View Page",
-								url: document.location.href
-							}
-						];
 					}
 					break;
 
@@ -511,18 +526,17 @@ presence.on("UpdateData", async () => {
 									presenceData.endTimestamp = leftTimestamp;
 								} else presenceData.endTimestamp = leftTimestamp;
 							}
-							if (images) {
-								if (
+							if (
+								images &&
+								document.querySelector<HTMLImageElement>(
+									".pnl-component.aircraft-image > a > img"
+								).src !==
+									"https://www.flightradar24.com/static/images/jp-promo.jpg"
+							) {
+								presenceData.largeImageKey =
 									document.querySelector<HTMLImageElement>(
 										".pnl-component.aircraft-image > a > img"
-									).src !==
-									"https://www.flightradar24.com/static/images/jp-promo.jpg"
-								) {
-									presenceData.largeImageKey =
-										document.querySelector<HTMLImageElement>(
-											".pnl-component.aircraft-image > a > img"
-										).src;
-								}
+									).src;
 							}
 							presenceData.buttons = [
 								{
@@ -633,12 +647,13 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Unsupported Page";
 				presenceData.state = document.location.pathname;
 			}
-			if (document.location.pathname.split("/")[1] === "search") {
-				if (document.querySelector(".search-controls-keywords")) {
-					presenceData.state = document.querySelector(
-						".search-controls-keywords"
-					).lastChild.textContent;
-				}
+			if (
+				document.location.pathname.split("/")[1] === "search" &&
+				document.querySelector(".search-controls-keywords")
+			) {
+				presenceData.state = document.querySelector(
+					".search-controls-keywords"
+				).lastChild.textContent;
 			}
 			break;
 		case "my":
