@@ -72,11 +72,10 @@ presence.on("UpdateData", async () => {
 			);
 		presenceData.details = "Visiting a profile";
 		presenceData.state = `[${perm.textContent}] ${title.textContent}`;
-		presenceData.largeImageKey = (
-			document.querySelector(
+		presenceData.largeImageKey =
+			document.querySelector<HTMLImageElement>(
 				"#dynamic-height-slate > div > div > div.col-md-9 > div > div > div.profile-upper > div.rev-banking-background.profile-background > div > div.profile-avatar.col-md-3 > div > img"
-			) as HTMLImageElement
-		).src;
+			).src;
 	} else if (document.location.pathname.includes("/terms")) {
 		const title = document.querySelector(
 			"#dynamic-height-slate > div > div.panel-body > p:nth-child(1) > small"
