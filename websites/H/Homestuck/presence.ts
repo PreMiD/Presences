@@ -8,8 +8,8 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		pathStr = document.location.pathname,
-		pathArr = pathStr.split("/");
+		{ pathname } = document.location,
+		pathArr = pathname.split("/");
 	switch (pathArr[1]) {
 		case "":
 			presenceData.details = "Viewing home page";
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathStr}`
+					url: `https://www.homestuck.com${pathname}`
 				}
 			];
 			break;
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathStr}`
+					url: `https://www.homestuck.com${pathname}`
 				}
 			];
 			break;
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathStr}`
+					url: `https://www.homestuck.com${pathname}`
 				}
 			];
 			break;
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathStr}`
+					url: `https://www.homestuck.com${pathname}`
 				}
 			];
 			break;
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathStr}`
+					url: `https://www.homestuck.com${pathname}`
 				}
 			];
 			break;
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathStr}`
+					url: `https://www.homestuck.com${pathname}`
 				}
 			];
 			break;
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathStr}`
+					url: `https://www.homestuck.com${pathname}`
 				}
 			];
 			break;
@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Read Along",
-								url: `https://www.homestuck.com${pathStr}`
+								url: `https://www.homestuck.com${pathname}`
 							}
 						];
 					}
@@ -156,7 +156,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Read Along",
-							url: `https://www.homestuck.com${pathStr}`
+							url: `https://www.homestuck.com${pathname}`
 						}
 					];
 					break;
@@ -168,7 +168,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Read Along",
-							url: `https://www.homestuck.com${pathStr}`
+							url: `https://www.homestuck.com${pathname}`
 						}
 					];
 					break;
