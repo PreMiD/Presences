@@ -38,7 +38,7 @@
 		"debug": "^4.3.2",
 		"enquirer": "^2.3.6",
 		"eslint": "^8.10.0",
-		"eslint-config-prettier": "^8.4.0",
+		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-eqeqeq-fix": "^1.0.3",
 		"eslint-plugin-no-one-time-vars": "^2.2.0",
 		"eslint-plugin-prettier": "^4.0.0",
