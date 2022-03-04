@@ -53,21 +53,9 @@ presence.on("UpdateData", async () => {
 					?.firstElementChild?.textContent ??
 				document.querySelector(".tt-video-meta-caption")?.firstElementChild
 					?.textContent;
-			presenceData.smallImageKey = document.querySelector(
-				"#app > div.tiktok-19fglm-DivBodyContainer.etsvyce0 > div.tiktok-7t2h2f-DivBrowserModeContainer.e1xqvjno0 > div.tiktok-5uccoo-DivVideoContainer.e1xqvjno27 > svg.tiktok-i8t918-SvgPlayIcon.e1xqvjno10"
-			)
-				? "pause"
-				: "play";
-			if (
-				!document.querySelector(
-					"#app > div.tiktok-19fglm-DivBodyContainer.etsvyce0 > div.tiktok-7t2h2f-DivBrowserModeContainer.e1xqvjno0 > div.tiktok-5uccoo-DivVideoContainer.e1xqvjno27 > svg.tiktok-i8t918-SvgPlayIcon.e1xqvjno10"
-				)
-			) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					presence.timestampFromFormat(time[0]),
-					presence.timestampFromFormat(time[1])
-				);
-			}
+			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			if (!video.paused)
+				presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewTikTok,
