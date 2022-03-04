@@ -43,17 +43,28 @@ presence.on("UpdateData", async () => {
 		//User
 		if (pageType === "video") {
 			//Video
-			const time = document
-				.querySelector('[class*="-DivSeekBarTimeContainer"]')
-				.innerHTML.split("/");
+			const video = document.querySelector<HTMLVideoElement>("video");
 
 			delete presenceData.startTimestamp;
 			presenceData.details =
-				document.querySelector(".video-meta-title:nth-child(1)")
-					?.firstElementChild?.textContent ??
-				document.querySelector(".tt-video-meta-caption")?.firstElementChild
-					?.textContent;
+				document.querySelector("[data-e2e=video-desc]")?.textContent ??
+				document.querySelector("[data-e2e=browse-video-desc]").textContent;
+			presenceData.state = `@${
+				document.querySelector("[data-e2e=video-author-uniqueid]")
+					?.textContent ??
+				document.querySelector("[data-e2e=browse-username]")?.textContent
+			}
+			(${
+				document.querySelector("[data-e2e=video-author-nickname]")
+					?.childNodes[0]?.textContent ??
+				document.querySelector("[data-e2e=browse-nickname]")?.textContent
+			})`;
 			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.largeImageKey = document
+				.querySelector(
+					"#app > div.tiktok-19fglm-DivBodyContainer.etsvyce0 > div.tiktok-yp78ys-DivMainContainer.erck9ax0 > div:nth-child(1) > div:nth-child(1) > a > div > span > img"
+				)
+				?.getAttribute("src");
 			if (!video.paused)
 				presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
 			presenceData.buttons = [
@@ -69,7 +80,16 @@ presence.on("UpdateData", async () => {
 		} else if (pageType === "live") {
 			//Live
 			delete presenceData.startTimestamp;
-			presenceData.details = document.querySelector(".live-title")?.textContent;
+			presenceData.details = document.querySelector(
+				"[data-e2e=user-profile-live-title]"
+			)?.textContent;
+			presenceData.state = `@${
+				document.querySelector("[data-e2e=user-profile-uid]").textContent
+			}
+			(${
+				document.querySelector("[data-e2e=user-profile-nickname]").childNodes[0]
+					.textContent
+			})`;
 			presenceData.smallImageKey = "live";
 
 			presenceData.buttons = [
@@ -84,6 +104,10 @@ presence.on("UpdateData", async () => {
 			];
 		} else {
 			presenceData.details = await strings.viewProfile;
+			presenceData.state = `@${
+				document.querySelector("[data-e2e=user-title]").textContent
+			} (${document.querySelector("[data-e2e=user-subtitle]").textContent})`;
+
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 				'meta[property="og:image"]'
 			).content;
@@ -101,6 +125,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = state;
 		presenceData.smallImageText = (await strings).browse;
 		presenceData.smallImageKey = "reading";
+	} else if (page.includes("live")) {
+		presenceData.details = document.querySelector(
+			"[data-e2e=broadcast-title]"
+		).textContent;
+		presenceData.state = `@${
+			document.querySelector("[data-e2e=anchor-nickname]").textContent
+		}`;
 	}
 
 	const buttons = await presence.getSetting<boolean>("buttons");
