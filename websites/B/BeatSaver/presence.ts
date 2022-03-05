@@ -54,9 +54,10 @@ presence.on("UpdateData", async () => {
 		if (preview.playing) {
 			presenceData.smallImageKey = "playing";
 			if (preview.duration) {
-				const currentTime = presence.timestampFromFormat(preview.currentTime),
-					duration = presence.timestampFromFormat(preview.duration),
-					timestamps = presence.getTimestamps(currentTime, duration);
+				const timestamps = presence.getTimestamps(
+					presence.timestampFromFormat(preview.currentTime),
+					presence.timestampFromFormat(preview.duration)
+				);
 				presenceData.endTimestamp = timestamps[1];
 			}
 			presenceData.smallImageText = "Playing";
