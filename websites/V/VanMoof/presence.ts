@@ -77,6 +77,14 @@ presence.on("UpdateData", async function () {
 
 					if (document.querySelector("#chakra-modal-register-bike"))
 						presenceData.state = "Registering Bike";
+					else if (document.querySelector("#remove-bike-ownership")) {
+						const bikeName =
+							document.querySelectorAll(".m-info__top-title")[1]?.textContent;
+
+						presenceData.state = `Managing Bike${
+							bikeName ? `: ${bikeName}` : ""
+						}`;
+					}
 
 					break;
 
