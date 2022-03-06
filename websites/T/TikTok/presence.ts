@@ -2,8 +2,9 @@ const presence = new Presence({
 		clientId: "809093093600133165"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
+let oldLang: string;
 async function getStrings() {
+	oldLang = await presence.getSetting<string>("lang").catch(() => "en");
 	return presence.getStrings(
 		{
 			browse: "general.browsing",
@@ -17,9 +18,8 @@ async function getStrings() {
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
-
-let strings: Awaited<ReturnType<typeof getStrings>>,
-	oldLang: string = null;
+const newStrings = getStrings();
+let strings: Awaited<typeof newStrings>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -28,21 +28,18 @@ presence.on("UpdateData", async () => {
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		[, page, pageType] = location.pathname.split("/");
-
-	if (oldLang !== newLang || !strings) {
+	strings ??= await newStrings;
+	if (oldLang !== newLang) {
 		oldLang = newLang;
-		strings = await getStrings();
 	}
 
 	if (!page || page === "foryou") {
-		const [detail, state] = (await strings).forYou.split("{0}");
+		const [detail, state] = strings.forYou.split("{0}");
 
 		presenceData.details = detail;
 		presenceData.state = state;
 	} else if (page.startsWith("@")) {
-		//User
 		if (pageType === "video") {
-			//Video
 			const video = document.querySelector<HTMLVideoElement>("video");
 
 			delete presenceData.startTimestamp;
@@ -78,7 +75,6 @@ presence.on("UpdateData", async () => {
 				}
 			];
 		} else if (pageType === "live") {
-			//Live
 			delete presenceData.startTimestamp;
 			presenceData.details = document.querySelector(
 				"[data-e2e=user-profile-live-title]"
