@@ -44,9 +44,6 @@ presence.on("UpdateData", async function () {
 						presenceData.state = "FAQ";
 
 						break;
-
-					default:
-						break;
 				}
 			} else {
 				switch (urlpath[3]) {
@@ -60,9 +57,6 @@ presence.on("UpdateData", async function () {
 								"Unknown";
 						}
 
-						break;
-
-					default:
 						break;
 				}
 			}
@@ -104,9 +98,6 @@ presence.on("UpdateData", async function () {
 				case "profile":
 					presenceData.state = "Profile";
 
-					break;
-
-				default:
 					break;
 			}
 
@@ -272,9 +263,6 @@ presence.on("UpdateData", async function () {
 				case "certified-partner":
 					presenceData.details = "About Certified Partnerships";
 
-					break;
-
-				default:
 					break;
 			}
 
