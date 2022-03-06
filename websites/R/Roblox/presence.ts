@@ -1,7 +1,7 @@
 const presence = new Presence({
 		clientId: "612416330003382314"
 	}),
-	browsingTimestampt = Math.floor(Date.now() / 1000),
+	browsingTimestamp = Math.floor(Date.now() / 1000),
 	dfLgImage = "https://i.imgur.com/76AO77L.png";
 let profileName,
 	profileId: string,
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			details: "Unknown page",
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestampt
+			startTimestamp: browsingTimestamp
 		},
 		{ pathname, hostname, href } = document.location,
 		gameName = document.querySelector<HTMLHeadingElement>(
