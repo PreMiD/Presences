@@ -80,23 +80,10 @@ presence.on("UpdateData", async function () {
 
 					break;
 
-				case "orders":
-					presenceData.state = "Orders";
-
-					break;
-
-				case "rewards":
-					presenceData.state = "Rewards";
-
-					break;
-
-				case "help":
-					presenceData.state = "Help";
-
-					break;
-
-				case "profile":
-					presenceData.state = "Profile";
+				case "orders" || "rewards" || "help" || "profile":
+					presenceData.state = `${urlpath[3][0].toUpperCase()}${urlpath[3].slice(
+						1
+					)}`;
 
 					break;
 			}
@@ -183,46 +170,20 @@ presence.on("UpdateData", async function () {
 
 					break;
 
-				case "s3":
+				case "s3" || "x3" || "vanmoof-v":
 					presenceData.details = "Viewing E-Bike";
-					presenceData.state = "VanMoof S3";
-					presenceData.largeImageKey = "vanmoof_s3";
+					presenceData.state = `VanMoof ${urlpath[2]
+						.split("-")
+						.pop()
+						.toUpperCase()}`;
+					presenceData.largeImageKey = `vanmoof_${urlpath[2].split("-").pop()}`;
 					presenceData.smallImageKey = "logo";
 					presenceData.buttons = [
 						{
 							label: "View on VanMoof",
-							url: "https://www.vanmoof.com/s3/"
+							url: `https://www.vanmoof.com/${urlpath[2]}/`
 						}
 					];
-
-					break;
-
-				case "x3":
-					presenceData.details = "Viewing E-Bike";
-					presenceData.state = "VanMoof X3";
-					presenceData.largeImageKey = "vanmoof_x3";
-					presenceData.smallImageKey = "logo";
-					presenceData.buttons = [
-						{
-							label: "View on VanMoof",
-							url: "https://www.vanmoof.com/x3/"
-						}
-					];
-
-					break;
-
-				case "vanmoof-v":
-					presenceData.details = "Viewing E-Bike";
-					presenceData.state = "VanMoof V";
-					presenceData.largeImageKey = "vanmoof_v";
-					presenceData.smallImageKey = "logo";
-					presenceData.buttons = [
-						{
-							label: "View on VanMoof",
-							url: "https://www.vanmoof.com/vanmoof-v/"
-						}
-					];
-
 					break;
 
 				case "test-rides":
