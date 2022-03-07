@@ -88,7 +88,10 @@ presence.on("UpdateData", async function () {
 
 					break;
 
-				case "orders" || "rewards" || "help" || "profile":
+				case "orders":
+				case "rewards":
+				case "help":
+				case "profile":
 					presenceData.state = `${urlpath[3][0].toUpperCase()}${urlpath[3].slice(
 						1
 					)}`;
@@ -178,7 +181,9 @@ presence.on("UpdateData", async function () {
 
 					break;
 
-				case "s3" || "x3" || "vanmoof-v":
+				case "s3":
+				case "x3":
+				case "vanmoof-v":
 					presenceData.details = "Viewing E-Bike";
 					presenceData.state = `VanMoof ${urlpath[2]
 						.split("-")
