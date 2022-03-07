@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 			);
 
 		if (presenceData.endTimestamp === Infinity)
-			presenceData.smallImageKey = "https://i.imgur.com/Es4p1V5.png";
+			presenceData.smallImageKey = "premiere-live";
 
 		if (paused || !timestamps) {
 			delete presenceData.startTimestamp;
