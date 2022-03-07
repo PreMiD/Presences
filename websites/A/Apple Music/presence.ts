@@ -54,16 +54,14 @@ presence.on("UpdateData", async () => {
 				Number(timestamp.ariaValueMax)
 			);
 
-		if (presenceData.endTimestamp === Infinity) {
+		if (presenceData.endTimestamp === Infinity)
 			presenceData.smallImageKey = "https://i.imgur.com/Es4p1V5.png";
-		}
+
 		if (paused || !timestamps) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
 		presence.setActivity(presenceData);
-	} else {
-		if (presence.getExtensionVersion() < 224) presence.setActivity();
-		else presence.clearActivity();
-	}
+	} else if (presence.getExtensionVersion() < 224) presence.setActivity();
+	else presence.clearActivity();
 });
