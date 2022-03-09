@@ -46,6 +46,11 @@ presence.on("UpdateData", async function () {
 						break;
 				}
 			} else {
+				const hash = window.location.hash.replace("#", "");
+
+				if (urlpath[3].startsWith("configure-"))
+					return (presenceData.state = "Configuring");
+
 				switch (urlpath[3]) {
 					case "accessories":
 						presenceData.state = "Accessories";
@@ -56,6 +61,14 @@ presence.on("UpdateData", async function () {
 								document.querySelector("h1.product-title")?.textContent ??
 								"Unknown";
 						}
+
+						break;
+
+					case "checkout":
+						if (hash) {
+							presenceData.details = "Shop - Checkout";
+							presenceData.state = hash[0].toUpperCase() + hash.slice(1);
+						} else presenceData.state = "Checkout";
 
 						break;
 				}
@@ -174,6 +187,7 @@ presence.on("UpdateData", async function () {
 		default:
 			switch (urlpath[2]) {
 				case "electric-bikes":
+				case "ebikes":
 					presenceData.details = "Viewing E-Bikes";
 
 					if (urlpath[3] === "powerbank")
