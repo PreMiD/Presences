@@ -160,34 +160,28 @@ presence.on("UpdateData", async () => {
 				if (
 					document.querySelector(
 						"#content > div.user_head.g_rblock > div.right > p.name > span"
-					).textContent ==
+					).textContent ===
 					document.querySelector("#header > div > a:nth-child(4) > b")
 						.textContent
 				) {
 					const a = document.querySelector(
-							"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
-						).textContent,
+						"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
+					).textContent.replace("#", ""),
 						b = document.querySelector(
 							"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank"
-						).textContent,
+						).textContent.replace("#", ""),
 						c = document.querySelector(
 							"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank"
-						).textContent,
+						).textContent.replace("#", ""),
 						d = document.querySelector(
 							"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
-						).textContent,
-						a1: number = +a.replace("#", ""),
-						b1: number = +b.replace("#", ""),
-						c1: number = +c.replace("#", ""),
-						d1: number = +d.replace("#", ""),
-						Top = Math.min(a1, b1, c1, d1);
+							).textContent.replace("#", "");
 					presenceData.details = `User: ${
 						document.querySelector(
 							"#content > div.user_head.g_rblock > div.right > p.name > span"
 						).textContent
 					}`;
-					presenceData.state = `Best Rank: ${Top}`;
-
+					presenceData.state = `Best Rank: ${Math.min(Number(a), Number(b), Number(c), Number(d))}`;
 					presenceData.smallImageKey = "user";
 					presenceData.buttons = [
 						{
