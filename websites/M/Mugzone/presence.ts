@@ -164,24 +164,37 @@ presence.on("UpdateData", async () => {
 					document.querySelector("#header > div > a:nth-child(4) > b")
 						.textContent
 				) {
-					const a = document.querySelector(
-						"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
-					).textContent.replace("#", ""),
-						b = document.querySelector(
-							"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank"
-						).textContent.replace("#", ""),
-						c = document.querySelector(
-							"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank"
-						).textContent.replace("#", ""),
-						d = document.querySelector(
-							"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
-							).textContent.replace("#", "");
+					const a = document
+							.querySelector(
+								"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
+							)
+							.textContent.replace("#", ""),
+						b = document
+							.querySelector(
+								"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank"
+							)
+							.textContent.replace("#", ""),
+						c = document
+							.querySelector(
+								"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank"
+							)
+							.textContent.replace("#", ""),
+						d = document
+							.querySelector(
+								"#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
+							)
+							.textContent.replace("#", "");
 					presenceData.details = `User: ${
 						document.querySelector(
 							"#content > div.user_head.g_rblock > div.right > p.name > span"
 						).textContent
 					}`;
-					presenceData.state = `Best Rank: ${Math.min(Number(a), Number(b), Number(c), Number(d))}`;
+					presenceData.state = `Best Rank: ${Math.min(
+						Number(a),
+						Number(b),
+						Number(c),
+						Number(d)
+					)}`;
 					presenceData.smallImageKey = "user";
 					presenceData.buttons = [
 						{
