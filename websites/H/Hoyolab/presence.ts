@@ -1,96 +1,94 @@
 const presence = new Presence({
-    clientId: "836534947170353173"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "836534947170353173"
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: browsingStamp
-    },
-    pathname = document.location.pathname;
-  if (pathname === "/genshin/") data.details = "Viewing the Homepage";
-  else if (pathname.endsWith("/home/1")) {
-    switch (document.location?.search?.substr(6)) {
-      case "create":
-        data.details = "Viewing tavern page";
-        data.state = "New";
-        break;
-      case "reply":
-        data.details = "Viewing tavern page";
-        data.state = "New replies";
-        break;
-      case "2":
-        data.details = "Viewing tavern page";
-        data.state = "Featured";
-        break;
-      default:
-        data.details = "Viewing tavern page";
-        data.state = "Hot";
-    }
-  } else if (pathname.endsWith("/home/3")) {
-    switch (document.location?.search?.substr(6)) {
-      case "1":
-        data.details = "Viewing official page";
-        data.state = "Notices";
-        break;
-      case "3":
-        data.details = "Viewing official page";
-        data.state = "Info";
-        break;
-      case "contribution":
-        data.details = "Viewing official page";
-        data.state = "Submission events";
-        break;
-      default:
-        data.details = "Viewing official page";
-        data.state = "Events";
-    }
-  } else if (pathname.endsWith("/home/2")) {
-    switch (document.location?.search?.substr(6)) {
-      case "create":
-        data.details = "Viewing billboards page";
-        data.state = "New";
-        break;
-      case "reply":
-        data.details = "Viewing billboards page";
-        data.state = "New replies";
-        break;
-      case "2":
-        data.details = "Viewing billboards page";
-        data.state = "Featured";
-        break;
-      default:
-        data.details = "Viewing billboards page";
-        data.state = "Hot";
-    }
-  } else if (pathname.startsWith("/genshin/article/")) {
-    const title = document.querySelector(
-        ".mhy-article-page__title > h1"
-      ).textContent,
-      author = document.querySelector(
-        ".mhy-article-page-author > .mhy-user-card__info > a > span"
-      ).innerHTML,
-      link = window.location.href;
-
-    data.details = title;
-    data.state = "by: " + author;
-    data.buttons = [{ label: "Visit Article", url: link }];
-  } else if (pathname.endsWith("/topic")) {
-    data.details = "Browsing topics";
-  } else if (pathname.startsWith("/genshin/topicDetail/")) {
-    const title = document.querySelector(".mhy-topic-card__name").textContent;
-
-    data.details = "Browsing topic:";
-    data.state = title;
-  } else if (pathname.startsWith("/genshin/search")) {
-    const queryString = window.location.search,
-      urlParams = new URLSearchParams(queryString),
-      search = urlParams.get("keyword");
-
-    data.details = "Searching:";
-    data.state = search;
-    data.smallImageKey = "search";
-  }
-  presence.setActivity(data);
+	const presenceData: PresenceData = {
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp
+		},
+		{ pathname, search } = document.location;
+	if (pathname === "/genshin/") presenceData.details = "Viewing the Homepage";
+	else if (pathname.endsWith("/home/1")) {
+		switch (search?.substr(6)) {
+			case "create":
+				presenceData.details = "Viewing tavern page";
+				presenceData.state = "New";
+				break;
+			case "reply":
+				presenceData.details = "Viewing tavern page";
+				presenceData.state = "New replies";
+				break;
+			case "2":
+				presenceData.details = "Viewing tavern page";
+				presenceData.state = "Featured";
+				break;
+			default:
+				presenceData.details = "Viewing tavern page";
+				presenceData.state = "Hot";
+		}
+	} else if (pathname.endsWith("/home/3")) {
+		switch (search?.substr(6)) {
+			case "1":
+				presenceData.details = "Viewing official page";
+				presenceData.state = "Notices";
+				break;
+			case "3":
+				presenceData.details = "Viewing official page";
+				presenceData.state = "Info";
+				break;
+			case "contribution":
+				presenceData.details = "Viewing official page";
+				presenceData.state = "Submission events";
+				break;
+			default:
+				presenceData.details = "Viewing official page";
+				presenceData.state = "Events";
+		}
+	} else if (pathname.endsWith("/home/2")) {
+		switch (search?.substr(6)) {
+			case "create":
+				presenceData.details = "Viewing billboards page";
+				presenceData.state = "New";
+				break;
+			case "reply":
+				presenceData.details = "Viewing billboards page";
+				presenceData.state = "New replies";
+				break;
+			case "2":
+				presenceData.details = "Viewing billboards page";
+				presenceData.state = "Featured";
+				break;
+			default:
+				presenceData.details = "Viewing billboards page";
+				presenceData.state = "Hot";
+		}
+	} else if (pathname.startsWith("/genshin/article/")) {
+		presenceData.details = document.querySelector(
+			".mhy-article-page__title > h1"
+		).textContent;
+		presenceData.state = `by: ${
+			document.querySelector(
+				".mhy-article-page-author > .mhy-user-card__info > a > span"
+			).textContent
+		}`;
+		presenceData.buttons = [
+			{ label: "Visit Article", url: window.location.href }
+		];
+	} else if (pathname.endsWith("/topic"))
+		presenceData.details = "Browsing topics";
+	else if (pathname.startsWith("/genshin/topicDetail/")) {
+		presenceData.details = "Browsing topic:";
+		presenceData.state = document.querySelector(
+			".mhy-topic-card__name"
+		).textContent;
+	} else if (pathname.startsWith("/genshin/search")) {
+		presenceData.details = "Searching:";
+		presenceData.state = new URLSearchParams(window.location.search).get(
+			"keyword"
+		);
+		presenceData.smallImageKey = "search";
+	}
+	presence.setActivity(presenceData);
 });
