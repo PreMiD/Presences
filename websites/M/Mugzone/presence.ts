@@ -188,7 +188,7 @@ presence.on("UpdateData", async () => {
             b1: number = +b.replace("#", ""),
             c1: number = +c.replace("#", ""),
             d1: number = +d.replace("#", ""),
-            Top = Math.min(a1, b1, c1,d1);
+            Top = Math.min(a1, b1, c1, d1);
           presenceData.details = `User: ${
             document.querySelector(
               "#content > div.user_head.g_rblock > div.right > p.name > span"
