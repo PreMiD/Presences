@@ -1,82 +1,54 @@
-const presence = new Presence({ clientId: "714636053235105832" });
-
-const strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
-
-function getTime(list: string[]): number {
-  let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}
-
-function getTimestamps(
-  audioTime: string,
-  audioDuration: string
-): Array<number> {
-  const splitAudioTime = audioTime.split(":").reverse(),
-    splitAudioDuration = audioDuration.split(":").reverse(),
-    parsedAudioTime = getTime(splitAudioTime),
-    parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now(),
-    endTime =
-      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+const presence = new Presence({ clientId: "714636053235105832" }),
+	strings = presence.getStrings({
+		play: "presence.playback.playing",
+		pause: "presence.playback.paused"
+	});
 
 let title: string,
-  author: string,
-  audioTime: string,
-  audioDuration: string,
-  audioTimeLeft: string,
-  player_button: HTMLButtonElement;
+	author: string,
+	audioTime: number,
+	audioDuration: number,
+	audioTimeLeft: string,
+	playerButton: HTMLButtonElement;
 
 presence.on("UpdateData", async () => {
-  const player = document.querySelector("#g_player");
+	if (document.querySelector("#g_player")) {
+		playerButton = document.querySelector(
+			"#g_player > div.btns > a.ply.j-flag"
+		);
+		const paused = playerButton.classList.contains("pas") === false;
+		audioTimeLeft = document.querySelector(
+			"#g_player > div.play > div.m-pbar > span"
+		).textContent;
+		title = document.querySelector(
+			"#g_player > div.play > div.j-flag.words > a"
+		).textContent;
+		author = document.querySelector(
+			"#g_player > div.play > div.j-flag.words > span > span"
+		).textContent;
+		audioTime = document.querySelector(
+			"#g_player > div.play > div.m-pbar > span > em"
+		).textContent as unknown as number;
+		audioDuration = audioTimeLeft
+			.replace(/(.*)(?=\/)/, "")
+			.replace("/ ", "") as unknown as number;
 
-  if (player) {
-    player_button = document.querySelector(
-      "#g_player > div.btns > a.ply.j-flag"
-    );
-    const paused = player_button.classList.contains("pas") === false;
-    audioTimeLeft = document.querySelector(
-      "#g_player > div.play > div.m-pbar > span"
-    ).textContent;
-    title = document.querySelector(
-      "#g_player > div.play > div.j-flag.words > a"
-    ).textContent;
-    author = document.querySelector(
-      "#g_player > div.play > div.j-flag.words > span > span"
-    ).textContent;
-    audioTime = document.querySelector(
-      "#g_player > div.play > div.m-pbar > span > em"
-    ).textContent;
-    audioDuration = audioTimeLeft.replace(/(.*)(?=\/)/, "").replace("/ ", "");
+		const timestamps = presence.getTimestamps(audioTime, audioDuration),
+			presenceData: PresenceData = {
+				details: title,
+				state: author,
+				largeImageKey: "logo",
+				smallImageKey: paused ? "pause" : "play",
+				smallImageText: paused ? (await strings).pause : (await strings).play,
+				startTimestamp: timestamps[0],
+				endTimestamp: timestamps[1]
+			};
 
-    const timestamps = getTimestamps(audioTime, audioDuration);
+		if (paused) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
 
-    const data: PresenceData = {
-      details: title,
-      state: author,
-      largeImageKey: "logo",
-      smallImageKey: paused ? "pause" : "play",
-      smallImageText: paused ? (await strings).pause : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
-
-    if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-    }
-
-    if (title !== null && author !== null) {
-      presence.setActivity(data, !paused);
-    }
-  } else {
-    presence.clearActivity();
-  }
+		if (title && author) presence.setActivity(presenceData, !paused);
+	} else presence.clearActivity();
 });
