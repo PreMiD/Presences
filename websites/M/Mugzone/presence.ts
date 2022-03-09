@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "key";
         presenceData.smallImageText = "KeyMode";
         presenceData.state = "Key Mode";
-        }
-      } else if (document.location.href.includes("/song")) {
+      }
+    } else if (document.location.href.includes("/song")) {
       presenceData.smallImageKey = "song";
       presenceData.details = "Viewing a song";
       presenceData.state = document.querySelector(
@@ -161,29 +161,21 @@ presence.on("UpdateData", async () => {
           document.querySelector(
             "#content > div.user_head.g_rblock > div.right > p.name > span"
           ).textContent ==
-        document.querySelector("#header > div > a:nth-child(4) > b"
-        ).textContent
+          document.querySelector("#header > div > a:nth-child(4) > b")
+            .textContent
         ) {
-          const a = document
-              .querySelector(
-                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
-              )
-              .textContent,
-            b = document
-              .querySelector(
-                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank"
-              )
-              .textContent,
-            c = document
-              .querySelector(
-                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank"
-              )
-              .textContent,
-            d = document
-              .querySelector(
-                "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
-              )
-              .textContent,
+          const a = document.querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(1) > div > p.rank"
+            ).textContent,
+            b = document.querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(2) > div > p.rank"
+            ).textContent,
+            c = document.querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(3) > div > p.rank"
+            ).textContent,
+            d = document.querySelector(
+              "#content > div.body > div.panel > div.rank.g_rblock > div:nth-child(4) > div > p.rank"
+            ).textContent,
             a1: number = +a.replace("#", ""),
             b1: number = +b.replace("#", ""),
             c1: number = +c.replace("#", ""),
