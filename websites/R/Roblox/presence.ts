@@ -39,7 +39,8 @@ presence.on("UpdateData", async () => {
 		);
 
 	switch (hostname) {
-		case "www.roblox.com" || "web.roblox.com": {
+		case "web.roblox.com":
+		case "www.roblox.com": {
 			const pages: {
 				[name: string]: PresenceData;
 			} = {
