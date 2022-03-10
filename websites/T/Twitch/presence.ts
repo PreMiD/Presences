@@ -296,7 +296,7 @@ presence.on("UpdateData", async () => {
 							.querySelector<HTMLImageElement>(
 								".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
 							)
-							.src.replace("profile_image-70x70", "profile_image-600x600");
+							.src.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600");
 					user += tab ? ` (${tab})` : "";
 
 					presenceData.details = strings.viewProfile;
@@ -454,7 +454,7 @@ presence.on("UpdateData", async () => {
 							.querySelector<HTMLImageElement>(
 								".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
 							)
-							.src.replace("profile_image-70x70", "profile_image-600x600");
+							.src.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600");
 					if (title && streamer) {
 						presenceData.details = streamDetail
 							.replace("%title%", title)
@@ -496,7 +496,7 @@ presence.on("UpdateData", async () => {
 							.querySelector<HTMLImageElement>(
 								".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
 							)
-							.src.replace("profile_image-70x70", "profile_image-600x600");
+							.src.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600");
 					if (title && uploader) {
 						presenceData.details = vidDetail
 							.replace("%title%", title)
