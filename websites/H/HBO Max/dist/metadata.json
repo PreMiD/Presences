@@ -16,7 +16,7 @@
 		"play.hbomax.com",
 		"help.hbomax.com"
 	],
-	"version": "2.0.7",
+	"version": "2.1.0",
 	"logo": "https://i.imgur.com/UxH7DDE.png",
 	"thumbnail": "https://i.imgur.com/d1bktD4.jpg",
 	"color": "#c600ff",
@@ -25,5 +25,13 @@
 		"originals",
 		"streaming-platform",
 		"hulu-bundle"
+	],
+	"settings": [
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		}
 	]
 }

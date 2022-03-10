@@ -227,60 +227,74 @@ presence.on("UpdateData", () => {
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/registrierung") {
-		presenceData.details = "Registriert sich gerade...";
-		presenceData.state = `Vielleicht als ${
-			document.querySelector<HTMLInputElement>("#formUsername").value
-		}`;
-		delete presenceData.smallImageText;
+	} else {
+		switch (document.location.pathname) {
+			case "/registrierung": {
+				presenceData.details = "Registriert sich gerade...";
+				presenceData.state = `Vielleicht als ${
+					document.querySelector<HTMLInputElement>("#formUsername").value
+				}`;
+				delete presenceData.smallImageText;
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/account") {
-		presenceData.details = "Angemeldet als";
-		presenceData.state = document.querySelector(
-			"#wrapper > header > div > div.header-content > nav > div > div.dd > p > a > span.name"
-		).textContent;
-		delete presenceData.smallImageText;
+				presence.setActivity(presenceData);
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/serienwuensche") {
-		presenceData.details = "Votet für neue Serien";
-		presenceData.state = `${
-			document.querySelector(
-				"#wrapper > div.container > div.row.leaderboardBox > div.col-md-3 > div > strong"
-			).textContent
-		} Serienwünsche`;
-		delete presenceData.smallImageText;
+				break;
+			}
+			case "/account": {
+				presenceData.details = "Angemeldet als";
+				presenceData.state = document.querySelector(
+					"#wrapper > header > div > div.header-content > nav > div > div.dd > p > a > span.name"
+				).textContent;
+				delete presenceData.smallImageText;
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/serien")) {
-		presenceData.details = "Sucht eine neue Serie";
-		presenceData.state =
-			document.querySelector<HTMLInputElement>("#serInput").value;
-		presenceData.smallImageKey = "search";
-		delete presenceData.smallImageText;
+				presence.setActivity(presenceData);
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/genre/")) {
-		presenceData.details = "Sucht in Genre";
-		presenceData.state = document.querySelector(
-			"#wrapper > div.container.marginBottom > div.seriesListSection > div.pageTitle.pageCenter.homeTitle > h1"
-		).textContent;
-		presenceData.smallImageKey = "search";
-		delete presenceData.smallImageText;
+				break;
+			}
+			case "/serienwuensche": {
+				presenceData.details = "Votet für neue Serien";
+				presenceData.state = `${
+					document.querySelector(
+						"#wrapper > div.container > div.row.leaderboardBox > div.col-md-3 > div > strong"
+					).textContent
+				} Serienwünsche`;
+				delete presenceData.smallImageText;
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/random")) {
-		presenceData.details = "Sucht eine random Serie";
-		presenceData.smallImageKey = "search";
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/search")) {
-		presenceData.smallImageKey = "search";
-		presenceData.details = "Sucht...";
-		presenceData.state =
-			document.querySelector<HTMLInputElement>("#search").value;
-		delete presenceData.smallImageText;
+				presence.setActivity(presenceData);
 
-		presence.setActivity(presenceData);
-	} else presence.setActivity();
+				break;
+			}
+			default:
+				if (document.location.pathname.includes("/serien")) {
+					presenceData.details = "Sucht eine neue Serie";
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("#serInput").value;
+					presenceData.smallImageKey = "search";
+					delete presenceData.smallImageText;
+
+					presence.setActivity(presenceData);
+				} else if (document.location.pathname.includes("/genre/")) {
+					presenceData.details = "Sucht in Genre";
+					presenceData.state = document.querySelector(
+						"#wrapper > div.container.marginBottom > div.seriesListSection > div.pageTitle.pageCenter.homeTitle > h1"
+					).textContent;
+					presenceData.smallImageKey = "search";
+					delete presenceData.smallImageText;
+
+					presence.setActivity(presenceData);
+				} else if (document.location.pathname.includes("/random")) {
+					presenceData.details = "Sucht eine random Serie";
+					presenceData.smallImageKey = "search";
+					presence.setActivity(presenceData);
+				} else if (document.location.pathname.includes("/search")) {
+					presenceData.smallImageKey = "search";
+					presenceData.details = "Sucht...";
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("#search").value;
+					delete presenceData.smallImageText;
+
+					presence.setActivity(presenceData);
+				} else presence.setActivity();
+		}
+	}
 });

@@ -26,7 +26,7 @@ function isShop(): boolean {
 }
 
 function isProfile(): boolean {
-	if (document.getElementsByClassName("profile-header__meta").length === 1) {
+	if (document.querySelectorAll(".profile-header__meta").length === 1) {
 		authorUrl = document.location.href.toString();
 		authorName = document.querySelector(
 			"#page-content-inner > div.brand-bg > div > header > div.profile-header__details > h1"
@@ -37,8 +37,8 @@ function isProfile(): boolean {
 }
 function isArticle(): boolean {
 	if (
-		document.getElementsByClassName("article-wrapper").length === 1 &&
-		document.getElementsByClassName("crayons-article__video").length === 0
+		document.querySelectorAll(".article-wrapper").length === 1 &&
+		document.querySelectorAll(".crayons-article__video").length === 0
 	) {
 		articleTitle = document.querySelector(
 			"#main-title > div.crayons-article__header__meta > h1"
@@ -58,8 +58,8 @@ function isArticle(): boolean {
 
 function isVideo(): boolean {
 	if (
-		document.getElementsByClassName("article-wrapper").length === 1 &&
-		document.getElementsByClassName("crayons-article__video").length === 1
+		document.querySelectorAll(".article-wrapper").length === 1 &&
+		document.querySelectorAll(".crayons-article__video").length === 1
 	) {
 		articleTitle = document.querySelector(
 			"#main-title > div.crayons-article__header__meta > h1"
@@ -78,9 +78,7 @@ function isVideo(): boolean {
 }
 
 function isPodcast(): boolean {
-	if (
-		document.getElementsByClassName("podcast-episode-container").length === 1
-	) {
+	if (document.querySelectorAll(".podcast-episode-container").length === 1) {
 		podcastTitle = document.querySelector("h1").textContent;
 		authorName = document.querySelector("div.title > h2 > a").textContent;
 		authorUrl = (<HTMLAnchorElement>(
@@ -184,7 +182,7 @@ presence.on("UpdateData", async () => {
 					}
 				];
 			}
-			contentStateKey = (<HTMLAudioElement>document.getElementById("audio"))
+			contentStateKey = (<HTMLAudioElement>document.querySelector("#audio"))
 				.paused
 				? "pause"
 				: "play";

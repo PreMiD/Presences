@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presenceData.details = "Broadcasting as";
-		[, , presenceData.state] = path.split("/");
+		presenceData.state = path.split("/")[2];
 		presenceData.smallImageKey = "live";
 		presenceData.smallImageText = (await strings).live;
 		presenceData.startTimestamp = elapsed;

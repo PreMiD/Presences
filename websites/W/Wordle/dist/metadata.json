@@ -8,8 +8,11 @@
 	"description": {
 		"en": "Guess the hidden word in 6 tries. A new puzzle is available each day."
 	},
-	"url": "www.powerlanguage.co.uk",
-	"version": "1.0.1",
+	"url": [
+		"www.nytimes.com",
+		"www.powerlanguage.co.uk"
+	],
+	"version": "1.1.1",
 	"logo": "https://i.imgur.com/N19NFSF.png",
 	"thumbnail": "https://i.imgur.com/2nENqtm.png",
 	"color": "#6AAA64",
@@ -22,7 +25,7 @@
 	"settings": [
 		{
 			"id": "guess",
-			"title": "Hide Number of Guesses",
+			"title": "Show Number of Guesses",
 			"icon": "fas fa-comment-alt-edit",
 			"value": true
 		}

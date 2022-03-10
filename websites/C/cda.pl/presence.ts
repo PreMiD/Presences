@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "reading";
 	} else if (pathname.includes("/info")) {
 		presenceData.details = "Szuka:";
-		[, , presenceData.state] = pathname.split("/");
+		presenceData.state = pathname.split("/")[2];
 		presenceData.smallImageKey = "search";
 	} else if (pathname === "/premium") {
 		presenceData.details = "Przegląda:";

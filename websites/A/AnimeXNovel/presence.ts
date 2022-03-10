@@ -23,12 +23,12 @@ presence.on("UpdateData", async () => {
 
 	presenceData.startTimestamp = browsingTimestamp;
 
-	if (document.location.pathname.indexOf("anime") !== -1) {
+	if (document.location.pathname.includes("anime")) {
 		presenceData.details = obraanimeR;
 		presenceData.state = `Episódio ${capituloR}`;
 	} else if (document.location.pathname.startsWith("/search")) {
-		if (document.location.pathname.indexOf("/search/label/") !== -1) {
-			if (document.location.pathname.indexOf("/In%C3%ADcio") !== -1)
+		if (document.location.pathname.includes("/search/label/")) {
+			if (document.location.pathname.includes("/In%C3%ADcio"))
 				presenceData.details = "Página inícial";
 			else {
 				presenceData.details = "Vendo a lista de";

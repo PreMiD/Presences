@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Bir şey arıyor:";
 		presenceData.state = document
 			.querySelector(".post-head .title strong")
-			?.textContent.replace(/"/g, "");
+			?.textContent.replaceAll('"', "");
 		presenceData.smallImageKey = "search";
 	} else if (page.includes("/harfler/")) {
 		const letter = document.querySelector(

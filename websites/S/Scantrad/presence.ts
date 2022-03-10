@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	path = document.location.pathname,
-	[, , mangaName] = path.split("/");
+	mangaName = path.split("/")[2];
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {

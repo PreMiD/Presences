@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Surfing the marketplace";
 	else if (document.location.pathname.startsWith("/studios"))
 		presenceData.details = "Visiting studios";
-	else if (document.location.href.indexOf("/jobs") > -1) {
+	else if (document.location.href.includes("/jobs")) {
 		presenceData.details = "Viewing jobs";
 		presenceData.state = document
 			.querySelector('meta[property="og:title"]')
@@ -143,13 +143,13 @@ presence.on("UpdateData", async () => {
 			presenceData.state = shortTitle;
 			presenceData.buttons = [{ label: "View Instructor", url: document.URL }];
 		}
-	} else if (document.location.href.indexOf("settings") > -1)
+	} else if (document.location.href.includes("settings"))
 		presenceData.details = "Changing settings";
-	else if (document.location.href.indexOf("profile/edit") > -1) {
+	else if (document.location.href.includes("profile/edit")) {
 		presenceData.details = "Editing profile";
 		presenceData.smallImageKey = "editprofile";
 		presenceData.smallImageText = "Editing profile";
-	} else if (document.location.href.indexOf("project/new") > -1) {
+	} else if (document.location.href.includes("project/new")) {
 		presenceData.details = "Uploading an artwork";
 		presenceData.smallImageKey = "upload";
 		presenceData.smallImageText = "Uploading artwork";

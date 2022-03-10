@@ -3,6 +3,33 @@
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+let preview = {
+	name: "",
+	subName: "",
+	currentTime: "",
+	difficulty: "",
+	customDifficulty: "",
+	playing: false,
+	duration: "",
+	gameMode: ""
+};
+
+presence.on(
+	"iFrameData",
+	(data: {
+		name: string;
+		subName: string;
+		currentTime: string;
+		difficulty: string;
+		customDifficulty: string;
+		gameMode: string;
+		playing: boolean;
+		duration: string;
+	}) => {
+		preview = data;
+	}
+);
+
 presence.on("UpdateData", async () => {
 	const [time, buttons, cover] = await Promise.all([
 			presence.getSetting<boolean>("time"),
@@ -14,7 +41,84 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp
 		};
 
-	if (document.location.href.includes("/?q=")) {
+	if (
+		document.querySelector("iframe") &&
+		document.querySelector<HTMLIFrameElement>("iframe").src !== "about:blank" &&
+		preview.name
+	) {
+		presenceData.details = `${preview.name} ${preview.subName}`;
+		presenceData.state =
+			preview.difficulty === preview.customDifficulty
+				? `${preview.gameMode} ${preview.difficulty}`
+				: `${preview.customDifficulty}`;
+		if (preview.playing) {
+			presenceData.smallImageKey = "playing";
+			if (preview.duration) {
+				const timestamps = presence.getTimestamps(
+					presence.timestampFromFormat(preview.currentTime),
+					presence.timestampFromFormat(preview.duration)
+				);
+				presenceData.endTimestamp = timestamps[1];
+			}
+			presenceData.smallImageText = "Playing";
+		} else {
+			presenceData.smallImageKey = "paused";
+			presenceData.smallImageText = "Paused";
+		}
+		if (document.location.href.includes("/maps/")) {
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"[alt='Cover Image']"
+			).src;
+			presenceData.buttons = [
+				{
+					label: "View Page",
+					url: document.location.href
+				},
+				{
+					label: "View Uploader's Profile",
+					url: `https://beatsaver.com${document
+						.querySelector(".list-group-item.d-flex.justify-content-between")
+						.getAttribute("href")}`
+				}
+			];
+		} else {
+			presenceData.largeImageKey = (
+				document.querySelector(
+					`[href='/maps/${
+						document
+							.querySelector<HTMLIFrameElement>("iframe")
+							.src.split("=")[1]
+					}']`
+				).parentElement.parentElement.firstChild.firstChild as HTMLImageElement
+			).src;
+			presenceData.buttons = [
+				{
+					label: "View Page",
+					url: `https://beatsaver.com${document
+						.querySelector(
+							`[href='/maps/${
+								document
+									.querySelector<HTMLIFrameElement>("iframe")
+									.src.split("=")[1]
+							}']`
+						)
+						.getAttribute("href")}`
+				},
+				{
+					label: "View Uploader's Profile",
+					url: `https://beatsaver.com${document
+						.querySelector(
+							`[href='/maps/${
+								document
+									.querySelector<HTMLIFrameElement>("iframe")
+									.src.split("=")[1]
+							}']`
+						)
+						.parentElement.children[1].firstElementChild.getAttribute("href")}`
+				}
+			];
+		}
+	} else if (document.location.href.includes("/?q=")) {
 		presenceData.details = "Searching Beatmaps";
 		presenceData.state = (
 			document.querySelector("input.form-control") as HTMLInputElement
@@ -45,44 +149,44 @@ presence.on("UpdateData", async () => {
 					"[alt='Cover Image']"
 				).src;
 			}
-		}
-		if (
-			document
-				.getElementsByClassName("badge badge-pill badge-danger mr-2")
-				.item(0)
-		) {
-			presenceData.smallImageKey = "showauto";
-			presenceData.smallImageText = "Made by a bot";
-		}
-		presenceData.details = document
-			.getElementsByClassName("card-header d-flex")
-			.item(0)
-			.childNodes.item(0).textContent;
-		if (presenceData.details === "") presenceData.details = "<NO NAME>";
 
-		presenceData.state = `Uploaded by ${
-			document
-				.getElementsByClassName(
-					"list-group-item d-flex justify-content-between"
-				)
-				.item(0)
-				.children.item(0).textContent
-		}`;
-		presenceData.buttons = [
-			{
-				label: "View Page",
-				url: document.location.href
-			},
-			{
-				label: "View Uploader's Profile",
-				url: `https://beatsaver.com${document
-					.getElementsByClassName(
-						"list-group-item d-flex justify-content-between"
-					)
-					.item(0)
-					.getAttribute("href")}`
+			if (
+				document.querySelector(
+					".list-group-item.d-flex.justify-content-between:nth-child(2) > span"
+				) &&
+				document.querySelector(
+					".list-group-item.d-flex.justify-content-between:nth-child(2) > span"
+				).textContent === "Bot"
+			) {
+				presenceData.smallImageKey = "showauto";
+				presenceData.smallImageText = "Made by a bot";
 			}
-		];
+
+			presenceData.details = document.querySelectorAll(
+				".card-header.d-flex"
+			)[0].childNodes[0].textContent;
+			if (presenceData.details === "") presenceData.details = "<NO NAME>";
+
+			presenceData.state = `Uploaded by ${
+				document
+					.querySelectorAll(".list-group-item.d-flex.justify-content-between")
+					.item(0)
+					.children.item(0).textContent
+			}`;
+			presenceData.buttons = [
+				{
+					label: "View Page",
+					url: document.location.href
+				},
+				{
+					label: "View Uploader's Profile",
+					url: `https://beatsaver.com${document
+						.querySelectorAll(".list-group-item.d-flex.justify-content-between")
+						.item(0)
+						.getAttribute("href")}`
+				}
+			];
+		}
 	} else if (document.location.pathname.includes("/profile")) {
 		presenceData.details = "Viewing Profile";
 		presenceData.state = document.querySelector("h4").textContent;
@@ -94,18 +198,14 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname === "/") {
 		presenceData.details = "Browsing Beatmaps";
-		if (document.location.href !== "https://beatsaver.com/") {
-			let filters = "";
-			if (document.location.href.includes("auto=true")) filters += " AI,";
-			if (document.location.href.includes("ranked=true")) filters += " Ranked,";
-			if (document.location.href.includes("fullSpread=true"))
-				filters += " Full Spread,";
-			if (document.location.href.includes("chroma=true")) filters += " Chroma,";
-			if (document.location.href.includes("noodle=true")) filters += " Noodle,";
-			if (document.location.href.includes("me=true"))
-				filters += " Mapping Extensions,";
-			if (document.location.href.includes("cinema=true")) filters += " Cinema,";
-			presenceData.state = `Filters:${filters.slice(0, -1)}`;
+		if (
+			document.querySelector(".filter-dropdown > span") &&
+			document.querySelector(".filter-dropdown > span").textContent !==
+				"Filters"
+		) {
+			presenceData.state = `Filters: ${
+				document.querySelector(".filter-dropdown > span").textContent
+			}`;
 		}
 	}
 

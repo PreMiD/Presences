@@ -73,26 +73,26 @@ presence.on("UpdateData", async () => {
 				const blocklyText = selected.querySelectorAll(
 					"text[class=blocklyText]"
 				);
-				blocklyText.forEach(element => {
+				for (const element of blocklyText) {
 					if (
 						element.parentElement.getAttribute("transform") ===
 						"translate(126.36666870117188,18)"
 					)
 						presenceData.state = `in Subroutine ${element.textContent}`;
-				});
+				}
 			} else if (
 				selected.querySelector(".ruleBlockRuleText")?.textContent === "RULE"
 			) {
 				const blocklyText = selected.querySelectorAll(
 					"text[class=blocklyText]"
 				);
-				blocklyText.forEach(element => {
+				for (const element of blocklyText) {
 					if (
 						element.parentElement.getAttribute("transform") ===
 						"translate(72.78333282470703,8.5)"
 					)
 						presenceData.state = `in RULE ${element.textContent}`;
-				});
+				}
 			} else if (description) {
 				//todo: need to implement if a single block is selected
 				presenceData.state = info.playgroundDescription;

@@ -203,7 +203,7 @@ presence.on("UpdateData", async () => {
 				details: title.textContent,
 				state: episodeX
 					.replace(/\n/g, "")
-					.replace(/-/g, "")
+					.replaceAll("-", "")
 					.replace(title.textContent, "")
 					.replace(" ", "")
 					.trim(),
@@ -268,7 +268,7 @@ presence.on("UpdateData", async () => {
 					details: title.textContent,
 					state: episodeX
 						.replace(/\n/g, "")
-						.replace(/-/g, "")
+						.replaceAll("-", "")
 						.replace(title.textContent, "")
 						.replace(" ", "")
 						.trim(),

@@ -36,14 +36,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/profile/")) {
 		delete presenceData.details;
 		presenceData.details = "Browsing a profile...";
-		presenceData.state = document.getElementsByClassName(
-			"ipsType_reset ipsPageHead_barText"
+		presenceData.state = document.querySelectorAll(
+			".ipsType_reset.ipsPageHead_barText"
 		)[0].textContent;
 	} else if (document.location.pathname.startsWith("/forum/")) {
 		delete presenceData.details;
 		presenceData.details = "Browsing a category...";
 		presenceData.state =
-			document.getElementsByClassName("ipsType_pageTitle")[0].textContent;
+			document.querySelectorAll(".ipsType_pageTitle")[0].textContent;
 		if (document.location.href.match("/?do=add")) {
 			delete presenceData.details;
 			delete presenceData.state;
@@ -52,8 +52,8 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/topic/")) {
 		delete presenceData.details;
 		presenceData.details = "Browsing a topic...";
-		presenceData.state = document.getElementsByClassName(
-			"ipsType_break ipsContained"
+		presenceData.state = document.querySelectorAll(
+			".ipsType_break.ipsContained"
 		)[0].textContent;
 	} else if (document.location.pathname.startsWith("/search/")) {
 		delete presenceData.details;
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "search";
 		presenceData.state = `Looking${
 			document
-				.getElementsByClassName("ipsType_reset ipsType_large")[0]
+				.querySelectorAll(".ipsType_reset.ipsType_large")[0]
 				.textContent.split("results")[1]
 		}`;
 	} else {

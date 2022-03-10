@@ -50,8 +50,8 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-	const { host } = location,
-		path = location.pathname.replace(/\/?$/, "/"),
+	const { host, pathname, href } = document.location,
+		path = pathname.replace(/\/?$/, "/"),
 		showSearch = await presence.getSetting<boolean>("search"),
 		showTimestamps = await presence.getSetting<boolean>("timestamp");
 
@@ -60,8 +60,8 @@ presence.on("UpdateData", async () => {
 		startTimestamp: elapsed
 	};
 
-	if (document.location.href !== prevUrl) {
-		prevUrl = document.location.href;
+	if (href !== prevUrl) {
+		prevUrl = href;
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 

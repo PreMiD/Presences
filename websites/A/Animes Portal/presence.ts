@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo"
 		},
-		{ pathname } = document.location,
+		{ pathname, href } = document.location,
 		[showThumb, showMessaging] = await Promise.all([
 			presence.getSetting<boolean>("showthumb"),
 			presence.getSetting<boolean>("showmessaging")
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View anime",
-					url: document.location.href
+					url: href
 				}
 			];
 		} else if (uid && eid) {
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Watch anime",
-						url: document.location.href
+						url: href
 					}
 				];
 
@@ -163,7 +163,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read manga",
-						url: document.location.href
+						url: href
 					}
 				];
 			} else {
@@ -177,7 +177,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read manga",
-						url: document.location.href
+						url: href
 					}
 				];
 			}
@@ -198,7 +198,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View manga",
-					url: document.location.href
+					url: href
 				}
 			];
 		} else if (paths[1])

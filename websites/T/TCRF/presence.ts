@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 			.join(" ")}`;
 	} else {
 		const name = document
-			.getElementById("firstHeading")
+			.querySelector("#firstHeading")
 			.textContent.replace(")", "")
 			.split("(");
 		if (name[0].startsWith("Prerelease:")) {

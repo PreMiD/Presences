@@ -11,7 +11,7 @@
 	},
 	"url": "www.artstation.com",
 	"regExp": "([a-z0-9-_]+)[.]artstation[.]com",
-	"version": "1.2.0",
+	"version": "1.2.2",
 	"logo": "https://i.imgur.com/hHlsZac.png",
 	"thumbnail": "https://i.imgur.com/bQ4qzHO.jpg",
 	"color": "#13AFF0",
@@ -39,7 +39,11 @@
 			"title": "Show Artworks",
 			"icon": "fab fa-artstation",
 			"value": 2,
-			"values": ["Logo", "Artist", "Artwork"]
+			"values": [
+				"Logo",
+				"Artist",
+				"Artwork"
+			]
 		},
 		{
 			"id": "button",

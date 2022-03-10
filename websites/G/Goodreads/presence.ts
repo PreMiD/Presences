@@ -20,12 +20,12 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/book/show/")) {
 		// beta layout conditional
 		presenceData.details = "Viewing a book:";
-		if (document.getElementById("bookTitle") === null) {
+		if (document.querySelector("#bookTitle") === null) {
 			book = document.querySelector("h1").textContent;
 			author = document.querySelector("span.ContributorLink__name").textContent;
 			presenceData.state = `${book} | by: ${author}`;
 		} else {
-			book = document.getElementById("bookTitle").textContent;
+			book = document.querySelector("#bookTitle").textContent;
 			author = document.querySelector(".authorName").textContent;
 			presenceData.state = `${book} | by: ${author}`;
 		}

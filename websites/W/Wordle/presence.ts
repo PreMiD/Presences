@@ -3,12 +3,11 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	puzzleNumber = Math.trunc(
-		(new Date().getTime() - new Date("06/19/2021").getTime()) /
-			(1000 * 3600 * 24)
+		(Date.now() - new Date("06/19/2021").getTime()) / (1000 * 3600 * 24)
 	);
 
 presence.on("UpdateData", async () => {
-	if (document.location.pathname.startsWith("/wordle")) {
+	if (document.location.pathname.includes("/wordle")) {
 		const presenceData: PresenceData = {
 				largeImageKey: "logo",
 				startTimestamp: browsingTimestamp
