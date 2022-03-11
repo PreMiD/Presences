@@ -18,6 +18,7 @@ async function getStrings() {
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
+
 const newStrings = getStrings();
 let strings: Awaited<typeof newStrings>;
 
@@ -27,11 +28,13 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		[, page, pageType] = location.pathname.split("/");
+		[, page, pageType] = location.pathname.split("/"),
+		[buttons, covers] = await Promise.all([
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("covers")
+		]);
 	strings ??= await newStrings;
-	if (oldLang !== newLang) {
-		oldLang = newLang;
-	}
+	if (oldLang !== newLang) oldLang = newLang;
 
 	if (!page || page === "foryou") {
 		const [detail, state] = strings.forYou.split("{0}");
@@ -46,31 +49,35 @@ presence.on("UpdateData", async () => {
 			presenceData.details =
 				document.querySelector("[data-e2e=video-desc]")?.textContent ??
 				document.querySelector("[data-e2e=browse-video-desc]").textContent;
-			presenceData.state = `@${
-				document.querySelector("[data-e2e=video-author-uniqueid]")
-					?.textContent ??
-				document.querySelector("[data-e2e=browse-username]")?.textContent
-			}
-			(${
+			presenceData.state = `${
 				document.querySelector("[data-e2e=video-author-nickname]")
 					?.childNodes[0]?.textContent ??
-				document.querySelector("[data-e2e=browse-nickname]")?.textContent
-			})`;
+				document.querySelector("[data-e2e=browse-nickname]")?.textContent ??
+				document.querySelector("[data-e2e=browser-nickname]")?.firstChild
+					?.textContent
+			}
+		(@${
+			document.querySelector("[data-e2e=video-author-uniqueid]")?.textContent ??
+			document.querySelector("[data-e2e=browse-username]")?.textContent ??
+			document.querySelector("[data-e2e=browser-username]")?.firstChild
+				?.textContent
+		})`;
 			presenceData.smallImageKey = video.paused ? "pause" : "play";
-			presenceData.largeImageKey = document
-				.querySelector(
-					"#app > div.tiktok-19fglm-DivBodyContainer.etsvyce0 > div.tiktok-yp78ys-DivMainContainer.erck9ax0 > div:nth-child(1) > div:nth-child(1) > a > div > span > img"
-				)
-				?.getAttribute("src");
+			if (covers) {
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(
+						"[data-e2e=browse-user-avatar] img[class*=-ImgAvatar]"
+					)?.src ?? "tiktok";
+			}
 			if (!video.paused)
 				presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
 			presenceData.buttons = [
 				{
-					label: (await strings).buttonViewTikTok,
+					label: strings.buttonViewTikTok,
 					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`
 				},
 				{
-					label: (await strings).buttonViewProfile,
+					label: strings.buttonViewProfile,
 					url: document.URL.split("?")[0]
 				}
 			];
@@ -79,47 +86,58 @@ presence.on("UpdateData", async () => {
 			presenceData.details = document.querySelector(
 				"[data-e2e=user-profile-live-title]"
 			)?.textContent;
-			presenceData.state = `@${
-				document.querySelector("[data-e2e=user-profile-uid]").textContent
-			}
-			(${
+			presenceData.state = `${
 				document.querySelector("[data-e2e=user-profile-nickname]").childNodes[0]
 					.textContent
-			})`;
+			}
+		(@${document.querySelector("[data-e2e=user-profile-uid]").textContent})`;
 			presenceData.smallImageKey = "live";
+			if (covers) {
+				presenceData.largeImageKey =
+					document
+						.querySelector("[data-e2e=user-profile-avatar-link]")
+						?.firstElementChild.getAttribute("src") ??
+					document
+						.querySelector(
+							"#tiktok-live-main-container-id > div.tiktok-1fxlgrb-DivBodyContainer.etwpsg30 > div.tiktok-5xcfjj-DivLiveContentContainer.etwpsg32 > div > div.tiktok-1se8o6v-DivLiveContent.e14c6d571 > div.tiktok-lm0twc-DivLiveRoomBanner.e10bhxlw0 > div.tiktok-1s7wqxh-DivUserHoverProfileContainer.e19m376d0 > div.tiktok-h3dty0-DivUserProfile.e1571njr0 > a > img"
+						)
+						.getAttribute("src") ??
+					"tiktok";
+			}
 
 			presenceData.buttons = [
 				{
-					label: (await strings).buttonViewTikTok,
+					label: strings.buttonViewTikTok,
 					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`
 				},
 				{
-					label: (await strings).buttonViewProfile,
+					label: strings.buttonViewProfile,
 					url: document.URL.split("?")[0]
 				}
 			];
 		} else {
-			presenceData.details = await strings.viewProfile;
+			presenceData.details = strings.viewProfile;
 			presenceData.state = `@${
 				document.querySelector("[data-e2e=user-title]").textContent
 			} (${document.querySelector("[data-e2e=user-subtitle]").textContent})`;
-
-			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
-				'meta[property="og:image"]'
-			).content;
+			if (covers) {
+				presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+					'meta[property="og:image"]'
+				).content;
+			}
 			presenceData.buttons = [
 				{
-					label: (await strings).buttonViewProfile,
+					label: strings.buttonViewProfile,
 					url: document.URL.split("?")[0]
 				}
 			];
 		}
 	} else if (page === "following") {
-		const [detail, state] = (await strings).following.split("{0}");
+		const [detail, state] = strings.following.split("{0}");
 
 		presenceData.details = detail;
 		presenceData.state = state;
-		presenceData.smallImageText = (await strings).browse;
+		presenceData.smallImageText = strings.browse;
 		presenceData.smallImageKey = "reading";
 	} else if (page.includes("live")) {
 		presenceData.details = document.querySelector(
@@ -128,9 +146,15 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `@${
 			document.querySelector("[data-e2e=anchor-nickname]").textContent
 		}`;
+		if (covers) {
+			presenceData.largeImageKey =
+				document
+					.querySelector(
+						"#tiktok-live-main-container-id > div.tiktok-1fxlgrb-DivBodyContainer.etwpsg30 > div.tiktok-5xcfjj-DivLiveContentContainer.etwpsg32 > div > div.tiktok-1vf24df-DivHotLiveContainer.ekpqugh2 > div > div.tiktok-ua4rq8-DivHotLiveMain.endcr5w3 > div > div > div > div.tiktok-1oa0qzn-DivProfileBanner.ep811by4 > div.tiktok-18wa6pm-DivProfileContainer.ep811by5 > div > img"
+					)
+					.getAttribute("src") ?? "tiktok";
+		}
 	}
-
-	const buttons = await presence.getSetting<boolean>("buttons");
 	if (!buttons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
