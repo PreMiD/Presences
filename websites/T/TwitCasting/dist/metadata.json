@@ -16,11 +16,18 @@
 	"thumbnail": "https://i.imgur.com/3P8di7c.png",
 	"color": "#0280FC",
 	"category": "socials",
-	"tags": ["video", "streaming", "entertainment"],
+	"tags": [
+		"video",
+		"streaming",
+		"entertainment"
+	],
 	"settings": [
 		{
 			"id": "lang",
-			"multiLanguage": ["twitch", "youtube"]
+			"multiLanguage": [
+				"twitch",
+				"youtube"
+			]
 		},
 		{
 			"id": "privacy",
