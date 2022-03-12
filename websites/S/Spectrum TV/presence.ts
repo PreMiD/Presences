@@ -2,11 +2,6 @@ const presence = new Presence({
     //The client ID of the Application created at https://discordapp.com/developers/applications
     clientId: "951615885922148412"
     }),
-    //You can use this to get translated strings in their browser language
-    strings = presence.getStrings({
-      play: "presence.playback.playing",
-      pause: "presence.playback.paused"
-    });
   
   /*
   function myOutsideHeavyLiftingFunction(){
@@ -53,8 +48,6 @@ const presence = new Presence({
     }]*/
     };
     if (document.location.pathname.includes("/livetv")){presenceData.state = "Watching TV | Live TV"; presenceData.largeImageKey = document.getElementsByClassName("selected")[0].getElementsByClassName("channel-block")[0].getElementsByClassName("logo")[0].getElementsByTagName("img")[0].src; presenceData.details = "Watching " + document.getElementsByClassName("selected")[0].getElementsByClassName("channel-block")[0].getElementsByClassName("channel-number-callsign")[0].getElementsByClassName("chan-call-group")[0].getElementsByClassName("callsign")[0].getAttribute("aria-label") + "(" + document.getElementsByClassName("selected")[0].getElementsByClassName("program-title")[0].getElementsByClassName("title-episode")[0].getElementsByClassName("title")[0].textContent + ")";}/*do presences */ else if (document.location.pathname.includes("/guide")) {presenceData.details = "Looking at the guide"; presenceData.largeImageKey = "guide_img"} else if (document.location.pathname.includes("/ondemand")) {if(document.location.pathname.includes("/playcdvr")) {presenceData.details = "Watching " + document.getElementsByClassName("asset-title")[0].textContent; if(document.getElementsByClassName("asset-meta")[0]){presenceData.details = presenceData.details + " (" + document.getElementsByClassName("asset-meta")[0].textContent + ")"};presenceData.state = "Watching From DVR";} else if (document.location.pathname.includes("/play")) {presenceData.details = "Watching " + document.getElementsByClassName("asset-title")[0].textContent; if(document.getElementsByClassName("asset-meta")[0]){presenceData.details = presenceData.details + " (" + document.getElementsByClassName("asset-meta")[0].textContent + ")"};presenceData.state = "Watching On Demand";} else{presenceData.details = "Looking at what's On Demand"; presenceData.largeImageKey = "guide_img"}}else if (document.location.pathname.includes("/settings")){presenceData.details = "Looking at Spectrum TV Settings"; presenceData.largeImageKey = "settings_cog"}else if (document.location.pathname.includes("/cdvr")) {if(document.location.pathname.includes("/recorded")){presenceData.state = "Looking at Spectrum TV DVR";presenceData.details = "Looking what's been Recorded"; presenceData.largeImageKey = "spectrum_tv_logo_gfx"}else if (document.location.pathname.includes("/scheduled")){presenceData.state = "Looking at Spectrum TV DVR";presenceData.details = "Looking what's Scheduled to Record"; presenceData.largeImageKey = "spectrum_tv_logo_gfx"}} else if (document.location.pathname.includes("/mylibrary")) {presenceData.details = "In My Library"}
-    if(presenceData.details.includes("Wisconsin") || presenceData.details.includes("HD") || presenceData.details.includes("()")){presenceData.details = presenceData.details.replace("Wisconsin", "");presenceData.details = presenceData.details.replace("()", ""); presenceData.details = presenceData.details.replace("HD", "")}
-    //Update the presence with all the values from the presenceData object
     if (presenceData.details) presence.setActivity(presenceData);
     //Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name
     else presence.setActivity();
