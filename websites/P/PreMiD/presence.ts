@@ -42,7 +42,8 @@ async function getStrings() {
 			slideshow: "premid.pageSlideshowClass",
 			iframe: "premid.pageIframe",
 			metadata: "premid.pageMetadata",
-			ts: "premid.pageTs"
+			ts: "premid.pageTs",
+			btnViewPage: "general.buttonViewPage"
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -57,11 +58,21 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "lg"
 		},
 		newLang = await presence.getSetting<string>("lang"),
-		time = await presence.getSetting<boolean>("time");
+		time = await presence.getSetting<boolean>("time"),
+		showButtons = await presence.getSetting<boolean>("showButtons");
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
+	}
+
+	if (showButtons) {
+		presenceData.buttons = [
+			{
+				label: (await strings).btnViewPage,
+				url: window.location.href
+			}
+		];
 	}
 
 	if (time) presenceData.startTimestamp = browsingTimestamp;
@@ -75,6 +86,8 @@ presence.on("UpdateData", async () => {
 				? (presenceData.smallImageText = `BETA | ${(await strings).browsing}`)
 				: (presenceData.smallImageText = (await strings).browsing);
 			presenceData.smallImageKey = "search";
+
+			let icon;
 
 			switch (true) {
 				case pathIncludes("/downloads"):
@@ -106,14 +119,27 @@ presence.on("UpdateData", async () => {
 					presenceData.state = (await strings).terms;
 					break;
 				case pathIncludes("/users/"):
+					icon = document.querySelector<HTMLImageElement>(
+						"div.user-avatar img"
+					)?.src;
+
 					presenceData.details = (await strings).viewUser;
 					presenceData.state = document.querySelector("div.user-data p")
 						? document
 								.querySelector("div.user-data p")
 								.textContent.replace(/[\s\n]+/gi, "")
 						: "USER NOT FOUND...";
+
+					if (icon) {
+						presenceData.largeImageKey = await getShortURL(icon);
+						presenceData.smallImageKey = "lg";
+					}
 					break;
 				case pathIncludes("/store/presences/"):
+					icon = document.querySelector<HTMLImageElement>(
+						"div.header__title div.section img"
+					)?.src;
+
 					presenceData.details = (await strings).viewPresence;
 					presenceData.state = document.querySelector(
 						".header__title > div > h1"
@@ -122,6 +148,11 @@ presence.on("UpdateData", async () => {
 								.querySelector(".header__title > div > h1")
 								.textContent.replace(/^\s+|\s+$/g, "")
 						: (await strings).store;
+
+					if (icon) {
+						presenceData.largeImageKey = await getShortURL(icon);
+						presenceData.smallImageKey = "lg";
+					}
 					break;
 				case pathIncludes("/store"):
 					presenceData.details = (await strings).viewPage;
@@ -254,3 +285,19 @@ presence.on("UpdateData", async () => {
 	}
 	presence.setActivity(presenceData);
 });
+
+const shortenedURLs: Record<string, string> = {};
+async function getShortURL(url: string) {
+  if (!url || url.length < 256) return url;
+  if (shortenedURLs[url]) return shortenedURLs[url];
+  try {
+    const pdURL = await (
+      await fetch(`https://pd.premid.app/create/${url}`)
+    ).text();
+    shortenedURLs[url] = pdURL;
+    return pdURL;
+  } catch (err) {
+    presence.error(err);
+    return url;
+  }
+}
