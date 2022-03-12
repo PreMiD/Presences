@@ -133,7 +133,7 @@ presence.on("UpdateData", async () => {
 						: "USER NOT FOUND...";
 
 					if (icon) {
-						presenceData.largeImageKey = await getShortURL(icon);
+						presenceData.largeImageKey = icon;
 						presenceData.smallImageKey = "lg";
 					}
 					break;
@@ -152,7 +152,7 @@ presence.on("UpdateData", async () => {
 						: strings.store;
 
 					if (icon) {
-						presenceData.largeImageKey = await getShortURL(icon);
+						presenceData.largeImageKey = icon;
 						presenceData.smallImageKey = "lg";
 					}
 					break;
@@ -274,19 +274,3 @@ presence.on("UpdateData", async () => {
 	}
 	presence.setActivity(presenceData);
 });
-
-const shortenedURLs: Record<string, string> = {};
-async function getShortURL(url: string) {
-	if (!url || url.length < 256) return url;
-	if (shortenedURLs[url]) return shortenedURLs[url];
-	try {
-		const pdURL = await (
-			await fetch(`https://pd.premid.app/create/${url}`)
-		).text();
-		shortenedURLs[url] = pdURL;
-		return pdURL;
-	} catch (err) {
-		presence.error(err);
-		return url;
-	}
-}
