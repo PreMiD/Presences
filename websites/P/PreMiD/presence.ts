@@ -288,16 +288,16 @@ presence.on("UpdateData", async () => {
 
 const shortenedURLs: Record<string, string> = {};
 async function getShortURL(url: string) {
-  if (!url || url.length < 256) return url;
-  if (shortenedURLs[url]) return shortenedURLs[url];
-  try {
-    const pdURL = await (
-      await fetch(`https://pd.premid.app/create/${url}`)
-    ).text();
-    shortenedURLs[url] = pdURL;
-    return pdURL;
-  } catch (err) {
-    presence.error(err);
-    return url;
-  }
+	if (!url || url.length < 256) return url;
+	if (shortenedURLs[url]) return shortenedURLs[url];
+	try {
+		const pdURL = await (
+			await fetch(`https://pd.premid.app/create/${url}`)
+		).text();
+		shortenedURLs[url] = pdURL;
+		return pdURL;
+	} catch (err) {
+		presence.error(err);
+		return url;
+	}
 }
