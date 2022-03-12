@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "CoopPlayzz",
+    "id": "594864203102158859"
+  },
+  "service": "Spectrum TV",
+  "description": {
+    "en": "Watch live and On Demand shows, and manage your DVR, whether you're home or on the go."
+  },
+  "url": [
+    "spectrum.net",
+    "www.spectrum.net",
+    "watch.spectrum.net"
+  ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/9V2fVAB.png",
+  "thumbnail": "https://i.imgur.com/QDCnLhA.jpg",
+  "color": "#2109d7",
+  "category": "videos",
+  "tags": [
+    "TV",
+    "Watch",
+    "Media"
+  ]
+}
