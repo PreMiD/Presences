@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"author": {
+		"name": "dae",
+		"id": "514722220090851328"
+	},
+	"service": "RedHero",
+	"description": {
+		"en": "aqw ps"
+	},
+	"url": "redhero.online",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/vhk2kRt.png",
+	"thumbnail": "https://i.imgur.com/eMifMYk.png",
+	"color": "#2e62ff",
+	"category": "anime",
+	"tags": [
+		"anime"
+	]
+}
