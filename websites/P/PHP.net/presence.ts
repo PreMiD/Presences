@@ -10,6 +10,9 @@ presence.on("UpdateData", () => {
 		},
 		route = document.location.pathname.split("/");
 
+	const manualTitle = document.title
+		.replaceAll("PHP: ", "")
+		.replaceAll(" - Manual", "");
 	switch (route[1]) {
 		case "":
 			data.details = "Browsing the main page...";
@@ -27,7 +30,7 @@ presence.on("UpdateData", () => {
 		case "download-logos.php":
 			data.details = "Viewing the official logos";
 			break;
-		case "manual":{
+		case "manual": {
 			data.details = "Viewing the documentation: ";
 			const manualTitle = document.title
 				.replaceAll("PHP: ", "")
