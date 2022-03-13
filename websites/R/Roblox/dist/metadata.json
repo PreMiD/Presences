@@ -34,12 +34,16 @@
 		"talent.roblox.com",
 		"devforum.roblox.com"
 	],
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"logo": "https://i.imgur.com/75dFVYB.png",
 	"thumbnail": "https://i.imgur.com/pufi4q1.png",
 	"color": "#1b1d1e",
 	"category": "games",
-	"tags": ["game", "community", "gaming"],
+	"tags": [
+		"game",
+		"community",
+		"gaming"
+	],
 	"settings": [
 		{
 			"id": "buttons",
