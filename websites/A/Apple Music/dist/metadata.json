@@ -9,7 +9,7 @@
 			"name": "Alexx",
 			"id": "604182077088202784"
 		},
-    {
+		{
 			"name": "Vasilis",
 			"id": "241929388403195914"
 		}
@@ -27,7 +27,7 @@
 		"music.apple.com",
 		"beta.music.apple.com"
 	],
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"logo": "https://i.imgur.com/06HbqaF.png",
 	"thumbnail": "https://i.imgur.com/dOYmE1u.png",
 	"color": "#FA273F",
@@ -38,7 +38,7 @@
 		"music",
 		"media"
 	],
-  "settings": [
+	"settings": [
 		{
 			"id": "timestamps",
 			"title": "Show timestamps",
