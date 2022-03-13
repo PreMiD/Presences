@@ -116,27 +116,37 @@ presence.on("UpdateData", async () => {
 		/* View Membership */
 		presenceData.details = "Member Page";
 		page = membersMapping[page[1]];
-
-		/* Searching */
-		// /Search?q=(search)
-	} else if (action === "Search") {
-		page = getParam(params, "q");
-		if (page.length === 0) page = "Blank Query...";
-
-		/* View Recent Discuss History */
-	} else if (action === "RecentDiscuss")
-		page = discussMapping[getParam(params, "logtype")];
-	/* Recent Changes History */ else if (action === "RecentChanges")
-		page = changesMapping[getParam(params, "logtype")];
-	/* View Discuss Thread */ else if (
-		action === "thread" ||
-		action === "edit_request"
-	)
-		page = document.querySelector("h1 > a").textContent;
-	// H1 Tag Only one
-	/* Other */ else if (details)
-		page = decodeURI(path.substring(`/${action}/`.length));
-	else page = null;
+	} else {
+		switch (action) {
+			/* Searching */
+			// /Search?q=(search)
+			case "Search": {
+				page = getParam(params, "q");
+				if (page.length === 0) page = "Blank Query...";
+				break;
+			}
+			/* View Recent Discuss History */
+			case "RecentDiscuss": {
+				page = discussMapping[getParam(params, "logtype")];
+				break;
+			}
+			/* Recent Changes History */
+			case "RecentChanges": {
+				page = changesMapping[getParam(params, "logtype")];
+				break;
+			}
+			/* View Discuss Thread */
+			case "thread":
+			case "edit_request": {
+				page = document.querySelector("h1 > a").textContent;
+				break;
+			}
+			/* Other */
+			default:
+				if (details) page = decodeURI(path.substring(`/${action}/`.length));
+				else page = null;
+		}
+	}
 
 	if (action === "w") {
 		presenceData.buttons = [
@@ -155,9 +165,9 @@ presence.on("UpdateData", async () => {
 	 */
 	if (details) {
 		const members = document.querySelectorAll(
-			"#app > div > div > nav > ul[class=r] > li > div > div > div"
+			"#app > div > div > nav > ul > li > div > div > div"
 		);
-		if (members[1].textContent.indexOf("Please login!") === -1) {
+		if (!members[1].textContent.includes("Please login!")) {
 			presenceData.smallImageKey = "user";
 			if (!privacy) presenceData.smallImageText = members[0].textContent;
 		}

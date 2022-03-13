@@ -75,51 +75,66 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Current page: ${pageNumber.textContent}/${lastPage}`;
 
 		presenceData.startTimestamp = browsingTimestamp;
-	} else if (document.location.pathname === "/jobs") {
-		const lastPageNumber: number = +lastPage,
-			lastjobPageNumber: number = +jobPageNumber.textContent;
+	} else {
+		switch (document.location.pathname) {
+			case "/jobs": {
+				const lastPageNumber: number = +lastPage,
+					lastjobPageNumber: number = +jobPageNumber.textContent;
 
-		if (lastjobPageNumber > lastPageNumber) {
-			presence.info(`${lastPageNumber} --- ${lastjobPageNumber}`);
+				if (lastjobPageNumber > lastPageNumber) {
+					presence.info(`${lastPageNumber} --- ${lastjobPageNumber}`);
 
-			lastPage = jobPageNumber.textContent;
+					lastPage = jobPageNumber.textContent;
+				}
+
+				presenceData.details = "Browsing jobs.";
+
+				presenceData.state = `Current page: ${jobPageNumber.textContent}/${lastPage}`;
+
+				presenceData.startTimestamp = browsingTimestamp;
+
+				break;
+			}
+			case "/users": {
+				const lastPageNumber: number = +lastPage,
+					lastusersortagsPageNumber: number =
+						+usersortagsPageNumber.textContent;
+
+				if (lastusersortagsPageNumber > lastPageNumber) {
+					presence.info(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
+
+					lastPage = usersortagsPageNumber.textContent;
+				}
+
+				presenceData.details = "Browsing users.";
+
+				presenceData.state = `Current page: ${usersortagsPageNumber.textContent}/${lastPage}`;
+
+				presenceData.startTimestamp = browsingTimestamp;
+
+				break;
+			}
+			case "/tags": {
+				const lastPageNumber: number = +lastPage,
+					lastusersortagsPageNumber: number =
+						+usersortagsPageNumber.textContent;
+
+				if (lastusersortagsPageNumber > lastPageNumber) {
+					presence.info(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
+
+					lastPage = usersortagsPageNumber.textContent;
+				}
+
+				presenceData.details = "Browsing tags.";
+
+				presenceData.state = `Current page: ${usersortagsPageNumber.textContent}/${lastPage}`;
+
+				presenceData.startTimestamp = browsingTimestamp;
+
+				break;
+			}
+			// No default
 		}
-
-		presenceData.details = "Browsing jobs.";
-
-		presenceData.state = `Current page: ${jobPageNumber.textContent}/${lastPage}`;
-
-		presenceData.startTimestamp = browsingTimestamp;
-	} else if (document.location.pathname === "/users") {
-		const lastPageNumber: number = +lastPage,
-			lastusersortagsPageNumber: number = +usersortagsPageNumber.textContent;
-
-		if (lastusersortagsPageNumber > lastPageNumber) {
-			presence.info(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
-
-			lastPage = usersortagsPageNumber.textContent;
-		}
-
-		presenceData.details = "Browsing users.";
-
-		presenceData.state = `Current page: ${usersortagsPageNumber.textContent}/${lastPage}`;
-
-		presenceData.startTimestamp = browsingTimestamp;
-	} else if (document.location.pathname === "/tags") {
-		const lastPageNumber: number = +lastPage,
-			lastusersortagsPageNumber: number = +usersortagsPageNumber.textContent;
-
-		if (lastusersortagsPageNumber > lastPageNumber) {
-			presence.info(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
-
-			lastPage = usersortagsPageNumber.textContent;
-		}
-
-		presenceData.details = "Browsing tags.";
-
-		presenceData.state = `Current page: ${usersortagsPageNumber.textContent}/${lastPage}`;
-
-		presenceData.startTimestamp = browsingTimestamp;
 	}
 
 	presence.setActivity(presenceData);

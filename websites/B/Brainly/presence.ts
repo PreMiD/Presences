@@ -26,10 +26,10 @@ function setPathName() {
 		document.location.hostname === "brainly.co.id" ||
 		document.location.hostname === "brainly.ro"
 	) {
-		pathNameLocalize.forEach((item, index) => {
+		for (const [index, item] of pathNameLocalize.entries()) {
 			if (document.location.hostname === item.hostname)
 				pathName = pathNameLocalize[index];
-		});
+		}
 	} else pathName = pathNameLocalize[0];
 }
 

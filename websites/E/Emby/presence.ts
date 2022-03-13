@@ -345,8 +345,12 @@ async function getApiClient() {
 async function isEmbyWebClient(): Promise<boolean> {
 	ApiClient ??= await getApiClient();
 
-	if (typeof ApiClient === "object")
-		if (ApiClient._appName && ApiClient._appName === "Emby Web") return true;
+	if (
+		typeof ApiClient === "object" &&
+		ApiClient._appName &&
+		ApiClient._appName === "Emby Web"
+	)
+		return true;
 
 	return false;
 }
@@ -357,9 +361,9 @@ async function isEmbyWebClient(): Promise<boolean> {
 async function handleAudioPlayback(): Promise<void> {
 	// sometimes the buttons are not created fast enough
 	try {
-		const [audioElem] = document.getElementsByTagName("audio"),
+		const [audioElem] = document.querySelectorAll("audio"),
 			buttons = document
-				.getElementsByClassName("nowPlayingBar")[0]
+				.querySelectorAll(".nowPlayingBar")[0]
 				.querySelectorAll("button.itemAction");
 
 		presenceData.details = `Listening to: ${
@@ -470,7 +474,7 @@ async function handleVideoPlayback(): Promise<void> {
 		return;
 	}
 
-	const [videoPlayerElem] = document.getElementsByTagName("video");
+	const [videoPlayerElem] = document.querySelectorAll("video");
 
 	// this variables content will be replaced in details and status properties on presenceData
 	let title, subtitle;
@@ -483,8 +487,8 @@ async function handleVideoPlayback(): Promise<void> {
 	// media metadata
 	let mediaInfo: string | MediaInfo;
 
-	const [videoPlayerContainerElem] = document.body.getElementsByClassName(
-		"videoPlayerContainer"
+	const [videoPlayerContainerElem] = document.body.querySelectorAll(
+		".videoPlayerContainer"
 	);
 
 	// no background image, we're playing live tv
@@ -617,7 +621,7 @@ async function handleItemDetails(): Promise<void> {
  * handleWebClient - handle the presence while the user is in the web client
  */
 async function handleWebClient(): Promise<void> {
-	const audioElems = document.body.getElementsByTagName("audio");
+	const audioElems = document.body.querySelectorAll("audio");
 
 	// audio player active
 	if (

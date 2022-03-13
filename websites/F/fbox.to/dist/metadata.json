@@ -4,12 +4,18 @@
 		"name": "वाह्य",
 		"id": "819696394180100106"
 	},
+	"contributors": [
+		{
+			"name": "Kyrie",
+			"id": "368399721494216706"
+		}
+	],
 	"service": "fbox.to",
 	"description": {
 		"en": "fbox online is free movies streaming website with zero ads, it allows you watch free movies online, watch free tv series online in high quality for free"
 	},
-	"url": "www3.fbox.to",
-	"version": "1.1.7",
+	"url": "www4.fbox.to",
+	"version": "1.2.1",
 	"logo": "https://i.imgur.com/HXOjyCu.png",
 	"thumbnail": "https://i.imgur.com/bCuViFL.png",
 	"color": "#565c67",
@@ -20,6 +26,12 @@
 	],
 	"iframe": true,
 	"settings": [
+		{
+			"id": "image",
+			"title": "Show Images",
+			"icon": "fad fa-images",
+			"value": true
+		},
 		{
 			"id": "buttons",
 			"title": "Show Buttons",

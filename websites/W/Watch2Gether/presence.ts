@@ -66,12 +66,28 @@ presence.on("UpdateData", async () => {
 			if (pathname.includes("edit"))
 				presenceData.details = "Editing user profile";
 			else presenceData.details = "Viewing user rooms";
-		} else if (pathname === "/auth/sign_in")
-			presenceData.details = "Signing In";
-		else if (pathname === "/auth/sign_up") presenceData.details = "Signing Up";
-		else if (pathname === "/pages/plus")
-			presenceData.details = "Checking w2g+ plans";
-		else if (pathname === "/pages/leave") presenceData.details = "Left room";
+		} else {
+			switch (pathname) {
+				case "/auth/sign_in": {
+					presenceData.details = "Signing In";
+					break;
+				}
+				case "/auth/sign_up": {
+					presenceData.details = "Signing Up";
+					break;
+				}
+				case "/pages/plus": {
+					presenceData.details = "Checking w2g+ plans";
+					break;
+				}
+				case "/pages/leave":
+					{
+						presenceData.details = "Left room";
+						// No default
+					}
+					break;
+			}
+		}
 	} else if (hostname === "community.w2g.tv") {
 		if (pathname === "/") presenceData.details = "At Community homepage";
 		else if (pathname.startsWith("/t/")) {

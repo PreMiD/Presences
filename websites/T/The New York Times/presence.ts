@@ -6,19 +6,19 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const title = document.title.replace(" - The New York Times", ""),
 		setting = await getSettings(),
-		{ pathname } = window.location,
+		{ pathname, hostname, href, search } = window.location,
 		path = pathname.split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: time
 		};
 
-	if (window.location.hostname === "www.nytimes.com") {
+	if (hostname === "www.nytimes.com") {
 		if (setting.buttons && !setting.privacy) {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: window.location.href
+					url: href
 				}
 			];
 		}
@@ -49,17 +49,14 @@ presence.on("UpdateData", async () => {
 			if (!setting.privacy) presenceData.state = title;
 		} else if (pathname.includes("/search")) {
 			presenceData.details = setting.privacy ? "Searching" : "Searching for:";
-			if (!setting.privacy) {
-				presenceData.state = new URLSearchParams(window.location.search).get(
-					"query"
-				);
-			}
+			if (!setting.privacy)
+				presenceData.state = new URLSearchParams(search).get("query");
 
 			if (setting.buttons && !setting.privacy) {
 				presenceData.buttons = [
 					{
 						label: "Show Search Results",
-						url: window.location.href
+						url: href
 					}
 				];
 			}
@@ -95,7 +92,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Listen to Podcast",
-						url: window.location.href
+						url: href
 					}
 				];
 			}
@@ -148,7 +145,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read Article",
-						url: window.location.href
+						url: href
 					}
 				];
 			}
@@ -162,20 +159,35 @@ presence.on("UpdateData", async () => {
 					authors?.textContent ?? `By ${author.title}`;
 			}
 		}
-	} else if (window.location.hostname === "myaccount.nytimes.com") {
+	} else if (hostname === "myaccount.nytimes.com") {
 		presenceData.details = "Managing Account";
 
 		if (!setting.privacy) {
-			if (path[2] === "subscription")
-				presenceData.state = "Subscription Overview";
-			else if (path[2] === "billing") presenceData.state = "Billing History";
-			else if (path[2] === "settings")
-				presenceData.state = "Emails and Settings";
-			else if (path[2] === "change-email") presenceData.state = "Change Email";
-			else if (path[2] === "forgot-password")
-				presenceData.state = "Reset Password";
-			else if (path[1] === "get-started" && path[2] === "manage-billing")
-				presenceData.state = "Payment details";
+			switch (path[2]) {
+				case "subscription": {
+					presenceData.state = "Subscription Overview";
+					break;
+				}
+				case "billing": {
+					presenceData.state = "Billing History";
+					break;
+				}
+				case "settings": {
+					presenceData.state = "Emails and Settings";
+					break;
+				}
+				case "change-email": {
+					presenceData.state = "Change Email";
+					break;
+				}
+				case "forgot-password": {
+					presenceData.state = "Reset Password";
+					break;
+				}
+				default:
+					if (path[1] === "get-started" && path[2] === "manage-billing")
+						presenceData.state = "Payment details";
+			}
 		}
 	}
 
@@ -224,9 +236,7 @@ async function getSettings() {
 			[key: string]: boolean;
 		} = {};
 
-	names.forEach((name, i) => {
-		obj[name] = settings[i];
-	});
+	for (const [i, name] of names.entries()) obj[name] = settings[i];
 
 	return obj;
 }

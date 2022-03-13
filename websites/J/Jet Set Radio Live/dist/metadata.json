@@ -15,8 +15,11 @@
 		"en": "Yo! You've heard about Jet Set Radio, right? It's only the hottest radio station straight outta Tokyo-to! Tune in. Turn on. Jet Set Radiooo!!!",
 		"nl": "Yo! Je hebt toch van Jet Set Radio gehoord? Het is alleen het populairste radiostation dat rechtstreeks uit Tokio komt! Stem af. Zet aan. Jetset Radiooo !!!"
 	},
-	"url": "jetsetradio.live",
-	"version": "2.1.9",
+	"url": [
+		"jetsetradio.live",
+		"jetsetradiofuture.live"
+	],
+	"version": "2.2.1",
 	"logo": "https://i.imgur.com/ZiIN6t9.png",
 	"thumbnail": "https://i.imgur.com/TmgNbn4.jpg",
 	"color": "#FFE222",

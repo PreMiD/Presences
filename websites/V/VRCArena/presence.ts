@@ -82,8 +82,8 @@ presence.on("UpdateData", async () => {
 				"h1.MuiTypography-root"
 			).textContent;
 			presenceData.details = "Browsing species";
-			if (thetitle !== "All Species")
-				if (privacymode === false) presenceData.state = thetitle;
+			if (thetitle !== "All Species" && privacymode === false)
+				presenceData.state = thetitle;
 
 			presence.setActivity(presenceData);
 		} else {

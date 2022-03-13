@@ -27,11 +27,22 @@ presence.on("UpdateData", async () => {
 				)
 				.textContent.trim()}`;
 
-			if (guardian === "Titan") presenceData.smallImageKey = "guardian-titan";
-			else if (guardian === "Warlock")
-				presenceData.smallImageKey = "guardian-warlock";
-			else if (guardian === "Hunter")
-				presenceData.smallImageKey = "guardian-hunter";
+			switch (guardian) {
+				case "Titan": {
+					presenceData.smallImageKey = "guardian-titan";
+					break;
+				}
+				case "Warlock": {
+					presenceData.smallImageKey = "guardian-warlock";
+					break;
+				}
+				case "Hunter":
+					{
+						presenceData.smallImageKey = "guardian-hunter";
+						// No default
+					}
+					break;
+			}
 		} else if (window.location.pathname.includes("progress"))
 			presenceData.details = "Progress";
 		else if (window.location.pathname.includes("vendors"))

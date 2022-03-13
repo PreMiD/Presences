@@ -105,11 +105,12 @@ presence.on("UpdateData", async () => {
 	}
 
 	// API Presence
-	if (document.location.origin.includes("api.brick-hill.com")) {
-		if (document.location.pathname.includes("/docs")) {
-			presenceData.details = "Viewing Page:";
-			presenceData.state = "API Docs";
-		}
+	if (
+		document.location.origin.includes("api.brick-hill.com") &&
+		document.location.pathname.includes("/docs")
+	) {
+		presenceData.details = "Viewing Page:";
+		presenceData.state = "API Docs";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

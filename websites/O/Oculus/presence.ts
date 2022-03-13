@@ -328,74 +328,89 @@ presence.on("UpdateData", async () => {
 							// Store home page
 							if (path[2] === "" || !path[2]) presenceData.state = "Home";
 							// Section aka showcases
-							else if (path[2] === "section") {
-								presenceData.details = `Store for ${splitOnDashes(
-									path[1]
-								)} - Showcase`;
-								presenceData.state =
-									document.getElementsByClassName("section-header__title")[0]
-										?.textContent ?? "Loading...";
+							else {
+								switch (path[2]) {
+									case "section": {
+										presenceData.details = `Store for ${splitOnDashes(
+											path[1]
+										)} - Showcase`;
+										presenceData.state =
+											document.querySelectorAll(".section-header__title")[0]
+												?.textContent ?? "Loading...";
 
-								presenceData.buttons.push({
-									label: "View Showcase",
-									url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
-								});
+										presenceData.buttons.push({
+											label: "View Showcase",
+											url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
+										});
 
-								// Developer posts
-							} else if (path[2] === "developer-post") {
-								const title =
-									document.querySelector("._9cq4")?.textContent ?? "Unknown";
+										// Developer posts
 
-								presenceData.state = `Dev-Post: ${
-									title.length > 118 ? `${title.slice(0, 115)}...` : title
-								}`;
+										break;
+									}
+									case "developer-post": {
+										const title =
+											document.querySelector("._9cq4")?.textContent ??
+											"Unknown";
 
-								presenceData.buttons.push({
-									label: "Read Dev-Post",
-									url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
-								});
+										presenceData.state = `Dev-Post: ${
+											title.length > 118 ? `${title.slice(0, 115)}...` : title
+										}`;
 
-								// Searching
-							} else if (path[2] === "search") {
-								presenceData.details = `Store for ${splitOnDashes(
-									path[1]
-								)} - Search`;
-								presenceData.state =
-									document.querySelector(".disco-search__query")?.textContent ??
-									"Unknown";
+										presenceData.buttons.push({
+											label: "Read Dev-Post",
+											url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
+										});
 
-								// Bundles
-							} else if (
-								document.querySelector(
-									"div.bundle-detail-page__description > h1"
-								)?.textContent
-							) {
-								presenceData.details = `Store for ${splitOnDashes(
-									path[1]
-								)} - Bundle`;
-								presenceData.state =
-									document.querySelector(
-										"div.bundle-detail-page__description > h1"
-									)?.textContent ?? "Loading...";
+										// Searching
 
-								presenceData.buttons.push({
-									label: "View bundle",
-									url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
-								});
+										break;
+									}
+									case "search": {
+										presenceData.details = `Store for ${splitOnDashes(
+											path[1]
+										)} - Search`;
+										presenceData.state =
+											document.querySelector(".disco-search__query")
+												?.textContent ?? "Unknown";
 
-								// Games
-							} else {
-								presenceData.details = `Store for ${splitOnDashes(
-									path[1]
-								)} - Game`;
-								presenceData.state =
-									document.getElementsByClassName("app-description__title")[0]
-										?.textContent ?? "Loading...";
+										// Bundles
 
-								presenceData.buttons.push({
-									label: "View Game",
-									url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
-								});
+										break;
+									}
+									default:
+										if (
+											document.querySelector(
+												"div.bundle-detail-page__description > h1"
+											)?.textContent
+										) {
+											presenceData.details = `Store for ${splitOnDashes(
+												path[1]
+											)} - Bundle`;
+											presenceData.state =
+												document.querySelector(
+													"div.bundle-detail-page__description > h1"
+												)?.textContent ?? "Loading...";
+
+											presenceData.buttons.push({
+												label: "View bundle",
+												url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
+											});
+
+											// Games
+										} else {
+											presenceData.details = `Store for ${splitOnDashes(
+												path[1]
+											)} - Game`;
+											presenceData.state =
+												document.querySelectorAll(".app-description__title")[0]
+													?.textContent ?? "Loading...";
+
+											presenceData.buttons.push({
+												label: "View Game",
+												url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
+											});
+										}
+								}
 							}
 
 							break;
