@@ -9,9 +9,9 @@
 		"en": "The official website and documentation for PHP."
 	},
 	"url": [
-    "php.net",
-    "www.php.net"
-  ],
+		"php.net",
+		"www.php.net"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/cC2n2S6.png",
 	"thumbnail": "https://i.imgur.com/O0eMrCB.png",
