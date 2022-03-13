@@ -8,13 +8,13 @@ const presence = new Presence({
 	getStrings = async () => {
 		return presence.getStrings(
 			{
-				play: "general.playing",
-				pause: "general.paused",
+				playing: "general.playing",
+				paused: "general.paused",
 				live: "general.live",
 				viewHome: "general.viewHome",
 				viewProfile: "general.viewProfile",
 				buttonViewProfile: "general.buttonViewProfile",
-				browse: "general.browsing",
+				browsing: "general.browsing",
 				watchingLive: "general.watchingLive",
 				watchingVid: "general.watchingVid",
 				viewCategory: "general.viewCategory",
@@ -24,11 +24,11 @@ const presence = new Presence({
 				subs: "twitch.subs",
 				browsingVideos: "youtube.browsingVideos",
 				ofChannel: "youtube.ofChannel",
-				searchingFor: "general.searchFor",
-				searchingSomething: "general.searchSomething",
+				searchFor: "general.searchFor",
+				searchSomething: "general.searchSomething",
 				search: "general.search",
-				watchStream: "general.buttonWatchStream",
-				watchVideo: "general.buttonWatchVideo"
+				buttonWatchStream: "general.buttonWatchStream",
+				buttonWatchVideo: "general.buttonWatchVideo"
 			},
 			oldLang
 		);
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 
 	if (new URLSearchParams(search).has("genre")) {
 		presenceData.smallImageKey = "reading";
-		presenceData.smallImageText = strings.browse;
+		presenceData.smallImageText = strings.browsing;
 		presenceData.details = strings.viewCategory;
 		if (!privacy) {
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
@@ -98,9 +98,9 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname === "/") presenceData.details = strings.viewHome;
 	else if (pathname.includes("/search")) {
-		if (privacy) presenceData.details = strings.searchingSomething;
+		if (privacy) presenceData.details = strings.searchSomething;
 		else {
-			presenceData.details = strings.searchingFor;
+			presenceData.details = strings.searchFor;
 			presenceData.state = document
 				.querySelector<HTMLHeadingElement>("h2")
 				.textContent.split(":")[1]
@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 					.replace("%streamer%", channelName)
 					.replace("%game%", game);
 				presenceData.buttons = [
-					{ label: strings.watchStream, url: document.URL }
+					{ label: strings.buttonWatchStream, url: document.URL }
 				];
 			}
 			presenceData.smallImageKey = "live";
@@ -158,9 +158,9 @@ presence.on("UpdateData", async () => {
 				}
 
 				presenceData.smallImageKey = paused ? "pause" : "play";
-				presenceData.smallImageText = paused ? strings.pause : strings.play;
+				presenceData.smallImageText = paused ? strings.paused : strings.playing;
 				presenceData.buttons = [
-					{ label: strings.watchVideo, url: document.URL }
+					{ label: strings.buttonWatchVideo, url: document.URL }
 				];
 			}
 		} else if (pathname.includes("/show") && !privacy) {
