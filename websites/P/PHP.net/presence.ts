@@ -26,20 +26,16 @@ presence.on("UpdateData", () => {
 		const manualTitle = document.title
 			.replaceAll("PHP: ", "")
 			.replaceAll(" - Manual", "");
-		if (route[3].includes("function.")) 
-			data.state = `Function: ${manualTitle}`;
+		if (route[3].includes("function.")) data.state = `Function: ${manualTitle}`;
 		else if (route[3].includes("language.")) {
 			const c = route[3].split(".")[1];
 			data.state = `${c.charAt(0).toUpperCase() + c.slice(1)}: ${manualTitle}`;
-		} else
-			data.state = manualTitle;
+		} else data.state = manualTitle;
 	} else if (route[1] === "releases") {
 		if (route[2] != "") {
 			data.details = "Viewing an release version:";
 			data.state = `PHP v${route[2]}`;
-		} else
-			data.details = "Viewing the releases";
-	} else 
-		data.details = "Browsing the website";
+		} else data.details = "Viewing the releases";
+	} else data.details = "Browsing the website";
 	presence.setActivity(data);
 });
