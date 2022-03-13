@@ -283,6 +283,21 @@ presence.on("UpdateData", async function () {
 					presenceData.details = "Viewing Warranty Information";
 
 					break;
+
+				case "privacy":
+				case "terms-and-conditions":
+				case "cookie-statement":
+				case "recruitment-statement":
+					const page = (title: string) =>
+						title
+							.replace(/-/g, " ")
+							.split(/ /g)
+							.map(word => `${word[0].toUpperCase()}${word.slice(1)}`)
+							.join(" ");
+
+					presenceData.details = `Viewing ${page(urlpath[2])}`;
+
+					break;
 			}
 
 			break;
