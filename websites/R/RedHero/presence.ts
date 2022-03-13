@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "logo1",
 		details: `Viewing ${getPage("title")}`,
 		startTimestamp: browsingStamp,
-		buttons: [{ label: "View this page", url: document.location.href }]
+		buttons: [{ label: "View Page", url: document.location.href }]
 	};
 
 	if (getPath == "/game/browser") {
