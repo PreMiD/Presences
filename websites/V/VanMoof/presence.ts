@@ -288,15 +288,11 @@ presence.on("UpdateData", async function () {
 				case "terms-and-conditions":
 				case "cookie-statement":
 				case "recruitment-statement":
-					function page(title: string) {
-						return title
-							.replaceAll(/-/g, " ")
-							.split(/ /g)
-							.map(word => `${word[0].toUpperCase()}${word.slice(1)}`)
-							.join(" ");
-					}
-
-					presenceData.details = `Viewing ${page(urlpath[2])}`;
+					presenceData.details = `Viewing ${urlpath[2]
+						.replaceAll(/-/g, " ")
+						.split(/ /g)
+						.map(word => `${word[0].toUpperCase()}${word.slice(1)}`)
+						.join(" ")}`;
 
 					break;
 			}
