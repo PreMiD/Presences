@@ -189,10 +189,24 @@ presence.on("UpdateData", async function () {
 			switch (urlpath[2]) {
 				case "electric-bikes":
 				case "ebikes":
-					presenceData.details = "Viewing E-Bikes";
+				case "velos-electriques":
+				case "elektrische-fietsen":
+					switch (urlpath[3]) {
+						case "powerbank":
+							presenceData.details = "Viewing PowerBank";
 
-					if (urlpath[3] === "powerbank")
-						presenceData.details = "Viewing PowerBank";
+							break;
+
+						case "app":
+							presenceData.details = "Viewing App";
+
+							break;
+
+						default:
+							presenceData.details = "Viewing E-Bikes";
+
+							break;
+					}
 
 					break;
 
@@ -245,12 +259,40 @@ presence.on("UpdateData", async function () {
 					break;
 
 				case "company-bikes":
+				case "firmenfahrräder":
 					presenceData.details = "Viewing Company Bikes";
 
 					break;
 
 				case "certified-partner":
 					presenceData.details = "About Certified Partnerships";
+
+					break;
+
+				case "shipping":
+					presenceData.details = "Viewing Shipping Information";
+
+					break;
+
+				case "returns":
+					presenceData.details = "Viewing Return Policy";
+
+					break;
+
+				case "warranty":
+					presenceData.details = "Viewing Warranty Information";
+
+					break;
+
+				case "privacy":
+				case "terms-and-conditions":
+				case "cookie-statement":
+				case "recruitment-statement":
+					presenceData.details = `Viewing ${urlpath[2]
+						.replaceAll(/-/g, " ")
+						.split(/ /g)
+						.map(word => `${word[0].toUpperCase()}${word.slice(1)}`)
+						.join(" ")}`;
 
 					break;
 			}
