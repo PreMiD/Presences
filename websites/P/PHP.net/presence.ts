@@ -9,6 +9,7 @@ presence.on("UpdateData", () => {
 			startTimestamp: browsingStamp
 		},
 		route = document.location.pathname.split("/");
+	data.buttons = [{ label: "View Website", url: document.location.href }];
 
 	switch (route[1]) {
 		case "":
@@ -27,14 +28,20 @@ presence.on("UpdateData", () => {
 		case "download-logos.php":
 			data.details = "Viewing the official logos";
 			break;
+		case "manual-lookup.php":
+			data.details = "Searching the documentation";
+			break;
 		case "manual": {
 			data.details = "Viewing the documentation: ";
 			const manualTitle = document.title
 				.replaceAll("PHP: ", "")
 				.replaceAll(" - Manual", "");
-			if (route[3].includes("function."))
+			if (route[3].includes("function.")) {
 				data.state = `Function: ${manualTitle}`;
-			else if (route[3].includes("language.")) {
+				data.buttons = [
+					{ label: "View Function", url: document.location.href }
+				];
+			} else if (route[3].includes("language.")) {
 				const c = route[3].split(".")[1];
 				data.state = `${
 					c.charAt(0).toUpperCase() + c.slice(1)
