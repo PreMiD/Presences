@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
 		case "download-logos.php":
 			data.details = "Viewing the official logos";
 			break;
-		case "manual":
+		case "manual":{
 			data.details = "Viewing the documentation: ";
 			const manualTitle = document.title
 				.replaceAll("PHP: ", "")
@@ -41,6 +41,7 @@ presence.on("UpdateData", () => {
 				}: ${manualTitle}`;
 			} else data.state = manualTitle;
 			break;
+		}
 		case "releases":
 			if (route[2] != "") {
 				data.details = "Viewing an release version:";
