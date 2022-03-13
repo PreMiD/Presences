@@ -6,15 +6,19 @@
 	},
 	"service": "RedHero",
 	"description": {
-		"en": "aqw ps"
+		"en": "RedHero is a completely free-to-play online MMORPG that will surely know how to keep you busy! RedHero is updated weekly, with new events and items, to keep all of the active members on the run! Be sure to bring your friends with you, because it's one hell-of-a-ride!",
+		"pt": "RedHero é um MMORPG online totalmente gratuito que certamente saberá como mantê-lo ocupado! RedHero é atualizado semanalmente, com novos eventos e itens, para manter todos os membros ativos em fuga! Certifique-se de trazer seus amigos com você, porque é um passeio infernal!"
+
 	},
 	"url": "redhero.online",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/vhk2kRt.png",
 	"thumbnail": "https://i.imgur.com/eMifMYk.png",
-	"color": "#2e62ff",
-	"category": "anime",
+	"color": "#ffb441",
+	"category": "games",
 	"tags": [
-		"anime"
+		"game",
+		"multiplayer",
+		"browser"
 	]
 }
