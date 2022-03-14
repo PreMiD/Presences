@@ -7,7 +7,6 @@
 		"eslint:recommended",
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:eqeqeq-fix/recommended",
 		"plugin:prettier/recommended"
 	],
 	"globals": {

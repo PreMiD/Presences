@@ -43,7 +43,7 @@
 		"beta.premid.app",
 		"status.premid.app"
 	],
-	"version": "3.0.13",
+	"version": "3.1.0",
 	"logo": "https://i.imgur.com/eYLI4hf.png",
 	"thumbnail": "https://i.imgur.com/OYxIOZ8.png",
 	"color": "#7289DA",
@@ -62,6 +62,12 @@
 			"id": "time",
 			"title": "Show timestamps",
 			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "showButtons",
+			"title": "Show buttons",
+			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
 	]

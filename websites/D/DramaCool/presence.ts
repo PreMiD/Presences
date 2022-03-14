@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = strings.searching;
 	} else if (pathname.match("/([a-z0-9-]+)-episode-([0-9]+)")) {
-		ShowData.title = document.querySelector("div.Category a").textContent;
+		ShowData.title = document.querySelector("div.category a").textContent;
 
 		if (ShowData.duration) {
 			ShowData.ep = (document.title.match(
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 				},
 				{
 					label: strings.viewSeriesButton,
-					url: document.querySelector<HTMLAnchorElement>("div.Category a").href
+					url: document.querySelector<HTMLAnchorElement>("div.category a").href
 				}
 			];
 
