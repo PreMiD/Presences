@@ -6,7 +6,7 @@
 	},
 	"service": "PHP.net",
 	"description": {
-		"en": "The official website and documentation for PHP."
+		"en": "PHP is a popular general-purpose scripting language that is especially suited to web development. Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world."
 	},
 	"url": [
 		"php.net",
@@ -14,14 +14,11 @@
 	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/cC2n2S6.png",
-	"thumbnail": "https://i.imgur.com/O0eMrCB.png",
+	"thumbnail": "https://i.imgur.com/MYTegAn.png",
 	"color": "#8892BF",
 	"category": "other",
 	"tags": [
-		"other",
 		"development",
-		"php-net",
-		"php",
 		"programming",
 		"documentation"
 	]
