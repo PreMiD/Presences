@@ -31,7 +31,7 @@
 		"@types/node": "^16.11.26",
 		"@types/prettier": "^2.4.4",
 		"@types/semver": "^7.3.9",
-		"@typescript-eslint/eslint-plugin": "^5.14.0",
+		"@typescript-eslint/eslint-plugin": "^5.15.0",
 		"@typescript-eslint/parser": "^5.14.0",
 		"axios": "^0.26.1",
 		"chalk": "^4.1.2",
