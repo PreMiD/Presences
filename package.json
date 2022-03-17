@@ -22,7 +22,7 @@
 		"@babel/core": "^7.17.7",
 		"@babel/preset-env": "^7.16.11",
 		"@commitlint/cli": "^16.2.1",
-		"@commitlint/config-angular": "^16.2.1",
+		"@commitlint/config-angular": "^16.2.3",
 		"@types/babel__core": "^7.1.18",
 		"@types/chrome": "^0.0.180",
 		"@types/debug": "^4.1.7",
