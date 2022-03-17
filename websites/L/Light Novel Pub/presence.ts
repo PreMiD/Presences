@@ -9,42 +9,52 @@ presence.on("UpdateData", async () => {
 			details: "Browsing...",
 			startTimestamp: browsingStamp
 		};
-
 	if (pathname.startsWith("/novel/")) {
 		presenceData.largeImageKey = document
 			.querySelector('meta[property="og:image"]')
 			.getAttribute("content");
 		presenceData.smallImageKey = "logo";
-		presenceData.startTimestamp = browsingStamp;
-		presenceData.buttons = [
-			{
-				label: "",
-				url: `${document.location}`
-			}
-		];
-
 		switch (true) {
 			case pathname.endsWith("-12032016"):
 				presenceData.details = "Viewing a Novel";
 				presenceData.state = title.split(" | Light")[0];
-				presenceData.buttons[0].label =
-					title.split(" | Light")[0].length >= 30
-						? "View Novel"
-						: title.split(" | Light")[0];
+				presenceData.buttons = [
+					{
+						label:
+							title.split(" | Light")[0].length >= 30
+								? "View Novel"
+								: title.split(" | Light")[0],
+						url: `${document.location}`
+					}
+				];
 				break;
 			case pathname.endsWith("/reviews"):
 				presenceData.details = "Viewing the Reviews";
 				presenceData.state = title.split(" | Light")[0].split("Novel User")[0];
-				presenceData.buttons[0].label =
-					presenceData.state.length >= 30 ? "View Novel" : presenceData.state;
+				presenceData.buttons = [
+					{
+						label:
+							presenceData.state.length >= 30
+								? "View Novel"
+								: presenceData.state,
+						url: `${document.location}`
+					}
+				];
 				break;
 			case pathname.endsWith("/chapters"):
 				presenceData.details = "Viewing the Chapters";
 				presenceData.state = title
 					.split(" | Light")[0]
 					.split("Novel Chapters")[0];
-				presenceData.buttons[0].label =
-					presenceData.state.length >= 30 ? "View Novel" : presenceData.state;
+				presenceData.buttons = [
+					{
+						label:
+							presenceData.state.length >= 30
+								? "View Novel"
+								: presenceData.state,
+						url: `${document.location}`
+					}
+				];
 				break;
 			default:
 				presenceData.details = title
@@ -72,6 +82,5 @@ presence.on("UpdateData", async () => {
 				break;
 		}
 	}
-
 	presence.setActivity(presenceData);
 });
