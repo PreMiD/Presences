@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.6",
+  "author": {
+    "name": "BossDaily",
+    "id": "274973338676494347"
+  },
+  "service": "BloomHost",
+  "description": {
+    "en": "This is a Premid extension for Bloom Host. A minecraft server host."
+  },
+  "url": [
+    "docs.bloom.host",
+    "bloom.host",
+    "mc.bloom.host",
+    "vps.bloom.host",
+    "billing.bloom.host",
+    "status.bloom.host",
+    "demo.bloom.host"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/1mVjQ4h.png",
+  "thumbnail": "https://i.imgur.com/R5huY4r.png",
+  "color": "#ff8040",
+  "category": "games",
+  "tags": [
+    "hinecraft-host",
+    "hosting",
+    "cloud",
+    "node",
+    "mc-host",
+    "minecraft",
+    "minecraft-server",
+    "servers",
+    "cloud-hosting",
+    "bloom-host",
+    "bloom",
+    "dedicated-server-hosting"
+  ]
+}
