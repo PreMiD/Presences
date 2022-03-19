@@ -1,21 +1,42 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "service": "ComicK",
-  "author": {
-    "name": "वाह्य",
-    "id": "819696394180100106"
-  },
-  "category": "other",
-  "logo": "https://i.imgur.com/DeNqLCB.png",
-  "thumbnail": "https://i.imgur.com/9Wp14l1.png",
-  "version": "1.0.3",
-  "color": "#f698c7",
-  "tags": [
-    "manga",
-    "comic-reader"
-  ],
-  "url": "comick.fun",
-  "description": {
-    "en": "🚀 ComicK - Fastest Comic Reader"
-  }
+	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"author": {
+		"name": "वाह्य",
+		"id": "819696394180100106"
+	},
+	"contributors": [
+		{
+			"name": "Kyrie",
+			"id": "368399721494216706"
+		}
+	],
+	"service": "ComicK",
+	"description": {
+		"en": "🚀 ComicK - Fastest Comic Reader",
+		"vi_VN": "🚀 ComicK - Trang đọc truyện tranh nhanh nhất"
+	},
+	"url": "comick.fun",
+	"version": "1.1.1",
+	"logo": "https://i.imgur.com/DeNqLCB.png",
+	"thumbnail": "https://i.imgur.com/9Wp14l1.png",
+	"color": "#f698c7",
+	"category": "other",
+	"tags": [
+		"manga",
+		"comic-reader"
+	],
+	"settings": [
+		{
+			"id": "image",
+			"title": "Show Image",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
 }

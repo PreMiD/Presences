@@ -1,208 +1,255 @@
 const presence = new Presence({
-    clientId: "889918462477095012"
-  }),
-  browsingTimestamp = new Date().getTime();
+		clientId: "889918462477095012"
+	}),
+	browsingTimestamp = Date.now();
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: browsingTimestamp
-    },
-    [, page, pageType, pageTypeType] = location.pathname.split("/");
+	const presenceData: PresenceData = {
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp
+		},
+		[, page, pageType, pageTypeType] = location.pathname.split("/");
 
-  if (!page) {
-    //Uploads
-    const subCount =
-        document.querySelector(".simplebar-content")?.children.length,
-      showCount = await presence.getSetting("subscriptions");
+	if (!page) {
+		//Uploads
+		const subCount =
+				document.querySelector(".simplebar-content")?.children.length,
+			showCount = await presence.getSetting<boolean>("subscriptions");
 
-    presenceData.details = "Vieweing uploads";
+		presenceData.details = "Vieweing uploads";
 
-    if (showCount && subCount > 0) {
-      presenceData.state = `${subCount - 1} ${
-        subCount > 2 ? "Subscriptions" : "Subscription"
-      }`;
-    }
-  } else if (page === "discover") {
-    //Homepage
-    presenceData.details = "Viewing Homepage";
-    presenceData.state = "Say Hello To Floatplane";
-  } else if (page === "browse") {
-    //Browsing
-    const searchTerm = (
-        document.querySelector(".search-bar") as HTMLInputElement
-      )?.value,
-      channelCount = document.querySelector(".creator-cards")?.children.length;
+		if (showCount && subCount > 0) {
+			presenceData.state = `${subCount - 1} ${
+				subCount > 2 ? "Subscriptions" : "Subscription"
+			}`;
+		}
+	} else {
+		switch (page) {
+			case "discover": {
+				//Homepage
+				presenceData.details = "Viewing Homepage";
+				presenceData.state = "Say Hello To Floatplane";
 
-    presenceData.details = "Browsing";
-    presenceData.state = `${channelCount} Channels`;
-    presenceData.smallImageKey = "reading";
-    presenceData.smallImageText = "Browsing";
+				break;
+			}
+			case "browse": {
+				//Browsing
+				const searchTerm = (
+						document.querySelector(".search-bar") as HTMLInputElement
+					)?.value,
+					channelCount =
+						document.querySelector(".creator-cards")?.children.length;
 
-    if (searchTerm) {
-      let stringFormated;
+				presenceData.details = "Browsing";
+				presenceData.state = `${channelCount} Channels`;
+				presenceData.smallImageKey = "reading";
+				presenceData.smallImageText = "Browsing";
 
-      switch (channelCount) {
-        case 1:
-          if (document.querySelector(".search-not-found")) {
-            stringFormated = "No Results";
-            break;
-          }
-          stringFormated = "1 Channel";
-          break;
+				if (searchTerm) {
+					let stringFormated;
 
-        default:
-          stringFormated = `${channelCount} Channels`;
-      }
+					switch (channelCount) {
+						case 1:
+							if (document.querySelector(".search-not-found")) {
+								stringFormated = "No Results";
+								break;
+							}
+							stringFormated = "1 Channel";
+							break;
 
-      presenceData.details = `Searching: ${searchTerm}`;
-      presenceData.state = stringFormated;
-      presenceData.smallImageKey = "search";
-      presenceData.smallImageText = "Searching";
-    }
-  } else if (page === "channel") {
-    //Viewing a channel
-    const channelTitle = document.querySelector(".channel-title")?.textContent;
+						default:
+							stringFormated = `${channelCount} Channels`;
+					}
 
-    //Wait for page to load
-    if (!channelTitle) return;
+					presenceData.details = `Searching: ${searchTerm}`;
+					presenceData.state = stringFormated;
+					presenceData.smallImageKey = "search";
+					presenceData.smallImageText = "Searching";
+				}
 
-    presenceData.details = "Viewing channel:";
-    presenceData.state = channelTitle;
-    presenceData.largeImageKey = pageType.toLowerCase();
-    presenceData.smallImageKey = "logo";
-    presenceData.smallImageText = document.title;
-    presenceData.buttons = [{ label: "View Channel", url: location.href }];
+				break;
+			}
+			case "channel": {
+				//Viewing a channel
+				const channelTitle =
+					document.querySelector(".channel-title")?.textContent;
 
-    if (pageTypeType === "live") {
-      //Stream
-      const title = document.querySelector(".title-text")?.textContent,
-        video = document.querySelector("video") as HTMLVideoElement;
+				//Wait for page to load
+				if (!channelTitle) return;
 
-      if (!title || !video) return;
+				presenceData.details = "Viewing channel:";
+				presenceData.state = channelTitle;
+				presenceData.largeImageKey = pageType.toLowerCase();
+				presenceData.smallImageKey = "logo";
+				presenceData.smallImageText = document.title;
+				presenceData.buttons = [{ label: "View Channel", url: location.href }];
 
-      delete presenceData.startTimestamp;
+				if (pageTypeType === "live") {
+					//Stream
+					const title = document.querySelector(".title-text")?.textContent,
+						video = document.querySelector("video") as HTMLVideoElement;
 
-      presenceData.details = title;
-      presenceData.smallImageKey = "live";
-      presenceData.smallImageText = "Live";
-      presenceData.buttons = [
-        {
-          label: "View Stream",
-          url: location.href
-        },
-        {
-          label: "View Channel",
-          url: (document.querySelector(".channel-title") as HTMLLinkElement)
-            ?.href
-        }
-      ];
-    }
-  } else if (pageType === "profile") {
-    //User
-    const channelTitle = document.querySelector(".channel-title").textContent;
+					if (!title || !video) return;
 
-    //Wait for page to load
-    if (!channelTitle) return;
+					delete presenceData.startTimestamp;
 
-    presenceData.details = "Viewing user:";
-    presenceData.state = channelTitle;
-    presenceData.buttons = [{ label: "View User", url: location.href }];
-  } else if (pageType === "settings") {
-    //Settings
-    presenceData.details = "Viewing thier";
-    presenceData.state = "Settings";
-  } else if (pageType === "help") {
-    //Help pages
-    presenceData.details = "Viewing:";
-    presenceData.state = "Support pages";
-  } else if (page === "support") {
-    //Support Pages
-    const searchTerm = (document.querySelector("#search") as HTMLInputElement)
-        .value,
-      faqCount = document.querySelectorAll(".question-answer").length;
+					presenceData.details = title;
+					presenceData.smallImageKey = "live";
+					presenceData.smallImageText = "Live";
+					presenceData.buttons = [
+						{
+							label: "View Stream",
+							url: location.href
+						},
+						{
+							label: "View Channel",
+							url: (document.querySelector(".channel-title") as HTMLLinkElement)
+								?.href
+						}
+					];
+				}
 
-    presenceData.details = "Viewing FAQ";
-    presenceData.state = `${faqCount} topics`;
+				break;
+			}
+			default:
+				switch (pageType) {
+					case "profile": {
+						//User
+						const channelTitle =
+							document.querySelector(".channel-title").textContent;
 
-    if (searchTerm) {
-      let stringFormated;
+						//Wait for page to load
+						if (!channelTitle) return;
 
-      switch (faqCount) {
-        case 1:
-          stringFormated = "1 Topic";
-          break;
-        case 0:
-          stringFormated = "No Results";
-          break;
-        default:
-          stringFormated = `${faqCount} Topics`;
-      }
+						presenceData.details = "Viewing user:";
+						presenceData.state = channelTitle;
+						presenceData.buttons = [{ label: "View User", url: location.href }];
 
-      presenceData.details = `Searching FAQ: ${searchTerm}`;
-      presenceData.state = stringFormated;
-      presenceData.smallImageKey = "search";
-      presenceData.smallImageText = "Searching";
-    }
-  } else if (page === "legal") {
-    //Support Pages
-    presenceData.details = "Legal Stuff";
-    presenceData.buttons = [
-      {
-        label: "Terms of Service",
-        url: "https://www.floatplane.com/legal/terms"
-      },
-      {
-        label: "Privacy Policy",
-        url: "https://www.floatplane.com/legal/privacy"
-      }
-    ];
-  } else if (page === "post") {
-    //Video
-    const title = document.querySelector(".title-text")?.textContent,
-      channel = document.querySelector(".channel-title")?.textContent,
-      channelURL = (
-        document.querySelector(".channel-title") as HTMLLinkElement
-      )?.href.toLowerCase(),
-      video = document.querySelector("video") as HTMLVideoElement;
+						break;
+					}
+					case "settings": {
+						//Settings
+						presenceData.details = "Viewing thier";
+						presenceData.state = "Settings";
 
-    //Wait for page to load
-    if (!video) return;
+						break;
+					}
+					case "help": {
+						//Help pages
+						presenceData.details = "Viewing:";
+						presenceData.state = "Support pages";
 
-    const timestamps = presence.getTimestampsfromMedia(video),
-      [, endTS] = timestamps;
+						break;
+					}
+					default:
+						switch (page) {
+							case "support": {
+								//Support Pages
+								const searchTerm = (
+										document.querySelector("#search") as HTMLInputElement
+									).textContent,
+									faqCount =
+										document.querySelectorAll(".question-answer").length;
 
-    delete presenceData.startTimestamp;
+								presenceData.details = "Viewing FAQ";
+								presenceData.state = `${faqCount} topics`;
 
-    presenceData.details = title;
-    presenceData.state = channel;
-    presenceData.largeImageKey = channelURL?.split("/").slice(-1)[0];
-    presenceData.endTimestamp = endTS;
-    presenceData.smallImageKey = video.paused ? "pause" : "play";
-    presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-    presenceData.buttons = [
-      {
-        label: "View Video",
-        url: location.href
-      },
-      {
-        label: "View Channel",
-        url: (document.querySelector(".channel-title") as HTMLLinkElement).href
-      }
-    ];
+								if (searchTerm) {
+									let stringFormated;
 
-    if (video.paused) {
-      delete presenceData.startTimestamp;
-      delete presenceData.endTimestamp;
-    }
-  }
+									switch (faqCount) {
+										case 1:
+											stringFormated = "1 Topic";
+											break;
+										case 0:
+											stringFormated = "No Results";
+											break;
+										default:
+											stringFormated = `${faqCount} Topics`;
+									}
 
-  const showButtons = await presence.getSetting("buttons");
+									presenceData.details = `Searching FAQ: ${searchTerm}`;
+									presenceData.state = stringFormated;
+									presenceData.smallImageKey = "search";
+									presenceData.smallImageText = "Searching";
+								}
 
-  if (!showButtons) delete presenceData.buttons;
+								break;
+							}
+							case "legal": {
+								//Support Pages
+								presenceData.details = "Legal Stuff";
+								presenceData.buttons = [
+									{
+										label: "Terms of Service",
+										url: "https://www.floatplane.com/legal/terms"
+									},
+									{
+										label: "Privacy Policy",
+										url: "https://www.floatplane.com/legal/privacy"
+									}
+								];
 
-  if (!presenceData.details) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(presenceData);
+								break;
+							}
+							case "post": {
+								//Video
+								const video = document.querySelector(
+									"video"
+								) as HTMLVideoElement;
+
+								//Wait for page to load
+								if (!video) return;
+								delete presenceData.startTimestamp;
+
+								presenceData.details =
+									document.querySelector(".title-text")?.textContent;
+								presenceData.state =
+									document.querySelector(".channel-title")?.textContent;
+								presenceData.largeImageKey = (
+									document.querySelector(".channel-title") as HTMLLinkElement
+								)?.href
+									.toLowerCase()
+									?.split("/")
+									.slice(-1)[0];
+								[, presenceData.endTimestamp] =
+									presence.getTimestampsfromMedia(video);
+								presenceData.smallImageKey = video.paused ? "pause" : "play";
+								presenceData.smallImageText = video.paused
+									? "Paused"
+									: "Playing";
+								presenceData.buttons = [
+									{
+										label: "View Video",
+										url: location.href
+									},
+									{
+										label: "View Channel",
+										url: (
+											document.querySelector(
+												".channel-title"
+											) as HTMLLinkElement
+										).href
+									}
+								];
+
+								if (video.paused) {
+									delete presenceData.startTimestamp;
+									delete presenceData.endTimestamp;
+								}
+
+								break;
+							}
+							// No default
+						}
+				}
+		}
+	}
+
+	const showButtons = await presence.getSetting<boolean>("buttons");
+
+	if (!showButtons) delete presenceData.buttons;
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

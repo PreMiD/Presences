@@ -4,28 +4,17 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-patch", "version-update:semver-minor"]
-    assignees:
-      - "TheDropX"
-      - "Timeraa"
     commit-message:
-      prefix: "🔼"
-      prefix-development: "🔼"
+      prefix: chore
+      include: scope
     labels:
-      - "🔼 Dependencies"
-    open-pull-requests-limit: 15
+      - "dependencies"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
-    assignees:
-      - "TheDropX"
-      - "Timeraa"
     commit-message:
-      prefix: "🔼"
-      prefix-development: "🔼"
+      prefix: chore
+      include: scope
     labels:
-      - "🔼 Dependencies"
-    open-pull-requests-limit: 15
+      - "dependencies"

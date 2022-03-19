@@ -1,27 +1,25 @@
 const presence = new Presence({
-  clientId: "631970829348896769"
+	clientId: "631970829348896769"
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-      largeImageKey: "krunker"
-    },
-    gameInfo = document.querySelector("#curGameInfo");
+	const presenceData: PresenceData = {
+			largeImageKey: "krunker"
+		},
+		gameInfo = document.querySelector("#curGameInfo");
 
-  if (gameInfo) {
-    const className = document.querySelector("#menuClassName"),
-      classSubtext = document.querySelector("#menuClassSubtext"),
-      playerInfo = `${className.textContent} (${classSubtext.textContent})`;
+	if (gameInfo) {
+		presenceData.details = gameInfo.textContent.replace("on ", " on ");
+		presenceData.state = `${
+			document.querySelector("#menuClassName").textContent
+		} (${document.querySelector("#menuClassSubtext").textContent})`;
+		presenceData.startTimestamp = Date.now();
 
-    data.details = gameInfo.textContent.replace("on ", " on ");
-    data.state = playerInfo;
-    data.startTimestamp = Date.now();
+		presence.setActivity(presenceData);
+	} else {
+		presenceData.details = "In the menus";
+		presenceData.startTimestamp = Date.now();
 
-    presence.setActivity(data);
-  } else {
-    data.details = "In the menus";
-    data.startTimestamp = Date.now();
-
-    presence.setActivity(data);
-  }
+		presence.setActivity(presenceData);
+	}
 });
