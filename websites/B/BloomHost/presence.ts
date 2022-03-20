@@ -100,10 +100,10 @@ presence.on("UpdateData", async () => {
     } else if (path.hostname === "status.bloom.host"){
       if (path.pathname.includes('report')){
         const title = document.querySelector(' div.portlet-body > div.row > div.col-xs-12 > span').textContent
-        presenceData.details = "Viewing the docs"
-        presenceData.state = `Viewing the status of: ${title}`
+        presenceData.details = "Viewing the Status Page"
+        presenceData.state = `Viewing the status of: ${title.replace(' (Recent History)', '').trim()}`
         presenceData.smallImageKey = 'stream-solid'
-      // console.log('HOGG RIDDAAAAAA')
+       console.log(`Viewing the status of: ${title.replace(' (Recent History)', '')}`)
       } else {
         presenceData.details = "Viewing the Status page"
         presenceData.smallImageKey = 'stream-solid'
