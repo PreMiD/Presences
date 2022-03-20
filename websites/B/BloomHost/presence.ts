@@ -84,7 +84,31 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Using the Panel"
         presenceData.state = `Viewing: Databases`
         presenceData.smallImageKey = 'database-solid'
+      } else if (path.pathname.includes('server') && path.pathname.includes('minecraft')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Managing: Minecraft players`
+        
+      } else if (path.pathname.includes('server') && path.pathname.includes('plugins')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Installing: Plugins`
+        
+      } else if (path.pathname.includes('server') && path.pathname.includes('modpacks')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Installing: Modpacks`
+        
       } 
+    } else if (path.hostname === "status.bloom.host"){
+      if (path.pathname.includes('report')){
+        const title = document.querySelector(' div.portlet-body > div.row > div.col-xs-12 > span').textContent
+        presenceData.details = "Viewing the docs"
+        presenceData.state = `Viewing the status of: ${title}`
+        presenceData.smallImageKey = 'stream-solid'
+      // console.log('HOGG RIDDAAAAAA')
+      } else {
+        presenceData.details = "Viewing the Status page"
+        presenceData.smallImageKey = 'stream-solid'
+      // console.log('HOGG RIDDAAAAAA')
+      }
     }
     if (!presenceData.details) {
       presence.setTrayTitle();
