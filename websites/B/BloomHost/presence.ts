@@ -76,11 +76,15 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Using the Panel"
         presenceData.state = `Viewing: SubUsers`
         presenceData.smallImageKey = 'users-solid'
-      } else if (path.pathname.includes('server') && path.pathname.includes('network')){
+      } else if (path.pathname.includes('server') && path.pathname.includes('schedules')){
         presenceData.details = "Using the Panel"
         presenceData.state = `Viewing: Schedules`
-        presenceData.smallImageKey = 'network-wired-solid'
-      }
+        presenceData.smallImageKey = 'calender-solid'
+      } else if (path.pathname.includes('server') && path.pathname.includes('databases')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Viewing: Databases`
+        presenceData.smallImageKey = 'database-solid'
+      } 
     }
     if (!presenceData.details) {
       presence.setTrayTitle();
