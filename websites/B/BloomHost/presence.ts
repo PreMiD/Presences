@@ -34,6 +34,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing the docs"
       presenceData.state = `Reading: ${title}`
       presenceData.smallImageKey = 'book-open-solid'
+      // console.log('HOGG RIDDAAAAAA')
     } else if (path.hostname === "mc.bloom.host") {
       if (path.pathname.includes('account')){
         presenceData.details = "Using the Panel"
@@ -51,6 +52,34 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Using the Panel"
         presenceData.state = `Using: The Server Importer `
         presenceData.smallImageKey = 'file-import-solid'
+      } else if (path.pathname.includes('server') && path.pathname.includes('startup')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Viewing: Startup`
+        presenceData.smallImageKey = 'rocket-solid'
+      } else if (path.pathname.includes('server') && path.pathname.includes('settings')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Viewing: Settings`
+        presenceData.smallImageKey = 'cog-solid'
+      } else if (path.pathname.includes('server') && path.pathname.includes('subdomain')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Viewing: Subdomains`
+        presenceData.smallImageKey = 'map-pin-solid'
+      } else if (path.pathname.includes('server') && path.pathname.includes('network')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Viewing: Ports & Proxies`
+        presenceData.smallImageKey = 'network-wired-solid'
+      } else if (path.pathname.includes('server') && path.pathname.includes('backups')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Creating: Backups`
+        presenceData.smallImageKey = 'window-restore-solid'
+      } else if (path.pathname.includes('server') && path.pathname.includes('users')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Viewing: SubUsers`
+        presenceData.smallImageKey = 'users-solid'
+      } else if (path.pathname.includes('server') && path.pathname.includes('network')){
+        presenceData.details = "Using the Panel"
+        presenceData.state = `Viewing: Schedules`
+        presenceData.smallImageKey = 'network-wired-solid'
       }
     }
     if (!presenceData.details) {
