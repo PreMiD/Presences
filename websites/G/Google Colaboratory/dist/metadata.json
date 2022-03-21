@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"author": {
+		"name": "proNOOBIE",
+		"id": "451845087098568707"
+	},
+	
+	"service": "Google Colaboratory",
+	"description": {
+		"en": "Google Colaboratory is an  free Jupyter notebook environment that runs entirely in the cloud offered by Google Research. Colab notebooks allow you to combine executable code and rich text in a single document, along with images, HTML, LaTeX and more.",
+		"nl": "Google Colaboratory is een gratis Jupyter-notebookomgeving die volledig in de cloud draait en wordt aangeboden door Google Research. Met Colab-notebooks kunt u uitvoerbare code en rich text combineren in één document, samen met afbeeldingen, HTML, LaTeX en meer."
+	},
+	"url": "colab.research.google.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/nRGn53J.png",
+	"thumbnail": "https://i.imgur.com/myQhFWl.png",
+	"color": "#F18E05",
+	"category": "other",
+	"tags": [
+		"developement",
+		"coding",
+		"developers",
+		"programming"
+	],
+	"settings": [
+		{
+			"id": "details",
+			"title": "Details Template",
+			"icon": "fas fa-info",
+			"value": "Editing %file%",
+			"placeholder": "can use %file%, %path%, %workspace%, %folder%, %workspaceOrFolder%, %ext%"
+		}
+		
+	]
+}
