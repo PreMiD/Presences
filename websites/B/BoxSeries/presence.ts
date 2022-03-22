@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "955350055034945576"
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -22,7 +22,7 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	const [Logo, Cover, Privacy, Buttons, Timestamps] = await Promise.all([
+	const [logo, cover, privacy, buttons, timestamps] = await Promise.all([
 			presence.getSetting<number>("logo"),
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("privacy"),
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			"pesquisa não encontrada",
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: ["default", "default_horizontal_tp"][Logo],
+			largeImageKey: ["default", "default_horizontal_tp"][logo],
 			startTimestamp: browsingTimestamp
 		};
 	if (location.search.includes("s")) {
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 				break;
 			case "generos":
 				presenceData.details = "Vendo Gêneros";
-				if (!Privacy && pathArray[4]) presenceData.state = titleMain;
+				if (!privacy && pathArray[4]) presenceData.state = titleMain;
 				presenceData.smallImageKey = "reading";
 				break;
 			case "anos":
@@ -65,17 +65,17 @@ presence.on("UpdateData", async () => {
 				break;
 			case "release":
 				presenceData.details = "Vendo Liberação";
-				if (!Privacy && pathArray[4]) presenceData.state = titleMain;
+				if (!privacy && pathArray[4]) presenceData.state = titleMain;
 				presenceData.smallImageKey = "reading";
 				break;
 			case "series":
 				presenceData.details = "Vendo Séries";
-				if (Cover) {
+				if (cover) {
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						"div > div > div > div.poster-season > img"
 					).src;
 				}
-				if (!Privacy && pathArray[4]) {
+				if (!privacy && pathArray[4]) {
 					presenceData.state = `${
 						document.querySelector("div > div > div > div.data > h1")
 							?.textContent ?? "pesquisa não encontrada"
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 			case "episodio":
-				if (Cover) {
+				if (cover) {
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						"#dt_contenedor > div.season-bg-bs > div > a > img"
 					).src;
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 						Math.floor(video.duration)
 					);
 				}
-				if (Buttons) {
+				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "Assistir episodio",
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 			case "filmes":
-				if (Cover) {
+				if (cover) {
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						"#dt_contenedor > div.season-bg-bs > div > img"
 					).src;
@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 						Math.floor(video.duration)
 					);
 				}
-				if (Buttons) {
+				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "Assistir filmes",
@@ -148,12 +148,12 @@ presence.on("UpdateData", async () => {
 				break;
 		}
 	}
-	if (!Buttons) delete presenceData.buttons;
-	if (!Timestamps) {
+	if (!buttons) delete presenceData.buttons;
+	if (!timestamps) {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (Privacy) {
+	if (privacy) {
 		delete presenceData.state;
 		delete presenceData.buttons;
 	}
