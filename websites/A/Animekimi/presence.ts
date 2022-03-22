@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "reading";
 				break;
 			case "movies":
-				if (!["เดอะมูฟวี่", "มูฟวี่", "เดอะ", "มูฟวี่"].includes(titlemovies)) {
+				if (!["เดอะมูฟวี่", "เดอะ", "มูฟวี่"].includes(titlemovies)) {
 					const movieinfo = titlemovies.split(/(เดอะ)?(มูฟวี่)/);
 					movie = movieinfo.pop();
 					if (movie === "ซับไทย")
