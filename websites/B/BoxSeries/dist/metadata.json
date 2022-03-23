@@ -29,7 +29,7 @@
 		},
 		{
 			"id": "timestamps",
-			"title": "Show timestamps",
+			"title": "Show Timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
 		},
