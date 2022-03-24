@@ -72,14 +72,16 @@ presence.on("UpdateData", () => {
 		presenceData.state = title.substring(21, title.length - 1);
 	} else if (path.startsWith("Talk:")) {
 		// talk page
-		const title = document.querySelector("#firstHeading").textContent;
 		presenceData.details = "Viewing a talk page";
-		presenceData.state = title.substring(5);
+		presenceData.state = document
+			.querySelector("#firstHeading")
+			.textContent.substring(5);
 	} else if (path.startsWith("Category:")) {
 		// category page
-		const title = document.querySelector("#firstHeading").textContent;
 		presenceData.details = "Viewing a category";
-		presenceData.state = title.substring(9);
+		presenceData.state = document
+			.querySelector("#firstHeading")
+			.textContent.substring(9);
 	} else if (path === "" && /^\?.*search=/.test(location.search)) {
 		// search page
 		presenceData.details = "Searching Explain xkcd";
@@ -87,9 +89,8 @@ presence.on("UpdateData", () => {
 			document.querySelector("#searchText > input") as HTMLInputElement
 		).value;
 	} else {
-		const title = document.querySelector("#firstHeading").textContent;
 		presenceData.details = "Viewing a page";
-		presenceData.state = title;
+		presenceData.state = document.querySelector("#firstHeading").textContent;
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
