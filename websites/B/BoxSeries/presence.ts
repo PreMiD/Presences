@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: ["default", "default_horizontal_tp"][logo],
 			startTimestamp: browsingTimestamp
 		};
-	if (location.search.includes("s")) {
+	if (new URLSearchParams(location.search).has("s")) {
 		presenceData.details = "Pesquisando po";
 		presenceData.state = `${
 			document.querySelector(
