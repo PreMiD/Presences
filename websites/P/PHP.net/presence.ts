@@ -9,9 +9,6 @@ presence.on("UpdateData", () => {
 			startTimestamp: browsingTimestamp
 		},
 		route = document.location.pathname.split("/");
-	presenceData.buttons = [
-		{ label: "View Website", url: document.location.href }
-	];
 
 	switch (route[1]) {
 		case "":
@@ -38,6 +35,9 @@ presence.on("UpdateData", () => {
 			const manualTitle = document.title
 				.replaceAll("PHP: ", "")
 				.replaceAll(" - Manual", "");
+			presenceData.buttons = [
+				{ label: "Open Documentation", url: document.location.href }
+			];
 			if (route[3].includes("function.")) {
 				presenceData.state = `Function: ${manualTitle}`;
 				presenceData.buttons = [
