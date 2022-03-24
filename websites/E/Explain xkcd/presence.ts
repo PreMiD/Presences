@@ -4,11 +4,9 @@ const presence = new Presence({
 	startTimestamp = Math.floor(Date.now() / 1000);
 
 function getComicNumber() {
-	const comicHeaderText = document.querySelector(
-			"table td li:nth-of-type(3)"
-		).textContent,
-		[comicNumber] = comicHeaderText.match(/\d+(?=\s\()/);
-	return comicNumber;
+	return document
+		.querySelector("table td li:nth-of-type(3)")
+		.textContent.match(/\d+(?=\s\()/)[0];
 }
 
 function getComicName() {
@@ -16,8 +14,7 @@ function getComicName() {
 }
 
 function getTitleText() {
-	const titleText = document.querySelector(".image + br + span").textContent;
-	return titleText.substring(12);
+	return document.querySelector(".image + br + span").textContent.substring(12);
 }
 
 presence.on("UpdateData", () => {
@@ -37,21 +34,26 @@ presence.on("UpdateData", () => {
 		presenceData.state = `Comic #${getComicNumber()}: ${getComicName()}`;
 		presenceData.smallImageKey = "explainer";
 		presenceData.smallImageText = getTitleText();
-	} else if (/^User:/.test(path)) {
+	} else if (path.startsWith("User:")) {
 		// user page
 		presenceData.details = "Viewing a user page";
 		presenceData.state = `User: ${path.substring(5)}`;
-	} else if (/^Special:Contributions\/\w+/.test(path)) {
+	} else if (
+		path.startsWith("Special:Contributions/") ||
+		(path === "" && /^\?.*title=Special%3AContributions/.test(location.search))
+	) {
 		// user contributions
 		presenceData.details = "Viewing a user's contributions";
-		presenceData.state = `User: ${path.substring(22)}`;
-	} else if (/^User_talk:/.test(path)) {
+		presenceData.state = `User: ${
+			document.querySelector("#contentSub > a").textContent
+		}`;
+	} else if (path.startsWith("User_talk:")) {
 		// user talk page
 		presenceData.details = "Viewing a user's talk page";
 		presenceData.state = `User: ${path.substring(10)}`;
 	} else if (path === "" && /^\?.*action=edit/.test(location.search)) {
 		// edit page
-		const title = document.getElementById("firstHeading").textContent;
+		const title = document.querySelector("#firstHeading").textContent;
 		if (title.startsWith("Editing")) {
 			presenceData.details = "Editing a page";
 			presenceData.state = title.substring(8);
@@ -65,17 +67,17 @@ presence.on("UpdateData", () => {
 		}
 	} else if (path === "" && /^\?.*action=history/.test(location.search)) {
 		// history page
-		const title = document.getElementById("firstHeading").textContent;
+		const title = document.querySelector("#firstHeading").textContent;
 		presenceData.details = "Viewing a page's history";
 		presenceData.state = title.substring(21, title.length - 1);
-	} else if (/^Talk:/.test(path)) {
+	} else if (path.startsWith("Talk:")) {
 		// talk page
-		const title = document.getElementById("firstHeading").textContent;
+		const title = document.querySelector("#firstHeading").textContent;
 		presenceData.details = "Viewing a talk page";
 		presenceData.state = title.substring(5);
-	} else if (/^Category:/.test(path)) {
+	} else if (path.startsWith("Category:")) {
 		// category page
-		const title = document.getElementById("firstHeading").textContent;
+		const title = document.querySelector("#firstHeading").textContent;
 		presenceData.details = "Viewing a category";
 		presenceData.state = title.substring(9);
 	} else if (path === "" && /^\?.*search=/.test(location.search)) {
@@ -85,7 +87,7 @@ presence.on("UpdateData", () => {
 			document.querySelector("#searchText > input") as HTMLInputElement
 		).value;
 	} else {
-		const title = document.getElementById("firstHeading").textContent;
+		const title = document.querySelector("#firstHeading").textContent;
 		presenceData.details = "Viewing a page";
 		presenceData.state = title;
 	}
