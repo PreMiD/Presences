@@ -1,7 +1,7 @@
 const presence = new Presence({
 		clientId: "956341194131116072"
 	}),
-	startTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function getComicNumber() {
 	return document
@@ -20,7 +20,7 @@ function getTitleText() {
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp
+			startTimestamp: browsingTimestamp
 		},
 		path = window.location.pathname.split("/wiki/index.php/")[1] ?? "";
 	if (path === "Main_Page") {
@@ -85,8 +85,8 @@ presence.on("UpdateData", () => {
 	} else if (path === "" && /^\?.*search=/.test(location.search)) {
 		// search page
 		presenceData.details = "Searching Explain xkcd";
-		presenceData.state = (
-			document.querySelector("#searchText > input") as HTMLInputElement
+		presenceData.state = document.querySelector<HTMLInputElement>(
+			"#searchText > input"
 		).value;
 	} else {
 		presenceData.details = "Viewing a page";
