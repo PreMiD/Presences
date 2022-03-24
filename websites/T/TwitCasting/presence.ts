@@ -67,11 +67,7 @@ presence.on("UpdateData", async () => {
 			.querySelector<HTMLSpanElement>(
 				":is(#movie_title_content, .tw-player-page__title-editor-value)"
 			)
-			?.textContent.trim()
-			.replace(
-				document.querySelector<HTMLDivElement>("#liveplayer-mesg")?.textContent,
-				""
-			),
+			?.innerText.split("\n")[0],
 		channelName =
 			document.querySelector<HTMLSpanElement>(".tw-user-nav-name")?.textContent,
 		game =
