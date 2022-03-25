@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		switch (pathArray[3]) {
 			case "calendario":
-				presenceData.details = "Vendo Calendário do Dia";
+				presenceData.details = "Vendo calendário do dia";
 				presenceData.smallImageKey = "reading";
 				break;
 			case "generos":
