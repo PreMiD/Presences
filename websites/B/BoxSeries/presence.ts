@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "reading";
 				break;
 			case "generos":
-				presenceData.details = "Vendo Gêneros";
+				presenceData.details = "Vendo gêneros";
 				if (!privacy && pathArray[4]) presenceData.state = titleMain;
 				presenceData.smallImageKey = "reading";
 				break;
@@ -64,12 +64,12 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "reading";
 				break;
 			case "release":
-				presenceData.details = "Vendo Liberação";
+				presenceData.details = "Vendo liberação";
 				if (!privacy && pathArray[4]) presenceData.state = titleMain;
 				presenceData.smallImageKey = "reading";
 				break;
 			case "series":
-				presenceData.details = "Vendo Séries";
+				presenceData.details = "Vendo séries";
 				if (cover) {
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						"div > div > div > div.poster-season > img"
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: "Assistir episodio",
+							label: "Assistindo episódio",
 							url: document.location.href.replace(/#\d+/, "")
 						}
 					];
@@ -135,20 +135,18 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: "Assistir filmes",
+							label: "Assistindo filmes",
 							url: document.location.href.replace(/#\d+/, "")
 						}
 					];
 				}
 				break;
 			default:
-				presenceData.details = "Vendo página";
-				presenceData.state = "em Página Inicial";
+				presenceData.details = "página inicial";
 				presenceData.smallImageKey = "reading";
 				break;
 		}
 	}
-	if (!buttons) delete presenceData.buttons;
 	if (!timestamps) {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
