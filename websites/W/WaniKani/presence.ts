@@ -1,10 +1,8 @@
 const presence: Presence = new Presence({
 		clientId: "800166344023867443"
 	}),
-	largeImageKey = "logo";
-
-let elapsed = 0,
-	eventType = -1;
+	largeImageKey = "logo",
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function capitalize(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
@@ -12,7 +10,9 @@ function capitalize(string: string) {
 
 presence.on("UpdateData", () => {
 	const { hostname, pathname } = window.location,
-		presenceData: PresenceData = {};
+		presenceData: PresenceData = {
+			startTimestamp: browsingTimestamp
+		};
 
 	let details: string,
 		state: string,
@@ -30,12 +30,11 @@ presence.on("UpdateData", () => {
 						".lessons-and-reviews__button"
 					);
 					if (buttons.length === 2) {
-						const lessons: number =
-								+buttons[0].querySelector("span").textContent,
-							reviews: number = +buttons[1].querySelector("span").textContent;
+						const lessons = +buttons[0].querySelector("span").textContent,
+							reviews = +buttons[1].querySelector("span").textContent;
 						details = "Viewing Dashboard";
 						state = `${lessons} lessons | ${reviews} reviews`;
-						smallImageText = document.querySelector<HTMLAnchorElement>(
+						smallImageText = document.querySelector(
 							".user-summary__attribute > a"
 						).textContent;
 						if (lessons > reviews) {
@@ -52,17 +51,9 @@ presence.on("UpdateData", () => {
 						else if (reviews < 500) smallImageKey = "reviews-250";
 						else if (reviews < 1000) smallImageKey = "reviews-500";
 						else smallImageKey = "reviews-1000";
-						if (eventType !== 1) {
-							elapsed = Math.round(Date.now() / 1000);
-							eventType = 1;
-						}
 					} else {
 						details = "Browsing...";
 						state = "Viewing Home Page";
-						if (eventType !== 0) {
-							elapsed = Math.round(Date.now() / 1000);
-							eventType = 0;
-						}
 					}
 					break;
 				}
@@ -73,40 +64,48 @@ presence.on("UpdateData", () => {
 						pathname === "/lesson"
 							? "Viewing Lesson Summary"
 							: "Viewing Reviews Summary";
-					if (eventType !== 0) {
-						elapsed = Math.round(Date.now() / 1000);
-						eventType = 0;
-					}
+					break;
+				}
+				case "/extra_study/session": {
+					const characterElement = document.querySelector("#character"),
+						characterType = characterElement.className;
+					details = `Doing ${
+						document.querySelector("#menu-bar-title").textContent
+					}`;
+					state = `${characterElement.textContent} | ${capitalize(
+						characterType
+					)} ${capitalize(document.querySelector("#question-type").className)}`;
+					smallImageText = `${
+						document.querySelector("#completed-count").textContent
+					} complete, ${
+						document.querySelector("#available-count").textContent
+					} remaining. (${
+						document.querySelector("#correct-rate").textContent
+					}%)`;
+					smallImageKey = characterType;
 					break;
 				}
 				case "/review/session": {
-					const characterElement: HTMLDivElement =
-							document.querySelector("#character"),
-						characterType: string = characterElement.className;
+					const characterElement = document.querySelector("#character"),
+						characterType = characterElement.className;
 					details = "Doing Reviews";
 					state = `${characterElement.textContent} | ${capitalize(
 						characterType
 					)} ${capitalize(document.querySelector("#question-type").className)}`;
 					smallImageText = `${
-						document.querySelector<HTMLElement>("#completed-count").textContent
+						document.querySelector("#completed-count").textContent
 					} complete, ${
-						document.querySelector<HTMLElement>("#available-count").textContent
+						document.querySelector("#available-count").textContent
 					} remaining. (${
-						document.querySelector<HTMLElement>("#correct-rate").textContent
+						document.querySelector("#correct-rate").textContent
 					}%)`;
 					smallImageKey = characterType;
-					if (eventType !== 2) {
-						elapsed = Math.round(Date.now() / 1000);
-						eventType = 2;
-					}
 					break;
 				}
 				case "/lesson/session": {
 					try {
-						const totalStats: NodeList =
-								document.querySelectorAll("#stats li > span"),
-							characterType: string =
-								document.querySelector("#main-info").className;
+						const totalStats = document.querySelectorAll("#stats li > span"),
+							characterType = document.querySelector("#main-info").className;
 						details = "Learning Lessons";
 						state = `${document.querySelector("#character").textContent} - ${
 							document.querySelector("#meaning").textContent
@@ -117,16 +116,11 @@ presence.on("UpdateData", () => {
 						} kanji | ${totalStats[2].textContent} vocab | ${
 							document.querySelector("#completed-count").textContent
 						} complete`;
-						if (eventType !== 2) {
-							elapsed = Math.round(Date.now() / 1000);
-							eventType = 2;
-						}
 					} catch (err) {
 						// Likely practicing
-						const characterType: string =
+						const characterType =
 								document.querySelector("#main-info").className,
-							totalStats: NodeList =
-								document.querySelectorAll("#stats li > span");
+							totalStats = document.querySelectorAll("#stats li > span");
 						details = "Practicing Lessons";
 						state = `${
 							document.querySelector("#character").textContent
@@ -145,17 +139,15 @@ presence.on("UpdateData", () => {
 				case (pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/) || {})
 					.input: {
 					const [, type] = pathname.split("/");
-					let textDescription: string = (
-						document.querySelector(".mnemonic-content") as HTMLElement
-					).textContent;
+					let textDescription =
+						document.querySelector(".mnemonic-content").textContent;
 					if (textDescription.length >= 50)
-						textDescription = `${textDescription.substr(0, 50)}...`;
+						textDescription = `${textDescription.substring(0, 50)}...`;
 
 					details = `Browsing ${capitalize(type)}`;
 					state = `${
-						document.querySelector<HTMLElement>(
-							`.${type.replace(/s$/, "")}-icon`
-						).textContent
+						document.querySelector(`.${type.replace(/s$/, "")}-icon`)
+							.textContent
 					} | ${
 						document.querySelector(`.${type.replace(/s$/, "")}-icon`).parentNode
 							.childNodes[4].textContent
@@ -168,19 +160,11 @@ presence.on("UpdateData", () => {
 					details = "Viewing User Profile";
 					state = document.querySelector(".username").textContent;
 					smallImageKey = "avatar";
-					if (eventType !== 0) {
-						elapsed = Math.round(Date.now() / 1000);
-						eventType = 0;
-					}
 					break;
 				}
 				default: {
 					details = "Browsing...";
 					state = `Viewing ${document.title.split(" / ").slice(1).join(" / ")}`;
-					if (eventType !== 0) {
-						elapsed = Math.round(Date.now() / 1000);
-						eventType = 0;
-					}
 				}
 			}
 			break;
@@ -188,17 +172,9 @@ presence.on("UpdateData", () => {
 		case "knowledge.wanikani.com": {
 			details = "Browsing WaniKani Knowledge...";
 			[state] = document.title.split(" | ");
-			if (eventType !== 0) {
-				elapsed = Math.round(Date.now() / 1000);
-				eventType = 0;
-			}
 			break;
 		}
 		case "community.wanikani.com": {
-			if (eventType !== 0) {
-				elapsed = Math.round(Date.now() / 1000);
-				eventType = 0;
-			}
 			if (/^\/u\/.+$/.test(pathname)) {
 				details = "Viewing User Profile";
 				smallImageKey = "avatar";
@@ -220,8 +196,6 @@ presence.on("UpdateData", () => {
 	if (smallImageText) presenceData.smallImageText = smallImageText;
 
 	presenceData.largeImageKey = largeImageKey;
-
-	if (eventType !== -1) presenceData.startTimestamp = elapsed;
 
 	presence.setActivity(presenceData);
 });
