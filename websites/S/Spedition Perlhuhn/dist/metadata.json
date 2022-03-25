@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.6",
+    "author": {
+        "name": "InfoBlock",
+        "id": "124220790001500161"
+    },
+    "service": "Spedition Perlhuhn",
+    "description": {
+        "de": "Die Offizielle PreMiD Presence für Spedition Perlhuhn",
+        "en": "The official PreMiD Presence for Spedition Perlhuhn"
+    },
+    "url": "spedition-perlhuhn.gq",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/T8lUH2w.png",
+    "thumbnail": "https://i.imgur.com/T8lUH2w.png",
+    "color": "#ffffff",
+    "category": "other",
+    "tags": [
+        "website",
+        "truckersmp",
+        "tmp",
+        "vtc"
+    ]
+}
