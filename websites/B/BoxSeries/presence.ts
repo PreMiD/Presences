@@ -31,10 +31,10 @@ presence.on("UpdateData", async () => {
 		]),
 		titleMain =
 			document.querySelector("#dt_contenedor > div.module > div > div > h1")
-				?.textContent ?? "pesquisa não encontrada",
+				?.textContent ?? "Pesquisa não encontrada",
 		titleEp =
 			document.querySelector("#single > h1.epih1")?.textContent.split(" - ") ??
-			"pesquisa não encontrada",
+			"Pesquisa não encontrada",
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: ["default", "default_horizontal_tp"][logo],
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${
 			document.querySelector(
 				"#dt_contenedor > div.module > div > div > div > header > h1 > span"
-			)?.textContent ?? "pesquisa não encontrada"
+			)?.textContent ?? "Pesquisa não encontrada"
 		}`;
 		presenceData.smallImageKey = "search";
 	} else {
