@@ -26,7 +26,7 @@ async function getStrings() {
 			correctAnswer: "kahoot.correctAnswer", // Correct Answer
 			pollAnswer: "kahoot.pollAnswer", // + Answered Poll
 			resultsQuestion: "kahoot.resultsQuestion", // Looking at Results:
-			slideViewing: "kahoot.slideViewing", // - Looking a Slide with Content...
+			slideViewing: "kahoot.slideViewing", // - Viewing Slide with Content...
 			gameOver: "kahoot.gameOver", // Game Over
 			gameCreate: "kahoot.gameCreate", // Creating a Game...
 			loadingPage: "kahoot.loadingPage", // Loading Page...
@@ -46,7 +46,8 @@ async function getStrings() {
 			waitingAnswer: "kahoot.waitingAnswer", // Waiting for Results...
 			drumRoll: "kahoot.drumRoll", // + Waiting for Final Ranking...
 			position: "kahoot.position", // + Position: {0},
-			teamTalk: "kahoot.teamTalk" // + Discussing with Team...
+			teamTalk: "kahoot.teamTalk", // + Discussing with Team...
+			gameLocked: "kahoot.gameLocked" // + Game Locked
 		},
 		await presence.getSetting<string>("lang")
 	);
@@ -178,60 +179,79 @@ presence.on("UpdateData", async () => {
 		}
 		case "play.kahoot.it": {
 			const path = document.location.pathname;
-			if (path === "/v2/") presenceData.details = strings.gameCreate;
-			// Creating a Game...
-			else if (path.includes("/lobby")) {
-				presenceData.details = strings.waiting; // Waiting to Start...
+			if (path === "/v2/") {
+				// Settings/game creation
+				presenceData.details = strings.gameCreate;
+			} else if (path.includes("/lobby")) {
+				// Lobby screen
+				presenceData.details = strings.waiting;
 
 				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: `${strings.buttonJoinGame.replace(
 								"{0}",
-								document.querySelector(
-									"div.headerstyles__GamePinGrouped-jk6b9n-9"
-								).textContent
+								document.querySelector('[data-functional-selector="game-pin"]')
+									?.textContent ?? `(${strings.gameLocked})`
 							)}`, // Join Game: ID
 							url: "https://kahoot.it/"
 						}
 					];
 				}
+			} else if (path.includes("/start")) {
+				// Game start
+				presenceData.details = strings.gameStarting;
 			} else if (path.includes("/gameover")) {
-				presenceData.details = `${strings.firstPlace.replace("{0}", "")} ${
-					document.querySelector("div.player-name__PlayerName-sc-1m2ooy2-1")
+				presenceData.details = `${strings.firstPlace.replace(
+					"{0}",
+					document.querySelector('[data-functional-selector="winner"]')
 						.textContent
-				} | ${strings.points.replace("{0}", "")} ${
-					document.querySelector("div.bar-styles__Score-ws2yhg-2").textContent
-				}`; // First Place: User | Points: 100000
-				presenceData.state = `${strings.questionsCorrect.replace("{0}", "")} ${
-					document.querySelector("div.bar-styles__Count-ws2yhg-3").textContent
-				}`; // Questions Correct: 1 of 10
-			} else if (path.includes("/contentblock")) {
-				presenceData.details = strings.slideShowing; // Showing a Slide with Content:
-				presenceData.state = `${strings.questionNumber.replace("{0}", "")} ${`${
-					document
-						.querySelector("div.styles__QuestionCount-sc-17ic93d-8")
-						.textContent.split("/")[0]
-				} ${strings.of.replace("{0}", "").replace("{1}", "")} ${
-					document
-						.querySelector("div.styles__QuestionCount-sc-17ic93d-8")
-						.textContent.split("/")[1]
-				}`}`; // Question: 1 of 3
-			} else if (path.includes("/gameblock")) {
-				presenceData.details = strings.questionShowing; // Showing Question:
-				presenceData.state = `${strings.questionNumber.replace("{0}", "")} ${`${
-					document
-						.querySelector("div.styles__QuestionCount-sc-17ic93d-8")
-						.textContent.split("/")[0]
-				} ${strings.of.replace("{0}", "").replace("{1}", "")} ${
-					document
-						.querySelector("div.styles__QuestionCount-sc-17ic93d-8")
-						.textContent.split("/")[1]
-				}`}`; // Question: 1 of 3
-			} else presenceData.details = strings.loadingPage; // Loading Page:
+				)} | ${strings.points.replace(
+					"{0}",
+					document.querySelector(
+						'[data-functional-selector="place-1"] > [data-functional-selector="total-score"]'
+					).textContent
+				)}`;
+				const correctCount = document.querySelector(
+					'[data-functional-selector="correct-count-gold"]'
+				);
+				if (correctCount) {
+					const [correct, total] = correctCount.textContent.match(/\d+/g);
+					presenceData.state = strings.questionsCorrect.replace(
+						"{0}",
+						strings.of.replace("{0}", correct).replace("{1}", total)
+					);
+				} else
+					presenceData.state = strings.questionsCorrect.replace("{0}", "0");
+			} else if (
+				path.includes("/gameblock") ||
+				path.includes("/contentblock")
+			) {
+				if (
+					document.querySelector(
+						'[data-functional-selector="content-block-page"]'
+					)
+				) {
+					// Showing a Slide with Content
+					presenceData.details = strings.slideShowing;
+				} else {
+					// Question in progress
+					const [currentQuestion, totalQuestions] = document
+						.querySelector(
+							'[data-functional-selector="bottom-bar-question-counter"]'
+						)
+						.textContent.split("/");
+					presenceData.details = strings.questionShowing;
+					presenceData.state = `${strings.questionNumber.replace(
+						"{0}",
+						`${strings.of
+							.replace("{0}", currentQuestion)
+							.replace("{1}", totalQuestions)}`
+					)}`;
+				}
+			} else presenceData.details = strings.loadingPage;
 
 			presence.setActivity(presenceData);
-
 			break;
 		}
 		case "create.kahoot.it": {
