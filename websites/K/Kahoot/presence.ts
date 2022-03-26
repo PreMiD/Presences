@@ -291,20 +291,17 @@ presence.on("UpdateData", async () => {
 				case "/": {
 					// Kahoot! Create home page
 					presenceData.details = strings.createHome;
-
 					break;
 				}
 				case "/after/login":
 				case "/auth/login": {
 					// Login
 					presenceData.details = strings.login;
-
 					break;
 				}
 				case "/discover": {
 					// Discover
 					presenceData.details = strings.discover;
-
 					break;
 				}
 				case "/search": {
@@ -313,7 +310,6 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document.querySelector<HTMLInputElement>(
 						'[data-functional-selector="search-box__input-field"]'
 					).value;
-
 					break;
 				}
 				default:
@@ -391,6 +387,7 @@ presence.on("UpdateData", async () => {
 						}
 					} else presenceData.details = strings.loadingPage;
 			}
+
 			presence.setActivity(presenceData);
 			break;
 		}
