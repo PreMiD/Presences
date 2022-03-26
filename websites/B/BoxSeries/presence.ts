@@ -1,11 +1,6 @@
 const presence = new Presence({
 		clientId: "955350055034945576"
 	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		browsing: "general.browsing"
-	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
@@ -35,13 +30,12 @@ presence.on("UpdateData", async () => {
 		titleEp =
 			document.querySelector("#single > h1.epih1")?.textContent.split(" - ") ??
 			"Pesquisa não encontrada",
-		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: ["default", "default_horizontal_tp"][logo],
 			startTimestamp: browsingTimestamp
 		};
 	if (new URLSearchParams(location.search).has("s")) {
-		presenceData.details = "Pesquisando po";
+		presenceData.details = "Pesquisando por";
 		presenceData.state = `${
 			document.querySelector(
 				"#dt_contenedor > div.module > div > div > div > header > h1 > span"
@@ -49,14 +43,14 @@ presence.on("UpdateData", async () => {
 		}`;
 		presenceData.smallImageKey = "search";
 	} else {
-		switch (pathArray[3]) {
+		switch (document.location.toString().split("/")[3]) {
 			case "calendario":
 				presenceData.details = "Vendo calendário do dia";
 				presenceData.smallImageKey = "reading";
 				break;
 			case "generos":
 				presenceData.details = "Vendo gêneros";
-				if (!privacy && pathArray[4]) presenceData.state = titleMain;
+				presenceData.state = titleMain;
 				presenceData.smallImageKey = "reading";
 				break;
 			case "anos":
@@ -65,7 +59,7 @@ presence.on("UpdateData", async () => {
 				break;
 			case "release":
 				presenceData.details = "Vendo liberação";
-				if (!privacy && pathArray[4]) presenceData.state = titleMain;
+				presenceData.state = titleMain;
 				presenceData.smallImageKey = "reading";
 				break;
 			case "series":
@@ -75,13 +69,11 @@ presence.on("UpdateData", async () => {
 						"div > div > div > div.poster-season > img"
 					).src;
 				}
-				if (!privacy && pathArray[4]) {
-					presenceData.state = `${
-						document.querySelector("div > div > div > div.data > h1")
-							?.textContent ?? "pesquisa não encontrada"
-					}`;
-					presenceData.smallImageKey = "reading";
-				}
+				presenceData.state = `${
+					document.querySelector("div > div > div > div.data > h1")
+						?.textContent ?? "Pesquisa não encontrada"
+				}`;
+				presenceData.smallImageKey = "reading";
 				break;
 			case "episodio":
 				if (cover) {
@@ -92,9 +84,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `${titleEp[0]}`;
 				presenceData.state = `${titleEp[1]}`;
 				presenceData.smallImageKey = video.paused ? "pause" : "play";
-				presenceData.smallImageText = video.paused
-					? (await strings).pause
-					: (await strings).play;
+				presenceData.smallImageText = video.paused ? "Pausado" : "Assistindo";
 				if (!video.paused) {
 					[, presenceData.endTimestamp] = presence.getTimestamps(
 						Math.floor(video.current),
@@ -104,7 +94,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: "Assistindo episódio",
+							label: "Assistir episódio",
 							url: document.location.href.replace(/#\d+/, "")
 						}
 					];
@@ -120,12 +110,10 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${
 					document.querySelector(
 						"#single > div.content.full_width_layout > div.dooplay_player > div.area-season.movie-bs > div.data > h1"
-					)?.textContent ?? "pesquisa não encontrada"
+					)?.textContent ?? "Pesquisa não encontrada"
 				}`;
 				presenceData.smallImageKey = video.paused ? "pause" : "play";
-				presenceData.smallImageText = video.paused
-					? (await strings).pause
-					: (await strings).play;
+				presenceData.smallImageText = video.paused ? "Pausado" : "Assistindo";
 				if (!video.paused) {
 					[, presenceData.endTimestamp] = presence.getTimestamps(
 						Math.floor(video.current),
@@ -135,14 +123,14 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: "Assistindo filmes",
+							label: "Assistir filmes",
 							url: document.location.href.replace(/#\d+/, "")
 						}
 					];
 				}
 				break;
 			default:
-				presenceData.details = "página inicial";
+				presenceData.details = "Página inicial";
 				presenceData.smallImageKey = "reading";
 				break;
 		}
@@ -151,10 +139,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (privacy) {
-		delete presenceData.state;
-		delete presenceData.buttons;
-	}
+	if (privacy) delete presenceData.state;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
