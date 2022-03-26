@@ -47,7 +47,8 @@ async function getStrings() {
 			drumRoll: "kahoot.drumRoll", // + Waiting for Final Ranking...
 			position: "kahoot.position", // + Position: {0},
 			teamTalk: "kahoot.teamTalk", // + Discussing with Team...
-			gameLocked: "kahoot.gameLocked" // + Game Locked
+			gameLocked: "kahoot.gameLocked", // + Game Locked
+			gameSummary: "kahoot.gameSummary" // + Looking at Game Summary...
 		},
 		await presence.getSetting<string>("lang")
 	);
@@ -236,19 +237,28 @@ presence.on("UpdateData", async () => {
 					presenceData.details = strings.slideShowing;
 				} else {
 					// Question in progress
-					const [currentQuestion, totalQuestions] = document
-						.querySelector(
-							'[data-functional-selector="bottom-bar-question-counter"]'
-						)
-						.textContent.split("/");
-					presenceData.details = strings.questionShowing;
-					presenceData.state = `${strings.questionNumber.replace(
-						"{0}",
-						`${strings.of
-							.replace("{0}", currentQuestion)
-							.replace("{1}", totalQuestions)}`
-					)}`;
+					const questionCounter = document.querySelector(
+						'[data-functional-selector="bottom-bar-question-counter"]'
+					);
+					if (!questionCounter) {
+						// Question is starting
+						presenceData.details = strings.questionLoading;
+					} else {
+						// Question is in progress
+						const [currentQuestion, totalQuestions] =
+							questionCounter.textContent.split("/");
+						presenceData.details = strings.questionShowing;
+						presenceData.state = `${strings.questionNumber.replace(
+							"{0}",
+							`${strings.of
+								.replace("{0}", currentQuestion)
+								.replace("{1}", totalQuestions)}`
+						)}`;
+					}
 				}
+			} else if (path.includes("/game-summary")) {
+				// Game summary
+				presenceData.details = strings.gameSummary;
 			} else presenceData.details = strings.loadingPage;
 
 			presence.setActivity(presenceData);
