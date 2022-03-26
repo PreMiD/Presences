@@ -69,11 +69,19 @@ async function getStrings() {
 }
 
 let strings: { [key: string]: string },
-	oldLang: string = null;
+	oldLang: string = null,
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	/**
+	 * 0 - no update required
+	 * 1 - update required
+	 * 2 - no update required, ready to be reset to 0
+	 */
+	timestampUpdateState = 0;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "kahoot"
+			largeImageKey: "kahoot",
+			startTimestamp: browsingTimestamp
 		},
 		buttons = await presence.getSetting<boolean>("buttons"),
 		newLang = await presence.getSetting<string>("lang");
@@ -81,6 +89,10 @@ presence.on("UpdateData", async () => {
 	oldLang ??= newLang;
 	strings ??= await getStrings();
 	if (oldLang !== newLang) oldLang = newLang;
+	if (timestampUpdateState === 1) {
+		browsingTimestamp = Math.floor(Date.now() / 1000);
+		timestampUpdateState = 2;
+	}
 
 	switch (location.host) {
 		case "kahoot.it": {
@@ -92,9 +104,13 @@ presence.on("UpdateData", async () => {
 			} else if (path.includes("/instructions")) {
 				// Waiting for game to start
 				presenceData.details = strings.waiting;
+				// Set start timestamp after joining game
+				if (timestampUpdateState === 0) timestampUpdateState = 1;
 			} else if (path.includes("/start")) {
 				// Game is starting
 				presenceData.details = strings.gameStarting;
+				// Allow timestamp to be reset upon a potential replay
+				if (timestampUpdateState === 2) timestampUpdateState = 0;
 			} else if (path.includes("/gameblock")) {
 				// Playing/Answering a question
 				const [currentQuestion, totalQuestions] = document
@@ -195,17 +211,20 @@ presence.on("UpdateData", async () => {
 				case "/v2/lobby": {
 					// Lobby screen
 					presenceData.details = strings.waiting;
+					// Set start timestamp after game has been created
+					if (timestampUpdateState === 0) timestampUpdateState = 1;
 
 					if (buttons) {
+						const pin = document.querySelector(
+							'[data-functional-selector="game-pin"]'
+						)?.textContent;
 						presenceData.buttons = [
 							{
 								label: `${strings.buttonJoinGame.replace(
 									"{0}",
-									document.querySelector(
-										'[data-functional-selector="game-pin"]'
-									)?.textContent ?? `(${strings.gameLocked})`
+									pin ?? `(${strings.gameLocked})`
 								)}`, // Join Game: ID
-								url: "https://kahoot.it/"
+								url: `https://kahoot.it/?pin=${pin ?? ""}`
 							}
 						];
 					}
@@ -214,6 +233,9 @@ presence.on("UpdateData", async () => {
 				case "/v2/start": {
 					// Game start
 					presenceData.details = strings.gameStarting;
+					// Allow timestamp to be reset upon a potential replay
+					if (timestampUpdateState === 2) timestampUpdateState = 0;
+
 					break;
 				}
 				case "/v2/gameover": {
