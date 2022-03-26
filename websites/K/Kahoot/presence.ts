@@ -386,9 +386,8 @@ presence.on("UpdateData", async () => {
 						const preview = document.querySelector(
 							'[data-functional-selector="mega-menu__session-title"]'
 						);
-						if (preview) {
-							presenceData.state = preview.textContent;
-						} else {
+						if (preview) presenceData.state = preview.textContent;
+						else {
 							const course = document.querySelector(
 									'[data-functional-selector="live-course-menu__toggle-mega-menu"] > span:nth-of-type(2)'
 								),
