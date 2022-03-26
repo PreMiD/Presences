@@ -48,9 +48,25 @@ async function getStrings() {
 			position: "kahoot.position", // + Position: {0},
 			teamTalk: "kahoot.teamTalk", // + Discussing with Team...
 			gameLocked: "kahoot.gameLocked", // + Game Locked
-			gameSummary: "kahoot.gameSummary" // + Looking at Game Summary...
+			gameSummary: "kahoot.gameSummary", // + Looking at Game Summary...
+			login: "kahoot.login", // + Logging in...
+			createHome: "kahoot.createHome", // + Viewing Create Home Page...
+			discover: "kahoot.discover", // + Viewing Kahoot! Discover Page...
+			searchKahoots: "kahoot.searchKahoots", // + Searching for Kahoots...
+			kahootDetails: "kahoot.kahootDetails", // + Viewing Kahoot Details...
+			kahootProfile: "kahoot.kahootProfile", // + Viewing Kahoot Profile...
+			myKahoots: "kahoot.myKahoots", // + Viewing My Kahoots...
+			userReports: "kahoot.userReports", // + Viewing Game Reports...
+			myCourses: "kahoot.myCourses", // + Viewing My Courses...,
+			editingCourse: "kahoot.editingCourse", // + Editing a Course...
+			viewingCourse: "kahoot.viewingCourse", // + Viewing a Course...
+			editingKahoot: "kahoot.editingKahoot", // + Editing a Kahoot...
+			previewingKahoot: "kahoot.previewingKahoot", // + Previewing a Kahoot...
+			liveCourse: "kahoot.liveCourse", // + Conducting a Course...
+			liveCourseSummary: "kahoot.liveCourseSummary", // + Viewing Summary: {0}
+			liveCourseActivity: "kahoot.liveCourseActivity" // + Doing Activity #{0}: {1}
 		},
-		await presence.getSetting<string>("lang")
+		await presence.getSetting("lang")
 	);
 }
 
@@ -270,6 +286,112 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "create.kahoot.it": {
+			const { pathname: path } = location;
+			switch (path) {
+				case "/": {
+					// Kahoot! Create home page
+					presenceData.details = strings.createHome;
+
+					break;
+				}
+				case "/after/login":
+				case "/auth/login": {
+					// Login
+					presenceData.details = strings.login;
+
+					break;
+				}
+				case "/discover": {
+					// Discover
+					presenceData.details = strings.discover;
+
+					break;
+				}
+				case "/search": {
+					// Search
+					presenceData.details = strings.searchKahoots;
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						'[data-functional-selector="search-box__input-field"]'
+					).value;
+
+					break;
+				}
+				default:
+					if (path.startsWith("/details/")) {
+						// Kahoot details
+						presenceData.details = strings.kahootDetails;
+						presenceData.state = document.querySelector(
+							'[data-functional-selector="kahoot-detail__title"]'
+						).textContent;
+					} else if (path.startsWith("/profiles/")) {
+						// Kahoot profile
+						presenceData.details = strings.kahootProfile;
+						presenceData.state = (
+							document.querySelector(
+								'[data-functional-selector="verified-user-profile-information"] > div > div'
+							) ??
+							document.querySelector(
+								'[data-functional-selector="default-user-profile"] > div > div > div:nth-of-type(2) > div'
+							)
+						).firstChild.textContent.replace(/\n/g, " ");
+					} else if (path.startsWith("/my-library/kahoots/")) {
+						// My Kahoots
+						presenceData.details = strings.myKahoots;
+					} else if (path === "/user-reports") {
+						// Game Reports
+						presenceData.details = strings.userReports;
+					} else if (path === "/my-library/courses") {
+						// My Courses
+						presenceData.details = strings.myCourses;
+					} else if (path.startsWith("/course/")) {
+						if (path.endsWith("/edit")) {
+							// Editing a course
+							presenceData.details = strings.editingCourse;
+							presenceData.state = document.querySelector<HTMLInputElement>(
+								'[data-functional-selector="course-title-input__course_title_input"]'
+							).value;
+						} else {
+							// Viewing a course
+							presenceData.details = strings.viewingCourse;
+							presenceData.state = document.querySelector(
+								'[data-functional-selector="course-details"] h2'
+							).textContent;
+						}
+					} else if (path.startsWith("/creator/")) {
+						// Editing a Kahoot!
+						presenceData.details = strings.editingKahoot;
+						presenceData.state = document.querySelector(
+							'[data-functional-selector="top-bar__kahoot-summary-button"] > span'
+						).textContent;
+					} else if (path.startsWith("/preview/")) {
+						// Previewing a Kahoot!
+						presenceData.details = strings.previewingKahoot;
+					} else if (path.startsWith("/v2/live-course/")) {
+						// Live course
+						presenceData.details = strings.liveCourse;
+						const preview = document.querySelector(
+							'[data-functional-selector="mega-menu__session-title"]'
+						);
+						if (preview) {
+							presenceData.state = strings.liveCourseSummary.replace(
+								"{0}",
+								preview.textContent
+							);
+						} else {
+							const course = document.querySelector(
+									'[data-functional-selector="live-course-menu__toggle-mega-menu"] > span:nth-of-type(2)'
+								),
+								[number] = course.textContent.match(/^\d+/);
+							presenceData.state = strings.liveCourseActivity
+								.replace("{0}", number)
+								.replace(
+									"{1}",
+									course.textContent.substring(number.length + 2)
+								);
+						}
+					} else presenceData.details = strings.loadingPage;
+			}
+			presence.setActivity(presenceData);
 			break;
 		}
 	}
