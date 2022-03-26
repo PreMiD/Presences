@@ -1,4 +1,8 @@
-async function findRanking(rankingSelector: HTMLElement) {
+const presence = new Presence({
+	clientId: "612793327510749210"
+});
+
+async function findRanking(rankingSelector: Element) {
 	if (
 		rankingSelector.textContent === strings.stString ||
 		rankingSelector.textContent === strings.ndString ||
@@ -8,10 +12,6 @@ async function findRanking(rankingSelector: HTMLElement) {
 		return true;
 	else return false;
 }
-
-const presence = new Presence({
-	clientId: "612793327510749210"
-});
 
 async function getStrings() {
 	return presence.getStrings(
@@ -54,14 +54,8 @@ async function getStrings() {
 	);
 }
 
-let currentQuestion: string,
-	totalQuestions: string,
-	score: string,
-	ranking: string,
-	top5: Promise<boolean>,
-	strings: { [key: string]: string },
-	oldLang: string = null,
-	rankingSelector: HTMLElement;
+let strings: { [key: string]: string },
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -89,12 +83,14 @@ presence.on("UpdateData", async () => {
 				presenceData.details = strings.gameStarting;
 			} else if (path.includes("/gameblock")) {
 				// Playing/Answering a question
-				[currentQuestion, totalQuestions] = document
-					.querySelector('[data-functional-selector="question-index-counter"]')
-					.textContent.match(/\d+/g);
-				score = document.querySelector(
-					'[data-functional-selector="bottom-bar-score"]'
-				).textContent;
+				const [currentQuestion, totalQuestions] = document
+						.querySelector(
+							'[data-functional-selector="question-index-counter"]'
+						)
+						.textContent.match(/\d+/g),
+					score = document.querySelector(
+						'[data-functional-selector="bottom-bar-score"]'
+					).textContent;
 				presenceData.details = strings.playing;
 				presenceData.state = `${strings.questionNumber.replace(
 					"{0}",
@@ -104,7 +100,7 @@ presence.on("UpdateData", async () => {
 				)} | ${strings.points.replace("{0}", score)}`;
 			} else if (path.includes("/getready")) {
 				// Next question is loading
-				[currentQuestion, totalQuestions] = document
+				const [currentQuestion, totalQuestions] = document
 					.querySelector('[data-functional-selector="question-index-counter"]')
 					.textContent.match(/\d+/g);
 				presenceData.details = strings.questionLoading;
@@ -122,14 +118,14 @@ presence.on("UpdateData", async () => {
 				presenceData.details = strings.waitingAnswer;
 			} else if (path.includes("/result")) {
 				// Answer result screen
-				rankingSelector = document.querySelector(
+				const rankingSelector = document.querySelector(
 					'[data-functional-selector="player-rank"]'
 				);
 				if (!rankingSelector) {
 					presenceData.details = strings.resultsQuestion;
 					presenceData.state = strings.pollAnswer;
 				} else {
-					score = document.querySelector(
+					const score = document.querySelector(
 						'[data-functional-selector="bottom-bar-score"]'
 					).textContent;
 					presenceData.details = strings.resultsQuestion;
@@ -153,21 +149,18 @@ presence.on("UpdateData", async () => {
 				presenceData.details = strings.slideViewing;
 			} else if (path.includes("/ranking")) {
 				// Viewing the final ranking
-				rankingSelector = document.querySelector(
+				const rankingSelector = document.querySelector(
 					'[data-functional-selector="ranking-header"],[data-functional-selector="ranking-header-winners"]'
 				);
 				if (!rankingSelector) presenceData.details = strings.drumRoll;
 				else {
-					top5 = findRanking(rankingSelector);
-					ranking = rankingSelector.textContent;
-					score = document.querySelector(
+					const score = document.querySelector(
 						'[data-functional-selector="bottom-bar-score"]'
 					).textContent;
-					presenceData.details = top5
-						? `${strings.gameOver} | ${ranking} | ${strings.points.replace(
-								"{0}",
-								score
-						  )}`
+					presenceData.details = findRanking(rankingSelector)
+						? `${strings.gameOver} | ${
+								rankingSelector.textContent
+						  } | ${strings.points.replace("{0}", score)}`
 						: `${strings.gameOver} | ${strings.points.replace("{0}", score)}`;
 				}
 			} else if (path.includes("/feedback")) {
@@ -179,8 +172,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "play.kahoot.it": {
-			const path = document.location.pathname;
-			switch (path) {
+			switch (location.pathname) {
 				case "/v2/": {
 					// Settings/game creation
 					presenceData.details = strings.gameCreate;
