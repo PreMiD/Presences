@@ -72,9 +72,8 @@ let strings: { [key: string]: string },
 	oldLang: string = null,
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	/**
-	 * 0 - no update required
-	 * 1 - update required
-	 * 2 - no update required, ready to be reset to 0
+	 * 0 - ready to be updated if needed
+	 * 1 - updated, ready to be reset to 0
 	 */
 	timestampUpdateState = 0;
 
@@ -89,10 +88,6 @@ presence.on("UpdateData", async () => {
 	oldLang ??= newLang;
 	strings ??= await getStrings();
 	if (oldLang !== newLang) oldLang = newLang;
-	if (timestampUpdateState === 1) {
-		browsingTimestamp = Math.floor(Date.now() / 1000);
-		timestampUpdateState = 2;
-	}
 
 	switch (location.host) {
 		case "kahoot.it": {
@@ -105,12 +100,15 @@ presence.on("UpdateData", async () => {
 				// Waiting for game to start
 				presenceData.details = strings.waiting;
 				// Set start timestamp after joining game
-				if (timestampUpdateState === 0) timestampUpdateState = 1;
+				if (timestampUpdateState === 0) {
+					browsingTimestamp = Math.floor(Date.now() / 1000);
+					timestampUpdateState = 1;
+				}
 			} else if (path.includes("/start")) {
 				// Game is starting
 				presenceData.details = strings.gameStarting;
 				// Allow timestamp to be reset upon a potential replay
-				if (timestampUpdateState === 2) timestampUpdateState = 0;
+				if (timestampUpdateState === 1) timestampUpdateState = 0;
 			} else if (path.includes("/gameblock")) {
 				// Playing/Answering a question
 				const [currentQuestion, totalQuestions] = document
@@ -212,7 +210,11 @@ presence.on("UpdateData", async () => {
 					// Lobby screen
 					presenceData.details = strings.waiting;
 					// Set start timestamp after game has been created
-					if (timestampUpdateState === 0) timestampUpdateState = 1;
+					if (timestampUpdateState === 0) {
+						browsingTimestamp = Math.floor(Date.now() / 1000);
+						presenceData.startTimestamp = browsingTimestamp;
+						timestampUpdateState = 1;
+					}
 
 					if (buttons) {
 						const pin = document.querySelector(
@@ -234,8 +236,7 @@ presence.on("UpdateData", async () => {
 					// Game start
 					presenceData.details = strings.gameStarting;
 					// Allow timestamp to be reset upon a potential replay
-					if (timestampUpdateState === 2) timestampUpdateState = 0;
-
+					if (timestampUpdateState === 1) timestampUpdateState = 0;
 					break;
 				}
 				case "/v2/gameover": {
