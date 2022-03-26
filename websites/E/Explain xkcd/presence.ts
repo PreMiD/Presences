@@ -14,7 +14,12 @@ function getComicName() {
 }
 
 function getTitleText() {
-	return document.querySelector(".image + br + span").textContent.substring(12);
+	let text = document
+		.querySelector(".image + br + span")
+		.textContent.substring(12);
+	if (text.length > 100) text = `${text.substring(0, 100)}...`;
+
+	return text;
 }
 
 presence.on("UpdateData", () => {
