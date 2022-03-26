@@ -3,14 +3,12 @@ const presence = new Presence({
 });
 
 function findRanking(rankingSelector: Element) {
-	if (
+	return (
 		rankingSelector.textContent === strings.stString ||
 		rankingSelector.textContent === strings.ndString ||
 		rankingSelector.textContent === strings.rdString ||
 		rankingSelector.textContent.replace(/\d+/, "{0}") === strings.topX
-	)
-		return true;
-	else return false;
+	);
 }
 
 async function getStrings() {
