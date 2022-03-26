@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "612793327510749210"
 });
 
-async function findRanking(rankingSelector: Element) {
+function findRanking(rankingSelector: Element) {
 	if (
 		rankingSelector.textContent === strings.stString ||
 		rankingSelector.textContent === strings.ndString ||
