@@ -31,7 +31,7 @@ async function getStrings() {
 			firstPlace: "kahoot.firstPlace", // First Place: {0}
 			points: "kahoot.points", // Points: {0}
 			questionsCorrect: "kahoot.questionsCorrect", // Questions Correct: {0}
-			slideShowing: "kahoot.slideShowing", // Showing Slide with Content...
+			slideShowing: "kahoot.slideShowing", // Showing Slide with Content
 			questionShowing: "kahoot.questionShowing", // Showing Question:
 			stString: "kahoot.stString", // 1st place
 			ndString: "kahoot.ndString", // 2nd place
@@ -40,29 +40,27 @@ async function getStrings() {
 			onPodium: "kahoot.onPodium", // On the Podium
 			of: "kahoot.of", // {0} of {1}
 			questionNumber: "kahoot.questionNumber", // Question: {0}
-			feedback: "kahoot.feedback", // Providing Feedback...
-			waitingAnswer: "kahoot.waitingAnswer", // Waiting for Results...
-			drumRoll: "kahoot.drumRoll", // Waiting for Final Ranking...
+			feedback: "kahoot.feedback", // Providing feedback
+			waitingAnswer: "kahoot.waitingAnswer", // Waiting for results...
+			drumRoll: "kahoot.drumRoll", // Waiting for final ranking...
 			position: "kahoot.position", // Position: {0}
-			teamTalk: "kahoot.teamTalk", // Discussing with Team...
-			gameLocked: "kahoot.gameLocked", // Game Locked
-			gameSummary: "kahoot.gameSummary", // Looking at Game Summary...
-			login: "kahoot.login", // Logging in...
-			createHome: "kahoot.createHome", // Viewing Create Home Page...
-			discover: "kahoot.discover", // Viewing Kahoot! Discover Page...
+			teamTalk: "kahoot.teamTalk", // Discussing with team
+			gameSummary: "kahoot.gameSummary", // Looking at game summary
+			login: "kahoot.login", // Logging in
+			createHome: "kahoot.createHome", // Viewing Create home Page
+			discover: "kahoot.discover", // Viewing Kahoot! discover Page
 			searchKahoots: "kahoot.searchKahoots", // Searching for Kahoots:
-			kahootDetails: "kahoot.kahootDetails", // Viewing Kahoot Details:
-			kahootProfile: "kahoot.kahootProfile", // Viewing Kahoot Profile:
-			myKahoots: "kahoot.myKahoots", // Viewing My Kahoots...
-			userReports: "kahoot.userReports", // Viewing Game Reports...
-			myCourses: "kahoot.myCourses", // Viewing My Courses...
-			editingCourse: "kahoot.editingCourse", // Editing a Course:
-			viewingCourse: "kahoot.viewingCourse", // Viewing a Course:
+			kahootDetails: "kahoot.kahootDetails", // Viewing Kahoot details:
+			kahootProfile: "kahoot.kahootProfile", // Viewing Kahoot profile:
+			myKahoots: "kahoot.myKahoots", // Viewing their Kahoots
+			userReports: "kahoot.userReports", // Viewing game reports
+			myCourses: "kahoot.myCourses", // Viewing their courses
+			editingCourse: "kahoot.editingCourse", // Editing a course:
+			viewingCourse: "kahoot.viewingCourse", // Viewing a course:
 			editingKahoot: "kahoot.editingKahoot", // Editing a Kahoot:
-			previewingKahoot: "kahoot.previewingKahoot", // Previewing a Kahoot...
-			liveCourse: "kahoot.liveCourse", // Conducting a Live Course...
-			liveCourseSummary: "kahoot.liveCourseSummary", // Viewing Summary: {0}
-			liveCourseActivity: "kahoot.liveCourseActivity" // Doing Activity #{0}: {1}
+			previewingKahoot: "kahoot.previewingKahoot", // Previewing a Kahoot
+			liveCourse: "kahoot.liveCourse", // Conducting a live course
+			liveCourseActivity: "kahoot.liveCourseActivity" // Activity #{0}: {1}
 		},
 		await presence.getSetting("lang")
 	);
@@ -220,15 +218,14 @@ presence.on("UpdateData", async () => {
 						const pin = document.querySelector(
 							'[data-functional-selector="game-pin"]'
 						)?.textContent;
-						presenceData.buttons = [
-							{
-								label: `${strings.buttonJoinGame.replace(
-									"{0}",
-									pin ?? `(${strings.gameLocked})`
-								)}`, // Join Game: ID
-								url: `https://kahoot.it/?pin=${pin ?? ""}`
-							}
-						];
+						if (pin) {
+							presenceData.buttons = [
+								{
+									label: `${strings.buttonJoinGame.replace("{0}", pin)}`, // Join Game: ID
+									url: `https://kahoot.it/?pin=${pin}`
+								}
+							];
+						}
 					}
 					break;
 				}
@@ -390,10 +387,7 @@ presence.on("UpdateData", async () => {
 							'[data-functional-selector="mega-menu__session-title"]'
 						);
 						if (preview) {
-							presenceData.state = strings.liveCourseSummary.replace(
-								"{0}",
-								preview.textContent
-							);
+							presenceData.state = preview.textContent;
 						} else {
 							const course = document.querySelector(
 									'[data-functional-selector="live-course-menu__toggle-mega-menu"] > span:nth-of-type(2)'
