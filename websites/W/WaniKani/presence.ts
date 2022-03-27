@@ -30,8 +30,10 @@ presence.on("UpdateData", () => {
 						".lessons-and-reviews__button"
 					);
 					if (buttons.length === 2) {
-						const lessons = +buttons[0].querySelector("span").textContent,
-							reviews = +buttons[1].querySelector("span").textContent;
+						const lessons =
+								+buttons[0].querySelector<HTMLSpanElement>("span").textContent,
+							reviews =
+								+buttons[1].querySelector<HTMLSpanElement>("span").textContent;
 						details = "Viewing Dashboard";
 						state = `${lessons} lessons | ${reviews} reviews`;
 						smallImageText = document.querySelector<HTMLAnchorElement>(
@@ -67,37 +69,48 @@ presence.on("UpdateData", () => {
 					break;
 				}
 				case "/extra_study/session": {
-					const characterElement = document.querySelector<HTMLDivElement>("#character"),
+					const characterElement =
+							document.querySelector<HTMLDivElement>("#character"),
 						characterType = characterElement.className;
 					details = `Doing ${
-						document.querySelector("#menu-bar-title").textContent
+						document.querySelector<HTMLDivElement>("#menu-bar-title")
+							.textContent
 					}`;
 					state = `${characterElement.textContent} | ${capitalize(
 						characterType
-					)} ${capitalize(document.querySelector("#question-type").className)}`;
+					)} ${capitalize(
+						document.querySelector<HTMLDivElement>("#question-type").className
+					)}`;
 					smallImageText = `${
-						document.querySelector<HTMLElement>("#completed-count").textContent
+						document.querySelector<HTMLSpanElement>("#completed-count")
+							.textContent
 					} complete, ${
-						document.querySelector<HTMLElement>("#available-count").textContent
+						document.querySelector<HTMLSpanElement>("#available-count")
+							.textContent
 					} remaining. (${
-						document.querySelector<HTMLElement>("#correct-rate").textContent
+						document.querySelector<HTMLSpanElement>("#correct-rate").textContent
 					}%)`;
 					smallImageKey = characterType;
 					break;
 				}
 				case "/review/session": {
-					const characterElement = document.querySelector("#character"),
+					const characterElement =
+							document.querySelector<HTMLDivElement>("#character"),
 						characterType = characterElement.className;
 					details = "Doing Reviews";
 					state = `${characterElement.textContent} | ${capitalize(
 						characterType
-					)} ${capitalize(document.querySelector("#question-type").className)}`;
+					)} ${capitalize(
+						document.querySelector<HTMLDivElement>("#question-type").className
+					)}`;
 					smallImageText = `${
-						document.querySelector("#completed-count").textContent
+						document.querySelector<HTMLSpanElement>("#completed-count")
+							.textContent
 					} complete, ${
-						document.querySelector("#available-count").textContent
+						document.querySelector<HTMLSpanElement>("#available-count")
+							.textContent
 					} remaining. (${
-						document.querySelector("#correct-rate").textContent
+						document.querySelector<HTMLSpanElement>("#correct-rate").textContent
 					}%)`;
 					smallImageKey = characterType;
 					break;
@@ -105,33 +118,38 @@ presence.on("UpdateData", () => {
 				case "/lesson/session": {
 					try {
 						const totalStats = document.querySelectorAll("#stats li > span"),
-							characterType = document.querySelector("#main-info").className;
+							characterType =
+								document.querySelector<HTMLDivElement>("#main-info").className;
 						details = "Learning Lessons";
-						state = `${document.querySelector("#character").textContent} - ${
-							document.querySelector("#meaning").textContent
+						state = `${
+							document.querySelector<HTMLDivElement>("#character").textContent
+						} - ${
+							document.querySelector<HTMLDivElement>("#meaning").textContent
 						}`;
 						smallImageKey = characterType;
 						smallImageText = `${totalStats[0].textContent} radicals | ${
 							totalStats[1].textContent
 						} kanji | ${totalStats[2].textContent} vocab | ${
-							document.querySelector("#completed-count").textContent
+							document.querySelector<HTMLSpanElement>("#completed-count")
+								.textContent
 						} complete`;
 					} catch (err) {
 						// Likely practicing
 						const characterType =
-								document.querySelector("#main-info").className,
+								document.querySelector<HTMLDivElement>("#main-info").className,
 							totalStats = document.querySelectorAll("#stats li > span");
 						details = "Practicing Lessons";
 						state = `${
-							document.querySelector("#character").textContent
+							document.querySelector<HTMLDivElement>("#character").textContent
 						} | ${capitalize(characterType)} ${capitalize(
-							document.querySelector("#question-type").className
+							document.querySelector<HTMLDivElement>("#question-type").className
 						)}`;
 						smallImageKey = characterType;
 						smallImageText = `${totalStats[0].textContent} radicals | ${
 							totalStats[1].textContent
 						} kanji | ${totalStats[2].textContent} vocab | ${
-							document.querySelector("#completed-count").textContent
+							document.querySelector<HTMLSpanElement>("#completed-count")
+								.textContent
 						} complete`;
 					}
 					break;
@@ -140,17 +158,21 @@ presence.on("UpdateData", () => {
 					.input: {
 					const [, type] = pathname.split("/");
 					let textDescription =
-						document.querySelector<HTMLElement>(".mnemonic-content").textContent;
+						document.querySelector<HTMLElement>(
+							".mnemonic-content"
+						).textContent;
 					if (textDescription.length >= 50)
 						textDescription = `${textDescription.substring(0, 50)}...`;
 
 					details = `Browsing ${capitalize(type)}`;
 					state = `${
-						document.querySelector<HTMLElement>(`.${type.replace(/s$/, "")}-icon`)
-							.textContent
+						document.querySelector<HTMLSpanElement>(
+							`.${type.replace(/s$/, "")}-icon`
+						).textContent
 					} | ${
-						document.querySelector(`.${type.replace(/s$/, "")}-icon`).parentNode
-							.childNodes[4].textContent
+						document.querySelector<HTMLSpanElement>(
+							`.${type.replace(/s$/, "")}-icon`
+						).parentNode.childNodes[4].textContent
 					}`;
 					smallImageText = textDescription;
 					smallImageKey = type.replace(/s$/, "");
@@ -158,7 +180,8 @@ presence.on("UpdateData", () => {
 				}
 				case (pathname.match(/^\/users\/.+$/) || {}).input: {
 					details = "Viewing User Profile";
-					state = document.querySelector(".username").textContent;
+					state =
+						document.querySelector<HTMLSpanElement>(".username").textContent;
 					smallImageKey = "avatar";
 					break;
 				}
@@ -178,7 +201,8 @@ presence.on("UpdateData", () => {
 			if (/^\/u\/.+$/.test(pathname)) {
 				details = "Viewing User Profile";
 				smallImageKey = "avatar";
-				state = document.querySelector(".username").textContent;
+				state =
+					document.querySelector<HTMLHeadingElement>(".username").textContent;
 				break;
 			}
 			details = "Browsing WaniKani Community...";
