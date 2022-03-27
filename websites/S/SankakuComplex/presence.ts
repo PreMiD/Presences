@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "956989323910201384"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: HTMLElement, search: HTMLElement;
 presence.on("UpdateData", async () => {
 	const urlParams = new URLSearchParams(window.location.search),
 		presenceData: PresenceData = {
