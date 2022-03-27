@@ -14,65 +14,63 @@ function findRanking(rankingSelector: Element) {
 async function getStrings() {
 	return presence.getStrings(
 		{
-			buttonJoinGame: "kahoot.buttonJoinGame", // Join Game: {0}
-			joiningGame: "kahoot.joiningGame", // Joining Game...
-			waiting: "kahoot.waiting", // Waiting to Start...
-			gameStarting: "kahoot.gameStarting", // Game Starting!
-			playing: "kahoot.playing", // Playing...
-			questionLoading: "kahoot.questionLoading", // Next Question Loading...
-			incorrectAnswer: "kahoot.incorrectAnswer", // Incorrect Answer
-			correctAnswer: "kahoot.correctAnswer", // Correct Answer
-			pollAnswer: "kahoot.pollAnswer", // + Answered Poll
-			resultsQuestion: "kahoot.resultsQuestion", // Looking at Results:
-			slideViewing: "kahoot.slideViewing", // Viewing Slide with Content...
-			gameOver: "kahoot.gameOver", // Game Over
-			gameCreate: "kahoot.gameCreate", // Creating a Game...
-			loadingPage: "kahoot.loadingPage", // Loading Page...
-			firstPlace: "kahoot.firstPlace", // First Place: {0}
-			points: "kahoot.points", // Points: {0}
-			questionsCorrect: "kahoot.questionsCorrect", // Questions Correct: {0}
-			slideShowing: "kahoot.slideShowing", // Showing Slide with Content
-			questionShowing: "kahoot.questionShowing", // Showing Question:
-			stString: "kahoot.stString", // 1st place
-			ndString: "kahoot.ndString", // 2nd place
-			rdString: "kahoot.rdString", // 3rd place
-			topX: "kahoot.topX", // Top {0}
-			onPodium: "kahoot.onPodium", // On the Podium
-			of: "kahoot.of", // {0} of {1}
-			questionNumber: "kahoot.questionNumber", // Question: {0}
-			feedback: "kahoot.feedback", // Providing feedback
-			waitingAnswer: "kahoot.waitingAnswer", // Waiting for results...
-			drumRoll: "kahoot.drumRoll", // Waiting for final ranking...
-			position: "kahoot.position", // Position: {0}
-			teamTalk: "kahoot.teamTalk", // Discussing with team
-			gameSummary: "kahoot.gameSummary", // Looking at game summary
-			login: "kahoot.login", // Logging in
-			createHome: "kahoot.createHome", // Viewing Create home Page
-			discover: "kahoot.discover", // Viewing Kahoot! discover Page
-			searchKahoots: "kahoot.searchKahoots", // Searching for Kahoots:
-			kahootDetails: "kahoot.kahootDetails", // Viewing Kahoot details:
-			kahootProfile: "kahoot.kahootProfile", // Viewing Kahoot profile:
-			myKahoots: "kahoot.myKahoots", // Viewing their Kahoots
-			userReports: "kahoot.userReports", // Viewing game reports
-			myCourses: "kahoot.myCourses", // Viewing their courses
-			editingCourse: "kahoot.editingCourse", // Editing a course:
-			viewingCourse: "kahoot.viewingCourse", // Viewing a course:
-			editingKahoot: "kahoot.editingKahoot", // Editing a Kahoot:
-			previewingKahoot: "kahoot.previewingKahoot", // Previewing a Kahoot
-			liveCourse: "kahoot.liveCourse", // Conducting a live course
-			liveCourseActivity: "kahoot.liveCourseActivity" // Activity #{0}: {1}
+			buttonJoinGame: "kahoot.buttonJoinGame",
+			joiningGame: "kahoot.joiningGame",
+			waiting: "kahoot.waiting",
+			gameStarting: "kahoot.gameStarting",
+			playing: "kahoot.playing",
+			questionLoading: "kahoot.questionLoading",
+			incorrectAnswer: "kahoot.incorrectAnswer",
+			correctAnswer: "kahoot.correctAnswer",
+			pollAnswer: "kahoot.pollAnswer",
+			resultsQuestion: "kahoot.resultsQuestion",
+			slideViewing: "kahoot.slideViewing",
+			gameOver: "kahoot.gameOver",
+			gameCreate: "kahoot.gameCreate",
+			loadingPage: "kahoot.loadingPage",
+			firstPlace: "kahoot.firstPlace",
+			points: "kahoot.points",
+			questionsCorrect: "kahoot.questionsCorrect",
+			slideShowing: "kahoot.slideShowing",
+			questionShowing: "kahoot.questionShowing",
+			stString: "kahoot.stString",
+			ndString: "kahoot.ndString",
+			rdString: "kahoot.rdString",
+			topX: "kahoot.topX",
+			onPodium: "kahoot.onPodium",
+			of: "kahoot.of",
+			questionNumber: "kahoot.questionNumber",
+			feedback: "kahoot.feedback",
+			waitingAnswer: "kahoot.waitingAnswer",
+			drumRoll: "kahoot.drumRoll",
+			position: "kahoot.position",
+			teamTalk: "kahoot.teamTalk",
+			gameSummary: "kahoot.gameSummary",
+			login: "kahoot.login",
+			createHome: "kahoot.createHome",
+			discover: "kahoot.discover",
+			searchKahoots: "kahoot.searchKahoots",
+			kahootDetails: "kahoot.kahootDetails",
+			kahootProfile: "kahoot.kahootProfile",
+			myKahoots: "kahoot.myKahoots",
+			userReports: "kahoot.userReports",
+			myCourses: "kahoot.myCourses",
+			editingCourse: "kahoot.editingCourse",
+			viewingCourse: "kahoot.viewingCourse",
+			editingKahoot: "kahoot.editingKahoot",
+			previewingKahoot: "kahoot.previewingKahoot",
+			liveCourse: "kahoot.liveCourse",
+			liveCourseActivity: "kahoot.liveCourseActivity"
 		},
-		await presence.getSetting("lang")
+		await presence.getSetting<string>("lang")
 	);
 }
 
 let strings: { [key: string]: string },
 	oldLang: string = null,
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-	/**
-	 * 0 - ready to be updated if needed
-	 * 1 - updated, ready to be reset to 0
-	 */
+	// 0 - ready to be updated if needed
+	// 1 - updated, ready to be reset to 0
 	timestampUpdateState = 0;
 
 presence.on("UpdateData", async () => {
@@ -80,21 +78,26 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "kahoot",
 			startTimestamp: browsingTimestamp
 		},
-		buttons = await presence.getSetting<boolean>("buttons"),
-		newLang = await presence.getSetting<string>("lang");
+		[buttons, newLang] = await Promise.all([
+			await presence.getSetting<boolean>("buttons"),
+			await presence.getSetting<string>("lang")
+		]);
 
 	oldLang ??= newLang;
 	strings ??= await getStrings();
 	if (oldLang !== newLang) oldLang = newLang;
 
-	switch (location.host) {
+	const { host, pathname } = document.location;
+	switch (host) {
 		case "kahoot.it": {
-			const path = document.location.pathname;
-
-			if (path === "/" || path.includes("/join") || path === "/v2/") {
+			if (
+				pathname === "/" ||
+				pathname.includes("/join") ||
+				pathname === "/v2/"
+			) {
 				// Home/Join screen
 				presenceData.details = strings.joiningGame;
-			} else if (path.includes("/instructions")) {
+			} else if (pathname.includes("/instructions")) {
 				// Waiting for game to start
 				presenceData.details = strings.waiting;
 				// Set start timestamp after joining game
@@ -102,12 +105,12 @@ presence.on("UpdateData", async () => {
 					browsingTimestamp = Math.floor(Date.now() / 1000);
 					timestampUpdateState = 1;
 				}
-			} else if (path.includes("/start")) {
+			} else if (pathname.includes("/start")) {
 				// Game is starting
 				presenceData.details = strings.gameStarting;
 				// Allow timestamp to be reset upon a potential replay
 				if (timestampUpdateState === 1) timestampUpdateState = 0;
-			} else if (path.includes("/gameblock")) {
+			} else if (pathname.includes("/gameblock")) {
 				// Playing/Answering a question
 				const [currentQuestion, totalQuestions] = document
 						.querySelector(
@@ -124,7 +127,7 @@ presence.on("UpdateData", async () => {
 						.replace("{0}", currentQuestion)
 						.replace("{1}", totalQuestions)
 				)} | ${strings.points.replace("{0}", score)}`;
-			} else if (path.includes("/getready")) {
+			} else if (pathname.includes("/getready")) {
 				// Next question is loading
 				const [currentQuestion, totalQuestions] = document
 					.querySelector('[data-functional-selector="question-index-counter"]')
@@ -136,13 +139,16 @@ presence.on("UpdateData", async () => {
 						.replace("{0}", currentQuestion)
 						.replace("{1}", totalQuestions)
 				)}`;
-			} else if (path.includes("/teamtalk")) {
+			} else if (pathname.includes("/teamtalk")) {
 				// Team discussion time
 				presenceData.details = strings.teamTalk;
-			} else if (path.includes("/answer") && !path.includes("/result")) {
+			} else if (
+				pathname.includes("/answer") &&
+				!pathname.includes("/result")
+			) {
 				// Waiting for question to end
 				presenceData.details = strings.waitingAnswer;
-			} else if (path.includes("/result")) {
+			} else if (pathname.includes("/result")) {
 				// Answer result screen
 				const rankingSelector = document.querySelector(
 					'[data-functional-selector="player-rank"]'
@@ -170,10 +176,10 @@ presence.on("UpdateData", async () => {
 							: strings.onPodium
 					} | ${strings.points.replace("{0}", score)}`;
 				}
-			} else if (path.includes("/contentblock")) {
+			} else if (pathname.includes("/contentblock")) {
 				// Viewing a slide with content
 				presenceData.details = strings.slideViewing;
-			} else if (path.includes("/ranking")) {
+			} else if (pathname.includes("/ranking")) {
 				// Viewing the final ranking
 				const rankingSelector = document.querySelector(
 					'[data-functional-selector="ranking-header"],[data-functional-selector="ranking-header-winners"]'
@@ -189,7 +195,7 @@ presence.on("UpdateData", async () => {
 						  } | ${strings.points.replace("{0}", score)}`
 						: `${strings.gameOver} | ${strings.points.replace("{0}", score)}`;
 				}
-			} else if (path.includes("/feedback")) {
+			} else if (pathname.includes("/feedback")) {
 				// Providing feedback
 				presenceData.details = strings.feedback;
 			} else presenceData.details = strings.loadingPage;
@@ -198,7 +204,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "play.kahoot.it": {
-			switch (location.pathname) {
+			switch (pathname) {
 				case "/v2/": {
 					// Settings/game creation
 					presenceData.details = strings.gameCreate;
@@ -304,8 +310,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "create.kahoot.it": {
-			const { pathname: path } = location;
-			switch (path) {
+			switch (pathname) {
 				case "/": {
 					// Kahoot! Create home page
 					presenceData.details = strings.createHome;
@@ -331,13 +336,13 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				default:
-					if (path.startsWith("/details/")) {
+					if (pathname.startsWith("/details/")) {
 						// Kahoot details
 						presenceData.details = strings.kahootDetails;
 						presenceData.state = document.querySelector(
 							'[data-functional-selector="kahoot-detail__title"]'
 						).textContent;
-					} else if (path.startsWith("/profiles/")) {
+					} else if (pathname.startsWith("/profiles/")) {
 						// Kahoot profile
 						presenceData.details = strings.kahootProfile;
 						presenceData.state = (
@@ -348,17 +353,17 @@ presence.on("UpdateData", async () => {
 								'[data-functional-selector="default-user-profile"] > div > div > div:nth-of-type(2) > div'
 							)
 						).firstChild.textContent.replace(/\n/g, " ");
-					} else if (path.startsWith("/my-library/kahoots/")) {
+					} else if (pathname.startsWith("/my-library/kahoots/")) {
 						// My Kahoots
 						presenceData.details = strings.myKahoots;
-					} else if (path === "/user-reports") {
+					} else if (pathname === "/user-reports") {
 						// Game Reports
 						presenceData.details = strings.userReports;
-					} else if (path === "/my-library/courses") {
+					} else if (pathname === "/my-library/courses") {
 						// My Courses
 						presenceData.details = strings.myCourses;
-					} else if (path.startsWith("/course/")) {
-						if (path.endsWith("/edit")) {
+					} else if (pathname.startsWith("/course/")) {
+						if (pathname.endsWith("/edit")) {
 							// Editing a course
 							presenceData.details = strings.editingCourse;
 							presenceData.state = document.querySelector<HTMLInputElement>(
@@ -371,16 +376,16 @@ presence.on("UpdateData", async () => {
 								'[data-functional-selector="course-details"] h2'
 							).textContent;
 						}
-					} else if (path.startsWith("/creator/")) {
+					} else if (pathname.startsWith("/creator/")) {
 						// Editing a Kahoot!
 						presenceData.details = strings.editingKahoot;
 						presenceData.state = document.querySelector(
 							'[data-functional-selector="top-bar__kahoot-summary-button"] > span'
 						).textContent;
-					} else if (path.startsWith("/preview/")) {
+					} else if (pathname.startsWith("/preview/")) {
 						// Previewing a Kahoot!
 						presenceData.details = strings.previewingKahoot;
-					} else if (path.startsWith("/v2/live-course/")) {
+					} else if (pathname.startsWith("/v2/live-course/")) {
 						// Live course
 						presenceData.details = strings.liveCourse;
 						const preview = document.querySelector(
