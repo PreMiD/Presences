@@ -35,6 +35,9 @@
 		},
 		{
 			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
@@ -51,6 +54,9 @@
 		},
 		{
 			"id": "cover",
+			"if": {
+				"privacy": false
+			},
 			"title": "Show Cover",
 			"icon": "fad fa-images",
 			"value": true
