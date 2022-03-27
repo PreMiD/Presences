@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				url: `https://xkcd.com/${comicNumber}`,
-				label: "View comic"
+				label: "View Comic"
 			}
 		];
 		presenceData.state = document.querySelector("#ctitle").textContent;
