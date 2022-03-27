@@ -9,9 +9,9 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "lg-sk",
 			startTimestamp: browsingTimestamp
 		};
-	if (document.location.pathname.includes("chan.sankakucomplex.com")) {
+	if (document.location.pathname.includes("chan.sankakucomplex.com"))
 		presenceData.details = "Viewing the homepage...";
-	} else if (document.location.pathname.includes("/show")) {
+	else if (document.location.pathname.includes("/show")) {
 		presenceData.details = "Viewing a Post...";
 		presenceData.state = `Post ${
 			document.location.pathname.split("/show/")[1]
