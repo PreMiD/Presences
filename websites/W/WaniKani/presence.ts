@@ -34,7 +34,7 @@ presence.on("UpdateData", () => {
 							reviews = +buttons[1].querySelector("span").textContent;
 						details = "Viewing Dashboard";
 						state = `${lessons} lessons | ${reviews} reviews`;
-						smallImageText = document.querySelector(
+						smallImageText = document.querySelector<HTMLAnchorElement>(
 							".user-summary__attribute > a"
 						).textContent;
 						if (lessons > reviews) {
@@ -67,7 +67,7 @@ presence.on("UpdateData", () => {
 					break;
 				}
 				case "/extra_study/session": {
-					const characterElement = document.querySelector("#character"),
+					const characterElement = document.querySelector<HTMLDivElement>("#character"),
 						characterType = characterElement.className;
 					details = `Doing ${
 						document.querySelector("#menu-bar-title").textContent
@@ -76,11 +76,11 @@ presence.on("UpdateData", () => {
 						characterType
 					)} ${capitalize(document.querySelector("#question-type").className)}`;
 					smallImageText = `${
-						document.querySelector("#completed-count").textContent
+						document.querySelector<HTMLElement>("#completed-count").textContent
 					} complete, ${
-						document.querySelector("#available-count").textContent
+						document.querySelector<HTMLElement>("#available-count").textContent
 					} remaining. (${
-						document.querySelector("#correct-rate").textContent
+						document.querySelector<HTMLElement>("#correct-rate").textContent
 					}%)`;
 					smallImageKey = characterType;
 					break;
@@ -140,13 +140,13 @@ presence.on("UpdateData", () => {
 					.input: {
 					const [, type] = pathname.split("/");
 					let textDescription =
-						document.querySelector(".mnemonic-content").textContent;
+						document.querySelector<HTMLElement>(".mnemonic-content").textContent;
 					if (textDescription.length >= 50)
 						textDescription = `${textDescription.substring(0, 50)}...`;
 
 					details = `Browsing ${capitalize(type)}`;
 					state = `${
-						document.querySelector(`.${type.replace(/s$/, "")}-icon`)
+						document.querySelector<HTMLElement>(`.${type.replace(/s$/, "")}-icon`)
 							.textContent
 					} | ${
 						document.querySelector(`.${type.replace(/s$/, "")}-icon`).parentNode
