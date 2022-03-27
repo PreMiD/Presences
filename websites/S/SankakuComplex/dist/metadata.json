@@ -4,13 +4,11 @@
       "name": "Trapinho",
       "id": "378688051288997889"
     },
-    "service": "Sankaku Complex",
+    "service": "SankakuComplex",
     "description": {
       "en": "Sankaku Complex - Anime, manga and games, observed from Japan"
     },
-    "url": [
-      "chan.sankakucomplex.com"
-    ],
+	"url": "chan.sankakucomplex.com",
     "version": "1.0.0",
     "logo": "https://i.imgur.com/f47YI6w.png",
     "thumbnail": "https://i.imgur.com/QNqF7D0.png",
