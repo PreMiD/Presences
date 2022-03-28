@@ -64,11 +64,10 @@ presence.on("UpdateData", async () => {
 					pathname.startsWith("/tokusatsu/") ||
 					pathname.startsWith("/donghua/")
 				) {
-					const title: string = (
+					presenceData.details = "Checking synopsis";
+					presenceData.state = (
 						document.querySelector(".anime_container_titulo") as HTMLDivElement
 					).textContent;
-					presenceData.details = "Checking synopsis";
-					presenceData.state = title;
 				} else if (pathname.startsWith("/video/")) {
 					const title: string = (
 							document.querySelector(

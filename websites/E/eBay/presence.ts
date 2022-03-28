@@ -17,10 +17,6 @@ presence.on("UpdateData", async () => {
 		} else {
 			switch (page) {
 				case "itm": {
-					const seller = (
-						document.querySelector(".mbg > a") as HTMLAnchorElement
-					)?.href;
-
 					presenceData.details = document
 						.querySelector("#itemTitle")
 						.textContent.replace(
@@ -31,7 +27,8 @@ presence.on("UpdateData", async () => {
 						{ label: "View Item", url: location.href },
 						{
 							label: "View Seller",
-							url: seller
+							url: (document.querySelector(".mbg > a") as HTMLAnchorElement)
+								?.href
 						}
 					];
 

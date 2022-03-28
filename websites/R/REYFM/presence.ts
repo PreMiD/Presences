@@ -153,13 +153,13 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLElement>("#player").style.cssText !==
 			"display: none;"
 		) {
-			const paused = document
-				.querySelector<HTMLImageElement>("#miniplayer-play")
-				.src.includes("play.png");
-
 			let track: string, artist: string, cover: string;
 
-			if (!paused) {
+			if (
+				!document
+					.querySelector<HTMLImageElement>("#miniplayer-play")
+					.src.includes("play.png")
+			) {
 				const channelID = findChannel();
 				if (channelID !== "YOU FAILED") {
 					const channel = channels.find(channel => channel.id === channelID);

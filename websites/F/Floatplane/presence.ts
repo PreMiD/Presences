@@ -86,10 +86,9 @@ presence.on("UpdateData", async () => {
 
 				if (pageTypeType === "live") {
 					//Stream
-					const title = document.querySelector(".title-text")?.textContent,
-						video = document.querySelector("video") as HTMLVideoElement;
-
-					if (!title || !video) return;
+					const title = document.querySelector(".title-text")?.textContent;
+					if (!title || (!document.querySelector("video") as HTMLVideoElement))
+						return;
 
 					delete presenceData.startTimestamp;
 

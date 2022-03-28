@@ -61,10 +61,11 @@ presence.on("UpdateData", async () => {
 				path.startsWith("/project/")
 			) {
 				presenceData.details = "Bir ürün oluşturuyor..";
-				const form = document.forms[2];
 
 				presenceData.smallImageKey = "project";
-				presenceData.smallImageText = (form[0] as HTMLInputElement).value;
+				presenceData.smallImageText = (
+					document.forms[2][0] as HTMLInputElement
+				).value;
 			} else if (path.startsWith("/project/") && path.includes("/products/")) {
 				presenceData.details = "Bir ürünü düzenliyor:";
 				const form = document.forms[2];

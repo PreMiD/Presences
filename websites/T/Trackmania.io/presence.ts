@@ -83,11 +83,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Club Rooms";
 			if (!window.location.hash.endsWith("rooms")) {
 				presenceData.details = "Club Room";
-				const text = document.querySelectorAll(".game-text")[0].textContent;
 
-				presenceData.state = `${text} (${
-					document.querySelectorAll(".subtitle")[0].textContent
-				})`;
+				presenceData.state = `${
+					document.querySelectorAll(".game-text")[0].textContent
+				} (${document.querySelectorAll(".subtitle")[0].textContent})`;
 
 				presenceData.largeImageKey = document
 					.querySelectorAll(".room-media")[0]
@@ -97,11 +96,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Clubs";
 			if (!window.location.hash.endsWith("clubs")) {
 				presenceData.details = "Club";
-				const text = document.querySelectorAll(".game-text")[0].textContent;
 
-				presenceData.state = `${text} (${
-					document.querySelectorAll(".subtitle")[0].textContent
-				})`;
+				presenceData.state = `${
+					document.querySelectorAll(".game-text")[0].textContent
+				} (${document.querySelectorAll(".subtitle")[0].textContent})`;
 
 				const clubImagesArray: string[] = [];
 
@@ -120,11 +118,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Events";
 			if (!window.location.hash.endsWith("competitions")) {
 				presenceData.details = "Event";
-				const text = document.querySelectorAll(".game-text")[0].textContent;
 
-				presenceData.state = `${text} (${
-					document.querySelectorAll(".subtitle")[0].textContent
-				})`;
+				presenceData.state = `${
+					document.querySelectorAll(".game-text")[0].textContent
+				} (${document.querySelectorAll(".subtitle")[0].textContent})`;
 
 				let eventLogo = document
 					.querySelectorAll(".logo")[0]
