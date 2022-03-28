@@ -87,7 +87,6 @@ presence.on("UpdateData", async () => {
 						presence.getTimestampsfromMedia(video);
 				}
 			}
-			break;
 		}
 		// CONTA
 		case document.location.pathname.includes("/account"):
