@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 				break;
 			case "series":
 				presenceData.details = "Vendo séries";
-				if (cover) {
+				if (!privacy && cover) {
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						"div > div > div > div.poster-season > img"
 					).src;
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "reading";
 				break;
 			case "episodio":
-				if (cover) {
+				if (!privacy && cover) {
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						"#dt_contenedor > div.season-bg-bs > div > a > img"
 					).src;
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 			case "filmes":
-				if (cover) {
+				if (!privacy && cover) {
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						"#dt_contenedor > div.season-bg-bs > div > img"
 					).src;
@@ -139,7 +139,10 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (privacy) delete presenceData.state;
+	if (privacy) {
+		delete presenceData.state;
+		delete presenceData.buttons;
+	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
