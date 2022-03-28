@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -21,7 +21,7 @@
 		"anontpp.com",
 		"goplay.anontpp.com"
 	],
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"logo": "https://i.imgur.com/Sr0u6MC.png",
 	"thumbnail": "https://i.imgur.com/ViBgH8i.png",
 	"color": "#F4ADEE",

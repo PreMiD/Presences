@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -13,7 +13,7 @@
 		"asurascans.com",
 		"www.asurascans.com"
 	],
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/ewDJfwk.png",
 	"thumbnail": "https://i.imgur.com/FjiRGf6.png",
 	"color": "#6E3CAA",
