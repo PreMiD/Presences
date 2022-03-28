@@ -66,7 +66,7 @@ async function getStrings() {
 	);
 }
 
-let strings: { [key: string]: string },
+let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	// 0 - ready to be updated if needed
