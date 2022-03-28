@@ -12,13 +12,13 @@
 		"www.explainxkcd.com",
 		"explainxkcd.com"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/mZSiamM.png",
 	"thumbnail": "https://i.imgur.com/MUuSnky.png",
 	"color": "#ffffff",
+	"category": "other",
 	"tags": [
 		"comic",
 		"wiki"
-	],
-	"category": "other"
+	]
 }
