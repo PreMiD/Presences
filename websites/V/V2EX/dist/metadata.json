@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Xunco",
 		"id": "611786551504011305"
@@ -18,7 +18,7 @@
 		"v2ex.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*v2ex[.]com[/]",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/kfj4PUe.png",
 	"thumbnail": "https://i.imgur.com/eugm5S4.png",
 	"color": "#aab0c6",
