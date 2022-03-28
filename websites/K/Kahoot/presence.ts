@@ -85,7 +85,10 @@ presence.on("UpdateData", async () => {
 
 	oldLang ??= newLang;
 	strings ??= await getStrings();
-	if (oldLang !== newLang) oldLang = newLang;
+	if (oldLang !== newLang) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
 	const { host, pathname } = document.location;
 	switch (host) {
