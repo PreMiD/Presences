@@ -199,10 +199,8 @@ presence.on("UpdateData", async () => {
 					.split("-")[0]
 					.replace(/ *\([^)]*\) */g, "");
 			} else {
-				const product = getPSName();
-
 				presenceData.details = strings.viewProduct;
-				presenceData.state = product;
+				presenceData.state = getPSName();
 			}
 
 			if (buttons) {
@@ -391,10 +389,9 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		} else if (urlpath[num] === "product") {
-			const product = document.querySelector("h1.rf-pdp-title")?.textContent;
-
 			presenceData.details = strings.viewProduct;
-			presenceData.state = product;
+			presenceData.state =
+				document.querySelector("h1.rf-pdp-title")?.textContent;
 
 			if (buttons) {
 				presenceData.buttons = [
@@ -588,10 +585,11 @@ presence.on("UpdateData", async () => {
 										? iframeData.currentMailSubject
 										: "";
 
-									if (iframeData.currentMailSender && showICloudMailSender)
+									if (iframeData.currentMailSender && showICloudMailSender) {
 										state = `${iframeData.currentMailSender}${
 											state !== "" ? `: ${state}` : ""
 										}`;
+									}
 
 									presenceData.state = state;
 								} else presenceData.state = iframeData.currentMailbox;
