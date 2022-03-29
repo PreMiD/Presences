@@ -60,7 +60,6 @@ switch (true) {
 	case document.location.pathname.startsWith("/filmes/") &&
 		!document.location.pathname.endsWith("documentarios"):
 		presenceData.details = `Vendo filmes por gênero:${getName()}`;
-		presenceData.smallImageKey = "reading";
 		break;
 
 	case document.location.pathname.includes("/filmes"):
