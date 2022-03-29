@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "!HVN丶nayumi#4378",
 		"id": "895438058621665331"
@@ -13,7 +13,7 @@
 		"hentai.fakku.cc",
 		"moe.hensoe.top"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/VlB7zdS.png",
 	"thumbnail": "https://i.imgur.com/emzMOBb.png",
 	"color": "#FBB313",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -15,7 +15,7 @@
 	},
 	"url": "www.amazon.com",
 	"regExp": "([a-z0-9-]+[.])*amazon([.][a-z]+)+[/](?!(-[/]([a-z0-9]+)[/])?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp[/]video))",
-	"version": "1.5.13",
+	"version": "1.5.14",
 	"logo": "https://i.imgur.com/qPBCqNA.png",
 	"thumbnail": "https://i.imgur.com/Y6njoa3.png",
 	"color": "#ff9900",
