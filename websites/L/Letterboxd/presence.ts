@@ -63,28 +63,22 @@ presence.on("UpdateData", async () => {
 				break;
 
 			case "settings": {
-				const smallPFP = getImageURLByAlt(user);
-
 				presenceData.details = "Changing their settings";
-				presenceData.smallImageKey = smallPFP;
+				presenceData.smallImageKey = getImageURLByAlt(user);
 
 				break;
 			}
 
 			case "list": {
-				const smallPFP = getImageURLByAlt(user);
-
 				presenceData.details = "Creating a list";
-				presenceData.smallImageKey = smallPFP;
+				presenceData.smallImageKey = getImageURLByAlt(user);
 
 				break;
 			}
 
 			case "invitations": {
-				const smallPFP = getImageURLByAlt(user);
-
 				presenceData.details = "Viewing their invitations";
-				presenceData.smallImageKey = smallPFP;
+				presenceData.smallImageKey = getImageURLByAlt(user);
 
 				break;
 			}
@@ -119,12 +113,10 @@ presence.on("UpdateData", async () => {
 
 			case "activity": {
 				const name = (
-						document.querySelectorAll(".title-3")[0]
-							.firstElementChild as HTMLAnchorElement
-					).textContent,
-					smallPFP = getImageURLByAlt(name);
-
-				presenceData.smallImageKey = smallPFP;
+					document.querySelectorAll(".title-3")[0]
+						.firstElementChild as HTMLAnchorElement
+				).textContent;
+				presenceData.smallImageKey = getImageURLByAlt(name);
 				presenceData.smallImageText = name;
 
 				if (path[1]) {
@@ -389,13 +381,11 @@ presence.on("UpdateData", async () => {
 								name = (
 									document.querySelectorAll(".name")[0]
 										.firstElementChild as HTMLSpanElement
-								).textContent,
-								smallPFP = getImageURLByAlt(name);
-
+								).textContent;
 							presenceData.details = `Viewing the list ${title}`;
 							presenceData.buttons = generateButtonText(presenceData.details);
 							presenceData.state = `By ${name}`;
-							presenceData.smallImageKey = smallPFP;
+							presenceData.smallImageKey = getImageURLByAlt(name);
 							presenceData.smallImageText = name;
 
 							break;
@@ -488,18 +478,16 @@ presence.on("UpdateData", async () => {
 						].includes(path[1])
 					) {
 						const name = (
-								document.querySelectorAll(".title-3")[0]
-									.firstElementChild as HTMLAnchorElement
-							).textContent,
-							smallPFP = getImageURLByAlt(name);
-
+							document.querySelectorAll(".title-3")[0]
+								.firstElementChild as HTMLAnchorElement
+						).textContent;
 						if (path[0] !== user && path[0] !== user.toLowerCase()) {
 							presenceData.details = presenceData.details
 								.replace("their", `${name}'s`)
 								.replace("they've", `${name} has`);
 						}
 
-						presenceData.smallImageKey = smallPFP;
+						presenceData.smallImageKey = getImageURLByAlt(name);
 						presenceData.smallImageText = name;
 					}
 				} else {

@@ -34,9 +34,8 @@ presence.on("UpdateData", async () => {
 		const page = paths[path];
 		if (page) presenceData.details = page;
 	} else {
-		const [page] = document.location.hostname.split(".");
 		presenceData.startTimestamp = Date.now();
-		switch (page) {
+		switch (document.location.hostname.split(".")[0]) {
 			case "support":
 				if (document.location.pathname.includes("categories")) {
 					const category = document.querySelector(".page-header h1");
