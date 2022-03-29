@@ -50,10 +50,8 @@ presence.on("UpdateData", () => {
 			document.querySelectorAll("header > div > div > button")
 		).map(button => button.textContent);
 		if (document.querySelectorAll(".v-btn__content")[2].textContent === "") {
-			// Participating
 			presenceData.details = "Participating in a Courtroom";
 		} else {
-			// Spectating
 			presenceData.details = "Spectating a Courtroom";
 		}
 		presenceData.state = `${
