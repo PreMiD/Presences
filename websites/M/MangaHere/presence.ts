@@ -76,24 +76,21 @@ presence.on("UpdateData", async () => {
 		}
 		default:
 			if (pathname.endsWith("/new/")) {
-				const url = pathname,
-					splitUrl = url.split("/");
+				const splitUrl = pathname.split("/");
 				presenceData.details =
 					splitUrl[1] === "new"
 						? "Browsing new manga"
 						: `Browsing new ${splitUrl[1]} manga`;
 			} else if (pathname.endsWith("/completed/")) {
 				//ganre/completed/
-				const url = pathname,
-					splitUrl = url.split("/");
+				const splitUrl = pathname.split("/");
 				presenceData.details =
 					splitUrl[1] === "completed"
 						? "Browsing completed manga"
 						: `Browsing completed ${splitUrl[1]} manga`;
 			} else if (pathname.endsWith("/on_going/")) {
 				//ganre/on_going/
-				const url = pathname,
-					splitUrl = url.split("/");
+				const splitUrl = pathname.split("/");
 				presenceData.details =
 					splitUrl[1] === "on_going"
 						? "Browsing ongoing manga"

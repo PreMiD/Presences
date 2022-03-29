@@ -178,10 +178,8 @@ presence.on("UpdateData", async () => {
 					}
 				}
 			} else if (pathname.includes("/search/groups")) {
-				const searchResult = new URL(href).searchParams.get("keyword");
-
 				presenceData.details = "Searching for a group:";
-				presenceData.state = searchResult;
+				presenceData.state = new URL(href).searchParams.get("keyword");
 			} else if (
 				(pathname === "/discover/" || pathname === "/discover") &&
 				gameName === null
@@ -231,20 +229,19 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Current page:";
 				presenceData.state = "Catalog";
 
-				const itemName = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					),
-					itemImage = document.querySelector<HTMLImageElement>(
-						"span.thumbnail-span img"
-					);
+				const itemImage = document.querySelector<HTMLImageElement>(
+					"span.thumbnail-span img"
+				);
 
 				if (searchResult) {
 					presenceData.details = "Searching for an item: ";
 					presenceData.state = searchResult;
 				} else if (itemImage) {
 					presenceData.details = "Looking at Catalog Item:";
-					(presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg"),
-						(presenceData.state = itemName.textContent);
+					presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
+					presenceData.state = document.querySelector<HTMLHeadingElement>(
+						".item-name-container h2"
+					).textContent;
 
 					if (buttons) {
 						presenceData.buttons = [
@@ -256,30 +253,28 @@ presence.on("UpdateData", async () => {
 					}
 				}
 			} else if (pathname.includes("/places/")) {
-				const selectedTab = document.querySelector<HTMLDivElement>(
-					"#MasterContainer #navbar div.selected a"
-				);
-
 				presenceData.details = "Configuring Place";
-				presenceData.state = `Tab: ${selectedTab.textContent || "Unknown"}`;
+				presenceData.state = `Tab: ${
+					document.querySelector<HTMLDivElement>(
+						"#MasterContainer #navbar div.selected a"
+					).textContent || "Unknown"
+				}`;
 			} else if (pathname.includes("/universes/configure")) {
-				const selectedTab = document.querySelector<HTMLDivElement>(
-					"#MasterContainer #navbar div.selected a"
-				);
-
 				presenceData.details = "Configuring Experience";
-				presenceData.state = `Tab: ${selectedTab.textContent || "Unknown"}`;
+				presenceData.state = `Tab: ${
+					document.querySelector<HTMLDivElement>(
+						"#MasterContainer #navbar div.selected a"
+					).textContent || "Unknown"
+				}`;
 			} else if (pathname.includes("/bundles/")) {
-				const itemName = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					),
-					itemImage = document.querySelector<HTMLImageElement>(
-						"span.thumbnail-span img"
-					);
-
 				presenceData.details = "Looking at Bundle:";
-				presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
-				presenceData.state = itemName.textContent;
+				presenceData.largeImageKey = imagesEnabled
+					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							.src
+					: "lg";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".item-name-container h2"
+				).textContent;
 
 				if (buttons) {
 					presenceData.buttons = [
@@ -290,10 +285,8 @@ presence.on("UpdateData", async () => {
 					];
 				}
 			} else if (pathname.includes("/search/users")) {
-				const searchResult = new URL(href).searchParams.get("keyword");
-
 				presenceData.details = "Searching for an user:";
-				presenceData.state = searchResult;
+				presenceData.state = new URL(href).searchParams.get("keyword");
 			} else if (pathname.includes("/develop")) {
 				presenceData.details = "Developer Page";
 				const developTabs = document.querySelector<HTMLDivElement>(
@@ -379,16 +372,14 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Transactions Page";
 				presenceData.state = `Tab: ${transactionsTab}`;
 			} else if (pathname.includes("/badges/")) {
-				const itemName = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					),
-					itemImage = document.querySelector<HTMLImageElement>(
-						"span.thumbnail-span img"
-					);
-
 				presenceData.details = "Looking at Badge:";
-				presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
-				presenceData.state = itemName.textContent;
+				presenceData.largeImageKey = imagesEnabled
+					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							.src
+					: "lg";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".item-name-container h2"
+				).textContent;
 
 				if (buttons) {
 					presenceData.buttons = [
@@ -399,16 +390,14 @@ presence.on("UpdateData", async () => {
 					];
 				}
 			} else if (pathname.includes("/library/")) {
-				const itemName = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					),
-					itemImage = document.querySelector<HTMLImageElement>(
-						"span.thumbnail-span img"
-					);
-
 				presenceData.details = "Looking at Asset:";
-				presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
-				presenceData.state = itemName.textContent;
+				presenceData.largeImageKey = imagesEnabled
+					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							.src
+					: "lg";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".item-name-container h2"
+				).textContent;
 
 				if (buttons) {
 					presenceData.buttons = [
@@ -419,16 +408,14 @@ presence.on("UpdateData", async () => {
 					];
 				}
 			} else if (pathname.includes("/game-pass/")) {
-				const itemName = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					),
-					itemImage = document.querySelector<HTMLImageElement>(
-						"span.thumbnail-span img"
-					);
-
 				presenceData.details = "Looking at Gamepass:";
-				presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
-				presenceData.state = itemName.textContent;
+				presenceData.largeImageKey = imagesEnabled
+					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							.src
+					: "lg";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".item-name-container h2"
+				).textContent;
 
 				if (buttons) {
 					presenceData.buttons = [

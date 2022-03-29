@@ -104,14 +104,12 @@ presence.on("UpdateData", () => {
 				case "/lesson/session": {
 					try {
 						const totalStats: NodeList =
-								document.querySelectorAll("#stats li > span"),
-							characterType: string =
-								document.querySelector("#main-info").className;
+							document.querySelectorAll("#stats li > span");
 						details = "Learning Lessons";
 						state = `${document.querySelector("#character").textContent} - ${
 							document.querySelector("#meaning").textContent
 						}`;
-						smallImageKey = characterType;
+						smallImageKey = document.querySelector("#main-info").className;
 						smallImageText = `${totalStats[0].textContent} radicals | ${
 							totalStats[1].textContent
 						} kanji | ${totalStats[2].textContent} vocab | ${

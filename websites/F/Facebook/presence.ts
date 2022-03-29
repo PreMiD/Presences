@@ -117,8 +117,7 @@ presence.on("UpdateData", async () => {
 			)?.parentElement;
 
 			if (videoFrame) {
-				const video = videoFrame.querySelector("video"),
-					user = videoFrame.querySelector(
+				const user = videoFrame.querySelector(
 						"span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.ltmttdrg.g0qnabr5"
 					)?.textContent,
 					description = videoFrame.querySelector("div.n1l5q3vz")?.textContent,
@@ -144,7 +143,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = "play";
 
 					presenceData.endTimestamp = presence
-						.getTimestampsfromMedia(video)
+						.getTimestampsfromMedia(videoFrame.querySelector("video"))
 						.pop();
 				}
 			} else if (location.pathname.includes("/live")) {
@@ -178,11 +177,12 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/marketplace/")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		if (document.location.pathname.includes("/search/") && !privacyMode) {
-			const search = new URLSearchParams(location.search).get("q");
 			presenceData.smallImageKey = "search";
 
 			presenceData.details = "Marketplace - Searching for:";
-			presenceData.state = showSeachQuery ? decodeURI(search) : "(Hidden)";
+			presenceData.state = showSeachQuery
+				? decodeURI(new URLSearchParams(location.search).get("q"))
+				: "(Hidden)";
 		} else if (document.location.pathname.includes("/item/")) {
 			if (privacyMode) presenceData.details = "Marketplace - Viewing item";
 			else {

@@ -82,13 +82,15 @@ presence.on("UpdateData", async () => {
 				else if (pathname.startsWith("/friends"))
 					presenceData.details = "Managing Friends";
 				else if (pathname.startsWith("/player")) {
-					const viewName = pathname.substring("/player/".length);
 					presenceData.details = "Viewing Player";
-					presenceData.state = `Player: ${viewName}`;
+					presenceData.state = `Player: ${pathname.substring(
+						"/player/".length
+					)}`;
 				} else if (pathname.startsWith("/clans/view")) {
-					const viewName = pathname.substring("/clans/view/".length);
 					presenceData.details = "Viewing Clan";
-					presenceData.state = `Clan: ${viewName}`;
+					presenceData.state = `Clan: ${pathname.substring(
+						"/clans/view/".length
+					)}`;
 				} else if (pathname.startsWith("/clans")) {
 					presenceData.details = "Managing Clan";
 					switch (pathname) {

@@ -288,10 +288,10 @@ presence.on("UpdateData", async () => {
 					detail = "The website's about us";
 				} else if (currentPath.includes("/request-anime.html")) {
 					state = states.REQUESTING;
-					const anime = (
-						document.getElementsByName("title")[0] as HTMLInputElement
-					)?.value;
-					detail = `Anime: ${anime}`;
+
+					detail = `Anime: ${
+						(document.getElementsByName("title")[0] as HTMLInputElement)?.value
+					}`;
 				} else {
 					switch (currentPath) {
 						case "contact-us.html": {

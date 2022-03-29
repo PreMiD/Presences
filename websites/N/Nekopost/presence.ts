@@ -15,10 +15,10 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Manga :${
 					document.querySelector("head > title").textContent.split("-")[1]
 				}!`;
-				const [state] = document
+
+				presenceData.state = document
 					.querySelector("head > title")
-					.textContent.split(" ");
-				presenceData.state = state;
+					.textContent.split(" ")[0];
 				presenceData.smallImageKey = "reading";
 			} else {
 				presenceData.details = `Manga :${
@@ -36,10 +36,10 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Novel :${
 					document.querySelector("head > title").textContent.split("-")[1]
 				}!`;
-				const [state] = document
+
+				presenceData.state = document
 					.querySelector("head > title")
-					.textContent.split(" ");
-				presenceData.state = state;
+					.textContent.split(" ")[0];
 				presenceData.smallImageKey = "reading";
 			} else {
 				presenceData.details = `Novel :${
@@ -57,10 +57,10 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Comic :${
 					document.querySelector("head > title").textContent.split("-")[1]
 				}!`;
-				const [state] = document
+
+				presenceData.state = document
 					.querySelector("head > title")
-					.textContent.split(" ");
-				presenceData.state = state;
+					.textContent.split(" ")[0];
 				presenceData.smallImageKey = "reading";
 			} else {
 				presenceData.details = `Comic :${
@@ -78,10 +78,10 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `ONovel :${
 					document.querySelector("head > title").textContent.split("-")[1]
 				}!`;
-				const [state] = document
+
+				presenceData.state = document
 					.querySelector("head > title")
-					.textContent.split(" ");
-				presenceData.state = state;
+					.textContent.split(" ")[0];
 				presenceData.smallImageKey = "reading";
 			} else {
 				presenceData.details = `ONovel :${

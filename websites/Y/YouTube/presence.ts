@@ -430,9 +430,9 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingStamp;
 			} else if (document.location.pathname.includes("/search")) {
 				searching = true;
-				const [, search] = document.URL.split("search?query=");
+
 				presenceData.details = strings.searchChannel.replace("{0}", user);
-				presenceData.state = search;
+				presenceData.state = document.URL.split("search?query=")[1];
 				presenceData.smallImageKey = "search";
 				presenceData.startTimestamp = browsingStamp;
 			} else {
