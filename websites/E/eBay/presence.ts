@@ -153,8 +153,8 @@ presence.on("UpdateData", async () => {
 				{
 					label: "View Author",
 					url: document.querySelector<HTMLAnchorElement>(
-							".lia-component-message-view-widget-author-username > a"
-						)?.href
+						".lia-component-message-view-widget-author-username > a"
+					)?.href
 				}
 			];
 		} else if (location.pathname.includes("/user/")) {
