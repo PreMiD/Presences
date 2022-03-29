@@ -49,11 +49,9 @@ presence.on("UpdateData", () => {
 		const [participants, spectators] = Array.from(
 			document.querySelectorAll("header > div > div > button")
 		).map(button => button.textContent);
-		if (document.querySelectorAll(".v-btn__content")[2].textContent === "") {
+		if (document.querySelectorAll(".v-btn__content")[2].textContent === "")
 			presenceData.details = "Participating in a Courtroom";
-		} else {
-			presenceData.details = "Spectating a Courtroom";
-		}
+		else presenceData.details = "Spectating a Courtroom";
 		presenceData.state = `${
 			document.querySelector(".v-toolbar__title").textContent || "Joining..."
 		} | Participants: ${participants} | Spectators: ${spectators ?? 0}`;
