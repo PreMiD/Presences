@@ -1,9 +1,7 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-	const mailboxes = document.querySelector<HTMLUListElement>("ul.mailbox-list");
-
-	if (mailboxes) {
+	if (document.querySelector<HTMLUListElement>("ul.mailbox-list")) {
 		iframe.send({
 			currentMailbox:
 				document.querySelector<HTMLParagraphElement>(
