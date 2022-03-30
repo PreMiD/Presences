@@ -120,11 +120,6 @@ presence.on("UpdateData", async () => {
 		"/anime/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)": {
 			disabled: !anime,
 			async setPresenceData() {
-				const [, endTimestamp] = presence.getTimestamps(
-					video.currentTime,
-					video.duration
-				);
-
 				data.meta.episode = document.querySelector(
 					"div.anime-title > h3"
 				).textContent;
@@ -137,7 +132,10 @@ presence.on("UpdateData", async () => {
 					? (await strings).pause
 					: (await strings).play;
 
-				data.presenceData.endTimestamp = endTimestamp;
+				data.presenceData.endTimestamp = presence.getTimestamps(
+					video.currentTime,
+					video.duration
+				)[1];
 
 				data.presenceData.buttons = [
 					{
@@ -177,11 +175,6 @@ presence.on("UpdateData", async () => {
 		"/filme/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-]+)": {
 			disabled: !movie,
 			async setPresenceData() {
-				const [, endTimestamp] = presence.getTimestamps(
-					video.currentTime,
-					video.duration
-				);
-
 				data.meta.title = document
 					.querySelector("div.anime-title")
 					.textContent.replace(
@@ -194,7 +187,10 @@ presence.on("UpdateData", async () => {
 					? (await strings).pause
 					: (await strings).play;
 
-				data.presenceData.endTimestamp = endTimestamp;
+				data.presenceData.endTimestamp = presence.getTimestamps(
+					video.currentTime,
+					video.duration
+				)[1];
 
 				data.presenceData.buttons = [
 					{

@@ -41,8 +41,10 @@ presence.on("UpdateData", async () => {
 		title = document.querySelector(".bd-hd");
 
 		if (title) {
-			const year = document.querySelector(".bd-hd > span");
-			title = title.textContent.replace(year.textContent, "");
+			title = title.textContent.replace(
+				document.querySelector(".bd-hd > span").textContent,
+				""
+			);
 
 			const season = document.querySelector(".accordion > li.open > div");
 

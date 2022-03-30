@@ -16,9 +16,9 @@ presence.on("UpdateData", async () => {
 		songInfo: HTMLDivElement = document.querySelector(".p-2.song-info");
 
 	if (songInfo) {
-		const details: NodeListOf<HTMLDivElement> =
-				songInfo.querySelectorAll(".mb-1"),
-			[artist, album, title] = [...details].map(e => e.textContent);
+		const [artist, album, title] = [...songInfo.querySelectorAll(".mb-1")].map(
+			e => e.textContent
+		);
 		if (artist && album && title) {
 			presenceData.details = `Looking at ${title.substring(
 				8

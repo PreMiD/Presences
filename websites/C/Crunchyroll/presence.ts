@@ -71,8 +71,8 @@ presence.on("UpdateData", async () => {
 
 	if (!playback && document.location.pathname.includes("/manga")) {
 		if (document.location.pathname.includes("/read")) {
-			const title = document.querySelector(".chapter-header a").textContent;
-			presenceData.details = title;
+			presenceData.details =
+				document.querySelector(".chapter-header a").textContent;
 			presenceData.state = `${(await strings).reading} ${
 				document
 					.querySelector(".chapter-header")
@@ -93,12 +93,10 @@ presence.on("UpdateData", async () => {
 				}
 			];
 		} else if (document.location.pathname.includes("/volumes")) {
-			const [, title] = document
-				.querySelector(".ellipsis")
-				.textContent.split("&gt;");
-
 			presenceData.details = (await strings).viewManga;
-			presenceData.state = title;
+			presenceData.state = document
+				.querySelector(".ellipsis")
+				.textContent.split("&gt;")[1];
 			presenceData.buttons = [
 				{
 					label: `View ${(await strings).manga}`,

@@ -236,9 +236,9 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the recent activity";
 			else if (document.location.pathname.includes("/search")) {
 				presenceData.details = "Searching for:";
-				const input =
-					document.querySelector<HTMLInputElement>("#elMainSearchInput");
-				presenceData.state = input.value;
+
+				presenceData.state =
+					document.querySelector<HTMLInputElement>("#elMainSearchInput").value;
 				presenceData.smallImageKey = "search";
 			} else presenceData.details = "Browsing the forums";
 
