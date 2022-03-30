@@ -61,8 +61,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Doing a competition";
 		}
 	} else if (document.location.pathname.includes("/text/")) {
-		const timer = document.querySelector("#time").textContent;
-		if (timer === "00:00")
+		if (document.querySelector("#time").textContent === "00:00")
 			presenceData.details = "Waiting to start a text practice";
 		else {
 			const finalTime = document.querySelector(".col-md-6 > p > strong");

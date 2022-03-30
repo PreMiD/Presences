@@ -153,13 +153,13 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLElement>("#player").style.cssText !==
 			"display: none;"
 		) {
-			const paused = document
-				.querySelector<HTMLImageElement>("#miniplayer-play")
-				.src.includes("play.png");
-
 			let track: string, artist: string, cover: string;
 
-			if (!paused) {
+			if (
+				!document
+					.querySelector<HTMLImageElement>("#miniplayer-play")
+					.src.includes("play.png")
+			) {
 				const channelID = findChannel();
 				if (channelID !== "YOU FAILED") {
 					const channel = channels.find(channel => channel.id === channelID);
@@ -219,10 +219,13 @@ presence.on("UpdateData", async () => {
 		document.location.hostname === "www.reyfm.de" &&
 		document.querySelector("#channel-player") !== null
 	) {
-		const channelID = document
-				.querySelector("#channel-player")
-				.className.replace("shadow channel-color-", ""),
-			channel = channels.find(channel => channel.id === channelID),
+		const channel = channels.find(
+				channel =>
+					channel.id ===
+					document
+						.querySelector("#channel-player")
+						.className.replace("shadow channel-color-", "")
+			),
 			paused = document
 				.querySelector<HTMLImageElement>("#play")
 				.src.includes("play.png");

@@ -96,11 +96,10 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/user")) {
 		// Profilo
 
-		const [, username] = document.title.split("-");
 		presenceData.smallImageKey = "user";
 		presenceData.smallImageText = "DreamSub";
 		presenceData.details = "Guardando il profilo di:";
-		presenceData.state = username;
+		presenceData.state = document.title.split("-")[1];
 	} else if (document.location.pathname.includes("/404")) {
 		// Error 404
 

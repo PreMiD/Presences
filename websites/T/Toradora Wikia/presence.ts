@@ -24,12 +24,12 @@ presence.on("UpdateData", async () => {
 				`An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   TWIKI_WIKIEN_GETPAGETITLE   :::   ${err}`
 			);
 		}
-		const presenceData: PresenceData = {
+
+		presence.setActivity({
 			details: "Viewing a page...",
 			state: page,
 			largeImageKey: "lg-twiki"
-		};
-		presence.setActivity(presenceData);
+		});
 	}
 	germanPresence.on("UpdateData", async () => {
 		if (
@@ -45,12 +45,12 @@ presence.on("UpdateData", async () => {
 					`An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   TWIKI_WIKIDE_GETPAGETITLE   :::   ${err}`
 				);
 			}
-			const presenceData: PresenceData = {
+
+			germanPresence.setActivity({
 				details: "Schaut eine Seite an...",
 				state: page,
 				largeImageKey: "lg-twiki"
-			};
-			germanPresence.setActivity(presenceData);
+			});
 		}
 	});
 });
