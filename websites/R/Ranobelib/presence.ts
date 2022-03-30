@@ -620,12 +620,9 @@ presence.on("UpdateData", async () => {
 						// edit
 						presenceData.smallImageText = "Редактирует";
 						presenceData.smallImageKey = "writing";
-
-						const title = document.querySelector(
+						presenceData.details = document.querySelector(
 							".section__header .breadcrumb a"
-						);
-
-						presenceData.details = title.textContent;
+						).textContent;
 
 						switch (Queries.section) {
 							case "media-edit":
@@ -646,12 +643,10 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Добавляет главы";
 						presenceData.smallImageText = "Добавляет";
 						presenceData.smallImageKey = "uploading";
-
-						const title = document.querySelector(
-							".section__header .breadcrumb a"
-						);
-
-						presenceData.state = `Ранобэ: ${title.textContent}`;
+						presenceData.state = `Ранобэ: ${
+							document.querySelector(".section__header .breadcrumb a")
+								.textContent
+						}`;
 
 						break;
 					}
@@ -660,12 +655,10 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Добавляет главу";
 						presenceData.smallImageText = "Добавляет";
 						presenceData.smallImageKey = "uploading";
-
-						const title = document.querySelector(
-							".section__header .breadcrumb a"
-						);
-
-						presenceData.state = `Ранобэ: ${title.textContent}`;
+						presenceData.state = `Ранобэ: ${
+							document.querySelector(".section__header .breadcrumb a")
+								.textContent
+						}`;
 
 						break;
 					}
@@ -673,12 +666,10 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Редактирует главу";
 						presenceData.smallImageText = "Пишет";
 						presenceData.smallImageKey = "writing";
-
-						const title = document.querySelector(
-							".section__header .breadcrumb a"
-						);
-
-						presenceData.state = `Ранобэ: ${title.textContent}`;
+						presenceData.state = `Ранобэ: ${
+							document.querySelector(".section__header .breadcrumb a")
+								.textContent
+						}`;
 					}
 				}
 			}

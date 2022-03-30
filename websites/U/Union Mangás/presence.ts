@@ -18,9 +18,9 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = "Procurando";
 	} else if (pathname.startsWith("/manga")) {
-		const mangaName = document.querySelector("div.col-md-12 > h2").textContent;
 		presenceData.details = "Olhando um mangá";
-		presenceData.state = mangaName;
+		presenceData.state =
+			document.querySelector("div.col-md-12 > h2").textContent;
 	} else if (pathname.startsWith("/leitor")) {
 		const [mangaName, mangaChapter] = document
 			.querySelector(".titulo-leitura")

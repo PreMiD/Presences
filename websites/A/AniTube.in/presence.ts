@@ -14,8 +14,8 @@ presence.on("UpdateData", async () => {
 		{ pathname, href } = document.location;
 
 	if (
-		(document.querySelector(".searchContainer") as HTMLDivElement).style
-			.display === "block"
+		document.querySelector<HTMLDivElement>(".searchContainer").style.display ===
+		"block"
 	)
 		presenceData.details = `Searching for ${search ? search.value : null}`;
 	else {
@@ -64,11 +64,10 @@ presence.on("UpdateData", async () => {
 					pathname.startsWith("/tokusatsu/") ||
 					pathname.startsWith("/donghua/")
 				) {
-					const title: string = (
-						document.querySelector(".anime_container_titulo") as HTMLDivElement
-					).textContent;
 					presenceData.details = "Checking synopsis";
-					presenceData.state = title;
+					presenceData.state = document.querySelector<HTMLDivElement>(
+						".anime_container_titulo"
+					).textContent;
 				} else if (pathname.startsWith("/video/")) {
 					const title: string = (
 							document.querySelector(
