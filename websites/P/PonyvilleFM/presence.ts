@@ -28,12 +28,11 @@ presence.on("UpdateData", async () => {
 				"html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3#mane_onair.ng-binding"
 			);
 			if (!listeningCheck) {
-				const presenceData: PresenceData = {
+				presence.setActivity({
 					details: stationStatus,
 					largeImageKey: "pvfm",
 					smallImageKey: "pause"
-				};
-				presence.setActivity(presenceData);
+				});
 			} else {
 				const presenceData: PresenceData = {
 					details: stationStatus,
@@ -66,12 +65,11 @@ presence.on("UpdateData", async () => {
 				"html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3"
 			);
 			if (!listeningCheck) {
-				const presenceData: PresenceData = {
+				presence.setActivity({
 					details: stationStatus,
 					largeImageKey: "pvfm",
 					smallImageKey: "pause"
-				};
-				presence.setActivity(presenceData);
+				});
 			} else {
 				const presenceData: PresenceData = {
 					details: stationStatus,
@@ -104,12 +102,11 @@ presence.on("UpdateData", async () => {
 				"html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3"
 			);
 			if (!listeningCheck) {
-				const presenceData: PresenceData = {
+				presence.setActivity({
 					details: stationStatus,
 					largeImageKey: "pvfm",
 					smallImageKey: "pause"
-				};
-				presence.setActivity(presenceData);
+				});
 			} else {
 				const presenceData: PresenceData = {
 					details: stationStatus,

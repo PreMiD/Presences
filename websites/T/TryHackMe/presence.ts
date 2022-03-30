@@ -22,13 +22,12 @@ presence.on("UpdateData", async () => {
 		if (title) {
 			customData = true;
 
-			const presenceData: PresenceData = {
+			presence.setActivity({
 				details: "Completing room:",
 				state: title.textContent,
 				largeImageKey: "icon",
 				startTimestamp: browsingTimestamp
-			};
-			presence.setActivity(presenceData);
+			});
 		} else presenceData.details = "Looking at rooms!";
 	} else if (
 		document.location.pathname === "/upload" ||
