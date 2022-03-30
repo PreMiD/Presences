@@ -4,10 +4,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/c0y4XDa.png"
-	};
-
-	const song = document.querySelector(
+			largeImageKey: "https://i.imgur.com/c0y4XDa.png"
+		},
+		song = document.querySelector(
 			"div.player.player--wide.player--active > div > div.PlayerArtistInfo-module__container--1r4wG > p > a > span:nth-child(2)"
 		).textContent,
 		title = document.querySelector(
