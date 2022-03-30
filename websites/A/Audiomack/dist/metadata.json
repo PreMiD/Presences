@@ -1,20 +1,20 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.7",
-    "author": {
-      "name": "Runa ٩(＾◡＾)۶",
-      "id": "317728561106518019"
-    },
-    "service": "Audiomack",
-    "description": {
-      "en": "Audiomack is an on-demand music streaming and audio discovery platform that allows artists and creators to upload limitless music and podcasts for listeners through its mobile apps and website."
-    },
-    "url": "audiomack.com",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/c0y4XDa.png",
-    "thumbnail": "https://i.imgur.com/M3Ft6dL.png",
-    "color": "#ffa200",
-    "tags": ["audiomack", "music"],
-    "category": "music",
-    "iframe": false,
-    "readLogs": false
-  }
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Runa ٩(＾◡＾)۶",
+		"id": "317728561106518019"
+	},
+	"service": "Audiomack",
+	"description": {
+		"en": "Audiomack is an on-demand music streaming and audio discovery platform that allows artists and creators to upload limitless music and podcasts for listeners through its mobile apps and website."
+	},
+	"url": "audiomack.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/c0y4XDa.png",
+	"thumbnail": "https://i.imgur.com/M3Ft6dL.png",
+	"color": "#ffa200",
+	"tags": ["audiomack", "music"],
+	"category": "music",
+	"iframe": false,
+	"readLogs": false
+}
