@@ -116,20 +116,20 @@ presence.on("UpdateData", async () => {
 			} else if (pathname.includes("/gameblock")) {
 				// Playing/Answering a question
 				const [currentQuestion, totalQuestions] = document
-						.querySelector(
-							'[data-functional-selector="question-index-counter"]'
-						)
-						.textContent.match(/\d+/g),
-					score = document.querySelector(
-						'[data-functional-selector="bottom-bar-score"]'
-					).textContent;
+					.querySelector('[data-functional-selector="question-index-counter"]')
+					.textContent.match(/\d+/g);
 				presenceData.details = strings.playing;
 				presenceData.state = `${strings.questionNumber.replace(
 					"{0}",
 					strings.of
 						.replace("{0}", currentQuestion)
 						.replace("{1}", totalQuestions)
-				)} | ${strings.points.replace("{0}", score)}`;
+				)} | ${strings.points.replace(
+					"{0}",
+					document.querySelector(
+						'[data-functional-selector="bottom-bar-score"]'
+					).textContent
+				)}`;
 			} else if (pathname.includes("/getready")) {
 				// Next question is loading
 				const [currentQuestion, totalQuestions] = document
@@ -160,9 +160,6 @@ presence.on("UpdateData", async () => {
 					presenceData.details = strings.resultsQuestion;
 					presenceData.state = strings.pollAnswer;
 				} else {
-					const score = document.querySelector(
-						'[data-functional-selector="bottom-bar-score"]'
-					).textContent;
 					presenceData.details = strings.resultsQuestion;
 					presenceData.state = `${
 						document.querySelector(
@@ -177,7 +174,12 @@ presence.on("UpdateData", async () => {
 									rankingSelector.textContent.match(/\d+/)[0]
 							  )
 							: strings.onPodium
-					} | ${strings.points.replace("{0}", score)}`;
+					} | ${strings.points.replace(
+						"{0}",
+						document.querySelector(
+							'[data-functional-selector="bottom-bar-score"]'
+						).textContent
+					)}`;
 				}
 			} else if (pathname.includes("/contentblock")) {
 				// Viewing a slide with content
