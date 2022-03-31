@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "612793327510749210"
+	clientId: "958898877598146571"
 });
 
 type RecursiveContent = [KahootStringKeys, ...(RecursiveContent | string)[]];
