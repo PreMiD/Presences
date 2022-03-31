@@ -2,6 +2,26 @@ const presence = new Presence({
 	clientId: "612793327510749210"
 });
 
+type RecursiveContent = [KahootStringKeys, ...(RecursiveContent | string)[]];
+type KahootStringKeys = keyof Awaited<ReturnType<typeof getStrings>>;
+type FrameContent = [...(string | RecursiveContent)[]];
+type FrameButton = {
+	label: KahootStringKeys;
+	url: string;
+	content?: FrameContent;
+};
+type KahootFrameData = {
+	largeImageKey?: string;
+	startTimestamp?: number;
+	details?: KahootStringKeys;
+	state?: KahootStringKeys;
+	buttons?: [FrameButton, FrameButton?];
+	detailsContent?: FrameContent;
+	stateContent?: FrameContent;
+};
+
+let iframePresenceData: KahootFrameData;
+
 function findRanking(rankingSelector: Element) {
 	return (
 		rankingSelector.textContent === strings.stString ||
@@ -22,7 +42,6 @@ async function getStrings() {
 			questionLoading: "kahoot.questionLoading",
 			incorrectAnswer: "kahoot.incorrectAnswer",
 			correctAnswer: "kahoot.correctAnswer",
-			pollAnswer: "kahoot.pollAnswer",
 			resultsQuestion: "kahoot.resultsQuestion",
 			slideViewing: "kahoot.slideViewing",
 			gameOver: "kahoot.gameOver",
@@ -64,6 +83,100 @@ async function getStrings() {
 		},
 		await presence.getSetting<string>("lang")
 	);
+}
+
+function recursiveReplace(content: RecursiveContent): string {
+	let str: string = content[0];
+	for (let i = 1; i < content.length; i++) {
+		if (typeof content[i] === "string")
+			str = str.replace(`{${i - 1}}`, content[i] as string);
+		else {
+			str = str.replace(
+				`{${i - 1}}`,
+				recursiveReplace(content[i] as RecursiveContent)
+			);
+		}
+	}
+	return str;
+}
+
+async function convertFrameData(
+	frameData: KahootFrameData
+): Promise<PresenceData> {
+	const convertedPresenceData: PresenceData = {
+			largeImageKey: frameData.largeImageKey,
+			startTimestamp: frameData.startTimestamp
+		},
+		{
+			detailsContent,
+			stateContent,
+			details: frameDetails,
+			state: frameState,
+			buttons: frameButtons
+		} = frameData;
+	// details replacements
+	if (frameDetails) {
+		let details = strings[frameDetails];
+		if (detailsContent) {
+			for (const [i, element] of detailsContent.entries()) {
+				if (typeof element === "string")
+					details = details.replace(`{${i}}`, element as string);
+				else {
+					details = details.replace(
+						`{${i}}`,
+						recursiveReplace(element as RecursiveContent)
+					);
+				}
+			}
+		}
+		convertedPresenceData.details = details;
+	}
+	// state replacements
+	if (frameState) {
+		let state = strings[frameState];
+		// state replacements
+		if (stateContent) {
+			for (const [i, element] of stateContent.entries()) {
+				if (typeof element === "string")
+					state = state.replace(`{${i}}`, element as string);
+				else {
+					state = state.replace(
+						`{${i}}`,
+						recursiveReplace(element as RecursiveContent)
+					);
+				}
+			}
+		}
+		convertedPresenceData.state = state;
+	}
+	// button check
+	if (frameButtons) {
+		const buttons = await presence.getSetting<boolean>("buttons");
+		if (buttons) {
+			const buttons: ButtonData[] = [];
+			for (const button of frameButtons) {
+				let label = strings[button.label];
+				if (button.content) {
+					for (const [i, element] of button.content.entries()) {
+						if (typeof element === "string")
+							label = label.replace(`{${i}}`, element as string);
+						else {
+							label = label.replace(
+								`{${i}}`,
+								recursiveReplace(element as RecursiveContent)
+							);
+						}
+					}
+				}
+				buttons.push({
+					label,
+					url: button.url
+				});
+			}
+			convertedPresenceData.buttons = buttons as PresenceData["buttons"];
+		}
+	}
+	return convertedPresenceData;
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -156,10 +269,8 @@ presence.on("UpdateData", async () => {
 				const rankingSelector = document.querySelector(
 					'[data-functional-selector="player-rank"]'
 				);
-				if (!rankingSelector) {
-					presenceData.details = strings.resultsQuestion;
-					presenceData.state = strings.pollAnswer;
-				} else {
+				if (!rankingSelector) presenceData.details = strings.resultsQuestion;
+				else {
 					presenceData.details = strings.resultsQuestion;
 					presenceData.state = `${
 						document.querySelector(
@@ -232,7 +343,7 @@ presence.on("UpdateData", async () => {
 						if (pin) {
 							presenceData.buttons = [
 								{
-									label: `${strings.buttonJoinGame.replace("{0}", pin)}`, // Join Game: ID
+									label: `${strings.buttonJoinGame.replace("{0}", pin)}`,
 									url: `https://kahoot.it/?pin=${pin}`
 								}
 							];
@@ -389,7 +500,14 @@ presence.on("UpdateData", async () => {
 						).textContent;
 					} else if (pathname.startsWith("/preview/")) {
 						// Previewing a Kahoot!
-						presenceData.details = strings.previewingKahoot;
+						if (iframePresenceData) {
+							Object.assign(
+								presenceData,
+								await convertFrameData(iframePresenceData)
+							);
+							presenceData.details = `${strings.previewingKahoot} - ${presenceData.details}`;
+						} else
+							presenceData.details = `${strings.previewingKahoot} - ${presenceData.details}`;
 					} else if (pathname.startsWith("/v2/live-course/")) {
 						// Live course
 						presenceData.details = strings.liveCourse;
@@ -416,4 +534,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 	}
+});
+
+presence.on("iFrameData", (data: KahootFrameData) => {
+	iframePresenceData = data;
 });

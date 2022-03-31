@@ -34,6 +34,8 @@
 	"thumbnail": "https://i.imgur.com/3DGbV8e.png",
 	"color": "#8A5CD7",
 	"category": "games",
+	"iframe": true,
+	"iFrameRegExp": "^https:\/\/play\\.kahoot\\.it",
 	"tags": [
 		"games",
 		"qna",
