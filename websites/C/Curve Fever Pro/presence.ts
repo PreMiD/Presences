@@ -46,14 +46,15 @@ function RefreshData() {
 		case "in_lobby_picking_powers": {
 			const [skinSlot] = document.querySelectorAll(".skin-slot.skin-slot--0"),
 				[groupTitle] = document.querySelectorAll(".group-name__title"),
-				userRows = document.querySelectorAll(".c-user.c-user--small"),
 				skinName = skinSlot
 					? skinSlot.children[0].getAttribute("title")
 					: "skin_unknown",
 				lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 
 			presenceData.details = "Picking Powers";
-			presenceData.state = `In Lobby, ${lobbyName} (${userRows.length}/6)`;
+			presenceData.state = `In Lobby, ${lobbyName} (${
+				document.querySelectorAll(".c-user.c-user--small").length
+			}/6)`;
 
 			if (skinNames.has(skinName)) {
 				presenceData.smallImageKey = skinNames.get(skinName);

@@ -4,8 +4,7 @@ const presence = new Presence({
 	timebrowsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const pathName = document.location.pathname,
-		[pages, state] = pathName.split("/").filter(p => p),
+	const [pages, state] = document.location.pathname.split("/").filter(p => p),
 		presenceData: PresenceData = {
 			largeImageKey: "largeimage",
 			startTimestamp: timebrowsed,

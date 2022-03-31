@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "AnOmniMoose",
 		"id": "180867904135233536"
@@ -13,7 +13,7 @@
 		"en": "Watch F1 live & on demand. Every F1 race live and on demand. With exclusive access to on-board cameras, team radio and live timing."
 	},
 	"url": "f1tv.formula1.com",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/opuHbca.png",
 	"thumbnail": "https://i.imgur.com/uDxWlhL.jpg",
 	"color": "#e10600",

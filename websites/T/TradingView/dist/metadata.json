@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Hibanka",
 		"id": "467658348158779393"
@@ -15,7 +15,7 @@
 		"status.tradingview.com"
 	],
 	"regExp": "([a-z0-9]+)[.]tradingview[.]com",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/1LFiAqv.png",
 	"thumbnail": "https://i.imgur.com/ow48UTD.png",
 	"color": "#2196f3",

@@ -71,9 +71,7 @@ presence.on("UpdateData", async () => {
 			"/actresses",
 			"/studios",
 			"/years"
-		],
-		pagesWithTermName = ["/actress", "/studio", "/release_year"];
-
+		];
 	if (pathname === "/" && !search) {
 		presenceData.details = (await strings).viewHome;
 		presenceData.state = (await strings).searchSomething;
@@ -113,7 +111,11 @@ presence.on("UpdateData", async () => {
 			.querySelector("h2")
 			.textContent.replace(/\(.*\)$/, "")
 			.trim()} ${getPage()}`;
-	} else if (~pagesWithTermName.findIndex(x => pathname.startsWith(x))) {
+	} else if (
+		~["/actress", "/studio", "/release_year"].findIndex(x =>
+			pathname.startsWith(x)
+		)
+	) {
 		presenceData.details = (await strings).viewList;
 		presenceData.state = `${document
 			.querySelector(".navbar .border-left")

@@ -100,15 +100,14 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLElement>("#choose").style.display !== "none"
 		) {
 			elapsed = Math.floor(Date.now() / 1000);
-			const presenceData = {
+
+			presence.setActivity({
 				details: "Preparing to Edge",
 				state: "choosing settings ",
 				//largeImageKey: "banner",
 				largeImageKey: "logo",
 				startTimestamp: elapsed
-			};
-
-			presence.setActivity(presenceData);
+			});
 		} else {
 			let presenceData;
 			const msg = document.querySelector("#message").textContent;

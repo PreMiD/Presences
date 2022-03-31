@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Marino",
 		"id": "598953747963707409"
@@ -14,7 +14,7 @@
 		"en.onlinesoccermanager.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*onlinesoccermanager[.](com|nl)[/]",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/SZFDa07.png",
 	"thumbnail": "https://i.imgur.com/G9nRkaR.png",
 	"color": "#FF971B",

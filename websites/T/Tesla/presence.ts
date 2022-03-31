@@ -140,10 +140,9 @@ presence.on("UpdateData", async function () {
 			else if (urlpath[num] === "settings") presenceData.state = "Settings";
 			else if (urlpath[num] === "ownership") presenceData.state = "Ownership";
 		} else if (urlpath[urlpNum] === "solarroof") {
-			const num = urlpNum + 1;
 			presenceData.details = "Solar Roof";
 
-			if (urlpath[num] === "design") presenceData.state = "Designing";
+			if (urlpath[urlpNum + 1] === "design") presenceData.state = "Designing";
 
 			if (showButtons) {
 				presenceData.buttons = [
@@ -165,10 +164,9 @@ presence.on("UpdateData", async function () {
 				];
 			}
 		} else if (urlpath[urlpNum] === "energy") {
-			const num = urlpNum + 1;
 			presenceData.details = "Energy";
 
-			if (urlpath[num] === "design") presenceData.state = "Designing";
+			if (urlpath[urlpNum + 1] === "design") presenceData.state = "Designing";
 
 			if (showButtons) {
 				presenceData.buttons = [
