@@ -2,8 +2,6 @@ const presence = new Presence({
 	clientId: "958898877598146571"
 });
 
-let iframeKahootName: string;
-
 function findRanking(rankingSelector: Element) {
 	return (
 		rankingSelector.textContent === strings.stString ||
@@ -72,7 +70,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	// 0 - ready to be updated if needed
 	// 1 - updated, ready to be reset to 0
-	timestampUpdateState = 0;
+	timestampUpdateState = 0,
+	iframeKahootName: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
