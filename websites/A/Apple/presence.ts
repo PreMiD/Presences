@@ -501,7 +501,7 @@ presence.on("UpdateData", async () => {
 						document.querySelector("h1.pageTitle-heading")?.textContent ||
 						document.querySelector("h1#main-title")?.textContent ||
 						"Unknown";
-					
+
 					if (buttons) {
 						presenceData.buttons = [
 							{
@@ -514,7 +514,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = strings.supportArticle;
 					presenceData.state =
 						document.querySelector("h1#howto-title")?.textContent || "Unknown";
-					
+
 					if (buttons) {
 						presenceData.buttons = [
 							{
