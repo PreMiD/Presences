@@ -15,7 +15,6 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			smallImageKey: "live",
 			smallImageText: "Live",
-			details: "LIVE",
 			state: titleName,
 			buttons: [{ label: "Play", url: "https://radiozu.ro/live" }],
 			startTimestamp: startTime
