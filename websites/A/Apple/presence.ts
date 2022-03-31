@@ -69,7 +69,7 @@ async function getStrings() {
 			statePlaying: "general.playing",
 			btnViewProduct: "apple.btnViewProduct",
 			btnViewService: "apple.btnViewService",
-			btnViewArticle: "general.buttonReadArticle",
+			btnReadArticle: "general.buttonReadArticle",
 			btnViewEvent: "apple.btnViewEvent",
 			btnViewOS: "apple.btnViewOS",
 			btnViewStudio: "apple.btnViewStudio",
@@ -237,7 +237,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
+							label: strings.btnReadArticle,
 							url: window.location.href
 						}
 					];
@@ -254,7 +254,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
+							label: strings.btnReadArticle,
 							url: window.location.href
 						}
 					];
@@ -286,7 +286,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
+							label: strings.btnReadArticle,
 							url: window.location.href
 						}
 					];
@@ -501,10 +501,28 @@ presence.on("UpdateData", async () => {
 						document.querySelector("h1.pageTitle-heading")?.textContent ||
 						document.querySelector("h1#main-title")?.textContent ||
 						"Unknown";
+					
+					if (buttons) {
+						presenceData.buttons = [
+							{
+								label: strings.btnReadArticle,
+								url: window.location.href
+							}
+						];
+					}
 				} else if (document.querySelector("div.mod-date")) {
 					presenceData.details = strings.supportArticle;
 					presenceData.state =
 						document.querySelector("h1#howto-title")?.textContent || "Unknown";
+					
+					if (buttons) {
+						presenceData.buttons = [
+							{
+								label: strings.btnReadArticle,
+								url: window.location.href
+							}
+						];
+					}
 				} else if (window.location.hostname === "getsupport.apple.com")
 					presenceData.details = strings.support;
 				else {
@@ -1011,7 +1029,7 @@ presence.on("UpdateData", async () => {
 								if (buttons) {
 									presenceData.buttons = [
 										{
-											label: strings.btnViewArticle,
+											label: strings.btnReadArticle,
 											url: window.location.href
 										}
 									];
