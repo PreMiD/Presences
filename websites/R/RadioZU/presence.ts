@@ -10,10 +10,7 @@ presence.on("UpdateData", async () => {
 		if (!startTime) startTime = Number(Date.now());
 		let titleName = "Radio ZU - LIVE";
 		const title = document.querySelector(".jp-title>strong");
-		if (title) {
-			if (title.textContent == "Radio Zu") return;
-			titleName = title.textContent;
-		}
+		if (title.textContent != "Radio ZU") titleName = title.textContent;
 		presence.setActivity({
 			largeImageKey: "logo",
 			smallImageKey: "live",
