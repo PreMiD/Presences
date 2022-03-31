@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "958898877598146571"
+	clientId: "612793327510749210"
 });
 
 function findRanking(rankingSelector: Element) {
