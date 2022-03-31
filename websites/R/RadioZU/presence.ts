@@ -8,9 +8,12 @@ presence.on("UpdateData", async () => {
 		presence.setActivity();
 	} else {
 		if (!startTime) startTime = Number(Date.now());
-		let titleName = "Unknown title";
+		let titleName = "Radio ZU - LIVE";
 		const title = document.querySelector(".jp-title>strong");
-		if (title) titleName = title.textContent;
+		if (title) {
+			if (title.textContent == "Radio Zu") return;
+			titleName = title.textContent;
+		}
 		presence.setActivity({
 			largeImageKey: "logo",
 			smallImageKey: "live",
