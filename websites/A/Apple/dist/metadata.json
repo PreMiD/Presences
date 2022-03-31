@@ -81,13 +81,13 @@
 			"id": "iCloudMailSender",
 			"title": "Show iCloud Mail Sender",
 			"icon": "fad fa-user-secret",
-			"value": true
+			"value": false
 		},
 		{
 			"id": "iCloudMailSubject",
 			"title": "Show iCloud Mail Subject",
 			"icon": "fad fa-user-secret",
-			"value": true
+			"value": false
 		}
 	]
 }
