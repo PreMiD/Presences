@@ -1,0 +1,58 @@
+const presence = new Presence({
+    clientId: "958805663532859473"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
+
+presence.on("UpdateData", () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "icon",
+    startTimestamp: browsingTimestamp
+  };
+  const { pathname, search } = location;
+  const queryParams = new URLSearchParams(search);
+
+  if (pathname === "/") {
+    presenceData.details = "Browsing the homepage";
+  } else if (pathname === "/passage/") {
+    if (queryParams.get("search")) {
+      presenceData.details = "Reading scripture";
+      presenceData.state = Array.from(document.querySelectorAll(".passage-display > div:first-child .dropdown-display-text")).map((el) => el.textContent).join(", ");
+    } else {
+      presenceData.details = "Searching for scripture";
+    }
+  } else if (pathname === "/keyword/" || pathname === "/topical/") {
+    presenceData.details = "Searching for scripture";
+  } else if (pathname === "/topical/topical_searchresults/") {
+    const searchQuery = document.querySelector(".current").textContent;
+    presenceData.details = "Browsing topical search results";
+    presenceData.state = searchQuery.substring(1, searchQuery.length - 1);
+  } else if (pathname === "/quicksearch/") {
+    const searchQuery = document.querySelector(".search-term").textContent;
+    presenceData.details = "Browsing quick search results";
+    presenceData.state = searchQuery.substring(1, searchQuery.length - 1);
+  } else if (/\/verse\/.+/.test(pathname)) {
+    presenceData.details = "Browsing verse translations";
+    presenceData.state = document.querySelector(".long-heading").textContent.replace(/^\s+/, "").replace(/\s+$/, "");
+  } else if (pathname === "/versions/") {
+    presenceData.details = "Browsing versions";
+  } else if (/\/versions\/.+/.test(pathname)) {
+    presenceData.details = "Browsing version details";
+    presenceData.state = document.querySelector(".bread-crumb").childNodes[2].textContent.replace(/^\s+\/\s+/, "").replace(/\s+$/, "").replace(/\s+(?=\s\()/, "");
+  } else if (/\/devotionals\/.+/.test(pathname)) {
+    presenceData.details = "Browsing devotional";
+    presenceData.state = document.querySelector(".long-heading").textContent.split("/")[1];
+  } else if (pathname.startsWith("/blog/")) {
+    presenceData.details = "Browsing blog";
+    // TODO!
+  } else {
+    const pageTitle = document.querySelector(".long-heading");
+    presenceData.details = "Browsing";
+    if (pageTitle) {
+      presenceData.state = pageTitle.textContent.replace(/^\s+/, "").replace(/\s+$/, "");
+    } else {
+      presenceData.state = document.title;
+    }
+  }
+
+  presence.setActivity(presenceData);
+});
