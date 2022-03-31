@@ -430,6 +430,7 @@ presence.on("UpdateData", async () => {
 				case "/": {
 					// Kahoot! Create home page
 					presenceData.details = strings.createHome;
+					presenceData.state = "create.kahoot.it";
 					break;
 				}
 				case "/after/login":
