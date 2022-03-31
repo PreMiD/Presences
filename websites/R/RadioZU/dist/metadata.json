@@ -1,19 +1,19 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.7",
-    "author": {
-      "name": "Ghosty2004",
-      "id": "334979056095199233"
-    },
-    "service": "Radio ZU",
-    "description": {
-      "en": "A radio station from Romania | Just listen",
-      "ro": "O statie de radio din Romania | Doar asculta"
-    },
-    "url": "radiozu.ro",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/rkfd4ke.png",
-    "thumbnail": "https://i.imgur.com/ph8xn3F.png",
-    "color": "#11d6ac",
-    "tags": ["romania", "radio"],
-    "category": "music"
-  }
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Ghosty2004",
+		"id": "334979056095199233"
+	},
+	"service": "Radio ZU",
+	"description": {
+		"en": "A radio station from Romania | Just listen",
+		"ro": "O statie de radio din Romania | Doar asculta"
+	},
+	"url": "radiozu.ro",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/rkfd4ke.png",
+	"thumbnail": "https://i.imgur.com/ph8xn3F.png",
+	"color": "#11d6ac",
+	"tags": ["romania", "radio"],
+	"category": "music"
+}
