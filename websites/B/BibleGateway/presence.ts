@@ -42,7 +42,17 @@ presence.on("UpdateData", () => {
     presenceData.details = "Browsing devotional";
     presenceData.state = document.querySelector(".long-heading").textContent.split("/")[1];
   } else if (pathname.startsWith("/blog/")) {
-    presenceData.details = "Browsing blog";
+    const blogPath = pathname.substring(5);
+    if (blogPath === "/") {
+      presenceData.details = "Browsing blog";
+      presenceData.state = "Home page";
+    } else if (blogPath.startsWith("/author/")) {
+      presenceData.details = "Browsing blog author";
+      presenceData.state = document.title.match(/.*?(?=,)/)[0];
+    } else {
+      presenceData.details = "Browsing blog";
+      presenceData.state = document.querySelector(".content-heading").childNodes[2].textContent;
+    }
     // TODO!
   } else {
     const pageTitle = document.querySelector(".long-heading");
