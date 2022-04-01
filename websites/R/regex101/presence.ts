@@ -11,10 +11,10 @@ presence.on("UpdateData", () => {
 		{ pathname } = location;
 
 	if (pathname === "/" || pathname.startsWith("/r/")) {
-		const regexContent = document.querySelector(".CodeMirror-line").textContent;
+		const regexLine = document.querySelector(".CodeMirror-line");
 		presenceData.details = "Testing a regex";
-		if (regexContent) {
-			presenceData.state = `/${regexContent}${
+		if (!regexLine.querySelector("[cm-text]")) {
+			presenceData.state = `/${regexLine.textContent}${
 				document.querySelector('[aria-label="Set Regex Options"').textContent
 			}`;
 		} else presenceData.details = "Browsing the home page";
@@ -28,7 +28,7 @@ presence.on("UpdateData", () => {
 					).value || null;
 				break;
 			}
-			case "/acount/mine": {
+			case "/account/mine": {
 				presenceData.details = "Viewing their regexes";
 				break;
 			}
