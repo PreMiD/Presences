@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		notebookTitle = document.querySelector("#doc-name").textContent,
+		notebookTitle = document.querySelector<HTMLInputElement>("#doc-name").value,
 		selected = document.querySelector(".cell.focused");
 
 	if (
@@ -19,9 +19,9 @@ presence.on("UpdateData", () => {
 		presenceData.details = `Viewing ${notebookTitle}`;
 	else presenceData.details = `Editing ${notebookTitle}`;
 
-	if (selected.classList.contains("code"))
+	if (selected?.classList.contains("code"))
 		presenceData.state = "Editing code block";
-	else if (selected.classList.contains("text")) {
+	else if (selected?.classList.contains("text")) {
 		if (selected.classList.contains("edit"))
 			presenceData.state = "Editing text block";
 		else presenceData.state = "Viewing text block";
