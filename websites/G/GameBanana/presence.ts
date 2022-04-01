@@ -1,100 +1,89 @@
 const presence = new Presence({ clientId: "958520351158050887" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let header: HTMLElement;
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "gblogo",
-			startTimestamp: browsingTimestamp
-		},
-		sections = [
-			"mods",
-			"scripts",
-			"sounds",
-			"sprays",
-			"tools",
-			"contests",
-			"jams",
-			"concepts",
-			"projects",
-			"requests",
-			"tuts",
-			"wips",
-			"articles",
-			"blogs",
-			"events",
-			"news",
-			"polls",
-			"questions",
-			"threads",
-			"wares",
-			"apps",
-			"bugs",
-			"clubs",
-			"games",
-			"ideas",
-			"models",
-			"positions",
-			"reviews",
-			"studios",
-			"statusupdates",
-			"wikis",
-			"updates",
-			"posts",
-			"support",
-			"stamps",
-			"flags",
-			"permits",
-			"generators",
-			"initiatives"
-		],
-		nogamesections = [
-			"App",
-			"Bug",
-			"Club",
-			"Generator",
-			"Idea",
-			"Initiative",
-			"Model",
-			"Review",
-			"StatusUpdate",
-			"Support",
-			"Studio",
-			"Wiki"
-		];
+		largeImageKey: "gblogo",
+		startTimestamp: browsingTimestamp
+	},
+	sections = [
+		"mods",
+		"scripts",
+		"sounds",
+		"sprays",
+		"tools",
+		"contests",
+		"jams",
+		"concepts",
+		"projects",
+		"requests",
+		"tuts",
+		"wips",
+		"articles",
+		"blogs",
+		"events",
+		"news",
+		"polls",
+		"questions",
+		"threads",
+		"wares",
+		"apps",
+		"bugs",
+		"clubs",
+		"games",
+		"ideas",
+		"models",
+		"positions",
+		"reviews",
+		"studios",
+		"statusupdates",
+		"wikis",
+		"updates",
+		"posts",
+		"support",
+		"stamps",
+		"flags",
+		"permits",
+		"generators",
+		"initiatives"
+	],
+	nogamesections = [
+		"App",
+		"Bug",
+		"Club",
+		"Generator",
+		"Idea",
+		"Initiative",
+		"Model",
+		"Review",
+		"StatusUpdate",
+		"Support",
+		"Studio",
+		"Wiki"
+	];
 
-	// Check if we're on the site
 	if (document.location.hostname === "gamebanana.com") {
-		header = document.querySelector("#PageTitle");
+		const header = document.querySelector("#PageTitle");
 
-		// Homepage
 		if (!header) presenceData.details = "Viewing the Homepage";
-		// 404
 		else if (header.textContent.includes("Tango Down!"))
 			presenceData.details = "Tango Down!";
-		// Discussions
 		else if (document.location.pathname === "/discussions")
 			presenceData.details = "Browsing discussions";
 		else if (header.textContent.includes(" : Discussions")) {
 			presenceData.details = "Viewing discussions for:";
 			presenceData.state = header.textContent.split(" : ")[0];
-			// PMs
 		} else if (document.location.pathname.startsWith("/pms")) {
 			if (document.location.pathname.includes("/add"))
 				presenceData.details = "Sending a PM";
 			else if (document.location.pathname.includes("/pms/"))
 				presenceData.details = "Reading a PM";
 			else presenceData.details = "Checking PMs";
-			// Games
 		} else if (document.location.pathname.startsWith("/games")) {
-			// Main Games Page
 			if (document.location.pathname === "/games")
 				presenceData.details = "Browsing games";
-			// Add Game
 			else if (document.location.pathname === "/games/add")
 				presenceData.details = "Adding a game";
-			// Game Info Pages
 			else if (header.textContent.includes(" : ")) {
 				presenceData.details = `Viewing 
 							${
@@ -112,7 +101,6 @@ presence.on("UpdateData", async () => {
 					'meta[property="gb:game_name"]'
 				).content;
 			}
-			// Add
 		} else if (document.location.pathname.includes("/add")) {
 			if (
 				document.querySelector<HTMLMetaElement>('meta[property="og:url"]')
@@ -138,11 +126,9 @@ presence.on("UpdateData", async () => {
 					).content;
 				} else presenceData.details = presenceData.details.replace(" for:", "");
 			}
-			// Submissions
 		} else if (
 			sections.includes(document.location.pathname.slice(1).split("/")[0])
 		) {
-			// Section Page
 			if (document.location.pathname.includes("/games/")) {
 				presenceData.details = `Browsing ${document
 					.querySelector<HTMLMetaElement>('meta[property="gb:plural_title"]')
@@ -151,9 +137,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector<HTMLMetaElement>(
 					'meta[property="gb:game_name"]'
 				).content;
-				// Category Page
 			} else if (document.location.pathname.includes("/cats")) {
-				// Some sections aren't accociated with Games
 				if (
 					nogamesections.includes(
 						document.querySelector<HTMLMetaElement>(
@@ -174,7 +158,6 @@ presence.on("UpdateData", async () => {
 					}:`;
 				}
 				presenceData.state = header.textContent.split("- ")[0];
-				// Submission Page
 			} else if (
 				header.textContent.includes("- A") &&
 				document.location.pathname !== "/bugs" &&
@@ -182,12 +165,10 @@ presence.on("UpdateData", async () => {
 			) {
 				if (document.location.pathname.includes("/messenger"))
 					presenceData.details = "Sending a PM";
-				// Submission Info Pages
 				else if (header.textContent.includes(" : ")) {
 					presenceData.state = header.textContent
 						.split("- A")[0]
 						.split(" : ")[1];
-					// Editing a Submission
 					if (document.location.pathname.includes("/edit")) {
 						presenceData.details = `Editing a 
 							${document
@@ -197,7 +178,6 @@ presence.on("UpdateData", async () => {
 								.content.toLowerCase()
 								.replace("statusupdate", "status update")
 								.replace("wip", "WiP")}:`;
-						// Check if the submission is private by checking the class of the Private button
 						if (
 							document
 								.querySelector(
@@ -230,9 +210,7 @@ presence.on("UpdateData", async () => {
 								.replace("statusupdate", "status update")
 								.replace("wip", "WiP")}:`;
 					}
-					// Main Submission Page
 				} else {
-					// Some sections aren't accociated with Games
 					if (
 						nogamesections.includes(
 							document.querySelector<HTMLMetaElement>(
@@ -263,7 +241,6 @@ presence.on("UpdateData", async () => {
 					}
 					presenceData.state = header.textContent.split("- A")[0];
 				}
-				// Check if the submission is private
 				if (document.querySelector("#PrivateAccessNoticeModule"))
 					presenceData.state = "(Private)";
 			} else {
@@ -274,19 +251,15 @@ presence.on("UpdateData", async () => {
 						.replace("statusupdate", "status update")
 						.replace("wip", "WiP")}`;
 			}
-			// Search
 		} else if (document.location.pathname.includes("/search"))
 			presenceData.details = "Searching for something...";
-		// Members
 		else if (document.location.pathname.includes("/members")) {
-			// Members Page
 			if (
 				document.location.pathname === "/members" ||
 				document.location.pathname === "/members/index" ||
 				document.location.pathname.startsWith("/members?")
 			)
 				presenceData.details = "Browsing members";
-			// Public Members Pages
 			else if (document.location.pathname.startsWith("/members/public")) {
 				if (document.location.pathname.includes("/online"))
 					presenceData.details = "Browsing online members";
@@ -322,7 +295,6 @@ presence.on("UpdateData", async () => {
 					document.location.pathname.includes("/leaderboards/submitters")
 				)
 					presenceData.details = "Viewing the submitters leaderboard";
-				// Settings
 			} else if (document.location.pathname.includes("/settings")) {
 				presenceData.details = `Changing 
 							${
@@ -332,15 +304,12 @@ presence.on("UpdateData", async () => {
 									.replace("settings", "")
 									.split(" : ")[0]
 							} settings`;
-				// Reminders
 			} else if (document.location.pathname.includes("/reminders"))
 				presenceData.details = "Viewing reminders";
-			// Other Members Pages
 			else if (header.textContent.includes(" : ")) {
 				presenceData.details = `Viewing ${
 					header.textContent.toLowerCase().split(" : ")[0]
 				} of:`;
-				// Check if we're on a user's submission section page
 				if (document.location.pathname.includes("/submissions")) {
 					if (
 						sections.includes(
@@ -353,12 +322,10 @@ presence.on("UpdateData", async () => {
 							.replace("support by", "support tickets for")
 							.replace("wip", "WiP")
 							.replace("games", "games added");
-						// Check for category pages
 					} else if (document.location.pathname.includes("cats/"))
 						presenceData.details = presenceData.details.replace("of", "by");
 				}
 				presenceData.state = header.textContent.split(" : ")[1];
-				// Profile
 			} else {
 				presenceData.details = "Viewing profile of:";
 				presenceData.state = header.textContent;
@@ -366,7 +333,6 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	// Make sure there aren't any line breaks or whitespaces
 	if (presenceData.details) {
 		presenceData.details = presenceData.details
 			.replaceAll("\n", "")
