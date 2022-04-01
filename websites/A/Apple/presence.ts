@@ -3,6 +3,10 @@ const presence = new Presence({
 	}),
 	time = Math.floor(Date.now() / 1000);
 
+let iframeData: {
+	[key: string]: string;
+} = {};
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -65,7 +69,7 @@ async function getStrings() {
 			statePlaying: "general.playing",
 			btnViewProduct: "apple.btnViewProduct",
 			btnViewService: "apple.btnViewService",
-			btnViewArticle: "general.buttonReadArticle",
+			btnReadArticle: "general.buttonReadArticle",
 			btnViewEvent: "apple.btnViewEvent",
 			btnViewOS: "apple.btnViewOS",
 			btnViewStudio: "apple.btnViewStudio",
@@ -90,12 +94,22 @@ let strings: ReturnType<typeof getStrings> extends PromiseLike<infer U>
 
 presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.toLowerCase().split("/"),
-		[newLang, timeElapsed, buttons, logo, devProfileBtn] = await Promise.all([
+		[
+			newLang,
+			timeElapsed,
+			buttons,
+			logo,
+			devProfileBtn,
+			showICloudMailSender,
+			showICloudMailSubject
+		] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("timeElapsed"),
 			presence.getSetting<boolean>("showButtons"),
 			presence.getSetting<number>("logo"),
-			presence.getSetting<boolean>("devProfileBtn")
+			presence.getSetting<boolean>("devProfileBtn"),
+			presence.getSetting<boolean>("iCloudMailSender"),
+			presence.getSetting<boolean>("iCloudMailSubject")
 		]),
 		products = [
 			"ipad",
@@ -223,7 +237,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
+							label: strings.btnReadArticle,
 							url: window.location.href
 						}
 					];
@@ -240,7 +254,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
+							label: strings.btnReadArticle,
 							url: window.location.href
 						}
 					];
@@ -272,7 +286,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
+							label: strings.btnReadArticle,
 							url: window.location.href
 						}
 					];
@@ -487,10 +501,28 @@ presence.on("UpdateData", async () => {
 						document.querySelector("h1.pageTitle-heading")?.textContent ||
 						document.querySelector("h1#main-title")?.textContent ||
 						"Unknown";
+
+					if (buttons) {
+						presenceData.buttons = [
+							{
+								label: strings.btnReadArticle,
+								url: window.location.href
+							}
+						];
+					}
 				} else if (document.querySelector("div.mod-date")) {
 					presenceData.details = strings.supportArticle;
 					presenceData.state =
 						document.querySelector("h1#howto-title")?.textContent || "Unknown";
+
+					if (buttons) {
+						presenceData.buttons = [
+							{
+								label: strings.btnReadArticle,
+								url: window.location.href
+							}
+						];
+					}
 				} else if (window.location.hostname === "getsupport.apple.com")
 					presenceData.details = strings.support;
 				else {
@@ -551,9 +583,36 @@ presence.on("UpdateData", async () => {
 
 				if (!urlpath[1]) presenceData.state = "Launchpad";
 				else {
+					if (urlpath[1] !== "iclouddrive") {
+						presenceData.largeImageKey = `icloud_${urlpath[1]}`;
+						presenceData.smallImageKey = "icloud";
+					}
+
 					switch (urlpath[1]) {
 						case "mail": {
 							presenceData.state = strings.iCloudMail;
+
+							if (iframeData) {
+								presenceData.details = `iCloud - ${strings.iCloudMail}`;
+								presenceData.state = iframeData.currentMailbox;
+
+								if (iframeData.currentMailSubject) {
+									presenceData.details = `iCloud - ${strings.iCloudMail} - ${iframeData.currentMailbox}`;
+
+									let state = showICloudMailSubject
+										? iframeData.currentMailSubject
+										: "";
+
+									if (iframeData.currentMailSender && showICloudMailSender) {
+										state = `${iframeData.currentMailSender}${
+											state !== "" ? `: ${state}` : ""
+										}`;
+									}
+
+									presenceData.state = state;
+								} else presenceData.state = iframeData.currentMailbox;
+							} else presenceData.state = strings.iCloudMail;
+
 							break;
 						}
 						case "contacts": {
@@ -581,8 +640,6 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "pages": {
-							presenceData.largeImageKey = "pages";
-
 							if (urlpath[2]) {
 								presenceData.details = "iCloud Pages";
 
@@ -602,8 +659,6 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "keynote": {
-							presenceData.largeImageKey = "keynote";
-
 							if (urlpath[2]) {
 								presenceData.details = "iCloud Keynote";
 
@@ -974,7 +1029,7 @@ presence.on("UpdateData", async () => {
 								if (buttons) {
 									presenceData.buttons = [
 										{
-											label: strings.btnViewArticle,
+											label: strings.btnReadArticle,
 											url: window.location.href
 										}
 									];
@@ -1006,4 +1061,8 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
+});
+
+presence.on("iFrameData", (data: { [key: string]: string }) => {
+	iframeData = data;
 });
