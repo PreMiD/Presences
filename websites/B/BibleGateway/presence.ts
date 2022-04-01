@@ -78,7 +78,7 @@ presence.on("UpdateData", () => {
 					presenceData.state =
 						document.querySelector(
 							".content-heading"
-						).childNodes[2].textContent;
+						).childNodes[3].textContent;
 				}
 			} else {
 				const pageTitle = document.querySelector(".long-heading");
