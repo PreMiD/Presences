@@ -251,9 +251,9 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	// Make sure there aren't any line breaks
-	if (presenceData.details) presenceData.details = presenceData.details.replaceAll("\n", "");
-	if (presenceData.state) presenceData.state = presenceData.state.replaceAll("\n", "");
+	// Make sure there aren't any line breaks or whitespaces
+	if (presenceData.details) presenceData.details = presenceData.details.replaceAll("\n", "").replaceAll("	", "");
+	if (presenceData.state) presenceData.state = presenceData.state.replaceAll("\n", "").replaceAll("	", "");
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
