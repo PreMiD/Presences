@@ -40,14 +40,14 @@ presence.on("UpdateData", async () => {
 	) {
 		const titulo = document.querySelector("h1.Title").textContent,
 			subtitulo = document.querySelector("h2.SubTitle").textContent,
-			cover = document.querySelector("div.backdrop > article > div.Image > figure > img").getAttribute("data-src");
+			cover = document
+				.querySelector("div.backdrop > article > div.Image > figure > img")
+				.getAttribute("data-src");
 
 		if (!document.location.pathname.includes("/episodio")) {
 			presenceData.details = titulo;
-			if(subtitulo === titulo)
-				delete presenceData.state
-			else
-				presenceData.state = subtitulo
+			if (subtitulo === titulo) delete presenceData.state;
+			else presenceData.state = subtitulo;
 			presenceData.buttons = [
 				{ label: "Ver Película", url: window.location.href }
 			];
@@ -85,7 +85,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = document.querySelector("h1.Title").textContent;
 		presenceData.smallImageKey = "browsing";
 		presenceData.smallImageText = (await strings).browsing;
-		presenceData.largeImageKey = document.querySelector("div.backdrop > article > div.Image > figure > img").getAttribute("data-src");
+		presenceData.largeImageKey = document
+			.querySelector("div.backdrop > article > div.Image > figure > img")
+			.getAttribute("data-src");
 	} else {
 		presenceData.details = (await strings).browsing;
 		presenceData.smallImageKey = "browsing";
