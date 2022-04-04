@@ -41,7 +41,7 @@
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-no-one-time-vars": "^2.2.6",
 		"eslint-plugin-prettier": "^4.0.0",
-		"eslint-plugin-unicorn": "^41.0.1",
+		"eslint-plugin-unicorn": "^42.0.0",
 		"glob": "^7.2.0",
 		"husky": "^7.0.4",
 		"is-ci": "^3.0.1",
