@@ -12,10 +12,11 @@
 		"www.tofugu.com",
 		"kana-quiz.tofugu.com"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/9UDFSMZ.png",
 	"thumbnail": "https://i.imgur.com/nMXF6Nc.jpg",
 	"color": "#EE0144",
+	"category": "other",
 	"tags": [
 		"japan",
 		"japanese",
@@ -23,6 +24,5 @@
 		"learning",
 		"language",
 		"blog"
-	],
-	"category": "other"
+	]
 }
