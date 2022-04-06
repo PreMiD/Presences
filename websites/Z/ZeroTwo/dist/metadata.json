@@ -7,10 +7,11 @@
 	"service": "ZeroTwo",
 	"description": {
 		"en": "I'm a waifu Discord bot based on ZeroTwo (Darling in the FranXX). I serve a variety of needs and have tons of functionality you can try!",
-		"de": "Ich bin ein Waifu Discord Bot basierend auf ZeroTwo (Darling in the FranXX). Ich erfülle eine Vielzahl von Bedürfnissen und habe jede Menge Funktionen, die Sie ausprobieren können!"
+		"de": "Ich bin ein Waifu Discord Bot basierend auf ZeroTwo (Darling in the FranXX). Ich erfülle eine Vielzahl von Bedürfnissen und habe jede Menge Funktionen, die Sie ausprobieren können!",
+		"ja": "私はZeroTwo（Darling in the FranXX）をベースにしたwaifu Discordボットです。 私はさまざまなニーズに対応し、試すことができる機能がたくさんあります。"
 	},
-	"url": "zerotwo.wtf",
-	"version": "1.0.6",
+	"url": "zerotwo.gay",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/NmwMLaF.png",
 	"thumbnail": "https://i.imgur.com/Pu1DxbM.png",
 	"color": "#ff40ff",
@@ -38,12 +39,6 @@
 			"title": "Display Timestamp",
 			"icon": "fas fa-stopwatch",
 			"value": true
-		},
-		{
-			"id": "buttons",
-			"title": "Show Buttons",
-			"icon": "fas fa-compress-arrows-alt",
-			"value": false
 		}
 	]
 }
