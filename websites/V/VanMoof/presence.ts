@@ -212,6 +212,8 @@ presence.on("UpdateData", async function () {
 
 				case "s3":
 				case "x3":
+				case "s5":
+				case "a5":
 				case "vanmoof-v":
 					presenceData.details = "Viewing E-Bike";
 					presenceData.state = `VanMoof ${urlpath[2]
