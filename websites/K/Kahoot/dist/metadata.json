@@ -29,18 +29,18 @@
 		"play.kahoot.it",
 		"create.kahoot.it"
 	],
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"logo": "https://i.imgur.com/yrWMYRs.png",
 	"thumbnail": "https://i.imgur.com/3DGbV8e.png",
 	"color": "#46178f",
 	"category": "games",
-	"iframe": true,
-	"iFrameRegExp": "^https:\/\/play\\.kahoot\\.it",
 	"tags": [
 		"games",
 		"qna",
 		"fun"
 	],
+	"iframe": true,
+	"iFrameRegExp": "^https://play\\.kahoot\\.it",
 	"settings": [
 		{
 			"id": "lang",
