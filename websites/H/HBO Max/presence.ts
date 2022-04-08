@@ -47,14 +47,8 @@ const presence = new Presence({
 	},
 	coverUrls: Record<string, string> = {};
 
-interface CryptoAPI extends Crypto {
-	randomUUID: () => string;
-}
-
 /* eslint-disable camelcase */
 function getToken(): Promise<string> {
-	const cryptoAPI = self.crypto as CryptoAPI;
-
 	return new Promise(resolve => {
 		fetch("https://oauth.api.hbo.com/auth/tokens", {
 			method: "POST",
@@ -63,10 +57,10 @@ function getToken(): Promise<string> {
 			},
 			body: JSON.stringify({
 				client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
-				client_secret: cryptoAPI.randomUUID(),
+				client_secret: crypto.randomUUID(),
 				scope: "browse video_playback",
 				grant_type: "client_credentials",
-				deviceSerialNumber: cryptoAPI.randomUUID(),
+				deviceSerialNumber: crypto.randomUUID(),
 				clientDeviceData: {
 					paymentProviderCode: "blackmarket"
 				}
