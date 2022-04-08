@@ -51,6 +51,7 @@ interface CryptoAPI extends Crypto {
 	randomUUID: () => string;
 }
 
+/* eslint-disable camelcase */
 function getToken(): Promise<string> {
 	const cryptoAPI = self.crypto as CryptoAPI;
 
@@ -75,19 +76,9 @@ function getToken(): Promise<string> {
 			.then(x => resolve(x.access_token));
 	});
 }
+/* eslint-enable camelcase */
 
 async function fetchCover(): Promise<string> {
-	let token: string;
-	let lastGenAt: number;
-
-	token ??= await getToken();
-	lastGenAt ??= Date.now();
-
-	if (Date.now() - lastGenAt >= 14400000) {
-		token = await getToken();
-		lastGenAt = Date.now();
-	}
-
 	return new Promise(resolve => {
 		fetch(
 			`https://comet.api.hbo.com/express-content/${
@@ -95,7 +86,7 @@ async function fetchCover(): Promise<string> {
 			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`,
 			{
 				headers: {
-					authorization: `Bearer ${token}`
+					authorization: `Bearer ${getToken()}`
 				}
 			}
 		)
