@@ -47,12 +47,57 @@ const presence = new Presence({
 	},
 	coverUrls: Record<string, string> = {};
 
-function fetchCover(): Promise<string> {
+interface CryptoAPI extends Crypto {
+	randomUUID: () => string;
+}
+
+function getToken(): Promise<string> {
+	const cryptoAPI = self.crypto as CryptoAPI;
+
+	return new Promise(resolve => {
+		fetch("https://oauth.api.hbo.com/auth/tokens", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
+				client_secret: cryptoAPI.randomUUID(),
+				scope: "browse video_playback",
+				grant_type: "client_credentials",
+				deviceSerialNumber: cryptoAPI.randomUUID(),
+				clientDeviceData: {
+					paymentProviderCode: "blackmarket"
+				}
+			})
+		})
+			.then(x => x.json())
+			.then(x => resolve(x.access_token));
+	});
+}
+
+async function fetchCover(): Promise<string> {
+	let token: string;
+	let lastGenAt: number;
+
+	token ??= await getToken();
+	lastGenAt ??= Date.now();
+
+	if (Date.now() - lastGenAt >= 14400000) {
+		token = await getToken();
+		lastGenAt = Date.now();
+	}
+
 	return new Promise(resolve => {
 		fetch(
 			`https://comet.api.hbo.com/express-content/${
 				location.pathname.split("/")[2]
-			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`
+			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`,
+			{
+				headers: {
+					authorization: `Bearer ${token}`
+				}
+			}
 		)
 			.then(x => x.json())
 			.then(x =>
