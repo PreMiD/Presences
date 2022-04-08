@@ -1,3 +1,5 @@
+/* eslint-disable brace-style */
+/* eslint-disable unicorn/consistent-destructuring */
 const presence = new Presence({
 		//The client ID of the Application created at https://discordapp.com/developers/applications
 		clientId: "961652082027421746"
