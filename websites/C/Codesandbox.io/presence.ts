@@ -16,7 +16,17 @@ const presence = new Presence({
 		"swift",
 		"java",
 		"html",
-		"css"
+		"css",
+		"php",
+		"kt",
+		"sql",
+		"lua",
+		"ru",
+		"bash",
+		"sh",
+		"bat",
+		"cr",
+		"go"
 	];
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
