@@ -41,11 +41,12 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Looking at their dashboard";
 		presenceData.largeImageKey = "dashboard";
 	} else if (pathname.includes("/u/")) {
-		const uname = document.querySelector<HTMLSpanElement>(
-			'[class="sc-bdnylx sc-gtssRu gDXMLZ itZLEx"]'
-		);
 		presenceData.details = "Looking at a user's profile";
-		presenceData.state = `@${uname.textContent}`;
+		presenceData.state = `@${
+			document.querySelector<HTMLSpanElement>(
+				'[class="sc-bdnylx sc-gtssRu gDXMLZ itZLEx"]'
+			).textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Profile",
