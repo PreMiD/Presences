@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `@${uname.textContent}`;
 		presenceData.buttons = [
 			{
-				label: `View @${uname.textContent}'s Profile`,
+				label: "View Profile",
 				url: location.href.toString()
 			}
 		];
