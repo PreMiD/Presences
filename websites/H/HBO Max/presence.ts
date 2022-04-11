@@ -72,9 +72,9 @@ function getToken(): Promise<string> {
 }
 /* eslint-enable camelcase */
 
-function fetchCover(): Promise<string> {
-	return new Promise(async resolve => {
-		fetch(
+async function fetchCover() {
+	const response = await (
+		await fetch(
 			`https://comet.api.hbo.com/express-content/${
 				location.pathname.split("/")[2]
 			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`,
@@ -84,15 +84,11 @@ function fetchCover(): Promise<string> {
 				}
 			}
 		)
-			.then(x => x.json())
-			.then(x =>
-				resolve(
-					`https://artist.api.cdn.hbo.com/images/${
-						x[0].body.references.series.match(/series:([^:]+)/)[1]
-					}/tileburnedin?size=1024x1024`
-				)
-			);
-	});
+	).json();
+
+	return `https://artist.api.cdn.hbo.com/images/${
+		response[0].body.references.series.match(/series:([^:]+)/)[1]
+	}/tileburnedin?size=1024x1024`;
 }
 
 presence.on("UpdateData", async () => {
