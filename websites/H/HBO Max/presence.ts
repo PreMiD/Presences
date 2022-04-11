@@ -47,12 +47,42 @@ const presence = new Presence({
 	},
 	coverUrls: Record<string, string> = {};
 
-function fetchCover(): Promise<string> {
+/* eslint-disable camelcase */
+function getToken(): Promise<string> {
+	return new Promise(resolve => {
+		fetch("https://oauth.api.hbo.com/auth/tokens", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
+				client_secret: crypto.randomUUID(),
+				scope: "browse video_playback",
+				grant_type: "client_credentials",
+				deviceSerialNumber: crypto.randomUUID(),
+				clientDeviceData: {
+					paymentProviderCode: "blackmarket"
+				}
+			})
+		})
+			.then(x => x.json())
+			.then(x => resolve(x.access_token));
+	});
+}
+/* eslint-enable camelcase */
+
+async function fetchCover(): Promise<string> {
 	return new Promise(resolve => {
 		fetch(
 			`https://comet.api.hbo.com/express-content/${
 				location.pathname.split("/")[2]
-			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`
+			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`,
+			{
+				headers: {
+					authorization: `Bearer ${getToken()}`
+				}
+			}
 		)
 			.then(x => x.json())
 			.then(x =>
