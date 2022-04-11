@@ -72,15 +72,15 @@ function getToken(): Promise<string> {
 }
 /* eslint-enable camelcase */
 
-async function fetchCover(): Promise<string> {
-	return new Promise(resolve => {
+function fetchCover(): Promise<string> {
+	return new Promise(async resolve => {
 		fetch(
 			`https://comet.api.hbo.com/express-content/${
 				location.pathname.split("/")[2]
 			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`,
 			{
 				headers: {
-					authorization: `Bearer ${getToken()}`
+					authorization: `Bearer ${await getToken()}`
 				}
 			}
 		)
