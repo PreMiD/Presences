@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "author": {
+    "name": "Shogun",
+    "id": "252741542442303490"
+  },
+  "service": "HackTheBox",
+  "description": {
+    "en": "English"
+  },
+  "url": [
+    "www.hackthebox.com",
+    "app.hackthebox.com"
+  ],
+  "version": "1.0.0",
+  "logo": "https://www.hackthebox.com/images/logo-htb.svg",
+  "thumbnail": "https://www.hackthebox.com/images/htb_socialmedia_cover.png",
+  "color": "#9fef00",
+  "category": "other",
+  "tags": [
+    "hacking",
+    "CTF",
+    "capture-the-flag",
+    "hacker",
+    "cybersecurity",
+    "infosec"
+  ]
+}
