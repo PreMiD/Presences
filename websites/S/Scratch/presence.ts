@@ -8,26 +8,21 @@ presence.on("UpdateData", () => {
 	};
 
 	if (window.location.href.toLowerCase().includes("scratch.mit.edu")) {
-		if (window.location.pathname === "") {
+		if (window.location.pathname === "" || window.location.pathname === "/") {
 			presenceData.details = "Community:";
 			presenceData.state = "Viewing public projects";
 		}
-		if (window.location.pathname === "/") {
-			presenceData.details = "Community:";
-			presenceData.state = "Viewing public projects";
-		}
-		if (window.location.pathname.toLowerCase().includes("/projects/editor")) {
+		if (window.location.pathname.toLowerCase().includes("/projects") || window.location.pathname.toLowerCase().includes("/editor")) {
 			presenceData.details = "Editing a project:";
-			if (
-				window.location.pathname
-					.toLowerCase()
-					.includes("/projects/editor/?tutorial=getstarted")
-			)
+			if (window.location.href
+				.toLowerCase()
+				.includes("/?tutorial=getstarted")
+			) {
 				presenceData.state = "Tutorial";
-			else if (
-				window.location.pathname
+			} else if (
+				window.location.href
 					.toLowerCase()
-					.includes("/projects/editor/?tutorial=all")
+					.includes("/?tutorial=all")
 			) {
 				presenceData.details = "Viewing projects:";
 				presenceData.state = "Tutorials";
