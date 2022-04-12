@@ -12,18 +12,14 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Community:";
 			presenceData.state = "Viewing public projects";
 		}
-		if (window.location.pathname.toLowerCase().includes("/projects") || window.location.pathname.toLowerCase().includes("/editor")) {
+		if (
+			window.location.pathname.toLowerCase().includes("/projects") ||
+			window.location.pathname.toLowerCase().includes("/editor")
+		) {
 			presenceData.details = "Editing a project:";
-			if (window.location.href
-				.toLowerCase()
-				.includes("/?tutorial=getstarted")
-			) {
+			if (window.location.href.toLowerCase().includes("/?tutorial=getstarted"))
 				presenceData.state = "Tutorial";
-			} else if (
-				window.location.href
-					.toLowerCase()
-					.includes("/?tutorial=all")
-			) {
+			else if (window.location.href.toLowerCase().includes("/?tutorial=all")) {
 				presenceData.details = "Viewing projects:";
 				presenceData.state = "Tutorials";
 			} else if (
@@ -156,7 +152,9 @@ presence.on("UpdateData", () => {
 		} else if (window.location.pathname.toLowerCase().includes("/ideas")) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Ideas";
-		} else if (window.location.pathname.toLowerCase().includes("/starter-projects")) {
+		} else if (
+			window.location.pathname.toLowerCase().includes("/starter-projects")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Starter Projects";
 		} else if (window.location.pathname.toLowerCase().includes("/parents")) {
@@ -174,7 +172,9 @@ presence.on("UpdateData", () => {
 		} else if (window.location.pathname.toLowerCase().includes("/jobs")) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Jobs";
-		} else if (window.location.pathname.toLowerCase().includes("/community_guidelines")) {
+		} else if (
+			window.location.pathname.toLowerCase().includes("/community_guidelines")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Community Guidelines";
 		} else if (window.location.pathname.toLowerCase().includes("/discuss")) {
@@ -195,10 +195,14 @@ presence.on("UpdateData", () => {
 		} else if (window.location.pathname.toLowerCase().includes("/store")) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Store";
-		} else if (window.location.pathname.toLowerCase().includes("/terms_of_use")) {
+		} else if (
+			window.location.pathname.toLowerCase().includes("/terms_of_use")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Terms and conditions";
-		} else if (window.location.pathname.toLowerCase().includes("/privacy_policy")) {
+		} else if (
+			window.location.pathname.toLowerCase().includes("/privacy_policy")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Privacy Policy";
 		} else if (window.location.pathname.toLowerCase().includes("/dmca")) {
@@ -215,7 +219,9 @@ presence.on("UpdateData", () => {
 			.replace(" - Scratch", "")
 			.replace("Scratch", "");
 	}
-	if (window.location.hostname.toLowerCase().includes("scratchfoundation.org")) {
+	if (
+		window.location.hostname.toLowerCase().includes("scratchfoundation.org")
+	) {
 		if (window.location.pathname.toLowerCase().includes("/media-kit")) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Press";
@@ -228,28 +234,44 @@ presence.on("UpdateData", () => {
 		if (window.location.href.toLowerCase().includes("en.scratch-wiki.info")) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "English Scratch Wiki";
-		} else if (window.location.href.toLowerCase().includes("de.scratch-wiki.info")) {
+		} else if (
+			window.location.href.toLowerCase().includes("de.scratch-wiki.info")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "German Scratch Wiki";
-		} else if (window.location.href.toLowerCase().includes("ru.scratch-wiki.info/")) {
+		} else if (
+			window.location.href.toLowerCase().includes("ru.scratch-wiki.info/")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Russian Scratch Wiki";
-		} else if (window.location.href.toLowerCase().includes("nl.scratch-wiki.info/")) {
+		} else if (
+			window.location.href.toLowerCase().includes("nl.scratch-wiki.info/")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Dutch Scratch Wiki";
-		} else if (window.location.href.toLowerCase().includes("id.scratch-wiki.info/")) {
+		} else if (
+			window.location.href.toLowerCase().includes("id.scratch-wiki.info/")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Indonesian Scratch Wiki";
-		} else if (window.location.href.toLowerCase().includes("ja.scratch-wiki.info/")) {
+		} else if (
+			window.location.href.toLowerCase().includes("ja.scratch-wiki.info/")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Japanese Scratch Wiki";
-		} else if (window.location.href.toLowerCase().includes("hu.scratch-wiki.info/")) {
+		} else if (
+			window.location.href.toLowerCase().includes("hu.scratch-wiki.info/")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Hungarian Scratch Wiki";
-		} else if (window.location.href.toLowerCase().includes("fr.scratch-wiki.info/")) {
+		} else if (
+			window.location.href.toLowerCase().includes("fr.scratch-wiki.info/")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "French Scratch Wiki";
-		} else if (window.location.href.toLowerCase().includes("test.scratch-wiki.info/")) {
+		} else if (
+			window.location.href.toLowerCase().includes("test.scratch-wiki.info/")
+		) {
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Test Scratch Wiki";
 		} else {
@@ -261,11 +283,17 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Viewing page:";
 		presenceData.state = "Scratch JR";
 	}
-	if (window.location.href.toLowerCase().includes("donationpay.org/scratchfoundation")) {
+	if (
+		window.location.href
+			.toLowerCase()
+			.includes("donationpay.org/scratchfoundation")
+	) {
 		presenceData.details = "Viewing page:";
 		presenceData.state = "Donate";
 	}
-	if (window.location.href.toLowerCase().includes("scratched.gse.harvard.edu")) {
+	if (
+		window.location.href.toLowerCase().includes("scratched.gse.harvard.edu")
+	) {
 		presenceData.details = "Viewing page:";
 		presenceData.state = "Scratch ED";
 	}
