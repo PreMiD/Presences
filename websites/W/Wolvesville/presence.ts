@@ -236,7 +236,6 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<boolean>("showTimestamp"),
 				presence.getSetting<number>("logo")
 			]),
-		// eslint-disable-next-line no-one-time-vars/no-one-time-vars
 		logoArr = ["wov", "wov_white", "wov_no_bg", "wov_text"],
 		presenceData: PresenceData = {
 			largeImageKey: logoArr[logo] || "wov"
@@ -387,24 +386,23 @@ presence.on("UpdateData", async () => {
 						"div.css-1dbjc4n.r-1kihuf0.r-z2wwpe.r-13awgt0.r-1ifxtd0.r-sb58tz.r-13qz1uu > div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-1777fci"
 					)
 				) {
-					document
-						.querySelectorAll(
-							"div.css-1dbjc4n.r-1loqt21.r-13awgt0.r-1777fci.r-1otgn73.r-lrvibr"
-						)
-						.forEach(function callback(value, index) {
-							if (
-								value.querySelector(
-									"div.css-1dbjc4n > div.css-901oao.r-qctebb.r-1i10wst.r-1vr29t4.r-1w50u8q.r-q4m81j"
-								) ||
-								!value.querySelector(
-									"div.css-1dbjc4n > div.css-901oao.r-wnl269.r-1i10wst.r-1vr29t4.r-1w50u8q.r-q4m81j"
-								)
-							) {
-								index === 0 && (presenceData.state = "Viewing roles");
-								index === 1 && (presenceData.state = "Viewing role cards");
-								index === 2 && (presenceData.state = "Viewing setups");
-							}
-						});
+					const tabs = document.querySelectorAll(
+						"div.css-1dbjc4n.r-1loqt21.r-13awgt0.r-1777fci.r-1otgn73.r-lrvibr"
+					);
+					for (const [index, value] of tabs.entries()) {
+						if (
+							value.querySelector(
+								"div.css-1dbjc4n > div.css-901oao.r-qctebb.r-1i10wst.r-1vr29t4.r-1w50u8q.r-q4m81j"
+							) ||
+							!value.querySelector(
+								"div.css-1dbjc4n > div.css-901oao.r-wnl269.r-1i10wst.r-1vr29t4.r-1w50u8q.r-q4m81j"
+							)
+						) {
+							index === 0 && (presenceData.state = "Viewing roles");
+							index === 1 && (presenceData.state = "Viewing role cards");
+							index === 2 && (presenceData.state = "Viewing setups");
+						}
+					}
 				}
 
 				document.querySelector(
@@ -517,12 +515,11 @@ presence.on("UpdateData", async () => {
 					)
 				) {
 					const playerCountLobby = document.querySelector(
-						"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
-					)?.childElementCount;
-
-					const spectatorCountLobby = document.querySelector(
-						"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
-					)?.childElementCount;
+							"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
+						)?.childElementCount,
+						spectatorCountLobby = document.querySelector(
+							"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
+						)?.childElementCount;
 
 					if (playerCountLobby === 1)
 						presenceData.state = `${playerCountLobby} player`;
@@ -540,9 +537,8 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = `Lobby (${root.getAttribute(
 					"premid-username"
 				)})`;
-			} else {
-				presenceData.smallImageText = "Lobby";
-			}
+			} else presenceData.smallImageText = "Lobby";
+
 			presenceData.smallImageKey = "friends";
 		}
 
@@ -570,22 +566,20 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageText = "Waiting";
 					if (!privacyMode) {
 						const playerCountPreGame = document.querySelector(
-							"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
-						)?.childElementCount;
-
-						const spectatorCountPreGame = document.querySelector(
-							"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
-						)?.childElementCount;
+								"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
+							)?.childElementCount,
+							spectatorCountPreGame = document.querySelector(
+								"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
+							)?.childElementCount;
 
 						if (playerCountPreGame === 1)
 							presenceData.state = `${playerCountPreGame} player`;
 						else presenceData.state = `${playerCountPreGame} players`;
 
-						if (spectatorCountPreGame === 1) {
+						if (spectatorCountPreGame === 1)
 							presenceData.state += `, ${spectatorCountPreGame} spectator`;
-						} else if (spectatorCountPreGame > 1) {
+						else if (spectatorCountPreGame > 1)
 							presenceData.state += `, ${spectatorCountPreGame} spectators`;
-						}
 
 						presenceData.smallImageText = `Waiting (${root.getAttribute(
 							"premid-username"
@@ -619,9 +613,8 @@ presence.on("UpdateData", async () => {
 							else gamemode = "Quick Game";
 						}
 
-						if (root.getAttribute("premid-friends") === "true") {
+						if (root.getAttribute("premid-friends") === "true")
 							gamemode += " with friends";
-						}
 					}
 
 					//Spectator
@@ -662,38 +655,34 @@ presence.on("UpdateData", async () => {
 							presenceData.smallImageText = playerState;
 						}
 						//Player
-					} else {
-						if (!privacyMode) {
-							let gameDetails = gamemode;
-							if (rankedLeague !== "unknown")
-								gameDetails += ` | ${rankedLeague}`;
-							if (lang !== "unknown" && gameLang) gameDetails += ` | ${lang}`;
-							presenceData.details = gameDetails;
+					} else if (!privacyMode) {
+						let gameDetails = gamemode;
+						if (rankedLeague !== "unknown") gameDetails += ` | ${rankedLeague}`;
+						if (lang !== "unknown" && gameLang) gameDetails += ` | ${lang}`;
+						presenceData.details = gameDetails;
 
-							document
-								.querySelector(
-									"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
-								)
-								?.innerHTML.includes(
-									"color: rgb(236, 64, 122); text-decoration-line: line-through;"
-								) ||
-							document
-								.querySelector(
-									"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
-								)
-								?.innerHTML.includes(
-									"color: rgb(255, 64, 129); text-decoration-line: line-through;"
-								)
-								? ((playerState = "Dead"),
-								  (presenceData.smallImageKey = "skull"))
-								: ((playerState = "Alive"),
-								  (presenceData.smallImageKey = "heart"));
+						document
+							.querySelector(
+								"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
+							)
+							?.innerHTML.includes(
+								"color: rgb(236, 64, 122); text-decoration-line: line-through;"
+							) ||
+						document
+							.querySelector(
+								"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
+							)
+							?.innerHTML.includes(
+								"color: rgb(255, 64, 129); text-decoration-line: line-through;"
+							)
+							? ((playerState = "Dead"), (presenceData.smallImageKey = "skull"))
+							: ((playerState = "Alive"),
+							  (presenceData.smallImageKey = "heart"));
 
-							presenceData.smallImageText = `${playerState} (${root.getAttribute(
-								"premid-username"
-							)})`;
-						} else presenceData.details = "Playing a game";
-					}
+						presenceData.smallImageText = `${playerState} (${root.getAttribute(
+							"premid-username"
+						)})`;
+					} else presenceData.details = "Playing a game";
 
 					//Game Over
 					if (
@@ -702,7 +691,7 @@ presence.on("UpdateData", async () => {
 						)
 					) {
 						!privacyMode
-							? (presenceData.details = "Game Over | " + presenceData.details)
+							? (presenceData.details = `Game Over | ${presenceData.details}`)
 							: (presenceData.details = "Game Over");
 
 						playerState !== "Spectator" &&
