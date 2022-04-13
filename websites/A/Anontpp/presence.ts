@@ -18,10 +18,11 @@ let oldUrl: string, elapsed: number, strings: Awaited<typeof newStrings>;
 presence.on("UpdateData", async () => {
 	const path = location.pathname.replace(/\/?$/, "/"),
 		video: HTMLVideoElement = document.querySelector("video"),
-		[showSearchInfo, showBrowseInfo, showVideoInfo] = await Promise.all([
+		[showSearchInfo, showBrowseInfo, showVideoInfo, cover] = await Promise.all([
 			presence.getSetting<boolean>("search"),
 			presence.getSetting<boolean>("browse"),
-			presence.getSetting<boolean>("video")
+			presence.getSetting<boolean>("video"),
+			presence.getSetting<boolean>("cover")
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: "anontpp"
@@ -51,11 +52,14 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (getElement("#episodetitle") !== "Feature Film") {
-			presenceData.details = "Watching Show";
-			presenceData.state = `${state[0]} (${state[1]})`;
-		} else {
-			presenceData.details = "Watching Movie";
-			[presenceData.state] = state;
+			presenceData.details = state[0];
+			presenceData.state = state[1];
+		} else presenceData.details = state[0];
+
+		if (cover) {
+			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+				"meta[property='og:image']"
+			).content;
 		}
 	}
 
