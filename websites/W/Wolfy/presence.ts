@@ -61,6 +61,15 @@ presence.on("UpdateData", async () => {
 			.querySelector("div.Header_nameState__3u5uu")
 			.textContent.toUpperCase();
 
+		presenceData.buttons = [
+			{
+				label: "Visiter son profil",
+				url: `https://wolfy.fr/leaderboard/${
+					document.querySelector("span.ChatMain_username__2C_7z").textContent
+				}`
+			}
+		];
+
 		if (presenceData.state !== prevState) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
