@@ -35,6 +35,44 @@ function addVisitProfilButton(presenceData: PresenceData, username: string) {
 		}
 	];
 }
+
+function handleCheckingLeaderboard(
+	presenceData: PresenceData,
+	username?: string
+) {
+	if (!username) {
+		const classementType =
+			document.querySelector("div.Leaderboard_moonLeaderboard__3U2H7") !== null
+				? "Lunaire"
+				: document.querySelector("div.Leaderboard_lifeLeaderboard__3Wtz1") !==
+				  null
+				? "Éternel"
+				: null;
+
+		presenceData.details = `Top ${parseInt(
+			document.querySelector(
+				"div.Leaderboard_playerLine__1uAgP > div.Leaderboard_rank__n6aio"
+			)?.textContent
+		).toLocaleString()} ${classementType} (${parseInt(
+			document.querySelector("div.Leaderboard_lifetimeXp__372DW > p")
+				?.textContent
+		).toLocaleString()} ${classementType === "Lunaire" ? "lauriers" : "xp"})`;
+		presenceData.state = `Regarde le classement ${classementType}`;
+	} else {
+		presenceData.details = `[${
+			document.querySelector("div.ExperienceGroup_first__3h_RY > p")
+				?.textContent
+		}] ${parseInt(
+			document
+				.querySelector("div.ExperienceGroup_experienceBarFull__3Qo8A > span")
+				?.textContent.split(" / ")[0]
+		).toLocaleString()} xp & ${parseInt(
+			document.querySelector("p.PlayerCard_number__1d0CM").textContent
+		).toLocaleString()} lauriers`;
+		presenceData.state = `Regarde le profile de ${username}`;
+	}
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "wf"
@@ -92,7 +130,18 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
 		} else presenceData.startTimestamp = cp;
-	} else {
+	} else if (path.includes("/leaderboard"))
+		handleCheckingLeaderboard(presenceData, path.split("/")[2]);
+	else {
+		addVisitProfilButton(
+			presenceData,
+			document.querySelector("p.Social_username__KhUdM")?.textContent
+		);
+
+		presenceData.smallImageKey = "reading";
+		presenceData.smallImageText = "Dans un menu";
+		presenceData.details = "Dans un menu";
+
 		switch (path) {
 			case "/settings":
 				presenceData.state = "Paramètres";
