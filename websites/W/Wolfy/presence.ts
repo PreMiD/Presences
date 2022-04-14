@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 		path.split("/")[2].length > 1
 	) {
 		presenceData.state = document
-			.querySelector("#chat div.nameState")
+			.querySelector("div.Header_nameState__3u5uu")
 			.textContent.toUpperCase();
 
 		if (presenceData.state !== prevState) {
@@ -66,9 +66,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 			prevState = presenceData.state;
 			cp = Date.now();
-			currTime = document.querySelector(
-				"#chat div.timeState.timer"
-			).textContent;
+			currTime = document.querySelector("div.Header_timer__36MsP").textContent;
 		}
 
 		const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);
