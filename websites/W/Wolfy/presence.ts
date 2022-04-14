@@ -143,6 +143,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Dans un menu";
 
 		switch (path) {
+			case "/skin":
+				presenceData.state = "Consulte ses Skins";
+				break;
 			case "/settings":
 				presenceData.state = "Paramètres";
 				break;
