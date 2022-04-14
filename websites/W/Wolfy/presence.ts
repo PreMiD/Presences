@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "721798189111443537"
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
 		browsing: "presence.activity.browsing"
 	});
 let path,
@@ -125,7 +124,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "En jeu";
 
 		presenceData.smallImageKey = "live";
-		presenceData.smallImageText = (await strings).play;
+		presenceData.smallImageText = "En jeu";
 		if (currTime && currTime.includes(":")) {
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
@@ -147,10 +146,10 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Consulte ses Skins";
 				break;
 			case "/settings":
-				presenceData.state = "Paramètres";
+				presenceData.state = "Change ses paramètres";
 				break;
 			case "/shop":
-				presenceData.state = "Boutique";
+				presenceData.state = "Consulte la Boutique";
 				break;
 			case "/articles":
 				presenceData.state = "Actualités";
