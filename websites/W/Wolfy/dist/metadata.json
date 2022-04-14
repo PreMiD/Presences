@@ -4,6 +4,12 @@
 		"name": "fror",
 		"id": "515668127829458945"
 	},
+	"contributors": [
+		{
+			"name": "Tenebrosful",
+			"id": "227882902031958016"
+		}
+	],
 	"service": "Wolfy",
 	"description": {
 		"en": "An online Werewolf card-based multiplayer game. Stay awake.",
