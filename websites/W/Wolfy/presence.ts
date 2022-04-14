@@ -27,6 +27,14 @@ function getTimestamps(audioTime: number, audioDuration: string): number[] {
 	];
 }
 
+function addVisitProfilButton(presenceData: PresenceData, username: string) {
+	presenceData.buttons = [
+		{
+			label: "Visiter son profil",
+			url: `https://wolfy.fr/leaderboard/${username}`
+		}
+	];
+}
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "wf"
@@ -61,15 +69,6 @@ presence.on("UpdateData", async () => {
 			.querySelector("div.Header_nameState__3u5uu")
 			.textContent.toUpperCase();
 
-		presenceData.buttons = [
-			{
-				label: "Visiter son profil",
-				url: `https://wolfy.fr/leaderboard/${
-					document.querySelector("span.ChatMain_username__2C_7z").textContent
-				}`
-			}
-		];
-
 		if (presenceData.state !== prevState) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
@@ -77,6 +76,11 @@ presence.on("UpdateData", async () => {
 			cp = Date.now();
 			currTime = document.querySelector("div.Header_timer__36MsP").textContent;
 		}
+
+		addVisitProfilButton(
+			presenceData,
+			document.querySelector("span.ChatMain_username__2C_7z")?.textContent
+		);
 
 		const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);
 
@@ -107,5 +111,6 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Page d'accueil";
 		}
 	}
+
 	presence.setActivity(presenceData);
 });
