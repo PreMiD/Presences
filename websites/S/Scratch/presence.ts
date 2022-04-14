@@ -230,53 +230,48 @@ presence.on("UpdateData", () => {
 			presenceData.state = "Scratch Foundation";
 		}
 	}
-	if (window.location.href.toLowerCase().includes("scratch-wiki.info")) {
-		if (window.location.href.toLowerCase().includes("en.scratch-wiki.info")) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "English Scratch Wiki";
-		} else if (
-			window.location.href.toLowerCase().includes("de.scratch-wiki.info")
-		) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "German Scratch Wiki";
-		} else if (
-			window.location.href.toLowerCase().includes("ru.scratch-wiki.info/")
-		) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Russian Scratch Wiki";
-		} else if (
-			window.location.href.toLowerCase().includes("nl.scratch-wiki.info/")
-		) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Dutch Scratch Wiki";
-		} else if (
-			window.location.href.toLowerCase().includes("id.scratch-wiki.info/")
-		) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Indonesian Scratch Wiki";
-		} else if (
-			window.location.href.toLowerCase().includes("ja.scratch-wiki.info/")
-		) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Japanese Scratch Wiki";
-		} else if (
-			window.location.href.toLowerCase().includes("hu.scratch-wiki.info/")
-		) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Hungarian Scratch Wiki";
-		} else if (
-			window.location.href.toLowerCase().includes("fr.scratch-wiki.info/")
-		) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "French Scratch Wiki";
-		} else if (
-			window.location.href.toLowerCase().includes("test.scratch-wiki.info/")
-		) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Test Scratch Wiki";
-		} else {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Scratch Wiki";
+	if (window.location.hostname.toLowerCase().includes("scratch-wiki.info")) {
+		switch (window.location.href.toLowerCase()) {
+			case "en.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "English Scratch Wiki";
+				break;
+			case "de.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "German Scratch Wiki";
+				break;
+			case "ru.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Russian Scratch Wiki";
+				break;
+			case "nl.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Dutch Scratch Wiki";
+				break;
+			case "id.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Indonesian Scratch Wiki";
+				break;
+			case "ja.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Japanese Scratch Wiki";
+				break;
+			case "hu.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Hungarian Scratch Wiki";
+				break;
+			case "fr.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "French Scratch Wiki";
+				break;
+			case "test.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Test Scratch Wiki";
+				break;
+			case "scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Scratch Wiki";
+				break;
 		}
 	}
 	if (window.location.hostname.toLowerCase().includes("scratchjr.org")) {
@@ -284,15 +279,14 @@ presence.on("UpdateData", () => {
 		presenceData.state = "Scratch JR";
 	}
 	if (
-		window.location.href
-			.toLowerCase()
-			.includes("donationpay.org/scratchfoundation")
+		// eslint-disable-next-line prettier/prettier
+		window.location.href.toLowerCase().includes("donationpay.org/scratchfoundation")
 	) {
 		presenceData.details = "Viewing page:";
 		presenceData.state = "Donate";
 	}
 	if (
-		window.location.href.toLowerCase().includes("scratched.gse.harvard.edu")
+		window.location.hostname.toLowerCase().includes("scratched.gse.harvard.edu")
 	) {
 		presenceData.details = "Viewing page:";
 		presenceData.state = "Scratch ED";
