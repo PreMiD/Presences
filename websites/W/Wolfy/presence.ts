@@ -119,6 +119,20 @@ presence.on("UpdateData", async () => {
 			document.querySelector("span.ChatMain_username__2C_7z")?.textContent
 		);
 
+		if (presenceData.state === "EN ATTENTE") {
+			presenceData.state += ` (${
+				document.querySelector("div.Header_timer__36MsP")?.textContent
+			})`;
+			if (await presence.getSetting("joinGameButton")) {
+				presenceData.buttons[1] = {
+					label: `(${
+						document.querySelector("div.Header_timer__36MsP")?.textContent
+					}) Rejoindre la partie`,
+					url: document.location.toString()
+				};
+			}
+		}
+
 		const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);
 
 		presenceData.details = "En jeu";

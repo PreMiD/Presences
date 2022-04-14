@@ -24,5 +24,12 @@
 		"games",
 		"card-based",
 		"multiplayer"
+	],
+	"settings": [
+		{
+			"id": "joinGameButton",
+			"title": "Bouton d'invitation",
+			"value": true
+		}
 	]
 }
