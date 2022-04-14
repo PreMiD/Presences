@@ -279,8 +279,9 @@ presence.on("UpdateData", () => {
 		presenceData.state = "Scratch JR";
 	}
 	if (
-		// eslint-disable-next-line prettier/prettier
-		window.location.href.toLowerCase().includes("donationpay.org/scratchfoundation")
+		window.location.href
+			.toLowerCase()
+			.includes("donationpay.org/scratchfoundation")
 	) {
 		presenceData.details = "Viewing page:";
 		presenceData.state = "Donate";
