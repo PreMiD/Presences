@@ -231,7 +231,7 @@ presence.on("UpdateData", () => {
 		}
 	}
 	if (window.location.hostname.toLowerCase().includes("scratch-wiki.info")) {
-		switch (window.location.href.toLowerCase()) {
+		switch (window.location.hostname.toLowerCase()) {
 			case "en.scratch-wiki.info":
 				presenceData.details = "Viewing page:";
 				presenceData.state = "English Scratch Wiki";
