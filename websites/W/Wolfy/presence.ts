@@ -26,16 +26,27 @@ function getTimestamps(audioTime: number, audioDuration: string): number[] {
 	];
 }
 
-function addVisitProfilButton(presenceData: PresenceData, username: string) {
-	presenceData.buttons = [
-		{
-			label: "Visiter son profil",
+async function addVisitProfilButton(
+	presenceData: PresenceData,
+	username: string
+) {
+	if (!(await presence.getSetting("visitProfileButton"))) return;
+	if (!presenceData.buttons) {
+		presenceData.buttons = [
+			{
+				label: `Visiter le profil de ${username}`,
+				url: `https://wolfy.fr/leaderboard/${username}`
+			}
+		];
+	} else {
+		presenceData.buttons[1] = {
+			label: `Visiter le profil de ${username}`,
 			url: `https://wolfy.fr/leaderboard/${username}`
-		}
-	];
+		};
+	}
 }
 
-function handleCheckingLeaderboard(
+async function handleCheckingLeaderboard(
 	presenceData: PresenceData,
 	username?: string
 ) {
@@ -69,6 +80,7 @@ function handleCheckingLeaderboard(
 			document.querySelector("p.PlayerCard_number__1d0CM").textContent
 		).toLocaleString()} lauriers`;
 		presenceData.state = `Regarde le profile de ${username}`;
+		await addVisitProfilButton(presenceData, username);
 	}
 }
 
@@ -143,10 +155,15 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
 		} else presenceData.startTimestamp = cp;
-	} else if (path.includes("/leaderboard"))
-		handleCheckingLeaderboard(presenceData, path.split("/")[2]);
-	else {
-		addVisitProfilButton(
+	} else if (path.includes("/leaderboard")) {
+		await addVisitProfilButton(
+			presenceData,
+			document.querySelector("p.Social_username__KhUdM")?.textContent
+		);
+
+		await handleCheckingLeaderboard(presenceData, path.split("/")[2]);
+	} else {
+		await addVisitProfilButton(
 			presenceData,
 			document.querySelector("p.Social_username__KhUdM")?.textContent
 		);
