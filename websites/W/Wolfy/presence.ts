@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
 
 		addVisitProfilButton(
 			presenceData,
-			document.querySelector("span.ChatMain_username__2C_7z")?.textContent
+			document.querySelector("span.ChatMain_username__2C_7z")?.textContent // Will be the anonymous username if used
 		);
 
 		if (presenceData.state === "EN ATTENTE") {
