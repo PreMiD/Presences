@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
 			currTime = document.querySelector("div.Header_timer__36MsP").textContent;
 		}
 
-		addVisitProfilButton(
+		await addVisitProfilButton(
 			presenceData,
 			document.querySelector("span.ChatMain_username__2C_7z")?.textContent // Will be the anonymous username if used
 		);
