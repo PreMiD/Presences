@@ -26,6 +26,27 @@ function getTimestamps(audioTime: number, audioDuration: string): number[] {
 	];
 }
 
+async function addJoinGameButton(presenceData: PresenceData, gameId: string) {
+	if (!(await presence.getSetting("joinGameButton"))) return;
+	if (!presenceData.buttons) {
+		presenceData.buttons = [
+			{
+				label: `(${
+					document.querySelector("div.Header_timer__36MsP")?.textContent
+				}) Rejoindre la partie`,
+				url: `https://wolfy.fr/game/${gameId}`
+			}
+		];
+	} else {
+		presenceData.buttons[1] = {
+			label: `(${
+				document.querySelector("div.Header_timer__36MsP")?.textContent
+			}) Rejoindre la partie`,
+			url: `https://wolfy.fr/game/${gameId}`
+		};
+	}
+}
+
 async function addVisitProfilButton(
 	presenceData: PresenceData,
 	username: string
@@ -135,14 +156,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state += ` (${
 				document.querySelector("div.Header_timer__36MsP")?.textContent
 			})`;
-			if (await presence.getSetting("joinGameButton")) {
-				presenceData.buttons[1] = {
-					label: `(${
-						document.querySelector("div.Header_timer__36MsP")?.textContent
-					}) Rejoindre la partie`,
-					url: document.location.toString()
-				};
-			}
+			await addJoinGameButton(presenceData, path.split("/")[2]);
 		}
 
 		const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);

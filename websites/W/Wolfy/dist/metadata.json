@@ -33,6 +33,11 @@
 	],
 	"settings": [
 		{
+			"id": "visitProfileButton",
+			"title": "Bouton de profil",
+			"value": true
+		},
+		{
 			"id": "joinGameButton",
 			"title": "Bouton d'invitation",
 			"value": true
