@@ -343,7 +343,10 @@ presence.on("UpdateData", async () => {
 
 		document.querySelector(
 			"div.css-1dbjc4n.r-z2wwpe.r-13awgt0.r-1dhrvg0.r-169s5xo.r-hvns9x.r-1pcd2l5"
-		) && (presenceData.details = "At the login page");
+		) &&
+			((presenceData.details = "At the login page"),
+			root.removeAttribute("premid-username"),
+			root.removeAttribute("premid-clantag"));
 
 		//Menu
 		if (
@@ -388,7 +391,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (!privacyMode) {
-				!clanTag
+				!clanTag && root.hasAttribute("premid-clantag")
 					? (presenceData.state = `${root.getAttribute(
 							"premid-clantag"
 					  )}|${root.getAttribute("premid-username")}`)
@@ -517,7 +520,7 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Browsing custom games";
 			if (!privacyMode) {
-				!clanTag
+				!clanTag && root.hasAttribute("premid-clantag")
 					? (presenceData.state = `${root.getAttribute(
 							"premid-clantag"
 					  )}|${root.getAttribute("premid-username")}`)
@@ -564,7 +567,7 @@ presence.on("UpdateData", async () => {
 						root.setAttribute("premid-friends", "true");
 					else root.removeAttribute("premid-friends");
 				} else presenceData.state = "Loading...";
-				!clanTag
+				!clanTag && root.hasAttribute("premid-clantag")
 					? (presenceData.smallImageText = `Lobby (${root.getAttribute(
 							"premid-clantag"
 					  )}|${root.getAttribute("premid-username")})`)
@@ -615,7 +618,7 @@ presence.on("UpdateData", async () => {
 						else if (spectatorCountPreGame > 1)
 							presenceData.state += `, ${spectatorCountPreGame} spectators`;
 
-						!clanTag
+						!clanTag && root.hasAttribute("premid-clantag")
 							? (presenceData.smallImageText = `Waiting (${root.getAttribute(
 									"premid-clantag"
 							  )}|${root.getAttribute("premid-username")})`)
@@ -679,7 +682,7 @@ presence.on("UpdateData", async () => {
 								if (lang !== "unknown" && gameLang) gameDetails += ` | ${lang}`;
 
 								presenceData.details = gameDetails;
-								!clanTag
+								!clanTag && root.hasAttribute("premid-clantag")
 									? (presenceData.smallImageText = `${playerState} (${root.getAttribute(
 											"premid-clantag"
 									  )}|${root.getAttribute("premid-username")})`)
@@ -731,7 +734,7 @@ presence.on("UpdateData", async () => {
 							}
 						}
 
-						!clanTag
+						!clanTag && root.hasAttribute("premid-clantag")
 							? (presenceData.smallImageText = `${playerState} (${root.getAttribute(
 									"premid-clantag"
 							  )}|${root.getAttribute("premid-username")})`)
