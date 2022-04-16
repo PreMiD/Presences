@@ -74,6 +74,15 @@
 			"value": false
 		},
 		{
+			"id": "clanTag",
+			"if": {
+				"privacy": false
+			},
+			"title": "Hide Clan Tag",
+			"icon": "fad fa-tag",
+			"value": false
+		},
+		{
 			"id": "privacyChat",
 			"if": {
 				"privacy": false

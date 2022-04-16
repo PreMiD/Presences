@@ -228,9 +228,10 @@ function languageCode(language: string): string {
 }
 
 presence.on("UpdateData", async () => {
-	const [privacyMode, privacyChat, gameLang, showTimestamp, logo] =
+	const [privacyMode, clanTag, privacyChat, gameLang, showTimestamp, logo] =
 			await Promise.all([
 				presence.getSetting<boolean>("privacy"),
+				presence.getSetting<boolean>("clanTag"),
 				presence.getSetting<boolean>("privacyChat"),
 				presence.getSetting<boolean>("gameLang"),
 				presence.getSetting<boolean>("showTimestamp"),
@@ -356,6 +357,26 @@ presence.on("UpdateData", async () => {
 			if (
 				document.querySelectorAll(
 					"div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u"
+				)[0]?.textContent &&
+				document
+					.querySelectorAll("div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u")[0]
+					?.textContent?.includes("|")
+			) {
+				root.setAttribute(
+					"premid-clantag",
+					document
+						.querySelectorAll("div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u")[0]
+						?.textContent.split("|")[0]
+				);
+				root.setAttribute(
+					"premid-username",
+					document
+						.querySelectorAll("div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u")[0]
+						?.textContent.split("|")[1]
+				);
+			} else if (
+				document.querySelectorAll(
+					"div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u"
 				)[0]?.textContent
 			) {
 				root.setAttribute(
@@ -367,7 +388,11 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (!privacyMode) {
-				presenceData.state = root.getAttribute("premid-username");
+				!clanTag
+					? (presenceData.state = `${root.getAttribute(
+							"premid-clantag"
+					  )}|${root.getAttribute("premid-username")}`)
+					: (presenceData.state = `${root.getAttribute("premid-username")}`);
 
 				document.querySelector(
 					"div.css-1dbjc4n.r-kdyh1x.r-eqz5dr.r-1pi2tsx.r-a2tzq0.r-1ybube5"
@@ -491,8 +516,13 @@ presence.on("UpdateData", async () => {
 			)
 		) {
 			presenceData.details = "Browsing custom games";
-			if (!privacyMode)
-				presenceData.state = root.getAttribute("premid-username");
+			if (!privacyMode) {
+				!clanTag
+					? (presenceData.state = `${root.getAttribute(
+							"premid-clantag"
+					  )}|${root.getAttribute("premid-username")}`)
+					: (presenceData.state = `${root.getAttribute("premid-username")}`);
+			}
 		}
 
 		//Lobby
@@ -534,9 +564,13 @@ presence.on("UpdateData", async () => {
 						root.setAttribute("premid-friends", "true");
 					else root.removeAttribute("premid-friends");
 				} else presenceData.state = "Loading...";
-				presenceData.smallImageText = `Lobby (${root.getAttribute(
-					"premid-username"
-				)})`;
+				!clanTag
+					? (presenceData.smallImageText = `Lobby (${root.getAttribute(
+							"premid-clantag"
+					  )}|${root.getAttribute("premid-username")})`)
+					: (presenceData.smallImageText = `Lobby (${root.getAttribute(
+							"premid-username"
+					  )})`);
 			} else presenceData.smallImageText = "Lobby";
 
 			presenceData.smallImageKey = "friends";
@@ -581,9 +615,13 @@ presence.on("UpdateData", async () => {
 						else if (spectatorCountPreGame > 1)
 							presenceData.state += `, ${spectatorCountPreGame} spectators`;
 
-						presenceData.smallImageText = `Waiting (${root.getAttribute(
-							"premid-username"
-						)})`;
+						!clanTag
+							? (presenceData.smallImageText = `Waiting (${root.getAttribute(
+									"premid-clantag"
+							  )}|${root.getAttribute("premid-username")})`)
+							: (presenceData.smallImageText = `Waiting (${root.getAttribute(
+									"premid-username"
+							  )})`);
 					}
 				} else {
 					//Playing
@@ -617,71 +655,89 @@ presence.on("UpdateData", async () => {
 							gamemode += " with friends";
 					}
 
-					//Spectator
-					if (
-						document
-							.querySelectorAll(
-								"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
-							)
-							[
-								document.querySelectorAll(
-									"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
-								).length - 1
-							]?.innerHTML.includes("color: rgb(236, 64, 122)") ||
-						document
-							.querySelectorAll(
-								"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
-							)
-							[
-								document.querySelectorAll(
-									"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
-								).length - 1
-							]?.innerHTML.includes("color: rgb(255, 64, 129)")
-					) {
-						playerState = "Spectator";
-						presenceData.smallImageKey = "popcorn";
-						if (!privacyMode) {
-							let gameDetails = gamemode;
-							if (rankedLeague !== "unknown")
-								gameDetails += ` | ${rankedLeague}`;
-							if (lang !== "unknown" && gameLang) gameDetails += ` | ${lang}`;
+					const spectatorList = document.querySelectorAll(
+						"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu:nth-last-child(1) > div > div > div > div > div.css-1dbjc4n.r-13awgt0.r-18u37iz.r-1jkjb.r-1d4mawv > div:nth-child(2)"
+					);
 
-							presenceData.details = gameDetails;
-							presenceData.smallImageText = `${playerState} (${root.getAttribute(
-								"premid-username"
-							)})`;
-						} else {
-							presenceData.details = "Spectating a game";
-							presenceData.smallImageText = playerState;
+					for (const spectator of spectatorList) {
+						if (
+							spectator.textContent.replace("|", "") ===
+								root.getAttribute("premid-username") ||
+							spectator
+								.getAttribute("style")
+								?.includes("color: rgb(236, 64, 122)") ||
+							spectator
+								.getAttribute("style")
+								?.includes("color: rgb(255, 64, 129)")
+						) {
+							playerState = "Spectator";
+							presenceData.smallImageKey = "popcorn";
+							if (!privacyMode) {
+								let gameDetails = gamemode;
+								if (rankedLeague !== "unknown")
+									gameDetails += ` | ${rankedLeague}`;
+								if (lang !== "unknown" && gameLang) gameDetails += ` | ${lang}`;
+
+								presenceData.details = gameDetails;
+								!clanTag
+									? (presenceData.smallImageText = `${playerState} (${root.getAttribute(
+											"premid-clantag"
+									  )}|${root.getAttribute("premid-username")})`)
+									: (presenceData.smallImageText = `${playerState} (${root.getAttribute(
+											"premid-username"
+									  )})`);
+							} else {
+								presenceData.details = "Spectating a game";
+								presenceData.smallImageText = playerState;
+							}
 						}
-						//Player
-					} else if (!privacyMode) {
+					}
+					//Player
+					if (!privacyMode) {
 						let gameDetails = gamemode;
 						if (rankedLeague !== "unknown") gameDetails += ` | ${rankedLeague}`;
 						if (lang !== "unknown" && gameLang) gameDetails += ` | ${lang}`;
 						presenceData.details = gameDetails;
 
-						document
-							.querySelector(
-								"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
-							)
-							?.innerHTML.includes(
-								"color: rgb(236, 64, 122); text-decoration-line: line-through;"
-							) ||
-						document
-							.querySelector(
-								"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
-							)
-							?.innerHTML.includes(
-								"color: rgb(255, 64, 129); text-decoration-line: line-through;"
-							)
-							? ((playerState = "Dead"), (presenceData.smallImageKey = "skull"))
-							: ((playerState = "Alive"),
-							  (presenceData.smallImageKey = "heart"));
+						const playerList = document.querySelectorAll(
+							"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div > div > div > div > div.css-1dbjc4n.r-13awgt0.r-18u37iz.r-1jkjb.r-1d4mawv > div:nth-child(2)"
+						);
+						for (const player of playerList) {
+							if (
+								(player.textContent.replace("|", "") ===
+									root.getAttribute("premid-username") ||
+									player
+										.getAttribute("style")
+										?.includes("color: rgb(236, 64, 122)") ||
+									player
+										.getAttribute("style")
+										?.includes("color: rgb(255, 64, 129)")) &&
+								player.getAttribute("style")?.includes("line-through")
+							) {
+								playerState = "Dead";
+								presenceData.smallImageKey = "skull";
+							} else if (
+								player.textContent.replace("|", "") ===
+									root.getAttribute("premid-username") ||
+								player
+									.getAttribute("style")
+									?.includes("color: rgb(236, 64, 122)") ||
+								player
+									.getAttribute("style")
+									?.includes("color: rgb(255, 64, 129)")
+							) {
+								playerState = "Alive";
+								presenceData.smallImageKey = "heart";
+							}
+						}
 
-						presenceData.smallImageText = `${playerState} (${root.getAttribute(
-							"premid-username"
-						)})`;
+						!clanTag
+							? (presenceData.smallImageText = `${playerState} (${root.getAttribute(
+									"premid-clantag"
+							  )}|${root.getAttribute("premid-username")})`)
+							: (presenceData.smallImageText = `${playerState} (${root.getAttribute(
+									"premid-username"
+							  )})`);
 					} else presenceData.details = "Playing a game";
 
 					//Game Over
