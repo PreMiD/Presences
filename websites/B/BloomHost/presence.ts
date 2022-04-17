@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = `Reading: ${title}`
       presenceData.smallImageKey = 'book-open-solid'
       // console.log('HOGG RIDDAAAAAA')
-    } else if (path.hostname === "mc.bloom.host") {
+    } else if (path.hostname === "mc.bloom.host" || path.hostname === "demo.bloom.host") {
       if (path.pathname.includes('account')){
         presenceData.details = "Using the Panel"
         presenceData.state = `Editing: Account Details`
@@ -96,7 +96,19 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Using the Panel"
         presenceData.state = `Installing: Modpacks`
         
-      } 
+      } else if (path.pathname.includes('console')) {
+        presenceData.details = "Using the panel"
+        presenceData.state = "Viewing: The Console"
+        presenceData.smallImageKey = "terminal-solid"
+      } else if (path.pathname.includes('files')){
+        presenceData.details = "Using the panel"
+        presenceData.state = "Editing: Files"
+        presenceData.smallImageKey = "folder-solid"
+      } else {
+        presenceData.details = "Using the panel"
+        presenceData.state = "Viewing: The Console"
+        presenceData.smallImageKey = "terminal-solid"
+      }
     } else if (path.hostname === "status.bloom.host"){
       if (path.pathname.includes('report')){
         const title = document.querySelector(' div.portlet-body > div.row > div.col-xs-12 > span').textContent
@@ -109,6 +121,10 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = 'stream-solid'
       // console.log('HOGG RIDDAAAAAA')
       }
+    } else if (path.hostname === "vps.bloom.host"){
+      presenceData.details = "Using the VPS panel"
+    } else if (path.hostname === "billing.bloom.host"){
+      presenceData.details = "Using the Billing Panel"
     }
     if (!presenceData.details) {
       presence.setTrayTitle();
