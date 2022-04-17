@@ -104,10 +104,7 @@ presence.on("UpdateData", async () => {
 			if (
 				document.querySelector<HTMLButtonElement>('[aria-label="Explorer"]')
 			) {
-				const workspaceName = document.querySelector<HTMLButtonElement>(
-						'[class="sc-bdnylx lfgQvf SandboxName___StyledButton-sc-1nxafha-0 gsbQdg"]'
-					),
-					cfile = search.split("/").filter(elm => elm !== ""),
+				const cfile = search.split("/").filter(elm => elm !== ""),
 					formatImg = search.split(".").filter(elm => elm !== "");
 				presenceData.details = `Editing ${
 					search
@@ -119,11 +116,10 @@ presence.on("UpdateData", async () => {
 								.textContent.replace(/\(|([0-9]*) selected\)/g, "")})`
 						: "a sandbox"
 				}`;
-				presenceData.state = `Workspace: ${workspaceName.textContent}`;
+				presenceData.state = `Workspace: ${document.title.split("-")[0]}`;
 				if (
 					formats.includes(
 						formatImg[formatImg.length - 1]
-							.toString()
 							/*.toLowerCase()*/
 							.replace(/(:)|[0-9]|(-)/g, "")
 					)
