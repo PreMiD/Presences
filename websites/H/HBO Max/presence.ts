@@ -77,7 +77,7 @@ async function fetchCover() {
 		await fetch(
 			`https://comet.api.hbo.com/express-content/${
 				location.pathname.split("/")[2]
-			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`,
+			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US&language=en-us`,
 			{
 				headers: {
 					authorization: `Bearer ${await getToken()}`
