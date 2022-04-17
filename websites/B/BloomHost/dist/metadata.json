@@ -4,9 +4,9 @@
     "name": "BossDaily",
     "id": "274973338676494347"
   },
-  "service": "BloomHost",
+  "service": "Bloom.Host",
   "description": {
-    "en": "This is a Premid extension for Bloom Host. A minecraft server host."
+    "en": "This is a Premid extension for Bloom Host. A high performance Minecraft and VPS server host that focuses on speed, reliability and protection."
   },
   "url": [
     "docs.bloom.host",
