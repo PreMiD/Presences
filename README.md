@@ -7,4 +7,4 @@ This repo contains all the PreMiD presences I am working on.
 
 <h1>Presences I am working on right now</h1>
 
-- <img src="https://i.imgur.com/1mVjQ4h.png" height=40 width=40/> [Bloom Host](https://bloom.host/)
+- <a href="https://bloom.host/"><img src="https://i.imgur.com/1mVjQ4h.png" height=40 width=40/><a/> [Bloom Host](https://github.com/BossDaily/Presences/tree/main/websites/B/BloomHost)
