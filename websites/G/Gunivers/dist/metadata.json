@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "fantomitechno 🦊",
 		"id": "563749920683720709"
@@ -14,7 +14,7 @@
 		"gunivers.net",
 		"project.gunivers.net"
 	],
-	"version": "1.2.9",
+	"version": "1.2.10",
 	"logo": "https://i.imgur.com/lbVBBIz.png",
 	"thumbnail": "https://i.imgur.com/8P9s1Pt.png",
 	"color": "#FF8C39",

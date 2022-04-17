@@ -191,8 +191,7 @@ presence.on("UpdateData", () => {
 		window.location.pathname.toLowerCase().startsWith("/forum/") &&
 		!window.location.pathname.toLowerCase().startsWith("/forum/categorie")
 	) {
-		const page = window.location.pathname.toLowerCase().split("/")[3];
-		let nbpage = page;
+		let nbpage = window.location.pathname.toLowerCase().split("/")[3];
 		if (!nbpage) nbpage = "1";
 
 		presenceData.details = "Forum - Sujet";
@@ -206,29 +205,29 @@ presence.on("UpdateData", () => {
 		if (window.document.title === "Forum de HabboCity")
 			presenceData.state = "Regarde la liste des sujets";
 		else {
-			const page = window.location.pathname.toLowerCase().split("/")[4],
-				nbpage = page;
 			presenceData.state = `Regarde la liste des sujets - ${window.document.title.replace(
 				"HabboCity:",
 				""
-			)} - Page ${nbpage}`;
+			)} - Page ${window.location.pathname.toLowerCase().split("/")[4]}`;
 		}
 	}
 
 	if (
 		window.location.pathname.toLowerCase().startsWith("/forum/categorie/com/")
 	) {
-		const nbpage = window.location.pathname.toLowerCase().split("/")[4];
 		presenceData.details = "Forum - Mes sujets commentés";
-		presenceData.state = `Regarde ses sujets commentés - Page ${nbpage}`;
+		presenceData.state = `Regarde ses sujets commentés - Page ${
+			window.location.pathname.toLowerCase().split("/")[4]
+		}`;
 	}
 
 	if (
 		window.location.pathname.toLowerCase().startsWith("/forum/categorie/mes/")
 	) {
-		const nbpage = window.location.pathname.toLowerCase().split("/")[4];
 		presenceData.details = "Forum - Mes sujets";
-		presenceData.state = `Regarde ses sujets - Page ${nbpage}`;
+		presenceData.state = `Regarde ses sujets - Page ${
+			window.location.pathname.toLowerCase().split("/")[4]
+		}`;
 	}
 
 	if (window.location.pathname.toLowerCase() === "/forum/new-sujet") {

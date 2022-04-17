@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Kinue",
 		"id": "634246091293851649"
@@ -11,7 +11,7 @@
 		"nl": "HentaiZ - Top # 1 Anime Hentai-website in Vietnam met hoge kwaliteit"
 	},
 	"url": "hentaiz.top",
-	"version": "1.0.8",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/685u3IG.png",
 	"thumbnail": "https://i.imgur.com/3XfELvO.png",
 	"color": "#1f1f1f",
