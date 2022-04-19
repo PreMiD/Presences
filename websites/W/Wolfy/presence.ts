@@ -148,6 +148,11 @@ presence.on("UpdateData", async () => {
 			)?.textContent;
 			addConsultArticleButton(presenceData, document.location.href);
 			addVisitHelpCenterButton(presenceData);
+		} else if (path.includes("/category") && path.split("/")[3]) {
+			presenceData.details = "Consulte la catégorie ⤵️";
+			presenceData.state = document.querySelector(
+				"span.csh-category-badge"
+			)?.textContent;
 		} else {
 			presenceData.details = "Consulte le centre d'aide";
 			presenceData.state = "Page d'accueil";
