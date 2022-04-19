@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "501842028569559061"
+	clientId: "501842028569559061" // Official Wolfy Discord App Client ID, owned by Wolfy's Admin
 });
 
 let path,
