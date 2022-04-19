@@ -153,6 +153,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"span.csh-category-badge"
 			)?.textContent;
+			addConsultCategoryButton(presenceData, document.location.href);
 		} else {
 			presenceData.details = "Consulte le centre d'aide";
 			presenceData.state = "Page d'accueil";
