@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.details = "Consulte le centre d'aide";
 			presenceData.state = "Page d'accueil";
-			await addConsultHelpCenterButton(presenceData);
+			addVisitHelpCenterButton(presenceData);
 		}
 	} else if (
 		path.includes("/articles/") &&
