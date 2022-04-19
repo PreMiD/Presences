@@ -186,8 +186,6 @@ presence.on("UpdateData", async () => {
 			document.querySelector("p.Social_username__KhUdM")?.textContent
 		);
 
-		presenceData.smallImageKey = "reading";
-		presenceData.smallImageText = "Dans un menu";
 		presenceData.details = "Dans un menu";
 
 		switch (path) {
