@@ -84,7 +84,8 @@ async function handleCheckingLeaderboard(
 				? "Éternel"
 				: null;
 
-		presenceData.details = `Top ${parseInt(
+		presenceData.details = `Regarde le classement ${classementType}`;
+		presenceData.state = `Top ${parseInt(
 			document.querySelector(
 				"div.Leaderboard_playerLine__1uAgP > div.Leaderboard_rank__n6aio"
 			)?.textContent
@@ -92,9 +93,9 @@ async function handleCheckingLeaderboard(
 			document.querySelector("div.Leaderboard_lifetimeXp__372DW > p")
 				?.textContent
 		).toLocaleString()} ${classementType === "Lunaire" ? "lauriers" : "xp"})`;
-		presenceData.state = `Regarde le classement ${classementType}`;
 	} else {
-		presenceData.details = `[${
+		presenceData.details = `Regarde le profil de ${username}`;
+		presenceData.state = `[${
 			document.querySelector("div.ExperienceGroup_first__3h_RY > p")
 				?.textContent
 		}] ${parseInt(
@@ -104,7 +105,6 @@ async function handleCheckingLeaderboard(
 		).toLocaleString()} xp & ${parseInt(
 			document.querySelector("p.PlayerCard_number__1d0CM").textContent
 		).toLocaleString()} lauriers`;
-		presenceData.state = `Regarde le profile de ${username}`;
 		await addVisitProfilButton(presenceData, username);
 	}
 }
