@@ -1,9 +1,7 @@
 const presence = new Presence({
-		clientId: "721798189111443537"
-	}),
-	strings = presence.getStrings({
-		browsing: "presence.activity.browsing"
-	});
+	clientId: "721798189111443537"
+});
+
 let path,
 	prev: string,
 	elapsed: number,
@@ -123,9 +121,6 @@ presence.on("UpdateData", async () => {
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 
-	presenceData.details = (await strings).browsing;
-	presenceData.smallImageKey = "search";
-	presenceData.smallImageText = (await strings).browsing;
 	presenceData.startTimestamp = elapsed;
 
 	if (
