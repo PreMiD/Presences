@@ -153,20 +153,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Page d'accueil";
 			addVisitHelpCenterButton(presenceData);
 		}
-	} else if (
-		path.includes("/articles/") &&
-		path.split("/")[2] !== null &&
-		path.split("/")[2].length > 1
-	) {
+	} else if (path.includes("/articles/") && path.split("/")[2]) {
 		presenceData.details = "Lis l'article ⤵️";
 		presenceData.smallImageKey = "reading";
 		presenceData.smallImageText = "Lis un article";
 		presenceData.state = document.querySelector("body h1").textContent;
-	} else if (
-		path.includes("/game/") &&
-		path.split("/")[2] !== null &&
-		path.split("/")[2].length > 1
-	) {
+	} else if (path.includes("/game/") && path.split("/")[2]) {
 		presenceData.state = document
 			.querySelector("div.Header_nameState__3u5uu")
 			.textContent.toUpperCase();
