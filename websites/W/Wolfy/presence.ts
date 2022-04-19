@@ -69,6 +69,22 @@ async function addVisitProfilButton(
 	}
 }
 
+async function addVisitWolfyButton(presenceData: PresenceData) {
+	if (!presenceData.buttons) {
+		presenceData.buttons = [
+			{
+				label: "Visiter le site de Wolfy",
+				url: "https://wolfy.fr"
+			}
+		];
+	} else {
+		presenceData.buttons[1] = {
+			label: "Visiter le site de Wolfy",
+			url: "https://wolfy.fr"
+		};
+	}
+}
+
 async function addConsultArticleButton(
 	presenceData: PresenceData,
 	url: string
@@ -260,6 +276,9 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Page d'accueil";
 		}
 	}
+
+	if (!presenceData.buttons || !presenceData.buttons[1])
+		addVisitWolfyButton(presenceData);
 
 	presence.setActivity(presenceData);
 });
