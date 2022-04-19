@@ -3,6 +3,7 @@ const presence = new Presence({
 	}),
 	startedTime = Math.floor(Date.now() / 1000);
 
+//If it returns a language, then the gamemode is quick game
 function languageCode(language: string): string {
 	switch (language) {
 		case "ar":
@@ -227,16 +228,16 @@ function languageCode(language: string): string {
 }
 
 presence.on("UpdateData", async () => {
-	const [privacyMode, privacyChat, gameLang, showTimestamp, logo] =
+	const [privacyMode, clanTag, privacyChat, gameLang, showTimestamp, logo] =
 			await Promise.all([
 				presence.getSetting<boolean>("privacy"),
+				presence.getSetting<boolean>("clanTag"),
 				presence.getSetting<boolean>("privacyChat"),
 				presence.getSetting<boolean>("gameLang"),
 				presence.getSetting<boolean>("showTimestamp"),
 				presence.getSetting<number>("logo")
 			]),
-		// eslint-disable-next-line no-one-time-vars/no-one-time-vars
-		logoArr = ["wov", "wov_no_bg", "wov_text"],
+		logoArr = ["wov", "wov_white", "wov_no_bg", "wov_text"],
 		presenceData: PresenceData = {
 			largeImageKey: logoArr[logo] || "wov"
 		};
@@ -316,9 +317,11 @@ presence.on("UpdateData", async () => {
 		const submissionView = document.querySelector(".css-757v71");
 
 		if (submissionView) {
-			if (!privacyMode)
+			if (!privacyMode) {
 				presenceData.state = `Viewing submission by ${submissionView.textContent}`;
-			else presenceData.state = "Viewing a submission";
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".css-seerqf").src;
+			} else presenceData.state = "Viewing a submission";
 		} else presenceData.state = "Browsing...";
 
 		//App info page
@@ -334,19 +337,16 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.href.includes("wolvesville.com")) {
 		const root = document.querySelector("#root");
 
-		//Loading Screen
 		document.querySelector(
 			"div.css-1dbjc4n.r-1p0dtai.r-18u37iz.r-1777fci.r-1d2f490.r-98ikmy.r-u8s1d.r-zchlnj > div.css-1dbjc4n.r-1ffj0ar.r-z2wwpe.r-18u37iz.r-1w6e6rj.r-1777fci.r-1l7z4oj.r-gu0qjt.r-85oauj.r-95jzfe > div.css-1dbjc4n.r-1awozwy.r-1777fci > div.css-1dbjc4n.r-17bb2tj.r-1muvv40.r-127358a.r-1ldzwu0.r-z80fyv.r-19wmn03"
-		)
-			? (presenceData.details = "Loading Wolvesville...")
-			: false;
+		) && (presenceData.details = "Loading Wolvesville...");
 
-		//Login
 		document.querySelector(
 			"div.css-1dbjc4n.r-z2wwpe.r-13awgt0.r-1dhrvg0.r-169s5xo.r-hvns9x.r-1pcd2l5"
-		)
-			? (presenceData.details = "At the login page")
-			: false;
+		) &&
+			((presenceData.details = "At the login page"),
+			root.removeAttribute("premid-username"),
+			root.removeAttribute("premid-clantag"));
 
 		//Menu
 		if (
@@ -360,6 +360,26 @@ presence.on("UpdateData", async () => {
 			if (
 				document.querySelectorAll(
 					"div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u"
+				)[0]?.textContent &&
+				document
+					.querySelectorAll("div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u")[0]
+					?.textContent?.includes("|")
+			) {
+				root.setAttribute(
+					"premid-clantag",
+					document
+						.querySelectorAll("div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u")[0]
+						?.textContent.split("|")[0]
+				);
+				root.setAttribute(
+					"premid-username",
+					document
+						.querySelectorAll("div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u")[0]
+						?.textContent.split("|")[1]
+				);
+			} else if (
+				document.querySelectorAll(
+					"div.css-901oao.r-jwli3a.r-ubezar.r-5oul0u"
 				)[0]?.textContent
 			) {
 				root.setAttribute(
@@ -371,24 +391,52 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (!privacyMode) {
-				//Username
-				presenceData.state = root.getAttribute("premid-username");
+				!clanTag && root.hasAttribute("premid-clantag")
+					? (presenceData.state = `${root.getAttribute(
+							"premid-clantag"
+					  )}|${root.getAttribute("premid-username")}`)
+					: (presenceData.state = `${root.getAttribute("premid-username")}`);
 
-				//Inventory
 				document.querySelector(
 					"div.css-1dbjc4n.r-kdyh1x.r-eqz5dr.r-1pi2tsx.r-a2tzq0.r-1ybube5"
-				)
-					? (presenceData.state = "Inventory")
-					: false;
+				) && (presenceData.state = "Inventory");
 
-				//Shop
 				document.querySelector(
 					"div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-1w6e6rj.r-1777fci.r-1guathk"
-				)
-					? (presenceData.state = "Shop")
-					: false;
+				) && (presenceData.state = "Shop");
 
-				//Clan
+				document.querySelector(
+					"div.css-1dbjc4n.r-8o21a9.r-12vffkv.r-u8s1d.r-13qz1uu.r-1g40b8q"
+				) && (presenceData.state = "Opening loot boxes");
+
+				if (
+					document.querySelector(
+						"div.css-1dbjc4n.r-1kihuf0.r-z2wwpe.r-13awgt0.r-1ifxtd0.r-sb58tz.r-13qz1uu > div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-1777fci"
+					)
+				) {
+					const tabs = document.querySelectorAll(
+						"div.css-1dbjc4n.r-1loqt21.r-13awgt0.r-1777fci.r-1otgn73.r-lrvibr"
+					);
+					for (const [index, value] of tabs.entries()) {
+						if (
+							value.querySelector(
+								"div.css-1dbjc4n > div.css-901oao.r-qctebb.r-1i10wst.r-1vr29t4.r-1w50u8q.r-q4m81j"
+							) ||
+							!value.querySelector(
+								"div.css-1dbjc4n > div.css-901oao.r-wnl269.r-1i10wst.r-1vr29t4.r-1w50u8q.r-q4m81j"
+							)
+						) {
+							index === 0 && (presenceData.state = "Viewing roles");
+							index === 1 && (presenceData.state = "Viewing role cards");
+							index === 2 && (presenceData.state = "Viewing setups");
+						}
+					}
+				}
+
+				document.querySelector(
+					"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-11yh6sk.r-1rnoaur.r-2eszeu.r-1sncvnh > div.css-1dbjc4n > div.css-1dbjc4n > div.css-1dbjc4n.r-13qz1uu > div.css-1dbjc4n.r-z2wwpe.r-nsbfu8.r-13qz1uu > div.css-1dbjc4n.r-1awozwy.r-13awgt0.r-18u37iz.r-1777fci"
+				) && (presenceData.state = "Upgrading a role card");
+
 				if (
 					document.querySelector(
 						"div.css-1dbjc4n.r-13awgt0.r-zd98yo.r-1v1z2uz.r-13qz1uu"
@@ -403,12 +451,12 @@ presence.on("UpdateData", async () => {
 						//viewing a clan
 						if (
 							document.querySelector(
-								"div.css-901oao.css-vcwn7f.r-qctebb.r-1i10wst.r-1kfrs79"
+								"div.css-901oao.css-vcwn7f.r-1i10wst.r-1kfrs79"
 							)
 						) {
 							presenceData.state = `Viewing clan: ${
 								document.querySelector(
-									"div.css-901oao.css-vcwn7f.r-qctebb.r-1i10wst.r-1kfrs79"
+									"div.css-901oao.css-vcwn7f.r-1i10wst.r-1kfrs79"
 								).textContent
 							}`;
 							//searching for a clan
@@ -428,32 +476,23 @@ presence.on("UpdateData", async () => {
 					} else {
 						presenceData.state = `Viewing their clan: ${
 							document.querySelector(
-								"div.css-901oao.css-vcwn7f.r-qctebb.r-1i10wst.r-1kfrs79"
+								"div.css-901oao.css-vcwn7f.r-1i10wst.r-1kfrs79"
 							)?.textContent
 						}`;
 					}
 				}
 
-				//Wheel
 				document.querySelector(
 					"div.css-1dbjc4n.r-1kihuf0.r-1mlwlqe.r-1d2f490.r-1udh08x.r-zchlnj > div.css-1dbjc4n.r-1niwhzg.r-vvn4in.r-u6sd8q.r-ehq7j7.r-1p0dtai.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-13qz1uu.r-1wyyakw"
-				)
-					? (presenceData.state = "Spinning the wheel")
-					: false;
+				) && (presenceData.state = "Spinning the wheel");
 
-				//Settings
 				document.querySelector(
 					"div.css-1dbjc4n.r-150rngu.r-1niwhzg.r-13awgt0.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-1pi2tsx.r-1lxl8vk.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
-				)
-					? (presenceData.state = "Settings")
-					: false;
+				) && (presenceData.state = "Settings");
 
-				//Mentor chat
-				document.querySelector("iframe[title='Mentor Chat']")
-					? (presenceData.state = "Mentor chat")
-					: false;
+				document.querySelector("iframe[title='Mentor Chat']") &&
+					(presenceData.state = "Mentor chat");
 
-				//Chat
 				if (
 					document.querySelector(
 						"div.css-1dbjc4n.r-1p0dtai.r-qdtdgp.r-u8s1d.r-1ro7rbe.r-ipm5af > div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-u8s1d.r-ipm5af > div.css-1dbjc4n.r-1pi2tsx.r-13qz1uu > div.css-1dbjc4n.r-led734.r-1p0dtai.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
@@ -468,24 +507,25 @@ presence.on("UpdateData", async () => {
 					} else presenceData.state = "Chatting with a friend";
 				}
 
-				//Clan chat
 				document.querySelector(
 					"div.css-1dbjc4n.r-1p0dtai.r-qdtdgp.r-u8s1d.r-1ro7rbe.r-ipm5af > div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-u8s1d.r-ipm5af > div.css-1dbjc4n.r-13awgt0 > div.css-1dbjc4n.r-13awgt0.r-wk8lta > div.css-1dbjc4n.r-led734.r-1p0dtai.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
-				)
-					? (presenceData.state = "Clan chat")
-					: false;
+				) && (presenceData.state = "Clan chat");
 			}
 		}
 
-		//Custom Games
 		if (
 			document.querySelector(
 				"div.css-1dbjc4n.r-18u37iz.r-1777fci.r-p1pxzi.r-1u936jj.r-1a6n0ax"
 			)
 		) {
 			presenceData.details = "Browsing custom games";
-			if (!privacyMode)
-				presenceData.state = root.getAttribute("premid-username");
+			if (!privacyMode) {
+				!clanTag && root.hasAttribute("premid-clantag")
+					? (presenceData.state = `${root.getAttribute(
+							"premid-clantag"
+					  )}|${root.getAttribute("premid-username")}`)
+					: (presenceData.state = `${root.getAttribute("premid-username")}`);
+			}
 		}
 
 		//Lobby
@@ -507,16 +547,35 @@ presence.on("UpdateData", async () => {
 						"div.css-1dbjc4n.r-1awozwy.r-1p0dtai.r-1777fci.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-1pozq62 > div.css-1dbjc4n.r-1awozwy.r-1777fci > div.css-1dbjc4n.r-17bb2tj.r-1muvv40.r-127358a.r-1ldzwu0.r-1r8g8re.r-1acpoxo"
 					)
 				) {
-					const playerCountLobby = document.querySelectorAll(
-						"div.css-1dbjc4n.r-1awozwy.r-1777fci.r-1rngwi6"
-					)?.length;
+					const playerCountLobby = document.querySelector(
+							"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
+						)?.childElementCount,
+						spectatorCountLobby = document.querySelector(
+							"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
+						)?.childElementCount;
 
 					if (playerCountLobby === 1)
-						presenceData.state = `${playerCountLobby} player connected`;
-					else presenceData.state = `${playerCountLobby} players connected`;
+						presenceData.state = `${playerCountLobby} player`;
+					else presenceData.state = `${playerCountLobby} players`;
+
+					if (spectatorCountLobby === 1)
+						presenceData.state += `, ${spectatorCountLobby} spectator`;
+					else if (spectatorCountLobby > 1)
+						presenceData.state += `, ${spectatorCountLobby} spectators`;
+
+					if (presenceData.details.includes("friends") && playerCountLobby > 1)
+						root.setAttribute("premid-friends", "true");
+					else root.removeAttribute("premid-friends");
 				} else presenceData.state = "Loading...";
-				presenceData.smallImageText = `${root.getAttribute("premid-username")}`;
-			}
+				!clanTag && root.hasAttribute("premid-clantag")
+					? (presenceData.smallImageText = `Lobby (${root.getAttribute(
+							"premid-clantag"
+					  )}|${root.getAttribute("premid-username")})`)
+					: (presenceData.smallImageText = `Lobby (${root.getAttribute(
+							"premid-username"
+					  )})`);
+			} else presenceData.smallImageText = "Lobby";
+
 			presenceData.smallImageKey = "friends";
 		}
 
@@ -531,136 +590,179 @@ presence.on("UpdateData", async () => {
 					"div.css-1dbjc4n.r-1awozwy.r-1777fci > div.css-1dbjc4n.r-17bb2tj.r-1muvv40.r-127358a.r-1ldzwu0.r-1r8g8re.r-1acpoxo"
 				)
 			) {
-				//Pre-game Lobby
-				let preGameLobby = !!document.querySelector(
-						"div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-1loqt21.r-sga3zk.r-1sbahrg.r-1otgn73.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao"
-					),
-					lobbyChar: string;
-
-				if (!preGameLobby) {
-					preGameLobby = !!document.querySelector(
-						"div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-sga3zk.r-12c3ph5.r-1sbahrg.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao.r-1281ybr"
-					);
-
-					if (preGameLobby) {
-						lobbyChar = document.querySelector(
-							"div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-sga3zk.r-12c3ph5.r-1sbahrg.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao.r-1281ybr"
-						)?.textContent;
-					}
-				} else {
-					lobbyChar = document.querySelector(
-						"div.css-1dbjc4n.r-1j16mh1.r-1d6rzhh.r-1loqt21.r-sga3zk.r-1sbahrg.r-1otgn73.r-lrvibr.r-7a29px > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-901oao"
-					)?.textContent;
-				}
-
-				if (preGameLobby && lobbyChar === "") {
+				//Pre game lobby
+				if (
+					document
+						.querySelector(
+							"div.css-1dbjc4n.r-150rngu.r-18u37iz.r-16y2uox.r-1wbh5a2.r-lltvgl.r-buy8e9.r-1sncvnh"
+						)
+						.innerHTML.includes("")
+				) {
 					presenceData.details = "In pre-game lobby";
 					presenceData.smallImageKey = "stopwatch";
-					presenceData.smallImageText = "Waiting for the game to begin";
+					presenceData.smallImageText = "Waiting";
 					if (!privacyMode) {
-						let playerCountPreGame = document.querySelectorAll(
-							"div.css-1dbjc4n.r-kdyh1x.r-1loqt21.r-13awgt0.r-1064s9p.r-1udh08x.r-1otgn73.r-lrvibr[tabindex='0']"
-						)?.length;
-						playerCountPreGame = 16 - playerCountPreGame;
+						const playerCountPreGame = document.querySelector(
+								"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
+							)?.childElementCount,
+							spectatorCountPreGame = document.querySelector(
+								"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div"
+							)?.childElementCount;
 
 						if (playerCountPreGame === 1)
-							presenceData.state = `${playerCountPreGame} player connected`;
-						else presenceData.state = `${playerCountPreGame} players connected`;
+							presenceData.state = `${playerCountPreGame} player`;
+						else presenceData.state = `${playerCountPreGame} players`;
 
-						presenceData.smallImageText = `${root.getAttribute(
-							"premid-username"
-						)} - Waiting for the game to begin`;
+						if (spectatorCountPreGame === 1)
+							presenceData.state += `, ${spectatorCountPreGame} spectator`;
+						else if (spectatorCountPreGame > 1)
+							presenceData.state += `, ${spectatorCountPreGame} spectators`;
+
+						!clanTag && root.hasAttribute("premid-clantag")
+							? (presenceData.smallImageText = `Waiting (${root.getAttribute(
+									"premid-clantag"
+							  )}|${root.getAttribute("premid-username")})`)
+							: (presenceData.smallImageText = `Waiting (${root.getAttribute(
+									"premid-username"
+							  )})`);
 					}
 				} else {
 					//Playing
 					let gamemode: string,
 						playerState: string,
-						gameState = "",
-						gameOver = false,
 						rankedLeague = "unknown",
 						lang = "unknown";
 
 					if (!privacyMode) {
 						const gamemodeId = localStorage?.getItem("last-game-game-mode");
+
 						if (gamemodeId?.includes("sandbox")) gamemode = "Sandbox";
-						else if (gamemodeId?.includes("custom")) gamemode = "a Custom Game";
+						else if (gamemodeId?.includes("custom")) gamemode = "Custom Game";
+						else if (gamemodeId?.includes("crazy")) gamemode = "Crazy Game";
 						else if (gamemodeId?.includes("advanced")) {
-							gamemode = "an Advanced Game";
+							gamemode = "Advanced Game";
 							lang = languageCode(gamemodeId?.split("-")[1]);
-						} else if (gamemodeId?.includes("crazy")) gamemode = "a Crazy Game";
-						else if (gamemodeId?.includes("ranked")) {
-							gamemode = "a Ranked Game";
+						} else if (gamemodeId?.includes("ranked")) {
+							lang = languageCode(gamemodeId?.split("-")[0]);
+							gamemode = "Ranked Game";
 							if (gamemodeId?.endsWith("2")) rankedLeague = "Standard League";
 							else if (gamemodeId?.endsWith("3"))
 								rankedLeague = "Advanced League";
 						} else {
 							lang = languageCode(gamemodeId);
-							if (lang === "unknown") gamemode = "a game";
-							else gamemode = "a Quick Game";
+							if (lang === "unknown") gamemode = "In a game";
+							else gamemode = "Quick Game";
 						}
+
+						if (root.getAttribute("premid-friends") === "true")
+							gamemode += " with friends";
 					}
 
-					//Spectator
-					if (
-						document.querySelector(
-							"div.css-1dbjc4n.r-1niwhzg.r-vvn4in.r-u6sd8q.r-ehq7j7.r-1p0dtai.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-13qz1uu.r-1wyyakw[style*='/static/media/spectator_popcorn']"
-						)
-					) {
-						playerState = "Spectator";
-						presenceData.smallImageKey = "popcorn";
-						if (!privacyMode) {
-							let gameDetails = `Spectating ${gamemode}`;
-							if (lang !== "unknown" && gameLang)
-								gameDetails = gameDetails.concat(` in ${lang}`);
-							else if (rankedLeague !== "unknown")
-								gameDetails = gameDetails.concat(` in ${rankedLeague}`);
+					const spectatorList = document.querySelectorAll(
+						"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-t5dtr9.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu:nth-last-child(1) > div > div > div > div > div.css-1dbjc4n.r-13awgt0.r-18u37iz.r-1jkjb.r-1d4mawv > div:nth-child(2)"
+					);
 
-							presenceData.details = gameDetails;
-							presenceData.smallImageText = `${playerState} (${root.getAttribute(
-								"premid-username"
-							)})`;
-						} else {
-							presenceData.details = "Spectating a game";
-							presenceData.smallImageText = playerState;
+					for (const spectator of spectatorList) {
+						if (
+							spectator.textContent.replace("|", "") ===
+								root.getAttribute("premid-username") ||
+							spectator
+								.getAttribute("style")
+								?.includes("color: rgb(236, 64, 122)") ||
+							spectator
+								.getAttribute("style")
+								?.includes("color: rgb(255, 64, 129)")
+						) {
+							playerState = "Spectator";
+							presenceData.smallImageKey = "popcorn";
+							if (!privacyMode) {
+								let gameDetails = gamemode;
+								if (rankedLeague !== "unknown")
+									gameDetails += ` | ${rankedLeague}`;
+								if (lang !== "unknown" && gameLang) gameDetails += ` | ${lang}`;
+
+								presenceData.details = gameDetails;
+								!clanTag && root.hasAttribute("premid-clantag")
+									? (presenceData.smallImageText = `${playerState} (${root.getAttribute(
+											"premid-clantag"
+									  )}|${root.getAttribute("premid-username")})`)
+									: (presenceData.smallImageText = `${playerState} (${root.getAttribute(
+											"premid-username"
+									  )})`);
+							} else {
+								presenceData.details = "Spectating a game";
+								presenceData.smallImageText = playerState;
+							}
 						}
-					} else {
-						if (!privacyMode) {
-							let details = `Playing ${gamemode}`;
-							if (lang !== "unknown" && gameLang)
-								details = details.concat(` in ${lang}`);
-							else if (rankedLeague !== "unknown")
-								details = details.concat(` in ${rankedLeague}`);
+					}
+					//Player
+					if (!privacyMode) {
+						let gameDetails = gamemode;
+						if (rankedLeague !== "unknown") gameDetails += ` | ${rankedLeague}`;
+						if (lang !== "unknown" && gameLang) gameDetails += ` | ${lang}`;
+						presenceData.details = gameDetails;
 
-							presenceData.details = details;
-						} else presenceData.details = "Playing a game";
-
-						if (!privacyMode) {
+						const playerList = document.querySelectorAll(
+							"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-5oul0u.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu > div > div > div > div > div.css-1dbjc4n.r-13awgt0.r-18u37iz.r-1jkjb.r-1d4mawv > div:nth-child(2)"
+						);
+						for (const player of playerList) {
 							if (
-								document.querySelector(
-									"div.css-1dbjc4n.r-1mlwlqe.r-1udh08x.r-u8s1d.r-417010 > div.css-1dbjc4n.r-1niwhzg.r-vvn4in.r-u6sd8q.r-ehq7j7.r-1p0dtai.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-13qz1uu.r-1wyyakw[style*='/static/media/game_over_tied']"
-								)
+								(player.textContent.replace("|", "") ===
+									root.getAttribute("premid-username") ||
+									player
+										.getAttribute("style")
+										?.includes("color: rgb(236, 64, 122)") ||
+									player
+										.getAttribute("style")
+										?.includes("color: rgb(255, 64, 129)")) &&
+								player.getAttribute("style")?.includes("line-through")
 							) {
 								playerState = "Dead";
 								presenceData.smallImageKey = "skull";
-							} else {
+							} else if (
+								player.textContent.replace("|", "") ===
+									root.getAttribute("premid-username") ||
+								player
+									.getAttribute("style")
+									?.includes("color: rgb(236, 64, 122)") ||
+								player
+									.getAttribute("style")
+									?.includes("color: rgb(255, 64, 129)")
+							) {
 								playerState = "Alive";
 								presenceData.smallImageKey = "heart";
 							}
-
-							presenceData.smallImageText = `${playerState} (${root.getAttribute(
-								"premid-username"
-							)})`;
 						}
-					}
+
+						!clanTag && root.hasAttribute("premid-clantag")
+							? (presenceData.smallImageText = `${playerState} (${root.getAttribute(
+									"premid-clantag"
+							  )}|${root.getAttribute("premid-username")})`)
+							: (presenceData.smallImageText = `${playerState} (${root.getAttribute(
+									"premid-username"
+							  )})`);
+					} else presenceData.details = "Playing a game";
 
 					//Game Over
-					document.querySelector(
-						"div.css-1dbjc4n.r-1p0dtai.r-1loqt21.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-1otgn73.r-lrvibr.r-1pwx3x0 > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-1dbjc4n.r-6dt33c.r-13qz1uu"
-					)
-						? ((presenceData.details = "Game over"),
-						  delete presenceData.smallImageKey,
-						  (gameOver = true))
-						: false;
+					if (
+						document.querySelector(
+							"div.css-1dbjc4n.r-1p0dtai.r-1loqt21.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-1otgn73.r-lrvibr.r-1pwx3x0 > div.css-1dbjc4n.r-1awozwy.r-1pi2tsx.r-1777fci.r-13qz1uu > div.css-1dbjc4n.r-6dt33c.r-13qz1uu"
+						)
+					) {
+						!privacyMode
+							? (presenceData.details = `Game Over | ${presenceData.details}`)
+							: (presenceData.details = "Game Over");
+
+						playerState !== "Spectator" &&
+							(document
+								.querySelector(
+									"div.css-1dbjc4n.r-13awgt0.r-1mlwlqe.r-uvuy5l.r-1udh08x.r-417010 > div.css-1dbjc4n.r-1niwhzg.r-vvn4in.r-u6sd8q.r-x3cy2q.r-1p0dtai.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-13qz1uu.r-1wyyakw"
+								)
+								.getAttribute("style")
+								.includes("banner_defeat_middle")
+								? (playerState = "Defeat")
+								: (playerState = "Victory"));
+					}
 
 					//Player count
 					if (!privacyMode) {
@@ -679,25 +781,31 @@ presence.on("UpdateData", async () => {
 								).length /
 									2;
 
-						if (gameOver === false && playerState !== "Spectator")
-							gameState = `${playerState} - `;
+						presenceData.state = playerState;
 
-						if (aliveCount === 1) {
-							gameState = gameState.concat(
-								`${aliveCount}/${playerCount} player left`
-							);
-						} else {
-							gameState = gameState.concat(
-								`${aliveCount}/${playerCount} players left`
-							);
-						}
+						aliveCount === 1
+							? (presenceData.state += ` - ${aliveCount}/${playerCount} player left`)
+							: (presenceData.state += ` - ${aliveCount}/${playerCount} players left`);
 					}
-					presenceData.state = gameState;
 				}
 			} else {
 				presenceData.details = "In pre-game lobby";
-				if (!privacyMode) presenceData.state = "Loading...";
+				privacyMode || (presenceData.state = "Loading...");
 			}
+		}
+		if (
+			//Role wheel
+			document.querySelector(
+				"div.css-1dbjc4n.r-1awozwy.r-1p0dtai.r-6koalj.r-eqz5dr.r-1777fci.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-1pozq62"
+			) ||
+			//Picking base or advanced role
+			document.querySelector(
+				"div.css-1dbjc4n.r-1awozwy.r-1xfd6ze.r-eqz5dr.r-edyy15.r-1dye5f7"
+			)
+		) {
+			presenceData.details = "Game is starting...";
+			presenceData.state = "Getting a role";
+			presenceData.smallImageKey = "https://i.imgur.com/sdGcq14.gif";
 		}
 	}
 	presence.setActivity(presenceData);
