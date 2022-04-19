@@ -104,9 +104,7 @@ async function addConsultArticleButton(
 	}
 }
 
-async function addConsultHelpCenterButton(
-	presenceData: PresenceData
-) {
+async function addConsultHelpCenterButton(presenceData: PresenceData) {
 	if (!presenceData.buttons) {
 		presenceData.buttons = [
 			{
