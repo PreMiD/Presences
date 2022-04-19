@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 	presenceData.startTimestamp = elapsed;
 
 	if (document.location.hostname === "help.wolfy.fr") {
-		if (path.includes("/article") && path.split("/")[2]) {
+		if (path.includes("/article") && path.split("/")[3]) {
 			presenceData.details = "Lit l'article ⤵️";
 			presenceData.state = document.querySelector(
 				"h1.csh-navigation-title-item-inner"
