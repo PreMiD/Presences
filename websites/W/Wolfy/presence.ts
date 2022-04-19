@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "721798189111443537"
+	clientId: "501842028569559061"
 });
 
 let path,
@@ -111,7 +111,7 @@ async function handleCheckingLeaderboard(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "wf"
+		largeImageKey: "logo"
 	};
 
 	path = document.location.pathname;
