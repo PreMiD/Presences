@@ -69,6 +69,43 @@ async function addVisitProfilButton(
 	}
 }
 
+async function addConsultArticleButton(
+	presenceData: PresenceData,
+	url: string
+) {
+	if (!presenceData.buttons) {
+		presenceData.buttons = [
+			{
+				label: "Consulter l'article",
+				url
+			}
+		];
+	} else {
+		presenceData.buttons[1] = {
+			label: "Consulter l'article",
+			url
+		};
+	}
+}
+
+async function addConsultHelpCenterButton(
+	presenceData: PresenceData
+) {
+	if (!presenceData.buttons) {
+		presenceData.buttons = [
+			{
+				label: "Consulter le centre d'aide",
+				url: "https://help.wolfy.fr"
+			}
+		];
+	} else {
+		presenceData.buttons[1] = {
+			label: "Consulter le centre d'aide",
+			url: "https://help.wolfy.fr"
+		};
+	}
+}
+
 async function handleCheckingLeaderboard(
 	presenceData: PresenceData,
 	username?: string
@@ -126,7 +163,20 @@ presence.on("UpdateData", async () => {
 
 	presenceData.startTimestamp = elapsed;
 
-	if (
+	if (document.location.hostname === "help.wolfy.fr") {
+		if (path.includes("/article") && path.split("/")[2]) {
+			presenceData.details = "Lit l'article ⤵️";
+			presenceData.state = document.querySelector(
+				"h1.csh-navigation-title-item-inner"
+			)?.textContent;
+			await addConsultArticleButton(presenceData, document.location.href);
+			await addConsultHelpCenterButton(presenceData);
+		} else {
+			presenceData.details = "Consulte le centre d'aide";
+			presenceData.state = "Page d'accueil";
+			await addConsultHelpCenterButton(presenceData);
+		}
+	} else if (
 		path.includes("/articles/") &&
 		path.split("/")[2] !== null &&
 		path.split("/")[2].length > 1
