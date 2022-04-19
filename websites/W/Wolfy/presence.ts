@@ -75,6 +75,7 @@ async function handleCheckingLeaderboard(
 ) {
 	presenceData.smallImageKey = "search";
 	presenceData.smallImageText = "Consulte le classement";
+
 	if (!username) {
 		const classementType =
 			document.querySelector("div.Leaderboard_moonLeaderboard__3U2H7") !== null
@@ -130,7 +131,7 @@ presence.on("UpdateData", async () => {
 		path.split("/")[2] !== null &&
 		path.split("/")[2].length > 1
 	) {
-		presenceData.details = "Lis un article";
+		presenceData.details = "Lis l'article ⤵️";
 		presenceData.smallImageKey = "reading";
 		presenceData.smallImageText = "Lis un article";
 		presenceData.state = document.querySelector("body h1").textContent;
@@ -199,7 +200,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Consulte la Boutique";
 				break;
 			case "/articles":
-				presenceData.state = "Actualités";
+				presenceData.state = "Consulte les dernières actualités";
 				presenceData.smallImageKey = "reading";
 				presenceData.smallImageText = "En train de lire";
 				break;
