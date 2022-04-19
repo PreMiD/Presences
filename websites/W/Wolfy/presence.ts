@@ -54,7 +54,7 @@ async function addVisitProfilButton(
 	if (!(await presence.getSetting("visitProfileButton"))) return;
 
 	let label = `Visiter le profil de ${username}`;
-	if(label.length > 32) label = label.slice(0, 31) + "…";
+	if (label.length > 32) label = `${label.slice(0, 31)}…`;
 
 	if (!presenceData.buttons) {
 		presenceData.buttons = [
