@@ -49,7 +49,7 @@ class AnimeStorage {
 		else if (!listing) return;
 		else {
 			this.list[title] = {
-				id: Number(document.querySelector('meta[name=id]').content),
+				id: Number(document.querySelector("meta[name=id]").content),
 				listing,
 				time: Date.now()
 			};
