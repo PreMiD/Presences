@@ -73,6 +73,8 @@ async function handleCheckingLeaderboard(
 	presenceData: PresenceData,
 	username?: string
 ) {
+	presenceData.smallImageKey = "search";
+	presenceData.smallImageText = "Consulte le classement";
 	if (!username) {
 		const classementType =
 			document.querySelector("div.Leaderboard_moonLeaderboard__3U2H7") !== null
