@@ -24,25 +24,47 @@ function getTimestamps(audioTime: number, audioDuration: string): number[] {
 	];
 }
 
-async function addJoinGameButton(presenceData: PresenceData, gameId: string) {
-	if (!(await presence.getSetting("joinGameButton"))) return;
+function addButton(presenceData: PresenceData, label: string, url: string) {
 	if (!presenceData.buttons) {
 		presenceData.buttons = [
 			{
-				label: `(${
-					document.querySelector("div.Header_timer__36MsP")?.textContent
-				}) Rejoindre la partie`,
-				url: `https://wolfy.fr/game/${gameId}`
+				label,
+				url
 			}
 		];
 	} else {
 		presenceData.buttons[1] = {
-			label: `(${
-				document.querySelector("div.Header_timer__36MsP")?.textContent
-			}) Rejoindre la partie`,
-			url: `https://wolfy.fr/game/${gameId}`
+			label,
+			url
 		};
 	}
+}
+
+function addConsultArticleButton(presenceData: PresenceData, url: string) {
+	addButton(presenceData, "Consulter l'article", url);
+}
+
+function addConsultCategoryButton(presenceData: PresenceData, url: string) {
+	addButton(presenceData, "Consulter la catégorie", url);
+}
+
+async function addJoinGameButton(presenceData: PresenceData, gameId: string) {
+	if (!(await presence.getSetting("joinGameButton"))) return;
+	addButton(
+		presenceData,
+		`(${
+			document.querySelector("div.Header_timer__36MsP")?.textContent
+		}) Rejoindre la partie`,
+		`https://wolfy.fr/game/${gameId}`
+	);
+}
+
+function addVisitHelpCenterButton(presenceData: PresenceData) {
+	addButton(
+		presenceData,
+		"Consulter le centre d'aide",
+		"https://help.wolfy.fr"
+	);
 }
 
 async function addVisitProfilButton(
@@ -54,70 +76,11 @@ async function addVisitProfilButton(
 	let label = `Visiter le profil de ${username}`;
 	if (label.length > 32) label = `${label.slice(0, 31)}…`;
 
-	if (!presenceData.buttons) {
-		presenceData.buttons = [
-			{
-				label,
-				url: `https://wolfy.fr/leaderboard/${username}`
-			}
-		];
-	} else {
-		presenceData.buttons[1] = {
-			label,
-			url: `https://wolfy.fr/leaderboard/${username}`
-		};
-	}
+	addButton(presenceData, label, `https://wolfy.fr/profile/${username}`);
 }
 
-async function addVisitWolfyButton(presenceData: PresenceData) {
-	if (!presenceData.buttons) {
-		presenceData.buttons = [
-			{
-				label: "Visiter le site de Wolfy",
-				url: "https://wolfy.fr"
-			}
-		];
-	} else {
-		presenceData.buttons[1] = {
-			label: "Visiter le site de Wolfy",
-			url: "https://wolfy.fr"
-		};
-	}
-}
-
-async function addConsultArticleButton(
-	presenceData: PresenceData,
-	url: string
-) {
-	if (!presenceData.buttons) {
-		presenceData.buttons = [
-			{
-				label: "Consulter l'article",
-				url
-			}
-		];
-	} else {
-		presenceData.buttons[1] = {
-			label: "Consulter l'article",
-			url
-		};
-	}
-}
-
-async function addConsultHelpCenterButton(presenceData: PresenceData) {
-	if (!presenceData.buttons) {
-		presenceData.buttons = [
-			{
-				label: "Consulter le centre d'aide",
-				url: "https://help.wolfy.fr"
-			}
-		];
-	} else {
-		presenceData.buttons[1] = {
-			label: "Consulter le centre d'aide",
-			url: "https://help.wolfy.fr"
-		};
-	}
+function addVisitWolfyButton(presenceData: PresenceData) {
+	addButton(presenceData, "Visiter le site de Wolfy", "https://wolfy.fr");
 }
 
 async function handleCheckingLeaderboard(
@@ -183,8 +146,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"h1.csh-navigation-title-item-inner"
 			)?.textContent;
-			await addConsultArticleButton(presenceData, document.location.href);
-			await addConsultHelpCenterButton(presenceData);
+			addConsultArticleButton(presenceData, document.location.href);
+			addVisitHelpCenterButton(presenceData);
 		} else {
 			presenceData.details = "Consulte le centre d'aide";
 			presenceData.state = "Page d'accueil";
@@ -225,7 +188,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state += ` (${
 				document.querySelector("div.Header_timer__36MsP")?.textContent
 			})`;
-			await addJoinGameButton(presenceData, path.split("/")[2]);
+			addJoinGameButton(presenceData, path.split("/")[2]);
 		}
 
 		const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);
