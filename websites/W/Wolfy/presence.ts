@@ -132,9 +132,12 @@ presence.on("UpdateData", async () => {
 		path.includes("/articles/") &&
 		path.split("/")[2] !== null &&
 		path.split("/")[2].length > 1
-	)
+	) {
+		presenceData.details = "Lis un article";
+		presenceData.smallImageKey = "reading";
+		presenceData.smallImageText = "Lis un article";
 		presenceData.state = document.querySelector("body h1").textContent;
-	else if (
+	} else if (
 		path.includes("/game/") &&
 		path.split("/")[2] !== null &&
 		path.split("/")[2].length > 1
