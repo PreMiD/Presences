@@ -39,7 +39,7 @@
 		"enquirer": "^2.3.6",
 		"eslint": "^8.13.0",
 		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-no-one-time-vars": "^2.3.0",
+		"eslint-plugin-no-one-time-vars": "^2.4.0",
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-unicorn": "^42.0.0",
 		"glob": "^8.0.1",
