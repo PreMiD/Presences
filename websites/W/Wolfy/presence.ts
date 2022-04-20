@@ -87,7 +87,7 @@ async function handleCheckingLeaderboard(
 	presenceData: PresenceData,
 	username?: string
 ) {
-	presenceData.smallImageKey = "search";
+	presenceData.smallImageKey = "leaderboard";
 	presenceData.smallImageText = "Consulte le classement";
 
 	if (!username) {
@@ -216,12 +216,16 @@ presence.on("UpdateData", async () => {
 
 		switch (path) {
 			case "/skin":
+				presenceData.smallImageKey = "skin";
+				presenceData.smallImageText = "Choisis ton skin";
 				presenceData.state = "Consulte ses Skins";
 				break;
 			case "/settings":
 				presenceData.state = "Change ses paramètres";
 				break;
 			case "/shop":
+				presenceData.smallImageKey = "shop";
+				presenceData.smallImageText = "Achete des skins";
 				presenceData.state = "Consulte la Boutique";
 				break;
 			case "/articles":
