@@ -49,12 +49,7 @@ class AnimeStorage {
 		else if (!listing) return;
 		else {
 			this.list[title] = {
-				id: parseInt(
-					(
-						document.querySelectorAll(".modal-body")[1].lastElementChild
-							.lastElementChild as HTMLAnchorElement
-					).href.split("/a/")[1]
-				),
+				id: Number(document.querySelector("meta[name=id]").content),
 				listing,
 				time: Date.now()
 			};
