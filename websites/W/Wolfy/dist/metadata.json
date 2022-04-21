@@ -18,11 +18,11 @@
 		"nl": "Een online weerwolf-kaartspel voor meerdere spelers. Wakker blijven."
 	},
 	"url": [
-		"help.wolfy.fr", // @deprecated, will soon redirect too help.wolfy.net
+		"help.wolfy.fr",
 		"help.wolfy.net", 
-		"wolfy.fr", // @deprecated, will soon redirect too wolfy.net
+		"wolfy.fr",
 		"wolfy.net",
-		"www.wolfy.fr", // @deprecated, will soon redirect too www.wolfy.net
+		"www.wolfy.fr",
 		"www.wolfy.net"
 	],
 	"version": "1.2.0",
