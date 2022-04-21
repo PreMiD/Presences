@@ -23,7 +23,7 @@
 		"wolfy.fr", // @deprecated, will soon redirect too wolfy.net
 		"wolfy.net",
 		"www.wolfy.fr", // @deprecated, will soon redirect too www.wolfy.net
-		"www.wolfy.net",
+		"www.wolfy.net"
 	],
 	"version": "1.2.0",
 	"logo": "https://i.imgur.com/TFduNvD.png",
