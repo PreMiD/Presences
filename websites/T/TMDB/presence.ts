@@ -9,113 +9,95 @@ const presence: Presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "tmdb_logo_lg",
-		startTimestamp
+			largeImageKey: "tmdb_logo_lg",
+			startTimestamp
 		},
 		{ pathname } = window.location;
 
 	if (pathname.startsWith("/u")) {
-
 		const user = pathname.split("/")[2];
-		
-		if (pathname.includes("watchlist")) {
+
+		if (pathname.includes("watchlist"))
 			presenceData.details = `Viewing ${user}'s watchlist`;
-		} else if (pathname.includes("favorites")) {
+		else if (pathname.includes("favorites"))
 			presenceData.details = `Viewing ${user}'s favorites`;
-		} else if (pathname.includes("lists")) {
+		else if (pathname.includes("lists"))
 			presenceData.details = `Viewing ${user}'s lists`;
-		} else if (pathname.includes("activity")) {
+		else if (pathname.includes("activity"))
 			presenceData.details = `Viewing ${user}'s activity`;
-		} else if (pathname.includes("discussions")) {
+		else if (pathname.includes("discussions"))
 			presenceData.details = `Reading ${user}'s discussions`;
-		} else if (pathname.includes("ratings")) {
+		else if (pathname.includes("ratings"))
 			presenceData.details = `Viewing ${user}'s ratings`;
-		} else if (pathname.includes("favorites")) {
-			presenceData.details = `Viewing ${user}'s favorites`;
-		} else if (pathname.includes("recommendations")) {
+		else if (pathname.includes("recommendations"))
 			presenceData.details = `Viewing ${user}'s recommendations`;
-		} else if (pathname.includes("events")) {
+		else if (pathname.includes("events"))
 			presenceData.details = `Viewing ${user}'s events`;
-		} else { 
-			presenceData.details = `Viewing ${user}'s profile`; 
-		}
-
+		else presenceData.details = `Viewing ${user}'s profile`;
 	} else if (pathname.startsWith("/movie")) {
-
-		if (pathname.startsWith("/movie/now-playing")) {
+		if (pathname.startsWith("/movie/now-playing"))
 			presenceData.details = "Viewing now playing movies";
-		} else if (pathname.startsWith("/movie/upcoming")) {
+		else if (pathname.startsWith("/movie/upcoming"))
 			presenceData.details = "Viewing upcoming movies";
-		} else if (pathname.startsWith("/movie/top-rated")) {
+		else if (pathname.startsWith("/movie/top-rated"))
 			presenceData.details = "Viewing top rated movies";
-		} else if (pathname.startsWith("/movie/new")) {
+		else if (pathname.startsWith("/movie/new"))
 			presenceData.details = "Adding a new movie";
-		} else if (pathname.split("/").length === 3) {
-			const movie = document.querySelector(`h2 > [href="${pathname}"]`).textContent.trim();
-			presenceData.details = `Viewing ${movie}`;
+		else if (pathname.split("/").length === 3) {
+			presenceData.details = `Viewing ${document
+				.querySelector(`h2 > [href="${pathname}"]`)
+				.textContent.trim()}`;
 		} else if (pathname.includes("/reviews")) {
 			const pathArr = pathname.split("/");
 			pathArr.length = 3;
-			const movie = document.querySelector(`h2 > [href="${pathArr.join("/")}"]`).textContent.trim();
-			presenceData.details = `Reading ${movie}'s reviews`;
+			presenceData.details = `Reading ${document
+				.querySelector(`h2 > [href="${pathArr.join("/")}"]`)
+				.textContent.trim()}'s reviews`;
 		} else if (pathname.includes("/discuss")) {
-			const movie = document.querySelector("h2").textContent.trim();
-			presenceData.details = `Reading ${movie}`;
-		} else {
-			presenceData.details = "Viewing movies";
-		}
-
+			presenceData.details = `Reading ${document
+				.querySelector("h2")
+				.textContent.trim()}`;
+		} else presenceData.details = "Viewing movies";
 	} else if (pathname.startsWith("/tv")) {
-		
-		if (pathname.startsWith("/tv/airing-today")) {
+		if (pathname.startsWith("/tv/airing-today"))
 			presenceData.details = "Viewing airing today TV shows";
-		} else if (pathname.startsWith("/tv/on-the-air")) {
+		else if (pathname.startsWith("/tv/on-the-air"))
 			presenceData.details = "Viewing airing TV shows";
-		} else if (pathname.startsWith("/tv/top-rated")) {
+		else if (pathname.startsWith("/tv/top-rated"))
 			presenceData.details = "Viewing top rated TV shows";
-		} else if (pathname.startsWith("/tv/new")) {
+		else if (pathname.startsWith("/tv/new"))
 			presenceData.details = "Adding a new TV show";
-		} else if (pathname.split("/").length === 3) {
-			const tv = document.querySelector(`h2 > [href="${pathname}"]`).textContent.trim();
-			presenceData.details = `Viewing ${tv}`;
+		else if (pathname.split("/").length === 3) {
+			presenceData.details = `Viewing ${document
+				.querySelector(`h2 > [href="${pathname}"]`)
+				.textContent.trim()}`;
 		} else if (pathname.includes("/reviews")) {
 			const pathArr = pathname.split("/");
 			pathArr.length = 3;
-			const tv = document.querySelector(`h2 > [href="${pathArr.join("/")}"]`).textContent.trim();
-			presenceData.state = `Reading ${tv}'s reviews`;
+			presenceData.state = `Reading ${document
+				.querySelector(`h2 > [href="${pathArr.join("/")}"]`)
+				.textContent.trim()}'s reviews`;
 		} else if (pathname.includes("/discuss")) {
-			const tv = document.querySelector("h2").textContent.trim();
-			presenceData.details = `Reading ${tv}`;
-		} else {
-			presenceData.details = "Viewing TV shows";
-		}
-
+			presenceData.details = `Reading ${document
+				.querySelector("h2")
+				.textContent.trim()}`;
+		} else presenceData.details = "Viewing TV shows";
 	} else if (pathname.startsWith("/person")) {
 		if (pathname.split("/").length === 3) {
-			const person = document.querySelector(`h2 > [href="${pathname}"]`).textContent.trim();
-			presenceData.details = `Viewing ${person}`;
-		} else {
-			presenceData.details = "Viewing Popular People list";
-		}
-
-	} else if (pathname.startsWith("/discuss")) {
+			presenceData.details = `Viewing ${document
+				.querySelector(`h2 > [href="${pathname}"]`)
+				.textContent.trim()}`;
+		} else presenceData.details = "Viewing Popular People list";
+	} else if (pathname.startsWith("/discuss"))
 		presenceData.details = "Viewing discussions";
-
-	} else if (pathname.startsWith("/leaderboard")) {
+	else if (pathname.startsWith("/leaderboard"))
 		presenceData.details = "Viewing leaderboard";
-
-
-	} else if (pathname.startsWith("/talk")) {
+	else if (pathname.startsWith("/talk"))
 		presenceData.details = "Viewing TMDB support";
-
-	} else if (pathname.startsWith("/search")) {
+	else if (pathname.startsWith("/search")) {
 		const query = (document.querySelector("input") as HTMLInputElement).value;
-		if (query.length > 0) {
-			presenceData.details = `Searching for ${query}`;
-		} else {
-			presenceData.details = "Searching";
-		}
-	
+		if (query.length > 0) presenceData.details = `Searching for ${query}`;
+		else presenceData.details = "Searching";
 	} else if (pathname.startsWith("/")) {
 		presenceData.details = (await strings).browsing;
 		presenceData.state = "Home";
