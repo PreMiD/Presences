@@ -187,7 +187,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state += ` (${
 				document.querySelector("div.Header_timer__36MsP")?.textContent
 			})`;
-			addJoinGameButton(presenceData, path.split("/")[2]);
+			await addJoinGameButton(presenceData, path.split("/")[2]);
 		}
 
 		const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);
