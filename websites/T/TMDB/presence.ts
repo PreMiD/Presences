@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.startsWith("/talk"))
 		presenceData.details = "Viewing TMDB support";
 	else if (pathname.startsWith("/search")) {
-		const query = (document.querySelector("input") as HTMLInputElement).value;
+		const query = (document.querySelector<HTMLInputElement>("input")).value;
 		if (query.length > 0) presenceData.details = `Searching for ${query}`;
 		else presenceData.details = "Searching";
 	} else if (pathname.startsWith("/")) {
