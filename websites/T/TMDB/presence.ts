@@ -10,7 +10,7 @@ const presence: Presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "tmdb_logo_lg",
-			startTimestamp
+			startTimestamp: browsingTimestamp
 		},
 		{ pathname } = window.location;
 
@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.startsWith("/talk"))
 		presenceData.details = "Viewing TMDB support";
 	else if (pathname.startsWith("/search")) {
-		const query = (document.querySelector<HTMLInputElement>("input")).value;
+		const query = document.querySelector<HTMLInputElement>("input").value;
 		if (query.length > 0) presenceData.details = `Searching for ${query}`;
 		else presenceData.details = "Searching";
 	} else if (pathname.startsWith("/")) {
