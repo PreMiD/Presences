@@ -1,7 +1,7 @@
 const presence: Presence = new Presence({
 		clientId: "966643093308837938"
 	}),
-	startTimestamp: number = Math.floor(Date.now() / 1000),
+	browsingTimestamp = Math.floor(Date.now() / 1000),
 	strings = presence.getStrings({
 		browsing: "presence.activity.browsing",
 		reading: "presence.activity.reading"
