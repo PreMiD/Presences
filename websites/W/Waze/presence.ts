@@ -29,7 +29,7 @@ const presence = new Presence({
 		"/press/": "Press"
 	};
 
-let path: string, start: string, end: string, mapelem : string, maploc : string;
+let path: string, start: string, end: string, mapelem: string, maploc: string;
 
 function fnd() {
 	path = window.location.pathname;
@@ -48,25 +48,27 @@ function fnd() {
 
 		presenceData.details = "Planning a route";
 		presenceData.state = `From ${start} to ${end}`;
-	} 
-	else if (path.includes("/editor")) {
-		
-		if (document.querySelector<HTMLSpanElement>("#segment-edit-general > ul > li.length-attribute")) {
-			let fullRoadName = document.querySelector<HTMLSpanElement>(
-				"#segment-edit-general > div.address-edit > div > div.clearfix.preview > div.full-address-container > span"
-			)?.textContent ?? "Roads";
-			let roadName = fullRoadName.split(",");
-			mapelem = roadName[0]; 
-		  } else if (document.querySelector<HTMLSpanElement>("#venue-edit-general > form > div:nth-child(1) > div:nth-child(2)")) {
-			let placecat = document.querySelectorAll(".category-name")
-			if (placecat[0].innerHTML.length == 0) {
-				mapelem = "a place";
-			} else {
-				mapelem = "a " + placecat[0].innerHTML.toLowerCase();
-			}
-		  } else {
-			  mapelem = "something";
-		  }
+	} else if (path.includes("/editor")) {
+		if (
+			document.querySelector<HTMLSpanElement>(
+				"#segment-edit-general > ul > li.length-attribute"
+			)
+		) {
+			const fullRoadName =
+				document.querySelector<HTMLSpanElement>(
+					"#segment-edit-general > div.address-edit > div > div.clearfix.preview > div.full-address-container > span"
+				)?.textContent ?? "Roads";
+			mapelem = fullRoadName.split(",")[0];
+		} else if (
+			document.querySelector<HTMLSpanElement>(
+				"#venue-edit-general > form > div:nth-child(1) > div:nth-child(2)"
+			)
+		) {
+			const placecat = document.querySelectorAll(".category-name");
+			if (placecat[0].innerHTML.length == 0) mapelem = "a place";
+			else mapelem = `a ${placecat[0].innerHTML.toLowerCase()}`;
+		} else mapelem = "something";
+
 		maploc =
 			document.querySelector<HTMLSpanElement>(
 				"#topbar-container > div > div > div.location-info-region > div > span"
