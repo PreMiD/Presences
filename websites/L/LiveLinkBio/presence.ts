@@ -1,12 +1,12 @@
 const presence = new Presence({
-	clientId: "966711989533544580"
-});
+		clientId: "966711989533544580"
+	}),
+	browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo"
 		},
-		browsingStamp = Math.floor(Date.now() / 1000),
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons")
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 	if (privacy) presenceData.details = "Browsing...";
 	else if (document.location.hostname.includes("docs.livelinkbio.com")) {
 		presenceData.startTimestamp = browsingStamp;
-		if (search && search.value !== "") {
+		if (search && !search.value) {
 			presenceData.details = "Searching For:";
 			presenceData.state = search.value;
 		} else {
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 			).textContent;
 		}
 	} else if (document.location.hostname.includes("status.livelinkbio.com"))
-		presenceData.details = "LiveLinkBio's Status";
+		presenceData.details = "Status";
 	else {
 		const type = document.querySelector(
 				"body > main > section > div.row.mb-4 > div.col-12.col-lg.d-flex.align-items-center.mb-3.mb-lg-0 > h1"
@@ -43,39 +43,35 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Dashboard";
 			title = "Dashboard";
 		} else if (document.location.pathname.includes("link")) {
-			const link = document.querySelector("#link_url").textContent;
-			if (document.location.pathname.endsWith("statistics")) {
+			presenceData.state = document.querySelector("#link_url").textContent;
+			if (document.location.pathname.endsWith("statistics"))
 				presenceData.details = "Statistics of Link:";
-				presenceData.state = link;
-			} else {
-				presenceData.details = "Editing Link:";
-				presenceData.state = link;
-			}
+			else presenceData.details = "Editing Link:";
 		} else if (document.querySelector("body").className.includes("open")) {
-			title = document
-				.querySelectorAll('[class="modal-title"]')[1]
-				.textContent.replace("Edit", "");
-			presenceData.details = `${document
-				.querySelectorAll('[class="modal-title"]')[1]
-				.textContent.replace("Edit", "")}:`;
+			const modal = document.querySelectorAll('[class="modal-title"]')[1]
+				.textContent;
+			title = modal.replace("Edit", "");
+			presenceData.details = `${modal.replace("Edit", "")}:`;
 			presenceData.state =
 				document.querySelector<HTMLInputElement>("#update_name").value;
 		} else if (type && !active) {
 			title = type.textContent.trim();
-			presenceData.details = `All ${type.textContent.trim()}`;
+			presenceData.details = `All ${title}`;
 		} else if (active) {
 			title = active.textContent.trim();
-			presenceData.details = active.textContent.trim();
+			presenceData.details = title;
 		}
 	}
 	if (!privacy && buttons && document.location.pathname !== "/") {
 		if (!title) title = "Page";
-		presenceData.buttons = [
-			{
-				label: `View ${title}`,
-				url: document.location.href
-			}
-		];
+		if (presenceData.buttons[0].label !== `View ${title}`) {
+			presenceData.buttons = [
+				{
+					label: `View ${title}`,
+					url: document.location.href
+				}
+			];
+		}
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
