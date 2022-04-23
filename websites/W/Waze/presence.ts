@@ -29,7 +29,7 @@ const presence = new Presence({
 		"/press/": "Press"
 	};
 
-let path: string, start: string, end: string, mapelem: string, maploc: string;
+let path: string, start: string, end: string, mapElem: string, mapLoc: string;
 
 function fnd() {
 	path = window.location.pathname;
@@ -58,24 +58,24 @@ function fnd() {
 				document.querySelector<HTMLSpanElement>(
 					"#segment-edit-general > div.address-edit > div > div.clearfix.preview > div.full-address-container > span"
 				)?.textContent ?? "Roads";
-			mapelem = fullRoadName.split(",")[0];
+			mapElem = fullRoadName.split(",")[0];
 		} else if (
 			document.querySelector<HTMLSpanElement>(
 				"#venue-edit-general > form > div:nth-child(1) > div:nth-child(2)"
 			)
 		) {
 			const placecat = document.querySelectorAll(".category-name");
-			if (placecat[0].innerHTML.length == 0) mapelem = "a place";
-			else mapelem = `a ${placecat[0].innerHTML.toLowerCase()}`;
-		} else mapelem = "something";
+			if (placecat[0].innerHTML.length == 0) mapElem = "a place";
+			else mapElem = `a ${placecat[0].innerHTML.toLowerCase()}`;
+		} else mapElem = "something";
 
-		maploc =
+		mapLoc =
 			document.querySelector<HTMLSpanElement>(
 				"#topbar-container > div > div > div.location-info-region > div > span"
 			)?.textContent ?? "somewhere";
 
-		presenceData.details = `Editing ${mapelem} on the map`;
-		presenceData.state = `Near ${maploc}`;
+		presenceData.details = `Editing ${mapElem} on the map`;
+		presenceData.state = `Near ${mapLoc}`;
 	} else {
 		presenceData.details = "Browsing";
 		presenceData.state = pages[path] ?? null;
