@@ -406,24 +406,14 @@ presence.on("UpdateData", async () => {
 		) ||
 		document.querySelector(
 			"span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
-		)
+		) ||
+		document.querySelectorAll('[data-pagelet="ProfileActions"]')[0]
 	) {
 		const hasCommentInput = document.querySelector(
 			"div.m9osqain.a5q79mjw.gy2v8mqq.jm1wdb64.k4urcfbm.qv66sw1b span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7"
 		);
-		let name = document
-			.querySelector(
-				"span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
-			)
-			?.textContent.trim();
-
-		if (!hasCommentInput) {
-			name = document
-				.querySelector(
-					"h2.gmql0nx0.l94mrbxd.p1ri9a11.lzcic4wl.d2edcug0.hpfvmrgz span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.embtmqzv.hrzyx87i.m6dqt4wy.h7mekvxk.hnhda86s.oo9gr5id.hzawbc8m > span"
-				)
-				?.textContent.trim();
-		}
+		let name = document.querySelector("head > title")?.textContent;
+		name = name.replace(name.slice(-11), "");
 
 		presenceData.details = `Viewing ${hasCommentInput ? "user" : "page"}${
 			privacyMode ? "" : ":"
