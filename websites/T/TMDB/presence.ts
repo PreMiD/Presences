@@ -1,11 +1,7 @@
 const presence: Presence = new Presence({
 		clientId: "966643093308837938"
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
-		reading: "presence.activity.reading"
-	});
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -48,10 +44,12 @@ presence.on("UpdateData", async () => {
 				.querySelector(`h2 > [href="${pathname}"]`)
 				.textContent.trim()}`;
 		} else if (pathname.includes("/reviews")) {
-			const pathArr = pathname.split("/");
-			pathArr.length = 3;
 			presenceData.details = `Reading ${document
-				.querySelector(`h2 > [href="${pathArr.join("/")}"]`)
+				.querySelector(
+					`
+				h2 > [href="${pathname.split("/").slice(0, 3).join("/")}"]
+					`
+				)
 				.textContent.trim()}'s reviews`;
 		} else if (pathname.includes("/discuss")) {
 			presenceData.details = `Reading ${document
@@ -72,10 +70,12 @@ presence.on("UpdateData", async () => {
 				.querySelector(`h2 > [href="${pathname}"]`)
 				.textContent.trim()}`;
 		} else if (pathname.includes("/reviews")) {
-			const pathArr = pathname.split("/");
-			pathArr.length = 3;
 			presenceData.state = `Reading ${document
-				.querySelector(`h2 > [href="${pathArr.join("/")}"]`)
+				.querySelector(
+					`
+				h2 > [href="${pathname.split("/").slice(0, 3).join("/")}"]
+					`
+				)
 				.textContent.trim()}'s reviews`;
 		} else if (pathname.includes("/discuss")) {
 			presenceData.details = `Reading ${document
@@ -99,7 +99,11 @@ presence.on("UpdateData", async () => {
 		if (query.length > 0) presenceData.details = `Searching for ${query}`;
 		else presenceData.details = "Searching";
 	} else if (pathname.startsWith("/")) {
-		presenceData.details = (await strings).browsing;
+		presenceData.details = (
+			await presence.getStrings({
+				browsing: "presence.activity.browsing"
+			})
+		).browsing;
 		presenceData.state = "Home";
 	}
 
