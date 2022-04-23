@@ -412,7 +412,7 @@ presence.on("UpdateData", async () => {
 		const hasCommentInput = document.querySelector(
 			"div.m9osqain.a5q79mjw.gy2v8mqq.jm1wdb64.k4urcfbm.qv66sw1b span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7"
 		);
-		let name = document.querySelector("head > title").textContent;
+		let name = document.querySelector("head > title")?.textContent;
 		name = name.replace(name.slice(-11), "");
 
 		presenceData.details = `Viewing ${hasCommentInput ? "user" : "page"}${
