@@ -98,14 +98,7 @@ presence.on("UpdateData", async () => {
 		const query = document.querySelector<HTMLInputElement>("input").value;
 		if (query.length > 0) presenceData.details = `Searching for ${query}`;
 		else presenceData.details = "Searching";
-	} else if (pathname.startsWith("/")) {
-		presenceData.details = (
-			await presence.getStrings({
-				browsing: "presence.activity.browsing"
-			})
-		).browsing;
-		presenceData.state = "Home";
-	}
+	} else if (pathname.startsWith("/")) presenceData.details = "Browsing TMDB";
 
 	presence.setActivity(presenceData, true);
 });
