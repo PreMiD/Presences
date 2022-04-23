@@ -25,10 +25,9 @@ presence.on("UpdateData", async () => {
 	} else if (page === "/") presenceData.details = "Bekijkt de homepagina";
 	else if (page.includes("/films/")) {
 		delete presenceData.startTimestamp;
-		const titles = JSON.parse(
-			document.querySelector("#__NEXT_DATA__").innerHTML
-		);
-		title2 = titles.props.pageProps.initialMovies[0].title;
+
+		title2 = JSON.parse(document.querySelector("#__NEXT_DATA__").innerHTML)
+			.props.pageProps.initialMovies[0].title;
 		title = document.querySelector("#player");
 		if (buttons) {
 			presenceData.buttons = [
@@ -68,10 +67,9 @@ presence.on("UpdateData", async () => {
 	} else if (page.includes("/films")) presenceData.details = "Bekijkt Films";
 	else if (page.includes("/programmas/")) {
 		delete presenceData.startTimestamp;
-		const titles = JSON.parse(
-			document.querySelector("#__NEXT_DATA__").innerHTML
-		);
-		title2 = titles.props.pageProps.video.series.title;
+
+		title2 = JSON.parse(document.querySelector("#__NEXT_DATA__").innerHTML)
+			.props.pageProps.video.series.title;
 		title = document.querySelector("#player");
 		if (buttons) {
 			presenceData.buttons = [

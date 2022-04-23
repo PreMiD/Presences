@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -27,7 +27,7 @@
 		"www.crunchyroll.com",
 		"beta.crunchyroll.com"
 	],
-	"version": "2.7.15",
+	"version": "2.7.17",
 	"logo": "https://i.imgur.com/LpTKP8c.png",
 	"thumbnail": "https://i.imgur.com/hzM7YCb.png",
 	"color": "#f47521",

@@ -323,10 +323,8 @@ presence.on("UpdateData", async () => {
 				}
 
 				if (path.includes("/friends/")) {
-					const tab = getElement(".tw-tab__link--active");
-
 					presenceData.details = strings.viewFriends;
-					presenceData.state = tab;
+					presenceData.state = getElement(".tw-tab__link--active");
 				}
 
 				let searching = false;
@@ -373,18 +371,15 @@ presence.on("UpdateData", async () => {
 				}
 
 				if (path.includes("/directory/")) {
-					const tab = getElement(".tw-c-text-link");
-
 					presenceData.details = strings.browse;
-					presenceData.state = tab;
+					presenceData.state = getElement(".tw-c-text-link");
 				}
 
 				if (path.includes("/directory/game/")) {
-					const category = getElement(".directory-header-new__banner-cover h1"),
-						tab = getElement(".tw-c-text-link");
-
+					const category = getElement(".directory-header-new__banner-cover h1");
 					presenceData.details = strings.viewCategory;
-					presenceData.state = category && `${category} (${tab})`;
+					presenceData.state =
+						category && `${category} (${getElement(".tw-c-text-link")})`;
 				}
 
 				if (path.includes("/directory/esports/")) {
@@ -424,10 +419,8 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (path.includes("/moderator/")) {
-				const user = getElement(".stream-info-card p > a");
-
 				presenceData.details = strings.modStreamer;
-				presenceData.state = user;
+				presenceData.state = getElement(".stream-info-card p > a");
 
 				if (getElement(".modview-dock-widget p") !== "Offline") {
 					presenceData.smallImageKey = "live";

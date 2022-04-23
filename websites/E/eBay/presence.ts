@@ -17,10 +17,6 @@ presence.on("UpdateData", async () => {
 		} else {
 			switch (page) {
 				case "itm": {
-					const seller = (
-						document.querySelector(".mbg > a") as HTMLAnchorElement
-					)?.href;
-
 					presenceData.details = document
 						.querySelector("#itemTitle")
 						.textContent.replace(
@@ -31,7 +27,7 @@ presence.on("UpdateData", async () => {
 						{ label: "View Item", url: location.href },
 						{
 							label: "View Seller",
-							url: seller
+							url: document.querySelector<HTMLAnchorElement>(".mbg > a")?.href
 						}
 					];
 
@@ -156,10 +152,8 @@ presence.on("UpdateData", async () => {
 				{ label: "View Post", url: location.href },
 				{
 					label: "View Author",
-					url: (
-						document.querySelector(
-							".lia-component-message-view-widget-author-username > a"
-						) as HTMLAnchorElement
+					url: document.querySelector<HTMLAnchorElement>(
+						".lia-component-message-view-widget-author-username > a"
 					)?.href
 				}
 			];

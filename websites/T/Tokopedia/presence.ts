@@ -24,6 +24,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing on EduMart....";
 			presenceData.startTimestamp = elapsed;
 			presence.setActivity(presenceData);
+		} else if (document.location.pathname.includes("/search")) {
+			presenceData.details = "Searching for a product....";
+			presenceData.state = new URL(document.location.href).searchParams.get(
+				"q"
+			);
+			presenceData.startTimestamp = elapsed;
+			presence.setActivity(presenceData);
 		} else {
 			presenceData.details = "Viewing a Homepage";
 			presenceData.startTimestamp = elapsed;

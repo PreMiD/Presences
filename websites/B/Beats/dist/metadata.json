@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -14,7 +14,7 @@
 	},
 	"url": "itsbeats.net",
 	"regExp": "([a-z0-9-]+[.])*(itsbeats[.]net)[/]",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/36Ln5RE.png",
 	"thumbnail": "https://i.imgur.com/audBuMC.png",
 	"color": "#32a852",
