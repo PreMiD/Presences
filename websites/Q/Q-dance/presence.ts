@@ -15,13 +15,6 @@ presence.on("UpdateData", async () => {
 			".audioplayer-nowplaying__artist"
 		).textContent;
 		presenceData.smallImageKey = "live";
-		presenceData.smallImageText = `Volume: ${document
-			.querySelector(
-				"#app > footer > div > div.audioplayer__wrapper > div.audioplayer-controls.audioplayer__controls > div.audioplayer-controls__right > div > div > div"
-			)
-			.getAttribute("style")
-			.replace("width:", "")
-			.replace(/;/, "")}`;
 		presenceData.largeImageKey =
 			document
 				.querySelector(
