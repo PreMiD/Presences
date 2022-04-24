@@ -40,6 +40,7 @@ presence.on("UpdateData", async () => {
 		path.hostname === "mc.bloom.host" ||
 		path.hostname === "demo.bloom.host"
 	) {
+		presenceData.details = "Using the panel";
 		if (path.pathname.includes("account")) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Editing: Account Details";
@@ -144,8 +145,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Using the panel";
 			presenceData.state = "Editing: Files";
 			presenceData.smallImageKey = "folder-solid";
-		} else {
-			presenceData.details = "Using the panel";
 		}
 	}
 	if (path.hostname === "status.bloom.host") {
