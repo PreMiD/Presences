@@ -146,8 +146,6 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "folder-solid";
 		} else {
 			presenceData.details = "Using the panel";
-			presenceData.state = "Viewing: The Console";
-			presenceData.smallImageKey = "terminal-solid";
 		}
 	} else if (path.hostname === "status.bloom.host") {
 		if (path.pathname.includes("report")) {
