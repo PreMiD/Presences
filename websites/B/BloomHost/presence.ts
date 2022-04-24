@@ -172,5 +172,5 @@ presence.on("UpdateData", async () => {
 		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
-	} 
+	}
 });
