@@ -137,10 +137,6 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Installing: Modpacks";
-		} else if (path.pathname.includes("console")) {
-			presenceData.details = "Using the panel";
-			presenceData.state = "Viewing: The Console";
-			presenceData.smallImageKey = "terminal-solid";
 		} else if (path.pathname.includes("files")) {
 			presenceData.details = "Using the panel";
 			presenceData.state = "Editing: Files";
