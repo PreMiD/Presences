@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Viewing: Startup";
 			presenceData.smallImageKey = "rocket-solid";
 		} else if (
-			path.pathname.includes("server") &&			
+			path.pathname.includes("server") &&
 			path.pathname.includes("settings")
 		) {
 			presenceData.details = "Using the Panel";
