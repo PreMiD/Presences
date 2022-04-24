@@ -29,11 +29,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing the main website";
 		}
 	} else if (path.hostname === "docs.bloom.host") {
-		const title = document.querySelector(
-			"div.text--center > header > h1"
-		).textContent;
 		presenceData.details = "Viewing the docs";
-		presenceData.state = `Reading: ${title}`;
+		presenceData.state = `Reading: ${document.querySelector(
+			"div.text--center > header > h1"
+		).textContent}`;
 		presenceData.smallImageKey = "book-open-solid";
 		// console.log('HOGG RIDDAAAAAA')
 	} else if (
