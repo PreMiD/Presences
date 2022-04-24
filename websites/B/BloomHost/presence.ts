@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 		}`;
 		presenceData.smallImageKey = "book-open-solid";
 		// console.log('HOGG RIDDAAAAAA')
-	} 
+	}
 	if (
 		path.hostname === "mc.bloom.host" ||
 		path.hostname === "demo.bloom.host"
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.details = "Using the panel";
 		}
-	} 
+	}
 	if (path.hostname === "status.bloom.host") {
 		if (path.pathname.includes("report")) {
 			presenceData.details = "Viewing the Status Page";
@@ -162,10 +162,10 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "stream-solid";
 			// console.log('HOGG RIDDAAAAAA')
 		}
-	} 
+	}
 	if (path.hostname === "vps.bloom.host") {
 		presenceData.details = "Using the VPS panel";
-	} 
+	}
 	if (path.hostname === "billing.bloom.host") {
 		presenceData.details = "Using the Billing Panel";
 	}
