@@ -148,6 +148,8 @@ presence.on("UpdateData", async () => {
 		}
 	}
 	if (path.hostname === "status.bloom.host") {
+		presenceData.details = "Viewing the Status page";
+		presenceData.smallImageKey = "stream-solid";
 		if (path.pathname.includes("report")) {
 			presenceData.details = "Viewing the Status Page";
 			presenceData.state = `Viewing the status of: ${document
@@ -155,10 +157,6 @@ presence.on("UpdateData", async () => {
 				.textContent.replace(" (Recent History)", "")
 				.trim()}`;
 			presenceData.smallImageKey = "stream-solid";
-		} else {
-			presenceData.details = "Viewing the Status page";
-			presenceData.smallImageKey = "stream-solid";
-			// console.log('HOGG RIDDAAAAAA')
 		}
 	}
 	if (path.hostname === "vps.bloom.host") {
