@@ -16,16 +16,16 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "globe-solid";
 		if (path.pathname.includes("minecraft")) {
 			presenceData.details = "Viewing the main website";
-			presenceData.state = `Reading: Minecraft Plans`;
+			presenceData.state = "Reading: Minecraft Plans";
 		} else if (path.pathname.includes("vps")) {
 			presenceData.details = "Viewing the main website";
-			presenceData.state = `Reading: VPS Plans`;
+			presenceData.state = "Reading: VPS Plans";
 		} else if (path.pathname.includes("duck-panel")) {
 			presenceData.details = "Viewing the main website";
-			presenceData.state = `Reading: About the Duck Panel`;
+			presenceData.state = "Reading: About the Duck Panel";
 		} else if (path.pathname.includes("about-bloom")) {
 			presenceData.details = "Viewing the main website";
-			presenceData.state = `Reading: About Bloom`;
+			presenceData.state = "Reading: About Bloom";
 		} else {
 			presenceData.details = "Viewing the main website";
 		}
@@ -43,100 +43,100 @@ presence.on("UpdateData", async () => {
 	) {
 		if (path.pathname.includes("account")) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Editing: Account Details`;
+			presenceData.state = "Editing: Account Details";
 			presenceData.smallImageKey = "user-solid";
 		} else if (path.pathname.includes("console")) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Viewing: The console`;
+			presenceData.state = "Viewing: The console";
 			presenceData.smallImageKey = "terminal-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("logs")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Viewing: Audit Logs`;
+			presenceData.state = "Viewing: Audit Logs";
 			presenceData.smallImageKey = "file-alt-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("import")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Using: The Server Importer `;
+			presenceData.state = "Using: The Server Importer ";
 			presenceData.smallImageKey = "file-import-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("startup")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Viewing: Startup`;
+			presenceData.state = "Viewing: Startup";
 			presenceData.smallImageKey = "rocket-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("settings")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Viewing: Settings`;
+			presenceData.state = "Viewing: Settings";
 			presenceData.smallImageKey = "cog-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("subdomain")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Viewing: Subdomains`;
+			presenceData.state = "Viewing: Subdomains";
 			presenceData.smallImageKey = "map-pin-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("network")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Viewing: Ports & Proxies`;
+			presenceData.state = "Viewing: Ports & Proxies";
 			presenceData.smallImageKey = "network-wired-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("backups")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Creating: Backups`;
+			presenceData.state = "Creating: Backups";
 			presenceData.smallImageKey = "window-restore-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("users")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Viewing: SubUsers`;
+			presenceData.state = "Viewing: SubUsers";
 			presenceData.smallImageKey = "users-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("schedules")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Viewing: Schedules`;
+			presenceData.state = "Viewing: Schedules";
 			presenceData.smallImageKey = "calender-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("databases")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Viewing: Databases`;
+			presenceData.state = "Viewing: Databases";
 			presenceData.smallImageKey = "database-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("minecraft")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Managing: Minecraft players`;
+			presenceData.state = "Managing: Minecraft players";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("plugins")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Installing: Plugins`;
+			presenceData.state = "Installing: Plugins";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("modpacks")
 		) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = `Installing: Modpacks`;
+			presenceData.state = "Installing: Modpacks";
 		} else if (path.pathname.includes("console")) {
 			presenceData.details = "Using the panel";
 			presenceData.state = "Viewing: The Console";
