@@ -5,7 +5,6 @@ const presence = new Presence({
 	browsingStamp = Math.floor(Date.now() / 1000),
 	path = document.location;
 
-const cleanPath = /(\/)/g;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "bloom_logo"
@@ -71,7 +70,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Viewing: Startup";
 			presenceData.smallImageKey = "rocket-solid";
 		} else if (
-			path.pathname.includes("server") &&
+			path.pathname.includes("server") &&			
 			path.pathname.includes("settings")
 		) {
 			presenceData.details = "Using the Panel";
