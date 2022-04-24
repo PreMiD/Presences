@@ -13,6 +13,7 @@ presence.on("UpdateData", async () => {
 	// Presence
 	if (path.hostname === "bloom.host") {
 		presenceData.smallImageKey = "globe-solid";
+		presenceData.details = "Viewing the main website";
 		if (path.pathname.includes("minecraft")) {
 			presenceData.details = "Viewing the main website";
 			presenceData.state = "Reading: Minecraft Plans";
@@ -25,8 +26,6 @@ presence.on("UpdateData", async () => {
 		} else if (path.pathname.includes("about-bloom")) {
 			presenceData.details = "Viewing the main website";
 			presenceData.state = "Reading: About Bloom";
-		} else {
-			presenceData.details = "Viewing the main website";
 		}
 	}
 	if (path.hostname === "docs.bloom.host") {
