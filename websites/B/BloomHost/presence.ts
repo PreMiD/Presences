@@ -159,16 +159,14 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "stream-solid";
 		}
 	}
-	if (path.hostname === "vps.bloom.host") {
+	if (path.hostname === "vps.bloom.host")
 		presenceData.details = "Using the VPS panel";
-	}
-	if (path.hostname === "billing.bloom.host") {
+
+	if (path.hostname === "billing.bloom.host")
 		presenceData.details = "Using the Billing Panel";
-	}
+
 	if (!presenceData.details) {
 		presence.setTrayTitle();
 		presence.setActivity();
-	} else {
-		presence.setActivity(presenceData);
-	}
+	} else presence.setActivity(presenceData);
 });
