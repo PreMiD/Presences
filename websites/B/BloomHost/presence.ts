@@ -28,14 +28,16 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.details = "Viewing the main website";
 		}
-	} else if (path.hostname === "docs.bloom.host") {
+	}
+	if (path.hostname === "docs.bloom.host") {
 		presenceData.details = "Viewing the docs";
 		presenceData.state = `Reading: ${
 			document.querySelector("div.text--center > header > h1").textContent
 		}`;
 		presenceData.smallImageKey = "book-open-solid";
 		// console.log('HOGG RIDDAAAAAA')
-	} else if (
+	} 
+	if (
 		path.hostname === "mc.bloom.host" ||
 		path.hostname === "demo.bloom.host"
 	) {
@@ -146,7 +148,8 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.details = "Using the panel";
 		}
-	} else if (path.hostname === "status.bloom.host") {
+	} 
+	if (path.hostname === "status.bloom.host") {
 		if (path.pathname.includes("report")) {
 			presenceData.details = "Viewing the Status Page";
 			presenceData.state = `Viewing the status of: ${document
@@ -159,9 +162,11 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "stream-solid";
 			// console.log('HOGG RIDDAAAAAA')
 		}
-	} else if (path.hostname === "vps.bloom.host") {
+	} 
+	if (path.hostname === "vps.bloom.host") {
 		presenceData.details = "Using the VPS panel";
-	} else if (path.hostname === "billing.bloom.host") {
+	} 
+	if (path.hostname === "billing.bloom.host") {
 		presenceData.details = "Using the Billing Panel";
 	}
 	if (!presenceData.details) {
