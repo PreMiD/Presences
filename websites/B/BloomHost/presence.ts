@@ -159,9 +159,6 @@ presence.on("UpdateData", async () => {
 				.replace(" (Recent History)", "")
 				.trim()}`;
 			presenceData.smallImageKey = "stream-solid";
-			console.log(
-				`Viewing the status of: ${title.replace(" (Recent History)", "")}`
-			);
 		} else {
 			presenceData.details = "Viewing the Status page";
 			presenceData.smallImageKey = "stream-solid";
