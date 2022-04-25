@@ -48,8 +48,6 @@ presence.on("UpdateData", async () => {
 
 	switch (true) {
 		case privacy: {
-			showButtons = false;
-			presenceData.state = null;
 			presenceData.largeImageKey = "incognito";
 			if (
 				pathnames.includes(pathname) ||
