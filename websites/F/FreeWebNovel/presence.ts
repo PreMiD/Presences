@@ -129,9 +129,7 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname.includes("/author/"): {
 			presenceData.details = "Checking out an author";
-			presenceData.state = `${document
-				.querySelector('[class="e1"]')
-				.textContent.replace("[", "")}`;
+			presenceData.state = document.querySelector<HTMLAnchorElement>("body > div.header > div.cur > div > a:nth-child(5)").title;
 			if (showButtons) {
 				presenceData.buttons = [
 					{
