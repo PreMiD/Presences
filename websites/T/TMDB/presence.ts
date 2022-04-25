@@ -46,9 +46,7 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("/reviews")) {
 			presenceData.details = `Reading ${document
 				.querySelector(
-					`
-				h2 > [href="${pathname.split("/").slice(0, 3).join("/")}"]
-					`
+					`h2 > [href="${pathname.split("/").slice(0, 3).join("/")}"]`
 				)
 				.textContent.trim()}'s reviews`;
 		} else if (pathname.includes("/discuss")) {
@@ -72,9 +70,7 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("/reviews")) {
 			presenceData.state = `Reading ${document
 				.querySelector(
-					`
-				h2 > [href="${pathname.split("/").slice(0, 3).join("/")}"]
-					`
+					`h2 > [href="${pathname.split("/").slice(0, 3).join("/")}"]`
 				)
 				.textContent.trim()}'s reviews`;
 		} else if (pathname.includes("/discuss")) {
