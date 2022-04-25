@@ -1,7 +1,6 @@
 const presence = new Presence({
 		clientId: "873728851052752896"
 	}),
-	// Const thing
 	browsingStamp = Math.floor(Date.now() / 1000),
 	path = document.location;
 
