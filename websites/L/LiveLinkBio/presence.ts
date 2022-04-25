@@ -48,9 +48,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Statistics of Link:";
 			else presenceData.details = "Editing Link:";
 		} else if (document.querySelector("body").className.includes("open")) {
-			const modal = document.querySelectorAll('[class="modal-title"]')[1]
-				.textContent;
-			title = modal.replace("Edit", "");
+			title = document.querySelectorAll('[class="modal-title"]')[1]
+				.textContent.replace("Edit", "");
 			presenceData.details = `${modal.replace("Edit", "")}:`;
 			presenceData.state =
 				document.querySelector<HTMLInputElement>("#update_name").value;
