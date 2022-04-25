@@ -17,10 +17,10 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "live";
 		presenceData.largeImageKey =
 			document
-				.querySelector(
-					"#app > footer > div > div.audioplayer__wrapper > div.audioplayer-nowplaying.audioplayer__nowplaying > div.audioplayer-nowplaying__image > img"
+				.querySelector<HTMLImageElement>(
+					"div.audioplayer-nowplaying__image > img"
 				)
-				?.getAttribute("src") ?? "logo";
+				?.src ?? "logo";
 		presenceData.startTimestamp = elapsed;
 		presence.setActivity(presenceData);
 	} else presence.setActivity();
