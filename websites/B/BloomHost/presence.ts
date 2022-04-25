@@ -32,7 +32,6 @@ presence.on("UpdateData", async () => {
 			document.querySelector("div.text--center > header > h1").textContent
 		}`;
 		presenceData.smallImageKey = "book-open-solid";
-		// console.log('HOGG RIDDAAAAAA')
 	}
 	if (
 		path.hostname === "mc.bloom.host" ||
