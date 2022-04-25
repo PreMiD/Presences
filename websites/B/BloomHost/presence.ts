@@ -9,7 +9,6 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "bloom_logo"
 	};
 	presenceData.startTimestamp = browsingStamp;
-	// Presence
 	if (path.hostname === "bloom.host") {
 		presenceData.smallImageKey = "globe-solid";
 		presenceData.details = "Viewing the main website";
