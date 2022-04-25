@@ -46,11 +46,6 @@ presence.on("UpdateData", async () => {
 	}
 	if (!showBook) showCover = false;
 
-	if (showButtons === true) {
-		presenceData.buttons = [
-			{ label: "Visit freewebnovel.com", url: "https://freewebnovel.com/" }
-		];
-	} else presenceData.buttons = null;
 	switch (true) {
 		case privacy: {
 			showButtons = false;
