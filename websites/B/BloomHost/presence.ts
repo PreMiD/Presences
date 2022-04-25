@@ -159,8 +159,6 @@ presence.on("UpdateData", async () => {
 	if (path.hostname === "billing.bloom.host")
 		presenceData.details = "Using the Billing Panel";
 
-	if (!presenceData.details) {
-		presence.setTrayTitle();
-		presence.setActivity();
-	} else presence.setActivity(presenceData);
+	if (!presenceData.details) presence.setActivity();
+	else presence.setActivity(presenceData);
 });
