@@ -6,7 +6,7 @@
   },
   "service": "BloomHost",
   "description": {
-    "en": "This is a Premid extension for Bloom Host. A high performance Minecraft and VPS server host that focuses on speed, reliability and protection."
+    "en": "Bloom offers affordable dedicated Minecraft server hosting and dedicated Virtual Private Servers. Experience the outstanding performance of Bloom today."
   },
   "url": [
     "docs.bloom.host",
@@ -23,7 +23,7 @@
   "color": "#ff8040",
   "category": "games",
   "tags": [
-    "hinecraft-host",
+    "minecraft-host",
     "hosting",
     "cloud",
     "node",
