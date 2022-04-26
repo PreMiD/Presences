@@ -64,9 +64,9 @@ function fnd() {
 				"#venue-edit-general > form > div:nth-child(1) > div:nth-child(2)"
 			)
 		) {
-			const placecat = document.querySelectorAll(".category-name");
-			if (placecat[0].innerHTML.length == 0) mapElem = "a place";
-			else mapElem = `a ${placecat[0].innerHTML.toLowerCase()}`;
+			const placeCat = document.querySelector(".category-name");
+			if (!placeCat.textContent) mapElem = "a place";
+			else mapElem = `a ${placeCat.textContent.toLowerCase()}`;
 		} else mapElem = "something";
 
 		mapLoc =
