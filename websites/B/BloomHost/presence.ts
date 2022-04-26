@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "bloom_logo"
 	};
-	presenceData.startTimestamp = browsingStamp;
+	presenceData.startTimestamp = browsingTimestamp;
 	if (path.hostname === "bloom.host") {
 		presenceData.smallImageKey = "globe-solid";
 		presenceData.details = "Viewing the main website";
