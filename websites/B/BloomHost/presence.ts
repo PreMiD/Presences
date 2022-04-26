@@ -1,8 +1,7 @@
 const presence = new Presence({
 		clientId: "873728851052752896"
 	}),
-	// Const thing
-	browsingStamp = Math.floor(Date.now() / 1000),
+	browsingTimestamp = Math.floor(Date.now() / 1000),
 	path = document.location;
 
 presence.on("UpdateData", async () => {
@@ -10,7 +9,6 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "bloom_logo"
 	};
 	presenceData.startTimestamp = browsingStamp;
-	// Presence
 	if (path.hostname === "bloom.host") {
 		presenceData.smallImageKey = "globe-solid";
 		presenceData.details = "Viewing the main website";
@@ -34,7 +32,6 @@ presence.on("UpdateData", async () => {
 			document.querySelector("div.text--center > header > h1").textContent
 		}`;
 		presenceData.smallImageKey = "book-open-solid";
-		// console.log('HOGG RIDDAAAAAA')
 	}
 	if (
 		path.hostname === "mc.bloom.host" ||
@@ -161,8 +158,6 @@ presence.on("UpdateData", async () => {
 	if (path.hostname === "billing.bloom.host")
 		presenceData.details = "Using the Billing Panel";
 
-	if (!presenceData.details) {
-		presence.setTrayTitle();
-		presence.setActivity();
-	} else presence.setActivity(presenceData);
+	if (!presenceData.details) presence.setActivity();
+	else presence.setActivity(presenceData);
 });
