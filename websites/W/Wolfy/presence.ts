@@ -77,7 +77,7 @@ async function addVisitProfilButton(
 	let label = `Visiter le profil de ${username}`;
 	if (label.length > 32) label = `${label.slice(0, 31)}…`;
 
-	addButton(presenceData, label, `https://wolfy.fr/profile/${username}`);
+	addButton(presenceData, label, `https://wolfy.fr/leaderboard/${username}`);
 }
 
 function addVisitWolfyButton(presenceData: PresenceData) {
