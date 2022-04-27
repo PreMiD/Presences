@@ -48,9 +48,10 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Statistics of Link:";
 			else presenceData.details = "Editing Link:";
 		} else if (document.querySelector("body").className.includes("open")) {
-			title = document.querySelectorAll('[class="modal-title"]')[1]
+			title = document
+				.querySelectorAll('[class="modal-title"]')[1]
 				.textContent.replace("Edit", "");
-			presenceData.details = `${modal.replace("Edit", "")}:`;
+			presenceData.details = `${title}:`;
 			presenceData.state =
 				document.querySelector<HTMLInputElement>("#update_name").value;
 		} else if (type && !active) {
