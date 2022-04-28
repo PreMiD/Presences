@@ -5,7 +5,7 @@ const presence = new Presence({
 async function getStrings() {
 	return presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		pause: "presence.playback.paused"
 	});
 }
 
@@ -44,7 +44,8 @@ presence.on("UpdateData", async () => {
 				? "персонажа"
 				: "человека";
 
-	if (document.location.pathname === "/") presenceData.details = "На главной странице";
+	if (document.location.pathname === "/")
+		presenceData.details = "На главной странице";
 	else if (document.location.pathname.includes("/profile")) {
 		presenceData.details = `Смотрит свой профиль (${
 			document.querySelector(".nav.navbar-nav.login li:nth-child(1) span")
