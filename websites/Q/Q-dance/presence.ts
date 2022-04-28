@@ -5,11 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
-		},
-		strings = presence.getStrings({
-			live: "presence.activity.live"
-		});
+		largeImageKey: "logo"
+	};
 	if (document.querySelector("svg.audioplayer-controls__icon--play")) {
 		presenceData.details = document.querySelector(
 			".audioplayer-nowplaying__track"
@@ -18,7 +15,11 @@ presence.on("UpdateData", async () => {
 			".audioplayer-nowplaying__artist"
 		).textContent;
 		(presenceData.smallImageKey = "live"),
-			(presenceData.smallImageText = (await strings).live);
+			(presenceData.smallImageText = (
+				await presence.getStrings({
+					live: "presence.activity.live"
+				})
+			).live);
 		presenceData.largeImageKey =
 			document.querySelector<HTMLImageElement>(
 				"div.audioplayer-nowplaying__image > img"
