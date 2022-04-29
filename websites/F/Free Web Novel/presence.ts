@@ -4,16 +4,16 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now());
 
 presence.on("UpdateData", async () => {
-	let [showCover, showButtons, showTimestamp, showBook, showLogo] =
+	let [showCover, showButtons, showBook, showLogo] =
 		await Promise.all([
 			presence.getSetting<boolean>("showCover"),
 			presence.getSetting<boolean>("showButtons"),
-			presence.getSetting<boolean>("showTimestamp"),
 			presence.getSetting<boolean>("showBook"),
 			presence.getSetting<boolean>("showLogo")
 		]);
-	const [privacy, showReading] = await Promise.all([
+	const [privacy, showTimestamp, showReading ] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("showTimestamp"),
 			presence.getSetting<boolean>("showReading")
 		]),
 		presenceData: PresenceData = {
