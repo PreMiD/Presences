@@ -16,8 +16,8 @@ const presence = new Presence({
 		"/support/regeln": "Betrachtet die Nutzungsbedingungen",
 		"/dmca": "Digital Millennium Copyright Act of 1998",
 		"/animewuensche": "Betrachtet Animewünsche",
-		"/login": "Login bei Anicloud",
-		"/registation": "Registrierung bei Anicloud",
+		"/login": "Login bei AniWorld",
+		"/registation": "Registrierung bei AniWorld",
 		"/account": "Betrachtet sein Account",
 		"/user/profil/": "Betrachtet ein Profil",
 		"/account/nachrichten": "Betrachtet seine Nachrichten",
@@ -27,7 +27,7 @@ const presence = new Presence({
 		"/account/subscribed": "Betrachtet seine Abonnierte Animes",
 		"/account/settings": "Account Einstellungen",
 		"/support/fragen": "Betrachtet Fragen & Antworten",
-		"/support": "Hilfe & Support bei Anicloud",
+		"/support": "Hilfe & Support bei AniWorld",
 		"/edit:information": "Neue Serieninformationen vorschlagen"
 	};
 let video,
@@ -51,7 +51,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "anicloud",
+			largeImageKey: "aniworld",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		};
 	if (page === "/") presenceData.details = "Betrachtet die Startseite";
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 		).textContent
 			.split("Staffel")[0]
 			.replace("Filme von", " ")
-			.split(" | AniCloud.io - Animes gratis online ansehen")} - ${
+			.split(" | AniWorld.to - Animes gratis online ansehen")} - ${
 			(document.querySelector("h2") as HTMLElement).textContent
 		}`;
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
