@@ -1,6 +1,6 @@
 const presence = new Presence({
-		clientId: "965294297048023050"
-	}),
+	clientId: "965294297048023050"
+}),
 	browsingTimestamp = Math.floor(Date.now());
 
 presence.on("UpdateData", async () => {
@@ -11,11 +11,11 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showBook"),
 			presence.getSetting<boolean>("showLogo")
 		]);
-	const [privacy, showTimestamp, showReading ] = await Promise.all([
-			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("showTimestamp"),
-			presence.getSetting<boolean>("showReading")
-		]),
+	const [privacy, showTimestamp, showReading] = await Promise.all([
+		presence.getSetting<boolean>("privacy"),
+		presence.getSetting<boolean>("showTimestamp"),
+		presence.getSetting<boolean>("showReading")
+	]),
 		presenceData: PresenceData = {
 			largeImageKey: "nocover",
 			smallImageKey: showReading ? "closed" : null,
@@ -145,11 +145,10 @@ presence.on("UpdateData", async () => {
 		default: {
 			if (document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')) {
 				presenceData.largeImageKey = showCover
-					? `${
-							document.querySelector<HTMLImageElement>(
-								"body > div.main > div > div > div.col-content > div.m-info > div.m-book1 > div.m-imgtxt > div.pic > img"
-							).src
-					  }`
+					? `${document.querySelector<HTMLImageElement>(
+						"body > div.main > div > div > div.col-content > div.m-info > div.m-book1 > div.m-imgtxt > div.pic > img"
+					).src
+					}`
 					: "nocover";
 				presenceData.details = showReading ? "Viewing a novel" : null;
 				presenceData.state = showBook ? document.title.split("-")[0] : null;
@@ -166,14 +165,14 @@ presence.on("UpdateData", async () => {
 			) {
 				presenceData.largeImageKey = showCover
 					? document.querySelector<HTMLMetaElement>("head > meta:nth-child(4)")
-							.content
+						.content
 					: "nocover";
 				presenceData.details = showBook
 					? `Reading ${document.title.split("-")[0]}`
 					: "Reading a novel";
 				presenceData.state = showBook
 					? document.querySelector<HTMLSpanElement>('[class="chapter"]')
-							.textContent
+						.textContent
 					: null;
 				presenceData.smallImageKey = showReading ? "open" : null;
 				presenceData.smallImageText = showReading ? "Reading" : null;
