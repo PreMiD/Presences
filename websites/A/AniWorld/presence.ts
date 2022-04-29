@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "830517484472762408"
+		clientId: "969716001090437120"
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
@@ -51,55 +51,64 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "aniworld",
+			largeImageKey: "aniworld-logo",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		};
 	if (page === "/") presenceData.details = "Betrachtet die Startseite";
 	else if (page.startsWith("/anime/")) {
-		presenceData.details = `${
-			(document.querySelector("h1") as HTMLElement).textContent
-		}`;
-		presenceData.state = `${(
-			document.querySelector("title") as HTMLElement
-		).textContent
-			.split("Staffel")[0]
-			.replace("Filme von", " ")
-			.split(" | AniWorld.to - Animes gratis online ansehen")} - ${
-			(document.querySelector("h2") as HTMLElement).textContent
-		}`;
-		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestamps(currentTime, timeEnd);
-		presenceData.buttons = [
-			{
-				label: "Watch Anime",
-				url: document.location.href
-			}
-		];
+		// Check if we are on the episode selection page
+		if (page.split("/").length === 4) {
+			presenceData.details = `${
+				(document.querySelector("h1") as HTMLElement).textContent
+			}`;
+			presenceData.state = "Betrachtet die Episodenliste";
+		} else {
+			presenceData.details = `${
+				(document.querySelector("h1") as HTMLElement).textContent
+			}`;
+			presenceData.state = `${(
+				document.querySelector("title") as HTMLElement
+			).textContent
+				.split("Staffel")[0]
+				.replace("Filme von", " ")
+				.split(" | AniWorld.to - Animes gratis online ansehen")} - ${
+				(document.querySelector("h2") as HTMLElement).textContent
+			}`;
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(currentTime, timeEnd);
+			presenceData.buttons = [
+				{
+					label: "Watch Anime",
+					url: document.location.href
+				}
+			];
 
-		video = document.querySelector("video");
-		if (video) {
-			played = video.currentTime !== 0;
-			timeEnd = video.duration;
-			({ currentTime } = video);
-			({ paused } = video);
-		}
-		if (played) {
-			if (!paused) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					currentTime,
-					timeEnd
-				);
+			video = document.querySelector("video");
+			if (video) {
+				played = video.currentTime !== 0;
+				timeEnd = video.duration;
+				({ currentTime } = video);
+				({ paused } = video);
 			}
-			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused
-				? (await strings).pause
-				: (await strings).play;
+			if (played) {
+				if (!paused) {
+					[, presenceData.endTimestamp] = presence.getTimestamps(
+						currentTime,
+						timeEnd
+					);
+				}
+				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageText = paused
+					? (await strings).pause
+					: (await strings).play;
+			}
 		}
-
 		//Obere Reiter
 	} else {
 		switch (page) {
-			case "/animes": {
+			case "/animes":
+			case "/animes-alphabet":
+			case "/animes-genres": {
 				presenceData.details = pages[page];
 				presenceData.state = `Sortiert nach: ${
 					(
@@ -269,6 +278,6 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (presenceData.details && presenceData.state)
+	if (presenceData.details || presenceData.state)
 		presence.setActivity(presenceData);
 });
