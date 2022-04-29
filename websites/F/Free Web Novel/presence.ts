@@ -63,14 +63,11 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case showLogo: {
-			showTimestamp = false;
-			showButtons = false;
-			showCover = false;
-			showBook = false;
 			presenceData.largeImageKey = "fwn_1024";
-			presenceData.smallImageKey = null;
-			presenceData.details = null;
-			presenceData.state = null;
+			delete presenceData.smallImageKey;
+			delete presenceData.details;
+			delete presenceData.state;
+			delete presenceData.buttons;
 			break;
 		}
 		case pathname === "/": {
