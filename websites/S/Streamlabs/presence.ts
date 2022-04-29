@@ -35,12 +35,10 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "logo"
 	};
 
-	if ("dev.streamlabs.com") {
+	if (window.location.hostname === "dev.streamlabs.com") {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = `${userType[0]}API Documentation`;
-	}
-
-	if (window.location.hostname === "streamlabs.com") {
+	} else if (window.location.hostname === "streamlabs.com") {
 		switch (document.location.pathname) {
 			case "/":
 				presenceData.startTimestamp = browsingTimestamp;
