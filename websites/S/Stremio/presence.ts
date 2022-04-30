@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 				const split = document
 					.querySelector("#play-progress-text")
 					?.textContent.split("/");
-				if (split[0]) {
+				if (split && split[0]) {
 					timestamp = presence.getTimestamps(
 						presence.timestampFromFormat(split[0].trim()),
 						presence.timestampFromFormat(split[1].trim())
