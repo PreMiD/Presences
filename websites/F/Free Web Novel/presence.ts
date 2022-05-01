@@ -48,10 +48,11 @@ presence.on("UpdateData", async () => {
 	switch (true) {
 		case privacy: {
 			presenceData.largeImageKey = "incognito";
+
 			if (
-				pathnames.includes(pathname) ||
-				(document.querySelector<HTMLDivElement>('[class="m-imgtxt"]') &&
-					showReading)
+				(pathnames.includes(pathname) ||
+					document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')) &&
+				showReading
 			)
 				presenceData.details = "Browsing...";
 			else if (
@@ -192,6 +193,5 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	}
-
 	presence.setActivity(presenceData);
 });
