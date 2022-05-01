@@ -13,13 +13,13 @@
 	},
 	"url": [
 		"help.wolfy.fr",
-		"help.wolfy.net", 
+		"help.wolfy.net",
 		"wolfy.fr",
 		"wolfy.net",
 		"www.wolfy.fr",
 		"www.wolfy.net"
 	],
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"logo": "https://i.imgur.com/TFduNvD.png",
 	"thumbnail": "https://i.imgur.com/aCO5gAP.png",
 	"color": "#1b1b2b",
