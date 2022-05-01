@@ -50,14 +50,18 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = "incognito";
 			if (
 				pathnames.includes(pathname) ||
-				document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')
+				(document.querySelector<HTMLDivElement>('[class="m-imgtxt"]') &&
+					showReading)
 			)
-				presenceData.details = showReading ? "Browsing..." : null;
+				presenceData.details = "Browsing...";
 			else if (
-				document.querySelector<HTMLAnchorElement>('[title="Read Next chapter"]')
+				document.querySelector<HTMLAnchorElement>(
+					'[title="Read Next chapter"]'
+				) &&
+				showReading
 			) {
-				presenceData.details = showReading ? "Reading..." : null;
-				presenceData.smallImageKey = showReading ? "opem" : null;
+				presenceData.details = "Reading...";
+				presenceData.smallImageKey = "open";
 			}
 			break;
 		}
