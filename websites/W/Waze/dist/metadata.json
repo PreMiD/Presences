@@ -8,7 +8,7 @@
 		{
 			"name": "frnk",
 			"id": "232904284004548608"
-		  }
+		}
 	],
 	"service": "Waze",
 	"description": {
@@ -19,7 +19,7 @@
 		"www.waze.com",
 		"beta.waze.com"
 	],
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"logo": "https://i.imgur.com/H814ZfW.png",
 	"thumbnail": "https://i.imgur.com/t1HF0dC.png",
 	"color": "#33ccff",

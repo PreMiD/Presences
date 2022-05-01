@@ -18,16 +18,8 @@
 	"description": {
 		"en": "Watch F1 live & on demand. Every F1 race live and on demand. With exclusive access to on-board cameras, team radio and live timing."
 	},
-	"settings": [
-		{
-			"id": "privacy",
-			"title": "Privacy Mode",
-			"icon": "fad fa-user-secret",
-			"value": false
-		}
-	],
 	"url": "f1tv.formula1.com",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"logo": "https://i.imgur.com/opuHbca.png",
 	"thumbnail": "https://i.imgur.com/uDxWlhL.jpg",
 	"color": "#e10600",
@@ -40,5 +32,13 @@
 		"f1",
 		"f2",
 		"f3"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		}
 	]
 }
