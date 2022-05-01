@@ -75,40 +75,34 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname === "/": {
-			presenceData.details = "Browsing through novels";
-			presenceData.state = "Page: Home";
+			presenceData.details = "Browsing the homepage";
 			break;
 		}
 		case pathname.includes("/history/"): {
-			presenceData.details = "Browsing through recently viewed novels";
-			presenceData.state = "Page: Your Reading Novels";
+			presenceData.details = "Browsing recently viewed novels";
 			break;
 		}
 		case pathname.includes("/latest-release-novel/"): {
-			presenceData.details = "Browsing through the latest released novels";
-			presenceData.state = "Page: Latest Released Novels";
+			presenceData.details = "Browsing latest released novels";
 			break;
 		}
 		case pathname.includes("/latest-novel/"): {
-			presenceData.details = "Browsing through the latest novels";
-			presenceData.state = "Page: Latest Novels";
+			presenceData.details = "Browsing the latest novels";
 			break;
 		}
 		case pathname.includes("/completed-novel/"): {
-			presenceData.details = "Browsing through fully finished novels";
-			presenceData.state = "Page: Completed Novels";
+			presenceData.details = "Browsing fully finished novels";
 			break;
 		}
 		case pathname.includes("/most-popular-novel/"): {
-			presenceData.details = "Browsing through the most popular novels";
-			presenceData.state = "Page: Most Popular Novels";
+			presenceData.details = "Browsing the most popular novels";
 			break;
 		}
 		case pathname.includes("/genre/"): {
 			const genre =
 				document.querySelector<HTMLHeadingElement>('[class="tit"]').textContent;
 			presenceData.details = `Checking out ${genre.toLowerCase()}`;
-			presenceData.state = `Page: ${genre}`;
+			presenceData.state = `Genre: ${genre}`;
 			break;
 		}
 		case pathname.includes("/author/"): {
@@ -128,22 +122,18 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname === "/search/": {
 			presenceData.details = "Searching for a novel";
-			presenceData.state = "Page: Search";
 			break;
 		}
 		case pathname === "/contact.html": {
 			presenceData.details = "Veiwing the contact page";
-			presenceData.state = "Page: Contact";
 			break;
 		}
 		case pathname === "/sitemap.xml": {
-			presenceData.details = "Veiwing the site's sitemap";
-			presenceData.state = "Page: Sitemap";
+			presenceData.details = "Viewing the site's sitemap";
 			break;
 		}
 		case pathname === "/privacy-terms-of-use.html": {
 			presenceData.details = "Looking through the privacy & terms of use";
-			presenceData.state = "Page: Privacy & Terms of Use";
 			break;
 		}
 		default: {
