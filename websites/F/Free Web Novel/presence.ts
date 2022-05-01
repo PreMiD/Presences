@@ -4,15 +4,16 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now());
 
 presence.on("UpdateData", async () => {
-	let [showCover, showButtons, showBook, showLogo] = await Promise.all([
-		presence.getSetting<boolean>("showCover"),
-		presence.getSetting<boolean>("showButtons"),
-		presence.getSetting<boolean>("showBook"),
-		presence.getSetting<boolean>("showLogo")
-	]);
-	const [privacy, showTimestamp, showReading] = await Promise.all([
-			presence.getSetting<boolean>("privacy"),
+	let [showCover, showButtons, showTimestamp, showBook, showLogo] =
+		await Promise.all([
+			presence.getSetting<boolean>("showCover"),
+			presence.getSetting<boolean>("showButtons"),
 			presence.getSetting<boolean>("showTimestamp"),
+			presence.getSetting<boolean>("showBook"),
+			presence.getSetting<boolean>("showLogo")
+		]);
+	const [privacy, showReading] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("showReading")
 		]),
 		presenceData: PresenceData = {
@@ -50,23 +51,30 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = "incognito";
 			if (
 				pathnames.includes(pathname) ||
-				document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')
+				(document.querySelector<HTMLDivElement>('[class="m-imgtxt"]') &&
+					showReading)
 			)
-				presenceData.details = showReading ? "Browsing..." : null;
+				presenceData.details = "Browsing...";
 			else if (
-				document.querySelector<HTMLAnchorElement>('[title="Read Next chapter"]')
+				document.querySelector<HTMLAnchorElement>(
+					'[title="Read Next chapter"]'
+				) &&
+				showReading
 			) {
-				presenceData.details = showReading ? "Reading..." : null;
-				presenceData.smallImageKey = showReading ? "opem" : null;
+				presenceData.details = "Reading...";
+				presenceData.smallImageKey = "open";
 			}
 			break;
 		}
 		case showLogo: {
+			showTimestamp = false;
+			showButtons = false;
+			showCover = false;
+			showBook = false;
 			presenceData.largeImageKey = "fwn_1024";
-			delete presenceData.smallImageKey;
-			delete presenceData.details;
-			delete presenceData.state;
-			delete presenceData.buttons;
+			presenceData.smallImageKey = null;
+			presenceData.details = null;
+			presenceData.state = null;
 			break;
 		}
 		case pathname === "/": {
