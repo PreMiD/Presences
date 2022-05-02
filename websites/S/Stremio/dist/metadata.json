@@ -15,7 +15,7 @@
 	"thumbnail": "https://i.imgur.com/frIQq2C.jpg",
 	"color": "#8A5AAB",
 	"category": "videos",
-	"tags": ["stremio", "videos", "cartoons", "stream", "video"],
+	"tags": ["cartoons", "stream"],
 	"settings": [
 		{
 			"id": "privacy",
