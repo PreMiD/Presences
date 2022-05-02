@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/profile")) {
 		presenceData.details = `Смотрит свой профиль (${
 			document.querySelector(".nav.navbar-nav.login li:nth-child(1) span")
-				.innerHTML
+				.textContent
 		})`;
 	} else if (document.location.pathname.includes("/user/")) {
 		presenceData.details = `Смотрит профиль ${
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 			document.location.pathname.includes("/anime") ||
 			document.location.pathname.includes("/manga")
 		)
-			presenceData.state = document.querySelector("main h1").innerHTML;
+			presenceData.state = document.querySelector("main h1").textContent;
 	} else if (
 		document.location.pathname === "/anime" ||
 		document.location.pathname.includes("/anime/season/") ||
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = `В поиске ${typeCurrent}`;
 		presenceData.state = `${
-			document.querySelector(".entity-title#anime-list-title h1").innerHTML
+			document.querySelector(".entity-title#anime-list-title h1").textContent
 		}`;
 	} else if (
 		document.location.pathname.includes("/anime/") ||
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 	) {
 		const titleContent = document.querySelector(
 				`.${typeContent === "person" ? "people" : typeContent}-title h1`
-			).innerHTML,
+			).textContent,
 			image = (<HTMLImageElement>(
 				document.querySelector(
 					`.${
