@@ -18,7 +18,8 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "nocover",
 			smallImageKey: showReading ? "closed" : null,
-			smallImageText: showReading ? "Not Reading" : null
+			smallImageText: showReading ? "Not Reading" : null,
+			startTimestamp: showTimestamp ? browsingTimestamp : null
 		},
 		{ pathname } = window.location,
 		pathnames = [
@@ -35,8 +36,6 @@ presence.on("UpdateData", async () => {
 			"/genre/",
 			"/author/"
 		];
-	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
-
 	if (!showReading) {
 		showBook = false;
 		showCover = false;
@@ -99,10 +98,9 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname.includes("/genre/"): {
-			const genre =
-				document.querySelector<HTMLHeadingElement>('[class="tit"]').textContent;
-			presenceData.details = `Checking out ${genre.toLowerCase()}`;
-			presenceData.state = `Genre: ${genre}`;
+			presenceData.details = `Checking out ${document
+				.querySelector<HTMLHeadingElement>('[class="tit"]')
+				.textContent.toLowerCase()}`;
 			break;
 		}
 		case pathname.includes("/author/"): {
@@ -125,7 +123,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname === "/contact.html": {
-			presenceData.details = "Veiwing the contact page";
+			presenceData.details = "Viewing the contact page";
 			break;
 		}
 		case pathname === "/sitemap.xml": {
@@ -133,7 +131,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname === "/privacy-terms-of-use.html": {
-			presenceData.details = "Looking through the privacy & terms of use";
+			presenceData.details = "Reviewing the terms of use";
 			break;
 		}
 		default: {
