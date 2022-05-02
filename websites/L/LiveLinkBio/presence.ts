@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.hostname.includes("docs.livelinkbio.com")) {
 		presenceData.startTimestamp = browsingStamp;
 		if (search && !search.value) {
-			presenceData.details = "Searching For:";
+			presenceData.details = "Searching for:";
 			presenceData.state = search.value;
 		} else {
 			presenceData.details = "Reading Docs:";
