@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: `View Library`,
+							label: "View Library",
 							url: document.location.href
 						}
 					];
