@@ -5,8 +5,8 @@ iframe.on("UpdateData", async () => {
 		document.querySelector("video") ||
 		document.querySelector(".vjs_video_3")
 	) {
-		const video: HTMLVideoElement = document.querySelector("video");
-		if (video && !isNaN(video.duration)) {
+		const video = document.querySelector<HTMLVideoElement>("video");
+		if (!isNaN(video?.duration)) {
 			iframe.send({
 				duration: video.duration,
 				currentTime: video.currentTime,
