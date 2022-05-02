@@ -92,12 +92,13 @@ presence.on("UpdateData", async () => {
 		const titleContent = document.querySelector(
 				`.${typeContent === "person" ? "people" : typeContent}-title h1`
 			).textContent,
-			image =
-				document.querySelector<HTMLImageElement>(
+			image = document
+				.querySelector<HTMLImageElement>(
 					`.${
 						typeContent === "person" ? "people" : typeContent
 					}-poster div:nth-child(2) img`
-				).srcset.split(" ")[0];
+				)
+				.srcset.split(" ")[0];
 		presenceData.details = `Смотрит страницу ${typeCurrent}`;
 		presenceData.state = titleContent;
 		presenceData.largeImageKey = image;
