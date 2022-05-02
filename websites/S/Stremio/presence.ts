@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "969208766807547917"
-});
+		clientId: "969208766807547917"
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 let video: HTMLMediaElement, timestamp: [number, number], pauseCheck: boolean;
 presence.on("UpdateData", async () => {
-	const browsingTimestamp = Math.floor(Date.now() / 1000),
-		presenceData: PresenceData = {
+	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector<HTMLMediaElement>("#videoPlayer");
 		if (privacy && !video) presenceData.details = "Browsing...";
 		else if (privacy && video) presenceData.details = "Watching...";
-		else if (search && search.value) {
+		else if (search?.value) {
 			presenceData.details = "Searching For:";
 			presenceData.state = search.value;
 		} else if (page.includes("/detail/")) {
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 			search = document.querySelector(
 				"#addons > div.filter > form > div.addon-search-input > input"
 			);
-			if (search && search.value) {
+			if (search?.value) {
 				presenceData.details = "Searching Addons For:";
 				presenceData.state = search.value;
 			} else {
@@ -55,27 +55,26 @@ presence.on("UpdateData", async () => {
 				} else presenceData.state = "All";
 
 				presenceData.details = `Browsing ${
-					document.querySelectorAll("[class='ng-scope selected']")[0]
-						?.textContent
+					document.querySelector("[class='ng-scope selected']")?.textContent
 				}:`;
 			}
 		} else if (page.includes("settings")) {
 			presenceData.details = `${
-				document.querySelectorAll("[class='ng-scope ng-binding active']")[0]
+				document.querySelector("[class='ng-scope ng-binding active']")
 					?.textContent ?? "General"
 			} Settings`;
 		} else if (page.includes("/discover/")) {
 			if (active) {
-				genreSort = document.querySelectorAll(
+				genreSort = document.querySelector(
 					"[class='ng-scope ng-binding selected']"
-				)[0]?.textContent;
+				)?.textContent;
 				if (!genreSort) {
 					genreSort =
 						document.querySelectorAll(
 							"[class='ng-binding ng-scope selected']"
 						)[2]?.textContent ?? "None";
 				}
-				if (genreSort == "Top") genreSort = "All";
+				if (genreSort === "Top") genreSort = "All";
 				presenceData.details = `Browsing ${active}`;
 				presenceData.state = `Genre: ${genreSort}`;
 			} else presenceData.state = "Browsing Movies";
@@ -96,14 +95,14 @@ presence.on("UpdateData", async () => {
 			else presenceData.details = "Library";
 		} else if (page.includes("/calendar")) presenceData.details = "Calendar";
 		else if (page.includes("player")) {
-			if (video?.duration && video) {
+			if (video?.duration) {
 				timestamp = presence.getTimestampsfromMedia(video);
 				pauseCheck = video.paused;
 			} else if (!video.duration && document.querySelector("#controlbar-top")) {
 				const split = document
 					.querySelector("#play-progress-text")
 					?.textContent.split("/");
-				if (split && split[0]) {
+				if (split?.[0]) {
 					timestamp = presence.getTimestamps(
 						presence.timestampFromFormat(split[0].trim()),
 						presence.timestampFromFormat(split[1].trim())
@@ -130,7 +129,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = document
 				.querySelector("head > title")
 				?.textContent.replace("Stremio -", "");
-		} else if (window.location.pathname == "/")
+		} else if (window.location.pathname === "/")
 			presenceData.details = "Homepage";
 
 		if (buttons && !privacy && page !== "https://app.strem.io/#/") {

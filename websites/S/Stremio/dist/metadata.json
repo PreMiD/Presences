@@ -9,13 +9,21 @@
 		"nl": "Vrijheid om te streamen. Stremio is een modern media center dat een one-stop oplossing is voor uw video entertainment. U ontdekt, bekijkt en organiseert video-inhoud via de eenvoudig te installeren addons.",
 		"en": "Freedom To Stream. Stremio is a modern media center that's a one-stop solution for your video entertainment. You discover, watch and organize video content from easy to install addons."
 	},
-	"url": ["stremio.com", "www.stremio.com", "app.strem.io", "www.app.strem.io"],
+	"url": [
+		"stremio.com",
+		"www.stremio.com",
+		"app.strem.io",
+		"www.app.strem.io"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/6bm1P3r.png",
 	"thumbnail": "https://i.imgur.com/frIQq2C.jpg",
 	"color": "#8A5AAB",
 	"category": "videos",
-	"tags": ["cartoons", "stream"],
+	"tags": [
+		"cartoons",
+		"stream"
+	],
 	"settings": [
 		{
 			"id": "privacy",
@@ -28,7 +36,7 @@
 			"if": {
 				"privacy": false
 			},
-			"title": "Thumbnails Mode",
+			"title": "Show Thumbnail",
 			"icon": "fad fa-album",
 			"value": false
 		},
