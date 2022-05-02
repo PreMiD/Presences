@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 			"[class='ng-binding ng-scope selected']"
 		)[0]?.textContent;
 
-	let search: HTMLInputElement, genreSort: string, title: string;
+	let search: HTMLInputElement, genreSort: string;
 	if (window.location.hostname.includes("app.strem.io")) {
 		search = document.querySelector("#global-search-field");
 		video = document.querySelector<HTMLMediaElement>("#videoPlayer");
@@ -28,18 +28,9 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Searching For:";
 			presenceData.state = search.value;
 		} else if (page.includes("/detail/")) {
-			title = document.querySelector(
+			presenceData.details = document.querySelector(
 				"#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div"
 			).textContent;
-			presenceData.details = title;
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: `View ${title}`,
-						url: document.location.href
-					}
-				];
-			}
 			if (thumbnails) {
 				presenceData.largeImageKey =
 					document
@@ -62,19 +53,10 @@ presence.on("UpdateData", async () => {
 						active.length
 					)}`;
 				} else presenceData.state = "All";
-				title = document.querySelector(
-					"[class='ng-scope selected']"
-				)?.textContent;
 
-				if (buttons) {
-					presenceData.buttons = [
-						{
-							label: `Browse ${title}`,
-							url: document.location.href
-						}
-					];
-				}
-				presenceData.details = `Browsing ${title}:`;
+				presenceData.details = `Browsing ${
+					document.querySelector("[class='ng-scope selected']")?.textContent
+				}:`;
 			}
 		} else if (page.includes("settings")) {
 			presenceData.details = `${
@@ -93,14 +75,6 @@ presence.on("UpdateData", async () => {
 						)[2]?.textContent ?? "None";
 				}
 				if (genreSort === "Top") genreSort = "All";
-				if (buttons) {
-					presenceData.buttons = [
-						{
-							label: `Browse: ${active}`,
-							url: document.location.href
-						}
-					];
-				}
 				presenceData.details = `Browsing ${active}`;
 				presenceData.state = `Genre: ${genreSort}`;
 			} else presenceData.state = "Browsing Movies";
@@ -117,38 +91,10 @@ presence.on("UpdateData", async () => {
 					.substring(1, genreSort.length)
 					.toLowerCase()}`;
 			}
-			if (active) {
-				presenceData.details = `${active} Library`;
-				if (buttons) {
-					presenceData.buttons = [
-						{
-							label: `View ${active} Library`,
-							url: document.location.href
-						}
-					];
-				}
-			} else {
-				if (buttons) {
-					presenceData.buttons = [
-						{
-							label: `View Library`,
-							url: document.location.href
-						}
-					];
-				}
-				presenceData.details = "Library";
-			}
-		} else if (page.includes("/calendar")) {
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Calendar",
-						url: document.location.href
-					}
-				];
-			}
-			presenceData.details = "Calendar";
-		} else if (page.includes("player")) {
+			if (active) presenceData.details = `${active} Library`;
+			else presenceData.details = "Library";
+		} else if (page.includes("/calendar")) presenceData.details = "Calendar";
+		else if (page.includes("player")) {
 			if (video?.duration) {
 				timestamp = presence.getTimestampsfromMedia(video);
 				pauseCheck = video.paused;
@@ -180,20 +126,20 @@ presence.on("UpdateData", async () => {
 				delete presenceData.endTimestamp;
 				presenceData.smallImageKey = "pause";
 			}
-			title = document
+			presenceData.details = document
 				.querySelector("head > title")
 				?.textContent.replace("Stremio -", "");
-			presenceData.details = title;
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: `Join View Party For: ${title}`,
-						url: document.location.href
-					}
-				];
-			}
 		} else if (window.location.pathname === "/")
 			presenceData.details = "Homepage";
+
+		if (buttons && !privacy && page !== "https://app.strem.io/#/") {
+			presenceData.buttons = [
+				{
+					label: `View ${presenceData.details}`,
+					url: document.location.href
+				}
+			];
+		}
 	} else presenceData.details = "Browsing...";
 
 	if (presenceData.details) presence.setActivity(presenceData);
