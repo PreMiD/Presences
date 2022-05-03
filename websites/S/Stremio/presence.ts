@@ -54,9 +54,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Searching Addons For:";
 				presenceData.state = search.value;
 			} else {
-				if (active) {
-					presenceData.state = active;
-				} else presenceData.state = "All";
+				if (active) presenceData.state = active;
+				else presenceData.state = "All";
 				title = document.querySelector(
 					"[class='ng-scope selected']"
 				)?.textContent;
