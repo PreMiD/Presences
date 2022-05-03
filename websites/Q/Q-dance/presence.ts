@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		(presenceData.smallImageKey = "live"),
 			(presenceData.smallImageText = (
 				await presence.getStrings({
-					live: "presence.activity.live"
+					live: "general.live"
 				})
 			).live);
 		presenceData.largeImageKey =
