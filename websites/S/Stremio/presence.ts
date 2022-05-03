@@ -32,14 +32,12 @@ presence.on("UpdateData", async () => {
 				"#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div"
 			).textContent;
 			presenceData.details = title;
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: `View ${title}`,
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "Watch Video",
+					url: document.location.href
+				}
+			];
 			if (thumbnails) {
 				presenceData.largeImageKey =
 					document
@@ -57,23 +55,18 @@ presence.on("UpdateData", async () => {
 				presenceData.state = search.value;
 			} else {
 				if (active) {
-					presenceData.state = `${active.charAt(0).toUpperCase()}${active.slice(
-						1,
-						active.length
-					)}`;
+					presenceData.state = active;
 				} else presenceData.state = "All";
 				title = document.querySelector(
 					"[class='ng-scope selected']"
 				)?.textContent;
 
-				if (buttons) {
-					presenceData.buttons = [
-						{
-							label: `Browse ${title}`,
-							url: document.location.href
-						}
-					];
-				}
+				presenceData.buttons = [
+					{
+						label: "Browse",
+						url: document.location.href
+					}
+				];
 				presenceData.details = `Browsing ${title}:`;
 			}
 		} else if (page.includes("settings")) {
@@ -93,14 +86,12 @@ presence.on("UpdateData", async () => {
 						)[2]?.textContent ?? "None";
 				}
 				if (genreSort === "Top") genreSort = "All";
-				if (buttons) {
-					presenceData.buttons = [
-						{
-							label: `Browse: ${active}`,
-							url: document.location.href
-						}
-					];
-				}
+				presenceData.buttons = [
+					{
+						label: "Browse",
+						url: document.location.href
+					}
+				];
 				presenceData.details = `Browsing ${active}`;
 				presenceData.state = `Genre: ${genreSort}`;
 			} else presenceData.state = "Browsing Movies";
@@ -113,40 +104,26 @@ presence.on("UpdateData", async () => {
 				.replace("_", " ")
 				.trim();
 			if (genreSort) {
-				presenceData.state = `Sorted by: ${genreSort.substring(0, 1)}${genreSort
-					.substring(1, genreSort.length)
+				presenceData.state = `Sorted by: ${genreSort.charAt(0)}${genreSort
+					.slice(1)
 					.toLowerCase()}`;
 			}
-			if (active) {
-				presenceData.details = `${active} Library`;
-				if (buttons) {
-					presenceData.buttons = [
-						{
-							label: `View ${active} Library`,
-							url: document.location.href
-						}
-					];
+			if (active) presenceData.details = `${active} Library`;
+			else presenceData.details = "Library";
+
+			presenceData.buttons = [
+				{
+					label: "View Library",
+					url: document.location.href
 				}
-			} else {
-				if (buttons) {
-					presenceData.buttons = [
-						{
-							label: "View Library",
-							url: document.location.href
-						}
-					];
-				}
-				presenceData.details = "Library";
-			}
+			];
 		} else if (page.includes("/calendar")) {
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Calendar",
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View Calendar",
+					url: document.location.href
+				}
+			];
 			presenceData.details = "Calendar";
 		} else if (page.includes("player")) {
 			if (video?.duration) {
@@ -184,18 +161,17 @@ presence.on("UpdateData", async () => {
 				.querySelector("head > title")
 				?.textContent.replace("Stremio -", "");
 			presenceData.details = title;
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: `Join View Party For: ${title}`,
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "Join View Party",
+					url: document.location.href
+				}
+			];
 		} else if (window.location.pathname === "/")
 			presenceData.details = "Homepage";
 	} else presenceData.details = "Browsing...";
 
+	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
