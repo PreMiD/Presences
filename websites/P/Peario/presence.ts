@@ -63,14 +63,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = search.value;
 		} else presenceData.details = "Browsing...";
 	} else if (page.includes("stream") || page.includes("room")) {
-		if (buttons) {
-			presenceData.buttons = [
-				{
-					label: "Join Room",
-					url: document.location.href
-				}
-			];
-		}
+		presenceData.buttons = [
+			{
+				label: "Join Room",
+				url: document.location.href
+			}
+		];
 		if (
 			document.querySelector(
 				"#app > div > div > div > div.player > div.lock-screen > div > button"
@@ -85,14 +83,12 @@ presence.on("UpdateData", async () => {
 				document.querySelector("#app > div > div > div > div.users.show > div")
 					.textContent
 			} Viewers`;
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: `Join Room ${fetched}`,
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: `Join Room ${fetched}`,
+					url: document.location.href
+				}
+			];
 			if (video.paused || isNaN(video.duration)) {
 				delete presenceData.endTimestamp;
 				presenceData.smallImageKey = "pause";
@@ -105,16 +101,15 @@ presence.on("UpdateData", async () => {
 			let title;
 			if (fetched) title = fetched.meta.name;
 			presenceData.details = title;
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: `Join Room: ${title}`,
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: `Join Room: ${title}`,
+					url: document.location.href
+				}
+			];
 		}
 	}
+	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
