@@ -15,7 +15,7 @@
 	"thumbnail": "https://i.imgur.com/U4DlHTe.png",
 	"color": "#41AAA5",
 	"category": "other",
-	"tags": ["livelinkbio", "live", "link", "bio"],
+	"tags": ["livelinkbio", "live", "link", "bio", "url", "url-shortener", "shorten", "shortener"],
 	"settings": [
 		{
 			"id": "privacy",
