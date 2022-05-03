@@ -101,9 +101,10 @@ presence.on("UpdateData", async () => {
 				presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
 			}
 		} else {
-			const fetched = await fetchWithoutVideo(),
-				title = fetched.meta.name;
-			if (fetched) presenceData.details = title;
+			const fetched = await fetchWithoutVideo();
+			let title;
+			if (fetched) title = fetched.meta.name;
+			presenceData.details = title;
 			if (buttons) {
 				presenceData.buttons = [
 					{
