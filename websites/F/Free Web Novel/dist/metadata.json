@@ -51,7 +51,6 @@
 			"title": "Show Current Book",
 			"icon": "fas fa-book",
 			"value": true
-
 		},
 		{
 			"id": "showCover",
@@ -90,7 +89,6 @@
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
-
 		}
 	]
   }
