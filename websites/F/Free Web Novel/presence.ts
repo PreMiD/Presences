@@ -1,7 +1,7 @@
 const presence = new Presence({
 		clientId: "965294297048023050"
 	}),
-	browsingTimestamp = Math.floor(Date.now());
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	let [showCover, showButtons, showBook, showLogo] = await Promise.all([
