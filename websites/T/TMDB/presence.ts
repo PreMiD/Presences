@@ -96,5 +96,5 @@ presence.on("UpdateData", async () => {
 		else presenceData.details = "Searching";
 	} else if (pathname.startsWith("/")) presenceData.details = "Browsing TMDB";
 
-	presence.setActivity(presenceData, true);
+	presence.setActivity(presenceData);
 });
