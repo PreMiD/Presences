@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 			if (buttons) {
 				presenceData.buttons = [
 					{
-						label: `View Category: ${title}`,
+						label: "View Category",
 						url: document.location.href
 					}
 				];
