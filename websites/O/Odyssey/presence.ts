@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "970659747021877318"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: string, title2: string;
+let title: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -16,11 +16,11 @@ presence.on("UpdateData", async () => {
 		]);
 	if (privacy) presenceData.details = "Browsing...";
 	else if (document.location.hostname.includes("store")) {
-		if (document.querySelector("#decus-modal").className.includes("is-open"))
+		if (document.querySelector("#decus-modal").className.includes("is-open")) {
 			presenceData.details = document.querySelector(
 				"#decus-modal > div > div > div.modal__header > h4"
 			).textContent;
-		else if (page === "/") presenceData.details = "Homepage";
+		} else if (page === "/") presenceData.details = "Homepage";
 		else if (page.includes("/category/")) {
 			title = document.querySelector(
 				"body > div.decus-wrapper > div.body > div.content > div > div.panel-heading"
