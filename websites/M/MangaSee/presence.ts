@@ -63,23 +63,16 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (pathname.startsWith("/read-online/")) {
+		const page = document.querySelector('button[data-target="#PageModal"]');
+
 		presenceData.details = document
 			.querySelector(".col-lg-4 > a")
-			.textContent.replace(new RegExp("\\\t", "g"), "")
-			.replace(new RegExp("\\\n", "g"), "");
-		presenceData.state = `📖 Ch. ${
-			document
-				.querySelector('button[data-target="#ChapterModal"]')
-				.textContent.replace(new RegExp("\\\t", "g"), "")
-				.replace(new RegExp("\\\n", "g"), "")
-				.split(" ")[1]
-		} 📄 ${
-			document
-				.querySelector('button[data-target="#PageModal"]')
-				.textContent.replace(new RegExp("\\\t", "g"), "")
-				.replace(new RegExp("\\\n", "g"), "")
-				.split(" ")[1]
-		}`;
+			.textContent.trim();
+		presenceData.state = `📖 Ch. ${document
+			.querySelector('button[data-target="#ChapterModal"]')
+			.textContent.trim()
+			.split(" ")
+			.pop()}${page ? ` 📄 ${page.textContent.trim().split(" ").pop()}` : ""}`;
 		presenceData.smallImageKey = "read";
 		if (buttons) {
 			presenceData.buttons = [
