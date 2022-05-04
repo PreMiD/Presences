@@ -93,7 +93,8 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = `Viewing a Profile${privacySetting ? "" : ":"}`;
 		presenceData.state = `${
-			document.querySelector("div.QGPIr h1")?.textContent ?? "Unknown"
+			document.querySelector("head > title")?.textContent.split("(")[0] ??
+			"Unknown"
 		} (@${profileName.textContent})`;
 
 		if (profilePicture)
