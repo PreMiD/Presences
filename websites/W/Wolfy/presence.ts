@@ -138,11 +138,11 @@ function addButton(presenceData: PresenceData, label: string, url: string) {
 }
 
 function addConsultArticleButton(presenceData: PresenceData, url: string) {
-	addButton(presenceData, "Consulter l'article", url);
+	addButton(presenceData, getString("toConsultArticle"), url);
 }
 
 function addConsultCategoryButton(presenceData: PresenceData, url: string) {
-	addButton(presenceData, "Consulter la catégorie", url);
+	addButton(presenceData, getString("toConsultCategory"), url);
 }
 
 async function addJoinGameButton(presenceData: PresenceData, gameId: string) {
@@ -151,7 +151,7 @@ async function addJoinGameButton(presenceData: PresenceData, gameId: string) {
 		presenceData,
 		`(${
 			document.querySelector("div.Header_timer__36MsP")?.textContent
-		}) Rejoindre la partie`,
+		}) ${getString("joinGame")}`,
 		`https://wolfy.fr/game/${gameId}`
 	);
 }
@@ -159,7 +159,7 @@ async function addJoinGameButton(presenceData: PresenceData, gameId: string) {
 function addVisitHelpCenterButton(presenceData: PresenceData) {
 	addButton(
 		presenceData,
-		"Consulter le centre d'aide",
+		getString("visitHelpCenter"),
 		"https://help.wolfy.fr"
 	);
 }
@@ -178,7 +178,7 @@ async function addVisitProfilButton(
 }
 
 function addVisitWolfyButton(presenceData: PresenceData) {
-	addButton(presenceData, "Visiter le site de Wolfy", "https://wolfy.fr");
+	addButton(presenceData, getString("visitWolfy"), "https://wolfy.net");
 }
 
 async function handleCheckingLeaderboard(
@@ -186,18 +186,21 @@ async function handleCheckingLeaderboard(
 	username?: string
 ) {
 	presenceData.smallImageKey = "leaderboard";
-	presenceData.smallImageText = "Consulte le classement";
+	presenceData.smallImageText = getString("consultingLeaderboard");
 
 	if (!username) {
 		const classementType =
 			document.querySelector("div.Leaderboard_moonLeaderboard__3U2H7") !== null
-				? "Lunaire"
+				? "lunar"
 				: document.querySelector("div.Leaderboard_lifeLeaderboard__3Wtz1") !==
 				  null
-				? "Éternel"
+				? "life"
 				: null;
 
-		presenceData.details = `Regarde le classement ${classementType}`;
+		presenceData.details = getString("consultingSpecificLeaderboard").replace(
+			"$leaderboardType",
+			getString(classementType)
+		);
 		presenceData.state = `Top ${parseInt(
 			document.querySelector(
 				"div.Leaderboard_playerLine__1uAgP > div.Leaderboard_rank__n6aio"
@@ -205,9 +208,14 @@ async function handleCheckingLeaderboard(
 		).toLocaleString()} ${classementType} (${parseInt(
 			document.querySelector("div.Leaderboard_lifetimeXp__372DW > p")
 				?.textContent
-		).toLocaleString()} ${classementType === "Lunaire" ? "lauriers" : "xp"})`;
+		).toLocaleString()} ${
+			classementType === "lunar" ? getString("laurels") : "xp"
+		})`;
 	} else {
-		presenceData.details = `Regarde le profil de ${username}`;
+		presenceData.details = getString("lookingAtProfile").replace(
+			"$username",
+			username
+		);
 		presenceData.state = `[${
 			document.querySelector("div.ExperienceGroup_first__3h_RY > p")
 				?.textContent
@@ -250,20 +258,20 @@ presence.on("UpdateData", async () => {
 			addConsultArticleButton(presenceData, document.location.href);
 			addVisitHelpCenterButton(presenceData);
 		} else if (path.includes("/category") && path.split("/")[3]) {
-			presenceData.details = "Consulte la catégorie ⤵️";
+			presenceData.details = getString("consultingCategory");
 			presenceData.state = document.querySelector(
 				"span.csh-category-badge"
 			)?.textContent;
 			addConsultCategoryButton(presenceData, document.location.href);
 		} else {
-			presenceData.details = "Consulte le centre d'aide";
-			presenceData.state = "Page d'accueil";
+			presenceData.details = getString("consultingHelpCenter");
+			presenceData.state = getString("consultingHome");
 			addVisitHelpCenterButton(presenceData);
 		}
 	} else if (path.includes("/articles/") && path.split("/")[2 + pathOffset]) {
 		presenceData.details = getString("readingAnArticle");
 		presenceData.smallImageKey = "reading";
-		presenceData.smallImageText = "Lis un article";
+		presenceData.smallImageText = getString("readingAnArticle");
 		presenceData.state = document.querySelector("body h1").textContent;
 		addConsultArticleButton(presenceData, document.location.href);
 	} else if (path.includes("/game/") && path.split("/")[2 + pathOffset]) {
@@ -284,7 +292,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector("span.ChatMain_username__2C_7z")?.textContent // Will be the anonymous username if used
 		);
 
-		if (presenceData.state === "EN ATTENTE") {
+		if (presenceData.state === getString("waiting")) {
 			presenceData.state += ` (${
 				document.querySelector("div.Header_timer__36MsP")?.textContent
 			})`;
@@ -293,10 +301,10 @@ presence.on("UpdateData", async () => {
 
 		const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);
 
-		presenceData.details = "En jeu";
+		presenceData.details = getString("playing");
 
 		presenceData.smallImageKey = "live";
-		presenceData.smallImageText = "En jeu";
+		presenceData.smallImageText = getString("playing");
 		if (currTime && currTime.includes(":")) {
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
@@ -319,13 +327,13 @@ presence.on("UpdateData", async () => {
 			document.querySelector("p.Social_username__KhUdM")?.textContent
 		);
 
-		presenceData.details = "Dans un menu";
+		presenceData.details = getString("inAMenu");
 
 		switch (path.split("/")[1 + pathOffset]) {
 			case "skin":
 				presenceData.smallImageKey = "skin";
-				presenceData.smallImageText = "Choisis ton skin";
-				presenceData.state = "Consulte ses Skins";
+				presenceData.smallImageText = getString("choosingSkin");
+				presenceData.state = getString("consultingSkin");
 				break;
 			case "settings":
 				presenceData.state = getString("consultingSettings");
@@ -333,16 +341,16 @@ presence.on("UpdateData", async () => {
 			case "shop":
 				presenceData.smallImageKey = "shop";
 				presenceData.smallImageText = "Achete des skins";
-				presenceData.state = "Consulte la Boutique";
+				presenceData.state = getString("consultingShop");
 				break;
 			case "articles":
 				presenceData.state = getString("consultingArticles");
 				presenceData.smallImageKey = "reading";
-				presenceData.smallImageText = "En train de lire";
+				presenceData.smallImageText = getString("consultingArticles");
 				break;
 			case "play":
 			default:
-				presenceData.state = "Page d'accueil";
+				presenceData.state = getString("consultingHome");
 		}
 	}
 
