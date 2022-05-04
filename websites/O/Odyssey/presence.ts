@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "970659747021877318"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -22,7 +21,7 @@ presence.on("UpdateData", async () => {
 			).textContent;
 		} else if (page === "/") presenceData.details = "Homepage";
 		else if (page.includes("/category/")) {
-			title = document.querySelector(
+			const title = document.querySelector(
 				"body > div.decus-wrapper > div.body > div.content > div > div.panel-heading"
 			)?.textContent;
 			if (buttons) {
