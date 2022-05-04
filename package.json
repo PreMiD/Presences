@@ -24,7 +24,7 @@
 		"@commitlint/cli": "^16.2.4",
 		"@commitlint/config-angular": "^16.2.4",
 		"@types/babel__core": "^7.1.19",
-		"@types/chrome": "^0.0.183",
+		"@types/chrome": "^0.0.184",
 		"@types/debug": "^4.1.7",
 		"@types/glob": "^7.2.0",
 		"@types/json-to-ast": "^2.1.2",
