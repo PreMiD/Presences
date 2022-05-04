@@ -1,3 +1,100 @@
+type langStrings = {
+	choosingSkin: string;
+	consultingArticles: string;
+	consultingCategory: string;
+	consultingAnEvent: string;
+	consultingEvents: string;
+	consultingHelpCenter: string;
+	consultingHome: string;
+	consultingLeaderboard: string;
+	consultingShop: string;
+	consultingSettings: string;
+	consultingSkin: string;
+	consultingSpecificLeaderboard: string; // $leaderboardType
+	joinGame: string;
+	laurels: string;
+	life: string;
+	lookingAtProfile: string; // $username
+	lunar: string;
+	inAMenu: string;
+	playing: string;
+	readingAnArticle: string;
+	toConsultArticle: string;
+	toConsultCategory: string;
+	visitHelpCenter: string;
+	visitProfile: string; // $username
+	visitWolfy: string;
+	waiting: string;
+};
+
+const strings: Record<string, Partial<langStrings>> = {
+	en: {
+		choosingSkin: "Choosing a skin",
+		consultingArticles: "Consulting articles",
+		consultingCategory: "Consulting a category ⤵️",
+		consultingAnEvent: "Consulting an event ⤵️",
+		consultingEvents: "Consulting events",
+		consultingHelpCenter: "Consulting the help center",
+		consultingHome: "Consulting the home page",
+		consultingLeaderboard: "Consulting the leaderboard",
+		consultingShop: "Consulting the shop",
+		consultingSettings: "Consulting the settings",
+		consultingSkin: "Consulting a skin",
+		consultingSpecificLeaderboard:
+			"Consulting the $leaderboardType leaderboard",
+		joinGame: "Join game",
+		laurels: "Laurels",
+		life: "Eternal",
+		lookingAtProfile: "Looking at $username's profile",
+		lunar: "Lunar",
+		inAMenu: "In a menu",
+		playing: "In Game",
+		readingAnArticle: "Reading an article ⤵️",
+		toConsultArticle: "Consult this article",
+		toConsultCategory: "Consult this category",
+		visitHelpCenter: "Visit the help center",
+		visitProfile: "Visit $username's profile",
+		visitWolfy: "Visit Wolfy's website",
+		waiting: "WAITING"
+	},
+	fr: {
+		choosingSkin: "Choisit son skin",
+		consultingArticles: "Consulte les articles",
+		consultingCategory: "Consulte la catégorie ⤵️",
+		consultingAnEvent: "Consulte l'événement ⤵️",
+		consultingEvents: "Consulte les évènements",
+		consultingHelpCenter: "Consulte le centre d'aide",
+		consultingHome: "Consulte la page d'accueil",
+		consultingLeaderboard: "Consulte le classement",
+		consultingShop: "Consulte la boutique",
+		consultingSettings: "Consulte ses paramètres",
+		consultingSkin: "Consulte un skin",
+		consultingSpecificLeaderboard: "Consulte le classement $leaderboardType",
+		joinGame: "Rejoindre la partie",
+		laurels: "Lauriers",
+		life: "Éternel",
+		lookingAtProfile: "Regarde le profil de $username",
+		lunar: "Lunaire",
+		inAMenu: "Dans un menu",
+		playing: "En jeu",
+		readingAnArticle: "Lit l'article ⤵️",
+		toConsultArticle: "Consulter l'article",
+		toConsultCategory: "Consulter la catégorie",
+		visitHelpCenter: "Visite le centre d'aide",
+		visitProfile: "Voir le profil de $username",
+		visitWolfy: "Visiter le site de Wolfy",
+		waiting: "EN ATTENTE"
+	}
+};
+
+function getString(key: keyof langStrings) {
+	return (
+		strings[document.querySelector("html")?.lang || "en"]?.[key] ||
+		strings.fr[key] ||
+		`<${key}>`
+	);
+}
+
 const presence = new Presence({
 	clientId: "501842028569559061" // Official Wolfy Discord App Client ID, owned by Wolfy's Admin
 });
@@ -74,7 +171,7 @@ async function addVisitProfilButton(
 	if (!username) return;
 	if (!(await presence.getSetting("visitProfileButton"))) return;
 
-	let label = `Visiter le profil de ${username}`;
+	let label = `${getString("visitProfile").replace("$username", username)}`;
 	if (label.length > 32) label = `${label.slice(0, 31)}…`;
 
 	addButton(presenceData, label, `https://wolfy.fr/leaderboard/${username}`);
@@ -120,7 +217,7 @@ async function handleCheckingLeaderboard(
 				?.textContent.split(" / ")[0]
 		).toLocaleString()} xp & ${parseInt(
 			document.querySelector("p.PlayerCard_number__1d0CM").textContent
-		).toLocaleString()} lauriers`;
+		).toLocaleString()} ${getString("laurels")}`;
 		await addVisitProfilButton(presenceData, username);
 	}
 }
@@ -131,6 +228,9 @@ presence.on("UpdateData", async () => {
 	};
 
 	path = document.location.pathname;
+
+	const pathOffset =
+		path.split("/")[1] === document.querySelector("html")?.lang ? 1 : 0; // If the language is the first path element, we need to add an offset
 
 	if (window.location.href !== prev && !path.includes("/game/")) {
 		delete presenceData.startTimestamp;
@@ -143,7 +243,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.hostname === "help.wolfy.fr") {
 		if (path.includes("/article") && path.split("/")[3]) {
-			presenceData.details = "Lit l'article ⤵️";
+			presenceData.details = getString("readingAnArticle");
 			presenceData.state = document.querySelector(
 				"h1.csh-navigation-title-item-inner"
 			)?.textContent;
@@ -160,12 +260,13 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Page d'accueil";
 			addVisitHelpCenterButton(presenceData);
 		}
-	} else if (path.includes("/articles/") && path.split("/")[2]) {
-		presenceData.details = "Lis l'article ⤵️";
+	} else if (path.includes("/articles/") && path.split("/")[2 + pathOffset]) {
+		presenceData.details = getString("readingAnArticle");
 		presenceData.smallImageKey = "reading";
 		presenceData.smallImageText = "Lis un article";
 		presenceData.state = document.querySelector("body h1").textContent;
-	} else if (path.includes("/game/") && path.split("/")[2]) {
+		addConsultArticleButton(presenceData, document.location.href);
+	} else if (path.includes("/game/") && path.split("/")[2 + pathOffset]) {
 		presenceData.state = document
 			.querySelector("div.Header_nameState__3u5uu")
 			.textContent.toUpperCase();
@@ -187,7 +288,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state += ` (${
 				document.querySelector("div.Header_timer__36MsP")?.textContent
 			})`;
-			await addJoinGameButton(presenceData, path.split("/")[2]);
+			await addJoinGameButton(presenceData, path.split("/")[2 + pathOffset]);
 		}
 
 		const [startTimestamp, endTimestamp] = getTimestamps(cp, currTime);
@@ -206,7 +307,12 @@ presence.on("UpdateData", async () => {
 			document.querySelector("p.Social_username__KhUdM")?.textContent
 		);
 
-		await handleCheckingLeaderboard(presenceData, path.split("/")[2]);
+		await handleCheckingLeaderboard(
+			presenceData,
+			path.split("/")[2 + pathOffset]
+		);
+	} else if (path.includes("/event") && path.split("/")[2 + pathOffset]) {
+		// @TODO : Handle events when they will be implemented
 	} else {
 		await addVisitProfilButton(
 			presenceData,
@@ -215,27 +321,26 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Dans un menu";
 
-		switch (path) {
-			case "/skin":
+		switch (path.split("/")[1 + pathOffset]) {
+			case "skin":
 				presenceData.smallImageKey = "skin";
 				presenceData.smallImageText = "Choisis ton skin";
 				presenceData.state = "Consulte ses Skins";
 				break;
-			case "/settings":
-				presenceData.state = "Change ses paramètres";
+			case "settings":
+				presenceData.state = getString("consultingSettings");
 				break;
-			case "/shop":
+			case "shop":
 				presenceData.smallImageKey = "shop";
 				presenceData.smallImageText = "Achete des skins";
 				presenceData.state = "Consulte la Boutique";
 				break;
-			case "/articles":
-				presenceData.state = "Consulte les dernières actualités";
+			case "articles":
+				presenceData.state = getString("consultingArticles");
 				presenceData.smallImageKey = "reading";
 				presenceData.smallImageText = "En train de lire";
 				break;
-			case "/play":
-			case "/":
+			case "play":
 			default:
 				presenceData.state = "Page d'accueil";
 		}
