@@ -167,6 +167,10 @@ function addVisitHelpCenterButton(presenceData: PresenceData) {
 	);
 }
 
+function addVisitEventButton(presenceData: PresenceData, href: string) {
+	addButton(presenceData, getString("toConsultEvent"), href);
+}
+
 async function addVisitProfilButton(
 	presenceData: PresenceData,
 	username: string
