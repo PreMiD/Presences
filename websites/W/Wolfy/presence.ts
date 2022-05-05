@@ -21,6 +21,7 @@ type langStrings = {
 	readingAnArticle: string;
 	toConsultArticle: string;
 	toConsultCategory: string;
+	toConsultEvent: string;
 	visitHelpCenter: string;
 	visitProfile: string; // $username
 	visitWolfy: string;
@@ -52,6 +53,7 @@ const strings: Record<string, Partial<langStrings>> = {
 		readingAnArticle: "Reading an article ⤵️",
 		toConsultArticle: "Consult this article",
 		toConsultCategory: "Consult this category",
+		toConsultEvent: "Consult this event",
 		visitHelpCenter: "Visit the help center",
 		visitProfile: "Visit $username's profile",
 		visitWolfy: "Visit Wolfy's website",
@@ -80,6 +82,7 @@ const strings: Record<string, Partial<langStrings>> = {
 		readingAnArticle: "Lit l'article ⤵️",
 		toConsultArticle: "Consulter l'article",
 		toConsultCategory: "Consulter la catégorie",
+		toConsultEvent: "Consulter l'événement",
 		visitHelpCenter: "Visite le centre d'aide",
 		visitProfile: "Voir le profil de $username",
 		visitWolfy: "Visiter le site de Wolfy",
@@ -320,7 +323,11 @@ presence.on("UpdateData", async () => {
 			path.split("/")[2 + pathOffset]
 		);
 	} else if (path.includes("/event") && path.split("/")[2 + pathOffset]) {
-		// @TODO : Handle events when they will be implemented
+		presenceData.details = getString("consultingAnEvent");
+		presenceData.state = document.querySelector(
+			"div.Event_title__hCZ5r"
+		)?.textContent;
+		addVisitEventButton(presenceData, document.location.href);
 	} else {
 		await addVisitProfilButton(
 			presenceData,
