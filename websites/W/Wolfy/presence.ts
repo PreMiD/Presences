@@ -259,7 +259,10 @@ presence.on("UpdateData", async () => {
 
 	presenceData.startTimestamp = elapsed;
 
-	if (document.location.hostname === "help.wolfy.fr") {
+	if (
+		document.location.hostname === "help.wolfy.net" ||
+		document.location.hostname === "help.wolfy.fr"
+	) {
 		if (path.includes("/article") && path.split("/")[3]) {
 			presenceData.details = getString("readingAnArticle");
 			presenceData.state = document.querySelector(
