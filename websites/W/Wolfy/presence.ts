@@ -117,7 +117,10 @@ function getTime(list: string[]): number {
 	return ret;
 }
 
-function getTimestamps(audioTime: number, audioDuration: string): number[] {
+function getInGameTimestamps(
+	audioTime: number,
+	audioDuration: string
+): number[] {
 	return [
 		Date.now(),
 		audioTime + getTime(audioDuration.split(":").reverse()) * 1000
