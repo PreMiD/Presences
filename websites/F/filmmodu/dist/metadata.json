@@ -4,14 +4,20 @@
 		"name": "EGGSY",
 		"id": "162969778699501569"
 	},
+	"contributors": [
+		{
+			"name": "Fast",
+			"id": "308087335873019905"
+		}
+	],
 	"service": "filmmodu",
 	"description": {
 		"en": "filmmodu is a Turkish service that provides latest movies.",
 		"tr": "Film modun geldiyse yüksek kalitede en yeni filmleri 1080p kalitede izleyebileceğiniz reklamsız film sitesi.",
 		"nl": "filmmodu is een Turkse dienst die de nieuwste films aanbiedt."
 	},
-	"url": "www.filmmodu.org",
-	"version": "1.2.14",
+	"url": "www.filmmodu4.com",
+	"version": "1.2.15",
 	"logo": "https://i.imgur.com/JV9Ef1p.png",
 	"thumbnail": "https://i.imgur.com/WVtVwEN.png",
 	"color": "#ffc526",
