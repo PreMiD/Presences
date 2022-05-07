@@ -1,11 +1,10 @@
 const presence = new Presence({
 		clientId: "972073369564483584"
 	}),
-	browsingStamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
-	return presence.getStrings(
-		{
+	return presence.getStrings({
 			play: "general.playing",
 			pause: "general.paused",
 			search: "general.search",
@@ -27,17 +26,15 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-	const [newLang] = await Promise.all([
-			presence.getSetting<string>("lang").catch(() => "en")
-		]),
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		presenceData: PresenceData = {
 			largeImageKey: "main",
-			startTimestamp: browsingStamp
+			startTimestamp: browsingTimestamp
 		},
 		title =
 			document.querySelector(
 				"div.layout-body.media-width > div > ul > li:nth-child(3) > span"
-			)?.textContent ||
+			)?.textContent ??
 			document.querySelector(
 				"div.layout-normal > div.layout-body.media-width > div > ul > li:nth-child(2) > a"
 			)?.textContent,
@@ -50,13 +47,12 @@ presence.on("UpdateData", async () => {
 	}
 	// Main Site
 	if (document.location.hostname === "www.bilibili.tv") {
-		switch (document.location.pathname.toString().toLowerCase().split("/")[2]) {
+		switch (document.location.pathname.toLowerCase().split("/")[2]) {
 			case "video": {
 				presenceData.details = strings.watchingVid;
 				presenceData.state = title;
-				presenceData.startTimestamp = browsingStamp;
 				presenceData.smallImageKey = playing ? "pause" : "play";
-				presenceData.smallImageText = playing ? strings.play : strings.pause;
+				presenceData.smallImageText = !playing ? strings.play : strings.pause;
 				presenceData.largeImageKey = document
 					.querySelector<HTMLImageElement>('meta[name="og:image"]')
 					.getAttribute("content")
@@ -91,7 +87,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("div.video-info__title-wrap > h1 > a")
 						.textContent
 				}`;
-				presenceData.state = `${ep}`;
+				presenceData.state = ep;
 				presenceData.smallImageKey = playing ? "pause" : "play";
 				presenceData.smallImageText = !playing ? strings.play : strings.pause;
 				presenceData.largeImageKey = document
@@ -151,12 +147,12 @@ presence.on("UpdateData", async () => {
 		}
 		// Studio
 	} else if (document.location.hostname === "studio.bilibili.tv") {
-		if (document.location.pathname.toString().toLowerCase().split("/")[1]) {
-			presenceData.details =
-				document.querySelector(".is-active")?.textContent ?? "?";
-		} else {
-			presenceData.details =
-				document.querySelector(".nav-menu__menu-title")?.textContent ?? "?";
+		if (document.location.pathname.toLowerCase().split("/")[1])
+			presenceData.details = document.querySelector(".is-active").textContent;
+		else {
+			presenceData.details = document.querySelector(
+				".nav-menu__menu-title"
+			).textContent;
 		}
 		presenceData.state = "Bilibili Studio";
 	}
