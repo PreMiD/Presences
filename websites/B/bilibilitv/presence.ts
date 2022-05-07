@@ -123,10 +123,9 @@ presence.on("UpdateData", async () => {
 			}
 			case "space": {
 				presenceData.details = strings.viewChannel.replace(":", "");
-				presenceData.state = `${
+				presenceData.state =
 					document.querySelector(".space-info__name")?.textContent ??
-					strings.searchSomething
-				}`;
+					strings.searchSomething;
 				break;
 			}
 			case "index": {
