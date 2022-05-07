@@ -4,7 +4,8 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
-	return presence.getStrings({
+	return presence.getStrings(
+		{
 			play: "general.playing",
 			pause: "general.paused",
 			search: "general.search",
