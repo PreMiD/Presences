@@ -1,44 +1,48 @@
 const presence = new Presence({
-		clientId: "972246349917610054"
-	}),
+	clientId: "972246349917610054"
+}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
-enum PathNames {
-	home = "/home",
-	watch = "/watch/",
-	profile = "/profile/",
-	anime = "/anime/"
-}
-
-presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			largeImageKey: "https://imgur.com/8MP205p.png",
-			startTimestamp: browsingTimestamp
-		},
-		pathName = window.location.pathname
-	function DefaultPresence(): void {
-		if (!presenceData.details) presence.setActivity();
-		else presence.setActivity(presenceData);
+presence.on("UpdateData", () => {
+	const defaultData = {
+		largeImageKey: "logo",
+		startTimestamp: browsingTimestamp
+	}, data: PresenceData = defaultData,
+		pathName = window.location.pathname;
+	if (pathName.startsWith("/home")) {
+		data.details = "Início:";
+		data.state = "Visualizando animes.";
+		data.startTimestamp = browsingTimestamp;
+	} else if (pathName.startsWith("/profile/")) {
+		const username = document.querySelector("h3").childNodes[0]?.textContent,
+			section = document.querySelector("button[class*=blue] span")?.textContent;
+		data.details = "Visualizando Perfil:";
+		data.state = `${username} - ${section}`;
+		data.startTimestamp = browsingTimestamp;
+		data.buttons = [
+			{ label: `Perfil de ${username}`, url: location.href }
+		];
+	} else if (pathName.startsWith("/anime/")) {
+		const animename = document.querySelector("section div[class^=text-3xl]")?.textContent;
+		data.details = "Visualizando Anime:";
+		data.state = `${animename}`;
+		data.startTimestamp = browsingTimestamp;
+		data.buttons = [
+			{ label: "🐒\u200C\u200C", url: location.href }
+		];
+	} else if (pathName.startsWith("/watch/")) {
+		const animename = document.querySelector("span.text-sm.font-bold.underline")?.textContent,
+			episode = document.querySelector("span.text-lg.font-bold")?.textContent;
+		data.details = animename;
+		data.state = episode;
+		data.buttons = [
+			{ label: `Assistir EP ${episode.match(/^\d+/g)[0]}`, url: location.href }
+		];
+		const video = document.querySelector("video");
+		if (!video.paused && video.readyState >= 1)
+			[data.startTimestamp, data.endTimestamp] = presence.getTimestamps(video.currentTime, video.duration);
+	} if (document.querySelector("input[id^=headlessui]")) {
+		data.details = "Pesquisando Animes"
 	}
-	if (pathName.startsWith(PathNames.home)) {
-		presenceData.details = "Início:";
-		presenceData.state = `Visualizando Animes.`;
-		presenceData.startTimestamp = browsingTimestamp;
-	} else if (pathName.startsWith(PathNames.profile)) {
-		const username = document.querySelector("h3").childNodes[0].textContent;
-		presenceData.details = "Visualizando Perfil:";
-		presenceData.state = `${username}`;
-		presenceData.startTimestamp = browsingTimestamp;
-	} else if (pathName.startsWith(PathNames.anime)) {
-		const animename = document.querySelector("section div[class^=text-3xl]");
-		presenceData.details = "Visualizando Anime:";
-		presenceData.state = `${animename.textContent}`;
-		presenceData.startTimestamp = browsingTimestamp;
-	} else if (pathName.startsWith(PathNames.watch)) {
-		const animename = document.querySelector("section div[class^=text-3xl]");
-		presenceData.details = "Assistindo Anime:";
-		presenceData.state = `${animename.textContent}`;
-		presenceData.startTimestamp = browsingTimestamp;
-	}
-	DefaultPresence();
+	if (!data.details) presence.setActivity(defaultData);
+	else presence.setActivity(data);
 });
