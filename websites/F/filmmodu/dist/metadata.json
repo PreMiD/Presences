@@ -4,12 +4,6 @@
 		"name": "EGGSY",
 		"id": "162969778699501569"
 	},
-	"contributors": [
-		{
-			"name": "Fast",
-			"id": "308087335873019905"
-		}
-	],
 	"service": "filmmodu",
 	"description": {
 		"en": "filmmodu is a Turkish service that provides latest movies.",
