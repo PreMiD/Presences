@@ -21,8 +21,10 @@ presence.on("UpdateData", () => {
 		data.buttons = [{ label: "Ver Perfil", url: location.href }];
 	} else if (pathname.startsWith("/anime/")) {
 		const genres: string[] = [];
-		for (const _ of document.querySelectorAll("div[class^=sm]>div[class^=mb]"))
-			genres.push(_.textContent);
+		for (const item of document.querySelectorAll(
+			"div[class^=sm]>div[class^=mb]"
+		))
+			genres.push(item.textContent);
 		data.details = document.querySelector(
 			"section div[class^=text-3xl]"
 		)?.textContent;
