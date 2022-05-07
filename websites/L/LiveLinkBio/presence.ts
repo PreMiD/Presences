@@ -22,6 +22,12 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Searching for:";
 			presenceData.state = search.value;
 		} else {
+			presenceData.buttons = [
+				{
+					label: "View Docs",
+					url: document.location.href
+				}
+			];
 			presenceData.details = "Reading docs:";
 			presenceData.state = document.querySelector(
 				"body > div.gitbook-root > div > div > div.css-1dbjc4n.r-1ro0kt6.r-16y2uox.r-1wbh5a2 > div.css-1dbjc4n.r-14lw9ot.r-13awgt0 > div > div > div.css-1dbjc4n.r-1ro0kt6.r-18u37iz.r-16y2uox.r-1wbh5a2 > div > div > div.css-1dbjc4n.r-eqz5dr.r-1ifxtd0.r-1ygmrgt > div.css-1dbjc4n.r-18u37iz > div.css-1dbjc4n.r-1ro0kt6.r-16y2uox.r-1wbh5a2 > div"
@@ -36,11 +42,21 @@ presence.on("UpdateData", async () => {
 			active = document.querySelector('[class="nav-link active"]');
 		if (document.location.pathname == "/") presenceData.details = "Homepage";
 		else if (document.location.pathname.includes("affiliate")) {
+			presenceData.buttons = [
+				{
+					label: "View Affiliates",
+					url: document.location.href
+				}
+			];
 			presenceData.details = "Affiliate";
-			title = "Affiliate";
 		} else if (document.location.pathname.includes("dashboard")) {
 			presenceData.details = "Dashboard";
-			title = "Dashboard";
+			presenceData.buttons = [
+				{
+					label: "View Dashboard",
+					url: document.location.href
+				}
+			];
 		} else if (document.location.pathname.includes("link")) {
 			presenceData.state = document.querySelector("#link_url").textContent;
 			if (document.location.pathname.endsWith("statistics"))
@@ -55,6 +71,12 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLInputElement>("#update_name").value;
 		} else if (type && !active) {
 			title = type.textContent.trim();
+			presenceData.buttons = [
+				{
+					label: "View all",
+					url: document.location.href
+				}
+			];
 			presenceData.details = `All ${title}`;
 		} else if (active) {
 			title = active.textContent.trim();
