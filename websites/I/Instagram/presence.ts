@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = `Viewing a Profile${privacySetting ? "" : ":"}`;
 		presenceData.state = `${
-			document.querySelector("head > title")?.textContent.split("(")[0] ??
+			document.querySelector("head > title")?.textContent.split("(")[0].trim() ??
 			"Unknown"
 		} (@${profileName.textContent})`;
 
