@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector(
 				"div.layout-normal > div.layout-body.media-width > div > ul > li:nth-child(2) > a"
 			)?.textContent,
-		playing = document.querySelector(
+		playing = !document.querySelector(
 			"img.player-mobile-icon.player-mobile-pause-icon.player-mobile-active"
 		);
 	if (oldLang !== newLang || !strings) {
@@ -52,8 +52,8 @@ presence.on("UpdateData", async () => {
 			case "video": {
 				presenceData.details = strings.watchingVid;
 				presenceData.state = title;
-				presenceData.smallImageKey = playing ? "pause" : "play";
-				presenceData.smallImageText = playing ? strings.pause : strings.play;
+				presenceData.smallImageKey = playing ? "play" : "pause" ;
+				presenceData.smallImageText = playing ? strings.play : strings.pause ;
 				presenceData.largeImageKey = document
 					.querySelector<HTMLImageElement>('meta[name="og:image"]')
 					.getAttribute("content")
@@ -89,8 +89,8 @@ presence.on("UpdateData", async () => {
 						.textContent
 				}`;
 				presenceData.state = ep;
-				presenceData.smallImageKey = playing ? "pause" : "play";
-				presenceData.smallImageText = playing ? strings.pause : strings.play;
+				presenceData.smallImageKey = playing ? "play" : "pause" ;
+				presenceData.smallImageText = playing ? strings.play : strings.pause ;
 				presenceData.largeImageKey = document
 					.querySelector<HTMLImageElement>('meta[name="og:image"]')
 					.getAttribute("content")
