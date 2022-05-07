@@ -9,10 +9,7 @@
 		"nl": "Deel je streams. Peario zorgt er voor dat je Stremio streams kan delen met je vrienden.",
 		"en": "Share your streams. Peario allows you to watch Stremio streams with your friends."
 	},
-	"url": [
-		"peario.xyz",
-		"www.peario.xyz"
-	],
+	"url": "peario.xyz",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/LPckbQY.png",
 	"thumbnail": "https://i.imgur.com/tlXaZ4m.png",
