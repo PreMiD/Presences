@@ -7,41 +7,46 @@ presence.on("UpdateData", () => {
 		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp
 	}, data: PresenceData = defaultData,
-		pathName = window.location.pathname;
-	if (pathName.startsWith("/home")) {
+		{ pathname } = window.location;
+	if (pathname.startsWith("/home")) {
 		data.details = "Início:";
 		data.state = "Visualizando animes.";
-		data.startTimestamp = browsingTimestamp;
-	} else if (pathName.startsWith("/profile/")) {
+		data.buttons = [
+			{ label: "💻・Puray Animes", url: location.href }
+		];
+	} else if (pathname.startsWith("/profile/")) {
 		const username = document.querySelector("h3").childNodes[0]?.textContent,
 			section = document.querySelector("button[class*=blue] span")?.textContent;
 		data.details = "Visualizando Perfil:";
 		data.state = `${username} - ${section}`;
 		data.startTimestamp = browsingTimestamp;
 		data.buttons = [
-			{ label: `Perfil de ${username}`, url: location.href }
+			{ label: `🐒・Perfil de ${username}`, url: location.href }
 		];
-	} else if (pathName.startsWith("/anime/")) {
+	} else if (pathname.startsWith("/anime/")) {
 		const animename = document.querySelector("section div[class^=text-3xl]")?.textContent;
-		data.details = "Visualizando Anime:";
-		data.state = `${animename}`;
+		const genders: string[] = [];
+		document.querySelectorAll("div[class^=sm]>div[class^=mb]").forEach(_ => { genders.push(_.textContent) });
+		data.details = animename;
+		if (genders.length)
+			data.state = genders.join(", ");
 		data.startTimestamp = browsingTimestamp;
 		data.buttons = [
-			{ label: "🐒\u200C\u200C", url: location.href }
+			{ label: "📺・Assistir Anime", url: location.href }
 		];
-	} else if (pathName.startsWith("/watch/")) {
+	} else if (pathname.startsWith("/watch/")) {
 		const animename = document.querySelector("span.text-sm.font-bold.underline")?.textContent,
 			episode = document.querySelector("span.text-lg.font-bold")?.textContent;
 		data.details = animename;
 		data.state = episode;
 		data.buttons = [
-			{ label: `Assistir EP ${episode.match(/^\d+/g)[0]}`, url: location.href }
+			{ label: `📺・Assistir EP ${episode.match(/^\d+/g)[0]}`, url: location.href }
 		];
 		const video = document.querySelector("video");
 		if (!video.paused && video.readyState >= 1)
 			[data.startTimestamp, data.endTimestamp] = presence.getTimestamps(video.currentTime, video.duration);
 	} if (document.querySelector("input[id^=headlessui]")) {
-		data.details = "Pesquisando Animes"
+		data.details = "🔍・Pesquisando Animes"
 	}
 	if (!data.details) presence.setActivity(defaultData);
 	else presence.setActivity(data);

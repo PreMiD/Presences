@@ -6,11 +6,11 @@
   },
   "service": "Puray Animes",
   "description": {
-    "en": "Puray animes is a site to watch anime without ads.",
-		"pt_BR": "Puray animes é um site para ver animes sem anuncios."
+    "en": "Puray Animes is a site to watch anime without ads.",
+		"pt_BR": "Puray Animes é um site para ver animes sem anuncios."
   },
   "url": "puray.moe",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/8MP205p.png",
   "thumbnail": "https://i.imgur.com/01bTk7A.png",
   "color": "#0e0e12",
