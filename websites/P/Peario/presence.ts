@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 		const search = document.querySelector<HTMLInputElement>(
 			"#app > div > div > div > div > input"
 		);
-		if (search && search.value) {
+		if (search?.value) {
 			presenceData.details = "Searching for:";
 			presenceData.state = search.value;
 		} else presenceData.details = "Browsing...";
