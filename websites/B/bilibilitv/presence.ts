@@ -52,8 +52,8 @@ presence.on("UpdateData", async () => {
 			case "video": {
 				presenceData.details = strings.watchingVid;
 				presenceData.state = title;
-				presenceData.smallImageKey = playing ? "play" : "pause" ;
-				presenceData.smallImageText = playing ? strings.play : strings.pause ;
+				presenceData.smallImageKey = playing ? "play" : "pause";
+				presenceData.smallImageText = playing ? strings.play : strings.pause;
 				presenceData.largeImageKey = document
 					.querySelector<HTMLImageElement>('meta[name="og:image"]')
 					.getAttribute("content")
@@ -89,8 +89,8 @@ presence.on("UpdateData", async () => {
 						.textContent
 				}`;
 				presenceData.state = ep;
-				presenceData.smallImageKey = playing ? "play" : "pause" ;
-				presenceData.smallImageText = playing ? strings.play : strings.pause ;
+				presenceData.smallImageKey = playing ? "play" : "pause";
+				presenceData.smallImageText = playing ? strings.play : strings.pause;
 				presenceData.largeImageKey = document
 					.querySelector<HTMLImageElement>('meta[name="og:image"]')
 					.getAttribute("content")
