@@ -2,13 +2,13 @@ const presence = new Presence({
 		clientId: "873728851052752896"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-	path = document.location;
+	{ hostname, pathname } = document.location;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bloom_logo"
+		largeImageKey: "bloom_logo",
+		startTimestamp: browsingTimestamp
 	};
-	presenceData.startTimestamp = browsingTimestamp;
 	if (path.hostname === "bloom.host") {
 		presenceData.smallImageKey = "globe-solid";
 		presenceData.details = "Viewing the main website";
