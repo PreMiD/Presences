@@ -4,36 +4,39 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 	const { pathname } = window.location,
-		data: PresenceData = {
+		presenceData: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		};
 	if (document.querySelector("input[id^=headlessui]"))
-		data.details = "Pesquisando Animes";
-	else if (pathname.startsWith("/home")) data.details = "Na página principal";
+		presenceData.details = "Pesquisando Animes";
+	else if (pathname.startsWith("/home"))
+		presenceData.details = "Na página principal";
 	else if (pathname.startsWith("/profile/")) {
-		data.details = "Visualizando perfil:";
-		data.state = `${
+		presenceData.details = "Visualizando perfil:";
+		presenceData.state = `${
 			document.querySelector("h3").childNodes[0]?.textContent
 		} - ${document.querySelector("button[class*=blue] span")?.textContent}`;
-		data.buttons = [{ label: "Ver perfil", url: location.href }];
+		presenceData.buttons = [{ label: "Ver perfil", url: location.href }];
 	} else if (pathname.startsWith("/anime/")) {
 		const genres: string[] = [];
 		for (const item of document.querySelectorAll(
 			"div[class^=sm]>div[class^=mb]"
 		))
 			genres.push(item.textContent);
-		data.details = document.querySelector(
+		presenceData.details = document.querySelector(
 			"section div[class^=text-3xl]"
 		)?.textContent;
-		if (genres.length) data.state = genres.join(", ");
-		data.buttons = [{ label: "Assistir anime", url: location.href }];
+		if (genres.length) presenceData.state = genres.join(", ");
+		presenceData.buttons = [{ label: "Assistir anime", url: location.href }];
 	} else if (pathname.startsWith("/watch/")) {
-		data.details = document.querySelector(
+		presenceData.details = document.querySelector(
 			"span.text-sm.font-bold.underline"
 		)?.textContent;
-		data.state = document.querySelector("span.text-lg.font-bold")?.textContent;
-		data.buttons = [
+		presenceData.state = document.querySelector(
+			"span.text-lg.font-bold"
+		)?.textContent;
+		presenceData.buttons = [
 			{
 				label: "Assistir episódio",
 				url: location.href
@@ -41,12 +44,10 @@ presence.on("UpdateData", () => {
 		];
 		const video = document.querySelector("video");
 		if (!video.paused && video.readyState >= 1) {
-			[data.startTimestamp, data.endTimestamp] = presence.getTimestamps(
-				video.currentTime,
-				video.duration
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(video.currentTime, video.duration);
 		}
 	}
-	if (!data.details) presence.setActivity();
-	else presence.setActivity(data);
+	if (!presenceData.details) presence.setActivity();
+	else presence.setActivity(presenceData);
 });
