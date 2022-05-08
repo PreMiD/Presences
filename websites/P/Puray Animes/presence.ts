@@ -11,8 +11,7 @@ presence.on("UpdateData", () => {
 	if (document.querySelector("input[id^=headlessui]"))
 		data.details = "Pesquisando Animes";
 	else if (pathname.startsWith("/home")) {
-		data.details = "Início";
-		data.state = "Navegando";
+		data.details = "Na página principal";
 	} else if (pathname.startsWith("/profile/")) {
 		data.details = "Visualizando perfil:";
 		data.state = `${
