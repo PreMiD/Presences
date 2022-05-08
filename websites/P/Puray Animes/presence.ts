@@ -4,15 +4,14 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 	const { pathname } = window.location,
-		presenceData: PresenceData = {
+		data: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		};
 	if (document.querySelector("input[id^=headlessui]"))
 		data.details = "Pesquisando Animes";
-	else if (pathname.startsWith("/home")) {
-		data.details = "Na página principal";
-	} else if (pathname.startsWith("/profile/")) {
+	else if (pathname.startsWith("/home")) data.details = "Na página principal";
+	else if (pathname.startsWith("/profile/")) {
 		data.details = "Visualizando perfil:";
 		data.state = `${
 			document.querySelector("h3").childNodes[0]?.textContent
