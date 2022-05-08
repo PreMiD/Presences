@@ -38,84 +38,73 @@ presence.on("UpdateData", async () => {
 		path.hostname === "demo.bloom.host"
 	) {
 		presenceData.details = "Using the panel";
+		presenceData.smallImageKey = "terminal-solid";
 		if (path.pathname.includes("account")) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Editing: Account Details";
-			presenceData.smallImageKey = "user-solid";
 		} else if (path.pathname.includes("console")) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing: The console";
-			presenceData.smallImageKey = "terminal-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("logs")
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing: Audit Logs";
-			presenceData.smallImageKey = "file-alt-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("import")
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Using: The Server Importer ";
-			presenceData.smallImageKey = "file-import-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("startup")
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing: Startup";
-			presenceData.smallImageKey = "rocket-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("settings")
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing: Settings";
-			presenceData.smallImageKey = "cog-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("subdomain")
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing: Subdomains";
-			presenceData.smallImageKey = "map-pin-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("network")
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing: Ports & Proxies";
-			presenceData.smallImageKey = "network-wired-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("backups")
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Creating: Backups";
-			presenceData.smallImageKey = "window-restore-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("users")
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing: SubUsers";
-			presenceData.smallImageKey = "users-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("schedules")
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing: Schedules";
-			presenceData.smallImageKey = "calender-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("databases")
 		) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing: Databases";
-			presenceData.smallImageKey = "database-solid";
 		} else if (
 			path.pathname.includes("server") &&
 			path.pathname.includes("minecraft")
@@ -137,7 +126,6 @@ presence.on("UpdateData", async () => {
 		} else if (path.pathname.includes("files")) {
 			presenceData.details = "Using the panel";
 			presenceData.state = "Editing: Files";
-			presenceData.smallImageKey = "folder-solid";
 		}
 	}
 	if (path.hostname === "status.bloom.host") {
@@ -154,9 +142,11 @@ presence.on("UpdateData", async () => {
 	}
 	if (path.hostname === "vps.bloom.host")
 		presenceData.details = "Using the VPS panel";
+	presenceData.smallImageKey = "server-solid";
 
 	if (path.hostname === "billing.bloom.host")
 		presenceData.details = "Using the Billing Panel";
+	presenceData.smallImageKey = "shopping-cart-solid";
 
 	if (!presenceData.details) presence.setActivity();
 	else presence.setActivity(presenceData);
