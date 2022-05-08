@@ -17,7 +17,7 @@ presence.on("UpdateData", () => {
 		data.state = `${
 			document.querySelector("h3").childNodes[0]?.textContent
 		} - ${document.querySelector("button[class*=blue] span")?.textContent}`;
-		data.buttons = [{ label: "Ver Perfil", url: location.href }];
+		data.buttons = [{ label: "Ver perfil", url: location.href }];
 	} else if (pathname.startsWith("/anime/")) {
 		const genres: string[] = [];
 		for (const item of document.querySelectorAll(
