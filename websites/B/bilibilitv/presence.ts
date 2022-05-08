@@ -84,9 +84,9 @@ presence.on("UpdateData", async () => {
 						title.match(/\d+/g)[0]
 					}`;
 				} else ep = `${strings.episode} ${title.match(/\d+/g)[0]}`;
-				presenceData.details =
-					document.querySelector("div.video-info__title-wrap > h1 > a")
-						.textContent;
+				presenceData.details = document.querySelector(
+					"div.video-info__title-wrap > h1 > a"
+				).textContent;
 				presenceData.state = ep;
 				presenceData.smallImageKey = playing ? "play" : "pause";
 				presenceData.smallImageText = playing ? strings.play : strings.pause;
