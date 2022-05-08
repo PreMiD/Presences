@@ -36,7 +36,7 @@ presence.on("UpdateData", () => {
 		data.state = document.querySelector("span.text-lg.font-bold")?.textContent;
 		data.buttons = [
 			{
-				label: "Assistir Episódio",
+				label: "Assistir episódio",
 				url: location.href
 			}
 		];
