@@ -55,7 +55,7 @@ presence.on("UpdateData", () => {
 			).textContent;
 			presenceData.state = `Profil de ${profilename}`;
 			presenceData.buttons = [
-				{ label: "Consulter le profil", url: `${document.URL}` }
+				{ label: "Consulter le profil", url: document.location.href }
 			];
 		} else if (document.location.pathname.includes("/blog")) {
 			presenceData.details = "Viewing Page:";
@@ -77,7 +77,7 @@ presence.on("UpdateData", () => {
 			).textContent;
 			presenceData.state = `Vendu par ${nomannonceur}`;
 			presenceData.buttons = [
-				{ label: "Consulter l'annonce", url: `${document.URL}` }
+				{ label: "Consulter l'annonce", url: document.location.href }
 			];
 		} else if (document.location.pathname.includes("/voitures/")) {
 			presenceData.details = `Annonce ${document.title.split("-")[0]}`;
@@ -86,7 +86,7 @@ presence.on("UpdateData", () => {
 			).textContent;
 			presenceData.state = `Vendu par ${nomannonceur}`;
 			presenceData.buttons = [
-				{ label: "Consulter l'annonce", url: `${document.URL}` }
+				{ label: "Consulter l'annonce", url: document.location.href }
 			];
 		} else if (document.location.pathname.includes("/")) {
 			presenceData.details = `Annonce ${document.title.split("-")[0]}`;
@@ -98,7 +98,7 @@ presence.on("UpdateData", () => {
 				).textContent;
 			presenceData.state = `Vendu ${prixannonce} par ${nomannonceur}`;
 			presenceData.buttons = [
-				{ label: "Consulter l'annonce", url: `${document.URL}` }
+				{ label: "Consulter l'annonce", url: document.location.href }
 			];
 		} else if (document.location.pathname === "https://www.leboncoin.fr") {
 			presenceData.details = "Regarde la page :";
