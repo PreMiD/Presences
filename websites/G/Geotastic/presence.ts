@@ -1,14 +1,7 @@
 const presence = new Presence({
-	clientId: "970081844391473192"
-});
-
-let currentURL = new URL(document.location.href),
-	currentPath = currentURL.pathname
-		.replace(/^\/|\/$|\/index\.html$|.html$/g, "")
-		.split("/"),
-	lastPathname = "-no-";
-
-const browsingTimestamp = Math.floor(Date.now() / 1000),
+		clientId: "970081844391473192"
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000),
 	defaultData: PresenceData = {
 		details: "Viewing an unsupported page",
 		largeImageKey: "lg",
@@ -33,6 +26,15 @@ const pathMap = new Map<string, string>([
 	["community-map", "Looking at the community map"]
 ]);
 
+let currentURL = new URL(document.location.href),
+	currentPath = currentURL.pathname
+		.replace(/^\/|\/$|\/index\.html$|.html$/g, "")
+		.split("/"),
+	lastPathname = "-no-",
+	lastTitle = document.title,
+	forceUpdate = false;
+//data = {} as any;
+
 presence.on("UpdateData", async () => {
 	currentURL = new URL(document.location.href);
 	currentPath = currentURL.pathname
@@ -40,14 +42,19 @@ presence.on("UpdateData", async () => {
 		.split("/");
 	presenceData = { ...defaultData };
 
-	if (lastPathname !== currentURL.pathname) {
+	if (
+		lastPathname !== currentURL.pathname ||
+		lastTitle !== document.title ||
+		forceUpdate
+	) {
 		lastPathname = currentURL.pathname;
+		lastTitle = document.title;
+		forceUpdate = false;
+		//data = {};
 
 		presenceData.details = document.title.slice("Geotastic - ".length);
 		if (pathMap.has(currentPath[0]))
 			presenceData.details = pathMap.get(currentPath[0]);
-
-		if (currentPath[0] === "home") presenceData.details = "On the home page";
 
 		presence.setActivity(presenceData);
 	}
