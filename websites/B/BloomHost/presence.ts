@@ -14,11 +14,14 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing the main website";
 		if (pathname.includes("minecraft")) {
 			presenceData.state = "Reading: Minecraft Plans";
-		} else if (pathname.includes("vps")) {
+		}
+		if (pathname.includes("vps")) {
 			presenceData.state = "Reading: VPS Plans";
-		} else if (pathname.includes("duck-panel")) {
+		}
+		if (pathname.includes("duck-panel")) {
 			presenceData.state = "Reading: About the Duck Panel";
-		} else if (pathname.includes("about-bloom")) {
+		}
+		if (pathname.includes("about-bloom")) {
 			presenceData.state = "Reading: About Bloom";
 		}
 	}
