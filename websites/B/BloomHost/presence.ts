@@ -95,13 +95,15 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "stream-solid";
 		}
 	}
-	if (hostname === "vps.bloom.host")
+	if (hostname === "vps.bloom.host") {
 		presenceData.details = "Using the VPS panel";
-	presenceData.smallImageKey = "server-solid";
+		presenceData.smallImageKey = "server-solid";
+	}
 
-	if (hostname === "billing.bloom.host")
+	if (hostname === "billing.bloom.host") {
 		presenceData.details = "Using the Billing Panel";
-	presenceData.smallImageKey = "shopping-cart-solid";
+		presenceData.smallImageKey = "shopping-cart-solid";
+	}
 
 	if (!presenceData.details) presence.setActivity();
 	else presence.setActivity(presenceData);
