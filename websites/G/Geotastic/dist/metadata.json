@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.7",
+    "author": {
+        "name": "ΛΚΘRΛ",
+        "id": "387655649934311427"
+    },
+    "service": "Geotastic",
+    "description": {
+        "en": "Geotastic is a free browser based geographic discovery game which has multiple diffrent gamemodes to test your geographic knowledge.",
+        "de": "Geotastic ist ein kostenloses browserbasiertes geografisches Entdeckungsspiel, das mehrere verschiedene Spielmodi bietet, um dein geografisches Wissen zu testen."
+    },
+    "url": [
+        "www.geotastic.net",
+        "geotastic.net"
+    ],
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/tM7nA4Y.png",
+    "thumbnail": "https://i.imgur.com/Zew5cN7.png",
+    "color": "#3dcb71",
+    "category": "games",
+    "tags": [
+        "geography",
+        "flags",
+        "guessing",
+        "maps"
+    ]
+}
