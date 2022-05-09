@@ -1,19 +1,20 @@
-const presence = new Presence({
+const { href } = window.location,
+	presence = new Presence({
 		clientId: "828549761376059441"
 	}),
 	getAction = (): string => {
-		if (window.location.href.includes("movielist")) return "movielist";
-		else if (window.location.href.includes("sportlist")) return "sportlist";
-		else if (window.location.href.includes("tvlist")) return "tvlist";
-		else if (window.location.href.includes("Tczo")) return "tvshow";
-		else if (window.location.href.includes("Mczo")) return "movie";
-		else if (window.location.href.includes("Sczo")) return "sport";
-		else if (window.location.href.includes("faq")) return "faq";
-		else if (window.location.href.includes("Eczo")) return "tv";
+		if (href.includes("movielist")) return "movielist";
+		else if (href.includes("sportlist")) return "sportlist";
+		else if (href.includes("tvlist")) return "tvlist";
+		else if (href.includes("Tczo")) return "tvshow";
+		else if (href.includes("Mczo")) return "movie";
+		else if (href.includes("Sczo")) return "sport";
+		else if (href.includes("faq")) return "faq";
+		else if (href.includes("Eczo")) return "tv";
 		else return "home";
 	},
 	getText = (text: string): string => {
-		return document.querySelectorAll(text)[0].textContent.trim();
+		return document.querySelector(text).textContent.trim();
 	},
 	getStatus = (): string => {
 		const element = document.querySelector("#t3").textContent.trim();
@@ -46,18 +47,18 @@ presence.on("UpdateData", async () => {
 
 		if (pauseFlag) {
 			[, watchStamp] = presence.getTimestampsfromMedia(
-				document.querySelectorAll("video")[0]
+				document.querySelector("video")
 			);
 			if (!isNaN(watchStamp)) pauseFlag = true;
 			presenceData = {
-				state: `${getStatus()} | ${getText("player-title-bar")}`,
+				state: `${getStatus()} | ${getText("[class~=player-title-bar]")}`,
 				endTimestamp: watchStamp,
 				smallImageKey: "play",
 				...presenceData
 			};
 		} else {
 			presenceData = {
-				state: `${getStatus()} | ${getText("player-title-bar")}`,
+				state: `${getStatus()} | ${getText("[class~=player-title-bar]")}`,
 				smallImageKey: "pause",
 				...presenceData
 			};
