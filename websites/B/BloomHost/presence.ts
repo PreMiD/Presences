@@ -12,18 +12,16 @@ presence.on("UpdateData", async () => {
 	if (hostname === "bloom.host") {
 		presenceData.smallImageKey = "globe-solid";
 		presenceData.details = "Viewing the main website";
-		if (pathname.includes("minecraft")) 
+		if (pathname.includes("minecraft"))
 			presenceData.state = "Reading: Minecraft Plans";
-		
-		if (pathname.includes("vps")) 
-			presenceData.state = "Reading: VPS Plans";
-		
-		if (pathname.includes("duck-panel")) 
+
+		if (pathname.includes("vps")) presenceData.state = "Reading: VPS Plans";
+
+		if (pathname.includes("duck-panel"))
 			presenceData.state = "Reading: About the Duck Panel";
-		
-		if (pathname.includes("about-bloom")) 
+
+		if (pathname.includes("about-bloom"))
 			presenceData.state = "Reading: About Bloom";
-		
 	}
 	if (hostname === "docs.bloom.host") {
 		presenceData.details = "Viewing the docs";
