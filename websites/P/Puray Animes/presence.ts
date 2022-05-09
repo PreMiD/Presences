@@ -19,15 +19,10 @@ presence.on("UpdateData", () => {
 		} - ${document.querySelector("button[class*=blue] span")?.textContent}`;
 		presenceData.buttons = [{ label: "Ver perfil", url: location.href }];
 	} else if (pathname.startsWith("/anime/")) {
-		const genres: string[] = [];
-		for (const item of document.querySelectorAll(
-			"div[class^=sm]>div[class^=mb]"
-		))
-			genres.push(item.textContent);
-		presenceData.details = document.querySelector(
+		presenceData.details = "Visualizando anime:";
+		presenceData.state = document.querySelector(
 			"section div[class^=text-3xl]"
 		)?.textContent;
-		if (genres.length) presenceData.state = genres.join(", ");
 		presenceData.buttons = [{ label: "Assistir anime", url: location.href }];
 	} else if (pathname.startsWith("/watch/")) {
 		presenceData.details = document.querySelector(
