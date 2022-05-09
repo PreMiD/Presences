@@ -13,16 +13,12 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "globe-solid";
 		presenceData.details = "Viewing the main website";
 		if (pathname.includes("minecraft")) {
-			presenceData.details = "Viewing the main website";
 			presenceData.state = "Reading: Minecraft Plans";
 		} else if (pathname.includes("vps")) {
-			presenceData.details = "Viewing the main website";
 			presenceData.state = "Reading: VPS Plans";
 		} else if (pathname.includes("duck-panel")) {
-			presenceData.details = "Viewing the main website";
 			presenceData.state = "Reading: About the Duck Panel";
 		} else if (pathname.includes("about-bloom")) {
-			presenceData.details = "Viewing the main website";
 			presenceData.state = "Reading: About Bloom";
 		}
 	}
