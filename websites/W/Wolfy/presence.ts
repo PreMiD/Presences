@@ -2,7 +2,7 @@ type langStrings = {
 	choosingSkin: string;
 	consultingArticles: string;
 	consultingCategory: string;
-	consultingAnEvent: string;
+	consultingAFutureEvent: string;
 	consultingEvents: string;
 	consultingHelpCenter: string;
 	consultingHome: string;
@@ -17,6 +17,7 @@ type langStrings = {
 	lookingAtProfile: string; // $username
 	lunar: string;
 	inAMenu: string;
+	participatingToAnEvent: string;
 	playing: string;
 	readingAnArticle: string;
 	toConsultArticle: string;
@@ -33,7 +34,7 @@ const strings: Record<string, Partial<langStrings>> = {
 		choosingSkin: "Choosing a skin",
 		consultingArticles: "Consulting articles",
 		consultingCategory: "Consulting a category ⤵️",
-		consultingAnEvent: "Consulting an event ⤵️",
+		consultingAFutureEvent: "Consulting a future event ⤵️",
 		consultingEvents: "Consulting events",
 		consultingHelpCenter: "Consulting the help center",
 		consultingHome: "Consulting the home page",
@@ -49,6 +50,7 @@ const strings: Record<string, Partial<langStrings>> = {
 		lookingAtProfile: "Looking at $username's profile",
 		lunar: "Lunar",
 		inAMenu: "In a menu",
+		participatingToAnEvent: "Participating to an event",
 		playing: "In Game",
 		readingAnArticle: "Reading an article ⤵️",
 		toConsultArticle: "Consult this article",
@@ -63,7 +65,7 @@ const strings: Record<string, Partial<langStrings>> = {
 		choosingSkin: "Choisit son skin",
 		consultingArticles: "Consulte les articles",
 		consultingCategory: "Consulte la catégorie ⤵️",
-		consultingAnEvent: "Consulte l'événement ⤵️",
+		consultingAFutureEvent: "Consulte l'événement prochain ⤵️",
 		consultingEvents: "Consulte les évènements",
 		consultingHelpCenter: "Consulte le centre d'aide",
 		consultingHome: "Consulte la page d'accueil",
@@ -78,6 +80,7 @@ const strings: Record<string, Partial<langStrings>> = {
 		lookingAtProfile: "Regarde le profil de $username",
 		lunar: "Lunaire",
 		inAMenu: "Dans un menu",
+		participatingToAnEvent: "Participe à un événement",
 		playing: "En jeu",
 		readingAnArticle: "Lit l'article ⤵️",
 		toConsultArticle: "Consulter l'article",
@@ -333,10 +336,23 @@ presence.on("UpdateData", async () => {
 			path.split("/")[2 + pathOffset]
 		);
 	} else if (path.includes("/event") && path.split("/")[2 + pathOffset]) {
-		presenceData.details = getString("consultingAnEvent");
-		presenceData.state = document.querySelector(
-			"div.Event_title__hCZ5r"
-		)?.textContent;
+		if (document.querySelector("div.Event_eventIntroduction__1HrZz")) {
+			presenceData.details = getString("participatingToAnEvent");
+			presenceData.state = `Top ${parseInt(
+				document.querySelector(
+					"div.Event_lineLeaderboard__hxgUV.Event_me__2Lm3n > div.Event_rank__Id586"
+				).textContent
+			).toLocaleString()} - ${parseInt(
+				document.querySelector(
+					"div.Event_lineLeaderboard__hxgUV.Event_me__2Lm3n > div.Event_points__3K_vr"
+				).textContent
+			).toLocaleString()} points`;
+		} else {
+			presenceData.details = getString("consultingAFutureEvent");
+			presenceData.state = document.querySelector(
+				"div.Event_title__hCZ5r"
+			)?.textContent;
+		}
 		addVisitEventButton(presenceData, document.location.href);
 	} else {
 		await addVisitProfilButton(
