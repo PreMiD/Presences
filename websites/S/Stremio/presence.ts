@@ -54,15 +54,14 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Searching Addons For:";
 				presenceData.state = search.value;
 			} else {
-				if (active) presenceData.state = active;
-				else presenceData.state = "All";
+				presenceData.state = active ?? "All";
 				title = document.querySelector(
 					"[class='ng-scope selected']"
 				)?.textContent;
 
 				presenceData.buttons = [
 					{
-						label: "Browse",
+						label: "Browse Addons",
 						url: document.location.href
 					}
 				];
@@ -87,7 +86,7 @@ presence.on("UpdateData", async () => {
 				if (genreSort === "Top") genreSort = "All";
 				presenceData.buttons = [
 					{
-						label: "Browse",
+						label: `Browse ${active}`,
 						url: document.location.href
 					}
 				];
@@ -137,7 +136,7 @@ presence.on("UpdateData", async () => {
 						presence.timestampFromFormat(split[0].trim()),
 						presence.timestampFromFormat(split[1].trim())
 					);
-				} else timestamp = void 0;
+				}
 
 				pauseCheck = document
 					.querySelector("#controlbar-top")
