@@ -55,15 +55,12 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = playing ? "play" : "pause";
 				presenceData.smallImageText = playing ? strings.play : strings.pause;
 				presenceData.largeImageKey = document
-					.querySelector<HTMLImageElement>('meta[name="og:image"]')
-					.getAttribute("content")
-					.split("@")[0];
+					.querySelector<HTMLMetaElement>('meta[name="og:image"]')
+					.content.split("@")[0];
 				presenceData.buttons = [
 					{
 						label: strings.buttonWatchVideo,
-						url: document
-							.querySelector('meta[name="og:url"]')
-							.getAttribute("content")
+						url: document.location.href
 					}
 				];
 				break;
@@ -91,15 +88,12 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = playing ? "play" : "pause";
 				presenceData.smallImageText = playing ? strings.play : strings.pause;
 				presenceData.largeImageKey = document
-					.querySelector<HTMLImageElement>('meta[name="og:image"]')
-					.getAttribute("content")
-					.split("@")[0];
+					.querySelector<HTMLMetaElement>('meta[name="og:image"]')
+					.content.split("@")[0];
 				presenceData.buttons = [
 					{
 						label: strings.buttonViewEpisode,
-						url: document
-							.querySelector('meta[name="og:url"]')
-							.getAttribute("content")
+						url: document.location.href
 					}
 				];
 				break;
