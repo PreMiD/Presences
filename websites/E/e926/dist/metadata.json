@@ -15,7 +15,13 @@
 	"thumbnail": "https://i.imgur.com/wliD7zr.jpg",
 	"color": "#284A81",
 	"category": "socials",
-	"tags": ["social", "imageboard", "nsfw", "e926", "e621"],
+	"tags": [
+		"social",
+		"imageboard",
+		"nsfw",
+		"e926",
+		"e621"
+	],
 	"settings": [
 		{
 			"id": "privacy",

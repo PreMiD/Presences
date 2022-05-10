@@ -21,7 +21,12 @@
 	"thumbnail": "https://i.imgur.com/m0h7xnO.png",
 	"color": "#284A81",
 	"category": "socials",
-	"tags": ["social", "imageboard", "nsfw", "e621"],
+	"tags": [
+		"social",
+		"imageboard",
+		"nsfw",
+		"e621"
+	],
 	"settings": [
 		{
 			"id": "privacy",
