@@ -52,9 +52,9 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (getElement("#episodetitle") !== "Feature Film") {
-			presenceData.details = state[0];
-			presenceData.state = state[1];
-		} else presenceData.details = state[0];
+			presenceData.details = state[1];
+			presenceData.state = state[2];
+		} else presenceData.details = state[1];
 
 		if (cover) {
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
