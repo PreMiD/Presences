@@ -2,13 +2,25 @@ const presence = new Presence({
 		clientId: "969204609845428234"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let cached: JSON;
+
+interface Data {
+	meta: {
+		name: string;
+	}[];
+}
+let cached: Data;
 
 async function fetchWithoutVideo() {
 	if (
 		!cached ||
 		!JSON.stringify(cached).includes(window.location.href.split("/")[5])
 	) {
+		if (
+			document.querySelector(
+				"#app > div > div > div > div.loading > div > ion-icon"
+			)
+		)
+			return;
 		const fetched = await fetch(
 			`https://v3-cinemeta.strem.io/meta/${
 				window.location.href.split("/")[4]
@@ -37,9 +49,9 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		video = document.querySelectorAll(
-			"[data-v-aacedae0='']"
-		)[2] as HTMLVideoElement,
+		video = document.querySelector(
+			"#app > div > div > div > div.player > video"
+		) as HTMLVideoElement,
 		page = window.location.pathname,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
@@ -85,7 +97,7 @@ presence.on("UpdateData", async () => {
 			} Viewers`;
 			presenceData.buttons = [
 				{
-					label: `Join Room ${fetched}`,
+					label: `Join Room`,
 					url: document.location.href
 				}
 			];
@@ -99,11 +111,12 @@ presence.on("UpdateData", async () => {
 		} else {
 			const fetched = await fetchWithoutVideo();
 			let title;
-			if (fetched) title = fetched.meta.name;
+			if (fetched) title = `:${fetched.meta.name}`;
+			else title = "";
 			presenceData.details = title;
 			presenceData.buttons = [
 				{
-					label: `Join Room: ${title}`,
+					label: `Join Room ${title}`,
 					url: document.location.href
 				}
 			];
