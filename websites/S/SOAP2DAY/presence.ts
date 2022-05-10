@@ -1,7 +1,7 @@
-const { href } = window.location,
-	presence = new Presence({
+const presence = new Presence({
 		clientId: "828549761376059441"
 	}),
+	{ href } = window.location,
 	getAction = (): string => {
 		if (href.includes("movielist")) return "movielist";
 		else if (href.includes("sportlist")) return "sportlist";
