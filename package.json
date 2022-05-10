@@ -43,7 +43,7 @@
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-unicorn": "^42.0.0",
 		"glob": "^8.0.1",
-		"husky": "^8.0.0",
+		"husky": "^8.0.1",
 		"is-ci": "^3.0.1",
 		"json-to-ast": "^2.1.0",
 		"jsonschema": "^1.4.0",
