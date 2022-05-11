@@ -24,10 +24,7 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname.includes("/album/"): {
 			presenceData.details = "Viewing an album";
-			presenceData.state = `${
-				getElementByXpath("/html/body/div[1]/div[1]/div/div/div[2]/h1")
-					.textContent
-			}`;
+			presenceData.state = document.querySelector("h1.text-center").textContent;
 			presenceData.buttons = [
 				{
 					label: "View Album",
