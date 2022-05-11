@@ -1,8 +1,8 @@
 {
-    	"$schema": "https://schemas.premid.app/metadata/1.7",
-    	"author": {
-      	"name": "2Lost4Discord",
-      	"id": "421991668556759042"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "2Lost4Discord",
+		"id": "421991668556759042"
 	},
 	"contributors": [
 		{
@@ -11,9 +11,9 @@
 		}
 	],
 	"service": "Stats.fm",
-    	"description": {
-        "en": "Enter a new dimension of music by getting unique insights into your music taste."
-    },
+	"description": {
+		"en": "Enter a new dimension of music by getting unique insights into your music taste."
+	},
 	"url": "stats.fm",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/WkUe5aL.png",
