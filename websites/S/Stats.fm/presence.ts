@@ -1,7 +1,7 @@
 const presence = new Presence({
 		clientId: "973027832307535952"
 	}),
-	browsingTimestamp = Math.floor(Date.now());
+	browsingTimestamp = Math.floor(Date.now()/1000);
 function getElementByXpath(path: string) {
 	return document.evaluate(
 		path,
