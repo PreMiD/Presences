@@ -12,7 +12,7 @@ let video: iFrameData = {
 	duration: 0,
 	currentTime: 0,
 	paused: false
-}
+};
 
 presence.on(
 	"iFrameData",
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "animego_logo",
 		smallImageText: "AnimeGO"
 	};
-	
+
 	const strings = await presence.getStrings({
 		play: "general.playing",
 		pause: "general.paused"
@@ -82,8 +82,9 @@ presence.on("UpdateData", async () => {
 		document.location.pathname === "/characters"
 	) {
 		presenceData.details = `В поиске ${typeCurrent}`;
-		presenceData.state =
-			document.querySelector(".entity-title#anime-list-title h1").textContent;
+		presenceData.state = document.querySelector(
+			".entity-title#anime-list-title h1"
+		).textContent;
 	} else if (
 		document.location.pathname.includes("/anime/") ||
 		document.location.pathname.includes("/manga/") ||
