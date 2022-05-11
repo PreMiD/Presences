@@ -9,9 +9,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp
-	};
+			largeImageKey: "lg",
+			startTimestamp: browsingTimestamp
+		},
+		privacy = await presence.getSetting<boolean>("privacy");
 
 	if ((homepageInput && homepageImage) || !document.location.pathname) {
 		presenceData.state = "Home";
@@ -86,7 +87,11 @@ presence.on("UpdateData", async () => {
 				// No default
 			}
 		}
+		if (privacy) {
+			delete presenceData.state;
+			if (presenceData.details.includes("Searching for"))
+				presenceData.details = "Searching";
+		}
 	}
-
 	presence.setActivity(presenceData);
 });
