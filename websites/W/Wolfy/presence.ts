@@ -95,7 +95,7 @@ const strings: Record<string, Partial<langStrings>> = {
 
 function getString(key: keyof langStrings) {
 	return (
-		strings[document.querySelector("html")?.lang || "en"]?.[key] ||
+		strings[document.querySelector("html")?.lang ?? "en"]?.[key] ||
 		strings.fr[key] ||
 		`<${key}>`
 	);
