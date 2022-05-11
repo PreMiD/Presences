@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dem0nx309",
+		"id": "145559039173066752"
+	},
+	"service": "Hyakanime",
+	"description": {
+		"en": "French site, allows you to follow your anime progress",
+		"fr": "Site franÃ§ais, permet de suivre ta progresion anime"
+	},
+	"url": [
+		"hyakanime.fr",
+		"www.hyakanime.fr"
+	],
+	"version": "1.2.13",
+	"logo": "https://i.imgur.com/cRrhUIZ.png",
+	"thumbnail": "https://i.imgur.com/TZOWrzr.png",
+	"color": "#089BEF",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"bots"
+	]
+}
