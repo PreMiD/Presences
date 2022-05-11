@@ -309,9 +309,8 @@ presence.on("UpdateData", async () => {
 
 		presenceData.smallImageKey = "live";
 		presenceData.smallImageText = getString("playing");
-		if (currTime && currTime.includes(":")) {
-			presenceData.startTimestamp = startTimestamp;
-			presenceData.endTimestamp = endTimestamp;
+		if (currTime?.includes(":")) {
+			[presence.startTimestamp, presence.endTimestamp] = getInGameTimestamps(cp, currTime);
 		} else presenceData.startTimestamp = cp;
 
 		await addVisitProfilButton(
