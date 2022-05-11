@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		).textContent;
 		presenceData.buttons = [
 			{
-				label: "Fiche",
+				label: "Afficher la fiche",
 				url: document.location.href
 			}
 		];
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 		).textContent;
 		presenceData.buttons = [
 			{
-				label: "Profil",
+				label: "Afficher le profil",
 				url: document.location.href
 			}
 		];
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Regarde l'agenda";
 		presenceData.buttons = [
 			{
-				label: "Agenda",
+				label: "Afficher l'agenda",
 				url: document.location.href
 			}
 		];
