@@ -303,7 +303,6 @@ presence.on("UpdateData", async () => {
 			currTime = document.querySelector("div.Header_timer__36MsP").textContent;
 		}
 
-		const [startTimestamp, endTimestamp] = getInGameTimestamps(cp, currTime);
 
 		presenceData.details = getString("playing");
 
