@@ -19,7 +19,10 @@
 	"thumbnail": "https://i.imgur.com/8Ayu4Re.png",
 	"color": "#ffffff",
 	"category": "other",
-	"tags": ["search", "popular"],
+	"tags": [
+		"search",
+		"popular"
+	],
 	"settings": [
 		{
 			"id": "privacy",
