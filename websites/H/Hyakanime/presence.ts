@@ -33,12 +33,12 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (page.includes("/search/"))
 		presenceData.details = "Cherche une fiche...";
-	else if (page.startsWith("/new")) {
+	else if (page.startsWith("/new"))
 		presenceData.details = "Soumets une nouvelle fiche";
-	} else if (page.startsWith("/edit/")) presenceData.details = "Édit une fiche";
-	else if (page.startsWith("/bibliotheque")) {
+	else if (page.startsWith("/edit/")) presenceData.details = "Édit une fiche";
+	else if (page.startsWith("/bibliotheque"))
 		presenceData.details = "Regarde sa bibliothèque";
-	} else if (page.startsWith("/agenda")) {
+	else if (page.startsWith("/agenda")) {
 		presenceData.details = "Regarde l'agenda";
 		presenceData.buttons = [
 			{
