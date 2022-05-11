@@ -2,19 +2,17 @@ const presence = new Presence({
 	clientId: "935597176426491924"
 });
 
-async function getStrings() {
-	return presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused"
-	});
+interface iFrameData {
+	duration: number;
+	currentTime: number;
+	paused: boolean;
 }
 
-let strings: Awaited<ReturnType<typeof getStrings>>,
-	video = {
-		duration: 0,
-		currentTime: 0,
-		paused: true
-	};
+let video: iFrameData = {
+	duration: 0,
+	currentTime: 0,
+	paused: false
+}
 
 presence.on(
 	"iFrameData",
@@ -29,7 +27,11 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "animego_logo",
 		smallImageText: "AnimeGO"
 	};
-	if (!strings) strings = await getStrings();
+	
+	const strings = await presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused"
+	});
 
 	const typeContent = document
 			.querySelector("meta[property='og:url']")
