@@ -35,7 +35,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Cherche une fiche...";
 	else if (page.startsWith("/new")) {
 		presenceData.details = "Soumets une nouvelle fiche";
-		presenceData.state = "About";
 	} else if (page.startsWith("/edit/"))
 		presenceData.details = "Édit une fiche";
 	else if (page.startsWith("/bibliotheque")) {
