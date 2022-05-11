@@ -23,15 +23,14 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		details: "Где-то на сайте",
-		largeImageKey: "animego_logo",
-		smallImageText: "AnimeGO"
-	};
-
-	const strings = await presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused"
-	});
+			details: "Где-то на сайте",
+			largeImageKey: "animego_logo",
+			smallImageText: "AnimeGO"
+		},
+		strings = await presence.getStrings({
+			play: "general.playing",
+			pause: "general.paused"
+		});
 
 	const typeContent = document
 			.querySelector("meta[property='og:url']")
