@@ -35,12 +35,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Cherche une fiche...";
 	else if (page.startsWith("/new")) {
 		presenceData.details = "Soumets une nouvelle fiche";
-	} else if (page.startsWith("/edit/"))
-		presenceData.details = "Édit une fiche";
+	} else if (page.startsWith("/edit/")) presenceData.details = "Édit une fiche";
 	else if (page.startsWith("/bibliotheque")) {
 		presenceData.details = "Regarde sa bibliothèque";
-	}
-	else if (page.startsWith("/agenda")) {
+	} else if (page.startsWith("/agenda")) {
 		presenceData.details = "Regarde l'agenda";
 		presenceData.buttons = [
 			{
@@ -51,8 +49,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
-	else{ 
-	presenceData.details = "Sur la page d'accueil"; 
-	presence.setActivity(presenceData);
+	else {
+		presenceData.details = "Sur la page d'accueil";
+		presence.setActivity(presenceData);
 	}
 });
