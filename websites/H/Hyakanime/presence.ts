@@ -49,8 +49,7 @@ presence.on("UpdateData", async () => {
 	}
 	if (presenceData.details) {
 		presence.setActivity(presenceData);
-	}
-	else {
+	} else {
 		presenceData.details = "Sur la page d'accueil";
 		presence.setActivity(presenceData);
 	}
