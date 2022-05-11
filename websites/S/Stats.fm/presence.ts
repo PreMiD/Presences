@@ -2,15 +2,6 @@ const presence = new Presence({
 		clientId: "973027832307535952"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-function getElementByXpath(path: string) {
-	return document.evaluate(
-		path,
-		document,
-		null,
-		XPathResult.FIRST_ORDERED_NODE_TYPE,
-		null
-	).singleNodeValue;
-}
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "stats_fm",
@@ -35,9 +26,7 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname.includes("/artist/"): {
 			presenceData.details = "Viewing an artist";
-			presenceData.state = `${
-				getElementByXpath("/html/body/div[1]/div[1]/div/div[2]/h1").textContent
-			}`;
+			presenceData.state = document.querySelector("h1.text-center").textContent;
 			presenceData.buttons = [
 				{
 					label: "View Artist",
@@ -48,10 +37,7 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname.includes("/track/"): {
 			presenceData.details = "Viewing stats for a track";
-			presenceData.state = `${
-				getElementByXpath("/html/body/div[1]/div[1]/div/div/div[2]/h1")
-					.textContent
-			}`;
+			presenceData.state = document.querySelector("h1.text-center").textContent;
 			presenceData.buttons = [
 				{
 					label: "View Track",
