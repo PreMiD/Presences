@@ -30,9 +30,8 @@ presence.on("UpdateData", async () => {
 		strings = await presence.getStrings({
 			play: "general.playing",
 			pause: "general.paused"
-		});
-
-	const typeContent = document
+		}),
+		typeContent = document
 			.querySelector("meta[property='og:url']")
 			.getAttribute("content")
 			.split("/")[3],
