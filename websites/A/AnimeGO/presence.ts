@@ -80,9 +80,8 @@ presence.on("UpdateData", async () => {
 		document.location.pathname === "/characters"
 	) {
 		presenceData.details = `В поиске ${typeCurrent}`;
-		presenceData.state = `${
-			document.querySelector(".entity-title#anime-list-title h1").textContent
-		}`;
+		presenceData.state =
+			document.querySelector(".entity-title#anime-list-title h1").textContent;
 	} else if (
 		document.location.pathname.includes("/anime/") ||
 		document.location.pathname.includes("/manga/") ||
@@ -112,7 +111,7 @@ presence.on("UpdateData", async () => {
 			}
 		];
 
-		if (video.duration !== 0) {
+		if (video.duration) {
 			const selected = document.querySelector<HTMLSelectElement>(
 					"select[name='series']"
 				),
