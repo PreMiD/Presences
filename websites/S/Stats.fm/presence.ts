@@ -46,6 +46,37 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
+		case pathname.includes("/beta"): {
+			presenceData.details = "Viewing Beta informations";
+			presenceData.buttons = [
+				{
+					label: "View Page",
+					url: location.href
+				}
+			];
+			break;
+		}
+		case pathname.includes("/privacy"): {
+			presenceData.details = "Reading the Privacy page";
+			presenceData.buttons = [
+				{
+					label: "View Page",
+					url: location.href
+				}
+			];
+			break;
+		}
+		case pathname.includes("/terms"): {
+			presenceData.details = "Reading the Terms page";
+			presenceData.buttons = [
+				{
+					label: "View Page",
+					url: location.href
+				}
+			];
+			break;
+		}
 	}
 	presence.setActivity(presenceData);
 });
+
