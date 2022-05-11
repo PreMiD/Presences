@@ -381,7 +381,6 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "reading";
 				presenceData.smallImageText = getString("consultingArticles");
 				break;
-			case "play":
 			default:
 				presenceData.state = getString("consultingHome");
 		}
