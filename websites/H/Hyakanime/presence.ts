@@ -39,28 +39,6 @@ presence.on("UpdateData", async () => {
 	else if (page.startsWith("/edit/")) presenceData.details = "Édit une fiche";
 	else if (page.startsWith("/bibliotheque"))
 		presenceData.details = "Regarde sa bibliothèque";
-	else if (page.startsWith("/diffusion/Crunchyroll"))
-		presenceData.details = "Regarde les fiches crunchyroll";
-	else if (page.startsWith("/diffusion/Wakanim"))
-		presenceData.details = "Regarde les fiches wakanim";
-	else if (page.startsWith("/diffusion/ADN"))
-		presenceData.details = "Regarde les fiches adn";
-	else if (page.startsWith("/diffusion/Netflix"))
-		presenceData.details = "Regarde les fiches netflix";
-	else if (page.startsWith("/diffusion/Prime"))
-		presenceData.details = "Regarde les fiches prime video";
-	else if (page.startsWith("/settings"))
-		presenceData.details = "Regarde ses paramètres";
-	else if (page.startsWith("/equipe"))
-		presenceData.details = "Regarde l'équipe de modération";
-	else if (page.startsWith("/premium"))
-		presenceData.details = "Considère l'achat du premium";
-	else if (page.startsWith("/mentions-legales"))
-		presenceData.details = "Regarde les mentions légales";
-	else if (page.startsWith("/simulcast"))
-		presenceData.details = "Regarde les fiches en simulcast";
-	else if (page.startsWith("/soon"))
-		presenceData.details = "Regarde les fiches sortant bientôt";
 	else if (page.startsWith("/agenda")) {
 		presenceData.details = "Regarde l'agenda";
 		presenceData.buttons = [
