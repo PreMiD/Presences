@@ -31,10 +31,10 @@ presence.on("UpdateData", () => {
 	else if (document.location.pathname.includes("/compte"))
 		presenceData.state = "Paramètres du compte";
 	else if (document.location.pathname.includes("/profil/")) {
-		const profilename = document.querySelector(
+		const profileName = document.querySelector(
 			"#mainContent > div.styles_Profile__3vhTo > div.styles_ProfileHero__aQISv > div > div.styles_userInfo__XBcBm > div > h3"
 		).textContent;
-		presenceData.state = `Profil de ${profilename}`;
+		presenceData.state = `Profil de ${profileName}`;
 		presenceData.buttons = [
 			{ label: "Consulter le profil", url: document.location.href }
 		];
@@ -50,31 +50,31 @@ presence.on("UpdateData", () => {
 		} »`;
 	} else if (document.location.pathname.includes("/commerces_marches/")) {
 		presenceData.details = `Annonce ${document.title.split("-")[0]}`;
-		const nomannonceur = document.querySelector<HTMLSpanElement>(
+		const advertiserName = document.querySelector<HTMLSpanElement>(
 			"#aside > section > div > div.styles_ProfileLight__esTKc > div.styles_ProfileLightContent__Jg3FU > div.styles_content__XvyPv > div.styles_heading__1Vz_9 > a"
 		).textContent;
-		presenceData.state = `Vendu par ${nomannonceur}`;
+		presenceData.state = `Vendu par ${advertiserName}`;
 		presenceData.buttons = [
 			{ label: "Consulter l'annonce", url: document.location.href }
 		];
 	} else if (document.location.pathname.includes("/voitures/")) {
 		presenceData.details = `Annonce ${document.title.split("-")[0]}`;
-		const nomannonceur = document.querySelector<HTMLSpanElement>(
+		const advertiserName = document.querySelector<HTMLSpanElement>(
 			"#aside > section > div > div.styles_ProfileLight__esTKc > div.styles_ProfileLightContent__Jg3FU > div.styles_content__XvyPv > div.styles_heading__1Vz_9 > a"
 		).textContent;
-		presenceData.state = `Vendu par ${nomannonceur}`;
+		presenceData.state = `Vendu par ${advertiserName}`;
 		presenceData.buttons = [
 			{ label: "Consulter l'annonce", url: document.location.href }
 		];
 	} else if (document.location.pathname.includes("/")) {
 		presenceData.details = `Annonce ${document.title.split("-")[0]}`;
-		const prixannonce = document.querySelector(
+		const adsPrice = document.querySelector(
 				"#mainContent > div > div > nav > div._3IX1b > div > div > div.sc-bdVaJa.cJzirk > div.sc-bdVaJa.gleyua > div.sc-bdVaJa.gKAIQK > div > span"
 			).textContent,
-			nomannonceur = document.querySelector<HTMLSpanElement>(
+			advertiserName = document.querySelector<HTMLSpanElement>(
 				"#aside > section > div > div.styles_ProfileLight__esTKc > div.styles_ProfileLightContent__Jg3FU > div.styles_content__XvyPv > div > a._3k87M._3Hrjq._3Wx6b._2MFch._1hnil._35DXM._1-TTU._1GcfX._2DyF8._3k00F"
 			).textContent;
-		presenceData.state = `Vendu ${prixannonce} par ${nomannonceur}`;
+		presenceData.state = `Vendu ${adsPrice} par ${advertiserName}`;
 		presenceData.buttons = [
 			{ label: "Consulter l'annonce", url: document.location.href }
 		];
