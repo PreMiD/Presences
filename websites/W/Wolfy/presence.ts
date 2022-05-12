@@ -303,15 +303,13 @@ presence.on("UpdateData", async () => {
 			currTime = document.querySelector("div.Header_timer__36MsP").textContent;
 		}
 
+
 		presenceData.details = getString("playing");
 
 		presenceData.smallImageKey = "live";
 		presenceData.smallImageText = getString("playing");
 		if (currTime?.includes(":")) {
-			[presence.startTimestamp, presence.endTimestamp] = getInGameTimestamps(
-				cp,
-				currTime
-			);
+			[presence.startTimestamp, presence.endTimestamp] = getInGameTimestamps(cp, currTime);
 		} else presenceData.startTimestamp = cp;
 
 		await addVisitProfilButton(
