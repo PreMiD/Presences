@@ -11,16 +11,11 @@
 		"nl": "Dizilla is één van de mooiste en populairste Turkse TV series website."
 	},
 	"url": "dizilla.eu",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/EqxZ0d3.png",
 	"thumbnail": "https://i.imgur.com/aqrhBjE.png",
 	"color": "#d32028",
 	"category": "videos",
-	"tags": [
-		"dizilla",
-		"video",
-		"tv-series",
-		"turkish"
-	],
+	"tags": ["dizilla", "video", "tv-series", "turkish"],
 	"iframe": true
 }
