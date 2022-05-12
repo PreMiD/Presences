@@ -1,10 +1,6 @@
 const presence = new Presence({
 		clientId: "969716001090437120"
 	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
-	}),
 	pages: { [k: string]: string } = {
 		"/animes": "Betrachtet alle Animes",
 		"/beliebte-animes": "Betrachtet beliebte Animes",
@@ -30,11 +26,19 @@ const presence = new Presence({
 		"/support": "Hilfe & Support bei AniWorld",
 		"/edit:information": "Neue Serieninformationen vorschlagen"
 	};
-let video,
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	video,
 	timeEnd: number,
 	currentTime: number,
 	paused: boolean,
 	played: boolean;
+
+async function getStrings() {
+	return presence.getStrings({
+		play: "presence.playback.playing",
+		pause: "presence.playback.paused"
+	});
+}
 
 presence.on(
 	"iFrameData",
@@ -49,6 +53,8 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
+	if (!strings) strings = await getStrings();
+
 	const page = document.location.pathname,
 		presenceData: PresenceData = {
 			largeImageKey: "aniworld-logo",
@@ -58,14 +64,12 @@ presence.on("UpdateData", async () => {
 	else if (page.startsWith("/anime/")) {
 		// Check if we are on the episode selection page
 		if (page.split("/").length === 4) {
-			presenceData.details = `${
-				document.querySelector<HTMLHeadingElement>("h1").textContent
-			}`;
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1").textContent;
 			presenceData.state = "Betrachtet die Episodenliste";
 		} else {
-			presenceData.details = `${
-				document.querySelector<HTMLHeadingElement>("h1").textContent
-			}`;
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1").textContent;
 			presenceData.state = `${document
 				.querySelector<HTMLTitleElement>("title")
 				.textContent.split("Staffel")[0]
@@ -85,9 +89,7 @@ presence.on("UpdateData", async () => {
 			video = document.querySelector<HTMLVideoElement>("video");
 			if (video) {
 				played = video.currentTime !== 0;
-				timeEnd = video.duration;
-				({ currentTime } = video);
-				({ paused } = video);
+				({ currentTime, duration: timeEnd, paused } = video);
 			}
 			if (played) {
 				if (!paused) {
@@ -97,9 +99,7 @@ presence.on("UpdateData", async () => {
 					);
 				}
 				presenceData.smallImageKey = paused ? "pause" : "play";
-				presenceData.smallImageText = paused
-					? (await strings).pause
-					: (await strings).play;
+				presenceData.smallImageText = paused ? strings.pause : strings.play;
 			}
 		}
 		//Obere Reiter
@@ -265,6 +265,5 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (presenceData.details || presenceData.state)
-		presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
 });
