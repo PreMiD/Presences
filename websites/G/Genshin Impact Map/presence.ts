@@ -147,6 +147,7 @@ presence.on("UpdateData", async () => {
 			} else currentcity = null;
 			break;
 	}
+	if (!current) return;
 	presenceData.details = current.map;
 	presenceData.state = current.city && currentcity ? currentcity.map : null;
 	presenceData.largeImageKey =
