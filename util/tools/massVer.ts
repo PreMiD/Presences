@@ -1,14 +1,10 @@
 import "source-map-support/register";
 
-import {
-	existsSync as exists,
-	readFileSync as readFile,
-	writeFileSync as writeFile,
-} from "node:fs";
+import { existsSync as exists } from "node:fs";
 import { sync as glob } from "glob";
 import { coerce, inc, valid } from "semver";
 
-import type { Metadata } from "./metadataSorter";
+import { readFile, writeJson, type Metadata } from "./util";
 
 /*  NOTE: THIS IS A TOOL THAT IS ONLY MEANT TO BE USED
     BY THE DEVS AND REVIEWERS FOR DEPLOYMENT PURPOSES,
@@ -25,19 +21,13 @@ function isValidJSON(text: string): boolean {
 	}
 }
 
-const read = (path: string): string => readFile(path, { encoding: "utf8" }),
-	write = (path: string, code: Metadata): void =>
-		writeFile(path, JSON.stringify(code, null, "\t"), {
-			encoding: "utf8",
-			flag: "w",
-		}),
-	missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
+const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
 		pF => !exists(`${pF}/dist/metadata.json`)
 	),
 	allmeta: Array<[Metadata, string]> = glob(
 		"./{websites,programs}/*/*/*/metadata.json"
 	).map(pF => {
-		const file = read(pF);
+		const file = readFile(pF);
 		if (isValidJSON(file)) return [JSON.parse(file), pF];
 		else {
 			console.error(`Error. ${pF} is not a valid metadata file, skipping...`);
@@ -62,7 +52,7 @@ function main() {
 					valid(coerce(newData.version)),
 					"patch"
 				) as Metadata["version"];
-				write(metadata[1], newData);
+				writeJson(newData, metadata[1]);
 			} else {
 				console.log(
 					`Error. ${
@@ -73,7 +63,7 @@ function main() {
 				);
 				try {
 					newData.version = "1.0.0";
-					write(metadata[1], newData);
+					writeJson(newData, metadata[1]);
 				} catch (err) {
 					console.log(err);
 					continue;
