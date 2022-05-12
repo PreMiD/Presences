@@ -64,14 +64,14 @@ let getpos: number,
 		hylid: number;
 		map: string;
 		largeImageKey: string;
-		pvlargeImageKey: string;
+		pvlargeImageKey: string | null;
 		smallImageKey: string;
 	},
 	currentcity: {
+		position?: number[];
 		map: string;
 		largeImageKey: string;
 		smallImageKey: string;
-		position?: number[];
 	};
 
 presence.on("UpdateData", async () => {
