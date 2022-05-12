@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname.includes("/beta"): {
-			presenceData.details = "Viewing Beta informations";
+			presenceData.details = "information about the beta";
 			presenceData.buttons = [
 				{
 					label: "View Page",
