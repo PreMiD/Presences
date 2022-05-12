@@ -6,8 +6,8 @@
 	},
 	"service": "Hyakanime",
 	"description": {
-		"en": "French website, allows you to create your own library of animes",
-		"fr": "Site français, permet de créer ta bibliothèque d'animés"
+		"en": "Create your own library of anime!",
+		"fr": "Crée ta bibliothèque d'animés !"
 	},
 	"url": [
 		"hyakanime.fr",
