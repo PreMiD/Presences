@@ -48,16 +48,10 @@ presence.on("UpdateData", () => {
 				url: document.querySelector<HTMLAnchorElement>(".mb-4>a").href
 			}
 		];
-		if (
-			document.querySelector("video") &&
-			!document.querySelector("video").paused &&
-			document.querySelector("video").readyState >= 1
-		) {
+		const video = document.querySelector("video");
+		if (video && !video.paused && video.readyState >= 1) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(
-					document.querySelector("video").currentTime,
-					document.querySelector("video").duration
-				);
+				presence.getTimestamps(video.currentTime, video.duration);
 		}
 	}
 	if (!presenceData.details) presence.setActivity();
