@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 		page = document.location.pathname;
 	presenceData.details = "Sur la page d'accueil";
 	if (page.startsWith("/anime/")) {
-		presenceData.details = "Regarde la fiche d'un animé:";
+		presenceData.details = "Regarde la fiche de l'animé:";
 		presenceData.state = document.querySelector(
 			"#root > div.anime-body > div.anime-white-informations > div.anime-white-infos > div:nth-child(2) > h1"
 		).textContent;
