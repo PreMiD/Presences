@@ -5,50 +5,32 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			smallImageKey: "reading",
-			smallImageText: "Regarde des annonces",
-			startTimestamp: browsingTimestamp
-		},
-		defaultPresenceData: PresenceData = {
-			largeImageKey: "logo",
-			smallImageKey: "reading",
-			smallImageText: "Regarde une page",
-			startTimestamp: browsingTimestamp,
-			details: "sur Leboncoin"
-		};
+		largeImageKey: "logo",
+		smallImageKey: "reading",
+		smallImageText: "Regarde des annonces",
+		startTimestamp: browsingTimestamp,
+		details: "Regarde la page :"
+	};
 
-	if (document.location.pathname.includes("/deposer-une-annonce")) {
-		presenceData.details = "Regarde la page :";
+	if (document.location.pathname.includes("/deposer-une-annonce"))
 		presenceData.state = "Déposer une annonce";
-	} else if (document.location.pathname.includes("/mes-recherches")) {
-		presenceData.details = "Regarde la page :";
+	else if (document.location.pathname.includes("/mes-recherches"))
 		presenceData.state = "Mes recherches sauvegardées";
-	} else if (document.location.pathname.includes("/mes-annonces")) {
-		presenceData.details = "Regarde la page :";
+	else if (document.location.pathname.includes("/mes-annonces"))
 		presenceData.state = "Mes annonces sauvegardées";
-	} else if (document.location.pathname.includes("/emploi")) {
-		presenceData.details = "Regarde la page :";
+	else if (document.location.pathname.includes("/emploi"))
 		presenceData.state = "Offres d'emploi";
-	} else if (
-		document.location.pathname.includes("/paiement-securise-livraison")
-	) {
-		presenceData.details = "Regarde la page :";
+	else if (document.location.pathname.includes("/paiement-securise-livraison"))
 		presenceData.state = "Paiement sécurisé";
-	} else if (document.location.pathname.includes("/messages")) {
-		presenceData.details = "Regarde la page :";
+	else if (document.location.pathname.includes("/messages"))
 		presenceData.state = "Messages privés";
-	} else if (document.location.pathname.includes("/dc")) {
-		presenceData.details = "Regarde la page :";
+	else if (document.location.pathname.includes("/dc"))
 		presenceData.state = "Informations légales";
-	} else if (document.location.pathname.includes("/annonces/offres")) {
-		presenceData.details = "Regarde la page :";
+	else if (document.location.pathname.includes("/annonces/offres"))
 		presenceData.state = "Annonces pour toute la France";
-	} else if (document.location.pathname.includes("/compte")) {
-		presenceData.details = "Regarde la page :";
+	else if (document.location.pathname.includes("/compte"))
 		presenceData.state = "Paramètres du compte";
-	} else if (document.location.pathname.includes("/profil/")) {
-		presenceData.details = "Regarde la page :";
+	else if (document.location.pathname.includes("/profil/")) {
 		const profilename = document.querySelector(
 			"#mainContent > div.styles_Profile__3vhTo > div.styles_ProfileHero__aQISv > div > div.styles_userInfo__XBcBm > div > h3"
 		).textContent;
@@ -56,9 +38,6 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{ label: "Consulter le profil", url: document.location.href }
 		];
-	} else if (document.location.pathname.includes("/blog")) {
-		presenceData.details = "Viewing Page:";
-		presenceData.state = "Node.js News";
 	} else if (document.location.pathname.includes("/recherche")) {
 		presenceData.details = "Dans les résultats de recherche :";
 
@@ -101,5 +80,5 @@ presence.on("UpdateData", () => {
 		];
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity(defaultPresenceData);
+	else presence.setActivity();
 });
