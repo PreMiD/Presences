@@ -32,6 +32,7 @@ const presence = new Presence({
 			hylid: 0,
 			map: "Unknown",
 			largeImageKey: "unknown_map",
+			pvlargeImageKey: null,
 			smallImageKey: "emblem_unknown"
 		}
 	],
@@ -57,7 +58,21 @@ const presence = new Presence({
 		// { position: [], map: "Sumeru", largeImageKey: "", smallImageKey: "" }
 	];
 
-let getpos: any, current: any, currentcity: any;
+let getpos: number,
+	current: {
+		city: boolean;
+		hylid: number;
+		map: string;
+		largeImageKey: string;
+		pvlargeImageKey: string;
+		smallImageKey: string;
+	},
+	currentcity: {
+		map: string;
+		largeImageKey: string;
+		smallImageKey: string;
+		position?: number[];
+	};
 
 presence.on("UpdateData", async () => {
 	const [showepreview, timestamps] = await Promise.all([
@@ -83,7 +98,11 @@ presence.on("UpdateData", async () => {
 								.textContent.toLowerCase()
 						)
 				) ??
-				maps.find(i => i.map.toLowerCase().includes(path[3].split("?map=")[1]));
+				maps.find(
+					i =>
+						i.map.toLowerCase().includes(path[3].split("?map=")[1]) ||
+						i.hylid === 2
+				);
 			break;
 		case "mapgenie.io":
 			if (
@@ -125,7 +144,7 @@ presence.on("UpdateData", async () => {
 							Math.abs(curr - getpos) < Math.abs(prev - getpos) ? curr : prev
 						) > getpos
 				);
-			} else currentcity = false;
+			} else currentcity = null;
 			break;
 	}
 	presenceData.details = current.map;
