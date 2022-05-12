@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname.includes("/terms"): {
-			presenceData.details = "Reading the Terms page";
+			presenceData.details = "Reading the Terms & Conditions";
 			presenceData.buttons = [
 				{
 					label: "View Page",
