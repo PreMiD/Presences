@@ -77,5 +77,6 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 	}
-	presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
