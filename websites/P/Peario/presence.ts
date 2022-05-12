@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 			} Viewers`;
 			presenceData.buttons = [
 				{
-					label: `Join Room`,
+					label: "Join Room",
 					url: document.location.href
 				}
 			];
