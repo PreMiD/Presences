@@ -14,12 +14,9 @@ presence.on("UpdateData", async () => {
 		},
 		privacy = await presence.getSetting<boolean>("privacy");
 
-	if ((homepageInput && homepageImage) || !document.location.pathname) {
-		presenceData.state = "Home";
-		presenceData.startTimestamp = browsingTimestamp;
-
-		delete presenceData.details;
-	} else if (document.location.pathname.startsWith("/doodles/")) {
+	if ((homepageInput && homepageImage) || !document.location.pathname)
+		presenceData.details = "Home";
+	else if (document.location.pathname.startsWith("/doodles/")) {
 		const doodleResult = new URL(document.location.href).searchParams.get("q"),
 			doodleTitle: HTMLElement = document.querySelector(
 				"#title-card > div > h2"
