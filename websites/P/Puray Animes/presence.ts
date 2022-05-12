@@ -7,8 +7,7 @@ presence.on("UpdateData", () => {
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
-		},
-		video = document.querySelector("video");
+		};
 	if (document.querySelector("input[id^=headlessui]"))
 		presenceData.details = "Pesquisando Animes";
 	else if (pathname.startsWith("/login")) presenceData.details = "Logando";
@@ -49,9 +48,16 @@ presence.on("UpdateData", () => {
 				url: document.querySelector<HTMLAnchorElement>(".mb-4>a").href
 			}
 		];
-		if (video && !video.paused && video.readyState >= 1) {
+		if (
+			document.querySelector("video") &&
+			!document.querySelector("video").paused &&
+			document.querySelector("video").readyState >= 1
+		) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(video.currentTime, video.duration);
+				presence.getTimestamps(
+					document.querySelector("video").currentTime,
+					document.querySelector("video").duration
+				);
 		}
 	}
 	if (!presenceData.details) presence.setActivity();
