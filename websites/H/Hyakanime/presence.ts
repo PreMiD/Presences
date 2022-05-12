@@ -9,6 +9,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp
 		},
 		page = document.location.pathname;
+	presenceData.details = "Sur la page d'accueil";
 	if (page.startsWith("/anime/")) {
 		presenceData.details = "Regarde la fiche d'un animé:";
 		presenceData.state = document.querySelector(
@@ -47,10 +48,5 @@ presence.on("UpdateData", async () => {
 			}
 		];
 	}
-	if (presenceData.details) 
-		presence.setActivity(presenceData);
-	else {
-		presenceData.details = "Sur la page d'accueil";
-		presence.setActivity(presenceData);
-	}
+	presence.setActivity(presenceData);
 });
