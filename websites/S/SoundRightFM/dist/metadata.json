@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.7",
+    "author": {
+      "name": "AliUK",
+      "id": "611664613880233995"
+    },
+    "service": "SoundRight FM",
+    "description": {
+      "en": "Your hit music station that broadcasts live all day, everyday."
+    },
+    "url": "soundright.ml",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/1Ff2FS8.jpeg",
+    "thumbnail": "https://i.imgur.com/WbgR8Dk.png",
+    "color": "#e6192e",
+    "category": "music",
+    "tags": [
+      "radio",
+      "soundright",
+      "music",
+      "fm"
+    ]
+  }
