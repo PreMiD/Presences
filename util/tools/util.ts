@@ -14,10 +14,10 @@ export async function execShellCommand(
 ): Promise<string> {
 	const response = await execute(cmd, { ...options });
 	if (response.stderr) throw response.stderr;
-	return response.stdout
+	return response.stdout;
 }
 
-export function createAnnotation(params: CreateAnnotationParams): string  {
+export function createAnnotation(params: CreateAnnotationParams): string {
 	const input = [];
 
 	for (const [key, value] of Object.entries(params)) {
@@ -26,7 +26,7 @@ export function createAnnotation(params: CreateAnnotationParams): string  {
 	}
 
 	return `::${params.type} ${input.join(",")}::${params.message}`;
-};
+}
 
 export function validateArg(arg: string): ValidEventName {
 	if (!arg) return;
@@ -87,7 +87,7 @@ export const readFile = (path: string): string =>
 	 */
 	writeJson = <T>(data: T, jsonPath: string): void =>
 		writeFileSync(jsonPath, JSON.stringify(data, null, "\t"), {
-			encoding: "utf8"
+			encoding: "utf8",
 		});
 
 export type ValidEventName = "push" | "pull_request";

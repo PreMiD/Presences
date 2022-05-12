@@ -5,7 +5,7 @@ import {
 	createAnnotation,
 	execShellCommand,
 	getChangedFolders,
-	validateArg
+	validateArg,
 } from "./util";
 
 async function main() {
@@ -27,11 +27,9 @@ async function main() {
 				green(`✔ Successfully compiled ${changedFolders[i].split("/").at(-1)}`)
 			);
 		} catch (err) {
-			const error = (
-				err.stderr ||
-				err.stdout ||
-				"Couldn't find error"
-			).replaceAll("\r", "").trim() as string;
+			const error = (err.stderr || err.stdout || "Couldn't find error")
+				.replaceAll("\r", "")
+				.trim() as string;
 
 			error
 				.split("\n")
@@ -46,7 +44,7 @@ async function main() {
 								file: changedFolders[i] + "/presence.ts",
 								title: "Failed to compile",
 								line: regexResult[1],
-								message: regexResult[2]
+								message: regexResult[2],
 							})
 						);
 					else
@@ -55,7 +53,7 @@ async function main() {
 								type: "error",
 								file: changedFolders[i] + "/presence.ts",
 								title: "Failed to compile",
-								message: e
+								message: e,
 							})
 						);
 				});
