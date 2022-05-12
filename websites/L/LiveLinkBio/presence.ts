@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.hostname.includes("docs.livelinkbio.com")) {
 		if (search?.value) {
 			presenceData.details = "Searching for:";
-			presenceData.state = search.value;
+			presenceData.state = search.value ?? "Unknown";
 		} else {
 			presenceData.buttons = [
 				{
