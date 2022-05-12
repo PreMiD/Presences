@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = title;
 		}
 	}
-	if (privacy || !buttons) delete presenceData.buttons;
+	if (!buttons) delete presenceData.buttons;
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
