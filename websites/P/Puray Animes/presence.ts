@@ -21,9 +21,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = `${
 			document.querySelector("h3").childNodes[0]?.textContent
 		} - ${document.querySelector("button[class*=blue] span")?.textContent}`;
-		presenceData.buttons = [
-			{ label: "Ver perfil", url: location.origin + location.pathname }
-		];
+		presenceData.buttons = [{ label: "Ver perfil", url: location.href }];
 	} else if (pathname.startsWith("/config")) {
 		presenceData.details = `Configurando ${
 			document.querySelector("button[class*=blue] span")?.textContent
@@ -33,9 +31,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.querySelector(
 			"section div[class^=text-3xl]"
 		)?.textContent;
-		presenceData.buttons = [
-			{ label: "Ver anime", url: location.origin + location.pathname }
-		];
+		presenceData.buttons = [{ label: "Ver anime", url: location.href }];
 	} else if (pathname.startsWith("/watch/")) {
 		presenceData.details = document.querySelector(
 			"span.text-sm.font-bold.underline"
@@ -46,7 +42,7 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Assistir episódio",
-				url: location.origin + location.pathname
+				url: location.href
 			},
 			{
 				label: "Ver anime",
