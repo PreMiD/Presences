@@ -1,7 +1,7 @@
 const presence = new Presence({
 	clientId: "616738921765667023"
 });
-let title: HTMLElement, mTitle: HTMLMetaElement, search: HTMLInputElement;
+let title: HTMLElement, mTitle: string, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -16,61 +16,53 @@ presence.on("UpdateData", async () => {
 		if (path === "/") {
 			search = document.querySelector("#tags");
 			if (search.value) {
-				presenceData.details = "Searching For:";
+				presenceData.details = "Searching for:";
+				presenceData.smallImageKey = "search";
 				presenceData.state = search.value;
 			} else presenceData.details = "Viewing the homepage";
 		} else if (path.includes("posts")) {
 			search = document.querySelector("#tags");
-			if (
-				search.value &&
-				search.value !==
-					document.querySelector<HTMLInputElement>("#tags_query").value
-			) {
-				presenceData.details = "Searching Posts For:";
+			mTitle = document
+				.querySelector<HTMLMetaElement>('meta[name="og:title"]')
+				?.content.replace(" - e926", "")
+				.replace(" ", "_");
+			document.querySelector<HTMLMetaElement>('meta[name="og:title"]');
+			if (path.includes("posts/")) {
+				mTitle = document.querySelector<HTMLMetaElement>(
+					'meta[property="og:title"]'
+				).content;
+				presenceData.details = "Viewing Post";
+				presenceData.state = `Created By: ${
+					mTitle.slice(0, mTitle.length - 6).split("created by")[1]
+				}`;
+				presenceData.buttons = [
+					{
+						label: "View Post",
+						url: document.location.href
+					}
+				];
+			} else if (search.value && search.value !== mTitle) {
+				presenceData.smallImageKey = "search";
+				presenceData.buttons = [
+					{
+						label: "View Search",
+						url: document.location.href
+					}
+				];
+				presenceData.details = "Searching Posts for:";
 				presenceData.state = search.value;
 			} else if (document.location.href.includes("/posts?tags=")) {
-				mTitle = document.querySelector('meta[name="og:title"]');
 				presenceData.details = "Viewing posts about:";
-				presenceData.state = mTitle.content.slice(0, mTitle.content.length - 6);
-			} else if (path.includes("posts/")) {
-				mTitle = document.querySelector('meta[property="og:title"]');
-				const split = mTitle.content
-					.slice(0, mTitle.content.length - 6)
-					.split("created by");
-				presenceData.details = split[0];
-				presenceData.state = `Created By: ${split[1]}`;
+				presenceData.state = mTitle;
 			} else {
+				presenceData.buttons = [
+					{
+						label: "View All Posts",
+						url: document.location.href
+					}
+				];
 				presenceData.details = "All Posts";
 				delete presenceData.state;
-			}
-			if (buttons) {
-				if (
-					(search.value &&
-						search.value !==
-							document.querySelector<HTMLInputElement>("#tags_query").value) ||
-					document.location.href.includes("/posts?tags=")
-				) {
-					presenceData.buttons = [
-						{
-							label: "View Search",
-							url: document.location.href
-						}
-					];
-				} else if (path.includes("posts/")) {
-					presenceData.buttons = [
-						{
-							label: "View Post",
-							url: document.location.href
-						}
-					];
-				} else {
-					presenceData.buttons = [
-						{
-							label: "View All Posts",
-							url: document.location.href
-						}
-					];
-				}
 			}
 		} else if (path.includes("comments")) {
 			title = document.querySelector(
@@ -78,33 +70,29 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = "Comments";
 			presenceData.state = `Page ${title.textContent}`;
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: `View Comment Page ${title.textContent}`,
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: `View Comment Page ${title.textContent}`,
+					url: document.location.href
+				}
+			];
 		} else if (path.includes("users/")) {
 			title = document.querySelector("head > title");
 			presenceData.details = `Viewing ${title.textContent.slice(
 				9,
 				title.textContent.length - 8
 			)}'s Profile`;
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Profile",
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View Profile",
+					url: document.location.href
+				}
+			];
 		} else if (path.includes("artists")) {
 			search = document.querySelector("#search_any_name_matches");
 			if (!search) search = document.querySelector("#quick_search_name");
 			if (search.value !== "") {
-				presenceData.details = "Searching Artists For:";
+				presenceData.details = "Searching Artists for:";
 				presenceData.state = search.value;
 			} else if (path.includes("artists/")) {
 				title = document.querySelector("#a-show > h1 > a");
@@ -113,26 +101,24 @@ presence.on("UpdateData", async () => {
 					""
 				)}`;
 			} else presenceData.details = "Artists";
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Artist",
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View Artist",
+					url: document.location.href
+				}
+			];
 		} else if (path.includes("tags")) {
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Tags",
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View Tags",
+					url: document.location.href
+				}
+			];
+
 			search = document.querySelector("#search_name_matches");
 			if (search.value !== "") {
-				presenceData.details = "Searching Tags For:";
+				presenceData.smallImageKey = "search";
+				presenceData.details = "Searching Tags for:";
 				presenceData.state = search.value;
 			} else if (document.location.href.includes("&search%5Border%5D=")) {
 				title = document.querySelector("#search_order");
@@ -171,40 +157,41 @@ presence.on("UpdateData", async () => {
 				];
 			}
 			search = document.querySelector("#search_name_matches");
-			if (search.value !== "") {
-				presenceData.details = "Searching Pools For:";
+			if (!search.value) {
+				presenceData.details = "Searching Pools for:";
+				presenceData.smallImageKey = "search";
 				presenceData.state = search.value;
 			} else presenceData.details = "Pools";
 		} else if (path.includes("post_sets")) presenceData.details = "Post Sets";
 		else if (path.includes("wiki_pages")) {
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Wiki",
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View Wiki",
+					url: document.location.href
+				}
+			];
 			search = document.querySelector("#quick_search_title");
-			if (search.value !== "") {
-				presenceData.details = "Searching Wiki For:";
+			if (search.value) {
+				presenceData.details = "Searching Wiki for:";
+				presenceData.smallImageKey = "search";
 				presenceData.state = search.value;
 			} else {
 				title = document.querySelector("#wiki-page-title > a");
-				presenceData.details = title.textContent;
+				presenceData.details = "Reading Wiki:";
+				presenceData.state = title.textContent;
+				presenceData.smallImageKey = "reading";
 			}
 		} else if (path.includes("forum_topics/")) {
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Forum Post",
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View Forum Post",
+					url: document.location.href
+				}
+			];
 			search = document.querySelector("#quick_search_body_matches");
-			if (search.value !== "") {
-				presenceData.details = "Searching Forum For:";
+			if (!search.value) {
+				presenceData.details = "Searching Forum for:";
+				presenceData.smallImageKey = "search";
 				presenceData.state = search.value;
 			} else {
 				title = document.querySelector("#a-show > h1");
@@ -213,19 +200,18 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (path.includes("forum_topics")) presenceData.details = "Forum";
 		else if (path.includes("help")) {
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Help Page",
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View Help Page",
+					url: document.location.href
+				}
+			];
 			title = document.querySelector("#content > div > h1");
 			if (title) presenceData.details = title.textContent;
 			else presenceData.details = "Help";
 		} else if (path.includes("site_map")) presenceData.details = "Sitemap";
 	} else presenceData.details = "Browsing...";
+	if (privacy || !buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
