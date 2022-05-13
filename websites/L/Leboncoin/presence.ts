@@ -42,11 +42,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Dans les résultats de recherche :";
 
 		presenceData.state = `Annonces pour « ${
-			document
-				.querySelector("h1")
-				.textContent.split("«")
-				.pop()
-				.split("»")[0]
+			document.querySelector("h1").textContent.split("«").pop().split("»")[0]
 		} »`;
 	} else if (document.location.pathname.includes("/commerces_marches/")) {
 		presenceData.details = `Annonce ${document.title.split("-")[0]}`;
