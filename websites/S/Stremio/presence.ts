@@ -21,9 +21,9 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("thumbnails"),
 			presence.getSetting<boolean>("buttons")
 		]),
-		active = document.querySelectorAll(
+		active = document.querySelector(
 			"[class='ng-binding ng-scope selected']"
-		)[0]?.textContent;
+		)?.textContent;
 
 	if (window.location.hostname.includes("app.strem.io")) {
 		search = document.querySelector("#global-search-field");
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Video",
-					url: document.location.href
+					url: page
 				}
 			];
 			if (thumbnails) {
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 						.querySelector(
 							"#detail > div.details-less-info > div.details-top > div:nth-child(1)"
 						)
-						?.firstElementChild?.getAttribute("src") ?? "logo";
+						?.firstElementChild.getAttribute("src") ?? "logo";
 			}
 		} else if (page.includes("addons")) {
 			search = document.querySelector(
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Browse Addons",
-						url: document.location.href
+						url: page
 					}
 				];
 				presenceData.details = `Browsing ${title}:`;
@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: `Browse ${active}`,
-						url: document.location.href
+						url: page
 					}
 				];
 				presenceData.details = `Browsing ${active}`;
@@ -118,14 +118,14 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Library",
-					url: document.location.href
+					url: page
 				}
 			];
 		} else if (page.includes("/calendar")) {
 			presenceData.buttons = [
 				{
 					label: "View Calendar",
-					url: document.location.href
+					url: page
 				}
 			];
 			presenceData.details = "Calendar";
@@ -144,18 +144,16 @@ presence.on("UpdateData", async () => {
 					);
 				}
 
-				pauseCheck = document
+				pauseCheck = !document
 					.querySelector("#controlbar-top")
-					?.firstElementChild?.className.includes("pause")
-					? false
-					: true;
+					?.firstElementChild.className.includes("pause");
 			}
 			delete presenceData.startTimestamp;
 			if (
 				!pauseCheck &&
 				!document.querySelector("#loading-logo").className.includes("flashing")
 			) {
-				presenceData.endTimestamp = timestamp[1] ?? 0;
+				presenceData.endTimestamp = timestamp[1];
 				presenceData.smallImageKey = "play";
 			} else {
 				delete presenceData.endTimestamp;
@@ -168,7 +166,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Join View Party",
-					url: document.location.href
+					url: page
 				}
 			];
 		} else if (window.location.pathname === "/")
