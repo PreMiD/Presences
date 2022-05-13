@@ -10,10 +10,8 @@
 		"en": "Freedom To Stream. Stremio is a modern media center that's a one-stop solution for your video entertainment. Discover, watch and organize video content from easy to install addons."
 	},
 	"url": [
-		"stremio.com",
 		"www.stremio.com",
-		"app.strem.io",
-		"www.app.strem.io"
+		"app.strem.io"
 	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/6bm1P3r.png",
