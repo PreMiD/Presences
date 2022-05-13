@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 		}`;
 		presenceData.smallImageKey = "book-open-solid";
 	}
-	if (hostname === "mc.bloom.host" || hostname === "demo.bloom.host") {
+	if (["mc.bloom.host", "demo.bloom.host"].includes(hostname)) {
 		presenceData.details = "Using the panel";
 		presenceData.smallImageKey = "terminal-solid";
 		if (pathname.includes("account")) {
