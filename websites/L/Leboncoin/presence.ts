@@ -43,8 +43,8 @@ presence.on("UpdateData", () => {
 
 		presenceData.state = `Annonces pour « ${
 			document
-				.querySelectorAll("h1")[0]
-				.innerHTML.split("«")
+				.querySelector("h1")
+				.textContent.split("«")
 				.pop()
 				.split("»")[0]
 		} »`;
