@@ -35,10 +35,10 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "terminal-solid";
 		if (pathname.includes("account")) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = "Editing: Account Details";
+			presenceData.state = "Editing account details";
 		} else if (pathname.includes("console")) {
 			presenceData.details = "Using the Panel";
-			presenceData.state = "Viewing: The console";
+			presenceData.state = "Viewing the console";
 		} else if (pathname.includes("server") && pathname.includes("logs")) {
 			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing: Audit Logs";
