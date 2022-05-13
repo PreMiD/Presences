@@ -2,7 +2,14 @@ const presence = new Presence({
 		clientId: "969208766807547917"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let video: HTMLMediaElement, timestamp: [number, number], pauseCheck: boolean;
+
+let video: HTMLMediaElement,
+	timestamp: [number, number],
+	pauseCheck: boolean,
+	search: HTMLInputElement,
+	genreSort: string,
+	title: string;
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
@@ -18,7 +25,6 @@ presence.on("UpdateData", async () => {
 			"[class='ng-binding ng-scope selected']"
 		)[0]?.textContent;
 
-	let search: HTMLInputElement, genreSort: string, title: string;
 	if (window.location.hostname.includes("app.strem.io")) {
 		search = document.querySelector("#global-search-field");
 		video = document.querySelector<HTMLMediaElement>("#videoPlayer");
