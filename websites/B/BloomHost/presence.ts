@@ -34,53 +34,37 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Using the panel";
 		presenceData.smallImageKey = "terminal-solid";
 		if (pathname.includes("account")) {
-			presenceData.details = "Using the Panel";
 			presenceData.state = "Editing account details";
 		} else if (pathname.includes("console")) {
-			presenceData.details = "Using the Panel";
 			presenceData.state = "Viewing the console";
 		} else if (pathname.includes("server") && pathname.includes("logs")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Viewing: Audit Logs";
+			presenceData.state = "Viewing Audit Logs";
 		} else if (pathname.includes("server") && pathname.includes("import")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Using: The Server Importer ";
+			presenceData.state = "Using The Server Importer ";
 		} else if (pathname.includes("server") && pathname.includes("startup")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Viewing: Startup";
+			presenceData.state = "Viewing Startup";
 		} else if (pathname.includes("server") && pathname.includes("settings")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Viewing: Settings";
+			presenceData.state = "Viewing Settings";
 		} else if (pathname.includes("server") && pathname.includes("subdomain")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Viewing: Subdomains";
+			presenceData.state = "Viewing Subdomains";
 		} else if (pathname.includes("server") && pathname.includes("network")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Viewing: Ports & Proxies";
+			presenceData.state = "Viewing Ports & Proxies";
 		} else if (pathname.includes("server") && pathname.includes("backups")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Creating: Backups";
+			presenceData.state = "Creating Backups";
 		} else if (pathname.includes("server") && pathname.includes("users")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Viewing: SubUsers";
+			presenceData.state = "Viewing SubUsers";
 		} else if (pathname.includes("server") && pathname.includes("schedules")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Viewing: Schedules";
+			presenceData.state = "Viewing Schedules";
 		} else if (pathname.includes("server") && pathname.includes("databases")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Viewing: Databases";
+			presenceData.state = "Viewing Databases";
 		} else if (pathname.includes("server") && pathname.includes("minecraft")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Managing: Minecraft players";
+			presenceData.state = "Managing Minecraft players";
 		} else if (pathname.includes("server") && pathname.includes("plugins")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Installing: Plugins";
+			presenceData.state = "Installing Plugins";
 		} else if (pathname.includes("server") && pathname.includes("modpacks")) {
-			presenceData.details = "Using the Panel";
-			presenceData.state = "Installing: Modpacks";
+			presenceData.state = "Installing Modpacks";
 		} else if (pathname.includes("files")) {
-			presenceData.details = "Using the panel";
-			presenceData.state = "Editing: Files";
+			presenceData.state = "Editing Files";
 		}
 	}
 	if (hostname === "status.bloom.host") {
