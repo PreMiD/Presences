@@ -29,7 +29,7 @@
 		"@types/glob": "^7.2.0",
 		"@types/json-to-ast": "^2.1.2",
 		"@types/node": "^16.11.35",
-		"@types/prettier": "^2.6.0",
+		"@types/prettier": "^2.6.1",
 		"@types/semver": "^7.3.9",
 		"@typescript-eslint/eslint-plugin": "^5.23.0",
 		"@typescript-eslint/parser": "^5.23.0",
