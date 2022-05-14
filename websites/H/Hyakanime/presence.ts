@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "applogo_7fac0ec4359bda8ccf0f",
 			startTimestamp: browsingTimestamp,
-			details: "Regarde la fiche de l'animé:"
+			details: "Sur la page d'accueil"
 		},
 		page = document.location.pathname;
 	if (page.startsWith("/anime/")) {
