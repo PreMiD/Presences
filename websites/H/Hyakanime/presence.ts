@@ -6,12 +6,11 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "applogo_7fac0ec4359bda8ccf0f",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
+			details: "Regarde la fiche de l'animé:"
 		},
 		page = document.location.pathname;
-	presenceData.details = "Sur la page d'accueil";
 	if (page.startsWith("/anime/")) {
-		presenceData.details = "Regarde la fiche de l'animé:";
 		presenceData.state = document.querySelector(
 			"#root > div.anime-body > div.anime-white-informations > div.anime-white-infos > div:nth-child(2) > h1"
 		).textContent;
