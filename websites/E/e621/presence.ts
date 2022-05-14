@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Page ${title.textContent}`;
 			presenceData.buttons = [
 				{
-					label: `View Comment Page ${title.textContent}`,
+					label: "View Comment Page",
 					url: document.location.href
 				}
 			];
