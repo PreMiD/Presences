@@ -24,8 +24,7 @@ presence.on("UpdateData", async () => {
 			search = document.querySelector("#tags");
 			mTitle = document
 				.querySelector<HTMLMetaElement>('meta[name="og:title"]')
-				?.content.replace(" - e926", "")
-				.replace(" ", "_");
+				?.content.replace(" - e926", "");
 			document.querySelector<HTMLMetaElement>('meta[name="og:title"]');
 			if (path.includes("posts/")) {
 				mTitle = document.querySelector<HTMLMetaElement>(
@@ -51,9 +50,6 @@ presence.on("UpdateData", async () => {
 				];
 				presenceData.details = "Searching Posts for:";
 				presenceData.state = search.value;
-			} else if (document.location.href.includes("/posts?tags=")) {
-				presenceData.details = "Viewing posts about:";
-				presenceData.state = mTitle;
 			} else {
 				presenceData.buttons = [
 					{
@@ -91,7 +87,7 @@ presence.on("UpdateData", async () => {
 		} else if (path.includes("artists")) {
 			search = document.querySelector("#search_any_name_matches");
 			if (!search) search = document.querySelector("#quick_search_name");
-			if (search.value !== "") {
+			if (search.value) {
 				presenceData.details = "Searching Artists for:";
 				presenceData.state = search.value;
 			} else if (path.includes("artists/")) {
@@ -116,7 +112,7 @@ presence.on("UpdateData", async () => {
 			];
 
 			search = document.querySelector("#search_name_matches");
-			if (search.value !== "") {
+			if (search.value) {
 				presenceData.smallImageKey = "search";
 				presenceData.details = "Searching Tags for:";
 				presenceData.state = search.value;
@@ -157,7 +153,7 @@ presence.on("UpdateData", async () => {
 				];
 			}
 			search = document.querySelector("#search_name_matches");
-			if (!search.value) {
+			if (search.value) {
 				presenceData.details = "Searching Pools for:";
 				presenceData.smallImageKey = "search";
 				presenceData.state = search.value;
