@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
 		};
 	if (document.querySelector("input[id^=headlessui]"))
 		presenceData.details = "Pesquisando Animes";
-	else if (pathname.startsWith("/login")) presenceData.details = "Logando";
+	else if (pathname.startsWith("/login")) presenceData.details = "Entrando";
 	else if (pathname.startsWith("/register"))
 		presenceData.details = "Cadastrando";
 	else if (pathname.startsWith("/home"))
