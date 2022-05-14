@@ -189,7 +189,7 @@ presence.on("UpdateData", async () => {
 				}
 			];
 			search = document.querySelector("#quick_search_body_matches");
-			if (!search.value) {
+			if (search.value) {
 				presenceData.details = "Searching Forum for:";
 				presenceData.smallImageKey = "search";
 				presenceData.state = search.value;
