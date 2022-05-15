@@ -88,8 +88,8 @@ presence.on("UpdateData", async () => {
 		path = document.location.toString().split("/");
 	switch (document.location.hostname) {
 		case "genshin-impact-map.appsample.com":
-			current =
-				maps.find(i =>
+			current = maps.find(
+				i =>
 					i.map
 						.toLowerCase()
 						.includes(
@@ -97,9 +97,9 @@ presence.on("UpdateData", async () => {
 								.querySelector("#map-selector-btn > strong > p")
 								.textContent.toLowerCase()
 						) ||
-						i.map.toLowerCase().includes(path[3].split("?map=")[1]) ||
-						i.hylid === 2
-				);
+					i.map.toLowerCase().includes(path[3].split("?map=")[1]) ||
+					i.hylid === 2
+			);
 			break;
 		case "mapgenie.io":
 			if (
@@ -135,27 +135,27 @@ presence.on("UpdateData", async () => {
 					0
 			);
 			if (current.city) {
-				currentcity = city.find(
+				currentCity = city.find(
 					i =>
 						i.position.reduce((prev, curr) =>
 							Math.abs(curr - getpos) < Math.abs(prev - getpos) ? curr : prev
 						) > getpos
 				);
-			} else currentcity = null;
+			} else currentCity = null;
 			break;
 	}
 	if (!current) return;
 	presenceData.details = current.map;
-	presenceData.state = current.city && currentcity ? currentcity.map : null;
+	presenceData.state = current.city && currentCity ? currentCity.map : null;
 	presenceData.largeImageKey =
-		showepreview && currentcity
-			? currentcity.largeImageKey
-			: showepreview
+		showPreview && currentCity
+			? currentCity.largeImageKey
+			: showPreview
 			? current.pvlargeImageKey
 			: current.largeImageKey;
 	presenceData.smallImageKey = current.city
-		? currentcity
-			? currentcity.smallImageKey
+		? currentCity
+			? currentCity.smallImageKey
 			: current.smallImageKey
 		: current.smallImageKey;
 	presenceData.smallImageText = document.location.host.replace(".com", "");
