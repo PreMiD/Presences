@@ -16,10 +16,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showReading")
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "nocover",
-			smallImageKey: showReading ? "closed" : null,
-			smallImageText: showReading ? "Not Reading" : null,
-			startTimestamp: showTimestamp ? browsingTimestamp : null
+			largeImageKey: "nocover"
 		},
 		{ pathname } = window.location,
 		pathnames = [
@@ -41,9 +38,13 @@ presence.on("UpdateData", async () => {
 		showCover = false;
 		showLogo = true;
 		showButtons = false;
+	} else {
+		presenceData.smallImageKey = "closed";
+		presenceData.smallImageText = "Not Reading";
 	}
+	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
+	else delete presenceData.startTimestamp;
 	if (!showBook) showCover = false;
-
 	switch (true) {
 		case privacy: {
 			presenceData.largeImageKey = "incognito";
