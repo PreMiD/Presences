@@ -6,12 +6,12 @@
 	},
 	"service": "Free Web Novel",
 	"description": {
-		"en": "We are offering free books online read! Read novel updated daily: light novel translations, web novel, chinese novel, english Novel, japanese novel and korean novel online."
+		"en": "We offer free novels to read online! Read novels updated daily: Chinese novels, English novels, Japanese novels, Korean novels, and novels of multiple genres."
 	},
 	"url": "freewebnovel.com",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/ePGzX1S.png",
-	"thumbnail": "https://i.imgur.com/PJw9FKX.png",
+	"thumbnail": "https://i.imgur.com/oX4nk92.png",
 	"color": "#5a5a5a",
 	"category": "socials",
 	"tags": [
@@ -24,7 +24,7 @@
 	],
 	"settings": [
 		{
-			"id": "showLogo",
+			"id": "logoOnly",
 			"title": "Logo Only",
 			"if": {
 				"privacy": false

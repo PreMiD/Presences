@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<boolean>("showCover"),
 		presence.getSetting<boolean>("showButtons"),
 		presence.getSetting<boolean>("showBook"),
-		presence.getSetting<boolean>("showLogo")
+		presence.getSetting<boolean>("logoOnly")
 	]);
 	const [privacy, showTimestamp, showReading] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
@@ -136,15 +136,17 @@ presence.on("UpdateData", async () => {
 		}
 		default: {
 			if (document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')) {
-				presenceData.largeImageKey = showCover
-					? `${
-							document.querySelector<HTMLImageElement>(
-								"body > div.main > div > div > div.col-content > div.m-info > div.m-book1 > div.m-imgtxt > div.pic > img"
-							).src
-					  }`
-					: "nocover";
-				presenceData.details = showReading ? "Viewing a novel" : null;
-				presenceData.state = showBook ? document.title.split("-")[0] : null;
+				if (showCover)
+					presenceData.largeImageKey = `${
+						document.querySelector<HTMLImageElement>(
+							"body > div.main > div > div > div.col-content > div.m-info > div.m-book1 > div.m-imgtxt > div.pic > img"
+						).src
+					}`;
+				else presenceData.largeImageKey = "nocover";
+				if (showReading) presenceData.details = "Viewing a novel";
+				else delete presenceData.details;
+				if (showBook) presenceData.state = document.title.split("-")[0];
+				else delete presenceData.state;
 				if (showButtons) {
 					presenceData.buttons = [
 						{
@@ -156,20 +158,28 @@ presence.on("UpdateData", async () => {
 			} else if (
 				document.querySelector<HTMLAnchorElement>('[title="Read Next chapter"]')
 			) {
-				presenceData.largeImageKey = showCover
-					? document.querySelector<HTMLMetaElement>("head > meta:nth-child(4)")
-							.content
-					: "nocover";
-				presenceData.details = showBook
-					? `Reading ${document.title.split("-")[0]}`
-					: "Reading a novel";
-				presenceData.state = showBook
-					? document.querySelector<HTMLSpanElement>('[class="chapter"]')
-							.textContent
-					: null;
-				presenceData.smallImageKey = showReading ? "open" : null;
-				presenceData.smallImageText = showReading ? "Reading" : null;
-
+				if (showCover)
+					presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+						"head > meta:nth-child(4)"
+					).content;
+				else presenceData.largeImageKey = "nocover";
+				if (showBook) {
+					presenceData.details = `Reading ${document.title.split("-")[0]}`;
+					presenceData.state =
+						document.querySelector<HTMLSpanElement>(
+							'[class="chapter"]'
+						).textContent;
+				} else {
+					presenceData.details = "Reading a novel";
+					delete presenceData.state;
+				}
+				if (showReading) {
+					presenceData.smallImageKey = "open";
+					presenceData.smallImageText = "Reading";
+				} else {
+					delete presenceData.smallImageKey;
+					delete presenceData.smallImageText;
+				}
 				if (showButtons) {
 					presenceData.buttons = [
 						{
