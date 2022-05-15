@@ -25,7 +25,7 @@
 	],
 	"settings": [
 		{
-			"id": "showepreview",
+			"id": "showPreview",
 			"title": "Show Preview",
 			"icon": "fad fa-user-secret",
 			"value": true

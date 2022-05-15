@@ -67,7 +67,7 @@ let getpos: number,
 		pvlargeImageKey: string | null;
 		smallImageKey: string;
 	},
-	currentcity: {
+	currentCity: {
 		position?: number[];
 		map: string;
 		largeImageKey: string;
@@ -75,8 +75,8 @@ let getpos: number,
 	};
 
 presence.on("UpdateData", async () => {
-	const [showepreview, timestamps] = await Promise.all([
-			presence.getSetting<boolean>("showepreview"),
+	const [showPreview, timestamps] = await Promise.all([
+			presence.getSetting<boolean>("showPreview"),
 			presence.getSetting<boolean>("timestamps")
 		]),
 		presenceData: PresenceData = {
@@ -96,10 +96,7 @@ presence.on("UpdateData", async () => {
 							document
 								.querySelector("#map-selector-btn > strong > p")
 								.textContent.toLowerCase()
-						)
-				) ??
-				maps.find(
-					i =>
+						) ||
 						i.map.toLowerCase().includes(path[3].split("?map=")[1]) ||
 						i.hylid === 2
 				);
