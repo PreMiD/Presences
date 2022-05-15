@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the main page";
 			else {
 				presenceData.details = "Reading a wiki page";
-				presenceData.state = `"${document.title.split("|")[0]}"`;
+				presenceData.state = document.title.split("|")[0];
 				presenceData.buttons = [
 					{
 						label: "Read Page",
@@ -33,12 +33,11 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the main page";
 			else if (pathname.includes("/tags/")) {
 				presenceData.details = "Looking for posts tagged with:";
-				presenceData.state = `"${
-					pathname.split("/")[pathname.split("/").length - 1]
-				}"`;
+				presenceData.state =
+					pathname.split("/")[pathname.split("/").length - 1];
 			} else {
 				presenceData.details = "Reading a Post";
-				presenceData.state = `"${document.title.split("|")[0]}"`;
+				presenceData.state = document.title.split("|")[0];
 				presenceData.buttons = [
 					{
 						label: "Read Post",
@@ -53,7 +52,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Searching...";
 			if (search) {
 				presenceData.details = "Searching for:";
-				presenceData.state = `${search.split("?q=")[1]}`;
+				presenceData.state = search.split("?q=")[1];
 			} else presenceData.details = "Searching for something...";
 			break;
 		}
