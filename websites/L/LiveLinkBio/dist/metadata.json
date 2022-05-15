@@ -9,8 +9,12 @@
 		"en": "LiveLinkBio is an advanced URL Shortener Platform that allows you to easily shorten links, target your audience based on their location or platform, and provide insights on analytics for the shortened links.",
 		"nl": "LiveLinkBio is een geavanceerde URL Verkorter Platform, waar je makkelijk links kan verkorten, om jouw gekozen publiek te bereiken op basis van locatie en platform en het bied analytics aan voor de verkorte links."
 	},
-	"url": ["livelinkbio.com", "status.livelinkbio.com", "docs.livelinkbio.com"],
-	"version": "1.0.0",
+	"url": [
+		"livelinkbio.com",
+		"status.livelinkbio.com",
+		"docs.livelinkbio.com"
+	],
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/mqJJ4p9.png",
 	"thumbnail": "https://i.imgur.com/U4DlHTe.png",
 	"color": "#41AAA5",
