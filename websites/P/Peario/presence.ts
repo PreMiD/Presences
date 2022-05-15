@@ -110,9 +110,8 @@ presence.on("UpdateData", async () => {
 			}
 		} else {
 			const fetched = await fetchWithoutVideo();
-			let title;
+			let title = "";
 			if (fetched) title = `:${fetched.meta.name}`;
-			else title = "";
 			presenceData.details = title;
 			presenceData.buttons = [
 				{
