@@ -136,13 +136,13 @@ presence.on("UpdateData", async () => {
 		}
 		default: {
 			if (document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')) {
-				if (showCover)
+				if (showCover) {
 					presenceData.largeImageKey = `${
 						document.querySelector<HTMLImageElement>(
 							"body > div.main > div > div > div.col-content > div.m-info > div.m-book1 > div.m-imgtxt > div.pic > img"
 						).src
 					}`;
-				else presenceData.largeImageKey = "nocover";
+				} else presenceData.largeImageKey = "nocover";
 				if (showReading) presenceData.details = "Viewing a novel";
 				else delete presenceData.details;
 				if (showBook) presenceData.state = document.title.split("-")[0];
@@ -158,11 +158,11 @@ presence.on("UpdateData", async () => {
 			} else if (
 				document.querySelector<HTMLAnchorElement>('[title="Read Next chapter"]')
 			) {
-				if (showCover)
+				if (showCover) {
 					presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 						"head > meta:nth-child(4)"
 					).content;
-				else presenceData.largeImageKey = "nocover";
+				} else presenceData.largeImageKey = "nocover";
 				if (showBook) {
 					presenceData.details = `Reading ${document.title.split("-")[0]}`;
 					presenceData.state =
