@@ -49,9 +49,9 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		video = document.querySelector(
+		video = document.querySelector<HTMLVideoElement>(
 			"#app > div > div > div > div.player > video"
-		) as HTMLVideoElement,
+		),
 		page = window.location.pathname,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
