@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		case pathname.includes("/wiki"): {
 			presenceData.smallImageKey = "wiki";
 			presenceData.smallImageText = "Wiki";
-			if (pathname === "/wiki" || "/wiki/")
+			if (pathname === "/wiki" || pathname === "/wiki/")
 				presenceData.details = "Viewing the main page";
 			else {
 				presenceData.details = "Reading a wiki page";
