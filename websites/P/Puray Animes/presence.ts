@@ -14,7 +14,7 @@ presence.on("UpdateData", () => {
 	else if (pathname.startsWith("/register"))
 		presenceData.details = "Cadastrando";
 	else if (pathname.startsWith("/home"))
-		presenceData.details = "Página principal";
+		presenceData.details = "Na página principal";
 	else if (pathname.startsWith("/profile/")) {
 		presenceData.details = "Visualizando perfil";
 		presenceData.state = `${
