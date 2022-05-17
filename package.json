@@ -21,7 +21,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.17.12",
 		"@babel/preset-env": "^7.17.10",
-		"@commitlint/cli": "^16.2.4",
+		"@commitlint/cli": "^17.0.0",
 		"@commitlint/config-angular": "^17.0.0",
 		"@types/babel__core": "^7.1.19",
 		"@types/chrome": "^0.0.186",
