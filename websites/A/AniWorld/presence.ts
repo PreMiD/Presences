@@ -33,10 +33,10 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	paused: boolean,
 	played: boolean;
 
-async function getStrings() {
+function getStrings() {
 	return presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused"
 	});
 }
 
