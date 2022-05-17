@@ -46,7 +46,7 @@
 		"husky": "^8.0.1",
 		"is-ci": "^3.0.1",
 		"json-to-ast": "^2.1.0",
-		"jsonschema": "^1.4.0",
+		"jsonschema": "^1.4.1",
 		"mongodb": "^4.4.1",
 		"ora": "5.4.1",
 		"prettier": "^2.6.2",
