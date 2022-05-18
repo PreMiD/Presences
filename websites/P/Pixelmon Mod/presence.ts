@@ -3,6 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	page = document.location.href;
+
 let title: Element, title2: Element;
 
 presence.on("UpdateData", async () => {
