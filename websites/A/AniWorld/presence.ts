@@ -26,19 +26,11 @@ const presence = new Presence({
 		"/support": "Hilfe & Support bei AniWorld",
 		"/edit:information": "Neue Serieninformationen vorschlagen"
 	};
-let strings: Awaited<ReturnType<typeof getStrings>>,
-	video,
+let video,
 	timeEnd: number,
 	currentTime: number,
 	paused: boolean,
 	played: boolean;
-
-function getStrings() {
-	return presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused"
-	});
-}
 
 presence.on(
 	"iFrameData",
@@ -53,8 +45,6 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	if (!strings) strings = await getStrings();
-
 	const page = document.location.pathname,
 		presenceData: PresenceData = {
 			largeImageKey: "aniworld-logo",
@@ -99,7 +89,9 @@ presence.on("UpdateData", async () => {
 					);
 				}
 				presenceData.smallImageKey = paused ? "pause" : "play";
-				presenceData.smallImageText = paused ? strings.pause : strings.play;
+				presenceData.smallImageText = paused
+					? "Wiedergabe pausiert"
+					: "Wiedergabe";
 			}
 		}
 		//Obere Reiter
