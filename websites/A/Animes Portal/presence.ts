@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo"
 		},
-		{ pathname } = document.location,
+		{ pathname, href } = document.location,
 		[showThumb, showMessaging] = await Promise.all([
 			presence.getSetting<boolean>("showthumb"),
 			presence.getSetting<boolean>("showmessaging")
@@ -19,16 +19,15 @@ presence.on("UpdateData", async () => {
 		if (!paths[1]) presenceData.details = "Viewing messages";
 		else if (paths[1].startsWith("pm-") && showMessaging) {
 			const body = document.querySelector<HTMLDivElement>(
-					"body > main.animated > div.wrapper > div.dialogPadding"
-				),
-				username =
-					body.querySelector<HTMLSpanElement>("span.username").textContent;
-
+				"body > main.animated > div.wrapper > div.dialogPadding"
+			);
 			presenceData.smallImageKey = parseAvatarFromAttr(
 				body.querySelector("a.avatar").getAttribute("style")
 			);
 
-			presenceData.details = `Messaging ${username}`;
+			presenceData.details = `Messaging ${
+				body.querySelector<HTMLSpanElement>("span.username").textContent
+			}`;
 		} else if (paths[1].startsWith("pm-") && showMessaging === false)
 			presenceData.details = "Viewing messages";
 	} else if (pathname === "/chat")
@@ -82,7 +81,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View anime",
-					url: document.location.href
+					url: href
 				}
 			];
 		} else if (uid && eid) {
@@ -98,7 +97,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Watch anime",
-						url: document.location.href
+						url: href
 					}
 				];
 
@@ -149,12 +148,11 @@ presence.on("UpdateData", async () => {
 				const list = document.querySelectorAll<HTMLSpanElement>(
 						"body > main.animated > ul#path > li > a > span"
 					),
-					name = list[1].textContent,
 					page = document.querySelector<HTMLParagraphElement>(
 						"body > main.animated > div.wrapper > div.heading > b#num"
 					).textContent;
 
-				presenceData.details = `Reading manga ${name}`;
+				presenceData.details = `Reading manga ${list[1].textContent}`;
 				presenceData.state = `Volume: ${tom}, Chapter: ${between(
 					list[3].textContent,
 					"Глава ",
@@ -163,7 +161,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read manga",
-						url: document.location.href
+						url: href
 					}
 				];
 			} else {
@@ -177,7 +175,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read manga",
-						url: document.location.href
+						url: href
 					}
 				];
 			}
@@ -198,7 +196,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View manga",
-					url: document.location.href
+					url: href
 				}
 			];
 		} else if (paths[1])

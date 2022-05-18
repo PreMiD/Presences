@@ -79,9 +79,8 @@ presence.on("UpdateData", async () => {
 	else if (href.includes("/#raid") || href.includes("/#raid_multi")) {
 		if (health === 0) {
 			presenceData.state = `At ${
-				document.getElementsByClassName(
-					"btn-enemy-gauge prt-enemy-percent alive"
-				)[0].textContent
+				document.querySelectorAll(".btn-enemy-gauge.prt-enemy-percent.alive")[0]
+					.textContent
 			}`;
 		} else if (health === 1) {
 			const boss = gameStatus.boss.param.find(x => x.alive),
@@ -91,8 +90,7 @@ presence.on("UpdateData", async () => {
 				parseInt(boss.hpmax)
 			).toFixed(2)}%]`;
 		}
-		presenceData.details =
-			document.getElementsByClassName("name")[0].textContent;
+		presenceData.details = document.querySelectorAll(".name")[0].textContent;
 		if (djeeta) {
 			const charaAlive =
 				document.querySelector<HTMLImageElement>(".img-chara-command");

@@ -7,12 +7,12 @@ function parseQueryString(queryString?: string): { [key: string]: string } {
 
 	const params: { [key: string]: string } = {},
 		queries = queryString.split("&");
-	queries.forEach((indexQuery: string) => {
+	for (const indexQuery of queries) {
 		const indexPair = indexQuery.split("=");
 		params[decodeURIComponent(indexPair[0])] = decodeURIComponent(
 			indexPair.length > 1 ? indexPair[1] : ""
 		);
-	});
+	}
 	return params;
 }
 
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "chall";
 		presenceData.smallImageText = "Challenges";
 		presenceData.details = route[3]
-			? `${route[2]} - ${route[3].replace(/-/g, " ")}`
+			? `${route[2]} - ${route[3].replaceAll("-", " ")}`
 			: `${route[2]}`;
 		presenceData.state = !route[4]
 			? "Navigating..."
@@ -81,8 +81,8 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "ctf";
 		presenceData.smallImageText = "Capture The Flag";
 		presenceData.details = route[3]
-			? `${route[2].replace(/-/g, " ")} - ${route[3].replace(/-/g, " ")}`
-			: route[2].replace(/-/g, " ");
+			? `${route[2].replaceAll("-", " ")} - ${route[3].replaceAll("-", " ")}`
+			: route[2].replaceAll("-", " ");
 		presenceData.state = "Navigating...";
 	} else if (
 		document.location.pathname.includes("/Communaute/") ||
@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "commu";
 		presenceData.smallImageText = "Communaute";
 		presenceData.details = route[3]
-			? `${route[2]} - ${route[3].replace(/-/g, " ")}`
+			? `${route[2]} - ${route[3].replaceAll("-", " ")}`
 			: route[2];
 		presenceData.state = "Navigating...";
 	} else if (
@@ -105,18 +105,18 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = "Documentation";
 		if (route[3] !== "Reseaux") {
 			presenceData.details = route[3]
-				? `${route[2]} - ${route[3].replace(/-/g, " ")}`
+				? `${route[2]} - ${route[3].replaceAll("-", " ")}`
 				: `${route[2]}`;
 			presenceData.state = !route[4]
 				? "Navigating..."
-				: route[4].replace(/-/g, " ");
+				: route[4].replaceAll("-", " ");
 		} else {
 			presenceData.details = route[4]
 				? `${route[2]} - ${route[3]} > ${route[4]}`
 				: `${route[2]} - ${route[3]}`;
 			presenceData.state = !route[5]
 				? "Navigating..."
-				: route[5].replace(/-/g, " ");
+				: route[5].replaceAll("-", " ");
 		}
 	} else if (
 		document.location.pathname.includes("/Informations/") ||
@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "tools";
 		presenceData.smallImageText = "Tools";
 		presenceData.details = route[3]
-			? `${route[2]} - ${route[3].replace(/-/g, " ")}`
+			? `${route[2]} - ${route[3].replaceAll("-", " ")}`
 			: `${route[2]}`;
 		presenceData.state = !route[4] ? "Navigating..." : route[4];
 	} else {

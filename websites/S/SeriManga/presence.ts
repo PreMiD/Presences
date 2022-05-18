@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = document.location;
+		{ pathname, search } = document.location;
 
 	if (pathname === "/") presenceData.details = "Ana Sayfa";
 	else if (pathname === "/fansublar")
@@ -42,14 +42,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Çeviri mangaya:";
 		presenceData.state = document.querySelector(".name").textContent;
 		presenceData.smallImageKey = "view";
-	} else if (
-		pathname === "/mangalar" &&
-		document.location?.search?.substr(0, 7) === "?search"
-	) {
+	} else if (pathname === "/mangalar" && search?.substr(0, 7) === "?search") {
 		presenceData.details = "Arıyor:";
-		presenceData.state = new URLSearchParams(document.location.search).get(
-			"search"
-		);
+		presenceData.state = new URLSearchParams(search).get("search");
 		presenceData.smallImageKey = "search";
 	} else if (pathname === "/mangalar")
 		presenceData.details = "Mangaya Göz Atıyor";

@@ -48,8 +48,8 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-	const { host } = location,
-		path = location.pathname.replace(/\/?$/, "/"),
+	const { host, pathname, href } = document.location,
+		path = pathname.replace(/\/?$/, "/"),
 		showBrowsing = await presence.getSetting<boolean>("browse"),
 		showCourses = await presence.getSetting<boolean>("course"),
 		showCodes = await presence.getSetting<boolean>("code"),
@@ -60,81 +60,75 @@ presence.on("UpdateData", async () => {
 		startTimestamp: elapsed
 	};
 
-	if (document.location.href !== prevUrl) {
-		prevUrl = document.location.href;
+	if (href !== prevUrl) {
+		prevUrl = href;
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 
-	if (showBrowsing) {
-		if (host === "www.sololearn.com") {
-			for (const [k, v] of Object.entries(statics))
-				if (path.match(k)) presenceData = { ...presenceData, ...v };
+	if (showBrowsing && host === "www.sololearn.com") {
+		for (const [k, v] of Object.entries(statics))
+			if (path.match(k)) presenceData = { ...presenceData, ...v };
 
-			if (path === "/") {
-				presenceData.details = "Browsing...";
-				presenceData.state = "Home";
+		if (path === "/") {
+			presenceData.details = "Browsing...";
+			presenceData.state = "Home";
+		}
+
+		if (path.includes("/Codes/")) {
+			presenceData.details = "Browsing Code Playground...";
+			presenceData.state = getElement(".tab.active");
+		}
+
+		if (path.includes("/Discuss/")) {
+			presenceData.details = "Browsing Discussions...";
+			presenceData.state = getElement(".tab.active");
+
+			if (document.querySelector(".post")) {
+				presenceData.details = "Browsing Discussion...";
+				presenceData.state = getElement(".detailsWrapper > .header");
 			}
+		}
 
-			if (path.includes("/Codes/")) {
-				presenceData.details = "Browsing Code Playground...";
-				presenceData.state = getElement(".tab.active");
+		if (path.includes("/Leaderboard/")) {
+			presenceData.details = "Browsing Leaderboard...";
+			presenceData.state = stripCourse(getElement(".nameTitle"));
+		}
+
+		if (path.includes("/Blog/")) {
+			presenceData.details = "Browsing Blogs...";
+
+			if (document.querySelector(".post")) {
+				presenceData.details = "Browsing Blog...";
+				presenceData.state = getElement(".articleTitle");
 			}
+		}
 
-			if (path.includes("/Discuss/")) {
-				presenceData.details = "Browsing Discussions...";
-				presenceData.state = getElement(".tab.active");
+		if (path.includes("/Course/")) {
+			presenceData.details = "Browsing Course...";
+			presenceData.state = getElement(".courseDescription > h1");
+		}
 
-				if (document.querySelector(".post")) {
-					presenceData.details = "Browsing Discussion...";
-					presenceData.state = getElement(".detailsWrapper > .header");
-				}
-			}
+		if (path.includes("/Profile/")) {
+			presenceData.details = "Browsing Profile...";
 
-			if (path.includes("/Leaderboard/")) {
-				presenceData.details = "Browsing Leaderboard...";
-				presenceData.state = stripCourse(getElement(".nameTitle"));
-			}
-
-			if (path.includes("/Blog/")) {
-				presenceData.details = "Browsing Blogs...";
-
-				if (document.querySelector(".post")) {
-					presenceData.details = "Browsing Blog...";
-					presenceData.state = getElement(".articleTitle");
-				}
-			}
-
-			if (path.includes("/Course/")) {
-				presenceData.details = "Browsing Course...";
-				presenceData.state = getElement(".courseDescription > h1");
-			}
-
-			if (path.includes("/Profile/")) {
-				presenceData.details = "Browsing Profile...";
-
-				const course = getElement(".course .name");
-				presenceData.state = getElement(".user .name");
-				presenceData.state += course ? ` (${stripCourse(course)})` : "";
-			}
+			const course = getElement(".course .name");
+			presenceData.state = getElement(".user .name");
+			presenceData.state += course ? ` (${stripCourse(course)})` : "";
 		}
 	}
 
-	if (showCourses) {
-		if (path.includes("/Play/")) {
-			presenceData.details = `Learning ${stripCourse(
-				document.querySelector<HTMLImageElement>(".content > .icon").alt
-			)}`;
-			presenceData.state = getElement(".title");
-		}
+	if (showCourses && path.includes("/Play/")) {
+		presenceData.details = `Learning ${stripCourse(
+			document.querySelector<HTMLImageElement>(".content > .icon").alt
+		)}`;
+		presenceData.state = getElement(".title");
 	}
 
-	if (showCodes) {
-		if (host === "code.sololearn.com") {
-			presenceData.details = "Viewing Code...";
-			presenceData.state = `${getElement(".codeName")} (${getElement(
-				".tab-box.active"
-			)})`;
-		}
+	if (showCodes && host === "code.sololearn.com") {
+		presenceData.details = "Viewing Code...";
+		presenceData.state = `${getElement(".codeName")} (${getElement(
+			".tab-box.active"
+		)})`;
 	}
 
 	if (presenceData.details) {

@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document
 					.querySelector(".title.update-title")
 					.textContent.split(" ")[1]
-					.replace(/_/g, " ");
+					.replaceAll("_", " ");
 				presenceData.smallImageKey = "search";
 			} else presenceData.details = "Browsing...";
 			break;
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".panel-breadcrumb")
 					.childNodes[4].textContent.split(":")[1]
 					.trim()
-					.replace(/_/g, " ");
+					.replaceAll("_", " ");
 				presenceData.smallImageKey = "search";
 			} else presenceData.details = "Browsing...";
 

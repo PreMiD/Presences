@@ -20,9 +20,9 @@ let lastEpisode: Episode = {};
 function getQuery() {
 	return JSON.parse(
 		`{"${decodeURI(location.search.substring(1))
-			.replace(/"/g, '\\"')
-			.replace(/&/g, '","')
-			.replace(/=/g, '":"')}"}`
+			.replaceAll('"', '\\"')
+			.replaceAll("&", '","')
+			.replaceAll("=", '":"')}"}`
 	);
 }
 

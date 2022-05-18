@@ -16,6 +16,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/partswap")) {
 		presenceData.details = "MvM Part Swap";
 		presenceData.state = "Trading MvM Parts";
+		presenceData.smallImageKey = "mvm";
 	} else if (document.location.pathname.includes("/itemvalues"))
 		presenceData.details = "Checking Item Values for Premium";
 	else if (document.location.pathname.includes("/games")) {
@@ -50,9 +51,10 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname.includes("all"))
 			presenceData.details = "Searching through Resources";
 		else if (document.location.pathname.includes("kb")) {
-			const title = document.querySelector("#helpcenter-content > h4");
 			presenceData.details = "Reading a help thread";
-			presenceData.state = `"${title.textContent}"`;
+			presenceData.state = `"${
+				document.querySelector("#helpcenter-content > h4").textContent
+			}"`;
 		} else presenceData.details = "Viewing Help Center";
 	} else if (document.location.pathname.includes("/megaraffle")) {
 		if (document.location.pathname.includes("/history")) {
@@ -71,6 +73,9 @@ presence.on("UpdateData", async () => {
 			);
 		presenceData.details = "Visiting a profile";
 		presenceData.state = `[${perm.textContent}] ${title.textContent}`;
+		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+			"#dynamic-height-slate > div > div > div.col-md-9 > div > div > div.profile-upper > div.rev-banking-background.profile-background > div > div.profile-avatar.col-md-3 > div > img"
+		).src;
 	} else if (document.location.pathname.includes("/terms")) {
 		const title = document.querySelector(
 			"#dynamic-height-slate > div > div.panel-body > p:nth-child(1) > small"
@@ -78,11 +83,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Reading ToS";
 		presenceData.state = title.textContent;
 	} else if (document.location.pathname.includes("/premium")) {
-		const title = document
-			.querySelector("#premium-balance")
-			.textContent.replace("You've Donated ", " ");
 		presenceData.details = "Visiting the Premium page";
-		presenceData.state = `${title} Donated`;
+		presenceData.state = `${document
+			.querySelector("#premium-balance")
+			.textContent.replace("You've Donated ", " ")} Donated`;
 	} else if (document.location.pathname.includes("/keys")) {
 		const sellp = document.querySelector(
 				"#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(2) > span"
@@ -92,49 +96,67 @@ presence.on("UpdateData", async () => {
 			);
 		presenceData.details = "Key Trading";
 		presenceData.state = `Buy price: ${buyp.textContent} | Sell price: ${sellp.textContent}`;
+		presenceData.smallImageKey = "keys";
 	} else if (document.location.pathname.includes("/sell")) {
 		presenceData.details = "Selling Items";
-		if (document.location.pathname.includes("/weapons"))
+		if (document.location.pathname.includes("/weapons")) {
 			presenceData.state = "Trading with Weapons";
-		else if (document.location.pathname.includes("/hats"))
+			presenceData.smallImageKey = "weapons";
+		} else if (document.location.pathname.includes("/hats")) {
 			presenceData.state = "Trading with Hats";
-		else if (document.location.pathname.includes("/items"))
+			presenceData.smallImageKey = "hats";
+		} else if (document.location.pathname.includes("/items")) {
 			presenceData.state = "Trading with Items";
-		else if (document.location.pathname.includes("/stranges"))
+			presenceData.smallImageKey = "items";
+		} else if (document.location.pathname.includes("/stranges")) {
 			presenceData.state = "Trading with Stranges";
-		else if (document.location.pathname.includes("/killstreaks"))
+			presenceData.smallImageKey = "stranges";
+		} else if (document.location.pathname.includes("/killstreaks")) {
 			presenceData.state = "Trading with Killstreak Kits";
-		else if (document.location.pathname.includes("/gifts"))
+			presenceData.smallImageKey = "killstreaks";
+		} else if (document.location.pathname.includes("/gifts"))
 			presenceData.state = "Trading with Steam Games";
-		else if (document.location.pathname.includes("/cards"))
+		else if (document.location.pathname.includes("/cards")) {
 			presenceData.state = "Trading with Steam Trade Cards";
-		else if (document.location.pathname.includes("/skins"))
+			presenceData.smallImageKey = "cards";
+		} else if (document.location.pathname.includes("/skins")) {
 			presenceData.state = "Trading with Warpaints/Skins";
-		else if (document.location.pathname.includes("/unusuals"))
+			presenceData.smallImageKey = "skins";
+		} else if (document.location.pathname.includes("/unusuals")) {
 			presenceData.state = "Trading with Unusuals";
-		else if (document.location.pathname.includes("/incinerator"))
+			presenceData.smallImageKey = "unusuals";
+		} else if (document.location.pathname.includes("/incinerator"))
 			presenceData.state = "Incinerating Items FOR FREE!";
 		else if (document.location.pathname.includes("/all"))
 			presenceData.state = "Choosing items from the entire backpack";
 	} else if (document.location.pathname.includes("/buy")) {
-		if (document.location.pathname.includes("/weapons"))
+		if (document.location.pathname.includes("/weapons")) {
 			presenceData.details = "Buying Weapons";
-		else if (document.location.pathname.includes("/hats"))
+			presenceData.smallImageKey = "weapons";
+		} else if (document.location.pathname.includes("/hats")) {
 			presenceData.details = "Buying Hats";
-		else if (document.location.pathname.includes("/items"))
+			presenceData.smallImageKey = "hats";
+		} else if (document.location.pathname.includes("/items")) {
 			presenceData.details = "Buying Items";
-		else if (document.location.pathname.includes("/stranges"))
+			presenceData.smallImageKey = "items";
+		} else if (document.location.pathname.includes("/stranges")) {
 			presenceData.details = "Buying Stranges";
-		else if (document.location.pathname.includes("/killstreaks"))
+			presenceData.smallImageKey = "stranges";
+		} else if (document.location.pathname.includes("/killstreaks")) {
 			presenceData.details = "Buying Killstreak Kits";
-		else if (document.location.pathname.includes("/gifts"))
+			presenceData.smallImageKey = "killstreaks";
+		} else if (document.location.pathname.includes("/gifts"))
 			presenceData.details = "Buying Steam Games";
-		else if (document.location.pathname.includes("/cards"))
+		else if (document.location.pathname.includes("/cards")) {
 			presenceData.details = "Buying Steam Trade Cards";
-		else if (document.location.pathname.includes("/skins"))
+			presenceData.smallImageKey = "cards";
+		} else if (document.location.pathname.includes("/skins")) {
 			presenceData.details = "Buying Warpaints/Skins";
-		else if (document.location.pathname.includes("/unusuals"))
+			presenceData.smallImageKey = "skins";
+		} else if (document.location.pathname.includes("/unusuals")) {
 			presenceData.details = "Buying Unusuals";
+			presenceData.smallImageKey = "unusuals";
+		}
 	} else if (document.location.pathname.includes("/raffles")) {
 		if (document.location.pathname.includes("puzzle")) {
 			const pze = document.querySelector(
@@ -304,7 +326,10 @@ presence.on("UpdateData", async () => {
 				.textContent.replace("Weapon Trading ", " ");
 			presenceData.details = "Trading Weapons with a Bot";
 			presenceData.state = `Viewing ${title}`;
-		} else presenceData.details = "Weapon Trading";
+		} else {
+			presenceData.details = "Weapon Trading";
+			presenceData.smallImageKey = "weapons";
+		}
 	} else if (
 		document.location.pathname !== "/sell/hats" &&
 		document.location.pathname !== "/buy/hats" &&
@@ -318,7 +343,10 @@ presence.on("UpdateData", async () => {
 				.textContent.replace("Hat Trading ", " ");
 			presenceData.details = "Trading Hats with a Bot";
 			presenceData.state = `Viewing ${title}`;
-		} else presenceData.details = "Hat Trading";
+		} else {
+			presenceData.details = "Hat Trading";
+			presenceData.smallImageKey = "hats";
+		}
 	} else if (
 		document.location.pathname !== "/sell/items" &&
 		document.location.pathname !== "/buy/items" &&
@@ -333,16 +361,18 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Trading Items with a Bot";
 			presenceData.state = `Viewing ${title}`;
 		} else {
-			(presenceData.details = "Item Trading"),
-				(presenceData.state = "Viewing item pricelist");
+			presenceData.details = "Item Trading";
+			presenceData.state = "Viewing item pricelist";
+			presenceData.smallImageKey = "items";
 		}
 	} else if (
 		document.location.pathname !== "/sell/unusuals" &&
 		document.location.pathname !== "/buy/unusuals" &&
 		document.location.pathname.includes("unusuals")
-	)
+	) {
 		presenceData.details = "Unusual Trading";
-	else if (
+		presenceData.smallImageKey = "unusuals";
+	} else if (
 		document.location.pathname !== "/sell/skins" &&
 		document.location.pathname !== "/buy/skins" &&
 		document.location.pathname.includes("skins")
@@ -355,7 +385,10 @@ presence.on("UpdateData", async () => {
 				.textContent.replace("Skin + War Paint Trading ", " ");
 			presenceData.details = "Trading Warpaints/Skins with a Bot";
 			presenceData.state = `Viewing ${title}`;
-		} else presenceData.details = "Skin & War Paint Trading";
+		} else {
+			presenceData.details = "Skin & War Paint Trading";
+			presenceData.smallImageKey = "skins";
+		}
 	} else if (
 		document.location.pathname !== "/sell/killstreaks" &&
 		document.location.pathname !== "/buy/killstreaks" &&
@@ -369,7 +402,10 @@ presence.on("UpdateData", async () => {
 				.textContent.replace("Killstreak Kits ", " ");
 			presenceData.details = "Trading Killstreaks with a Bot";
 			presenceData.state = `Viewing ${title}`;
-		} else presenceData.details = "Killstreak Kit Trading";
+		} else {
+			presenceData.details = "Killstreak Kit Trading";
+			presenceData.smallImageKey = "killstreaks";
+		}
 	} else if (
 		document.location.pathname !== "/sell/stranges" &&
 		document.location.pathname !== "/buy/stranges" &&
@@ -383,7 +419,10 @@ presence.on("UpdateData", async () => {
 				.textContent.replace("Strange Trading ", " ");
 			presenceData.details = "Trading Strange Items with a Bot";
 			presenceData.state = `Viewing ${title}`;
-		} else presenceData.details = "Strange Items Trading";
+		} else {
+			presenceData.details = "Strange Items Trading";
+			presenceData.smallImageKey = "stranges";
+		}
 	} else if (
 		document.location.pathname !== "/sell/cards" &&
 		document.location.pathname !== "/buy/cards" &&
@@ -397,7 +436,10 @@ presence.on("UpdateData", async () => {
 				.textContent.replace("Steam Trading Cards ", " ");
 			presenceData.details = "Trading Cards with a Bot";
 			presenceData.state = `Viewing ${title}`;
-		} else presenceData.details = "Card Trading";
+		} else {
+			presenceData.details = "Card Trading";
+			presenceData.smallImageKey = "cards";
+		}
 	} else if (
 		document.location.pathname !== "/sell/incinerator" &&
 		document.location.pathname.includes("incinerator")

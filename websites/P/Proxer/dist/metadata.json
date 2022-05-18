@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Paul1365972",
 		"id": "243125346751217664"
@@ -11,7 +11,7 @@
 		"nl": "Gratis en open Duitse Anime-community"
 	},
 	"url": "proxer.me",
-	"version": "1.0.8",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/jx65gdz.png",
 	"thumbnail": "https://i.imgur.com/j0hV7nO.png",
 	"color": "#8A0E0E",

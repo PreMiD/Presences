@@ -3,6 +3,7 @@ interface Channel {
 	name: string;
 	track: string;
 	artist: string;
+	cover: string;
 	listeners: number;
 	timeStart: string;
 	timeEnd: string;
@@ -23,26 +24,28 @@ function newStats(): void {
 			totalListeners = data.all_listeners;
 			const channelList: string[] = data.sequence,
 				channelArray: Channel[] = [];
-			channelList.forEach(channel => {
+			for (const channel of channelList) {
 				channelArray.push({
 					id: channel,
 					name: "",
 					track: "",
 					artist: "",
+					cover: "",
 					listeners: 0,
 					timeStart: "",
 					timeEnd: ""
 				});
-			});
-			channelArray.forEach(channel => {
+			}
+			for (const channel of channelArray) {
 				const channelData = data.channels[`${channel.id}`];
 				channel.name = channelData.name;
 				channel.listeners = channelData.listeners;
 				channel.track = channelData.now.title;
 				channel.artist = channelData.now.artist;
+				channel.cover = channelData.now.cover_urls["500x500"];
 				channel.timeStart = channelData.now.time.start;
 				channel.timeEnd = channelData.now.time.end;
-			});
+			}
 			channels = channelArray;
 		});
 }
@@ -150,17 +153,17 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLElement>("#player").style.cssText !==
 			"display: none;"
 		) {
-			const paused = document
-				.querySelector<HTMLImageElement>("#miniplayer-play")
-				.src.includes("play.png");
+			let track: string, artist: string, cover: string;
 
-			let track: string, artist: string;
-
-			if (!paused) {
+			if (
+				!document
+					.querySelector<HTMLImageElement>("#miniplayer-play")
+					.src.includes("play.png")
+			) {
 				const channelID = findChannel();
 				if (channelID !== "YOU FAILED") {
 					const channel = channels.find(channel => channel.id === channelID);
-					({ track, artist } = channel);
+					({ track, artist, cover } = channel);
 
 					presenceData.smallImageKey = "play";
 					presenceData.smallImageText = format3
@@ -179,6 +182,11 @@ presence.on("UpdateData", async () => {
 					track = document.querySelector(
 						"#player > div.wrapper > div.current > span.title"
 					).textContent;
+					cover = document
+						.querySelector(
+							"#player > div.wrapper > div.cover > img#player-coverart"
+						)
+						.getAttribute("src");
 					presenceData.smallImageKey = "play";
 					presenceData.smallImageText = "Loading statistics...";
 				}
@@ -189,6 +197,11 @@ presence.on("UpdateData", async () => {
 				track = document.querySelector(
 					"#player > div.wrapper > div.current > span.title"
 				).textContent;
+				cover = document
+					.querySelector(
+						"#player > div.wrapper > div.cover > img#player-coverart"
+					)
+					.getAttribute("src");
 				presenceData.smallImageKey = "pause";
 				presenceData.smallImageText = `Total Listeners: ${totalListeners}`;
 				delete presenceData.startTimestamp;
@@ -200,15 +213,19 @@ presence.on("UpdateData", async () => {
 			presenceData.state = format2
 				.replace("%title%", track)
 				.replace("%artist%", artist);
+			presenceData.largeImageKey = cover;
 		}
 	} else if (
 		document.location.hostname === "www.reyfm.de" &&
 		document.querySelector("#channel-player") !== null
 	) {
-		const channelID = document
-				.querySelector("#channel-player")
-				.className.replace("shadow channel-color-", ""),
-			channel = channels.find(channel => channel.id === channelID),
+		const channel = channels.find(
+				channel =>
+					channel.id ===
+					document
+						.querySelector("#channel-player")
+						.className.replace("shadow channel-color-", "")
+			),
 			paused = document
 				.querySelector<HTMLImageElement>("#play")
 				.src.includes("play.png");
@@ -227,6 +244,8 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = format3
 			.replace("%listeners%", `${channel.listeners}`)
 			.replace("%totalListeners%", `${totalListeners}`);
+
+		presenceData.largeImageKey = channel.cover;
 
 		showFormat3 = true;
 

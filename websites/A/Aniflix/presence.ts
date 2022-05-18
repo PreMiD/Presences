@@ -135,41 +135,58 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/airing") {
-		presenceData.details = "Viewing the calendar";
-		delete presenceData.state;
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		delete presenceData.smallImageKey;
+	} else {
+		switch (document.location.pathname) {
+			case "/airing": {
+				presenceData.details = "Viewing the calendar";
+				delete presenceData.state;
+				delete presenceData.endTimestamp;
+				presenceData.startTimestamp = browsingTimestamp;
+				delete presenceData.smallImageText;
+				delete presenceData.smallImageKey;
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/all") {
-		presenceData.details = "Viewing the list";
-		presenceData.state = "of all shows";
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		delete presenceData.smallImageKey;
+				presence.setActivity(presenceData);
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/about") {
-		presenceData.details = "Viewing the about page";
-		delete presenceData.state;
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "reading";
+				break;
+			}
+			case "/all": {
+				presenceData.details = "Viewing the list";
+				presenceData.state = "of all shows";
+				delete presenceData.endTimestamp;
+				presenceData.startTimestamp = browsingTimestamp;
+				delete presenceData.smallImageText;
+				delete presenceData.smallImageKey;
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/") {
-		presenceData.details = "Viewing the main page";
-		delete presenceData.state;
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "reading";
+				presence.setActivity(presenceData);
 
-		presence.setActivity(presenceData);
-	} else presence.setActivity();
+				break;
+			}
+			case "/about": {
+				presenceData.details = "Viewing the about page";
+				delete presenceData.state;
+				delete presenceData.endTimestamp;
+				presenceData.startTimestamp = browsingTimestamp;
+				delete presenceData.smallImageText;
+				presenceData.smallImageKey = "reading";
+
+				presence.setActivity(presenceData);
+
+				break;
+			}
+			case "/": {
+				presenceData.details = "Viewing the main page";
+				delete presenceData.state;
+				delete presenceData.endTimestamp;
+				presenceData.startTimestamp = browsingTimestamp;
+				delete presenceData.smallImageText;
+				presenceData.smallImageKey = "reading";
+
+				presence.setActivity(presenceData);
+
+				break;
+			}
+			default:
+				presence.setActivity();
+		}
+	}
 });

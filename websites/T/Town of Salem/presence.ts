@@ -139,10 +139,10 @@ presence.on("UpdateData", () => {
 		};
 	} else {
 		try {
-			const e = document.getElementById(
-					"PreMiD_Salem_Out"
-				) as HTMLTextAreaElement,
-				info = JSON.parse(e.textContent);
+			const info = JSON.parse(
+				document.querySelector<HTMLTextAreaElement>("#PreMiD_Salem_Out")
+					.textContent
+			);
 			if (oldState.page !== info.page) elapsed = Math.round(Date.now() / 1000);
 
 			let key = "regular";

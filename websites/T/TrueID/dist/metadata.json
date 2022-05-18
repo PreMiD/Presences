@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Faelayis",
 		"id": "328731868096888833"
@@ -14,7 +14,7 @@
 		"movie.trueid.net",
 		"tv.trueid.net"
 	],
-	"version": "1.0.4",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/5975C9m.jpg",
 	"thumbnail": "https://i.imgur.com/4RlMDGT.jpg",
 	"color": "#e0081a",

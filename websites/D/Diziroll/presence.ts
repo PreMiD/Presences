@@ -24,16 +24,16 @@ presence.on("UpdateData", async () => {
 	} else if (path === "/") {
 		presenceData.details = "Bir sayfaya bakıyor:";
 		presenceData.state = "Ana Sayfa";
-	} else if (document.getElementById("archive-page")) {
+	} else if (document.querySelector("#archive-page")) {
 		presenceData.details = "Bir dizi türünü inceliyor: ";
 		presenceData.state = document.querySelector("div.title").textContent;
-	} else if (document.getElementById("series-page")) {
+	} else if (document.querySelector("#series-page")) {
 		presenceData.details = "Bir diziyi inceliyor:";
 		presenceData.state = document.querySelector("div.top > h1").textContent;
-	} else if (document.getElementsByClassName("episode-detail").length > 0) {
+	} else if (document.querySelectorAll(".episode-detail").length > 0) {
 		presenceData.details =
-			(document.getElementsByClassName("series-name")[0] as HTMLElement)
-				.title || "Bulunamadı";
+			(document.querySelectorAll(".series-name")[0] as HTMLElement).title ||
+			"Bulunamadı";
 		presenceData.state = `${
 			document.querySelector("div.select-season > a").textContent
 				? document.querySelector("div.select-season > a").textContent

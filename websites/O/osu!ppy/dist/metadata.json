@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -37,7 +37,7 @@
 		"vi_VN": "Giai điệu bắt đầu bằng một cái *click* chuột! Với Ouendan/EBA, Taiko và các chế độ trò chơi độc nhất, cũng như một bộ chỉnh sửa trò chơi."
 	},
 	"url": "osu.ppy.sh",
-	"version": "2.0.9",
+	"version": "2.0.11",
 	"logo": "https://i.imgur.com/IWWqSYR.png",
 	"thumbnail": "https://i.imgur.com/6YEJ9sY.png",
 	"color": "#FF66AA",

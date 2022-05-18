@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "QkeleQ10",
 		"id": "807917674477649943"
@@ -14,7 +14,7 @@
 		"roulette.hitmaps.com"
 	],
 	"regExp": "([a-z0-9]+)[.]hitmaps[.]com",
-	"version": "1.0.6",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/CgaXYn2.png",
 	"thumbnail": "https://i.imgur.com/S6DAuSR.png",
 	"color": "#fb0111",

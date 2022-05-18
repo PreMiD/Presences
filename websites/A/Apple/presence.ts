@@ -3,6 +3,10 @@ const presence = new Presence({
 	}),
 	time = Math.floor(Date.now() / 1000);
 
+let iframeData: {
+	[key: string]: string;
+} = {};
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -65,7 +69,7 @@ async function getStrings() {
 			statePlaying: "general.playing",
 			btnViewProduct: "apple.btnViewProduct",
 			btnViewService: "apple.btnViewService",
-			btnViewArticle: "general.buttonReadArticle",
+			btnReadArticle: "general.buttonReadArticle",
 			btnViewEvent: "apple.btnViewEvent",
 			btnViewOS: "apple.btnViewOS",
 			btnViewStudio: "apple.btnViewStudio",
@@ -90,12 +94,22 @@ let strings: ReturnType<typeof getStrings> extends PromiseLike<infer U>
 
 presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.toLowerCase().split("/"),
-		[newLang, timeElapsed, buttons, logo, devProfileBtn] = await Promise.all([
+		[
+			newLang,
+			timeElapsed,
+			buttons,
+			logo,
+			devProfileBtn,
+			showICloudMailSender,
+			showICloudMailSubject
+		] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("timeElapsed"),
 			presence.getSetting<boolean>("showButtons"),
 			presence.getSetting<number>("logo"),
-			presence.getSetting<boolean>("devProfileBtn")
+			presence.getSetting<boolean>("devProfileBtn"),
+			presence.getSetting<boolean>("iCloudMailSender"),
+			presence.getSetting<boolean>("iCloudMailSubject")
 		]),
 		products = [
 			"ipad",
@@ -185,10 +199,8 @@ presence.on("UpdateData", async () => {
 					.split("-")[0]
 					.replace(/ *\([^)]*\) */g, "");
 			} else {
-				const product = getPSName();
-
 				presenceData.details = strings.viewProduct;
-				presenceData.state = product;
+				presenceData.state = getPSName();
 			}
 
 			if (buttons) {
@@ -225,7 +237,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
+							label: strings.btnReadArticle,
 							url: window.location.href
 						}
 					];
@@ -242,7 +254,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
+							label: strings.btnReadArticle,
 							url: window.location.href
 						}
 					];
@@ -274,7 +286,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
+							label: strings.btnReadArticle,
 							url: window.location.href
 						}
 					];
@@ -377,10 +389,9 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		} else if (urlpath[num] === "product") {
-			const product = document.querySelector("h1.rf-pdp-title")?.textContent;
-
 			presenceData.details = strings.viewProduct;
-			presenceData.state = product;
+			presenceData.state =
+				document.querySelector("h1.rf-pdp-title")?.textContent;
 
 			if (buttons) {
 				presenceData.buttons = [
@@ -467,429 +478,579 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Shop";
 			presenceData.state = strings.other;
 		}
-	} else if (
-		window.location.hostname === "support.apple.com" ||
-		window.location.hostname === "getsupport.apple.com"
-	) {
-		const sProducts = [
-			"iphone",
-			"mac",
-			"ipad",
-			"watch",
-			"airpods",
-			"music",
-			"tv",
-			"displays"
-		];
-
-		presenceData.largeImageKey = "apple-support";
-
-		if (sProducts.find(e => urlpath.includes(e))) {
-			presenceData.details = strings.support;
-			presenceData.state =
-				document.querySelector("h1.pageTitle-heading")?.textContent ||
-				document.querySelector("h1#main-title")?.textContent ||
-				"Unknown";
-		} else if (document.querySelector("div.mod-date")) {
-			presenceData.details = strings.supportArticle;
-			presenceData.state =
-				document.querySelector("h1#howto-title")?.textContent || "Unknown";
-		} else if (window.location.hostname === "getsupport.apple.com")
-			presenceData.details = strings.support;
-		else {
-			presenceData.details = strings.support;
-			presenceData.state = "Home";
-		}
-	} else if (window.location.hostname === "apps.apple.com") {
-		presenceData.largeImageKey = "app-store";
-
-		if (urlpath.includes("app")) {
-			if (document.querySelector("p.we-connecting__instructions")) {
-				presenceData.details = "App Store";
-				presenceData.state = strings.appStoreCon;
-			} else {
-				presenceData.details = "App Store - App:";
-				presenceData.state = document
-					.querySelector("h1.product-header__title.app-header__title")
-					?.childNodes[1].textContent.trim();
-			}
-
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: strings.btnViewApp,
-						url: window.location.href
-					}
+	} else {
+		switch (window.location.hostname) {
+			case "support.apple.com":
+			case "getsupport.apple.com": {
+				const sProducts = [
+					"iphone",
+					"mac",
+					"ipad",
+					"watch",
+					"airpods",
+					"music",
+					"tv",
+					"displays"
 				];
-			}
-		} else if (urlpath.includes("developer")) {
-			if (document.querySelector("p.we-connecting__instructions")) {
-				presenceData.details = "App Store";
-				presenceData.state = strings.appStoreCon;
-			} else {
-				presenceData.details = "App Store - Developer:";
-				presenceData.state = document.querySelector(
-					"h1.page-header__title"
-				)?.textContent;
-			}
 
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: strings.btnViewDeveloper,
-						url: window.location.href
-					}
-				];
-			}
-		}
-	} else if (window.location.hostname === "www.icloud.com") {
-		presenceData.largeImageKey = "icloud";
-		presenceData.details = "iCloud";
+				presenceData.largeImageKey = "apple-support";
 
-		if (!urlpath[1]) presenceData.state = "Launchpad";
-		else if (urlpath[1] === "mail") presenceData.state = strings.iCloudMail;
-		else if (urlpath[1] === "contacts")
-			presenceData.state = strings.iCloudContacts;
-		else if (urlpath[1] === "calendar")
-			presenceData.state = strings.iCloudCalendar;
-		else if (urlpath[1] === "photos") presenceData.state = strings.iCloudPhotos;
-		else if (urlpath[1] === "iclouddrive") presenceData.state = "Drive";
-		else if (urlpath[1] === "notes") presenceData.state = strings.iCloudNotes;
-		else if (urlpath[1] === "reminders")
-			presenceData.state = strings.iCloudReminders;
-		else if (urlpath[1] === "pages") {
-			presenceData.largeImageKey = "pages";
+				if (sProducts.find(e => urlpath.includes(e))) {
+					presenceData.details = strings.support;
+					presenceData.state =
+						document.querySelector("h1.pageTitle-heading")?.textContent ||
+						document.querySelector("h1#main-title")?.textContent ||
+						"Unknown";
 
-			if (urlpath[2]) {
-				presenceData.details = "iCloud Pages";
-
-				if (urlpath[2] === "create")
-					presenceData.state = strings.iCloudPagesCreate;
-				else {
-					presenceData.state = document.querySelector(
-						"div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
-					)?.textContent;
-				}
-			} else presenceData.state = "Pages";
-		} else if (urlpath[1] === "numbers") presenceData.state = "Numbers";
-		else if (urlpath[1] === "keynote") {
-			presenceData.largeImageKey = "keynote";
-
-			if (urlpath[2]) {
-				presenceData.details = "iCloud Keynote";
-
-				if (urlpath[2] === "create")
-					presenceData.state = strings.iCloudPagesCreate;
-				else {
-					presenceData.state = document.querySelector(
-						"div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
-					)?.textContent;
-				}
-			} else presenceData.state = "Keynote";
-		} else if (urlpath[1] === "keynote-live" && urlpath[2]) {
-			presenceData.details = "iCloud Keynote Live";
-			presenceData.largeImageKey = "keynote";
-
-			if (document.querySelector("iframe")?.style.display === "none")
-				presenceData.state = strings.iCloudKeynoteWait;
-		} else if (urlpath[1] === "fmf") presenceData.state = "Find My Friends";
-		else if (urlpath[1] === "find") presenceData.state = "Find My";
-	} else if (window.location.hostname === "card.apple.com") {
-		presenceData.largeImageKey = "apple-card";
-		presenceData.details = "Apple Card";
-
-		if (!urlpath[1]) presenceData.state = "Home";
-		else if (urlpath[1] === "apply") presenceData.state = "Apply";
-	} else if (window.location.hostname === "developer.apple.com") {
-		const dPages = [
-				"discover",
-				"develop",
-				"distribute",
-				"support",
-				"account",
-				"download",
-				"bug-reporting",
-				"sf-symbols",
-				"contact",
-				"localization",
-				"accessories",
-				"licensing-trademarks",
-				"system-status",
-				"widgets"
-			],
-			cpage =
-				document.querySelector("body")?.id ||
-				document.querySelector("body").classList[0]?.replace("nav-", "");
-
-		presenceData.largeImageKey = "apple-developer";
-		presenceData.details = "Apple Developer";
-		presenceData.state = "Home";
-
-		if (dPages.find(e => urlpath[1] === e)) {
-			presenceData.state =
-				document.querySelector(`a.ac-gn-link.ac-gn-link-${cpage}>span`)
-					?.textContent ||
-				document.querySelector("section.section-hero>h1.section-headline")
-					?.textContent ||
-				document.querySelector("h2.localnav-title>a")?.textContent ||
-				"Unknown";
-		} else if (urlpath[1] === "custom-apps") {
-			presenceData.state =
-				document.querySelector("h2.localnav-title>a")?.textContent ||
-				document.querySelector("h1.typography-headline")?.textContent ||
-				"Unknown";
-		} else if (urlpath[1].startsWith("wwdc")) {
-			const wwdc = document
-				.querySelector("a.ac-ln-title-logo>img")
-				?.getAttribute("alt");
-			presenceData.state = wwdc || "Unknown";
-
-			if (urlpath[2]) {
-				presenceData.details = wwdc;
-				presenceData.state =
-					document.querySelector("span.localnav-menu-link.current")
-						?.textContent ||
-					document.querySelector("h1.typography-headline")?.textContent ||
-					"Unknown";
-			}
-
-			if (buttons && wwdc) {
-				presenceData.buttons = [
-					{
-						label: strings.btnViewWWDC.replace("{0}", wwdc),
-						url: `https://developer.apple.com/${wwdc.toLowerCase()}/`
-					}
-				];
-			}
-		} else if (urlpath[1] === "enroll") {
-			presenceData.details = "Developer Program";
-			if (urlpath[2] === "purchase") presenceData.state = "Enrollment";
-		} else if (
-			urlpath[1] === "ios" ||
-			urlpath[1] === "ipados" ||
-			urlpath[1] === "tvos" ||
-			urlpath[1] === "watchos" ||
-			urlpath[1] === "macos" ||
-			urlpath[1] === "mac-catalyst" ||
-			urlpath[1] === "xcode" ||
-			urlpath[1] === "swift" ||
-			urlpath[1] === "swift-playgrounds" ||
-			urlpath[1] === "app-clips"
-		) {
-			presenceData.details =
-				document.querySelector("h2.localnav-title>a")?.textContent ||
-				"Apple Developer";
-
-			if (!urlpath[2]) presenceData.state = strings.overview;
-			else if (urlpath[2] === "whats-new") presenceData.state = strings.devNew;
-			else if (urlpath[2] === "submit") presenceData.state = strings.devSubmit;
-			else if (urlpath[1] === "macos" && urlpath[2] === "iphone-and-ipad-apps")
-				presenceData.state = strings.devPhonePad;
-			else if (urlpath[1] === "macos" && urlpath[2] === "distribution")
-				presenceData.state = strings.devDistribution;
-			else if (urlpath[1] === "watchos" && urlpath[2] === "features")
-				presenceData.state = strings.devFeatures;
-			else {
-				presenceData.state =
-					document.querySelector("h1.typography-headline")?.textContent ||
-					"Other";
-			}
-		} else if (urlpath[1] === "documentation") {
-			const page = document.querySelector("span.current.item");
-
-			presenceData.details = strings.devDocs;
-			presenceData.state = page?.textContent || "Home";
-
-			if (buttons && page) {
-				presenceData.buttons = [
-					{
-						label: strings.btnViewPage,
-						url: window.location.href
-					}
-				];
-			}
-		} else if (urlpath[1] === "design") {
-			presenceData.details = "Design";
-
-			if (!urlpath[2]) presenceData.state = "Overview";
-			else if (urlpath[2] === "whats-new") presenceData.state = strings.devNew;
-			else if (urlpath[2] === "human-interface-guidelines")
-				presenceData.state = strings.devHIG;
-			else if (urlpath[2] === "resources")
-				presenceData.state = strings.devResources;
-			else {
-				presenceData.state =
-					document.querySelector("h1.typography-headline")?.textContent ||
-					"Other";
-			}
-		} else if (
-			urlpath[1] === "safari" ||
-			urlpath[1] === "app-store-connect" ||
-			urlpath[1] === "business" ||
-			urlpath[1] === "app-store" ||
-			urlpath[1] === "education" ||
-			urlpath[1] === "classkit" ||
-			urlpath[1] === "programs"
-		) {
-			presenceData.details =
-				document.querySelector("h2.localnav-title>a")?.textContent ||
-				"Apple Developer";
-			presenceData.state =
-				document.querySelector(`a.localnav-menu-link.link-${cpage}`)
-					?.textContent ||
-				document.querySelector("span.localnav-menu-link.current")
-					?.textContent ||
-				document.querySelector("a.localnav-menu-link.current")?.textContent ||
-				"Other";
-		} else if (urlpath[1] === "testflight") presenceData.state = "Testflight";
-		else if (urlpath[1] === "games") presenceData.state = strings.devGames;
-		else if (urlpath[1] === "forums") {
-			presenceData.details = "Forum";
-
-			if (urlpath[2] === "thread") {
-				presenceData.details = "Forum - Thread";
-				presenceData.state =
-					document.querySelector("div.header>h1.title")?.textContent ||
-					"Unknown";
-
-				presenceData.buttons = [
-					{
-						label: strings.btnViewThread,
-						url: window.location.href
-					}
-				];
-			} else if (urlpath[2] === "tags") {
-				presenceData.details = strings.forumTags;
-				presenceData.state =
-					document.querySelector("div.tag-content>h2.tag-title")?.textContent ||
-					"Unknown";
-
-				presenceData.buttons = [
-					{
-						label: strings.btnViewTags,
-						url: window.location.href
-					}
-				];
-			} else if (urlpath[2] === "profile" && urlpath[3]) {
-				const nickname = document.querySelector(
-					"div.user-name>h2.user-nickname"
-				)?.textContent;
-
-				presenceData.details = strings.viewProfile;
-
-				if (urlpath[3] === "preferences")
-					presenceData.state = strings.forumPreferences;
-				else {
-					presenceData.state = nickname || "Unknown";
-
-					if (nickname) {
+					if (buttons) {
 						presenceData.buttons = [
 							{
-								label: strings.btnViewProfile.replace("{0}", nickname),
+								label: strings.btnReadArticle,
+								url: window.location.href
+							}
+						];
+					}
+				} else if (document.querySelector("div.mod-date")) {
+					presenceData.details = strings.supportArticle;
+					presenceData.state =
+						document.querySelector("h1#howto-title")?.textContent || "Unknown";
+
+					if (buttons) {
+						presenceData.buttons = [
+							{
+								label: strings.btnReadArticle,
+								url: window.location.href
+							}
+						];
+					}
+				} else if (window.location.hostname === "getsupport.apple.com")
+					presenceData.details = strings.support;
+				else {
+					presenceData.details = strings.support;
+					presenceData.state = "Home";
+				}
+
+				break;
+			}
+			case "apps.apple.com": {
+				presenceData.largeImageKey = "app-store";
+
+				if (urlpath.includes("app")) {
+					if (document.querySelector("p.we-connecting__instructions")) {
+						presenceData.details = "App Store";
+						presenceData.state = strings.appStoreCon;
+					} else {
+						presenceData.details = "App Store - App:";
+						presenceData.state = document
+							.querySelector("h1.product-header__title.app-header__title")
+							?.childNodes[1].textContent.trim();
+					}
+
+					if (buttons) {
+						presenceData.buttons = [
+							{
+								label: strings.btnViewApp,
+								url: window.location.href
+							}
+						];
+					}
+				} else if (urlpath.includes("developer")) {
+					if (document.querySelector("p.we-connecting__instructions")) {
+						presenceData.details = "App Store";
+						presenceData.state = strings.appStoreCon;
+					} else {
+						presenceData.details = "App Store - Developer:";
+						presenceData.state = document.querySelector(
+							"h1.page-header__title"
+						)?.textContent;
+					}
+
+					if (buttons) {
+						presenceData.buttons = [
+							{
+								label: strings.btnViewDeveloper,
 								url: window.location.href
 							}
 						];
 					}
 				}
-			} else if (urlpath[2] === "create")
-				presenceData.state = strings.forumCreateThread;
-			else if (urlpath[2] === "register")
-				presenceData.state = strings.forumRegister;
 
-			if (buttons) {
-				if (
-					devProfileBtn &&
-					document.querySelector<HTMLAnchorElement>(
-						"li.menu-item>a.menu-item-link"
-					)?.href !== "https://developer.apple.com/forums/login"
-				) {
-					presenceData.buttons = [
-						{
-							label: strings.btnGViewProfile,
-							url:
-								document.querySelector<HTMLAnchorElement>("a.view-profile-link")
-									?.href ||
-								`https://developer.apple.com/forums/profile/${
-									document.querySelector("span.user-name")?.textContent
-								}`
-						}
-					];
-				}
+				break;
 			}
-		} else if (urlpath[1] === "videos") {
-			presenceData.details = strings.devVideos;
+			case "www.icloud.com": {
+				presenceData.largeImageKey = "icloud";
+				presenceData.details = "iCloud";
 
-			if (
-				urlpath[2] === "featured" ||
-				urlpath[2] === "design" ||
-				urlpath[2] === "developer-tools" ||
-				urlpath[2] === "frameworks" ||
-				urlpath[2] === "graphics-and-games" ||
-				urlpath[2] === "media" ||
-				urlpath[2] === "app-store-and-distribution" ||
-				urlpath[2] === "all-videos"
-			) {
-				presenceData.details = strings.devVidTopic;
-				presenceData.state =
-					document.querySelector("section.inline-block>h1.collection-title")
-						?.textContent ||
-					document.title.replace(" - Videos - Apple Developer", "") ||
-					"Other";
-			} else if (urlpath[2] === "play") {
-				const vid = document.querySelector<HTMLVideoElement>("video#video");
+				if (!urlpath[1]) presenceData.state = "Launchpad";
+				else {
+					if (urlpath[1] !== "iclouddrive") {
+						presenceData.largeImageKey = `icloud_${urlpath[1]}`;
+						presenceData.smallImageKey = "icloud";
+					}
 
-				presenceData.state = document.querySelector(
-					"li.supplement.details>h1"
-				)?.textContent;
+					switch (urlpath[1]) {
+						case "mail": {
+							presenceData.state = strings.iCloudMail;
 
-				if (vid) {
-					presenceData.endTimestamp =
-						Math.floor(Date.now() / 1000) - vid.currentTime + vid.duration + 1;
+							if (iframeData) {
+								presenceData.details = `iCloud - ${strings.iCloudMail}`;
+								presenceData.state = iframeData.currentMailbox;
 
-					if (!vid.paused) {
-						presenceData.smallImageKey = "play";
-						presenceData.smallImageText = strings.statePlaying;
-					} else {
-						presenceData.smallImageKey = "pause";
-						presenceData.smallImageText = strings.statePaused;
+								if (iframeData.currentMailSubject) {
+									presenceData.details = `iCloud - ${strings.iCloudMail} - ${iframeData.currentMailbox}`;
+
+									let state = showICloudMailSubject
+										? iframeData.currentMailSubject
+										: "";
+
+									if (iframeData.currentMailSender && showICloudMailSender) {
+										state = `${iframeData.currentMailSender}${
+											state !== "" ? `: ${state}` : ""
+										}`;
+									}
+
+									presenceData.state = state;
+								} else presenceData.state = iframeData.currentMailbox;
+							} else presenceData.state = strings.iCloudMail;
+
+							break;
+						}
+						case "contacts": {
+							presenceData.state = strings.iCloudContacts;
+							break;
+						}
+						case "calendar": {
+							presenceData.state = strings.iCloudCalendar;
+							break;
+						}
+						case "photos": {
+							presenceData.state = strings.iCloudPhotos;
+							break;
+						}
+						case "iclouddrive": {
+							presenceData.state = "Drive";
+							break;
+						}
+						case "notes": {
+							presenceData.state = strings.iCloudNotes;
+							break;
+						}
+						case "reminders": {
+							presenceData.state = strings.iCloudReminders;
+							break;
+						}
+						case "pages": {
+							if (urlpath[2]) {
+								presenceData.details = "iCloud Pages";
+
+								if (urlpath[2] === "create")
+									presenceData.state = strings.iCloudPagesCreate;
+								else {
+									presenceData.state = document.querySelector(
+										"div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
+									)?.textContent;
+								}
+							} else presenceData.state = "Pages";
+
+							break;
+						}
+						case "numbers": {
+							presenceData.state = "Numbers";
+							break;
+						}
+						case "keynote": {
+							if (urlpath[2]) {
+								presenceData.details = "iCloud Keynote";
+
+								if (urlpath[2] === "create")
+									presenceData.state = strings.iCloudPagesCreate;
+								else {
+									presenceData.state = document.querySelector(
+										"div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
+									)?.textContent;
+								}
+							} else presenceData.state = "Keynote";
+
+							break;
+						}
+						default:
+							if (urlpath[1] === "keynote-live" && urlpath[2]) {
+								presenceData.details = "iCloud Keynote Live";
+								presenceData.largeImageKey = "keynote";
+
+								if (document.querySelector("iframe")?.style.display === "none")
+									presenceData.state = strings.iCloudKeynoteWait;
+							} else if (urlpath[1] === "fmf")
+								presenceData.state = "Find My Friends";
+							else if (urlpath[1] === "find") presenceData.state = "Find My";
 					}
 				}
 
-				if (buttons) {
-					presenceData.buttons = [
-						{
-							label: strings.btnGWatchVideo,
-							url: window.location.href
-						}
-					];
-				}
-			} else {
-				presenceData.state =
-					document.querySelector("section.inline-block>h1.collection-title")
-						?.textContent ||
-					document.querySelector("span.localnav-menu-link.current")
-						?.textContent ||
-					"Other";
+				break;
 			}
-		} else if (urlpath[1] === "news") {
-			presenceData.details = strings.devNews;
+			case "card.apple.com": {
+				presenceData.largeImageKey = "apple-card";
+				presenceData.details = "Apple Card";
 
-			if (urlpath[2] === "releases") presenceData.state = strings.devReleases;
+				if (!urlpath[1]) presenceData.state = "Home";
+				else if (urlpath[1] === "apply") presenceData.state = "Apply";
 
-			if (new URLSearchParams(window.location.search).get("id")) {
-				presenceData.state =
-					document.querySelector("h2.article-title")?.textContent;
-
-				if (buttons) {
-					presenceData.buttons = [
-						{
-							label: strings.btnViewArticle,
-							url: window.location.href
-						}
-					];
-				}
+				break;
 			}
-		} else if (urlpath[1] === "shareplay") presenceData.state = "SharePlay";
+			case "developer.apple.com": {
+				const dPages = [
+						"discover",
+						"develop",
+						"distribute",
+						"support",
+						"account",
+						"download",
+						"bug-reporting",
+						"sf-symbols",
+						"contact",
+						"localization",
+						"accessories",
+						"licensing-trademarks",
+						"system-status",
+						"widgets"
+					],
+					cpage =
+						document.querySelector("body")?.id ||
+						document.querySelector("body").classList[0]?.replace("nav-", "");
+
+				presenceData.largeImageKey = "apple-developer";
+				presenceData.details = "Apple Developer";
+				presenceData.state = "Home";
+
+				if (dPages.find(e => urlpath[1] === e)) {
+					presenceData.state =
+						document.querySelector(`a.ac-gn-link.ac-gn-link-${cpage}>span`)
+							?.textContent ||
+						document.querySelector("section.section-hero>h1.section-headline")
+							?.textContent ||
+						document.querySelector("h2.localnav-title>a")?.textContent ||
+						"Unknown";
+				} else if (urlpath[1] === "custom-apps") {
+					presenceData.state =
+						document.querySelector("h2.localnav-title>a")?.textContent ||
+						document.querySelector("h1.typography-headline")?.textContent ||
+						"Unknown";
+				} else if (urlpath[1].startsWith("wwdc")) {
+					const wwdc = document
+						.querySelector("a.ac-ln-title-logo>img")
+						?.getAttribute("alt");
+					presenceData.state = wwdc || "Unknown";
+
+					if (urlpath[2]) {
+						presenceData.details = wwdc;
+						presenceData.state =
+							document.querySelector("span.localnav-menu-link.current")
+								?.textContent ||
+							document.querySelector("h1.typography-headline")?.textContent ||
+							"Unknown";
+					}
+
+					if (buttons && wwdc) {
+						presenceData.buttons = [
+							{
+								label: strings.btnViewWWDC.replace("{0}", wwdc),
+								url: `https://developer.apple.com/${wwdc.toLowerCase()}/`
+							}
+						];
+					}
+				} else {
+					switch (urlpath[1]) {
+						case "enroll": {
+							presenceData.details = "Developer Program";
+							if (urlpath[2] === "purchase") presenceData.state = "Enrollment";
+
+							break;
+						}
+						case "ios":
+						case "ipados":
+						case "tvos":
+						case "watchos":
+						case "macos":
+						case "mac-catalyst":
+						case "xcode":
+						case "swift":
+						case "swift-playgrounds":
+						case "app-clips": {
+							presenceData.details =
+								document.querySelector("h2.localnav-title>a")?.textContent ||
+								"Apple Developer";
+
+							if (!urlpath[2]) presenceData.state = strings.overview;
+							else if (urlpath[2] === "whats-new")
+								presenceData.state = strings.devNew;
+							else if (urlpath[2] === "submit")
+								presenceData.state = strings.devSubmit;
+							else if (
+								urlpath[1] === "macos" &&
+								urlpath[2] === "iphone-and-ipad-apps"
+							)
+								presenceData.state = strings.devPhonePad;
+							else if (urlpath[1] === "macos" && urlpath[2] === "distribution")
+								presenceData.state = strings.devDistribution;
+							else if (urlpath[1] === "watchos" && urlpath[2] === "features")
+								presenceData.state = strings.devFeatures;
+							else {
+								presenceData.state =
+									document.querySelector("h1.typography-headline")
+										?.textContent || "Other";
+							}
+
+							break;
+						}
+						case "documentation": {
+							const page = document.querySelector("span.current.item");
+
+							presenceData.details = strings.devDocs;
+							presenceData.state = page?.textContent || "Home";
+
+							if (buttons && page) {
+								presenceData.buttons = [
+									{
+										label: strings.btnViewPage,
+										url: window.location.href
+									}
+								];
+							}
+
+							break;
+						}
+						case "design": {
+							presenceData.details = "Design";
+
+							if (!urlpath[2]) presenceData.state = "Overview";
+							else {
+								switch (urlpath[2]) {
+									case "whats-new": {
+										presenceData.state = strings.devNew;
+										break;
+									}
+									case "human-interface-guidelines": {
+										presenceData.state = strings.devHIG;
+										break;
+									}
+									case "resources": {
+										presenceData.state = strings.devResources;
+										break;
+									}
+									default: {
+										presenceData.state =
+											document.querySelector("h1.typography-headline")
+												?.textContent || "Other";
+									}
+								}
+							}
+
+							break;
+						}
+						case "safari":
+						case "app-store-connect":
+						case "business":
+						case "app-store":
+						case "education":
+						case "classkit":
+						case "programs": {
+							presenceData.details =
+								document.querySelector("h2.localnav-title>a")?.textContent ||
+								"Apple Developer";
+							presenceData.state =
+								document.querySelector(`a.localnav-menu-link.link-${cpage}`)
+									?.textContent ||
+								document.querySelector("span.localnav-menu-link.current")
+									?.textContent ||
+								document.querySelector("a.localnav-menu-link.current")
+									?.textContent ||
+								"Other";
+
+							break;
+						}
+						case "testflight": {
+							presenceData.state = "Testflight";
+							break;
+						}
+						case "games": {
+							presenceData.state = strings.devGames;
+							break;
+						}
+						case "forums": {
+							presenceData.details = "Forum";
+
+							if (urlpath[2] === "thread") {
+								presenceData.details = "Forum - Thread";
+								presenceData.state =
+									document.querySelector("div.header>h1.title")?.textContent ||
+									"Unknown";
+
+								presenceData.buttons = [
+									{
+										label: strings.btnViewThread,
+										url: window.location.href
+									}
+								];
+							} else if (urlpath[2] === "tags") {
+								presenceData.details = strings.forumTags;
+								presenceData.state =
+									document.querySelector("div.tag-content>h2.tag-title")
+										?.textContent || "Unknown";
+
+								presenceData.buttons = [
+									{
+										label: strings.btnViewTags,
+										url: window.location.href
+									}
+								];
+							} else if (urlpath[2] === "profile" && urlpath[3]) {
+								const nickname = document.querySelector(
+									"div.user-name>h2.user-nickname"
+								)?.textContent;
+
+								presenceData.details = strings.viewProfile;
+
+								if (urlpath[3] === "preferences")
+									presenceData.state = strings.forumPreferences;
+								else {
+									presenceData.state = nickname || "Unknown";
+
+									if (nickname) {
+										presenceData.buttons = [
+											{
+												label: strings.btnViewProfile.replace("{0}", nickname),
+												url: window.location.href
+											}
+										];
+									}
+								}
+							} else if (urlpath[2] === "create")
+								presenceData.state = strings.forumCreateThread;
+							else if (urlpath[2] === "register")
+								presenceData.state = strings.forumRegister;
+
+							if (
+								buttons &&
+								devProfileBtn &&
+								document.querySelector<HTMLAnchorElement>(
+									"li.menu-item>a.menu-item-link"
+								)?.href !== "https://developer.apple.com/forums/login"
+							) {
+								presenceData.buttons = [
+									{
+										label: strings.btnGViewProfile,
+										url:
+											document.querySelector<HTMLAnchorElement>(
+												"a.view-profile-link"
+											)?.href ||
+											`https://developer.apple.com/forums/profile/${
+												document.querySelector("span.user-name")?.textContent
+											}`
+									}
+								];
+							}
+
+							break;
+						}
+						case "videos": {
+							presenceData.details = strings.devVideos;
+
+							if (
+								urlpath[2] === "featured" ||
+								urlpath[2] === "design" ||
+								urlpath[2] === "developer-tools" ||
+								urlpath[2] === "frameworks" ||
+								urlpath[2] === "graphics-and-games" ||
+								urlpath[2] === "media" ||
+								urlpath[2] === "app-store-and-distribution" ||
+								urlpath[2] === "all-videos"
+							) {
+								presenceData.details = strings.devVidTopic;
+								presenceData.state =
+									document.querySelector(
+										"section.inline-block>h1.collection-title"
+									)?.textContent ||
+									document.title.replace(" - Videos - Apple Developer", "") ||
+									"Other";
+							} else if (urlpath[2] === "play") {
+								const vid =
+									document.querySelector<HTMLVideoElement>("video#video");
+
+								presenceData.state = document.querySelector(
+									"li.supplement.details>h1"
+								)?.textContent;
+
+								if (vid) {
+									presenceData.endTimestamp =
+										Math.floor(Date.now() / 1000) -
+										vid.currentTime +
+										vid.duration +
+										1;
+
+									if (!vid.paused) {
+										presenceData.smallImageKey = "play";
+										presenceData.smallImageText = strings.statePlaying;
+									} else {
+										presenceData.smallImageKey = "pause";
+										presenceData.smallImageText = strings.statePaused;
+									}
+								}
+
+								if (buttons) {
+									presenceData.buttons = [
+										{
+											label: strings.btnGWatchVideo,
+											url: window.location.href
+										}
+									];
+								}
+							} else {
+								presenceData.state =
+									document.querySelector(
+										"section.inline-block>h1.collection-title"
+									)?.textContent ||
+									document.querySelector("span.localnav-menu-link.current")
+										?.textContent ||
+									"Other";
+							}
+
+							break;
+						}
+						case "news": {
+							presenceData.details = strings.devNews;
+
+							if (urlpath[2] === "releases")
+								presenceData.state = strings.devReleases;
+
+							if (new URLSearchParams(window.location.search).get("id")) {
+								presenceData.state =
+									document.querySelector("h2.article-title")?.textContent;
+
+								if (buttons) {
+									presenceData.buttons = [
+										{
+											label: strings.btnReadArticle,
+											url: window.location.href
+										}
+									];
+								}
+							}
+
+							break;
+						}
+						case "shareplay":
+							{
+								presenceData.state = "SharePlay";
+								// No default
+							}
+							break;
+					}
+				}
+
+				break;
+			}
+			// No default
+		}
 	}
 
 	if (
@@ -900,4 +1061,8 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
+});
+
+presence.on("iFrameData", (data: { [key: string]: string }) => {
+	iframeData = data;
 });

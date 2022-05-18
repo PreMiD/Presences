@@ -42,9 +42,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Đang tìm kiếm";
 			presenceData.state = `Từ khoá: ${search.split("?s=")[1]}`;
 		} else if (curPath.includes("/category")) {
-			const title = document.querySelector("title");
 			presenceData.details = "Đang tìm phim";
-			[presenceData.state] = title.textContent.split(" - ");
+			[presenceData.state] = document
+				.querySelector("title")
+				.textContent.split(" - ");
 		} else if (curPath.includes("/hentai-uncensored"))
 			presenceData.details = "Đang tìm phim Uncensored";
 		else if (curPath.includes("/completed-hentai"))

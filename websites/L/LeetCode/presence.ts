@@ -3,7 +3,7 @@ const presence = new Presence({
 		clientId: "719373053028728894"
 	}),
 	// time spent on current URL
-	timeElapsed: number = new Date().getTime();
+	timeElapsed: number = Date.now();
 
 presence.on("UpdateData", async () => {
 	// default settings
@@ -25,9 +25,9 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/explore")) {
 		presenceData.details = "Explore";
 
-		if (document.getElementsByClassName("question-title")) {
+		if (document.querySelectorAll(".question-title")) {
 			presenceData.state =
-				document.getElementsByClassName("question-title")[0].textContent;
+				document.querySelectorAll(".question-title")[0].textContent;
 		}
 	} else if (document.location.pathname.startsWith("/contest"))
 		presenceData.details = "In a Contest";

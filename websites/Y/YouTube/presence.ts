@@ -231,7 +231,7 @@ presence.on("UpdateData", async () => {
 				.querySelector<HTMLImageElement>(
 					"#avatar.ytd-video-owner-renderer > img"
 				)
-				.src.replace("=s88", "=s512");
+				.src.replace(/=s[0-9]+/, "=s512");
 		}
 		const unlistedPathElement = document.querySelector<SVGPathElement>(
 				"g#privacy_unlisted > path"
@@ -312,25 +312,23 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = "yt_lg";
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 			delete presenceData.endTimestamp;
-		} else if (buttons) {
-			if (!unlistedVideo) {
-				presenceData.buttons = [
-					{
-						label: live ? strings.watchStreamButton : strings.watchVideoButton,
-						url: document.URL.includes("/watch?v=")
-							? document.URL.split("&")[0]
-							: `https://www.youtube.com/watch?v=${videoId}`
-					},
-					{
-						label: strings.viewChannelButton,
-						url: (
-							document.querySelector(
-								"#top-row > ytd-video-owner-renderer > a"
-							) as HTMLLinkElement
-						).href
-					}
-				];
-			}
+		} else if (buttons && !unlistedVideo) {
+			presenceData.buttons = [
+				{
+					label: live ? strings.watchStreamButton : strings.watchVideoButton,
+					url: document.URL.includes("/watch?v=")
+						? document.URL.split("&")[0]
+						: `https://www.youtube.com/watch?v=${videoId}`
+				},
+				{
+					label: strings.viewChannelButton,
+					url: (
+						document.querySelector(
+							"#top-row > ytd-video-owner-renderer > a"
+						) as HTMLLinkElement
+					).href
+				}
+			];
 		}
 		if (!time) {
 			delete presenceData.startTimestamp;
@@ -432,9 +430,9 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingStamp;
 			} else if (document.location.pathname.includes("/search")) {
 				searching = true;
-				const [, search] = document.URL.split("search?query=");
+
 				presenceData.details = strings.searchChannel.replace("{0}", user);
-				presenceData.state = search;
+				presenceData.state = document.URL.split("search?query=")[1];
 				presenceData.smallImageKey = "search";
 				presenceData.startTimestamp = browsingStamp;
 			} else {
@@ -448,17 +446,17 @@ presence.on("UpdateData", async () => {
 						.querySelector<HTMLImageElement>(
 							"yt-img-shadow.ytd-channel-avatar-editor > img"
 						)
-						?.src.replace("=s176", "=s512") ??
+						?.src.replace(/=s[0-9]+/, "=s512") ??
 					document
 						.querySelector<HTMLImageElement>(
 							"#avatar.ytd-c4-tabbed-header-renderer > img"
 						)
-						?.src.replace("=s176", "=s512") ??
+						?.src.replace(/=s[0-9]+/, "=s512") ??
 					document //when viewing a community post
 						.querySelector<HTMLImageElement>(
 							"#author-thumbnail > a > yt-img-shadow > img"
 						)
-						?.src.replace("=s76", "=s512") ??
+						?.src.replace(/=s[0-9]+/, "=s512") ??
 					"yt_lg";
 				if (channelImg) presenceData.largeImageKey = channelImg;
 			}

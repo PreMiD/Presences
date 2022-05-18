@@ -20,7 +20,7 @@ async function getStrings() {
 			viewPage: "general.viewPage",
 			viewHome: "general.viewHome"
 		},
-		await presence.getSetting<string>("lang")
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 
@@ -71,8 +71,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = (await strings).search;
 			break;
 		case pathIncludes("/rules") || pathIncludes("/help"):
-			presenceData.state = (await strings).reading;
-			presenceData.details = (await strings).terms;
+			presenceData.details = (await strings).reading;
+			presenceData.state = (await strings).terms;
 			presenceData.startTimestamp = browsingTimestamp;
 			break;
 		case pathIncludes("/conversations"):

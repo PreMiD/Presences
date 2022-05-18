@@ -29,7 +29,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = `Learning ${capitalize(
 			language.textContent.toLowerCase()
 		)}`;
-		if (whitelist.some(lang => lang === language.textContent))
+		if (whitelist.includes(language.textContent))
 			presenceData.details = `Learning ${language.textContent}`;
 	}
 

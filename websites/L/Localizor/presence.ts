@@ -43,11 +43,11 @@ presence.on("UpdateData", async () => {
 		const gameImage = document
 			.querySelector<HTMLImageElement>("div.game-card__image")
 			.style.backgroundImage.slice(4, -1)
-			.replace(/"/g, "");
+			.replaceAll('"', "");
 		presenceData.details = "Viewing game:";
 		presenceData.state = document.querySelector<HTMLHeadingElement>(
 			"div.col-lg-6 div.text-center h3"
-		).innerText;
+		).textContent;
 		if (gameImage !== "null") presenceData.largeImageKey = gameImage;
 		presenceData.buttons = [
 			{

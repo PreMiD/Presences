@@ -7,14 +7,14 @@ presence.on("UpdateData", () => {
 		largeImageKey: "dilogo"
 	};
 	if (
-		document.getElementById("webplayer-region").getAttribute("data-state") ===
+		document.querySelector("#webplayer-region").getAttribute("data-state") ===
 		"playing"
 	) {
 		presenceData.details = document
-			.getElementsByClassName("artist-name")[0]
+			.querySelectorAll(".artist-name")[0]
 			.textContent.replace("-", "");
 		presenceData.state =
-			document.getElementsByClassName("track-name")[0].textContent;
+			document.querySelectorAll(".track-name")[0].textContent;
 		presenceData.smallImageKey = "play";
 	} else {
 		presenceData.state = "Browsing...";

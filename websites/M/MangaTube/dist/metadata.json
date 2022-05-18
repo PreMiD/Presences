@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Emir",
 		"id": "466885774621540372"
@@ -11,7 +11,7 @@
 		"nl": "Uw Duitse mangagemeenschap. Praat met Manga-fans en blader door onze enorme database met meer dan 600 Manga"
 	},
 	"url": "manga-tube.me",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/roeUqz0.png",
 	"thumbnail": "https://i.imgur.com/l6i0Jeo.png",
 	"color": "#000000",

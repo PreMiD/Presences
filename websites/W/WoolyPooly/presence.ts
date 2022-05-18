@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `Effort (${effortType}): ${currencyEffort}%`;
 				}
 				presenceData.details = currencyTitle;
-				[, , presenceData.smallImageKey] = window.location.pathname.split("/");
+				presenceData.smallImageKey = window.location.pathname.split("/")[2];
 				presenceData.smallImageText = currencyTitle;
 			} else {
 				presenceData.startTimestamp = browsingTimestamp;

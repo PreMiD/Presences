@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Cascade",
 		"id": "442612628104151040"
@@ -14,7 +14,7 @@
 		"hd-streams.org",
 		"www.hd-streams.org"
 	],
-	"version": "1.0.9",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/rtSPknc.png",
 	"thumbnail": "https://i.imgur.com/0bLEfQ2.jpg",
 	"color": "#64DD17",

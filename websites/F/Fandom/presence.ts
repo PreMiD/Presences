@@ -63,67 +63,112 @@ if (
 
 		*/
 
-				if (currentPath[0] === "") presenceData.details = "On the index page";
-				else if (currentPath[0] === "signin")
-					presenceData.details = "Signing in";
-				else if (currentPath[0] === "register")
-					presenceData.details = "Registering an account";
-				else if (currentPath[0] === "articles") {
-					presenceData.details = "Reading an article";
-					presenceData.state = document.querySelector(
-						".article-header__title"
-					).textContent;
-				} else if (currentPath[0] === "topics") {
-					presenceData.details = "Viewing a topic";
-					presenceData.state = document.querySelector(
-						".topic-header__title"
-					).firstElementChild.textContent;
-				} else if (currentPath[0] === "video") {
-					presenceData.details = "Watching a video";
-					delete presenceData.startTimestamp;
-					updateCallback.function = (): void => {
+				switch (currentPath[0]) {
+					case "": {
+						presenceData.details = "On the index page";
+						break;
+					}
+					case "signin": {
+						presenceData.details = "Signing in";
+						break;
+					}
+					case "register": {
+						presenceData.details = "Registering an account";
+						break;
+					}
+					case "articles": {
+						presenceData.details = "Reading an article";
 						presenceData.state = document.querySelector(
-							".video-page-featured-player__title"
+							".article-header__title"
 						).textContent;
-						try {
-							if (
-								document
-									.querySelector(".jw-icon-playback")
-									.getAttribute("aria-label") === "Pause"
-							) {
-								[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
-									document.querySelector(".jw-video")
-								);
-							} else delete presenceData.endTimestamp;
-						} catch (e) {
-							delete presenceData.endTimestamp;
+
+						break;
+					}
+					case "topics": {
+						presenceData.details = "Viewing a topic";
+						presenceData.state = document.querySelector(
+							".topic-header__title"
+						).firstElementChild.textContent;
+
+						break;
+					}
+					case "video": {
+						presenceData.details = "Watching a video";
+						delete presenceData.startTimestamp;
+						updateCallback.function = (): void => {
+							presenceData.state = document.querySelector(
+								".video-page-featured-player__title"
+							).textContent;
+							try {
+								if (
+									document
+										.querySelector(".jw-icon-playback")
+										.getAttribute("aria-label") === "Pause"
+								) {
+									[, presenceData.endTimestamp] =
+										presence.getTimestampsfromMedia(
+											document.querySelector(".jw-video")
+										);
+								} else delete presenceData.endTimestamp;
+							} catch (e) {
+								delete presenceData.endTimestamp;
+							}
+						};
+
+						break;
+					}
+					case "curated": {
+						presenceData.details = "Viewing a curation";
+						presenceData.state =
+							document.querySelector(".card__title").textContent;
+
+						break;
+					}
+					case "u": {
+						presenceData.details = "Viewing a profile page";
+						presenceData.state = `${
+							document.querySelector(".profile-info-card__name").textContent
+						} (${
+							document.querySelector(".profile-info-card__username").textContent
+						})`;
+
+						break;
+					}
+					default: {
+						presenceData.details = "Viewing a page";
+						switch (currentPath[0]) {
+							case "explore": {
+								presenceData.state = "Explore";
+								break;
+							}
+							case "about": {
+								presenceData.state = "About";
+								break;
+							}
+							case "carriers": {
+								presenceData.state = "Carriers";
+								break;
+							}
+							case "terms-of-use": {
+								presenceData.state = "Terms of Use";
+								break;
+							}
+							case "privacy-policy": {
+								presenceData.state = "Privacy Policy";
+								break;
+							}
+							case "mediakit": {
+								presenceData.state = "Media Kit";
+								break;
+							}
+							case "local-sitemap":
+								{
+									presenceData.state = "Local Sitemap";
+									// No default
+								}
+								break;
 						}
-					};
-				} else if (currentPath[0] === "curated") {
-					presenceData.details = "Viewing a curation";
-					presenceData.state =
-						document.querySelector(".card__title").textContent;
-				} else if (currentPath[0] === "u") {
-					presenceData.details = "Viewing a profile page";
-					presenceData.state = `${
-						document.querySelector(".profile-info-card__name").textContent
-					} (${
-						document.querySelector(".profile-info-card__username").textContent
-					})`;
-				} else {
-					presenceData.details = "Viewing a page";
-					if (currentPath[0] === "explore") presenceData.state = "Explore";
-					else if (currentPath[0] === "about") presenceData.state = "About";
-					else if (currentPath[0] === "carriers")
-						presenceData.state = "Carriers";
-					else if (currentPath[0] === "terms-of-use")
-						presenceData.state = "Terms of Use";
-					else if (currentPath[0] === "privacy-policy")
-						presenceData.state = "Privacy Policy";
-					else if (currentPath[0] === "mediakit")
-						presenceData.state = "Media Kit";
-					else if (currentPath[0] === "local-sitemap")
-						presenceData.state = "Local Sitemap";
+					}
 				}
 			} else if (currentPath.includes("wiki")) {
 				/*
@@ -141,7 +186,7 @@ if (
 								? getURLParam("title")
 								: currentPath[0] === "wiki"
 								? currentPath.slice(1).join("/")
-								: currentPath.slice(2).join("/").replace(/_/g, " ")
+								: currentPath.slice(2).join("/").replaceAll("_", " ")
 						);
 					};
 
@@ -214,7 +259,7 @@ if (
 							2002: "Viewing a forum topic" // depercated, redirected
 						}[
 							[...document.querySelector("body").classList]
-								.filter(v => /ns--?\d/.test(v))[0]
+								.find(v => /ns--?\d/.test(v))
 								.slice(3)
 						] || "Viewing a wiki page"
 					);

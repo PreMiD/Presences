@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 
 	presenceData.details = "Viewing Docs";
 	presenceData.state = `Page: ${document
-		.getElementsByTagName("h1")[0]
+		.querySelectorAll("h1")[0]
 		.textContent.replace("#", "")}`;
 
 	if (!presenceData.details) presence.setActivity();

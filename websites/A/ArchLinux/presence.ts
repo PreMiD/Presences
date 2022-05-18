@@ -168,9 +168,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = archData[hostname][path1].details;
 		if (archData[hostname][path1].state) {
 			presenceData.state = document
-				.getElementsByTagName(archData[hostname][path1].state)
+				.querySelectorAll(archData[hostname][path1].state)
 				.item(0)
-				.innerHTML.replace(/&amp;/g, "&")
+				.innerHTML.replaceAll("&amp;", "&")
 				.split(" / ")[0];
 		}
 	} else presenceData.details = archData[hostname][""].details;

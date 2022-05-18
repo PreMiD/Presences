@@ -64,9 +64,9 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "pause";
 		presenceData.smallImageText = (await strings).pause;
 	} else {
-		const [, , , , , stationID] = document
+		const stationID = document
 			.querySelector<HTMLImageElement>("#graffitiSoul")
-			.src.split("/");
+			.src.split("/")[5];
 		presenceData.largeImageKey = stationID;
 		presenceData.state = stationIDMap[stationID];
 		if (

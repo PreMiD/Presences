@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "935463828584538192"
+		clientId: "721748388143562852"
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
@@ -40,10 +40,7 @@ function decodeReq(entity: Element): string {
 	return txt.textContent;
 }
 
-function getTag(
-	collection: HTMLCollectionOf<Element>,
-	tagName: string
-): Element {
+function getTag(collection: NodeListOf<Element>, tagName: string): Element {
 	for (const tag of collection)
 		if (tag.getAttribute("name") === tagName) return tag;
 }
@@ -164,21 +161,20 @@ const getStatus = setLoop(function () {
 				if (req.status === 200) {
 					if (i > 0) i = 0;
 
-					req.responseXML.getElementsByTagName("state")[0].textContent.length >
-					0
+					req.responseXML.querySelectorAll("state")[0].textContent.length > 0
 						? (media.state =
-								req.responseXML.getElementsByTagName("state")[0].textContent)
+								req.responseXML.querySelectorAll("state")[0].textContent)
 						: (media.state = "stopped");
 
 					if (media.state !== "stopped") {
 						media.time =
-							req.responseXML.getElementsByTagName("time")[0].textContent;
+							req.responseXML.querySelectorAll("time")[0].textContent;
 						media.length =
-							req.responseXML.getElementsByTagName("length")[0].textContent;
+							req.responseXML.querySelectorAll("length")[0].textContent;
 						media.loop =
-							req.responseXML.getElementsByTagName("loop")[0].textContent;
+							req.responseXML.querySelectorAll("loop")[0].textContent;
 						media.repeat =
-							req.responseXML.getElementsByTagName("repeat")[0].textContent;
+							req.responseXML.querySelectorAll("repeat")[0].textContent;
 					} else {
 						media.time = null;
 						media.length = null;
@@ -186,8 +182,8 @@ const getStatus = setLoop(function () {
 						media.repeat = null;
 					}
 
-					if (navigator.userAgent.toLowerCase().indexOf("firefox") > -1) {
-						const collection = req.responseXML.getElementsByTagName("info");
+					if (navigator.userAgent.toLowerCase().includes("firefox")) {
+						const collection = req.responseXML.querySelectorAll("info");
 
 						// basically the same thing but with a Firefox workaround because it's annoying
 
@@ -326,7 +322,7 @@ const getStatus = setLoop(function () {
 		);
 		req.send();
 	}
-}, (navigator.userAgent.toLowerCase().indexOf("firefox") > -1 ? 5 : 2) * 1000);
+}, (navigator.userAgent.toLowerCase().includes("firefox") ? 5 : 2) * 1000);
 
 interface MediaObj {
 	time?: string;

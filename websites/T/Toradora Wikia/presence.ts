@@ -11,49 +11,46 @@ const presence = new Presence({
 	});
 
 presence.on("UpdateData", async () => {
-	if (document.location.href.includes("tora-dora.fandom.com")) {
-		// English Wiki
-		if (document.location.pathname.startsWith("/wiki/")) {
-			// Making 100% sure it's the english wiki
-			let page = "N/A";
-			try {
-				page =
-					document.getElementsByClassName("page-header__title")[0].textContent;
-			} catch (err) {
-				presence.info(
-					`An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   TWIKI_WIKIEN_GETPAGETITLE   :::   ${err}`
-				);
-			}
-			const presenceData: PresenceData = {
-				details: "Viewing a page...",
-				state: page,
-				largeImageKey: "lg-twiki"
-			};
-			presence.setActivity(presenceData);
+	if (
+		document.location.href.includes("tora-dora.fandom.com") && // English Wiki
+		document.location.pathname.startsWith("/wiki/")
+	) {
+		// Making 100% sure it's the english wiki
+		let page = "N/A";
+		try {
+			page = document.querySelectorAll(".page-header__title")[0].textContent;
+		} catch (err) {
+			presence.info(
+				`An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   TWIKI_WIKIEN_GETPAGETITLE   :::   ${err}`
+			);
 		}
+
+		presence.setActivity({
+			details: "Viewing a page...",
+			state: page,
+			largeImageKey: "lg-twiki"
+		});
 	}
 	germanPresence.on("UpdateData", async () => {
-		if (document.location.href.includes("toradora.fandom.com")) {
-			// German Wiki
-			if (document.location.pathname.startsWith("/de/wiki/")) {
-				// Making 100% sure it's the german wiki
-				let page = "N/A";
-				try {
-					page =
-						document.getElementsByClassName("page-header__title")[0]
-							.textContent;
-				} catch (err) {
-					germanPresence.info(
-						`An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   TWIKI_WIKIDE_GETPAGETITLE   :::   ${err}`
-					);
-				}
-				const presenceData: PresenceData = {
-					details: "Schaut eine Seite an...",
-					state: page,
-					largeImageKey: "lg-twiki"
-				};
-				germanPresence.setActivity(presenceData);
+		if (
+			document.location.href.includes("toradora.fandom.com") && // German Wiki
+			document.location.pathname.startsWith("/de/wiki/")
+		) {
+			// Making 100% sure it's the german wiki
+			let page = "N/A";
+			try {
+				page = document.querySelectorAll(".page-header__title")[0].textContent;
+			} catch (err) {
+				germanPresence.info(
+					`An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   TWIKI_WIKIDE_GETPAGETITLE   :::   ${err}`
+				);
 			}
+
+			germanPresence.setActivity({
+				details: "Schaut eine Seite an...",
+				state: page,
+				largeImageKey: "lg-twiki"
+			});
 		}
 	});
 });

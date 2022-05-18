@@ -58,15 +58,13 @@ presence.on("UpdateData", async () => {
 			presenceData.state = gameModeMap[agarData.gameMode];
 			presenceData.startTimestamp = gameStartTimestamp;
 
-			if (buttons) {
-				if (document.querySelector(".partymode-info > #code")) {
-					presenceData.buttons = [
-						{
-							label: "Join Party",
-							url: document.URL
-						}
-					];
-				}
+			if (buttons && document.querySelector(".partymode-info > #code")) {
+				presenceData.buttons = [
+					{
+						label: "Join Party",
+						url: document.URL
+					}
+				];
 			}
 		}
 	}

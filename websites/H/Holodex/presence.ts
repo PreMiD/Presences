@@ -20,7 +20,7 @@ const getInfo = {
 						decodeURIComponent(
 							(new RegExp(`[?|&]${name}=` + "([^&;]+?)(&|#|;|$)").exec(
 								location.search
-							) || [null, ""])[1].replace(/\+/g, "%20")
+							) || [null, ""])[1].replaceAll("+", "%20")
 						) || null
 					);
 				}
@@ -131,35 +131,35 @@ const getInfo = {
 					}
 
 					// Add Search query/tags
-					getInfo
+					for (const [i, val] of getInfo
 						.generic()
 						.getURLParameter("q")
 						.split("\n")
-						.forEach((val, i) => {
-							if (i > 0) {
-								const tag = val.split(",");
-								switch (tag[0]) {
-									case "channel":
-										returnString += `Channel: ${tag[2]}, `;
-										break;
-									case "title & desc":
-										returnString += `Title/Desc: ${tag[2]}, `;
-										break;
-									case "comments":
-										returnString += `Comments: ${tag[2]}, `;
-										break;
-									case "topic":
-										returnString += `Topic: ${tag[2]}, `;
-										break;
-									case "org":
-										returnString += `Org: ${tag[2]}, `;
-										break;
+						.entries()) {
+						if (i > 0) {
+							const tag = val.split(",");
+							switch (tag[0]) {
+								case "channel":
+									returnString += `Channel: ${tag[2]}, `;
+									break;
+								case "title & desc":
+									returnString += `Title/Desc: ${tag[2]}, `;
+									break;
+								case "comments":
+									returnString += `Comments: ${tag[2]}, `;
+									break;
+								case "topic":
+									returnString += `Topic: ${tag[2]}, `;
+									break;
+								case "org":
+									returnString += `Org: ${tag[2]}, `;
+									break;
 
-									default:
-										break;
-								}
+								default:
+									break;
 							}
-						});
+						}
+					}
 
 					return returnString.slice(0, -2); //Remove the last ", "
 				}

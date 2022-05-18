@@ -36,8 +36,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Determining their recommended Xbox console";
 		else if (document.location.href.includes("consoles/")) {
 			presenceData.details = "Viewing an Xbox console";
-			const [splitString] = document.title.split("|");
-			presenceData.state = splitString;
+
+			presenceData.state = document.title.split("|")[0];
 			presenceData.buttons = [
 				{ label: "View this console", url: document.location.href }
 			];
@@ -52,8 +52,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Determining their recommended Xbox console";
 		else if (document.location.href.includes("accessories/")) {
 			presenceData.details = "Viewing an Xbox accessory";
-			const [splitString] = document.title.split("|");
-			presenceData.state = splitString;
+
+			presenceData.state = document.title.split("|")[0];
 			presenceData.buttons = [
 				{ label: "View this accessory", url: document.location.href }
 			];
@@ -64,12 +64,12 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = "gamepass";
 		if (document.location.href.includes("play/games")) {
 			presenceData.details = "Viewing an Xbox Cloud Gaming game";
-			const [splitString] = document.title.split("|");
-			presenceData.state = splitString;
+
+			presenceData.state = document.title.split("|")[0];
 		} else if (document.location.href.includes("play/launch")) {
 			presenceData.details = "Playing an Xbox Cloud Gaming game";
-			const [splitString] = document.title.split("|");
-			presenceData.state = splitString;
+
+			presenceData.state = document.title.split("|")[0];
 			presenceData.buttons = [
 				{ label: "Play this game (Game Pass)", url: document.location.href }
 			];
@@ -79,42 +79,51 @@ presence.on("UpdateData", async () => {
 				presenceData.details += " (unfocused)";
 		} else {
 			presenceData.details = "Browsing Xbox Cloud Gaming games";
-			if (document.location.href.includes("gallery/")) {
-				const [splitString] = document.title.split("|");
-				presenceData.state = `Category: ${splitString}`;
-			}
+			if (document.location.href.includes("gallery/"))
+				presenceData.state = `Category: ${document.title.split("|")[0]}`;
 		}
 	} else if (document.location.href.includes("/community")) {
 		//Community
 		presenceData.details = "Viewing the Xbox Community";
 		if (document.location.href.includes("esports"))
 			presenceData.details = "Reading about Xbox Esports";
-	} else if (document.location.hostname === "account.xbox.com") {
-		//My Xbox
-		presenceData.details = "Viewing their profile";
-		if (document.location.href.includes("gamertag=")) {
-			const [splitString] = document.title.split("|");
-			presenceData.details = `Viewing profile: ${splitString}`;
-		}
-	} else if (document.location.hostname === "support.xbox.com") {
-		//Support
-		presenceData.details = "Viewing Xbox Support";
-		if (document.location.href.includes("help")) {
-			const [splitString] = document.title.split("|");
-			presenceData.state = splitString;
-		}
-	} else if (document.location.hostname === "news.xbox.com") {
-		//Xbox Wire
-		presenceData.details = "Viewing news from Xbox Wire";
-		if (document.title.includes("-")) {
-			const [splitString] = document.title.split("|");
-			presenceData.state = splitString;
-		}
 	} else {
-		//Other
-		presenceData.details = "Browsing the website";
-		presenceData.state = `Page: ${document.title}`;
-		if (document.location.pathname.length < 8) presenceData.state = "Homepage";
+		switch (document.location.hostname) {
+			case "account.xbox.com": {
+				//My Xbox
+				presenceData.details = "Viewing their profile";
+				if (document.location.href.includes("gamertag=")) {
+					presenceData.details = `Viewing profile: ${
+						document.title.split("|")[0]
+					}`;
+				}
+
+				break;
+			}
+			case "support.xbox.com": {
+				//Support
+				presenceData.details = "Viewing Xbox Support";
+				if (document.location.href.includes("help"))
+					presenceData.state = document.title.split("|")[0];
+
+				break;
+			}
+			case "news.xbox.com": {
+				//Xbox Wire
+				presenceData.details = "Viewing news from Xbox Wire";
+				if (document.title.includes("-"))
+					presenceData.state = document.title.split("|")[0];
+
+				break;
+			}
+			default: {
+				//Other
+				presenceData.details = "Browsing the website";
+				presenceData.state = `Page: ${document.title}`;
+				if (document.location.pathname.length < 8)
+					presenceData.state = "Homepage";
+			}
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

@@ -501,7 +501,7 @@ presence.on("UpdateData", async () => {
 		if (document.location.href.includes("forbusiness"))
 			presenceData.state = "Tools";
 	} else if (document.location.href.includes("contribute")) {
-		const contr = document.querySelector("span[role=img]");
+		const contr = document.querySelector("div.Xxlgbc > span[role=img]");
 		presenceData.details = "Contribute";
 		if (contr) {
 			const langs = document

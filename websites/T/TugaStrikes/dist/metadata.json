@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Kewaii",
 		"id": "135112599460118528"
@@ -10,7 +10,7 @@
 		"nl": "TugaStrikes is een gamingcommunity die is opgericht in 2017 en zich richt op CS:GO"
 	},
 	"url": "tugastrikes.com",
-	"version": "1.2.10",
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/nDCQmhr.png",
 	"thumbnail": "https://i.imgur.com/fgUUaYV.png",
 	"color": "#00ecec",

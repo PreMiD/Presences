@@ -5,7 +5,7 @@ const presence = new Presence({
 	browsingStamp = Math.floor(Date.now() / 1000),
 	search = document.querySelector("#dle-content > h2"),
 	getGenreTitle = (genre: string) => {
-		[, , genre] = genre.split("/");
+		genre = genre.split("/")[2];
 		return genre;
 	};
 

@@ -472,17 +472,17 @@ presence.on("UpdateData", async () => {
 					? largeImageKey.image
 					: "txt";
 				presenceData.details = (await presence.getSetting<string>("details"))
-					.replace(/%file%/g, currentFile.textContent)
-					.replace(/%guild%/g, guildName)
-					.replace(
-						/%ext%/g,
+					.replaceAll("%file%", currentFile.textContent)
+					.replaceAll("%guild%", guildName)
+					.replaceAll(
+						"%ext%",
 						(largeImageKey ? largeImageKey.image : "txt").toUpperCase()
 					);
 				presenceData.state = (await presence.getSetting<string>("state"))
-					.replace(/%file%/g, currentFile.textContent)
-					.replace(/%guild%/g, guildName)
-					.replace(
-						/%ext%/g,
+					.replaceAll("%file%", currentFile.textContent)
+					.replaceAll("%guild%", guildName)
+					.replaceAll(
+						"%ext%",
 						(largeImageKey ? largeImageKey.image : "txt").toUpperCase()
 					);
 			} else {

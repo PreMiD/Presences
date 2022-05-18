@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 				break;
 		}
 		presenceData.state =
-			document.getElementsByClassName("channelname")[0].textContent;
+			document.querySelectorAll(".channelname")[0].textContent;
 		presenceData.smallImageKey = "live";
 		presence.setActivity(presenceData);
 	} else {
@@ -69,127 +69,159 @@ presence.on("UpdateData", async () => {
 			//nothing
 		}
 		// __________________________________________________________________ Path's
-		if (document.location.pathname === "/") {
-			// --------------------- Home
-			switch (language) {
-				case "de":
-					presenceData.details = "Stöbert durch";
-					presenceData.state = "die Startseite";
-					break;
-				case "en":
-					presenceData.details = "Browsing through";
-					presenceData.state = "mainpage";
-					break;
+		switch (document.location.pathname) {
+			case "/": {
+				// --------------------- Home
+				switch (language) {
+					case "de":
+						presenceData.details = "Stöbert durch";
+						presenceData.state = "die Startseite";
+						break;
+					case "en":
+						presenceData.details = "Browsing through";
+						presenceData.state = "mainpage";
+						break;
+				}
+				presence.setActivity(presenceData);
+
+				break;
 			}
-			presence.setActivity(presenceData);
-		} else if (document.location.pathname === "/voting/") {
-			//--------- Voting for Songs
-			switch (language) {
-				case "de":
-					presenceData.details = "Votet für";
-					presenceData.state = "neue Lieder";
-					break;
-				case "en":
-					presenceData.details = "Voting for";
-					presenceData.state = "new songs";
-					break;
+			case "/voting/": {
+				//--------- Voting for Songs
+				switch (language) {
+					case "de":
+						presenceData.details = "Votet für";
+						presenceData.state = "neue Lieder";
+						break;
+					case "en":
+						presenceData.details = "Voting for";
+						presenceData.state = "new songs";
+						break;
+				}
+				presence.setActivity(presenceData);
+
+				break;
 			}
-			presence.setActivity(presenceData);
-		} else if (document.location.pathname === "/the-battle/") {
-			//------- Voting for The Battle
-			switch (language) {
-				case "de":
-					presenceData.details = "Votet für";
-					presenceData.state = "The Battle";
-					break;
-				case "en":
-					presenceData.details = "Voting for";
-					presenceData.state = "the battlee";
-					break;
+			case "/the-battle/": {
+				//------- Voting for The Battle
+				switch (language) {
+					case "de":
+						presenceData.details = "Votet für";
+						presenceData.state = "The Battle";
+						break;
+					case "en":
+						presenceData.details = "Voting for";
+						presenceData.state = "the battlee";
+						break;
+				}
+				presence.setActivity(presenceData);
+
+				break;
 			}
-			presence.setActivity(presenceData);
-		} else if (document.location.pathname === "/charts/") {
-			// ----------- Charts
-			switch (language) {
-				case "de":
-					presenceData.details = "Sucht in Charts...";
-					break;
-				case "en":
-					presenceData.details = "Looking for charts...";
-					break;
+			case "/charts/": {
+				// ----------- Charts
+				switch (language) {
+					case "de":
+						presenceData.details = "Sucht in Charts...";
+						break;
+					case "en":
+						presenceData.details = "Looking for charts...";
+						break;
+				}
+				presence.setActivity(presenceData);
+
+				break;
 			}
-			presence.setActivity(presenceData);
-		} else if (document.location.pathname === "/dance/") {
-			// ------------- Dance & DJ's
-			switch (language) {
-				case "de":
-					presenceData.details = "Sucht in Dance & DJ's...";
-					break;
-				case "en":
-					presenceData.details = "Looking for";
-					presenceData.state = "Dance & DJ's...";
-					break;
+			case "/dance/": {
+				// ------------- Dance & DJ's
+				switch (language) {
+					case "de":
+						presenceData.details = "Sucht in Dance & DJ's...";
+						break;
+					case "en":
+						presenceData.details = "Looking for";
+						presenceData.state = "Dance & DJ's...";
+						break;
+				}
+				presence.setActivity(presenceData);
+
+				break;
 			}
-			presence.setActivity(presenceData);
-		} else if (document.location.pathname === "/hiphop/") {
-			// ------------- Hip Hop
-			switch (language) {
-				case "de":
-					presenceData.details = "Sucht in Hip Hop...";
-					break;
-				case "en":
-					presenceData.details = "Looking for Hip Hop...";
-					break;
+			case "/hiphop/": {
+				// ------------- Hip Hop
+				switch (language) {
+					case "de":
+						presenceData.details = "Sucht in Hip Hop...";
+						break;
+					case "en":
+						presenceData.details = "Looking for Hip Hop...";
+						break;
+				}
+				presence.setActivity(presenceData);
+
+				break;
 			}
-			presence.setActivity(presenceData);
-		} else if (document.location.pathname === "/channels/") {
-			// ------------- Channellist
-			switch (language) {
-				case "de":
-					presenceData.details = "Durchsucht die";
-					presenceData.state = "Channelliste";
-					break;
-				case "en":
-					presenceData.details = "Search in";
-					presenceData.state = "Channel list";
-					break;
+			case "/channels/": {
+				// ------------- Channellist
+				switch (language) {
+					case "de":
+						presenceData.details = "Durchsucht die";
+						presenceData.state = "Channelliste";
+						break;
+					case "en":
+						presenceData.details = "Search in";
+						presenceData.state = "Channel list";
+						break;
+				}
+				presence.setActivity(presenceData);
+
+				break;
 			}
-			presence.setActivity(presenceData);
-		} else if (document.location.pathname === "/streams/") {
-			// --------------- Streams
-			switch (language) {
-				case "de":
-					presenceData.details = "Sucht nach";
-					presenceData.state = "Streamlinks";
-					break;
-				case "en":
-					presenceData.details = "Looking for";
-					presenceData.state = "stream links";
-					break;
+			case "/streams/": {
+				// --------------- Streams
+				switch (language) {
+					case "de":
+						presenceData.details = "Sucht nach";
+						presenceData.state = "Streamlinks";
+						break;
+					case "en":
+						presenceData.details = "Looking for";
+						presenceData.state = "stream links";
+						break;
+				}
+				presence.setActivity(presenceData);
+
+				break;
 			}
-			presence.setActivity(presenceData);
-		} else if (document.location.pathname === "/datenschutz/") {
-			// ------------- Privacy policy
-			switch (language) {
-				case "de":
-					presenceData.details = "Liest den Datenschutz...";
-					break;
-				case "en":
-					presenceData.details = "Reading privacy policy";
-					break;
+			case "/datenschutz/": {
+				// ------------- Privacy policy
+				switch (language) {
+					case "de":
+						presenceData.details = "Liest den Datenschutz...";
+						break;
+					case "en":
+						presenceData.details = "Reading privacy policy";
+						break;
+				}
+				presence.setActivity(presenceData);
+
+				break;
 			}
-			presence.setActivity(presenceData);
-		} else if (document.location.pathname === "/impressum/") {
-			// ---------------- Imprint
-			switch (language) {
-				case "de":
-					presenceData.details = "Liest das Impressum...";
-					break;
-				case "en":
-					presenceData.details = "Reading imprint...";
-					break;
+			case "/impressum/": {
+				// ---------------- Imprint
+				switch (language) {
+					case "de":
+						presenceData.details = "Liest das Impressum...";
+						break;
+					case "en":
+						presenceData.details = "Reading imprint...";
+						break;
+				}
+				presence.setActivity(presenceData);
+
+				break;
 			}
-			presence.setActivity(presenceData);
+			// No default
 		}
 		presence.setActivity(presenceData);
 	}

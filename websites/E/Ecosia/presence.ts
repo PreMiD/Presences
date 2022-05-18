@@ -15,7 +15,7 @@ presence.on("UpdateData", () => {
 	) {
 		presenceData.details = `Searching for ${urlParams.get("q")}`;
 		presenceData.state =
-			document.getElementsByClassName("result-count")[0].textContent;
+			document.querySelectorAll(".result-count")[0].textContent;
 
 		presenceData.smallImageKey = "search";
 	} else if (

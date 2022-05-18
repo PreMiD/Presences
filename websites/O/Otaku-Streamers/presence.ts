@@ -67,85 +67,98 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (window.location.hostname === "beta.otaku-streamers.com") {
 		presenceData.largeImageKey = "logo";
-		if (path === "/" || path === "/index.php" || path === "/#")
-			presenceData.details = "Home";
-		else if (path === "/news/") presenceData.details = "Viewing News";
-		else if (path === "/new-titles/")
-			presenceData.details = "Viewing New Titles Of This Season";
-		else if (path.includes("/genres/")) {
-			title = document.querySelector(
-				"#main > div.title-box > h4 > u"
-			) as HTMLTextAreaElement;
-			if (title) {
-				presenceData.details = "Viewing:";
-				presenceData.state = title.textContent;
-			} else presenceData.details = "Viewing Genres";
-		} else if (path === "/discussions/")
-			presenceData.details = "Viewing Discussions";
-		else if (path.includes("/thread/")) {
-			title = document.querySelector("head > title") as HTMLTextAreaElement;
-			if (title) {
-				presenceData.details = "Discussions:";
-				presenceData.state = title.textContent.replace(
-					" - Otaku-Streamers",
-					""
-				);
-				presenceData.smallImageKey = "read";
-				presenceData.smallImageText = "Reading";
-			} else presenceData.details = "Reading a discusion";
-		} else if (path.includes("/title/")) {
-			title = document.querySelector(
-				"div.album-top-box.mb-4.text-left > h1"
-			) as HTMLTextAreaElement;
-			if (title) {
-				presenceData.details = "Viewing:";
-				presenceData.state = title.textContent;
-			} else presenceData.details = "Viewing a show";
-		} else if (path.includes("/review/")) {
-			title = document.querySelector(
-				"div.title-box > h4 > a"
-			) as HTMLTextAreaElement;
-			if (title) {
-				presenceData.details = "Viewing Reviews:";
-				presenceData.state = title.textContent;
-			} else presenceData.details = "Viewing Reviews";
-		} else if (path.includes("/watch/")) {
-			video = document.getElementsByClassName(
-				"vjs-tech"
-			)[0] as HTMLVideoElement;
-			title = document.querySelector("div > h2 > a") as HTMLTextAreaElement;
-			chapter = document.querySelector(
-				"div > h2 > span"
-			) as HTMLTextAreaElement;
-			if (video && title && chapter) {
-				timestamps = presence.getTimestamps(video.currentTime, video.duration);
-				if (video.currentTime !== 0) {
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
-					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-					if (!video.paused) {
-						[presenceData.startTimestamp, presenceData.endTimestamp] =
-							timestamps;
-						presenceData.details = "Playing";
-						presenceData.state = `${title.textContent} ${chapter.textContent}`;
-					} else {
-						delete presenceData.startTimestamp;
-						delete presenceData.endTimestamp;
-						presenceData.details = "Paused";
-						presenceData.state = `${title.textContent} ${chapter.textContent}`;
+		switch (path) {
+			case "/":
+			case "/index.php":
+			case "/#": {
+				presenceData.details = "Home";
+				break;
+			}
+			case "/news/": {
+				presenceData.details = "Viewing News";
+				break;
+			}
+			case "/new-titles/": {
+				presenceData.details = "Viewing New Titles Of This Season";
+				break;
+			}
+			default:
+				if (path.includes("/genres/")) {
+					title = document.querySelector(
+						"#main > div.title-box > h4 > u"
+					) as HTMLTextAreaElement;
+					if (title) {
+						presenceData.details = "Viewing:";
+						presenceData.state = title.textContent;
+					} else presenceData.details = "Viewing Genres";
+				} else if (path === "/discussions/")
+					presenceData.details = "Viewing Discussions";
+				else if (path.includes("/thread/")) {
+					title = document.querySelector("head > title") as HTMLTextAreaElement;
+					if (title) {
+						presenceData.details = "Discussions:";
+						presenceData.state = title.textContent.replace(
+							" - Otaku-Streamers",
+							""
+						);
+						presenceData.smallImageKey = "read";
+						presenceData.smallImageText = "Reading";
+					} else presenceData.details = "Reading a discusion";
+				} else if (path.includes("/title/")) {
+					title = document.querySelector(
+						"div.album-top-box.mb-4.text-left > h1"
+					) as HTMLTextAreaElement;
+					if (title) {
+						presenceData.details = "Viewing:";
+						presenceData.state = title.textContent;
+					} else presenceData.details = "Viewing a show";
+				} else if (path.includes("/review/")) {
+					title = document.querySelector(
+						"div.title-box > h4 > a"
+					) as HTMLTextAreaElement;
+					if (title) {
+						presenceData.details = "Viewing Reviews:";
+						presenceData.state = title.textContent;
+					} else presenceData.details = "Viewing Reviews";
+				} else if (path.includes("/watch/")) {
+					video = document.querySelectorAll(".vjs-tech")[0] as HTMLVideoElement;
+					title = document.querySelector("div > h2 > a") as HTMLTextAreaElement;
+					chapter = document.querySelector(
+						"div > h2 > span"
+					) as HTMLTextAreaElement;
+					if (video && title && chapter) {
+						timestamps = presence.getTimestamps(
+							video.currentTime,
+							video.duration
+						);
+						if (video.currentTime !== 0) {
+							presenceData.smallImageKey = video.paused ? "pause" : "play";
+							presenceData.smallImageText = video.paused ? "Paused" : "Playing";
+							if (!video.paused) {
+								[presenceData.startTimestamp, presenceData.endTimestamp] =
+									timestamps;
+								presenceData.details = "Playing";
+								presenceData.state = `${title.textContent} ${chapter.textContent}`;
+							} else {
+								delete presenceData.startTimestamp;
+								delete presenceData.endTimestamp;
+								presenceData.details = "Paused";
+								presenceData.state = `${title.textContent} ${chapter.textContent}`;
+							}
+						} else presenceData.details = "Watching Some Anime";
 					}
-				} else presenceData.details = "Watching Some Anime";
-			}
-		} else if (path === "/top-titles/")
-			presenceData.details = "Viewing Popular Anime";
-		else if (path === "/drama/") presenceData.details = "Viewing Drama";
-		else if (path.includes("/member/")) {
-			title = document.querySelector(
-				"#main > div.master-container-fluid > div.row.justify-content-between > div.col-xl-7.text-center.text-md-left > h1 > span"
-			) as HTMLTextAreaElement;
-			if (title) {
-				presenceData.details = "Viewing Profile:";
-				presenceData.state = title.textContent;
-			}
+				} else if (path === "/top-titles/")
+					presenceData.details = "Viewing Popular Anime";
+				else if (path === "/drama/") presenceData.details = "Viewing Drama";
+				else if (path.includes("/member/")) {
+					title = document.querySelector(
+						"#main > div.master-container-fluid > div.row.justify-content-between > div.col-xl-7.text-center.text-md-left > h1 > span"
+					) as HTMLTextAreaElement;
+					if (title) {
+						presenceData.details = "Viewing Profile:";
+						presenceData.state = title.textContent;
+					}
+				}
 		}
 	} else presenceData.details = "Site is Unreadable";
 

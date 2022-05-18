@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "N0chteil ^^",
 		"id": "495901098926669825"
@@ -28,7 +28,7 @@
 		"developer.apple.com",
 		"www.icloud.com"
 	],
-	"version": "2.2.4",
+	"version": "2.3.0",
 	"logo": "https://i.imgur.com/rBAusA5.png",
 	"thumbnail": "https://i.imgur.com/D5b7fQ5.jpg",
 	"color": "#606C80",
@@ -42,6 +42,8 @@
 		"store",
 		"icloud"
 	],
+	"iframe": true,
+	"iFrameRegExp": "https://www.icloud.com/applications/mail2/current/*",
 	"settings": [
 		{
 			"id": "lang",
@@ -59,21 +61,33 @@
 		},
 		{
 			"id": "timeElapsed",
-			"title": "Show elapsed time",
+			"title": "Show Elapsed Time",
 			"icon": "fad fa-hourglass-half",
 			"value": true
 		},
 		{
 			"id": "showButtons",
-			"title": "Show buttons",
-			"icon": "fas fa-compress-arrows-alt",
+			"title": "Show Buttons",
+			"icon": "fad fa-compress-arrows-alt",
 			"value": true
 		},
 		{
 			"id": "devProfileBtn",
-			"title": "Show Dev Forum profile button",
-			"icon": "fas fa-id-badge",
+			"title": "Show Dev Forum Profile Button",
+			"icon": "fad fa-id-badge",
 			"value": true
+		},
+		{
+			"id": "iCloudMailSender",
+			"title": "Show iCloud Mail Sender",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "iCloudMailSubject",
+			"title": "Show iCloud Mail Subject",
+			"icon": "fad fa-user-secret",
+			"value": false
 		}
 	]
 }

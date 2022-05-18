@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 							"#member-container > div:nth-child(1) > div > a"
 						);
 						uploaderName = `${uploader.textContent} + ${
-							document.getElementsByClassName("up-card").length
+							document.querySelectorAll(".up-card").length
 						} more`;
 					} else {
 						uploader = document.querySelector("a.username");

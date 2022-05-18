@@ -26,8 +26,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Dashboard";
 			presenceData.state = `Browsing: ${
 				document
-					.getElementsByClassName("Mui-selected")[0]
-					.getElementsByTagName("span")[0].textContent
+					.querySelectorAll(".Mui-selected")[0]
+					.querySelectorAll("span")[0].textContent
 			}`;
 			presenceData.largeImageKey = "favicon";
 		} else if (
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Dashboard";
 			presenceData.state = `Browsing: ${
-				document.getElementsByClassName("jss326")[1].textContent
+				document.querySelectorAll(".jss326")[1].textContent
 			}`;
 			presenceData.largeImageKey = "favicon";
 		}
@@ -70,25 +70,21 @@ presence.on("UpdateData", async () => {
 	) {
 		// Check if the user is reading the first chapter or not
 		if (
-			document.body.contains(
-				document.getElementsByClassName("breadcrumb__item")[3]
-			)
+			document.body.contains(document.querySelectorAll(".breadcrumb__item")[3])
 		) {
 			// If the user is reading the second chapter or more, there is a chapter name
-			const courseClass = document.getElementsByClassName("breadcrumb__item");
+			const courseClass = document.querySelectorAll(".breadcrumb__item");
 			presenceData.details = `Reading: ${
-				courseClass[2].getElementsByTagName("span")[0].textContent
+				courseClass[2].querySelectorAll("span")[0].textContent
 			}`;
 			presenceData.state = `Chapter: ${courseClass[3].textContent}`;
 			presenceData.largeImageKey = "favicon";
 		} else if (
-			!document.body.contains(
-				document.getElementsByClassName("breadcrumb__item")[3]
-			)
+			!document.body.contains(document.querySelectorAll(".breadcrumb__item")[3])
 		) {
 			// If the user is reading the first chapter, there is no default "chapter name" so we set it manually
 			presenceData.details = `Reading: ${
-				document.getElementsByClassName("breadcrumb__item")[2].textContent
+				document.querySelectorAll(".breadcrumb__item")[2].textContent
 			}`;
 			presenceData.state = "Chapter: First chapter";
 			presenceData.largeImageKey = "favicon";

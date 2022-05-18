@@ -78,17 +78,29 @@ presence.on("UpdateData", async () => {
 					.querySelector(".plyr__time")
 					.textContent.split(":");
 
-				if (timeArray.length === 3) {
-					podcastDuration =
-						parseInt(timeArray[2]) +
-						parseInt(timeArray[1].replace("-", "")) * 60 +
-						parseInt(timeArray[0].replace("-", "")) * 60 * 60;
-				} else if (timeArray.length === 2) {
-					podcastDuration =
-						parseInt(timeArray[1]) +
-						parseInt(timeArray[0].replace("-", "")) * 60;
-				} else if (timeArray.length === 1)
-					podcastDuration = parseInt(timeArray[1]);
+				switch (timeArray.length) {
+					case 3: {
+						podcastDuration =
+							parseInt(timeArray[2]) +
+							parseInt(timeArray[1].replace("-", "")) * 60 +
+							parseInt(timeArray[0].replace("-", "")) * 60 * 60;
+
+						break;
+					}
+					case 2: {
+						podcastDuration =
+							parseInt(timeArray[1]) +
+							parseInt(timeArray[0].replace("-", "")) * 60;
+
+						break;
+					}
+					case 1:
+						{
+							podcastDuration = parseInt(timeArray[1]);
+							// No default
+						}
+						break;
+				}
 
 				presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 				presenceData.endTimestamp =

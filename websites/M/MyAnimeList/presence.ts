@@ -4,31 +4,28 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	if (document.location.pathname === "/") {
-		const presenceData: PresenceData = {
+		presence.setActivity({
 			details: "Viewing the homepage",
 			largeImageKey: "lg-mal"
-		};
-		presence.setActivity(presenceData);
+		});
 	} else if (
 		document.location.pathname === "/anime.php" ||
 		document.location.pathname.startsWith("/topanime") ||
 		document.location.pathname.startsWith("/watch")
 	) {
-		const presenceData: PresenceData = {
+		presence.setActivity({
 			details: "Looking for anime",
 			largeImageKey: "lg-mal"
-		};
-		presence.setActivity(presenceData);
+		});
 	} else if (
 		document.location.pathname === "/manga.php" ||
 		document.location.pathname.startsWith("/topmanga") ||
 		document.location.pathname.startsWith("/store")
 	) {
-		const presenceData: PresenceData = {
+		presence.setActivity({
 			details: "Looking for manga",
 			largeImageKey: "lg-mal"
-		};
-		presence.setActivity(presenceData);
+		});
 	} else if (document.location.pathname.startsWith("/forum")) {
 		const presenceData: PresenceData = {
 			details: "Viewing the forums",
@@ -39,55 +36,48 @@ presence.on("UpdateData", async () => {
 		};
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.startsWith("/clubs.php")) {
-		if (document.getElementsByClassName("normal_header")[1]) {
+		if (document.querySelectorAll(".normal_header")[1]) {
 			const presenceData: PresenceData = {
 				details: "Viewing an club",
-				state: document.getElementsByClassName("h1")[0].textContent,
+				state: document.querySelectorAll(".h1")[0].textContent,
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);
 		} else if (
-			document.getElementsByClassName("h1-title")[0].textContent ===
-			"Invitations"
+			document.querySelectorAll(".h1-title")[0].textContent === "Invitations"
 		) {
-			const presenceData: PresenceData = {
+			presence.setActivity({
 				details: "Viewing club Invitations",
 				largeImageKey: "lg-mal"
-			};
-			presence.setActivity(presenceData);
+			});
 		} else if (
-			document.getElementsByClassName("h1-title")[0].textContent === "My Clubs"
+			document.querySelectorAll(".h1-title")[0].textContent === "My Clubs"
 		) {
-			const presenceData: PresenceData = {
+			presence.setActivity({
 				details: "Viewing my clubs",
 				largeImageKey: "lg-mal"
-			};
-			presence.setActivity(presenceData);
+			});
 		} else {
-			const presenceData: PresenceData = {
+			presence.setActivity({
 				details: "Looking for clubs",
 				largeImageKey: "lg-mal"
-			};
-			presence.setActivity(presenceData);
+			});
 		}
 	} else if (document.location.pathname.startsWith("/blog.php")) {
-		const presenceData: PresenceData = {
+		presence.setActivity({
 			details: "Viewing the blogs",
 			largeImageKey: "lg-mal"
-		};
-		presence.setActivity(presenceData);
+		});
 	} else if (document.location.pathname.startsWith("/users.php")) {
-		const presenceData: PresenceData = {
+		presence.setActivity({
 			details: "Searching for users",
 			largeImageKey: "lg-mal"
-		};
-		presence.setActivity(presenceData);
+		});
 	} else if (document.location.pathname.startsWith("/news")) {
-		const presenceData: PresenceData = {
+		presence.setActivity({
 			details: "Viewing the news",
 			largeImageKey: "lg-mal"
-		};
-		presence.setActivity(presenceData);
+		});
 	} else if (document.location.pathname.startsWith("/featured")) {
 		if (
 			document
@@ -95,48 +85,45 @@ presence.on("UpdateData", async () => {
 				.getAttribute("content")
 				.includes("Featured Articles")
 		) {
-			const presenceData: PresenceData = {
+			presence.setActivity({
 				details: "Viewing featured articles",
 				largeImageKey: "lg-mal"
-			};
-			presence.setActivity(presenceData);
+			});
 		} else {
 			const presenceData: PresenceData = {
 				details: "Viewing an article",
-				state: document.getElementsByClassName("title")[0].textContent,
+				state: document.querySelectorAll(".title")[0].textContent,
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);
 		}
 	} else if (document.location.pathname.startsWith("/people")) {
-		if (document.getElementsByClassName("h1")[0].textContent === "People") {
-			const presenceData: PresenceData = {
+		if (document.querySelectorAll(".h1")[0].textContent === "People") {
+			presence.setActivity({
 				details: "Viewing peoples",
 				largeImageKey: "lg-mal"
-			};
-			presence.setActivity(presenceData);
+			});
 		} else {
 			const presenceData: PresenceData = {
 				details: "Viewing a person",
 				state: document
-					.getElementsByClassName("title-name")[0]
+					.querySelectorAll(".title-name")[0]
 					.textContent.replace(/(<([^>]+)>)/gi, ""),
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);
 		}
 	} else if (document.location.pathname.startsWith("/character")) {
-		if (document.getElementsByClassName("h1")[0].textContent === "Characters") {
-			const presenceData: PresenceData = {
+		if (document.querySelectorAll(".h1")[0].textContent === "Characters") {
+			presence.setActivity({
 				details: "Looking for characters",
 				largeImageKey: "lg-mal"
-			};
-			presence.setActivity(presenceData);
+			});
 		} else {
 			const presenceData: PresenceData = {
 				details: "Viewing an character",
 				state: document
-					.getElementsByClassName("normal_header")[2]
+					.querySelectorAll(".normal_header")[2]
 					.textContent.replace(/(<([^>]+)>)/gi, ""),
 				largeImageKey: "lg-mal"
 			};
@@ -165,44 +152,41 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.startsWith("/anime")) {
 		// TODO: The if loop to check if thhe user is really on the page of an anime is currently always true for some reason which results in the presence going away when the user is for example in the anime directory
-		if (document.getElementsByClassName("js-anime-edit-info-button")[0]) {
+		if (document.querySelectorAll(".js-anime-edit-info-button")[0]) {
 			const presenceData: PresenceData = {
 				details: "Viewing an anime",
 				state:
-					document.getElementsByClassName("header-right")[0].parentNode
-						.childNodes[1].textContent,
+					document.querySelectorAll(".header-right")[0].parentNode.childNodes[1]
+						.textContent,
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);
 		} else {
-			const presenceData: PresenceData = {
+			presence.setActivity({
 				details: "Looking for anime",
 				largeImageKey: "lg-mal"
-			};
-			presence.setActivity(presenceData);
+			});
 		}
 	} else if (document.location.pathname.startsWith("/manga")) {
 		// TODO: The if loop to check if thhe user is really on the page of an anime is currently always true for some reason which results in the presence going away when the user is for example in the anime directory
-		if (document.getElementsByClassName("js-manga-edit-info-button")[0]) {
+		if (document.querySelectorAll(".js-manga-edit-info-button")[0]) {
 			const presenceData: PresenceData = {
 				details: "Viewing a manga",
 				state:
-					document.getElementsByClassName("header-right")[0].parentNode
-						.childNodes[1].textContent,
+					document.querySelectorAll(".header-right")[0].parentNode.childNodes[1]
+						.textContent,
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);
 		} else {
-			const presenceData: PresenceData = {
+			presence.setActivity({
 				details: "Looking for manga",
 				largeImageKey: "lg-mal"
-			};
-			presence.setActivity(presenceData);
+			});
 		}
 	} else {
-		const presenceData: PresenceData = {
+		presence.setActivity({
 			largeImageKey: "lg-mal"
-		};
-		presence.setActivity(presenceData);
+		});
 	}
 });

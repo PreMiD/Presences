@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		//Inits temporary button array that is to be applied to presenceData later.
 		tempButtons = new Array(0),
 		//Sets button for joining.
-		joinLinkArr = document.getElementsByClassName("joinLink"),
+		joinLinkArr = document.querySelectorAll(".joinLink"),
 		//Sets username
 		username = getUsername();
 
@@ -133,8 +133,8 @@ presence.on("UpdateData", async () => {
 function getUsername() {
 	try {
 		return document
-			.getElementsByClassName("navbar-right")[0]
-			.getElementsByClassName("dropdown-toggle")[1]
+			.querySelectorAll(".navbar-right")[0]
+			.querySelectorAll(".dropdown-toggle")[1]
 			.textContent.replace(/\n/g, "");
 	} catch (err) {
 		return;
@@ -143,7 +143,7 @@ function getUsername() {
 
 function parseQuery(search: string) {
 	return JSON.parse(
-		`{"${search.replace(/&/g, '","').replace(/=/g, '":"')}"}`,
+		`{"${search.replaceAll("&", '","').replaceAll("=", '":"')}"}`,
 		function (key, value) {
 			return key === "" ? value : decodeURIComponent(value);
 		}

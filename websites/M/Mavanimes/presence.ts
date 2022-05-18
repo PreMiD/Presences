@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 	else {
 		presenceData.details = "Regarde un animé :";
 		presenceData.state =
-			document.getElementsByClassName("entry-title")[0].textContent;
+			document.querySelectorAll(".entry-title")[0].textContent;
 		const timestamps = presence.getTimestamps(
 			Math.floor(video.currentTime),
 			Math.floor(video.duration)

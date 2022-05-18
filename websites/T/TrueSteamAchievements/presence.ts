@@ -85,89 +85,144 @@ presence.on("UpdateData", async () => {
 			".newsitem > header > h1"
 		).textContent;
 		presenceData.smallImageKey = "reading";
-	} else if (document.location.pathname === "/suggestnews.aspx") {
-		presenceData.details = "Suggesting new news";
-		presenceData.smallImageKey = "writing";
-	} else if (document.location.pathname === "/news/community")
-		presenceData.details = "Viewing the latest community news";
-	else if (document.location.pathname === "/siteupdates")
-		presenceData.details = "Viewing the latest site updates";
-	else if (document.location.pathname === "/games.aspx")
-		presenceData.details = "Viewing all games";
-	else if (document.location.pathname === "/steam-achievements.aspx")
-		presenceData.details = "Viewing all achievements";
-	else if (document.location.pathname === "/solutions-required.aspx") {
-		presenceData.details = "Viewing all achievements";
-		presenceData.state = "that require guides";
-	} else if (document.location.pathname === "/sitereviews.aspx")
-		presenceData.details = "Viewing site reviews";
-	else if (document.location.pathname === "/solutions")
-		presenceData.details = "Viewing achievement solutions";
-	else if (
-		document.location.pathname.includes("/viewcomment.aspx") &&
-		document.querySelector(".pagetitle")?.textContent === "View Solution"
-	) {
-		presenceData.details = "Viewing solution for achievement:";
-		presenceData.state = document.querySelector(".title").textContent;
-		presenceData.smallImageKey = "reading";
-		presenceData.smallImageText = `Game: ${
-			document.querySelector("div.panel-header.w > h3 > a").textContent
-		}`;
-	} else if (document.location.pathname === "/serieslist.aspx")
-		presenceData.details = "Viewing Game Series";
-	else if (document.location.pathname === "/popularachievements.aspx")
-		presenceData.details = "Viewing popular achievements";
-	else if (document.location.pathname === "/walkthroughs.aspx")
-		presenceData.details = "Viewing Steam Walkthroughs and Guides";
-	else if (document.location.pathname === "/reviews.aspx")
-		presenceData.details = "Viewing user reviews";
-	else if (document.location.pathname === "/gamereleases.aspx")
-		presenceData.details = "Viewing upcoming releases";
-	else if (document.location.pathname === "/searchresults.aspx") {
-		presenceData.details = "Searching for:";
-		presenceData.state =
-			document.querySelector<HTMLInputElement>("#txtSearchFor").value;
-		presenceData.smallImageKey = "search";
-	} else if (document.location.pathname.includes("/products")) {
-		if (document.location.pathname.includes("/latest"))
-			presenceData.details = "Viewing the latest products";
-		else if (document.location.pathname.includes("/steam-sales"))
-			presenceData.details = "Viewing steam sales";
-		else if (document.querySelector(".pagetitle")) {
-			presenceData.details = "Viewing prices for:";
-			presenceData.state = document
-				.querySelector(".pagetitle")
-				.textContent.replace("Best price for ", "")
-				.trim();
+	} else {
+		switch (document.location.pathname) {
+			case "/suggestnews.aspx": {
+				presenceData.details = "Suggesting new news";
+				presenceData.smallImageKey = "writing";
+
+				break;
+			}
+			case "/news/community": {
+				presenceData.details = "Viewing the latest community news";
+				break;
+			}
+			case "/siteupdates": {
+				presenceData.details = "Viewing the latest site updates";
+				break;
+			}
+			case "/games.aspx": {
+				presenceData.details = "Viewing all games";
+				break;
+			}
+			case "/steam-achievements.aspx": {
+				presenceData.details = "Viewing all achievements";
+				break;
+			}
+			case "/solutions-required.aspx": {
+				presenceData.details = "Viewing all achievements";
+				presenceData.state = "that require guides";
+
+				break;
+			}
+			case "/sitereviews.aspx": {
+				presenceData.details = "Viewing site reviews";
+				break;
+			}
+			case "/solutions": {
+				presenceData.details = "Viewing achievement solutions";
+				break;
+			}
+			default:
+				if (
+					document.location.pathname.includes("/viewcomment.aspx") &&
+					document.querySelector(".pagetitle")?.textContent === "View Solution"
+				) {
+					presenceData.details = "Viewing solution for achievement:";
+					presenceData.state = document.querySelector(".title").textContent;
+					presenceData.smallImageKey = "reading";
+					presenceData.smallImageText = `Game: ${
+						document.querySelector("div.panel-header.w > h3 > a").textContent
+					}`;
+				} else {
+					switch (document.location.pathname) {
+						case "/serieslist.aspx": {
+							presenceData.details = "Viewing Game Series";
+							break;
+						}
+						case "/popularachievements.aspx": {
+							presenceData.details = "Viewing popular achievements";
+							break;
+						}
+						case "/walkthroughs.aspx": {
+							presenceData.details = "Viewing Steam Walkthroughs and Guides";
+							break;
+						}
+						case "/reviews.aspx": {
+							presenceData.details = "Viewing user reviews";
+							break;
+						}
+						case "/gamereleases.aspx": {
+							presenceData.details = "Viewing upcoming releases";
+							break;
+						}
+						case "/searchresults.aspx": {
+							presenceData.details = "Searching for:";
+							presenceData.state =
+								document.querySelector<HTMLInputElement>("#txtSearchFor").value;
+							presenceData.smallImageKey = "search";
+
+							break;
+						}
+						default:
+							if (document.location.pathname.includes("/products")) {
+								if (document.location.pathname.includes("/latest"))
+									presenceData.details = "Viewing the latest products";
+								else if (document.location.pathname.includes("/steam-sales"))
+									presenceData.details = "Viewing steam sales";
+								else if (document.querySelector(".pagetitle")) {
+									presenceData.details = "Viewing prices for:";
+									presenceData.state = document
+										.querySelector(".pagetitle")
+										.textContent.replace("Best price for ", "")
+										.trim();
+								}
+							} else if (document.location.pathname.includes("/forum/")) {
+								presenceData.smallImageKey = "reading";
+								if (document.location.pathname.includes("/viewthreads.aspx")) {
+									presenceData.details =
+										"Forums - Viewing their recent threads";
+								} else if (document.location.pathname.includes("/forums.aspx"))
+									presenceData.details = "Browsing the forums...";
+								else if (
+									document.location.pathname.includes("/viewboard.aspx")
+								) {
+									presenceData.details = "Forums - Viewing board:";
+									presenceData.state =
+										document.querySelector(".pagetitle").textContent;
+								} else if (
+									document.location.pathname.includes("/newthreads.aspx")
+								)
+									presenceData.details = "Forums - Viewing new threads";
+								else if (
+									document.location.pathname.includes("/viewthread.aspx")
+								) {
+									presenceData.details = "Forums - Reading thread:";
+									presenceData.state = document.querySelector(
+										"#oMessageThread > div:nth-child(2) > h1"
+									).textContent;
+								} else if (
+									document.location.pathname.includes("/search.aspx")
+								) {
+									presenceData.details = "Forums - Searching for:";
+									presenceData.state =
+										document.querySelector<HTMLInputElement>(
+											"#txtSearchFor"
+										).value;
+									presenceData.smallImageKey = "search";
+								}
+							} else if (document.location.pathname.includes("/leaderboard"))
+								presenceData.details = "Viewing the leaderboards";
+							else if (
+								document.location.pathname.includes("/userleaderboards.aspx")
+							)
+								presenceData.details = "Viewing user created leaderboards";
+							else if (document.location.pathname === "/")
+								presenceData.details = "Browsing...";
+					}
+				}
 		}
-	} else if (document.location.pathname.includes("/forum/")) {
-		presenceData.smallImageKey = "reading";
-		if (document.location.pathname.includes("/viewthreads.aspx"))
-			presenceData.details = "Forums - Viewing their recent threads";
-		else if (document.location.pathname.includes("/forums.aspx"))
-			presenceData.details = "Browsing the forums...";
-		else if (document.location.pathname.includes("/viewboard.aspx")) {
-			presenceData.details = "Forums - Viewing board:";
-			presenceData.state = document.querySelector(".pagetitle").textContent;
-		} else if (document.location.pathname.includes("/newthreads.aspx"))
-			presenceData.details = "Forums - Viewing new threads";
-		else if (document.location.pathname.includes("/viewthread.aspx")) {
-			presenceData.details = "Forums - Reading thread:";
-			presenceData.state = document.querySelector(
-				"#oMessageThread > div:nth-child(2) > h1"
-			).textContent;
-		} else if (document.location.pathname.includes("/search.aspx")) {
-			presenceData.details = "Forums - Searching for:";
-			presenceData.state =
-				document.querySelector<HTMLInputElement>("#txtSearchFor").value;
-			presenceData.smallImageKey = "search";
-		}
-	} else if (document.location.pathname.includes("/leaderboard"))
-		presenceData.details = "Viewing the leaderboards";
-	else if (document.location.pathname.includes("/userleaderboards.aspx"))
-		presenceData.details = "Viewing user created leaderboards";
-	else if (document.location.pathname === "/")
-		presenceData.details = "Browsing...";
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

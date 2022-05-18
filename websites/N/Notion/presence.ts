@@ -1,7 +1,21 @@
 const presence = new Presence({
 		clientId: "926386695354609684"
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	shortenedURLs: Record<string, string> = {};
+
+async function shortenURL(url: string, fallback?: string): Promise<string> {
+	if (!url || url.length < 256) return url;
+	if (shortenedURLs[url]) return shortenedURLs[url];
+	try {
+		return (shortenedURLs[url] = await (
+			await fetch(`https://pd.premid.app/create/${url}`)
+		).text());
+	} catch (err) {
+		presence.error(err);
+		return fallback;
+	}
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -9,9 +23,15 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp
 		},
 		path = document.location.pathname,
-		title = await presence.getSetting<boolean>("title"),
+		[title, showPageIcon] = await Promise.all([
+			presence.getSetting<boolean>("title"),
+			presence.getSetting<boolean>("icon")
+		]),
 		overlayTitle = document.querySelector<HTMLDivElement>(
-			"#notion-app > div > div.notion-overlay-container.notion-default-overlay-container > div:nth-child(2) > div > div:nth-child(2) > div.notion-scroller.vertical > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div"
+			"div.notion-overlay-container.notion-default-overlay-container div[class='notranslate'][contenteditable='true']"
+		),
+		pageIcon = document.querySelector<HTMLImageElement>(
+			":is(.notion-frame, .notion-overlay-container.notion-default-overlay-container) .notion-record-icon div > div > img:not(.notion-emoji)"
 		);
 	if (path.startsWith("/product")) {
 		if (path === "/product") presenceData.details = "Viewing Home page";
@@ -33,24 +53,44 @@ presence.on("UpdateData", async () => {
 	else if (
 		overlayTitle ||
 		document.querySelector<HTMLDivElement>(
-			"#notion-app > div > div.notion-cursor-listener > div:nth-child(2) > div.notion-frame > div:nth-child(2) > div > div"
+			"div.notion-cursor-listener div.notion-frame > div:nth-child(2) > div > div"
 		)
 	) {
 		presenceData.details = "Editing a page";
 		if (title) {
 			if (!overlayTitle) presenceData.state = document.title;
-			else presenceData.state = overlayTitle.textContent;
+			else {
+				presenceData.state =
+					overlayTitle.textContent || overlayTitle.getAttribute("placeholder");
+			}
 		}
-		presenceData.smallImageKey = "edit";
+
+		if (title && showPageIcon) {
+			presenceData.smallImageKey = pageIcon
+				? pageIcon.alt
+					? `https://twemoji.maxcdn.com/v/latest/72x72/${pageIcon.alt
+							.codePointAt(0)
+							.toString(16)}.png`
+					: await shortenURL(pageIcon.src, "edit")
+				: "edit";
+		} else presenceData.smallImageKey = "edit";
 		presenceData.smallImageText = "Editing";
 	} else if (
 		document.querySelector<HTMLDivElement>(
-			"#notion-app > div > div.notion-cursor-listener > div:nth-child(2) > div:nth-child(1) > div.notion-topbar"
+			"div.notion-topbar div.notion-focusable > div[class='notranslate']"
 		)
 	) {
 		presenceData.details = "Reading a page";
 		if (title) presenceData.state = document.title;
-		presenceData.smallImageKey = "read";
+		if (title && showPageIcon) {
+			presenceData.smallImageKey = pageIcon
+				? pageIcon.alt
+					? `https://twemoji.maxcdn.com/v/latest/72x72/${pageIcon.alt
+							.codePointAt(0)
+							.toString(16)}.png`
+					: await shortenURL(pageIcon.src, "read")
+				: "read";
+		} else presenceData.smallImageKey = "read";
 		presenceData.smallImageText = "Reading";
 	}
 	presence.setActivity(presenceData);

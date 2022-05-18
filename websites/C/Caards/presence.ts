@@ -11,91 +11,116 @@ presence.on("UpdateData", async () => {
 			details: "Viewing unsupported page"
 		};
 
-	if (document.location.hostname === "www.caards.me") {
-		if (document.location.pathname === "/")
-			presenceData.details = "Viewing home page";
-		else if (document.location.pathname.includes("partners")) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Partners";
-			presenceData.buttons = [
-				{
-					label: "View Partners",
-					url: document.location.href
+	switch (document.location.hostname) {
+		case "www.caards.me": {
+			if (document.location.pathname === "/")
+				presenceData.details = "Viewing home page";
+			else if (document.location.pathname.includes("partners")) {
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Partners";
+				presenceData.buttons = [
+					{
+						label: "View Partners",
+						url: document.location.href
+					}
+				];
+			} else if (document.location.pathname === "/popular") {
+				presenceData.details = "Viewing:";
+				presenceData.state = "Popular caards";
+				presenceData.buttons = [
+					{
+						label: "View Popular Caards",
+						url: document.location.href
+					}
+				];
+			} else if (document.location.pathname.includes("feed"))
+				presenceData.details = "Viewing feed";
+			else if (document.location.pathname.includes("/u/")) {
+				presenceData.smallImageKey = "reading";
+				presenceData.details = "Viewing profile:";
+				presenceData.state = `${
+					document.querySelector("span.Name.text-3xl")?.textContent || "Unknown"
+				}`;
+				presenceData.buttons = [
+					{
+						label: "View Profile",
+						url: document.location.href
+					}
+				];
+			} else if (document.location.pathname === "/me/settings") {
+				const tab = document.querySelector("button.B01")?.textContent;
+				presenceData.details = "Editing Profile";
+				presenceData.state = `${"Tab:" + ` ${tab ? tab : "User"}`}`;
+			} else if (document.location.pathname === "/themes") {
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Themes";
+				presenceData.buttons = [
+					{
+						label: "View Themes",
+						url: document.location.href
+					}
+				];
+			} else if (document.location.pathname.includes("/t/")) {
+				const [, theme] = document.location.href.split("/t/");
+				presenceData.details = "Viewing theme:";
+				presenceData.state = `${theme}`;
+				presenceData.buttons = [
+					{
+						label: `View ${theme}`,
+						url: document.location.href
+					}
+				];
+			} else {
+				switch (document.location.pathname) {
+					case "/signup": {
+						presenceData.details = "Signing Up";
+						break;
+					}
+					case "/signin": {
+						const username = document.querySelector("input")?.value;
+						presenceData.details = "Signing In:";
+						username
+							? (presenceData.state = `To ${username}`)
+							: (presenceData.state = "To Unknown");
+
+						break;
+					}
+					case "/privacy": {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Privacy Policy";
+
+						break;
+					}
+					case "/tos": {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Terms of Service";
+
+						break;
+					}
+					// No default
 				}
-			];
-		} else if (document.location.pathname === "/popular") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Popular caards";
-			presenceData.buttons = [
-				{
-					label: "View Popular Caards",
-					url: document.location.href
-				}
-			];
-		} else if (document.location.pathname.includes("feed"))
-			presenceData.details = "Viewing feed";
-		else if (document.location.pathname.includes("/u/")) {
-			const username =
-				document.querySelector("span.Name.text-3xl")?.textContent;
-			presenceData.smallImageKey = "reading";
-			presenceData.details = "Viewing profile:";
-			presenceData.state = `${username || "Unknown"}`;
-			presenceData.buttons = [
-				{
-					label: "View Profile",
-					url: document.location.href
-				}
-			];
-		} else if (document.location.pathname === "/me/settings") {
-			const tab = document.querySelector("button.B01")?.textContent;
-			presenceData.details = "Editing Profile";
-			presenceData.state = `${"Tab:" + ` ${tab ? tab : "User"}`}`;
-		} else if (document.location.pathname === "/themes") {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Themes";
-			presenceData.buttons = [
-				{
-					label: "View Themes",
-					url: document.location.href
-				}
-			];
-		} else if (document.location.pathname.includes("/t/")) {
-			const [, theme] = document.location.href.split("/t/");
-			presenceData.details = "Viewing theme:";
-			presenceData.state = `${theme}`;
-			presenceData.buttons = [
-				{
-					label: `View ${theme}`,
-					url: document.location.href
-				}
-			];
-		} else if (document.location.pathname === "/signup")
-			presenceData.details = "Signing Up";
-		else if (document.location.pathname === "/signin") {
-			const username = document.querySelector("input")?.value;
-			presenceData.details = "Signing In:";
-			username
-				? (presenceData.state = `To ${username}`)
-				: (presenceData.state = "To Unknown");
-		} else if (document.location.pathname === "/privacy") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Privacy Policy";
-		} else if (document.location.pathname === "/tos") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Terms of Service";
+			}
+			break;
 		}
-	} else if (document.location.hostname === "help.caards.me") {
-		if (document.location.pathname === "/")
-			presenceData.details = "Viewing help page";
-		else if (document.location.pathname.includes("/widgets/")) {
-			presenceData.details = "Viewing help info...";
-			presenceData.state = `Widget: ${
-				document.location.href.split("/widgets/")[1]
-			}`;
+		case "help.caards.me": {
+			if (document.location.pathname === "/")
+				presenceData.details = "Viewing help page";
+			else if (document.location.pathname.includes("/widgets/")) {
+				presenceData.details = "Viewing help info...";
+				presenceData.state = `Widget: ${
+					document.location.href.split("/widgets/")[1]
+				}`;
+			}
+
+			break;
 		}
-	} else if (document.location.hostname === "status.caards.me") {
-		if (document.location.pathname === "/")
-			presenceData.details = "Viewing status page";
+		case "status.caards.me": {
+			if (document.location.pathname === "/")
+				presenceData.details = "Viewing status page";
+
+			break;
+		}
+		// No default
 	}
 
 	if (!showButtons) delete presenceData.buttons;

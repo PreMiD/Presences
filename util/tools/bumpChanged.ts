@@ -48,29 +48,37 @@ const readFile = (path: string): string =>
 	increaseSemver = async (changedPresenceFiles: string[]): Promise<void> => {
 		for (const path of changedPresenceFiles) {
 			// Normalize the path and seperate it on OS specific seperator
-			const normalizedPath = resolve(normalize(path)).split(sep),
-				metadataPath = join(normalizedPath.join(sep), "dist", "metadata.json"),
-				metadata = readJson<Metadata>(metadataPath),
-				apiVersion = (
-					await axios.post<{
-						data: {
-							presences: [{ metadata: { version: string } }];
-						};
-					}>("https://api.premid.app/v3", {
-						query: `{
+			try {
+				const normalizedPath = resolve(normalize(path)).split(sep),
+					metadataPath = join(
+						normalizedPath.join(sep),
+						"dist",
+						"metadata.json"
+					),
+					metadata = readJson<Metadata>(metadataPath),
+					apiVersion = (
+						await axios.post<{
+							data: {
+								presences: [{ metadata: { version: string } }];
+							};
+						}>("https://api.premid.app/v3", {
+							query: `{
 							presences(service: "${metadata.service}") {
 								metadata {
 									version
 								}
 							}
 						}`
-					})
-				).data.data.presences[0]?.metadata.version;
+						})
+					).data.data.presences[0]?.metadata.version;
 
-			if (metadata.version === apiVersion) {
-				const newVersion = inc(coerce(metadata.version), "patch");
-				writeJson({ ...metadata, version: newVersion }, metadataPath);
-				console.log(path);
+				if (metadata.version === apiVersion) {
+					const newVersion = inc(coerce(metadata.version), "patch");
+					writeJson({ ...metadata, version: newVersion }, metadataPath);
+					console.log(path);
+				}
+			} catch (e) {
+				console.error(e);
 			}
 		}
 	},

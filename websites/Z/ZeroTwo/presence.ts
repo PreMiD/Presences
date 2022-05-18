@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (!(await presence.getSetting<boolean>("incognito"))) {
-		presenceData.details = document.getElementById("premid").innerText;
+		presenceData.details = document.querySelector("#premid").textContent;
 		if (await presence.getSetting<boolean>("showTimestamp"))
 			presenceData.startTimestamp = browsingTimestamp;
 	}

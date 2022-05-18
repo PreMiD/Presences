@@ -11,30 +11,38 @@ presence.on("UpdateData", () => {
 		{ pathname } = document.location,
 		{ hostname } = document.location;
 
-	if (hostname === "fivem.net" || hostname === "www.fivem.net") {
-		presenceData.details = "Viewing:";
-		if (pathname === "/") presenceData.state = "Home Page";
-	} else if (
-		hostname === "docs.fivem.net" ||
-		hostname === "www.docs.fivem.net"
-	) {
-		presenceData.details = "Viewing documentation:";
-		if (pathname.startsWith("/docs/")) {
-			presenceData.state = document.querySelector(
-				"body > div > div > div > main > div > h1:nth-child(1)"
-			).textContent;
+	switch (hostname) {
+		case "fivem.net":
+		case "www.fivem.net": {
+			presenceData.details = "Viewing:";
+			if (pathname === "/") presenceData.state = "Home Page";
+
+			break;
 		}
-	} else if (
-		hostname === "servers.fivem.net" ||
-		hostname === "www.servers.fivem.net"
-	) {
-		presenceData.details = "Viewing server:";
-		if (pathname.startsWith("/servers/detail/")) {
-			presenceData.state = document.querySelector(
-				"body > app-root > div > div.app-root > servers > app-servers-detail > div.info.one-info > h1"
-			).textContent;
-		} else if (pathname === "/servers")
-			presenceData.details = "Seaching for a server";
+		case "docs.fivem.net":
+		case "www.docs.fivem.net": {
+			presenceData.details = "Viewing documentation:";
+			if (pathname.startsWith("/docs/")) {
+				presenceData.state = document.querySelector(
+					"body > div > div > div > main > div > h1:nth-child(1)"
+				).textContent;
+			}
+
+			break;
+		}
+		case "servers.fivem.net":
+		case "www.servers.fivem.net": {
+			presenceData.details = "Viewing server:";
+			if (pathname.startsWith("/servers/detail/")) {
+				presenceData.state = document.querySelector(
+					"body > app-root > div > div.app-root > servers > app-servers-detail > div.info.one-info > h1"
+				).textContent;
+			} else if (pathname === "/servers")
+				presenceData.details = "Seaching for a server";
+
+			break;
+		}
+		// No default
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

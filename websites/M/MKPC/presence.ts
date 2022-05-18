@@ -31,38 +31,54 @@ presence.on("UpdateData", async () => {
 			{ label: "Play Game", url: "https://mkpc.malahieude.net/mariokart.php" }
 		];
 		presenceData.smallImageKey = "wheel";
-	} else if (document.location.pathname === "/mariokart.php") {
-		presenceData.details = "browsing map's";
-		presenceData.smallImageKey = "search";
-	} else if (document.location.pathname === "/category.php") {
-		user = document.querySelector("html > body > main > h1");
-		presenceData.details = `Viewing the following category: ${user.textContent}`;
-		presenceData.smallImageKey = "search";
-		presenceData.buttons = [
-			{ label: "View category", url: document.location.href }
-		];
-	} else if (document.location.pathname === "/topic.php") {
-		user = document.querySelector("html > body > main > h1");
-		presenceData.details = `Viewing: ${user.textContent}`;
-		presenceData.smallImageKey = "search";
-		presenceData.buttons = [
-			{ label: "View topic", url: document.location.href }
-		];
-	} else if (
-		document.location.pathname === "/ban-player.php" ||
-		document.location.pathname === "/admin.php" ||
-		document.location.pathname === "doublecomptes.php"
-	)
-		presenceData.details = "Viewing staff backend";
-	else if (document.location.pathname === "/profil.php") {
-		user = document.querySelector(
-			"body > main > div > div.profile-summary > h1"
-		);
-		presenceData.details = `Viewing: ${user.textContent}`;
-		presenceData.smallImageKey = "search";
-		presenceData.buttons = [
-			{ label: "View profile", url: document.location.href }
-		];
+	} else {
+		switch (document.location.pathname) {
+			case "/mariokart.php": {
+				presenceData.details = "browsing map's";
+				presenceData.smallImageKey = "search";
+
+				break;
+			}
+			case "/category.php": {
+				user = document.querySelector("html > body > main > h1");
+				presenceData.details = `Viewing the following category: ${user.textContent}`;
+				presenceData.smallImageKey = "search";
+				presenceData.buttons = [
+					{ label: "View category", url: document.location.href }
+				];
+
+				break;
+			}
+			case "/topic.php": {
+				user = document.querySelector("html > body > main > h1");
+				presenceData.details = `Viewing: ${user.textContent}`;
+				presenceData.smallImageKey = "search";
+				presenceData.buttons = [
+					{ label: "View topic", url: document.location.href }
+				];
+
+				break;
+			}
+			case "/ban-player.php":
+			case "/admin.php":
+			case "doublecomptes.php": {
+				presenceData.details = "Viewing staff backend";
+				break;
+			}
+			case "/profil.php": {
+				user = document.querySelector(
+					"body > main > div > div.profile-summary > h1"
+				);
+				presenceData.details = `Viewing: ${user.textContent}`;
+				presenceData.smallImageKey = "search";
+				presenceData.buttons = [
+					{ label: "View profile", url: document.location.href }
+				];
+
+				break;
+			}
+			// No default
+		}
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

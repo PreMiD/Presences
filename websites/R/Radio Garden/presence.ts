@@ -21,30 +21,41 @@ presence.on("UpdateData", async () => {
 				startTimestamp: elapsed
 			};
 		currentState = document
-			.getElementsByClassName("_control_oyndo_11 _modPlay_oyndo_53")[0]
+			.querySelectorAll("._control_oyndo_11._modPlay_oyndo_53")[0]
 			.getAttribute("aria-label"); // get current state of the "button", not the "player", except when loading
 		if (currentState.length > 0) {
-			if (currentState === "stop") {
-				// currently playing
-				presenceData.smallImageKey = "statusplay";
-				presenceData.smallImageText = "Playing";
-				presenceData.details = details;
-				presenceData.state = state;
-				presenceData.startTimestamp = elapsed;
-			} else if (currentState === "loading") {
-				// currently loading
-				presenceData.smallImageKey = "statusplay";
-				presenceData.smallImageText = "Tuning";
-				presenceData.details = "Tuning";
-				delete presenceData.startTimestamp;
-				delete presenceData.state;
-			} else if (currentState === "play") {
-				// currently stopped
-				presenceData.smallImageKey = "statusstop";
-				presenceData.smallImageText = "Stopped";
-				delete presenceData.state;
-				presenceData.details = "Stopped";
-				delete presenceData.startTimestamp;
+			switch (currentState) {
+				case "stop": {
+					// currently playing
+					presenceData.smallImageKey = "statusplay";
+					presenceData.smallImageText = "Playing";
+					presenceData.details = details;
+					presenceData.state = state;
+					presenceData.startTimestamp = elapsed;
+
+					break;
+				}
+				case "loading": {
+					// currently loading
+					presenceData.smallImageKey = "statusplay";
+					presenceData.smallImageText = "Tuning";
+					presenceData.details = "Tuning";
+					delete presenceData.startTimestamp;
+					delete presenceData.state;
+
+					break;
+				}
+				case "play": {
+					// currently stopped
+					presenceData.smallImageKey = "statusstop";
+					presenceData.smallImageText = "Stopped";
+					delete presenceData.state;
+					presenceData.details = "Stopped";
+					delete presenceData.startTimestamp;
+
+					break;
+				}
+				// No default
 			}
 		}
 		presence.setActivity(presenceData);

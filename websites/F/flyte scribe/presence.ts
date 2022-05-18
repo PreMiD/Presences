@@ -9,15 +9,23 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp
 	};
 
-	if (document.location.pathname === "/")
-		presenceData.details = "Viewing the homepage";
-	else if (document.location.pathname === "/about/")
-		presenceData.details = "Looking at the blog info";
-	else if (document.location.pathname === "/flyte/")
-		presenceData.details = "Getting to know edo/flyte";
-	else {
-		presenceData.details = "Looking at a blog post";
-		presenceData.state = document.querySelector("h1.post-title").textContent;
+	switch (document.location.pathname) {
+		case "/": {
+			presenceData.details = "Viewing the homepage";
+			break;
+		}
+		case "/about/": {
+			presenceData.details = "Looking at the blog info";
+			break;
+		}
+		case "/flyte/": {
+			presenceData.details = "Getting to know edo/flyte";
+			break;
+		}
+		default: {
+			presenceData.details = "Looking at a blog post";
+			presenceData.state = document.querySelector("h1.post-title").textContent;
+		}
 	}
 
 	presence.setActivity(presenceData);

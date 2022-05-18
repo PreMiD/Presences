@@ -1,7 +1,7 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "SlowLife",
+		"name": "Slowlife",
 		"id": "374905512661221377"
 	},
 	"contributors": [
@@ -24,7 +24,7 @@
 		"www.bbc.co.uk",
 		"www.bbc.com"
 	],
-	"version": "2.0.12",
+	"version": "2.1.2",
 	"logo": "https://i.imgur.com/4GzQf9o.png",
 	"thumbnail": "https://i.imgur.com/fBxxQDw.png",
 	"color": "#000000",
@@ -33,6 +33,7 @@
 		"bbc",
 		"bbc-iplayer",
 		"bbc-sounds",
+		"series",
 		"movie",
 		"weather",
 		"bbc-weather",
@@ -43,6 +44,12 @@
 		{
 			"multiLanguage": true,
 			"id": "lang"
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fas fa-images",
+			"value": true
 		},
 		{
 			"id": "buttons",

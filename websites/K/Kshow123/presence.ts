@@ -100,40 +100,60 @@ presence.on("UpdateData", async () => {
 			).textContent;
 			presenceData.smallImageKey = "reading";
 		}
-	} else if (document.location.pathname === "/") {
-		presenceData.details = "Browsing through";
-		presenceData.state = "the main page";
-		presenceData.smallImageKey = "reading";
-	} else if (document.location.pathname === "/show/latest/") {
-		presenceData.details = "Browsing through";
-		presenceData.state = "the latest shows";
-		presenceData.smallImageKey = "reading";
-	} else if (document.location.pathname === "/show/popular/") {
-		presenceData.details = "Browsing through";
-		presenceData.state = "the most popular shows";
-		presenceData.smallImageKey = "reading";
-	} else if (document.location.pathname === "/show/rated/") {
-		presenceData.details = "Browsing through";
-		presenceData.state = "the highest rated shows";
-		presenceData.smallImageKey = "reading";
-	} else if (document.location.pathname === "/show/") {
-		presenceData.details = "Browsing through";
-		presenceData.state = "a list of all shows";
-		presenceData.smallImageKey = "reading";
-	} else if (document.location.pathname.includes("/show/")) {
-		presenceData.details = "Browsing through all episodes of:";
-		presenceData.state = document.querySelector(
-			"#info > div.media > div > h1 > a"
-		).textContent;
-		presenceData.smallImageKey = "reading";
+	} else {
+		switch (document.location.pathname) {
+			case "/": {
+				presenceData.details = "Browsing through";
+				presenceData.state = "the main page";
+				presenceData.smallImageKey = "reading";
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/search/")) {
-		presenceData.details = "Searching for:";
-		presenceData.state = document.querySelector(
-			"#featured > div.page-header > h3"
-		).textContent;
-		presenceData.smallImageKey = "search";
+				break;
+			}
+			case "/show/latest/": {
+				presenceData.details = "Browsing through";
+				presenceData.state = "the latest shows";
+				presenceData.smallImageKey = "reading";
+
+				break;
+			}
+			case "/show/popular/": {
+				presenceData.details = "Browsing through";
+				presenceData.state = "the most popular shows";
+				presenceData.smallImageKey = "reading";
+
+				break;
+			}
+			case "/show/rated/": {
+				presenceData.details = "Browsing through";
+				presenceData.state = "the highest rated shows";
+				presenceData.smallImageKey = "reading";
+
+				break;
+			}
+			case "/show/": {
+				presenceData.details = "Browsing through";
+				presenceData.state = "a list of all shows";
+				presenceData.smallImageKey = "reading";
+
+				break;
+			}
+			default:
+				if (document.location.pathname.includes("/show/")) {
+					presenceData.details = "Browsing through all episodes of:";
+					presenceData.state = document.querySelector(
+						"#info > div.media > div > h1 > a"
+					).textContent;
+					presenceData.smallImageKey = "reading";
+
+					presence.setActivity(presenceData);
+				} else if (document.location.pathname.includes("/search/")) {
+					presenceData.details = "Searching for:";
+					presenceData.state = document.querySelector(
+						"#featured > div.page-header > h3"
+					).textContent;
+					presenceData.smallImageKey = "search";
+				}
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

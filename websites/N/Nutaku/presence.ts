@@ -30,7 +30,7 @@ function getGameEntity(): GameEntity {
 	const object = Array.from(
 		document.querySelectorAll('script[type="application/ld+json"]')
 	)
-		.find(x => x.textContent.indexOf('"@type": "SoftwareApplication"') !== -1)
+		.find(x => x.textContent.includes('"@type": "SoftwareApplication"'))
 		?.textContent.replace(/\r?\n/g, ""); // filter out new lines - required by json
 	if (!object) return null;
 	return JSON.parse(object);

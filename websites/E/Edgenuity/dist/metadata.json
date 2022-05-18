@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Alexx",
 		"id": "604182077088202784"
@@ -15,7 +15,7 @@
 		"r22.core.learn.edgenuity.com",
 		"r23.core.learn.edgenuity.com"
 	],
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"logo": "https://i.imgur.com/FDv2y9V.png",
 	"thumbnail": "https://i.imgur.com/sEMMqUf.png",
 	"color": "#FF0000",

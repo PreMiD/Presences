@@ -17,8 +17,14 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = "Viewing leaderboard of server:";
 			presenceData.state = title.textContent;
-		} else if (document.querySelector(".pluginTitle")) {
-			title = document.querySelector(".pluginTitle");
+		} else if (
+			document.querySelector(
+				"#app-mount > div > div.sc-e2wlkd-0.ideomx > div.sc-e2wlkd-2.bnyPVx > div > div > div.sc-13ru8pb-14.bhtyFP > h4"
+			)
+		) {
+			title = document.querySelector(
+				"#app-mount > div > div.sc-e2wlkd-0.ideomx > div.sc-e2wlkd-2.bnyPVx > div > div > div.sc-13ru8pb-14.bhtyFP > h4"
+			);
 			presenceData.details = "Dashboard - Editing plugin:";
 			presenceData.state = title.textContent;
 			presenceData.smallImageKey = "writing";
@@ -36,7 +42,7 @@ presence.on("UpdateData", async () => {
 		search = document.querySelector<HTMLInputElement>(
 			"body > header > div.csh-wrapper > form > span > input"
 		);
-		if (search.textContent !== "") {
+		if (!search.textContent) {
 			presenceData.details = "Helpdesk searching for:";
 			presenceData.state = search.value;
 			presenceData.smallImageKey = "searching";

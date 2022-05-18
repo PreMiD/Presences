@@ -87,8 +87,8 @@ presence.on("UpdateData", async () => {
 					"#livestreaming-player__player_html5_api"
 				) as HTMLVideoElement;
 				if (video) {
-					presenceData.details = document.getElementsByClassName(
-						"b-livestreaming-detail__title section__title"
+					presenceData.details = document.querySelectorAll(
+						".b-livestreaming-detail__title.section__title"
 					)[1].textContent;
 					presenceData.state = document.querySelector(
 						".b-livestreaming-user__name"

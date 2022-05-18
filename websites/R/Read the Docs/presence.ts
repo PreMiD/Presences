@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 	}
 	const presenceData: PresenceData = {
 		largeImageKey: "icon",
-		startTimestamp: new Date().getTime()
+		startTimestamp: Date.now()
 	};
 	let loc = window.location.href;
 	if (loc.endsWith("/")) loc = loc.slice(0, -1); // remove trailing slash

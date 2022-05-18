@@ -45,7 +45,7 @@ presence.on("UpdateData", () => {
 				presenceData.state = `${pName} (${(pName === "Summary"
 					? document.querySelector(".prog-points").textContent
 					: document.querySelector(".twb").textContent
-				).replace(/ /g, "")})`;
+				).replaceAll(" ", "")})`;
 			} else if (path.startsWith("/dealership"))
 				presenceData.details = "Browsing the Dealership";
 			else if (path.startsWith("/friends"))
@@ -91,7 +91,7 @@ presence.on("UpdateData", () => {
 						.querySelector(
 							".gridTable-row.is-self > div:nth-child(4) > div:nth-child(2) > div:nth-child(2)"
 						)
-						.textContent.replace(/ /g, "")
+						.textContent.replaceAll(" ", "")
 						.replace(/\n/g, " ")}`;
 				}
 			} else if (PREMID_DEBUG_LOGGING) presenceData.details = path;

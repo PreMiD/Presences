@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Vasilis",
 		"id": "241929388403195914"
@@ -55,7 +55,7 @@
 		"voting.wolvesville.com",
 		"app.wolvesville.com"
 	],
-	"version": "1.2.1",
+	"version": "1.3.1",
 	"logo": "https://i.imgur.com/yowEwrw.png",
 	"thumbnail": "https://i.imgur.com/s5NhKcP.png",
 	"color": "#FF4181",
@@ -74,6 +74,15 @@
 			"value": false
 		},
 		{
+			"id": "clanTag",
+			"if": {
+				"privacy": false
+			},
+			"title": "Hide Clan Tag",
+			"icon": "fad fa-tag",
+			"value": false
+		},
+		{
 			"id": "privacyChat",
 			"if": {
 				"privacy": false
@@ -87,7 +96,7 @@
 			"if": {
 				"privacy": false
 			},
-			"title": "Show Mode Language",
+			"title": "Show Game Language",
 			"icon": "fad fa-flag",
 			"value": false
 		},
@@ -104,6 +113,7 @@
 			"value": 0,
 			"values": [
 				"Normal",
+				"White",
 				"No Background",
 				"Full Text Logo"
 			]

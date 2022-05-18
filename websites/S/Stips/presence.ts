@@ -185,24 +185,24 @@ presence.on("UpdateData", () => {
 			if (isDelete) details = xplrObj["/"].remove;
 			if (isEdit) details = xplrObj["/"].edit;
 
-			if (!details) {
-				// eslint-disable-next-line no-prototype-builtins
-				if (xplrObj.hasOwnProperty(PathSecond)) {
-					// seems like xplrObj[PathSecond] won't work
-					// let's do it manually then >'-'<
-					switch (PathSecond) {
-						case "/":
-							details = xplrObj["/"].main;
-							break;
-						case "hot":
-							details = xplrObj.hot.main;
-							break;
-						case "me":
-							details = xplrObj.me.main;
-							break;
-						default:
-							details = xplrObj.unknown;
-					}
+			if (
+				!details && // eslint-disable-next-line no-prototype-builtins
+				xplrObj.hasOwnProperty(PathSecond)
+			) {
+				// seems like xplrObj[PathSecond] won't work
+				// let's do it manually then >'-'<
+				switch (PathSecond) {
+					case "/":
+						details = xplrObj["/"].main;
+						break;
+					case "hot":
+						details = xplrObj.hot.main;
+						break;
+					case "me":
+						details = xplrObj.me.main;
+						break;
+					default:
+						details = xplrObj.unknown;
 				}
 			}
 
@@ -242,10 +242,9 @@ presence.on("UpdateData", () => {
 			isEdit = elemExists(".edit-view");
 
 			if (isDelete) {
-				isAns =
-					document
-						.querySelector("app-item-editor-delete .text-title")
-						.textContent.indexOf("תשובה") !== -1;
+				isAns = document
+					.querySelector("app-item-editor-delete .text-title")
+					.textContent.includes("תשובה");
 			}
 			if (isEdit) isAns = elemExists(".edit-view + mat-card.item-type-ans");
 

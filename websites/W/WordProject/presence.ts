@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = location,
+		{ pathname, href } = location,
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (pathname.startsWith("/index")) {
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Listen",
-						url: location.href
+						url: href
 					}
 				];
 			}
@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Listen",
-					url: location.href
+					url: href
 				}
 			];
 		}

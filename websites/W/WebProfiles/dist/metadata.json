@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Anaxes",
 		"id": "567885938160697377"
@@ -9,7 +9,7 @@
 		"en": "Let people know which social accounts are really you"
 	},
 	"url": "webprofiles.me",
-	"version": "1.0.7",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/dPN4dbK.png",
 	"thumbnail": "https://i.imgur.com/n0olPse.png",
 	"color": "#1E1E40",

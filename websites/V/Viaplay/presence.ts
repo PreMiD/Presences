@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 	};
 	const url = window.location.href;
 	if (url.includes("/player/")) {
-		const [video] = document.getElementsByTagName("video"),
+		const [video] = document.querySelectorAll("video"),
 			timestamps = presence.getTimestamps(
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)

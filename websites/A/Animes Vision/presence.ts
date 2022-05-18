@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = (await strings).episode.replace(
 			"{0}",
 			document
-				.getElementById("current_episode_name")
+				.querySelector("#current_episode_name")
 				.textContent.match(/\d+/g)[0]
 		);
 		if (!video.paused) {

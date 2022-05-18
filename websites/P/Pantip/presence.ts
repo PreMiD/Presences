@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 		} else if (path.pathname.includes("search")) {
 			presenceData.details = "กำลังค้นหา ";
 			presenceData.state =
-				document.getElementById("search-text").getAttribute("value") ??
+				document.querySelector("#search-text").getAttribute("value") ??
 				"ไม่ทราบการค้นหา";
 			presenceData.smallImageKey = "searching";
 		} else if (path.pathname.includes("topic")) {

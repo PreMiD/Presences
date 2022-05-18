@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = page
 					.replace("/zoek/", "")
 					.replace("-", " ")
-					.replace(/%20/g, " ");
+					.replaceAll("%20", " ");
 			} else {
 				presenceData.details = "Zoekt Voor:";
 				presenceData.state = title.textContent.replace(

@@ -92,19 +92,17 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname === "/category/slots")
 			presenceData.state = "Items by Slot";
 		else if (document.location.pathname.includes("/slot/")) {
-			const title = document.querySelector(
-				"#page-content > div > div.stats-body > div.stats-header > p"
-			);
 			presenceData.details = "Viewing item:";
-			presenceData.state = title.textContent;
+			presenceData.state = document.querySelector(
+				"#page-content > div > div.stats-body > div.stats-header > p"
+			).textContent;
 		} else if (document.location.pathname === "/category/classes")
 			presenceData.state = "Items by Class";
 		else if (document.location.pathname.includes("/class/")) {
-			const title = document.querySelector(
-				"#page-content > div > div.stats-body > div.stats-header > p"
-			);
 			presenceData.details = "Viewing item:";
-			presenceData.state = title.textContent;
+			presenceData.state = document.querySelector(
+				"#page-content > div > div.stats-body > div.stats-header > p"
+			).textContent;
 		} else presenceData.details = "This page doesn't exist you know :/";
 	} else if (document.location.pathname.includes("/u/")) {
 		presenceData.details = "Viewing a profile page:";

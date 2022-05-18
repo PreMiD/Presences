@@ -1,8 +1,8 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "PreMiD",
-		"id": "503557087041683458"
+		"name": "fror",
+		"id": "515668127829458945"
 	},
 	"service": "VLC",
 	"description": {
@@ -15,7 +15,7 @@
 		"localhost",
 		"127.0.0.1"
 	],
-	"version": "1.4.23",
+	"version": "1.4.26",
 	"logo": "https://i.imgur.com/WuzLOQu.png",
 	"thumbnail": "https://i.imgur.com/Bg2AFYN.png",
 	"color": "#ff7c00",

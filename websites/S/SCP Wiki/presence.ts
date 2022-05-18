@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Front Page";
 	else {
 		presenceData.state = document
-			.getElementById("page-title")
+			.querySelector("#page-title")
 			.textContent.trim();
 	}
 

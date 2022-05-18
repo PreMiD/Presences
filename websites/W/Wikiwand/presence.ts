@@ -43,7 +43,7 @@ const updateCallback = {
 	try {
 		title = document.querySelector("h1.firstHeading span").textContent;
 	} catch (e) {
-		title = decodeURI(currentPath.slice(1).join("/").replace(/_/g, " "));
+		title = decodeURI(currentPath.slice(1).join("/").replaceAll("_", " "));
 	}
 
 	if (currentPath[0] === "") presenceData.details = "On the main page";

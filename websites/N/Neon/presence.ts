@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 			details: "Browsing...",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = document.location;
+		{ pathname, search } = document.location;
 
 	if (pathname.includes("/series/")) {
 		presenceData.details = "Viewing series:";
@@ -97,11 +97,9 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-	} else if (document.location.search.startsWith("?")) {
+	} else if (search.startsWith("?")) {
 		presenceData.details = "Searching for:";
-		presenceData.state = new URLSearchParams(document.location.search).get(
-			"search"
-		);
+		presenceData.state = new URLSearchParams(search).get("search");
 	}
 
 	if (!(await presence.getSetting<boolean>("buttons")) && presenceData.buttons)

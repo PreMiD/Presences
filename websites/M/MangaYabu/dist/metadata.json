@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Nanashin",
 		"id": "330030557457022986"
@@ -12,7 +12,7 @@
 		"nl": "Met MangaYabu kan de gebruiker verschillende soorten manga's lezen met een comfort en zonder advertenties die het lezen belemmeren."
 	},
 	"url": "mangayabu.com",
-	"version": "1.1.12",
+	"version": "1.1.13",
 	"logo": "https://i.imgur.com/hJfEWAm.png",
 	"thumbnail": "https://i.imgur.com/yiwM0IG.png",
 	"color": "#3887ec",

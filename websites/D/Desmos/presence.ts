@@ -24,16 +24,13 @@ presence.on("UpdateData", async () => {
 	if (url.includes("/calculator")) {
 		// Graphing Calculator
 		graphing = 2; // "Plotting a Graph: "
-		title =
-			document.getElementsByClassName("dcg-variable-title")[0].textContent;
-		numEquations = document.getElementsByClassName(
-			"dcg-template-expressioneach"
-		)[0].childElementCount;
+		title = document.querySelectorAll(".dcg-variable-title")[0].textContent;
+		numEquations = document.querySelectorAll(".dcg-template-expressioneach")[0]
+			.childElementCount;
 	} else if (url.includes("/geometry")) {
 		// Geometry Tool
 		graphing = 1; // "Using Desmos Geometry: "
-		title =
-			document.getElementsByClassName("dcg-variable-title")[0].textContent;
+		title = document.querySelectorAll(".dcg-variable-title")[0].textContent;
 		pageType = "Geometry";
 		numEquations = 0;
 	} else if (
@@ -43,10 +40,10 @@ presence.on("UpdateData", async () => {
 		if (pageType === "Scientific" || pageType === "Fourfunction") {
 			// These three use a different container for equations
 			numEquations =
-				document.getElementsByClassName("dcg-basic-list")[0].childElementCount;
+				document.querySelectorAll(".dcg-basic-list")[0].childElementCount;
 		} else if (pageType === "Matrix") {
 			numEquations =
-				document.getElementsByClassName("dcg-matrix-list")[0].childElementCount;
+				document.querySelectorAll(".dcg-matrix-list")[0].childElementCount;
 		} else numEquations = 0;
 	} else graphing = 0;
 	// Setting Presence

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -14,7 +14,7 @@
 		"www.hepsiburada.com",
 		"hepsiburada.com"
 	],
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/5AozcKg.png",
 	"thumbnail": "https://i.imgur.com/WnZo2SR.png",
 	"color": "#ff6000",

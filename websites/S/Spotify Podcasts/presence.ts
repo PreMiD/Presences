@@ -99,101 +99,129 @@ presence.on("UpdateData", async () => {
 	if (!podcast) {
 		if (timestamps) presenceData.startTimestamp = browsingStamp;
 		presenceData.smallImageKey = "reading";
-		if (document.location.hostname === "open.spotify.com") {
-			if (document.location.pathname.includes("browse/featured")) {
-				presenceData.details = strings.browse;
-				presenceData.state = strings.featured;
-			} else if (document.location.pathname.includes("browse/podcasts")) {
-				presenceData.details = strings.browse;
-				presenceData.state = strings.bestPodcasts;
-			} else if (document.location.pathname.includes("browse/charts"))
-				presenceData.details = strings.charts;
-			else if (document.location.pathname.includes("browse/genres"))
-				presenceData.details = strings.genres;
-			else if (document.location.pathname.includes("browse/newreleases"))
-				presenceData.details = strings.latest;
-			else if (document.location.pathname.includes("browse/discover"))
-				presenceData.details = strings.discover;
-			else if (document.location.pathname.includes("/search/")) {
-				search = document.querySelector("input");
-				searching = true;
-				presenceData.details = strings.searchFor;
-				presenceData.state = search.value;
-				if (search.value.length <= 3) presenceData.state = "something...";
+		switch (document.location.hostname) {
+			case "open.spotify.com": {
+				if (document.location.pathname.includes("browse/featured")) {
+					presenceData.details = strings.browse;
+					presenceData.state = strings.featured;
+				} else if (document.location.pathname.includes("browse/podcasts")) {
+					presenceData.details = strings.browse;
+					presenceData.state = strings.bestPodcasts;
+				} else if (document.location.pathname.includes("browse/charts"))
+					presenceData.details = strings.charts;
+				else if (document.location.pathname.includes("browse/genres"))
+					presenceData.details = strings.genres;
+				else if (document.location.pathname.includes("browse/newreleases"))
+					presenceData.details = strings.latest;
+				else if (document.location.pathname.includes("browse/discover"))
+					presenceData.details = strings.discover;
+				else if (document.location.pathname.includes("/search/")) {
+					search = document.querySelector("input");
+					searching = true;
+					presenceData.details = strings.searchFor;
+					presenceData.state = search.value;
+					if (search.value.length <= 3) presenceData.state = "something...";
 
-				presenceData.smallImageKey = "search";
-			} else if (document.location.pathname.includes("/search")) {
-				searching = true;
-				presenceData.details = strings.search;
-				presenceData.smallImageKey = "search";
-			} else if (document.location.pathname.includes("collection/playlists")) {
-				presenceData.details = strings.browse;
-				presenceData.state = strings.playlist;
-			} else if (
-				document.location.pathname.includes("collection/made-for-you")
-			) {
-				presenceData.details = strings.browse;
-				presenceData.state = strings.forMeh;
-			} else if (document.location.pathname.includes("collection/tracks")) {
-				presenceData.details = strings.browse;
-				presenceData.state = strings.songLike;
-			} else if (document.location.pathname.includes("collection/albums")) {
-				presenceData.details = strings.browse;
-				presenceData.state = strings.albumLike;
-			} else if (document.location.pathname.includes("collection/artists")) {
-				presenceData.details = strings.browse;
-				presenceData.state = strings.artistLike;
-			} else if (document.location.pathname.includes("collection/podcasts")) {
-				presenceData.details = strings.browse;
-				presenceData.state = strings.podcastLike;
-			} else if (document.location.pathname.includes("/playlist/")) {
-				title = document.querySelector(
-					"div.main-view-container__scroll-node-child > section > div > div > span > button > h1"
-				).textContent;
-				presenceData.details = strings.viewPlaylist;
-				presenceData.state = title;
-				delete presenceData.smallImageKey;
-			} else if (document.location.pathname.includes("/show/")) {
-				title = document.querySelector(
-					"div.main-view-container__scroll-node-child > section > div > div > h1"
-				).textContent;
-				presenceData.details = strings.show;
-				presenceData.state = title;
-				delete presenceData.smallImageKey;
-			} else if (document.location.pathname.includes("/settings")) {
-				presenceData.details = strings.account;
-				delete presenceData.smallImageKey;
+					presenceData.smallImageKey = "search";
+				} else if (document.location.pathname.includes("/search")) {
+					searching = true;
+					presenceData.details = strings.search;
+					presenceData.smallImageKey = "search";
+				} else if (
+					document.location.pathname.includes("collection/playlists")
+				) {
+					presenceData.details = strings.browse;
+					presenceData.state = strings.playlist;
+				} else if (
+					document.location.pathname.includes("collection/made-for-you")
+				) {
+					presenceData.details = strings.browse;
+					presenceData.state = strings.forMeh;
+				} else if (document.location.pathname.includes("collection/tracks")) {
+					presenceData.details = strings.browse;
+					presenceData.state = strings.songLike;
+				} else if (document.location.pathname.includes("collection/albums")) {
+					presenceData.details = strings.browse;
+					presenceData.state = strings.albumLike;
+				} else if (document.location.pathname.includes("collection/artists")) {
+					presenceData.details = strings.browse;
+					presenceData.state = strings.artistLike;
+				} else if (document.location.pathname.includes("collection/podcasts")) {
+					presenceData.details = strings.browse;
+					presenceData.state = strings.podcastLike;
+				} else if (document.location.pathname.includes("/playlist/")) {
+					title = document.querySelector(
+						"div.main-view-container__scroll-node-child > section > div > div > span > button > h1"
+					).textContent;
+					presenceData.details = strings.viewPlaylist;
+					presenceData.state = title;
+					delete presenceData.smallImageKey;
+				} else if (document.location.pathname.includes("/show/")) {
+					title = document.querySelector(
+						"div.main-view-container__scroll-node-child > section > div > div > h1"
+					).textContent;
+					presenceData.details = strings.show;
+					presenceData.state = title;
+					delete presenceData.smallImageKey;
+				} else if (document.location.pathname.includes("/settings")) {
+					presenceData.details = strings.account;
+					delete presenceData.smallImageKey;
+				}
+
+				break;
 			}
-		} else if (document.location.hostname === "support.spotify.com") {
-			presenceData.details = strings.browse;
-			presenceData.state = "Support Center";
-		} else if (document.location.hostname === "investors.spotify.com") {
-			presenceData.details = strings.browse;
-			presenceData.state = "Support Center";
-		} else if (document.location.hostname === "developer.spotify.com") {
-			presenceData.details = strings.browse;
-			presenceData.state = "Spotify for Developers";
-		} else if (document.location.hostname === "artists.spotify.com") {
-			presenceData.details = strings.browse;
-			presenceData.state = "Spotify for Artists";
-		} else if (document.location.hostname === "newsroom.spotify.com") {
-			presenceData.details = strings.browse;
-			presenceData.state = "Spotify for Newsroom";
-		} else if (document.location.hostname === "podcasters.spotify.com") {
-			presenceData.details = strings.browse;
-			presenceData.state = "Spotify for Podcasters";
-		} else if (document.location.hostname === "www.spotify.com") {
-			if (document.location.pathname.includes("/premium")) {
-				presenceData.details = strings.viewing;
-				presenceData.state = "Spotify Premium";
-				delete presenceData.smallImageKey;
-			} else if (document.location.pathname.includes("/download")) {
-				presenceData.details = strings.download;
-				presenceData.smallImageKey = "downloading";
-			} else if (document.location.pathname.includes("/account")) {
-				presenceData.details = strings.account;
-				delete presenceData.smallImageKey;
+			case "support.spotify.com": {
+				presenceData.details = strings.browse;
+				presenceData.state = "Support Center";
+
+				break;
 			}
+			case "investors.spotify.com": {
+				presenceData.details = strings.browse;
+				presenceData.state = "Support Center";
+
+				break;
+			}
+			case "developer.spotify.com": {
+				presenceData.details = strings.browse;
+				presenceData.state = "Spotify for Developers";
+
+				break;
+			}
+			case "artists.spotify.com": {
+				presenceData.details = strings.browse;
+				presenceData.state = "Spotify for Artists";
+
+				break;
+			}
+			case "newsroom.spotify.com": {
+				presenceData.details = strings.browse;
+				presenceData.state = "Spotify for Newsroom";
+
+				break;
+			}
+			case "podcasters.spotify.com": {
+				presenceData.details = strings.browse;
+				presenceData.state = "Spotify for Podcasters";
+
+				break;
+			}
+			case "www.spotify.com": {
+				if (document.location.pathname.includes("/premium")) {
+					presenceData.details = strings.viewing;
+					presenceData.state = "Spotify Premium";
+					delete presenceData.smallImageKey;
+				} else if (document.location.pathname.includes("/download")) {
+					presenceData.details = strings.download;
+					presenceData.smallImageKey = "downloading";
+				} else if (document.location.pathname.includes("/account")) {
+					presenceData.details = strings.account;
+					delete presenceData.smallImageKey;
+				}
+
+				break;
+			}
+			// No default
 		}
 		const control = document.querySelector<HTMLButtonElement>(
 			"div.player-controls__buttons > button:nth-child(3)"

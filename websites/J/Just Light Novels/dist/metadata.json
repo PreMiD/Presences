@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Nekolen",
 		"id": "270125856679002113"
@@ -16,7 +16,7 @@
 		"nl": "Gewoon lichte romans! Huis van alle lichte romans"
 	},
 	"url": "justlightnovels.com",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/O2Xalve.png",
 	"thumbnail": "https://i.imgur.com/KWY5wqt.png",
 	"color": "#0000ff",

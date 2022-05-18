@@ -2,7 +2,7 @@ const koliFrame = new iFrame();
 
 let currentMonster: string | null = null;
 function updateCombat(i: iFrame) {
-	const name = document.getElementById("monname");
+	const name = document.querySelector("#monname");
 
 	if (name) {
 		const monster = name.textContent;
@@ -34,7 +34,7 @@ function updateCharpane(i: iFrame) {
 	const nonCompactContainer = document.querySelector<HTMLElement>(
 			'img[alt="Adventures Remaining"] ~ span'
 		),
-		compactContainer = document.getElementById("lastadvmenu"),
+		compactContainer = document.querySelector("#lastadvmenu"),
 		chitContainer = document.querySelector<HTMLElement>(
 			'img[src$="slimhourglass.gif"]'
 		);
@@ -49,12 +49,13 @@ function updateCharpane(i: iFrame) {
 	} else if (chitContainer)
 		adventures = Number(chitContainer.previousSibling.textContent);
 
-	if (adventures !== -1) {
-		if (adventures !== currentAdventures || Date.now() - lastPing > 10_000) {
-			currentAdventures = adventures;
-			lastPing = Date.now();
-			return i.send({ type: "ADVENTURES", payload: adventures });
-		}
+	if (
+		adventures !== -1 &&
+		(adventures !== currentAdventures || Date.now() - lastPing > 10_000)
+	) {
+		currentAdventures = adventures;
+		lastPing = Date.now();
+		return i.send({ type: "ADVENTURES", payload: adventures });
 	}
 }
 

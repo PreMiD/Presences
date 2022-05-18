@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Nanashin",
 		"id": "330030557457022986"
@@ -12,7 +12,7 @@
 		"nl": "Een Braziliaanse scanlator die webtoons en manga's maakt"
 	},
 	"url": "markscans.online",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/yDmQsYg.png",
 	"thumbnail": "https://i.imgur.com/QEdn2iJ.png",
 	"color": "#0090ed",

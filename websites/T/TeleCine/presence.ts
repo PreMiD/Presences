@@ -71,6 +71,7 @@ presence.on("UpdateData", async () => {
 				"body > div > div > div > div > section > div > div > h1"
 			).textContent;
 			presenceData.state = "Visualizando página do filme...";
+			presenceData.smallImageKey = "reading";
 			if (video) {
 				presenceData.details = document.querySelector(
 					"body > div > div > div > div > section > div > div > h1"

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "creeperkafasipw",
 		"id": "442685489833705483"
@@ -12,7 +12,7 @@
 		"staging.holodex.net",
 		"holodex.net"
 	],
-	"version": "1.0.7",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/ywSCOHi.png",
 	"thumbnail": "https://i.imgur.com/FM9qnIG.png",
 	"color": "#64b5f6",

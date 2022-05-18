@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 		)?.textContent;
 		presenceData.details = "Viewing user:";
 		presenceData.state = `${username || "Unknown"} - ❤️ ${
-			document.getElementById("likes-count")?.textContent || 0
+			document.querySelector("#likes-count")?.textContent || 0
 		}`;
 		presenceData.buttons = [
 			{

@@ -8,27 +8,18 @@ presence.on("UpdateData", () => {
 	};
 
 	if (window.location.href.toLowerCase().includes("scratch.mit.edu")) {
-		if (window.location.pathname === "") {
+		if (window.location.pathname === "" || window.location.pathname === "/") {
 			presenceData.details = "Community:";
 			presenceData.state = "Viewing public projects";
 		}
-		if (window.location.pathname === "/") {
-			presenceData.details = "Community:";
-			presenceData.state = "Viewing public projects";
-		}
-		if (window.location.pathname.toLowerCase().includes("/projects/editor")) {
+		if (
+			window.location.pathname.toLowerCase().includes("/projects") ||
+			window.location.pathname.toLowerCase().includes("/editor")
+		) {
 			presenceData.details = "Editing a project:";
-			if (
-				window.location.pathname
-					.toLowerCase()
-					.includes("/projects/editor/?tutorial=getstarted")
-			)
+			if (window.location.href.toLowerCase().includes("/?tutorial=getstarted"))
 				presenceData.state = "Tutorial";
-			else if (
-				window.location.pathname
-					.toLowerCase()
-					.includes("/projects/editor/?tutorial=all")
-			) {
+			else if (window.location.href.toLowerCase().includes("/?tutorial=all")) {
 				presenceData.details = "Viewing projects:";
 				presenceData.state = "Tutorials";
 			} else if (
@@ -240,18 +231,60 @@ presence.on("UpdateData", () => {
 		}
 	}
 	if (window.location.hostname.toLowerCase().includes("scratch-wiki.info")) {
-		presenceData.details = "Viewing page:";
-		presenceData.state = "Wiki";
+		switch (window.location.hostname.toLowerCase()) {
+			case "en.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "English Scratch Wiki";
+				break;
+			case "de.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "German Scratch Wiki";
+				break;
+			case "ru.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Russian Scratch Wiki";
+				break;
+			case "nl.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Dutch Scratch Wiki";
+				break;
+			case "id.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Indonesian Scratch Wiki";
+				break;
+			case "ja.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Japanese Scratch Wiki";
+				break;
+			case "hu.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Hungarian Scratch Wiki";
+				break;
+			case "fr.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "French Scratch Wiki";
+				break;
+			case "test.scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Test Scratch Wiki";
+				break;
+			case "scratch-wiki.info":
+				presenceData.details = "Viewing page:";
+				presenceData.state = "Scratch Wiki";
+				break;
+		}
 	}
 	if (window.location.hostname.toLowerCase().includes("scratchjr.org")) {
 		presenceData.details = "Viewing page:";
 		presenceData.state = "Scratch JR";
 	}
-	if (window.location.hostname.toLowerCase().includes("donationpay.org")) {
-		if (window.location.pathname.toLowerCase().includes("/scratchfoundation")) {
-			presenceData.details = "Viewing page:";
-			presenceData.state = "Donate";
-		}
+	if (
+		window.location.href
+			.toLowerCase()
+			.includes("donationpay.org/scratchfoundation")
+	) {
+		presenceData.details = "Viewing page:";
+		presenceData.state = "Donate";
 	}
 	if (
 		window.location.hostname.toLowerCase().includes("scratched.gse.harvard.edu")

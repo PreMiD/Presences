@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `${document.location.pathname.split("/")[2]}/${
 				document.location.pathname.split("/")[3]
 			}`;
-		} else [, , presenceData.state] = document.location.pathname.split("/");
+		} else presenceData.state = document.location.pathname.split("/")[2];
 	} else if (document.location.pathname.startsWith("/~")) {
 		presenceData.details = "Viewing a profile...";
 		presenceData.state = document.location.pathname.substr(3);

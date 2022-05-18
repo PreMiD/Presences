@@ -47,22 +47,48 @@ const presence = new Presence({
 	},
 	coverUrls: Record<string, string> = {};
 
-function fetchCover(): Promise<string> {
+/* eslint-disable camelcase */
+function getToken(): Promise<string> {
 	return new Promise(resolve => {
-		fetch(
+		fetch("https://oauth.api.hbo.com/auth/tokens", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
+				client_secret: crypto.randomUUID(),
+				scope: "browse video_playback",
+				grant_type: "client_credentials",
+				deviceSerialNumber: crypto.randomUUID(),
+				clientDeviceData: {
+					paymentProviderCode: "blackmarket"
+				}
+			})
+		})
+			.then(x => x.json())
+			.then(x => resolve(x.access_token));
+	});
+}
+/* eslint-enable camelcase */
+
+async function fetchCover() {
+	const response = await (
+		await fetch(
 			`https://comet.api.hbo.com/express-content/${
 				location.pathname.split("/")[2]
-			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`
+			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US&language=en-us`,
+			{
+				headers: {
+					authorization: `Bearer ${await getToken()}`
+				}
+			}
 		)
-			.then(x => x.json())
-			.then(x =>
-				resolve(
-					`https://artist.api.cdn.hbo.com/images/${
-						x[0].body.references.series.match(/series:([^:]+)/)[1]
-					}/tileburnedin?size=1024x1024`
-				)
-			);
-	});
+	).json();
+
+	return `https://artist.api.cdn.hbo.com/images/${
+		response[0].body.references.series.match(/series:([^:]+)/)[1]
+	}/tileburnedin?size=1024x1024`;
 }
 
 presence.on("UpdateData", async () => {

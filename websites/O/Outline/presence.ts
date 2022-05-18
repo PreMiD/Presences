@@ -40,42 +40,54 @@ const updateCallback = {
 ((): void => {
 	if (document.querySelector("outline-not-found"))
 		presenceData.details = "On a non-existent page";
-	else if (currentPath[0] === "terms.html")
-		presenceData.details = "Reading the terms";
-	else if (currentPath[0] === "privacy.html")
-		presenceData.details = "Reading the privacy policy";
-	else if (currentPath[0] === "dmca.html")
-		presenceData.details = "Reading the DMCA page";
-	else if (currentPath[0] === "report.html")
-		presenceData.details = "Reporting an article";
 	else {
-		let loadedPath: string,
-			forceUpdate = false,
-			presenceDataPlaced: PresenceData = {};
-		updateCallback.function = (): void => {
-			if (loadedPath !== currentURL.pathname || forceUpdate) {
-				loadedPath = currentURL.pathname;
-				try {
-					if (document.querySelector("outline-not-found"))
-						presenceData.details = "On a non-existent page";
-					else if (currentPath[0] === "")
-						presenceData.details = "On the home page";
-					else {
-						presenceData.details = document.querySelector("h1").textContent;
-						[presenceData.state] = document
-							.querySelector(".publication")
-							.textContent.trim()
-							.split(" ›");
-					}
-				} catch (error) {
-					forceUpdate = true;
-					resetData();
-					presenceData.details = "Loading...";
-				}
-				presenceDataPlaced = presenceData;
-				forceUpdate = false;
-			} else presenceData = presenceDataPlaced;
-		};
+		switch (currentPath[0]) {
+			case "terms.html": {
+				presenceData.details = "Reading the terms";
+				break;
+			}
+			case "privacy.html": {
+				presenceData.details = "Reading the privacy policy";
+				break;
+			}
+			case "dmca.html": {
+				presenceData.details = "Reading the DMCA page";
+				break;
+			}
+			case "report.html": {
+				presenceData.details = "Reporting an article";
+				break;
+			}
+			default: {
+				let loadedPath: string,
+					forceUpdate = false,
+					presenceDataPlaced: PresenceData = {};
+				updateCallback.function = (): void => {
+					if (loadedPath !== currentURL.pathname || forceUpdate) {
+						loadedPath = currentURL.pathname;
+						try {
+							if (document.querySelector("outline-not-found"))
+								presenceData.details = "On a non-existent page";
+							else if (currentPath[0] === "")
+								presenceData.details = "On the home page";
+							else {
+								presenceData.details = document.querySelector("h1").textContent;
+								[presenceData.state] = document
+									.querySelector(".publication")
+									.textContent.trim()
+									.split(" ›");
+							}
+						} catch (error) {
+							forceUpdate = true;
+							resetData();
+							presenceData.details = "Loading...";
+						}
+						presenceDataPlaced = presenceData;
+						forceUpdate = false;
+					} else presenceData = presenceDataPlaced;
+				};
+			}
+		}
 	}
 })();
 

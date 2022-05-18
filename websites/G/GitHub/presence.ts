@@ -50,29 +50,25 @@ presence.on("UpdateData", async () => {
 				details: "Viewing subscriptions"
 			}
 		},
-		{ pathname } = document.location,
+		{ pathname, search, href } = document.location,
 		[cover, timestamp] = await Promise.all([
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("timestamp")
 		]);
 
 	for (const [path, data] of Object.entries(pages)) {
-		if (document.location.pathname.includes(`/${path}`))
+		if (pathname.includes(`/${path}`))
 			presenceData = { ...presenceData, ...data };
 	}
 
 	switch (true) {
 		// * For Profiles
 		case !!document.querySelector<HTMLBodyElement>("body.page-profile"):
-			const searchParam = new URLSearchParams(document.location.search).get(
-					"tab"
-				),
+			const searchParam = new URLSearchParams(search).get("tab"),
 				profileName = document
 					.querySelector("span.p-nickname")
 					.textContent.trim();
-			presenceData.buttons = [
-				{ label: "View Profile", url: document.location.href }
-			];
+			presenceData.buttons = [{ label: "View Profile", url: href }];
 			if (cover) {
 				presenceData.largeImageKey = `${
 					document.querySelector<HTMLImageElement>("img.avatar").src
@@ -87,14 +83,12 @@ presence.on("UpdateData", async () => {
 			"div#repository-container-header"
 		):
 			const repository = {
-				owner: document.location.pathname.split("/")[1],
-				name: document.location.pathname.split("/")[2],
-				target: document.location.pathname.split("/")[4],
-				id: document.location.pathname.split("/")[4]
+				owner: pathname.split("/")[1],
+				name: pathname.split("/")[2],
+				target: pathname.split("/")[4],
+				id: pathname.split("/")[4]
 			};
-			presenceData.buttons = [
-				{ label: "View Repository", url: document.location.href }
-			];
+			presenceData.buttons = [{ label: "View Repository", url: href }];
 			if (cover) {
 				presenceData.largeImageKey = `https://avatars.githubusercontent.com/u/${
 					document.querySelector<HTMLMetaElement>(
@@ -105,7 +99,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.includes("/tree/")) {
 				presenceData.details = `Browsing repository ${repository.owner}/${repository.name}`;
 
-				presenceData.state = `In folder ${document.location.pathname
+				presenceData.state = `In folder ${pathname
 					.split("/")
 					.slice(4)
 					.join("/")}`;
@@ -124,9 +118,7 @@ presence.on("UpdateData", async () => {
 						document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
 							.textContent
 					}`;
-					presenceData.buttons = [
-						{ label: "View Issue", url: document.location.href }
-					];
+					presenceData.buttons = [{ label: "View Issue", url: href }];
 				} else {
 					presenceData.details = "Browsing issues";
 					presenceData.state = `${repository.owner}/${repository.name}`;
@@ -143,9 +135,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
 						.textContent
 				}`;
-				presenceData.buttons = [
-					{ label: "View Pull Request", url: document.location.href }
-				];
+				presenceData.buttons = [{ label: "View Pull Request", url: href }];
 			} else if (pathname.endsWith("/discussions")) {
 				presenceData.details = "Browsing discussions in";
 				presenceData.state = `${repository.owner}/${repository.name}`;
@@ -158,19 +148,17 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
 						.textContent
 				}`;
-				presenceData.buttons = [
-					{ label: "View Discussion", url: document.location.href }
-				];
+				presenceData.buttons = [{ label: "View Discussion", url: href }];
 			} else if (
-				document.location.pathname.includes("/pulse") ||
-				document.location.pathname.includes("/graphs/contributors") ||
-				document.location.pathname.includes("/community") ||
-				document.location.pathname.includes("/graphs/commit-activity") ||
-				document.location.pathname.includes("/graphs/code-frequency") ||
-				document.location.pathname.includes("/network/dependencies") ||
-				document.location.pathname.includes("/graphs/commit-activity") ||
-				document.location.pathname.includes("/network") ||
-				document.location.pathname.includes("/network/members")
+				pathname.includes("/pulse") ||
+				pathname.includes("/graphs/contributors") ||
+				pathname.includes("/community") ||
+				pathname.includes("/graphs/commit-activity") ||
+				pathname.includes("/graphs/code-frequency") ||
+				pathname.includes("/network/dependencies") ||
+				pathname.includes("/graphs/commit-activity") ||
+				pathname.includes("/network") ||
+				pathname.includes("/network/members")
 			) {
 				presenceData.details = `Browsing insights of ${repository.owner} / ${repository.name}`;
 
@@ -194,17 +182,17 @@ presence.on("UpdateData", async () => {
 				}`;
 			}
 			break;
-		case document.location.pathname.includes("/orgs/"):
-			presenceData.details = `Viewing ${
-				document.location.pathname.split("/")[2]
-			}'s ${document.location.pathname.split("/")[3]}`;
+		case pathname.includes("/orgs/"):
+			presenceData.details = `Viewing ${pathname.split("/")[2]}'s ${
+				pathname.split("/")[3]
+			}`;
 			if (cover) {
 				presenceData.largeImageKey = `${
 					document.querySelector<HTMLImageElement>("h1 > a > img").src
 				}`;
 			}
 			break;
-		case document.location.pathname === "/" || !document.location.pathname:
+		case pathname === "/" || !pathname:
 			presenceData.details = "Viewing the home page";
 			break;
 	}

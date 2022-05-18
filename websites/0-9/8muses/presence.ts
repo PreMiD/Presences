@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname.split("/")[2].includes("")) {
 			presenceData.details = `${comicName} - ${document.location.pathname
 				.split("/")[2]
-				.replace(/_/g, " ")}`;
+				.replaceAll("_", " ")}`;
 			presenceData.state = issueNumber;
 			presenceData.smallImageKey = "reading";
 		} else {

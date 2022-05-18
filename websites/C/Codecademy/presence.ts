@@ -5,7 +5,7 @@ const presence = new Presence({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
 	}),
-	start = new Date().getTime();
+	start = Date.now();
 let videoTitle: string,
 	videoCurrentTime: number,
 	videoDuration: number,
@@ -86,18 +86,16 @@ presence.on("UpdateData", async () => {
 			premiumPath = false;
 			if (heading.className.startsWith("trackTitle__")) premiumPath = true;
 			heading = heading.textContent;
-			if (pathArray[0] === "courses") {
-				if (heading.startsWith("Learn ")) {
-					presenceData.smallImageKey = heading
-						.split(" ")
-						.slice(1)
-						.join(" ")
-						.toLowerCase()
-						.replace(" ", "_")
-						.replace("+", "plus")
-						.replace("#", "sharp");
-					presenceData.smallImageText = heading.split(" ").slice(1).join(" ");
-				}
+			if (pathArray[0] === "courses" && heading.startsWith("Learn ")) {
+				presenceData.smallImageKey = heading
+					.split(" ")
+					.slice(1)
+					.join(" ")
+					.toLowerCase()
+					.replace(" ", "_")
+					.replace("+", "plus")
+					.replace("#", "sharp");
+				presenceData.smallImageText = heading.split(" ").slice(1).join(" ");
 			}
 			presenceData.details = heading.startsWith("Learn ")
 				? `Learning ${heading.split(" ").slice(1).join(" ")}`

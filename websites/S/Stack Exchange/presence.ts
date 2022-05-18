@@ -10,30 +10,47 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, hostname } = window.location;
 
-	if (hostname === "stackexchange.com") presenceData.details = "Browsing";
-	else if (hostname === "serverfault.com") {
-		presenceData.largeImageKey = "serverfault";
-		presenceData.details = "Server Fault";
-	} else if (hostname === "meta.serverfault.com") {
-		presenceData.largeImageKey = "serverfault";
-		presenceData.details = "Server Fault Meta";
-	} else if (hostname === "superuser.com") {
-		presenceData.largeImageKey = "superuser";
-		presenceData.details = "Super User";
-	} else if (hostname === "meta.superuser.com") {
-		presenceData.largeImageKey = "superuser";
-		presenceData.details = "Super User Meta";
-	} else {
-		const imageKey = hostname.replace(".stackexchange.com", "");
-		if (imageKey === "meta") presenceData.smallImageKey = imageKey;
-		else presenceData.smallImageKey = imageKey.replace(".meta", "");
+	switch (hostname) {
+		case "stackexchange.com": {
+			presenceData.details = "Browsing";
+			break;
+		}
+		case "serverfault.com": {
+			presenceData.largeImageKey = "serverfault";
+			presenceData.details = "Server Fault";
 
-		presenceData.smallImageText = document
-			.querySelector("meta[property='og:site_name']")
-			.getAttribute("content")
-			.replace("Stack Exchange", "");
-		if (pathname.includes("/questions"))
-			presenceData.details = "Reading a question";
+			break;
+		}
+		case "meta.serverfault.com": {
+			presenceData.largeImageKey = "serverfault";
+			presenceData.details = "Server Fault Meta";
+
+			break;
+		}
+		case "superuser.com": {
+			presenceData.largeImageKey = "superuser";
+			presenceData.details = "Super User";
+
+			break;
+		}
+		case "meta.superuser.com": {
+			presenceData.largeImageKey = "superuser";
+			presenceData.details = "Super User Meta";
+
+			break;
+		}
+		default: {
+			const imageKey = hostname.replace(".stackexchange.com", "");
+			if (imageKey === "meta") presenceData.smallImageKey = imageKey;
+			else presenceData.smallImageKey = imageKey.replace(".meta", "");
+
+			presenceData.smallImageText = document
+				.querySelector("meta[property='og:site_name']")
+				.getAttribute("content")
+				.replace("Stack Exchange", "");
+			if (pathname.includes("/questions"))
+				presenceData.details = "Reading a question";
+		}
 	}
 
 	if (pathname === "/") {

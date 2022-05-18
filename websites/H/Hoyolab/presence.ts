@@ -8,10 +8,10 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = document.location;
+		{ pathname, search } = document.location;
 	if (pathname === "/genshin/") presenceData.details = "Viewing the Homepage";
 	else if (pathname.endsWith("/home/1")) {
-		switch (document.location?.search?.substr(6)) {
+		switch (search?.substr(6)) {
 			case "create":
 				presenceData.details = "Viewing tavern page";
 				presenceData.state = "New";
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Hot";
 		}
 	} else if (pathname.endsWith("/home/3")) {
-		switch (document.location?.search?.substr(6)) {
+		switch (search?.substr(6)) {
 			case "1":
 				presenceData.details = "Viewing official page";
 				presenceData.state = "Notices";
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Events";
 		}
 	} else if (pathname.endsWith("/home/2")) {
-		switch (document.location?.search?.substr(6)) {
+		switch (search?.substr(6)) {
 			case "create":
 				presenceData.details = "Viewing billboards page";
 				presenceData.state = "New";

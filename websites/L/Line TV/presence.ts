@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details: strings.browse
 		},
-		{ pathname } = document.location,
+		{ pathname, search } = document.location,
 		[newLang, showButton, showSearch, pDetail] = await Promise.all([
 			presence.getSetting<string>("lang"),
 			presence.getSetting<boolean>("Buttons"),
@@ -267,9 +267,7 @@ presence.on("UpdateData", async () => {
 		const resutls = parseInt(document.querySelector("em.ea")?.textContent, 10);
 
 		presenceData.details = `${strings.searchFor} ${
-			showSearch
-				? decodeURI(document.location.search.replace("?query=", ""))
-				: "(Hidden)"
+			showSearch ? decodeURI(search.replace("?query=", "")) : "(Hidden)"
 		}`;
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = strings.searching;

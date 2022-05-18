@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Psycho",
 		"id": "444779014888882177"
@@ -21,7 +21,7 @@
 		"gogoanime.news"
 	],
 	"regExp": "[0-9w]{0,6}.*gogoanime[s]*.[a-z]+",
-	"version": "2.0.13",
+	"version": "2.0.16",
 	"logo": "https://i.imgur.com/OnaEYdo.png",
 	"thumbnail": "https://i.imgur.com/RZwilwc.png",
 	"color": "#FFC119",

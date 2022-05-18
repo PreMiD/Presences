@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 
 	switch (
 		document
-			.getElementsByClassName("btn playbutton")[0]
+			.querySelectorAll(".btn.playbutton")[0]
 			.getAttributeNode("data-trackingaction").textContent
 	) {
 		case "stop": {

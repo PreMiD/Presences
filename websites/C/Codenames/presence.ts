@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			let randomInt = 0;
-			availableCards.forEach((card, index) => {
+			for (const [index, card] of availableCards.entries()) {
 				const name = card.textContent;
 				if (!slideshow.hasSlide(name)) {
 					presence.info(`Adding ${name} card to SlideShow.`);
@@ -128,14 +128,14 @@ presence.on("UpdateData", async () => {
 					);
 					randomInt++;
 				}
-			});
-			foundCards.forEach(card => {
+			}
+			for (const card of foundCards) {
 				const name = card.textContent;
 				if (slideshow.hasSlide(name)) {
 					presence.info(`Removing ${name} card from SlideShow.`);
 					slideshow.deleteSlide(name);
 				}
-			});
+			}
 
 			presenceData = { ...presenceData, ...slideshow.currentSlide };
 

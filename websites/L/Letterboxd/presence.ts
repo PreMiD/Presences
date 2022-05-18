@@ -23,13 +23,13 @@ function clarifyString(str: string) {
 }
 
 function getImageURLByAlt(alt: string) {
-	return Array.from(document.getElementsByTagName("img")).find(
+	return Array.from(document.querySelectorAll("img")).find(
 		img => img.alt === alt
 	)?.src;
 }
 
 function filterIterable<T extends Element>(
-	itr: HTMLCollectionOf<T>,
+	itr: NodeListOf<T>,
 	fnc: (val: T, ind?: number) => boolean
 ) {
 	return Array.from(itr).find((element, ind) => fnc(element, ind));
@@ -63,28 +63,22 @@ presence.on("UpdateData", async () => {
 				break;
 
 			case "settings": {
-				const smallPFP = getImageURLByAlt(user);
-
 				presenceData.details = "Changing their settings";
-				presenceData.smallImageKey = smallPFP;
+				presenceData.smallImageKey = getImageURLByAlt(user);
 
 				break;
 			}
 
 			case "list": {
-				const smallPFP = getImageURLByAlt(user);
-
 				presenceData.details = "Creating a list";
-				presenceData.smallImageKey = smallPFP;
+				presenceData.smallImageKey = getImageURLByAlt(user);
 
 				break;
 			}
 
 			case "invitations": {
-				const smallPFP = getImageURLByAlt(user);
-
 				presenceData.details = "Viewing their invitations";
-				presenceData.smallImageKey = smallPFP;
+				presenceData.smallImageKey = getImageURLByAlt(user);
 
 				break;
 			}
@@ -92,17 +86,17 @@ presence.on("UpdateData", async () => {
 			case "actor":
 			case "director": {
 				const name = (
-						document.getElementsByClassName(
-							"title-1 prettify"
+						document.querySelectorAll(
+							".title-1.prettify"
 						)[0] as HTMLHeadingElement
-					).innerText.replace(
+					).textContent.replace(
 						path[0] === "director" ? "FILMS DIRECTED BY\n" : "FILMS STARRING\n",
 						""
 					),
 					pfp = (
 						(
-							document.getElementsByClassName(
-								"avatar person-image image-loaded"
+							document.querySelectorAll(
+								".avatar.person-image.image-loaded"
 							)[0] as HTMLDivElement
 						).firstElementChild as HTMLImageElement
 					).src;
@@ -119,12 +113,10 @@ presence.on("UpdateData", async () => {
 
 			case "activity": {
 				const name = (
-						document.getElementsByClassName("title-3")[0]
-							.firstElementChild as HTMLAnchorElement
-					).innerText,
-					smallPFP = getImageURLByAlt(name);
-
-				presenceData.smallImageKey = smallPFP;
+					document.querySelectorAll(".title-3")[0]
+						.firstElementChild as HTMLAnchorElement
+				).textContent;
+				presenceData.smallImageKey = getImageURLByAlt(name);
 				presenceData.smallImageText = name;
 
 				if (path[1]) {
@@ -174,11 +166,11 @@ presence.on("UpdateData", async () => {
 						default: {
 							if (path[2]) {
 								if (path[2] === "trailer") {
-									const header = document.getElementById(
-											"featured-film-header"
+									const header = document.querySelector(
+											"#featured-film-header"
 										),
 										title = clarifyString(
-											(header.firstElementChild as HTMLElement).innerText
+											(header.firstElementChild as HTMLElement).textContent
 										);
 
 									presenceData.details = "Viewing the trailer of...";
@@ -186,7 +178,7 @@ presence.on("UpdateData", async () => {
 										(
 											header.lastElementChild.firstElementChild
 												.firstElementChild as HTMLAnchorElement
-										).innerText
+										).textContent
 									}`;
 									presenceData.largeImageKey = getImageURLByAlt(title);
 									presenceData.smallImageKey = "final";
@@ -195,33 +187,33 @@ presence.on("UpdateData", async () => {
 										{ label: "Watch trailer", url: window.location.href }
 									];
 								} else {
-									const title = document.getElementsByClassName(
-											"contextual-title"
+									const title = document.querySelectorAll(
+											".contextual-title"
 										)[0].firstElementChild.firstElementChild
 											.nextElementSibling as HTMLAnchorElement,
 										year = (
 											title.nextElementSibling
 												.firstElementChild as HTMLAnchorElement
-										).innerText;
+										).textContent;
 
 									switch (path[2]) {
 										case "members":
-											presenceData.details = `Viewing people who have seen ${title.innerText}, ${year}`;
+											presenceData.details = `Viewing people who have seen ${title.textContent}, ${year}`;
 											break;
 										case "fans":
-											presenceData.details = `Viewing fans of ${title.innerText}, ${year}`;
+											presenceData.details = `Viewing fans of ${title.textContent}, ${year}`;
 											break;
 										case "likes":
-											presenceData.details = `Viewing people who have liked ${title.innerText}, ${year}`;
+											presenceData.details = `Viewing people who have liked ${title.textContent}, ${year}`;
 											break;
 										case "ratings":
-											presenceData.details = `Viewing ratings of ${title.innerText}, ${year}`;
+											presenceData.details = `Viewing ratings of ${title.textContent}, ${year}`;
 											break;
 										case "reviews":
-											presenceData.details = `Viewing reviews of ${title.innerText}, ${year}`;
+											presenceData.details = `Viewing reviews of ${title.textContent}, ${year}`;
 											break;
 										case "lists":
-											presenceData.details = `Viewing lists that include ${title.innerText}, ${year}`;
+											presenceData.details = `Viewing lists that include ${title.textContent}, ${year}`;
 											break;
 									}
 
@@ -229,27 +221,27 @@ presence.on("UpdateData", async () => {
 										presenceData.details
 									);
 									presenceData.largeImageKey = getImageURLByAlt(
-										clarifyString(title.innerText)
+										clarifyString(title.textContent)
 									);
 									presenceData.smallImageKey = "final";
 								}
 							} else {
-								const header = document.getElementById("featured-film-header"),
+								const header = document.querySelector("#featured-film-header"),
 									title = clarifyString(
-										(header.firstElementChild as HTMLElement).innerText
+										(header.firstElementChild as HTMLElement).textContent
 									);
 
 								presenceData.details = `${title}, ${
 									(
 										header.lastElementChild.firstElementChild
 											.firstElementChild as HTMLAnchorElement
-									).innerText
+									).textContent
 								}`;
 								presenceData.state = `By ${
 									(
 										header.lastElementChild.lastElementChild
 											.firstElementChild as HTMLSpanElement
-									).innerText
+									).textContent
 								}`;
 								presenceData.buttons = [
 									{ label: `View ${title}`, url: window.location.href }
@@ -362,10 +354,9 @@ presence.on("UpdateData", async () => {
 						}
 
 						case "stats": {
-							const name = document.getElementsByClassName(
-								"yir-member-subtitle"
-							)[0].lastElementChild as HTMLAnchorElement;
-							presenceData.details = `Viewing ${name.innerText}'s statistics`;
+							const name = document.querySelectorAll(".yir-member-subtitle")[0]
+								.lastElementChild as HTMLAnchorElement;
+							presenceData.details = `Viewing ${name.textContent}'s statistics`;
 							presenceData.largeImageKey = (
 								name.previousElementSibling
 									.firstElementChild as HTMLImageElement
@@ -373,7 +364,7 @@ presence.on("UpdateData", async () => {
 							presenceData.smallImageKey = "final";
 							presenceData.buttons = [
 								{
-									label: `View ${name.innerText}'s stats`,
+									label: `View ${name.textContent}'s stats`,
 									url: window.location.href
 								}
 							];
@@ -383,34 +374,31 @@ presence.on("UpdateData", async () => {
 
 						case "list": {
 							const title = (
-									document.getElementsByClassName(
-										"title-1 prettify"
+									document.querySelectorAll(
+										".title-1.prettify"
 									)[0] as HTMLHeadingElement
-								).innerText,
+								).textContent,
 								name = (
-									document.getElementsByClassName("name")[0]
+									document.querySelectorAll(".name")[0]
 										.firstElementChild as HTMLSpanElement
-								).innerText,
-								smallPFP = getImageURLByAlt(name);
-
+								).textContent;
 							presenceData.details = `Viewing the list ${title}`;
 							presenceData.buttons = generateButtonText(presenceData.details);
 							presenceData.state = `By ${name}`;
-							presenceData.smallImageKey = smallPFP;
+							presenceData.smallImageKey = getImageURLByAlt(name);
 							presenceData.smallImageText = name;
 
 							break;
 						}
 
 						case "friends": {
-							const title = document.getElementsByClassName(
-									"contextual-title"
-								)[0].firstElementChild.firstElementChild
+							const title = document.querySelectorAll(".contextual-title")[0]
+									.firstElementChild.firstElementChild
 									.nextElementSibling as HTMLAnchorElement,
 								year = (
 									title.nextElementSibling
 										.firstElementChild as HTMLAnchorElement
-								).innerText;
+								).textContent;
 
 							if (path[4]) {
 								switch (path[4]) {
@@ -433,9 +421,9 @@ presence.on("UpdateData", async () => {
 								}
 							} else presenceData.details = "Viewing friends who have seen...";
 
-							presenceData.state = `${title.innerText}, ${year}`;
+							presenceData.state = `${title.textContent}, ${year}`;
 							presenceData.largeImageKey = getImageURLByAlt(
-								clarifyString(title.innerText)
+								clarifyString(title.textContent)
 							);
 							presenceData.smallImageKey = "final";
 
@@ -445,23 +433,23 @@ presence.on("UpdateData", async () => {
 						case "film": {
 							const title = clarifyString(
 									(
-										document.getElementsByClassName("film-title-wrapper")[0]
+										document.querySelectorAll(".film-title-wrapper")[0]
 											.firstElementChild as HTMLAnchorElement
-									).innerText
+									).textContent
 								),
 								rater = filterIterable(
-									document.getElementsByTagName("span"),
+									document.querySelectorAll("span"),
 									val => {
 										if (val.getAttribute("itemprop") === "name") return true;
 									}
-								).innerText,
+								).textContent,
 								rating = filterIterable(
-									document.getElementsByTagName("span"),
+									document.querySelectorAll("span"),
 									val => {
 										if (val.className.startsWith("rating rating-large"))
 											return true;
 									}
-								).innerText;
+								).textContent;
 
 							presenceData.details = `Review of ${title}`;
 							presenceData.state = `By ${rater} (${rating})`;
@@ -490,24 +478,22 @@ presence.on("UpdateData", async () => {
 						].includes(path[1])
 					) {
 						const name = (
-								document.getElementsByClassName("title-3")[0]
-									.firstElementChild as HTMLAnchorElement
-							).innerText,
-							smallPFP = getImageURLByAlt(name);
-
+							document.querySelectorAll(".title-3")[0]
+								.firstElementChild as HTMLAnchorElement
+						).textContent;
 						if (path[0] !== user && path[0] !== user.toLowerCase()) {
 							presenceData.details = presenceData.details
 								.replace("their", `${name}'s`)
 								.replace("they've", `${name} has`);
 						}
 
-						presenceData.smallImageKey = smallPFP;
+						presenceData.smallImageKey = getImageURLByAlt(name);
 						presenceData.smallImageText = name;
 					}
 				} else {
 					const name = (
-						document.getElementsByClassName("title-1")[0] as HTMLHeadingElement
-					).innerText;
+						document.querySelectorAll(".title-1")[0] as HTMLHeadingElement
+					).textContent;
 					// I could use the get image func but ID is available so its fine (smaller loop (I think))
 					presenceData.details = `Viewing ${
 						path[0] === user ? "their own" : `${name}'s`
@@ -516,7 +502,7 @@ presence.on("UpdateData", async () => {
 						path[0] === user ? `${name}/${path[0]}` : path[0]
 					})`;
 					presenceData.largeImageKey = (
-						document.getElementById("avatar-zoom")
+						document.querySelector("#avatar-zoom")
 							.previousElementSibling as HTMLImageElement
 					).src;
 					presenceData.smallImageKey = "final";

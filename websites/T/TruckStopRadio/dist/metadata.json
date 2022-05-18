@@ -1,20 +1,22 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
 	},
-	"contributors": [{
-		"name": "ItsHarryUK",
-		"id": "695355328753041410"
-	}],
+	"contributors": [
+		{
+			"name": "ItsHarryUK",
+			"id": "695355328753041410"
+		}
+	],
 	"service": "TruckStopRadio",
 	"description": {
 		"en": "Truck Stop Radio, is a popular radio station for Euro Truck Simulator and American Truck Simulator.",
 		"nl": "Truck Stop Radio, is een populair radiostation voor Euro Truck Simulator en American Truck Simulator."
 	},
 	"url": "truckstopradio.co.uk",
-	"version": "2.0.0",
+	"version": "2.0.2",
 	"logo": "https://i.imgur.com/n3TBX8g.png",
 	"thumbnail": "https://i.imgur.com/NybGLPS.png",
 	"color": "#2056f8",

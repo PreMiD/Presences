@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -9,13 +9,21 @@
 		"nl": "Het internet archief.",
 		"en": "The internet archive."
 	},
-	"url": ["web.archive.org", "www.web.archive.org"],
-	"version": "1.0.0",
+	"url": [
+		"web.archive.org",
+		"www.web.archive.org"
+	],
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/cjnISR9.png",
 	"thumbnail": "https://i.imgur.com/xnU6Kjz.png",
 	"color": "#AD2E37",
 	"category": "other",
-	"tags": ["archive", "wayback", "wayback-machine", "machine"],
+	"tags": [
+		"archive",
+		"wayback",
+		"wayback-machine",
+		"machine"
+	],
 	"settings": [
 		{
 			"id": "buttons",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Robin",
 		"id": "284370397535666188"
@@ -10,7 +10,7 @@
 		"nl": "De grote hit Curve Fever is terug met een nieuw multiplayer browsergame: Curve Fever Pro. Snijd tegenstanders af, wurm door kleine gaatjes en ontgrendel nieuwe krachten."
 	},
 	"url": "curvefever.pro",
-	"version": "1.0.8",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/Qdjm4j8.png",
 	"thumbnail": "https://i.imgur.com/FLGADmy.png",
 	"color": "#1f3559",

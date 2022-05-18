@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Paulé",
 		"id": "376812375795302402"
@@ -12,7 +12,7 @@
 		"vi_VN": "Google Fonts là dịch vụ của Google, cung cấp hơn 1000 bộ phông miễn phí cho các dự án Android và CSS."
 	},
 	"url": "fonts.google.com",
-	"version": "1.0.12",
+	"version": "1.0.14",
 	"logo": "https://i.imgur.com/l1S996y.png",
 	"thumbnail": "https://i.imgur.com/lVved9l.png",
 	"color": "#ff5756",

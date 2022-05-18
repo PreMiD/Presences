@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Cairo",
 		"id": "208105877838888960"
@@ -10,7 +10,7 @@
 		"nl": "Bekijk de nieuwste TV On Demand-afleveringen van al uw favoriete programma's van Three met ThreeNow. Bekijk Three livestream, Newshub, Three Movies en Three shows."
 	},
 	"url": "www.threenow.co.nz",
-	"version": "1.2.11",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/t7j0bcF.png",
 	"thumbnail": "https://i.imgur.com/N8CRfMJ.png",
 	"color": "#FF0050",

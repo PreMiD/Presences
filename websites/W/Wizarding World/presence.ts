@@ -17,117 +17,156 @@ presence.on("UpdateData", async function () {
 
 	if (document.location.host === "www.wizardingworld.com") {
 		if (!urlpath[1]) presenceData.details = "Home";
-		else if (urlpath[1] === "news" || urlpath[1] === "features") {
-			presenceData.details = urlpath[1] === "news" ? "News" : "Features";
+		else {
+			switch (urlpath[1]) {
+				case "news":
+				case "features": {
+					presenceData.details = urlpath[1] === "news" ? "News" : "Features";
 
-			if (urlpath[2]) {
-				presenceData.state =
-					document.querySelector("h1.ArticleHero_title__cOam6")?.textContent ||
-					"Unknown";
+					if (urlpath[2]) {
+						presenceData.state =
+							document.querySelector("h1.ArticleHero_title__cOam6")
+								?.textContent || "Unknown";
 
-				if (setting.showButtons) {
-					presenceData.buttons = [
-						{
-							label: "View Article",
-							url: window.location.href
+						if (setting.showButtons) {
+							presenceData.buttons = [
+								{
+									label: "View Article",
+									url: window.location.href
+								}
+							];
 						}
-					];
-				}
-			}
-		} else if (urlpath[1] === "quiz") {
-			presenceData.details = "Quiz";
-
-			if (urlpath[2]) {
-				presenceData.state =
-					document.querySelector("h1.ArticleHero_title__cOam6")?.textContent ||
-					"Unknown";
-
-				if (setting.showButtons) {
-					presenceData.buttons = [
-						{
-							label: "View Quiz",
-							url: window.location.href
-						}
-					];
-				}
-			}
-		} else if (urlpath[1] === "writing-by-jk-rowling") {
-			presenceData.details = "J.K. Rowling Originals";
-
-			if (urlpath[2]) {
-				const post = document.querySelector("h1.ArticleHero_title__cOam6"),
-					label =
-						post?.textContent.length >= 15
-							? `${post?.textContent.substring(0, 15)}...`
-							: post?.textContent;
-
-				presenceData.state = post?.textContent || "Unknown";
-
-				if (setting.showButtons && post) {
-					presenceData.buttons = [
-						{
-							label: `View: ${label}`,
-							url: window.location.href
-						}
-					];
-				}
-			}
-		} else if (urlpath[1] === "discover") {
-			presenceData.details = "Discover";
-
-			if (
-				urlpath[2] === "books" ||
-				urlpath[2] === "films" ||
-				urlpath[2] === "portkey-games" ||
-				urlpath[2] === "on-stage" ||
-				urlpath[2] === "experiences"
-			) {
-				if (urlpath[3]) {
-					let ctopic = "Loading...";
-
-					presenceData.state =
-						document.querySelector("h1.Header_productName__8oV2G")
-							?.textContent || "Unknown";
-
-					if (urlpath[2] === "books") ctopic = "Book";
-					else if (urlpath[2] === "films") ctopic = "Film";
-					else if (urlpath[2] === "portkey-games") ctopic = "Game";
-					else if (urlpath[2] === "experiences") ctopic = "Experience";
-
-					if (setting.showButtons && urlpath[2] !== "on-stage") {
-						presenceData.buttons = [
-							{
-								label: `View ${ctopic}`,
-								url: window.location.href
-							}
-						];
 					}
-				} else {
-					presenceData.state =
-						document.querySelector("h1.DiscoverListHeader_header__3ivqr")
-							?.textContent || "Unknown";
+
+					break;
 				}
-			}
-		} else if (urlpath[1] === "collections") {
-			presenceData.details = "Collections";
+				case "quiz": {
+					presenceData.details = "Quiz";
 
-			if (urlpath[2]) {
-				presenceData.state =
-					document.querySelector("h1.CollectionHero_header__3rDGu")
-						?.textContent || "Unknown";
+					if (urlpath[2]) {
+						presenceData.state =
+							document.querySelector("h1.ArticleHero_title__cOam6")
+								?.textContent || "Unknown";
 
-				if (setting.showButtons) {
-					presenceData.buttons = [
-						{
-							label: "View Collection",
-							url: window.location.href
+						if (setting.showButtons) {
+							presenceData.buttons = [
+								{
+									label: "View Quiz",
+									url: window.location.href
+								}
+							];
 						}
-					];
+					}
+
+					break;
 				}
+				case "writing-by-jk-rowling": {
+					presenceData.details = "J.K. Rowling Originals";
+
+					if (urlpath[2]) {
+						const post = document.querySelector("h1.ArticleHero_title__cOam6"),
+							label =
+								post?.textContent.length >= 15
+									? `${post?.textContent.substring(0, 15)}...`
+									: post?.textContent;
+
+						presenceData.state = post?.textContent || "Unknown";
+
+						if (setting.showButtons && post) {
+							presenceData.buttons = [
+								{
+									label: `View: ${label}`,
+									url: window.location.href
+								}
+							];
+						}
+					}
+
+					break;
+				}
+				case "discover": {
+					presenceData.details = "Discover";
+
+					if (
+						urlpath[2] === "books" ||
+						urlpath[2] === "films" ||
+						urlpath[2] === "portkey-games" ||
+						urlpath[2] === "on-stage" ||
+						urlpath[2] === "experiences"
+					) {
+						if (urlpath[3]) {
+							let ctopic = "Loading...";
+
+							presenceData.state =
+								document.querySelector("h1.Header_productName__8oV2G")
+									?.textContent || "Unknown";
+
+							switch (urlpath[2]) {
+								case "books": {
+									ctopic = "Book";
+									break;
+								}
+								case "films": {
+									ctopic = "Film";
+									break;
+								}
+								case "portkey-games": {
+									ctopic = "Game";
+									break;
+								}
+								case "experiences":
+									{
+										ctopic = "Experience";
+										// No default
+									}
+									break;
+							}
+
+							if (setting.showButtons && urlpath[2] !== "on-stage") {
+								presenceData.buttons = [
+									{
+										label: `View ${ctopic}`,
+										url: window.location.href
+									}
+								];
+							}
+						} else {
+							presenceData.state =
+								document.querySelector("h1.DiscoverListHeader_header__3ivqr")
+									?.textContent || "Unknown";
+						}
+					}
+
+					break;
+				}
+				case "collections": {
+					presenceData.details = "Collections";
+
+					if (urlpath[2]) {
+						presenceData.state =
+							document.querySelector("h1.CollectionHero_header__3rDGu")
+								?.textContent || "Unknown";
+
+						if (setting.showButtons) {
+							presenceData.buttons = [
+								{
+									label: "View Collection",
+									url: window.location.href
+								}
+							];
+						}
+					}
+
+					break;
+				}
+				case "harry-potter-fan-club": {
+					presenceData.details = "Fan Club";
+					break;
+				}
+				default:
+					presenceData.details = "Other";
 			}
-		} else if (urlpath[1] === "harry-potter-fan-club")
-			presenceData.details = "Fan Club";
-		else presenceData.details = "Other";
+		}
 	} else if (document.location.host === "my.wizardingworld.com") {
 		if (urlpath[1] === "passport") presenceData.details = "Passport";
 

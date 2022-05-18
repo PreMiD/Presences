@@ -5,17 +5,17 @@ let oldLang: string = null,
 
 function getMeta(metaName: string): string {
 	metaName = `PreMiD_${metaName}`;
-	const metas = document.getElementsByTagName("meta");
-	for (let i = 0; i < metas.length; i++) {
-		if (metas[i].getAttribute("name") === metaName)
-			return metas[i].getAttribute("content");
+	const metas = document.querySelectorAll("meta");
+	for (const meta of metas) {
+		if (meta.getAttribute("name") === metaName)
+			return meta.getAttribute("content");
 	}
 	return "";
 }
 
 function hasMeta(metaName: string): boolean {
 	metaName = `PreMiD_${metaName}`;
-	const metas = document.getElementsByTagName("meta");
+	const metas = document.querySelectorAll("meta");
 	for (let i = 0; i < metas.length; i++)
 		if (metas[i].getAttribute("name") === metaName) return true;
 

@@ -52,8 +52,8 @@ presence.on("UpdateData", async () => {
 		const title = document.querySelector(
 				".meta-title[ng-bind='details.title']"
 			)?.textContent,
-			video: HTMLVideoElement = document.querySelector("video#arxPlayer"),
-			{ paused } = video,
+			{ paused, currentTime, duration } =
+				document.querySelector<HTMLVideoElement>("video#arxPlayer"),
 			live = document.querySelector(".meta-remain") ? true : false;
 
 		if (!live) {
@@ -63,10 +63,7 @@ presence.on("UpdateData", async () => {
 				: (await strings).play;
 
 			presenceData.endTimestamp = presence
-				.getTimestamps(
-					Math.floor(video.currentTime),
-					Math.floor(video.duration)
-				)
+				.getTimestamps(Math.floor(currentTime), Math.floor(duration))
 				.pop();
 
 			if (

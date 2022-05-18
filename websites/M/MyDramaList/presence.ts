@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/search")) {
 		let searchThing = decodeURIComponent(
 			document.location.search.substring(3)
-		).replace(/\+/g, " ");
+		).replaceAll("+", " ");
 
 		if (searchThing.includes("&"))
 			searchThing = searchThing.substring(0, searchThing.indexOf("&"));

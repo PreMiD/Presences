@@ -7,8 +7,8 @@ presence.on("UpdateData", async () => {
 			smallImageKey: "voxiom",
 			smallImageText: "Playing Voxiom"
 		},
-		{ pathname } = window.location,
-		gameCode = window.location.hash.substring(1);
+		{ pathname, hash, protocol, hostname } = window.location,
+		gameCode = hash.substring(1);
 
 	if (pathname === "/" && gameCode) {
 		presenceData.details = "In a Game";
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Join Game",
-							url: `${window.location.protocol}//${window.location.hostname}/#${gameCode}`
+							url: `${protocol}//${hostname}/#${gameCode}`
 						}
 					];
 				}
@@ -62,39 +62,53 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/shop")) presenceData.details = "In Shop";
 	else if (pathname.startsWith("/leaderboard"))
 		presenceData.details = "Viewing Leaderboard";
-	else if (pathname === "/changelog")
-		presenceData.details = "Reading Changelog";
-	else if (pathname === "/settings") presenceData.details = "Changing Settings";
-	else if (pathname === "/match")
-		presenceData.details = "Reviewing Match Stats";
-	else if (pathname.startsWith("/account"))
-		presenceData.details = "Viewing Account";
-	else if (pathname.startsWith("/friends"))
-		presenceData.details = "Managing Friends";
-	else if (pathname.startsWith("/player")) {
-		const viewName = pathname.substring("/player/".length);
-		presenceData.details = "Viewing Player";
-		presenceData.state = `Player: ${viewName}`;
-	} else if (pathname.startsWith("/clans/view")) {
-		const viewName = pathname.substring("/clans/view/".length);
-		presenceData.details = "Viewing Clan";
-		presenceData.state = `Clan: ${viewName}`;
-	} else if (pathname.startsWith("/clans")) {
-		presenceData.details = "Managing Clan";
+	else {
 		switch (pathname) {
-			case "/clans":
-			case "/clans/join":
-				presenceData.state = "Viewing Clan List";
+			case "/changelog": {
+				presenceData.details = "Reading Changelog";
 				break;
-			case "/clans/create":
-				presenceData.state = "Creating a Clan";
+			}
+			case "/settings": {
+				presenceData.details = "Changing Settings";
 				break;
-			case "/clans/invites":
-				presenceData.state = "Viewing Clan Invites";
+			}
+			case "/match": {
+				presenceData.details = "Reviewing Match Stats";
 				break;
-			case "/clans/requests":
-				presenceData.state = "Viewing Clan Requests";
-				break;
+			}
+			default:
+				if (pathname.startsWith("/account"))
+					presenceData.details = "Viewing Account";
+				else if (pathname.startsWith("/friends"))
+					presenceData.details = "Managing Friends";
+				else if (pathname.startsWith("/player")) {
+					presenceData.details = "Viewing Player";
+					presenceData.state = `Player: ${pathname.substring(
+						"/player/".length
+					)}`;
+				} else if (pathname.startsWith("/clans/view")) {
+					presenceData.details = "Viewing Clan";
+					presenceData.state = `Clan: ${pathname.substring(
+						"/clans/view/".length
+					)}`;
+				} else if (pathname.startsWith("/clans")) {
+					presenceData.details = "Managing Clan";
+					switch (pathname) {
+						case "/clans":
+						case "/clans/join":
+							presenceData.state = "Viewing Clan List";
+							break;
+						case "/clans/create":
+							presenceData.state = "Creating a Clan";
+							break;
+						case "/clans/invites":
+							presenceData.state = "Viewing Clan Invites";
+							break;
+						case "/clans/requests":
+							presenceData.state = "Viewing Clan Requests";
+							break;
+					}
+				}
 		}
 	}
 

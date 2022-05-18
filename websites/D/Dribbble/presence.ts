@@ -58,18 +58,16 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/search")) search("");
 	else if (document.body.id === "profile") {
 		// view a profile
-		const pathArray = document.location.pathname.split("/"),
-			[, profileName] = pathArray;
+
 		presenceData.details = "Viewing profile :";
-		presenceData.state = `- ${profileName} -`;
+		presenceData.state = `- ${document.location.pathname.split("/")[1]} -`;
 	} else presenceData.details = "Homepage";
 
 	if (document.body.id === "user-profile") {
 		// view personal profile
-		const pathArray = document.location.pathname.split("/"),
-			[, profileName] = pathArray;
+
 		presenceData.details = "Viewing personal profile :";
-		presenceData.state = `- ${profileName} -`;
+		presenceData.state = `- ${document.location.pathname.split("/")[1]} -`;
 	}
 
 	if (!presenceData.details) presence.setActivity();

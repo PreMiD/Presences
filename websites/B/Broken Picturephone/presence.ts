@@ -4,8 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const browsingTimestamp = Math.floor(Date.now() / 1000),
-		valor = document.getElementsByTagName("button").length,
-		players = document.getElementsByClassName("userActive"),
+		valor = document.querySelectorAll("button").length,
+		players = document.querySelectorAll(".userActive"),
 		presenceData: PresenceData = {
 			largeImageKey: "large_image",
 			startTimestamp: browsingTimestamp
@@ -27,16 +27,16 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `(${numLimit} of ${numLimit} players)`;
 	}
 
-	if (document.getElementById("writeEntryundefined"))
+	if (document.querySelector("#writeEntryundefined"))
 		presenceData.details = "Typing...";
 
-	if (document.getElementsByClassName("ptro-crp-el").length >= 1)
+	if (document.querySelectorAll(".ptro-crp-el").length >= 1)
 		presenceData.details = "Drawing";
 
-	if (document.getElementsByClassName("presentationSection").length >= 1)
+	if (document.querySelectorAll(".presentationSection").length >= 1)
 		presenceData.details = "Viewing the presentation";
 
-	if (document.getElementsByClassName("waitingSet rounded").length >= 1)
+	if (document.querySelectorAll(".waitingSet.rounded").length >= 1)
 		presenceData.details = "On waitlist";
 
 	if (!presenceData.details) presence.setActivity();

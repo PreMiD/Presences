@@ -6,15 +6,26 @@ const presence = new Presence({ clientId: "658192386899312651" }),
 	};
 
 function makeRPC(title: string, category: string): void {
-	if (category === "kategori") {
-		presenceData.details = "Bir kategoriye göz atıyor:";
-		presenceData.state = title;
-	} else if (category === "etiket") {
-		presenceData.details = "Bir etikete göz atıyor:";
-		presenceData.state = title;
-	} else if (category === "author") {
-		presenceData.details = "Bir yazara göz atıyor:";
-		presenceData.state = title;
+	switch (category) {
+		case "kategori": {
+			presenceData.details = "Bir kategoriye göz atıyor:";
+			presenceData.state = title;
+
+			break;
+		}
+		case "etiket": {
+			presenceData.details = "Bir etikete göz atıyor:";
+			presenceData.state = title;
+
+			break;
+		}
+		case "author": {
+			presenceData.details = "Bir yazara göz atıyor:";
+			presenceData.state = title;
+
+			break;
+		}
+		// No default
 	}
 }
 

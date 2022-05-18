@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "MMDDKK",
 		"id": "259984855503339520"
@@ -11,7 +11,7 @@
 		"vi_VN": "Cách tốt nhất để xem anime và phim trực tuyến hoàn toàn miễn phí, chỉ phát và xem những bộ anime yêu thích của bạn với chất lượng tốt nhất (FULLHD), cùng với những bản fansub dành cho các tập phim."
 	},
 	"url": "animes.gg",
-	"version": "1.0.10",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/hkqIL8Q.png",
 	"thumbnail": "http://i.imgur.com/Mw0gNnG.png",
 	"color": "#f59f16",

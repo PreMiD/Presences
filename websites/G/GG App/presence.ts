@@ -54,13 +54,11 @@ presence.on("UpdateData", async () => {
 			presenceData.state = listname.textContent;
 			presenceData.buttons = [{ label: "View List", url: document.URL }];
 		}
-		if (cover) {
-			if (profilePicture) {
-				presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-					"#root > div > div.css-1dbjc4n > div > div:nth-child(3) > div.w-full > div > div > a > img"
-				).src;
-				presenceData.smallImageKey = "lg";
-			}
+		if (cover && profilePicture) {
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"#root > div > div.css-1dbjc4n > div > div:nth-child(3) > div.w-full > div > div > a > img"
+			).src;
+			presenceData.smallImageKey = "lg";
 		}
 	} else if (path.includes("/games/")) {
 		if (path.endsWith("/reviews")) {

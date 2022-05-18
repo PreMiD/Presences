@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Hans5958",
 		"id": "279855717203050496"
@@ -30,7 +30,7 @@
 		"trackmania.exchange",
 		"blog.mania.exchange"
 	],
-	"version": "1.1.8",
+	"version": "1.1.10",
 	"logo": "https://i.imgur.com/KPcs9y1.png",
 	"thumbnail": "https://i.imgur.com/NYitprM.png",
 	"color": "#7ad5ff",

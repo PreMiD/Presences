@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Emijor",
 		"id": "466885774621540372"
@@ -12,7 +12,7 @@
 		"vi_VN": "Xem ngay hơn 1,000+ bộ anime tại AniCloud hoàn toàn miễn phí. Anime theo nhu cầu: ✓ 100% miễn phí ✓ Trực tuyến ✓ Những bộ anime độc quyền"
 	},
 	"url": "anicloud.io",
-	"version": "1.0.11",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/eCZpN6e.png",
 	"thumbnail": "https://i.imgur.com/fKBCijM.png",
 	"color": "#637cf9",

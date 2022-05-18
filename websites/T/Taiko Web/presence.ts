@@ -102,13 +102,37 @@ presence.on("UpdateData", async () => {
 
 				if (songId !== -1)
 					presenceData.details = `Selecting Song ${selectedSong.title_lang.en}`;
-				else if (songIndex === 201 || songIndex === 207)
-					presenceData.details = "Back to homescreen";
-				else if (songIndex === 202) presenceData.details = "Random Song";
-				else if (songIndex === 203) presenceData.details = "How to Play";
-				else if (songIndex === 204) presenceData.details = "About Simulator";
-				else if (songIndex === 205) presenceData.details = "Game Settings";
-				else if (songIndex === 206) presenceData.details = "Custom Songs";
+				else {
+					switch (songIndex) {
+						case 201:
+						case 207: {
+							presenceData.details = "Back to homescreen";
+							break;
+						}
+						case 202: {
+							presenceData.details = "Random Song";
+							break;
+						}
+						case 203: {
+							presenceData.details = "How to Play";
+							break;
+						}
+						case 204: {
+							presenceData.details = "About Simulator";
+							break;
+						}
+						case 205: {
+							presenceData.details = "Game Settings";
+							break;
+						}
+						case 206:
+							{
+								presenceData.details = "Custom Songs";
+								// No default
+							}
+							break;
+					}
+				}
 
 				break;
 			}

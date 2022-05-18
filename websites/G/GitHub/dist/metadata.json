@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -26,7 +26,7 @@
 		"vi_VN": "GitHub là hệ thống quản lý mã và dự án cũng như là nền tảng mạng xã hội dành cho các nhà phát triển."
 	},
 	"url": "github.com",
-	"version": "2.10.5",
+	"version": "2.10.7",
 	"logo": "https://i.imgur.com/cr3bzXB.png",
 	"thumbnail": "https://i.imgur.com/G816tlo.png",
 	"color": "#000000",

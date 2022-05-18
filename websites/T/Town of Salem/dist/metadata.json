@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -13,7 +13,7 @@
 		"blankmediagames.com",
 		"www.blankmediagames.com"
 	],
-	"version": "1.0.7",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/y7VYTQK.jpg",
 	"thumbnail": "https://i.imgur.com/xdm53K3.jpg",
 	"color": "#F0B450",

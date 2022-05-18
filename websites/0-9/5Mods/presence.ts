@@ -19,10 +19,10 @@ presence.on("UpdateData", async () => {
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the front page...";
 	else if (categories[document.location.pathname.split("/")[1]]) {
-		if (document.getElementsByClassName("btn-download")[0]) {
+		if (document.querySelectorAll(".btn-download")[0]) {
 			presenceData.details = "Viewing a Mod...";
 			let name =
-				document.getElementsByClassName("clearfix")[1].children[0].textContent;
+				document.querySelectorAll(".clearfix")[1].children[0].textContent;
 			if (name.length > 60) name = `${name.slice(0, 57)}...`;
 			presenceData.state = `${name} (${
 				categories[document.location.pathname.split("/")[1]]

@@ -64,7 +64,6 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Viewing Ko-Fi's About Page";
 	else if (document.location.pathname.toLowerCase().startsWith("/s/")) {
 		try {
-			const [, , URLSplit] = document.location.pathname.split("/");
 			presenceData.details = `Viewing ${document
 				.querySelector(
 					"#shop-item-detail > div > div.kfds-lyt-between-algn-top-row-to-col.kfds-c-sticky > div.sidebar.kfds-c-sticky-wrapper.kfds-c-order-2.kfds-c-shop-detail-wrapper > div.kfds-lyt-width-100.kfds-c-lyt-pdg-16-24.kfds-c-shop-detail-column-control > span"
@@ -78,7 +77,9 @@ presence.on("UpdateData", () => {
 			presenceData.buttons = [
 				{
 					label: "View Item",
-					url: `https://ko-fi.com/s/${URLSplit}?ref=premid_discord_presence`
+					url: `https://ko-fi.com/s/${
+						document.location.pathname.split("/")[2]
+					}?ref=premid_discord_presence`
 				}
 			];
 		} catch {
@@ -97,7 +98,6 @@ presence.on("UpdateData", () => {
 	else if (document.location.pathname.toLowerCase().startsWith("/post")) {
 		presenceData.details = "Viewing a post.";
 		try {
-			const [, , URLSplit] = document.location.pathname.split("/");
 			presenceData.details = "Viewing a post:";
 			presenceData.state = document
 				.querySelector(
@@ -107,7 +107,9 @@ presence.on("UpdateData", () => {
 			presenceData.buttons = [
 				{
 					label: "View Post",
-					url: `https://ko-fi.com/post/${URLSplit}?ref=premid_discord_presence`
+					url: `https://ko-fi.com/post/${
+						document.location.pathname.split("/")[2]
+					}?ref=premid_discord_presence`
 				}
 			];
 		} catch {

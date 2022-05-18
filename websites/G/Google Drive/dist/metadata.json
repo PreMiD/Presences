@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -21,7 +21,7 @@
 	},
 	"url": "drive.google.com",
 	"regExp": "drive[.]google([.][a-z]+)+[/]",
-	"version": "1.5.17",
+	"version": "1.6.1",
 	"logo": "https://i.imgur.com/WdNIJe8.png",
 	"thumbnail": "https://i.imgur.com/mZdtUw5.png",
 	"color": "#3aa154",
@@ -32,9 +32,9 @@
 	],
 	"settings": [
 		{
-			"id": "filename",
-			"title": "Show File Name",
-			"icon": "fas fa-lock",
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
 			"value": true
 		}
 	]

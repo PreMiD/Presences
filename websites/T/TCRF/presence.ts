@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-one-time-vars/no-one-time-vars
 const presence = new Presence({
 		clientId: "631259475038175232"
 	}),
@@ -31,7 +32,7 @@ presence.on("UpdateData", async () => {
 			.join(" ")}`;
 	} else {
 		const name = document
-			.getElementById("firstHeading")
+			.querySelector("#firstHeading")
 			.textContent.replace(")", "")
 			.split("(");
 		if (name[0].startsWith("Prerelease:")) {

@@ -10,16 +10,14 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = document.location;
+		{ pathname, search } = document.location;
 	if (pathname === "/") presenceData.details = "Viewing the Homepage";
 	else if (
 		pathname === "/search/" &&
 		window.location.search.substr(0, 1) === "?"
 	) {
 		presenceData.details = "Searching: ";
-		presenceData.state = new URLSearchParams(document.location.search).get(
-			"name"
-		);
+		presenceData.state = new URLSearchParams(search).get("name");
 		presenceData.smallImageKey = "search";
 	} else if (pathname === "/directory/" || pathname === "/search/")
 		presenceData.details = "Browsing all manga";
@@ -65,23 +63,16 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (pathname.startsWith("/read-online/")) {
+		const page = document.querySelector('button[data-target="#PageModal"]');
+
 		presenceData.details = document
 			.querySelector(".col-lg-4 > a")
-			.textContent.replace(new RegExp("\\\t", "g"), "")
-			.replace(new RegExp("\\\n", "g"), "");
-		presenceData.state = `📖 Ch. ${
-			document
-				.querySelector('button[data-target="#ChapterModal"]')
-				.textContent.replace(new RegExp("\\\t", "g"), "")
-				.replace(new RegExp("\\\n", "g"), "")
-				.split(" ")[1]
-		} 📄 ${
-			document
-				.querySelector('button[data-target="#PageModal"]')
-				.textContent.replace(new RegExp("\\\t", "g"), "")
-				.replace(new RegExp("\\\n", "g"), "")
-				.split(" ")[1]
-		}`;
+			.textContent.trim();
+		presenceData.state = `📖 Ch. ${document
+			.querySelector('button[data-target="#ChapterModal"]')
+			.textContent.trim()
+			.split(" ")
+			.pop()}${page ? ` 📄 ${page.textContent.trim().split(" ").pop()}` : ""}`;
 		presenceData.smallImageKey = "read";
 		if (buttons) {
 			presenceData.buttons = [

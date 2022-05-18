@@ -100,42 +100,61 @@ const updateCallback = {
 				}
 			} else if (currentPath[0] === "maps" && !currentPath[1])
 				presenceData.details = "Looking for a map";
-			else if (currentPath[0] === "maps") {
-				if (document.querySelector(".map-block__title")) {
-					presenceData.details = "Viewing a map";
-					presenceData.state =
-						document.querySelector(".map-block__title").textContent;
-				} else presenceData.details = "Looking for a map";
-			} else if (currentPath[0] === "user") {
-				presenceData.details = "Viewing a user profile";
-				presenceData.state = document.querySelector(
-					".profile-summary__nick"
-				).textContent;
-			} else if (currentPath[0] === "me") {
-				if (!currentPath[2]) presenceData.details = "Viewing their own profile";
-				else {
-					presenceData.details = "Viewing a personal page";
-					presenceData.state = {
-						settings: "Settings",
-						leagues: "Leagues",
-						activities: "Activities",
-						current: "Ongoing games",
-						likes: "Favorite maps",
-						badges: "Badges",
-						maps: "My maps",
-						"map-maker": "Map Maker"
-					}[currentURL.pathname.split("/")[2]];
-				}
-			} else if (currentPath[0] === "signin")
-				presenceData.details = "Signing in";
-			else if (currentPath[0] === "signup")
-				presenceData.details = "Registering an account";
-			else if (document.title === "GeoGuessr - Let's explore the world!")
-				forceUpdate = true;
 			else {
-				forceUpdate = false;
-				presenceData.details = "Viewing a page";
-				presenceData.state = document.title.replace(" - GeoGuessr", "");
+				switch (currentPath[0]) {
+					case "maps": {
+						if (document.querySelector(".map-block__title")) {
+							presenceData.details = "Viewing a map";
+							presenceData.state =
+								document.querySelector(".map-block__title").textContent;
+						} else presenceData.details = "Looking for a map";
+
+						break;
+					}
+					case "user": {
+						presenceData.details = "Viewing a user profile";
+						presenceData.state = document.querySelector(
+							".profile-summary__nick"
+						).textContent;
+
+						break;
+					}
+					case "me": {
+						if (!currentPath[2])
+							presenceData.details = "Viewing their own profile";
+						else {
+							presenceData.details = "Viewing a personal page";
+							presenceData.state = {
+								settings: "Settings",
+								leagues: "Leagues",
+								activities: "Activities",
+								current: "Ongoing games",
+								likes: "Favorite maps",
+								badges: "Badges",
+								maps: "My maps",
+								"map-maker": "Map Maker"
+							}[currentURL.pathname.split("/")[2]];
+						}
+
+						break;
+					}
+					case "signin": {
+						presenceData.details = "Signing in";
+						break;
+					}
+					case "signup": {
+						presenceData.details = "Registering an account";
+						break;
+					}
+					default:
+						if (document.title === "GeoGuessr - Let's explore the world!")
+							forceUpdate = true;
+						else {
+							forceUpdate = false;
+							presenceData.details = "Viewing a page";
+							presenceData.state = document.title.replace(" - GeoGuessr", "");
+						}
+				}
 			}
 
 			presenceDataPlaced = presenceData;

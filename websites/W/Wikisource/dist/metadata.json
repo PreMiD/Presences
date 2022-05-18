@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Hans5958",
 		"id": "279855717203050496"
@@ -15,7 +15,7 @@
 	},
 	"url": "wikisource.org",
 	"regExp": "([a-z0-9-]+[.])*wikisource[.]org[/]",
-	"version": "1.0.12",
+	"version": "1.0.14",
 	"logo": "https://i.imgur.com/HS37uGx.png",
 	"thumbnail": "https://i.imgur.com/K7f8lKG.png",
 	"color": "#f9f9f9",

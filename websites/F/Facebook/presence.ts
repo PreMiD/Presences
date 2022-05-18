@@ -117,8 +117,7 @@ presence.on("UpdateData", async () => {
 			)?.parentElement;
 
 			if (videoFrame) {
-				const video = videoFrame.querySelector("video"),
-					user = videoFrame.querySelector(
+				const user = videoFrame.querySelector(
 						"span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.ltmttdrg.g0qnabr5"
 					)?.textContent,
 					description = videoFrame.querySelector("div.n1l5q3vz")?.textContent,
@@ -144,7 +143,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = "play";
 
 					presenceData.endTimestamp = presence
-						.getTimestampsfromMedia(video)
+						.getTimestampsfromMedia(videoFrame.querySelector("video"))
 						.pop();
 				}
 			} else if (location.pathname.includes("/live")) {
@@ -178,11 +177,12 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/marketplace/")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		if (document.location.pathname.includes("/search/") && !privacyMode) {
-			const search = new URLSearchParams(location.search).get("q");
 			presenceData.smallImageKey = "search";
 
 			presenceData.details = "Marketplace - Searching for:";
-			presenceData.state = showSeachQuery ? decodeURI(search) : "(Hidden)";
+			presenceData.state = showSeachQuery
+				? decodeURI(new URLSearchParams(location.search).get("q"))
+				: "(Hidden)";
 		} else if (document.location.pathname.includes("/item/")) {
 			if (privacyMode) presenceData.details = "Marketplace - Viewing item";
 			else {
@@ -406,29 +406,18 @@ presence.on("UpdateData", async () => {
 		) ||
 		document.querySelector(
 			"span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
-		)
+		) ||
+		document.querySelectorAll('[data-pagelet="ProfileActions"]')[0]
 	) {
 		const hasCommentInput = document.querySelector(
 			"div.m9osqain.a5q79mjw.gy2v8mqq.jm1wdb64.k4urcfbm.qv66sw1b span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7"
 		);
-		let name = document
-			.querySelector(
-				"span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
-			)
-			?.textContent.trim();
-
-		if (!hasCommentInput) {
-			name = document
-				.querySelector(
-					"h2.gmql0nx0.l94mrbxd.p1ri9a11.lzcic4wl.d2edcug0.hpfvmrgz span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.embtmqzv.hrzyx87i.m6dqt4wy.h7mekvxk.hnhda86s.oo9gr5id.hzawbc8m > span"
-				)
-				?.textContent.trim();
-		}
 
 		presenceData.details = `Viewing ${hasCommentInput ? "user" : "page"}${
 			privacyMode ? "" : ":"
 		}`;
-		if (!privacyMode) presenceData.state = name || "Unknown";
+		if (!privacyMode)
+			presenceData.state = document.title.slice(0, -11) || "Unknown";
 	} else if (document.location.pathname.includes("/settings"))
 		presenceData.details = "Settings";
 	else if (document.location.pathname.includes("/places"))

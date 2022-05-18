@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Harold",
 		"id": "141206144264699904"
@@ -10,7 +10,7 @@
 		"nl": "Lees manga gratis online op MangaHere zonder advertenties, afbeeldingen van hoge kwaliteit!"
 	},
 	"url": "www.mangahere.cc",
-	"version": "1.0.8",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/1K3aiaF.png",
 	"thumbnail": "https://i.imgur.com/yUGRcWL.png",
 	"color": "#3d6eff",

@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: elapsed
 		},
-		{ pathname } = document.location,
+		{ pathname, href } = document.location,
 		[
 			showTimestamps,
 			newLang,
@@ -79,16 +79,15 @@ presence.on("UpdateData", async () => {
 		streamer = getElement(
 			":is(div.nimo-rm_sub-title > h1, #meta-info div.anchor-name.n-as-text-over > a > h2)"
 		),
-		game = getElement("div.nimo-anchor-broadcast-game > a > h4"),
-		vidTimer = getElement("#nimo-player div.time-label-control.control-item");
+		game = getElement("div.nimo-anchor-broadcast-game > a > h4");
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
 
-	if (document.location.href !== prevUrl) {
-		prevUrl = document.location.href;
+	if (href !== prevUrl) {
+		prevUrl = href;
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 
@@ -165,14 +164,11 @@ presence.on("UpdateData", async () => {
 			else if (pathname.includes("/video")) presenceData.state = strings.colls;
 		}
 	} else if (title && streamer) {
-		if (vidTimer) {
-			let paused = !document.querySelector('#nimo-player div[title~="Pause"]');
-			const timeElapsed = presence.timestampFromFormat(
-					vidTimer.split("/", 2)[0].trim()
-				),
-				duration = presence.timestampFromFormat(
-					vidTimer.split("/", 2)[1].trim()
-				);
+		if (
+			document.querySelector("#nimo-player div.time-label-control.control-item")
+		) {
+			const { duration, currentTime, paused } =
+				document.querySelector<HTMLVideoElement>("video");
 			if (!privacy) {
 				presenceData.details = vidDetail
 					.replace("%title%", title)
@@ -183,11 +179,9 @@ presence.on("UpdateData", async () => {
 
 				delete presenceData.startTimestamp;
 
-				if (Date.now() / 1000 >= Date.now() / 1000 + duration - timeElapsed)
-					paused = true;
 				if (!paused) {
 					presenceData.endTimestamp =
-						Date.now() / 1000 + duration - timeElapsed;
+						Date.now() / 1000 + duration - currentTime;
 				}
 
 				presenceData.buttons = [

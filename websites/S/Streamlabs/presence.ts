@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 					break;
 			}
 			presenceData.details = `Watching ${clipTitle[0]} to`;
-			[, , presenceData.state] = clipTitle;
+			presenceData.state = clipTitle[2];
 		} else if (document.location.pathname.includes("/dashboard")) {
 			switch (document.location.hash) {
 				case "#/widgets":
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 				break;
 		}
 		presenceData.details = `Watching ${clipTitle[0]} to`;
-		[, , presenceData.state] = clipTitle;
+		presenceData.state = clipTitle[2];
 	} else if (document.location.pathname.includes("/dashboard")) {
 		switch (document.location.hash) {
 			case "#/widgets":

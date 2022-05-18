@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
 				presenceData.state = "Paused menu";
 			}
 		} else {
-			const [pageHome] = document.getElementsByClassName("title");
+			const [pageHome] = document.querySelectorAll(".title");
 			let pageText1;
 			if (!pageHome) pageText1 = "Browsing...";
 			else pageText1 = `Listening: ${pageHome.textContent}`;
@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
 				(presenceData.state = pageText1);
 		}
 	} else if (document.location.pathname.startsWith("/index")) {
-		const [pageHome] = document.getElementsByClassName("title");
+		const [pageHome] = document.querySelectorAll(".title");
 		let pageText1;
 		if (!pageHome) pageText1 = "Browsing...";
 		else pageText1 = `Listening: ${pageHome.textContent}`;
@@ -35,7 +35,7 @@ presence.on("UpdateData", () => {
 		(presenceData.details = "Viewing the homepage"),
 			(presenceData.state = pageText1);
 	} else if (document.location.pathname.startsWith("/new")) {
-		const [pageNew] = document.getElementsByClassName("title");
+		const [pageNew] = document.querySelectorAll(".title");
 		let pageText2;
 		if (!pageNew) pageText2 = "Browsing...";
 		else pageText2 = `Listening: ${pageNew.textContent}`;
@@ -43,7 +43,7 @@ presence.on("UpdateData", () => {
 		(presenceData.details = "Viewing new beatmaps"),
 			(presenceData.state = pageText2);
 	} else if (document.location.pathname.startsWith("/hot")) {
-		const [pageHot] = document.getElementsByClassName("title");
+		const [pageHot] = document.querySelectorAll(".title");
 		let pageText3;
 		if (!pageHot) pageText3 = "Browsing...";
 		else pageText3 = `Listening: ${pageHot.textContent}`;
@@ -51,9 +51,8 @@ presence.on("UpdateData", () => {
 		(presenceData.details = "Viewing hot beatmaps"),
 			(presenceData.state = pageText3);
 	} else if (document.location.pathname.startsWith("/genre")) {
-		const [pageGen2, pageGen3, pageGen1] =
-				document.getElementsByClassName("title"),
-			[pageGen4, pageGen5] = document.getElementsByClassName("selitem active");
+		const [pageGen2, pageGen3, pageGen1] = document.querySelectorAll(".title"),
+			[pageGen4, pageGen5] = document.querySelectorAll(".selitem.active");
 		if (pageGen1) {
 			(presenceData.details = "Searching by categories"),
 				(presenceData.state = `Listening: ${pageGen1.textContent}`);
@@ -62,7 +61,7 @@ presence.on("UpdateData", () => {
 				(presenceData.state = `${pageGen2.textContent}: ${pageGen4.textContent} ${pageGen3.textContent}: ${pageGen5.textContent}`);
 		}
 	} else if (document.location.pathname.startsWith("/search")) {
-		const [pageSch1] = document.getElementsByClassName("title"),
+		const [pageSch1] = document.querySelectorAll(".title"),
 			[pageSch2] = document.getElementsByName(
 				"q"
 			) as NodeListOf<HTMLInputElement>;
@@ -79,7 +78,7 @@ presence.on("UpdateData", () => {
 				(presenceData.state = pageText7);
 		}
 	} else if (document.location.pathname.startsWith("/local")) {
-		const [pageFav] = document.getElementsByClassName("title");
+		const [pageFav] = document.querySelectorAll(".title");
 		let pageText7;
 		if (!pageFav) pageText7 = "Browsing...";
 		else pageText7 = `Listening: ${pageFav.textContent}`;

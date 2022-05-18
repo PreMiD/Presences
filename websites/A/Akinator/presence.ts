@@ -9,16 +9,25 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp
 	};
 
-	if (document.location.pathname === "/")
-		presenceData.details = "Starting Akinator";
-	else if (document.location.pathname === "/theme-selection")
-		presenceData.details = "Selecting Theme";
-	else if (document.location.pathname === "/game") {
-		const hover = document.querySelectorAll(":hover")[12].textContent;
-		presenceData.details = `Q: ${
-			document.getElementsByClassName("bubble-body")[0].textContent
-		}`;
-		presenceData.state = `Selecting: ${hover ? hover : "Still Thinking"}`;
+	switch (document.location.pathname) {
+		case "/": {
+			presenceData.details = "Starting Akinator";
+			break;
+		}
+		case "/theme-selection": {
+			presenceData.details = "Selecting Theme";
+			break;
+		}
+		case "/game": {
+			const hover = document.querySelectorAll(":hover")[12].textContent;
+			presenceData.details = `Q: ${
+				document.querySelectorAll(".bubble-body")[0].textContent
+			}`;
+			presenceData.state = `Selecting: ${hover ? hover : "Still Thinking"}`;
+
+			break;
+		}
+		// No default
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

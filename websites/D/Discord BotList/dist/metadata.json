@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "OGMatrix",
 		"id": "657290880947978241"
@@ -15,7 +15,7 @@
 		"docs.discord-botlist.eu",
 		"discord-botlist.eu"
 	],
-	"version": "1.0.10",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/V8TuIHR.jpg",
 	"thumbnail": "https://i.imgur.com/utk2huo.png",
 	"color": "#3563ed",

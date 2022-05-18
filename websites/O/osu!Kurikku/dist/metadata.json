@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Moe Kotoki",
 		"id": "276627005280092162"
@@ -14,7 +14,7 @@
 		"sig.kurikku.pw",
 		"status.kurikku.pw"
 	],
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/99lEgeG.png",
 	"thumbnail": "https://i.imgur.com/Oa9jhmt.png",
 	"color": "#FF66AA",

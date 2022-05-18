@@ -77,11 +77,12 @@ presence.on("UpdateData", async () => {
 					.split("/search/")[1]
 					.trim()}` + ")";
 		}
-	} else if (window.location.hostname === "docs.botsfordiscord.com") {
-		if (window.location.pathname.startsWith("/")) {
-			presenceData.details = "API Docs | Viewing page:";
-			presenceData.state = document.querySelector("h1 span").textContent.trim();
-		}
+	} else if (
+		window.location.hostname === "docs.botsfordiscord.com" &&
+		window.location.pathname.startsWith("/")
+	) {
+		presenceData.details = "API Docs | Viewing page:";
+		presenceData.state = document.querySelector("h1 span").textContent.trim();
 	}
 	if (!presenceData.state) presence.setActivity();
 	else presence.setActivity(presenceData);

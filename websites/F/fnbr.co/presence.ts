@@ -51,28 +51,69 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".col-md-12 h2").textContent
 		}`;
 		presenceData.state = document.querySelector(".col-md-12 p").textContent;
-	} else if (path === "/sets") presenceData.details = "Viewing item sets";
-	else if (path === "/png") presenceData.details = "Viewing cosmetics png";
-	else if (path === "/icons") presenceData.details = "Viewing cosmetics icons";
-	else if (path === "/reminders")
-		presenceData.details = "Viewing item reminders";
-	else if (path === "/history") presenceData.details = "Viewing shop history";
-	else if (path.startsWith("/shop/")) {
-		presenceData.details = "Viewing item shop";
-		presenceData.state =
-			document.querySelector(".col-md-12 h2 .you").textContent;
-	} else if (path === "/shop") {
-		presenceData.details = "Viewing item shop";
-		presenceData.state = document.querySelector(
-			".col-m.col-12.primary h2 .you"
-		).textContent;
-	} else if (path === "/modes") presenceData.details = "Viewing ltm's";
-	else if (path === "/news") presenceData.details = "Viewing news";
-	else if (path === "/random") presenceData.details = "Randomising items";
-	else if (path === "/api/docs")
-		presenceData.details = "Viewing api documentation";
-	else if (path === "/account") presenceData.details = "Viewing account data";
-	else presenceData.details = `Viewing ${path.substring(1)}`;
+	} else {
+		switch (path) {
+			case "/sets": {
+				presenceData.details = "Viewing item sets";
+				break;
+			}
+			case "/png": {
+				presenceData.details = "Viewing cosmetics png";
+				break;
+			}
+			case "/icons": {
+				presenceData.details = "Viewing cosmetics icons";
+				break;
+			}
+			case "/reminders": {
+				presenceData.details = "Viewing item reminders";
+				break;
+			}
+			case "/history": {
+				presenceData.details = "Viewing shop history";
+				break;
+			}
+			default:
+				if (path.startsWith("/shop/")) {
+					presenceData.details = "Viewing item shop";
+					presenceData.state =
+						document.querySelector(".col-md-12 h2 .you").textContent;
+				} else {
+					switch (path) {
+						case "/shop": {
+							presenceData.details = "Viewing item shop";
+							presenceData.state = document.querySelector(
+								".col-m.col-12.primary h2 .you"
+							).textContent;
+
+							break;
+						}
+						case "/modes": {
+							presenceData.details = "Viewing ltm's";
+							break;
+						}
+						case "/news": {
+							presenceData.details = "Viewing news";
+							break;
+						}
+						case "/random": {
+							presenceData.details = "Randomising items";
+							break;
+						}
+						case "/api/docs": {
+							presenceData.details = "Viewing api documentation";
+							break;
+						}
+						case "/account": {
+							presenceData.details = "Viewing account data";
+							break;
+						}
+						default:
+							presenceData.details = `Viewing ${path.substring(1)}`;
+					}
+				}
+		}
+	}
 
 	presenceData.startTimestamp = Date.now();
 	presence.setActivity(presenceData);

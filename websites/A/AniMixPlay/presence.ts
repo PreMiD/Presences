@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `${urlParams
 				.get("genre")
 				.toLowerCase()
-				.replace(/,/g, " + ")} related anime`;
+				.replaceAll(",", " + ")} related anime`;
 			presenceData.smallImageKey = "browsing-v1";
 			presenceData.smallImageText = "Exploring...";
 		} else if (urlParams.get("season") && urlParams.get("year")) {

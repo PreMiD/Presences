@@ -1,15 +1,9 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "fror",
-		"id": "515668127829458945"
+		"name": "Slowftw",
+		"id": "325046217904226306"
 	},
-	"contributors": [
-		{
-			"name": "Slowftw",
-			"id": "325046217904226306"
-		}
-	],
 	"service": "Tsuki Mangás",
 	"description": {
 		"en": "Tsuki Mangás is an brazilian manga reader; read your favorite mangas in your smartphone, tablet, computer or any other device. Save your favorite characters and follow the latest releases.",
@@ -17,7 +11,7 @@
 		"nl": "Tsuki Mangás is een Braziliaanse manga-lezer; lees je favoriete manga's op je smartphone, tablet, computer of een ander apparaat. Sla je favoriete personages op en volg de nieuwste releases."
 	},
 	"url": "tsukimangas.com",
-	"version": "1.4.10",
+	"version": "1.4.13",
 	"logo": "https://i.imgur.com/QZ1gTNi.png",
 	"thumbnail": "https://i.imgur.com/01bTk7A.png",
 	"color": "#161616",

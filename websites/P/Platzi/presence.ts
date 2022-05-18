@@ -162,15 +162,13 @@ presence.on("UpdateData", async () => {
 			{ label: "Ver Live", url: `https://platzi.com${pathname}` }
 		];
 	} else if (pathname.includes("/clases/") && pathNameSplit.length === 2) {
-		const course = document.querySelector<HTMLHeadingElement>(
-			".CourseDetail-left-title"
-		);
-
 		presenceData.state = `de ${
 			document.querySelector<HTMLSpanElement>(".TeacherList-full-name")
 				.textContent
 		}`;
-		presenceData.details = course.textContent;
+		presenceData.details = document.querySelector<HTMLHeadingElement>(
+			".CourseDetail-left-title"
+		).textContent;
 		presenceData.buttons = [
 			{
 				label: "Ver curso",
@@ -237,11 +235,11 @@ presence.on("UpdateData", async () => {
 			if (activeCategory !== "") presenceData.details = activeCategory;
 
 			if (!categoriesEventListener) {
-				learningPaths.forEach(learningPath => {
+				for (const learningPath of learningPaths) {
 					learningPath.addEventListener("mouseover", () =>
 						setPresenceFromEvent(learningPath.querySelector("h2").textContent)
 					);
-				});
+				}
 				categoriesEventListener = true;
 			}
 		}

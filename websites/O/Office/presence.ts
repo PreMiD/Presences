@@ -29,9 +29,9 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "office",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname } = document.location,
+		{ pathname, hostname } = document.location,
 		privacy = await presence.getSetting<boolean>("privacy");
-	if (document.location.hostname === "www.office.com") {
+	if (hostname === "www.office.com") {
 		presenceData.details = "Home page";
 		if (pathname.startsWith("/launch/")) {
 			presenceData.details = `Browsing ${document.title} documents`;

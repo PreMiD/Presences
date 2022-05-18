@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "The Gamerzs",
 		"id": "730142125181894657"
@@ -12,7 +12,7 @@
 		"en": "Here at LIME, we have some of the best gaming equipment and accessories."
 	},
 	"url": "limeprogaming.com",
-	"version": "1.0.5",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/IZlOaJU.png",
 	"thumbnail": "https://i.imgur.com/FUBK77b.png",
 	"color": "#9bda45",

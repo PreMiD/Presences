@@ -96,29 +96,40 @@ presence.on("UpdateData", async () => {
 		} Results`;
 
 		presenceData.smallImageKey = "search";
-	} else if (window.location.pathname === "/cart")
-		presenceData.details = "Viewing cart";
-	else if (window.location.pathname === "/account")
-		presenceData.details = "Viewing account";
-	else if (window.location.pathname === "/apps/subscriptions")
-		presenceData.details = "Viewing subscriptions";
-	else if (window.location.pathname.includes("/checkouts/"))
-		presenceData.details = "Ordering";
-	else if (window.location.pathname.includes("/blogs/")) {
-		blogTitle =
-			document.querySelector(
-				"#shopify-section-article-template > div:nth-child(1) > div > div > div > div > h1"
-			)?.textContent || "Viewing News";
-		blogAuthor =
-			document.querySelector(
-				"#shopify-section-article-template > div:nth-child(1) > div > div > div > div > div.tt-autor"
-			)?.textContent || null;
+	} else {
+		switch (window.location.pathname) {
+			case "/cart": {
+				presenceData.details = "Viewing cart";
+				break;
+			}
+			case "/account": {
+				presenceData.details = "Viewing account";
+				break;
+			}
+			case "/apps/subscriptions": {
+				presenceData.details = "Viewing subscriptions";
+				break;
+			}
+			default:
+				if (window.location.pathname.includes("/checkouts/"))
+					presenceData.details = "Ordering";
+				else if (window.location.pathname.includes("/blogs/")) {
+					blogTitle =
+						document.querySelector(
+							"#shopify-section-article-template > div:nth-child(1) > div > div > div > div > h1"
+						)?.textContent || "Viewing News";
+					blogAuthor =
+						document.querySelector(
+							"#shopify-section-article-template > div:nth-child(1) > div > div > div > div > div.tt-autor"
+						)?.textContent || null;
 
-		presenceData.details = blogTitle;
-		if (blogAuthor) presenceData.state = blogAuthor;
+					presenceData.details = blogTitle;
+					if (blogAuthor) presenceData.state = blogAuthor;
 
-		if (blogAuthor) presenceData.smallImageKey = "reading";
-	} else presence.setActivity();
+					if (blogAuthor) presenceData.smallImageKey = "reading";
+				} else presence.setActivity();
+		}
+	}
 
 	presence.setActivity(presenceData);
 });
