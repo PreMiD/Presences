@@ -12,11 +12,11 @@ presence.on("UpdateData", async () => {
 		case pathname.includes("/wiki"): {
 			presenceData.smallImageKey = "wiki";
 			presenceData.smallImageText = "Wiki";
-			if (pathname === ("/wiki" || "/wiki/"))
+			if (pathname === "/wiki" || pathname === "/wiki/")
 				presenceData.details = "Viewing the main page";
 			else {
 				presenceData.details = "Reading a wiki page";
-				presenceData.state = `"${document.title.split("|")[0]}"`;
+				presenceData.state = document.title.split("|")[0];
 				presenceData.buttons = [
 					{
 						label: "Read Page",
@@ -32,11 +32,12 @@ presence.on("UpdateData", async () => {
 			if (document.title === "Blog | Discord Resources")
 				presenceData.details = "Viewing the main page";
 			else if (pathname.includes("/tags/")) {
+				const pSplit = pathname.split("/");
 				presenceData.details = "Looking for posts tagged with:";
-				presenceData.state = `"${pathname.split("/")}"`;
+				presenceData.state = `"${pSplit[pSplit.length - 1]}"`;
 			} else {
 				presenceData.details = "Reading a Post";
-				presenceData.state = `"${document.title.split("|")[0]}"`;
+				presenceData.state = document.title.split("|")[0];
 				presenceData.buttons = [
 					{
 						label: "Read Post",
@@ -51,7 +52,11 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Searching...";
 			if (search) {
 				presenceData.details = "Searching for:";
-				presenceData.state = `"${pathname.split("/")}"`;
+				presenceData.state = document
+					.querySelector<HTMLHeadElement>(
+						"#__docusaurus > div.main-wrapper > div > h1"
+					)
+					.textContent.split("Search results for ")[1];
 			} else presenceData.details = "Searching for something...";
 			break;
 		}
@@ -64,3 +69,4 @@ presence.on("UpdateData", async () => {
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
+
