@@ -22,15 +22,13 @@ presence.on("UpdateData", async () => {
 
 		if (pathname.includes("about-bloom"))
 			presenceData.state = "Reading: About Bloom";
-	}
-	if (hostname === "docs.bloom.host") {
+	} else if (hostname === "docs.bloom.host") {
 		presenceData.details = "Viewing the docs";
 		presenceData.state = `Reading: ${
 			document.querySelector("div.text--center > header > h1").textContent
 		}`;
 		presenceData.smallImageKey = "book-open-solid";
-	}
-	if (["mc.bloom.host", "demo.bloom.host"].includes(hostname)) {
+	} else if (["mc.bloom.host", "demo.bloom.host"].includes(hostname)) {
 		presenceData.details = "Using the panel";
 		presenceData.smallImageKey = "terminal-solid";
 		if (pathname.includes("account"))
@@ -64,8 +62,7 @@ presence.on("UpdateData", async () => {
 		else if (pathname.includes("server") && pathname.includes("modpacks"))
 			presenceData.state = "Installing Modpacks";
 		else if (pathname.includes("files")) presenceData.state = "Editing Files";
-	}
-	if (hostname === "status.bloom.host") {
+	} else if (hostname === "status.bloom.host") {
 		presenceData.details = "Viewing the Status page";
 		presenceData.smallImageKey = "stream-solid";
 		if (pathname.includes("report")) {
@@ -76,13 +73,10 @@ presence.on("UpdateData", async () => {
 				.trim()}`;
 			presenceData.smallImageKey = "stream-solid";
 		}
-	}
-	if (hostname === "vps.bloom.host") {
+	} else if (hostname === "vps.bloom.host") {
 		presenceData.details = "Using the VPS panel";
 		presenceData.smallImageKey = "server-solid";
-	}
-
-	if (hostname === "billing.bloom.host") {
+	} else if (hostname === "billing.bloom.host") {
 		presenceData.details = "Using the Billing Panel";
 		presenceData.smallImageKey = "shopping-cart-solid";
 	}
