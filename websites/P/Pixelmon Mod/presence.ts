@@ -4,8 +4,6 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	page = document.location.href;
 
-let title: Element, title2: Element;
-
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
 		presenceData: PresenceData = {
@@ -32,9 +30,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = firstChild.textContent;
 			presenceData.smallImageKey = "reading";
 			presenceData.details = "Reading Wiki:";
-		} else if (document.querySelector("#firstHeading-h2csdq87lb"))
-			presenceData.details = "Search Results";
-		else presenceData.details = "Reading Wiki:";
+		} else if (document.querySelector("#firstHeading-h2csdq87lb")) {
+			presenceData.details = "Search Results for:";
+			presenceData.state = document.querySelector("#ooui-php-1").textContent;
+		} else presenceData.details = "Reading Wiki:";
 	} else if (page.includes("index.php")) presenceData.details = "Forum";
 	else if (page.includes("viewforum.php"))
 		presenceData.details = `${title.textContent} Forum`;

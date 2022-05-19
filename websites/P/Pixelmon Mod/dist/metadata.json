@@ -6,8 +6,8 @@
 	},
 	"service": "Pixelmon Mod",
 	"description": {
-		"en": "Pixelmon adds many aspects of the Pokémon into Minecraft, including the Pokémon themselves, battling, trading, and breeding. ",
-		"nl": "Pixelmon voegt veel aspecten van Pokémon toe in Minecraft, zoals Pokémons, battlen, traden en breeden."
+		"en": "Pixelmon adds many aspects of Pokémon into Minecraft, including the Pokémon themselves, battling, trading, and breeding.",
+		"nl": "Pixelmon voegt veel aspecten van Pokémon toe aan Minecraft, zoals Pokémons, battlen, traden en breeden."
 	},
 	"url": "pixelmonmod.com",
 	"version": "1.0.0",
