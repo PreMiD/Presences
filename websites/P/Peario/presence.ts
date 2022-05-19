@@ -1,7 +1,8 @@
 const presence = new Presence({
 		clientId: "969204609845428234"
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	split = window.location.href.split("/");
 
 interface Data {
 	meta: {
@@ -22,19 +23,14 @@ async function fetchWithoutVideo() {
 		)
 			return;
 		const fetched = await fetch(
-			`https://v3-cinemeta.strem.io/meta/${
-				window.location.href.split("/")[4]
-			}/${window.location.href.split("/")[5]}.json`
+			`https://v3-cinemeta.strem.io/meta/${split[4]}/${split[5]}.json`
 		).then(x => x.json());
 		cached = fetched;
 		return fetched;
 	} else return cached;
 }
 async function fetchWithVideo(video: HTMLMediaElement) {
-	if (
-		!cached ||
-		!JSON.stringify(cached).includes(window.location.href.split("/")[5])
-	) {
+	if (!cached || !JSON.stringify(cached).includes(split[5])) {
 		const fetched = await fetch(
 			`https://v3-cinemeta.strem.io/meta/movie/${
 				video.getAttribute("poster").split("/")[5]
@@ -95,12 +91,6 @@ presence.on("UpdateData", async () => {
 				document.querySelector("#app > div > div > div > div.users.show > div")
 					.textContent
 			} Viewers`;
-			presenceData.buttons = [
-				{
-					label: "Join Room",
-					url: document.location.href
-				}
-			];
 			if (video.paused || isNaN(video.duration)) {
 				delete presenceData.endTimestamp;
 				presenceData.smallImageKey = "pause";
@@ -113,12 +103,6 @@ presence.on("UpdateData", async () => {
 			let title = "";
 			if (fetched) title = `:${fetched.meta.name}`;
 			presenceData.details = title;
-			presenceData.buttons = [
-				{
-					label: `Join Room ${title}`,
-					url: document.location.href
-				}
-			];
 		}
 	}
 	if (!buttons) delete presenceData.buttons;
