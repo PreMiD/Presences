@@ -89,9 +89,7 @@ presence.on("UpdateData", async () => {
 					);
 				}
 				presenceData.smallImageKey = paused ? "pause" : "play";
-				presenceData.smallImageText = paused
-					? "Wiedergabe pausiert"
-					: "Wiedergabe";
+				presenceData.smallImageText = paused ? "Pausiert" : "Wiedergabe";
 			}
 		}
 		//Obere Reiter
