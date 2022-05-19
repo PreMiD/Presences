@@ -43,7 +43,6 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = "Not Reading";
 	}
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
-	else delete presenceData.startTimestamp;
 	if (!showBook) showCover = false;
 	switch (true) {
 		case privacy: {
