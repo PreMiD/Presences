@@ -47,8 +47,10 @@ presence.on("UpdateData", async () => {
 	} else if (page.includes("ucp.php?mode=")) {
 		presenceData.details = title2.textContent;
 		presenceData.smallImageKey = "reading";
-	} else if (page.includes("downloads.php")) presenceData.details = "Downloads";
-	else if (page.includes("donate.php")) presenceData.details = "Donate";
+	} else if (page.includes("downloads.php"))
+		presenceData.details = "Pixelmon Mod Downloads";
+	else if (page.includes("donate.php"))
+		presenceData.details = "Donate to Pixelmon Mod";
 	else if (page.includes("tracker.php")) {
 		presenceData.details = title2.textContent;
 		if (document.querySelector("#col1 > div:nth-child(1) > h3")) {
