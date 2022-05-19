@@ -16,13 +16,11 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing the main website";
 			if (pathname.includes("minecraft"))
 				presenceData.state = "Reading: Minecraft Plans";
-
-			if (pathname.includes("vps")) presenceData.state = "Reading: VPS Plans";
-
-			if (pathname.includes("duck-panel"))
+			else if (pathname.includes("vps"))
+				presenceData.state = "Reading: VPS Plans";
+			else if (pathname.includes("duck-panel"))
 				presenceData.state = "Reading: About the Duck Panel";
-
-			if (pathname.includes("about-bloom"))
+			else if (pathname.includes("about-bloom"))
 				presenceData.state = "Reading: About Bloom";
 			break;
 		case "docs.bloom.host":
