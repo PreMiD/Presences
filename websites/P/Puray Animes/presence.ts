@@ -10,20 +10,27 @@ presence.on("UpdateData", () => {
 		};
 	if (document.querySelector("input[id^=headlessui]"))
 		presenceData.details = "Pesquisando Animes";
+	else if (pathname.startsWith("/login")) presenceData.details = "Entrando";
+	else if (pathname.startsWith("/register"))
+		presenceData.details = "Cadastrando";
 	else if (pathname.startsWith("/home"))
 		presenceData.details = "Na página principal";
 	else if (pathname.startsWith("/profile/")) {
-		presenceData.details = "Visualizando perfil:";
+		presenceData.details = "Visualizando perfil";
 		presenceData.state = `${
 			document.querySelector("h3").childNodes[0]?.textContent
 		} - ${document.querySelector("button[class*=blue] span")?.textContent}`;
 		presenceData.buttons = [{ label: "Ver perfil", url: location.href }];
+	} else if (pathname.startsWith("/config")) {
+		presenceData.details = `Configurando ${
+			document.querySelector("button[class*=blue] span")?.textContent
+		}`;
 	} else if (pathname.startsWith("/anime/")) {
-		presenceData.details = "Visualizando anime:";
+		presenceData.details = "Visualizando anime";
 		presenceData.state = document.querySelector(
 			"section div[class^=text-3xl]"
 		)?.textContent;
-		presenceData.buttons = [{ label: "Assistir anime", url: location.href }];
+		presenceData.buttons = [{ label: "Ver anime", url: location.href }];
 	} else if (pathname.startsWith("/watch/")) {
 		presenceData.details = document.querySelector(
 			"span.text-sm.font-bold.underline"
@@ -35,10 +42,14 @@ presence.on("UpdateData", () => {
 			{
 				label: "Assistir episódio",
 				url: location.href
+			},
+			{
+				label: "Ver anime",
+				url: document.querySelector<HTMLAnchorElement>(".mb-4>a").href
 			}
 		];
 		const video = document.querySelector("video");
-		if (!video.paused && video.readyState >= 1) {
+		if (video && !video.paused && video.readyState >= 1) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(video.currentTime, video.duration);
 		}
