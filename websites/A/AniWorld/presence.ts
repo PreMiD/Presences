@@ -1,9 +1,5 @@
 const presence = new Presence({
-		clientId: "830517484472762408"
-	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		clientId: "969716001090437120"
 	}),
 	pages: { [k: string]: string } = {
 		"/animes": "Betrachtet alle Animes",
@@ -16,8 +12,8 @@ const presence = new Presence({
 		"/support/regeln": "Betrachtet die Nutzungsbedingungen",
 		"/dmca": "Digital Millennium Copyright Act of 1998",
 		"/animewuensche": "Betrachtet Animewünsche",
-		"/login": "Login bei Anicloud",
-		"/registation": "Registrierung bei Anicloud",
+		"/login": "Login bei AniWorld",
+		"/registation": "Registrierung bei AniWorld",
 		"/account": "Betrachtet sein Account",
 		"/user/profil/": "Betrachtet ein Profil",
 		"/account/nachrichten": "Betrachtet seine Nachrichten",
@@ -27,7 +23,7 @@ const presence = new Presence({
 		"/account/subscribed": "Betrachtet seine Abonnierte Animes",
 		"/account/settings": "Account Einstellungen",
 		"/support/fragen": "Betrachtet Fragen & Antworten",
-		"/support": "Hilfe & Support bei Anicloud",
+		"/support": "Hilfe & Support bei AniWorld",
 		"/edit:information": "Neue Serieninformationen vorschlagen"
 	};
 let video,
@@ -51,61 +47,61 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "anicloud",
+			largeImageKey: "aniworld-logo",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		};
 	if (page === "/") presenceData.details = "Betrachtet die Startseite";
 	else if (page.startsWith("/anime/")) {
-		presenceData.details = `${
-			(document.querySelector("h1") as HTMLElement).textContent
-		}`;
-		presenceData.state = `${(
-			document.querySelector("title") as HTMLElement
-		).textContent
-			.split("Staffel")[0]
-			.replace("Filme von", " ")
-			.split(" | AniCloud.io - Animes gratis online ansehen")} - ${
-			(document.querySelector("h2") as HTMLElement).textContent
-		}`;
-		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestamps(currentTime, timeEnd);
-		presenceData.buttons = [
-			{
-				label: "Watch Anime",
-				url: document.location.href
-			}
-		];
+		// Check if we are on the episode selection page
+		if (page.split("/").length === 4) {
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1").textContent;
+			presenceData.state = "Betrachtet die Episodenliste";
+		} else {
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1").textContent;
+			presenceData.state = `${document
+				.querySelector<HTMLTitleElement>("title")
+				.textContent.split("Staffel")[0]
+				.replace("Filme von", " ")
+				.split(" | AniWorld.to - Animes gratis online ansehen")} - ${
+				document.querySelector<HTMLHeadingElement>("h2").textContent
+			}`;
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(currentTime, timeEnd);
+			presenceData.buttons = [
+				{
+					label: "Watch Anime",
+					url: document.location.href
+				}
+			];
 
-		video = document.querySelector("video");
-		if (video) {
-			played = video.currentTime !== 0;
-			timeEnd = video.duration;
-			({ currentTime } = video);
-			({ paused } = video);
-		}
-		if (played) {
-			if (!paused) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					currentTime,
-					timeEnd
-				);
+			video = document.querySelector<HTMLVideoElement>("video");
+			if (video) {
+				played = video.currentTime !== 0;
+				({ currentTime, duration: timeEnd, paused } = video);
 			}
-			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused
-				? (await strings).pause
-				: (await strings).play;
+			if (played) {
+				if (!paused) {
+					[, presenceData.endTimestamp] = presence.getTimestamps(
+						currentTime,
+						timeEnd
+					);
+				}
+				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageText = paused ? "Pausiert" : "Wiedergabe";
+			}
 		}
-
 		//Obere Reiter
 	} else {
 		switch (page) {
-			case "/animes": {
+			case "/animes":
+			case "/animes-alphabet":
+			case "/animes-genres": {
 				presenceData.details = pages[page];
 				presenceData.state = `Sortiert nach: ${
-					(
-						document.querySelector(
-							"#wrapper > div.container.marginBottom > div.seriesListNavigation > strong"
-						) as HTMLElement
+					document.querySelector<HTMLSpanElement>(
+						"#wrapper > div.container.marginBottom > div.seriesListNavigation > strong"
 					).textContent
 				}`;
 
@@ -113,9 +109,9 @@ presence.on("UpdateData", async () => {
 			}
 			case "/beliebte-animes": {
 				presenceData.state = `${
-					(document.querySelector("title") as HTMLElement).textContent.split(
-						"|"
-					)[0]
+					document
+						.querySelector<HTMLTitleElement>("title")
+						.textContent.split("|")[0]
 				}`;
 
 				break;
@@ -130,10 +126,8 @@ presence.on("UpdateData", async () => {
 				if (page.includes("/search")) {
 					presenceData.details = "Sucht nach:";
 					presenceData.state = `${
-						(
-							document.querySelector(
-								"#wrapper > div.container > div.pageTitle.searchResultsPageTitle > h2 > strong"
-							) as HTMLElement
+						document.querySelector<HTMLSpanElement>(
+							"#wrapper > div.container > div.pageTitle.searchResultsPageTitle > h2 > strong"
 						).textContent
 					}`;
 				} else {
@@ -141,10 +135,8 @@ presence.on("UpdateData", async () => {
 						case "/animekalender": {
 							presenceData.details = pages[page];
 							presenceData.state = `${
-								(
-									document.querySelector(
-										"#wrapper > div.container > div.seriesWishListHeader > div.row > div.col-md-4 > small"
-									) as HTMLElement
+								document.querySelector<HTMLSpanElement>(
+									"#wrapper > div.container > div.seriesWishListHeader > div.row > div.col-md-4 > small"
 								).textContent
 							}`;
 
@@ -190,14 +182,12 @@ presence.on("UpdateData", async () => {
 							if (page.startsWith("/user/profil/")) {
 								presenceData.details = "Betrachtet ein Profil";
 								presenceData.state = `${
-									(document.querySelector("h1") as HTMLElement).textContent
+									document.querySelector<HTMLHeadingElement>("h1").textContent
 								}`;
 								presenceData.smallImageKey = "user";
 								presenceData.smallImageText = `${
-									(
-										document.querySelector(
-											"#userDetails > div > div > div:nth-child(3) > div"
-										) as HTMLElement
+									document.querySelector<HTMLDivElement>(
+										"#userDetails > div > div > div:nth-child(3) > div"
 									).textContent
 								}`;
 							} else {
@@ -235,27 +225,23 @@ presence.on("UpdateData", async () => {
 											presenceData.details = pages[page];
 										else if (page.startsWith("/katalog/")) {
 											presenceData.details = `Betrachtet Animes mit ${
-												(
-													document.querySelector(
-														"#wrapper > div.container.marginBottom > div.pageTitle > h1 > strong"
-													) as HTMLElement
+												document.querySelector<HTMLSpanElement>(
+													"#wrapper > div.container.marginBottom > div.pageTitle > h1 > strong"
 												).textContent
 											}`;
 										} else if (page.startsWith("/support/frage/")) {
 											presenceData.details = `Frage von ${
-												(document.querySelector("h5") as HTMLElement)
+												document.querySelector<HTMLHeadingElement>("h5")
 													.textContent
 											}`;
 											presenceData.state = `${
-												(document.querySelector("h1") as HTMLElement)
+												document.querySelector<HTMLHeadingElement>("h1")
 													.textContent
 											}`;
 										} else if (page.startsWith("/genre/")) {
 											presenceData.details = `Sucht nach ${
-												(
-													document.querySelector(
-														"#wrapper > div.container.marginBottom > div.seriesListSection > div.pageTitle.pageCenter.homeTitle > h1"
-													) as HTMLElement
+												document.querySelector<HTMLHeadingElement>(
+													"#wrapper > div.container.marginBottom > div.seriesListSection > div.pageTitle.pageCenter.homeTitle > h1"
 												).textContent
 											}`;
 										} else {
@@ -269,6 +255,5 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (presenceData.details && presenceData.state)
-		presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
 });
