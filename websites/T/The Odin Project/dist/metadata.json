@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Rick",
+		"id": "211982234964590592"
+	},
+	"service": "The Odin Project",
+	"description": {
+		"en": ""
+	},
+	"url": "theodinproject.com",
+	"regExp": "([a-z0-9-]+[.])*theodinproject[.]com[/]",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/t2BG2Fj.png",
+	"thumbnail": "https://i.imgur.com/CmOz6oG.png",
+	"color": "#ffffff",
+	"category": "other",
+	"tags": [
+		"coding",
+		"web-development"
+	]
+}
