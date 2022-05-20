@@ -65,14 +65,6 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
-		case showLogo: {
-			presenceData.largeImageKey = "fwn_1024";
-			delete presenceData.smallImageKey;
-			delete presenceData.details;
-			delete presenceData.state;
-			delete presenceData.buttons;
-			break;
-		}
 		case pathname === "/": {
 			presenceData.details = "Browsing the homepage";
 			break;
@@ -120,18 +112,25 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname === "/search/": {
 			presenceData.details = "Searching for a novel";
+			presenceData.state = `"${document.querySelector(
+				"body > div.main > div.wp > div.m-t1 > em.e2"
+			)}`;
 			break;
 		}
 		case pathname === "/contact.html": {
 			presenceData.details = "Viewing the contact page";
 			break;
 		}
-		case pathname === "/sitemap.xml": {
-			presenceData.details = "Viewing the site's sitemap";
+		case pathname === "/privacy-terms-of-use.html": {
+			presenceData.details = "Reading the terms of use";
 			break;
 		}
-		case pathname === "/privacy-terms-of-use.html": {
-			presenceData.details = "Reviewing the terms of use";
+		case showLogo: {
+			presenceData.largeImageKey = "fwn_1024";
+			delete presenceData.smallImageKey;
+			delete presenceData.details;
+			delete presenceData.state;
+			delete presenceData.buttons;
 			break;
 		}
 		default: {
@@ -144,9 +143,7 @@ presence.on("UpdateData", async () => {
 					}`;
 				} else presenceData.largeImageKey = "nocover";
 				if (showReading) presenceData.details = "Viewing a novel";
-				else delete presenceData.details;
 				if (showBook) presenceData.state = document.title.split("-")[0];
-				else delete presenceData.state;
 				if (showButtons) {
 					presenceData.buttons = [
 						{
