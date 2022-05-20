@@ -1,7 +1,6 @@
 const presence = new Presence({
 		clientId: "976435781486911509",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
 	page = document.location.href;
 
 presence.on("UpdateData", async () => {
