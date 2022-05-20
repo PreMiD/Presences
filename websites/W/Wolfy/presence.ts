@@ -62,7 +62,7 @@ async function addJoinGameButton(presenceData: PresenceData, gameId: string) {
 	addButton(
 		presenceData,
 		`(${
-			document.querySelector("div.Header_timer__36MsP")?.textContent
+			document.querySelector("div.Header_timeState__L9yx4")?.textContent
 		}) Rejoindre la partie`,
 		`https://wolfy.net/game/${gameId}`
 	);
@@ -102,9 +102,9 @@ async function handleCheckingLeaderboard(
 
 	if (!username) {
 		const classementType =
-			document.querySelector("div.Leaderboard_moonLeaderboard__3U2H7") !== null
+			document.querySelector("div.Leaderboard_moonLeaderboard__7q9CE") !== null
 				? "Lunaire"
-				: document.querySelector("div.Leaderboard_lifeLeaderboard__3Wtz1") !==
+				: document.querySelector("div.Leaderboard_lifeLeaderboard__itvcT") !==
 				  null
 				? "Éternel"
 				: null;
@@ -112,23 +112,23 @@ async function handleCheckingLeaderboard(
 		presenceData.details = `Regarde le classement ${classementType}`;
 		presenceData.state = `Top ${parseInt(
 			document.querySelector(
-				"div.Leaderboard_playerLine__1uAgP > div.Leaderboard_rank__n6aio"
+				"div.Leaderboard_playerLine__Qo9eG > div.Leaderboard_rank__n6Cz_"
 			)?.textContent
 		).toLocaleString()} ${classementType} (${parseInt(
-			document.querySelector("div.Leaderboard_lifetimeXp__372DW > p")
+			document.querySelector("div.Leaderboard_lifetimeXp__UpQAh > p")
 				?.textContent
 		).toLocaleString()} ${classementType === "Lunaire" ? "lauriers" : "xp"})`;
 	} else {
 		presenceData.details = `Regarde le profil de ${username}`;
 		presenceData.state = `[${
-			document.querySelector("div.ExperienceGroup_first__3h_RY > p")
+			document.querySelector("div.ExperienceGroup_first__cLc5y > p")
 				?.textContent
 		}] ${parseInt(
 			document
-				.querySelector("div.ExperienceGroup_experienceBarFull__3Qo8A > span")
+				.querySelector("div.ExperienceGroup_experienceBarFull__xUSsB > span")
 				?.textContent.split(" / ")[0]
 		).toLocaleString()} xp & ${parseInt(
-			document.querySelector("p.PlayerCard_number__1d0CM").textContent
+			document.querySelector("p.PlayerCard_number__BC5Cv").textContent
 		).toLocaleString()} lauriers`;
 		await addVisitProfilButton(presenceData, username);
 	}
@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector("body h1").textContent;
 	} else if (path.includes("/game/") && path.split("/")[2 + pathOffset]) {
 		presenceData.state = document
-			.querySelector("div.Header_nameState__3u5uu")
+			.querySelector("div.Header_nameState__arW6y")
 			.textContent.toUpperCase();
 
 		if (presenceData.state !== prevState) {
@@ -187,7 +187,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 			prevState = presenceData.state;
 			cp = Date.now();
-			currTime = document.querySelector("div.Header_timer__36MsP").textContent;
+			currTime = document.querySelector("div.Header_timer__xtmy2").textContent;
 		}
 
 		presenceData.details = "En jeu";
@@ -203,21 +203,21 @@ presence.on("UpdateData", async () => {
 
 		await addVisitProfilButton(
 			presenceData,
-			document.querySelector("span.ChatMain_username__2C_7z")?.textContent // Will be the anonymous username if used
+			document.querySelector("span.ChatMain_username__0G_cN")?.textContent // Will be the anonymous username if used
 		);
 
 		if (
 			presenceData.state === waitingString[document.querySelector("html").lang]
 		) {
 			presenceData.state += ` (${
-				document.querySelector("div.Header_timer__36MsP")?.textContent
+				document.querySelector("div.Header_timeState__L9yx4")?.textContent
 			})`;
 			await addJoinGameButton(presenceData, path.split("/")[2 + pathOffset]);
 		}
 	} else if (path.includes("/leaderboard")) {
 		await addVisitProfilButton(
 			presenceData,
-			document.querySelector("p.Social_username__KhUdM")?.textContent
+			document.querySelector("p.Social_username__qpX4D")?.textContent
 		);
 
 		await handleCheckingLeaderboard(
@@ -225,28 +225,28 @@ presence.on("UpdateData", async () => {
 			path.split("/")[2 + pathOffset]
 		);
 	} else if (path.includes("/event") && path.split("/")[2 + pathOffset]) {
-		if (document.querySelector("div.Event_eventIntroduction__1HrZz")) {
+		if (document.querySelector("div.Event_eventIntroduction__tumD2")) {
 			presenceData.details = "Participe à un évènement";
 			presenceData.state = `Top ${parseInt(
 				document.querySelector(
-					"div.Event_lineLeaderboard__hxgUV.Event_me__2Lm3n > div.Event_rank__Id586"
+					"div.Event_lineLeaderboard__FMbXh.Event_me__5c0fl > Event_rank__lrB8C"
 				).textContent
 			).toLocaleString()} - ${parseInt(
 				document.querySelector(
-					"div.Event_lineLeaderboard__hxgUV.Event_me__2Lm3n > div.Event_points__3K_vr"
+					"div.Event_lineLeaderboard__FMbXh.Event_me__5c0fl > div.Event_points__6cXnJ"
 				).textContent
 			).toLocaleString()} points`;
 		} else {
 			presenceData.details = "Consulte un évènement à venir ⤵️";
 			presenceData.state = document.querySelector(
-				"div.Event_title__hCZ5r"
+				"div.Event_title__YeebM"
 			)?.textContent;
 		}
 		addConsultEventButton(presenceData, document.location.href);
 	} else {
 		await addVisitProfilButton(
 			presenceData,
-			document.querySelector("p.Social_username__KhUdM")?.textContent
+			document.querySelector("p.Social_username__qpX4D")?.textContent
 		);
 
 		presenceData.details = "Dans un menu";
