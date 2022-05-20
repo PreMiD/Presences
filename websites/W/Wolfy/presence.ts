@@ -9,7 +9,7 @@ let path,
 	cp: number,
 	currTime: string;
 
-const waitingString: Record<string, string> = {
+const waitingString = {
 	en: "WAITING",
 	fr: "EN ATTENTE"
 };
@@ -134,6 +134,16 @@ async function handleCheckingLeaderboard(
 	}
 }
 
+function isWaitingGame(state: string, lang: string) {
+	return state === waitingString[resolveLanguage(lang)];
+}
+
+function resolveLanguage(lang: string): keyof typeof waitingString {
+	if (Object.keys(waitingString).includes(lang))
+		return lang as keyof typeof waitingString;
+	return "en";
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo"
@@ -207,7 +217,7 @@ presence.on("UpdateData", async () => {
 		);
 
 		if (
-			presenceData.state === waitingString[document.querySelector("html").lang]
+			isWaitingGame(presenceData.state, document.querySelector("html")?.lang)
 		) {
 			presenceData.state += ` (${
 				document.querySelector("div.Header_timeState__L9yx4")?.textContent
