@@ -1,7 +1,6 @@
 const presence = new Presence({
 		clientId: "969204609845428234"
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
 	split = window.location.href.split("/");
 
 interface Data {
@@ -12,10 +11,7 @@ interface Data {
 let cached: Data;
 
 async function fetchWithoutVideo() {
-	if (
-		!cached ||
-		!JSON.stringify(cached).includes(window.location.href.split("/")[5])
-	) {
+	if (!cached || !JSON.stringify(cached).includes(split[5])) {
 		if (
 			document.querySelector(
 				"#app > div > div > div > div.loading > div > ion-icon"
@@ -41,7 +37,8 @@ async function fetchWithVideo(video: HTMLMediaElement) {
 	} else return cached;
 }
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
+	const browsingTimestamp = Math.floor(Date.now() / 1000),
+		presenceData: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
