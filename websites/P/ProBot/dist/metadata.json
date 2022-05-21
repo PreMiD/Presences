@@ -6,13 +6,13 @@
 	},
 	"service": "ProBot",
 	"description": {
-		"en": "Welcome images, moderation, global levels, logs, high quality music and many many more!",
+		"en": "ProBot is a very customizable multipurpose bot for welcome image, In-depth logs, Social commands, Music, Moderation and many more...",
 		"nl": "Welkomstafbeeldingen, moderatie, wereldwijde niveaus, logboeken, muziek van hoge kwaliteit en nog veel meer!"
 	},
-	"url": "www.probot.io",
-	"version": "1.4.6",
+	"url": "probot.io",
+	"version": "2.0.0",
 	"logo": "https://i.imgur.com/Oq9jXbz.png",
-	"thumbnail": "https://i.imgur.com/98zTh1t.png",
+	"thumbnail": "https://i.imgur.com/NMMkmv0.png",
 	"color": "#450F40",
 	"category": "other",
 	"tags": [
