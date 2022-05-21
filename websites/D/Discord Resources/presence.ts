@@ -9,10 +9,10 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, search } = window.location;
 	switch (true) {
-		case pathname.includes("/wiki"): {
+		case pathname.includes("/resources"): {
 			presenceData.smallImageKey = "wiki";
 			presenceData.smallImageText = "Wiki";
-			if (pathname === "/wiki" || pathname === "/wiki/")
+			if (pathname === "/resources" || pathname === "/resources/")
 				presenceData.details = "Viewing the main page";
 			else {
 				presenceData.details = "Reading a wiki page";
