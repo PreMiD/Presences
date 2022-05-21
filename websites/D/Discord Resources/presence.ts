@@ -9,12 +9,9 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, search } = window.location;
 	switch (true) {
-		case pathname.includes("/wiki"): {
+		case pathname.includes("/resources"): {
 			presenceData.smallImageKey = "wiki";
-			presenceData.smallImageText = "Wiki";
-			if (pathname === "/wiki" || pathname === "/resources/")
-				presenceData.details = "Viewing the main page";
-			else {
+			presenceData.smallImageText = "Wiki"; 
 				presenceData.details = "Reading a wiki page";
 				presenceData.state = document.title.split("|")[0];
 				presenceData.buttons = [
@@ -23,7 +20,7 @@ presence.on("UpdateData", async () => {
 						url: location.href
 					}
 				];
-			}
+			
 			break;
 		}
 		case pathname.includes("/blog"): {
