@@ -9,7 +9,7 @@
     "en": "Bloom offers affordable dedicated Minecraft server hosting and dedicated Virtual Private Servers. Experience the outstanding performance of Bloom today."
   },
   "url": "bloom.host",
-  "regExp": "(?:[a-z0-9]+\\.)*bloom\\.host",
+  "regExp": "(?:[a-z]+\\.)*bloom\\.host",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/1mVjQ4h.png",
   "thumbnail": "https://i.imgur.com/R5huY4r.png",
