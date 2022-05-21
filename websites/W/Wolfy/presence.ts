@@ -149,12 +149,12 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "logo"
 	};
 
-	path = document.location.pathname;
+	path = document.location.pathname.split("/");
 
-	const pathOffset =
-		path.split("/")[1] === document.querySelector("html")?.lang ? 1 : 0; // If the language is the first path element, we need to add an offset
+	if (path[1] === document.querySelector("html")?.lang) path = path.slice(2);
+	else path = path.slice(1);
 
-	if (window.location.href !== prev && !path.includes("/game/")) {
+	if (window.location.href !== prev && !path.includes("game")) {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 		prev = window.location.href;
@@ -164,14 +164,14 @@ presence.on("UpdateData", async () => {
 	presenceData.startTimestamp = elapsed;
 
 	if (document.location.hostname.includes("help.wolfy")) {
-		if (path.includes("/article") && path.split("/")[3]) {
+		if (path.includes("article") && path[2]) {
 			presenceData.details = "Lit l'article ⤵️";
 			presenceData.state = document.querySelector(
 				"h1.csh-navigation-title-item-inner"
 			)?.textContent;
 			addConsultArticleButton(presenceData, document.location.href);
 			addVisitHelpCenterButton(presenceData);
-		} else if (path.includes("/category") && path.split("/")[3]) {
+		} else if (path.includes("category") && path[2]) {
 			presenceData.details = "Consulte la catégorie ⤵️";
 			presenceData.state = document.querySelector(
 				"span.csh-category-badge"
@@ -182,12 +182,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Page d'accueil";
 			addVisitHelpCenterButton(presenceData);
 		}
-	} else if (path.includes("/articles/") && path.split("/")[2 + pathOffset]) {
+	} else if (path.includes("articles") && path[1]) {
 		presenceData.details = "Lis l'article ⤵️";
 		presenceData.smallImageKey = "reading";
 		presenceData.smallImageText = "Lis un article";
 		presenceData.state = document.querySelector("body h1").textContent;
-	} else if (path.includes("/game/") && path.split("/")[2 + pathOffset]) {
+	} else if (path.includes("game") && path[1]) {
 		presenceData.state = document
 			.querySelector("div.Header_nameState__arW6y")
 			.textContent.toUpperCase();
@@ -222,19 +222,16 @@ presence.on("UpdateData", async () => {
 			presenceData.state += ` (${
 				document.querySelector("div.Header_timeState__L9yx4")?.textContent
 			})`;
-			await addJoinGameButton(presenceData, path.split("/")[2 + pathOffset]);
+			await addJoinGameButton(presenceData, path[1]);
 		}
-	} else if (path.includes("/leaderboard")) {
+	} else if (path.includes("leaderboard")) {
 		await addVisitProfilButton(
 			presenceData,
 			document.querySelector("p.Social_username__qpX4D")?.textContent
 		);
 
-		await handleCheckingLeaderboard(
-			presenceData,
-			path.split("/")[2 + pathOffset]
-		);
-	} else if (path.includes("/event") && path.split("/")[2 + pathOffset]) {
+		await handleCheckingLeaderboard(presenceData, path[1]);
+	} else if (path.includes("event") && path[1]) {
 		if (document.querySelector("div.Event_eventIntroduction__tumD2")) {
 			presenceData.details = "Participe à un évènement";
 			presenceData.state = `Top ${parseInt(
@@ -261,7 +258,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Dans un menu";
 
-		switch (path.split("/")[1 + pathOffset]) {
+		switch (path[0]) {
 			case "skin":
 				presenceData.smallImageKey = "skin";
 				presenceData.smallImageText = "Choisis ton skin";
