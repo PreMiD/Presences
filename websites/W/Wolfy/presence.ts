@@ -239,7 +239,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Participe à un évènement";
 			presenceData.state = `Top ${parseInt(
 				document.querySelector(
-					"div.Event_lineLeaderboard__FMbXh.Event_me__5c0fl > Event_rank__lrB8C"
+					"div.Event_lineLeaderboard__FMbXh.Event_me__5c0fl > div.Event_rank__lrB8C"
 				).textContent
 			).toLocaleString()} - ${parseInt(
 				document.querySelector(
