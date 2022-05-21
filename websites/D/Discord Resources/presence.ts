@@ -9,18 +9,18 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, search } = window.location;
 	switch (true) {
-		case pathname.includes("/resources"): {
+		case pathname.includes("/resources/"): {
 			presenceData.smallImageKey = "wiki";
-			presenceData.smallImageText = "Wiki"; 
-				presenceData.details = "Reading a wiki page";
-				presenceData.state = document.title.split("|")[0];
-				presenceData.buttons = [
-					{
-						label: "Read Page",
-						url: location.href
-					}
-				];
-			
+			presenceData.smallImageText = "Wiki";
+			presenceData.details = "Reading a wiki page";
+			presenceData.state = document.title.split("|")[0];
+			presenceData.buttons = [
+				{
+					label: "Read Page",
+					url: location.href
+				}
+			];
+
 			break;
 		}
 		case pathname.includes("/blog"): {
