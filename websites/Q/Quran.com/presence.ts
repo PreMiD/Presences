@@ -41,11 +41,11 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname === "/privacy": {
-			presenceData.details = "Looking at Quran apps";
+			presenceData.details = "Reading privacy terms";
 			break;
 		}
 		case pathname.includes("/product-updates"): {
-			presenceData.details = "Looking at product updates";
+			presenceData.details = "Looking through product updates";
 			break;
 		}
 		case pathname === "/support": {
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 							"#__next > div > div.ContextMenu_container__M7_N3 > div > div:nth-child(2) > div > p:nth-child(2) > span"
 					  ).textContent
 					: document.querySelector<HTMLSpanElement>(
-							"#__next > div > div.ContextMenu_container__M7_N3 > div > div:nth-child(2) > div > p:nth-child(2) > span"
+							"#__next > div > div.ContextMenu_container__M7_N3.ContextMenu_visibleContainer__KnWDa.ContextMenu_expandedContainer__W_YZP > div > div:nth-child(2) > div > p:nth-child(2) > span.ContextMenu_primaryInfo__QL1fr"
 					  ).textContent
 			})`;
 			break;
@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 							"#__next > div > div.ContextMenu_container__M7_N3 > div > div:nth-child(2) > div > p:nth-child(2) > span"
 					  ).textContent
 					: document.querySelector<HTMLSpanElement>(
-							"#__next > div > div.ContextMenu_container__M7_N3 > div > div:nth-child(2) > div > p:nth-child(2) > span"
+							"#__next > div > div.ContextMenu_container__M7_N3.ContextMenu_visibleContainer__KnWDa.ContextMenu_expandedContainer__W_YZP > div > div:nth-child(2) > div > p:nth-child(2) > span.ContextMenu_primaryInfo__QL1fr"
 					  ).textContent
 			})`;
 		}
