@@ -1,77 +1,77 @@
 const presence = new Presence({
-		clientId: "655050505726197781"
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+    clientId: "655050505726197781"
+  }),
+  browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-	const presenceData: PresenceData = {
-		largeImageKey: "probot",
-		startTimestamp: browsingTimestamp
-	};
+  const presenceData: PresenceData = {
+    largeImageKey: "probot",
+    startTimestamp: browsingTimestamp
+  };
 
-	if (document.location.pathname === "/")
+  if (document.location.pathname === "/")
     presenceData.details = "Visiting the Main Page";
   else if (document.location.pathname.includes("/dashboard")) {
-		presenceData.details = "Visiting the Dashboard";
+    presenceData.details = "Visiting the Dashboard";
     presenceData.buttons = [
       {
         label: "Go to Dashboard",
         url: document.URL
       }
     ];
-	} else if (document.location.pathname.includes("/commands")) {
-		presenceData.details = "Viewing a page:";
-		presenceData.state = "Commands";
+  } else if (document.location.pathname.includes("/commands")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Commands";
     presenceData.buttons = [
       {
         label: "View ProBot Commands",
         url: document.URL
       }
     ];
-	} else if (document.location.pathname.includes("premium")) {
+  } else if (document.location.pathname.includes("premium")) {
     if (document.location.pathname.includes("/manage"))
       presenceData.details = "Managing their Premium";
     else presenceData.details = "Reading more about Premium";
   } else if (document.location.pathname.includes("/store")) {
     presenceData.details = "Managing their";
-	  if (document.location.pathname.includes("/profile"))
+    if (document.location.pathname.includes("/profile"))
       presenceData.state = "Profile Backgrounds";
     else if (document.location.pathname.includes("/rank"))
       presenceData.state = "ID Backgrounds";
     else presenceData.state = "purchased items";
-	} else if (document.location.pathname.includes("/badges")) {
-		presenceData.details = "Managing their";
-		presenceData.state = "Profile Badges";
-	} else if (document.location.pathname.includes("/xp")) {
-		presenceData.details = "Viewing top 100 people";
-		presenceData.state = "with the most XP";
+  } else if (document.location.pathname.includes("/badges")) {
+    presenceData.details = "Managing their";
+    presenceData.state = "Profile Badges";
+  } else if (document.location.pathname.includes("/xp")) {
+    presenceData.details = "Viewing top 100 people";
+    presenceData.state = "with the most XP";
     presenceData.buttons = [
       {
         label: "Visit the page",
         url: document.URL
       }
     ];
-	} else if (document.location.pathname.includes("/credits")) {
-		presenceData.details = "Viewing top 100 people";
-		presenceData.state = "with the most Credits";
+  } else if (document.location.pathname.includes("/credits")) {
+    presenceData.details = "Viewing top 100 people";
+    presenceData.state = "with the most Credits";
     presenceData.buttons = [
       {
         label: "Visit the page",
         url: document.URL
       }
     ];
-	} else if (document.location.pathname.includes("/daily")) {
-		presenceData.details = "Claiming their daily Credits";
+  } else if (document.location.pathname.includes("/daily")) {
+    presenceData.details = "Claiming their daily Credits";
     presenceData.buttons = [
       {
         label: "Claim your daily reward!",
         url: document.URL
       }
     ];
-	} else if (document.location.pathname.includes("/transactions")) {
-		presenceData.details = "Viewing their";
-		presenceData.state = "Credits Transactions History";
-	} else if (document.location.pathname.includes("terms-of-use")) {
+  } else if (document.location.pathname.includes("/transactions")) {
+    presenceData.details = "Viewing their";
+    presenceData.state = "Credits Transactions History";
+  } else if (document.location.pathname.includes("terms-of-use")) {
     presenceData.details = "Reading the Terms Of Use";
     presenceData.buttons = [
       {
@@ -101,9 +101,9 @@ presence.on("UpdateData", () => {
   else if (document.location.pathname.includes("/server/")) {
     presenceData.smallImageKey = "probot";
     presenceData.largeImageKey = (
-      document.querySelector(
-        "#sidebar_sidebar__avatar__QDGRP"
-      ) as HTMLImageElement
+    document.querySelector(
+      "#sidebar_sidebar__avatar__QDGRP"
+    ) as HTMLImageElement
     ).src;
     presenceData.smallImageText = document.querySelector(
       "#sidebar_sidebar__server-info__03ViT > h4"
@@ -173,5 +173,5 @@ presence.on("UpdateData", () => {
     }
   }
 
-	presence.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });
