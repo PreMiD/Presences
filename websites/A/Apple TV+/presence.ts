@@ -194,6 +194,11 @@ presence.on("UpdateData", async () => {
 			id: "buttons",
 			delete: true,
 			data: ["buttons"]
+		},
+		{
+			id: "smallImage",
+			delete: true,
+			data: ["smallImageKey"]
 		}
 	];
 
