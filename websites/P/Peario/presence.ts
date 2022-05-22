@@ -100,9 +100,7 @@ presence.on("UpdateData", async () => {
 			}
 		} else {
 			const fetched = await fetchWithoutVideo();
-			let title = "";
-			if (fetched) title = fetched.meta.name;
-			presenceData.details = title;
+			if (fetched) presenceData.details = fetched.meta.name;
 		}
 	} else presenceData.details = "Browsing...";
 	if (!buttons) delete presenceData.buttons;
