@@ -1,7 +1,6 @@
 const presence = new Presence({
-		clientId: "969204609845428234"
-	}),
-	split = window.location.href.split("/");
+	clientId: "969204609845428234"
+});
 
 interface Data {
 	meta: {
@@ -11,6 +10,7 @@ interface Data {
 let cached: Data;
 
 async function fetchWithoutVideo() {
+	const split = window.location.href.split("/");
 	if (!cached || !JSON.stringify(cached).includes(split[5])) {
 		if (
 			document.querySelector(
@@ -26,7 +26,10 @@ async function fetchWithoutVideo() {
 	} else return cached;
 }
 async function fetchWithVideo(video: HTMLMediaElement) {
-	if (!cached || !JSON.stringify(cached).includes(split[5])) {
+	if (
+		!cached ||
+		!JSON.stringify(cached).includes(window.location.href.split("/")[5])
+	) {
 		const fetched = await fetch(
 			`https://v3-cinemeta.strem.io/meta/movie/${
 				video.getAttribute("poster").split("/")[5]
