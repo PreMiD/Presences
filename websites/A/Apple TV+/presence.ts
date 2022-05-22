@@ -30,8 +30,7 @@ class AppleTV extends Presence {
 			"div.product-header__image-logo.clr-primary-text-on-dark > a > h2"
 		)?.textContent;
 
-		if (title) return title;
-		else return document.querySelector<HTMLImageElement>("img").alt;
+		return title ?? document.querySelector(".review-card__title.typ-headline-emph > span")?.textContent ?? "Unknown";
 	}
 
 	getEpisodeTitle() {
@@ -110,7 +109,7 @@ presence.on("UpdateData", async () => {
 						delete presenceData.endTimestamp;
 					}
 				} else {
-					presenceData.details = "Viewing show:";
+					presenceData.details = "Viewing Show:";
 					presenceData.state = presence.getTitle();
 
 					presenceData.buttons = [
@@ -147,7 +146,7 @@ presence.on("UpdateData", async () => {
 						delete presenceData.endTimestamp;
 					}
 				} else {
-					presenceData.details = "Viewing movie:";
+					presenceData.details = "Viewing Movie:";
 					presenceData.state = presence.getTitle();
 
 					presenceData.buttons = [
@@ -161,7 +160,7 @@ presence.on("UpdateData", async () => {
 		},
 		"/person/([a-zA-Z0-9-]+)": {
 			setPresenceData() {
-				presenceData.details = "Viewing person:";
+				presenceData.details = "Viewing Person:";
 				presenceData.state = document.querySelector(
 					"div.person-header__bio > h1"
 				)?.textContent;
@@ -169,7 +168,7 @@ presence.on("UpdateData", async () => {
 		},
 		"/settings": {
 			setPresenceData() {
-				presenceData.details = "Viewing their settings";
+				presenceData.details = "Viewing their Settings";
 			}
 		}
 	};
