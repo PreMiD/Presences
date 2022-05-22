@@ -29,51 +29,64 @@ presence.on("UpdateData", async () => {
 				document.querySelector("div.text--center > header > h1").textContent
 			}`;
 			break;
-		case "mc.bloom.host" && "demo.bloom.host":
+		case "demo.bloom.host":
+		case "mc.bloom.host":
 			presenceData.details = "Using the panel";
 			presenceData.smallImageKey = "terminal-solid";
 			if (pathname.includes("account"))
 				presenceData.state = "Editing account details";
 			else if (pathname.includes("console"))
 				presenceData.state = "Viewing the console";
-			else if (pathname.includes("server") && pathname.includes("logs"))
+			else if (pathname.includes("server") && pathname.includes("logs")) {
 				presenceData.state = "Viewing Audit Logs";
-			else if (pathname.includes("server") && pathname.includes("import"))
+			} else if (pathname.includes("server") && pathname.includes("import")) {
 				presenceData.state = "Using The Server Importer ";
-			else if (pathname.includes("server") && pathname.includes("startup"))
+			} else if (pathname.includes("server") && pathname.includes("startup")) {
 				presenceData.state = "Viewing Startup";
-			else if (pathname.includes("server") && pathname.includes("settings"))
+			} else if (pathname.includes("server") && pathname.includes("settings")) {
 				presenceData.state = "Viewing Settings";
-			else if (pathname.includes("server") && pathname.includes("subdomain"))
+			} else if (
+				pathname.includes("server") &&
+				pathname.includes("subdomain")
+			) {
 				presenceData.state = "Viewing Subdomains";
-			else if (pathname.includes("server") && pathname.includes("network"))
+			} else if (pathname.includes("server") && pathname.includes("network")) {
 				presenceData.state = "Viewing Ports & Proxies";
-			else if (pathname.includes("server") && pathname.includes("backups"))
+			} else if (pathname.includes("server") && pathname.includes("backups")) {
 				presenceData.state = "Creating Backups";
-			else if (pathname.includes("server") && pathname.includes("users"))
+			} else if (pathname.includes("server") && pathname.includes("users")) {
 				presenceData.state = "Viewing SubUsers";
-			else if (pathname.includes("server") && pathname.includes("schedules"))
+			} else if (
+				pathname.includes("server") &&
+				pathname.includes("schedules")
+			) {
 				presenceData.state = "Viewing Schedules";
-			else if (pathname.includes("server") && pathname.includes("databases"))
+			} else if (
+				pathname.includes("server") &&
+				pathname.includes("databases")
+			) {
 				presenceData.state = "Viewing Databases";
-			else if (pathname.includes("server") && pathname.includes("minecraft"))
+			} else if (
+				pathname.includes("server") &&
+				pathname.includes("minecraft")
+			) {
 				presenceData.state = "Managing Minecraft players";
-			else if (pathname.includes("server") && pathname.includes("plugins"))
+			} else if (pathname.includes("server") && pathname.includes("plugins")) {
 				presenceData.state = "Installing Plugins";
-			else if (pathname.includes("server") && pathname.includes("modpacks"))
+			} else if (pathname.includes("server") && pathname.includes("modpacks")) {
 				presenceData.state = "Installing Modpacks";
-			else if (pathname.includes("files")) presenceData.state = "Editing Files";
+			} else if (pathname.includes("server") && pathname.includes("files")) {
+				presenceData.state = "Editing Files";
+			}
 			break;
 		case "status.bloom.host":
 			presenceData.details = "Viewing the Status page";
 			presenceData.smallImageKey = "stream-solid";
 			if (pathname.includes("report")) {
-				presenceData.details = "Viewing the Status Page";
 				presenceData.state = `Viewing the status of: ${document
 					.querySelector(" div.portlet-body > div.row > div.col-xs-12 > span")
 					.textContent.replace(" (Recent History)", "")
 					.trim()}`;
-				presenceData.smallImageKey = "stream-solid";
 			}
 			break;
 		case "vps.bloom.host":
