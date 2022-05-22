@@ -1,7 +1,7 @@
 const presence = new Presence({
 		clientId: "976435781486911509",
 	}),
-	page = document.location.href;
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
