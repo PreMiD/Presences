@@ -217,7 +217,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "En jeu";
 
 		presenceData.smallImageKey = "live";
-		presenceData.smallImageText = "En jeu";
 		if (currTime?.includes(":")) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
 				cp,
