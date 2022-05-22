@@ -69,14 +69,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"body > div.header > div.cur > div > a:nth-child(5)"
 			).title;
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "View Author",
-						url: location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View Author",
+					url: location.href
+				}
+			];
 			break;
 		}
 		case pathname === "/search/": {
@@ -132,14 +130,12 @@ presence.on("UpdateData", async () => {
 				} else presenceData.largeImageKey = "nocover";
 				if (showReading) presenceData.details = "Viewing a novel";
 				if (showBook) presenceData.state = document.title.split("-")[0];
-				if (showButtons) {
-					presenceData.buttons = [
-						{
-							label: "View Novel",
-							url: location.href
-						}
-					];
-				}
+				presenceData.buttons = [
+					{
+						label: "View Novel",
+						url: location.href
+					}
+				];
 			} else if (
 				document.querySelector<HTMLAnchorElement>('[title="Read Next chapter"]')
 			) {
@@ -165,14 +161,12 @@ presence.on("UpdateData", async () => {
 					delete presenceData.smallImageKey;
 					delete presenceData.smallImageText;
 				}
-				if (showButtons) {
-					presenceData.buttons = [
-						{
-							label: "Read Novel",
-							url: location.href
-						}
-					];
-				}
+				presenceData.buttons = [
+					{
+						label: "Read Novel",
+						url: location.href
+					}
+				];
 			}
 		}
 	}
@@ -185,6 +179,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "closed";
 		presenceData.smallImageText = "Not Reading";
 	}
+	if (!showButtons) delete presenceData.buttons;
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 	if (!showBook) showCover = false;
 	presence.setActivity(presenceData);
