@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Chas",
+		"id": "498195150711947285"
+	},
+	"service": "Animeler.net",
+	"description": {
+		"en": "Animeler.net is a website that you can reach latest news about animes. Provided by Turk Anime TV.",
+		"tr": "En iyi, en güncel, en çok konuşulan içerikler ve farklı kaynaklardan tamamen tarafsız içerikleri okuyun. Türk Anime TV iştirakidir.",
+		"nl": "Animeler.net is de site die u op de snelste manier anime-nieuws aanbiedt. Het is een dochteronderneming van Turk Anime TV."
+	},
+	"url": "www.animeler.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/22aafhT.png",
+	"thumbnail": "https://i.imgur.com/yZzHfYX.png",
+	"color": "#d00b0b",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"haber",
+		"news",
+		"türk-anime-tv",
+		"animeler-net"
+	]
+}
