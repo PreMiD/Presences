@@ -33,38 +33,7 @@ presence.on("UpdateData", async () => {
 			"/genre/",
 			"/author/"
 		];
-	if (!showReading) {
-		showBook = false;
-		showCover = false;
-		showLogo = true;
-		showButtons = false;
-	} else {
-		presenceData.smallImageKey = "closed";
-		presenceData.smallImageText = "Not Reading";
-	}
-	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
-	if (!showBook) showCover = false;
 	switch (true) {
-		case privacy: {
-			presenceData.largeImageKey = "incognito";
-
-			if (
-				(pathnames.includes(pathname) ||
-					document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')) &&
-				showReading
-			)
-				presenceData.details = "Browsing...";
-			else if (
-				document.querySelector<HTMLAnchorElement>(
-					'[title="Read Next chapter"]'
-				) &&
-				showReading
-			) {
-				presenceData.details = "Reading...";
-				presenceData.smallImageKey = "open";
-			}
-			break;
-		}
 		case pathname === "/": {
 			presenceData.details = "Browsing the homepage";
 			break;
@@ -114,7 +83,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Searching for a novel";
 			presenceData.state = `"${document.querySelector(
 				"body > div.main > div.wp > div.m-t1 > em.e2"
-			)}`;
+			)}"`;
 			break;
 		}
 		case pathname === "/contact.html": {
@@ -123,6 +92,25 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname === "/privacy-terms-of-use.html": {
 			presenceData.details = "Reading the terms of use";
+			break;
+		}
+		case privacy: {
+			presenceData.largeImageKey = "incognito";
+			if (
+				(pathnames.includes(pathname) ||
+					document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')) &&
+				showReading
+			)
+				presenceData.details = "Browsing...";
+			else if (
+				document.querySelector<HTMLAnchorElement>(
+					'[title="Read Next chapter"]'
+				) &&
+				showReading
+			) {
+				presenceData.details = "Reading...";
+				presenceData.smallImageKey = "open";
+			}
 			break;
 		}
 		case showLogo: {
@@ -188,5 +176,16 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	}
+	if (!showReading) {
+		showBook = false;
+		showCover = false;
+		showLogo = true;
+		showButtons = false;
+	} else {
+		presenceData.smallImageKey = "closed";
+		presenceData.smallImageText = "Not Reading";
+	}
+	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
+	if (!showBook) showCover = false;
 	presence.setActivity(presenceData);
 });
