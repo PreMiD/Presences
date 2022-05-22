@@ -200,17 +200,6 @@ presence.on("UpdateData", async () => {
 			currTime = document.querySelector("div.Header_timer__xtmy2").textContent;
 		}
 
-		presenceData.details = "En jeu";
-
-		presenceData.smallImageKey = "live";
-		presenceData.smallImageText = "En jeu";
-		if (currTime?.includes(":")) {
-			[presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
-				cp,
-				currTime
-			);
-		} else presenceData.startTimestamp = cp;
-
 		await addVisitProfilButton(
 			presenceData,
 			document.querySelector("span.ChatMain_username__0G_cN")?.textContent // Will be the anonymous username if used
@@ -224,6 +213,17 @@ presence.on("UpdateData", async () => {
 			})`;
 			await addJoinGameButton(presenceData, path[1]);
 		}
+
+		presenceData.details = "En jeu";
+
+		presenceData.smallImageKey = "live";
+		presenceData.smallImageText = "En jeu";
+		if (currTime?.includes(":")) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
+				cp,
+				currTime
+			);
+		} else presenceData.startTimestamp = cp;
 	} else if (path.includes("leaderboard")) {
 		await addVisitProfilButton(
 			presenceData,
