@@ -40,6 +40,9 @@ class AppleTV extends Presence {
 			title ??
 			document.querySelector(".review-card__title.typ-headline-emph > span")
 				?.textContent ??
+			document.querySelector(
+				"div.product-header__image-logo__show-title.typ-headline"
+			)?.textContent ??
 			"Unknown"
 		);
 	}
