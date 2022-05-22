@@ -7,8 +7,14 @@ class AppleTV extends Presence {
 		return document
 			.querySelector("apple-tv-plus-player")
 			.shadowRoot.querySelector("amp-video-player-internal")
-			.shadowRoot.querySelector("amp-video-player")
-			.shadowRoot.querySelector<HTMLVideoElement>("#apple-music-video-player");
+			?.shadowRoot.querySelector("amp-video-player")
+			?.shadowRoot.querySelector<HTMLVideoElement>("#apple-music-video-player");
+	}
+
+	getVideoType() {
+		return document
+			.querySelector("apple-tv-plus-player")
+			.shadowRoot.querySelector(".container.takeover")?.classList[2];
 	}
 
 	getTitle(eyebrow = false) {
@@ -16,35 +22,40 @@ class AppleTV extends Presence {
 			const title = document
 				.querySelector("apple-tv-plus-player")
 				.shadowRoot.querySelector("amp-video-player-internal")
-				.shadowRoot.querySelector("div.info__eyebrow")?.textContent;
+				?.shadowRoot.querySelector("div.info__eyebrow")?.textContent;
 
 			if (title || eyebrow) return title;
 			else {
 				return document
 					.querySelector("apple-tv-plus-player")
 					.shadowRoot.querySelector("amp-video-player-internal")
-					.shadowRoot.querySelector("div.info__title")?.textContent;
+					?.shadowRoot.querySelector("div.info__title")?.textContent;
 			}
 		}
 		const title = document.querySelector(
 			"div.product-header__image-logo.clr-primary-text-on-dark > a > h2"
 		)?.textContent;
 
-		return title ?? document.querySelector(".review-card__title.typ-headline-emph > span")?.textContent ?? "Unknown";
+		return (
+			title ??
+			document.querySelector(".review-card__title.typ-headline-emph > span")
+				?.textContent ??
+			"Unknown"
+		);
 	}
 
 	getEpisodeTitle() {
 		return document
 			.querySelector("apple-tv-plus-player")
 			.shadowRoot.querySelector("amp-video-player-internal")
-			.shadowRoot.querySelector("div.info__title")?.textContent;
+			?.shadowRoot.querySelector("div.info__title")?.textContent;
 	}
 
 	isWatching() {
 		return !!document
 			.querySelector("apple-tv-plus-player")
 			.shadowRoot.querySelector("amp-video-player-internal")
-			.shadowRoot.querySelector("div.info__title")?.textContent;
+			?.shadowRoot.querySelector("div.info__title")?.textContent;
 	}
 }
 
@@ -186,8 +197,22 @@ presence.on("UpdateData", async () => {
 		}
 	];
 
-	for (const [pathname, PData] of Object.entries(data.presence))
-		if (document.location.pathname.match(pathname)) PData.setPresenceData();
+	let presenceSelect;
+
+	for (const [pathname, PData] of Object.entries(data.presence)) {
+		if (document.location.pathname.match(pathname)) {
+			presenceSelect = pathname;
+			PData.setPresenceData();
+		}
+	}
+
+	if (!presenceSelect && presence.isWatching()) {
+		data.presence[
+			presence.getVideoType() === "movie"
+				? "/movie/([a-zA-Z0-9-]+)"
+				: "/(show|episode)/([a-zA-Z0-9-]+)"
+		].setPresenceData();
+	}
 
 	for (const setting of data.settings) {
 		const settingValue = await presence.getSetting<boolean>(setting.id);
