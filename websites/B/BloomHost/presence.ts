@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case "docs.bloom.host":
 			presenceData.details = "Viewing the docs";
-			presenceData.state = `Reading: ${
+			presenceData.state = `Reading ${
 				document.querySelector("div.text--center > header > h1").textContent
 			}`;
 			break;
@@ -84,6 +84,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Using the Billing Panel";
 			presenceData.smallImageKey = "shopping-cart-solid";
 			break;
+		default:
+			presenceData.details = "On Bloom Host";
 	}
 
 	if (!presenceData.details) presence.setActivity();
