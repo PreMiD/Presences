@@ -1,6 +1,7 @@
 const presence = new Presence({
-	clientId: "969204609845428234"
-});
+		clientId: "969204609845428234"
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 interface Data {
 	meta: {
@@ -40,8 +41,7 @@ async function fetchWithVideo(video: HTMLMediaElement) {
 	} else return cached;
 }
 presence.on("UpdateData", async () => {
-	const browsingTimestamp = Math.floor(Date.now() / 1000),
-		presenceData: PresenceData = {
+	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 			if (fetched) title = fetched.meta.name;
 			presenceData.details = title;
 		}
-	}
+	} else presenceData.details = "Browsing...";
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
