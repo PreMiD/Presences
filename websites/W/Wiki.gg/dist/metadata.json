@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"service": "Wiki.gg",
+	"description": {
+		"en": "Platform operated by creators of gaming experiences. Flexible platform that adjusts to the needs of creators.",
+		"nl": "Platform beheerd door makers van spelervaringen. Flexibel platform dat zich aanpast aan de behoeften van de makers."
+	},
+	"url": "wiki.gg",
+	"regExp": "([a-z0-9-]+[.])*wiki[.]gg[/]",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/4YN40As.png",
+	"thumbnail": "https://i.imgur.com/0Gq1Ra5.jpg",
+	"color": "#ff1980",
+	"category": "other",
+	"tags": ["wiki", "wikis", "terraria"],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}
