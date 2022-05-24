@@ -4,7 +4,7 @@
 ## Acknowledgements
 - [ ] I read the [Presence Guidelines](https://github.com/PreMiD/Presences/blob/main/.github/CONTRIBUTING.md)
 - [ ] I linted the code by running `yarn format`
-- [ ] I bumped the version of the presence in accordance with [Semver](https://devhints.io/semver)
+- [ ] The PR title follows the repo's [commit conventions](https://github.com/PreMiD/Presences/blob/main/.github/COMMIT_CONVENTION.md)
 
 ## Screenshots
 <details>
