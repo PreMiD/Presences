@@ -22,13 +22,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Preparing for a round";
 		else if (document.querySelector(".active-component-play")) {
 			if (document.querySelector(".side-bar")) {
-				var info = document
+				let info = document
 					.querySelector(".meta-infos")
 					.querySelectorAll("span");
 				presenceData.details = "In an online battle";
 				presenceData.state = "Playing map " + info[1].textContent;
 			} else {
-				var info = document
+				let info = document
 					.querySelector(".meta-infos")
 					.querySelectorAll("span");
 				presenceData.details = "Playing map " + info[1].textContent;
