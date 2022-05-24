@@ -79,9 +79,10 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname === "/search/": {
 			presenceData.details = "Searching for a novel";
-			presenceData.state = `"${document.querySelector(
-				"body > div.main > div.wp > div.m-t1 > em.e2"
-			)}"`;
+			presenceData.state = `"${
+				document.querySelector("body > div.main > div.wp > div.m-t1 > em.e2")
+					.textContent
+			}"`;
 			break;
 		}
 		case pathname === "/contact.html": {
