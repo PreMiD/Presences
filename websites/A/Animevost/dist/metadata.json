@@ -14,8 +14,8 @@
 	],
 	"regExp": "([a-z0-9-]+[.])*vost([.][a-z]+)+[/]",
 	"version": "1.0.0",
-	"logo": "https://dl.dropboxusercontent.com/s/pz35d53jxfrk91r/animevost.png",
-	"thumbnail": "https://dl.dropboxusercontent.com/s/yooqmoforhn0jpy/chrome_23t2CrVBVT.png",
+	"logo": "https://i.imgur.com/O09DM9g.png",
+	"thumbnail": "https://i.imgur.com/3W98Sei.png",
 	"color": "#fabf6e",
 	"category": "anime",
 	"tags": [
