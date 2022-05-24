@@ -1,35 +1,33 @@
-var presence = new Presence({
-  clientId: "620084360120369172"
-});
-
-var elapsed = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+		clientId: "844109673618735144"
+	}),
+	elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "yahoomail-logo"
-  };
-
-  var path = document.location.pathname;
-  if (path.includes("/folders/") || path.includes("/search/")) {
-    if (path.includes("messages")) {
-      data.details = "Viewing an Email";
-      data.startTimestamp = elapsed;
-    } else {
-      data.details = "Viewing Mail";
-      data.startTimestamp = elapsed;
-    }
-  } else if (path.includes("/compose/")) {
-    data.details = "Composing a New Email";
-    data.startTimestamp = elapsed;
-  } else if (path.includes("/settings/")) {
-    data.details = "Viewing Settings";
-    data.startTimestamp = elapsed;
-  } else if (path.includes("/contacts")) {
-    data.details = "Viewing Contacts";
-    data.startTimestamp = elapsed;
-  } else {
-    data.details = "Viewing Mail";
-    data.startTimestamp = elapsed;
-  }
-  presence.setActivity(data);
+	const presenceData: PresenceData = {
+			largeImageKey: "logo"
+		},
+		path = document.location.pathname;
+	if (path.includes("/folders/") || path.includes("/search/")) {
+		if (path.includes("messages")) {
+			presenceData.details = "Viewing an Email";
+			presenceData.startTimestamp = elapsed;
+		} else {
+			presenceData.details = "Viewing Mail";
+			presenceData.startTimestamp = elapsed;
+		}
+	} else if (path.includes("/compose/")) {
+		presenceData.details = "Composing a New Email";
+		presenceData.startTimestamp = elapsed;
+	} else if (path.includes("/settings/")) {
+		presenceData.details = "Viewing Settings";
+		presenceData.startTimestamp = elapsed;
+	} else if (path.includes("/contacts")) {
+		presenceData.details = "Viewing Contacts";
+		presenceData.startTimestamp = elapsed;
+	} else {
+		presenceData.details = "Viewing Mail";
+		presenceData.startTimestamp = elapsed;
+	}
+	presence.setActivity(presenceData);
 });

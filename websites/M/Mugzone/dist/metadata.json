@@ -1,31 +1,31 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.3",
-  "service": "Mugzone",
-  "author": {
-    "name": "Himori",
-    "id": "350602512044261386"
-  },
-  "category": "games",
-  "logo": "https://i.imgur.com/HP5fcgM.png",
-  "thumbnail": "https://i.imgur.com/JkhV3Q0.png",
-  "version": "1.1.2",
-  "color": "#b1b8cd",
-  "tags": [
-    "malody",
-    "rhythm-game",
-    "community"
-  ],
-  "settings": [
-    {
-      "id": "privacy",
-      "title": "Keep me hidden",
-      "icon": "fas fa-eye-slash",
-      "value": false
-    }
-  ],
-  "url": "m.mugzone.net",
-  "description": {
-    "en": "Malody, cross-platform music game community.",
-    "nl": "Malody, platformonafhankelijke muziekgame-community."
-  }
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Himori",
+		"id": "350602512044261386"
+	},
+	"service": "Mugzone",
+	"description": {
+		"en": "Malody, cross-platform music game community.",
+		"nl": "Malody, platformonafhankelijke muziekgame-community."
+	},
+	"url": "m.mugzone.net",
+	"version": "2.0.9",
+	"logo": "https://i.imgur.com/5phtiVk.png",
+	"thumbnail": "https://i.imgur.com/LiUGZxS.png",
+	"color": "#b1b8cd",
+	"category": "games",
+	"tags": [
+		"malody",
+		"mugzone",
+		"game"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Keep me hidden",
+			"icon": "fas fa-eye-slash",
+			"value": false
+		}
+	]
 }

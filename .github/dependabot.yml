@@ -3,26 +3,18 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
-    assignees:
-      - "TheDropX"
-      - "Timeraa"
+      interval: "monthly"
     commit-message:
-      prefix: "🔼"
-      prefix-development: "🔼"
+      prefix: chore
+      include: scope
     labels:
       - "dependencies"
-    open-pull-requests-limit: 15
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-    assignees:
-      - "TheDropX"
-      - "Timeraa"
+      interval: "daily"
     commit-message:
-      prefix: "🔼"
-      prefix-development: "🔼"
+      prefix: chore
+      include: scope
     labels:
       - "dependencies"
-    open-pull-requests-limit: 15

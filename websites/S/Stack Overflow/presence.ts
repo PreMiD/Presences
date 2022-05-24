@@ -1,136 +1,141 @@
-var presence = new Presence({
-  clientId: "610123745033584651"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var title: any,
-  pageNumber: any,
-  jobPageNumber: any,
-  usersortagsPageNumber: any,
-  allPages: any,
-  lastPage: any,
-  jobLastPage: any,
-  questionsLastPage: any;
+const presence = new Presence({
+		clientId: "610123745033584651"
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+let title: HTMLAnchorElement,
+	pageNumber: HTMLElement,
+	jobPageNumber: HTMLAnchorElement,
+	usersortagsPageNumber: HTMLElement,
+	allPages: NodeListOf<HTMLAnchorElement>,
+	lastPage: string,
+	jobLastPage: NodeListOf<HTMLAnchorElement>,
+	questionsLastPage: NodeListOf<HTMLAnchorElement>;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    details: "Unknown page",
-    largeImageKey: "lg"
-  };
+	const presenceData: PresenceData = {
+		details: "Unknown page",
+		largeImageKey: "lg"
+	};
 
-  title = document.querySelector("div#question-header h1 a");
+	title = document.querySelector("div#question-header h1 a");
 
-  pageNumber = document.querySelector("div.pager.fl span.page-numbers.current");
+	pageNumber = document.querySelector("div.pager.fl span.page-numbers.current");
 
-  usersortagsPageNumber = document.querySelector(
-    "div.pager.fr span.page-numbers.current"
-  );
+	usersortagsPageNumber = document.querySelector(
+		"div.pager.fr span.page-numbers.current"
+	);
 
-  jobPageNumber = document.querySelector(
-    "div:nth-child(1) > div > a.job-link.selected"
-  );
+	jobPageNumber = document.querySelector(
+		"div:nth-child(1) > div > a.job-link.selected"
+	);
 
-  allPages = document.querySelectorAll("div.pager.fr a");
+	allPages = document.querySelectorAll("div.pager.fr a");
 
-  jobLastPage = document.querySelectorAll("div.pagination a");
+	jobLastPage = document.querySelectorAll("div.pagination a");
 
-  questionsLastPage = document.querySelectorAll("div.pager.fl a");
+	questionsLastPage = document.querySelectorAll("div.pager.fl a");
 
-  if (
-    document.location.pathname.includes("/users") ||
-    document.location.pathname.includes("/tags")
-  ) {
-    lastPage = allPages[allPages.length - 2].innerText;
-  } else if (document.location.pathname.includes("/jobs")) {
-    lastPage = jobLastPage[jobLastPage.length - 2].innerText;
-  } else if (document.location.pathname == "/questions") {
-    lastPage = questionsLastPage[questionsLastPage.length - 2].innerText;
-  }
+	if (
+		document.location.pathname.includes("/users") ||
+		document.location.pathname.includes("/tags")
+	)
+		lastPage = allPages[allPages.length - 2].textContent;
+	else if (document.location.pathname.includes("/jobs"))
+		lastPage = jobLastPage[jobLastPage.length - 2].textContent;
+	else if (document.location.pathname === "/questions")
+		lastPage = questionsLastPage[questionsLastPage.length - 2].textContent;
 
-  if (title && document.location.pathname.includes("/questions/")) {
-    presenceData.details = "Reading a question.";
+	if (title && document.location.pathname.includes("/questions/")) {
+		presenceData.details = "Reading a question.";
 
-    presenceData.state = title.innerText;
+		presenceData.state = title.textContent;
 
-    presenceData.startTimestamp = browsingStamp;
-  } else {
-    if (document.location.pathname == "/") {
-      presenceData.state = "Main Page | Home";
+		presenceData.startTimestamp = browsingTimestamp;
+	} else if (document.location.pathname === "/") {
+		presenceData.state = "Main Page | Home";
 
-      presenceData.startTimestamp = browsingStamp;
+		presenceData.startTimestamp = browsingTimestamp;
 
-      delete presenceData.details;
-    } else if (
-      document.location.pathname == "/questions" &&
-      pageNumber.innerText.length > 0
-    ) {
-      var lastPageNumber: number = +lastPage;
-      var lastquestionsPageNumber: number = +pageNumber.innerText;
+		delete presenceData.details;
+	} else if (
+		document.location.pathname === "/questions" &&
+		pageNumber.textContent.length > 0
+	) {
+		const lastPageNumber: number = +lastPage,
+			lastquestionsPageNumber: number = +pageNumber.textContent;
 
-      if (lastquestionsPageNumber > lastPageNumber) {
-        console.log(lastPageNumber + " --- " + lastquestionsPageNumber);
+		if (lastquestionsPageNumber > lastPageNumber) {
+			presence.info(`${lastPageNumber} --- ${lastquestionsPageNumber}`);
 
-        lastPage = pageNumber.innerText;
-      }
+			lastPage = pageNumber.textContent;
+		}
 
-      presenceData.details = "Browsing all the questions.";
+		presenceData.details = "Browsing all the questions.";
 
-      presenceData.state =
-        "Current page: " + pageNumber.innerText + "/" + lastPage;
+		presenceData.state = `Current page: ${pageNumber.textContent}/${lastPage}`;
 
-      presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname == "/jobs") {
-      const lastPageNumber: number = +lastPage;
-      const lastjobPageNumber: number = +jobPageNumber.innerText;
+		presenceData.startTimestamp = browsingTimestamp;
+	} else {
+		switch (document.location.pathname) {
+			case "/jobs": {
+				const lastPageNumber: number = +lastPage,
+					lastjobPageNumber: number = +jobPageNumber.textContent;
 
-      if (lastjobPageNumber > lastPageNumber) {
-        console.log(lastPageNumber + " --- " + lastjobPageNumber);
+				if (lastjobPageNumber > lastPageNumber) {
+					presence.info(`${lastPageNumber} --- ${lastjobPageNumber}`);
 
-        lastPage = jobPageNumber.innerText;
-      }
+					lastPage = jobPageNumber.textContent;
+				}
 
-      presenceData.details = "Browsing jobs.";
+				presenceData.details = "Browsing jobs.";
 
-      presenceData.state =
-        "Current page: " + jobPageNumber.innerText + "/" + lastPage;
+				presenceData.state = `Current page: ${jobPageNumber.textContent}/${lastPage}`;
 
-      presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname == "/users") {
-      const lastPageNumber: number = +lastPage;
-      var lastusersortagsPageNumber: number = +usersortagsPageNumber.innerText;
+				presenceData.startTimestamp = browsingTimestamp;
 
-      if (lastusersortagsPageNumber > lastPageNumber) {
-        console.log(lastPageNumber + " --- " + lastusersortagsPageNumber);
+				break;
+			}
+			case "/users": {
+				const lastPageNumber: number = +lastPage,
+					lastusersortagsPageNumber: number =
+						+usersortagsPageNumber.textContent;
 
-        lastPage = usersortagsPageNumber.innerText;
-      }
+				if (lastusersortagsPageNumber > lastPageNumber) {
+					presence.info(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
 
-      presenceData.details = "Browsing users.";
+					lastPage = usersortagsPageNumber.textContent;
+				}
 
-      presenceData.state =
-        "Current page: " + usersortagsPageNumber.innerText + "/" + lastPage;
+				presenceData.details = "Browsing users.";
 
-      presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname == "/tags") {
-      const lastPageNumber: number = +lastPage;
-      const lastusersortagsPageNumber: number =
-        +usersortagsPageNumber.innerText;
+				presenceData.state = `Current page: ${usersortagsPageNumber.textContent}/${lastPage}`;
 
-      if (lastusersortagsPageNumber > lastPageNumber) {
-        console.log(lastPageNumber + " --- " + lastusersortagsPageNumber);
+				presenceData.startTimestamp = browsingTimestamp;
 
-        lastPage = usersortagsPageNumber.innerText;
-      }
+				break;
+			}
+			case "/tags": {
+				const lastPageNumber: number = +lastPage,
+					lastusersortagsPageNumber: number =
+						+usersortagsPageNumber.textContent;
 
-      presenceData.details = "Browsing tags.";
+				if (lastusersortagsPageNumber > lastPageNumber) {
+					presence.info(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
 
-      presenceData.state =
-        "Current page: " + usersortagsPageNumber.innerText + "/" + lastPage;
+					lastPage = usersortagsPageNumber.textContent;
+				}
 
-      presenceData.startTimestamp = browsingStamp;
-    }
-  }
+				presenceData.details = "Browsing tags.";
 
-  presence.setActivity(presenceData);
+				presenceData.state = `Current page: ${usersortagsPageNumber.textContent}/${lastPage}`;
+
+				presenceData.startTimestamp = browsingTimestamp;
+
+				break;
+			}
+			// No default
+		}
+	}
+
+	presence.setActivity(presenceData);
 });

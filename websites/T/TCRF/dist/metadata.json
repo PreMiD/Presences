@@ -1,24 +1,25 @@
 {
-  "author": {
-    "name": "Nekolen",
-    "id": "270125856679002113"
-  },
-  "service": "TCRF",
-  "description": {
-    "en": "The Cutting Room Floor is a site dedicated to unearthing and researching unused and cut content from video games.",
-    "nl": "The Cutting Room Floor is een site gewijd aan het opgraven en onderzoeken van ongebruikte en geknipte inhoud uit videogames."
-  },
-  "url": "tcrf.net",
-  "version": "1.4.5",
-  "thumbnail": "https://i.imgur.com/Q1bzBtD.png",
-  "logo": "https://i.imgur.com/uyVNYME.png",
-  "color": "#D3D3D3",
-  "tags": [
-    "games",
-    "retro",
-    "wiki",
-    "research",
-    "cut-contents"
-  ],
-  "category": "games"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Nekolen",
+		"id": "270125856679002113"
+	},
+	"service": "TCRF",
+	"description": {
+		"en": "The Cutting Room Floor is a site dedicated to unearthing and researching unused and cut content from video games.",
+		"nl": "The Cutting Room Floor is een site gewijd aan het opgraven en onderzoeken van ongebruikte en geknipte inhoud uit videogames."
+	},
+	"url": "tcrf.net",
+	"version": "1.4.15",
+	"logo": "https://i.imgur.com/huRGBxt.png",
+	"thumbnail": "https://i.imgur.com/Q1bzBtD.png",
+	"color": "#D3D3D3",
+	"category": "games",
+	"tags": [
+		"games",
+		"retro",
+		"wiki",
+		"research",
+		"cut-contents"
+	]
 }

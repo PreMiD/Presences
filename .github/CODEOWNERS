@@ -1,11 +1,8 @@
 websites/** @PreMiD/presence-verifiers
-
-@types/** @Timeraa @ririxidev @Bas950
-package.json @Timeraa @Fruxh @TheDropX @ririxidev
-yarn.lock @Timeraa @Fruxh @TheDropX @ririxidev
-.eslintrc.json @ririxidev
-.github/CODEOWNERS @ririxidev @Bas950
-.github/CONTRIBUTING.md @Bas950 @ririxidev
-
-util/tools/translator.ts @Bas950 @ririxidev
-util/tools/auto/** @SeMiD
+@types/** @PreMiD/administrators @PreMiD/presence-verifiers
+yarn.lock @PreMiD/administrators @PreMiD/presence-verifiers
+.eslintrc.json @PreMiD/administrators @PreMiD/presence-verifiers
+.github/CODEOWNERS @PreMiD/administrators
+.github/CONTRIBUTING.md @PreMiD/administrators @PreMiD/presence-verifiers
+util/tools/translator.ts @PreMiD/presence-verifiers
+util/tools/auto/** @PreMiD/presence-verifiers

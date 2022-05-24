@@ -1,27 +1,28 @@
 {
-  "author": {
-    "name": "EGGSY",
-    "id": "162969778699501569"
-  },
-  "service": "ShiftDelete.Net",
-  "description": {
-    "en": "ShiftDelete.Net is one of the biggest technology blogs in Turkey.",
-    "tr": "ShiftDelete.Net, Türkiye'nin en büyük teknoloji haberleri ve forum sitelerinden birisidir..",
-    "nl": "ShiftDelete.Net is een van de grootste technologie blogs in Turkije."
-  },
-  "url": [
-    "shiftdelete.net",
-    "forum.shiftdelete.net"
-  ],
-  "version": "1.2.5",
-  "logo": "https://premid.is-inside.me/wmPRERck.png",
-  "thumbnail": "https://premid.is-inside.me/A4v9naOV.png",
-  "color": "#fedd00",
-  "tags": [
-    "shiftdelete",
-    "blog",
-    "technology",
-    "turkish"
-  ],
-  "category": "other"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "EGGSY",
+		"id": "162969778699501569"
+	},
+	"service": "ShiftDelete.Net",
+	"description": {
+		"en": "ShiftDelete.Net is one of the biggest technology blogs in Turkey.",
+		"tr": "ShiftDelete.Net, Türkiye'nin en büyük teknoloji haberleri ve forum sitelerinden birisidir..",
+		"nl": "ShiftDelete.Net is een van de grootste technologie blogs in Turkije."
+	},
+	"url": [
+		"shiftdelete.net",
+		"forum.shiftdelete.net"
+	],
+	"version": "1.2.12",
+	"logo": "https://i.imgur.com/xqgfIoI.png",
+	"thumbnail": "https://i.imgur.com/U4jK4yl.png",
+	"color": "#fedd00",
+	"category": "other",
+	"tags": [
+		"shiftdelete",
+		"blog",
+		"technology",
+		"turkish"
+	]
 }

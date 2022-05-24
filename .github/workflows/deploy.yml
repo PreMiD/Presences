@@ -2,7 +2,7 @@ name: DePloY
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "**.ts"
       - "**.json"
@@ -12,24 +12,16 @@ jobs:
     if: github.repository_owner == 'PreMiD'
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v2
-      - name: Use Node.js 12
-        uses: actions/setup-node@v2.1.5
+        uses: actions/checkout@v3
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3.2.0
         with:
-          node-version: 12
-      - name: Restore CI Cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
-      - name: Install Deps
+          node-version: 16
+          cache: "yarn"
+      - name: Install dependencies
         run: yarn
-      - name: Compile Script
-        run: yarn pu:compile
       - name: Update Presences
         env:
-          MONGO_IP: ${{ secrets.MONGO_IP }}
-          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
-          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+          MONGO_URL: ${{ secrets.MONGO_URL }}
           GHTOKEN: ${{ secrets.GHTOKEN }}
         run: yarn pu

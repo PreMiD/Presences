@@ -1,36 +1,19 @@
-name: SV
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - "**/metadata.json"
-  pull_request:
-    branches:
-      - master
-    paths:
-      - "**/metadata.json"
+name: Schema Validation Check
+on: [push, pull_request]
 jobs:
   validate:
     name: Schema Validation Check
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'PreMiD'
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v2
-      - name: Use Node.js 12
-        uses: actions/setup-node@v2.1.5
+        uses: actions/checkout@v3
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3.2.0
         with:
-          node-version: 12
-      - name: Restore CI Cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
-      - name: Prep SV
-        run: |
-          yarn
-          yarn sv:compile
+          node-version: 16
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn
       - name: Find Changed Files (direct push)
         if: github.event_name == 'push'
         run: |

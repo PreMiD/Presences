@@ -1,61 +1,43 @@
-interface LangStrings {
-  buttonJoinGame: string;
+const presence = new Presence({
+	clientId: "808664560936026122"
+});
+async function getStrings() {
+	return presence.getStrings(
+		{
+			buttonJoinGame: "kahoot.buttonJoinGame",
+			viewHome: "general.viewHome"
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
 }
 
-const presence = new Presence({
-    clientId: "808664560936026122"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        buttonJoinGame: "kahoot.buttonJoinGame"
-      },
-      await presence.getSetting("lang")
-    );
-  };
-
-let elapsed = Math.floor(Date.now() / 1000),
-  strings: Promise<LangStrings> = getStrings(),
-  oldLang: string = null;
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
-    inGame =
-      document.querySelector("#containerGamePlayers").textContent === ""
-        ? false
-        : true,
-    inLobby = document.querySelector("#round").textContent ? false : true,
-    buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang");
+	const presenceData: PresenceData = {
+			largeImageKey: "logo"
+		},
+		buttons = await presence.getSetting<boolean>("buttons"),
+		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+		round = document.querySelector("#round").textContent;
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
-  }
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
-  if (inGame && !inLobby) {
-    const round = document.querySelector("#round").textContent;
-    presenceData.details = round;
-    if (buttons) {
-      presenceData.buttons = [
-        {
-          label: (await strings).buttonJoinGame.replace(": {0}", ""),
-          url: document.location.href
-        }
-      ];
-    }
-
-    if (elapsed == null) {
-      elapsed = Math.floor(Date.now() / 1000);
-    }
-    presenceData.startTimestamp = elapsed;
-  } else {
-    presenceData.details = "Viewing the Homepage";
-    elapsed = null;
-  }
-  presence.setActivity(presenceData);
+	if (document.querySelector("#containerGamePlayers").textContent && !round) {
+		presenceData.details = round;
+		if (buttons) {
+			presenceData.buttons = [
+				{
+					label: (await strings).buttonJoinGame.replace(": {0}", ""),
+					url: document.location.href
+				}
+			];
+		}
+		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+	} else presenceData.details = (await strings).viewHome;
+	presence.setActivity(presenceData);
 });

@@ -1,69 +1,65 @@
 const presence = new Presence({
-    clientId: "760588725494218844"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused",
-    browsing: "presence.activity.browsing"
-  });
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+		clientId: "934789855962083359"
+	}),
+	strings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing"
+	});
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-      largeImageKey: "lm"
-    },
-    video: HTMLVideoElement = document.querySelector("video");
+	const presenceData: PresenceData = {
+			largeImageKey: "lm"
+		},
+		video = document.querySelector<HTMLVideoElement>("#video_player"),
+		videoDur = document.querySelector(
+			"#video_player > div.vjs-control-bar > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display"
+		);
+	if (video && videoDur) {
+		const titles = document.querySelector<HTMLMetaElement>(
+				'meta[property="og:title"]'
+			),
+			videoDuration = presence.timestampFromFormat(
+				document.querySelector(
+					"#video_player > div.vjs-control-bar > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display"
+				).textContent
+			),
+			videoCurrent = presence.timestampFromFormat(
+				document.querySelector(
+					"#video_player > div.vjs-control-bar > div.vjs-current-time.vjs-time-control.vjs-control > span.vjs-current-time-display"
+				).textContent
+			),
+			videoPaused = video.className;
+		if (document.location.pathname.includes("/s/")) {
+			presenceData.details = titles.content
+				.replace("Watch show", "")
+				.replace("on lookmovie for free in 1080p High Definition", "");
+		} else if (document.location.pathname.includes("/m/")) {
+			presenceData.details = titles.content
+				.replace("Watch movie", "")
+				.replace("on lookmovie in 1080p high definition", "");
+		}
+		presenceData.smallImageKey = videoPaused.includes("vjs-paused")
+			? "pause"
+			: "play";
+		presenceData.smallImageText = videoPaused.includes("vjs-paused")
+			? (await strings).pause
+			: (await strings).play;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(
+				Math.floor(videoCurrent),
+				Math.floor(videoDuration)
+			);
 
-  if (video != null && !isNaN(video.duration)) {
-    const timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
-
-    if (document.location.pathname.includes("/shows/view")) {
-      data.details =
-        document.querySelector(".watch-heading > h1 > span").previousSibling
-          .textContent +
-        "(" +
-        document.querySelector(".watch-heading > h1 > span").textContent +
-        ")";
-      data.state =
-        document.querySelector(".seasons-switcher > span").textContent +
-        " " +
-        document.querySelector(".episodes-switcher > span").textContent;
-    } else if (document.location.pathname.includes("/movies/view")) {
-      data.details = document.querySelector(
-        ".watch-heading > h1 > span"
-      ).previousSibling.textContent;
-      data.state = document.querySelector(
-        ".watch-heading > h1 > span"
-      ).textContent;
-    }
-    (data.smallImageKey = video.paused ? "pause" : "play"),
-      (data.smallImageText = video.paused
-        ? (await strings).pause
-        : (await strings).play),
-      (data.startTimestamp = timestamps[0]),
-      (data.endTimestamp = timestamps[1]);
-
-    if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-    }
-
-    presence.setActivity(data, !video.paused);
-  } else {
-    data.details = (await strings).browsing;
-    data.smallImageKey = "search";
-    data.smallImageText = (await strings).browsing;
-    presence.setActivity(data);
-  }
+		if (videoPaused.includes("vjs-paused")) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
+	} else {
+		presenceData.details = (await strings).browsing;
+		presenceData.smallImageKey = "search";
+		presenceData.smallImageText = (await strings).browsing;
+	}
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

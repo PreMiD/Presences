@@ -1,21 +1,22 @@
 {
-  "author": {
-    "name": "Dominik",
-    "id": "594491170248458250"
-  },
-  "service": "Nodejs.org",
-  "description": {
-    "en": "Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.",
-    "nl": "Node.js® is een JavaScript-runtime die is gebouwd op de V8 JavaScript-engine van Chrome."
-  },
-  "url": "nodejs.org",
-  "version": "1.3.5",
-  "logo": "https://i.imgur.com/MmTi5zJ.png",
-  "thumbnail": "https://i.imgur.com/olNX0gM.png",
-  "color": "#00ff00",
-  "tags": [
-    "node-js",
-    "javascript"
-  ],
-  "category": "other"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dominik",
+		"id": "594491170248458250"
+	},
+	"service": "Nodejs.org",
+	"description": {
+		"en": "Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.",
+		"nl": "Node.js® is een JavaScript-runtime die is gebouwd op de V8 JavaScript-engine van Chrome."
+	},
+	"url": "nodejs.org",
+	"version": "1.3.11",
+	"logo": "https://i.imgur.com/MmTi5zJ.png",
+	"thumbnail": "https://i.imgur.com/olNX0gM.png",
+	"color": "#00ff00",
+	"category": "other",
+	"tags": [
+		"node-js",
+		"javascript"
+	]
 }

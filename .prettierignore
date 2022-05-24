@@ -1,4 +1,4 @@
 node_modules
-*.json
 *.js
-CONTRIBUTING.md
+*.md
+*.json

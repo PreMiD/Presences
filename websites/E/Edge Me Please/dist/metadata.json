@@ -1,23 +1,24 @@
 {
-  "author": {
-    "name": "Nekolen",
-    "id": "270125856679002113"
-  },
-  "service": "Edge Me Please",
-  "description": {
-    "en": "It's a edging instruction website if you are into it.",
-    "nl": "Het is een edging website als je daar in geïnteresseerd bent."
-  },
-  "url": "www.edgemeplease.com",
-  "version": "1.3.6",
-  "thumbnail": "https://i.imgur.com/oyh6K6I.png",
-  "logo": "https://i.imgur.com/bYM3Ykg.jpg",
-  "color": "#121110",
-  "tags": [
-    "edging",
-    "nsfw",
-    "males-only",
-    "masturbation"
-  ],
-  "category": "other"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Nekolen",
+		"id": "270125856679002113"
+	},
+	"service": "Edge Me Please",
+	"description": {
+		"en": "It's a edging instruction website if you are into it.",
+		"nl": "Het is een edging website als je daar in geïnteresseerd bent."
+	},
+	"url": "www.edgemeplease.com",
+	"version": "1.3.15",
+	"logo": "https://i.imgur.com/scJSNj1.png",
+	"thumbnail": "https://i.imgur.com/oyh6K6I.png",
+	"color": "#121110",
+	"category": "other",
+	"tags": [
+		"edging",
+		"nsfw",
+		"males-only",
+		"masturbation"
+	]
 }

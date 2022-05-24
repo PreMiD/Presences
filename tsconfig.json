@@ -1,15 +1,15 @@
 {
-  "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ES2020",
-    "removeComments": true,
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": true,
-    "newLine": "lf",
-    "noImplicitAny": true,
-    "noUnusedParameters": true,
-    "typeRoots": ["@types"],
-    "esModuleInterop": true
-  }
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ES2021",
+		"removeComments": true,
+		"noEmitOnError": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedLocals": true,
+		"newLine": "lf",
+		"noImplicitAny": true,
+		"noUnusedParameters": true,
+		"typeRoots": ["@types"],
+		"esModuleInterop": true
+	}
 }
