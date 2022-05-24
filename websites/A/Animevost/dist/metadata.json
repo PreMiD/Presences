@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "denfake2",
+		"id": "870352885089730561"
+	},
+	"service": "Animevost",
+	"description": {
+		"en": "The original site animevost (animevost), where you can watch uninterrupted anime online (anime online) in good quality, without advertising, stable, and without delay. Fastest new anime series dubbing an hour after release in Japan.",
+		"ru": "Оригинальный сайт animevost (анимевост), на котором вы можете смотреть бесперебойно аниме онлайн (anime online) в хорошем качестве, без рекламы, стабильно и без задержке. Самая быстрая озвучка новых серий аниме через час после выхода в японии."
+	},
+	"url": [
+		"v2.vost.pw"
+	],
+	"regExp": "([a-z0-9-]+[.])*vost([.][a-z]+)+[/]",
+	"version": "1.0.0",
+	"logo": "https://dl.dropboxusercontent.com/s/pz35d53jxfrk91r/animevost.png",
+	"thumbnail": "https://dl.dropboxusercontent.com/s/yooqmoforhn0jpy/chrome_23t2CrVBVT.png",
+	"color": "#fabf6e",
+	"category": "anime",
+	"tags": [
+		"video",
+		"anime",
+		"donhua"
+	]
+}
