@@ -4,10 +4,12 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function GetSeria() {
-	const all: string[] = [];
-	document.querySelectorAll("div[id='items']>div").forEach((e: Element) => {
-		if (e.className.includes("active")) all.push(e.textContent);
-	});
+	const all: string[] = [],
+		nodes = document.querySelectorAll("div[id='items']>div");
+	for (let i = 0; nodes[i]; i++) {
+		const node = nodes[i];
+		if (node.className.includes("active")) all.push(node.textContent);
+	}
 	return all.join("");
 }
 
