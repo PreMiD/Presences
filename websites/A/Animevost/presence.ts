@@ -2,13 +2,6 @@ const presence = new Presence({
 		clientId: "978634361266110534"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: HTMLElement, search: HTMLElement;
-
-function DifIndient(st: string) {
-	const state = document.location.pathname.split(st);
-	if (state.length == 2 && state[1] != "") return "iframe";
-	else return "genre";
-}
 
 function GetSeria() {
 	const all: string[] = [];
@@ -56,7 +49,6 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.endsWith(".html") &&
 		document.location.pathname.includes("/tip/")
 	) {
-
 		presenceData.state = `смотрит\n ${GetSeria()}`;
 		presenceData.details = `${
 			document
