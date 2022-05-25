@@ -26,12 +26,19 @@ presence.on("UpdateData", async () => {
 			search = document.querySelectorAll("input[name='search']");
 			mTitle = document.location.hostname.split(".")[0];
 			title = mTitle[0].toUpperCase() + mTitle.slice(1);
-			if (title === "Terraria")
-				presenceData.largeImageKey = "https://i.imgur.com/fNW9Glp.png";
-			else if (title === "Darkdeity")
-				presenceData.largeImageKey = "https://i.imgur.com/r1CDG80.png";
-			else if (title === "Coromon")
-				presenceData.largeImageKey = "https://i.imgur.com/0V4Onno.png";
+			switch (title) {
+				case "Terraria": {
+					presenceData.largeImageKey = "https://i.imgur.com/fNW9Glp.png";
+					break;
+				}
+				case "Darkdeity": {
+					presenceData.largeImageKey = "https://i.imgur.com/r1CDG80.png";
+					break;
+				}
+				case "Coromon": {
+					presenceData.largeImageKey = "https://i.imgur.com/0V4Onno.png";
+				}
+			}
 			if (search[0]?.value || search[1]?.value) {
 				if (search[0]?.value) presenceData.state = search[0].value;
 				else if (
