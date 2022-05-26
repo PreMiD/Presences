@@ -43,6 +43,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "closed";
 		presenceData.smallImageText = "Not Reading";
 	}
+	if (!showBook) showCover = false;
 	switch (true) {
 		case pathname === "/": {
 			presenceData.details = "Browsing the homepage";
@@ -183,7 +184,5 @@ presence.on("UpdateData", async () => {
 	}
 	if (!showButtons) delete presenceData.buttons;
 	if (!showTimestamp) delete presenceData.startTimestamp;
-	browsingTimestamp;
-	if (!showBook) showCover = false;
 	presence.setActivity(presenceData);
 });
