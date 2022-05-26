@@ -16,7 +16,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showReading")
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "nocover"
+			largeImageKey: "nocover",
+			startTimestamp: browsingTimestamp
 		},
 		{ pathname } = window.location,
 		pathnames = [
@@ -33,6 +34,15 @@ presence.on("UpdateData", async () => {
 			"/genre/",
 			"/author/"
 		];
+	if (!showReading) {
+		showBook = false;
+		showCover = false;
+		showLogo = true;
+		showButtons = false;
+	} else {
+		presenceData.smallImageKey = "closed";
+		presenceData.smallImageText = "Not Reading";
+	}
 	switch (true) {
 		case pathname === "/": {
 			presenceData.details = "Browsing the homepage";
@@ -171,17 +181,9 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	}
-	if (!showReading) {
-		showBook = false;
-		showCover = false;
-		showLogo = true;
-		showButtons = false;
-	} else {
-		presenceData.smallImageKey = "closed";
-		presenceData.smallImageText = "Not Reading";
-	}
 	if (!showButtons) delete presenceData.buttons;
-	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
+	if (!showTimestamp) delete presenceData.startTimestamp;
+	browsingTimestamp;
 	if (!showBook) showCover = false;
 	presence.setActivity(presenceData);
 });
