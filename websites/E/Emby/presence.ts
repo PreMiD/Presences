@@ -196,6 +196,10 @@ interface Chapter {
 }
 
 interface MediaInfo {
+	AlbumArtist: string;
+	AlbumArtists: { Name: string; Id: string }[];
+	ArtistsItems: { Name: string; Id: string }[];
+	Artists: string[];
 	Name: string;
 	OriginalTitle: string;
 	ServerId: string;
@@ -362,6 +366,17 @@ async function isEmbyWebClient(): Promise<boolean> {
 	return false;
 }
 
+function embyBasenameUrl(): string {
+	return `${`${location.protocol}//${location.host}${location.pathname.replace(
+		location.pathname.split("/").slice(-2).join("/"),
+		""
+	)}`}`;
+}
+
+function mediaPrimaryImage(mediaId: string): string {
+	return `${embyBasenameUrl()}/emby/Items/${mediaId}/Images/Primary?height=256`;
+}
+
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
@@ -369,16 +384,25 @@ async function handleAudioPlayback(): Promise<void> {
 	// sometimes the buttons are not created fast enough
 	try {
 		const [audioElem] = document.querySelectorAll("audio"),
-			buttons = document
-				.querySelectorAll(".nowPlayingBar")[0]
-				.querySelectorAll("button.itemAction");
+			regexResult = /\/Audio\/(\w+)\/universal/.exec(audioElem.src);
 
-		presenceData.details = `Listening to: ${
-			buttons.length >= 1 ? buttons[0].textContent : "unknown title"
-		}`;
-		presenceData.state = `By: ${
-			buttons.length >= 2 ? buttons[1].textContent : "unknown artist"
-		}`;
+		if (!regexResult) {
+			presence.error("Could not obtain audio itemId");
+			return;
+		}
+
+		const [, mediaId] = regexResult,
+			info = await obtainMediaInfo(mediaId);
+		presenceData.details = `Listening to: ${info.Name ?? "unknown title"}`;
+		presenceData.state = `By: ${info.AlbumArtist ?? "unknown artist"}`;
+		if (
+			(await presence.getSetting("showRichImages")) &&
+			(await presence.getSetting("showAlbumart")) &&
+			// some songs might not have albumart
+			document.querySelector<HTMLDivElement>(".nowPlayingBarImage").style
+				.backgroundImage
+		)
+			presenceData.largeImageKey = mediaPrimaryImage(mediaId);
 
 		// playing
 		if (!audioElem.paused) {
@@ -479,7 +503,9 @@ async function handleVideoPlayback(): Promise<void> {
 	const [videoPlayerElem] = document.querySelectorAll("video");
 
 	// this variables content will be replaced in details and status properties on presenceData
-	let title, subtitle;
+	let title,
+		subtitle,
+		largeImage = PRESENCE_ART_ASSETS.logo;
 
 	const regexResult = /\/Items\/(\d+)\//.exec(
 		document.querySelector<HTMLDivElement>(".pageTitle").style.backgroundImage
@@ -502,11 +528,23 @@ async function handleVideoPlayback(): Promise<void> {
 			case "Movie":
 				title = "Watching a Movie";
 				subtitle = mediaInfo.Name;
+
+				if (
+					(await presence.getSetting("showRichImages")) &&
+					(await presence.getSetting("showMoviePoster"))
+				)
+					largeImage = mediaPrimaryImage(mediaInfo.Id);
 				break;
 			case "Series":
 				title = `Watching ${mediaInfo.Name}`;
 				subtitle =
 					videoPlayerPage.querySelector("h3.videoOsdTitle").textContent;
+
+				if (
+					(await presence.getSetting("showRichImages")) &&
+					(await presence.getSetting("showTvShowPoster"))
+				)
+					largeImage = mediaPrimaryImage(mediaInfo.Id);
 				break;
 			case "TvChannel":
 				title = "Watching Live Tv";
@@ -516,6 +554,8 @@ async function handleVideoPlayback(): Promise<void> {
 				title = `Watching ${mediaInfo.Type}`;
 				subtitle = mediaInfo.Name;
 		}
+
+		presenceData.largeImageKey = largeImage;
 
 		// watching live tv
 		if (mediaInfo && mediaInfo.Type === "TvChannel") {
@@ -714,16 +754,19 @@ async function handleWebClient(): Promise<void> {
  * setDefaultsToPresence - set defaul values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
+	presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
+
 	if (presenceData.smallImageKey) delete presenceData.smallImageKey;
 
 	if (presenceData.smallImageText) delete presenceData.smallImageText;
 
 	if (presenceData.startTimestamp) delete presenceData.startTimestamp;
 
-	if (presenceData.endTimestamp) delete presenceData.endTimestamp;
+	if (presenceData.endTimestamp && isNaN(presenceData.endTimestamp))
+		delete presenceData.endTimestamp;
 
 	if (await presence.getSetting<boolean>("showTimestamps"))
-		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+		presenceData.startTimestamp = Date.now();
 }
 
 /**

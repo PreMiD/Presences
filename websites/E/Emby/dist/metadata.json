@@ -40,6 +40,39 @@
 			"title": "Show timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
+		},
+		{
+			"id": "showRichImages",
+			"title": "Show rich images",
+			"icon": "fad fa-sparkles",
+			"value": true
+		},
+		{
+			"if": {
+				"showRichImages": true
+			},
+			"id": "showAlbumart",
+			"title": "Rich images for music",
+			"icon": "fad fa-album",
+			"value": true
+		},
+		{
+			"if": {
+				"showRichImages": true
+			},
+			"id": "showMoviePoster",
+			"title": "Rich images for movies",
+			"icon": "fad fa-film",
+			"value": true
+		},
+		{
+			"if": {
+				"showRichImages": true
+			},
+			"id": "showTvShowPoster",
+			"title": "Rich images for TV Shows",
+			"icon": "fad fa-tv-retro",
+			"value": true
 		}
 	]
 }
