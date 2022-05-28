@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
 						delete presenceData.endTimestamp;
 					}
 				} else {
-					presenceData.details = "Viewing Show:";
+					presenceData.details = "Viewing show:";
 					presenceData.state = presence.getTitle();
 
 					presenceData.buttons = [
@@ -160,7 +160,7 @@ presence.on("UpdateData", async () => {
 						delete presenceData.endTimestamp;
 					}
 				} else {
-					presenceData.details = "Viewing Movie:";
+					presenceData.details = "Viewing movie:";
 					presenceData.state = presence.getTitle();
 
 					presenceData.buttons = [
@@ -174,7 +174,7 @@ presence.on("UpdateData", async () => {
 		},
 		"/person/([a-zA-Z0-9-]+)": {
 			setPresenceData() {
-				presenceData.details = "Viewing Person:";
+				presenceData.details = "Viewing person:";
 				presenceData.state = document.querySelector(
 					"div.person-header__bio > h1"
 				)?.textContent;
@@ -182,7 +182,7 @@ presence.on("UpdateData", async () => {
 		},
 		"/settings": {
 			setPresenceData() {
-				presenceData.details = "Viewing their Settings";
+				presenceData.details = "Viewing their settings";
 			}
 		}
 	};
