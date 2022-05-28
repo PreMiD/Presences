@@ -208,7 +208,7 @@ presence.on("UpdateData", async () => {
 	let presenceSelect;
 
 	for (const [pathname, PData] of Object.entries(data.presence)) {
-		if (document.location.pathname.match(pathname)) {
+		if (new RegExp(pathname).test(document.location.pathname)) {
 			presenceSelect = pathname;
 			PData.setPresenceData();
 		}
