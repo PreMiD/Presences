@@ -285,6 +285,13 @@ const // official website
 let presence: Presence, ApiClient: ApiClient;
 
 /**
+ * refreshApiClient - Initializes the ApiClient object
+ */
+async function refreshApiClient(): Promise<void> {
+	ApiClient = await getApiClient();
+}
+
+/**
  * handleOfficialWebsite - handle the presence while the user is in the official website
  */
 function handleOfficialWebsite(): void {
@@ -408,20 +415,20 @@ function getUserId(): string {
 			localStorage.getItem("servercredentials3")
 		).Servers;
 
-		// server id available on browser location
-		if (location.hash.indexOf("?") > 0) {
-			for (const param of location.hash.split("?")[1].split("&")) {
-				if (param.startsWith("serverId")) {
-					for (const server of servers)
-						if (server.Id === param.split("=")[0]) return server.UserId;
-				}
-			}
-		} else return servers[0].UserId;
+		return (
+			servers.length === 1
+				? servers[0]
+				: servers.find(
+						(s: { Id: string }) =>
+							s.Id ===
+							new URLSearchParams(location.hash.split("?")[1]).get("serverId")
+				  )
+		).UserId;
 	}
 }
 
 // cache the requested media
-const media: Record<string, string | MediaInfo> = {};
+const mediaInfoCache = new Map<string, MediaInfo>();
 
 /**
  * obtainMediaInfo - obtain the metadata of the given id
@@ -429,21 +436,16 @@ const media: Record<string, string | MediaInfo> = {};
  * @param  {string} itemId id of the item to get metadata of
  * @return {object}        metadata of the item
  */
-async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
-	const pending = "pending";
+async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
+	if (mediaInfoCache.has(itemId)) return mediaInfoCache.get(itemId);
 
-	if (media[itemId]) {
-		if (media[itemId] !== pending) return media[itemId];
+	let accessToken = ApiClient._serverInfo.AccessToken;
 
-		return;
+	if (!accessToken) {
+		await refreshApiClient();
+
+		accessToken = ApiClient._serverInfo.AccessToken;
 	}
-
-	if (!ApiClient._serverInfo.AccessToken) {
-		ApiClient = await getApiClient();
-		return;
-	}
-
-	media[itemId] = pending;
 
 	const res = await fetch(
 			`${`${location.protocol}//${location.host}${location.pathname.replace(
@@ -454,13 +456,13 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
 				`X-Emby-Device-Name=${ApiClient._deviceName}&` +
 				`X-Emby-Device-Id=${ApiClient._deviceId}&` +
 				`X-Emby-Client-Version=${ApiClient._appVersion}&` +
-				`X-Emby-Token=${ApiClient._serverInfo.AccessToken}`
+				`X-Emby-Token=${accessToken}`
 		),
-		mediaInfo = await res.json();
+		mediaInfo: MediaInfo = await res.json();
 
-	if (media[itemId] === pending) media[itemId] = mediaInfo;
+	mediaInfoCache.set(itemId, mediaInfo);
 
-	return media[itemId];
+	return mediaInfoCache.get(itemId);
 }
 
 /**
@@ -479,28 +481,16 @@ async function handleVideoPlayback(): Promise<void> {
 	// this variables content will be replaced in details and status properties on presenceData
 	let title, subtitle;
 
-	// title on the header
-	const osdParentTitleElem = videoPlayerPage.querySelector(
-		"h2.videoOsdParentTitle"
+	const regexResult = /\/Items\/(\d+)\//.exec(
+		document.querySelector<HTMLDivElement>(".pageTitle").style.backgroundImage
 	);
 
-	// media metadata
-	let mediaInfo: string | MediaInfo;
-
-	const [videoPlayerContainerElem] = document.body.querySelectorAll(
-		".videoPlayerContainer"
-	);
-
-	// no background image, we're playing live tv
-	if ((videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage) {
-		// with this url we can obtain the id of the item we are playing back
-
-		mediaInfo = await obtainMediaInfo(
-			(videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage
-				.split('"')[1]
-				.split("/")[5]
-		);
+	if (!regexResult) {
+		presence.error("Could not obtain video itemId");
+		return;
 	}
+
+	const mediaInfo = await obtainMediaInfo(regexResult[1]);
 
 	// display generic info
 	if (!mediaInfo) {
@@ -511,17 +501,16 @@ async function handleVideoPlayback(): Promise<void> {
 		switch (mediaInfo.Type) {
 			case "Movie":
 				title = "Watching a Movie";
-				subtitle = osdParentTitleElem.textContent;
+				subtitle = mediaInfo.Name;
 				break;
 			case "Series":
-				title = `Watching ${
-					videoPlayerPage.querySelector("h3.videoOsdTitle").textContent
-				}`;
-				subtitle = osdParentTitleElem.textContent;
+				title = `Watching ${mediaInfo.Name}`;
+				subtitle =
+					videoPlayerPage.querySelector("h3.videoOsdTitle").textContent;
 				break;
 			case "TvChannel":
 				title = "Watching Live Tv";
-				subtitle = osdParentTitleElem.textContent;
+				subtitle = mediaInfo.Name;
 				break;
 			default:
 				title = `Watching ${mediaInfo.Type}`;
@@ -562,16 +551,9 @@ async function handleVideoPlayback(): Promise<void> {
  * handleItemDetails - handles the presence when the user is viewing the details of an item
  */
 async function handleItemDetails(): Promise<void> {
-	let id;
-
-	for (const param of location.hash.split("?")[1].split("&")) {
-		if (param.startsWith("id=")) {
-			[id] = param.split("=");
-			break;
-		}
-	}
-
-	const data = await obtainMediaInfo(id);
+	const data = await obtainMediaInfo(
+		new URLSearchParams(location.hash.split("?")[1]).get("id")
+	);
 
 	if (!data) {
 		presenceData.details = "Browsing details of an item";
