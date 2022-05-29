@@ -376,8 +376,8 @@ function mediaPrimaryImage(mediaId: string): string {
 async function handleAudioPlayback(): Promise<void> {
 	// sometimes the buttons are not created fast enough
 	try {
-		const [audioElem] = document.querySelectorAll("audio"),
-			regexResult = /\/Audio\/(\w+)\/universal/.exec(audioElem.src);
+		const audioElement = document.querySelector<HTMLAudioElement>("audio"),
+			regexResult = /\/Audio\/(\w+)\/universal/.exec(audioElement.src);
 
 		if (!regexResult) {
 			presence.error("Could not obtain audio itemId");
@@ -397,13 +397,13 @@ async function handleAudioPlayback(): Promise<void> {
 			presenceData.largeImageKey = mediaPrimaryImage(mediaId);
 
 		// playing
-		if (!audioElem.paused) {
+		if (!audioElement.paused) {
 			presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
 			presenceData.smallImageText = "Playing";
 
 			if (await presence.getSetting<boolean>("showMediaTimestamps")) {
 				[, presenceData.endTimestamp] =
-					presence.getTimestampsfromMedia(audioElem);
+					presence.getTimestampsfromMedia(audioElement);
 			} else delete presenceData.endTimestamp;
 
 			// paused
@@ -493,7 +493,7 @@ async function handleVideoPlayback(): Promise<void> {
 		return;
 	}
 
-	const [videoPlayerElem] = document.querySelectorAll("video");
+	const videoPlayerElem = document.querySelector<HTMLVideoElement>("video");
 
 	// this variables content will be replaced in details and status properties on presenceData
 	let title,
@@ -630,13 +630,13 @@ async function handleItemDetails(): Promise<void> {
  * handleWebClient - handle the presence while the user is in the web client
  */
 async function handleWebClient(): Promise<void> {
-	const audioElems = document.body.querySelectorAll("audio");
+	const audioElement = document.body.querySelector<HTMLAudioElement>("audio");
 
 	// audio player active
 	if (
-		audioElems.length > 0 &&
-		audioElems[0].classList.contains("mediaPlayerAudio") &&
-		audioElems[0].src
+		audioElement &&
+		audioElement.classList.contains("mediaPlayerAudio") &&
+		audioElement.src
 	) {
 		await handleAudioPlayback();
 		return;
