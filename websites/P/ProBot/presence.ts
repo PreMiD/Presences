@@ -10,9 +10,9 @@ presence.on("UpdateData", () => {
 	};
 
 	if (document.location.pathname === "/")
-		presenceData.details = "Visiting the Main Page";
+		presenceData.details = "Viewing the main page";
 	else if (document.location.pathname.includes("/dashboard")) {
-		presenceData.details = "Visiting the Dashboard";
+		presenceData.details = "Viewing the dashboard";
 		presenceData.buttons = [
 			{
 				label: "Go to Dashboard",
@@ -38,63 +38,63 @@ presence.on("UpdateData", () => {
 			presenceData.state = "Profile Backgrounds";
 		else if (document.location.pathname.includes("/rank"))
 			presenceData.state = "ID Backgrounds";
-		else presenceData.state = "purchased items";
+		else presenceData.state = "Purchased items";
 	} else if (document.location.pathname.includes("/badges")) {
 		presenceData.details = "Managing their";
 		presenceData.state = "Profile Badges";
 	} else if (document.location.pathname.includes("/xp")) {
-		presenceData.details = "Viewing top 100 people";
-		presenceData.state = "with the most XP";
+		presenceData.details = "Viewing leaderboard:";
+		presenceData.state = "Most XP";
 		presenceData.buttons = [
 			{
-				label: "Visit the page",
+				label: "View the leaderboard",
 				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("/credits")) {
-		presenceData.details = "Viewing top 100 people";
-		presenceData.state = "with the most Credits";
+		presenceData.details = "Viewing leaderboard:";
+		presenceData.state = "Most credits";
 		presenceData.buttons = [
 			{
-				label: "Visit the page",
+				label: "View the leaderboard",
 				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("/daily"))
-		presenceData.details = "Claiming their daily Credits";
+		presenceData.details = "Claiming their daily credits";
 	else if (document.location.pathname.includes("/transactions")) {
 		presenceData.details = "Viewing their";
-		presenceData.state = "Credits Transactions History";
+		presenceData.state = "Credit transactions history";
 	} else if (document.location.pathname.includes("terms-of-use")) {
 		presenceData.details = "Reading the Terms Of Use";
 		presenceData.buttons = [
 			{
-				label: "Read the page",
+				label: "Read the Terms of Use",
 				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("privacy-policy")) {
-		presenceData.details = "Reading the Privacy Policy page";
+		presenceData.details = "Reading the Privacy Policy";
 		presenceData.buttons = [
 			{
-				label: "Read the page",
+				label: "Read the Privacy Policy",
 				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("refund-policy")) {
-		presenceData.details = "Reading the Refund Policy page";
+		presenceData.details = "Reading the Refund Policy";
 		presenceData.buttons = [
 			{
-				label: "Read the page",
+				label: "Read the Refund Policy",
 				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("/server/")) {
 		presenceData.smallImageKey = "probot";
 		presenceData.largeImageKey = (
-			document.querySelector(
+			document.querySelector<HTMLImageElement>(
 				"#sidebar_sidebar__avatar__QDGRP"
-			) as HTMLImageElement
+			)
 		).src;
 		presenceData.smallImageText = document.querySelector(
 			"#sidebar_sidebar__server-info__03ViT > h4"
