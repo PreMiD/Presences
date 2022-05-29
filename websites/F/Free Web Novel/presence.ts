@@ -108,13 +108,11 @@ presence.on("UpdateData", async () => {
 			if (!showReading) break;
 			if (
 				pathnames.includes(pathname) ||
-					document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')
+				document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')
 			)
 				presenceData.details = "Browsing...";
 			else if (
-				document.querySelector<HTMLAnchorElement>(
-					'[title="Read Next chapter"]'
-				)
+				document.querySelector<HTMLAnchorElement>('[title="Read Next chapter"]')
 			) {
 				presenceData.details = "Reading...";
 				presenceData.smallImageKey = "open";
