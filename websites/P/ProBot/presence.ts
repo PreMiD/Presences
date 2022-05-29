@@ -91,10 +91,8 @@ presence.on("UpdateData", () => {
 		];
 	} else if (document.location.pathname.includes("/server/")) {
 		presenceData.smallImageKey = "probot";
-		presenceData.largeImageKey = (
-			document.querySelector<HTMLImageElement>(
-				"#sidebar_sidebar__avatar__QDGRP"
-			)
+		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+			"#sidebar_sidebar__avatar__QDGRP"
 		).src;
 		presenceData.smallImageText = document.querySelector(
 			"#sidebar_sidebar__server-info__03ViT > h4"
