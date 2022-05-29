@@ -386,8 +386,8 @@ async function handleAudioPlayback(): Promise<void> {
 
 		const [, mediaId] = regexResult,
 			info = await obtainMediaInfo(mediaId);
-		presenceData.details = `Listening to: ${info.Name ?? "unknown title"}`;
-		presenceData.state = `By: ${info.AlbumArtist ?? "unknown artist"}`;
+		presenceData.details = `Listening to ${info.Name ?? "Unknown title"}`;
+		presenceData.state = `By ${info.AlbumArtist ?? "Unknown artist"}`;
 		if (
 			(await presence.getSetting("showThumbnails")) &&
 			// some songs might not have albumart
