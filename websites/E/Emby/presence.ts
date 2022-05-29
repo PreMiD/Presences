@@ -289,13 +289,6 @@ const // official website
 let presence: Presence, ApiClient: ApiClient;
 
 /**
- * refreshApiClient - Initializes the ApiClient object
- */
-async function refreshApiClient(): Promise<void> {
-	ApiClient = await getApiClient();
-}
-
-/**
  * handleOfficialWebsite - handle the presence while the user is in the official website
  */
 function handleOfficialWebsite(): void {
@@ -465,7 +458,8 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 	let accessToken = ApiClient._serverInfo.AccessToken;
 
 	if (!accessToken) {
-		await refreshApiClient();
+		// refresh the ApiClient
+		ApiClient = await getApiClient();
 
 		accessToken = ApiClient._serverInfo.AccessToken;
 	}
