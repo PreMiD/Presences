@@ -359,7 +359,7 @@ async function isEmbyWebClient(): Promise<boolean> {
 	return false;
 }
 
-function embyBasenameUrl(): string {
+function embyBasenameURL(): string {
 	const { pathname } = location;
 
 	return `${location.origin}${pathname.replace(
@@ -369,7 +369,7 @@ function embyBasenameUrl(): string {
 }
 
 function mediaPrimaryImage(mediaId: string): string {
-	return `${embyBasenameUrl()}/emby/Items/${mediaId}/Images/Primary?height=256`;
+	return `${embyBasenameURL()}/emby/Items/${mediaId}/Images/Primary?height=256`;
 }
 
 /**
@@ -467,7 +467,7 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 	}
 
 	const res = await fetch(
-			`${embyBasenameUrl()}emby/Users/${getUserId()}/Items/${itemId}?` +
+			`${embyBasenameURL()}emby/Users/${getUserId()}/Items/${itemId}?` +
 				`X-Emby-Client=${ApiClient._appName}&` +
 				`X-Emby-Device-Name=${ApiClient._deviceName}&` +
 				`X-Emby-Device-Id=${ApiClient._deviceId}&` +
