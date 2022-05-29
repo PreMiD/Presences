@@ -360,10 +360,12 @@ async function isEmbyWebClient(): Promise<boolean> {
 }
 
 function embyBasenameUrl(): string {
-	return `${`${location.protocol}//${location.host}${location.pathname.replace(
-		location.pathname.split("/").slice(-2).join("/"),
+	const { pathname } = location;
+
+	return `${location.origin}${pathname.replace(
+		pathname.split("/").slice(-2).join("/"),
 		""
-	)}`}`;
+	)}`;
 }
 
 function mediaPrimaryImage(mediaId: string): string {
@@ -465,10 +467,7 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 	}
 
 	const res = await fetch(
-			`${`${location.protocol}//${location.host}${location.pathname.replace(
-				location.pathname.split("/").slice(-2).join("/"),
-				""
-			)}`}emby/Users/${getUserId()}/Items/${itemId}?` +
+			`${embyBasenameUrl()}emby/Users/${getUserId()}/Items/${itemId}?` +
 				`X-Emby-Client=${ApiClient._appName}&` +
 				`X-Emby-Device-Name=${ApiClient._deviceName}&` +
 				`X-Emby-Device-Id=${ApiClient._deviceId}&` +
@@ -646,7 +645,7 @@ async function handleWebClient(): Promise<void> {
 
 	// obtain the path, on the example would return "login.html"
 	// https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
-	const path = location.hash.split("?")[0].substr(3);
+	const path = location.hash.split("?")[0].substring(3);
 
 	switch (path) {
 		case "startup/login.html":
