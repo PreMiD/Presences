@@ -106,17 +106,16 @@ presence.on("UpdateData", async () => {
 		}
 		case privacy: {
 			presenceData.largeImageKey = "incognito";
+			if (!showReading) break;
 			if (
-				(pathnames.includes(pathname) ||
-					document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')) &&
-				showReading
+				pathnames.includes(pathname) ||
+					document.querySelector<HTMLDivElement>('[class="m-imgtxt"]')
 			)
 				presenceData.details = "Browsing...";
 			else if (
 				document.querySelector<HTMLAnchorElement>(
 					'[title="Read Next chapter"]'
-				) &&
-				showReading
+				)
 			) {
 				presenceData.details = "Reading...";
 				presenceData.smallImageKey = "open";
