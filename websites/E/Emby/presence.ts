@@ -396,8 +396,7 @@ async function handleAudioPlayback(): Promise<void> {
 		presenceData.details = `Listening to: ${info.Name ?? "unknown title"}`;
 		presenceData.state = `By: ${info.AlbumArtist ?? "unknown artist"}`;
 		if (
-			(await presence.getSetting("showRichImages")) &&
-			(await presence.getSetting("showAlbumart")) &&
+			(await presence.getSetting("showThumbnails")) &&
 			// some songs might not have albumart
 			document.querySelector<HTMLDivElement>(".nowPlayingBarImage").style
 				.backgroundImage
@@ -529,10 +528,7 @@ async function handleVideoPlayback(): Promise<void> {
 				title = "Watching a Movie";
 				subtitle = mediaInfo.Name;
 
-				if (
-					(await presence.getSetting("showRichImages")) &&
-					(await presence.getSetting("showMoviePoster"))
-				)
+				if (await presence.getSetting("showThumbnails"))
 					largeImage = mediaPrimaryImage(mediaInfo.Id);
 				break;
 			case "Series":
@@ -540,10 +536,7 @@ async function handleVideoPlayback(): Promise<void> {
 				subtitle =
 					videoPlayerPage.querySelector("h3.videoOsdTitle").textContent;
 
-				if (
-					(await presence.getSetting("showRichImages")) &&
-					(await presence.getSetting("showTvShowPoster"))
-				)
+				if (await presence.getSetting("showThumbnails"))
 					largeImage = mediaPrimaryImage(mediaInfo.Id);
 				break;
 			case "TvChannel":
