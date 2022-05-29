@@ -16,7 +16,7 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Go to Dashboard",
-				url: document.URL
+				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("/commands")) {
@@ -25,7 +25,7 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "View ProBot Commands",
-				url: document.URL
+				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("premium")) {
@@ -48,7 +48,7 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Visit the page",
-				url: document.URL
+				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("/credits")) {
@@ -57,18 +57,12 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Visit the page",
-				url: document.URL
+				url: document.location.href
 			}
 		];
-	} else if (document.location.pathname.includes("/daily")) {
+	} else if (document.location.pathname.includes("/daily"))
 		presenceData.details = "Claiming their daily Credits";
-		presenceData.buttons = [
-			{
-				label: "Claim your daily reward!",
-				url: document.URL
-			}
-		];
-	} else if (document.location.pathname.includes("/transactions")) {
+	else if (document.location.pathname.includes("/transactions")) {
 		presenceData.details = "Viewing their";
 		presenceData.state = "Credits Transactions History";
 	} else if (document.location.pathname.includes("terms-of-use")) {
@@ -76,7 +70,7 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Read the page",
-				url: document.URL
+				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("privacy-policy")) {
@@ -84,7 +78,7 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Read the page",
-				url: document.URL
+				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("refund-policy")) {
@@ -92,7 +86,7 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Read the page",
-				url: document.URL
+				url: document.location.href
 			}
 		];
 	} else if (document.location.pathname.includes("/server/")) {
