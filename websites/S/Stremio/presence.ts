@@ -3,8 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let video: HTMLMediaElement,
-	timestamp: [number, number],
+let timestamp: [number, number],
 	pauseCheck: boolean,
 	search: HTMLInputElement,
 	genreSort: string,
@@ -15,7 +14,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		page = window.location.href,
+		{ pathname, hostname, href } = document.location,
 		[privacy, thumbnails, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("thumbnails"),
@@ -25,15 +24,15 @@ presence.on("UpdateData", async () => {
 			"[class='ng-binding ng-scope selected']"
 		)?.textContent;
 
-	if (window.location.hostname.includes("app.strem.io")) {
+	if (hostname.includes("app.strem.io")) {
 		search = document.querySelector("#global-search-field");
-		video = document.querySelector<HTMLMediaElement>("#videoPlayer");
+		const video = document.querySelector<HTMLMediaElement>("#videoPlayer");
 		if (privacy && !video) presenceData.details = "Browsing...";
 		else if (privacy && video) presenceData.details = "Watching...";
 		else if (search?.value) {
 			presenceData.details = "Searching For:";
 			presenceData.state = search.value;
-		} else if (page.includes("/detail/")) {
+		} else if (pathname.includes("/detail/")) {
 			title = document.querySelector(
 				"#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div"
 			).textContent;
@@ -41,7 +40,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Video",
-					url: page
+					url: href
 				}
 			];
 			if (thumbnails) {
@@ -52,12 +51,12 @@ presence.on("UpdateData", async () => {
 						)
 						?.firstElementChild.getAttribute("src") ?? "logo";
 			}
-		} else if (page.includes("addons")) {
+		} else if (pathname.includes("addons")) {
 			search = document.querySelector(
 				"#addons > div.filter > form > div.addon-search-input > input"
 			);
 			if (search?.value) {
-				presenceData.details = "Searching Addons For:";
+				presenceData.details = "Searching addons for:";
 				presenceData.state = search.value;
 			} else {
 				presenceData.state = active ?? "All";
@@ -68,17 +67,17 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Browse Addons",
-						url: page
+						url: href
 					}
 				];
 				presenceData.details = `Browsing ${title}:`;
 			}
-		} else if (page.includes("settings")) {
+		} else if (pathname.includes("settings")) {
 			presenceData.details = `${
 				document.querySelector("[class='ng-scope ng-binding active']")
 					?.textContent ?? "General"
-			} Settings`;
-		} else if (page.includes("/discover/")) {
+			} settings`;
+		} else if (pathname.includes("/discover/")) {
 			if (active) {
 				genreSort = document.querySelector(
 					"[class='ng-scope ng-binding selected']"
@@ -93,13 +92,13 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: `Browse ${active}`,
-						url: page
+						url: href
 					}
 				];
 				presenceData.details = `Browsing ${active}`;
 				presenceData.state = `Genre: ${genreSort}`;
 			} else presenceData.state = "Browsing Movies";
-		} else if (page.includes("/library")) {
+		} else if (pathname.includes("/library")) {
 			genreSort = document
 				.querySelector<HTMLSelectElement>(
 					"#library > div.sort-filter > div.custom-select.lib-sort > select"
@@ -118,21 +117,21 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Library",
-					url: page
+					url: href
 				}
 			];
-		} else if (page.includes("/calendar")) {
+		} else if (pathname.includes("/calendar")) {
 			presenceData.buttons = [
 				{
 					label: "View Calendar",
-					url: page
+					url: href
 				}
 			];
 			presenceData.details = "Calendar";
-		} else if (page.includes("player")) {
+		} else if (pathname.includes("player")) {
 			if (video?.duration) {
 				timestamp = presence.getTimestampsfromMedia(video);
-				pauseCheck = video.paused;
+				pauseCheck = video?.paused ?? true;
 			} else if (!video.duration && document.querySelector("#controlbar-top")) {
 				const split = document
 					.querySelector("#play-progress-text")
@@ -166,11 +165,10 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Join View Party",
-					url: page
+					url: href
 				}
 			];
-		} else if (window.location.pathname === "/")
-			presenceData.details = "Homepage";
+		} else if (pathname === "/") presenceData.details = "Viewing the homepage";
 	} else presenceData.details = "Browsing...";
 
 	if (!buttons) delete presenceData.buttons;
