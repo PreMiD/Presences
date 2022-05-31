@@ -23,35 +23,35 @@ presence.on("UpdateData", async () => {
 		)?.firstElementChild;
 		if (search.value) {
 			presenceData.smallImageKey = "search";
-			presenceData.details = "Searching for:";
+			presenceData.details = "Searching for";
 			presenceData.state = search.value;
 		} else if (firstChild.className.includes("firstHeading")) {
 			presenceData.state = firstChild.textContent;
 			presenceData.smallImageKey = "reading";
-			presenceData.details = "Reading Wiki:";
+			presenceData.details = "Reading wiki";
 		} else if (document.querySelector("#firstHeading-h2csdq87lb")) {
-			presenceData.details = "Search Results for:";
+			presenceData.details = "Search results for";
 			presenceData.state = document.querySelector("#ooui-php-1").textContent;
-		} else presenceData.details = "Reading Wiki:";
-	} else if (page.includes("index.php")) presenceData.details = "Forum";
-	else if (page.includes("viewforum.php"))
+		} else presenceData.details = "Reading wiki";
+	} else if (pathname.includes("index.php")) presenceData.details = "Forum";
+	else if (pathname.includes("viewforum.php"))
 		presenceData.details = `${title.textContent} Forum`;
-	else if (page.includes("viewtopic.php")) {
-		presenceData.details = "Viewing Post:";
+	else if (pathname.includes("viewtopic.php")) {
+		presenceData.details = "Viewing Post";
 		presenceData.state = title.textContent;
-	} else if (page.includes("team.php")) {
+	} else if (pathname.includes("team.php")) {
 		presenceData.details = `Pixelmon's ${
 			document.querySelector("li[class='team-nav-active']").textContent
 		} Team`;
-	} else if (page.includes("ucp.php?mode=")) {
-		presenceData.details = title2.textContent;
+	} else if (pathname.includes("ucp.php?mode=")) {
+		presenceData.details = title.textContent;
 		presenceData.smallImageKey = "reading";
-	} else if (page.includes("downloads.php"))
-		presenceData.details = "Pixelmon Mod Downloads";
-	else if (page.includes("donate.php"))
-		presenceData.details = "Donate to Pixelmon Mod";
-	else if (page.includes("tracker.php")) {
-		presenceData.details = title2.textContent;
+	} else if (pathname.includes("downloads.php"))
+		presenceData.details = "Viewing mod Downloads page";
+	else if (pathname.includes("donate.php"))
+		presenceData.details = "Viewing the Donations page";
+	else if (pathname.includes("tracker.php")) {
+		presenceData.details = title.textContent;
 		if (document.querySelector("#col1 > div:nth-child(1) > h3")) {
 			presenceData.state = document.querySelector(
 				"#col1 > div:nth-child(1) > h3"
