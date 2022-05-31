@@ -53,4 +53,4 @@ body:
   - type: textarea
     attributes:
       label: Additional Comments
-      description: Optionally add further comments which may enhance the issue
+      description: Optionally, add further comments which may enhance the issue
