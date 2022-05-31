@@ -2,29 +2,31 @@ const presence = new Presence({
 		clientId: "978186598669758504",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: string, mTitle: string, search: NodeListOf<HTMLInputElement>;
+let title: string, mTitle: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		},
-		path = document.location.pathname,
+		{ pathname, hostname, href } = document.location,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
 		]);
 	if (!privacy) {
-		if (document.location.hostname == "wiki.gg") {
-			if (path === "/") presenceData.details = "Viewing the homepage";
+		if (hostname == "wiki.gg") {
+			if (pathname === "/") presenceData.details = "Viewing the homepage";
 			else {
 				presenceData.details = document
 					.querySelector("head > title")
 					.textContent.slice(0, -10);
 			}
 		} else {
-			search = document.querySelectorAll("input[name='search']");
-			mTitle = document.location.hostname.split(".")[0];
+			const search = document.querySelectorAll<HTMLInputElement>(
+				"input[name='search']"
+			);
+			mTitle = hostname.split(".")[0];
 			title = mTitle[0].toUpperCase() + mTitle.slice(1);
 			switch (title) {
 				case "Terraria": {
@@ -47,13 +49,7 @@ presence.on("UpdateData", async () => {
 				)
 					presenceData.state = search[1].value;
 				title = `Searching ${title}'s wiki for:`;
-				presenceData.buttons = [
-					{
-						label: "View Search Result",
-						url: document.location.href,
-					},
-				];
-			} else if (path.includes("wiki") || path.includes("index.php")) {
+			} else if (pathname.includes("wiki") || pathname.includes("index.php")) {
 				title = `Viewing ${title} Wiki about:`;
 				presenceData.state = document
 					.querySelector("#firstHeading")
@@ -65,7 +61,7 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else if (
-				path === "/" ||
+				pathname === "/" ||
 				document.querySelector(
 					"#mw-content-text > div.mw-parser-output > div > div:nth-child(1) > div > div:nth-child(1)"
 				)
