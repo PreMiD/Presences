@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 						url: href
 					}
 				];
-				presenceData.details = `Browsing ${title}:`;
+				presenceData.details = `Browsing ${title}`;
 			}
 		} else if (pathname.includes("settings")) {
 			presenceData.details = `${
