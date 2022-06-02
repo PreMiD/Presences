@@ -5,10 +5,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
-	},
-	{ pathname, hostname } = document.location
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp
+		},
+		{ pathname, hostname } = document.location;
 
 	if (["www.brain.fm", "try.brain.fm"].includes(hostname)) {
 		if (["/", "/home"].includes(pathname))
@@ -53,9 +53,7 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Signing up";
 		else if (pathname.startsWith("/welcome"))
 			presenceData.details = "Getting started";
-		else if (
-			["/focus", "/relax", "/sleep"].includes(pathname)
-		) {
+		else if (["/focus", "/relax", "/sleep"].includes(pathname)) {
 			switch (pathname) {
 				case "/focus":
 					presenceData.state = `Focusing • ${document
