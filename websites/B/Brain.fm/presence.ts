@@ -10,35 +10,35 @@ presence.on("UpdateData", () => {
 	},
 	{ pathname, hostname } = document.location
 
-	if (["www.brain.fm", "try.brain.fm"].includes(window.location.hostname)) {
-		if (["/", "/home"].includes(document.location.pathname))
+	if (["www.brain.fm", "try.brain.fm"].includes(hostname)) {
+		if (["/", "/home"].includes(pathname))
 			presenceData.details = "Viewing the home page.";
-		else if (document.location.pathname.startsWith("/about"))
+		else if (pathname.startsWith("/about"))
 			presenceData.details = "Viewing Brain.fm's about page.";
-		else if (document.location.pathname.startsWith("/pdfs"))
+		else if (pathname.startsWith("/pdfs"))
 			presenceData.details = "Reading a Brain.fm PDF.";
-		else if (document.location.pathname.startsWith("/science"))
+		else if (pathname.startsWith("/science"))
 			presenceData.details = "Viewing Brain.fm's science page.";
-		else if (document.location.pathname.startsWith("/press"))
+		else if (pathname.startsWith("/press"))
 			presenceData.details = "Viewing Brain.fm's press page.";
-		else if (document.location.pathname.startsWith("/pricing"))
+		else if (pathname.startsWith("/pricing"))
 			presenceData.details = "Viewing pricing for Brain.fm.";
-		else if (document.location.pathname.startsWith("/jobs"))
+		else if (pathname.startsWith("/jobs"))
 			presenceData.details = "Viewing jobs at Brain.fm.";
-		else if (document.location.pathname.startsWith("/faq"))
+		else if (pathname.startsWith("/faq"))
 			presenceData.details = "Viewing Brain.fm's FAQ page.";
-		else if (document.location.pathname.startsWith("/contact"))
+		else if (pathname.startsWith("/contact"))
 			presenceData.details = "Viewing Brain.fm's contact page.";
-		else if (document.location.pathname.startsWith("/terms"))
+		else if (pathname.startsWith("/terms"))
 			presenceData.details = "Viewing Brain.fm's terms page.";
-		else if (document.location.pathname.startsWith("/privacy"))
+		else if (pathname.startsWith("/privacy"))
 			presenceData.details = "Viewing Brain.fm's privacy page.";
-		else if (document.location.pathname.startsWith("/legal"))
+		else if (pathname.startsWith("/legal"))
 			presenceData.details = "Viewing Brain.fm's legal page.";
-		else if (document.location.pathname.startsWith("/forgot-password"))
+		else if (pathname.startsWith("/forgot-password"))
 			presenceData.details = "Resetting Password...";
-	} else if (window.location.hostname.startsWith("my")) {
-		if (document.location.pathname === "/") {
+	} else if (hostname.startsWith("my")) {
+		if (pathname === "/") {
 			if (
 				document.querySelector(
 					"#root > div > div.sc-gKsewC.sc-iBPRYJ.sc-gGiJkG.efCouF.cOWINi.jzdkxv"
@@ -49,14 +49,14 @@ presence.on("UpdateData", () => {
 				document.querySelector("#root > div > div > div > div.sc-jsNsAp.byZiWf")
 			)
 				presenceData.details = "Choosing Mode...";
-		} else if (document.location.pathname.startsWith("/signup"))
+		} else if (pathname.startsWith("/signup"))
 			presenceData.details = "Signing Up for Brain.fm";
-		else if (document.location.pathname.startsWith("/welcome"))
+		else if (pathname.startsWith("/welcome"))
 			presenceData.details = "Getting started with Brain.fm";
 		else if (
-			["/focus", "/relax", "/sleep"].includes(document.location.pathname)
+			["/focus", "/relax", "/sleep"].includes(pathname)
 		) {
-			switch (document.location.pathname) {
+			switch (pathname) {
 				case "/focus":
 					presenceData.state = `Focusing • ${document
 						.querySelector(
@@ -100,11 +100,11 @@ presence.on("UpdateData", () => {
 				.getAttribute("src");
 			presenceData.smallImageKey = "logo";
 			presenceData.smallImageText = songTypeInfo[1];
-		} else if (document.location.pathname.startsWith("/user"))
+		} else if (pathname.startsWith("/user"))
 			presenceData.details = "Viewing user information...";
-		else if (document.location.pathname.startsWith("/payment"))
+		else if (pathname.startsWith("/payment"))
 			presenceData.details = "Viewing payment information...";
-		else if (document.location.pathname.startsWith("/forgot-password"))
+		else if (pathname.startsWith("/forgot-password"))
 			presenceData.details = "Resetting Password...";
 	} else presenceData.details = "Browsing...";
 
