@@ -55,25 +55,30 @@ presence.on("UpdateData", () => {
 		else if (
 			["/focus", "/relax", "/sleep"].includes(document.location.pathname)
 		) {
-			if (document.location.pathname === "/focus") {
-				presenceData.state = `Focussing • ${document
-					.querySelector(
-						"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
-					)
-					.textContent.trim()}`;
-			} else if (document.location.pathname === "/relax") {
-				presenceData.state = `Relaxing • ${document
-					.querySelector(
-						"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
-					)
-					.textContent.trim()}`;
-			} else if (document.location.pathname === "/sleep") {
-				presenceData.state = `Sleeping • ${document
-					.querySelector(
-						"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
-					)
-					.textContent.trim()}`;
+			switch (document.location.pathname) {
+				case "/focus":
+					presenceData.state = `Focussing • ${document
+						.querySelector(
+							"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
+						)
+						.textContent.trim()}`;
+					break;
+				case "/relax":
+					presenceData.state = `Relaxing • ${document
+						.querySelector(
+							"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
+						)
+						.textContent.trim()}`;
+					break;
+				case "/sleep":
+					presenceData.state = `Sleeping • ${document
+						.querySelector(
+							"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
+						)
+						.textContent.trim()}`;
+					break;
 			}
+
 			const songTypeInfo = document
 				.querySelector(
 					"#root > div > div > div.sc-VhGJa.kMMYFW > div.sc-jwBoPJ.glJHPW > div > div.sc-chbBtj.ciMhIb > div > div > div > div > div.sc-leFDRL.iaABgi"
