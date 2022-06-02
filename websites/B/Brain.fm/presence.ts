@@ -57,7 +57,7 @@ presence.on("UpdateData", () => {
 		) {
 			switch (document.location.pathname) {
 				case "/focus":
-					presenceData.state = `Focussing • ${document
+					presenceData.state = `Focusing • ${document
 						.querySelector(
 							"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
 						)
