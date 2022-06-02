@@ -7,7 +7,8 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp
-	};
+	},
+	{ pathname, hostname } = document.location
 
 	if (["www.brain.fm", "try.brain.fm"].includes(window.location.hostname)) {
 		if (["/", "/home"].includes(document.location.pathname))
