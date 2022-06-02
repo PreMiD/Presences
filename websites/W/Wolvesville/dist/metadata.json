@@ -91,7 +91,7 @@
 			"icon": "far fa-comment-slash",
 			"value": false
 		},
-    {
+		{
 			"id": "showStatus",
 			"if": {
 				"privacy": false
@@ -100,7 +100,7 @@
 			"icon": "far fa-play-circle",
 			"value": true
 		},
-    {
+		{
 			"id": "invisiblePrivacy",
 			"if": {
 				"privacy": false
