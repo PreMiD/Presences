@@ -102,8 +102,6 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Viewing user information";
 		else if (pathname.startsWith("/payment"))
 			presenceData.details = "Viewing payment information";
-		else if (pathname.startsWith("/forgot-password"))
-			presenceData.details = "Resetting their password";
 	} else presenceData.details = "Browsing";
 
 	presence.setActivity(presenceData);
