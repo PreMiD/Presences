@@ -457,13 +457,13 @@ const mediaInfoCache = new Map<string, MediaInfo>();
 async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 	if (mediaInfoCache.has(itemId)) return mediaInfoCache.get(itemId);
 
-	let accessToken = ApiClient._serverInfo.AccessToken;
+	let { AccessToken: accessToken } = ApiClient._serverInfo;
 
 	if (!accessToken) {
 		// refresh the ApiClient
 		ApiClient = await getApiClient();
 
-		accessToken = ApiClient._serverInfo.AccessToken;
+		({ AccessToken: accessToken } = ApiClient._serverInfo);
 	}
 
 	const res = await fetch(
