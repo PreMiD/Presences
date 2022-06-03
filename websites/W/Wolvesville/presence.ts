@@ -347,17 +347,23 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.href.includes("wolvesville.com")) {
 		const root = document.querySelector("#root");
 
-		document.querySelector(
-			"div.css-1dbjc4n.r-1p0dtai.r-18u37iz.r-1777fci.r-1d2f490.r-98ikmy.r-u8s1d.r-zchlnj > div.css-1dbjc4n.r-1ffj0ar.r-z2wwpe.r-18u37iz.r-1w6e6rj.r-1777fci.r-1l7z4oj.r-gu0qjt.r-85oauj.r-95jzfe > div.css-1dbjc4n.r-1awozwy.r-1777fci > div.css-1dbjc4n.r-17bb2tj.r-1muvv40.r-127358a.r-1ldzwu0.r-z80fyv.r-19wmn03"
-		) && (presenceData.details = "Loading Wolvesville...");
+		if (
+			document.querySelector(
+				"div.css-1dbjc4n.r-1p0dtai.r-18u37iz.r-1777fci.r-1d2f490.r-98ikmy.r-u8s1d.r-zchlnj > div.css-1dbjc4n.r-1ffj0ar.r-z2wwpe.r-18u37iz.r-1w6e6rj.r-1777fci.r-1l7z4oj.r-gu0qjt.r-85oauj.r-95jzfe > div.css-1dbjc4n.r-1awozwy.r-1777fci > div.css-1dbjc4n.r-17bb2tj.r-1muvv40.r-127358a.r-1ldzwu0.r-z80fyv.r-19wmn03"
+			)
+		)
+			presenceData.details = "Loading Wolvesville...";
 
-		document.querySelector(
-			"div.css-1dbjc4n.r-z2wwpe.r-13awgt0.r-1dhrvg0.r-169s5xo.r-hvns9x.r-1pcd2l5"
-		) &&
-			((presenceData.details = "At the login page"),
-			root.removeAttribute("premid-username"),
-			root.removeAttribute("premid-clantag"),
-			root.removeAttribute("premid-status"));
+		if (
+			document.querySelector(
+				"div.css-1dbjc4n.r-z2wwpe.r-13awgt0.r-1dhrvg0.r-169s5xo.r-hvns9x.r-1pcd2l5"
+			)
+		) {
+			presenceData.details = "At the login page";
+			root.removeAttribute("premid-username");
+			root.removeAttribute("premid-clantag");
+			root.removeAttribute("premid-status");
+		}
 
 		//Menu
 		if (
@@ -429,37 +435,47 @@ presence.on("UpdateData", async () => {
 				) &&
 				!privacyMode
 			) {
-				!clanTag && root.hasAttribute("premid-clantag")
-					? (presenceData.state = `${root.getAttribute(
-							"premid-clantag"
-					  )}|${root.getAttribute("premid-username")}`)
-					: (presenceData.state = `${root.getAttribute("premid-username")}`);
+				if (!clanTag && root.hasAttribute("premid-clantag")) {
+					presenceData.state = `${root.getAttribute(
+						"premid-clantag"
+					)}|${root.getAttribute("premid-username")}`;
+				} else presenceData.state = `${root.getAttribute("premid-username")}`;
 			}
 
 			if (!privacyMode && showStatus) {
-				root.getAttribute("premid-status") === "lets_play" &&
-					((presenceData.smallImageKey = "lets_play"),
-					(presenceData.smallImageText = "Let's play"));
-				root.getAttribute("premid-status") === "online" &&
-					((presenceData.smallImageKey = "online"),
-					(presenceData.smallImageText = "Online"));
-				root.getAttribute("premid-status") === "dnd" &&
-					((presenceData.smallImageKey = "dnd"),
-					(presenceData.smallImageText = "Do not disturb"));
+				if (root.getAttribute("premid-status") === "lets_play") {
+					presenceData.smallImageKey = "lets_play";
+					presenceData.smallImageText = "Let's Play";
+				} else if (root.getAttribute("premid-status") === "online") {
+					presenceData.smallImageKey = "online";
+					presenceData.smallImageText = "Online";
+				} else if (root.getAttribute("premid-status") === "dnd") {
+					presenceData.smallImageKey = "dnd";
+					presenceData.smallImageText = "Do Not Disturb";
+				}
 			}
 
 			if (!privacyMode) {
-				document.querySelector(
-					"div.css-1dbjc4n.r-kdyh1x.r-eqz5dr.r-1pi2tsx.r-a2tzq0.r-1ybube5"
-				) && (presenceData.state = "Inventory");
+				if (
+					document.querySelector(
+						"div.css-1dbjc4n.r-kdyh1x.r-eqz5dr.r-1pi2tsx.r-a2tzq0.r-1ybube5"
+					)
+				)
+					presenceData.state = "Inventory";
 
-				document.querySelector(
-					"div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-1w6e6rj.r-1777fci.r-1guathk"
-				) && (presenceData.state = "Shop");
+				if (
+					document.querySelector(
+						"div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-1w6e6rj.r-1777fci.r-1guathk"
+					)
+				)
+					presenceData.state = "Shop";
 
-				document.querySelector(
-					"div.css-1dbjc4n.r-8o21a9.r-12vffkv.r-u8s1d.r-13qz1uu.r-1g40b8q"
-				) && (presenceData.state = "Opening loot boxes");
+				if (
+					document.querySelector(
+						"div.css-1dbjc4n.r-8o21a9.r-12vffkv.r-u8s1d.r-13qz1uu.r-1g40b8q"
+					)
+				)
+					presenceData.state = "Opening loot boxes";
 
 				if (
 					document.querySelector(
@@ -478,16 +494,27 @@ presence.on("UpdateData", async () => {
 								"div.css-1dbjc4n > div.css-901oao.r-wnl269.r-1i10wst.r-1vr29t4.r-1w50u8q.r-q4m81j"
 							)
 						) {
-							index === 0 && (presenceData.state = "Viewing roles");
-							index === 1 && (presenceData.state = "Viewing role cards");
-							index === 2 && (presenceData.state = "Viewing role setups");
+							switch (index) {
+								case 0:
+									presenceData.state = "Viewing roles";
+									break;
+								case 1:
+									presenceData.state = "Viewing role cards";
+									break;
+								case 2:
+									presenceData.state = "Viewing role setups";
+									break;
+							}
 						}
 					}
 				}
 
-				document.querySelector(
-					"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-11yh6sk.r-1rnoaur.r-2eszeu.r-1sncvnh > div.css-1dbjc4n > div.css-1dbjc4n > div.css-1dbjc4n.r-13qz1uu > div.css-1dbjc4n.r-z2wwpe.r-nsbfu8.r-13qz1uu > div.css-1dbjc4n.r-1awozwy.r-13awgt0.r-18u37iz.r-1777fci"
-				) && (presenceData.state = "Upgrading a role card");
+				if (
+					document.querySelector(
+						"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-11yh6sk.r-1rnoaur.r-2eszeu.r-1sncvnh > div.css-1dbjc4n > div.css-1dbjc4n > div.css-1dbjc4n.r-13qz1uu > div.css-1dbjc4n.r-z2wwpe.r-nsbfu8.r-13qz1uu > div.css-1dbjc4n.r-1awozwy.r-13awgt0.r-18u37iz.r-1777fci"
+					)
+				)
+					presenceData.state = "Upgrading a role card";
 
 				if (
 					document.querySelector("div.css-1dbjc4n.r-13awgt0.r-zd98yo.r-13qz1uu")
@@ -532,16 +559,22 @@ presence.on("UpdateData", async () => {
 					}
 				}
 
-				document.querySelector(
-					"div.css-1dbjc4n.r-1kihuf0.r-1mlwlqe.r-1d2f490.r-1udh08x.r-zchlnj > div.css-1dbjc4n.r-1niwhzg.r-vvn4in.r-u6sd8q.r-ehq7j7.r-1p0dtai.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-13qz1uu.r-1wyyakw"
-				) && (presenceData.state = "Wheel of fortune");
+				if (
+					document.querySelector(
+						"div.css-1dbjc4n.r-1kihuf0.r-1mlwlqe.r-1d2f490.r-1udh08x.r-zchlnj > div.css-1dbjc4n.r-1niwhzg.r-vvn4in.r-u6sd8q.r-ehq7j7.r-1p0dtai.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-13qz1uu.r-1wyyakw"
+					)
+				)
+					presenceData.state = "Wheel of fortune";
 
-				document.querySelector(
-					"div.css-1dbjc4n.r-150rngu.r-1niwhzg.r-13awgt0.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-1pi2tsx.r-1lxl8vk.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
-				) && (presenceData.state = "Settings");
+				if (
+					document.querySelector(
+						"div.css-1dbjc4n.r-150rngu.r-1niwhzg.r-13awgt0.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-1pi2tsx.r-1lxl8vk.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
+					)
+				)
+					presenceData.state = "Settings";
 
-				document.querySelector("iframe[title='Mentor Chat']") &&
-					(presenceData.state = "Mentor chat");
+				if (document.querySelector("iframe[title='Mentor Chat']"))
+					presenceData.state = "Mentor chat";
 
 				if (
 					document.querySelector(
@@ -557,9 +590,12 @@ presence.on("UpdateData", async () => {
 					} else presenceData.state = "Chatting with a friend";
 				}
 
-				document.querySelector(
-					"div.css-1dbjc4n.r-1p0dtai.r-qdtdgp.r-u8s1d.r-1ro7rbe.r-ipm5af > div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-u8s1d.r-ipm5af > div.css-1dbjc4n.r-13awgt0 > div.css-1dbjc4n.r-13awgt0.r-wk8lta > div.css-1dbjc4n.r-led734.r-1p0dtai.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
-				) && (presenceData.state = "Clan chat");
+				if (
+					document.querySelector(
+						"div.css-1dbjc4n.r-1p0dtai.r-qdtdgp.r-u8s1d.r-1ro7rbe.r-ipm5af > div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-u8s1d.r-ipm5af > div.css-1dbjc4n.r-13awgt0 > div.css-1dbjc4n.r-13awgt0.r-wk8lta > div.css-1dbjc4n.r-led734.r-1p0dtai.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
+					)
+				)
+					presenceData.state = "Clan chat";
 			}
 		}
 
@@ -575,11 +611,11 @@ presence.on("UpdateData", async () => {
 				) &&
 				!privacyMode
 			) {
-				!clanTag && root.hasAttribute("premid-clantag")
-					? (presenceData.state = `${root.getAttribute(
-							"premid-clantag"
-					  )}|${root.getAttribute("premid-username")}`)
-					: (presenceData.state = `${root.getAttribute("premid-username")}`);
+				if (!clanTag && root.hasAttribute("premid-clantag")) {
+					presenceData.state = `${root.getAttribute(
+						"premid-clantag"
+					)}|${root.getAttribute("premid-username")}`;
+				} else presenceData.state = `${root.getAttribute("premid-username")}`;
 			}
 		}
 
@@ -806,15 +842,16 @@ presence.on("UpdateData", async () => {
 							presenceData.details = `Game Over | ${presenceData.details}`;
 						else presenceData.details = "Game Over";
 
-						playerState !== "Spectator" &&
-							(document
+						if (playerState !== "Spectator") {
+							document
 								.querySelector(
 									"div.css-1dbjc4n.r-13awgt0.r-1mlwlqe.r-uvuy5l.r-1udh08x.r-417010 > div.css-1dbjc4n.r-1niwhzg.r-vvn4in.r-u6sd8q.r-x3cy2q.r-1p0dtai.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-13qz1uu.r-1wyyakw"
 								)
 								.getAttribute("style")
 								.includes("banner_defeat_middle")
 								? (playerState = "Defeat")
-								: (playerState = "Victory"));
+								: (playerState = "Victory");
+						}
 					}
 
 					//Player count
@@ -835,7 +872,7 @@ presence.on("UpdateData", async () => {
 									2;
 
 						presenceData.state = "";
-						playerState && (presenceData.state = `${playerState} - `);
+						if (playerState) presenceData.state = `${playerState} - `;
 
 						aliveCount === 1
 							? (presenceData.state += `${aliveCount}/${playerCount} player left`)
@@ -869,13 +906,15 @@ presence.on("UpdateData", async () => {
 			) &&
 			!privacyMode
 		) {
-			!clanTag && root.hasAttribute("premid-clantag")
-				? (presenceData.smallImageText += ` (${root.getAttribute(
-						"premid-clantag"
-				  )}|${root.getAttribute("premid-username")})`)
-				: (presenceData.smallImageText += ` (${root.getAttribute(
-						"premid-username"
-				  )})`);
+			if (!clanTag && root.hasAttribute("premid-clantag")) {
+				presenceData.smallImageText += ` (${root.getAttribute(
+					"premid-clantag"
+				)}|${root.getAttribute("premid-username")})`;
+			} else {
+				presenceData.smallImageText += ` (${root.getAttribute(
+					"premid-username"
+				)})`;
+			}
 		}
 	}
 	presence.setActivity(presenceData);
