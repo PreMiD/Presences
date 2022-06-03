@@ -753,7 +753,7 @@ presence.on("UpdateData", async () => {
 
 						if (root.getAttribute("premid-friends") === "true")
 							gamemode += " with friends";
-					}
+					} else presenceData.details = "In a game";
 
 					const spectatorList = document.querySelectorAll(
 						"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-3z64tn.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu:nth-last-child(1) > div > div > div > div > div.css-1dbjc4n.r-13awgt0.r-18u37iz.r-1jkjb.r-1d4mawv > div:nth-child(2)"
@@ -822,7 +822,7 @@ presence.on("UpdateData", async () => {
 							}
 						}
 						presenceData.smallImageText = playerState;
-					} else presenceData.details = "In a game";
+					}
 
 					//Game Over
 					if (
@@ -831,8 +831,8 @@ presence.on("UpdateData", async () => {
 						)
 					) {
 						if (!privacyMode && presenceData.details !== "In a game")
-							presenceData.details = `Game Over | ${presenceData.details}`;
-						else presenceData.details = "Game Over";
+							presenceData.details = `Game over | ${presenceData.details}`;
+						else presenceData.details = "Game over";
 
 						if (playerState !== "Spectator") {
 							document
