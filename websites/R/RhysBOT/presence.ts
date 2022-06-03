@@ -1,8 +1,7 @@
 const presence = new Presence({
-	clientId: "658765364439810048"
-});
-
-const date = Date.now();
+		clientId: "658765364439810048"
+	}),
+	date = Date.now();
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -19,7 +18,7 @@ presence.on("UpdateData", async () => {
 		page = document.location.pathname;
 
 	if (document.querySelector("#itemName")) {
-		presenceData.largeImageKey = 
+		presenceData.largeImageKey =
 			document.querySelector<HTMLImageElement>("#itemImage").src;
 
 		presenceData.details = `Viewing ${
