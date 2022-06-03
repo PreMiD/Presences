@@ -284,10 +284,12 @@ let ApiClient: ApiClient,
 	wasLogin = false;
 
 function jellyfinBasenameUrl(): string {
-	return `${`${location.protocol}//${location.host}${location.pathname.replace(
-		location.pathname.split("/").slice(-2).join("/"),
+	const { pathname } = location;
+
+	return `${location.origin}${pathname.replace(
+		pathname.split("/").slice(-2).join("/"),
 		""
-	)}`}`;
+	)}`;
 }
 
 function mediaPrimaryImage(mediaId: string): string {
@@ -298,8 +300,9 @@ function mediaPrimaryImage(mediaId: string): string {
  * handleAudioPlayback - handles the presence when the audio player is active
  */
 async function handleAudioPlayback(): Promise<void> {
-	const [audioElem] = document.querySelectorAll("audio"),
-		regexResult = /\/Audio\/(\w+)\/universal/.exec(audioElem.src);
+	const regexResult = /\/Audio\/(\w+)\/universal/.exec(
+		document.querySelector("audio").src
+	);
 
 	if (!regexResult) {
 		presence.error("Could not obtain audio itemId");
@@ -388,19 +391,19 @@ function getUserId(): string {
 	try {
 		return ApiClient._currentUser.Id;
 	} catch (e) {
-		const servers = JSON.parse(
+		const servers: Server[] = JSON.parse(
 			localStorage.getItem("jellyfin_credentials")
 		).Servers;
 
-		// server id available on browser location
-		if (location.hash.indexOf("?") > 0) {
-			for (const param of location.hash.split("?")[1].split("&")) {
-				if (param.startsWith("serverId")) {
-					for (const server of servers)
-						if (server.Id === param.split("=")[1]) return server.UserId;
-				}
-			}
-		} else return servers[0].UserId;
+		return (
+			servers.length === 1
+				? servers[0]
+				: servers.find(
+						(s: Server) =>
+							s.Id ===
+							new URLSearchParams(location.hash.split("?")[1]).get("serverId")
+				  )
+		).UserId;
 	}
 }
 
@@ -556,16 +559,9 @@ async function handleVideoPlayback(): Promise<void> {
  * handleItemDetails - handles the presence when the user is viewing the details of an item
  */
 async function handleItemDetails(): Promise<void> {
-	let id;
-
-	for (const param of location.hash.split("?")[1].split("&")) {
-		if (param.startsWith("id=")) {
-			[, id] = param.split("=");
-			break;
-		}
-	}
-
-	const data = await obtainMediaInfo(id);
+	const data = await obtainMediaInfo(
+		new URLSearchParams(location.hash.split("?")[1]).get("id")
+	);
 
 	if (!data) {
 		presenceData.details = "Browsing details of an item";
@@ -592,7 +588,7 @@ async function handleItemDetails(): Promise<void> {
 
 				if (data.Overview) {
 					description =
-						data.Overview.substr(0, 40) +
+						data.Overview.substring(0, 40) +
 						(data.Overview.length > 40 ? "..." : "");
 				}
 				presenceData.state = `${data.Type} ─ ${description}`;
@@ -640,13 +636,14 @@ async function loggedIn(): Promise<void> {
  * handleWebClient - handle the presence while the user is in the web client
  */
 async function handleWebClient(): Promise<void> {
-	const audioElems = document.body.querySelectorAll("audio");
+	const audioElement = document.body.querySelector<HTMLAudioElement>("audio"),
+		nowPlayingBar = document.querySelector(".nowPlayingBar");
 
 	// audio player active
 	if (
-		audioElems.length > 0 &&
-		audioElems[0].classList.contains("mediaPlayerAudio") &&
-		audioElems[0].src
+		audioElement &&
+		audioElement.classList.contains("mediaPlayerAudio") &&
+		audioElement.src
 	) {
 		await handleAudioPlayback();
 		return;
@@ -768,8 +765,7 @@ async function setDefaultsToPresence(): Promise<void> {
 
 	if (presenceData.startTimestamp) delete presenceData.startTimestamp;
 
-	if (presenceData.endTimestamp && isNaN(presenceData.endTimestamp))
-		delete presenceData.endTimestamp;
+	if (isNaN(presenceData.endTimestamp)) delete presenceData.endTimestamp;
 
 	if (await presence.getSetting<boolean>("showTimestamps"))
 		presenceData.startTimestamp = Date.now();
