@@ -2,39 +2,37 @@ const presence = new Presence({
 	clientId: "658765364439810048"
 });
 
+const date = Date.now();
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/yAhhPzj.png",
+			largeImageKey: "Logo",
 			details: "Exploring",
-			startTimestamp: Date.now(),
+			startTimestamp: date,
 			buttons: [
 				{
 					label: "View Page",
-					url: location.href
+					url: document.location.href
 				}
 			]
 		},
-		page = location.href.split("#")[0].split("?")[0].split("/").slice(-1);
+		page = document.location.pathname;
 
 	if (document.querySelector("#itemName")) {
-		presenceData.largeImageKey = (<HTMLImageElement>(
-			document.querySelector("#itemImage")
-		)).src;
+		presenceData.largeImageKey = 
+			document.querySelector<HTMLImageElement>("#itemImage").src;
 
 		presenceData.details = `Viewing ${
-			document.querySelector("#itemName").innerHTML
+			document.querySelector("#itemName").textContent
 		}`;
 
 		if (document.querySelector("#itemDescription")) {
 			presenceData.state = `${
-				document.querySelector("#itemDescription").innerHTML
+				document.querySelector("#itemDescription").textContent
 			}`;
 		}
-	} else if (page[0] && !page[0].includes("_"))
+	} else if (page && !page.includes("_"))
 		presenceData.details = `Exploring the ${page} page`;
-
-	if (location.href.includes("#google_vignette"))
-		presenceData.details = "Closing a pop-up ad";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
