@@ -834,11 +834,12 @@ presence.on("UpdateData", async () => {
 								).length /
 									2;
 
-						presenceData.state = playerState;
+						presenceData.state = "";
+						playerState && (presenceData.state = `${playerState} - `);
 
 						aliveCount === 1
-							? (presenceData.state += ` - ${aliveCount}/${playerCount} player left`)
-							: (presenceData.state += ` - ${aliveCount}/${playerCount} players left`);
+							? (presenceData.state += `${aliveCount}/${playerCount} player left`)
+							: (presenceData.state += `${aliveCount}/${playerCount} players left`);
 					}
 				}
 			} else {
