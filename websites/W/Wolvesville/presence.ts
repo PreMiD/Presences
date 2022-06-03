@@ -227,6 +227,26 @@ function languageCode(language: string): string {
 	}
 }
 
+function getPlayerStatus(root: Element, status: Element) {
+	if (status?.querySelector("div > div").textContent === "")
+		root.setAttribute("premid-status", "lets_play");
+	else if (
+		status
+			?.querySelector("div")
+			.getAttribute("style")
+			.includes("rgb(244, 67, 54)")
+	)
+		root.setAttribute("premid-status", "dnd");
+	else if (
+		status
+			?.querySelector("div")
+			.getAttribute("style")
+			.includes("rgb(158, 158, 158)")
+	)
+		root.setAttribute("premid-status", "invisible");
+	else if (status) root.setAttribute("premid-status", "online");
+}
+
 presence.on("UpdateData", async () => {
 	const [
 			privacyMode,
@@ -408,26 +428,12 @@ presence.on("UpdateData", async () => {
 			}
 
 			//Get status
-			const status = document.querySelector(
-				"div.css-1dbjc4n.r-18u37iz > div.css-1dbjc4n.r-173mn98.r-19u6a5r.r-12zb1j4.r-1inuy60"
+			getPlayerStatus(
+				root,
+				document.querySelector(
+					"div.css-1dbjc4n.r-18u37iz > div.css-1dbjc4n.r-173mn98.r-19u6a5r.r-12zb1j4.r-1inuy60"
+				)
 			);
-			if (status?.querySelector("div > div").textContent === "")
-				root.setAttribute("premid-status", "lets_play");
-			else if (
-				status
-					?.querySelector("div")
-					.getAttribute("style")
-					.includes("rgb(244, 67, 54)")
-			)
-				root.setAttribute("premid-status", "dnd");
-			else if (
-				status
-					?.querySelector("div")
-					.getAttribute("style")
-					.includes("rgb(158, 158, 158)")
-			)
-				root.setAttribute("premid-status", "invisible");
-			else if (status) root.setAttribute("premid-status", "online");
 
 			if (
 				!(
@@ -682,26 +688,12 @@ presence.on("UpdateData", async () => {
 						"div.css-1dbjc4n.r-1awozwy.r-knv0ih.r-633pao.r-417010 > div.css-1dbjc4n.r-1awozwy.r-lrvibr.r-13qz1uu"
 					)
 				) {
-					const status = document.querySelector(
-						"div.css-1dbjc4n.r-13awgt0.r-eqz5dr.r-1x0uki6.r-xd6kpl.r-1ss6j8a.r-1qortcd > div > div.css-1dbjc4n.r-1pz39u2.r-13awgt0.r-18u37iz > div.css-1dbjc4n"
+					getPlayerStatus(
+						root,
+						document.querySelector(
+							"div.css-1dbjc4n.r-13awgt0.r-eqz5dr.r-1x0uki6.r-xd6kpl.r-1ss6j8a.r-1qortcd > div > div.css-1dbjc4n.r-1pz39u2.r-13awgt0.r-18u37iz > div.css-1dbjc4n"
+						)
 					);
-					if (status?.querySelector("div > div").textContent === "")
-						root.setAttribute("premid-status", "lets_play");
-					else if (
-						status
-							?.querySelector("div")
-							.getAttribute("style")
-							.includes("rgb(244, 67, 54)")
-					)
-						root.setAttribute("premid-status", "dnd");
-					else if (
-						status
-							?.querySelector("div")
-							.getAttribute("style")
-							.includes("rgb(158, 158, 158)")
-					)
-						root.setAttribute("premid-status", "invisible");
-					else root.setAttribute("premid-status", "online");
 				}
 
 				//Pre game lobby
