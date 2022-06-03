@@ -86,18 +86,7 @@ interface ApiClient {
 		IsLocal: boolean;
 	};
 	_serverAddress: string;
-	_serverInfo: {
-		AccessToken: string;
-		DateLastAccessed: number; // timestamp
-		ExchangeToken: string;
-		Id: string;
-		LastConnectionMode: number;
-		ManualAddress: string;
-		Name: string;
-		UserId: string;
-		// UserLinkType: any; // unknown
-		manualAddressOnly: boolean;
-	};
+	_serverInfo: Server;
 	_serverVersion: string;
 	_webSocket: {
 		binaryType: string;
@@ -268,6 +257,21 @@ interface MediaInfo {
 	Height: number;
 }
 
+interface Server {
+	AccessToken: string;
+	DateLastAccessed: number; // timestamp
+	Id: string;
+	IsLocalServer: boolean;
+	LastConnectionMode: number;
+	LocalAddress: string;
+	ManualAddress: string;
+	Name: string;
+	RemoteAddress: string;
+	Type: "Server";
+	UserId: string;
+	manualAddressOnly: boolean;
+}
+
 const // official website
 	EMBY_URL = "emby.media",
 	// web client app name
@@ -429,7 +433,7 @@ function getUserId(): string {
 	try {
 		return ApiClient._currentUser.Id;
 	} catch (e) {
-		const servers = JSON.parse(
+		const servers: Server[] = JSON.parse(
 			localStorage.getItem("servercredentials3")
 		).Servers;
 
@@ -437,7 +441,7 @@ function getUserId(): string {
 			servers.length === 1
 				? servers[0]
 				: servers.find(
-						(s: { Id: string }) =>
+						(s: Server) =>
 							s.Id ===
 							new URLSearchParams(location.hash.split("?")[1]).get("serverId")
 				  )
