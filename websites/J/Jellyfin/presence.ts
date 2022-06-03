@@ -76,18 +76,7 @@ interface ApiClient {
 		IsLocal: boolean;
 	};
 	_serverAddress: string;
-	_serverInfo: {
-		AccessToken: string;
-		DateLastAccessed: number; // timestamp
-		ExchangeToken: string;
-		Id: string;
-		LastConnectionMode: number;
-		ManualAddress: string;
-		Name: string;
-		UserId: string;
-		// UserLinkType: any; // unknown
-		manualAddressOnly: boolean;
-	};
+	_serverInfo: Server;
 	_serverVersion: string;
 	_webSocket: {
 		binaryType: string;
@@ -221,7 +210,7 @@ interface MediaInfo {
 	};
 	IsHD: boolean;
 	IsFolder: boolean;
-	ParentId: number;
+	ParentId: string;
 	Type: string;
 	People: Person[];
 	// Studios: Array;
@@ -256,6 +245,21 @@ interface MediaInfo {
 	LockData: boolean;
 	Width: number;
 	Height: number;
+}
+
+interface Server {
+	AccessToken: string;
+	DateLastAccessed: number; // timestamp
+	Id: string;
+	IsLocalServer: boolean;
+	LastConnectionMode: number;
+	LocalAddress: string;
+	ManualAddress: string;
+	Name: string;
+	RemoteAddress: string;
+	Type: "Server";
+	UserId: string;
+	manualAddressOnly: boolean;
 }
 
 const // official website
