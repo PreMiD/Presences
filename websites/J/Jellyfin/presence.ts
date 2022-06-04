@@ -3,6 +3,7 @@
  * I've tried to set as many properties as I could find.
  */
 
+//#region Interfaces
 interface ApiClient {
 	enableAutomaticBitrateDetection: boolean;
 	enableAutomaticNetworking: boolean;
@@ -262,6 +263,8 @@ interface Server {
 	manualAddressOnly: boolean;
 }
 
+// #endregion
+
 const // official website
 	JELLYFIN_URL = "jellyfin.org",
 	// all the presence art assets uploaded to discord
@@ -283,6 +286,9 @@ let ApiClient: ApiClient,
 	presence: Presence,
 	wasLogin = false;
 
+/**
+ * Obtain the base name Url of the server
+ */
 function jellyfinBasenameUrl(): string {
 	const { pathname } = location;
 
@@ -292,12 +298,15 @@ function jellyfinBasenameUrl(): string {
 	)}`;
 }
 
+/**
+ * Obtain the url of the primary image of a media given its id
+ */
 function mediaPrimaryImage(mediaId: string): string {
 	return `${jellyfinBasenameUrl()}Items/${mediaId}/Images/Primary?fillHeight=256&fillWidth=256`;
 }
 
 /**
- * handleAudioPlayback - handles the presence when the audio player is active
+ * Handle the presence when the audio player is active
  */
 async function handleAudioPlayback(): Promise<void> {
 	const regexResult = /\/Audio\/(\w+)\/universal/.exec(
@@ -313,7 +322,7 @@ async function handleAudioPlayback(): Promise<void> {
 }
 
 /**
- * handleOfficialWebsite - handle the presence while the user is in the official website
+ * Handle the presence while the user is in the official website
  */
 function handleOfficialWebsite(): void {
 	presenceData.details = "At jellyfin.org";
@@ -352,9 +361,7 @@ function handleOfficialWebsite(): void {
 }
 
 /**
- * getUserId - obtains the user id
- *
- * @return {string}  user id
+ * Obtain the authenticated user id
  */
 function getUserId(): string {
 	try {
@@ -376,8 +383,14 @@ function getUserId(): string {
 	}
 }
 
+/**
+ * Cache performed mediaInfo
+ */
 const mediaInfoCache = new Map<string, MediaInfo>();
 
+/**
+ * Obtain media info given an itemId
+ */
 async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 	if (mediaInfoCache.has(itemId)) return mediaInfoCache.get(itemId);
 
@@ -402,10 +415,13 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 	return mediaInfoCache.get(itemId);
 }
 
+/**
+ * Cache performed media searches
+ */
 const searchMediaCache = new Map<string, MediaInfo[]>();
 
 /**
- * searchMedia - search Movie and Series
+ * Search Movie and Series given a term
  */
 async function searchMedia(searchTerm: string): Promise<MediaInfo[]> {
 	if (searchMediaCache.has(searchTerm)) return searchMediaCache.get(searchTerm);
@@ -439,7 +455,7 @@ async function searchMedia(searchTerm: string): Promise<MediaInfo[]> {
 }
 
 /**
- * handleVideoPlayback - handles the presence when the user is using the video player
+ * Handles the presence when the user is using the video player
  */
 async function handleVideoPlayback(): Promise<void> {
 	if (!document.querySelector("#videoOsdPage")) {
@@ -464,7 +480,9 @@ async function handleVideoPlayback(): Promise<void> {
 	if (!presenceData.state) delete presenceData.state;
 }
 
-
+/**
+ * Handle the presence when the user is playing back content remotely
+ */
 async function handleRemotePlayback(): Promise<void> {
 	const [, mediaId] = /\/Items\/(\w+)\/Images/.exec(
 		document.querySelector<HTMLDivElement>(".nowPlayingImage").style
@@ -474,6 +492,8 @@ async function handleRemotePlayback(): Promise<void> {
 	await setPresenceByMediaId(mediaId);
 }
 
+/**
+ * Handle the presence when the user is viewing the details of an item
  */
 async function handleItemDetails(): Promise<void> {
 	const data = await obtainMediaInfo(
@@ -596,6 +616,8 @@ async function setPresenceByMediaId(mediaId: string): Promise<void> {
 	if (!presenceData.state) delete presenceData.state;
 }
 
+/**
+ * Suspend execution of code for an interval, see <https://manpage.me/?q=sleep>
  */
 function sleep(ms: number): Promise<void> {
 	return new Promise(res => {
@@ -604,7 +626,7 @@ function sleep(ms: number): Promise<void> {
 }
 
 /**
- * loggedIn - Refreshes the ApiClient object
+ * Refreshes the ApiClient object
  */
 async function loggedIn(): Promise<void> {
 	let apiClient: ApiClient;
@@ -618,7 +640,7 @@ async function loggedIn(): Promise<void> {
 }
 
 /**
- * handleWebClient - handle the presence while the user is in the web client
+ * Handle the presence while the user is in the web client
  */
 async function handleWebClient(): Promise<void> {
 	const audioElement = document.body.querySelector<HTMLAudioElement>("audio"),
@@ -745,7 +767,7 @@ async function handleWebClient(): Promise<void> {
 }
 
 /**
- * setDefaultsToPresence - set default values to the presenceData object
+ * Sets default values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
 	presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
@@ -765,17 +787,14 @@ async function setDefaultsToPresence(): Promise<void> {
 }
 
 /**
- * refreshApiClient - Initializes the ApiClient object
+ * Initializes the ApiClient object
  */
 async function refreshApiClient(): Promise<void> {
 	ApiClient ??= await presence.getPageletiable<ApiClient>("ApiClient");
 }
 
 /**
- * isJellyfinWebClient - imports the ApiClient variable and
- * verifies that we are in the jellyfin web client
- *
- * @return {boolean} true once the variable has been imported, otherwise false
+ * Imports the ApiClient variable and verifies that we are in the jellyfin web client
  */
 async function isJellyfinWebClient(): Promise<boolean> {
 	if (!ApiClient) await refreshApiClient();
@@ -792,7 +811,7 @@ async function isJellyfinWebClient(): Promise<boolean> {
 }
 
 /**
- * updateData - tick function, this is called several times a second by UpdateData event
+ * PreMiD tick function
  */
 async function updateData(): Promise<void> {
 	await setDefaultsToPresence();
@@ -825,7 +844,7 @@ async function updateData(): Promise<void> {
 }
 
 /**
- * init - check if the presence should be initialized, if so start doing the magic
+ * Check if the presence should be initialized, if so start doing the magic
  */
 async function init(): Promise<void> {
 	let validPage = false,
