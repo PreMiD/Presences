@@ -309,38 +309,7 @@ async function handleAudioPlayback(): Promise<void> {
 		return;
 	}
 
-	const [, mediaId] = regexResult,
-		info = await obtainMediaInfo(mediaId);
-
-	presenceData.details = `Listening to: ${info.Name ?? "unknown title"}`;
-	presenceData.state = `By: ${info.AlbumArtist ?? "unknown artist"}`;
-
-	if (
-		(await presence.getSetting("showRichImages")) &&
-		(await presence.getSetting("showAlbumart")) &&
-		// some songs might not have albumart
-		document.querySelector<HTMLDivElement>(".nowPlayingImage").style
-			.backgroundImage
-	)
-		presenceData.largeImageKey = mediaPrimaryImage(mediaId);
-
-	// playing
-	if (!audioElem.paused) {
-		presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
-		presenceData.smallImageText = "Playing";
-
-		if (await presence.getSetting("showMediaTimestamps")) {
-			[, presenceData.endTimestamp] =
-				presence.getTimestampsfromMedia(audioElem);
-		}
-
-		// paused
-	} else {
-		presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
-		presenceData.smallImageText = "Paused";
-
-		delete presenceData.endTimestamp;
-	}
+	await setPresenceByMediaId(regexResult[1]);
 }
 
 /**
@@ -478,79 +447,19 @@ async function handleVideoPlayback(): Promise<void> {
 		return;
 	}
 
-	const videoPlayerElem = document.querySelectorAll(
-		"video"
-	)[0] as HTMLVideoElement;
-
-	// this variables content will be replaced in details and status properties on presenceData
-	let title, subtitle;
-
 	// title on the header
-	const headerTitle =
-			document.querySelector<HTMLHeadingElement>("h3.pageTitle").textContent,
-		[mediaInfo] = await searchMedia(headerTitle);
+	const [mediaInfo] = await searchMedia(
+		document.querySelector<HTMLHeadingElement>("h3.pageTitle").textContent
+	);
 
-	let largeImage = PRESENCE_ART_ASSETS.logo;
-
-	// display generic info
-	if (!mediaInfo) {
-		title = "Watching:";
-		subtitle = "Unknown Content";
-	} else {
-		switch (mediaInfo.Type) {
-			case "Movie":
-				title = "Watching:";
-				subtitle = mediaInfo.Name;
-				if (
-					(await presence.getSetting("showRichImages")) &&
-					(await presence.getSetting("showMoviePoster"))
-				)
-					largeImage = mediaPrimaryImage(mediaInfo.Id);
-
-				break;
-			case "Episode":
-				title = `Watching: ${mediaInfo.SeriesName}`;
-				subtitle = `${/S[0-9]+:E[0-9]+/.exec(headerTitle)} - ${mediaInfo.Name}`;
-
-				if (
-					(await presence.getSetting("showRichImages")) &&
-					(await presence.getSetting("showTvShowPoster"))
-				)
-					largeImage = mediaPrimaryImage(mediaInfo.ParentBackdropItemId);
-				break;
-			default:
-				title = `Watching ${mediaInfo.Type}`;
-				subtitle = mediaInfo.Name;
-		}
-
-		presenceData.largeImageKey = largeImage;
-
-		// watching live tv
-		if (mediaInfo && mediaInfo.Type === "TvChannel") {
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
-			presenceData.smallImageText = "Live TV";
-
-			// playing
-		} else if (!videoPlayerElem.paused) {
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
-			presenceData.smallImageText = "Playing";
-
-			if (await presence.getSetting<boolean>("showMediaTimestamps")) {
-				[, presenceData.endTimestamp] =
-					presence.getTimestampsfromMedia(videoPlayerElem);
-			}
-
-			// paused
-		} else {
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
-			presenceData.smallImageText = "Paused";
-
-			delete presenceData.endTimestamp;
-		}
+	if (mediaInfo) {
+		await setPresenceByMediaId(mediaInfo.Id);
+		return;
 	}
 
-	presenceData.details = title;
-	presenceData.state = subtitle;
+	// display generic info
+	presenceData.details = "Watching:";
+	presenceData.state = "Unknown Content";
 
 	if (!presenceData.state) delete presenceData.state;
 }
@@ -608,9 +517,75 @@ async function handleItemDetails(): Promise<void> {
 }
 
 /**
- * sleep - Suspend execution of code for an interval, see <https://manpage.me/?q=sleep>
- *
- * @param ms Time in milliseconds
+ * Sets a presence based on the given multimedia mediaId
+ */
+async function setPresenceByMediaId(mediaId: string): Promise<void> {
+	const mediaInfo = await obtainMediaInfo(mediaId);
+
+	let title: string, subtitle: string;
+
+	switch (mediaInfo.Type) {
+		case "Audio":
+			title = `Listening to ${mediaInfo.Name ?? "Unknown title"}`;
+			subtitle = `By ${mediaInfo.AlbumArtist ?? "Unknown artist"}`;
+			break;
+		case "Movie":
+		case "Series":
+			title = `Watching ${mediaInfo.Type}`;
+			subtitle = mediaInfo.Name;
+			break;
+		case "Episode":
+			title = `Watching: ${mediaInfo.SeriesName}`;
+			subtitle = `${/S[0-9]+:E[0-9]+/.exec(
+				document.querySelector<HTMLHeadingElement>(".pageTitle").textContent
+			)} - ${mediaInfo.Name}`;
+			mediaId = mediaInfo.SeriesId;
+
+			break;
+		case "TvChannel":
+			presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
+			presenceData.smallImageText = "Live TV";
+			break;
+		default:
+			title = `Watching ${mediaInfo.Type}`;
+			subtitle = mediaInfo.Name;
+	}
+
+	if (await presence.getSetting("showThumbnails"))
+		presenceData.largeImageKey = mediaPrimaryImage(mediaId);
+
+	if (mediaInfo.Type !== "TvChannel") {
+		const playbackElement =
+			document.querySelector<HTMLMediaElement>("audio, video");
+
+		if (playbackElement) {
+			if (playbackElement.paused) {
+				presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
+				presenceData.smallImageText = "Paused";
+
+				delete presenceData.endTimestamp;
+			} else {
+				presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
+				presenceData.smallImageText = "Playing";
+
+				if (await presence.getSetting("showMediaTimestamps")) {
+					[, presenceData.endTimestamp] =
+						presence.getTimestampsfromMedia(playbackElement);
+				}
+			}
+		} else {
+			delete presenceData.smallImageKey;
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
+	}
+
+	presenceData.details = title;
+	presenceData.state = subtitle;
+
+	if (!presenceData.state) delete presenceData.state;
+}
+
  */
 function sleep(ms: number): Promise<void> {
 	return new Promise(res => {
