@@ -464,8 +464,16 @@ async function handleVideoPlayback(): Promise<void> {
 	if (!presenceData.state) delete presenceData.state;
 }
 
-/**
- * handleItemDetails - handles the presence when the user is viewing the details of an item
+
+async function handleRemotePlayback(): Promise<void> {
+	const [, mediaId] = /\/Items\/(\w+)\/Images/.exec(
+		document.querySelector<HTMLDivElement>(".nowPlayingImage").style
+			.backgroundImage
+	);
+
+	await setPresenceByMediaId(mediaId);
+}
+
  */
 async function handleItemDetails(): Promise<void> {
 	const data = await obtainMediaInfo(
@@ -555,28 +563,30 @@ async function setPresenceByMediaId(mediaId: string): Promise<void> {
 		presenceData.largeImageKey = mediaPrimaryImage(mediaId);
 
 	if (mediaInfo.Type !== "TvChannel") {
-		const playbackElement =
-			document.querySelector<HTMLMediaElement>("audio, video");
+		const mediaElement =
+				document.querySelector<HTMLMediaElement>("audio, video"),
+			paused = mediaElement
+				? mediaElement.paused
+				: document
+						.querySelector<HTMLSpanElement>(
+							".nowPlayingBar .playPauseButton span"
+						)
+						.classList.contains("play_arrow");
 
-		if (playbackElement) {
-			if (playbackElement.paused) {
-				presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
-				presenceData.smallImageText = "Paused";
+		if (paused) {
+			presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
+			presenceData.smallImageText = "Paused";
 
-				delete presenceData.endTimestamp;
-			} else {
-				presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
-				presenceData.smallImageText = "Playing";
-
-				if (await presence.getSetting("showMediaTimestamps")) {
-					[, presenceData.endTimestamp] =
-						presence.getTimestampsfromMedia(playbackElement);
-				}
-			}
-		} else {
-			delete presenceData.smallImageKey;
-			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
+		} else {
+			presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
+			presenceData.smallImageText = "Playing";
+
+			// TODO: worth setting timestamps on remote playback? Requires WS connection
+			if (mediaElement && (await presence.getSetting("showMediaTimestamps"))) {
+				[, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(mediaElement);
+			}
 		}
 	}
 
@@ -621,6 +631,12 @@ async function handleWebClient(): Promise<void> {
 		audioElement.src
 	) {
 		await handleAudioPlayback();
+		return;
+	} else if (
+		nowPlayingBar &&
+		!nowPlayingBar.classList.contains("nowPlayingBar-hidden")
+	) {
+		await handleRemotePlayback();
 		return;
 	}
 
@@ -737,6 +753,8 @@ async function setDefaultsToPresence(): Promise<void> {
 	if (presenceData.smallImageKey) delete presenceData.smallImageKey;
 
 	if (presenceData.smallImageText) delete presenceData.smallImageText;
+
+	if (presenceData.state) delete presenceData.state;
 
 	if (presenceData.startTimestamp) delete presenceData.startTimestamp;
 
