@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", async function () {
+presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
 			details: "Other",
@@ -49,8 +49,10 @@ presence.on("UpdateData", async function () {
 			} else {
 				const hash = window.location.hash.replace("#", "");
 
-				if (urlpath[3].startsWith("configure-"))
-					return (presenceData.state = "Configuring");
+				if (urlpath[3].startsWith("configure-")) {
+					presenceData.state = "Configuring";
+					return;
+				}
 
 				switch (urlpath[3]) {
 					case "accessories":
