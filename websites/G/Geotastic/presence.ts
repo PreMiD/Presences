@@ -101,7 +101,8 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector("h1").textContent;
 			} else if (document.location.pathname.includes("/help-out/"))
 				presenceData.details = "Viewing ways to support Geotastic";
-	} if (
+	}
+	if (
 		document.location.pathname === "/play" ||
 		document.location.pathname.includes("/play-online/")
 	) {
