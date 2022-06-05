@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp: date,
 		buttons: [
 			{
-				label: "View Page",
+				label: "View Website",
 				url: document.location.href
 			}
 		]
