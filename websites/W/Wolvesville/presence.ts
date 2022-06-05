@@ -227,26 +227,6 @@ function languageCode(language: string): string {
 	}
 }
 
-function getPlayerStatus(root: Element, status: Element) {
-	if (status?.querySelector("div > div").textContent === "")
-		root.setAttribute("premid-status", "lets_play");
-	else if (
-		status
-			?.querySelector("div")
-			.getAttribute("style")
-			.includes("rgb(244, 67, 54)")
-	)
-		root.setAttribute("premid-status", "dnd");
-	else if (
-		status
-			?.querySelector("div")
-			.getAttribute("style")
-			.includes("rgb(158, 158, 158)")
-	)
-		root.setAttribute("premid-status", "invisible");
-	else if (status) root.setAttribute("premid-status", "online");
-}
-
 presence.on("UpdateData", async () => {
 	const [
 			privacyMode,
@@ -366,6 +346,46 @@ presence.on("UpdateData", async () => {
 		//Game
 	} else if (document.location.href.includes("wolvesville.com")) {
 		const root = document.querySelector("#root");
+		let status: Element;
+
+		//Get player status
+		if (
+			document.querySelector(
+				"div.css-1dbjc4n.r-18u37iz > div.css-1dbjc4n.r-173mn98.r-19u6a5r.r-12zb1j4.r-1inuy60"
+			) ||
+			(document.querySelector(
+				"div.css-1dbjc4n.r-1awozwy.r-1p0dtai.r-1777fci.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
+			) &&
+				document.querySelector(
+					"div.css-1dbjc4n.r-1awozwy.r-knv0ih.r-633pao.r-417010 > div.css-1dbjc4n.r-1awozwy.r-lrvibr.r-13qz1uu"
+				))
+		) {
+			status =
+				document.querySelector(
+					"div.css-1dbjc4n.r-18u37iz > div.css-1dbjc4n.r-173mn98.r-19u6a5r.r-12zb1j4.r-1inuy60"
+				) ||
+				document.querySelector(
+					"div.css-1dbjc4n.r-13awgt0.r-eqz5dr.r-1x0uki6.r-xd6kpl.r-1ss6j8a.r-1qortcd > div > div.css-1dbjc4n.r-1pz39u2.r-13awgt0.r-18u37iz > div.css-1dbjc4n"
+				);
+		}
+
+		if (status?.querySelector("div > div").textContent === "")
+			root.setAttribute("premid-status", "lets_play");
+		else if (
+			status
+				?.querySelector("div")
+				.getAttribute("style")
+				.includes("rgb(244, 67, 54)")
+		)
+			root.setAttribute("premid-status", "dnd");
+		else if (
+			status
+				?.querySelector("div")
+				.getAttribute("style")
+				.includes("rgb(158, 158, 158)")
+		)
+			root.setAttribute("premid-status", "invisible");
+		else if (status) root.setAttribute("premid-status", "online");
 
 		if (
 			document.querySelector(
@@ -426,14 +446,6 @@ presence.on("UpdateData", async () => {
 					)[0]?.textContent
 				);
 			}
-
-			//Get status
-			getPlayerStatus(
-				root,
-				document.querySelector(
-					"div.css-1dbjc4n.r-18u37iz > div.css-1dbjc4n.r-173mn98.r-19u6a5r.r-12zb1j4.r-1inuy60"
-				)
-			);
 
 			if (
 				!(
@@ -680,22 +692,6 @@ presence.on("UpdateData", async () => {
 					"div.css-1dbjc4n.r-1awozwy.r-1777fci > div.css-1dbjc4n.r-17bb2tj.r-1muvv40.r-127358a.r-1ldzwu0.r-1r8g8re.r-1acpoxo"
 				)
 			) {
-				if (
-					document.querySelector(
-						"div.css-1dbjc4n.r-1awozwy.r-1p0dtai.r-1777fci.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
-					) &&
-					document.querySelector(
-						"div.css-1dbjc4n.r-1awozwy.r-knv0ih.r-633pao.r-417010 > div.css-1dbjc4n.r-1awozwy.r-lrvibr.r-13qz1uu"
-					)
-				) {
-					getPlayerStatus(
-						root,
-						document.querySelector(
-							"div.css-1dbjc4n.r-13awgt0.r-eqz5dr.r-1x0uki6.r-xd6kpl.r-1ss6j8a.r-1qortcd > div > div.css-1dbjc4n.r-1pz39u2.r-13awgt0.r-18u37iz > div.css-1dbjc4n"
-						)
-					);
-				}
-
 				//Pre game lobby
 				if (
 					document
