@@ -5,17 +5,16 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "Logo",
-			details: "Exploring",
-			startTimestamp: date,
-			buttons: [
-				{
-					label: "View Page",
-					url: document.location.href
-				}
-			]
-		},
-		page = document.location.pathname;
+		largeImageKey: "logo",
+		details: "Exploring",
+		startTimestamp: date,
+		buttons: [
+			{
+				label: "View Page",
+				url: document.location.href
+			}
+		]
+	};
 
 	if (document.querySelector("#itemName")) {
 		presenceData.largeImageKey =
@@ -30,8 +29,11 @@ presence.on("UpdateData", async () => {
 				document.querySelector("#itemDescription").textContent
 			}`;
 		}
-	} else if (page && !page.includes("_"))
-		presenceData.details = `Exploring the ${page} page`;
+
+		presenceData.buttons[0].label = `View ${
+			document.querySelector("#itemName").textContent
+		}`;
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
