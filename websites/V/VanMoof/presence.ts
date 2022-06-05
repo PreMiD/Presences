@@ -50,28 +50,29 @@ presence.on("UpdateData", async function () {
 				const hash = window.location.hash.replace("#", "");
 
 				if (urlpath[3].startsWith("configure-"))
-					return (presenceData.state = "Configuring");
+					presenceData.state = "Configuring";
+				else {
+					switch (urlpath[3]) {
+						case "accessories":
+							presenceData.state = "Accessories";
 
-				switch (urlpath[3]) {
-					case "accessories":
-						presenceData.state = "Accessories";
+							if (urlpath[4]) {
+								presenceData.details = "Shop - Accessories";
+								presenceData.state =
+									document.querySelector("h1.product-title")?.textContent ??
+									"Unknown";
+							}
 
-						if (urlpath[4]) {
-							presenceData.details = "Shop - Accessories";
-							presenceData.state =
-								document.querySelector("h1.product-title")?.textContent ??
-								"Unknown";
-						}
+							break;
 
-						break;
+						case "checkout":
+							if (hash) {
+								presenceData.details = "Shop - Checkout";
+								presenceData.state = hash[0].toUpperCase() + hash.slice(1);
+							} else presenceData.state = "Checkout";
 
-					case "checkout":
-						if (hash) {
-							presenceData.details = "Shop - Checkout";
-							presenceData.state = hash[0].toUpperCase() + hash.slice(1);
-						} else presenceData.state = "Checkout";
-
-						break;
+							break;
+					}
 				}
 			}
 
