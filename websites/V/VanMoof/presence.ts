@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", async function () {
+presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
 			details: "Other",
@@ -49,30 +49,31 @@ presence.on("UpdateData", async function () {
 			} else {
 				const hash = window.location.hash.replace("#", "");
 
-				if (urlpath[3].startsWith("configure-"))
+				if (urlpath[3].startsWith("configure-")) {
 					presenceData.state = "Configuring";
-				else {
-					switch (urlpath[3]) {
-						case "accessories":
-							presenceData.state = "Accessories";
+					return;
+				}
 
-							if (urlpath[4]) {
-								presenceData.details = "Shop - Accessories";
-								presenceData.state =
-									document.querySelector("h1.product-title")?.textContent ??
-									"Unknown";
-							}
+				switch (urlpath[3]) {
+					case "accessories":
+						presenceData.state = "Accessories";
 
-							break;
+						if (urlpath[4]) {
+							presenceData.details = "Shop - Accessories";
+							presenceData.state =
+								document.querySelector("h1.product-title")?.textContent ??
+								"Unknown";
+						}
 
-						case "checkout":
-							if (hash) {
-								presenceData.details = "Shop - Checkout";
-								presenceData.state = hash[0].toUpperCase() + hash.slice(1);
-							} else presenceData.state = "Checkout";
+						break;
 
-							break;
-					}
+					case "checkout":
+						if (hash) {
+							presenceData.details = "Shop - Checkout";
+							presenceData.state = hash[0].toUpperCase() + hash.slice(1);
+						} else presenceData.state = "Checkout";
+
+						break;
 				}
 			}
 
