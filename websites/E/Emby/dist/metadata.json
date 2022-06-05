@@ -17,7 +17,7 @@
 	},
 	"url": "emby.media",
 	"regExp": ".*[/]web[/]index[.]html",
-	"version": "1.3.9",
+	"version": "1.4.0",
 	"logo": "https://i.imgur.com/mTHBDPm.png",
 	"thumbnail": "https://i.imgur.com/gDfeWur.png",
 	"color": "#52B54B",
@@ -39,6 +39,12 @@
 			"id": "showTimestamps",
 			"title": "Show timestamps",
 			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "showThumbnails",
+			"title": "Show thumbnails",
+			"icon": "fad fa-image",
 			"value": true
 		}
 	]
