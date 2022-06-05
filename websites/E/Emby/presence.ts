@@ -86,7 +86,18 @@ interface ApiClient {
 		IsLocal: boolean;
 	};
 	_serverAddress: string;
-	_serverInfo: Server;
+	_serverInfo: {
+		AccessToken: string;
+		DateLastAccessed: number; // timestamp
+		ExchangeToken: string;
+		Id: string;
+		LastConnectionMode: number;
+		ManualAddress: string;
+		Name: string;
+		UserId: string;
+		// UserLinkType: any; // unknown
+		manualAddressOnly: boolean;
+	};
 	_serverVersion: string;
 	_webSocket: {
 		binaryType: string;
@@ -185,10 +196,6 @@ interface Chapter {
 }
 
 interface MediaInfo {
-	AlbumArtist: string;
-	AlbumArtists: { Name: string; Id: string }[];
-	ArtistsItems: { Name: string; Id: string }[];
-	Artists: string[];
 	Name: string;
 	OriginalTitle: string;
 	ServerId: string;
@@ -255,21 +262,6 @@ interface MediaInfo {
 	LockData: boolean;
 	Width: number;
 	Height: number;
-}
-
-interface Server {
-	AccessToken: string;
-	DateLastAccessed: number; // timestamp
-	Id: string;
-	IsLocalServer: boolean;
-	LastConnectionMode: number;
-	LocalAddress: string;
-	ManualAddress: string;
-	Name: string;
-	RemoteAddress: string;
-	Type: "Server";
-	UserId: string;
-	manualAddressOnly: boolean;
 }
 
 const // official website
@@ -363,53 +355,32 @@ async function isEmbyWebClient(): Promise<boolean> {
 	return false;
 }
 
-function embyBasenameURL(): string {
-	const { pathname } = location;
-
-	return `${location.origin}${pathname.replace(
-		pathname.split("/").slice(-2).join("/"),
-		""
-	)}`;
-}
-
-function mediaPrimaryImage(mediaId: string): string {
-	return `${embyBasenameURL()}/emby/Items/${mediaId}/Images/Primary?height=256`;
-}
-
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
 async function handleAudioPlayback(): Promise<void> {
 	// sometimes the buttons are not created fast enough
 	try {
-		const audioElement = document.querySelector<HTMLAudioElement>("audio"),
-			regexResult = /\/Audio\/(\w+)\/universal/.exec(audioElement.src);
+		const [audioElem] = document.querySelectorAll("audio"),
+			buttons = document
+				.querySelectorAll(".nowPlayingBar")[0]
+				.querySelectorAll("button.itemAction");
 
-		if (!regexResult) {
-			presence.error("Could not obtain audio itemId");
-			return;
-		}
-
-		const [, mediaId] = regexResult,
-			info = await obtainMediaInfo(mediaId);
-		presenceData.details = `Listening to ${info.Name ?? "Unknown title"}`;
-		presenceData.state = `By ${info.AlbumArtist ?? "Unknown artist"}`;
-		if (
-			(await presence.getSetting("showThumbnails")) &&
-			// some songs might not have albumart
-			document.querySelector<HTMLDivElement>(".nowPlayingBarImage").style
-				.backgroundImage
-		)
-			presenceData.largeImageKey = mediaPrimaryImage(mediaId);
+		presenceData.details = `Listening to: ${
+			buttons.length >= 1 ? buttons[0].textContent : "unknown title"
+		}`;
+		presenceData.state = `By: ${
+			buttons.length >= 2 ? buttons[1].textContent : "unknown artist"
+		}`;
 
 		// playing
-		if (!audioElement.paused) {
+		if (!audioElem.paused) {
 			presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
 			presenceData.smallImageText = "Playing";
 
 			if (await presence.getSetting<boolean>("showMediaTimestamps")) {
 				[, presenceData.endTimestamp] =
-					presence.getTimestampsfromMedia(audioElement);
+					presence.getTimestampsfromMedia(audioElem);
 			} else delete presenceData.endTimestamp;
 
 			// paused
@@ -433,24 +404,24 @@ function getUserId(): string {
 	try {
 		return ApiClient._currentUser.Id;
 	} catch (e) {
-		const servers: Server[] = JSON.parse(
+		const servers = JSON.parse(
 			localStorage.getItem("servercredentials3")
 		).Servers;
 
-		return (
-			servers.length === 1
-				? servers[0]
-				: servers.find(
-						(s: Server) =>
-							s.Id ===
-							new URLSearchParams(location.hash.split("?")[1]).get("serverId")
-				  )
-		).UserId;
+		// server id available on browser location
+		if (location.hash.indexOf("?") > 0) {
+			for (const param of location.hash.split("?")[1].split("&")) {
+				if (param.startsWith("serverId")) {
+					for (const server of servers)
+						if (server.Id === param.split("=")[0]) return server.UserId;
+				}
+			}
+		} else return servers[0].UserId;
 	}
 }
 
 // cache the requested media
-const mediaInfoCache = new Map<string, MediaInfo>();
+const media: Record<string, string | MediaInfo> = {};
 
 /**
  * obtainMediaInfo - obtain the metadata of the given id
@@ -458,31 +429,38 @@ const mediaInfoCache = new Map<string, MediaInfo>();
  * @param  {string} itemId id of the item to get metadata of
  * @return {object}        metadata of the item
  */
-async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
-	if (mediaInfoCache.has(itemId)) return mediaInfoCache.get(itemId);
+async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
+	const pending = "pending";
 
-	let { AccessToken: accessToken } = ApiClient._serverInfo;
+	if (media[itemId]) {
+		if (media[itemId] !== pending) return media[itemId];
 
-	if (!accessToken) {
-		// refresh the ApiClient
-		ApiClient = await getApiClient();
-
-		({ AccessToken: accessToken } = ApiClient._serverInfo);
+		return;
 	}
 
+	if (!ApiClient._serverInfo.AccessToken) {
+		ApiClient = await getApiClient();
+		return;
+	}
+
+	media[itemId] = pending;
+
 	const res = await fetch(
-			`${embyBasenameURL()}emby/Users/${getUserId()}/Items/${itemId}?` +
+			`${`${location.protocol}//${location.host}${location.pathname.replace(
+				location.pathname.split("/").slice(-2).join("/"),
+				""
+			)}`}emby/Users/${getUserId()}/Items/${itemId}?` +
 				`X-Emby-Client=${ApiClient._appName}&` +
 				`X-Emby-Device-Name=${ApiClient._deviceName}&` +
 				`X-Emby-Device-Id=${ApiClient._deviceId}&` +
 				`X-Emby-Client-Version=${ApiClient._appVersion}&` +
-				`X-Emby-Token=${accessToken}`
+				`X-Emby-Token=${ApiClient._serverInfo.AccessToken}`
 		),
-		mediaInfo: MediaInfo = await res.json();
+		mediaInfo = await res.json();
 
-	mediaInfoCache.set(itemId, mediaInfo);
+	if (media[itemId] === pending) media[itemId] = mediaInfo;
 
-	return mediaInfoCache.get(itemId);
+	return media[itemId];
 }
 
 /**
@@ -496,23 +474,33 @@ async function handleVideoPlayback(): Promise<void> {
 		return;
 	}
 
-	const videoPlayerElem = document.querySelector<HTMLVideoElement>("video");
+	const [videoPlayerElem] = document.querySelectorAll("video");
 
 	// this variables content will be replaced in details and status properties on presenceData
-	let title,
-		subtitle,
-		largeImage = PRESENCE_ART_ASSETS.logo;
+	let title, subtitle;
 
-	const regexResult = /\/Items\/(\d+)\//.exec(
-		document.querySelector<HTMLDivElement>(".pageTitle").style.backgroundImage
+	// title on the header
+	const osdParentTitleElem = videoPlayerPage.querySelector(
+		"h2.videoOsdParentTitle"
 	);
 
-	if (!regexResult) {
-		presence.error("Could not obtain video itemId");
-		return;
-	}
+	// media metadata
+	let mediaInfo: string | MediaInfo;
 
-	const mediaInfo = await obtainMediaInfo(regexResult[1]);
+	const [videoPlayerContainerElem] = document.body.querySelectorAll(
+		".videoPlayerContainer"
+	);
+
+	// no background image, we're playing live tv
+	if ((videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage) {
+		// with this url we can obtain the id of the item we are playing back
+
+		mediaInfo = await obtainMediaInfo(
+			(videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage
+				.split('"')[1]
+				.split("/")[5]
+		);
+	}
 
 	// display generic info
 	if (!mediaInfo) {
@@ -523,29 +511,22 @@ async function handleVideoPlayback(): Promise<void> {
 		switch (mediaInfo.Type) {
 			case "Movie":
 				title = "Watching a Movie";
-				subtitle = mediaInfo.Name;
-
-				if (await presence.getSetting("showThumbnails"))
-					largeImage = mediaPrimaryImage(mediaInfo.Id);
+				subtitle = osdParentTitleElem.textContent;
 				break;
 			case "Series":
-				title = `Watching ${mediaInfo.Name}`;
-				subtitle =
-					videoPlayerPage.querySelector("h3.videoOsdTitle").textContent;
-
-				if (await presence.getSetting("showThumbnails"))
-					largeImage = mediaPrimaryImage(mediaInfo.Id);
+				title = `Watching ${
+					videoPlayerPage.querySelector("h3.videoOsdTitle").textContent
+				}`;
+				subtitle = osdParentTitleElem.textContent;
 				break;
 			case "TvChannel":
 				title = "Watching Live Tv";
-				subtitle = mediaInfo.Name;
+				subtitle = osdParentTitleElem.textContent;
 				break;
 			default:
 				title = `Watching ${mediaInfo.Type}`;
 				subtitle = mediaInfo.Name;
 		}
-
-		presenceData.largeImageKey = largeImage;
 
 		// watching live tv
 		if (mediaInfo && mediaInfo.Type === "TvChannel") {
@@ -581,9 +562,16 @@ async function handleVideoPlayback(): Promise<void> {
  * handleItemDetails - handles the presence when the user is viewing the details of an item
  */
 async function handleItemDetails(): Promise<void> {
-	const data = await obtainMediaInfo(
-		new URLSearchParams(location.hash.split("?")[1]).get("id")
-	);
+	let id;
+
+	for (const param of location.hash.split("?")[1].split("&")) {
+		if (param.startsWith("id=")) {
+			[id] = param.split("=");
+			break;
+		}
+	}
+
+	const data = await obtainMediaInfo(id);
 
 	if (!data) {
 		presenceData.details = "Browsing details of an item";
@@ -633,13 +621,13 @@ async function handleItemDetails(): Promise<void> {
  * handleWebClient - handle the presence while the user is in the web client
  */
 async function handleWebClient(): Promise<void> {
-	const audioElement = document.body.querySelector<HTMLAudioElement>("audio");
+	const audioElems = document.body.querySelectorAll("audio");
 
 	// audio player active
 	if (
-		audioElement &&
-		audioElement.classList.contains("mediaPlayerAudio") &&
-		audioElement.src
+		audioElems.length > 0 &&
+		audioElems[0].classList.contains("mediaPlayerAudio") &&
+		audioElems[0].src
 	) {
 		await handleAudioPlayback();
 		return;
@@ -649,7 +637,7 @@ async function handleWebClient(): Promise<void> {
 
 	// obtain the path, on the example would return "login.html"
 	// https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
-	const path = location.hash.split("?")[0].substring(3);
+	const path = location.hash.split("?")[0].substr(3);
 
 	switch (path) {
 		case "startup/login.html":
@@ -744,18 +732,16 @@ async function handleWebClient(): Promise<void> {
  * setDefaultsToPresence - set defaul values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
-	presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
-
 	if (presenceData.smallImageKey) delete presenceData.smallImageKey;
 
 	if (presenceData.smallImageText) delete presenceData.smallImageText;
 
 	if (presenceData.startTimestamp) delete presenceData.startTimestamp;
 
-	if (isNaN(presenceData.endTimestamp)) delete presenceData.endTimestamp;
+	if (presenceData.endTimestamp) delete presenceData.endTimestamp;
 
 	if (await presence.getSetting<boolean>("showTimestamps"))
-		presenceData.startTimestamp = Date.now();
+		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 }
 
 /**

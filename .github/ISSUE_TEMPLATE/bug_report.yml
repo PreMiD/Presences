@@ -1,5 +1,6 @@
 name: Bug Report
 description: Create a report to help us improve the PreMiD Store
+title: Service Name | Service URL
 labels: [bug, needs repro]
 body:
   - type: markdown

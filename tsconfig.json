@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"module": "CommonJS",
-		"target": "ES2022",
+		"target": "ES2021",
 		"removeComments": true,
 		"noEmitOnError": true,
 		"noFallthroughCasesInSwitch": true,
