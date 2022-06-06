@@ -37,7 +37,7 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Viewing the legal page";
 		else if (pathname.startsWith("/forgot-password"))
 			presenceData.details = "Resetting their password";
-	} else {
+	} else if (hostname.startsWith("my")) {
 		if (pathname === "/") {
 			if (
 				document.querySelector(
