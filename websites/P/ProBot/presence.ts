@@ -30,7 +30,7 @@ presence.on("UpdateData", () => {
 		];
 	} else if (document.location.pathname.includes("premium")) {
 		if (document.location.pathname.includes("/manage"))
-			presenceData.details = "Managing their Premium";
+			presenceData.details = "Managing their Premium Bots/Servers";
 		else presenceData.details = "Reading more about Premium";
 	} else if (document.location.pathname.includes("/store")) {
 		presenceData.details = "Managing their";
@@ -107,7 +107,7 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Viewing Moderation Actions";
 		else if (document.location.pathname.includes("premium")) {
 			if (document.location.pathname.includes("/manage"))
-				presenceData.details = "Managing their Premium";
+				presenceData.details = "Managing their Premium Bot/Server";
 			else presenceData.details = "Reading more about Premium";
 		} else if (document.location.pathname.includes("utility")) {
 			presenceData.details = "Changing Module Settings";
