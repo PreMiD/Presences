@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp
 		},
-		{ pathname, hostname, href } = document.location,
+		{ hostname, href } = document.location,
 		[privacy, thumbnails, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("thumbnails"),
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 		else if (search?.value) {
 			presenceData.details = "Searching For:";
 			presenceData.state = search.value;
-		} else if (pathname.includes("/detail/")) {
+		} else if (href.includes("/detail/")) {
 			title = document.querySelector(
 				"#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div"
 			).textContent;
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 						)
 						?.firstElementChild.getAttribute("src") ?? "logo";
 			}
-		} else if (pathname.includes("addons")) {
+		} else if (href.includes("addons")) {
 			search = document.querySelector(
 				"#addons > div.filter > form > div.addon-search-input > input"
 			);
@@ -72,22 +72,19 @@ presence.on("UpdateData", async () => {
 				];
 				presenceData.details = `Browsing ${title}`;
 			}
-		} else if (pathname.includes("settings")) {
+		} else if (href.includes("settings")) {
 			presenceData.details = `${
 				document.querySelector("[class='ng-scope ng-binding active']")
 					?.textContent ?? "General"
 			} settings`;
-		} else if (pathname.includes("/discover/")) {
+		} else if (href.includes("/discover/")) {
 			if (active) {
-				genreSort = document.querySelector(
-					"[class='ng-scope ng-binding selected']"
-				)?.textContent;
-				if (!genreSort) {
-					genreSort =
-						document.querySelectorAll(
-							"[class='ng-binding ng-scope selected']"
-						)[2]?.textContent ?? "None";
-				}
+				genreSort =
+					document.querySelector("[class='ng-scope ng-binding selected']")
+						?.textContent ??
+					document.querySelectorAll("[class='ng-binding ng-scope selected']")[2]
+						?.textContent ??
+					"None";
 				if (genreSort === "Top") genreSort = "All";
 				presenceData.buttons = [
 					{
@@ -98,7 +95,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Browsing ${active}`;
 				presenceData.state = `Genre: ${genreSort}`;
 			} else presenceData.state = "Browsing Movies";
-		} else if (pathname.includes("/library")) {
+		} else if (href.includes("/library")) {
 			genreSort = document
 				.querySelector<HTMLSelectElement>(
 					"#library > div.sort-filter > div.custom-select.lib-sort > select"
@@ -120,7 +117,7 @@ presence.on("UpdateData", async () => {
 					url: href
 				}
 			];
-		} else if (pathname.includes("/calendar")) {
+		} else if (href.includes("/calendar")) {
 			presenceData.buttons = [
 				{
 					label: "View Calendar",
@@ -128,18 +125,19 @@ presence.on("UpdateData", async () => {
 				}
 			];
 			presenceData.details = "Calendar";
-		} else if (pathname.includes("player")) {
+		} else if (href.includes("player")) {
 			if (video?.duration) {
 				timestamp = presence.getTimestampsfromMedia(video);
 				pauseCheck = video?.paused ?? true;
 			} else if (!video.duration && document.querySelector("#controlbar-top")) {
-				const split = document
+				let split = document
 					.querySelector("#play-progress-text")
 					?.textContent.split("/");
 				if (split?.[0]) {
+					split = split.map(s => s.trim());
 					timestamp = presence.getTimestamps(
-						presence.timestampFromFormat(split[0].trim()),
-						presence.timestampFromFormat(split[1].trim())
+						presence.timestampFromFormat(split[0]),
+						presence.timestampFromFormat(split[1])
 					);
 				}
 
@@ -168,7 +166,8 @@ presence.on("UpdateData", async () => {
 					url: href
 				}
 			];
-		} else if (pathname === "/") presenceData.details = "Viewing the homepage";
+		} else if (href === "https://app.strem.io/#/")
+			presenceData.details = "Viewing the homepage";
 	} else presenceData.details = "Browsing...";
 
 	if (!buttons) delete presenceData.buttons;
