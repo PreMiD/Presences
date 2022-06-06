@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		]);
 	if (!privacy) {
 		if (hostname == "wiki.gg") {
-			if (pathname === "/") presenceData.details = "Viewing the homepage";
+			if (pathname === "/") presenceData.details = "Viewing the home page";
 			else {
 				presenceData.details = document
 					.querySelector("head > title")
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Viewing Homepage";
 			presenceData.details = title;
 		}
-	} else presenceData.details = "Browsing...";
+	} else presenceData.details = "Browsing";
 	if (privacy || !buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

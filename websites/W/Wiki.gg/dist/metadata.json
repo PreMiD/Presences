@@ -6,8 +6,8 @@
 	},
 	"service": "Wiki.gg",
 	"description": {
-		"en": "Platform operated by creators of gaming experiences. Flexible platform that adjusts to the needs of creators.",
-		"nl": "Platform beheerd door makers van spelervaringen. Flexibel platform dat zich aanpast aan de behoeften van de makers."
+		"en": "We are creating a community of developers and editors to come together and create the best possible experience for gamers.",
+		"nl": "Wij brengen een gemeenschap van ontwikkelaars en editors samen om de best mogelijke ervaring voor gamers te creëren."
 	},
 	"url": "wiki.gg",
 	"regExp": "([a-z0-9-]+[.])*wiki[.]gg[/]",
