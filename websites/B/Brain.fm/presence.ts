@@ -17,12 +17,17 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Viewing the about page";
 		else if (pathname.startsWith("/pdfs")) {
 			presenceData.details = "Reading a PDF";
-			if (pathname === "/pdfs/performance-pilot.pdf")
-				presenceData.state = "Performance Pilot";
-			else if (pathname === "/pdfs/white-paper.pdf")
-				presenceData.state = "White Paper";
-			else if (pathname === "/pdfs/sleep-study.pdf")
-				presenceData.state = "Sleep Studies";
+			switch (pathname) {
+				case "/pdfs/performance-pilot.pdf":
+					presenceData.state = "Performance Pilot";
+					break;
+				case "/pdfs/white-paper.pdf":
+					presenceData.state = "White Paper";
+					break;
+				case "/pdfs/sleep-study.pdf":
+					presenceData.state = "Sleep Studies";
+					break;
+			}
 		} else if (pathname.startsWith("/science"))
 			presenceData.details = "Viewing the science page";
 		else if (pathname.startsWith("/press"))
