@@ -105,11 +105,7 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Viewing Control Panel Logs";
 		else if (document.location.pathname.includes("mod_actions"))
 			presenceData.details = "Viewing Moderation Actions";
-		else if (document.location.pathname.includes("premium")) {
-			if (document.location.pathname.includes("/manage"))
-				presenceData.details = "Managing their Premium Bot/Server";
-			else presenceData.details = "Reading more about Premium";
-		} else if (document.location.pathname.includes("utility")) {
+		else if (document.location.pathname.includes("utility")) {
 			presenceData.details = "Changing Module Settings";
 			presenceData.state = "Utility Commands";
 		} else if (document.location.pathname.includes("mod")) {
