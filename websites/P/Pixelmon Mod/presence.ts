@@ -28,16 +28,16 @@ presence.on("UpdateData", async () => {
 		} else if (firstChild.className.includes("firstHeading")) {
 			presenceData.state = firstChild.textContent;
 			presenceData.smallImageKey = "reading";
-			presenceData.details = "Reading wiki";
+			presenceData.details = "Reading wiki page";
 		} else if (document.querySelector("#firstHeading-h2csdq87lb")) {
 			presenceData.details = "Search results for";
 			presenceData.state = document.querySelector("#ooui-php-1").textContent;
-		} else presenceData.details = "Reading wiki";
+		} else presenceData.details = "Reading the wiki";
 	} else if (pathname.includes("index.php")) presenceData.details = "Forum";
 	else if (pathname.includes("viewforum.php"))
 		presenceData.details = `${title.textContent} Forum`;
 	else if (pathname.includes("viewtopic.php")) {
-		presenceData.details = "Viewing Post";
+		presenceData.details = "Viewing post";
 		presenceData.state = title.textContent;
 	} else if (pathname.includes("team.php")) {
 		presenceData.details = `Pixelmon's ${
@@ -47,9 +47,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = title.textContent;
 		presenceData.smallImageKey = "reading";
 	} else if (pathname.includes("downloads.php"))
-		presenceData.details = "Viewing mod Downloads page";
+		presenceData.details = "Viewing mod downloads page";
 	else if (pathname.includes("donate.php"))
-		presenceData.details = "Viewing the Donations page";
+		presenceData.details = "Viewing the donations page";
 	else if (pathname.includes("tracker.php")) {
 		presenceData.details = title.textContent;
 		if (document.querySelector("#col1 > div:nth-child(1) > h3")) {
@@ -57,7 +57,12 @@ presence.on("UpdateData", async () => {
 				"#col1 > div:nth-child(1) > h3"
 			).textContent;
 		}
-	}
+	} else if (
+		document.querySelector(
+			"#page-body > main > div > div.col-sm-8 > div:nth-child(2)"
+		)
+	)
+		presenceData.details = "Homepage";
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
