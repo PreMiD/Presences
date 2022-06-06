@@ -30,7 +30,7 @@ presence.on("UpdateData", () => {
 		];
 	} else if (document.location.pathname.includes("premium")) {
 		if (document.location.pathname.includes("/manage"))
-			presenceData.details = "Managing their Premium Bots/Servers";
+			presenceData.details = "Managing their Premium settings";
 		else presenceData.details = "Reading more about Premium";
 	} else if (document.location.pathname.includes("/store")) {
 		presenceData.details = "Managing their";
