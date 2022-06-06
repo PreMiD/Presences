@@ -54,27 +54,20 @@ presence.on("UpdateData", () => {
 		else if (pathname.startsWith("/welcome"))
 			presenceData.details = "Getting started";
 		else if (["/focus", "/relax", "/sleep"].includes(pathname)) {
+			const activity = document
+			.querySelector(
+				"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
+			)
+			.textContent.trim()
 			switch (pathname) {
 				case "/focus":
-					presenceData.state = `Focusing • ${document
-						.querySelector(
-							"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
-						)
-						.textContent.trim()}`;
+					presenceData.state = `Focusing • ${activity}`;
 					break;
 				case "/relax":
-					presenceData.state = `Relaxing • ${document
-						.querySelector(
-							"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
-						)
-						.textContent.trim()}`;
+					presenceData.state = `Relaxing • ${activity}`;
 					break;
 				case "/sleep":
-					presenceData.state = `Sleeping • ${document
-						.querySelector(
-							"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
-						)
-						.textContent.trim()}`;
+					presenceData.state = `Sleeping • ${activity}`;
 					break;
 			}
 
