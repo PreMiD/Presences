@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 			timestamp =
 				document.querySelector<HTMLInputElement>(
 					"input[aria-valuenow][aria-valuemax]"
-				) ||
+				) ??
 				document
 					.querySelector("amp-chrome-player")
 					.shadowRoot.querySelector("div > amp-lcd")
