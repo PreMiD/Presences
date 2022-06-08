@@ -4,104 +4,57 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
+	let presenceData: PresenceData = {
 		largeImageKey: "logo",
 		details: "Viewing an unsupported page",
 		startTimestamp: browsingTimestamp
 	};
 
-	switch (document.location.pathname) {
-		case "/home": {
-			presenceData.details = "Viewing the home page";
-			break;
-		}
-		case "/local-lobby": {
-			presenceData.details = "Creating a local lobby";
-			break;
-		}
-		case "/user-challenges/find": {
-			presenceData.details = "Browsing unplayed user challenges";
-			break;
-		}
-		case "/user-challenges/played": {
-			presenceData.details = "Browsing played user challenges";
-			break;
-		}
-		case "/user-challenges/own": {
-			presenceData.details = "Browing created user challenges";
-			break;
-		}
-		case "/user-challenges/create": {
-			presenceData.details = "Creating a challenge";
-			break;
-		}
-		case "/matchmaking-lobby": {
-			presenceData.details = "In a matchmaking lobby";
-			break;
-		}
-		case "/community-map": {
-			presenceData.details = "Viewing the community map";
-			break;
-		}
-		case "/squad/list": {
-			presenceData.details = "Browsing the list of squads";
-			break;
-		}
-		case "/squad/management": {
-			presenceData.details = "Viewing the squad management page";
-			break;
-		}
-		case "/map-editor/maps": {
-			presenceData.details = "Creating a map";
-			break;
-		}
-		case "/map-editor/drop-groups": {
-			presenceData.details = "Viewing their drop groups";
-			break;
-		}
-		case "/events": {
-			presenceData.details = "Browsing past and future events";
-			break;
-		}
-		case "/account/profile": {
-			presenceData.details = "Viewing their profile settings";
-			break;
-		}
-		case "/account/statistics": {
-			presenceData.details = "Viewing their statistics";
-			break;
-		}
-		case "/account/trophies": {
-			presenceData.details = "Viewing their trophies";
-			break;
-		}
-		case "/account/friends": {
-			presenceData.details = "Viewing their friends";
-			break;
-		}
-		case "/account/supporter-status": {
-			presenceData.details = "Viewing their supporter status";
-			break;
-		}
-		case "/account/quota-consumption": {
-			presenceData.details = "Viewing their quota consumption";
-			break;
-		}
-		case "/account/account-settings": {
-			presenceData.details = "Viewing their account settings";
-			break;
-		}
-		default:
-			if (document.location.pathname.includes("/challenge-details/"))
-				presenceData.details = "Viewing a challenge";
-			else if (document.location.pathname.includes("/online-lobby/"))
-				presenceData.details = "In an online lobby";
-			else if (document.location.pathname.includes("/events/")) {
-				presenceData.details = "Viewing an event";
-				presenceData.state = document.querySelector("h1").textContent;
-			} else if (document.location.pathname.includes("/help-out/"))
-				presenceData.details = "Viewing ways to support Geotastic";
+	const [] = await Promise.all([]),
+		pages: Record<string, PresenceData> = {
+			"/home": { details: "Viewing the home page" },
+			"/local-lobby": { details: "Creating a local lobby" },
+			"/user-challenges/find": { details: "Browsing unplayed user challenges" },
+			"/user-challenges/played": { details: "Browsing played user challenges" },
+			"/user-challenges/own": { details: "Browsing created user challenges" },
+			"/user-challenges/create": { details: "Creating a challenge" },
+			"/matchmaking-lobby": { details: "In a matchmaking lobby" },
+			"/community-map": { details: "Viewing the community map" },
+			"/squad/list": { details: "Browsing the list of squads" },
+			"/squad/management": { details: "Viewing the squad management page" },
+			"/map-editor/maps": { details: "Creating a map" },
+			"/map-editor/drop-groups": { details: "Viewing their drop groups" },
+			"/events": { details: "Browsing past and future events" },
+			"/account/profile": { details: "Viewing their profile settings" },
+			"/account/statistics": { details: "Viewing their statistics" },
+			"/account/trophies": { details: "Viewing their trophies" },
+			"/account/friends": { details: "Viewing their friends" },
+			"/account/supporter-status": { details: "Viewing their supporter status" },
+			"/account/quota-consumption": { details: "Viewing their quota consumption" },
+			"/account/account-settings": { details: "Viewing their account settings" }
+		};
+
+	for (const [path, data] of Object.entries(pages)) {
+		if (document.location.pathname.includes(path))
+			presenceData = { ...presenceData, ...data };
 	}
+
+	switch (true) {
+		case document.location.pathname.includes("/challenge-details/"):
+			presenceData.details = "Viewing a challenge";
+			break;
+		case document.location.pathname.includes("/online-lobby/"):
+			presenceData.details = "In an online lobby";
+			break;
+		case document.location.pathname.includes("/events/"):
+			presenceData.details = "Viewing an event";
+			presenceData.state = document.querySelector("h1").textContent;
+			break;
+		case document.location.pathname.includes("/help-out/"):
+			presenceData.details = "Viewing ways to support Geotastic";
+			break;
+	}
+
 	if (
 		document.location.pathname === "/play" ||
 		document.location.pathname.includes("/play-online/")
