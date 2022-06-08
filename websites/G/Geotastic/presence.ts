@@ -11,31 +11,31 @@ presence.on("UpdateData", async () => {
 	};
 
 	let pages: Record<string, PresenceData> = {
-			"/home": { details: "Viewing the home page" },
-			"/local-lobby": { details: "Creating a local lobby" },
-			"/user-challenges/find": { details: "Browsing unplayed user challenges" },
-			"/user-challenges/played": { details: "Browsing played user challenges" },
-			"/user-challenges/own": { details: "Browsing created user challenges" },
-			"/user-challenges/create": { details: "Creating a challenge" },
-			"/matchmaking-lobby": { details: "In a matchmaking lobby" },
-			"/community-map": { details: "Viewing the community map" },
-			"/squad/list": { details: "Browsing the list of squads" },
-			"/squad/management": { details: "Viewing the squad management page" },
-			"/map-editor/maps": { details: "Creating a map" },
-			"/map-editor/drop-groups": { details: "Viewing their drop groups" },
-			"/events": { details: "Browsing past and future events" },
-			"/account/profile": { details: "Viewing their profile settings" },
-			"/account/statistics": { details: "Viewing their statistics" },
-			"/account/trophies": { details: "Viewing their trophies" },
-			"/account/friends": { details: "Viewing their friends" },
-			"/account/supporter-status": {
-				details: "Viewing their supporter status"
-			},
-			"/account/quota-consumption": {
-				details: "Viewing their quota consumption"
-			},
-			"/account/account-settings": { details: "Viewing their account settings" }
-		};
+		"/home": { details: "Viewing the home page" },
+		"/local-lobby": { details: "Creating a local lobby" },
+		"/user-challenges/find": { details: "Browsing unplayed user challenges" },
+		"/user-challenges/played": { details: "Browsing played user challenges" },
+		"/user-challenges/own": { details: "Browsing created user challenges" },
+		"/user-challenges/create": { details: "Creating a challenge" },
+		"/matchmaking-lobby": { details: "In a matchmaking lobby" },
+		"/community-map": { details: "Viewing the community map" },
+		"/squad/list": { details: "Browsing the list of squads" },
+		"/squad/management": { details: "Viewing the squad management page" },
+		"/map-editor/maps": { details: "Creating a map" },
+		"/map-editor/drop-groups": { details: "Viewing their drop groups" },
+		"/events": { details: "Browsing past and future events" },
+		"/account/profile": { details: "Viewing their profile settings" },
+		"/account/statistics": { details: "Viewing their statistics" },
+		"/account/trophies": { details: "Viewing their trophies" },
+		"/account/friends": { details: "Viewing their friends" },
+		"/account/supporter-status": {
+			details: "Viewing their supporter status"
+		},
+		"/account/quota-consumption": {
+			details: "Viewing their quota consumption"
+		},
+		"/account/account-settings": { details: "Viewing their account settings" }
+	};
 
 	for (const [path, data] of Object.entries(pages)) {
 		if (document.location.pathname.includes(path))
