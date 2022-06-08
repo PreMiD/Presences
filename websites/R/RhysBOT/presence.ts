@@ -33,9 +33,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons[0].label = `View ${
 			document.querySelector("#itemName").textContent
 		}`;
-	} else {
-		presenceData.details = "Exploring";
-	}
+	} else presenceData.details = "Exploring";
 
 	presence.setActivity(presenceData);
 });
