@@ -63,7 +63,6 @@
 			"title": "Show Book Cover",
 			"icon": "fas fa-images",
 			"value": true
-
 		},
 		{
 			"id": "showReading",
@@ -91,4 +90,4 @@
 			"value": true
 		}
 	]
-  }
+}

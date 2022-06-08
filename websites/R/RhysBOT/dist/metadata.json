@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Rhys",
+		"id": "237674807561289731"
+	},
+	"service": "RhysBOT",
+	"description": {
+		"en": "An informative website for the world of Fortnite."
+	},
+	"url": "rhysbot.co.uk",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/yAhhPzj.png",
+	"thumbnail": "https://i.imgur.com/hG1xClB.png",
+	"color": "#007CFF",
+	"category": "games",
+	"tags": [
+		"fortnite",
+		"gaming"
+	]
+}
