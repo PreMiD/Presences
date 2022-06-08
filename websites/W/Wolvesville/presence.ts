@@ -346,7 +346,7 @@ presence.on("UpdateData", async () => {
 		//Game
 	} else if (document.location.href.includes("wolvesville.com")) {
 		const root = document.querySelector("#root");
-		let status: Element;
+		let status: HTMLDivElement;
 
 		//Get player status
 		if (
