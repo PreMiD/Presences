@@ -78,7 +78,6 @@ presence.on("UpdateData", async () => {
 	}
 
 	//Episode part
-	let episodePresence;
 	if (title && episode) {
 		presenceData.details = title.textContent;
 		presenceData.state = episode.textContent.split("/ ").slice(1).join(" ");
