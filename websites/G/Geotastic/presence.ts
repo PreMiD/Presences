@@ -9,8 +9,7 @@ presence.on("UpdateData", async () => {
 		details: "Viewing an unsupported page",
 		startTimestamp: browsingTimestamp
 	};
-
-	let pages: Record<string, PresenceData> = {
+	const pages: Record<string, PresenceData> = {
 		"/home": { details: "Viewing the home page" },
 		"/local-lobby": { details: "Creating a local lobby" },
 		"/user-challenges/find": { details: "Browsing unplayed user challenges" },
