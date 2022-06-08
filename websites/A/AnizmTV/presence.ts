@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 	if (title && episode) {
 		presenceData.details = title.textContent;
 		episodePresence = episode.textContent.split("/ ").slice(1).join(" ");
-		episodePresence = episodePresence + " İzliyor";
+		episodePresence += " İzliyor";
 		presenceData.state = episodePresence;
 		presenceData.buttons = [
 			{
