@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 			?.querySelector<HTMLVideoElement>("video#apple-music-video-player");
 	if (video?.title || audio?.title) {
 		const media = video || audio,
-			timestamp = document.querySelector<HTMLInputElement>(
+			timestamp = document?.querySelector<HTMLInputElement>(
 				"input[aria-valuenow][aria-valuemax]"
 			),
 			paused = media.paused || media.readyState <= 2;
@@ -48,14 +48,12 @@ presence.on("UpdateData", async () => {
 				);
 		}
 
-		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestamps(
-				Number(timestamp.ariaValueNow),
-				Number(timestamp.ariaValueMax)
-			);
-
-		if (presenceData.endTimestamp === Infinity)
-			presenceData.smallImageKey = "premiere-live";
+		[presenceData.startTimestamp, presenceData.endTimestamp] = timestamp
+			? presence.getTimestamps(
+					Number(timestamp.ariaValueNow),
+					Number(timestamp.ariaValueMax)
+			  )
+			: presence.getTimestampsfromMedia(media);
 
 		if (paused || !timestamps) {
 			delete presenceData.startTimestamp;
