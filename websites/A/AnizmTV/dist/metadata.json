@@ -1,8 +1,8 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "Bas1C",
-		"id": "303603391941050370"
+		"name": "PuffyTR#0001",
+		"id": "219389887944589312"
 	},
 	"service": "AnizmTV",
 	"description": {
@@ -13,8 +13,40 @@
 		"vi_VN": "AnizmTV là trang web giúp bạn xem anime phụ đề mới nhất với chất lượng cao."
 	},
 	"url": [
+		"www.anizm.info",
+		"anizm.info",
 		"www.anizm.net",
-		"anizm.net"
+		"anizm.net",
+		"www.anizm.tv",
+		"anizm.tv",
+		"www.puffytr.com",
+		"puffytr.com",
+		"www.anizle.com",
+		"anizle.com",
+		"www.anizm.pro",
+		"anizm.pro",
+		"www.turkanime.info",
+		"turkanime.info",
+		"www.turkanime.pro",
+		"turkanime.pro",
+		"www.turkanime.shop",
+		"turkanime.shop",
+		"www.turkanime.xyz",
+		"turkanime.xyz",
+		"www.turkanime.store",
+		"turkanime.store",
+		"www.anizm.store",
+		"anizm.store",
+		"www.tranimeizle.org",
+		"tranimeizle.org",
+		"www.animetr.fun",
+		"animetr.fun",
+		"www.tranimeizle.xyz",
+		"tranimeizle.xyz",
+		"www.turkanime.fun",
+		"turkanime.fun",
+		"www.turkceanimeizle.org",
+		"turkceanimeizle.org"
 	],
 	"version": "1.0.15",
 	"logo": "https://i.imgur.com/TZZcyOQ.png",
