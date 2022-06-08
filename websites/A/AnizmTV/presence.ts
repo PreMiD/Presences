@@ -81,9 +81,8 @@ presence.on("UpdateData", async () => {
 	let episodePresence;
 	if (title && episode) {
 		presenceData.details = title.textContent;
-		episodePresence = episode.textContent.split("/ ").slice(1).join(" ");
-		episodePresence += " İzliyor";
-		presenceData.state = episodePresence;
+		presenceData.state = episode.textContent.split("/ ").slice(1).join(" ");
+		presenceData.state += " İzliyor";
 		presenceData.buttons = [
 			{
 				label: "Bölümü İzle",
