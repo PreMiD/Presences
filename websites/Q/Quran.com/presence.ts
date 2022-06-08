@@ -69,13 +69,10 @@ presence.on("UpdateData", async () => {
 				} (${
 					getElementByXpath(
 						"/html/body/div[1]/div/div[2]/div/div[2]/div/p[2]/span[2]"
-					)
-						? getElementByXpath(
-								"/html/body/div[1]/div/div[2]/div/div[2]/div/p[2]/span[2]"
-						  ).textContent
-						: getElementByXpath(
-								"/html/body/div[1]/div/div[2]/div/div[2]/div/p[2]/span"
-						  ).textContent
+					)?.textContent ??
+					getElementByXpath(
+						"/html/body/div[1]/div/div[2]/div/div[2]/div/p[2]/span"
+					).textContent
 				})`;
 			}
 		}
