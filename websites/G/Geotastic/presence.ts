@@ -29,8 +29,12 @@ presence.on("UpdateData", async () => {
 			"/account/statistics": { details: "Viewing their statistics" },
 			"/account/trophies": { details: "Viewing their trophies" },
 			"/account/friends": { details: "Viewing their friends" },
-			"/account/supporter-status": { details: "Viewing their supporter status" },
-			"/account/quota-consumption": { details: "Viewing their quota consumption" },
+			"/account/supporter-status": {
+				details: "Viewing their supporter status"
+			},
+			"/account/quota-consumption": {
+				details: "Viewing their quota consumption"
+			},
 			"/account/account-settings": { details: "Viewing their account settings" }
 		};
 
