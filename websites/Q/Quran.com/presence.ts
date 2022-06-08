@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/radio": {
-			presenceData.details = "Looking through radio stations...";
+			presenceData.details = "Looking through radio stations";
 			break;
 		}
 		case "/about-us": {
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/privacy": {
-			presenceData.details = "Reading privacy terms";
+			presenceData.details = "Reading the privacy policy";
 			break;
 		}
 		case "/support": {
@@ -47,22 +47,20 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/search": {
-			if (document.title.includes("Search for")) {
-				presenceData.details = `Making a ${document.title
-					.split("-")[0]
-					.toLowerCase()}`;
-			} else presenceData.details = "Searching for something...";
+			const searchQuery =
+				document.querySelector<HTMLInputElement>("#searchQuery")?.value;
+			if (searchQuery) presenceData.details = `Searching for ${searchQuery}`;
+			else presenceData.details = "Searching for something...";
 			break;
 		}
 		default: {
 			if (pathname.includes("/reciters")) {
 				if (pathname.includes("/reciters/")) {
-					presenceData.details = `Viewing a reciter: ${
-						document.querySelector<HTMLDivElement>(
-							"#__next > div > div.index_pageContainer__Pxtn3 > div.reciterPage_reciterInfoContainer__mYOjC > div > div > div:nth-child(2) > div.ReciterInfo_reciterName__SiK59"
-						).textContent
-					}`;
-				} else presenceData.details = "Looking for a reciter";
+					presenceData.details = "Viewing a reciter:";
+					presenceData.state = document.querySelector<HTMLDivElement>(
+						".ReciterInfo_reciterName__SiK59"
+					).textContent;
+				} else presenceData.details = "Browsing through reciters";
 			} else {
 				presenceData.details = "Reading the Holy Quran";
 				presenceData.state = `Surah: Surat ${
