@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showTime")
 		]),
 		presenceData: PresenceData = {
-			details: "Что-то делает на Фугапедии",
+			details: "Делает что-то на Фугапедии",
 			largeImageKey: "logo",
 			startTimestamp: showTime ? browsingTimestamp : null,
 		},
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 
 	if (ariaExpanded === "true") {
 		presenceData.details = "Собирается что-то найти";
-		if (!privacyMode && value) presenceData.state = `по запросу: «${value}»`;
+		if (!privacyMode && value) presenceData.state = `по запросу «${value}»`;
 		presence.setActivity(presenceData);
 		return;
 	}
