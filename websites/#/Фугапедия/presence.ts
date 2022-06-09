@@ -13,12 +13,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: showTime ? browsingTimestamp : null,
 		},
-		{ value, ariaExpanded } =
-			document.querySelector<HTMLInputElement>("#general_search"),
+		generalSearch = document.querySelector<HTMLInputElement>("#general_search"),
 		splittedPathname = document.location.pathname.split("/");
 
-	if (ariaExpanded === "true") {
+	if (generalSearch?.ariaExpanded === "true") {
 		presenceData.details = "Собирается что-то найти";
+		const { value } = generalSearch;
 		if (!privacyMode && value) presenceData.state = `по запросу «${value}»`;
 		presence.setActivity(presenceData);
 		return;
