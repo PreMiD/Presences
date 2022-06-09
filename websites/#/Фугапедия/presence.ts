@@ -141,10 +141,13 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Читает статью";
 				if (!privacyMode) {
 					presenceData.state = `«${parseName(2, "article_id")}»`;
-					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+					const image = document.querySelector<HTMLImageElement>(
 						"body > div > div > div > div > img"
-					).src;
-					presenceData.smallImageKey = "logo";
+					);
+					if (image) {
+						presenceData.largeImageKey = image.src;
+						presenceData.smallImageKey = "logo";
+					}
 				}
 			}
 		}
