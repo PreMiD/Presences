@@ -103,7 +103,7 @@ presence.on("UpdateData", () => {
 			presenceData.smallImageKey = "logo";
 			presenceData.smallImageText = songTypeInfo[1];
 		} else if (pathname.startsWith("/user"))
-			presenceData.details = "Viewing user information";
+			presenceData.details = "Viewing their user information";
 		else if (pathname.startsWith("/payment"))
 			presenceData.details = "Viewing payment information";
 	} else presenceData.details = "Browsing";
