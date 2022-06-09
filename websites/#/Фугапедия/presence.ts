@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
 		case "s": {
 			const query = parseName(3);
 			if (!privacyMode && query) {
-				presenceData.details = "Ищет что-то по запросу:";
+				presenceData.details = "Ищет что-то по запросу";
 				presenceData.state = `«${query}»`;
 			} else presenceData.details = "Ищет что-то";
 			break;
@@ -123,15 +123,16 @@ presence.on("UpdateData", async () => {
 		case "u": {
 			presenceData.details = "Смотрит профиль пользователя";
 			if (!privacyMode) {
-				if (splittedPathname[2] === "me")
+				if (splittedPathname[2] === "me") {
 					presenceData.details = "Смотрит свой профиль";
-				else {
-					presenceData.state = parseName("profile_user_id");
-					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-						"body > div > div > main > div > div > div > div > div > img"
-					).src;
-					presenceData.smallImageKey = "logo";
-				}
+					presenceData.state = document.querySelector(
+						"body > div > div > main > div > div > div > div > div > h2.font-serif-text"
+					).textContent;
+				} else presenceData.state = parseName("profile_user_id");
+				presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+					"body > div > div > main > div > div > div > div > div > img"
+				).src;
+				presenceData.smallImageKey = "logo";
 			}
 			break;
 		}
