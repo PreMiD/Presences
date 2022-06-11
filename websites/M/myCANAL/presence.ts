@@ -22,7 +22,9 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = (await strings).live;
 				presenceData.startTimestamp = browsingTimestamp;
 			} else {
-				title = document.querySelector(".bodyTitle___DZEtt").textContent;
+				title = `${
+					document.querySelector("._3tdt8zwgvMCJ6v_sElXneQ").textContent
+				} ${document.querySelector("._3pyJlyeeH9KBKeFd4nFAmt").textContent}`;
 
 				presenceData.smallImageKey = video.paused ? "pause" : "play";
 				presenceData.smallImageText = video.paused
