@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 
 	switch (host) {
 		case "support.crowdin.com": {
-			const isEnterprise = !!~pathnameSplit.indexOf("enterprise");
+			const isEnterprise = pathnameSplit.includes("enterprise");
 			if (!pathname || pathname === "/")
 				presenceData.details = "On the main support page";
 			else if (
