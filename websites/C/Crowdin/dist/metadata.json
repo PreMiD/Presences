@@ -39,6 +39,12 @@
 	],
 	"settings": [
 		{
+			"id": "showProject",
+			"title": "Show project names",
+			"icon": "fa-regular fa-tag",
+			"value": true
+		},
+		{
 			"id": "showManager",
 			"title": "Show manager pages",
 			"icon": "fa-duotone fa-user-police-tie",

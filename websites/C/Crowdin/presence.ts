@@ -23,13 +23,13 @@ async function getLanguageName(id: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			details: "Unknown page",
 			largeImageKey: "crowdin",
 			startTimestamp: browsingTimestamp
 		},
 		{ pathname, host, href } = document.location,
 		pathnameSplit = pathname.split("/"),
-		[showManager, showConversations] = await Promise.all([
+		[showProject, showManager, showConversations] = await Promise.all([
+			presence.getSetting<boolean>("showProject"),
 			presence.getSetting<boolean>("showManager"),
 			presence.getSetting<boolean>("showConversations")
 		]);
@@ -174,19 +174,22 @@ presence.on("UpdateData", async () => {
 				if (document.querySelector(".not-found-header"))
 					presenceData.details = "Viewing an invalid project";
 				else {
-					presenceData.details =
-						document.querySelector(".project-name__title__text")?.textContent ??
-						document.querySelector<HTMLAnchorElement>(
-							"#wrap > div.section.project-page > div > div.clearfix.mb-2 > div > div:nth-child(2) > a"
-						).outerText;
-					presenceData.buttons = [
-						{
-							label: "View project",
-							url:
-								document.location.origin +
-								pathnameSplit.filter((_, i) => i <= 2).join("/")
-						}
-					];
+					if (showProject) {
+						presenceData.details =
+							document.querySelector(".project-name__title__text")
+								?.textContent ??
+							document.querySelector<HTMLAnchorElement>(
+								"#wrap > div.section.project-page > div > div.clearfix.mb-2 > div > div:nth-child(2) > a"
+							).outerText;
+						presenceData.buttons = [
+							{
+								label: "View project",
+								url:
+									document.location.origin +
+									pathnameSplit.filter((_, i) => i <= 2).join("/")
+							}
+						];
+					}
 					if (pathname.includes("/activity-stream"))
 						presenceData.state = "Viewing activity";
 					else if (pathname.includes("/discussions")) {
@@ -196,7 +199,8 @@ presence.on("UpdateData", async () => {
 									"#topic-view-container > div > div > div:nth-child(3) > div.reply-toolbar > div.author-info-section.d-flex.flex-row.align-items-center > span"
 								)
 								.parentElement.querySelector(".user-name").textContent;
-							presenceData.details += " - Discussions";
+							if (showProject) presenceData.details += " - Discussions";
+							else presenceData.details = "Viewing a project's discussion";
 							presenceData.state = `${
 								(
 									document.querySelector(
@@ -216,13 +220,15 @@ presence.on("UpdateData", async () => {
 						} else presenceData.state = "Browsing discussions";
 					} else if (pathname.includes("/tasks")) {
 						if (parseInt(pathnameSplit.at(-1))) {
-							presenceData.details += " - Tasks";
+							if (showProject) presenceData.details += " - Tasks";
+							else presenceData.details = "Viewing a project's task";
 							presenceData.state =
 								document.querySelector("#task-title").textContent;
 						} else presenceData.state = "Browsing tasks";
 					} else if (pathname.includes("/reports")) {
 						const currentReport = pathnameSplit.at(-1);
-						presenceData.details += " - Reports";
+						if (showProject) presenceData.details += " - Reports";
+						else presenceData.details = "Viewing a project's reports";
 						presenceData.state =
 							!showManager &&
 							["cost-estimate", "abuse-report"].includes(currentReport)
@@ -244,10 +250,15 @@ presence.on("UpdateData", async () => {
 
 					if (showManager) {
 						if (pathname.includes("/content")) {
-							presenceData.details += " - Content";
-							presenceData.state = `Managing ${
-								document.querySelector(".nav-item.active").textContent
-							}`;
+							const managedContent =
+								document.querySelector(".nav-item.active").textContent;
+							if (showProject) {
+								presenceData.details += " - Content";
+								presenceData.state = `Managing ${managedContent}`;
+							} else {
+								presenceData.details = `Managing a project's ${managedContent}`;
+								delete presenceData.state;
+							}
 						} else if (pathname.includes("/resources"))
 							presenceData.state = "Viewing resources";
 						else if (pathname.includes("/members"))
@@ -256,7 +267,8 @@ presence.on("UpdateData", async () => {
 							// Unfortunately every app has a different selector, so it's virtually impossible to support them all
 							presenceData.state = "Managing tools";
 						} else if (pathname.includes("/apps")) {
-							presenceData.details += " - Integrations";
+							if (showProject) presenceData.details += " - Integrations";
+							else presenceData.details = "Managing a project's integrations";
 							presenceData.state = `Managing ${
 								document.querySelector(
 									".integration-details > .description > h3"
@@ -265,6 +277,14 @@ presence.on("UpdateData", async () => {
 						} else if (pathname.includes("/settings"))
 							presenceData.state = "Managing project settings";
 					}
+					if (!presenceData.details && presenceData.state) {
+						const stateSplit = presenceData.state.split(" ");
+						if (!stateSplit.includes("project"))
+							stateSplit.splice(1, 0, "a project's");
+						else stateSplit[stateSplit.indexOf("project")] = "a project's";
+						presenceData.details = stateSplit.join(" ");
+						delete presenceData.state;
+					}
 				}
 			} else if (
 				pathname.includes("/translate") ||
@@ -272,18 +292,20 @@ presence.on("UpdateData", async () => {
 			) {
 				// Ensure the editor has loaded to prevent undefined text
 				if (!document.querySelector("#crowdin-editor-wrapper")) return;
-				const translatingFile = document.querySelector(".file-name");
+				const fileName = document.querySelector(".file-name")?.textContent,
+					languageName = document.querySelector(
+						".language-name-wrapper.text-overflow"
+					)?.textContent;
 
 				if (pathname.includes("/proofread"))
-					presenceData.details = `Proofreading ${translatingFile?.textContent}`;
-				else
-					presenceData.details = `Translating ${translatingFile?.textContent}`;
+					presenceData.details = `Proofreading ${fileName}`;
+				else presenceData.details = `Translating ${fileName}`;
 
-				presenceData.state = `${document.title.split("-")[1]?.trim()} - ${
-					document.querySelector(".language-name-wrapper.text-overflow")
-						?.textContent
-				}`;
-
+				if (showProject) {
+					presenceData.state = `${document.title
+						.split("-")[1]
+						?.trim()} - ${languageName}`;
+				} else presenceData.state = languageName;
 				presenceData.smallImageKey = "writing";
 				presenceData.buttons = [
 					{
