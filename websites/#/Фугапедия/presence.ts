@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: showTime ? browsingTimestamp : null,
 		},
 		generalSearch = document.querySelector<HTMLInputElement>("#general_search"),
-		splittedPathname = document.location.pathname.split("/");
+		splitPathname = document.location.pathname.split("/");
 
 	if (generalSearch?.ariaExpanded === "true") {
 		presenceData.details = "Собирается что-то найти";
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 		return;
 	}
 
-	switch (splittedPathname[1]) {
+	switch (splitPathname[1]) {
 		case "": {
 			presenceData.details = "На главной странице";
 			break;
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
 		case "u": {
 			presenceData.details = "Смотрит профиль пользователя";
 			if (!privacyMode) {
-				if (splittedPathname[2] === "me") {
+				if (splitPathname[2] === "me") {
 					presenceData.details = "Смотрит свой профиль";
 					presenceData.state = document.querySelector(
 						"body > div > div > main > div > div > div > div > div > h2.font-serif-text"
@@ -156,9 +156,6 @@ presence.on("UpdateData", async () => {
 	presence.setActivity(presenceData);
 });
 
-function parseName(start: number): string;
-function parseName(id: string): string;
-function parseName(start: number, id: string): string;
 function parseName(start: number | string, id?: string): string {
 	if (typeof start === "string") {
 		id = start;
