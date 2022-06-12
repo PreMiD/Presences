@@ -6,7 +6,6 @@ const presence = new Presence({
 let timestamp: [number, number],
 	pauseCheck: boolean,
 	search: HTMLInputElement,
-	genreSort: string,
 	title: string;
 
 presence.on("UpdateData", async () => {
@@ -79,35 +78,15 @@ presence.on("UpdateData", async () => {
 			} settings`;
 		} else if (href.includes("/discover/")) {
 			if (active) {
-				genreSort =
-					document.querySelector("[class='ng-scope ng-binding selected']")
-						?.textContent ??
-					document.querySelectorAll("[class='ng-binding ng-scope selected']")[2]
-						?.textContent ??
-					"None";
-				if (genreSort === "Top") genreSort = "All";
 				presenceData.buttons = [
 					{
-						label: `Browse ${active}`,
+						label: `Browse`,
 						url: href
 					}
 				];
 				presenceData.details = `Browsing: ${active}`;
-				presenceData.state = `Genre: ${genreSort}`;
 			} else presenceData.state = "Browsing Movies";
 		} else if (href.includes("/library")) {
-			genreSort = document
-				.querySelector<HTMLSelectElement>(
-					"#library > div.sort-filter > div.custom-select.lib-sort > select"
-				)
-				?.value.replace("SORT", "")
-				.replace("_", " ")
-				.trim();
-			if (genreSort) {
-				presenceData.state = `Sorted by: ${genreSort.charAt(0)}${genreSort
-					.slice(1)
-					.toLowerCase()}`;
-			}
 			if (active) presenceData.details = `${active} Library`;
 			else presenceData.details = "Library";
 
@@ -168,7 +147,24 @@ presence.on("UpdateData", async () => {
 			];
 		} else if (href === "https://app.strem.io/#/")
 			presenceData.details = "Viewing the homepage";
-	} else presenceData.details = "Browsing...";
+	} else {
+		if (href.includes("addon-sdk")) presenceData.details = "Viewing Addon SDK";
+		else if (href.includes("contribute"))
+			presenceData.details = "Contributing page";
+		else if (href.includes("community"))
+			presenceData.details = "Viewing the Community";
+		else if (href.includes("technology"))
+			presenceData.details = "Viewing the technology";
+		else if (document.querySelector("#tos-container > h1 > strong"))
+			presenceData.details = `Reading ${
+				document.querySelector("#tos-container > h1 > strong").textContent
+			}`;
+		else if (document.querySelector("[class='active']")?.textContent !== "EN") {
+			presenceData.details =
+				document.querySelector("[class='active']")?.textContent ??
+				"Browsing...";
+		}
+	}
 
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
