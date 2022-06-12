@@ -80,13 +80,13 @@ presence.on("UpdateData", async () => {
 			if (!pathname || pathname === "/")
 				presenceData.details = "On the main store page";
 			else if (pathname.includes("/author/")) {
-				presenceData.details = "Viewing Developer";
+				presenceData.details = "Viewing developer";
 				presenceData.state = document
 					.querySelectorAll("div.sc-marketplace-author")[1]
 					?.querySelector("h1").childNodes[0].textContent;
 				presenceData.buttons = [{ label: "View developer", url: href }];
 			} else if (appName) {
-				presenceData.details = "Viewing App";
+				presenceData.details = "Viewing app";
 				presenceData.state = appName;
 				presenceData.buttons = [{ label: "View app", url: href }];
 			} else {
