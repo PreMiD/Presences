@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 				URL.get("filter")
 			)} — Sayfa ${URL.get("page")}`;
 		} else {
-		        presenceData.state = `Sayfa ${URL.get("page")}`	;
+			presenceData.state = `Sayfa ${URL.get("page")}`;
 		}
 	}
 
