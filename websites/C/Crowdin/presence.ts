@@ -3,24 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
-async function getLanguageName(id: string) {
-	const languages = await fetch(
-		"https://api.crowdin.com/api/v2/languages?limit=500",
-		{
-			headers: { Accept: "application/json" }
-		}
-	)
-		.then(
-			r =>
-				r.json() as Promise<{
-					data: { data: CrowdinLanguage }[];
-					pagination: { limit: number; offset: number };
-				}>
-		)
-		.then(r => r.data.map(l => l.data));
-	return languages.find(l => l.id === id)?.name;
-}
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "crowdin",
@@ -434,6 +416,24 @@ presence.on("UpdateData", async () => {
 
 	presence.setActivity(presenceData);
 });
+
+async function getLanguageName(id: string) {
+	const languages = await fetch(
+		"https://api.crowdin.com/api/v2/languages?limit=500",
+		{
+			headers: { Accept: "application/json" }
+		}
+	)
+		.then(
+			r =>
+				r.json() as Promise<{
+					data: { data: CrowdinLanguage }[];
+					pagination: { limit: number; offset: number };
+				}>
+		)
+		.then(r => r.data.map(l => l.data));
+	return languages.find(l => l.id === id)?.name;
+}
 
 interface CrowdinLanguage {
 	id: string;
