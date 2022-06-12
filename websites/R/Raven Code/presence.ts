@@ -28,6 +28,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Arama: ${decodeURIComponent(
 				URL.get("filter")
 			)} — Sayfa ${URL.get("page")}`;
+		} else {
+		        presenceData.state = `Sayfa ${URL.get("page")}`	;
 		}
 	}
 
