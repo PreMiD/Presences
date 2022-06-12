@@ -1,23 +1,19 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "author": {
-    "name": "can",
-    "id": "613700645173592086"
-  },
-  "service": "Raven Code",
-  "description": {
-    "en": "For Raven Code web site.",
-    "tr": "Raven Code web sitesi için."
-  },
-  "url": "ravencode.live",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/H7NAz9R.png",
-  "thumbnail": "https://i.imgur.com/BICD0F8.png",
-  "color": "#0a0a0a",
-  "category": "other",
-  "tags": [
-    "discord",
-    "kod-paylaşım",
-    "raven-code"
-  ]
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "can",
+		"id": "613700645173592086"
+	},
+	"service": "Raven Code",
+	"description": {
+		"en": "For Raven Code web site.",
+		"tr": "Raven Code web sitesi için."
+	},
+	"url": "ravencode.live",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/H7NAz9R.png",
+	"thumbnail": "https://i.imgur.com/BICD0F8.png",
+	"color": "#0a0a0a",
+	"category": "other",
+	"tags": ["discord", "kod-paylaşım", "raven-code"]
 }
