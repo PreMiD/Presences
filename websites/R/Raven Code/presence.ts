@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		page = document.location.pathname;
 	if (page == "/") presenceData.details = "Anasayfayı görüntülüyor.";
 	if (page == "/yetkililer")
-		presenceData.details = "Yetkili sayfasını görüntülüyor.";
+		presenceData.details = "Yetkililer sayfasını görüntülüyor.";
 	if (page == "/profile") {
 		presenceData.details = "Profil görüntüleniyor:";
 		presenceData.state = document.querySelector(".user-info").textContent;
