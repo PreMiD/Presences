@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
 						url: href
 					}
 				];
-				presenceData.details = `Browsing ${active}`;
+				presenceData.details = `Browsing: ${active}`;
 				presenceData.state = `Genre: ${genreSort}`;
 			} else presenceData.state = "Browsing Movies";
 		} else if (href.includes("/library")) {
