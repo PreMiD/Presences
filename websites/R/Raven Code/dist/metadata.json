@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "author": {
+    "name": "can",
+    "id": "613700645173592086"
+  },
+  "service": "Raven Code",
+  "description": {
+    "en": "For Raven Code web site.",
+    "tr": "Raven Code web sitesi için."
+  },
+  "url": "ravencode.live",
+  "version": "1.0.0",
+  "logo": "https://cdn.discordapp.com/attachments/925563605238292490/969103102437371924/logo-circle.png",
+  "thumbnail": "https://cdn.discordapp.com/attachments/950618045343207484/985373007914606622/Screenshot_39.png",
+  "color": "#0a0a0a",
+  "category": "other",
+  "tags": [
+    "discord",
+    "kod-paylaşım",
+    "raven-code"
+  ]
+}
