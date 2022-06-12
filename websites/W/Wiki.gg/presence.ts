@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "978186598669758504",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: string, mTitle: string;
+let title: string, wikiTitle: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -26,8 +26,8 @@ presence.on("UpdateData", async () => {
 			const search = document.querySelectorAll<HTMLInputElement>(
 				"input[name='search']"
 			);
-			mTitle = hostname.split(".")[0];
-			title = mTitle[0].toUpperCase() + mTitle.slice(1);
+			wikiTitle = hostname.split(".")[0];
+			title = wikiTitle[0].toUpperCase() + wikiTitle.slice(1);
 			switch (title) {
 				case "Terraria": {
 					presenceData.largeImageKey = "https://i.imgur.com/fNW9Glp.png";
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 					"#mw-content-text > div.mw-parser-output > div > div:nth-child(1) > div > div:nth-child(1)"
 				)
 			)
-				presenceData.state = "Viewing Homepage";
+				presenceData.state = "Viewing home page";
 			presenceData.details = title;
 		}
 	} else presenceData.details = "Browsing";
