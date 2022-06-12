@@ -177,10 +177,9 @@ presence.on("UpdateData", async () => {
 					else if (pathname.includes("/discussions")) {
 						if (parseInt(pathnameSplit.at(-1))) {
 							const author = document
-								.querySelector(
-									"#topic-view-container > div > div > div:nth-child(3) > div.reply-toolbar > div.author-info-section.d-flex.flex-row.align-items-center > span"
-								)
+								.querySelector(".author-info-section > span")
 								.parentElement.querySelector(".user-name").textContent;
+
 							if (showProject) presenceData.details += " - Discussions";
 							else presenceData.details = "Viewing a project's discussion";
 							presenceData.state = `${
@@ -195,7 +194,7 @@ presence.on("UpdateData", async () => {
 							} - ${
 								author === "You"
 									? document.querySelector<HTMLImageElement>(
-											"#topic-view-container > div > div > div:nth-child(3) > div.reply-toolbar > div.author-avatar.avatar-small.mr-1 > img"
+											".textarea-toolbar > .author-avatar > img"
 									  ).title
 									: author
 							}`;
