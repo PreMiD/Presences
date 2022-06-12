@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 			if (active) {
 				presenceData.buttons = [
 					{
-						label: `Browse`,
+						label: "Browse",
 						url: href
 					}
 				];
@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
 			];
 		} else if (href === "https://app.strem.io/#/")
 			presenceData.details = "Viewing the homepage";
-	} else {
+	} else if (hostname == "stremio.com") {
 		if (href.includes("addon-sdk")) presenceData.details = "Viewing Addon SDK";
 		else if (href.includes("contribute"))
 			presenceData.details = "Contributing page";
@@ -155,11 +155,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing the Community";
 		else if (href.includes("technology"))
 			presenceData.details = "Viewing the technology";
-		else if (document.querySelector("#tos-container > h1 > strong"))
+		else if (document.querySelector("#tos-container > h1 > strong")) {
 			presenceData.details = `Reading ${
 				document.querySelector("#tos-container > h1 > strong").textContent
 			}`;
-		else if (document.querySelector("[class='active']")?.textContent !== "EN") {
+		} else if (
+			document.querySelector("[class='active']")?.textContent !== "EN"
+		) {
 			presenceData.details =
 				document.querySelector("[class='active']")?.textContent ??
 				"Browsing...";
