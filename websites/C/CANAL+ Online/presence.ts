@@ -97,8 +97,6 @@ presence.on("UpdateData", async () => {
 				document.querySelector("meta[name='og:title']") ||
 				document.querySelector("div > div > div > span");
 
-			console.log((ele as HTMLMetaElement).content);
-
 			title = ((ele as HTMLMetaElement).content || ele.textContent).replace(
 				" | CANAL+ Online",
 				""
