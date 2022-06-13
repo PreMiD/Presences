@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
 			console.log((ele as HTMLMetaElement).content);
 
 			title = ((ele as HTMLMetaElement).content || ele.textContent).replace(
-				" | CANAL+",
+				" | CANAL+ Online",
 				""
 			);
 
