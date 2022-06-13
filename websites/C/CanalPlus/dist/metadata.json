@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "KamelaJda",
+		"id": "343467373417857025"
+	},
+	"service": "CANAL+ Online",
+	"description": {
+		"en": "Discover CANAL+ online. Here you will find the best live channels, exciting sports as well as movies, series and on-demand programs.",
+		"pl": "Odkryj CANAL+ online. Tu znajdziesz najlepsze w swojej kategorii kanały na żywo, emocjonujący sport oraz filmy, seriale i programy na życzenie."
+	},
+	"url": "www.canalplus.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/d2I3FdS.png",
+	"thumbnail": "https://i.imgur.com/isvQ47m.png",
+	"color": "#1A1A1A",
+	"category": "videos",
+	"tags": [
+		"video"
+	]
+}
