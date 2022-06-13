@@ -53,8 +53,8 @@ const pages: PageContext[] = [
 		{
 			middleware: ref =>
 				!!ref.location.pathname.match(
-					/^\/(hot|tags|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs)/gi
-				) || ref.location.pathname === "/",
+					/^\/?(hot|tags|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs|\/)/gi
+				),
 			exec: (
 				context,
 				data,
@@ -118,19 +118,17 @@ const pages: PageContext[] = [
 						? images.PLAY
 						: images.PAUSE;
 				if (showWatch) {
-					data.buttons.push(
-						...[
-							{
-								label: strings.watchVideo,
-								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
-							},
-							...getSourceLink(
-								activeMedia.querySelector<HTMLAnchorElement>(
-									".description__stamp a.description__stamp__source"
-								)?.href
-							),
-						]
-					);
+					data.buttons = [
+						{
+							label: strings.watchVideo,
+							url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
+						},
+						getSourceLink(
+							activeMedia.querySelector<HTMLAnchorElement>(
+								".description__stamp a.description__stamp__source"
+							)?.href
+						)?.[0],
+					];
 				}
 				return data;
 			},
@@ -183,20 +181,18 @@ const pages: PageContext[] = [
 						? images.PLAY
 						: images.PAUSE;
 				if (showWatch) {
-					data.buttons.push(
-						...[
-							{
-								label: strings.watchVideo,
-								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
-							},
-							{
-								label: strings.viewProfil,
-								url: `${document.location.origin}/${
-									document.location.pathname.split("/")[1]
-								}`,
-							},
-						]
-					);
+					data.buttons = [
+						{
+							label: strings.watchVideo,
+							url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
+						},
+						{
+							label: strings.viewProfil,
+							url: `${document.location.origin}/${
+								document.location.pathname.split("/")[1]
+							}`,
+						},
+					];
 				}
 				return data;
 			},
@@ -231,19 +227,17 @@ const pages: PageContext[] = [
 						: images.PAUSE;
 
 				if (showWatch) {
-					data.buttons.push(
-						...[
-							{
-								label: strings.watchVideo,
-								url: document.location.href,
-							},
-							...getSourceLink(
-								activeMedia.parentElement.querySelector<HTMLAnchorElement>(
-									'.coub__info .media-block__item > a[type="embedPopup"]'
-								)?.href
-							),
-						]
-					);
+					data.buttons = [
+						{
+							label: strings.watchVideo,
+							url: document.location.href,
+						},
+						getSourceLink(
+							activeMedia.parentElement.querySelector<HTMLAnchorElement>(
+								'.coub__info .media-block__item > a[type="embedPopup"]'
+							)?.href
+						)?.[0],
+					];
 				}
 				return data;
 			},
@@ -281,19 +275,17 @@ const pages: PageContext[] = [
 						: images.PAUSE;
 				data.details = `${title}`;
 				if (showWatch) {
-					data.buttons.push(
-						...[
-							{
-								label: strings.watchVideo,
-								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
-							},
-							...getSourceLink(
-								activeMedia.querySelector<HTMLAnchorElement>(
-									".description__stamp a.description__stamp__source"
-								)?.href
-							),
-						]
-					);
+					data.buttons = [
+						{
+							label: strings.watchVideo,
+							url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
+						},
+						getSourceLink(
+							activeMedia.querySelector<HTMLAnchorElement>(
+								".description__stamp a.description__stamp__source"
+							)?.href
+						)?.[0],
+					];
 				}
 
 				return data;
@@ -312,26 +304,28 @@ const pages: PageContext[] = [
 	],
 	presence = new Presence({
 		clientId: "818598086984728576",
-	});
-
+	}),
+	IMAGES = {
+		PLAY: "playx1024",
+		PAUSE: "pausex1024",
+	};
+function getStrings(newLang?: string) {
+	return presence.getStrings(
+		{
+			browsing: "presence.activity.browsing",
+			watching: "presence.playback.playing",
+			watchVideo: "general.buttonWatchVideo",
+			viewProfile: "general.buttonViewProfile",
+		},
+		newLang
+	);
+}
 let currentLang: string, localizedStrings: { [key: string]: string };
-const IMAGES = {
-	PLAY: "playx1024",
-	PAUSE: "pausex1024",
-};
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang");
-	if (newLang !== currentLang) {
+	const newLang = await presence.getSetting<string>("lang").catch(() => null);
+	if (!localizedStrings || newLang !== currentLang) {
 		currentLang = newLang;
-		localizedStrings = await presence.getStrings(
-			{
-				browsing: "presence.activity.browsing",
-				watching: "presence.playback.playing",
-				watchVideo: "general.buttonWatchVideo",
-				viewProfile: "general.buttonViewProfile",
-			},
-			newLang
-		);
+		localizedStrings = await getStrings(newLang);
 	}
 	const query: { [key: string]: unknown } = getQuery(),
 		context = pages.find(x => x.middleware(window, [query]));
