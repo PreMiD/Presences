@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "821104573329440848"
+		clientId: "821104573329440848",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 	const [buttons, timestamp, privacy] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamp"),
-			presence.getSetting<boolean>("privacy")
+			presence.getSetting<boolean>("privacy"),
 		]),
 		pages: Record<string, PresenceData> = {
 			"/team": { details: "Viewing the staff team" },
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 			"/api": { details: "Viewing the API" },
 			"/live": { details: "Viewing the live stats" },
 			"/history": { details: "Viewing the history" },
-			"/settings": { details: "Viewing the settings" }
+			"/settings": { details: "Viewing the settings" },
 		};
 
 	for (const [path, data] of Object.entries(pages)) {
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 							"header > h1"
 						).textContent;
 					presenceData.buttons = [
-						{ label: "View Forum Category", url: document.URL }
+						{ label: "View Forum Category", url: document.URL },
 					];
 					break;
 				default:

@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "630561466872889344"
+	clientId: "630561466872889344",
 });
 
 enum PageType {
 	Game = 0,
-	Category = 1
+	Category = 1,
 }
 
 const capitalize = (text: string[]): string => {
@@ -82,6 +82,6 @@ presence.on("UpdateData", async () => {
 		details,
 		state,
 		largeImageKey: "coolmathgames",
-		startTimestamp: elapsed
+		startTimestamp: elapsed,
 	});
 });

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "651455140477272065"
+		clientId: "651455140477272065",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -46,7 +46,7 @@ let lastTitle = "",
 
 presence.on("UpdateData", function () {
 	const presenceData: PresenceData = {
-		largeImageKey: "srlogo"
+		largeImageKey: "srlogo",
 	};
 
 	if (

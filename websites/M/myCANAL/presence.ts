@@ -1,17 +1,17 @@
 const presence = new Presence({
-		clientId: "844106861711196179"
+		clientId: "844106861711196179",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		live: "presence.activity.live",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		video: HTMLVideoElement = document.querySelector(".aPWk0-TaQEzvggxIT6qvP");
 	if (video && !isNaN(video.duration)) {

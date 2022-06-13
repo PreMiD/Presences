@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "836662139926216724"
+		clientId: "836662139926216724",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 		buttons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
 	if (pathname === "/") presenceData.details = "Viewing the Homepage";
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".Description > span").textContent
 		}`;
 		presenceData.buttons = [
-			{ label: "View discussion", url: window.location.href }
+			{ label: "View discussion", url: window.location.href },
 		];
 	} else if (pathname.endsWith("/subscription.php")) {
 		presenceData.details = "Viewing subscriptions";
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "view";
 		if (buttons) {
 			presenceData.buttons = [
-				{ label: "View manga", url: window.location.href }
+				{ label: "View manga", url: window.location.href },
 			];
 		}
 	} else if (pathname.startsWith("/read-online/")) {
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "read";
 		if (buttons) {
 			presenceData.buttons = [
-				{ label: "View manga", url: window.location.href }
+				{ label: "View manga", url: window.location.href },
 			];
 		}
 	}

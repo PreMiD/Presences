@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "828549761376059441"
+		clientId: "828549761376059441",
 	}),
 	{ href } = window.location,
 	getAction = (): string => {
@@ -30,7 +30,7 @@ const presence = new Presence({
 		sport: "Enjoying some sports",
 		home: "Checking out the home page",
 		faq: "Reading the FAQ",
-		tv: "Relaxing to some TV"
+		tv: "Relaxing to some TV",
 	};
 let pauseFlag = true,
 	watchStamp = 0;
@@ -38,7 +38,7 @@ let pauseFlag = true,
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "icon",
-		details: constructAction[getAction()]
+		details: constructAction[getAction()],
 	};
 	// If the user is watching something, get the title and set duration.
 	if (["movie", "tv", "sport"].includes(getAction())) {
@@ -54,13 +54,13 @@ presence.on("UpdateData", async () => {
 				state: `${getStatus()} | ${getText("[class~=player-title-bar]")}`,
 				endTimestamp: watchStamp,
 				smallImageKey: "play",
-				...presenceData
+				...presenceData,
 			};
 		} else {
 			presenceData = {
 				state: `${getStatus()} | ${getText("[class~=player-title-bar]")}`,
 				smallImageKey: "pause",
-				...presenceData
+				...presenceData,
 			};
 		}
 		pauseFlag = true;
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 		// If the user is not watching something, return how long they have been browsing.
 		presenceData = {
 			startTimestamp: Math.floor(Date.now() / 1000),
-			...presenceData
+			...presenceData,
 		};
 	}
 

@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "653220659887079434"
+	clientId: "653220659887079434",
 });
 
 presence.on("UpdateData", async () => {
@@ -32,14 +32,14 @@ presence.on("UpdateData", async () => {
 				details,
 				state,
 				smallImageKey: smallImage ? smallImage : "SOMETHING-SKETCHY",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else {
 			presence.setActivity({
 				largeImageKey: "ec-logo",
 				details: "Viewing a page:",
 				state: "Homepage",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		}
 	}

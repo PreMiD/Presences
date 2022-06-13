@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "794916348761210920"
+		clientId: "794916348761210920",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".jdlrx > h1")
 					.textContent.replace(/Subtitle Indonesia/gi, "");
 				presenceData.buttons = [
-					{ label: "View anime", url: document.location.href }
+					{ label: "View anime", url: document.location.href },
 				];
 			}
 			if (document.querySelector(".mirrorstream")) {
@@ -63,8 +63,8 @@ presence.on("UpdateData", async () => {
 						label: "View Anime",
 						url: [...document.querySelectorAll("a")].find(x =>
 							/See All Episodes/gi.exec(x.textContent)
-						).href
-					}
+						).href,
+					},
 				];
 			}
 			break;

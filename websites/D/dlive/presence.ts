@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "609531561389588480"
+	clientId: "609531561389588480",
 });
 let lastPlaybackState = null,
 	playback: boolean,
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 
 	if (!playback) {
 		const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		};
 
 		presenceData.details = "Browsing...";
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 	if (document.querySelector("video.dplayer-video.dplayer-video-current")) {
 		const presenceData: PresenceData = {
 			largeImageKey: "lg",
-			smallImageKey: "live"
+			smallImageKey: "live",
 		};
 
 		presenceData.details = document.querySelector<HTMLElement>(

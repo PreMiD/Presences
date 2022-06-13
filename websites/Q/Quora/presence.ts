@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "798449961691250709"
+		clientId: "798449961691250709",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ let question, taxonomy, account: string;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname.match(/[A-Za-z]+.quora.com/)) {

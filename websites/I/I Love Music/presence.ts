@@ -1,6 +1,6 @@
 //______________________________________________________________________________________
 const presence = new Presence({
-	clientId: "477919120789078026"
+	clientId: "477919120789078026",
 });
 let { language } = navigator;
 
@@ -38,7 +38,7 @@ switch (language) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 	if (parseInt(document.querySelector("#playstop").textContent) > 0) {
 		switch (language) {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "628269030901547037"
+		clientId: "628269030901547037",
 	}),
 	pages: { [key: string]: string } = {
 		"/": "Ana Sayfa",
@@ -15,12 +15,12 @@ const presence = new Presence({
 		"/odullerimiz": "Ödüllerimiz",
 		"/kunye": "Künye",
 		"/gizlilik": "Gizlilik",
-		"/iletisim": "İletişim"
+		"/iletisim": "İletişim",
 	},
 	smallImageKey: { [key: string]: string } = {
 		"/ara": "searching",
 		"/video": "video",
-		"/uye/favorilerim": "star"
+		"/uye/favorilerim": "star",
 	};
 
 presence.on("UpdateData", async () => {
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 			details: "Bir yazara göz atıyor:",
 			state:
 				author && author.textContent !== "" ? author.textContent : "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (title && title.textContent !== "") {
 		presence.setActivity({
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 			})`,
 			smallImageKey: "post",
 			smallImageText: "Bir gönderi okuyor...",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (videoTitle && videoTitle.textContent !== "") {
 		presence.setActivity({
@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
 			})`,
 			smallImageKey: "video",
 			smallImageText: "Bir video gönderi okuyor...",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 			state: pages[page] || pages[page.slice(0, -1)] || "Ana Sayfa",
 			smallImageKey:
 				smallImageKey[page] || smallImageKey[page.slice(0, -1)] || "NOTHING",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 });

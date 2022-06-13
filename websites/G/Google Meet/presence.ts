@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "701914032541794386"
+		clientId: "701914032541794386",
 	}),
 	time = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "meetlogo",
-		startTimestamp: time
+		startTimestamp: time,
 	};
 
 	if (document.location.pathname.toLowerCase() === "/") {

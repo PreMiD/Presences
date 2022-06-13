@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "806984559308046336"
+	clientId: "806984559308046336",
 });
 
 let sname: string,
@@ -32,12 +32,12 @@ let lastTitle: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		[changeDetails, changeState, changeSmallText] = await Promise.all([
 			presence.getSetting<string>("changedetails"),
 			presence.getSetting<string>("changestate"),
-			presence.getSetting<string>("changesmalltext")
+			presence.getSetting<string>("changesmalltext"),
 		]);
 
 	if (lastTitle !== sname) {

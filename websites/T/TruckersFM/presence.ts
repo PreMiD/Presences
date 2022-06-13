@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "640914619082211338"
+		clientId: "640914619082211338",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "tfmlogo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	presenceData.details = `${
@@ -18,8 +18,8 @@ presence.on("UpdateData", () => {
 	presenceData.buttons = [
 		{
 			label: "Tune into TFM",
-			url: "https://truckers.fm/listen"
-		}
+			url: "https://truckers.fm/listen",
+		},
 	];
 
 	const spotifyUrl = document
@@ -28,7 +28,7 @@ presence.on("UpdateData", () => {
 	if (spotifyUrl) {
 		presenceData.buttons.push({
 			label: "Listen on Spotify",
-			url: spotifyUrl
+			url: spotifyUrl,
 		});
 	}
 

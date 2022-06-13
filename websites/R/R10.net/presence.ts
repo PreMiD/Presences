@@ -16,7 +16,7 @@ const presence = new Presence({ clientId: "650497315391537153" }),
 		"/whois/": "WHOIS Sorgulama",
 		"/itrader_main.php": "Ticaret Bölümü",
 		"/search.php": "Arama",
-		"/pm/": "Özel Mesajlar"
+		"/pm/": "Özel Mesajlar",
 	};
 
 presence.on("UpdateData", async () => {
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 		),
 		presenceData: PresenceData = {
 			largeImageKey: "logo_beyaz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (kategori && kategori.textContent !== "") {

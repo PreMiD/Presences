@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "815947069117169684"
+		clientId: "815947069117169684",
 	}),
 	getStrings = async () =>
 		presence.getStrings(
@@ -15,7 +15,7 @@ const presence = new Presence({
 				viewingMovie: "general.viewMovie",
 				watchMovie: "general.buttonWatchMovie",
 				watchEpisode: "general.buttonViewEpisode",
-				searching: "general.search"
+				searching: "general.search",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		),
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<string>("lang").catch(() => "en"),
 		presence.getSetting<boolean>("buttons"),
 		presence.getSetting<boolean>("searchQ"),
-		presence.getSetting<number>("logo")
+		presence.getSetting<number>("logo"),
 	]);
 
 	if (oldPath !== document.location.pathname) {
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 		details: strings.browse,
 		smallImageKey: "reading",
 		largeImageKey: ["viu_logo", "viu_logo_text"][presenceLogo],
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname.includes("/vod/")) {
@@ -109,8 +109,8 @@ presence.on("UpdateData", async () => {
 						label: isMovie
 							? (await strings).watchMovie
 							: (await strings).watchEpisode,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 
@@ -176,8 +176,8 @@ presence.on("UpdateData", async () => {
 						label: isMovie
 							? (await strings).watchMovie
 							: (await strings).watchEpisode,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 

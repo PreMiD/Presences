@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "563434444321587202"
+		clientId: "563434444321587202",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	// Default data
 	const presenceData: PresenceData = {
 		largeImageKey: "maki",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") {
@@ -22,8 +22,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Invite",
-				url: "https://maki.gg/invite"
-			}
+				url: "https://maki.gg/invite",
+			},
 		];
 		if (document.location.pathname === "/dashboard") {
 			// Server selection

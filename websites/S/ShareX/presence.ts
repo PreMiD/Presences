@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "888726220571811914"
+		clientId: "888726220571811914",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -13,9 +13,9 @@ presence.on("UpdateData", async () => {
 			buttons: [
 				{
 					label: "View Page",
-					url: document.location.href
-				}
-			]
+					url: document.location.href,
+				},
+			],
 		};
 	// Main Pages
 	if (document.location.pathname === "/") {

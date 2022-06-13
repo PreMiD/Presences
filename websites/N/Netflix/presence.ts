@@ -25,7 +25,7 @@ interface DiscoveryModel {
 }
 
 const presence = new Presence({
-		clientId: "926541425682829352"
+		clientId: "926541425682829352",
 	}),
 	getStrings = async () => {
 		return presence.getStrings(
@@ -48,7 +48,7 @@ const presence = new Presence({
 				viewList: "netflix.viewList",
 				profile: "netflix.profile",
 				latest: "netflix.latest",
-				refer: "netflix.referral"
+				refer: "netflix.referral",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
@@ -145,7 +145,7 @@ presence.on("UpdateData", async () => {
 			privacy,
 			newLang,
 			logo,
-			cover
+			cover,
 		] = await Promise.all([
 			presence.getSetting<string>("movie"),
 			presence.getSetting<string>("movieDetails"),
@@ -159,14 +159,14 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<number>("logo"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]),
 		largeImage =
 			["https://i.imgur.com/Wf8G0mk.gif", "nflix_lg", "noback"][logo] ||
 			"nflix_lg";
 
 	let presenceData: PresenceData = {
-			largeImageKey: largeImage
+			largeImageKey: largeImage,
 		},
 		[videoMetadata] = Object.values(latestData?.videoMetadata || {});
 	//* Reset browsingTimestamp if href has changed.
@@ -231,10 +231,10 @@ presence.on("UpdateData", async () => {
 								document.querySelector(
 									"[data-uia$='video-title'] span:nth-child(3)"
 								)
-							)?.textContent
-						}
-					]
-				}
+							)?.textContent,
+						},
+					],
+				},
 			],
 			title:
 				type === "movie"
@@ -245,7 +245,7 @@ presence.on("UpdateData", async () => {
 					: (
 							document.querySelector("[class$='title'] .ellipsize-text h4") ??
 							document.querySelector("[data-uia$='video-title'] h4")
-					  )?.textContent
+					  )?.textContent,
 		};
 	}
 
@@ -282,12 +282,12 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.watchMovie,
-						url: `https://www.netflix.com/watch/${id}`
+						url: `https://www.netflix.com/watch/${id}`,
 					},
 					{
 						label: strings.viewMovies,
-						url: `https://www.netflix.com/title/${id}`
-					}
+						url: `https://www.netflix.com/title/${id}`,
+					},
 				];
 
 				if (privacy) {
@@ -334,12 +334,12 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.watchEpisode,
-						url: `https://www.netflix.com/watch/${currentEpisode}`
+						url: `https://www.netflix.com/watch/${currentEpisode}`,
 					},
 					{
 						label: strings.viewSeries,
-						url: `https://www.netflix.com/title/${id}`
-					}
+						url: `https://www.netflix.com/title/${id}`,
+					},
 				];
 
 				if (privacy) {
@@ -371,7 +371,7 @@ presence.on("UpdateData", async () => {
 		[name: string]: PresenceData;
 	} = {
 		"/browse": {
-			details: strings.browse
+			details: strings.browse,
 		},
 		"/browse/genre/(\\d*)/": {
 			...(() => {
@@ -384,12 +384,12 @@ presence.on("UpdateData", async () => {
 					details: strings.genre,
 					state:
 						document.querySelector(".genreTitle")?.textContent ||
-						document.querySelector(".nm-collections-header-name")?.textContent
+						document.querySelector(".nm-collections-header-name")?.textContent,
 				};
-			})()
+			})(),
 		},
 		"/browse/my-list/": {
-			details: strings.viewList
+			details: strings.viewList,
 		},
 		"/title/(\\d*)/": {
 			...(await (async () => {
@@ -407,23 +407,23 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: isSeries ? strings.viewSeries : strings.viewMovies,
-							url: document.URL.split("&")[0]
-						}
-					]
+							url: document.URL.split("&")[0],
+						},
+					],
 				};
-			})())
+			})()),
 		},
 		"/latest/": {
 			details: strings.latest.includes("{0}")
 				? strings.latest.split("{0}")[0]
 				: strings.latest,
-			state: strings.latest.split("{0}")[1]
+			state: strings.latest.split("{0}")[1],
 		},
 		"/search/": {
 			details: strings.searchFor,
 			state: document.querySelector<HTMLInputElement>(".searchInput > input")
 				?.value,
-			smallImageKey: "search"
+			smallImageKey: "search",
 		},
 		"jbv/(\\d*)/": {
 			...(await (async () => {
@@ -446,24 +446,24 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: isSeries ? strings.viewSeries : strings.viewMovies,
-							url: document.URL.split("&")[0]
-						}
-					]
+							url: document.URL.split("&")[0],
+						},
+					],
 				};
-			})())
+			})()),
 		},
 		"/referfriends/": {
 			details: strings.refer.includes("{0}")
 				? strings.refer.split("{0}")[0]
 				: strings.refer,
-			state: strings.refer.split("{0}")[1]
+			state: strings.refer.split("{0}")[1],
 		},
 		"/profiles/manage/": {
-			details: strings.profile
+			details: strings.profile,
 		},
 		"/YourAccount/": {
-			details: strings.account
-		}
+			details: strings.account,
+		},
 	};
 
 	if (showBrowsing) {

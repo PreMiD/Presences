@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "632293282847784973"
+		clientId: "632293282847784973",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -16,7 +16,7 @@ async function getStrings() {
 			classwork: "google classroom.classwork",
 			classmembersPrivate: "google classroom.classmembersPrivate",
 			classmembers: "google classroom.classmembers",
-			settings: "google classroom.settings"
+			settings: "google classroom.settings",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -28,12 +28,12 @@ let strings: Awaited<ReturnType<typeof getStrings>> = null,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname.split("/"),
 		[newLang, privacy] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
-			presence.getSetting<boolean>("privacy")
+			presence.getSetting<boolean>("privacy"),
 		]);
 
 	if (oldLang !== newLang) {

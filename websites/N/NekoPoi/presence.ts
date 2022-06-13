@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "795282263256203297"
+		clientId: "795282263256203297",
 	}),
 	path: string = document.location.pathname,
 	regex: string[] = path.match(/\/([a-z0-9\-._~%!$&'()*+,;=:@/]*)/),
@@ -11,7 +11,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "nekopoi",
-		startTimestamp: Date.now()
+		startTimestamp: Date.now(),
 	};
 
 	if (document.location.search.startsWith("?s")) {

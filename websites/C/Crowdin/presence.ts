@@ -1,19 +1,19 @@
 const presence = new Presence({
-		clientId: "848293229409337444"
+		clientId: "848293229409337444",
 	}),
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "crowdin",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, host, href } = document.location,
 		pathnameSplit = pathname.split("/"),
 		[showProject, showManager, showConversations] = await Promise.all([
 			presence.getSetting<boolean>("showProject"),
 			presence.getSetting<boolean>("showManager"),
-			presence.getSetting<boolean>("showConversations")
+			presence.getSetting<boolean>("showConversations"),
 		]);
 
 	switch (host) {
@@ -45,8 +45,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Read more",
-							url: href
-						}
+							url: href,
+						},
 					];
 				}
 			} else if (pathname.includes("/search")) {
@@ -64,8 +64,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View article",
-						url: href
-					}
+						url: href,
+					},
 				];
 			}
 
@@ -126,8 +126,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View tag",
-						url: href
-					}
+						url: href,
+					},
 				];
 			} else if (pathname.includes("/search")) {
 				presenceData.details = "Searching the blog";
@@ -140,8 +140,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View blog post",
-						url: href
-					}
+						url: href,
+					},
 				];
 			} else {
 				presenceData.details = "Unknown page";
@@ -168,8 +168,8 @@ presence.on("UpdateData", async () => {
 								label: "View project",
 								url:
 									document.location.origin +
-									pathnameSplit.filter((_, i) => i <= 2).join("/")
-							}
+									pathnameSplit.filter((_, i) => i <= 2).join("/"),
+							},
 						];
 					}
 					if (pathname.includes("/activity-stream"))
@@ -291,8 +291,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Translate project",
-						url: href
-					}
+						url: href,
+					},
 				];
 			} else if (pathname.includes("/profile")) {
 				if (document.querySelector(".error-page"))
@@ -322,15 +322,15 @@ presence.on("UpdateData", async () => {
 							// We can't just use href because own profile may not have the nickname at the end
 							url: `https://crowdin.com/profile/${
 								(profileNickname ?? profileName).textContent
-							}`
-						}
+							}`,
+						},
 					];
 				}
 			} else if (pathname.includes("/messages")) {
 				const participants = [
 						...document
 							.querySelector(".messages-members-status")
-							.querySelectorAll(".messages-single-member-status")
+							.querySelectorAll(".messages-single-member-status"),
 					]
 						.map(e => e.textContent)
 						// The elements already come with commas and spaces so we don't need to modify anything. This also accounts for the "X more" button and for single users
@@ -377,8 +377,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View release notes",
-						url: href
-					}
+						url: href,
+					},
 				];
 			} else if (pathname === "/features")
 				presenceData.details = "Viewing Crowdin's features";
@@ -392,8 +392,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View page",
-						url: href
-					}
+						url: href,
+					},
 				];
 			} else if (pathname.includes("/pricing"))
 				presenceData.details = "Viewing pricing";
@@ -420,7 +420,7 @@ async function getLanguageName(id: string) {
 	const languages = await fetch(
 		"https://api.crowdin.com/api/v2/languages?limit=500",
 		{
-			headers: { Accept: "application/json" }
+			headers: { Accept: "application/json" },
 		}
 	)
 		.then(

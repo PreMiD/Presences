@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "969716001090437120"
+		clientId: "969716001090437120",
 	}),
 	pages: { [k: string]: string } = {
 		"/animes": "Betrachtet alle Animes",
@@ -24,7 +24,7 @@ const presence = new Presence({
 		"/account/settings": "Account Einstellungen",
 		"/support/fragen": "Betrachtet Fragen & Antworten",
 		"/support": "Hilfe & Support bei AniWorld",
-		"/edit:information": "Neue Serieninformationen vorschlagen"
+		"/edit:information": "Neue Serieninformationen vorschlagen",
 	};
 let video,
 	timeEnd: number,
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		presenceData: PresenceData = {
 			largeImageKey: "aniworld-logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 	if (page === "/") presenceData.details = "Betrachtet die Startseite";
 	else if (page.startsWith("/anime/")) {
@@ -72,8 +72,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Anime",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 
 			video = document.querySelector<HTMLVideoElement>("video");

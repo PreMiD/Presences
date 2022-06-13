@@ -1,11 +1,11 @@
 const presence = new Presence({
-	clientId: "811305223783448627"
+	clientId: "811305223783448627",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "juke-crown",
-		buttons: [{ label: "Radio luisteren", url: document.location.href }]
+		buttons: [{ label: "Radio luisteren", url: document.location.href }],
 	};
 
 	if (document.querySelector("span[class*=eC-title]")) {
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "playing";
 		presenceData.smallImageText = "Wordt afgespeeld";
 		presenceData.buttons = [
-			{ label: "Ook radio luisteren", url: document.location.href }
+			{ label: "Ook radio luisteren", url: document.location.href },
 		];
 	} else if (document.querySelector("[class*=spinner]")) {
 		presenceData.smallImageKey = "waiting";

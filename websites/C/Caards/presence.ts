@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "887975742812590120"
+		clientId: "887975742812590120",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
 			largeImageKey: "caards_logo",
-			details: "Viewing unsupported page"
+			details: "Viewing unsupported page",
 		};
 
 	switch (document.location.hostname) {
@@ -21,8 +21,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Partners",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			} else if (document.location.pathname === "/popular") {
 				presenceData.details = "Viewing:";
@@ -30,8 +30,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Popular Caards",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			} else if (document.location.pathname.includes("feed"))
 				presenceData.details = "Viewing feed";
@@ -44,8 +44,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Profile",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			} else if (document.location.pathname === "/me/settings") {
 				const tab = document.querySelector("button.B01")?.textContent;
@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Themes",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			} else if (document.location.pathname.includes("/t/")) {
 				const [, theme] = document.location.href.split("/t/");
@@ -67,8 +67,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: `View ${theme}`,
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			} else {
 				switch (document.location.pathname) {

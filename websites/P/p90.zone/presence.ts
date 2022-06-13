@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "633714339999645737"
+	clientId: "633714339999645737",
 });
 
 function getTimestamps(curr: number, dura: number): number[] {
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		strings = await presence.getStrings({
 			playing: "presence.playback.playing",
 			paused: "presence.playback.paused",
-			browsing: "presence.activity.browsing"
+			browsing: "presence.activity.browsing",
 		});
 
 	if (video) {
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).paused
-					: (await strings).playing
+					: (await strings).playing,
 			};
 
 		if (video.paused) {

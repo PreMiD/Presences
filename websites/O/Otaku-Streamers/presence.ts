@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "719985436075753492"
+		clientId: "719985436075753492",
 	}),
 	path = window.location.pathname,
 	browsingTimestamp = Math.floor(Date.now() / 1000);
@@ -8,7 +8,7 @@ let title, video, timestamps, chapter, blog;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "otaku-streamers.com") {
 		presenceData.largeImageKey = "betalogo";

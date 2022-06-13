@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "605119835751579649"
+		clientId: "605119835751579649",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 presence.on("UpdateData", async () => {
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 					? (await strings).pause
 					: (await strings).play,
 				startTimestamp,
-				endTimestamp
+				endTimestamp,
 			};
 
 		//* Remove timestamps if paused

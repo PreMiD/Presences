@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "645028677033132033"
+		clientId: "645028677033132033",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	{ language } = window.navigator; //Make this change-able with presence settings
@@ -158,7 +158,7 @@ async function getShortURL(url: string) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "plex",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.querySelector("#plex")) {

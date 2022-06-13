@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "641394369651277834"
+		clientId: "641394369651277834",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -12,7 +12,7 @@ let user: HTMLElement, title: HTMLElement | string, search: HTMLInputElement;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "globo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "globoplay.globo.com") {

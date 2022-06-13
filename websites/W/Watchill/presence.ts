@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "646716119289298984"
+		clientId: "646716119289298984",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	pages: { [page: string]: string } = {
 		"/": "Ana Sayfa",
@@ -13,7 +13,7 @@ const presence = new Presence({
 		"/register": "Kayıt Ol",
 		"/collections": "Listeler",
 		"/timeline": "Akış",
-		"/profile": "Profilim"
+		"/profile": "Profilim",
 	};
 
 presence.on("UpdateData", async () => {
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "wh-logo",
 			details: "Bir diziyi inceliyor:",
 			state: showTitle.textContent || "Bilinmeyen",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (
 		page.includes("/user/") &&
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "wh-logo",
 			details: "Bir üyenin profiline bakıyor:",
 			state: username.textContent.trim() || "Bilinmeyen",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/search/")) {
 		presence.setActivity({
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 					.map(i => i[0].toUpperCase() + i.slice(1).toLowerCase())
 					.join(" ") || "Bilinmeyen",
 			startTimestamp: Math.floor(Date.now() / 1000),
-			smallImageKey: "search"
+			smallImageKey: "search",
 		});
 	} else if (page.includes("/category/")) {
 		const categoryName = document.querySelector(
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 				categoryName && categoryName.textContent !== ""
 					? categoryName.textContent.replace("Dizileri", "")
 					: "Bilinmeyen",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/movie/") && video) {
 		const title = document.querySelector(
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause
-					: (await strings).play
+					: (await strings).play,
 			};
 
 		if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause
-					: (await strings).play
+					: (await strings).play,
 			};
 
 		if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
@@ -152,14 +152,14 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "wh-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
 			largeImageKey: "wh-logo",
 			details: "Bir sayafaya göz atıyor:",
 			state: "Ana Sayfa",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 });

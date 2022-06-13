@@ -56,7 +56,7 @@ const classNames = {
 	20: "Snake Oiler",
 	23: "Gelatinous Noob",
 	24: "Vampyre",
-	25: "Plumber"
+	25: "Plumber",
 } as { [id: number]: string };
 
 function formatDetails() {
@@ -77,13 +77,13 @@ function generateButtons() {
 	return [
 		{
 			label: "Visit profile",
-			url: `https://kingdomofloathing.com/showplayer.php?who=${kolStatus.playerid}`
-		}
+			url: `https://kingdomofloathing.com/showplayer.php?who=${kolStatus.playerid}`,
+		},
 	];
 }
 
 const presence = new Presence({
-	clientId: "814073263378137097"
+	clientId: "814073263378137097",
 });
 
 function setActivity(state: string) {
@@ -91,7 +91,7 @@ function setActivity(state: string) {
 		details: formatDetails(),
 		state,
 		largeImageKey: "kol",
-		buttons: generateButtons()
+		buttons: generateButtons(),
 	} as PresenceData);
 }
 

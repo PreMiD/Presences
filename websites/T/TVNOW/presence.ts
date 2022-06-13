@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "640275259282686015"
+		clientId: "640275259282686015",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "tv"
+			largeImageKey: "tv",
 		};
 
 	if (document.querySelector("#bitmovinplayer-video-player_container")) {

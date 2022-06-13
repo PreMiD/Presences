@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "631543282601558046"
+		clientId: "631543282601558046",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "akinator",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (document.location.pathname) {

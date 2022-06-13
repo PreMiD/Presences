@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "857964031700238356"
+		clientId: "857964031700238356",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "wrt_icon",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
 
@@ -48,8 +48,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Lihat Manga",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/manga/")) {
 		const mangaName =
@@ -61,8 +61,8 @@ presence.on("UpdateData", async () => {
 			{
 				label:
 					pathname === "/manga/" ? "Lihat Daftar Manga" : "Lihat Detail Manga",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/bookmark/"))
 		presenceData.details = "Membuka Bookmarks";

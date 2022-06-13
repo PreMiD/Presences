@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "784954155747377162"
+		clientId: "784954155747377162",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "latex",
 			smallImageKey: "whitelogo",
 			smallImageText: "Overleaf",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		pth = window.location.pathname.toLowerCase();
 

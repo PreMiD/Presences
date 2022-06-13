@@ -1,16 +1,16 @@
 const presence: Presence = new Presence({
-		clientId: "632479205707350037"
+		clientId: "632479205707350037",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "large_img",
-			startTimestamp
+			startTimestamp,
 		},
 		url = window.location.href;
 	if (url.includes("/watch/")) {

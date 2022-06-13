@@ -63,7 +63,7 @@ class AppleTV extends Presence {
 }
 
 const presence = new AppleTV({
-		clientId: "835157562432290836"
+		clientId: "835157562432290836",
 	}),
 	data: {
 		startedSince: number;
@@ -79,7 +79,7 @@ const presence = new AppleTV({
 		};
 	} = {
 		presence: {},
-		startedSince: Math.floor(Date.now() / 1000)
+		startedSince: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "apple-tv",
 		details: "Browsing...",
 		smallImageKey: "browse",
-		startTimestamp: data.startedSince
+		startTimestamp: data.startedSince,
 	};
 
 	data.presence = {
@@ -114,8 +114,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Show",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 
 					if (video.paused) {
@@ -129,11 +129,11 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Show",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
-			}
+			},
 		},
 		"/movie/([a-zA-Z0-9-]+)": {
 			setPresenceData() {
@@ -151,8 +151,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Movie",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 
 					if (video.paused) {
@@ -166,11 +166,11 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Movie",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
-			}
+			},
 		},
 		"/person/([a-zA-Z0-9-]+)": {
 			setPresenceData() {
@@ -178,31 +178,31 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector(
 					"div.person-header__bio > h1"
 				)?.textContent;
-			}
+			},
 		},
 		"/settings": {
 			setPresenceData() {
 				presenceData.details = "Viewing their settings";
-			}
-		}
+			},
+		},
 	};
 
 	data.settings = [
 		{
 			id: "timestamp",
 			delete: true,
-			data: ["startTimestamp", "endTimestamp"]
+			data: ["startTimestamp", "endTimestamp"],
 		},
 		{
 			id: "buttons",
 			delete: true,
-			data: ["buttons"]
+			data: ["buttons"],
 		},
 		{
 			id: "smallImage",
 			delete: true,
-			data: ["smallImageKey"]
-		}
+			data: ["smallImageKey"],
+		},
 	];
 
 	let presenceSelect;

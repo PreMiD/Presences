@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "827910536049852488"
+		clientId: "827910536049852488",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement, title: HTMLElement;
@@ -7,7 +7,7 @@ let search: HTMLInputElement, title: HTMLElement;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		page = window.location.pathname;
 	if (page === "/") {
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Category:";
 			presenceData.state = title.textContent;
 			presenceData.buttons = [
-				{ label: "View Category", url: window.location.href }
+				{ label: "View Category", url: window.location.href },
 			];
 		}
 	} else if (page === "/community") presenceData.details = "Viewing the forums";
@@ -43,20 +43,20 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Reading Forum Thread:";
 		presenceData.state = title.textContent;
 		presenceData.buttons = [
-			{ label: "View Thread", url: window.location.href }
+			{ label: "View Thread", url: window.location.href },
 		];
 	} else if (page.includes("/friends/")) {
 		title = document.querySelector("#main > h2");
 		if (title.textContent === "Your Friends") {
 			presenceData.details = "Viewing their friends";
 			presenceData.buttons = [
-				{ label: "View Friends", url: window.location.href }
+				{ label: "View Friends", url: window.location.href },
 			];
 		} else {
 			presenceData.details = "Viewing the friends of:";
 			presenceData.state = title.textContent;
 			presenceData.buttons = [
-				{ label: "View Friends", url: window.location.href }
+				{ label: "View Friends", url: window.location.href },
 			];
 		}
 	} else if (page.includes("/user/")) {
@@ -64,14 +64,14 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing the profile of:";
 		presenceData.state = title.textContent;
 		presenceData.buttons = [
-			{ label: "View Profile", url: window.location.href }
+			{ label: "View Profile", url: window.location.href },
 		];
 	} else if (page.includes("/author/")) {
 		title = document.querySelector("#categorylisting > h2 > a");
 		presenceData.details = "Viewing Games Made By:";
 		presenceData.state = title.textContent;
 		presenceData.buttons = [
-			{ label: "View Profile", url: window.location.href }
+			{ label: "View Profile", url: window.location.href },
 		];
 	} else if (page === "/register" || page === "/register/")
 		presenceData.details = "Registering";
@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing:";
 		presenceData.state = "All Games";
 		presenceData.buttons = [
-			{ label: "Browse Games", url: window.location.href }
+			{ label: "Browse Games", url: window.location.href },
 		];
 	} else if (page.includes("game")) {
 		title = document.querySelector(

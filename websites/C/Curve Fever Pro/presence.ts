@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "775356824240128021"
+		clientId: "775356824240128021",
 	}),
 	skinNames = new Map<string, string>()
 		.set("Angel", "angel")
@@ -32,7 +32,7 @@ const presenceData: PresenceData = {
 	largeImageKey: "index",
 	startTimestamp: Date.now(),
 	details: "Main Menu",
-	state: "Just Started Playing"
+	state: "Just Started Playing",
 };
 
 presence.on("UpdateData", async () => {

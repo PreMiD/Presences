@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "928142086446923798"
+		clientId: "928142086446923798",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		cover = await presence.getSetting<boolean>("cover"),
 		shortTitle = document.title.match(/(.*) -/)[1],

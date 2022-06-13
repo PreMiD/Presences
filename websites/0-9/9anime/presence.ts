@@ -1,15 +1,15 @@
 const presence = new Presence({
-		clientId: "934701636251680768"
+		clientId: "934701636251680768",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	});
 let video = {
 	duration: 0,
 	currentTime: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -21,7 +21,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "9anime"
+		largeImageKey: "9anime",
 	};
 
 	if (

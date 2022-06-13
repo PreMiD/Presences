@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "796446671617130567"
+		clientId: "796446671617130567",
 	}),
 	timeS = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			smallImageKey: "teaching",
-			smallImageText: "OpenClassrooms"
+			smallImageText: "OpenClassrooms",
 		},
 		webpath = window.location.pathname.toLowerCase();
 

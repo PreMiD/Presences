@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "860857600203554816"
+		clientId: "860857600203554816",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo_anime",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search, href } = document.location,
 		fav: HTMLDivElement = document.querySelector(".favFixed");
@@ -70,8 +70,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Vendo Sinopse",
-							url: href
-						}
+							url: href,
+						},
 					];
 				} else {
 					const anime: HTMLHeadingElement = document.querySelector(
@@ -90,8 +90,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Assistir Episódio",
-								url: href
-							}
+								url: href,
+							},
 						];
 					}
 				}

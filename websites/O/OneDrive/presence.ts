@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
 		fileType = title[1].replace("Microsoft", "").replace("Online", "").trim(),
 		presenceData: PresenceData = {
 			largeImageKey: "onedrive-logo",
-			startTimestamp: Math.round(Date.now() / 1000)
+			startTimestamp: Math.round(Date.now() / 1000),
 		};
 
 	if (fileType === "OneDrive") {

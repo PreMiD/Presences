@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "702935358395908168"
+		clientId: "702935358395908168",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "runo3",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "runo.pw") {
 		if (document.location.pathname.startsWith("/index")) {

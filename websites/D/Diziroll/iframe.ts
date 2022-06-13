@@ -6,7 +6,7 @@ iframe.on("UpdateData", () => {
 		return iframe.send({
 			duration: vidyo.duration,
 			currentTime: vidyo.currentTime,
-			paused: vidyo.paused
+			paused: vidyo.paused,
 		});
 	}
 });

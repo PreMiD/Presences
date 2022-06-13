@@ -27,7 +27,6 @@
 		"quotes": ["error", "double", { "avoidEscape": true }],
 		"camelcase": ["error", { "properties": "always" }],
 		"curly": ["error", "multi-or-nest"],
-		"comma-dangle": ["error", "never"],
 		"one-var": ["error", "consecutive"],
 		"linebreak-style": ["error", "unix"],
 		"prefer-const": "error",
@@ -64,9 +63,9 @@
 		"prefer-arrow-callback": "off",
 		"no-one-time-vars/no-one-time-vars": [
 			2,
-			{ 
-				"ignoredVariables": ["browsingTimestamp"], 
-				"ignoreObjectDestructuring": true 
+			{
+				"ignoredVariables": ["browsingTimestamp"],
+				"ignoreObjectDestructuring": true
 			}
 		],
 		"radix": "off",

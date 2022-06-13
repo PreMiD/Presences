@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "655050505726197781"
+		clientId: "655050505726197781",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "probot",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/")
@@ -16,8 +16,8 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Go to Dashboard",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/commands")) {
 		presenceData.details = "Viewing a page:";
@@ -25,8 +25,8 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "View ProBot Commands",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("premium")) {
 		if (document.location.pathname.includes("/manage"))
@@ -48,8 +48,8 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "View the leaderboard",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/credits")) {
 		presenceData.details = "Viewing leaderboard:";
@@ -57,8 +57,8 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "View the leaderboard",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/daily"))
 		presenceData.details = "Claiming their daily credits";
@@ -70,24 +70,24 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Read the Terms of Use",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("privacy-policy")) {
 		presenceData.details = "Reading the Privacy Policy";
 		presenceData.buttons = [
 			{
 				label: "Read the Privacy Policy",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("refund-policy")) {
 		presenceData.details = "Reading the Refund Policy";
 		presenceData.buttons = [
 			{
 				label: "Read the Refund Policy",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/server/")) {
 		presenceData.smallImageKey = "probot";

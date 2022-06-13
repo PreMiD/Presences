@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "721266123282317333"
+		clientId: "721266123282317333",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "spiderum"
+		largeImageKey: "spiderum",
 	};
 
 	if (document.location.hostname === "spiderum.com") {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "912784051801301053"
+		clientId: "912784051801301053",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 		lang = path.pathname.substring(1, 6),
 		presenceData: PresenceData = {
 			largeImageKey: "index",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	switch (path.hostname) {
@@ -94,8 +94,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: `${lang === "th-th" ? "ดูซีรีส์" : "Watch Series"}`,
-								url: document.location.href.replace(/#\d+/, "")
-							}
+								url: document.location.href.replace(/#\d+/, ""),
+							},
 						];
 					}
 					break;
@@ -106,8 +106,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: `${lang === "th-th" ? "ดูหนัง" : "Watch Movies"}`,
-								url: document.location.href.replace(/#\d+/, "")
-							}
+								url: document.location.href.replace(/#\d+/, ""),
+							},
 						];
 					}
 					break;
@@ -138,8 +138,8 @@ presence.on("UpdateData", async () => {
 								label: `${
 									lang === "th-th" ? "ดูทีวีออนไลน์" : "Watch tv online"
 								}`,
-								url: document.location.href.replace(/#\d+/, "")
-							}
+								url: document.location.href.replace(/#\d+/, ""),
+							},
 						];
 					}
 					break;

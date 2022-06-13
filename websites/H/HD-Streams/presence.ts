@@ -98,11 +98,11 @@ const matchYoutubeUrl = (url: string): boolean =>
 								{
 									movie: "buttonViewMovie",
 									series: "buttonViewSeries",
-									other: "buttonViewPage"
+									other: "buttonViewPage",
 								}[type]
 							],
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 				return data;
 			},
@@ -110,7 +110,7 @@ const matchYoutubeUrl = (url: string): boolean =>
 				if (data.startTimestamp) delete data.startTimestamp;
 				if (data.endTimestamp) delete data.endTimestamp;
 				if (data.state) delete data.state;
-			}
+			},
 		},
 		{
 			middleware: ref =>
@@ -125,14 +125,14 @@ const matchYoutubeUrl = (url: string): boolean =>
 				data.buttons = [
 					{
 						label: strings.buttonViewPage,
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 				return data;
 			},
 			destroy: data => {
 				if (data.buttons) delete data.buttons;
-			}
+			},
 		},
 		{
 			middleware: ref =>
@@ -149,7 +149,7 @@ const matchYoutubeUrl = (url: string): boolean =>
 					seasons: "Series Seasons",
 					actors: "Actors",
 					popular: "Popular Series/Movies",
-					cinema: "Cinema titles"
+					cinema: "Cinema titles",
 				}[
 					location.pathname.match(
 						/^\/(movies|series|seasons|actors|popular|cinema)$/i
@@ -157,7 +157,7 @@ const matchYoutubeUrl = (url: string): boolean =>
 				];
 				data.smallImageKey = images.SEARCH;
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.location.hostname.match(/hd-streams/i),
@@ -167,11 +167,11 @@ const matchYoutubeUrl = (url: string): boolean =>
 				delete data.state;
 				data.smallImageKey = images.BROWSE;
 				return data;
-			}
-		}
+			},
+		},
 	],
 	presence = new Presence({
-		clientId: "825696879223635988"
+		clientId: "825696879223635988",
 	});
 
 let lastPageIndex: number,
@@ -183,7 +183,7 @@ const IMAGES = {
 	PLAY: "playx1024",
 	PAUSE: "pausex1024",
 	BROWSE: "browsex1024",
-	SEARCH: "searchx1024"
+	SEARCH: "searchx1024",
 };
 presence.on("iFrameData", (data: VideoContext) => {
 	frameData = data;
@@ -203,7 +203,7 @@ presence.on("UpdateData", async () => {
 				viewPage: "general.viewPage",
 				playing: "general.playing",
 				searching: "general.search",
-				searchFor: "general.searchFor"
+				searchFor: "general.searchFor",
 			},
 			newLang
 		);
@@ -223,13 +223,13 @@ presence.on("UpdateData", async () => {
 		context.exec(
 			presence,
 			{
-				largeImageKey: IMAGES.LOGO
+				largeImageKey: IMAGES.LOGO,
 			},
 			{
 				frame: frameData,
 				strings: localizedStrings,
 				query,
-				images: IMAGES
+				images: IMAGES,
 			}
 		)
 	)
@@ -246,7 +246,7 @@ presence.on("UpdateData", async () => {
 			if (!data) {
 				presence.setActivity({
 					largeImageKey: IMAGES.LOGO,
-					state: localizedStrings.browsing
+					state: localizedStrings.browsing,
 				});
 			} else {
 				if (data.details) presence.setActivity(data);

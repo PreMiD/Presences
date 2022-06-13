@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "812656134120931330"
+		clientId: "812656134120931330",
 	}),
 	getStrings = async () =>
 		presence.getStrings(
 			{
 				play: "general.playing",
-				pause: "general.paused"
+				pause: "general.paused",
 			},
 			await presence.getSetting<string>("lang")
 		),
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "radiooooo_logo",
 			details: "Idling",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		audio = document.querySelector("audio");
 
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			[songDetails, songState, newLang] = await Promise.all([
 				presence.getSetting<string>("song1"),
 				presence.getSetting<string>("song2"),
-				presence.getSetting<string>("lang")
+				presence.getSetting<string>("lang"),
 			]);
 
 		if (oldLang !== newLang || !strings) {

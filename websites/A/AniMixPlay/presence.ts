@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "787739407720513596"
+		clientId: "787739407720513596",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -35,7 +35,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo-v2",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (location.pathname === "/") {
@@ -98,8 +98,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Episode",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 
 			if (paused) {

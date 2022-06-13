@@ -43,7 +43,7 @@ const readFile = (path: string): string =>
 	 */
 	writeJson = <T>(data: T, jsonPath: string): void =>
 		writeFileSync(jsonPath, JSON.stringify(data, null, "\t"), {
-			encoding: "utf8"
+			encoding: "utf8",
 		}),
 	increaseSemver = async (changedPresenceFiles: string[]): Promise<void> => {
 		for (const path of changedPresenceFiles) {
@@ -68,7 +68,7 @@ const readFile = (path: string): string =>
 									version
 								}
 							}
-						}`
+						}`,
 						})
 					).data.data.presences[0]?.metadata.version;
 

@@ -17,7 +17,7 @@
 	},
 	"url": "namemc.com",
 	"regExp": "([a-z0-9-]+[.])*namemc[.]com[/]",
-	"version": "2.0.8",
+	"version": "2.0.9",
 	"logo": "https://i.imgur.com/9JDmZaF.png",
 	"thumbnail": "https://i.imgur.com/XIZsGTQ.png",
 	"color": "#000000",

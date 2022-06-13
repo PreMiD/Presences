@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "630462023003799583"
+		clientId: "630462023003799583",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		live: "presence.activity.live",
 	});
 
 function getTime(list: string[]): number {
@@ -21,7 +21,7 @@ function getTimestamps(audioTime: string, audioDuration: string): number[] {
 		Math.floor(startTime / 1000),
 		Math.floor(startTime / 1000) -
 			getTime(audioTime.split(":").reverse()) +
-			getTime(audioDuration.split(":").reverse())
+			getTime(audioDuration.split(":").reverse()),
 	];
 }
 
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 			smallImageKey,
 			smallImageText,
 			startTimestamp,
-			endTimestamp
+			endTimestamp,
 		},
 		playing
 	);

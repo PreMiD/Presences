@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "867411016836186112"
+		clientId: "867411016836186112",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	}),
 	path = document.location.pathname,
 	browsingTimestamp = Math.floor(Date.now() / 1000);
@@ -12,7 +12,7 @@ const presence = new Presence({
 let video = {
 	duration: 0,
 	currentTime: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -25,7 +25,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (path.includes("/liste-danimes")) {
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Regarder l'épisode",
-					url: document.location.href
+					url: document.location.href,
 				},
 				{
 					label: "Voir l'anime",
@@ -80,8 +80,8 @@ presence.on("UpdateData", async () => {
 						.querySelector(
 							"#manga-reading-nav-head > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li:nth-child(2) > a"
 						)
-						.getAttribute("href")
-				}
+						.getAttribute("href"),
+				},
 			];
 			if (video.paused) {
 				delete presenceData.startTimestamp;

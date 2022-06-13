@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "764198138495893554"
+	clientId: "764198138495893554",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "unsplash_logo"
+		largeImageKey: "unsplash_logo",
 	};
 
 	if (document.location.pathname === "/")

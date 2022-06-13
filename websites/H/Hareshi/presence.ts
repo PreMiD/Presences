@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "944271713997324339"
+		clientId: "944271713997324339",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,12 +9,12 @@ presence.on("UpdateData", async () => {
 	const [timestamps, privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: "hareshi",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 	if (document.location.hostname === "www.hareshi.net") {
 		switch (pathArray[3]) {
@@ -149,8 +149,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `ดู${page}`,
-					url: document.location.href.replace(/#\d+/, "")
-				}
+					url: document.location.href.replace(/#\d+/, ""),
+				},
 			];
 		}
 	}

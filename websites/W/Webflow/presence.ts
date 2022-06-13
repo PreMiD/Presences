@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "775333674563403838"
+	clientId: "775333674563403838",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "webflow_logo"
+		largeImageKey: "webflow_logo",
 	};
 
 	if (document.location.hostname.includes("preview.webflow.com")) {

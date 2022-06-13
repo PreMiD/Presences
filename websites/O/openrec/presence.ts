@@ -1,13 +1,13 @@
 const presence = new Presence({
-		clientId: "612652426180296849"
+		clientId: "612652426180296849",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		live: "presence.activity.live",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 presence.on("UpdateData", async () => {
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		});
 	}
 });

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "629093766170411014"
+		clientId: "629093766170411014",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement, search: HTMLInputElement, title: HTMLElement | string;
@@ -7,7 +7,7 @@ let user: HTMLElement, search: HTMLInputElement, title: HTMLElement | string;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "hypixel",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	switch (document.location.hostname) {
 		case "hypixel.net": {

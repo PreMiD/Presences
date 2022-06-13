@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "719784356725653504"
+	clientId: "719784356725653504",
 });
 
 interface QuizletData {
@@ -21,7 +21,7 @@ let qzData: QuizletData = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "quizlet"
+			largeImageKey: "quizlet",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 
@@ -45,8 +45,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Profile",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 				actionTimestamp = null;
@@ -73,8 +73,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "View Set",
-									url: document.URL
-								}
+									url: document.URL,
+								},
 							];
 						}
 						break;

@@ -1,8 +1,8 @@
 const presence = new Presence({
-	clientId: "651406405093425152"
+	clientId: "651406405093425152",
 });
 let presenceData: PresenceData = {
-	largeImageKey: "logo"
+	largeImageKey: "logo",
 };
 
 presence.on("UpdateData", async () => {
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Looking at the download page";
 	else {
 		presenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		};
 	}
 	presence.setActivity(presenceData);

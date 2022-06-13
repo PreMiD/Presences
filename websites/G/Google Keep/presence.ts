@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "928068375031214170"
+		clientId: "928068375031214170",
 	}),
 	timer = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "keep_logo",
-			startTimestamp: timer
+			startTimestamp: timer,
 		},
 		{ hash, href } = document.location,
 		id = href.split("/")[4],

@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "761889098490183691"
+		clientId: "761889098490183691",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 let songName: HTMLElement,
@@ -13,7 +13,7 @@ let songName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	songName = document.querySelector(

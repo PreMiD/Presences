@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "941317056589086730"
+		clientId: "941317056589086730",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (new URLSearchParams(window.location.search).has("q")) {
@@ -35,8 +35,8 @@ presence.on("UpdateData", async () => {
 				label: "Read along",
 				url: `${document.URL}&p=${document
 					.querySelector("span[class='current-page']")
-					.textContent.trim()}`
-			}
+					.textContent.trim()}`,
+			},
 		];
 	} else if (document.location.pathname.includes("/stats")) {
 		presenceData.smallImageKey = "read";

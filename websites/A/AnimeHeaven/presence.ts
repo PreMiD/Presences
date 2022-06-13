@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "816042675626442783"
+		clientId: "816042675626442783",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -31,8 +31,8 @@ const paths = {
 			presenceData.buttons = [
 				{
 					label: "Current Episode",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 
 			const link =
@@ -40,7 +40,7 @@ const paths = {
 			if (link) {
 				presenceData.buttons.push({
 					label: "Episode List",
-					url: link
+					url: link,
 				});
 			}
 		}
@@ -114,7 +114,7 @@ const paths = {
 	},
 	"/"(presenceData: PresenceData) {
 		presenceData.state = "Viewing landing page...";
-	}
+	},
 };
 
 presence.on("UpdateData", async () => {
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
 			state: "Browsing...",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	let playback = true;

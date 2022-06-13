@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "808667100319186964"
+		clientId: "808667100319186964",
 	}),
 	elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: elapsed
+			startTimestamp: elapsed,
 		},
 		path = window.location.href;
 

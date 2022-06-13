@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "937350108780052571"
+		clientId: "937350108780052571",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		showTime = await presence.getSetting<boolean>("stamp"),
 		langLabel = document.querySelectorAll(

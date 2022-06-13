@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "622163652207706122"
+		clientId: "622163652207706122",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: Date.now()
+		startTimestamp: Date.now(),
 	};
 
 presence.on("UpdateData", () => {

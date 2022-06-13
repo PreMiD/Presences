@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "917868456232230932"
+		clientId: "917868456232230932",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,11 +7,11 @@ presence.on("UpdateData", async () => {
 	const [privacyMode, showTime, showButtons] = await Promise.all([
 			presence.getSetting<boolean>("privacyMode"),
 			presence.getSetting<boolean>("showTime"),
-			presence.getSetting<boolean>("showButtons")
+			presence.getSetting<boolean>("showButtons"),
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: showTime ? browsingTimestamp : null
+			startTimestamp: showTime ? browsingTimestamp : null,
 		},
 		searchText = document.querySelector("#search-text").textContent;
 
@@ -45,8 +45,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Перейти к статье",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -64,8 +64,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Перейти к правке",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -83,8 +83,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Перейти в категорию",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -147,8 +147,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Войти в портал",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -170,8 +170,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Перейти к книге",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -200,8 +200,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Перейти к пользователю",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}

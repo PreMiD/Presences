@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "817385570912174121"
+		clientId: "817385570912174121",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "image"
+			largeImageKey: "image",
 		},
 		showISP = await presence.getSetting<boolean>("showISP");
 

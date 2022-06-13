@@ -284,10 +284,10 @@ const // official website
 		play: "play",
 		read: "reading",
 		search: "search",
-		write: "writing"
+		write: "writing",
 	},
 	presenceData: PresenceData = {
-		largeImageKey: PRESENCE_ART_ASSETS.logo
+		largeImageKey: PRESENCE_ART_ASSETS.logo,
 	};
 
 let presence: Presence, ApiClient: ApiClient;
@@ -827,7 +827,7 @@ async function init(): Promise<void> {
 
 	if (validPage) {
 		presence = new Presence({
-			clientId: "671807692297207828"
+			clientId: "671807692297207828",
 		});
 
 		if (isWebClient) presence.info("Emby web client detected");

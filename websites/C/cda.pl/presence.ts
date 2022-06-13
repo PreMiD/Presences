@@ -1,18 +1,18 @@
 const presence = new Presence({
-		clientId: "783068812635013180"
+		clientId: "783068812635013180",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	getTimestamps = (videoTime: number, videoDuration: number): number[] => {
 		return [
 			Math.floor(Date.now() / 1000),
-			Math.floor(Date.now() / 1000) - videoTime + videoDuration
+			Math.floor(Date.now() / 1000) - videoTime + videoDuration,
 		];
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		pathname: string = document.location.pathname.toLowerCase();
 

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "972073369564483584"
+		clientId: "972073369564483584",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -18,7 +18,7 @@ async function getStrings() {
 			readingAbout: "general.readingAbout",
 			searchSomething: "general.searchSomething",
 			buttonWatchVideo: "general.buttonWatchVideo",
-			buttonViewEpisode: "general.buttonViewEpisode"
+			buttonViewEpisode: "general.buttonViewEpisode",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		presenceData: PresenceData = {
 			largeImageKey: "main",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		title =
 			document.querySelector(
@@ -60,8 +60,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonWatchVideo,
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 				break;
 			}
@@ -93,8 +93,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonViewEpisode,
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 				break;
 			}

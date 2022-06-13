@@ -1,12 +1,12 @@
 const presence = new Presence({
-	clientId: "843060416208306196"
+	clientId: "843060416208306196",
 });
 
 let showName: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (

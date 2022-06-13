@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "696085711148941344"
+		clientId: "696085711148941344",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 let iFrameVideo: boolean,
 	currentTime: number,
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 	if (elapsed) browsingTimestamp = Math.floor(Date.now() / 1000);
 
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 	if (info) {
 		switch (document.location.pathname) {
@@ -122,12 +122,12 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "Current Episode",
-									url: document.location.href
+									url: document.location.href,
 								},
 								{
 									label: "First Episode",
-									url: `https://gogo-stream.com${firstVideo}`
-								}
+									url: `https://gogo-stream.com${firstVideo}`,
+								},
 							];
 						}
 						if (iFrameVideo && !isNaN(duration) && title && video) {

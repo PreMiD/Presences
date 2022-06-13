@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "973027832307535952"
+		clientId: "973027832307535952",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "stats_fm",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location;
 	switch (true) {
@@ -19,8 +19,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Album",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 			break;
 		}
@@ -30,8 +30,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Artist",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 			break;
 		}
@@ -41,8 +41,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Track",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 			break;
 		}
@@ -51,8 +51,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 			break;
 		}
@@ -61,8 +61,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 			break;
 		}
@@ -71,8 +71,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 			break;
 		}

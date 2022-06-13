@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "662715886662057994"
+		clientId: "662715886662057994",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "enthix.net") {
 		presenceData.details = "Viewing Home Page";
