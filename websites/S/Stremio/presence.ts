@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "969208766807547917"
+		clientId: "969208766807547917",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,13 +11,13 @@ let timestamp: [number, number],
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ hostname, href } = document.location,
 		[privacy, thumbnails, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("thumbnails"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		active = document.querySelector(
 			"[class='ng-binding ng-scope selected']"
@@ -39,8 +39,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Video",
-					url: href
-				}
+					url: href,
+				},
 			];
 			if (thumbnails) {
 				presenceData.largeImageKey =
@@ -66,8 +66,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Browse Addons",
-						url: href
-					}
+						url: href,
+					},
 				];
 				presenceData.details = `Browsing ${title}`;
 			}
@@ -81,8 +81,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Browse",
-						url: href
-					}
+						url: href,
+					},
 				];
 				presenceData.details = `Browsing: ${active}`;
 			} else presenceData.state = "Browsing Movies";
@@ -93,15 +93,15 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Library",
-					url: href
-				}
+					url: href,
+				},
 			];
 		} else if (href.includes("/calendar")) {
 			presenceData.buttons = [
 				{
 					label: "View Calendar",
-					url: href
-				}
+					url: href,
+				},
 			];
 			presenceData.details = "Calendar";
 		} else if (href.includes("player")) {
@@ -142,8 +142,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Join View Party",
-					url: href
-				}
+					url: href,
+				},
 			];
 		} else if (href === "https://app.strem.io/#/")
 			presenceData.details = "Viewing the homepage";
