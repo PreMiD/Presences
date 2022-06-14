@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const [privacyMode, showTime] = await Promise.all([
 			presence.getSetting<boolean>("privacyMode"),
-			presence.getSetting<boolean>("showTime")
+			presence.getSetting<boolean>("showTime"),
 		]),
 		presenceData: PresenceData = {
 			details: "Делает что-то на Фугапедии",
