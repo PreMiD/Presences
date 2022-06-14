@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "968880591003082783"
+		clientId: "968880591003082783",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/7V0kxEb.png",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	const path = document.location.pathname.toLowerCase(),
@@ -29,43 +29,43 @@ presence.on("UpdateData", async () => {
 			"/calendars/my": { details: "Browsing my calendar" },
 			"/calendars/my/shows": {
 				details: "Browsing my calendar",
-				state: "Shows"
+				state: "Shows",
 			},
 			"/calendars/my/premieres": {
 				details: "Browsing my calendar",
-				state: "Premieres"
+				state: "Premieres",
 			},
 			"/calendars/my/new-shows": {
 				details: "Browsing my calendar",
-				state: "New shows"
+				state: "New shows",
 			},
 			"/calendars/my/movies": {
 				details: "Browsing my calendar",
-				state: "Movies"
+				state: "Movies",
 			},
 			"/calendars/my/dvd": {
 				details: "Browsing my calendar",
-				state: "DVD & Blu-ray"
+				state: "DVD & Blu-ray",
 			},
 			"/calendars/shows": {
 				details: "Browsing calendar",
-				state: "Shows"
+				state: "Shows",
 			},
 			"/calendars/premieres": {
 				details: "Browsing calendar",
-				state: "Premieres"
+				state: "Premieres",
 			},
 			"/calendars/new-shows": {
 				details: "Browsing calendar",
-				state: "New shows"
+				state: "New shows",
 			},
 			"/calendars/movies": {
 				details: "Browsing calendar",
-				state: "Movies"
+				state: "Movies",
 			},
 			"/calendars/dvd": {
 				details: "Browsing calendar",
-				state: "DVD & Blu-ray"
+				state: "DVD & Blu-ray",
 			},
 			"/discover": { details: "Finding new shows/movies" },
 			"/apps": { details: "Browsing apps" },
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 			"/settings": { details: "Browsing settings" },
 			"/auth/signin": { details: "Registering on Trakt" },
 			"/auth/login": { details: "Logging in to Trakt" },
-			"/widgets": { details: "Browsing widgets" }
+			"/widgets": { details: "Browsing widgets" },
 		};
 
 	for (const [pathname, data] of Object.entries(pages))
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
 						"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h2 > a:nth-child(1)"
 					)
 					.textContent.split(":")[0]
-			} - 
+			} -
 		${
 			document.querySelector(
 				"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1 > span.main-title-sxe"
