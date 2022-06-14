@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "968882955474853909"
+		clientId: "968882955474853909",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	{ language } = window.navigator;
@@ -47,7 +47,7 @@ let title;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "apple-icon",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "www.canalplus.com") {
