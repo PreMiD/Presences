@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "983277228710297600"
+		clientId: "983277228710297600",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp,
-		details: "Current page:"
+		details: "Current page:",
 	};
 
 	if (document.location.pathname.includes("/traces/new"))
@@ -85,19 +85,19 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Reading a blog post:";
 		presenceData.state = document.title.split(" |")[0];
 		presenceData.buttons = [
-			{ label: "Read this post", url: document.location.href }
+			{ label: "Read this post", url: document.location.href },
 		];
 	} else if (document.location.hostname.startsWith("forum")) {
 		presenceData.details = "Reading a forum post:";
 		presenceData.state = document.title.split(" /")[0];
 		presenceData.buttons = [
-			{ label: "Read this post", url: document.location.href }
+			{ label: "Read this post", url: document.location.href },
 		];
 	} else if (document.location.hostname.startsWith("community")) {
 		presenceData.details = "Reading a community post:";
 		presenceData.state = document.title.split(" -")[0];
 		presenceData.buttons = [
-			{ label: "Read this post", url: document.location.href }
+			{ label: "Read this post", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("/search")) {
 		presenceData.details = "Search results for:";
@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
 			).textContent;
 		presenceData.state = `${userEdits} edits since ${mapperSince}`;
 		presenceData.buttons = [
-			{ label: "Check this profile", url: document.location.href }
+			{ label: "Check this profile", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("/changeset/")) {
 		presenceData.details = `Watching changeset ${
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
 			).textContent
 		}"`;
 		presenceData.buttons = [
-			{ label: "Check the changeset", url: document.location.href }
+			{ label: "Check the changeset", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("/way/")) {
 		const wayNumber = document
@@ -140,7 +140,7 @@ presence.on("UpdateData", async () => {
 			).textContent
 		}`;
 		presenceData.buttons = [
-			{ label: "Check the way", url: document.location.href }
+			{ label: "Check the way", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("/node/")) {
 		const wayNumber = document
@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
 			).textContent
 		}`;
 		presenceData.buttons = [
-			{ label: "Check the node", url: document.location.href }
+			{ label: "Check the node", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("/edit")) {
 		try {
@@ -176,7 +176,7 @@ presence.on("UpdateData", async () => {
 		else
 			presenceData.state = `Near ${locationcity}, ${locationstate}, ${locationcountry}`;
 		presenceData.buttons = [
-			{ label: "Edit the map", url: document.location.href }
+			{ label: "Edit the map", url: document.location.href },
 		];
 	} else if (document.location.hash.includes("#map=")) {
 		presenceData.details = "Looking at the map";
@@ -187,13 +187,13 @@ presence.on("UpdateData", async () => {
 		else
 			presenceData.state = `Near ${locationcity}, ${locationstate}, ${locationcountry}`;
 		presenceData.buttons = [
-			{ label: "Open the map", url: document.location.href }
+			{ label: "Open the map", url: document.location.href },
 		];
 	} else if (document.location.pathname.startsWith("/wiki")) {
 		presenceData.details = "Reading the wiki";
 		presenceData.state = `"${document.title.split(" —")[0]}"`;
 		presenceData.buttons = [
-			{ label: "Check the page", url: document.location.href }
+			{ label: "Check the page", url: document.location.href },
 		];
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
