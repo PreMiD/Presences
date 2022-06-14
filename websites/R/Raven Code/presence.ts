@@ -4,7 +4,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			details: "Geziniyor.",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		page = document.location.pathname;
 	if (page == "/") presenceData.details = "Anasayfayı görüntülüyor.";
@@ -38,33 +38,33 @@ presence.on("UpdateData", async () => {
 			{
 				page: "discord.js",
 				key: "https://avatars.githubusercontent.com/u/26492485?s=200&v=4",
-				text: "Discord.js"
+				text: "Discord.js",
 			},
 			{
 				page: "eris",
 				key: "https://www.endometriozis.org/wp-content/uploads/2019/11/service1_navy_circle.png",
-				text: "Eris"
+				text: "Eris",
 			},
 			{
 				page: "javascript",
 				key: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png",
-				text: "JavaScript"
+				text: "JavaScript",
 			},
 			{
 				page: "html",
 				key: "https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png",
-				text: "HTML"
+				text: "HTML",
 			},
 			{
 				page: "python",
 				key: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/2048px-Python-logo-notext.svg.png",
-				text: "Python"
+				text: "Python",
 			},
 			{
 				page: "css",
 				key: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/800px-CSS3_logo.svg.png",
-				text: "CSS"
-			}
+				text: "CSS",
+			},
 		];
 
 		for (const language of languages) {
