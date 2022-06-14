@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "707123244397887548"
+		clientId: "707123244397887548",
 	}),
 	pages: {
 		[name: string]: string;
@@ -11,7 +11,7 @@ const presence = new Presence({
 		"/help": "Yardım",
 		"/safety": "Güvenlik Önerileri",
 		"/terms-and-conditions": "Şartlar ve Gizlilik",
-		"/privacy": "Gizlilik Politikası"
+		"/privacy": "Gizlilik Politikası",
 	};
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "letgo-logob",
 			details: "Bir kategoriyi inceliyor:",
 			state: category.textContent.trim() || "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 		//console.log('asd')
 	} else if (
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 					? searchingFor.textContent
 					: "Belirsiz",
 			smallImageKey: "letgo-ara",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/i/")) {
 		const stuff =
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 								: ""
 					  }`
 					: "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/u/")) {
 		const user =
@@ -93,21 +93,21 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "letgo-logob",
 			details: "Bir kullanıcı profili inceliyor:",
 			state: username || "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
 			largeImageKey: "letgo-logob",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
 			largeImageKey: "letgo-logob",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 });

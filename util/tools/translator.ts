@@ -27,8 +27,8 @@ const spinnerSettings = {
 			chalk.hex("#bebebe")(`(   ${chalk.white("●")} )`),
 			chalk.hex("#bebebe")(`(  ${chalk.white("●")}  )`),
 			chalk.hex("#bebebe")(`( ${chalk.white("●")}   )`),
-			chalk.hex("#bebebe")(`(${chalk.white("●")}    )`)
-		]
+			chalk.hex("#bebebe")(`(${chalk.white("●")}    )`),
+		],
 	},
 	filesMap = new Map(),
 	logger = debug("Translator"),
@@ -78,7 +78,7 @@ const spinnerSettings = {
 	},
 	main = async () => {
 		const langLoadSpinner = ora({
-			text: chalk.green("Loading languages…")
+			text: chalk.green("Loading languages…"),
 		});
 		langLoadSpinner.spinner = spinnerSettings;
 		langLoadSpinner.start();
@@ -90,7 +90,7 @@ const spinnerSettings = {
             lang
           }
         }
-        `
+        `,
 			})
 		).data.data.langFiles
 			.map((c: { lang: string }) => c.lang)
@@ -106,13 +106,13 @@ const spinnerSettings = {
 					choices: langs.sort(),
 					footer() {
 						return chalk.gray("(Scroll up and down to reveal more choices)");
-					}
-				}
+					},
+				},
 			])
 				.then((answer: { selectedLang: string }) => answer.selectedLang)
 				.catch(() => process.exit()),
 			loadFilesSpinner = ora({
-				text: chalk.green("Loading presences... \n")
+				text: chalk.green("Loading presences... \n"),
 			});
 
 		loadSpinner = loadFilesSpinner;
@@ -130,20 +130,20 @@ const spinnerSettings = {
 					{
 						name: "EVERY",
 						message: "Translate every Presence in order.",
-						value: "EVERY"
+						value: "EVERY",
 					},
 					{
 						name: "CATEGORY",
 						message: "Translate every Presence of category.",
-						value: "CATEGORY"
+						value: "CATEGORY",
 					},
 					{
 						name: "SELECT",
 						message: "Translate selected Presences.",
-						value: "SELECT"
-					}
-				]
-			}
+						value: "SELECT",
+					},
+				],
+			},
 		])
 			.then((answer: { mode: Mode }) => answer.mode)
 			.catch(() => process.exit());
@@ -162,35 +162,35 @@ const spinnerSettings = {
 								{
 									name: "anime",
 									message: "Anime",
-									value: "anime"
+									value: "anime",
 								},
 								{
 									name: "games",
 									message: "Games",
-									value: "games"
+									value: "games",
 								},
 								{
 									name: "music",
 									message: "Music",
-									value: "music"
+									value: "music",
 								},
 								{
 									name: "socials",
 									message: "Socials",
-									value: "socials"
+									value: "socials",
 								},
 								{
 									name: "videos",
 									message: "Videos & Streams",
-									value: "videos"
+									value: "videos",
 								},
 								{
 									name: "other",
 									message: "Other",
-									value: "other"
-								}
-							]
-						}
+									value: "other",
+								},
+							],
+						},
 					])
 						.then(
 							(answer: { category: Metadata["category"] }) => answer.category
@@ -217,8 +217,8 @@ const spinnerSettings = {
 								return chalk.gray(
 									`(Scroll up and down to reveal more choices)\n(You selected ${selectedPresences} presences)`
 								);
-							}
-						}
+							},
+						},
 					])
 						.then((answer: { selected: string }) => answer.selected)
 						.catch(() => process.exit());
@@ -253,7 +253,7 @@ const spinnerSettings = {
 						chalk.hex("#bebebe")(file[1].description.en) +
 						chalk.green('":\n') +
 						chalk.hex("#bebebe")('(Type "skip" to skip or "stop" to stop)'),
-					name: "translatedDes"
+					name: "translatedDes",
 				})
 					.then((answer: { translatedDes: string }) => answer.translatedDes)
 					.catch(() => process.exit()),

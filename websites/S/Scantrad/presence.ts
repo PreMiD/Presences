@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "817856303719907389"
+		clientId: "817856303719907389",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	path = document.location.pathname,
@@ -8,7 +8,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.body.contains(document.querySelector(".titre"))) {
@@ -42,8 +42,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Lire le chapitre",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (path.startsWith("/mangas")) {
 		presenceData.details = "Visite une page :";

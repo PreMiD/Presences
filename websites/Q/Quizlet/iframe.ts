@@ -14,6 +14,6 @@ iframe.on("UpdateData", async () => {
 		layer: quizlet.dataLayer.find(
 			layer => layer.event === "dataLayer-initialized"
 		),
-		searchLayer: quizlet.dataLayer.find(layer => layer.event === "Search")
+		searchLayer: quizlet.dataLayer.find(layer => layer.event === "Search"),
 	});
 });

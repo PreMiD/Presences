@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "747683982279180359"
+	clientId: "747683982279180359",
 });
 
 presence.on("UpdateData", async () => {
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			details: "Rustlabs",
 			largeImageKey: "logo_big",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	switch (window.location.pathname.split("/").slice(1)[0]) {

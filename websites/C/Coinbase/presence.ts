@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "796810487177674822"
+		clientId: "796810487177674822",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "coinbase",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 	if (path === "/") presenceData.details = "Browsing...";

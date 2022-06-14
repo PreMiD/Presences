@@ -1,11 +1,11 @@
 const presence = new Presence({
-	clientId: "934863156356972584"
+	clientId: "934863156356972584",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey: "shikimori_logo"
+			largeImageKey: "shikimori_logo",
 		},
 		title = document
 			.querySelector("meta[property='og:title']")

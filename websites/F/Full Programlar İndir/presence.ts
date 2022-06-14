@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "707431547715977218"
+		clientId: "707431547715977218",
 	}),
 	pages: { [name: string]: string } = {
 		"/turbobit-premium-alma-hizli-indirme":
@@ -10,7 +10,7 @@ const presence = new Presence({
 		"/kirik-link-bildirimi-yapin": "Kırık Link Bildirimi Yapın!",
 		"/winrar-crc-hatasi-cozumu-0": "Winrar CRC Hatası Çözümü %100",
 		"/windows-dvd-usb-ile-format-atma": "Windows DVD USB İle Format Atma !",
-		"/yardim-istek-bolumu": "Yardım & İstek Bölümü !"
+		"/yardim-istek-bolumu": "Yardım & İstek Bölümü !",
 	};
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 					document.location.pathname.indexOf("page") + 5,
 					document.location.pathname.length
 				)}`})`,
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		}
 	} else if (document.location.href.includes("?s=") && searchingFor) {
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 				? searchingFor.textContent.slice(17, searchingFor.textContent.length)
 				: "Belirsiz",
 			smallImageKey: "search",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/page/")) {
 		const pgnum = document.location.pathname.slice(
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "fp-logo",
 			details: "Sayfalar arasında geziniyor:",
 			state: pgnum ? `Ana Sayfa: ${pgnum}` : "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes(".html")) {
 		const published = document.querySelector(
@@ -72,21 +72,21 @@ presence.on("UpdateData", async () => {
 								: ""
 					  }`
 					: "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
 			largeImageKey: "fp-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
 			largeImageKey: "fp-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 });

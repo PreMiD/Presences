@@ -1,15 +1,15 @@
 const presence = new Presence({
-		clientId: "867795822711013387"
+		clientId: "867795822711013387",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (document.location.pathname.includes("/common/aquaplayer/")) {
@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 			).textContent.split("\n");
 			[presenceData.details, presenceData.state] = [
 				temp[0].replace("영역", " 영역"),
-				temp[1].replace("선생님", " 선생님")
+				temp[1].replace("선생님", " 선생님"),
 			];
 		} else if (
 			document.location.pathname.includes("/myzone/mypage/myInfo/msgList.ds")

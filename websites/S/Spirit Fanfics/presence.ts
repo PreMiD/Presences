@@ -1,18 +1,18 @@
 const presence = new Presence({
-		clientId: "628786533587091490"
+		clientId: "628786533587091490",
 	}),
 	{ pathname } = window.location,
 	strings = presence.getStrings({
 		browsing: "presence.activity.browsing",
 		searching: "presence.activity.searching",
-		reading: "presence.activity.reading"
+		reading: "presence.activity.reading",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "spirit_lg",
 			startTimestamp: Math.floor(Date.now() / 1000),
-			details: (await strings).browsing
+			details: (await strings).browsing,
 		},
 		nav = document.querySelector("#secaoNav").lastChild.textContent;
 	if (pathname.startsWith("/historia")) {

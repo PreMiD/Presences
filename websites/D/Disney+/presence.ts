@@ -1,5 +1,5 @@
 const presence: Presence = new Presence({
-	clientId: "630236276829716483"
+	clientId: "630236276829716483",
 });
 
 async function getStrings() {
@@ -11,7 +11,7 @@ async function getStrings() {
 			watchingMovie: "general.watchingMovie",
 			watchingSeries: "general.watchingSeries",
 			watchEpisode: "general.buttonViewEpisode",
-			watchVideo: "general.buttonWatchVideo"
+			watchVideo: "general.buttonWatchVideo",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -111,15 +111,15 @@ presence.on("UpdateData", async () => {
 						label: subtitle
 							? (await strings).watchEpisode
 							: (await strings).watchVideo,
-						url: `https://www.disneyplus.com${location.pathname}`
-					}
+						url: `https://www.disneyplus.com${location.pathname}`,
+					},
 				];
 
 				// change button if GroupWatch is active and user enabled the button
 				if (groupWatchId && groupWatchBtn) {
 					presenceData.buttons.push({
 						label: "Join GroupWatch",
-						url: `https://www.disneyplus.com/groupwatch/${groupWatchId}`
+						url: `https://www.disneyplus.com/groupwatch/${groupWatchId}`,
 					});
 				}
 			}
@@ -164,8 +164,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Join GroupWatch",
-					url: location.pathname
-				}
+					url: location.pathname,
+				},
 			];
 		}
 
@@ -209,8 +209,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: (await strings).watchVideo,
-						url: `https://www.hotstar.com${location.pathname}`
-					}
+						url: `https://www.hotstar.com${location.pathname}`,
+					},
 				];
 			}
 

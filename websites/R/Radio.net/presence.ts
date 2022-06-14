@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "634124614544392193"
+	clientId: "634124614544392193",
 });
 
 let oldLang: string,
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 	const host = window.location.hostname.split("."),
 		path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "logo_big"
+			largeImageKey: "logo_big",
 		};
 
 	oldLang = newLang;
@@ -169,7 +169,7 @@ async function getStrings(lang: string) {
 			play: "general.playing",
 			pause: "general.paused",
 			search: "general.searching",
-			browsing: "general.browsing"
+			browsing: "general.browsing",
 		},
 		lang
 	);

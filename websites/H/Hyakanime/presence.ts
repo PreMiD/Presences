@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "967174885992456292"
+		clientId: "967174885992456292",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "applogo_7fac0ec4359bda8ccf0f",
 			startTimestamp: browsingTimestamp,
-			details: "Sur la page d'accueil"
+			details: "Sur la page d'accueil",
 		},
 		page = document.location.pathname;
 	if (page.startsWith("/anime/")) {
@@ -17,8 +17,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Afficher la fiche",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (page.startsWith("/profil/")) {
 		presenceData.details = "Regarde le profil de:";
@@ -28,8 +28,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Afficher le profil",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (page.includes("/search/"))
 		presenceData.details = "Cherche une fiche...";
@@ -65,8 +65,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Afficher l'agenda",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	}
 	presence.setActivity(presenceData);

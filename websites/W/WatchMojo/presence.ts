@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "822457774574272592"
+		clientId: "822457774574272592",
 	}),
 	getStrings = async () => {
 		return presence.getStrings(
@@ -21,7 +21,7 @@ const presence = new Presence({
 				buttonViewChannel: "general.buttonViewChannel",
 				buttonReadArticle: "general.buttonReadArticle",
 				buttonWatchVideo: "general.buttonWatchVideo",
-				buttonPlayTrivia: "watchmojo.buttonPlayTrivia"
+				buttonPlayTrivia: "watchmojo.buttonPlayTrivia",
 			},
 			await presence.getSetting<string>("lang")
 		);
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector<HTMLVideoElement>("#myDiv_html5");
 
 	let presenceData: PresenceData = {
-		largeImageKey: "mojo"
+		largeImageKey: "mojo",
 	};
 
 	if (document.location.href !== prevUrl) {
@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
 		[name: string]: PresenceData;
 	} = {
 		"/": {
-			details: (await strings).browse
+			details: (await strings).browse,
 		},
 		"/video/id/(\\d*)/": {
 			details: privacy ? (await strings).watchingVid : (await strings).watching,
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 				: video
 				? presence.getTimestampsfromMedia(video)[1]
 				: null,
-			buttons: [{ label: (await strings).buttonWatchVideo, url: document.URL }]
+			buttons: [{ label: (await strings).buttonWatchVideo, url: document.URL }],
 		},
 		"/trivia/": {
 			details: privacy
@@ -158,24 +158,28 @@ presence.on("UpdateData", async () => {
 			endTimestamp: iframePau
 				? 0
 				: presence.getTimestamps(iframeCur, iframeDur)[1],
-			buttons: [{ label: (await strings).buttonPlayTrivia, url: document.URL }]
+			buttons: [{ label: (await strings).buttonPlayTrivia, url: document.URL }],
 		},
 		"/blog/(\\d*)/(\\d*)/(\\d*)/": {
 			details: (await strings).article,
 			state: document.querySelector("h1")?.textContent,
-			buttons: [{ label: (await strings).buttonReadArticle, url: document.URL }]
+			buttons: [
+				{ label: (await strings).buttonReadArticle, url: document.URL },
+			],
 		},
 		"/categories/": {
 			details: (await strings).category,
 			state:
 				typeof location.pathname.split("/")[2] === "string"
 					? capitalize(location.pathname.split("/")[2])
-					: "NEEDS RESET"
+					: "NEEDS RESET",
 		},
 		"/channels/": {
 			details: (await strings).viewChannel,
 			state: location.pathname.split("/")[2],
-			buttons: [{ label: (await strings).buttonViewChannel, url: document.URL }]
+			buttons: [
+				{ label: (await strings).buttonViewChannel, url: document.URL },
+			],
 		},
 		"/search/": {
 			details: (await strings).searchFor,
@@ -183,8 +187,8 @@ presence.on("UpdateData", async () => {
 				document.querySelector("#result > div > b:nth-child(2)")?.textContent ||
 				document.querySelector("#resultd > a > span")?.textContent,
 			smallImageKey: "search",
-			smallImageText: (await strings).search
-		}
+			smallImageText: (await strings).search,
+		},
 	};
 
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;

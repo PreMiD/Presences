@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "835652520637890620"
+		clientId: "835652520637890620",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
 
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(".caption").textContent;
 		presenceData.smallImageKey = "view";
 		presenceData.buttons = [
-			{ label: "View Podcast", url: window.location.href }
+			{ label: "View Podcast", url: window.location.href },
 		];
 	} else if (pathname.startsWith("/episode")) {
 		const elapsedTime = presence.timestampFromFormat(
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 		);
 
 		presenceData.buttons = [
-			{ label: "Listen Along", url: window.location.href }
+			{ label: "Listen Along", url: window.location.href },
 		];
 		presenceData.details = document.querySelector(".pure-button").textContent;
 		presenceData.state = document.querySelector(".title").textContent;

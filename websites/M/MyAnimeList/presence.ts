@@ -1,12 +1,12 @@
 const presence = new Presence({
-	clientId: "468420510632509473"
+	clientId: "468420510632509473",
 });
 
 presence.on("UpdateData", async () => {
 	if (document.location.pathname === "/") {
 		presence.setActivity({
 			details: "Viewing the homepage",
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		});
 	} else if (
 		document.location.pathname === "/anime.php" ||
@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presence.setActivity({
 			details: "Looking for anime",
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		});
 	} else if (
 		document.location.pathname === "/manga.php" ||
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presence.setActivity({
 			details: "Looking for manga",
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		});
 	} else if (document.location.pathname.startsWith("/forum")) {
 		const presenceData: PresenceData = {
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 			state: document
 				.querySelector("meta[property='og:title']")
 				.getAttribute("content"),
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		};
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.startsWith("/clubs.php")) {
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 			const presenceData: PresenceData = {
 				details: "Viewing an club",
 				state: document.querySelectorAll(".h1")[0].textContent,
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			};
 			presence.setActivity(presenceData);
 		} else if (
@@ -48,35 +48,35 @@ presence.on("UpdateData", async () => {
 		) {
 			presence.setActivity({
 				details: "Viewing club Invitations",
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			});
 		} else if (
 			document.querySelectorAll(".h1-title")[0].textContent === "My Clubs"
 		) {
 			presence.setActivity({
 				details: "Viewing my clubs",
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			});
 		} else {
 			presence.setActivity({
 				details: "Looking for clubs",
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			});
 		}
 	} else if (document.location.pathname.startsWith("/blog.php")) {
 		presence.setActivity({
 			details: "Viewing the blogs",
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		});
 	} else if (document.location.pathname.startsWith("/users.php")) {
 		presence.setActivity({
 			details: "Searching for users",
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		});
 	} else if (document.location.pathname.startsWith("/news")) {
 		presence.setActivity({
 			details: "Viewing the news",
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		});
 	} else if (document.location.pathname.startsWith("/featured")) {
 		if (
@@ -87,13 +87,13 @@ presence.on("UpdateData", async () => {
 		) {
 			presence.setActivity({
 				details: "Viewing featured articles",
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			});
 		} else {
 			const presenceData: PresenceData = {
 				details: "Viewing an article",
 				state: document.querySelectorAll(".title")[0].textContent,
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			};
 			presence.setActivity(presenceData);
 		}
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 		if (document.querySelectorAll(".h1")[0].textContent === "People") {
 			presence.setActivity({
 				details: "Viewing peoples",
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			});
 		} else {
 			const presenceData: PresenceData = {
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 				state: document
 					.querySelectorAll(".title-name")[0]
 					.textContent.replace(/(<([^>]+)>)/gi, ""),
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			};
 			presence.setActivity(presenceData);
 		}
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
 		if (document.querySelectorAll(".h1")[0].textContent === "Characters") {
 			presence.setActivity({
 				details: "Looking for characters",
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			});
 		} else {
 			const presenceData: PresenceData = {
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
 				state: document
 					.querySelectorAll(".normal_header")[2]
 					.textContent.replace(/(<([^>]+)>)/gi, ""),
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			};
 			presence.setActivity(presenceData);
 		}
@@ -133,21 +133,21 @@ presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
 			details: "Viewing a profile",
 			state: document.location.pathname.split("/")[2],
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		};
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.startsWith("/animelist")) {
 		const presenceData: PresenceData = {
 			details: "Viewing an anime list",
 			state: document.location.pathname.split("/")[2],
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		};
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.startsWith("/mangalist")) {
 		const presenceData: PresenceData = {
 			details: "Viewing a manga list",
 			state: document.location.pathname.split("/")[2],
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		};
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.startsWith("/anime")) {
@@ -158,13 +158,13 @@ presence.on("UpdateData", async () => {
 				state:
 					document.querySelectorAll(".header-right")[0].parentNode.childNodes[1]
 						.textContent,
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			};
 			presence.setActivity(presenceData);
 		} else {
 			presence.setActivity({
 				details: "Looking for anime",
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			});
 		}
 	} else if (document.location.pathname.startsWith("/manga")) {
@@ -175,18 +175,18 @@ presence.on("UpdateData", async () => {
 				state:
 					document.querySelectorAll(".header-right")[0].parentNode.childNodes[1]
 						.textContent,
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			};
 			presence.setActivity(presenceData);
 		} else {
 			presence.setActivity({
 				details: "Looking for manga",
-				largeImageKey: "lg-mal"
+				largeImageKey: "lg-mal",
 			});
 		}
 	} else {
 		presence.setActivity({
-			largeImageKey: "lg-mal"
+			largeImageKey: "lg-mal",
 		});
 	}
 });

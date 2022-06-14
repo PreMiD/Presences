@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "840126038205923369"
+		clientId: "840126038205923369",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: Element, title2: Element;
@@ -7,7 +7,7 @@ let title: Element, title2: Element;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		page = window.location.pathname,
 		pageh = document.location.href,
@@ -28,8 +28,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Bekijk Plaatje",
-						url: pageh
-					}
+						url: pageh,
+					},
 				];
 			}
 		}
@@ -43,8 +43,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Bekijk Filmpje",
-						url: pageh
-					}
+						url: pageh,
+					},
 				];
 			}
 			presenceData.details = element && element.getAttribute("content");
@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Bekijk Video",
-							url: pageh
-						}
+							url: pageh,
+						},
 					];
 				}
 				delete presenceData.startTimestamp;
@@ -94,8 +94,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Bekijk Foto",
-						url: pageh
-					}
+						url: pageh,
+					},
 				];
 			}
 
@@ -117,8 +117,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Zoek",
-						url: pageh
-					}
+						url: pageh,
+					},
 				];
 			}
 			title = document.querySelector(
@@ -145,8 +145,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Bekijk Latest",
-					url: pageh
-				}
+					url: pageh,
+				},
 			];
 		}
 	}

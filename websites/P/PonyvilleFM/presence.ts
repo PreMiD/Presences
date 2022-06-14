@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "613628090219757599"
+		clientId: "613628090219757599",
 	}),
 	timeElapsed = Math.floor(Date.now() / 1000);
 let otherListeners: HTMLElement,
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 				presence.setActivity({
 					details: stationStatus,
 					largeImageKey: "pvfm",
-					smallImageKey: "pause"
+					smallImageKey: "pause",
 				});
 			} else {
 				const presenceData: PresenceData = {
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 					state: `On air: ${onAir.textContent}`,
 					largeImageKey: "pvfm",
 					smallImageKey: "play",
-					startTimestamp: timeElapsed
+					startTimestamp: timeElapsed,
 				};
 				presence.setActivity(presenceData);
 			}
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 				presence.setActivity({
 					details: stationStatus,
 					largeImageKey: "pvfm",
-					smallImageKey: "pause"
+					smallImageKey: "pause",
 				});
 			} else {
 				const presenceData: PresenceData = {
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 					state: `On air: ${onAir.textContent}`,
 					largeImageKey: "pvfm",
 					smallImageKey: "play",
-					startTimestamp: timeElapsed
+					startTimestamp: timeElapsed,
 				};
 				presence.setActivity(presenceData);
 			}
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 				presence.setActivity({
 					details: stationStatus,
 					largeImageKey: "pvfm",
-					smallImageKey: "pause"
+					smallImageKey: "pause",
 				});
 			} else {
 				const presenceData: PresenceData = {
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 					state: `On air: ${onAir.textContent}`,
 					largeImageKey: "pvfm",
 					smallImageKey: "play",
-					startTimestamp: timeElapsed
+					startTimestamp: timeElapsed,
 				};
 				presence.setActivity(presenceData);
 			}

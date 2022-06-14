@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "821106305241972746"
+		clientId: "821106305241972746",
 	}),
 	timebrowsed = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "largeimage",
 			startTimestamp: timebrowsed,
-			details: "Browsing ..."
+			details: "Browsing ...",
 		},
 		displayStats = await presence.getSetting<boolean>("statsdisplay");
 

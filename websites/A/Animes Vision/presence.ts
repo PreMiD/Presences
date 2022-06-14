@@ -1,18 +1,18 @@
 const presence = new Presence({
-		clientId: "700405996677365842"
+		clientId: "700405996677365842",
 	}),
 	strings = presence.getStrings({
 		playing: "presence.playback.playing",
 		paused: "presence.playback.paused",
 		browsing: "presence.activity.browsing",
-		episode: "presence.media.info.episode"
+		episode: "presence.media.info.episode",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "anvlogo",
 			details: (await strings).browsing,
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		path = window.location.pathname;
 	if (path.endsWith("/equipe"))

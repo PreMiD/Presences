@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "879535934977245244"
+		clientId: "879535934977245244",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	}),
 	slugs: { [key: string]: string } = {
 		home: "Home",
@@ -43,7 +43,7 @@ const presence = new Presence({
 		"cartoon-network": "Cartoon Network",
 		"sesame-workshop": "Sesame Workshop",
 		"looney-tunes": "Looney Tunes",
-		crunchyroll: "Crunchyroll Collection"
+		crunchyroll: "Crunchyroll Collection",
 	},
 	coverUrls: Record<string, string> = {};
 
@@ -53,7 +53,7 @@ function getToken(): Promise<string> {
 		fetch("https://oauth.api.hbo.com/auth/tokens", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
@@ -62,9 +62,9 @@ function getToken(): Promise<string> {
 				grant_type: "client_credentials",
 				deviceSerialNumber: crypto.randomUUID(),
 				clientDeviceData: {
-					paymentProviderCode: "blackmarket"
-				}
-			})
+					paymentProviderCode: "blackmarket",
+				},
+			}),
 		})
 			.then(x => x.json())
 			.then(x => resolve(x.access_token));
@@ -80,8 +80,8 @@ async function fetchCover() {
 			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US&language=en-us`,
 			{
 				headers: {
-					authorization: `Bearer ${await getToken()}`
-				}
+					authorization: `Bearer ${await getToken()}`,
+				},
 			}
 		)
 	).json();
@@ -93,7 +93,7 @@ async function fetchCover() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		},
 		video = document.querySelector("video"),
 		path = document.location.pathname;
@@ -103,14 +103,14 @@ presence.on("UpdateData", async () => {
 	switch (true) {
 		case path === "/profileSelect":
 			Object.assign(presenceData, {
-				details: "Selecting a profile"
+				details: "Selecting a profile",
 			});
 			break;
 		case path === "/search":
 			Object.assign(presenceData, {
 				details: "Searching",
 				smallImageKey: "search",
-				smallImageText: (await strings).browsing
+				smallImageText: (await strings).browsing,
 			});
 			break;
 		case !!video:
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause
-					: (await strings).play
+					: (await strings).play,
 			});
 
 			if (
@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
 			if (!video.paused) {
 				Object.assign(presenceData, {
 					startTimestamp: timestamps[0],
-					endTimestamp: timestamps[1]
+					endTimestamp: timestamps[1],
 				});
 			}
 			break;

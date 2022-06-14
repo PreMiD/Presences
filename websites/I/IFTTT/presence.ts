@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "665519810054062100"
+	clientId: "665519810054062100",
 });
 
 let oldLang: string,
@@ -9,7 +9,7 @@ let oldLang: string,
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "logo_big"
+			largeImageKey: "logo_big",
 		};
 
 	oldLang = newLang;
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 						incidents = [
 							...(document.querySelector<HTMLDivElement>(
 								".unresolved-incidents"
-							).children as unknown as HTMLDivElement[])
+							).children as unknown as HTMLDivElement[]),
 						].filter(e => e.style.display !== "none");
 					} catch (e) {
 						incidents = [];
@@ -284,7 +284,7 @@ async function getStrings(lang: string) {
 		{
 			search: "general.searching",
 			browsing: "general.browsing",
-			reading: "general.reading"
+			reading: "general.reading",
 		},
 		lang
 	);

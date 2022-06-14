@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "840489095767261194"
+		clientId: "840489095767261194",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ let title: HTMLElement, title2: HTMLElement, titleSite: HTMLElement;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		page = window.location.pathname,
 		buttons = await presence.getSetting<boolean>("buttons");
@@ -33,8 +33,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Forum Post",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			}
 		} else if (page.includes("/c/")) {
@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Forum Category",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			}
 		} else presenceData.details = "Browsing Through The Forum";

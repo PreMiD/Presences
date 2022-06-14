@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "640161890059812865"
+		clientId: "640161890059812865",
 	}),
 	getStrings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -12,7 +12,7 @@ let prevTitle: string, prevEpisode: string, strings: Awaited<typeof getStrings>;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "fun",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		showPoster = await presence.getSetting("poster"),
 		video = document.querySelector<HTMLVideoElement>("video.vjs-tech");

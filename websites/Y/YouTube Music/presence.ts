@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "463151177836658699"
+	clientId: "463151177836658699",
 });
 
 let prevMetadata: {
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		[buttons, timestamps, cover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamps"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]);
 	if (title && !isNaN(video.duration)) {
 		const endTimestamp =
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 				details: title,
 				state: [
 					navigator.mediaSession.metadata.artist,
-					navigator.mediaSession.metadata.album
+					navigator.mediaSession.metadata.album,
 				]
 					.filter(Boolean)
 					.join(" - "),
@@ -53,15 +53,15 @@ presence.on("UpdateData", async () => {
 					? "Playlist on loop"
 					: "Playing",
 				startTimestamp: prevMetadata?.startedAt,
-				endTimestamp
+				endTimestamp,
 			};
 
 		if (buttons) {
 			presenceData.buttons = [
 				{
 					label: "Listen Along",
-					url: `https://music.youtube.com/watch?v=${watchID}`
-				}
+					url: `https://music.youtube.com/watch?v=${watchID}`,
+				},
 			];
 		}
 
@@ -69,8 +69,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Listen Along",
-					url: `https://music.youtube.com/watch?v=${watchID}`
-				}
+					url: `https://music.youtube.com/watch?v=${watchID}`,
+				},
 			];
 		}
 
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 		if (!prevMetadata || prevMetadata.title !== title) {
 			prevMetadata = {
 				title,
-				startedAt: Date.now() / 1000
+				startedAt: Date.now() / 1000,
 			};
 		}
 

@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "609220157910286346"
+		clientId: "609220157910286346",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		live: "presence.activity.live",
 	});
 
 function getTimesec(
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 				let owner;
 				if (ownerElement) {
 					[, owner] = ownerElement.textContent.match(/(.+) さん$/) || [
-						ownerElement.textContent
+						ownerElement.textContent,
 					];
 				} else owner = "Deleted User";
 
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 							Math.floor(
 								document.querySelector<HTMLVideoElement>(".VideoPlayer video")
 									.currentTime
-							)
+							),
 					};
 
 				presence.setActivity(presenceData);
@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
 							document.querySelector(
 								" span[class^='___time-score___'] span[class^='___value___'] "
 							).textContent
-						).elapsedSec
+						).elapsedSec,
 				};
 
 				presence.setActivity(presenceData);
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
 
 		case "seiga.nicovideo.jp": {
 			const presenceData: PresenceData = {
-				largeImageKey: "niconico"
+				largeImageKey: "niconico",
 			};
 			if (location.pathname.startsWith("/seiga/im")) {
 				presenceData.details = document.querySelector(".title").textContent;

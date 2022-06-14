@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "972246349917610054"
+		clientId: "972246349917610054",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 	const { pathname } = window.location,
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 	if (document.querySelector("input[id^=headlessui]"))
 		presenceData.details = "Pesquisando Animes";
@@ -41,12 +41,12 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Assistir episódio",
-				url: location.href
+				url: location.href,
 			},
 			{
 				label: "Ver anime",
-				url: document.querySelector<HTMLAnchorElement>(".mb-4>a").href
-			}
+				url: document.querySelector<HTMLAnchorElement>(".mb-4>a").href,
+			},
 		];
 		const video = document.querySelector("video");
 		if (video && !video.paused && video.readyState >= 1) {

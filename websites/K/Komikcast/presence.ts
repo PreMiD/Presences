@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "909694033251688449"
+		clientId: "909694033251688449",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			details: "Page not Supported",
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (document.location.href === "https://komikcast.com")
@@ -36,8 +36,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `View ${type}`,
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		}
 	} else if (document.location.pathname.startsWith("/chapter/")) {
@@ -57,12 +57,12 @@ presence.on("UpdateData", async () => {
 					url: document.location.href
 						.replace("chapter", "komik")
 						.replace(/-chapter-\d+/, "")
-						.replace(/#\d+/, "")
+						.replace(/#\d+/, ""),
 				},
 				{
 					label: chapter,
-					url: document.location.href.replace(/#\d+/, "")
-				}
+					url: document.location.href.replace(/#\d+/, ""),
+				},
 			];
 		}
 	} else if (document.location.href.includes("?s=")) {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "897489206199324713"
+		clientId: "897489206199324713",
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -8,11 +8,11 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("cover"),
-			presence.getSetting<boolean>("welcome")
+			presence.getSetting<boolean>("welcome"),
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingStamp
+			startTimestamp: browsingStamp,
 		};
 
 	switch (document.location.pathname.split("/")[3]) {
@@ -81,8 +81,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Page",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 				if (cover) {
 					presenceData.largeImageKey = (

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "959487033963843594"
+		clientId: "959487033963843594",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		notebookTitle =
 			document.querySelector<HTMLInputElement>("#doc-name")?.value,

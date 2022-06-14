@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "844109673618735144"
+		clientId: "844109673618735144",
 	}),
 	elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		path = document.location.pathname;
 	if (path.includes("/folders/") || path.includes("/search/")) {

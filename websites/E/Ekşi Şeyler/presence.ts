@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "643771565951025153"
+	clientId: "643771565951025153",
 });
 
 presence.on("UpdateData", async () => {
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "es-logo",
 			details: "Bir kategoriye göz atıyor:",
 			state: category ? category : "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/kanal/")) {
 		const channel =
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "es-logo",
 			details: "Bir kanala göz atıyor:",
 			state: channel ? channel : "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/derleme/arama/")) {
 		const searchingFor = document.querySelector(
@@ -48,21 +48,21 @@ presence.on("UpdateData", async () => {
 				searchingFor && searchingFor.textContent !== ""
 					? searchingFor.textContent
 					: "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (postTitle && postTitle.textContent !== "") {
 		presence.setActivity({
 			largeImageKey: "es-logo",
 			details: "Bir gönderiyi okuyor:",
 			state: postTitle.textContent || "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
 			largeImageKey: "es-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 });

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "712294190339588209"
+		clientId: "712294190339588209",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,11 +9,11 @@ presence.on("UpdateData", async () => {
 	strings = await presence.getStrings({
 		live: "presence.activity.live",
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 	const presenceData: PresenceData = {
 		largeImageKey: "peloton",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (window.location.hostname.includes("www.onepeloton")) {

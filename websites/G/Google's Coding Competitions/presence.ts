@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
 		details: "Home page",
-		startTimestamp: timeElapsed
+		startTimestamp: timeElapsed,
 	};
 
 	switch (location.pathname.split("/")[1]) {

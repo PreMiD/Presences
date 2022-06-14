@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "919817726195814431"
+		clientId: "919817726195814431",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "stackexchange",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = window.location;
 
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 				"serverfault.com",
 				"meta.serverfault.com",
 				"superuser.com",
-				"meta.superuser.com"
+				"meta.superuser.com",
 			].includes(hostname)
 		)
 			presenceData.state = "Main Page";
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 			"serverfault.com",
 			"meta.serverfault.com",
 			"superuser.com",
-			"meta.superuser.com"
+			"meta.superuser.com",
 		].includes(hostname)
 	)
 		presenceData.state = "Browsing";

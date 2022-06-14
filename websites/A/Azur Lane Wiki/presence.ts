@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "670325644319522816"
+		clientId: "670325644319522816",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "azurlogo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/Azur_Lane_Wiki")

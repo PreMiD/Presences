@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "691491207356088320"
+	clientId: "691491207356088320",
 });
 
 let currentTime: number, duration: number, paused: boolean;
@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		};
 
 	if (document.URL === "https://www.threenow.co.nz/") {

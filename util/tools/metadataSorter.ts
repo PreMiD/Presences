@@ -3,7 +3,7 @@ import "source-map-support/register";
 import {
 	existsSync as exists,
 	readFileSync as readFile,
-	writeFileSync as writeFile
+	writeFileSync as writeFile,
 } from "node:fs";
 import axios from "axios";
 import { sync as glob } from "glob";
@@ -21,7 +21,7 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
 	write = (path: string, code: Metadata): void =>
 		writeFile(path, JSON.stringify(code, null, "\t"), {
 			encoding: "utf8",
-			flag: "w"
+			flag: "w",
 		}),
 	missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
 		pF => !exists(`${pF}/dist/metadata.json`)
@@ -79,7 +79,7 @@ if (missingMetadata?.length > 0)
 				iframe: metadata[0].iframe,
 				iFrameRegExp: metadata[0].iFrameRegExp,
 				readLogs: metadata[0].readLogs,
-				settings: metadata[0].settings
+				settings: metadata[0].settings,
 			};
 
 			for (const key in newData) {

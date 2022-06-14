@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "643159616498171934"
+		clientId: "643159616498171934",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: string;
@@ -9,7 +9,7 @@ const actionURL = new URL(document.location.href),
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	title = (

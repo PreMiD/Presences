@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "900717839713959967"
+		clientId: "900717839713959967",
 	}),
 	elapsed = Math.floor(Date.now() / 1e3);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
 	const { pathname, origin } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: elapsed,
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		};
 	let comics: number;
 
@@ -47,8 +47,8 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Visit Comic Page",
-				url: origin + pathname
-			}
+				url: origin + pathname,
+			},
 		];
 	} else if (
 		/^\/series\/[0-9a-z-]+\/+(chapter|ch)-[0-9]+\/?$/i.test(pathname)
@@ -74,12 +74,12 @@ presence.on("UpdateData", () => {
 					origin +
 					document.querySelector<HTMLAnchorElement>(
 						"ol.breadcrumb li:nth-child(3) a"
-					).href
+					).href,
 			},
 			{
 				label: "Visit Chapter",
-				url: origin + pathname
-			}
+				url: origin + pathname,
+			},
 		];
 	} else {
 		presenceData.details = "Browsing Reaper Scans";

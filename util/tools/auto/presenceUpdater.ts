@@ -11,7 +11,7 @@ import {
 	CompilerOptions,
 	createProgram,
 	flattenDiagnosticMessageText,
-	getPreEmitDiagnostics
+	getPreEmitDiagnostics,
 } from "typescript";
 
 const url = process.env.MONGO_URL,
@@ -66,8 +66,8 @@ const readFile = (path: string): string =>
 		const result = await terser(readFile(file), {
 			ecma: 5,
 			compress: {
-				passes: 2
-			}
+				passes: 2,
+			},
 		});
 		if (result && result.code && result.code.length > 0)
 			writeJS(file, result.code);
@@ -78,7 +78,7 @@ const readFile = (path: string): string =>
 	},
 	polyfill = async (file: string): Promise<void> => {
 		const result = await transform(file, {
-			presets: [["@babel/preset-env", { exclude: ["transform-regenerator"] }]]
+			presets: [["@babel/preset-env", { exclude: ["transform-regenerator"] }]],
 		});
 		if (result && result.code && result.code.length > 0) {
 			writeJS(file, result.code);
@@ -111,7 +111,7 @@ const readFile = (path: string): string =>
 					...presenceConfig,
 					outDir: rslv(normalizedPath.join(sep), "dist"),
 					noEmitOnError: false,
-					types: ["node"]
+					types: ["node"],
 				};
 
 			compileFile([fileToCompile, premidTypings], tsConfig);
@@ -239,7 +239,7 @@ const readFile = (path: string): string =>
 						metadata.service
 					)}/`,
 					metadata,
-					presenceJs: readFileSync(`${path}dist/presence.js`, "utf-8")
+					presenceJs: readFileSync(`${path}dist/presence.js`, "utf-8"),
 				};
 
 				if (metadata.iframe && existsSync(`${path}dist/iframe.js`))

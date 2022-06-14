@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "463097721130188830"
+		clientId: "463097721130188830",
 	}),
 	// YouTube TV separator pattern
 	pattern = "•";
@@ -56,7 +56,7 @@ async function getStrings() {
 			searchSomething: "general.searchSomething",
 			watchStreamButton: "general.buttonWatchStream",
 			watchVideoButton: "general.buttonWatchVideo",
-			viewChannelButton: "general.buttonViewChannel"
+			viewChannelButton: "general.buttonViewChannel",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 		vidState,
 		channelPic,
 		logo,
-		buttons
+		buttons,
 	] = await Promise.all([
 		presence.getSetting<string>("lang").catch(() => "en"),
 		presence.getSetting<boolean>("privacy"),
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<string>("vidState"),
 		presence.getSetting<boolean>("channelPic"),
 		presence.getSetting<number>("logo"),
-		presence.getSetting<boolean>("buttons")
+		presence.getSetting<boolean>("buttons"),
 	]);
 
 	if (oldLang !== newLang || !strings) {
@@ -274,7 +274,7 @@ presence.on("UpdateData", async () => {
 					: isPlaylistLoop
 					? "Playlist on loop"
 					: strings.play,
-				endTimestamp: presence.getTimestampsfromMedia(video)[1]
+				endTimestamp: presence.getTimestampsfromMedia(video)[1],
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;
@@ -318,7 +318,7 @@ presence.on("UpdateData", async () => {
 					label: live ? strings.watchStreamButton : strings.watchVideoButton,
 					url: document.URL.includes("/watch?v=")
 						? document.URL.split("&")[0]
-						: `https://www.youtube.com/watch?v=${videoId}`
+						: `https://www.youtube.com/watch?v=${videoId}`,
 				},
 				{
 					label: strings.viewChannelButton,
@@ -326,8 +326,8 @@ presence.on("UpdateData", async () => {
 						document.querySelector(
 							"#top-row > ytd-video-owner-renderer > a"
 						) as HTMLLinkElement
-					).href
-				}
+					).href,
+				},
 			];
 		}
 		if (!time) {
@@ -342,7 +342,7 @@ presence.on("UpdateData", async () => {
 		document.location.hostname === "youtube.com"
 	) {
 		const presenceData: PresenceData = {
-				largeImageKey: "yt_lg"
+				largeImageKey: "yt_lg",
 			},
 			browsingStamp = Math.floor(Date.now() / 1000);
 		let searching = false;
@@ -561,7 +561,7 @@ presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
 				largeImageKey: "yt_lg",
 				smallImageKey: "studio",
-				smallImageText: "Youtube Studio"
+				smallImageText: "Youtube Studio",
 			},
 			browsingStamp = Math.floor(Date.now() / 1000);
 

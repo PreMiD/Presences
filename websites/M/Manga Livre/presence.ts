@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "641409342566039558"
+		clientId: "641409342566039558",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "ml",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "mangalivre.net") {

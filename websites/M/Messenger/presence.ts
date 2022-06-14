@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "630896385889271819"
+		clientId: "630896385889271819",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "messenger",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[messageRecipient, callRecipient] = await Promise.all([
 			presence.getSetting<boolean>("message"),
-			presence.getSetting<boolean>("call")
+			presence.getSetting<boolean>("call"),
 		]);
 
 	if (document.location.pathname.includes("/groupcall/")) {

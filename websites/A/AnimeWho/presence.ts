@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "747190301676011550"
+		clientId: "747190301676011550",
 	}),
 	strings = presence.getStrings({
 		playing: "presence.playback.playing",
 		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "animewho",
 		details: "Ana Sayfada Anime Arıyor",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	presenceData.details = (
 		document.querySelector("head > title") as HTMLHeadElement

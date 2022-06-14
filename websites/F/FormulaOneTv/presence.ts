@@ -25,7 +25,7 @@ const presence = new Presence({ clientId: "916438450952097834" }),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "general.browsing"
+		browsing: "general.browsing",
 	}),
 	videoDetails: VideoDetails = {};
 
@@ -78,7 +78,7 @@ async function setWatchingVideoActivity(
 			{
 				"FORMULA 1": "F1",
 				"FORMULA 2": "F2",
-				"FORMULA 3": "F3"
+				"FORMULA 3": "F3",
 			}[videoMetadata.emfAttributes.Series]
 		} - ${videoMetadata.emfAttributes.Global_Meeting_Name}`;
 	} else {
@@ -133,7 +133,7 @@ async function setBrowsingActivity(presenceData: PresenceData) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo_512"
+		largeImageKey: "logo_512",
 	};
 	let contentId = "";
 

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "830504223153717311"
+		clientId: "830504223153717311",
 	}),
 	browsingTimestamp = Math.floor(Date.now());
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			details: "Viewing unsupported page",
 			largeImageKey: "replit",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
 

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "860146992284958762"
+		clientId: "860146992284958762",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
@@ -7,7 +7,7 @@ let currentURL = new URL(document.location.href),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
 		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 const updateCallback = {
 		_function: null as () => void,
@@ -19,7 +19,7 @@ const updateCallback = {
 		},
 		get present(): boolean {
 			return this._function !== null;
-		}
+		},
 	},
 	/**
 	 * Initialize/reset presenceData.
@@ -28,7 +28,7 @@ const updateCallback = {
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		}
 	): void => {
 		currentURL = new URL(document.location.href);
@@ -225,7 +225,7 @@ const updateCallback = {
 								presenceData.state = [
 									...document.querySelectorAll(
 										".phui-crumbs-view.phui-crumbs-border .phui-crumb-name"
-									)
+									),
 								]
 									.slice(1)
 									.map(element => element.textContent.trim())
@@ -235,7 +235,7 @@ const updateCallback = {
 								const crumbs = [
 									...document.querySelectorAll(
 										".phui-crumbs-view.phui-crumbs-border .phui-crumb-name"
-									)
+									),
 								];
 								presenceData.state = crumbs
 									.slice(1, crumbs.length - 1)
@@ -347,7 +347,7 @@ const updateCallback = {
 								presenceData.state = [
 									...document.querySelectorAll(
 										".phui-crumbs-view.phui-crumbs-border .phui-crumb-name"
-									)
+									),
 								]
 									.slice(1)
 									.map(element => element.textContent.trim())
@@ -386,7 +386,7 @@ const updateCallback = {
 							"Backup dumps of wikis which no longer exist",
 						other: "Other content",
 						"legal.html": "License information",
-						"mirrors.html": "Mirrors of database backup dumps"
+						"mirrors.html": "Mirrors of database backup dumps",
 					};
 					presenceData.state = pageNames[currentPath[0]];
 				}
@@ -504,7 +504,7 @@ const updateCallback = {
 								Manual: "Viewing a manual page",
 								"Manual talk": "Viewing a manual talk page",
 								Form: "Viewing a form page",
-								"Form talk": "Viewing a form talk page"
+								"Form talk": "Viewing a form talk page",
 							},
 							canonicalNamespace = mwConfig.wgCanonicalNamespace.replaceAll(
 								"_",

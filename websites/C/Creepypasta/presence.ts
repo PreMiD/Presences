@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "929823434572202005"
+		clientId: "929823434572202005",
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const [time, buttons] = await Promise.all([
 			presence.getSetting<boolean>("time"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingStamp
+			startTimestamp: browsingStamp,
 		},
 		orderBy = document.getElementsByName("_orderby")[0] as HTMLSelectElement;
 
@@ -129,8 +129,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 	}
 	if (

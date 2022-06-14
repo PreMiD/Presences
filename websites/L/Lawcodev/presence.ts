@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "651439039156715531"
+	clientId: "651439039156715531",
 });
 
 presence.on("UpdateData", () => {
@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
 		browsingTimestamp = Math.floor(Date.now() / 1000),
 		presenceData: PresenceData = {
 			largeImageKey: "lawco",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (path === "/")

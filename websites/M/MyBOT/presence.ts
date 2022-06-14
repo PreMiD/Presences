@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "719604498389270599"
+		clientId: "719604498389270599",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
 		largeImageKey: "mybot",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 presence.on("UpdateData", () => {

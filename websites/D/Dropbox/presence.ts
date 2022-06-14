@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "777578842172162068"
+	clientId: "777578842172162068",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "dropbox_logo"
+			largeImageKey: "dropbox_logo",
 		},
 		showFileNames = await presence.getSetting<boolean>("showFileNames");
 

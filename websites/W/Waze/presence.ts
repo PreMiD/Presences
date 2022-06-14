@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "854718080433520661"
+		clientId: "854718080433520661",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: ~~(Date.now() / 1000)
+		startTimestamp: ~~(Date.now() / 1000),
 	},
 	pages: { [key: string]: string } = {
 		"/": "Homepage",
@@ -26,7 +26,7 @@ const presence = new Presence({
 		"/legal/copyright/": "Copyright Policy",
 		"/ccp": "Waze for Cities",
 		"/forum/": "Forum",
-		"/press/": "Press"
+		"/press/": "Press",
 	};
 
 let path: string, start: string, end: string, mapElem: string, mapLoc: string;

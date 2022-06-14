@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "863949633009090580"
+		clientId: "863949633009090580",
 	}),
 	pages: { [k: string]: string } = {
 		"/anime": "Watching an anime",
@@ -22,7 +22,7 @@ const presence = new Presence({
 		"/special": "Searching for special anime episodes",
 		"/az-list": "Seaching all animes",
 		"/most-watched": "Searching most watched animes",
-		"/upcoming": "Searching upcoming animes"
+		"/upcoming": "Searching upcoming animes",
 	};
 
 let timeEnd: number, currentTime: number, paused: boolean;
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 		epNumber = page.slice(page.length - 5).replace(/^\D+/g, ""),
 		presenceData: PresenceData = {
 			largeImageKey: "animesuge",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		search: URLSearchParams = new URLSearchParams(
 			document.location.search.substring(1)
@@ -70,8 +70,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Watch Episode",
-				url: `http://animesuge.to${page}`
-			}
+				url: `http://animesuge.to${page}`,
+			},
 		];
 	} else if (page.includes("/genre")) {
 		const genre = page.slice("/genre/".length);

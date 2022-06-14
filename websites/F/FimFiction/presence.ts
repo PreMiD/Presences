@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "642719342609432586"
+		clientId: "642719342609432586",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLElement;
@@ -7,7 +7,7 @@ let title: HTMLElement;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "ff",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "www.fimfiction.net") {

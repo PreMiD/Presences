@@ -1,13 +1,13 @@
 const presence: Presence = new Presence({
-		clientId: "615652705565933581"
+		clientId: "615652705565933581",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		live: "presence.activity.live",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "listen_moe_lg"
+		largeImageKey: "listen_moe_lg",
 	},
 	audio: HTMLAudioElement = document.querySelector("audio");
 let path: string,

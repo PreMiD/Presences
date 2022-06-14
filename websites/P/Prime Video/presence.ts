@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "705139844883677224"
+		clientId: "705139844883677224",
 	}),
 	strings = presence.getStrings({
 		paused: "presence.playback.paused",
-		playing: "presence.playback.playing"
+		playing: "presence.playback.playing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -16,7 +16,7 @@ function getTimestamps(videoTime: number, videoDuration: number): number[] {
 	const startTime = Date.now();
 	return [
 		Math.floor(startTime / 1000),
-		Math.floor(startTime / 1000) - videoTime + videoDuration
+		Math.floor(startTime / 1000) - videoTime + videoDuration,
 	];
 }
 

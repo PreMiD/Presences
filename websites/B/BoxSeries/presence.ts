@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "955350055034945576"
+		clientId: "955350055034945576",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
 	current: 0,
 	duration: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<boolean>("timestamps")
+			presence.getSetting<boolean>("timestamps"),
 		]),
 		titleMain =
 			document.querySelector("#dt_contenedor > div.module > div > div > h1")
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 			"Pesquisa não encontrada",
 		presenceData: PresenceData = {
 			largeImageKey: ["default", "default_horizontal_tp"][logo],
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 	if (new URLSearchParams(location.search).has("s")) {
 		presenceData.details = "Pesquisando por";
@@ -95,8 +95,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Assistir episódio",
-							url: document.location.href.replace(/#\d+/, "")
-						}
+							url: document.location.href.replace(/#\d+/, ""),
+						},
 					];
 				}
 				break;
@@ -124,8 +124,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Assistir filmes",
-							url: document.location.href.replace(/#\d+/, "")
-						}
+							url: document.location.href.replace(/#\d+/, ""),
+						},
 					];
 				}
 				break;

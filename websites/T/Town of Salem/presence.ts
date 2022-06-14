@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "754771926857285782"
+	clientId: "754771926857285782",
 });
 
 interface GameState {
@@ -124,7 +124,7 @@ let elapsed = Math.round(Date.now() / 1000),
 		page: "Login",
 		day: 1,
 		type: "Classic",
-		state: 1
+		state: 1,
 	};
 
 presence.on("UpdateData", () => {
@@ -135,7 +135,7 @@ presence.on("UpdateData", () => {
 			details: "Browsing BlankMediaGames",
 			state: document.title,
 			startTimestamp: elapsed,
-			largeImageKey: "regular"
+			largeImageKey: "regular",
 		};
 	} else {
 		try {
@@ -205,7 +205,7 @@ presence.on("UpdateData", () => {
 						details: "Logging in",
 						largeImageKey: "regular",
 						smallImageKey: "idle",
-						startTimestamp: elapsed
+						startTimestamp: elapsed,
 					};
 					break;
 				}
@@ -216,14 +216,14 @@ presence.on("UpdateData", () => {
 							state: "Waiting in queue",
 							largeImageKey: "regular",
 							smallImageKey: "idle",
-							startTimestamp: elapsed
+							startTimestamp: elapsed,
 						};
 					} else {
 						data = {
 							details: "Browsing Home Screen",
 							largeImageKey: "regular",
 							smallImageKey: "idle",
-							startTimestamp: elapsed
+							startTimestamp: elapsed,
 						};
 					}
 					break;
@@ -234,7 +234,7 @@ presence.on("UpdateData", () => {
 						state: "Waiting in lobby",
 						elapsed,
 						largeImageKey: key,
-						smallImageKey: "idle"
+						smallImageKey: "idle",
 					});
 					break;
 				}
@@ -242,7 +242,7 @@ presence.on("UpdateData", () => {
 					Object.assign(data, {
 						details: `In a ${gameType} match`,
 						largeImageKey: key,
-						startTimestamp: elapsed
+						startTimestamp: elapsed,
 					});
 					switch (info.state) {
 						case 0: {
@@ -273,7 +273,7 @@ presence.on("UpdateData", () => {
 						details: "Browsing End-Game Screen",
 						largeImageKey: key,
 						smallImageKey: "idle",
-						startTimestamp: elapsed
+						startTimestamp: elapsed,
 					});
 					break;
 				}
@@ -288,7 +288,7 @@ presence.on("UpdateData", () => {
 				details: "Logging in.",
 				largeImageKey: "regular",
 				smallImageKey: "idle",
-				startTimestamp: elapsed
+				startTimestamp: elapsed,
 			});
 		}
 	}

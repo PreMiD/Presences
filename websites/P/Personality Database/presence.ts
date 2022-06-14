@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "909403157686288414"
+		clientId: "909403157686288414",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "personality-database",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		useOnlyFirstPersonalityType = await presence.getSetting<boolean>(
 			"useOnlyFirstPersonalityType"
@@ -50,8 +50,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Visit profile",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname === "/search") {
 		const urlParams = new URLSearchParams(window.location.search);
@@ -85,8 +85,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `Visit ${userName}'s profile`,
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else presenceData.details = "Viewing user's profile";
 		presenceData.smallImageKey = "user";

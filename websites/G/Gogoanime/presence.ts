@@ -22,13 +22,13 @@ interface DomainCheckState {
 
 const presence = new Presence({
 	clientId: "696341580096733185",
-	appMode: true
+	appMode: true,
 });
 
 let videoInfos = {
 		duration: 0,
 		currentTime: 0,
-		paused: false
+		paused: false,
 	},
 	framaDataUpdated = false,
 	isDomainChecked = false, // we only need to verify the authenticity of the domain ONCE
@@ -46,7 +46,7 @@ const states = {
 	SIGNUP: ["Signing up...", "signup"],
 	BOOKMARK: ["Managing bookmarks...", "bookmark"],
 	REQUESTING: ["Requesting an anime...", "request"],
-	CONTACTING: ["Contacting the support...", "contact"]
+	CONTACTING: ["Contacting the support...", "contact"],
 };
 
 presence.on(
@@ -78,7 +78,7 @@ function parseCookieString(cookie: string): Record<string, string>[] {
 			if (parts.length === 2) {
 				dict.push({
 					key: parts[0].trimStart(),
-					value: parts[1]
+					value: parts[1],
 				});
 			}
 		}
@@ -91,8 +91,8 @@ async function sendRequestToDomainAPI(): Promise<Response> {
 		method: "GET",
 		mode: "cors",
 		headers: {
-			"Content-Type": "application/json"
-		}
+			"Content-Type": "application/json",
+		},
 	});
 	return response;
 }
@@ -344,7 +344,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
 		details: state[0],
-		state: detail
+		state: detail,
 	};
 
 	if (state === states.NOTFOUND) presence.setActivity({});
@@ -352,8 +352,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Watch",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 
 		if (

@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "777530802887983124"
+	clientId: "777530802887983124",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "google_podcast_logo"
+			largeImageKey: "google_podcast_logo",
 		},
 		podcastTitle =
 			document.querySelectorAll(".Ut8Gr").length > 0 &&

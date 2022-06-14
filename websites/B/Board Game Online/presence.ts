@@ -1,8 +1,8 @@
 const presence = new Presence({
-		clientId: "684570342085099546"
+		clientId: "684570342085099546",
 	}),
 	strings = presence.getStrings({
-		browse: "presence.activity.browsing"
+		browse: "presence.activity.browsing",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);
@@ -14,89 +14,89 @@ function setObject(path: string) {
 	switch (path) {
 		case "/": {
 			return {
-				details: "Browsing"
+				details: "Browsing",
 			};
 		}
 
 		case "forgot_login": {
 			return {
-				details: "Forgot Login"
+				details: "Forgot Login",
 			};
 		}
 
 		case "register": {
 			return {
-				details: "Registering..."
+				details: "Registering...",
 			};
 		}
 
 		case "newgame": {
 			return {
 				details: "Creating",
-				state: "New Game"
+				state: "New Game",
 			};
 		}
 
 		case "joingame": {
 			return {
 				details: "Joining",
-				state: "New Game"
+				state: "New Game",
 			};
 		}
 
 		case "shop": {
 			return {
 				details: "Viewing",
-				state: "Shop"
+				state: "Shop",
 			};
 		}
 
 		case "donations": {
 			return {
 				details: "Viewing",
-				state: "Donations"
+				state: "Donations",
 			};
 		}
 
 		case "info": {
 			return {
 				details: "Viewing",
-				state: "Game Info"
+				state: "Game Info",
 			};
 		}
 
 		case "recruit": {
 			return {
 				details: "Viewing",
-				state: "Recruit a Friend"
+				state: "Recruit a Friend",
 			};
 		}
 
 		case "terms": {
 			return {
 				details: "Viewing",
-				state: "Terms of Service"
+				state: "Terms of Service",
 			};
 		}
 
 		case "privacy": {
 			return {
 				details: "Viewing",
-				state: "Privacy Policy"
+				state: "Privacy Policy",
 			};
 		}
 
 		case "contact": {
 			return {
 				details: "Viewing",
-				state: "Contact"
+				state: "Contact",
 			};
 		}
 
 		case "/forum": {
 			return {
 				details: "Viewing Page",
-				state: "Forums"
+				state: "Forums",
 			};
 		}
 	}
@@ -104,7 +104,7 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "boardgameonline"
+			largeImageKey: "boardgameonline",
 		},
 		path = location.pathname,
 		query = location.search,

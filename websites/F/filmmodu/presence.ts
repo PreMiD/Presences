@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "634816982843129857"
+		clientId: "634816982843129857",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	pages: {
 		[name: string]: string;
@@ -17,14 +17,14 @@ const presence = new Presence({
 		"/turkce-dublaj-izle": "Türkçe Dublajlı Filmler",
 		"/giris-yap": "Giriş Yap",
 		"/kayit-ol": "Kayıt Ol",
-		"/iletisim": "İletişim"
+		"/iletisim": "İletişim",
 	},
 	browsingTimetsamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "fm-logo",
-			startTimestamp: browsingTimetsamp
+			startTimestamp: browsingTimetsamp,
 		},
 		page = document.location.pathname,
 		title = document.querySelector(

@@ -10,7 +10,7 @@
 	},
 	"url": "wikia.org",
 	"regExp": "([a-z0-9-]+[.])?wikia[.]org[/]",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/qvLS6QI.png",
 	"thumbnail": "https://i.imgur.com/3Ikm2IH.png",
 	"color": "#39424D",

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "440182142694064129"
+		clientId: "440182142694064129",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,7 +11,7 @@ async function getStrings() {
 			readingPost: "general.readingPost",
 			viewPage: "general.viewPage",
 			viewUser: "general.viewUser",
-			watchingVid: "general.watchingVid"
+			watchingVid: "general.watchingVid",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -43,16 +43,16 @@ presence.on("UpdateData", async () => {
 			[
 				"eternalnetworktm_logo",
 				"eternalnetworktm_logo_2",
-				"eternalnetworktm_logo_3"
+				"eternalnetworktm_logo_3",
 			][bigicon] || "eternalnetworktm_logo",
 		smallImageText: hostname + pathname,
 		startTimestamp: browsingTimestamp,
 		buttons: [
 			{
 				label: (await strings).buttonViewPage,
-				url: window.location.href
-			}
-		]
+				url: window.location.href,
+			},
+		],
 	};
 
 	if (!showTimestamps) delete presenceData.startTimestamp;
@@ -102,14 +102,14 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: (await strings).buttonViewPage,
-						url: window.location.href
+						url: window.location.href,
 					},
 					{
 						label: document
 							.querySelector("div.postbody > div > a > span")
 							.getAttribute("title"),
-						url: document.querySelector("#video_title").getAttribute("value")
-					}
+						url: document.querySelector("#video_title").getAttribute("value"),
+					},
 				];
 			}
 

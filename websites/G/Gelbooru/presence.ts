@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "620294187878711313"
+	clientId: "620294187878711313",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg-gb"
+			largeImageKey: "lg-gb",
 		},
 		urlParams = new URLSearchParams(window.location.search);
 	if (document.location.pathname === "/")

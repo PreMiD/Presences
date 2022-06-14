@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "748098665033498735"
+		clientId: "748098665033498735",
 	}),
 	matrixBrowsing = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: matrixBrowsing
+			startTimestamp: matrixBrowsing,
 		},
 		matrixPage = window.location.pathname;
 
@@ -18,8 +18,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Bot",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 		presenceData.details = "Watching Bot:";
 		presenceData.state = document.evaluate(

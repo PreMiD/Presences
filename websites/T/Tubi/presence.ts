@@ -1,14 +1,14 @@
 const presence = new Presence({
-		clientId: "937290941285429311"
+		clientId: "937290941285429311",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "tubi-logo"
+			largeImageKey: "tubi-logo",
 		},
 		video: HTMLVideoElement = document.querySelector(
 			"video#videoPlayerComponent"

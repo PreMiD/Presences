@@ -1,7 +1,7 @@
 type availableColors = "red" | "blue" | "beige";
 
 const presence = new Presence({
-		clientId: "817859401477259315"
+		clientId: "817859401477259315",
 	}),
 	slideshow = presence.createSlideshow(),
 	icons = {
@@ -14,7 +14,7 @@ const presence = new Presence({
 			"red6",
 			"red7",
 			"red8",
-			"red9"
+			"red9",
 		],
 		blue: [
 			"blue1",
@@ -25,9 +25,9 @@ const presence = new Presence({
 			"blue6",
 			"blue7",
 			"blue8",
-			"blue9"
+			"blue9",
 		],
-		beige: ["beige1", "beige2", "beige3", "beige4", "beige5", "beige6"]
+		beige: ["beige1", "beige2", "beige3", "beige4", "beige5", "beige6"],
 	};
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -36,7 +36,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "codenames"
+		largeImageKey: "codenames",
 	};
 
 	const buttons = await presence.getSetting<boolean>("buttons");
@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Join room",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 		if (document.querySelector(".justify-start.items-center")) {
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
 							smallImageKey: icons[color][randomInt],
 							smallImageText: `Available cards: ${name} (${index + 1}/${
 								availableCards.length
-							})`
+							})`,
 						},
 						5000
 					);
@@ -176,8 +176,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Join room",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 		} else if (document.location.pathname.includes("/room/")) {
@@ -186,8 +186,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Join room",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 		} else presenceData.details = "Browsing...";

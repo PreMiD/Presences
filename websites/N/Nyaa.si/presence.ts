@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "635213174144237601"
+		clientId: "635213174144237601",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title;
@@ -9,7 +9,7 @@ const viewString = "Viewing ",
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (new URLSearchParams(window.location.search).has("q")) {

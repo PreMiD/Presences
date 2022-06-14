@@ -1,6 +1,6 @@
 const PREMID_DEBUG_LOGGING = true,
 	presence = new Presence({
-		clientId: "676560908578717702"
+		clientId: "676560908578717702",
 	});
 
 function getNumberWithOrdinal(n: number): string {
@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
 				smallImageKey: loggedIn ? "user" : "guest",
 				smallImageText: loggedIn
 					? document.querySelector(".dropdown--account span").textContent
-					: "Racing as a guest"
+					: "Racing as a guest",
 			},
 			path = location.pathname;
 		try {

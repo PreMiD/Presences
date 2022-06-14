@@ -1,14 +1,14 @@
 const presence = new Presence({
-		clientId: "779397757928210472"
+		clientId: "779397757928210472",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "storyfire"
+			largeImageKey: "storyfire",
 		},
 		video: HTMLVideoElement = document.querySelector(
 			"#storyfire-player_html5_api"
@@ -39,8 +39,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (document.location.pathname.startsWith("/forgot-password"))

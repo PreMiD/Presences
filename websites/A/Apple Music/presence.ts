@@ -1,18 +1,18 @@
 const presence = new Presence({
-		clientId: "842112189618978897"
+		clientId: "842112189618978897",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "applemusic-logo"
+			largeImageKey: "applemusic-logo",
 		},
 		[timestamps, cover] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]),
 		audio = document.querySelector<HTMLAudioElement>(
 			"audio#apple-music-player"

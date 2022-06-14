@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "666412985513672715"
+		clientId: "666412985513672715",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 //! Songs timestamp will reset on new song (see further below)
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		[format1, format2, showElapsed] = await Promise.all([
 			presence.getSetting<string>("sFormat1"),
 			presence.getSetting<string>("sFormat2"),
-			presence.getSetting<boolean>("tElapsed")
+			presence.getSetting<boolean>("tElapsed"),
 		]);
 
 	//! Merch website

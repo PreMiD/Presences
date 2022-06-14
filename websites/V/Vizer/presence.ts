@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "684199669424848970"
+		clientId: "684199669424848970",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		search: "presence.activity.searching"
+		search: "presence.activity.searching",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -28,7 +28,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "vizer_logo"
+		largeImageKey: "vizer_logo",
 	};
 
 	let title;

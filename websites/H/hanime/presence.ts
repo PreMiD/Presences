@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "622375113702113281"
+		clientId: "622375113702113281",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 let playback = true,
@@ -31,7 +31,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 	if (document.location.pathname.includes("/videos")) {
 		if (playback === true && !isNaN(duration)) {

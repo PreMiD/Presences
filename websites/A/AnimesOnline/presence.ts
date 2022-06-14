@@ -1,17 +1,17 @@
 const presence = new Presence({
-		clientId: "874161536074145833"
+		clientId: "874161536074145833",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
 	current: 0,
 	duration: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -24,14 +24,14 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const [time, buttons] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		playvdo =
 			document.querySelector("#info > h1")?.textContent ?? "desconhecido",
 		path = document.location,
 		presenceData: PresenceData = {
 			largeImageKey: "site",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	// Presence
@@ -104,8 +104,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Assistir Anime",
-					url: document.location.href.replace(/#\d+/, "")
-				}
+					url: document.location.href.replace(/#\d+/, ""),
+				},
 			];
 		}
 	} else if (path.pathname.match(/(\W|^)filmes(\W|$)/)) {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "858408468854997052"
+		clientId: "858408468854997052",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		accountValue = await presence.getSetting<number>("accountValue"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	switch (document.location.hostname) {
@@ -61,8 +61,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					break;
 				case "calculator":
@@ -91,8 +91,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					}
 					break;
@@ -111,8 +111,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					if (document.querySelector("a.tabnav-tab.selected")) {
 						presenceData.details = `Viewing App ${
@@ -133,8 +133,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					presenceData.details = `Viewing Sub ${
 						document.querySelector("a.tabnav-tab.selected").childNodes[1]
@@ -153,8 +153,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					break;
 				case "bundles":
@@ -176,8 +176,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					} else {
 						presenceData.details = "Viewing Blog Post";
@@ -186,8 +186,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					}
 					break;
@@ -273,8 +273,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 						if (
 							document.querySelector<HTMLInputElement>(
@@ -347,8 +347,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					}
 					break;
@@ -359,8 +359,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					if (
 						document.querySelector("h1.header-title").textContent !==
@@ -396,8 +396,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					break;
 				case "signout":
@@ -407,8 +407,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					presenceData.state =
 						document.querySelector("h1").lastChild.textContent;
@@ -563,8 +563,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					}
 					break;

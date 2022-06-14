@@ -20,7 +20,7 @@ iframe.on("UpdateData", () => {
 			queryD: query4 ? query4.textContent : false,
 			queryE: document.querySelector("table#postForm") ? true : false,
 			queryF: query6 ? query6.hasAttribute("style") : false,
-			queryG: document.querySelector("div#quickReply") ? true : false
+			queryG: document.querySelector("div#quickReply") ? true : false,
 		});
 	}
 });

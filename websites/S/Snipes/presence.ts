@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "827620297896230912"
+		clientId: "827620297896230912",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		setTimeElapsed = await presence.getSetting<boolean>("timeElapsed"),
 		setShowButtons = await presence.getSetting<boolean>("showButtons"),
@@ -38,8 +38,8 @@ presence.on("UpdateData", async function () {
 			presenceData.buttons = [
 				{
 					label: "View Category",
-					url: window.location.href //e.g. https://www.snipes.com/c/clothing/trackpants
-				}
+					url: window.location.href, //e.g. https://www.snipes.com/c/clothing/trackpants
+				},
 			];
 		}
 
@@ -73,8 +73,8 @@ presence.on("UpdateData", async function () {
 			presenceData.buttons = [
 				{
 					label: "View Product",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 
@@ -96,8 +96,8 @@ presence.on("UpdateData", async function () {
 			presenceData.buttons = [
 				{
 					label: "View Results",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (urlpath[urlpNum + 1] === "view-account")

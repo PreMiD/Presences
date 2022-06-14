@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "673322920809988120"
+	clientId: "673322920809988120",
 });
 
 function parseQueryString(queryString?: string): { [key: string]: string } {
@@ -18,7 +18,7 @@ function parseQueryString(queryString?: string): { [key: string]: string } {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		route = document.location.pathname.split("/");
 

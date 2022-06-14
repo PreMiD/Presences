@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "638118757453004820"
+		clientId: "638118757453004820",
 	}),
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ let layout: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "jackbox"
+			largeImageKey: "jackbox",
 		},
 		// Check for presence setting
 		useName = await presence.getSetting<boolean>("useName"),

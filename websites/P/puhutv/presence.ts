@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "628341182581440531"
+		clientId: "628341182581440531",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 presence.on("UpdateData", async () => {
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: Math.floor(Date.now() / 1000),
 			details: "Geziniyor...",
 			state:
-				category && category.textContent ? category.textContent : "Ana Sayfa"
+				category && category.textContent ? category.textContent : "Ana Sayfa",
 		});
 	} else {
 		const video = document.querySelector(
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 				smallImageKey: video.paused ? "paused" : "playing",
 				smallImageText: video.paused
 					? (await strings).pause
-					: (await strings).play
+					: (await strings).play,
 			};
 
 			if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
