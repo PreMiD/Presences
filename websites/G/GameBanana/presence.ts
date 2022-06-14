@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 			"StatusUpdate",
 			"Support",
 			"Studio",
-			"Wiki"
+			"Wiki",
 		],
 		gamesettingspages = [
 			"welcomemessage",
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 			"rules",
 			"attribs",
 			"details",
-			"uberstyle"
+			"uberstyle",
 		];
 
 	if (document.location.hostname === "gamebanana.com") {
