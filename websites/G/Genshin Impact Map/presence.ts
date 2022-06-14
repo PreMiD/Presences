@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "973729201104511007"
+		clientId: "973729201104511007",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -26,7 +26,7 @@ const map: Maps[] = [
 			map: "Teyvat",
 			largeImageKey: "teyvat_map",
 			pvlargeImageKey: "teyvat_map",
-			smallImageKey: "emblem_unknown"
+			smallImageKey: "emblem_unknown",
 		},
 		{
 			city: false,
@@ -34,7 +34,7 @@ const map: Maps[] = [
 			map: "Enkanomiya",
 			largeImageKey: "enkanomiya_map",
 			pvlargeImageKey: "preview_enkanomiya",
-			smallImageKey: "emblem_enkanomiya"
+			smallImageKey: "emblem_enkanomiya",
 		},
 		{
 			city: false,
@@ -42,7 +42,7 @@ const map: Maps[] = [
 			map: "The Chasm: Underground Mines",
 			largeImageKey: "the_chasm_underground_mines_map",
 			pvlargeImageKey: "preview_the_chasm_underground_mines",
-			smallImageKey: "emblem_thechasm"
+			smallImageKey: "emblem_thechasm",
 		},
 		{
 			city: false,
@@ -50,28 +50,28 @@ const map: Maps[] = [
 			map: "Unknown",
 			largeImageKey: "unknown_map",
 			pvlargeImageKey: null,
-			smallImageKey: "emblem_unknown"
-		}
+			smallImageKey: "emblem_unknown",
+		},
 	],
 	city: City[] = [
 		{
 			position: 1200,
 			map: "Mondstadt",
 			largeImageKey: "preview_mondstadt",
-			smallImageKey: "emblem_mondstadt"
+			smallImageKey: "emblem_mondstadt",
 		},
 		{
 			position: 4000,
 			map: "Liyue",
 			largeImageKey: "preview_liyue",
-			smallImageKey: "emblem_liyue"
+			smallImageKey: "emblem_liyue",
 		},
 		{
 			position: 9000,
 			map: "Inazuma",
 			largeImageKey: "preview_tenshukaku",
-			smallImageKey: "emblem_inazuma"
-		}
+			smallImageKey: "emblem_inazuma",
+		},
 	];
 
 let getpos: number, current: Maps, currentCity: City;
@@ -79,13 +79,13 @@ let getpos: number, current: Maps, currentCity: City;
 presence.on("UpdateData", async () => {
 	const [showPreview, timestamps] = await Promise.all([
 			presence.getSetting<boolean>("showPreview"),
-			presence.getSetting<boolean>("timestamps")
+			presence.getSetting<boolean>("timestamps"),
 		]),
 		presenceData: PresenceData = {
 			details: "Genshin Impact Map",
 			largeImageKey: "main",
 			smallImageKey: "search",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.href;
 	switch (document.location.hostname) {
