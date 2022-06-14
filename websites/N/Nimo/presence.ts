@@ -74,10 +74,10 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons")
 		]),
 		title = getElement(
-			":is(div.nimo-rm_title-text > h3, #meta-info > div.video-info h1)"
+			":is(div.nimo-rm_title-text > h3, #meta-info > div.video-info h1, .nimo-player__room-meta_title-text)"
 		),
 		streamer = getElement(
-			":is(div.nimo-rm_sub-title > h1, #meta-info div.anchor-name.n-as-text-over > a > h2)"
+			":is(div.nimo-rm_sub-title > h1, #meta-info div.anchor-name.n-as-text-over > a > h2, .nimo-player__room-meta__nick)"
 		),
 		game = getElement("div.nimo-anchor-broadcast-game > a > h4");
 
