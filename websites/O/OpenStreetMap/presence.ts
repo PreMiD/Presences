@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/traces"))
 		presenceData.state = "Public GPS tracks";
 	else if (document.location.pathname.includes("/diary/new"))
-		presenceData.state = "Write new diary entry";
+		presenceData.state = "Writing a new diary entry";
 	else if (document.location.pathname.includes("/diary"))
 		presenceData.state = "Users' Diaries";
 	else if (document.location.pathname.includes("/help"))
@@ -83,19 +83,19 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.title.split(" -")[0];
 	} else if (document.location.hostname.startsWith("blog")) {
 		presenceData.details = "Reading a blog post:";
-		presenceData.state = document.title.split(" |")[0];
+		presenceData.state = document.title.split("|")[0];
 		presenceData.buttons = [
 			{ label: "Read this post", url: document.location.href },
 		];
 	} else if (document.location.hostname.startsWith("forum")) {
 		presenceData.details = "Reading a forum post:";
-		presenceData.state = document.title.split(" /")[0];
+		presenceData.state = document.title.split("/")[0];
 		presenceData.buttons = [
 			{ label: "Read this post", url: document.location.href },
 		];
 	} else if (document.location.hostname.startsWith("community")) {
 		presenceData.details = "Reading a community post:";
-		presenceData.state = document.title.split(" -")[0];
+		presenceData.state = document.title.split("-")[0];
 		presenceData.buttons = [
 			{ label: "Read this post", url: document.location.href },
 		];
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Search results for:";
 		presenceData.state = document.title.split("|")[0];
 	} else if (document.location.pathname.includes("/user/")) {
-		presenceData.details = `On ${document.title.split("|")[0]} profile :`;
+		presenceData.details = `On ${document.title.split("|")[0]}'s profile:`;
 		const userEdits = document.querySelector(
 				"#content > div.content-heading > div > div > div.col > nav > ul > li:nth-child(1) > span"
 			).textContent,
@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/wiki")) {
 		presenceData.details = "Reading the wiki";
-		presenceData.state = `"${document.title.split(" —")[0]}"`;
+		presenceData.state = `"${document.title.split("—")[0]}"`;
 		presenceData.buttons = [
 			{ label: "Check the page", url: document.location.href },
 		];
