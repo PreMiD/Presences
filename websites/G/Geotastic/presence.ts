@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "978557181911773214"
+		clientId: "978557181911773214",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "logo",
 		details: "Viewing an unsupported page",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	const pages: Record<string, PresenceData> = {
 		"/home": { details: "Viewing the home page" },
@@ -28,12 +28,12 @@ presence.on("UpdateData", async () => {
 		"/account/trophies": { details: "Viewing their trophies" },
 		"/account/friends": { details: "Viewing their friends" },
 		"/account/supporter-status": {
-			details: "Viewing their supporter status"
+			details: "Viewing their supporter status",
 		},
 		"/account/quota-consumption": {
-			details: "Viewing their quota consumption"
+			details: "Viewing their quota consumption",
 		},
-		"/account/account-settings": { details: "Viewing their account settings" }
+		"/account/account-settings": { details: "Viewing their account settings" },
 	};
 
 	for (const [path, data] of Object.entries(pages)) {
