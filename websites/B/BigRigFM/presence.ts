@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "985821439829622825"
+		clientId: "985821439829622825",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "brfmlogo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	presenceData.details = `${
@@ -18,8 +18,8 @@ presence.on("UpdateData", () => {
 	presenceData.buttons = [
 		{
 			label: "Tune into BRFM",
-			url: "https://bigrig.fm/listen"
-		}
+			url: "https://bigrig.fm/listen",
+		},
 	];
 
 	const spotifyUrl = document
@@ -28,7 +28,7 @@ presence.on("UpdateData", () => {
 	if (spotifyUrl) {
 		presenceData.buttons.push({
 			label: "Listen on Spotify",
-			url: spotifyUrl
+			url: spotifyUrl,
 		});
 	}
 
