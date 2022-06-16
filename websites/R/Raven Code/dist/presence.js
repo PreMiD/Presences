@@ -1,35 +1,31 @@
 const presence = new Presence({ clientId: "937015924425367643" });
-
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
+	const presenceData = {
 			largeImageKey: "logo",
-			details: "Geziniyor",
+			details: "Geziniyor.",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		},
 		page = document.location.pathname;
-	if (page == "/") presenceData.details = "Anasayfayı görüntülüyor";
+	if (page == "/") presenceData.details = "Anasayfayı görüntülüyor.";
 	if (page == "/yetkililer")
-		presenceData.details = "Yetkililer sayfasını görüntülüyor";
+		presenceData.details = "Yetkili sayfasını görüntülüyor.";
 	if (page == "/profile") {
 		presenceData.details = "Profil görüntüleniyor:";
 		presenceData.state = document.querySelector(".user-info").textContent;
-		presenceData.largeImageKey = (<HTMLImageElement>(
-			document.querySelector("img.avatar")
-		)).src;
+		presenceData.largeImageKey = document.querySelector("img.avatar").src;
 	}
-	if (page == "/share") presenceData.details = "Kod paylaşıyor";
-	if (page == "/tools") presenceData.details = "Araçlar sayfasını görüntülüyor";
-
+	if (page == "/share") presenceData.details = "Kod paylaşıyor.";
+	if (page == "/tools")
+		presenceData.details = "Araçlar sayfasını görüntülüyor.";
 	if (page == "/codes") {
 		const URL = new URLSearchParams(document.location.search);
-		presenceData.details = "Kodlar sayfasını görüntülüyor";
+		presenceData.details = "Kodlar sayfasını görüntülüyor.";
 		if (URL.get("filter") !== "all") {
 			presenceData.state = `Arama: ${decodeURIComponent(
 				URL.get("filter")
 			)} — Sayfa ${URL.get("page")}`;
-		} else presenceData.state = `Sayfa ${URL.get("page")}`;
+		}
 	}
-
 	if (page.startsWith("/code/")) {
 		presenceData.details = "Kod görüntüleniyor:";
 		presenceData.state = document.title.split("— ")[1];
@@ -65,14 +61,12 @@ presence.on("UpdateData", async () => {
 				text: "CSS"
 			}
 		];
-
 		for (const language of languages) {
 			if (page.includes(language.page)) {
 				presenceData.smallImageKey = language.key;
 				presenceData.smallImageText = `Kategori — ${language.text}`;
 			}
 		}
-
 		if (
 			document.activeElement == document.querySelector('input[name="comment"]')
 		)
@@ -91,7 +85,6 @@ presence.on("UpdateData", async () => {
 		)
 			presenceData.details = "Hata bildiriyor:";
 	}
-
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
