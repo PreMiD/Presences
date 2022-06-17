@@ -4,16 +4,16 @@
 		"name": "can",
 		"id": "613700645173592086"
 	},
-  "contributors": [
-    {
-      "name": "nowongame",
-      "id": "686990422198845452"
-    }
-  ],
-	"service": "Discord Türkiye",
+	"contributors": [
+		{
+			"name": "nowongame",
+			"id": "686990422198845452"
+		}
+	],
+	"service": "Discord Turkiye",
 	"description": {
 		"en": "Discord Turkiye is the largest Forum/Discord community in Turkey, which contains updates, news, servers, bots, trades and many categories.",
-		"tr": "Discord Türkiye, güncellemeler, haberler, sunucular, botlar, ticaretler ve birçok kategoriyi içerisinde barındıran Turkiye'nin en büyük Forum/Discord topluluğudur."
+		"tr": "Discord Turkiye, güncellemeler, haberler, sunucular, botlar, ticaretler ve birçok kategoriyi içerisinde barındıran Turkiye'nin en büyük Forum/Discord topluluğudur."
 	},
 	"url": "discordturkiye.com",
 	"version": "1.0.0",

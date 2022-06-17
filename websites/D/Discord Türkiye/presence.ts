@@ -1,20 +1,16 @@
 const presence = new Presence({ clientId: "890757020393816064" });
+const startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const presenceData = {
+	const presenceData: PresenceData = {
 			largeImageKey: "1024dctr",
 			details: "Geziniyor",
-			state: "",
-			startTimestamp: Math.floor(Date.now() / 1000),
-			smallImageText: "",
-			smallImageKey: "",
+			startTimestamp
 		},
-		page = document.location.pathname,
-		privacyMode = await presence.getSetting("privacy_mode").catch(() => {
-			false;
-		});
+		{ pathname } = document.location,
+		privacyMode = await presence.getSetting("privacy_mode").catch(() => false);
 
-	if (document.querySelector('[href="/login/"]') != null) {
+	if (document.querySelector('[href="/login/"]')) {
 		presenceData.smallImageText = "Misafir Modu";
 		presenceData.smallImageKey = "https://i.hizliresim.com/385dt7x.png";
 	} else if (document.querySelector("span.avatar.avatar--xxs > img")) {
@@ -24,46 +20,43 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "https://i.hizliresim.com/385dt7x.png";
 	}
 
-	if (page == "/") presenceData.details = "Anasayfayı görüntülüyor";
-	if (page.includes("/hesabim")) {
+	if (pathname === "/") presenceData.details = "Anasayfayı görüntülüyor";
+	if (pathname.includes("/hesabim"))
 		presenceData.details = "Kişisel detaylarını görüntülüyor";
-	}
-	if (page.includes("/konular/")) {
+	if (pathname.includes("/konular/")) {
 		presenceData.details = "Konuyu görüntülüyor:";
 		presenceData.state = document.title.split(" | ")[0];
 		if (
-			(<HTMLElement>document.querySelector("div.fr-element.fr-view > p"))
-				?.innerText != undefined &&
-			(<HTMLElement>document.querySelector("div.fr-element.fr-view > p"))
-				?.innerText != "\n"
+			document.querySelector<HTMLElement>("div.fr-element.fr-view > p")
+				?.textContent &&
+			document.querySelector<HTMLElement>("div.fr-element.fr-view > p")
+				?.textContent != "\n"
 		) {
 			presenceData.details = "Konuya yorum yazıyor:";
 			presenceData.state = document.title.split(" | ")[0];
 		}
 	}
-	if (page.includes("/kullanicilar/")) {
+	if (pathname.includes("/kullanicilar/"))
 		presenceData.details = "Kullanıcıları görüntülüyor";
-	}
 	if (document.querySelector("span.username > span")) {
 		presenceData.details = "Kullanıcıyı görüntülüyor:";
 		presenceData.state = document.title.split(" | ")[0];
 	}
-	if (page == "/araclar/") {
+	if (pathname === "/araclar/") {
 		presenceData.details = "Araçları görüntülüyor";
 		delete presenceData.smallImageKey;
 	}
 
-	if (page == "/araclar/davet/") {
+	if (pathname === "/araclar/davet/") {
 		delete presenceData.smallImageKey;
-		if (privacyMode) {
-			presenceData.details = "Davet görüntülüyor";
-		} else if (
-			(<HTMLElement>document.querySelector("div.tag > div.name")).innerText
+		if (privacyMode) presenceData.details = "Davet görüntülüyor";
+		else if (
+			(<HTMLElement>document.querySelector("div.tag > div.name")).textContent
 		) {
 			presenceData.details = "Daveti görüntülüyor:";
 			presenceData.state = (<HTMLElement>(
 				document.querySelector("div.tag > div.name")
-			)).innerText;
+			)).textContent;
 			presenceData.largeImageKey = (<HTMLElement>(
 				document.querySelector("div.icon")
 			)).style.backgroundImage
@@ -72,18 +65,19 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (page == "/araclar/kullanici/") {
+	if (pathname === "/araclar/kullanici/") {
 		delete presenceData.smallImageKey;
 		if (privacyMode) {
 			presenceData.details = "Kullanıcı görüntülüyor";
-		} else if ((<HTMLElement>document.querySelector("div.tag")).innerText) {
+		} else if ((<HTMLElement>document.querySelector("div.tag")).textContent) {
 			presenceData.details = "Kullanıcı görüntülüyor:";
-			presenceData.state =
+			presenceData.state = `${
 				(<HTMLElement>document.querySelector("div.tag > div.username"))
-					.innerText +
-				"" +
+					.textContent
+			}${
 				(<HTMLElement>document.querySelector("div.tag > div.discriminator"))
-					.innerText;
+					.textContent
+			}`;
 			presenceData.largeImageKey = (<HTMLElement>(
 				document.querySelector("div.avatar")
 			)).style.backgroundImage
@@ -92,24 +86,22 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (page == "/konusmalar/") {
+	if (pathname === "/konusmalar/")
 		presenceData.details = "Konuşmalarını görüntülüyor";
-	}
 
-	if (page.includes("/tags/")) {
+	if (pathname.includes("/tags/")) {
 		presenceData.details = "Etiketi görüntülüyor:";
 		presenceData.state = document.title.split(" | ")[0];
 	}
 
-	if (page == "/tags") presenceData.details == "Etiketleri görüntülüyor";
+	if (pathname === "/tags") presenceData.details == "Etiketleri görüntülüyor";
 
-	if (page.includes("/post-thread")) {
+	if (pathname.includes("/post-thread")) {
 		presenceData.details = "Kategoride konu açıyor:";
 		presenceData.state = document.querySelector(
 			'[itemprop="itemListElement"]:last-child span[itemprop="name"]'
 		).textContent;
 	}
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	return presence.setActivity(presenceData);
 });
