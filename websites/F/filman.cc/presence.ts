@@ -9,12 +9,12 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname.toLowerCase();
-	if (path == "/" || path == "/online")
+	if (path === "/" || path === "/online")
 		presenceData.details = "Przegląda stronę główną...";
 	else if (path.includes("/movies")) {
 		presenceData.details = "Ogląda film:";
 		presenceData.state = document.title.split(" ").slice(0, -9).join(" ");
-	} else if (path.includes("/serial-online/") && path.split("/").length == 5) {
+	} else if (path.includes("/serial-online/") && path.split("/").length === 5) {
 		presenceData.details = "Ogląda serial:";
 		presenceData.state = `${document.title.split(" ").slice(0, -9).join(" ")}`;
 	} else if (path.includes("/serial-online")) {
