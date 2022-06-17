@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "721748388143562852"
+		clientId: "721748388143562852",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	}),
 	media: MediaObj = {
 		// anyone is welcome to suggest more metadata via GH issues
@@ -20,7 +20,7 @@ const presence = new Presence({
 		trackNumber: null,
 		showName: null,
 		seasonNumber: null,
-		episodeNumber: null
+		episodeNumber: null,
 	};
 let isShow = false,
 	isSong = false,
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 		document.querySelector(".footer").textContent.includes("VLC")
 	) {
 		const presenceData: PresenceData = {
-			largeImageKey: "vlc"
+			largeImageKey: "vlc",
 		};
 
 		if (media.state !== prev) {

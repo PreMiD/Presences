@@ -4,7 +4,7 @@ presence.on("UpdateData", async () => {
 	const path: string = document.location.pathname,
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: Date.now()
+			startTimestamp: Date.now(),
 		},
 		baslik: Element = document.querySelector("h1.title");
 

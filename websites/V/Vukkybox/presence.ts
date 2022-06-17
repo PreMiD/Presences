@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "918248582459555871"
+		clientId: "918248582459555871",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "icon",
 		smallImageKey: "vukky",
 		smallImageText: "Playing Vukkybox",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/gallery") {

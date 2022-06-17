@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "687426695417823238"
+	clientId: "687426695417823238",
 });
 
 let currentTime: number, duration: number, paused: boolean, playback;
@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		};
 
 	if (document.location.href.includes("login.tech.tvnz.co.nz")) {

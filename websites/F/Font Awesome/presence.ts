@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "820023496934817804"
+		clientId: "820023496934817804",
 	}),
 	pBrowsing = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "icon2",
-			startTimestamp: pBrowsing
+			startTimestamp: pBrowsing,
 		},
 		pPage = window.location.pathname;
 
@@ -31,8 +31,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Icon",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 		} else {

@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "736516965748834336"
+		clientId: "736516965748834336",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	start = Date.now();
 let videoTitle: string,
@@ -25,7 +25,7 @@ presence.on("iFrameData", (data: DataInterface) => {
 });
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		pathArray: string[] = window.location.pathname
 			.replace(/^\/|\/$/g, "")

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "861567034706100234"
+		clientId: "861567034706100234",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -19,12 +19,12 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "fbox_logo"
+			largeImageKey: "fbox_logo",
 		},
 		{ pathname, href } = document.location,
 		[buttons, image] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<boolean>("image")
+			presence.getSetting<boolean>("image"),
 		]);
 
 	if (pathname === "/home") presenceData.details = "Browsing";
@@ -55,8 +55,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Series",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (pathname.startsWith("/movie/")) {
@@ -80,8 +80,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Movie",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (pathname === "/user/profile")

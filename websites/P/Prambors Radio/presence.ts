@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "630428033966276612"
+		clientId: "630428033966276612",
 	}),
 	strings = presence.getStrings({
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 let timestamp: number;
@@ -20,8 +20,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Listen to Prambors",
-				url: "https://live.pramborsfm.com"
-			}
+				url: "https://live.pramborsfm.com",
+			},
 		];
 		timestamp ??= Date.now();
 		switch (document.location.hostname) {
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 			}
 			case "live.pramborsfm.com": {
 				const buttonAction = [
-					...[...document.querySelectorAll("button")].pop().classList
+					...[...document.querySelectorAll("button")].pop().classList,
 				]
 					.pop()
 					.split("--")

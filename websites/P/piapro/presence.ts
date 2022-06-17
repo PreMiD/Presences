@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "641416608790609942"
+		clientId: "641416608790609942",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement,
@@ -14,7 +14,7 @@ let search: HTMLInputElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "pia"
+		largeImageKey: "pia",
 	};
 
 	if (document.location.hostname === "piapro.jp") {

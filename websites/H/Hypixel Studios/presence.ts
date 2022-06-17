@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "812069625067077662"
+		clientId: "812069625067077662",
 	}),
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "hypixel_studios_logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (document.location.pathname) {

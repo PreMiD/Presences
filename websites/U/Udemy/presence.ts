@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "639131130703904808"
+		clientId: "639131130703904808",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	pages: { [k: string]: string } = {
 		"/": "Homepage",
@@ -41,7 +41,7 @@ const presence = new Presence({
 		"/home/my-courses/search": "My Courses",
 		"/home/my-courses/collections": "My Courses (Collections)",
 		"/home/my-courses/wishlist": "My Courses (Wishlist)",
-		"/home/my-courses/archived": "My Courses (Archived)"
+		"/home/my-courses/archived": "My Courses (Archived)",
 	};
 
 presence.on("UpdateData", async () => {
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector("video"),
 		presenceData: PresenceData = {
 			largeImageKey: "ud-logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (page.includes("/courses/search")) {

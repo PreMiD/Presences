@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "868085258371870820"
+		clientId: "868085258371870820",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			details: "Page not Supported",
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (document.location.href === "https://komiku.id/")
@@ -48,8 +48,8 @@ presence.on("UpdateData", async () => {
 					label: `View ${
 						document.querySelector("section#Informasi b").textContent
 					}`,
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		}
 	} else if (document.location.pathname.startsWith("/ch/")) {
@@ -70,12 +70,12 @@ presence.on("UpdateData", async () => {
 					url: document.location.href
 						.replace("ch", "manga")
 						.replace(/-chapter-\d+/, "")
-						.replace(/#\d+/, "")
+						.replace(/#\d+/, ""),
 				},
 				{
 					label: chapter,
-					url: document.location.href.replace(/#\d+/, "")
-				}
+					url: document.location.href.replace(/#\d+/, ""),
+				},
 			];
 		}
 	} else if (document.location.pathname.startsWith("/cari/")) {

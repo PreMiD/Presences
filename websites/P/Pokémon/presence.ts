@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "684885381728043048"
+		clientId: "684885381728043048",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 function settingSetter(): void {
@@ -17,7 +17,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "pokemonlogo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	settingSetter();

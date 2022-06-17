@@ -11,6 +11,6 @@ iframe.on("UpdateData", async () => {
 		title: videoElement.textContent,
 		duration: videoElement.duration ? videoElement.duration : null,
 		currentTime: videoElement.currentTime,
-		paused: videoElement.paused
+		paused: videoElement.paused,
 	});
 });

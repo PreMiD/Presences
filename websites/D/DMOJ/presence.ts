@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "754070047193956492"
+		clientId: "754070047193956492",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			smallImageKey: "icon",
 			smallImageText: "DMOJ: Modern Online Judge",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		url = document.location.pathname.split("/");
 	if (url.includes("post")) {
@@ -17,7 +17,7 @@ presence.on("UpdateData", () => {
 			.textContent.trim();
 		presenceData.largeImageKey = "post";
 		presenceData.buttons = [
-			{ label: "View Post", url: `https://dmoj.ca/post/${url[2][2]}` }
+			{ label: "View Post", url: `https://dmoj.ca/post/${url[2][2]}` },
 		];
 	} else if (url.includes("problems")) {
 		presenceData.details = "Browsing problems";
@@ -42,7 +42,7 @@ presence.on("UpdateData", () => {
 			presenceData.largeImageKey = "submission_list";
 			presenceData.buttons.push({
 				label: "View Submissions",
-				url: `${problemURL}/submissions/`
+				url: `${problemURL}/submissions/`,
 			});
 		} else if (url.includes("rank")) {
 			presenceData.details = "Viewing best submissions to problem:";
@@ -52,7 +52,7 @@ presence.on("UpdateData", () => {
 			presenceData.largeImageKey = "submission_list";
 			presenceData.buttons.push({
 				label: "View Best Submissions",
-				url: `${problemURL}/rank/`
+				url: `${problemURL}/rank/`,
 			});
 		} else if (url.includes("editorial")) {
 			presenceData.details = "Viewing editorial for problem:";
@@ -62,7 +62,7 @@ presence.on("UpdateData", () => {
 			presenceData.largeImageKey = "editorial";
 			presenceData.buttons.push({
 				label: "View Editorial",
-				url: `${problemURL}/editorial/`
+				url: `${problemURL}/editorial/`,
 			});
 		} else if (url.includes("tickets") && url.includes("new")) {
 			presenceData.details = "Creating a ticket for problem:";
@@ -99,9 +99,9 @@ presence.on("UpdateData", () => {
 				presenceData.buttons = [
 					{
 						label: "View Submissions",
-						url: `https://dmoj.ca/submissions/user/${user}`
+						url: `https://dmoj.ca/submissions/user/${user}`,
 					},
-					{ label: "View User", url: `https://dmoj.ca/user/${user}` }
+					{ label: "View User", url: `https://dmoj.ca/user/${user}` },
 				];
 			} else {
 				const user = document
@@ -112,9 +112,9 @@ presence.on("UpdateData", () => {
 				presenceData.buttons = [
 					{
 						label: "View Submissions",
-						url: `https://dmoj.ca/submissions/user/${user}`
+						url: `https://dmoj.ca/submissions/user/${user}`,
 					},
-					{ label: "View User", url: `https://dmoj.ca/user/${user}` }
+					{ label: "View User", url: `https://dmoj.ca/user/${user}` },
 				];
 			}
 		} else {
@@ -130,8 +130,8 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "View Submission",
-				url: `https://dmoj.ca/submission/${url[2]}`
-			}
+				url: `https://dmoj.ca/submission/${url[2]}`,
+			},
 		];
 	} else if (url.includes("src")) {
 		presenceData.details = "Viewing submission source to problem:";
@@ -150,7 +150,7 @@ presence.on("UpdateData", () => {
 			.replace(" Members", "");
 		presenceData.buttons = [
 			{ label: "View Organization", url: organizationURL },
-			{ label: "View Members", url: `${organizationURL}/users` }
+			{ label: "View Members", url: `${organizationURL}/users` },
 		];
 
 		if (url.includes("users")) {
@@ -184,7 +184,7 @@ presence.on("UpdateData", () => {
 				presenceData.largeImageKey = "submission_list";
 				presenceData.buttons = [
 					{ label: "View User", url: userURL },
-					{ label: "View Solved Problems", url: `${userURL}/solved` }
+					{ label: "View Solved Problems", url: `${userURL}/solved` },
 				];
 			} else {
 				const [, user] = document
@@ -197,7 +197,7 @@ presence.on("UpdateData", () => {
 				presenceData.largeImageKey = "submission_list";
 				presenceData.buttons = [
 					{ label: "View User", url: userURL },
-					{ label: "View Solved Problems", url: `${userURL}/solved` }
+					{ label: "View Solved Problems", url: `${userURL}/solved` },
 				];
 			}
 		} else {
@@ -215,7 +215,7 @@ presence.on("UpdateData", () => {
 				presenceData.state = `${user} (Rank: #${userRank})`;
 				presenceData.largeImageKey = "user";
 				presenceData.buttons = [
-					{ label: "View User", url: `https://dmoj.ca/user/${user}` }
+					{ label: "View User", url: `https://dmoj.ca/user/${user}` },
 				];
 			} else {
 				const [, user] = document
@@ -226,7 +226,7 @@ presence.on("UpdateData", () => {
 				presenceData.state = `${user} (Rank: #${userRank})`;
 				presenceData.largeImageKey = "user";
 				presenceData.buttons = [
-					{ label: "View User", url: `https://dmoj.ca/user/${user}` }
+					{ label: "View User", url: `https://dmoj.ca/user/${user}` },
 				];
 			}
 		}
@@ -252,21 +252,21 @@ presence.on("UpdateData", () => {
 			presenceData.largeImageKey = "statistics";
 			presenceData.buttons.push({
 				label: "View Statistics",
-				url: `${contestURL}/stats`
+				url: `${contestURL}/stats`,
 			});
 		} else if (url.includes("ranking")) {
 			presenceData.details = "Viewing rankings of contest:";
 			presenceData.largeImageKey = "leaderboard";
 			presenceData.buttons.push({
 				label: "View Rankings",
-				url: `${contestURL}/ranking`
+				url: `${contestURL}/ranking`,
 			});
 		} else if (url.includes("participations")) {
 			presenceData.details = "Viewing participation of contest:";
 			presenceData.largeImageKey = "users";
 			presenceData.buttons.push({
 				label: "View Participation",
-				url: `${contestURL}/participations`
+				url: `${contestURL}/participations`,
 			});
 		} else {
 			presenceData.details = "Viewing contest:";

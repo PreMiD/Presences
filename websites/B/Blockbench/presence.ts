@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "901821070263336971"
+		clientId: "901821070263336971",
 	}),
 	pages: Record<string, string> = {
 		"/": "Home",
@@ -9,7 +9,7 @@ const presence = new Presence({
 		"/wiki": "Wiki",
 		"/about": "About",
 		"/imprint": "Imprint",
-		"/privacy-policy": "Privacy Policy"
+		"/privacy-policy": "Privacy Policy",
 	},
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
 			largeImageKey: "blockbench-logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		pluginHeader = document.querySelector(
 			"#content_wrapper > div > div > h2"

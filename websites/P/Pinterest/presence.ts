@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "629428243061145640"
+		clientId: "629428243061145640",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: Element | HTMLElement | string,
@@ -8,7 +8,7 @@ let user: Element | HTMLElement | string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "pinterest"
+		largeImageKey: "pinterest",
 	};
 	presenceData.startTimestamp = browsingTimestamp;
 	if (document.location.hostname === "help.pinterest.com") {

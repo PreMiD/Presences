@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "817063719288700939"
+	clientId: "817063719288700939",
 });
 
 let lastPath: string,
@@ -8,7 +8,7 @@ let lastPath: string,
 presence.on("UpdateData", async () => {
 	const curPath = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		};
 
 	if (lastPath !== curPath) {

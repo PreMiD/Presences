@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "965294297048023050"
+		clientId: "965294297048023050",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
@@ -7,16 +7,16 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<boolean>("showCover"),
 		presence.getSetting<boolean>("showButtons"),
 		presence.getSetting<boolean>("showBook"),
-		presence.getSetting<boolean>("logoOnly")
+		presence.getSetting<boolean>("logoOnly"),
 	]);
 	const [privacy, showTimestamp, showReading] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("showTimestamp"),
-			presence.getSetting<boolean>("showReading")
+			presence.getSetting<boolean>("showReading"),
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: "nocover",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,
 		pathnames = [
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 			"/sitemap.xml",
 			"/privacy-terms-of-use.html",
 			"/genre/",
-			"/author/"
+			"/author/",
 		];
 	if (!showReading) {
 		showBook = false;
@@ -82,8 +82,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Author",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 			break;
 		}
@@ -141,8 +141,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Novel",
-						url: location.href
-					}
+						url: location.href,
+					},
 				];
 			} else if (
 				document.querySelector<HTMLAnchorElement>('[title="Read Next chapter"]')
@@ -172,8 +172,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read Novel",
-						url: location.href
-					}
+						url: location.href,
+					},
 				];
 			}
 		}

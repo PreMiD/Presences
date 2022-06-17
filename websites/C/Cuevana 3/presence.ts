@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "804448815942860821"
+		clientId: "804448815942860821",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	});
 
 let iFrameVideo: boolean,
@@ -31,7 +31,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			if (subtitulo === titulo) delete presenceData.state;
 			else presenceData.state = subtitulo;
 			presenceData.buttons = [
-				{ label: "Ver Película", url: window.location.href }
+				{ label: "Ver Película", url: window.location.href },
 			];
 			presenceData.largeImageKey = cover;
 		} else {
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector("h1.Title > span").textContent
 			} ${subtitulo}`;
 			presenceData.buttons = [
-				{ label: "Ver Episodio", url: window.location.href }
+				{ label: "Ver Episodio", url: window.location.href },
 			];
 			presenceData.largeImageKey = cover;
 		}

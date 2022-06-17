@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "764916517895798796"
+		clientId: "764916517895798796",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
 		live: "presence.activity.live",
-		search: "presence.activity.searching"
+		search: "presence.activity.searching",
 	});
 
 /**
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 			smallImageKey,
 			smallImageText,
 			startTimestamp,
-			endTimestamp
+			endTimestamp,
 		};
 
 	if (href !== oldUrl) {

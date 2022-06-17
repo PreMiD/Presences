@@ -49,8 +49,8 @@ presence.on("UpdateData", async () => {
 				label: "Diziyi Görüntüle",
 				url: `${document.location.origin}/${
 					document.location.pathname.split("/")[1]
-				}`
-			}
+				}`,
+			},
 		];
 		presenceData.smallImageKey = stream.paused ? "pause" : "play";
 		presenceData.smallImageText = stream.paused ? "Durduruldu" : "Oynatılıyor";

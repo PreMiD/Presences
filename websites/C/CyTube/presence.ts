@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "653639828826750976" // Contact if you want me to edit the discord assets/keys/whatever
+		clientId: "653639828826750976", // Contact if you want me to edit the discord assets/keys/whatever
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 function getTimes(time: number): Record<string, number> {
@@ -19,7 +19,7 @@ function getTimes(time: number): Record<string, number> {
 	return {
 		sec: seconds,
 		min: minutes,
-		hrs: hours
+		hrs: hours,
 	};
 }
 
@@ -51,7 +51,7 @@ const matches: MatchList = {
 	"docs.google": { display: "Google Drive", imageKey: "cytube_service_gd" },
 	googleusercontent: {
 		display: "Google Drive",
-		imageKey: "cytube_service_gd"
+		imageKey: "cytube_service_gd",
 	},
 
 	appspot: { display: "Google Cloud", imageKey: "cytube_service_gc" },
@@ -65,13 +65,13 @@ const matches: MatchList = {
 
 	discordapp: { display: "Discord", imageKey: "cytube_service_dc" },
 
-	"vimeo-prod-": { display: "Vimeo", imageKey: "cytube_service_ve" }
+	"vimeo-prod-": { display: "Vimeo", imageKey: "cytube_service_ve" },
 };
 
 function service(service: string): Match {
 	let returnMatch: Match = {
 		display: "Unknown Service",
-		imageKey: "cytube_service_uk"
+		imageKey: "cytube_service_uk",
 	};
 
 	for (const key of Object.keys(matches))
@@ -99,11 +99,11 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "cytube_logo",
 			details: "loading",
-			state: "CyTube"
+			state: "CyTube",
 		},
 		translate = {
 			pause: (await strings).pause,
-			play: (await strings).play
+			play: (await strings).play,
 		};
 
 	async function setVideo(data: VideoData) {
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
 				currentTime: video.currentTime,
 				duration: video.duration,
 				paused: video.paused,
-				site: video.src
+				site: video.src,
 			});
 		}
 	} else if (path === "/") {

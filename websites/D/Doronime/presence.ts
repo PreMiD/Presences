@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "967447688687779920"
+		clientId: "967447688687779920",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 	if (base === "anime") {
 		if (data.length) {
 			const animeInfo = [
-					...document.querySelectorAll(".Content__breadcrumb > li").values()
+					...document.querySelectorAll(".Content__breadcrumb > li").values(),
 				]
 					.slice(1)
 					.map(x => {
@@ -34,8 +34,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Anime",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else presenceData.details = "Viewing Anime List";
 	}
@@ -46,15 +46,15 @@ presence.on("UpdateData", async () => {
 			const [title, artist] = [
 				...document.querySelectorAll(
 					".Content__description-caption > div > div > div"
-				)
+				),
 			].map(x => x.textContent);
 			presenceData.details = artist;
 			presenceData.state = title;
 			presenceData.buttons = [
 				{
 					label: "View OST",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else presenceData.details = "Viewing Anime OST List";
 	}

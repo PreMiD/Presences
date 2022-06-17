@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "936448491373359105"
+	clientId: "936448491373359105",
 });
 
 presence.on("UpdateData", async () => {
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 		const [songDetail, songState, time] = await Promise.all([
 				presence.getSetting<string>("songDetail"),
 				presence.getSetting<string>("songState"),
-				presence.getSetting<number>("time")
+				presence.getSetting<number>("time"),
 			]),
 			title =
 				document.querySelector<HTMLDivElement>("#as-player-title").textContent,
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 					.textContent
 			),
 			presenceData: PresenceData = {
-				largeImageKey: "logo"
+				largeImageKey: "logo",
 			},
 			paused = document
 				.querySelector<HTMLAnchorElement>("#as-player-play")

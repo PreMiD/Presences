@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "614583717951963137" // CLIENT ID FOR YOUR PRESENCE
+		clientId: "614583717951963137", // CLIENT ID FOR YOUR PRESENCE
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ let board: HTMLElement, profile: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "trello"
+			largeImageKey: "trello",
 		},
 		displayPrivateBoards = await presence.getSetting<boolean>(
 			"displayPrivateBoards"

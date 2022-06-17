@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "966800501326876692"
+		clientId: "966800501326876692",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
 		smallImageKey: "reading",
 		smallImageText: "Regarde des annonces",
 		startTimestamp: browsingTimestamp,
-		details: "Regarde la page :"
+		details: "Regarde la page :",
 	};
 
 	if (document.location.pathname.includes("/deposer-une-annonce"))
@@ -36,7 +36,7 @@ presence.on("UpdateData", () => {
 		).textContent;
 		presenceData.state = `Profil de ${profileName}`;
 		presenceData.buttons = [
-			{ label: "Consulter le profil", url: document.location.href }
+			{ label: "Consulter le profil", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("/recherche")) {
 		presenceData.details = "Dans les résultats de recherche :";
@@ -51,7 +51,7 @@ presence.on("UpdateData", () => {
 		).textContent;
 		presenceData.state = `Vendu par ${advertiserName}`;
 		presenceData.buttons = [
-			{ label: "Consulter l'annonce", url: document.location.href }
+			{ label: "Consulter l'annonce", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("/voitures/")) {
 		presenceData.details = `Annonce ${document.title.split("-")[0]}`;
@@ -60,7 +60,7 @@ presence.on("UpdateData", () => {
 		).textContent;
 		presenceData.state = `Vendu par ${advertiserName}`;
 		presenceData.buttons = [
-			{ label: "Consulter l'annonce", url: document.location.href }
+			{ label: "Consulter l'annonce", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("/")) {
 		presenceData.details = `Annonce ${document.title.split("-")[0]}`;
@@ -72,7 +72,7 @@ presence.on("UpdateData", () => {
 			).textContent;
 		presenceData.state = `Vendu ${adsPrice} par ${advertiserName}`;
 		presenceData.buttons = [
-			{ label: "Consulter l'annonce", url: document.location.href }
+			{ label: "Consulter l'annonce", url: document.location.href },
 		];
 	}
 	if (presenceData.details) presence.setActivity(presenceData);

@@ -14,7 +14,7 @@
 		"help.marktplaats.nl"
 	],
 	"regExp": "([a-z0-9-]+[.])*marktplaats[.]nl[/]",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/K0yeNeC.png",
 	"thumbnail": "https://i.imgur.com/xOUBejy.jpg",
 	"color": "#FF0000",

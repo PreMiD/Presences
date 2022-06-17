@@ -25,7 +25,7 @@
 	},
 	"url": "music.amazon.com",
 	"regExp": "music[.]amazon([.][a-z]+)+[/]",
-	"version": "2.1.4",
+	"version": "2.1.5",
 	"logo": "https://i.imgur.com/AUKbzxX.png",
 	"thumbnail": "https://i.imgur.com/htSGR6k.png",
 	"color": "#21293C",

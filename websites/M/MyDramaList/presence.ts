@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "739290632463319141"
+		clientId: "739290632463319141",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -12,7 +12,7 @@ interface FilmData {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "mdl-logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		coverEnabled = await presence.getSetting("cover");
 
@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".container-fluid.title-container")
 					?.getAttribute("itemtypex")
 					?.split("/")
-					?.pop()
+					?.pop(),
 			};
 		})();
 

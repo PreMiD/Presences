@@ -43,8 +43,8 @@ function getSourceLink(url: string): { label: string; url: string }[] {
 		return [
 			{
 				label: "Watch Youtube Source",
-				url
-			}
+				url,
+			},
 		];
 	}
 	return [];
@@ -122,18 +122,18 @@ const pages: PageContext[] = [
 						...[
 							{
 								label: strings.watchVideo,
-								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
+								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
 							},
 							...getSourceLink(
 								activeMedia.querySelector<HTMLAnchorElement>(
 									".description__stamp a.description__stamp__source"
 								)?.href
-							)
+							),
 						]
 					);
 				}
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref =>
@@ -187,19 +187,19 @@ const pages: PageContext[] = [
 						...[
 							{
 								label: strings.watchVideo,
-								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
+								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
 							},
 							{
 								label: strings.viewProfil,
 								url: `${document.location.origin}/${
 									document.location.pathname.split("/")[1]
-								}`
-							}
+								}`,
+							},
 						]
 					);
 				}
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.location.pathname.match(/^\/view\/(.*)/gi),
@@ -235,18 +235,18 @@ const pages: PageContext[] = [
 						...[
 							{
 								label: strings.watchVideo,
-								url: document.location.href
+								url: document.location.href,
 							},
 							...getSourceLink(
 								activeMedia.parentElement.querySelector<HTMLAnchorElement>(
 									'.coub__info .media-block__item > a[type="embedPopup"]'
 								)?.href
-							)
+							),
 						]
 					);
 				}
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.location.pathname.match(/^\/(community)/gi),
@@ -285,19 +285,19 @@ const pages: PageContext[] = [
 						...[
 							{
 								label: strings.watchVideo,
-								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
+								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
 							},
 							...getSourceLink(
 								activeMedia.querySelector<HTMLAnchorElement>(
 									".description__stamp a.description__stamp__source"
 								)?.href
-							)
+							),
 						]
 					);
 				}
 
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.window,
@@ -307,17 +307,17 @@ const pages: PageContext[] = [
 				data.details = "";
 				if (data.smallImageKey) delete data.smallImageKey;
 				return data;
-			}
-		}
+			},
+		},
 	],
 	presence = new Presence({
-		clientId: "818598086984728576"
+		clientId: "818598086984728576",
 	});
 
 let currentLang: string, localizedStrings: { [key: string]: string };
 const IMAGES = {
 	PLAY: "playx1024",
-	PAUSE: "pausex1024"
+	PAUSE: "pausex1024",
 };
 presence.on("UpdateData", async () => {
 	const newLang = await presence.getSetting<string>("lang");
@@ -328,7 +328,7 @@ presence.on("UpdateData", async () => {
 				browsing: "presence.activity.browsing",
 				watching: "presence.playback.playing",
 				watchVideo: "general.buttonWatchVideo",
-				viewProfile: "general.buttonViewProfile"
+				viewProfile: "general.buttonViewProfile",
 			},
 			newLang
 		);
@@ -341,7 +341,7 @@ presence.on("UpdateData", async () => {
 		context.exec(
 			presence,
 			{
-				largeImageKey: "logo"
+				largeImageKey: "logo",
 			},
 			{
 				strings: localizedStrings,
@@ -349,14 +349,14 @@ presence.on("UpdateData", async () => {
 				images: IMAGES,
 				showWatch: await presence
 					.getSetting<boolean>("show_button_watching")
-					.catch(() => true)
+					.catch(() => true),
 			}
 		)
 	);
 	if (!result) {
 		presence.setActivity({
 			largeImageKey: "logo",
-			state: localizedStrings.browsing
+			state: localizedStrings.browsing,
 		});
 	} else if (result.details) presence.setActivity(result);
 });

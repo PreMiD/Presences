@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "664057766809436161"
+	clientId: "664057766809436161",
 });
 
 let currentURL = new URL(document.location.href),
@@ -8,7 +8,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
 	details: "Viewing an unsupported page",
 	largeImageKey: "lg",
-	startTimestamp: browsingTimestamp
+	startTimestamp: browsingTimestamp,
 };
 const updateCallback = {
 		_function: null as () => void,
@@ -20,7 +20,7 @@ const updateCallback = {
 		},
 		get present(): boolean {
 			return this._function !== null;
-		}
+		},
 	},
 	/**
 	 * Initialize/reset presenceData.
@@ -29,7 +29,7 @@ const updateCallback = {
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		}
 	): void => {
 		currentURL = new URL(document.location.href);
@@ -66,7 +66,7 @@ const updateCallback = {
 			);
 			presence.info(currentURL.href);
 			presence.info(error);
-		}
+		},
 	},
 	/**
 	 * Search for URL parameters.
@@ -101,7 +101,7 @@ const updateCallback = {
 
 		const presenceSettings = {
 			chatChannelNames: await presence.getSetting<boolean>("chatChannelNames"),
-			detailedSettings: await presence.getSetting<boolean>("detailedSettings")
+			detailedSettings: await presence.getSetting<boolean>("detailedSettings"),
 		};
 
 		switch (currentURL.hostname) {
@@ -479,7 +479,7 @@ const updateCallback = {
 																All: "Viewing a user's posts",
 																Journals: "Viewing a user's journals",
 																"Status Updates": "Viewing a user's statuses",
-																Polls: "Viewing a user's polls"
+																Polls: "Viewing a user's polls",
 															}[
 																document.querySelector(
 																	"._3xmU1 div a"

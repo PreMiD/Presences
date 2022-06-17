@@ -1,5 +1,5 @@
 let presence = new Presence({
-	clientId: "658230518520741915"
+	clientId: "658230518520741915",
 });
 
 function setClient(options: PresenceOptions) {
@@ -28,7 +28,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 				buttonViewMovie: "general.buttonViewMovie",
 				buttonViewEpisode: "general.buttonViewEpisode",
 				buttonListenAlong: "general.buttonListenAlong",
-				buttonReadArticle: "general.buttonReadArticle"
+				buttonReadArticle: "general.buttonReadArticle",
 			},
 			lang
 		),
@@ -36,12 +36,12 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 		switch (location.pathname.split("/")[1]) {
 			case "iplayer":
 				setClient({
-					clientId: "932513249327460402"
+					clientId: "932513249327460402",
 				});
 				return "bbciplayer";
 			case "sounds":
 				setClient({
-					clientId: "944257541964169287"
+					clientId: "944257541964169287",
 				});
 				return "bbcsounds";
 			case "sport":
@@ -52,13 +52,13 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 				return "bbcweather";
 			default:
 				setClient({
-					clientId: "658230518520741915"
+					clientId: "658230518520741915",
 				});
 				return "bbc";
 		}
 	})(),
 	assets = {
-		LIVE: "https://i.imgur.com/vibO5wd.gif"
+		LIVE: "https://i.imgur.com/vibO5wd.gif",
 	} as const;
 
 let oldLang: string = null,
@@ -66,13 +66,13 @@ let oldLang: string = null,
 	VideoMedia: MediaData = {
 		duration: 0,
 		currentTime: 0,
-		paused: true
+		paused: true,
 	},
 	SoundMedia: MediaData = {
 		duration: 0,
 		currentTime: 0,
 		paused: true,
-		title: null
+		title: null,
 	};
 
 presence.on("iFrameData", (data: IFrameData) => {
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("search"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]),
 		setCover = (url: string, size?: string) => {
 			if (url) {
@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: `${serviceName}_logo`,
 		details: strings.browse,
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (path.includes("/iplayer")) {
@@ -199,12 +199,12 @@ presence.on("UpdateData", async () => {
 							label: strings.buttonViewEpisode,
 							url: `https://www.bbc.co.uk/iplayer/episode/${
 								document.location.pathname.split("/")[3]
-							}`
+							}`,
 						},
 						{
 							label: strings.buttonViewSeries,
-							url: `https://www.bbc.co.uk/iplayer/episode/${iPlayer.relatedEpisodes.episodes[0].episode.id}`
-						}
+							url: `https://www.bbc.co.uk/iplayer/episode/${iPlayer.relatedEpisodes.episodes[0].episode.id}`,
+						},
 					];
 				} else {
 					presenceData.buttons = [
@@ -214,8 +214,8 @@ presence.on("UpdateData", async () => {
 								: strings.watchVideo,
 							url: `https://www.bbc.co.uk/iplayer/episode/${
 								document.location.pathname.split("/")[3]
-							}`
-						}
+							}`,
+						},
 					];
 				}
 
@@ -262,8 +262,10 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.buttonListenAlong,
-					url: `https://www.bbc.co.uk/sounds/play/${document.URL.split("/")[5]}`
-				}
+					url: `https://www.bbc.co.uk/sounds/play/${
+						document.URL.split("/")[5]
+					}`,
+				},
 			];
 
 			if (SoundMedia.paused || isLive) {
@@ -293,8 +295,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			} else if (path.includes("/formula1/")) {
 				presenceData.details = strings.readingArticle;
@@ -302,8 +304,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 		} else if (path.includes("/sport/football")) {
@@ -322,8 +324,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			} else if (path.includes("/transfers")) {
 				presenceData.details = strings.readingArticle;
@@ -331,8 +333,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			} else if (path.includes("/top-scorers")) {
 				presenceData.details = strings.viewPage;
@@ -352,8 +354,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 		} else if (path.includes("/sport/cricket")) {
@@ -399,8 +401,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 		} else if (path.includes("/rugby-union")) {
@@ -419,8 +421,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 		} else if (path.includes("/tennis")) {
@@ -441,8 +443,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 		} else if (path.includes("/golf")) {
@@ -457,8 +459,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 		} else if (path.includes("/cycling")) {
@@ -473,8 +475,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 		} else if (path.includes("/sport/")) {
@@ -483,8 +485,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.buttonReadArticle,
-					url: document.baseURI
-				}
+					url: document.baseURI,
+				},
 			];
 
 			if (VideoMedia.duration) {
@@ -496,8 +498,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.watchVideo,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 		}
@@ -528,8 +530,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.watchVideo,
-					url: document.baseURI
-				}
+					url: document.baseURI,
+				},
 			];
 		}
 	} else if (path.includes("/weather")) {
@@ -547,12 +549,12 @@ presence.on("UpdateData", async () => {
 					state: document.querySelector<HTMLInputElement>(
 						"input.location-search-input__input"
 					)?.value,
-					smallImageKey: "search"
+					smallImageKey: "search",
 				},
 				"/weather/map": {
 					details: strings.viewPage,
 					state: "Map",
-					smallImageKey: "map"
+					smallImageKey: "map",
 				},
 				"/weather/([0-9])": {
 					details: "Viewing weather of:",
@@ -567,9 +569,9 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: "View Weather",
-							url: document.baseURI
-						}
-					]
+							url: document.baseURI,
+						},
+					],
 				},
 				"/weather/features/([0-9])": {
 					details: strings.readingArticle,
@@ -578,10 +580,10 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: strings.buttonReadArticle,
-							url: document.baseURI
-						}
-					]
-				}
+							url: document.baseURI,
+						},
+					],
+				},
 			};
 
 		for (const [key, value] of Object.entries(weatherPages)) {
@@ -607,11 +609,11 @@ presence.on("UpdateData", async () => {
 			} = {
 				"/have_your_say": {
 					details: strings.viewPage,
-					state: "Your Coronavirus Stories"
+					state: "Your Coronavirus Stories",
 				},
 				"/coronavirus": {
 					details: strings.viewPage,
-					state: "Coronavirus pandemic"
+					state: "Coronavirus pandemic",
 				},
 				"(-|/)([0-9])": {
 					details: strings.readingArticle,
@@ -619,58 +621,58 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: strings.buttonReadArticle,
-							url: document.baseURI
-						}
-					]
+							url: document.baseURI,
+						},
+					],
 				},
 				"/in_pictures": {
 					details: strings.viewPage,
-					state: "In Pictures"
+					state: "In Pictures",
 				},
 				"/reality_check": {
 					details: strings.viewPage,
-					state: "Reality Check"
+					state: "Reality Check",
 				},
 				"/the_reporters": {
 					details: strings.viewPage,
-					state: "Long Reads"
+					state: "Long Reads",
 				},
 				"/newsbeat": {
 					details: strings.readingArticle,
-					state: "Newsbeat"
+					state: "Newsbeat",
 				},
 				"/blogs": {
 					details: strings.viewPage,
-					state: "Blogs"
+					state: "Blogs",
 				},
 				"/technology": {
 					details: strings.viewPage,
-					state: "Technology news"
+					state: "Technology news",
 				},
 				"/science-environment": {
 					details: strings.viewPage,
-					state: "Technology news"
+					state: "Technology news",
 				},
 				"/stories": {
 					details: strings.viewPage,
-					state: "Stories"
+					state: "Stories",
 				},
 				"/entertainment_and_arts": {
 					details: strings.viewPage,
-					state: "Entertainment and arts"
+					state: "Entertainment and arts",
 				},
 				"/health": {
 					details: strings.viewPage,
-					state: "Health news"
+					state: "Health news",
 				},
 				"/world": {
 					details: strings.viewPage,
-					state: "World news"
+					state: "World news",
 				},
 				"/business": {
 					details: strings.viewPage,
-					state: "Business news"
-				}
+					state: "Business news",
+				},
 			};
 
 		for (const [key, value] of Object.entries(newsPages)) {
@@ -693,8 +695,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.watchVideo,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			} else if (path.match(/(-[0-9])/)) {
 				presenceData.details = strings.readingArticle;
@@ -703,8 +705,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonReadArticle,
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 			}
 		}

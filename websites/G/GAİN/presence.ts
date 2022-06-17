@@ -1,13 +1,13 @@
 const gain = new Presence({
-		clientId: "926450473559547944"
+		clientId: "926450473559547944",
 	}),
 	gainStrings = gain.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	gainSettings = async () => ({
 		showImages: await gain.getSetting<boolean>("showImages"),
-		showButtons: await gain.getSetting<boolean>("showButtons")
+		showButtons: await gain.getSetting<boolean>("showButtons"),
 	}),
 	gainPages: { [k: string]: string } = {
 		"/": "Ana Sayfa",
@@ -30,14 +30,14 @@ const gain = new Presence({
 		"/on-bilgilendirme-formu": "Ön Bilgilendirme Formu",
 		"/cerez-politikasi": "Çerez Politikası",
 		"/gizlilik-politikasi": "Gizlilik Politikası",
-		"/abonelik-sozlesmesi": "Abonelik Sözleşmesi"
+		"/abonelik-sozlesmesi": "Abonelik Sözleşmesi",
 	};
 
 gain.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
 			largeImageKey: "g-logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		settings = await gainSettings();
 
@@ -63,8 +63,8 @@ gain.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: presenceData.state ? "Bölüme Git" : "Filme Git",
-					url: `https://gain.tv${document.location.pathname}`
-				}
+					url: `https://gain.tv${document.location.pathname}`,
+				},
 			];
 		}
 

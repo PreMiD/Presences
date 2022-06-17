@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "473155249763385345"
+		clientId: "473155249763385345",
 	}),
 	browsingTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "hclogo"
+		largeImageKey: "hclogo",
 	};
 	presenceData.startTimestamp = browsingTime;
 
@@ -246,7 +246,7 @@ presence.on("UpdateData", () => {
 				9: "Jeux & événements",
 				7: "Artistique",
 				137: "Tutoriels",
-				136: "Aide"
+				136: "Aide",
 			};
 		presenceData.details = "Forum - Nouveau sujet";
 		if (title !== "")

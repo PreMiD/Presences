@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "853327058054545438"
+		clientId: "853327058054545438",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "anitube_logo_",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		search: HTMLInputElement = document.querySelector(
 			".searchContainer > form > input"
@@ -86,8 +86,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Along",
-							url: href
-						}
+							url: href,
+						},
 					];
 					if (!videoElement.paused) {
 						[, presenceData.endTimestamp] =

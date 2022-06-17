@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "661889916635971616"
+	clientId: "661889916635971616",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon"
+		largeImageKey: "icon",
 	};
 
 	if (document.querySelectorAll(".player-controls").length === 0) {

@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "640150336547454976"
+		clientId: "640150336547454976",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -36,7 +36,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "vrv"
+		largeImageKey: "vrv",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

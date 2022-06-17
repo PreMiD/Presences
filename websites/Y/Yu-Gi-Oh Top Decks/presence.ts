@@ -1,12 +1,12 @@
 const presence = new Presence({
-	clientId: "630550023133724692"
+	clientId: "630550023133724692",
 });
 let deck;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "banner",
-		smallImageKey: "icon"
+		smallImageKey: "icon",
 	};
 
 	switch (document.location.pathname) {

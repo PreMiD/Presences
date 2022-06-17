@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "895232122892214313"
+		clientId: "895232122892214313",
 	}),
 	path: string = document.location.pathname,
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	details = { view: "Viewing anime:", stream: "Watching anime:" };
 
@@ -12,7 +12,7 @@ let video = {
 		duration: 0,
 		currentTime: 0,
 		paused: true,
-		isPlaying: false
+		isPlaying: false,
 	},
 	everPlaying = false;
 
@@ -31,7 +31,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "kayo",
-		startTimestamp: Date.now()
+		startTimestamp: Date.now(),
 	};
 
 	switch (path) {

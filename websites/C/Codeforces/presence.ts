@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "842486883128705024"
+		clientId: "842486883128705024",
 	}),
 	path = location.pathname,
 	timeElapsed = ~~(Date.now() / 1000);
@@ -7,7 +7,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: timeElapsed
+		startTimestamp: timeElapsed,
 	};
 
 	switch (path.split("/")[1]) {

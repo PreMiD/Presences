@@ -13,7 +13,7 @@ const presence = new Presence({ clientId: "666074265233260555" }),
 		watching: "general.watching",
 		episode: "general.episode",
 		watchEpisode: "general.buttonViewEpisode",
-		anime: "general.anime"
+		anime: "general.anime",
 	});
 
 let video: Video;
@@ -24,7 +24,7 @@ presence.on("iFrameData", (msg: Video) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "turkanime"
+			largeImageKey: "turkanime",
 		},
 		title =
 			document
@@ -61,12 +61,12 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: (await strings).watchEpisode,
-				url: document.URL.split("&")[0]
+				url: document.URL.split("&")[0],
 			},
 			{
 				label: (await strings).anime,
-				url: `https://www.turkanime.net/${animePage}`
-			}
+				url: `https://www.turkanime.net/${animePage}`,
+			},
 		];
 	} else if (window.location.pathname.startsWith("/anime/") && animeTitle) {
 		// About Anime Page
@@ -75,8 +75,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: (await strings).anime,
-				url: animePage
-			}
+				url: animePage,
+			},
 		];
 	} else {
 		// Browsing

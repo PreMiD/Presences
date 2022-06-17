@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "612653415419609088"
+		clientId: "612653415419609088",
 	}),
 	pattern = "- Page",
 	searchResult = new URL(document.location.href).searchParams.get("q"),
@@ -31,7 +31,7 @@ if (lastPlaybackState !== reading) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "lg"
+		largeImageKey: "lg",
 	};
 
 	tabTitle = document.title;

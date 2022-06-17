@@ -1,6 +1,6 @@
 /* Global variables */
 const presence = new Presence({
-	clientId: "772597423188082729"
+	clientId: "772597423188082729",
 });
 let profile: string;
 
@@ -13,7 +13,7 @@ function getUserName(): void {
 async function getProfileDetails() {
 	// Gets profile from the user you're viewing.
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		privacymode = await presence.getSetting<boolean>("privacy"),
 		viewingprofilename =
@@ -42,7 +42,7 @@ async function getProfileDetails() {
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		privacymode = await presence.getSetting<boolean>("privacy");
 

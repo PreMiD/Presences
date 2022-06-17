@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "813392002526871592"
+		clientId: "813392002526871592",
 	}),
 	getStrings = async () =>
 		presence.getStrings(
@@ -16,7 +16,7 @@ const presence = new Presence({
 				watchStream: "general.buttonWatchStream",
 				viewVideo: "general.buttonWatchVideo",
 				viewSong: "general.buttonViewSong",
-				searching: "general.search"
+				searching: "general.search",
 			},
 			await presence.getSetting<string>("lang")
 		),
@@ -37,14 +37,14 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "linetv_logo",
 			startTimestamp: browsingTimestamp,
-			details: strings.browse
+			details: strings.browse,
 		},
 		{ pathname, search } = document.location,
 		[newLang, showButton, showSearch, pDetail] = await Promise.all([
 			presence.getSetting<string>("lang"),
 			presence.getSetting<boolean>("Buttons"),
 			presence.getSetting<boolean>("searchQuery"),
-			presence.getSetting<string>("detail")
+			presence.getSetting<string>("detail"),
 		]);
 
 	videoData ??= await presence.getPageletiable<VideoData>("ghtEnv");
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 		const video = document.querySelector("video"),
 			videoD: VideoDType = {
 				title: (videoData.sClipTitle.match(/.+?(?=\[|【|「)/) || [
-					videoData.sClipTitle
+					videoData.sClipTitle,
 				])[0],
 				playList: document.querySelector<HTMLElement>("tooltip")?.title,
 				aTitle: videoData.sClipTitle,
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 				smallImagePlay: "play",
 				epText: null,
 				id: videoData.nClipNo,
-				genre: videoData.sCategoryCode
+				genre: videoData.sCategoryCode,
 			};
 		if (videoD.title.includes("["))
 			videoD.title = videoD.title.replace(/(\[.+\])/g, "");
@@ -254,8 +254,8 @@ presence.on("UpdateData", async () => {
 						url:
 							document.baseURI.length > 512
 								? `https://tv.line.me/v/${videoD.id}`
-								: document.baseURI
-					}
+								: document.baseURI,
+					},
 				];
 			} else delete presenceData.buttons;
 		} else {

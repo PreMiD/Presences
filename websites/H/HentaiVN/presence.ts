@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "942782020055089192"
+		clientId: "942782020055089192",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let namekey, doukey, charkey, keystr, largebox;
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		searchParams = new URLSearchParams(search),
 		page = searchParams.get("page") || "1",
 		presenceData: PresenceData = {
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (pathname.startsWith("/tim-kiem-truyen.html") && searchParams.has("key")) {
@@ -145,8 +145,8 @@ presence.on("UpdateData", async () => {
 				label: `Xem tường ${document
 					.querySelector("h1[itemprop='name']")
 					.textContent.trim()}`,
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (pathname.startsWith("/user-")) {
 		presenceData.details = "Đang xem tường Truyện thành viên";
@@ -158,8 +158,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: `Xem tường ${document.querySelector("h2").textContent.trim()}`,
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (pathname.startsWith("/forum/edit_pass.php")) {
 		presenceData.details = "Đang đổi mật khẩu...";
@@ -226,8 +226,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Đọc cùng",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (
 		!pathname.startsWith("/forum/t") &&
@@ -240,8 +240,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Xem truyện",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 		presenceData.smallImageKey = "xem";
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
@@ -257,8 +257,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Xem topic",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 		presenceData.smallImageKey = "xem";
 		presenceData.largeImageKey = "forum";
@@ -480,7 +480,7 @@ presence.on("UpdateData", async () => {
 				112: "Yandere",
 				96: "Yaoi",
 				97: "Yuri",
-				128: "Zombie"
+				128: "Zombie",
 			};
 			keystr = keystr
 				.toString()

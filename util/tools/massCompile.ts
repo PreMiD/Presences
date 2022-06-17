@@ -19,7 +19,7 @@ export const read = (path: string): string =>
 	write = (path: string, code: Metadata): void =>
 		writeFile(path, JSON.stringify(code, null, "\t"), {
 			encoding: "utf8",
-			flag: "w"
+			flag: "w",
 		});
 
 export const allFolders = glob("./{websites,programs}/*/*/*")

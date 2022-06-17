@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "687070418804408445" //The client ID of the Application created at https://discordapp.com/developers/applications
+	clientId: "687070418804408445", //The client ID of the Application created at https://discordapp.com/developers/applications
 });
 
 let details: string, state: string, currentState: string;
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 				details,
 				state,
 				largeImageKey: "bigglobe",
-				startTimestamp: elapsed
+				startTimestamp: elapsed,
 			};
 		currentState = document
 			.querySelectorAll("._control_oyndo_11._modPlay_oyndo_53")[0]

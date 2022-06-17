@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "844108776793178122"
+		clientId: "844108776793178122",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		live: "presence.activity.live",
 	});
 
 let title, author;
@@ -12,7 +12,7 @@ let title, author;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	if (
 		document

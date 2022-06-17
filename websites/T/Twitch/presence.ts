@@ -3,7 +3,7 @@ let elapsed = Math.floor(Date.now() / 1000),
 	oldLang = "en";
 
 const presence = new Presence({
-		clientId: "802958789555781663"
+		clientId: "802958789555781663",
 	}),
 	getElement = (query: string): string | undefined => {
 		return document.querySelector(query)?.textContent;
@@ -99,7 +99,7 @@ const presence = new Presence({
 				thread: "general.readingThread",
 				user: "general.viewUser",
 				watchStream: "general.buttonWatchStream",
-				watchVideo: "general.buttonWatchVideo"
+				watchVideo: "general.buttonWatchVideo",
 			},
 			oldLang
 		);
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
 			pfp,
 			logo,
 			devLogo,
-			buttons
+			buttons,
 		] = await Promise.all([
 			presence.getSetting<boolean>("browse"),
 			presence.getSetting<boolean>("live"),
@@ -140,7 +140,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("profilePic"),
 			presence.getSetting<number>("logo"),
 			presence.getSetting<number>("devLogo"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 
 	if (oldLang !== newLang || !strings) {
@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
 
 	let presenceData: PresenceData = {
 		largeImageKey: logoArr[logo] || "twitch",
-		startTimestamp: elapsed
+		startTimestamp: elapsed,
 	};
 
 	if (document.location.href !== prevUrl) {
@@ -164,115 +164,115 @@ presence.on("UpdateData", async () => {
 			const statics = {
 				"/downloads/": {
 					details: strings.viewPage,
-					state: strings.download
+					state: strings.download,
 				},
 				"/jobs/": {
 					details: strings.viewPage,
-					state: strings.jobs
+					state: strings.jobs,
 				},
 				"/turbo/": {
 					details: strings.viewPage,
-					state: strings.turbo
+					state: strings.turbo,
 				},
 				"/broadcast/studio/": {
 					details: strings.readingAbout,
-					state: "Twitch Studio"
+					state: "Twitch Studio",
 				},
 				"/redeem/": {
-					details: strings.redeem
+					details: strings.redeem,
 				},
 				"/p/partners/": {
 					details: strings.viewPage,
-					state: strings.partners
+					state: strings.partners,
 				},
 				"/p/press-center/": {
 					details: strings.viewPage,
-					state: strings.press
+					state: strings.press,
 				},
 				"/p/security/": {
 					details: strings.viewPage,
-					state: strings.security
+					state: strings.security,
 				},
 				"/p/legal/accessibility/": {
 					details: strings.viewPage,
-					state: strings.access
+					state: strings.access,
 				},
 				"/p/legal/ad-choices/": {
 					details: strings.viewPage,
-					state: strings.ads
+					state: strings.ads,
 				},
 				"/p/legal/community-guidelines/": {
 					details: strings.viewPage,
-					state: strings.guidelines
+					state: strings.guidelines,
 				},
 				"/p/legal/cookie-policy/": {
 					details: strings.viewPage,
-					state: strings.cookie
+					state: strings.cookie,
 				},
 				"/p/legal/privacy-notice/": {
 					details: strings.viewPage,
-					state: strings.privacy
+					state: strings.privacy,
 				},
 				"/p/legal/terms-of-serice/": {
 					details: strings.viewPage,
-					state: strings.terms
+					state: strings.terms,
 				},
 				"/p/(\\w*|\\w*-\\w*)/about/": {
 					details: strings.readingAbout,
-					state: "Twitch"
+					state: "Twitch",
 				},
 				"/p/(\\w*|\\w*-\\w*)/stream/": {
 					details: strings.readingAbout,
-					state: "How to stream"
+					state: "How to stream",
 				},
 				"/p/(\\w*|\\w*-\\w*)/watch/": {
 					details: strings.readingAbout,
-					state: "How to watch"
+					state: "How to watch",
 				},
 				"/p/(\\w*|\\w*-\\w*)/company/": {
 					details: strings.readingAbout,
-					state: "The Company"
+					state: "The Company",
 				},
 				"/p/(\\w*|\\w*-\\w*)/giftcard/": {
 					details: strings.readingAbout,
-					state: "Giftcards"
+					state: "Giftcards",
 				},
 				"/p/(\\w*|\\w*-\\w*)/artists/": {
 					details: strings.readingAbout,
-					state: "Artists"
+					state: "Artists",
 				},
 				"/creatorcamp/(\\w*|\\w*-\\w*)/learn-the-basics/": {
 					details: `${strings.camp} | ${strings.viewPage}`,
-					state: strings.campBasic
+					state: strings.campBasic,
 				},
 				"/creatorcamp/(\\w*|\\w*-\\w*)/setting-up-your-stream/": {
 					details: `${strings.camp} | ${strings.viewPage}`,
-					state: strings.campSetup
+					state: strings.campSetup,
 				},
 				"/creatorcamp/(\\w*|\\w*-\\w*)/level-up/": {
 					details: `${strings.camp} | ${strings.viewPage}`,
-					state: strings.campLevel
+					state: strings.campLevel,
 				},
 				"/creatorcamp/(\\w*|\\w*-\\w*)/connect-and-engage/": {
 					details: `${strings.camp} | ${strings.viewPage}`,
-					state: strings.campConnect
+					state: strings.campConnect,
 				},
 				"/creatorcamp/(\\w*|\\w*-\\w*)/get-rewarded/": {
 					details: `${strings.camp} | ${strings.viewPage}`,
-					state: strings.campReward
+					state: strings.campReward,
 				},
 				"/creatorcamp/(\\w*|\\w*-\\w*)/twitch-music-getting-started/": {
 					details: `${strings.camp} | ${strings.viewPage}`,
-					state: strings.campMusic
+					state: strings.campMusic,
 				},
 				"/creatorcamp/(\\w*|\\w*-\\w*)/live/": {
 					details: `${strings.camp} | ${strings.viewPage}`,
-					state: strings.campLive
+					state: strings.campLive,
 				},
 				"/creatorcamp/(\\w*|\\w*-\\w*)/": {
 					details: `${strings.camp} | ${strings.viewPage}`,
-					state: strings.home
-				}
+					state: strings.home,
+				},
 			};
 
 			if (showBrowsing) {
@@ -470,8 +470,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: strings.watchStream,
-								url: document.URL.split("?")[0]
-							}
+								url: document.URL.split("?")[0],
+							},
 						];
 					}
 				}
@@ -517,8 +517,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: strings.watchVideo,
-								url: document.URL.split("?")[0]
-							}
+								url: document.URL.split("?")[0],
+							},
 						];
 					}
 				}
@@ -551,68 +551,68 @@ presence.on("UpdateData", async () => {
 				const statics = {
 					"/home/": {
 						details: `${strings.dashboard} | ${strings.viewPage}`,
-						state: strings.home
+						state: strings.home,
 					},
 					"/stream-manager/": {
 						details: strings.dashboard,
-						state: strings.dashboardManage
+						state: strings.dashboardManage,
 					},
 					"/channel-analytics/": {
 						details: `${strings.dashboard} | ${strings.viewTheir}`,
-						state: strings.channelAnaly
+						state: strings.channelAnaly,
 					},
 					"/stream-summary/": {
 						details: `${strings.dashboard} | ${strings.viewTheir}`,
-						state: strings.streamSum
+						state: strings.streamSum,
 					},
 					"/achievements/": {
 						details: `${strings.dashboard} | ${strings.viewTheir}`,
-						state: strings.achievements
+						state: strings.achievements,
 					},
 					"/community/roles/": {
 						details: strings.dashboard,
-						state: strings.manageRoles
+						state: strings.manageRoles,
 					},
 					"/community/activity/": {
 						details: `${strings.dashboard} | ${strings.viewTheir}`,
-						state: strings.activity
+						state: strings.activity,
 					},
 					"/community/followers-list/": {
 						details: `${strings.dashboard} | ${strings.viewTheir}`,
-						state: strings.followList
+						state: strings.followList,
 					},
 					"/content/video-producer/": {
 						details: strings.dashboard,
-						state: strings.produce
+						state: strings.produce,
 					},
 					"/content/collections/": {
 						details: `${strings.dashboard} | ${strings.viewTheir}`,
-						state: strings.colls
+						state: strings.colls,
 					},
 					"/content/clips/": {
 						details: `${strings.dashboard} | ${strings.viewTheir}`,
-						state: strings.clips
+						state: strings.clips,
 					},
 					"/settings/channel/": {
 						details: `${strings.dashboard} | ${strings.viewTheir}`,
-						state: strings.channelSettings
+						state: strings.channelSettings,
 					},
 					"/settings/moderation/": {
 						details: `${strings.dashboard} | ${strings.viewTheir}`,
-						state: strings.moderationSettings
+						state: strings.moderationSettings,
 					},
 					"/drops/": {
 						details: `${strings.dashboard} | ${strings.viewTheir}`,
-						state: strings.dropsSettings
+						state: strings.dropsSettings,
 					},
 					"/broadcast/": {
 						details: strings.dashboard,
-						state: strings.tools
+						state: strings.tools,
 					},
 					"/extensions/": {
 						details: strings.dashboard,
-						state: strings.extensions
-					}
+						state: strings.extensions,
+					},
 				};
 
 				for (const [k, v] of Object.entries(statics)) {
@@ -638,20 +638,20 @@ presence.on("UpdateData", async () => {
 				const statics = {
 					"/brand/": {
 						details: strings.brand,
-						state: strings.brandReal
+						state: strings.brandReal,
 					},
 					"/madness/": {
 						details: strings.brand,
-						state: strings.brandMadness
+						state: strings.brandMadness,
 					},
 					"/expression/": {
 						details: strings.brand,
-						state: strings.brandExpression
+						state: strings.brandExpression,
 					},
 					"/together/": {
 						details: strings.brand,
-						state: strings.brandTogether
-					}
+						state: strings.brandTogether,
+					},
 				};
 
 				for (const [k, v] of Object.entries(statics)) {
@@ -693,18 +693,18 @@ presence.on("UpdateData", async () => {
 			if (showBrowsing) {
 				const statics = {
 					"/": {
-						details: strings.blogBrowse
+						details: strings.blogBrowse,
 					},
 					"/(\\w*|\\w*-\\w*)/archive/": {
 						details: strings.blogArchive.replace(
 							"{0}",
 							location.pathname.replace(/\/?$/, "/").split("/")[3]
-						)
+						),
 					},
 					"/(\\w*|\\w*-\\w*)/(\\d*)/(\\d*)/(\\d*)/((\\w*|\\w*-\\w*)*)/": {
 						details: `${strings.blogs} | ${strings.readingArticle}`,
-						state: document.querySelector(".c-page-heading__text")?.textContent
-					}
+						state: document.querySelector(".c-page-heading__text")?.textContent,
+					},
 				};
 
 				for (const [k, v] of Object.entries(statics)) {
@@ -729,19 +729,19 @@ presence.on("UpdateData", async () => {
 			if (showBrowsing) {
 				const statics = {
 					"/s/": {
-						details: `${strings.help} | ${strings.browse}`
+						details: `${strings.help} | ${strings.browse}`,
 					},
 					"/s/topiccatalog/": {
-						details: strings.helpTopicCatalog
+						details: strings.helpTopicCatalog,
 					},
 					"/s/topic/": {
 						details: strings.helpTopic,
-						state: document.querySelector(".headlineTitle")?.textContent
+						state: document.querySelector(".headlineTitle")?.textContent,
 					},
 					"/s/article/": {
 						details: `${strings.help} | ${strings.readingArticle}`,
-						state: document.querySelector(".articleTitle")?.textContent
-					}
+						state: document.querySelector(".articleTitle")?.textContent,
+					},
 				};
 
 				for (const [k, v] of Object.entries(statics)) {
@@ -784,28 +784,28 @@ presence.on("UpdateData", async () => {
 			if (showBrowsing) {
 				const statics = {
 					"/": {
-						details: `${strings.dev} | ${strings.browse}`
+						details: `${strings.dev} | ${strings.browse}`,
 					},
 					"/products/": {
 						details: `${strings.dev} | ${strings.viewing}`,
-						state: strings.devProduct
+						state: strings.devProduct,
 					},
 					"/showcase/": {
 						details: `${strings.dev} | ${strings.viewing}`,
-						state: strings.devShowcase
+						state: strings.devShowcase,
 					},
 					"/support/": {
 						details: `${strings.dev} | ${strings.viewing}`,
-						state: strings.devSupport
+						state: strings.devSupport,
 					},
 					"/docs/": {
 						details: strings.devDocs,
-						state: strings.browse
+						state: strings.browse,
 					},
 					"/docs/(\\w*|\\w*-\\w*)/": {
 						details: `${strings.devDocs} | ${strings.readingAbout}`,
-						state: document.querySelector(".text-content > h1")?.textContent
-					}
+						state: document.querySelector(".text-content > h1")?.textContent,
+					},
 				};
 
 				for (const [k, v] of Object.entries(statics)) {
@@ -831,20 +831,20 @@ presence.on("UpdateData", async () => {
 			if (showBrowsing) {
 				const statics = {
 					"/": {
-						details: `${strings.dev} (${strings.forums}) | ${strings.browse}`
+						details: `${strings.dev} (${strings.forums}) | ${strings.browse}`,
 					},
 					"/c/": {
 						details: `${strings.dev} (${strings.forums}) | ${strings.viewCategory}`,
-						state: document.querySelector(".category-name")?.textContent
+						state: document.querySelector(".category-name")?.textContent,
 					},
 					"/t/": {
 						details: `${strings.dev} (${strings.forums}) | ${strings.thread}`,
-						state: document.querySelector(".fancy-title")?.textContent
+						state: document.querySelector(".fancy-title")?.textContent,
 					},
 					"/u/": {
 						details: `${strings.dev} (${strings.forums}) | ${strings.user}`,
-						state: document.querySelector(".username")?.textContent
-					}
+						state: document.querySelector(".username")?.textContent,
+					},
 				};
 
 				for (const [k, v] of Object.entries(statics)) {
@@ -872,20 +872,20 @@ presence.on("UpdateData", async () => {
 			if (showBrowsing) {
 				const statics = {
 					"/": {
-						details: `Status page | ${strings.browse}`
+						details: `Status page | ${strings.browse}`,
 					},
 					"/incidents/": {
 						details: `Status page | ${strings.viewing}`,
-						state: document.querySelector(".page-title > div")?.textContent
+						state: document.querySelector(".page-title > div")?.textContent,
 					},
 					"/history/": {
 						details: `Status page | ${strings.viewing}`,
-						state: strings.incident
+						state: strings.incident,
 					},
 					"/uptime/": {
 						details: `Status page | ${strings.viewing}`,
-						state: strings.uptime
-					}
+						state: strings.uptime,
+					},
 				};
 
 				for (const [k, v] of Object.entries(statics)) {

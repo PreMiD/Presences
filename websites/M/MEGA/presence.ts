@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "762522704128901131"
+	clientId: "762522704128901131",
 });
 
 let fileName: HTMLElement,
@@ -10,7 +10,7 @@ let fileName: HTMLElement,
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		page = window.location.pathname;
 

@@ -1,16 +1,16 @@
 const presence = new Presence({
-	clientId: "969245744261390337"
+	clientId: "969245744261390337",
 });
 let title: HTMLElement, mTitle: string, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		path = document.location.pathname,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 	if (!privacy) {
 		if (path === "/") {
@@ -37,16 +37,16 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Post",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			} else if (search.value && search.value !== mTitle) {
 				presenceData.smallImageKey = "search";
 				presenceData.buttons = [
 					{
 						label: "View Search",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 				presenceData.details = "Searching Posts for:";
 				presenceData.state = search.value;
@@ -54,8 +54,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View All Posts",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 				presenceData.details = "All Posts";
 				delete presenceData.state;
@@ -69,8 +69,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Comment Page",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else if (path.includes("users/")) {
 			title = document.querySelector("head > title");
@@ -81,8 +81,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Profile",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else if (path.includes("artists")) {
 			search = document.querySelector("#search_any_name_matches");
@@ -100,15 +100,15 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Artist",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else if (path.includes("tags")) {
 			presenceData.buttons = [
 				{
 					label: "View Tags",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 
 			search = document.querySelector("#search_name_matches");
@@ -134,8 +134,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Blips",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			}
 			title = document.querySelector(
@@ -148,8 +148,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Pools",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			}
 			search = document.querySelector("#search_name_matches");
@@ -163,8 +163,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Wiki",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			search = document.querySelector("#quick_search_title");
 			if (search.value) {
@@ -181,8 +181,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Forum Post",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			search = document.querySelector("#quick_search_body_matches");
 			if (search.value) {
@@ -199,8 +199,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Help Page",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			title = document.querySelector("#content > div > h1");
 			if (title) presenceData.details = title.textContent;

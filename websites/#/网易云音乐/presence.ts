@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "714636053235105832" }),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 let title: string,
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 				smallImageKey: paused ? "pause" : "play",
 				smallImageText: paused ? (await strings).pause : (await strings).play,
 				startTimestamp: timestamps[0],
-				endTimestamp: timestamps[1]
+				endTimestamp: timestamps[1],
 			};
 
 		if (paused) {

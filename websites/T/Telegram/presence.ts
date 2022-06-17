@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "664595715242197008"
+	clientId: "664595715242197008",
 });
 
 function setPresenceData(
@@ -32,7 +32,7 @@ function setPresenceData(
 presence.on("UpdateData", async () => {
 	const showName: boolean = await presence.getSetting<boolean>("name"); // presence settings
 	let presenceData: PresenceData = {
-			largeImageKey: "telegram"
+			largeImageKey: "telegram",
 		}, // default PresenceData
 		isLoggedIn: boolean, // determine if logged in or still logging in
 		activeChatDetails: HTMLElement, // details of current active chat
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 			textArea,
 			messagesCount,
 			statusSpan
-		)
+		),
 	};
 
 	presence.setActivity(presenceData);

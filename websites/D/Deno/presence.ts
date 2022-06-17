@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "843058683100266526"
+		clientId: "843058683100266526",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let moduleName: HTMLElement;
@@ -12,7 +12,7 @@ function pathIncludes(string: string): boolean {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/")

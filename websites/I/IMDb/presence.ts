@@ -1,16 +1,16 @@
 const presence: Presence = new Presence({
-		clientId: "631379801826918400"
+		clientId: "631379801826918400",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "large_img",
-			startTimestamp
+			startTimestamp,
 		},
 		url = document.URL;
 	if (url.includes("/videoplayer/")) {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "692230804402864148"
+	clientId: "692230804402864148",
 });
 
 /**
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 					? `🎤  ${firstLetterUp(state.textContent)}`
 					: "🇧🇷 suamusica.com.br",
 			startTimestamp: 0,
-			endTimestamp: 0
+			endTimestamp: 0,
 		};
 
 	if (presenceData.details) presence.setActivity(presenceData);

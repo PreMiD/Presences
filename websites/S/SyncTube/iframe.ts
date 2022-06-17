@@ -17,7 +17,7 @@ iframe.on("UpdateData", async () => {
 				).textContent || "Unknown",
 			url: document.querySelector<HTMLAnchorElement>(
 				"a.ytp-youtube-button.ytp-button.yt-uix-sessionlink"
-			)?.href
+			)?.href,
 		});
 	}
 });

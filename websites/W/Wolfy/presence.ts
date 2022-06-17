@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "501842028569559061" // Official Wolfy Discord App Client ID, owned by Wolfy's Admin
+	clientId: "501842028569559061", // Official Wolfy Discord App Client ID, owned by Wolfy's Admin
 });
 
 let path,
@@ -11,7 +11,7 @@ let path,
 
 const waitingString = {
 	en: "WAITING",
-	fr: "EN ATTENTE"
+	fr: "EN ATTENTE",
 };
 
 function getTime(list: string[]): number {
@@ -25,7 +25,7 @@ function getTime(list: string[]): number {
 function getTimestamps(audioTime: number, audioDuration: string): number[] {
 	return [
 		Date.now(),
-		audioTime + getTime(audioDuration.split(":").reverse()) * 1000
+		audioTime + getTime(audioDuration.split(":").reverse()) * 1000,
 	];
 }
 
@@ -34,13 +34,13 @@ function addButton(presenceData: PresenceData, label: string, url: string) {
 		presenceData.buttons = [
 			{
 				label,
-				url
-			}
+				url,
+			},
 		];
 	} else {
 		presenceData.buttons[1] = {
 			label,
-			url
+			url,
 		};
 	}
 }
@@ -146,7 +146,7 @@ function resolveLanguage(lang: string): keyof typeof waitingString {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	path = document.location.pathname.split("/");

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "685611188306051093"
+		clientId: "685611188306051093",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	searchItems = {
@@ -9,7 +9,7 @@ const presence = new Presence({
 		page: "page",
 		query: "q",
 		tab: "tab",
-		type: "type"
+		type: "type",
 	},
 	/**
 	 * Lambda function to ucFirst
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 		details: "Unknown page", // Left here as a clue to find missing possible states
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (document.location.host === "hub.docker.com") {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "809093093600133165"
+		clientId: "809093093600133165",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -12,7 +12,7 @@ async function getStrings() {
 			buttonViewProfile: "general.buttonViewProfile",
 			viewProfile: "general.viewProfile",
 			viewTikTok: "tiktok.viewing",
-			buttonViewTikTok: "tiktok.buttonViewTikTok"
+			buttonViewTikTok: "tiktok.buttonViewTikTok",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -24,7 +24,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "tiktok",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		[, page, pageType] = location.pathname.split("/");
@@ -63,12 +63,12 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewTikTok,
-					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`
+					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`,
 				},
 				{
 					label: (await strings).buttonViewProfile,
-					url: document.URL.split("?")[0]
-				}
+					url: document.URL.split("?")[0],
+				},
 			];
 		} else if (pageType === "live") {
 			//Live
@@ -82,12 +82,12 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewTikTok,
-					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`
+					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`,
 				},
 				{
 					label: (await strings).buttonViewProfile,
-					url: document.URL.split("?")[0]
-				}
+					url: document.URL.split("?")[0],
+				},
 			];
 		} else {
 			presenceData.details = (await strings).viewProfile;
@@ -99,8 +99,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewProfile,
-					url: document.URL.split("?")[0]
-				}
+					url: document.URL.split("?")[0],
+				},
 			];
 		}
 	} else if (page === "following") {

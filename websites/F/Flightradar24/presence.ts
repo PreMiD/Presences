@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "930914836773224498"
+		clientId: "930914836773224498",
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 let remaining = 0,
@@ -7,12 +7,12 @@ let remaining = 0,
 	player = {
 		total: "",
 		elapsed: "",
-		isPlaying: false
+		isPlaying: false,
 	},
 	video = {
 		currentTime: 0,
 		duration: 0,
-		paused: true
+		paused: true,
 	};
 
 presence.on(
@@ -28,12 +28,12 @@ presence.on(
 		(player = {
 			total: data.total,
 			elapsed: data.elapsed,
-			isPlaying: data.isPlaying
+			isPlaying: data.isPlaying,
 		}),
 			(video = {
 				currentTime: data.currentTime,
 				duration: data.duration,
-				paused: data.paused
+				paused: data.paused,
 			});
 	}
 );
@@ -43,11 +43,11 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("elapsed"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("images"),
-			presence.getSetting<boolean>("timeLeft")
+			presence.getSetting<boolean>("timeLeft"),
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingStamp
+			startTimestamp: browsingStamp,
 		};
 
 	switch (document.location.hostname.split(".")[0]) {
@@ -86,8 +86,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "View Airport",
-										url: document.location.href
-									}
+										url: document.location.href,
+									},
 								];
 							} else presenceData.details = "Browsing Airports";
 							break;
@@ -106,8 +106,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "View Airline",
-										url: document.location.href
-									}
+										url: document.location.href,
+									},
 								];
 							} else presenceData.details = "Browsing Airlines";
 							break;
@@ -119,8 +119,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "View Page",
-										url: document.location.href
-									}
+										url: document.location.href,
+									},
 								];
 							} else if (
 								document.querySelector("[id='cnt-subpage-info'] > h1")
@@ -145,8 +145,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "View Aircraft",
-										url: document.location.href
-									}
+										url: document.location.href,
+									},
 								];
 							} else presenceData.details = "Browsing Aircraft";
 							break;
@@ -162,8 +162,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "View Page",
-										url: document.location.href
-									}
+										url: document.location.href,
+									},
 								];
 							} else presenceData.details = "Browsing Flights";
 							break;
@@ -189,8 +189,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "View Aircraft",
-										url: document.location.href
-									}
+										url: document.location.href,
+									},
 								];
 							} else presenceData.details = "Browsing Pinned Flights";
 							break;
@@ -325,8 +325,8 @@ presence.on("UpdateData", async () => {
 									presenceData.buttons = [
 										{
 											label: "View Page",
-											url: document.location.href
-										}
+											url: document.location.href,
+										},
 									];
 								}
 								presenceData.details = "Watching Video";
@@ -339,7 +339,7 @@ presence.on("UpdateData", async () => {
 									presenceData.buttons = [
 										{
 											label: "View Page",
-											url: document.location.href
+											url: document.location.href,
 										},
 										{
 											label: "Watch Video",
@@ -350,21 +350,21 @@ presence.on("UpdateData", async () => {
 													)
 													.src.split("/")[4]
 													.split("?")[0]
-											}`
-										}
+											}`,
+										},
 									];
 								} else if (document.querySelector("video")) {
 									presenceData.buttons = [
 										{
 											label: "View Page",
-											url: document.location.href
+											url: document.location.href,
 										},
 										{
 											label: "Watch Video",
 											url: document.querySelector<HTMLMetaElement>(
 												"meta[itemprop='url']"
-											).content
-										}
+											).content,
+										},
 									];
 								}
 								if (video.duration !== 0) {
@@ -398,8 +398,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "View Page",
-										url: document.location.href
-									}
+										url: document.location.href,
+									},
 								];
 							}
 					}
@@ -414,8 +414,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "View Page",
-									url: document.location.href
-								}
+									url: document.location.href,
+								},
 							];
 							if (
 								document.querySelector(".layout.flex").childElementCount === 1
@@ -541,8 +541,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "View Page",
-									url: document.location.href
-								}
+									url: document.location.href,
+								},
 							];
 						} else if (
 							document.querySelector("[class*='airport-panel-open']")
@@ -586,8 +586,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "View Page",
-									url: document.location.href
-								}
+									url: document.location.href,
+								},
 							];
 						}
 					} else {
@@ -614,8 +614,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Profile",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			} else if (
 				document.querySelector(".widget-tabs-nav > ul > .ui-state-active") &&
@@ -630,8 +630,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Page",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			} else if (document.querySelector("h1.main-title")) {
 				presenceData.details = `Viewing ${
@@ -640,8 +640,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Page",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			} else {
 				presenceData.details = "Unsupported Page";
@@ -672,8 +672,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Page",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 				if (images) {
 					presenceData.largeImageKey = document

@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "777146104117854230"
+	clientId: "777146104117854230",
 });
 
 let stream: { duration: number; currentTime: number; paused: boolean };
@@ -13,7 +13,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const path: string = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "dizimag"
+			largeImageKey: "dizimag",
 		};
 	if (path.startsWith("/uye-ol")) {
 		presenceData.details = "Bir sayfaya bakıyor:";
@@ -84,8 +84,8 @@ presence.on("UpdateData", async () => {
 					label: "Diziyi Görüntüle",
 					url: `${document.location.origin}/${
 						document.location.pathname.split("/")[1]
-					}/${document.location.pathname.split("/")[2]}`
-				}
+					}/${document.location.pathname.split("/")[2]}`,
+				},
 			];
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
@@ -98,8 +98,8 @@ presence.on("UpdateData", async () => {
 					label: "Diziyi Görüntüle",
 					url: `${document.location.origin}/${
 						document.location.pathname.split("/")[1]
-					}/${document.location.pathname.split("/")[2]}`
-				}
+					}/${document.location.pathname.split("/")[2]}`,
+				},
 			];
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(

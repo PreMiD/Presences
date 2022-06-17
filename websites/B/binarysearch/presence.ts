@@ -1,6 +1,6 @@
 //Application ID on Discord
 const presence = new Presence({
-		clientId: "784650203172438026"
+		clientId: "784650203172438026",
 	}),
 	browsingTimestamp = Date.now();
 
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
 		details: document.title,
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") presenceData.details = "Home";

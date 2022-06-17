@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "708082807775428678"
+		clientId: "708082807775428678",
 	}),
 	strings = presence.getStrings({
 		playing: "presence.playback.playing",
 		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000);
 
@@ -23,7 +23,7 @@ presence.on("iFrameData", async (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "aniturk"
+			largeImageKey: "aniturk",
 		},
 		title = document.querySelector(
 			"html > body > div.konter > a > div.icerik-bilgi"

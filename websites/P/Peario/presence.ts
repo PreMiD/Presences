@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "969204609845428234"
+		clientId: "969204609845428234",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -43,7 +43,7 @@ async function fetchWithVideo(video: HTMLMediaElement) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		video = document.querySelector<HTMLVideoElement>(
 			"#app > div > div > div > div.player > video"
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 		page = window.location.pathname,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 	if (privacy && !video) presenceData.details = "Browsing...";
 	else if (privacy && video) presenceData.details = "Watching...";
@@ -74,8 +74,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Join Room",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 		if (
 			document.querySelector(

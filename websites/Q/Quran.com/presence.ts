@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "969064871310282813"
+		clientId: "969064871310282813",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 function getElementByXpath(path: string) {
@@ -14,7 +14,7 @@ function getElementByXpath(path: string) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo_1024",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location;
 	switch (pathname) {

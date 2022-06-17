@@ -12,7 +12,7 @@ iframe.on("UpdateData", async () => {
 			paused: video.paused,
 			isLive: !document
 				.querySelector(".vjs-live-control")
-				.classList.contains("vjs-hidden")
+				.classList.contains("vjs-hidden"),
 		});
 	}
 });

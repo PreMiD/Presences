@@ -1,8 +1,8 @@
 const presence = new Presence({
-		clientId: "612042450785271811"
+		clientId: "612042450785271811",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 presence.on("UpdateData", async () => {
@@ -20,14 +20,14 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Petition",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 		presence.setActivity(presenceData);
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		});
 	}
 });

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "706956748329713685"
+		clientId: "706956748329713685",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let pathname: string,
@@ -60,7 +60,7 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		details: getTitle(),
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (pathname === "/") presenceData.details = "Home";
 	else if (pathname && pathname.includes("/thread/")) {

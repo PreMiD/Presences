@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "640538683392655370"
+		clientId: "640538683392655370",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLElement,
@@ -9,7 +9,7 @@ let title: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "tsfm"
+		largeImageKey: "tsfm",
 	};
 	//presenceData.startTimestamp = browsingTimestamp;
 	player = document.querySelector("#player");

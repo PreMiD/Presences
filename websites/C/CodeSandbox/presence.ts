@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "961652082027421746"
+		clientId: "961652082027421746",
 	}),
 	browsingTimestamp = Math.floor(Date.now()),
 	formats = [
@@ -27,7 +27,7 @@ const presence = new Presence({
 		"bat",
 		"cr",
 		"go",
-		"rs"
+		"rs",
 	];
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 			smallImageKey: "smallimagekey",
 			smallImageText: "CodeSandbox",
 			details: "Loading",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = window.location;
 	if (pathname.startsWith("/")) {
@@ -97,8 +97,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Profile",
-					url: location.href.toString()
-				}
+					url: location.href.toString(),
+				},
 			];
 		} else if (pathname.includes("/s/")) {
 			if (
@@ -143,8 +143,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Sandbox",
-						url: location.href.toString()
-					}
+						url: location.href.toString(),
+					},
 				];
 			}
 		} else {

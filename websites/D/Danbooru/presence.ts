@@ -1,18 +1,18 @@
 const presence = new Presence({
-		clientId: "918794311557058590"
+		clientId: "918794311557058590",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "danbooru",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[shortTitle] = document.title.split(/[|]/, 1),
 		path = document.location.pathname,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 
 	if (path === "/posts") {
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = "Viewing artworks";
 		if (buttons) {
 			presenceData.buttons = [
-				{ label: "View Artwork", url: document.location.href }
+				{ label: "View Artwork", url: document.location.href },
 			];
 		}
 	} else if (path.startsWith("/post_versions"))
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageText = "Viewing a profile";
 					if (buttons) {
 						presenceData.buttons = [
-							{ label: "View Artist", url: document.location.href }
+							{ label: "View Artist", url: document.location.href },
 						];
 					}
 				} else if (path === "/users") {

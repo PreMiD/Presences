@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "643821029940133898"
+		clientId: "643821029940133898",
 	}),
 	pages: { [key: string]: string } = {
 		"/": "Ana Sayfa",
@@ -47,7 +47,7 @@ const presence = new Presence({
 		"/account/connected-accounts": "Bağlı Hesaplar",
 		"/account/following": "Takip Ettiklerim",
 		"/account/ignored": "Yok Sayılanlar",
-		"/account": "Hesap Ayrıntıları"
+		"/account": "Hesap Ayrıntıları",
 	};
 
 presence.on("UpdateData", async () => {
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 				)} (${time.textContent.trim().replace("eklendi", "")})`,
 				smallImageKey: "read",
 				smallImageText: "Bir gönderi okuyor...",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (page.includes("/yazar/")) {
 			const title = document.title.split(" ");
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
 				details: "Bir yazara bakıyor:",
 				state:
 					title.slice(0, title.indexOf("Yazıları")).join(" ") ?? "Belirsiz",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (page.includes("/arama/")) {
 			const searchingFor = document.querySelector(
@@ -111,14 +111,14 @@ presence.on("UpdateData", async () => {
 						? searchingFor.textContent.replaceAll('"', "")
 						: "Belirsiz",
 				smallImageKey: "search",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (pages[page] || pages[page.slice(0, -1)]) {
 			presence.setActivity({
 				largeImageKey: "sd-logo",
 				details: "Bir sayfaya göz atıyor:",
 				state: pages[page] || pages[page.slice(0, -1)],
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		}
 	} else if (host === "forum.shiftdelete.net") {
@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "sd-logo",
 				details: "Bir kullanıcıya bakıyor:",
 				state: user.textContent,
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (page.includes("/post-thread")) {
 			const newTitle = document.querySelector(
@@ -145,7 +145,7 @@ presence.on("UpdateData", async () => {
 					newTitle && newTitle.value !== ""
 						? newTitle.value
 						: "Henüz Başlık Girilmemiş",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (page.includes("/forums/")) {
 			const forumTitle = document.querySelector(
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
 					forumTitle && forumTitle.textContent
 						? forumTitle.textContent
 						: "Belirsiz",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (page.includes("/threads/")) {
 			const title = document.querySelector(
@@ -183,7 +183,7 @@ presence.on("UpdateData", async () => {
 				} ${time && time.textContent !== "" ? `(${time.textContent})` : ""}`,
 				smallImageKey: "forum",
 				smallImageText: "Bir forum gönderisi okuyor.",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (page.includes("/search/")) {
 			const searchingFor = document.querySelector(
@@ -198,7 +198,7 @@ presence.on("UpdateData", async () => {
 						? searchingFor.textContent
 						: "Belirsiz",
 				smallImageKey: "search",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (pages[page] || pages[page.slice(0, -1)]) {
 			presence.setActivity({
@@ -207,7 +207,7 @@ presence.on("UpdateData", async () => {
 				state: pages[page] || pages[page.slice(0, -1)],
 				smallImageKey: "forum",
 				smallImageText: "Bu kullanıcı şuan da SDN Forum'da.",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		}
 	}

@@ -3,7 +3,7 @@ import "source-map-support/register";
 import {
 	existsSync as exists,
 	readFileSync as readFile,
-	writeFileSync as writeFile
+	writeFileSync as writeFile,
 } from "node:fs";
 import { sync as glob } from "glob";
 import { coerce, inc, valid } from "semver";
@@ -29,7 +29,7 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
 	write = (path: string, code: Metadata): void =>
 		writeFile(path, JSON.stringify(code, null, "\t"), {
 			encoding: "utf8",
-			flag: "w"
+			flag: "w",
 		}),
 	missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
 		pF => !exists(`${pF}/dist/metadata.json`)

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "651671730905153539"
+		clientId: "651671730905153539",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		),
 		presenceData: PresenceData = {
 			largeImageKey: "hn-logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (page.includes("/tagged") && tagged && tagged.textContent !== "") {

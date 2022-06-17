@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "858886158045806602"
+	clientId: "858886158045806602",
 });
 
 let prevURL = "",
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "netacadlogo",
 		details,
 		state,
-		startTimestamp: timestamp
+		startTimestamp: timestamp,
 	};
 	if (!state) delete presenceData.state;
 

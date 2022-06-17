@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "640969147911503910"
+		clientId: "640969147911503910",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "star"
+		largeImageKey: "star",
 	};
 
 	if (document.location.hostname === "www.gamestar.de") {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "837833278777065503"
+		clientId: "837833278777065503",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -39,14 +39,14 @@ function isInViewport(ele: HTMLElement) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "oculus-logo-small",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		hostName = document.location.hostname.replace("www.", ""),
 		path = window.location.pathname.split("/").slice(1),
 		setting = {
 			showButtons: await presence.getSetting<boolean>("buttons"),
 			showTimestamp: await presence.getSetting<boolean>("timestamp"),
-			showCartTotal: await presence.getSetting<boolean>("shop_total")
+			showCartTotal: await presence.getSetting<boolean>("shop_total"),
 		};
 
 	switch (hostName) {
@@ -66,8 +66,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Open Article",
-							url: `https://${hostName}/${path[0]}`
-						}
+							url: `https://${hostName}/${path[0]}`,
+						},
 					];
 				} else presenceData.state = "Unknown Article";
 			}
@@ -165,8 +165,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Product",
-								url: `https://${hostName}/${path[0]}`
-							}
+								url: `https://${hostName}/${path[0]}`,
+							},
 						];
 						break;
 					}
@@ -191,8 +191,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "View Accessory",
-									url: `https://${hostName}/accessories/${path[1]}`
-								}
+									url: `https://${hostName}/accessories/${path[1]}`,
+								},
 							];
 						}
 
@@ -233,7 +233,7 @@ presence.on("UpdateData", async () => {
 							),
 							right: <HTMLSelectElement>(
 								document.querySelectorAll("div._9erd select._9ere")[1]
-							)
+							),
 						};
 
 						presenceData.details = "Comparing Headsets:";
@@ -258,8 +258,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "Read Story",
-									url: `https://${hostName}/vr-for-good/stories/${path[2]}`
-								}
+									url: `https://${hostName}/vr-for-good/stories/${path[2]}`,
+								},
 							];
 						} else {
 							presenceData.details = "Viewing Page:";
@@ -287,8 +287,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "Read Blog Post",
-									url: `https://${hostName}/${path[0]}/${path[1]}`
-								}
+									url: `https://${hostName}/${path[0]}/${path[1]}`,
+								},
 							];
 						}
 						break;
@@ -309,8 +309,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "View Experience",
-										url: `https://${hostName}/experiences/${path[1]}`
-									}
+										url: `https://${hostName}/experiences/${path[1]}`,
+									},
 								];
 							} else presenceData.details = "Viewing Experiences";
 
@@ -321,8 +321,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "View Store",
-									url: `https://${hostName}/${path[0]}`
-								}
+									url: `https://${hostName}/${path[0]}`,
+								},
 							];
 
 							// Store home page
@@ -340,7 +340,7 @@ presence.on("UpdateData", async () => {
 
 										presenceData.buttons.push({
 											label: "View Showcase",
-											url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
+											url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`,
 										});
 
 										// Developer posts
@@ -358,7 +358,7 @@ presence.on("UpdateData", async () => {
 
 										presenceData.buttons.push({
 											label: "Read Dev-Post",
-											url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
+											url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`,
 										});
 
 										// Searching
@@ -393,7 +393,7 @@ presence.on("UpdateData", async () => {
 
 											presenceData.buttons.push({
 												label: "View bundle",
-												url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
+												url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`,
 											});
 
 											// Games
@@ -407,7 +407,7 @@ presence.on("UpdateData", async () => {
 
 											presenceData.buttons.push({
 												label: "View Game",
-												url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
+												url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`,
 											});
 										}
 								}
@@ -423,8 +423,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: `https://${hostName}/${path[0]}`
-							}
+								url: `https://${hostName}/${path[0]}`,
+							},
 						];
 
 						break;
@@ -436,8 +436,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: `https://${hostName}/${path[0]}`
-							}
+								url: `https://${hostName}/${path[0]}`,
+							},
 						];
 
 						break;
@@ -452,8 +452,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: `https://${hostName}/${path[0]}`
-							}
+								url: `https://${hostName}/${path[0]}`,
+							},
 						];
 
 						break;

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "888429594120716328"
+		clientId: "888429594120716328",
 	}),
 	startedTime = Math.floor(Date.now() / 1000);
 
@@ -235,11 +235,11 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<boolean>("privacyChat"),
 				presence.getSetting<boolean>("gameLang"),
 				presence.getSetting<boolean>("showTimestamp"),
-				presence.getSetting<number>("logo")
+				presence.getSetting<number>("logo"),
 			]),
 		logoArr = ["wov", "wov_white", "wov_no_bg", "wov_text"],
 		presenceData: PresenceData = {
-			largeImageKey: logoArr[logo] || "wov"
+			largeImageKey: logoArr[logo] || "wov",
 		};
 
 	if (showTimestamp) presenceData.startTimestamp = startedTime;
@@ -261,8 +261,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read Post",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			} else presenceData.state = "Reading a blog post";
 		}
