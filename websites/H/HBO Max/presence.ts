@@ -47,48 +47,83 @@ const presence = new Presence({
 	},
 	coverUrls: Record<string, string> = {};
 
-/* eslint-disable camelcase */
-function getToken(): Promise<string> {
-	return new Promise(resolve => {
-		fetch("https://oauth.api.hbo.com/auth/tokens", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
+let isFetching = false;
+
+function fetchToken(): Promise<string> {
+	return fetch("https://oauth.api.hbo.com/auth/tokens", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		/* eslint-disable camelcase */
+		body: JSON.stringify({
+			client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
+			client_secret: crypto.randomUUID(),
+			scope: "browse video_playback",
+			grant_type: "client_credentials",
+			deviceSerialNumber: crypto.randomUUID(),
+			clientDeviceData: {
+				paymentProviderCode: "blackmarket",
 			},
-			body: JSON.stringify({
-				client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
-				client_secret: crypto.randomUUID(),
-				scope: "browse video_playback",
-				grant_type: "client_credentials",
-				deviceSerialNumber: crypto.randomUUID(),
-				clientDeviceData: {
-					paymentProviderCode: "blackmarket",
-				},
-			}),
-		})
-			.then(x => x.json())
-			.then(x => resolve(x.access_token));
-	});
+		}),
+		/* eslint-enable camelcase */
+	})
+		.then(res => res.json())
+		.then(res => res.access_token);
 }
-/* eslint-enable camelcase */
+
+function fetchClientConfig(
+	token: string
+): Promise<{ routeKey: string; countryCode: string }> {
+	return fetch("https://sessions.api.hbo.com/sessions/v1/clientConfig", {
+		method: "POST",
+		headers: {
+			authorization: `Bearer ${token}`,
+			"content-type": "application/json",
+		},
+		body: JSON.stringify({
+			contract: "abc:1.0.0.0",
+			preferredLanguages: ["en-us"],
+		}),
+	})
+		.then(res => res.json())
+		.then(res => ({
+			routeKey: res.routeKeys.contentSubdomain,
+			countryCode: new URLSearchParams(
+				res.features["express-content"].config.expressContentParams
+			).get("country-code"),
+		}));
+}
 
 async function fetchCover() {
-	const response = await (
-		await fetch(
-			`https://comet.api.hbo.com/express-content/${
+	let output: string;
+
+	const accessToken = await fetchToken(),
+		{ routeKey, countryCode } = await fetchClientConfig(accessToken);
+
+	isFetching = true;
+
+	try {
+		const response = await fetch(
+			`https://comet${routeKey}.api.hbo.com/express-content/${
 				location.pathname.split("/")[2]
-			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US&language=en-us`,
+			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=${countryCode}&language=en-us`,
 			{
 				headers: {
-					authorization: `Bearer ${await getToken()}`,
+					authorization: `Bearer ${accessToken}`,
 				},
 			}
-		)
-	).json();
+		).then(res => res.json());
 
-	return `https://artist.api.cdn.hbo.com/images/${
-		response[0].body.references.series.match(/series:([^:]+)/)[1]
-	}/tileburnedin?size=1024x1024`;
+		output = `https://artist.api.cdn.hbo.com/images/${
+			response[0].body.references.series.match(/series:([^:]+)/)[1]
+		}/tileburnedin?size=1024x1024`;
+	} catch {
+		output = "lg";
+	}
+
+	isFetching = false;
+	return output;
 }
 
 presence.on("UpdateData", async () => {
@@ -142,6 +177,8 @@ presence.on("UpdateData", async () => {
 					}/tileburnedin?size=1024x1024`;
 				} else {
 					const episodeId = location.pathname.match(/:episode:([^:]+)/)[1];
+
+					if (isFetching) return;
 					coverUrls[episodeId] ??= await fetchCover();
 
 					presenceData.largeImageKey = coverUrls[episodeId];
