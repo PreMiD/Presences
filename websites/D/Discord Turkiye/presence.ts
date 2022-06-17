@@ -82,7 +82,6 @@ presence.on("UpdateData", async () => {
 				.split('url("')[1]
 				.split('");')[0];
 		}
-	}
 
 	if (pathname === "/konusmalar/")
 		presenceData.details = "Konuşmalarını görüntülüyor";
