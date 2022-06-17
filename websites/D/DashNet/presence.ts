@@ -19,7 +19,7 @@ function spaceAfterNumbers(str: string) {
     let newStr = String()
     let found = false;
 	arr.forEach(c => {
-        newStr += (isNaN(Number(c)) && found == false && c !== ".") ? " " + c : c
+        newStr += (isNaN(Number(c)) && found == false && c !== "." && c !== ",") ? " " + c : c
         if (newStr.includes(" ")) found = true;
     })
 
@@ -40,7 +40,7 @@ presence.on("UpdateData", () => {
 
 	if (document.location.pathname.includes("/cookieclicker/")) {
 		const cookies = document
-			.querySelector("#cookies") 
+			.querySelector("#cookies")
 			.textContent.replace(
 				document.querySelector("#cookies div").textContent,
 				""
