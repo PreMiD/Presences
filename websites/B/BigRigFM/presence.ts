@@ -4,12 +4,12 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "brfmlogo",
-		startTimestamp: browsingTimestamp,
-	},
-	spotifyUrl = document
-		.querySelector(".player-artist-text a")
-		.getAttribute("href");
+			largeImageKey: "brfmlogo",
+			startTimestamp: browsingTimestamp,
+		},
+		spotifyUrl = document
+			.querySelector(".player-artist-text a")
+			.getAttribute("href");
 
 	presenceData.details = `${
 		document.querySelector(".player-artist-text").textContent
