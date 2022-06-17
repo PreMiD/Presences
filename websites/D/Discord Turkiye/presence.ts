@@ -5,7 +5,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "1024dctr",
 			details: "Geziniyor",
-			startTimestamp
+			startTimestamp,
 		},
 		{ pathname } = document.location,
 		privacyMode = await presence.getSetting("privacy_mode").catch(() => false);
