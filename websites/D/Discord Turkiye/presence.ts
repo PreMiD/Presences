@@ -1,10 +1,11 @@
-const presence = new Presence({ clientId: "890757020393816064" }), startTimestamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({ clientId: "890757020393816064" }),
+	startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "1024dctr",
 			details: "Geziniyor",
-			startTimestamp,
+			startTimestamp
 		},
 		{ pathname } = document.location,
 		privacyMode = await presence.getSetting("privacy_mode").catch(() => false);
@@ -67,21 +68,21 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/araclar/kullanici/") {
 		delete presenceData.smallImageKey;
 		if (privacyMode) presenceData.details = "Kullanıcı görüntülüyor";
-		} else if ((<HTMLElement>document.querySelector("div.tag")).textContent) {
-			presenceData.details = "Kullanıcı görüntülüyor:";
-			presenceData.state = `${
-				(<HTMLElement>document.querySelector("div.tag > div.username"))
-					.textContent
-			}${
-				(<HTMLElement>document.querySelector("div.tag > div.discriminator"))
-					.textContent
-			}`;
-			presenceData.largeImageKey = (<HTMLElement>(
-				document.querySelector("div.avatar")
-			)).style.backgroundImage
-				.split('url("')[1]
-				.split('");')[0];
-		}
+	} else if ((<HTMLElement>document.querySelector("div.tag")).textContent) {
+		presenceData.details = "Kullanıcı görüntülüyor:";
+		presenceData.state = `${
+			(<HTMLElement>document.querySelector("div.tag > div.username"))
+				.textContent
+		}${
+			(<HTMLElement>document.querySelector("div.tag > div.discriminator"))
+				.textContent
+		}`;
+		presenceData.largeImageKey = (<HTMLElement>(
+			document.querySelector("div.avatar")
+		)).style.backgroundImage
+			.split('url("')[1]
+			.split('");')[0];
+	}
 
 	if (pathname === "/konusmalar/")
 		presenceData.details = "Konuşmalarını görüntülüyor";
