@@ -14,6 +14,18 @@ function presenceSet(): void {
 	}
 }
 
+function spaceAfterNumbers(str) {
+	let arr = str.split('')
+    let newStr = String()
+    let found = false;
+	arr.forEach(c => {
+        newStr += (isNaN(c) && found == false) ? " " + c : c
+        if (newStr.includes(" ")) found = true;
+    })
+
+    return newStr
+}
+
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presenceSet();
@@ -34,7 +46,7 @@ presence.on("UpdateData", () => {
 				""
 			);
 		if (cookies.includes(" cookies")) presenceData.details = cookies;
-		else presenceData.details = cookies.replace("cookies", " cookies");
+		else presenceData.details = spaceAfterNumbers(cookies).replace("cookies", " cookies");
 
 		presenceData.state = document
 			.querySelector("#cookies div")
