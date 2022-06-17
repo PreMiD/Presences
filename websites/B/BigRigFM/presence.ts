@@ -14,9 +14,8 @@ presence.on("UpdateData", () => {
 	presenceData.details = `${
 		document.querySelector(".player-artist-text").textContent
 	} - ${document.querySelector(".player-title-text").textContent}`;
-	presenceData.state = document.querySelector(".live-name").textContent
-		? document.querySelector(".live-name").textContent
-		: "AutoDJ";
+	presenceData.state =
+		document.querySelector(".live-name")?.textContent || "AutoDJ";
 
 	presenceData.buttons = [
 		{
