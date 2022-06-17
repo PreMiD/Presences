@@ -15,25 +15,9 @@ function presenceSet(): void {
 }
 
 function spaceAfterNumbers(str: string) {
-	let arr = str.split("");
-	let newStr = String();
-	let found = false;
-	arr.forEach(c => {
-		newStr +=
-			isNaN(Number(c)) && found == false && c !== "." && c !== ","
-				? " " + c
-				: c;
-		if (newStr.includes(" ")) found = true;
-	});
-
-	return newStr;
-}
-
-function spaceAfterNumbers(str: string) {
-	const arr = str.split("");
 	let newStr = String(),
 		found = false;
-	for (const c of arr) {
+	for (const c of str.split("")) {
 		newStr +=
 			isNaN(Number(c)) && found == false && c !== "." && c !== ","
 				? ` ${c}`
