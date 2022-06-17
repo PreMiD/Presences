@@ -27,6 +27,7 @@
 		"quotes": ["error", "double", { "avoidEscape": true }],
 		"camelcase": ["error", { "properties": "always" }],
 		"curly": ["error", "multi-or-nest"],
+		"eqeqeq": ["error", "always", { "null": "ignore" }],
 		"one-var": ["error", "consecutive"],
 		"linebreak-style": ["error", "unix"],
 		"prefer-const": "error",

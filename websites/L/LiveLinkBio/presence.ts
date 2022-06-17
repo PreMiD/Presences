@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 				"body > main > section > div.row.mb-4 > div.col-12.col-lg.d-flex.align-items-center.mb-3.mb-lg-0 > h1"
 			),
 			active = document.querySelector('[class="nav-link active"]');
-		if (document.location.pathname == "/") presenceData.details = "Homepage";
+		if (document.location.pathname === "/") presenceData.details = "Homepage";
 		else if (document.location.pathname.includes("affiliate")) {
 			presenceData.buttons = [
 				{
