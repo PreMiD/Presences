@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 			state: "",
 			startTimestamp: Math.floor(Date.now() / 1000),
 			smallImageText: "",
-			smallImageKey: ""
+			smallImageKey: "",
 		},
 		page = document.location.pathname,
 		privacyMode = await presence.getSetting("privacy_mode").catch(() => {
