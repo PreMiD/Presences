@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.title.split(" | ")[0];
 	}
 
-	if (pathname === "/tags") presenceData.details == "Etiketleri görüntülüyor";
+	if (pathname === "/tags") presenceData.details = "Etiketleri görüntülüyor";
 
 	if (pathname.includes("/post-thread")) {
 		presenceData.details = "Kategoride konu açıyor:";
