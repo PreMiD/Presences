@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (pathname === "/") presenceData.details = "Anasayfayı görüntülüyor";
-	if (pathname.includes("/hesabim"))
+	else if (pathname.includes("/hesabim"))
 		presenceData.details = "Kişisel detaylarını görüntülüyor";
 	if (pathname.includes("/konular/")) {
 		presenceData.details = "Konuyu görüntülüyor:";
