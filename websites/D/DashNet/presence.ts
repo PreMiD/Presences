@@ -14,6 +14,21 @@ function presenceSet(): void {
 	}
 }
 
+function spaceAfterNumbers(str: string) {
+	const arr = str.split("");
+	let newStr = String(),
+		found = false;
+	for (const c of arr) {
+		newStr +=
+			isNaN(Number(c)) && found == false && c !== "." && c !== ","
+				? ` ${c}`
+				: c;
+		if (newStr.includes(" ")) found = true;
+	}
+
+	return newStr;
+}
+
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presenceSet();
@@ -33,8 +48,14 @@ presence.on("UpdateData", () => {
 				document.querySelector("#cookies div").textContent,
 				""
 			);
-		if (cookies.includes(" cookies")) presenceData.details = cookies;
-		else presenceData.details = cookies.replace("cookies", " cookies");
+		if (cookies.includes(" cookies"))
+			presenceData.details = spaceAfterNumbers(cookies);
+		else {
+			presenceData.details = spaceAfterNumbers(cookies).replace(
+				"cookies",
+				" cookies"
+			);
+		}
 
 		presenceData.state = document
 			.querySelector("#cookies div")
