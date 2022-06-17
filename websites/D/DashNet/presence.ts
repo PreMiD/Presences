@@ -14,12 +14,12 @@ function presenceSet(): void {
 	}
 }
 
-function spaceAfterNumbers(str) {
+function spaceAfterNumbers(str: string) {
 	let arr = str.split('')
     let newStr = String()
     let found = false;
 	arr.forEach(c => {
-        newStr += (isNaN(c) && found == false) ? " " + c : c
+        newStr += (isNaN(Number(c)) && found == false && c !== ".") ? " " + c : c
         if (newStr.includes(" ")) found = true;
     })
 
@@ -40,12 +40,12 @@ presence.on("UpdateData", () => {
 
 	if (document.location.pathname.includes("/cookieclicker/")) {
 		const cookies = document
-			.querySelector("#cookies")
+			.querySelector("#cookies") 
 			.textContent.replace(
 				document.querySelector("#cookies div").textContent,
 				""
 			);
-		if (cookies.includes(" cookies")) presenceData.details = cookies;
+		if (cookies.includes(" cookies")) presenceData.details = spaceAfterNumbers(cookies);
 		else presenceData.details = spaceAfterNumbers(cookies).replace("cookies", " cookies");
 
 		presenceData.state = document
