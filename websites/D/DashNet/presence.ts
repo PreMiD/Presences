@@ -14,20 +14,6 @@ function presenceSet(): void {
 	}
 }
 
-function spaceAfterNumbers(str: string) {
-	let newStr = String(),
-		found = false;
-	for (const c of str.split("")) {
-		newStr +=
-			isNaN(Number(c)) && found == false && c !== "." && c !== ","
-				? ` ${c}`
-				: c;
-		if (newStr.includes(" ")) found = true;
-	}
-
-	return newStr;
-}
-
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presenceSet();
@@ -43,18 +29,11 @@ presence.on("UpdateData", () => {
 	if (document.location.pathname.includes("/cookieclicker/")) {
 		const cookies = document
 			.querySelector("#cookies")
-			.textContent.replace(
-				document.querySelector("#cookies div").textContent,
-				""
-			);
-		if (cookies.includes(" cookies"))
-			presenceData.details = spaceAfterNumbers(cookies);
-		else {
-			presenceData.details = spaceAfterNumbers(cookies).replace(
-				"cookies",
-				" cookies"
-			);
-		}
+			.innerHTML.replace("<br>", " ")
+			.split("<")[0];
+
+		if (cookies.includes(" cookies")) presenceData.details = cookies;
+		else presenceData.details = cookies.replace("cookies", " cookies");
 
 		presenceData.state = document
 			.querySelector("#cookies div")
