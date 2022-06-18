@@ -45,7 +45,9 @@ export async function getChangedFolders(
 	const changedPresenceFolders = (
 		await execShellCommand(
 			`git --no-pager diff --name-only ${
-				eventName === "push" ? "HEAD HEAD^" : "HEAD origin/main"
+				eventName === "push"
+					? "HEAD HEAD^"
+					: `HEAD origin/${process.argv[3] ?? "main"}`
 			}`
 		)
 	)
