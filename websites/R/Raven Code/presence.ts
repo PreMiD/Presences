@@ -46,32 +46,32 @@ presence.on("UpdateData", async () => {
 		const languages = [
 			{
 				page: "discord.js",
-				key: "https://avatars.githubusercontent.com/u/26492485?s=200&v=4",
+				key: "https://ravencode.live/assets/d403fd74-017c-cf35-e2c6-5fc1f93ae1d6.jpg",
 				text: "Discord.js",
 			},
 			{
 				page: "eris",
-				key: "https://www.endometriozis.org/wp-content/uploads/2019/11/service1_navy_circle.png",
+				key: "https://ravencode.live/assets/13df8b96-37db-627c-9052-f29df2391d17.jpg",
 				text: "Eris",
 			},
 			{
 				page: "javascript",
-				key: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png",
+				key: "https://ravencode.live/assets/f8d448e8-abc5-1562-bfdc-35b5b84346e7.jpg",
 				text: "JavaScript",
 			},
 			{
 				page: "html",
-				key: "https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png",
+				key: "https://ravencode.live/assets/724c385b-a123-701a-427d-f8a9660cbbcd.jpg",
 				text: "HTML",
 			},
 			{
 				page: "python",
-				key: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/2048px-Python-logo-notext.svg.png",
+				key: "https://ravencode.live/assets/b86f1bd7-7066-ee31-290a-4bccfc2b7e65.jpg",
 				text: "Python",
 			},
 			{
 				page: "css",
-				key: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/800px-CSS3_logo.svg.png",
+				key: "https://ravencode.live/assets/ea0fa51a-960c-c68f-6315-f7ae20fa39f4.jpg",
 				text: "CSS",
 			},
 		];
