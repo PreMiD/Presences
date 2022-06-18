@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	const path = document.location.pathname.toLowerCase(),
+	const pathname = document.location.pathname.toLowerCase(),
 		pages: Record<string, PresenceData> = {
 			"/": { details: "Browsing the home page" },
 			"/dashboard": { details: "Browsing dashboard" },
@@ -76,30 +76,30 @@ presence.on("UpdateData", async () => {
 			"/widgets": { details: "Browsing widgets" },
 		};
 
-	for (const [pathname, data] of Object.entries(pages))
-		if (path.includes(pathname)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages))
+		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
 
-	if (path.includes("/users")) {
+	if (pathname.includes("/users")) {
 		const username = document.querySelector(
 			"#avatar-wrapper >  .emojis-supported > a"
 		).textContent;
-		if (path.includes("/history"))
+		if (pathname.includes("/history"))
 			presenceData.details = `Browsing ${username}'s history`;
-		else if (path.includes("/progress"))
+		else if (pathname.includes("/progress"))
 			presenceData.details = `Browsing ${username}'s progress`;
-		else if (path.includes("/collection"))
+		else if (pathname.includes("/collection"))
 			presenceData.details = `Browsing ${username}'s collection`;
-		else if (path.includes("/ratings"))
+		else if (pathname.includes("/ratings"))
 			presenceData.details = `Browsing ${username}'s ratings`;
-		else if (path.includes("/lists"))
+		else if (pathname.includes("/lists"))
 			presenceData.details = `Browsing ${username}'s lists`;
-		else if (path.includes("/comments"))
+		else if (pathname.includes("/comments"))
 			presenceData.details = `Browsing ${username}'s comments`;
-		else if (path.includes("/network" || "/network/friends"))
+		else if (pathname.includes("/network") || pathname.includes("/network/friends"))
 			presenceData.details = `Browsing ${username}'s friends`;
 		else presenceData.details = `Browsing ${username}'s profile`;
-	} else if (path.includes("/shows/")) {
-		if (path.includes("/episodes/")) {
+	} else if (pathname.includes("/shows/")) {
+		if (pathname.includes("/episodes/")) {
 			presenceData.details = "Browsing episode";
 			presenceData.state = `${
 				document
@@ -113,8 +113,8 @@ presence.on("UpdateData", async () => {
 				"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1 > span.main-title-sxe"
 			).textContent
 		}`;
-			presenceData.buttons = [{ label: "Check episode", url: document.URL }];
-		} else if (path.includes("/seasons/")) {
+			presenceData.buttons = [{ label: "Check episode", url: document.location.href }];
+		} else if (pathname.includes("/seasons/")) {
 			presenceData.details = "Browsing season";
 			presenceData.state = `${
 				document.querySelector("#level-up-link").textContent
@@ -123,19 +123,19 @@ presence.on("UpdateData", async () => {
 					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 				).firstChild.textContent
 			}`;
-			presenceData.buttons = [{ label: "Check season", url: document.URL }];
+			presenceData.buttons = [{ label: "Check season", url: document.location.href }];
 		} else {
 			try {
 				presenceData.details = "Browsing TV show";
 				presenceData.state = document.querySelector(
 					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 				).firstChild.textContent;
-				presenceData.buttons = [{ label: "Check TV show", url: document.URL }];
+				presenceData.buttons = [{ label: "Check TV show", url: document.location.href }];
 			} catch (e) {
 				presenceData.details = "Browsing";
 			}
 		}
-	} else if (path.includes("/movies")) {
+	} else if (pathname.includes("/movies")) {
 		try {
 			presenceData.details = "Browsing movie";
 			presenceData.state = document
@@ -147,17 +147,17 @@ presence.on("UpdateData", async () => {
 						"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1 > span"
 					).textContent
 				)[0];
-			presenceData.buttons = [{ label: "Check movie", url: document.URL }];
+			presenceData.buttons = [{ label: "Check movie", url: document.location.href }];
 		} catch (e) {
 			presenceData.details = "Browsing";
 		}
-	} else if (path.includes("/people")) {
+	} else if (pathname.includes("/people")) {
 		presenceData.details = "Browsing actor";
 		presenceData.state = document.querySelector(
 			"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 		).textContent;
-		presenceData.buttons = [{ label: "Check actor", url: document.URL }];
-	} else if (path.includes("/search")) {
+		presenceData.buttons = [{ label: "Check actor", url: document.location.href }];
+	} else if (pathname.includes("/search")) {
 		presenceData.details = "Searching for";
 		presenceData.state = new URLSearchParams(window.location.search).get(
 			"query"
