@@ -1,36 +1,34 @@
-const presence = new Presence({ clientId: "937015924425367643" });
+const presence = new Presence({ clientId: "937015924425367643" }),
+	startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			details: "Geziniyor",
-			startTimestamp: Math.floor(Date.now() / 1000),
+			startTimestamp,
 		},
-		page = document.location.pathname;
-	if (page == "/") presenceData.details = "Anasayfayı görüntülüyor";
-	if (page == "/yetkililer")
+		{ pathname } = document.location;
+
+	if (pathname === "/") presenceData.details = "Anasayfayı görüntülüyor";
+	else if (pathname === "/yetkililer")
 		presenceData.details = "Yetkililer sayfasını görüntülüyor";
-	if (page == "/profile") {
+	else if (pathname === "/profile") {
 		presenceData.details = "Profil görüntüleniyor:";
 		presenceData.state = document.querySelector(".user-info").textContent;
-		presenceData.largeImageKey = (<HTMLImageElement>(
-			document.querySelector("img.avatar")
-		)).src;
-	}
-	if (page == "/share") presenceData.details = "Kod paylaşıyor";
-	if (page == "/tools") presenceData.details = "Araçlar sayfasını görüntülüyor";
-
-	if (page == "/codes") {
-		const URL = new URLSearchParams(document.location.search);
+		presenceData.largeImageKey =
+			document.querySelector<HTMLImageElement>("img.avatar").src;
+	} else if (pathname === "/share") presenceData.details = "Kod paylaşıyor";
+	else if (pathname === "/tools")
+		presenceData.details = "Araçlar sayfasını görüntülüyor";
+	else if (pathname === "/codes") {
+		const searchParams = new URLSearchParams(document.location.search);
 		presenceData.details = "Kodlar sayfasını görüntülüyor";
-		if (URL.get("filter") !== "all") {
+		if (searchParams.get("filter") !== "all") {
 			presenceData.state = `Arama: ${decodeURIComponent(
-				URL.get("filter")
-			)} — Sayfa ${URL.get("page")}`;
-		} else presenceData.state = `Sayfa ${URL.get("page")}`;
-	}
-
-	if (page.startsWith("/code/")) {
+				searchParams.get("filter")
+			)} — Sayfa ${searchParams.get("page")}`;
+		} else presenceData.state = `Sayfa ${searchParams.get("page")}`;
+	} else if (pathname.startsWith("/code/")) {
 		presenceData.details = "Kod görüntüleniyor:";
 		presenceData.state = document.title.split("— ")[1];
 		const languages = [
@@ -67,14 +65,14 @@ presence.on("UpdateData", async () => {
 		];
 
 		for (const language of languages) {
-			if (page.includes(language.page)) {
+			if (pathname.includes(language.page)) {
 				presenceData.smallImageKey = language.key;
 				presenceData.smallImageText = `Kategori — ${language.text}`;
 			}
 		}
 
 		if (
-			document.activeElement == document.querySelector('input[name="comment"]')
+			document.activeElement === document.querySelector('input[name="comment"]')
 		)
 			presenceData.details = "Yorum yapılıyor:";
 		if (
@@ -87,11 +85,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Kod bloğu düzenliyor:";
 		if (
 			document.querySelector(".swal2-title > div > div:nth-child(2)")
-				?.textContent == "Kod Raporlama"
+				?.textContent === "Kod Raporlama"
 		)
 			presenceData.details = "Hata bildiriyor:";
 	}
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	return presence.setActivity(presenceData);
 });
