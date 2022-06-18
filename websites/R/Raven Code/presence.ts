@@ -7,7 +7,8 @@ presence.on("UpdateData", async () => {
 			details: "Geziniyor",
 			startTimestamp,
 		},
-		{ pathname } = document.location;
+		{ pathname, search } = document.location,
+		searchParams = new URLSearchParams(search);
 
 	switch (pathname) {
 		case "/":
@@ -31,7 +32,6 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "/codes":
-			const searchParams = new URLSearchParams(document.location.search);
 			presenceData.details = "Kodlar sayfasını görüntülüyor";
 			if (searchParams.get("filter") !== "all") {
 				presenceData.state = `Arama: ${decodeURIComponent(
