@@ -83,6 +83,7 @@ presence.on("UpdateData", async () => {
 		const username = document.querySelector(
 			"#avatar-wrapper >  .emojis-supported > a"
 		).textContent;
+		presenceData.buttons = [{ label: "Check profile", url: document.location.href }];
 		if (pathname.includes("/history"))
 			presenceData.details = `Browsing ${username}'s history`;
 		else if (pathname.includes("/progress"))
