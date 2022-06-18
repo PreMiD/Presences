@@ -1,5 +1,14 @@
 const presence = new Presence({ clientId: "937015924425367643" }),
 	startTimestamp = Math.floor(Date.now() / 1000);
+let languages: { key: string; page: string; text: string }[] = [];
+
+setInterval(() => {
+	fetch("https://ravencode.live/api/v1/premid/languages")
+		.then(res => res.json())
+		.then(data => {
+			languages = data;
+		});
+}, 1000 * 15);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -43,38 +52,6 @@ presence.on("UpdateData", async () => {
 	if (pathname.startsWith("/code/")) {
 		presenceData.details = "Kod görüntüleniyor:";
 		presenceData.state = document.title.split("— ")[1];
-		const languages = [
-			{
-				page: "discord.js",
-				key: "https://ravencode.live/assets/d403fd74-017c-cf35-e2c6-5fc1f93ae1d6.jpg",
-				text: "Discord.js",
-			},
-			{
-				page: "eris",
-				key: "https://ravencode.live/assets/13df8b96-37db-627c-9052-f29df2391d17.jpg",
-				text: "Eris",
-			},
-			{
-				page: "javascript",
-				key: "https://ravencode.live/assets/f8d448e8-abc5-1562-bfdc-35b5b84346e7.jpg",
-				text: "JavaScript",
-			},
-			{
-				page: "html",
-				key: "https://ravencode.live/assets/724c385b-a123-701a-427d-f8a9660cbbcd.jpg",
-				text: "HTML",
-			},
-			{
-				page: "python",
-				key: "https://ravencode.live/assets/b86f1bd7-7066-ee31-290a-4bccfc2b7e65.jpg",
-				text: "Python",
-			},
-			{
-				page: "css",
-				key: "https://ravencode.live/assets/ea0fa51a-960c-c68f-6315-f7ae20fa39f4.jpg",
-				text: "CSS",
-			},
-		];
 
 		for (const language of languages) {
 			if (pathname.includes(language.page)) {
