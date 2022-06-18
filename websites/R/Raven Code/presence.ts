@@ -9,26 +9,38 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname } = document.location;
 
-	if (pathname === "/") presenceData.details = "Anasayfayı görüntülüyor";
-	else if (pathname === "/yetkililer")
-		presenceData.details = "Yetkililer sayfasını görüntülüyor";
-	else if (pathname === "/profile") {
-		presenceData.details = "Profil görüntüleniyor:";
-		presenceData.state = document.querySelector(".user-info").textContent;
-		presenceData.largeImageKey =
-			document.querySelector<HTMLImageElement>("img.avatar").src;
-	} else if (pathname === "/share") presenceData.details = "Kod paylaşıyor";
-	else if (pathname === "/tools")
-		presenceData.details = "Araçlar sayfasını görüntülüyor";
-	else if (pathname === "/codes") {
-		const searchParams = new URLSearchParams(document.location.search);
-		presenceData.details = "Kodlar sayfasını görüntülüyor";
-		if (searchParams.get("filter") !== "all") {
-			presenceData.state = `Arama: ${decodeURIComponent(
-				searchParams.get("filter")
-			)} — Sayfa ${searchParams.get("page")}`;
-		} else presenceData.state = `Sayfa ${searchParams.get("page")}`;
-	} else if (pathname.startsWith("/code/")) {
+	switch (pathname) {
+		case "/":
+			presenceData.details = "Anasayfayı görüntülüyor";
+			break;
+		case "/yetkililer":
+			presenceData.details = "Yetkililer sayfasını görüntülüyor";
+			break;
+		case "/share":
+			presenceData.details = "Kod paylaşıyor";
+			break;
+		case "/tools":
+			presenceData.details = "Araçlar sayfasını görüntülüyor";
+			break;
+
+		case "/profile":
+			presenceData.details = "Profil görüntüleniyor:";
+			presenceData.state = document.querySelector(".user-info").textContent;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("img.avatar").src;
+			break;
+
+		case "/codes":
+			const searchParams = new URLSearchParams(document.location.search);
+			presenceData.details = "Kodlar sayfasını görüntülüyor";
+			if (searchParams.get("filter") !== "all") {
+				presenceData.state = `Arama: ${decodeURIComponent(
+					searchParams.get("filter")
+				)} — Sayfa ${searchParams.get("page")}`;
+			} else presenceData.state = `Sayfa ${searchParams.get("page")}`;
+	}
+
+	if (pathname.startsWith("/code/")) {
 		presenceData.details = "Kod görüntüleniyor:";
 		presenceData.state = document.title.split("— ")[1];
 		const languages = [
@@ -61,7 +73,7 @@ presence.on("UpdateData", async () => {
 				page: "css",
 				key: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/800px-CSS3_logo.svg.png",
 				text: "CSS",
-			},
+			}
 		];
 
 		for (const language of languages) {
