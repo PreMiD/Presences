@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	const pathname = document.location.pathname,
+	const { pathname, href } = document.location,
 		pages: Record<string, PresenceData> = {
 			"/": { details: "Browsing the home page" },
 			"/dashboard": { details: "Browsing dashboard" },
@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 		const username = document.querySelector(
 			"#avatar-wrapper >  .emojis-supported > a"
 		).textContent;
-		presenceData.buttons = [{ label: "Check profile", url: document.location.href }];
+		presenceData.buttons = [{ label: "Check profile", url: href }];
 		if (pathname.includes("/history"))
 			presenceData.details = `Browsing ${username}'s history`;
 		else if (pathname.includes("/progress"))
@@ -96,7 +96,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Browsing ${username}'s lists`;
 		else if (pathname.includes("/comments"))
 			presenceData.details = `Browsing ${username}'s comments`;
-		else if (pathname.includes("/network") || pathname.includes("/network/friends"))
+		else if (
+			pathname.includes("/network") ||
+			pathname.includes("/network/friends")
+		)
 			presenceData.details = `Browsing ${username}'s friends`;
 		else presenceData.details = `Browsing ${username}'s profile`;
 	} else if (pathname.includes("/shows/")) {
@@ -114,7 +117,7 @@ presence.on("UpdateData", async () => {
 				"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1 > span.main-title-sxe"
 			).textContent
 		}`;
-			presenceData.buttons = [{ label: "Check episode", url: document.location.href }];
+			presenceData.buttons = [{ label: "Check episode", url: href }];
 		} else if (pathname.includes("/seasons/")) {
 			presenceData.details = "Browsing season";
 			presenceData.state = `${
@@ -124,14 +127,14 @@ presence.on("UpdateData", async () => {
 					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 				).firstChild.textContent
 			}`;
-			presenceData.buttons = [{ label: "Check season", url: document.location.href }];
+			presenceData.buttons = [{ label: "Check season", url: href }];
 		} else {
 			try {
 				presenceData.details = "Browsing TV show";
 				presenceData.state = document.querySelector(
 					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 				).firstChild.textContent;
-				presenceData.buttons = [{ label: "Check TV show", url: document.location.href }];
+				presenceData.buttons = [{ label: "Check TV show", url: href }];
 			} catch (e) {
 				presenceData.details = "Browsing";
 			}
@@ -148,7 +151,7 @@ presence.on("UpdateData", async () => {
 						"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1 > span"
 					).textContent
 				)[0];
-			presenceData.buttons = [{ label: "Check movie", url: document.location.href }];
+			presenceData.buttons = [{ label: "Check movie", url: href }];
 		} catch (e) {
 			presenceData.details = "Browsing";
 		}
@@ -157,7 +160,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 		).textContent;
-		presenceData.buttons = [{ label: "Check actor", url: document.location.href }];
+		presenceData.buttons = [{ label: "Check actor", url: href }];
 	} else if (pathname.includes("/search")) {
 		presenceData.details = "Searching for";
 		presenceData.state = new URLSearchParams(window.location.search).get(
