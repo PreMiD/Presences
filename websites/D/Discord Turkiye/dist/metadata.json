@@ -1,15 +1,9 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "can",
-		"id": "613700645173592086"
+		"name": "nowongame",
+		"id": "686990422198845452"
 	},
-	"contributors": [
-		{
-			"name": "nowongame",
-			"id": "686990422198845452"
-		}
-	],
 	"service": "Discord Turkiye",
 	"description": {
 		"en": "Discord Turkiye is the largest Forum/Discord community in Turkey, which contains updates, news, servers, bots, trades and many categories.",
