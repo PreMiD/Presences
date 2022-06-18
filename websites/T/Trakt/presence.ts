@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	const pathname = document.location.pathname.toLowerCase(),
+	const pathname = document.location.pathname,
 		pages: Record<string, PresenceData> = {
 			"/": { details: "Browsing the home page" },
 			"/dashboard": { details: "Browsing dashboard" },
