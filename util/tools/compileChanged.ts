@@ -1,16 +1,11 @@
 import "source-map-support/register";
 
 import { green, red } from "chalk";
-import {
-	createAnnotation,
-	execShellCommand,
-	getChangedFolders,
-	validateArg,
-} from "./util";
+import { createAnnotation, execShellCommand, getChangedFolders } from "./util";
 
 async function main() {
 	const errors: string[] = [],
-		changedFolders = await getChangedFolders(validateArg(process.argv[2]));
+		changedFolders = await getChangedFolders();
 	if (!changedFolders.length) return;
 
 	await compileFile(0);

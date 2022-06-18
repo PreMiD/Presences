@@ -28,7 +28,7 @@ export function createAnnotation(params: CreateAnnotationParams): string {
 	return `::${params.type} ${input.join(",")}::${params.message}`;
 }
 
-export function validateArg(arg: string): ValidEventName {
+function validateArg(arg: string): ValidEventName {
 	if (!arg) return;
 	if (!["push", "pull_request"].includes(arg))
 		throw new Error(`SV was not called with a valid event name: ${arg}`);
@@ -39,25 +39,24 @@ export function validateArg(arg: string): ValidEventName {
  * Gets an array of all the changed folders using the git diff
  * @returns {Promise<string[]>} Array of unique paths to the changed folders
  */
-export async function getChangedFolders(
-	eventName: ValidEventName = "pull_request"
-) {
-	const changedPresenceFolders = (
-		await execShellCommand(
-			`git --no-pager diff --name-only ${
-				eventName === "push"
-					? "HEAD HEAD^"
-					: `HEAD origin/${process.argv[3] ?? "main"}`
-			}`
+export async function getChangedFolders() {
+	const eventName = validateArg(process.argv[2]) ?? "pull_request",
+		changedPresenceFolders = (
+			await execShellCommand(
+				`git --no-pager diff --name-only ${
+					eventName === "push"
+						? "HEAD HEAD^"
+						: `HEAD origin/${process.argv[3] ?? "main"}`
+				}`
+			)
 		)
-	)
-		.split("\n")
-		.filter(
-			file =>
-				file.includes("presence.ts") ||
-				file.includes("iframe.ts") ||
-				file.includes("metadata.json")
-		);
+			.split("\n")
+			.filter(
+				file =>
+					file.includes("presence.ts") ||
+					file.includes("iframe.ts") ||
+					file.includes("metadata.json")
+			);
 
 	if (changedPresenceFolders.length === 0) return [];
 

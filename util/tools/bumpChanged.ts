@@ -4,7 +4,7 @@ import { join, normalize, resolve, sep } from "node:path";
 import { coerce, inc } from "semver";
 import debug from "debug";
 import axios from "axios";
-import { getChangedFolders, readJson, validateArg, writeJson } from "./util";
+import { getChangedFolders, readJson, writeJson } from "./util";
 
 const log = debug("BumpChanged");
 debug.enable("BumpChanged*");
@@ -51,9 +51,7 @@ async function increaseSemver(changedPresenceFiles: string[]): Promise<void> {
 async function main(): Promise<void> {
 	log("Bumping versions...");
 
-	const changedPresenceFiles = await getChangedFolders(
-		validateArg(process.argv[2])
-	);
+	const changedPresenceFiles = await getChangedFolders();
 
 	await increaseSemver(changedPresenceFiles);
 

@@ -6,7 +6,7 @@ import { blue, green, red, yellow } from "chalk";
 import ParseJSON, { ObjectNode } from "json-to-ast";
 import { validate } from "jsonschema";
 import { compare, diff } from "semver";
-import { createAnnotation, getChangedFolders, validateArg } from "../util";
+import { createAnnotation, getChangedFolders } from "../util";
 
 const latestMetadataSchema = async (): Promise<string[]> => {
 		const versions = (
@@ -97,9 +97,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 (async (): Promise<void> => {
 	console.log(blue("Getting changed files..."));
 
-	const changedMetaFiles = await getChangedFolders(
-		validateArg(process.argv[2])
-	).then(f =>
+	const changedMetaFiles = await getChangedFolders().then(f =>
 		f
 			//TODO: Add support for programs in the future
 			.filter(p => p.includes("websites/"))
