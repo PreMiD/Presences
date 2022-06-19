@@ -43,7 +43,7 @@ const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
 if (missingMetadata?.length > 0)
 	console.log(
 		`\nThe following presence${
-			missingMetadata.length > 1 ? "s don't" : "doesn't"
+			missingMetadata.length > 1 ? "s don't" : " doesn't"
 		} include a metadata file :\n${missingMetadata.join(", ")}\n`
 	);
 

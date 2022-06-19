@@ -36,7 +36,7 @@ const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
 	});
 
 function main() {
-	if (missingMetadata && missingMetadata.length > 0) {
+	if (missingMetadata?.length > 0) {
 		console.log(
 			`\nThe following presence${
 				missingMetadata.length > 1 ? "s don't" : "doesn't"
