@@ -2,13 +2,13 @@ const presence = new Presence({ clientId: "937015924425367643" }),
 	startTimestamp = Math.floor(Date.now() / 1000);
 let languages: { key: string; page: string; text: string }[] = [];
 
-setInterval(() => {
-	fetch("https://ravencode.live/api/v1/premid/languages")
-		.then(res => res.json())
-		.then(data => {
-			languages = data;
-		});
-}, 1000 * 15);
+setInterval(
+	() =>
+		fetch("https://premid.ravencode.live").then(res =>
+			res.text().then(data => (languages = JSON.parse(data)))
+		),
+	1000 * 15
+);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
