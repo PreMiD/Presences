@@ -31,10 +31,9 @@ presence.on("UpdateData", async () => {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
-
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-	},
+			largeImageKey: "logo",
+		},
 		songTitle = document.querySelector<HTMLAnchorElement>(
 			'div[data-test="footer-track-title"] > a'
 		),
