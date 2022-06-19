@@ -8,6 +8,10 @@
 		{
 			"name": "Kyrie",
 			"id": "368399721494216706"
+		},
+		{
+			"name": "VirusBLITZ",
+			"id": "280746709590474753"
 		}
 	],
 	"service": "Tidal",
@@ -22,7 +26,7 @@
 		"listen.tidal.com",
 		"tidal.com"
 	],
-	"version": "3.1.5",
+	"version": "3.1.6",
 	"logo": "https://i.imgur.com/i9pIvqR.png",
 	"thumbnail": "https://i.imgur.com/xNeJ8oq.png",
 	"color": "#000000",
