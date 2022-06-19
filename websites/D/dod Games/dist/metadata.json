@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "nFin1ty",
+		"id": "131877010157862912"
+	},
+	"service": "dod Games",
+	"description": {
+		"en": "dod Games is the most known multiplayer games and chatting community in Greece",
+		"el": "Το dod Games είναι το μεγαλύτερο site επιτραπέζιων παιχνιδιών και παιχνιδιών με κάρτες και η πιο γνωστή κοινότητα chatting στην Ελλάδα"
+	},
+	"url": "www.dod.gr",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/8on5V0y.png",
+	"thumbnail": "https://i.imgur.com/2VBZbvF.png",
+	"color": "#008fec",
+	"category": "games",
+	"tags": [
+		"dod",
+		"dod-games"
+	]
+}
