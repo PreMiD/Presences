@@ -33,16 +33,16 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-		},
+		largeImageKey: "logo",
+	},
 		songTitle = document.querySelector<HTMLAnchorElement>(
 			'div[data-test="footer-track-title"] > a'
 		),
 		currentTime = document
-			.querySelector<HTMLElement>("time.current-time")
+			.querySelector<HTMLElement>('time[data-test="current-time"]')
 			.textContent.split(":"),
 		endTime = document
-			.querySelector<HTMLElement>("time.duration-time")
+			.querySelector<HTMLElement>('time[data-test="duration"]')
 			.textContent.split(":"),
 		currentTimeSec =
 			(parseFloat(currentTime[0]) * 60 + parseFloat(currentTime[1])) * 1000,
