@@ -6,7 +6,8 @@
 	},
 	"service": "dod Games",
 	"description": {
-		"en": "dod Games is the most known multiplayer games and chatting community in Greece"
+		"en": "dod Games is the most known multiplayer games and chatting community in Greece",
+		"el_GR": "Το dod Games είναι το μεγαλύτερο site online παιχνιδιών και η πιο γνωστή κοινότητα chatting στην Ελλάδα"
 	},
 	"url": "www.dod.gr",
 	"version": "1.0.0",
