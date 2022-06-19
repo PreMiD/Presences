@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]);
 	if (!privacy) {
-		if (hostname == "wiki.gg") {
+		if (hostname === "wiki.gg") {
 			if (pathname === "/") presenceData.details = "Viewing the home page";
 			else {
 				presenceData.details = document
