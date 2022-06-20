@@ -20,8 +20,6 @@ presence.on("UpdateData", async () => {
 
 		// Draw It
 		if (url.textContent.includes("game=drawit&room=")) {
-			presenceData.details = "Παίζει Ζωγράφισέ Το";
-			presenceData.startTimestamp = timeStarted;
 			if (!isInGame) {
 				timeStarted = Date.now();
 				isInGame = true;
@@ -45,7 +43,6 @@ presence.on("UpdateData", async () => {
 					} | Γύρος: ${round} | Θέση #${
 						parseInt(scores[i].getAttribute("index")) + 1
 					}/${scores.length}`;
-					presenceData.startTimestamp = timeStarted;
 				}
 			}
 			if (scores.length < 10) {
@@ -56,10 +53,11 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			}
+			presenceData.details = "Παίζει Ζωγράφισέ Το";
+			presenceData.startTimestamp = timeStarted;
 			break;
 		} else if (url.textContent.includes("game=quiz&room=")) {
 			// Quiz
-			presenceData.details = "Παίζει Κουίζ";
 			if (!isInGame) {
 				timeStarted = Date.now();
 				isInGame = true;
@@ -81,22 +79,20 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `Σκορ: ${
 						scores[i].querySelector(".quiz_playerPoints").textContent
 					} | Γύρος: ${
-						parseInt(document.querySelector("#countRound").textContent) || "-"
+						parseInt(document.querySelector("#countRound").textContent) || "–"
 					} | Θέση #${parseInt(
 						scores[i].querySelector(".quiz_playerNumber").textContent
 					)}/${scores.length}`;
 				}
 			}
+			presenceData.details = "Παίζει Κουίζ";
+			presenceData.startTimestamp = timeStarted;
 			break;
 		} else if (url.textContent.includes("game=agonia&room=")) {
 			// Αγωνία
 			const nPlayers = parseInt(
 				document.querySelector("#agonia_content").className.match(/\d+/g)[0]
 			);
-			presenceData.details = `Παίζει Αγωνία | 💪🏻 ${document
-				.querySelector(".mytr")
-				.getAttribute("elo")}`;
-			presenceData.startTimestamp = timeStarted;
 			if (!isInGame) {
 				timeStarted = Date.now();
 				isInGame = true;
@@ -166,12 +162,14 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			}
+			presenceData.details = `Παίζει Αγωνία | 💪🏻 ${document
+				.querySelector(".mytr")
+				.getAttribute("elo")}`;
+			presenceData.startTimestamp = timeStarted;
 			break;
 		} else if (url.textContent.includes("game=tichu&room=")) {
 			// Tichu
-			presenceData.details = `Παίζει Tichu | 💪🏻 ${document
-				.querySelector(".mytr")
-				.getAttribute("elo")}`;
+
 			if (!isInGame) {
 				timeStarted = Date.now();
 				isInGame = true;
@@ -224,11 +222,11 @@ presence.on("UpdateData", async () => {
 					}${player.name}`
 				);
 			}
-			presenceData.startTimestamp = timeStarted;
+
 			if (teamPlayers.length === 2 && opPlayers.length === 2) {
 				presenceData.state = `(${teamPlayers[0]}, ${teamPlayers[1]}) ${
 					document.querySelector("#txtMyTeamScore").textContent
-				} - ${document.querySelector("#txtOpTeamScore").textContent} (${
+				} – ${document.querySelector("#txtOpTeamScore").textContent} (${
 					opPlayers[0]
 				}, ${opPlayers[1]})`;
 			} else {
@@ -242,6 +240,10 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			}
+			presenceData.details = `Παίζει Tichu | 💪🏻 ${document
+				.querySelector(".mytr")
+				.getAttribute("elo")}`;
+			presenceData.startTimestamp = timeStarted;
 			break;
 		}
 	}
