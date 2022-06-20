@@ -195,9 +195,9 @@ presence.on("UpdateData", async () => {
 				).textContent;
 
 			if (bot) playerState.bot = { name: bot, bet: null };
-			else if (up) playerState.up = { name: up, bet: null };
-			else if (left) playerState.left = { name: left, bet: null };
-			else if (right) playerState.right = { name: right, bet: null };
+			if (up) playerState.up = { name: up, bet: null };
+			if (left) playerState.left = { name: left, bet: null };
+			if (right) playerState.right = { name: right, bet: null };
 
 			for (const pos of ["up", "left", "right"]) {
 				if (!(pos in playerState)) continue;
