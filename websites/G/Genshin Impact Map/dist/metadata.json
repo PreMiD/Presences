@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Faelayis",
+		"id": "328731868096888833"
+	},
+	"service": "Genshin Impact Map",
+	"description": {
+		"en": "Genshin Impact Interactive Map of all locations locations descriptions guides and more."
+	},
+	"url": [
+		"webstatic-sea.mihoyo.com",
+		"webstatic-sea.hoyolab.com",
+		"act.hoyolab.com",
+		"genshin-impact-map.appsample.com",
+		"mapgenie.io"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/6XrkcZs.png",
+	"thumbnail": "https://i.imgur.com/3UmAxEL.png",
+	"color": "#b6c48c",
+	"category": "games",
+	"tags": [
+		"genshin-impact",
+		"map"
+	],
+	"settings": [
+		{
+			"id": "showPreview",
+			"title": "Show Preview",
+			"icon": "fad fa-user-secret",
+			"value": true
+		},
+		{
+			"id": "timestamps",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		}
+	]
+}
