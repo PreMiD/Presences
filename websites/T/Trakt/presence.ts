@@ -28,23 +28,23 @@ presence.on("UpdateData", async () => {
 			"/movies/boxoffice": { state: "Top 10 grossing movies" },
 			"/calendars/my": { details: "Browsing my calendar" },
 			"/calendars/my/shows": {
-				details: "Browsing my calendar",
+				details: "Browsing their calendar",
 				state: "Shows",
 			},
 			"/calendars/my/premieres": {
-				details: "Browsing my calendar",
+				details: "Browsing their calendar",
 				state: "Premieres",
 			},
 			"/calendars/my/new-shows": {
-				details: "Browsing my calendar",
+				details: "Browsing their calendar",
 				state: "New shows",
 			},
 			"/calendars/my/movies": {
-				details: "Browsing my calendar",
+				details: "Browsing their calendar",
 				state: "Movies",
 			},
 			"/calendars/my/dvd": {
-				details: "Browsing my calendar",
+				details: "Browsing their calendar",
 				state: "DVD & Blu-ray",
 			},
 			"/calendars/shows": {
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 
 	if (pathname.includes("/users")) {
 		const username = document.querySelector(
-			"#avatar-wrapper >  .emojis-supported > a"
+			"#avatar-wrapper > .emojis-supported > a"
 		).textContent;
 		presenceData.buttons = [{ label: "Check profile", url: href }];
 		if (pathname.includes("/history"))
@@ -104,19 +104,20 @@ presence.on("UpdateData", async () => {
 		else presenceData.details = `Browsing ${username}'s profile`;
 	} else if (pathname.includes("/shows/")) {
 		if (pathname.includes("/episodes/")) {
-			presenceData.details = "Browsing episode";
+			presenceData.details = document
+				.querySelector(
+					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h2 > a:nth-child(1)"
+				)
+				.textContent.replace(":", "");
 			presenceData.state = `${
-				document
-					.querySelector(
-						"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h2 > a:nth-child(1)"
-					)
-					.textContent.split(":")[0]
-			} -
-		${
-			document.querySelector(
-				"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1 > span.main-title-sxe"
-			).textContent
-		}`;
+				document.querySelector(
+					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1 > span.main-title-sxe"
+				).textContent
+			}: ${
+				document.querySelector(
+					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1 > span.main-title"
+				).textContent
+			}`;
 			presenceData.buttons = [{ label: "Check episode", url: href }];
 		} else if (pathname.includes("/seasons/")) {
 			presenceData.details = "Browsing season";
@@ -135,24 +136,18 @@ presence.on("UpdateData", async () => {
 					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 				).firstChild.textContent;
 				presenceData.buttons = [{ label: "Check TV show", url: href }];
-			} catch (e) {
+			} catch {
 				presenceData.details = "Browsing";
 			}
 		}
 	} else if (pathname.includes("/movies")) {
 		try {
 			presenceData.details = "Browsing movie";
-			presenceData.state = document
-				.querySelector(
-					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
-				)
-				.textContent.split(
-					document.querySelector(
-						"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1 > span"
-					).textContent
-				)[0];
+			presenceData.state = document.querySelector(
+				"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
+			).childNodes[0].textContent;
 			presenceData.buttons = [{ label: "Check movie", url: href }];
-		} catch (e) {
+		} catch {
 			presenceData.details = "Browsing";
 		}
 	} else if (pathname.includes("/people")) {
