@@ -5,7 +5,7 @@ const presence = new Presence({
 
 interface Maps {
 	city: boolean;
-	hylid: number;
+	id: number;
 	map: string;
 	largeImageKey: string;
 	pvlargeImageKey: string | null;
@@ -22,7 +22,7 @@ interface City {
 const map: Maps[] = [
 		{
 			city: true,
-			hylid: 2,
+			id: 2,
 			map: "Teyvat",
 			largeImageKey: "teyvat_map",
 			pvlargeImageKey: "teyvat_map",
@@ -30,7 +30,7 @@ const map: Maps[] = [
 		},
 		{
 			city: false,
-			hylid: 7,
+			id: 7,
 			map: "Enkanomiya",
 			largeImageKey: "enkanomiya_map",
 			pvlargeImageKey: "preview_enkanomiya",
@@ -38,7 +38,7 @@ const map: Maps[] = [
 		},
 		{
 			city: false,
-			hylid: 9,
+			id: 9,
 			map: "The Chasm: Underground Mines",
 			largeImageKey: "the_chasm_underground_mines_map",
 			pvlargeImageKey: "preview_the_chasm_underground_mines",
@@ -46,7 +46,7 @@ const map: Maps[] = [
 		},
 		{
 			city: false,
-			hylid: 0,
+			id: 0,
 			map: "Unknown",
 			largeImageKey: "unknown_map",
 			pvlargeImageKey: null,
@@ -87,8 +87,8 @@ presence.on("UpdateData", async () => {
 			smallImageKey: "search",
 			startTimestamp: browsingTimestamp,
 		},
-		path = document.location.href;
-	switch (document.location.hostname) {
+		{ host, hostname, href } = document.location;
+	switch (hostname) {
 		case "genshin-impact-map.appsample.com":
 			current = map.find(
 				i =>
@@ -99,27 +99,27 @@ presence.on("UpdateData", async () => {
 								.querySelector("#map-selector-btn > strong > p")
 								.textContent.toLowerCase()
 						) ||
-					i.map.toLowerCase().includes(path.split("?map=")[1] || "Teyvat")
+					i.map.toLowerCase().includes(href.split("?map=")[1] || "Teyvat")
 			);
 			break;
 		case "mapgenie.io":
-			if (path.split("/maps/")[1].toLowerCase() === "the-chasm-underground")
-				current = map.find(i => i.hylid === 9);
+			if (href.split("/maps/")[1].toLowerCase() === "the-chasm-underground")
+				current = map.find(i => i.id === 9);
 			else {
 				current = map.find(i =>
-					i.map.toLowerCase().includes(path.split("/maps/")[1].toLowerCase())
+					i.map.toLowerCase().includes(href.split("/maps/")[1].toLowerCase())
 				);
 			}
 			break;
 		default: // Official Site
-			if (!path.includes("&center=") && !path.includes("&zoom=")) return;
+			if (!href.includes("&center=") && !href.includes("&zoom=")) return;
 			getpos = parseInt(
-				path.split("&center=")[1].split("&zoom=")[0].split(",")[0]
+				href.split("&center=")[1].split("&zoom=")[0].split(",")[0]
 			);
 			current = map.find(
-				i => i.hylid === parseInt(path.split("/map/")[1].split("?")[0]) || 0
+				i => i.id === (parseInt(href.split("/map/")[1].split("?")[0]) || 0)
 			);
-			if (current.city) currentCity = city.find(i => i.position > getpos);
+			if (current?.city) currentCity = city.find(i => i.position > getpos);
 			else currentCity = null;
 			break;
 	}
@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
 			? currentCity.smallImageKey
 			: current.smallImageKey
 		: current.smallImageKey;
-	presenceData.smallImageText = document.location.host.replace(".com", "");
+	presenceData.smallImageText = host.replace(".com", "");
 	if (!timestamps) {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
