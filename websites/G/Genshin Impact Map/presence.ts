@@ -87,19 +87,13 @@ presence.on("UpdateData", async () => {
 			smallImageKey: "search",
 			startTimestamp: browsingTimestamp,
 		},
-		{ host, hostname, pathname } = document.location;
+		{ hash, host, hostname, pathname, search } = document.location;
 	switch (hostname) {
 		case "genshin-impact-map.appsample.com":
-			current = map.find(
-				i =>
-					i.map
-						.toLowerCase()
-						.includes(
-							document
-								.querySelector("#map-selector-btn > strong > p")
-								.textContent.toLowerCase()
-						) ||
-					i.map.toLowerCase().includes(pathname.split("?map=")[1] || "Teyvat")
+			current = map.find(i =>
+				i.map
+					.toLowerCase()
+					.includes(search?.split("?map=")[1].toLowerCase() || "teyvat")
 			);
 			break;
 		case "mapgenie.io":
@@ -109,18 +103,17 @@ presence.on("UpdateData", async () => {
 				current = map.find(i =>
 					i.map
 						.toLowerCase()
-						.includes(pathname.split("/maps/")[1].toLowerCase())
+						.includes(pathname?.split("/maps/")[1].toLowerCase() || "teyvat")
 				);
 			}
 			break;
 		default: // Official Site
-			if (!pathname.includes("&center=") && !pathname.includes("&zoom="))
-				return;
+			if (!hash.includes("&center=") && !hash.includes("&zoom=")) return;
 			getpos = parseInt(
-				pathname.split("&center=")[1].split("&zoom=")[0].split(",")[0]
+				hash.split("&center=")[1].split("&zoom=")[0].split(",")[0]
 			);
 			current = map.find(
-				i => i.id === (parseInt(pathname.split("/map/")[1].split("?")[0]) || 0)
+				i => i.id === (parseInt(hash?.split("/map/")[1]?.split("?")[0]) || 2)
 			);
 			if (current?.city) currentCity = city.find(i => i.position > getpos);
 			else currentCity = null;
