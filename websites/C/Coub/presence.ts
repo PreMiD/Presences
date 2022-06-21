@@ -305,7 +305,7 @@ const pages: PageContext[] = [
 	presence = new Presence({
 		clientId: "818598086984728576",
 	}),
-	IMAGES = {
+	presenceImageKeys = {
 		PLAY: "playx1024",
 		PAUSE: "pausex1024",
 	};
@@ -340,7 +340,7 @@ presence.on("UpdateData", async () => {
 			{
 				strings: localizedStrings,
 				query,
-				images: IMAGES,
+				images: presenceImageKeys,
 				showWatch: await presence
 					.getSetting<boolean>("show_button_watching")
 					.catch(() => true),
