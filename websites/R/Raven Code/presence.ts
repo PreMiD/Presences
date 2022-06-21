@@ -5,7 +5,7 @@ let languages: { key: string; page: string; text: string }[] = [];
 setInterval(
 	() =>
 		fetch("https://premid.ravencode.live").then(res =>
-			res.text().then(data => (languages = JSON.parse(data)))
+			res.json()
 		),
 	1000 * 15
 );
