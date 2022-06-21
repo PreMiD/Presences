@@ -3,10 +3,10 @@ const presence = new Presence({ clientId: "937015924425367643" }),
 let languages: { key: string; page: string; text: string }[] = [];
 
 setInterval(
-	() =>
-		fetch("https://premid.ravencode.live").then(
-			async res => (languages = await res.json())
-		),
+	async () =>
+		(languages = await fetch("https://premid.ravencode.live").then(res =>
+			res.json()
+		)),
 	15_000
 );
 
