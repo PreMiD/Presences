@@ -7,7 +7,7 @@ setInterval(
 		fetch("https://premid.ravencode.live").then(res =>
 			res.json()
 		),
-	1000 * 15
+	15_000
 );
 
 presence.on("UpdateData", async () => {
