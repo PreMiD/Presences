@@ -4,8 +4,8 @@ let languages: { key: string; page: string; text: string }[] = [];
 
 setInterval(
 	() =>
-		fetch("https://premid.ravencode.live").then(res =>
-			res.json()
+		fetch("https://premid.ravencode.live").then(
+			async res => (languages = await res.json())
 		),
 	15_000
 );
