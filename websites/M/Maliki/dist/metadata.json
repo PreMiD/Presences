@@ -1,0 +1,50 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.7",
+    "author": {
+      "name": "RisingSunLight",
+      "id": "240521747852558347"
+    },
+    "service": "Maliki",
+    "description": {
+      "fr": "Présence qui permet de suivre votre activité sur le site officiel de Maliki !"
+    },
+    "url": "https://maliki.com/",
+    "version": "1.0",
+    "logo": "URL",
+    "thumbnail": "URL",
+    "color": "#HEX000",
+    "tags": ["Maliki", "Dessin"],
+    "category": "other",
+    "iFrameRegExp": "REGEXP",
+    "iframe": false,
+    "readLogs": false,
+    "settings": [
+      {
+        "id": "ID",
+        "multiLanguage": true
+      },
+      {
+        "id": "ID",
+        "title": "DISPLAY TITLE",
+        "icon": "FONTAWESOME ICON",
+        "value": true
+      },
+      {
+        "id": "ID",
+        "if": {
+          "ID": true
+        },
+        "title": "DISPLAY TITLE",
+        "icon": "FONTAWESOME ICON",
+        "value": "\"%song%\" by %artist%",
+        "placeholder": "use %song% or %artist%"
+      },
+      {
+        "id": "ID",
+        "title": "DISPLAY TITLE",
+        "icon": "FONTAWESOME ICON",
+        "value": 0,
+        "values": ["1", "2", "etc."]
+      }
+    ]
+  }
