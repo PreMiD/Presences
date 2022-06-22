@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		},
 		pathname = document.location.pathname.toLowerCase();
 
-	if (pathname == "/") presenceData.details = "Przegląda stronę główną";
+	if (pathname === "/") presenceData.details = "Przegląda stronę główną";
 	else if (pathname.endsWith("/ustawienia"))
 		presenceData.details = "Przegląda ustawienia";
 	else if (pathname.endsWith("/poczta"))
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.endsWith("/obejrzyj-pozniej"))
 		presenceData.details = 'Przegląda "Obejrzyj później"';
 	else if (pathname.includes("/tv")) {
-		if (pathname == "/tv")
+		if (pathname === "/tv")
 			presenceData.details = "Przegląda kanały telewizyjne";
 		else {
 			presenceData.details = `Ogląda TV: ${
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 		pathname.split("/")[2] &&
 		document.querySelector(
 			"#placeholder-foldery > div:nth-child(1) > div.panel-heading.smoke"
-		).textContent == "Foldery "
+		).textContent === "Foldery "
 	) {
 		presenceData.details = `Przegląda folder od ${
 			document.location.pathname.split("/")[1]
