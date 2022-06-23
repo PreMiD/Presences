@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 		else if (document.location.pathname.includes("/stats"))
 			presenceData.details = "Viewing stats";
 		else if (document.location.pathname.includes("/quiz"))
-			presenceData.details = "Taking quizes";
+			presenceData.details = "Taking quizzes";
 		else if (document.location.pathname.includes("/leaderboard"))
 			presenceData.details = "Viewing leaderboard";
 		else if (document.location.pathname.includes("/settings"))
