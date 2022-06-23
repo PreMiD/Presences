@@ -2,9 +2,7 @@ const presence = new Presence({
 		clientId: "988699263775154176",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
-let duecount: string, decktitle: string, query: string, meaning: string;
-
+let dueCountElem: Element, deckTitle: string, query: string, meaning: string;
 const decklist: string[] = [
 	"/novel",
 	"/vocabulary-list",
@@ -17,7 +15,6 @@ const decklist: string[] = [
 	"/visual-novel",
 	"/audio",
 ];
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "jpdb",
@@ -27,16 +24,18 @@ presence.on("UpdateData", async () => {
 	if (document.location.hostname === "jpdb.io") {
 		if (document.location.pathname.includes("/learn")) {
 			presenceData.details = "Viewing learn page";
-			duecount =
-				document.querySelector('a[href="/learn"]').firstElementChild
-					.textContent;
-			presenceData.state = `Due : ${duecount}\n item(s)`;
+			dueCountElem =
+				document.querySelector('a[href="/learn"]').firstElementChild;
+			if (dueCountElem.getAttribute("style") === "color: green;")
+				presenceData.state = `New : ${dueCountElem.textContent}\n items`;
+			else presenceData.state = `Due : ${dueCountElem.textContent}\n items`;
 		} else if (document.location.pathname.includes("/review")) {
 			presenceData.details = "Reviewing cards";
-			duecount =
-				document.querySelector('a[href="/learn"]').firstElementChild
-					.textContent;
-			presenceData.state = `Due : ${duecount}\n item(s)`;
+			dueCountElem =
+				document.querySelector('a[href="/learn"]').firstElementChild;
+			if (dueCountElem.getAttribute("style") === "color: green;")
+				presenceData.state = `New : ${dueCountElem.textContent}\n items`;
+			else presenceData.state = `Due : ${dueCountElem.textContent}\n items`;
 		} else if (document.location.pathname.includes("/search")) {
 			if (document.querySelector("div.results.search")) {
 				presenceData.details = "Searching:";
@@ -63,22 +62,26 @@ presence.on("UpdateData", async () => {
 					presenceData.state = query;
 				}
 			}
-		} else if (document.location.pathname.includes("/vocabulary")) {
+		} else if (document.location.pathname.includes("/vocabulary/")) {
 			presenceData.details = "Viewing a word:";
 			query = decodeURI(document.location.pathname.split("/")[3]);
+			presenceData.state = query;
+		} else if (document.location.pathname.includes("/kanji")) {
+			presenceData.details = "Viewing a kanji:";
+			query = decodeURI(document.location.pathname.split("/")[2]);
 			presenceData.state = query;
 		} else if (
 			decklist.some(deck => document.location.pathname.includes(deck))
 		) {
 			presenceData.details = "Viewing pre-built deck";
-			decktitle = document.querySelector("h3").textContent;
-			presenceData.state = decktitle;
+			deckTitle = document.querySelector("h3").textContent;
+			presenceData.state = deckTitle;
 		} else if (document.location.pathname.includes("/deck")) {
 			presenceData.details = "Viewing a deck";
-			decktitle = document.querySelector(
+			deckTitle = document.querySelector(
 				"div.container.bugfix > div:nth-child(2)"
 			).textContent;
-			presenceData.state = decktitle;
+			presenceData.state = deckTitle;
 		} else if (document.location.pathname.includes("/prebuilt_decks"))
 			presenceData.details = "Finding pre-built deck";
 		else if (document.location.pathname === "/")
