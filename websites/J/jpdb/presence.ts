@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/novel-difficulty-list"))
 		presenceData.details = "Viewing novel difficulty list";
 	else if (document.location.pathname.includes("/web-novel-difficulty-list"))
-		presenceData.details = "Viewing novel difficulty list";
+		presenceData.details = "Viewing web novel difficulty list";
 	else if (document.location.pathname.includes("/about"))
 		presenceData.details = "Reading the about page";
 	else if (document.location.pathname.includes("/faq"))
