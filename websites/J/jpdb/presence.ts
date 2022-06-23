@@ -1,19 +1,8 @@
 const presence = new Presence({
 		clientId: "988699263775154176",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	decklist: string[] = [
-		"/novel",
-		"/vocabulary-list",
-		"/textbook",
-		"/anime",
-		"/youtube-video",
-		"/live-action",
-		"/video-game",
-		"/web-novel",
-		"/visual-novel",
-		"/audio",
-	];
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "jpdb",
@@ -57,10 +46,23 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/vocabulary/")) {
 		presenceData.details = "Viewing a word:";
 		presenceData.state = decodeURI(document.location.pathname.split("/")[3]);
-	} else if (document.location.pathname.includes("/kanji")) {
+	} else if (document.location.pathname.includes("/kanji/")) {
 		presenceData.details = "Viewing a kanji:";
 		presenceData.state = decodeURI(document.location.pathname.split("/")[2]);
-	} else if (decklist.some(deck => document.location.pathname.includes(deck))) {
+	} else if (
+		[
+			"/novel/",
+			"/vocabulary-list/",
+			"/textbook/",
+			"/anime/",
+			"/youtube-video/",
+			"/live-action/",
+			"/video-game/",
+			"/web-novel/",
+			"/visual-novel/",
+			"/audio/",
+		].some(deck => document.location.pathname.includes(deck))
+	) {
 		presenceData.details = "Viewing pre-built deck";
 		presenceData.state = document.querySelector("h3").textContent;
 	} else if (document.location.pathname.includes("/deck")) {
@@ -80,6 +82,30 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing leaderboard";
 	else if (document.location.pathname.includes("/settings"))
 		presenceData.details = "Viewing settings page";
+	else if (document.location.pathname.includes("/contact-us"))
+		presenceData.details = "Viewing contact page";
+	else if (document.location.pathname.includes("/anime-difficulty-list"))
+		presenceData.details = "Viewing anime difficulty list";
+	else if (document.location.pathname.includes("/live-action-difficulty-list"))
+		presenceData.details = "Viewing live action difficulty list";
+	else if (document.location.pathname.includes("/visual-novel-difficulty-list"))
+		presenceData.details = "Viewing visual novel difficulty list";
+	else if (document.location.pathname.includes("/novel-difficulty-list"))
+		presenceData.details = "Viewing novel difficulty list";
+	else if (document.location.pathname.includes("/web-novel-difficulty-list"))
+		presenceData.details = "Viewing novel difficulty list";
+	else if (document.location.pathname.includes("/about"))
+		presenceData.details = "Reading the about page";
+	else if (document.location.pathname.includes("/faq"))
+		presenceData.details = "Reading FAQ";
+	else if (document.location.pathname.includes("/privacy-policy"))
+		presenceData.details = "Reading privacy policy";
+	else if (document.location.pathname.includes("/terms-of-use"))
+		presenceData.details = "Reading terms of use";
+	else if (document.location.pathname.includes("/changelog"))
+		presenceData.details = "Reading changelog";
+	else if (document.location.pathname.includes("/login"))
+		presenceData.details = "Logging in";
 
 	if (!presenceData.details) presence.setActivity();
 	else presence.setActivity(presenceData);
