@@ -87,7 +87,9 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (document.location.hostname === "play.picoctf.org") {
-		if (document.location.pathname === "/practice") {
+		if (document.location.pathname === "/login")
+			presenceData.details = !privacy ? "Logging in" : "Viewing home page";
+		else if (document.location.pathname === "/practice") {
 			const practiceparams = new URLSearchParams(document.location.search),
 				formatCategory = (cat: number) => {
 					if (cat === 34) return "uncategorized";
