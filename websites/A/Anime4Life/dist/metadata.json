@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "author": {
+    "name": "AndreiDM",
+    "id": "274848975855550476"
+  },
+  "service": "Anime4Life",
+  "description": {
+    "en": "Anime, manga and manhwa series translated into Romanian",
+		"ro_RO": "Serii anime, manga și manhwa traduse în Română"
+  },
+  "url": "anime4life.ro",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/iPZyc2T.png",
+  "thumbnail": "https://i.imgur.com/uWdtHFx_d.webp?maxwidth=760&fidelity=grand",
+  "color": "#a70606",
+  "category": "anime",
+  "tags": [
+    "anime",
+    "romania",
+    "animeromania",
+    "manga",
+    "manhwa"
+  ]
+}
