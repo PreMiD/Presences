@@ -11,7 +11,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/AD1naGM.png",
+			largeImageKey: "https://i.imgur.com/SQlMvJh.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		pathname = document.location.pathname.toLowerCase();
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 					"#leftCol > div:nth-child(2) > div.DescrVID > div.DescrVID-left > div > div > div > div:nth-child(1) > a > span > span"
 				).textContent
 			}`;
-			presenceData.buttons = [{ label: "Obejrzyj film", url: document.URL }];
+			presenceData.buttons = [{ label: "Obejrzyj film", url: document.location.href }];
 
 			const video: HTMLVideoElement = document.querySelector("video");
 			[presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"#folder-replace > div.panel-heading.smoke > span > span > a"
 		).textContent;
-		presenceData.buttons = [{ label: "Przejdź do folderu", url: document.URL }];
+		presenceData.buttons = [{ label: "Przejdź do folderu", url: document.location.href }];
 	} else if (
 		document.querySelector(
 			"#gora > div:nth-child(2) > div > div > div > div > div > h4 > span > strong > a"
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"#gora > div:nth-child(2) > div > div > div > div > div > h4 > span > strong > a"
 		).textContent;
-		presenceData.buttons = [{ label: "Zobacz profil", url: document.URL }];
+		presenceData.buttons = [{ label: "Zobacz profil", url: document.location.href }];
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
