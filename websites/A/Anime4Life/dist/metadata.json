@@ -7,12 +7,12 @@
   "service": "Anime4Life",
   "description": {
     "en": "Anime, manga and manhwa series translated into Romanian",
-		"ro_RO": "Serii anime, manga și manhwa traduse în Română"
+		"ro": "Serii anime, manga și manhwa traduse în Română"
   },
   "url": "anime4life.ro",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/iPZyc2T.png",
-  "thumbnail": "https://i.imgur.com/uWdtHFx_d.webp?maxwidth=760&fidelity=grand",
+  "thumbnail": "https://i.imgur.com/fKQLkWo.png",
   "color": "#a70606",
   "category": "anime",
   "tags": [
