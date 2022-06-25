@@ -1,7 +1,19 @@
 const presence = new Presence({
 		clientId: "988699263775154176",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	deckList = [
+		"/novel/",
+		"/vocabulary-list/",
+		"/textbook/",
+		"/anime/",
+		"/youtube-video/",
+		"/live-action/",
+		"/video-game/",
+		"/web-novel/",
+		"/visual-novel/",
+		"/audio/",
+	];
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -49,20 +61,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/kanji/")) {
 		presenceData.details = "Viewing a kanji:";
 		presenceData.state = decodeURI(document.location.pathname.split("/")[2]);
-	} else if (
-		[
-			"/novel/",
-			"/vocabulary-list/",
-			"/textbook/",
-			"/anime/",
-			"/youtube-video/",
-			"/live-action/",
-			"/video-game/",
-			"/web-novel/",
-			"/visual-novel/",
-			"/audio/",
-		].some(deck => document.location.pathname.includes(deck))
-	) {
+	} else if (deckList.some(deck => document.location.pathname.includes(deck))) {
 		presenceData.details = "Viewing pre-built deck:";
 		presenceData.state = document.querySelector("h3").textContent;
 	} else if (document.location.pathname.includes("/anki-import/deck")) {
