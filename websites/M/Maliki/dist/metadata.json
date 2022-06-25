@@ -6,45 +6,14 @@
     },
     "service": "Maliki",
     "description": {
+      "en": "Presence which helps you to follow your activity on the official website of Maliki !",
       "fr": "Présence qui permet de suivre votre activité sur le site officiel de Maliki !"
     },
-    "url": "https://maliki.com/",
-    "version": "1.0",
-    "logo": "URL",
-    "thumbnail": "URL",
-    "color": "#HEX000",
-    "tags": ["Maliki", "Dessin"],
-    "category": "other",
-    "iFrameRegExp": "REGEXP",
-    "iframe": false,
-    "readLogs": false,
-    "settings": [
-      {
-        "id": "ID",
-        "multiLanguage": true
-      },
-      {
-        "id": "ID",
-        "title": "DISPLAY TITLE",
-        "icon": "FONTAWESOME ICON",
-        "value": true
-      },
-      {
-        "id": "ID",
-        "if": {
-          "ID": true
-        },
-        "title": "DISPLAY TITLE",
-        "icon": "FONTAWESOME ICON",
-        "value": "\"%song%\" by %artist%",
-        "placeholder": "use %song% or %artist%"
-      },
-      {
-        "id": "ID",
-        "title": "DISPLAY TITLE",
-        "icon": "FONTAWESOME ICON",
-        "value": 0,
-        "values": ["1", "2", "etc."]
-      }
-    ]
+    "url": "maliki.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/QDOaEbp.jpg",
+    "thumbnail": "https://i.imgur.com/LDOrHM3.jpg",
+    "color": "#f576ab",
+    "tags": ["maliki", "dessin"],
+    "category": "other"
   }
