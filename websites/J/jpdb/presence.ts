@@ -63,14 +63,52 @@ presence.on("UpdateData", async () => {
 			"/audio/",
 		].some(deck => document.location.pathname.includes(deck))
 	) {
-		presenceData.details = "Viewing pre-built deck";
+		presenceData.details = "Viewing pre-built deck:";
 		presenceData.state = document.querySelector("h3").textContent;
+	} else if (document.location.pathname.includes("/anki-import/deck")) {
+		presenceData.details = "Viewing an imported deck:";
+		presenceData.state = document
+			.querySelector("div.container.bugfix")
+			.firstElementChild.textContent.substring(15);
 	} else if (document.location.pathname.includes("/deck")) {
-		presenceData.details = "Viewing a deck";
+		presenceData.details = "Viewing a deck:";
 		presenceData.state = document.querySelector(
 			"div.container.bugfix > div:nth-child(2)"
 		).textContent;
-	} else if (document.location.pathname.includes("/prebuilt_decks"))
+	} else if (document.location.pathname.includes("/anki-import/overview")) {
+		presenceData.details = "Importing from Anki";
+		presenceData.state = `Total: ${
+			document
+				.querySelector("div.container.bugfix > table > tbody > tr:nth-child(2)")
+				.textContent.substring(5)
+				.split("/")[0]
+		} items`;
+	} else if (
+		document.location.pathname.includes("/add_to_deck_from_text_confirm")
+	) {
+		presenceData.details = "Adding vocabulary from text";
+		presenceData.state = `Total: ${document
+			.querySelector("div.container.bugfix > p")
+			.textContent.substring(76, 78)} items`;
+	} else if (document.location.pathname.includes("/add_to_deck_from_text"))
+		presenceData.details = "Adding vocabulary from text";
+	else if (
+		document.location.pathname.includes("/add-to-deck-from-satori-reader")
+	)
+		presenceData.details = "Importing from Satori Reader";
+	else if (
+		document.location.pathname.includes("/add-to-deck-from-shirabe-jisho")
+	)
+		presenceData.details = "Importing from Shirabe Jisho";
+	else if (document.location.pathname.includes("/anki-import"))
+		presenceData.details = "Importing from Anki";
+	else if (document.location.pathname.includes("/add-empty-deck"))
+		presenceData.details = "Creating a deck";
+	else if (document.location.pathname.includes("/new_deck_from_text"))
+		presenceData.details = "Creating a deck from text";
+	else if (document.location.pathname.includes("/new-deck-from-top-vocabulary"))
+		presenceData.details = "Creating a deck from top vocabulary";
+	else if (document.location.pathname.includes("/prebuilt_decks"))
 		presenceData.details = "Finding pre-built deck";
 	else if (document.location.pathname === "/")
 		presenceData.details = "Viewing home page";
