@@ -180,7 +180,7 @@ interface Metadata {
 	 * A regular expression selector that selects iframes to inject into.
 	 * @link https://docs.premid.app/dev/presence/metadata#regular-expressions
 	 */
-	iframeRegExp?: string;
+	iFrameRegExp?: string;
 	/**
 	 * Defines whether `getLogs()` is used.
 	 */

@@ -13,7 +13,7 @@
 		"sv": "tsc -p ./util/configs/tsconfig.auto.schemaValidator.json && node ./util/tools/auto/schemaValidator.js",
 		"pu": "tsc -p ./util/configs/tsconfig.auto.presenceUpdater.json && node ./util/tools/auto/presenceUpdater.js",
 		"ms": "tsc -p ./util/configs/tsconfig.metadataSorter.json && node ./util/tools/metadataSorter.js",
-		"mc": "tsc -p ./util/configs/tsconfig.massCompile.json && node ./util/tools/massCompile.js",
+		"compile": "tsc -p ./util/configs/tsconfig.compileChanged.json && node ./util/tools/compileChanged.js",
 		"translator": "tsc -p ./util/configs/tsconfig.translator.json && node ./util/tools/translator.js",
 		"prepare": "is-ci || husky install",
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
@@ -40,7 +40,6 @@
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-no-one-time-vars": "^2.4.1",
-		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-unicorn": "^42.0.0",
 		"glob": "^8.0.3",
 		"husky": "^8.0.1",
