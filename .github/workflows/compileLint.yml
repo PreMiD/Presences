@@ -1,12 +1,14 @@
-name: Lint
+name: Compile and Lint
 on: [push, pull_request]
 jobs:
-  lint:
-    name: Lint
+  compileLint:
+    name: Compile and Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Use Node.js 16
         uses: actions/setup-node@v3.3.0
         with:
@@ -14,5 +16,9 @@ jobs:
           cache: "yarn"
       - name: Install dependencies
         run: yarn
-      - name: Lint
+      - name: Compile changed files
+        run: |
+          git config --global core.quotePath false
+          yarn compile ${{ github.event_name }} $GITHUB_BASE_REF
+      - name: Check Lint
         run: yarn lint:ci
