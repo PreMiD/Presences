@@ -52,7 +52,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "releases":
-			if (route[2] != "") {
+			if (route[2]) {
 				presenceData.details = "Viewing an release version:";
 				presenceData.state = `PHP v${route[2]}`;
 			} else presenceData.details = "Viewing the releases";
