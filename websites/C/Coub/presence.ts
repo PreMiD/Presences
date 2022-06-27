@@ -16,7 +16,6 @@ interface ExecutionArguments {
 	images: { [key: string]: string };
 	[key: string]: unknown;
 }
-
 function getQuery() {
 	const queryString = location.search.split("?", 2),
 		query =
@@ -32,28 +31,26 @@ function getQuery() {
 function capitalizeFirstLetter(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
+const youtubeUrlRegex =
+	/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm;
 function matchYoutubeUrl(url: string): boolean {
-	return !!url.match(
-		/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm
-	);
+	return youtubeUrlRegex.test(url);
 }
-function getSourceLink(url: string): { label: string; url: string }[] {
-	if (!url) return [];
+function getSourceLink(url: string): { label: string; url: string } | null {
+	if (!url) return null;
 	if (matchYoutubeUrl(url)) {
-		return [
-			{
-				label: "Watch Youtube Source",
-				url,
-			},
-		];
+		return {
+			label: "Watch Youtube Source",
+			url,
+		};
 	}
-	return [];
+	return null;
 }
 const pages: PageContext[] = [
 		{
 			middleware: ref =>
-				!!ref.location.pathname.match(
-					/^\/?(hot|tags|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs|\/)/gi
+				/^\/?(hot|tags|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs|\/)/gi.test(
+					ref.location.pathname
 				),
 			exec: (
 				context,
@@ -127,7 +124,7 @@ const pages: PageContext[] = [
 							activeMedia.querySelector<HTMLAnchorElement>(
 								".description__stamp a.description__stamp__source"
 							)?.href
-						)?.[0],
+						),
 					];
 				}
 				return data;
@@ -187,7 +184,7 @@ const pages: PageContext[] = [
 							url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
 						},
 						{
-							label: strings.viewProfil,
+							label: strings.viewProfile,
 							url: `${document.location.origin}/${
 								document.location.pathname.split("/")[1]
 							}`,
@@ -198,7 +195,7 @@ const pages: PageContext[] = [
 			},
 		},
 		{
-			middleware: ref => !!ref.location.pathname.match(/^\/view\/(.*)/gi),
+			middleware: ref => /^\/view\/(.*)/gi.test(ref.location.pathname),
 			exec: (
 				context,
 				data,
@@ -236,14 +233,14 @@ const pages: PageContext[] = [
 							activeMedia.parentElement.querySelector<HTMLAnchorElement>(
 								'.coub__info .media-block__item > a[type="embedPopup"]'
 							)?.href
-						)?.[0],
+						),
 					];
 				}
 				return data;
 			},
 		},
 		{
-			middleware: ref => !!ref.location.pathname.match(/^\/(community)/gi),
+			middleware: ref => /^\/(community)/gi.test(ref.location.pathname),
 			exec: (
 				context,
 				data,
@@ -284,7 +281,7 @@ const pages: PageContext[] = [
 							activeMedia.querySelector<HTMLAnchorElement>(
 								".description__stamp a.description__stamp__source"
 							)?.href
-						)?.[0],
+						),
 					];
 				}
 
