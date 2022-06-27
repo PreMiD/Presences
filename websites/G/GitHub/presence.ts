@@ -103,20 +103,22 @@ presence.on("UpdateData", async () => {
 				id: pathname.split("/")[4],
 			};
 			presenceData.buttons = [{ label: "View Repository", url: href }];
-			if (privacy) {
-				presenceData.details = "Viewing a repository";
-				delete presenceData.state;
-				delete presenceData.buttons;
-				break;
-			}
 			if (cover) {
 				presenceData.largeImageKey = `https://avatars.githubusercontent.com/u/${
 					document.querySelector<HTMLMetaElement>(
 						'meta[name~="octolytics-dimension-user_id"]'
 					).content
 				}`;
+			} else {
+				presenceData.largeImageKey = "lg";
 			}
 			if (pathname.includes("/tree/")) {
+				if (privacy) {
+					presenceData.details = "Viewing a repository";
+					presenceData.state = "In a folder";
+					delete presenceData.buttons;
+					break;
+				}
 				presenceData.details = `Browsing repository ${repository.owner}/${repository.name}`;
 
 				presenceData.state = `In folder ${pathname
@@ -124,12 +126,24 @@ presence.on("UpdateData", async () => {
 					.slice(4)
 					.join("/")}`;
 			} else if (pathname.includes("/blob/")) {
+				if (privacy) {
+					presenceData.details = "Browsing a repository";
+					presenceData.state = "Viewing a file";
+					delete presenceData.buttons;
+					break;
+				}
 				presenceData.details = `Browsing repository ${repository.owner}/${repository.name}`;
 				presenceData.state = `Viewing file ${document
 					.querySelector("h2#blob-path > strong")
 					.textContent.trim()} at ${repository.target}`;
 			} else if (pathname.includes("/issues")) {
 				if (pathname.includes("/issues/")) {
+					if (privacy) {
+						presenceData.details = "Looking at an issue";
+						delete presenceData.state;
+						delete presenceData.buttons;
+						break;
+					}
 					presenceData.details = `Looking at issue #${repository.id}`;
 					presenceData.state = `${
 						document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
@@ -140,13 +154,31 @@ presence.on("UpdateData", async () => {
 					}`;
 					presenceData.buttons = [{ label: "View Issue", url: href }];
 				} else {
+					if (privacy) {
+						presenceData.details = "Browsing issues";
+						delete presenceData.state;
+						delete presenceData.buttons;
+						break;
+					}
 					presenceData.details = "Browsing issues";
 					presenceData.state = `${repository.owner}/${repository.name}`;
 				}
 			} else if (pathname.includes("/pulls")) {
+				if (privacy) {
+					presenceData.details = "Browsing pull requests";
+					delete presenceData.state;
+					delete presenceData.buttons;
+					break;
+				}
 				presenceData.details = "Browsing pull requests";
 				presenceData.state = `${repository.owner}/${repository.name}`;
 			} else if (pathname.includes("/pull")) {
+				if (privacy) {
+					presenceData.details = "Looking at a pull request";
+					delete presenceData.state;
+					delete presenceData.buttons;
+					break;
+				}
 				presenceData.details = `Looking at pull request #${repository.id}`;
 				presenceData.state = `${
 					document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
@@ -157,9 +189,21 @@ presence.on("UpdateData", async () => {
 				}`;
 				presenceData.buttons = [{ label: "View Pull Request", url: href }];
 			} else if (pathname.endsWith("/discussions")) {
+				if (privacy) {
+					presenceData.details = "Browsing discussions";
+					delete presenceData.state;
+					delete presenceData.buttons;
+					break;
+				}
 				presenceData.details = "Browsing discussions in";
 				presenceData.state = `${repository.owner}/${repository.name}`;
 			} else if (pathname.includes("/discussions/")) {
+				if (privacy) {
+					presenceData.details = "Looking at a discussion";
+					delete presenceData.state;
+					delete presenceData.buttons;
+					break;
+				}
 				presenceData.details = `Looking at discussion #${repository.id}`;
 				presenceData.state = `${
 					document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
@@ -180,12 +224,24 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/network") ||
 				pathname.includes("/network/members")
 			) {
+				if (privacy) {
+					presenceData.details = "Browsing insights";
+					delete presenceData.state;
+					delete presenceData.buttons;
+					break;
+				}
 				presenceData.details = `Browsing insights of ${repository.owner} / ${repository.name}`;
 
 				presenceData.state = document.querySelector<HTMLAnchorElement>(
 					"nav a.js-selected-navigation-item.selected.menu-item"
 				).textContent;
 			} else {
+				if (privacy) {
+					presenceData.details = "Browsing a repository";
+					delete presenceData.state;
+					delete presenceData.buttons;
+					break;
+				}
 				presenceData.details = "Browsing repository";
 				presenceData.state = `${repository.owner}/${repository.name}`;
 			}
@@ -193,6 +249,12 @@ presence.on("UpdateData", async () => {
 		case !!document.querySelector<HTMLHeadingElement>(
 			"#js-pjax-container > div > header > div.container-xl.pt-4.pt-lg-0.p-responsive.clearfix > div > div.flex-1 > h1"
 		):
+			if (privacy) {
+				presenceData.details = "Viewing an organization";
+				delete presenceData.state;
+				delete presenceData.buttons;
+				break;
+			}
 			presenceData.details = "Viewing an organization";
 			presenceData.state =
 				document.querySelector<HTMLHeadingElement>("h1").textContent;
@@ -209,6 +271,12 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case pathname.includes("/orgs/"):
+			if (privacy) {
+				presenceData.details = "Viewing an organization's people";
+				delete presenceData.state;
+				delete presenceData.buttons;
+				break;
+			}
 			presenceData.details = `Viewing ${pathname.split("/")[2]}'s ${
 				pathname.split("/")[3]
 			}`;
