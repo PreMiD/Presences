@@ -1,17 +1,14 @@
 const presence = new Presence({
-	clientId: "990900646301544468",
-}),
-
- elapsed = Math.floor(Date.now() / 1000);
+		clientId: "990900646301544468",
+	}),
+	elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://ghosteshop.com/icon.png",
-		startTimestamp: elapsed,
-	},
-	 
-	 
-	 type = window.location.hostname.split(".");
+			largeImageKey: "https://ghosteshop.com/icon.png",
+			startTimestamp: elapsed,
+		},
+		type = window.location.hostname.split(".");
 
 	if (type.length === 3) {
 		presenceData.details = `Reading the ${type[0].toLowerCase()}`;
