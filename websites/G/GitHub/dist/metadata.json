@@ -48,6 +48,12 @@
 			"title": "Show timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": true
 		}
 	]
 }

@@ -51,10 +51,18 @@ presence.on("UpdateData", async () => {
 			},
 		},
 		{ pathname, search, href } = document.location,
-		[cover, timestamp] = await Promise.all([
+		[cover, timestamp, privacy] = await Promise.all([
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("privacy"),
 		]);
+
+	if (privacy) {
+		delete presenceData.state;
+		presenceData.largeImageKey = "lg";
+		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+		delete presenceData.endTimestamp;
+	}
 
 	for (const [path, data] of Object.entries(pages)) {
 		if (pathname.includes(`/${path}`))
@@ -69,6 +77,12 @@ presence.on("UpdateData", async () => {
 					.querySelector("span.p-nickname")
 					.textContent.trim();
 			presenceData.buttons = [{ label: "View Profile", url: href }];
+			if (privacy) {
+				presenceData.details = "Viewing a profile";
+				delete presenceData.state;
+				delete presenceData.buttons;
+				break;
+			}
 			if (cover) {
 				presenceData.largeImageKey = `${
 					document.querySelector<HTMLImageElement>("img.avatar").src
@@ -89,6 +103,12 @@ presence.on("UpdateData", async () => {
 				id: pathname.split("/")[4],
 			};
 			presenceData.buttons = [{ label: "View Repository", url: href }];
+			if (privacy) {
+				presenceData.details = "Viewing a repository";
+				delete presenceData.state;
+				delete presenceData.buttons;
+				break;
+			}
 			if (cover) {
 				presenceData.largeImageKey = `https://avatars.githubusercontent.com/u/${
 					document.querySelector<HTMLMetaElement>(
