@@ -26,8 +26,10 @@ presence.on('UpdateData', () => {
             case 'games':
                 presenceData.details = 'Looking for a game';
                 const titles = document.querySelectorAll('.v-card__title');
-                if (titles.length === 2)
+                if (titles.length === 2 && titles[1].innerHTML !== titles[1].innerText)
                     presenceData.state = titles[1].innerText;
+                else
+                    presenceData.state = 'Viewing all games';
                 break;
         };
     };
