@@ -31,7 +31,11 @@
 	"thumbnail": "https://i.imgur.com/G816tlo.png",
 	"color": "#000000",
 	"category": "other",
-	"tags": ["programming", "sharing", "coding"],
+	"tags": [
+		"programming",
+		"sharing",
+		"coding"
+	],
 	"settings": [
 		{
 			"id": "cover",
