@@ -13,17 +13,9 @@ presence.on('UpdateData', () => {
     const path = window.location.hostname;
     const page = window.location.pathname.replace('/', '');
     const type = path.split('.');
-    
-    if (type.length === 3) {
-        switch (type[0]) {
-            case 'wiki':
-                presenceData.details = 'Reading the wiki';
-                break;
-            case 'cdn':
-                presenceData.details = 'Reading the CDN';
-                break;
-        };
 
+    if (type.length === 3) {
+        presenceData.details = `Reading the ${type[0].toUpperCase()}`;
         presenceData.state = `Reading ${document.title}`;
     } else {
         switch (page) {
@@ -42,4 +34,4 @@ presence.on('UpdateData', () => {
 
     if (presenceData.details) presence.setActivity(presenceData);
     else presence.setActivity();
-});990900646301544468
+});
