@@ -1,19 +1,25 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.7",
-    "author": {
-      "name": "RisingSunLight",
-      "id": "240521747852558347"
-    },
-    "service": "Maliki",
-    "description": {
-      "en": "Presence which helps you to follow your activity on the official website of Maliki !",
-      "fr": "Présence qui permet de suivre votre activité sur le site officiel de Maliki !"
-    },
-    "url": ["maliki.com", "malimode.maliki.com"],
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/QDOaEbp.jpg",
-    "thumbnail": "https://i.imgur.com/LDOrHM3.jpg",
-    "color": "#f576ab",
-    "tags": ["maliki", "dessin"],
-    "category": "other"
-  }
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "RisingSunLight",
+		"id": "240521747852558347"
+	},
+	"service": "Maliki",
+	"description": {
+		"en": "Presence which helps you to follow your activity on the official website of Maliki !",
+		"fr": "Présence qui permet de suivre votre activité sur le site officiel de Maliki !"
+	},
+	"url": [
+		"maliki.com",
+		"malimode.maliki.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/QDOaEbp.jpg",
+	"thumbnail": "https://i.imgur.com/LDOrHM3.jpg",
+	"color": "#f576ab",
+	"category": "other",
+	"tags": [
+		"maliki",
+		"dessin"
+	]
+}
