@@ -15,7 +15,7 @@ presence.on('UpdateData', () => {
     const type = path.split('.');
     
     if (type.length === 3) {
-        presenceData.details = `Reading the ${type[0].toUpperCase()}`;
+        presenceData.details = `Reading the ${type[0].toLowerCase()}`;
         presenceData.state = `Reading ${document.title}`;
     } else {
         switch (page) {
@@ -26,8 +26,8 @@ presence.on('UpdateData', () => {
             case 'games':
                 presenceData.details = 'Looking for a game';
                 const titles = document.querySelectorAll('.v-card__title');
-                if (titles.length === 2 && titles[1].innerHTML !== titles[1].innerText)
-                    presenceData.state = titles[1].innerText;
+                if (titles.length === 2)
+                    presenceData.state = titles[1].textContent;
                 else
                     presenceData.state = 'Viewing all games';
                 break;
