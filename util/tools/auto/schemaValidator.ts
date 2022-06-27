@@ -6,6 +6,7 @@ import { blue, green, red, yellow } from "chalk";
 import ParseJSON, { ObjectNode } from "json-to-ast";
 import { validate } from "jsonschema";
 import { compare, diff } from "semver";
+import { createAnnotation, getChangedFolders } from "../util";
 
 const latestMetadataSchema = async (): Promise<string[]> => {
 		const versions = (
@@ -91,40 +92,18 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 		} catch {
 			return [null];
 		}
-	},
-	createAnnotation = (params: CreateAnnotationParams): string => {
-		const input = [];
-
-		for (const [key, value] of Object.entries(params)) {
-			if (["type", "message"].includes(key)) continue;
-			else input.push(`${key}=${value}`);
-		}
-
-		return `::${params.type} ${input.join(",")}::${params.message}`;
-	},
-	changedMetaFiles = [
-		...new Set(
-			readFileSync("./file_changes.txt", "utf-8")
-				.trim()
-				.split("\n")
-				.filter(file =>
-					["metadata.json", "presence.ts", "iframe.ts"].some(x =>
-						file.endsWith(x)
-					)
-				)
-				.map(file => {
-					const path = file.split("/");
-
-					path.at(-1) === "metadata.json"
-						? path.splice(path.length - 2, 2)
-						: path.pop();
-
-					return `${path.join("/")}/dist/metadata.json`;
-				})
-		),
-	];
+	};
 
 (async (): Promise<void> => {
+	console.log(blue("Getting changed files..."));
+
+	const changedMetaFiles = await getChangedFolders().then(f =>
+		f
+			//TODO: Add support for programs in the future
+			.filter(p => p.includes("websites/"))
+			.map(p => (p += "/dist/metadata.json"))
+	);
+
 	console.log(blue("Getting latest schema..."));
 
 	const [latestSchema, latestSchemaVersion] = await latestMetadataSchema(),
@@ -355,15 +334,4 @@ interface APIQuery {
 			}
 		];
 	};
-}
-
-interface CreateAnnotationParams {
-	type: "warning" | "error" | "notice";
-	title?: string;
-	file: string;
-	line?: string | number;
-	endLine?: string | number;
-	col?: string | number;
-	endColumn?: string | number;
-	message: string;
 }
