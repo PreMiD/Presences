@@ -109,9 +109,8 @@ presence.on("UpdateData", async () => {
 						'meta[name~="octolytics-dimension-user_id"]'
 					).content
 				}`;
-			} else 
-				presenceData.largeImageKey = "lg";
-			
+			} else presenceData.largeImageKey = "lg";
+
 			if (pathname.includes("/tree/")) {
 				if (privacy) {
 					presenceData.details = "Viewing a repository";
@@ -266,9 +265,9 @@ presence.on("UpdateData", async () => {
 			break;
 		case pathname.includes("/features"):
 			presenceData.details = "Browsing features";
-			if (pathname.includes("copilot")) 
+			if (pathname.includes("copilot"))
 				presenceData.state = "Looking at Github Copilot";
-			
+
 			break;
 		case pathname.includes("/orgs/"):
 			if (privacy) {
