@@ -11,9 +11,9 @@ presence.on('UpdateData', () => {
     };
 
     const path = window.location.hostname;
-    const page = window.location.pathname.replace('/', '');
+    const page = window.location.pathname.replace(/\//g, '');
     const type = path.split('.');
-
+    
     if (type.length === 3) {
         presenceData.details = `Reading the ${type[0].toUpperCase()}`;
         presenceData.state = `Reading ${document.title}`;
