@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "969208766807547917",
+		clientId: "969208766807547917"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,13 +11,13 @@ let timestamp: [number, number],
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp,
+			startTimestamp: browsingTimestamp
 		},
-		{ hostname, href } = document.location,
+		{ hash, hostname, href } = document.location,
 		[privacy, thumbnails, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("thumbnails"),
-			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("buttons")
 		]),
 		active = document.querySelector(
 			"[class='ng-binding ng-scope selected']"
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 		else if (search?.value) {
 			presenceData.details = "Searching For:";
 			presenceData.state = search.value;
-		} else if (href.includes("/detail/")) {
+		} else if (hash.includes("/detail/")) {
 			title = document.querySelector(
 				"#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div"
 			).textContent;
@@ -39,8 +39,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Video",
-					url: href,
-				},
+					url: href
+				}
 			];
 			if (thumbnails) {
 				presenceData.largeImageKey =
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 						)
 						?.firstElementChild.getAttribute("src") ?? "logo";
 			}
-		} else if (href.includes("addons")) {
+		} else if (hash.includes("addons")) {
 			search = document.querySelector(
 				"#addons > div.filter > form > div.addon-search-input > input"
 			);
@@ -66,45 +66,45 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Browse Addons",
-						url: href,
-					},
+						url: href
+					}
 				];
 				presenceData.details = `Browsing ${title}`;
 			}
-		} else if (href.includes("settings")) {
+		} else if (hash.includes("settings")) {
 			presenceData.details = `${
 				document.querySelector("[class='ng-scope ng-binding active']")
 					?.textContent ?? "General"
 			} settings`;
-		} else if (href.includes("/discover/")) {
+		} else if (hash.includes("/discover/")) {
 			if (active) {
 				presenceData.buttons = [
 					{
 						label: "Browse",
-						url: href,
-					},
+						url: href
+					}
 				];
 				presenceData.details = `Browsing: ${active}`;
 			} else presenceData.state = "Browsing Movies";
-		} else if (href.includes("/library")) {
+		} else if (hash.includes("/library")) {
 			if (active) presenceData.details = `${active} Library`;
 			else presenceData.details = "Library";
 
 			presenceData.buttons = [
 				{
 					label: "View Library",
-					url: href,
-				},
+					url: href
+				}
 			];
-		} else if (href.includes("/calendar")) {
+		} else if (hash.includes("/calendar")) {
 			presenceData.buttons = [
 				{
 					label: "View Calendar",
-					url: href,
-				},
+					url: href
+				}
 			];
 			presenceData.details = "Calendar";
-		} else if (href.includes("player")) {
+		} else if (hash.includes("player")) {
 			if (video?.duration) {
 				timestamp = presence.getTimestampsfromMedia(video);
 				pauseCheck = video?.paused ?? true;
@@ -142,18 +142,17 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Join View Party",
-					url: href,
-				},
+					url: href
+				}
 			];
-		} else if (href === "https://app.strem.io/#/")
-			presenceData.details = "Viewing the homepage";
-	} else if (hostname == "stremio.com") {
-		if (href.includes("addon-sdk")) presenceData.details = "Viewing Addon SDK";
-		else if (href.includes("contribute"))
+		} else if (hash === "/#") presenceData.details = "Viewing the homepage";
+	} else if (hostname === "stremio.com") {
+		if (hash.includes("addon-sdk")) presenceData.details = "Viewing Addon SDK";
+		else if (hash.includes("contribute"))
 			presenceData.details = "Contributing page";
-		else if (href.includes("community"))
+		else if (hash.includes("community"))
 			presenceData.details = "Viewing the Community";
-		else if (href.includes("technology"))
+		else if (hash.includes("technology"))
 			presenceData.details = "Viewing the technology";
 		else if (document.querySelector("#tos-container > h1 > strong")) {
 			presenceData.details = `Reading ${
