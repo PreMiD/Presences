@@ -145,7 +145,7 @@ presence.on("UpdateData", async () => {
 					url: href
 				}
 			];
-		} else if (hash === "/#") presenceData.details = "Viewing the homepage";
+		} else if (hash === "#/") presenceData.details = "Viewing the homepage";
 	} else if (hostname === "stremio.com") {
 		if (hash.includes("addon-sdk")) presenceData.details = "Viewing Addon SDK";
 		else if (hash.includes("contribute"))
