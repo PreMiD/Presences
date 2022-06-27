@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
 		case pathname.includes("/features"):
 			presenceData.details = "Browsing features";
 			if (pathname.includes("copilot")) {
-				presenceData.state = "Looking at Github Copilot";
+				presenceData.state = "Looking at Github Copilot"
 			}
 			break;
 		case pathname.includes("/orgs/"):
