@@ -8,8 +8,7 @@
 	"description": {
 	  "en": "Ghost eShop is a huge database of games from the Nintendo 3ds family. With Ghost eShop, your console is never out of date ! You can download your favorite games from this site or the console application.",
 	  "fr": "Ghost eShop est une énorme base de données de jeux de la famille Nintendo 3ds. Avec Ghost eShop, votre console n'est jamais obsolète ! Vous pouvez ainsi télécharger vos jeux favoris depuis ce site ou l'application pour console.",
-	  "es": "Ghost eShop es una enorme base de datos de juegos de la familia Nintendo 3ds. Con Ghost eShop, tu consola nunca se queda sin actualizar. Puedes descargar tus juegos favoritos desde este sitio o desde la aplicación de la consola.",
-	  "jp": "Ghost eShopは、Nintendo 3DSのゲームを集めたデータベースです。GhosteShopがあれば、あなたの3DSは決して時代遅れにはなりません。このサイトや3DS用アプリケーションから、ゲームをダウンロードすることができます。"
+	  "es": "Ghost eShop es una enorme base de datos de juegos de la familia Nintendo 3ds. Con Ghost eShop, tu consola nunca se queda sin actualizar. Puedes descargar tus juegos favoritos desde este sitio o desde la aplicación de la consola."
 	},
 	"url": [
 	  "ghosteshop.com",
@@ -17,7 +16,7 @@
 	  "cdn.ghosteshop.com"
 	],
 	"version": "1.0.0",
-	"logo": "https://ghosteshop.com/icon.png",
+	"logo": "https://i.imgur.com/xU6SmRi.png",
 	"thumbnail": "https://i.imgur.com/KtKoWsO.jpeg",
 	"color": "#ff8800",
 	"category": "games",
