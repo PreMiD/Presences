@@ -15,8 +15,9 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "hareshi",
 			startTimestamp: browsingTimestamp,
-		};
-	if (document.location.hostname === "www.hareshi.net") {
+		},
+		{ host, hostname, href, search } = document.location;
+	if (host.includes("hareshi.net")) {
 		switch (pathArray[3]) {
 			case "browse":
 				presenceData.details = "เรียกดู";
@@ -37,7 +38,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "หน้าแรก";
 				break;
 		}
-	} else if (document.location.hostname === "forum.hareshi.net") {
+	} else if (hostname === "forum.hareshi.net") {
 		switch (pathArray[3]) {
 			case "forums":
 				page = "ฟอรั่ม";
@@ -121,7 +122,7 @@ presence.on("UpdateData", async () => {
 		}
 		if (!privacy && pathArray[4] === "find-source") {
 			presenceData.smallImageKey = "reading";
-			switch (document.location.search) {
+			switch (search) {
 				case "?order=reply_count":
 					presenceData.smallImageText = "ยอดนิยม";
 					break;
@@ -149,7 +150,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `ดู${page}`,
-					url: document.location.href.replace(/#\d+/, ""),
+					url: href.replace(/#\d+/, ""),
 				},
 			];
 		}
