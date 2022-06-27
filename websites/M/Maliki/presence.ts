@@ -6,36 +6,40 @@ let title: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
-	largeImageKey: "1337x",
+	largeImageKey: "maliki_1024",
 	startTimestamp: browsingTimestamp,
+	buttons: [{ label: "Voir le site", url: "https://maliki.com/" }]
 };
-const path_array = document.location.pathname.split("/");
-const page_name = path_array.length === 0 ? path_array[0] : path_array[1];
 
-switch(page_name) {
-	case "":
-		presenceData.details = "Regarde la page principale";
+switch(document.URL) { // Change the detail depending on the current URL
+	case "https://maliki.com/strips/":
+		presenceData.details = "Parcourt les strips";
 		break;
-	case "strips":
-		presenceData.details = path_array[2] == "" ? "Parcourt les strips" : "Lit un strip";
-		break;
-	case "actualites":
+	case "https://maliki.com/actualites/":
 		presenceData.details = "Parcourt les actualités";
 		break;
-	case "bonus":
+	case "https://maliki.com/bonus/":
 		presenceData.details = "Parcours les bonus";
 		break;
-	case "radio":
+	case "https://maliki.com/radio/":
 		presenceData.details = "Écoute la radio";
 		break;
-	case "shop":
+	case "https://maliki.com/shop/":
 		presenceData.details = "Parcours le shop";
 		break;
-	case "events":
+	case "https://maliki.com/events/":
 		presenceData.details = "Se renseigne sur les futurs événements";
 		break;
-	case "faq":
+	case "https://maliki.com/faq/":
 		presenceData.details = "Lire la foire aux questions";
+		break;
+	default:
+		// If the case "https://maliki.com/strips/" does not match, but there's a part of the url
+		presenceData.details = document.URL.includes("https://maliki.com/strips/") ? "Lit un strip" : "Regarde la page principale";
+		if (document.URL.includes("https://malimode.maliki.com/")) { // If the url is not the standard url, then set a special details
+			presenceData.details = "Crée un personnage sur le Malimode";
+			presenceData.largeImageKey = "malimode";
+		}
 		break;
 }
 
