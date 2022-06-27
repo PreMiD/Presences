@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 				id: pathname.split("/")[4],
 			};
 			presenceData.buttons = [{ label: "View Repository", url: href }];
-			if (cover) {
+			if (cover && !privacy) {
 				presenceData.largeImageKey = `https://avatars.githubusercontent.com/u/${
 					document.querySelector<HTMLMetaElement>(
 						'meta[name~="octolytics-dimension-user_id"]'
