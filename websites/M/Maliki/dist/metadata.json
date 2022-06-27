@@ -9,7 +9,7 @@
       "en": "Presence which helps you to follow your activity on the official website of Maliki !",
       "fr": "Présence qui permet de suivre votre activité sur le site officiel de Maliki !"
     },
-    "url": "maliki.com",
+    "url": ["maliki.com", "malimode.maliki.com"],
     "version": "1.0.0",
     "logo": "https://i.imgur.com/QDOaEbp.jpg",
     "thumbnail": "https://i.imgur.com/LDOrHM3.jpg",
