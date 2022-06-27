@@ -36,6 +36,7 @@ switch(document.URL) { // Change the detail depending on the current URL
 	default:
 		// If the case "https://maliki.com/strips/" does not match, but there's a part of the url
 		presenceData.details = document.URL.includes("https://maliki.com/strips/") ? "Lit un strip" : "Regarde la page principale";
+		presenceData.details = document.URL.includes("https://maliki.com/bonus/") ? "Regarde un bonus" : "Regarde la page principale";
 		if (document.URL.includes("https://malimode.maliki.com/")) { // If the url is not the standard url, then set a special details
 			presenceData.details = "Crée un personnage sur le Malimode";
 			presenceData.largeImageKey = "malimode";
