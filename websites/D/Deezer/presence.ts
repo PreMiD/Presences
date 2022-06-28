@@ -66,9 +66,9 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (document.querySelector(".page-player")) {
-		const [albumLink, artistLink] = (document.querySelector<HTMLAnchorElement>(
+		const [albumLink, artistLink] = document.querySelector<HTMLAnchorElement>(
 				"div.marquee-content"
-			).children as unknown) as [HTMLAnchorElement, HTMLAnchorElement],
+			).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
 			currentTime = document.querySelector(
 				"div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
 			).textContent,
@@ -133,9 +133,9 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		} else {
-			const [podcastLink] = (document.querySelector<HTMLAnchorElement>(
+			const [podcastLink] = document.querySelector<HTMLAnchorElement>(
 					"div.marquee-content"
-				).children as unknown) as [HTMLAnchorElement, HTMLAnchorElement],
+				).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
 				podcastId = podcastLink.href.split("/")[5];
 			[presenceData.state, presenceData.details] = document
 				.querySelector("div.marquee-content")
