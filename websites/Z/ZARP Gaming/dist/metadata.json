@@ -10,14 +10,13 @@
 	},
 	"url": [
 		"zarpgaming.com",
-		"www.zarpgaming.com",
 		"control.zarpgaming.com"
 	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/GKOegt1.jpg",
-	"thumbnail": "",
+	"thumbnail": "https://i.imgur.com/e2aXbRm.png",
 	"color": "#82d071",
-	"category": "Socials",
+	"category": "socials",
 	"tags": [
 		"gaming",
 		"games",
