@@ -50,10 +50,12 @@ presence.on("UpdateData", async () => {
 			break;
 		default: {
 			if (document.location.pathname.includes("/strips/")) {
+				// If we are on a strip page, modify the details
 				presenceData.details = "Lit le strip :";
 				presenceData.state = document.querySelector(".singleTitle").textContent;
 			}
 			if (document.location.pathname.includes("/bonus/")) {
+				// If we are on a bonus page, modify the details
 				presenceData.details = "Regarde le bonus :";
 				presenceData.state = document.querySelector(".singleTitle").textContent;
 			}
@@ -61,6 +63,17 @@ presence.on("UpdateData", async () => {
 				// If the url is not the standard url, then set a special details
 				presenceData.details = "Crée un personnage sur le Malimode";
 				presenceData.largeImageKey = "malimode";
+			}
+			if (
+				document
+					.querySelector(".singleContentShare--title")
+					?.textContent.includes("actualité")
+			) {
+				// If we are on a page about actuality, modify the details
+				presenceData.details = "Lit l'actualité :";
+				presenceData.state = document.querySelector(
+					".singleHeader--title"
+				).textContent;
 			}
 			break;
 		}
