@@ -99,7 +99,9 @@ presence.on("UpdateData", () => {
 			} else if (window.location.pathname.includes("/new-topic")) {
 				presenceData.details = "Creating a topic in section:";
 
-				for (const option of document.querySelector<HTMLSelectElement>("#postcatid")) {
+				for (const option of document.querySelector<HTMLSelectElement>(
+					"#postcatid"
+				)) {
 					if (option.selected) {
 						presenceData.state = option.textContent
 							.replace(/^[-\s]+/, "")
