@@ -190,7 +190,7 @@ presence.on("UpdateData", async () => {
 				}
 				presenceData.details = `Looking at pull request #${repository.id}`;
 				presenceData.state = `${
-					document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
+					document.querySelectorAll<HTMLAnchorElement>("a.author.Link--primary")[0]
 						.textContent
 				} - ${
 					document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
