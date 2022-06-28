@@ -66,9 +66,9 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (document.querySelector(".page-player")) {
-		const [albumLink, artistLink] = document.querySelector<HTMLAnchorElement>(
+		const [albumLink, artistLink] = (document.querySelector<HTMLAnchorElement>(
 				"div.marquee-content"
-			).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
+			).children as unknown) as [HTMLAnchorElement, HTMLAnchorElement],
 			currentTime = document.querySelector(
 				"div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
 			).textContent,
@@ -84,9 +84,9 @@ presence.on("UpdateData", async () => {
 		if (
 			document
 				.querySelector(
-					"#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > g > path"
+					"#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > path"
 				)
-				.outerHTML.match('<path d="m5 2 18 10L5 22V2z"></path>')
+				.outerHTML.match('<path d="m3 1 12 7-12 7V1z"></path>')
 		)
 			paused = true;
 
@@ -133,9 +133,9 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		} else {
-			const [podcastLink] = document.querySelector<HTMLAnchorElement>(
+			const [podcastLink] = (document.querySelector<HTMLAnchorElement>(
 					"div.marquee-content"
-				).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
+				).children as unknown) as [HTMLAnchorElement, HTMLAnchorElement],
 				podcastId = podcastLink.href.split("/")[5];
 			[presenceData.state, presenceData.details] = document
 				.querySelector("div.marquee-content")
