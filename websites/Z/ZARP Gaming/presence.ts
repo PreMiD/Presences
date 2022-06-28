@@ -105,7 +105,7 @@ presence.on("UpdateData", () => {
 					break;
 			}
 
-			if (presenceData.details == null) {
+			if (!presenceData.details) {
 				presenceData.details = "Viewing a page:";
 				presenceData.state = document.title;
 			}
