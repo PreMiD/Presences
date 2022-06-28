@@ -31,8 +31,8 @@ presence.on("UpdateData", async () => {
                 presenceData.state = "Reading Blog Entry"
                 presenceData.details = `${document.getElementsByClassName("display-2 text-white").item(0).textContent}`
             } else {
-                presenceData.state = "",
-                    presenceData.details = ""
+                presenceData.state = ""
+                presenceData.details = ""
             }
         }
     }
