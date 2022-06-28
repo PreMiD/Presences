@@ -3,6 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+interface songPlayingInformations {
+	artist: string;
+	song: string;
+}
+
+let songInfo: songPlayingInformations = null;
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "maliki_1024",
@@ -26,7 +33,11 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Parcours les bonus";
 			break;
 		case "/radio/":
-			presenceData.details = "Écoute la radio";
+			if (!songInfo) presenceData.details = "Écoute la radio";
+			else {
+				presenceData.details = `Écoute ${songInfo.song}`;
+				presenceData.state = `De ${songInfo.artist}`;
+			}
 			break;
 		case "/shop/":
 			presenceData.details = "Parcours le shop";
@@ -57,4 +68,8 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
+});
+
+presence.on("iFrameData", async (data: songPlayingInformations) => {
+	songInfo = data;
 });
