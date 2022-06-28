@@ -1,5 +1,5 @@
-const presence = new Presence({clientId: "991160367629750372"}),
-flowlabTimestamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({ clientId: "991160367629750372" }),
+    flowlabTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
                 presenceData.details = `${document.getElementsByClassName("display-2 text-white").item(0).textContent}`
             } else {
                 presenceData.state = "",
-                presenceData.details = ""
+                    presenceData.details = ""
             }
         }
     }
