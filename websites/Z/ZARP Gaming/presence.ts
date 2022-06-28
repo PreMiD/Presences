@@ -46,17 +46,10 @@ presence.on("UpdateData", () => {
 					break;
 				case "/index.php/new-topic":
 					presenceData.details = "Creating a topic in section:";
-
-					for (const option of document.querySelector<HTMLSelectElement>(
-						"#postcatid"
-					)) {
-						if (option.selected) {
-							presenceData.state = option.textContent
-								.replace(/^[-\s]+/, "")
-								.replace(/[-\s]+/g, " ");
-							break;
-						}
-					}
+					presenceData.state = document
+						.querySelector<HTMLSelectElement>("#postcatid")
+						.selectedOptions[0].text.replace(/^[-\s]+/, "")
+						.replace(/[-\s]+/g, " ");
 					break;
 			}
 
