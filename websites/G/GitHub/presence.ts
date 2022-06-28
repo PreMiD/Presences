@@ -146,21 +146,21 @@ presence.on("UpdateData", async () => {
 						}
 						presenceData.details = `Creating an issue in ${repository.owner}/${repository.name}`;
 					} else {
-					if (privacy) {
-						presenceData.details = "Looking at an issue";
-						delete presenceData.state;
-						delete presenceData.buttons;
-						break;
-					}
-					presenceData.details = `Looking at issue #${repository.id}`;
-					presenceData.state = `${
-						document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
-							.textContent
-					} - ${
-						document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
-							.textContent
-					}`;
-					presenceData.buttons = [{ label: "View Issue", url: href }];
+						if (privacy) {
+							presenceData.details = "Looking at an issue";
+							delete presenceData.state;
+							delete presenceData.buttons;
+							break;
+						}
+						presenceData.details = `Looking at issue #${repository.id}`;
+						presenceData.state = `${
+							document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
+								.textContent
+						} - ${
+							document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
+								.textContent
+						}`;
+						presenceData.buttons = [{ label: "View Issue", url: href }];
 					}
 				} else {
 					if (privacy) {
