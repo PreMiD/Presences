@@ -1,7 +1,7 @@
-const flowlabPresence = new Presence({clientId: "991160367629750372"}),
+const presence = new Presence({clientId: "991160367629750372"}),
 flowlabTimestamp = Math.floor(Date.now() / 1000);
 
-flowlabPresence.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "icon",
         startTimestamp: flowlabTimestamp
@@ -37,6 +37,6 @@ flowlabPresence.on("UpdateData", async () => {
         }
     }
 
-    if (presenceData.details) flowlabPresence.setActivity(presenceData);
-    else flowlabPresence.setActivity();
+    if (presenceData.details) presence.setActivity(presenceData);
+    else presence.setActivity();
 });
