@@ -8,112 +8,106 @@ presence.on("UpdateData", () => {
 	};
 	switch (window.location.host) {
 		case "zarpgaming.com":
-			if (
-				window.location.pathname === "/index.php" ||
-				window.location.pathname === "/index.php/forum"
-			)
-				presenceData.details = "Viewing the home page";
-			else if (window.location.pathname.startsWith("/index.php/forum/")) {
-				presenceData.details = "Viewing a section:";
-				presenceData.state =
-					document.querySelector<HTMLElement>(
-						"#Kunena > form > div > div.kheader > h2 > span"
-					)?.textContent ?? document.title;
-				presenceData.buttons = [
-					{
-						label: "Visit Section",
-						url: window.location.href,
-					},
-				];
-			} else if (window.location.pathname === "/index.php/servers")
-				presenceData.details = "Viewing servers";
-			else if (window.location.pathname === "/index.php/user-list")
-				presenceData.details = "Viewing the list of users";
-			else if (window.location.pathname === "/index.php/zarp-vip")
-				presenceData.details = "Viewing the VIP page";
-			else if (window.location.pathname === "/index.php/zarp-vip/booster-pack")
-				presenceData.details = "Viewing the booster packs";
-			else if (window.location.pathname === "/index.php/help")
-				presenceData.details = "Viewing the help page";
-			else if (window.location.pathname.startsWith("/index.php/help/faq")) {
-				presenceData.details = "Viewing the FAQ";
-				if (window.location.pathname.includes("faq/"))
-					presenceData.state = document.title;
-			} else if (
-				document.querySelector(
-					"#Kunena > div:nth-child(5) > div.kheader > h1 > span"
-				)
-			) {
-				presenceData.details = "Viewing a thead:";
-				presenceData.state = document
-					.querySelector<HTMLElement>(
-						"#Kunena > div:nth-child(5) > div.kheader > h1 > span"
-					)
-					.textContent.replace("TOPIC: ", "");
-				presenceData.buttons = [
-					{
-						label: "Visit Thread",
-						url: window.location.href,
-					},
-				];
-			} else if (
-				window.location.pathname.startsWith("/index.php/2013-11-13-21-35-14/")
-			) {
-				presenceData.details = "Viewing a section:";
-				presenceData.state = document.querySelector<HTMLElement>(
-					"#Kunena > div.kblock.kpathway.breadcrumbs-1 > div > div > div > div.path-element > a"
-				).textContent;
-				presenceData.buttons = [
-					{
-						label: "Visit Section",
-						url: window.location.href,
-					},
-				];
-			} else if (
-				window.location.pathname.startsWith("/index.php/forum/profile/")
-			) {
-				presenceData.details = "Viewing a profile:";
-				presenceData.state = document.title.replace("Profile for ", "");
-				presenceData.buttons = [
-					{
-						label: "Visit Profile",
-						url: window.location.href,
-					},
-				];
-			} else if (
-				window.location.pathname.startsWith("/index.php/forum/announcement/")
-			) {
-				if (window.location.pathname.includes("list"))
-					presenceData.details = "Viewing the announcement list";
-				else {
-					presenceData.details = "Viewing an announcement:";
+			switch (window.location.pathname) {
+				case "/index.php":
+					presenceData.details = "Viewing the home page";
+					break;
+				case "/index.php/user-list":
+					presenceData.details = "Viewing the user list";
+					break;
+				case "/index.php/zarp-vip":
+					presenceData.details = "Viewing the VIP page";
+					break;
+				case "/index.php/zarp-vip/booster-pack":
+					presenceData.details = "Viewing the booster packs";
+					break;
+				case "/index.php/help":
+					presenceData.details = "Viewing the help page";
+					break;
+				case "/index.php/help/faq":
+					presenceData.details = "Viewing the FAQ";
+					if (window.location.pathname.includes("faq/"))
+						presenceData.state = document.title;
+					break;
+				case "/index.php/profile/profile-edit":
+					presenceData.details = "Editing profile";
+					break;
+				case "/index.php/2013-11-13-21-35-14/":
+					presenceData.details = "Viewing a section:";
 					presenceData.state = document.querySelector<HTMLElement>(
-						"#Kunena > div.kblock.kannouncement > div.kheader > h2 > span"
+						"#Kunena > div.kblock.kpathway.breadcrumbs-1 > div > div > div > div.path-element > a"
 					).textContent;
-				}
-			} else if (window.location.pathname.includes("/topic/create")) {
-				presenceData.details = "Creating a topic in section:";
-				presenceData.state = document.querySelector<HTMLElement>(
-					"#Kunena > div.kblock.kpathway.breadcrumbs-1 > div > div > div > div:nth-child(3) > a"
-				).textContent;
-			} else if (window.location.pathname.includes("/new-topic")) {
-				presenceData.details = "Creating a topic in section:";
+					presenceData.buttons = [
+						{
+							label: "Visit Section",
+							url: window.location.href,
+						},
+					];
+					break;
+				case "/index.php/new-topic":
+					presenceData.details = "Creating a topic in section:";
 
-				for (const option of document.querySelector<HTMLSelectElement>(
-					"#postcatid"
-				)) {
-					if (option.selected) {
-						presenceData.state = option.textContent
-							.replace(/^[-\s]+/, "")
-							.replace(/[-\s]+/g, " ");
-						break;
+					for (const option of document.querySelector<HTMLSelectElement>(
+						"#postcatid"
+					)) {
+						if (option.selected) {
+							presenceData.state = option.textContent
+								.replace(/^[-\s]+/, "")
+								.replace(/[-\s]+/g, " ");
+							break;
+						}
 					}
-				}
-			} else if (!presenceData.details) {
-				presenceData.details = "Viewing a page:";
-				presenceData.state = document.title;
+					break;
 			}
 
+			switch (true) {
+				case window.location.pathname.includes("/forum/profile/"):
+					presenceData.details = "Viewing a profile:";
+					presenceData.state = document.title.replace("Profile for ", "");
+					presenceData.buttons = [
+						{
+							label: "Visit Profile",
+							url: window.location.href,
+						},
+					];
+					break;
+				case window.location.pathname.includes("/topic/create"):
+					presenceData.details = "Creating a topic in section:";
+					presenceData.state = document.querySelector<HTMLElement>(
+						"#Kunena > div.kblock.kpathway.breadcrumbs-1 > div > div > div > div:nth-child(3) > a"
+					).textContent;
+					break;
+				case window.location.pathname.endsWith("/reply"):
+					presenceData.details = "Replying to a topic:";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						"#subject"
+					).value;
+					break;
+				case window.location.pathname.includes("/faq/"):
+					presenceData.details = "Viewing FAQ:";
+					presenceData.state = document.title;
+					break;
+				case window.location.pathname.includes("/index.php/forum/announcement/"):
+					if (window.location.pathname.includes("list"))
+						presenceData.details = "Viewing the announcement list";
+					else if (window.location.pathname.includes("edit")) {
+						presenceData.details = "Editing an announcement:";
+						presenceData.state = document.querySelector<HTMLInputElement>(
+							"#kannouncement > div.kbody > div > form > div:nth-child(4) > label:nth-child(1) > input"
+						).value;
+					} else {
+						presenceData.details = "Viewing an announcement:";
+						presenceData.state = document.querySelector<HTMLElement>(
+							"#Kunena > div.kblock.kannouncement > div.kheader > h2 > span"
+						).textContent;
+					}
+					break;
+			}
+
+			if (presenceData.details == null) {
+				presenceData.details = "Viewing a page:"
+				presenceData.state = document.title;
+			}
 			break;
 		case "control.zarpgaming.com":
 			presenceData.details = "Server Control Panel";
