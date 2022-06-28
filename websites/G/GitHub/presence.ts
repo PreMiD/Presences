@@ -137,6 +137,15 @@ presence.on("UpdateData", async () => {
 					.textContent.trim()} at ${repository.target}`;
 			} else if (pathname.includes("/issues")) {
 				if (pathname.includes("/issues/")) {
+					if (pathname.includes("new")) {
+						if (privacy) {
+							presenceData.details = "Creating an issue";
+							delete presenceData.state;
+							delete presenceData.buttons;
+							break;
+						}
+						presenceData.details = `Creating an issue in ${repository.owner}/${repository.name}`;
+					} else {
 					if (privacy) {
 						presenceData.details = "Looking at an issue";
 						delete presenceData.state;
@@ -152,6 +161,7 @@ presence.on("UpdateData", async () => {
 							.textContent
 					}`;
 					presenceData.buttons = [{ label: "View Issue", url: href }];
+					}
 				} else {
 					if (privacy) {
 						presenceData.details = "Browsing issues";
