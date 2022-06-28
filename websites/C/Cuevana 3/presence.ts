@@ -105,10 +105,8 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.includes("/episodio")
 	) {
 
-		let titulo;
-		const cover = `https://ww3.cuevana.pro${String(document
-			.querySelector("figure.poster > img")
-			.getAttribute("src"))}`;
+		let titulo,
+			cover;
 
 		if (!document.location.pathname.includes("/episodio")) {
 			titulo = document.querySelector("h1.title > span").textContent;
@@ -117,16 +115,20 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{ label: "Ver Película", url: window.location.href },
 			];
+			cover = `https://ww3.cuevana.pro${String(document
+			.querySelector("figure.poster > img")
+			.getAttribute("src"))}`;
 			presenceData.largeImageKey = cover;
 		} else {
-			console.log("1");
 			titulo = document.querySelector("h1.title").textContent;
 			presenceData.details = titulo;
 			delete presenceData.state;
 			presenceData.buttons = [
 				{ label: "Ver Episodio", url: window.location.href },
 			];
-			presenceData.largeImageKey = cover;
+			presenceData.largeImageKey = document
+				.querySelector("figure > img")
+				.getAttribute("src");
 		}
 
 		if (iFrameVideo) {
@@ -145,12 +147,12 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData, !videoPaused);
 	} else if (document.location.pathname.includes("/serie/")) {
-		presenceData.details = document.querySelector("h1.Title").textContent;
+		presenceData.details = document.querySelector("h1.title > span").textContent;
 		presenceData.smallImageKey = "browsing";
 		presenceData.smallImageText = (await strings).browsing;
 		presenceData.largeImageKey = document
-			.querySelector("div.backdrop > article > div.Image > figure > img")
-			.getAttribute("data-src");
+			.querySelector("figure > img")
+			.getAttribute("src");
 	} else {
 		presenceData.details = (await strings).browsing;
 		presenceData.smallImageKey = "browsing";
