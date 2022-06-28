@@ -79,15 +79,16 @@ presence.on("UpdateData", () => {
 					break;
 				case window.location.pathname.endsWith("/reply"):
 					presenceData.details = "Replying to a topic:";
-					presenceData.state = document.querySelector<HTMLInputElement>(
-						"#subject"
-					).value;
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("#subject").value;
 					break;
 				case window.location.pathname.includes("/faq/"):
 					presenceData.details = "Viewing FAQ:";
 					presenceData.state = document.title;
 					break;
-				case window.location.pathname.includes("/index.php/forum/announcement/"):
+				case window.location.pathname.includes(
+					"/index.php/forum/announcement/"
+				):
 					if (window.location.pathname.includes("list"))
 						presenceData.details = "Viewing the announcement list";
 					else if (window.location.pathname.includes("edit")) {
@@ -105,7 +106,7 @@ presence.on("UpdateData", () => {
 			}
 
 			if (presenceData.details == null) {
-				presenceData.details = "Viewing a page:"
+				presenceData.details = "Viewing a page:";
 				presenceData.state = document.title;
 			}
 			break;
