@@ -104,12 +104,14 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.includes("/pelicula") ||
 		document.location.pathname.includes("/episodio")
 	) {
-		const titulo = document.querySelector("h1.title > span").textContent,
-			cover = `https://ww3.cuevana.pro${String(document
-				.querySelector("figure.poster > img")
-				.getAttribute("src"))}`;
+
+		let titulo;
+		const cover = `https://ww3.cuevana.pro${String(document
+			.querySelector("figure.poster > img")
+			.getAttribute("src"))}`;
 
 		if (!document.location.pathname.includes("/episodio")) {
+			titulo = document.querySelector("h1.title > span").textContent;
 			presenceData.details = titulo;
 			delete presenceData.state;
 			presenceData.buttons = [
@@ -117,15 +119,14 @@ presence.on("UpdateData", async () => {
 			];
 			presenceData.largeImageKey = cover;
 		} else {
-			presenceData.details = titulo
-				.replace(document.querySelector("h1.Title > span").textContent, "")
-				.replace(/\s+/g, " ")
-				.trim();
+			console.log("1");
+			titulo = document.querySelector("h1.title").textContent;
+			presenceData.details = titulo;
 			delete presenceData.state;
 			presenceData.buttons = [
 				{ label: "Ver Episodio", url: window.location.href },
 			];
-			// presenceData.largeImageKey = cover;
+			presenceData.largeImageKey = cover;
 		}
 
 		if (iFrameVideo) {
