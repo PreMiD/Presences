@@ -11,43 +11,48 @@ presence.on("UpdateData", async () => {
 	};
 
 	switch (
-		document.URL // Change the detail depending on the current URL
+		document.location.pathname // Change the detail depending on the current URL
 	) {
-		case "https://maliki.com/strips/":
+		case "/":
+			presenceData.details = "Regarde la page principale";
+			break;
+		case "/strips/":
 			presenceData.details = "Parcourt les strips";
 			break;
-		case "https://maliki.com/actualites/":
+		case "/actualites/":
 			presenceData.details = "Parcourt les actualités";
 			break;
-		case "https://maliki.com/bonus/":
+		case "/bonus/":
 			presenceData.details = "Parcours les bonus";
 			break;
-		case "https://maliki.com/radio/":
+		case "/radio/":
 			presenceData.details = "Écoute la radio";
 			break;
-		case "https://maliki.com/shop/":
+		case "/shop/":
 			presenceData.details = "Parcours le shop";
 			break;
-		case "https://maliki.com/events/":
+		case "/events/":
 			presenceData.details = "Se renseigne sur les futurs événements";
 			break;
-		case "https://maliki.com/faq/":
+		case "/faq/":
 			presenceData.details = "Lire la foire aux questions";
 			break;
-		default:
-			// If the case "https://maliki.com/strips/" does not match, but there's a part of the url
-			presenceData.details = document.URL.includes("https://maliki.com/strips/")
-				? "Lit un strip"
-				: "Regarde la page principale";
-			presenceData.details = document.URL.includes("https://maliki.com/bonus/")
-				? "Regarde un bonus"
-				: "Regarde la page principale";
+		default: {
+			if (document.location.pathname.includes("/strips/")) {
+				presenceData.details = "Lit le strip :";
+				presenceData.state = document.querySelector(".singleTitle").textContent;
+			}
+			if (document.location.pathname.includes("/bonus/")) {
+				presenceData.details = "Regarde le bonus :";
+				presenceData.state = document.querySelector(".singleTitle").textContent;
+			}
 			if (document.URL.includes("https://malimode.maliki.com/")) {
 				// If the url is not the standard url, then set a special details
 				presenceData.details = "Crée un personnage sur le Malimode";
 				presenceData.largeImageKey = "malimode";
 			}
 			break;
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
