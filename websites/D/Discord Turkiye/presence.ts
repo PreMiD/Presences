@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 		if (privacyMode) presenceData.details = "Davet görüntülüyor";
 		else if (
-			(<HTMLElement>document.querySelector("div.tag > div.name")).textContent
+			document.querySelector<HTMLElement>("div.tag > div.name").textContent
 		) {
 			presenceData.details = "Daveti görüntülüyor:";
 			presenceData.state = (<HTMLElement>(
