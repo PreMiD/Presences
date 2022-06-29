@@ -28,8 +28,6 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.title.split(" | ")[0];
 		if (
 			document.querySelector<HTMLElement>("div.fr-element.fr-view > p")
-				?.textContent &&
-			document.querySelector<HTMLElement>("div.fr-element.fr-view > p")
 				?.textContent !== "\n"
 		) {
 			presenceData.details = "Konuya yorum yazıyor:";
@@ -54,13 +52,11 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLElement>("div.tag > div.name").textContent
 		) {
 			presenceData.details = "Daveti görüntülüyor:";
-			presenceData.state = (<HTMLElement>(
-				document.querySelector("div.tag > div.name")
-			)).textContent;
-			presenceData.largeImageKey = (<HTMLElement>(
-				document.querySelector("div.icon")
-			)).style.backgroundImage
-				.split('url("')[1]
+			presenceData.state =
+				document.querySelector<HTMLElement>("div.tag > div.name").textContent;
+			presenceData.largeImageKey = document
+				.querySelector<HTMLElement>("div.icon")
+				.style.backgroundImage.split('url("')[1]
 				.split('");')[0];
 		}
 	}
@@ -68,19 +64,17 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/araclar/kullanici/") {
 		delete presenceData.smallImageKey;
 		if (privacyMode) presenceData.details = "Kullanıcı görüntülüyor";
-	} else if ((<HTMLElement>document.querySelector("div.tag")).textContent) {
+	} else if (document.querySelector<HTMLElement>("div.tag").textContent) {
 		presenceData.details = "Kullanıcı görüntülüyor:";
 		presenceData.state = `${
-			(<HTMLElement>document.querySelector("div.tag > div.username"))
-				.textContent
+			document.querySelector<HTMLElement>("div.tag > div.username").textContent
 		}${
-			(<HTMLElement>document.querySelector("div.tag > div.discriminator"))
+			document.querySelector<HTMLElement>("div.tag > div.discriminator")
 				.textContent
 		}`;
-		presenceData.largeImageKey = (<HTMLElement>(
-			document.querySelector("div.avatar")
-		)).style.backgroundImage
-			.split('url("')[1]
+		presenceData.largeImageKey = document
+			.querySelector<HTMLElement>("div.avatar")
+			.style.backgroundImage.split('url("')[1]
 			.split('");')[0];
 	}
 
@@ -101,5 +95,5 @@ presence.on("UpdateData", async () => {
 		).textContent;
 	}
 
-	return presence.setActivity(presenceData);
+	presence.setActivity(presenceData);
 });
