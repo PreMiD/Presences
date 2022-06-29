@@ -40,9 +40,9 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 	}
 	if (document.querySelector(".controls").ariaLabel.includes("Paused")) {
-		if (document.location.pathname === "/podcasts") 
+		if (document.location.pathname === "/podcasts")
 			presenceData.details = "Viewing subscriptions";
-		 else if (
+		else if (
 			document.location.pathname.startsWith("/podcasts/") ||
 			document.location.pathname.startsWith("/discover/podcast/")
 		) {
