@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, hostname, href } = document.location,
 		gameName = document.querySelector<HTMLHeadingElement>(
-			"div.game-calls-to-action > div.game-title-container > h2"
+			"div.game-calls-to-action > div.game-title-container > h1"
 		);
 
 	switch (hostname) {
