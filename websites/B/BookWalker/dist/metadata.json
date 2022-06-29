@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "NeroPako",
+		"id": "250864719181643790"
+	},
+	"service": "BookWalker",
+	"altnames": [
+		"Book☆Walker"
+	],
+	"description": {
+		"en": "Shows the manga and light novel you're reading on Discord"
+	},
+	"url": [
+		"bookwalker.jp",
+		"global.bookwalker.jp",
+		"viewer.bookwalker.jp"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/MixQOh3.png",
+	"thumbnail": "https://i.imgur.com/ycicSG2.png",
+	"color": "#0ab4fc",
+	"category": "anime",
+	"tags": [
+		"bookwalker",
+		"manga",
+		"light-novel",
+		"anime",
+		"book",
+		"books",
+		"nsfw"
+	]
+}
