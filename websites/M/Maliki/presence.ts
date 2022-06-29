@@ -12,11 +12,11 @@ let songInfo: songPlayingInformations = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "maliki_1024",
-		startTimestamp: browsingTimestamp,
-		buttons: [{ label: "Voir le site", url: "https://maliki.com/" }],
-	};
-
+			largeImageKey: "maliki_1024",
+			startTimestamp: browsingTimestamp,
+			buttons: [{ label: "Voir le site", url: "https://maliki.com/" }],
+		},
+		privacy: boolean = await presence.getSetting("privacy");
 	switch (
 		document.location.pathname // Change the detail depending on the current URL
 	) {
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Parcours les bonus";
 			break;
 		case "/radio/":
-			if (!songInfo) presenceData.details = "Écoute la radio";
+			if (!songInfo || privacy) presenceData.details = "Écoute la radio";
 			else {
 				presenceData.details = `Écoute ${songInfo.song}`;
 				presenceData.state = `De ${songInfo.artist}`;
@@ -51,15 +51,21 @@ presence.on("UpdateData", async () => {
 		default: {
 			if (document.location.pathname.includes("/strips/")) {
 				// If we are on a strip page, modify the details
-				presenceData.details = "Lit le strip :";
-				presenceData.state = document.querySelector(".singleTitle").textContent;
+				presenceData.details = privacy ? "Lit un strip" : "Lit le strip :";
+				presenceData.state = privacy
+					? ""
+					: document.querySelector(".singleTitle").textContent;
 			}
 			if (document.location.pathname.includes("/bonus/")) {
 				// If we are on a bonus page, modify the details
-				presenceData.details = "Regarde le bonus :";
-				presenceData.state = document.querySelector(".singleTitle").textContent;
+				presenceData.details = privacy
+					? "Regarde un bonus"
+					: "Regarde le bonus :";
+				presenceData.state = privacy
+					? ""
+					: document.querySelector(".singleTitle").textContent;
 			}
-			if (document.URL.includes("https://malimode.maliki.com/")) {
+			if (document.location.hostname === "malimode.maliki.com") {
 				// If the url is not the standard url, then set a special details
 				presenceData.details = "Crée un personnage sur le Malimode";
 				presenceData.largeImageKey = "malimode";
@@ -70,10 +76,12 @@ presence.on("UpdateData", async () => {
 					?.textContent.includes("actualité")
 			) {
 				// If we are on a page about actuality, modify the details
-				presenceData.details = "Lit l'actualité :";
-				presenceData.state = document.querySelector(
-					".singleHeader--title"
-				).textContent;
+				presenceData.details = privacy
+					? "Lit une actualité"
+					: "Lit l'actualité :";
+				presenceData.state = privacy
+					? ""
+					: document.querySelector(".singleHeader--title").textContent;
 			}
 			break;
 		}

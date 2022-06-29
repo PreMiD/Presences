@@ -22,5 +22,13 @@
 	"tags": [
 		"maliki",
 		"dessin"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		}
 	]
 }
