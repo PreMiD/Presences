@@ -12,16 +12,27 @@ let songInfo: songPlayingInformations = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "maliki_1024",
+			largeImageKey:
+				document.location.hostname === "malimode.maliki.com"
+					? "malimode"
+					: "maliki_1024",
 			startTimestamp: browsingTimestamp,
 			buttons: [{ label: "Voir le site", url: "https://maliki.com/" }],
 		},
-		privacy: boolean = await presence.getSetting("privacy");
-	switch (
-		document.location.pathname // Change the detail depending on the current URL
-	) {
+		//* Get options of the presence
+		[privacy, time] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("time"),
+		]);
+	if (!time) delete presenceData.startTimestamp; // delete the startTimestamp if time option desactivated
+
+	//* Change the detail depending on the current URL
+	switch (document.location.pathname) {
 		case "/":
-			presenceData.details = "Regarde la page principale";
+			presenceData.details =
+				document.location.hostname === "malimode.maliki.com"
+					? "Regarde la page principale du malimode"
+					: "Regarde la page principale";
 			break;
 		case "/strips/":
 			presenceData.details = "Parcourt les strips";
@@ -48,6 +59,14 @@ presence.on("UpdateData", async () => {
 		case "/faq/":
 			presenceData.details = "Lire la foire aux questions";
 			break;
+		case "/personnalisation":
+			presenceData.details = "Personnalise son personnage";
+			presenceData.largeImageKey = "malimode";
+			break;
+		case "/partager":
+			presenceData.details = "Partage son personnage";
+			presenceData.largeImageKey = "malimode";
+			break;
 		default: {
 			if (document.location.pathname.includes("/strips/")) {
 				// If we are on a strip page, modify the details
@@ -64,11 +83,6 @@ presence.on("UpdateData", async () => {
 				presenceData.state = privacy
 					? ""
 					: document.querySelector(".singleTitle").textContent;
-			}
-			if (document.location.hostname === "malimode.maliki.com") {
-				// If the url is not the standard url, then set a special details
-				presenceData.details = "Crée un personnage sur le Malimode";
-				presenceData.largeImageKey = "malimode";
 			}
 			if (
 				document

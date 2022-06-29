@@ -29,6 +29,12 @@
 			"title": "Privacy Mode",
 			"icon": "fad fa-user-secret",
 			"value": false
+		},
+		{
+			"id": "time",
+			"title": "Montrer le timestamp",
+			"icon": "fad fa-stopwatch",
+			"value": true
 		}
 	]
 }
