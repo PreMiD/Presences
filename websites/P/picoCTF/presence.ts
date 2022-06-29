@@ -24,14 +24,16 @@ presence.on("UpdateData", async () => {
 				? "Reading about sponsoring picoCTF"
 				: "Reading a research paper";
 		} else if (document.location.pathname === "/get_started.html") {
-			presenceData.details =
+			const viewing =
 				document.querySelectorAll(
 					'ul#competition-tabs li a:not([aria-selected="false"])'
 				)[0].innerHTML === "User Guide"
 					? "Viewing the user guide"
 					: "Viewing the FAQ";
 
-			if (!privacy && presenceData.details === "Viewing the user guide") {
+			presenceData.details = viewing;
+
+			if (!privacy && viewing === "Viewing the user guide") {
 				presenceData.state = Array.from(
 					document.querySelectorAll(
 						'div.active button:not([aria-selected="false"]) span'
