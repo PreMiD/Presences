@@ -22,7 +22,6 @@ presence.on("UpdateData", async () => {
 			)
 			.textContent.split(":")
 			.map(n => Number(n));
-
 		presenceData.smallImageKey = "play";
 		if (time.length === 3) {
 			presenceData.startTimestamp =
@@ -39,8 +38,8 @@ presence.on("UpdateData", async () => {
 		).textContent;
 		presenceData.smallImageKey = "pause";
 		delete presenceData.startTimestamp;
-	} else {
-		presenceData.smallImageKey = "more";
+	}
+	if (document.querySelector(".controls").ariaLabel.includes("Paused")) {
 		if (document.location.pathname === "/podcasts") 
 			presenceData.details = "Viewing subscriptions";
 		 else if (
