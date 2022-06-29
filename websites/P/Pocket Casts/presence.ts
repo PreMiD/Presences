@@ -10,33 +10,40 @@ presence.on("UpdateData", async () => {
 	// const el = document.querySelector(".controls");
 
 	if (document.querySelector(".controls").ariaLabel.includes("Playing")) {
-		presenceData.details = document.querySelector("div.episode > span").textContent;
-		presenceData.state = document.querySelector("div.podcast-title-date > span").textContent;
+		presenceData.details =
+			document.querySelector("div.episode > span").textContent;
+		presenceData.state = document.querySelector(
+			"div.podcast-title-date > span"
+		).textContent;
 
 		const time = document
-			.querySelector(".TimeTextstyled__TimeTextWrapper-sc-1yzkn0m-0.lmVDeu.current-time")
+			.querySelector(
+				".TimeTextstyled__TimeTextWrapper-sc-1yzkn0m-0.lmVDeu.current-time"
+			)
 			.textContent.split(":")
 			.map(n => Number(n));
-		
-			presenceData.smallImageKey = "play";
-			if (time.length === 3) {
-				presenceData.startTimestamp =
-					Date.now() - (time[0] * 3600 + time[1] * 60 + time[2]) * 1000;
-			} else {
-				presenceData.startTimestamp =
-					Date.now() - (time[0] * 60 + time[1]) * 1000;
-			}
-	
+
+		presenceData.smallImageKey = "play";
+		if (time.length === 3) {
+			presenceData.startTimestamp =
+				Date.now() - (time[0] * 3600 + time[1] * 60 + time[2]) * 1000;
+		} else {
+			presenceData.startTimestamp =
+				Date.now() - (time[0] * 60 + time[1]) * 1000;
+		}
 	} else if (document.querySelector(".controls").ariaLabel.includes("Paused")) {
-		presenceData.details = document.querySelector("div.episode > span").textContent;
-		presenceData.state = document.querySelector("div.podcast-title-date > span").textContent;
+		presenceData.details =
+			document.querySelector("div.episode > span").textContent;
+		presenceData.state = document.querySelector(
+			"div.podcast-title-date > span"
+		).textContent;
 		presenceData.smallImageKey = "pause";
 		delete presenceData.startTimestamp;
 	} else {
 		presenceData.smallImageKey = "more";
-		if (document.location.pathname === "/podcasts") {
+		if (document.location.pathname === "/podcasts") 
 			presenceData.details = "Viewing subscriptions";
-		} else if (
+		 else if (
 			document.location.pathname.startsWith("/podcasts/") ||
 			document.location.pathname.startsWith("/discover/podcast/")
 		) {
