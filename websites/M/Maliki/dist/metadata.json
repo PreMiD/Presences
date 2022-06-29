@@ -18,11 +18,11 @@
 	"thumbnail": "https://i.imgur.com/LDOrHM3.jpg",
 	"color": "#f576ab",
 	"category": "other",
-	"iframe": true,
 	"tags": [
 		"maliki",
 		"dessin"
 	],
+	"iframe": true,
 	"settings": [
 		{
 			"id": "privacy",
