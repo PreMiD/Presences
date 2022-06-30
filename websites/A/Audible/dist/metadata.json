@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-	  "name": "Tofuine",
-	  "id": "734631480541708291"
+		"name": "Tofuine",
+		"id": "734631480541708291"
 	},
 	"service": "Audible",
 	"description": {
-	  "en": "Audible is an American online audiobook and podcast service that allows users to purchase and stream audiobooks and other forms of spoken word content.",
-	  "fr": "Audible est un service en ligne d'audio et de podcast qui permet aux utilisateurs de commander et de télécharger des livres audio et d'autres formes de contenu écrit."
+		"en": "Audible is an American online audiobook and podcast service that allows users to purchase and stream audiobooks and other forms of spoken word content.",
+		"fr": "Audible est un service en ligne d'audio et de podcast qui permet aux utilisateurs de commander et de télécharger des livres audio et d'autres formes de contenu écrit."
 	},
 	"url": "www.audible.com",
 	"version": "1.0.0",
@@ -15,4 +15,4 @@
 	"thumbnail": "https://m.media-amazon.com/images/G/01/audibleweb/arya/navigation/audible_logo._V517446980_.svg",
 	"color": "#f7991c",
 	"category": "other"
-  }
+}
