@@ -36,8 +36,6 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.largeImageKey = cover;
 	} else if (document.location.pathname.includes("/webplayer")) {
-		
-		
 		presenceData.details = `Listening to ${document
 			.querySelector("input[name=title]")
 			.getAttribute("value")}`;
