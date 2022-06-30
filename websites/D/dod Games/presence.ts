@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 			for (let i = 0; i < scores.length; i++) {
 				if (scores[i].querySelector(".name").textContent === playerName) {
 					if (
-						(document.querySelector("#drawtools") as HTMLElement).style
+						document.querySelector<HTMLDivElement>("#drawtools").style
 							.display !== "none"
 					) {
 						presenceData.smallImageKey = "molivaki";
@@ -98,18 +98,13 @@ presence.on("UpdateData", async () => {
 				isInGame = true;
 			}
 
-			interface PlayerState {
-				score: string;
-				winner: boolean;
-			}
-
 			const playerClassNames = [
 					"agonia_player1",
 					"agonia_player2",
 					"agonia_player3",
 					"agonia_player4",
 				],
-				state: { [key: string]: PlayerState } = {};
+				state: { [key: string]: AgoniaPlayerState } = {};
 			for (const playerClassName of playerClassNames) {
 				const player = document.querySelector(`#${playerClassName}`);
 				if (player) {
@@ -122,10 +117,11 @@ presence.on("UpdateData", async () => {
 					}
 				}
 			}
-			if (
+
+			const gameOverVisible =
 				document.querySelector("#gameover_content").parentElement.style
-					.display !== "none"
-			) {
+					.display !== "none";
+			if (gameOverVisible) {
 				const gameOverClassNames = [
 					"gameover_user1",
 					"gameover_user2",
@@ -136,8 +132,8 @@ presence.on("UpdateData", async () => {
 					const player = document.querySelector(`#${gameOverClassName}`);
 					if (
 						player &&
-						(player.querySelector(".gameover_userphotowin") as HTMLElement)
-							.style.display !== "none"
+						player.querySelector<HTMLDivElement>(".gameover_userphotowin").style
+							.display !== "none"
 					) {
 						const winnerName = player.getAttribute("shownname");
 						if (winnerName in state) state[winnerName].winner = true;
@@ -149,7 +145,7 @@ presence.on("UpdateData", async () => {
 				const value = state[key];
 				stateString += `${value.winner ? " 🏆 " : ""}${key}: ${value.score} – `;
 			}
-			if (Object.keys(state).length === nPlayers)
+			if (Object.keys(state).length === nPlayers || gameOverVisible)
 				presenceData.state = stateString.substring(0, stateString.length - 3);
 			else {
 				presenceData.state = `${
@@ -169,20 +165,14 @@ presence.on("UpdateData", async () => {
 			break;
 		} else if (url.textContent.includes("game=tichu&room=")) {
 			// Tichu
-
 			if (!isInGame) {
 				timeStarted = Date.now();
 				isInGame = true;
 			}
 
-			interface PlayerState {
-				name: string;
-				bet: string;
-			}
-
 			const teamPlayers: string[] = [],
 				opPlayers: string[] = [],
-				playerState: { [key: string]: PlayerState } = {},
+				playerState: { [key: string]: TichuPlayerState } = {},
 				bot = document.querySelector(
 					"#nickholder_bottom .playerName"
 				).textContent,
@@ -201,17 +191,18 @@ presence.on("UpdateData", async () => {
 
 			for (const pos of ["up", "left", "right"]) {
 				if (!(pos in playerState)) continue;
-				const betElement = document.querySelector(
+				const betElement = document.querySelector<HTMLDivElement>(
 					`#nickholder_${pos} #tichugrand`
-				) as HTMLElement;
+				);
 				if (betElement.style.display !== "none")
 					playerState[pos].bet = betElement.className;
 			}
 
-			let betElement = document.querySelector("#btnTichuToggle") as HTMLElement;
+			let betElement =
+				document.querySelector<HTMLDivElement>("#btnTichuToggle");
 			if (betElement.style.display !== "none") playerState.bot.bet = "tichu";
 
-			betElement = document.querySelector("#btnGrandToggle") as HTMLElement;
+			betElement = document.querySelector<HTMLDivElement>("#btnGrandToggle");
 			if (betElement.style.display !== "none") playerState.bot.bet = "grand";
 
 			for (const pos in playerState) {
@@ -251,3 +242,13 @@ presence.on("UpdateData", async () => {
 	if (isInGame) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
+
+interface AgoniaPlayerState {
+	score: string;
+	winner: boolean;
+}
+
+interface TichuPlayerState {
+	name: string;
+	bet: string;
+}
