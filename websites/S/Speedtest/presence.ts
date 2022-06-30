@@ -148,19 +148,21 @@ presence.on("UpdateData", async () => {
 					).textContent
 				}`,
 				ping =
-					document.querySelector(".result-item-ping .result-data").textContent +
+					document.querySelector(".result-item-ping .result-data")
+						?.textContent +
 					document.querySelector(".result-item-ping .result-data-unit")
-						.textContent,
+						?.textContent,
 				download =
 					document.querySelector(".result-item-download .result-data")
-						.textContent +
+						?.textContent +
 					document.querySelector(".result-item-download .result-data-unit")
-						.textContent,
+						?.textContent,
 				upload = `${
-					document.querySelector(".result-item-upload .result-data").textContent
+					document.querySelector(".result-item-upload .result-data")
+						?.textContent
 				}${
 					document.querySelector(".result-item-upload .result-data-unit")
-						.textContent
+						?.textContent
 				}`;
 			let isp = document.querySelector(
 				".result-item-icon.result-item-isp .result-label"
