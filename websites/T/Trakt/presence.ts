@@ -96,10 +96,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Browsing ${username}'s lists`;
 		else if (pathname.includes("/comments"))
 			presenceData.details = `Browsing ${username}'s comments`;
-		else if (
-			pathname.includes("/network") ||
-			pathname.includes("/network/friends")
-		)
+		else if (pathname.includes("/network"))
 			presenceData.details = `Browsing ${username}'s friends`;
 		else presenceData.details = `Browsing ${username}'s profile`;
 	} else if (pathname.includes("/shows/")) {
