@@ -82,6 +82,11 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"div.container.bugfix > div:nth-child(2)"
 		).textContent;
+	} else if (document.location.pathname.includes("/stats")) {
+		presenceData.details = "Viewing stats";
+		presenceData.state = document.querySelector(
+			"div.container.bugfix > p"
+		).textContent;
 	} else if (document.location.pathname.includes("/anki-import/overview")) {
 		presenceData.details = "Importing from Anki";
 		presenceData.state = `Total: ${
@@ -117,8 +122,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Creating a deck from top vocabulary";
 	else if (document.location.pathname === "/")
 		presenceData.details = "Viewing home page";
-	else if (document.location.pathname.includes("/stats"))
-		presenceData.details = "Viewing stats";
 	else if (document.location.pathname.includes("/quiz"))
 		presenceData.details = "Taking quizzes";
 	else if (document.location.pathname.includes("/leaderboard"))
