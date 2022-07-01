@@ -67,7 +67,11 @@ presence.on("UpdateData", async () => {
 		presenceData.state = decodeURI(document.location.pathname.split("/")[2]);
 	} else if (deckList.some(deck => document.location.pathname.includes(deck))) {
 		presenceData.details = "Viewing pre-built deck:";
-		presenceData.state = document.querySelector("h3").textContent;
+		if (document.location.pathname.includes("/vocabulary-list")) {
+			presenceData.state = document
+				.querySelector("h4")
+				.textContent.substring(17);
+		} else presenceData.state = document.querySelector("h3").textContent;
 	} else if (document.location.pathname.includes("/anki-import/deck")) {
 		presenceData.details = "Viewing an imported deck:";
 		presenceData.state = document
