@@ -65,6 +65,12 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/kanji/")) {
 		presenceData.details = "Viewing a kanji:";
 		presenceData.state = decodeURI(document.location.pathname.split("/")[2]);
+	} else if (document.location.pathname.includes("/conjugate")) {
+		presenceData.details = "Viewing conjugations:";
+		presenceData.state = decodeURI(document.location.pathname.split("/")[3]);
+	} else if (document.location.pathname.includes("/conjugation")) {
+		presenceData.details = "Reading about conjugation:";
+		presenceData.state = decodeURI(document.location.pathname.split("/")[3]);
 	} else if (deckList.some(deck => document.location.pathname.includes(deck))) {
 		presenceData.details = "Viewing pre-built deck:";
 		if (document.location.pathname.includes("/vocabulary-list")) {
