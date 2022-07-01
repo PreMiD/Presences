@@ -91,7 +91,8 @@
 		"unicorn/throw-new-error": "error",
 		"unicorn/no-unreadable-array-destructuring": "error",
 		"unicorn/prefer-query-selector": "error",
-		"unicorn/prefer-dom-node-text-content": "error"
+		"unicorn/prefer-dom-node-text-content": "error",
+		"unicorn/prefer-logical-operator-over-ternary": "error"
 	},
 	"overrides": [
 		{
