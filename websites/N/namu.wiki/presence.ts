@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 	 * Setting Details & State
 	 *
 	 */
-	presenceData.details = !details ? "Unknown Action" : details;
+	presenceData.details = details ?? "Unknown Action";
 
 	let page: RegExpExecArray | string = validateContributeUrl.exec(path);
 	/* View Contribute */

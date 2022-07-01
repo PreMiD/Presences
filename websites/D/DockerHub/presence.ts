@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 
 			page = params.get(searchItems.page);
 
-			presenceData.details = `On image ${tab ? tab : ""} page${
+			presenceData.details = `On image ${tab ?? ""} page${
 				page ? ` ${page}` : ""
 			}`;
 			presenceData.state = `${owner}/${name}`;
@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
 				arch = (selector && selector.textContent) || null;
 
 				presenceData.details = "On image history";
-				presenceData.state = `${owner}/${name}:${match[3]} ${arch ? arch : ""}`;
+				presenceData.state = `${owner}/${name}:${match[3]} ${arch ?? ""}`;
 			}
 		} else if (
 			document.location.pathname.match(/^\/u\/([^/]+)(?:\/([^/]+))?/)

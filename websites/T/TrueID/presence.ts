@@ -75,8 +75,8 @@ presence.on("UpdateData", async () => {
 					} ${selector}`;
 					break;
 				case path.pathname.includes("series"):
-					(ep = title.match(/\d+/g)),
-						(result = title.replace(`EP.${ep} | `, ""));
+					ep = title.match(/\d+/g);
+					result = title.replace(`EP.${ep} | `, "");
 					result_ = result.split("| ");
 					presenceData.details = `${lang === "th-th" ? "ซีรีส์" : "Series"} ${
 						ep
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 							  }`
 							: ""
 					}`;
-					presenceData.state = `${result_[1] ? result_[1] : result}`;
+					presenceData.state = `${result_[1] ?? result}`;
 					if (buttons) {
 						presenceData.buttons = [
 							{
