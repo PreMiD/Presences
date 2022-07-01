@@ -123,6 +123,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing settings page";
 	else if (document.location.pathname.includes("/contact-us"))
 		presenceData.details = "Viewing contact page";
+	else if (document.location.pathname.includes("/labs"))
+		presenceData.details = "Viewing labs page";
 	else if (document.location.pathname.includes("/anime-difficulty-list"))
 		presenceData.details = "Viewing anime difficulty list";
 	else if (document.location.pathname.includes("/live-action-difficulty-list"))
