@@ -9,7 +9,7 @@
 		"inc": "tsc -p ./util/configs/tsconfig.massVer.json && node ./util/tools/massVer.js",
 		"bumpChanged": "tsc -p ./util/configs/tsconfig.bumpChanged.json && node ./util/tools/bumpChanged",
 		"format": "yarn ms && yarn lint",
-		"se": "yarn format && yarn bumpChanged",
+		"se": "yarn format && yarn bumpChanged uncommitted",
 		"sv": "tsc -p ./util/configs/tsconfig.auto.schemaValidator.json && node ./util/tools/auto/schemaValidator.js",
 		"pu": "tsc -p ./util/configs/tsconfig.auto.presenceUpdater.json && node ./util/tools/auto/presenceUpdater.js",
 		"ms": "tsc -p ./util/configs/tsconfig.metadataSorter.json && node ./util/tools/metadataSorter.js",

@@ -40,14 +40,15 @@ function validateArg(arg: string): ValidEventName {
  * @returns {Promise<string[]>} Array of unique paths to the changed folders
  */
 export async function getChangedFolders() {
-	const eventName = validateArg(process.argv[2]) ?? "pull_request",
+	const commands: Record<ValidEventName, string> = {
+			push: "HEAD HEAD^",
+			pull_request: `HEAD origin/${process.argv[3] ?? "main"}`,
+			uncommitted: "HEAD --",
+		},
+		eventName = validateArg(process.argv[2]) ?? "pull_request",
 		changedPresenceFolders = (
 			await execShellCommand(
-				`git --no-pager diff --name-only ${
-					eventName === "push"
-						? "HEAD HEAD^"
-						: `HEAD origin/${process.argv[3] ?? "main"}`
-				}`
+				`git --no-pager diff --name-only ${commands[eventName]}`
 			)
 		)
 			.split("\n")
@@ -91,7 +92,7 @@ export const readFile = (path: string): string =>
 			encoding: "utf8",
 		});
 
-export type ValidEventName = "push" | "pull_request";
+export type ValidEventName = "push" | "pull_request" | "uncommitted";
 
 export interface Metadata extends Record<string, any> {
 	$schema: `https://schemas.premid.app/metadata/${number}.${number}`;
