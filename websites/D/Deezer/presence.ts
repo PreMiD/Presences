@@ -84,9 +84,9 @@ presence.on("UpdateData", async () => {
 		if (
 			document
 				.querySelector(
-					"#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > g > path"
+					"#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > path"
 				)
-				.outerHTML.match('<path d="m5 2 18 10L5 22V2z"></path>')
+				.outerHTML.match('<path d="m3 1 12 7-12 7V1z"></path>')
 		)
 			paused = true;
 
