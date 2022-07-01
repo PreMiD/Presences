@@ -30,7 +30,7 @@ export function createAnnotation(params: CreateAnnotationParams): string {
 
 function validateArg(arg: string): ValidEventName {
 	if (!arg) return;
-	if (!["push", "pull_request"].includes(arg))
+	if (!["push", "pull_request", "uncommitted"].includes(arg))
 		throw new Error(`SV was not called with a valid event name: ${arg}`);
 	return arg as ValidEventName;
 }
