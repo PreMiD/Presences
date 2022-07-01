@@ -55,6 +55,10 @@ presence.on("UpdateData", async () => {
 				new URLSearchParams(document.location.search).get("q")
 			);
 		}
+	} else if (document.location.pathname.includes("/prebuilt_decks")) {
+		presenceData.details = "Finding pre-built deck";
+		presenceData.state =
+			new URLSearchParams(document.location.search).get("q") || "";
 	} else if (document.location.pathname.includes("/vocabulary/")) {
 		presenceData.details = "Viewing a word:";
 		presenceData.state = decodeURI(document.location.pathname.split("/")[3]);
@@ -107,8 +111,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Creating a deck from text";
 	else if (document.location.pathname.includes("/new-deck-from-top-vocabulary"))
 		presenceData.details = "Creating a deck from top vocabulary";
-	else if (document.location.pathname.includes("/prebuilt_decks"))
-		presenceData.details = "Finding pre-built deck";
 	else if (document.location.pathname === "/")
 		presenceData.details = "Viewing home page";
 	else if (document.location.pathname.includes("/stats"))
