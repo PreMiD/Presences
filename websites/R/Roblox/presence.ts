@@ -428,7 +428,7 @@ presence.on("UpdateData", async () => {
 			} else {
 				for (const [i, v] of Object.entries(pages)) {
 					if (pathname.includes(i)) {
-						presenceData.details = v.details ? v.details : "Current Page: ";
+						presenceData.details = v.details ?? "Current Page: ";
 						if (v.state) presenceData.state = v.state;
 						else delete presenceData.state;
 					}
@@ -609,7 +609,7 @@ presence.on("UpdateData", async () => {
 					const req = await fetch(
 						`https://users.roblox.com/v1/users/${Id}`
 					).then(response => response.json());
-					talentUserData = [Id, req.name ? req.name : talentUserData[1]];
+					talentUserData = [Id, req.name ?? talentUserData[1]];
 				}
 				if (!talentUserData[1]) presenceData.state = "Browsing Profile";
 				else presenceData.state = `Looking at ${talentUserData[1]}'s Profile`;
