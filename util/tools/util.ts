@@ -92,6 +92,15 @@ export const readFile = (path: string): string =>
 			encoding: "utf8",
 		});
 
+export function isValidJSON(text: string): boolean {
+	try {
+		JSON.parse(text);
+		return true;
+	} catch {
+		return false;
+	}
+}
+
 export type ValidEventName = "push" | "pull_request" | "uncommitted";
 
 export interface Metadata extends Record<string, any> {
