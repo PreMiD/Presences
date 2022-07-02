@@ -5,7 +5,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "1024dctr",
 			details: "Geziniyor",
-			startTimestamp,
+			startTimestamp
 		},
 		{ pathname } = document.location,
 		privacyMode = await presence.getSetting("privacy_mode").catch(() => false);
@@ -20,45 +20,89 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "https://i.hizliresim.com/385dt7x.png";
 	}
 
-	if (pathname === "/") presenceData.details = "Anasayfayı görüntülüyor";
-	else if (pathname.includes("/hesabim"))
-		presenceData.details = "Kişisel detaylarını görüntülüyor";
-	else if (pathname.includes("/konular/")) {
-		presenceData.details = "Konuyu görüntülüyor:";
-		presenceData.state = document.title.split(" | ")[0];
-		if (
-			document.querySelector<HTMLElement>("div.fr-element.fr-view > p")
-				?.textContent !== "\n"
-		) {
-			presenceData.details = "Konuya yorum yazıyor:";
+	switch (pathname) {
+		case "/":
+			presenceData.details = "Anasayfayı görüntülüyor";
+			break;
+		case "/hesabim":
+			presenceData.details = "Kişisel detaylarını görüntülüyor";
+			break;
+		case "/kullanicilar/":
+			presenceData.details = "Kullanıcıları görüntülüyor";
+			break;
+		case "/araclar/":
+			presenceData.details = "Araçları görüntülüyor";
+			delete presenceData.smallImageKey;
+			break;
+
+		case "/araclar/davet/":
+			delete presenceData.smallImageKey;
+			if (privacyMode) presenceData.details = "Davet görüntülüyor";
+			else if (
+				document.querySelector<HTMLElement>("div.tag > div.name").textContent
+			) {
+				presenceData.details = "Daveti görüntülüyor:";
+				presenceData.state =
+					document.querySelector<HTMLElement>("div.tag > div.name").textContent;
+				presenceData.largeImageKey = document
+					.querySelector<HTMLElement>("div.icon")
+					.style.backgroundImage.split('url("')[1]
+					.split('");')[0];
+			}
+			break;
+		case "/konular/":
+			presenceData.details = "Konuyu görüntülüyor:";
 			presenceData.state = document.title.split(" | ")[0];
-		}
-	} else if (pathname.includes("/kullanicilar/"))
-		presenceData.details = "Kullanıcıları görüntülüyor";
-	else if (document.querySelector("span.username > span")) {
+			if (
+				document.querySelector<HTMLElement>("div.fr-element.fr-view > p")
+					?.textContent !== "\n"
+			) {
+				presenceData.details = "Konuya yorum yazıyor:";
+				presenceData.state = document.title.split(" | ")[0];
+			}
+			break;
+		case "/araclar/kullanici/":
+			delete presenceData.smallImageKey;
+			if (privacyMode) presenceData.details = "Kullanıcı görüntülüyor";
+			else if (document.querySelector<HTMLElement>("div.tag").textContent) {
+				presenceData.details = "Kullanıcı görüntülüyor:";
+				presenceData.state = `${
+					document.querySelector<HTMLElement>("div.tag > div.username")
+						.textContent
+				}${
+					document.querySelector<HTMLElement>("div.tag > div.discriminator")
+						.textContent
+				}`;
+				presenceData.largeImageKey = document
+					.querySelector<HTMLElement>("div.avatar")
+					.style.backgroundImage.split('url("')[1]
+					.split('");')[0];
+			}
+			break;
+		case "/konusmalar/":
+			presenceData.details = "Konuşmalarını görüntülüyor";
+			break;
+		case "/tags/":
+			presenceData.details = "Etiketi görüntülüyor:";
+			presenceData.state = document.title.split(" | ")[0];
+			break;
+		case "/tags":
+			presenceData.details = "Etiketleri görüntülüyor";
+			break;
+		case "/post-thread":
+			presenceData.details = "Kategoride konu açıyor:";
+			presenceData.state = document.querySelector(
+				'[itemprop="itemListElement"]:last-child span[itemprop="name"]'
+			).textContent;
+			break;
+	}
+
+	if (document.querySelector("span.username > span")) {
 		presenceData.details = "Kullanıcıyı görüntülüyor:";
 		presenceData.state = document.title.split(" | ")[0];
-	} else if (pathname === "/araclar/") {
-		presenceData.details = "Araçları görüntülüyor";
-		delete presenceData.smallImageKey;
-	} else if (pathname === "/araclar/davet/") {
-		delete presenceData.smallImageKey;
-		if (privacyMode) presenceData.details = "Davet görüntülüyor";
-		else if (
-			document.querySelector<HTMLElement>("div.tag > div.name").textContent
-		) {
-			presenceData.details = "Daveti görüntülüyor:";
-			presenceData.state =
-				document.querySelector<HTMLElement>("div.tag > div.name").textContent;
-			presenceData.largeImageKey = document
-				.querySelector<HTMLElement>("div.icon")
-				.style.backgroundImage.split('url("')[1]
-				.split('");')[0];
-		}
-	} else if (pathname === "/araclar/kullanici/") {
-		delete presenceData.smallImageKey;
-		if (privacyMode) presenceData.details = "Kullanıcı görüntülüyor";
-	} else if (document.querySelector<HTMLElement>("div.tag").textContent) {
+	}
+
+	if (document.querySelector<HTMLElement>("div.tag").textContent) {
 		presenceData.details = "Kullanıcı görüntülüyor:";
 		presenceData.state = `${
 			document.querySelector<HTMLElement>("div.tag > div.username").textContent
@@ -70,18 +114,6 @@ presence.on("UpdateData", async () => {
 			.querySelector<HTMLElement>("div.avatar")
 			.style.backgroundImage.split('url("')[1]
 			.split('");')[0];
-	} else if (pathname === "/konusmalar/")
-		presenceData.details = "Konuşmalarını görüntülüyor";
-	else if (pathname.includes("/tags/")) {
-		presenceData.details = "Etiketi görüntülüyor:";
-		presenceData.state = document.title.split(" | ")[0];
-	} else if (pathname === "/tags")
-		presenceData.details = "Etiketleri görüntülüyor";
-	else if (pathname.includes("/post-thread")) {
-		presenceData.details = "Kategoride konu açıyor:";
-		presenceData.state = document.querySelector(
-			'[itemprop="itemListElement"]:last-child span[itemprop="name"]'
-		).textContent;
 	}
 
 	presence.setActivity(presenceData);
