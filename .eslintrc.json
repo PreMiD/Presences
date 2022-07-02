@@ -62,7 +62,7 @@
 		"arrow-body-style": "off",
 		"prefer-arrow-callback": "off",
 		"no-one-time-vars/no-one-time-vars": [
-			2,
+			"warn",
 			{
 				"ignoredVariables": ["browsingTimestamp"],
 				"ignoreObjectDestructuring": true
