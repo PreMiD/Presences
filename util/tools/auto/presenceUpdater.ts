@@ -41,7 +41,7 @@ const writeJS = (path: string, code: string): void =>
 				emitResult.diagnostics
 			);
 
-		allDiagnostics.forEach(diagnostic => {
+		for (const diagnostic of allDiagnostics) {
 			if (diagnostic.file) {
 				const { line, character } =
 						diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!),
@@ -53,7 +53,7 @@ const writeJS = (path: string, code: string): void =>
 				);
 			} else
 				console.log(flattenDiagnosticMessageText(diagnostic.messageText, "\n"));
-		});
+		}
 
 		if (emitResult.emitSkipped) appCode = 1;
 	},
@@ -163,7 +163,7 @@ const writeJS = (path: string, code: string): void =>
 				.filter(dbData =>
 					presences.some(
 						([metadata]) =>
-							dbData.name === metadata.service &&
+							metadata.service === dbData.name &&
 							metadata.version !== dbData.metadata.version
 					)
 				)
@@ -268,10 +268,12 @@ const writeJS = (path: string, code: string): void =>
 
 		try {
 			const newPresenceData = compiledPresences.filter(dbData =>
-					newPresences.some(([metadata]) => dbData.name === metadata.service)
+					newPresences.some(([metadata]) => metadata.service === dbData.name)
 				),
-				updatedPresenceData = compiledPresences.filter(e =>
-					outdatedPresences.some(([metadata]) => e.name === metadata.service)
+				updatedPresenceData = compiledPresences.filter(dbPresencdbPresence =>
+					outdatedPresences.some(
+						([metadata]) => metadata.service === dbPresencdbPresence.name
+					)
 				);
 
 			let newPresenceResult: Promise<InsertManyResult<DBdata>>,
