@@ -345,29 +345,24 @@ presence.on("UpdateData", async () => {
 
 		//Game
 	} else if (document.location.href.includes("wolvesville.com")) {
-		const root = document.querySelector("#root");
-		let status: HTMLDivElement;
-
-		//Get player status
-		if (
-			document.querySelector(
-				"div.css-1dbjc4n.r-18u37iz > div.css-1dbjc4n.r-173mn98.r-19u6a5r.r-12zb1j4.r-1inuy60"
-			) ||
-			(document.querySelector(
-				"div.css-1dbjc4n.r-1awozwy.r-1p0dtai.r-1777fci.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
-			) &&
-				document.querySelector(
-					"div.css-1dbjc4n.r-1awozwy.r-knv0ih.r-633pao.r-417010 > div.css-1dbjc4n.r-1awozwy.r-lrvibr.r-13qz1uu"
-				))
-		) {
-			status =
+		const root = document.querySelector("#root"),
+			status = //Get player status
 				document.querySelector(
 					"div.css-1dbjc4n.r-18u37iz > div.css-1dbjc4n.r-173mn98.r-19u6a5r.r-12zb1j4.r-1inuy60"
 				) ||
-				document.querySelector(
-					"div.css-1dbjc4n.r-13awgt0.r-eqz5dr.r-1x0uki6.r-xd6kpl.r-1ss6j8a.r-1qortcd > div > div.css-1dbjc4n.r-1pz39u2.r-13awgt0.r-18u37iz > div.css-1dbjc4n"
-				);
-		}
+				(document.querySelector(
+					"div.css-1dbjc4n.r-1awozwy.r-1p0dtai.r-1777fci.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
+				) &&
+					document.querySelector(
+						"div.css-1dbjc4n.r-1awozwy.r-knv0ih.r-633pao.r-417010 > div.css-1dbjc4n.r-1awozwy.r-lrvibr.r-13qz1uu"
+					))
+					? document.querySelector(
+							"div.css-1dbjc4n.r-18u37iz > div.css-1dbjc4n.r-173mn98.r-19u6a5r.r-12zb1j4.r-1inuy60"
+					  ) ??
+					  document.querySelector(
+							"div.css-1dbjc4n.r-13awgt0.r-eqz5dr.r-1x0uki6.r-xd6kpl.r-1ss6j8a.r-1qortcd > div > div.css-1dbjc4n.r-1pz39u2.r-13awgt0.r-18u37iz > div.css-1dbjc4n"
+					  )
+					: null;
 
 		if (status?.querySelector("div > div").textContent === "")
 			root.setAttribute("premid-status", "lets_play");
