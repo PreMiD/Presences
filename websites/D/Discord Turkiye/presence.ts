@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/") presenceData.details = "Anasayfayı görüntülüyor";
 	else if (pathname.includes("/hesabim"))
 		presenceData.details = "Kişisel detaylarını görüntülüyor";
-	if (pathname.includes("/konular/")) {
+	else if (pathname.includes("/konular/")) {
 		presenceData.details = "Konuyu görüntülüyor:";
 		presenceData.state = document.title.split(" | ")[0];
 		if (
@@ -33,19 +33,15 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Konuya yorum yazıyor:";
 			presenceData.state = document.title.split(" | ")[0];
 		}
-	}
-	if (pathname.includes("/kullanicilar/"))
+	} else if (pathname.includes("/kullanicilar/"))
 		presenceData.details = "Kullanıcıları görüntülüyor";
-	if (document.querySelector("span.username > span")) {
+	else if (document.querySelector("span.username > span")) {
 		presenceData.details = "Kullanıcıyı görüntülüyor:";
 		presenceData.state = document.title.split(" | ")[0];
-	}
-	if (pathname === "/araclar/") {
+	} else if (pathname === "/araclar/") {
 		presenceData.details = "Araçları görüntülüyor";
 		delete presenceData.smallImageKey;
-	}
-
-	if (pathname === "/araclar/davet/") {
+	} else if (pathname === "/araclar/davet/") {
 		delete presenceData.smallImageKey;
 		if (privacyMode) presenceData.details = "Davet görüntülüyor";
 		else if (
@@ -59,9 +55,7 @@ presence.on("UpdateData", async () => {
 				.style.backgroundImage.split('url("')[1]
 				.split('");')[0];
 		}
-	}
-
-	if (pathname === "/araclar/kullanici/") {
+	} else if (pathname === "/araclar/kullanici/") {
 		delete presenceData.smallImageKey;
 		if (privacyMode) presenceData.details = "Kullanıcı görüntülüyor";
 	} else if (document.querySelector<HTMLElement>("div.tag").textContent) {
@@ -76,19 +70,14 @@ presence.on("UpdateData", async () => {
 			.querySelector<HTMLElement>("div.avatar")
 			.style.backgroundImage.split('url("')[1]
 			.split('");')[0];
-	}
-
-	if (pathname === "/konusmalar/")
+	} else if (pathname === "/konusmalar/")
 		presenceData.details = "Konuşmalarını görüntülüyor";
-
-	if (pathname.includes("/tags/")) {
+	else if (pathname.includes("/tags/")) {
 		presenceData.details = "Etiketi görüntülüyor:";
 		presenceData.state = document.title.split(" | ")[0];
-	}
-
-	if (pathname === "/tags") presenceData.details = "Etiketleri görüntülüyor";
-
-	if (pathname.includes("/post-thread")) {
+	} else if (pathname === "/tags")
+		presenceData.details = "Etiketleri görüntülüyor";
+	else if (pathname.includes("/post-thread")) {
 		presenceData.details = "Kategoride konu açıyor:";
 		presenceData.state = document.querySelector(
 			'[itemprop="itemListElement"]:last-child span[itemprop="name"]'
