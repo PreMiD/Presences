@@ -270,9 +270,9 @@ const writeJS = (path: string, code: string): void =>
 			const newPresenceData = compiledPresences.filter(dbData =>
 					newPresences.some(([metadata]) => metadata.service === dbData.name)
 				),
-				updatedPresenceData = compiledPresences.filter(dbPresencdbPresence =>
+				updatedPresenceData = compiledPresences.filter(dbPresence =>
 					outdatedPresences.some(
-						([metadata]) => metadata.service === dbPresencdbPresence.name
+						([metadata]) => metadata.service === dbPresence.name
 					)
 				);
 
