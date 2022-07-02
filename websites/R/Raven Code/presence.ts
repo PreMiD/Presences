@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			details: "Geziniyor",
-			startTimestamp,
+			startTimestamp
 		},
 		{ pathname, search } = document.location,
 		searchParams = new URLSearchParams(search);
