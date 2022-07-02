@@ -14,31 +14,11 @@ presence.on("UpdateData", async () => {
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: "hareshi",
+			details: "หน้าแรก",
 			startTimestamp: browsingTimestamp,
 		},
-		{ host, hostname, href, search } = document.location;
-	if (host.includes("hareshi.net")) {
-		switch (pathArray[3]) {
-			case "browse":
-				presenceData.details = "เรียกดู";
-				if (pathArray[4] === "anime") {
-					presenceData.state =
-						document.querySelector("#anipop")?.textContent ?? "ไม่พบข้อมูล";
-				} else {
-					presenceData.state =
-						document.querySelector(
-							"#__layout > div > div > div > div.container > h1"
-						)?.textContent ?? "ไม่พบข้อมูล";
-				}
-				break;
-			case "calendar":
-				presenceData.details = "ตารางออกอากาศ";
-				break;
-			default:
-				presenceData.details = "หน้าแรก";
-				break;
-		}
-	} else if (hostname === "forum.hareshi.net") {
+		{ hostname, href, search } = document.location;
+	if (hostname === "forum.hareshi.net") {
 		switch (pathArray[3]) {
 			case "forums":
 				page = "ฟอรั่ม";
@@ -153,6 +133,24 @@ presence.on("UpdateData", async () => {
 					url: href.replace(/#\d+/, ""),
 				},
 			];
+		}
+	} else {
+		switch (pathArray[3]) {
+			case "browse":
+				presenceData.details = "เรียกดู";
+				if (pathArray[4] === "anime") {
+					presenceData.state =
+						document.querySelector("#anipop")?.textContent ?? "ไม่พบข้อมูล";
+				} else {
+					presenceData.state =
+						document.querySelector(
+							"#__layout > div > div > div > div.container > h1"
+						)?.textContent ?? "ไม่พบข้อมูล";
+				}
+				break;
+			case "calendar":
+				presenceData.details = "ตารางออกอากาศ";
+				break;
 		}
 	}
 	if (!timestamps) {
