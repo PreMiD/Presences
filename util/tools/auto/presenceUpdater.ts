@@ -182,16 +182,6 @@ const writeJS = (path: string, code: string): void =>
 		const compiledPresences = (
 			await Promise.all(
 				dbDiff.map(async ([metadata, path]) => {
-					if (!isValidJSON(`${path}dist/metadata.json`)) {
-						console.error(
-							red(
-								`Error. Folder ${path} does not include a valid metadata file, skipping...`
-							)
-						);
-						exitCode = 1;
-						return null;
-					}
-
 					const sources = glob(`${path}*.ts`);
 
 					appCode = 0;
