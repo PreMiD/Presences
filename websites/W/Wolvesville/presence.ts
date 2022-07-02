@@ -471,26 +471,80 @@ presence.on("UpdateData", async () => {
 			if (!privacyMode) {
 				if (
 					document.querySelector(
-						"div.css-1dbjc4n.r-kdyh1x.r-eqz5dr.r-1pi2tsx.r-a2tzq0.r-1ybube5"
+						"div.css-1dbjc4n.r-1p0dtai.r-qdtdgp.r-u8s1d.r-1ro7rbe.r-ipm5af > div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-u8s1d.r-ipm5af > div.css-1dbjc4n.r-13awgt0 > div.css-1dbjc4n.r-13awgt0.r-wk8lta > div.css-1dbjc4n.r-led734.r-1p0dtai.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
 					)
 				)
-					presenceData.state = "Inventory";
-
-				if (
+					presenceData.state = "Clan chat";
+				else if (
 					document.querySelector(
-						"div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-1w6e6rj.r-1777fci.r-1guathk"
+						"div.css-1dbjc4n.r-1p0dtai.r-qdtdgp.r-u8s1d.r-1ro7rbe.r-ipm5af > div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-u8s1d.r-ipm5af > div.css-1dbjc4n.r-1pi2tsx.r-13qz1uu > div.css-1dbjc4n.r-led734.r-1p0dtai.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
 					)
-				)
-					presenceData.state = "Shop";
-
-				if (
+				) {
+					if (!privacyChat) {
+						presenceData.state = `Chatting with ${
+							document.querySelector(
+								"div.css-1dbjc4n.r-19u6a5r > div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-f1odvy > div.css-901oao.r-jwli3a.r-1x35g6.r-vw2c0b"
+							)?.textContent
+						}`;
+					} else presenceData.state = "Chatting with a friend";
+				} else if (document.querySelector("iframe[title='Mentor Chat']"))
+					presenceData.state = "Mentor chat";
+				else if (
 					document.querySelector(
-						"div.css-1dbjc4n.r-8o21a9.r-12vffkv.r-u8s1d.r-13qz1uu.r-1g40b8q"
+						"div.css-1dbjc4n.r-150rngu.r-1niwhzg.r-13awgt0.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-1pi2tsx.r-1lxl8vk.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
 					)
 				)
-					presenceData.state = "Opening loot boxes";
-
-				if (
+					presenceData.state = "Settings";
+				else if (
+					document.querySelector(
+						"div.css-1dbjc4n.r-1kihuf0.r-1mlwlqe.r-1d2f490.r-1udh08x.r-zchlnj > div.css-1dbjc4n.r-1niwhzg.r-vvn4in.r-u6sd8q.r-ehq7j7.r-1p0dtai.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-13qz1uu.r-1wyyakw"
+					)
+				)
+					presenceData.state = "Wheel of fortune";
+				else if (
+					document.querySelector("div.css-1dbjc4n.r-13awgt0.r-zd98yo.r-13qz1uu")
+				) {
+					//check if viewing their clan or another one
+					if (
+						document.querySelector(
+							"div.css-1dbjc4n.r-1xfd6ze.r-13awgt0.r-1pi2tsx.r-1udh08x"
+						)
+					) {
+						//viewing a clan
+						if (
+							document.querySelector(
+								"div.css-901oao.css-vcwn7f.r-1i10wst.r-1kfrs79"
+							)
+						) {
+							presenceData.state = `Viewing clan: ${
+								document.querySelector(
+									"div.css-901oao.css-vcwn7f.r-1i10wst.r-1kfrs79"
+								).textContent
+							}`;
+							//searching for a clan
+						} else if (
+							document
+								.querySelector(
+									"div.css-1dbjc4n.r-cdmcib.r-13awgt0.r-88pszg.r-1uu6nss > input"
+								)
+								.getAttribute("value")
+						) {
+							presenceData.state = "Searching for clans";
+						} else presenceData.state = "Browsing clans";
+					} else {
+						presenceData.state = `Viewing their clan: ${
+							document.querySelector(
+								"div.css-901oao.css-vcwn7f.r-1i10wst.r-1kfrs79"
+							)?.textContent
+						}`;
+					}
+				} else if (
+					document.querySelector(
+						"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-11yh6sk.r-1rnoaur.r-2eszeu.r-1sncvnh > div.css-1dbjc4n > div.css-1dbjc4n > div.css-1dbjc4n.r-13qz1uu > div.css-1dbjc4n.r-z2wwpe.r-nsbfu8.r-13qz1uu > div.css-1dbjc4n.r-1awozwy.r-13awgt0.r-18u37iz.r-1777fci"
+					)
+				)
+					presenceData.state = "Upgrading a role card";
+				else if (
 					document.querySelector(
 						"div.css-1dbjc4n.r-1kihuf0.r-z2wwpe.r-13awgt0.r-1ifxtd0.r-sb58tz.r-13qz1uu > div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-1777fci"
 					)
@@ -520,95 +574,24 @@ presence.on("UpdateData", async () => {
 							}
 						}
 					}
-				}
-
-				if (
+				} else if (
 					document.querySelector(
-						"div.css-1dbjc4n.r-150rngu.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-11yh6sk.r-1rnoaur.r-2eszeu.r-1sncvnh > div.css-1dbjc4n > div.css-1dbjc4n > div.css-1dbjc4n.r-13qz1uu > div.css-1dbjc4n.r-z2wwpe.r-nsbfu8.r-13qz1uu > div.css-1dbjc4n.r-1awozwy.r-13awgt0.r-18u37iz.r-1777fci"
+						"div.css-1dbjc4n.r-8o21a9.r-12vffkv.r-u8s1d.r-13qz1uu.r-1g40b8q"
 					)
 				)
-					presenceData.state = "Upgrading a role card";
-
-				if (
-					document.querySelector("div.css-1dbjc4n.r-13awgt0.r-zd98yo.r-13qz1uu")
-				) {
-					//check if viewing their clan or another one
-					if (
-						document.querySelector(
-							"div.css-1dbjc4n.r-1xfd6ze.r-13awgt0.r-1pi2tsx.r-1udh08x"
-						)
-					) {
-						//viewing a clan
-						if (
-							document.querySelector(
-								"div.css-901oao.css-vcwn7f.r-1i10wst.r-1kfrs79"
-							)
-						) {
-							presenceData.state = `Viewing clan: ${
-								document.querySelector(
-									"div.css-901oao.css-vcwn7f.r-1i10wst.r-1kfrs79"
-								).textContent
-							}`;
-							//searching for a clan
-						} else if (
-							document
-								.querySelector(
-									"div.css-1dbjc4n.r-cdmcib.r-13awgt0.r-88pszg.r-1uu6nss > input"
-								)
-								.getAttribute("value")
-						) {
-							presenceData.state = `Searching for clans: '${document
-								.querySelector(
-									"div.css-1dbjc4n.r-cdmcib.r-13awgt0.r-88pszg.r-1uu6nss > input"
-								)
-								.getAttribute("value")}'`;
-						} else presenceData.state = "Browsing clans";
-					} else {
-						presenceData.state = `Viewing their clan: ${
-							document.querySelector(
-								"div.css-901oao.css-vcwn7f.r-1i10wst.r-1kfrs79"
-							)?.textContent
-						}`;
-					}
-				}
-
-				if (
+					presenceData.state = "Opening loot boxes";
+				else if (
 					document.querySelector(
-						"div.css-1dbjc4n.r-1kihuf0.r-1mlwlqe.r-1d2f490.r-1udh08x.r-zchlnj > div.css-1dbjc4n.r-1niwhzg.r-vvn4in.r-u6sd8q.r-ehq7j7.r-1p0dtai.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-13qz1uu.r-1wyyakw"
+						"div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-1w6e6rj.r-1777fci.r-1guathk"
 					)
 				)
-					presenceData.state = "Wheel of fortune";
-
-				if (
+					presenceData.state = "Shop";
+				else if (
 					document.querySelector(
-						"div.css-1dbjc4n.r-150rngu.r-1niwhzg.r-13awgt0.r-eqz5dr.r-16y2uox.r-1wbh5a2.r-1pi2tsx.r-1lxl8vk.r-11yh6sk.r-1rnoaur.r-1sncvnh.r-13qz1uu"
+						"div.css-1dbjc4n.r-kdyh1x.r-eqz5dr.r-1pi2tsx.r-a2tzq0.r-1ybube5"
 					)
 				)
-					presenceData.state = "Settings";
-
-				if (document.querySelector("iframe[title='Mentor Chat']"))
-					presenceData.state = "Mentor chat";
-
-				if (
-					document.querySelector(
-						"div.css-1dbjc4n.r-1p0dtai.r-qdtdgp.r-u8s1d.r-1ro7rbe.r-ipm5af > div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-u8s1d.r-ipm5af > div.css-1dbjc4n.r-1pi2tsx.r-13qz1uu > div.css-1dbjc4n.r-led734.r-1p0dtai.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
-					)
-				) {
-					if (!privacyChat) {
-						presenceData.state = `Chatting with ${
-							document.querySelector(
-								"div.css-1dbjc4n.r-19u6a5r > div.css-1dbjc4n.r-1awozwy.r-18u37iz.r-f1odvy > div.css-901oao.r-jwli3a.r-1x35g6.r-vw2c0b"
-							)?.textContent
-						}`;
-					} else presenceData.state = "Chatting with a friend";
-				}
-
-				if (
-					document.querySelector(
-						"div.css-1dbjc4n.r-1p0dtai.r-qdtdgp.r-u8s1d.r-1ro7rbe.r-ipm5af > div.css-1dbjc4n.r-1p0dtai.r-1d2f490.r-u8s1d.r-ipm5af > div.css-1dbjc4n.r-13awgt0 > div.css-1dbjc4n.r-13awgt0.r-wk8lta > div.css-1dbjc4n.r-led734.r-1p0dtai.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af"
-					)
-				)
-					presenceData.state = "Clan chat";
+					presenceData.state = "Inventory";
 			}
 		}
 
