@@ -528,9 +528,9 @@ presence.on("UpdateData", async () => {
 									"div.css-1dbjc4n.r-cdmcib.r-13awgt0.r-88pszg.r-1uu6nss > input"
 								)
 								.getAttribute("value")
-						) {
+						)
 							presenceData.state = "Searching for clans";
-						} else presenceData.state = "Browsing clans";
+						else presenceData.state = "Browsing clans";
 					} else {
 						presenceData.state = `Viewing their clan: ${
 							document.querySelector(
