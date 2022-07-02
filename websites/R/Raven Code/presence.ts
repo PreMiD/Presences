@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			details: "Geziniyor",
-			startTimestamp,
+			startTimestamp
 		},
 		{ pathname, search } = document.location,
 		searchParams = new URLSearchParams(search);
@@ -79,5 +79,5 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Hata bildiriyor:";
 	}
 
-	return presence.setActivity(presenceData);
+	presence.setActivity(presenceData);
 });
