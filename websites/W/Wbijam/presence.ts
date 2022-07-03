@@ -67,7 +67,9 @@ presence.on("UpdateData", async () => {
 		if (path === "/" || pathWithoutExtension === "/wiadomosci") {
 			presenceData.details = "Przegląda subdomenę anime";
 			presenceData.state = animeName;
-			presenceData.buttons = [{label: "Przejdź na stronę", url: document.location.href}];
+			presenceData.buttons = [
+				{ label: "Przejdź na stronę", url: document.location.href },
+			];
 		} else {
 			switch (pathWithoutExtension) {
 				case "/spoilerzone": {
@@ -115,7 +117,9 @@ presence.on("UpdateData", async () => {
 							" ",
 							""
 						)}: ${pathWithoutExtension.replace("_", " ").slice(1)}`;
-						presenceData.buttons = [{label: "Zobacz listę odcinków", url: document.location.href}];
+						presenceData.buttons = [
+							{ label: "Zobacz listę odcinków", url: document.location.href },
+						];
 					} else if (
 						document.querySelector("#tresc_lewa > div.episode-calendar-wrapper")
 					) {
@@ -124,7 +128,9 @@ presence.on("UpdateData", async () => {
 							.querySelector("#tresc_lewa > h1")
 							.textContent.match(/(?<=").+?(?=")/i)
 							.toString();
-						presenceData.buttons = [{label: "Zobacz odcinek", url: document.location.href}];
+						presenceData.buttons = [
+							{ label: "Zobacz odcinek", url: document.location.href },
+						];
 					}
 				}
 			}
