@@ -54,7 +54,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Konuyu görüntülüyor:";
 			presenceData.state = document.title.split(" | ")[0];
 			if (
-				document.querySelector<HTMLElement>("div.fr-element.fr-view > p")
+				document
+					.querySelector<HTMLElement>("div.fr-element.fr-view > p")
 					?.textContent.trim()
 			) {
 				presenceData.details = "Konuya yorum yazıyor:";
