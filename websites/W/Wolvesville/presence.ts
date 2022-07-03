@@ -809,14 +809,14 @@ presence.on("UpdateData", async () => {
 						else presenceData.details = "Game over";
 
 						if (playerState !== "Spectator") {
-							document
+							playerState = document
 								.querySelector(
 									"div.css-1dbjc4n.r-13awgt0.r-1mlwlqe.r-uvuy5l.r-1udh08x.r-417010 > div.css-1dbjc4n.r-1niwhzg.r-vvn4in.r-u6sd8q.r-x3cy2q.r-1p0dtai.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-13qz1uu.r-1wyyakw"
 								)
 								.getAttribute("style")
 								.includes("banner_defeat_middle")
-								? (playerState = "Defeat")
-								: (playerState = "Victory");
+								? "Defeat"
+								: "Victory";
 						}
 					}
 
@@ -840,9 +840,10 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "";
 						if (playerState) presenceData.state = `${playerState} - `;
 
-						aliveCount === 1
-							? (presenceData.state += `${aliveCount}/${playerCount} player left`)
-							: (presenceData.state += `${aliveCount}/${playerCount} players left`);
+						presenceData.state +=
+							aliveCount === 1
+								? `${aliveCount}/${playerCount} player left`
+								: `${aliveCount}/${playerCount} players left`;
 					}
 				}
 			} else {
