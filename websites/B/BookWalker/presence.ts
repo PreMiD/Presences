@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing newly added";
 			else if (document.location.pathname.includes("/pre-order"))
 				presenceData.details = "Browsing pre-orders";
-			else if (document.querySelector("h1[itemProp='name']") !== null) {
+			else if (document.querySelector("h1[itemProp='name']")) {
 				presenceData.details = `Viewing: ${
 					document.querySelector("h1[itemProp='name']").textContent
 				}`;
