@@ -1,15 +1,12 @@
+type LocalizedStrings = typeof localizedStrings;
 interface PageContext {
 	middleware: (ref: Window, ...args: unknown[]) => boolean;
 	exec: (
 		context: Presence,
 		presenceData: PresenceData,
-		options?: { [key: string]: unknown }
+		options?: { strings: LocalizedStrings; [key: string]: unknown }
 	) => Promise<PresenceData> | PresenceData;
 }
-interface LocalizedStrings {
-	[key: string]: string;
-}
-
 interface ExecutionArguments {
 	showWatch?: boolean;
 	strings: LocalizedStrings;
@@ -33,12 +30,9 @@ function capitalizeFirstLetter(string: string) {
 }
 const youtubeUrlRegex =
 	/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm;
-function matchYoutubeUrl(url: string): boolean {
-	return youtubeUrlRegex.test(url);
-}
-function getSourceLink(url: string): { label: string; url: string } | null {
+function getSourceLink(url: string): ButtonData | null {
 	if (!url) return null;
-	if (matchYoutubeUrl(url)) {
+	if (youtubeUrlRegex.test(url)) {
 		return {
 			label: "Watch Youtube Source",
 			url,
@@ -305,21 +299,19 @@ const pages: PageContext[] = [
 	presenceImageKeys = {
 		PLAY: "playx1024",
 		PAUSE: "pausex1024",
+	},
+	presenceStrings = {
+		browsing: "presence.activity.browsing",
+		watching: "presence.playback.playing",
+		watchVideo: "general.buttonWatchVideo",
+		viewProfile: "general.buttonViewProfile",
 	};
 function getStrings(newLang?: string) {
-	return presence.getStrings(
-		{
-			browsing: "presence.activity.browsing",
-			watching: "presence.playback.playing",
-			watchVideo: "general.buttonWatchVideo",
-			viewProfile: "general.buttonViewProfile",
-		},
-		newLang
-	);
+	return presence.getStrings(presenceStrings, newLang);
 }
-let currentLang: string, localizedStrings: { [key: string]: string };
+let currentLang: string, localizedStrings: typeof presenceStrings;
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang").catch(() => null);
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (!localizedStrings || newLang !== currentLang) {
 		currentLang = newLang;
 		localizedStrings = await getStrings(newLang);
