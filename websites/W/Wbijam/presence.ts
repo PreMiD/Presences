@@ -131,7 +131,6 @@ presence.on("UpdateData", async () => {
 		}
 		if (iFrameVideo === true && !isNaN(duration)) {
 			presenceData.details = animeName;
-			// presenceData.state = episode;
 			const [startTimestamp, endTimestamp] = presence.getTimestamps(
 				Math.floor(currentTime),
 				Math.floor(duration)
