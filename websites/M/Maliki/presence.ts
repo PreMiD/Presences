@@ -3,12 +3,12 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-interface songPlayingData {
+interface SongPlayingData {
 	artist: string;
 	song: string;
 }
 
-let songInfo: songPlayingData = null;
+let songInfo: SongPlayingData = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -106,6 +106,6 @@ presence.on("UpdateData", async () => {
 	else presence.setActivity();
 });
 
-presence.on("iFrameData", (data: songPlayingData) => {
+presence.on("iFrameData", (data: SongPlayingData) => {
 	songInfo = data;
 });
