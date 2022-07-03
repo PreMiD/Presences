@@ -1,11 +1,14 @@
 const presence = new Presence({
-		clientId: "804448815942860821",
-	}),
-	strings = presence.getStrings({
+	clientId: "804448815942860821",
+});
+
+async function getStrings() {
+	return presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
 		browsing: "presence.activity.browsing",
 	});
+}
 
 let iFrameVideo: boolean,
 	videoPaused: boolean,
@@ -30,6 +33,7 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
+	let strings = await getStrings();
 	if (document.location.hostname === "ww1.cuevana3.me") {
 		const presenceData: PresenceData = {
 			largeImageKey: "logo",
@@ -68,10 +72,11 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (iFrameVideo) {
+				strings = await getStrings();
 				(presenceData.smallImageKey = videoPaused ? "pause" : "play"),
 					(presenceData.smallImageText = videoPaused
-						? (await strings).pause
-						: (await strings).play),
+						? strings.pause
+						: strings.play),
 					(presenceData.startTimestamp = startTimestamp),
 					(presenceData.endTimestamp = endTimestamp);
 
@@ -85,14 +90,14 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/serie/")) {
 			presenceData.details = document.querySelector("h1.Title").textContent;
 			presenceData.smallImageKey = "browsing";
-			presenceData.smallImageText = (await strings).browsing;
+			presenceData.smallImageText = strings.browsing;
 			presenceData.largeImageKey = document
 				.querySelector("div.backdrop > article > div.Image > figure > img")
 				.getAttribute("data-src");
 		} else {
-			presenceData.details = (await strings).browsing;
+			presenceData.details = strings.browsing;
 			presenceData.smallImageKey = "browsing";
-			presenceData.smallImageText = (await strings).browsing;
+			presenceData.smallImageText = strings.browsing;
 		}
 	}
 
@@ -132,8 +137,8 @@ presence.on("UpdateData", async () => {
 		if (iFrameVideo) {
 			(presenceData.smallImageKey = videoPaused ? "pause" : "play"),
 				(presenceData.smallImageText = videoPaused
-					? (await strings).pause
-					: (await strings).play),
+					? strings.pause
+					: strings.play),
 				(presenceData.startTimestamp = startTimestamp),
 				(presenceData.endTimestamp = endTimestamp);
 
@@ -148,14 +153,14 @@ presence.on("UpdateData", async () => {
 		presenceData.details =
 			document.querySelector("h1.title > span").textContent;
 		presenceData.smallImageKey = "browsing";
-		presenceData.smallImageText = (await strings).browsing;
+		presenceData.smallImageText = strings.browsing;
 		presenceData.largeImageKey = document
 			.querySelector("figure > img")
 			.getAttribute("src");
 	} else {
-		presenceData.details = (await strings).browsing;
+		presenceData.details = strings.browsing;
 		presenceData.smallImageKey = "browsing";
-		presenceData.smallImageText = (await strings).browsing;
+		presenceData.smallImageText = strings.browsing;
 	}
 
 	presence.setActivity(presenceData);
