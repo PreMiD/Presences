@@ -299,17 +299,20 @@ const pages: PageContext[] = [
 	presenceImageKeys = {
 		PLAY: "playx1024",
 		PAUSE: "pausex1024",
-	},
-	presenceStrings = {
-		browsing: "presence.activity.browsing",
-		watching: "presence.playback.playing",
-		watchVideo: "general.buttonWatchVideo",
-		viewProfile: "general.buttonViewProfile",
 	};
 function getStrings(newLang?: string) {
-	return presence.getStrings(presenceStrings, newLang);
+	return presence.getStrings(
+		{
+			browsing: "presence.activity.browsing",
+			watching: "presence.playback.playing",
+			watchVideo: "general.buttonWatchVideo",
+			viewProfile: "general.buttonViewProfile",
+		},
+		newLang
+	);
 }
-let currentLang: string, localizedStrings: typeof presenceStrings;
+let currentLang: string,
+	localizedStrings: Awaited<ReturnType<typeof getStrings>>;
 presence.on("UpdateData", async () => {
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (!localizedStrings || newLang !== currentLang) {
