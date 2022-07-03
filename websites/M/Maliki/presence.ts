@@ -3,12 +3,12 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-interface songPlayingInformations {
+interface songPlayingData {
 	artist: string;
 	song: string;
 }
 
-let songInfo: songPlayingInformations = null;
+let songInfo: songPlayingData = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -17,16 +17,13 @@ presence.on("UpdateData", async () => {
 					? "malimode"
 					: "maliki_1024",
 			startTimestamp: browsingTimestamp,
-			buttons: [{ label: "Voir le site", url: "https://maliki.com/" }],
 		},
-		//* Get options of the presence
 		[privacy, time] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("time"),
 		]);
-	if (!time) delete presenceData.startTimestamp; // delete the startTimestamp if time option desactivated
+	if (!time) delete presenceData.startTimestamp;
 
-	//* Change the detail depending on the current URL
 	switch (document.location.pathname) {
 		case "/":
 			presenceData.details =
@@ -71,18 +68,20 @@ presence.on("UpdateData", async () => {
 			if (document.location.pathname.includes("/strips/")) {
 				// If we are on a strip page, modify the details
 				presenceData.details = privacy ? "Lit un strip" : "Lit le strip :";
-				presenceData.state = privacy
-					? ""
-					: document.querySelector(".singleTitle").textContent;
+				if (!privacy) {
+					presenceData.state =
+						document.querySelector(".singleTitle").textContent;
+				}
 			}
 			if (document.location.pathname.includes("/bonus/")) {
 				// If we are on a bonus page, modify the details
 				presenceData.details = privacy
 					? "Regarde un bonus"
 					: "Regarde le bonus :";
-				presenceData.state = privacy
-					? ""
-					: document.querySelector(".singleTitle").textContent;
+				if (!privacy) {
+					presenceData.state =
+						document.querySelector(".singleTitle").textContent;
+				}
 			}
 			if (
 				document
@@ -93,9 +92,11 @@ presence.on("UpdateData", async () => {
 				presenceData.details = privacy
 					? "Lit une actualité"
 					: "Lit l'actualité :";
-				presenceData.state = privacy
-					? ""
-					: document.querySelector(".singleHeader--title").textContent;
+				if (!privacy) {
+					presenceData.state = document.querySelector(
+						".singleHeader--title"
+					).textContent;
+				}
 			}
 			break;
 		}
@@ -105,6 +106,6 @@ presence.on("UpdateData", async () => {
 	else presence.setActivity();
 });
 
-presence.on("iFrameData", async (data: songPlayingInformations) => {
+presence.on("iFrameData", (data: songPlayingData) => {
 	songInfo = data;
 });
