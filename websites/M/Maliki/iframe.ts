@@ -1,10 +1,12 @@
 const iframe = new iFrame();
 
-iframe.on("UpdateData", async () => {
-	if (document.querySelector(".artiste") && document.querySelector(".titre")) {
+iframe.on("UpdateData", () => {
+	const artist = document.querySelector(".artiste"),
+		title = document.querySelector(".titre");
+	if (artist && title) {
 		iframe.send({
-			artist: document.querySelector(".artiste").textContent,
-			song: document.querySelector(".titre").textContent.split(".")[0], // Get only the title without the extension file
+			artist: artist.textContent,
+			song: title.textContent.split(".")[0], // Get only the title without the extension file
 		});
 	}
 });
