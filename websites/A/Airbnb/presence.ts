@@ -19,8 +19,9 @@ presence.on("UpdateData", async () => {
 			{ label: "View Room", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("/book")) {
-		
-		presenceData.details = `Booking ${document.querySelector("#LISTING_CARD-title").textContent}`;
+		presenceData.details = `Booking ${
+			document.querySelector("#LISTING_CARD-title").textContent
+		}`;
 		const dates = document.querySelector(
 				'[data-plugin-in-point-id="DATE_PICKER"] > div > div > div._b7b6bk > div._1qyi2pa > div._jbk4n3'
 			).textContent,
