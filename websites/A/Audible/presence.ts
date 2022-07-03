@@ -9,17 +9,17 @@ presence.on("UpdateData", async () => {
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
-	if (document.location.pathname.includes("/account")) 
+	if (document.location.pathname.includes("/account"))
 		presenceData.details = "Viewing account";
-	 else if (document.location.pathname.includes("/wl")) 
+	else if (document.location.pathname.includes("/wl"))
 		presenceData.details = "Viewing wishlist";
-	 else if (document.location.pathname.includes("/library")) 
+	else if (document.location.pathname.includes("/library"))
 		presenceData.details = "Viewing library";
-	 else if(document.location.pathname.includes("plus")) 
+	else if (document.location.pathname.includes("plus"))
 		presenceData.details = "Viewing plus catalog";
-	else if(document.location.pathname.includes("gift")) 
+	else if (document.location.pathname.includes("gift"))
 		presenceData.details = "Viewing gift center";
-	 else if (document.location.pathname.includes("/pd")) {
+	else if (document.location.pathname.includes("/pd")) {
 		const title = document.querySelector(
 				"h1.bc-heading.bc-color-base.bc-pub-break-word.bc-text-bold"
 			).textContent,
