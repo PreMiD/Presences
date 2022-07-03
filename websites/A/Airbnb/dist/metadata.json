@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Tofuine",
+		"id": "993151156652093480"
+	},
+	"service": "Airbnb",
+	"description": {
+		"en": "Airbnb, Inc. is an American company that operates an online marketplace for lodging, primarily homestays for vacation rentals, and tourism activities."
+	},
+	"url": "www.airbnb.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/UnBuyQM.png",
+	"thumbnail": "https://i.imgur.com/3ltXMdS.png",
+	"color": "#f9585e",
+	"category": "other",
+	"tags": [
+		"travel",
+		"hotel"
+	]
+}
