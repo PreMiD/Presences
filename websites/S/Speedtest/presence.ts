@@ -22,11 +22,10 @@ presence.on("UpdateData", async () => {
 				}`,
 				ping =
 					document.querySelector(
-						"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-test > div > div > div.result-container-speed > div.result-item-details > div > span.result-item.result-item-latency.result-data-latency-item.updated > span"
+						"span.result-item.result-item-latency.result-data-latency-item.updated > span"
 					).textContent +
-					document.querySelector(
-						"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-test > div > div > div.result-container-speed > div.result-item-details > div > span:nth-child(1) > span.result-data-unit"
-					).textContent,
+					document.querySelector("span:nth-child(1) > span.result-data-unit")
+						.textContent,
 				download =
 					document.querySelector(".result-item-download .result-data")
 						.textContent +
@@ -68,29 +67,29 @@ presence.on("UpdateData", async () => {
 			try {
 				presenceData.details = `Viewing results - Ping ${
 					document.querySelector(
-						"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-test > div > div > div.result-container-speed.result-container-speed-active > div.result-item-details > div > span.result-item.result-item-latency.result-data-latency-item.updated > span"
+						"span.result-item.result-item-latency.result-data-latency-item.updated > span"
 					).textContent
 				} ms | Download ${
 					document.querySelector(
-						"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-share > div.result-container.clearfix > div.result-container-speed > div > div.result-item-container.result-item-container-align-center > div > div.result-data.u-align-left > span"
+						"div.result-item-container.result-item-container-align-center > div > div.result-data.u-align-left > span"
 					).textContent
 				} Mbps | Upload ${
 					document.querySelector(
-						"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-share > div.result-container.clearfix > div.result-container-speed > div > div.result-item-container.result-item-container-align-left > div > div.result-data.u-align-left > span"
+						"div.result-item-container.result-item-container-align-left > div > div.result-data.u-align-left > span"
 					).textContent
 				} Mbps`;
 			} catch {
 				presenceData.details = `Viewing results - Ping ${
 					document.querySelector(
-						"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-test > div > div > div.result-container-speed.result-container-speed-active > div.result-item-details > div > span.result-item.result-item-latency.result-data-latency-item.updated > span"
+						"span.result-item.result-item-latency.result-data-latency-item.updated > span"
 					).textContent
 				} ms | Download ${
 					document.querySelector(
-						"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-test > div > div > div.result-container-speed.result-container-speed-active > div.result-container-data > div.result-item-container.result-item-container-align-center > div > div.result-data.u-align-left > span"
+						"div.result-item-container.result-item-container-align-center > div > div.result-data.u-align-left > span"
 					).textContent
 				} Mbps | Upload ${
 					document.querySelector(
-						"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-test > div > div > div.result-container-speed.result-container-speed-active > div.result-container-data > div.result-item-container.result-item-container-align-left > div > div.result-data.u-align-left > span"
+						"div.result-item-container.result-item-container-align-left > div > div.result-data.u-align-left > span"
 					).textContent
 				} Mbps`;
 			}
@@ -141,9 +140,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing help QA";
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (
-			document.querySelector<HTMLSpanElement>(
-				"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.start-button > a > span.start-background"
-			).style.opacity === "1"
+			document.querySelector<HTMLSpanElement>("a > span.start-background").style
+				.opacity === "1"
 		) {
 			const server = `${
 					document.querySelector(
@@ -172,19 +170,16 @@ presence.on("UpdateData", async () => {
 			if (!showISP) isp = "Hidden";
 			if (
 				document.querySelector(
-					"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-test > div > div > div.result-container-speed > div.result-item-details > div > span.result-item.result-item-latency.result-data-latency-item.updated > span"
+					"span.result-item.result-item-latency.result-data-latency-item.updated > span"
 				) &&
-				document.querySelector(
-					"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-test > div > div > div.result-container-speed > div.result-item-details > div > span:nth-child(1) > span.result-data-unit"
-				)
+				document.querySelector("span:nth-child(1) > span.result-data-unit")
 			) {
 				ping =
 					document.querySelector(
-						"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-test > div > div > div.result-container-speed > div.result-item-details > div > span.result-item.result-item-latency.result-data-latency-item.updated > span"
+						"span.result-item.result-item-latency.result-data-latency-item.updated > span"
 					).textContent +
-					document.querySelector(
-						"#container > div > div.main-content > div > div > div > div.pure-u-custom-speedtest > div.speedtest-container.main-row > div.main-view > div > div.result-area.result-area-test > div > div > div.result-container-speed > div.result-item-details > div > span:nth-child(1) > span.result-data-unit"
-					).textContent;
+					document.querySelector("span:nth-child(1) > span.result-data-unit")
+						.textContent;
 			} else ping = "N/A";
 
 			presenceData.details = `Testing ${server}`;
