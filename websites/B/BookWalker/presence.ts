@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing release schedule";
 			else if (document.location.pathname.includes("/holdBooks"))
 				presenceData.details = "Viewing library";
-			else if (document.querySelector(".p-main__title") !== null) {
+			else if (document.querySelector(".p-main__title")) {
 				presenceData.details = `Viewing: ${
 					document.querySelector(".p-main__title").textContent
 				}`;
