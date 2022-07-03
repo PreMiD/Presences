@@ -1,6 +1,6 @@
 const iframe = new iFrame();
 
-iframe.on("UpdateData", () => {
+iframe.on("UpdateData", async () => {
 	const artist = document.querySelector(".artiste"),
 		title = document.querySelector(".titre");
 	if (artist && title) {
