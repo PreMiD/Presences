@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(duration)
 			);
 			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused ? "pauza" : "odtwarzanie";
+			presenceData.smallImageText = paused ? "Pauza" : "Odtwarzanie";
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
 
