@@ -36,8 +36,11 @@ presence.on("UpdateData", async () => {
 		removeExtension = (str: string) => str.split(".")[0];
 
 	if (domain === "wbijam.pl") {
-		if (path === "/") presenceData.details = "Przegląda stronę główną";
 		switch (removeExtension(path)) {
+			case "/": {
+				presenceData.details = "Przegląda stronę główną";
+				break;
+			}
 			case "/pomoc_techniczna": {
 				presenceData.details = "Przegląda pomoc techniczną";
 				break;
