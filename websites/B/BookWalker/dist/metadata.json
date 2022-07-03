@@ -5,9 +5,6 @@
 		"id": "250864719181643790"
 	},
 	"service": "BookWalker",
-	"altnames": [
-		"Book☆Walker"
-	],
 	"description": {
 		"en": "Shows the manga and light novel you're reading on Discord"
 	},
@@ -18,7 +15,7 @@
 	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/MixQOh3.png",
-	"thumbnail": "https://i.imgur.com/ycicSG2.png",
+	"thumbnail": "https://i.imgur.com/YX6eLNi.png",
 	"color": "#0ab4fc",
 	"category": "anime",
 	"tags": [
