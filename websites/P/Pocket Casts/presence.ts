@@ -7,8 +7,6 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "icon",
 	};
 
-	// const el = document.querySelector(".controls");
-
 	if (document.querySelector(".controls").ariaLabel.includes("Playing")) {
 		presenceData.details =
 			document.querySelector("div.episode > span").textContent;
@@ -21,7 +19,7 @@ presence.on("UpdateData", async () => {
 				".TimeTextstyled__TimeTextWrapper-sc-1yzkn0m-0.lmVDeu.current-time"
 			)
 			.textContent.split(":")
-			.map(n => Number(n));
+			.map(Number);
 		presenceData.smallImageKey = "play";
 		if (time.length === 3) {
 			presenceData.startTimestamp =
