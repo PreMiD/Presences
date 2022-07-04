@@ -15,11 +15,9 @@ presence.on("UpdateData", async () => {
 	presenceData.startTimestamp = browsingTimestamp;
 	if (document.location.pathname.includes("/place")) {
 		const place = document.location.href,
-			
 			indexes = [];
-		for (const [index, element] of Array.from(place).entries()) 
+		for (const [index, element] of Array.from(place).entries())
 			if (element === "/") indexes.push(index);
-		
 
 		presenceData.details = `Viewing ${lettersOnly(
 			place.substring(indexes[4] + 1, indexes[5])
@@ -51,12 +49,10 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.includes("/search")) {
 		const search = document.location.href,
-			
 			indexes = [];
-		for (const [index, element] of Array.from(search).entries()) 
+		for (const [index, element] of Array.from(search).entries())
 			if (element === "/") indexes.push(index);
 
-		
 		presenceData.details = `Searching for ${lettersOnly(
 			search.substring(indexes[4] + 1, indexes[5])
 		)}`;
