@@ -14,6 +14,7 @@
 	"thumbnail": "https://i.imgur.com/u7oLYw6.png",
 	"color": "#4e85f2",
 	"category": "other",
+	"regExp": "www[.]google[.]com[/]maps",
 	"tags": [
 		"maps",
 		"navigation"
