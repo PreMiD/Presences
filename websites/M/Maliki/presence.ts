@@ -32,10 +32,10 @@ presence.on("UpdateData", async () => {
 					: "Regarde la page principale";
 			break;
 		case "/strips/":
-			presenceData.details = "Parcourt les strips";
+			presenceData.details = "Parcours les strips";
 			break;
 		case "/actualites/":
-			presenceData.details = "Parcourt les actualités";
+			presenceData.details = "Parcours les actualités";
 			break;
 		case "/bonus/":
 			presenceData.details = "Parcours les bonus";
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Se renseigne sur les futurs événements";
 			break;
 		case "/faq/":
-			presenceData.details = "Lire la foire aux questions";
+			presenceData.details = "Lis la foire aux questions";
 			break;
 		case "/personnalisation":
 			presenceData.details = "Personnalise son personnage";
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 		default: {
 			if (document.location.pathname.includes("/strips/")) {
 				// If we are on a strip page, modify the details
-				presenceData.details = privacy ? "Lit un strip" : "Lit le strip :";
+				presenceData.details = privacy ? "Lis un strip" : "Lis le strip :";
 				if (!privacy) {
 					presenceData.state =
 						document.querySelector(".singleTitle").textContent;
@@ -90,8 +90,8 @@ presence.on("UpdateData", async () => {
 			) {
 				// If we are on a page about actuality, modify the details
 				presenceData.details = privacy
-					? "Lit une actualité"
-					: "Lit l'actualité :";
+					? "Lis une actualité"
+					: "Lis l'actualité :";
 				if (!privacy) {
 					presenceData.state = document.querySelector(
 						".singleHeader--title"
