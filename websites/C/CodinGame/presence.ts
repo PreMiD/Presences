@@ -12,121 +12,99 @@ presence.on("UpdateData", async () => {
 	if (path === "/") presenceData.details = "Browsing...";
 	else if (path.includes("/home")) {
 		presenceData.details = "On dashboard";
-		presenceData.state =
-			`${document.querySelectorAll(
-				"div[class='home-content'] > div > div > div > div > home > div > home-react > div > div > section > section > div > div > div > div"
-			)[0].textContent
-			} - Rank : ${
+		presenceData.state = `${
 			document.querySelectorAll(
 				"div[class='home-content'] > div > div > div > div > home > div > home-react > div > div > section > section > div > div > div > div"
-			)[4].textContent}`;
+			)[0].textContent
+		} - Rank : ${
+			document.querySelectorAll(
+				"div[class='home-content'] > div > div > div > div > home > div > home-react > div > div > section > section > div > div > div > div"
+			)[4].textContent
+		}`;
 	} else if (path.includes("/training")) {
 		if (path.includes("/training/easy/")) {
 			presenceData.details = "Training: Easy";
-			presenceData.state =
-				`${document.querySelector("h1[class='title']").textContent
-				} (${
-				document.querySelector("div[class='chart-inner']").textContent
-				}%)`;
+			presenceData.state = `${
+				document.querySelector("h1[class='title']").textContent
+			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
 		} else if (path.includes("/training/medium/")) {
 			presenceData.details = "Training: Medium";
-			presenceData.state =
-				`${document.querySelector("h1[class='title']").textContent
-				} (${
-				document.querySelector("div[class='chart-inner']").textContent
-				}%)`;
+			presenceData.state = `${
+				document.querySelector("h1[class='title']").textContent
+			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
 		} else if (path.includes("/training/hard/")) {
 			presenceData.details = "Training: Hard";
-			presenceData.state =
-				`${document.querySelector("h1[class='title']").textContent
-				} (${
-				document.querySelector("div[class='chart-inner']").textContent
-				}%)`;
+			presenceData.state = `${
+				document.querySelector("h1[class='title']").textContent
+			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
 		} else if (path.includes("/training/expert/")) {
 			presenceData.details = "Training: Hard";
-			presenceData.state =
-				`${document.querySelector("h1[class='title']").textContent
-				} (${
-				document.querySelector("div[class='chart-inner']").textContent
-				}%)`;
+			presenceData.state = `${
+				document.querySelector("h1[class='title']").textContent
+			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
 		} else presenceData.details = "Looking at Practice";
 	} else if (path.includes("/multiplayer")) {
-if (path.includes("/multiplayer/clashofcode")) {
+		if (path.includes("/multiplayer/clashofcode")) {
 			presenceData.details = "Looking at Clash of Code";
-			presenceData.state =
-				`Rank : ${
+			presenceData.state = `Rank : ${
 				document.querySelector("span[class='rank-value']").textContent
-				} th`;
+			} th`;
 		} else if (path.includes("/multiplayer/bot-programming")) {
 			presenceData.details = "Training: Bot Programming";
 
 			try {
-
-				presenceData.state =
-					`${document.querySelector("h1[class='title']").textContent
-					} - Rank : ${
+				presenceData.state = `${
+					document.querySelector("h1[class='title']").textContent
+				} - Rank : ${
 					document.querySelectorAll(
-					"div[id='content-details-league'] > div > div"
-				)[1].textContent}`;
+						"div[id='content-details-league'] > div > div"
+					)[1].textContent
+				}`;
 			} catch {
-				presenceData.state =
-					`${document.querySelector("h1[class='title']").textContent
-					} - Not yet solved`;
+				presenceData.state = `${
+					document.querySelector("h1[class='title']").textContent
+				} - Not yet solved`;
 			}
 		} else if (path.includes("/multiplayer/codegolf")) {
 			presenceData.details = "Training: Code Golf";
 			try {
-
-				if (document.querySelector(
-					"div[class='chart-inner']"
-				).textContent !== "0") {
-presenceData.state =
-						`${document.querySelector("h1[class='title']").textContent
-						} (${
-						document.querySelector("span[class='rank-value']").textContent
-						}${document.querySelector("span[class='rank-suffix']").textContent
-						}/${
-						document.querySelector("span[class='rank-total']").textContent
-						})`;
-} else presenceData.state = "Not yet solved";
+				if (
+					document.querySelector("div[class='chart-inner']").textContent !== "0"
+				) {
+					presenceData.state = `${
+						document.querySelector("h1[class='title']").textContent
+					} (${document.querySelector("span[class='rank-value']").textContent}${
+						document.querySelector("span[class='rank-suffix']").textContent
+					}/${document.querySelector("span[class='rank-total']").textContent})`;
+				} else presenceData.state = "Not yet solved";
 			} catch {
-				presenceData.state =
-					`${document.querySelector("h1[class='title']").textContent
-					} (${
-					document.querySelector("span[class='rank-value']").textContent
-					}${document.querySelector("span[class='rank-suffix']").textContent
-					}/${
-					document.querySelector("span[class='rank-total']").textContent
-					})`;
+				presenceData.state = `${
+					document.querySelector("h1[class='title']").textContent
+				} (${document.querySelector("span[class='rank-value']").textContent}${
+					document.querySelector("span[class='rank-suffix']").textContent
+				}/${document.querySelector("span[class='rank-total']").textContent})`;
 			}
 		} else if (path.includes("/multiplayer/optimization")) {
 			presenceData.details = "Training: Optimization";
 			try {
-
-				if (document.querySelector(
-					"div[class='chart-inner']"
-				).textContent !== "0") {
-presenceData.state =
-						`${document.querySelector("h1[class='title']").textContent
-						} (${
-						document.querySelector("span[class='rank-value']").textContent
-						}${document.querySelector("span[class='rank-suffix']").textContent
-						}/${
-						document.querySelector("span[class='rank-total']").textContent
-						})`;
-} else presenceData.state = "Not yet solved";
+				if (
+					document.querySelector("div[class='chart-inner']").textContent !== "0"
+				) {
+					presenceData.state = `${
+						document.querySelector("h1[class='title']").textContent
+					} (${document.querySelector("span[class='rank-value']").textContent}${
+						document.querySelector("span[class='rank-suffix']").textContent
+					}/${document.querySelector("span[class='rank-total']").textContent})`;
+				} else presenceData.state = "Not yet solved";
 			} catch {
-				presenceData.state =
-					`${document.querySelector("h1[class='title']").textContent
-					} (${
-					document.querySelector("span[class='rank-value']").textContent
-					}${document.querySelector("span[class='rank-suffix']").textContent
-					}/${
-					document.querySelector("span[class='rank-total']").textContent
-					})`;
+				presenceData.state = `${
+					document.querySelector("h1[class='title']").textContent
+				} (${document.querySelector("span[class='rank-value']").textContent}${
+					document.querySelector("span[class='rank-suffix']").textContent
+				}/${document.querySelector("span[class='rank-total']").textContent})`;
 			}
 		} else presenceData.details = "Looking at Compete";
-} else if (path.includes("/cooperate"))
+	} else if (path.includes("/cooperate"))
 		presenceData.details = "Looking at Cooperate";
 	else if (path.includes("/learn")) presenceData.details = "Looking at Learn";
 	else if (path.includes("/events")) presenceData.details = "Looking at Events";
@@ -156,12 +134,12 @@ presenceData.state =
 	else if (path.includes("/start")) presenceData.details = "Not logged in";
 	else if (path.includes("/ide")) {
 		if (path.includes("/ide/puzzle/")) {
-			presenceData.details =
-				`Solving the challenge : ${
+			presenceData.details = `Solving the challenge : ${
 				document.querySelectorAll("h1[class='cg-ide-title'] > span")[
 					document.querySelectorAll("h1[class='cg-ide-title'] > span").length -
 						1
-				].textContent}`;
+				].textContent
+			}`;
 			try {
 				const score = document.querySelector(
 					"span[class*='score-value']"
@@ -173,22 +151,18 @@ presenceData.state =
 							"span[class='rank-value']"
 						).textContent;
 						if (rank !== "") {
-							presenceData.state =
-								`${rank
-								}th/${
-								document.querySelector("span[class='rank-total']").textContent}`;
-						} else
-							presenceData.state = `(${score}%)`;
-
+							presenceData.state = `${rank}th/${
+								document.querySelector("span[class='rank-total']").textContent
+							}`;
+						} else presenceData.state = `(${score}%)`;
 					} catch {
 						presenceData.state = `(${score}%)`;
 					}
 				}
 			} catch {
-
-				presenceData.state = `League : ${document.querySelector(
-					"span[class='league-value']"
-				).textContent}`;
+				presenceData.state = `League : ${
+					document.querySelector("span[class='league-value']").textContent
+				}`;
 			}
 		} else {
 			presenceData.details = document.querySelectorAll(
@@ -196,12 +170,9 @@ presenceData.state =
 			)[
 				document.querySelectorAll("h1[class='cg-ide-title'] > span").length - 1
 			].textContent;
-			presenceData.state =
-				`Time left : ${
+			presenceData.state = `Time left : ${
 				document.querySelector("span[class*='minutes']").textContent
-				}m : ${
-				document.querySelector("span[class*='seconds']").textContent
-				}s`;
+			}m : ${document.querySelector("span[class*='seconds']").textContent}s`;
 		}
 	} else if (path.includes("/clashofcode/clash/")) {
 		presenceData.details = "Waiting for the Clash of Code";
