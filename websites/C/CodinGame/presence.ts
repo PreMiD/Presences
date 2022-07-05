@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector("h1[class='title']").textContent
 			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
 		} else if (path.includes("/training/expert/")) {
-			presenceData.details = "Training: Hard";
+			presenceData.details = "Training: Very Hard";
 			presenceData.state = `${
 				document.querySelector("h1[class='title']").textContent
 			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
