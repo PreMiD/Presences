@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "sybetjeh.",
+		"id": "963105872408641656"
+	},
+	"service": "RobloxForum",
+	"description": {
+		"en": "A presence for robloxforum! People on discord will be able to see what you do on robloxforum."
+	},
+	"url": "www.robloxforum.com",
+	"version": "1.0.0",
+	"logo": "https://i.ibb.co/wMzCd5g/0x0.png",
+	"thumbnail": "https://i.ibb.co/BsDpRHZ/Screenshot-2022-07-05-191152.png",
+	"color": "#c33737",
+	"category": "other",
+	"tags": [
+		"roblox",
+		"forums",
+		"social-community",
+		"community",
+		"robloxforum"
+	]
+}
