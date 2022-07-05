@@ -50,8 +50,8 @@ presence.on("UpdateData", async () => {
 		} else if (path.includes("/multiplayer/codegolf")) {
 			presenceData.details = "Training: Code Golf";
 			try {
-				var pourcent = document.querySelector("div[class='chart-inner']").textContent
-				if (pourcent != "0")
+				var pourcentGolf = document.querySelector("div[class='chart-inner']").textContent
+				if (pourcentGolf != "0")
 					presenceData.state = document.querySelector("h1[class='title']").textContent + " (" + document.querySelector("span[class='rank-value']").textContent + document.querySelector("span[class='rank-suffix']").textContent + "/" + document.querySelector("span[class='rank-total']").textContent + ")";
 				else
 					presenceData.state = "Not yet solved";
@@ -64,8 +64,8 @@ presence.on("UpdateData", async () => {
 		} else if (path.includes("/multiplayer/optimization")) {
 			presenceData.details = "Training: Optimization";
 			try {
-				var pourcent = document.querySelector("div[class='chart-inner']").textContent
-				if (pourcent != "0")
+				var pourcentOptimization = document.querySelector("div[class='chart-inner']").textContent
+				if (pourcentOptimization != "0")
 					presenceData.state = document.querySelector("h1[class='title']").textContent + " (" + document.querySelector("span[class='rank-value']").textContent + document.querySelector("span[class='rank-suffix']").textContent + "/" + document.querySelector("span[class='rank-total']").textContent + ")";
 				else
 					presenceData.state = "Not yet solved";
@@ -132,8 +132,8 @@ presence.on("UpdateData", async () => {
 					}
 				}
 			} catch {
-				var rank = document.querySelector("span[class='league-value']").textContent;
-				presenceData.state = "Rank : " + rank;
+				var league = document.querySelector("span[class='league-value']").textContent;
+				presenceData.state = "League : " + league;
 			}
 
 
