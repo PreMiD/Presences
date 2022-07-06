@@ -32,8 +32,8 @@ presence.on("UpdateData", async () => {
 		const dueCountElem =
 			document.querySelector('a[href="/learn"]').firstElementChild;
 		if (dueCountElem.getAttribute("style") === "color: green;")
-			presenceData.state = `New: ${dueCountElem.textContent}\n items`;
-		else presenceData.state = `Due : ${dueCountElem.textContent}\n items`;
+			presenceData.state = `New: ${dueCountElem.textContent} items`;
+		else presenceData.state = `Due : ${dueCountElem.textContent} items`;
 	} else if (document.location.pathname.includes("/search")) {
 		if (document.querySelector("div.results.search")) {
 			presenceData.details = "Searching:";
