@@ -25,7 +25,6 @@ presence.on("UpdateData", async () => {
 				isInGame = true;
 			}
 
-			
 			const scores = document.querySelectorAll("#playersContainer .player");
 			for (let i = 0; i < scores.length; i++) {
 				if (scores[i].querySelector(".name").textContent === playerName) {
@@ -40,8 +39,8 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `Σκορ: ${
 						scores[i].querySelector(".score").textContent
 					} | Γύρος: ${document
-				.querySelector("#round b")
-				.textContent.replaceAll(" ", "")} | Θέση #${
+						.querySelector("#round b")
+						.textContent.replaceAll(" ", "")} | Θέση #${
 						parseInt(scores[i].getAttribute("index")) + 1
 					}/${scores.length}`;
 				}
@@ -172,17 +171,15 @@ presence.on("UpdateData", async () => {
 			}
 
 			const playerPositions = ["bottom", "up", "right", "left"],
-			 teamPlayers: string[] = [],
-			 opPlayers: string[] = [],
-			 playerState: { [key: string]: TichuPlayerState } = {};
+				teamPlayers: string[] = [],
+				opPlayers: string[] = [],
+				playerState: { [key: string]: TichuPlayerState } = {};
 			for (const playerPos of playerPositions) {
-				debugger;
 				const playerName = document.querySelector(
 					`#nickholder_${playerPos} .playerName`
 				).textContent;
-				if (playerName) 
+				if (playerName)
 					playerState[playerPos] = { name: playerName, bet: null };
-				
 			}
 
 			for (const pos of ["up", "left", "right"]) {

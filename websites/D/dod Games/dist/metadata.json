@@ -15,8 +15,5 @@
 	"thumbnail": "https://i.imgur.com/MqAAZAH.png",
 	"color": "#008fec",
 	"category": "games",
-	"tags": [
-		"dod",
-		"dod-games"
-	]
+	"tags": ["dod", "dod-games"]
 }
