@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
 						const rank = document.querySelector(
 							"span[class='rank-value']"
 						).textContent;
-						if (rank !== "") {
+						if (!rank) {
 							presenceData.state = `${rank}th/${
 								document.querySelector("span[class='rank-total']").textContent
 							}`;
