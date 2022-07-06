@@ -160,7 +160,7 @@ presence.on("UpdateData", async () => {
 					}
 				}
 			} catch {
-				presenceData.state = `League : ${
+				presenceData.state = `League: ${
 					document.querySelector("span[class='league-value']").textContent
 				}`;
 			}
