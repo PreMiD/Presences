@@ -25,8 +25,7 @@ presence.on("UpdateData", async () => {
 				isInGame = true;
 			}
 
-			let round = document.querySelector("#round b").textContent;
-			round = round.replaceAll(" ", "");
+			
 			const scores = document.querySelectorAll("#playersContainer .player");
 			for (let i = 0; i < scores.length; i++) {
 				if (scores[i].querySelector(".name").textContent === playerName) {
@@ -40,7 +39,9 @@ presence.on("UpdateData", async () => {
 
 					presenceData.state = `Σκορ: ${
 						scores[i].querySelector(".score").textContent
-					} | Γύρος: ${round} | Θέση #${
+					} | Γύρος: ${document
+				.querySelector("#round b")
+				.textContent.replaceAll(" ", "")} | Θέση #${
 						parseInt(scores[i].getAttribute("index")) + 1
 					}/${scores.length}`;
 				}
@@ -48,7 +49,7 @@ presence.on("UpdateData", async () => {
 			if (scores.length < 10) {
 				presenceData.buttons = [
 					{
-						label: "Join Game",
+						label: "Είσοδος",
 						url: url.textContent,
 					},
 				];
@@ -64,7 +65,7 @@ presence.on("UpdateData", async () => {
 			}
 			presenceData.buttons = [
 				{
-					label: "Join Game",
+					label: "Είσοδος",
 					url: url.textContent,
 				},
 			];
@@ -153,7 +154,7 @@ presence.on("UpdateData", async () => {
 				}/${nPlayers} παίκτες...`;
 				presenceData.buttons = [
 					{
-						label: "Join Game",
+						label: "Είσοδος",
 						url: url.textContent,
 					},
 				];
@@ -170,24 +171,19 @@ presence.on("UpdateData", async () => {
 				isInGame = true;
 			}
 
-			const teamPlayers: string[] = [],
-				opPlayers: string[] = [],
-				playerState: { [key: string]: TichuPlayerState } = {},
-				bot = document.querySelector(
-					"#nickholder_bottom .playerName"
-				).textContent,
-				up = document.querySelector("#nickholder_up .playerName").textContent,
-				left = document.querySelector(
-					"#nickholder_left .playerName"
-				).textContent,
-				right = document.querySelector(
-					"#nickholder_right .playerName"
+			const playerPositions = ["bottom", "up", "right", "left"],
+			 teamPlayers: string[] = [],
+			 opPlayers: string[] = [],
+			 playerState: { [key: string]: TichuPlayerState } = {};
+			for (const playerPos of playerPositions) {
+				debugger;
+				const playerName = document.querySelector(
+					`#nickholder_${playerPos} .playerName`
 				).textContent;
-
-			if (bot) playerState.bot = { name: bot, bet: null };
-			if (up) playerState.up = { name: up, bet: null };
-			if (left) playerState.left = { name: left, bet: null };
-			if (right) playerState.right = { name: right, bet: null };
+				if (playerName) 
+					playerState[playerPos] = { name: playerName, bet: null };
+				
+			}
 
 			for (const pos of ["up", "left", "right"]) {
 				if (!(pos in playerState)) continue;
@@ -226,7 +222,7 @@ presence.on("UpdateData", async () => {
 				}/4 παίκτες...`;
 				presenceData.buttons = [
 					{
-						label: "Join Game",
+						label: "Είσοδος",
 						url: url.textContent,
 					},
 				];
