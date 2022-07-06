@@ -8,7 +8,6 @@ function lettersOnly(str: string) {
 }
 
 presence.on("UpdateData", async () => {
-	// if (document.location.pathname.includes("/maps")) {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp
