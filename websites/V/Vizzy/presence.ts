@@ -104,8 +104,7 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				default:
-					if (!tabParams || !search)
-						presenceData.details = "Browsing features";
+					if (!tabParams || !search) presenceData.details = "Browsing features";
 			}
 			break;
 		}
