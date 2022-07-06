@@ -135,12 +135,12 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (iFrameVideo) {
-			presenceData.smallImageKey = videoPaused ? "pause" : "play",
-				presenceData.smallImageText = videoPaused
+			(presenceData.smallImageKey = videoPaused ? "pause" : "play"),
+				(presenceData.smallImageText = videoPaused
 					? strings.pause
-					: strings.play,
-				presenceData.startTimestamp = startTimestamp,
-				presenceData.endTimestamp = endTimestamp;
+					: strings.play),
+				(presenceData.startTimestamp = startTimestamp),
+				(presenceData.endTimestamp = endTimestamp);
 
 			if (videoPaused) {
 				delete presenceData.startTimestamp;
