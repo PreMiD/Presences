@@ -58,5 +58,4 @@ presence.on("UpdateData", async () => {
 	} else presenceData.details = "Viewing map";
 
 	presence.setActivity(presenceData);
-	// }
 });
