@@ -10,7 +10,7 @@ function lettersOnly(str: string) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname.includes("/place")) {
 		const place = document.location.href,
