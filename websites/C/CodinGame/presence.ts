@@ -44,12 +44,12 @@ presence.on("UpdateData", async () => {
 			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
 		} else presenceData.details = "Looking at Practice";
 	} else if (pathname.includes("/multiplayer")) {
-		if (pathname.includes("/multiplayer/clashofcode")) {
+		if (pathname.includes("/clashofcode")) {
 			presenceData.details = "Looking at Clash of Code";
 			presenceData.state = `Rank : ${
 				document.querySelector("span[class='rank-value']").textContent
 			} th`;
-		} else if (pathname.includes("/multiplayer/bot-programming")) {
+		} else if (pathname.includes("/bot-programming")) {
 			presenceData.details = "Training: Bot Programming";
 
 			try {
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("h1[class='title']").textContent
 				} - Not yet solved`;
 			}
-		} else if (pathname.includes("/multiplayer/codegolf")) {
+		} else if (pathname.includes("/codegolf")) {
 			presenceData.details = "Training: Code Golf";
 			try {
 				if (
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("span[class='rank-suffix']").textContent
 				}/${document.querySelector("span[class='rank-total']").textContent})`;
 			}
-		} else if (pathname.includes("/multiplayer/optimization")) {
+		} else if (pathname.includes("/optimization")) {
 			presenceData.details = "Training: Optimization";
 			try {
 				if (
@@ -103,42 +103,44 @@ presence.on("UpdateData", async () => {
 					document.querySelector("span[class='rank-suffix']").textContent
 				}/${document.querySelector("span[class='rank-total']").textContent})`;
 			}
-		} else presenceData.details = "Looking at Compete";
+		}
 	} else if (pathname.includes("/cooperate"))
 		presenceData.details = "Looking at Cooperate";
 	else if (pathname.includes("/learn"))
-		presenceData.details = "Looking at Learn";
+		presenceData.details = "Looking at the learn page";
 	else if (pathname.includes("/events"))
-		presenceData.details = "Looking at Events";
+		presenceData.details = "Looking at the events page";
 	else if (pathname.includes("/contribute/community"))
-		presenceData.details = "Looking at Community";
+		presenceData.details = "Looking at community page";
 	else if (pathname.includes("/contribute/my-contributions"))
-		presenceData.details = "Looking at My Contributions";
+		presenceData.details = "Looking at their contributions";
 	else if (pathname.includes("/live-streams"))
-		presenceData.details = "Looking at Live Streams";
-	else if (pathname.includes("/blog")) presenceData.details = "Looking at Blog";
+		presenceData.details = "Looking at live streams";
+	else if (pathname.includes("/blog"))
+		presenceData.details = "Looking at the blog";
 	else if (pathname.includes("/forum"))
-		presenceData.details = "Looking at Forum";
+		presenceData.details = "Looking at the forum";
 	else if (pathname.includes("/profile"))
-		presenceData.details = "Looking at Profile";
+		presenceData.details = "Looking at a profile";
 	else if (pathname.includes("/settings"))
-		presenceData.details = "Looking at Settings";
+		presenceData.details = "Looking at their settings";
 	else if (pathname.includes("/about"))
-		presenceData.details = "Looking at Abouts";
+		presenceData.details = "Looking at the about page";
 	else if (pathname.includes("/careers"))
-		presenceData.details = "Looking at Careers";
-	else if (pathname.includes("/work")) presenceData.details = "Looking at Work";
+		presenceData.details = "Looking at the careers page";
+	else if (pathname.includes("/work"))
+		presenceData.details = "Looking at the work page";
 	else if (
 		pathname.includes("/legal/privacy-policy") &&
 		pathname.includes("/playgrounds")
 	)
-		presenceData.details = "Looking at Privacy Policy";
+		presenceData.details = "Looking at the privacy policy";
 	else if (pathname.includes("/help-center"))
-		presenceData.details = "Looking at FAQ";
+		presenceData.details = "Looking at the FAQ page";
 	else if (pathname.includes("/start")) presenceData.details = "Not logged in";
 	else if (pathname.includes("/ide")) {
 		if (pathname.includes("/ide/puzzle/")) {
-			presenceData.details = `Solving the challenge : ${
+			presenceData.details = `Solving the challenge: ${
 				document.querySelectorAll("h1[class='cg-ide-title'] > span")[
 					document.querySelectorAll("h1[class='cg-ide-title'] > span").length -
 						1
@@ -148,7 +150,7 @@ presence.on("UpdateData", async () => {
 				const score = document.querySelector(
 					"span[class*='score-value']"
 				).textContent;
-				if (score === "N/A") presenceData.state = "(0%)";
+				if (score === "N/A") presenceData.state = "0%";
 				else {
 					try {
 						const rank = document.querySelector(
@@ -158,7 +160,7 @@ presence.on("UpdateData", async () => {
 							presenceData.state = `${rank}th/${
 								document.querySelector("span[class='rank-total']").textContent
 							}`;
-						} else presenceData.state = `(${score}%)`;
+						} else presenceData.state = `${score}%`;
 					} catch {
 						presenceData.state = `${score}%`;
 					}
