@@ -64,7 +64,8 @@ if (missingMetadata?.length > 0)
 		};
 
 		for (const key in newData)
-			if (typeof newData[key] === "undefined") delete newData[key];
+			if (typeof newData[key as keyof Metadata] === "undefined")
+				delete newData[key as keyof Metadata];
 
 		writeJson(newData, path);
 	}
