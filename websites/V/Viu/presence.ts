@@ -201,11 +201,7 @@ presence.on("UpdateData", async () => {
 		).value;
 
 		presenceData.details = (await strings).searchFor;
-		presenceData.state = searchQueryOn
-			? searchQuery
-				? searchQuery
-				: "(Unknow)"
-			: "(Hidden)";
+		presenceData.state = searchQueryOn ? searchQuery ?? "(Unknow)" : "(Hidden)";
 
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = (await strings).searching;

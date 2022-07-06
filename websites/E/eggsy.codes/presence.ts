@@ -5,24 +5,18 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	if (document.location.pathname !== "/projects/premid/custom-status") {
 		const details = document.querySelector("[name~=premid-details][content]")
-				? (
-						document.querySelector(
-							"[name~=premid-details][content]"
-						) as HTMLMetaElement
+				? document.querySelector<HTMLMetaElement>(
+						"[name~=premid-details][content]"
 				  ).content
 				: null,
 			state = document.querySelector("[name~=premid-state][content]")
-				? (
-						document.querySelector(
-							"[name~=premid-state][content]"
-						) as HTMLMetaElement
+				? document.querySelector<HTMLMetaElement>(
+						"[name~=premid-state][content]"
 				  ).content
 				: null,
 			smallImage = document.querySelector("[name~=premid-smallImage][content]")
-				? (
-						document.querySelector(
-							"[name~=premid-smallImage][content]"
-						) as HTMLMetaElement
+				? document.querySelector<HTMLMetaElement>(
+						"[name~=premid-smallImage][content]"
 				  ).content
 				: null;
 
@@ -31,7 +25,7 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "ec-logo",
 				details,
 				state,
-				smallImageKey: smallImage ? smallImage : "SOMETHING-SKETCHY",
+				smallImageKey: smallImage ?? "SOMETHING-SKETCHY",
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else {

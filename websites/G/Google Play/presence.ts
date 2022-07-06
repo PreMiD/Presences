@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
 
 								if (logo) presenceData.largeImageKey = await getShortURL(logo);
 
-								presenceData.details = `Viewing ${name ? name : "app"}`;
+								presenceData.details = `Viewing ${name ?? "app"}`;
 								presenceData.buttons = [
 									{
 										label: "View app",

@@ -34,8 +34,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Creating a new project";
 	else if (document.location.pathname.includes("dashboard/sites")) {
 		presenceData.details = "Editing project settings";
-		const projectName = document.title.replace(" - Webflow", "");
-		presenceData.state = projectName ? projectName : "Unknown Project";
+		presenceData.state =
+			document.title.replace(" - Webflow", "") ?? "Unknown Project";
 	} else if (document.location.pathname.includes("designers")) {
 		presenceData.details = "Browsing Designers";
 		if (document.location.pathname.includes("popular"))

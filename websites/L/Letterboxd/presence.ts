@@ -143,13 +143,11 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Viewing popular films";
 							break;
 						case "genre":
-							presenceData.details = `Viewing ${
-								path[2] ? path[2] : "unknown"
-							} films`;
+							presenceData.details = `Viewing ${path[2] ?? "unknown"} films`;
 							break;
 						case "decade":
 							presenceData.details = `Viewing films from the ${
-								path[2] ? path[2] : "unknown"
+								path[2] ?? "unknown"
 							}`;
 					}
 				} else presenceData.details = "Viewing films";
