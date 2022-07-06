@@ -156,7 +156,7 @@ presence.on("UpdateData", async () => {
 							}`;
 						} else presenceData.state = `(${score}%)`;
 					} catch {
-						presenceData.state = `(${score}%)`;
+						presenceData.state = `${score}%`;
 					}
 				}
 			} catch {
