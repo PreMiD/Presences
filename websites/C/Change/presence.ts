@@ -6,15 +6,14 @@ const presence = new Presence({
 	};
 
 presence.on("UpdateData", async () => {
-	const title: HTMLElement = document.querySelector(
+	const title = document.querySelector<HTMLElement>(
 		".mtl.mbxxxl.xs-mts.xs-mbxs.petition-title"
 	);
 	if (title) {
-		presenceData.details = (title as HTMLElement).textContent;
+		presenceData.details = title.textContent;
 		presenceData.state = (
-			document.querySelector(".mbxs span strong")
-				? document.querySelector(".mbxs span strong")
-				: (document.querySelector("p.type-weak") as HTMLElement)
+			document.querySelector(".mbxs span strong") ??
+			document.querySelector<HTMLElement>("p.type-weak")
 		).textContent;
 		presenceData.largeImageKey = "logo";
 		presenceData.buttons = [
