@@ -32,16 +32,14 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector("div.top > h1").textContent;
 	} else if (document.querySelectorAll(".episode-detail").length > 0) {
 		presenceData.details =
-			(document.querySelectorAll(".series-name")[0] as HTMLElement).title ||
+			document.querySelectorAll<HTMLElement>(".series-name")[0].title ||
 			"Bulunamadı";
 		presenceData.state = `${
-			document.querySelector("div.select-season > a").textContent
-				? document.querySelector("div.select-season > a").textContent
-				: "Bulunamadı"
+			document.querySelector("div.select-season > a").textContent ??
+			"Bulunamadı"
 		}- ${
-			document.querySelector("div.select-episode > a").textContent
-				? document.querySelector("div.select-episode > a").textContent
-				: "Bulunamadı"
+			document.querySelector("div.select-episode > a").textContent ??
+			"Bulunamadı"
 		}`;
 		presenceData.buttons = [
 			{ label: "İzle", url: document.location.href },

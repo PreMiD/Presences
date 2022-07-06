@@ -165,13 +165,10 @@ presence.on("UpdateData", async () => {
 					? uploader2
 					: document.querySelector(
 							"#upload-info yt-formatted-string.ytd-channel-name a"
-					  )
-					? document.querySelector(
-							"#upload-info yt-formatted-string.ytd-channel-name a"
-					  )
-					: uploaderEmbed &&
-					  YouTubeEmbed &&
-					  uploaderEmbed.textContent.length > 0
+					  ) ??
+					  (uploaderEmbed &&
+							YouTubeEmbed &&
+							uploaderEmbed.textContent.length > 0)
 					? uploaderEmbed
 					: (uploaderTV = truncateAfter(
 							uploaderTV.textContent.replace(/\s+/g, ""),
@@ -282,11 +279,10 @@ presence.on("UpdateData", async () => {
 		presence.setTrayTitle(
 			video.paused
 				? ""
-				: !finalTitle
-				? document.querySelector(
-						".title.style-scope.ytd-video-primary-info-renderer"
-				  ).textContent
-				: finalTitle
+				: finalTitle ??
+						document.querySelector(
+							".title.style-scope.ytd-video-primary-info-renderer"
+						).textContent
 		);
 
 		//* Remove timestamps if paused or live
