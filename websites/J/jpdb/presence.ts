@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/kanken-kanji"))
 		presenceData.details = "Viewing Kanken kanji list";
 	else if (document.location.pathname.includes("/analyze-text"))
-		presenceData.details = "Analyzing japanese text";
+		presenceData.details = "Analyzing Japanese text";
 	else if (document.location.pathname.includes("/about"))
 		presenceData.details = "Reading the about page";
 	else if (document.location.pathname.includes("/faq"))
