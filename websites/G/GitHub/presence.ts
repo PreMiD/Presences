@@ -57,13 +57,6 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("privacy"),
 		]);
 
-	if (privacy) {
-		delete presenceData.state;
-		presenceData.largeImageKey = "lg";
-		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-		delete presenceData.endTimestamp;
-	}
-
 	for (const [path, data] of Object.entries(pages)) {
 		if (pathname.includes(`/${path}`))
 			presenceData = { ...presenceData, ...data };
@@ -72,17 +65,15 @@ presence.on("UpdateData", async () => {
 	switch (true) {
 		// * For Profiles
 		case !!document.querySelector<HTMLBodyElement>("body.page-profile"):
+			if (privacy) {
+				presenceData.details = "Viewing a profile";
+				break;
+			}
 			const searchParam = new URLSearchParams(search).get("tab"),
 				profileName = document
 					.querySelector("span.p-nickname")
 					.textContent.trim();
 			presenceData.buttons = [{ label: "View Profile", url: href }];
-			if (privacy) {
-				presenceData.details = "Viewing a profile";
-				delete presenceData.state;
-				delete presenceData.buttons;
-				break;
-			}
 			if (cover) {
 				presenceData.largeImageKey = `${
 					document.querySelector<HTMLImageElement>("img.avatar").src
@@ -109,7 +100,7 @@ presence.on("UpdateData", async () => {
 						'meta[name~="octolytics-dimension-user_id"]'
 					).content
 				}`;
-			} else presenceData.largeImageKey = "lg";
+			}
 
 			if (pathname.includes("/tree/")) {
 				if (privacy) {
@@ -282,7 +273,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case pathname.includes("/orgs/"):
 			if (privacy) {
-				presenceData.details = "Viewing an organization's people";
+				presenceData.details = "Viewing the people in an organization";
 				delete presenceData.state;
 				delete presenceData.buttons;
 				break;
