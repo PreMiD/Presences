@@ -11,8 +11,8 @@ presence.on("UpdateData", async () => {
 	// if (document.location.pathname.includes("/maps")) {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
+		startTimestamp: browsingTimestamp
 	};
-	presenceData.startTimestamp = browsingTimestamp;
 	if (document.location.pathname.includes("/place")) {
 		const place = document.location.href,
 			indexes = [];
