@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 		presenceData.endTimestamp;
 	}
 
-	presenceData.state = `${songName}: ${state}`;
+	presenceData.state = `${state}: ${songName}`;
 	presenceData.buttons = [
 		{ label: "Go to station", url: document.location.href },
 	];
