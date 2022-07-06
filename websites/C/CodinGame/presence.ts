@@ -178,7 +178,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Waiting for the Clash of Code";
 		presenceData.buttons = [
 			{
-				label: "Join the clash",
+				label: "Join Clash",
 				url: document
 					.querySelector("input[class='copy-url-button']")
 					.getAttribute("value"),
