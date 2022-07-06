@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 		path = document.location.pathname;
 	if (path === "/") presenceData.details = "Browsing...";
 	else if (path.includes("/home")) {
-		presenceData.details = "On dashboard";
+		presenceData.details = "On the dashboard";
 		presenceData.state = `${
 			document.querySelectorAll(
 				"div[class='home-content'] > div > div > div > div > home > div > home-react > div > div > section > section > div > div > div > div"
