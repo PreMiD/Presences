@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity({
 			largeImageKey: "es-logo",
 			details: "Bir kategoriye göz atıyor:",
-			state: category ? category : "Belirsiz",
+			state: category || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/kanal/")) {
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity({
 			largeImageKey: "es-logo",
 			details: "Bir kanala göz atıyor:",
-			state: channel ? channel : "Belirsiz",
+			state: channel || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/derleme/arama/")) {
