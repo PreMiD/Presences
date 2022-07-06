@@ -8,9 +8,9 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/ar0zfXY.png",
 			startTimestamp: browsingTimestamp,
 		},
-		path = document.location.pathname;
-	if (path === "/") presenceData.details = "Browsing...";
-	else if (path.includes("/home")) {
+		{ pathname } = document.location;
+	if (pathname === "/") presenceData.details = "Browsing...";
+	else if (pathname.includes("/home")) {
 		presenceData.details = "On the dashboard";
 		presenceData.state = `${
 			document.querySelectorAll(
@@ -21,35 +21,35 @@ presence.on("UpdateData", async () => {
 				"div[class='home-content'] > div > div > div > div > home > div > home-react > div > div > section > section > div > div > div > div"
 			)[4].textContent
 		}`;
-	} else if (path.includes("/training")) {
-		if (path.includes("/training/easy/")) {
+	} else if (pathname.includes("/training")) {
+		if (pathname.includes("/easy/")) {
 			presenceData.details = "Training: Easy";
 			presenceData.state = `${
 				document.querySelector("h1[class='title']").textContent
 			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
-		} else if (path.includes("/training/medium/")) {
+		} else if (pathname.includes("/medium/")) {
 			presenceData.details = "Training: Medium";
 			presenceData.state = `${
 				document.querySelector("h1[class='title']").textContent
 			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
-		} else if (path.includes("/training/hard/")) {
+		} else if (pathname.includes("/hard/")) {
 			presenceData.details = "Training: Hard";
 			presenceData.state = `${
 				document.querySelector("h1[class='title']").textContent
 			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
-		} else if (path.includes("/training/expert/")) {
+		} else if (pathname.includes("/expert/")) {
 			presenceData.details = "Training: Very Hard";
 			presenceData.state = `${
 				document.querySelector("h1[class='title']").textContent
 			} (${document.querySelector("div[class='chart-inner']").textContent}%)`;
 		} else presenceData.details = "Looking at Practice";
-	} else if (path.includes("/multiplayer")) {
-		if (path.includes("/multiplayer/clashofcode")) {
+	} else if (pathname.includes("/multiplayer")) {
+		if (pathname.includes("/multiplayer/clashofcode")) {
 			presenceData.details = "Looking at Clash of Code";
 			presenceData.state = `Rank : ${
 				document.querySelector("span[class='rank-value']").textContent
 			} th`;
-		} else if (path.includes("/multiplayer/bot-programming")) {
+		} else if (pathname.includes("/multiplayer/bot-programming")) {
 			presenceData.details = "Training: Bot Programming";
 
 			try {
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("h1[class='title']").textContent
 				} - Not yet solved`;
 			}
-		} else if (path.includes("/multiplayer/codegolf")) {
+		} else if (pathname.includes("/multiplayer/codegolf")) {
 			presenceData.details = "Training: Code Golf";
 			try {
 				if (
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("span[class='rank-suffix']").textContent
 				}/${document.querySelector("span[class='rank-total']").textContent})`;
 			}
-		} else if (path.includes("/multiplayer/optimization")) {
+		} else if (pathname.includes("/multiplayer/optimization")) {
 			presenceData.details = "Training: Optimization";
 			try {
 				if (
@@ -104,36 +104,40 @@ presence.on("UpdateData", async () => {
 				}/${document.querySelector("span[class='rank-total']").textContent})`;
 			}
 		} else presenceData.details = "Looking at Compete";
-	} else if (path.includes("/cooperate"))
+	} else if (pathname.includes("/cooperate"))
 		presenceData.details = "Looking at Cooperate";
-	else if (path.includes("/learn")) presenceData.details = "Looking at Learn";
-	else if (path.includes("/events")) presenceData.details = "Looking at Events";
-	else if (path.includes("/contribute/community"))
+	else if (pathname.includes("/learn"))
+		presenceData.details = "Looking at Learn";
+	else if (pathname.includes("/events"))
+		presenceData.details = "Looking at Events";
+	else if (pathname.includes("/contribute/community"))
 		presenceData.details = "Looking at Community";
-	else if (path.includes("/contribute/my-contributions"))
+	else if (pathname.includes("/contribute/my-contributions"))
 		presenceData.details = "Looking at My Contributions";
-	else if (path.includes("/live-streams"))
+	else if (pathname.includes("/live-streams"))
 		presenceData.details = "Looking at Live Streams";
-	else if (path.includes("/blog")) presenceData.details = "Looking at Blog";
-	else if (path.includes("/forum")) presenceData.details = "Looking at Forum";
-	else if (path.includes("/profile"))
+	else if (pathname.includes("/blog")) presenceData.details = "Looking at Blog";
+	else if (pathname.includes("/forum"))
+		presenceData.details = "Looking at Forum";
+	else if (pathname.includes("/profile"))
 		presenceData.details = "Looking at Profile";
-	else if (path.includes("/settings"))
+	else if (pathname.includes("/settings"))
 		presenceData.details = "Looking at Settings";
-	else if (path.includes("/about")) presenceData.details = "Looking at Abouts";
-	else if (path.includes("/careers"))
+	else if (pathname.includes("/about"))
+		presenceData.details = "Looking at Abouts";
+	else if (pathname.includes("/careers"))
 		presenceData.details = "Looking at Careers";
-	else if (path.includes("/work")) presenceData.details = "Looking at Work";
+	else if (pathname.includes("/work")) presenceData.details = "Looking at Work";
 	else if (
-		path.includes("/legal/privacy-policy") &&
-		path.includes("/playgrounds")
+		pathname.includes("/legal/privacy-policy") &&
+		pathname.includes("/playgrounds")
 	)
 		presenceData.details = "Looking at Privacy Policy";
-	else if (path.includes("/help-center"))
+	else if (pathname.includes("/help-center"))
 		presenceData.details = "Looking at FAQ";
-	else if (path.includes("/start")) presenceData.details = "Not logged in";
-	else if (path.includes("/ide")) {
-		if (path.includes("/ide/puzzle/")) {
+	else if (pathname.includes("/start")) presenceData.details = "Not logged in";
+	else if (pathname.includes("/ide")) {
+		if (pathname.includes("/ide/puzzle/")) {
 			presenceData.details = `Solving the challenge : ${
 				document.querySelectorAll("h1[class='cg-ide-title'] > span")[
 					document.querySelectorAll("h1[class='cg-ide-title'] > span").length -
@@ -174,19 +178,19 @@ presence.on("UpdateData", async () => {
 				document.querySelector("span[class*='minutes']").textContent
 			}m : ${document.querySelector("span[class*='seconds']").textContent}s`;
 		}
-	} else if (path.includes("/clashofcode/clash/")) {
+	} else if (pathname.includes("/clashofcode/clash/")) {
 		presenceData.details = "Waiting for the Clash of Code";
 		presenceData.buttons = [
 			{
-				label: "Join Clash",
+				label: "Join clash",
 				url: document
 					.querySelector("input[class='copy-url-button']")
 					.getAttribute("value"),
 			},
 		];
 	} else if (
-		!path.includes("/legal/privacy-policy") &&
-		path.includes("/playgrounds")
+		!pathname.includes("/legal/privacy-policy") &&
+		pathname.includes("/playgrounds")
 	) {
 		presenceData.details = document.querySelector(
 			"h1[class='playground_header-title'] > span"
