@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = document.location.pathname.includes(
 				"Sponsorship_Flyer"
 			)
-				? "Reading about sponsoring picoCTF"
+				? "Reading about sponsoring"
 				: "Reading a research paper";
 		} else if (document.location.pathname === "/get_started.html") {
 			const viewing =
@@ -73,16 +73,16 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Reading terms of service";
 					break;
 				case "/about.html":
-					presenceData.details = "Reading about picoCTF";
+					presenceData.details = "Reading the about page";
 					break;
 				case "/research.html":
-					presenceData.details = "Reading picoCTF's research";
+					presenceData.details = "Reading the research page";
 					break;
 				case "/sponsors.html":
-					presenceData.details = "Reading about picoCTF's sponsors";
+					presenceData.details = "Viewing sponsors";
 					break;
 				case "/contact.html":
-					presenceData.details = "Viewing contact page";
+					presenceData.details = "Viewing the contact page";
 					break;
 			}
 		}
