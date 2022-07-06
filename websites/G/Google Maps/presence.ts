@@ -14,9 +14,8 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		};
 	if (document.location.pathname.includes("/place")) {
-		if (privacy) 
-			presenceData.details = "Viewing a place";
-		 else {
+		if (privacy) presenceData.details = "Viewing a place";
+		else {
 			const place = document.location.href,
 				indexes = [];
 			for (const [index, element] of Array.from(place).entries())
@@ -30,9 +29,9 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (document.location.pathname.includes("/dir")) {
-		if (privacy) 
+		if (privacy)
 			presenceData.details = "Viewing directions from one place to another";
-		 else {
+		else {
 			presenceData.details = "Viewing directions";
 			let from, destination;
 			if (document.querySelector("#sb_ifc50 > input") === null) {
@@ -56,9 +55,8 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (document.location.pathname.includes("/search")) {
-		if (privacy) 
-			presenceData.details = "Searching for a place";
-		 else {
+		if (privacy) presenceData.details = "Searching for a place";
+		else {
 			const search = document.location.href,
 				indexes = [];
 			for (const [index, element] of Array.from(search).entries())
