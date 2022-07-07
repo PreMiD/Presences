@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
         case "flowlab.io": {
             switch (document.location.pathname) {
                 case "/": {
-                    presenceData.details = "Viewing Home Page";
+                    presenceData.details = "Viewing home page";
                     break;
                 }
                 case "/game/list": {
