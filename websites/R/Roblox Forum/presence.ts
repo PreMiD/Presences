@@ -15,11 +15,9 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = date;
 	} else if (document.location.pathname.startsWith("/threads/")) {
 		presenceData.details = "Browsing a thread...";
-		presenceData.state =
-			"Thread: " +
-			document
-				.querySelector("meta[property='og:title']")
-				.getAttribute("content");
+		presenceData.state = `Thread: ${document
+			.querySelector("meta[property='og:title']")
+			.getAttribute("content")}`;
 		presenceData.startTimestamp = date;
 	} else if (document.location.pathname.startsWith("/forums/")) {
 		presenceData.details = "Browsing a category...";
