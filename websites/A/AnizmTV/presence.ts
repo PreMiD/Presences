@@ -1,4 +1,4 @@
-const presence = new Presence({ clientId: "778715860638367804" }),
+const presence = new Presence({ clientId: "980817205480550410" }),
 	strings = presence.getStrings({
 		playing: "presence.playback.playing",
 		paused: "presence.playback.paused",
@@ -81,6 +81,7 @@ presence.on("UpdateData", async () => {
 	if (title && episode) {
 		presenceData.details = title.textContent;
 		presenceData.state = episode.textContent.split("/ ").slice(1).join(" ");
+		presenceData.state += " İzliyor";
 		presenceData.buttons = [
 			{
 				label: "Bölümü İzle",

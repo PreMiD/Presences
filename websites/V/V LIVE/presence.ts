@@ -197,7 +197,7 @@ presence.on("UpdateData", async () => {
 			"/channel/(\\w*\\d*)/board/": {
 				details: strings.channelBoard.replace(
 					"{0}",
-					document.querySelector("#root > div > div > div > div > div > h3")
+					document.querySelector("#root > div > div > div > div > div > h2")
 						?.textContent ?? "ERROR: NOT FOUND!"
 				),
 				state: strings.ofChannel.replace("{0}", channelPageChannelName),

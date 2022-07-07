@@ -110,9 +110,9 @@ presence.on("UpdateData", async () => {
 				? "Listening..."
 				: "Disconnected"
 			: userState,
-		details: roomName ? roomName : userState,
+		details: roomName ?? userState,
 		state: inCall ? `${userCount} users` : roomName ? userState : null,
-		startTimestamp: joinedRoomTimestamp ? joinedRoomTimestamp : Date.now(),
+		startTimestamp: joinedRoomTimestamp ?? Date.now(),
 	};
 
 	if (!presenceData.details) delete presenceData.details;
