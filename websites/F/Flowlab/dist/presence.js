@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
             (presenceData.state = `${document.getElementById("game_author").textContent}`);
     }
     else if (document.location.pathname === "/resources")
-        presenceData.details = "Viewing Flowlab Examples";
+        presenceData.details = "Viewing Flowlab examples";
     else if (document.location.pathname === "/lab/blog/")
         presenceData.details = "Viewing Flowlab Blog";
     else if (document.location.pathname.includes("/blog/")) {
