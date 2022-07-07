@@ -1,77 +1,61 @@
 const presence = new Presence({
-		clientId: "993929577099448481",
-	}),
-	date = Date.now();
+	clientId: "993929577099448481",
+});
 
 presence.on("UpdateData", async () => {
+	const presenceData: PresenceData = {
+			largeImageKey: "ig-mal",
+			smallImageKey: "small",
+			smallImageText: "Swooosh!",
+		},
+		date = Math.floor(Date.now() / 1000);
+
 	if (document.location.pathname === "/") {
-		const presenceData: PresenceData = {
-			details: "Viewing the homepage",
-			smallImageKey: "small",
-			smallImageText: "Swoosh",
-			largeImageKey: "ig-mal",
-			startTimestamp: date,
-		};
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.startsWith("/members")) {
-		const presenceData: PresenceData = {
-			details: "Looking at a profile",
-			state: `Profile: ${document
-				.querySelector("meta[property='og:title']")
-				.getAttribute("content")}`,
-			smallImageKey: "small",
-			smallImageText: "Profiles?!",
-			largeImageKey: "ig-mal",
-			startTimestamp: date,
-		};
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.startsWith("/whats-new")) {
-		const presenceData: PresenceData = {
-			details: "Looking at the latest content",
-			state: document
-				.querySelector("meta[property='og:title']")
-				.getAttribute("content"),
-			smallImageKey: "small",
-			smallImageText: "Profiles?!",
-			largeImageKey: "ig-mal",
-			startTimestamp: date,
-		};
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.startsWith("/thread")) {
-		const presenceData: PresenceData = {
-			details: "Viewing a thread",
-			state: `Thread: ${document
-				.querySelector("meta[property='og:title']")
-				.getAttribute("content")}`,
-			smallImageKey: "small",
-			smallImageText: "Threading...",
-			largeImageKey: "ig-mal",
-			startTimestamp: date,
-		};
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.startsWith("/pages/premium")) {
-		const presenceData: PresenceData = {
-			details: "Looking at the premium packages",
-			smallImageKey: "small",
-			smallImageText: "Premium?!",
-			largeImageKey: "ig-mal",
-			startTimestamp: date,
-		};
-		presence.setActivity(presenceData);
+		presenceData.details = "Viewing the homepage";
+		presenceData.startTimestamp = date;
+	} else if (document.location.pathname.startsWith("/threads/")) {
+		presenceData.details = "Browsing a thread...";
+		presenceData.state = document
+			.querySelector("meta[property='og:title']")
+			.getAttribute("content");
+		presenceData.startTimestamp = date;
 	} else if (document.location.pathname.startsWith("/forums/")) {
-		const presenceData: PresenceData = {
-			details: "Viewing categories",
-			state: `Category: ${document
-				.querySelector("meta[property='og:title']")
-				.getAttribute("content")}`,
-			largeImageKey: "ig-mal",
-			startTimestamp: date,
-		};
-		presence.setActivity(presenceData);
+		presenceData.details = "Browsing a category...";
+		presenceData.state = `Category: ${document
+			.querySelector("meta[property='og:title']")
+			.getAttribute("content")}`;
+		presenceData.startTimestamp = date;
+	} else if (document.location.pathname.startsWith("/members/")) {
+		presenceData.details = "Viewing a profile...";
+		presenceData.state = `Profile: ${document
+			.querySelector("meta[property='og:title']")
+			.getAttribute("content")}`;
+		presenceData.startTimestamp = date;
+	} else if (document.location.pathname.startsWith("/whats-new/")) {
+		presenceData.details = "Browsing latest content...";
+		presenceData.state = document
+			.querySelector("meta[property='og:title']")
+			.getAttribute("content");
+		presenceData.startTimestamp = date;
 	} else {
-		presence.setActivity({
-			details: "Vibing on RobloxForum",
-			largeImageKey: "ig-mal",
-		});
+		switch (document.location.pathname) {
+			case "/pages/premium/":
+				presenceData.details = "Browsing premium packages";
+				presenceData.startTimestamp = date;
+				break;
+			case "/account/account-details/":
+				presenceData.details = "Editing my account details";
+				presenceData.startTimestamp = date;
+				break;
+			case "/account/alerts":
+				presenceData.details = "Viewing my alerts in full";
+				presenceData.startTimestamp = date;
+				break;
+			case "/account/privacy":
+				presenceData.details = "Editing my privacy settings";
+				presenceData.startTimestamp = date;
+				break;
+		}
 	}
+	presence.setActivity(presenceData);
 });
