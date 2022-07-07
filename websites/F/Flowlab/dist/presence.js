@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
                     break;
                 }
                 case "/game/browse": {
-                    presenceData.details = "Viewing Games Page";
+                    presenceData.details = "Viewing games page";
                     break;
                 }
             }
