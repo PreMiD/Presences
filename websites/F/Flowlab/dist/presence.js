@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
                     break;
                 }
                 case "/game/list": {
-                    presenceData.details = "Viewing Their Games";
+                    presenceData.details = "Viewing their games";
                     break;
                 }
                 case "/game/browse": {
