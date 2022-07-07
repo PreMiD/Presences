@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname === "/resources")
         presenceData.details = "Viewing Flowlab examples";
     else if (document.location.pathname === "/lab/blog/")
-        presenceData.details = "Viewing Flowlab Blog";
+        presenceData.details = "Viewing Flowlab blog";
     else if (document.location.pathname.includes("/blog/")) {
         presenceData.state = "Reading Blog Entry";
         presenceData.details = document
