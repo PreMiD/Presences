@@ -22,7 +22,6 @@ presence.on("UpdateData", async () => {
 			document
 				.querySelector("meta[property='og:title']")
 				.getAttribute("content");
-		presenceData.startTimestamp = date;
 	} else if (document.location.pathname.startsWith("/forums/")) {
 		presenceData.details = "Browsing a category...";
 		presenceData.state = `Category: ${document
