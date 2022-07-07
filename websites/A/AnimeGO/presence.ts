@@ -1,16 +1,20 @@
 const presence = new Presence({
-		clientId: "935597176426491924",
-	}),
-	strings = presence.getStrings({
+	clientId: "935597176426491924",
+});
+
+async function getStrings() {
+	return presence.getStrings({
 		play: "general.watchingVid",
 		pause: "general.paused",
 	});
+}
 
 let video = {
-	duration: 0,
-	currentTime: 0,
-	paused: true,
-};
+		duration: 0,
+		currentTime: 0,
+		paused: true,
+	},
+	strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on(
 	"iFrameData",
@@ -43,6 +47,8 @@ presence.on("UpdateData", async () => {
 				: typeContent === "character" || typeContent === "characters"
 				? "персонажа"
 				: "человека";
+
+	if (!strings) strings = await getStrings();
 
 	if (document.location.pathname === "/")
 		presenceData.details = "На главной странице";
@@ -103,9 +109,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Смотрит ${privacy ? typeCurrent : titleContent}`;
 			presenceData.state = privacy ? "" : serie;
 			presenceData.smallImageKey = video.paused ? "pause" : "play";
-			presenceData.smallImageText = video.paused
-				? (await strings).pause
-				: (await strings).play;
+			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 			if (time) {
 				if (video.paused) {
 					delete presenceData.startTimestamp;
