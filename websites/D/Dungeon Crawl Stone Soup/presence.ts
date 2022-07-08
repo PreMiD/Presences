@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (window.location.hash === "#lobby")
-		presenceData.details = "Browsing lobby..";
+		presenceData.details = "Browsing lobby";
 	else if (window.location.hash.startsWith("#watch")) {
 		presenceData.details = `Spectating: ${
 			document.querySelector<HTMLSpanElement>("#stats_titleline").textContent
