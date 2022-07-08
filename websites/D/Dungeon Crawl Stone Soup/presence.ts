@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 				url: document.location.href,
 			},
 		];
-	} else if (window.location.hash.startsWith("#play-dcss-")) {
+	} else if (window.location.hash.startsWith("#play-")) {
 		presenceData.details = `Playing as: ${
 			document.querySelector<HTMLSpanElement>("#stats_titleline").textContent
 		}`;
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Spectate",
-				url: `http://crawl.akrasiac.org:8080/#watch-${document
+				url: `${document.location.origin}/#watch-${document
 					.querySelector<HTMLSpanElement>("#stats_titleline")
 					.textContent.split("the")[0]
 					.trim()}`,
