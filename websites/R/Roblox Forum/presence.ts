@@ -31,9 +31,9 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Profile: ${document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content")}`;
-	} else if (document.location.pathname.startsWith("/whats-new/")) {
+	} else if (document.location.pathname.startsWith("/whats-new/"))
 		presenceData.details = "Browsing latest content";
-	} else {
+	else {
 		switch (document.location.pathname) {
 			case "/pages/premium/":
 				presenceData.details = "Browsing premium packages";
