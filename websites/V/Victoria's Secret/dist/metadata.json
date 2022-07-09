@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "author": {
+    "name": "Skeptator",
+    "id": "203906692834918401"
+  },
+  "service": "Victoria's Secret",
+  "description": {
+    "en": "Woman's clothing "
+  },
+  "url": [
+    "www.victoriassecret.co.uk",
+    "www.victoriassecret.com",
+    "victoriassecret.ie"
+  ],
+  "version": "1.0.0",
+  "logo": "https://imgur.com/a/6XlvylO",
+  "thumbnail": "https://imgur.com/3OLB4Y3",
+  "color": "#ff00bb",
+  "category": "other",
+  "tags": [
+    "Lingerie",
+    "Cosmetics",
+    "Fragrances"
+  ]
+}
