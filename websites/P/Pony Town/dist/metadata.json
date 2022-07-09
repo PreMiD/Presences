@@ -11,9 +11,6 @@
 		}
 	],
 	"service": "Pony Town",
-	"altnames": [
-		"Pony"
-	],
 	"description": {
 		"en": "A game of ponies building a town."
 	},
