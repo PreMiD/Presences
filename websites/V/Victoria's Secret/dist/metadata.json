@@ -17,6 +17,14 @@
 	"logo": "https://i.imgur.com/CuWo20p.png",
 	"thumbnail": "https://i.imgur.com/3OLB4Y3.jpeg",
 	"color": "#ff00bb",
-	"category": "other"
+	"category": "other",
+	"tags": [
+			"lingerie",
+			"underwear",
+			"cosmetics",
+			"fragrances"
+
+
+	]
 
 }
