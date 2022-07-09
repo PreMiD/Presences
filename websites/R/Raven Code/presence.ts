@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 
 		case "/codes":
 			presenceData.details = "Kodlar sayfasını görüntülüyor";
-			if (searchParams.get("search") !== null)
+			if (searchParams.get("search"))
 				presenceData.state = `Arama: ${searchParams.get("search")}`;
 			break;
 	}
