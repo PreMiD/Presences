@@ -103,7 +103,7 @@ export function isValidJSON(text: string): boolean {
 
 export type ValidEventName = "push" | "pull_request" | "uncommitted";
 
-export interface Metadata extends Record<string, any> {
+export interface Metadata {
 	$schema: `https://schemas.premid.app/metadata/${number}.${number}`;
 	author: Contributor;
 	contributors?: Contributor[];
