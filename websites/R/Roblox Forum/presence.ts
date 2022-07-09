@@ -9,23 +9,18 @@ presence.on("UpdateData", async () => {
 		smallImageText: "Swooosh!",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
-	if (document.location.pathname === "/") 
+	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the homepage";
 	else if (document.location.pathname.startsWith("/threads/")) {
 		presenceData.details = "Browsing a thread";
 		presenceData.state = `Thread: ${document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content")}`;
-	 else if (document.location.pathname.startsWith("/threads/")) {
+	} else if (document.location.pathname.startsWith("/threads/")) {
 		presenceData.details = "Browsing a thread...";
 		presenceData.state = `Thread: ${document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content")}`;
-		presenceData.state =
-			`Thread: ${ 
-			document
-				.querySelector("meta[property='og:title']")
-				.getAttribute("content")}`;
 	} else if (document.location.pathname.startsWith("/forums/")) {
 		presenceData.details = "Browsing a category";
 		presenceData.state = `Category: ${document
@@ -53,6 +48,6 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Editing my privacy settings";
 				break;
 		}
-		presence.setActivity(presenceData);
 	}
+	presence.setActivity(presenceData);
 });
