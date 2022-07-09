@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.7",
+    "author": {
+      "name": "Lavenderleaff",
+      "id": "988801425196867644"
+    },
+    "service": "Discohook",
+    "description": {
+      "en": "The easiest way to build and send Discord messages with embeds using webhooks."
+    },
+    "url": "discohook.org",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/cIhqNG1.png",
+    "thumbnail": "https://i.imgur.com/cIhqNG1.png",
+    "color": "#3c47d7",
+    "tags": ["discord", "webhooks"],
+    "category": "other"
+  }
