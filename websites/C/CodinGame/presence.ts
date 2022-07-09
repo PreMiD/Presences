@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("span[class='rank-suffix']").textContent
 				}/${document.querySelector("span[class='rank-total']").textContent})`;
 			}
-		}
+		} else presenceData.details = "Looking at a competition";
 	} else if (pathname.includes("/cooperate"))
 		presenceData.details = "Looking at Cooperate";
 	else if (pathname.includes("/learn"))
