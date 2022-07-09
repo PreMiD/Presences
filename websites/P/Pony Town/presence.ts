@@ -6,6 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "main",
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/") presenceData.details = "In-Game";
 	else if (document.location.pathname.includes("help"))
@@ -16,7 +17,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Customizing their character.";
 	else if (document.location.pathname.includes("account"))
 		presenceData.details = "Editing their account settings.";
-	presenceData.startTimestamp = websiteLoadTimestamp;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
