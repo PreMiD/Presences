@@ -14,5 +14,7 @@
 	"thumbnail": "https://i.imgur.com/gAHmasT.jpg",
 	"color": "#88e6ec",
 	"category": "games",
-	"tags": ["game-maker", "flowlab"]
+	"tags": [
+		"games"
+	]
 }
