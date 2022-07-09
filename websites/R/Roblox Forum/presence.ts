@@ -16,11 +16,6 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Thread: ${document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content")}`;
-	} else if (document.location.pathname.startsWith("/threads/")) {
-		presenceData.details = "Browsing a thread...";
-		presenceData.state = `Thread: ${document
-			.querySelector("meta[property='og:title']")
-			.getAttribute("content")}`;
 	} else if (document.location.pathname.startsWith("/forums/")) {
 		presenceData.details = "Browsing a category";
 		presenceData.state = `Category: ${document
