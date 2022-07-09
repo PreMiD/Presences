@@ -43,6 +43,6 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Editing my privacy settings";
 				break;
 		}
-	presence.setActivity(presenceData);
-};
-})
+		presence.setActivity(presenceData);
+	}
+});
