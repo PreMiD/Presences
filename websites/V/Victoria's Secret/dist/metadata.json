@@ -14,13 +14,9 @@
 		"victoriassecret.ie"
 	],
 	"version": "1.0.0",
-	"logo": "https://imgur.com/a/6XlvylO",
-	"thumbnail": "https://imgur.com/3OLB4Y3",
+	"logo": "https://i.imgur.com/CuWo20p.png",
+	"thumbnail": "https://i.imgur.com/3OLB4Y3.jpeg",
 	"color": "#ff00bb",
-	"category": "other",
-	"tags": [
-		"Lingerie",
-		"Cosmetics",
-		"Fragrances"
-	]
+	"category": "other"
+
 }
