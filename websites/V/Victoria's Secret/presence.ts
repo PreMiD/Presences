@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = 'Viewing Favourites'
 					document.querySelector("h2").textContent
 
-			} if (document.location.pathname.includes("/Login")) {
+			} else if (document.location.pathname.includes("/Login")) {
 				presenceData.details = 'Logging In'
 					document.querySelector("h2").textContent
 
