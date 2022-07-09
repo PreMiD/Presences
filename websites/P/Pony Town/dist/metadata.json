@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Lavenderleaff",
+		"id": "205984221859151873"
+	},
+	"contributors": [
+		{
+			"name": "joerkig",
+			"id": "205984221859151873"
+		}
+	],
+	"service": "Pony Town",
+	"altnames": [
+		"Pony"
+	],
+	"description": {
+		"en": "A game of ponies building a town."
+	},
+	"url": "pony.town",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/aZXi6K1.png",
+	"thumbnail": "https://i.imgur.com/aZXi6K1.png",
+	"color": "#ecff5c",
+	"category": "games",
+	"tags": [
+		"mlp",
+		"animals"
+	]
+}
