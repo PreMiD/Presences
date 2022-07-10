@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
 				}
 			}
 		}
-		if (iFrameVideo === true && !isNaN(duration)) {
+		if (iFrameVideo && !isNaN(duration)) {
 			presenceData.details = animeName;
 			const [startTimestamp, endTimestamp] = presence.getTimestamps(
 				Math.floor(currentTime),
