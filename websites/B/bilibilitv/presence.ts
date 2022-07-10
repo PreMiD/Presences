@@ -32,13 +32,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "main",
 			startTimestamp: browsingTimestamp,
 		},
-		title =
-			document.querySelector(
-				"div.layout-body.media-width > div > ul > li:nth-child(3) > span"
-			)?.textContent ??
-			document.querySelector(
-				"div.layout-normal > div.layout-body.media-width > div > ul > li:nth-child(2) > a"
-			)?.textContent,
+		title = document.querySelector(".bstar-meta__title")?.textContent,
 		playing = !document.querySelector(
 			"img.player-mobile-icon.player-mobile-pause-icon.player-mobile-active"
 		);
@@ -63,28 +57,18 @@ presence.on("UpdateData", async () => {
 						url: document.location.href,
 					},
 				];
+				delete presenceData.startTimestamp;
 				break;
 			}
 			case "play": {
-				let ep;
-				if (
-					document.querySelector("span.series-text.active") &&
-					!document
-						.querySelector("div.video-info__title-wrap > h1 > a")
-						.textContent.includes(
-							document.querySelector("span.series-text.active").textContent
-						)
-				) {
-					ep = `${document
-						.querySelector("span.series-text.active")
-						.textContent.replace(/ *\([^)]*\) */g, "")} | ${strings.episode} ${
-						title.match(/\d+/g)[0]
-					}`;
-				} else ep = `${strings.episode} ${title.match(/\d+/g)[0]}`;
-				presenceData.details = document.querySelector(
-					"div.video-info__title-wrap > h1 > a"
-				).textContent;
-				presenceData.state = ep;
+				presenceData.details = title;
+				presenceData.state = `${
+					document.querySelector(".ep-item__reference--active").textContent
+				} • ${
+					document.querySelector(".player-mobile-time-current-text").textContent
+				} / ${
+					document.querySelector(".player-mobile-time-total-text").textContent
+				}`;
 				presenceData.smallImageKey = playing ? "play" : "pause";
 				presenceData.smallImageText = playing ? strings.play : strings.pause;
 				presenceData.largeImageKey = document
@@ -96,6 +80,7 @@ presence.on("UpdateData", async () => {
 						url: document.location.href,
 					},
 				];
+				delete presenceData.startTimestamp;
 				break;
 			}
 			case "media": {
