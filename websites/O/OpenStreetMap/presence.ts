@@ -12,12 +12,11 @@ let locationcity: string,
 	selectedObject: boolean;
 setInterval(() => {
 	if (x && y) {
-		fetch(
+		const fetchingGeo = fetch(
 			`https://nominatim.openstreetmap.org/reverse?lat=${x}&lon=${y}&format=json`
-		)
-			.then(res => res.json())
-			.then(res => {
-				//locationcity = res.address.city ?? res.address.hamlet ?? res.address.village ?? res.address.town;
+		);
+		fetchingGeo.then(res => {
+			res.json().then(res => {
 				[locationcity, locationstate, locationcountry] = [
 					res.address.isolated_dwelling ??
 						res.address.hamlet ??
@@ -27,8 +26,9 @@ setInterval(() => {
 					res.address.state,
 					res.address.country,
 				];
-			})
-			.catch();
+			});
+		});
+		fetchingGeo.catch();
 	}
 }, 5000);
 
