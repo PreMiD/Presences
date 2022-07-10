@@ -6,9 +6,9 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "icon",
 			startTimestamp: flowlabTimestamp,
 		},
-		{ pathname, hostname } = document.location;
+		{ pathname } = document.location;
 
-	if (hostname === "flowlab.io") {
+	if (document.location.hostname === "flowlab.io") {
 		switch (pathname) {
 			case "/": {
 				presenceData.details = "Viewing home page";
