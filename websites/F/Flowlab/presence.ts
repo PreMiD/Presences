@@ -1,5 +1,5 @@
 const presence = new Presence({ clientId: "991160367629750372" }),
-	flowlabTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
