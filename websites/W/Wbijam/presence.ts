@@ -30,13 +30,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/1DbVzt2.png",
 			startTimestamp: browsingTimestamp,
 		},
-		domain = document.location.host,
-		path = document.location.pathname,
+		{ hostname, pathname, href } = document.location,
 		{ title } = document,
 		removeExtension = (str: string) => str.split(".")[0];
 
-	if (domain === "wbijam.pl") {
-		switch (removeExtension(path)) {
+	if (hostname === "wbijam.pl") {
+		switch (removeExtension(pathname)) {
 			case "/": {
 				presenceData.details = "Przegląda stronę główną";
 				break;
@@ -63,14 +62,14 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 		}
-	} else if (domain.endsWith("wbijam.pl") && domain !== "wbijam.pl") {
-		const pathWithoutExtension = removeExtension(path),
+	} else if (hostname.endsWith("wbijam.pl") && hostname !== "wbijam.pl") {
+		const pathWithoutExtension = removeExtension(pathname),
 			animeName = title.split("-")[0];
-		if (path === "/" || pathWithoutExtension === "/wiadomosci") {
+		if (pathname === "/" || pathWithoutExtension === "/wiadomosci") {
 			presenceData.details = "Przegląda subdomenę anime";
 			presenceData.state = animeName;
 			presenceData.buttons = [
-				{ label: "Przejdź na stronę", url: document.location.href },
+				{ label: "Przejdź na stronę", url: href },
 			];
 		} else {
 			switch (pathWithoutExtension) {
@@ -112,7 +111,7 @@ presence.on("UpdateData", async () => {
 						document
 							.querySelector("#tresc_lewa > div > h1")
 							?.textContent.toLowerCase()
-							.includes(domain.split(".")[0].toLowerCase())
+							.includes(hostname.split(".")[0].toLowerCase())
 					) {
 						presenceData.details = "Przegląda odcinki";
 						presenceData.state = `${animeName.replace(
@@ -120,7 +119,7 @@ presence.on("UpdateData", async () => {
 							""
 						)}: ${pathWithoutExtension.replace("_", " ").slice(1)}`;
 						presenceData.buttons = [
-							{ label: "Zobacz listę odcinków", url: document.location.href },
+							{ label: "Zobacz listę odcinków", url: href },
 						];
 					} else if (
 						document.querySelector("#tresc_lewa > div.episode-calendar-wrapper")
@@ -131,7 +130,7 @@ presence.on("UpdateData", async () => {
 							.textContent.match(/(?<=").+?(?=")/i)
 							.toString();
 						presenceData.buttons = [
-							{ label: "Zobacz odcinek", url: document.location.href },
+							{ label: "Zobacz odcinek", url: href },
 						];
 					}
 				}
@@ -139,14 +138,12 @@ presence.on("UpdateData", async () => {
 		}
 		if (iFrameVideo === true && !isNaN(duration)) {
 			presenceData.details = animeName;
-			const [startTimestamp, endTimestamp] = presence.getTimestamps(
+			[presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
 				Math.floor(currentTime),
 				Math.floor(duration)
 			);
 			presenceData.smallImageKey = paused ? "pause" : "play";
 			presenceData.smallImageText = paused ? "Pauza" : "Odtwarzanie";
-			presenceData.startTimestamp = startTimestamp;
-			presenceData.endTimestamp = endTimestamp;
 
 			if (paused) {
 				delete presenceData.startTimestamp;
