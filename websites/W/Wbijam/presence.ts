@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 				}
 			}
 		}
-		if (iFrameVideo === true && !isNaN(duration)) {
+		if (iFrameVideo && !isNaN(duration)) {
 			presenceData.details = animeName;
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
