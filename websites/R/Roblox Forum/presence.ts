@@ -6,7 +6,6 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "ig-mal",
 		smallImageKey: "small",
-		smallImageText: "Swooosh!",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	if (document.location.pathname === "/")
