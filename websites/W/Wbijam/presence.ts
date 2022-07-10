@@ -68,9 +68,7 @@ presence.on("UpdateData", async () => {
 		if (pathname === "/" || pathWithoutExtension === "/wiadomosci") {
 			presenceData.details = "Przegląda subdomenę anime";
 			presenceData.state = animeName;
-			presenceData.buttons = [
-				{ label: "Przejdź na stronę", url: href },
-			];
+			presenceData.buttons = [{ label: "Przejdź na stronę", url: href }];
 		} else {
 			switch (pathWithoutExtension) {
 				case "/spoilerzone": {
@@ -129,19 +127,15 @@ presence.on("UpdateData", async () => {
 							.querySelector("#tresc_lewa > h1")
 							.textContent.match(/(?<=").+?(?=")/i)
 							.toString();
-						presenceData.buttons = [
-							{ label: "Zobacz odcinek", url: href },
-						];
+						presenceData.buttons = [{ label: "Zobacz odcinek", url: href }];
 					}
 				}
 			}
 		}
 		if (iFrameVideo === true && !isNaN(duration)) {
 			presenceData.details = animeName;
-			[presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
-				Math.floor(currentTime),
-				Math.floor(duration)
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
 			presenceData.smallImageKey = paused ? "pause" : "play";
 			presenceData.smallImageText = paused ? "Pauza" : "Odtwarzanie";
 
