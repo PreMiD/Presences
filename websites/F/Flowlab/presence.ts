@@ -4,7 +4,7 @@ const presence = new Presence({ clientId: "991160367629750372" }),
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "icon",
-			startTimestamp: flowlabTimestamp,
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
 
