@@ -11,10 +11,9 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname.includes("/rooms")) {
 		presenceData.details = "Viewing rooms";
-		const room = document.querySelector(
+		presenceData.state = document.querySelector(
 			"#site-content > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > section > div._b8stb0 > span > h1"
 		).textContent;
-		presenceData.state = room;
 		presenceData.buttons = [
 			{ label: "View Room", url: document.location.href },
 		];
