@@ -48,9 +48,11 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else if (document.location.pathname === "/me/settings") {
-				const tab = document.querySelector("button.B01")?.textContent;
 				presenceData.details = "Editing Profile";
-				presenceData.state = `${"Tab:" + ` ${tab ? tab : "User"}`}`;
+				presenceData.state = `${
+					"Tab:" +
+					` ${document.querySelector("button.B01")?.textContent ?? "User"}`
+				}`;
 			} else if (document.location.pathname === "/themes") {
 				presenceData.details = "Viewing page:";
 				presenceData.state = "Themes";

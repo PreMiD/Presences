@@ -1,11 +1,12 @@
 import "source-map-support/register";
 
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import axios from "axios";
 import { blue, green, red, yellow } from "chalk";
 import ParseJSON, { ObjectNode } from "json-to-ast";
 import { validate } from "jsonschema";
 import { compare, diff } from "semver";
+import { createAnnotation, getChangedFolders, type Metadata } from "../util";
 
 const latestMetadataSchema = async (): Promise<string[]> => {
 		const versions = (
@@ -84,57 +85,40 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 		console.log("::endgroup::");
 		stats.failedToValidate++;
 	},
-	loadMetadata = (path: string): [metadata, string?] => {
+	loadMetadata = (path: string): [Metadata | null, string?] => {
 		try {
 			const metaFile = readFileSync(path, "utf8");
 			return [JSON.parse(metaFile), metaFile];
 		} catch {
 			return [null];
 		}
-	},
-	createAnnotation = (params: CreateAnnotationParams): string => {
-		const input = [];
-
-		for (const [key, value] of Object.entries(params)) {
-			if (["type", "message"].includes(key)) continue;
-			else input.push(`${key}=${value}`);
-		}
-
-		return `::${params.type} ${input.join(",")}::${params.message}`;
-	},
-	changedMetaFiles = [
-		...new Set(
-			readFileSync("./file_changes.txt", "utf-8")
-				.trim()
-				.split("\n")
-				.filter(file =>
-					["metadata.json", "presence.ts", "iframe.ts"].some(x =>
-						file.endsWith(x)
-					)
-				)
-				.map(file => {
-					const path = file.split("/");
-
-					path.at(-1) === "metadata.json"
-						? path.splice(path.length - 2, 2)
-						: path.pop();
-
-					return `${path.join("/")}/dist/metadata.json`;
-				})
-		),
-	];
+	};
 
 (async (): Promise<void> => {
+	console.log(blue("Getting changed files..."));
+
+	const changedFolders = await getChangedFolders().then(f =>
+			f
+				//TODO: Add support for programs in the future
+				.filter(p => p.includes("websites/"))
+		),
+		changedMetaFiles = changedFolders.map(p => (p += "/dist/metadata.json"));
+
 	console.log(blue("Getting latest schema..."));
 
 	const [latestSchema, latestSchemaVersion] = await latestMetadataSchema(),
 		schema = (await axios.get(latestSchema)).data;
 
+	if (!changedMetaFiles.length) {
+		console.log(blue("There are no presences to validate, exiting..."));
+		process.exit(0);
+	}
+
 	console.log(
 		blue(`Beginning validation of ${changedMetaFiles.length} presences...`)
 	);
 
-	for (const metaFile of changedMetaFiles) {
+	for (const [index, metaFile] of changedMetaFiles.entries()) {
 		const [meta, rawMeta] = loadMetadata(metaFile),
 			folder = metaFile.split("/")[2];
 
@@ -169,20 +153,24 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 			validLangs = langFiles.map(l => l.lang),
 			oldVersion = presences[0]?.metadata.version,
 			invalidLangs: string[] = [],
-			versionCheck = isValidVersionBump(newVersion, oldVersion);
+			versionCheck = isValidVersionBump(newVersion, oldVersion),
+			iFrameExists = existsSync(changedFolders[index] + "/iframe.ts");
 
+		// Get all invalid langs
 		Object.keys(meta.description).forEach(lang => {
 			const index = validLangs.findIndex((l: string) => l === lang);
-			if (index === -1) invalidLangs.push(lang);
+			if (!~index) invalidLangs.push(lang);
 		});
 
+		// Check if schema is up to date
 		if (
 			versionCheck === true &&
 			folder === meta.service &&
 			!invalidLangs.length &&
-			result.valid
+			result.valid &&
+			iFrameExists === !!meta.iframe
 		) {
-			if (meta.$schema && meta.$schema !== latestSchema) {
+			if (meta.$schema !== latestSchema) {
 				validatedWithWarnings(
 					service,
 					createAnnotation({
@@ -197,6 +185,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 		} else {
 			const errors: string[] = [];
 
+			// Check if version is correct
 			if (typeof versionCheck === "string") {
 				errors.push(
 					createAnnotation({
@@ -209,6 +198,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 				);
 			}
 
+			// Check if service name matches folder name
 			if (folder !== service) {
 				errors.push(
 					createAnnotation({
@@ -221,6 +211,31 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 				);
 			}
 
+			// Check if iframe is correct
+			if (meta.iframe && !iFrameExists) {
+				errors.push(
+					createAnnotation({
+						type: "error",
+						file: metaFile,
+						line: getLine("iframe"),
+						title: "instance.iframe",
+						message: "Property was set to true but no iframe.ts file was found",
+					})
+				);
+			} else if (!meta.iframe && iFrameExists) {
+				errors.push(
+					createAnnotation({
+						type: "error",
+						file: metaFile,
+						line: getLine("iframe"),
+						title: "instance.iframe",
+						message:
+							"iframe.ts file was found but instance.iframe was not set to true",
+					})
+				);
+			}
+
+			// Write all schema validation errors
 			for (const error of result.errors) {
 				let property = error.property.split(".").at(1) as key;
 
@@ -264,6 +279,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 				}
 			}
 
+			// Write all invalid lang errors
 			for (const invalidLang of invalidLangs) {
 				errors.push(
 					createAnnotation({
@@ -334,11 +350,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 		console.log(yellow("One or more services validated, but with warnings."));
 })();
 
-type key = keyof metadata;
-
-interface metadata extends Metadata {
-	$schema: string;
-}
+type key = keyof Metadata;
 
 interface APIQuery {
 	data: {
@@ -355,15 +367,4 @@ interface APIQuery {
 			}
 		];
 	};
-}
-
-interface CreateAnnotationParams {
-	type: "warning" | "error" | "notice";
-	title?: string;
-	file: string;
-	line?: string | number;
-	endLine?: string | number;
-	col?: string | number;
-	endColumn?: string | number;
-	message: string;
 }
