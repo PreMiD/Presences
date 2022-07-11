@@ -35,14 +35,15 @@ presence.on("UpdateData", async () => {
 		title = document.querySelector(".bstar-meta__title")?.textContent,
 		playing = !document.querySelector(
 			"img.player-mobile-icon.player-mobile-pause-icon.player-mobile-active"
-		);
+		),
+		{ hostname, href, pathname } = document.location;
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
 	// Main Site
-	if (document.location.hostname === "www.bilibili.tv") {
-		switch (document.location.pathname.toLowerCase().split("/")[2]) {
+	if (hostname === "www.bilibili.tv") {
+		switch (pathname.toLowerCase().split("/")[2]) {
 			case "video": {
 				presenceData.details = strings.watchingVid;
 				presenceData.state = title;
@@ -54,7 +55,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonWatchVideo,
-						url: document.location.href,
+						url: href,
 					},
 				];
 				delete presenceData.startTimestamp;
@@ -77,7 +78,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.buttonViewEpisode,
-						url: document.location.href,
+						url: href,
 					},
 				];
 				delete presenceData.startTimestamp;
@@ -124,8 +125,8 @@ presence.on("UpdateData", async () => {
 			}
 		}
 		// Studio
-	} else if (document.location.hostname === "studio.bilibili.tv") {
-		if (document.location.pathname.toLowerCase().split("/")[1])
+	} else if (hostname === "studio.bilibili.tv") {
+		if (pathname.toLowerCase().split("/")[1])
 			presenceData.details = document.querySelector(".is-active").textContent;
 		else {
 			presenceData.details = document.querySelector(
