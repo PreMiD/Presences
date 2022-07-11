@@ -21,11 +21,15 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Booking ${
 			document.querySelector("#LISTING_CARD-title").textContent
 		}`;
-		presenceData.state = `From ${document.querySelector(
+		presenceData.state = `From ${
+			document.querySelector(
 				'[data-plugin-in-point-id="DATE_PICKER"] > div > div > div._b7b6bk > div._1qyi2pa > div._jbk4n3'
-			).textContent} for ${document.querySelector(
+			).textContent
+		} for ${
+			document.querySelector(
 				'[data-plugin-in-point-id="GUEST_PICKER"] > div > div > div._b7b6bk > div._1qyi2pa > div._jbk4n3'
-			).textContent}`;
+			).textContent
+		}`;
 		presenceData.buttons = [
 			{ label: "View Booking Details", url: document.location.href },
 		];
