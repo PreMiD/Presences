@@ -322,18 +322,18 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `Viewing ${profileName}'s ${searchParam}`;
 				else presenceData.details = `Viewing ${profileName}'s profile`;
 				break;
-			// * For repositories
+			// * For gists
 			case !!document.querySelector("div.repository-content.gist-content"):
 				if (privacy) {
 					presenceData.details = "Viewing a gist";
 					break;
 				}
-				const repository = {
+				const gist = {
 					owner: pathname.split("/")[1],
 					name: document.querySelector("[itemprop = 'name'] > a").innerHTML,
 				};
-				presenceData.buttons = [{ label: "View Repository", url: href }];
-				presenceData.details = `Browsing gist ${repository.name} by ${repository.owner}`;
+				presenceData.buttons = [{ label: "View Gist", url: href }];
+				presenceData.details = `Browsing gist ${gist.name} by ${gist.owner}`;
 		}
 	}
 	if (timestamp) presenceData.startTimestamp = browsingTimestamp;
