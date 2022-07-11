@@ -25,7 +25,7 @@
 		"pl": "GitHub to system do zarządzania projektami i wersjonowania kodu, a także platforma społecznościowa stworzona dla programistów.",
 		"vi_VN": "GitHub là hệ thống quản lý mã và dự án cũng như là nền tảng mạng xã hội dành cho các nhà phát triển."
 	},
-	"url": "github.com",
+	"url": ["github.com", "gist.github.com"],
 	"version": "2.11.0",
 	"logo": "https://i.imgur.com/cr3bzXB.png",
 	"thumbnail": "https://i.imgur.com/G816tlo.png",
@@ -53,7 +53,7 @@
 			"id": "privacy",
 			"title": "Privacy Mode",
 			"icon": "fad fa-user-secret",
-			"value": true
+			"value": false
 		}
 	]
 }
