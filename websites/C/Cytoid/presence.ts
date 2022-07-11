@@ -4,8 +4,8 @@
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const [time, buttons, cover] = await Promise.all([
-			presence.getSetting<boolean>("time"),
+	const [timestamps, buttons, cover] = await Promise.all([
+			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("cover"),
 		]),
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 					: "↓"
 			}`;
 			const previewedCard = [...document.querySelectorAll("audio")].find(
-				element => element.paused === false
+				element => !element.paused
 			)?.parentElement.parentElement.parentElement;
 			if (previewedCard) {
 				presenceData.details =
@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
 	if (document.location.pathname === "/credits")
 		presenceData.details = "Viewing Credits";
 
-	if (!time) {
+	if (!timestamps) {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}

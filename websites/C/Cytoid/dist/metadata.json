@@ -22,7 +22,7 @@
 	],
 	"settings": [
 		{
-			"id": "time",
+			"id": "timestamps",
 			"title": "Show Timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
