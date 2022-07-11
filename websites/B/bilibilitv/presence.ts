@@ -36,6 +36,14 @@ presence.on("UpdateData", async () => {
 		playing = !document.querySelector(
 			"img.player-mobile-icon.player-mobile-pause-icon.player-mobile-active"
 		),
+		thumbnail =
+			document
+				.querySelector(".player-mobile-video-wrap > video")
+				?.getAttribute("poster")
+				?.split("@")[0] ||
+			document
+				.querySelector<HTMLMetaElement>('meta[name="og:image"]')
+				?.content?.split("@")[0],
 		{ hostname, href, pathname } = document.location;
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -49,9 +57,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = title;
 				presenceData.smallImageKey = playing ? "play" : "pause";
 				presenceData.smallImageText = playing ? strings.play : strings.pause;
-				presenceData.largeImageKey = document
-					.querySelector<HTMLMetaElement>('meta[name="og:image"]')
-					.content.split("@")[0];
+				presenceData.largeImageKey = thumbnail;
 				presenceData.buttons = [
 					{
 						label: strings.buttonWatchVideo,
@@ -72,9 +78,7 @@ presence.on("UpdateData", async () => {
 				}`;
 				presenceData.smallImageKey = playing ? "play" : "pause";
 				presenceData.smallImageText = playing ? strings.play : strings.pause;
-				presenceData.largeImageKey = document
-					.querySelector<HTMLMetaElement>('meta[name="og:image"]')
-					.content.split("@")[0];
+				presenceData.largeImageKey = thumbnail;
 				presenceData.buttons = [
 					{
 						label: strings.buttonViewEpisode,
