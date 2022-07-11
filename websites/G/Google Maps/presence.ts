@@ -29,8 +29,7 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (document.location.pathname.includes("/dir")) {
-		if (privacy)
-			presenceData.details = "Viewing directions to a location";
+		if (privacy) presenceData.details = "Viewing directions to a location";
 		else {
 			presenceData.details = "Viewing directions";
 			let from, destination;
