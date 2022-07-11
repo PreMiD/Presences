@@ -72,9 +72,9 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${
 					document.querySelector(".ep-item__reference--active").textContent
 				} • ${
-					document.querySelector(".player-mobile-time-current-text").textContent
+					document.querySelector(".player-mobile-time-current-text")?.textContent ?? "00:00"
 				} / ${
-					document.querySelector(".player-mobile-time-total-text").textContent
+					document.querySelector(".player-mobile-time-total-text")?.textContent ?? "00:00"
 				}`;
 				presenceData.smallImageKey = playing ? "play" : "pause";
 				presenceData.smallImageText = playing ? strings.play : strings.pause;
