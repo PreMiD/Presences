@@ -19,16 +19,18 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("gift"))
 		presenceData.details = "Viewing gift center";
 	else if (document.location.pathname.includes("/pd")) {
-		presenceData.details = `Viewing ${document.querySelector(
-			"h1.bc-heading.bc-color-base.bc-pub-break-word.bc-text-bold"
-		).textContent} by ${
+		presenceData.details = `Viewing ${
+			document.querySelector(
+				"h1.bc-heading.bc-color-base.bc-pub-break-word.bc-text-bold"
+			).textContent
+		} by ${
 			document.querySelector(
 				"li.bc-list-item.authorLabel > a.bc-link.bc-color-link"
 			).textContent
 		}`;
 		presenceData.largeImageKey = document
-		.querySelector("img.bc-pub-block.bc-image-inset-border.js-only-element")
-		.getAttribute("src");
+			.querySelector("img.bc-pub-block.bc-image-inset-border.js-only-element")
+			.getAttribute("src");
 	} else if (document.location.pathname.includes("/webplayer")) {
 		presenceData.details = `Listening to ${document
 			.querySelector("input[name=title]")
