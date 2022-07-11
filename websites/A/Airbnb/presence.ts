@@ -6,9 +6,9 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
+		startTimestamp: browsingTimestamp,
 	};
 
-	presenceData.startTimestamp = browsingTimestamp;
 	if (document.location.pathname.includes("/rooms")) {
 		presenceData.details = "Viewing rooms";
 		const room = document.querySelector(
@@ -22,13 +22,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Booking ${
 			document.querySelector("#LISTING_CARD-title").textContent
 		}`;
-		const dates = document.querySelector(
+		presenceData.state = `From ${document.querySelector(
 				'[data-plugin-in-point-id="DATE_PICKER"] > div > div > div._b7b6bk > div._1qyi2pa > div._jbk4n3'
-			).textContent,
-			guests = document.querySelector(
+			).textContent} for ${document.querySelector(
 				'[data-plugin-in-point-id="GUEST_PICKER"] > div > div > div._b7b6bk > div._1qyi2pa > div._jbk4n3'
-			).textContent;
-		presenceData.state = `From ${dates} for ${guests}`;
+			).textContent}`;
 		presenceData.buttons = [
 			{ label: "View Booking Details", url: document.location.href },
 		];
