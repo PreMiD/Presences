@@ -75,8 +75,9 @@ presence.on("UpdateData", async () => {
 						.textContent.trim();
 				presenceData.buttons = [{ label: "View Profile", url: href }];
 				if (cover) {
-					presenceData.largeImageKey = `${document.querySelector<HTMLImageElement>("img.avatar").src
-						}.png`;
+					presenceData.largeImageKey = `${
+						document.querySelector<HTMLImageElement>("img.avatar").src
+					}.png`;
 				}
 				if (searchParam)
 					presenceData.details = `Viewing ${profileName}'s ${searchParam}`;
@@ -94,10 +95,11 @@ presence.on("UpdateData", async () => {
 				};
 				presenceData.buttons = [{ label: "View Repository", url: href }];
 				if (cover && !privacy) {
-					presenceData.largeImageKey = `https://avatars.githubusercontent.com/u/${document.querySelector<HTMLMetaElement>(
-						'meta[name~="octolytics-dimension-user_id"]'
-					).content
-						}`;
+					presenceData.largeImageKey = `https://avatars.githubusercontent.com/u/${
+						document.querySelector<HTMLMetaElement>(
+							'meta[name~="octolytics-dimension-user_id"]'
+						).content
+					}`;
 				}
 
 				if (pathname.includes("/tree/")) {
@@ -142,11 +144,13 @@ presence.on("UpdateData", async () => {
 								break;
 							}
 							presenceData.details = `Looking at issue #${repository.id}`;
-							presenceData.state = `${document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
-								.textContent
-								} - ${document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
+							presenceData.state = `${
+								document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
 									.textContent
-								}`;
+							} - ${
+								document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
+									.textContent
+							}`;
 							presenceData.buttons = [{ label: "View Issue", url: href }];
 						}
 					} else {
@@ -176,12 +180,14 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					presenceData.details = `Looking at pull request #${repository.id}`;
-					presenceData.state = `${document.querySelectorAll<HTMLAnchorElement>(
-						"a.author.Link--primary"
-					)[0].textContent
-						} - ${document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
+					presenceData.state = `${
+						document.querySelectorAll<HTMLAnchorElement>(
+							"a.author.Link--primary"
+						)[0].textContent
+					} - ${
+						document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
 							.textContent
-						}`;
+					}`;
 					presenceData.buttons = [{ label: "View Pull Request", url: href }];
 				} else if (pathname.endsWith("/discussions")) {
 					if (privacy) {
@@ -200,11 +206,13 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					presenceData.details = `Looking at discussion #${repository.id}`;
-					presenceData.state = `${document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
-						.textContent
-						} - ${document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
+					presenceData.state = `${
+						document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
 							.textContent
-						}`;
+					} - ${
+						document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
+							.textContent
+					}`;
 					presenceData.buttons = [{ label: "View Discussion", url: href }];
 				} else if (
 					pathname.includes("/pulse") ||
@@ -252,8 +260,9 @@ presence.on("UpdateData", async () => {
 				presenceData.state =
 					document.querySelector<HTMLHeadingElement>("h1").textContent;
 				if (cover) {
-					presenceData.largeImageKey = `${document.querySelector<HTMLImageElement>("div > img").src
-						}`;
+					presenceData.largeImageKey = `${
+						document.querySelector<HTMLImageElement>("div > img").src
+					}`;
 				}
 				break;
 			case pathname.includes("/features"):
@@ -269,63 +278,62 @@ presence.on("UpdateData", async () => {
 					delete presenceData.buttons;
 					break;
 				}
-				presenceData.details = `Viewing ${pathname.split("/")[2]}'s ${pathname.split("/")[3]
-					}`;
+				presenceData.details = `Viewing ${pathname.split("/")[2]}'s ${
+					pathname.split("/")[3]
+				}`;
 				if (cover) {
-					presenceData.largeImageKey = `${document.querySelector<HTMLImageElement>("h1 > a > img").src
-						}`;
+					presenceData.largeImageKey = `${
+						document.querySelector<HTMLImageElement>("h1 > a > img").src
+					}`;
 				}
 				break;
 			case pathname === "/" || !pathname:
 				presenceData.details = "Viewing the home page";
 				break;
 		}
-	} else {
-		if (document.location.pathname === "\/") {
-			presenceData.details = "Creating a GitHub gist";
-		} else if (document.location.pathname.includes("/discover")) {
-			presenceData.details = "Browsing GitHub gists";
-		} else if (document.location.pathname.includes("/forked")) {
-			presenceData.details = "Browsing forked GitHub gists";
-		} else if (document.location.pathname.includes("/starred")) {
-			presenceData.details = "Browsing starred GitHub gists";
-		} else {
-			switch (true) {
-				// * For Profiles
-				case !!document.querySelector("div.js-profile-editable-replace"):
-					console.log(1);
-					if (privacy) {
-						presenceData.details = "Viewing a profile";
-						break;
-					}
-					const searchParam = new URLSearchParams(search).get("tab"),
-						profileName = document
-							.querySelector("span.p-nickname")
-							.textContent.trim();
-					presenceData.buttons = [{ label: "View Profile", url: href }];
-					if (cover) {
-						presenceData.largeImageKey = `${document.querySelector<HTMLImageElement>("img.avatar.avatar-user.width-full").src
-							}.png`;
-					}
-					console.log(presenceData.largeImageKey);
-					if (searchParam)
-						presenceData.details = `Viewing ${profileName}'s ${searchParam}`;
-					else presenceData.details = `Viewing ${profileName}'s profile`;
+	} else if (pathname === "/") presenceData.details = "Creating a GitHub gist";
+	else if (pathname.includes("/discover"))
+		presenceData.details = "Browsing GitHub gists";
+	else if (pathname.includes("/forked"))
+		presenceData.details = "Browsing forked GitHub gists";
+	else if (pathname.includes("/starred"))
+		presenceData.details = "Browsing starred GitHub gists";
+	else {
+		switch (true) {
+			// * For Profiles
+			case !!document.querySelector("div.js-profile-editable-replace"):
+				if (privacy) {
+					presenceData.details = "Viewing a profile";
 					break;
-				// * For repositories
-				case !!document.querySelector("div.repository-content.gist-content"):
-					if (privacy) {
-						console.log("privacy");
-						presenceData.details = "Viewing a gist";
-						break;
-					}
-					const repository = {
-						owner: pathname.split("/")[1],
-						name: document.querySelector("[itemprop = 'name'] > a").innerHTML,
-					};
-					presenceData.buttons = [{ label: "View Repository", url: href }];
-					presenceData.details = `Browsing gist ${repository.name} by ${repository.owner}`;
-			}
+				}
+				const searchParam = new URLSearchParams(search).get("tab"),
+					profileName = document
+						.querySelector("span.p-nickname")
+						.textContent.trim();
+				presenceData.buttons = [{ label: "View Profile", url: href }];
+				if (cover) {
+					presenceData.largeImageKey = `${
+						document.querySelector<HTMLImageElement>(
+							"img.avatar.avatar-user.width-full"
+						).src
+					}.png`;
+				}
+				if (searchParam)
+					presenceData.details = `Viewing ${profileName}'s ${searchParam}`;
+				else presenceData.details = `Viewing ${profileName}'s profile`;
+				break;
+			// * For repositories
+			case !!document.querySelector("div.repository-content.gist-content"):
+				if (privacy) {
+					presenceData.details = "Viewing a gist";
+					break;
+				}
+				const repository = {
+					owner: pathname.split("/")[1],
+					name: document.querySelector("[itemprop = 'name'] > a").innerHTML,
+				};
+				presenceData.buttons = [{ label: "View Repository", url: href }];
+				presenceData.details = `Browsing gist ${repository.name} by ${repository.owner}`;
 		}
 	}
 	if (timestamp) presenceData.startTimestamp = browsingTimestamp;
