@@ -30,11 +30,11 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.includes("/dir")) {
 		if (privacy)
-			presenceData.details = "Viewing directions from one place to another";
+			presenceData.details = "Viewing directions to a location";
 		else {
 			presenceData.details = "Viewing directions";
 			let from, destination;
-			if (document.querySelector("#sb_ifc50 > input") === null) {
+			if (!document.querySelector("#sb_ifc50 > input")) {
 				(from = document
 					.querySelector("#sb_ifc51 > input")
 					.getAttribute("aria-label")),
