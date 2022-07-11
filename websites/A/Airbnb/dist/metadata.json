@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Tofuine",
-		"id": "993151156652093480"
+		"id": "734631480541708291"
 	},
 	"service": "Airbnb",
 	"description": {
@@ -10,7 +10,7 @@
 	},
 	"url": "www.airbnb.com",
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/UnBuyQM.png",
+	"logo": "https://i.imgur.com/DyWMYDn.png",
 	"thumbnail": "https://i.imgur.com/3ltXMdS.png",
 	"color": "#f9585e",
 	"category": "other",
