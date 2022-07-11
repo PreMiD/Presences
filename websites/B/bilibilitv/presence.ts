@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ hostname, href, pathname } = document.location,
-		pathArray = pathname.split("/").toString().toLowerCase(),
+		pathArray = pathname?.split("/"),
 		title = document.querySelector(".bstar-meta__title")?.textContent,
 		playing = !document.querySelector(
 			"img.player-mobile-icon.player-mobile-pause-icon.player-mobile-active"
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 	}
 	// Main Site
 	if (hostname === "www.bilibili.tv") {
-		switch (pathArray) {
+		switch (pathArray[2]) {
 			case "video": {
 				presenceData.details = strings.watchingVid;
 				presenceData.state = title;
