@@ -273,11 +273,37 @@ const // official website
 	},
 	presenceData: PresenceData = {
 		largeImageKey: PRESENCE_ART_ASSETS.logo,
-	};
+	},
+	uploadedImages: Record<string, string> = {};
 
 let ApiClient: ApiClient,
 	presence: Presence,
-	wasLogin = false;
+	wasLogin = false,
+	isUploading = false;
+
+async function uploadImage(url: string): Promise<string> {
+	if (isUploading) return PRESENCE_ART_ASSETS.logo;
+
+	if (uploadedImages[url]) return uploadedImages[url];
+	isUploading = true;
+
+	const file = await fetch(url).then(x => x.arrayBuffer()),
+		outputUrl = await fetch("https://bashupload.com", {
+			method: "POST",
+			body: file,
+		})
+			.then(x => x.text())
+			.then(x => x.match(/https(.*)/)?.[0]);
+
+	isUploading = false;
+	return (uploadedImages[url] = outputUrl);
+}
+
+function isPrivateIp(ip = location.hostname): boolean {
+	return /^(?:(?:10|127|192\.168|172\.(?:1[6-9]|2\d|3[01]))\.|localhost)/.test(
+		ip
+	);
+}
 
 function jellyfinBasenameUrl(): string {
 	return `${`${location.protocol}//${location.host}${location.pathname.replace(
@@ -286,8 +312,9 @@ function jellyfinBasenameUrl(): string {
 	)}`}`;
 }
 
-function mediaPrimaryImage(mediaId: string): string {
-	return `${jellyfinBasenameUrl()}Items/${mediaId}/Images/Primary?fillHeight=256&fillWidth=256`;
+async function mediaPrimaryImage(mediaId: string): Promise<string> {
+	const mediaUrl = `${jellyfinBasenameUrl()}Items/${mediaId}/Images/Primary?fillHeight=256&fillWidth=256`;
+	return isPrivateIp() ? await uploadImage(mediaUrl) : mediaUrl;
 }
 
 /**
@@ -315,7 +342,7 @@ async function handleAudioPlayback(): Promise<void> {
 		document.querySelector<HTMLDivElement>(".nowPlayingImage").style
 			.backgroundImage
 	)
-		presenceData.largeImageKey = mediaPrimaryImage(mediaId);
+		presenceData.largeImageKey = await mediaPrimaryImage(mediaId);
 
 	// playing
 	if (!audioElem.paused) {
@@ -498,7 +525,7 @@ async function handleVideoPlayback(): Promise<void> {
 					(await presence.getSetting("showRichImages")) &&
 					(await presence.getSetting("showMoviePoster"))
 				)
-					largeImage = mediaPrimaryImage(mediaInfo.Id);
+					largeImage = await mediaPrimaryImage(mediaInfo.Id);
 
 				break;
 			case "Episode":
@@ -509,7 +536,7 @@ async function handleVideoPlayback(): Promise<void> {
 					(await presence.getSetting("showRichImages")) &&
 					(await presence.getSetting("showTvShowPoster"))
 				)
-					largeImage = mediaPrimaryImage(mediaInfo.ParentBackdropItemId);
+					largeImage = await mediaPrimaryImage(mediaInfo.ParentBackdropItemId);
 				break;
 			default:
 				title = `Watching ${mediaInfo.Type}`;
@@ -803,7 +830,6 @@ async function isJellyfinWebClient(): Promise<boolean> {
  */
 async function updateData(): Promise<void> {
 	await setDefaultsToPresence();
-
 	let showPresence = false;
 
 	// we are on the official jellyfin page
