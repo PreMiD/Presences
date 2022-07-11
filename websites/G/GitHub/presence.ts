@@ -281,7 +281,9 @@ presence.on("UpdateData", async () => {
 				break;
 		}
 	} else {
-		if (document.location.pathname.includes("/discover")) {
+		if (document.location.pathname === "\/") {
+			presenceData.details = "Creating a GitHub gist";
+		} else if (document.location.pathname.includes("/discover")) {
 			presenceData.details = "Browsing GitHub gists";
 		} else if (document.location.pathname.includes("/forked")) {
 			presenceData.details = "Browsing forked GitHub gists";
