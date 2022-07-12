@@ -25,8 +25,9 @@ presence.on("UpdateData", async () => {
 		else presenceData.details = "Browing Photomash...";
 	} else if (document.location.pathname.startsWith("/x/")) {
 		presenceData.largeImageKey = "x";
-		if (document.location.hash.endsWith("#editor"))
-			presenceData.details = "Editing a photo...";
+		if (document.location.hash.endsWith("#editor")) {
+			presenceData.details = `Editing a photo at ${document.querySelector("#zoom-level").textContent} zoom...`;
+		}	
 		else if (document.location.hash.endsWith("template"))
 			presenceData.details = "Browsing templates...";
 		else if (document.location.hash.endsWith("search"))
@@ -38,8 +39,10 @@ presence.on("UpdateData", async () => {
 		else presenceData.details = "Browsing Pixlr X...";
 	} else if (document.location.pathname.startsWith("/e/")) {
 		presenceData.largeImageKey = "e";
-		if (document.location.hash.endsWith("#editor"))
-			presenceData.details = "Editing a photo...";
+		if (document.location.hash.endsWith("#editor")) {
+			presenceData.details = "Editing a photo in:"
+			presenceData.state = `${document.querySelector("#horizontal-image-info").textContent}.`;
+		}
 		else if (document.location.hash.endsWith("template"))
 			presenceData.details = "Browsing templates...";
 		else if (document.location.hash.endsWith("search"))
