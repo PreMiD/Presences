@@ -26,9 +26,10 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/x/")) {
 		presenceData.largeImageKey = "x";
 		if (document.location.hash.endsWith("#editor")) {
-			presenceData.details = `Editing a photo at ${document.querySelector("#zoom-level").textContent} zoom...`;
-		}	
-		else if (document.location.hash.endsWith("template"))
+			presenceData.details = `Editing a photo at ${
+				document.querySelector("#zoom-level").textContent
+			} zoom...`;
+		} else if (document.location.hash.endsWith("template"))
 			presenceData.details = "Browsing templates...";
 		else if (document.location.hash.endsWith("search"))
 			presenceData.details = "Searching for stock images...";
@@ -40,10 +41,11 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/e/")) {
 		presenceData.largeImageKey = "e";
 		if (document.location.hash.endsWith("#editor")) {
-			presenceData.details = "Editing a photo in:"
-			presenceData.state = `${document.querySelector("#horizontal-image-info").textContent}.`;
-		}
-		else if (document.location.hash.endsWith("template"))
+			presenceData.details = "Editing a photo in:";
+			presenceData.state = `${
+				document.querySelector("#horizontal-image-info").textContent
+			}.`;
+		} else if (document.location.hash.endsWith("template"))
 			presenceData.details = "Browsing templates...";
 		else if (document.location.hash.endsWith("search"))
 			presenceData.details = "Searching for stock images...";
