@@ -28,7 +28,7 @@ async function getStrings() {
 			watching: "general.watching",
 			readButton: "general.buttonReadArticle",
 			viewProfileButton: "general.buttonViewProfile",
-			streamButton: "general.buttonWatchStream"
+			streamButton: "general.buttonWatchStream",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 			largeImageKey: "reddit_lg",
-			startTimestamp
+			startTimestamp,
 		},
 		{ pathname } = window.location;
 	if (oldReddit) {
@@ -70,8 +70,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						url: `https://www.reddit.com${pathname}`,
-						label: strings.readButton
-					}
+						label: strings.readButton,
+					},
 				];
 			} else {
 				// if privacy mode is enabled
@@ -87,8 +87,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						url: `https://www.reddit.com${pathname}`,
-						label: strings.viewProfileButton
-					}
+						label: strings.viewProfileButton,
+					},
 				];
 			} else presenceData.details = strings.profile.slice(0, -4); // if privacy mode is enabled
 		} else if (pathname.startsWith("/search")) {
@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
 			).textContent;
 			subReddit =
 				subReddit === "Home" &&
-					document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1] !== null
+				document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1] !== null
 					? document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1].textContent
 					: subReddit;
 			presenceData.details = `${strings.reading} '${postTitle}'`;
@@ -118,12 +118,12 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					url: `https://www.reddit.com${pathname}`,
-					label: strings.readButton
-				}
+					label: strings.readButton,
+				},
 			];
-		} else {
+		} else 
 			presenceData.details = `${strings.reading.slice(0, -1)}`;
-		}
+		
 	} else if (pathname.startsWith("/user/")) {
 		if (!privacy) {
 			// if privacy mode is disabled
@@ -141,8 +141,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					url: `https://www.reddit.com${pathname}`,
-					label: strings.viewProfileButton
-				}
+					label: strings.viewProfileButton,
+				},
 			];
 		} else presenceData.details = strings.profile.slice(0, -4); // if privacy mode is enabled
 	} else if (pathname.startsWith("/search")) {
@@ -160,14 +160,13 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					url: `https://www.reddit.com${pathname}`,
-					label: strings.streamButton
-				}
+					label: strings.streamButton,
+				},
 			];
 		}
 		presenceData.smallImageKey = "live";
 		presenceData.smallImageText = strings.live;
-	} else {
-		if (!privacy) {
+	} else if (!privacy) {
 			const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
 			if (sub === null) {
 				const sub2 = document.querySelector(
@@ -189,31 +188,30 @@ presence.on("UpdateData", async () => {
 				presenceData.state = !sub2 ? "Home" : sub2.textContent;
 			} else {
 				presenceData.details = strings.browsing;
-				if (sub.textContent.includes("r/")) {
+				if (sub.textContent.includes("r/")) 
 					presenceData.state = "In a subreddit";
-				} else {
+				 else 
 					presenceData.state = sub.textContent;
-				}
+				
 			}
 		}
-	}
 	if (pathname.includes("/r/netflix")) {
 		if (!presenceData.buttons?.length) {
 			presenceData.buttons = [
 				{
 					url: "https://www.reddit.com/r/netflix",
-					label: "View r/Netflix Subreddit"
+					label: "View r/Netflix Subreddit",
 				},
 				{
 					url: "https://discord.gg/bDumw325vX",
-					label: "Join r/Netflix Discord"
-				}
+					label: "Join r/Netflix Discord",
+				},
 			];
 		}
 		if (presenceData.buttons.length === 1) {
 			presenceData.buttons.push({
 				url: "https://discord.gg/bDumw325vX",
-				label: "Join r/Netflix Discord"
+				label: "Join r/Netflix Discord",
 			});
 		}
 	}
