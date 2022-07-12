@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "RisingSunLight",
+		"id": "240521747852558347"
+	},
+	"service": "Neovel",
+	"description": {
+		"en": "Designed by and for book lovers ! Discover countless new stories at your fingertips and join a strong positive community !",
+		"fr": "Pensé et conçu pour les amoureux des novels ! Accédez, lisez et découvrez simplement des milliers de novels et rejoignez une communauté de passionnés !",
+		"es": "¡Hecho, diseñado y pensado para los amantes de las novelas! ¡Con la punta de tus dedos puedes acceder, leer & descubrir montones de historias nuevas y una comunidad fuerte!"
+	},
+	"url": [
+		"neovel.io",
+		"fr.neovel.io",
+		"es.neovel.io"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/CYk2ZDX.jpg",
+	"thumbnail": "https://i.imgur.com/Ei5H8Zz.jpg",
+	"color": "#f576ab",
+	"category": "other",
+	"tags": [
+		"read",
+		"novel"
+	]
+}
