@@ -66,9 +66,7 @@ presence.on("UpdateData", async () => {
 			}
 			case "play": {
 				presenceData.details = title;
-				presenceData.state = `${
-					document.querySelector(".ep-item__reference--active").textContent
-				}`;
+				presenceData.state = `${strings.episode} ${document.querySelector(".ep-item__reference--active").textContent?.replace(/\D/g, "")}` ;
 				presenceData.buttons = [
 					{
 						label: strings.buttonViewEpisode,
