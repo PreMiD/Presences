@@ -1,12 +1,12 @@
 const presence = new Presence({
-	clientId: "719757905888542730"
+	clientId: "719757905888542730",
 });
 
 let actionTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "gitbookw"
+		largeImageKey: "gitbookw",
 	};
 
 	if (location.hostname === "app.gitbook.com") {

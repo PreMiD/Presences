@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "651145049811451924"
+	clientId: "651145049811451924",
 });
 presence.on("UpdateData", async () => {
 	if (document.location.pathname.startsWith("/wiki/")) {
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity({
 			details: "Viewing a page...",
 			state: pageText,
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		});
 	}
 });

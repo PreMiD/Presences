@@ -1,34 +1,34 @@
 const presence = new Presence({
-		clientId: "877352306100813944"
+		clientId: "877352306100813944",
 	}),
 	pages: Record<string, PresenceData> = {
 		"/assinatura/": {
 			details: "Na página de premium",
-			state: "Vendo sobre os planos premiums"
+			state: "Vendo sobre os planos premiums",
 		},
 		"/login/": {
 			details: "Fazendo login no site",
-			state: "Login..."
+			state: "Login...",
 		},
 		"/perfil/": {
 			details: "Vendo seu próprio perfil",
-			state: "Vendo o perfil."
+			state: "Vendo o perfil.",
 		},
 		"/generos/": {
 			details: "Vendo todos os gêneros de anime.",
-			state: "Vendo..."
+			state: "Vendo...",
 		},
 		"/calendario/": {
 			details: "Vendo o calendário de animes",
-			state: "Vendo..."
-		}
+			state: "Vendo...",
+		},
 	},
 	presenceTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: presenceTimestamp
+		startTimestamp: presenceTimestamp,
 	};
 	const page = document.location.pathname,
 		params = new URLSearchParams(document.location.search.substring(1));
@@ -83,8 +83,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Assista também",
-								url: `https://animes.gg/${page}`
-							}
+								url: `https://animes.gg/${page}`,
+							},
 						];
 					} else {
 						const animeTitleFull = document.querySelector(
@@ -126,8 +126,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Assista também",
-							url: `https://animes.gg/${page}`
-						}
+							url: `https://animes.gg/${page}`,
+						},
 					];
 					presenceData.smallImageKey = "play";
 					if (video.paused) {

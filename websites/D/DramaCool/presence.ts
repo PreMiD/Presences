@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "813038241451343882"
+		clientId: "813038241451343882",
 	}),
 	startsTime = Math.floor(Date.now() / 1000),
 	ShowData = {
@@ -7,7 +7,7 @@ const presence = new Presence({
 		ep: "",
 		duration: 0,
 		currentTime: 0,
-		paused: true
+		paused: true,
 	},
 	getStrings = async () =>
 		presence.getStrings(
@@ -22,7 +22,7 @@ const presence = new Presence({
 				viewEpisode: "general.buttonViewEpisode",
 				viewSeries: "general.viewSeries",
 				reading: "general.reading",
-				viewPage: "general.viewPage"
+				viewPage: "general.viewPage",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 			details: "Browsing",
 			smallImageText: "Browsing",
 			smallImageKey: "reading",
-			startTimestamp: startsTime
+			startTimestamp: startsTime,
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
@@ -64,8 +64,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: strings.viewSeriesButton,
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (pathname.includes("/search")) {
 		presenceData.details = strings.searchFor;
@@ -98,12 +98,12 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.viewEpisode,
-					url: document.URL
+					url: document.URL,
 				},
 				{
 					label: strings.viewSeriesButton,
-					url: document.querySelector<HTMLAnchorElement>("div.category a").href
-				}
+					url: document.querySelector<HTMLAnchorElement>("div.category a").href,
+				},
 			];
 
 			if (ShowData.paused) {
@@ -119,8 +119,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.viewSeriesButton,
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (pathname.includes("/calendar")) {
@@ -130,8 +130,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Calendar",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	}
 

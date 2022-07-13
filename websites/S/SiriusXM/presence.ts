@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "843058220398542878"
+	clientId: "843058220398542878",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	switch (document.location.pathname) {
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 		const data = {
 			channel: document.querySelector(".channel-name")?.textContent,
 			track: document.querySelector(".track-name")?.textContent ?? "Loading",
-			artist: document.querySelector(".artist-name")?.textContent ?? "Loading"
+			artist: document.querySelector(".artist-name")?.textContent ?? "Loading",
 		};
 
 		if (data.track === data.artist) presenceData.details = data.track;

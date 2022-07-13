@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "630101652380188692"
+	clientId: "630101652380188692",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "glitchlogo"
+		largeImageKey: "glitchlogo",
 	};
 
 	if (window.location.href.includes(".glitch.me")) {

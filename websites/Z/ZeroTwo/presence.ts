@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "752067809214857298"
+		clientId: "752067809214857298",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (!(await presence.getSetting<boolean>("incognito"))) {

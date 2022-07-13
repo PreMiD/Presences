@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "887996093189742612"
+		clientId: "887996093189742612",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "webprofiles_logo"
+			largeImageKey: "webprofiles_logo",
 		};
 
 	if (document.location.pathname === "/")
@@ -23,8 +23,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: `View ${username}`,
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/search")) {
 		presenceData.details = "Searching for...";

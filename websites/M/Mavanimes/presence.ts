@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "814986239681626143"
+	clientId: "814986239681626143",
 });
 let video: {
 	currentTime?: number;
@@ -14,7 +14,7 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		params = new URLSearchParams(new URL(window.location.href).search);
 	if (document.location.pathname === "/") {

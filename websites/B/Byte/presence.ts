@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "671199009674756146"
+		clientId: "671199009674756146",
 	}),
 	strings = presence.getStrings({
 		browse: "presence.activity.browsing",
-		search: "presence.activity.searching"
+		search: "presence.activity.searching",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);
@@ -17,56 +17,56 @@ function setObject(path: string) {
 	switch (path) {
 		case "/": {
 			return {
-				details: "Browsing"
+				details: "Browsing",
 			};
 		}
 
 		case "/about/": {
 			return {
 				details: "Viewing",
-				state: "About"
+				state: "About",
 			};
 		}
 
 		case "/faq/": {
 			return {
 				details: "Viewing",
-				state: "Frequently Asked Questions"
+				state: "Frequently Asked Questions",
 			};
 		}
 
 		case "/terms/": {
 			return {
 				details: "Viewing",
-				state: "Terms of Service"
+				state: "Terms of Service",
 			};
 		}
 
 		case "/tos/": {
 			return {
 				details: "Viewing",
-				state: "Terms of Service"
+				state: "Terms of Service",
 			};
 		}
 
 		case "/privacy/": {
 			return {
 				details: "Viewing",
-				state: "Privacy"
+				state: "Privacy",
 			};
 		}
 
 		case "/guidelines/": {
 			return {
 				details: "Viewing",
-				state: "Guidelines"
+				state: "Guidelines",
 			};
 		}
 
 		case "/contact/": {
 			return {
 				details: "Viewing",
-				state: "Contact"
+				state: "Contact",
 			};
 		}
 	}
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			details: detailsObj.details,
 			state: detailsObj.state,
-			largeImageKey: "byte"
+			largeImageKey: "byte",
 		};
 
 	if (oldUrl !== path) {

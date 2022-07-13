@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "923893773048619008"
+		clientId: "923893773048619008",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let cacheMangaURL: string, cacheMangaChapter: string;
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Browsing",
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
 		mangaURL = document.querySelector<HTMLAnchorElement>(
@@ -55,8 +55,8 @@ presence.on("UpdateData", async () => {
 			{ label: "Read chapter", url: document.URL },
 			{
 				label: "View series",
-				url: cacheMangaURL
-			}
+				url: cacheMangaURL,
+			},
 		];
 	}
 	if (!buttons) delete presenceData.buttons;

@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "639578071338582021"
+		clientId: "639578071338582021",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 		),
 		presenceData: PresenceData = {
 			largeImageKey: "ya",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (document.location.pathname.includes("/item")) {

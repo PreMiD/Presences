@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "699318388270301284"
+	clientId: "699318388270301284",
 });
 
 let title: HTMLVideoElement;
@@ -8,7 +8,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "v2ex-logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 

@@ -1,17 +1,17 @@
 const presence = new Presence({
-		clientId: "945295281728159744"
+		clientId: "945295281728159744",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = document.location,
 		[image, buttons] = await Promise.all([
 			presence.getSetting<boolean>("image"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		pageIcon = document.querySelector<HTMLLinkElement>("link[rel~='icon']"),
 		shortTitle = document.title.split(/-(.+)/)[1];
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `by ${hostname.split(".")[0]}`;
 		if (image && pageIcon) presenceData.largeImageKey = pageIcon.href;
 		presenceData.buttons = [
-			{ label: "View Page", url: document.location.origin }
+			{ label: "View Page", url: document.location.origin },
 		];
 	}
 	if (!buttons) delete presenceData.buttons;

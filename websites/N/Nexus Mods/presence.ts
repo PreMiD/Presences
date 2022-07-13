@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "683438933841018928"
+	clientId: "683438933841018928",
 });
 
 let presenceData: PresenceData;
@@ -914,7 +914,7 @@ function isValidGame(name: string): boolean {
 		"wolcenlordsofmayhem",
 		"metalunit",
 		"plagueincevolved",
-		"mountandblade2bannerlord"
+		"mountandblade2bannerlord",
 	];
 	return validGames.includes(name);
 }
@@ -1017,7 +1017,7 @@ presence.on("UpdateData", () => {
 	presenceData = {
 		largeImageKey: "logo",
 		smallImageKey: "reading",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	// Main entry point

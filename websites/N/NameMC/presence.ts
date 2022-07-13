@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "809067572061405246"
+		clientId: "809067572061405246",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 async function getStrings() {
@@ -28,7 +28,7 @@ async function getStrings() {
 			search: "general.searchFor",
 			buttonViewServer: "namemc.buttonViewServer",
 			buttonViewProfile: "general.buttonViewProfile",
-			viewSkin: "namemc.viewSkin"
+			viewSkin: "namemc.viewSkin",
 		},
 		await presence.getSetting<string>("lang")
 	);
@@ -48,32 +48,32 @@ presence.on("UpdateData", async () => {
 
 	let presenceData: PresenceData = {
 		largeImageKey: "namemc",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	const statics: {
 		[name: string]: PresenceData;
 	} = {
 		"/": {
-			details: (await strings).browse
+			details: (await strings).browse,
 		},
 		"/minecraft-names/": {
-			details: (await strings).names
+			details: (await strings).names,
 		},
 		"/minecraft-skins/": {
-			details: (await strings).skinsFeatured
+			details: (await strings).skinsFeatured,
 		},
 		"/minecraft-skins/top/": {
-			details: (await strings).skinsTop
+			details: (await strings).skinsTop,
 		},
 		"/minecraft-skins/new/": {
-			details: (await strings).skinsNew
+			details: (await strings).skinsNew,
 		},
 		"/minecraft-skins/random/": {
-			details: (await strings).skinsRandom
+			details: (await strings).skinsRandom,
 		},
 		"/minecraft-skins/tag/": {
-			details: (await strings).skinsTagged
+			details: (await strings).skinsTagged,
 		},
 		"/minecraft-skins/tag/(\\w*)/": {
 			details: (await strings).skinsTag.replace(
@@ -85,10 +85,10 @@ presence.on("UpdateData", async () => {
 						""
 					)
 					.trim()
-			)
+			),
 		},
 		"/capes/": {
-			details: (await strings).capes
+			details: (await strings).capes,
 		},
 		"/cape/": {
 			details: (await strings).viewCape,
@@ -96,10 +96,10 @@ presence.on("UpdateData", async () => {
 				document
 					.querySelector(".default-skin main.container h1")
 					?.textContent.split("\n")[1]
-			} Cape`
+			} Cape`,
 		},
 		"/minecraft-servers/": {
-			details: (await strings).servers
+			details: (await strings).servers,
 		},
 		"/server/": {
 			details: (await strings).viewServer,
@@ -109,25 +109,25 @@ presence.on("UpdateData", async () => {
 			buttons: [
 				{
 					label: (await strings).buttonViewServer,
-					url: document.URL
-				}
-			]
+					url: document.URL,
+				},
+			],
 		},
 		"/claim-your-profile/": {
-			details: (await strings).claim
+			details: (await strings).claim,
 		},
 		"/my-profile/": {
 			details: (await strings).profileEdit.split("{0}")[0],
-			state: (await strings).profileEdit.split("{0}")[1]
+			state: (await strings).profileEdit.split("{0}")[1],
 		},
 		"/my-profile/friends/": {
-			details: (await strings).viewFriends
+			details: (await strings).viewFriends,
 		},
 		"/my-profile/skins/": {
-			details: (await strings).viewSkins
+			details: (await strings).viewSkins,
 		},
 		"/my-profile/emoji/": {
-			details: (await strings).viewEmoji
+			details: (await strings).viewEmoji,
 		},
 		"/profile/": {
 			details: (await strings).viewProfile,
@@ -135,24 +135,24 @@ presence.on("UpdateData", async () => {
 			buttons: [
 				{
 					label: (await strings).buttonViewProfile,
-					url: document.URL
-				}
-			]
+					url: document.URL,
+				},
+			],
 		},
 		"/privacy/": {
 			details: (await strings).viewing,
-			state: (await strings).privacy
+			state: (await strings).privacy,
 		},
 		"/search/": {
 			details: (await strings).search,
 			state: document.querySelector(
 				"#status-bar > div > div > div.col-lg-7 > h1 > samp"
 			)?.textContent,
-			smallImageKey: "search"
+			smallImageKey: "search",
 		},
 		"/skin/": {
-			details: (await strings).viewSkin
-		}
+			details: (await strings).viewSkin,
+		},
 	};
 
 	for (const [k, v] of Object.entries(statics)) {

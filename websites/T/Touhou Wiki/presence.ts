@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "651135297756856339"
+		clientId: "651135297756856339",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title;
@@ -8,7 +8,7 @@ const actionURL = new URL(document.location.href),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	title = document.querySelector("h1#firstHeading");

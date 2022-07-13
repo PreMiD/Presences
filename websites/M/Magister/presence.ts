@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "864581253930680341"
+	clientId: "864581253930680341",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "app"
+		largeImageKey: "app",
 	};
 
 	if (document.location.href.includes("account/login"))

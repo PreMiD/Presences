@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "863866805184626708"
+		clientId: "863866805184626708",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "manacube",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "manacube.com")
 		presenceData.details = "Forums";

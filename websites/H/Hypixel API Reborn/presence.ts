@@ -1,11 +1,11 @@
 const presence = new Presence({
-	clientId: "800651916345999360"
+	clientId: "800651916345999360",
 });
 
 presence.on("UpdateData", () => {
 	const route = document.location.hash.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		};
 
 	if (route.length === 1 || route[1] === "")

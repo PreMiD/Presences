@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "876055665091678228"
+		clientId: "876055665091678228",
 	}),
 	time = Math.floor(Date.now() / 1000),
 	pathStartsWith = (path: string): boolean => {
@@ -38,7 +38,7 @@ setInterval(setCourseInfo, 2000);
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "educativelogo",
-		startTimestamp: time
+		startTimestamp: time,
 	};
 
 	if (pathStartsWith("/courses")) {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "640561280800915456"
+		clientId: "640561280800915456",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let min: number,
@@ -12,7 +12,7 @@ let min: number,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "bc",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "bandcamp.com") {

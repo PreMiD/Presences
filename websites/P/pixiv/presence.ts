@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "640234287525920834"
+	clientId: "640234287525920834",
 });
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -10,7 +10,7 @@ const typeURL = new URL(document.location.href),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "pix"
+			largeImageKey: "pix",
 		},
 		curPath = document.location.pathname;
 	if (lastPath !== curPath) {

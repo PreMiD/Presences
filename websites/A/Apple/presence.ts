@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "839150832036872213"
+		clientId: "839150832036872213",
 	}),
 	time = Math.floor(Date.now() / 1000);
 
@@ -81,7 +81,7 @@ async function getStrings() {
 			btnViewProfile: "apple.btnViewProfile",
 			btnViewPage: "general.buttonViewPage",
 			btnGViewProfile: "general.buttonViewProfile",
-			btnGWatchVideo: "general.buttonWatchVideo"
+			btnGWatchVideo: "general.buttonWatchVideo",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 			logo,
 			devProfileBtn,
 			showICloudMailSender,
-			showICloudMailSubject
+			showICloudMailSubject,
 		] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("timeElapsed"),
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<number>("logo"),
 			presence.getSetting<boolean>("devProfileBtn"),
 			presence.getSetting<boolean>("iCloudMailSender"),
-			presence.getSetting<boolean>("iCloudMailSubject")
+			presence.getSetting<boolean>("iCloudMailSubject"),
 		]),
 		products = [
 			"ipad",
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
 			"airpods-3rd-generation",
 			"homepod-mini",
 			"ipod-touch",
-			"apple-tv-4k"
+			"apple-tv-4k",
 		],
 		services = [
 			"apple-fitness-plus",
@@ -165,10 +165,10 @@ presence.on("UpdateData", async () => {
 			"app-store",
 			"music",
 			"apple-music",
-			"maps"
+			"maps",
 		],
 		presenceData: PresenceData = {
-			largeImageKey: ["logo", "logo-rainbow"][logo] || "logo"
+			largeImageKey: ["logo", "logo-rainbow"][logo] || "logo",
 		};
 
 	if (!oldLang || oldLang !== newLang) {
@@ -207,8 +207,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.btnViewProduct,
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (services.find(e => urlpath.includes(e))) {
@@ -219,8 +219,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.btnViewService,
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath.includes("newsroom")) {
@@ -238,8 +238,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.btnReadArticle,
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			}
@@ -255,8 +255,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.btnReadArticle,
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			} else if (urlpath.includes("event")) {
@@ -271,8 +271,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.btnViewEvent,
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			} else if (document.querySelector("h1.typography-headline-elevated")) {
@@ -287,8 +287,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.btnReadArticle,
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			}
@@ -326,8 +326,8 @@ presence.on("UpdateData", async () => {
 						label: strings.btnViewOS
 							.replace("{0}", OS.textContent.replace("Preview", ""))
 							.substring(0, 30),
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath.includes("apple-events")) {
@@ -342,8 +342,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.btnViewEvent,
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath.includes("store-opening-letter"))
@@ -384,8 +384,8 @@ presence.on("UpdateData", async () => {
 						label: strings.btnViewProduct,
 						url: `https://www.apple.com/shop/${urlpath[num]}/${
 							urlpath[num + 1]
-						}`
-					}
+						}`,
+					},
 				];
 			}
 		} else if (urlpath[num] === "product") {
@@ -397,8 +397,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.btnViewProduct,
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath[num] === "watch") {
@@ -423,8 +423,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.btnViewStudio.replace("{0}", product),
-						url: `https://www.apple.com/shop/studio/${urlpath[num + 1]}`
-					}
+						url: `https://www.apple.com/shop/studio/${urlpath[num + 1]}`,
+					},
 				];
 			}
 		} else if (urlpath[num] === "favorites") {
@@ -490,7 +490,7 @@ presence.on("UpdateData", async () => {
 					"airpods",
 					"music",
 					"tv",
-					"displays"
+					"displays",
 				];
 
 				presenceData.largeImageKey = "apple-support";
@@ -506,8 +506,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: strings.btnReadArticle,
-								url: window.location.href
-							}
+								url: window.location.href,
+							},
 						];
 					}
 				} else if (document.querySelector("div.mod-date")) {
@@ -519,8 +519,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: strings.btnReadArticle,
-								url: window.location.href
-							}
+								url: window.location.href,
+							},
 						];
 					}
 				} else if (window.location.hostname === "getsupport.apple.com")
@@ -550,8 +550,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: strings.btnViewApp,
-								url: window.location.href
-							}
+								url: window.location.href,
+							},
 						];
 					}
 				} else if (urlpath.includes("developer")) {
@@ -569,8 +569,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: strings.btnViewDeveloper,
-								url: window.location.href
-							}
+								url: window.location.href,
+							},
 						];
 					}
 				}
@@ -712,7 +712,7 @@ presence.on("UpdateData", async () => {
 						"accessories",
 						"licensing-trademarks",
 						"system-status",
-						"widgets"
+						"widgets",
 					],
 					cpage =
 						document.querySelector("body")?.id ||
@@ -754,8 +754,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: strings.btnViewWWDC.replace("{0}", wwdc),
-								url: `https://developer.apple.com/${wwdc.toLowerCase()}/`
-							}
+								url: `https://developer.apple.com/${wwdc.toLowerCase()}/`,
+							},
 						];
 					}
 				} else {
@@ -812,8 +812,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: strings.btnViewPage,
-										url: window.location.href
-									}
+										url: window.location.href,
+									},
 								];
 							}
 
@@ -888,8 +888,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: strings.btnViewThread,
-										url: window.location.href
-									}
+										url: window.location.href,
+									},
 								];
 							} else if (urlpath[2] === "tags") {
 								presenceData.details = strings.forumTags;
@@ -900,8 +900,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: strings.btnViewTags,
-										url: window.location.href
-									}
+										url: window.location.href,
+									},
 								];
 							} else if (urlpath[2] === "profile" && urlpath[3]) {
 								const nickname = document.querySelector(
@@ -919,8 +919,8 @@ presence.on("UpdateData", async () => {
 										presenceData.buttons = [
 											{
 												label: strings.btnViewProfile.replace("{0}", nickname),
-												url: window.location.href
-											}
+												url: window.location.href,
+											},
 										];
 									}
 								}
@@ -945,8 +945,8 @@ presence.on("UpdateData", async () => {
 											)?.href ||
 											`https://developer.apple.com/forums/profile/${
 												document.querySelector("span.user-name")?.textContent
-											}`
-									}
+											}`,
+									},
 								];
 							}
 
@@ -1000,8 +1000,8 @@ presence.on("UpdateData", async () => {
 									presenceData.buttons = [
 										{
 											label: strings.btnGWatchVideo,
-											url: window.location.href
-										}
+											url: window.location.href,
+										},
 									];
 								}
 							} else {
@@ -1030,8 +1030,8 @@ presence.on("UpdateData", async () => {
 									presenceData.buttons = [
 										{
 											label: strings.btnReadArticle,
-											url: window.location.href
-										}
+											url: window.location.href,
+										},
 									];
 								}
 							}

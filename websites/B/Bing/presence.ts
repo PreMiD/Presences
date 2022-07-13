@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "691575527190036480"
+	clientId: "691575527190036480",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	// Get search query from HTML form input.

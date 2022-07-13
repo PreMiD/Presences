@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "795125406264066099"
+		clientId: "795125406264066099",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "anichart",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {

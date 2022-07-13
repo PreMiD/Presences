@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "776522940517974016"
+		clientId: "776522940517974016",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	currencyList = [
@@ -13,7 +13,7 @@ const presence = new Presence({
 		"wdgld",
 		"algo",
 		"usd-d",
-		"usdt"
+		"usdt",
 	];
 
 let currencyTitle: string, pageStatus: string;
@@ -21,7 +21,7 @@ let currencyTitle: string, pageStatus: string;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (window.location.host === "www.blockchain.com") {

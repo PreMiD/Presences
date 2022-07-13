@@ -1,19 +1,19 @@
 const presence = new Presence({
-		clientId: "917417055458852865"
+		clientId: "917417055458852865",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "artstation",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		shortTitle = document.title.split(/-(.+)/)[1],
 		[image, artwork, button, time] = await Promise.all([
 			presence.getSetting<boolean>("image"),
 			presence.getSetting<number>("artwork"),
 			presence.getSetting<boolean>("button"),
-			presence.getSetting<boolean>("time")
+			presence.getSetting<boolean>("time"),
 		]);
 
 	if (document.location.pathname.startsWith("/messages")) {
@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
 				label: "View Artist",
 				url: document.querySelector<HTMLAnchorElement>(
 					"div.d-none.d-md-flex.align-items-start > a"
-				).href
-			}
+				).href,
+			},
 		];
 	} else if (document.location.pathname.startsWith("/marketplace"))
 		presenceData.details = "Surfing the marketplace";

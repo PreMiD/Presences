@@ -1,25 +1,25 @@
 const presence = new Presence({
-		clientId: "959109938779684874"
+		clientId: "959109938779684874",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Browsing",
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		[privacy, timestamp, cover, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<number>("timestamp"),
 			presence.getSetting<boolean>("cover"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		{ pathname, hostname, href, search } = document.location,
 		[book, comic, stories, ranking] = [
 			pathname.startsWith("/book/"),
 			pathname.startsWith("/comic/"),
 			pathname.startsWith("/stories/"),
-			pathname.startsWith("/ranking/")
+			pathname.startsWith("/ranking/"),
 		];
 	switch (hostname) {
 		case "www.webnovel.com": {
@@ -58,8 +58,8 @@ presence.on("UpdateData", async () => {
 							{ label: "Read Chapter", url: document.URL },
 							{
 								label: "Read Book",
-								url: document.querySelector<HTMLAnchorElement>(".dib.ell").href
-							}
+								url: document.querySelector<HTMLAnchorElement>(".dib.ell").href,
+							},
 						];
 					}
 				} else {
@@ -139,8 +139,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Discussion",
-							url: href.split("/").splice(0, 5).join("/")
-						}
+							url: href.split("/").splice(0, 5).join("/"),
+						},
 					];
 				}
 			} else if (pathname.startsWith("/u")) {
@@ -157,8 +157,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Profile",
-							url: href.split("/").splice(0, 5).join("/")
-						}
+							url: href.split("/").splice(0, 5).join("/"),
+						},
 					];
 				}
 			} else if (pathname.startsWith("/p")) {

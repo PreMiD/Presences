@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "935242142106914869"
+		clientId: "935242142106914869",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -18,7 +18,7 @@ async function getStrings() {
 			terms: "general.terms",
 			dm: "general.readingDM",
 			viewPage: "general.viewPage",
-			viewHome: "general.viewHome"
+			viewHome: "general.viewHome",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -45,8 +45,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Open",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			presenceData.startTimestamp = browsingTimestamp;
 			break;
@@ -62,8 +62,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Open",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			presenceData.startTimestamp = browsingTimestamp;
 			break;
@@ -98,8 +98,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: (await strings).viewProfileButton,
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 		presenceData.startTimestamp = browsingTimestamp;
 	}

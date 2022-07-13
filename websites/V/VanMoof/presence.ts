@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "941761536681201676"
+		clientId: "941761536681201676",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", async function () {
+presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
 			details: "Other",
@@ -12,9 +12,9 @@ presence.on("UpdateData", async function () {
 			buttons: [
 				{
 					label: "View Page",
-					url: window.location.href.replace(`${urlpath[1]}/`, "")
-				}
-			]
+					url: window.location.href.replace(`${urlpath[1]}/`, ""),
+				},
+			],
 		};
 
 	switch (true) {
@@ -49,8 +49,10 @@ presence.on("UpdateData", async function () {
 			} else {
 				const hash = window.location.hash.replace("#", "");
 
-				if (urlpath[3].startsWith("configure-"))
-					return (presenceData.state = "Configuring");
+				if (urlpath[3].startsWith("configure-")) {
+					presenceData.state = "Configuring";
+					return;
+				}
 
 				switch (urlpath[3]) {
 					case "accessories":
@@ -127,8 +129,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View on VanMoof",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 
 				if (urlpath[3] === "category") {
@@ -178,8 +180,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View on VanMoof",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 
@@ -225,8 +227,8 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: "View on VanMoof",
-							url: `https://www.vanmoof.com/${urlpath[2]}/`
-						}
+							url: `https://www.vanmoof.com/${urlpath[2]}/`,
+						},
 					];
 					break;
 

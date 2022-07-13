@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "732982987905302570"
+	clientId: "732982987905302570",
 });
 
 let lastPlaybackState = null,
@@ -34,7 +34,7 @@ if (lastPlaybackState !== reading) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "largeimage"
+		largeImageKey: "largeimage",
 	};
 
 	tabTitle = document.title;

@@ -1,9 +1,9 @@
 const presence = new Presence({
-	clientId: "704585837949747330"
+	clientId: "704585837949747330",
 });
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		path = document.location.pathname;
 	let PesquisaTexto: HTMLInputElement,

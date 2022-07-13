@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "726570008037163100"
+	clientId: "726570008037163100",
 });
 
 function pathStarts(string: string): boolean {
@@ -25,7 +25,7 @@ function getGuildTitle(): string {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "aminoapps",
-		startTimestamp: Date.now()
+		startTimestamp: Date.now(),
 	};
 	if (document.location.hostname === "aminoapps.com") {
 		switch (true) {

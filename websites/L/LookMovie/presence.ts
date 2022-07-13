@@ -1,15 +1,15 @@
 const presence = new Presence({
-		clientId: "934789855962083359"
+		clientId: "934789855962083359",
 	}),
 	strings = presence.getStrings({
 		play: "general.playing",
 		pause: "general.paused",
-		browsing: "general.browsing"
+		browsing: "general.browsing",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lm"
+			largeImageKey: "lm",
 		},
 		video = document.querySelector<HTMLVideoElement>("#video_player"),
 		videoDur = document.querySelector(

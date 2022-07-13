@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "801742167608787015"
+		clientId: "801742167608787015",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
 		sprivacy = await presence.getSetting<boolean>("super-privacy");

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "901490472046968843"
+		clientId: "901490472046968843",
 	}),
 	pages: Record<string, string> = {
 		"/": "Home",
 		"/about-us": "About",
 		"/commenting-conduct": "Code of Conduct",
 		"/privacy-policy": "Privacy Policy",
-		"/tip": "Contact"
+		"/tip": "Contact",
 	},
 	startTimestamp = Math.round(Date.now() / 1000);
 
@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
 			largeImageKey: "omgubuntu-logo",
-			startTimestamp
+			startTimestamp,
 		},
 		header = document
 			.querySelector("div.u--box.content-container > div.loop > header > h2")

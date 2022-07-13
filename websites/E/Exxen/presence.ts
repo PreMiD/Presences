@@ -1,17 +1,17 @@
 const presence = new Presence({
-		clientId: "794408060847390760"
+		clientId: "794408060847390760",
 	}),
 	strings = presence.getStrings({
 		playing: "presence.playback.playing",
 		paused: "presence.playback.paused",
 		browsing: "presence.activity.browsing",
-		episode: "presence.media.info.episode"
+		episode: "presence.media.info.episode",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "exxen"
+		largeImageKey: "exxen",
 	};
 	if (document.location.pathname.includes("watch")) {
 		const video: HTMLVideoElement = document.querySelector(".rmp-video"),

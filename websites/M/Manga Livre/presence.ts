@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "641409342566039558"
+		clientId: "641409342566039558",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "ml",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "mangalivre.net") {
@@ -28,8 +28,9 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/manga/")) {
 			presenceData.details = "Viewing the manga:";
-			presenceData.state =
-				document.querySelector(".series-title > h1").textContent;
+			presenceData.state = document.querySelector(
+				"#series-data > .series-info > .series-title > h1"
+			).textContent;
 			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/lista-de-mangas")) {
 			presenceData.details = "Viewing manga list";

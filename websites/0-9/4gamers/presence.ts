@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "648494004870184981"
+		clientId: "648494004870184981",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ let title: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "4gamers"
+		largeImageKey: "4gamers",
 	};
 
 	if (document.location.hostname === "www.4gamers.com.tw") {

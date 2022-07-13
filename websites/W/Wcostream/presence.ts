@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "936985014560755753"
+		clientId: "936985014560755753",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
 	timeLeft: "",
-	paused: true
+	paused: true,
 };
 
 presence.on("iFrameData", (data: { timeLeft: string; paused: boolean }) => {
@@ -16,13 +16,13 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			details: "Browsing...",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
 		[timestamps, cover, buttons] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("cover"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 	if (video.timeLeft !== "") {
 		presenceData.details = "Watching:";

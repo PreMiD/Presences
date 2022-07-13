@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "714001239351885904"
+	clientId: "714001239351885904",
 });
 enum ResourceNames {
 	logo = "logo",
@@ -7,7 +7,7 @@ enum ResourceNames {
 	search = "search",
 	writing = "writing",
 	history = "history",
-	info = "info"
+	info = "info",
 }
 async function Resource(ResourceSelected: ResourceNames): Promise<string> {
 	let value = ResourceSelected.toString();
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 			window.location.pathname === "/404" ||
 			document.querySelectorAll(".notfound").length !== 0,
 		presenceData: PresenceData = {
-			largeImageKey: await Resource(ResourceNames.logo)
+			largeImageKey: await Resource(ResourceNames.logo),
 		};
 	if (await presence.getSetting<boolean>("resetTimestamp"))
 		browsingTimestamp = Math.floor(Date.now() / 1000);

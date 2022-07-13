@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "642714892201230336"
+	clientId: "642714892201230336",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "time"
+			largeImageKey: "time",
 		},
 		clock =
 			document.querySelector("#clock0_bg") ||

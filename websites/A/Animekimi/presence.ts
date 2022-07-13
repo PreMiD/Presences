@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "870850875562819595"
+		clientId: "870850875562819595",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -25,7 +25,7 @@ async function getStrings() {
 			watchingMovie: "general.watchingMovie",
 			searchSomething: "general.searchSomething",
 			buttonWatchMovie: "general.buttonWatchMovie",
-			buttonViewEpisode: "general.buttonViewEpisode"
+			buttonViewEpisode: "general.buttonViewEpisode",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -34,7 +34,7 @@ async function getStrings() {
 let video = {
 		current: 0,
 		duration: 0,
-		paused: true
+		paused: true,
 	},
 	movie,
 	episode,
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<boolean>("showepisode"),
 				presence.getSetting<boolean>("timestamps"),
 				presence.getSetting<boolean>("subtitle"),
-				presence.getSetting<boolean>("buttons")
+				presence.getSetting<boolean>("buttons"),
 			]),
 		title =
 			document.querySelector(
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: "site",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -165,8 +165,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.buttonWatchMovie,
-							url: document.location.href.replace(/#\d+/, "")
-						}
+							url: document.location.href.replace(/#\d+/, ""),
+						},
 					];
 				}
 				delete presenceData.startTimestamp;
@@ -225,8 +225,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.buttonViewEpisode,
-							url: document.location.href.replace(/#\d+/, "")
-						}
+							url: document.location.href.replace(/#\d+/, ""),
+						},
 					];
 				}
 				break;

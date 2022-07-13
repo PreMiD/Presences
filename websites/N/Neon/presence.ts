@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "837985880408457217"
+		clientId: "837985880408457217",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "key",
 			details: "Browsing...",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
 
@@ -26,8 +26,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Series",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (pathname.includes("/movie/")) {
 		presenceData.details = "Viewing movie:";
@@ -37,8 +37,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Movie",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (pathname.includes("/trailer/")) {
 		const video = document.querySelector("video");
@@ -54,8 +54,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Watch Trailer",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 
 		if (video.paused) {
@@ -89,8 +89,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: isSeries ? "Watch Episode" : "Watch Movie",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 
 		if (video.paused) {

@@ -4,6 +4,12 @@
 		"name": "Eason",
 		"id": "462456154266796032"
 	},
+	"contributors": [
+		{
+			"name": "Faelayis",
+			"id": "328731868096888833"
+		}
+	],
 	"service": "bilibilitv",
 	"description": {
 		"en": "bilibili.tv is an ad-free anime streaming website.",
@@ -13,12 +19,18 @@
 		"www.bilibili.tv",
 		"studio.bilibili.tv"
 	],
-	"version": "1.0.7",
+	"version": "2.0.1",
 	"logo": "https://i.imgur.com/BY7MROC.png",
 	"thumbnail": "https://i.imgur.com/eMifMYk.png",
 	"color": "#2e62ff",
 	"category": "anime",
 	"tags": [
 		"anime"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
 	]
 }

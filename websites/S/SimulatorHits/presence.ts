@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "701623299460825108"
+	clientId: "701623299460825108",
 });
 
 let title = "Loading SimulatorHits",
@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
 		largeImageKey: "logo",
 		smallImageText: `Current Presenter: ${presenter}`,
 		smallImageKey: "play",
-		startTimestamp: currentTime
+		startTimestamp: currentTime,
 	};
 
 	if (document.location.hostname === "simulatorhits.com") {

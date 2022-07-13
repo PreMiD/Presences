@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "806539630878261328"
+	clientId: "806539630878261328",
 });
 async function getStrings() {
 	return presence.getStrings(
@@ -7,7 +7,7 @@ async function getStrings() {
 			play: "general.playing",
 			pause: "general.paused",
 			viewSeries: "general.buttonViewSeries",
-			watchEpisode: "general.buttonViewEpisode"
+			watchEpisode: "general.buttonViewEpisode",
 		},
 		await presence.getSetting<string>("lang")
 	);
@@ -17,7 +17,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 	video = {
 		duration: 0,
 		currentTime: 0,
-		paused: true
+		paused: true,
 	},
 	currentTime: number,
 	duration: number,
@@ -48,11 +48,11 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "animelon",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[buttons, newLang] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<string>("lang")
+			presence.getSetting<string>("lang"),
 		]);
 
 	if (oldLang !== newLang || !strings) {
@@ -79,12 +79,12 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.watchEpisode,
-						url: document.URL
+						url: document.URL,
 					},
 					{
 						label: strings.viewSeries,
-						url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`
-					}
+						url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`,
+					},
 				];
 			}
 
@@ -106,12 +106,12 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.watchEpisode,
-						url: document.URL
+						url: document.URL,
 					},
 					{
 						label: strings.viewSeries,
-						url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`
-					}
+						url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`,
+					},
 				];
 			}
 
@@ -128,8 +128,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.viewSeries,
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else presenceData.details = "Browsing...";

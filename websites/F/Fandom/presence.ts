@@ -8,7 +8,7 @@ if (
 ) {
 	((): void => {
 		const presence = new Presence({
-				clientId: "644400074008297512"
+				clientId: "644400074008297512",
 			}),
 			browsingTimestamp = Math.floor(Date.now() / 1000);
 		let currentURL = new URL(document.location.href),
@@ -16,7 +16,7 @@ if (
 			presenceData: PresenceData = {
 				details: "Viewing an unsupported page",
 				largeImageKey: "lg",
-				startTimestamp: browsingTimestamp
+				startTimestamp: browsingTimestamp,
 			};
 		const updateCallback = {
 				_function: null as () => void,
@@ -28,7 +28,7 @@ if (
 				},
 				get present(): boolean {
 					return this._function !== null;
-				}
+				},
 			},
 			/**
 			 * Initialize/reset presenceData.
@@ -37,7 +37,7 @@ if (
 				defaultData: PresenceData = {
 					details: "Viewing an unsupported page",
 					largeImageKey: "lg",
-					startTimestamp: browsingTimestamp
+					startTimestamp: browsingTimestamp,
 				}
 			): void => {
 				currentURL = new URL(document.location.href);
@@ -256,7 +256,7 @@ if (
 							1202: "Viewing a message wall greeting",
 							2000: "Viewing a forum board", // depercated, redirected
 							2001: "Viewing a forum board thread", // depercated, redirected
-							2002: "Viewing a forum topic" // depercated, redirected
+							2002: "Viewing a forum topic", // depercated, redirected
 						}[
 							[...document.querySelector("body").classList]
 								.find(v => /ns--?\d/.test(v))

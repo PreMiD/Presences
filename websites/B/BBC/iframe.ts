@@ -9,8 +9,8 @@ iframe.on("UpdateData", async () => {
 			video: {
 				currentTime: video.currentTime,
 				duration: video.duration,
-				paused: video.paused
-			}
+				paused: video.paused,
+			},
 		});
 	} else if (!isNaN(audio?.duration)) {
 		iframe.send({
@@ -18,8 +18,8 @@ iframe.on("UpdateData", async () => {
 				currentTime: audio.currentTime,
 				duration: audio.duration,
 				paused: audio.paused,
-				title: audio.title
-			}
+				title: audio.title,
+			},
 		});
 	}
 });

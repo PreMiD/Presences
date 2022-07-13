@@ -9,16 +9,16 @@
 		"Fugapedia"
 	],
 	"description": {
-		"en": "Encyclopedia about the League of Cubism and universe of the servers of #SC.",
-		"ru": "Энциклопедия про Лигу Кубизма и вселенную серверов #СП."
+		"en": "Encyclopedia about the League of Cubism and the server of the universe of SC. Read a lot of cool articles and write your own ones, complementing the most toxic encyclopedia.",
+		"ru": "Энциклопедия про Лигу Кубизма и сервера вселенной СП. Читай много крутых статей и пиши свои, дополняя самую токсчисную энциклопедию."
 	},
 	"url": [
 		"fugapedia.xyz",
 		"www.fugapedia.xyz"
 	],
-	"version": "1.2.4",
+	"version": "2.0.0",
 	"logo": "https://i.imgur.com/L6kpaCb.jpg",
-	"thumbnail": "https://i.imgur.com/ZRXkQlr.jpg",
+	"thumbnail": "https://i.imgur.com/wb29gfk.png",
 	"color": "#ffffff",
 	"category": "other",
 	"tags": [
@@ -37,15 +37,6 @@
 			"icon": "fad fa-stopwatch",
 			"title": "Показывать время",
 			"id": "showTime",
-			"value": true
-		},
-		{
-			"id": "showButtons",
-			"if": {
-				"privacyMode": false
-			},
-			"title": "Показывать кнопки",
-			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
 	]

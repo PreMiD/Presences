@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "854448403273351202"
+		clientId: "854448403273351202",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	// typer.io/play presence (aka quick play)

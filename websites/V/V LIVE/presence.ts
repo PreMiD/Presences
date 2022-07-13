@@ -1,6 +1,6 @@
 const presence = new Presence({
 	clientId: "614386371532161054",
-	injectOnComplete: true
+	injectOnComplete: true,
 });
 async function getStrings() {
 	return presence.getStrings(
@@ -42,7 +42,7 @@ async function getStrings() {
 			coins: "v live.coins",
 			devices: "v live.devices",
 			followed: "v live.followed",
-			policies: "v live.policies"
+			policies: "v live.policies",
 		},
 		await presence.getSetting<string>("lang")
 	);
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 		vidDetail,
 		vidState,
 		streamDetail,
-		streamState
+		streamState,
 	] = await Promise.all([
 		presence.getSetting<boolean>("privacy"),
 		presence.getSetting<boolean>("browse"),
@@ -79,12 +79,12 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<string>("vidDetail"),
 		presence.getSetting<string>("vidState"),
 		presence.getSetting<string>("streamDetail"),
-		presence.getSetting<string>("streamState")
+		presence.getSetting<string>("streamState"),
 	]);
 
 	let presenceData: PresenceData = {
 			largeImageKey: "vlive2",
-			startTimestamp: elapsed
+			startTimestamp: elapsed,
 		},
 		searchPageValue: string;
 
@@ -113,105 +113,105 @@ presence.on("UpdateData", async () => {
 			"/home/new/": {
 				details: strings.browseThrough,
 				state: strings.newVid,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/home/chart/": {
 				details: strings.browseThrough,
 				state: strings.charts,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/home/my/": {
 				details: strings.recentUploads.includes("{0}")
 					? strings.recentUploads.split("{0}")[0]
 					: strings.recentUploads,
 				state: strings.recentUploads.split("{0}")[1],
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/my/": {
 				details: strings.viewTheir,
 				state: strings.profile,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/my/profile/": {
 				details: strings.profileEdit.includes("{0}")
 					? strings.profileEdit.split("{0}")[0]
 					: strings.profileEdit,
 				state: strings.profileEdit.split("{0}")[1],
-				smallImageKey: "search"
+				smallImageKey: "search",
 			},
 			"/my/watched/": {
 				details: strings.viewTheir,
 				state: strings.watched,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/my/purchased/": {
 				details: strings.viewTheir,
 				state: strings.purchases,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/my/coin/": {
 				details: strings.viewTheir,
 				state: strings.coins,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/my/devices/": {
 				details: strings.viewTheir,
 				state: strings.devices,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/my/channels/": {
 				details: strings.viewTheir,
 				state: strings.followed,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/upcoming/": {
 				details: strings.browseThrough,
 				state: strings.upcoming,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/channels/": {
 				details: strings.browseThrough,
 				state: strings.channelList,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/channel/(\\w*\\d*)/": {
 				details: strings.channelHome,
 				state: strings.ofChannel.replace("{0}", channelPageChannelName),
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/channel/(\\w*\\d*)/schedule/": {
 				details: strings.channelSchedule,
 				state: strings.ofChannel.replace("{0}", channelPageChannelName),
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/channel/(\\w*\\d*)/my/": {
 				details: strings.channelMy,
 				state: strings.ofChannel.replace("{0}", channelPageChannelName),
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/channel/(\\w*\\d*)/store/": {
 				details: strings.channelStore,
 				state: strings.ofChannel.replace("{0}", channelPageChannelName),
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/channel/(\\w*\\d*)/board/": {
 				details: strings.channelBoard.replace(
 					"{0}",
-					document.querySelector("#root > div > div > div > div > div > h3")
+					document.querySelector("#root > div > div > div > div > div > h2")
 						?.textContent ?? "ERROR: NOT FOUND!"
 				),
 				state: strings.ofChannel.replace("{0}", channelPageChannelName),
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/events/": {
 				details: strings.browseThrough,
 				state: strings.events,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/vstore/": {
 				details: strings.browseThrough,
 				state: strings.store,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/product/(\\w*\\d*)/": {
 				details: strings.product.replace(
@@ -220,21 +220,21 @@ presence.on("UpdateData", async () => {
 				),
 				state:
 					document.querySelector("h3.tit")?.textContent ?? "ERROR: NOT FOUND!",
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/search/": {
 				details: privacy ? strings.searchSomething : strings.searchFor,
 				state: searchPageValue,
-				smallImageKey: "search"
+				smallImageKey: "search",
 			},
 			"/policies/": {
 				details: strings.policies,
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/about/": {
 				details: `${strings.readingAbout} V LIVE`,
-				smallImageKey: "reading"
-			}
+				smallImageKey: "reading",
+			},
 		};
 
 	if (showBrowsing) {

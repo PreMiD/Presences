@@ -1,6 +1,6 @@
 const presence = new Presence({
 		clientId: "619561001234464789",
-		injectOnComplete: true
+		injectOnComplete: true,
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000),
 	shortenedURLs: Record<string, string> = {};
@@ -52,7 +52,7 @@ async function getStrings() {
 			searchSomething: "general.searchSomething",
 			browsing: "general.browsing",
 			listening: "general.listeningMusic",
-			show: "general.viewShow"
+			show: "general.viewShow",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<string>("lang"),
 		presence.getSetting<boolean>("privacy"),
 		presence.getSetting<boolean>("timestamps"),
-		presence.getSetting<boolean>("cover")
+		presence.getSetting<boolean>("cover"),
 	]);
 
 	if (oldLang !== newLang) {
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-			largeImageKey: "spotify"
+			largeImageKey: "spotify",
 		},
 		albumCover =
 			Array.from(document.querySelectorAll("a")).find(

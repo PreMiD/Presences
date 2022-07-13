@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "850759953718575224"
+		clientId: "850759953718575224",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
@@ -7,7 +7,7 @@ let currentURL = new URL(document.location.href),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
 		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 const updateCallback = {
 		_function: null as () => void,
@@ -19,7 +19,7 @@ const updateCallback = {
 		},
 		get present(): boolean {
 			return this._function !== null;
-		}
+		},
 	},
 	/**
 	 * Initialize/reset presenceData.
@@ -28,7 +28,7 @@ const updateCallback = {
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		}
 	): void => {
 		currentURL = new URL(document.location.href);
@@ -145,7 +145,7 @@ const updateCallback = {
 							2302: "Viewing a gadget definition page",
 							2303: "Viewing a gadget definition talk page",
 							Portal: "Viewing a portal",
-							"Portal talk": "Viewing a portal talk page"
+							"Portal talk": "Viewing a portal talk page",
 						},
 						canonicalNamespace = mwConfig.wgCanonicalNamespace.replaceAll(
 							"_",

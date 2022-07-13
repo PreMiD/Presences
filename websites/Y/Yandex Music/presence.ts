@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "745261937092198532"
+		clientId: "745261937092198532",
 	}),
 	strings = presence.getStrings({
 		playing: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 let presenceData: PresenceData;
@@ -49,7 +49,7 @@ setInterval(async () => {
 			getMillisecondsFromString(
 				(document.querySelectorAll(".progress__right")[0] as HTMLElement)
 					.textContent
-			)
+			),
 	};
 
 	if (!playing) {

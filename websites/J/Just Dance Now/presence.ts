@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "928372793438011433"
+		clientId: "928372793438011433",
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -7,11 +7,11 @@ presence.on("UpdateData", async () => {
 	const [time, cover, roomCode] = await Promise.all([
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<boolean>("cover"),
-			presence.getSetting<boolean>("roomCode")
+			presence.getSetting<boolean>("roomCode"),
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingStamp
+			startTimestamp: browsingStamp,
 		};
 
 	if (document.querySelector("html").className.includes("vip"))

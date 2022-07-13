@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "833689728774832168"
+	clientId: "833689728774832168",
 });
 
 let videoData: {
@@ -14,7 +14,7 @@ presence.on("iFrameData", (data: typeof videoData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "animetube"
+		largeImageKey: "animetube",
 	};
 
 	if (document.location.pathname === "/") {

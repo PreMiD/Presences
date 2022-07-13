@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "829056927227969596"
+		clientId: "829056927227969596",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", async function () {
 			presence.getSetting<boolean>("timeElapsed"),
 			presence.getSetting<boolean>("showButtons"),
 			presence.getSetting<number>("logo"),
-			presence.getSetting<boolean>("showCheckout")
+			presence.getSetting<boolean>("showCheckout"),
 		]),
 		logoArr = ["logo_red", "logo_red_text", "logo_white", "logo_white_text"],
 		urlpath = window.location.pathname.split("/"),
@@ -50,11 +50,11 @@ presence.on("UpdateData", async function () {
 			"en_sg",
 			"ko_kr",
 			"en_au",
-			"en_nz"
+			"en_nz",
 		],
 		urlpNum = langs.includes(urlpath[1]) ? 2 : 1,
 		presenceData: PresenceData = {
-			largeImageKey: logoArr[logo] ?? "logo_red"
+			largeImageKey: logoArr[logo] ?? "logo_red",
 		};
 
 	if (timeElapsed) presenceData.startTimestamp = browsingTimestamp;
@@ -76,12 +76,12 @@ presence.on("UpdateData", async function () {
 							label: `View ${model}`,
 							url: window.location.href
 								.replace(urlpath[num], "")
-								.replace("#overview", "")
+								.replace("#overview", ""),
 						},
 						{
 							label: `Design ${model}`,
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			} else {
@@ -94,8 +94,8 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: `View ${model}`,
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			}
@@ -111,12 +111,12 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: "View Cybertruck",
-							url: window.location.href.replace(urlpath[num], "")
+							url: window.location.href.replace(urlpath[num], ""),
 						},
 						{
 							label: "Design Cybertruck",
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			} else {
@@ -126,8 +126,8 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: "View Cybertruck",
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			}
@@ -148,8 +148,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Solar Roof",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath[urlpNum] === "solarpanels") {
@@ -159,8 +159,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Solar Panels",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath[urlpNum] === "energy") {
@@ -172,8 +172,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Page",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath[urlpNum] === "powerwall") {
@@ -183,8 +183,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Powerwall",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath[urlpNum] === "inventory") {
@@ -194,8 +194,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Inventory",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath[urlpNum] === "drive")
@@ -223,8 +223,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Category",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath[urlpNum] === "product" && urlpath[num]) {
@@ -236,8 +236,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Product",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (

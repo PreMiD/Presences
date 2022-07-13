@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "676821417823830017"
+		clientId: "676821417823830017",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		page = document.location.pathname;
 	if (page.startsWith("/bots/")) {

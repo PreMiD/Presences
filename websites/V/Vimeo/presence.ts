@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "808762696023146578"
+		clientId: "808762696023146578",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 presence.on("UpdateData", async () => {
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 			".vp-video-wrapper .vp-video video"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		};
 
 	if (document.location.pathname === "/") presenceData.details = "Browsing...";

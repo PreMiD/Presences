@@ -1,5 +1,5 @@
 const presence: Presence = new Presence({
-		clientId: "800166344023867443"
+		clientId: "800166344023867443",
 	}),
 	largeImageKey = "logo",
 	browsingTimestamp = Math.floor(Date.now() / 1000);
@@ -11,7 +11,7 @@ function capitalize(string: string) {
 presence.on("UpdateData", () => {
 	const { hostname, pathname } = window.location,
 		presenceData: PresenceData = {
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	let details: string,

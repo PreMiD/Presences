@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "715536733227450379"
+		clientId: "715536733227450379",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	});
 
 let video = {
 	current: 0,
 	duration: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -22,7 +22,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (isNaN(video.duration) || video.duration <= 0) {

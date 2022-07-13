@@ -1,18 +1,18 @@
 const presence = new Presence({
-		clientId: "883446187099840562"
+		clientId: "883446187099840562",
 	}),
 	strings = presence.getStrings({
 		play: "general.playing",
 		pause: "general.paused",
 		live: "general.live",
-		search: "general.searchFor"
+		search: "general.searchFor",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "tv",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.href.includes("search")) {
 		presenceData.details = "Searching...";

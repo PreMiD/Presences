@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "889524311566725161"
+		clientId: "889524311566725161",
 	}),
 	browsingTimestamp = Date.now();
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		pathnames = location.pathname.split("/");
 
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.buttons = [
 			{ label: "View Padlet", url: padletData.url },
-			{ label: "View Author", url: padletData.author.url }
+			{ label: "View Author", url: padletData.author.url },
 		];
 	} else if (document.querySelector(".header-user-info")) {
 		//Author
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(".header-user-bio").textContent;
 
 		presenceData.buttons = [
-			{ label: "View Author", url: `https://padlet.com/${padletData.url}` }
+			{ label: "View Author", url: `https://padlet.com/${padletData.url}` },
 		];
 	}
 

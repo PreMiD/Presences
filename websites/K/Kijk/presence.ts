@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "812413011502825504"
+		clientId: "812413011502825504",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLElement, title2: string;
@@ -7,7 +7,7 @@ let title: HTMLElement, title2: string;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		search = document.querySelector<HTMLInputElement>(
 			"#__next > div > div > div.SearchModalstyle__SearchModalStyle-sc-1h6b5wy-0.knmuVj > div.SearchModalstyle__SearchModalHeaderStyle-sc-1h6b5wy-1.kNvWZE > div > div:nth-child(2) > div.SearchModalstyle__SearchModalInputWrapperStyle-sc-1h6b5wy-5.iwOFOK > input"
@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 		page = window.location.pathname,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 	if (privacy) presenceData.details = "Browsing...";
 	else if (search.value) {
@@ -33,8 +33,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `Bekijk ${title2}`,
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		}
 		if (
@@ -75,8 +75,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `Bekijk ${title2}`,
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		}
 		if (title.className.includes("jw-state-paused")) {

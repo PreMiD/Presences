@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "689724677274337290"
+		clientId: "689724677274337290",
 	}),
 	timeElapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "clouds"
+			largeImageKey: "clouds",
 		},
 		albumName = document.querySelector<HTMLElement>(
 			"p#cardAlbum.playerText.truncate"

@@ -269,10 +269,10 @@ const // official website
 		play: "play",
 		read: "reading",
 		search: "search",
-		write: "writing"
+		write: "writing",
 	},
 	presenceData: PresenceData = {
-		largeImageKey: PRESENCE_ART_ASSETS.logo
+		largeImageKey: PRESENCE_ART_ASSETS.logo,
 	};
 
 let ApiClient: ApiClient,
@@ -415,8 +415,8 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 						`Device="${ApiClient._deviceName}",` +
 						`DeviceId="${ApiClient._deviceId}",` +
 						`Version="${ApiClient._appVersion}",` +
-						`Token="${ApiClient._serverInfo.AccessToken}"`
-				}
+						`Token="${ApiClient._serverInfo.AccessToken}"`,
+				},
 			}
 		),
 		mediaInfo: MediaInfo = await res.json();
@@ -451,8 +451,8 @@ async function searchMedia(searchTerm: string): Promise<MediaInfo[]> {
 						`Device="${ApiClient._deviceName}",` +
 						`DeviceId="${ApiClient._deviceId}",` +
 						`Version="${ApiClient._appVersion}",` +
-						`Token="${ApiClient._serverInfo.AccessToken}"`
-				}
+						`Token="${ApiClient._serverInfo.AccessToken}"`,
+				},
 			}
 		),
 		resJson = await res.json();
@@ -865,7 +865,7 @@ async function init(): Promise<void> {
 
 	if (validPage) {
 		presence = new Presence({
-			clientId: "669359568391766018"
+			clientId: "669359568391766018",
 		});
 
 		presence.info(infoMessage);

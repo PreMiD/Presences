@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "618212337895079996"
+		clientId: "618212337895079996",
 	}),
 	elapsed = Math.floor(Date.now() / 1000);
 let text;
@@ -7,7 +7,7 @@ let text;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "banner",
-		startTimestamp: elapsed
+		startTimestamp: elapsed,
 	};
 
 	if (document.location.pathname === "/home") {

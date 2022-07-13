@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "713563682722021436"
+		clientId: "713563682722021436",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let login,
@@ -52,7 +52,7 @@ const path = document.location.pathname,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "ailogo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "aidungeon.io") {
 		presence.info("Online");

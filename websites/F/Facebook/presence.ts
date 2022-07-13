@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "631803867708915732"
+		clientId: "631803867708915732",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -14,14 +14,14 @@ function getVideoData(element: HTMLElement): [string?, HTMLVideoElement?] {
 			result.querySelector("div.n1l5q3vz > span") ??
 			result.querySelector("div.i1fnvgqd.j83agx80 div.w0hvl6rk.qjjbsfad > span")
 		).textContent,
-		result.querySelector("video")
+		result.querySelector("video"),
 	];
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "facebook",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		privacyMode = await presence.getSetting<boolean>("privacyMode"),
 		showTimestamp = await presence.getSetting<boolean>("timestamp"),
@@ -85,8 +85,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `Watch ${isLive ? "live" : "video"}`,
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (document.location.pathname.includes("/photo/")) {
@@ -101,8 +101,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View photo",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (document.location.pathname.includes("/watch")) {
@@ -286,8 +286,8 @@ presence.on("UpdateData", async () => {
 						url: `https://www.facebook.com/events/${document.location.pathname.replace(
 							/^\D+/g,
 							""
-						)}`
-					}
+						)}`,
+					},
 				];
 			} else presenceData.state = "Viewing event";
 		}
@@ -356,8 +356,8 @@ presence.on("UpdateData", async () => {
 							url: `https://www.facebook.com/gaming/play/${document.location.pathname.replace(
 								/^\D+/g,
 								""
-							)}`
-						}
+							)}`,
+						},
 					];
 				} else {
 					presenceData.details = "Gaming";

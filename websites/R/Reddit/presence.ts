@@ -28,7 +28,7 @@ async function getStrings() {
 			watching: "general.watching",
 			readButton: "general.buttonReadArticle",
 			viewProfileButton: "general.buttonViewProfile",
-			streamButton: "general.buttonWatchStream"
+			streamButton: "general.buttonWatchStream",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 			largeImageKey: "reddit_lg",
-			startTimestamp
+			startTimestamp,
 		},
 		{ pathname } = window.location;
 	if (oldReddit) {
@@ -63,8 +63,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					url: `https://www.reddit.com${pathname}`,
-					label: (await strings).readButton
-				}
+					label: (await strings).readButton,
+				},
 			];
 		} else if (pathname.startsWith("/user/")) {
 			username = document.querySelector(".titlebox > h1").textContent;
@@ -73,8 +73,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					url: `https://www.reddit.com${pathname}`,
-					label: (await strings).viewProfileButton
-				}
+					label: (await strings).viewProfileButton,
+				},
 			];
 		} else if (pathname.startsWith("/search")) {
 			presenceData.details = (await strings).searchSomething;
@@ -102,8 +102,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				url: `https://www.reddit.com${pathname}`,
-				label: (await strings).readButton
-			}
+				label: (await strings).readButton,
+			},
 		];
 	} else if (pathname.startsWith("/user/")) {
 		username = document.querySelector(
@@ -117,8 +117,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				url: `https://www.reddit.com${pathname}`,
-				label: (await strings).viewProfileButton
-			}
+				label: (await strings).viewProfileButton,
+			},
 		];
 	} else if (pathname.startsWith("/search")) {
 		presenceData.details = (await strings).searchSomething;
@@ -135,8 +135,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				url: `https://www.reddit.com${pathname}`,
-				label: (await strings).streamButton
-			}
+				label: (await strings).streamButton,
+			},
 		];
 	} else {
 		const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
@@ -156,18 +156,18 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					url: "https://www.reddit.com/r/netflix",
-					label: "View r/Netflix Subreddit"
+					label: "View r/Netflix Subreddit",
 				},
 				{
 					url: "https://discord.gg/bDumw325vX",
-					label: "Join r/Netflix Discord"
-				}
+					label: "Join r/Netflix Discord",
+				},
 			];
 		}
 		if (presenceData.buttons.length === 1) {
 			presenceData.buttons.push({
 				url: "https://discord.gg/bDumw325vX",
-				label: "Join r/Netflix Discord"
+				label: "Join r/Netflix Discord",
 			});
 		}
 	}

@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "goodreads",
 		details: "Browsing Goodreads",
-		startTimestamp: timeElapsed
+		startTimestamp: timeElapsed,
 	};
 
 	if (

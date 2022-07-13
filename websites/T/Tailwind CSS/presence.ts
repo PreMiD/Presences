@@ -5,7 +5,7 @@ presence.on("UpdateData", async () => {
 		[subdomain] = location.host.split("."),
 		presenceData: PresenceData = {
 			largeImageKey: "tailwind-logo",
-			startTimestamp: Math.round(Date.now() / 1000)
+			startTimestamp: Math.round(Date.now() / 1000),
 		};
 
 	if (location.host === "tailwindui.com") {

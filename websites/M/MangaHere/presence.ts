@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "831262912815300638"
+		clientId: "831262912815300638",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "mangahere",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
 		ganres = [
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 			"shounen",
 			"slice-of-life",
 			"tragedy",
-			"mecha"
+			"mecha",
 		];
 
 	switch (pathname) {
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 					".detail-info-right-title-font"
 				).textContent;
 				presenceData.buttons = [
-					{ label: "View Manga", url: window.location.href }
+					{ label: "View Manga", url: window.location.href },
 				];
 				presenceData.smallImageKey = "viewing";
 			} else if (pathname.startsWith("/manga") && pathname.endsWith(".html")) {
