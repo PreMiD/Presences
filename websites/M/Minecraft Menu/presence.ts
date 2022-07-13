@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "971311477514444800"
+		clientId: "971311477514444800",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLElement;
@@ -7,7 +7,7 @@ let title: HTMLElement;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		search = document.querySelector<HTMLInputElement>(
 			"body > div.pusher > div.site-nav.clearfix > div > header > nav > div.right.menu > div > div.ui.right.action.left.icon.input > input"
@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 		page = window.location.pathname,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 	if (privacy) presenceData.details = "Browsing...";
 	else if (search.value) {
@@ -34,15 +34,15 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View server",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (page.includes("/cp")) {
 		presenceData.buttons = [
 			{
 				label: "Open control panel",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 		presenceData.details = "Control Panel";
 		presenceData.state =
@@ -52,24 +52,24 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View partners",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 		presenceData.details = "Partners";
 	} else if (page.includes("/sponsored")) {
 		presenceData.buttons = [
 			{
 				label: "View sponsored servers",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 		presenceData.details = "Sponsored";
 	} else if (page.search(new RegExp(/Minecraft .* Servers/gm))) {
 		presenceData.buttons = [
 			{
 				label: "View category",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 		presenceData.details = document.querySelector(
 			"body > div.pusher > section > div.header-wrappy > h2 > span"
