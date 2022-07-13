@@ -1,8 +1,8 @@
 const presence = new Presence({
-		clientId: "776113876605337660"
+		clientId: "776113876605337660",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "mojevideo"
+		largeImageKey: "mojevideo",
 	};
 
 presence.on("UpdateData", async () => {

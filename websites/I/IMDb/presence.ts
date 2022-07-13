@@ -1,22 +1,21 @@
 const presence: Presence = new Presence({
-		clientId: "631379801826918400"
+		clientId: "631379801826918400",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "large_img",
-			startTimestamp
+			startTimestamp,
 		},
 		url = document.URL;
 	if (url.includes("/videoplayer/")) {
-		const [video] = document.querySelectorAll("video"),
-			title = document.querySelectorAll("h1.title")[0].textContent;
-		presenceData.details = title;
+		const [video] = document.querySelectorAll("video");
+		presenceData.details = document.querySelector("h1.title").textContent;
 		presenceData.state = (
 			document.querySelectorAll(".primary-relation-name")[0] as HTMLElement
 		).textContent;
@@ -38,9 +37,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Searching...";
 		presenceData.smallImageKey = "search";
 	} else if (url.includes("/title/")) {
-		const tokens = document.title.split(" - "),
-			[title] = tokens;
-		presenceData.details = title;
+		const tokens = document.title.split(" - ");
+		presenceData.details = tokens[0];
 		if (tokens[1].trim() === "IMDb") presenceData.state = "Browsing...";
 		else presenceData.state = tokens[1].trim();
 	} else if (url.includes("/user/") || url.includes("/poll/"))

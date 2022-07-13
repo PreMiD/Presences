@@ -1,15 +1,15 @@
 const presence = new Presence({
-		clientId: "717563140300210196"
+		clientId: "717563140300210196",
 	}),
 	strings = presence.getStrings({
-		search: "presence.activity.searching"
+		search: "presence.activity.searching",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (new URLSearchParams(window.location.search).has("s")) {
 		presenceData.details = "Searching for:";

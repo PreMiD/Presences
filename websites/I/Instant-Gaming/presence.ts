@@ -1,13 +1,13 @@
 const presence = new Presence({
-		clientId: "702978839722197012"
+		clientId: "702978839722197012",
 	}),
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "instantgaming"
+		largeImageKey: "instantgaming",
 	};
 	try {
 		let productPlatform = document.querySelector(

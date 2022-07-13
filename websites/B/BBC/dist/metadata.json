@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Slowlife",
 		"id": "374905512661221377"
@@ -24,7 +24,7 @@
 		"www.bbc.co.uk",
 		"www.bbc.com"
 	],
-	"version": "2.1.1",
+	"version": "2.1.3",
 	"logo": "https://i.imgur.com/4GzQf9o.png",
 	"thumbnail": "https://i.imgur.com/fBxxQDw.png",
 	"color": "#000000",

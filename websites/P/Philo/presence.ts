@@ -1,17 +1,17 @@
 const presence = new Presence({
-		clientId: "770395849041248306"
+		clientId: "770395849041248306",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		live: "presence.activity.live",
 	});
 
 let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "philo"
+			largeImageKey: "philo",
 		},
 		{ href, pathname: path } = window.location;
 

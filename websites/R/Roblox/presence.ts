@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "612416330003382314"
+		clientId: "612416330003382314",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	dfLgImage = "https://i.imgur.com/76AO77L.png";
@@ -26,16 +26,16 @@ let profileName,
 presence.on("UpdateData", async () => {
 	const [buttons, imagesEnabled] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<boolean>("images")
+			presence.getSetting<boolean>("images"),
 		]),
 		presenceData: PresenceData = {
 			details: "Unknown page",
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,
 		gameName = document.querySelector<HTMLHeadingElement>(
-			"div.game-calls-to-action > div.game-title-container > h2"
+			"div.game-calls-to-action > div.game-title-container > h1"
 		);
 
 	switch (hostname) {
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 				"/crossdevicelogin": { state: "Quick Log In" },
 				"/abusereport/": { state: "Reporting Content Abuse" },
 				"/user-ads/create": { state: "Creating Ad" },
-				"/login": { state: "Log In" }
+				"/login": { state: "Log In" },
 			};
 
 			if (pathname.includes("/users") && pathname.includes("/profile")) {
@@ -101,8 +101,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Visit Profile",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			} else if (
@@ -172,16 +172,14 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Visit Group",
-								url: document.URL
-							}
+								url: document.URL,
+							},
 						];
 					}
 				}
 			} else if (pathname.includes("/search/groups")) {
-				const searchResult = new URL(href).searchParams.get("keyword");
-
 				presenceData.details = "Searching for a group:";
-				presenceData.state = searchResult;
+				presenceData.state = new URL(href).searchParams.get("keyword");
 			} else if (
 				(pathname === "/discover/" || pathname === "/discover") &&
 				gameName === null
@@ -221,8 +219,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Visit Game",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			} else if (pathname.includes("/catalog")) {
@@ -231,69 +229,64 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Current page:";
 				presenceData.state = "Catalog";
 
-				const itemName = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					),
-					itemImage = document.querySelector<HTMLImageElement>(
-						"span.thumbnail-span img"
-					);
+				const itemImage = document.querySelector<HTMLImageElement>(
+					"span.thumbnail-span img"
+				);
 
 				if (searchResult) {
 					presenceData.details = "Searching for an item: ";
 					presenceData.state = searchResult;
 				} else if (itemImage) {
 					presenceData.details = "Looking at Catalog Item:";
-					(presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg"),
-						(presenceData.state = itemName.textContent);
+					presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
+					presenceData.state = document.querySelector<HTMLHeadingElement>(
+						".item-name-container h2"
+					).textContent;
 
 					if (buttons) {
 						presenceData.buttons = [
 							{
 								label: "View Catalog Item",
-								url: document.URL
-							}
+								url: document.URL,
+							},
 						];
 					}
 				}
 			} else if (pathname.includes("/places/")) {
-				const selectedTab = document.querySelector<HTMLDivElement>(
-					"#MasterContainer #navbar div.selected a"
-				);
-
 				presenceData.details = "Configuring Place";
-				presenceData.state = `Tab: ${selectedTab.textContent || "Unknown"}`;
+				presenceData.state = `Tab: ${
+					document.querySelector<HTMLDivElement>(
+						"#MasterContainer #navbar div.selected a"
+					).textContent || "Unknown"
+				}`;
 			} else if (pathname.includes("/universes/configure")) {
-				const selectedTab = document.querySelector<HTMLDivElement>(
-					"#MasterContainer #navbar div.selected a"
-				);
-
 				presenceData.details = "Configuring Experience";
-				presenceData.state = `Tab: ${selectedTab.textContent || "Unknown"}`;
+				presenceData.state = `Tab: ${
+					document.querySelector<HTMLDivElement>(
+						"#MasterContainer #navbar div.selected a"
+					).textContent || "Unknown"
+				}`;
 			} else if (pathname.includes("/bundles/")) {
-				const itemName = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					),
-					itemImage = document.querySelector<HTMLImageElement>(
-						"span.thumbnail-span img"
-					);
-
 				presenceData.details = "Looking at Bundle:";
-				presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
-				presenceData.state = itemName.textContent;
+				presenceData.largeImageKey = imagesEnabled
+					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							.src
+					: "lg";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".item-name-container h2"
+				).textContent;
 
 				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "View Bundle",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			} else if (pathname.includes("/search/users")) {
-				const searchResult = new URL(href).searchParams.get("keyword");
-
 				presenceData.details = "Searching for an user:";
-				presenceData.state = searchResult;
+				presenceData.state = new URL(href).searchParams.get("keyword");
 			} else if (pathname.includes("/develop")) {
 				presenceData.details = "Developer Page";
 				const developTabs = document.querySelector<HTMLDivElement>(
@@ -379,69 +372,63 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Transactions Page";
 				presenceData.state = `Tab: ${transactionsTab}`;
 			} else if (pathname.includes("/badges/")) {
-				const itemName = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					),
-					itemImage = document.querySelector<HTMLImageElement>(
-						"span.thumbnail-span img"
-					);
-
 				presenceData.details = "Looking at Badge:";
-				presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
-				presenceData.state = itemName.textContent;
+				presenceData.largeImageKey = imagesEnabled
+					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							.src
+					: "lg";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".item-name-container h2"
+				).textContent;
 
 				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "View Badge",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			} else if (pathname.includes("/library/")) {
-				const itemName = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					),
-					itemImage = document.querySelector<HTMLImageElement>(
-						"span.thumbnail-span img"
-					);
-
 				presenceData.details = "Looking at Asset:";
-				presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
-				presenceData.state = itemName.textContent;
+				presenceData.largeImageKey = imagesEnabled
+					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							.src
+					: "lg";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".item-name-container h2"
+				).textContent;
 
 				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "View Asset",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			} else if (pathname.includes("/game-pass/")) {
-				const itemName = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					),
-					itemImage = document.querySelector<HTMLImageElement>(
-						"span.thumbnail-span img"
-					);
-
 				presenceData.details = "Looking at Gamepass:";
-				presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
-				presenceData.state = itemName.textContent;
+				presenceData.largeImageKey = imagesEnabled
+					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							.src
+					: "lg";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".item-name-container h2"
+				).textContent;
 
 				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "View Gamepass",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			} else {
 				for (const [i, v] of Object.entries(pages)) {
 					if (pathname.includes(i)) {
-						presenceData.details = v.details ? v.details : "Current Page: ";
+						presenceData.details = v.details ?? "Current Page: ";
 						if (v.state) presenceData.state = v.state;
 						else delete presenceData.state;
 					}
@@ -467,7 +454,7 @@ presence.on("UpdateData", async () => {
 				"/new": { state: "Browsing New Topics" },
 				"/about": { state: "Browsing About" },
 				"/faq": { state: "Browsing FAQ" },
-				"/categories": { state: "Browsing Categories" }
+				"/categories": { state: "Browsing Categories" },
 			};
 
 			presenceData.details = "Surfing the DevForum";
@@ -480,8 +467,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Topic",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 
@@ -534,8 +521,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Profile",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 
@@ -547,7 +534,7 @@ presence.on("UpdateData", async () => {
 					"/badges": [`Browsing ${user}'s Badges`, false],
 					"/preferences": ["Editing Account Preferences", true],
 					"/messages": ["Browsing Messages", true],
-					"/notifications": ["Browsing Notifications", true]
+					"/notifications": ["Browsing Notifications", true],
 				};
 
 				if (pathname.includes("/follow")) {
@@ -617,12 +604,12 @@ presence.on("UpdateData", async () => {
 				if (talentUserData[0] !== Id) {
 					talentUserData = [
 						Id,
-						document.head.title.replace("'s Creator Page - Talent Hub", "")
+						document.head.title.replace("'s Creator Page - Talent Hub", ""),
 					];
 					const req = await fetch(
 						`https://users.roblox.com/v1/users/${Id}`
 					).then(response => response.json());
-					talentUserData = [Id, req.name ? req.name : talentUserData[1]];
+					talentUserData = [Id, req.name ?? talentUserData[1]];
 				}
 				if (!talentUserData[1]) presenceData.state = "Browsing Profile";
 				else presenceData.state = `Looking at ${talentUserData[1]}'s Profile`;
@@ -634,8 +621,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Visit Profile",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			} else if (
@@ -652,8 +639,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Visit Job",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			} else if (pathname.includes("/inbox"))

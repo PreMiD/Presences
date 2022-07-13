@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Echology",
 		"id": "272875632088842240"
@@ -12,7 +12,7 @@
 		"minehut.com",
 		"shop.minehut.com"
 	],
-	"version": "1.0.3",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/FOvZNY6.png",
 	"thumbnail": "https://i.imgur.com/o38mcIN.png",
 	"color": "#488aff",

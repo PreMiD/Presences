@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "709308577701036074"
+		clientId: "709308577701036074",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	title1 =
@@ -20,7 +20,7 @@ const presence = new Presence({
 let video = {
 	current: 0,
 	duration: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -32,7 +32,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon"
+		largeImageKey: "icon",
 	};
 
 	// Presence

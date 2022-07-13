@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "735878480318955660"
+		clientId: "735878480318955660",
 	}),
 	strings = presence.getStrings({
 		browse: "presence.activity.browsing",
-		search: "presence.activity.searching"
+		search: "presence.activity.searching",
 	}),
 	getElement = (query: string): string | undefined => {
 		return document.querySelector(query)?.textContent.trim();
@@ -15,8 +15,8 @@ let elapsed = Math.floor(Date.now() / 1000),
 const statics = {
 	"/tos/": {
 		details: "Viewing Page...",
-		state: "Terms of Service"
-	}
+		state: "Terms of Service",
+	},
 };
 
 presence.on("UpdateData", async () => {
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 
 	let presenceData: PresenceData = {
 		largeImageKey: "googledomains",
-		startTimestamp: elapsed
+		startTimestamp: elapsed,
 	};
 
 	if (document.location.href !== prevUrl) {

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "erdem",
 		"id": "292692556809109534"
@@ -14,7 +14,7 @@
 		"suratkargo.com.tr",
 		"www.suratkargo.com.tr"
 	],
-	"version": "1.0.8",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/CBsEtCf.png",
 	"thumbnail": "https://i.imgur.com/B7H16MR.png",
 	"color": "#e33d2f",

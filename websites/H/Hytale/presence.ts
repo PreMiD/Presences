@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "809083630117978123"
+		clientId: "809083630117978123",
 	}),
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "hytale_logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/")

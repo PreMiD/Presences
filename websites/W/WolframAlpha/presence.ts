@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "826428815365373994"
+		clientId: "826428815365373994",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	path = document.location.pathname;
@@ -7,7 +7,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (path.includes("/input")) {

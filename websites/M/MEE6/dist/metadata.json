@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -13,7 +13,7 @@
 		"mee6.xyz",
 		"help.mee6.xyz"
 	],
-	"version": "1.2.12",
+	"version": "1.2.14",
 	"logo": "https://i.imgur.com/AZVCG6a.png",
 	"thumbnail": "https://i.imgur.com/RuCUc5R.png",
 	"color": "#60d1f6",

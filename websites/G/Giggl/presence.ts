@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "876239113307709493"
+		clientId: "876239113307709493",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -10,7 +10,7 @@ async function getStrings() {
 			user: "general.viewUser",
 			call: "general.inCall",
 			reading: "general.readingAbout",
-			browsing: "general.browsing"
+			browsing: "general.browsing",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -21,7 +21,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),

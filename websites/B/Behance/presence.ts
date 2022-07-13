@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "934826046824542279"
+		clientId: "934826046824542279",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ let video = {
 	duration: "",
 	currentTime: "",
 	live: false,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -26,12 +26,12 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			details: "Browsing",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
 		[image, buttons] = await Promise.all([
 			presence.getSetting<boolean>("image"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 	if (pathname.startsWith("/gallery")) {
 		presenceData.details =
@@ -52,21 +52,21 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Work",
-					url: document.URL
+					url: document.URL,
 				},
 				{
 					label: "View Artist",
 					url: document.querySelector<HTMLAnchorElement>("figcaption > div > a")
-						.href
-				}
+						.href,
+				},
 			];
 		} else {
 			presenceData.state = "Multiple Owners";
 			presenceData.buttons = [
 				{
 					label: "View Work",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (pathname.startsWith("/galleries")) {
@@ -116,14 +116,14 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Stream",
-					url: document.URL
+					url: document.URL,
 				},
 				{
 					label: "View Profile",
 					url: document.querySelector<HTMLAnchorElement>(
 						"div.UserInfo-main-gTU > div:nth-child(2) > a"
-					).href
-				}
+					).href,
+				},
 			];
 		} else if (video.duration && video.currentTime) {
 			// Intentional `delete` for pause boolean
@@ -140,14 +140,14 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Video",
-					url: document.URL
+					url: document.URL,
 				},
 				{
 					label: "View Profile",
 					url: document.querySelector<HTMLAnchorElement>(
 						"div.UserInfo-main-gTU > div:nth-child(2) > a"
-					).href
-				}
+					).href,
+				},
 			];
 		}
 	} else if (pathname.startsWith("/live")) {

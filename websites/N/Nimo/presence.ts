@@ -3,7 +3,7 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const presence = new Presence({
-		clientId: "939877915032682576"
+		clientId: "939877915032682576",
 	}),
 	getElement = (query: string): string | undefined => {
 		return document.querySelector(query)?.textContent;
@@ -38,7 +38,7 @@ const presence = new Presence({
 				searchingSomething: "general.searchSomething",
 				search: "general.search",
 				watchStream: "general.buttonWatchStream",
-				watchVideo: "general.buttonWatchVideo"
+				watchVideo: "general.buttonWatchVideo",
 			},
 			oldLang
 		);
@@ -49,7 +49,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: elapsed
+			startTimestamp: elapsed,
 		},
 		{ pathname, href } = document.location,
 		[
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 			streamDetail,
 			streamState,
 			profilePic,
-			buttons
+			buttons,
 		] = await Promise.all([
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<string>("lang").catch(() => "en"),
@@ -71,16 +71,15 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<string>("streamDetail"),
 			presence.getSetting<string>("streamState"),
 			presence.getSetting<boolean>("profilePic"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		title = getElement(
-			":is(div.nimo-rm_title-text > h3, #meta-info > div.video-info h1)"
+			":is(div.nimo-rm_title-text > h3, #meta-info > div.video-info h1, .nimo-player__room-meta_title-text)"
 		),
 		streamer = getElement(
-			":is(div.nimo-rm_sub-title > h1, #meta-info div.anchor-name.n-as-text-over > a > h2)"
+			":is(div.nimo-rm_sub-title > h1, #meta-info div.anchor-name.n-as-text-over > a > h2, .nimo-player__room-meta__nick)"
 		),
-		game = getElement("div.nimo-anchor-broadcast-game > a > h4"),
-		vidTimer = getElement("#nimo-player div.time-label-control.control-item");
+		game = getElement("div.nimo-anchor-broadcast-game > a > h4");
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -165,14 +164,11 @@ presence.on("UpdateData", async () => {
 			else if (pathname.includes("/video")) presenceData.state = strings.colls;
 		}
 	} else if (title && streamer) {
-		if (vidTimer) {
-			let paused = !document.querySelector('#nimo-player div[title~="Pause"]');
-			const timeElapsed = presence.timestampFromFormat(
-					vidTimer.split("/", 2)[0].trim()
-				),
-				duration = presence.timestampFromFormat(
-					vidTimer.split("/", 2)[1].trim()
-				);
+		if (
+			document.querySelector("#nimo-player div.time-label-control.control-item")
+		) {
+			const { duration, currentTime, paused } =
+				document.querySelector<HTMLVideoElement>("video");
 			if (!privacy) {
 				presenceData.details = vidDetail
 					.replace("%title%", title)
@@ -183,15 +179,13 @@ presence.on("UpdateData", async () => {
 
 				delete presenceData.startTimestamp;
 
-				if (Date.now() / 1000 >= Date.now() / 1000 + duration - timeElapsed)
-					paused = true;
 				if (!paused) {
 					presenceData.endTimestamp =
-						Date.now() / 1000 + duration - timeElapsed;
+						Date.now() / 1000 + duration - currentTime;
 				}
 
 				presenceData.buttons = [
-					{ label: strings.watchVideo, url: document.URL }
+					{ label: strings.watchVideo, url: document.URL },
 				];
 			} else presenceData.details = strings.watchingVid;
 			presenceData.smallImageKey = paused ? "pause" : "play";
@@ -207,7 +201,7 @@ presence.on("UpdateData", async () => {
 					.replace("%streamer%", streamer)
 					.replace("%game%", game);
 				presenceData.buttons = [
-					{ label: strings.watchStream, url: document.URL }
+					{ label: strings.watchStream, url: document.URL },
 				];
 			} else presenceData.details = strings.watchingLive;
 			presenceData.smallImageKey = "live";

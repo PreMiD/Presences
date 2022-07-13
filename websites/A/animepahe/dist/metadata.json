@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "MulverineX",
 		"id": "178551656714076161"
@@ -17,7 +17,7 @@
 		"animepahe.ru",
 		"animepahe.org"
 	],
-	"version": "1.5.5",
+	"version": "1.5.9",
 	"logo": "https://i.imgur.com/LBb6FrK.png",
 	"thumbnail": "https://i.imgur.com/Tm58ZXt.png",
 	"color": "#d5015b",

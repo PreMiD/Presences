@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "809133308604055622"
+		clientId: "809133308604055622",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 async function getStrings() {
@@ -17,7 +17,7 @@ async function getStrings() {
 			viewLyrics: "genius.viewLyrics",
 			home: "genius.viewHome",
 			viewAlbum: "genius.viewAlbum",
-			buttonAlbum: "general.buttonViewAlbum"
+			buttonAlbum: "general.buttonViewAlbum",
 		},
 		await presence.getSetting<string>("lang")
 	);
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 			largeImageKey: "genius",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 
@@ -64,8 +64,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonAlbum,
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (
@@ -92,8 +92,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: (await strings).viewLyrics,
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (

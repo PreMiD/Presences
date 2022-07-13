@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "John Smith",
 		"id": "233950379065212938"
@@ -19,7 +19,7 @@
 		"www.nytimes.com",
 		"myaccount.nytimes.com"
 	],
-	"version": "2.0.2",
+	"version": "2.0.4",
 	"logo": "https://i.imgur.com/e5xEpfu.jpg",
 	"thumbnail": "https://i.imgur.com/p8luyGx.png",
 	"color": "#ffffff",

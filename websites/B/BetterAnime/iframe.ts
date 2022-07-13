@@ -5,7 +5,7 @@
 			iframe.send({
 				duration: video.duration,
 				currentTime: video.currentTime,
-				paused: video.paused
+				paused: video.paused,
 			});
 		}
 	}))(new iFrame());

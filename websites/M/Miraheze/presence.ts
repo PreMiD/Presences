@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "900002010156400670"
+		clientId: "900002010156400670",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
@@ -7,7 +7,7 @@ let currentURL = new URL(document.location.href),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
 		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 const updateCallback = {
 		_function: null as () => void,
@@ -19,7 +19,7 @@ const updateCallback = {
 		},
 		get present(): boolean {
 			return this._function !== null;
-		}
+		},
 	},
 	/**
 	 * Initialize/reset presenceData.
@@ -28,7 +28,7 @@ const updateCallback = {
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		}
 	): void => {
 		currentURL = new URL(document.location.href);
@@ -100,7 +100,7 @@ const updateCallback = {
 									presenceData.state = [
 										...document.querySelectorAll(
 											".phui-crumbs-view.phui-crumbs-border .phui-crumb-name"
-										)
+										),
 									]
 										.slice(1)
 										.map(element => element.textContent.trim())
@@ -110,7 +110,7 @@ const updateCallback = {
 									const crumbs = [
 										...document.querySelectorAll(
 											".phui-crumbs-view.phui-crumbs-border .phui-crumb-name"
-										)
+										),
 									];
 									presenceData.state = crumbs
 										.slice(1, crumbs.length - 1)
@@ -222,7 +222,7 @@ const updateCallback = {
 									presenceData.state = [
 										...document.querySelectorAll(
 											".phui-crumbs-view.phui-crumbs-border .phui-crumb-name"
-										)
+										),
 									]
 										.slice(1)
 										.map(element => element.textContent.trim())
@@ -340,7 +340,7 @@ const updateCallback = {
 									Schema: "Viewing a schema page",
 									"Schema talk": "Viewing a schema talk page",
 									Translations: "Viewing a translations page",
-									"Translations talk": "Viewing a translations talk page"
+									"Translations talk": "Viewing a translations talk page",
 								},
 								canonicalNamespace = mwConfig.wgCanonicalNamespace.replaceAll(
 									"_",

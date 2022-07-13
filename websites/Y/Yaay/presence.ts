@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "752933383411204196"
+		clientId: "752933383411204196",
 	}),
 	yaayPages: { [key: string]: string } = {
 		"/": "Ana Sayfa",
@@ -13,13 +13,13 @@ const presence = new Presence({
 		"/logout": "Çıkış Yap",
 		"/register": "Kayıt Ol",
 		"/login": "Giriş Yap",
-		"/explore": "Popüler 24"
+		"/explore": "Popüler 24",
 	};
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "yaay-logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		page = document.location.pathname,
 		userPage = document.querySelector(".profile_container");

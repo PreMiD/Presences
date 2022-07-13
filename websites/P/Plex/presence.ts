@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "645028677033132033"
+		clientId: "645028677033132033",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	{ language } = window.navigator; //Make this change-able with presence settings
@@ -158,7 +158,7 @@ async function getShortURL(url: string) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "plex",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.querySelector("#plex")) {
@@ -191,6 +191,9 @@ presence.on("UpdateData", async () => {
 				) ||
 				document.querySelector(
 					"#plex > div:nth-child(4) > div > div:nth-child(4) > div > div > div:nth-child(2) > div:nth-child(1) > div > a"
+				) ||
+				document.querySelector(
+					"#plex > div > div > div > div > div > div:nth-child(1) > div > div:nth-child(2) > div > div > div:nth-child(1) > a"
 				);
 			title =
 				document.querySelector(
@@ -198,7 +201,11 @@ presence.on("UpdateData", async () => {
 				) ||
 				document.querySelector(
 					"#plex > div:nth-child(4) > div > div:nth-child(4) > div > div > div:nth-child(2) > div:nth-child(1) > div > span"
+				) ||
+				document.querySelector(
+					"#plex > div:nth-child(4) > div > div > div > div > div > div > div > a"
 				);
+
 			presenceData.details = user?.textContent;
 			if (title) {
 				title = (title.textContent || "").split("—");

@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "616940877042155531"
+	clientId: "616940877042155531",
 });
 async function getStrings() {
 	return presence.getStrings(
@@ -65,7 +65,7 @@ async function getStrings() {
 			product: "general.viewProduct",
 			collection: "discord.merch.collection",
 			viewPage: "general.viewPage",
-			shopCart: "general.shopCart"
+			shopCart: "general.shopCart",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 		privacy,
 		showCalls,
 		newLang,
-		logo
+		logo,
 	] = await Promise.all([
 		presence.getSetting<boolean>("browse"),
 		presence.getSetting<boolean>("timestamp"),
@@ -94,12 +94,12 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<boolean>("privacy"),
 		presence.getSetting<boolean>("call"),
 		presence.getSetting<string>("lang").catch(() => "en"),
-		presence.getSetting<number>("logo")
+		presence.getSetting<number>("logo"),
 	]);
 
 	let presenceData: PresenceData = {
 		largeImageKey:
-			["discordwhite", "discord", "discordblack"][logo] || "discordwhite"
+			["discordwhite", "discord", "discordblack"][logo] || "discordwhite",
 	};
 
 	if (document.location.href !== prevUrl) {
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
 					[name: string]: PresenceData;
 				} = {
 					"/": {
-						details: (await strings).browse
+						details: (await strings).browse,
 					},
 					"/channels/(\\d*)/(\\d*)/": {
 						details: serverTyping
@@ -183,10 +183,10 @@ presence.on("UpdateData", async () => {
 						smallImageKey: serverTyping ? "writing" : "reading",
 						smallImageText: serverTyping
 							? (await strings).writing
-							: (await strings).reading
+							: (await strings).reading,
 					},
 					"/channels/@me/": {
-						details: (await strings).friends
+						details: (await strings).friends,
 					},
 					"/channels/@me/(\\d*)/": {
 						details: dmsTyping
@@ -222,7 +222,7 @@ presence.on("UpdateData", async () => {
 						smallImageKey: dmsTyping ? "writing" : "reading",
 						smallImageText: dmsTyping
 							? (await strings).writing
-							: (await strings).reading
+							: (await strings).reading,
 					},
 					"/invite/(\\w*\\d*)/": {
 						details: showInvites
@@ -248,104 +248,104 @@ presence.on("UpdateData", async () => {
 							? [
 									{
 										label: (await strings).buttonInvite,
-										url: document.URL
-									}
+										url: document.URL,
+									},
 							  ]
-							: []
+							: [],
 					},
 					"/store/": {
-						details: (await strings).nitro
+						details: (await strings).nitro,
 					},
 					"/nitro/": {
-						details: (await strings).nitro
+						details: (await strings).nitro,
 					},
 					"/download/": {
 						details: (await strings).browseThrough,
-						state: (await strings).download
+						state: (await strings).download,
 					},
 					"/why-discord-is-different/": {
 						details: (await strings).browseThrough,
-						state: (await strings).why
+						state: (await strings).why,
 					},
 					"/safety/": {
 						details: (await strings).browseThrough,
-						state: (await strings).safety
+						state: (await strings).safety,
 					},
 					"/jobs/": {
 						details: (await strings).browseThrough,
-						state: (await strings).jobs
+						state: (await strings).jobs,
 					},
 					"/company/": {
 						details: (await strings).browseThrough,
-						state: (await strings).company
+						state: (await strings).company,
 					},
 					"/branding/": {
 						details: (await strings).browseThrough,
-						state: (await strings).branding
+						state: (await strings).branding,
 					},
 					"/inspiration/": {
 						details: (await strings).browseThrough,
-						state: (await strings).inspiration
+						state: (await strings).inspiration,
 					},
 					"/college/": {
 						details: (await strings).browseThrough,
-						state: (await strings).college
+						state: (await strings).college,
 					},
 					"/newsroom/": {
 						details: (await strings).browseThrough,
-						state: (await strings).newsroom
+						state: (await strings).newsroom,
 					},
 					"/partners/": {
 						details: (await strings).browseThrough,
-						state: (await strings).partner
+						state: (await strings).partner,
 					},
 					"/verification/": {
 						details: (await strings).browseThrough,
-						state: (await strings).verification
+						state: (await strings).verification,
 					},
 					"/streamkit/": {
 						details: (await strings).browseThrough,
-						state: (await strings).streamkit
+						state: (await strings).streamkit,
 					},
 					"/open-source/": {
 						details: (await strings).browseThrough,
-						state: (await strings).opensource
+						state: (await strings).opensource,
 					},
 					"/security/": {
 						details: (await strings).browseThrough,
-						state: (await strings).security
+						state: (await strings).security,
 					},
 					"/moderation/": {
 						details: (await strings).browseThrough,
-						state: (await strings).moderation
+						state: (await strings).moderation,
 					},
 					"/rich-presence/": {
 						details: (await strings).browseThrough,
-						state: (await strings).rpc
+						state: (await strings).rpc,
 					},
 					"/terms/": {
 						details: (await strings).browseThrough,
-						state: (await strings).policies
+						state: (await strings).policies,
 					},
 					"/privacy/": {
 						details: (await strings).browseThrough,
-						state: (await strings).policies
+						state: (await strings).policies,
 					},
 					"/guidelines/": {
 						details: (await strings).browseThrough,
-						state: (await strings).policies
+						state: (await strings).policies,
 					},
 					"/acknowledgements/": {
 						details: (await strings).browseThrough,
-						state: (await strings).policies
+						state: (await strings).policies,
 					},
 					"/licenses/": {
 						details: (await strings).browseThrough,
-						state: (await strings).policies
+						state: (await strings).policies,
 					},
 					"/developers/applications/": {
 						details: (await strings).portal,
-						state: (await strings).appsBrowse
+						state: (await strings).appsBrowse,
 					},
 					"/developers/applications/(\\d*)/": {
 						details: (await strings).portal,
@@ -355,11 +355,11 @@ presence.on("UpdateData", async () => {
 								c.className?.includes("appDetails")
 							)?.textContent
 						),
-						smallImageKey: "writing"
+						smallImageKey: "writing",
 					},
 					"/developers/teams/": {
 						details: (await strings).portal,
-						state: (await strings).teamsBrowse
+						state: (await strings).teamsBrowse,
 					},
 					"/developers/teams/(\\d*)/": {
 						details: (await strings).portal,
@@ -367,11 +367,11 @@ presence.on("UpdateData", async () => {
 							"{0}",
 							document.querySelector("div.Select-value")?.textContent
 						),
-						smallImageKey: "writing"
+						smallImageKey: "writing",
 					},
 					"/developers/servers/": {
 						details: (await strings).portal,
-						state: (await strings).serversBrowse
+						state: (await strings).serversBrowse,
 					},
 					"/developers/servers/(\\d*)/": {
 						details: (await strings).portal,
@@ -381,14 +381,14 @@ presence.on("UpdateData", async () => {
 								c.className.includes("itemName")
 							)?.textContent
 						),
-						smallImageKey: "reading"
+						smallImageKey: "reading",
 					},
 					"/developers/docs/": {
 						details: (await strings).portal,
 						state: (await strings).docs,
 						smallImageKey: "reading",
-						smallImageText: (await strings).reading
-					}
+						smallImageText: (await strings).reading,
+					},
 				};
 
 			if (
@@ -513,20 +513,20 @@ presence.on("UpdateData", async () => {
 			} = {
 				"/": {
 					details: (await strings).status,
-					state: (await strings).browse
+					state: (await strings).browse,
 				},
 				"/uptime/": {
 					details: (await strings).status,
-					state: `${(await strings).viewing} ${(await strings).uptime}`
+					state: `${(await strings).viewing} ${(await strings).uptime}`,
 				},
 				"/history/": {
 					details: (await strings).status,
-					state: `${(await strings).viewing} ${(await strings).incident}`
+					state: `${(await strings).viewing} ${(await strings).incident}`,
 				},
 				"/incidents/": {
 					details: (await strings).status,
-					state: (await strings).incidentView
-				}
+					state: (await strings).incidentView,
+				},
 			};
 			if (showBrowsing) {
 				if (privacy) {
@@ -562,13 +562,13 @@ presence.on("UpdateData", async () => {
 			} = {
 				"/": {
 					details: (await strings).helpCenter,
-					state: (await strings).browse
+					state: (await strings).browse,
 				},
 				"/categories/": {
 					details: (await strings).helpCenter,
 					state: `${(await strings).viewCategory} ${
 						document.querySelector("h1")?.textContent
-					}`
+					}`,
 				},
 				"/search/": {
 					details: (await strings).helpCenter,
@@ -576,7 +576,7 @@ presence.on("UpdateData", async () => {
 						(document.querySelector("#query") as HTMLInputElement)?.value
 					}`,
 					smallImageKey: "search",
-					smallImageText: (await strings).searching
+					smallImageText: (await strings).searching,
 				},
 				"/articles/": {
 					details: (await strings).helpCenter,
@@ -584,8 +584,8 @@ presence.on("UpdateData", async () => {
 						.querySelector("h1")
 						?.textContent.trim()}`,
 					smallImageKey: "reading",
-					smallImageText: (await strings).reading
-				}
+					smallImageText: (await strings).reading,
+				},
 			};
 			if (showBrowsing) {
 				if (privacy) {
@@ -626,28 +626,28 @@ presence.on("UpdateData", async () => {
 							? `${(await strings).readingArticle} ${
 									document.querySelector("h1").textContent
 							  }`
-							: (await strings).browse
+							: (await strings).browse,
 				},
 				"/product-posts/": {
 					details: (await strings).blog,
-					state: `${(await strings).viewCategory} Product posts`
+					state: `${(await strings).viewCategory} Product posts`,
 				},
 				"/company-posts/": {
 					details: (await strings).blog,
-					state: `${(await strings).viewCategory} Company posts`
+					state: `${(await strings).viewCategory} Company posts`,
 				},
 				"/education-posts/": {
 					details: (await strings).blog,
-					state: `${(await strings).viewCategory} Education posts`
+					state: `${(await strings).viewCategory} Education posts`,
 				},
 				"/community-posts/": {
 					details: (await strings).blog,
-					state: `${(await strings).viewCategory} Community posts`
+					state: `${(await strings).viewCategory} Community posts`,
 				},
 				"/engineering-posts/": {
 					details: (await strings).blog,
-					state: `${(await strings).viewCategory} Engineering posts`
-				}
+					state: `${(await strings).viewCategory} Engineering posts`,
+				},
 			};
 			if (showBrowsing) {
 				if (privacy) {
@@ -683,29 +683,29 @@ presence.on("UpdateData", async () => {
 			} = {
 				"/": {
 					details: (await strings).merch,
-					state: (await strings).browse
+					state: (await strings).browse,
 				},
 				"/products/": {
 					details: (await strings).merch,
 					state: `${(await strings).product} ${
 						document.querySelector("h1")?.textContent
-					}`
+					}`,
 				},
 				"/collections/": {
 					details: (await strings).merch,
 					state: `${(await strings).collection} ${
 						document.querySelector("h1")?.textContent
-					}`
+					}`,
 				},
 				"/pages/": {
 					details: (await strings).merch,
 					state: `${(await strings).viewPage} ${
 						document.querySelector("h1")?.textContent
-					}`
+					}`,
 				},
 				"/cart/": {
 					details: (await strings).merch,
-					state: `${(await strings).viewing} ${(await strings).shopCart}`
+					state: `${(await strings).viewing} ${(await strings).shopCart}`,
 				},
 				"/search/": {
 					details: (await strings).merch,
@@ -713,8 +713,8 @@ presence.on("UpdateData", async () => {
 						(document.querySelector("input") as HTMLInputElement)?.value
 					}`,
 					smallImageKey: "search",
-					smallImageText: (await strings).searching
-				}
+					smallImageText: (await strings).searching,
+				},
 			};
 			if (showBrowsing) {
 				if (privacy) {

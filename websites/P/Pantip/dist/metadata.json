@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Yusaki",
 		"id": "439582316873121793"
@@ -12,7 +12,7 @@
 	},
 	"url": "www.pantip.com",
 	"regExp": "([a-z0-9-]+[.])*pantip[.]com[/]",
-	"version": "1.0.10",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/pXOyBO5.png",
 	"thumbnail": "https://i.imgur.com/5ji4rGg.png",
 	"color": "#9d93f5",

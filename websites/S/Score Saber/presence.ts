@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "833644176967991346"
+		clientId: "833644176967991346",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 		cover = await presence.getSetting<boolean>("cover"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 	if (document.querySelector("[class*='is-visible']")) {
 		presenceData.details = "Searching";
@@ -67,8 +67,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			if (cover) {
 				presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
@@ -96,16 +96,16 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/u/")) {
 		presenceData.details = "Viewing User";
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 		if (
 			document.querySelector(

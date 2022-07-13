@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "864304063804997702"
+		clientId: "864304063804997702",
 	}),
 	elapsed = Math.floor(Date.now() / 1e3);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
 	const { pathname, origin } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: elapsed,
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		};
 
 	let state, details, buttons: [ButtonData, ButtonData?];
@@ -20,8 +20,8 @@ presence.on("UpdateData", () => {
 		buttons = [
 			{
 				label: "Visit Comic Page",
-				url: origin + pathname
-			}
+				url: origin + pathname,
+			},
 		];
 	} else if (/\/[a-z-19]+(chapter|ch)-[0-9]+\/?$/i.test(pathname)) {
 		details = "Reading Comic";
@@ -31,12 +31,12 @@ presence.on("UpdateData", () => {
 				label: "Visit Comic Page",
 				url: `${origin} + ${
 					(document.querySelector(".allc > a") as HTMLAnchorElement).href
-				}`
+				}`,
 			},
 			{
 				label: "Visit Chapter",
-				url: origin + pathname
-			}
+				url: origin + pathname,
+			},
 		];
 	} else {
 		details = "Browsing Asura Scans";

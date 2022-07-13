@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "john",
 		"id": "156937406375919616"
@@ -9,7 +9,7 @@
 		"en": "Formerly known as MSPaintAdventures, Homestuck.com hosts webcomics created by Andrew Hussie."
 	},
 	"url": "www.homestuck.com",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/r6Hyf4D.png",
 	"thumbnail": "https://i.imgur.com/fgZQAYZ.png",
 	"color": "#0fff00",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -15,7 +15,7 @@
 		"community.wanikani.com",
 		"knowledge.wanikani.com"
 	],
-	"version": "1.0.13",
+	"version": "1.1.2",
 	"logo": "https://i.imgur.com/NdlB8M5.png",
 	"thumbnail": "https://i.imgur.com/8OKXkxY.png",
 	"color": "#1BA0ED",

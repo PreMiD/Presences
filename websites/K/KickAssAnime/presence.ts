@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "802964241179082822"
+		clientId: "802964241179082822",
 	}),
 	nextEpisodeElement = document.querySelector<HTMLDivElement>(
 		"div#sidebar-anime-info > div.border.rounded.mb-3.p-3:nth-child(2) > div:nth-child(1) > a.ka-url-wrapper"
@@ -15,7 +15,7 @@ async function getStrings() {
 			pause: "general.paused",
 			viewSeries: "general.buttonViewSeries",
 			viewMovie: "general.buttonViewMovie",
-			watchEpisode: "general.buttonViewEpisode"
+			watchEpisode: "general.buttonViewEpisode",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -25,7 +25,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 	video = {
 		duration: 0,
 		currentTime: 0,
-		paused: true
+		paused: true,
 	},
 	currentTime: number,
 	duration: number,
@@ -91,12 +91,12 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "kaa",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[buttons, newLang, cover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<string>("lang"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]);
 
 	if (oldLang !== newLang) {
@@ -132,12 +132,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.watchEpisode,
-							url: document.URL
+							url: document.URL,
 						},
 						{
 							label: strings.viewSeries,
-							url: document.URL.replace(document.URL.split("/")[5], "")
-						}
+							url: document.URL.replace(document.URL.split("/")[5], ""),
+						},
 					];
 				}
 
@@ -153,12 +153,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.watchEpisode,
-							url: document.URL
+							url: document.URL,
 						},
 						{
 							label: strings.viewMovie,
-							url: document.URL.replace(document.URL.split("/")[5], "")
-						}
+							url: document.URL.replace(document.URL.split("/")[5], ""),
+						},
 					];
 				}
 			}
@@ -189,12 +189,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.watchEpisode,
-							url: document.URL
+							url: document.URL,
 						},
 						{
 							label: strings.viewSeries,
-							url: document.URL.replace(document.URL.split("/")[5], "")
-						}
+							url: document.URL.replace(document.URL.split("/")[5], ""),
+						},
 					];
 				}
 			} else {
@@ -204,12 +204,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.watchEpisode,
-							url: document.URL
+							url: document.URL,
 						},
 						{
 							label: strings.viewMovie,
-							url: document.URL.replace(document.URL.split("/")[5], "")
-						}
+							url: document.URL.replace(document.URL.split("/")[5], ""),
+						},
 					];
 				}
 			}
@@ -241,8 +241,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.viewSeries,
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (document.location.pathname.includes("anime-list")) {

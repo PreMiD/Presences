@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "660882722839068702"
+		clientId: "660882722839068702",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let iFrameVideo: boolean,
@@ -29,7 +29,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 });
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "hwnew"
+		largeImageKey: "hwnew",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

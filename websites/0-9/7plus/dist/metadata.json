@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -18,7 +18,7 @@
 		"vi_VN": "7plus là dịch vụ cung cấp video và truyền hình theo nhu cầu bởi Seven Network. 7plus cũng cung cấp dịch vụ phát trực tuyến cho Channel Seven, 7TWO, 7mate, 7flix và Racing.com."
 	},
 	"url": "7plus.com.au",
-	"version": "1.1.2",
+	"version": "1.1.4",
 	"logo": "https://i.imgur.com/BamXC8h.png",
 	"thumbnail": "https://i.imgur.com/A50n9nx.png",
 	"color": "#FF0000",

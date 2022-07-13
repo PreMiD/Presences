@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Kinue",
 		"id": "634246091293851649"
@@ -12,7 +12,7 @@
 	},
 	"url": "yoake.moe",
 	"regExp": "([a-z0-9-]+[.])*yoake.moe",
-	"version": "1.1.10",
+	"version": "1.1.12",
 	"logo": "https://i.imgur.com/eL8ARU0.png",
 	"thumbnail": "https://i.imgur.com/un3I1sl.jpeg",
 	"color": "#ffb6c1",

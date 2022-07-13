@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "711871296346128395"
+		clientId: "711871296346128395",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	userType = [
 		"Viewing the ",
 		"Viewing their ",
 		"Modifying their ",
-		"Creating their "
+		"Creating their ",
 	];
 
 let strings,
@@ -18,10 +18,10 @@ let strings,
 presence.on("UpdateData", async () => {
 	strings = await presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	switch (window.location.hostname) {

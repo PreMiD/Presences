@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "901591802342150174"
+	clientId: "901591802342150174",
 });
 
 async function getStrings() {
@@ -7,7 +7,7 @@ async function getStrings() {
 		{
 			play: "general.playing",
 			pause: "general.paused",
-			viewSong: "general.buttonViewSong"
+			viewSong: "general.buttonViewSong",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -24,25 +24,24 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<string>("lang").catch(() => "en"),
 		presence.getSetting<boolean>("timestamps"),
 		presence.getSetting<boolean>("cover"),
-		presence.getSetting<boolean>("buttons")
+		presence.getSetting<boolean>("buttons"),
 	]);
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
-
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		songTitle = document.querySelector<HTMLAnchorElement>(
 			'div[data-test="footer-track-title"] > a'
 		),
 		currentTime = document
-			.querySelector<HTMLElement>("time.current-time")
+			.querySelector<HTMLElement>('time[data-test="current-time"]')
 			.textContent.split(":"),
 		endTime = document
-			.querySelector<HTMLElement>("time.duration-time")
+			.querySelector<HTMLElement>('time[data-test="duration"]')
 			.textContent.split(":"),
 		currentTimeSec =
 			(parseFloat(currentTime[0]) * 60 + parseFloat(currentTime[1])) * 1000,
@@ -97,8 +96,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: (await strings).viewSong,
-				url: songTitle.href
-			}
+				url: songTitle.href,
+			},
 		];
 	}
 	if (!timestamps) delete presenceData.endTimestamp;

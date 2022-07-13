@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "786770326234464256"
+		clientId: "786770326234464256",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		paths = document.location.pathname.split("/");
 

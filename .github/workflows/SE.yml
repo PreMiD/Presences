@@ -1,7 +1,7 @@
 name: Syntax Enforcer
 on:
   schedule:
-    - cron: 0 0 */3 * *
+    - cron: 0 0 1 * *
   workflow_dispatch:
 jobs:
   qa:
@@ -11,8 +11,10 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Use Node.js 16
-        uses: actions/setup-node@v3.0.0
+        uses: actions/setup-node@v3.3.0
         with:
           node-version: 16
           cache: "yarn"
@@ -38,7 +40,7 @@ jobs:
             git config --local user.name "${GITHUB_USER}";
             git checkout -b semid/qa/`date +%F-%H-%M`;
             git commit -sam "refactor: run syntax enforcer";
-            hub pull-request -b "PreMiD:main" -p -m "refactor: semi-weekly SE" -m "*beep boop* I've prettified and refactored some Presences and sorted all metadata files...";
+            hub pull-request -b "PreMiD:main" -p -m "refactor: monthly SE" -m "*beep boop* I've prettified and refactored some Presences and sorted all metadata files..." -l chore;
           fi
         env:
           GITHUB_USER: SeMiD

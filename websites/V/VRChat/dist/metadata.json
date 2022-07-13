@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "KnuffelBeestje",
 		"id": "219155156569161731"
@@ -15,7 +15,7 @@
 		"hello.vrchat.com",
 		"feedback.vrchat.com"
 	],
-	"version": "1.0.15",
+	"version": "1.0.17",
 	"logo": "https://i.imgur.com/J54T2Wn.png",
 	"thumbnail": "https://i.imgur.com/PdmE1EK.png",
 	"color": "#0B5286",

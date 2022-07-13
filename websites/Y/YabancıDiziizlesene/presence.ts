@@ -5,12 +5,12 @@ interface Video {
 }
 
 const presence = new Presence({
-		clientId: "664350968585912350"
+		clientId: "664350968585912350",
 	}),
 	strings = presence.getStrings({
 		playing: "presence.playback.playing",
 		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000);
 
@@ -23,7 +23,7 @@ presence.on("iFrameData", async (msg: Video) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		seriesBool = document.querySelector(
 			"body > section > div > div > div.content__inner.movie__page.d-flex.justify-content-between > div.content__sidebar > div.card.card__bg1.mb-4.mb-hidden > div.card__title.title__no-icon.d-flex.justify-content-between > h2"

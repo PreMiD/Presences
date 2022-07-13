@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -16,7 +16,7 @@
 		"www.nimo.tv",
 		"dashboard.nimo.tv"
 	],
-	"version": "1.0.2",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/dXRRZoM.png",
 	"thumbnail": "https://i.imgur.com/Sq0hpoF.jpeg",
 	"color": "#622DF7",

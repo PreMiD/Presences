@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "889467818020597790"
+	clientId: "889467818020597790",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "tweakers-logo"
+		largeImageKey: "tweakers-logo",
 	};
 
 	if (document.location.href.includes("nieuws/")) {

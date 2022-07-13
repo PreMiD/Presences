@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "858408468854997052"
+		clientId: "858408468854997052",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,95 +9,47 @@ presence.on("UpdateData", async () => {
 		accountValue = await presence.getSetting<number>("accountValue"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	switch (document.location.hostname) {
 		case "steamdb.info":
 			switch (document.location.pathname.split("/")[1]) {
-				case "realtime":
-					presenceData.details = "Viewing Realtime Stream";
-					presenceData.smallImageKey = "users";
-					presenceData.smallImageText = `Users: ${
-						document.querySelector("#js-realtime-users").textContent
-					}`;
-					if (
-						!document
-							.querySelector("#js-realtime-log")
-							.children.item(0)
-							.children.item(0)
-							.textContent.includes("Connection opened, listening for changes…")
-					) {
-						[, presenceData.state] = document
-							.querySelector("#js-realtime-log")
-							.children.item(0)
-							.textContent.split("—");
-						if (
-							document
-								.querySelector("#js-realtime-log")
-								.children.item(0)
-								.children.item(2) !== null
-						) {
-							presenceData.buttons = [
-								{
-									label: "View Page",
-									url: document.location.href
-								},
-								{
-									label: "View Changelist",
-									url: `${document.location.origin}${document
-										.querySelector("#js-realtime-log")
-										.children.item(0)
-										.children.item(2)
-										.getAttribute("href")}`
-								}
-							];
-						}
-					}
-					break;
 				case "graph":
 					presenceData.details = "Viewing Steam Charts";
 					if (
-						(document.querySelector("#js-tag-select") as HTMLSelectElement)
-							.textContent !== "0"
+						document.querySelector<HTMLSelectElement>("#js-tag-select")
+							.value !== "0"
 					) {
 						presenceData.state = `Filter: ${
-							(document.querySelector("#js-tag-select") as HTMLSelectElement)
+							document.querySelector<HTMLSelectElement>("#js-tag-select")
 								.options[
-								(document.querySelector("#js-tag-select") as HTMLSelectElement)
+								document.querySelector<HTMLSelectElement>("#js-tag-select")
 									.selectedIndex
 							].text
 						}`;
 					}
 					if (
-						(document.querySelector("#js-category-select") as HTMLSelectElement)
-							.textContent !== "0"
+						document.querySelector<HTMLSelectElement>("#js-category-select")
+							.value !== "0"
 					) {
 						presenceData.state = `Filter: ${
-							(
-								document.querySelector(
-									"#js-category-select"
-								) as HTMLSelectElement
-							).options[
-								(
-									document.querySelector(
-										"#js-category-select"
-									) as HTMLSelectElement
-								).selectedIndex
+							document.querySelector<HTMLSelectElement>("#js-category-select")
+								.options[
+								document.querySelector<HTMLSelectElement>("#js-category-select")
+									.selectedIndex
 							].text
 						}`;
 					}
 					if (
-						(
-							document.querySelector("#table-apps_filter").firstElementChild
-								.firstElementChild as HTMLInputElement
+						document.querySelector<HTMLInputElement>(
+							"input[type='search'][class='']"
 						).value !== ""
 					) {
 						presenceData.state = `Search: ${
-							(
-								document.querySelector("#table-apps_filter").firstElementChild
-									.firstElementChild as HTMLInputElement
-							).textContent
+							document.querySelector<HTMLInputElement>(
+								"input[type='search'][class='']"
+							).value
 						}`;
 					}
 					break;
@@ -109,8 +61,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					break;
 				case "calculator":
@@ -123,28 +75,24 @@ presence.on("UpdateData", async () => {
 							presenceData.state = `${
 								document.querySelectorAll(".player-name").item(0).textContent
 							} (${
-								document
-									.querySelectorAll(".number-price")
-									.item(0)
-									.textContent.split(">")[2]
-									.split("<")[0]
+								Array.from(
+									document.querySelector(".number-price").childNodes
+								).find(node => node.nodeName === "#text").textContent
 							})`;
 						} else if (accountValue === 1) {
 							presenceData.state = `${
 								document.querySelectorAll(".player-name").item(0).textContent
 							} (${
-								document
-									.querySelectorAll(".number-price-lowest")
-									.item(0)
-									.textContent.split(">")[2]
-									.split("<")[0]
+								Array.from(
+									document.querySelector(".number-price-lowest").childNodes
+								).find(node => node.nodeName === "#text").textContent
 							})`;
 						}
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					}
 					break;
@@ -163,8 +111,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					if (document.querySelector("a.tabnav-tab.selected")) {
 						presenceData.details = `Viewing App ${
@@ -185,8 +133,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					presenceData.details = `Viewing Sub ${
 						document.querySelector("a.tabnav-tab.selected").childNodes[1]
@@ -205,8 +153,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					break;
 				case "bundles":
@@ -228,8 +176,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					} else {
 						presenceData.details = "Viewing Blog Post";
@@ -238,8 +186,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					}
 					break;
@@ -249,17 +197,13 @@ presence.on("UpdateData", async () => {
 				case "instantsearch":
 					presenceData.details = "Instant Search";
 					if (
-						(
-							document.querySelector(
-								"input.ais-SearchBox-input"
-							) as HTMLInputElement
+						document.querySelector<HTMLInputElement>(
+							"input.ais-SearchBox-input"
 						).value !== ""
 					) {
 						presenceData.state = `Search: ${
-							(
-								document.querySelector(
-									"input.ais-SearchBox-input"
-								) as HTMLInputElement
+							document.querySelector<HTMLInputElement>(
+								"input.ais-SearchBox-input"
 							).value
 						}`;
 					}
@@ -280,15 +224,13 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Viewing App Price Changes";
 					else presenceData.details = "Viewing Package Price Changes";
 					if (
-						(
-							document.querySelector("#DataTables_Table_0_filter")
-								.firstElementChild.firstElementChild as HTMLInputElement
+						document.querySelector<HTMLInputElement>(
+							"input[type='search'][class='']"
 						).value !== ""
 					) {
 						presenceData.state = `Search: ${
-							(
-								document.querySelector("#DataTables_Table_0_filter")
-									.firstElementChild.firstElementChild as HTMLInputElement
+							document.querySelector<HTMLInputElement>(
+								"input[type='search'][class='']"
 							).value
 						}`;
 					}
@@ -296,17 +238,12 @@ presence.on("UpdateData", async () => {
 				case "tags":
 					presenceData.details = "Browsing Game Tags";
 					if (
-						(
-							document.querySelector(
-								"input.input-block.search"
-							) as HTMLInputElement
-						).value !== ""
+						document.querySelector<HTMLInputElement>("input.input-block.search")
+							.value !== ""
 					) {
 						presenceData.state = `Search: ${
-							(
-								document.querySelector(
-									"input.input-block.search"
-								) as HTMLInputElement
+							document.querySelector<HTMLInputElement>(
+								"input.input-block.search"
 							).value
 						}`;
 					}
@@ -318,15 +255,13 @@ presence.on("UpdateData", async () => {
 							.textContent.split("»")[1]
 					}`;
 					if (
-						(
-							document.querySelector("#table-apps_filter").firstElementChild
-								.firstElementChild as HTMLInputElement
+						document.querySelector<HTMLInputElement>(
+							"input[type='search'][class='']"
 						).value !== ""
 					) {
 						presenceData.state = `Search: ${
-							(
-								document.querySelector("#table-apps_filter").firstElementChild
-									.firstElementChild as HTMLInputElement
+							document.querySelector<HTMLInputElement>(
+								"input[type='search'][class='']"
 							).value
 						}`;
 					}
@@ -338,19 +273,17 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 						if (
-							(
-								document.querySelector("#table-apps_filter").firstElementChild
-									.firstElementChild as HTMLInputElement
+							document.querySelector<HTMLInputElement>(
+								"input[type='search'][class='']"
 							).value !== ""
 						) {
 							presenceData.state = `Search: ${
-								(
-									document.querySelector("#table-apps_filter").firstElementChild
-										.firstElementChild as HTMLInputElement
+								document.querySelector<HTMLInputElement>(
+									"input[type='search'][class='']"
 								).value
 							}`;
 						}
@@ -414,8 +347,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					}
 					break;
@@ -426,8 +359,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					if (
 						document.querySelector("h1.header-title").textContent !==
@@ -463,8 +396,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					break;
 				case "signout":
@@ -474,8 +407,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 					presenceData.state =
 						document.querySelector("h1").lastChild.textContent;
@@ -490,34 +423,28 @@ presence.on("UpdateData", async () => {
 					else if (document.location.pathname.includes("/mostfollowed/")) {
 						presenceData.details = "Browsing Most Followed Upcoming Games";
 						if (
-							(document.querySelector("#js-tag-select") as HTMLSelectElement)
-								.textContent !== "0"
+							document.querySelector<HTMLSelectElement>("#js-tag-select")
+								.value !== "0"
 						) {
 							presenceData.state = `Filter: ${
-								(document.querySelector("#js-tag-select") as HTMLSelectElement)
+								document.querySelector<HTMLSelectElement>("#js-tag-select")
 									.options[
-									(
-										document.querySelector(
-											"#js-tag-select"
-										) as HTMLSelectElement
-									).selectedIndex
+									document.querySelector<HTMLSelectElement>("#js-tag-select")
+										.selectedIndex
 								].text
 							}`;
 						}
 					} else {
 						presenceData.details = "Browsing Upcoming Games";
 						if (
-							(document.querySelector("#js-tag-select") as HTMLSelectElement)
-								.textContent !== "0"
+							document.querySelector<HTMLSelectElement>("#js-tag-select")
+								.value !== "0"
 						) {
 							presenceData.state = `Filter: ${
-								(document.querySelector("#js-tag-select") as HTMLSelectElement)
+								document.querySelector<HTMLSelectElement>("#js-tag-select")
 									.options[
-									(
-										document.querySelector(
-											"#js-tag-select"
-										) as HTMLSelectElement
-									).selectedIndex
+									document.querySelector<HTMLSelectElement>("#js-tag-select")
+										.selectedIndex
 								].text
 							}`;
 						}
@@ -534,34 +461,25 @@ presence.on("UpdateData", async () => {
 						case "mostfollowed":
 							presenceData.details = "Browsing Most Followed Games";
 							if (
-								(
-									document.querySelector("#table-apps_filter").firstElementChild
-										.firstElementChild as HTMLInputElement
+								document.querySelector<HTMLInputElement>(
+									"input[type='search'][class='']"
 								).value !== ""
 							) {
 								presenceData.state = `Search: ${
-									(
-										document.querySelector("#table-apps_filter")
-											.firstElementChild.firstElementChild as HTMLInputElement
+									document.querySelector<HTMLInputElement>(
+										"input[type='search'][class='']"
 									).value
 								}`;
 							} else if (
-								(
-									document.querySelector(
-										"#js-category-select"
-									) as HTMLSelectElement
-								).textContent !== "0"
+								document.querySelector<HTMLSelectElement>("#js-category-select")
+									.value !== "0"
 							) {
 								presenceData.state = `Filter: ${
-									(
-										document.querySelector(
-											"#js-category-select"
-										) as HTMLSelectElement
+									document.querySelector<HTMLSelectElement>(
+										"#js-category-select"
 									).options[
-										(
-											document.querySelector(
-												"#js-category-select"
-											) as HTMLSelectElement
+										document.querySelector<HTMLSelectElement>(
+											"#js-category-select"
 										).selectedIndex
 									].text
 								}`;
@@ -570,15 +488,13 @@ presence.on("UpdateData", async () => {
 						case "mostwished":
 							presenceData.details = "Browsing Most Wishlisted Games";
 							if (
-								(
-									document.querySelector("#table-apps_filter").firstElementChild
-										.firstElementChild as HTMLInputElement
+								document.querySelector<HTMLInputElement>(
+									"input[type='search'][class='']"
 								).value !== ""
 							) {
 								presenceData.state = `Search: ${
-									(
-										document.querySelector("#table-apps_filter")
-											.firstElementChild.firstElementChild as HTMLInputElement
+									document.querySelector<HTMLInputElement>(
+										"input[type='search'][class='']"
 									).value
 								}`;
 							}
@@ -587,30 +503,26 @@ presence.on("UpdateData", async () => {
 							if (document.location.href.includes("?all_types")) {
 								presenceData.details = "Browsing Top Rated Apps";
 								if (
-									(
-										document.querySelector("#table-apps_filter")
-											.firstElementChild.firstElementChild as HTMLInputElement
+									document.querySelector<HTMLInputElement>(
+										"input[type='search'][class='']"
 									).value !== ""
 								) {
 									presenceData.state = `Search: ${
-										(
-											document.querySelector("#table-apps_filter")
-												.firstElementChild.firstElementChild as HTMLInputElement
+										document.querySelector<HTMLInputElement>(
+											"input[type='search'][class='']"
 										).value
 									}`;
 								}
 							} else if (document.location.pathname === "/stats/gameratings/") {
 								presenceData.details = "Browsing Top Rated Games";
 								if (
-									(
-										document.querySelector("#table-apps_filter")
-											.firstElementChild.firstElementChild as HTMLInputElement
+									document.querySelector<HTMLInputElement>(
+										"input[type='search'][class='']"
 									).value !== ""
 								) {
 									presenceData.state = `Search: ${
-										(
-											document.querySelector("#table-apps_filter")
-												.firstElementChild.firstElementChild as HTMLInputElement
+										document.querySelector<HTMLInputElement>(
+											"input[type='search'][class='']"
 										).value
 									}`;
 								}
@@ -626,20 +538,14 @@ presence.on("UpdateData", async () => {
 						case "releases":
 							presenceData.details = "Viewing Game Release Summary";
 							if (
-								(document.querySelector("#js-tag-select") as HTMLSelectElement)
-									.textContent !== "0"
+								document.querySelector<HTMLSelectElement>("#js-tag-select")
+									.value !== "0"
 							) {
 								presenceData.state = `Filter: ${
-									(
-										document.querySelector(
-											"#js-tag-select"
-										) as HTMLSelectElement
-									).options[
-										(
-											document.querySelector(
-												"#js-tag-select"
-											) as HTMLSelectElement
-										).selectedIndex
+									document.querySelector<HTMLSelectElement>("#js-tag-select")
+										.options[
+										document.querySelector<HTMLSelectElement>("#js-tag-select")
+											.selectedIndex
 									].text
 								}`;
 							}
@@ -657,8 +563,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Page",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					}
 					break;
@@ -671,15 +577,13 @@ presence.on("UpdateData", async () => {
 					} else {
 						presenceData.details = "Browsing Sales";
 						if (
-							(
-								document.querySelector("#DataTables_Table_0_filter")
-									.firstElementChild.firstElementChild as HTMLInputElement
+							document.querySelector<HTMLInputElement>(
+								"input[type='search'][class='']"
 							).value !== ""
 						) {
 							presenceData.state = `Search: ${
-								(
-									document.querySelector("#DataTables_Table_0_filter")
-										.firstElementChild.firstElementChild as HTMLInputElement
+								document.querySelector<HTMLInputElement>(
+									"input[type='search'][class='']"
 								).value
 							}`;
 						}
@@ -697,136 +601,112 @@ presence.on("UpdateData", async () => {
 					switch (document.querySelector("a.tabnav-tab.selected").textContent) {
 						case "Apps":
 							presenceData.state = `${
-								(document.querySelector("#inputQuery-app") as HTMLInputElement)
+								document.querySelector<HTMLSelectElement>("#inputQuery-app")
 									.value
 							} Type: ${
-								(document.querySelector("#inputType") as HTMLSelectElement)
-									.options[
-									(document.querySelector("#inputType") as HTMLSelectElement)
+								document.querySelector<HTMLSelectElement>("#inputType").options[
+									document.querySelector<HTMLSelectElement>("#inputType")
 										.selectedIndex
-								].value
+								].textContent
 							} Category: ${
-								(document.querySelector("#inputCategory") as HTMLSelectElement)
+								document.querySelector<HTMLSelectElement>("#inputCategory")
 									.options[
-									(
-										document.querySelector(
-											"#inputCategory"
-										) as HTMLSelectElement
-									).selectedIndex
+									document.querySelector<HTMLSelectElement>("#inputCategory")
+										.selectedIndex
 								].textContent
 							}`;
 							break;
 						case "Packages":
 							if (
-								(document.querySelector("#inputQuery-sub") as HTMLInputElement)
+								document.querySelector<HTMLInputElement>("#inputQuery-sub")
 									.value
 							) {
 								presenceData.state = `Search: ${
-									(
-										document.querySelector(
-											"#inputQuery-sub"
-										) as HTMLInputElement
-									).value
+									document.querySelector<HTMLInputElement>("#inputQuery-sub")
+										.value
 								}`;
 							}
 							break;
 						case "Bundles":
 							if (
-								document.querySelector("#inputQuery-bundle") as HTMLInputElement
+								document.querySelector<HTMLInputElement>("#inputQuery-bundle")
+									.value
 							) {
 								presenceData.state = `Search: ${
-									(
-										document.querySelector(
-											"#inputQuery-bundle"
-										) as HTMLInputElement
-									).value
+									document.querySelector<HTMLInputElement>("#inputQuery-bundle")
+										.value
 								}`;
 							}
 							break;
 						case "App Keys":
 							presenceData.state = `${
-								(document.querySelector("#inputType2") as HTMLSelectElement)
+								document.querySelector<HTMLSelectElement>("#inputType2")
 									.options[
-									(document.querySelector("#inputType2") as HTMLSelectElement)
+									document.querySelector<HTMLSelectElement>("#inputType2")
 										.selectedIndex
 								].textContent
 							} ${
-								(document.querySelector("#inputKeyName") as HTMLSelectElement)
+								document.querySelector<HTMLSelectElement>("#inputKeyName")
 									.options[
-									(document.querySelector("#inputKeyName") as HTMLSelectElement)
+									document.querySelector<HTMLSelectElement>("#inputKeyName")
 										.selectedIndex
 								].textContent
 							} ${
-								(document.querySelector("#inputOperator") as HTMLSelectElement)
+								document.querySelector<HTMLSelectElement>("#inputOperator")
 									.options[
-									(
-										document.querySelector(
-											"#inputOperator"
-										) as HTMLSelectElement
-									).selectedIndex
+									document.querySelector<HTMLSelectElement>("#inputOperator")
+										.selectedIndex
 								].textContent
 							} ${
-								(document.querySelector("#inputKeyValue") as HTMLInputElement)
-									.value
+								document.querySelector<HTMLInputElement>("#inputKeyValue").value
 							} Raw: ${
-								(
-									document.querySelector(
-										"input[name='display_value']"
-									) as HTMLInputElement
+								document.querySelector<HTMLInputElement>(
+									"input[name='display_value']"
 								).checked
 							}`;
 							break;
 						case "Package Keys":
 							presenceData.state = `${
-								(document.querySelector("#inputKeyName2") as HTMLSelectElement)
+								document.querySelector<HTMLSelectElement>("#inputKeyName2")
 									.options[
-									(
-										document.querySelector(
-											"#inputKeyName2"
-										) as HTMLSelectElement
-									).selectedIndex
+									document.querySelector<HTMLSelectElement>("#inputKeyName2")
+										.selectedIndex
 								].textContent
 							} ${
-								(document.querySelector("#inputOperator2") as HTMLSelectElement)
+								document.querySelector<HTMLSelectElement>("#inputOperator2")
 									.options[
-									(
-										document.querySelector(
-											"#inputOperator2"
-										) as HTMLSelectElement
-									).selectedIndex
+									document.querySelector<HTMLSelectElement>("#inputOperator2")
+										.selectedIndex
 								].textContent
 							} ${
-								(document.querySelector("#inputKeyValue2") as HTMLInputElement)
+								document.querySelector<HTMLInputElement>("#inputKeyValue2")
 									.value
 							}`;
 							break;
 						case "Patch Notes":
 							presenceData.state = `${
-								(
-									document.querySelector(
-										"#patchnotes_query"
-									) as HTMLInputElement
-								).value
+								document.querySelector<HTMLInputElement>("#patchnotes_query")
+									.value
+									? "Search: "
+									: ""
+							}${
+								document.querySelector<HTMLInputElement>("#patchnotes_query")
+									.value
 							} AppID: ${
-								(
-									document.querySelector(
-										"#patchnotes_appid"
-									) as HTMLInputElement
-								).textContent || "All"
+								document.querySelector<HTMLInputElement>("#patchnotes_appid")
+									.value || "All"
 							}`;
 							break;
 					}
 					if (
 						document.querySelector("#table-sortable_filter") &&
-						(
-							document.querySelector("#table-sortable_filter").firstElementChild
-								.firstElementChild as HTMLInputElement
+						document.querySelector<HTMLInputElement>(
+							"input[type='search'][class='']"
 						).value !== ""
 					) {
 						presenceData.state = `Search: ${
-							(
-								document.querySelector("#table-sortable_filter")
-									.firstElementChild.firstElementChild as HTMLInputElement
+							document.querySelector<HTMLInputElement>(
+								"input[type='search'][class='']"
 							).value
 						}`;
 					}

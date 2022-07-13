@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "864631234339930132"
+		clientId: "864631234339930132",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
 			smallImageKey: "small",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (!showTimestamp) delete presenceData.startTimestamp;

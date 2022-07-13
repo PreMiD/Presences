@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "OGMatrix",
 		"id": "657290880947978241"
@@ -11,7 +11,7 @@
 		"nl": "'s Werelds meest populaire en makkelijkst te gebruiken iconenset heeft net een upgrade gekregen. Meer iconen. Meer stijlen. Meer opties."
 	},
 	"url": "fontawesome.com",
-	"version": "1.0.8",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/SnQ9HYz.png",
 	"thumbnail": "https://i.imgur.com/GJFmAgg.png",
 	"color": "#0285f7",

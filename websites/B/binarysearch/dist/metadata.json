@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "sylvesteryue",
 		"id": "246138990674051073"
@@ -14,7 +14,7 @@
 		"binarysearch.com",
 		"www.binarysearch.com"
 	],
-	"version": "1.0.10",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/0HotbTy.png",
 	"thumbnail": "https://i.imgur.com/Q59B8YD.png",
 	"color": "#384252",

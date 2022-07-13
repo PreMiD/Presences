@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "813518808634621952"
+		clientId: "813518808634621952",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -15,7 +15,7 @@ const noGames: string[] = [
 	"Paint",
 	"Table",
 	"Virtual room",
-	"Watch Party"
+	"Watch Party",
 ];
 
 presence.on("UpdateData", async () => {
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 		smallImageKey,
 		details,
 		state,
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (presenceData.details) presence.setActivity(presenceData);

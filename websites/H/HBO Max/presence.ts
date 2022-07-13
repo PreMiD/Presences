@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "879535934977245244"
+		clientId: "879535934977245244",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	}),
 	slugs: { [key: string]: string } = {
 		home: "Home",
@@ -43,31 +43,92 @@ const presence = new Presence({
 		"cartoon-network": "Cartoon Network",
 		"sesame-workshop": "Sesame Workshop",
 		"looney-tunes": "Looney Tunes",
-		crunchyroll: "Crunchyroll Collection"
+		crunchyroll: "Crunchyroll Collection",
 	},
 	coverUrls: Record<string, string> = {};
 
-function fetchCover(): Promise<string> {
-	return new Promise(resolve => {
-		fetch(
-			`https://comet.api.hbo.com/express-content/${
+let isFetching = false;
+
+function fetchToken(): Promise<string> {
+	return fetch("https://oauth.api.hbo.com/auth/tokens", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		/* eslint-disable camelcase */
+		body: JSON.stringify({
+			client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
+			client_secret: crypto.randomUUID(),
+			scope: "browse video_playback",
+			grant_type: "client_credentials",
+			deviceSerialNumber: crypto.randomUUID(),
+			clientDeviceData: {
+				paymentProviderCode: "blackmarket",
+			},
+		}),
+		/* eslint-enable camelcase */
+	})
+		.then(res => res.json())
+		.then(res => res.access_token);
+}
+
+function fetchClientConfig(
+	token: string
+): Promise<{ routeKey: string; countryCode: string }> {
+	return fetch("https://sessions.api.hbo.com/sessions/v1/clientConfig", {
+		method: "POST",
+		headers: {
+			authorization: `Bearer ${token}`,
+			"content-type": "application/json",
+		},
+		body: JSON.stringify({
+			contract: "abc:1.0.0.0",
+			preferredLanguages: ["en-us"],
+		}),
+	})
+		.then(res => res.json())
+		.then(res => ({
+			routeKey: res.routeKeys.contentSubdomain,
+			countryCode: new URLSearchParams(
+				res.features["express-content"].config.expressContentParams
+			).get("country-code"),
+		}));
+}
+
+async function fetchCover() {
+	let output: string;
+
+	const accessToken = await fetchToken(),
+		{ routeKey, countryCode } = await fetchClientConfig(accessToken);
+
+	isFetching = true;
+
+	try {
+		const response = await fetch(
+			`https://comet${routeKey}.api.hbo.com/express-content/${
 				location.pathname.split("/")[2]
-			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=US`
-		)
-			.then(x => x.json())
-			.then(x =>
-				resolve(
-					`https://artist.api.cdn.hbo.com/images/${
-						x[0].body.references.series.match(/series:([^:]+)/)[1]
-					}/tileburnedin?size=1024x1024`
-				)
-			);
-	});
+			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=${countryCode}&language=en-us`,
+			{
+				headers: {
+					authorization: `Bearer ${accessToken}`,
+				},
+			}
+		).then(res => res.json());
+
+		output = `https://artist.api.cdn.hbo.com/images/${
+			response[0].body.references.series.match(/series:([^:]+)/)[1]
+		}/tileburnedin?size=1024x1024`;
+	} catch {
+		output = "lg";
+	}
+
+	isFetching = false;
+	return output;
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		},
 		video = document.querySelector("video"),
 		path = document.location.pathname;
@@ -77,14 +138,14 @@ presence.on("UpdateData", async () => {
 	switch (true) {
 		case path === "/profileSelect":
 			Object.assign(presenceData, {
-				details: "Selecting a profile"
+				details: "Selecting a profile",
 			});
 			break;
 		case path === "/search":
 			Object.assign(presenceData, {
 				details: "Searching",
 				smallImageKey: "search",
-				smallImageText: (await strings).browsing
+				smallImageText: (await strings).browsing,
 			});
 			break;
 		case !!video:
@@ -103,7 +164,7 @@ presence.on("UpdateData", async () => {
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause
-					: (await strings).play
+					: (await strings).play,
 			});
 
 			if (
@@ -116,6 +177,8 @@ presence.on("UpdateData", async () => {
 					}/tileburnedin?size=1024x1024`;
 				} else {
 					const episodeId = location.pathname.match(/:episode:([^:]+)/)[1];
+
+					if (isFetching) return;
 					coverUrls[episodeId] ??= await fetchCover();
 
 					presenceData.largeImageKey = coverUrls[episodeId];
@@ -125,7 +188,7 @@ presence.on("UpdateData", async () => {
 			if (!video.paused) {
 				Object.assign(presenceData, {
 					startTimestamp: timestamps[0],
-					endTimestamp: timestamps[1]
+					endTimestamp: timestamps[1],
 				});
 			}
 			break;

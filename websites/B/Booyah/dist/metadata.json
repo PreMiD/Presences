@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Anderson Paiva",
 		"id": "584828331954929909"
@@ -9,7 +9,7 @@
 		"en": "BOOYAH! is a leading livestreaming and community platform designed for gaming enthusiasts, powered by Garena."
 	},
 	"url": "booyah.live",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/W9irPdk.png",
 	"thumbnail": "https://i.imgur.com/tF1F2fi.png",
 	"color": "#ffc106",

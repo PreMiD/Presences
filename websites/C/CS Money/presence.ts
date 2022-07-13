@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "922108073533898763"
+		clientId: "922108073533898763",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (
 		document.querySelector("#modal > div.styles_overlay__3KR4i") &&
@@ -25,14 +25,14 @@ presence.on("UpdateData", () => {
 				label: "Inspect 3D",
 				url: document.querySelector<HTMLAnchorElement>(
 					"#modal > div > div.styles_wrapper__1pcux > div > div > div > div.ItemDetailsLayout_item_visual__2lBPE > div:nth-child(3) > div > a:nth-child(3)"
-				).href
+				).href,
 			},
 			{
 				label: "More details",
 				url: document.querySelector<HTMLAnchorElement>(
 					"#modal > div > div.styles_wrapper__1pcux > div > div > div > div.ItemDetailsLayout_item_visual__2lBPE > div:nth-child(3) > div > a:nth-child(4)"
-				).href
-			}
+				).href,
+			},
 		];
 	} else if (
 		document.querySelector("#modal > div.styles_overlay__3KR4i") &&

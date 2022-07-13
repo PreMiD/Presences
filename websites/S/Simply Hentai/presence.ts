@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "608043966285348944"
+	clientId: "608043966285348944",
 });
 let lastPlaybackState = null,
 	reading,
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = browsingTimestamp;
 	} else {
 		const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		};
 
 		presenceData.details = "Browsing...";

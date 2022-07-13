@@ -10,7 +10,7 @@ interface Channel {
 }
 
 const presence = new Presence({
-		clientId: "748660637021896835"
+		clientId: "748660637021896835",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -33,7 +33,7 @@ function newStats(): void {
 					cover: "",
 					listeners: 0,
 					timeStart: "",
-					timeEnd: ""
+					timeEnd: "",
 				});
 			}
 			for (const channel of channelArray) {
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<string>("sFormat2"),
 				presence.getSetting<string>("sListeners"),
 				presence.getSetting<boolean>("buttons"),
-				presence.getSetting<number>("logo")
+				presence.getSetting<number>("logo"),
 			]),
 		logoArr = [
 			"reywhitebacksmall",
@@ -97,11 +97,11 @@ presence.on("UpdateData", async () => {
 			"reycolorback",
 			"reywhite",
 			"reyblack",
-			"rey"
+			"rey",
 		],
 		presenceData: PresenceData = {
 			largeImageKey: logoArr[logo] || "reywhitebacksmall",
-			smallImageKey: "reading"
+			smallImageKey: "reading",
 		};
 
 	let showFormat3 = false;
@@ -115,16 +115,16 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Bots",
-						url: "https://www.reyfm.de/bots"
-					}
+						url: "https://www.reyfm.de/bots",
+					},
 				];
 			} else if (document.location.pathname.includes("/discord-bot")) {
 				presenceData.details = "Viewing the Discord bot";
 				presenceData.buttons = [
 					{
 						label: "View Bot",
-						url: "https://www.reyfm.de/discord-bot"
-					}
+						url: "https://www.reyfm.de/discord-bot",
+					},
 				];
 			} else if (document.location.pathname.includes("/partner"))
 				presenceData.details = "Viewing partners";
@@ -153,13 +153,13 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLElement>("#player").style.cssText !==
 			"display: none;"
 		) {
-			const paused = document
-				.querySelector<HTMLImageElement>("#miniplayer-play")
-				.src.includes("play.png");
-
 			let track: string, artist: string, cover: string;
 
-			if (!paused) {
+			if (
+				!document
+					.querySelector<HTMLImageElement>("#miniplayer-play")
+					.src.includes("play.png")
+			) {
 				const channelID = findChannel();
 				if (channelID !== "YOU FAILED") {
 					const channel = channels.find(channel => channel.id === channelID);
@@ -173,7 +173,7 @@ presence.on("UpdateData", async () => {
 					presenceData.endTimestamp = Date.parse(channel.timeEnd);
 					showFormat3 = true;
 					presenceData.buttons = [
-						{ label: "Listen along!", url: `https://reyfm.de/${channel.name}` }
+						{ label: "Listen along!", url: `https://reyfm.de/${channel.name}` },
 					];
 				} else {
 					artist = document.querySelector(
@@ -219,10 +219,13 @@ presence.on("UpdateData", async () => {
 		document.location.hostname === "www.reyfm.de" &&
 		document.querySelector("#channel-player") !== null
 	) {
-		const channelID = document
-				.querySelector("#channel-player")
-				.className.replace("shadow channel-color-", ""),
-			channel = channels.find(channel => channel.id === channelID),
+		const channel = channels.find(
+				channel =>
+					channel.id ===
+					document
+						.querySelector("#channel-player")
+						.className.replace("shadow channel-color-", "")
+			),
 			paused = document
 				.querySelector<HTMLImageElement>("#play")
 				.src.includes("play.png");

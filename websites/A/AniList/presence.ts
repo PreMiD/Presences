@@ -1,16 +1,16 @@
 const presence: Presence = new Presence({
-		clientId: "614220272790274199"
+		clientId: "614220272790274199",
 	}),
 	startTimestamp: number = Math.floor(Date.now() / 1000),
 	strings = presence.getStrings({
 		browsing: "presence.activity.browsing",
-		reading: "presence.activity.reading"
+		reading: "presence.activity.reading",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "anilist_lg",
-			startTimestamp
+			startTimestamp,
 		},
 		{ pathname } = window.location;
 	if (pathname.startsWith("/home")) {

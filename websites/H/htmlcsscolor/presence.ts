@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "630441527826579467"
+	clientId: "630441527826579467",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "htmlcsscolor"
+		largeImageKey: "htmlcsscolor",
 	};
 
 	// My special Format

@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "918904479888334968"
+		clientId: "918904479888334968",
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "scrap-logo",
-		startTimestamp: browsingStamp
+		startTimestamp: browsingStamp,
 	};
 
 	if (document.location.pathname === "/")
@@ -51,9 +51,10 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname.includes("all"))
 			presenceData.details = "Searching through Resources";
 		else if (document.location.pathname.includes("kb")) {
-			const title = document.querySelector("#helpcenter-content > h4");
 			presenceData.details = "Reading a help thread";
-			presenceData.state = `"${title.textContent}"`;
+			presenceData.state = `"${
+				document.querySelector("#helpcenter-content > h4").textContent
+			}"`;
 		} else presenceData.details = "Viewing Help Center";
 	} else if (document.location.pathname.includes("/megaraffle")) {
 		if (document.location.pathname.includes("/history")) {
@@ -82,11 +83,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Reading ToS";
 		presenceData.state = title.textContent;
 	} else if (document.location.pathname.includes("/premium")) {
-		const title = document
-			.querySelector("#premium-balance")
-			.textContent.replace("You've Donated ", " ");
 		presenceData.details = "Visiting the Premium page";
-		presenceData.state = `${title} Donated`;
+		presenceData.state = `${document
+			.querySelector("#premium-balance")
+			.textContent.replace("You've Donated ", " ")} Donated`;
 	} else if (document.location.pathname.includes("/keys")) {
 		const sellp = document.querySelector(
 				"#pid-keys > div.welcome > div > div > div.col-md-9.bank-welcome.keys-welcome > h3:nth-child(2) > span"

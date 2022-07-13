@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "656959119118565406"
+	clientId: "656959119118565406",
 });
 
 // Redirect to iframe source, to prevent loss of progress
@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 		state: exercise,
 		startTimestamp: timestamp,
 		endTimestamp: timeleft,
-		largeImageKey: "wims_lg"
+		largeImageKey: "wims_lg",
 	};
 	if (loggedout) presence.setActivity();
 	else presence.setActivity(presenceData);

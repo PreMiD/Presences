@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "612746548631044116"
+		clientId: "612746548631044116",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	truncateBefore = function (str: string, pattern: string): string {
 		return str.slice(str.indexOf(pattern) + pattern.length);
@@ -36,7 +36,7 @@ let musicTitle: HTMLElement,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Unknown page",
-		largeImageKey: "lg"
+		largeImageKey: "lg",
 	};
 
 	currentUser = document.querySelector(

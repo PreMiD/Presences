@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "937622209260826664"
+		clientId: "937622209260826664",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ let office = {
 	OneNoteTitle: "Selecting a note",
 	WordStatus: "Page ? of ?",
 	PptCurrentSlide: "Slide ? of ?",
-	ExcelActiveTab: ""
+	ExcelActiveTab: "",
 };
 
 presence.on(
@@ -27,7 +27,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "office",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = document.location,
 		privacy = await presence.getSetting<boolean>("privacy");

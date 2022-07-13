@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "712838005165129728"
+		clientId: "712838005165129728",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	pages: { [k: string]: string } = {
 		"/": "Ana Sayfa",
@@ -21,7 +21,7 @@ const presence = new Presence({
 		"/imdb-top-100": "IMDb Top 100",
 		"/kanallar": "Kanallar",
 		"/dizi-onerileri": "Dizi Önerileri",
-		"/iletisim": "İletişim"
+		"/iletisim": "İletişim",
 	};
 
 interface IframeData {
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 		),
 		presenceData: PresenceData = {
 			largeImageKey: "dz-logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (path.startsWith("/dizi/")) {

@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "765545656579522572"
+		clientId: "765545656579522572",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	});
 
 let video = {
 	duration: 0,
 	currentTime: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -27,7 +27,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "akisa"
+		largeImageKey: "akisa",
 	};
 	if (
 		document.querySelector(".infoan2") &&

@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "842620457655730207"
+		clientId: "842620457655730207",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.playback.browsing"
+		browsing: "presence.playback.browsing",
 	});
 
 presence.on("UpdateData", async () => {
@@ -71,6 +71,7 @@ presence.on("UpdateData", async () => {
 				"body > div > div > div > div > section > div > div > h1"
 			).textContent;
 			presenceData.state = "Visualizando página do filme...";
+			presenceData.smallImageKey = "reading";
 			if (video) {
 				presenceData.details = document.querySelector(
 					"body > div > div > div > div > section > div > div > h1"

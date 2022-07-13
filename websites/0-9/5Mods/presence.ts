@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "651412198727352331"
+		clientId: "651412198727352331",
 	}),
 	categories: Record<string, string> = {
 		tools: "Tools",
@@ -9,12 +9,12 @@ const presence = new Presence({
 		scripts: "Scripts",
 		player: "Player",
 		maps: "Maps",
-		misc: "Misc"
+		misc: "Misc",
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "lg"
+		largeImageKey: "lg",
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the front page...";

@@ -1,33 +1,33 @@
 /* eslint-disable no-case-declarations */
 const presence = new Presence({
-		clientId: "607587875122446359"
+		clientId: "607587875122446359",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "lg"
+		largeImageKey: "lg",
 	};
 	const pages: Record<string, PresenceData> = {
 			login: {
-				details: "Logging in"
+				details: "Logging in",
 			},
 			settings: {
-				details: "Viewing settings"
+				details: "Viewing settings",
 			},
 			explore: {
-				details: "Browsing repositories"
+				details: "Browsing repositories",
 			},
 			discover: {
-				details: "Browsing repositories"
+				details: "Browsing repositories",
 			},
 			marketplace: {
-				details: "Browsing marketplace"
+				details: "Browsing marketplace",
 			},
 			pulls: { details: "Viewing pull requests" },
 			issues: { details: "Viewing issues" },
 			notifications: {
-				details: "Viewing notifications"
+				details: "Viewing notifications",
 			},
 			watching: { details: "Browsing interested repositories" },
 			new: { details: "Creating a repository" },
@@ -38,22 +38,22 @@ presence.on("UpdateData", async () => {
 			codespaces: { details: "Browsing codespaces" },
 			search: {
 				details: "Searching for",
-				state: new URLSearchParams(document.location.search).get("q")
+				state: new URLSearchParams(document.location.search).get("q"),
 			},
 			"trending/developers": {
-				details: "Browsing trending developers"
+				details: "Browsing trending developers",
 			},
 			"new/import": { details: "Importing a repository" },
 			"new/project": { details: "Creating a project" },
 			"organization/new": { details: "Creating an organization" },
 			"notifications/subscriptions": {
-				details: "Viewing subscriptions"
-			}
+				details: "Viewing subscriptions",
+			},
 		},
 		{ pathname, search, href } = document.location,
 		[cover, timestamp] = await Promise.all([
 			presence.getSetting<boolean>("cover"),
-			presence.getSetting<boolean>("timestamp")
+			presence.getSetting<boolean>("timestamp"),
 		]);
 
 	for (const [path, data] of Object.entries(pages)) {
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 				owner: pathname.split("/")[1],
 				name: pathname.split("/")[2],
 				target: pathname.split("/")[4],
-				id: pathname.split("/")[4]
+				id: pathname.split("/")[4],
 			};
 			presenceData.buttons = [{ label: "View Repository", url: href }];
 			if (cover) {

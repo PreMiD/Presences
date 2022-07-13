@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "782853565550034954"
+		clientId: "782853565550034954",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	stationIDMap: { [key: string]: string } = {
 		olliolliworld: "OlliOlli World",
@@ -46,12 +46,12 @@ const presence = new Presence({
 		summer: "Summer",
 		halloween: "Halloween",
 		christmas: "Christmas",
-		snowfi: "Snow-Fi"
+		snowfi: "Snow-Fi",
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "jsrl"
+			largeImageKey: "jsrl",
 		},
 		audio = document.querySelector<HTMLAudioElement>("#audioPlayer"),
 		songName = document.querySelector(
@@ -94,8 +94,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Tune In",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	}

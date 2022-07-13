@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "894342965772820490"
+		clientId: "894342965772820490",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "animefillerlistlogo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") presenceData.details = "In home page";
@@ -37,8 +37,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View User",
-				url: `${document.URL}`
-			}
+				url: `${document.URL}`,
+			},
 		];
 	} else if (document.location.pathname.includes("/contact"))
 		presenceData.details = "Contacting with the page...";

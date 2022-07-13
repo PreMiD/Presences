@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "607881666836561930"
+		clientId: "607881666836561930",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 let lastPlaybackState = null,
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 	playback = !!document.querySelector(".AT-player video");
 
 	const presenceData: PresenceData = {
-		largeImageKey: "lg"
+		largeImageKey: "lg",
 	};
 
 	if (!playback) {

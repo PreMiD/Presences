@@ -2,7 +2,7 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const presence = new Presence({
-		clientId: "853718947412967474"
+		clientId: "853718947412967474",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
@@ -10,12 +10,12 @@ const presence = new Presence({
 		browsing: "general.browsing",
 		browsingThrough: "discord.browseThrough",
 		buttonWatchVideo: "general.buttonWatchVideo",
-		buttonWatchStream: "general.buttonWatchStream"
+		buttonWatchStream: "general.buttonWatchStream",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "ard_mediathek"
+			largeImageKey: "ard_mediathek",
 		},
 		path = location.pathname.replace(/\/?$/, "/");
 
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = videoTitle;
 			presenceData.startTimestamp = elapsed;
 			presenceData.buttons = [
-				{ label: (await strings).buttonWatchStream, url: prevUrl }
+				{ label: (await strings).buttonWatchStream, url: prevUrl },
 			];
 		} else if (path.startsWith("/video/")) {
 			// Video-on-demand
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			);
 			presenceData.buttons = [
-				{ label: (await strings).buttonWatchVideo, url: prevUrl }
+				{ label: (await strings).buttonWatchVideo, url: prevUrl },
 			];
 		}
 

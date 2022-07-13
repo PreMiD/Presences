@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "630505174032449537"
+	clientId: "630505174032449537",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "virginmedia"
+			largeImageKey: "virginmedia",
 		},
 		pageTitle = document.title;
 	let currentPage;

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "871843228213731340"
+		clientId: "871843228213731340",
 	}),
 	time = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: time
+			startTimestamp: time,
 		},
 		data = document.querySelector("#premIdVars"),
 		vars = JSON.parse(data.getAttribute("vars")),

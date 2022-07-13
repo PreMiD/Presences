@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Hans5958",
 		"id": "850759953718575224"
@@ -10,7 +10,7 @@
 	},
 	"url": "wikia.org",
 	"regExp": "([a-z0-9-]+[.])?wikia[.]org[/]",
-	"version": "1.0.5",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/qvLS6QI.png",
 	"thumbnail": "https://i.imgur.com/3Ikm2IH.png",
 	"color": "#39424D",

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "709526684428271687"
+		clientId: "709526684428271687",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let owner, title, presenceprivate;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		lock = await presence.getSetting<boolean>("lock");
 	presenceprivate = document.querySelector(

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -12,7 +12,7 @@
 		"konachan.com",
 		"konachan.net"
 	],
-	"version": "1.0.4",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/g9Xe9SH.png",
 	"thumbnail": "https://i.imgur.com/jIuUwC1.jpg",
 	"color": "#676894",

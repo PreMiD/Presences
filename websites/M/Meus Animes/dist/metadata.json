@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Nanashin",
 		"id": "330030557457022986"
@@ -12,7 +12,7 @@
 		"nl": "Een van de meest schone websites voor het kijken van anime in Brazilië"
 	},
 	"url": "meusanimes.com",
-	"version": "1.0.10",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/IJ9ufN3.png",
 	"thumbnail": "https://i.imgur.com/qzN7gbO.png",
 	"color": "#816bab",

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "840759396103749633"
+		clientId: "840759396103749633",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -70,7 +70,7 @@ async function getTranslation(name: string) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (window.location.pathname) {
@@ -95,15 +95,18 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: await getTranslation("viewActivity"),
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			} else if (window.location.pathname.includes("/user/")) {
 				if (!document.querySelector("#userName")) return;
 				presenceData.details = await getTranslation("user");
 				presenceData.state = document.querySelector("#userName").textContent;
 				presenceData.buttons = [
-					{ label: await getTranslation("viewUser"), url: window.location.href }
+					{
+						label: await getTranslation("viewUser"),
+						url: window.location.href,
+					},
 				];
 			} else if (window.location.pathname === "/settings")
 				presenceData.details = await getTranslation("settings");

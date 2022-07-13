@@ -1,24 +1,23 @@
 const presence = new Presence({
-		clientId: "808758769424138252"
+		clientId: "808758769424138252",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const video: HTMLVideoElement = document.querySelector("video.vjs-tech"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (document.location.pathname.includes("video") && video) {
-		const titles = document.querySelector<HTMLMetaElement>(
-			'meta[property="og:image"]'
-		);
 		presenceData.largeImageKey =
-			titles?.content?.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
+			document
+				.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+				?.content?.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
 		const episode = JSON.parse(
 			document.querySelector('[type="application/ld+json"]').textContent
 		);
@@ -33,8 +32,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Watch Episode",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			}
 
@@ -49,17 +48,16 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Page",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			}
 		}
 	} else if (document.location.pathname.includes("video") && !video) {
-		const titles = document.querySelector<HTMLMetaElement>(
-			'meta[property="og:image"]'
-		);
 		presenceData.largeImageKey =
-			titles?.content?.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
+			document
+				.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+				?.content?.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
 		if (
 			document.querySelector(
 				"#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
@@ -75,8 +73,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Page",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			}
 		}

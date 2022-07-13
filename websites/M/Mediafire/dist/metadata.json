@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -15,7 +15,7 @@
 		"app.mediafire.com",
 		"blog.mediafire.com"
 	],
-	"version": "1.0.6",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/nIZ0XtN.png",
 	"thumbnail": "https://i.imgur.com/DwfSIyG.jpg",
 	"color": "#FF0000",

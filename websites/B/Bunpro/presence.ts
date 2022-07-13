@@ -1,6 +1,6 @@
 const presence: Presence = new Presence({
 		clientId: "833430731816173669",
-		injectOnComplete: true
+		injectOnComplete: true,
 	}),
 	largeImageKey = "logo";
 
@@ -29,7 +29,7 @@ function getLevelInHeader() {
 presence.on("UpdateData", () => {
 	const { pathname } = window.location,
 		presenceData: PresenceData = {
-			largeImageKey
+			largeImageKey,
 		},
 		level: number = getLevelInHeader();
 

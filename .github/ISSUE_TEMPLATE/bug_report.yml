@@ -1,17 +1,10 @@
 name: Bug Report
 description: Create a report to help us improve the PreMiD Store
-title: Service Name | Service URL
-labels: [🐛 Bug]
+labels: [bug, needs repro]
 body:
   - type: markdown
     attributes:
       value: Before submitting a new issue, ensure your bug hasn't already been reported. If it has, reply to the open issue instead.
-  - type: textarea
-    validations:
-      required: true
-    attributes:
-      label: Description
-      description: Provide a clear and concise description of what the bug is
   - type: textarea
     validations:
       required: true
@@ -22,12 +15,6 @@ body:
         1. Go to this link
         2. Click on this
         3. Observe that
-  - type: textarea
-    validations:
-      required: false
-    attributes:
-      label: "Screenshots"
-      description: "Optionally add some screenshots to reinforce your point"
   - type: input
     validations:
       required: true
@@ -46,21 +33,23 @@ body:
     attributes:
       label: Page URL
       description: The URL you were visiting when the bug happens
+  - type: textarea
+    attributes:
+      label: Screenshots
+      description: Optionally, add some screenshots to show the issue
   - type: input
     validations:
       required: true
     attributes:
-      label: Operating System (OS)
+      label: Operating System
       description: E.g. Windows 11, macOS 12, etc
   - type: input
     validations:
       required: true
     attributes:
-      label: Browser
-      description: E.g. Chrome, Firefox, etc
-  - type: input
-    validations:
-      required: true
+      label: Browser and Version
+      description: Include the type of browser you use AND the browser version
+  - type: textarea
     attributes:
-      label: Browser Version
-      description: You can get the version by visiting about:support on Firefox or chrome://help on most browsers
+      label: Additional Comments
+      description: Optionally, add further comments which may enhance the issue

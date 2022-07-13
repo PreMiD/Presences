@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "629413450774347786"
+		clientId: "629413450774347786",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "mcstacker",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (
 		document.location.hostname === "bimbimma.com" &&

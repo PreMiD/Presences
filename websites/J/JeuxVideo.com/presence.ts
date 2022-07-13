@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "651930315279040512"
+	clientId: "651930315279040512",
 });
 
 /**
@@ -14,7 +14,7 @@ function truncateString(text: string, length: number): string {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (document.location.pathname === "/")

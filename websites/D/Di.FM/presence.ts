@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "630542731701387276"
+	clientId: "630542731701387276",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "dilogo"
+		largeImageKey: "dilogo",
 	};
 	if (
 		document.querySelector("#webplayer-region").getAttribute("data-state") ===

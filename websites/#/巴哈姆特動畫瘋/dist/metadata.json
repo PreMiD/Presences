@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -14,7 +14,7 @@
 		"vi_VN": "Nền tảng cung cấp hoạt hình hoàn toàn miễn phí."
 	},
 	"url": "ani.gamer.com.tw",
-	"version": "1.2.12",
+	"version": "1.2.14",
 	"logo": "https://i.imgur.com/24VLERu.png",
 	"thumbnail": "https://i.imgur.com/atthc8l.png",
 	"color": "#58bec9",

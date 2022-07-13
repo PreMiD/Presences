@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "859440340683325491"
+		clientId: "859440340683325491",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -23,7 +23,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons");
@@ -91,8 +91,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Join Room",
-						url: href
-					}
+						url: href,
+					},
 				];
 			}
 		}
@@ -115,8 +115,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Episode",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (pathname === "/events") presenceData.details = "Looking at events";
@@ -136,8 +136,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Check Synopsis",
-						url: href
-					}
+						url: href,
+					},
 				];
 			}
 		}

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -13,7 +13,7 @@
 		"primemc.org",
 		"buy.primemc.org"
 	],
-	"version": "1.2.10",
+	"version": "1.2.12",
 	"logo": "https://i.imgur.com/XNUEGd9.png",
 	"thumbnail": "https://i.imgur.com/NKZxaeG.png",
 	"color": "#00c3c5",

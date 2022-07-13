@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "630570838084812801"
+	clientId: "630570838084812801",
 });
 
 presence.on("UpdateData", async () => {
@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "banner",
 			smallImageKey: "logo",
 			smallImageText: decodeURIComponent(document.location.href),
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "banner",
 			smallImageKey: "logo",
 			smallImageText: decodeURIComponent(document.location.href),
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 
@@ -48,11 +48,11 @@ presence.on("UpdateData", async () => {
 
 		return presence.setActivity({
 			details: "Editing/Writing How to",
-			state: `Topic: ${newTopic ? newTopic : "Unknown."} `,
+			state: `Topic: ${newTopic ?? "Unknown."} `,
 			largeImageKey: "banner",
 			smallImageKey: "logo",
 			smallImageText: decodeURIComponent(document.location.href),
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "banner",
 			smallImageKey: "logo",
 			smallImageText: "Searching...",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 
@@ -77,6 +77,6 @@ presence.on("UpdateData", async () => {
 		state: "Homepage",
 		largeImageKey: "banner",
 		smallImageKey: "logo",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	});
 });

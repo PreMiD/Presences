@@ -5,8 +5,8 @@ iframe.on("UpdateData", async () => {
 	if (video) {
 		iframe.send({
 			video: {
-				isPaused: video.paused
-			}
+				isPaused: video.paused,
+			},
 		});
 	}
 });

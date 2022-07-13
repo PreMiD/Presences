@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "795564487910227968"
+		clientId: "795564487910227968",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "vidio",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {

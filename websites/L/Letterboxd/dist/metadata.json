@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"id": "324468886357540865",
 		"name": "Skaytacium"
@@ -9,7 +9,7 @@
 		"en": "The social network for film lovers."
 	},
 	"url": "letterboxd.com",
-	"version": "1.0.3",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/nbvB9cV.png",
 	"thumbnail": "https://i.imgur.com/Mx9K2lU.png",
 	"color": "#202830",

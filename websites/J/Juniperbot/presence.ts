@@ -21,7 +21,7 @@ async function getStrings() {
 			usercard: "juniperbot.usercard",
 			terms: "general.terms",
 			privacy: "general.privacy",
-			cookies: "juniperbot.cookies"
+			cookies: "juniperbot.cookies",
 		},
 		await presence.getSetting<string>("lang")
 	);

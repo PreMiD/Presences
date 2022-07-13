@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "941298758598164481"
+		clientId: "941298758598164481",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement;
@@ -7,7 +7,7 @@ let search: HTMLInputElement;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		page = window.location.pathname,
 		buttons = await presence.getSetting<boolean>("buttons"),
@@ -28,8 +28,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		}
 		presenceData.details = page.replace("/web/*/", "");
@@ -38,8 +38,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		}
 		if (page.includes("*"))

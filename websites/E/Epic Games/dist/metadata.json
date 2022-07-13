@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Marino",
 		"id": "598953747963707409"
@@ -13,7 +13,7 @@
 		"epicgames.com",
 		"www.epicgames.com"
 	],
-	"version": "1.0.7",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/CAsgHOc.png",
 	"thumbnail": "https://i.imgur.com/sLgae3U.png",
 	"color": "#2A2A2A",

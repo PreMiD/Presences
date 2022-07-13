@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "वाह्य",
 		"id": "819696394180100106"
@@ -10,7 +10,7 @@
 		"id": "World Romance Translation adalah Website Grup Penerjemah Manga Bergenre Romance Comedy"
 	},
 	"url": "wrt.my.id",
-	"version": "1.0.8",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/WJFdTQL.png",
 	"thumbnail": "https://i.imgur.com/s3wgvCP.png",
 	"color": "#e444ee",

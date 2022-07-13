@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "mon",
 		"id": "608817245417898004"
@@ -11,7 +11,7 @@
 		"nl": "Lawcodev, sociaal netwerk voor programmeurs, u kunt video's over programmeren, foto's en publicaties delen."
 	},
 	"url": "www.lawcodev.com",
-	"version": "1.4.12",
+	"version": "1.4.14",
 	"logo": "https://i.imgur.com/vADndhN.png",
 	"thumbnail": "https://i.imgur.com/tT2mENc.png",
 	"color": "#131313",

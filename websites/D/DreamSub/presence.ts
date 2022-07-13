@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "711175341825064970"
+		clientId: "711175341825064970",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let iFrameVideo: boolean,
@@ -28,7 +28,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo_ds" // Banner
+		largeImageKey: "logo_ds", // Banner
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -96,11 +96,10 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/user")) {
 		// Profilo
 
-		const [, username] = document.title.split("-");
 		presenceData.smallImageKey = "user";
 		presenceData.smallImageText = "DreamSub";
 		presenceData.details = "Guardando il profilo di:";
-		presenceData.state = username;
+		presenceData.state = document.title.split("-")[1];
 	} else if (document.location.pathname.includes("/404")) {
 		// Error 404
 

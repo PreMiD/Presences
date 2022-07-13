@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "752151960743837817"
+		clientId: "752151960743837817",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bigdefault"
+		largeImageKey: "bigdefault",
 	};
 
 	if (document.location.hostname === "spinsha.re") {

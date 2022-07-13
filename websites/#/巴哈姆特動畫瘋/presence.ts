@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "640194732718292992"
+		clientId: "640194732718292992",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,7 +11,7 @@ let user: HTMLElement | Element | string, title: HTMLElement | Element | string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "ani"
+		largeImageKey: "ani",
 	};
 
 	if (document.location.hostname === "ani.gamer.com.tw") {

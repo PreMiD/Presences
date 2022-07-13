@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Hans5958",
 		"id": "279855717203050496"
@@ -46,7 +46,7 @@
 		"donate.wikimedia.org",
 		"wikispore.wmflabs.org"
 	],
-	"version": "1.0.6",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/M58Pucd.png",
 	"thumbnail": "https://i.imgur.com/keAOFru.png",
 	"color": "#000000",

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "812646634663837706"
+		clientId: "812646634663837706",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (window.location.pathname.includes("/leaderboards")) {
@@ -29,8 +29,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Leaderboard",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (window.location.pathname.includes("/search")) {
 		presenceData.details = "Searching Player:";
@@ -52,8 +52,8 @@ presence.on("UpdateData", async () => {
 				label: "View Stats",
 				url: document.URL.replace("/operators", "")
 					.replace("/seasons", "")
-					.replace("/weapons", "")
-			}
+					.replace("/weapons", ""),
+			},
 		];
 	} else if (window.location.pathname.includes("/compare")) {
 		presenceData.details = "Viewing Page:";

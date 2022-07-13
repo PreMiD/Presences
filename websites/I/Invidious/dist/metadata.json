@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "ry",
 		"id": "421371986824921109"
@@ -17,7 +17,7 @@
 		"vid.mint.lgbt",
 		"yewtu.be"
 	],
-	"version": "1.0.12",
+	"version": "1.0.14",
 	"logo": "https://i.imgur.com/Cfm6lRV.png",
 	"thumbnail": "https://i.imgur.com/qBOgRqU.jpg",
 	"color": "#00B6F0",

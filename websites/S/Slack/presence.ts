@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "617113314572369973" // CLIENT ID FOR YOUR PRESENCE
+		clientId: "617113314572369973", // CLIENT ID FOR YOUR PRESENCE
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let group: HTMLElement,
@@ -11,7 +11,7 @@ let group: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "slack"
+		largeImageKey: "slack",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

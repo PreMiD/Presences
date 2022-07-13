@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "lolilover",
 		"id": "616761152331841550"
@@ -12,7 +12,7 @@
 		"mangareader.to",
 		"www.mangareader.to"
 	],
-	"version": "1.0.4",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/TEB9rWf.png",
 	"thumbnail": "https://i.imgur.com/8MhY0Ov.png",
 	"color": "#6241B0",

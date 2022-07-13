@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "640275259282686015"
+		clientId: "640275259282686015",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "tv"
+			largeImageKey: "tv",
 		};
 
 	if (document.querySelector("#bitmovinplayer-video-player_container")) {
@@ -57,10 +57,8 @@ presence.on("UpdateData", async () => {
 			title = document.querySelector(
 				"body > now-root > now-seo > article > h1 > font > font"
 			);
-			if (title) {
-				const [state] = title.textContent.split("-");
-				presenceData.state = state;
-			} else {
+			if (title) presenceData.state = title.textContent.split("-")[0];
+			else {
 				title = document.querySelector(
 					"body > now-root > now-seo > article > h1"
 				);
@@ -76,20 +74,16 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing main page";
 		presenceData.startTimestamp = browsingTimestamp;
 	} else if (document.location.pathname.includes("/serien/")) {
-		const [state] = document
-			.querySelector("head > title")
-			.textContent.split(" - ");
-
 		presenceData.details = "Viewing serie:";
-		presenceData.state = state;
+		presenceData.state = document
+			.querySelector("head > title")
+			.textContent.split(" - ")[0];
 		presenceData.startTimestamp = browsingTimestamp;
 	} else if (document.location.pathname.includes("/shows/")) {
-		const [state] = document
-			.querySelector("head > title")
-			.textContent.split(" - ");
-
 		presenceData.details = "Viewing show:";
-		presenceData.state = state;
+		presenceData.state = document
+			.querySelector("head > title")
+			.textContent.split(" - ")[0];
 		presenceData.startTimestamp = browsingTimestamp;
 	} else if (document.URL.includes("/serien")) {
 		presenceData.details = "Viewing all series";
@@ -98,12 +92,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing all shows";
 		presenceData.startTimestamp = browsingTimestamp;
 	} else if (document.location.pathname.includes("/filme/")) {
-		const [state] = document
-			.querySelector("head > title")
-			.textContent.split(" - ");
-
 		presenceData.details = "Viewing show:";
-		presenceData.state = state;
+		presenceData.state = document
+			.querySelector("head > title")
+			.textContent.split(" - ")[0];
 		presenceData.startTimestamp = browsingTimestamp;
 	} else if (document.URL.includes("/filme")) {
 		presenceData.details = "Viewing all series";
