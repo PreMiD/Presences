@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "971311477514444800"
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: HTMLElement, title2: string;
+let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -16,8 +16,7 @@ presence.on("UpdateData", async () => {
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons")
-		]),
-		regex = new RegExp(/Minecraft .* Servers/gm);
+		]);
 	if (privacy) presenceData.details = "Browsing...";
 	else if (search.value) {
 		presenceData.details = "Searching for:";
@@ -65,7 +64,7 @@ presence.on("UpdateData", async () => {
 			}
 		];
 		presenceData.details = "Sponsored";
-	} else if (page.search(regex)) {
+	} else if (page.search(new RegExp(/Minecraft .* Servers/gm))) {
 		presenceData.buttons = [
 			{
 				label: "View Category",
