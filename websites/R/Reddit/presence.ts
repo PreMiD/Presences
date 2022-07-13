@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 				];
 			} else {
 				// if privacy mode is enabled
-				presenceData.details = `${strings.reading.slice(0, -1)}`;
+				presenceData.details = "Reading a post";
 				presenceData.state = subReddit;
 			}
 		} else if (pathname.startsWith("/user/")) {
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
 						label: strings.viewProfileButton,
 					},
 				];
-			} else presenceData.details = strings.profile.slice(0, -4); // if privacy mode is enabled
+			} else presenceData.details = "Viewing a profile"; // if privacy mode is enabled
 		} else if (pathname.startsWith("/search")) {
 			presenceData.details = strings.searchSomething;
 			presenceData.smallImageKey = "search";
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		} else 
-			presenceData.details = `${strings.reading.slice(0, -1)}`;
+			presenceData.details = "Reading a post";
 		
 	} else if (pathname.startsWith("/user/")) {
 		if (!privacy) {
@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
 					label: strings.viewProfileButton,
 				},
 			];
-		} else presenceData.details = strings.profile.slice(0, -4); // if privacy mode is enabled
+		} else presenceData.details = "Viewing a profile"; // if privacy mode is enabled
 	} else if (pathname.startsWith("/search")) {
 		presenceData.details = strings.searchSomething;
 		presenceData.smallImageKey = "search";
