@@ -33,14 +33,14 @@ presence.on("UpdateData", async () => {
 		).textContent;
 		presenceData.buttons = [
 			{
-				label: "View Server",
+				label: "View server",
 				url: document.location.href
 			}
 		];
 	} else if (page.includes("/cp")) {
 		presenceData.buttons = [
 			{
-				label: "Open Control Panel",
+				label: "Open control panel",
 				url: document.location.href
 			}
 		];
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 	} else if (page.includes("/partners")) {
 		presenceData.buttons = [
 			{
-				label: "View Partners",
+				label: "View partners",
 				url: document.location.href
 			}
 		];
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 	} else if (page.includes("/sponsored")) {
 		presenceData.buttons = [
 			{
-				label: "View Sponsored Servers",
+				label: "View sponsored servers",
 				url: document.location.href
 			}
 		];
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 	} else if (page.search(new RegExp(/Minecraft .* Servers/gm))) {
 		presenceData.buttons = [
 			{
-				label: "View Category",
+				label: "View category",
 				url: document.location.href
 			}
 		];
