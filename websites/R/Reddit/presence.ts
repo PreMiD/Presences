@@ -121,9 +121,7 @@ presence.on("UpdateData", async () => {
 					label: strings.readButton,
 				},
 			];
-		} else 
-			presenceData.details = "Reading a post";
-		
+		} else presenceData.details = "Reading a post";
 	} else if (pathname.startsWith("/user/")) {
 		if (!privacy) {
 			// if privacy mode is disabled
@@ -167,34 +165,31 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "live";
 		presenceData.smallImageText = strings.live;
 	} else if (!privacy) {
-			const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
-			if (sub === null) {
-				const sub2 = document.querySelector(
-					"#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.MSTY2ZpsdupobywLEfx9u > div._3JDs8KEQIXSMn1bTF2ZqJ_ > div.QscnL9OySMkHhGudEvEya > div._3I4Wpl_rl6oTm02aWPZayD > div._3TG57N4WQtubLLo8SbAXVF > h2"
-				);
-				presenceData.details = strings.browsing;
-				presenceData.state = !sub2 ? "Home" : sub2.textContent;
-			} else {
-				presenceData.details = strings.browsing;
-				presenceData.state = sub.textContent;
-			}
+		const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
+		if (sub === null) {
+			const sub2 = document.querySelector(
+				"#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.MSTY2ZpsdupobywLEfx9u > div._3JDs8KEQIXSMn1bTF2ZqJ_ > div.QscnL9OySMkHhGudEvEya > div._3I4Wpl_rl6oTm02aWPZayD > div._3TG57N4WQtubLLo8SbAXVF > h2"
+			);
+			presenceData.details = strings.browsing;
+			presenceData.state = !sub2 ? "Home" : sub2.textContent;
 		} else {
-			const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
-			if (sub === null) {
-				const sub2 = document.querySelector(
-					"#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.MSTY2ZpsdupobywLEfx9u > div._3JDs8KEQIXSMn1bTF2ZqJ_ > div.QscnL9OySMkHhGudEvEya > div._3I4Wpl_rl6oTm02aWPZayD > div._3TG57N4WQtubLLo8SbAXVF > h2"
-				);
-				presenceData.details = strings.browsing;
-				presenceData.state = !sub2 ? "Home" : sub2.textContent;
-			} else {
-				presenceData.details = strings.browsing;
-				if (sub.textContent.includes("r/")) 
-					presenceData.state = "In a subreddit";
-				 else 
-					presenceData.state = sub.textContent;
-				
-			}
+			presenceData.details = strings.browsing;
+			presenceData.state = sub.textContent;
 		}
+	} else {
+		const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
+		if (sub === null) {
+			const sub2 = document.querySelector(
+				"#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.MSTY2ZpsdupobywLEfx9u > div._3JDs8KEQIXSMn1bTF2ZqJ_ > div.QscnL9OySMkHhGudEvEya > div._3I4Wpl_rl6oTm02aWPZayD > div._3TG57N4WQtubLLo8SbAXVF > h2"
+			);
+			presenceData.details = strings.browsing;
+			presenceData.state = !sub2 ? "Home" : sub2.textContent;
+		} else {
+			presenceData.details = strings.browsing;
+			if (sub.textContent.includes("r/")) presenceData.state = "In a subreddit";
+			else presenceData.state = sub.textContent;
+		}
+	}
 	if (pathname.includes("/r/netflix")) {
 		if (!presenceData.buttons?.length) {
 			presenceData.buttons = [
