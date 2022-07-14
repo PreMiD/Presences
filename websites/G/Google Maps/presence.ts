@@ -34,12 +34,12 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing directions";
 			let from, destination;
 			if (!document.querySelector("#sb_ifc50 > input")) {
-				(from = document
+				from = document
 					.querySelector("#sb_ifc51 > input")
-					.getAttribute("aria-label")),
-					(destination = document
+					.getAttribute("aria-label");
+					destination = document
 						.querySelector("#sb_ifc52 > input")
-						.getAttribute("aria-label"));
+						.getAttribute("aria-label");
 			} else {
 				(from = document
 					.querySelector("#sb_ifc50 > input")
