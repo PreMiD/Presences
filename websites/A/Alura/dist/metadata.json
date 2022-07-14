@@ -9,13 +9,11 @@
       "en": "The largest online technology school in Brazil.",
       "pt_BR": "A maior escola online de tecnologia do Brasil."
     },
-    "url": [
-      "cursos.alura.com.br",
-      "www.alura.com.br"
-    ],
+    "url": "www.alura.com.br",
+    "regExp": "([a-z0-9]+)[.]alura.com.br",
     "version": "1.0.0",
-    "logo": "https://i.imgur.com/qPBCqNA.png",
-    "thumbnail": "https://i.imgur.com/s3kZzkB.jpeg",
+    "logo": "https://i.imgur.com/PAVyL0E.png",
+    "thumbnail": "https://i.imgur.com/7IevIec.png",
     "color": "#051932",
     "category": "other",
     "tags": [
