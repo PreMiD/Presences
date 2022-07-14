@@ -296,7 +296,7 @@ async function uploadImage(url: string): Promise<string> {
 			.then(x => x.match(/https(.*)/)?.[0]);
 
 	isUploading = false;
-        uploadedImages[url] = outputUrl;
+	uploadedImages[url] = outputUrl;
 	return outputUrl;
 }
 
