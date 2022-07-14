@@ -83,7 +83,6 @@ presence.on("UpdateData", async () => {
 				// if privacy mode is disabled
 				presenceData.state = document.querySelector(".titlebox > h1").textContent;
 				presenceData.details = strings.profile;
-				presenceData.state = username;
 				presenceData.buttons = [
 					{
 						url: `https://www.reddit.com${pathname}`,
