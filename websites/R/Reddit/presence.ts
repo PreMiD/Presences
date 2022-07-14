@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.startsWith("/user/")) {
 			if (!privacy) {
 				// if privacy mode is disabled
-				username = document.querySelector(".titlebox > h1").textContent;
+				presenceData.state = document.querySelector(".titlebox > h1").textContent;
 				presenceData.details = strings.profile;
 				presenceData.state = username;
 				presenceData.buttons = [
