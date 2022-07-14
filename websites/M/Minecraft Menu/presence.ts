@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "971311477514444800",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -12,7 +11,7 @@ presence.on("UpdateData", async () => {
 		search = document.querySelector<HTMLInputElement>(
 			"body > div.pusher > div.site-nav.clearfix > div > header > nav > div.right.menu > div > div.ui.right.action.left.icon.input > input"
 		),
-		page = window.location.pathname,
+		{ pathname, href } = document.location,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
@@ -22,53 +21,54 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Searching for:";
 		presenceData.state = search.value;
 		presenceData.smallImageKey = "searching";
-	} else if (page === "/") presenceData.details = "Homepage";
-	else if (page.includes("/server")) {
-		title = document.querySelector(
-			"body > div.pusher > section > div.ui.stackable.grid > div.six.wide.column > table > thead > tr > th"
-		);
-		presenceData.details = title.textContent.trim();
+	} else if (pathname === "/") presenceData.details = "Homepathname";
+	else if (pathname.includes("/server")) {
+		presenceData.details = document
+			.querySelector(
+				"body > div.pusher > section > div.ui.stackable.grid > div.six.wide.column > table > thead > tr > th"
+			)
+			.textContent.trim();
 		presenceData.state = document.querySelector(
 			"[class='active item']"
 		).textContent;
 		presenceData.buttons = [
 			{
-				label: "View server",
-				url: document.location.href,
+				label: "View Server",
+				url: href,
 			},
 		];
-	} else if (page.includes("/cp")) {
+	} else if (pathname.includes("/cp")) {
 		presenceData.buttons = [
 			{
-				label: "Open control panel",
-				url: document.location.href,
+				label: "Open Control Panel",
+				url: href,
 			},
 		];
 		presenceData.details = "Control Panel";
 		presenceData.state =
 			document.querySelector("[class='active item']")?.textContent ??
 			document.querySelector("[class=' active item']")?.textContent;
-	} else if (page.includes("/partners")) {
+	} else if (pathname.includes("/partners")) {
 		presenceData.buttons = [
 			{
-				label: "View partners",
-				url: document.location.href,
+				label: "View Partners",
+				url: href,
 			},
 		];
 		presenceData.details = "Partners";
-	} else if (page.includes("/sponsored")) {
+	} else if (pathname.includes("/sponsored")) {
 		presenceData.buttons = [
 			{
-				label: "View sponsored servers",
-				url: document.location.href,
+				label: "View Sponsored Servers",
+				url: href,
 			},
 		];
 		presenceData.details = "Sponsored";
-	} else if (page.search(new RegExp(/Minecraft .* Servers/gm))) {
+	} else if (pathname.search(new RegExp(/Minecraft .* Servers/gm))) {
 		presenceData.buttons = [
 			{
-				label: "View category",
-				url: document.location.href,
+				label: "View Category",
+				url: href,
 			},
 		];
 		presenceData.details = document.querySelector(
