@@ -13,7 +13,10 @@
 	"url": [
 		"neovel.io",
 		"fr.neovel.io",
-		"es.neovel.io"
+		"es.neovel.io",
+		"neopload.neovel.io",
+		"fr.neopload.neovel.io",
+		"es.neopload.neovel.io"
 	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/CYk2ZDX.jpg",
@@ -22,6 +25,7 @@
 	"category": "other",
 	"tags": [
 		"read",
-		"novel"
+		"novel",
+		"story"
 	]
 }
