@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.7",
+    "author": {
+      "name": "Nima",
+      "id": "303571400164245504"
+    },
+    "service": "MEGAKino",
+    "description": {
+      "en": "KOSTENLOS FILME UND SERIEN AUF DEUTSCH ANSCHAUEN.",
+      "de": "KOSTENLOS FILME UND SERIEN AUF DEUTSCH ANSCHAUEN."
+    },
+    "url": "megakino.co",
+    "version": "1.0.0",
+    "logo": "https://cdn.discordapp.com/attachments/826049705619882027/996927799396941935/Opera_Momentaufnahme_2022-07-14_015449_megakino.co.png?size=4096",
+    "thumbnail": "https://cdn.discordapp.com/attachments/826049705619882027/996927968221859930/Opera_Momentaufnahme_2022-07-14_015529_megakino.co.png?size=4096",
+    "color": "#ffc800",
+    "category": "socials & stream",
+    "tags": [
+      "stream",
+      "filme",
+      "deutsch"
+    ]
+  }
