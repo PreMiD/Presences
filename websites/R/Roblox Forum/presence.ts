@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.startsWith("/reports/"))
 		presenceData.details = "Performing moderation actions";
 	else if (document.location.pathname.startsWith("/whats-new/"))
-		presenceData.details = "Browsing latest content";
+		presenceData.details = "Browsing the latest content";
 	else {
 		switch (document.location.pathname) {
 			case "/pages/premium/":
