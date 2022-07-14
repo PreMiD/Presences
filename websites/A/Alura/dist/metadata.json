@@ -1,0 +1,31 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.7",
+    "author": {
+      "name": "Mad",
+      "id": "653742649798295560"
+    },
+    "service": "Alura",
+    "description": {
+      "en": "The largest online technology school in Brazil.",
+      "pt_BR": "A maior escola online de tecnologia do Brasil."
+    },
+    "url": [
+      "cursos.alura.com.br",
+      "www.alura.com.br"
+    ],
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/qPBCqNA.png",
+    "thumbnail": "https://i.imgur.com/s3kZzkB.jpeg",
+    "color": "#051932",
+    "category": "other",
+    "tags": [
+      "coding",
+      "courses"
+    ],
+    "settings": [
+      {
+        "id": "lang",
+        "multiLanguage": true
+      }
+    ]
+  }
