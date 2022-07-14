@@ -296,7 +296,8 @@ async function uploadImage(url: string): Promise<string> {
 			.then(x => x.match(/https(.*)/)?.[0]);
 
 	isUploading = false;
-	return (uploadedImages[url] = outputUrl);
+        uploadedImages[url] = outputUrl;
+	return outputUrl;
 }
 
 function isPrivateIp(ip = location.hostname): boolean {
