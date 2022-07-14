@@ -168,7 +168,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 			folder === meta.service &&
 			!invalidLangs.length &&
 			result.valid &&
-			iFrameExists === meta.iframe
+			iFrameExists === !!meta.iframe
 		) {
 			if (meta.$schema !== latestSchema) {
 				validatedWithWarnings(
