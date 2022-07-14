@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = "https://i.imgur.com/Qkik4ug.png";
 		presenceData.details = "Viewing Pixlr Stories";
 	} else if (document.location.pathname.includes("myaccount"))
-		presenceData.details = "Editing account settings.";
+		presenceData.details = "Editing account settings";
 	else if (document.location.pathname.startsWith("/photomash/")) {
 		presenceData.largeImageKey = "https://i.imgur.com/iuGXkjK.png";
 		if (document.location.hash.endsWith("#editor"))
