@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "ig-mal",
-		smallImageKey: "small"
+		smallImageKey: "small",
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the homepage";
