@@ -25,13 +25,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Profile: ${document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content")}`;
-	} else if (document.location.pathname.startsWith("/admin.php")) {
-		presenceData.details = "Performing moderation duties";
-	} else if (document.location.pathname.startsWith("/approval-queue/")) {
-		presenceData.details = "Performing moderation duties";
-	} else if (document.location.pathname.startsWith("/reports/")) {
-		presenceData.details = "Performing moderation duties";
-	} else if (document.location.pathname.startsWith("/whats-new/"))
+	} else if (document.location.pathname.startsWith("/admin.php")) 
+		presenceData.details = "Performing moderation actions";
+	 else if (document.location.pathname.startsWith("/approval-queue/")) 
+		presenceData.details = "Performing moderation actions";
+	 else if (document.location.pathname.startsWith("/reports/")) 
+		presenceData.details = "Performing moderation actions";
+	 else if (document.location.pathname.startsWith("/whats-new/"))
 		presenceData.details = "Browsing latest content";
 	else {
 		switch (document.location.pathname) {
