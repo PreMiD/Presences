@@ -4,9 +4,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
+		startTimestamp: Math.floor(Date.now() / 1000),
 		largeImageKey: "ig-mal",
 		smallImageKey: "small",
-		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the homepage";
@@ -60,6 +60,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Editing my privacy settings";
 				break;
 		}
+		presenceData.details = "Unknown page";
 	}
 	presence.setActivity(presenceData);
 });
