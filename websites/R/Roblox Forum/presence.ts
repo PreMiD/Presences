@@ -15,6 +15,12 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Thread: ${document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content")}`;
+			presenceData.buttons = [
+				{
+					label: "View thread",
+					url: document.location.href,
+				},
+			];	
 	} else if (document.location.pathname.startsWith("/forums/")) {
 		presenceData.details = "Browsing a category";
 		presenceData.state = `Category: ${document
@@ -25,6 +31,12 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Profile: ${document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content")}`;
+		presenceData.buttons = [
+				{
+					label: "View profile",
+					url: document.location.href,
+				},
+			];		
 	} else if (document.location.pathname.startsWith("/admin.php"))
 		presenceData.details = "Performing moderation actions";
 	else if (document.location.pathname.startsWith("/approval-queue/"))
