@@ -13,9 +13,16 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "neovel_logo",
 			startTimestamp: browsingTimestamp,
 		},
-		urlArray = document.location.pathname.split("/");
+		pathnameArray = document.location.pathname.split("/");
 
-	switch (urlArray[1]) {
+	switch (pathnameArray[1]) {
+		case "discover":
+			presenceData.details = "Discover new books";
+			break;
+		case "tos":
+			presenceData.details = "Read Neovel T.O.S.";
+			if (pathnameArray.length > 2) presenceData.state = "Privacy Policy";
+			break;
 		case "book":
 			presenceData.details = presenceDataSlide.details = "Read a book page";
 
@@ -23,16 +30,17 @@ presence.on("UpdateData", async () => {
 				document.querySelector(
 					"a.author-element span.highEmphasis.ng-tns-c148-3" // Get Author name
 				).textContent
-			} [${urlArray[3]}]`;
+			} [${pathnameArray[3]}]`;
 			slideshow.addSlide("slideAuthor", presenceData, 5000);
 
 			presenceDataSlide.state = `${
 				document.querySelector("div.title-section h1").textContent // Get Book name
-			} [${urlArray[3]}]`;
+			} [${pathnameArray[3]}]`;
 			presenceData.buttons = presenceDataSlide.buttons = [
 				{ label: "Go to book page", url: document.documentURI },
 			];
 			slideshow.addSlide("slideBook", presenceDataSlide, 5000);
+			break;
 	}
 
 	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
