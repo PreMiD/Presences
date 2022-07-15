@@ -44,7 +44,8 @@ const map: Maps[] = [
 			pvlargeImageKey: "preview_the_chasm_underground_mines",
 			smallImageKey: "emblem_thechasm",
 		},
-		{ // Event map
+		{
+			// Event map
 			city: false,
 			id: 0,
 			map: "Golden Apple Archipelago",
@@ -96,29 +97,33 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ hash, host, hostname, pathname, search } = document.location;
+	if (hostname === "mapgenie.io" && !pathname.includes("genshin-impact"))
+		return;
 	switch (hostname) {
 		case "genshin-impact-map.appsample.com":
 			current = map.find(i =>
 				i.map
 					.toLowerCase()
-					.includes(search?.split("?map=")[1].toLowerCase() || "teyvat")
+					.includes(search?.split("?map=")[1]?.toLowerCase() || "teyvat")
 			);
 			break;
 		case "mapgenie.io":
-			if (pathname.split("/maps/")[1].toLowerCase() === "the-chasm-underground")
+			if (
+				pathname.split("/maps/")[1]?.toLowerCase() === "the-chasm-underground"
+			)
 				current = map.find(i => i.id === 9);
 			else {
 				current = map.find(i =>
 					i.map
 						.toLowerCase()
-						.includes(pathname?.split("/maps/")[1].toLowerCase() || "teyvat")
+						.includes(pathname?.split("/maps/")[1]?.toLowerCase() || "teyvat")
 				);
 			}
 			break;
 		default: // Official Site
 			if (!hash.includes("&center=") && !hash.includes("&zoom=")) return;
 			getpos = parseInt(
-				hash.split("&center=")[1].split("&zoom=")[0].split(",")[0]
+				hash.split("&center=")[1].split("&zoom=")[0]?.split(",")[0]
 			);
 			current = map.find(
 				i => i.id === (parseInt(hash?.split("/map/")[1]?.split("?")[0]) || 2)
