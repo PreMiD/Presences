@@ -42,6 +42,7 @@ const map: Maps[] = [
 			id: 9,
 			map: "The Chasm: Underground Mines",
 			largeImageKey: "the_chasm_underground_mines_map",
+			key: ["the-chasm-underground"],
 			pvlargeImageKey: "preview_the_chasm_underground_mines",
 			smallImageKey: "emblem_thechasm",
 		},
@@ -112,19 +113,13 @@ presence.on("UpdateData", async () => {
 			);
 			break;
 		case "mapgenie.io":
-			if (
-				pathname.split("/maps/")[1]?.toLowerCase() === "the-chasm-underground"
-			)
-				current = map.find(i => i.id === 9);
-			else {
-				current = map.find(
-					i =>
-						i.key?.includes(pathname?.split("/maps/")[1]?.toLowerCase()) ??
-						i.map
-							.toLowerCase()
-							.includes(pathname?.split("/maps/")[1]?.toLowerCase() || "teyvat")
-				);
-			}
+			current = map.find(
+				i =>
+					i.key?.includes(pathname?.split("/maps/")[1]?.toLowerCase()) ??
+					i.map
+						.toLowerCase()
+						.includes(pathname?.split("/maps/")[1]?.toLowerCase() || "teyvat")
+			);
 			break;
 		default: // Official Site
 			if (!hash.includes("&center=") && !hash.includes("&zoom=")) return;
