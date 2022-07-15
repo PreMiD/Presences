@@ -41,10 +41,10 @@ const startTimestamp = Math.floor(Date.now() / 1000),
 presence.on("UpdateData", async () => {
 	setPresence();
 	const [newLang, buttons, privacy] = await Promise.all([
-			presence.getSetting<string>("lang").catch(() => "en"),
-			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<boolean>("privacy"),
-		]);
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("buttons"),
+		presence.getSetting<boolean>("privacy"),
+	]);
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -81,7 +81,8 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (pathname.startsWith("/user/")) {
 			if (!privacy) {
-				presenceData.state = document.querySelector(".titlebox > h1").textContent;
+				presenceData.state =
+					document.querySelector(".titlebox > h1").textContent;
 				presenceData.details = strings.profile;
 				presenceData.buttons = [
 					{
@@ -183,7 +184,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = !sub2 ? "Home" : sub2.textContent;
 		} else {
 			presenceData.details = strings.browsing;
-			if (sub.textContent.includes("r/")) presenceData.state = strings.insubreddit;
+			if (sub.textContent.includes("r/"))
+				presenceData.state = strings.insubreddit;
 			else presenceData.state = sub.textContent;
 		}
 	}
