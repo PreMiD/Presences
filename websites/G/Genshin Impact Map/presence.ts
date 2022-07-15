@@ -99,17 +99,19 @@ presence.on("UpdateData", async () => {
 			smallImageKey: "search",
 			startTimestamp: browsingTimestamp,
 		},
-		{ hash, host, hostname, pathname, search } = document.location;
+		{ hash, host, hostname, pathname, search } = document.location,
+		searchParams = new URLSearchParams(search);
+
 	if (hostname === "mapgenie.io" && !pathname.includes("genshin-impact"))
 		return;
 	switch (hostname) {
 		case "genshin-impact-map.appsample.com":
 			current = map.find(
 				i =>
-					i.key?.includes(search?.split("?map=")[1]?.toLowerCase()) ??
+					i.key?.includes(searchParams.get("map")?.toLowerCase()) ??
 					i.map
 						.toLowerCase()
-						.includes(search?.split("?map=")[1]?.toLowerCase() || "teyvat")
+						.includes(searchParams.get("map")?.toLowerCase() || "teyvat")
 			);
 			break;
 		case "mapgenie.io":
@@ -122,13 +124,10 @@ presence.on("UpdateData", async () => {
 			);
 			break;
 		default: // Official Site
-			if (!hash.includes("&center=") && !hash.includes("&zoom=")) return;
-			getpos = parseInt(
-				hash.split("&center=")[1].split("&zoom=")[0]?.split(",")[0]
-			);
 			current = map.find(
 				i => i.id === (parseInt(hash?.split("/map/")[1]?.split("?")[0]) || 2)
 			);
+			getpos = parseInt(new URLSearchParams(hash).get("center"));
 			if (current?.city) currentCity = city.find(i => i.position > getpos);
 			else currentCity = null;
 			break;
