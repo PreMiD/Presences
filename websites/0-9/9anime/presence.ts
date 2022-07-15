@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-		console.log(presenceData);
+
 		presence.setActivity(presenceData, !video.paused);
 	} else {
 		presenceData.details = (await strings).browsing;
