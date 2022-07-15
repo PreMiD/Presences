@@ -16,9 +16,9 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
 		]);
-	if (privacy) presenceData.details = "Browsing...";
+	if (privacy) presenceData.details = "Browsing";
 	else if (search.value) {
-		presenceData.details = "Searching for:";
+		presenceData.details = "Searching for";
 		presenceData.state = search.value;
 		presenceData.smallImageKey = "searching";
 	} else if (pathname === "/") presenceData.details = "Homepathname";
