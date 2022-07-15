@@ -35,12 +35,12 @@ presence.on("UpdateData", async () => {
 		}"`;
 		presenceData.state = document.querySelector("#game_author").textContent;
 	} else if (pathname.includes("/play/")) {
-		presenceData.details = `Playing "${
+		(presenceData.details = `Playing "${
 			document.querySelector("#game_title").textContent
-		}"`;
-			presenceData.state = `${
+		}"`),
+			(presenceData.state = `${
 				document.querySelector("#game_author").textContent
-			}`;
+			}`);
 	} else if (pathname === "/resources")
 		presenceData.details = "Viewing Flowlab examples";
 	else if (pathname === "/lab/blog/")
