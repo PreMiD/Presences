@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.location.pathname.includes("/rooms")) {
-		presenceData.details = "Viewing rooms";
+		presenceData.details = "Viewing a room";
 		presenceData.state = document.querySelector(
 			"#site-content > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > section > div._b8stb0 > span > h1"
 		).textContent;
