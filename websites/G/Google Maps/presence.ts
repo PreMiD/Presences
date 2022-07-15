@@ -37,16 +37,16 @@ presence.on("UpdateData", async () => {
 				from = document
 					.querySelector("#sb_ifc51 > input")
 					.getAttribute("aria-label");
-					destination = document
-						.querySelector("#sb_ifc52 > input")
-						.getAttribute("aria-label");
+				destination = document
+					.querySelector("#sb_ifc52 > input")
+					.getAttribute("aria-label");
 			} else {
 				from = document
 					.querySelector("#sb_ifc50 > input")
 					.getAttribute("aria-label");
-					destination = document
-						.querySelector("#sb_ifc51 > input")
-						.getAttribute("aria-label");
+				destination = document
+					.querySelector("#sb_ifc51 > input")
+					.getAttribute("aria-label");
 			}
 			presenceData.state = `${from}, ${destination}`;
 			presenceData.buttons = [
