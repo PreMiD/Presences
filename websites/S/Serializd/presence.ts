@@ -34,8 +34,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Viewing a review for ${
 			document.querySelector(".subheading").textContent
 		}`;
-	}
-	else if (document.location.pathname.includes("user")) {
+	} else if (document.location.pathname.includes("user")) {
 		presenceData.details = `Viewing ${
 			document.querySelector(".heading").textContent
 		}'s Profile`;
