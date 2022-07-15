@@ -5,10 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp,
-	},
-
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp,
+		},
 		privacy = await presence.getSetting("privacy");
 
 	if (document.location.pathname.includes("/rooms")) {
@@ -26,18 +25,21 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (document.location.pathname.includes("/book")) {
-		if (privacy) {
+		if (privacy) 
 			presenceData.details = "Booking a room";
-		} else {
-			presenceData.details = `Booking ${document.querySelector("#LISTING_CARD-title").textContent
-				}`;
-			presenceData.state = `From ${document.querySelector(
-				'[data-plugin-in-point-id="DATE_PICKER"] > div > div > div._b7b6bk > div._1qyi2pa > div._jbk4n3'
-			).textContent
-				} for ${document.querySelector(
+		 else {
+			presenceData.details = `Booking ${
+				document.querySelector("#LISTING_CARD-title").textContent
+			}`;
+			presenceData.state = `From ${
+				document.querySelector(
+					'[data-plugin-in-point-id="DATE_PICKER"] > div > div > div._b7b6bk > div._1qyi2pa > div._jbk4n3'
+				).textContent
+			} for ${
+				document.querySelector(
 					'[data-plugin-in-point-id="GUEST_PICKER"] > div > div > div._b7b6bk > div._1qyi2pa > div._jbk4n3'
 				).textContent
-				}`;
+			}`;
 			presenceData.buttons = [
 				{ label: "View Booking Details", url: document.location.href },
 			];

@@ -20,10 +20,10 @@
 	],
 	"settings": [
 		{
-			"id" : "privacy" ,
-			"title" : "Privacy Mode" ,
-			"icon" : "fad fa-user-secret" ,
-			"value" : true
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": true
 		}
 	]
 }
