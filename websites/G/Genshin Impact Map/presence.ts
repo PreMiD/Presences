@@ -49,7 +49,7 @@ const map: Maps[] = [
 		{
 			// Event map
 			city: false,
-			id: 0,
+			id: 12,
 			map: "Golden Apple Archipelago",
 			key: ["isles"],
 			largeImageKey: "golden_apple_archipelago_map_2_8",
