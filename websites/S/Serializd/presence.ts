@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 				"input.search-page-search-input.form-control"
 			)?.value
 		}`;
-	} else presenceData.details = "Unsupported Page";
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
