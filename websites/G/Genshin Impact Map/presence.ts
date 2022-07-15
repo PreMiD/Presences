@@ -44,6 +44,14 @@ const map: Maps[] = [
 			pvlargeImageKey: "preview_the_chasm_underground_mines",
 			smallImageKey: "emblem_thechasm",
 		},
+		{ // Event map
+			city: false,
+			id: 0,
+			map: "Golden Apple Archipelago",
+			largeImageKey: "golden_apple_archipelago_map_2_8",
+			pvlargeImageKey: "preview_golden_apple_archipelago_2_8",
+			smallImageKey: "emblem_isles",
+		},
 		{
 			city: false,
 			id: 0,
