@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (
-		document.location.pathname == "/admin.php" ||
+		document.location.pathname === "/admin.php" ||
 		"/approval-queue/" ||
 		"/reports/"
 	)
