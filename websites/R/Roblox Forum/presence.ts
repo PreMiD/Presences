@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 			.getAttribute("content")}`;
 		presenceData.buttons = [
 			{
-				label: "View profile",
+				label: "View Profile",
 				url: document.location.href,
 			},
 		];
