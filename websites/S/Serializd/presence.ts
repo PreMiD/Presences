@@ -25,10 +25,11 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing trending reviews";
 		else if (document.location.pathname.endsWith("friends"))
 			presenceData.details = "Viewing their friend activity";
-		else
+		else {
 			presenceData.details = `Viewing reviews of ${
 				document.querySelector(".subheading").textContent
 			}`;
+		}
 	} else if (document.location.pathname.includes("review")) {
 		presenceData.details = `Viewing a review for ${
 			document.querySelector(".subheading").textContent
