@@ -3,15 +3,7 @@ import "source-map-support/register";
 import { existsSync as exists } from "node:fs";
 import axios from "axios";
 import { sync as glob } from "glob";
-import { readFile, writeJson, type Metadata } from "./util";
-export function isValidJSON(text: string): boolean {
-	try {
-		JSON.parse(text);
-		return true;
-	} catch {
-		return false;
-	}
-}
+import { isValidJSON, readFile, writeJson, type Metadata } from "./util";
 
 const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
 		pF => !exists(`${pF}/dist/metadata.json`)
@@ -72,7 +64,8 @@ if (missingMetadata?.length > 0)
 		};
 
 		for (const key in newData)
-			if (typeof newData[key] === "undefined") delete newData[key];
+			if (typeof newData[key as keyof Metadata] === "undefined")
+				delete newData[key as keyof Metadata];
 
 		writeJson(newData, path);
 	}

@@ -283,13 +283,11 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname.includes("/templates/id/new")) {
-					const newTemplateName = document.querySelector(
-						"h5.font-semibold.text-lg.truncate"
-					)?.textContent;
 					presenceData.largeImageKey = "discordtemplates_logo";
 					presenceData.details = "Creating New Template:";
 					presenceData.state = `${
-						newTemplateName ? newTemplateName : "Unknown"
+						document.querySelector("h5.font-semibold.text-lg.truncate")
+							?.textContent ?? "Unknown"
 					}`;
 				} else if (document.location.pathname.includes("/templates/id/top")) {
 					presenceData.largeImageKey = "discordtemplates_logo";
@@ -303,12 +301,12 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname.includes("/templates/id/")) {
-					const templateName = document.querySelector(
-						"h1.font-semibold.truncate"
-					)?.textContent;
 					presenceData.largeImageKey = "discordtemplates_logo";
 					presenceData.details = "Viewing Template:";
-					presenceData.state = `${templateName ? templateName : "Unknown"}`;
+					presenceData.state = `${
+						document.querySelector("h1.font-semibold.truncate")?.textContent ??
+						"Unknown"
+					}`;
 					presenceData.buttons = [
 						{
 							label: "View Template",
@@ -316,12 +314,12 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname.includes("/templates/users/")) {
-					const userName = document.querySelector(
-						"h1.text-3xl.font-semibold"
-					)?.textContent;
 					presenceData.largeImageKey = "discordtemplates_logo";
 					presenceData.details = "Viewing User:";
-					presenceData.state = `${userName ? userName : "Unknown"}`;
+					presenceData.state = `${
+						document.querySelector("h1.text-3xl.font-semibold")?.textContent ??
+						"Unknown"
+					}`;
 					presenceData.buttons = [
 						{
 							label: "View User",
@@ -329,19 +327,20 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname.includes("/templates/search/")) {
-					const [, query] =
-						document.location.pathname.split("/templates/search/");
 					presenceData.largeImageKey = "discordtemplates_logo";
 					presenceData.details = "Searching for:";
-					presenceData.state = `${query ? query : "Unknown"}`;
+					presenceData.state = `${
+						document.location.pathname.split("/templates/search/")[1] ??
+						"Unknown"
+					}`;
 					presenceData.smallImageKey = "search";
 					presenceData.smallImageText = "Searching...";
 				} else if (document.location.pathname.includes("/templates/tags/")) {
-					const [, tagName] =
-						document.location.pathname.split("/templates/tags/");
 					presenceData.largeImageKey = "discordtemplates_logo";
 					presenceData.details = "Searching by tag:";
-					presenceData.state = `${tagName ? tagName : "Unknown"}`;
+					presenceData.state = `${
+						document.location.pathname.split("/templates/tags/")[1] ?? "Unknown"
+					}`;
 					presenceData.smallImageKey = "search";
 					presenceData.smallImageText = "Searching...";
 				} else if (document.location.pathname.includes("/templates")) {
