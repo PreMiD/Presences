@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 			}
 		} else presenceData.details = "Looking at a competition";
 	} else if (pathname.includes("/cooperate"))
-		presenceData.details = "Looking at Cooperate";
+		presenceData.details = "Looking at the corporate page";
 	else if (pathname.includes("/learn"))
 		presenceData.details = "Looking at the learn page";
 	else if (pathname.includes("/events"))
