@@ -39,9 +39,11 @@ const startTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	setPresence();
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		buttons = await presence.getSetting<boolean>("buttons"),
-		privacy = await presence.getSetting<boolean>("privacy");
+	const [newLang, buttons, privacy] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("privacy"),
+		]);
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -57,8 +59,8 @@ presence.on("UpdateData", async () => {
 		subReddit = document.querySelector(".redditname")
 			? `${
 					!privacy
-						? `r/${document.querySelector(".redditname").textContent}` // if privacy mode is disabled
-						: "In a subreddit" // if privacy mode is enabled
+						? `r/${document.querySelector(".redditname").textContent}`
+						: "In a subreddit"
 			  }`
 			: "Home";
 		if (pathname.includes("/comments/")) {
