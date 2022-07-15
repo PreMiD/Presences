@@ -65,9 +65,7 @@ presence.on("UpdateData", async () => {
 					media.album = null;
 
 				presenceData.details =
-					(media.title
-						? media.title
-						: media.trackNumber
+					(media.title ?? media.trackNumber
 						? `Track N°${media.trackNumber}`
 						: "A song") + (media.album ? ` on ${media.album}` : "");
 				media.artist
@@ -316,7 +314,7 @@ const getStatus = setLoop(function () {
 		req.open(
 			"GET",
 			`${document.location.protocol}//${document.location.hostname}:${
-				document.location.port ? document.location.port : ""
+				document.location.port ?? ""
 			}/requests/status.xml`,
 			true
 		);

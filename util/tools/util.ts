@@ -30,7 +30,7 @@ export function createAnnotation(params: CreateAnnotationParams): string {
 
 function validateArg(arg: string): ValidEventName {
 	if (!arg) return;
-	if (!["push", "pull_request"].includes(arg))
+	if (!["push", "pull_request", "uncommitted"].includes(arg))
 		throw new Error(`SV was not called with a valid event name: ${arg}`);
 	return arg as ValidEventName;
 }
@@ -40,14 +40,15 @@ function validateArg(arg: string): ValidEventName {
  * @returns {Promise<string[]>} Array of unique paths to the changed folders
  */
 export async function getChangedFolders() {
-	const eventName = validateArg(process.argv[2]) ?? "pull_request",
+	const commands: Record<ValidEventName, string> = {
+			push: "HEAD HEAD^",
+			pull_request: `HEAD origin/${process.argv[3] ?? "main"}`,
+			uncommitted: "HEAD --",
+		},
+		eventName = validateArg(process.argv[2]) ?? "pull_request",
 		changedPresenceFolders = (
 			await execShellCommand(
-				`git --no-pager diff --name-only ${
-					eventName === "push"
-						? "HEAD HEAD^"
-						: `HEAD origin/${process.argv[3] ?? "main"}`
-				}`
+				`git --no-pager diff --name-only ${commands[eventName]}`
 			)
 		)
 			.split("\n")
@@ -91,9 +92,18 @@ export const readFile = (path: string): string =>
 			encoding: "utf8",
 		});
 
-export type ValidEventName = "push" | "pull_request";
+export function isValidJSON(text: string): boolean {
+	try {
+		JSON.parse(text);
+		return true;
+	} catch {
+		return false;
+	}
+}
 
-export interface Metadata extends Record<string, any> {
+export type ValidEventName = "push" | "pull_request" | "uncommitted";
+
+export interface Metadata {
 	$schema: `https://schemas.premid.app/metadata/${number}.${number}`;
 	author: Contributor;
 	contributors?: Contributor[];

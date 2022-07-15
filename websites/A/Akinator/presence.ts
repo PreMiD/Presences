@@ -19,11 +19,12 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/game": {
-			const hover = document.querySelectorAll(":hover")[12].textContent;
 			presenceData.details = `Q: ${
 				document.querySelectorAll(".bubble-body")[0].textContent
 			}`;
-			presenceData.state = `Selecting: ${hover ? hover : "Still Thinking"}`;
+			presenceData.state = `Selecting: ${
+				document.querySelectorAll(":hover")[12].textContent ?? "Still Thinking"
+			}`;
 
 			break;
 		}

@@ -4,22 +4,13 @@ import { existsSync as exists } from "node:fs";
 import { sync as glob } from "glob";
 import { coerce, inc, valid } from "semver";
 
-import { readFile, writeJson, type Metadata } from "./util";
+import { readFile, writeJson, type Metadata, isValidJSON } from "./util";
 
 /*  NOTE: THIS IS A TOOL THAT IS ONLY MEANT TO BE USED
     BY THE DEVS AND REVIEWERS FOR DEPLOYMENT PURPOSES,
     PLEASE DON'T COMPILE OR RUN IT BEFORE MAKING A PULL
     REQUEST UNLESS YOU'VE BEEN EXPLICITLY INSTRUCTED BY
     A DEV TO DO SO, WHICH WILL MOST LIKELY NEVER HAPPEN.  */
-
-function isValidJSON(text: string): boolean {
-	try {
-		JSON.parse(text);
-		return true;
-	} catch {
-		return false;
-	}
-}
 
 const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
 		pF => !exists(`${pF}/dist/metadata.json`)
