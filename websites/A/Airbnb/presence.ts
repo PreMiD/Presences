@@ -25,9 +25,8 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (document.location.pathname.includes("/book")) {
-		if (privacy) 
-			presenceData.details = "Booking a room";
-		 else {
+		if (privacy) presenceData.details = "Booking a room";
+		else {
 			presenceData.details = `Booking ${
 				document.querySelector("#LISTING_CARD-title").textContent
 			}`;
