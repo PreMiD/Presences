@@ -7,6 +7,7 @@ interface Maps {
 	city: boolean;
 	id: number;
 	map: string;
+	key?: string[];
 	largeImageKey: string;
 	pvlargeImageKey: string | null;
 	smallImageKey: string;
@@ -49,6 +50,7 @@ const map: Maps[] = [
 			city: false,
 			id: 0,
 			map: "Golden Apple Archipelago",
+			key: ["isles"],
 			largeImageKey: "golden_apple_archipelago_map_2_8",
 			pvlargeImageKey: "preview_golden_apple_archipelago_2_8",
 			smallImageKey: "emblem_isles",
@@ -101,10 +103,12 @@ presence.on("UpdateData", async () => {
 		return;
 	switch (hostname) {
 		case "genshin-impact-map.appsample.com":
-			current = map.find(i =>
-				i.map
-					.toLowerCase()
-					.includes(search?.split("?map=")[1]?.toLowerCase() || "teyvat")
+			current = map.find(
+				i =>
+					i.key?.includes(search?.split("?map=")[1]?.toLowerCase()) ??
+					i.map
+						.toLowerCase()
+						.includes(search?.split("?map=")[1]?.toLowerCase() || "teyvat")
 			);
 			break;
 		case "mapgenie.io":
@@ -114,6 +118,7 @@ presence.on("UpdateData", async () => {
 				current = map.find(i => i.id === 9);
 			else {
 				current = map.find(i =>
+					i.key?.includes(pathname?.split("/maps/")[1]?.toLowerCase()) ??
 					i.map
 						.toLowerCase()
 						.includes(pathname?.split("/maps/")[1]?.toLowerCase() || "teyvat")
