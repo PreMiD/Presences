@@ -37,8 +37,8 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (
-		document.location.pathname.startsWith(
-			"/reports/" || "/approval-queue/" || "/admin.php"
+		window.location.pathname == (
+			"/reports/" && "/approval-queue/"
 		)
 	)
 		presenceData.details = "Performing moderation actions";
