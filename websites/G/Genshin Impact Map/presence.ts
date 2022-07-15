@@ -117,11 +117,12 @@ presence.on("UpdateData", async () => {
 			)
 				current = map.find(i => i.id === 9);
 			else {
-				current = map.find(i =>
-					i.key?.includes(pathname?.split("/maps/")[1]?.toLowerCase()) ??
-					i.map
-						.toLowerCase()
-						.includes(pathname?.split("/maps/")[1]?.toLowerCase() || "teyvat")
+				current = map.find(
+					i =>
+						i.key?.includes(pathname?.split("/maps/")[1]?.toLowerCase()) ??
+						i.map
+							.toLowerCase()
+							.includes(pathname?.split("/maps/")[1]?.toLowerCase() || "teyvat")
 				);
 			}
 			break;
