@@ -3,16 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let title: HTMLElement;
-
-// Get Strings
 async function getStrings() {
 	return presence.getStrings(
 		{
 			user: "general.viewUser",
 			readindArticle: "general.readingArticle",
 		},
-		await presence.getSetting<string>("lang").catch(() => "en")
+		await presence.getSetting<string>("lang").catch(() => "pt_BR")
 	);
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -20,12 +17,11 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "default",
-			details: "Browsing Alura",
+			largeImageKey: "https://i.imgur.com/mJC39Kz.png",
+			details: "Vendo a Alura",
 			startTimestamp: browsingTimestamp,
 		},
-		// Update language
-		newLang = await presence.getSetting<string>("lang").catch(() => "en");
+		newLang = await presence.getSetting<string>("lang").catch(() => "pt_BR");
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
@@ -37,241 +33,247 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.includes("/course") &&
 		!document.location.pathname.includes("/courses")
 	) {
-		presenceData.details = "Viewing a course"; // alura.viewCourse
-		// Check in what course page you are, and return the same course name
+		presenceData.details = "Vendo um curso"; // alura.viewCourse
 		if (
 			!document.querySelector(
 				"div.container.course-header-banner-content > div > div.hreview-aggregate > h1 > strong"
 			)
 		) {
-			title = document.querySelector("section.task-menu-header > div > a > h2");
-			presenceData.state = title.textContent;
+			presenceData.state = document.querySelector(
+				"section.task-menu-header > div > a > h2"
+			).textContent;
 		} else {
-			title = document.querySelector(
+			presenceData.state = document.querySelector(
 				"div.container.course-header-banner-content > div > div.hreview-aggregate > h1 > strong"
-			);
-			presenceData.state = title.textContent;
+			).textContent;
 		}
 
-		// Check what knowledge branch this course belongs
 		if (
 			document
 				.querySelector("a.course-header-banner-breadcrumb__category")
 				.getAttribute("aria-label") === "Front-end"
 		)
-			presenceData.largeImageKey = "frontend";
+			presenceData.largeImageKey = "https://i.imgur.com/D42AEvv.png";
 		else if (
 			document
 				.querySelector("a.course-header-banner-breadcrumb__category")
 				.getAttribute("aria-label") === "Programação"
 		)
-			presenceData.largeImageKey = "programacao";
+			presenceData.largeImageKey = "https://i.imgur.com/p57IsEa.png";
 		else if (
 			document
 				.querySelector("a.course-header-banner-breadcrumb__category")
 				.getAttribute("aria-label") === "DevOps"
 		)
-			presenceData.largeImageKey = "devops";
+			presenceData.largeImageKey = "https://i.imgur.com/RRyEvvR.png";
 		else if (
 			document
 				.querySelector("a.course-header-banner-breadcrumb__category")
 				.getAttribute("aria-label") === "UX & Design"
 		)
-			presenceData.largeImageKey = "ux";
+			presenceData.largeImageKey = "https://i.imgur.com/dIKn6Wz.png";
 		else if (
 			document
 				.querySelector("a.course-header-banner-breadcrumb__category")
 				.getAttribute("aria-label") === "Data Science"
 		)
-			presenceData.largeImageKey = "datascience";
+			presenceData.largeImageKey = "https://i.imgur.com/4AQNRB1.png";
 		else if (
 			document
 				.querySelector("a.course-header-banner-breadcrumb__category")
 				.getAttribute("aria-label") === "Mobile"
 		)
-			presenceData.largeImageKey = "mobile";
+			presenceData.largeImageKey = "https://i.imgur.com/mLpf7Yz.png";
 		else if (
 			document
 				.querySelector("a.course-header-banner-breadcrumb__category")
 				.getAttribute("aria-label") === "Inovação & Gestão"
 		)
-			presenceData.largeImageKey = "inovacao";
+			presenceData.largeImageKey = "https://i.imgur.com/RrC0z8A.png";
 	} else if (document.location.pathname.includes("/dashboard"))
 		// Dashboard
-		presenceData.details = "Viewing dashboard"; // alura.viewDashboard
+		presenceData.details = "Vendo a dashboard"; // alura.viewDashboard
 	// Training
 	else if (document.location.pathname.includes("/formacao")) {
-		title = document.querySelector("div.formacao-header-headline > h1");
-		presenceData.details = "Viewing a training"; // alura.viewTraining
-		presenceData.state = title.textContent;
+		presenceData.details = "Vendo uma formação"; // alura.viewTraining
+		presenceData.state = document.querySelector(
+			"div.formacao-header-headline > h1"
+		).textContent;
 
-		// Check what knowledge branch this training belongs
 		if (
 			document.querySelector("div.formacao__info-categoria > a").textContent ===
 			"Front-end"
 		)
-			presenceData.largeImageKey = "frontend";
+			presenceData.largeImageKey = "https://i.imgur.com/D42AEvv.png";
 		else if (
 			document.querySelector("div.formacao__info-categoria > a").textContent ===
 			"Programação"
 		)
-			presenceData.largeImageKey = "programacao";
+			presenceData.largeImageKey = "https://i.imgur.com/p57IsEa.png";
 		else if (
 			document.querySelector("div.formacao__info-categoria > a").textContent ===
 			"DevOps"
 		)
-			presenceData.largeImageKey = "devops";
+			presenceData.largeImageKey = "https://i.imgur.com/RRyEvvR.png";
 		else if (
 			document.querySelector("div.formacao__info-categoria > a").textContent ===
 			"UX & Design"
 		)
-			presenceData.largeImageKey = "ux";
+			presenceData.largeImageKey = "https://i.imgur.com/dIKn6Wz.png";
 		else if (
 			document.querySelector("div.formacao__info-categoria > a").textContent ===
 			"Data Science"
 		)
-			presenceData.largeImageKey = "datascience";
+			presenceData.largeImageKey = "https://i.imgur.com/4AQNRB1.png";
 		else if (
 			document.querySelector("div.formacao__info-categoria > a").textContent ===
 			"Mobile"
 		)
-			presenceData.largeImageKey = "mobile";
+			presenceData.largeImageKey = "https://i.imgur.com/mLpf7Yz.png";
 		else if (
 			document.querySelector("div.formacao__info-categoria > a").textContent ===
 			"Inovação & Gestão"
 		)
-			presenceData.largeImageKey = "inovacao";
+			presenceData.largeImageKey = "https://i.imgur.com/RrC0z8A.png";
 	} else if (document.location.pathname.includes("/courses"))
 		// My courses
-		presenceData.details = "Viewing my courses"; // alura.viewMycourses
+		presenceData.details = "Vendo meus cursos"; // alura.viewMycourses
 	// User page
 	else if (document.location.pathname.includes("/user")) {
-		if (document.querySelector(".profile-header-name") !== null) {
-			title = document.querySelector(".profile-header-name");
+		if (document.querySelector(".profile-header-name")) {
 			presenceData.details = strings.user; // general.viewUser
-			presenceData.state = title.textContent;
+			presenceData.state = document.querySelector(
+				".profile-header-name"
+			).textContent;
 		} else {
 			// Study Plans
 			if (document.location.pathname.includes("/planos-de-estudo"))
-				presenceData.details = "Viewing study plans"; // alura.viewStudyPlans
+				presenceData.details = "Vendo planos de estudo"; // alura.viewStudyPlans
 			// Payments
 			else if (document.location.pathname.includes("/payments"))
-				presenceData.details = "Viewing payments"; // alura.viewPayments
+				presenceData.details = "Vendo pegamentos"; // alura.viewPayments
 			// Ranking
 			else document.location.pathname.includes("/rank");
-			presenceData.details = "Viewing ranking"; // alura.viewRanking
+			presenceData.details = "Vendo o ranking"; // alura.viewRanking
 		}
 	} else if (document.location.pathname.includes("/aluraflix")) {
 		//Aluraflix
-		presenceData.largeImageKey = "aluraflix";
-		presenceData.details = "Browsing Aluraflix"; // alura.aluraflix
+		presenceData.largeImageKey = "https://i.imgur.com/43iG62U.png";
+		presenceData.details = "Vendo o Aluraflix"; // alura.aluraflix
 	} else if (document.location.pathname.includes("/carreirasemfronteiras")) {
 		//Alura programs
-		presenceData.largeImageKey = "carreirasemfronteiras"; // I accidentally misspelled the name in Developer Portal
-		presenceData.details = 'Listening to "Carreiras sem Fronteiras"'; // alura.carreirassemfronteiras
+		presenceData.largeImageKey = "https://i.imgur.com/XbsVEFV.png";
+		presenceData.details = 'Ouvindo o "Carreiras sem Fronteiras"'; // alura.carreirassemfronteiras
 		if (
 			document.querySelector(".podcast-header-title") !== null &&
 			document.querySelector(".--margin-left-image") === null
 		) {
-			title = document.querySelector(".podcast-header-title");
-			presenceData.state = `"${title.textContent}"`;
+			presenceData.state = `"${
+				document.querySelector(".podcast-header-title").textContent
+			}"`;
 		}
 	} else if (document.location.pathname.includes("/cases")) {
 		//Alura Cases
-		presenceData.largeImageKey = "aluracases";
-		presenceData.details = "Watching a Case"; // alura.cases
+		presenceData.largeImageKey = "https://i.imgur.com/rtevoAV.png";
+		presenceData.details = "Assistindo um Case"; // alura.cases
 		if (
 			document.querySelector(".intro__title") !== null &&
 			document.location.pathname.includes("/extra")
 		) {
-			title = document.querySelector(".intro__title");
-			presenceData.state = `"${title.textContent}"`;
+			presenceData.state = `"${
+				document.querySelector(".intro__title").textContent
+			}"`;
 		}
 	} else if (document.location.pathname.includes("/scubadev")) {
 		//ScubaDev
-		presenceData.largeImageKey = "scubadev";
-		presenceData.details = 'Listening to "ScubaDev"'; // alura.scubadev
+		presenceData.largeImageKey = "https://i.imgur.com/SMQfe3Y.png";
+		presenceData.details = 'Ouvindo o "ScubaDev"'; // alura.scubadev
 		if (
 			document.querySelector(".podcast-header-title") !== null &&
 			document.querySelector(".--margin-left-image") === null
 		) {
-			title = document.querySelector(".podcast-header-title");
-			presenceData.state = `"${title.textContent}"`;
+			presenceData.state = `"${
+				document.querySelector(".podcast-header-title").textContent
+			}"`;
 		}
 	} else if (document.location.pathname.includes("/layerstech")) {
 		//Layers.Tech
 
-		presenceData.largeImageKey = "layers";
-		presenceData.details = 'Listening to "Layers.Tech"'; // alura.layerstech
+		presenceData.largeImageKey = "https://i.imgur.com/xpUDQWR.png";
+		presenceData.details = 'Ouvindo o "Layers.Tech"'; // alura.layerstech
 		if (
 			document.querySelector(".podcast-header-title") !== null &&
 			document.querySelector(".--margin-left-image") === null
 		) {
-			title = document.querySelector(".podcast-header-title");
-			presenceData.state = `"${title.textContent}"`;
+			presenceData.state = `"${
+				document.querySelector(".podcast-header-title").textContent
+			}"`;
 		}
 	} else if (document.location.pathname.includes("/likeaboss")) {
 		//Like a Boss
-		presenceData.largeImageKey = "likeaboss";
-		presenceData.details = 'Listening to "Like a Boss"'; // alura.likeaboss
+		presenceData.largeImageKey = "https://i.imgur.com/96xQTpM.png";
+		presenceData.details = 'Ouvindo o "Like a Boss"'; // alura.likeaboss
 		if (
 			document.querySelector(".podcast-header-title") !== null &&
 			document.querySelector(".--margin-left-image") === null
 		) {
-			title = document.querySelector(".podcast-header-title");
-			presenceData.state = `"${title.textContent}"`;
+			presenceData.state = `"${
+				document.querySelector(".podcast-header-title").textContent
+			}"`;
 		}
 	} else if (document.location.pathname.includes("/hipsterstech")) {
 		// Hipsters.Tech
-		presenceData.largeImageKey = "hipsters";
-		presenceData.details = 'Listening to "Hipsters.tech"'; // alura.hipsterstech
+		presenceData.largeImageKey = "https://i.imgur.com/T7SMsQU.png";
+		presenceData.details = 'Ouvindo o "Hipsters.tech"'; // alura.hipsterstech
 		if (
 			document.querySelector(".podcast-header-title") !== null &&
 			document.querySelector(".--margin-left-image") === null
 		) {
-			title = document.querySelector(".podcast-header-title");
-			presenceData.state = `"${title.textContent}"`;
+			presenceData.state = `"${
+				document.querySelector(".podcast-header-title").textContent
+			}"`;
 		}
 	} else if (document.location.pathname.includes("/alura-mais")) {
 		// Alura+
 
-		presenceData.largeImageKey = "aluramais";
-		presenceData.details = "Browsing Alura+"; // alura.aluramais
+		presenceData.largeImageKey = "https://i.imgur.com/KrviSfF.png";
+		presenceData.details = "Vendo Alura+"; // alura.aluramais
 	} else if (document.location.pathname.includes("/formacoes"))
 		// Trainings
-		presenceData.details = "Browsing trainings"; // alura.browseTrainings
+		presenceData.details = "Vendo formações"; // alura.browseTrainings
 	// Immersions
 	else if (document.location.pathname.includes("/imersoes"))
-		presenceData.details = "Viewing immersions"; // alura.viewImmersions
+		presenceData.details = "Vendo imersões"; // alura.viewImmersions
 	// Podcasts
 	else if (document.location.pathname.includes("/podcasts"))
-		presenceData.details = "Browsing podcasts"; // alura.browsePodcasts
+		presenceData.details = "Vendo podcasts"; // alura.browsePodcasts
 	// Recommendations
 	else if (document.location.pathname.includes("/recommendations"))
-		presenceData.details = "Viewing recommendations";
+		presenceData.details = "Vendo recomendações";
 	// alura.viewRecommendations
 	// Forum
 	else if (
 		document.location.pathname.includes("/forum") &&
 		!document.location.pathname.includes("/topico-")
 	)
-		presenceData.details = "Browsing forums"; // alura.browseForums
+		presenceData.details = "Vendo fórums"; // alura.browseForums
 	// Reading topic
 	else if (
 		document.location.pathname.includes("/forum") &&
 		document.location.pathname.includes("/topico-")
 	) {
-		title = document.querySelector(".topic-header-container-title");
-		presenceData.details = "Reading a topic"; // alura.readingTopic
-		presenceData.state = `"${title.textContent}"`;
+		presenceData.details = "Lendo um tópico no fórum"; // alura.readingTopic
+		presenceData.state = `"${
+			document.querySelector(".topic-header-container-title").textContent
+		}"`;
 	} else if (document.location.pathname.includes("/planos-estudos-publicos"))
 		// Public study plans
 
-		presenceData.details = "Browsing public study plans";
+		presenceData.details = "Vendo planos de estudo públicos";
 	// alura.browsePublicStudyPlans
 	// Points
 	else if (document.location.pathname.includes("/points"))
-		presenceData.details = "Viewing points"; // alura.viewingPoints
+		presenceData.details = "Vendo pontos"; // alura.viewingPoints
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
