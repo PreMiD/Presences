@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 			.getAttribute("content")}`;
 		presenceData.buttons = [
 			{
-				label: "View thread",
+				label: "View Thread",
 				url: document.location.href,
 			},
 		];
