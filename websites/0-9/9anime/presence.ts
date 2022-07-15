@@ -36,22 +36,12 @@ presence.on("UpdateData", async () => {
 			coverArt = document.querySelector<HTMLImageElement>("#info img")?.src,
 			showCover = await presence.getSetting<boolean>("cover");
 
-		presenceData.details = document.querySelector("#info .title").textContent;
-		presenceData.state =
-			document.querySelector("#episodes .episodes a.active") &&
-			/\d/.test(
-				document.querySelector("#episodes .episodes a.active").textContent
-			)
-				? `${
-						document.querySelector(
-							".meta .col1 > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)"
-						).textContent
-				  } • E${
-						document.querySelector("#episodes .episodes a.active").textContent
-				  }`
-				: document.querySelector(
-						".meta .col1 > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)"
-				  ).textContent;
+		presenceData.details = document.querySelector(
+			".film-name.dynamic-name"
+		).textContent;
+		presenceData.state = `Ep ${document
+			.querySelector(".ep-item.active")
+			.textContent.replace(/\D/g, "")}`;
 
 		if (coverArt && showCover) presenceData.largeImageKey = coverArt;
 
@@ -66,7 +56,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-
+		console.log(presenceData);
 		presence.setActivity(presenceData, !video.paused);
 	} else {
 		presenceData.details = (await strings).browsing;
