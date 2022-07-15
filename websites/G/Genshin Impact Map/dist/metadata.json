@@ -9,13 +9,13 @@
 		"en": "Genshin Impact Interactive Map of all locations locations descriptions guides and more."
 	},
 	"url": [
+		"act.hoyolab.com",
 		"webstatic-sea.mihoyo.com",
 		"webstatic-sea.hoyolab.com",
-		"act.hoyolab.com",
 		"genshin-impact-map.appsample.com",
 		"mapgenie.io"
 	],
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"logo": "https://i.imgur.com/6XrkcZs.png",
 	"thumbnail": "https://i.imgur.com/3UmAxEL.png",
 	"color": "#b6c48c",
