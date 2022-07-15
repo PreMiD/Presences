@@ -29,6 +29,7 @@ async function getStrings() {
 			readButton: "general.buttonReadArticle",
 			viewProfileButton: "general.buttonViewProfile",
 			streamButton: "general.buttonWatchStream",
+			insubreddit: "In a subreddit",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -60,12 +61,11 @@ presence.on("UpdateData", async () => {
 			? `${
 					!privacy
 						? `r/${document.querySelector(".redditname").textContent}`
-						: "In a subreddit"
+						: strings.insubreddit
 			  }`
 			: "Home";
 		if (pathname.includes("/comments/")) {
 			if (!privacy) {
-				// if privacy mode is disabled
 				postTitle = document.querySelector("p.title > a").textContent;
 				presenceData.details = `${strings.reading} '${postTitle}'`;
 				presenceData.state = subReddit;
@@ -76,13 +76,11 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else {
-				// if privacy mode is enabled
-				presenceData.details = "Reading a post";
+				presenceData.details = strings.reading.slice(0, -1);
 				presenceData.state = subReddit;
 			}
 		} else if (pathname.startsWith("/user/")) {
 			if (!privacy) {
-				// if privacy mode is disabled
 				presenceData.state = document.querySelector(".titlebox > h1").textContent;
 				presenceData.details = strings.profile;
 				presenceData.buttons = [
@@ -91,7 +89,7 @@ presence.on("UpdateData", async () => {
 						label: strings.viewProfileButton,
 					},
 				];
-			} else presenceData.details = "Viewing a profile"; // if privacy mode is enabled
+			} else presenceData.details = strings.profile.slice(0, -4);
 		} else if (pathname.startsWith("/search")) {
 			presenceData.details = strings.searchSomething;
 			presenceData.smallImageKey = "search";
@@ -122,10 +120,9 @@ presence.on("UpdateData", async () => {
 					label: strings.readButton,
 				},
 			];
-		} else presenceData.details = "Reading a post";
+		} else presenceData.details = strings.reading.slice(0, -1);
 	} else if (pathname.startsWith("/user/")) {
 		if (!privacy) {
-			// if privacy mode is disabled
 			username = document.querySelector("span._1LCAhi_8JjayVo7pJ0KIh0")
 				? document.querySelector("span._1LCAhi_8JjayVo7pJ0KIh0").textContent
 				: document
@@ -135,7 +132,7 @@ presence.on("UpdateData", async () => {
 			nickname = document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ")
 				? document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ").textContent
 				: "";
-			presenceData.details = (await strings).profile;
+			presenceData.details = strings.profile;
 			presenceData.state = nickname !== "" ? nickname : username;
 			presenceData.buttons = [
 				{
@@ -143,7 +140,7 @@ presence.on("UpdateData", async () => {
 					label: strings.viewProfileButton,
 				},
 			];
-		} else presenceData.details = "Viewing a profile"; // if privacy mode is enabled
+		} else presenceData.details = strings.profile.slice(0, -4);
 	} else if (pathname.startsWith("/search")) {
 		presenceData.details = strings.searchSomething;
 		presenceData.smallImageKey = "search";
@@ -151,7 +148,6 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/rpan")) {
 		presenceData.details = `${strings.watching} (RPAN)`;
 		if (!privacy) {
-			// if privacy mode is disabled
 			rpanTitle = document.querySelector("h1")
 				? document.querySelector("h1").textContent
 				: "Loading title...";
@@ -187,7 +183,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = !sub2 ? "Home" : sub2.textContent;
 		} else {
 			presenceData.details = strings.browsing;
-			if (sub.textContent.includes("r/")) presenceData.state = "In a subreddit";
+			if (sub.textContent.includes("r/")) presenceData.state = strings.insubreddit;
 			else presenceData.state = sub.textContent;
 		}
 	}
