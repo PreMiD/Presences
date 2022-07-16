@@ -16,6 +16,9 @@ async function getStrings() {
 			viewSeries: "general.buttonViewSeries",
 			viewMovie: "general.buttonViewMovie",
 			watchEpisode: "general.buttonViewEpisode",
+			viewing: "general.viewing",
+			searching: "general.searchFor",
+			episode: "general.episode",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -126,7 +129,7 @@ presence.on("UpdateData", async () => {
 					episodeNumber = currentAnimeEpisode.replace("0", "");
 				else episodeNumber = currentAnimeEpisode;
 
-				currentAnimeEpisode = `Episode ${episodeNumber}`;
+				currentAnimeEpisode = `${strings.episode} ${episodeNumber}`;
 
 				if (buttons) {
 					presenceData.buttons = [
@@ -183,7 +186,7 @@ presence.on("UpdateData", async () => {
 					episodeNumber = currentAnimeEpisode.replace("0", "");
 				else episodeNumber = currentAnimeEpisode;
 
-				currentAnimeEpisode = `Episode ${episodeNumber}`;
+				currentAnimeEpisode = `${strings.episode} ${episodeNumber}`;
 
 				if (buttons) {
 					presenceData.buttons = [
@@ -228,7 +231,7 @@ presence.on("UpdateData", async () => {
 	) {
 		currentAnimeTitle =
 			document.querySelector<HTMLHeadingElement>("h1.title").textContent;
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = `${currentAnimeTitle}`;
 		presenceData.smallImageKey = "searching";
 		presenceData.largeImageKey = cover
@@ -246,27 +249,40 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (document.location.pathname.includes("anime-list")) {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "Anime List";
 		presenceData.smallImageKey = "searching";
 	} else if (document.location.pathname.includes("new-season")) {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "New Season";
 		presenceData.smallImageKey = "searching";
 	} else if (document.location.pathname.includes("favorites")) {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "Their Favorites";
 		presenceData.smallImageKey = "searching";
 	} else if (document.location.pathname.includes("watched")) {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "Watch History";
 		presenceData.smallImageKey = "searching";
+	} else if (document.location.pathname.includes("search")) {
+		presenceData.details = strings.searching;
+		presenceData.state = document.location.search
+			.replace("%20", " ")
+			.replace("%20", " ")
+			.replace("?q=", "");
+		presenceData.smallImageKey = "searching";
+		if (cover) {
+			presenceData.largeImageKey = document
+				.querySelector<HTMLElement>("#content > div > div:nth-child(1) > a")
+				.style.background.replace('url("', "")
+				.replace('") center center / cover no-repeat', "");
+		}
 	} else if (document.location.pathname === "/") {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "Home Page";
 		presenceData.smallImageKey = "searching";
 	} else {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "An Unsupported Page";
 	}
 
