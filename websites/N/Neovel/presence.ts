@@ -25,10 +25,15 @@ presence.on("UpdateData", async () => {
 			break;
 		case "book":
 			presenceData.details = presenceDataSlide.details = "Read a book page";
+			presenceData.buttons = presenceDataSlide.buttons = [
+				{ label: "Go to book page", url: document.documentURI },
+			];
+			presenceData.largeImageKey =
+				presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
 
 			presenceData.state = `from ${
 				document.querySelector(
-					"a.author-element span.highEmphasis.ng-tns-c148-3" // Get Author name
+					"a.author-element span" // Get Author name
 				).textContent
 			} [${pathnameArray[3]}]`;
 			slideshow.addSlide("slideAuthor", presenceData, 5000);
@@ -36,10 +41,46 @@ presence.on("UpdateData", async () => {
 			presenceDataSlide.state = `${
 				document.querySelector("div.title-section h1").textContent // Get Book name
 			} [${pathnameArray[3]}]`;
-			presenceData.buttons = presenceDataSlide.buttons = [
-				{ label: "Go to book page", url: document.documentURI },
-			];
 			slideshow.addSlide("slideBook", presenceDataSlide, 5000);
+			break;
+		case "read":
+			presenceData.details = presenceDataSlide.details = `Read the chapter "${
+				document.querySelector("h1.chapter-name").textContent
+			}"`;
+			presenceData.buttons = presenceDataSlide.buttons = [
+				{ label: "Go to the chapter", url: document.documentURI },
+				{
+					label: "Go to book page",
+					url: `https://neovel.io/book/${pathnameArray[2]}/${pathnameArray[3]}`,
+				},
+			];
+			presenceData.largeImageKey =
+				presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+
+			presenceData.state = `from ${
+				document.querySelector(
+					"div.book-info span" // Get Author name
+				).textContent
+			} [${pathnameArray[3]}]`;
+			slideshow.addSlide("slideAuthor", presenceData, 5000);
+
+			presenceDataSlide.state = `from ${
+				document.querySelector("div.book-info h2 a").textContent // Get Book name
+			} [${pathnameArray[3]}]`;
+			slideshow.addSlide("slideBook", presenceDataSlide, 5000);
+			break;
+		case "user":
+			presenceData.details = "Read an user page";
+			presenceData.buttons = [
+				{ label: "Go to the user page", url: document.documentURI },
+			];
+			presenceData.largeImageKey = document
+				.querySelector("app-avatar.author-profile-picture img")
+				.getAttribute("src");
+
+			presenceData.state = `${
+				document.querySelector("div.author-label h1").textContent
+			}`;
 			break;
 	}
 
