@@ -82,6 +82,37 @@ presence.on("UpdateData", async () => {
 				document.querySelector("div.author-label h1").textContent
 			}`;
 			break;
+		case "explorer":
+			presenceData.details = "Explore stories";
+			presenceData.state = `from "${
+				document.querySelector("div.top-bar h1").textContent
+			}"`;
+			break;
+		case "library":
+			presenceData.details = "Explore its library";
+			presenceData.state = {
+				0: "In its recents novels",
+				1: "In its lists",
+				2: "Reading its comments",
+			}[pathnameArray[2]];
+			break;
+		case "write":
+			presenceData.details = "Is going to write";
+			break;
+		case "profile":
+			presenceData.details = "Manage its author profile";
+			presenceData.state = `On page "${
+				document.querySelector(".mat-tab-label-active").textContent
+			}"`;
+			break;
+		case "validation":
+			presenceData.details = "Validate books";
+			break;
+		default:
+			if (pathnameArray[1].includes("profile"))
+				presenceData.details = "Manage its reader profile";
+			else if (pathnameArray[1].includes("search"))
+				presenceData.details = "Look for a book";
 	}
 
 	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
