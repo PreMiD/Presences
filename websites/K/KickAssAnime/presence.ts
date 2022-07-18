@@ -266,10 +266,9 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "searching";
 	} else if (document.location.pathname.includes("search")) {
 		presenceData.details = strings.searching;
-		presenceData.state = document.location.search
-			.replace("%20", " ")
-			.replace("%20", " ")
-			.replace("?q=", "");
+		presenceData.state = document
+			.querySelector("#content > h1")
+			.textContent.split('"')[1];
 		presenceData.smallImageKey = "searching";
 		if (cover) {
 			presenceData.largeImageKey = document
