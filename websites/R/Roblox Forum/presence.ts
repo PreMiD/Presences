@@ -36,8 +36,6 @@ presence.on("UpdateData", async () => {
 				url: document.location.href,
 			},
 		];
-	} else if (window.location.pathname === ("/reports/" && "/approval-queue/"))
-		presenceData.details = "Performing moderation actions";
 	else if (document.location.pathname.startsWith("/whats-new/"))
 		presenceData.details = "Browsing the latest content";
 	else {
