@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 				url: document.location.href,
 			},
 		];
-	else if (document.location.pathname.startsWith("/whats-new/"))
+	} else if (document.location.pathname.startsWith("/whats-new/"))
 		presenceData.details = "Browsing the latest content";
 	else {
 		switch (document.location.pathname) {
