@@ -18,7 +18,10 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("time"),
 		]);
-	if (!time) delete presenceData.startTimestamp;
+	if (!time) {
+		delete presenceData.startTimestamp;
+		delete presenceDataSlide.startTimestamp;
+	}
 
 	switch (pathnameArray[1]) {
 		case "discover":
