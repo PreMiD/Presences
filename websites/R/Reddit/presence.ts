@@ -209,6 +209,6 @@ presence.on("UpdateData", async () => {
 			});
 		}
 	}
-	if (!buttons || privacy) delete presenceData.buttons; // delete button if show button is disabled or privacy mode is enabled
+	if (!buttons || privacy) delete presenceData.buttons;
 	presence.setActivity(presenceData, true);
 });
