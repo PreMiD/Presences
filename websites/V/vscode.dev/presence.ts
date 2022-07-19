@@ -538,12 +538,12 @@ presence.on("UpdateData", async () => {
 			timestamps,
 			buttons,
 		] = await Promise.all([
-			presence.getSetting<string>("custom_detail_idling"),
-			presence.getSetting<string>("custom_detail"),
-			presence.getSetting<string>("custom_state"),
-			presence.getSetting<string>("custom_smallImageText"),
-			presence.getSetting<string>("custom_empty"),
-			presence.getSetting<boolean>("timestamps"),
+			presence.getSetting<string>("customIdling"),
+			presence.getSetting<string>("customDetail"),
+			presence.getSetting<string>("customState"),
+			presence.getSetting<string>("customImageText"),
+			presence.getSetting<string>("customEmpty"),
+			presence.getSetting<boolean>("timeStamps"),
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
