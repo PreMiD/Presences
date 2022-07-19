@@ -210,5 +210,5 @@ presence.on("UpdateData", async () => {
 		}
 	}
 	if (!buttons || privacy) delete presenceData.buttons;
-	presence.setActivity(presenceData, true);
+	presence.setActivity(presenceData);
 });
