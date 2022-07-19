@@ -9,7 +9,7 @@ async function getStrings() {
 			user: "general.viewUser",
 			readindArticle: "general.readingArticle",
 		},
-		await presence.getSetting<string>("lang").catch(() => "pt_BR")
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 			details: "Vendo a Alura",
 			startTimestamp: browsingTimestamp,
 		},
-		newLang = await presence.getSetting<string>("lang").catch(() => "pt_BR");
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
@@ -141,18 +141,18 @@ presence.on("UpdateData", async () => {
 			).textContent;
 		} else {
 			if (document.location.pathname.includes("/planos-de-estudo"))
-				presenceData.details = "Vendo planos de estudo"; 
+				presenceData.details = "Vendo planos de estudo";
 			else if (document.location.pathname.includes("/payments"))
-				presenceData.details = "Vendo pegamentos"; 
+				presenceData.details = "Vendo pegamentos";
 			else document.location.pathname.includes("/rank");
-			presenceData.details = "Vendo o ranking"; 
+			presenceData.details = "Vendo o ranking";
 		}
 	} else if (document.location.pathname.includes("/aluraflix")) {
 		presenceData.largeImageKey = "https://i.imgur.com/43iG62U.png";
-		presenceData.details = "Vendo o Aluraflix"; 
+		presenceData.details = "Vendo o Aluraflix";
 	} else if (document.location.pathname.includes("/carreirasemfronteiras")) {
 		presenceData.largeImageKey = "https://i.imgur.com/XbsVEFV.png";
-		presenceData.details = 'Ouvindo o "Carreiras sem Fronteiras"'; 
+		presenceData.details = 'Ouvindo o "Carreiras sem Fronteiras"';
 		if (
 			document.querySelector(".podcast-header-title") &&
 			!document.querySelector(".--margin-left-image")
@@ -218,11 +218,11 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.includes("/alura-mais")) {
 		presenceData.largeImageKey = "https://i.imgur.com/KrviSfF.png";
-		presenceData.details = "Vendo Alura+"; 
+		presenceData.details = "Vendo Alura+";
 	} else if (document.location.pathname.includes("/formacoes"))
-		presenceData.details = "Vendo formações"; 
+		presenceData.details = "Vendo formações";
 	else if (document.location.pathname.includes("/imersoes"))
-		presenceData.details = "Vendo imersões"; 
+		presenceData.details = "Vendo imersões";
 	else if (document.location.pathname.includes("/podcasts"))
 		presenceData.details = "Vendo podcasts";
 	else if (document.location.pathname.includes("/recommendations"))
