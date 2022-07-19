@@ -13,7 +13,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "neovel_logo",
 			startTimestamp: browsingTimestamp,
 		},
-		pathnameArray = document.location.pathname.split("/");
+		pathnameArray = document.location.pathname.split("/"),
+		[privacy, time] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("time"),
+		]);
+	if (!time) delete presenceData.startTimestamp;
 
 	switch (pathnameArray[1]) {
 		case "discover":
@@ -26,11 +31,13 @@ presence.on("UpdateData", async () => {
 		case "book":
 			if (document.location.hostname.includes("neopload")) {
 				presenceData.details = "Viewing its book parameters";
-				presenceData.state = `Book : ${
-					document.querySelector(`option[value="${pathnameArray[2]}"]`)
-						.textContent
-				} [${pathnameArray[3]}]`;
-				presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+				if (!privacy) {
+					presenceData.state = `Book : ${
+						document.querySelector(`option[value="${pathnameArray[2]}"]`)
+							.textContent
+					} [${pathnameArray[3]}]`;
+					presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+				}
 			} else {
 				presenceData.details = presenceDataSlide.details =
 					"Reading a book page";
@@ -54,17 +61,25 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case "read":
-			presenceData.details =
-				presenceDataSlide.details = `Reading the chapter "${
-					document.querySelector("h1.chapter-name").textContent
-				}"`;
-			presenceData.buttons = presenceDataSlide.buttons = [
-				{ label: "Go to the chapter", url: document.documentURI },
-				{
-					label: "Go to book page",
-					url: `https://neovel.io/book/${pathnameArray[2]}/${pathnameArray[3]}`,
-				},
-			];
+			presenceData.details = presenceDataSlide.details = privacy
+				? "Reading a chapter"
+				: `Reading the chapter "${
+						document.querySelector("h1.chapter-name").textContent
+				  }"`;
+			presenceData.buttons = presenceDataSlide.buttons = privacy
+				? [
+						{
+							label: "Go to book page",
+							url: `https://neovel.io/book/${pathnameArray[2]}/${pathnameArray[3]}`,
+						},
+				  ]
+				: [
+						{ label: "Go to the chapter", url: document.documentURI },
+						{
+							label: "Go to book page",
+							url: `https://neovel.io/book/${pathnameArray[2]}/${pathnameArray[3]}`,
+						},
+				  ];
 			presenceData.largeImageKey =
 				presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
 
@@ -88,33 +103,38 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document
 				.querySelector("app-avatar.author-profile-picture img")
 				.getAttribute("src");
-
 			presenceData.state = `${
 				document.querySelector("div.author-label h1").textContent
 			}`;
 			break;
 		case "explorer":
 			presenceData.details = "Exploring stories";
-			presenceData.state = `from "${
-				document.querySelector("div.top-bar h1").textContent
-			}"`;
+			if (!privacy) {
+				presenceData.state = `from "${
+					document.querySelector("div.top-bar h1").textContent
+				}"`;
+			}
 			break;
 		case "library":
 			presenceData.details = "Exploring its library";
-			presenceData.state = {
-				0: "In its recents novels",
-				1: "In its lists",
-				2: "Reading its comments",
-			}[pathnameArray[2]];
+			if (!privacy) {
+				presenceData.state = {
+					0: "In its recents novels",
+					1: "In its lists",
+					2: "Reading its comments",
+				}[pathnameArray[2]];
+			}
 			break;
 		case "write":
 			presenceData.details = "Is going to write";
 			break;
 		case "profile":
 			presenceData.details = "Managing its author profile";
-			presenceData.state = `On page "${
-				document.querySelector(".mat-tab-label-active").textContent
-			}"`;
+			if (!privacy) {
+				presenceData.state = `On page "${
+					document.querySelector(".mat-tab-label-active").textContent
+				}"`;
+			}
 			break;
 		case "validation":
 			presenceData.details = "Validating books";
@@ -124,18 +144,22 @@ presence.on("UpdateData", async () => {
 			break;
 		case "chapter":
 			presenceData.details = "Editing a chapter";
-			presenceData.state = `from "${
-				document.querySelector("div.card-title strong.neovel-font-big")
-					.textContent
-			}"`;
-			presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+			if (!privacy) {
+				presenceData.state = `from "${
+					document.querySelector("div.card-title strong.neovel-font-big")
+						.textContent
+				}"`;
+				presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+			}
 			break;
 		case "dashboard":
 			presenceData.details = "Viewing book dashboard";
-			presenceData.state = `from ${
-				document.querySelector("div.book-detail-container h2").textContent
-			} [${pathnameArray[3]}]`;
-			presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+			if (!privacy) {
+				presenceData.state = `from ${
+					document.querySelector("div.book-detail-container h2").textContent
+				} [${pathnameArray[3]}]`;
+				presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+			}
 			break;
 		case "contact_us":
 			presenceData.details = "Contacting Neovel staff...";

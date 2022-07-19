@@ -27,5 +27,19 @@
 		"read",
 		"novel",
 		"story"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "time",
+			"title": "Show timestamp",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		}
 	]
 }
