@@ -17,36 +17,47 @@ presence.on("UpdateData", async () => {
 
 	switch (pathnameArray[1]) {
 		case "discover":
-			presenceData.details = "Discover new books";
+			presenceData.details = "Discovering new books";
 			break;
 		case "tos":
-			presenceData.details = "Read Neovel T.O.S.";
+			presenceData.details = "Reading Neovel T.O.S.";
 			if (pathnameArray.length > 2) presenceData.state = "Privacy Policy";
 			break;
 		case "book":
-			presenceData.details = presenceDataSlide.details = "Read a book page";
-			presenceData.buttons = presenceDataSlide.buttons = [
-				{ label: "Go to book page", url: document.documentURI },
-			];
-			presenceData.largeImageKey =
-				presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+			if (document.location.hostname.includes("neopload")) {
+				presenceData.details = "Viewing its book parameters";
+				presenceData.state = `Book : ${
+					document.querySelector(`option[value="${pathnameArray[2]}"]`)
+						.textContent
+				} [${pathnameArray[3]}]`;
+				presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+			} else {
+				presenceData.details = presenceDataSlide.details =
+					"Reading a book page";
+				presenceData.buttons = presenceDataSlide.buttons = [
+					{ label: "Go to book page", url: document.documentURI },
+				];
+				presenceData.largeImageKey =
+					presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
 
-			presenceData.state = `from ${
-				document.querySelector(
-					"a.author-element span" // Get Author name
-				).textContent
-			} [${pathnameArray[3]}]`;
-			slideshow.addSlide("slideAuthor", presenceData, 5000);
+				presenceData.state = `from ${
+					document.querySelector(
+						"a.author-element span" // Get Author name
+					).textContent
+				} [${pathnameArray[3]}]`;
+				slideshow.addSlide("slideAuthor", presenceData, 5000);
 
-			presenceDataSlide.state = `${
-				document.querySelector("div.title-section h1").textContent // Get Book name
-			} [${pathnameArray[3]}]`;
-			slideshow.addSlide("slideBook", presenceDataSlide, 5000);
+				presenceDataSlide.state = `${
+					document.querySelector("div.title-section h1").textContent // Get Book name
+				} [${pathnameArray[3]}]`;
+				slideshow.addSlide("slideBook", presenceDataSlide, 5000);
+			}
 			break;
 		case "read":
-			presenceData.details = presenceDataSlide.details = `Read the chapter "${
-				document.querySelector("h1.chapter-name").textContent
-			}"`;
+			presenceData.details =
+				presenceDataSlide.details = `Reading the chapter "${
+					document.querySelector("h1.chapter-name").textContent
+				}"`;
 			presenceData.buttons = presenceDataSlide.buttons = [
 				{ label: "Go to the chapter", url: document.documentURI },
 				{
@@ -70,9 +81,9 @@ presence.on("UpdateData", async () => {
 			slideshow.addSlide("slideBook", presenceDataSlide, 5000);
 			break;
 		case "user":
-			presenceData.details = "Read an user page";
+			presenceData.details = "Reading an author page";
 			presenceData.buttons = [
-				{ label: "Go to the user page", url: document.documentURI },
+				{ label: "Go to the author page", url: document.documentURI },
 			];
 			presenceData.largeImageKey = document
 				.querySelector("app-avatar.author-profile-picture img")
@@ -83,13 +94,13 @@ presence.on("UpdateData", async () => {
 			}`;
 			break;
 		case "explorer":
-			presenceData.details = "Explore stories";
+			presenceData.details = "Exploring stories";
 			presenceData.state = `from "${
 				document.querySelector("div.top-bar h1").textContent
 			}"`;
 			break;
 		case "library":
-			presenceData.details = "Explore its library";
+			presenceData.details = "Exploring its library";
 			presenceData.state = {
 				0: "In its recents novels",
 				1: "In its lists",
@@ -100,19 +111,41 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Is going to write";
 			break;
 		case "profile":
-			presenceData.details = "Manage its author profile";
+			presenceData.details = "Managing its author profile";
 			presenceData.state = `On page "${
 				document.querySelector(".mat-tab-label-active").textContent
 			}"`;
 			break;
 		case "validation":
-			presenceData.details = "Validate books";
+			presenceData.details = "Validating books";
+			break;
+		case "starter":
+			presenceData.details = "Fetching its books";
+			break;
+		case "chapter":
+			presenceData.details = "Editing a chapter";
+			presenceData.state = `from "${
+				document.querySelector("div.card-title strong.neovel-font-big")
+					.textContent
+			}"`;
+			presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+			break;
+		case "dashboard":
+			presenceData.details = "Viewing book dashboard";
+			presenceData.state = `from ${
+				document.querySelector("div.book-detail-container h2").textContent
+			} [${pathnameArray[3]}]`;
+			presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+			break;
+		case "contact_us":
+			presenceData.details = "Contacting Neovel staff...";
 			break;
 		default:
 			if (pathnameArray[1].includes("profile"))
-				presenceData.details = "Manage its reader profile";
+				presenceData.details = "Managing its reader profile";
 			else if (pathnameArray[1].includes("search"))
-				presenceData.details = "Look for a book";
+				presenceData.details = "Looking for a book";
+			break;
 	}
 
 	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
