@@ -2,12 +2,13 @@ const presence = new Presence({
 		clientId: "945791515169521694",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-	rssConverter = `https://api.rss2json.com/v1/api.json?rss_url=${"https://homestuck2.com/story/rss"}`,
-	getPages = async () => {
-		const response = await fetch(rssConverter),
-			data = await response.json();
-		return data.items[0].title;
-	};
+
+ rssConverter = `https://api.rss2json.com/v1/api.json?rss_url=${"https://homestuck2.com/story/rss"}`,
+ getPages = async () => {
+	const response = await fetch(rssConverter),
+		data = await response.json();
+	return data.items[0].title;
+};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -19,7 +20,7 @@ presence.on("UpdateData", async () => {
 
 	switch (pathArr[1]) {
 		case "":
-			presenceData.details = "Viewing home page";
+			presenceData.details = "Viewing the home page";
 			break;
 
 		case "story":
@@ -122,23 +123,23 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "about":
-			presenceData.details = "Viewing about page";
+			presenceData.details = "Viewing the about page";
 			break;
 
 		case "contacts":
-			presenceData.details = "Viewing contact information";
+			presenceData.details = "Viewing the contact information";
 			break;
 
 		case "credits":
-			presenceData.details = "Viewing credits";
+			presenceData.details = "Viewing the credits";
 			break;
 
 		case "log":
-			presenceData.details = "Viewing adventure log";
+			presenceData.details = "Viewing the adventure log";
 			break;
 
 		case "privacy-policy":
-			presenceData.details = "Viewing privacy policy";
+			presenceData.details = "Viewing the privacy policy";
 			break;
 
 		case "recap":
