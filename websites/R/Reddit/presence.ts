@@ -176,7 +176,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else {
 		const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
-		if (sub === null) {
+		if (!sub) {
 			const sub2 = document.querySelector(
 				"#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.MSTY2ZpsdupobywLEfx9u > div._3JDs8KEQIXSMn1bTF2ZqJ_ > div.QscnL9OySMkHhGudEvEya > div._3I4Wpl_rl6oTm02aWPZayD > div._3TG57N4WQtubLLo8SbAXVF > h2"
 			);
