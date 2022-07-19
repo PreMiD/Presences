@@ -1,14 +1,7 @@
 const presence = new Presence({
 		clientId: "945791515169521694",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-
- rssConverter = `https://api.rss2json.com/v1/api.json?rss_url=${"https://homestuck2.com/story/rss"}`,
- getPages = async () => {
-	const response = await fetch(rssConverter),
-		data = await response.json();
-	return data.items[0].title;
-};
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -154,3 +147,10 @@ presence.on("UpdateData", async () => {
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
+
+const rssConverter = `https://api.rss2json.com/v1/api.json?rss_url=${"https://homestuck2.com/story/rss"}`,
+	getPages = async () => {
+		const response = await fetch(rssConverter),
+			data = await response.json();
+		return data.items[0].title;
+	};
