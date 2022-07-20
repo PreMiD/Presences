@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 				slideshow.addSlide("slideAuthor", presenceData, 5000);
 
 				presenceDataSlide.state = `${
-					document.querySelector("div.title-section h1").textContent // Get Book name
+					document.querySelector("div.title-section h1").textContent 
 				} [${pathnameArray[3]}]`;
 				slideshow.addSlide("slideBook", presenceDataSlide, 5000);
 			}
