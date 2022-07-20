@@ -165,7 +165,7 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case "contact_us":
-			presenceData.details = "Contacting Neovel staff...";
+			presenceData.details = "Contacting Neovel staff";
 			break;
 		default:
 			if (pathnameArray[1].includes("profile"))
