@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 		case "user":
 			presenceData.details = "Reading an author page";
 			presenceData.buttons = [
-				{ label: "Go to the author page", url: document.documentURI },
+				{ label: "View Author", url: document.documentURI },
 			];
 			presenceData.largeImageKey = document
 				.querySelector("app-avatar.author-profile-picture img")
