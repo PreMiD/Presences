@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		buttons = await presence.getSetting<boolean>("buttons");
 	switch (hostname) {
 		case "www.mediafire.com":
-			if (pathname === "/") presenceData.details = "Viewing the homepage";
+			if (pathname === "/") presenceData.details = "Viewing the home page";
 			else if (document.querySelector("#content > h2")?.textContent) {
 				presenceData.details =
 					document.querySelector("#content > h2").textContent;
@@ -20,12 +20,9 @@ presence.on("UpdateData", async () => {
 				presenceData.details = document.querySelector(
 					"body > main > div.content > div.center > div > div.dl-info > div.sidebar > div.apps > div > div"
 				).textContent;
-			} else if (
-				pathname === "/software/mobile/" ||
-				pathname === "/software/mobile"
-			)
+			} else if (pathname === "/software/mobile")
 				presenceData.details = "Mediafire Mobile Apps";
-			else if (pathname === "/about" || pathname === "/about/") {
+			else if (pathname === "/about") {
 				presenceData.details = document.querySelector(
 					"#titlebar > div > h1"
 				).textContent;
@@ -37,7 +34,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = document.querySelector(
 					"#adInquiryWrap > h2"
 				).textContent;
-			} else if (pathname === "/press" || pathname === "/press/") {
+			} else if (pathname === "/press") {
 				presenceData.details = document.querySelector(
 					"#content > h2.h2.mb-4"
 				).textContent;
@@ -70,14 +67,15 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case "app.mediafire.com":
-			if (pathname.includes("/myfiles")) presenceData.details = "My Files";
+			if (pathname.includes("/myfiles"))
+				presenceData.details = "Viewing their files";
 			else if (pathname.includes("/recent"))
-				presenceData.details = "My Recent Files";
+				presenceData.details = "Viewing their Recent Files";
 			else if (pathname.includes("/following"))
-				presenceData.details = "Files Shared With Me";
+				presenceData.details = "Viewing files shared with them";
 			else if (pathname.includes("/trash"))
-				presenceData.details = "The Trashcan";
-			else presenceData.details = "My Files";
+				presenceData.details = "Viewing their Trashcan";
+			else presenceData.details = "Viewing their files";
 
 			presenceData.buttons = [
 				{
