@@ -5,23 +5,20 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp,
-	},
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp,
+		},
 		privacy = await presence.getSetting("privacy"),
-		{pathname, href} = document.location;
+		{ pathname, href } = document.location;
 
 	if (pathname.includes("/rooms")) {
-		if (privacy) {
-			presenceData.details = "Viewing a room";
-		} else {
+		if (privacy) presenceData.details = "Viewing a room";
+		else {
 			presenceData.details = "Viewing a room";
 			presenceData.state = document.querySelector(
 				"#site-content > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > section > div._b8stb0 > span > h1"
 			).textContent;
-			presenceData.buttons = [
-				{ label: "View Room", url: pathname.href },
-			];
+			presenceData.buttons = [{ label: "View Room", url: href }];
 		}
 	} else if (pathname.includes("/book")) {
 		if (privacy) presenceData.details = "Booking a room";
@@ -38,9 +35,7 @@ presence.on("UpdateData", async () => {
 					'[data-plugin-in-point-id="GUEST_PICKER"] > div > div > div._b7b6bk > div._1qyi2pa > div._jbk4n3'
 				).textContent
 			}`;
-			presenceData.buttons = [
-				{ label: "View Booking Details", url: href },
-			];
+			presenceData.buttons = [{ label: "View Booking Details", url: href }];
 		}
 	} else if (pathname.includes("/inbox"))
 		presenceData.details = "Viewing Messages";
