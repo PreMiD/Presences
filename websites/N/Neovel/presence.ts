@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Discovering new books";
 			break;
 		case "tos":
-			presenceData.details = "Reading Neovel T.O.S.";
+			presenceData.details = "Reading Neovel ToS";
 			if (pathnameArray.length > 2) presenceData.state = "Privacy Policy";
 			break;
 		case "book":
