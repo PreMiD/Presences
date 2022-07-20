@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 			if (document.location.hostname.includes("neopload")) {
 				presenceData.details = "Viewing its book parameters";
 				if (!privacy) {
-					presenceData.state = `Book : ${
+					presenceData.state = `Book ${
 						document.querySelector(`option[value="${pathnameArray[2]}"]`)
 							.textContent
 					} [${pathnameArray[3]}]`;
