@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Validating books";
 			break;
 		case "starter":
-			presenceData.details = "Fetching its books";
+			presenceData.details = "Fetching their books";
 			break;
 		case "chapter":
 			presenceData.details = "Editing a chapter";
