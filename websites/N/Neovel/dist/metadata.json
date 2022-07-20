@@ -37,7 +37,7 @@
 		},
 		{
 			"id": "time",
-			"title": "Show timestamp",
+			"title": "Show Timestamp",
 			"icon": "fad fa-stopwatch",
 			"value": true
 		}
