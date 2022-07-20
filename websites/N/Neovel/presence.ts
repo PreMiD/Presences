@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
 			slideshow.addSlide("slideBook", presenceDataSlide, 5000);
 			break;
 		case "user":
-			presenceData.details = "Reading an author page";
+			presenceData.details = "Viewing an author";
 			presenceData.buttons = [
 				{ label: "View Author", url: document.documentURI },
 			];
