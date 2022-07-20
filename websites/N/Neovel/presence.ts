@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = presenceDataSlide.buttons = privacy
 				? [
 						{
-							label: "Go to book page",
+							label: "View Book",
 							url: `https://neovel.io/book/${pathnameArray[2]}/${pathnameArray[3]}`,
 						},
 				  ]
