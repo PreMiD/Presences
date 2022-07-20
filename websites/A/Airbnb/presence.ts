@@ -5,26 +5,25 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp,
-		},
-		privacy = await presence.getSetting("privacy");
+		largeImageKey: "logo",
+		startTimestamp: browsingTimestamp,
+	},
+		privacy = await presence.getSetting("privacy"),
+		{pathname, href} = document.location;
 
-	if (document.location.pathname.includes("/rooms")) {
+	if (pathname.includes("/rooms")) {
 		if (privacy) {
 			presenceData.details = "Viewing a room";
-			delete presenceData.state;
-			delete presenceData.buttons;
 		} else {
 			presenceData.details = "Viewing a room";
 			presenceData.state = document.querySelector(
 				"#site-content > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > section > div._b8stb0 > span > h1"
 			).textContent;
 			presenceData.buttons = [
-				{ label: "View Room", url: document.location.href },
+				{ label: "View Room", url: pathname.href },
 			];
 		}
-	} else if (document.location.pathname.includes("/book")) {
+	} else if (pathname.includes("/book")) {
 		if (privacy) presenceData.details = "Booking a room";
 		else {
 			presenceData.details = `Booking ${
@@ -40,18 +39,18 @@ presence.on("UpdateData", async () => {
 				).textContent
 			}`;
 			presenceData.buttons = [
-				{ label: "View Booking Details", url: document.location.href },
+				{ label: "View Booking Details", url: href },
 			];
 		}
-	} else if (document.location.pathname.includes("/inbox"))
+	} else if (pathname.includes("/inbox"))
 		presenceData.details = "Viewing Messages";
-	else if (document.location.pathname.includes("notifications"))
+	else if (pathname.includes("notifications"))
 		presenceData.details = "Viewing Notifications";
-	else if (document.location.pathname.includes("wishlists"))
+	else if (pathname.includes("wishlists"))
 		presenceData.details = "Viewing wishlists";
-	else if (document.location.pathname.includes("split-stays"))
+	else if (pathname.includes("split-stays"))
 		presenceData.details = "Viewing a split stay";
-	else if (document.location.pathname.includes("/account"))
+	else if (pathname.includes("/account"))
 		presenceData.details = "Viewing account details";
 	else presenceData.details = "Browsing";
 
