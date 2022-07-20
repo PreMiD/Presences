@@ -169,7 +169,7 @@ presence.on("UpdateData", async () => {
 			break;
 		default:
 			if (pathnameArray[1].includes("profile"))
-				presenceData.details = "Managing its reader profile";
+				presenceData.details = "Managing their reader profile";
 			else if (pathnameArray[1].includes("search"))
 				presenceData.details = "Looking for a book";
 			break;
