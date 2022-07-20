@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = presenceDataSlide.details =
 					"Reading a book page";
 				presenceData.buttons = presenceDataSlide.buttons = [
-					{ label: "Go to book page", url: document.documentURI },
+					{ label: "View Book", url: document.documentURI },
 				];
 				presenceData.largeImageKey =
 					presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
