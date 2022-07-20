@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.state = `from ${
 					document.querySelector(
-						"a.author-element span" // Get Author name
+						"a.author-element span"
 					).textContent
 				} [${pathnameArray[3]}]`;
 				slideshow.addSlide("slideAuthor", presenceData, 5000);
