@@ -128,11 +128,12 @@ presence.on("UpdateData", async () => {
 				).textContent
 			} (${document.querySelector("[class^='title-header pp']").textContent})`;
 		}
-	} else if (document.location.pathname.includes("/legal/privacy")) {
-		presenceData.details = "Reading Privacy Policy?";
-		presenceData.state = "People read this?!";
-	} else if (document.location.pathname.includes("/team"))
+	} else if (document.location.pathname.includes("/legal/privacy"))
+		presenceData.details = "Viewing Privacy Policy";
+	else if (document.location.pathname.includes("/team"))
 		presenceData.details = "Viewing ScoreSaber Team";
+	else if (document.location.pathname.startsWith("/scores"))
+		presenceData.details = "Viewing Score Feed";
 	else if (document.location.pathname === "/")
 		presenceData.details = "Viewing Homepage";
 
