@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Is going to write";
 			break;
 		case "profile":
-			presenceData.details = "Managing its author profile";
+			presenceData.details = "Managing their author profile";
 			if (!privacy) {
 				presenceData.state = `On page "${
 					document.querySelector(".mat-tab-label-active").textContent
