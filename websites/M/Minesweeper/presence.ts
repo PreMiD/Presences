@@ -1,111 +1,53 @@
 const presence = new Presence({
-	clientId: "989759189394030613"
-});
+	clientId: "989759189394030613",
+}),
+browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/KtDhLn7.png"
-	};
+const presenceData: PresenceData = {
+	largeImageKey: "https://i.imgur.com/KtDhLn7.png",
+	startTimestamp: browsingTimestamp,
+};
 
-	if (window.location.href.indexOf("my-games") > -1) {
-		presenceData.details = "Viewing their games";
-		presenceData.startTimestamp = Date.now();
+if (window.location.href.includes("my-games"))
+	presenceData.details = "Viewing their games";
+else if (window.location.href.includes("help"))
+	presenceData.details = "Viewing the help page";
+else if (window.location.href.includes("game"))
+	presenceData.details = "Clicking cells";
+else if (window.location.href.includes("ranking"))
+	presenceData.details = "Viewing the rankings";
+else if (window.location.href.includes("best-players"))
+	presenceData.details = "Viewing the best players";
+else if (window.location.href.includes("season-leaders"))
+	presenceData.details = "Viewing this season's leaders";
+else if (window.location.href.includes("quests"))
+	presenceData.details = "Viewing their quests";
+else if (window.location.href.includes("arena"))
+	presenceData.details = "In the arena";
+else if (window.location.href.includes("equipment"))
+	presenceData.details = "Viewing their equipment";
+else if (window.location.href.includes("marketplace"))
+	presenceData.details = "Viewing the marketplace";
+else if (window.location.href.includes("events"))
+	presenceData.details = "Viewing the event";
+else if (window.location.href.includes("players-online"))
+	presenceData.details = "Viewing players online";
+else if (window.location.href.includes("player"))
+	presenceData.details = "Viewing their profile";
+else if (window.location.href.includes("news"))
+	presenceData.details = "Viewing the news";
+else if (window.location.href.includes("statistics"))
+	presenceData.details = "Viewing statistics";
+else if (window.location.href.includes("chat"))
+	presenceData.details = "Chatting";
+else if (window.location.href.includes("premium"))
+	presenceData.details = "Viewing the premium perks";
+else if (window.location.href.includes("shop"))
+	presenceData.details = "Viewing the shop";
+else if (window.location.href.includes("profile"))
+	presenceData.details = "Managing their account details";
+else presenceData.details = "On the home page";
 
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("help") > -1) {
-		presenceData.details = "Viewing the help page";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("game") > -1) {
-		presenceData.details = "Clicking cells";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("ranking") > -1) {
-		presenceData.details = "Viewing the rankings";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("best-players") > -1) {
-		presenceData.details = "Viewing the best players";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("season-leaders") > -1) {
-		presenceData.details = "Viewing this season's leaders";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("quests") > -1) {
-		presenceData.details = "Viewing their quests";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("arena") > -1) {
-		presenceData.details = "In the arena";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("equipment") > -1) {
-		presenceData.details = "Viewing their equipment";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("marketplace") > -1) {
-		presenceData.details = "Viewing the marketplace";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("events") > -1) {
-		presenceData.details = "Viewing the event";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("players-online") > -1) {
-		presenceData.details = "Viewing players online";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("player") > -1) {
-		presenceData.details = "Viewing their profile";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("news") > -1) {
-		presenceData.details = "Viewing the news";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("statistics") > -1) {
-		presenceData.details = "Viewing statistics";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("chat") > -1) {
-		presenceData.details = "Chatting";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("premium") > -1) {
-		presenceData.details = "Viewing the premium perks";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("shop") > -1) {
-		presenceData.details = "Viewing the shop";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else if (window.location.href.indexOf("profile") > -1) {
-		presenceData.details = "Managing their account details";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	} else {
-		presenceData.details = "On the home page";
-		presenceData.startTimestamp = Date.now();
-
-		presence.setActivity(presenceData);
-	}
+presence.setActivity(presenceData);
 });
