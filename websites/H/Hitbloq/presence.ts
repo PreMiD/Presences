@@ -4,9 +4,11 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const time = await presence.getSetting<boolean>("time"),
-		buttons = await presence.getSetting<boolean>("buttons"),
-		cover = await presence.getSetting<boolean>("cover"),
+	const [time, buttons, cover] = await Promise.all([
+			presence.getSetting<boolean>("time"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("cover"),
+		]),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
@@ -14,7 +16,7 @@ presence.on("UpdateData", async () => {
 	presenceData.details = document.location.pathname.split("/")[1];
 	switch (document.location.pathname.split("/")[1]) {
 		case "map_pool": {
-			presenceData.details = "Viewing Map Pool";
+			presenceData.details = "Viewing map pool";
 			presenceData.state = document
 				.querySelector<HTMLMetaElement>("[property='og:title']")
 				.content.replace(" Map Pool", "");
@@ -32,14 +34,14 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "ladder": {
-			presenceData.details = "Viewing Ladder";
+			presenceData.details = "Viewing ladder";
 			presenceData.state = document
 				.querySelector<HTMLMetaElement>("[property='og:title']")
 				.content.replace(" Ladder", "");
 			break;
 		}
 		case "ranked_list": {
-			presenceData.details = "Viewing Ranked List";
+			presenceData.details = "Viewing ranked list";
 			presenceData.state = document
 				.querySelector<HTMLMetaElement>("[property='og:title']")
 				.content.replace(" Ranked List", "");
@@ -133,27 +135,27 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "map_pools": {
-			presenceData.details = "Browsing Map Pools";
+			presenceData.details = "Browsing map pools";
 			break;
 		}
 		case "about": {
-			presenceData.details = "Viewing About Us";
+			presenceData.details = "Viewing about page";
 			break;
 		}
 		case "contact": {
-			presenceData.details = "Viewing Contact Us";
+			presenceData.details = "Viewing contact info";
 			break;
 		}
 		case "actions": {
-			presenceData.details = "Viewing Action Queue";
+			presenceData.details = "Viewing action queue";
 			break;
 		}
 		case "add_user": {
-			presenceData.details = "Viewing Add User";
+			presenceData.details = "Adding user";
 			break;
 		}
 		case "": {
-			presenceData.details = "Viewing Homepage";
+			presenceData.details = "Viewing home page";
 			break;
 		}
 	}

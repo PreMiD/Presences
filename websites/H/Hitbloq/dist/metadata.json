@@ -21,7 +21,7 @@
 	"settings": [
 		{
 			"id": "time",
-			"title": "Show timestamps",
+			"title": "Show Timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
 		},
