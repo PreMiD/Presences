@@ -1,4 +1,4 @@
-# How to custom string
+# Presence Parameters for Customisation
 Custom string for the details or state <br>
 This is a string that can be used (there must be a `%` sign before and after every time) <br>
 
