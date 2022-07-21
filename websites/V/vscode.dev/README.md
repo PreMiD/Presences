@@ -1,6 +1,5 @@
 # Presence Parameters for Customisation
-Custom string for the details or state <br>
-This is a string that can be used (there must be a `%` sign before and after every time) <br>
+The exact parameter must be included for `details` or `state`. For example, to display the current file name the input should be `%file%`, including the `%`
 
 - `%file%` will be replaced with the current file name.
 - `%branch%` will be replaced with the current branch name. (remote URL only)
