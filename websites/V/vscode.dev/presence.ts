@@ -5,30 +5,12 @@ const presence = new Presence({
 
 interface Stauts {
 	file: string;
-	branch: string;
-	error: string;
-	problems: string;
 	workspace: string;
 	editor: {
 		lang: string;
-		encoding: string;
-		selection: string;
 	};
 }
 
-/**
- * Custom output
- * - '%file%' (presence.ts)
- * - '%branch%' (main)
- * - '%error%' (0)
- * - '%problems%' (0)
- * - '%workspace%' (Presences)
- * - '%lang%' (typescript)
- * - '%encoding%' (UTF-8)
- * - '%selection%' (Ln 20, Col 20)
- */
-
-// Thank Resource from
 // https://github.com/iCrawl/discord-vscode/blob/master/src/data/languages.json @iCrawl
 // https://github.com/leonardssh/vscord/tree/main/assets/icons @leonardssh
 const KNOWN_LANGUAGES: { language: string; image: string }[] = [
@@ -547,67 +529,41 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey:
-				"https://raw.githubusercontent.com/leonardssh/vscord/main/assets/icons/idle-vscode.png",
-			smallImageKey:
-				"https://raw.githubusercontent.com/leonardssh/vscord/main/assets/icons/vscode.png",
+			largeImageKey: "idle-vscode",
+			smallImageKey: "vscode",
 			startTimestamp,
 		},
 		status: Stauts = {
 			file: document.querySelector(".tab.active a")?.textContent,
-			branch: document.querySelector("#status\\.scm\\.0")?.textContent.trim(),
-			error: document
-				.querySelector("#status\\.problems")
-				?.textContent.split("  ")[0],
-			problems: document
-				.querySelector("#status\\.problems")
-				?.textContent.split("  ")[1],
 			workspace: document
 				.querySelector("div.pane-header[aria-label='Folders Section'] h3")
 				?.getAttribute("title"),
 			editor: {
 				lang: document.querySelector("#status\\.editor\\.mode")?.textContent,
-				encoding: document.querySelector("#status\\.editor\\.encoding")
-					?.textContent,
-				selection: document.querySelector("#status\\.editor\\.selection")
-					?.textContent,
 			},
 		},
-		filename = status.file,
+		{ file, workspace, editor } = status,
 		findExtension = Object.keys(KNOWN_EXTENSIONS).find(key => {
-			if (filename?.endsWith(key)) return true;
+			if (file?.endsWith(key)) return true;
 			const match = /^\/(.*)\/([mgiy]+)$/.exec(key);
 			if (!match) return false;
-			return new RegExp(match[1], match[2]).test(filename);
-		}),
-		Replace = function (value: string) {
-			return value
-				.replace("%file%", status.file || customEmpty)
-				.replace("%branch%", status.branch || customEmpty)
-				.replace("%error%", status.error || customEmpty)
-				.replace("%problems%", status.problems || customEmpty)
-				.replace("%workspace%", status.workspace || customEmpty)
-				.replace("%lang%", status.editor.lang || customEmpty)
-				.replace("%encoding%", status.editor.encoding || customEmpty)
-				.replace("%selection%", status.editor.selection || customEmpty);
-		};
+			return new RegExp(match[1], match[2]).test(file);
+		});
 
-	if (!status.file || !status.workspace) {
+	if (!file || !workspace) {
 		presenceData.details = detailIdling;
-		presenceData.largeImageKey =
-			"https://raw.githubusercontent.com/leonardssh/vscord/main/assets/icons/idle-vscode.png";
+		presenceData.largeImageKey = "idle-vscode";
 		if (presenceData.buttons) delete presenceData.buttons;
 	} else {
-		presenceData.state = Replace(customState);
-		presenceData.details = Replace(customDetail);
-		presenceData.smallImageText = Replace(customSmallText);
-		presenceData.largeImageKey = `https://raw.githubusercontent.com/leonardssh/vscord/main/assets/icons/${
+		presenceData.state = Replace(customState, customEmpty);
+		presenceData.details = Replace(customDetail, customEmpty);
+		presenceData.smallImageText = Replace(customSmallText, customEmpty);
+		presenceData.largeImageKey =
 			KNOWN_EXTENSIONS[findExtension]?.image ||
 			KNOWN_LANGUAGES.find(key =>
-				key.language.includes(status.editor.lang?.toLowerCase())
+				key.language.includes(editor.lang?.toLowerCase())
 			)?.image ||
-			"vscode"
-		}.png`;
+			"vscode";
 	}
 
 	if (buttons && document.location.pathname?.split("/")[1] === "github") {
@@ -624,3 +580,30 @@ presence.on("UpdateData", async () => {
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
+
+function Replace(value: string, empty: string) {
+	for (const [string, selector] of Object.entries({
+		"%file%": [".tab.active a"],
+		"%branch%": ["#status\\.scm\\.0"],
+		"%error%": ["#status\\.problems > a > span.codiconcodicon-error"],
+		"%problems%": ["#status\\.problems > a > span.codicon.codicon-warning"],
+		"%workspace%": [
+			"div.pane-header[aria-label='Folders Section'] h3",
+			"title",
+		],
+		"%lang%": ["#status\\.editor\\.mode"],
+		"%encoding%": ["#status\\.editor\\.encoding"],
+		"%selection%": ["#status\\.editor\\.selection"],
+	})) {
+		value = value.replace(
+			string,
+			selector[1]
+				? document
+						.querySelector(selector[0])
+						?.getAttribute(selector[1])
+						?.trim() || empty
+				: document.querySelector(selector[0])?.textContent?.trim() || empty
+		);
+	}
+	return value;
+}
