@@ -25,4 +25,3 @@ if not it will show empty space
  - selection Ln 20, Col 20
 ```
 
-_Much of the code in this repository is based on [iCrawl/discord-vscode](https://github.com/iCrawl/discord-vscode) and image from [leonardssh/vscord](https://github.com/leonardssh/vscord/tree/main/assets/icons)_
