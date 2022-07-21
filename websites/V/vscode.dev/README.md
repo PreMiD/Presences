@@ -1,14 +1,14 @@
 # Presence Parameters for Customisation
 The exact parameter must be included for `details` or `state`. For example, to display the current file name the input should be `%file%`, including the `%`
 
-- `%file%` will be replaced with the current file name.
-- `%branch%` will be replaced with the current branch name. (remote URL only)
-- `%error%` will be replaced with error current workspace folder.
-- `%problems%` will be replaced with problems current workspace folder.
-- `%workspace%` will be replaced with the current workspace name.
-- `%lang%` will be replaced with the language current file.
-- `%encoding%` will be replaced with the encoding.
-- `%selection%` will be replaced with the current line.
+- `%file%` will display the current file name.
+- `%branch%` will display the current branch name. (remote URL only)
+- `%error%` will display the error current workspace folder.
+- `%problems%` will display the problems current workspace folder.
+- `%workspace%` will display the current workspace name.
+- `%lang%` will display the language current file.
+- `%encoding%` will display the encoding.
+- `%selection%` will display the current line.
 
 if not it will show empty space
 
