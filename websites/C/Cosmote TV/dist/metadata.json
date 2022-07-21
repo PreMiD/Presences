@@ -27,13 +27,13 @@
 	"settings": [
 		{
 			"id": "logo",
-			"title": "Show channel logo",
+			"title": "Show Channel Logo",
 			"icon": "fad fa-images",
 			"value": true
 		},
 		{
 			"id": "timestamps",
-			"title": "Show timestamps",
+			"title": "Show Timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
 		}
