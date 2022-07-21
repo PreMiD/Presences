@@ -1,27 +1,15 @@
 # Presence Parameters for Customisation
 The exact parameter must be included for `details` or `state`. For example, to display the current file name the input should be `%file%`, including the `%`
 
-- `%file%` will display the current file name.
-- `%branch%` will display the current branch name. (remote URL only)
-- `%error%` will display the error current workspace folder.
-- `%problems%` will display the problems current workspace folder.
-- `%workspace%` will display the current workspace name.
-- `%lang%` will display the language current file.
-- `%encoding%` will display the encoding.
-- `%selection%` will display the current line.
+| Parameter | Description                                             | Example       |
+|:---------:|:-------------------------------------------------------:|:-------------:|
+| file      | will display the current file name.                     | presence.ts   |
+| branch    | will display the current branch name. (remote URL only) | main          |
+| error     | will display the error current workspace folder.        | 0             |
+| problems  | will display the problems current workspace folder.     | 0             |
+| workspace | will display the current workspace name.                | Presences     |
+| lang      | will display the language current file.                 | typescript    |
+| encoding  | will display the encoding.                              | UTF-8         |
+| selection | will display the current line.                          | Ln 20, Col 20 |
 
-if not it will show empty space
-
-#### output example
-
-```
- - file presence.ts
- - branch main
- - error 0
- - problems 0
- - workspace Presences
- - lang typescript
- - encoding UTF-8
- - selection Ln 20, Col 20
-```
-
+If not found, it will be replaced an empty space.
