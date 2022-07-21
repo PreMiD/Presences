@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Mad",
-		"id": "653742649798295560"
+		"id": "559097551362457607"
 	},
 	"service": "Alura",
 	"description": {
@@ -19,11 +19,5 @@
 	"tags": [
 		"coding",
 		"courses"
-	],
-	"settings": [
-		{
-			"id": "lang",
-			"multiLanguage": true
-		}
 	]
 }
