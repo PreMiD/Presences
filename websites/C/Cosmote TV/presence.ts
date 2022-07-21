@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 				details: "Browsing Live TV",
 			},
 			"livetv/replaytv": {
-				details: "Browsing ReplayTV",
+				details: "Browsing Replay TV",
 			},
 			"livetv/guide": {
 				details: "Browsing Live TV Guide",
@@ -114,16 +114,16 @@ presence.on("UpdateData", async () => {
 					: (await strings).live;
 			} else {
 				// Replay / Timeshift
-				const timestamps = presence.getTimestamps(
-					presence.timestampFromFormat(
-						document.querySelector<HTMLSpanElement>("#VcurrentTime").textContent
-					),
-					presence.timestampFromFormat(
-						document.querySelector<HTMLSpanElement>("#Vduration").textContent
-					)
-				);
-				presenceData.startTimestamp = timestamps[0];
-				presenceData.endTimestamp = timestamps[1];
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						presence.timestampFromFormat(
+							document.querySelector<HTMLSpanElement>("#VcurrentTime")
+								.textContent
+						),
+						presence.timestampFromFormat(
+							document.querySelector<HTMLSpanElement>("#Vduration").textContent
+						)
+					);
 
 				presenceData.smallImageKey = paused ? "pause" : "play";
 				presenceData.smallImageText = paused
