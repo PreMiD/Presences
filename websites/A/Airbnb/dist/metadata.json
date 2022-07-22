@@ -8,8 +8,11 @@
 	"description": {
 		"en": "Airbnb, Inc. is an American company that operates an online marketplace for lodging, primarily homestays for vacation rentals, and tourism activities."
 	},
-	"url": "www.airbnb.com",
-	"version": "1.0.0",
+	"url": [
+		"www.airbnb.com",
+		"www.airbnb.co.uk"
+	],
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/Bffbxtu.png",
 	"thumbnail": "https://i.imgur.com/3ltXMdS.png",
 	"color": "#f9585e",
@@ -23,7 +26,7 @@
 			"id": "privacy",
 			"title": "Privacy Mode",
 			"icon": "fad fa-user-secret",
-			"value": true
+			"value": false
 		}
 	]
 }
