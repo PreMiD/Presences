@@ -1,4 +1,3 @@
-websites/** @PreMiD/presence-verifiers
 @types/** @PreMiD/administrators @PreMiD/presence-verifiers
 yarn.lock @PreMiD/administrators @PreMiD/presence-verifiers
 .eslintrc.json @PreMiD/administrators @PreMiD/presence-verifiers
