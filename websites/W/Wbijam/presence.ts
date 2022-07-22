@@ -19,7 +19,9 @@ interface IFrameData {
 
 presence.on("iFrameData", (data: IFrameData) => {
 	if (data.iframeVideo.dur) {
-		{ iFrameVideo, paused, currentTime, dur } = data.iframeVideo;
+		({ iFrameVideo, paused } = data.iframeVideo);
+		currentTime = data.iframeVideo.currTime;
+		duration = data.iframeVideo.dur;
 	}
 });
 
