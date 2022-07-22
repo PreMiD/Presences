@@ -6,7 +6,6 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "ig-mal",
 		smallImageKey: "small",
-		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the homepage";
@@ -15,6 +14,12 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Thread: ${document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content")}`;
+		presenceData.buttons = [
+			{
+				label: "View Thread",
+				url: document.location.href,
+			},
+		];
 	} else if (document.location.pathname.startsWith("/forums/")) {
 		presenceData.details = "Browsing a category";
 		presenceData.state = `Category: ${document
@@ -25,8 +30,14 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Profile: ${document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content")}`;
+		presenceData.buttons = [
+			{
+				label: "View Profile",
+				url: document.location.href,
+			},
+		];
 	} else if (document.location.pathname.startsWith("/whats-new/"))
-		presenceData.details = "Browsing latest content";
+		presenceData.details = "Browsing the latest content";
 	else {
 		switch (document.location.pathname) {
 			case "/pages/premium/":
@@ -42,6 +53,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Editing my privacy settings";
 				break;
 		}
+		presenceData.details = "Unknown page";
 	}
 	presence.setActivity(presenceData);
 });
