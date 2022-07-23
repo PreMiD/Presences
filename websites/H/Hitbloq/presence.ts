@@ -139,15 +139,15 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "about": {
-			presenceData.details = "Viewing about page";
+			presenceData.details = "Viewing the about page";
 			break;
 		}
 		case "contact": {
-			presenceData.details = "Viewing contact info";
+			presenceData.details = "Viewing the contact page";
 			break;
 		}
 		case "actions": {
-			presenceData.details = "Viewing action queue";
+			presenceData.details = "Viewing the action queue";
 			break;
 		}
 		case "add_user": {
@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "": {
-			presenceData.details = "Viewing home page";
+			presenceData.details = "Viewing the home page";
 			break;
 		}
 	}
