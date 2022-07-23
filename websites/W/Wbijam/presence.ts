@@ -31,8 +31,10 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ hostname, pathname, href } = document.location,
-		{ title } = document,
-		removeExtension = (str: string) => str.split(".")[0];
+		{ title } = document;
+	function removeExtension(str: string) {
+		return str.split(".")[0];
+	}
 
 	if (hostname === "wbijam.pl") {
 		switch (removeExtension(pathname)) {
