@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector(".btn-galleries.js-lpbtn.active")
 						?.textContent ??
 					document.querySelector(".btn-myfiles.js-lpbtn.active")?.textContent ??
-					"None"
+					"Dashboard"
 				}`;
 			}
 		} else if (pathname.includes("/fm/chat")) {
