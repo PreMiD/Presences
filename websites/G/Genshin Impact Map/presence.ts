@@ -146,6 +146,13 @@ presence.on("UpdateData", async () => {
 		)
 	)
 		current = map[0];
+	else if (
+		(current.starting || current.ending) &&
+		!(
+			current.starting < Date.now() / 1000 || current.ending > Date.now() / 1000
+		)
+	)
+		current = map[0];
 	presenceData.details = current.map;
 	presenceData.state = current.city && currentCity ? currentCity.map : null;
 	presenceData.largeImageKey =
