@@ -16,11 +16,11 @@
 	],
 	"service": "AnimationDigitalNetwork",
 	"description": {
-		"en": "Anime Digital Network is the best of the live animated Japan! See all Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight, and more.",
-		"zh_CN": "AnimeDigitalNetwork是最棒的日本在线动漫网站。",
-		"ga_IE": "Is é Anime Digital Network an chuid is fearr den tSeapáin bheoite bheo! Féach gach Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight, agus go leor eile.",
-		"nl": "Anime Digital Network is het beste van het live geanimeerde Japan! Bekijk alles van Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight en meer.",
-		"vi_VN": "Anime Digital Network là một trong những nền tảng chiếu anime lớn nhất! Xem ngay Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight, và hơn nữa."
+		"en": "Animation Digital Network is the best of the live animated Japan! See all Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight, and more.",
+		"zh_CN": "AnimationDigitalNetwork是最棒的日本在线动漫网站。",
+		"ga_IE": "Is é Animation Digital Network an chuid is fearr den tSeapáin bheoite bheo! Féach gach Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight, agus go leor eile.",
+		"nl": "Animation Digital Network is het beste van het live geanimeerde Japan! Bekijk alles van Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight en meer.",
+		"vi_VN": "Animation Digital Network là một trong những nền tảng chiếu anime lớn nhất! Xem ngay Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight, và hơn nữa."
 	},
 	"url": "animationdigitalnetwork.fr",
 	"version": "1.5.5",
@@ -29,7 +29,7 @@
 	"color": "#0096FF",
 	"category": "anime",
 	"tags": [
-		"anime-digital-network",
+		"animation-digital-network",
 		"video",
 		"anime",
 		"adn"
