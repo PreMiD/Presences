@@ -160,8 +160,6 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	cover;
-
 	if (!time) delete presenceData.startTimestamp;
 
 	if (!buttons) delete presenceData.buttons;
