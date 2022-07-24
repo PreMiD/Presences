@@ -8,9 +8,13 @@
 		{
 			"name": "Bryan",
 			"id": "293775922757238784"
+		},
+		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
 		}
 	],
-	"service": "AnimeDigitalNetwork",
+	"service": "AnimationDigitalNetwork",
 	"description": {
 		"en": "Anime Digital Network is the best of the live animated Japan! See all Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight, and more.",
 		"zh_CN": "AnimeDigitalNetwork是最棒的日本在线动漫网站。",
@@ -18,8 +22,8 @@
 		"nl": "Anime Digital Network is het beste van het live geanimeerde Japan! Bekijk alles van Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight en meer.",
 		"vi_VN": "Anime Digital Network là một trong những nền tảng chiếu anime lớn nhất! Xem ngay Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight, và hơn nữa."
 	},
-	"url": "animedigitalnetwork.fr",
-	"version": "1.5.4",
+	"url": "animationdigitalnetwork.fr",
+	"version": "1.5.5",
 	"logo": "https://i.imgur.com/JnLqL7n.png",
 	"thumbnail": "https://i.imgur.com/1idATDN.png",
 	"color": "#0096FF",
