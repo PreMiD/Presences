@@ -139,7 +139,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = route[3]
 			? `${route[2]} - ${route[3].replaceAll("-", " ")}`
 			: `${route[2]}`;
-		presenceData.state = !route[4] ? "Navigating..." : route[4];
+		presenceData.state = route[4] ?? "Navigating...";
 	} else {
 		presenceData.details = `Watching member : ${
 			document.querySelector("span.forum").textContent
