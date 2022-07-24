@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case "book":
 			if (document.location.hostname.includes("neopload")) {
-				presenceData.details = "Viewing its book parameters";
+				presenceData.details = "Managing their book";
 				if (!privacy) {
 					presenceData.state = `Book ${
 						document.querySelector(`option[value="${pathnameArray[2]}"]`)
@@ -45,20 +45,18 @@ presence.on("UpdateData", async () => {
 				presenceData.details = presenceDataSlide.details =
 					"Reading a book page";
 				presenceData.buttons = presenceDataSlide.buttons = [
-					{ label: "Go to book page", url: document.documentURI },
+					{ label: "View Book", url: document.documentURI },
 				];
 				presenceData.largeImageKey =
 					presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
 
 				presenceData.state = `from ${
-					document.querySelector(
-						"a.author-element span"
-					).textContent
+					document.querySelector("a.author-element span").textContent
 				} [${pathnameArray[3]}]`;
 				slideshow.addSlide("slideAuthor", presenceData, 5000);
 
 				presenceDataSlide.state = `${
-					document.querySelector("div.title-section h1").textContent 
+					document.querySelector("div.title-section h1").textContent
 				} [${pathnameArray[3]}]`;
 				slideshow.addSlide("slideBook", presenceDataSlide, 5000);
 			}
@@ -87,9 +85,7 @@ presence.on("UpdateData", async () => {
 				presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
 
 			presenceData.state = `from ${
-				document.querySelector(
-					"div.book-info span"
-				).textContent
+				document.querySelector("div.book-info span").textContent
 			} [${pathnameArray[3]}]`;
 			slideshow.addSlide("slideAuthor", presenceData, 5000);
 
@@ -99,7 +95,7 @@ presence.on("UpdateData", async () => {
 			slideshow.addSlide("slideBook", presenceDataSlide, 5000);
 			break;
 		case "user":
-			presenceData.details = "Reading an author page";
+			presenceData.details = "Viewing an author";
 			presenceData.buttons = [
 				{ label: "View Author", url: document.documentURI },
 			];
