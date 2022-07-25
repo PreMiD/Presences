@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 const presence = new Presence({
 		clientId: "879535934977245244",
 	}),
@@ -47,10 +46,6 @@ const presence = new Presence({
 		crunchyroll: "Crunchyroll Collection",
 	},
 	coverUrls: Record<string, string> = {};
-
-interface Crypto {
-	randomUUID: () => string;
-}
 let isFetching = false,
 	titles: string,
 	titles2: string;
