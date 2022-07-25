@@ -23,6 +23,7 @@
 		"es": "El ritmo está a solo un *clic* de distancia! Con Ouendan/EBA, Taiko y modos de juego originales, así como un editor de niveles totalmente funcional.",
 		"nl": "Ritme is slechts een *klik* verwijderd!  Met Ouendan/EBA, Taiko en originele spelmodi, en zelfs een volledig functionele level editor.",
 		"fi": "Rytmi on vain klikkauksen päässä! Varustettuna Ouendan/EBA ja Taikosta tutuilla sekä alkuperäisillä pelimuodoilla ja täysin toiminnallisella tasoeditorilla.",
+		"ga_IE": "Níl i rithim ach *cliceáil* ! Le Ouedan / EBA, Taiko agus modhanna bunaidh gameplay, chomh maith le eagarthóir leibhéal ag feidhmiú go hiomlán.",
 		"ro": "Ritmul este doar la un *clic* distanță! Cu Ouendan/EBA, Taiko și moduri de joc originale,  precum și un editor de nivel complet funcțional.",
 		"zh_CN": "节奏跃然指上！内含来自「押忍！战斗应援团」、「精英节拍特工」、太鼓的以及 osu! 原创的游戏模式，以及为其设计的全功能谱面编辑器。",
 		"zh_TW": "節奏躍然指上！遊戲模式來自「押忍！戰鬥應援團」、「精英節拍特工」、太鼓的以及 osu! 原創的模式。包含一個功能齊全的譜面編輯器。",
@@ -44,5 +45,17 @@
 	"category": "games",
 	"tags": [
 		"games"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
 	]
 }
