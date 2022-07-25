@@ -24,7 +24,12 @@
 	"thumbnail": "https://i.imgur.com/1idATDN.png",
 	"color": "#0096FF",
 	"category": "anime",
-	"tags": ["animation-digital-network", "video", "anime", "adn"],
+	"tags": [
+		"animation-digital-network",
+		"video",
+		"anime",
+		"adn"
+	],
 	"settings": [
 		{
 			"id": "buttons",
