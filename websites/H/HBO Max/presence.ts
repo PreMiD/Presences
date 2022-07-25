@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const presence = new Presence({
 		clientId: "879535934977245244",
 	}),
@@ -47,7 +48,12 @@ const presence = new Presence({
 	},
 	coverUrls: Record<string, string> = {};
 
-let isFetching = false;
+interface Crypto {
+	randomUUID: () => string;
+}
+let isFetching = false,
+	titles: string,
+	titles2: string;
 
 function fetchToken(): Promise<string> {
 	return fetch("https://oauth.api.hbo.com/auth/tokens", {
@@ -126,6 +132,31 @@ async function fetchCover() {
 	return output;
 }
 
+async function fetchTitle() {
+	const accessToken = await fetchToken(),
+		{ routeKey, countryCode } = await fetchClientConfig(accessToken);
+
+	isFetching = true;
+
+	try {
+		const response = await fetch(
+			`https://comet${routeKey}.api.hbo.com/express-content/${
+				location.pathname.split("/")[2]
+			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=${countryCode}&language=en-us`,
+			{
+				headers: {
+					authorization: `Bearer ${accessToken}`,
+				},
+			}
+		).then(res => res.json());
+
+		titles = response[0].body.titles.short;
+	} catch {
+		return;
+	}
+
+	isFetching = false;
+}
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "lg",
@@ -133,7 +164,7 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector("video"),
 		path = document.location.pathname;
 
-	let titles, hasEpisode, timestamps, pageSlug;
+	let timestamps, pageSlug;
 
 	switch (true) {
 		case path === "/profileSelect":
@@ -149,18 +180,17 @@ presence.on("UpdateData", async () => {
 			});
 			break;
 		case !!video:
-			(titles = Array.from(
-				document.querySelectorAll("[role=heading]:first-child span span")
-			)
-				.map(z => z.textContent)
-				.filter(z => z.length > 1 && !/\d \/ \d+/.test(z))), // Test for "d / d" ex.: 01:45 / 01:30:00
-				(hasEpisode = titles.length > 1);
-
+			titles = document
+				.querySelector('[href*="type:episode"]')
+				?.getAttribute("aria-label");
+			await fetchTitle();
+			titles2 = titles.replace(/S[0-9]*:E[0-9]*/gm, "");
+			titles = titles.replace(titles2, "");
 			timestamps = presence.getTimestampsfromMedia(video);
 
 			Object.assign(presenceData, {
-				details: titles[0],
-				state: hasEpisode ? titles[1] : "Watching movie",
+				details: titles,
+				state: titles2 ?? "Watching movie",
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause
@@ -190,7 +220,8 @@ presence.on("UpdateData", async () => {
 					startTimestamp: timestamps[0],
 					endTimestamp: timestamps[1],
 				});
-			}
+			} else delete presenceData.endTimestamp;
+
 			break;
 
 		default: {
