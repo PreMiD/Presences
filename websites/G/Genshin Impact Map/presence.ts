@@ -11,6 +11,8 @@ interface Maps {
 	largeImageKey: string;
 	pvlargeImageKey: string | null;
 	smallImageKey: string;
+	starting?: number;
+	ending?: number;
 }
 
 interface City {
@@ -42,19 +44,22 @@ const map: Maps[] = [
 			id: 9,
 			map: "The Chasm: Underground Mines",
 			largeImageKey: "the_chasm_underground_mines_map",
-			key: ["the-chasm-underground", "chasm"],
+			key: ["chasm", "the-chasm-underground"],
 			pvlargeImageKey: "preview_the_chasm_underground_mines",
 			smallImageKey: "emblem_thechasm",
 		},
 		{
-			// Event map
+			// Event map 2.8
+			// https://www.hoyolab.com/article/5958494/
 			city: false,
 			id: 12,
 			map: "Golden Apple Archipelago",
-			key: ["golden apple", "isles"],
+			key: ["isles", "golden-apple-archipelago-2-8"],
 			largeImageKey: "golden_apple_archipelago_map_2_8",
 			pvlargeImageKey: "preview_golden_apple_archipelago_2_8",
 			smallImageKey: "emblem_isles",
+			starting: 1657854000, // Fri, 15 Jul 2022 03:00 GMT
+			ending: 1661295600, // Wed, 24 Aug 2022 23:00 GMT
 		},
 		{
 			city: false,
@@ -133,6 +138,21 @@ presence.on("UpdateData", async () => {
 			break;
 	}
 	if (!current) return;
+	if (
+		current.starting &&
+		current.ending &&
+		!(
+			current.starting < Date.now() / 1000 && current.ending > Date.now() / 1000
+		)
+	)
+		current = map[0];
+	else if (
+		(current.starting || current.ending) &&
+		!(
+			current.starting < Date.now() / 1000 || current.ending > Date.now() / 1000
+		)
+	)
+		current = map[0];
 	presenceData.details = current.map;
 	presenceData.state = current.city && currentCity ? currentCity.map : null;
 	presenceData.largeImageKey =
