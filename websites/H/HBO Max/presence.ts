@@ -48,7 +48,8 @@ const presence = new Presence({
 	coverUrls: Record<string, string> = {};
 let isFetching = false,
 	titles: string,
-	titles2: string;
+	titles2: string,
+	output: string;
 
 function fetchToken(): Promise<string> {
 	return fetch("https://oauth.api.hbo.com/auth/tokens", {
@@ -95,10 +96,7 @@ function fetchClientConfig(
 			).get("country-code"),
 		}));
 }
-
-async function fetchCover() {
-	let output: string;
-
+async function fetchCoverAndTitle() {
 	const accessToken = await fetchToken(),
 		{ routeKey, countryCode } = await fetchClientConfig(accessToken);
 
@@ -119,35 +117,9 @@ async function fetchCover() {
 		output = `https://artist.api.cdn.hbo.com/images/${
 			response[0].body.references.series.match(/series:([^:]+)/)[1]
 		}/tileburnedin?size=1024x1024`;
-	} catch {
-		output = "lg";
-	}
-
-	isFetching = false;
-	return output;
-}
-
-async function fetchTitle() {
-	const accessToken = await fetchToken(),
-		{ routeKey, countryCode } = await fetchClientConfig(accessToken);
-
-	isFetching = true;
-
-	try {
-		const response = await fetch(
-			`https://comet${routeKey}.api.hbo.com/express-content/${
-				location.pathname.split("/")[2]
-			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=${countryCode}&language=en-us`,
-			{
-				headers: {
-					authorization: `Bearer ${accessToken}`,
-				},
-			}
-		).then(res => res.json());
-
 		titles = response[0].body.titles.short;
 	} catch {
-		return;
+		output = "lg";
 	}
 
 	isFetching = false;
@@ -175,16 +147,10 @@ presence.on("UpdateData", async () => {
 			});
 			break;
 		case !!video:
-			titles = document
-				.querySelector('[href*="type:episode"]')
-				?.getAttribute("aria-label");
-			await fetchTitle();
-			titles2 = titles.replace(/S[0-9]*:E[0-9]*/gm, "");
-			titles = titles.replace(titles2, "");
 			timestamps = presence.getTimestampsfromMedia(video);
 
 			Object.assign(presenceData, {
-				details: titles,
+				details: titles ?? "Unknown title",
 				state: titles2 ?? "Watching movie",
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
@@ -204,7 +170,10 @@ presence.on("UpdateData", async () => {
 					const episodeId = location.pathname.match(/:episode:([^:]+)/)[1];
 
 					if (isFetching) return;
-					coverUrls[episodeId] ??= await fetchCover();
+					await fetchCoverAndTitle();
+					coverUrls[episodeId] ??= output;
+					titles2 = titles.replace(/S[0-9]*:E[0-9]*/gm, "");
+					titles = titles.replace(titles2, "");
 
 					presenceData.largeImageKey = coverUrls[episodeId];
 				}
@@ -215,7 +184,7 @@ presence.on("UpdateData", async () => {
 					startTimestamp: timestamps[0],
 					endTimestamp: timestamps[1],
 				});
-			} else delete presenceData.endTimestamp;
+			}
 
 			break;
 
