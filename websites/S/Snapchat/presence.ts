@@ -4,11 +4,10 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const [privacyMode, showActiveChatAvatar] =
-			await Promise.all([
-				presence.getSetting<boolean>("privacyMode"),
-				presence.getSetting<boolean>("showActiveChatAvatar")
-			]),
+	const [privacyMode, showActiveChatAvatar] = await Promise.all([
+			presence.getSetting<boolean>("privacyMode"),
+			presence.getSetting<boolean>("showActiveChatAvatar"),
+		]),
 		presenceData: PresenceData = {
 			details: "Other",
 			largeImageKey: "logo",
@@ -28,9 +27,7 @@ presence.on("UpdateData", async () => {
 				activeChat?.querySelectorAll("div.ovUsZ > span")[4]?.textContent;
 
 		presenceData.details = "Chatting with";
-		presenceData.state = privacyMode
-			? activeChatUsername
-			: "somebody";
+		presenceData.state = privacyMode ? activeChatUsername : "somebody";
 
 		if (privacyMode && snapStreak) presenceData.state += ` | ${snapStreak}`;
 
