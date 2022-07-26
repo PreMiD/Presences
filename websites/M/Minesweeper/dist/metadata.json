@@ -1,23 +1,24 @@
 {
-"$schema": "https://schemas.premid.app/metadata/1.7",
-  "author": {
-    "name": "unicornbetrayal",
-    "id": "377284540420587541"
-  },
-  "service": "Minesweeper",
-  "description": {
-    "en": "Playing Minesweeper is our passion. That's why we strive to make it the greatest game in the world!"
-  },
-  "url": "minesweeper.online",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/yjwiBiP.png",
-  "thumbnail": "https://i.imgur.com/4dV6MhT.png",
-  "color": "#666666",
-  "category": "games",
-  "tags": [
-		"minesweeper",
-		"game",
-		"puzzle",
-		"logic"
-	]
-}
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+    "author": {
+      "name": "unicornbetrayal",
+      "id": "377284540420587541"
+    },
+    "service": "Minesweeper",
+    "description": {
+      "en": "Playing Minesweeper is our passion. That's why we strive to make it the greatest game in the world!"
+    },
+    "url": "minesweeper.online",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/yjwiBiP.png",
+    "thumbnail": "https://i.imgur.com/4dV6MhT.png",
+    "color": "#666666",
+    "category": "games",
+    "tags": [
+      "minesweeper",
+      "game",
+      "puzzle",
+      "logic"
+    ]
+  }
+  
