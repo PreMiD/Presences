@@ -31,7 +31,6 @@
 			"icon": "fad fa-user-astronaut",
 			"value": true
 		},
-
 		{
 			"id": "showSnapStreak",
 			"title": "Show active chat SnapStreak",
