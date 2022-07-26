@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "N0chteil ^^",
+		"id": "495901098926669825"
+	},
+	"service": "Snapchat",
+	"description": {
+		"en": "Snapchat is an American multimedia instant messaging app and service developed by Snap Inc., originally Snapchat Inc. One of the principal features of Snapchat is that pictures and messages are usually only available for a short time before they become inaccessible to their recipients."
+	},
+	"url": "web.snapchat.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/dr9SkT5.png",
+	"thumbnail": "https://i.imgur.com/JkqVPkf.jpg",
+	"color": "#FFFC00",
+	"category": "other",
+	"tags": [
+		"chat",
+		"messaging"
+	],
+	"settings": [
+		{
+			"id": "showActiveChatUsername",
+			"title": "Show active chat username",
+			"icon": "fad fa-user-gear",
+			"value": true
+		},
+		{
+			"id": "showActiveChatAvatar",
+			"title": "Show active chat avatar",
+			"icon": "fad fa-user-astronaut",
+			"value": true
+		},
+
+		{
+			"id": "showSnapStreak",
+			"title": "Show active chat SnapStreak",
+			"icon": "fad fa-fire-flame",
+			"value": true
+		}
+	]
+}
