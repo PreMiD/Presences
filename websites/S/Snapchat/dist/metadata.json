@@ -20,21 +20,15 @@
 	],
 	"settings": [
 		{
-			"id": "showActiveChatUsername",
-			"title": "Show active chat username",
-			"icon": "fad fa-user-gear",
+			"id": "privacyMode",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
 			"value": true
 		},
 		{
 			"id": "showActiveChatAvatar",
 			"title": "Show active chat avatar",
 			"icon": "fad fa-user-astronaut",
-			"value": true
-		},
-		{
-			"id": "showSnapStreak",
-			"title": "Show active chat SnapStreak",
-			"icon": "fad fa-fire-flame",
 			"value": true
 		}
 	]
