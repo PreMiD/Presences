@@ -65,15 +65,6 @@ presence.on("UpdateData", async () => {
 			];
 		}
 
-		if (buttons) {
-			presenceData.buttons = [
-				{
-					label: "Listen Along",
-					url: `https://music.youtube.com/watch?v=${watchID}`,
-				},
-			];
-		}
-
 		if (video.paused || !timestamps) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
