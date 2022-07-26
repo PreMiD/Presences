@@ -29,10 +29,9 @@ presence.on("UpdateData", async () => {
 				activeChat?.querySelectorAll("div.ovUsZ > span")[4]?.textContent;
 
 		presenceData.details = "Chatting with";
-		presenceData.state =
-			showActiveChatUsername && activeChatUsername
-				? activeChatUsername
-				: "somebody";
+		presenceData.state = showActiveChatUsername
+			? activeChatUsername
+			: "somebody";
 
 		if (showSnapStreak && snapStreak) presenceData.state += ` | ${snapStreak}`;
 
