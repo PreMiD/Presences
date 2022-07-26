@@ -1,12 +1,14 @@
 const presence = new Presence({
 	clientId: "989759189394030613",
-});
+}),
+browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/yjwiBiP.png",
-		startTimestamp: Math.floor(Date.now() / 1000),
+const presenceData: PresenceData = {
+	largeImageKey: "https://i.imgur.com/KtDhLn7.png",
+	startTimestamp: browsingTimestamp,
 	};
+
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the homepage";
 	else if (document.location.pathname.startsWith("/game/")) {
