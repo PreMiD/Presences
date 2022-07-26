@@ -24,10 +24,10 @@
 	],
 	"settings": [
 		{
-		  "id": "privacy",
-		  "title": "Hide map location",
-		  "icon": "fa-duotone fa-shield-halved",
-		  "value": false
+			"id": "privacy",
+			"title": "Hide map location",
+			"icon": "fa-duotone fa-shield-halved",
+			"value": false
 		}
 	]
 }
