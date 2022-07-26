@@ -1,53 +1,89 @@
 const presence = new Presence({
 	clientId: "989759189394030613",
-}),
-browsingTimestamp = Math.floor(Date.now() / 1000);
+});
 
 presence.on("UpdateData", async () => {
-const presenceData: PresenceData = {
-	largeImageKey: "https://i.imgur.com/KtDhLn7.png",
-	startTimestamp: browsingTimestamp,
-};
-
-if (window.location.href.includes("my-games"))
-	presenceData.details = "Viewing their games";
-else if (window.location.href.includes("help"))
-	presenceData.details = "Viewing the help page";
-else if (window.location.href.includes("game"))
-	presenceData.details = "Clicking cells";
-else if (window.location.href.includes("ranking"))
-	presenceData.details = "Viewing the rankings";
-else if (window.location.href.includes("best-players"))
-	presenceData.details = "Viewing the best players";
-else if (window.location.href.includes("season-leaders"))
-	presenceData.details = "Viewing this season's leaders";
-else if (window.location.href.includes("quests"))
-	presenceData.details = "Viewing their quests";
-else if (window.location.href.includes("arena"))
-	presenceData.details = "In the arena";
-else if (window.location.href.includes("equipment"))
-	presenceData.details = "Viewing their equipment";
-else if (window.location.href.includes("marketplace"))
-	presenceData.details = "Viewing the marketplace";
-else if (window.location.href.includes("events"))
-	presenceData.details = "Viewing the event";
-else if (window.location.href.includes("players-online"))
-	presenceData.details = "Viewing players online";
-else if (window.location.href.includes("player"))
-	presenceData.details = "Viewing their profile";
-else if (window.location.href.includes("news"))
-	presenceData.details = "Viewing the news";
-else if (window.location.href.includes("statistics"))
-	presenceData.details = "Viewing statistics";
-else if (window.location.href.includes("chat"))
-	presenceData.details = "Chatting";
-else if (window.location.href.includes("premium"))
-	presenceData.details = "Viewing the premium perks";
-else if (window.location.href.includes("shop"))
-	presenceData.details = "Viewing the shop";
-else if (window.location.href.includes("profile"))
-	presenceData.details = "Managing their account details";
-else presenceData.details = "On the home page";
-
-presence.setActivity(presenceData);
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/yjwiBiP.png",
+		startTimestamp: Math.floor(Date.now() / 1000),
+	};
+	if (document.location.pathname === "/")
+		presenceData.details = "Viewing the homepage";
+	else if (document.location.pathname.startsWith("/game/")) {
+		presenceData.details = "Clicking cells";
+		presenceData.state = `Difficulty: ${document
+			.querySelector<HTMLSpanElement>("a.level-select-link.active > span").textContent}`;
+			presenceData.buttons = [
+				{
+				  label: "Spectate Game",
+				  url: location.href
+				}
+			  ];
+	} else if (document.location.pathname.startsWith("/player/")) {
+		presenceData.details = "Viewing profile";
+		presenceData.state = `${document
+			.querySelector("meta[property='og:title']")
+			.getAttribute("content").replace(' - Minesweeper Online','')}`;
+			presenceData.buttons = [
+				{
+				  label: "View Profile",
+				  url: location.href
+				}
+			  ];
+	} else if (document.location.pathname.startsWith("/ranking/"))
+		presenceData.details = "Viewing the rankings";
+	else {
+		switch (document.location.pathname) {
+			case "/my-games/":
+				presenceData.details = "Viewing their games history";
+				break;
+			case "/best-players/":
+				presenceData.details = "Viewing the best players";
+				break;
+			case "/season-leaders/":
+				presenceData.details = "Viewing this seasons's leaders";
+				break;
+			case "/quests/":
+				presenceData.details = "Viewing their quests";
+				break;
+			case "/arena/":
+				presenceData.details = "In the arena";
+				break;	
+			case "/equipment/":
+				presenceData.details = "Viewing their equipment";
+				break;		
+			case "/marketplace/":
+				presenceData.details = "Viewing the marketplace";
+				break;		
+			case "/events/":
+				presenceData.details = "Viewing the event";
+				break;		
+			case "/players-online/":
+				presenceData.details = "Viewing players online";
+				break;		
+			case "/news/":
+				presenceData.details = "Viewing the news";
+				break;		
+			case "/statistics/":
+				presenceData.details = "Viewing statistics";
+				break;		
+			case "/chat/":
+				presenceData.details = "Chatting";
+				break;		
+			case "/premium/":
+				presenceData.details = "Viewing premium perks";
+				break;	
+				case "/shop/":
+					presenceData.details = "Viewing the shop";
+					break;		
+			case "/help/":
+				presenceData.details = "Viewing the help page";
+				presenceData.state = `${document
+					.querySelector("meta[property='og:title']")
+					.getAttribute("content").replace(' - Minesweeper Online','')}`;	
+				
+		}
+	}
+	presence.setActivity(presenceData);
 });
+		
