@@ -80,12 +80,14 @@ presence.on("UpdateData", async () => {
 			const filmName =
 				document.querySelector<HTMLHeadingElement>("h2.film-name");
 			presenceData.details = "In a room";
+			presenceData.smallImageKey = "https://i.imgur.com/0OIopUE.png";
 			if (filmName) presenceData.state = `Watching ${filmName.textContent}`;
 			if (data && !data.paused) {
 				[, presenceData.endTimestamp] = presence.getTimestamps(
 					data.currTime,
 					data.duration
 				);
+				presenceData.smallImageKey = "https://i.imgur.com/Reh3lIT.png";
 			}
 			if (buttons) {
 				presenceData.buttons = [
@@ -97,19 +99,22 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else if (pathname.startsWith("/watch")) {
+		delete presenceData.startTimestamp;
 		const title = document.querySelector<HTMLDataListElement>(
 				"li.breadcrumb-item.dynamic-name.active"
 			),
-			episode = document.querySelector<HTMLSpanElement>(
-				"span#cm-episode-number"
-			);
+			episode = `Episode ${
+				JSON.parse(document.querySelector('[id="syncData"]').innerHTML).episode
+			}`;
 		if (title) presenceData.details = title.textContent;
-		if (episode) presenceData.state = `Episode ${episode.textContent}`;
+		if (episode.match(/[0-9]/gm)) presenceData.state = episode;
+		presenceData.smallImageKey = "https://i.imgur.com/0OIopUE.png";
 		if (data && !data.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestamps(
 				data.currTime,
 				data.duration
 			);
+			presenceData.smallImageKey = "https://i.imgur.com/Reh3lIT.png";
 		}
 		if (buttons) {
 			presenceData.buttons = [
