@@ -105,6 +105,10 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the shop";
 				break;
 			}
+			case "/profile": {
+				presenceData.details = "Managing their account details";
+				break;
+			}
 		}
 	}
 	presence.setActivity(presenceData);
