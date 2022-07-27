@@ -133,7 +133,13 @@ presence.on("UpdateData", async () => {
 								"input[name=channel_name]"
 							) as HTMLInputElement
 					  )?.value || "Undefined"
-					: `@${document.querySelector("h3")?.textContent || "Undefined"}`,
+					: `@${
+							document.querySelector("[aria-label='Channel header']")
+								?.firstElementChild?.children[2]?.textContent ||
+							document.querySelector("head > title")?.textContent === "Discord"
+								? "undefined"
+								: document.querySelector("head > title")?.textContent
+					  }`,
 				serverTyping =
 					Array.from(
 						document.querySelectorAll("div[contenteditable=true]")
