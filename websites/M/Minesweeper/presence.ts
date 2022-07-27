@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 		{ pathname } = window.location;
 
 	if (document.location.pathname === "/")
-		presenceData.details = "Viewing the homepage";
+		presenceData.details = "Viewing the home page";
 	else if (document.location.pathname.startsWith("/game/")) {
 		presenceData.details = "Clicking cells";
 		presenceData.state = `Difficulty: ${
