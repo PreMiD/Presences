@@ -1,24 +1,23 @@
 const presence = new Presence({
-		clientId: "989759189394030613",
-	}),
+	clientId: "989759189394030613",
+}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/KtDhLn7.png",
-			startTimestamp: browsingTimestamp,
-		},
+		largeImageKey: "https://i.imgur.com/KtDhLn7.png",
+		startTimestamp: browsingTimestamp,
+	},
 		{ pathname } = window.location;
 
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the homepage";
 	else if (document.location.pathname.startsWith("/game/")) {
 		presenceData.details = "Clicking cells";
-		presenceData.state = `Difficulty: ${
-			document.querySelector<HTMLSpanElement>(
-				"a.level-select-link.active > span"
-			).textContent
-		}`;
+		presenceData.state = `Difficulty: ${document.querySelector<HTMLSpanElement>(
+			"a.level-select-link.active > span"
+		).textContent
+			}`;
 		presenceData.buttons = [
 			{
 				label: "Spectate Game",
