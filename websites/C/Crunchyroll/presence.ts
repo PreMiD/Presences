@@ -164,6 +164,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = videoTitle ?? "Title not found...";
 		presenceData.state = episode;
 
+		presenceData.largeImageKey =
+			document.querySelector<HTMLMetaElement>("[property='og:image']")
+				?.content ?? "lg";
 		if (paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
