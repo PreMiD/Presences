@@ -149,7 +149,9 @@ presence.on("UpdateData", async () => {
 });
 
 async function getPages() {
-	const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${"https://homestuck2.com/story/rss"}`),
+	const response = await fetch(
+			`https://api.rss2json.com/v1/api.json?rss_url=${"https://homestuck2.com/story/rss"}`
+		),
 		data = await response.json();
 	return data.items[0].title;
 }
