@@ -10,7 +10,8 @@ let prevTitleAuthor = "",
 	videoListenerAttached = false;
 
 presence.on("UpdateData", async () => {
-	const [
+	const { pathname, search, href } = document.location,
+		[
 			showButtons,
 			showTimestamps,
 			showCover,
@@ -37,16 +38,10 @@ presence.on("UpdateData", async () => {
 
 	if (videoElement) {
 		if (!videoListenerAttached) {
-			const videoListener = () => {
-				mediaTimestamps = presence.getTimestampsfromMedia(videoElement);
-				//* Don't ask me why the above function doesn't floor the end timestamp
-				mediaTimestamps[1] = Math.floor(mediaTimestamps[1]);
-			};
-
 			//* If video scrobbled, update timestamps
-			videoElement.addEventListener("seeked", videoListener);
+			videoElement.addEventListener("seeked", updateSongTimestamps);
 			//* If video resumes playing, update timestamps
-			videoElement.addEventListener("play", videoListener);
+			videoElement.addEventListener("play", updateSongTimestamps);
 
 			videoListenerAttached = true;
 		}
@@ -63,12 +58,12 @@ presence.on("UpdateData", async () => {
 
 	if (["playing", "paused"].includes(mediaSession.playbackState)) {
 		if (privacyMode) {
-			return mediaSession.playbackState === "playing"
-				? presence.setActivity({
-						largeImageKey: "ytm_lg",
-						details: "Listening to music",
-				  })
-				: presence.setActivity();
+			return presence.setActivity({
+				...(mediaSession.playbackState === "playing" && {
+					largeImageKey: "ytm_lg",
+					details: "Listening to music",
+				}),
+			});
 		}
 
 		if (
@@ -80,14 +75,22 @@ presence.on("UpdateData", async () => {
 
 		if (
 			prevTitleAuthor !==
-			mediaSession.metadata.title + mediaSession.metadata.artist
+			mediaSession.metadata.title +
+				mediaSession.metadata.artist +
+				document
+					.querySelector<HTMLSpanElement>("#left-controls > span")
+					.textContent.trim()
 		) {
-			mediaTimestamps = presence.getTimestampsfromMedia(videoElement);
-			//* Don't ask me why the above function doesn't floor the end timestamp
-			mediaTimestamps[1] = Math.floor(mediaTimestamps[1]);
+			updateSongTimestamps();
+
+			if (mediaTimestamps[0] === mediaTimestamps[1]) return;
 
 			prevTitleAuthor =
-				mediaSession.metadata.title + mediaSession.metadata.artist;
+				mediaSession.metadata.title +
+				mediaSession.metadata.artist +
+				document
+					.querySelector<HTMLSpanElement>("#left-controls > span")
+					.textContent.trim();
 		}
 
 		const albumArtistBtnLink = mediaSession.metadata.album
@@ -149,8 +152,8 @@ presence.on("UpdateData", async () => {
 			});
 		}
 
-		if (oldPath !== document.location.pathname) {
-			oldPath = document.location.pathname;
+		if (oldPath !== pathname) {
+			oldPath = pathname;
 			startTimestamp = Math.floor(Date.now() / 1000);
 		}
 
@@ -160,24 +163,21 @@ presence.on("UpdateData", async () => {
 			startTimestamp,
 		};
 
-		if (document.location.pathname === "/")
-			presenceData.details = "Browsing Home...";
+		if (pathname === "/") presenceData.details = "Browsing Home";
 
-		if (document.location.pathname === "/explore")
-			presenceData.details = "Browsing Explore...";
+		if (pathname === "/explore") presenceData.details = "Browsing Explore";
 
-		if (document.location.pathname.match(/\/library\//)) {
+		if (pathname.match(/\/library\//)) {
 			presenceData.details = "Browsing Library:";
 			presenceData.state = document.querySelector(
 				"#tabs .iron-selected .tab"
 			).textContent;
 		}
 
-		if (document.location.pathname.match(/^\/playlist/)) {
+		if (pathname.match(/^\/playlist/)) {
 			presenceData.details = "Browsing Playlist:";
 
-			if (document.location.search === "?list=LM")
-				presenceData.state = "Liked Music";
+			if (search === "?list=LM") presenceData.state = "Liked Music";
 			else {
 				presenceData.state =
 					document.querySelector(".metadata .title").textContent;
@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Show Playlist",
-						url: document.location.href,
+						url: href,
 					},
 				];
 			}
@@ -195,7 +195,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "ytm_lg";
 		}
 
-		if (document.location.pathname.match(/^\/search/)) {
+		if (pathname.match(/^\/search/)) {
 			presenceData.details = "Searching:";
 			presenceData.state = document.querySelector<HTMLInputElement>(
 				".search-container input"
@@ -204,52 +204,52 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `Search ${presenceData.state}`,
-					url: document.location.href,
+					url: href,
 				},
 			];
 		}
 
-		if (document.location.pathname.match(/^\/channel/)) {
+		if (pathname.match(/^\/channel/)) {
 			presenceData.details = "Browsing Channel:";
 			presenceData.state = document.querySelector("#header .title").textContent;
 
 			presenceData.buttons = [
 				{
 					label: "Show Channel",
-					url: document.location.href,
+					url: href,
 				},
 			];
 		}
 
-		if (document.location.pathname.match(/^\/new_releases/)) {
-			presenceData.details = "Browsing New Releases...";
+		if (pathname.match(/^\/new_releases/)) {
+			presenceData.details = "Browsing New Releases";
 
 			presenceData.buttons = [
 				{
 					label: "Show New Releases",
-					url: document.location.href,
+					url: href,
 				},
 			];
 		}
 
-		if (document.location.pathname.match(/^\/charts/)) {
-			presenceData.details = "Browsing Charts...";
+		if (pathname.match(/^\/charts/)) {
+			presenceData.details = "Browsing Charts";
 
 			presenceData.buttons = [
 				{
 					label: "Show Charts",
-					url: document.location.href,
+					url: href,
 				},
 			];
 		}
 
-		if (document.location.pathname.match(/^\/moods_and_genres/)) {
-			presenceData.details = "Browsing Moods & Genres...";
+		if (pathname.match(/^\/moods_and_genres/)) {
+			presenceData.details = "Browsing Moods & Genres";
 
 			presenceData.buttons = [
 				{
 					label: "Show Moods & Genres",
-					url: document.location.href,
+					url: href,
 				},
 			];
 		}
@@ -258,7 +258,18 @@ presence.on("UpdateData", async () => {
 	if (!showBrowsing) return presence.clearActivity();
 
 	//* For some bizarre reason the timestamps are NaN eventho they are never actually set in testing, this spread is a workaround
-	presenceData
-		? presence.setActivity({ ...presenceData })
-		: presence.setActivity();
+	presence.setActivity(presenceData);
 });
+
+function updateSongTimestamps() {
+	const element = document
+			.querySelector<HTMLSpanElement>("#left-controls > span")
+			.textContent.trim(),
+		currTimes = element.match(/(\d{1,2}):(\d{1,2})/),
+		totalTimes = element.match(/(\d{1,2}):(\d{1,2})$/);
+
+	mediaTimestamps = presence.getTimestamps(
+		parseInt(currTimes[1]) * 60 + parseInt(currTimes[2]),
+		parseInt(totalTimes[1]) * 60 + parseInt(totalTimes[2])
+	);
+}
