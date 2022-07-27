@@ -148,9 +148,10 @@ presence.on("UpdateData", async () => {
 	else presence.setActivity();
 });
 
-const rssConverter = `https://api.rss2json.com/v1/api.json?rss_url=${"https://homestuck2.com/story/rss"}`,
-	getPages = async () => {
-		const response = await fetch(rssConverter),
-			data = await response.json();
-		return data.items[0].title;
-	};
+async function getPages() {
+	const response = await fetch(
+			`https://api.rss2json.com/v1/api.json?rss_url=${"https://homestuck2.com/story/rss"}`
+		),
+		data = await response.json();
+	return data.items[0].title;
+}
