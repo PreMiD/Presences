@@ -10,15 +10,21 @@ let prevTitleAuthor = "",
 	videoListenerAttached = false;
 
 presence.on("UpdateData", async () => {
-	const [showButtons, showTimestamps, showCover, hidePaused, showBrowsing,privacyMode] =
-			await Promise.all([
-				presence.getSetting<boolean>("buttons"),
-				presence.getSetting<boolean>("timestamps"),
-				presence.getSetting<boolean>("cover"),
-				presence.getSetting<boolean>("hidePaused"),
-				presence.getSetting<boolean>("browsing"),
-				presence.getSetting<boolean>("privacy"),
-			]),
+	const [
+			showButtons,
+			showTimestamps,
+			showCover,
+			hidePaused,
+			showBrowsing,
+			privacyMode,
+		] = await Promise.all([
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("timestamps"),
+			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("hidePaused"),
+			presence.getSetting<boolean>("browsing"),
+			presence.getSetting<boolean>("privacy"),
+		]),
 		{ mediaSession } = navigator,
 		watchID = document
 			.querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
@@ -35,7 +41,7 @@ presence.on("UpdateData", async () => {
 				mediaTimestamps = presence.getTimestampsfromMedia(videoElement);
 				//* Don't ask me why the above function doesn't floor the end timestamp
 				mediaTimestamps[1] = Math.floor(mediaTimestamps[1]);
-			}
+			};
 
 			//* If video scrobbled, update timestamps
 			videoElement.addEventListener("seeked", videoListener);
@@ -56,10 +62,14 @@ presence.on("UpdateData", async () => {
 		return presence.clearActivity();
 
 	if (["playing", "paused"].includes(mediaSession.playbackState)) {
-		if (privacyMode) return mediaSession.playbackState === "playing" ?presence.setActivity( {
-			largeImageKey: "ytm_lg",
-			details: "Listening to music"
-		}) : presence.setActivity()
+		if (privacyMode) {
+return mediaSession.playbackState === "playing"
+				? presence.setActivity({
+						largeImageKey: "ytm_lg",
+						details: "Listening to music",
+				  })
+				: presence.setActivity();
+}
 
 		if (
 			!mediaSession.metadata?.title ||
@@ -83,20 +93,21 @@ presence.on("UpdateData", async () => {
 		const albumArtistBtnLink = mediaSession.metadata.album
 			? [...document.querySelectorAll<HTMLAnchorElement>(".byline a")].at(-1)
 					?.href
-			: document.querySelector<HTMLAnchorElement>(".byline a")?.href;
+			: document.querySelector<HTMLAnchorElement>(".byline a")?.href,
 
-		const buttons:[ButtonData,ButtonData?] = [
+		 buttons: [ButtonData, ButtonData?] = [
 			{
 				label: "Listen Along",
 				url: `https://music.youtube.com/watch?v=${watchID}`,
-			}
+			},
 		];
 
-		if (albumArtistBtnLink)
-			buttons.push({
+		if (albumArtistBtnLink) {
+buttons.push({
 				label: `View ${mediaSession.metadata.album ? "Album" : "Artist"}`,
 				url: albumArtistBtnLink,
 			});
+}
 
 		presenceData = {
 			largeImageKey: showCover
@@ -132,10 +143,12 @@ presence.on("UpdateData", async () => {
 				}),
 		};
 	} else if (showBrowsing) {
-		if (privacyMode) return presence.setActivity({
-			largeImageKey: "ytm_lg",
-			details: "Browsing YouTube Music"
-		})
+		if (privacyMode) {
+return presence.setActivity({
+				largeImageKey: "ytm_lg",
+				details: "Browsing YouTube Music",
+			});
+}
 
 		if (oldPath !== document.location.pathname) {
 			oldPath = document.location.pathname;
@@ -246,5 +259,7 @@ presence.on("UpdateData", async () => {
 	if (!showBrowsing) return presence.clearActivity();
 
 	//* For some bizarre reason the timestamps are NaN eventho they are never actually set in testing, this spread is a workaround
-	presenceData ? presence.setActivity({...presenceData}) : presence.setActivity();
+	presenceData
+		? presence.setActivity({ ...presenceData })
+		: presence.setActivity();
 });
