@@ -4,15 +4,9 @@
 		"name": "Timeraa",
 		"id": "223238938716798978"
 	},
-	"contributors": [
-		{
-			"name": "Bas950",
-			"id": "241278257335500811"
-		}
-	],
 	"service": "YouTube Music",
 	"description": {
-		"en": "A new music service with official albums, singles, videos, remixes, live performances and more for Android, iOS and desktop. It's all here.",
+		"en": "A music service with official albums, singles, videos, remixes, live performances and more for Android, iOS and desktop. It's all here.",
 		"ro": "Un serviciu nou pentru muzică cu albume oficiale, videoclipuri, remix-uri, perfomanțe live și multe altele pentru Android, iOS și desktop. Toate sunt aici.",
 		"pt_BR": "Um novo serviço de música com albuns oficiais, singles, vídeos, remixes, apresentações ao vivo e mais para Android, iOS e desktop, está tudo aqui.",
 		"fr": "Un nouveau service musical avec des albums officiels, des singles, des vidéos, des remixes, des performances en direct et plus encore pour Android, iOS et desktop. Tout est là.",
@@ -25,7 +19,7 @@
 		"vi_VN": "Một dịch vụ phát nhạc mới với các album, đĩa đơn, video, bản remix, và các tiết mục trực tiếp chính thức và hơn nữa cho Android, iOS và máy tính. Tất cả đều tại đây."
 	},
 	"url": "music.youtube.com",
-	"version": "2.9.3",
+	"version": "3.0.0",
 	"logo": "https://i.imgur.com/31gvH2b.png",
 	"thumbnail": "https://i.imgur.com/iQ8MA50.png",
 	"color": "#E40813",
@@ -36,22 +30,52 @@
 	],
 	"settings": [
 		{
-			"id": "timestamps",
-			"title": "Show timestamps",
-			"icon": "fad fa-stopwatch",
-			"value": true
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-shield-alt",
+			"value": false
 		},
 		{
 			"id": "cover",
 			"title": "Show Cover",
 			"icon": "fad fa-images",
-			"value": true
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "timestamps",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
 		},
 		{
 			"id": "buttons",
 			"title": "Show Buttons",
-			"icon": "fas fa-compress-arrows-alt",
+			"icon": "fad fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "browsing",
+			"title": "Show Browsing",
+			"icon": "fad fa-compass",
 			"value": true
+		},
+		{
+			"id": "hidePaused",
+			"title": "Hide Paused",
+			"icon": "fad fa-pause-circle",
+			"value": false,
+			"if": {
+				"privacy": false
+			}
 		}
 	]
 }
