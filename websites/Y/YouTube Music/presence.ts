@@ -66,12 +66,7 @@ presence.on("UpdateData", async () => {
 			});
 		}
 
-		if (
-			!mediaSession.metadata?.title ||
-			//* Check if the video has a duration
-			isNaN(videoElement.duration)
-		)
-			return;
+		if (!mediaSession.metadata?.title || isNaN(videoElement.duration)) return;
 
 		if (
 			prevTitleAuthor !==
