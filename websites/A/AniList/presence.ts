@@ -13,7 +13,8 @@ presence.on("UpdateData", async () => {
 			startTimestamp,
 		},
 		pathnameArray = document.location.pathname.split("/"),
-		page = pathnameArray[1];
+		page = pathnameArray[1],
+		showCover = await presence.getSetting<boolean>("cover");
 
 	switch (page) {
 		case "":
@@ -22,10 +23,12 @@ presence.on("UpdateData", async () => {
 			break;
 		case "user": {
 			const user = pathnameArray[2];
-			presenceData.largeImageKey = document
-				.querySelector(".avatar")
-				.getAttribute("src");
-			presenceData.smallImageKey = "anilist_lg";
+			if (showCover) {
+				presenceData.largeImageKey = document
+					.querySelector(".avatar")
+					.getAttribute("src");
+				presenceData.smallImageKey = "anilist_lg";
+			}
 			switch (pathnameArray[3]) {
 				case "mangalist":
 					presenceData.details = "Viewing manga list";
@@ -68,9 +71,11 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document
 				.querySelector("div.content > h1")
 				.textContent.trim();
-			presenceData.largeImageKey = document
-				.querySelector(".cover")
-				.getAttribute("src");
+			if (showCover) {
+				presenceData.largeImageKey = document
+					.querySelector(".cover")
+					.getAttribute("src");
+			}
 			presenceData.buttons = [
 				{ label: `View ${page}`, url: document.documentURI },
 			];
@@ -79,9 +84,11 @@ presence.on("UpdateData", async () => {
 		case "staff":
 			presenceData.details = `Viewing a ${page}`;
 			presenceData.state = document.querySelector(".name").textContent.trim();
-			presenceData.largeImageKey = document
-				.querySelector(".image")
-				.getAttribute("src");
+			if (showCover) {
+				presenceData.largeImageKey = document
+					.querySelector(".image")
+					.getAttribute("src");
+			}
 			presenceData.buttons = [
 				{ label: `View ${page}`, url: document.documentURI },
 			];
