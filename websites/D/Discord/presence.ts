@@ -135,7 +135,10 @@ presence.on("UpdateData", async () => {
 					  )?.value || "Undefined"
 					: `@${
 							document.querySelector("[aria-label='Channel header']")
-								?.firstElementChild?.children[2]?.textContent || "Undefined"
+								?.firstElementChild?.children[2]?.textContent ||
+							document.querySelector("head > title")?.textContent === "Discord"
+								? "undefined"
+								: document.querySelector("head > title")?.textContent
 					  }`,
 				serverTyping =
 					Array.from(
