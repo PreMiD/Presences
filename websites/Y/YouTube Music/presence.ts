@@ -63,13 +63,13 @@ presence.on("UpdateData", async () => {
 
 	if (["playing", "paused"].includes(mediaSession.playbackState)) {
 		if (privacyMode) {
-return mediaSession.playbackState === "playing"
+			return mediaSession.playbackState === "playing"
 				? presence.setActivity({
 						largeImageKey: "ytm_lg",
 						details: "Listening to music",
 				  })
 				: presence.setActivity();
-}
+		}
 
 		if (
 			!mediaSession.metadata?.title ||
@@ -91,23 +91,22 @@ return mediaSession.playbackState === "playing"
 		}
 
 		const albumArtistBtnLink = mediaSession.metadata.album
-			? [...document.querySelectorAll<HTMLAnchorElement>(".byline a")].at(-1)
-					?.href
-			: document.querySelector<HTMLAnchorElement>(".byline a")?.href,
-
-		 buttons: [ButtonData, ButtonData?] = [
-			{
-				label: "Listen Along",
-				url: `https://music.youtube.com/watch?v=${watchID}`,
-			},
-		];
+				? [...document.querySelectorAll<HTMLAnchorElement>(".byline a")].at(-1)
+						?.href
+				: document.querySelector<HTMLAnchorElement>(".byline a")?.href,
+			buttons: [ButtonData, ButtonData?] = [
+				{
+					label: "Listen Along",
+					url: `https://music.youtube.com/watch?v=${watchID}`,
+				},
+			];
 
 		if (albumArtistBtnLink) {
-buttons.push({
+			buttons.push({
 				label: `View ${mediaSession.metadata.album ? "Album" : "Artist"}`,
 				url: albumArtistBtnLink,
 			});
-}
+		}
 
 		presenceData = {
 			largeImageKey: showCover
@@ -144,11 +143,11 @@ buttons.push({
 		};
 	} else if (showBrowsing) {
 		if (privacyMode) {
-return presence.setActivity({
+			return presence.setActivity({
 				largeImageKey: "ytm_lg",
 				details: "Browsing YouTube Music",
 			});
-}
+		}
 
 		if (oldPath !== document.location.pathname) {
 			oldPath = document.location.pathname;
