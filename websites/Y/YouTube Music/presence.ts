@@ -52,8 +52,6 @@ presence.on("UpdateData", async () => {
 
 	presenceData = null;
 
-	//TODO Check live stream
-
 	if (hidePaused && mediaSession.playbackState !== "playing")
 		return presence.clearActivity();
 
