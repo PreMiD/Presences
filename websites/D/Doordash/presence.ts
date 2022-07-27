@@ -72,10 +72,10 @@ presence.on("UpdateData", async () => {
 
 			// If there is an active span, set the rpc state to the text of the span
 			if (activeSpan) {
-presenceData.state = `Looking for ${
+				presenceData.state = `Looking for ${
 					(activeSpan as HTMLSpanElement).textContent
 				}`;
-}
+			}
 
 			break;
 		}
