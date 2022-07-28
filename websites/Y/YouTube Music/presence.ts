@@ -163,14 +163,14 @@ presence.on("UpdateData", async () => {
 		if (pathname === "/explore") presenceData.details = "Browsing Explore";
 
 		if (pathname.match(/\/library\//)) {
-			presenceData.details = "Browsing Library:";
+			presenceData.details = "Browsing Library";
 			presenceData.state = document.querySelector(
 				"#tabs .iron-selected .tab"
 			).textContent;
 		}
 
 		if (pathname.match(/^\/playlist/)) {
-			presenceData.details = "Browsing Playlist:";
+			presenceData.details = "Browsing Playlist";
 
 			if (search === "?list=LM") presenceData.state = "Liked Music";
 			else {
@@ -191,21 +191,21 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (pathname.match(/^\/search/)) {
-			presenceData.details = "Searching:";
+			presenceData.details = "Searching";
 			presenceData.state = document.querySelector<HTMLInputElement>(
 				".search-container input"
 			).value;
 
 			presenceData.buttons = [
 				{
-					label: `Search ${presenceData.state}`,
+					label: "View Search",
 					url: href,
 				},
 			];
 		}
 
 		if (pathname.match(/^\/channel/)) {
-			presenceData.details = "Browsing Channel:";
+			presenceData.details = "Browsing Channel";
 			presenceData.state = document.querySelector("#header .title").textContent;
 
 			presenceData.buttons = [
