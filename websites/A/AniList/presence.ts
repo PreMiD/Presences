@@ -28,7 +28,6 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 			break;
 		case "user": {
-			const user = pathnameArray[2];
 			if (showCover) {
 				presenceData.largeImageKey = document
 					.querySelector(".avatar")
@@ -57,11 +56,11 @@ presence.on("UpdateData", async () => {
 				default:
 					presenceData.details = "Viewing profile";
 			}
-			presenceData.state = `from ${user}`;
+			presenceData.state = `from ${pathnameArray[2]}`;
 			presenceData.buttons = [
 				{
 					label: "View user's page",
-					url: `https://anilist.co/user/${user}`,
+					url: document.location.href.replace(pathnameArray[3], ""),
 				},
 			];
 			break;
