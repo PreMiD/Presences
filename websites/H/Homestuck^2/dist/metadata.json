@@ -9,10 +9,10 @@
 		"en": "The Homestuck^2 website hosts the official continuation of the popular MSPaintAdventure Homestuck and all Patreon-driven bonus content."
 	},
 	"url": [
-		"www.homestuck2.com", 
+		"www.homestuck2.com",
 		"homestuck2.com"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/wYCAFtE.png",
 	"thumbnail": "https://i.imgur.com/bnnYvGO.png",
 	"color": "#f2a400",
