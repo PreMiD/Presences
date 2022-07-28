@@ -27,7 +27,7 @@
 		"www.crunchyroll.com",
 		"beta.crunchyroll.com"
 	],
-	"version": "2.8.0",
+	"version": "2.9.0",
 	"logo": "https://i.imgur.com/LpTKP8c.png",
 	"thumbnail": "https://i.imgur.com/hzM7YCb.png",
 	"color": "#f47521",
@@ -42,6 +42,12 @@
 		{
 			"id": "lang",
 			"multiLanguage": true
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
 		}
 	]
 }
