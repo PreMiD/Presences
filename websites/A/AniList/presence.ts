@@ -82,7 +82,10 @@ presence.on("UpdateData", async () => {
 					.getAttribute("src");
 			}
 			presenceData.buttons = [
-				{ label: `View ${page}`, url: document.location.href },
+				{
+					label: page === "anime" ? "View anime" : "View manga",
+					url: document.location.href,
+				},
 			];
 			break;
 		case "character":
@@ -95,7 +98,10 @@ presence.on("UpdateData", async () => {
 					.getAttribute("src");
 			}
 			presenceData.buttons = [
-				{ label: `View ${page}`, url: document.location.href },
+				{
+					label: page === "character" ? "View character" : "View staff",
+					url: document.location.href,
+				},
 			];
 			break;
 		case "forum":
