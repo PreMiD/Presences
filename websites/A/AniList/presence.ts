@@ -1,11 +1,16 @@
 const presence: Presence = new Presence({
 		clientId: "614220272790274199",
 	}),
-	startTimestamp: number = Math.floor(Date.now() / 1000),
-	strings = presence.getStrings({
+	startTimestamp: number = Math.floor(Date.now() / 1000);
+
+async function getStrings() {
+	return presence.getStrings({
 		browsing: "presence.activity.browsing",
 		reading: "presence.activity.reading",
 	});
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -15,10 +20,11 @@ presence.on("UpdateData", async () => {
 		pathnameArray = document.location.pathname.split("/"),
 		page = pathnameArray[1],
 		showCover = await presence.getSetting<boolean>("cover");
+	strings = await getStrings();
 
 	switch (page) {
 		case "":
-			presenceData.details = (await strings).browsing;
+			presenceData.details = strings.browsing;
 			presenceData.state = "Home";
 			break;
 		case "user": {
@@ -54,7 +60,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `from ${user}`;
 			presenceData.buttons = [
 				{
-					label: `View ${user}'s page`,
+					label: "View user's page",
 					url: `https://anilist.co/user/${user}`,
 				},
 			];
@@ -77,7 +83,7 @@ presence.on("UpdateData", async () => {
 					.getAttribute("src");
 			}
 			presenceData.buttons = [
-				{ label: `View ${page}`, url: document.documentURI },
+				{ label: `View ${page}`, url: document.location.href },
 			];
 			break;
 		case "character":
@@ -90,7 +96,7 @@ presence.on("UpdateData", async () => {
 					.getAttribute("src");
 			}
 			presenceData.buttons = [
-				{ label: `View ${page}`, url: document.documentURI },
+				{ label: `View ${page}`, url: document.location.href },
 			];
 			break;
 		case "forum":
@@ -100,7 +106,7 @@ presence.on("UpdateData", async () => {
 					.querySelector("h1.title")
 					.textContent.trim()}'`;
 				presenceData.smallImageKey = "reading";
-				presenceData.smallImageText = (await strings).reading;
+				presenceData.smallImageText = strings.reading;
 			} else presenceData.details = "Browsing the forum";
 			break;
 		case "studio":
@@ -120,7 +126,7 @@ presence.on("UpdateData", async () => {
 				.textContent.trim()
 				.replace("a review ", "")}`;
 			presenceData.smallImageKey = "reading";
-			presenceData.smallImageText = (await strings).reading;
+			presenceData.smallImageText = strings.reading;
 			break;
 		case "recommendations":
 			presenceData.details = "Browsing recommendations";
