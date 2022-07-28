@@ -97,6 +97,7 @@ function fetchClientConfig(
 		}));
 }
 async function fetchCoverAndTitle() {
+	console.log("fetching");
 	const accessToken = await fetchToken(),
 		{ routeKey, countryCode } = await fetchClientConfig(accessToken);
 
@@ -118,6 +119,7 @@ async function fetchCoverAndTitle() {
 			response[0].body.references.series.match(/series:([^:]+)/)[1]
 		}/tileburnedin?size=1024x1024`;
 		titles = response[0].body.titles.short;
+		titles2 = titles.replace(/S[0-9]*:E[0-9]*/gm, "");
 	} catch {
 		output = "lg";
 	}
@@ -150,8 +152,6 @@ presence.on("UpdateData", async () => {
 			timestamps = presence.getTimestampsfromMedia(video);
 
 			Object.assign(presenceData, {
-				details: titles ?? "Unknown title",
-				state: titles2 ?? "Watching movie",
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause
@@ -170,10 +170,12 @@ presence.on("UpdateData", async () => {
 					const episodeId = location.pathname.match(/:episode:([^:]+)/)[1];
 
 					if (isFetching) return;
-					await fetchCoverAndTitle();
+					if (!coverUrls[episodeId] || !titles || !titles2)
+						await fetchCoverAndTitle();
 					coverUrls[episodeId] ??= output;
-					titles2 = titles.replace(/S[0-9]*:E[0-9]*/gm, "");
 					titles = titles.replace(titles2, "");
+					presenceData.details = titles ?? "Unknown title";
+					presenceData.state = titles2 ?? "Watching movie";
 
 					presenceData.largeImageKey = coverUrls[episodeId];
 				}
