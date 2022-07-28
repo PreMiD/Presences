@@ -97,7 +97,6 @@ function fetchClientConfig(
 		}));
 }
 async function fetchCoverAndTitle() {
-	console.log("fetching");
 	const accessToken = await fetchToken(),
 		{ routeKey, countryCode } = await fetchClientConfig(accessToken);
 
