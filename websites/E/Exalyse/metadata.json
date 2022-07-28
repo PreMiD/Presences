@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "author": {
+    "name": "Janast",
+    "id": "780035705287999539"
+  },
+  "contributors": [
+    {
+      "name": "Ghazera",
+      "id": "663494703060353045"
+    }
+  ],
+  "service": "SERVICE",
+  "altnames": ["SERVICE"],
+  "description": {
+    "en": "Exalyse is a French and free streaming platform",
+    "fr": "Exalyse est une plateforme de streaming et de lecture en ligne française et gratuite",
+    "de": "Exalyse ist eine französische und freie Streaming-Plattform",
+    "es": "Exalyse es una plataforma de streaming y lectura en línea francesa y gratuita",
+    "it": "Exalyse è una piattaforma di streaming e lettura in linea francese e gratuita",
+    "pt": "Exalyse é uma plataforma de streaming e leitura livre em francês e gratuita",
+    "ja": "Exalyseはフランスのフリーストリーミングプラットフォームです",
+    "ko": "Exalyse는 불법적인 스트리밍 서비스입니다",
+    "zh": "Exalyse是一个法国和免费的流媒体平台",
+    "ar": "Exalyse هو منصة تحميل وتشغيل تجارية إنجليزية ومجانية",
+    "hi": "Exalyse है जिसकी मुक्त स्ट्रीमिंग और लाइन प्रदान के लिए है",
+    "ru": "Exalyse - платформа для просмотра и подключения к платным трансляциям в Франции"
+  },
+  "url": "exalyse.xyz",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/CzzzqAW.gif",
+  "thumbnail": "https://i.imgur.com/Omhvvt8.png",
+  "color": "#8B3DF8",
+  "tags": ["streaming"],
+  "category": "videos",
+  "regExp": "REGEXP",
+  "iFrameRegExp": "REGEXP",
+  "iframe": false,
+  "readLogs": false,
+  "settings": []
+}
