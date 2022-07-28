@@ -59,7 +59,10 @@ presence.on("iFrameData", (data: iFrameData) => {
 });
 
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
+	const [newLang, showCover] = await Promise.all([
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("cover"),
+	]);
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
@@ -164,9 +167,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = videoTitle ?? "Title not found...";
 		presenceData.state = episode;
 
-		presenceData.largeImageKey =
-			document.querySelector<HTMLMetaElement>("[property='og:image']")
-				?.content ?? "lg";
+		if (showCover) {
+			presenceData.largeImageKey =
+				document.querySelector<HTMLMetaElement>("[property='og:image']")
+					?.content ?? "lg";
+		}
 		if (paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
