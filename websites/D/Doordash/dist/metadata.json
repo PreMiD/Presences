@@ -10,7 +10,7 @@
 	},
 	"url": "www.doordash.com",
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/Y1Yj7ue.png",
+	"logo": "https://i.imgur.com/Kif7kro.png",
 	"thumbnail": "https://i.imgur.com/Sc5sj8U.jpg",
 	"color": "#ff3008",
 	"category": "other",
@@ -22,12 +22,12 @@
 	"settings": [
 		{
 			"id": "hideFood",
-			"title": "Hidden Food Items",
+			"title": "Hide Food Selection",
 			"value": false
 		},
 		{
 			"id": "hideSearch",
-			"title": "Don't show searches",
+			"title": "Hide Search Results",
 			"value": false
 		}
 	]
