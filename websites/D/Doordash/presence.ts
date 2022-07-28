@@ -9,10 +9,6 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: started,
 		};
-
-	// If they're using includes statements, it means the page is not a static page (like home, orders, etc.)
-
-	// Store page
 	if (path.includes("/store/") && !path.includes("/search/")) {
 		const name = document.querySelector<HTMLSpanElement>(
 				"h1.styles__TextElement-sc-1jrzcv7-0"
@@ -44,8 +40,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Viewing the menu of ${name}`;
 			presenceData.smallImageKey = image.src;
 		}
-
-		// Search page
 	} else if (path.includes("/search/store/")) {
 		const hideSearch = await presence.getSetting<boolean>("hideSearch");
 		if (!hideSearch) {
@@ -58,19 +52,16 @@ presence.on("UpdateData", async () => {
 	}
 
 	switch (path) {
-		// Home page
 		case "/": {
 			presenceData.details = "Browsing Doordash";
 			let activeSpan;
 
 			const spanArray = Array.from(document.querySelectorAll(".sc-hFLmAl"));
 
-			for (const span of spanArray) {
-				// If the color is red, it's the active one, so set it
+			for (const span of spanArray) 
 				if (span.attributes[1].value === "#EB1700") activeSpan = span;
-			}
+			
 
-			// If there is an active span, set the rpc state to the text of the span
 			if (activeSpan) {
 				presenceData.state = `Looking for ${
 					(activeSpan as HTMLSpanElement).textContent
@@ -79,17 +70,14 @@ presence.on("UpdateData", async () => {
 
 			break;
 		}
-		// Orders page
 		case "/orders": {
 			presenceData.details = "Viewing their orders";
 			break;
 		}
-		// Edit profile page
 		case "/consumer/edit_profile/": {
 			presenceData.details = "Editing their profile";
 			break;
 		}
-		// Saved stores page
 		case "/saved-stores/": {
 			presenceData.details = "Viewing their saved stores";
 			break;
