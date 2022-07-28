@@ -154,7 +154,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData = {
 			largeImageKey: "ytm_lg",
-			details: "Browsing...",
+			details: "Browsing",
 			startTimestamp,
 		};
 
