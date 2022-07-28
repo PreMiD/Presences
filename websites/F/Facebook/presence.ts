@@ -224,6 +224,29 @@ presence.on("UpdateData", async () => {
 				} else presenceData.details = "Groups";
 			}
 		}
+	} else if (
+		document.querySelector('[aria-label="Link to open profile cover photo"]') ||
+		document.querySelector('[style*="padding-top: 37"]') ||
+		document.querySelector('[style*="padding-top:37"]')
+	) {
+		const selected = document.querySelector(
+				"[style='background-color: var(--accent);']"
+			)?.parentElement?.textContent,
+			profileUsername = document
+				.querySelector("head > title")
+				.innerHTML.replace(/(\(.*\))/gm, "")
+				.replace("| Facebook", "")
+				.trim();
+		if (
+			document
+				.querySelector('[role="banner"]')
+				.children[1]?.getAttribute("aria-hidden") === "false"
+		) {
+			if (privacyMode) presenceData.details = "Viewing Profile";
+			else if (selected)
+				presenceData.details = `Viewing ${profileUsername}'s ${selected}`;
+			else presenceData.details = `Viewing ${profileUsername}'s Profile`;
+		}
 	} else if (document.location.pathname.includes("/friends")) {
 		presenceData.details = "Friends";
 
