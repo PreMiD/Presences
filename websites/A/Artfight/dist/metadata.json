@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "RisingSunLight",
+		"id": "240521747852558347"
+	},
+	"service": "Artfight",
+	"description": {
+		"en": "An art trading game"},
+	"url": "artfight.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/eABLEqd.jpg",
+	"thumbnail": "https://i.imgur.com/6YslHn6.jpg",
+	"color": "#a65178",
+	"category": "other",
+	"tags": [
+		"artfight",
+		"art",
+		"drawing",
+		"game"
+	]
+}
