@@ -12,9 +12,9 @@
 	},
 	"url": "fandom.com",
 	"regExp": "[a-z0-9-]+[.]fandom[.]com[/]",
-	"version": "1.2.16",
-	"logo": "https://i.imgur.com/sko4P3c.png",
-	"thumbnail": "https://i.imgur.com/VrVSD2b.png",
+	"version": "1.3.0",
+	"logo": "https://i.imgur.com/85TFVjV.png",
+	"thumbnail": "https://i.imgur.com/u7dHJxM.png",
 	"color": "#002A32",
 	"category": "other",
 	"tags": [
@@ -28,5 +28,19 @@
 		"tv",
 		"movies",
 		"anime"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		}
 	]
 }
