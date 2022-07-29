@@ -1,13 +1,22 @@
 const presence = new Presence({
-		clientId: "883446187099840562",
-	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		live: "general.live",
-	});
+	clientId: "883446187099840562",
+});
 
-let channel: string, channelTimestamp: number;
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			live: "general.live",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let channel: string,
+	channelTimestamp: number,
+	strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
@@ -68,7 +77,8 @@ presence.on("UpdateData", async () => {
 				details: "Browsing Kids Content",
 			},
 		},
-		[logo, timestamps] = await Promise.all([
+		[newLang, logo, timestamps] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("logo"),
 			presence.getSetting<boolean>("timestamps"),
 		]);
@@ -76,6 +86,11 @@ presence.on("UpdateData", async () => {
 	for (const [path, data] of Object.entries(pages)) {
 		if (document.location.hash.includes(path))
 			presenceData = { ...presenceData, ...data };
+	}
+
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
 	}
 
 	if (document.querySelector<HTMLDivElement>("div[ng-if='showPlayer']")) {
@@ -109,9 +124,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = channelTimestamp;
 
 				presenceData.smallImageKey = paused ? "pause" : "live";
-				presenceData.smallImageText = paused
-					? (await strings).pause
-					: (await strings).live;
+				presenceData.smallImageText = paused ? strings.pause : strings.live;
 			} else {
 				// Replay / Timeshift
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -126,9 +139,7 @@ presence.on("UpdateData", async () => {
 					);
 
 				presenceData.smallImageKey = paused ? "pause" : "play";
-				presenceData.smallImageText = paused
-					? (await strings).pause
-					: (await strings).play;
+				presenceData.smallImageText = paused ? strings.pause : strings.play;
 			}
 			channel = presenceData.state;
 		} else {
@@ -183,9 +194,7 @@ presence.on("UpdateData", async () => {
 				.pop();
 
 			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused
-				? (await strings).pause
-				: (await strings).play;
+			presenceData.smallImageText = paused ? strings.pause : strings.play;
 		}
 
 		if (paused || !timestamps) {

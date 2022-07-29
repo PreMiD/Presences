@@ -26,6 +26,10 @@
 	],
 	"settings": [
 		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
 			"id": "logo",
 			"title": "Show Channel Logo",
 			"icon": "fad fa-images",
