@@ -46,16 +46,10 @@
 		"donate.wikimedia.org",
 		"wikispore.wmflabs.org"
 	],
-	"version": "1.0.8",
+	"version": "1.1.0",
 	"logo": "https://i.imgur.com/M58Pucd.png",
 	"thumbnail": "https://i.imgur.com/keAOFru.png",
 	"color": "#000000",
 	"category": "other",
-	"tags": [
-		"encyclopedia",
-		"wiki",
-		"wikimedia-foundation",
-		"wikimedia",
-		"wmf"
-	]
+	"tags": ["encyclopedia", "wiki", "wikimedia-foundation", "wikimedia", "wmf"]
 }
