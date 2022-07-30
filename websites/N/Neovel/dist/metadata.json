@@ -18,10 +18,10 @@
 		"fr.neopload.neovel.io",
 		"es.neopload.neovel.io"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/CYk2ZDX.jpg",
 	"thumbnail": "https://i.imgur.com/Ei5H8Zz.jpg",
-	"color": "#f576ab",
+	"color": "#041a26",
 	"category": "other",
 	"tags": [
 		"read",
