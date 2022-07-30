@@ -5,26 +5,20 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/12lTZIs.png",
+			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = window.location;
+		{ pathname, href } = window.location;
 
-	if (document.location.pathname === "/")
+	if (pathname === "/")
 		presenceData.details = "Browsing the dictionary";
 	else if (document.location.pathname.startsWith("/dictionary/")) {
 		presenceData.details = "Viewing definitions";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" Definition & Meaning - Merriam-Webster", "")
-			.replace(
-				" - Definition and More from the Free Merriam-Webster Dictionary",
-				""
-			)}`;
+		presenceData.state = document.querySelector("#left-content > div:nth-child(2) > div:nth-child(1) > h1").textContent
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/word-games/")) {
@@ -38,19 +32,16 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Play",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/word-of-the-day")) {
 		presenceData.details = "Viewing the word of the day";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace("Word of the Day: ", "")
-			.replace(" | Merriam-Webster", "")}`;
+		presenceData.state = document.querySelector('[class="word-and-pronunciation"]').firstElementChild.textContent
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/words-at-play/")) {
@@ -61,7 +52,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Post",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/reviews/")) {
@@ -72,7 +63,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Review",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/video/")) {
@@ -83,7 +74,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Watch Video",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/thesaurus/")) {
@@ -98,7 +89,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/help/")) {
@@ -109,7 +100,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/vocabulary/")) {
@@ -120,7 +111,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/browse/legal/")) {
@@ -131,7 +122,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/browse/medical/")) {
@@ -142,7 +133,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/legal/")) {
@@ -156,7 +147,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/medical/")) {
@@ -170,7 +161,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/about-us/")) {
@@ -181,7 +172,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/contact-us/")) {
@@ -192,7 +183,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: location.href,
+				url: href,
 			},
 		];
 	} else {
