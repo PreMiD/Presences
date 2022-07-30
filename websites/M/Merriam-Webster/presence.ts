@@ -27,12 +27,9 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/word-games/")) {
 		presenceData.details = "Playing a word game";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" | Merriam-Webster Games And Quizzes", "")
-			.replace(" | Merriam-Webster Games & Quizzes", "")
-			.replace(" - Word Game | Merriam-Webster", "")
-			.replace(" | Merriam-Webster", "")}`;
+		presenceData.state = document.querySelector(
+			'[class="play-title"]'
+		).textContent;
 		presenceData.buttons = [
 			{
 				label: "Play",
@@ -52,9 +49,8 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/words-at-play/")) {
 		presenceData.details = "Reading post";
-		presenceData.state = `${document
-			.querySelector("meta[property='og:title']")
-			.getAttribute("content")}`;
+		presenceData.state =
+			document.querySelector('[class="title-lg"]').textContent;
 		presenceData.buttons = [
 			{
 				label: "View Post",
@@ -63,9 +59,9 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/reviews/")) {
 		presenceData.details = "Reading a review";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" | Reviews by Merriam-Webster", "")}`;
+		presenceData.state = document.querySelector(
+			'[class="text-center"]'
+		).textContent;
 		presenceData.buttons = [
 			{
 				label: "View Review",
@@ -74,9 +70,11 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/video/")) {
 		presenceData.details = "Watching a video";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" (Video) | Merriam-Webster", "")}`;
+		presenceData.state = `${
+			document.querySelector(
+				"body > div.outer-container > div > div.full-cnt.clearfix.bg-white.padding-lr-0p8em > main > div > div > div.play-text-content > h1"
+			).textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "Watch Video",
@@ -84,10 +82,9 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (document.location.pathname.startsWith("/thesaurus/")) {
-		const word = document
-			.querySelector("meta[name='twitter:title']")
-			.getAttribute("content")
-			.replace("Thesaurus results for ", "");
+		const word = document.querySelector(
+			"#left-content > div.row.entry-header.thesaurus > div:nth-child(1) > h1"
+		).textContent;
 		presenceData.details = "Viewing synonyms";
 		presenceData.state = `${
 			word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
@@ -100,9 +97,9 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/help/")) {
 		presenceData.details = "Viewing the help page";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" | Merriam-Webster", "")}`;
+		presenceData.state = `${
+			document.querySelector("#static_pg_container > section > h2").textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Page",
@@ -112,8 +109,8 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/vocabulary/")) {
 		presenceData.details = "Viewing vocabulary learning lists";
 		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" | Merriam-Webster", "")}`;
+			.querySelector("meta[name='og:title']")
+			.getAttribute("content")}`;
 		presenceData.buttons = [
 			{
 				label: "View Page",
@@ -122,9 +119,11 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/browse/legal/")) {
 		presenceData.details = "Browsing the law dictionary";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(": Browse the Dictionary | Merriam-Webster", "")}`;
+		presenceData.state = `${
+			document.querySelector(
+				"body > div.outer-container > div > div.main-wrapper.clearfix > div.univ-title-container > h1"
+			).textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Page",
@@ -133,9 +132,11 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/browse/medical/")) {
 		presenceData.details = "Browsing the medical dictionary";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(": Browse the Dictionary | Merriam-Webster", "")}`;
+		presenceData.state = `${
+			document.querySelector(
+				"body > div.outer-container > div > div.main-wrapper.clearfix > div.univ-title-container > h1"
+			).textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Page",
@@ -144,12 +145,11 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/legal/")) {
 		presenceData.details = "Viewing legal definition";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(
-				" Definition & Meaning | Merriam-Webster Legal",
-				""
-			)}`;
+		presenceData.state = `${
+			document.querySelector(
+				"#left-content > div.row.entry-header.long-headword > div:nth-child(1) > h1 > span"
+			).textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Page",
@@ -157,13 +157,13 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (document.location.pathname.startsWith("/medical/")) {
+		const word = document.querySelector(
+			"#left-content > div.row.entry-header.long-headword > div:nth-child(1) > h1 > span"
+		).textContent;
 		presenceData.details = "Viewing medical definition";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(
-				" Definition & Meaning | Merriam-Webster Medical",
-				""
-			)}`;
+		presenceData.state = `${
+			word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Page",
@@ -172,20 +172,11 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/about-us/")) {
 		presenceData.details = "Viewing the about page";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" | Merriam-Webster", "")}`;
-		presenceData.buttons = [
-			{
-				label: "View Page",
-				url: href,
-			},
-		];
-	} else if (document.location.pathname.startsWith("/contact-us/")) {
-		presenceData.details = "Viewing the contact page";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" | Merriam-Webster", "")}`;
+		presenceData.state = `${
+			document.querySelector(
+				"body > div.outer-container > div > div.main-wrapper.clearfix > div.univ-title-container > h1"
+			).textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Page",
