@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "643762072626266125"
+		clientId: "643762072626266125",
 	}),
 	pages: { [key: string]: string } = {
 		"/": "Ana Sayfa",
@@ -12,7 +12,7 @@ const presence = new Presence({
 		"/iletisim": "İletişim",
 		"/reklam": "Reklam",
 		"/sub-etha": "sub-etha",
-		"/modlog": "Modlog"
+		"/modlog": "Modlog",
 	};
 
 presence.on("UpdateData", async () => {
@@ -26,14 +26,14 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "es-logo",
 			details: "Biri'ne göz atıyor:",
 			state: who && who.textContent ? who.textContent : "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/ayarlar/")) {
 		presence.setActivity({
 			largeImageKey: "es-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ayarlar",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (document.location.search.includes("?q=")) {
 		presence.setActivity({
@@ -41,21 +41,21 @@ presence.on("UpdateData", async () => {
 			details: "Bir şey arıyor:",
 			state: entry && entry.textContent ? entry.textContent : "Belirsiz",
 			smallImageKey: "search",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
 			largeImageKey: "es-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (entry && entry.textContent !== "") {
 		presence.setActivity({
 			largeImageKey: "es-logo",
 			details: "Bir entry'e göz atıyor:",
 			state: entry.textContent,
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 });

@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "768028596035649536"
+	clientId: "768028596035649536",
 });
 
 let roomName: string,
@@ -110,9 +110,9 @@ presence.on("UpdateData", async () => {
 				? "Listening..."
 				: "Disconnected"
 			: userState,
-		details: roomName ? roomName : userState,
+		details: roomName ?? userState,
 		state: inCall ? `${userCount} users` : roomName ? userState : null,
-		startTimestamp: joinedRoomTimestamp ? joinedRoomTimestamp : Date.now()
+		startTimestamp: joinedRoomTimestamp ?? Date.now(),
 	};
 
 	if (!presenceData.details) delete presenceData.details;

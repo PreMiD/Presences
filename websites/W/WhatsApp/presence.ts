@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "628019683718856714"
+		clientId: "628019683718856714",
 	}),
 	getSettings = async (): Promise<{
 		showRecipient: boolean;
 		showNumbers: boolean;
 	}> => ({
 		showRecipient: await presence.getSetting<boolean>("showRecipient"),
-		showNumbers: await presence.getSetting<boolean>("showNumbers")
+		showNumbers: await presence.getSetting<boolean>("showNumbers"),
 	});
 
 presence.on("UpdateData", async () => {
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 				(typing?.textContent && "Typing...") ||
 				(typing === null && "No type permission.") ||
 				"Just waiting...",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 });

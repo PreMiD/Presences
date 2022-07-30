@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "639534386538348565"
+		clientId: "639534386538348565",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 let timestamps: number[],
@@ -35,12 +35,12 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lr"
+			largeImageKey: "lr",
 		},
 		[sGlobalRepeat, sFormatRepeat, sFormatGlobalRepeat] = await Promise.all([
 			presence.getSetting<boolean>("sGlobalRepeat"),
 			presence.getSetting<string>("sFormatRepeat"),
-			presence.getSetting<string>("sFormatGlobalRepeat")
+			presence.getSetting<string>("sFormatGlobalRepeat"),
 		]),
 		//TODO language selector and translation strings
 		repeatsTrans = "Repeats",

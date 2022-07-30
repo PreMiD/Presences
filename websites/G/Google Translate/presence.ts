@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "705033229719175179"
+	clientId: "705033229719175179",
 });
 
 function languageCode(language: string): string {
@@ -489,7 +489,7 @@ presence.on("UpdateData", async () => {
 		tDetail = await presence.getSetting<string>("tDetail"),
 		tState = await presence.getSetting<string>("tState"),
 		presenceData: PresenceData = {
-			largeImageKey: "gt"
+			largeImageKey: "gt",
 		};
 
 	if (document.location.href.includes("about")) {

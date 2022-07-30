@@ -1,12 +1,12 @@
 const presence: Presence = new Presence({
-		clientId: "966643093308837938"
+		clientId: "966643093308837938",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "tmdb_logo_lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location;
 

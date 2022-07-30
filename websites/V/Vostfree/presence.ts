@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "925799512205844490"
+		clientId: "925799512205844490",
 	}),
 	path = document.location.pathname,
 	browsingStamp = Math.floor(Date.now() / 1000),
@@ -12,7 +12,7 @@ const presence = new Presence({
 let video = {
 	duration: 0,
 	currentTime: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -25,11 +25,11 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingStamp
+			startTimestamp: browsingStamp,
 		},
 		[privacy, button] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("button")
+			presence.getSetting<boolean>("button"),
 		]),
 		title = document.querySelector(
 			"#dle-content > div.watch-top > div > div > div > div.slide-middle > h1"
@@ -46,8 +46,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Regarder l'épisode",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused ? "En pause" : "En cours";

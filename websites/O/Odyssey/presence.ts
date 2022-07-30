@@ -1,17 +1,17 @@
 const presence = new Presence({
-		clientId: "970659747021877318"
+		clientId: "970659747021877318",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		page = window.location.pathname,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 	if (privacy) presenceData.details = "Browsing...";
 	else if (document.location.hostname.includes("store")) {
@@ -28,8 +28,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Category",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			}
 			presenceData.details = document

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "836534947170353173"
+		clientId: "836534947170353173",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
 	if (pathname === "/genshin/") presenceData.details = "Viewing the Homepage";
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 			).textContent
 		}`;
 		presenceData.buttons = [
-			{ label: "Visit Article", url: window.location.href }
+			{ label: "Visit Article", url: window.location.href },
 		];
 	} else if (pathname.endsWith("/topic"))
 		presenceData.details = "Browsing topics";

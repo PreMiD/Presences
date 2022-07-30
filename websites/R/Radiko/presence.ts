@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "736620343279484959"
+		clientId: "736620343279484959",
 	}),
 	_preStrings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		browsing: "presence.activity.browsing",
 	});
 
 // Pre-declare variable
@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 	// code
 	const preStrings = await _preStrings,
 		presenceData: PresenceData = {
-			largeImageKey: "largeimage"
+			largeImageKey: "largeimage",
 		};
 
 	// In Radio

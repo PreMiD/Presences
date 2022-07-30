@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "607352899214901248"
+		clientId: "607352899214901248",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 presence.on("UpdateData", async () => {
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 					smallImageText: video.paused
 						? (await strings).pause
 						: (await strings).play,
-					endTimestamp: presence.getTimestampsfromMedia(video)[1]
+					endTimestamp: presence.getTimestampsfromMedia(video)[1],
 				};
 
 			//* Remove timestamps if paused or not show timestamps

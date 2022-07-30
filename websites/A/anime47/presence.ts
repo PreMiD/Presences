@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "640990409224486971"
+		clientId: "640990409224486971",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -30,7 +30,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 			iFrameVideo,
 			paused,
 			currTime: currentTime,
-			dur: duration
+			dur: duration,
 		} = data.iframeVideo);
 	}
 });
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 		),
 		presenceData: PresenceData = {
 			largeImageKey: "anime47",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (

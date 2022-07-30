@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "850295838361649153"
+		clientId: "850295838361649153",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing Main page";
@@ -25,8 +25,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View the Stats",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (document.location.pathname.includes("/stats/")) {
 		if (
@@ -78,8 +78,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View the Item",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 			presenceData.state = (
 				document.querySelector(
@@ -120,8 +120,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View the Profile",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (document.location.pathname.includes("/profiles/")) {
 		presenceData.details = "Viewing a profile page:";
@@ -139,8 +139,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View the Profile",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (document.location.pathname.includes("/friends/")) {
 		presenceData.details = "Viewing a profile page:";
@@ -158,8 +158,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View the Profile",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (document.location.pathname.includes("/unusual/")) {
 		presenceData.details = "Viewing Unusual Pricelist:";
@@ -233,8 +233,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View the Classifieds",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (document.location.pathname.includes("/suggestion/")) {
 		presenceData.details = "Searching through:";
@@ -242,8 +242,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View the Suggestions",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (document.location.pathname.includes("/about")) {
 		presenceData.details = "Viewing page:";

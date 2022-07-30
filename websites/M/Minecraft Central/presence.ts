@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "693097839424831489"
+		clientId: "693097839424831489",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement | Element, thread: HTMLElement | Element;
@@ -7,7 +7,7 @@ let user: HTMLElement | Element, thread: HTMLElement | Element;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "mccentrallogo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "mccentral.org") {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "798139973240225812"
+		clientId: "798139973240225812",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ let course, sub: string;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "eldiru.unsoed.ac.id") {

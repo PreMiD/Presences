@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "918904479888334968"
+		clientId: "918904479888334968",
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "scrap-logo",
-		startTimestamp: browsingStamp
+		startTimestamp: browsingStamp,
 	};
 
 	if (document.location.pathname === "/")

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "633637979952250881"
+		clientId: "633637979952250881",
 	}),
 	{ pathname } = window.location,
 	{ hostname } = window.location,
@@ -27,10 +27,10 @@ presence.on("UpdateData", async () => {
 	const strings = await presence.getStrings({
 			playing: "presence.playback.playing",
 			paused: "presence.playback.paused",
-			browsing: "presence.activity.browsing"
+			browsing: "presence.activity.browsing",
 		}),
 		presenceData: PresenceData = {
-			largeImageKey: "animedao_lg"
+			largeImageKey: "animedao_lg",
 		};
 	if (pathname.startsWith("/view/")) {
 		const title: string = document.querySelector("h2").textContent.trim();

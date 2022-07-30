@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "934462939417673770"
+		clientId: "934462939417673770",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			details: "Browsing...",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		productName = document.querySelector<HTMLHeadingElement>(
 			"#main-content > div > section:nth-child(3) > div > div.css-0 > h1"
@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		[price, image, buttons] = await Promise.all([
 			presence.getSetting<boolean>("price"),
 			presence.getSetting<boolean>("image"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 	if (pathname.startsWith("/search")) {
 		presenceData.details = "Searching For:";

@@ -1,18 +1,18 @@
 const presence = new Presence({
-		clientId: "842112189618978897"
+		clientId: "842112189618978897",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "applemusic-logo"
+			largeImageKey: "applemusic-logo",
 		},
 		[timestamps, cover] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]),
 		audio = document.querySelector<HTMLAudioElement>(
 			"audio#apple-music-player"
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 			?.querySelector<HTMLVideoElement>("video#apple-music-video-player");
 	if (video?.title || audio?.title) {
 		const media = video || audio,
-			timestamp = document.querySelector<HTMLInputElement>(
+			timestamp = document?.querySelector<HTMLInputElement>(
 				"input[aria-valuenow][aria-valuemax]"
 			),
 			paused = media.paused || media.readyState <= 2;
@@ -48,14 +48,12 @@ presence.on("UpdateData", async () => {
 				);
 		}
 
-		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestamps(
-				Number(timestamp.ariaValueNow),
-				Number(timestamp.ariaValueMax)
-			);
-
-		if (presenceData.endTimestamp === Infinity)
-			presenceData.smallImageKey = "premiere-live";
+		[presenceData.startTimestamp, presenceData.endTimestamp] = timestamp
+			? presence.getTimestamps(
+					Number(timestamp.ariaValueNow),
+					Number(timestamp.ariaValueMax)
+			  )
+			: presence.getTimestampsfromMedia(media);
 
 		if (paused || !timestamps) {
 			delete presenceData.startTimestamp;

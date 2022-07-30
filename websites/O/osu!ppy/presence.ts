@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "609774216430092298"
+	clientId: "609774216430092298",
 });
 
 let beatmapTitle: string,
@@ -16,7 +16,7 @@ let beatmapTitle: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (document.location.pathname === "/home") {

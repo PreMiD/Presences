@@ -3,7 +3,7 @@ interface ImageKeyMap {
 }
 
 const presence = new Presence({
-		clientId: "778572824708775946"
+		clientId: "778572824708775946",
 	}),
 	// Maps editor mode titles to respective images
 	langMap: ImageKeyMap = {
@@ -70,7 +70,7 @@ const presence = new Presence({
 		"reason.hover.type": { image: "reasonml" },
 		"jest-snapshot": { image: "jest" },
 		erb: { image: "ruby" },
-		"x86 and x86_64 Assembly": { image: "assembly" }
+		"x86 and x86_64 Assembly": { image: "assembly" },
 		// Auto-maps keys to identical image keys
 	},
 	// https://github.com/iCrawl/discord-vscode/blob/master/src/data/languages.json
@@ -94,13 +94,13 @@ const presence = new Presence({
 		".aspx": { image: "asp" },
 		".axd": { image: "asp" },
 		"/\\.setTrayTitle(l?a|[ls]?o|out|s|a51|asm|axf|elf|prx|puff|z80)$/i": {
-			image: "assembly"
+			image: "assembly",
 		},
 		".agc": { image: "assembly" },
 		".ko": { image: "assembly" },
 		".lst": { image: "assembly" },
 		"/\\.setTrayTitle((c([+px]{2}?)?-?)?objdump|bsdiff|bin|dat|pak|pdb)$/i": {
-			image: "assembly"
+			image: "assembly",
 		},
 		".d-objdump": { image: "assembly" },
 		"/\\.gcode|\\.gco/i": { image: "assembly" },
@@ -162,7 +162,7 @@ const presence = new Presence({
 		".dme": { image: "dm" },
 		".dmm": { image: "dm" },
 		"/^(Dockerfile|docker-compose)|\\.docker(file|ignore)$/i": {
-			image: "docker"
+			image: "docker",
 		},
 		"/^docker-sync\\.yml$/i": { image: "docker" },
 		".editorconfig": { image: "editorconfig" },
@@ -285,19 +285,19 @@ const presence = new Presence({
 		"/^METADATA\\.pb$/": { image: "manifest" },
 		"/[\\/\\\\](?:magic[\\/\\\\]Magdir|file[\\/\\\\]magic)[\\/\\\\][-.\\w]+$/i":
 			{
-				image: "manifest"
+				image: "manifest",
 			},
 		"/(\\\\|\\/)dev[-\\w]+\\1(?:[^\\\\\\/]+\\1)*(?!DESC|NOTES)(?:[A-Z][-A-Z]*)(?:\\.in)?$/":
 			{
-				image: "manifest"
+				image: "manifest",
 			},
 		"lib/icons/.icondb.js": { image: "manifest" },
 		"/\\.git[\\/\\\\](.*[\\/\\\\])?(HEAD|ORIG_HEAD|packed-refs|logs[\\/\\\\](.+[\\/\\\\])?[^\\/\\\\]+)$/":
 			{
-				image: "manifest"
+				image: "manifest",
 			},
 		"/\\.setTrayTitle(md|mdown|markdown|mkd|mkdown|mdwn|mkdn|rmd|ron|pmd)$/i": {
-			image: "markdown"
+			image: "markdown",
 		},
 		".mdx": { image: "markdownx" },
 		".marko": { image: "marko" },
@@ -348,7 +348,7 @@ const presence = new Presence({
 		".ps1xml": { image: "powershell" },
 		".prettierignore": { image: "prettier" },
 		"/\\.prettier((rc)|(\\.setTrayTitle(toml|yml|yaml|json|js))?$){2}/i": {
-			image: "prettier"
+			image: "prettier",
 		},
 		"prettier.config.js": { image: "prettier" },
 		"prisma.yml": { image: "prisma" },
@@ -380,12 +380,12 @@ const presence = new Presence({
 		".re": { image: "reasonml" },
 		"/\\.setTrayTitle(rb|ru|ruby|erb|gemspec|god|mspec|pluginspec|podspec|rabl|rake|opal)$/i":
 			{
-				image: "ruby"
+				image: "ruby",
 			},
 		"/^\\.?(irbrc|gemrc|pryrc|ruby-(gemset|version))$/i": { image: "ruby" },
 		"/^(Appraisals|(Rake|[bB]uild|Cap|Danger|Deliver|Fast|Guard|Jar|Maven|Pod|Puppet|Snap)file(\\.lock)?)$/":
 			{
-				image: "ruby"
+				image: "ruby",
 			},
 		"/\\.setTrayTitle(jbuilder|rbuild|rb[wx]|builder)$/i": { image: "ruby" },
 		"/^rails$/": { image: "ruby" },
@@ -395,17 +395,17 @@ const presence = new Presence({
 		".scss": { image: "scss" },
 		".sass": { image: "scss" },
 		"/\\.setTrayTitle(sh|rc|bats|bash|tool|install|command)$/i": {
-			image: "shell"
+			image: "shell",
 		},
 		"/^(\\.?bash(rc|[-_]?(profile|login|logout|history|prompt))|_osc|config|install-sh|PKGBUILD)$/i":
 			{
-				image: "shell"
+				image: "shell",
 			},
 		"/\\.setTrayTitle(ksh|mksh|pdksh)$/i": { image: "shell" },
 		".sh-session": { image: "shell" },
 		"/\\.zsh(-theme|_history)?$|^\\.?(antigen|zpreztorc|zlogin|zlogout|zprofile|zshenv|zshrc)$/i":
 			{
-				image: "shell"
+				image: "shell",
 			},
 		"/\\.fish$|^\\.fishrc$/i": { image: "shell" },
 		"/^\\.?(login|profile)$/": { image: "shell" },
@@ -413,10 +413,10 @@ const presence = new Presence({
 		".tmux": { image: "shell" },
 		"/^(configure|config\\.setTrayTitle(guess|rpath|status|sub)|depcomp|libtool|compile)$/":
 			{
-				image: "shell"
+				image: "shell",
 			},
 		"/^\\/(private\\/)?etc\\/([^\\/]+\\/)*(profile$|nanorc$|rc\\.|csh\\.)/i": {
-			image: "shell"
+			image: "shell",
 		},
 		"/^\\.?cshrc$/i": { image: "shell" },
 		".profile": { image: "shell" },
@@ -475,7 +475,7 @@ const presence = new Presence({
 		".wasm": { image: "wasm" },
 		"/webpack(\\.dev|\\.development|\\.prod|\\.production)?\\.config(\\.babel)?\\.setTrayTitle(js|jsx|coffee|ts|json|json5|yaml|yml)/i":
 			{
-				image: "webpack"
+				image: "webpack",
 			},
 		".xml": { image: "xml" },
 		"/\\.ya?ml$/i": { image: "yaml" },
@@ -485,7 +485,7 @@ const presence = new Presence({
 
 		".json": { image: "json" },
 		".js": { image: "js" },
-		".css": { image: "css" }
+		".css": { image: "css" },
 	};
 
 let lastFileChange: number = null,
@@ -494,7 +494,7 @@ let lastFileChange: number = null,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			smallImageKey: "gh",
-			smallImageText: "GitHub Codespaces"
+			smallImageText: "GitHub Codespaces",
 		},
 		activeTab = document.querySelector(".tab.active"),
 		editorMode = document.querySelector("#status.editor.mode");

@@ -12,7 +12,7 @@ iframe.on("UpdateData", async () => {
 			)?.textContent,
 			currentMailSender: document.querySelector<HTMLSpanElement>(
 				"div.ic-gg4vpm span.ic-x1z554"
-			)?.textContent
+			)?.textContent,
 		});
 	}
 });

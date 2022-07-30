@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "857504938443407360"
+	clientId: "857504938443407360",
 });
 
 function getQuery() {
@@ -29,7 +29,7 @@ function getGenre(code: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "geneie"
+			largeImageKey: "geneie",
 		},
 		{ location } = window;
 	// If player

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "864573021762224129"
+		clientId: "864573021762224129",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1e3),
 	whitespaceRegex = /^\s*|\n/gm;
@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
 			window.location.pathname.split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp
+			startTimestamp,
 		};
 
 	function mainWikiPathDetails(namespace: string) {

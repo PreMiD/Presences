@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "848082293427273748"
+		clientId: "848082293427273748",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 					"div.seriestucon > div.seriestuheader > h1"
 				).textContent;
 				presenceData.buttons = [
-					{ label: `View ${type}`, url: document.location.href }
+					{ label: `View ${type}`, url: document.location.href },
 				];
 			}
 			if (document.querySelector(".chapterbody")) {
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("#chapter > option:nth-child(2)").textContent
 				}`;
 				presenceData.buttons = [
-					{ label: "Read Manga", url: document.location.href }
+					{ label: "Read Manga", url: document.location.href },
 				];
 			}
 			break;

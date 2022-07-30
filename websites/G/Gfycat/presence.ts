@@ -1,14 +1,14 @@
 const presence = new Presence({
-		clientId: "630874255990587402"
+		clientId: "630874255990587402",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "gfycat"
+		largeImageKey: "gfycat",
 	};
 
 	if (document.location.pathname.startsWith("/discover")) {

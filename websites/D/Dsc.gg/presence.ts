@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "843711390539841577"
+		clientId: "843711390539841577",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "dscgg",
 			details: "Viewing 📰 page:",
-			state: "🛑 Unsupported"
+			state: "🛑 Unsupported",
 		};
 
 	if (document.location.hostname === "dsc.gg") {
@@ -23,24 +23,24 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Results",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else if (document.location.pathname === "/about") {
 			presenceData.state = "📚 About";
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else if (document.location.pathname.includes("/premium")) {
 			presenceData.state = "💎 Premium";
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else {
 			switch (document.location.pathname) {
@@ -49,8 +49,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 
 					break;
@@ -82,8 +82,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Visit Link",
-								url: `https://dsc.gg/${link}`
-							}
+								url: `https://dsc.gg/${link}`,
+							},
 						];
 					} else if (document.location.pathname === "/legal/privacy")
 						presenceData.state = "📜 Privacy Policy";

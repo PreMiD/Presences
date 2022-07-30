@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "919182644296683520"
+	clientId: "919182644296683520",
 });
 interface PlaygoundInfo {
 	playgroundId?: string;
@@ -24,14 +24,14 @@ const editingStamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "img1"
+			largeImageKey: "img1",
 		},
 		[block, time, buttons, name, description] = await Promise.all([
 			presence.getSetting<boolean>("block"),
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("name"),
-			presence.getSetting<boolean>("desc")
+			presence.getSetting<boolean>("desc"),
 		]),
 		url = document.URL;
 

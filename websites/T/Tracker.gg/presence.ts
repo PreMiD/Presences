@@ -4,7 +4,7 @@ const presence = new Presence({ clientId: "929349462365704222" }),
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,
 		botHost = document.location.hostname;
@@ -651,8 +651,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Open Page",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	}
 

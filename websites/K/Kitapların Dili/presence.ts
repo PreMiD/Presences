@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "769651625379102761"
+		clientId: "769651625379102761",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	kitapPages: { [k: string]: string } = {
 		"/": "Ana Sayfa",
@@ -20,7 +20,7 @@ const presence = new Presence({
 		"/my-account/favorite": "Dinlediklerim",
 		"/my-account/watch-later": "Dinlenecekler",
 		"/my-account/update": "Profili Düzenle",
-		"/my-account/change-password": "Şifre Değiştir"
+		"/my-account/change-password": "Şifre Değiştir",
 	};
 
 presence.on("UpdateData", async () => {
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "kd-logo",
 			details: "Bir türü inceliyor:",
 			state: genre || "Bilinmeyen Tür",
-			startTimestamp: Date.now()
+			startTimestamp: Date.now(),
 		});
 	} else if (page.includes("/az-list/")) {
 		const letter = page.split("/")?.[page.split("/").length - 1]?.toUpperCase();
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 			details: "Arşivi inceliyor:",
 			state: letter ? `Harf: ${letter}` : "Bilinmeyen Harf",
 			smallImageKey: "search",
-			startTimestamp: Date.now()
+			startTimestamp: Date.now(),
 		});
 	} else if (page.includes("/search")) {
 		presence.setActivity({
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 			state:
 				document.title.replace(" - Kitapların Dili", "") || "Bilinmeyen Terim",
 			smallImageKey: "search",
-			startTimestamp: Date.now()
+			startTimestamp: Date.now(),
 		});
 	} else if (page.includes("/country/")) {
 		presence.setActivity({
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 					)
 					?.join(" ") || "Bilinmeyen Dil",
 			smallImageKey: "search",
-			startTimestamp: Date.now()
+			startTimestamp: Date.now(),
 		});
 	} else if (page.includes("/star/")) {
 		presence.setActivity({
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
 			state:
 				document.querySelector(".page-title > font")?.textContent?.trim() ||
 				"Bilinmeyen Yazar",
-			startTimestamp: Date.now()
+			startTimestamp: Date.now(),
 		});
 	} else if (page.includes("/watch/")) {
 		const bookName =
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "kd-logo",
 				details: bookName,
 				smallImageKey: "question",
-				smallImageText: "Video verisi alınamıyor"
+				smallImageText: "Video verisi alınamıyor",
 			});
 		}
 
@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
 					? (await strings).pause
 					: (await strings).play,
 				startTimestamp: timestamps[0],
-				endTimestamp: timestamps[1]
+				endTimestamp: timestamps[1],
 			};
 
 		if (video.paused) {
@@ -141,14 +141,14 @@ presence.on("UpdateData", async () => {
 				kitapPages[page.slice(0, -1)] ||
 				kitapPages[page.replace(".html", "")] ||
 				"Bilinmeyen Sayfa",
-			startTimestamp: Date.now()
+			startTimestamp: Date.now(),
 		});
 	} else {
 		presence.setActivity({
 			largeImageKey: "kd-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
-			startTimestamp: Date.now()
+			startTimestamp: Date.now(),
 		});
 	}
 });

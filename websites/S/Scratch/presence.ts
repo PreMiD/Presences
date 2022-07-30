@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "630778865643552779"
+	clientId: "630778865643552779",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "scratchlogo"
+		largeImageKey: "scratchlogo",
 	};
 
 	if (window.location.href.toLowerCase().includes("scratch.mit.edu")) {

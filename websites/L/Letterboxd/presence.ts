@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "938732156346314795"
+		clientId: "938732156346314795",
 	}),
 	user = document.cookie
 		.split(";")
@@ -11,8 +11,8 @@ function generateButtonText(text: string): [ButtonData] {
 	return [
 		{
 			label: text.replace("Viewing", "View"),
-			url: window.location.href
-		}
+			url: window.location.href,
+		},
 	];
 }
 
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 		largeImageKey: "final",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (path[0]) {
@@ -143,13 +143,11 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Viewing popular films";
 							break;
 						case "genre":
-							presenceData.details = `Viewing ${
-								path[2] ? path[2] : "unknown"
-							} films`;
+							presenceData.details = `Viewing ${path[2] ?? "unknown"} films`;
 							break;
 						case "decade":
 							presenceData.details = `Viewing films from the ${
-								path[2] ? path[2] : "unknown"
+								path[2] ?? "unknown"
 							}`;
 					}
 				} else presenceData.details = "Viewing films";
@@ -184,7 +182,7 @@ presence.on("UpdateData", async () => {
 									presenceData.smallImageKey = "final";
 									delete presenceData.startTimestamp;
 									presenceData.buttons = [
-										{ label: "Watch trailer", url: window.location.href }
+										{ label: "Watch trailer", url: window.location.href },
 									];
 								} else {
 									const title = document.querySelectorAll(
@@ -244,7 +242,7 @@ presence.on("UpdateData", async () => {
 									).textContent
 								}`;
 								presenceData.buttons = [
-									{ label: `View ${title}`, url: window.location.href }
+									{ label: `View ${title}`, url: window.location.href },
 								];
 								presenceData.largeImageKey = getImageURLByAlt(title);
 								presenceData.smallImageKey = "final";
@@ -365,8 +363,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: `View ${name.textContent}'s stats`,
-									url: window.location.href
-								}
+									url: window.location.href,
+								},
 							];
 
 							break;
@@ -454,7 +452,7 @@ presence.on("UpdateData", async () => {
 							presenceData.details = `Review of ${title}`;
 							presenceData.state = `By ${rater} (${rating})`;
 							presenceData.buttons = [
-								{ label: "View review", url: window.location.href }
+								{ label: "View review", url: window.location.href },
 							];
 							presenceData.largeImageKey = getImageURLByAlt(title);
 							presenceData.smallImageKey = getImageURLByAlt(rater);
@@ -474,7 +472,7 @@ presence.on("UpdateData", async () => {
 							"following",
 							"tags",
 							"likes",
-							"lists"
+							"lists",
 						].includes(path[1])
 					) {
 						const name = (
@@ -507,7 +505,7 @@ presence.on("UpdateData", async () => {
 					).src;
 					presenceData.smallImageKey = "final";
 					presenceData.buttons = [
-						{ label: `View ${name}`, url: window.location.href }
+						{ label: `View ${name}`, url: window.location.href },
 					];
 
 					break;

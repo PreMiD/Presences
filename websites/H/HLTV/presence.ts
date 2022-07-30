@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "634032819915456552"
+		clientId: "634032819915456552",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement, title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "hltv"
+		largeImageKey: "hltv",
 	};
 
 	if (document.location.hostname === "www.hltv.org") {

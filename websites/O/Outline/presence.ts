@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "715602476249776239"
+	clientId: "715602476249776239",
 });
 
 let currentURL = new URL(document.location.href),
@@ -8,7 +8,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
 	details: "Viewing an unsupported page",
 	largeImageKey: "lg",
-	startTimestamp: browsingTimestamp
+	startTimestamp: browsingTimestamp,
 };
 const updateCallback = {
 		_function: null as () => void,
@@ -20,7 +20,7 @@ const updateCallback = {
 		},
 		get present(): boolean {
 			return this._function !== null;
-		}
+		},
 	},
 	/**
 	 * Initialize/reset presenceData.
@@ -29,7 +29,7 @@ const updateCallback = {
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		}
 	): void => {
 		currentURL = new URL(document.location.href);

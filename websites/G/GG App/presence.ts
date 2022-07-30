@@ -1,18 +1,18 @@
 const presence = new Presence({
-		clientId: "928868301105426463"
+		clientId: "928868301105426463",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname,
 		[timestamps, cover, buttons] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("cover"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 	// Apparently "/games" is a user page so .pathname can't be used to detect a game but instead the header
 	if (

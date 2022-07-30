@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "640963335826833418"
+		clientId: "640963335826833418",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ let user: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "tumblr"
+		largeImageKey: "tumblr",
 	};
 
 	if (document.location.hostname === "www.tumblr.com") {

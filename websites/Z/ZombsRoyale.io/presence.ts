@@ -1,12 +1,12 @@
 const presence = new Presence({
-	clientId: "845354103118364672"
+	clientId: "845354103118364672",
 });
 
 let matchStart: number = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		currentGameState = await getPageletiable("game.currentGameState");
 

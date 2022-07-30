@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "806926545771167774"
+		clientId: "806926545771167774",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "botsfordiscord.com") {
 		presenceData.details = "Viewing page:";

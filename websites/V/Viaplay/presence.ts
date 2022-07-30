@@ -1,9 +1,9 @@
 const presence: Presence = new Presence({
-		clientId: "632618001824219167"
+		clientId: "632618001824219167",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000);
 
@@ -21,7 +21,7 @@ function capitalise(splitStr: string[]): string {
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "large_img",
-		startTimestamp
+		startTimestamp,
 	};
 	const url = window.location.href;
 	if (url.includes("/player/")) {
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 				? (await strings).pause
 				: (await strings).play,
 			startTimestamp: timestamps[0],
-			endTimestamp: timestamps[1]
+			endTimestamp: timestamps[1],
 		};
 
 		if (tokens.length > 8) {

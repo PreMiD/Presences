@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "643593006821408778"
+		clientId: "643593006821408778",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	pages: { [k: string]: string } = {
 		"/": "Ana Sayfa",
@@ -16,7 +16,7 @@ const presence = new Presence({
 		"/forum": "Forum",
 		"/koleksiyon": "Koleksiyon",
 		"/birlikte-izle": "Birlikte İzle",
-		"/profil/ayarlar": "Hesap Ayarları"
+		"/profil/ayarlar": "Hesap Ayarları",
 	};
 let video: {
 	dataAvailable?: boolean;
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "yd-logo",
 				details: "Bir sayfaya göz atıyor:",
 				state: "Keşfet",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (page.includes("/oyuncu/")) {
 			const actorName = document.querySelector(
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "yd-logo",
 				details: "Bir aktöre göz atıyor:",
 				state: actorName ? actorName.textContent.trim() : "Belirsiz",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (
 			page.includes("/film/tur/") &&
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "yd-logo",
 				details: "Bir kategoriye göz atıyor:",
 				state: categoryTitle.textContent,
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (
 			page.includes("/dizi/tur") &&
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "yd-logo",
 				details: "Bir kategoriye göz atıyor:",
 				state: categoryTitle.textContent,
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (
 			page.includes("/film-izle") &&
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "yd-logo",
 				details: "Bir kategoriye göz atıyor:",
 				state: categoryTitle2.textContent,
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (
 			page.includes("/dizi/") &&
@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "yd-logo",
 				details: "Bir diziye göz atıyor:",
 				state: showName.textContent,
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (
 			page.includes("/profil/") &&
@@ -129,14 +129,14 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "yd-logo",
 				details: "Bir profile göz atıyor:",
 				state: userName.textContent,
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (pages[page] || pages[page.slice(0, -1)]) {
 			presence.setActivity({
 				largeImageKey: "yd-logo",
 				details: "Bir sayfaya göz atıyor:",
 				state: pages[page] || pages[page.slice(0, -1)],
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		}
 	} else if (_video && !isNaN(_video.currentTime)) {
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
 					smallImageKey: _video.paused ? "pause" : "play",
 					smallImageText: _video.paused
 						? (await strings).pause
-						: (await strings).play
+						: (await strings).play,
 				};
 
 			if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
@@ -190,7 +190,7 @@ presence.on("UpdateData", async () => {
 					smallImageKey: video.paused ? "pause" : "play",
 					smallImageText: video.paused
 						? (await strings).pause
-						: (await strings).play
+						: (await strings).play,
 				};
 
 			presenceData.startTimestamp = startTimestamp;
@@ -227,7 +227,7 @@ presence.on("UpdateData", async () => {
 					smallImageKey: video.paused ? "pause" : "play",
 					smallImageText: video.paused
 						? (await strings).pause
-						: (await strings).play
+						: (await strings).play,
 				};
 
 			if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
@@ -258,7 +258,7 @@ presence.on("UpdateData", async () => {
 					smallImageKey: video.paused ? "pause" : "play",
 					smallImageText: video.paused
 						? (await strings).pause
-						: (await strings).play
+						: (await strings).play,
 				};
 
 			if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
@@ -277,7 +277,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "yd-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Bilinmeyen Sayfa",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 });

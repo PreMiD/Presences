@@ -1,17 +1,17 @@
 const presence = new Presence({
-		clientId: "748698437720997888"
+		clientId: "748698437720997888",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "reach2"
+			largeImageKey: "reach2",
 		},
 		[info, elapsed, format1, format2] = await Promise.all([
 			presence.getSetting<boolean>("sInfo"),
 			presence.getSetting<boolean>("tElapsed"),
 			presence.getSetting<string>("sFormat1"),
-			presence.getSetting<string>("sFormat2")
+			presence.getSetting<string>("sFormat2"),
 		]),
 		paused =
 			document.querySelector<HTMLImageElement>(

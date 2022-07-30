@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "802379096122196050"
+	clientId: "802379096122196050",
 });
 let timestart = Math.round(Date.now() / 1000),
 	prevPage = "",
@@ -12,7 +12,7 @@ function refreshTime() {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "online_sequencer_icon",
-		startTimestamp: timestart
+		startTimestamp: timestart,
 	};
 	if (document.querySelectorAll(".fas.fa-stop")[0]) {
 		prevPage = currPage;
@@ -25,8 +25,8 @@ presence.on("UpdateData", async () => {
 			{ label: "View Sequence", url: window.location.href },
 			{
 				label: "View Creator",
-				url: document.querySelector<HTMLAnchorElement>("#titlebar div a").href
-			}
+				url: document.querySelector<HTMLAnchorElement>("#titlebar div a").href,
+			},
 		];
 	} else {
 		switch (document.location.pathname) {
@@ -125,8 +125,8 @@ presence.on("UpdateData", async () => {
 								label: "View Creator",
 								url: document.querySelector<HTMLAnchorElement>(
 									"#titlebar div a"
-								).href
-							}
+								).href,
+							},
 						];
 					} else presenceData.details = "Editing a sequence";
 

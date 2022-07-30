@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "800520515315695666"
+		clientId: "800520515315695666",
 	}),
 	pages: { [key: string]: string } = {
 		"/": "Ana Sayfa",
@@ -9,11 +9,11 @@ const presence = new Presence({
 		"/oyuncular.asp": "Oyuncular",
 		"/rehber.asp": "Rehber",
 		"/uye": "Üye Profili",
-		"/dizi-tartisma": "Dizi Tartışma"
+		"/dizi-tartisma": "Dizi Tartışma",
 	},
 	strings = presence.getStrings({
 		play: "general.playing",
-		pause: "general.paused"
+		pause: "general.paused",
 	});
 
 interface iframeData {
@@ -31,7 +31,7 @@ const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "sdlogo",
-			startTimestamp
+			startTimestamp,
 		},
 		{ search, pathname: page } = document.location;
 
@@ -72,8 +72,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Diziyi Görüntüle",
-				url: location.href
-			}
+				url: location.href,
+			},
 		];
 		presenceData.details = currentTabTitle;
 		presenceData.state =
@@ -83,8 +83,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Tartışmayı Görüntüle",
-				url: location.href
-			}
+				url: location.href,
+			},
 		];
 
 		presenceData.details =
@@ -119,8 +119,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Bölümü İzle",
-				url: location.href
-			}
+				url: location.href,
+			},
 		];
 
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
@@ -131,8 +131,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Kullanıcıyı Görüntüle",
-				url: location.href
-			}
+				url: location.href,
+			},
 		];
 
 		presenceData.details = "Bir kullanıcıya göz atıyor:";

@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "641243628903333900"
+		clientId: "641243628903333900",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		pause: "presence.playback.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement;
@@ -11,7 +11,7 @@ let user: HTMLElement;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "ao",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "www.animesonline.cz") {

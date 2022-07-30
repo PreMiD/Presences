@@ -2,7 +2,7 @@
 //       maybe at some point he'll finish it and this will need updating.
 
 const presence = new Presence({
-		clientId: "629355416714739732" // Contact if you want me to edit the discord assets/keys/whatever
+		clientId: "629355416714739732", // Contact if you want me to edit the discord assets/keys/whatever
 	}),
 	waitStrings = async (lang: string) =>
 		presence.getStrings(
@@ -25,7 +25,7 @@ const presence = new Presence({
 				season: "animepahe.season",
 				special: "animepahe.special",
 				viewOn: "animepahe.view",
-				timeSeason: "animepahe.timeSeason"
+				timeSeason: "animepahe.timeSeason",
 			},
 			lang
 		);
@@ -33,7 +33,7 @@ const presence = new Presence({
 let iframeResponse = {
 	paused: true,
 	duration: 0,
-	currentTime: 0
+	currentTime: 0,
 };
 
 type storeType = Record<
@@ -49,9 +49,11 @@ class AnimeStorage {
 		else if (!listing) return;
 		else {
 			this.list[title] = {
-				id: Number(document.querySelector("meta[name=id]").content),
+				id: Number(
+					document.querySelector<HTMLMetaElement>("meta[name=id]").content
+				),
 				listing,
-				time: Date.now()
+				time: Date.now(),
 			};
 
 			// Removes the oldest stored anime if the store length has exceeded 10
@@ -96,7 +98,7 @@ function getTimes(time: number): Record<string, number> {
 	return {
 		sec: seconds,
 		min: minutes,
-		hrs: hours
+		hrs: hours,
 	};
 }
 
@@ -156,7 +158,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "animepahe",
 			details: "loading",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		strings = await waitStrings(
 			await presence.getSetting<string>("lang").catch(() => "en")
@@ -280,12 +282,12 @@ presence.on("UpdateData", async () => {
 										label: strings.viewOn.replace("{0}", "Pahe"),
 										url: `https://pahe.win/a/${
 											animeStore.anime(title, listing).id
-										}`
+										}`,
 									},
 									{
 										label: strings.viewOn.replace("{0}", listing[0]),
-										url: listing[1]
-									}
+										url: listing[1],
+									},
 								];
 							}
 						}
@@ -347,12 +349,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: movie ? strings.watchMovie : strings.watchEpisode,
-							url: `https://pahe.win/a/${anime.id}/${episode}`
+							url: `https://pahe.win/a/${anime.id}/${episode}`,
 						},
 						{
 							label: strings.viewOn.replace("{0}", anime.listing[0]),
-							url: anime.listing[1]
-						}
+							url: anime.listing[1],
+						},
 					];
 				}
 

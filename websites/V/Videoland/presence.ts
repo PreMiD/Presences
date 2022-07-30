@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "941627291304329226"
+		clientId: "941627291304329226",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let cached: Record<string, unknown>;
@@ -22,7 +22,7 @@ async function fetchShowTitle() {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		page = window.location.pathname;
 

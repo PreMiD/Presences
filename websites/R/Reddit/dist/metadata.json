@@ -8,6 +8,10 @@
 		{
 			"name": "Bas950",
 			"id": "241278257335500811"
+		},
+		{
+			"name": "Atlassian",
+			"id": "191388216509595648"
 		}
 	],
 	"service": "Reddit",
@@ -34,7 +38,7 @@
 		"www.reddit.com",
 		"old.reddit.com"
 	],
-	"version": "3.0.8",
+	"version": "3.1.0",
 	"logo": "https://i.imgur.com/Yzr4SeJ.png",
 	"thumbnail": "https://i.imgur.com/fPUwXN5.png",
 	"color": "#ff4500",
@@ -52,7 +56,16 @@
 			"multiLanguage": true
 		},
 		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
 			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true

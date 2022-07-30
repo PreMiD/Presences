@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "708314580304003124"
+		clientId: "708314580304003124",
 	}),
 	newStrings = presence.getStrings({
 		play: "general.playing",
 		pause: "general.paused",
 		browse: "general.browsing",
-		search: "general.search"
+		search: "general.search",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);
@@ -22,10 +22,10 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("search"),
 			presence.getSetting<boolean>("browse"),
 			presence.getSetting<boolean>("video"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "anontpp"
+			largeImageKey: "anontpp",
 		};
 
 	if (oldUrl !== path) {

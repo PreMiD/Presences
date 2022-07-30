@@ -4,16 +4,19 @@
 		"name": "sks316",
 		"id": "226098403304538122"
 	},
+	"contributors": [
+		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
+		}
+	],
 	"service": "Sitting on Clouds Radio",
 	"description": {
 		"en": "Video game music radio from the Sitting on Clouds Soundtrack Collection",
 		"nl": "Video game muziek radio van de Sitting on Clouds Soundtrack Collectie"
 	},
-	"url": [
-		"squid-radio.net",
-		"www.squid-radio.net"
-	],
-	"version": "1.1.12",
+	"url": "radio.sittingonclouds.net",
+	"version": "1.2.0",
 	"logo": "https://i.imgur.com/pAEVAX8.png",
 	"thumbnail": "https://i.imgur.com/a73vtbs.png",
 	"color": "#67bdff",

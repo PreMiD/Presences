@@ -3,7 +3,7 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const presence = new Presence({
-		clientId: "951488835718635600"
+		clientId: "951488835718635600",
 	}),
 	getStrings = async () => {
 		return presence.getStrings(
@@ -28,7 +28,7 @@ const presence = new Presence({
 				searchSomething: "general.searchSomething",
 				search: "general.search",
 				buttonWatchStream: "general.buttonWatchStream",
-				buttonWatchVideo: "general.buttonWatchVideo"
+				buttonWatchVideo: "general.buttonWatchVideo",
 			},
 			oldLang
 		);
@@ -39,7 +39,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: elapsed
+			startTimestamp: elapsed,
 		},
 		[
 			showTimestamps,
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 			streamDetail,
 			streamState,
 			profilePic,
-			buttons
+			buttons,
 		] = await Promise.all([
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<string>("lang").catch(() => "en"),
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<string>("streamDetail"),
 			presence.getSetting<string>("streamState"),
 			presence.getSetting<boolean>("profilePic"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		{ pathname, search, href } = document.location,
 		title = document
@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
 					.replace("%streamer%", channelName)
 					.replace("%game%", game);
 				presenceData.buttons = [
-					{ label: strings.buttonWatchStream, url: document.URL }
+					{ label: strings.buttonWatchStream, url: document.URL },
 				];
 			}
 			presenceData.smallImageKey = "live";
@@ -156,20 +156,20 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = paused ? "pause" : "play";
 				presenceData.smallImageText = paused ? strings.paused : strings.playing;
 				presenceData.buttons = [
-					{ label: strings.buttonWatchVideo, url: document.URL }
+					{ label: strings.buttonWatchVideo, url: document.URL },
 				];
 			}
 		} else if (pathname.includes("/show") && !privacy) {
 			presenceData.details = strings.browsingVideos;
 			presenceData.state = `${strings.ofChannel} ${channelName}`;
 			presenceData.buttons = [
-				{ label: strings.buttonViewProfile, url: document.URL }
+				{ label: strings.buttonViewProfile, url: document.URL },
 			];
 		} else if (!privacy) {
 			presenceData.details = strings.viewProfile;
 			presenceData.state = channelName;
 			presenceData.buttons = [
-				{ label: strings.buttonViewProfile, url: document.URL }
+				{ label: strings.buttonViewProfile, url: document.URL },
 			];
 		}
 	} else if (pathname.includes("/notifyindex" || "/membership"))

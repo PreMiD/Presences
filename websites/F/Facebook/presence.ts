@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "631803867708915732"
+		clientId: "631803867708915732",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -14,14 +14,14 @@ function getVideoData(element: HTMLElement): [string?, HTMLVideoElement?] {
 			result.querySelector("div.n1l5q3vz > span") ??
 			result.querySelector("div.i1fnvgqd.j83agx80 div.w0hvl6rk.qjjbsfad > span")
 		).textContent,
-		result.querySelector("video")
+		result.querySelector("video"),
 	];
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "facebook",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		privacyMode = await presence.getSetting<boolean>("privacyMode"),
 		showTimestamp = await presence.getSetting<boolean>("timestamp"),
@@ -85,8 +85,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `Watch ${isLive ? "live" : "video"}`,
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (document.location.pathname.includes("/photo/")) {
@@ -101,8 +101,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View photo",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (document.location.pathname.includes("/watch")) {
@@ -224,6 +224,29 @@ presence.on("UpdateData", async () => {
 				} else presenceData.details = "Groups";
 			}
 		}
+	} else if (
+		document.querySelector('[aria-label="Link to open profile cover photo"]') ||
+		document.querySelector('[style*="padding-top: 37"]') ||
+		document.querySelector('[style*="padding-top:37"]')
+	) {
+		const selected = document.querySelector(
+				"[style='background-color: var(--accent);']"
+			)?.parentElement?.textContent,
+			profileUsername = document
+				.querySelector("head > title")
+				.innerHTML.replace(/(\(.*\))/gm, "")
+				.replace("| Facebook", "")
+				.trim();
+		if (
+			document
+				.querySelector('[role="banner"]')
+				.children[1]?.getAttribute("aria-hidden") === "false"
+		) {
+			if (privacyMode) presenceData.details = "Viewing Profile";
+			else if (selected)
+				presenceData.details = `Viewing ${profileUsername}'s ${selected}`;
+			else presenceData.details = `Viewing ${profileUsername}'s Profile`;
+		}
 	} else if (document.location.pathname.includes("/friends")) {
 		presenceData.details = "Friends";
 
@@ -286,8 +309,8 @@ presence.on("UpdateData", async () => {
 						url: `https://www.facebook.com/events/${document.location.pathname.replace(
 							/^\D+/g,
 							""
-						)}`
-					}
+						)}`,
+					},
 				];
 			} else presenceData.state = "Viewing event";
 		}
@@ -356,8 +379,8 @@ presence.on("UpdateData", async () => {
 							url: `https://www.facebook.com/gaming/play/${document.location.pathname.replace(
 								/^\D+/g,
 								""
-							)}`
-						}
+							)}`,
+						},
 					];
 				} else {
 					presenceData.details = "Gaming";

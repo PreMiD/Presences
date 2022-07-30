@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "966711989533544580"
+		clientId: "966711989533544580",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		search = document.querySelector<HTMLInputElement>(
 			"#portals-root > div:nth-child(3) > div > div > div > div > div.css-1dbjc4n.r-1ro0kt6.r-16y2uox.r-1wbh5a2 > input"
@@ -25,8 +25,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Docs",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			presenceData.details = "Reading docs:";
 			presenceData.state = document.querySelector(
@@ -40,13 +40,13 @@ presence.on("UpdateData", async () => {
 				"body > main > section > div.row.mb-4 > div.col-12.col-lg.d-flex.align-items-center.mb-3.mb-lg-0 > h1"
 			),
 			active = document.querySelector('[class="nav-link active"]');
-		if (document.location.pathname == "/") presenceData.details = "Homepage";
+		if (document.location.pathname === "/") presenceData.details = "Homepage";
 		else if (document.location.pathname.includes("affiliate")) {
 			presenceData.buttons = [
 				{
 					label: "View Affiliates",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			presenceData.details = "Affiliate";
 		} else if (document.location.pathname.includes("dashboard")) {
@@ -54,8 +54,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Dashboard",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else if (document.location.pathname.includes("link")) {
 			presenceData.state = document.querySelector("#link_url").textContent;
@@ -74,8 +74,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View all",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			presenceData.details = `All ${title}`;
 		} else if (active) {

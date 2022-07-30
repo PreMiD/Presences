@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "630194809763790871"
+		clientId: "630194809763790871",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "pastebinlogo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		urlData = window.location.pathname.replace(/^\/([^/]*).*$/, "$1");
 	let currentPage = document.title.slice(15);

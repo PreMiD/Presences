@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "882003722270572574"
+		clientId: "882003722270572574",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -22,7 +22,7 @@ setInterval(fetchStats, 10000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "default",
-		smallImageKey: "live"
+		smallImageKey: "live",
 	};
 
 	if (document.location.hash.startsWith("#/")) {

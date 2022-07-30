@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "802964241179082822"
+		clientId: "802964241179082822",
 	}),
 	nextEpisodeElement = document.querySelector<HTMLDivElement>(
 		"div#sidebar-anime-info > div.border.rounded.mb-3.p-3:nth-child(2) > div:nth-child(1) > a.ka-url-wrapper"
@@ -15,7 +15,10 @@ async function getStrings() {
 			pause: "general.paused",
 			viewSeries: "general.buttonViewSeries",
 			viewMovie: "general.buttonViewMovie",
-			watchEpisode: "general.buttonViewEpisode"
+			watchEpisode: "general.buttonViewEpisode",
+			viewing: "general.viewing",
+			searching: "general.searchFor",
+			episode: "general.episode",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -25,7 +28,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 	video = {
 		duration: 0,
 		currentTime: 0,
-		paused: true
+		paused: true,
 	},
 	currentTime: number,
 	duration: number,
@@ -91,12 +94,12 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "kaa",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[buttons, newLang, cover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<string>("lang"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]);
 
 	if (oldLang !== newLang) {
@@ -126,18 +129,18 @@ presence.on("UpdateData", async () => {
 					episodeNumber = currentAnimeEpisode.replace("0", "");
 				else episodeNumber = currentAnimeEpisode;
 
-				currentAnimeEpisode = `Episode ${episodeNumber}`;
+				currentAnimeEpisode = `${strings.episode} ${episodeNumber}`;
 
 				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: strings.watchEpisode,
-							url: document.URL
+							url: document.URL,
 						},
 						{
 							label: strings.viewSeries,
-							url: document.URL.replace(document.URL.split("/")[5], "")
-						}
+							url: document.URL.replace(document.URL.split("/")[5], ""),
+						},
 					];
 				}
 
@@ -153,12 +156,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.watchEpisode,
-							url: document.URL
+							url: document.URL,
 						},
 						{
 							label: strings.viewMovie,
-							url: document.URL.replace(document.URL.split("/")[5], "")
-						}
+							url: document.URL.replace(document.URL.split("/")[5], ""),
+						},
 					];
 				}
 			}
@@ -183,18 +186,18 @@ presence.on("UpdateData", async () => {
 					episodeNumber = currentAnimeEpisode.replace("0", "");
 				else episodeNumber = currentAnimeEpisode;
 
-				currentAnimeEpisode = `Episode ${episodeNumber}`;
+				currentAnimeEpisode = `${strings.episode} ${episodeNumber}`;
 
 				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: strings.watchEpisode,
-							url: document.URL
+							url: document.URL,
 						},
 						{
 							label: strings.viewSeries,
-							url: document.URL.replace(document.URL.split("/")[5], "")
-						}
+							url: document.URL.replace(document.URL.split("/")[5], ""),
+						},
 					];
 				}
 			} else {
@@ -204,12 +207,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.watchEpisode,
-							url: document.URL
+							url: document.URL,
 						},
 						{
 							label: strings.viewMovie,
-							url: document.URL.replace(document.URL.split("/")[5], "")
-						}
+							url: document.URL.replace(document.URL.split("/")[5], ""),
+						},
 					];
 				}
 			}
@@ -228,7 +231,7 @@ presence.on("UpdateData", async () => {
 	) {
 		currentAnimeTitle =
 			document.querySelector<HTMLHeadingElement>("h1.title").textContent;
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = `${currentAnimeTitle}`;
 		presenceData.smallImageKey = "searching";
 		presenceData.largeImageKey = cover
@@ -241,32 +244,44 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.viewSeries,
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (document.location.pathname.includes("anime-list")) {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "Anime List";
 		presenceData.smallImageKey = "searching";
 	} else if (document.location.pathname.includes("new-season")) {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "New Season";
 		presenceData.smallImageKey = "searching";
 	} else if (document.location.pathname.includes("favorites")) {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "Their Favorites";
 		presenceData.smallImageKey = "searching";
 	} else if (document.location.pathname.includes("watched")) {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "Watch History";
 		presenceData.smallImageKey = "searching";
+	} else if (document.location.pathname.includes("search")) {
+		presenceData.details = strings.searching;
+		presenceData.state = document
+			.querySelector("#content > h1")
+			.textContent.split('"')[1];
+		presenceData.smallImageKey = "searching";
+		if (cover) {
+			presenceData.largeImageKey = document
+				.querySelector<HTMLElement>("#content > div > div:nth-child(1) > a")
+				.style.background.replace('url("', "")
+				.replace('") center center / cover no-repeat', "");
+		}
 	} else if (document.location.pathname === "/") {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "Home Page";
 		presenceData.smallImageKey = "searching";
 	} else {
-		presenceData.details = "Looking at:";
+		presenceData.details = strings.viewing;
 		presenceData.state = "An Unsupported Page";
 	}
 

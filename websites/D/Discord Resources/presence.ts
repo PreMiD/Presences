@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "973710731549745152"
+		clientId: "973710731549745152",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "drw",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = window.location;
 	switch (true) {
@@ -17,8 +17,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Page",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 
 			break;
@@ -38,8 +38,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read Post",
-						url: location.href
-					}
+						url: location.href,
+					},
 				];
 			}
 			break;

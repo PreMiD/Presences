@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "614387676467953674"
+		clientId: "614387676467953674",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		live: "presence.activity.live",
 	});
 
 let title: HTMLInputElement, video: HTMLVideoElement;
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 
 	if (!video) {
 		const presenceData: PresenceData = {
-			largeImageKey: "viki"
+			largeImageKey: "viki",
 		};
 
 		presenceData.startTimestamp = browsingTimestamp;
@@ -423,7 +423,7 @@ presence.on("UpdateData", async () => {
 					? (await strings).pause
 					: (await strings).play,
 				startTimestamp: timestamps[0],
-				endTimestamp: timestamps[1]
+				endTimestamp: timestamps[1],
 			};
 
 		presenceData.details = document.querySelector(

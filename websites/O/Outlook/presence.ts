@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "925643552208355378"
+		clientId: "925643552208355378",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 	if (path.startsWith("/mail")) {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "644645903973482536"
+		clientId: "644645903973482536",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -80,7 +80,7 @@ function getTranslation(stringName: string): string {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "zalando",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	({ language } = window.navigator); //Make this change-able with presence settings

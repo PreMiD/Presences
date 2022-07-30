@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "743233111097081886"
+	clientId: "743233111097081886",
 });
 
 // Timestamp
@@ -22,7 +22,7 @@ let Routes: string[],
 presence.on("UpdateData", async () => {
 	// Presence Data
 	const presenceData: PresenceData = {
-		largeImageKey: "ranobelib_large"
+		largeImageKey: "ranobelib_large",
 	};
 
 	// Setup Routes & Query

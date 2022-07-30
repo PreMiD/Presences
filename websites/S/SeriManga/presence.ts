@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "836589763896541195"
+		clientId: "836589763896541195",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
 
@@ -33,11 +33,11 @@ presence.on("UpdateData", async () => {
 			.replace("SAYFA", "")}`;
 		presenceData.smallImageKey = "read";
 		presenceData.buttons = [
-			{ label: "Sayfaya Git", url: window.location.href }
+			{ label: "Sayfaya Git", url: window.location.href },
 		];
 	} else if (pathname.startsWith("/manga/")) {
 		presenceData.buttons = [
-			{ label: "Sayfaya Git", url: window.location.href }
+			{ label: "Sayfaya Git", url: window.location.href },
 		];
 		presenceData.details = "Çeviri mangaya:";
 		presenceData.state = document.querySelector(".name").textContent;

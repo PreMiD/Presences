@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "957670687278002206"
+		clientId: "957670687278002206",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
 
@@ -30,8 +30,8 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "View Objection",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/case/")) {
 		presenceData.details = "Viewing a Case";
@@ -42,8 +42,8 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "View Case",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/courtroom/")) {
 		const [participants, spectators] = Array.from(
@@ -58,8 +58,8 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				label: "Join Courtroom",
-				url: href
-			}
+				url: href,
+			},
 		];
 	}
 

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "866604211248824371"
+		clientId: "866604211248824371",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,12 +7,12 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Browsing",
 			largeImageKey: "large",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
 		[image, buttons] = await Promise.all([
 			presence.getSetting<boolean>("image"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 
 	if (pathname === "/") presenceData.details = "Browsing Homepage";
@@ -45,12 +45,12 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Chapter",
-					url: href
+					url: href,
 				},
 				{
 					label: "Read Description",
-					url: href.split(/(.+)[\\/]/)[1]
-				}
+					url: href.split(/(.+)[\\/]/)[1],
+				},
 			];
 		} else {
 			const title = document.querySelector<HTMLHeadingElement>("h1");
@@ -65,8 +65,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read Description",
-						url: href
-					}
+						url: href,
+					},
 				];
 			}
 		}

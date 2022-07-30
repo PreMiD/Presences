@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "682593223948238849"
+		clientId: "682593223948238849",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -15,7 +15,7 @@ function getRow(row: number) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	presenceData.details = getRow(1);
 	presenceData.state = getRow(2);

@@ -20,9 +20,9 @@ const presence = new Presence({ clientId: "826806766033174568" }),
 			account: "icon-g-account",
 			browse: "icon-g-browse",
 			read: "icon-g-read",
-			search: "icon-g-search"
+			search: "icon-g-search",
 		},
-		player: { play: "icon-p-play", pause: "icon-p-pause" }
+		player: { play: "icon-p-play", pause: "icon-p-pause" },
 	},
 	toProperCase = (str: string) => str[0].toUpperCase() + str.slice(1);
 let playerData: PlayerData,
@@ -47,7 +47,7 @@ function updateData() {
 			title,
 			episode,
 			episodeName: currentEpisodeOption.textContent,
-			playbackState: paused ? "paused" : "playing"
+			playbackState: paused ? "paused" : "playing",
 		};
 		if (document.body.contains(player) && !pageLoaded) pageLoaded = true;
 	} else pageLoaded = true;
@@ -61,7 +61,7 @@ presence.on("UpdateData", () => {
 		smallImageKey: rpaImage.general.browse,
 		smallImageText: "Browsing",
 		details: "Browsing",
-		startTimestamp: initMillis
+		startTimestamp: initMillis,
 	};
 	switch (page.toLowerCase()) {
 		case "watch": {

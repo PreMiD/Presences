@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "860298084512038964"
+		clientId: "860298084512038964",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "mangaworld_logo_dark"
+			largeImageKey: "mangaworld_logo_dark",
 		},
 		/* Query dell'URI - URI query */
 		searchParams = new URLSearchParams(
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 				ON_HOLD: "In pausa",
 				PLAN_TO_READ: "Da leggere",
 				DROPPED: "Droppati",
-				READING: "In lettura"
+				READING: "In lettura",
 			},
 			category = document.location.pathname.split("/")[3];
 		if (category in categories) presenceData.state = categories[category];
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 				ongoing: "In corso d'opera",
 				completed: "Finiti",
 				paused: "In pausa",
-				canceled: "Cancellati"
+				canceled: "Cancellati",
 			},
 			status = searchParams.get("status");
 		if (status in statuses) presenceData.state = statuses[status];
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 				// eslint-disable-next-line camelcase
 				less_read: "Meno letti",
 				newest: "Più recenti",
-				oldest: "Meno recenti"
+				oldest: "Meno recenti",
 			},
 			sort = searchParams.get("sort");
 		if (sort in sorts) presenceData.state = sorts[sort];
@@ -141,12 +141,12 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Leggilo anche tu!",
-					url: document.location.href.replace(/.$/, "1")
+					url: document.location.href.replace(/.$/, "1"),
 				},
 				{
 					label: "Vai alla pagina del manga!",
-					url: document.location.href.replace(/read\/.*/g, "")
-				}
+					url: document.location.href.replace(/read\/.*/g, ""),
+				},
 			];
 		} else {
 			/* Nella pagina principale del manga - In the manga's main page */
@@ -158,8 +158,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Vai alla pagina del manga!",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		}
 	} else {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "858246998561783828"
+		clientId: "858246998561783828",
 	}),
 	slideshow = presence.createSlideshow(),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -7,7 +7,7 @@ const presence = new Presence({
 		2: "Easy",
 		3: "Normal",
 		4: "Hard",
-		5: "Extreme"
+		5: "Extreme",
 	};
 
 interface Song {
@@ -66,7 +66,7 @@ async function getSong(id: number) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "taiko_logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		canvas = document.querySelector<HTMLCanvasElement>("canvas"),
 		initialLoading = document.querySelector<HTMLSpanElement>("span.percentage"),
@@ -158,7 +158,7 @@ presence.on("UpdateData", async () => {
 						details: `Category: ${selectedSong.category}`,
 						state: `Difficulty: ${
 							difficulty[parseInt(localStorage.getItem("selectedDiff"))]
-						}`
+						}`,
 					},
 					3500
 				);
@@ -180,8 +180,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Join the game",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	}
 

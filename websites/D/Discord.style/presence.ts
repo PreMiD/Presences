@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "847409866528260116"
+		clientId: "847409866528260116",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "discordstyle_logo"
+			largeImageKey: "discordstyle_logo",
 		};
 
 	if (document.location.pathname === "/")
@@ -38,8 +38,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Template",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/user")) {
 		const username = document.querySelector(
@@ -60,8 +60,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View User",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/latest")) {
 		presenceData.details = "Viewing latest templates";
@@ -71,24 +71,24 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Latest",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/search")) {
 		presenceData.details = "Viewing search page";
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/bot")) {
 		presenceData.details = "Viewing 🤖 bot page";
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/new"))
 		presenceData.details = "Creating 🎨 new template";
@@ -101,8 +101,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Tag",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	}
 

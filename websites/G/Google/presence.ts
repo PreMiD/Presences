@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "612704158826496028"
+		clientId: "612704158826496028",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	pageInput: HTMLInputElement = document.querySelector("#lst-ib"),
@@ -10,7 +10,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy");
 

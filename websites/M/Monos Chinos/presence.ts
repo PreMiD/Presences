@@ -13,14 +13,14 @@ type VideoContext = {
 };
 
 const presence = new Presence({
-		clientId: "707389880505860156"
+		clientId: "707389880505860156",
 	}),
 	strings = presence.getStrings({
 		playing: "presence.playback.playing",
 		paused: "presence.playback.paused",
 		browsing: "presence.activity.browsing",
 		searching: "presence.activity.searching",
-		episode: "presence.media.info.episode"
+		episode: "presence.media.info.episode",
 	});
 let video: VideoContext = null,
 	lastVideoOption = 1;
@@ -31,44 +31,44 @@ presence.on("iFrameData", async (context: VideoContext) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		browsingData: PresenceData = {
 			largeImageKey: "logo",
 			details: (await strings).browsing,
 			smallImageKey: "browsing",
-			smallImageText: (await strings).browsing
+			smallImageText: (await strings).browsing,
 		},
 		actions: PageAction[] = [
 			{
 				id: "episode",
 				path: "/ver",
-				text: (await strings).playing
+				text: (await strings).playing,
 			},
 			{
 				id: "seasonList",
 				path: "/emision",
 				text: "viendo lista de emisión",
-				icon: "season"
+				icon: "season",
 			},
 			{
 				id: "directory",
 				path: "/animes",
 				text: "viendo el directorio",
-				icon: "directory"
+				icon: "directory",
 			},
 			{
 				id: "directoryAnime",
 				path: "/anime/",
 				text: "viendo lista de episodios",
-				icon: "directory"
+				icon: "directory",
 			},
 			{
 				id: "search",
 				path: "/search",
 				text: (await strings).searching,
-				icon: "search"
-			}
+				icon: "search",
+			},
 		];
 	let action: PageAction = null;
 
@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 			details: title,
 			state: (await strings).episode.replace("{0}", episode),
 			smallImageKey: "browsing",
-			smallImageText: "viendo el capitulo"
+			smallImageText: "viendo el capitulo",
 		});
 
 		const currentOptionElement = document.querySelector(
@@ -122,13 +122,13 @@ presence.on("UpdateData", async () => {
 
 		Object.assign(presenceData, {
 			smallImageKey: video.paused ? "paused" : "playing",
-			smallImageText: (await strings)[video.paused ? "paused" : "playing"]
+			smallImageText: (await strings)[video.paused ? "paused" : "playing"],
 		} as PresenceData);
 
 		if (!video.paused) {
 			Object.assign(presenceData, {
 				startTimestamp,
-				endTimestamp
+				endTimestamp,
 			});
 		}
 	} else {
@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 		Object.assign(presenceData, {
 			details: action.text,
 			smallImageKey: action.icon,
-			smallImageText: action.text
+			smallImageText: action.text,
 		} as PresenceData);
 	}
 

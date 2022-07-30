@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "658971769285115957"
+		clientId: "658971769285115957",
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "general.paused"
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	switch (document.location.pathname) {
 		case "/": {

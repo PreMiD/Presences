@@ -1,11 +1,11 @@
 const presence = new Presence({
-	clientId: "930231661986197554"
+	clientId: "930231661986197554",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			smallImageKey: "voxiom",
-			smallImageText: "Playing Voxiom"
+			smallImageText: "Playing Voxiom",
 		},
 		{ pathname, hash, protocol, hostname } = window.location,
 		gameCode = hash.substring(1);
@@ -34,8 +34,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Join Game",
-							url: `${protocol}//${hostname}/#${gameCode}`
-						}
+							url: `${protocol}//${hostname}/#${gameCode}`,
+						},
 					];
 				}
 			}

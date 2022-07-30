@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "608065709741965327"
+	clientId: "608065709741965327",
 });
 
 async function getStrings() {
@@ -14,7 +14,7 @@ async function getStrings() {
 			viewSeries: "general.buttonViewSeries",
 			manga: "general.manga",
 			chapter: "general.chapter",
-			page: "general.page"
+			page: "general.page",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -53,20 +53,23 @@ presence.on("iFrameData", (data: iFrameData) => {
 			iFrameVideo,
 			currTime: currentTime,
 			dur: duration,
-			paused
+			paused,
 		} = data.iFrameVideoData);
 	}
 });
 
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
+	const [newLang, showCover] = await Promise.all([
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("cover"),
+	]);
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "lg"
+		largeImageKey: "lg",
 	};
 
 	if (!playback && document.location.pathname.includes("/manga")) {
@@ -89,8 +92,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `Read ${(await strings).chapter}`,
-					url: document.location.toString()
-				}
+					url: document.location.toString(),
+				},
 			];
 		} else if (document.location.pathname.includes("/volumes")) {
 			presenceData.details = (await strings).viewManga;
@@ -100,8 +103,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `View ${(await strings).manga}`,
-					url: document.location.toString()
-				}
+					url: document.location.toString(),
+				},
 			];
 		} else {
 			presenceData.details = (await strings).browse;
@@ -164,6 +167,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = videoTitle ?? "Title not found...";
 		presenceData.state = episode;
 
+		if (showCover) {
+			presenceData.largeImageKey =
+				document.querySelector<HTMLMetaElement>("[property='og:image']")
+					?.content ?? "lg";
+		}
 		if (paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
@@ -173,12 +181,12 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: (await strings).watchEpisode,
-					url: document.location.toString()
+					url: document.location.toString(),
 				},
 				{
 					label: (await strings).viewSeries,
-					url: seriesLink
-				}
+					url: seriesLink,
+				},
 			];
 			presence.setActivity(presenceData, !paused);
 		}

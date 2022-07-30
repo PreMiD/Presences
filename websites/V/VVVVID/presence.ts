@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "639916600031707149"
+		clientId: "639916600031707149",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -15,7 +15,7 @@ let hour: number,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "vid"
+		largeImageKey: "vid",
 	};
 
 	if (document.location.hostname === "www.vvvvid.it") {

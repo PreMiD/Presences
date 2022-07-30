@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "792735245488488458"
+		clientId: "792735245488488458",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -43,7 +43,7 @@ async function getStrings() {
 			iframe: "premid.pageIframe",
 			metadata: "premid.pageMetadata",
 			ts: "premid.pageTs",
-			btnViewPage: "general.buttonViewPage"
+			btnViewPage: "general.buttonViewPage",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -55,12 +55,12 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		},
 		[newLang, time, showButtons] = await Promise.all([
 			presence.getSetting<string>("lang"),
 			presence.getSetting<string>("time"),
-			presence.getSetting<string>("showButtons")
+			presence.getSetting<string>("showButtons"),
 		]);
 
 	if (oldLang !== newLang || !strings) {
@@ -72,8 +72,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: strings.btnViewPage,
-				url: window.location.href
-			}
+				url: window.location.href,
+			},
 		];
 	}
 

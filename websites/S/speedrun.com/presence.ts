@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "639603634451120138"
+		clientId: "639603634451120138",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "run"
+		largeImageKey: "run",
 	};
 
 	if (document.location.hostname === "www.speedrun.com") {
