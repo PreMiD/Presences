@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (document.location.pathname.startsWith("/thesaurus/")) {
-		var word = document
+		const word = document
 			.querySelector("meta[name='twitter:title']")
 			.getAttribute("content")
 			.replace("Thesaurus results for ", "");
@@ -203,10 +203,6 @@ presence.on("UpdateData", async () => {
 			}
 			case "/words-at-play": {
 				presenceData.details = "Browsing words at play";
-				break;
-			}
-			case "/word-games": {
-				presenceData.details = "Browsing games and quizzes";
 				break;
 			}
 			case "/reviews": {
