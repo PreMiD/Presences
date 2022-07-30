@@ -12,10 +12,13 @@ presence.on("UpdateData", async () => {
 
 	if (pathname === "/") presenceData.details = "Browsing the dictionary";
 	else if (document.location.pathname.startsWith("/dictionary/")) {
-		presenceData.details = "Viewing definitions";
-		presenceData.state = document.querySelector(
+		const word = document.querySelector(
 			"#left-content > div:nth-child(2) > div:nth-child(1) > h1"
 		).textContent;
+		presenceData.details = "Viewing definitions";
+		presenceData.state = `${
+			word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Page",
