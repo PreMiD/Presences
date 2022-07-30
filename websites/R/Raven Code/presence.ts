@@ -1,4 +1,4 @@
-const presence = new Presence({ clientId: "937015924425367643" }),
+const presence = new Presence({ clientId: "1000041677035163779" }),
 	startTimestamp = Math.floor(Date.now() / 1000);
 let languages: { key: string; page: string; text: string }[] = [];
 
