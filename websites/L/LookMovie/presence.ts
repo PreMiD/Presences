@@ -11,47 +11,37 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "lm",
 		},
-		video = document.querySelector<HTMLVideoElement>("#video_player"),
-		videoDur = document.querySelector(
-			"#video_player > div.vjs-control-bar > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display"
-		);
-	if (video && videoDur) {
-		const titles = document.querySelector<HTMLMetaElement>(
-				'meta[property="og:title"]'
-			),
-			videoDuration = presence.timestampFromFormat(
-				document.querySelector(
-					"#video_player > div.vjs-control-bar > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display"
-				).textContent
-			),
-			videoCurrent = presence.timestampFromFormat(
-				document.querySelector(
-					"#video_player > div.vjs-control-bar > div.vjs-current-time.vjs-time-control.vjs-control > span.vjs-current-time-display"
-				).textContent
-			),
-			videoPaused = video.className;
-		if (document.location.pathname.includes("/s/")) {
-			presenceData.details = titles.content
-				.replace("Watch show", "")
-				.replace("on lookmovie for free in 1080p High Definition", "");
-		} else if (document.location.pathname.includes("/m/")) {
-			presenceData.details = titles.content
-				.replace("Watch movie", "")
-				.replace("on lookmovie in 1080p high definition", "");
-		}
-		presenceData.smallImageKey = videoPaused.includes("vjs-paused")
-			? "pause"
-			: "play";
-		presenceData.smallImageText = videoPaused.includes("vjs-paused")
+		video =
+			document.querySelector<HTMLVideoElement>("video[class*='video']") ??
+			document.querySelector<HTMLVideoElement>("video[id*='video']"),
+		cover = await presence.getSetting<boolean>("cover");
+	if (video && video?.duration) {
+		const titles =
+			document.querySelector('[class="bd-hd"]')?.textContent ??
+			document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
+				?.content ??
+			document
+				.querySelector("head > title")
+				?.textContent.replace(" | LookMovie", "");
+		presenceData.details = titles;
+
+		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestamps(
-				Math.floor(videoCurrent),
-				Math.floor(videoDuration)
-			);
+			presence.getTimestampsfromMedia(video);
+		if (cover) {
+			presenceData.largeImageKey =
+				document
+					.querySelector('[id="longInfo"]')
+					?.firstElementChild?.getAttribute("src") ??
+				document.querySelector<HTMLMetaElement>('[property="og:image"]')
+					.content ??
+				"lm";
+		}
 
-		if (videoPaused.includes("vjs-paused")) {
+		if (video.paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
