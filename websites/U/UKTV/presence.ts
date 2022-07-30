@@ -21,8 +21,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("covers"),
 			presence.getSetting<boolean>("buttons"),
 		]);
-	if (privacy)
-		presenceData.details = presenceData.details = (await strings).browsing;
+	if (privacy) presenceData.details = (await strings).browsing;
 	else if (search) {
 		presenceData.details = "Searching for";
 		presenceData.state = search.value;
