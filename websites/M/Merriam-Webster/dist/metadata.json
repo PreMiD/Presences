@@ -8,10 +8,7 @@
     "description": {
       "en": "The dictionary by Merriam-Webster is America's most trusted online dictionary for English word definitions, meanings, and pronunciation."
     },
-    "url": [
-      "www.merriam-webster.com",
-      "shop.merriam-webster.com"
-    ],
+    "url": "www.merriam-webster.com",
     "version": "1.0.0",
     "logo": "https://i.imgur.com/Q0r1EJx.png",
     "thumbnail": "https://i.imgur.com/0gUOyxz.jpg",
