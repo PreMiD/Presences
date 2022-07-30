@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLVideoElement>("video[class*='video']") ??
 			document.querySelector<HTMLVideoElement>("video[id*='video']"),
 		cover = await presence.getSetting<boolean>("cover");
-	if (video && video?.duration) {
+	if (video && video.duration) {
 		const titles =
 			document.querySelector('[class="bd-hd"]')?.textContent ??
 			document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
