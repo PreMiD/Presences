@@ -10,11 +10,12 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href } = window.location;
 
-	if (pathname === "/")
-		presenceData.details = "Browsing the dictionary";
+	if (pathname === "/") presenceData.details = "Browsing the dictionary";
 	else if (document.location.pathname.startsWith("/dictionary/")) {
 		presenceData.details = "Viewing definitions";
-		presenceData.state = document.querySelector("#left-content > div:nth-child(2) > div:nth-child(1) > h1").textContent
+		presenceData.state = document.querySelector(
+			"#left-content > div:nth-child(2) > div:nth-child(1) > h1"
+		).textContent;
 		presenceData.buttons = [
 			{
 				label: "View Page",
@@ -37,7 +38,9 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/word-of-the-day")) {
 		presenceData.details = "Viewing the word of the day";
-		presenceData.state = document.querySelector('[class="word-and-pronunciation"]').firstElementChild.textContent
+		presenceData.state = document.querySelector(
+			'[class="word-and-pronunciation"]'
+		).firstElementChild.textContent;
 		presenceData.buttons = [
 			{
 				label: "View Page",
