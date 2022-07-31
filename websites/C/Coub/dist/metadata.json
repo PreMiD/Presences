@@ -43,13 +43,13 @@
 		},
 		{
 			"id": "show_externalLargeImage",
-			"title": "Show community/channel images",
+			"title": "Show Thumbnails (community/channel images)",
 			"icon": "fas fa-image",
 			"value": true
 		},
 		{
 			"id": "show_startedBrowsing",
-			"title": "Show elapsed time",
+			"title": "Show Elapsed Time",
 			"icon": "fas fa-stopwatch",
 			"value": true
 		}
