@@ -7,7 +7,8 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		startTimestamp: browsingTimestamp,
 		largeImageKey: "https://i.imgur.com/SUZJZEX.png",
-	};
+	},
+	{ pathname } = document.location;
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the home page";
 	else if (document.location.pathname.startsWith("/games/")) {
