@@ -15,15 +15,14 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLVideoElement>("video[class*='video']") ??
 			document.querySelector<HTMLVideoElement>("video[id*='video']"),
 		cover = await presence.getSetting<boolean>("cover");
-	if (video && video.duration) {
-		const titles =
+	if (video?.duration) {
+		presenceData.details =
 			document.querySelector('[class="bd-hd"]')?.textContent ??
 			document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
 				?.content ??
 			document
 				.querySelector("head > title")
 				?.textContent.replace(" | LookMovie", "");
-		presenceData.details = titles;
 
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused
