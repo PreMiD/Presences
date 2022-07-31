@@ -6,9 +6,9 @@ interface Video {
 
 const presence = new Presence({ clientId: "666074265233260555" }),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
 		viewAnime: "general.viewAnime",
 		watching: "general.watching",
 		episode: "general.episode",

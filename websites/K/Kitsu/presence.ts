@@ -7,7 +7,7 @@ const presence = new Presence({
 
 let path, user: string;
 const strings = presence.getStrings({
-	browsing: "presence.activity.browsing",
+	browsing: "general.browsing",
 });
 
 presence.on("UpdateData", async () => {

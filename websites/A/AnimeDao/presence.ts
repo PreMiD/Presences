@@ -25,9 +25,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const strings = await presence.getStrings({
-			playing: "presence.playback.playing",
-			paused: "presence.playback.paused",
-			browsing: "presence.activity.browsing",
+			playing: "general.playing",
+			paused: "general.paused",
+			browsing: "general.browsing",
 		}),
 		presenceData: PresenceData = {
 			largeImageKey: "animedao_lg",
