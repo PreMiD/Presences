@@ -40,6 +40,18 @@
 			"title": "Show current playing button",
 			"icon": "fas fa-external-link-alt",
 			"value": true
+		},
+		{
+			"id": "show_externalLargeImage",
+			"title": "Show community/channel images",
+			"icon": "fas fa-image",
+			"value": true
+		},
+		{
+			"id": "show_startedBrowsing",
+			"title": "Show elapsed time",
+			"icon": "fas fa-stopwatch",
+			"value": true
 		}
 	]
 }
