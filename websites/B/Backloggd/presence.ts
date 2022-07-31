@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "https://i.imgur.com/SUZJZEX.png",
 	},
 	{ pathname } = document.location;
-	if (document.location.pathname === "/")
+	if (pathname === "/")
 		presenceData.details = "Viewing the home page";
 	else if (document.location.pathname.startsWith("/games/")) {
 		if (document.location.pathname.includes("/lib/"))
