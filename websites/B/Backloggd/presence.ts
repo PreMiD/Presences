@@ -10,8 +10,8 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname } = document.location;
 	if (pathname === "/") presenceData.details = "Viewing the home page";
-	else if (document.location.pathname.startsWith("/games/")) {
-		if (document.location.pathname.includes("/lib/"))
+	else if (pathname.startsWith("/games/")) {
+		if (pathname.includes("/lib/"))
 			presenceData.details = "Viewing popular games";
 		else {
 			presenceData.details = `Viewing ${document
@@ -26,36 +26,34 @@ presence.on("UpdateData", async () => {
 				).src
 			}`;
 		}
-	} else if (document.location.pathname.includes("/search/")) {
+	} else if (pathname.includes("/search/")) {
 		presenceData.details = "Searching 🔎";
 		presenceData.state = `${document
 			.querySelector("#search-title h1")
 			.textContent.trim()}`;
-	} else if (document.location.pathname.includes("/about/"))
+	} else if (pathname.includes("/about/"))
 		presenceData.details = "Viewing the about page";
-	else if (document.location.pathname.includes("/settings/"))
+	else if (pathname.includes("/settings/"))
 		presenceData.details = "Editing their profile/account settings";
-	else if (document.location.pathname.includes("/changelog/"))
+	else if (pathname.includes("/changelog/"))
 		presenceData.details = "Viewing the Changelog";
-	else if (document.location.pathname.includes("/contact/"))
+	else if (pathname.includes("/contact/"))
 		presenceData.details = "Viewing the contact form";
-	else if (document.location.pathname.includes("/roadmap/"))
+	else if (pathname.includes("/roadmap/"))
 		presenceData.details = "Viewing the Backloggd Roadmap";
-	else if (document.location.pathname.includes("/backers/"))
+	else if (pathname.includes("/backers/"))
 		presenceData.details = "Viewing the Supporters Page";
-	else if (document.location.pathname.startsWith("/about/")) {
-		if (document.location.pathname.endsWith("terms-of-service"))
+	else if (pathname.startsWith("/about/")) {
+		if (pathname.endsWith("terms-of-service"))
 			presenceData.details = "Viewing the Terms of Service";
-		else if (document.location.pathname.endsWith("privacy"))
+		else if (pathname.endsWith("privacy"))
 			presenceData.details = "Viewing the Privacy Policy";
-	} else if (document.location.pathname.startsWith("/users/")) {
-		if (document.location.pathname.endsWith("sign_in"))
-			presenceData.details = "Signing In";
-		else if (document.location.pathname.endsWith("sign_up"))
-			presenceData.details = "Signing Up";
-		else if (document.location.pathname.endsWith("password/new"))
+	} else if (pathname.startsWith("/users/")) {
+		if (pathname.endsWith("sign_in")) presenceData.details = "Signing In";
+		else if (pathname.endsWith("sign_up")) presenceData.details = "Signing Up";
+		else if (pathname.endsWith("password/new"))
 			presenceData.details = "Resetting Password";
-	} else if (document.location.pathname.startsWith("/u/")) {
+	} else if (pathname.startsWith("/u/")) {
 		presenceData.details = `Viewing ${document
 			.querySelector("#profile-header h3")
 			.textContent.trim()}'s Profile`;
