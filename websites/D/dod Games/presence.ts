@@ -53,9 +53,8 @@ presence.on("UpdateData", async () => {
 						}/${scores.length}`;
 					}
 				}
-				if (scores.length < 10 && roomURL) 
-					addJoinRoomButton(roomURL);
-				
+				if (scores.length < 10 && roomURL) addJoinRoomButton(roomURL);
+
 				presenceData.details = "Παίζει Ζωγράφισέ Το";
 				presenceData.startTimestamp = timeStarted;
 				break;
@@ -79,9 +78,8 @@ presence.on("UpdateData", async () => {
 						)}/${scores.length}`;
 					}
 				}
-				if (roomURL) 
-					addJoinRoomButton(roomURL);
-				
+				if (roomURL) addJoinRoomButton(roomURL);
+
 				presenceData.details = "Παίζει Κουίζ";
 				presenceData.startTimestamp = timeStarted;
 				break;
@@ -146,9 +144,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${
 						Object.keys(state).length
 					}/${nPlayers} παίκτες...`;
-					if (roomURL) 
-						addJoinRoomButton(roomURL);
-					
+					if (roomURL) addJoinRoomButton(roomURL);
 				}
 				presenceData.details = `Παίζει Αγωνία | 💪🏻 ${document
 					.querySelector(".mytr")
@@ -205,9 +201,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${
 						teamPlayers.length + opPlayers.length
 					}/4 παίκτες...`;
-					if (roomURL) 
-						addJoinRoomButton(roomURL);
-					
+					if (roomURL) addJoinRoomButton(roomURL);
 				}
 				presenceData.details = `Παίζει Tichu | 💪🏻 ${document
 					.querySelector(".mytr")
