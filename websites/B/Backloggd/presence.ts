@@ -5,12 +5,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		startTimestamp: browsingTimestamp,
-		largeImageKey: "https://i.imgur.com/SUZJZEX.png",
-	},
-	{ pathname } = document.location;
-	if (pathname === "/")
-		presenceData.details = "Viewing the home page";
+			startTimestamp: browsingTimestamp,
+			largeImageKey: "https://i.imgur.com/SUZJZEX.png",
+		},
+		{ pathname } = document.location;
+	if (pathname === "/") presenceData.details = "Viewing the home page";
 	else if (document.location.pathname.startsWith("/games/")) {
 		if (document.location.pathname.includes("/lib/"))
 			presenceData.details = "Viewing popular games";
