@@ -11,9 +11,9 @@ presence.on("UpdateData", async () => {
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the home page";
 	else if (document.location.pathname.startsWith("/games/")) {
-		if (document.location.pathname.includes("/lib/")) {
+		if (document.location.pathname.includes("/lib/")) 
 			presenceData.details = "Viewing popular games";
-		} else {
+		 else {
 			presenceData.details = `Viewing ${document
 				.querySelector("#game-profile h1")
 				.textContent.trim()}`;
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 				.textContent.trim()}`;
 		}
 	} else if (document.location.pathname.includes("/search/")) {
-		presenceData.details = `Searching 🔎`;
+		presenceData.details = "Searching 🔎";
 		presenceData.state = `${document
 			.querySelector("#search-title h1")
 			.textContent.trim()}`;
@@ -57,9 +57,9 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = `${
 			document.querySelector<HTMLImageElement>("#profile-header img").src
 		}`;
-	} else {
+	} else 
 		presenceData.details = "Viewing an unsupported page.";
-	}
+	
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
