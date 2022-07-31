@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "735588731637203080",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browse: "presence.activity.browsing",
+		play: "general.playing",
+		pause: "general.paused",
+		browse: "general.browsing",
 	}),
 	getElement = (query: string): string | undefined => {
 		return document.querySelector(query)?.textContent;

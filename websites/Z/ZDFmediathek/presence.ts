@@ -6,8 +6,8 @@ const presence = new Presence({
 	}),
 	// TODO: Add multiLang
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 		browsing: "general.browsing",
 		browsingThrough: "discord.browseThrough",
 		buttonWatchVideo: "general.buttonWatchVideo",

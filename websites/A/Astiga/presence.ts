@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "612746548631044116",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	truncateBefore = function (str: string, pattern: string): string {
 		return str.slice(str.indexOf(pattern) + pattern.length);

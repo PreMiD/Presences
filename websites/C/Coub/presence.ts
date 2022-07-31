@@ -303,8 +303,8 @@ const pages: PageContext[] = [
 function getStrings(newLang?: string) {
 	return presence.getStrings(
 		{
-			browsing: "presence.activity.browsing",
-			watching: "presence.playback.playing",
+			browsing: "general.browsing",
+			watching: "general.playing",
 			watchVideo: "general.buttonWatchVideo",
 			viewProfile: "general.buttonViewProfile",
 		},
