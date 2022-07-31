@@ -58,7 +58,9 @@ presence.on("UpdateData", async () => {
 					episodeName ?? episodeNumber
 			  }`
 			: `${episodeNumber}${
-					episodeName === episodeNumber ? "" : ` • ${episodeName}`
+					!episodeName || episodeName === episodeNumber
+						? ""
+						: ` • ${episodeName}`
 			  }`;
 
 		if (coverArt && showCover) presenceData.largeImageKey = coverArt;
