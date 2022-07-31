@@ -9,9 +9,10 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ hostname, href } = document.location,
-		[privacy, cover] = await Promise.all([
+		[privacy, covers, idAndTag] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("covers"),
+			presence.getSetting<boolean>("idAndTag"),
 		]);
 
 	if (hostname.includes("wiki.discord.id")) {
@@ -41,18 +42,23 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLInputElement>('[id="inputid"]')?.value &&
 				!document.querySelector('[id="captchaPopup___BV_modal_header_"]')
 			) {
-				if (cover) {
-					presenceData.largeImageKey = document
-						.querySelector('[class="avyimg"]')
-						.getAttribute("src");
+				if (covers) {
+					if (badge.length > 0) {
+						presenceData.smallImageKey = `${href}${badge[
+							badge.length - 1
+						].getAttribute("src")}`;
+					}
+					presenceData.largeImageKey =
+						document.querySelector('[class="avyimg"]')?.getAttribute("src") ??
+						"https://i.imgur.com/O06B09v.png";
 				}
-				if (badge.length > 0) {
-					presenceData.smallImageKey = `${href}${badge[
-						badge.length - 1
-					].getAttribute("src")}`;
-				}
-
-				if (id?.textContent && username?.textContent) {
+				if (idAndTag) {
+					if (!username) presenceData.details = "Viewing IDs";
+					else {
+						presenceData.details = "Viewing user";
+						presenceData.state = username.textContent.split("#")[0];
+					}
+				} else if (id?.textContent && username?.textContent) {
 					presenceData.details = "Viewing user";
 					presenceData.state = `${username.textContent} (${id.textContent})`;
 				} else if (id?.textContent && !username?.textContent) {

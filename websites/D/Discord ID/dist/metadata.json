@@ -8,19 +8,13 @@
 	"description": {
 		"en": "Lookup for all type of discord ids."
 	},
-	"url": [
-		"wiki.discord.id",
-		"discord.id"
-	],
+	"url": ["wiki.discord.id", "discord.id"],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/O06B09v.png",
 	"thumbnail": "https://i.imgur.com/Y8sQNb9.png",
 	"color": "#7289da",
 	"category": "other",
-	"tags": [
-		"discord",
-		"id"
-	],
+	"tags": ["discord", "id"],
 	"settings": [
 		{
 			"id": "privacy",
@@ -29,13 +23,19 @@
 			"value": false
 		},
 		{
+			"id": "idAndTag",
+			"title": "Disable Tag/ID Mode",
+			"icon": "fad fa-hashtag-lock",
+			"value": true
+		},
+		{
 			"id": "cover",
 			"if": {
 				"privacy": false
 			},
 			"title": "Show Cover",
 			"icon": "fad fa-album",
-			"value": true
+			"value": false
 		}
 	]
 }
