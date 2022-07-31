@@ -13,25 +13,60 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "artfight-logo",
 			startTimestamp: browsingTimestamp,
 		},
-		pathnameArray = document.location.pathname.split("/");
+		pathnameArray = document.location.pathname.split("/"),
+		showCover = await presence.getSetting<boolean>("cover");
 
 	switch (pathnameArray[1]) {
 		case "":
 			presenceData.details = "Browsing homepage";
 			break;
 		case "attack": {
-			presenceData.details = presenceDataSlide.details = "Viewing an attack";
+			const presenceDataTeam: PresenceData = {
+				largeImageKey: "artfight-logo",
+				startTimestamp: browsingTimestamp,
+			};
+
+			presenceData.details =
+				presenceDataSlide.details =
+				presenceDataTeam.details =
+					`Viewing a${
+						document.querySelector("td > div.badge.badge-info")?.textContent ??
+						"n attack"
+					}`;
+
 			presenceData.state = `"${document
 				.querySelector(".profile-header-name > a > u")
 				.textContent.trim()}"`;
-			presenceData.largeImageKey = presenceDataSlide.largeImageKey = document
-				.querySelector("#image-pane > div > a > img")
-				.getAttribute("src");
+
+			if (showCover && !document.querySelector("div.alert")) {
+				presenceData.largeImageKey =
+					presenceDataSlide.largeImageKey =
+					presenceDataTeam.largeImageKey =
+						document
+							.querySelector("#image-pane > div > a > img")
+							.getAttribute("src");
+			}
 
 			const tableAttackData = document.querySelectorAll("tbody > tr > td");
 			presenceDataSlide.state = `From ${tableAttackData[1].textContent.trim()} to ${tableAttackData[3].textContent.trim()}`;
+			presenceDataTeam.state = `Team ${tableAttackData[5].textContent.trim()}`;
+
+			presenceData.buttons =
+				presenceDataSlide.buttons =
+				presenceDataTeam.buttons =
+					[
+						{ label: "View Drawing", url: document.location.href },
+						{
+							label: "View Artist",
+							url: `${
+								document.location.origin
+							}/~${tableAttackData[1].textContent.trim()}`,
+						},
+					];
+
 			slideshow.addSlide("attackName", presenceData, 5000);
 			slideshow.addSlide("authorName", presenceDataSlide, 5000);
+			slideshow.addSlide("teamName", presenceDataTeam, 5000);
 			break;
 		}
 	}
