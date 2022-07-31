@@ -20,7 +20,11 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Made by ${document
 				.querySelectorAll("#game-profile #game-body .sub-title a")[1]
 				.textContent.trim()}`;
-			presenceData.largeImageKey = `${document.querySelector<HTMLImageElement>(".game-cover .overflow-wrapper >img").src}`
+			presenceData.largeImageKey = `${
+				document.querySelector<HTMLImageElement>(
+					".game-cover .overflow-wrapper >img"
+				).src
+			}`;
 		}
 	} else if (document.location.pathname.includes("/search/")) {
 		presenceData.details = "Searching 🔎";
