@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 				: [
 						{ label: "View Chapter", url: document.documentURI },
 						{
-							label: "Go to book page",
+							label: "View Book",
 							url: `https://neovel.io/book/${pathnameArray[2]}/${pathnameArray[3]}`,
 						},
 				  ];
