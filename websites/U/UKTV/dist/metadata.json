@@ -11,7 +11,7 @@
 	"url": "uktvplay.uktv.co.uk",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/wjqmEQY.png",
-	"thumbnail": "https://i.imgur.com/wjqmEQY.png",
+	"thumbnail": "https://i.imgur.com/mPSBoXK.png",
 	"color": "#00BAC6",
 	"category": "videos",
 	"tags": [
@@ -21,6 +21,10 @@
 		"series"
 	],
 	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
 		{
 			"id": "privacy",
 			"title": "Privacy Mode",

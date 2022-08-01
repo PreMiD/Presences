@@ -1,11 +1,20 @@
 const presence = new Presence({
-		clientId: "1002899869599551508",
-	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		browsing: "general.browsing",
-	});
+	clientId: "1002899869599551508",
+});
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "presence.playback.playing",
+			pause: "presence.playback.paused",
+			browse: "presence.activity.browsing",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -16,12 +25,17 @@ presence.on("UpdateData", async () => {
 		),
 		{ href, pathname } = document.location,
 		search = document.querySelector<HTMLInputElement>("#search-input"),
-		[privacy, covers, buttons] = await Promise.all([
+		[newLang, privacy, covers, buttons] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("covers"),
 			presence.getSetting<boolean>("buttons"),
 		]);
-	if (privacy) presenceData.details = (await strings).browsing;
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+	if (privacy) presenceData.details = (await strings).browse;
 	else if (search) {
 		presenceData.details = "Searching for";
 		presenceData.state = search.value;
@@ -81,9 +95,9 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
-		presenceData.details = (await strings).browsing;
+		presenceData.details = (await strings).browse;
 		presenceData.smallImageKey = "search";
-		presenceData.smallImageText = (await strings).browsing;
+		presenceData.smallImageText = (await strings).browse;
 		presenceData.buttons = [
 			{
 				label: "Browse",
