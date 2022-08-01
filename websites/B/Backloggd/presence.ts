@@ -27,7 +27,8 @@ presence.on("UpdateData", async () => {
 			}`;
 		}
 	} else if (pathname.includes("/search/")) {
-		presenceData.details = "Searching 🔎";
+		presenceData.smallImageKey = "https://i.imgur.com/UC6s55L.png";
+		presenceData.details = "Searching";
 		presenceData.state = `${document
 			.querySelector("#search-title h1")
 			.textContent.trim()}`;
