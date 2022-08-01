@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "658971769285115957",
+		clientId: "1003589140241186918",
 	}),
 	strings = presence.getStrings({
 		play: "general.playing",
@@ -9,7 +9,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/f3zxOuL.png",
 		startTimestamp: browsingTimestamp,
 	};
 	switch (document.location.pathname) {
