@@ -185,6 +185,43 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "event":
+			if (
+				document
+					.querySelector<HTMLHeadingElement>("div.container-fluid > h1")
+					.textContent.trim() === "No Event"
+			)
+				presenceData.details = "Viewing event page";
+			else {
+				presenceData.details = document.querySelector<HTMLHeadingElement>(
+					"div.container-fluid > h1"
+				).firstChild.textContent;
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".container-fluid > h2"
+				).textContent;
+				presenceData.buttons = [
+					{
+						label: "Join a team !",
+						url: document
+							.querySelector<HTMLLinkElement>(".btn")
+							.getAttribute("href"),
+					},
+				];
+			}
+			break;
+		case "team":
+			if (pathnameArray[2] === "sort")
+				presenceData.details = "On team sorting page";
+			else {
+				presenceData.details = "On team page";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					"div.container-fluid > h1 > strong > a"
+				).textContent;
+				presenceData.buttons = [
+					{ label: "View Team Page", url: document.location.href },
+				];
+			}
+			break;
 		default:
 			break;
 	}
