@@ -6,7 +6,7 @@
 	},
 	"service": "Discord ID",
 	"description": {
-		"en": "Lookup for all type of discord ids."
+		"en": "Lookup a Discord User or Bot ID."
 	},
 	"url": [
 		"wiki.discord.id",
