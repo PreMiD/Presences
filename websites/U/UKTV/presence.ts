@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Searching for";
 		presenceData.state = search.value;
 		presenceData.smallImageKey = "search";
-	} else if (video && video.duration) {
+	} else if (video?.duration) {
 		const titles = document.querySelector(
 			'[class="vod-episode__title margin-bottom--xxs invert-text semi-bold"]'
 		)?.textContent;
