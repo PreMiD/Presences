@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 				url: document.URL,
 			},
 		];
-	} else presenceData.details = strings.browse;
+	}
 
 	if (!showButtons && presenceData.buttons) delete presenceData.buttons;
 
