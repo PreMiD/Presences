@@ -32,9 +32,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${document
 			.querySelector("#search-title h1")
 			.textContent.trim()}`;
-	} else if (pathname.includes("/about/"))
-		presenceData.details = "Viewing the about page";
-	else if (pathname.includes("/settings/"))
+	} else if (pathname.includes("/settings/"))
 		presenceData.details = "Editing their profile/account settings";
 	else if (pathname.includes("/changelog/"))
 		presenceData.details = "Viewing the Changelog";
@@ -44,11 +42,14 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing the Backloggd Roadmap";
 	else if (pathname.includes("/backers/"))
 		presenceData.details = "Viewing the Supporters Page";
-	else if (pathname.startsWith("/about/")) {
-		if (pathname.endsWith("terms-of-service"))
-			presenceData.details = "Viewing the Terms of Service";
-		else if (pathname.endsWith("privacy"))
+	else if (document.location.pathname.startsWith("/about/")) {
+		if (document.location.pathname.endsWith("privacy/")) {
 			presenceData.details = "Viewing the Privacy Policy";
+		} else if (document.location.pathname.endsWith("terms-of-service/")) {
+			presenceData.details = "Viewing the Terms of Service";
+		} else {
+			presenceData.details = "Viewing the About Page";
+		}
 	} else if (pathname.startsWith("/users/")) {
 		if (pathname.endsWith("sign_in")) presenceData.details = "Signing In";
 		else if (pathname.endsWith("sign_up")) presenceData.details = "Signing Up";
@@ -59,7 +60,9 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = `${
 			document.querySelector<HTMLImageElement>("#profile-header img").src
 		}`;
-	} else presenceData.details = "Viewing an unsupported page.";
+	} else {
+		presenceData.details = "Viewing an unsupported page.";
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
