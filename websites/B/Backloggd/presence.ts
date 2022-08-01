@@ -42,10 +42,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing the Backloggd Roadmap";
 	else if (pathname.includes("/backers/"))
 		presenceData.details = "Viewing the Supporters Page";
-	else if (document.location.pathname.startsWith("/about/")) {
-		if (document.location.pathname.endsWith("privacy/"))
+	else if (pathname.startsWith("/about/")) {
+		if (pathname.endsWith("privacy/"))
 			presenceData.details = "Viewing the Privacy Policy";
-		else if (document.location.pathname.endsWith("terms-of-service/"))
+		else if (pathname.endsWith("terms-of-service/"))
 			presenceData.details = "Viewing the Terms of Service";
 		else presenceData.details = "Viewing the About Page";
 	} else if (pathname.startsWith("/users/")) {
