@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "668173626775830529",
 	}),
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
+		browsing: "general.browsing",
 	}),
 	getElement = (query: string): string | undefined =>
 		document.querySelector(query)?.textContent.trimStart().trimEnd(),

@@ -4,9 +4,9 @@ const presence = new Presence({
 
 async function getStrings() {
 	return presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 }
 

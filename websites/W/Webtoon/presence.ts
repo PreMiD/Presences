@@ -7,7 +7,7 @@ const presence: Presence = new Presence({
 		startTimestamp: browsingTimestamp,
 	},
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
+		browsing: "general.browsing",
 	}),
 	path: string = window.location.pathname;
 let webtoon: string, chapter: string, seriesPage: string;
