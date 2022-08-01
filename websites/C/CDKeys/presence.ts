@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 	} else if (game) {
 		presenceData.buttons = [
 			{
-				label: "View game",
+				label: "View Game",
 				url: href,
 			},
 		];
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 	} else if (series) {
 		presenceData.buttons = [
 			{
-				label: "View procuct series",
+				label: "View product series",
 				url: href,
 			},
 		];
