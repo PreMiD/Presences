@@ -37,9 +37,7 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/techtree/")) {
 		presenceData.details = "Viewing the tech tree";
-		presenceData.state = `${
-			document.querySelector(".current").innerHTML
-		}`;
+		presenceData.state = `${document.querySelector(".current").innerHTML}`;
 		presenceData.buttons = [
 			{
 				label: "View Tech Tree",
