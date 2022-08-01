@@ -54,8 +54,6 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
-	} else if (document.location.pathname.startsWith("/list/stats/dpm")) {
-		presenceData.details = "Browsing tanks by stats";
 	} else if (document.location.pathname.startsWith("/na/")) {
 		presenceData.details = "Viewing profile (NA)";
 		presenceData.state = `${
