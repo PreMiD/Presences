@@ -22,6 +22,19 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
+	} else if (document.location.pathname.startsWith("/list/stats")) {
+		presenceData.details = "Browsing tanks by stats";
+		presenceData.state = `Sorting by: ${
+			document.querySelector(
+				"#content > div > div.container-fluid.main-container > div > div.filter > div.dropdown.stat > button"
+			).textContent
+		}`;
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
 	} else if (document.location.pathname.startsWith("/techtree/")) {
 		presenceData.details = "Viewing the tech tree";
 		presenceData.state = `${
@@ -41,6 +54,8 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
+	} else if (document.location.pathname.startsWith("/list/stats/dpm")) {
+		presenceData.details = "Browsing tanks by stats";
 	} else if (document.location.pathname.startsWith("/na/")) {
 		presenceData.details = "Viewing profile (NA)";
 		presenceData.state = `${
@@ -84,10 +99,6 @@ presence.on("UpdateData", async () => {
 		switch (pathname) {
 			case "/list": {
 				presenceData.details = "Browsing tanks";
-				break;
-			}
-			case "/list/stats": {
-				presenceData.details = "Browsing tanks by stats";
 				break;
 			}
 			case "/compare": {
