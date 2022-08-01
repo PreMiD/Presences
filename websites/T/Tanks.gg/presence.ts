@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.startsWith("/tank/")) {
 		presenceData.details = "Viewing a tank";
 		presenceData.state = `${
-			document.querySelector(".header-tank > h1").childNodes[0].textContent
+			document.querySelector(".header-tank > h1").firstChild.textContent
 		}`;
 		presenceData.buttons = [
 			{
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/techtree/")) {
 		presenceData.details = "Viewing the tech tree";
 		presenceData.state = `${
-			document.querySelectorAll(".current")[0].innerHTML
+			document.querySelector(".current").innerHTML
 		}`;
 		presenceData.buttons = [
 			{
@@ -54,38 +54,14 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
-	} else if (document.location.pathname.startsWith("/na/")) {
-		presenceData.details = "Viewing profile (NA)";
+	} else if (document.querySelector('[class="player-stats"]')) {
+		presenceData.details = `Viewing profile (${
+			document.querySelector('[class="dropdown-item active"]').textContent
+		})`;
 		presenceData.state = `${
 			document.querySelector(
 				"#content > div > div.container-fluid.main-container > div > div.top-container > div.main-col > h2"
-			).childNodes[0].textContent
-		}`;
-		presenceData.buttons = [
-			{
-				label: "View Profile",
-				url: href,
-			},
-		];
-	} else if (document.location.pathname.startsWith("/eu/")) {
-		presenceData.details = "Viewing profile (EU)";
-		presenceData.state = `${
-			document.querySelector(
-				"#content > div > div.container-fluid.main-container > div > div.top-container > div.main-col > h2"
-			).childNodes[0].textContent
-		}`;
-		presenceData.buttons = [
-			{
-				label: "View Profile",
-				url: href,
-			},
-		];
-	} else if (document.location.pathname.startsWith("/asia/")) {
-		presenceData.details = "Viewing profile (Asia)";
-		presenceData.state = `${
-			document.querySelector(
-				"#content > div > div.container-fluid.main-container > div > div.top-container > div.main-col > h2"
-			).childNodes[0].textContent
+			).firstChild.textContent
 		}`;
 		presenceData.buttons = [
 			{
