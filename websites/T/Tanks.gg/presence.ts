@@ -3,10 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-function delay(ms: number) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/jjvJi16.png",
