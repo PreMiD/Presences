@@ -43,13 +43,11 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/backers/"))
 		presenceData.details = "Viewing the Supporters Page";
 	else if (document.location.pathname.startsWith("/about/")) {
-		if (document.location.pathname.endsWith("privacy/")) {
+		if (document.location.pathname.endsWith("privacy/"))
 			presenceData.details = "Viewing the Privacy Policy";
-		} else if (document.location.pathname.endsWith("terms-of-service/")) {
+		else if (document.location.pathname.endsWith("terms-of-service/"))
 			presenceData.details = "Viewing the Terms of Service";
-		} else {
-			presenceData.details = "Viewing the About Page";
-		}
+		else presenceData.details = "Viewing the About Page";
 	} else if (pathname.startsWith("/users/")) {
 		if (pathname.endsWith("sign_in")) presenceData.details = "Signing In";
 		else if (pathname.endsWith("sign_up")) presenceData.details = "Signing Up";
