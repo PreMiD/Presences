@@ -33,7 +33,7 @@
 		"@types/prettier": "^2.6.3",
 		"@types/semver": "^7.3.10",
 		"@typescript-eslint/eslint-plugin": "^5.30.7",
-		"@typescript-eslint/parser": "^5.30.7",
+		"@typescript-eslint/parser": "^5.31.0",
 		"axios": "^0.27.2",
 		"chalk": "^4.1.2",
 		"debug": "^4.3.4",
