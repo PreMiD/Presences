@@ -26,7 +26,6 @@ const presence = new Presence({
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
-
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
@@ -46,14 +45,12 @@ presence.on("UpdateData", async () => {
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
-		{ pathname, search } = document.location;
+		{ pathname, search, href } = document.location;
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
-
-	if (pathname.includes("running-man")) presenceData.largeImageKey = "rm";
 
 	if (pathname.includes("/drama-detail")) {
 		presenceData.smallImageText = strings.reading;
@@ -74,8 +71,13 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = strings.searching;
 	} else if (pathname.match("/([a-z0-9-]+)-episode-([0-9]+)")) {
-		ShowData.title = document.querySelector("div.category a").textContent;
-
+		ShowData.title =
+			document.querySelector("div.category a")?.textContent ??
+			JSON.parse(
+				document
+					.querySelector('[class="yoast-schema-graph"]')
+					.innerHTML.replace(/@/gm, "")
+			).graph[3].itemListElement[1].name.replace(/Episode [0-9]*/gm, "");
 		if (ShowData.duration) {
 			ShowData.ep = (document.title.match(
 				/Episode ?([1-9][0-9]?[0-9]?)?( & )?([1-9][0-9]?[0-9]?)/g
@@ -98,11 +100,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.viewEpisode,
-					url: document.URL,
-				},
-				{
-					label: strings.viewSeriesButton,
-					url: document.querySelector<HTMLAnchorElement>("div.category a").href,
+					url: href,
 				},
 			];
 
@@ -133,7 +131,7 @@ presence.on("UpdateData", async () => {
 				url: document.URL,
 			},
 		];
-	}
+	} else presenceData.details = strings.browse;
 
 	if (!showButtons && presenceData.buttons) delete presenceData.buttons;
 
