@@ -2,9 +2,9 @@ const presence: Presence = new Presence({
 		clientId: "615652705565933581",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "listen_moe_lg",

@@ -5,10 +5,10 @@ const presence = new Presence({
 async function getStrings() {
 	return presence.getStrings(
 		{
-			play: "presence.playback.playing",
-			pause: "presence.playback.paused",
-			browse: "presence.activity.browsing",
-			reading: "presence.activity.reading",
+			play: "general.playing",
+			pause: "general.paused",
+			browse: "general.browsing",
+			reading: "general.reading",
 			viewManga: "general.viewManga",
 			watchEpisode: "general.buttonViewEpisode",
 			viewSeries: "general.buttonViewSeries",

@@ -7,9 +7,9 @@ let path, strings, clipTitle, clipAuthor, clipTimeLeft;
 
 presence.on("UpdateData", async () => {
 	strings = await presence.getStrings({
-		live: "presence.activity.live",
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		live: "general.live",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 	const presenceData: PresenceData = {
 		largeImageKey: "peloton",

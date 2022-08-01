@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "717563140300210196",
 	}),
 	strings = presence.getStrings({
-		search: "presence.activity.searching",
+		search: "general.searching",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 

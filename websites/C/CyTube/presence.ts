@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "653639828826750976", // Contact if you want me to edit the discord assets/keys/whatever
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 function getTimes(time: number): Record<string, number> {

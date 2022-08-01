@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "700405996677365842",
 	}),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
 		episode: "presence.media.info.episode",
 	});
 

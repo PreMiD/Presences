@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "630771716058120192",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "logo",
