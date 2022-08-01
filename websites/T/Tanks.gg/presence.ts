@@ -3,9 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+function delay(ms: number) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/PjDWjpk.png",
+			largeImageKey: "https://i.imgur.com/jjvJi16.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = window.location;
@@ -13,9 +17,9 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/") presenceData.details = "Browsing the home page";
 	else if (document.location.pathname.startsWith("/tank/")) {
 		presenceData.details = "Viewing a tank";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" - World of Tanks - tanks.gg", "")}`;
+		presenceData.state = `${
+			document.querySelector(".header-tank > h1").childNodes[0].textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Tank",
@@ -24,9 +28,9 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/techtree/")) {
 		presenceData.details = "Viewing the tech tree";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" - Tech Tree - World of Tanks - tanks.gg", "")}`;
+		presenceData.state = `${
+			document.querySelectorAll(".current")[0].innerHTML
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Tech Tree",
@@ -43,10 +47,11 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/na/")) {
 		presenceData.details = "Viewing profile (NA)";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" - World of Tanks - tanks.gg", "")
-			.replace("World of Tanks - tanks.gg", "")}`;
+		presenceData.state = `${
+			document.querySelector(
+				"#content > div > div.container-fluid.main-container > div > div.top-container > div.main-col > h2"
+			).childNodes[0].textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Profile",
@@ -55,10 +60,11 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/eu/")) {
 		presenceData.details = "Viewing profile (EU)";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" - World of Tanks - tanks.gg", "")
-			.replace("World of Tanks - tanks.gg", "")}`;
+		presenceData.state = `${
+			document.querySelector(
+				"#content > div > div.container-fluid.main-container > div > div.top-container > div.main-col > h2"
+			).childNodes[0].textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Profile",
@@ -67,10 +73,11 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.startsWith("/asia/")) {
 		presenceData.details = "Viewing profile (Asia)";
-		presenceData.state = `${document
-			.querySelector("head > title")
-			.textContent.replace(" - World of Tanks - tanks.gg", "")
-			.replace("World of Tanks - tanks.gg", "")}`;
+		presenceData.state = `${
+			document.querySelector(
+				"#content > div > div.container-fluid.main-container > div > div.top-container > div.main-col > h2"
+			).childNodes[0].textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Profile",
