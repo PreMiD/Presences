@@ -7,7 +7,7 @@
     "service": "Backloggd",
     "description": {
       "en": "Keep a virtual backlog of your video game collection, then rate and review the ones you've played to share with your friends!",
-      "fr": "Découvrez, Collectez, Analysez vos Jeux"
+      "fr": "Gardez un backlog virtuel de votre collection de jeux vidéo, puis évaluez et passez en revue ceux auxquels vous avez joué pour les partager avec vos amis !"
     },
     "url": "backloggd.com",
     "version": "1.0.0",
