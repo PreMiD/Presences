@@ -52,8 +52,6 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/users/")) {
 		if (pathname.endsWith("sign_in")) presenceData.details = "Signing In";
 		else if (pathname.endsWith("sign_up")) presenceData.details = "Signing Up";
-		else if (pathname.endsWith("password/new"))
-			presenceData.details = "Resetting Password";
 	} else if (pathname.startsWith("/u/")) {
 		presenceData.details = `Viewing ${document
 			.querySelector("#profile-header h3")
