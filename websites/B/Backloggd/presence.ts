@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = `${
 			document.querySelector<HTMLImageElement>("#profile-header img").src
 		}`;
-	} else presenceData.details = "Viewing an unsupported page.";
+	} else presenceData.details = "Viewing an unsupported page";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
