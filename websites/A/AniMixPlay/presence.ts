@@ -34,9 +34,10 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo-v2",
-		startTimestamp: browsingTimestamp,
-	};
+			largeImageKey: "logo-v2",
+			startTimestamp: browsingTimestamp,
+		},
+		showCover = await presence.getSetting<boolean>("cover");
 
 	if (location.pathname === "/") {
 		const urlParams = new URLSearchParams(window.location.search);
@@ -112,6 +113,11 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${
 			document.querySelector("#animepagetitle").textContent
 		} (${document.querySelector("#addInfo").textContent.split(" ")[5].trim()})`;
+		if (showCover) {
+			presenceData.largeImageKey = document
+				.querySelector("#maincoverimage")
+				.getAttribute("src");
+		}
 		presenceData.smallImageKey = "reading-v1";
 		presenceData.smallImageText = "Reading...";
 	}
