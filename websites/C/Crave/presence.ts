@@ -1,5 +1,4 @@
 const presence = new Presence({
-	//The client ID of the Application created at https://discordapp.com/developers/applications
 	clientId: "1001288215388495953",
 });
 
