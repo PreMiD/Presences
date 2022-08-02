@@ -111,8 +111,6 @@ function getState(): [string, string, string] {
 	}
 }
 
-// Presence
-
 presence.on("UpdateData", async () => {
 	const isVideo = getState()[0] === "Watching";
 
