@@ -69,6 +69,7 @@ presence.on("UpdateData", async () => {
 			"category/promotions": strings.categoryPromotions,
 			"category/forum": strings.categoryForum,
 			"settings/general": strings.generalSettings,
+			settings: strings.generalSettings,
 			"settings/labels": strings.labelSettings,
 			"settings/inbox": strings.inboxSettings,
 			"settings/accounts": strings.accountSetting,
