@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 		const titles = name.textContent.replace(/[0-9]* сезон [0-9]* серия/g, "");
 		presenceData.details = titles;
 		presenceData.state = name.textContent.replace(titles, "");
-	} else if (title) presenceData.details = `Просмотр ${title.textContent}`;
+	} else if (title) presenceData.details = `Смотрит «${title.textContent}»`;
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
