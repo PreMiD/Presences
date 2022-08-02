@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 		if (!video.paused && !isNaN(Number(video.duration))) {
 			presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
 			presenceData.smallImageKey = "play";
-			presenceData.smallImageText = "Игра";
+			presenceData.smallImageText = "Воспроизводится";
 		} else {
 			delete presenceData.endTimestamp;
 			presenceData.smallImageKey = "pause";
