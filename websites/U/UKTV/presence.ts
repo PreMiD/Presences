@@ -5,9 +5,9 @@ const presence = new Presence({
 async function getStrings() {
 	return presence.getStrings(
 		{
-			play: "presence.playback.playing",
-			pause: "presence.playback.paused",
-			browse: "presence.activity.browsing",
+			play: "general.playing",
+			pause: "general.paused",
+			browse: "general.browsing",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
-	if (privacy) presenceData.details = (await strings).browse;
+	if (privacy) presenceData.details = strings.browse;
 	else if (search) {
 		presenceData.details = "Searching for";
 		presenceData.state = search.value;
@@ -47,9 +47,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = titles;
 
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
-		presenceData.smallImageText = video.paused
-			? (await strings).pause
-			: (await strings).play;
+		presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestampsfromMedia(video);
 		if (covers) {
@@ -95,9 +93,9 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
-		presenceData.details = (await strings).browse;
+		presenceData.details = strings.browse;
 		presenceData.smallImageKey = "search";
-		presenceData.smallImageText = (await strings).browse;
+		presenceData.smallImageText = strings.browse;
 		presenceData.buttons = [
 			{
 				label: "Browse",
