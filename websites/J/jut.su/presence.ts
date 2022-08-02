@@ -21,8 +21,8 @@ presence.on("UpdateData", async () => {
 		),
 		name = document.querySelector("#dle-content > div > h1 > span");
 	if (search?.value) {
-		presenceData.details = "идет поиск";
-		presenceData.state = search.value;
+		presenceData.details = "Ищет по запросу";
+		presenceData.state = `«${search.value}»`;
 	} else if (pathname === "/")
 		presenceData.details = "Смотрит домашнюю страницу";
 	else if (mangaTitle) {
