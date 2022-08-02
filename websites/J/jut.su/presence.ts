@@ -21,8 +21,8 @@ presence.on("UpdateData", async () => {
 		),
 		name = document.querySelector("#dle-content > div > h1 > span");
 	if (search?.value) {
-		presenceData.details = "идет поиск";
-		presenceData.state = search.value;
+		presenceData.details = "Ищет по запросу";
+		presenceData.state = `«${search.value}»`;
 	} else if (pathname === "/")
 		presenceData.details = "Смотрит домашнюю страницу";
 	else if (mangaTitle) {
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 		if (!video.paused && !isNaN(Number(video.duration))) {
 			presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
 			presenceData.smallImageKey = "play";
-			presenceData.smallImageText = "Игра";
+			presenceData.smallImageText = "Воспроизводится";
 		} else {
 			delete presenceData.endTimestamp;
 			presenceData.smallImageKey = "pause";
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 		const titles = name.textContent.replace(/[0-9]* сезон [0-9]* серия/g, "");
 		presenceData.details = titles;
 		presenceData.state = name.textContent.replace(titles, "");
-	} else if (title) presenceData.details = `Просмотр ${title.textContent}`;
+	} else if (title) presenceData.details = `Смотрит «${title.textContent}»`;
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
