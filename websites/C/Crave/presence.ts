@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
 			? [
 					{
 						label: "Watch",
-						url: document.URL,
+						url: document.location.href,
 					},
 			  ]
 			: null,
