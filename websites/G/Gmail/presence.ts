@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 		[newLang, privacy, time] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("time"),
 		]);
 
 	if (!time) delete presenceData.startTimestamp;
