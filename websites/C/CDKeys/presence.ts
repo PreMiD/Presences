@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 				?.getAttribute("src") ?? "logo";
 		presenceData.buttons = [
 			{
-				label: "View product",
+				label: "View Product",
 				url: href,
 			},
 		];
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 	} else if (series) {
 		presenceData.buttons = [
 			{
-				label: "View product series",
+				label: "View Product Series",
 				url: href,
 			},
 		];
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 	} else if (active || pathname.includes("/coming-soon")) {
 		presenceData.buttons = [
 			{
-				label: "View category",
+				label: "View Category",
 				url: href,
 			},
 		];
