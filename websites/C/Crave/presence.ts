@@ -3,23 +3,19 @@ const presence = new Presence({
 	}),
 	browsingStamp = Date.now();
 
-function $(selector: string): HTMLElement {
-	return document.querySelector(selector);
-}
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = { largeImageKey: "crave_logo" };
 
-	if ($(".jw-video") !== null) {
+	if (document.querySelector(".jw-video")) {
 		// if contains video
-		if ($(".jw-icon-playback").ariaLabel !== "Play") {
+		if (document.querySelector(".jw-icon-playback").ariaLabel !== "Play") {
 			// video is playing
 
 			const elapsed = presence.timestampFromFormat(
-					$(".jw-text-elapsed").innerHTML
+					document.querySelector(".jw-text-elapsed").textContent
 				),
 				duration = presence.timestampFromFormat(
-					$(".jw-text-duration").innerHTML
+					document.querySelector(".jw-text-duration").textContent
 				);
 
 			presenceData.startTimestamp = presence.getTimestamps(
@@ -42,9 +38,10 @@ presence.on("UpdateData", async () => {
 			},
 		];
 
-		if ($(".bm-icon-episode-list") !== null) {
+		if (document.querySelector(".bm-icon-episode-list")) {
 			// if the video is an episode
-			const details = $(".jw-title-primary").innerHTML || "",
+			const details =
+					document.querySelector(".jw-title-primary").textContent || "",
 				// split episode details to achieve {showName, episodeNumber, episodeName}
 				// regex finds the season + episode number then split the entire title with said regex
 				epDetails = details.split(/(S([0-9]+):E([0-9]+))/g.exec(details)[0]);
@@ -55,7 +52,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = epDetails[0].trim(); // {showName}
 		} else {
 			// video is a movie
-			presenceData.details = $(".jw-title-primary").innerHTML; // movie title
+			presenceData.details =
+				document.querySelector(".jw-title-primary").textContent; // movie title
 		}
 	} else {
 		// default to browsing
