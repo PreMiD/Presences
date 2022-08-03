@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 			];
 		} else presenceData.details = "Browsing Through The Forum";
 	} else if (pathname.includes("/cheap-web-hosting"))
-		presenceData.details = "Viewing cheap webhosting";
+		presenceData.details = "Viewing webhosting";
 	else if (pathname.includes("members/website/list"))
 		presenceData.details = "Viewing All Websites";
 	else if (pathname.includes("/members/store"))
