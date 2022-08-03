@@ -1,155 +1,67 @@
 const presence = new Presence({
-	clientId: "1001288215388495953",
-});
+		clientId: "1001288215388495953",
+	}),
+	browsingStamp = Date.now();
 
-/**
- * @param title
- * @return {string} Clean title
- */
-function cleanTitle(title: string): string {
-	if (!title) return "";
-
-	const words = title.replaceAll("_", " ").split(" ");
-	for (let i = 0; i < words.length; i++)
-		words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
-
-	return words.join(" ");
-}
-
-/**
- * @returns {string} The title of the movie
- */
-function getMovieTitle(): string {
-	return document.querySelector("head > title").innerHTML.split(" | ")[0];
-}
-
-/**
- * @returns {string} The title of the show
- */
-function getShowTitle(): string {
-	return document.querySelector("head > title").innerHTML.split(" | ")[0];
-}
-
-interface IShowDetails {
-	name: string;
-	title: string;
-	number: string;
-}
-
-function splitEpisodeDetails(episodeDetails: string): IShowDetails {
-	if (!episodeDetails) return { name: "", title: "", number: "" };
-
-	const match = /(S([0-9]+):E([0-9]+))/g.exec(episodeDetails);
-
-	return {
-		name: episodeDetails.split(match[0])[1].trim(),
-		title: episodeDetails.split(match[0])[0].trim(),
-		number: match[0].trim(),
-	};
-}
-
-/**
- * @returns {boolean} If the video is playing or not
- */
-function isPlaying(): boolean {
-	return document.querySelector(".jw-icon-playback").ariaLabel !== "Play";
-}
-/**
- * @returns [number,number] The current time and the duration of the video
- */
-function getTimeStamps(): [number, number] {
-	return presence.getTimestamps(
-		presence.timestampFromFormat(
-			document.querySelector(".jw-text-elapsed").innerHTML
-		),
-		presence.timestampFromFormat(
-			document.querySelector(".jw-text-duration").innerHTML
-		)
-	);
-}
-
-/**
- * @returns {[string, string, string]} first state, second state, and third state
- */
-function getState(): [string, string, string] {
-	const contentType = document
-			.querySelector("head > meta[property='og:type']")
-			.getAttribute("content")
-			.split(":"),
-		state = contentType[0],
-		content = contentType[1];
-
-	switch (state) {
-		case "section":
-			switch (content) {
-				case "movies":
-					return ["Browsing", "Movies", ""];
-				case "tv_shows":
-					return ["Browsing", "Shows", ""];
-				default:
-					return ["Browsing", cleanTitle(content), ""];
-			}
-		case "movies":
-			return ["Looking", cleanTitle(content), ""];
-		case "tv_shows":
-			return ["Looking", cleanTitle(content), ""];
-		default:
-			if (state.split(".")[0] === "video") {
-				switch (state.split(".")[1]) {
-					case "movie":
-						return ["Watching", getMovieTitle(), "movie"];
-					case "episode":
-						return ["Watching", getShowTitle(), "episode"];
-					default:
-						return ["Watching", cleanTitle(content), ""];
-				}
-			} else if (state === "website") return ["Browsing", "Website", ""];
-			else {
-				presence.error(`Unknown state: ${state}`);
-				return ["Error", "Unknown State", ""];
-			}
-	}
+function $(selector: string): HTMLElement {
+	return document.querySelector(selector);
 }
 
 presence.on("UpdateData", async () => {
-	const isVideo = getState()[0] === "Watching";
+	const presenceData: PresenceData = { largeImageKey: "crave_logo" };
 
-	let stateString, detailsString;
+	if ($(".jw-video") !== null) {
+		// if contains video
+		if ($(".jw-icon-playback").ariaLabel !== "Play") {
+			// video is playing
 
-	if (getState()[2] === "episode") {
-		const episodeDetails = splitEpisodeDetails(
-			document.querySelector(".jw-title-primary")?.innerHTML || ""
-		);
-		// if the video is an episode
-		stateString = `${episodeDetails.number} - ${episodeDetails.name}`;
-		detailsString = getShowTitle();
-	} else if (getState()[2] === "movie") {
-		// if the video is a movie
-		stateString = `${getMovieTitle()}`;
-		detailsString = getState()[0];
+			const elapsed = presence.timestampFromFormat(
+					$(".jw-text-elapsed").innerHTML
+				),
+				duration = presence.timestampFromFormat(
+					$(".jw-text-duration").innerHTML
+				);
+
+			presenceData.startTimestamp = presence.getTimestamps(
+				elapsed,
+				duration
+			)[0];
+			presenceData.endTimestamp = presence.getTimestamps(elapsed, duration)[1];
+
+			presenceData.smallImageKey = "play";
+			presenceData.smallImageText = "Playing";
+		} else {
+			presenceData.smallImageKey = "pause";
+			presenceData.smallImageText = "Paused";
+		}
+
+		presenceData.buttons = [
+			{
+				label: "Watch",
+				url: document.location.href,
+			},
+		];
+
+		if ($(".bm-icon-episode-list") !== null) {
+			// if the video is an episode
+			const details = $(".jw-title-primary").innerHTML || "",
+				// split episode details to achieve {showName, episodeNumber, episodeName}
+				// regex finds the season + episode number then split the entire title with said regex
+				epDetails = details.split(/(S([0-9]+):E([0-9]+))/g.exec(details)[0]);
+
+			presenceData.state = `${
+				/(S([0-9]+):E([0-9]+))/g.exec(details)[0]
+			} - ${epDetails[1].trim()}`; // {episodeNumber} - {episodeName}
+			presenceData.details = epDetails[0].trim(); // {showName}
+		} else {
+			// video is a movie
+			presenceData.details = $(".jw-title-primary").innerHTML; // movie title
+		}
 	} else {
-		stateString = getState()[1];
-		detailsString = getState()[0];
+		// default to browsing
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = browsingStamp;
 	}
 
-	const presenceData: PresenceData = {
-		largeImageKey: "crave_logo",
-		smallImageKey: isVideo ? (isPlaying() ? "play" : "pause") : "Browsing",
-		smallImageText: isVideo ? (isPlaying() ? "Playing" : "Paused") : "Browsing",
-		details: detailsString,
-		state: stateString,
-		startTimestamp: isVideo ? (isPlaying() ? getTimeStamps()[0] : 0) : null,
-		endTimestamp: isVideo ? (isPlaying() ? getTimeStamps()[1] : 0) : null,
-		buttons: isVideo
-			? [
-					{
-						label: "Watch",
-						url: document.location.href,
-					},
-			  ]
-			: null,
-	};
-
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	presence.setActivity(presenceData);
 });
