@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Watch";
 			presenceData.state = `Viewing ${
 				document.querySelector('span > a[role="link"] > span').textContent
-			}'s page`
+			}'s page`;
 			presenceData.buttons = [
 				{ label: "View User", url: document.location.href },
 			];
