@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 		]),
 		title = document.querySelector("head > title"),
 		titleSite = document.querySelector(
-			"#nav-container > div > div.sidebar__header.flex.flex-col > a.sidebar-header__app-link.text-color-white.text-bold.disabled-link.sidebar-header__app-link--disabled > span"
+			'[class="sidebar__header flex flex-col"]'
 		);
 	if (titleSite) presenceData.state = titleSite.textContent;
 	if (pathname === "/") presenceData.details = "Viewing the Homepage";
