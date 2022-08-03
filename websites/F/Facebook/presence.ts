@@ -174,7 +174,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Watch - Searching for:";
 			presenceData.state = showSeachQuery ? decodeURI(search) : "(Hidden)";
 		} else if (privacyMode)
-			presenceData.details = "Watch - Viewing an user's page";
+			presenceData.details = "Watch - Viewing a user's page";
 		else {
 			presenceData.details = "Watch";
 			presenceData.state = `Viewing ${
