@@ -83,7 +83,6 @@ presence.on("UpdateData", async () => {
 				Math.floor(duration)
 			);
 		}
-
 		if (!isNaN(duration)) {
 			presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
 			presenceData.smallImageText = paused
@@ -93,6 +92,11 @@ presence.on("UpdateData", async () => {
 			presenceData.details = document.querySelector(
 				"#aligncenter > span.animetitle"
 			).textContent;
+			if (showCover) {
+				presenceData.largeImageKey = document
+					.querySelector('meta[property="og:image"]')
+					.getAttribute("content");
+			}
 			presenceData.state = `Episode ${document
 				.querySelector("#eptitle > span#eptitleplace")
 				.textContent.replace(/\D/g, "")}`;
