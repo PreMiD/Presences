@@ -31,6 +31,12 @@
 			"title": "Show buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
+		},
+		{
+			"id": "covers",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
 		}
 	]
 }

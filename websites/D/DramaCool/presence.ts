@@ -43,8 +43,11 @@ presence.on("UpdateData", async () => {
 			smallImageKey: "reading",
 			startTimestamp: startsTime,
 		},
-		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
+		[covers, buttons, newLang] = await Promise.all([
+			presence.getSetting<boolean>("covers"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<string>("lang").catch(() => "en"),
+		]),
 		{ pathname, search, href } = document.location;
 
 	if (oldLang !== newLang || !strings) {
@@ -102,7 +105,19 @@ presence.on("UpdateData", async () => {
 					label: strings.viewEpisode,
 					url: href,
 				},
+				{
+					label: strings.viewSeriesButton,
+					url: document
+						.querySelector('[class="Category"]')
+						.firstElementChild.firstElementChild.getAttribute("href"),
+				},
 			];
+
+			if (covers) {
+				presenceData.largeImageKey =
+					document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+						?.content ?? "dramacool_logo_b";
+			}
 
 			if (ShowData.paused) {
 				delete presenceData.startTimestamp;
@@ -133,7 +148,7 @@ presence.on("UpdateData", async () => {
 		];
 	}
 
-	if (!showButtons && presenceData.buttons) delete presenceData.buttons;
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
 });
