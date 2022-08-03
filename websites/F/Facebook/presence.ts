@@ -176,9 +176,10 @@ presence.on("UpdateData", async () => {
 		} else if (privacyMode)
 			presenceData.details = "Watch - Viewing an user's page";
 		else {
-			presenceData.details = `Watch - Viewing ${
+			presenceData.details = "Watch";
+			presenceData.state = `Viewing ${
 				document.querySelector('span > a[role="link"] > span').textContent
-			}'s page`;
+			}'s page`
 			presenceData.buttons = [
 				{ label: "View User", url: document.location.href },
 			];
