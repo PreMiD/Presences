@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 		const search = new URLSearchParams(location.search).get("q"),
 			videoId = new URLSearchParams(location.search).get("v");
 		presenceData.largeImageKey = "https://i.imgur.com/FMIfiPA.png";
-		if (!videoId && !search) {
+		if (!videoId && !search && document.location.href.includes("?v=")) {
 			const videoFrame = Array.from(
 				document.querySelectorAll('div[class="l9j0dhe7"]')
 			).find(
@@ -130,7 +130,7 @@ presence.on("UpdateData", async () => {
 						isLive ? "live" : "video"
 					}`;
 				} else if (isLive) {
-					presenceData.details = "Wattch - Watching a live:";
+					presenceData.details = "Watch - Watching a live:";
 					presenceData.state = description || user;
 
 					presenceData.smallImageKey = "live";
@@ -173,6 +173,15 @@ presence.on("UpdateData", async () => {
 		} else if (search && !privacyMode) {
 			presenceData.details = "Watch - Searching for:";
 			presenceData.state = showSeachQuery ? decodeURI(search) : "(Hidden)";
+		} else if (privacyMode)
+			presenceData.details = "Watch - Viewing an user's page";
+		else {
+			presenceData.details = `Watch - Viewing ${
+				document.querySelector('span > a[role="link"] > span').textContent
+			}'s page`;
+			presenceData.buttons = [
+				{ label: "View User", url: document.location.href },
+			];
 		}
 	} else if (document.location.pathname.includes("/marketplace/")) {
 		presenceData.startTimestamp = browsingTimestamp;
