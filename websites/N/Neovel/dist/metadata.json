@@ -10,15 +10,9 @@
 		"fr": "Conçu par et pour les amoureux des livres ! Découvrez d'innombrables nouvelles histoires à portée de main et rejoignez une forte communauté positive !",
 		"es": "¡Hecho, diseñado y pensado para los amantes de las novelas! ¡Con la punta de tus dedos puedes acceder, leer y descubrir montones de historias nuevas y una comunidad fuerte!"
 	},
-	"url": [
-		"neovel.io",
-		"fr.neovel.io",
-		"es.neovel.io",
-		"neopload.neovel.io",
-		"fr.neopload.neovel.io",
-		"es.neopload.neovel.io"
-	],
-	"version": "1.0.2",
+	"url": "neovel.io",
+	"regExp": "([a-z]*[.])*(neovel|neopload.neovel)[.]io",
+	"version": "1.1.0",
 	"logo": "https://i.imgur.com/CYk2ZDX.jpg",
 	"thumbnail": "https://i.imgur.com/Ei5H8Zz.jpg",
 	"color": "#041a26",
@@ -26,7 +20,8 @@
 	"tags": [
 		"read",
 		"novel",
-		"story"
+		"story",
+		"neovel"
 	],
 	"settings": [
 		{
@@ -39,6 +34,12 @@
 			"id": "time",
 			"title": "Show Timestamp",
 			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
 			"value": true
 		}
 	]
