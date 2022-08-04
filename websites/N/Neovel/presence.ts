@@ -24,6 +24,9 @@ presence.on("UpdateData", async () => {
 		delete presenceDataSlide.startTimestamp;
 	}
 
+	const bookCoverPath =
+		"https://neovel.io/V2/book/image?bookId=%bookId%&oldApp=false&imageExtension=1";
+
 	switch (pathnameArray[1]) {
 		case "discover":
 			presenceData.details = "Discovering new books";
@@ -40,8 +43,12 @@ presence.on("UpdateData", async () => {
 						document.querySelector(`option[value="${pathnameArray[2]}"]`)
 							.textContent
 					} [${pathnameArray[3]}]`;
-					if (showCover)
-						presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+					if (showCover) {
+						presenceData.largeImageKey = bookCoverPath.replace(
+							"%bookId%",
+							pathnameArray[2]
+						);
+					}
 				}
 			} else {
 				presenceData.details = presenceDataSlide.details =
@@ -50,8 +57,8 @@ presence.on("UpdateData", async () => {
 					{ label: "View Book", url: document.documentURI },
 				];
 				if (showCover) {
-					presenceData.largeImageKey =
-						presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+					presenceData.largeImageKey = presenceDataSlide.largeImageKey =
+						bookCoverPath.replace("%bookId%", pathnameArray[2]);
 				}
 				presenceData.state = `from ${
 					document.querySelector("a.author-element span").textContent
@@ -85,8 +92,8 @@ presence.on("UpdateData", async () => {
 						},
 				  ];
 			if (showCover) {
-				presenceData.largeImageKey =
-					presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+				presenceData.largeImageKey = presenceDataSlide.largeImageKey =
+					bookCoverPath.replace("%bookId%", pathnameArray[2]);
 			}
 			presenceData.state = `from ${
 				document.querySelector("div.book-info span").textContent
@@ -154,8 +161,12 @@ presence.on("UpdateData", async () => {
 					document.querySelector("div.card-title strong.neovel-font-big")
 						.textContent
 				}"`;
-				if (showCover)
-					presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+				if (showCover) {
+					presenceData.largeImageKey = bookCoverPath.replace(
+						"%bookId%",
+						pathnameArray[2]
+					);
+				}
 			}
 			break;
 		case "dashboard":
@@ -164,8 +175,12 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `from ${
 					document.querySelector("div.book-detail-container h2").textContent
 				} [${pathnameArray[3]}]`;
-				if (showCover)
-					presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+				if (showCover) {
+					presenceData.largeImageKey = bookCoverPath.replace(
+						"%bookId%",
+						pathnameArray[2]
+					);
+				}
 			}
 			break;
 		case "contact_us":
