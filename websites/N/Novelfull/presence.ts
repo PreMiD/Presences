@@ -5,42 +5,55 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/4UOKOMH.jpg",
 			startTimestamp: browsingTimestamp,
 		},
-		page = window.location.pathname,
-		search: HTMLInputElement = document.querySelector("#search-input");
-	if (search.value !== "") {
-		presenceData.details = "Searching for:";
+		{ hostname, pathname, href } = window.location,
+		[covers, buttons] = await Promise.all([
+			presence.getSetting<boolean>("covers"),
+			presence.getSetting<boolean>("buttons"),
+		]),
+		search = document.querySelector<HTMLInputElement>("#search-input");
+	if (search.value) {
+		presenceData.details = "Searching for";
 		presenceData.state = search.value;
-	} else if (page === "/") presenceData.details = "Viewing the homepage";
-	else if (page.includes("genre")) {
-		presenceData.details = "Viewing Novels Genre:";
-		presenceData.state = page.replace("/genre/", "");
-	} else if (page.includes("chapter")) {
-		presenceData.details = document.querySelector(
-			"#container > div.navbar-breadcrumb > div > ol > li:nth-child(2) > h1 > a > span"
-		).textContent;
-		presenceData.state = document.querySelector(
-			"#chapter > div > div > h2 > a > span"
-		).textContent;
-	} else if (page.includes("latest-release-novel"))
-		presenceData.details = "Latest Releases";
-	else if (page.includes("hot-novel")) presenceData.details = "Hot Novels";
-	else if (page.includes("completed-novel"))
-		presenceData.details = "Completed Novels";
-	else if (page.includes("most-popular"))
-		presenceData.details = "Most Popular Novels";
-	else if (
-		document.querySelector(
-			"#truyen > div.csstransforms3d > div > div.col-xs-12.col-info-desc > div.title-list > h2"
-		)
-	) {
-		presenceData.details = "Viewing:";
-		presenceData.state = document.querySelector(
-			"#truyen > div.csstransforms3d > div > div.col-xs-12.col-info-desc > div.col-xs-12.col-sm-8.col-md-8.desc > h3"
-		).textContent;
+	} else if (pathname === "/") presenceData.details = "Viewing the homepage";
+	else if (pathname.includes("genre")) {
+		presenceData.details = "Viewing Novels with Genre";
+		presenceData.state = pathname.replace("/genre/", "");
+		presenceData.buttons = [{ label: "Browse genre", url: href }];
+	} else if (pathname.includes("chapter")) {
+		const split = document
+			.querySelector<HTMLMetaElement>('[name="title"]')
+			.content.split("-");
+		presenceData.details = split[0];
+		presenceData.state = split[1].replace("online free", "");
+		presenceData.buttons = [
+			{ label: "Read chapter", url: href },
+			{
+				label: "View novel",
+				url: `http://${hostname}${document
+					.querySelector('[class="truyen-title"]')
+					.getAttribute("href")}`,
+			},
+		];
+	} else if (pathname.includes("-novel")) {
+		presenceData.details = "Viewing all";
+		presenceData.state = `${
+			document.querySelector('[class="active"]').textContent
+		}s`;
+	} else if (document.querySelector('[class="book"]')) {
+		if (covers) {
+			presenceData.largeImageKey = `http://${hostname}${document
+				.querySelector('[class="book"]')
+				?.firstElementChild?.getAttribute("src")}`;
+		}
+		presenceData.details = "Viewing";
+		presenceData.state = document.querySelector('[class="title"]').textContent;
+		presenceData.buttons = [{ label: "View Novel", url: href }];
+		presenceData.smallImageKey = "read";
 	}
+	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

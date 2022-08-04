@@ -13,7 +13,7 @@
 		"novelfull.com",
 		"www.novelfull.com"
 	],
-	"version": "1.0.5",
+	"version": "1.1.0",
 	"logo": "https://i.imgur.com/4UOKOMH.jpg",
 	"thumbnail": "https://i.imgur.com/EgovjIn.jpg",
 	"color": "#0093c9",
@@ -24,5 +24,19 @@
 		"novefull",
 		"read",
 		"reading"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"id": "covers",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		}
 	]
 }
