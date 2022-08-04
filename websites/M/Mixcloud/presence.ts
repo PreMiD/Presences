@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "610102236374368267",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
 	});
 
 let author: string, title: string, url: string, openUrlText: string;

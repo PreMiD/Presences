@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "860224040060715018",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let iFrameVideo: { isPaused: boolean };

@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/watch")) {
 		const search = new URLSearchParams(location.search).get("q"),
 			videoId = new URLSearchParams(location.search).get("v");
-
+		presenceData.largeImageKey = "https://i.imgur.com/FMIfiPA.png";
 		if (!videoId && !search) {
 			const videoFrame = Array.from(
 				document.querySelectorAll('div[class="l9j0dhe7"]')

@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [{ label: "View Topic", url: document.URL }];
 					break;
 				case document.location.pathname.includes("/forum"):
-					presenceData.details = "Browing the forum";
+					presenceData.details = "Browsing the forum";
 					presenceData.state =
 						document.querySelector<HTMLHeadingElement>(
 							"header > h1"

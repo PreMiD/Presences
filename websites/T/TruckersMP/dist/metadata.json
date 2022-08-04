@@ -21,7 +21,7 @@
 		"stats.truckersmp.com",
 		"map.truckersmp.com"
 	],
-	"version": "3.0.6",
+	"version": "3.0.7",
 	"logo": "https://i.imgur.com/ptddTU8.png",
 	"thumbnail": "https://i.imgur.com/Z8CxsNw.png",
 	"color": "#B92025",
@@ -35,22 +35,25 @@
 	],
 	"settings": [
 		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
 			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		},
 		{
 			"id": "timestamp",
-			"title": "Show timestamps",
+			"title": "Show Timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
-		},
-		{
-			"id": "privacy",
-			"title": "Privacy Mode",
-			"icon": "fad fa-user-secret",
-			"value": false
 		}
 	]
 }

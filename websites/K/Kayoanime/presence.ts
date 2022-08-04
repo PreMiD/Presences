@@ -3,8 +3,8 @@ const presence = new Presence({
 	}),
 	path: string = document.location.pathname,
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	details = { view: "Viewing anime:", stream: "Watching anime:" };
 

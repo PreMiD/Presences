@@ -19,7 +19,7 @@
 		"vi_VN": "Coub là trang web chia sẻ video trực tuyến. Nó cho phép người dùng tạo và chia sẻ video lặp lại lên tới mười giây, sử dụng các video có sẵn tại YouTube, Vimeo, hoặc tệp riêng của họ"
 	},
 	"url": "coub.com",
-	"version": "2.0.14",
+	"version": "2.1.0",
 	"logo": "https://i.imgur.com/HRAGMzw.png",
 	"thumbnail": "https://i.imgur.com/8P8RhcZ.png",
 	"color": "#0084FF",
@@ -39,6 +39,18 @@
 			"id": "show_button_watching",
 			"title": "Show current playing button",
 			"icon": "fas fa-external-link-alt",
+			"value": true
+		},
+		{
+			"id": "show_externalLargeImage",
+			"title": "Show Thumbnails (community/channel images)",
+			"icon": "fas fa-image",
+			"value": true
+		},
+		{
+			"id": "show_startedBrowsing",
+			"title": "Show Elapsed Time",
+			"icon": "fas fa-stopwatch",
 			"value": true
 		}
 	]
