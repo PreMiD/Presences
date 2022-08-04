@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "721748388143562852",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	}),
 	media: MediaObj = {
 		// anyone is welcome to suggest more metadata via GH issues

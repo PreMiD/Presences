@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "747190301676011550",
 	}),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 

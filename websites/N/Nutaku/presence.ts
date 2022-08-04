@@ -181,7 +181,7 @@ presence.on("UpdateData", async () => {
 		currentLang = newLang;
 		localizedStrings = await presence.getStrings(
 			{
-				browsing: "presence.activity.browsing",
+				browsing: "general.browsing",
 				playing: "general.playing",
 				readingArticle: "general.readingArticle",
 				readingArticleButton: "general.buttonReadArticle",

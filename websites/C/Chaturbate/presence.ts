@@ -2,10 +2,10 @@ const presence = new Presence({
 		clientId: "721741902403207218",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
-		live: "presence.activity.live",
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
+		live: "general.live",
 	});
 let prev: string, elapsed: number, path: string, gender: string;
 

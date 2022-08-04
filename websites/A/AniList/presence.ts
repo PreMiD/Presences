@@ -5,8 +5,8 @@ const presence: Presence = new Presence({
 
 async function getStrings() {
 	return presence.getStrings({
-		browsing: "presence.activity.browsing",
-		reading: "presence.activity.reading",
+		browsing: "general.browsing",
+		reading: "general.reading",
 	});
 }
 

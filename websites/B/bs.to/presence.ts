@@ -9,7 +9,12 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "bs",
 	};
 
-	if (document.location.hostname === "bs.to") {
+	if (document.location.hostname === "burningseries.domains") {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "Viewing burning series domains";
+	} else if (
+		document.location.hostname.match(/(bs|burningseries)[.]([a-z0-9-])+/g)
+	) {
 		presenceData.startTimestamp = browsingTimestamp;
 		if (document.location.pathname === "/")
 			presenceData.details = "Viewing home page";
