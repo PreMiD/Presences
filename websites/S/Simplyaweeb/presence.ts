@@ -114,9 +114,11 @@ presence.on("UpdateData", async () => {
 		case "memes":
 			presenceData.details = "Browsing anime memes";
 			if (document.querySelector("div.lg")) {
-				presenceData.details = "Viewing a meme";
+				presenceData.details = "Reading a meme";
 				presenceData.state =
 					document.querySelector<HTMLDivElement>("div.lg-sub-html").textContent;
+				presenceData.smallImageKey = "reading";
+				presenceData.smallImageText = "Reading";
 			}
 			break;
 		case "anime":
@@ -173,6 +175,8 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLImageElement>("div.col-left > img").src;
 				if (showCover && imgLink !== imgPlaceholder)
 					presenceData.largeImageKey = imgLink;
+				presenceData.smallImageKey = "reading";
+				presenceData.smallImageText = "Reading";
 
 				presenceData.buttons = [
 					{ label: "Read Chapter", url: document.location.href },
