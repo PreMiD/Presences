@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
 		currentPage = path.split("#")[1];
 
 	if (pages[currentPage]) presenceData.details = pages[currentPage];
-	else if (path.endsWith("compose=new"))
+	else if (path.includes("compose="))
 		presenceData.details = strings.composingEmail;
 	else if (path.match("#search"))
 		presenceData.details = strings.lookingForEmail;
