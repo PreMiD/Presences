@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("genre")) {
 		presenceData.details = "Viewing Novels with Genre";
 		presenceData.state = pathname.replace("/genre/", "");
-		presenceData.buttons = [{ label: "Browse genre", url: href }];
+		presenceData.buttons = [{ label: "Browse Genre", url: href }];
 	} else if (pathname.includes("chapter")) {
 		const split = document
 			.querySelector<HTMLMetaElement>('[name="title"]')
@@ -29,17 +29,16 @@ presence.on("UpdateData", async () => {
 		presenceData.details = split[0];
 		presenceData.state = split[1].replace("online free", "");
 		presenceData.buttons = [
-			{ label: "Read chapter", url: href },
+			{ label: "Read Chapter", url: href },
 			{
-				label: "View novel",
+				label: "View Novel",
 				url: `http://${hostname}${document
 					.querySelector('[class="truyen-title"]')
 					.getAttribute("href")}`,
 			},
 		];
 	} else if (pathname.includes("-novel")) {
-		presenceData.details = "Viewing all";
-		presenceData.state = `${
+		presenceData.details = `Viewing all ${
 			document.querySelector('[class="active"]').textContent
 		}s`;
 	} else if (document.querySelector('[class="book"]')) {
@@ -48,8 +47,9 @@ presence.on("UpdateData", async () => {
 				.querySelector('[class="book"]')
 				?.firstElementChild?.getAttribute("src")}`;
 		}
-		presenceData.details = "Viewing";
-		presenceData.state = document.querySelector('[class="title"]').textContent;
+		presenceData.details = `Viewing ${
+			document.querySelector('[class="title"]').textContent
+		}`;
 		presenceData.buttons = [{ label: "View Novel", url: href }];
 		presenceData.smallImageKey = "read";
 	}
