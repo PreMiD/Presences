@@ -36,12 +36,21 @@
 		},
 		{
 			"id": "buttons",
-			"if": {
-				"privacy": false
-			},
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
-			"value": true
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "covers",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": false,
+			"if": {
+				"privacy": false
+			}
 		}
 	]
 }
