@@ -20,17 +20,11 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector<HTMLInputElement>(
 				'[class="input-xlarge"]'
 			).value;
-			presenceData.buttons = [
-				{
-					label: "Browse Searches",
-					url: href,
-				},
-			];
 		} else if (search?.value) presenceData.state = search?.value;
 		else delete presenceData.details;
 
 		presenceData.smallImageKey = "searching";
-	} else if (pathname === "/") presenceData.details = "Viewing The Home page";
+	} else if (pathname === "/") presenceData.details = "Viewing the Home page";
 	else if (pathname.includes("/category/")) {
 		if (pathname === "/category/all")
 			presenceData.details = "Viewing All Categories";
@@ -44,21 +38,21 @@ presence.on("UpdateData", async () => {
 	} else if (pathname === "/community")
 		presenceData.details = "Viewing the forums";
 	else if (pathname.includes("/forum/")) {
-		presenceData.details = "Viewing Forum";
+		presenceData.details = "Viewing forum";
 		presenceData.state = document
 			.querySelector("#content-canvas > main > h1")
 			.textContent.replace("Forums → ", "");
 		presenceData.buttons = [{ label: "View Forum", url: href }];
 	} else if (pathname.includes("thread")) {
-		presenceData.details = "Reading Forum Thread";
+		presenceData.details = "Reading a forum thread";
 		presenceData.state = document.querySelector("#thread-title").textContent;
 		presenceData.buttons = [{ label: "View Thread", url: href }];
 	} else if (pathname.includes("/user/")) {
-		presenceData.details = "Viewing the profile of";
+		presenceData.details = "Viewing a user's profile";
 		presenceData.state = document.querySelector("#user-data > h1").textContent;
 		presenceData.buttons = [{ label: "View Profile", url: href }];
 	} else if (pathname.includes("/author/")) {
-		presenceData.details = "Viewing Games Made By";
+		presenceData.details = "Viewing games created by";
 		presenceData.state = document.querySelector(
 			"#categorylisting > h2 > a"
 		).textContent;
