@@ -36,16 +36,24 @@ presence.on("UpdateData", () => {
 		 } else if(path.includes("/search")) {
 			presenceData.details = "Searching";
 			presenceData.state = path.split("/")[2].replaceAll("%20", " ");
-		 } else if(path.includes("/lyrics") && path.includes("/translation/")) {
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>("#site > div > div > div > main > div > div > div.mxm-track-banner.top > div > div > div > div.col-sm-1.col-md-2.col-ml-3.col-lg-3.static-position > div > div > div > img").src;
-			presenceData.smallImageKey = "https://i.imgur.com/Yb4CWnm.png";
-			presenceData.details = `Reading ${path.split("/")[5]} translation`;
-			presenceData.state = `${document.querySelector("#site h1").textContent} - ${document.querySelector("#site h2 > span > a").textContent}`;
-		 } else if(path.includes("/lyrics")) {
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>("#site > div > div > div > main > div > div > div.mxm-track-banner.top > div > div > div > div.col-sm-1.col-md-2.col-ml-3.col-lg-3.static-position > div > div > div > img").src;
-			presenceData.smallImageKey = "https://i.imgur.com/Yb4CWnm.png";
-			presenceData.details = "Reading lyrics";
-			presenceData.state = `${document.querySelector("#site h1").textContent} - ${document.querySelector("#site h2 > span > a").textContent}`;
+		 } else if (path.includes("/lyrics") && path.includes("/translation/")) {
+				presenceData.largeImageKey = document.querySelector<HTMLImageElement>("#site > div > div > div > main > div > div > div.mxm-track-banner.top > div > div > div > div.col-sm-1.col-md-2.col-ml-3.col-lg-3.static-position > div > div > div > img").src;
+				presenceData.smallImageKey = "https://i.imgur.com/Yb4CWnm.png";
+				presenceData.details = `Reading ${path.split("/")[5]} translation`;
+				presenceData.state = `${document.querySelector("#site h2 > span > a")?.textContent || document.querySelector("#site h2 > span > span > a").textContent} - ${document.querySelector("#site h1").childNodes[1].textContent}`;
+		} else if (path.includes("/lyrics")) {
+				presenceData.largeImageKey = document.querySelector<HTMLImageElement>("#site > div > div > div > main > div > div > div.mxm-track-banner.top > div > div > div > div.col-sm-1.col-md-2.col-ml-3.col-lg-3.static-position > div > div > div > img").src;
+				presenceData.smallImageKey = "https://i.imgur.com/Yb4CWnm.png";
+				presenceData.details = "Reading lyrics";
+				presenceData.state = `${document.querySelector("#site h2 > span > a")?.textContent || document.querySelector("#site h2 > span > span > a").textContent} - ${document.querySelector("#site h1").childNodes[1].textContent}`;
+		 } else if(path.includes("/artist")) {
+			const avatar = document.querySelector<HTMLImageElement>("#content > div > div.profile-header.artist-header > div > div.profile-info > div > div.profile-image > img").src;
+			if(!avatar.includes("avatar-placeholder.png")) {
+				presenceData.largeImageKey = avatar;
+				presenceData.smallImageKey = "https://i.imgur.com/Yb4CWnm.png";
+			}
+			presenceData.details = "Browsing artist";
+			presenceData.state = document.querySelector("#content > div > div.profile-header.artist-header > div > div.profile-info > div > div.profile-data > h1").textContent;
 		 }
 	} else if(domain === "curators.musixmatch.com") {
 		if(path === "/" || path === "/missions") presenceData.details = "Browsing curator's missions";
