@@ -24,7 +24,9 @@ presence.on("UpdateData", async () => {
 		[showCover, time] = await Promise.all([
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("time"),
-		]);
+		]),
+		imgPlaceholder =
+			"https://simplyaweeb.to/wp-content/themes/simplyaweeb/images/placeholder.jpg";
 
 	switch (document.location.pathname.split("/")[1]) {
 		case "":
@@ -134,10 +136,11 @@ presence.on("UpdateData", async () => {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(video.current, video.duration);
 
-				if (showCover) {
-					presenceData.largeImageKey =
-						document.querySelector<HTMLImageElement>("div.col-left > img").src;
-				}
+				const imgLink =
+					document.querySelector<HTMLImageElement>("div.col-left > img").src;
+				if (showCover && imgLink !== imgPlaceholder)
+					presenceData.largeImageKey = imgLink;
+
 				presenceData.smallImageKey = "play";
 				presenceData.smallImageText = "Playing";
 
@@ -166,10 +169,10 @@ presence.on("UpdateData", async () => {
 					.querySelector<HTMLDivElement>(".episode-number")
 					.textContent.trim();
 
-				if (showCover) {
-					presenceData.largeImageKey =
-						document.querySelector<HTMLImageElement>("div.col-left > img").src;
-				}
+				const imgLink =
+					document.querySelector<HTMLImageElement>("div.col-left > img").src;
+				if (showCover && imgLink !== imgPlaceholder)
+					presenceData.largeImageKey = imgLink;
 
 				presenceData.buttons = [
 					{ label: "Read Chapter", url: document.location.href },
