@@ -74,6 +74,7 @@ presence.on("UpdateData", async () => {
 					.textContent.trim()} (${document
 					.querySelector<HTMLSpanElement>(".season-anime")
 					.textContent.trim()})`;
+
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(
 						presence.timestampFromFormat(
@@ -87,6 +88,13 @@ presence.on("UpdateData", async () => {
 								.textContent.trim()
 						)
 					);
+
+				if (showCover) {
+					presenceData.largeImageKey = document
+						.querySelector<HTMLImageElement>("div.col-left > img")
+						.src.replace("&w=100", "");
+				}
+
 				presenceData.smallImageKey = "play";
 				presenceData.smallImageText = "Playing";
 				if (
