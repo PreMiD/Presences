@@ -1,12 +1,12 @@
 const presence = new Presence({
 		clientId: "844109673618735144",
 	}),
-	elapsed = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/1uePEgT.png",
-			startTimestamp: elapsed,
+			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting("privacy"),
 		{ pathname } = document.location;
@@ -22,13 +22,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Composing an email";
 	else if (privacy) {
 		if (pathname.includes("/folders/") || pathname.includes("/search/")) {
-			if (pathname.includes("messages")) {
+			if (pathname.includes("messages"))
 				presenceData.details = "Viewing an Email";
-				presenceData.startTimestamp = elapsed;
-			} else {
-				presenceData.details = "Viewing Mail";
-				presenceData.startTimestamp = elapsed;
-			}
+			else presenceData.details = "Viewing Mail";
 		} else presenceData.details = "Browsing";
 	} else if (document.querySelector('[data-test-is-active="true"]')) {
 		presenceData.details = `Viewing ${document
