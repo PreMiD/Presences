@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 
 	switch (document.location.pathname.split("/")[1]) {
 		case "":
-			presenceData.details = "Browsing videos";
+			presenceData.details = "Browsing anime videos";
 			if (
 				!["", "none"].includes(
 					document.querySelector<HTMLElement>("#youtubelightbox").style.display
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case "music":
-			presenceData.details = "Browsing Musics";
+			presenceData.details = "Browsing anime musics";
 			if (
 				!["", "none"].includes(
 					document.querySelector<HTMLElement>("#youtubelightbox").style.display
