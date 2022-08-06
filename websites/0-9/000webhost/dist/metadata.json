@@ -10,12 +10,9 @@
 		"nl": "Gratis Web Hosting met Nul kosten, met PHP, MySQL, cPanel & geen ads!",
 		"vi_VN": "Dịch vụ Lưu trữ Web không mất phí, dành cho PHP, MySQL, cPanel với không quảng cáo!"
 	},
-	"url": [
-		"www.000webhost.com",
-		"000webhost.com"
-	],
+	"url": "000webhost.com",
 	"regExp": "([a-z0-9-]+[.])*000webhost[.]com[\\/]",
-	"version": "1.1.7",
+	"version": "1.2.0",
 	"logo": "https://i.imgur.com/FiCZfzh.png",
 	"thumbnail": "https://i.imgur.com/coiMeKE.jpg",
 	"color": "#ff5c62",
@@ -30,10 +27,19 @@
 	],
 	"settings": [
 		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
 			"id": "buttons",
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
-			"value": true
+			"value": true,
+			"if": {
+				"privacy": false
+			}
 		}
 	]
 }
