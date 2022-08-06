@@ -113,50 +113,67 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		}
-	} else if (path[1] === "bestcovery") {
-		const categories = [
-				"auto",
-				"home",
-				"lifestyle",
-				"electronics",
-				"tech",
-				"health-beauty",
-				"fashion",
-				"sports",
-				"music",
-				"kids-babies",
-				"streaming",
-			],
-			title = document.title.replace(" - Bestcovery", "");
+	} else {
+		switch (path[1]) {
+			case "bestcovery": {
+				const categories = [
+						"auto",
+						"home",
+						"lifestyle",
+						"electronics",
+						"tech",
+						"health-beauty",
+						"fashion",
+						"sports",
+						"music",
+						"kids-babies",
+						"streaming",
+					],
+					title = document.title.replace(" - Bestcovery", "");
 
-		presenceData.largeImageKey = "bestcovery";
-		presenceData.smallImageKey = "logo-small";
-		presenceData.smallImageText = "Bestcovery powered by L.A. Times";
+				presenceData.largeImageKey = "bestcovery";
+				presenceData.smallImageKey = "logo-small";
+				presenceData.smallImageText = "Bestcovery powered by L.A. Times";
 
-		if (categories.includes(path[2])) {
-			presenceData.details = "Viewing a Category";
-			presenceData.buttons[0].label = "View Category";
+				if (categories.includes(path[2])) {
+					presenceData.details = "Viewing a Category";
+					presenceData.buttons[0].label = "View Category";
 
-			if (!privacyMode) presenceData.state = title;
-		} else {
-			presenceData.details = "Reading a Review";
-			presenceData.state = title.replace(" | Review by Bestcovery", "");
-			presenceData.buttons[0].label = "Read Article";
+					if (!privacyMode) presenceData.state = title;
+				} else {
+					presenceData.details = "Reading a Review";
+					presenceData.state = title.replace(" | Review by Bestcovery", "");
+					presenceData.buttons[0].label = "Read Article";
+				}
+
+				break;
+			}
+
+			case "coupon-codes": {
+				presenceData.details = "Viewing Coupon Codes";
+				break;
+			}
+
+			case "games": {
+				presenceData.details = "Viewing Games";
+
+				if (!privacyMode && path[2]) {
+					presenceData.details = "Playing a Game";
+					presenceData.state =
+						document.querySelector("h2.subhead")?.textContent;
+					presenceData.buttons[0].label = "View Game";
+				}
+
+				break;
+			}
+
+			default:
+				if (path[1]) {
+					presenceData.details = "Viewing a Category";
+
+					if (!privacyMode) presenceData.state = title;
+				}
 		}
-	} else if (path[1] === "coupon-codes")
-		presenceData.details = "Viewing Coupon Codes";
-	else if (path[1] === "games") {
-		presenceData.details = "Viewing Games";
-
-		if (!privacyMode && path[2]) {
-			presenceData.details = "Playing a Game";
-			presenceData.state = document.querySelector("h2.subhead")?.textContent;
-			presenceData.buttons[0].label = "View Game";
-		}
-	} else if (path[1]) {
-		presenceData.details = "Viewing a Category";
-
-		if (!privacyMode) presenceData.state = title;
 	}
 
 	if (!presenceData.state) delete presenceData.state;
