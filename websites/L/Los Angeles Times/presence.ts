@@ -70,9 +70,7 @@ presence.on("UpdateData", async () => {
 				img: document.querySelector<HTMLImageElement>(
 					"div.author-avatar a > img"
 				),
-				name:
-					document.querySelector("div.author-avatar a")?.ariaLabel.trim() ??
-					"Unknown",
+				name: document.querySelector("div.author-avatar a")?.ariaLabel.trim(),
 			},
 			authors = document.querySelector("div.authors > div.author-name"),
 			headline = document.querySelector("h1.headline")?.textContent ?? title;
@@ -96,7 +94,7 @@ presence.on("UpdateData", async () => {
 			];
 		}
 
-		if (showArticleAuthor && !privacyMode && author) {
+		if (showArticleAuthor && !privacyMode && author.name) {
 			presenceData.smallImageKey = await getShortURL(author.img?.src);
 			presenceData.smallImageText =
 				authors?.textContent.trim() ?? `By ${author.name}`;
