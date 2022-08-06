@@ -22,11 +22,24 @@ presence.on("UpdateData", async () => {
 	else {
 		switch (pathname) {
 			case "/shows-a-z": {
-				presenceData.details = "Viewing 7plus Shows";
+				presenceData.details = "Browsing 7plus Shows";
+				presenceData.buttons = [
+					{
+						label: "Browse Shows",
+						url: href,
+					},
+				];
 				break;
 			}
 			case "/sport": {
-				presenceData.details = "Viewing 7plus Sports";
+				presenceData.details = "Browsing 7plus Sports";
+
+				presenceData.buttons = [
+					{
+						label: "Browse All Sports",
+						url: href,
+					},
+				];
 				break;
 			}
 			case "/search": {
@@ -86,6 +99,12 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey =
 						video.getAttribute("poster") ?? "https://i.imgur.com/BamXC8h.png";
 				} else {
+					presenceData.buttons = [
+						{
+							label: "View Show",
+							url: href,
+						},
+					];
 					presenceData.largeImageKey =
 						document
 							.querySelector('[class="logoWrapper"]')
