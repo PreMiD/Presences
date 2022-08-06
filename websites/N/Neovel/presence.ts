@@ -14,14 +14,18 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		pathnameArray = document.location.pathname.split("/"),
-		[privacy, time] = await Promise.all([
+		[privacy, time, showCover] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("time"),
+			presence.getSetting<boolean>("cover"),
 		]);
 	if (!time) {
 		delete presenceData.startTimestamp;
 		delete presenceDataSlide.startTimestamp;
 	}
+
+	const bookCoverPath =
+		"https://neovel.io/V2/book/image?bookId=%bookId%&oldApp=false&imageExtension=1";
 
 	switch (pathnameArray[1]) {
 		case "discover":
@@ -39,7 +43,12 @@ presence.on("UpdateData", async () => {
 						document.querySelector(`option[value="${pathnameArray[2]}"]`)
 							.textContent
 					} [${pathnameArray[3]}]`;
-					presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+					if (showCover) {
+						presenceData.largeImageKey = bookCoverPath.replace(
+							"%bookId%",
+							pathnameArray[2]
+						);
+					}
 				}
 			} else {
 				presenceData.details = presenceDataSlide.details =
@@ -47,9 +56,10 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = presenceDataSlide.buttons = [
 					{ label: "View Book", url: document.documentURI },
 				];
-				presenceData.largeImageKey =
-					presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
-
+				if (showCover) {
+					presenceData.largeImageKey = presenceDataSlide.largeImageKey =
+						bookCoverPath.replace("%bookId%", pathnameArray[2]);
+				}
 				presenceData.state = `from ${
 					document.querySelector("a.author-element span").textContent
 				} [${pathnameArray[3]}]`;
@@ -81,9 +91,10 @@ presence.on("UpdateData", async () => {
 							url: `https://neovel.io/book/${pathnameArray[2]}/${pathnameArray[3]}`,
 						},
 				  ];
-			presenceData.largeImageKey =
-				presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
-
+			if (showCover) {
+				presenceData.largeImageKey = presenceDataSlide.largeImageKey =
+					bookCoverPath.replace("%bookId%", pathnameArray[2]);
+			}
 			presenceData.state = `from ${
 				document.querySelector("div.book-info span").textContent
 			} [${pathnameArray[3]}]`;
@@ -99,9 +110,11 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{ label: "View Author", url: document.documentURI },
 			];
-			presenceData.largeImageKey = document
-				.querySelector("app-avatar.author-profile-picture img")
-				.getAttribute("src");
+			if (showCover) {
+				presenceData.largeImageKey = document
+					.querySelector("app-avatar.author-profile-picture img")
+					.getAttribute("src");
+			}
 			presenceData.state = `${
 				document.querySelector("div.author-label h1").textContent
 			}`;
@@ -148,7 +161,12 @@ presence.on("UpdateData", async () => {
 					document.querySelector("div.card-title strong.neovel-font-big")
 						.textContent
 				}"`;
-				presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+				if (showCover) {
+					presenceData.largeImageKey = bookCoverPath.replace(
+						"%bookId%",
+						pathnameArray[2]
+					);
+				}
 			}
 			break;
 		case "dashboard":
@@ -157,7 +175,12 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `from ${
 					document.querySelector("div.book-detail-container h2").textContent
 				} [${pathnameArray[3]}]`;
-				presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+				if (showCover) {
+					presenceData.largeImageKey = bookCoverPath.replace(
+						"%bookId%",
+						pathnameArray[2]
+					);
+				}
 			}
 			break;
 		case "contact_us":
