@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.7",
+    "author": {
+        "name": "riimuru",
+        "id": "775082234507427890"
+    },
+    "contributors": [{
+        "name": "riimuru",
+        "id": "775082234507427890"
+    }],
+    "service": "Enime",
+    "description": {
+        "en": "An anime streaming site based on Enime API. Just hop in and watch with speed without VPN or ads"
+    },
+    "url": "enime.moe",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/QGZupDu.png",
+    "thumbnail": "https://i.imgur.com/KWgjuaC.png",
+    "color": "#2e2e2e",
+    "category": "anime",
+    "tags": [
+        "anime",
+        "streaming",
+        "video"
+    ]
+}
