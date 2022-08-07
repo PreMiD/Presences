@@ -27,8 +27,22 @@ presence.on("UpdateData", async () => {
 	)
 		name = null;
 
-	if (!name && !typing) return presence.setActivity();
-	else {
+	if (!name && !typing) {
+		if (!document.querySelector('[data-testid="conversation-info-header"]')) {
+			presence.setActivity({
+				largeImageKey: "waweb-logo",
+				details: "Browsing...",
+				startTimestamp: Math.floor(Date.now() / 1000),
+			});
+		} else {
+			presence.setActivity({
+				largeImageKey: "waweb-logo",
+				details: "Texting with someone",
+				state: "Just reading...",
+				startTimestamp: Math.floor(Date.now() / 1000),
+			});
+		}
+	} else {
 		presence.setActivity({
 			largeImageKey: "waweb-logo",
 			details: `Texting with ${name || "someone"}`,
