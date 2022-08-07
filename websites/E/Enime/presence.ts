@@ -81,8 +81,5 @@ presence.on("UpdateData", () => {
 			}
 	}
 
-	//Update the presence with all the values from the presenceData object
-	if (presenceData.details) presence.setActivity(presenceData);
-	//Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name
-	else presence.setActivity();
+	presence.setActivity(presenceData);
 });
