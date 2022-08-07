@@ -48,9 +48,15 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Reading : ${
 					document.querySelector("h2").textContent
 				}`;
-				presenceData.state = `${
-					document.querySelector("div.chapter > h3").textContent
-				}`;
+				var isNull = document.querySelector("div.chapter > h3") == null;
+				if (isNull) {
+					presenceData.state = `Oneshot`;
+				} else {
+					presenceData.state = `${
+						document.querySelector("div.chapter > h3").textContent
+					}`;
+				}
+
 				presenceData.buttons = [
 					{
 						label: "View",
