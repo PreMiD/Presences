@@ -12,10 +12,11 @@
 		"en": "On Archive of Our Own (AO3), users can make profiles, create works and other Content, post comments, give Kudos, create Collections and Bookmarks."
 	},
 	"url": "archiveofourown.org",
-	"version": "1.0",
-	"logo": "https://archiveofourown.org/images/ao3_logos/logo_42.png",
-	"thumbnail": "https://archiveofourown.org/images/ao3_logos/logo_42.png",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/am5LMe9.png",
+	"thumbnail": "https://i.imgur.com/am5LMe9.png",
 	"color": "#970000",
+	"category": "other",
 	"tags": [
 		"fanfics",
 		"story",

@@ -1,11 +1,7 @@
 const presence = new Presence({
-		//The client ID of the Application created at https://discordapp.com/developers/applications
-		clientId: "1005873313551220757",
-	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	});
+	//The client ID of the Application created at https://discordapp.com/developers/applications
+	clientId: "1005873313551220757",
+});
 
 /*
   function myOutsideHeavyLiftingFunction(){
@@ -29,62 +25,55 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<string>("tag"),
 		]);
 
-	if (document.location.hostname == "archiveofourown.org") {
-		if (document.location.pathname === "/")
-			presenceData.details = "Viewing home page";
-		else if (document.location.pathname.includes("/tags/")) {
-			if (tag) {
-				presenceData.details = `Browsing tag : ${
-					document.querySelector(".heading > .tag").textContent
-				} `;
-				presenceData.state = `Page  : ${
-					document.querySelector("h2.heading").textContent
-				}`;
-			} else {
-				presenceData.details = " Browsing tags...";
-			}
-		} else if (document.location.pathname.includes("/works/")) {
-			if (work) {
-				presenceData.details = `Reading : ${
-					document.querySelector("h2").textContent
-				}`;
-				var isNull = document.querySelector("div.chapter > h3") == null;
-				if (isNull) {
-					presenceData.state = `Oneshot`;
-				} else {
-					presenceData.state = `${
-						document.querySelector("div.chapter > h3").textContent
-					}`;
-				}
-
-				presenceData.buttons = [
-					{
-						label: "View",
-						url: window.location.origin + window.location.pathname,
-					},
-				];
-			} else {
-				presenceData.details = " Reading a work...";
-			}
-		} else if (document.location.pathname.includes("/users")) {
-			presenceData.details = `Viewing profile...`;
-		} else if (document.location.pathname.includes("/series")) {
-			presenceData.details = `Viewing Series : ${
+	if (document.location.pathname === "/")
+		presenceData.details = "Viewing home page";
+	else if (document.location.pathname.includes("/tags/")) {
+		if (tag) {
+			presenceData.details = `Browsing tag : ${
+				document.querySelector(".heading > .tag").textContent
+			} `;
+			presenceData.state = `Page  : ${
 				document.querySelector("h2.heading").textContent
 			}`;
-			presenceData.state = `By ${
-				document.querySelector("a[rel=author]").textContent
+		} else presenceData.details = " Browsing tags...";
+	} else if (document.location.pathname.includes("/works/")) {
+		if (work) {
+			presenceData.details = `Reading : ${
+				document.querySelector("h2").textContent
 			}`;
+
+			if (document.querySelector("div.chapter > h3") === null)
+				presenceData.state = "Oneshot";
+			else {
+				presenceData.state = `${
+					document.querySelector("div.chapter > h3").textContent
+				}`;
+			}
+
 			presenceData.buttons = [
 				{
 					label: "View",
 					url: window.location.origin + window.location.pathname,
 				},
 			];
-		} else {
-			presenceData.details = "Browsing the website...";
-		}
-	}
+		} else presenceData.details = " Reading a work...";
+	} else if (document.location.pathname.includes("/users"))
+		presenceData.details = "Viewing profile...";
+	else if (document.location.pathname.includes("/series")) {
+		presenceData.details = `Viewing Series : ${
+			document.querySelector("h2.heading").textContent
+		}`;
+		presenceData.state = `By ${
+			document.querySelector("a[rel=author]").textContent
+		}`;
+		presenceData.buttons = [
+			{
+				label: "View",
+				url: window.location.origin + window.location.pathname,
+			},
+		];
+	} else presenceData.details = "Browsing the website...";
+
 	//Update the presence with all the values from the presenceData object
 	if (presenceData.details) presence.setActivity(presenceData);
 	//Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name
