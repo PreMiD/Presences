@@ -1,36 +1,40 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.7",
-    "author": {
-      "name": "Amalia",
-      "id": "73026412281344000"
-    },
-    "service": "Archive of Our Own",
-    "altnames": ["AO3"],
-    "description": {
-      "en": "On Archive of Our Own (AO3), users can make profiles, create works and other Content, post comments, give Kudos, create Collections and Bookmarks."
-    },
-    "url": "archiveofourown.org",
-    "version": "1.0",
-    "logo": "https://archiveofourown.org/images/ao3_logos/logo_42.png",
-    "thumbnail": "https://archiveofourown.org/images/ao3_logos/logo_42.png",
-    "color": "#970000",
-    "tags": [	"fanfics",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Amalia",
+		"id": "73026412281344000"
+	},
+	"service": "Archive of Our Own",
+	"altnames": [
+		"AO3"
+	],
+	"description": {
+		"en": "On Archive of Our Own (AO3), users can make profiles, create works and other Content, post comments, give Kudos, create Collections and Bookmarks."
+	},
+	"url": "archiveofourown.org",
+	"version": "1.0",
+	"logo": "https://archiveofourown.org/images/ao3_logos/logo_42.png",
+	"thumbnail": "https://archiveofourown.org/images/ao3_logos/logo_42.png",
+	"color": "#970000",
+	"tags": [
+		"fanfics",
 		"story",
 		"entertainment",
-		"reading"],
-    "readLogs": false,
-    "settings": [
-      {
-        "id": "work",
-        "title": "Show current work",
-        "icon": "fa-solid fa-book-open",
-        "value": true
-      },
-      {
-        "id": "tag",
-        "title": "Show current tag",
-        "icon": "fa-solid fa-tags",
-        "value": true
-      }
-    ]
-  }
+		"reading"
+	],
+	"readLogs": false,
+	"settings": [
+		{
+			"id": "work",
+			"title": "Show current work",
+			"icon": "fa-solid fa-book-open",
+			"value": true
+		},
+		{
+			"id": "tag",
+			"title": "Show current tag",
+			"icon": "fa-solid fa-tags",
+			"value": true
+		}
+	]
+}
