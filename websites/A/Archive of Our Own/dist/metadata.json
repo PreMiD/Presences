@@ -13,7 +13,7 @@
 	},
 	"url": "archiveofourown.org",
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/am5LMe9.png",
+	"logo": "https://i.imgur.com/2ewm9Gc.png",
 	"thumbnail": "https://i.imgur.com/am5LMe9.png",
 	"color": "#970000",
 	"category": "other",
@@ -27,13 +27,13 @@
 	"settings": [
 		{
 			"id": "work",
-			"title": "Show current work",
+			"title": "Show Current Work",
 			"icon": "fa-solid fa-book-open",
 			"value": true
 		},
 		{
 			"id": "tag",
-			"title": "Show current tag",
+			"title": "Show Current Tag",
 			"icon": "fa-solid fa-tags",
 			"value": true
 		}

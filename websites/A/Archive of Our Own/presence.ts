@@ -23,43 +23,39 @@ presence.on("UpdateData", async () => {
 		[work, tag] = await Promise.all([
 			presence.getSetting<string>("work"),
 			presence.getSetting<string>("tag"),
-		]);
-
-	if (document.location.pathname === "/")
-		presenceData.details = "Viewing home page";
-	else if (document.location.pathname.includes("/tags/")) {
+		]),
+		{ pathname, href } = document.location;
+	if (pathname === "/") presenceData.details = "Viewing home page";
+	else if (pathname.includes("/tags/")) {
 		if (tag) {
 			presenceData.details = `Browsing tag : ${
 				document.querySelector(".heading > .tag").textContent
-			} `;
-			presenceData.state = `Page  : ${
-				document.querySelector("h2.heading").textContent
 			}`;
+			presenceData.state = document.querySelector("h2.heading").textContent;
 		} else presenceData.details = " Browsing tags...";
-	} else if (document.location.pathname.includes("/works/")) {
+	} else if (pathname.includes("/works/")) {
 		if (work) {
 			presenceData.details = `Reading : ${
 				document.querySelector("h2").textContent
 			}`;
 
-			if (document.querySelector("div.chapter > h3") === null)
+			if (document.querySelector("div.chapter > h3"))
 				presenceData.state = "Oneshot";
 			else {
 				presenceData.state = `${
 					document.querySelector("div.chapter > h3").textContent
 				}`;
 			}
-
 			presenceData.buttons = [
 				{
 					label: "View",
-					url: window.location.origin + window.location.pathname,
+					url: href,
 				},
 			];
 		} else presenceData.details = " Reading a work...";
-	} else if (document.location.pathname.includes("/users"))
+	} else if (pathname.includes("/users"))
 		presenceData.details = "Viewing profile...";
-	else if (document.location.pathname.includes("/series")) {
+	else if (pathname.includes("/series")) {
 		presenceData.details = `Viewing Series : ${
 			document.querySelector("h2.heading").textContent
 		}`;
@@ -69,7 +65,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View",
-				url: window.location.origin + window.location.pathname,
+				url: href,
 			},
 		];
 	} else presenceData.details = "Browsing the website...";
