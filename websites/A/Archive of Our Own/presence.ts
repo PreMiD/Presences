@@ -1,20 +1,6 @@
 const presence = new Presence({
-	//The client ID of the Application created at https://discordapp.com/developers/applications
 	clientId: "1005873313551220757",
 });
-
-/*
-  function myOutsideHeavyLiftingFunction(){
-      //Grab and process all your data here
-  
-      // element grabs //
-      // api calls //
-      // variable sets //
-  }
-  
-  setInterval(myOutsideHeavyLiftingFunction, 10000);
-  //Run the function separate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
-  */
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -69,9 +55,6 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else presenceData.details = "Browsing the website...";
-
-	//Update the presence with all the values from the presenceData object
 	if (presenceData.details) presence.setActivity(presenceData);
-	//Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name
 	else presence.setActivity();
 });
