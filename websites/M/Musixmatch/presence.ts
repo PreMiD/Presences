@@ -71,10 +71,9 @@ presence.on("UpdateData", () => {
 				document.querySelector("#site h2 > span > span > a").textContent
 			} - ${document.querySelector("#site h1").childNodes[1].textContent}`;
 		} else if (pathname.includes("/artist")) {
-			const avatar = (presenceData.largeImageKey =
-				document.querySelector<HTMLMetaElement>(
-					'[property="og:image"]'
-				).content);
+			const avatar = document.querySelector<HTMLMetaElement>(
+				'[property="og:image"]'
+			).content;
 			if (!avatar.includes("avatar-placeholder.png")) {
 				presenceData.largeImageKey = avatar;
 				presenceData.smallImageKey = "https://i.imgur.com/Yb4CWnm.png";
