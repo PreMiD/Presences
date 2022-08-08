@@ -33,6 +33,10 @@
 	],
 	"settings": [
 		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
 			"id": "privacy",
 			"title": "Privacy Mode",
 			"icon": "fas fa-user-secret",

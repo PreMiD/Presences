@@ -3,16 +3,33 @@ const presence = new Presence({
 	}),
 	elapsed = Math.floor(Date.now() / 1000);
 
+async function getStrings() {
+	return presence.getStrings(
+		{
+			browse: "general.browsing",
+			live: "general.live",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/wkzP4tG.png",
 		},
-		[privacy, buttons, covers] = await Promise.all([
+		[newLang, privacy, buttons, covers] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("covers"),
 		]),
 		{ href } = document.location;
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 	if (privacy) presenceData.details = "Browsing";
 	else if (!document.querySelector("svg.audioplayer-controls__icon--play")) {
 		presenceData.details = document.querySelector(
@@ -22,11 +39,7 @@ presence.on("UpdateData", async () => {
 			".audioplayer-nowplaying__artist"
 		).textContent;
 		presenceData.smallImageKey = "live";
-		presenceData.smallImageText = (
-			await presence.getStrings({
-				live: "general.live",
-			})
-		).live;
+		presenceData.smallImageText = strings.live;
 		presenceData.largeImageKey =
 			document.querySelector<HTMLImageElement>(
 				"div.audioplayer-nowplaying__image > img"
@@ -45,7 +58,7 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
-		presenceData.details = `Browsing ${
+		presenceData.details = `${strings.browse} ${
 			document.querySelector(
 				'[class="nav-item__link router-link-exact-active router-link-active active"]'
 			)?.textContent ?? ""
