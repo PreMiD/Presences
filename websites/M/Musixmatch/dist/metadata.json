@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "NMW03",
-		"id": "534099893979971584"
+		"name": "xKubson_",
+		"id": "404217213873029120"
 	},
 	"contributors": [
 		{
-			"name": "xKubson_",
-			"id": "404217213873029120"
+			"name": "NMW03",
+			"id": "534099893979971584"
 		}
 	],
 	"service": "Musixmatch",
@@ -17,7 +17,7 @@
 	},
 	"url": ["musixmatch.com", "www.musixmatch.com", "curators.musixmatch.com"],
 	"version": "2.0.0",
-	"logo": "https://i.imgur.com/Yb4CWnm.png",
+	"logo": "https://i.imgur.com/fzadGHL.png",
 	"thumbnail": "https://i.imgur.com/hzsfZlu.png",
 	"color": "#FF3262",
 	"category": "music",
