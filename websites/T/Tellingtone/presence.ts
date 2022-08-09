@@ -79,12 +79,15 @@ presence.on("UpdateData", async () => {
 			);
 		delete presenceData.buttons;
 
-		const playElement: HTMLOrSVGImageElement =
-			document.querySelector("div.icon-pause");
-		presenceData.smallImageKey = playElement ? "play" : "pause";
-		presenceData.smallImageText = playElement
-			? strings.playing
-			: strings.paused;
+		if (document.querySelector(".icon-pause")) {
+			presenceData.smallImageKey = "play";
+			presenceData.smallImageText = strings.playing;
+		} else {
+			presenceData.smallImageKey = "pause";
+			presenceData.smallImageText = strings.paused;
+			delete presenceData.endTimestamp;
+			delete presenceData.startTimestamp;
+		}
 	}
 
 	if (!time) {
