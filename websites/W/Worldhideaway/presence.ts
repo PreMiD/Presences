@@ -37,17 +37,17 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viendo logros";
 				presenceData.buttons = [
 					{
-						label: "Viendo Logros",
+						label: "Ver Logros",
 						url: href,
 					},
 				];
 				break;
 			}
 			case "events": {
-				presenceData.details = "Viendo events";
+				presenceData.details = "Viendo eventos";
 				presenceData.buttons = [
 					{
-						label: "Viendo Events",
+						label: "Ver Eventos",
 						url: href,
 					},
 				];
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "reading";
 				presenceData.buttons = [
 					{
-						label: "Leyendo Sobre",
+						label: "Ver Actividad",
 						url: href,
 					},
 				];
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 				).textContent;
 				presenceData.buttons = [
 					{
-						label: "Viendo Noticia Sobre",
+						label: "Ver Noticia",
 						url: href,
 					},
 				];
@@ -84,14 +84,14 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Viendo miembros";
 					presenceData.buttons = [
 						{
-							label: "Viendo Miembros",
+							label: "Ver Miembros",
 							url: href,
 						},
 					];
 				} else {
 					presenceData.buttons = [
 						{
-							label: "Viendo Miembro",
+							label: "Ver Miembro",
 							url: href,
 						},
 					];
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 			case "category": {
 				presenceData.buttons = [
 					{
-						label: "Viendo Categoría",
+						label: "Ver Categoría",
 						url: href,
 					},
 				];
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
 			case "faqs": {
 				presenceData.buttons = [
 					{
-						label: "Leyendo FAQ",
+						label: "Leer FAQ",
 						url: href,
 					},
 				];
@@ -133,7 +133,7 @@ presence.on("UpdateData", async () => {
 			case "contacto": {
 				presenceData.buttons = [
 					{
-						label: "Viendo Contacto",
+						label: "Ver Contacto",
 						url: href,
 					},
 				];
@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
 				if (check) {
 					presenceData.buttons = [
 						{
-							label: "Leyendo",
+							label: "Leer Un Articulo",
 							url: href,
 						},
 					];
@@ -160,7 +160,7 @@ presence.on("UpdateData", async () => {
 				} else if (active) {
 					presenceData.buttons = [
 						{
-							label: "Viendo",
+							label: "Ver Información",
 							url: href,
 						},
 					];

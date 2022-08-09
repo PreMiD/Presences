@@ -25,13 +25,13 @@
 	"settings": [
 		{
 			"id": "privacy",
-			"title": "Privacy Mode",
+			"title": "Modo Privado",
 			"icon": "fas fa-user-secret",
 			"value": false
 		},
 		{
 			"id": "buttons",
-			"title": "Show Buttons",
+			"title": "Mostrar Botones",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true,
 			"if": {
@@ -40,7 +40,7 @@
 		},
 		{
 			"id": "covers",
-			"title": "Show Cover",
+			"title": "Mostrar Portada",
 			"icon": "fad fa-images",
 			"value": true,
 			"if": {
