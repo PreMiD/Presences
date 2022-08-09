@@ -1,27 +1,26 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.7",
-    "author": {
-      "name": "Nolo001",
-      "id": "388698872886722560"
-    },
-    "service": "Yandex",
-    "description": {
-      "en": "A search engine owned by the Russian \"Yandex\" corporation and it's main product. Processes up to 56% of all search queries in the Russian sector of the Internet.",
-      "ru": "Поисковая система, принадлежащая российской корпорации «Яндекс», основной продукт компании. Доля «Яндекс.Поиска» составляет 56% на рынке Рунета."
-    },
-    "url": [
-      "yandex.ru",
-      "ya.ru",
-      "yandex.com",
-      "newssearch.yandex.ru"
-    ],
-    "version": "1.0.0",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Yandex_icon.svg/480px-Yandex_icon.svg.png",
-    "thumbnail": "https://i.imgur.com/HTfU01l.png",
-    "color": "#ffcc00",
-    "category": "other",
-    "tags": [
-      "search"
-    ]
-  }
-  
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Nolo001",
+		"id": "388698872886722560"
+	},
+	"service": "Yandex",
+	"description": {
+		"en": "A search engine owned by the Russian \"Yandex\" corporation and it's main product. Processes up to 56% of all search queries in the Russian sector of the Internet.",
+		"ru": "Поисковая система, принадлежащая российской корпорации «Яндекс», основной продукт компании. Доля «Яндекс.Поиска» составляет 56% на рынке Рунета."
+	},
+	"url": [
+		"yandex.ru",
+		"ya.ru",
+		"yandex.com",
+		"newssearch.yandex.ru"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/LPMsja4.png",
+	"thumbnail": "https://i.imgur.com/HTfU01l.png",
+	"color": "#ffcc00",
+	"category": "other",
+	"tags": [
+		"search"
+	]
+}
