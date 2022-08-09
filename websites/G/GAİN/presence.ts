@@ -2,8 +2,8 @@ const gain = new Presence({
 		clientId: "926450473559547944",
 	}),
 	gainStrings = gain.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	gainSettings = async () => ({
 		showImages: await gain.getSetting<boolean>("showImages"),

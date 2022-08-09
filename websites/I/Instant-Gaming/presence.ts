@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "702978839722197012",
 	}),
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
+		browsing: "general.browsing",
 	});
 
 presence.on("UpdateData", async () => {

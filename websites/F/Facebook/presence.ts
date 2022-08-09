@@ -108,8 +108,8 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/watch")) {
 		const search = new URLSearchParams(location.search).get("q"),
 			videoId = new URLSearchParams(location.search).get("v");
-
-		if (!videoId && !search) {
+		presenceData.largeImageKey = "https://i.imgur.com/FMIfiPA.png";
+		if (!videoId && !search && document.location.href.includes("?v=")) {
 			const videoFrame = Array.from(
 				document.querySelectorAll('div[class="l9j0dhe7"]')
 			).find(
@@ -130,7 +130,7 @@ presence.on("UpdateData", async () => {
 						isLive ? "live" : "video"
 					}`;
 				} else if (isLive) {
-					presenceData.details = "Wattch - Watching a live:";
+					presenceData.details = "Watch - Watching a live:";
 					presenceData.state = description || user;
 
 					presenceData.smallImageKey = "live";
@@ -173,6 +173,16 @@ presence.on("UpdateData", async () => {
 		} else if (search && !privacyMode) {
 			presenceData.details = "Watch - Searching for:";
 			presenceData.state = showSeachQuery ? decodeURI(search) : "(Hidden)";
+		} else if (privacyMode)
+			presenceData.details = "Watch - Viewing a user's page";
+		else {
+			presenceData.details = "Watch";
+			presenceData.state = `Viewing ${
+				document.querySelector('span > a[role="link"] > span').textContent
+			}'s page`;
+			presenceData.buttons = [
+				{ label: "View User", url: document.location.href },
+			];
 		}
 	} else if (document.location.pathname.includes("/marketplace/")) {
 		presenceData.startTimestamp = browsingTimestamp;
@@ -223,6 +233,29 @@ presence.on("UpdateData", async () => {
 					presenceData.state = groupName;
 				} else presenceData.details = "Groups";
 			}
+		}
+	} else if (
+		document.querySelector('[aria-label="Link to open profile cover photo"]') ||
+		document.querySelector('[style*="padding-top: 37"]') ||
+		document.querySelector('[style*="padding-top:37"]')
+	) {
+		const selected = document.querySelector(
+				"[style='background-color: var(--accent);']"
+			)?.parentElement?.textContent,
+			profileUsername = document
+				.querySelector("head > title")
+				.innerHTML.replace(/(\(.*\))/gm, "")
+				.replace("| Facebook", "")
+				.trim();
+		if (
+			document
+				.querySelector('[role="banner"]')
+				.children[1]?.getAttribute("aria-hidden") === "false"
+		) {
+			if (privacyMode) presenceData.details = "Viewing Profile";
+			else if (selected)
+				presenceData.details = `Viewing ${profileUsername}'s ${selected}`;
+			else presenceData.details = `Viewing ${profileUsername}'s Profile`;
 		}
 	} else if (document.location.pathname.includes("/friends")) {
 		presenceData.details = "Friends";

@@ -1,4 +1,4 @@
-const presence = new Presence({ clientId: "937015924425367643" }),
+const presence = new Presence({ clientId: "1000041677035163779" }),
 	startTimestamp = Math.floor(Date.now() / 1000);
 let languages: { key: string; page: string; text: string }[] = [];
 
@@ -22,31 +22,49 @@ presence.on("UpdateData", async () => {
 	switch (pathname) {
 		case "/":
 			presenceData.details = "Anasayfayı görüntülüyor";
-			break;
-		case "/yetkililer":
-			presenceData.details = "Yetkililer sayfasını görüntülüyor";
+			if (searchParams.has("user_id")) {
+				const image = document.querySelector<HTMLImageElement>(
+						"[data-premid-useravatar]"
+					)?.src,
+					userTag = document.querySelector<HTMLElement>(
+						"[data-premid-usertag]"
+					)?.innerText;
+				if (image && userTag) {
+					presenceData.details = "Kullanıcıyı görüntülüyor:";
+					presenceData.state = userTag;
+					presenceData.largeImageKey = image;
+				}
+			} else if (searchParams.has("invite_code")) {
+				const image = document.querySelector<HTMLImageElement>(
+						"[data-premid-guildicon]"
+					)?.src,
+					guildName = document.querySelector<HTMLElement>(
+						"[data-premid-guildname]"
+					)?.innerText;
+				if (image && guildName) {
+					presenceData.details = "Daveti görüntülüyor:";
+					presenceData.state = guildName;
+					presenceData.largeImageKey = image;
+				}
+			}
 			break;
 		case "/share":
 			presenceData.details = "Kod paylaşıyor";
 			break;
-		case "/tools":
-			presenceData.details = "Araçlar sayfasını görüntülüyor";
-			break;
 
 		case "/profile":
 			presenceData.details = "Profil görüntüleniyor:";
-			presenceData.state = document.querySelector(".user-info").textContent;
-			presenceData.largeImageKey =
-				document.querySelector<HTMLImageElement>("img.avatar").src;
+			presenceData.state = document.title.split("— ")[1];
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"[data-premid-avatar]"
+			).src;
 			break;
 
 		case "/codes":
 			presenceData.details = "Kodlar sayfasını görüntülüyor";
-			if (searchParams.get("filter") !== "all") {
-				presenceData.state = `Arama: ${decodeURIComponent(
-					searchParams.get("filter")
-				)} — Sayfa ${searchParams.get("page")}`;
-			} else presenceData.state = `Sayfa ${searchParams.get("page")}`;
+			if (searchParams.get("search"))
+				presenceData.state = `Arama: ${searchParams.get("search")}`;
+			break;
 	}
 
 	if (pathname.startsWith("/code/")) {
@@ -61,23 +79,10 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (
-			document.activeElement === document.querySelector('input[name="comment"]')
+			document.activeElement === document.querySelector('input[id="comment"]')
 		)
 			presenceData.details = "Yorum yapılıyor:";
-		if (
-			document.querySelector(
-				'.comment-text-wrapper > .text[contenteditable="true"]'
-			)
-		)
-			presenceData.details = "Yorum düzenleniyor:";
-		if (document.querySelector('code[contenteditable="true"]'))
-			presenceData.details = "Kod bloğu düzenliyor:";
-		if (
-			document.querySelector(".swal2-title > div > div:nth-child(2)")
-				?.textContent === "Kod Raporlama"
-		)
-			presenceData.details = "Hata bildiriyor:";
 	}
 
-	return presence.setActivity(presenceData);
+	presence.setActivity(presenceData);
 });

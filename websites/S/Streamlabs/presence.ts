@@ -17,8 +17,8 @@ let strings,
 
 presence.on("UpdateData", async () => {
 	strings = await presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",

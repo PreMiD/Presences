@@ -5,10 +5,10 @@ const presence = new Presence({
 async function getStrings() {
 	return presence.getStrings(
 		{
-			play: "presence.playback.playing",
-			pause: "presence.playback.paused",
-			browse: "presence.activity.browsing",
-			reading: "presence.activity.reading",
+			play: "general.playing",
+			pause: "general.paused",
+			browse: "general.browsing",
+			reading: "general.reading",
 			viewManga: "general.viewManga",
 			watchEpisode: "general.buttonViewEpisode",
 			viewSeries: "general.buttonViewSeries",
@@ -59,7 +59,10 @@ presence.on("iFrameData", (data: iFrameData) => {
 });
 
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
+	const [newLang, showCover] = await Promise.all([
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("cover"),
+	]);
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
@@ -164,6 +167,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = videoTitle ?? "Title not found...";
 		presenceData.state = episode;
 
+		if (showCover) {
+			presenceData.largeImageKey =
+				document.querySelector<HTMLMetaElement>("[property='og:image']")
+					?.content ?? "lg";
+		}
 		if (paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;

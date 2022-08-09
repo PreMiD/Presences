@@ -91,11 +91,11 @@ presence.on("UpdateData", async () => {
 			];
 		} else {
 			presenceData.details = (await strings).viewProfile;
-			presenceData.state = `${document
-				.querySelector(".share-sub-title")
-				?.textContent.trim()} (@${document
-				.querySelector(".share-title")
-				?.textContent.trim()})`;
+			presenceData.state = `${
+				document.querySelector('h2[data-e2e="user-title"]').textContent
+			} (@${
+				document.querySelector('h1[data-e2e="user-subtitle"]').textContent
+			})`;
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewProfile,
