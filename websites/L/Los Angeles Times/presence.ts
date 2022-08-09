@@ -28,8 +28,10 @@ presence.on("UpdateData", async () => {
 		];
 	}
 
-	if (!path[1]) presenceData.details = "Viewing Home Page";
-	else if (pathname.includes("/topic/")) {
+	if (!path[1]) {
+		presenceData.details = "Viewing Home Page";
+		delete presenceData.buttons;
+	} else if (pathname.includes("/topic/")) {
 		presenceData.details = "Viewing a Topic";
 		if (!privacyMode) presenceData.state = title;
 	} else if (pathname.includes("/search")) {
