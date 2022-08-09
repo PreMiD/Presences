@@ -1,7 +1,7 @@
 const presence = new Presence({
 		clientId: "1005501034191409153",
 	}),
-	time = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const title = document.title.replace(" - Los Angeles Times", ""),
@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		path = pathname.split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: time,
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (showButtons && !privacyMode) {
