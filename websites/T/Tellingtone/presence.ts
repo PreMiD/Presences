@@ -78,6 +78,13 @@ presence.on("UpdateData", async () => {
 				presence.timestampFromFormat(timers[1])
 			);
 		delete presenceData.buttons;
+
+		const playElement: HTMLOrSVGImageElement =
+			document.querySelector("div.icon-pause");
+		presenceData.smallImageKey = playElement ? "play" : "pause";
+		presenceData.smallImageText = playElement
+			? strings.playing
+			: strings.paused;
 	}
 
 	if (!time) {
