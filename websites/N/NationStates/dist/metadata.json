@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Onegen",
+		"id": "258681302960701450"
+	},
+	"service": "NationStates",
+	"description": {
+		"en": "NationStates is a nation simulation game. Create a nation according to your political ideals and care for its people. Or deliberately oppress them. It's up to you."
+	},
+	"url": ["www.nationstates.net", "forum.nationstates.net"],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/04gnehi.png",
+	"thumbnail": "https://i.imgur.com/bR5PtNf.png",
+	"color": "#cbcbcb",
+	"tags": ["game", "gaming", "simulator", "politics", "forum"],
+	"category": "games",
+	"iframe": false,
+	"readLogs": false,
+	"settings": [
+		{
+			"id": "displayFull",
+			"title": "Full Nation Name?",
+			"icon": "fas fa-file-signature",
+			"value": true
+		}
+	]
+}
