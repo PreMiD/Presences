@@ -23,12 +23,17 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Looking for Images of ${textQuery}`;
 			break;
 		}
+		case "news": {
+			presenceData.details = `Looking for News on ${textQuery}`;
+			break;
+		}
+		case "maps": {
+			presenceData.details = "Using Maps";
+			break;
+		}
 		default:
 			if (currentPath[1] === "video" && currentPath[2] === "search")
 				presenceData.details = `Looking for Videos of ${textQuery}`;
-			else if (currentPath[1] === "news")
-				presenceData.details = `Looking for News on ${textQuery}`;
-			else if (currentPath[1] === "maps") presenceData.details = "Using Maps";
 	}
 	presence.setActivity(presenceData);
 });
