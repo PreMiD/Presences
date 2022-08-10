@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
 				if (check) {
 					presenceData.buttons = [
 						{
-							label: "Leer Un Articulo",
+							label: "Leer Articulo",
 							url: href,
 						},
 					];
