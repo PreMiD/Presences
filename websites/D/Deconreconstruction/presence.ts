@@ -1,0 +1,153 @@
+const presence = new Presence({
+		clientId: "945791824147128341",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+presence.on("UpdateData", async () => {
+	const presenceData: PresenceData = {
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location,
+		pathArr = pathname.split("/");
+
+	switch (pathArr[1]) {
+		case "":
+			presenceData.details = "Viewing the home page";
+			break;
+
+		case "vasterror":
+			switch (pathArr[2]) {
+				case "adventuremap":
+					presenceData.details = "Viewing the adventure map";
+					break;
+
+				case "credits":
+					presenceData.details = "Viewing the credits";
+					break;
+
+				case "log":
+					presenceData.details = "Viewing the Vast Error log";
+					break;
+
+				default:
+					presenceData.details = "Reading Vast Error";
+					presenceData.smallImageKey = "ve";
+					presenceData.state = `Page ${pathArr[2]} of ${vePages}`;
+					presenceData.smallImageText =
+						document.querySelector("#command").textContent;
+					presenceData.buttons = [
+						{
+							label: "Read Along",
+							url: `https://www.deconreconstruction.com${pathname}`,
+						},
+					];
+					break;
+			}
+			break;
+
+		case "thaumatrope":
+			switch (pathArr[2]) {
+				case "syzygy":
+					presenceData.details = "Reading Thaumatrope: Syzygy";
+					presenceData.smallImageKey = "thaumatrope";
+					presenceData.state = `Page ${pathArr[3]} of 162`;
+					presenceData.smallImageText =
+						document.querySelector("#command").textContent;
+					presenceData.buttons = [
+						{
+							label: "Read Along",
+							url: `https://www.deconreconstruction.com${pathname}`,
+						},
+					];
+					break;
+
+				case "haustoria":
+					presenceData.details = "Reading Thaumatrope: Haustoria";
+					presenceData.smallImageKey = "thaumatrope";
+					presenceData.state = `Page ${pathArr[3]} of ${htPages}`;
+					presenceData.smallImageText =
+						document.querySelector("#command").textContent;
+					presenceData.buttons = [
+						{
+							label: "Read Along",
+							url: `https://www.deconreconstruction.com${pathname}`,
+						},
+					];
+					break;
+
+				case "log":
+					presenceData.details = "Viewing the Thaumatrope log";
+					break;
+
+				default:
+					presenceData.details = "Viewing an unsupported page";
+					break;
+			}
+			break;
+
+		case "bonus":
+			switch (pathArr[2]) {
+				case "april-fools-day-2017":
+					presenceData.details = "Reading April Fools 2017";
+					presenceData.smallImageKey = "mspa";
+					presenceData.state = `Page ${pathArr[3]} of 4`;
+					presenceData.smallImageText =
+						document.querySelector("#command").textContent;
+					presenceData.buttons = [
+						{
+							label: "Read Along",
+							url: `https://www.deconreconstruction.com${pathname}`,
+						},
+					];
+					break;
+
+				case "recap":
+					presenceData.details = "Viewing the Act 1 recap";
+					break;
+
+				case "revised":
+					presenceData.details = "Viewing revised pages";
+					break;
+
+				default:
+					presenceData.details = "Viewing bonus content";
+					break;
+			}
+			break;
+
+		default:
+			presenceData.details = "Viewing an unsupported page";
+			break;
+	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
+});
+
+let vePages: string, htPages: string;
+(function () {
+	function getPages() {
+		if (document.location.pathname.match(/^\/vasterror\/\d+$/)) {
+			fetch(
+				"https://api.deconreconstruction.com/pages/count?story.name=vast-error&published_at_null=false"
+			)
+				.then(res => res.json())
+				.then(res => {
+					vePages = res;
+				});
+		}
+
+		if (document.location.pathname.match(/^\/thaumatrope\/haustoria\/\d+$/)) {
+			fetch(
+				"https://api.deconreconstruction.com/pages/count?story.name=thaumatrope/haustoria&published_at_null=false"
+			)
+				.then(res => res.json())
+				.then(res => {
+					htPages = res;
+				});
+		}
+	}
+	getPages();
+	setInterval(getPages, 60000);
+})();
