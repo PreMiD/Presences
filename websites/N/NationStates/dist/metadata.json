@@ -8,13 +8,22 @@
 	"description": {
 		"en": "NationStates is a nation simulation game. Create a nation according to your political ideals and care for its people. Or deliberately oppress them. It's up to you."
 	},
-	"url": ["www.nationstates.net", "forum.nationstates.net"],
+	"url": [
+		"www.nationstates.net",
+		"forum.nationstates.net"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/04gnehi.png",
 	"thumbnail": "https://i.imgur.com/bR5PtNf.png",
 	"color": "#cbcbcb",
-	"tags": ["game", "gaming", "simulator", "politics", "forum"],
 	"category": "games",
+	"tags": [
+		"game",
+		"gaming",
+		"simulator",
+		"politics",
+		"forum"
+	],
 	"iframe": false,
 	"readLogs": false,
 	"settings": [
