@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Parcours la page d'accueil";
 			break;
 		case "discovery": {
-			presenceData.details = "Découvre de nouvelles animations";
+			presenceData.details = "Découvre de nouveaux animes";
 			const queryText = document
 				.querySelector<HTMLDivElement>("div.filter-value")
 				.textContent.trim();
