@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
 			}
 			case "blog": {
 				if (pathname.split("/")[2] === "category") {
-					presenceData.details = "Browsing category";
+					presenceData.details = "Browsing blogs category";
 					presenceData.state =
 						document.querySelector(".current-menu-item").textContent;
 				} else if (!pathname.split("/")[2])
