@@ -13,10 +13,10 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search, href, hostname } = document.location,
-		pathnameArray = pathname.split("/");
+		pathArr = pathname.split("/");
 
 	if (hostname === "opensea.io") {
-		switch (pathnameArray[1]) {
+		switch (pathArr[1]) {
 			case "": {
 				presenceData.details = "Viewing home page";
 				break;
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 			}
 			case "account": {
 				presenceData.details = "Viewing their account";
-				if (pathnameArray[2] === "settings")
+				if (pathArr[2] === "settings")
 					presenceData.details = "Viewing their settings";
 				break;
 			}
@@ -93,17 +93,15 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "asset": {
-				if (pathnameArray[2] === "create")
-					presenceData.details = "Creating asset";
+				if (pathArr[2] === "create") presenceData.details = "Creating asset";
 				break;
 			}
 			case "blog": {
-				if (pathnameArray[2] === "category") {
+				if (pathArr[2] === "category") {
 					presenceData.details = "Browsing blogs category";
 					presenceData.state =
 						document.querySelector(".current-menu-item").textContent;
-				} else if (!pathnameArray[2])
-					presenceData.details = "Browsing blog posts";
+				} else if (!pathArr[2]) presenceData.details = "Browsing blog posts";
 				else {
 					presenceData.details = "Viewing blog post";
 					presenceData.state =
