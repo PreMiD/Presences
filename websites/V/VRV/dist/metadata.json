@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "Bas950",
-		"id": "241278257335500811"
+		"name": "RisingSunLight",
+		"id": "240521747852558347"
 	},
 	"contributors": [
 		{
-			"name": "RisingSunLight",
-			"id": "240521747852558347"
+			"name": "Bas950",
+			"id": "241278257335500811"
 		}
 	],
 	"service": "VRV",

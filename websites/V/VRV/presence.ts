@@ -1,6 +1,11 @@
 const presence = new Presence({
-	clientId: "640150336547454976",
-});
+		clientId: "640150336547454976",
+	}),
+	logo = "https://i.imgur.com/p6Xv2Bv.png",
+	searchImg = "https://i.imgur.com/OIgfjTG.png",
+	playImg = "https://i.imgur.com/KNneWuF.png",
+	pauseImg = "https://i.imgur.com/BtWUfrZ.png",
+	readingImg = "https://i.imgur.com/53N4eY6.png";
 
 async function getStrings() {
 	return presence.getStrings(
@@ -51,7 +56,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "vrv",
+			largeImageKey: logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname } = document.location,
@@ -71,10 +76,10 @@ presence.on("UpdateData", async () => {
 	switch (pathname.split("/")[1]) {
 		case "watch": {
 			presenceData.details = strings.viewing;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = readingImg;
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("img.c-content-image")?.src ??
-				"vrv";
+				logo;
 
 			presenceData.buttons = [{ label: strings.buttonViewEpisode, url: href }];
 
@@ -88,7 +93,7 @@ presence.on("UpdateData", async () => {
 				: `${seriesName} - ${episode}`;
 
 			if (iFrameVideo && !isNaN(duration)) {
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? pauseImg : playImg;
 				presenceData.smallImageText = paused ? strings.pause : strings.play;
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
@@ -111,16 +116,16 @@ presence.on("UpdateData", async () => {
 				document.querySelector("div.series-title").textContent;
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("img.c-content-image")?.src ??
-				"vrv";
+				logo;
 			presenceData.buttons = [{ label: strings.buttonViewSeries, url: href }];
 			break;
 		case "watchlist":
 			presenceData.details = "Viewing their watchlist";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = readingImg;
 			break;
 		case "":
 			presenceData.details = strings.viewHome;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = readingImg;
 			break;
 		default:
 			if (document.querySelector(".item-type")?.textContent === "Channel") {
@@ -136,14 +141,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = href.split("?q=")[1];
 		presenceData.startTimestamp = browsingTimestamp;
 		delete presenceData.endTimestamp;
-		presenceData.largeImageKey = "vrv";
-		presenceData.smallImageKey =
-			"https://github.com/PreMiD/Presences/blob/main/.resources/search.png?raw=true";
+		presenceData.largeImageKey = logo;
+		presenceData.smallImageKey = searchImg;
 		presenceData.smallImageText = strings.search;
 		delete presenceData.buttons;
 	}
 
-	if (!showCover) presenceData.largeImageKey = "vrv";
+	if (!showCover) presenceData.largeImageKey = logo;
 	if (!showButtons) delete presenceData.buttons;
 	if (!time) {
 		delete presenceData.startTimestamp;
