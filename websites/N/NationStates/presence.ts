@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp: number = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
-		largeImageKey: "ns",
+		largeImageKey: "https://i.imgur.com/04gnehi.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -113,7 +113,7 @@ async function updatePresenceData(): Promise<void> {
 		if (page.startsWith("/page=dilemmas")) {
 			// Browsing issues
 			presenceData.state = "Addressing Issues";
-			presenceData.smallImageKey = "person_white";
+			presenceData.smallImageKey = "https://i.imgur.com/8pTlzJw.png";
 			presenceData.smallImageText = "Issues";
 		} else if (page.startsWith("/page=show_dilemma")) {
 			// Issue (viewing)
@@ -127,7 +127,7 @@ async function updatePresenceData(): Promise<void> {
 						: issuename
 				}`;
 			} else presenceData.state = "Addressing Issues";
-			presenceData.smallImageKey = "person_white";
+			presenceData.smallImageKey = "https://i.imgur.com/8pTlzJw.png";
 			presenceData.smallImageText = "Issues";
 		} else if (page.startsWith("/page=enact_dilemma")) {
 			// Issue (resolved)
@@ -141,7 +141,7 @@ async function updatePresenceData(): Promise<void> {
 						: issuename
 				}`;
 			} else presenceData.state = "Addressing Issues";
-			presenceData.smallImageKey = "person_white";
+			presenceData.smallImageKey = "https://i.imgur.com/8pTlzJw.png";
 			presenceData.smallImageText = "Issues";
 		} else if (
 			page.startsWith("/page=telegram") ||
@@ -152,7 +152,7 @@ async function updatePresenceData(): Promise<void> {
 		) {
 			// Telegrams
 			presenceData.state = "Reading Telegrams";
-			presenceData.smallImageKey = "envelope_white";
+			presenceData.smallImageKey = "https://i.imgur.com/6Hp3f7k.png";
 			presenceData.smallImageText = "Telegrams";
 		} else if (
 			page.startsWith("/page=settings") ||
@@ -165,7 +165,7 @@ async function updatePresenceData(): Promise<void> {
 		} else if (page.startsWith("/page=create_nation")) {
 			// Nation creation
 			presenceData.state = "Declaring a New Nation";
-			presenceData.smallImageKey = "flag_white";
+			presenceData.smallImageKey = "https://i.imgur.com/BAzbs0d.png";
 			presenceData.smallImageText = "My Nation";
 		} else if (
 			page.startsWith("/page=ga") ||
@@ -174,7 +174,7 @@ async function updatePresenceData(): Promise<void> {
 		) {
 			// General Assembly
 			presenceData.state = "Attending the General Assembly";
-			presenceData.smallImageKey = "wa_white";
+			presenceData.smallImageKey = "https://i.imgur.com/A09MAL2.png";
 			presenceData.smallImageText = "World Assembly";
 		} else if (
 			page.startsWith("/page=sa") ||
@@ -183,7 +183,7 @@ async function updatePresenceData(): Promise<void> {
 		) {
 			// Security Council
 			presenceData.state = "Attending the Security Council";
-			presenceData.smallImageKey = "wa_white";
+			presenceData.smallImageKey = "https://i.imgur.com/A09MAL2.png";
 			presenceData.smallImageText = "World Assembly";
 		} else if (
 			page.startsWith("/page=wa") ||
@@ -192,7 +192,7 @@ async function updatePresenceData(): Promise<void> {
 		) {
 			// World Assembly
 			presenceData.state = "Attending the World Assembly";
-			presenceData.smallImageKey = "wa_white";
+			presenceData.smallImageKey = "https://i.imgur.com/A09MAL2.png";
 			presenceData.smallImageText = "World Assembly";
 		} else if (page.startsWith("/nation=")) {
 			// Nation page
@@ -201,14 +201,14 @@ async function updatePresenceData(): Promise<void> {
 			if (nationid === document.body.getAttribute("data-nname")) {
 				// Self nation page
 				presenceData.state = "Viewing Nation";
-				presenceData.smallImageKey = "flag_white";
+				presenceData.smallImageKey = "https://i.imgur.com/BAzbs0d.png";
 				presenceData.smallImageText = "My Nation";
 			} else {
 				// Other nation page
 				presenceData.state = `Viewing Nation: ${await fetchNationName(
 					nationid
 				)}`;
-				presenceData.smallImageKey = "globe_white";
+				presenceData.smallImageKey = "https://i.imgur.com/hE7TN9d.png";
 				presenceData.smallImageText = "World";
 			}
 		} else if (page.startsWith("/region=")) {
@@ -216,21 +216,21 @@ async function updatePresenceData(): Promise<void> {
 			presenceData.state = `Viewing Region: ${await fetchRegionName(
 				page.match(/(?<=\/region=)\w+/gi)[0]
 			)}`;
-			presenceData.smallImageKey = "globe_white";
+			presenceData.smallImageKey = "https://i.imgur.com/hE7TN9d.png";
 			presenceData.smallImageText = "World";
 		} else if (page.startsWith("/page=dispatches")) {
 			// Dispatches
 			presenceData.state = "Browsing Dispatches";
-			presenceData.smallImageKey = "news_white";
+			presenceData.smallImageKey = "https://i.imgur.com/pArUzoy.png";
 			presenceData.smallImageText = "Dispatches";
 		} else if (page.startsWith("/page=news")) {
 			// News
 			presenceData.state = "Reading News";
-			presenceData.smallImageKey = "news_white";
+			presenceData.smallImageKey = "https://i.imgur.com/pArUzoy.png";
 			presenceData.smallImageText = "News";
 		} else if (page.startsWith("/page=dispatch")) {
 			// Reading a dispatch
-			presenceData.smallImageKey = "news_white";
+			presenceData.smallImageKey = "https://i.imgur.com/pArUzoy.png";
 			presenceData.smallImageText = "Dispatches";
 			let title = document
 				.querySelector("#content")
@@ -243,7 +243,7 @@ async function updatePresenceData(): Promise<void> {
 		} else if (page.startsWith("/page=create_dispatch")) {
 			// Writing a dispatch
 			presenceData.state = "Writing Dispatch";
-			presenceData.smallImageKey = "news_white";
+			presenceData.smallImageKey = "https://i.imgur.com/pArUzoy.png";
 			presenceData.smallImageText = "Dispatches";
 		} else if (
 			page.startsWith("/page=store") ||
@@ -252,7 +252,7 @@ async function updatePresenceData(): Promise<void> {
 		) {
 			// Store
 			presenceData.state = "Browsing the Store";
-			presenceData.smallImageKey = "gift_white";
+			presenceData.smallImageKey = "https://i.imgur.com/28eyl2A.png";
 			presenceData.smallImageText = "Store";
 		} else {
 			// Other
@@ -262,8 +262,9 @@ async function updatePresenceData(): Promise<void> {
 	} else if (document.location.hostname === "forum.nationstates.net") {
 		// Forums (forum.nationstates.net)
 		presenceData.details = "Browsing Forums";
-		presenceData.smallImageKey = "forum_white";
+		presenceData.smallImageKey = "https://i.imgur.com/uDIj1ta.png";
 		presenceData.smallImageText = "Forums";
+		delete presenceData.buttons;
 		const { title } = document;
 		if (title.startsWith("NationStates • View")) {
 			const topicsearch = title.match(/(?<=nationstates\s•\sview\s).+/gi);
