@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Read Along",
-							url: `https://www.deconreconstruction.com${pathname}`,
+							url: href,
 						},
 					];
 					break;
