@@ -24,8 +24,6 @@
 		"politics",
 		"forum"
 	],
-	"iframe": false,
-	"readLogs": false,
 	"settings": [
 		{
 			"id": "displayFull",
