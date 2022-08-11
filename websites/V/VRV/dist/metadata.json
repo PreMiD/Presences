@@ -54,7 +54,7 @@
 		},
 		{
 			"id": "search",
-			"title": "Show Search Query",
+			"title": "Show Search",
 			"icon": "fas fa-search",
 			"value": true
 		}
