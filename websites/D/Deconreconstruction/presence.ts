@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location,
+		{ href, pathname } = document.location,
 		pathArr = pathname.split("/");
 
 	switch (pathArr[1]) {
