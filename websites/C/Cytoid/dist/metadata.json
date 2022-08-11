@@ -6,10 +6,11 @@
 	},
 	"service": "Cytoid",
 	"description": {
-		"en": "Cytoid is a music game where you can create, share and play your own levels! Powered by community, with many dedicated creators, Cytoid provides a huge variety of musical genres to enjoy and a diverse range of gameplay design."
+		"en": "Cytoid is a music game where you can create, share and play your own levels! Powered by community, with many dedicated creators, Cytoid provides a huge variety of musical genres to enjoy and a diverse range of gameplay design.",
+		"nl": "Cytoid is een muziekspel waarin je je eigen levels kunt maken, delen en spelen! Aangedreven door de gemeenschap, met veel toegewijde makers, biedt Cytoid een enorme variatie aan muziekgenres om van te genieten en een divers gameplay-ontwerp."
 	},
 	"url": "cytoid.io",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/3K3skPd.png",
 	"thumbnail": "https://i.imgur.com/oOrYTUr.png",
 	"color": "#476ADC",

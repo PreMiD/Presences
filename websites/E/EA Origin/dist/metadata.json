@@ -6,10 +6,11 @@
 	},
 	"service": "EA Origin",
 	"description": {
-		"en": "Get great PC and Mac games on Origin. Play the latest RPGs, shooters, Sims games & more."
+		"en": "Get great PC and Mac games on Origin. Play the latest RPGs, shooters, Sims games & more.",
+		"nl": "Haal geweldige PC- en Mac-spellen op Origin. Speel de nieuwste RPG's, shooters, Sims-spellen en meer."
 	},
 	"url": "www.origin.com",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/y98b3oj.png",
 	"thumbnail": "https://i.imgur.com/fyEfBmo.png",
 	"color": "#f15a23",

@@ -6,10 +6,11 @@
 	},
 	"service": "Drama",
 	"description": {
-		"en": "Drama.gg is a community for exposing fraudulent companies and businesses."
+		"en": "Drama.gg is a community for exposing fraudulent companies and businesses.",
+		"nl": "Drama.gg is een gemeenschap voor het ontmaskeren van frauduleuze bedrijven en ondernemingen."
 	},
 	"url": "drama.gg",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/tA4eeXJ.png",
 	"thumbnail": "https://i.imgur.com/TDjianL.png",
 	"color": "#32f597",

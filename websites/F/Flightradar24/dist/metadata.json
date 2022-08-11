@@ -6,7 +6,8 @@
 	},
 	"service": "Flightradar24",
 	"description": {
-		"en": "The world’s most popular flight tracker. Track planes in real-time on our flight tracker map and get up-to-date flight status & airport information."
+		"en": "The world’s most popular flight tracker. Track planes in real-time on our flight tracker map and get up-to-date flight status & airport information.",
+		"nl": "'S werelds meest populaire vlucht tracker. Volg vliegtuigen in real-time op onze vlucht tracker kaart en krijg up-to-date vluchtstatusen & luchthaveninformatie."
 	},
 	"url": [
 		"www.flightradar24.com",
@@ -14,7 +15,7 @@
 		"my.flightradar24.com",
 		"careers.flightradar24.com"
 	],
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/Vks89dr.png",
 	"thumbnail": "https://i.imgur.com/tYzgiW8.png",
 	"color": "#f15a23",

@@ -10,10 +10,11 @@
 	],
 	"description": {
 		"ko_KR": "음악을 들을수록 나를 더 닮아가는 나만의 FLO. 지금, 당신의 음악",
-		"en": "My own FLO that resembles me more and more the more I listen to music. Now, your music"
+		"en": "My own FLO that resembles me more and more the more I listen to music. Now, your music",
+		"nl": "Mijn eigen FLO die meer en meer op mij lijkt hoe meer ik naar muziek luister. Nu, jouw muziek"
 	},
 	"url": "www.music-flo.com",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/1EEUg5a.png",
 	"thumbnail": "https://i.imgur.com/EgI8zOz.png",
 	"color": "#3f3fff",

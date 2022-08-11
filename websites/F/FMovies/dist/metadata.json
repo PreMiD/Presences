@@ -6,10 +6,11 @@
 	},
 	"service": "FMovies",
 	"description": {
-		"en": "Watch online movies for free, watch movies free in high quality without registration.  Just a better place for watching online movies for free. Fmovies.to, FFmovies.is, FFmovies.to"
+		"en": "Watch online movies for free, watch movies free in high quality without registration.  Just a better place for watching online movies for free. Fmovies.to, FFmovies.is, FFmovies.to",
+		"nl": "Bekijk gratis online films, films kijken in hoge kwaliteit zonder registratie helemaal gratis.  Gewoon een betere plek voor het kijken naar online films voor niks. Fmovies.to, FFmovies.is, FFmovies.to"
 	},
 	"url": "fmovies.to",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/gnXTraq.png",
 	"thumbnail": "https://i.imgur.com/j7RpmBJ.jpeg",
 	"color": "#1BB3C6",

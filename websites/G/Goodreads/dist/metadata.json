@@ -6,10 +6,11 @@
 	},
 	"service": "Goodreads",
 	"description": {
-		"en": "Goodreads is an American social cataloging website that allows individuals to search its database of books, annotations, quotes, and reviews."
+		"en": "Goodreads is an American social cataloging website that allows individuals to search its database of books, annotations, quotes, and reviews.",
+		"nl": "Goodreads is een Amerikaanse sociale cataloguswebsite die mensen de mogelijkheid biedt te zoeken in zijn database van boeken, annotaties, citaten en recensies."
 	},
 	"url": "www.goodreads.com",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/DtHgzGt.png",
 	"thumbnail": "https://i.imgur.com/susc3Ij.png",
 	"color": "#b5ae84",

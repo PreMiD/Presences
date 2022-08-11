@@ -10,13 +10,14 @@
 	],
 	"description": {
 		"en": "Encyclopedia about the League of Cubism and the server of the universe of SC. Read a lot of cool articles and write your own ones, complementing the most toxic encyclopedia.",
-		"ru": "Энциклопедия про Лигу Кубизма и сервера вселенной СП. Читай много крутых статей и пиши свои, дополняя самую токсчисную энциклопедию."
+		"ru": "Энциклопедия про Лигу Кубизма и сервера вселенной СП. Читай много крутых статей и пиши свои, дополняя самую токсчисную энциклопедию.",
+		"nl": "Encyclopedie over de League van Cubism en de server van het universum van SC. Lees veel coole artikelen en schrijf je eigen artikelen, als aanvulling op de meest giftige encyclopedie."
 	},
 	"url": [
 		"fugapedia.xyz",
 		"www.fugapedia.xyz"
 	],
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"logo": "https://i.imgur.com/L6kpaCb.jpg",
 	"thumbnail": "https://i.imgur.com/wb29gfk.png",
 	"color": "#ffffff",

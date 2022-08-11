@@ -16,10 +16,11 @@
 	],
 	"service": "Discords.com",
 	"description": {
-		"en": "Find discord servers using the most advanced public index."
+		"en": "Find discord servers using the most advanced public index.",
+		"nl": "Vind discord servers met behulp van de meest geavanceerde openbare index."
 	},
 	"url": "discords.com",
-	"version": "1.1.10",
+	"version": "1.1.11",
 	"logo": "https://i.imgur.com/ZjtyAQx.png",
 	"thumbnail": "https://i.imgur.com/LbR2uNX.png",
 	"color": "#23283B",

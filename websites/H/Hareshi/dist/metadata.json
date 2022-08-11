@@ -7,14 +7,15 @@
 	"service": "Hareshi",
 	"description": {
 		"en": "Hareshi website you can find all the anime with Thai subtitles and Thai dubs you want from here. And there is also a community forum system for discussion and there is also a broadcast schedule in Thailand.",
-		"th": "ในเว็บไซต์ฮาเรชินี้คุณสามารถค้นหาอนิเมะซับไทยและพากย์ไทยที่คุณต้องการได้ทั้งหมดจากที่นี่ และนอกจากนี้ยังมีระบบชุมชนฟอรั่มไว้ให้พูดคุยสนทนาและยังมีตารางออกอากาศในไทยอีกด้วย"
+		"th": "ในเว็บไซต์ฮาเรชินี้คุณสามารถค้นหาอนิเมะซับไทยและพากย์ไทยที่คุณต้องการได้ทั้งหมดจากที่นี่ และนอกจากนี้ยังมีระบบชุมชนฟอรั่มไว้ให้พูดคุยสนทนาและยังมีตารางออกอากาศในไทยอีกด้วย",
+		"nl": "Op Hareshi's website kun je alle anime vinden met Thaise ondertiteling en Thaise nasynchronisatie die je maar wilt. En er is ook een gemeenschapsforum systeem voor discussie en er is ook een uitzendschema in Thailand."
 	},
 	"url": [
 		"hareshi.net",
 		"forum.hareshi.net"
 	],
 	"regExp": "([a-z0-9-]+[.])*hareshi[.]net[/]",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/Rj3w0bs.jpg",
 	"thumbnail": "https://i.imgur.com/9TONSpq.jpg",
 	"color": "#ff6c96",

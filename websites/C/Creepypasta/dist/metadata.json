@@ -6,10 +6,11 @@
 	},
 	"service": "Creepypasta",
 	"description": {
-		"en": "Welcome to Creepypasta.com! Scaring you since 2008 with paranormal stories and creepy original horror fiction. Sleep well..."
+		"en": "Welcome to Creepypasta.com! Scaring you since 2008 with paranormal stories and creepy original horror fiction. Sleep well...",
+		"nl": "Welkom bij Creepypasta.com! Sinds 2008 maken we je bang met paranormale verhalen en griezelige originele horror fictie. Slaap lekker..."
 	},
 	"url": "www.creepypasta.com",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/WYcFqyS.png",
 	"thumbnail": "https://i.imgur.com/ZlvL1BP.png",
 	"color": "#dd3333",

@@ -6,10 +6,11 @@
 	},
 	"service": "Discord.style",
 	"description": {
-		"en": "Online library for finding and sharing free Discord Templates. Upload your own Discord Template and collect votes!"
+		"en": "Online library for finding and sharing free Discord Templates. Upload your own Discord Template and collect votes!",
+		"nl": "Online bibliotheek voor het vinden en delen van gratis Discord Templates. Upload je eigen Discord Templates en verzamel stemmen!"
 	},
 	"url": "www.discord.style",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/1wKlRwf.png",
 	"thumbnail": "https://i.imgur.com/pigr2GZ.jpg",
 	"color": "#1f2131",

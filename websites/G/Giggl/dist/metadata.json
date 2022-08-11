@@ -12,14 +12,15 @@
 	],
 	"service": "Giggl",
 	"description": {
-		"en": "Watch & browse the web, together - From hosting virtual movie nights, browsing the web with friends or watching anime with your long-distance partner: Giggl lets you do that together in real-time."
+		"en": "Watch & browse the web, together - From hosting virtual movie nights, browsing the web with friends or watching anime with your long-distance partner: Giggl lets you do that together in real-time.",
+		"nl": "Samen kijken en surfen op het web - Of je nu een virtuele filmavond organiseert, met vrienden op het web surft of anime kijkt met je lange-afstandspartner: Giggl laat je dat allemaal samen doen in real-time."
 	},
 	"url": [
 		"giggl.app",
 		"canary.giggl.app",
 		"status.giggl.app"
 	],
-	"version": "2.0.8",
+	"version": "2.0.9",
 	"logo": "https://i.imgur.com/k1TnUGL.jpg",
 	"thumbnail": "https://i.imgur.com/i5j8A6k.png",
 	"color": "#FF0099",

@@ -6,10 +6,11 @@
 	},
 	"service": "Booyah",
 	"description": {
-		"en": "BOOYAH! is a leading livestreaming and community platform designed for gaming enthusiasts, powered by Garena."
+		"en": "BOOYAH! is a leading livestreaming and community platform designed for gaming enthusiasts, powered by Garena.",
+		"nl": "BOOYAH! is een leidend livestreaming en gemeenschapsplatform ontworpen voor gameliefhebbers, aangedreven door Garena."
 	},
 	"url": "booyah.live",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/W9irPdk.png",
 	"thumbnail": "https://i.imgur.com/tF1F2fi.png",
 	"color": "#ffc106",

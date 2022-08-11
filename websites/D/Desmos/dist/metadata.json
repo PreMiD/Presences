@@ -6,10 +6,11 @@
 	},
 	"service": "Desmos",
 	"description": {
-		"en": "Desmos Graphing Calculator lets you graph functions, plot data, evaluate equations, explore transformations, and much more— all for free. "
+		"en": "Desmos Graphing Calculator lets you graph functions, plot data, evaluate equations, explore transformations, and much more— all for free. ",
+		"nl": "Met Desmos Grafische rekenmachine kunt u functies grafisch weergeven, gegevens plotten, vergelijkingen evalueren, transformaties onderzoeken en nog veel meer - en dat alles gratis."
 	},
 	"url": "www.desmos.com",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/MVpfVss.jpg",
 	"thumbnail": "https://i.imgur.com/FkLdvtA.png",
 	"color": "#158f47",

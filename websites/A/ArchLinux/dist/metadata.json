@@ -6,11 +6,12 @@
 	},
 	"service": "ArchLinux",
 	"description": {
-		"en": "Arch Linux, a lightweight and flexible Linux® distribution that tries to Keep It Simple."
+		"en": "Arch Linux, a lightweight and flexible Linux® distribution that tries to Keep It Simple.",
+		"nl": "Arch Linux, een lichtgewicht en flexibele Linux® distributie die het simpel probeert te houden."
 	},
 	"url": "archlinux.org",
 	"regExp": "([a-z0-9-]+[.])*archlinux[.]org[/]",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/GiMACbc.png",
 	"thumbnail": "https://i.imgur.com/DXVGQFR.png",
 	"color": "#1793d1",

@@ -6,10 +6,11 @@
 	},
 	"service": "Doordash",
 	"description": {
-		"en": "Delivery & takeout from the best local restaurants. Breakfast, lunch, dinner and more, delivered safely to your door."
+		"en": "Delivery & takeout from the best local restaurants. Breakfast, lunch, dinner and more, delivered safely to your door.",
+		"nl": "Bezorging en afhaalmaaltijden van de beste lokale restaurants. Ontbijt, lunch, diner en meer, veilig aan huis bezorgd."
 	},
 	"url": "www.doordash.com",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/Kif7kro.png",
 	"thumbnail": "https://i.imgur.com/Sc5sj8U.jpg",
 	"color": "#ff3008",

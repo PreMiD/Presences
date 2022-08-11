@@ -6,10 +6,11 @@
 	},
 	"service": "Free Web Novel",
 	"description": {
-		"en": "We offer free novels to read online! Read novels updated daily: Chinese novels, English novels, Japanese novels, Korean novels, and novels of multiple genres."
+		"en": "We offer free novels to read online! Read novels updated daily: Chinese novels, English novels, Japanese novels, Korean novels, and novels of multiple genres.",
+		"nl": "Wij bieden gratis romans aan om online te lezen! Lees dagelijks bijgewerkte romans zoals: Chinese romans, Engelse romans, Japanse romans, Koreaanse romans, en romans van verschillende genres."
 	},
 	"url": "freewebnovel.com",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/ePGzX1S.png",
 	"thumbnail": "https://i.imgur.com/oX4nk92.png",
 	"color": "#5a5a5a",

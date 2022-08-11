@@ -7,10 +7,11 @@
 	"service": "AnimeFillerList",
 	"description": {
 		"en": "Community created filler lists that help you get to the good stuff.",
-		"vi_VN": "Danh sách được chọn lọc bởi cộng đồng để bạn có thể chọn những bộ phim hay."
+		"vi_VN": "Danh sách được chọn lọc bởi cộng đồng để bạn có thể chọn những bộ phim hay.",
+		"nl": "Door de gemeenschap gemaakte vullijsten helpen je naar het goede spul."
 	},
 	"url": "www.animefillerlist.com",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/NAG50Oi.png",
 	"thumbnail": "https://i.imgur.com/rYaZaYT.png",
 	"color": "#E56E2E",

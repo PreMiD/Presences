@@ -9,7 +9,8 @@
 		"bg": "Общностна мрежа за новини, уроци и споделяне.",
 		"en": "Community Network website for news, tutorials and sharing.",
 		"de": "Community Network-Website für Neuigkeiten, Tutorials und Austausch.",
-		"es": "Sitio web de Community Network para noticias, tutoriales y compartir."
+		"es": "Sitio web de Community Network para noticias, tutoriales y compartir.",
+		"nl": "Gemeenschap Netwerk website voor nieuws, handleidingen en delen."
 	},
 	"url": [
 		"eternalnetworktm.com",
@@ -17,7 +18,7 @@
 		"radio.eternalnetworktm.com",
 		"status.eternalnetworktm.com"
 	],
-	"version": "1.1.13",
+	"version": "1.1.14",
 	"logo": "https://i.imgur.com/Saq6ADh.png",
 	"thumbnail": "https://i.imgur.com/8pBRB2e.png",
 	"color": "#c005e6",

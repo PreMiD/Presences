@@ -7,10 +7,11 @@
 	"service": "Google Photos",
 	"description": {
 		"en": "Google Photos is the home for all your photos and videos, automatically organized and easy to share.",
-		"vi_VN": "Google Photos là nơi cho tất cả các bức ảnh và video của bạn, được tự động sắp xếp và dễ dàng chia sẻ"
+		"vi_VN": "Google Photos là nơi cho tất cả các bức ảnh và video của bạn, được tự động sắp xếp và dễ dàng chia sẻ",
+		"nl": "Google Foto's is de thuisbasis voor al uw foto's en video's, automatisch georganiseerd en gemakkelijk te delen."
 	},
 	"url": "photos.google.com",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/H4jjKhD.png",
 	"thumbnail": "https://i.imgur.com/bDLIxDm.jpg",
 	"color": "#FFFFFF",

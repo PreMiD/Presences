@@ -13,13 +13,14 @@
 	"service": "bilibilitv",
 	"description": {
 		"en": "bilibili.tv is an ad-free anime streaming website.",
-		"vi_VN": "bilibili.tv là nền tảng xem anime trực tuyến không có quảng cáo."
+		"vi_VN": "bilibili.tv là nền tảng xem anime trực tuyến không có quảng cáo.",
+		"nl": "bilibili.tv is een reclamevrije anime streaming website."
 	},
 	"url": [
 		"www.bilibili.tv",
 		"studio.bilibili.tv"
 	],
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"logo": "https://i.imgur.com/BY7MROC.png",
 	"thumbnail": "https://i.imgur.com/eMifMYk.png",
 	"color": "#2e62ff",

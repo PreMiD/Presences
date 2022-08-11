@@ -12,10 +12,11 @@
 	],
 	"service": "fbox.to",
 	"description": {
-		"en": "fbox online is free movies streaming website with zero ads, it allows you watch free movies online, watch free tv series online in high quality for free"
+		"en": "fbox online is free movies streaming website with zero ads, it allows you watch free movies online, watch free tv series online in high quality for free",
+		"nl": "fbox online is een gratis films streaming website met nul advertenties, hier kun je kijken naar gratis films online, kijk gratis tv-series online in hoge kwaliteit voor niks"
 	},
 	"url": "www4.fbox.to",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"logo": "https://i.imgur.com/HXOjyCu.png",
 	"thumbnail": "https://i.imgur.com/bCuViFL.png",
 	"color": "#565c67",

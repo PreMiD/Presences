@@ -7,11 +7,12 @@
 	"service": "Google Play",
 	"description": {
 		"en": "Enjoy millions of the latest Android apps, games, music, movies, TV, books, magazines & more.",
-		"bg": "Насладете се на милиони най-нови приложения за Android, игри, музика, филми, телевизия, книги, списания и др."
+		"bg": "Насладете се на милиони най-нови приложения за Android, игри, музика, филми, телевизия, книги, списания и др.",
+		"nl": "Geniet van miljoenen van de nieuwste Android apps, games, muziek, films, TV, boeken, tijdschriften & meer."
 	},
 	"url": "play.google.com",
 	"regExp": "play|google",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/5pg4mIv.png",
 	"thumbnail": "https://i.imgur.com/mqTRapM.png",
 	"color": "#F0464B",

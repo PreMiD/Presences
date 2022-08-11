@@ -10,11 +10,12 @@
 	],
 	"description": {
 		"en": "A better way to trade CS:GO skins. Buy, sell, and trade skins easier and faster. All deals are secured with the highest level protection methods.",
-		"vi_VN": "Cách tốt hơn để trao đổi CS:GO skin. Mua, bán, và trao đổi skin nhanh hơn và dễ dàng hơn. Tất cả các giao dịch đều được bảo mật bằng phương thức cao nhất."
+		"vi_VN": "Cách tốt hơn để trao đổi CS:GO skin. Mua, bán, và trao đổi skin nhanh hơn và dễ dàng hơn. Tất cả các giao dịch đều được bảo mật bằng phương thức cao nhất.",
+		"nl": "Een betere manier om CS:GO skins te verhandelen. Koop, verkoop en ruil skins makkelijker en sneller. Alle deals zijn beveiligd met het hoogste niveau beveiligingsmethoden."
 	},
 	"url": "cs.money",
 	"regExp": "([a-z0-9]+[.])?cs[.]money",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/y7THfIx.png",
 	"thumbnail": "https://i.imgur.com/Ob8gt4E.png",
 	"color": "#4214AC",

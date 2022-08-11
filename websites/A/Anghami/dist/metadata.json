@@ -9,10 +9,11 @@
 		"أنغامي"
 	],
 	"description": {
-		"en": "Make some noise, the world is listening."
+		"en": "Make some noise, the world is listening.",
+		"nl": "Maak wat geluid, de wereld luistert"
 	},
 	"url": "play.anghami.com",
-	"version": "1.3.4",
+	"version": "1.3.5",
 	"logo": "https://i.imgur.com/PzxFsAZ.png",
 	"thumbnail": "https://i.imgur.com/eEJ16jU.jpg",
 	"color": "#FF00FE",

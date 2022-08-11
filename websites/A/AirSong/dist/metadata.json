@@ -6,11 +6,12 @@
 	},
 	"service": "AirSong",
 	"description": {
-		"en": "AirSong is a music server for your web browser. You can listen to your MP3 music stored on your device directly from your browser, over the air, no need to copy all the music from your device to your PC. The only requirement is to be under the same LAN (WIFI), both, the device and the PC that will run the browser."
+		"en": "AirSong is a music server for your web browser. You can listen to your MP3 music stored on your device directly from your browser, over the air, no need to copy all the music from your device to your PC. The only requirement is to be under the same LAN (WIFI), both, the device and the PC that will run the browser.",
+		"nl": "AirSong is een muziekserver voor je webbrowser. Je kunt naar je MP3-muziek luisteren die op je apparaat is opgeslagen, direct vanuit je browser, via de wifi, zonder dat je alle muziek van je apparaat naar je PC hoeft te kopiëren. De enige vereiste is dat allebei de apparaten, zich onder hetzelfde LAN (WIFI) bevinden. "
 	},
 	"url": "localhost",
 	"regExp": "192[.]168[.]1[.]([0-9]+)",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/rLh25vA.png",
 	"thumbnail": "https://i.imgur.com/Xr5RBAm.png",
 	"color": "#0094CB",

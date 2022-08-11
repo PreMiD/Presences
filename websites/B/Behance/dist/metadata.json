@@ -6,10 +6,11 @@
 	},
 	"service": "Behance",
 	"description": {
-		"en": "Behance is the world's largest creative network for showcasing and discovering creative work."
+		"en": "Behance is the world's largest creative network for showcasing and discovering creative work.",
+		"nl": "Behance is 's werelds grootste creatieve netwerk voor het tonen en ontdekken van creatief werk"
 	},
 	"url": "www.behance.net",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/XyGiJIR.png",
 	"thumbnail": "https://i.imgur.com/NxcdIqY.jpeg",
 	"color": "#1769FF",

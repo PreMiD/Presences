@@ -7,14 +7,15 @@
 	"service": "CodeChef",
 	"description": {
 		"en": "CodeChef is a competitive programming community of programmers from across the globe.",
-		"vi_VN": "CodeChef là công đồng cạnh tranh của các lập trình viên toàn cầu."
+		"vi_VN": "CodeChef là công đồng cạnh tranh của các lập trình viên toàn cầu.",
+		"nl": "CodeChef is een competitieve programmeergemeenschap van programmeurs van over de hele wereld."
 	},
 	"url": [
 		"www.codechef.com",
 		"blog.codechef.com",
 		"discuss.codechef.com"
 	],
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/yErRb6J.png",
 	"thumbnail": "https://i.imgur.com/8Q9qJdD.png",
 	"color": "#e1d5d5",

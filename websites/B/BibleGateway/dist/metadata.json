@@ -6,10 +6,11 @@
 	},
 	"service": "BibleGateway",
 	"description": {
-		"en": "Read, hear, and study Scripture at the world's most-visited Christian website. Grow your faith with devotionals, Bible reading plans, and mobile apps."
+		"en": "Read, hear, and study Scripture at the world's most-visited Christian website. Grow your faith with devotionals, Bible reading plans, and mobile apps.",
+		"nl": "Lees, hoor en bestudeer het Schrift op 's werelds meest bezochte christelijke website. Laat je geloof groeien met toewijdingen, Bijbelleesplannen en mobiele apps."
 	},
 	"url": "www.biblegateway.com",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/zaxEjvB.png",
 	"thumbnail": "https://i.imgur.com/N203oXY.png",
 	"color": "#952004",

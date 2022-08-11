@@ -7,13 +7,14 @@
 	"service": "Asura Scans",
 	"description": {
 		"en": "Read Comics on Asura Scans.",
-		"vi_VN": "Đọc truyện tranh tại Asura Scans."
+		"vi_VN": "Đọc truyện tranh tại Asura Scans.",
+		"nl": "Lees stripboeken op Asura Scans."
 	},
 	"url": [
 		"asurascans.com",
 		"www.asurascans.com"
 	],
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/ewDJfwk.png",
 	"thumbnail": "https://i.imgur.com/FjiRGf6.png",
 	"color": "#6E3CAA",

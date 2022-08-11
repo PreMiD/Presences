@@ -6,10 +6,11 @@
 	},
 	"service": "Dribbble",
 	"description": {
-		"en": "Dribbble is where designers gain inspiration, feedback, community, and jobs and is your best resource to discover and connect with designers worldwide."
+		"en": "Dribbble is where designers gain inspiration, feedback, community, and jobs and is your best resource to discover and connect with designers worldwide.",
+		"nl": "Dribbble is de plek waar ontwerpers inspiratie, feedback, gemeenschap en banen krijgen en is jouw beste bron om ontwerpers wereldwijd te ontdekken en met hen in contact te komen."
 	},
 	"url": "dribbble.com",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/lZ0G2SL.png",
 	"thumbnail": "https://i.imgur.com/BfP9AEk.png",
 	"color": "#ea4c89",

@@ -6,13 +6,14 @@
 	},
 	"service": "Explain xkcd",
 	"description": {
-		"en": "Explain xkcd is a wiki dedicated to explaining the webcomic xkcd. Go figure."
+		"en": "Explain xkcd is a wiki dedicated to explaining the webcomic xkcd. Go figure.",
+		"nl": "Explain xkcd is een wiki gewijd aan het verklaren van de webcomic xkcd. Stel je voor."
 	},
 	"url": [
 		"www.explainxkcd.com",
 		"explainxkcd.com"
 	],
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/mZSiamM.png",
 	"thumbnail": "https://i.imgur.com/MUuSnky.png",
 	"color": "#ffffff",

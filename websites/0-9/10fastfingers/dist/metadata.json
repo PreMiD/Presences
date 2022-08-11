@@ -8,10 +8,11 @@
 	"description": {
 		"en": "Test & Improve your Typing Speed with our free Typing Games",
 		"es": "Pruebe y mejore su velocidad de escritura con nuestros juegos de mecanografía gratuitos",
-		"vi_VN": "Thử và cải thiện tốc độ đánh máy của bạn với các trò chơi đánh máy miễn phí của chúng tôi."
+		"vi_VN": "Thử và cải thiện tốc độ đánh máy của bạn với các trò chơi đánh máy miễn phí của chúng tôi.",
+		"nl": "Test & Verbeter uw typesnelheid met onze gratis Typespellen"
 	},
 	"url": "10fastfingers.com",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/OE0fMrX.png",
 	"thumbnail": "https://i.imgur.com/Z8sPB3q.png",
 	"color": "#082333",

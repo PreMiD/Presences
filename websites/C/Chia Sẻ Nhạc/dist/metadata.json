@@ -10,11 +10,12 @@
 	],
 	"description": {
 		"en": "High-fidelity music sharing and ranking community",
-		"vi_VN": "Cộng đồng chia sẻ nhạc chất lượng cao và xếp hạng âm nhạc trực tuyến"
+		"vi_VN": "Cộng đồng chia sẻ nhạc chất lượng cao và xếp hạng âm nhạc trực tuyến",
+		"nl": "Heel betrouwbaar muziek delen en rangschik gemeenschap"
 	},
 	"url": "chiasenhac.vn",
 	"regExp": "([a-z0-9]+[.])?chiasenhac[.]vn",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/VEQTygm.png",
 	"thumbnail": "https://i.imgur.com/Fz3UUv1.png",
 	"color": "#FB5B49",

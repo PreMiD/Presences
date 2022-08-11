@@ -6,10 +6,11 @@
 	},
 	"service": "Flowlab",
 	"description": {
-		"en": "Flowlab is an online game creator. Make your own games to share with friends."
+		"en": "Flowlab is an online game creator. Make your own games to share with friends.",
+		"nl": "Flowlab is een online spelletjes maker. Maak je eigen spellen om te delen met vrienden."
 	},
 	"url": "flowlab.io",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/XpyDbbv.png",
 	"thumbnail": "https://i.imgur.com/gAHmasT.jpg",
 	"color": "#88e6ec",

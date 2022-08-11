@@ -7,10 +7,11 @@
 	"service": "Animes Portal",
 	"description": {
 		"en": "Anime, manga and Asian culture",
-		"bg": "Аниме, манга и азиатска култура"
+		"bg": "Аниме, манга и азиатска култура",
+		"nl": "Anime, manga en de Aziatische cultuur"
 	},
 	"url": "animes-portal.info",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/EwyBmHJ.png",
 	"thumbnail": "https://i.imgur.com/Nr3XhzA.jpg",
 	"color": "#365AA8",

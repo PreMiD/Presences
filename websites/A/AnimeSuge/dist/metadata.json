@@ -7,10 +7,11 @@
 	"service": "AnimeSuge",
 	"description": {
 		"en": "AnimeSuge is a free streaming anime website that allows you to watch anime online in English subbed and dubbed.",
-		"vi_VN": "AnimeSuge là trang web phát anime miễn phí cho phép bạn xem anime với phụ đề hoặc thuyết minh Tiếng Anh."
+		"vi_VN": "AnimeSuge là trang web phát anime miễn phí cho phép bạn xem anime với phụ đề hoặc thuyết minh Tiếng Anh.",
+		"nl": "AnimeSuge is een gratis anime streaming website waarmee je anime online kunt bekijken in het Engels ondertiteld en nagesynchroniseerd."
 	},
 	"url": "animesuge.to",
-	"version": "1.1.8",
+	"version": "1.1.9",
 	"logo": "https://i.imgur.com/TQPRXrN.png",
 	"thumbnail": "https://i.imgur.com/stBappT.png",
 	"color": "#161616",

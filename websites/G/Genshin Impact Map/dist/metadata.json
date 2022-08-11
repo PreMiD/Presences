@@ -6,7 +6,8 @@
 	},
 	"service": "Genshin Impact Map",
 	"description": {
-		"en": "Genshin Impact Interactive Map of all locations locations descriptions guides and more."
+		"en": "Genshin Impact Interactive Map of all locations locations descriptions guides and more.",
+		"nl": "Genshin Impact Interactieve kaart van alle locaties, locaties beschrijvingen gidsen en meer."
 	},
 	"url": [
 		"act.hoyolab.com",
@@ -15,7 +16,7 @@
 		"genshin-impact-map.appsample.com",
 		"mapgenie.io"
 	],
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"logo": "https://i.imgur.com/6XrkcZs.png",
 	"thumbnail": "https://i.imgur.com/3UmAxEL.png",
 	"color": "#b6c48c",

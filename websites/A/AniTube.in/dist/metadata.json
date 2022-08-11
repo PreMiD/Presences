@@ -7,10 +7,11 @@
 	"service": "AniTube.in",
 	"description": {
 		"en": "Anitube.in is a Portuguese(language) website where anyone can stream and download anime/dramas for Free.",
-		"vi_VN": "Anitube.in là trang web Tiếng Bồ Đào nha nơi mọi người có thể xem trực tuyến và tải về anime/drama miễn phí."
+		"vi_VN": "Anitube.in là trang web Tiếng Bồ Đào nha nơi mọi người có thể xem trực tuyến và tải về anime/drama miễn phí.",
+		"nl": "Anitube.in is een Portugese website waar iedereen gratis anime/dramas kan streamen en downloaden."
 	},
 	"url": "www.anitube.in",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/pL1fgAo.png",
 	"thumbnail": "https://i.imgur.com/nRikMNR.png",
 	"color": "#0fa6a9",

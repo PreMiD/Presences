@@ -7,10 +7,11 @@
 	"service": "Discord Turkiye",
 	"description": {
 		"en": "Discord Turkiye is the largest Forum/Discord community in Turkey, which contains updates, news, servers, bots, trades and many categories.",
-		"tr": "Discord Turkiye, güncellemeler, haberler, sunucular, botlar, ticaret ve birçok kategoriyi içerisinde barındıran Türkiye'nin en büyük forum/Discord topluluğudur."
+		"tr": "Discord Turkiye, güncellemeler, haberler, sunucular, botlar, ticaret ve birçok kategoriyi içerisinde barındıran Türkiye'nin en büyük forum/Discord topluluğudur.",
+		"nl": "Discord Turkiye is de grootste Forum/Discord gemeenschap in Turkije, die updates, nieuws, servers, bots, trades en vele andere categorieën bevat"
 	},
 	"url": "discordturkiye.com",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/soQZ7fc.png",
 	"thumbnail": "https://i.imgur.com/wg1lIfq.png",
 	"color": "#57F287",

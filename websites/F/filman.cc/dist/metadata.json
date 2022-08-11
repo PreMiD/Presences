@@ -7,10 +7,11 @@
 	"service": "filman.cc",
 	"description": {
 		"en": "Polish site offering links to series and movies from other sources.",
-		"pl": "Polska strona oferująca linki do seriali i filmów z innych źródeł."
+		"pl": "Polska strona oferująca linki do seriali i filmów z innych źródeł.",
+		"nl": "Poolse site met links naar series en films uit andere bronnen."
 	},
 	"url": "filman.cc",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/NHoj4QX.png",
 	"thumbnail": "https://i.imgur.com/Fx7f5BM.png",
 	"color": "#00b3ff",

@@ -7,10 +7,11 @@
 	"service": "Backloggd",
 	"description": {
 		"en": "Keep a virtual backlog of your video game collection, then rate and review the ones you've played to share with your friends!",
-		"fr": "Gardez un backlog virtuel de votre collection de jeux vidéo, puis évaluez et passez en revue ceux auxquels vous avez joué pour les partager avec vos amis !"
+		"fr": "Gardez un backlog virtuel de votre collection de jeux vidéo, puis évaluez et passez en revue ceux auxquels vous avez joué pour les partager avec vos amis !",
+		"nl": " Houd een virtueel overzicht bij van jouw videogameverzameling en beoordeel de games die je hebt gespeeld om ze met je vrienden te delen"
 	},
 	"url": "backloggd.com",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/SUZJZEX.png",
 	"thumbnail": "https://i.imgur.com/JlGeqrS.png",
 	"color": "#4a5e8d",

@@ -6,11 +6,12 @@
 	},
 	"service": "Google Maps",
 	"description": {
-		"en": "Google Maps is a web mapping platform and consumer application offered by Google. It offers satellite imagery, aerial photography, street maps, 360° interactive panoramic views of streets, real-time traffic conditions, and route planning for traveling by foot, car, bike, air and public transportation."
+		"en": "Google Maps is a web mapping platform and consumer application offered by Google. It offers satellite imagery, aerial photography, street maps, 360° interactive panoramic views of streets, real-time traffic conditions, and route planning for traveling by foot, car, bike, air and public transportation.",
+		"nl": "Google Maps is een online kaartenplatform en consumententoepassing die wordt aangeboden door Google. Het biedt satellietbeelden, luchtfoto's, wegenkaarten, interactieve 360°-panoramaweergaven van straten, real-time verkeersomstandigheden en routeplanning voor reizen ter voet, per auto, fiets, vliegtuig en openbaar vervoer."
 	},
 	"url": "www.google.com",
 	"regExp": "www\\.google\\.com\\/maps",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/RI6Wn79.png",
 	"thumbnail": "https://i.imgur.com/u7oLYw6.png",
 	"color": "#4e85f2",

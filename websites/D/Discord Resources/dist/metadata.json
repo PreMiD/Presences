@@ -6,10 +6,11 @@
 	},
 	"service": "Discord Resources",
 	"description": {
-		"en": "A list of tons of useful Discord resources and utilities for all types of users, from beginners to power users."
+		"en": "A list of tons of useful Discord resources and utilities for all types of users, from beginners to power users.",
+		"nl": "Een lijst van tonnen nuttige Discord bronnen en hulpprogramma's voor alle soorten gebruikers, van beginners tot power users."
 	},
 	"url": "discordresources.com",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/LzdNPBJ.png",
 	"thumbnail": "https://i.imgur.com/LCBideV.png",
 	"color": "#ba6ec4",

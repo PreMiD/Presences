@@ -7,10 +7,11 @@
 	"service": "AnimeGO",
 	"description": {
 		"en": "AnimeGO - watch anime online for free.",
-		"ru": "AnimeGO — смотреть аниме онлайн бесплатно."
+		"ru": "AnimeGO — смотреть аниме онлайн бесплатно.",
+		"nl": "AnimeGO - kijk gratis anime online."
 	},
 	"url": "animego.org",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/B32aOhi.jpg",
 	"thumbnail": "https://i.imgur.com/xwYpmDF.png",
 	"color": "#ff5c57",

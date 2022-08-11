@@ -6,13 +6,14 @@
 	},
 	"service": "Educative",
 	"description": {
-		"en": "Interactive Courses for Software Developers"
+		"en": "Interactive Courses for Software Developers",
+		"nl": "Interactieve cursussen voor softwareontwikkelaars"
 	},
 	"url": [
 		"educative.io",
 		"www.educative.io"
 	],
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/vYEoDm5.png",
 	"thumbnail": "https://i.imgur.com/VOUPf7V.png",
 	"color": "#5553ff",

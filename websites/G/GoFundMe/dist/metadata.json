@@ -6,11 +6,12 @@
 	},
 	"service": "GoFundMe",
 	"description": {
-		"en": "GoFundMe is an American for-profit crowdfunding platform that allows people to raise money for events ranging from life events such as celebrations and graduations to challenging circumstances like accidents and illnesses. "
+		"en": "GoFundMe is an American for-profit crowdfunding platform that allows people to raise money for events ranging from life events such as celebrations and graduations to challenging circumstances like accidents and illnesses. ",
+		"nl": "GoFundMe is een Amerikaans crowdfundingplatform met commerciële doeleinden dat mensen in staat stelt geld in te zamelen voor evenementen variërend van levensgebeurtenissen zoals feesten en diploma-uitreikingen tot uitdagende omstandigheden zoals ongevallen en ziekten."
 	},
 	"url": "gofundme.com",
 	"regExp": "([a-z0-9]+)[.]gofundme[.]com",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/5z37NtP.png",
 	"thumbnail": "https://i.imgur.com/EytuDmf.png",
 	"color": "#00b640",

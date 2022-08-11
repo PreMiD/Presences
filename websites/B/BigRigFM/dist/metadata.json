@@ -6,10 +6,11 @@
 	},
 	"service": "BigRigFM",
 	"description": {
-		"en": "BigRig.FM is the No.1 Country Music Station, providing round the clock entertainment broadcasting your county classics and the hits of today."
+		"en": "BigRig.FM is the No.1 Country Music Station, providing round the clock entertainment broadcasting your county classics and the hits of today.",
+		"nl": "BigRig.FM is het nr.1 Country Muziek Station, dat 24 uur per dag entertainment uitzendt met de klassiekers uit je eigen regio en de hits van vandaag."
 	},
 	"url": "bigrig.fm",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/2GSzYEu.png",
 	"thumbnail": "https://i.imgur.com/c8EKKAI.png",
 	"color": "#e57215",

@@ -6,13 +6,14 @@
 	},
 	"service": "Emanate",
 	"description": {
-		"en": "Emanate unites musicians and music lovers on a fast and fair collaboration and sharing platform to create and earn more. You’ve always lived for music, now make it a living."
+		"en": "Emanate unites musicians and music lovers on a fast and fair collaboration and sharing platform to create and earn more. You’ve always lived for music, now make it a living.",
+		"nl": "Emanate verenigt muzikanten en muziekliefhebbers op een snel en eerlijk samenwerkings- en deelplatform om meer te creëren en te verdienen. Je hebt altijd voor muziek geleefd, maak er nu je beroep van."
 	},
 	"url": [
 		"dashboard.emanate.live",
 		"emanate.live"
 	],
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/yFQLKFU.png",
 	"thumbnail": "https://i.imgur.com/XnyMHma.png",
 	"color": "#1e1e1e",

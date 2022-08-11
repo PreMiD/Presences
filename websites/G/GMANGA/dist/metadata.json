@@ -6,14 +6,15 @@
 	},
 	"service": "GMANGA",
 	"description": {
-		"en": "GMANGA - An interactive site that aims to provide more options for translating manga chapters to Arabic."
+		"en": "GMANGA - An interactive site that aims to provide more options for translating manga chapters to Arabic.",
+		"nl": "GMANGA - Een interactieve site die meer mogelijkheden wil bieden om manga-hoofdstukken naar het Arabisch te vertalen."
 	},
 	"url": [
 		"gmanga.org",
 		"gmanga.io",
 		"gmanga.me"
 	],
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/HITNgFU.png",
 	"thumbnail": "https://i.imgur.com/mVR71z8.png",
 	"color": "#428bca",

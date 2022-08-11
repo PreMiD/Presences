@@ -6,10 +6,11 @@
 	},
 	"service": "Gaia",
 	"description": {
-		"en": "Gaia offers the largest online resource of consciousness-expanding videos—over 8,000 informative and enlightening films, original shows, yoga and meditation"
+		"en": "Gaia offers the largest online resource of consciousness-expanding videos—over 8,000 informative and enlightening films, original shows, yoga and meditation",
+		"nl": "Gaia biedt de grootste online bron van bewustzijnverruimende video's - meer dan 8.000 informatieve en verhelderende films, originele shows, yoga en meditatie"
 	},
 	"url": "www.gaia.com",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/7Y2qTl9.png",
 	"thumbnail": "https://i.imgur.com/dVKxkkZ.png",
 	"color": "#ffffff",

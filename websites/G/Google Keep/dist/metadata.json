@@ -13,10 +13,11 @@
 	"service": "Google Keep",
 	"description": {
 		"en": "Google Keep is a note-taking service included as part of the free, web-based Google Docs Editors suite offered by Google.",
-		"vi_VN": "Google Keep là dịch vụ ghi chú, nằm trong bộ Google Docs Editors của Google."
+		"vi_VN": "Google Keep là dịch vụ ghi chú, nằm trong bộ Google Docs Editors của Google.",
+		"nl": "Google Keep is een dienst voor het maken van aantekeningen die deel uitmaakt van de gratis, webgebaseerde Google Docs Editors-suite van Google."
 	},
 	"url": "keep.google.com",
-	"version": "1.1.5",
+	"version": "1.1.6",
 	"logo": "https://i.imgur.com/a3Zeo3X.png",
 	"thumbnail": "https://i.imgur.com/AyaAOXp.png",
 	"color": "#FFBA00",

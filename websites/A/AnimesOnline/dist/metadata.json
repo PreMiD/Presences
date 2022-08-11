@@ -8,10 +8,11 @@
 	"description": {
 		"en": "Animes Online in FULLHD, HD and SD, choose the anime of your choice and watch it subtitled or dubbed! Join now it's free!",
 		"pt_BR": "Animes Online em FULLHD, HD e SD, escolha o anime de sua preferencia e assista legendado ou dublado! Acesse agora é gratuito!",
-		"vi_VN": "Xem anime trực tuyến với chất lượng FULLHD, HD và SD, chọn anime của bạn và xem với phụ đề hoặc thuyết minh! Tham gia hoàn toàn miễn phí!"
+		"vi_VN": "Xem anime trực tuyến với chất lượng FULLHD, HD và SD, chọn anime của bạn và xem với phụ đề hoặc thuyết minh! Tham gia hoàn toàn miễn phí!",
+		"nl": "Animes Online in VOLLEDIG HD, HD en SD, kies de anime van je keuze en bekijk het ondertiteld of nagesynchroniseerd! Meld je nu aan, het is gratis!"
 	},
 	"url": "animesonline.org",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/5U9jD9W.jpg",
 	"thumbnail": "https://i.imgur.com/4Q65GWB.jpg",
 	"color": "#e74c3c",

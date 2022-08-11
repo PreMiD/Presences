@@ -7,10 +7,11 @@
 	"service": "BoxSeries",
 	"description": {
 		"en": "Series & movies online in HD, choose your favorite series or movie and watch dubbed or subtitled! Join now it's free!",
-		"pt_BR": "Séries e filmes online em HD, escolha sua série ou seu filme de preferencia e assista dublado ou legendado! Acesse agora é gratuito!"
+		"pt_BR": "Séries e filmes online em HD, escolha sua série ou seu filme de preferencia e assista dublado ou legendado! Acesse agora é gratuito!",
+		"nl": "Series & films online in HD, kies je favoriete serie of film en kijk die nagesynchroniseerd of ondertiteld! Meld je nu aan, het is gratis!"
 	},
 	"url": "boxseries.org",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/AdhYVbR.jpg",
 	"thumbnail": "https://i.imgur.com//9XNvptP.jpg",
 	"color": "#0297c5",

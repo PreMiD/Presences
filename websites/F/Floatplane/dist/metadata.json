@@ -6,10 +6,11 @@
 	},
 	"service": "Floatplane",
 	"description": {
-		"en": "Floatplane is a streaming service that offers a wide variety of content from shows to reviews and more! All viewable on thousands of internet-connected devices."
+		"en": "Floatplane is a streaming service that offers a wide variety of content from shows to reviews and more! All viewable on thousands of internet-connected devices.",
+		"nl": "Floatplane is een streamingdienst die een grote variatie aan content biedt, van shows tot recensies en meer! Allemaal te bekijken op duizenden met internet verbonden apparaten."
 	},
 	"url": "www.floatplane.com",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/tXncd0U.png",
 	"thumbnail": "https://i.imgur.com/b4eo89T.png",
 	"color": "#ffffff",
