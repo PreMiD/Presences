@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href } = document.location,
 		pathSplit = pathname.split("/"),
-		[newLang, time, cover] = await Promise.all([
+		[newLang, time, showCover] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<boolean>("cover"),
@@ -51,10 +51,9 @@ presence.on("UpdateData", async () => {
 			presenceData.details = strings.viewPage;
 			presenceData.state =
 				document.querySelector<HTMLHeadingElement>("div.head > h1").textContent;
-			if (cover) {
-				presenceData.largeImageKey =
-					document.querySelector<HTMLImageElement>("div.head > img").src;
-			}
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("div.head > img").src;
+
 			presenceData.buttons = [{ label: strings.buttonViewSeries, url: href }];
 	}
 	if (document.querySelector("div#Player")) {
@@ -63,11 +62,9 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLDivElement>("div.media-title").textContent;
 		presenceData.state =
 			document.querySelector<HTMLDivElement>("div.media-episode").textContent;
-		if (cover) {
-			presenceData.largeImageKey = document
-				.querySelector<HTMLImageElement>("div.media-image > svg > image")
-				.getAttribute("xlink:href");
-		}
+		presenceData.largeImageKey = document
+			.querySelector<HTMLImageElement>("div.media-image > svg > image")
+			.getAttribute("xlink:href");
 
 		const timers: string[] = [];
 		for (const element of document.querySelectorAll("div.desktop > div.timer"))
@@ -94,6 +91,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
+	if (!showCover) presenceData.largeImageKey = "logo";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
