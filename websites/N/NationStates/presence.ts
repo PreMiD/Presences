@@ -33,12 +33,13 @@ async function fetchSelfNationName(): Promise<string | null> {
 		),
 		nationname = nationparsed.querySelector("NAME").textContent,
 		nationtype = `${nationparsed.querySelector("TYPE").textContent} of`,
-		displayFull: boolean = await presence.getSetting("displayFull");
+		namesetting: number = await presence.getSetting("displayname");
 
-	if (nationname.length + nationtype.length + 2 <= 128 && displayFull)
+	if (nationname.length + nationtype.length + 2 <= 128 && namesetting > 1)
 		return `${nationname}, ${nationtype}`;
-	else if (nationname.length <= 128) return nationname;
-	else return null;
+	else if (nationname.length <= 128 && namesetting > 0) return nationname;
+	else if (namesetting > 0) return `${nationname.substring(0, 126)}…`;
+	else return "";
 }
 
 /**
@@ -93,7 +94,20 @@ async function updatePresenceData(): Promise<void> {
 	// Main website (nationstates.net)
 	if (document.location.hostname === "www.nationstates.net") {
 		// Set presence details to the logged in nation name (leave blank if not logged in)
-		presenceData.details = await fetchSelfNationName();
+		const nationname: string = await fetchSelfNationName();
+		if (nationname && nationname.length > 0) presenceData.details = nationname;
+		else delete presenceData.details;
+		// Set presence button, if enabled
+		if (nationname && (await presence.getSetting("buttons"))) {
+			presenceData.buttons = [
+				{
+					label: "View Nation",
+					url: `https://www.nationstates.net/nation=${document.body.getAttribute(
+						"data-nname"
+					)}`,
+				},
+			];
+		} else delete presenceData.buttons;
 		// Set presence state to the current page
 		const page = window.location.pathname.toLowerCase();
 		if (page.startsWith("/page=dilemmas")) {
@@ -147,7 +161,7 @@ async function updatePresenceData(): Promise<void> {
 		) {
 			// Settings
 			presenceData.state = "Tweaking the Nation";
-			presenceData.smallImageKey = null;
+			delete presenceData.smallImageKey;
 		} else if (page.startsWith("/page=create_nation")) {
 			// Nation creation
 			presenceData.state = "Declaring a New Nation";
@@ -243,7 +257,7 @@ async function updatePresenceData(): Promise<void> {
 		} else {
 			// Other
 			presenceData.state = "Browsing";
-			presenceData.smallImageKey = null;
+			delete presenceData.smallImageKey;
 		}
 	} else if (document.location.hostname === "forum.nationstates.net") {
 		// Forums (forum.nationstates.net)
@@ -261,8 +275,8 @@ async function updatePresenceData(): Promise<void> {
 			}
 		}
 	} else {
-		presenceData.state = null;
-		presenceData.details = null;
+		delete presenceData.state;
+		delete presenceData.details;
 	}
 }
 setInterval(updatePresenceData, 10000);
