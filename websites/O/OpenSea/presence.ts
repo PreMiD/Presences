@@ -4,10 +4,9 @@
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const [timestamps, buttons, cover] = await Promise.all([
+	const [timestamps, buttons] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/1HHTwaN.png",
@@ -134,7 +133,6 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (!cover) presenceData.largeImageKey = "logo";
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	if (presenceData.details) presence.setActivity(presenceData);
