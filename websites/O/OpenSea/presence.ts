@@ -12,10 +12,11 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/1HHTwaN.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, search, href, hostname } = document.location;
+		{ pathname, search, href, hostname } = document.location,
+		pathnameArray = pathname.split("/");
 
 	if (hostname === "opensea.io") {
-		switch (pathname.split("/")[1]) {
+		switch (pathnameArray[1]) {
 			case "": {
 				presenceData.details = "Viewing home page";
 				break;
@@ -66,7 +67,7 @@ presence.on("UpdateData", async () => {
 			}
 			case "account": {
 				presenceData.details = "Viewing their account";
-				if (pathname.split("/")[2] === "settings")
+				if (pathnameArray[2] === "settings")
 					presenceData.details = "Viewing their settings";
 				break;
 			}
@@ -92,16 +93,16 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "asset": {
-				if (pathname.split("/")[2] === "create")
+				if (pathnameArray[2] === "create")
 					presenceData.details = "Creating asset";
 				break;
 			}
 			case "blog": {
-				if (pathname.split("/")[2] === "category") {
+				if (pathnameArray[2] === "category") {
 					presenceData.details = "Browsing blogs category";
 					presenceData.state =
 						document.querySelector(".current-menu-item").textContent;
-				} else if (!pathname.split("/")[2])
+				} else if (!pathnameArray[2])
 					presenceData.details = "Browsing blog posts";
 				else {
 					presenceData.details = "Viewing blog post";
