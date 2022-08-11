@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://archiveofourown.org/images/ao3_logos/logo_42.png",
+			largeImageKey: "https://i.imgur.com/2ewm9Gc.png",
 		},
 		[work, tag] = await Promise.all([
 			presence.getSetting<string>("work"),
@@ -25,13 +25,9 @@ presence.on("UpdateData", async () => {
 				document.querySelector("h2").textContent
 			}`;
 
-			if (document.querySelector("div.chapter > h3"))
-				presenceData.state = "Oneshot";
-			else {
-				presenceData.state = `${
-					document.querySelector("div.chapter > h3").textContent
-				}`;
-			}
+			presenceData.state = document.querySelector("div.chapter > h3")
+				? document.querySelector("div.chapter > h3").textContent
+				: "Oneshot";
 			presenceData.buttons = [
 				{
 					label: "View",
