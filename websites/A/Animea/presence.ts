@@ -84,39 +84,32 @@ presence.on("UpdateData", async () => {
 					delete presenceData.endTimestamp;
 				}
 
-				if (showCover) {
-					presenceData.largeImageKey = document
-						.querySelector<HTMLHeadElement>('meta[property="og:image"]')
-						.getAttribute("content");
-				}
+				presenceData.largeImageKey = document
+					.querySelector<HTMLHeadElement>('meta[property="og:image"]')
+					.getAttribute("content");
 
-				if (showButtons) {
-					presenceData.buttons = [
-						{ label: "Voir l'épisode", url: document.location.href },
-						{
-							label: "Voir l'animé",
-							url: document.location.href.replace(
-								/-\d*-season-\d*-episode/gm,
-								""
-							),
-						},
-					];
-				}
+				presenceData.buttons = [
+					{ label: "Voir l'épisode", url: document.location.href },
+					{
+						label: "Voir l'animé",
+						url: document.location.href.replace(
+							/-\d*-season-\d*-episode/gm,
+							""
+						),
+					},
+				];
 			} else {
 				presenceData.details = "Parcours la page de";
 				presenceData.state = document
 					.querySelector<HTMLHeadingElement>("div.pl-md-4 > h1")
 					.textContent.trim();
-				if (showCover) {
-					presenceData.largeImageKey = document
-						.querySelector<HTMLHeadElement>('meta[property="og:image"]')
-						.getAttribute("content");
-				}
-				if (showButtons) {
-					presenceData.buttons = [
-						{ label: "Voir l'animé", url: document.location.href },
-					];
-				}
+
+				presenceData.largeImageKey = document
+					.querySelector<HTMLHeadElement>('meta[property="og:image"]')
+					.getAttribute("content");
+				presenceData.buttons = [
+					{ label: "Voir l'animé", url: document.location.href },
+				];
 			}
 			break;
 		}
@@ -126,6 +119,9 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
+	if (!showCover) presenceData.largeImageKey = "logo";
+	if (!showButtons) delete presenceData.buttons;
+
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
