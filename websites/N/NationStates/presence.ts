@@ -23,6 +23,7 @@ const images = {
 		page: "https://i.imgur.com/pArUzoy.png",
 		person: "https://i.imgur.com/8pTlzJw.png",
 		worldassembly: "https://i.imgur.com/A09MAL2.png",
+		target: "https://i.imgur.com/nksi1kH.png",
 	},
 	/**
 	 * Timestamp of browsing start
@@ -284,7 +285,8 @@ async function updatePresenceData(): Promise<void> {
 				if (opponent && opponent.textContent)
 					presenceData.state = `Challenging ${opponent.textContent}`;
 				else presenceData.state = "Challenging";
-				delete presenceData.smallImageKey;
+				presenceData.smallImageKey = images.target;
+				presenceData.smallImageText = "Challenge";
 				break;
 			}
 
