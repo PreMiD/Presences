@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "RisingSunLight",
+		"id": "240521747852558347"
+	},
+	"service": "MangaFreak",
+	"description": {
+		"en": "Read manga and download for free. Mangafreak has the latest chapter of all your favorite manga. Check the latest chapter of popular manga like Naruto, Boruto, One Piece and Bleach. Enjoy reading. Manga Reader Online."
+	},
+	"url": "w13.mangafreak.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/1yBi5L5.jpg",
+	"thumbnail": "https://i.imgur.com/1yBi5L5.jpg",
+	"color": "#ed9912",
+	"category": "other",
+	"tags": [
+		"manga",
+		"reading"
+	],
+    "settings": [
+        {
+			"id": "time",
+			"title": "Show Timestamp",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+        {
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		}
+    ]
+}
