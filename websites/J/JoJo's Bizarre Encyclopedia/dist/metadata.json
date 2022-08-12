@@ -8,7 +8,10 @@
 	"description": {
 		"en": "JoJo's Bizarre Encyclopedia is a wiki dedicated to JoJo's Bizarre Adventure written and illustrated by Hirohiko Araki."
 	},
-	"url": ["jojowiki.com", "jojo-news.com"],
+	"url": [
+		"jojowiki.com",
+		"jojo-news.com"
+	],
 	"regExp": "(jojowiki|jojo-news)[.]com[/]",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/Kkn0ZW0.png",
