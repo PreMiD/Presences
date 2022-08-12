@@ -10,7 +10,7 @@
 	},
 	"url": ["jojowiki.com", "jojo-news.com"],
 	"regExp": "(jojowiki|jojo-news)[.]com[/]",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"logo": "https://i.imgur.com/Kkn0ZW0.png",
 	"thumbnail": "https://i.imgur.com/dZX1t4c.png",
 	"color": "#ea0fa3",

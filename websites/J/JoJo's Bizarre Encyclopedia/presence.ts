@@ -124,6 +124,20 @@ presence.on("UpdateData", () => {
 					url: window.location.href
 				}
 			]
+		} else if (window.location.pathname.toLowerCase() === "/fun/jojodle/") {
+			presenceData.state = "Playing JoJodle!";
+			presenceData.buttons = [
+				{
+					label: "Play Along!",
+					url: window.location.href
+				}
+			]
+		} else if (window.location.pathname.toLowerCase().includes("/category")) {
+			let category = window.location.pathname.toLowerCase().match(/^\/category\/(.+)/)[1];
+
+			category = newsUrlToCategory(category);
+
+			presenceData.state = "Browsing category: " + category;
 		}
 	}
 	presence.setActivity(presenceData);
@@ -135,4 +149,32 @@ function titleToUrl(title: string) {
 }
 function urlToTitle(url: string) {
 	return url.replace(/_/g, " ");
+}
+function capitalizeFirstLetter(string: string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function toTitleCase(phrase: string) {
+	return phrase
+	  .toLowerCase()
+	  .split(' ')
+	  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+	  .join(' ');
+  };
+function newsUrlToCategory(url: string) {
+	url = url.replace(/(^\/|\/$)/g, "")
+	let urlSplit = url.split("/")
+	// Get last sub category in category list
+	if (urlSplit.length > 1) {
+		url = urlSplit[urlSplit.length - 1]
+	}
+
+	url = url.replace(/-/g, " ")
+	url = toTitleCase(url)
+
+	url = url.replace(/\bjojos\b/i, "JoJo's")
+	url = url.replace(/^interview$/i, "Interviews")
+	url = url.replace(/^exclusive$/i, "Exclusives")
+	url = url.replace(/^analysis$/i, "Analyses")
+
+	return url;
 }
