@@ -31,7 +31,7 @@
 			"icon": "fas fa-file-signature",
 			"value": 2,
 			"values": [
-				"None",
+				"Hide",
 				"Short",
 				"Full"
 			]

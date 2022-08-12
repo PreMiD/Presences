@@ -134,18 +134,18 @@ async function updatePresenceData(): Promise<void> {
 	// Main website (nationstates.net)
 	if (document.location.hostname === "www.nationstates.net") {
 		// Set presence details to the logged in nation name (leave blank if not logged in)
-		const nationname: string = await fetchSelfNationName();
+		const isLoggedIn: boolean = document.body.id === "loggedin",
+			username: string = document.body.getAttribute("data-nname"),
+			nationname: string = await fetchSelfNationName();
 		if (nationname && nationname.length > 0) presenceData.details = nationname;
 		else delete presenceData.details;
 
 		// Set presence button, if enabled
-		if (nationname && (await presence.getSetting("buttons"))) {
+		if (isLoggedIn && (await presence.getSetting("buttons"))) {
 			presenceData.buttons = [
 				{
 					label: "View Nation",
-					url: `https://www.nationstates.net/nation=${document.body.getAttribute(
-						"data-nname"
-					)}`,
+					url: `https://www.nationstates.net/nation=${username}`,
 				},
 			];
 		} else delete presenceData.buttons;
@@ -164,7 +164,7 @@ async function updatePresenceData(): Promise<void> {
 		) {
 			// Nation page
 			case "nation": {
-				if (page === document.body.getAttribute("data-nname")) {
+				if (isLoggedIn && page === username) {
 					// Visiting own nation profile
 					presenceData.state = "Viewing Nation";
 					presenceData.smallImageKey = images.flag;
@@ -280,7 +280,7 @@ async function updatePresenceData(): Promise<void> {
 				].find(
 					challanger =>
 						challanger.textContent.toLowerCase().split(" ").join("_") !==
-						document.body.getAttribute("data-nname")
+						username
 				);
 				if (opponent && opponent.textContent)
 					presenceData.state = `Challenging ${opponent.textContent}`;
