@@ -1,15 +1,54 @@
-const presence = new Presence({
+/**
+ * @typedef {object} images NationStates image URLs (typeface version 7)
+ * @see https://nsindex.net/wiki/NationStates_(typeface)
+ * @property {string} header Long 'NationStates' header image
+ * @property {string} logo Square 'NS' image
+ * @property {string} envelope Envelope (for telegrams)
+ * @property {string} flag Flag (for nations)
+ * @property {string} forum Forum logo
+ * @property {string} gift Gift (for store)
+ * @property {string} globe Globe (for other nations and regions)
+ * @property {string} page News page (for dispatches)
+ * @property {string} person Person (for dillemas/issues)
+ * @property {string} worldassembly World Assembly sigil
+ */
+const images = {
+		header: "https://i.imgur.com/ffxJj5E.png",
+		logo: "https://i.imgur.com/04gnehi.png",
+		envelope: "https://i.imgur.com/6Hp3f7k.png",
+		flag: "https://i.imgur.com/BAzbs0d.png",
+		forum: "https://i.imgur.com/uDIj1ta.png",
+		gift: "https://i.imgur.com/28eyl2A.png",
+		globe: "https://i.imgur.com/hE7TN9d.png",
+		page: "https://i.imgur.com/pArUzoy.png",
+		person: "https://i.imgur.com/8pTlzJw.png",
+		worldassembly: "https://i.imgur.com/A09MAL2.png",
+	},
+	/**
+	 * Timestamp of browsing start
+	 * @constant {number} browsingTimestamp
+	 */
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	/**
+	 * Discord Rich Presence
+	 * @constant {Presence} presence
+	 */
+	presence = new Presence({
 		clientId: "1006869424441131109",
 	}),
-	browsingTimestamp: number = Math.floor(Date.now() / 1000),
+	/**
+	 * Discord Rich Presence data
+	 * @typedef {PresenceData} presenceData
+	 * @see https://discord.com/developers/docs/rich-presence/how-to#updating-presence
+	 */
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/04gnehi.png",
+		largeImageKey: images.logo,
 		startTimestamp: browsingTimestamp,
 	};
 
 /**
  * Get full nation name of the logged in user.
- * @returns {Promise<string|null>} Nation full name (ex. "America, United States of") or null if not logged in.
+ * @returns {Promise<string|null>} Settings-aware name of the logged in user or null if not logged in.
  * @see https://www.nationstates.net/pages/api.html#nationapi
  */
 async function fetchSelfNationName(): Promise<string | null> {
@@ -38,7 +77,7 @@ async function fetchSelfNationName(): Promise<string | null> {
 	if (nationname.length + nationtype.length + 2 <= 128 && namesetting > 1)
 		return `${nationname}, ${nationtype}`;
 	else if (nationname.length <= 128 && namesetting > 0) return nationname;
-	else if (namesetting > 0) return `${nationname.substring(0, 126)}…`;
+	else if (namesetting > 0) return `${nationname.substring(0, 128 - 1)}…`;
 	else return "";
 }
 
@@ -261,10 +300,12 @@ async function updatePresenceData(): Promise<void> {
 		}
 	} else if (document.location.hostname === "forum.nationstates.net") {
 		// Forums (forum.nationstates.net)
-		presenceData.details = "Browsing Forums";
-		presenceData.smallImageKey = "https://i.imgur.com/uDIj1ta.png";
+		presenceData.details = "Browsing the Forums";
+		presenceData.smallImageKey = images.forum;
 		presenceData.smallImageText = "Forums";
 		delete presenceData.buttons;
+
+		// Attempt to get the current forum post title
 		const { title } = document;
 		if (title.startsWith("NationStates • View")) {
 			const topicsearch = title.match(/(?<=nationstates\s•\sview\s).+/gi);
@@ -273,8 +314,8 @@ async function updatePresenceData(): Promise<void> {
 				topic = topic.charAt(0).toUpperCase() + topic.slice(1);
 				if (topic.length > 128) topic = `${topic.substring(0, 128)}…`;
 				presenceData.state = topic;
-			}
-		}
+			} else delete presenceData.state;
+		} else delete presenceData.state;
 	} else {
 		delete presenceData.state;
 		delete presenceData.details;
