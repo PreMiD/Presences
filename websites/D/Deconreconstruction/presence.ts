@@ -131,21 +131,17 @@ let vePages: string, htPages: string;
 		if (document.location.pathname.match(/^\/vasterror\/\d+$/)) {
 			fetch(
 				"https://api.deconreconstruction.com/pages/count?story.name=vast-error&published_at_null=false"
-			)
-				.then(res => res.json())
-				.then(res => {
-					vePages = res;
-				});
+			).then(async res => {
+				vePages = await res.json();
+			});
 		}
 
 		if (document.location.pathname.match(/^\/thaumatrope\/haustoria\/\d+$/)) {
 			fetch(
 				"https://api.deconreconstruction.com/pages/count?story.name=thaumatrope/haustoria&published_at_null=false"
-			)
-				.then(res => res.json())
-				.then(res => {
-					htPages = res;
-				});
+			).then(async res => {
+				htPages = await res.json();
+			});
 		}
 	}
 	getPages();
