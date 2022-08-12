@@ -177,12 +177,21 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Watch - Viewing a user's page";
 		else {
 			presenceData.details = "Watch";
-			presenceData.state = `Viewing ${
-				document.querySelector('span > a[role="link"] > span').textContent
-			}'s page`;
+			const queryUserName =
+				document.querySelector("h2 > span.d2edcug0.hzawbc8m > span") ??
+				document.querySelector('span > a[role="link"] > span');
+			presenceData.state = `Viewing ${queryUserName.textContent.trim()}'s page`;
 			presenceData.buttons = [
 				{ label: "View User", url: document.location.href },
 			];
+		}
+	} else if (document.location.pathname.includes("/reel")) {
+		presenceData.details = "Watching a reel";
+		presenceData.largeImageKey = "https://i.imgur.com/x2Mx3si.png";
+		if (!privacyMode) {
+			presenceData.state = `From ${document
+				.querySelector<HTMLLinkElement>("h2 > span > span > a.oajrlxb2")
+				.textContent.trim()}`;
 		}
 	} else if (document.location.pathname.includes("/marketplace/")) {
 		presenceData.startTimestamp = browsingTimestamp;
