@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"service": "巴哈姆特動畫瘋",
 	"description": {
@@ -14,7 +15,7 @@
 		"vi_VN": "Nền tảng cung cấp hoạt hình hoàn toàn miễn phí."
 	},
 	"url": "ani.gamer.com.tw",
-	"version": "1.2.15",
+	"version": "1.2.16",
 	"logo": "https://i.imgur.com/24VLERu.png",
 	"thumbnail": "https://i.imgur.com/atthc8l.png",
 	"color": "#58bec9",
