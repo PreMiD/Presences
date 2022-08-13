@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "Sinefy",
 	"description": {
@@ -11,7 +12,7 @@
 		"nl": "Sinefy is een Turkse videostreamingdienst voor het bekijken van films en tv-programma's in full HD."
 	},
 	"url": "sinefy.com",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/8JBfyCa.jpg",
 	"thumbnail": "https://i.imgur.com/UgFuRve.png",
 	"color": "#fdc516",

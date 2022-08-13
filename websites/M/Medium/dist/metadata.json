@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "Medium",
 	"description": {
@@ -12,7 +13,7 @@
 	},
 	"url": "medium.com",
 	"regExp": "([a-z0-9|-]+[.])*medium[.]com[/]",
-	"version": "1.2.7",
+	"version": "1.2.8",
 	"logo": "https://i.imgur.com/7bfJ5VM.png",
 	"thumbnail": "https://i.imgur.com/VozjgCY.png",
 	"color": "#141210",

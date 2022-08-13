@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "TRanimeizle",
 	"description": {
@@ -14,7 +15,7 @@
 		"www.tranimeizle.net",
 		"tranimeizle.net"
 	],
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/TsLirN4.jpg",
 	"thumbnail": "https://i.imgur.com/tvxzX3S.png",
 	"color": "#eb0254",

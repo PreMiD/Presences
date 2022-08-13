@@ -2,12 +2,14 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Encrypted",
-		"id": "564434085708038144"
+		"id": "564434085708038144",
+		"github": "EncryptedDev"
 	},
 	"contributors": [
 		{
 			"name": "Callum",
-			"id": "506899274748133376"
+			"id": "506899274748133376",
+			"github": "callumok2004"
 		}
 	],
 	"service": "Google Docs",
@@ -21,7 +23,7 @@
 	},
 	"url": "docs.google.com",
 	"regExp": "docs[.]google([.][a-z]+)+[/]",
-	"version": "1.4.18",
+	"version": "1.4.19",
 	"logo": "https://i.imgur.com/m768cDN.png",
 	"thumbnail": "https://i.imgur.com/jbuIiwv.jpg",
 	"color": "#3a404a",

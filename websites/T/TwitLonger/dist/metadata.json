@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "fror",
-		"id": "515668127829458945"
+		"id": "515668127829458945",
+		"github": "fr0r"
 	},
 	"service": "TwitLonger",
 	"description": {
@@ -10,7 +11,7 @@
 		"nl": "Als je teveel praat voor Twitter."
 	},
 	"url": "www.twitlonger.com",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/Sl7M64D.png",
 	"thumbnail": "https://i.imgur.com/Fx8VNFk.png",
 	"color": "#428BCA",

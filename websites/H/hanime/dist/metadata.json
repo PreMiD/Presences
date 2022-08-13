@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
-		"id": "215509157837537280"
+		"id": "215509157837537280",
+		"github": "StrikerFRFX"
 	},
 	"contributors": [
 		{
@@ -19,7 +20,7 @@
 		"hanime.tv",
 		"members.hanime.tv"
 	],
-	"version": "1.2.10",
+	"version": "1.2.11",
 	"logo": "https://i.imgur.com/LXjbZoN.png",
 	"thumbnail": "https://i.imgur.com/zeoWi1W.png",
 	"color": "#000000",

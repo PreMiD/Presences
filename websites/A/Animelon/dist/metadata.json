@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
-		"id": "215509157837537280"
+		"id": "215509157837537280",
+		"github": "StrikerFRFX"
 	},
 	"service": "Animelon",
 	"description": {
@@ -13,7 +14,7 @@
 	},
 	"url": "animelon.com",
 	"regExp": "([a-z0-9-]+[.])*animelon([.][a-z]+)+[/]",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/5gunVuc.png",
 	"thumbnail": "https://i.imgur.com/sT2xcZP.jpg",
 	"color": "#D34344",

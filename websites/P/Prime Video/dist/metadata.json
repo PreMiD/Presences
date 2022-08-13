@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"contributors": [
 		{
@@ -18,7 +19,7 @@
 	},
 	"url": "www.primevideo.com",
 	"regExp": "(([a-z0-9-]+[.])*amazon([.][a-z]+)+[/](-[/]([a-z0-9]+)[/])?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp[/]video))|([a-z0-9-]+[.])*primevideo([.][a-z]+)+[/]",
-	"version": "2.1.14",
+	"version": "2.1.15",
 	"logo": "https://i.imgur.com/OgbBS7a.png",
 	"thumbnail": "https://i.imgur.com/AkSVbml.jpg",
 	"color": "#FFFFFF",

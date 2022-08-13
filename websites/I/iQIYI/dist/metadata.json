@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "SlowLife",
-		"id": "374905512661221377"
+		"id": "374905512661221377",
+		"github": "Slowlife01"
 	},
 	"service": "iQIYI",
 	"description": {
@@ -11,7 +12,7 @@
 		"nl": "iQIYI is 's werelds toonaangevende website voor het online streamen van films en video's en biedt tv-drama's, films, variétéshows, animaties en andere inhoud van hoge kwaliteit."
 	},
 	"url": "www.iq.com",
-	"version": "1.2.5",
+	"version": "1.2.6",
 	"logo": "https://i.imgur.com/gehI1mg.png",
 	"thumbnail": "https://i.imgur.com/4PESzW3.png",
 	"color": "#0BBE06",

@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "Game Jolt",
 	"description": {
@@ -11,7 +12,7 @@
 		"nl": "Game Jolt is een hostingdienst voor freeware en commerciële videospelletjes met sociale functies."
 	},
 	"url": "gamejolt.com",
-	"version": "1.2.16",
+	"version": "1.2.17",
 	"logo": "https://i.imgur.com/R8qwQfC.png",
 	"thumbnail": "https://i.imgur.com/YYZ6UI4.png",
 	"color": "#191919",

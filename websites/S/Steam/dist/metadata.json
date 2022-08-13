@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "TheDrop.",
-		"id": "293828021134295040"
+		"id": "293828021134295040",
+		"github": "TheDropX"
 	},
 	"service": "Steam",
 	"description": {
@@ -17,7 +18,7 @@
 		"steamcommunity.com",
 		"store.steampowered.com"
 	],
-	"version": "2.2.14",
+	"version": "2.2.15",
 	"logo": "https://i.imgur.com/cek4hGt.png",
 	"thumbnail": "https://i.imgur.com/vChtnTL.png",
 	"color": "#000000",

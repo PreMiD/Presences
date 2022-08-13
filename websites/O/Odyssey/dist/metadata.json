@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Dark_Ville",
-		"id": "638080361179512853"
+		"id": "638080361179512853",
+		"github": "DarkVillager"
 	},
 	"service": "Odyssey",
 	"description": {
@@ -13,7 +14,7 @@
 		"store.odyssey.gg",
 		"install.odyssey.gg"
 	],
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/VD9G5DE.png",
 	"thumbnail": "https://i.imgur.com/1qjZ8jL.jpg",
 	"color": "#ff0000",

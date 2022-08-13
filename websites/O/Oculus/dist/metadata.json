@@ -7,7 +7,8 @@
 	"contributors": [
 		{
 			"name": "N0chteil ^^",
-			"id": "495901098926669825"
+			"id": "495901098926669825",
+			"github": "N0chteil"
 		}
 	],
 	"service": "Oculus",
@@ -20,7 +21,7 @@
 		"support.oculus.com",
 		"secure.oculus.com"
 	],
-	"version": "1.2.7",
+	"version": "1.2.8",
 	"logo": "https://i.imgur.com/jzoFzDA.jpg",
 	"thumbnail": "https://i.imgur.com/E2oERhP.png",
 	"color": "#ffffff",

@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Dark_Ville",
-		"id": "638080361179512853"
+		"id": "638080361179512853",
+		"github": "DarkVillager"
 	},
 	"service": "UKTV",
 	"description": {
@@ -12,7 +13,7 @@
 		"uktvplay.uktv.co.uk",
 		"uktvplay.co.uk"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/wjqmEQY.png",
 	"thumbnail": "https://i.imgur.com/mPSBoXK.png",
 	"color": "#00BAC6",

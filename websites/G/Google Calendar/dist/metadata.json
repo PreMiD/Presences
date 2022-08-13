@@ -7,7 +7,8 @@
 	"contributors": [
 		{
 			"name": "Bas950",
-			"id": "241278257335500811"
+			"id": "241278257335500811",
+			"github": "Bas950"
 		}
 	],
 	"service": "Google Calendar",
@@ -21,7 +22,7 @@
 		"calendar.google.com",
 		"www.calendar.google.com"
 	],
-	"version": "1.2.14",
+	"version": "1.2.15",
 	"logo": "https://i.imgur.com/AxEDCqw.png",
 	"thumbnail": "https://i.imgur.com/yaq6y1d.png",
 	"color": "#4689F4",

@@ -2,12 +2,14 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "TheDrop.",
-		"id": "293828021134295040"
+		"id": "293828021134295040",
+		"github": "TheDropX"
 	},
 	"contributors": [
 		{
 			"name": "Rodry",
-			"id": "240875059953139714"
+			"id": "240875059953139714",
+			"github": "ImRodry"
 		}
 	],
 	"service": "Crowdin",
@@ -26,7 +28,7 @@
 		"status.crowdin.com",
 		"blog.crowdin.com"
 	],
-	"version": "4.0.1",
+	"version": "4.0.2",
 	"logo": "https://i.imgur.com/rtkC4kS.png",
 	"thumbnail": "https://i.imgur.com/dJnnzqd.png",
 	"color": "#2e3340",

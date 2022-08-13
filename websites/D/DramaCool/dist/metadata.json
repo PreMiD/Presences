@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Slowlife",
-		"id": "374905512661221377"
+		"id": "374905512661221377",
+		"github": "Slowlife01"
 	},
 	"service": "DramaCool",
 	"description": {
@@ -11,7 +12,7 @@
 	},
 	"url": "dramacool.vc",
 	"regExp": "[0-9w]{0,6}.*dramacool.[a-z]+",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"logo": "https://i.imgur.com/Bn5qNZO.png",
 	"thumbnail": "https://i.imgur.com/f3AIc30.png",
 	"color": "#26bdc6",

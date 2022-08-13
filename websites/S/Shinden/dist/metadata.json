@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"service": "Shinden",
 	"description": {
@@ -14,7 +15,7 @@
 		"shinden.pl",
 		"forum.shinden.pl"
 	],
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/sGSeLBJ.png",
 	"thumbnail": "https://i.imgur.com/atx9P8n.png",
 	"color": "#6a2b8b",

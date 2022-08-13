@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"service": "AnimeLab",
 	"description": {
@@ -13,7 +14,7 @@
 		"vi_VN": "Xem các bộ anime nổi và mới nhất song song từ Nhật Bản bằng HD. AnimeLab độc quyền chỉ phát sóng tại Úc và New Zealand."
 	},
 	"url": "www.animelab.com",
-	"version": "2.1.15",
+	"version": "2.1.16",
 	"logo": "https://i.imgur.com/Fj1RBAc.png",
 	"thumbnail": "https://i.imgur.com/oDT9Z0I.png",
 	"color": "#3e2d7d",

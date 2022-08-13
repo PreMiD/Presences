@@ -7,7 +7,8 @@
 	"contributors": [
 		{
 			"name": "Bas950",
-			"id": "241278257335500811"
+			"id": "241278257335500811",
+			"github": "Bas950"
 		}
 	],
 	"service": "IFTTT",
@@ -18,7 +19,7 @@
 	},
 	"url": "ifttt.com",
 	"regExp": "(ift[.]tt|((help|platform|status)[.]|)ifttt[.]com)[/]",
-	"version": "2.0.5",
+	"version": "2.0.6",
 	"logo": "https://i.imgur.com/1d8TEw1.png",
 	"thumbnail": "https://i.imgur.com/oHMcwT3.png",
 	"color": "#0d99fd",

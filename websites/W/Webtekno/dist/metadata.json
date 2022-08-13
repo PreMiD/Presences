@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "Webtekno",
 	"description": {
@@ -12,7 +13,7 @@
 		"nl": "Webtekno is een van de grootste technologieblogs in Turkije."
 	},
 	"url": "www.webtekno.com",
-	"version": "1.3.13",
+	"version": "1.3.14",
 	"logo": "https://i.imgur.com/ONnE8dp.png",
 	"thumbnail": "https://i.imgur.com/TVps3je.png",
 	"color": "#f54b37",

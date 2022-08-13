@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "Udemy",
 	"description": {
@@ -11,7 +12,7 @@
 		"nl": "Udemy is een online leer- en onderwijsmarktplaats met meer dan 100.000 cursussen en 24 miljoen studenten."
 	},
 	"url": "www.udemy.com",
-	"version": "1.2.13",
+	"version": "1.2.14",
 	"logo": "https://i.imgur.com/cTa4588.png",
 	"thumbnail": "https://i.imgur.com/g1yqYRK.png",
 	"color": "#ea5252",

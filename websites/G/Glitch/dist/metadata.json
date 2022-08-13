@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Callum",
-		"id": "506899274748133376"
+		"id": "506899274748133376",
+		"github": "callumok2004"
 	},
 	"service": "Glitch",
 	"description": {
@@ -16,7 +17,7 @@
 		"status.glitch.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*glitch([.][a-z]+)+[/]",
-	"version": "1.8.15",
+	"version": "1.8.16",
 	"logo": "https://i.imgur.com/YFnN57M.png",
 	"thumbnail": "https://i.imgur.com/mnilDhS.png",
 	"color": "#f003fc",

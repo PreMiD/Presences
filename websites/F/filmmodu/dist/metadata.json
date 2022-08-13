@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "filmmodu",
 	"description": {
@@ -11,7 +12,7 @@
 		"nl": "filmmodu is een Turkse dienst die de nieuwste films aanbiedt."
 	},
 	"url": "www.filmmodu.org",
-	"version": "1.2.16",
+	"version": "1.2.17",
 	"logo": "https://i.imgur.com/JV9Ef1p.png",
 	"thumbnail": "https://i.imgur.com/WVtVwEN.png",
 	"color": "#ffc526",

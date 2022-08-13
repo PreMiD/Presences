@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"contributors": [
 		{
@@ -23,7 +24,7 @@
 	},
 	"url": "discord.com",
 	"regExp": "([a-z0-9-]+[.])*(discord[.]com|discord[.]gg|discordapp[.]com|discordmerch[.]com|discordstatus[.]com)[/]",
-	"version": "3.0.18",
+	"version": "3.0.19",
 	"logo": "https://i.imgur.com/MysN6Lu.png",
 	"thumbnail": "https://i.imgur.com/0v13nHT.png",
 	"color": "#7289DA",

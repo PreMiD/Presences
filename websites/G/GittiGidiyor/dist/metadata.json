@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "GittiGidiyor",
 	"description": {
@@ -15,7 +16,7 @@
 		"urun.gittigidiyor.com",
 		"gittigidiyor.com"
 	],
-	"version": "1.1.14",
+	"version": "1.1.15",
 	"logo": "https://i.imgur.com/4XOmMIy.png",
 	"thumbnail": "https://i.imgur.com/NtQEokm.png",
 	"color": "#2a6bb0",

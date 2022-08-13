@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
-		"id": "215509157837537280"
+		"id": "215509157837537280",
+		"github": "StrikerFRFX"
 	},
 	"service": "Yandex.Translate",
 	"description": {
@@ -17,7 +18,7 @@
 		"translate.yandex.ua"
 	],
 	"regExp": "(translate|ceviri).yandex([.][a-z]+)+[/]",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/kAHbOW1.png",
 	"thumbnail": "https://i.imgur.com/iRYR5Rj.png",
 	"color": "#FF2222",

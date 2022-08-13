@@ -2,12 +2,14 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
-		"id": "215509157837537280"
+		"id": "215509157837537280",
+		"github": "StrikerFRFX"
 	},
 	"contributors": [
 		{
 			"name": "Encrypted",
-			"id": "564434085708038144"
+			"id": "564434085708038144",
+			"github": "EncryptedDev"
 		},
 		{
 			"name": "Alanexei ✔",
@@ -27,7 +29,7 @@
 		"ga_IE": "Éifeall na ceimhniú a thágthóg, uair éirinn."
 	},
 	"url": "www.deezer.com",
-	"version": "2.2.9",
+	"version": "2.2.10",
 	"logo": "https://i.imgur.com/GKMQi3h.png",
 	"thumbnail": "https://i.imgur.com/gVAvQ6k.png",
 	"color": "#A31D7C",

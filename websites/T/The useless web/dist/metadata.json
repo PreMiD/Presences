@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Callum",
-		"id": "506899274748133376"
+		"id": "506899274748133376",
+		"github": "callumok2004"
 	},
 	"service": "The useless web",
 	"description": {
@@ -79,7 +80,7 @@
 		"www.theuselessweb.com",
 		"theuselessweb.com"
 	],
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/YeXjpVB.jpg",
 	"thumbnail": "https://i.imgur.com/G9tV2NS.png",
 	"color": "#ae3484",

@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"contributors": [
 		{
@@ -17,7 +18,7 @@
 	},
 	"url": "namemc.com",
 	"regExp": "([a-z0-9-]+[.])*namemc[.]com[/]",
-	"version": "2.0.9",
+	"version": "2.0.10",
 	"logo": "https://i.imgur.com/9JDmZaF.png",
 	"thumbnail": "https://i.imgur.com/XIZsGTQ.png",
 	"color": "#000000",

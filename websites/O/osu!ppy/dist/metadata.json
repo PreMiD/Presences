@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
-		"id": "215509157837537280"
+		"id": "215509157837537280",
+		"github": "StrikerFRFX"
 	},
 	"contributors": [
 		{
@@ -11,7 +12,8 @@
 		},
 		{
 			"name": "Dark_Ville",
-			"id": "638080361179512853"
+			"id": "638080361179512853",
+			"github": "DarkVillager"
 		}
 	],
 	"service": "osu!ppy",
@@ -37,7 +39,7 @@
 		"vi_VN": "Giai điệu bắt đầu bằng một cái *click* chuột! Với Ouendan/EBA, Taiko và các chế độ trò chơi độc nhất, cũng như một bộ chỉnh sửa trò chơi."
 	},
 	"url": "osu.ppy.sh",
-	"version": "2.0.12",
+	"version": "2.0.13",
 	"logo": "https://i.imgur.com/IWWqSYR.png",
 	"thumbnail": "https://i.imgur.com/6YEJ9sY.png",
 	"color": "#FF66AA",

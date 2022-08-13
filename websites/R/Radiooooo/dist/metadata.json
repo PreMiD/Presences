@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "SlowLife",
-		"id": "374905512661221377"
+		"id": "374905512661221377",
+		"github": "Slowlife01"
 	},
 	"service": "Radiooooo",
 	"description": {
@@ -10,7 +11,7 @@
 		"nl": "Radiooooo - De muzikale tijdmachine."
 	},
 	"url": "radiooooo.com",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/EktlHNP.png",
 	"thumbnail": "https://i.imgur.com/AT7vWm9.jpg",
 	"color": "#108cb4",

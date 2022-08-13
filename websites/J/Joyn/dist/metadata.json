@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "N0chteil ^^",
-		"id": "495901098926669825"
+		"id": "495901098926669825",
+		"github": "N0chteil"
 	},
 	"service": "Joyn",
 	"description": {
@@ -14,7 +15,7 @@
 		"www.joyn.de",
 		"joyn.de"
 	],
-	"version": "1.2.14",
+	"version": "1.2.15",
 	"logo": "https://i.imgur.com/SrAaJDz.jpg",
 	"thumbnail": "https://i.imgur.com/W0qRCZk.png",
 	"color": "#000",

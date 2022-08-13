@@ -7,7 +7,8 @@
 	"contributors": [
 		{
 			"name": "Bas950",
-			"id": "241278257335500811"
+			"id": "241278257335500811",
+			"github": "Bas950"
 		}
 	],
 	"service": "All The Flavors",
@@ -20,7 +21,7 @@
 		"vi_VN": "alltheflavors.com và trang web cung cấp các công thức và nguyên liệu có thể tự làm."
 	},
 	"url": "alltheflavors.com",
-	"version": "1.4.13",
+	"version": "1.4.14",
 	"logo": "https://i.imgur.com/y9Bj4mt.png",
 	"thumbnail": "https://i.imgur.com/ncLBJMx.png",
 	"color": "#FF6347",

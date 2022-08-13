@@ -7,7 +7,8 @@
 	"contributors": [
 		{
 			"name": "N0chteil ^^",
-			"id": "495901098926669825"
+			"id": "495901098926669825",
+			"github": "N0chteil"
 		}
 	],
 	"service": "The New York Times",
@@ -19,7 +20,7 @@
 		"www.nytimes.com",
 		"myaccount.nytimes.com"
 	],
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"logo": "https://i.imgur.com/e5xEpfu.jpg",
 	"thumbnail": "https://i.imgur.com/p8luyGx.png",
 	"color": "#ffffff",

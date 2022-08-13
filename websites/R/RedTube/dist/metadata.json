@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "TheDrop.",
-		"id": "293828021134295040"
+		"id": "293828021134295040",
+		"github": "TheDropX"
 	},
 	"service": "RedTube",
 	"description": {
@@ -25,7 +26,7 @@
 		"jp.redtube.com",
 		"fr.redtube.com"
 	],
-	"version": "2.2.15",
+	"version": "2.2.16",
 	"logo": "https://i.imgur.com/YrWWEZC.png",
 	"thumbnail": "https://i.imgur.com/6DD83q7.png",
 	"color": "#af181f",

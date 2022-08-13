@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "Playerbros",
 	"description": {
@@ -11,7 +12,7 @@
 		"nl": "Playerbros is een Turkse nieuwswebsite over e-sport."
 	},
 	"url": "playerbros.com",
-	"version": "1.1.14",
+	"version": "1.1.15",
 	"logo": "https://i.imgur.com/OowJF1h.png",
 	"thumbnail": "https://i.imgur.com/yFE0IjA.png",
 	"color": "#f15a22",

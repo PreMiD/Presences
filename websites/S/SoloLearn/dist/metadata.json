@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
-		"id": "215509157837537280"
+		"id": "215509157837537280",
+		"github": "StrikerFRFX"
 	},
 	"contributors": [
 		{
@@ -17,7 +18,7 @@
 	},
 	"url": "www.sololearn.com",
 	"regExp": "([a-z0-9-]+[.])*sololearn[.]com[/]",
-	"version": "2.0.15",
+	"version": "2.0.16",
 	"logo": "https://i.imgur.com/MPEOcif.png",
 	"thumbnail": "https://i.imgur.com/k7Mi8zh.png",
 	"color": "#1ABC9C",

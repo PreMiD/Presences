@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "N0chteil ^^",
-		"id": "495901098926669825"
+		"id": "495901098926669825",
+		"github": "N0chteil"
 	},
 	"contributors": [
 		{
@@ -27,7 +28,7 @@
 		"music.apple.com",
 		"beta.music.apple.com"
 	],
-	"version": "1.5.5",
+	"version": "1.5.6",
 	"logo": "https://i.imgur.com/06HbqaF.png",
 	"thumbnail": "https://i.imgur.com/dOYmE1u.png",
 	"color": "#FA273F",

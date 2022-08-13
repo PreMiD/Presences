@@ -7,7 +7,8 @@
 	"contributors": [
 		{
 			"name": "Bas950",
-			"id": "241278257335500811"
+			"id": "241278257335500811",
+			"github": "Bas950"
 		},
 		{
 			"name": "DooMLorD",
@@ -67,7 +68,7 @@
 		"www.youtube.com",
 		"studio.youtube.com"
 	],
-	"version": "5.2.5",
+	"version": "5.2.6",
 	"logo": "https://i.imgur.com/o5injgg.png",
 	"thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
 	"color": "#E40813",

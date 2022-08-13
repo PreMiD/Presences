@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"contributors": [
 		{
@@ -23,7 +24,7 @@
 		"biligame.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com[/]",
-	"version": "2.3.10",
+	"version": "2.3.11",
 	"logo": "https://i.imgur.com/w7q6IS0.png",
 	"thumbnail": "https://i.imgur.com/wKnEEei.jpg",
 	"color": "#05acff",

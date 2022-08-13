@@ -7,7 +7,8 @@
 	"contributors": [
 		{
 			"name": "Bas950",
-			"id": "241278257335500811"
+			"id": "241278257335500811",
+			"github": "Bas950"
 		}
 	],
 	"service": "Just Light Novels",
@@ -16,7 +17,7 @@
 		"nl": "Gewoon lichte romans! Huis van alle lichte romans"
 	},
 	"url": "justlightnovels.com",
-	"version": "1.2.13",
+	"version": "1.2.14",
 	"logo": "https://i.imgur.com/O2Xalve.png",
 	"thumbnail": "https://i.imgur.com/KWY5wqt.png",
 	"color": "#0000ff",

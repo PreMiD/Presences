@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Callum",
-		"id": "506899274748133376"
+		"id": "506899274748133376",
+		"github": "callumok2004"
 	},
 	"service": "BladeFM",
 	"description": {
@@ -13,7 +14,7 @@
 	},
 	"url": "bladefm.com.au",
 	"regExp": "([a-z0-9-]+[.])*(bladefm[.]com[.]au)[/]",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/Sjj3gx6.png",
 	"thumbnail": "https://i.imgur.com/DWa62sw.png",
 	"color": "#203391",

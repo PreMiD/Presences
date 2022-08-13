@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"service": "AnimeRadio.de",
 	"description": {
@@ -24,7 +25,7 @@
 		"www.animefestival.de",
 		"www.animetickets.de"
 	],
-	"version": "1.2.15",
+	"version": "1.2.16",
 	"logo": "https://i.imgur.com/9q7Vuqr.png",
 	"thumbnail": "https://i.imgur.com/nBe7Cfw.jpg",
 	"color": "#ccf5fd",

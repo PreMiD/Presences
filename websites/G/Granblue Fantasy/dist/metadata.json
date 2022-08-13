@@ -11,7 +11,8 @@
 		},
 		{
 			"name": "Slowlife",
-			"id": "374905512661221377"
+			"id": "374905512661221377",
+			"github": "Slowlife01"
 		}
 	],
 	"service": "Granblue Fantasy",
@@ -21,7 +22,7 @@
 		"vi_VN": "Trò chơi đóng vai Nhật Bản"
 	},
 	"url": "game.granbluefantasy.jp",
-	"version": "1.4.4",
+	"version": "1.4.5",
 	"logo": "https://i.imgur.com/XyHgDQX.png",
 	"thumbnail": "https://i.imgur.com/2GPNZM8.jpg",
 	"color": "#2F4F7A",

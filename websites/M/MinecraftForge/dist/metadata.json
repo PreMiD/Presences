@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"service": "MinecraftForge",
 	"description": {
@@ -15,7 +16,7 @@
 		"mcforge.readthedocs.io",
 		"forgedev.flocker.tv"
 	],
-	"version": "1.2.13",
+	"version": "1.2.14",
 	"logo": "https://i.imgur.com/yPLG6pu.png",
 	"thumbnail": "https://i.imgur.com/xsz3eWv.png",
 	"color": "#d7a664",

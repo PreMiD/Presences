@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"service": "Imgur",
 	"description": {
@@ -20,7 +21,7 @@
 		"apidocs.imgur.com",
 		"community.imgur.com"
 	],
-	"version": "1.1.14",
+	"version": "1.1.15",
 	"logo": "https://i.imgur.com/eZf3wsO.png",
 	"thumbnail": "https://i.imgur.com/vTLBJYm.jpg",
 	"color": "#89c624",

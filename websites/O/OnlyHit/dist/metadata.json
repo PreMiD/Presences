@@ -7,7 +7,8 @@
 	"contributors": [
 		{
 			"name": "Bas950",
-			"id": "241278257335500811"
+			"id": "241278257335500811",
+			"github": "Bas950"
 		}
 	],
 	"service": "OnlyHit",
@@ -19,7 +20,7 @@
 		"onlyhit.us",
 		"onlyhit.merchforall.com"
 	],
-	"version": "1.1.12",
+	"version": "1.1.13",
 	"logo": "https://i.imgur.com/vyiCjQz.png",
 	"thumbnail": "https://i.imgur.com/x5Jpq7I.png",
 	"color": "#C1272D",

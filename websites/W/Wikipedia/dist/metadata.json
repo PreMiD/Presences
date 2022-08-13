@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "TheDrop.",
-		"id": "293828021134295040"
+		"id": "293828021134295040",
+		"github": "TheDropX"
 	},
 	"contributors": [
 		{
@@ -164,7 +165,7 @@
 	},
 	"url": "wikipedia.org",
 	"regExp": "([a-z0-9-]+[.])+wikipedia[.]org[/]",
-	"version": "2.7.19",
+	"version": "2.7.20",
 	"logo": "https://i.imgur.com/4OX6OZi.png",
 	"thumbnail": "https://i.imgur.com/vJiuzZy.png",
 	"color": "#f9f9f9",

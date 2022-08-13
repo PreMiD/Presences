@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"service": "AliExpress",
 	"description": {
@@ -46,7 +47,7 @@
 		"star.aliexpress.com",
 		"home.aliexpress.com"
 	],
-	"version": "1.2.15",
+	"version": "1.2.16",
 	"logo": "https://i.imgur.com/2LONg2Y.png",
 	"thumbnail": "https://i.imgur.com/UrX3fAS.png",
 	"color": "#e62e04",

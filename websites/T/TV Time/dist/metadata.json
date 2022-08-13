@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Dark_Ville",
-		"id": "638080361179512853"
+		"id": "638080361179512853",
+		"github": "DarkVillager"
 	},
 	"contributors": [
 		{
@@ -20,7 +21,7 @@
 		"nl": "TV Time is een online dienst die uitsluitend gericht is op televisieseries. Het stelt gebruikers in staat om informatie te krijgen en commentaar te geven op de shows die ze volgen, met verschillende informatie-segmenten die aan hen gerelateerd zijn, zoals releasedatums van nieuwe afleveringen en verschillende opties op basis van de reactie van de gebruiker."
 	},
 	"url": "www.tvtime.com",
-	"version": "1.2.17",
+	"version": "1.2.18",
 	"logo": "https://i.imgur.com/KuPkyx2.png",
 	"thumbnail": "https://i.imgur.com/9Uc9myA.png",
 	"color": "#FDDF39",

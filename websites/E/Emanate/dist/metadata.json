@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "SlowLife",
-		"id": "374905512661221377"
+		"id": "374905512661221377",
+		"github": "Slowlife01"
 	},
 	"service": "Emanate",
 	"description": {
@@ -12,7 +13,7 @@
 		"dashboard.emanate.live",
 		"emanate.live"
 	],
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/yFQLKFU.png",
 	"thumbnail": "https://i.imgur.com/XnyMHma.png",
 	"color": "#1e1e1e",

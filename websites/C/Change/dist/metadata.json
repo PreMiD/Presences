@@ -2,12 +2,14 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
-		"id": "215509157837537280"
+		"id": "215509157837537280",
+		"github": "StrikerFRFX"
 	},
 	"contributors": [
 		{
 			"name": "Encrypted",
-			"id": "564434085708038144"
+			"id": "564434085708038144",
+			"github": "EncryptedDev"
 		},
 		{
 			"name": "TheSlowly",
@@ -23,7 +25,7 @@
 		"vi_VN": "Thay đổi thế giới"
 	},
 	"url": "www.change.org",
-	"version": "1.2.15",
+	"version": "1.2.16",
 	"logo": "https://i.imgur.com/BwMtgWb.jpg",
 	"thumbnail": "https://i.imgur.com/bjNVk3Z.png",
 	"color": "#FF0000",

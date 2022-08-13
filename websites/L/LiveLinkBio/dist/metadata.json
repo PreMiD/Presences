@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Dark_Ville",
-		"id": "638080361179512853"
+		"id": "638080361179512853",
+		"github": "DarkVillager"
 	},
 	"service": "LiveLinkBio",
 	"description": {
@@ -14,7 +15,7 @@
 		"status.livelinkbio.com",
 		"docs.livelinkbio.com"
 	],
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/mqJJ4p9.png",
 	"thumbnail": "https://i.imgur.com/U4DlHTe.png",
 	"color": "#41AAA5",

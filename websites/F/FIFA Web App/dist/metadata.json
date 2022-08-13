@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"service": "FIFA Web App",
 	"description": {
@@ -11,7 +12,7 @@
 	},
 	"url": "www.easports.com",
 	"regExp": "([a-z0-9-]+[.])*easports[.]com[/]([a-z0-9]+)[/]fifa[/]ultimate-team[/]web-app[/]",
-	"version": "1.2.14",
+	"version": "1.2.15",
 	"logo": "https://i.imgur.com/uXThlTp.png",
 	"thumbnail": "https://i.imgur.com/UxPGmuo.png",
 	"color": "#FFFFFF",

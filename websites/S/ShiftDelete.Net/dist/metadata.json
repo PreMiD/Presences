@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "ShiftDelete.Net",
 	"description": {
@@ -14,7 +15,7 @@
 		"shiftdelete.net",
 		"forum.shiftdelete.net"
 	],
-	"version": "1.2.13",
+	"version": "1.2.14",
 	"logo": "https://i.imgur.com/xqgfIoI.png",
 	"thumbnail": "https://i.imgur.com/U4jK4yl.png",
 	"color": "#fedd00",

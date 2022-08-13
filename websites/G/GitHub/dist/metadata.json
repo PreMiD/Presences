@@ -2,12 +2,14 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "TheDrop.",
-		"id": "293828021134295040"
+		"id": "293828021134295040",
+		"github": "TheDropX"
 	},
 	"contributors": [
 		{
 			"name": "Encrypted",
-			"id": "564434085708038144"
+			"id": "564434085708038144",
+			"github": "EncryptedDev"
 		}
 	],
 	"service": "GitHub",
@@ -29,7 +31,7 @@
 		"github.com",
 		"gist.github.com"
 	],
-	"version": "2.11.0",
+	"version": "2.11.1",
 	"logo": "https://i.imgur.com/cr3bzXB.png",
 	"thumbnail": "https://i.imgur.com/G816tlo.png",
 	"color": "#000000",

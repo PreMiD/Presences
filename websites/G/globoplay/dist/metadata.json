@@ -2,12 +2,14 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "fror",
-		"id": "515668127829458945"
+		"id": "515668127829458945",
+		"github": "fr0r"
 	},
 	"contributors": [
 		{
 			"name": "Bas950",
-			"id": "241278257335500811"
+			"id": "241278257335500811",
+			"github": "Bas950"
 		}
 	],
 	"service": "globoplay",
@@ -17,7 +19,7 @@
 		"pt_BR": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser."
 	},
 	"url": "globoplay.globo.com",
-	"version": "2.1.10",
+	"version": "2.1.11",
 	"logo": "https://i.imgur.com/nPyw54J.png",
 	"thumbnail": "https://i.imgur.com/eEb3Dy7.png",
 	"color": "#ED1A37",

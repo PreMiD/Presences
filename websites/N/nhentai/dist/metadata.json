@@ -2,12 +2,14 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "TheDrop.",
-		"id": "293828021134295040"
+		"id": "293828021134295040",
+		"github": "TheDropX"
 	},
 	"contributors": [
 		{
 			"name": "fror",
-			"id": "515668127829458945"
+			"id": "515668127829458945",
+			"github": "fr0r"
 		}
 	],
 	"service": "nhentai",
@@ -18,7 +20,7 @@
 		"vi_VN": "nhentai là trang web hentai lưu trữ các bộ manga hentai khiêu dâm với trong nhiều ngôn ngữ khác nhau."
 	},
 	"url": "nhentai.net",
-	"version": "2.4.11",
+	"version": "2.4.12",
 	"logo": "https://i.imgur.com/xRqpOcL.png",
 	"thumbnail": "https://i.imgur.com/Z3EG4lT.png",
 	"color": "#eb2754",

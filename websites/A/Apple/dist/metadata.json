@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "N0chteil ^^",
-		"id": "495901098926669825"
+		"id": "495901098926669825",
+		"github": "N0chteil"
 	},
 	"contributors": [
 		{
@@ -28,7 +29,7 @@
 		"developer.apple.com",
 		"www.icloud.com"
 	],
-	"version": "2.3.1",
+	"version": "2.3.2",
 	"logo": "https://i.imgur.com/rBAusA5.png",
 	"thumbnail": "https://i.imgur.com/D5b7fQ5.jpg",
 	"color": "#606C80",

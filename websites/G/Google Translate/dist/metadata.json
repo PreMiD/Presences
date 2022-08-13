@@ -2,16 +2,19 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
-		"id": "241278257335500811"
+		"id": "241278257335500811",
+		"github": "Bas950"
 	},
 	"contributors": [
 		{
 			"name": "Callum",
-			"id": "506899274748133376"
+			"id": "506899274748133376",
+			"github": "callumok2004"
 		},
 		{
 			"name": "Striker",
-			"id": "215509157837537280"
+			"id": "215509157837537280",
+			"github": "StrikerFRFX"
 		},
 		{
 			"name": "Vasilis",
@@ -27,7 +30,7 @@
 	},
 	"url": "translate.google.com",
 	"regExp": "translate.google([.][a-z]+)+[/]",
-	"version": "3.0.8",
+	"version": "3.0.9",
 	"logo": "https://i.imgur.com/TblAuvW.png",
 	"thumbnail": "https://i.imgur.com/HSrkJq0.png",
 	"color": "#4c8bf5",

@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "sahibinden.com",
 	"description": {
@@ -15,7 +16,7 @@
 		"secure.sahibinden.com",
 		"banaozel.sahibinden.com"
 	],
-	"version": "1.1.12",
+	"version": "1.1.13",
 	"logo": "https://i.imgur.com/lutK4xu.png",
 	"thumbnail": "https://i.imgur.com/slIYKIe.png",
 	"color": "#ffe800",

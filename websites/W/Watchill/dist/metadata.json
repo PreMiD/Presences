@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
-		"id": "162969778699501569"
+		"id": "162969778699501569",
+		"github": "eggsy"
 	},
 	"service": "Watchill",
 	"description": {
@@ -15,7 +16,7 @@
 		"watchill.org",
 		"www.watchill.org"
 	],
-	"version": "1.2.15",
+	"version": "1.2.16",
 	"logo": "https://i.imgur.com/XGGf0Xq.png",
 	"thumbnail": "https://i.imgur.com/77d6LaS.png",
 	"color": "#0d1215",
