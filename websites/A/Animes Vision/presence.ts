@@ -10,6 +10,7 @@ async function getStrings() {
 			paused: "general.paused",
 			episode: "general.episode",
 			browsing: "general.browsing",
+			viewHome: "general.viewHome",
 			buttonViewEpisode: "general.buttonViewEpisode",
 			buttonViewSeries: "general.buttonViewSeries",
 		},
@@ -42,6 +43,9 @@ presence.on("UpdateData", async () => {
 		pathArrEnd = pathArr[pathArr.length - 1];
 
 	switch (pathArrEnd) {
+		case "":
+			presenceData.details = strings.viewHome;
+			break;
 		case "equipe":
 			presenceData.details = "Vendo os membros da equipe";
 			break;
@@ -76,14 +80,14 @@ presence.on("UpdateData", async () => {
 			if (video.paused) {
 				presenceData.smallImageKey = "pause";
 				presenceData.smallImageText = strings.paused;
-				delete presenceData.startTimestamp;
+				presenceData.startTimestamp = browsingTimestamps;
 				delete presenceData.endTimestamp;
 			}
-			console.log(presenceData);
 			break;
 		}
 		default:
-			presenceData.details = `Vendo a lista de ${pathArrEnd}`;
+			if (pathArr[1] === "lista")
+				presenceData.details = `Vendo a lista de ${pathArrEnd}`;
 	}
 	if (pathname.startsWith("/top")) presenceData.details = "Vendo o top animes";
 
@@ -94,6 +98,6 @@ presence.on("UpdateData", async () => {
 	if (!showCover) presenceData.largeImageKey = "anvlogo";
 	if (!showButtons) delete presenceData.buttons;
 
-	if (presenceData.details) presence.setActivity(presenceData, true);
+	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
