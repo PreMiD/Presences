@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			details: strings.browsing,
 			startTimestamp: browsingTimestamps,
 		},
-		{ pathname, href, hostname } = window.location,
+		{ pathname, href, origin } = window.location,
 		pathArr = pathname.split("/"),
 		pathArrEnd = pathArr[pathArr.length - 1];
 
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 				{ label: strings.buttonViewEpisode, url: href },
 				{
 					label: strings.buttonViewSeries,
-					url: `${hostname}/animes/${pathArr[2]}`,
+					url: `${origin}/animes/${pathArr[2]}`,
 				},
 			];
 
