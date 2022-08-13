@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector("video");
 	if (privacy) presenceData.details = "Browsing...";
 	else if (search?.value) {
-		presenceData.details = "Zoekt voor";
+		presenceData.details = "Zoekt naar";
 		presenceData.state = search.value;
 		presenceData.smallImageKey = "searching";
 	} else {
