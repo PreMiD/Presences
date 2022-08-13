@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = categoryName;
 				presenceData.smallImageKey = "reading";
 			} else if (categoryNamealt) {
-				presenceData.details = "Vendo a categoria de podcast:";
+				presenceData.details = "Vendo a categoria:";
 				presenceData.state = categoryNamealt.textContent;
 				presenceData.smallImageKey = "reading";
 			} else presenceData.details = "Categorias";
@@ -131,10 +131,9 @@ presence.on("UpdateData", async () => {
 					presenceData.details = podcastTitlealt;
 
 					// Podcast name
-					presenceData.state =
-						playingPodcastalt.querySelector<HTMLHeadingElement>(
-							"div.podcast-episode-view__header__info > h1"
-						)?.textContent;
+					presenceData.state = document.querySelector(
+						"div.podcast-episode-view__header-info > h1"
+					).textContent;
 
 					// Boolean if podcast is playing or paused
 					const playing =
@@ -314,6 +313,15 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.pathname.includes("/8223631/")) {
 				presenceData.details = `Premiere - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "premiere";
+			} else if (document.location.pathname.includes("/8221785/")) {
+				presenceData.details = `Premiere 2 - ${programTitle.textContent}`;
+				presenceData.state = programMetadata.textContent;
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "premiere";
+			} else if (document.location.pathname.includes("/8221838/")) {
+				presenceData.details = "Mosaico Premiere";
 				presenceData.smallImageKey = "live";
 				presenceData.largeImageKey = "premiere";
 			} else if (document.location.pathname.includes("/8310612/")) {
