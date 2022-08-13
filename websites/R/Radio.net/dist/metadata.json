@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "ACertainCoder",
-		"id": "320507572455079949"
+		"id": "320507572455079949",
+		"github": "ACertainCoder"
 	},
 	"service": "Radio.net",
 	"description": {

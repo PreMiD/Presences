@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "MauriceX",
-		"id": "268768664411439115"
+		"id": "268768664411439115",
+		"github": "MauriceX24"
 	},
 	"service": "VirusTotal",
 	"description": {

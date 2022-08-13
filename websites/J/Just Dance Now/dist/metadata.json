@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "joerkig",
-		"id": "205984221859151873"
+		"id": "205984221859151873",
+		"github": "joerkig"
 	},
 	"service": "Just Dance Now",
 	"description": {

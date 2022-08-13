@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Viruz",
-		"id": "158973226465230848"
+		"id": "158973226465230848",
+		"github": "Viruzaum"
 	},
 	"service": "Yay Animes",
 	"description": {

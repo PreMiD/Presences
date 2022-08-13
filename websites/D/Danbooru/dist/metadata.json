@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Kyrie",
-		"id": "368399721494216706"
+		"id": "368399721494216706",
+		"github": "kyrie25"
 	},
 	"service": "Danbooru",
 	"description": {

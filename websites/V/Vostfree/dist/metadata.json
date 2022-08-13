@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Kozou",
-		"id": "379362415428632576"
+		"id": "379362415428632576",
+		"github": "Kozou4ever"
 	},
 	"service": "Vostfree",
 	"description": {

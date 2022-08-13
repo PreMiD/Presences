@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "QkeleQ10",
-		"id": "807917674477649943"
+		"id": "807917674477649943",
+		"github": "QkeleQ10"
 	},
 	"service": "bol.com",
 	"description": {

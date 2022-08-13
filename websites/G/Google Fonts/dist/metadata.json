@@ -2,7 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Paulé",
-		"id": "376812375795302402"
+		"id": "376812375795302402",
+		"github": "peaillaud"
 	},
 	"service": "Google Fonts",
 	"description": {
