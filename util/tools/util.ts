@@ -1,6 +1,7 @@
 import { exec, type ExecOptions } from "node:child_process";
 import { promisify } from "node:util";
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { sync as glob } from "glob";
 
 const execute = promisify(exec);
 /**
@@ -101,6 +102,20 @@ export function isValidJSON(text: string): boolean {
 	}
 }
 
+export const missingMetadata: string[] = glob(
+		"./{websites,programs}/*/*/"
+	).filter(pF => !existsSync(`${pF}/dist/metadata.json`)),
+	allmeta: [Metadata, string][] = glob(
+		"./{websites,programs}/*/*/*/metadata.json"
+	).reduce((result, pF) => {
+		const file = readFile(pF);
+		if (isValidJSON(file)) result.push([JSON.parse(file), pF]);
+		else
+			console.error(`Error. ${pF} is not a valid metadata file, skipping...`);
+
+		return result;
+	}, []);
+
 export type ValidEventName = "push" | "pull_request" | "uncommitted";
 
 export interface Metadata {
@@ -132,6 +147,7 @@ export interface Metadata {
 interface Contributor {
 	name: string;
 	id: `${bigint}`;
+	github?: string;
 }
 
 type ImageTypes = "png" | "jpeg" | "jpg" | "gif";

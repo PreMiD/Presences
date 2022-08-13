@@ -1,42 +1,27 @@
 import "source-map-support/register";
 
-import { existsSync as exists } from "node:fs";
 import axios from "axios";
-import { sync as glob } from "glob";
-import { isValidJSON, readFile, writeJson, type Metadata } from "./util";
+import { allmeta, missingMetadata, writeJson, type Metadata } from "./util";
 
-const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
-		pF => !exists(`${pF}/dist/metadata.json`)
-	),
-	allmeta: [Metadata, string][] = glob(
-		"./{websites,programs}/*/*/*/metadata.json"
-	).reduce((result, pF) => {
-		const file = readFile(pF);
-		if (isValidJSON(file)) result.push([JSON.parse(file), pF]);
-		else
-			console.error(`Error. ${pF} is not a valid metadata file, skipping...`);
-
-		return result;
-	}, []),
-	latestMetadataSchema = async () => {
-		const latestVersion = (
-			(
-				await axios.get(
-					"https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata"
-				)
-			).data as { name: string }[]
-		)
-			.filter(c => c.name.endsWith(".json"))
-			.map(c => c.name.match(/\d.\d/g)[0])
-			.pop() as `${number}.${number}`;
-		return `https://schemas.premid.app/metadata/${latestVersion}` as const;
-	};
+const latestMetadataSchema = async () => {
+	const latestVersion = (
+		(
+			await axios.get(
+				"https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata"
+			)
+		).data as { name: string }[]
+	)
+		.filter(c => c.name.endsWith(".json"))
+		.map(c => c.name.match(/\d.\d/g)[0])
+		.pop() as `${number}.${number}`;
+	return `https://schemas.premid.app/metadata/${latestVersion}` as const;
+};
 
 if (missingMetadata?.length > 0)
 	console.log(
 		`\nThe following presence${
 			missingMetadata.length > 1 ? "s don't" : " doesn't"
-		} include a metadata file :\n${missingMetadata.join(", ")}\n`
+		} include a metadata file :\n${missingMetadata.join(", ")}`
 	);
 
 (async function () {
