@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 			if (video.paused) {
 				presenceData.smallImageKey = "pause";
 				presenceData.smallImageText = strings.paused;
-				presenceData.startTimestamp = browsingTimestamps;
+				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
 			break;
