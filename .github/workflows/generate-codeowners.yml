@@ -7,7 +7,7 @@ jobs:
   qa:
     name: Generate Codeowners
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'PreMiD'
+    if: github.repository == 'premid/presences'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Run Script
-        run: yarn se
+        run: yarn generateCodeowners
       - name: Commit
         run: |
           git config --global user.email "semid@premid.app"

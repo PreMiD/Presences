@@ -1,0 +1,35 @@
+name: Notify Contributors
+on: 
+  pull_request_target: 
+    paths: 
+      - "websites/**"
+    branches: [main]
+
+jobs: 
+  notify-contributors: 
+    if: github.repository == "premid/presences"
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout Project
+        uses: actions/actions@v3
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3.41
+        with: 
+          node-version: 16
+          cache: "yarn"
+      - name: Get Changed Files
+        id: changed-files
+        uses: Ana06/get-changed-files
+        with: 
+          format: "json"
+      - name: Install Dependencies
+        run: yarn
+      - name: Compile Tools
+        uses: yarn compileTools
+      - name: Run notify-codeowners script
+        uses: actions/github-script@v5
+        with: 
+          script: |
+            const script = require("./utils/tools/notify-contributors.js")
+            await script({github, context, changedFiles: ${{ steps.changed-files.outputs.all }}})
+      
