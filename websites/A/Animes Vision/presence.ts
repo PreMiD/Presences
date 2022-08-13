@@ -1,53 +1,99 @@
 const presence = new Presence({
 		clientId: "700405996677365842",
 	}),
-	strings = presence.getStrings({
-		playing: "general.playing",
-		paused: "general.paused",
-		browsing: "general.browsing",
-		episode: "presence.media.info.episode",
-	});
+	browsingTimestamps = Math.floor(Date.now() / 1000);
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			playing: "general.playing",
+			paused: "general.paused",
+			episode: "general.episode",
+			browsing: "general.browsing",
+			buttonViewEpisode: "general.buttonViewEpisode",
+			buttonViewSeries: "general.buttonViewSeries",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
+	const [newLang, time, showCover, showButtons] = await Promise.all([
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("time"),
+		presence.getSetting<boolean>("cover"),
+		presence.getSetting<boolean>("buttons"),
+	]);
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+
 	const presenceData: PresenceData = {
 			largeImageKey: "anvlogo",
-			details: (await strings).browsing,
-			startTimestamp: Math.floor(Date.now() / 1000),
+			details: strings.browsing,
+			startTimestamp: browsingTimestamps,
 		},
-		path = window.location.pathname;
-	if (path.endsWith("/equipe"))
-		presenceData.details = "Vendo os membros da equipe";
+		{ pathname, href, hostname } = window.location,
+		pathArr = pathname.split("/"),
+		pathArrEnd = pathArr[pathArr.length - 1];
 
-	if (path.startsWith("/top")) presenceData.details = "Vendo o top animes";
-	else if (path.endsWith("/doramas"))
-		presenceData.details = "Vendo a lista de doramas";
-	else if (path.endsWith("/filmes"))
-		presenceData.details = "Vendo a lista de filmes";
-	else if (path.endsWith("/lancamentos"))
-		presenceData.details = "Vendo a lista de lançamentos";
-	else if (path.endsWith("/animes"))
-		presenceData.details = "Vendo a lista de animes";
-	else if (path.endsWith("/legendado")) {
-		const video: HTMLVideoElement = document.querySelector("video");
-		presenceData.details = document
-			.querySelectorAll(".active h1")[0]
-			.textContent.replace(" - Episodio ", "")
-			.replace(/[0-9]/g, "");
-		presenceData.state = (await strings).episode.replace(
-			"{0}",
-			document
-				.querySelector("#current_episode_name")
-				.textContent.match(/\d+/g)[0]
-		);
-		if (!video.paused) {
+	switch (pathArrEnd) {
+		case "equipe":
+			presenceData.details = "Vendo os membros da equipe";
+			break;
+		case "legendado": {
+			const video: HTMLVideoElement = document.querySelector("video");
+			presenceData.details = document
+				.querySelector("h2.film-name")
+				.textContent.trim();
+			presenceData.state = `${strings.episode} ${
+				document
+					.querySelector(".active > .ssli-detail > div")
+					.textContent.trim()
+					.split(" ")[1]
+			}`;
+
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(video.currentTime, video.duration);
 			presenceData.smallImageKey = "play";
-			presenceData.smallImageText = (await strings).playing;
-		} else if (document.querySelector("video").currentTime > 0) {
-			presenceData.smallImageKey = "pause";
-			presenceData.smallImageText = (await strings).paused;
+			presenceData.smallImageText = strings.playing;
+			presenceData.largeImageKey = document
+				.querySelector('meta[property="og:image"]')
+				.getAttribute("content");
+
+			presenceData.buttons = [
+				{ label: strings.buttonViewEpisode, url: href },
+				{
+					label: strings.buttonViewSeries,
+					url: `${hostname}/animes/${pathArr[2]}`,
+				},
+			];
+
+			if (video.paused) {
+				presenceData.smallImageKey = "pause";
+				presenceData.smallImageText = strings.paused;
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
+			}
+			console.log(presenceData);
+			break;
 		}
+		default:
+			presenceData.details = `Vendo a lista de ${pathArrEnd}`;
 	}
-	presence.setActivity(presenceData, true);
+	if (pathname.startsWith("/top")) presenceData.details = "Vendo o top animes";
+
+	if (!time) {
+		delete presenceData.endTimestamp;
+		delete presenceData.startTimestamp;
+	}
+	if (!showCover) presenceData.largeImageKey = "anvlogo";
+	if (!showButtons) delete presenceData.buttons;
+
+	if (presenceData.details) presence.setActivity(presenceData, true);
+	else presence.setActivity();
 });
