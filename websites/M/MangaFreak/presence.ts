@@ -1,12 +1,15 @@
 const presence = new Presence({ clientId: "1007662369058594937" }),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	logo = "https://i.imgur.com/1yBi5L5.jpg",
-	searchingImg = "https://i.imgur.com/OIgfjTG.png",
-	readingImg = "https://i.imgur.com/53N4eY6.png";
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+enum Assets {
+	Logo = "https://i.imgur.com/1yBi5L5.jpg",
+	Searching = "https://i.imgur.com/OIgfjTG.png",
+	Reading = "https://i.imgur.com/53N4eY6.png",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: logo,
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		[time, showButtons, showCover] = await Promise.all([
@@ -45,7 +48,7 @@ presence.on("UpdateData", async () => {
 		case "Search":
 			presenceData.details = "Searching for mangas";
 			presenceData.state = pageDetails;
-			presenceData.smallImageKey = searchingImg;
+			presenceData.smallImageKey = Assets.Searching;
 			break;
 		case "Manga": {
 			presenceData.details = "Viewing a manga";
@@ -69,7 +72,7 @@ presence.on("UpdateData", async () => {
 				'option[selected="selected"]'
 			).textContent;
 
-			presenceData.smallImageKey = readingImg;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = `Page ${
 				document.querySelector("option.selected").textContent
 			}/${
@@ -83,7 +86,7 @@ presence.on("UpdateData", async () => {
 
 	if (!time) delete presenceData.startTimestamp;
 	if (!showButtons) delete presenceData.buttons;
-	if (!showCover) presenceData.largeImageKey = logo;
+	if (!showCover) presenceData.largeImageKey = Assets.Logo;
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
