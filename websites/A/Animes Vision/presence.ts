@@ -3,6 +3,12 @@ const presence = new Presence({
 	}),
 	browsingTimestamps = Math.floor(Date.now() / 1000);
 
+enum Assets {
+	Logo = "https://i.imgur.com/CSan6Ae.png",
+	Playing = "https://i.imgur.com/KNneWuF.png",
+	Paused = "https://i.imgur.com/BtWUfrZ.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -34,7 +40,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-			largeImageKey: "anvlogo",
+			largeImageKey: Assets.Logo,
 			details: strings.browsing,
 			startTimestamp: browsingTimestamps,
 		},
@@ -63,7 +69,7 @@ presence.on("UpdateData", async () => {
 
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(video.currentTime, video.duration);
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Playing;
 			presenceData.smallImageText = strings.playing;
 			presenceData.largeImageKey = document
 				.querySelector('meta[property="og:image"]')
@@ -78,7 +84,7 @@ presence.on("UpdateData", async () => {
 			];
 
 			if (video.paused) {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Paused;
 				presenceData.smallImageText = strings.paused;
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
@@ -95,7 +101,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.endTimestamp;
 		delete presenceData.startTimestamp;
 	}
-	if (!showCover) presenceData.largeImageKey = "anvlogo";
+	if (!showCover) presenceData.largeImageKey = Assets.Logo;
 	if (!showButtons) delete presenceData.buttons;
 
 	if (presenceData.details) presence.setActivity(presenceData);
