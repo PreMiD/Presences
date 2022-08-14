@@ -1,11 +1,14 @@
 const presence = new Presence({
-		clientId: "640150336547454976",
-	}),
-	logo = "https://i.imgur.com/p6Xv2Bv.png",
-	searchImg = "https://i.imgur.com/OIgfjTG.png",
-	playImg = "https://i.imgur.com/KNneWuF.png",
-	pauseImg = "https://i.imgur.com/BtWUfrZ.png",
-	readingImg = "https://i.imgur.com/53N4eY6.png";
+	clientId: "640150336547454976",
+});
+
+enum Assets {
+	Logo = "https://i.imgur.com/p6Xv2Bv.png",
+	Searching = "https://i.imgur.com/OIgfjTG.png",
+	Playing = "https://i.imgur.com/KNneWuF.png",
+	Paused = "https://i.imgur.com/BtWUfrZ.png",
+	Reading = "https://i.imgur.com/53N4eY6.png",
+}
 
 async function getStrings() {
 	return presence.getStrings(
@@ -56,7 +59,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: logo,
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname } = document.location,
@@ -76,10 +79,10 @@ presence.on("UpdateData", async () => {
 	switch (pathname.split("/")[1]) {
 		case "watch": {
 			presenceData.details = strings.viewing;
-			presenceData.smallImageKey = readingImg;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("img.c-content-image")?.src ??
-				logo;
+				Assets.Logo;
 
 			presenceData.buttons = [{ label: strings.buttonViewEpisode, url: href }];
 
@@ -93,7 +96,7 @@ presence.on("UpdateData", async () => {
 				: `${seriesName} - ${episode}`;
 
 			if (iFrameVideo && !isNaN(duration)) {
-				presenceData.smallImageKey = paused ? pauseImg : playImg;
+				presenceData.smallImageKey = paused ? Assets.Paused : Assets.Playing;
 				presenceData.smallImageText = paused ? strings.pause : strings.play;
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
@@ -116,16 +119,16 @@ presence.on("UpdateData", async () => {
 				document.querySelector("div.series-title").textContent;
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("img.c-content-image")?.src ??
-				logo;
+				Assets.Logo;
 			presenceData.buttons = [{ label: strings.buttonViewSeries, url: href }];
 			break;
 		case "watchlist":
 			presenceData.details = "Viewing their watchlist";
-			presenceData.smallImageKey = readingImg;
+			presenceData.smallImageKey = Assets.Reading;
 			break;
 		case "":
 			presenceData.details = strings.viewHome;
-			presenceData.smallImageKey = readingImg;
+			presenceData.smallImageKey = Assets.Reading;
 			break;
 		default:
 			if (document.querySelector(".item-type")?.textContent === "Channel") {
@@ -141,13 +144,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = href.split("?q=")[1];
 		presenceData.startTimestamp = browsingTimestamp;
 		delete presenceData.endTimestamp;
-		presenceData.largeImageKey = logo;
-		presenceData.smallImageKey = searchImg;
+		presenceData.largeImageKey = Assets.Logo;
+		presenceData.smallImageKey = Assets.Searching;
 		presenceData.smallImageText = strings.search;
 		delete presenceData.buttons;
 	}
 
-	if (!showCover) presenceData.largeImageKey = logo;
+	if (!showCover) presenceData.largeImageKey = Assets.Logo;
 	if (!showButtons) delete presenceData.buttons;
 	if (!time) {
 		delete presenceData.startTimestamp;
