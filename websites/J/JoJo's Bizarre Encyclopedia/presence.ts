@@ -7,8 +7,8 @@ presence.on("UpdateData", () => {
 
 	if (window.location.href.toLowerCase().includes("jojowiki.com")) {
 		presenceData = {
-			largeImageKey: "logo_bordered",
-			smallImageKey: "wiki_icon",
+			largeImageKey: "https://i.imgur.com/iBLgETb.png",
+			smallImageKey: "https://i.imgur.com/h5EZ0JB.png",
 			smallImageText: "jojowiki.com",
 		};
 		presenceData.details = "Browsing JoJoWiki";
@@ -124,8 +124,8 @@ presence.on("UpdateData", () => {
 	}
 	if (window.location.hostname.toLowerCase().includes("jojo-news.com")) {
 		presenceData = {
-			largeImageKey: "logo_bordered",
-			smallImageKey: "news_icon_bordered",
+			largeImageKey: "https://i.imgur.com/iBLgETb.png",
+			smallImageKey: "https://i.imgur.com/lLWbSBd.png",
 			smallImageText: "jojo-news.com",
 		};
 		presenceData.details = "Browsing News";
