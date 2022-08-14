@@ -1,6 +1,7 @@
 const presence = new Presence({
-	clientId: "608065709741965327",
-});
+		clientId: "608065709741965327",
+	}),
+	logo = "https://i.imgur.com/8CpYMrh.png";
 
 async function getStrings() {
 	return presence.getStrings(
@@ -61,7 +62,7 @@ presence.on("iFrameData", (data: iFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg",
+			largeImageKey: logo,
 		},
 		{ href, pathname, hostname } = document.location,
 		[newLang, showCover] = await Promise.all([
@@ -153,7 +154,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.largeImageKey =
 			document.querySelector<HTMLMetaElement>("[property='og:image']")
-				?.content ?? "lg";
+				?.content ?? logo;
 
 		if (paused) {
 			delete presenceData.startTimestamp;
@@ -177,7 +178,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector("h1.title").textContent;
 		presenceData.largeImageKey =
 			document.querySelector<HTMLMetaElement>("[property='og:image']")
-				?.content ?? "lg";
+				?.content ?? logo;
 		presenceData.buttons = [
 			{
 				label: strings.viewSeries,
@@ -186,7 +187,7 @@ presence.on("UpdateData", async () => {
 		];
 	}
 
-	if (!showCover) presenceData.largeImageKey = "lg";
+	if (!showCover) presenceData.largeImageKey = logo;
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
