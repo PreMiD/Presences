@@ -81,80 +81,32 @@ presence.on("UpdateData", async () => {
 		case "info":
 			presenceData.details = "Reading";
 			presenceData.smallImageKey = "reading";
-			switch (pathnameArray[2]) {
-				case "help":
-					presenceData.state = "Help page";
-					break;
-				case "about":
-					presenceData.state = "About Artfight";
-					break;
-				case "faq":
-					presenceData.state = "Frequently Asked Questions";
-					break;
-				case "guide-attacks":
-					presenceData.state = "Guide to categorize your attack";
-					break;
-				case "size":
-					presenceData.state = "Guide to name character size";
-					break;
-				case "drawings":
-					presenceData.state = "Guide to rate drawings";
-					break;
-				case "3d-modeling":
-					presenceData.state = "Guide to rate 3D models";
-					break;
-				case "crafts":
-					presenceData.state = "Guide to rate crafts arts";
-					break;
-				case "animation":
-					presenceData.state = "Guide to rate animations";
-					break;
-				case "guide-maturity":
-					presenceData.state = "Guide to filter mature content";
-					break;
-				case "gore":
-					presenceData.state = "Guide to filter gore content";
-					break;
-				case "bodyhorror":
-					presenceData.state = "Guide to filter bodyhorror content";
-					break;
-				case "nudity":
-					presenceData.state = "Guide to filter nudity content";
-					break;
-				case "sexualthemes":
-					presenceData.state = "Guide to filter sexual themes content";
-					break;
-				case "epilespy":
-					presenceData.state = "Guide to Epilespy and eye strain warning";
-					break;
-				case "otherfilters":
-					presenceData.state = "Guide to other sensitive content";
-					break;
-				case "guide-bbcode":
-					presenceData.state = "Guide to BBCode and CSS";
-					break;
-				case "contact-us":
-					presenceData.state = "How to contact a moderator";
-					break;
-				case "contact":
-					presenceData.state = "How to contact an administrator";
-					break;
-				case "credits":
-					presenceData.state = "Staff credits page";
-					break;
-				case "artcredits":
-					presenceData.state = "Art credits page";
-					break;
-				case "rules":
-					presenceData.state = "artfight rules";
-					break;
-				case "tos":
-					presenceData.state = "ToS page";
-					break;
-				case "privacy":
-					presenceData.state = "Privacy policy";
-					break;
-			}
+			presenceData.state = {
+				help: "Help page",
+				about: "About Artfight",
+				faq: "Frequently Asked Questions",
+				"guide-attacks": "Guide to categorize your attack",
+				size: "Guide to name character size",
+				drawings: "Guide to rate drawings",
+				"3d-modeling": "Guide to rate 3D models",
+				crafts: "Guide to rate crafts arts",
+				animation: "Guide to rate animations",
+				"guide-maturity": "Guide to filter mature content",
+				gore: "Guide to filter gore content",
+				bodyhorror: "Guide to filter bodyhorror content",
+				nudity: "Guide to filter nudity content",
+				sexualthemes: "Guide to filter sexual themes content",
+				epilespy: "Guide to Epilespy and eye strain warning",
+				otherfilters: "Guide to other sensitive content",
+				"guide-bbcode": "Guide to BBCode and CSS",
+				"contact-us": "How to contact a moderator",
+				contact: "How to contact an administrator",
+				credits: "Staff credits page",
+				artcredits: "Art credits page",
+				rules: "artfight rules",
+				tos: "ToS page",
+				privacy: "Privacy policy",
+			}[pathnameArray[2]];
 			break;
 		case "shop":
 			presenceData.details = "Browsing the shop";
@@ -223,7 +175,6 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		default:
-			break;
 	}
 
 	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
