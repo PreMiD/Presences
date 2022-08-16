@@ -28,14 +28,13 @@ presence.on("UpdateData", () => {
 				presenceData.smallImageKey = "https://i.imgur.com/Bl7BSIW.png";
 				presenceData.smallImageText = "Curator";
 			}
-			if(pathname === "/profile/me") presenceData.details = "Viewing their profile";
+			if (pathname === "/profile/me")
+				presenceData.details = "Viewing their profile";
 			else {
-presenceData.details = `Viewing ${
-				document.querySelector(
-					"#site h1"
-				).textContent
-			}'s profile`;
-}
+				presenceData.details = `Viewing ${
+					document.querySelector("#site h1").textContent
+				}'s profile`;
+			}
 		} else if (pathname.includes("/search")) {
 			presenceData.details = "Searching";
 			presenceData.state = pathname.split("/")[2].replaceAll("%20", " ");
