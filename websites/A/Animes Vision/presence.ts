@@ -55,6 +55,7 @@ presence.on("UpdateData", async () => {
 		case "equipe":
 			presenceData.details = "Vendo os membros da equipe";
 			break;
+		case "dublado":
 		case "legendado": {
 			const video: HTMLVideoElement = document.querySelector("video");
 			presenceData.details = document
