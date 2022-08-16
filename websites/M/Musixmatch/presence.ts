@@ -18,32 +18,24 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Viewing the community page";
 		else if (pathname.includes("/contribute"))
 			presenceData.details = "Viewing the contribute page";
-		else if (pathname.includes("/profile/me")) {
+		else if (pathname.includes("/profile/")) {
 			//if user status = curator show curator badge
 			if (
 				document.querySelector(
-					"#site > div > div > div > main > div > div.mxm-user-header.mxm-user-header--profile > div > div:nth-child(1) > div:nth-child(2) > div > div > span"
+					"#site > div > div > div > main > .mxm-page > .mxm-user-header > .container > .row > div > div > div > span"
 				)
 			) {
 				presenceData.smallImageKey = "https://i.imgur.com/Bl7BSIW.png";
 				presenceData.smallImageText = "Curator";
 			}
-			presenceData.details = "Viewing their profile";
-		} else if (pathname.includes("/profile/")) {
-			//if user status = curator show curator badge
-			if (
+			if(pathname === "/profile/me") presenceData.details = "Viewing their profile";
+			else {
+presenceData.details = `Viewing ${
 				document.querySelector(
-					"#site > div > div > div > main > div > div.mxm-user-header.mxm-user-header--profile > div > div:nth-child(1) > div:nth-child(2) > div > div > span"
-				)
-			) {
-				presenceData.smallImageKey = "https://i.imgur.com/Bl7BSIW.png";
-				presenceData.smallImageText = "Curator";
-			}
-			presenceData.details = `Viewing ${
-				document.querySelector(
-					"#site > div > div > div > main > div > div.mxm-user-header.mxm-user-header--profile > div > div:nth-child(1) > div:nth-child(2) > div > div > h1"
+					"#site h1"
 				).textContent
 			}'s profile`;
+}
 		} else if (pathname.includes("/search")) {
 			presenceData.details = "Searching";
 			presenceData.state = pathname.split("/")[2].replaceAll("%20", " ");
@@ -80,7 +72,7 @@ presence.on("UpdateData", () => {
 			}
 			presenceData.details = "Browsing artist";
 			presenceData.state = document.querySelector(
-				"#content > div > div.profile-header.artist-header > div > div.profile-info > div > div.profile-data > h1"
+				"#site > #artist-page > #content h1"
 			).textContent;
 		}
 	} else if (hostname === "curators.musixmatch.com") {
