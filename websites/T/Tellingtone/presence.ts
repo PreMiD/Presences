@@ -10,7 +10,7 @@ async function getStrings() {
 			episode: "general.episode",
 			viewPage: "general.viewPage",
 			buttonViewSeries: "general.buttonViewSeries",
-			currentlyListening: "general.currentlyListening",
+			listeningTo: "general.listeningTo",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: strings.buttonViewSeries, url: href }];
 	}
 	if (document.querySelector("div#Player")) {
-		presenceData.details = strings.currentlyListening
+		presenceData.details = strings.listeningTo
 			.replace("{0}", " ")
 			.replace(
 				"{1}",
