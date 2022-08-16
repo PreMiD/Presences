@@ -113,9 +113,9 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (showName?.textContent && episode?.textContent) {
 		presenceData.details =
-			`${showName?.textContent
+			`${showName.textContent
 				.charAt(0)
-				.toUpperCase()}${showName?.textContent.slice(0)}` || "Bilinmeyen Dizi";
+				.toUpperCase()}${showName.textContent.slice(0)}` || "Bilinmeyen Dizi";
 		presenceData.state = episode?.textContent || "Bilinmeyen Bölüm";
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
