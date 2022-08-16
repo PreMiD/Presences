@@ -10,7 +10,7 @@ async function getStrings() {
 			episode: "general.episode",
 			viewPage: "general.viewPage",
 			buttonViewSeries: "general.buttonViewSeries",
-			currentlyListening: "generan.currentlyListeningTo",
+			currentlyListening: "general.currentlyListening",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -55,9 +55,12 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: strings.buttonViewSeries, url: href }];
 	}
 	if (document.querySelector("div#Player")) {
-		presenceData.details = `${strings.currentlyListening} ${
-			document.querySelector<HTMLDivElement>("div.media-title").textContent
-		}`;
+		presenceData.details = strings.currentlyListening.replace(
+			"{0}{1}",
+			` ${
+				document.querySelector<HTMLDivElement>("div.media-title").textContent
+			}`
+		);
 		presenceData.state =
 			document.querySelector<HTMLDivElement>("div.media-episode").textContent;
 		presenceData.largeImageKey = document
