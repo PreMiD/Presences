@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 	}
 	if (document.querySelector("div#Player")) {
 		presenceData.details = strings.currentlyListening
-			.replace("{0}", "")
+			.replace("{0}", " ")
 			.replace(
 				"{1}",
 				document.querySelector<HTMLDivElement>("div.media-title").textContent
