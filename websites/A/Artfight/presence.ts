@@ -4,28 +4,36 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	slideshow = new Slideshow();
 
+enum Assets {
+	Logo = "https://i.imgur.com/eABLEqd.jpg",
+	Reading = "https://i.imgur.com/53N4eY6.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "artfight-logo",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		presenceDataSlide: PresenceData = {
-			largeImageKey: "artfight-logo",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		pathnameArray = document.location.pathname.split("/"),
-		showCover = await presence.getSetting<boolean>("cover");
+		presenceDataTeam: PresenceData = {
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href, origin } = document.location,
+		pathArr = pathname.split("/"),
+		[showCover, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("buttons"),
+		]);
 
-	switch (pathnameArray[1]) {
+	switch (pathArr[1]) {
 		case "":
 			presenceData.details = "Browsing homepage";
 			break;
 		case "attack": {
-			const presenceDataTeam: PresenceData = {
-				largeImageKey: "artfight-logo",
-				startTimestamp: browsingTimestamp,
-			};
-
 			presenceData.details =
 				presenceDataSlide.details =
 				presenceDataTeam.details =
@@ -38,7 +46,7 @@ presence.on("UpdateData", async () => {
 				.querySelector(".profile-header-name > a > u")
 				.textContent.trim()}"`;
 
-			if (showCover && !document.querySelector("div.alert")) {
+			if (!document.querySelector("div.alert")) {
 				presenceData.largeImageKey =
 					presenceDataSlide.largeImageKey =
 					presenceDataTeam.largeImageKey =
@@ -55,12 +63,10 @@ presence.on("UpdateData", async () => {
 				presenceDataSlide.buttons =
 				presenceDataTeam.buttons =
 					[
-						{ label: "View Drawing", url: document.location.href },
+						{ label: "View Drawing", url: href },
 						{
 							label: "View Artist",
-							url: `${
-								document.location.origin
-							}/~${tableAttackData[1].textContent.trim()}`,
+							url: `${origin}/~${tableAttackData[1].textContent.trim()}`,
 						},
 					];
 
@@ -71,16 +77,15 @@ presence.on("UpdateData", async () => {
 		}
 		case "browse":
 			presenceData.details = "Browsing";
-			if (pathnameArray[2].startsWith("attacks"))
-				presenceData.state = "attacks";
-			else if (pathnameArray[2].startsWith("characters"))
+			if (pathArr[2].startsWith("attacks")) presenceData.state = "attacks";
+			else if (pathArr[2].startsWith("characters"))
 				presenceData.state = "characters";
-			else if (pathnameArray[2].startsWith("tags"))
+			else if (pathArr[2].startsWith("tags"))
 				presenceData.state = "characters by tags";
 			break;
 		case "info":
 			presenceData.details = "Reading";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.state = {
 				help: "Help page",
 				about: "About Artfight",
@@ -106,7 +111,7 @@ presence.on("UpdateData", async () => {
 				rules: "artfight rules",
 				tos: "ToS page",
 				privacy: "Privacy policy",
-			}[pathnameArray[2]];
+			}[pathArr[2]];
 			break;
 		case "shop":
 			presenceData.details = "Browsing the shop";
@@ -121,20 +126,19 @@ presence.on("UpdateData", async () => {
 			break;
 		case "news":
 			presenceData.details = "Reading news";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			break;
 		case "members": {
 			presenceData.details = "Browsing members";
-			const browsingPageNumber = document.location.href.split("?");
+			const browsingPageNumber = href.split("?");
 			presenceData.state =
 				browsingPageNumber.length === 1
 					? "Page 1"
 					: `Page ${browsingPageNumber[1].split("=")[1]}`;
-			if (showCover) {
-				presenceData.largeImageKey = document
-					.querySelector<HTMLSpanElement>("span.icon-user")
-					.style.backgroundImage.split('"')[1];
-			}
+			presenceData.largeImageKey = document
+				.querySelector<HTMLSpanElement>("span.icon-user")
+				.style.backgroundImage.split('"')[1];
+
 			break;
 		}
 		case "event":
@@ -162,19 +166,53 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case "team":
-			if (pathnameArray[2] === "sort")
-				presenceData.details = "On team sorting page";
+			if (pathArr[2] === "sort") presenceData.details = "On team sorting page";
 			else {
 				presenceData.details = "On team page";
 				presenceData.state = document.querySelector<HTMLHeadingElement>(
 					"div.container-fluid > h1 > strong > a"
 				).textContent;
-				presenceData.buttons = [
-					{ label: "View Team Page", url: document.location.href },
-				];
+				presenceData.buttons = [{ label: "View Team Page", url: href }];
 			}
 			break;
+		case "character":
+			presenceData.details = `Viewing ${
+				document.querySelector(".profile-header-name > a").textContent
+			}`;
+			presenceData.state = `Owner : ${document
+				.querySelector(
+					".profile-header-normal-status > div > strong:nth-child(2)"
+				)
+				.textContent.trim()}`;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("div > a > img").src;
+			presenceData.buttons = [{ label: "View character", url: href }];
+			break;
 		default:
+			if (pathArr[1].startsWith("~")) {
+				presenceData.details = `Viewing ${
+					document.querySelector(".profile-header-name > strong").textContent
+				}`;
+				presenceData.state = document
+					.querySelector(".profile-header-normal-status > p:nth-child(3)")
+					.textContent.trim();
+				presenceData.largeImageKey = document
+					.querySelector<HTMLSpanElement>(".icon-user")
+					.style.backgroundImage.split('"')[1];
+				presenceData.buttons = [{ label: "View artist profile", url: href }];
+			}
+	}
+
+	if (!showCover) {
+		presenceData.largeImageKey =
+			presenceDataSlide.largeImageKey =
+			presenceDataTeam.largeImageKey =
+				Assets.Logo;
+	}
+	if (!showButtons) {
+		delete presenceData.buttons;
+		delete presenceDataSlide.buttons;
+		delete presenceDataTeam.buttons;
 	}
 
 	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
