@@ -10,14 +10,14 @@ async function getStrings() {
 			episode: "general.episode",
 			viewPage: "general.viewPage",
 			buttonViewSeries: "general.buttonViewSeries",
+			currentlyListening: "generan.currentlyListeningTo",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
-	oldLang: string = null,
-	currentListening: string = null;
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -34,8 +34,6 @@ presence.on("UpdateData", async () => {
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
-		currentListening =
-			newLang === "fr" ? "Écoute actuellement " : "Currently listening to ";
 		strings = await getStrings();
 	}
 
@@ -57,9 +55,9 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: strings.buttonViewSeries, url: href }];
 	}
 	if (document.querySelector("div#Player")) {
-		presenceData.details =
-			currentListening +
-			document.querySelector<HTMLDivElement>("div.media-title").textContent;
+		presenceData.details = `${strings.currentlyListening} ${
+			document.querySelector<HTMLDivElement>("div.media-title").textContent
+		}`;
 		presenceData.state =
 			document.querySelector<HTMLDivElement>("div.media-episode").textContent;
 		presenceData.largeImageKey = document
