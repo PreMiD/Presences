@@ -49,10 +49,10 @@
 			"value": true
 		},
 		{
-		"id": "buttons",
-		"title": "Show Buttons",
-		"icon": "fad fa-compress-arrows-alt",
-		"value": true
-	}
-]
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fad fa-compress-arrows-alt",
+			"value": true
+		}
+	]
 }
