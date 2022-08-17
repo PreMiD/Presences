@@ -30,8 +30,8 @@ iframe.on("UpdateData", async () => {
 		iframe.send({
 			iframeVideo: {
 				iFrameVideo: true,
-				currTime: video.currentTime,
-				dur: video.duration,
+				currentTime: video.currentTime,
+				duration: video.duration,
 				paused: video.paused,
 			},
 		});
