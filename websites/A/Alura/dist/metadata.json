@@ -8,7 +8,7 @@
 	"description": {
 		"en": "The largest online technology school in Brazil.",
 		"pt_BR": "A maior escola online de tecnologia do Brasil.",
-		"nl": "De grooste online technologie school van Brazilië."
+		"nl": "De grootste online technologieschool van Brazilië."
 	},
 	"url": "www.alura.com.br",
 	"regExp": "([a-z0-9]+)[.]alura.com.br",

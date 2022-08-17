@@ -7,10 +7,11 @@
 	"service": "Hitomi",
 	"description": {
 		"en": "Hitomi.la is the best source of free hentai doujinshi, manga, artist CG, and anime.",
-		"ko_KR": "Hitomi.la는 무료 헨타이 동인지, 만화, 아티스트 CG 그리고 애니메이션의 최고의 소스입니다."
+		"ko_KR": "Hitomi.la는 무료 헨타이 동인지, 만화, 아티스트 CG 그리고 애니메이션의 최고의 소스입니다.",
+		"nl": "Hitomi.la is de beste bron van gratis hentai doujinshi, manga, artiest CG en anime."
 	},
 	"url": "hitomi.la",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/sQZ65FE.png",
 	"thumbnail": "https://i.imgur.com/648ECEg.png",
 	"color": "#242d3c",

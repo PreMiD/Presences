@@ -6,10 +6,11 @@
 	},
 	"service": "Harmony",
 	"description": {
-		"en": "Harmony broadcasts from all over the world and we all have the same desire to play the biggest hits!"
+		"en": "Harmony broadcasts from all over the world and we all have the same desire to play the biggest hits!",
+		"nl": "Harmony zendt uit van over de hele wereld en we hebben allemaal hetzelfde verlangen om de grootste hits te spelen!"
 	},
 	"url": "weareharmony.net",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/lI0bLxr.png",
 	"thumbnail": "https://i.imgur.com/MqPDsUl.png",
 	"color": "#4c1eff",

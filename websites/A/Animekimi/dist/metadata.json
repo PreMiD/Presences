@@ -6,10 +6,8 @@
 	},
 	"service": "Animekimi",
 	"description": {
-		"en": "Watch anime online cartoons Thai dubbed anime Thai subtitled anime latest episodes.",
-		"th": "ดูอนิเมะออนไลน์ การ์ตูน อนิเมะพากย์ไทย อนิเมะซับไทย ตอนใหม่ล่าสุด",
-		"vi_VN": "Xem những anime mới nhất trực tuyến có phụ đề và thuyết minh Tiếng Thái.",
-		"nl": "Bekijk anime & cartoons online in het Thais nagesynchroniseerde anime of Thais ondertitelde anime met de nieuwste afleveringen."
+		"en": "Watch anime & cartoons online dubbed or subbed anime in Thai with even the latest episodes.",
+		"nl": "Bekijk anime & cartoons online in het Thais nagesynchroniseerde anime of Thais ondertitelde anime met zelfs de nieuwste afleveringen."
 	},
 	"url": "animekimi.com",
 	"version": "1.3.3",

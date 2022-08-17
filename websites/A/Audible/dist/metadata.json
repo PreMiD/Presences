@@ -7,7 +7,7 @@
 	"service": "Audible",
 	"description": {
 		"en": "Audible is an American online audiobook and podcast service that allows users to purchase and stream audiobooks and other forms of spoken word content.",
-		"nl": "Audible is een Amerikaanse online audioboek en podcastdienst die gebruikers de mogelijkheid biedt audioboeken en andere vormen van gesproken woordinhoud te kopen en te streamen."
+		"nl": "Audible is een Amerikaanse online audioboek- en podcastdienst die gebruikers de mogelijkheid biedt audioboeken en andere vormen van gesproken woordinhoud te kopen en te streamen."
 	},
 	"url": "www.audible.com",
 	"version": "1.0.1",

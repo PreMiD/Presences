@@ -6,13 +6,14 @@
 	},
 	"service": "Homestuck^2",
 	"description": {
-		"en": "The Homestuck^2 website hosts the official continuation of the popular MSPaintAdventure Homestuck and all Patreon-driven bonus content."
+		"en": "The Homestuck^2 website hosts the official continuation of the popular MSPaintAdventure Homestuck and all Patreon-driven bonus content.",
+		"nl": "De Homestuck^2 website host de officiële voortzetting van het populaire MSPaintAdventure Homestuck en alle Patreon-gedreven bonus content."
 	},
 	"url": [
 		"www.homestuck2.com",
 		"homestuck2.com"
 	],
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/wYCAFtE.png",
 	"thumbnail": "https://i.imgur.com/bnnYvGO.png",
 	"color": "#f2a400",

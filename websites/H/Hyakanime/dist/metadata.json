@@ -7,13 +7,14 @@
 	"service": "Hyakanime",
 	"description": {
 		"en": "Create your own library of anime!",
-		"fr": "Crée ta bibliothèque d'animés !"
+		"fr": "Crée ta bibliothèque d'animés !",
+		"nl": "Maak je eigen bibliotheek van anime!"
 	},
 	"url": [
 		"hyakanime.fr",
 		"www.hyakanime.fr"
 	],
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/cRrhUIZ.png",
 	"thumbnail": "https://i.imgur.com/vsxIEWI.png",
 	"color": "#089BEF",

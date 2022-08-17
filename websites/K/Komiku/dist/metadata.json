@@ -7,10 +7,11 @@
 	"service": "Komiku",
 	"description": {
 		"en": "Komiku is a comic reading platform with the most complete list of comics in Indonesia.",
-		"id": "Komiku adalah platform baca komik dengan daftar komik paling lengkap di Indonesia."
+		"id": "Komiku adalah platform baca komik dengan daftar komik paling lengkap di Indonesia.",
+		"nl": "Komiku is een platform voor het lezen van strips met de meest complete lijst van strips in Indonesië."
 	},
 	"url": "komiku.id",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/zP76GVO.png",
 	"thumbnail": "https://i.imgur.com/d0l7u4C.png",
 	"color": "#4165b3",

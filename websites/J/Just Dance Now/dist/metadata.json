@@ -6,10 +6,11 @@
 	},
 	"service": "Just Dance Now",
 	"description": {
-		"en": "UNLEASH YOUR INNER DANCER! · Experience Just Dance's greatest dance routines without a console."
+		"en": "UNLEASH YOUR INNER DANCER! · Experience Just Dance's greatest dance routines without a console.",
+		"nl": "LAAT JE INNERLIJKE DANSER LOS! - Ervaar de grootste dansroutines van Just Dance zonder console."
 	},
 	"url": "justdancenow.com",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/nq0goQ9.png",
 	"thumbnail": "https://i.imgur.com/S5p9Pwj.png",
 	"color": "#558e9c",

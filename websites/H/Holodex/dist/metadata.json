@@ -6,13 +6,14 @@
 	},
 	"service": "Holodex",
 	"description": {
-		"en": "Watch your favorite vtubers and find their subbed clips in your language. Tracks 400+ vtubers and almost 700 clippers from Hololive to Independents."
+		"en": "Watch your favorite vtubers and find their subbed clips in your language. Tracks 400+ vtubers and almost 700 clippers from Hololive to Independents.",
+		"nl": "Bekijk je favoriete vtubers en vind hun ondertitelde clips in jouw taal. Tracks 400+ vtubers en bijna 700 clippers van Hololive tot zelfstandige."
 	},
 	"url": [
 		"staging.holodex.net",
 		"holodex.net"
 	],
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/ywSCOHi.png",
 	"thumbnail": "https://i.imgur.com/FM9qnIG.png",
 	"color": "#64b5f6",

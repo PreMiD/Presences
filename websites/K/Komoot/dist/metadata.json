@@ -6,7 +6,8 @@
 	},
 	"service": "Komoot",
 	"description": {
-		"en": "Komoot is an app that lets you find, plan, and share adventures with the easy route planner."
+		"en": "Komoot is an app that lets you find, plan, and share adventures with the easy route planner.",
+		"nl": "Komoot is een app waarmee je avonturen kunt vinden, plannen en delen met de eenvoudige routeplanner."
 	},
 	"url": [
 		"www.komoot.com",
@@ -16,7 +17,7 @@
 		"www.komoot.es",
 		"www.komoot.nl"
 	],
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/G8vn23a.png",
 	"thumbnail": "https://i.imgur.com/mbb326e.png",
 	"color": "#FFFFFF",

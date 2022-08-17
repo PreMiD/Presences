@@ -6,10 +6,11 @@
 	},
 	"service": "Homestuck",
 	"description": {
-		"en": "Formerly known as MSPaintAdventures, Homestuck.com hosts webcomics created by Andrew Hussie."
+		"en": "Formerly known as MSPaintAdventures, Homestuck.com hosts webcomics created by Andrew Hussie.",
+		"nl": "Voorheen bekend als MSPaintAdventures, biedt Homestuck.com webcomics aan gemaakt door Andrew Hussie."
 	},
 	"url": "www.homestuck.com",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/r6Hyf4D.png",
 	"thumbnail": "https://i.imgur.com/fgZQAYZ.png",
 	"color": "#0fff00",

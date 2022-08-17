@@ -6,10 +6,11 @@
 	},
 	"service": "jpdb",
 	"description": {
-		"en": "Powerful Japanese dictionary and an all-in-one learning system for kanji and vocabulary."
+		"en": "Powerful Japanese dictionary and an all-in-one learning system for kanji and vocabulary.",
+		"nl": "Krachtig Japans woordenboek en een alles-in-één leersysteem voor kanji en woordenschat."
 	},
 	"url": "jpdb.io",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/6BRVubq.png",
 	"thumbnail": "https://i.imgur.com/X6tShYX.png",
 	"color": "#fe0000",

@@ -6,11 +6,12 @@
 	},
 	"service": "HentaiLA",
 	"description": {
-		"en": "HentaiLa the best site to watch hentai in Latin America. We have uncensored hentai separated into genres and categories.",
-		"es": "HentaiLa el mejor sitio para ver hentai en Latinoamérica. Tenemos hidrógeno sin censura separado en géneros y categorías."
+		"en": "HentaiLa is the best site to watch hentai in Latin America. We have uncensored hentai separated into genres and categories.",
+		"es": "HentaiLa el mejor sitio para ver hentai en Latinoamérica. Tenemos hidrógeno sin censura separado en géneros y categorías.",
+		"nl": "HentaiLa is de beste site om hentai te bekijken in Latijns-Amerika. We hebben ongecensureerde hentai onderverdeeld in genres en categorieën."
 	},
 	"url": "hentaila.com",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/h2Jxbzn.png",
 	"thumbnail": "https://i.imgur.com/YnzudeZ.png",
 	"color": "#EA4C89",

@@ -7,13 +7,14 @@
 	"service": "KickAssFingers",
 	"description": {
 		"en": "Test your typing speed on a different typing tests, earn points, win medals and climb the rankings.",
-		"it": "Testa tua velocità di battitura in diversi tipi di test, guadagna punti, vinci medaglie e scala le classifiche."
+		"it": "Testa tua velocità di battitura in diversi tipi di test, guadagna punti, vinci medaglie e scala le classifiche.",
+		"nl": "Test je typesnelheid op een andere typetest, verdien punten, win medailles en beklim de ranglijsten."
 	},
 	"url": [
 		"kickassfingers.com",
 		"www.kickassfingers.com"
 	],
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/9eu1lO1.png",
 	"thumbnail": "https://i.imgur.com/iBVW8mA.png",
 	"color": "#976398",

@@ -8,11 +8,12 @@
 	"description": {
 		"es": "Un recurso de aprendizaje personalizado, para todas las edades. Khan Academy ofrece ejercicios de práctica, videos instructivos y un panel de aprendizaje personalizado que permite a los estudiantes aprender a su propio ritmo, dentro y fuera del salón de clases.",
 		"en": "Khan Academy offers practice exercises, instructional videos, and a personalized learning dashboard that empower learners to study at their own pace in and outside of the classroom.",
-		"vi_VN": "Khan Academy cung cấp các bài luyện tập, video hướng dẫn, và một bảng điều khiển được cá nhân hoá để giúp các học viên có thể tự học trong và ngoài lớp."
+		"vi_VN": "Khan Academy cung cấp các bài luyện tập, video hướng dẫn, và một bảng điều khiển được cá nhân hoá để giúp các học viên có thể tự học trong và ngoài lớp.",
+		"nl": "Khan Academy biedt oefenoefeningen, instructievideo's en een gepersonaliseerd leerdashboard waarmee leerlingen in hun eigen tempo kunnen studeren, zowel binnen als buiten het klaslokaal."
 	},
 	"url": "www.khanacademy.org",
 	"regExp": "([a-z]+[.])+khanacademy[.]org[/]",
-	"version": "1.1.9",
+	"version": "1.1.10",
 	"logo": "https://i.imgur.com/747RYiz.png",
 	"thumbnail": "https://i.imgur.com/0oNkO8J.png",
 	"color": "#4de682",

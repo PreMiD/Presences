@@ -7,10 +7,11 @@
 	"service": "HentaiVN",
 	"description": {
 		"en": "HentaiVN is the largest Otaku forum and Hentai manga website in Vietnam",
-		"vi_VN": "HentaiVN là website đọc truyện Hentai lớn nhất Việt Nam, nó cũng là diễn đàn dành cho wibu hàng đầu cả nước."
+		"vi_VN": "HentaiVN là website đọc truyện Hentai lớn nhất Việt Nam, nó cũng là diễn đàn dành cho wibu hàng đầu cả nước.",
+		"nl": "HentaiVN is het grootste Otaku-forum en Hentai manga website in Vietnam"
 	},
 	"url": "hentaivn.fun",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"logo": "https://i.imgur.com/Ihee8C2.png",
 	"thumbnail": "https://i.imgur.com/TkWSqnL.png",
 	"color": "#299CEE",

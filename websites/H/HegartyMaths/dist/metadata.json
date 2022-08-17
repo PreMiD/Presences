@@ -6,10 +6,11 @@
 	},
 	"service": "HegartyMaths",
 	"description": {
-		"en": "HegartyMaths is an educational tool used by schools in the United Kingdom to set mathematics homework tasks."
+		"en": "HegartyMaths is an educational tool used by schools in the United Kingdom to set mathematics homework tasks.",
+		"nl": "HegartyMaths is een educatief hulpmiddel dat door scholen in het Verenigd Koninkrijk wordt gebruikt om huiswerkopdrachten voor wiskunde op te geven."
 	},
 	"url": "hegartymaths.com",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/Z8MBnw9.jpg",
 	"thumbnail": "https://i.imgur.com/67EEyre.png",
 	"color": "#33a7e0",

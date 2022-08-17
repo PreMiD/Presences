@@ -6,13 +6,14 @@
 	},
 	"service": "Hiven",
 	"description": {
-		"en": "Hiven connects you to friends, fans and new exciting communties. From private, to public, to monetized groups - Hiven's where it happens."
+		"en": "Hiven connects you to friends, fans and new exciting communties. From private, to public, to monetized groups - Hiven's where it happens.",
+		"nl": "Hiven brengt je in contact met vrienden, fans en nieuwe spannende gemeenschappen. Van privé, tot openbare, tot groepen die inkomsten genereren - Hiven is waar het gebeurt."
 	},
 	"url": [
 		"hiven.io",
 		"app.hiven.io"
 	],
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/3S9suBH.jpg",
 	"thumbnail": "https://i.imgur.com/NtkbuT6.png",
 	"color": "#ff0083",

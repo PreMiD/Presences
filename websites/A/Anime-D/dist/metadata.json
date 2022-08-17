@@ -6,10 +6,8 @@
 	},
 	"service": "Anime-D",
 	"description": {
-		"en": "Anime-D anime good anime web site cartoon online The latest episode loads quickly. Watch for free.",
-		"th": "Anime-D อนิเมะ ดี เว็บดูอนิเมะ การ์ตูนออนไลน์ ตอนล่าสุดโหลดเร็ว ดูฟรี",
-		"vi_VN": "Anime-D anime hay trang web xem những tập phim mới nhất nhanh chóng. Xem hoàn toàn miễn phí.",
-		"nl": "Anime-D goede anime website cartoon online De nieuwste aflevering wordt snel geladen. Kijk gratis."
+		"en": "Anime-D is a good website to watch anime and cartoons online with even the latest episodes. The site loads quickly and it's free to watch.",
+		"nl": "Anime-D is een goede website voor het online bekijken van anime en tekenfilms, met zelfs de nieuwe afleveringen. De website laad snel and het is gratis."
 	},
 	"url": "anime-d.com",
 	"regExp": "([a-z0-9-]+[.])*anime-d[.]com[/]",

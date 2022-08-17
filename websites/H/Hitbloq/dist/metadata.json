@@ -6,10 +6,11 @@
 	},
 	"service": "Hitbloq",
 	"description": {
-		"en": "Hitbloq is a competitive Beat Saber service with endless map pools where anything is rankable."
+		"en": "Hitbloq is a competitive Beat Saber service with endless map pools where anything is rankable.",
+		"nl": "Hitbloq is een competitieve Beat Saber service met eindeloze map pools waar alles te rangschikken is."
 	},
 	"url": "hitbloq.com",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/BtSGm7r.png",
 	"thumbnail": "https://i.imgur.com/G4avVQk.png",
 	"color": "#0099db",
