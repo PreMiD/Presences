@@ -8,9 +8,11 @@ interface Maps {
 	id: number;
 	map: string;
 	key?: string[];
-	largeImageKey: string;
-	pvlargeImageKey: string | null;
-	smallImageKey: string;
+	image: {
+		large: string;
+		small: string;
+		preview?: string | string[] | null;
+	};
 	starting?: number;
 	ending?: number;
 }
@@ -18,8 +20,11 @@ interface Maps {
 interface City {
 	position?: number;
 	map: string;
-	largeImageKey: string;
-	smallImageKey: string;
+	image: {
+		small: string;
+		large?: string | null;
+		preview: string | string[] | null;
+	};
 }
 
 const map: Maps[] = [
@@ -27,26 +32,32 @@ const map: Maps[] = [
 			city: true,
 			id: 2,
 			map: "Teyvat",
-			largeImageKey: "teyvat_map",
-			pvlargeImageKey: "teyvat_map",
-			smallImageKey: "emblem_unknown",
+			image: {
+				large: "teyvat_map",
+				small: "emblem_unknown",
+				preview: "teyvat_map",
+			},
 		},
 		{
 			city: false,
 			id: 7,
 			map: "Enkanomiya",
-			largeImageKey: "enkanomiya_map",
-			pvlargeImageKey: "preview_enkanomiya",
-			smallImageKey: "emblem_enkanomiya",
+			image: {
+				large: "enkanomiya_map",
+				small: "emblem_enkanomiya",
+				preview: "preview_enkanomiya",
+			},
 		},
 		{
 			city: false,
 			id: 9,
 			map: "The Chasm: Underground Mines",
-			largeImageKey: "the_chasm_underground_mines_map",
 			key: ["chasm", "the-chasm-underground"],
-			pvlargeImageKey: "preview_the_chasm_underground_mines",
-			smallImageKey: "emblem_thechasm",
+			image: {
+				large: "the_chasm_underground_mines_map",
+				small: "emblem_thechasm",
+				preview: "preview_the_chasm_underground_mines",
+			},
 		},
 		{
 			// Event map 2.8
@@ -55,9 +66,11 @@ const map: Maps[] = [
 			id: 12,
 			map: "Golden Apple Archipelago",
 			key: ["isles", "golden-apple-archipelago-2-8"],
-			largeImageKey: "golden_apple_archipelago_map_2_8",
-			pvlargeImageKey: "preview_golden_apple_archipelago_2_8",
-			smallImageKey: "emblem_isles",
+			image: {
+				large: "golden_apple_archipelago_map_2_8",
+				small: "emblem_isles",
+				preview: "preview_golden_apple_archipelago_2_8",
+			},
 			starting: 1657854000, // Fri, 15 Jul 2022 03:00 GMT
 			ending: 1661295600, // Wed, 24 Aug 2022 23:00 GMT
 		},
@@ -65,38 +78,59 @@ const map: Maps[] = [
 			city: false,
 			id: 0,
 			map: "Unknown",
-			largeImageKey: "unknown_map",
-			pvlargeImageKey: null,
-			smallImageKey: "emblem_unknown",
+			image: {
+				large: "unknown_map",
+				small: "emblem_unknown",
+			},
 		},
 	],
 	city: City[] = [
 		{
 			position: 1200,
 			map: "Mondstadt",
-			largeImageKey: "preview_mondstadt",
-			smallImageKey: "emblem_mondstadt",
+			image: {
+				small: "emblem_mondstadt",
+				preview: "preview_mondstadt",
+			},
 		},
 		{
 			position: 4000,
 			map: "Liyue",
-			largeImageKey: "preview_liyue",
-			smallImageKey: "emblem_liyue",
+			image: {
+				small: "emblem_liyue",
+				preview: "preview_liyue",
+			},
 		},
 		{
 			position: 9000,
 			map: "Inazuma",
-			largeImageKey: "preview_tenshukaku",
-			smallImageKey: "emblem_inazuma",
+			image: {
+				small: "emblem_inazuma",
+				preview: "preview_tenshukaku",
+			},
+		},
+		{
+			position: 0,
+			map: "Sumeru",
+			image: {
+				large: "sumeru_map",
+				small: "emblem_sumeru",
+				preview: "preview_sumeru",
+			},
 		},
 	];
 
-let getpos: number, current: Maps, currentCity: City;
+let oldMap: string,
+	current: Maps,
+	currentCity: City,
+	getPosition: number,
+	randomNumber: number;
 
 presence.on("UpdateData", async () => {
-	const [showPreview, timestamps] = await Promise.all([
-			presence.getSetting<boolean>("showPreview"),
+	const [timestamps, showPreview, randomPreview] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
+			presence.getSetting<boolean>("showPreview"),
+			presence.getSetting<boolean>("randomPreview"),
 		]),
 		presenceData: PresenceData = {
 			details: "Genshin Impact Map",
@@ -129,15 +163,20 @@ presence.on("UpdateData", async () => {
 			);
 			break;
 		default: // Official Site
+			if (pathname.includes("signin-sea")) return;
 			current = map.find(
 				i => i.id === (parseInt(hash?.split("/map/")[1]?.split("?")[0]) || 2)
 			);
-			getpos = parseInt(new URLSearchParams(hash).get("center"));
-			if (current?.city) currentCity = city.find(i => i.position > getpos);
+			getPosition = parseInt(new URLSearchParams(hash).get("center"));
+			if (current?.city) currentCity = city.find(i => i.position > getPosition);
 			else currentCity = null;
 			break;
 	}
 	if (!current) return;
+	if (oldMap !== (currentCity?.map ?? current.map)) {
+		oldMap = currentCity?.map ?? current.map;
+		randomNumber = Math.random();
+	}
 	if (
 		current.starting &&
 		current.ending &&
@@ -155,17 +194,12 @@ presence.on("UpdateData", async () => {
 		current = map[0];
 	presenceData.details = current.map;
 	presenceData.state = current.city && currentCity ? currentCity.map : null;
-	presenceData.largeImageKey =
-		showPreview && currentCity
-			? currentCity.largeImageKey
-			: showPreview
-			? current.pvlargeImageKey
-			: current.largeImageKey;
-	presenceData.smallImageKey = current.city
-		? currentCity
-			? currentCity.smallImageKey
-			: current.smallImageKey
-		: current.smallImageKey;
+	presenceData.largeImageKey = getImage(
+		showPreview ? "preview" : "large",
+		randomPreview
+	);
+	presenceData.smallImageKey =
+		current.city && currentCity ? currentCity.image.small : current.image.small;
 	presenceData.smallImageText = host.replace(".com", "");
 	if (!timestamps) {
 		delete presenceData.startTimestamp;
@@ -174,3 +208,14 @@ presence.on("UpdateData", async () => {
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
+
+function getImage(type: "large" | "preview", random?: boolean) {
+	const currentImage = currentCity?.image ?? current.image;
+	return (
+		Array.isArray(currentImage[type]) && type === "preview"
+			? currentImage[type][
+					random ? Math.floor(randomNumber * currentImage[type].length) : 0
+			  ]
+			: currentImage[type] || current.image.large
+	) as string;
+}
