@@ -10,13 +10,14 @@
 		"nimo.tv"
 	],
 	"description": {
-		"en": "Nimo TV is a leading game live streaming platform around the world. Watch the hottest PC games live stream, mobile games live stream, and esports live now."
+		"en": "Nimo TV is a leading game live streaming platform around the world. Watch the hottest PC games live stream, mobile games live stream, and esports live now.",
+		"nl": "Nimo TV is een toonaangevend platform voor livestreaming van games over de hele wereld. Bekijk nu de populairste livestream van pc-games, mobiele-games en esports."
 	},
 	"url": [
 		"www.nimo.tv",
 		"dashboard.nimo.tv"
 	],
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/dXRRZoM.png",
 	"thumbnail": "https://i.imgur.com/Sq0hpoF.jpeg",
 	"color": "#622DF7",

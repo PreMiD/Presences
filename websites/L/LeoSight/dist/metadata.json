@@ -7,7 +7,8 @@
 	"service": "LeoSight",
 	"description": {
 		"cs_CZ": "Discordové RPC pro stránku LeoSight, které vám umožní sdílet vaši aktivitu s přáteli.",
-		"en": "Discord RPC for LeoSight, which can show your activity to your friends."
+		"en": "Discord RPC for LeoSight, which can show your activity to your friends.",
+		"nl": "Discord RPC voor LeoSight, die je activiteit aan je vrienden kan laten zien."
 	},
 	"url": [
 		"leosight.cz",
@@ -16,7 +17,7 @@
 		"eco.leosight.cz",
 		"guard.leosight.cz"
 	],
-	"version": "1.1.7",
+	"version": "1.1.8",
 	"logo": "https://i.imgur.com/HOmso2n.png",
 	"thumbnail": "https://i.imgur.com/KR8f71Y.png",
 	"color": "#595959",

@@ -9,14 +9,15 @@
 		"Manga4Life"
 	],
 	"description": {
-		"en": "MangaLife: Read free manga online."
+		"en": "MangaLife: Read free manga online.",
+		"nl": "MangaLife: Lees gratis manga online."
 	},
 	"url": [
 		"www.manga4life.com",
 		"manga4life.com"
 	],
 	"regExp": "([a-z0-9]+[.])?manga4life[.]com",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/mJTwQxZ.png",
 	"thumbnail": "https://i.imgur.com/7R0tE9U.png",
 	"color": "#6cabdf",

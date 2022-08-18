@@ -6,13 +6,14 @@
 	},
 	"service": "Minehut",
 	"description": {
-		"en": "Minehut provides unlimited free server hosting for the Minecraft Community."
+		"en": "Minehut provides unlimited free server hosting for the Minecraft Community.",
+		"nl": "Minehut biedt onbeperkte gratis server hosting voor de Minecraft gemeenschap."
 	},
 	"url": [
 		"minehut.com",
 		"shop.minehut.com"
 	],
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/FOvZNY6.png",
 	"thumbnail": "https://i.imgur.com/o38mcIN.png",
 	"color": "#488aff",

@@ -9,10 +9,11 @@
 		"LPG"
 	],
 	"description": {
-		"en": "Here at LIME, we have some of the best gaming equipment and accessories."
+		"en": "Here at LIME, we have some of the best gaming equipment and accessories.",
+		"nl": "Hier bij LIME hebben we enkele van de beste gaming-apparatuur en accessoires."
 	},
 	"url": "limeprogaming.com",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/IZlOaJU.png",
 	"thumbnail": "https://i.imgur.com/FUBK77b.png",
 	"color": "#9bda45",

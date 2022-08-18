@@ -7,10 +7,11 @@
 	"service": "Lolz.guru",
 	"description": {
 		"en": "LZT (lolzteam) - a forum about games, ways to earn and giveaways",
-		"ru": "LZT (lolzteam, лолзтим) - форум об играх, способы заработка и раздачи"
+		"ru": "LZT (lolzteam, лолзтим) - форум об играх, способы заработка и раздачи",
+		"nl": "LZT (lolzteam) - een forum over spelletjes, manieren om te verdienen en giveaways"
 	},
 	"url": "lolz.guru",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/du58qsy.jpg",
 	"thumbnail": "https://i.imgur.com/7yywlIW.jpg",
 	"color": "#23a86d",

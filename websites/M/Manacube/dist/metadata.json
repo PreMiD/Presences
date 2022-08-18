@@ -6,11 +6,12 @@
 	},
 	"service": "Manacube",
 	"description": {
-		"en": "ManaCube is a premium Minecraft network with a range of feature-rich gamemodes."
+		"en": "ManaCube is a premium Minecraft network with a range of feature-rich gamemodes.",
+		"nl": "ManaCube is een premium Minecraft netwerk met een reeks van functierijke gamemodes."
 	},
 	"url": "manacube.com",
 	"regExp": "([a-z0-9-]+[.])*manacube[.]com[/]",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/sBgHblJ.png",
 	"thumbnail": "https://i.imgur.com/D04YmVN.png",
 	"color": "#06D1DF",

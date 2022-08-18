@@ -6,10 +6,11 @@
 	},
 	"service": "Nightride.fm",
 	"description": {
-		"en": "Nightride.FM is an independently owned and operated synthwave internet radio station."
+		"en": "Nightride.FM is an independently owned and operated synthwave internet radio station.",
+		"nl": "Nightride.FM is een onafhankelijk synthwave internet radiostation."
 	},
 	"url": "nightride.fm",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/HnZw53P.png",
 	"thumbnail": "https://i.imgur.com/z1GvSQG.png",
 	"color": "#c240a6",

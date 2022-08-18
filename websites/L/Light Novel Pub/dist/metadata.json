@@ -6,14 +6,15 @@
 	},
 	"service": "Light Novel Pub",
 	"description": {
-		"en": "Light Novel Pub: Special platform where you can read the translated versions of world famous Japanese Light Novels, Chinese Light Novels and Korean Light Novels in English. Start reading now to explore this mysterious fantasy world."
+		"en": "Light Novel Pub: Special platform where you can read the translated versions of world famous Japanese Light Novels, Chinese Light Novels and Korean Light Novels in English. Start reading now to explore this mysterious fantasy world.",
+		"nl": "Licht Novel Pub: Speciaal platform waar je de vertaalde versies van wereldberoemde Japanse Light Novels, Chinese Light Novels en Koreaanse Light Novels in het Engels kunt lezen. Begin nu met lezen om deze mysterieuze fantasiewereld te ontdekken."
 	},
 	"url": [
 		"www.lightnovelpub.com",
 		"lightnovelpub.com"
 	],
 	"regExp": "([a-z0-9]+[.])?lightnovelpub[.]com",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/JgWlu7j.png",
 	"thumbnail": "https://i.imgur.com/mulJD3I.png",
 	"color": "#546573",

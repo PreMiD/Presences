@@ -7,10 +7,11 @@
 	"service": "MyAnimeList.vip",
 	"description": {
 		"en": "MyAnimeList is a brazilian site where you can watch the best animes with the best quality!",
-		"pt_BR": "MyAnimeList é um site brasileiro onde você pode assistir os melhores animes com a melhor qualidade!"
+		"pt_BR": "MyAnimeList é um site brasileiro onde você pode assistir os melhores animes com a melhor qualidade!",
+		"nl": "MyAnimeList is een Braziliaanse site waar je de beste animes in de beste kwaliteit kunt bekijken!"
 	},
 	"url": "myanimelist.vip",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/byl8bvz.png",
 	"thumbnail": "https://i.imgur.com/pxSgtdy.png",
 	"color": "#c62d3c",

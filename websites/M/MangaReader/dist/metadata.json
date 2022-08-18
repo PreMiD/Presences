@@ -6,13 +6,14 @@
 	},
 	"service": "MangaReader",
 	"description": {
-		"en": "MangaReader.to is a free tool for everyone, where users from different regions can read Manga completely free. There is an extensive collection of Manga for every age group, which allows users from other areas to find their favorite stories. The most crucial part of MangaReader.to is that you won’t get ads on the page to have a peaceful reading."
+		"en": "MangaReader.to is a free tool for everyone, where users from different regions can read Manga completely free. There is an extensive collection of Manga for every age group, which allows users from other areas to find their favorite stories. The most crucial part of MangaReader.to is that you won’t get ads on the page to have a peaceful reading.",
+		"nl": "MangaReader.to is een gratis tool voor iedereen, waar gebruikers uit verschillende regio's Manga volledig gratis kunnen lezen. Er is een uitgebreide collectie Manga voor elke leeftijdsgroep, waardoor gebruikers uit andere gebieden hun favoriete verhalen kunnen vinden. Het meest cruciale onderdeel van MangaReader.to is dat u geen advertenties op de pagina krijgt om rustig te lezen."
 	},
 	"url": [
 		"mangareader.to",
 		"www.mangareader.to"
 	],
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/TEB9rWf.png",
 	"thumbnail": "https://i.imgur.com/8MhY0Ov.png",
 	"color": "#6241B0",

@@ -6,11 +6,12 @@
 	},
 	"service": "Miraheze",
 	"description": {
-		"en": "Miraheze is a non-profit wiki farm with the goal of providing everyone high quality wiki hosting with flexibility."
+		"en": "Miraheze is a non-profit wiki farm with the goal of providing everyone high quality wiki hosting with flexibility.",
+		"nl": "Miraheze is een wiki-farm zonder winstoogmerk met als doel iedereen wiki-hosting van hoge kwaliteit te bieden met flexibiliteit."
 	},
 	"url": "www.miraheze.org",
 	"regExp": "([a-z0-9-]+[.])?miraheze[.](org|wiki)[/]",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/LAkD3vB.png",
 	"thumbnail": "https://i.imgur.com/Yygo8FE.png",
 	"color": "#2F5782",

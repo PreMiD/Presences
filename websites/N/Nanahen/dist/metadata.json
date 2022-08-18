@@ -7,10 +7,11 @@
 	"service": "Nanahen",
 	"description": {
 		"en": "Nanahen is an doujinshi scanlation website with indonesian languange",
-		"id": "Nanahen adalah website scanlation doujinshi bahasa indonesia"
+		"id": "Nanahen adalah website scanlation doujinshi bahasa indonesia",
+		"nl": "Nanahen is een doujinshi scanlation website in het Indonesisch"
 	},
 	"url": "nanahen.com",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/q7Q01Bh.png",
 	"thumbnail": "https://i.imgur.com/vNpw9NQ.png",
 	"color": "#d8345f",

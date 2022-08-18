@@ -6,10 +6,11 @@
 	},
 	"service": "Minesweeper",
 	"description": {
-		"en": "Play Minesweeper online with over 5 million players from around the world!"
+		"en": "Play Minesweeper online with over 5 million players from around the world!",
+		"nl": "Speel Minesweeper online met meer dan 5 miljoen spelers van over de hele wereld!"
 	},
 	"url": "minesweeper.online",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/IVV8LJg.png",
 	"thumbnail": "https://i.imgur.com/ZsExngi.png",
 	"color": "#666666",

@@ -6,10 +6,11 @@
 	},
 	"service": "Localizor",
 	"description": {
-		"en": "Localizor is an innovative crowd translation platform built to translate your game with the help of your own and our community"
+		"en": "Localizor is an innovative crowd translation platform built to translate your game with the help of your own and our community",
+		"nl": "Localizor is een innovatieve publieke vertalings-platform gebouwd om jouw spel te vertalen met de hulp van jopu en jouw eigen gemeenschap"
 	},
 	"url": "www.localizor.com",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/b7Go6NC.png",
 	"thumbnail": "https://i.imgur.com/WQkfFet.png",
 	"color": "#000000",

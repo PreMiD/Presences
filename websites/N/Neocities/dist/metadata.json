@@ -6,11 +6,12 @@
 	},
 	"service": "Neocities",
 	"description": {
-		"en": "Neocities is a social network of 428,200 web sites that are bringing back the lost individual creativity of the web. We offer free static web hosting and tools that allow you to create your own web site. Join us! Note: Does not work on custom domains."
+		"en": "Neocities is a social network of 428,200 web sites that are bringing back the lost individual creativity of the web. We offer free static web hosting and tools that allow you to create your own web site. Join us! Note: Does not work on custom domains.",
+		"nl": "Neocities is een sociaal netwerk van 428.200 websites die de verloren individuele creativiteit van het web terugbrengen. Wij bieden gratis statische webhosting en tools aan waarmee je je eigen website kunt maken. Sluit je bij ons aan! Opmerking: Werkt niet op aangepaste domeinen."
 	},
 	"url": "neocities.org",
 	"regExp": "([a-z0-9-_]+[.])?neocities[.]org",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/NQ9JwPd.png",
 	"thumbnail": "https://i.imgur.com/fH9vMF7.png",
 	"color": "#F59C32",

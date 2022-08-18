@@ -6,10 +6,11 @@
 	},
 	"service": "Merriam-Webster",
 	"description": {
-		"en": "The dictionary by Merriam-Webster is America's most trusted online dictionary for English word definitions, meanings, and pronunciation."
+		"en": "The dictionary by Merriam-Webster is America's most trusted online dictionary for English word definitions, meanings, and pronunciation.",
+		"nl": "Het woordenboek van Merriam-Webster is Amerika's meest vertrouwde online woordenboek voor Engelse woorddefinities, betekenissen en uitspraak."
 	},
 	"url": "www.merriam-webster.com",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/Iw9ZHAJ.png",
 	"thumbnail": "https://i.imgur.com/0gUOyxz.jpg",
 	"color": "#d8121b",
