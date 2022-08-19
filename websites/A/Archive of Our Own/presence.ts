@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/") presenceData.details = "Viewing home page";
 	else if (pathname.includes("/tags/")) {
 		if (tag) {
-			presenceData.details = `Browsing tag : ${
+			presenceData.details = `Browsing tag: ${
 				document.querySelector(".heading > .tag").textContent
 			}`;
 			presenceData.state = document.querySelector("h2.heading").textContent;
