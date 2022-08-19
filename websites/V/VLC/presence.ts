@@ -269,9 +269,9 @@ const getStatus = setLoop(function () {
 							media.album = null;
 						}
 
-						req.responseXML.getElementsByName("trackNumber")[0]
+						req.responseXML.getElementsByName("track_number")[0]
 							? (media.trackNumber = decodeReq(
-									req.responseXML.getElementsByName("trackNumber")[0]
+									req.responseXML.getElementsByName("track_number")[0]
 							  ))
 							: (media.trackNumber = null);
 
