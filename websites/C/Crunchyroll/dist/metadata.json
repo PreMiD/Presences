@@ -6,6 +6,10 @@
 	},
 	"contributors": [
 		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
+		},
+		{
 			"name": "ScarVite",
 			"id": "141218912934166528"
 		}
@@ -27,7 +31,7 @@
 		"www.crunchyroll.com",
 		"beta.crunchyroll.com"
 	],
-	"version": "2.9.1",
+	"version": "2.10.0",
 	"logo": "https://i.imgur.com/LpTKP8c.png",
 	"thumbnail": "https://i.imgur.com/hzM7YCb.png",
 	"color": "#f47521",
