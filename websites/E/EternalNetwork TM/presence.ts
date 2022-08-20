@@ -30,6 +30,7 @@ presence.on("UpdateData", async () => {
 		buttons = await presence.getSetting<boolean>("buttons"),
 		{ hostname, pathname, search, hash } = document.location,
 		etrnl = "eternalnetworktm.com",
+		etrnltm = "etrnltm.com",
 		ttl = document.title;
 
 	if (oldLang !== newLang || !strings) {
@@ -166,6 +167,40 @@ presence.on("UpdateData", async () => {
 			if (search.includes("?do=settings"))
 				presenceData.state = "Adding new service !";
 			delete presenceData.buttons;
+
+			break;
+		}
+		case `et-log.${etrnl}`:
+		case `www.et-log.${etrnl}`: {
+			presenceData.smallImageKey = "eternallogistic_logo";
+
+			if (pathname.startsWith("/")) presenceData.state = ttl;
+
+			break;
+		}
+		case `dev.${etrnl}`:
+		case `www.dev.${etrnl}`: {
+			presenceData.smallImageKey = "eternalnetworktm_dev";
+
+			if (pathname.startsWith("/")) {
+				presenceData.state = "Developing new website or a features !";
+				presenceData.smallImageText = "Development & Features";
+				delete presenceData.buttons;
+			}
+
+			break;
+		}
+		case `shortener.${etrnltm}`:
+		case `www.shortener.${etrnltm}`: {
+			presenceData.smallImageKey = "eternalshortener_logo";
+
+			if (pathname.startsWith("/")) presenceData.state = ttl;
+
+			if (pathname.includes("/admin")) {
+				presenceData.state = "Adding new incident 😥 !";
+				presenceData.smallImageText = "Admin Panel";
+				delete presenceData.buttons;
+			}
 
 			break;
 		}
