@@ -3,84 +3,78 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-interface Maps {
-	city: boolean;
+interface Maps extends Image {
 	id: number;
 	map: string;
 	key?: string[];
-	image: {
-		large: string;
-		small: string;
-		preview?: string | string[] | null;
-	};
+	city?: boolean;
 	starting?: number;
 	ending?: number;
 }
 
-interface City {
-	position?: number;
+interface City extends Image {
+	position: number;
 	map: string;
+}
+
+interface Image {
 	image: {
 		small: string;
-		large?: string | null;
-		preview: string | string[] | null;
+		default: string;
+		preview?: string | string[];
 	};
 }
 
 const map: Maps[] = [
 		{
-			city: true,
 			id: 2,
 			map: "Teyvat",
+			city: true,
 			image: {
-				large: "teyvat_map",
 				small: "emblem_unknown",
+				default: "teyvat_map",
 				preview: "teyvat_map",
 			},
 		},
 		{
-			city: false,
 			id: 7,
 			map: "Enkanomiya",
 			image: {
-				large: "enkanomiya_map",
 				small: "emblem_enkanomiya",
+				default: "enkanomiya_map",
 				preview: "preview_enkanomiya",
 			},
 		},
 		{
-			city: false,
 			id: 9,
 			map: "The Chasm: Underground Mines",
 			key: ["chasm", "the-chasm-underground"],
 			image: {
-				large: "the_chasm_underground_mines_map",
 				small: "emblem_thechasm",
+				default: "the_chasm_underground_mines_map",
 				preview: "preview_the_chasm_underground_mines",
 			},
 		},
 		{
 			// Event map 2.8
 			// https://www.hoyolab.com/article/5958494/
-			city: false,
 			id: 12,
 			map: "Golden Apple Archipelago",
 			key: ["isles", "golden-apple-archipelago-2-8"],
 			image: {
-				large: "golden_apple_archipelago_map_2_8",
 				small: "emblem_isles",
+				default: "golden_apple_archipelago_map_2_8",
 				preview: "preview_golden_apple_archipelago_2_8",
 			},
 			starting: 1657854000, // Fri, 15 Jul 2022 03:00 GMT
 			ending: 1661295600, // Wed, 24 Aug 2022 23:00 GMT
 		},
 		{
-			city: false,
 			id: 0,
 			map: "Unknown",
 			image: {
-				large: "unknown_map",
 				small: "emblem_unknown",
+				default: "unknown_map",
 			},
 		},
 	],
@@ -90,6 +84,7 @@ const map: Maps[] = [
 			map: "Mondstadt",
 			image: {
 				small: "emblem_mondstadt",
+				default: "mondstadt_map",
 				preview: "preview_mondstadt",
 			},
 		},
@@ -98,6 +93,7 @@ const map: Maps[] = [
 			map: "Liyue",
 			image: {
 				small: "emblem_liyue",
+				default: "liyue_map",
 				preview: "preview_liyue",
 			},
 		},
@@ -106,6 +102,7 @@ const map: Maps[] = [
 			map: "Inazuma",
 			image: {
 				small: "emblem_inazuma",
+				default: "inazuma_map",
 				preview: "preview_tenshukaku",
 			},
 		},
@@ -113,8 +110,8 @@ const map: Maps[] = [
 			position: 0,
 			map: "Sumeru",
 			image: {
-				large: "sumeru_map",
 				small: "emblem_sumeru",
+				default: "sumeru_map",
 				preview: "preview_sumeru",
 			},
 		},
@@ -195,7 +192,7 @@ presence.on("UpdateData", async () => {
 	presenceData.details = current.map;
 	presenceData.state = current.city && currentCity ? currentCity.map : null;
 	presenceData.largeImageKey = getImage(
-		showPreview ? "preview" : "large",
+		showPreview ? "preview" : "default",
 		randomPreview
 	);
 	presenceData.smallImageKey =
@@ -209,13 +206,13 @@ presence.on("UpdateData", async () => {
 	else presence.setActivity();
 });
 
-function getImage(type: "large" | "preview", random?: boolean) {
+function getImage(type: "default" | "preview", random?: boolean) {
 	const currentImage = currentCity?.image ?? current.image;
 	return (
 		Array.isArray(currentImage[type]) && type === "preview"
 			? currentImage[type][
 					random ? Math.floor(randomNumber * currentImage[type].length) : 0
 			  ]
-			: currentImage[type] || current.image.large
+			: currentImage[type] || current.image.default
 	) as string;
 }
