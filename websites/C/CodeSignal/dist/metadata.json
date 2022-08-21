@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "T10",
+		"id": "271915138741829632"
+	},
+	"service": "CodeSignal",
+	"description": {
+		"en": "Also known as a developer assessment platform, CodeSignal offers a cloud-based technical skills screening software powered by professionally-designed skills evaluations and a proprietary predictive Coding Score."
+	},
+	"url": "app.codesignal.com",
+	"version": "1.0.0",
+	"logo": "https://i.ibb.co/rmH61qN/Code-Signal-Logo.png",
+	"thumbnail": "https://i.gyazo.com/6cc0f87f6e396b2f05d6e065ec3daac5.png",
+	"color": "#1D64F2",
+	"category": "other",
+	"tags": [
+		"code",
+		"coding",
+		"platform"
+	]
+}
