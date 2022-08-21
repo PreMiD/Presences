@@ -3,7 +3,7 @@ const presence = new Presence({
 }), timeElapsed = Date.now();
 presence.on("UpdateData", async () => {
     const presenceData = {
-        largeImageKey: "https://ibb.co/1LTqwBj",
+        largeImageKey: "https://i.ibb.co/rmH61qN/Code-Signal-Logo.png",
         details: document.title,
         startTimestamp: timeElapsed,
     };
