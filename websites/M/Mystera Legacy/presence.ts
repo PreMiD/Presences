@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
-			"https://play-lh.googleusercontent.com/zS3Zi_4PltspasItG2tP2pQujLW6PcR_hGYUy8uMzOEbiWOkS_vlewFcHrn4gVtawCM",
+			"https://i.imgur.com/XBaHzfF.png",
 		details: "Mystera Legacy",
 		startTimestamp: browsingTimestamp,
 	};
