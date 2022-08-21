@@ -1,21 +1,20 @@
 const presence = new Presence({
 		clientId: "440182142694064129",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
-
-async function getStrings() {
-	return presence.getStrings(
-		{
-			buttonViewPage: "general.buttonViewPage",
-			listeningMusic: "general.listeningMusic",
-			readingPost: "general.readingPost",
-			viewPage: "general.viewPage",
-			viewUser: "general.viewUser",
-			watchingVid: "general.watchingVid",
-		},
-		await presence.getSetting<string>("lang").catch(() => "en")
-	);
-}
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	getStrings = async () => {
+		return presence.getStrings(
+			{
+				buttonViewPage: "general.buttonViewPage",
+				listeningMusic: "general.listeningMusic",
+				readingPost: "general.readingPost",
+				viewPage: "general.viewPage",
+				viewUser: "general.viewUser",
+				watchingVid: "general.watchingVid",
+			},
+			await presence.getSetting<string>("lang").catch(() => "en")
+		);
+	};
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
@@ -159,7 +158,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/admin")) {
-				presenceData.state = "Adding new incident 😥 !";
+				presenceData.state = "Adding new incident !";
 				presenceData.smallImageText = "Admin Panel";
 				delete presenceData.buttons;
 			}
@@ -183,8 +182,8 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "eternalnetworktm_dev";
 
 			if (pathname.startsWith("/")) {
-				presenceData.state = "Developing new website or a features !";
-				presenceData.smallImageText = "Development & Features";
+				presenceData.state = "Developing new features !";
+				presenceData.smallImageText = "Dev's paradise";
 				delete presenceData.buttons;
 			}
 
@@ -197,7 +196,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/admin")) {
-				presenceData.state = "Adding new incident 😥 !";
+				presenceData.state = "Using admin power !";
 				presenceData.smallImageText = "Admin Panel";
 				delete presenceData.buttons;
 			}
