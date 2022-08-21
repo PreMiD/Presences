@@ -4,13 +4,13 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Assets {
-	logo = "https://i.imgur.com/KuPkyx2.png",
-	searchImage = "https://i.imgur.com/oGQtnIY.png",
+	Logo = "https://i.imgur.com/KuPkyx2.png",
+	SearchImage = "https://i.imgur.com/oGQtnIY.png",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.logo,
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname } = document.location,
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 	else if (search?.value) {
 		presenceData.details = "Searching for";
 		presenceData.state = search?.value;
-		presenceData.smallImageKey = Assets.searchImage;
+		presenceData.smallImageKey = Assets.SearchImage;
 	} else if (
 		pathname === `/${document.querySelector("html").getAttribute("lang")}`
 	)
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 							document
 								.querySelector('[property="og:image"]')
 								?.getAttribute("content") ??
-							Assets.logo;
+							Assets.Logo;
 						if (title.match(/S[0-9]*E[0-9]/gm)) {
 							presenceData.buttons = [
 								{
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey =
 					document
 						.querySelector('[property="og:image"]')
-						?.getAttribute("content") ?? Assets.logo;
+						?.getAttribute("content") ?? Assets.Logo;
 				presenceData.buttons = [
 					{
 						label: "View Actor",
@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	}
-	if (!covers) presenceData.largeImageKey = Assets.logo;
+	if (!covers) presenceData.largeImageKey = Assets.Logo;
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
