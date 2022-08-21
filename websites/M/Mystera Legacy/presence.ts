@@ -45,6 +45,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing the privacy page";
 	else if (document.location.pathname.includes("/forums"))
 		presenceData.details = "Viewing the forums";
+	else if (document.location.pathname.includes("/become-a-supporter"))
+		presenceData.details = "Becoming a Supporter";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	//Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name
