@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "lucky",
+		"id": "275273443329441792"
+	},
+	"service": "Mystera Legacy",
+	"description": {
+		"en": "Mystera Legacy is a completely free to play mmo. It has a simple 2D style with a big sandbox world so you can build your own houses and shops if you like. Character creation takes less than a minute so go level up now!"
+	},
+	"url": "www.mysteralegacy.com",
+	"version": "1.0.0",
+	"logo": "https://play-lh.googleusercontent.com/zS3Zi_4PltspasItG2tP2pQujLW6PcR_hGYUy8uMzOEbiWOkS_vlewFcHrn4gVtawCM",
+	"thumbnail": "https://cdn.mmohuts.com/wp-content/uploads/2018/08/Mystera-Legacy-Battle.jpg",
+	"color": "#8587cc",
+	"category": "games",
+	"tags": ["games", "mmorpg", "mmo", "rpg", "game", "mystera"]
+}
