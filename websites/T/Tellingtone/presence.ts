@@ -59,7 +59,9 @@ presence.on("UpdateData", async () => {
 			.replace("{0}", " ")
 			.replace(
 				"{1}",
-				document.querySelector<HTMLDivElement>("div.media-title").textContent
+				document.querySelector<HTMLDivElement>(
+					".reading-media > .media-infos > .media-title"
+				).textContent
 			);
 		presenceData.state =
 			document.querySelector<HTMLDivElement>("div.media-episode").textContent;
