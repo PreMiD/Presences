@@ -6,7 +6,7 @@ const presence = new Presence({
   presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
-	  largeImageKey: "https://i.ibb.co/BNK1zr2/Code-Signal-Logo.png",
+	  largeImageKey: "https://ibb.co/1LTqwBj",
 	  details: document.title,
 	  startTimestamp: timeElapsed,
 	};
