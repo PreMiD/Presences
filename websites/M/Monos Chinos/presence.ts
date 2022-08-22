@@ -16,10 +16,10 @@ const presence = new Presence({
 		clientId: "707389880505860156",
 	}),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
-		searching: "presence.activity.searching",
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
+		searching: "general.searching",
 		episode: "presence.media.info.episode",
 	});
 let video: VideoContext = null,

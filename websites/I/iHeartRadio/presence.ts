@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "808777200119316521",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
 	});
 
 function checkLength(string: string): string {

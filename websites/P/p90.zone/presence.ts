@@ -10,9 +10,9 @@ function getTimestamps(curr: number, dura: number): number[] {
 presence.on("UpdateData", async () => {
 	const video = document.querySelector("video"),
 		strings = await presence.getStrings({
-			playing: "presence.playback.playing",
-			paused: "presence.playback.paused",
-			browsing: "presence.activity.browsing",
+			playing: "general.playing",
+			paused: "general.paused",
+			browsing: "general.browsing",
 		});
 
 	if (video) {

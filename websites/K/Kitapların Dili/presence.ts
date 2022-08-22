@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "769651625379102761",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	kitapPages: { [k: string]: string } = {
 		"/": "Ana Sayfa",

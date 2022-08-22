@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "761889098490183691",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let songName: HTMLElement,

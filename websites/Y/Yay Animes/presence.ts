@@ -3,9 +3,9 @@ const presence: Presence = new Presence({
 	}),
 	path: string = window.location.pathname,
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
+		browsing: "general.browsing",
+		playing: "general.playing",
+		paused: "general.paused",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "yay_lg",

@@ -9,6 +9,7 @@ interface PageContext {
 }
 interface ExecutionArguments {
 	showWatch?: boolean;
+	showExternalImages?: boolean;
 	strings: LocalizedStrings;
 	images: { [key: string]: string };
 	[key: string]: unknown;
@@ -28,24 +29,12 @@ function getQuery() {
 function capitalizeFirstLetter(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
-const youtubeUrlRegex =
-	/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm;
-function getSourceLink(url: string): ButtonData | null {
-	if (!url) return null;
-	if (youtubeUrlRegex.test(url)) {
-		return {
-			label: "Watch Youtube Source",
-			url,
-		};
-	}
-	return null;
-}
 const pages: PageContext[] = [
 		{
 			middleware: ref =>
-				/^\/?(hot|tags|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs|\/)/gi.test(
+				/^\/(hot|tags|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs|\/)/gi.test(
 					ref.location.pathname
-				),
+				) || location.pathname === "/",
 			exec: (
 				context,
 				data,
@@ -114,11 +103,6 @@ const pages: PageContext[] = [
 							label: strings.watchVideo,
 							url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
 						},
-						getSourceLink(
-							activeMedia.querySelector<HTMLAnchorElement>(
-								".description__stamp a.description__stamp__source"
-							)?.href
-						),
 					];
 				}
 				return data;
@@ -130,7 +114,7 @@ const pages: PageContext[] = [
 			exec: (
 				context,
 				data,
-				{ showWatch, strings, images }: ExecutionArguments
+				{ showWatch, showExternalImages, strings, images }: ExecutionArguments
 			) => {
 				if (!context) return null;
 				const activeMedia = document.querySelector<HTMLElement>(
@@ -140,9 +124,13 @@ const pages: PageContext[] = [
 				const title = activeMedia
 						.querySelector(".description__title")
 						.textContent?.trim(),
-					userName = document.querySelector<HTMLHeadingElement>(
+					channelParent = document.querySelector<HTMLDivElement>(".channel"),
+					userName = channelParent.querySelector<HTMLHeadingElement>(
 						".channel__description > h1[title]"
 					).title,
+					userImage = channelParent.querySelector<HTMLImageElement>(
+						'.avatar-upload img[src*="coub_storage/channel"]'
+					)?.src,
 					activeTab =
 						document.querySelector<HTMLElement>(
 							".page__content .page-menu > .page-menu__inner > .page-menu__item.-active"
@@ -167,6 +155,8 @@ const pages: PageContext[] = [
 						? " (❤)"
 						: ""
 				}`;
+				if (showExternalImages && userImage?.startsWith("https://"))
+					data.largeImageKey = userImage;
 				data.smallImageKey =
 					activeMedia.querySelector("video")?.paused === false
 						? images.PLAY
@@ -223,11 +213,6 @@ const pages: PageContext[] = [
 							label: strings.watchVideo,
 							url: document.location.href,
 						},
-						getSourceLink(
-							activeMedia.parentElement.querySelector<HTMLAnchorElement>(
-								'.coub__info .media-block__item > a[type="embedPopup"]'
-							)?.href
-						),
 					];
 				}
 				return data;
@@ -238,7 +223,7 @@ const pages: PageContext[] = [
 			exec: (
 				context,
 				data,
-				{ showWatch, strings, images }: ExecutionArguments
+				{ showWatch, showExternalImages, strings, images }: ExecutionArguments
 			) => {
 				if (!context) return null;
 				const communityParent = document.querySelector(
@@ -250,6 +235,9 @@ const pages: PageContext[] = [
 				const communityTitle = communityParent
 						.querySelector(".description > .title > h2")
 						?.textContent?.trim(),
+					communityImage = communityParent.querySelector<HTMLImageElement>(
+						'img[src*="coub_storage/category"]'
+					)?.src,
 					title = activeMedia
 						.querySelector(".description__title")
 						?.textContent?.trim();
@@ -260,6 +248,8 @@ const pages: PageContext[] = [
 						".page-menu.hot__menu > .page-menu__inner > .page-menu__item.-active"
 					)?.dataset?.title || "Hot"
 				}`;
+				if (showExternalImages && communityImage?.startsWith("https://"))
+					data.largeImageKey = communityImage;
 				data.smallImageKey =
 					activeMedia.querySelector("video")?.paused === false
 						? images.PLAY
@@ -271,11 +261,6 @@ const pages: PageContext[] = [
 							label: strings.watchVideo,
 							url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
 						},
-						getSourceLink(
-							activeMedia.querySelector<HTMLAnchorElement>(
-								".description__stamp a.description__stamp__source"
-							)?.href
-						),
 					];
 				}
 
@@ -303,8 +288,8 @@ const pages: PageContext[] = [
 function getStrings(newLang?: string) {
 	return presence.getStrings(
 		{
-			browsing: "presence.activity.browsing",
-			watching: "presence.playback.playing",
+			browsing: "general.browsing",
+			watching: "general.playing",
 			watchVideo: "general.buttonWatchVideo",
 			viewProfile: "general.buttonViewProfile",
 		},
@@ -313,6 +298,7 @@ function getStrings(newLang?: string) {
 }
 let currentLang: string,
 	localizedStrings: Awaited<ReturnType<typeof getStrings>>;
+const startedBrowsingAt = new Date();
 presence.on("UpdateData", async () => {
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (!localizedStrings || newLang !== currentLang) {
@@ -322,26 +308,33 @@ presence.on("UpdateData", async () => {
 	const query: { [key: string]: unknown } = getQuery(),
 		context = pages.find(x => x.middleware(window, [query]));
 	if (!context) return;
+	const data: PresenceData = {
+			largeImageKey: "logo",
+		},
+		showStartedBrowsing = await presence
+			.getSetting<boolean>("show_startedBrowsing")
+			.catch(() => true);
+
+	if (showStartedBrowsing && !data.startTimestamp)
+		data.startTimestamp = startedBrowsingAt.getTime();
 
 	const result = await Promise.resolve(
-		context.exec(
-			presence,
-			{
-				largeImageKey: "logo",
-			},
-			{
-				strings: localizedStrings,
-				query,
-				images: presenceImageKeys,
-				showWatch: await presence
-					.getSetting<boolean>("show_button_watching")
-					.catch(() => true),
-			}
-		)
+		context.exec(presence, data, {
+			strings: localizedStrings,
+			query,
+			images: presenceImageKeys,
+			showWatch: await presence
+				.getSetting<boolean>("show_button_watching")
+				.catch(() => true),
+			showExternalImages: await presence
+				.getSetting<boolean>("show_externalLargeImage")
+				.catch(() => true),
+			showStartedBrowsing,
+		})
 	);
 	if (!result) {
 		presence.setActivity({
-			largeImageKey: "logo",
+			...data,
 			state: localizedStrings.browsing,
 		});
 	} else if (result.details) presence.setActivity(result);

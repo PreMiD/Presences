@@ -81,8 +81,8 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "vk_logo",
 		},
 		gstrings = await presence.getStrings({
-			play: "presence.playback.playing",
-			pause: "presence.playback.paused",
+			play: "general.playing",
+			pause: "general.paused",
 		});
 
 	if (

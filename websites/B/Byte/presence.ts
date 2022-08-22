@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "671199009674756146",
 	}),
 	strings = presence.getStrings({
-		browse: "presence.activity.browsing",
-		search: "presence.activity.searching",
+		browse: "general.browsing",
+		search: "general.searching",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);

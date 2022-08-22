@@ -9,11 +9,8 @@
 		"nl": "Kijk opent je ogen",
 		"en": "Kijk opens your eyes."
 	},
-	"url": [
-		"kijk.nl",
-		"www.kijk.nl"
-	],
-	"version": "1.1.4",
+	"url": "www.kijk.nl",
+	"version": "1.2.0",
 	"logo": "https://i.imgur.com/LSOqk1G.png",
 	"thumbnail": "https://i.imgur.com/vBQdKP7.jpg",
 	"color": "#ff0000",
@@ -40,6 +37,15 @@
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
+		},
+		{
+			"id": "covers",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": false
 		}
 	]
 }
