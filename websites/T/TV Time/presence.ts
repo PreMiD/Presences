@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Exploring Shows";
 							presenceData.buttons = [
 								{
-									label: "Exlpore Shows",
+									label: "Explore Shows",
 									url: href,
 								},
 							];
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Exploring Shows";
 					presenceData.buttons = [
 						{
-							label: "Exlpore Shows",
+							label: "Explore Shows",
 							url: href,
 						},
 					];
