@@ -23,6 +23,11 @@ presence.on("UpdateData", async () => {
 		]),
 		search = document.querySelector<HTMLInputElement>('[id="search-input"]'),
 		pathnameSplit = pathname.split("/");
+	if (privacy) {
+		presenceData.largeImageKey = Assets.Logo;
+		presenceData.details = "Browsing";
+		return;
+	}
 	switch (hostname) {
 		case "deno.land": {
 			if (search?.value) {
@@ -202,11 +207,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing deno's merch store";
 			break;
 		}
-	}
-	if (privacy) {
-		delete presenceData.smallImageKey && delete presenceData.state;
-		presenceData.largeImageKey = Assets.Logo;
-		presenceData.details = "Browsing";
 	}
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
