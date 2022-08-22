@@ -10,8 +10,9 @@
 		"tr": "Dizilla, Türkiye'de hizmet veren yerel bir dizi yayın platformudur.",
 		"nl": "Dizilla is één van de mooiste en populairste Turkse TV series website."
 	},
-	"url": "dizilla.eu",
-	"version": "1.0.16",
+	"url": "dizilla4.com",
+	"regExp": "(dizilla[0-9][.][a-z]{3})",
+	"version": "1.1.1",
 	"logo": "https://i.imgur.com/EqxZ0d3.png",
 	"thumbnail": "https://i.imgur.com/aqrhBjE.png",
 	"color": "#d32028",

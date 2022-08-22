@@ -7,7 +7,7 @@ import ora, { Ora } from "ora";
 
 /**
  * Translation Tool for PreMiD Presences.
- * @author callumok2004 <callumokane123@gmail.com>
+ * @author callumok2004 <me@callumdev.xyz>
  * @author Bas950 <me@bas950.com>
  */
 

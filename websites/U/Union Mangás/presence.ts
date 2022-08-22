@@ -4,7 +4,7 @@ const presence = new Presence({
 	startTimestamp = Math.floor(Date.now() / 1000),
 	{ pathname } = window.location,
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
+		browsing: "general.browsing",
 	});
 
 presence.on("UpdateData", async () => {

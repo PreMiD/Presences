@@ -6,6 +6,10 @@
 	},
 	"contributors": [
 		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
+		},
+		{
 			"name": "Aya",
 			"id": "256422547556401152"
 		},
@@ -28,7 +32,7 @@
 		"www.mangadex.org",
 		"mangadex.cc"
 	],
-	"version": "2.0.8",
+	"version": "3.0.0",
 	"logo": "https://i.imgur.com/zs8myqz.png",
 	"thumbnail": "https://i.imgur.com/xiKNaUJ.png",
 	"color": "#F18F1E",
@@ -36,5 +40,19 @@
 	"tags": [
 		"mangadex",
 		"reading"
+	],
+	"settings": [
+		{
+			"id": "cover",
+			"title": "Show Manga Cover",
+			"icon": "fas fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fad fa-compress-arrows-alt",
+			"value": true
+		}
 	]
 }
