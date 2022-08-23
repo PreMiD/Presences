@@ -112,7 +112,7 @@ const map: Maps[] = [
 			image: {
 				small: "emblem_sumeru",
 				default: "preview_sumeru",
-				preview: ["preview_sumeru","https://i.imgur.com/23Sw1VR.png"],
+				preview: ["preview_sumeru", "https://i.imgur.com/23Sw1VR.png"],
 			},
 		},
 	];
