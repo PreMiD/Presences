@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 		case "doc.deno.land": {
 			presenceData.buttons = [
 				{
-					label: "Read The Docs",
+					label: "View Docs",
 					url: href,
 				},
 			];
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 				case "blog": {
 					presenceData.buttons = [
 						{
-							label: "Read Blog",
+							label: "View Blog",
 							url: href,
 						},
 					];
