@@ -84,7 +84,7 @@ const map: Maps[] = [
 			map: "Mondstadt",
 			image: {
 				small: "emblem_mondstadt",
-				default: "mondstadt_map",
+				default: "preview_mondstadt",
 				preview: "preview_mondstadt",
 			},
 		},
@@ -93,7 +93,7 @@ const map: Maps[] = [
 			map: "Liyue",
 			image: {
 				small: "emblem_liyue",
-				default: "liyue_map",
+				default: "preview_liyue",
 				preview: "preview_liyue",
 			},
 		},
@@ -102,7 +102,7 @@ const map: Maps[] = [
 			map: "Inazuma",
 			image: {
 				small: "emblem_inazuma",
-				default: "inazuma_map",
+				default: "preview_tenshukaku",
 				preview: "preview_tenshukaku",
 			},
 		},
@@ -111,8 +111,8 @@ const map: Maps[] = [
 			map: "Sumeru",
 			image: {
 				small: "emblem_sumeru",
-				default: "sumeru_map",
-				preview: "preview_sumeru",
+				default: "preview_sumeru",
+				preview: ["preview_sumeru","https://i.imgur.com/23Sw1VR.png"],
 			},
 		},
 	];
