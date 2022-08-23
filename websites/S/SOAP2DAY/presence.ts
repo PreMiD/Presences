@@ -32,45 +32,38 @@ const presence = new Presence({
 		faq: "Reading the FAQ",
 		tv: "Relaxing to some TV",
 	};
-let pauseFlag = true,
-	watchStamp = 0;
+let watchStamp = 0;
 
 presence.on("UpdateData", async () => {
-	let presenceData: PresenceData = {
-		largeImageKey: "icon",
-		details: constructAction[getAction()],
-	};
-	// If the user is watching something, get the title and set duration.
-	if (["movie", "tv", "sport"].includes(getAction())) {
-		// If paused, reset update remaining.
-		if (getStatus() === "Pause") pauseFlag = false;
+	const presenceData: PresenceData = {
+			largeImageKey: "icon",
+			details: constructAction[getAction()],
+		},
+		showTitle = await presence.getSetting<boolean>("title");
 
-		if (pauseFlag) {
-			[, watchStamp] = presence.getTimestampsfromMedia(
-				document.querySelector("video")
-			);
-			if (!isNaN(watchStamp)) pauseFlag = true;
-			presenceData = {
-				state: `${getStatus()} | ${getText("[class~=player-title-bar]")}`,
-				endTimestamp: watchStamp,
-				smallImageKey: "play",
-				...presenceData,
-			};
-		} else {
-			presenceData = {
-				state: `${getStatus()} | ${getText("[class~=player-title-bar]")}`,
-				smallImageKey: "pause",
-				...presenceData,
-			};
-		}
-		pauseFlag = true;
-	} else {
-		// If the user is not watching something, return how long they have been browsing.
-		presenceData = {
-			startTimestamp: Math.floor(Date.now() / 1000),
-			...presenceData,
-		};
+	if (!["movie", "tv", "sport"].includes(getAction())) {
+		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+		presence.setActivity(presenceData);
+		return;
 	}
+
+	if (showTitle) {
+		presenceData.details =
+			document.querySelector(".alert > a:nth-child(3)")?.textContent ??
+			document.querySelector(".alert").textContent.split(">>")[2].trim();
+	}
+
+	if (getStatus() !== "Pause") {
+		[, watchStamp] = presence.getTimestampsfromMedia(
+			document.querySelector("video")
+		);
+		presenceData.endTimestamp = watchStamp;
+		presenceData.smallImageKey = "play";
+	} else presenceData.smallImageKey = "pause";
+
+	presenceData.state = `${getStatus()} | ${getText(
+		"[class~=player-title-bar]"
+	)}`.replace(`| ${presenceData.details}`, "");
 
 	presence.setActivity(presenceData);
 });

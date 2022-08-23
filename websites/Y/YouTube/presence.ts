@@ -217,6 +217,7 @@ presence.on("UpdateData", async () => {
 		}
 		if (
 			!uploader &&
+			!uploaderTV &&
 			document.querySelector(".style-scope.ytd-channel-name > a")
 		) {
 			finalUploader = document.querySelector(
