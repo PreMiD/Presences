@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/wp-admin")) {
-				presenceData.state = "Using administrating power over the website !";
+				presenceData.state = "Administrating the website";
 				presenceData.smallImageText = "Admin Panel";
 				delete presenceData.buttons;
 			}
@@ -79,16 +79,16 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/memberlist.php"))
-				presenceData.state = "Sneaking into member list !";
+				presenceData.state = "Sneaking into member list";
 
 			if (search.includes("?mode=team"))
-				presenceData.state = "Checking out team list !";
+				presenceData.state = "Checking out team list";
 
 			if (pathname.includes("/partner"))
-				presenceData.state = "Cheking our partners !";
+				presenceData.state = "Cheking our partners";
 
 			if (pathname.includes("/donation"))
-				presenceData.state = "Trying to make donation for the forum !";
+				presenceData.state = "Trying to make donation for the forum";
 
 			if (pathname.includes("/imageupload"))
 				presenceData.state = "Uploading images!";
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (pathname.includes("/adm/")) {
-				presenceData.state = "Using administrating power over the forum !";
+				presenceData.state = "Administrating the forum";
 				presenceData.smallImageText = "Admin Panel";
 				delete presenceData.buttons;
 			}
@@ -138,16 +138,16 @@ presence.on("UpdateData", async () => {
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
-			if (hash.includes("page_ABOUT")) presenceData.state = "About info page !";
+			if (hash.includes("page_ABOUT")) presenceData.state = "About info page";
 
 			if (hash.includes("page_PROGRAMS"))
-				presenceData.state = "Checking radio program !";
+				presenceData.state = "Checking radio program";
 
 			if (hash.includes("page_REQUEST"))
-				presenceData.state = "Requesting a song !";
+				presenceData.state = "Requesting a song";
 
 			if (hash.includes("page_CONTACTS"))
-				presenceData.state = "Contact us page !";
+				presenceData.state = "Contact us page";
 
 			break;
 		}
@@ -158,13 +158,13 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/admin")) {
-				presenceData.state = "Adding new incident !";
+				presenceData.state = "Adding new incident";
 				presenceData.smallImageText = "Admin Panel";
 				delete presenceData.buttons;
 			}
 
 			if (search.includes("?do=settings"))
-				presenceData.state = "Adding new service !";
+				presenceData.state = "Adding new service";
 			delete presenceData.buttons;
 
 			break;
@@ -182,7 +182,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "eternalnetworktm_dev";
 
 			if (pathname.startsWith("/")) {
-				presenceData.state = "Developing new features !";
+				presenceData.state = "Developing new features";
 				presenceData.smallImageText = "Dev's paradise";
 				delete presenceData.buttons;
 			}
@@ -196,7 +196,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/admin")) {
-				presenceData.state = "Using admin power !";
+				presenceData.state = "Administrating the system";
 				presenceData.smallImageText = "Admin Panel";
 				delete presenceData.buttons;
 			}
