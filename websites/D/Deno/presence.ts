@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 	if (privacy) {
 		presenceData.largeImageKey = Assets.Logo;
 		presenceData.details = "Browsing";
-		if (presenceData.details) presence.setActivity(presenceData);
+		presence.setActivity(presenceData);
 		return;
 	}
 	switch (hostname) {
