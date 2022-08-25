@@ -13,14 +13,15 @@
 	"service": "Oculus",
 	"description": {
 		"en": "Oculus is a brand of Meta that produces virtual reality headsets.",
-		"de": "Oculus ist eine Marke von Meta, die Virtual-Reality-Headsets herstellt."
+		"de": "Oculus ist eine Marke von Meta, die Virtual-Reality-Headsets herstellt.",
+		"nl": "Oculus is een merk van Meta dat virtual reality-headsets produceert."
 	},
 	"url": [
 		"www.oculus.com",
 		"support.oculus.com",
 		"secure.oculus.com"
 	],
-	"version": "1.2.7",
+	"version": "1.2.8",
 	"logo": "https://i.imgur.com/jzoFzDA.jpg",
 	"thumbnail": "https://i.imgur.com/E2oERhP.png",
 	"color": "#ffffff",

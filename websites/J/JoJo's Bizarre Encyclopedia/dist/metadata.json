@@ -6,14 +6,15 @@
 	},
 	"service": "JoJo's Bizarre Encyclopedia",
 	"description": {
-		"en": "JoJo's Bizarre Encyclopedia is a wiki dedicated to JoJo's Bizarre Adventure written and illustrated by Hirohiko Araki."
+		"en": "JoJo's Bizarre Encyclopedia is a wiki dedicated to JoJo's Bizarre Adventure written and illustrated by Hirohiko Araki.",
+		"nl": "JoJo's Bizarre Encyclopedie is een wiki gewijd aan JoJo's Bizarre Adventure geschreven en geïllustreerd door Hirohiko Araki."
 	},
 	"url": [
 		"jojowiki.com",
 		"jojo-news.com"
 	],
 	"regExp": "(jojowiki|jojo-news)[.]com[/]",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/Kkn0ZW0.png",
 	"thumbnail": "https://i.imgur.com/dZX1t4c.png",
 	"color": "#ea0fa3",

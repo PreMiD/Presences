@@ -6,10 +6,11 @@
 	},
 	"service": "MangaFreak",
 	"description": {
-		"en": "Read manga and download for free. Mangafreak has the latest chapter of all your favorite manga. Check the latest chapter of popular manga like Naruto, Boruto, One Piece and Bleach. Enjoy reading. Manga Reader Online."
+		"en": "Read manga and download for free. Mangafreak has the latest chapter of all your favorite manga. Check the latest chapter of popular manga like Naruto, Boruto, One Piece and Bleach. Enjoy reading. Manga Reader Online.",
+		"nl": "Lees manga en download gratis. Mangafreak heeft het laatste hoofdstuk van al jouw favoriete manga. Check het laatste hoofdstuk van populaire manga zoals Naruto, Boruto, One Piece en Bleach. Veel plezier met lezen. Manga Lezen Online."
 	},
 	"url": "w13.mangafreak.net",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/1yBi5L5.jpg",
 	"thumbnail": "https://i.imgur.com/HhQHw0S.png",
 	"color": "#ed9912",

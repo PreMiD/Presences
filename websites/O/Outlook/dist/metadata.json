@@ -7,10 +7,11 @@
 	"service": "Outlook",
 	"description": {
 		"en": "Outlook.com is a personal information manager web app from Microsoft consisting of webmail, calendaring, contacts, and tasks services.",
-		"vi_VN": "Outlook.com là ứng dụng quản lý thông tin cá nhân của Microsoft bao gồm thư điện tử, quản lý lịch, danh bạ và các nhiệm vụ."
+		"vi_VN": "Outlook.com là ứng dụng quản lý thông tin cá nhân của Microsoft bao gồm thư điện tử, quản lý lịch, danh bạ và các nhiệm vụ.",
+		"nl": "Outlook.com is een webapplicatie van Microsoft voor het beheren van persoonlijke informatie, bestaande uit webmail, agenda's, contactpersonen en taken."
 	},
 	"url": "outlook.live.com",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/nwBDM8Q.png",
 	"thumbnail": "https://i.imgur.com/9IKy3ax.png",
 	"color": "#0F78D4",

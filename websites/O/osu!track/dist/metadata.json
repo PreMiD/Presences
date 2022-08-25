@@ -6,10 +6,11 @@
 	},
 	"service": "osu!track",
 	"description": {
-		"en": "Site where players of the game osu! can track their progress and view the progression of others."
+		"en": "Site where players of the game osu! can track their progress and view the progression of others.",
+		"nl": "Site waar spelers van het spel osu! hun en andere mensen hun voortuitgang kunnen volgen en bekijken."
 	},
 	"url": "ameobea.me",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/oSw7qlV.png",
 	"thumbnail": "https://i.imgur.com/huSlPUo.png",
 	"color": "#ffffff",

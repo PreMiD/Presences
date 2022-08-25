@@ -6,13 +6,14 @@
 	},
 	"service": "picoCTF",
 	"description": {
-		"en": "picoCTF is a free computer security education program with original content in a capture-the-flag format."
+		"en": "picoCTF is a free computer security education program with original content in a capture-the-flag format.",
+		"nl": "picoCTF is een gratis educatief programma voor computerbeveiliging met originele inhoud in een capture-the-flag-formaat."
 	},
 	"url": [
 		"picoctf.org",
 		"play.picoctf.org"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/nrp0UQ8.png",
 	"thumbnail": "https://i.imgur.com/08xWjUl.png",
 	"color": "#9b1e33",

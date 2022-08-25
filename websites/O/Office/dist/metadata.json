@@ -6,7 +6,8 @@
 	},
 	"service": "Office",
 	"description": {
-		"en": "Microsoft Office, or simply Office, is a family of client software, server software, and services developed by Microsoft."
+		"en": "Microsoft Office, or simply Office, is a family of client software, server software, and services developed by Microsoft.",
+		"nl": "Microsoft Office, of simpel weg Office, is een familie van clientsoftware, serversoftware en diensten die zijn ontwikkeld door Microsoft."
 	},
 	"url": [
 		"www.office.com",
@@ -14,7 +15,7 @@
 		"onedrive.live.com"
 	],
 	"regExp": "www[.]office[.]com|([a-z0-9-_]+)[-]my[.]sharepoint[.]com|onedrive[.]live[.]com",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/PB21xZi.png",
 	"thumbnail": "https://i.imgur.com/t3LDGbp.png",
 	"color": "#DE5001",

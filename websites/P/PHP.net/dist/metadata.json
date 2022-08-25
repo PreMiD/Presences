@@ -6,13 +6,14 @@
 	},
 	"service": "PHP.net",
 	"description": {
-		"en": "PHP is a popular general-purpose scripting language that is especially suited to web development. Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world."
+		"en": "PHP is a popular general-purpose scripting language that is especially suited to web development. Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.",
+		"nl": "PHP is een populaire scripttaal voor algemene doeleinden die bijzonder geschikt is voor webontwikkeling. Snel, flexibel en pragmatisch, PHP is de kracht achter alles, van uw blog tot de meest populaire websites ter wereld."
 	},
 	"url": [
 		"php.net",
 		"www.php.net"
 	],
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/cC2n2S6.png",
 	"thumbnail": "https://i.imgur.com/MYTegAn.png",
 	"color": "#8892BF",

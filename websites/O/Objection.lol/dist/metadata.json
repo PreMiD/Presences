@@ -6,10 +6,11 @@
 	},
 	"service": "Objection.lol",
 	"description": {
-		"en": "An online ace attorney case maker and generator."
+		"en": "An online ace attorney case maker and generator.",
+		"nl": "Een online advocaat zaak maker en generator."
 	},
 	"url": "objection.lol",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/bIrOvOu.jpg",
 	"thumbnail": "https://i.imgur.com/fAjHIUJ.png",
 	"color": "#050564",

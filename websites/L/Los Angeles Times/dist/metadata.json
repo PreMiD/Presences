@@ -6,10 +6,11 @@
 	},
 	"service": "Los Angeles Times",
 	"description": {
-		"en": "The Los Angeles Times is a daily newspaper that started publishing in Los Angeles in 1881 and is now based in the adjacent suburb of El Segundo. It has the fifth-largest circulation in the U.S. and is the largest American newspaper not headquartered on the East Coast."
+		"en": "The Los Angeles Times is a daily newspaper that started publishing in Los Angeles in 1881 and is now based in the adjacent suburb of El Segundo. It has the fifth-largest circulation in the U.S. and is the largest American newspaper not headquartered on the East Coast.",
+		"nl": "De Los Angeles Times is een dagblad dat in 1881 in Los Angeles begon te verschijnen en nu gevestigd is in de aangrenzende voorstad El Segundo. Het heeft de op vier na grootste oplage in de VS en is de grootste Amerikaanse krant die niet aan de oostkust gevestigd is."
 	},
 	"url": "www.latimes.com",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/Z6MOTZp.jpg",
 	"thumbnail": "https://i.imgur.com/ecj5NkY.png",
 	"color": "#ffffff",

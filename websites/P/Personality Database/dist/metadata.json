@@ -6,11 +6,12 @@
 	},
 	"service": "Personality Database",
 	"description": {
-		"en": "Personality Database (PDB) is a user-driven, social community based on analytical psychology typing methods as Jungian Cognitive Functions, Myers–Briggs Type Indicators (MBTI), Enneagram, Instinctual Variant, Tritype, Socionics, Big Five Personality Traits, Psychosophy (Attitudinal Psyche), and Temperaments."
+		"en": "Personality Database (PDB) is a user-driven, social community based on analytical psychology typing methods as Jungian Cognitive Functions, Myers–Briggs Type Indicators (MBTI), Enneagram, Instinctual Variant, Tritype, Socionics, Big Five Personality Traits, Psychosophy (Attitudinal Psyche), and Temperaments.",
+		"nl": "Personality Database (PDB) is een gebruikers-gedreven, sociale gemeenschap gebaseerd op analytische psychologie typeringsmethoden als Jungiaanse Cognitieve Functies, Myers-Briggs Type Indicatoren (MBTI), Enneagram, Instinctuele Variant, Tritype, Socionics, Big Five Persoonlijkheidstrekken, Psychosofie (Attitudinale Psyche), en Temperamenten."
 	},
 	"url": "personality-database.com",
 	"regExp": "([a-z0-9-]+[.])*personality-database[.]com[/]",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/hcw43Xf.png",
 	"thumbnail": "https://i.imgur.com/0pBs69u.png",
 	"color": "#2e96a5",

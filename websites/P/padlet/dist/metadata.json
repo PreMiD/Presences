@@ -6,10 +6,11 @@
 	},
 	"service": "padlet",
 	"description": {
-		"en": "From your hobby to your career, your class notes to your final exam, your mood board to your runway show, padlets help you organize your life."
+		"en": "From your hobby to your career, your class notes to your final exam, your mood board to your runway show, padlets help you organize your life.",
+		"nl": "Van je hobby tot je carrière, van je aantekeningen tot je eindexamen, van je stemmingsbord tot je catwalkshow, padlets helpen je je leven te organiseren."
 	},
 	"url": "padlet.com",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/sxpYxcR.png",
 	"thumbnail": "https://i.imgur.com/I8dYgHQ.png",
 	"color": "#303644",
