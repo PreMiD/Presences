@@ -72,14 +72,14 @@ presence.on("UpdateData", async () => {
 			)[1];
 			presenceData.buttons = [
 				{
-					label: "View Video",
+					label: "Watch Video",
 					url: href,
 				},
 			];
 		} else {
 			presenceData.buttons = [
 				{
-					label: "View Live Video",
+					label: "Watch Live",
 					url: href,
 				},
 			];
