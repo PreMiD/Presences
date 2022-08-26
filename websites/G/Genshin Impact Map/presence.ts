@@ -165,7 +165,8 @@ presence.on("UpdateData", async () => {
 				i => i.id === (parseInt(hash?.split("/map/")[1]?.split("?")[0]) || 2)
 			);
 			getPosition = parseInt(new URLSearchParams(hash).get("center"));
-			if (current?.city) currentCity = city.find(i => i.position >= getPosition);
+			if (current?.city)
+				currentCity = city.find(i => i.position >= getPosition);
 			else currentCity = null;
 			break;
 	}
