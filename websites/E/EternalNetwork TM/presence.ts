@@ -140,14 +140,11 @@ presence.on("UpdateData", async () => {
 
 			if (hash.includes("page_ABOUT")) presenceData.state = "About info page";
 
-			if (hash.includes("page_PROGRAMS"))
-				presenceData.state = "Checking radio program";
+			if (hash.includes("page_PROGRAMS")) presenceData.state = "Checking radio program";
 
-			if (hash.includes("page_REQUEST"))
-				presenceData.state = "Requesting a song";
+			if (hash.includes("page_REQUEST")) presenceData.state = "Requesting a song";
 
-			if (hash.includes("page_CONTACTS"))
-				presenceData.state = "Contact us page";
+			if (hash.includes("page_CONTACTS")) presenceData.state = "Contact us page";
 
 			break;
 		}
@@ -175,6 +172,21 @@ presence.on("UpdateData", async () => {
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
+			if (pathname.includes("/about.php")) {
+				presenceData.details = "Reading information";
+				presenceData.state = ttl;
+			}
+
+			if (pathname.includes("/gallery.php")) {
+				presenceData.details = "Checking gallery photos";
+				presenceData.state = ttl;
+			}
+
+			if (pathname.includes("/applications.php")) {
+				presenceData.details = "Applying for the VTC";
+				presenceData.state = ttl;
+			}
+
 			break;
 		}
 		case `dev.${etrnl}`:
@@ -182,8 +194,20 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "eternalnetworktm_dev";
 
 			if (pathname.startsWith("/")) {
-				presenceData.state = "Developing new features";
+				presenceData.state = "Creating new features";
 				presenceData.smallImageText = "Dev's paradise";
+				delete presenceData.buttons;
+			}
+
+			if (pathname.includes("/etlog")) {
+				presenceData.state = "Working on ET-LOG system";
+				presenceData.smallImageText = "Updating the website";
+				delete presenceData.buttons;
+			}
+
+			if (pathname.includes("/radio")) {
+				presenceData.state = "Working on radio page";
+				presenceData.smallImageText = "Updating the website";
 				delete presenceData.buttons;
 			}
 
