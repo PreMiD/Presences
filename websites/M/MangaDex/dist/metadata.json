@@ -25,6 +25,7 @@
 	"service": "MangaDex",
 	"description": {
 		"en": "Read manga online for free at MangaDex with no ads, high quality images and support scanlation groups!",
+		"fr": "Lit des mangas en ligne gratuitement sur MangaDex sans pubs, haute qualité d'images et supporte les groupes de scanlation !",
 		"nl": "Lees manga gratis online op MangaDex zonder advertenties, afbeeldingen van hoge kwaliteit en ondersteunende scanlatiegroepen!"
 	},
 	"url": [
@@ -32,7 +33,7 @@
 		"www.mangadex.org",
 		"mangadex.cc"
 	],
-	"version": "3.0.0",
+	"version": "3.1.0",
 	"logo": "https://i.imgur.com/zs8myqz.png",
 	"thumbnail": "https://i.imgur.com/xiKNaUJ.png",
 	"color": "#F18F1E",

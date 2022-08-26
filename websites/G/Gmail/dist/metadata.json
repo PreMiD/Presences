@@ -21,12 +21,13 @@
 	"service": "Gmail",
 	"description": {
 		"en": "Gmail is a free email service developed by Google. Users can access Gmail on the web and using third-party programs that synchronize email content through POP or IMAP protocols. Gmail started as a limited beta release on April 1, 2004 and ended its testing phase on July 7, 2009.",
+		"fr": "Gmail est un service d'email gratuit développé par Google. Les utilisateurs peuvent accéder à Gmail sur le web et utiliser des programmes tiers qui permettent de synchroniser leurs emails grâce à des protocols POP ou IMAP. Gmail a commencé une bêta fermée le premier avril 2004 et a terminé sa phase de test le 7 juillet 2009.",
 		"zh_CN": "Gmail是Google开发的免费电子邮件服务。",
 		"nl": "Gmail is een gratis e-mailservice van Google. Gebruikers hebben toegang tot Gmail via beveiligde webmail of via het POP3- of IMAP4-protocol.",
 		"vi_VN": "Gmail là dịch vụ thư điện tử miễn phí được phát triển bởi Google. Người dùng có thể truy cập Gmail trên web và sử dụng phần mềm bên thứ ba để đồng bộ nội dung thư qua phương thức POP hoặc IMAP. Gmail phát hành bản beta đóng kín vào 1 Tháng 4 2004 và kết thúc quá trình thử nghiệm vào 7 Tháng 7 năm 2009."
 	},
 	"url": "mail.google.com",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"logo": "https://i.imgur.com/ZvjZHER.png",
 	"thumbnail": "https://i.imgur.com/zLejTHm.png",
 	"color": "#DD4B3E",
