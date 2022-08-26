@@ -4,10 +4,12 @@
 		"name": "FelipeSazz",
 		"id": "326123612153053184"
 	},
-	"contributors": [{
-		"name": "RisingSunLight",
-		"id": "240521747852558347"
-	}],
+	"contributors": [
+		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
+		}
+	],
 	"service": "Animes Vision",
 	"description": {
 		"en": "Animes Vision is one of the largest Brazilian anime sites.",
