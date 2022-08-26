@@ -89,12 +89,21 @@ const map: Maps[] = [
 			},
 		},
 		{
-			position: 4000,
+			position: 2500,
 			map: "Liyue",
 			image: {
 				small: "emblem_liyue",
 				default: "preview_liyue",
 				preview: "preview_liyue",
+			},
+		},
+		{
+			position: 5000,
+			map: "Sumeru",
+			image: {
+				small: "emblem_sumeru",
+				default: "preview_sumeru",
+				preview: ["preview_sumeru", "https://i.imgur.com/23Sw1VR.png"],
 			},
 		},
 		{
@@ -104,15 +113,6 @@ const map: Maps[] = [
 				small: "emblem_inazuma",
 				default: "preview_tenshukaku",
 				preview: "preview_tenshukaku",
-			},
-		},
-		{
-			position: 0,
-			map: "Sumeru",
-			image: {
-				small: "emblem_sumeru",
-				default: "preview_sumeru",
-				preview: ["preview_sumeru", "https://i.imgur.com/23Sw1VR.png"],
 			},
 		},
 	];
@@ -165,7 +165,7 @@ presence.on("UpdateData", async () => {
 				i => i.id === (parseInt(hash?.split("/map/")[1]?.split("?")[0]) || 2)
 			);
 			getPosition = parseInt(new URLSearchParams(hash).get("center"));
-			if (current?.city) currentCity = city.find(i => i.position > getPosition);
+			if (current?.city) currentCity = city.find(i => i.position >= getPosition);
 			else currentCity = null;
 			break;
 	}
