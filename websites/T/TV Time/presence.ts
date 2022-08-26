@@ -169,7 +169,7 @@ presence.on("UpdateData", async () => {
 							.textContent.trim()})`;
 						presenceData.buttons = [
 							{
-								label: "View Their Calendar",
+								label: "View Calendar",
 								url: href,
 							},
 						];
