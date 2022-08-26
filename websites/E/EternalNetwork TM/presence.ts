@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Checking out team list";
 
 			if (pathname.includes("/partner"))
-				presenceData.state = "Cheking our partners";
+				presenceData.state = "Checking our partners";
 
 			if (pathname.includes("/donation"))
 				presenceData.state = "Trying to make donation for the forum";
@@ -140,11 +140,14 @@ presence.on("UpdateData", async () => {
 
 			if (hash.includes("page_ABOUT")) presenceData.state = "About info page";
 
-			if (hash.includes("page_PROGRAMS")) presenceData.state = "Checking radio program";
+			if (hash.includes("page_PROGRAMS"))
+				presenceData.state = "Checking radio program";
 
-			if (hash.includes("page_REQUEST")) presenceData.state = "Requesting a song";
+			if (hash.includes("page_REQUEST"))
+				presenceData.state = "Requesting a song";
 
-			if (hash.includes("page_CONTACTS")) presenceData.state = "Contact us page";
+			if (hash.includes("page_CONTACTS"))
+				presenceData.state = "Contact us page";
 
 			break;
 		}
@@ -218,6 +221,24 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "eternalshortener_logo";
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
+
+			if (pathname.includes("/home")) {
+				presenceData.state = ttl;
+				presenceData.smallImageText = "Adding new short url";
+				delete presenceData.buttons;
+			}
+
+			if (pathname.includes("/profile")) {
+				presenceData.state = "Checking profile";
+				presenceData.smallImageText = "User profile";
+				delete presenceData.buttons;
+			}
+
+			if (pathname.includes("/dashboard")) {
+				presenceData.state = "Checking URLs statistics";
+				presenceData.smallImageText = "Dashboard";
+				delete presenceData.buttons;
+			}
 
 			if (pathname.includes("/admin")) {
 				presenceData.state = "Administrating the system";
