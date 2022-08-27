@@ -9,10 +9,11 @@
 		"tr": "Her gün konuşarak, sosyalleşebileceğin özel bir platform.",
 		"en": "A special platform where you can socialize by talking every day."
 	},
+	"version": "1.0.0",
 	"url": "cortexduo.com",
 	"version": "25.08.22",
-	"logo": "https://cortexduo.com/images/cortexdaire.png",
-	"thumbnail": "https://camo.githubusercontent.com/4b259716b6eb9e9fc4b4ef2554ac2afd25fd34b48089643550b57950dd51e3a0/68747470733a2f2f6d656469612e646973636f72646170702e6e65742f6174746163686d656e74732f3936353332333932373434383630303632362f313031323834303033313636363331353334342f436f7274657844756f42414e4e45522e706e67", 
+	"logo": "https://i.imgur.com/iTS3Dcq.png",
+	"thumbnail": "https://i.imgur.com/XXQteoJ.png", 
 	"color": "#304ac9",
 	"category": "other",
 	"tags": [
