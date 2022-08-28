@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "frnk",
+		"id": "232904284004548608"
+	},
+	"service": "MarineTraffic",
+	"description": {
+		"en": "MarineTraffic is a website providing real-time monitoring of global maritime traffic.",
+		"fr": "MarineTraffic est un site web permettant de suivre en temps réel le trafic maritime mondial."
+	},
+	"url": [
+		"marinetraffic.com",
+		"www.marinetraffic.com",
+		"business.marinetraffic.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/u2NmdZX.png",
+	"thumbnail": "https://i.imgur.com/xi5jZEP.png",
+	"color": "#00186b",
+	"category": "other",
+	"tags": [
+		"marine",
+		"marinetraffic",
+		"ship",
+		"tracking",
+		"traffic",
+		"sea"
+	]
+}
