@@ -10,7 +10,7 @@ let locationMap: string,
 	shipDep: string,
 	elemDesc: string;
 
-const capitalize = (s: string | any[]) =>
+const capitalize = (s: string | never[]) =>
 	(s && s[0].toUpperCase() + s.slice(1)) || "";
 
 presence.on("UpdateData", async () => {
@@ -101,9 +101,9 @@ presence.on("UpdateData", async () => {
 					"#infosnippet_container > div > div > div > div:nth-child(2) > div > div > div.d-flex.align-items-center.justify-content-start.flex-wrap.flex-1-1-auto > div:nth-child(1) > div > span > a"
 				)
 				.href.includes("javascript")
-		) {
+		)
 			shipDep = "Unknown";
-		} else {
+		else {
 			shipDep = capitalize(
 				document
 					.querySelector<HTMLAnchorElement>(
@@ -120,9 +120,9 @@ presence.on("UpdateData", async () => {
 					"#infosnippet_container > div > div > div > div:nth-child(2) > div > div > div.d-flex.align-items-center.justify-content-start.flex-wrap.flex-1-1-auto > div:nth-child(2) > a"
 				)
 				.href.includes("javascript")
-		) {
+		)
 			shipDest = "Unknown";
-		} else {
+		else {
 			shipDest = capitalize(
 				document
 					.querySelector<HTMLAnchorElement>(
@@ -155,14 +155,15 @@ presence.on("UpdateData", async () => {
 				)
 				.innerHTML.toLowerCase()
 		);
-		elemDesc =
+		elemDesc = `${
 			document.querySelector(
 				"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.panel-body.no-padding > div > div.d-flex.flexcol.align-items-stretch.justify-content-start.flex-wrap.flex-1-1-100.flexcol-xs-6.flexcol-sm-8 > div:nth-child(3) > div > b"
-			).innerHTML +
-			", " +
+			).innerHTML
+		}, ${
 			document.querySelector<HTMLDivElement>(
 				"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.handle.cursor-move > div > div > div:nth-child(2) > div"
-			).title;
+			).title
+		}`;
 		presenceData.details = `Watching "${elemName}"`;
 		presenceData.state = `Location : ${elemDesc}`;
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
@@ -178,30 +179,28 @@ presence.on("UpdateData", async () => {
 			{ label: "View Lighthouse", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("ais/home/portid")) {
-		elemName =
-			capitalize(
-				document
-					.querySelector(
-						"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.handle.cursor-move > div > div > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > a"
-					)
-					.innerHTML.toLowerCase()
-			) +
-			", " +
+		elemName = `${capitalize(
+			document
+				.querySelector(
+					"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.handle.cursor-move > div > div > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > a"
+				)
+				.innerHTML.toLowerCase()
+		)}, ${
 			document.querySelector<HTMLDivElement>(
 				"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.handle.cursor-move > div > div > div:nth-child(2) > div"
-			).title;
-		elemDesc =
-			capitalize(
-				document
-					.querySelector(
-						"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.panel-body.no-padding > div > div.d-flex.flexcol.align-items-stretch.justify-content-start.flex-wrap.flex-1-1-100.flexcol-xs-6.flexcol-sm-8 > div > div:nth-child(1) > div:nth-child(1) > div > b"
-					)
-					.innerHTML.toLowerCase()
-			) +
-			" - " +
+			).title
+		}`;
+		elemDesc = `${capitalize(
+			document
+				.querySelector(
+					"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.panel-body.no-padding > div > div.d-flex.flexcol.align-items-stretch.justify-content-start.flex-wrap.flex-1-1-100.flexcol-xs-6.flexcol-sm-8 > div > div:nth-child(1) > div:nth-child(1) > div > b"
+				)
+				.innerHTML.toLowerCase()
+		)} - ${
 			document.querySelector(
 				"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.panel-body.no-padding > div > div.d-flex.flexcol.align-items-stretch.justify-content-start.flex-wrap.flex-1-1-100.flexcol-xs-6.flexcol-sm-8 > div > div:nth-child(3) > div:nth-child(1) > div > a > div > div > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto.undefined > span > b"
-			).innerHTML;
+			).innerHTML
+		}`;
 		presenceData.details = `Watching ${elemName}`;
 		presenceData.state = `${elemDesc} vessels`;
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
@@ -210,11 +209,11 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
 			"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.handle.cursor-move > div > div > div:nth-child(1) > img"
 		).src;
-		presenceData.smallImageText =
-			"Temperature: " +
+		presenceData.smallImageText = `Temperature: ${
 			document.querySelector(
 				"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.panel-body.no-padding > div > div:nth-child(3) > div > div > div:nth-child(1) > div > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > b"
-			).innerHTML;
+			).innerHTML
+		}`;
 		presenceData.buttons = [
 			{ label: "View Port", url: document.location.href },
 		];
@@ -243,17 +242,17 @@ presence.on("UpdateData", async () => {
 				.innerHTML.toLowerCase()
 		);
 		presenceData.details = `Watching ${elemName}`;
-		presenceData.state =
-			"Near" +
+		presenceData.state = `Near${
 			document
 				.querySelector(
 					"#vesselDetails_summarySection > div.MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-c4sutr > div > div > div > div:nth-child(2) > div > strong:nth-child(2)"
 				)
-				.innerHTML.split("-")[1] +
-			" - " +
+				.innerHTML.split("-")[1]
+		} - ${
 			document.querySelector(
 				"#vesselDetails_latestPositionSection > div.MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-c4sutr > div > div > div > div > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-md-true.css-4d8ot5 > p:nth-child(6) > b"
-			).innerHTML;
+			).innerHTML
+		}`;
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			"#vesselDetailsHeader > div > div:nth-child(1) > div > div.MuiGrid-root.MuiGrid-item.css-1wxaqej > div > img"
 		).src;
@@ -267,28 +266,27 @@ presence.on("UpdateData", async () => {
 			{ label: "View Ship", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("ais/details/ports")) {
-		elemName =
-			capitalize(
-				document
-					.querySelector(
-						"#summary > div.MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-c4sutr > div > div > div > div:nth-child(2) > div > div > strong:nth-child(1)"
-					)
-					.innerHTML.toLowerCase()
-			) +
-			" " +
+		elemName = `${capitalize(
+			document
+				.querySelector(
+					"#summary > div.MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-c4sutr > div > div > div > div:nth-child(2) > div > div > strong:nth-child(1)"
+				)
+				.innerHTML.toLowerCase()
+		)} ${
 			document.querySelector(
 				"#portDetailsHeader > div > div.MuiGrid-root.MuiGrid-item.css-1wxaqej > div > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-sm-true.css-qc7bc1 > h1 > span"
-			).innerHTML;
+			).innerHTML
+		}`;
 		presenceData.details = `Watching ${elemName}`;
-		presenceData.state =
+		presenceData.state = `${
 			document.querySelector(
 				"#generalInfo > div.MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-c4sutr > div > div > div > div > p:nth-child(3) > b > a"
-			).innerHTML +
-			" vessels in | " +
+			).innerHTML
+		} vessels in | ${
 			document.querySelector(
 				"#generalInfo > div.MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-c4sutr > div > div > div > div > p:nth-child(4) > b > a"
-			).innerHTML +
-			" arriving";
+			).innerHTML
+		} arriving`;
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			"#portDetailsHeader > div > div.MuiGrid-root.MuiGrid-item.css-1wxaqej > div > div.MuiGrid-root.MuiGrid-item.css-1wxaqej > div > img"
 		).src;
