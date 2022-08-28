@@ -10,13 +10,13 @@ presence.on("UpdateData", () => {
   };
 
   if (window.location.pathname.toLowerCase() === "/") {
-    if (document.querySelector("#duo_loading").style.display === "flex") {
+    if (document.querySelector<HTMLElement>("#duo_loading").style.display === "flex") {
       presenceData.details = "CortexDuo'da eşleşiyor...";
       presenceData.state = "cortexduo.com";
-    } else if (!document.querySelector('button[class="search_humans"]')) {
+    } else if (!document.querySelector<HTMLElement>('button[class="search_humans"]')) {
       presenceData.details = "Sohbet ediyor...";
       presenceData.state = "cortexduo.com";
-    } else if (document.querySelectorAll("#line_chat").length > 5) {
+    } else if (document.querySelectorAll<HTMLElement>("#line_chat").length > 5) {
       presenceData.details = "Yapay Zeka ile sohbet ediyor...";
       presenceData.state = "cortexduo.com";
     } else {
