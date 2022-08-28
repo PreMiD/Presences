@@ -9,6 +9,10 @@ async function getStrings() {
 			paused: "general.paused",
 			browse: "general.browsing",
 			live: "general.live",
+			buttonWatchVideo: "general.buttonWatchVideo",
+			buttonWatchLive: "general.buttonWatchStream",
+			viewCategory: "general.viewCategory",
+			search: "general.searchFor",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -46,11 +50,11 @@ presence.on("UpdateData", async () => {
 		return;
 	}
 	if (search?.value) {
-		presenceData.details = "Searching for";
+		presenceData.details = strings.search;
 		presenceData.state = search.value;
 		presenceData.smallImageKey = Assets.SearchImage;
 	} else if (pathname.includes("/category/")) {
-		presenceData.details = "Viewing category";
+		presenceData.details = strings.viewCategory;
 		presenceData.state = document.querySelector<HTMLMetaElement>(
 			'[property="og:title"]'
 		).content;
@@ -72,14 +76,14 @@ presence.on("UpdateData", async () => {
 			)[1];
 			presenceData.buttons = [
 				{
-					label: "Watch Video",
+					label: strings.buttonWatchVideo,
 					url: href,
 				},
 			];
 		} else {
 			presenceData.buttons = [
 				{
-					label: "Watch Live",
+					label: strings.buttonWatchLive,
 					url: href,
 				},
 			];
