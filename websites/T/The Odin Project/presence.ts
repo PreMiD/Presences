@@ -16,9 +16,10 @@ presence.on("UpdateData", async () => {
 		),
 		courseTitle = document.querySelector<HTMLHeadElement>(
 			"body > div.page-container.lesson > header > div > div > a > h2"
-		);
+		),
+		path = document.location.pathname;
 
-	switch (document.location.pathname) {
+	switch (path) {
 		case "/paths": {
 			presenceData.state = "Viewing all Paths";
 			break;
@@ -40,24 +41,24 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (
-		document.location.pathname.includes("/paths/full-stack-javascript/courses/")
+		path.includes("/paths/full-stack-javascript/courses/")
 	) {
 		(presenceData.details = "Full Stack Javascript - Courses"),
 			(presenceData.state = `${course.textContent}`);
 	} else if (
-		document.location.pathname.includes(
+		path.includes(
 			"/paths/full-stack-ruby-on-rails/courses/"
 		)
 	) {
 		(presenceData.details = "Full Stack Ruby - Courses"),
 			(presenceData.state = `${course.textContent}`);
-	} else if (document.location.pathname.includes("/foundations-")) {
+	} else if (path.includes("/foundations-")) {
 		(presenceData.state = `${lesson.textContent}`),
 			(presenceData.details = "𝙁𝙤𝙪𝙣𝙙𝙖𝙩𝙞𝙤𝙣𝙨 - 𝙇𝙚𝙨𝙨𝙤𝙣");
-	} else if (document.location.pathname.includes("/lessons/node-")) {
+	} else if (path.includes("/lessons/node-")) {
 		(presenceData.details = courseTitle.textContent),
 			(presenceData.state = lesson.textContent);
-	} else if (document.location.pathname.includes("/lessons/ruby-")) {
+	} else if (path.includes("/lessons/ruby-")) {
 		(presenceData.details = courseTitle.textContent),
 			(presenceData.state = lesson.textContent);
 	}
