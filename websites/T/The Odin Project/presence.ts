@@ -10,7 +10,6 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/gtBvHQH.png",
 			startTimestamp: browsingTimestamp,
 		},
-		
 		lesson = document.querySelector(
 			"body > div.page-container.lesson > header > div > div > h1"
 		) as HTMLElement | null,
@@ -21,7 +20,6 @@ presence.on("UpdateData", async () => {
 			"body > div.page-container.lesson > header > div > div > a > h2"
 		) as HTMLElement | null;
 
-		
 	switch (document.location.pathname) {
 		case "/paths": {
 			presenceData.state = "𝐕𝐢𝐞𝐰𝐢𝐧𝐠 𝐚𝐥𝐥 𝐏𝐚𝐭𝐡𝐬";
@@ -41,31 +39,29 @@ presence.on("UpdateData", async () => {
 		}
 		default:
 			presenceData.state = "Viewing Dashboard";
+	}
 
-			if (
-				document.location.pathname.includes(
-					"/paths/full-stack-javascript/courses/"
-				)
-			) {
-				(presenceData.details = "𝗙𝘂𝗹𝗹 𝗦𝘁𝗮𝗰𝗸 𝗝𝗮𝘃𝗮𝘀𝗰𝗿𝗶𝗽𝘁 - 𝗖𝗼𝘂𝗿𝘀𝗲𝘀"),
-					(presenceData.state = `${course.innerText}`);
-			} else if (
-				document.location.pathname.includes(
-					"/paths/full-stack-ruby-on-rails/courses/"
-				)
-			) {
-				(presenceData.details = "𝗙𝘂𝗹𝗹 𝗦𝘁𝗮𝗰𝗸 𝗥𝘂𝗯𝘆 - 𝗖𝗼𝘂𝗿𝘀𝗲𝘀"),
-					(presenceData.state = `${course.innerText}`);
-			} else if (document.location.pathname.includes("/foundations-")) {
-				(presenceData.state = `${lesson.innerText}`),
-					(presenceData.details = "𝙁𝙤𝙪𝙣𝙙𝙖𝙩𝙞𝙤𝙣𝙨 - 𝙇𝙚𝙨𝙨𝙤𝙣");
-			} else if (document.location.pathname.includes("/lessons/node-")) {
-				(presenceData.details = courseTitle.innerText),
-					(presenceData.state = lesson.innerText);
-			} else if (document.location.pathname.includes("/lessons/ruby-")) {
-				(presenceData.details = courseTitle.innerText),
-					(presenceData.state = lesson.innerText);
-			}
+	if (
+		document.location.pathname.includes("/paths/full-stack-javascript/courses/")
+	) {
+		(presenceData.details = "𝗙𝘂𝗹𝗹 𝗦𝘁𝗮𝗰𝗸 𝗝𝗮𝘃𝗮𝘀𝗰𝗿𝗶𝗽𝘁 - 𝗖𝗼𝘂𝗿𝘀𝗲𝘀"),
+			(presenceData.state = `${course.innerText}`);
+	} else if (
+		document.location.pathname.includes(
+			"/paths/full-stack-ruby-on-rails/courses/"
+		)
+	) {
+		(presenceData.details = "𝗙𝘂𝗹𝗹 𝗦𝘁𝗮𝗰𝗸 𝗥𝘂𝗯𝘆 - 𝗖𝗼𝘂𝗿𝘀𝗲𝘀"),
+			(presenceData.state = `${course.innerText}`);
+	} else if (document.location.pathname.includes("/foundations-")) {
+		(presenceData.state = `${lesson.innerText}`),
+			(presenceData.details = "𝙁𝙤𝙪𝙣𝙙𝙖𝙩𝙞𝙤𝙣𝙨 - 𝙇𝙚𝙨𝙨𝙤𝙣");
+	} else if (document.location.pathname.includes("/lessons/node-")) {
+		(presenceData.details = courseTitle.innerText),
+			(presenceData.state = lesson.innerText);
+	} else if (document.location.pathname.includes("/lessons/ruby-")) {
+		(presenceData.details = courseTitle.innerText),
+			(presenceData.state = lesson.innerText);
 	}
 
 	presence.setActivity(presenceData);
