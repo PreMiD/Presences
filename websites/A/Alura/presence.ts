@@ -7,14 +7,16 @@ let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/mJC39Kz.png",
-		details: "Vendo a Alura",
-		startTimestamp: browsingTimestamp,
-	};
+			largeImageKey: "https://i.imgur.com/mJC39Kz.png",
+			details: "Vendo a Alura",
+			startTimestamp: browsingTimestamp,
+		},
+		video = document.querySelector("video");
 
 	if (
 		document.location.pathname.includes("/course") &&
-		!document.location.pathname.includes("/courses")
+		!document.location.pathname.includes("/courses") &&
+		!document.location.pathname.includes("/task")
 	) {
 		presenceData.details = "Vendo um curso";
 		if (
@@ -66,6 +68,22 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 		}
+	} else if (
+		document.location.pathname.includes("/course") &&
+		document.location.pathname.includes("/task")
+	) {
+		presenceData.details = document.querySelector(
+			"a.task-menu-header-info-title > h2"
+		).textContent;
+		presenceData.state = document.querySelector(
+			"span.task-body-header-title-text"
+		).textContent;
+		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageText = video.paused ? "Pausado" : "Reproduzindo";
+
+		delete presenceData.startTimestamp;
+		if (!video.paused)
+			presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
 	} else if (document.location.pathname.includes("/dashboard"))
 		presenceData.details = "Vendo a dashboard";
 	else if (document.location.pathname.includes("/formacao")) {
