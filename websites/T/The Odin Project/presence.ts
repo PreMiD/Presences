@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "1013489969379152022",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/gtBvHQH.png",
@@ -18,7 +17,6 @@ presence.on("UpdateData", async () => {
 			"body > div.page-container.lesson > header > div > div > a > h2"
 		),
 		path = document.location.pathname;
-
 	switch (path) {
 		case "/paths": {
 			presenceData.state = "Viewing all Paths";
@@ -40,16 +38,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Viewing Dashboard";
 	}
 
-	if (
-		path.includes("/paths/full-stack-javascript/courses/")
-	) {
+	if (path.includes("/paths/full-stack-javascript/courses/")) {
 		(presenceData.details = "Full Stack Javascript - Courses"),
 			(presenceData.state = `${course.textContent}`);
-	} else if (
-		path.includes(
-			"/paths/full-stack-ruby-on-rails/courses/"
-		)
-	) {
+	} else if (path.includes("/paths/full-stack-ruby-on-rails/courses/")) {
 		(presenceData.details = "Full Stack Ruby - Courses"),
 			(presenceData.state = `${course.textContent}`);
 	} else if (path.includes("/foundations-")) {
@@ -62,6 +54,5 @@ presence.on("UpdateData", async () => {
 		(presenceData.details = courseTitle.textContent),
 			(presenceData.state = lesson.textContent);
 	}
-
 	presence.setActivity(presenceData);
 });
