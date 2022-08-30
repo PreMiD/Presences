@@ -196,12 +196,6 @@ presence.on("UpdateData", async () => {
 		case `www.dev.${etrnl}`: {
 			presenceData.smallImageKey = "eternalnetworktm_dev";
 
-			if (pathname.startsWith("/")) {
-				presenceData.state = "Creating new features";
-				presenceData.smallImageText = "Dev's paradise";
-				delete presenceData.buttons;
-			}
-
 			if (pathname.includes("/etlog")) {
 				presenceData.state = "Working on ET-LOG system";
 				presenceData.smallImageText = "Updating the website";
@@ -224,12 +218,12 @@ presence.on("UpdateData", async () => {
 
 			if (pathname.includes("/home")) {
 				presenceData.state = ttl;
-				presenceData.smallImageText = "Adding new short url";
+				presenceData.smallImageText = "Adding a new shortened url";
 				delete presenceData.buttons;
 			}
 
 			if (pathname.includes("/profile")) {
-				presenceData.state = "Checking profile";
+				presenceData.state = "Viewing profile";
 				presenceData.smallImageText = "User profile";
 				delete presenceData.buttons;
 			}
@@ -241,7 +235,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (pathname.includes("/admin")) {
-				presenceData.state = "Administrating the system";
+				presenceData.state = "Viewing an admin page";
 				presenceData.smallImageText = "Admin Panel";
 				delete presenceData.buttons;
 			}
