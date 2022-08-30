@@ -39,20 +39,20 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path.includes("/paths/full-stack-javascript/courses/")) {
-		(presenceData.details = "Full Stack Javascript - Courses"),
-			(presenceData.state = `${course.textContent}`);
+		presenceData.details = "Full Stack Javascript - Courses";
+		presenceData.state = `${course.textContent}`;
 	} else if (path.includes("/paths/full-stack-ruby-on-rails/courses/")) {
-		(presenceData.details = "Full Stack Ruby - Courses"),
-			(presenceData.state = `${course.textContent}`);
+		presenceData.details = "Full Stack Ruby - Courses";
+		presenceData.state = `${course.textContent}`;
 	} else if (path.includes("/foundations-")) {
-		(presenceData.state = `${lesson.textContent}`),
-			(presenceData.details = "𝙁𝙤𝙪𝙣𝙙𝙖𝙩𝙞𝙤𝙣𝙨 - 𝙇𝙚𝙨𝙨𝙤𝙣");
+		presenceData.state = `${lesson.textContent}`;
+		presenceData.details = "𝙁𝙤𝙪𝙣𝙙𝙖𝙩𝙞𝙤𝙣𝙨 - 𝙇𝙚𝙨𝙨𝙤𝙣";
 	} else if (path.includes("/lessons/node-")) {
-		(presenceData.details = courseTitle.textContent),
-			(presenceData.state = lesson.textContent);
+		presenceData.details = courseTitle.textContent;
+		presenceData.state = lesson.textContent;
 	} else if (path.includes("/lessons/ruby-")) {
-		(presenceData.details = courseTitle.textContent),
-			(presenceData.state = lesson.textContent);
+		presenceData.details = courseTitle.textContent;
+		presenceData.state = lesson.textContent;
 	}
 	presence.setActivity(presenceData);
 });
