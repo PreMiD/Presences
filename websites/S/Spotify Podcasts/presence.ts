@@ -258,10 +258,9 @@ presence.on("UpdateData", async () => {
 		let pause: boolean;
 
 		if (
-			(
-				document.querySelector("div.player-controls__buttons")
-					.children[1] as HTMLButtonElement
-			).dataset.testid === "control-button-play"
+			document
+				.querySelector("div.player-controls__buttons")
+				?.children[1]?.getAttribute("aria-label") === "Play"
 		)
 			pause = true;
 		else pause = false;
