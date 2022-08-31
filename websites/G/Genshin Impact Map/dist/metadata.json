@@ -15,7 +15,7 @@
 		"genshin-impact-map.appsample.com",
 		"mapgenie.io"
 	],
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"logo": "https://i.imgur.com/6XrkcZs.png",
 	"thumbnail": "https://i.imgur.com/3UmAxEL.png",
 	"color": "#b6c48c",
@@ -26,15 +26,24 @@
 	],
 	"settings": [
 		{
-			"id": "showPreview",
-			"title": "Show Preview",
-			"icon": "fad fa-user-secret",
-			"value": true
-		},
-		{
 			"id": "timestamps",
 			"title": "Show Timestamps",
 			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "showPreview",
+			"title": "Show Preview",
+			"icon": "fad fa-globe",
+			"value": true
+		},
+		{
+			"id": "randomPreview",
+			"if": {
+				"showPreview": true
+			},
+			"title": "Random Preview",
+			"icon": "fad fa-random",
 			"value": true
 		}
 	]
