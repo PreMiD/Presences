@@ -7,15 +7,12 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
 		},
-		{ hostname, pathname } = window.location,
-		searchParams = new URLSearchParams(window.location.search);
-
+		{ hostname, pathname, search } = window.location;
 	switch (hostname) {
 		case "www.heroku.com": {
 			presenceData.details = "Browsing";
-			if (pathname === "/home") {
-				presenceData.state = "Home page";
-			} else {
+			if (pathname === "/home") presenceData.state = "Home page";
+			else {
 				presenceData.state = document.title.match(
 					/(.*?)(?=(?: \| Heroku|$))/
 				)[1];
@@ -29,12 +26,11 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector("h2").textContent;
 			} else if (
 				pathname === "/tickets/new" ||
-				(pathname === "/" && searchParams.get("t") === "true")
-			) {
+				(pathname === "/" && new URLSearchParams(search).get("t") === "true")
+			)
 				presenceData.state = "Creating a new ticket";
-			} else if (pathname === "/tickets") {
-				presenceData.state = "Viewing tickets";
-			} else {
+			else if (pathname === "/tickets") presenceData.state = "Viewing tickets";
+			else {
 				presenceData.state =
 					document.querySelector("h2")?.textContent ||
 					document.querySelector("h1")?.textContent ||
@@ -56,34 +52,28 @@ presence.on("UpdateData", async () => {
 		}
 		case "data.heroku.com": {
 			presenceData.details = "Browsing Data";
-			if (pathname === "/") {
-				presenceData.state = "Looking at datastores";
-			} else if (pathname === "/dataclips") {
+			if (pathname === "/") presenceData.state = "Looking at datastores";
+			else if (pathname === "/dataclips")
 				presenceData.state = "Looking at dataclips";
-			} else if (pathname.startsWith("/datastores/")) {
+			else if (pathname.startsWith("/datastores/")) {
 				if (await presence.getSetting<boolean>("showNames")) {
 					presenceData.state = `Viewing datastore '${document.title.match(
 						/(.*?)(?=(?: \| Heroku Data|$))/
 					)}'`;
-				} else {
-					presenceData.state = "Viewing a datastore";
-				}
+				} else presenceData.state = "Viewing a datastore";
 			} else if (pathname.startsWith("/dataclips/")) {
 				if (await presence.getSetting<boolean>("showNames")) {
 					presenceData.state = `Viewing dataclip '${document.title.match(
 						/(.*?)(?=(?: \| Heroku Data|$))/
 					)}'`;
-				} else {
-					presenceData.state = "Viewing a dataclip";
-				}
+				} else presenceData.state = "Viewing a dataclip";
 			}
 			break;
 		}
 		case "devcenter.heroku.com": {
 			presenceData.details = "Browsing Dev Center";
-			if (pathname === "/") {
-				presenceData.state = "Home page";
-			} else {
+			if (pathname === "/") presenceData.state = "Home page";
+			else {
 				presenceData.state = document.title.match(
 					/(.*?)(?=(?: \| Heroku Dev Center|$))/
 				)[1];
@@ -92,9 +82,8 @@ presence.on("UpdateData", async () => {
 		}
 		case "status.heroku.com": {
 			presenceData.details = "Viewing Heroku Status";
-			if (pathname === "/incidents") {
-				presenceData.state = "Past incidents";
-			} else if (pathname.startsWith("/incidents/")) {
+			if (pathname === "/incidents") presenceData.state = "Past incidents";
+			else if (pathname.startsWith("/incidents/")) {
 				presenceData.state = document.title.match(
 					/(.*?)(?=(?: \| Heroku Status|$))/
 				)[1];
@@ -119,35 +108,44 @@ Tools: ${toolsStatus.textContent.replace(/\s/g, "")}`;
 		}
 		case "dashboard.heroku.com": {
 			presenceData.details = "Viewing Dashboard";
-			if (pathname === "/apps") {
-				presenceData.state = "Apps";
-			} else if (pathname === "/new-app") {
+			if (pathname === "/apps") presenceData.state = "Apps";
+			else if (pathname === "/new-app")
 				presenceData.details = "Creating new app";
-			} else if (pathname.startsWith("/account")) {
+			else if (pathname.startsWith("/account")) {
 				presenceData.details = "Managing account";
-				if (pathname === "/acount") {
-					presenceData.state = "Account settings";
-				} else if (pathname === "/account/applications") {
-					presenceData.state = "Application settings";
-				} else if (pathname === "/account/billing") {
-					presenceData.state = "Billing settings";
+				switch (pathname) {
+					case "/acount": {
+						presenceData.state = "Account settings";
+
+						break;
+					}
+					case "/account/applications": {
+						presenceData.state = "Application settings";
+
+						break;
+					}
+					case "/account/billing": {
+						presenceData.state = "Billing settings";
+
+						break;
+					}
+					// No default
 				}
 			} else if (pathname.startsWith("/apps/")) {
 				if (await presence.getSetting<boolean>("showNames")) {
 					presenceData.details = `Managing app: '${
 						document.title.match(/(.*?)(?=(?: \| Heroku|$))/)[1]
 					}'`;
-				} else {
-					presenceData.details = "Managing app";
-				}
-				const [, , subpath, subpath2] = pathname.split("/").slice(1);
+				} else presenceData.details = "Managing app";
+
+				const [subpath, subpath2] = pathname.split("/").slice(3);
 				if (subpath) {
 					switch (subpath) {
 						case "activity": {
 							presenceData.state = "Activity";
-							if (subpath2 === "/builds") {
+							if (subpath2 === "/builds")
 								presenceData.state = "Viewing build log";
-							}
+
 							break;
 						}
 						default: {
@@ -156,9 +154,7 @@ Tools: ${toolsStatus.textContent.replace(/\s/g, "")}`;
 							)}`;
 						}
 					}
-				} else {
-					presenceData.state = "Overview";
-				}
+				} else presenceData.state = "Overview";
 			} else if (pathname === "/provision-addon") {
 				presenceData.details = "Provisioning an addon";
 				presenceData.state = document.querySelector(
@@ -169,7 +165,5 @@ Tools: ${toolsStatus.textContent.replace(/\s/g, "")}`;
 		}
 	}
 
-	if (presenceData.details) {
-		presence.setActivity(presenceData);
-	}
+	if (presenceData.details) presence.setActivity(presenceData);
 });
