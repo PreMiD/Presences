@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${course.textContent}`;
 	} else if (path.includes("/foundations-")) {
 		presenceData.state = `${lesson.textContent}`;
-		presenceData.details = "𝙁𝙤𝙪𝙣𝙙𝙖𝙩𝙞𝙤𝙣𝙨 - 𝙇𝙚𝙨𝙨𝙤𝙣";
+		presenceData.details = "Foundations - Lessons";
 	} else if (path.includes("/lessons/node-")) {
 		presenceData.details = courseTitle.textContent;
 		presenceData.state = lesson.textContent;
