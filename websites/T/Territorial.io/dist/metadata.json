@@ -1,0 +1,17 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.7",
+    "author": {
+      "name": "redtrillix",
+      "id": "385372736605650945"
+    },
+    "service": "territorial.io",
+    "description": {
+      "en": "Territorial.io is a strategy io game where players fight to expand their nations. Defend your territory, expand, and conquer the map in games of up to 500 players."
+    },
+    "url": "territorial.io",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/gIRlwXD.png",
+    "thumbnail": "https://i.imgur.com/9HuOLtY.png",
+    "color": "#0bb127",
+    "category": "games"
+  }
