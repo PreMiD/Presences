@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "dogukan",
-		"id": "0420"
+		"id": "351309620918091776"
 	},
 	"service": "The Odin Project",
 	"description": {
@@ -18,7 +18,7 @@
 		"top",
 		"odin",
 		"project",
-		"odin-project",
-		"the-odin-project"
+		"odinproject",
+		"theodinproject"
 	]
 }
