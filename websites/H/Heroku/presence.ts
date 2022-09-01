@@ -108,6 +108,65 @@ Tools: ${toolsStatus.textContent.replace(/\s/g, "")}`;
 			}
 			break;
 		}
+		case "blog.heroku.com": {
+			presenceData.details = "Browsing blog posts";
+			if (pathname !== "/") {
+				presenceData.state = document.title.match(
+					/(.*?)(?=(?: \| Heroku|$))/
+				)[1];
+			}
+			break;
+		}
+		case "dashboard.heroku.com": {
+			presenceData.details = "Viewing Dashboard";
+			if (pathname === "/apps") {
+				presenceData.state = "Apps";
+			} else if (pathname === "/new-app") {
+				presenceData.details = "Creating new app";
+			} else if (pathname.startsWith("/account")) {
+				presenceData.details = "Managing account";
+				if (pathname === "/acount") {
+					presenceData.state = "Account settings";
+				} else if (pathname === "/account/applications") {
+					presenceData.state = "Application settings";
+				} else if (pathname === "/account/billing") {
+					presenceData.state = "Billing settings";
+				}
+			} else if (pathname.startsWith("/apps/")) {
+				if (await presence.getSetting<boolean>("showNames")) {
+					presenceData.details = `Managing app: '${
+						document.title.match(/(.*?)(?=(?: \| Heroku|$))/)[1]
+					}'`;
+				} else {
+					presenceData.details = "Managing app";
+				}
+				const [, , subpath, subpath2] = pathname.split("/").slice(1);
+				if (subpath) {
+					switch (subpath) {
+						case "activity": {
+							presenceData.state = "Activity";
+							if (subpath2 === "/builds") {
+								presenceData.state = "Viewing build log";
+							}
+							break;
+						}
+						default: {
+							presenceData.state = `${subpath[0].toUpperCase()}${subpath.slice(
+								1
+							)}`;
+						}
+					}
+				} else {
+					presenceData.state = "Overview";
+				}
+			} else if (pathname === "/provision-addon") {
+				presenceData.details = "Provisioning an addon";
+				presenceData.state = document.querySelector(
+					".new-app-view > div > div > div:nth-of-type(2) > div:nth-of-type(2)"
+				).textContent;
+			}
+			break;
+		}
 	}
 
 	if (presenceData.details) {
