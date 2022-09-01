@@ -27,7 +27,7 @@
 		"@types/babel__core": "^7.1.19",
 		"@types/chrome": "^0.0.193",
 		"@types/debug": "^4.1.7",
-		"@types/glob": "^7.2.0",
+		"@types/glob": "^8.0.0",
 		"@types/json-to-ast": "^2.1.2",
 		"@types/node": "^18.6.3",
 		"@types/prettier": "^2.6.4",
