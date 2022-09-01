@@ -79,6 +79,35 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "devcenter.heroku.com": {
+			presenceData.details = "Browsing Dev Center";
+			if (pathname === "/") {
+				presenceData.state = "Home page";
+			} else {
+				presenceData.state = document.title.match(
+					/(.*?)(?=(?: \| Heroku Dev Center|$))/
+				)[1];
+			}
+			break;
+		}
+		case "status.heroku.com": {
+			presenceData.details = "Viewing Heroku Status";
+			if (pathname === "/incidents") {
+				presenceData.state = "Past incidents";
+			} else if (pathname.startsWith("/incidents/")) {
+				presenceData.state = document.title.match(
+					/(.*?)(?=(?: \| Heroku Status|$))/
+				)[1];
+			} else {
+				const [appStatus, dataStatus, toolsStatus] = document.querySelectorAll(
+					".container.body-container > div a > .status-summary__description"
+				);
+				presenceData.state = `Apps: ${appStatus.textContent.replace(/\s/g, "")}
+Data: ${dataStatus.textContent.replace(/\s/g, "")}
+Tools: ${toolsStatus.textContent.replace(/\s/g, "")}`;
+			}
+			break;
+		}
 	}
 
 	if (presenceData.details) {
