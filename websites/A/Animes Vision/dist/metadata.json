@@ -4,10 +4,12 @@
 		"name": "FelipeSazz",
 		"id": "326123612153053184"
 	},
-	"contributors": [{
-		"name": "RisingSunLight",
-		"id": "240521747852558347"
-	}],
+	"contributors": [
+		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
+		}
+	],
 	"service": "Animes Vision",
 	"description": {
 		"en": "Animes Vision is one of the largest Brazilian anime sites.",
@@ -17,7 +19,7 @@
 		"vi_VN": "Animes Vision là một trong những trang anime lớn nhất Brazil."
 	},
 	"url": "animes.vision",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"logo": "https://i.imgur.com/mzqXcKZ.png",
 	"thumbnail": "https://i.imgur.com/OIHNhHg.png",
 	"color": "#0EAFC1",

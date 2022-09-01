@@ -5,10 +5,10 @@
 		"id": "559097551362457607"
 	},
 	"contributors": [
-	  {
-		"name": "lucas-ga",
-		"id": "855988388216700938"
-	  }
+		{
+			"name": "lucas-ga",
+			"id": "855988388216700938"
+		}
 	],
 	"service": "Alura",
 	"description": {
@@ -17,7 +17,7 @@
 	},
 	"url": "www.alura.com.br",
 	"regExp": "([a-z0-9]+)[.]alura.com.br",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"logo": "https://i.imgur.com/PAVyL0E.png",
 	"thumbnail": "https://i.imgur.com/7IevIec.png",
 	"color": "#051932",
