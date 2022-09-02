@@ -1,14 +1,15 @@
 const presence = new Presence({
 		clientId: "1014999001801691246",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1e3);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "logo_sqaure",
+			largeImageKey: "https://i.imgur.com/V7ZULKG.png",
 		},
-		{ hostname, pathname, search } = window.location;
+		{ hostname, pathname, search } = window.location,
+		showNames = await presence.getSetting<boolean>("showNames");
 	switch (hostname) {
 		case "www.heroku.com": {
 			presenceData.details = "Browsing";
@@ -54,10 +55,9 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Billing settings";
 						break;
 					}
-					// No default
 				}
 			} else if (pathname.startsWith("/apps/")) {
-				if (await presence.getSetting<boolean>("showNames")) {
+				if (showNames) {
 					presenceData.details = `Managing app: '${
 						document.title.match(/(.*?)(?=(?: \| Heroku|$))/)[1]
 					}'`;
@@ -65,18 +65,13 @@ presence.on("UpdateData", async () => {
 
 				const [subpath, subpath2] = pathname.split("/").slice(3);
 				if (subpath) {
-					switch (subpath) {
-						case "activity": {
-							presenceData.state = "Activity";
-							if (subpath2 === "builds")
-								presenceData.state = "Viewing build log";
-							break;
-						}
-						default: {
-							presenceData.state = `${subpath[0].toUpperCase()}${subpath.slice(
-								1
-							)}`;
-						}
+					if (subpath === "activity") {
+						presenceData.state = "Activity";
+						if (subpath2 === "builds") presenceData.state = "Viewing build log";
+					} else {
+						presenceData.state = `${subpath[0].toUpperCase()}${subpath.slice(
+							1
+						)}`;
 					}
 				} else presenceData.state = "Overview";
 			} else if (pathname === "/provision-addon") {
@@ -93,13 +88,13 @@ presence.on("UpdateData", async () => {
 			else if (pathname === "/dataclips")
 				presenceData.state = "Looking at dataclips";
 			else if (pathname.startsWith("/datastores/")) {
-				if (await presence.getSetting<boolean>("showNames")) {
+				if (showNames) {
 					presenceData.state = `Viewing datastore '${document.title.match(
 						/(.*?)(?=(?: \| Heroku Data|$))/
 					)}'`;
 				} else presenceData.state = "Viewing a datastore";
 			} else if (pathname.startsWith("/dataclips/")) {
-				if (await presence.getSetting<boolean>("showNames")) {
+				if (showNames) {
 					presenceData.state = `Viewing dataclip '${document.title.match(
 						/(.*?)(?=(?: \| Heroku Data|$))/
 					)}'`;
