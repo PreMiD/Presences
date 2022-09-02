@@ -25,7 +25,9 @@ presence.on("UpdateData", () => {
 		}
 		case "forum.warthunder.com": {
 			presenceData.details = "Viewing forums";
-			const searchPath = search.match(/(?:\?)(.*?)(?:&.*|$)/)[1],
+			const searchPath = search.match(/(?:\?)(.*?)(?:&.*|$)/)
+					? search.match(/(?:\?)(.*?)(?:&.*|$)/)[1]
+					: "",
 				searchParams = new URLSearchParams(search),
 				pageTitle =
 					document.querySelector<HTMLHeadingElement>(
@@ -73,7 +75,7 @@ presence.on("UpdateData", () => {
 				}`;
 				presenceData.buttons = [
 					{
-						label: "View Page",
+						label: "View Post",
 						url: `https://${hostname}${pathname}`,
 					},
 				];
