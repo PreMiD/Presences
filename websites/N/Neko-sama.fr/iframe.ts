@@ -2,9 +2,9 @@ const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
 
-	if (document.querySelector("video") == null) return;
+	if (document.querySelector("video") === null) return;
 
-	var video = document.querySelector("video");
+	const video = document.querySelector("video");
 	iframe.send({
 		time: video.currentTime,
 		duration: video.duration,
