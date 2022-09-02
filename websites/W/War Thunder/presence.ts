@@ -17,6 +17,7 @@ const presence = new Presence({
 		viewList: "general.viewList",
 		viewCategory: "general.viewCategory",
 		viewProfile: "general.viewProfile",
+		buttonViewPage: "general.buttonViewPage",
 	});
 
 presence.on("UpdateData", async () => {
@@ -33,6 +34,7 @@ presence.on("UpdateData", async () => {
 			viewList,
 			readingPost,
 			readingArticle,
+			buttonViewPage,
 			viewThread,
 			reading,
 			viewProfile,
@@ -101,6 +103,29 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "live.warthunder.com": {
+			presenceData.details = "Browsing War Thunder Live";
+			if (pathname.startsWith("/feed/")) {
+				presenceData.state = document.title.match(/(?:WT Live \/\/ )(.*)/)[1];
+			} else if (pathname.startsWith("/post/")) {
+				presenceData.state = `${readingPost} ${
+					document.title.match(/(?:WT Live \/\/ )(.*)/)[1]
+				}`;
+				presenceData.buttons = [
+					{
+						label: buttonViewPage,
+						url: `https://${hostname}${pathname}`,
+					},
+				];
+			} else if (pathname.startsWith("/subscribes/")) {
+				presenceData.state = `${viewing} subscriptions`;
+			} else if (pathname.startsWith("/user/")) {
+				presenceData.state = `${viewProfile} ${
+					document.querySelector<HTMLSpanElement>(".nickname > span")
+						.textContent
+				}`;
+			} else {
+				presenceData.state = document.title;
+			}
 			break;
 		}
 		case "tss.warthunder.com": {
