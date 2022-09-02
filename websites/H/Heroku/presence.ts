@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "logo_square",
+			largeImageKey: "logo_sqaure",
 		},
 		{ hostname, pathname, search } = window.location;
 	switch (hostname) {
