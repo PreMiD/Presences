@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "547436289960574977"
+		clientId: "547436289960574977",
 	}),
 	timestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		[privacySetting, elapsedTimeSetting, postImageSetting] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("elapsedTime"),
-			presence.getSetting<boolean>("postImage")
+			presence.getSetting<boolean>("postImage"),
 		]),
 		{ pathname } = window.location,
 		path = pathname.split("/"),
@@ -43,8 +43,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Story",
-				url: `https://www.instagram.com/stories/${path[2]}/${path[3]}`
-			}
+				url: `https://www.instagram.com/stories/${path[2]}/${path[3]}`,
+			},
 		];
 	} else if (pathname.startsWith("/accounts")) {
 		presenceData.details = "Settings";
@@ -75,8 +75,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Post",
-				url: `https://www.instagram.com/${path[1]}/${path[2]}`
-			}
+				url: `https://www.instagram.com/${path[1]}/${path[2]}`,
+			},
 		];
 	} else if (pathname.startsWith("/explore"))
 		presenceData.details = "Exploring...";
@@ -93,7 +93,10 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = `Viewing a Profile${privacySetting ? "" : ":"}`;
 		presenceData.state = `${
-			document.querySelector("div.QGPIr h1")?.textContent ?? "Unknown"
+			document
+				.querySelector("head > title")
+				?.textContent.split("(")[0]
+				.trim() ?? "Unknown"
 		} (@${profileName.textContent})`;
 
 		if (profilePicture)
@@ -102,8 +105,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Profile",
-				url: `https://www.instagram.com/${path[1]}`
-			}
+				url: `https://www.instagram.com/${path[1]}`,
+			},
 		];
 	}
 

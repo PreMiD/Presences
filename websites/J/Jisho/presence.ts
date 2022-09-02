@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "715912352561627246"
+		clientId: "715912352561627246",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "favicon",
 		smallImageText: "Jisho Japanese Dictionary",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "jisho.org") {

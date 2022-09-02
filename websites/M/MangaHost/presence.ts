@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "753818401541193859"
+		clientId: "753818401541193859",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "mh_l",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
 		{ hostname } = document.location;
@@ -22,8 +22,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Lançamentos";
 		}
 		if (pathname.startsWith("/scans")) {
-			const [pathsplitted] = pathname.split("/").slice(-1);
-			if (!pathsplitted.includes("scans")) {
+			if (!pathname.split("/").slice(-1)[0].includes("scans")) {
 				presenceData.details = "Vendo Scan:";
 				presenceData.state = document.querySelector("h1").textContent;
 			} else {
@@ -43,9 +42,8 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (pathname.startsWith("/find")) {
-			const [pathsplitted] = pathname.split("/").slice(-1);
 			presenceData.details = "Pesquisando por:";
-			presenceData.state = pathsplitted;
+			presenceData.state = pathname.split("/").slice(-1)[0];
 		}
 
 		if (pathname.startsWith("/wp-admin/profile")) {

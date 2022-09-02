@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "760586876854992926"
+		clientId: "721740741570986016",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 
 function getTime(list: string[]): number {
@@ -20,13 +20,13 @@ function getTimestamps(audioTime: string, audioDuration: string): number[] {
 		Math.floor(Date.now() / 1000),
 		Math.floor(Date.now() / 1000) -
 			getTime(audioTime.split(":").reverse()) +
-			getTime(audioDuration.split(":").reverse())
+			getTime(audioDuration.split(":").reverse()),
 	];
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "anlg"
+			largeImageKey: "anlg",
 		},
 		playback = !!document.querySelector("anghami-player");
 

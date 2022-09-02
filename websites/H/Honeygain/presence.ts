@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "703447484025798717"
+		clientId: "703447484025798717",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
 		presenceData: PresenceData = {
 			largeImageKey: "honeygain",
 			details: "Browsing Honeygain",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (document.location.hostname === "www.honeygain.com") {

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "QkeleQ10",
 		"id": "807917674477649943"
@@ -12,7 +12,7 @@
 	},
 	"url": "xbox.com",
 	"regExp": "([a-z0-9-]+[.])*xbox[.]com[/]",
-	"version": "1.0.7",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/ckUYcRa.png",
 	"thumbnail": "https://i.imgur.com/l6rl0ka.png",
 	"color": "#107c10",

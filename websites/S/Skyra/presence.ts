@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "266624760782258186"
+		clientId: "266624760782258186",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "skyra"
+		largeImageKey: "skyra",
 	};
 
 	if (document.location.hostname === "skyra.pw") {

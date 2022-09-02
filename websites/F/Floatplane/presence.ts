@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "889918462477095012"
+		clientId: "889918462477095012",
 	}),
 	browsingTimestamp = Date.now();
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[, page, pageType, pageTypeType] = location.pathname.split("/");
 
@@ -86,10 +86,8 @@ presence.on("UpdateData", async () => {
 
 				if (pageTypeType === "live") {
 					//Stream
-					const title = document.querySelector(".title-text")?.textContent,
-						video = document.querySelector("video") as HTMLVideoElement;
-
-					if (!title || !video) return;
+					const title = document.querySelector(".title-text")?.textContent;
+					if (!title || !document.querySelector("video")) return;
 
 					delete presenceData.startTimestamp;
 
@@ -99,13 +97,13 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Stream",
-							url: location.href
+							url: location.href,
 						},
 						{
 							label: "View Channel",
 							url: (document.querySelector(".channel-title") as HTMLLinkElement)
-								?.href
-						}
+								?.href,
+						},
 					];
 				}
 
@@ -182,12 +180,12 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "Terms of Service",
-										url: "https://www.floatplane.com/legal/terms"
+										url: "https://www.floatplane.com/legal/terms",
 									},
 									{
 										label: "Privacy Policy",
-										url: "https://www.floatplane.com/legal/privacy"
-									}
+										url: "https://www.floatplane.com/legal/privacy",
+									},
 								];
 
 								break;
@@ -221,7 +219,7 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "View Video",
-										url: location.href
+										url: location.href,
 									},
 									{
 										label: "View Channel",
@@ -229,8 +227,8 @@ presence.on("UpdateData", async () => {
 											document.querySelector(
 												".channel-title"
 											) as HTMLLinkElement
-										).href
-									}
+										).href,
+									},
 								];
 
 								if (video.paused) {

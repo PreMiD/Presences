@@ -5,7 +5,7 @@ let gameArea: HTMLElement, pauseMenu: HTMLElement;
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") {

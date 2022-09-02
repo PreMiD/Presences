@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "798272335035498557"
+		clientId: "798272335035498557",
 	}),
 	time = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 	presenceData.startTimestamp = time;
 	switch (document.location.pathname.toLowerCase()) {
@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
 						char: moreStatsElem.querySelector(".key .bottom").textContent,
 						con: moreStatsElem.querySelector(".consistency .bottom")
 							.textContent,
-						time: moreStatsElem.querySelector(".time .bottom").textContent
+						time: moreStatsElem.querySelector(".time .bottom").textContent,
 					};
 				presenceData.details = `Finished ${document
 					.querySelector(".testType .bottom")

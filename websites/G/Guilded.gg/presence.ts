@@ -1,12 +1,12 @@
 const presence = new Presence({
-	clientId: "662634921914925056"
+	clientId: "662634921914925056",
 });
 
 let login;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (document.location.pathname === "/") {

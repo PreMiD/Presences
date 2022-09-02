@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -18,11 +18,12 @@
 		"tr": "Discord; ücretsiz, güvenli ve hem masaüstünüzde hem de telefonunuzda çalışan oyuncular için hepsi bir arada sesli ve yazılı sohbet uygulamasıdır.",
 		"zh_TW": "Discord是一款專為電子遊戲社區設計的免費網路即時通話軟體與數位發行平台。",
 		"zh_CN": "Discord是一款专为电子游戏社区设计的免费网络实时通话软件与数字发行平台。",
-		"vi_VN": "Phần mềm nhắn tin và trò chuyện tất cả trong một dành cho gamer. Miễn phí, bảo mật, và dùng được trên cả máy tính và điện thoại."
+		"vi_VN": "Phần mềm nhắn tin và trò chuyện tất cả trong một dành cho gamer. Miễn phí, bảo mật, và dùng được trên cả máy tính và điện thoại.",
+		"ko_KR": "Discord는 게이머를 위한 음성 및 채팅 프로그램으로, 데스크톱과 핸드폰 모두에서 무료로 안전하게 작동합니다."
 	},
 	"url": "discord.com",
 	"regExp": "([a-z0-9-]+[.])*(discord[.]com|discord[.]gg|discordapp[.]com|discordmerch[.]com|discordstatus[.]com)[/]",
-	"version": "3.0.13",
+	"version": "3.0.19",
 	"logo": "https://i.imgur.com/MysN6Lu.png",
 	"thumbnail": "https://i.imgur.com/0v13nHT.png",
 	"color": "#7289DA",

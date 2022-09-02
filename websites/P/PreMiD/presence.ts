@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "792735245488488458"
+		clientId: "792735245488488458",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -42,7 +42,8 @@ async function getStrings() {
 			slideshow: "premid.pageSlideshowClass",
 			iframe: "premid.pageIframe",
 			metadata: "premid.pageMetadata",
-			ts: "premid.pageTs"
+			ts: "premid.pageTs",
+			btnViewPage: "general.buttonViewPage",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -54,14 +55,26 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		},
-		newLang = await presence.getSetting<string>("lang"),
-		time = await presence.getSetting<boolean>("time");
+		[newLang, time, showButtons] = await Promise.all([
+			presence.getSetting<string>("lang"),
+			presence.getSetting<string>("time"),
+			presence.getSetting<string>("showButtons"),
+		]);
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
+	}
+
+	if (showButtons) {
+		presenceData.buttons = [
+			{
+				label: strings.btnViewPage,
+				url: window.location.href,
+			},
+		];
 	}
 
 	if (time) presenceData.startTimestamp = browsingTimestamp;
@@ -72,180 +85,187 @@ presence.on("UpdateData", async () => {
 		case "premid.app":
 		case "beta.premid.app": {
 			host.includes("beta")
-				? (presenceData.smallImageText = `BETA | ${(await strings).browsing}`)
-				: (presenceData.smallImageText = (await strings).browsing);
+				? (presenceData.smallImageText = `BETA | ${strings.browsing}`)
+				: (presenceData.smallImageText = strings.browsing);
 			presenceData.smallImageKey = "search";
+
+			let icon;
 
 			switch (true) {
 				case pathIncludes("/downloads"):
-					presenceData.details = (await strings).viewPage;
-					presenceData.state = (await strings).downloads;
+					presenceData.details = strings.viewPage;
+					presenceData.state = strings.downloads;
 					break;
 				case pathIncludes("/contributors"):
-					presenceData.details = (await strings).viewPage;
-					presenceData.state = (await strings).contributors;
+					presenceData.details = strings.viewPage;
+					presenceData.state = strings.contributors;
 					break;
 				case pathIncludes("/beta"):
-					presenceData.details = (await strings).viewPage;
+					presenceData.details = strings.viewPage;
 					presenceData.state = "BETA";
 					break;
 				case pathIncludes("/partner"):
-					presenceData.details = (await strings).viewPage;
-					presenceData.state = (await strings).partners;
+					presenceData.details = strings.viewPage;
+					presenceData.state = strings.partners;
 					break;
 				case pathIncludes("/cookies"):
-					presenceData.details = (await strings).viewPage;
-					presenceData.state = (await strings).cookies;
+					presenceData.details = strings.viewPage;
+					presenceData.state = strings.cookies;
 					break;
 				case pathIncludes("/privacy"):
-					presenceData.details = (await strings).viewPage;
-					presenceData.state = (await strings).privacy;
+					presenceData.details = strings.viewPage;
+					presenceData.state = strings.privacy;
 					break;
 				case pathIncludes("/tos"):
-					presenceData.details = (await strings).viewPage;
-					presenceData.state = (await strings).terms;
+					presenceData.details = strings.viewPage;
+					presenceData.state = strings.terms;
 					break;
 				case pathIncludes("/users/"):
-					presenceData.details = (await strings).viewUser;
+					icon = document.querySelector<HTMLImageElement>(
+						"div.user-avatar img"
+					)?.src;
+
+					presenceData.details = strings.viewUser;
 					presenceData.state = document.querySelector("div.user-data p")
 						? document
 								.querySelector("div.user-data p")
 								.textContent.replace(/[\s\n]+/gi, "")
 						: "USER NOT FOUND...";
+
+					if (icon) {
+						presenceData.largeImageKey = icon;
+						presenceData.smallImageKey = "lg";
+					}
 					break;
 				case pathIncludes("/store/presences/"):
-					presenceData.details = (await strings).viewPresence;
+					icon = document.querySelector<HTMLImageElement>(
+						"div.header__title div.section img"
+					)?.src;
+
+					presenceData.details = strings.viewPresence;
 					presenceData.state = document.querySelector(
 						".header__title > div > h1"
 					)
 						? document
 								.querySelector(".header__title > div > h1")
 								.textContent.replace(/^\s+|\s+$/g, "")
-						: (await strings).store;
+						: strings.store;
+
+					if (icon) {
+						presenceData.largeImageKey = icon;
+						presenceData.smallImageKey = "lg";
+					}
 					break;
 				case pathIncludes("/store"):
-					presenceData.details = (await strings).viewPage;
-					presenceData.state = (await strings).store;
+					presenceData.details = strings.viewPage;
+					presenceData.state = strings.store;
 					break;
 				default:
-					presenceData.details = (await strings).viewPage;
-					presenceData.state = (await strings).home;
+					presenceData.details = strings.viewPage;
+					presenceData.state = strings.home;
 			}
 
 			break;
 		}
 		case "docs.premid.app": {
-			presenceData.details = `${(await strings).docs} | ${
-				(await strings).viewPage
-			}`;
+			presenceData.details = `${strings.docs} | ${strings.viewPage}`;
 			presenceData.smallImageKey = "reading";
-			presenceData.smallImageText = (await strings).reading;
+			presenceData.smallImageText = strings.reading;
 
 			switch (true) {
 				case pathIncludes("/troubleshooting"):
-					presenceData.state = (await strings).yikes;
+					presenceData.state = strings.yikes;
 					break;
 				case pathIncludes("/install/requirements"):
-					presenceData.state = (await strings).sysreq;
+					presenceData.state = strings.sysreq;
 					break;
 				case pathIncludes("/install/windows"):
-					presenceData.state = (await strings).installFor.replace(
-						"{0}",
-						"Windows"
-					);
+					presenceData.state = strings.installFor.replace("{0}", "Windows");
 					break;
 				case pathIncludes("/install/macos"):
-					presenceData.state = (await strings).installFor.replace(
-						"{0}",
-						"MacOS"
-					);
+					presenceData.state = strings.installFor.replace("{0}", "MacOS");
 					break;
 				case pathIncludes("/install/linux"):
-					presenceData.state = (await strings).installFor.replace(
-						"{0}",
-						"Linux"
-					);
+					presenceData.state = strings.installFor.replace("{0}", "Linux");
 					break;
 				case pathIncludes("/install/firefox"):
-					presenceData.state = (await strings).installFor.replace(
-						"{0}",
-						"Firefox"
-					);
+					presenceData.state = strings.installFor.replace("{0}", "Firefox");
 					break;
 				case pathIncludes("/install/chromium"):
-					presenceData.state = (await strings).installFor.replace(
+					presenceData.state = strings.installFor.replace(
 						"{0}",
 						"Chromium-based browsers"
 					);
 					break;
 				case pathIncludes("/install"):
-					presenceData.state = (await strings).install;
+					presenceData.state = strings.install;
 					break;
 				case pathIncludes("/dev/presence/guidelines"):
-					presenceData.state = (await strings).presenceGuide;
+					presenceData.state = strings.presenceGuide;
 					break;
 				case pathIncludes("/dev/presence/tsconfig"):
-					presenceData.state = (await strings).ts;
+					presenceData.state = strings.ts;
 					break;
 				case pathIncludes("/dev/presence/metadata"):
-					presenceData.state = (await strings).metadata;
+					presenceData.state = strings.metadata;
 					break;
 				case pathIncludes("/dev/presence/iframe"):
-					presenceData.state = (await strings).iframe;
+					presenceData.state = strings.iframe;
 					break;
 				case pathIncludes("/dev/presence/class"):
-					presenceData.state = (await strings).class;
+					presenceData.state = strings.class;
 					break;
 				case pathIncludes("/dev/presence/slideshow"):
-					presenceData.state = (await strings).slideshow;
+					presenceData.state = strings.slideshow;
 					break;
 				case pathIncludes("/dev/presence"):
-					presenceData.state = (await strings).presenceDev;
+					presenceData.state = strings.presenceDev;
 					break;
 				case pathIncludes("/dev/api/v3"):
-					presenceData.state = (await strings).apiPage.replace("{0}", "3");
+					presenceData.state = strings.apiPage.replace("{0}", "3");
 					break;
 				case pathIncludes("/dev/api/v2"):
-					presenceData.state = (await strings).apiPage.replace("{0}", "2");
+					presenceData.state = strings.apiPage.replace("{0}", "2");
 					break;
 				case pathIncludes("/dev/api/v1"):
-					presenceData.state = (await strings).apiPage.replace("{0}", "1");
+					presenceData.state = strings.apiPage.replace("{0}", "1");
 					break;
 				case pathIncludes("/dev/api"):
-					presenceData.state = (await strings).api;
+					presenceData.state = strings.api;
 					break;
 				case pathIncludes("/dev"):
-					presenceData.state = (await strings).start;
+					presenceData.state = strings.start;
 					break;
 				case pathIncludes("/about"):
-					presenceData.state = (await strings).about;
+					presenceData.state = strings.about;
 					break;
 				case pathIncludes("/home"):
 				default:
-					presenceData.state = (await strings).home;
+					presenceData.state = strings.home;
 			}
 
 			break;
 		}
 		case "status.premid.app": {
-			presenceData.details = `Status page | ${(await strings).viewing}`;
+			presenceData.details = `Status page | ${strings.viewing}`;
 			presenceData.smallImageKey = "search";
-			presenceData.smallImageText = (await strings).browsing;
+			presenceData.smallImageText = strings.browsing;
 
 			switch (true) {
 				case pathIncludes("/incidents"):
-					presenceData.details = `${
-						(await strings).viewing
-					} ${document.title.replace("PreMiD Status - ", "")}`;
+					presenceData.details = `${strings.viewing} ${document.title.replace(
+						"PreMiD Status - ",
+						""
+					)}`;
 					break;
 				case pathIncludes("/history"):
-					presenceData.state = (await strings).incident;
+					presenceData.state = strings.incident;
 					break;
 				case pathIncludes("/uptime"):
-					presenceData.state = (await strings).uptime;
+					presenceData.state = strings.uptime;
 					break;
 				default:
-					presenceData.state = (await strings).home;
+					presenceData.state = strings.home;
 			}
 
 			break;

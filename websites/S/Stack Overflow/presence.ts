@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "610123745033584651"
+		clientId: "610123745033584651",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLAnchorElement,
@@ -14,7 +14,7 @@ let title: HTMLAnchorElement,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Unknown page",
-		largeImageKey: "lg"
+		largeImageKey: "lg",
 	};
 
 	title = document.querySelector("div#question-header h1 a");

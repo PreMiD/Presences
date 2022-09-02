@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "730052820459454496"
+		clientId: "730052820459454496",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		[format1, format2, elapsed, format, info, dj] = await Promise.all([
 			presence.getSetting<string>("sFormatNoDj1"),
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("tElapsed"),
 			presence.getSetting<string>("sFormat"),
 			presence.getSetting<boolean>("sInfo"),
-			presence.getSetting<boolean>("sDj")
+			presence.getSetting<boolean>("sDj"),
 		]);
 
 	if (elapsed) presenceData.startTimestamp = browsingTimestamp;

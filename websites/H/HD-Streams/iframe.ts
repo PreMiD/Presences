@@ -1,5 +1,3 @@
-const _frameInstance = new iFrame();
-
 (function (iframe: iFrame) {
 	iframe.on("UpdateData", async () => {
 		const video: HTMLVideoElement =
@@ -11,8 +9,8 @@ const _frameInstance = new iFrame();
 			iframe.send({
 				duration: video.duration,
 				currentTime: video.currentTime,
-				paused: video.paused
+				paused: video.paused,
 			});
 		} else iframe.send(null);
 	});
-})(_frameInstance);
+})(new iFrame());

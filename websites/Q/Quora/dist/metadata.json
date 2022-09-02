@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "rippledwater",
 		"id": "752720971089182752"
@@ -13,7 +13,7 @@
 	},
 	"url": "quora.com",
 	"regExp": "([a-z0-9]+)[.]quora[.]com",
-	"version": "1.0.11",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/WBwFUzx.png",
 	"thumbnail": "https://i.imgur.com/rrhEpI3.png",
 	"color": "#A70000",

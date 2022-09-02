@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "853327058054545438"
+		clientId: "853327058054545438",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "anitube_logo_",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		search: HTMLInputElement = document.querySelector(
 			".searchContainer > form > input"
@@ -14,8 +14,8 @@ presence.on("UpdateData", async () => {
 		{ pathname, href } = document.location;
 
 	if (
-		(document.querySelector(".searchContainer") as HTMLDivElement).style
-			.display === "block"
+		document.querySelector<HTMLDivElement>(".searchContainer").style.display ===
+		"block"
 	)
 		presenceData.details = `Searching for ${search ? search.value : null}`;
 	else {
@@ -64,11 +64,10 @@ presence.on("UpdateData", async () => {
 					pathname.startsWith("/tokusatsu/") ||
 					pathname.startsWith("/donghua/")
 				) {
-					const title: string = (
-						document.querySelector(".anime_container_titulo") as HTMLDivElement
-					).textContent;
 					presenceData.details = "Checking synopsis";
-					presenceData.state = title;
+					presenceData.state = document.querySelector<HTMLDivElement>(
+						".anime_container_titulo"
+					).textContent;
 				} else if (pathname.startsWith("/video/")) {
 					const title: string = (
 							document.querySelector(
@@ -87,8 +86,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Along",
-							url: href
-						}
+							url: href,
+						},
 					];
 					if (!videoElement.paused) {
 						[, presenceData.endTimestamp] =

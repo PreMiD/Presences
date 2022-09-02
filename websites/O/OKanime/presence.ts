@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "760589463792910388"
+		clientId: "721747730774491187",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 
 interface VideoData {
@@ -16,7 +16,7 @@ interface VideoData {
 let video: VideoData = {
 	duration: 0,
 	currentTime: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on("iFrameData", (data: VideoData) => {
@@ -25,7 +25,7 @@ presence.on("iFrameData", (data: VideoData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "oa"
+		largeImageKey: "oa",
 	};
 
 	if (video && !isNaN(video.duration) && video.duration > 0) {

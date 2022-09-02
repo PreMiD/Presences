@@ -10,7 +10,7 @@ const startTime: number = Date.now();
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: startTime
+		startTimestamp: startTime,
 	};
 	// Getting Data
 	url = document.URL;

@@ -1,18 +1,43 @@
 const presence = new Presence({
-		clientId: "870850875562819595"
-	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		clientId: "870850875562819595",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			anime: "general.anime",
+			pause: "general.paused",
+			search: "general.search",
+			episode: "general.episode",
+			viewPage: "general.viewPage",
+			browsing: "general.browsing",
+			watching: "general.watching",
+			viewHome: "general.viewHome",
+			viewList: "general.viewList",
+			searchFor: "general.searchFor",
+			viewGenre: "general.viewGenre",
+			viewMovie: "general.viewMovie",
+			viewAnime: "general.viewAnime",
+			viewEpisode: "general.viewEpisode",
+			viewCategory: "general.viewCategory",
+			watchingMovie: "general.watchingMovie",
+			searchSomething: "general.searchSomething",
+			buttonWatchMovie: "general.buttonWatchMovie",
+			buttonViewEpisode: "general.buttonViewEpisode",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
 
 let video = {
 		current: 0,
 		duration: 0,
-		paused: true
+		paused: true,
 	},
+	movie,
+	episode,
 	Sub: string;
 
 presence.on(
@@ -22,78 +47,109 @@ presence.on(
 	}
 );
 
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
+
 presence.on("UpdateData", async () => {
-	const [time, privacy, buttons] = await Promise.all([
-			presence.getSetting<boolean>("timestamps"),
-			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
-		]),
+	const [newLang, privacy, showepisode, time, subtitle, buttons] =
+			await Promise.all([
+				presence.getSetting<string>("lang").catch(() => "en"),
+				presence.getSetting<boolean>("privacy"),
+				presence.getSetting<boolean>("showepisode"),
+				presence.getSetting<boolean>("timestamps"),
+				presence.getSetting<boolean>("subtitle"),
+				presence.getSetting<boolean>("buttons"),
+			]),
 		title =
 			document.querySelector(
 				"#contenedor > div.module > div.content > header > h1"
-			)?.textContent ?? "ไม่ทราบชื่อ",
+			)?.textContent ?? "?",
 		titlemovies =
 			document.querySelector(
 				"#single > div.content > div.sheader > div.data > h1"
-			)?.textContent ?? "ไม่ทราบชื่อ",
-		playvdo =
-			document.querySelector("#info > h1")?.textContent ?? "ไม่ทราบชื่อเรื่อง",
+			)?.textContent ?? "?",
+		playvdo = document.querySelector("#info > h1")?.textContent ?? "?",
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: "site",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
-	let movie, episode;
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 	if (pathArray[3].includes("?s=")) {
-		presenceData.details = "กำลังค้นหา";
+		presenceData.details = `${
+			privacy ? strings.searchSomething : strings.searchFor
+		}`;
 		presenceData.state = (
 			document.querySelector(".content.rigth.csearch > header > h1")
-				?.textContent ?? "ไม่พบสิ่งที่คุณกำลังค้นหา"
+				?.textContent ?? strings.searchSomething
 		)
 			.split("ผลการค้นหา:")
 			.pop();
 		presenceData.smallImageKey = "search";
 	} else if (!privacy && (pathArray[4] === "page" || pathArray[5] === "page")) {
-		presenceData.details = `หน้า ${pathArray[pathArray.indexOf("page") + 1]}`;
+		presenceData.details = `${strings.viewPage} ${
+			pathArray[pathArray.indexOf("page") + 1]
+		}`;
 		presenceData.state = title;
 	} else {
 		switch (pathArray[3]) {
 			case "genre":
-				presenceData.details = "ประเภท";
+				presenceData.details = privacy
+					? strings.viewGenre.replace(":", "")
+					: strings.viewGenre;
 				presenceData.state = title;
+				presenceData.smallImageKey = "reading";
 				break;
 			case "catalog":
-				presenceData.details = "หมวดหมู่";
+				presenceData.details = privacy
+					? strings.viewCategory.replace(":", "")
+					: strings.viewList;
 				presenceData.state = title;
+				presenceData.smallImageKey = "reading";
 				break;
 			case "category":
-				presenceData.details = "หมวดหมู่";
+				presenceData.details = privacy
+					? strings.viewCategory.replace(":", "")
+					: strings.viewCategory;
 				presenceData.state = title;
+				presenceData.smallImageKey = "reading";
 				break;
 			case "tag":
-				presenceData.details = "รวมอนิเมะ";
+				presenceData.details = privacy
+					? strings.viewCategory.replace(":", "")
+					: strings.viewList;
 				presenceData.state = title.split("รวมอนิเมะ").pop();
+				presenceData.smallImageKey = "reading";
 				break;
 			case "release":
-				presenceData.details = "ปี";
+				presenceData.details = privacy
+					? strings.viewCategory.replace(":", "")
+					: strings.viewList;
 				presenceData.state = title;
+				presenceData.smallImageKey = "reading";
 				break;
 			case "movies":
-				presenceData.details = "เดอะมูฟวี่";
-				presenceData.state = titlemovies;
-				if (titlemovies === "มูฟวี่") {
+				if (!["เดอะมูฟวี่", "เดอะ", "มูฟวี่"].includes(titlemovies)) {
 					const movieinfo = titlemovies.split(/(เดอะ)?(มูฟวี่)/);
 					movie = movieinfo.pop();
 					if (movie === "ซับไทย")
 						movie = movie.replace((Sub = "ซับไทย"), "").trim();
 					else if (movie === "พากย์ไทย")
 						movie = movie.replace((Sub = "พากย์ไทย"), "").trim();
-					movie = `เดอะมูฟวี่ ${movie} ${Sub}`;
-					if (privacy) presenceData.details = movie;
-					else if (!privacy) {
-						presenceData.state = movie;
-						[presenceData.details] = movieinfo;
-					}
+					movie = `${strings.watchingMovie} ${movie} ${subtitle ? Sub : ""}`;
+					privacy
+						? (presenceData.details = strings.watchingMovie)
+						: (presenceData.state = `${movieinfo[0]}`),
+						(presenceData.details = strings.watchingMovie);
+				} else {
+					presenceData.details = privacy
+						? strings.viewMovie.replace(":", "")
+						: strings.viewMovie;
+					presenceData.state = titlemovies;
+					presenceData.smallImageKey = "reading";
 				}
 				presenceData.smallImageKey = video.paused ? "pause" : "playing";
 				presenceData.smallImageText = video.paused
@@ -108,26 +164,27 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: "ดูเดอะมูฟวี่",
-							url: document.location.href.replace(/#\d+/, "")
-						}
+							label: strings.buttonWatchMovie,
+							url: document.location.href.replace(/#\d+/, ""),
+						},
 					];
-				} else {
-					delete presenceData.startTimestamp;
-					delete presenceData.endTimestamp;
 				}
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
 				break;
 			case "anime":
 				if (pathArray[4] !== "page") {
 					const ep =
 						document.querySelector(
 							"#single > div.content > div.sheader > div.data > h1"
-						)?.textContent ?? "ไม่ทราบชื่อตอน";
+						)?.textContent ?? strings.anime;
 					presenceData.startTimestamp = browsingTimestamp;
-					presenceData.details = "เลือกตอน";
+					presenceData.details = privacy
+						? strings.viewAnime.replace(":", "")
+						: strings.viewAnime;
 					presenceData.state = `${ep.split("ตอนที่")[0]}`;
-				} else presenceData.details = "อนิเมะอัพเดตล่าสุด";
-
+				} else presenceData.details = strings.browsing;
+				presenceData.smallImageKey = "reading";
 				break;
 			case "ep":
 				if (playvdo.includes("ตอนที่")) {
@@ -137,20 +194,22 @@ presence.on("UpdateData", async () => {
 						episode = episode.replace((Sub = "ซับไทย"), "").trim();
 					else if (episode === "พากย์ไทย")
 						episode = episode.replace((Sub = "พากย์ไทย"), "").trim();
-					episode = `ตอนที่ ${episode}`;
-					if (privacy) presenceData.details = episode;
-					else if (!privacy) {
-						presenceData.state = episode;
-						[presenceData.details] = info;
-					}
+					episode = `${strings.episode} ${
+						subtitle ? episode : episode.match(/\d+/g)[0]
+					}`;
+					privacy
+						? (presenceData.details = showepisode
+								? episode
+								: `${strings.watching.replace(":", "")} ${strings.anime}`)
+						: ([presenceData.details] = info),
+						(presenceData.state = episode);
 				} else {
 					let info;
 					if (playvdo === "ซับไทย") info = playvdo.replace("ซับไทย", "").trim();
 					else if (playvdo === "พากย์ไทย")
 						info = playvdo.replace("พากย์ไทย", "").trim();
-					episode = "กำลังดู";
+					presenceData.details = strings.watching;
 					presenceData.state = info;
-					presenceData.details = episode;
 				}
 				presenceData.smallImageKey = video.paused ? "pause" : "playing";
 				presenceData.smallImageText = video.paused
@@ -165,14 +224,15 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: "ดูอนิเมะ",
-							url: document.location.href.replace(/#\d+/, "")
-						}
+							label: strings.buttonViewEpisode,
+							url: document.location.href.replace(/#\d+/, ""),
+						},
 					];
 				}
 				break;
 			default:
-				presenceData.details = "อนิเมะอัพเดตล่าสุด";
+				presenceData.details = strings.viewHome;
+				presenceData.smallImageKey = "reading";
 				break;
 		}
 	}

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "612299892764966923"
+		clientId: "612299892764966923",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	subsection = new URL(document.location.href).searchParams.get("subsection");
@@ -15,7 +15,7 @@ let AppName: HTMLElement,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Unknown page",
-		largeImageKey: "lg"
+		largeImageKey: "lg",
 	};
 
 	if (document.location.hostname === "steamcommunity.com") {

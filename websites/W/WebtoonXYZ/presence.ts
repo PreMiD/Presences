@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "836962986451140609"
+		clientId: "836962986451140609",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const [logo, buttons] = await Promise.all([
 			presence.getSetting<number>("logo"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: !logo ? "logo" : "logo-v2",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
 
@@ -64,8 +64,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Webtoon",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (pathname.startsWith("/read")) {
@@ -82,8 +82,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Webtoon",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (pathname === "/user-settings/") {

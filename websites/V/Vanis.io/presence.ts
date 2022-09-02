@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "759926761554313218"
+	clientId: "759926761554313218",
 });
 
 // Timestamp

@@ -1,7 +1,11 @@
 const presence = new Presence({
-		clientId: "839150832036872213"
+		clientId: "839150832036872213",
 	}),
 	time = Math.floor(Date.now() / 1000);
+
+let iframeData: {
+	[key: string]: string;
+} = {};
 
 async function getStrings() {
 	return presence.getStrings(
@@ -65,7 +69,7 @@ async function getStrings() {
 			statePlaying: "general.playing",
 			btnViewProduct: "apple.btnViewProduct",
 			btnViewService: "apple.btnViewService",
-			btnViewArticle: "general.buttonReadArticle",
+			btnReadArticle: "general.buttonReadArticle",
 			btnViewEvent: "apple.btnViewEvent",
 			btnViewOS: "apple.btnViewOS",
 			btnViewStudio: "apple.btnViewStudio",
@@ -77,7 +81,7 @@ async function getStrings() {
 			btnViewProfile: "apple.btnViewProfile",
 			btnViewPage: "general.buttonViewPage",
 			btnGViewProfile: "general.buttonViewProfile",
-			btnGWatchVideo: "general.buttonWatchVideo"
+			btnGWatchVideo: "general.buttonWatchVideo",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -90,12 +94,22 @@ let strings: ReturnType<typeof getStrings> extends PromiseLike<infer U>
 
 presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.toLowerCase().split("/"),
-		[newLang, timeElapsed, buttons, logo, devProfileBtn] = await Promise.all([
+		[
+			newLang,
+			timeElapsed,
+			buttons,
+			logo,
+			devProfileBtn,
+			showICloudMailSender,
+			showICloudMailSubject,
+		] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("timeElapsed"),
 			presence.getSetting<boolean>("showButtons"),
 			presence.getSetting<number>("logo"),
-			presence.getSetting<boolean>("devProfileBtn")
+			presence.getSetting<boolean>("devProfileBtn"),
+			presence.getSetting<boolean>("iCloudMailSender"),
+			presence.getSetting<boolean>("iCloudMailSubject"),
 		]),
 		products = [
 			"ipad",
@@ -134,7 +148,7 @@ presence.on("UpdateData", async () => {
 			"airpods-3rd-generation",
 			"homepod-mini",
 			"ipod-touch",
-			"apple-tv-4k"
+			"apple-tv-4k",
 		],
 		services = [
 			"apple-fitness-plus",
@@ -151,10 +165,10 @@ presence.on("UpdateData", async () => {
 			"app-store",
 			"music",
 			"apple-music",
-			"maps"
+			"maps",
 		],
 		presenceData: PresenceData = {
-			largeImageKey: ["logo", "logo-rainbow"][logo] || "logo"
+			largeImageKey: ["logo", "logo-rainbow"][logo] || "logo",
 		};
 
 	if (!oldLang || oldLang !== newLang) {
@@ -185,18 +199,16 @@ presence.on("UpdateData", async () => {
 					.split("-")[0]
 					.replace(/ *\([^)]*\) */g, "");
 			} else {
-				const product = getPSName();
-
 				presenceData.details = strings.viewProduct;
-				presenceData.state = product;
+				presenceData.state = getPSName();
 			}
 
 			if (buttons) {
 				presenceData.buttons = [
 					{
 						label: strings.btnViewProduct,
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (services.find(e => urlpath.includes(e))) {
@@ -207,8 +219,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.btnViewService,
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath.includes("newsroom")) {
@@ -225,9 +237,9 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
-							url: window.location.href
-						}
+							label: strings.btnReadArticle,
+							url: window.location.href,
+						},
 					];
 				}
 			}
@@ -242,9 +254,9 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
-							url: window.location.href
-						}
+							label: strings.btnReadArticle,
+							url: window.location.href,
+						},
 					];
 				}
 			} else if (urlpath.includes("event")) {
@@ -259,8 +271,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.btnViewEvent,
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			} else if (document.querySelector("h1.typography-headline-elevated")) {
@@ -274,9 +286,9 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.btnViewArticle,
-							url: window.location.href
-						}
+							label: strings.btnReadArticle,
+							url: window.location.href,
+						},
 					];
 				}
 			}
@@ -314,8 +326,8 @@ presence.on("UpdateData", async () => {
 						label: strings.btnViewOS
 							.replace("{0}", OS.textContent.replace("Preview", ""))
 							.substring(0, 30),
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath.includes("apple-events")) {
@@ -330,8 +342,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.btnViewEvent,
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath.includes("store-opening-letter"))
@@ -372,22 +384,21 @@ presence.on("UpdateData", async () => {
 						label: strings.btnViewProduct,
 						url: `https://www.apple.com/shop/${urlpath[num]}/${
 							urlpath[num + 1]
-						}`
-					}
+						}`,
+					},
 				];
 			}
 		} else if (urlpath[num] === "product") {
-			const product = document.querySelector("h1.rf-pdp-title")?.textContent;
-
 			presenceData.details = strings.viewProduct;
-			presenceData.state = product;
+			presenceData.state =
+				document.querySelector("h1.rf-pdp-title")?.textContent;
 
 			if (buttons) {
 				presenceData.buttons = [
 					{
 						label: strings.btnViewProduct,
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath[num] === "watch") {
@@ -412,8 +423,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.btnViewStudio.replace("{0}", product),
-						url: `https://www.apple.com/shop/studio/${urlpath[num + 1]}`
-					}
+						url: `https://www.apple.com/shop/studio/${urlpath[num + 1]}`,
+					},
 				];
 			}
 		} else if (urlpath[num] === "favorites") {
@@ -479,7 +490,7 @@ presence.on("UpdateData", async () => {
 					"airpods",
 					"music",
 					"tv",
-					"displays"
+					"displays",
 				];
 
 				presenceData.largeImageKey = "apple-support";
@@ -490,10 +501,28 @@ presence.on("UpdateData", async () => {
 						document.querySelector("h1.pageTitle-heading")?.textContent ||
 						document.querySelector("h1#main-title")?.textContent ||
 						"Unknown";
+
+					if (buttons) {
+						presenceData.buttons = [
+							{
+								label: strings.btnReadArticle,
+								url: window.location.href,
+							},
+						];
+					}
 				} else if (document.querySelector("div.mod-date")) {
 					presenceData.details = strings.supportArticle;
 					presenceData.state =
 						document.querySelector("h1#howto-title")?.textContent || "Unknown";
+
+					if (buttons) {
+						presenceData.buttons = [
+							{
+								label: strings.btnReadArticle,
+								url: window.location.href,
+							},
+						];
+					}
 				} else if (window.location.hostname === "getsupport.apple.com")
 					presenceData.details = strings.support;
 				else {
@@ -521,8 +550,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: strings.btnViewApp,
-								url: window.location.href
-							}
+								url: window.location.href,
+							},
 						];
 					}
 				} else if (urlpath.includes("developer")) {
@@ -540,8 +569,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: strings.btnViewDeveloper,
-								url: window.location.href
-							}
+								url: window.location.href,
+							},
 						];
 					}
 				}
@@ -554,9 +583,36 @@ presence.on("UpdateData", async () => {
 
 				if (!urlpath[1]) presenceData.state = "Launchpad";
 				else {
+					if (urlpath[1] !== "iclouddrive") {
+						presenceData.largeImageKey = `icloud_${urlpath[1]}`;
+						presenceData.smallImageKey = "icloud";
+					}
+
 					switch (urlpath[1]) {
 						case "mail": {
 							presenceData.state = strings.iCloudMail;
+
+							if (iframeData) {
+								presenceData.details = `iCloud - ${strings.iCloudMail}`;
+								presenceData.state = iframeData.currentMailbox;
+
+								if (iframeData.currentMailSubject) {
+									presenceData.details = `iCloud - ${strings.iCloudMail} - ${iframeData.currentMailbox}`;
+
+									let state = showICloudMailSubject
+										? iframeData.currentMailSubject
+										: "";
+
+									if (iframeData.currentMailSender && showICloudMailSender) {
+										state = `${iframeData.currentMailSender}${
+											state !== "" ? `: ${state}` : ""
+										}`;
+									}
+
+									presenceData.state = state;
+								} else presenceData.state = iframeData.currentMailbox;
+							} else presenceData.state = strings.iCloudMail;
+
 							break;
 						}
 						case "contacts": {
@@ -584,8 +640,6 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "pages": {
-							presenceData.largeImageKey = "pages";
-
 							if (urlpath[2]) {
 								presenceData.details = "iCloud Pages";
 
@@ -605,8 +659,6 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "keynote": {
-							presenceData.largeImageKey = "keynote";
-
 							if (urlpath[2]) {
 								presenceData.details = "iCloud Keynote";
 
@@ -660,7 +712,7 @@ presence.on("UpdateData", async () => {
 						"accessories",
 						"licensing-trademarks",
 						"system-status",
-						"widgets"
+						"widgets",
 					],
 					cpage =
 						document.querySelector("body")?.id ||
@@ -702,8 +754,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: strings.btnViewWWDC.replace("{0}", wwdc),
-								url: `https://developer.apple.com/${wwdc.toLowerCase()}/`
-							}
+								url: `https://developer.apple.com/${wwdc.toLowerCase()}/`,
+							},
 						];
 					}
 				} else {
@@ -760,8 +812,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: strings.btnViewPage,
-										url: window.location.href
-									}
+										url: window.location.href,
+									},
 								];
 							}
 
@@ -836,8 +888,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: strings.btnViewThread,
-										url: window.location.href
-									}
+										url: window.location.href,
+									},
 								];
 							} else if (urlpath[2] === "tags") {
 								presenceData.details = strings.forumTags;
@@ -848,8 +900,8 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: strings.btnViewTags,
-										url: window.location.href
-									}
+										url: window.location.href,
+									},
 								];
 							} else if (urlpath[2] === "profile" && urlpath[3]) {
 								const nickname = document.querySelector(
@@ -867,8 +919,8 @@ presence.on("UpdateData", async () => {
 										presenceData.buttons = [
 											{
 												label: strings.btnViewProfile.replace("{0}", nickname),
-												url: window.location.href
-											}
+												url: window.location.href,
+											},
 										];
 									}
 								}
@@ -893,8 +945,8 @@ presence.on("UpdateData", async () => {
 											)?.href ||
 											`https://developer.apple.com/forums/profile/${
 												document.querySelector("span.user-name")?.textContent
-											}`
-									}
+											}`,
+									},
 								];
 							}
 
@@ -948,8 +1000,8 @@ presence.on("UpdateData", async () => {
 									presenceData.buttons = [
 										{
 											label: strings.btnGWatchVideo,
-											url: window.location.href
-										}
+											url: window.location.href,
+										},
 									];
 								}
 							} else {
@@ -977,9 +1029,9 @@ presence.on("UpdateData", async () => {
 								if (buttons) {
 									presenceData.buttons = [
 										{
-											label: strings.btnViewArticle,
-											url: window.location.href
-										}
+											label: strings.btnReadArticle,
+											url: window.location.href,
+										},
 									];
 								}
 							}
@@ -1009,4 +1061,8 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
+});
+
+presence.on("iFrameData", (data: { [key: string]: string }) => {
+	iframeData = data;
 });

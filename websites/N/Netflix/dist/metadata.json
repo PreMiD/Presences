@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Timeraa",
 		"id": "223238938716798978"
@@ -55,7 +55,7 @@
 		"www.netflix.com",
 		"netflix.com"
 	],
-	"version": "5.1.4",
+	"version": "5.1.7",
 	"logo": "https://i.imgur.com/LyG9Afx.png",
 	"thumbnail": "https://i.imgur.com/LWcRBZs.jpg",
 	"color": "#db0000",

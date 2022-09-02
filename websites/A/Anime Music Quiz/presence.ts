@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "691494438349832227"
+	clientId: "691494438349832227",
 });
 
 let lobbyNumber,
@@ -12,7 +12,7 @@ let lobbyNumber,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "amq"
+		largeImageKey: "amq",
 	};
 	if (!navigator.language.includes("it-IT")) {
 		// English

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "631803867708915732"
+		clientId: "631803867708915732",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -14,14 +14,14 @@ function getVideoData(element: HTMLElement): [string?, HTMLVideoElement?] {
 			result.querySelector("div.n1l5q3vz > span") ??
 			result.querySelector("div.i1fnvgqd.j83agx80 div.w0hvl6rk.qjjbsfad > span")
 		).textContent,
-		result.querySelector("video")
+		result.querySelector("video"),
 	];
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "facebook",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		privacyMode = await presence.getSetting<boolean>("privacyMode"),
 		showTimestamp = await presence.getSetting<boolean>("timestamp"),
@@ -85,8 +85,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `Watch ${isLive ? "live" : "video"}`,
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (document.location.pathname.includes("/photo/")) {
@@ -101,15 +101,15 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View photo",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (document.location.pathname.includes("/watch")) {
 		const search = new URLSearchParams(location.search).get("q"),
 			videoId = new URLSearchParams(location.search).get("v");
-
-		if (!videoId && !search) {
+		presenceData.largeImageKey = "https://i.imgur.com/FMIfiPA.png";
+		if (!videoId && !search && document.location.href.includes("?v=")) {
 			const videoFrame = Array.from(
 				document.querySelectorAll('div[class="l9j0dhe7"]')
 			).find(
@@ -117,8 +117,7 @@ presence.on("UpdateData", async () => {
 			)?.parentElement;
 
 			if (videoFrame) {
-				const video = videoFrame.querySelector("video"),
-					user = videoFrame.querySelector(
+				const user = videoFrame.querySelector(
 						"span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.ltmttdrg.g0qnabr5"
 					)?.textContent,
 					description = videoFrame.querySelector("div.n1l5q3vz")?.textContent,
@@ -131,7 +130,7 @@ presence.on("UpdateData", async () => {
 						isLive ? "live" : "video"
 					}`;
 				} else if (isLive) {
-					presenceData.details = "Wattch - Watching a live:";
+					presenceData.details = "Watch - Watching a live:";
 					presenceData.state = description || user;
 
 					presenceData.smallImageKey = "live";
@@ -144,7 +143,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = "play";
 
 					presenceData.endTimestamp = presence
-						.getTimestampsfromMedia(video)
+						.getTimestampsfromMedia(videoFrame.querySelector("video"))
 						.pop();
 				}
 			} else if (location.pathname.includes("/live")) {
@@ -174,15 +173,35 @@ presence.on("UpdateData", async () => {
 		} else if (search && !privacyMode) {
 			presenceData.details = "Watch - Searching for:";
 			presenceData.state = showSeachQuery ? decodeURI(search) : "(Hidden)";
+		} else if (privacyMode)
+			presenceData.details = "Watch - Viewing a user's page";
+		else {
+			presenceData.details = "Watch";
+			const queryUserName =
+				document.querySelector("h2 > span.d2edcug0.hzawbc8m > span") ??
+				document.querySelector('span > a[role="link"] > span');
+			presenceData.state = `Viewing ${queryUserName.textContent.trim()}'s page`;
+			presenceData.buttons = [
+				{ label: "View User", url: document.location.href },
+			];
+		}
+	} else if (document.location.pathname.includes("/reel")) {
+		presenceData.details = "Watching a reel";
+		presenceData.largeImageKey = "https://i.imgur.com/x2Mx3si.png";
+		if (!privacyMode) {
+			presenceData.state = `From ${document
+				.querySelector<HTMLLinkElement>("h2 > span > span > a.oajrlxb2")
+				.textContent.trim()}`;
 		}
 	} else if (document.location.pathname.includes("/marketplace/")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		if (document.location.pathname.includes("/search/") && !privacyMode) {
-			const search = new URLSearchParams(location.search).get("q");
 			presenceData.smallImageKey = "search";
 
 			presenceData.details = "Marketplace - Searching for:";
-			presenceData.state = showSeachQuery ? decodeURI(search) : "(Hidden)";
+			presenceData.state = showSeachQuery
+				? decodeURI(new URLSearchParams(location.search).get("q"))
+				: "(Hidden)";
 		} else if (document.location.pathname.includes("/item/")) {
 			if (privacyMode) presenceData.details = "Marketplace - Viewing item";
 			else {
@@ -223,6 +242,29 @@ presence.on("UpdateData", async () => {
 					presenceData.state = groupName;
 				} else presenceData.details = "Groups";
 			}
+		}
+	} else if (
+		document.querySelector('[aria-label="Link to open profile cover photo"]') ||
+		document.querySelector('[style*="padding-top: 37"]') ||
+		document.querySelector('[style*="padding-top:37"]')
+	) {
+		const selected = document.querySelector(
+				"[style='background-color: var(--accent);']"
+			)?.parentElement?.textContent,
+			profileUsername = document
+				.querySelector("head > title")
+				.innerHTML.replace(/(\(.*\))/gm, "")
+				.replace("| Facebook", "")
+				.trim();
+		if (
+			document
+				.querySelector('[role="banner"]')
+				.children[1]?.getAttribute("aria-hidden") === "false"
+		) {
+			if (privacyMode) presenceData.details = "Viewing Profile";
+			else if (selected)
+				presenceData.details = `Viewing ${profileUsername}'s ${selected}`;
+			else presenceData.details = `Viewing ${profileUsername}'s Profile`;
 		}
 	} else if (document.location.pathname.includes("/friends")) {
 		presenceData.details = "Friends";
@@ -286,8 +328,8 @@ presence.on("UpdateData", async () => {
 						url: `https://www.facebook.com/events/${document.location.pathname.replace(
 							/^\D+/g,
 							""
-						)}`
-					}
+						)}`,
+					},
 				];
 			} else presenceData.state = "Viewing event";
 		}
@@ -356,8 +398,8 @@ presence.on("UpdateData", async () => {
 							url: `https://www.facebook.com/gaming/play/${document.location.pathname.replace(
 								/^\D+/g,
 								""
-							)}`
-						}
+							)}`,
+						},
 					];
 				} else {
 					presenceData.details = "Gaming";
@@ -406,29 +448,18 @@ presence.on("UpdateData", async () => {
 		) ||
 		document.querySelector(
 			"span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
-		)
+		) ||
+		document.querySelectorAll('[data-pagelet="ProfileActions"]')[0]
 	) {
 		const hasCommentInput = document.querySelector(
 			"div.m9osqain.a5q79mjw.gy2v8mqq.jm1wdb64.k4urcfbm.qv66sw1b span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7"
 		);
-		let name = document
-			.querySelector(
-				"span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
-			)
-			?.textContent.trim();
-
-		if (!hasCommentInput) {
-			name = document
-				.querySelector(
-					"h2.gmql0nx0.l94mrbxd.p1ri9a11.lzcic4wl.d2edcug0.hpfvmrgz span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.embtmqzv.hrzyx87i.m6dqt4wy.h7mekvxk.hnhda86s.oo9gr5id.hzawbc8m > span"
-				)
-				?.textContent.trim();
-		}
 
 		presenceData.details = `Viewing ${hasCommentInput ? "user" : "page"}${
 			privacyMode ? "" : ":"
 		}`;
-		if (!privacyMode) presenceData.state = name || "Unknown";
+		if (!privacyMode)
+			presenceData.state = document.title.slice(0, -11) || "Unknown";
 	} else if (document.location.pathname.includes("/settings"))
 		presenceData.details = "Settings";
 	else if (document.location.pathname.includes("/places"))

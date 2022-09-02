@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "614389710625964045"
+		clientId: "614389710625964045",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 			smallImageKey: paused ? "pause" : "play",
 			smallImageText: paused ? (await strings).pause : (await strings).play,
 			startTimestamp: timestamps[0],
-			endTimestamp: timestamps[1]
+			endTimestamp: timestamps[1],
 		};
 	if (
 		document.location.pathname.includes(".html") &&

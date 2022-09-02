@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "706574162331697163"
+	clientId: "706574162331697163",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (document.location.pathname === "/") {
@@ -13,9 +13,13 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "logo";
 		presenceData.smallImageText = "www.mixmods.com.br";
 	} else if (document.location.pathname.match("/search/label")) {
-		const [url] = document.location.href.split("/label/")[1].split("?&max");
 		presenceData.details = "Visualizando categoria:";
-		presenceData.state = decodeURI(url.split("?&max")[0]);
+		presenceData.state = decodeURI(
+			document.location.href
+				.split("/label/")[1]
+				.split("?&max")[0]
+				.split("?&max")[0]
+		);
 	} else if (document.location.pathname.startsWith("/p")) {
 		switch (document.location.pathname) {
 			case "/p/about.html":
@@ -51,8 +55,10 @@ presence.on("UpdateData", async () => {
 		}`;
 	} else {
 		presenceData.details = "Navegando no site";
-		const [, url] = document.location.href.split("#");
-		presenceData.state = `Página ${url.split("=")[1]}`;
+
+		presenceData.state = `Página ${
+			document.location.href.split("#")[1].split("=")[1]
+		}`;
 	}
 
 	presence.setActivity(presenceData);

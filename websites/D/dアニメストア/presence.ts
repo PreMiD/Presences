@@ -1,10 +1,10 @@
 {
 	const presence = new Presence({
-			clientId: "611012705306017792"
+			clientId: "611012705306017792",
 		}),
 		strings = presence.getStrings({
-			play: "presence.playback.playing",
-			pause: "presence.playback.paused"
+			play: "general.playing",
+			pause: "general.paused",
 		});
 
 	presence.on("UpdateData", async () => {
@@ -25,7 +25,7 @@
 						? (await strings).play
 						: (await strings).pause,
 					startTimestamp:
-						Math.floor(Date.now() / 1000) - Math.floor(video.currentTime)
+						Math.floor(Date.now() / 1000) - Math.floor(video.currentTime),
 				};
 
 			if (!isPlaying) delete presenceData.startTimestamp;

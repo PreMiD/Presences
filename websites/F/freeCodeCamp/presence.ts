@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "797749214175035412"
+		clientId: "797749214175035412",
 	}),
 	timeStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const {
 			title,
-			location: { pathname: page }
+			location: { pathname: page },
 		} = document,
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: timeStamp
+			startTimestamp: timeStamp,
 		},
 		arr = page.split("/").filter(String),
 		capitalize = (str: string) =>
@@ -40,7 +40,7 @@ presence.on("UpdateData", () => {
 		};
 	if (page !== "/") {
 		presenceData.buttons = [
-			{ label: "Visit Page", url: `https://freecodecamp.org${page}` }
+			{ label: "Visit Page", url: `https://freecodecamp.org${page}` },
 		];
 	}
 	presenceData.details = details(page, title);

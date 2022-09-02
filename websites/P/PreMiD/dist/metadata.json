@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -34,7 +34,8 @@
 		"de": "PreMiD ergänzt viele Dienste, die du nutzt und liebst, um die Unterstützung von Discord Rich Presence.",
 		"fr": "PreMiD ajoute le support de Discord Rich Presence à de nombreux services que vous utilisez et aimez.",
 		"tr": "PreMiD, kullandığınız internet servisleri için Discord profilinize Rich Presence bilgisi ekler.",
-		"vi_VN": "PreMiD thêm hỗ trợ Discord Rich Presence cho các dịch vụ bạn yêu thích và sử dụng."
+		"vi_VN": "PreMiD thêm hỗ trợ Discord Rich Presence cho các dịch vụ bạn yêu thích và sử dụng.",
+		"ko_KR": "PreMiD는 당신이 사용하고 좋아하는 많은 서비스에 Discord Rich Presence 지원을 추가시킵니다."
 	},
 	"url": [
 		"premid.app",
@@ -42,7 +43,7 @@
 		"beta.premid.app",
 		"status.premid.app"
 	],
-	"version": "3.0.11",
+	"version": "3.1.2",
 	"logo": "https://i.imgur.com/eYLI4hf.png",
 	"thumbnail": "https://i.imgur.com/OYxIOZ8.png",
 	"color": "#7289DA",
@@ -61,6 +62,12 @@
 			"id": "time",
 			"title": "Show timestamps",
 			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "showButtons",
+			"title": "Show buttons",
+			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
 	]

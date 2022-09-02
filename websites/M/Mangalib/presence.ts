@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "684124119146692619"
+	clientId: "684124119146692619",
 });
 
 // Timestamp
@@ -22,7 +22,7 @@ let Routes: string[],
 presence.on("UpdateData", async () => {
 	// Presence Data
 	const presenceData: PresenceData = {
-		largeImageKey: "mangalib_large"
+		largeImageKey: "mangalib_large",
 	};
 
 	// Setup Routes & Query
@@ -614,12 +614,9 @@ presence.on("UpdateData", async () => {
 						// edit
 						presenceData.smallImageText = "Редактирует";
 						presenceData.smallImageKey = "writing";
-
-						const title = document.querySelector(
+						presenceData.details = document.querySelector(
 							".section__header .breadcrumb a"
-						);
-
-						presenceData.details = title.textContent;
+						).textContent;
 
 						switch (Queries.section) {
 							case "media-edit":
@@ -640,12 +637,10 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Добавляет главы";
 						presenceData.smallImageText = "Добавляет";
 						presenceData.smallImageKey = "uploading";
-
-						const title = document.querySelector(
-							".section__header .breadcrumb a"
-						);
-
-						presenceData.state = `Манга: ${title.textContent}`;
+						presenceData.state = `Манга: ${
+							document.querySelector(".section__header .breadcrumb a")
+								.textContent
+						}`;
 
 						break;
 					}
@@ -654,12 +649,10 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Добавляет главу";
 						presenceData.smallImageText = "Добавляет";
 						presenceData.smallImageKey = "uploading";
-
-						const title = document.querySelector(
-							".section__header .breadcrumb a"
-						);
-
-						presenceData.state = `Манга: ${title.textContent}`;
+						presenceData.state = `Манга: ${
+							document.querySelector(".section__header .breadcrumb a")
+								.textContent
+						}`;
 
 						break;
 					}
@@ -667,12 +660,10 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Редактирует главу";
 						presenceData.smallImageText = "Пишет";
 						presenceData.smallImageKey = "writing";
-
-						const title = document.querySelector(
-							".section__header .breadcrumb a"
-						);
-
-						presenceData.state = `Манга: ${title.textContent}`;
+						presenceData.state = `Манга: ${
+							document.querySelector(".section__header .breadcrumb a")
+								.textContent
+						}`;
 					}
 				}
 			}

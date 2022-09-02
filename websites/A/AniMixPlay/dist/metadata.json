@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Jack Hansen",
 		"id": "140590672657776641"
@@ -12,7 +12,7 @@
 		"vi_VN": "AniMixPlay là trang web giúp bạn xem Anime khắp thể giới, hoàn toàn miễn phí."
 	},
 	"url": "animixplay.to",
-	"version": "1.0.15",
+	"version": "1.1.1",
 	"logo": "https://i.imgur.com/eMXyO0Y.png",
 	"thumbnail": "https://i.imgur.com/XcEtF5e.png",
 	"color": "#3AACE7",
@@ -22,5 +22,13 @@
 		"animixplay",
 		"videos"
 	],
-	"iframe": true
+	"iframe": true,
+	"settings": [
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		}
+	]
 }

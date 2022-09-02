@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "684885381728043048"
+		clientId: "684885381728043048",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 function settingSetter(): void {
@@ -17,7 +17,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "pokemonlogo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	settingSetter();
@@ -236,9 +236,9 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the recent activity";
 			else if (document.location.pathname.includes("/search")) {
 				presenceData.details = "Searching for:";
-				const input =
-					document.querySelector<HTMLInputElement>("#elMainSearchInput");
-				presenceData.state = input.value;
+
+				presenceData.state =
+					document.querySelector<HTMLInputElement>("#elMainSearchInput").value;
 				presenceData.smallImageKey = "search";
 			} else presenceData.details = "Browsing the forums";
 

@@ -12,7 +12,7 @@ iframe.on("UpdateData", async () => {
 			).textContent,
 			OneNoteTitle: document.querySelector(
 				'#PageList > div [aria-label~="Selected."]'
-			)?.textContent
+			)?.textContent,
 		});
 	} else if (
 		document.querySelector(
@@ -22,11 +22,11 @@ iframe.on("UpdateData", async () => {
 		iframe.send({
 			PptCurrentSlide: document.querySelector(
 				'#WACStatusBarContainer div[data-unique-id="GetSlideInformation"]'
-			).textContent
+			).textContent,
 		});
 	} else if (document.querySelector("li.tab-active > a")) {
 		iframe.send({
-			ExcelActiveTab: document.querySelector("li.tab-active > a").ariaLabel
+			ExcelActiveTab: document.querySelector("li.tab-active > a").ariaLabel,
 		});
 	} else if (
 		document.querySelector("#WACStatusBarContainer button:nth-child(1)")
@@ -35,7 +35,7 @@ iframe.on("UpdateData", async () => {
 		iframe.send({
 			WordStatus: document.querySelector<HTMLButtonElement>(
 				"#WACStatusBarContainer button:nth-child(1)"
-			).ariaLabel
+			).ariaLabel,
 		});
 	}
 });

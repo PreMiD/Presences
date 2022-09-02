@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "erdem",
 		"id": "292692556809109534"
@@ -14,7 +14,7 @@
 		"diziroll.com",
 		"www.diziroll.com"
 	],
-	"version": "1.0.9",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/PY7u54F.png",
 	"thumbnail": "https://i.imgur.com/YsL5RgB.jpg",
 	"color": "#1a1d30",

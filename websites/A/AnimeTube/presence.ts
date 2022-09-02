@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "833689728774832168"
+	clientId: "833689728774832168",
 });
 
 let videoData: {
@@ -14,7 +14,7 @@ presence.on("iFrameData", (data: typeof videoData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "animetube"
+		largeImageKey: "animetube",
 	};
 
 	if (document.location.pathname === "/") {
@@ -27,10 +27,8 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.startsWith("/anime") &&
 		!document.location.pathname.includes("/watch")
 	) {
-		const titleSplit = document.title.split("›").map(s => s.trim());
-
 		presenceData.details = "| Übersicht";
-		presenceData.state = titleSplit[2];
+		presenceData.state = document.title.split("›").map(s => s.trim())[2];
 	} else if (document.location.pathname === "/static/calendar") {
 		presenceData.details = "| Kalendar";
 		presenceData.state = "Schaut sich die neuen Releases an";
@@ -41,9 +39,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "| Einstellungen";
 		presenceData.state = "Macht irgendwas kaputt";
 	} else if (document.location.pathname.includes("/user/")) {
-		const titleSplit = document.title.split("Profil von ");
 		presenceData.details = "| Benutzerinfo";
-		presenceData.state = `Profil von ${titleSplit[1]}`;
+		presenceData.state = `Profil von ${document.title.split("Profil von ")[1]}`;
 	} else if (document.location.pathname === "/easteregg") {
 		presenceData.details = "| Easteregg?";
 		presenceData.state = "Jup, Easeregg!";

@@ -1,17 +1,17 @@
 const presence = new Presence({
-		clientId: "760587514477281320"
+		clientId: "721741902403207218",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
-		live: "presence.activity.live"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
+		live: "general.live",
 	});
 let prev: string, elapsed: number, path: string, gender: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "chb"
+			largeImageKey: "ch",
 		},
 		video: HTMLVideoElement = document.querySelector("video[id$='_html5_api']");
 

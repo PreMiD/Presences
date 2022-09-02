@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "895022531868774451"
+		clientId: "895022531868774451",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "typinglogo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[, end] = presence.getTimestamps(
 			presence.timestampFromFormat("00:00"),
@@ -61,8 +61,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Doing a competition";
 		}
 	} else if (document.location.pathname.includes("/text/")) {
-		const timer = document.querySelector("#time").textContent;
-		if (timer === "00:00")
+		if (document.querySelector("#time").textContent === "00:00")
 			presenceData.details = "Waiting to start a text practice";
 		else {
 			const finalTime = document.querySelector(".col-md-6 > p > strong");

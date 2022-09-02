@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "685559589625659492"
+	clientId: "685559589625659492",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "photopea"
+			largeImageKey: "photopea",
 		},
 		Path = document.location.pathname;
 	presenceData.startTimestamp = Math.floor(Date.now() / 1000);

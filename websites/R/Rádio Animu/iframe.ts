@@ -8,7 +8,7 @@ iframe.on("UpdateData", async () => {
 			artist: document.querySelector(".status").textContent.split(" - ")[0],
 			title: document.querySelector(".status").textContent.split(" - ")[1],
 			artwork: (<HTMLImageElement>document.querySelector("#ta-cover-art")).src,
-			playing: true
+			playing: true,
 		});
 	}
 });

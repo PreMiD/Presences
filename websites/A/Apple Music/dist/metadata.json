@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "N0chteil ^^",
 		"id": "495901098926669825"
@@ -8,6 +8,10 @@
 		{
 			"name": "Alexx",
 			"id": "604182077088202784"
+		},
+		{
+			"name": "Vasilis",
+			"id": "241929388403195914"
 		}
 	],
 	"service": "Apple Music",
@@ -23,7 +27,7 @@
 		"music.apple.com",
 		"beta.music.apple.com"
 	],
-	"version": "1.4.11",
+	"version": "1.5.5",
 	"logo": "https://i.imgur.com/06HbqaF.png",
 	"thumbnail": "https://i.imgur.com/dOYmE1u.png",
 	"color": "#FA273F",
@@ -33,5 +37,19 @@
 		"apple",
 		"music",
 		"media"
+	],
+	"settings": [
+		{
+			"id": "timestamps",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "cover",
+			"title": "Show cover",
+			"icon": "fad fa-images",
+			"value": true
+		}
 	]
 }

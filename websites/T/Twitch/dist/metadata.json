@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -8,6 +8,10 @@
 		{
 			"name": "Alanexei ✔",
 			"id": "163319338403627008"
+		},
+		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
 		}
 	],
 	"service": "Twitch",
@@ -41,7 +45,7 @@
 		"devstatus.twitch.tv",
 		"status.twitch.tv"
 	],
-	"version": "3.1.15",
+	"version": "3.2.0",
 	"logo": "https://i.imgur.com/So7h3G0.png",
 	"thumbnail": "https://i.imgur.com/OAcBmwW.png",
 	"color": "#9146FF",

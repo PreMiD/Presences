@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "643758670131363840"
+		clientId: "643758670131363840",
 	}),
 	pages: { [key: string]: string } = {
 		"/butik/liste/erkek": "Erkek Giyim",
@@ -26,7 +26,7 @@ const presence = new Presence({
 		"/Hesabim/KrediKartlarim": "Kredi Kartları",
 		"/Hesabim/Elite": "Trendyol Elite",
 		"/Hesabim/DuyuruTercihleri": "Duyuru Tercihleri",
-		"/Hesabim/Favoriler": "Favoriler"
+		"/Hesabim/Favoriler": "Favoriler",
 	};
 
 presence.on("UpdateData", async () => {
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "ty-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Yardım & Sorular",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (
 		(page === "/tum--urunler" && document.location.search.includes("?q=")) ||
@@ -74,14 +74,14 @@ presence.on("UpdateData", async () => {
 			details: "Bir şey arıyor:",
 			state: searchingFor.textContent || "Belirsiz",
 			smallImageKey: "search",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (category && category.textContent !== "") {
 		presence.setActivity({
 			largeImageKey: "ty-logo",
 			details: "Bir kategoriye göz atıyor:",
 			state: category.textContent || "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (
 		product &&
@@ -95,21 +95,21 @@ presence.on("UpdateData", async () => {
 			state: `${product.textContent} | ${product2.textContent} ${
 				price && price.textContent !== "" ? `(${price.textContent})` : null
 			}`,
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
 			largeImageKey: "ty-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
 			largeImageKey: "ty-logo",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 });

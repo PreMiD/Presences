@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "758864138897850368"
+		clientId: "758864138897850368",
 	}),
 	startTimeStamp = Math.round(Date.now());
 let author: string,
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "flickr_logo",
 		startTimestamp: startTimeStamp,
 		smallImageKey: "flickr_logo",
-		smallImageText: "Viewing Images or videos on Flickr"
+		smallImageText: "Viewing Images or videos on Flickr",
 	};
 	if (document.location.hostname === "www.flickr.com") {
 		if (

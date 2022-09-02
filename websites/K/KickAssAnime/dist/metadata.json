@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -7,14 +7,15 @@
 	"service": "KickAssAnime",
 	"description": {
 		"en": "KickAssAnime is a streaming website where you can watch TV Series, Movies & OVA in dubbed and subbed formats.",
-		"nl": "KickAssAnime is een streamingwebsite waar u tv-series, films en eicellen kunt bekijken in nagesynchroniseerde en subbedformaten."
+		"nl": "KickAssAnime is een streamingwebsite waar u tv-series, films en OVA kunt bekijken in nagesynchroniseerde en ondertitelde vorm.",
+		"ga_IE": "Is suíomh Gréasáin sruthaithe é KickAssAnime inar féidir leat féachaint ar Shraith Teilifíse, ar Scannáin & OVA i bhformáidí a bhfuil dubáil agus fo-leagan orthu."
 	},
 	"url": [
 		"kickassanime.lol",
 		"kickassanime.ro"
 	],
 	"regExp": "([a-z0-9-]+[.])*kickassanime([.][a-z]+)+[/]",
-	"version": "1.0.19",
+	"version": "1.1.0",
 	"logo": "https://i.imgur.com/TGgZkKQ.png",
 	"thumbnail": "https://i.imgur.com/c2vGXuN.png",
 	"color": "#c7c95b",

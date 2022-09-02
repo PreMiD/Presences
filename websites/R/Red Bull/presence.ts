@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "872712888375193680"
+		clientId: "872712888375193680",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons"),
@@ -49,8 +49,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Article",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (splitPath.length === 3) presenceData.details = "At homepage";
@@ -66,8 +66,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Event",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (pathname.includes("athlete")) {
@@ -81,8 +81,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Athlete",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (
@@ -118,8 +118,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Video",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	}

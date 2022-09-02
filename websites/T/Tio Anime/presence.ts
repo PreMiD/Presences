@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "896323132871299103"
+		clientId: "896323132871299103",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
 	duration: 0,
 	currentTime: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -19,7 +19,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "tioanimelogo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
 		buttons = await presence.getSetting<boolean>("buttons");
@@ -32,8 +32,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Ver Anime",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 			presenceData.details = "Viendo lista de episodios:";
@@ -45,8 +45,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Ver Capítulo",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 			const capt = document.querySelector("h1").textContent;

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "natto",
 		"id": "874685117891739749"
@@ -14,7 +14,7 @@
 		"www.indiachan.com",
 		"pajeet.top"
 	],
-	"version": "1.0.8",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/caelFBx.png",
 	"thumbnail": "https://i.imgur.com/EBTNFKT.png",
 	"color": "#ef8e00",

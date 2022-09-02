@@ -92,7 +92,7 @@ const guessKeys: ItemMap = {
 	"32:32:n:33:163": "dig",
 	"48:48:23.5:23.5:44:101": "war",
 	"32:32:15.5:15.25:46:72": "unearth",
-	"48:48:23:23:46:492": "excavate"
+	"48:48:23:23:46:492": "excavate",
 };
 
 // Guesses the map via the map object
@@ -115,7 +115,7 @@ iframe.on("UpdateData", async () => {
 					isGuest: main.net.guest,
 					username: main.net.user,
 					isDonator: main.net.type === 1,
-					rank: main.stats ? main.stats.rank : null
+					rank: main.stats ? main.stats.rank : null,
 			  }
 			: null,
 		serverInfo: main.net.game.info || null,
@@ -125,15 +125,15 @@ iframe.on("UpdateData", async () => {
 					gameOver: main.game.gameOver,
 					info: {
 						...main.game.settings,
-						players: main.game.ui.score.scores.length
+						players: main.game.ui.score.scores.length,
 					},
 					score: main.game.ui.score.scores.find(
 						(score: Score20XX) =>
 							score.name.replace("γ", "") === main.net.display
 					),
-					map: guessMap(main.game.map)
+					map: guessMap(main.game.map),
 			  }
 			: null,
-		nav: main.menu.lastNav
+		nav: main.menu.lastNav,
 	});
 });

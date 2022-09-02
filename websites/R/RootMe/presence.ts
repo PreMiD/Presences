@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "673322920809988120"
+	clientId: "673322920809988120",
 });
 
 function parseQueryString(queryString?: string): { [key: string]: string } {
@@ -18,7 +18,7 @@ function parseQueryString(queryString?: string): { [key: string]: string } {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		route = document.location.pathname.split("/");
 
@@ -139,7 +139,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = route[3]
 			? `${route[2]} - ${route[3].replaceAll("-", " ")}`
 			: `${route[2]}`;
-		presenceData.state = !route[4] ? "Navigating..." : route[4];
+		presenceData.state = route[4] ?? "Navigating...";
 	} else {
 		presenceData.details = `Watching member : ${
 			document.querySelector("span.forum").textContent

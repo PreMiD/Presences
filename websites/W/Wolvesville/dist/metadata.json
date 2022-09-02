@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Vasilis",
 		"id": "241929388403195914"
@@ -55,7 +55,7 @@
 		"voting.wolvesville.com",
 		"app.wolvesville.com"
 	],
-	"version": "1.2.1",
+	"version": "1.4.0",
 	"logo": "https://i.imgur.com/yowEwrw.png",
 	"thumbnail": "https://i.imgur.com/s5NhKcP.png",
 	"color": "#FF4181",
@@ -70,7 +70,16 @@
 		{
 			"id": "privacy",
 			"title": "Privacy Mode",
-			"icon": "fad fa-user-secret",
+			"icon": "far fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "clanTag",
+			"if": {
+				"privacy": false
+			},
+			"title": "Hide Clan Tag",
+			"icon": "far fa-tag",
 			"value": false
 		},
 		{
@@ -79,7 +88,25 @@
 				"privacy": false
 			},
 			"title": "Hide Chat Recipient",
-			"icon": "fad fa-comment-slash",
+			"icon": "far fa-comment-slash",
+			"value": false
+		},
+		{
+			"id": "showStatus",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Status",
+			"icon": "far fa-play-circle",
+			"value": true
+		},
+		{
+			"id": "invisiblePrivacy",
+			"if": {
+				"privacy": false
+			},
+			"title": "Hide Name When Invisible",
+			"icon": "far fa-ghost",
 			"value": false
 		},
 		{
@@ -87,23 +114,24 @@
 			"if": {
 				"privacy": false
 			},
-			"title": "Show Mode Language",
-			"icon": "fad fa-flag",
+			"title": "Show Game Language",
+			"icon": "far fa-flag",
 			"value": false
 		},
 		{
 			"id": "showTimestamp",
 			"title": "Show Timestamp",
-			"icon": "fad fa-stopwatch",
+			"icon": "far fa-stopwatch",
 			"value": true
 		},
 		{
 			"id": "logo",
 			"title": "Icon",
-			"icon": "fad fa-images",
+			"icon": "far fa-images",
 			"value": 0,
 			"values": [
 				"Normal",
+				"White",
 				"No Background",
 				"Full Text Logo"
 			]

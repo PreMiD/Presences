@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -14,7 +14,7 @@
 	},
 	"url": "cs.money",
 	"regExp": "([a-z0-9]+[.])?cs[.]money",
-	"version": "1.0.6",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/y7THfIx.png",
 	"thumbnail": "https://i.imgur.com/Ob8gt4E.png",
 	"color": "#4214AC",

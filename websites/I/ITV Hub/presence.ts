@@ -1,11 +1,11 @@
 const presence = new Presence({
-	clientId: "645290651604221999"
+	clientId: "645290651604221999",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "itv_logo",
-			startTimestamp: Date.now()
+			startTimestamp: Date.now(),
 		},
 		path = document.location.pathname;
 
@@ -99,7 +99,7 @@ presence.on("UpdateData", () => {
 						name: document.querySelector("#programme-title").textContent,
 						episode: document
 							.querySelectorAll(".episode-info__episode-title")[0]
-							.textContent.trim()
+							.textContent.trim(),
 					},
 					[video] = document.querySelectorAll("video");
 				if (!video.paused) {

@@ -10,7 +10,7 @@ iframe.on("UpdateData", async () => {
 				.title.includes("Play"),
 			timeLeft: document.querySelector<HTMLSpanElement>(
 				"span.vjs-remaining-time-display"
-			).textContent
+			).textContent,
 		});
 	}
 });

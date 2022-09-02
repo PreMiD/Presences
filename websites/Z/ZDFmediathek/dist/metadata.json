@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "TONi_C137#1757",
 		"id": "328213965299515393"
@@ -10,7 +10,7 @@
 		"en": "ZDFmediathek is a shared video-on-demand streaming service offered by German public-sector broadcasters of ZDF."
 	},
 	"url": "www.zdf.de",
-	"version": "1.0.7",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/5mxv8gX.png",
 	"thumbnail": "https://i.imgur.com/OxSGg0B.jpg",
 	"color": "#FE7405",

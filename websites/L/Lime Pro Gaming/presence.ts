@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "863173597941727282"
+		clientId: "863173597941727282",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ let productName, productBrand, blogTitle, blogAuthor;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (window.location.pathname === "/")
@@ -36,8 +36,8 @@ presence.on("UpdateData", async () => {
 							.querySelector(
 								"#same_product_height > div.tt-breadcrumb > div > ul > li:nth-child(2) > a"
 							)
-							.getAttribute("href")
-				}
+							.getAttribute("href"),
+				},
 			];
 		} else if (
 			window.location.pathname === "/collections" ||
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = productName;
 
 		presenceData.buttons = [
-			{ label: "View Product", url: document.location.href }
+			{ label: "View Product", url: document.location.href },
 		];
 	} else if (window.location.pathname.includes("/pages")) {
 		presenceData.details = `Viewing: ${
@@ -79,8 +79,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (window.location.pathname.includes("/search")) {
 		presenceData.details = `Searching: ${

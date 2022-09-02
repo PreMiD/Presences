@@ -1,11 +1,11 @@
 const presence = new Presence({
-	clientId: "620304668710535207"
+	clientId: "620304668710535207",
 });
 
 presence.on("UpdateData", () => {
 	const urlParams = new URLSearchParams(window.location.search);
 	let presenceData: PresenceData = {
-		largeImageKey: "lg"
+		largeImageKey: "lg",
 	};
 	if (document.location.pathname === "/") presence.setActivity(presenceData);
 	else if (
@@ -18,13 +18,13 @@ presence.on("UpdateData", () => {
 				presenceData = {
 					details: "Searching...",
 					state: urlParams.get("tags").replace(" ", ", "),
-					largeImageKey: "lg"
+					largeImageKey: "lg",
 				};
 				presence.setActivity(presenceData);
 			} else {
 				presenceData = {
 					details: "Viewing Posts List...",
-					largeImageKey: "lg"
+					largeImageKey: "lg",
 				};
 				presence.setActivity(presenceData);
 			}
@@ -32,18 +32,18 @@ presence.on("UpdateData", () => {
 			presenceData = {
 				details: "Viewing a Post...",
 				state: `Post ${urlParams.get("id")}`,
-				largeImageKey: "lg"
+				largeImageKey: "lg",
 			};
 			presence.setActivity(presenceData);
 		} else {
 			presenceData = {
-				largeImageKey: "lg"
+				largeImageKey: "lg",
 			};
 			presence.setActivity(presenceData);
 		}
 	} else {
 		presenceData = {
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		};
 		presence.setActivity(presenceData);
 	}

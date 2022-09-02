@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "631523770988888074"
+	clientId: "631523770988888074",
 });
 
 function capitalize(string: string): string {
@@ -12,7 +12,7 @@ let data;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") {

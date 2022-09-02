@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "715116675346989096"
+	clientId: "715116675346989096",
 });
 
 presence.on("UpdateData", async () => {
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 				smallImageKey: paused ? "pause" : "playing",
 				smallImageText: paused ? "Paused" : "Playing",
 				startTimestamp: timestamps[0],
-				endTimestamp: timestamps[1]
+				endTimestamp: timestamps[1],
 			};
 
 		if (paused) {

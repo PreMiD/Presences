@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "660894911331172372"
+		clientId: "660894911331172372",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let priceEls;
@@ -7,7 +7,7 @@ let priceEls;
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "bots.discordlabs.org") {

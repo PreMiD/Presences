@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "809898713996066827"
+		clientId: "809898713996066827",
 	}),
 	tmb = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			smallImageKey: "google",
 			smallImageText: "Google",
-			startTimestamp: tmb
+			startTimestamp: tmb,
 		},
 		path = document.location.pathname.toLowerCase(),
 		showcon = await presence.getSetting<boolean>("showContact");

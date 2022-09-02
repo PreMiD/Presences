@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "715344422039977994"
+		clientId: "715344422039977994",
 	}),
 	strings = {
 		listen: "Listening",
 		mute: "Muted",
 		record: "Recording",
 		view: "Viewing",
-		read: "Reading"
+		read: "Reading",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	modes = ["CW", "LSB", "USB", "AM", "FM", "AMsync"];
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "favicon",
 		//smallImageKey: "key",
 		smallImageText: "University of Twente SDR",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (document.location.pathname) {

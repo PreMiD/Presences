@@ -3,7 +3,7 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const presence = new Presence({
-		clientId: "943158612090568745"
+		clientId: "943158612090568745",
 	}),
 	getStrings = async () => {
 		return presence.getStrings(
@@ -24,7 +24,7 @@ const presence = new Presence({
 				searchingSomething: "general.searchSomething",
 				search: "general.search",
 				watchStream: "general.buttonWatchStream",
-				watchVideo: "general.buttonWatchVideo"
+				watchVideo: "general.buttonWatchVideo",
 			},
 			oldLang
 		);
@@ -35,7 +35,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: elapsed
+			startTimestamp: elapsed,
 		},
 		{ pathname, href } = document.location,
 		[
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 			streamDetail,
 			streamState,
 			profilePic,
-			buttons
+			buttons,
 		] = await Promise.all([
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<string>("lang").catch(() => "en"),
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<string>("streamDetail"),
 			presence.getSetting<string>("streamState"),
 			presence.getSetting<boolean>("profilePic"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		title = document.querySelector(
 			"#layout-content > div > div > div.channel-top-bar > div > div.components-profile-card-center.only-center > div:nth-child(1) > div"
@@ -160,7 +160,7 @@ presence.on("UpdateData", async () => {
 				}
 
 				presenceData.buttons = [
-					{ label: strings.watchVideo, url: document.URL }
+					{ label: strings.watchVideo, url: document.URL },
 				];
 			} else presenceData.details = strings.watchingVid;
 			presenceData.smallImageKey = paused ? "pause" : "play";
@@ -176,7 +176,7 @@ presence.on("UpdateData", async () => {
 					.replace("%streamer%", streamer)
 					.replace("%game%", game);
 				presenceData.buttons = [
-					{ label: strings.watchStream, url: document.URL }
+					{ label: strings.watchStream, url: document.URL },
 				];
 			} else presenceData.details = strings.watchingLive;
 			presenceData.smallImageKey = "live";

@@ -1,23 +1,23 @@
 const presence = new Presence({
-		clientId: "937439130613350480"
+		clientId: "937439130613350480",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	pathNameLocalize = [
 		{
 			hostname: "universal", //English, India, Philipine
 			subject: "/subject",
-			question: "/question"
+			question: "/question",
 		},
 		{
 			hostname: "brainly.co.id", //Indonesia
 			subject: "/mapel",
-			question: "/tugas"
+			question: "/tugas",
 		},
 		{
 			hostname: "brainly.ro", //Romania
 			subject: "/materie",
-			question: "/tema"
-		}
+			question: "/tema",
+		},
 	];
 let pathName: { hostname: string; subject: string; question: string };
 
@@ -37,12 +37,12 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Viewing an unsupported page",
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		page = document.location.pathname,
 		[time, buttons] = await Promise.all([
 			presence.getSetting<boolean>("time"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 
 	setPathName();
@@ -69,8 +69,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Question",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 
 		if (
@@ -99,8 +99,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Profile",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (page.includes("/users/profile"))
 		presenceData.details = "Editing profile";

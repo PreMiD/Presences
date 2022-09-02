@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -21,7 +21,7 @@
 		"community.byte.co",
 		"help.byte.co"
 	],
-	"version": "1.1.16",
+	"version": "1.1.19",
 	"logo": "https://i.imgur.com/oX5socK.png",
 	"thumbnail": "https://i.imgur.com/MaC2lww.png",
 	"color": "#6001E5",

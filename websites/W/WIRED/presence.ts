@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "645051733961211934"
+	clientId: "645051733961211934",
 });
 
 let elapsed: number, oldURL: string;
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 	const { title } = document,
 		presenceData: PresenceData = {
 			largeImageKey: "wired",
-			startTimestamp: elapsed
+			startTimestamp: elapsed,
 		};
 
 	if (

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -10,7 +10,7 @@
 		"tr": "GAİN ile uzun, kısa diziler, filmler, yaratıcı, güncel içerikler, belgeseller, spor, eğlence programları ve dahası istediğiniz her zaman, her yerde sizinle!"
 	},
 	"url": "gain.tv",
-	"version": "1.0.3",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/S1ftiFE.jpg",
 	"thumbnail": "https://i.imgur.com/n8AgY7d.jpg",
 	"color": "#f5313f",

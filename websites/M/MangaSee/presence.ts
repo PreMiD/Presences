@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "836662139926216724"
+		clientId: "836662139926216724",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 		buttons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
 	if (pathname === "/") presenceData.details = "Viewing the Homepage";
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".Description > span").textContent
 		}`;
 		presenceData.buttons = [
-			{ label: "View discussion", url: window.location.href }
+			{ label: "View discussion", url: window.location.href },
 		];
 	} else if (pathname.endsWith("/subscription.php")) {
 		presenceData.details = "Viewing subscriptions";
@@ -59,31 +59,24 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "view";
 		if (buttons) {
 			presenceData.buttons = [
-				{ label: "View manga", url: window.location.href }
+				{ label: "View manga", url: window.location.href },
 			];
 		}
 	} else if (pathname.startsWith("/read-online/")) {
+		const page = document.querySelector('button[data-target="#PageModal"]');
+
 		presenceData.details = document
 			.querySelector(".col-lg-4 > a")
-			.textContent.replace(new RegExp("\\\t", "g"), "")
-			.replace(new RegExp("\\\n", "g"), "");
-		presenceData.state = `📖 Ch. ${
-			document
-				.querySelector('button[data-target="#ChapterModal"]')
-				.textContent.replace(new RegExp("\\\t", "g"), "")
-				.replace(new RegExp("\\\n", "g"), "")
-				.split(" ")[1]
-		} 📄 ${
-			document
-				.querySelector('button[data-target="#PageModal"]')
-				.textContent.replace(new RegExp("\\\t", "g"), "")
-				.replace(new RegExp("\\\n", "g"), "")
-				.split(" ")[1]
-		}`;
+			.textContent.trim();
+		presenceData.state = `📖 Ch. ${document
+			.querySelector('button[data-target="#ChapterModal"]')
+			.textContent.trim()
+			.split(" ")
+			.pop()}${page ? ` 📄 ${page.textContent.trim().split(" ").pop()}` : ""}`;
 		presenceData.smallImageKey = "read";
 		if (buttons) {
 			presenceData.buttons = [
-				{ label: "View manga", url: window.location.href }
+				{ label: "View manga", url: window.location.href },
 			];
 		}
 	}

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Deleted 7.12i",
 		"id": "591702135310385157"
@@ -16,7 +16,7 @@
 		"root-me.org",
 		"www.root-me.org"
 	],
-	"version": "1.2.17",
+	"version": "1.2.20",
 	"logo": "https://i.imgur.com/RqcY9ZL.png",
 	"thumbnail": "https://i.imgur.com/jD8QJKf.png",
 	"color": "#191C22",

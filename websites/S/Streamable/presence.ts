@@ -1,14 +1,14 @@
 const presence = new Presence({
-		clientId: "630847999106482176"
+		clientId: "630847999106482176",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "streamable"
+			largeImageKey: "streamable",
 		},
 		player = document.querySelector<HTMLVideoElement>(".video-player-tag");
 

@@ -1,75 +1,89 @@
 const presence = new Presence({
-	clientId: "830504223153717311"
-});
+		clientId: "830504223153717311",
+	}),
+	browsingTimestamp = Math.floor(Date.now());
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "replit"
+			details: "Viewing unsupported page",
+			largeImageKey: "replit",
+			startTimestamp: browsingTimestamp,
 		},
-		path = document.location.pathname;
+		{ pathname } = document.location;
 
-	if (path === "/" || path === "/~") presenceData.details = "Viewing home page";
-	else if (path.startsWith("/@")) {
+	if (pathname === "/" || pathname === "/~")
+		presenceData.details = "Viewing home page";
+	else if (pathname.startsWith("/@")) {
 		if (
-			path
+			pathname
 				.replace("/@", "")
 				.split("/")
 				.filter(elm => elm !== "").length === 1
 		) {
 			presenceData.details = "Viewing a user's profile";
-			presenceData.state = path.replace("/@", "");
+			presenceData.state = pathname.replace("/@", "");
+		} else if (
+			document.querySelector<HTMLSpanElement>(".content span") &&
+			!document.querySelector(".breadcrumb-content")
+		) {
+			presenceData.details = `Viewing ${
+				pathname.replace("/@", "").split("/")[0]
+			}'s repl`;
+			presenceData.state =
+				document.querySelector<HTMLSpanElement>(".content span").textContent;
 		} else {
 			presenceData.details = `Editing ${
-				document.querySelector<HTMLImageElement>(
-					"#workspace-root > div > div.jsx-132086333.content > div.jsx-77352756.workspace-page-wrapper.desktop > div > div > div:nth-child(1) > header > div > div.jsx-2650114939.left > div > div > div.jsx-2652062152.workspace-header-info > div.jsx-2652062152.language-icon-container > img"
-				).alt
+				document.querySelector<HTMLDivElement>("div.language-icon-container")
+					.title
 			} repl`;
-			presenceData.state = `${path.split("/").filter(elm => elm !== "")[1]}${
-				window.location.hash ? ` - ${window.location.hash.substr(1)}` : ""
-			}`;
-			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+			presenceData.state = `${
+				pathname.split("/").filter(elm => elm !== "")[1]
+			}${window.location.hash ? ` - ${window.location.hash.slice(1)}` : ""}`;
 		}
-	} else if (path.startsWith("/notifications"))
+	} else if (pathname.startsWith("/notifications"))
 		presenceData.details = "Viewing notifications";
-	else if (path.startsWith("/languages")) {
+	else if (pathname.startsWith("/languages")) {
 		presenceData.details = "Browsing languages:";
 		presenceData.state = "All languages";
-	} else if (path.startsWith("/new")) {
+	} else if (pathname.startsWith("/new")) {
 		presenceData.details = "Creating new repl:";
 		presenceData.state = `${
-			document.querySelector<HTMLInputElement>("#languageSelector-input").value
+			document.querySelector<HTMLInputElement>(
+				"input[data-cy='new-repl-language-input']"
+			).value || "No languages chosen"
 		}`;
-	} else if (path.startsWith("/repls")) {
+	} else if (pathname.startsWith("/repls")) {
 		const repls = document.querySelector<HTMLDivElement>(
 				"#__next > div > div > div.jsx-2888589246.content > div.jsx-1264267603.repl-content > div.jsx-4064465542 > div:nth-child(3)"
 			),
-			length = repls ? repls.children.length - (path === "/repls" ? 2 : 1) : 0;
+			length = repls
+				? repls.children.length - (pathname === "/repls" ? 2 : 1)
+				: 0;
 		presenceData.details = `Viewing repls ${length ? `(Total ${length})` : ""}`;
 		presenceData.state = `${
-			path === "/repls"
+			pathname === "/repls"
 				? "In the main page"
-				: `In a folder : ${path.replace("/repls/folder/", "")}`
+				: `In a folder : ${pathname.replace("/repls/folder/", "")}`
 		}`;
-	} else if (path.startsWith("/talk")) {
+	} else if (pathname.startsWith("/community")) {
 		presenceData.details = "Surfing feed";
-		const [postType] = path.replace("/talk/", "").split("/"),
+		const [postType] = pathname.replace("/community/", "").split("/"),
 			postElement: HTMLDivElement = document.querySelector(
 				"#__next > div > div.jsx-132086333.content > div.jsx-2019133593 > div.jsx-2019133593.post-page-content > div.jsx-347352367 > div.jsx-347352367.board-post-detail-header > div.jsx-347352367.board-post-detail-title"
 			);
-		switch (path.replace("/talk/", "")) {
+		switch (pathname.replace("/community/", "")) {
 			case "all":
 				presenceData.state = "All posts";
 				break;
 			default:
 				presenceData.state = `${postType
 					.charAt(0)
-					.toUpperCase()}${postType.substr(1)}${
+					.toUpperCase()}${postType.slice(1)}${
 					postElement ? ` : ${postElement.textContent}` : ""
 				}`;
 				break;
 		}
-	} else if (path.startsWith("/templates"))
+	} else if (pathname.startsWith("/templates"))
 		presenceData.details = "Viewing replit templates";
-	else presenceData.details = "Viewing unsupported page";
 	presence.setActivity(presenceData);
 });

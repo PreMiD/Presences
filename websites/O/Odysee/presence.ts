@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
 			".content__viewer--floating"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		};
 	if (document.location.pathname === "/" && !floatingViewer)
 		presenceData.details = "Browsing homepage";
@@ -73,12 +73,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Video",
-							url: document.URL
+							url: document.URL,
 						},
 						{
 							label: "View Channel",
-							url: uploaderUrlElement.href
-						}
+							url: uploaderUrlElement.href,
+						},
 					];
 				}
 				if (video) {

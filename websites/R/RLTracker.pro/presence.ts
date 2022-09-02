@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "636659890927960064"
+		clientId: "636659890927960064",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "rlt"
+		largeImageKey: "rlt",
 	};
 
 	if (document.location.pathname === "/") {

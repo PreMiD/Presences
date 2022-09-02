@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "630098355145539595"
+		clientId: "630098355145539595",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		},
 		[page, section] = window.location.href
 			.replace("https://tugastrikes.com/", "")

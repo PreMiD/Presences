@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "626148940927991829" // CLIENT ID FOR YOUR PRESENCE
+		clientId: "626148940927991829", // CLIENT ID FOR YOUR PRESENCE
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement | Element | string,
@@ -9,7 +9,7 @@ let user: HTMLElement | Element | string,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "mc-market",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "www.mc-market.org") {
 		if (document.location.pathname.includes("/chat/")) {

@@ -1,12 +1,12 @@
 const presence = new Presence({
-	clientId: "663151599924936714"
+	clientId: "663151599924936714",
 });
 
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
 			largeImageKey: "paybutik",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	switch (path) {
@@ -61,10 +61,11 @@ presence.on("UpdateData", async () => {
 				path.startsWith("/project/")
 			) {
 				presenceData.details = "Bir ürün oluşturuyor..";
-				const form = document.forms[2];
 
 				presenceData.smallImageKey = "project";
-				presenceData.smallImageText = (form[0] as HTMLInputElement).value;
+				presenceData.smallImageText = (
+					document.forms[2][0] as HTMLInputElement
+				).value;
 			} else if (path.startsWith("/project/") && path.includes("/products/")) {
 				presenceData.details = "Bir ürünü düzenliyor:";
 				const form = document.forms[2];

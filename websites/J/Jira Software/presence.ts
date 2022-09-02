@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "782358522628145153" //Presence Application ID on Discord Developers.
+		clientId: "782358522628145153", //Presence Application ID on Discord Developers.
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ let projectName: string;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "jira_logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 						burnup = "Analyzing Burnup report.",
 						burndown = "Analyzing Burndown report.",
 						velocity = "Analyzing Velocity report.",
-						cumulative = "Analyzing Cumulative report."
+						cumulative = "Analyzing Cumulative report.",
 					}
 
 					presenceData.details =
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 								details = "Editing Details settings.",
 								access = "Editing Access settings.",
 								notifications = "Editing Notifications settings.",
-								features = "Editing Features settings."
+								features = "Editing Features settings.",
 							}
 
 							presenceData.details =
@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 						roadmap = "Viewing Roadmap.",
 						backlog = "Viewing Backlog.",
 						code = "Reviewing Code.",
-						pages = "Viewing Pages."
+						pages = "Viewing Pages.",
 					}
 
 					presenceData.details =
@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
 							"Created recently." = -6,
 							"Resolved recently." = -7,
 							"Updated recently." = -8,
-							"Done issues." = -9
+							"Done issues." = -9,
 						}
 
 						presenceData.details = "Tracking global Issues:";

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "775356824240128021"
+		clientId: "775356824240128021",
 	}),
 	skinNames = new Map<string, string>()
 		.set("Angel", "angel")
@@ -32,7 +32,7 @@ const presenceData: PresenceData = {
 	largeImageKey: "index",
 	startTimestamp: Date.now(),
 	details: "Main Menu",
-	state: "Just Started Playing"
+	state: "Just Started Playing",
 };
 
 presence.on("UpdateData", async () => {
@@ -46,14 +46,15 @@ function RefreshData() {
 		case "in_lobby_picking_powers": {
 			const [skinSlot] = document.querySelectorAll(".skin-slot.skin-slot--0"),
 				[groupTitle] = document.querySelectorAll(".group-name__title"),
-				userRows = document.querySelectorAll(".c-user.c-user--small"),
 				skinName = skinSlot
 					? skinSlot.children[0].getAttribute("title")
 					: "skin_unknown",
 				lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 
 			presenceData.details = "Picking Powers";
-			presenceData.state = `In Lobby, ${lobbyName} (${userRows.length}/6)`;
+			presenceData.state = `In Lobby, ${lobbyName} (${
+				document.querySelectorAll(".c-user.c-user--small").length
+			}/6)`;
 
 			if (skinNames.has(skinName)) {
 				presenceData.smallImageKey = skinNames.get(skinName);

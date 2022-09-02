@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "743239699992281160"
+	clientId: "743239699992281160",
 });
 
 // Timestamp
@@ -22,7 +22,7 @@ let Routes: string[],
 presence.on("UpdateData", async () => {
 	// Presence Data
 	const presenceData: PresenceData = {
-		largeImageKey: "hentailib_large"
+		largeImageKey: "hentailib_large",
 	};
 
 	// Setup Routes & Query
@@ -627,12 +627,9 @@ presence.on("UpdateData", async () => {
 						// edit
 						presenceData.smallImageText = "Редактирует";
 						presenceData.smallImageKey = "writing";
-
-						const title = document.querySelector(
+						presenceData.details = document.querySelector(
 							".section__header .breadcrumb a"
-						);
-
-						presenceData.details = title.textContent;
+						).textContent;
 
 						switch (Queries.section) {
 							case "media-edit":
@@ -653,12 +650,10 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Добавляет главы";
 						presenceData.smallImageText = "Добавляет";
 						presenceData.smallImageKey = "uploading";
-
-						const title = document.querySelector(
-							".section__header .breadcrumb a"
-						);
-
-						presenceData.state = `Ранобэ: ${title.textContent}`;
+						presenceData.state = `Ранобэ: ${
+							document.querySelector(".section__header .breadcrumb a")
+								.textContent
+						}`;
 
 						break;
 					}
@@ -667,12 +662,10 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Добавляет главу";
 						presenceData.smallImageText = "Добавляет";
 						presenceData.smallImageKey = "uploading";
-
-						const title = document.querySelector(
-							".section__header .breadcrumb a"
-						);
-
-						presenceData.state = `Ранобэ: ${title.textContent}`;
+						presenceData.state = `Ранобэ: ${
+							document.querySelector(".section__header .breadcrumb a")
+								.textContent
+						}`;
 
 						break;
 					}
@@ -680,12 +673,10 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Редактирует главу";
 						presenceData.smallImageText = "Пишет";
 						presenceData.smallImageKey = "writing";
-
-						const title = document.querySelector(
-							".section__header .breadcrumb a"
-						);
-
-						presenceData.state = `Ранобэ: ${title.textContent}`;
+						presenceData.state = `Ранобэ: ${
+							document.querySelector(".section__header .breadcrumb a")
+								.textContent
+						}`;
 					}
 				}
 			}

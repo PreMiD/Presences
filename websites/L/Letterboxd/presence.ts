@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "938732156346314795"
+		clientId: "938732156346314795",
 	}),
 	user = document.cookie
 		.split(";")
@@ -11,8 +11,8 @@ function generateButtonText(text: string): [ButtonData] {
 	return [
 		{
 			label: text.replace("Viewing", "View"),
-			url: window.location.href
-		}
+			url: window.location.href,
+		},
 	];
 }
 
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 		largeImageKey: "final",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (path[0]) {
@@ -63,28 +63,22 @@ presence.on("UpdateData", async () => {
 				break;
 
 			case "settings": {
-				const smallPFP = getImageURLByAlt(user);
-
 				presenceData.details = "Changing their settings";
-				presenceData.smallImageKey = smallPFP;
+				presenceData.smallImageKey = getImageURLByAlt(user);
 
 				break;
 			}
 
 			case "list": {
-				const smallPFP = getImageURLByAlt(user);
-
 				presenceData.details = "Creating a list";
-				presenceData.smallImageKey = smallPFP;
+				presenceData.smallImageKey = getImageURLByAlt(user);
 
 				break;
 			}
 
 			case "invitations": {
-				const smallPFP = getImageURLByAlt(user);
-
 				presenceData.details = "Viewing their invitations";
-				presenceData.smallImageKey = smallPFP;
+				presenceData.smallImageKey = getImageURLByAlt(user);
 
 				break;
 			}
@@ -119,12 +113,10 @@ presence.on("UpdateData", async () => {
 
 			case "activity": {
 				const name = (
-						document.querySelectorAll(".title-3")[0]
-							.firstElementChild as HTMLAnchorElement
-					).textContent,
-					smallPFP = getImageURLByAlt(name);
-
-				presenceData.smallImageKey = smallPFP;
+					document.querySelectorAll(".title-3")[0]
+						.firstElementChild as HTMLAnchorElement
+				).textContent;
+				presenceData.smallImageKey = getImageURLByAlt(name);
 				presenceData.smallImageText = name;
 
 				if (path[1]) {
@@ -151,13 +143,11 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Viewing popular films";
 							break;
 						case "genre":
-							presenceData.details = `Viewing ${
-								path[2] ? path[2] : "unknown"
-							} films`;
+							presenceData.details = `Viewing ${path[2] ?? "unknown"} films`;
 							break;
 						case "decade":
 							presenceData.details = `Viewing films from the ${
-								path[2] ? path[2] : "unknown"
+								path[2] ?? "unknown"
 							}`;
 					}
 				} else presenceData.details = "Viewing films";
@@ -192,7 +182,7 @@ presence.on("UpdateData", async () => {
 									presenceData.smallImageKey = "final";
 									delete presenceData.startTimestamp;
 									presenceData.buttons = [
-										{ label: "Watch trailer", url: window.location.href }
+										{ label: "Watch trailer", url: window.location.href },
 									];
 								} else {
 									const title = document.querySelectorAll(
@@ -252,7 +242,7 @@ presence.on("UpdateData", async () => {
 									).textContent
 								}`;
 								presenceData.buttons = [
-									{ label: `View ${title}`, url: window.location.href }
+									{ label: `View ${title}`, url: window.location.href },
 								];
 								presenceData.largeImageKey = getImageURLByAlt(title);
 								presenceData.smallImageKey = "final";
@@ -373,8 +363,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: `View ${name.textContent}'s stats`,
-									url: window.location.href
-								}
+									url: window.location.href,
+								},
 							];
 
 							break;
@@ -389,13 +379,11 @@ presence.on("UpdateData", async () => {
 								name = (
 									document.querySelectorAll(".name")[0]
 										.firstElementChild as HTMLSpanElement
-								).textContent,
-								smallPFP = getImageURLByAlt(name);
-
+								).textContent;
 							presenceData.details = `Viewing the list ${title}`;
 							presenceData.buttons = generateButtonText(presenceData.details);
 							presenceData.state = `By ${name}`;
-							presenceData.smallImageKey = smallPFP;
+							presenceData.smallImageKey = getImageURLByAlt(name);
 							presenceData.smallImageText = name;
 
 							break;
@@ -464,7 +452,7 @@ presence.on("UpdateData", async () => {
 							presenceData.details = `Review of ${title}`;
 							presenceData.state = `By ${rater} (${rating})`;
 							presenceData.buttons = [
-								{ label: "View review", url: window.location.href }
+								{ label: "View review", url: window.location.href },
 							];
 							presenceData.largeImageKey = getImageURLByAlt(title);
 							presenceData.smallImageKey = getImageURLByAlt(rater);
@@ -484,22 +472,20 @@ presence.on("UpdateData", async () => {
 							"following",
 							"tags",
 							"likes",
-							"lists"
+							"lists",
 						].includes(path[1])
 					) {
 						const name = (
-								document.querySelectorAll(".title-3")[0]
-									.firstElementChild as HTMLAnchorElement
-							).textContent,
-							smallPFP = getImageURLByAlt(name);
-
+							document.querySelectorAll(".title-3")[0]
+								.firstElementChild as HTMLAnchorElement
+						).textContent;
 						if (path[0] !== user && path[0] !== user.toLowerCase()) {
 							presenceData.details = presenceData.details
 								.replace("their", `${name}'s`)
 								.replace("they've", `${name} has`);
 						}
 
-						presenceData.smallImageKey = smallPFP;
+						presenceData.smallImageKey = getImageURLByAlt(name);
 						presenceData.smallImageText = name;
 					}
 				} else {
@@ -519,7 +505,7 @@ presence.on("UpdateData", async () => {
 					).src;
 					presenceData.smallImageKey = "final";
 					presenceData.buttons = [
-						{ label: `View ${name}`, url: window.location.href }
+						{ label: `View ${name}`, url: window.location.href },
 					];
 
 					break;

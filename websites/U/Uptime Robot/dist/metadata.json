@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Jonax",
 		"id": "394799641192824834"
@@ -16,7 +16,7 @@
 		"nl": "Uptime Robot helpt u uw websites up-to-date te houden."
 	},
 	"url": "uptimerobot.com",
-	"version": "1.4.10",
+	"version": "1.4.12",
 	"logo": "https://i.imgur.com/D2RsWKt.jpg",
 	"thumbnail": "https://i.imgur.com/9uhpjDJ.png",
 	"color": "#7FFF00",

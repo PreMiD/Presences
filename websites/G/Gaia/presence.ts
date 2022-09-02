@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "928134371205083166"
+		clientId: "928134371205083166",
 	}),
 	browsingTimestamp = Date.now() / 1000,
 	shortenedURLs: Record<string, string> = {};
@@ -23,12 +23,12 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "gaia",
 		smallImageKey: "browse",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	const [buttons, cover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]),
 		pages: Record<
 			string,
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 								?.textContent,
 							document
 								.querySelector(".text-season-episode")
-								?.textContent?.toUpperCase()
+								?.textContent?.toUpperCase(),
 						],
 						coverUrl = document
 							.querySelector<HTMLElement>(".vjs-poster")
@@ -69,8 +69,8 @@ presence.on("UpdateData", async () => {
 					data.buttons = [
 						{
 							label: title[0] ? "Watch Series" : "Watch Film",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 
 					return data;
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 							document.querySelector(".jumbotron-episode__meta > h1") ??
 							document.querySelector(".heading.detail-series__title")
 						)?.textContent,
-						document.querySelector(".jumbotron-video__meta> h1")?.textContent
+						document.querySelector(".jumbotron-video__meta> h1")?.textContent,
 					];
 
 					data.details = title[0] ? "Viewing series:" : "Viewing film:";
@@ -89,8 +89,8 @@ presence.on("UpdateData", async () => {
 					data.buttons = [
 						{
 							label: title[0] ? "View Series" : "View Film",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 
 					return data;
@@ -100,15 +100,15 @@ presence.on("UpdateData", async () => {
 				() => ({
 					details: "Browsing:",
 					state: document.querySelector(".heading.jumbotron-subcategory__title")
-						.textContent
+						.textContent,
 				}),
 			"/films-docs/": {
 				details: "Browsing:",
-				state: "Docs & Films"
+				state: "Docs & Films",
 			},
 			"/recently-added": {
-				details: "Viewing what's new on Gaia"
-			}
+				details: "Viewing what's new on Gaia",
+			},
 		};
 
 	for (const [path, data] of Object.entries(pages)) {

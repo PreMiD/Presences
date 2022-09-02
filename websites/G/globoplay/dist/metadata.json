@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "fror",
 		"id": "515668127829458945"
@@ -8,6 +8,10 @@
 		{
 			"name": "Bas950",
 			"id": "241278257335500811"
+		},
+		{
+			"name": "Kyrie",
+			"id": "368399721494216706"
 		}
 	],
 	"service": "globoplay",
@@ -17,13 +21,21 @@
 		"pt_BR": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser."
 	},
 	"url": "globoplay.globo.com",
-	"version": "2.1.7",
+	"version": "2.2.0",
 	"logo": "https://i.imgur.com/nPyw54J.png",
 	"thumbnail": "https://i.imgur.com/eEb3Dy7.png",
 	"color": "#ED1A37",
 	"category": "videos",
 	"tags": [
 		"shows",
-		"movies"
+		"movies",
+		"radio",
+		"soap-opera",
+		"sports",
+		"music",
+		"news",
+		"anime",
+		"podcast",
+		"animation"
 	]
 }

@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "715667985267949649"
+	clientId: "715667985267949649",
 });
 let title, subTitle, chapter, quiz, search;
 const browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -7,7 +7,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (path === "/") presenceData.details = "Viewing Home";
 	else if (path.includes("/literature/")) {

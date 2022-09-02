@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Palskie",
 		"id": "90431685472038912"
@@ -14,9 +14,9 @@
 		"blog.codechef.com",
 		"discuss.codechef.com"
 	],
-	"version": "1.0.7",
-	"logo": "https://i.imgur.com/E5jTqq0.png",
-	"thumbnail": "https://i.imgur.com/ZsRfm2Q.png",
+	"version": "1.0.10",
+	"logo": "https://i.imgur.com/yErRb6J.png",
+	"thumbnail": "https://i.imgur.com/8Q9qJdD.png",
 	"color": "#e1d5d5",
 	"category": "other",
 	"tags": [

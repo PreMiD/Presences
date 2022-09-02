@@ -1,14 +1,19 @@
 const presence = new Presence({
-		clientId: "866604211248824371"
+		clientId: "866604211248824371",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
+			details: "Browsing",
 			largeImageKey: "large",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = document.location;
+		{ pathname, href } = document.location,
+		[image, buttons] = await Promise.all([
+			presence.getSetting<boolean>("image"),
+			presence.getSetting<boolean>("buttons"),
+		]);
 
 	if (pathname === "/") presenceData.details = "Browsing Homepage";
 	else if (pathname === "/list") presenceData.details = "Viewing Followed List";
@@ -22,7 +27,7 @@ presence.on("UpdateData", async () => {
 				if (title) presenceData.details = `Reading ${title.textContent}`;
 				if (chapter) presenceData.state = chapter.textContent;
 			} else if (imageReader) {
-				const img = imageReader.querySelector<HTMLImageElement>("img"),
+				const img = imageReader.querySelectorAll<HTMLImageElement>("img")[1],
 					chapter = document.querySelector<HTMLHeadingElement>("h1");
 				if (img) {
 					presenceData.details = `Reading ${img.alt.substring(
@@ -32,23 +37,36 @@ presence.on("UpdateData", async () => {
 				}
 				if (chapter) presenceData.state = chapter.textContent;
 			}
-			presenceData.smallImageKey = "small";
+			if (image) {
+				presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+					"meta[property='og:image']"
+				).content;
+			} else presenceData.smallImageKey = "small";
 			presenceData.buttons = [
 				{
 					label: "Read Chapter",
-					url: href
-				}
+					url: href,
+				},
+				{
+					label: "Read Description",
+					url: href.split(/(.+)[\\/]/)[1],
+				},
 			];
 		} else {
 			const title = document.querySelector<HTMLHeadingElement>("h1");
 			if (title) {
-				presenceData.details = "Checking Description";
+				presenceData.details = "Reading Description";
 				presenceData.state = title.textContent;
+				if (image) {
+					presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+						"meta[property='og:image']"
+					).content;
+				}
 				presenceData.buttons = [
 					{
-						label: "Check Description",
-						url: href
-					}
+						label: "Read Description",
+						url: href,
+					},
 				];
 			}
 		}
@@ -63,6 +81,15 @@ presence.on("UpdateData", async () => {
 				presenceData.state = t.textContent;
 				break;
 			}
+		}
+	} else if (pathname.startsWith("/user") && pathname !== "/user") {
+		presenceData.details = `Viewing ${
+			document.querySelector<HTMLHeadingElement>("h1").textContent
+		}`;
+		if (image) {
+			presenceData.largeImageKey = document
+				.querySelector<HTMLImageElement>("#__next div > div > img")
+				.src.replace("size=200", "size=640");
 		}
 	} else {
 		switch (pathname) {
@@ -86,15 +113,16 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Privacy POlicy";
 				break;
 			}
-			case "/install_app":
-				{
-					presenceData.details = "ComicK App";
-					// No default
-				}
+			case "/install_app": {
+				presenceData.details = "ComicK App";
 				break;
+			}
+			case "/user": {
+				presenceData.details = "Viewing their profile";
+				break;
+			}
 		}
 	}
-
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	if (!buttons) delete presenceData.buttons;
+	presence.setActivity(presenceData);
 });

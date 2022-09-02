@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.6",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"name": "Miodec",
 		"id": "102819690287489024"
@@ -19,7 +19,7 @@
 		"www.monkeytype.com",
 		"monkeytype.com"
 	],
-	"version": "2.0.11",
+	"version": "2.0.13",
 	"logo": "https://i.imgur.com/IgXEro3.png",
 	"thumbnail": "https://i.imgur.com/PsuyFRC.png",
 	"color": "#383200",

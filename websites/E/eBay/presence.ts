@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "619219701146583080"
+		clientId: "619219701146583080",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "ebaylogo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[, page] = location.pathname.split("/");
 
@@ -17,10 +17,6 @@ presence.on("UpdateData", async () => {
 		} else {
 			switch (page) {
 				case "itm": {
-					const seller = (
-						document.querySelector(".mbg > a") as HTMLAnchorElement
-					)?.href;
-
 					presenceData.details = document
 						.querySelector("#itemTitle")
 						.textContent.replace(
@@ -31,8 +27,8 @@ presence.on("UpdateData", async () => {
 						{ label: "View Item", url: location.href },
 						{
 							label: "View Seller",
-							url: seller
-						}
+							url: document.querySelector<HTMLAnchorElement>(".mbg > a")?.href,
+						},
 					];
 
 					if (document.querySelector("#vi-cdown_timeLeft")) {
@@ -64,8 +60,8 @@ presence.on("UpdateData", async () => {
 							{ label: "View List", url: location.href },
 							{
 								label: "View Seller",
-								url: seller.href
-							}
+								url: seller.href,
+							},
 						];
 					}
 
@@ -156,12 +152,10 @@ presence.on("UpdateData", async () => {
 				{ label: "View Post", url: location.href },
 				{
 					label: "View Author",
-					url: (
-						document.querySelector(
-							".lia-component-message-view-widget-author-username > a"
-						) as HTMLAnchorElement
-					)?.href
-				}
+					url: document.querySelector<HTMLAnchorElement>(
+						".lia-component-message-view-widget-author-username > a"
+					)?.href,
+				},
 			];
 		} else if (location.pathname.includes("/user/")) {
 			presenceData.details = "eBay Forum Author:";
