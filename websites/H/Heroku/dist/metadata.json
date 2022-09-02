@@ -24,6 +24,11 @@
 	"thumbnail": "https://i.imgur.com/06zNE4U.png",
 	"color": "#211746",
 	"category": "other",
+	"tags": [
+		"hosting",
+		"application",
+		"web"
+	],
 	"settings": [
 		{
 			"id": "showNames",
@@ -32,6 +37,5 @@
 			"title": "Show Application Names",
 			"icon": "fas fa-text"
 		}
-	],
-	"tags": ["hosting", "application", "web"]
+	]
 }
