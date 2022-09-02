@@ -1,52 +1,21 @@
 const presence = new Presence({
 		clientId: "1015299454292725760",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	strings = presence.getStrings({
-		browsing: "general.browsing",
-		forums: "general.forums",
-		readingPost: "general.readingPost",
-		readingAbout: "general.readingAbout",
-		viewThread: "general.viewThread",
-		reading: "general.reading",
-		searching: "general.search",
-		searchingFor: "general.searchFor",
-		viewHome: "general.viewHome",
-		viewing: "general.viewing",
-		viewList: "general.viewList",
-		viewCategory: "general.viewCategory",
-		viewProfile: "general.viewProfile",
-		buttonViewPage: "general.buttonViewPage",
-	});
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/LWQZ2xQ.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ hostname, pathname, search } = window.location,
-		{
-			browsing,
-			readingAbout,
-			forums,
-			viewing,
-			viewList,
-			readingPost,
-			buttonViewPage,
-			viewThread,
-			reading,
-			viewProfile,
-			viewCategory,
-			searching,
-			searchingFor,
-			viewHome,
-		} = await strings;
+		{ hostname, pathname, search } = window.location;
 	switch (hostname) {
 		case "warthunder.com": {
-			presenceData.details = browsing;
-			if (/^\/[a-z]{2}\/?$/i.test(pathname)) presenceData.state = viewHome;
+			presenceData.details = "Browsing...";
+			if (/^\/[a-z]{2}\/?$/i.test(pathname))
+				presenceData.state = "Viewing home page";
 			else if (pathname.substring(3) === "/game/about")
-				presenceData.state = readingAbout;
+				presenceData.state = "About War Thunder";
 			else {
 				presenceData.state =
 					document.querySelector(".content__title")?.textContent ||
@@ -55,36 +24,36 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "forum.warthunder.com": {
-			presenceData.details = `${viewing} ${forums}`;
+			presenceData.details = "Viewing forums";
 			const searchPath = search.match(/(?:\?)(.*?)(?:&.*|$)/)[1],
 				searchParams = new URLSearchParams(search),
 				pageTitle =
 					document.querySelector<HTMLHeadingElement>(
 						".ipsType_pageTitle"
 					)?.textContent;
-			if (searchPath === "") presenceData.state = viewHome;
+			if (searchPath === "") presenceData.state = "Viewing home page";
 			else if (searchPath.startsWith("/calendar/"))
-				presenceData.state = `${viewing} Calendar`;
+				presenceData.state = "Viewing calendar";
 			else if (searchPath.startsWith("/search/")) {
 				if (searchParams.get("q"))
-					presenceData.state = `${searchingFor} ${searchParams.get("q")}`;
-				else presenceData.state = searching;
+					presenceData.state = `Searching for: ${searchParams.get("q")}`;
+				else presenceData.state = "Searching";
 			} else if (searchPath.startsWith("/forum/"))
-				presenceData.state = `${viewCategory} ${pageTitle}`;
+				presenceData.state = `Viewing category: ${pageTitle}`;
 			else if (searchPath.startsWith("/topic/"))
-				presenceData.state = `${viewThread} ${pageTitle}`;
+				presenceData.state = `Viewing thread: ${pageTitle}`;
 			else if (searchPath.startsWith("/profile/")) {
-				presenceData.state = `${viewProfile} ${document
+				presenceData.state = `Viewing profile of: ${document
 					.querySelector<HTMLHeadingElement>(".ipsPageHead_barText")
 					.textContent.replace(/^\s*|\s*$/g, "")}`;
 			} else if (searchPath.startsWith("/submit"))
 				presenceData.state = "Creating new thread";
 			else if (searchPath.startsWith("/messenger/")) {
 				if (/^\d+/.test(searchPath.substring(11)))
-					presenceData.state = `${reading} DM: ${pageTitle}`;
+					presenceData.state = `Reading DM: ${pageTitle}`;
 				else if (searchPath.startsWith("/messenger/compose"))
 					presenceData.state = "Composing new message";
-				else presenceData.state = `${viewing} private messages`;
+				else presenceData.state = "Viewing private messages";
 			} else {
 				presenceData.state =
 					pageTitle ||
@@ -99,19 +68,19 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/feed/"))
 				presenceData.state = document.title.match(/(?:WT Live \/\/ )(.*)/)[1];
 			else if (pathname.startsWith("/post/")) {
-				presenceData.state = `${readingPost} ${
+				presenceData.state = `Reading post: ${
 					document.title.match(/(?:WT Live \/\/ )(.*)/)[1]
 				}`;
 				presenceData.buttons = [
 					{
-						label: buttonViewPage,
+						label: "View Page",
 						url: `https://${hostname}${pathname}`,
 					},
 				];
 			} else if (pathname.startsWith("/subscribes/"))
-				presenceData.state = `${viewing} subscriptions`;
+				presenceData.state = "Viewing subscriptions";
 			else if (pathname.startsWith("/user/")) {
-				presenceData.state = `${viewProfile} ${
+				presenceData.state = `Viewing profile of: ${
 					document.querySelector<HTMLSpanElement>(".nickname > span")
 						.textContent
 				}`;
@@ -123,15 +92,15 @@ presence.on("UpdateData", async () => {
 
 			switch (new URLSearchParams(search).get("action")) {
 				case "rating": {
-					presenceData.state = `${viewList} player ratings`;
+					presenceData.state = "Viewing a list of: player ratings";
 					break;
 				}
 				case "current_tournaments": {
-					presenceData.state = `${viewList} active tournaments`;
+					presenceData.state = "Viewing a list of: active tournaments";
 					break;
 				}
 				case "tournament": {
-					presenceData.details = `${viewing} a tournament`;
+					presenceData.details = "Viewing a tournament";
 					presenceData.state = document.querySelector<HTMLSpanElement>(
 						".txt_name_tournament"
 					).textContent;
