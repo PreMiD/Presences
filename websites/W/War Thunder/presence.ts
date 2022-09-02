@@ -129,6 +129,42 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "tss.warthunder.com": {
+			presenceData.details = "Browsing War Thunder Tournament Service";
+			const action = new URLSearchParams(search).get("action");
+			switch (action) {
+				case "rating": {
+					presenceData.state = `${viewList} player ratings`;
+					break;
+				}
+				case "current_tournaments": {
+					presenceData.state = `${viewList} active tournaments`;
+					break;
+				}
+				case "tournament": {
+					presenceData.details = `${viewing} a tournament`;
+					presenceData.state = document.querySelector<HTMLSpanElement>(
+						".txt_name_tournament"
+					).textContent;
+					presenceData.smallImageKey =
+						document.querySelector<HTMLImageElement>(".img_tournament").src;
+					presenceData.smallImageText = `Teams: ${
+						document.querySelector<HTMLSpanElement>("#all_teams_param_tour")
+							.textContent
+					} | Prize: ${
+						document.querySelector("[id-tss='prize_pool']").textContent
+					}`;
+					presenceData.buttons = [
+						{
+							label: "View Tournament",
+							url: `https://${hostname}${pathname}${search}`,
+						},
+					];
+					break;
+				}
+				default: {
+					presenceData.state = document.title;
+				}
+			}
 			break;
 		}
 		case "wiki.warthunder.com": {
