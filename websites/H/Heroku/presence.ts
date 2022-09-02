@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "",
+		clientId: "1014999001801691246",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1e3);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
+			largeImageKey: "logo_square",
 		},
 		{ hostname, pathname, search } = window.location;
 	switch (hostname) {
