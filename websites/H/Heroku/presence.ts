@@ -44,17 +44,14 @@ presence.on("UpdateData", async () => {
 				switch (pathname) {
 					case "/acount": {
 						presenceData.state = "Account settings";
-
 						break;
 					}
 					case "/account/applications": {
 						presenceData.state = "Application settings";
-
 						break;
 					}
 					case "/account/billing": {
 						presenceData.state = "Billing settings";
-
 						break;
 					}
 					// No default
@@ -71,9 +68,8 @@ presence.on("UpdateData", async () => {
 					switch (subpath) {
 						case "activity": {
 							presenceData.state = "Activity";
-							if (subpath2 === "/builds")
+							if (subpath2 === "builds")
 								presenceData.state = "Viewing build log";
-
 							break;
 						}
 						default: {
