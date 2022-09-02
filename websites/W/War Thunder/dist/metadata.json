@@ -19,6 +19,7 @@
 	"logo": "https://i.imgur.com/LWQZ2xQ.png",
 	"thumbnail": "https://i.imgur.com/M0BOK9r.jpg",
 	"color": "#e53935",
+	"category": "games",
 	"tags": [
 		"tank",
 		"combat",
@@ -26,6 +27,5 @@
 		"multiplayer",
 		"airplane",
 		"battleship"
-	],
-	"category": "games"
+	]
 }

@@ -89,7 +89,6 @@ presence.on("UpdateData", async () => {
 		}
 		case "tss.warthunder.com": {
 			presenceData.details = "Browsing War Thunder Tournament Service";
-
 			switch (new URLSearchParams(search).get("action")) {
 				case "rating": {
 					presenceData.state = "Viewing a list of: player ratings";
