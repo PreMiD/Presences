@@ -54,53 +54,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Playing the game";
 		presenceData.buttons = [{ label: "Play The Game", url: href }];
 	}
-	// if (startMenu[0] === 57 || startMenu[0] === 27 || startMenu[0] === 45) {
-	// 	presenceData.buttons = [{ label: "View Start Menu", url: href }];
-	// } else {
-	// 	// playing
-	// }
-
-	// 		 if (startMenu[0] === 57 || startMenu[0] === 27 || startMenu[0] === 45) {
-	// 					if (!zoomedIn) {
-	// 			const leaderboardMenu = context.getImageData(810, 140, 400, 60).data,
-	// 		emojiMenu = context.getImageData(780, 160, 400, 60).data,
-	// 				moreMenu = context.getImageData(1380, 60, 400, 60).data;
-	// 				colorMenu = context.getImageData(500, 220, 400, 60).data,
-	// if (leaderboardMenu[0] === 55) presenceData.details = "Viewing clans leaderboard"
-	// else if (leaderboardMenu[0] === 4) presenceData.details = "Viewing players leaderboard"
-	// else if (emojiMenu[0] === 254) presenceData.details = "Viewing the emoji menu"
-	// else if (moreMenu[0] === 8) presenceData.details = "Viewing extra options"
-	// else if (colorMenu[0] === 14) presenceData.details = "Viewing the color menu"
-	// else presenceData.details = "Viewing the start menu"
-	// 		presenceData.buttons = [
-	// 			{ label: "View Start Menu", url: href },
-	// 		];
-	// 		} else {
-	// 		const leaderboardMenu = context.getImageData(810, 80, 400, 60).data,
-	// 		emojiMenu = context.getImageData(780, 160, 400, 60).data,
-	// 		moreMenu = context.getImageData(1400, 80, 400, 60).data;
-	// 		colorMenu = context.getImageData(500, 60, 400, 60).data,
-	// 		if (leaderboardMenu[0] === 68) presenceData.details = "Viewing clans leaderboard"
-	// else if (leaderboardMenu[0] === 17) presenceData.details = "Viewing players leaderboard"
-	// else if (emojiMenu[0] === 8) presenceData.details = "Viewing the emoji menu"
-	// else if (moreMenu[0] === 46) presenceData.details = "Viewing extra options"
-	// else if (colorMenu[0] === 6) presenceData.details = "Viewing the color menu"
-	// else presenceData.details = "Viewing the start menu"
-	// 		presenceData.buttons = [
-	// 			{ label: "View Start Menu", url: href },
-	// 		];
-	// 	}
-	// 		} else {
-	// 			if (context.getImageData(1020, 550, 400, 60).data[0] === 130)
-	// 				presenceData.details = "The game has ended"
-	// 			else {
-	// 			presenceData.details = "Playing the game"
-	// 		presenceData.buttons = [
-	// 			{ label: "Play The Game", url: href },
-	// 		];
-	// 	}
-	// 	}
-
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
