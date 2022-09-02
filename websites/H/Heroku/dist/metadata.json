@@ -29,7 +29,8 @@
 			"id": "showNames",
 			"value": false,
 			"multiLanguage": false,
-			"title": "Show Application Names"
+			"title": "Show Application Names",
+			"icon": "fas fa-text"
 		}
 	],
 	"tags": ["hosting", "application", "web"]
