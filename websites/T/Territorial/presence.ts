@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "1014903980410802237"
+		clientId: "1014903980410802237",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Assets {
-	Logo = "https://i.imgur.com/8vXevly.png"
+	Logo = "https://i.imgur.com/8vXevly.png",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ href } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons"),
