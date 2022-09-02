@@ -6,7 +6,6 @@ const presence = new Presence({
 		browsing: "general.browsing",
 		forums: "general.forums",
 		readingPost: "general.readingPost",
-		readingArticle: "general.readingArticle",
 		readingAbout: "general.readingAbout",
 		viewThread: "general.viewThread",
 		reading: "general.reading",
@@ -33,7 +32,6 @@ presence.on("UpdateData", async () => {
 			viewing,
 			viewList,
 			readingPost,
-			readingArticle,
 			buttonViewPage,
 			viewThread,
 			reading,
@@ -46,11 +44,10 @@ presence.on("UpdateData", async () => {
 	switch (hostname) {
 		case "warthunder.com": {
 			presenceData.details = browsing;
-			if (/^\/[a-z]{2}\/?$/i.test(pathname)) {
-				presenceData.state = viewHome;
-			} else if (pathname.substring(3) === "/game/about") {
+			if (/^\/[a-z]{2}\/?$/i.test(pathname)) presenceData.state = viewHome;
+			else if (pathname.substring(3) === "/game/about")
 				presenceData.state = readingAbout;
-			} else {
+			else {
 				presenceData.state =
 					document.querySelector(".content__title")?.textContent ||
 					document.title.match(/(.*?)(?: - War Thunder$|$)/)[1];
@@ -65,34 +62,29 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLHeadingElement>(
 						".ipsType_pageTitle"
 					)?.textContent;
-			if (searchPath === "") {
-				presenceData.state = viewHome;
-			} else if (searchPath.startsWith("/calendar/")) {
+			if (searchPath === "") presenceData.state = viewHome;
+			else if (searchPath.startsWith("/calendar/"))
 				presenceData.state = `${viewing} Calendar`;
-			} else if (searchPath.startsWith("/search/")) {
-				if (searchParams.get("q")) {
+			else if (searchPath.startsWith("/search/")) {
+				if (searchParams.get("q"))
 					presenceData.state = `${searchingFor} ${searchParams.get("q")}`;
-				} else {
-					presenceData.state = searching;
-				}
-			} else if (searchPath.startsWith("/forum/")) {
+				else presenceData.state = searching;
+			} else if (searchPath.startsWith("/forum/"))
 				presenceData.state = `${viewCategory} ${pageTitle}`;
-			} else if (searchPath.startsWith("/topic/")) {
+			else if (searchPath.startsWith("/topic/"))
 				presenceData.state = `${viewThread} ${pageTitle}`;
-			} else if (searchPath.startsWith("/profile/")) {
+			else if (searchPath.startsWith("/profile/")) {
 				presenceData.state = `${viewProfile} ${document
 					.querySelector<HTMLHeadingElement>(".ipsPageHead_barText")
 					.textContent.replace(/^\s*|\s*$/g, "")}`;
-			} else if (searchPath.startsWith("/submit")) {
+			} else if (searchPath.startsWith("/submit"))
 				presenceData.state = "Creating new thread";
-			} else if (searchPath.startsWith("/messenger/")) {
-				if (/^\d+/.test(searchPath.substring(11))) {
+			else if (searchPath.startsWith("/messenger/")) {
+				if (/^\d+/.test(searchPath.substring(11)))
 					presenceData.state = `${reading} DM: ${pageTitle}`;
-				} else if (searchPath.startsWith("/messenger/compose")) {
+				else if (searchPath.startsWith("/messenger/compose"))
 					presenceData.state = "Composing new message";
-				} else {
-					presenceData.state = `${viewing} private messages`;
-				}
+				else presenceData.state = `${viewing} private messages`;
 			} else {
 				presenceData.state =
 					pageTitle ||
@@ -104,9 +96,9 @@ presence.on("UpdateData", async () => {
 		}
 		case "live.warthunder.com": {
 			presenceData.details = "Browsing War Thunder Live";
-			if (pathname.startsWith("/feed/")) {
+			if (pathname.startsWith("/feed/"))
 				presenceData.state = document.title.match(/(?:WT Live \/\/ )(.*)/)[1];
-			} else if (pathname.startsWith("/post/")) {
+			else if (pathname.startsWith("/post/")) {
 				presenceData.state = `${readingPost} ${
 					document.title.match(/(?:WT Live \/\/ )(.*)/)[1]
 				}`;
@@ -116,22 +108,20 @@ presence.on("UpdateData", async () => {
 						url: `https://${hostname}${pathname}`,
 					},
 				];
-			} else if (pathname.startsWith("/subscribes/")) {
+			} else if (pathname.startsWith("/subscribes/"))
 				presenceData.state = `${viewing} subscriptions`;
-			} else if (pathname.startsWith("/user/")) {
+			else if (pathname.startsWith("/user/")) {
 				presenceData.state = `${viewProfile} ${
 					document.querySelector<HTMLSpanElement>(".nickname > span")
 						.textContent
 				}`;
-			} else {
-				presenceData.state = document.title;
-			}
+			} else presenceData.state = document.title;
 			break;
 		}
 		case "tss.warthunder.com": {
 			presenceData.details = "Browsing War Thunder Tournament Service";
-			const action = new URLSearchParams(search).get("action");
-			switch (action) {
+
+			switch (new URLSearchParams(search).get("action")) {
 				case "rating": {
 					presenceData.state = `${viewList} player ratings`;
 					break;
@@ -168,10 +158,19 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "wiki.warthunder.com": {
+			presenceData.details = "Browsing the wiki";
+			const searchParams = new URLSearchParams(search),
+				title =
+					searchParams.get("title") ||
+					document.querySelector<HTMLHeadingElement>("#firstHeading")
+						.textContent,
+				action = searchParams.get("action");
+			if (action === "edit") presenceData.state = `Editing ${title}`;
+			else if (action === "history")
+				presenceData.state = `Viewing revision history of: ${title}`;
+			else presenceData.state = title;
 			break;
 		}
 	}
-	if (presenceData.details) {
-		presence.setActivity(presenceData);
-	}
+	if (presenceData.details) presence.setActivity(presenceData);
 });
