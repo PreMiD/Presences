@@ -10,8 +10,7 @@ let locationMap: string,
 	shipDep: string,
 	elemDesc: string;
 
-const capitalize = (s: string) =>
-	(s && s[0].toUpperCase() + s.slice(1)) || "";
+const capitalize = (s: string) => (s && s[0].toUpperCase() + s.slice(1)) || "";
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
@@ -86,13 +85,11 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("ais/home/shipid")) {
 		elemName = capitalize(
 			document
-				.querySelector(
-					'[href*="/en/ais/details/ships/shipid:"]'
-				).textContent.toLowerCase()
+				.querySelector('[href*="/en/ais/details/ships/shipid:"]')
+				.textContent.toLowerCase()
 		);
-		shipStatus = document.querySelector(
-			'[class="infowin-genericinfo1-cell"]'
-		).firstElementChild.textContent;
+		shipStatus = document.querySelector('[class="infowin-genericinfo1-cell"]')
+			.firstElementChild.textContent;
 
 		if (
 			document
@@ -124,9 +121,7 @@ presence.on("UpdateData", async () => {
 		else {
 			shipDest = capitalize(
 				document
-					.querySelector<HTMLAnchorElement>(
-						'[href*="/en/ais/details/ports/"]'
-					)
+					.querySelector<HTMLAnchorElement>('[href*="/en/ais/details/ports/"]')
 					.href.split("?name=")[1]
 					.split("&country=")[0]
 					.toLowerCase()
