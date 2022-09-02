@@ -10,12 +10,12 @@ let locationMap: string,
 	shipDep: string,
 	elemDesc: string;
 
-const capitalize = (s: string | never[]) =>
+const capitalize = (s: string) =>
 	(s && s[0].toUpperCase() + s.slice(1)) || "";
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/u2NmdZX.png",
 		startTimestamp: browsingTimestamp,
 		details: "Viewing:",
 	};
@@ -87,13 +87,12 @@ presence.on("UpdateData", async () => {
 		elemName = capitalize(
 			document
 				.querySelector(
-					"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.handle.cursor-move > div > div > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > a"
-				)
-				.innerHTML.toLowerCase()
+					'[href*="/en/ais/details/ships/shipid:"]'
+				).textContent.toLowerCase()
 		);
 		shipStatus = document.querySelector(
-			"#infosnippet_container > div > div > div > div:nth-child(2) > div > div:nth-child(1) > div > strong"
-		).innerHTML;
+			'[class="infowin-genericinfo1-cell"]'
+		).firstElementChild.textContent;
 
 		if (
 			document
@@ -126,7 +125,7 @@ presence.on("UpdateData", async () => {
 			shipDest = capitalize(
 				document
 					.querySelector<HTMLAnchorElement>(
-						"#infosnippet_container > div > div > div > div:nth-child(2) > div > div > div.d-flex.align-items-center.justify-content-start.flex-wrap.flex-1-1-auto > div:nth-child(2) > a"
+						'[href*="/en/ais/details/ports/"]'
 					)
 					.href.split("?name=")[1]
 					.split("&country=")[0]
@@ -139,7 +138,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Tracking ${elemName}`;
 		presenceData.state = `From ${shipDep} to ${shipDest} (${shipStatus})`;
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-			"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.panel-body.no-padding > div.d-flex.align-items-stretch.justify-content-start.flex-wrap.flex-1-1-auto.inforow > div:nth-child(1) > a > img"
+			'[src*="https://photos.marinetraffic.com/ais/showphoto.aspx?"]'
 		).src;
 		presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
 			"#app > div > div.jss2 > div.d-flex.align-items-start.justify-content-start.flex-1-1-auto.home-layout > div.d-flex.flexcol.align-items-start.justify-content-start.flex-wrap.flex-1-1-auto > div > div:nth-child(4) > div > div > div > div > div > div.handle.cursor-move > div > div > div:nth-child(1) > img"
