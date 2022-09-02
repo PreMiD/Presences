@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "theusaf",
+		"id": "193714715631812608"
+	},
+	"service": "War Thunder",
+	"description": {
+		"en": "Next-Gen MMO Combat Game for PC, Mac, Linux and PlayStation®4"
+	},
+	"url": [
+		"warthunder.com",
+		"forum.warthunder.com",
+		"live.warthunder.com",
+		"tss.warthunder.com",
+		"wiki.warthunder.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/LWQZ2xQ.png",
+	"thumbnail": "https://i.imgur.com/M0BOK9r.jpg",
+	"color": "#e53935",
+	"tags": [
+		"tank",
+		"combat",
+		"simulation",
+		"multiplayer",
+		"airplane",
+		"battleship"
+	],
+	"category": "games"
+}
