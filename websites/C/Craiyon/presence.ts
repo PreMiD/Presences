@@ -42,12 +42,9 @@ presence.on("UpdateData", () => {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
 					activityState = "results";
 				}
-				if (
-					document.activeElement === input &&
-					input.textContent !== oldPrompt
-				) {
+				if (document.activeElement === input && input.textContent !== oldPrompt)
 					presenceData.details = "Thinking of a new prompt";
-				} else if (container.childElementCount > 3) {
+				else if (container.childElementCount > 3) {
 					presenceData.details = "Viewing results";
 					presenceData.state = `"${oldPrompt}"`;
 				} else {
@@ -66,7 +63,6 @@ presence.on("UpdateData", () => {
 			break;
 		}
 	}
-	if (presenceData.details) {
-		presence.setActivity(presenceData);
-	} else presence.setActivity();
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
