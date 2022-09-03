@@ -4,7 +4,7 @@ const presence = new Presence({ clientId: "1014873319419424869" }),
 		"": "Viewing homepage",
 		"~rules": "Reading rules",
 		"~tos": "Reading ToS",
-		"~account": "Managing its account",
+		"~account": "Managing their account",
 	};
 
 enum Assets {
