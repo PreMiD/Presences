@@ -4,6 +4,12 @@
 		"name": "AcidEpicice",
 		"id": "249992970235936768"
 	},
+	"contributors": [
+	    {
+	      "name": "Infiniticity",
+	      "id": "703134690613264425"
+	    }
+	],
 	"service": "Stack Exchange",
 	"description": {
 		"en": "Stack Exchange is a network of question-and-answer websites on topics in diverse fields, each site covering a specific topic, where questions, answers, and users are subject to a reputation award process. The reputation system allows the sites to be self-moderating."
