@@ -16,7 +16,9 @@ presence.on("UpdateData", () => {
 				container = document.querySelector(
 					".h-full.w-full > .relative > div > div"
 				);
-			presenceData.state = input.textContent ? `"${input.textContent}"` : "Waiting for input...";
+			presenceData.state = input.textContent
+				? `"${input.textContent}"`
+				: "Waiting for input...";
 			if (container.querySelector("svg.text-gray-300"))
 				presenceData.details = "Thinking of a prompt";
 			else if (
