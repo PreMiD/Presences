@@ -2,12 +2,16 @@ const presence = new Presence({
 	clientId: "1015402986534608948",
 });
 
-let browsingTimestamp: number = null,
-	oldPrompt: string = null;
+type State = "start" | "generation" | "results";
+
+let browsingTimestamp: number = Date.now() / 1000,
+	oldPrompt: string = null,
+	activityState: State = "start";
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/uCqmcTv.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location;
 	switch (pathname) {
@@ -26,17 +30,24 @@ presence.on("UpdateData", () => {
 					.querySelector("img")
 					.classList.contains("animate-wiggle")
 			) {
-				if (!browsingTimestamp) {
-					browsingTimestamp = Date.now() / 1000;
+				if (activityState !== "generation") {
+					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
 					oldPrompt = input.textContent;
+					activityState = "generation";
 				}
 				presenceData.details = "Generating images";
 				presenceData.state = `"${oldPrompt}"`;
 			} else {
-				browsingTimestamp = null;
-				if (document.activeElement === input && input.textContent !== oldPrompt)
+				if (activityState !== "results") {
+					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
+					activityState = "results";
+				}
+				if (
+					document.activeElement === input &&
+					input.textContent !== oldPrompt
+				) {
 					presenceData.details = "Thinking of a new prompt";
-				else if (container.childElementCount > 3) {
+				} else if (container.childElementCount > 3) {
 					presenceData.details = "Viewing results";
 					presenceData.state = `"${oldPrompt}"`;
 				} else {
@@ -56,7 +67,6 @@ presence.on("UpdateData", () => {
 		}
 	}
 	if (presenceData.details) {
-		presenceData.startTimestamp = browsingTimestamp;
 		presence.setActivity(presenceData);
 	} else presence.setActivity();
 });
