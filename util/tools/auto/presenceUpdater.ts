@@ -296,7 +296,7 @@ const writeJS = (path: string, code: string): void =>
 					updatedPresenceData.map<AnyBulkWriteOperation<DBdata>>(newData => ({
 						updateOne: {
 							filter: { name: newData.name },
-							update: { $set: newData },
+							update: { set: newData },
 						},
 					}))
 				);
