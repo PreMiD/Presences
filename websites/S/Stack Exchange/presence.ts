@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "stackexchange",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, hostname } = window.location;
+		{ pathname, href, hostname } = window.location;
 
 	switch (hostname) {
 		case "stackexchange.com": {
@@ -50,6 +50,8 @@ presence.on("UpdateData", async () => {
 				.replace("Stack Exchange", "");
 			if (pathname.includes("/questions"))
 				presenceData.details = "Reading a question";
+
+			presenceData.buttons = [{ label: "View Question", url: href }];
 		}
 	}
 
