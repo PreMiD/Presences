@@ -19,9 +19,7 @@ const presenceData: PresenceData = {
 
 title = document.querySelector("div#question-header h1 a");
 
-pageNumber = document.querySelector(
-	"div.pager.fl span.page-numbers.current"
-);
+pageNumber = document.querySelector("div.pager.fl span.page-numbers.current");
 
 usersortagsPageNumber = document.querySelector(
 	"div.pager.fr span.page-numbers.current"
@@ -45,9 +43,7 @@ if (
 else if (document.location.pathname.includes("/jobs"))
 	lastPage = jobLastPage[jobLastPage.length - 2].textContent;
 else if (document.location.pathname === "/questions")
-	lastPage =
-		questionsLastPage[questionsLastPage.length - 2]
-			.textContent;
+	lastPage = questionsLastPage[questionsLastPage.length - 2].textContent;
 
 if (title && document.location.pathname.includes("/questions/")) {
 	presenceData.details = "Reading a question.";
@@ -66,13 +62,10 @@ if (title && document.location.pathname.includes("/questions/")) {
 	pageNumber.textContent.length > 0
 ) {
 	const lastPageNumber: number = +lastPage,
-		lastquestionsPageNumber: number =
-			+pageNumber.textContent;
+		lastquestionsPageNumber: number = +pageNumber.textContent;
 
 	if (lastquestionsPageNumber > lastPageNumber) {
-		presence.info(
-			`${lastPageNumber} --- ${lastquestionsPageNumber}`
-		);
+		presence.info(`${lastPageNumber} --- ${lastquestionsPageNumber}`);
 
 		lastPage = pageNumber.textContent;
 	}
@@ -86,13 +79,10 @@ if (title && document.location.pathname.includes("/questions/")) {
 	switch (document.location.pathname) {
 		case "/jobs": {
 			const lastPageNumber: number = +lastPage,
-				lastjobPageNumber: number =
-					+jobPageNumber.textContent;
+				lastjobPageNumber: number = +jobPageNumber.textContent;
 
 			if (lastjobPageNumber > lastPageNumber) {
-				presence.info(
-					`${lastPageNumber} --- ${lastjobPageNumber}`
-				);
+				presence.info(`${lastPageNumber} --- ${lastjobPageNumber}`);
 
 				lastPage = jobPageNumber.textContent;
 			}
@@ -110,16 +100,10 @@ if (title && document.location.pathname.includes("/questions/")) {
 				lastusersortagsPageNumber: number =
 					+usersortagsPageNumber.textContent;
 
-			if (
-				lastusersortagsPageNumber >
-				lastPageNumber
-			) {
-				presence.info(
-					`${lastPageNumber} --- ${lastusersortagsPageNumber}`
-				);
+			if (lastusersortagsPageNumber > lastPageNumber) {
+				presence.info(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
 
-				lastPage =
-					usersortagsPageNumber.textContent;
+				lastPage = usersortagsPageNumber.textContent;
 			}
 
 			presenceData.details = "Browsing users.";
@@ -135,16 +119,10 @@ if (title && document.location.pathname.includes("/questions/")) {
 				lastusersortagsPageNumber: number =
 					+usersortagsPageNumber.textContent;
 
-			if (
-				lastusersortagsPageNumber >
-				lastPageNumber
-			) {
-				presence.info(
-					`${lastPageNumber} --- ${lastusersortagsPageNumber}`
-				);
+			if (lastusersortagsPageNumber > lastPageNumber) {
+				presence.info(`${lastPageNumber} --- ${lastusersortagsPageNumber}`);
 
-				lastPage =
-					usersortagsPageNumber.textContent;
+				lastPage = usersortagsPageNumber.textContent;
 			}
 
 			presenceData.details = "Browsing tags.";
@@ -156,12 +134,7 @@ if (title && document.location.pathname.includes("/questions/")) {
 			break;
 		}
 		default: {
-			presenceData.buttons = [
-				{
-					label: "View Question",
-					url: document.location.href,
-				},
-			];
+			presenceData.buttons = [{ label: "View Question", url: document.location.href }];
 		}
 	}
 }

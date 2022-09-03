@@ -40,17 +40,9 @@ switch (hostname) {
 		break;
 	}
 	default: {
-		const imageKey = hostname.replace(
-			".stackexchange.com",
-			""
-		);
-		if (imageKey === "meta")
-			presenceData.smallImageKey = imageKey;
-		else
-			presenceData.smallImageKey = imageKey.replace(
-				".meta",
-				""
-			);
+		const imageKey = hostname.replace(".stackexchange.com", "");
+		if (imageKey === "meta") presenceData.smallImageKey = imageKey;
+		else presenceData.smallImageKey = imageKey.replace(".meta", "");
 
 		presenceData.smallImageText = document
 			.querySelector("meta[property='og:site_name']")
@@ -59,9 +51,7 @@ switch (hostname) {
 		if (pathname.includes("/questions"))
 			presenceData.details = "Reading a question";
 
-		presenceData.buttons = [
-			{ label: "View Question", url: href },
-		];
+		presenceData.buttons = [{ label: "View Question", url: href }];
 	}
 }
 
