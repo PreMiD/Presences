@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Viewing Forum Partners";
 
 			if (pathname.includes("/donation"))
-				presenceData.state = "Donation to the forum";
+				presenceData.state = "Viewing the donations page";
 
 			if (pathname.includes("/imageupload"))
 				presenceData.state = "Uploading images!";
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (pathname.includes("/adm/")) {
-				presenceData.state = "Viewing an admin panel";
+				presenceData.state = "Viewing the admin panel";
 				presenceData.smallImageText = "Admin Panel";
 				delete presenceData.buttons;
 			}
@@ -235,7 +235,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (pathname.includes("/admin")) {
-				presenceData.state = "Viewing an admin panel";
+				presenceData.state = "Viewing the admin panel";
 				presenceData.smallImageText = "Admin Panel";
 				delete presenceData.buttons;
 			}
