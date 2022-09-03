@@ -133,7 +133,9 @@ presence.on("UpdateData", async () => {
 
 				break;
 			}
-			// No default
+			default: {
+				presenceData.buttons = [{ label: "View Question", url: document.location.href }];
+			}
 		}
 	}
 
