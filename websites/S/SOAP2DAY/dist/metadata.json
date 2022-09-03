@@ -12,7 +12,8 @@
 	],
 	"service": "SOAP2DAY",
 	"description": {
-		"en": "You can watch all videos without logging in or registration. Soap2day is free all the time, but there are few ads on videoplayer page."
+		"en": "You can watch all videos without logging in or registration. Soap2day is free all the time, but there are few ads on videoplayer page.",
+		"fr": "Vous pouvez regarder toutes les vidéos sans vous connecter ni vous enregistrer. Soap2day est gratuit tout le temps, mais il y a quelques pubs sur la page du lecteur vidéo."
 	},
 	"url": [
 		"soap2day.to",
@@ -24,7 +25,7 @@
 		"s2dfree.de",
 		"s2dfree.is"
 	],
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"logo": "https://i.imgur.com/WAOvAe6.png",
 	"thumbnail": "https://i.imgur.com/AEHBaRS.png",
 	"color": "#9eeae7",
