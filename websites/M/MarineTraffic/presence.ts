@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/u2NmdZX.png",
 		startTimestamp: browsingTimestamp,
-		details: "Viewing:",
+		details: "Viewing",
 	};
 
 	const pages: Record<string, PresenceData> = {
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 			{ label: "Read this page", url: document.location.href },
 		];
 	} else if (document.location.pathname.startsWith("/blog")) {
-		presenceData.details = "Reading a blog post:";
+		presenceData.details = "Reading a blog post";
 		presenceData.state = document.title.split("-")[0];
 		presenceData.buttons = [
 			{ label: "Read this post", url: document.location.href },
