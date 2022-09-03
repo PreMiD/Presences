@@ -6,7 +6,7 @@
 	},
 	"service": "Craiyon",
 	"description": {
-		"en": "AI model drawing images from any prompt!"
+		"en": "Craiyon is an AI model that can draw images from any text prompt!"
 	},
 	"url": "www.craiyon.com",
 	"version": "1.0.0",

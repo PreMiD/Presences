@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "1015402986534608948",
 });
 
-let elapsedTimestamp: number = null,
+let browsingTimestamp: number = null,
 	oldPrompt: string = null;
 
 presence.on("UpdateData", () => {
@@ -16,7 +16,7 @@ presence.on("UpdateData", () => {
 				container = document.querySelector(
 					".h-full.w-full > .relative > div > div"
 				);
-			presenceData.state = input.textContent ? `"${input.textContent}"` : "";
+			presenceData.state = input.textContent ? `"${input.textContent}"` : "Waiting for input...";
 			if (container.querySelector("svg.text-gray-300"))
 				presenceData.details = "Thinking of a prompt";
 			else if (
@@ -24,14 +24,14 @@ presence.on("UpdateData", () => {
 					.querySelector("img")
 					.classList.contains("animate-wiggle")
 			) {
-				if (elapsedTimestamp === null) {
-					elapsedTimestamp = Date.now() / 1000;
+				if (!browsingTimestamp) {
+					browsingTimestamp = Date.now() / 1000;
 					oldPrompt = input.textContent;
 				}
 				presenceData.details = "Generating images";
 				presenceData.state = `"${oldPrompt}"`;
 			} else {
-				elapsedTimestamp = null;
+				browsingTimestamp = null;
 				if (document.activeElement === input && input.textContent !== oldPrompt)
 					presenceData.details = "Thinking of a new prompt";
 				else if (container.childElementCount > 3) {
@@ -54,7 +54,7 @@ presence.on("UpdateData", () => {
 		}
 	}
 	if (presenceData.details) {
-		presenceData.startTimestamp = elapsedTimestamp;
+		presenceData.startTimestamp = browsingTimestamp;
 		presence.setActivity(presenceData);
 	} else presence.setActivity();
 });
