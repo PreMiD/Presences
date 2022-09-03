@@ -20,9 +20,9 @@
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.18.9",
+		"@babel/core": "^7.18.13",
 		"@babel/preset-env": "^7.18.10",
-		"@commitlint/cli": "^17.0.3",
+		"@commitlint/cli": "^17.1.2",
 		"@commitlint/config-angular": "^17.1.0",
 		"@types/babel__core": "^7.1.19",
 		"@types/chrome": "^0.0.195",
@@ -31,9 +31,9 @@
 		"@types/json-to-ast": "^2.1.2",
 		"@types/node": "^18.7.14",
 		"@types/prettier": "^2.7.0",
-		"@types/semver": "^7.3.10",
+		"@types/semver": "^7.3.12",
 		"@typescript-eslint/eslint-plugin": "^5.36.1",
-		"@typescript-eslint/parser": "^5.31.0",
+		"@typescript-eslint/parser": "^5.36.1",
 		"axios": "^0.27.2",
 		"chalk": "^4.1.2",
 		"debug": "^4.3.4",
