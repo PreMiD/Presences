@@ -466,14 +466,12 @@ presence.on("UpdateData", async () => {
 						presenceData.largeImageKey =
 							profilePic ?? (logoArr[logo] || "twitch");
 					}
-					if (buttons) {
-						presenceData.buttons = [
-							{
-								label: strings.watchStream,
-								url: document.URL.split("?")[0],
-							},
-						];
-					}
+					presenceData.buttons = [
+						{
+							label: strings.watchStream,
+							url: document.URL.split("?")[0],
+						},
+					];
 				}
 
 				if (showVideo && !live) {
@@ -513,14 +511,12 @@ presence.on("UpdateData", async () => {
 					presenceData.startTimestamp = startTimestamp;
 					presenceData.endTimestamp = endTimestamp;
 
-					if (buttons) {
-						presenceData.buttons = [
-							{
-								label: strings.watchVideo,
-								url: document.URL.split("?")[0],
-							},
-						];
-					}
+					presenceData.buttons = [
+						{
+							label: strings.watchVideo,
+							url: document.URL.split("?")[0],
+						},
+					];
 				}
 
 				if (((showLive && live) || (showVideo && !live)) && video.paused) {
@@ -908,12 +904,12 @@ presence.on("UpdateData", async () => {
 		// No default
 	}
 
-	if (presenceData.details) {
-		if (!showTimestamps) {
-			delete presenceData.startTimestamp;
-			delete presenceData.endTimestamp;
-		}
+	if (!showTimestamps) {
+		delete presenceData.startTimestamp;
+		delete presenceData.endTimestamp;
+	}
+	if (privacy || !buttons) delete presenceData.buttons;
 
-		presence.setActivity(presenceData);
-	} else presence.setActivity();
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
