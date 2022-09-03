@@ -3,13 +3,9 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
-	Logo = "https://i.imgur.com/8vXevly.png",
-}
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.Logo,
+			largeImageKey: "https://i.imgur.com/8vXevly.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href } = document.location,
