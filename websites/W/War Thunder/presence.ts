@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
 			largeImageKey: "https://i.imgur.com/LWQZ2xQ.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ hostname, pathname, search } = window.location;
+		{ hostname, pathname, search, href } = window.location;
 	switch (hostname) {
 		case "warthunder.com": {
 			presenceData.details = "Browsing...";
@@ -76,7 +76,7 @@ presence.on("UpdateData", () => {
 				presenceData.buttons = [
 					{
 						label: "View Post",
-						url: `https://${hostname}${pathname}`,
+						url: href,
 					},
 				];
 			} else if (pathname.startsWith("/subscribes/"))
@@ -116,7 +116,7 @@ presence.on("UpdateData", () => {
 					presenceData.buttons = [
 						{
 							label: "View Tournament",
-							url: `https://${hostname}${pathname}${search}`,
+							url: href,
 						},
 					];
 					break;
@@ -143,4 +143,5 @@ presence.on("UpdateData", () => {
 		}
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
