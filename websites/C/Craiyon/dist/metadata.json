@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "theusaf",
+		"id": "193714715631812608"
+	},
+	"service": "Craiyon",
+	"description": {
+		"en": "AI model drawing images from any prompt!"
+	},
+	"url": "www.craiyon.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/uCqmcTv.png",
+	"thumbnail": "https://i.imgur.com/cDreT5W.png",
+	"color": "#ea580c",
+	"category": "other",
+	"tags": ["ai", "dalle", "image", "generation"]
+}
