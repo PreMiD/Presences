@@ -20,7 +20,7 @@
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.18.9",
+		"@babel/core": "^7.18.13",
 		"@babel/preset-env": "^7.18.10",
 		"@commitlint/cli": "^17.0.3",
 		"@commitlint/config-angular": "^17.1.0",
