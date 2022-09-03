@@ -63,8 +63,10 @@ presence.on("UpdateData", async () => {
 		else {
 			presenceData.details = `Watching a ${isLive ? "live" : "video"} on:`;
 			presenceData.state = `${
-				document.querySelector("span.nc684nl6 > span")?.textContent ||
-				document.querySelector("span.nc684nl6 > a > strong > span")?.textContent
+				document.querySelector("span.nc684nl6 > span")?.textContent ??
+				document.querySelector("span.nc684nl6 > a > strong > span")
+					?.textContent ??
+				document.querySelector('[href*="?__tn__=-UC*F"]')?.textContent
 			}'s profile`;
 
 			if (isLive) {
@@ -89,14 +91,16 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
-	} else if (document.location.pathname.includes("/photo/")) {
+	} else if (document.location.pathname.includes("/photo")) {
 		if (privacyMode) presenceData.details = "Viewing a photo";
 		else {
 			presenceData.details = "Viewing a photo on:";
 			presenceData.state = `${
-				document.querySelector("span.nc684nl6 > span")?.textContent ||
-				document.querySelector("span.nc684nl6 > a > strong > span")?.textContent
-			}'s profile'`;
+				document.querySelector("span.nc684nl6 > span")?.textContent ??
+				document.querySelector("span.nc684nl6 > a > strong > span")
+					?.textContent ??
+				document.querySelector('[href*="?__tn__=-UC*F"]')?.textContent
+			}'s profile`;
 
 			presenceData.buttons = [
 				{
