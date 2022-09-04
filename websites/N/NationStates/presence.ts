@@ -1,17 +1,18 @@
-const images = {
-		header: "https://i.imgur.com/ffxJj5E.png",
-		logo: "https://i.imgur.com/04gnehi.png",
-		envelope: "https://i.imgur.com/6Hp3f7k.png",
-		flag: "https://i.imgur.com/BAzbs0d.png",
-		forum: "https://i.imgur.com/uDIj1ta.png",
-		gift: "https://i.imgur.com/28eyl2A.png",
-		globe: "https://i.imgur.com/hE7TN9d.png",
-		page: "https://i.imgur.com/pArUzoy.png",
-		person: "https://i.imgur.com/8pTlzJw.png",
-		worldassembly: "https://i.imgur.com/A09MAL2.png",
-		target: "https://i.imgur.com/nksi1kH.png",
-	},
-	browsingTimestamp = Math.floor(Date.now() / 1000),
+enum images {
+	header = "https://i.imgur.com/ffxJj5E.png",
+	logo = "https://i.imgur.com/04gnehi.png",
+	envelope = "https://i.imgur.com/6Hp3f7k.png",
+	flag = "https://i.imgur.com/BAzbs0d.png",
+	forum = "https://i.imgur.com/uDIj1ta.png",
+	gift = "https://i.imgur.com/28eyl2A.png",
+	globe = "https://i.imgur.com/hE7TN9d.png",
+	page = "https://i.imgur.com/pArUzoy.png",
+	person = "https://i.imgur.com/8pTlzJw.png",
+	worldassembly = "https://i.imgur.com/A09MAL2.png",
+	target = "https://i.imgur.com/nksi1kH.png",
+}
+
+const browsingTimestamp = Math.floor(Date.now() / 1000),
 	presence = new Presence({
 		clientId: "1006869424441131109",
 	}),
