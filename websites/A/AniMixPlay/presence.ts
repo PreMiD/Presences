@@ -116,7 +116,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Currently reading...";
 		presenceData.state = `${
 			document.querySelector("#animepagetitle").textContent
-		} (${document.querySelector("#addInfo").textContent.split(" ")[5].trim()})`;
+		} (${document
+			.querySelector("#addInfo")
+			.textContent.split(": ")[2]
+			.split("\n")[0]
+			.trim()})`;
 		if (showCover) {
 			presenceData.largeImageKey = document
 				.querySelector("#maincoverimage")

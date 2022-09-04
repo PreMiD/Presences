@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname.includes("/groupcall/")) {
 		const users = document
-			.querySelector(".paneContent h1")
+			.querySelector("div > div > span")
 			?.textContent?.split(", ")
 			?.slice(1);
 		if (users) {
