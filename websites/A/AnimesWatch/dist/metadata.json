@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "NullMan",
+		"id": "716930725877907466"
+	},
+	"service": "AnimesWatch",
+	"description": {
+		"tr": "AnimesWatch, türkçe altyazılı anime izleyebileceğiniz bir site.",
+		"en": "AnimesWatch is a site where you can watch anime with Turkish subtitles."
+	},
+	"url": [
+		"www.animeswatch.com",
+		"animeswatch.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/T1Vk10O.png",
+	"thumbnail": "https://i.imgur.com/T1Vk10O.png",
+	"color": "#ff00ff",
+	"category": "anime",
+	"tags": [
+		"türk",
+		"anime",
+		"video"
+	],
+	"iframe": true
+}
