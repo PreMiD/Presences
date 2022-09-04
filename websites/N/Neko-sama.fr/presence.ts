@@ -44,61 +44,76 @@ presence.on("iFrameData", (data: Video) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "nekosama-icon",
-	};
+			largeImageKey: "nekosama-icon",
+			details: "Navigue sur Neko-sama",
+		},
+		{ pathname } = document.location,
+		pathSplit = pathname.split("/");
 
-	if (document.URL.startsWith("https://www.neko-sama.fr/anime/episode/")) {
-		const episodeImage: string =
-				document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
-					.content === "https://neko-sama.fr/images/default_thumbnail.png"
-					? "nekosama-icon"
-					: document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
-							.content,
-			{ paused, time, duration } = video;
-		if (!paused) {
-			const timestamps = presence.getTimestamps(time, duration);
-			presenceData.startTimestamp = timestamps[0];
-			presenceData.endTimestamp = timestamps[1];
-		}
-		presenceData.state = `${timeToString(Math.floor(time))}/${timeToString(
-			Math.floor(duration)
-		)}`;
-		presenceData.details = `Regarde ${
-			document.querySelector("#watch").querySelectorAll("h1")[0].firstChild
-				.textContent
-		}`;
-		presenceData.largeImageKey = episodeImage;
-		presenceData.smallImageKey = paused ? "pause" : "play";
-		presenceData.smallImageText = paused ? "En pause" : "Lecture en cours";
-		presenceData.buttons = [
-			{
-				label: "Voir Épisode",
-				url: document.URL,
-			},
-		];
-	} else if (document.URL.startsWith("https://www.neko-sama.fr/anime/info/")) {
-		const animeImage: string =
-			document.querySelector<HTMLImageElement>(".cover > img").src ===
-			"https://neko-sama.fr/images/default_thumbnail.png"
-				? "nekosama-icon"
-				: document.querySelector<HTMLImageElement>(".cover > img").src;
-		presenceData.details = "Regarde la page d'un animé ";
-		presenceData.state = document
-			.querySelector("#head")
-			.querySelectorAll("h1")[0].childNodes[0].textContent;
-		presenceData.largeImageKey = animeImage;
-		presenceData.buttons = [
-			{
-				label: "Voir Animé",
-				url: document.URL,
-			},
-		];
-	} else if (document.URL.startsWith("https://www.neko-sama.fr/anime/"))
-		presenceData.details = "Cherche un animé en VOSTFR";
-	else if (document.URL.startsWith("https://www.neko-sama.fr/anime-vf/"))
-		presenceData.details = "Cherche un animé en VF";
-	else presenceData.details = "Navigue sur Neko-sama";
+	switch (pathSplit[1]) {
+		case "anime":
+			switch (pathSplit[2]) {
+				case "episode": {
+					const episodeImage: string = document.querySelector<HTMLMetaElement>(
+							'meta[property="og:image"]'
+						).content,
+						{ paused, time, duration } = video;
+					if (!paused) {
+						const timestamps = presence.getTimestamps(time, duration);
+						presenceData.startTimestamp = timestamps[0];
+						presenceData.endTimestamp = timestamps[1];
+					}
+					presenceData.state = `${timeToString(
+						Math.floor(time)
+					)}/${timeToString(Math.floor(duration))}`;
+					presenceData.details = `Regarde ${
+						document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
+							.content
+					}`;
+					presenceData.largeImageKey =
+						episodeImage === "https://neko-sama.fr/images/default_thumbnail.png"
+							? "nekosama-icon"
+							: episodeImage;
+					presenceData.smallImageKey = paused ? "pause" : "play";
+					presenceData.smallImageText = paused
+						? "En pause"
+						: "Lecture en cours";
+					presenceData.buttons = [
+						{
+							label: "Voir Épisode",
+							url: document.URL,
+						},
+					];
+					break;
+				}
+				case "info": {
+					const animeImage: string = document.querySelector<HTMLMetaElement>(
+						'meta[property="og:image"]'
+					).content;
+					presenceData.details = "Regarde la page d'un animé :";
+					presenceData.state =
+						document.querySelector("h1").firstChild.textContent;
+					presenceData.largeImageKey =
+						animeImage === "https://neko-sama.fr/images/default_thumbnail.png"
+							? "nekosama-icon"
+							: animeImage;
+					presenceData.buttons = [
+						{
+							label: "Voir Animé",
+							url: document.URL,
+						},
+					];
+					break;
+				}
+				default:
+					presenceData.details = "Cherche un animé en VOSTFR";
+					break;
+			}
+			break;
+		case "anime-vf":
+			presenceData.details = "Cherche un animé en VF";
+			break;
+	}
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	presence.setActivity(presenceData);
 });
