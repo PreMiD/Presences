@@ -228,25 +228,9 @@ presence.on("UpdateData", async () => {
 			{ label: "View Business", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("ais/details/ships")) {
-		elemName = capitalize(
-			document
-				.querySelector(
-					"#vesselDetails_summarySection > div.MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-c4sutr > div > div > div > div:nth-child(2) > div > strong:nth-child(1)"
-				)
-				.innerHTML.toLowerCase()
-		);
-		presenceData.details = `Watching ${elemName}`;
-		presenceData.state = `Near${
-			document
-				.querySelector(
-					"#vesselDetails_summarySection > div.MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-c4sutr > div > div > div > div:nth-child(2) > div > strong:nth-child(2)"
-				)
-				.innerHTML.split("-")[1]
-		} - ${
-			document.querySelector(
-				"#vesselDetails_latestPositionSection > div.MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-c4sutr > div > div > div > div > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-md-true.css-4d8ot5 > p:nth-child(6) > b"
-			).innerHTML
-		}`;
+		strongQuery = document.querySelectorAll("div > strong");
+		presenceData.details = `Watching ${capitalize(strongQuery[1].textContent.toLowerCase())}`;
+		presenceData.state = `Near${strongQuery[2].textContent.split("-")[1]} - ${document.querySelector("div > p:nth-child(6) > b").textContent}`;
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>("div > img").src;
 		const smallImageQuery = document.querySelector<HTMLImageElement>("p > img");
 		presenceData.smallImageKey = smallImageQuery.src;
