@@ -247,15 +247,10 @@ presence.on("UpdateData", async () => {
 				"#vesselDetails_latestPositionSection > div.MuiCollapse-root.MuiCollapse-vertical.MuiCollapse-entered.css-c4sutr > div > div > div > div > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-md-true.css-4d8ot5 > p:nth-child(6) > b"
 			).innerHTML
 		}`;
-		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-			"#vesselDetailsHeader > div > div:nth-child(1) > div > div.MuiGrid-root.MuiGrid-item.css-1wxaqej > div > img"
-		).src;
-		presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
-			"#vesselDetailsHeader > div > div:nth-child(1) > div > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-sm-true.css-qc7bc1 > p > img"
-		).src;
-		presenceData.smallImageText = document.querySelector<HTMLImageElement>(
-			"#vesselDetailsHeader > div > div:nth-child(1) > div > div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-sm-true.css-qc7bc1 > p > img"
-		).title;
+		presenceData.largeImageKey = document.querySelector<HTMLImageElement>("div > img").src;
+		const smallImageQuery = document.querySelector<HTMLImageElement>("p > img");
+		presenceData.smallImageKey = smallImageQuery.src;
+		presenceData.smallImageText = smallImageQuery.title;
 		presenceData.buttons = [
 			{ label: "View Ship", url: document.location.href },
 		];
