@@ -6,10 +6,6 @@ let sendback: {
 	paused: boolean;
 };
 
-function send(): void {
-	iframe.send(sendback);
-}
-
 iframe.on("UpdateData", () => {
 	if (document.querySelector("video")) {
 		const video: HTMLVideoElement = document.querySelector("video");
@@ -18,6 +14,6 @@ iframe.on("UpdateData", () => {
 			duration: video.duration,
 			paused: video.paused,
 		};
-		send();
+		iframe.send(sendback);
 	}
 });

@@ -22,39 +22,49 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/qldgMDR.png",
 		},
 		{ pathname, href } = document.location;
+	switch (pathname.split("/")[1]) {
+		case "movie":
+		// fall through
+		case "tv": {
+			const title = document
+				.querySelectorAll("div.mvic-desc")[0]
+				.querySelector("h3");
 
-	if (pathname.startsWith("/movie/") || pathname.startsWith("/tv/")) {
-		const title = document
-			.querySelectorAll("div.mvic-desc")[0]
-			.querySelector("h3");
-
-		if (title) presenceData.details = title.textContent.trim();
-		if (!document.querySelectorAll("div.page-cover")[0] && iFrameData) {
-			if (!iFrameData.paused) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					iFrameData.currTime,
-					iFrameData.duration
-				);
-				presenceData.smallImageKey = "play";
-			} else presenceData.smallImageKey = "pause";
+			if (title) presenceData.details = title.textContent.trim();
+			if (!document.querySelectorAll("div.page-cover")[0] && iFrameData) {
+				if (!iFrameData.paused) {
+					[, presenceData.endTimestamp] = presence.getTimestamps(
+						iFrameData.currTime,
+						iFrameData.duration
+					);
+					presenceData.smallImageKey = "play";
+				} else presenceData.smallImageKey = "pause";
+			}
+			presenceData.buttons = [
+				{
+					label: "Watch Video",
+					url: href,
+				},
+			];
+			break;
 		}
-		presenceData.buttons = [
-			{
-				label: "Watch Video",
-				url: href,
-			},
-		];
-	} else if (pathname === "/") presenceData.details = "Browsing Home";
-	else if (pathname.startsWith("/genre")) {
-		presenceData.details = `Browsing Genre: ${pathname
-			.split("/genre/")[1]
-			.slice(0, -1)}`;
-	} else if (pathname.startsWith("/search-query")) {
-		presenceData.details = `Searching for ${pathname
-			.split("/search-query/")[1]
-			.slice(0, -1)}`;
-		presenceData.smallImageKey = "search";
-	} else presenceData.details = "Browsing";
-
+		case "":
+			presenceData.details = "Browsing Home";
+			break;
+		case "genre":
+			presenceData.details = `Browsing Genre: ${pathname
+				.split("/genre/")[1]
+				.slice(0, -1)}`;
+			break;
+		case "search-query":
+			presenceData.details = `Searching for ${pathname
+				.split("/search-query/")[1]
+				.slice(0, -1)}`;
+			presenceData.smallImageKey = "search";
+			break;
+		default:
+			presenceData.details = "Browsing";
+			break;
+	}
 	presence.setActivity(presenceData);
 });
