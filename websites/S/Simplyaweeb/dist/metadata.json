@@ -6,10 +6,11 @@
 	},
 	"service": "Simplyaweeb",
 	"description": {
-		"en": "Weebs only one stop to get updated with the latest anime content, meme and bang on the latest anime music. More features coming soon so stay tuned."
+		"en": "Weebs only one stop to get updated with the latest anime content, meme and bang on the latest anime music. More features coming soon so stay tuned.",
+		"fr": "Weebs sont à un seul arrêt pour être à jour avec les derniers animes, les memes et se balancer sur les dernières musiques d'animes. Plus de fonctionnalités sont à venir, donc restez à l'écoute."
 	},
 	"url": "simplyaweeb.to",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/LdUPH9K.png",
 	"thumbnail": "https://i.imgur.com/yXqDlOS.jpg",
 	"color": "#04fd5b",

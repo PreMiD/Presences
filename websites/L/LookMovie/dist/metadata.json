@@ -14,7 +14,8 @@
 		"lookmovies.ru",
 		"playerwatchlm25.xyz"
 	],
-	"version": "1.4.0",
+	"regExp": "(playerwatch[0-9]*.xyz)|(playerwatchlm[0-9]*.xyz)|(lookmovie[0-9]?[.][A-z]{2})",
+	"version": "1.5.0",
 	"logo": "https://i.imgur.com/vlSumUl.png",
 	"thumbnail": "https://i.imgur.com/nseTbMZ.png",
 	"color": "#ffcc00",
@@ -25,10 +26,32 @@
 	],
 	"settings": [
 		{
-			"id": "cover",
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "covers",
 			"title": "Show Cover",
 			"icon": "fad fa-images",
-			"value": true
+			"value": true,
+			"if": {
+				"privacy": false
+			}
 		}
 	]
 }

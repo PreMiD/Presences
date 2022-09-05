@@ -6,6 +6,10 @@
 	},
 	"contributors": [
 		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
+		},
+		{
 			"name": "Aya",
 			"id": "256422547556401152"
 		},
@@ -21,6 +25,7 @@
 	"service": "MangaDex",
 	"description": {
 		"en": "Read manga online for free at MangaDex with no ads, high quality images and support scanlation groups!",
+		"fr": "Lisez des mangas en ligne gratuitement sur MangaDex sans pubs, des images de haute qualité et supporte les groupes de scantrad !",
 		"nl": "Lees manga gratis online op MangaDex zonder advertenties, afbeeldingen van hoge kwaliteit en ondersteunende scanlatiegroepen!"
 	},
 	"url": [
@@ -28,7 +33,7 @@
 		"www.mangadex.org",
 		"mangadex.cc"
 	],
-	"version": "2.0.8",
+	"version": "3.0.1",
 	"logo": "https://i.imgur.com/zs8myqz.png",
 	"thumbnail": "https://i.imgur.com/xiKNaUJ.png",
 	"color": "#F18F1E",
@@ -36,5 +41,19 @@
 	"tags": [
 		"mangadex",
 		"reading"
+	],
+	"settings": [
+		{
+			"id": "cover",
+			"title": "Show Manga Cover",
+			"icon": "fas fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fad fa-compress-arrows-alt",
+			"value": true
+		}
 	]
 }

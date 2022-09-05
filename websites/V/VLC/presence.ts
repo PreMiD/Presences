@@ -65,9 +65,9 @@ presence.on("UpdateData", async () => {
 					media.album = null;
 
 				presenceData.details =
-					(media.title ?? media.trackNumber
-						? `Track N°${media.trackNumber}`
-						: "A song") + (media.album ? ` on ${media.album}` : "");
+					((media.title ?? "") +
+						(media.trackNumber ? ` Track N°${media.trackNumber}` : "") ||
+						"A song") + (media.album ? ` on ${media.album}` : "");
 				media.artist
 					? (presenceData.state = `by ${media.artist}`)
 					: media.filename
@@ -292,6 +292,8 @@ const getStatus = setLoop(function () {
 							media.episodeNumber = null;
 						}
 					}
+					for (const key of Object.keys(media))
+						media[key] = media[key]?.replace("&#39;", "'");
 				} else {
 					i++;
 					if (i > 4) {
@@ -336,4 +338,5 @@ interface MediaObj {
 	showName?: string;
 	seasonNumber?: string;
 	episodeNumber?: string;
+	[key: string]: string;
 }

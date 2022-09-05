@@ -1,21 +1,71 @@
 const presence = new Presence({
 		clientId: "934789855962083359",
 	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		browsing: "general.browsing",
-	});
+	browingTimestamp = Math.floor(Date.now() / 1000);
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			paused: "general.paused",
+			browse: "general.browsing",
+			buttonWatchVideo: "general.buttonWatchVideo",
+			viewCategory: "general.viewCategory",
+			search: "general.searchFor",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+enum Assets {
+	Logo = "https://i.imgur.com/vlSumUl.png",
+	Play = "https://i.imgur.com/OLaz6JN.png",
+	Paused = "https://i.imgur.com/4iyMINk.png",
+	SearchImage = "https://i.imgur.com/oGQtnIY.png",
+}
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lm",
+			largeImageKey: Assets.Logo,
+			startTimestamp: browingTimestamp,
 		},
-		video =
-			document.querySelector<HTMLVideoElement>("video[class*='video']") ??
-			document.querySelector<HTMLVideoElement>("video[id*='video']"),
-		cover = await presence.getSetting<boolean>("cover");
-	if (video?.duration) {
+		video = document.querySelector<HTMLVideoElement>("video"),
+		search = document.querySelector<HTMLInputElement>('[id="search_input"]'),
+		{ pathname, href } = document.location,
+		[newLang, privacy, buttons, covers] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("covers"),
+		]);
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+
+	if (privacy) {
+		presenceData.details = strings.browse;
+		presence.setActivity(presenceData);
+		return;
+	}
+	if (search?.value) {
+		presenceData.details = strings.search;
+		presenceData.state = search.value;
+		presenceData.smallImageKey = Assets.SearchImage;
+	} else if (pathname.includes("/view/")) {
+		presenceData.details = `Viewing ${document
+			.querySelector('[class*="active"]')
+			.textContent.trim()
+			.slice(0, -1)}`;
+		presenceData.state = document
+			.querySelector<HTMLMetaElement>('[property="og:title"]')
+			.content.split("-")[0];
+		presenceData.largeImageKey =
+			document
+				.querySelector('[class="movie-img"]')
+				.firstElementChild.getAttribute("data-background-image") ?? Assets.Logo;
+	} else if (video?.duration) {
+		delete presenceData.startTimestamp;
 		presenceData.details =
 			document.querySelector('[class="bd-hd"]')?.textContent ??
 			document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
@@ -24,31 +74,35 @@ presence.on("UpdateData", async () => {
 				.querySelector("head > title")
 				?.textContent.replace(" | LookMovie", "");
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
-		presenceData.smallImageText = video.paused
-			? (await strings).pause
-			: (await strings).play;
-		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestampsfromMedia(video);
-		if (cover) {
-			presenceData.largeImageKey =
-				document
-					.querySelector('[id="longInfo"]')
-					?.firstElementChild?.getAttribute("src") ??
-				document.querySelector<HTMLMetaElement>('[property="og:image"]')
-					.content ??
-				"lm";
-		}
+		presenceData.smallImageKey = video.paused ? Assets.Paused : Assets.Play;
+		presenceData.smallImageText = video.paused ? strings.paused : strings.play;
+		[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+		presenceData.largeImageKey =
+			document
+				.querySelector('[id="longInfo"]')
+				?.firstElementChild?.getAttribute("src") ??
+			document.querySelector<HTMLMetaElement>('[property="og:image"]')
+				.content ??
+			Assets.Logo;
+		presenceData.buttons = [
+			{
+				label: strings.buttonWatchVideo,
+				url: href,
+			},
+		];
 
-		if (video.paused) {
-			delete presenceData.startTimestamp;
-			delete presenceData.endTimestamp;
-		}
+		if (video.paused) delete presenceData.endTimestamp;
 	} else {
-		presenceData.details = (await strings).browsing;
-		presenceData.smallImageKey = "search";
-		presenceData.smallImageText = (await strings).browsing;
+		presenceData.buttons = [
+			{
+				label: "Browse",
+				url: href,
+			},
+		];
+		presenceData.details = strings.browse;
 	}
+	if (!buttons) delete presenceData.buttons;
+	if (!covers) presenceData.largeImageKey = Assets.Logo;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

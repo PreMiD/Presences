@@ -13,6 +13,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 		},
+		showCover = await presence.getSetting<boolean>("cover"),
 		video: HTMLVideoElement = document.querySelector(".aPWk0-TaQEzvggxIT6qvP");
 	if (video && !isNaN(video.duration)) {
 		if (!document.querySelector("._3uUpH58Juk_Qbizq6j5ThG")) {
@@ -23,8 +24,8 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 			} else {
 				title = `${
-					document.querySelector("._3tdt8zwgvMCJ6v_sElXneQ").textContent
-				} ${document.querySelector("._3pyJlyeeH9KBKeFd4nFAmt").textContent}`;
+					document.querySelector("._3tdt8zwgvMCJ6v_sElXneQ")?.textContent
+				} ${document.querySelector("._3pyJlyeeH9KBKeFd4nFAmt")?.textContent}`;
 
 				presenceData.smallImageKey = video.paused ? "pause" : "play";
 				presenceData.smallImageText = video.paused
@@ -34,6 +35,16 @@ presence.on("UpdateData", async () => {
 					Math.floor(video.currentTime),
 					Math.floor(video.duration)
 				);
+
+				if (showCover) {
+					presenceData.largeImageKey =
+						document.querySelector<HTMLImageElement>(
+							"#binder_mediaCardHeader > div > img"
+						)?.src ||
+						document.querySelector<HTMLImageElement>(
+							"#episodeGrid-Épisode\\ 1\\ -\\ Les\\ Héritiers\\ du\\ Dragon_onclick_toFocus > div.poster___Cbuef.card__poster___cb98P.poster--dark___UyYiC > img"
+						)?.src;
+				}
 			}
 			const subtitle = document.querySelector(
 				"._39WJKEhrSYo7ftwMlFjZtA  ._3tdt8zwgvMCJ6v_sElXneQ"
