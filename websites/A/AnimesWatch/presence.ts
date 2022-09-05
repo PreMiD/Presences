@@ -17,23 +17,27 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "animeswatch",
-		details: "Ana Sayfada Göz Gezdiriyor",
-		startTimestamp: browsingTimestamp,
-	},
-	{ pathname } = document.location;
+			largeImageKey: "animeswatch",
+			details: "Ana Sayfada Göz Gezdiriyor",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location,
+		title = document.title.slice(0, document.title.length - 14);
 	if (pathname === "/") {
 		presenceData.details = "Ana Sayfada";
 		presenceData.state = "Anime Arıyor";
-	} else if (document.location.pathname.includes("/browse")) {
+	} else if (pathname.includes("/browse")) {
 		presenceData.details = "Keşfet ";
 		presenceData.state = "Animelere Göz Gezdiriyor";
-	} else if (document.location.pathname.includes("/team")) {
+	} else if (pathname.includes("/team")) {
 		presenceData.details = "Ekibimiz";
 		presenceData.state = "Ekibimiz Hakkında Bilgi Ediniyor";
-	} else if (document.location.pathname.includes("/anime")) {
-		presenceData.details = document.title.slice(0, document.title.length - 14);
+	} else if (pathname.includes("/anime")) {
+		presenceData.details = title;
 		presenceData.state = "Animenin Detaylarını İnceliyor";
+	} else if (pathname.includes("/users")) {
+		presenceData.details = title;
+		presenceData.state = "Bir kullanıcı profiline bakıyor";
 	}
 	if (video) {
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
@@ -41,7 +45,7 @@ presence.on("UpdateData", async () => {
 			? (await strings).paused
 			: (await strings).playing;
 		presenceData.state = "Anime İzliyor";
-		presenceData.details = document.title.slice(0, document.title.length - 14);
+		presenceData.details = title;
 		if (!video.paused && video.duration) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(
