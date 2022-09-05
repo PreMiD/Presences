@@ -10,14 +10,10 @@
 		"tr": "Raven Code gelişmeyi hedefleyen olağanüstü bir topluluktur. Discord sunucumuzda birileriyle sohbet edebileceğin güzel kanallar var. Bu sunucu, iyi arkadaşlıklar kurabileceğin sıcak bir ortamdır."
 	},
 	"url": ["ravencode.live", "docs.ravencode.live"],
-	"version": "2.0.3",
+	"version": "2.1.2",
 	"logo": "https://i.imgur.com/74Calja.png",
 	"thumbnail": "https://i.imgur.com/LabRRNC.png",
 	"color": "#7a92f1",
 	"category": "other",
-	"tags": [
-		"discord",
-		"kod-paylaşım",
-		"raven-code"
-	]
+	"tags": ["discord", "kod-paylaşım", "raven-code"]
 }

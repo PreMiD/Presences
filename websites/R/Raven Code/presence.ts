@@ -11,7 +11,7 @@ setInterval(
 );
 
 presence.on("UpdateData", async () => {
-	console.log(document.location)
+	console.log(document.location);
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
 			details: "Geziniyor",
