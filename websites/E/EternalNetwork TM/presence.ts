@@ -65,8 +65,8 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/wp-admin")) {
-				presenceData.state = "Viewing an admin panel";
-				presenceData.smallImageText = "Admin Panel";
+				presenceData.state = "Viewing the Admin panel";
+				delete presenceData.smallImageText;
 				delete presenceData.buttons;
 			}
 
@@ -124,8 +124,8 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (pathname.includes("/adm/")) {
-				presenceData.state = "Viewing the admin panel";
-				presenceData.smallImageText = "Admin Panel";
+				presenceData.state = "Viewing the Admin panel";
+				delete presenceData.smallImageText;
 				delete presenceData.buttons;
 			}
 
@@ -138,16 +138,13 @@ presence.on("UpdateData", async () => {
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
-			if (hash.includes("page_ABOUT")) presenceData.state = "About info page";
+			if (hash.includes("page_ABOUT")) presenceData.state = "Viewing About Page";
 
-			if (hash.includes("page_PROGRAMS"))
-				presenceData.state = "Checking radio program";
+			if (hash.includes("page_PROGRAMS")) presenceData.state = "Viewing radio program";
 
-			if (hash.includes("page_REQUEST"))
-				presenceData.state = "Requesting a song";
+			if (hash.includes("page_REQUEST")) presenceData.state = "Requesting a song";
 
-			if (hash.includes("page_CONTACTS"))
-				presenceData.state = "Using contact form";
+			if (hash.includes("page_CONTACTS")) presenceData.state = "Viewing contact page";
 
 			break;
 		}
@@ -235,8 +232,8 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (pathname.includes("/admin")) {
-				presenceData.state = "Viewing the admin panel";
-				presenceData.smallImageText = "Admin Panel";
+				presenceData.state = "Viewing the Admin panel";
+				delete presenceData.smallImageText;
 				delete presenceData.buttons;
 			}
 
