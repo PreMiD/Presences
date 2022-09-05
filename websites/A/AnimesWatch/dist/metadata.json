@@ -9,9 +9,7 @@
 		"tr": "AnimesWatch anime sevenlerin türkçe bir şekilde anime izlemesini sağlayan bir kuruluştur. Site üzerinde bulunan türkçe altyazılı animeleri girip izleyebilirler.",
 		"en": "AnimesWatch is a site where you can watch anime with Turkish subtitles."
 	},
-	"url": [
-		"animeswatch.com"
-	],
+	"url": "animeswatch.com",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/T1Vk10O.png",
 	"thumbnail": "https://i.imgur.com/KUXKU7O.png",
