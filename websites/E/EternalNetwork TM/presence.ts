@@ -138,13 +138,17 @@ presence.on("UpdateData", async () => {
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
-			if (hash.includes("page_ABOUT")) presenceData.state = "Viewing About Page";
+			if (hash.includes("page_ABOUT"))
+				presenceData.state = "Viewing About Page";
 
-			if (hash.includes("page_PROGRAMS")) presenceData.state = "Viewing radio program";
+			if (hash.includes("page_PROGRAMS"))
+				presenceData.state = "Viewing radio program";
 
-			if (hash.includes("page_REQUEST")) presenceData.state = "Requesting a song";
+			if (hash.includes("page_REQUEST"))
+				presenceData.state = "Requesting a song";
 
-			if (hash.includes("page_CONTACTS")) presenceData.state = "Viewing contact page";
+			if (hash.includes("page_CONTACTS"))
+				presenceData.state = "Viewing contact page";
 
 			break;
 		}
