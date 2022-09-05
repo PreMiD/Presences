@@ -19,7 +19,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "app",
+			largeImageKey: "https://i.imgur.com/qldgMDR.png",
 		},
 		{ pathname, href } = document.location;
 
@@ -40,17 +40,20 @@ presence.on("UpdateData", async () => {
 		}
 		presenceData.buttons = [
 			{
-				label: "Watch",
+				label: "Watch Video",
 				url: href,
 			},
 		];
 	} else if (pathname === "/") presenceData.details = "Browsing Home";
 	else if (pathname.startsWith("/genre"))
-		presenceData.details = "Browsing Genre";
+		presenceData.details = `Browsing Genre: ${pathname
+			.split("/genre/")[1]
+			.slice(0, -1)}`;
 	else if (pathname.startsWith("/search-query")) {
 		presenceData.details = `Searching for ${pathname
 			.split("/search-query/")[1]
 			.slice(0, -1)}`;
+		presenceData.smallImageKey = "search";
 	} else presenceData.details = "Browsing";
 
 	presence.setActivity(presenceData);
