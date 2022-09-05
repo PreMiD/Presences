@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 			? (presenceData.details = "Viewing color options")
 			: (presenceData.details = "Viewing main menu");
 
-		presenceData.buttons = [{ label: "View The Menu", url: href }];
+		presenceData.buttons = [{ label: "View Menu", url: href }];
 	} else if (
 		context.getImageData(1020, 540, 400, 60).data[0] === 255 ||
 		context.getImageData(1116, 502, 400, 60).data[0] === 255
