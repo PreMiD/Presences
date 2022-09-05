@@ -13,7 +13,7 @@
 		"nl": "Stack Overflow is een open community voor iedereen die codeert. Het helpt je om antwoorden op je moeilijkste codeervragen te krijgen, kennis met je collega's privé te delen en je volgende droombaan te vinden."
 	},
 	"url": "stackoverflow.com",
-	"version": "2.3.14",
+	"version": "2.4.0",
 	"logo": "https://i.imgur.com/iTWct8S.png",
 	"thumbnail": "https://i.imgur.com/Z4LQn2d.png",
 	"color": "#f48023",
@@ -21,5 +21,13 @@
 	"tags": [
 		"coding",
 		"help"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
 	]
 }
