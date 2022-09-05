@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Prabesh",
+		"id": "736529187724197951"
+	},
+	"service": "0gomovies",
+	"description": {
+		"en": "Free website for new movies and latest Tv Series. Watch Online English, Hindi, Malayalam, Tamil, Telugu, Punjabi more.."
+	},
+	"url": "0gomovies.sk",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/DaPoV6g.png",
+	"thumbnail": "https://i.imgur.com/bYW3SNF.png",
+	"color": "#1BB3C6",
+	"tags": ["movies", "stream"],
+	"category": "videos",
+	"iframe": true
+}
