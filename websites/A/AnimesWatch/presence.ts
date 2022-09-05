@@ -20,8 +20,9 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "animeswatch",
 		details: "Ana Sayfada Göz Gezdiriyor",
 		startTimestamp: browsingTimestamp,
-	};
-	if (document.location.pathname === "/") {
+	},
+	{ pathname } = document.location;
+	if (pathname === "/") {
 		presenceData.details = "Ana Sayfada";
 		presenceData.state = "Anime Arıyor";
 	} else if (document.location.pathname.includes("/browse")) {
