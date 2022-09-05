@@ -45,11 +45,11 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (pathname === "/") presenceData.details = "Browsing Home";
-	else if (pathname.startsWith("/genre"))
+	else if (pathname.startsWith("/genre")) {
 		presenceData.details = `Browsing Genre: ${pathname
 			.split("/genre/")[1]
 			.slice(0, -1)}`;
-	else if (pathname.startsWith("/search-query")) {
+	} else if (pathname.startsWith("/search-query")) {
 		presenceData.details = `Searching for ${pathname
 			.split("/search-query/")[1]
 			.slice(0, -1)}`;
