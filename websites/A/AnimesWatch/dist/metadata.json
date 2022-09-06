@@ -23,6 +23,10 @@
 	"iframe": true,
 	"settings": [
 		{
+			"multiLanguage": true,
+			"id": "lang"
+		},
+		{
 			"id": "button",
 			"title": "Butonlar",
 			"icon": "fas fa-circle-dot",
