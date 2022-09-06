@@ -26,41 +26,45 @@ presence.on("UpdateData", async () => {
 		{ pathname } = document.location,
 		title = document.title.slice(0, document.title.length - 14);
 
-	if (pathname === "/") {
-		presenceData.details = "Ana Sayfada";
-		presenceData.state = "Anime Arıyor";
-	} else if (pathname.includes("/browse")) {
-		presenceData.details = "Keşfet ";
-		presenceData.state = "Animelere Göz Gezdiriyor";
-	} else if (pathname.includes("/team")) {
-		presenceData.details = "Ekibimiz";
-		presenceData.state = "Ekibimiz Hakkında Bilgi Ediniyor";
-	} else if (pathname.includes("/anime")) {
-		presenceData.details = title;
-		presenceData.state = "Animenin Detaylarını İnceliyor";
-	} else if (pathname.includes("/users")) {
-		presenceData.details = "Profil Sayfasında";
-		presenceData.state = title + " kullanıcısının profilinde";
-	} else if (pathname.includes("/watch")) {
-		presenceData.details = title;
-		presenceData.state = "Anime izleme sayfasında";
+	switch (pathname.split("/")[1]) {
+		case "":
+			presenceData.details = "Ana Sayfada Göz Gezdiriyor";
+			break;
+		case "anime":
+			presenceData.details = "Bir animeye bakıyor";
+			presenceData.state = title;
+			break;
+		case "watch":
+			presenceData.details = "Bir anime izleme sayfasında";
+			presenceData.state = title;
 
-		if (video) {
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
-			presenceData.smallImageText = video.paused
-				? (await strings).paused
-				: (await strings).playing;
-			presenceData.state = "Anime İzliyor";
-			if (!video.paused && video.duration) {
-				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					presence.getTimestamps(
-						Math.floor(video.currentTime),
-						Math.floor(video.duration)
-					);
+			if (video) {
+				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageText = video.paused
+					? (await strings).paused
+					: (await strings).playing;
+				presenceData.details = "Anime izliyor";
+				if (!video.paused && video.duration) {
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(
+							Math.floor(video.currentTime),
+							Math.floor(video.duration)
+						);
+				}
 			}
-		}
+			break;
+		case "team":
+			presenceData.details = "Takım sayfasında";
+			presenceData.state = title;
+			break;
+		case "browse":
+			presenceData.details = "Bir anime arıyor";
+			presenceData.state = title;
+			break;
+		case "users":
+			presenceData.details = "Bir kullanıcıya bakıyor";
+			presenceData.state = title;
 	}
-
 	if (await presence.getSetting("timestamp"))
 		presenceData.startTimestamp = browsingTimestamp;
 	if (await presence.getSetting("button"))
