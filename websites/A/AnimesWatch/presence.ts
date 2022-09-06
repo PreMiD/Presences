@@ -7,7 +7,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-var video: HTMLVideoElement;
+let video: HTMLVideoElement;
 
 presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 	if (!msg) return;
