@@ -4,6 +4,12 @@
 		"name": "Bas950",
 		"id": "241278257335500811"
 	},
+	"contributors": [
+		{
+			"name": "Dark_Ville",
+			"id": "638080361179512853"
+		}
+	],
 	"service": "Skype",
 	"description": {
 		"en": "Stay in touch! Free online calls, messaging, affordable international calling to mobiles or landlines and Skype for Business for effective collaboration.",
@@ -15,7 +21,7 @@
 		"preview.web.skype.com",
 		"www.skype.com"
 	],
-	"version": "1.5.14",
+	"version": "1.6.0",
 	"logo": "https://i.imgur.com/Q4myT8y.png",
 	"thumbnail": "https://i.imgur.com/upHWjaY.png",
 	"color": "#00acf0",
@@ -23,5 +29,17 @@
 	"tags": [
 		"chat",
 		"voice"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		}
 	]
 }
