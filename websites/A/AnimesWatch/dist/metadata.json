@@ -20,5 +20,19 @@
 		"anime",
 		"video"
 	],
-	"iframe": true
+	"iframe": true,
+	"settings": [
+		{
+			"id": "button",
+			"title": "Butonlar",
+			"icon": "fas fa-circle-dot",
+			"value": true
+		},
+		{
+			"id": "timestamp",
+			"title": "Süre",
+			"icon": "fas fa-timer",
+			"value": true
+		}
+	]
 }
