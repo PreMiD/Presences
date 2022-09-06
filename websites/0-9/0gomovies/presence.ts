@@ -21,17 +21,18 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			largeImageKey: "https://i.imgur.com/qldgMDR.png",
 		},
-		{ pathname, href } = document.location;
-	switch (pathname.split("/")[1]) {
+		{ href } = document.location,
+		pathname = document.location.pathname.split("/");
+	switch (pathname[1]) {
 		case "movie":
-		// fall through
 		case "tv": {
-			const title = document
-				.querySelectorAll("div.mvic-desc")[0]
-				.querySelector("h3");
-
-			if (title) presenceData.details = title.textContent.trim();
-			if (!document.querySelectorAll("div.page-cover")[0] && iFrameData) {
+			const title = document.querySelector("div.mvic-desc h3");
+			if (!title) {
+				presenceData.details = "Browsing";
+				break;
+			}
+			presenceData.details = title.textContent.trim();
+			if (iFrameData) {
 				if (!iFrameData.paused) {
 					[, presenceData.endTimestamp] = presence.getTimestamps(
 						iFrameData.currTime,
@@ -49,17 +50,14 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "":
+		case "home":
 			presenceData.details = "Browsing Home";
 			break;
 		case "genre":
-			presenceData.details = `Browsing Genre: ${pathname
-				.split("/genre/")[1]
-				.slice(0, -1)}`;
+			presenceData.details = `Browsing Genre: ${pathname[2]}`;
 			break;
 		case "search-query":
-			presenceData.details = `Searching for ${pathname
-				.split("/search-query/")[1]
-				.slice(0, -1)}`;
+			presenceData.details = `Searching for ${pathname[2]}`;
 			presenceData.smallImageKey = "search";
 			break;
 		default:
