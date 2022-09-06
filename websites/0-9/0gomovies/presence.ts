@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Browsing Genre: ${pathArr[2]}`;
 			break;
 		case "search-query":
-			presenceData.details = `Searching for ${pathname[2]}`;
+			presenceData.details = `Searching for ${pathArr[2]}`;
 			presenceData.smallImageKey = "search";
 			break;
 		default:
