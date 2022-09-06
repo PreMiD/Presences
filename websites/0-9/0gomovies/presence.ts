@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing Home";
 			break;
 		case "genre":
-			presenceData.details = `Browsing Genre: ${pathname[2]}`;
+			presenceData.details = `Browsing Genre: ${pathArr[2]}`;
 			break;
 		case "search-query":
 			presenceData.details = `Searching for ${pathname[2]}`;
