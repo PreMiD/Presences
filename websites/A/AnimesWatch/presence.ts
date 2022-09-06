@@ -1,13 +1,17 @@
 const presence = new Presence({
 		clientId: "972647321970016316",
 	}),
-	strings = presence.getStrings({
-		playing: "general.playing",
-		paused: "general.paused",
-	}),
+	getStrings = async () =>
+		presence.getStrings(
+			{
+				playing: "general.playing",
+				paused: "general.paused",
+			},
+			await presence.getSetting<string>("lang").catch(() => "tr")
+		),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let video: HTMLVideoElement;
+let video: HTMLVideoElement, strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 	if (!msg) return;
