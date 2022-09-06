@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ href, pathname } = document.location,
 		pathArr = pathname.split("/");
-	switch (pathname[1]) {
+	switch (pathArr[1]) {
 		case "movie":
 		case "tv": {
 			const title = document.querySelector("div.mvic-desc h3");
