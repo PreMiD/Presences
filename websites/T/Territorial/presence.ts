@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "The game has ended";
 	else {
 		presenceData.details = "Playing the game";
-		presenceData.buttons = [{ label: "Play The Game", url: href }];
+		presenceData.buttons = [{ label: "Play", url: href }];
 	}
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
