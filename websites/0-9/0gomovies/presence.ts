@@ -21,8 +21,8 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			largeImageKey: "https://i.imgur.com/qldgMDR.png",
 		},
-		{ href } = document.location,
-		pathname = document.location.pathname.split("/");
+		{ href, pathname } = document.location,
+		pathArr = pathname.split("/");
 	switch (pathname[1]) {
 		case "movie":
 		case "tv": {
