@@ -7,8 +7,8 @@
 	"service": "Anime Sama",
 	"description": {
 		"en": "Your streaming website for animes and scans without ad.",
-        "fr": "Votre site de streaming préféré pour vos animes et scans sans pubs."    
-    },
+		"fr": "Votre site de streaming préféré pour vos animes et scans sans pubs."
+	},
 	"url": "anime-sama.fr",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/Q4kwFRA.jpg",
@@ -18,11 +18,11 @@
 	"tags": [
 		"anime",
 		"anime-sama",
-        "scan",
-        "vf",
-        "vostfr"
+		"scan",
+		"vf",
+		"vostfr"
 	],
-    "iframe": true,
+	"iframe": true,
 	"iFrameRegExp": ".*((sendvid)|(sibnet)|(myvi)).*",
 	"settings": [
 		{
