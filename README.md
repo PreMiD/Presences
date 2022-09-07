@@ -7,7 +7,7 @@ This repository contains the source code of all Presences that are available in 
 
 <div align="left">
     <a target="_blank" href="https://discord.premid.app/" title="Join our Discord!">
-        <img  src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" height="76px" draggable="false" alt="Join our Discord!">
+        <img  src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" height="75px" draggable="false" alt="Join our Discord!">
     </a>
 </div>
 
@@ -17,12 +17,12 @@ This repository contains the source code of all Presences that are available in 
 
 Please refer to our [documentation](https://docs.premid.app/dev/presence) to get started.
 
-
-
 ---
 
 ## Translator Tool
+
 Translate Presences by using our [Translator Tool](./TRANSLATOR.md)
+
 ## Committing
 
 This repository strictly enforces the use of commitlint. For more information read the [Commit Convention guide](./.github/COMMIT_CONVENTION.md)
