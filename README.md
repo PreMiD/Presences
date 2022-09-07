@@ -3,37 +3,38 @@
     <h1>PreMiD Presences</h1>
 </div>
 
-This repository contains the source code of all presences that are available in PreMiD Store. If you would like to <strong>publish</strong> your presence, please feel free to open a <a href="https://github.com/PreMiD/Presences/pulls">pull request</a>.
+This repository contains the source code of all Presences that are available in [**PreMiD's Store**](https://premid.app/store). If you wish to <strong>publish</strong> your Presence, open a [**Pull Request**](https://github.com/PreMiD/Presences/pulls).
 
 <div align="left">
     <a target="_blank" href="https://discord.premid.app/" title="Join our Discord!">
-        <img  src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" height="76px" draggable="false" alt="Join our Discord!">
+        <img  src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" height="75px" draggable="false" alt="Join our Discord!">
     </a>
 </div>
 
-## Requirements to create a presence
-
-- You must have the [latest TypeScript compiler](https://www.typescriptlang.org/#download-links) version installed
+## Requirements to create a Presence
+- [**Git**](https://git-scm.com)
+- [**Node.js**](https://nodejs.org/)
+- [**NPM**](https://npmjs.org/) (Or any other package manager)
 - Basic knowlege of TypeScript
 
 ## Getting started
 
-We made a documentation to make your development process a little bit better and faster. You can see it [**here**](https://docs.premid.app/dev/presence).
+Please refer to our [**documentation**](https://docs.premid.app/dev/presence).
 
 ## Folder structure
 
 ```bash
-presence
+Presence
 ├── dist
 │   └── metadata.json
 ├── presence.ts
 └── tsconfig.json
 ```
 
-For presences with `iframe.ts`:
+For Presences that require `iframe.ts`:
 
 ```bash
-presence
+Presence
 ├── dist
 │   └── metadata.json
 ├── presence.ts
@@ -47,18 +48,18 @@ presence
 
 ### Setup
 
-- Clone the PreMiD repository to your system.
-- Install repository modules with `yarn` or `npm install`.
+- Fork this repository.
+- Install repository dependencies with `npm install` or your package manager of choice.
 
 ### Using the script
 
-- Open up a terminal and run `yarn translator` or `npm run translator`
-- When prompted, select the **Language Code** for the language you are translated (e.g `ga_IE` for Irish)
-- Once selected. The script will first cache all presences metadata files, it will then go through each one and remove the files containing the language you inputted from the cache.
-- You will then be prompted to select a mode, afterwards you might get asked some aditional information to finalize your filter.
-- Then at last you will be asked to fill in you translations. (You can type "skip" to skip)
+- Open a terminal and run `npm run translator`
+- When prompted, select the **Language Code** for the language you wish to add translations for (e.g `ga_IE` for Irish)
+- Once selected, the script will first cache all Presences metadata files, it will then go through each one and remove the files containing the language you inputted from the cache.
+- You will then be prompted to select a mode, afterwards you might get asked for some aditional information to finalize your filter.
+- Then at last you will be asked to fill in your translations. (You can type "skip" to skip)
 - To stop at any time, hit `ctrl+c` or type `stop`.
 
 ## Committing
 
-On this repo we enforce the use of commitlint. For more information on this, read the [Commit Convention guide](./.github/COMMIT_CONVENTION.md)
+This repository strictly enforces the use of commitlint. For more information read the [**Commit Convention guide**](./.github/COMMIT_CONVENTION.md)
