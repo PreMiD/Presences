@@ -64,6 +64,7 @@ presence.on("UpdateData", () => {
 		}
 		case "community.metabrainz.org": {
 			presenceData.details = "Browsing forum";
+			presenceData.largeImageKey = "https://i.imgur.com/AtrEqxF.png";
 			if (pathname === "/") presenceData.state = "Home page";
 			else if (pathname.startsWith("/c/") || /^\/tags\/c\/.+/.test(pathname)) {
 				presenceData.state = `Viewing category '${
@@ -86,7 +87,7 @@ presence.on("UpdateData", () => {
 					document.querySelector<HTMLHeadingElement>(".username").textContent
 				}`;
 				presenceData.smallImageKey =
-					document.querySelector<HTMLImageElement>(".avatar").src;
+					document.querySelector<HTMLImageElement>(".user-profile-avatar > img").src;
 				presenceData.smallImageText =
 					document.querySelector<HTMLHeadingElement>(".full-name").textContent;
 			} else {
