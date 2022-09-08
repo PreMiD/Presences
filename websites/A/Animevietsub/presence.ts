@@ -1,14 +1,22 @@
 const presence = new Presence({
-		clientId: "1016991973531451502",
-	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-	});
+	clientId: "1016991973531451502",
+});
 
 let lastPlaybackState: boolean,
 	lastPath: string,
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			pause: "general.paused",
+			play: "general.playing",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
 
 presence.on("UpdateData", async () => {
 	const playback =
@@ -16,6 +24,7 @@ presence.on("UpdateData", async () => {
 			(document.querySelectorAll("video").length &&
 				document.querySelectorAll("video")[0].className !== "previewVideo"),
 		curPath = document.location.pathname,
+		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
 		};
@@ -24,6 +33,11 @@ presence.on("UpdateData", async () => {
 		lastPath = curPath;
 		lastPlaybackState = playback;
 		browsingTimestamp = Math.floor(Date.now() / 1000);
+	}
+
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
 	}
 
 	if (!playback) {
@@ -79,9 +93,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			);
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
-		presenceData.smallImageText = video.paused
-			? (await strings).pause
-			: (await strings).play;
+		presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
 
