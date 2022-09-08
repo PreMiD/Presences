@@ -26,12 +26,6 @@ presence.on("UpdateData", () => {
 		case "area": {
 			const areaName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing area";
-			presenceData.buttons = [
-				{
-					label: "View Area",
-					url: href,
-				},
-			];
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "events":
@@ -63,6 +57,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = areaName;
+					presenceData.buttons = [
+						{
+							label: "View Area",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -70,12 +70,6 @@ presence.on("UpdateData", () => {
 		case "artist": {
 			const artistName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing artist";
-			presenceData.buttons = [
-				{
-					label: "View Artist",
-					url: href,
-				},
-			];
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "works":
 				case "recordings":
@@ -94,7 +88,6 @@ presence.on("UpdateData", () => {
 				case "edit": {
 					presenceData.state = "Editing artist";
 					presenceData.state = artistName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "open_edits": {
@@ -125,6 +118,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = artistName;
+					presenceData.buttons = [
+						{
+							label: "View Artist",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -132,23 +131,10 @@ presence.on("UpdateData", () => {
 		case "collection": {
 			const collectionName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing label";
-			if (
-				!document
-					.querySelector<HTMLParagraphElement>(".subheader")
-					.textContent.includes("Private collection")
-			) {
-				presenceData.buttons = [
-					{
-						label: "View Collection",
-						url: href,
-					},
-				];
-			}
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "edit": {
 					presenceData.details = "Editing collection";
 					presenceData.state = collectionName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "open_edits": {
@@ -165,10 +151,22 @@ presence.on("UpdateData", () => {
 				}
 				case "create": {
 					presenceData.details = "Creating new collection";
-					break
+					break;
 				}
 				default: {
 					presenceData.state = collectionName;
+					if (
+						!document
+							.querySelector<HTMLParagraphElement>(".subheader")
+							.textContent.includes("Private collection")
+					) {
+						presenceData.buttons = [
+							{
+								label: "View Collection",
+								url: href,
+							},
+						];
+					}
 				}
 			}
 			break;
@@ -183,12 +181,6 @@ presence.on("UpdateData", () => {
 		case "event": {
 			const eventName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing event";
-			presenceData.buttons = [
-				{
-					label: "View Event",
-					url: href,
-				},
-			];
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "tags":
@@ -202,13 +194,11 @@ presence.on("UpdateData", () => {
 				case "edit": {
 					presenceData.details = "Editing event";
 					presenceData.state = eventName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "edit_annotation": {
 					presenceData.details = "Editing event annotation";
 					presenceData.state = eventName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "annotations": {
@@ -229,6 +219,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = eventName;
+					presenceData.buttons = [
+						{
+							label: "View Event",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -236,12 +232,6 @@ presence.on("UpdateData", () => {
 		case "genre": {
 			const genreName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing genre";
-			presenceData.buttons = [
-				{
-					label: "View Genre",
-					url: href,
-				},
-			];
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "details": {
@@ -260,6 +250,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = genreName;
+					presenceData.buttons = [
+						{
+							label: "View Genre",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -267,12 +263,6 @@ presence.on("UpdateData", () => {
 		case "instrument": {
 			const instrumentName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing instrument";
-			presenceData.buttons = [
-				{
-					label: "View Instrument",
-					url: href,
-				},
-			];
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "artists":
@@ -287,6 +277,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = instrumentName;
+					presenceData.buttons = [
+						{
+							label: "View Instrument",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -294,12 +290,6 @@ presence.on("UpdateData", () => {
 		case "label": {
 			const labelName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing label";
-			presenceData.buttons = [
-				{
-					label: "View Label",
-					url: href,
-				},
-			];
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "tags":
@@ -314,18 +304,15 @@ presence.on("UpdateData", () => {
 				case "edit": {
 					presenceData.details = "Editing label";
 					presenceData.state = labelName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "annotations": {
 					presenceData.state = `Annotation history for '${labelName}'`;
-					delete presenceData.buttons;
 					break;
 				}
 				case "edit_annotation": {
 					presenceData.details = "Editing label annotation";
 					presenceData.state = labelName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "open_edits": {
@@ -346,6 +333,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = labelName;
+					presenceData.buttons = [
+						{
+							label: "View Label",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -359,12 +352,6 @@ presence.on("UpdateData", () => {
 			}' Length: ${
 				document.querySelector<HTMLDivElement>(".length")?.textContent
 			}`;
-			presenceData.buttons = [
-				{
-					label: "View Recording",
-					url: href,
-				},
-			];
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "fingerprints":
 				case "aliases":
@@ -379,7 +366,6 @@ presence.on("UpdateData", () => {
 				case "edit": {
 					presenceData.details = "Editing release";
 					presenceData.state = recordingName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "edit_annotation": {
@@ -405,6 +391,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = recordingName;
+					presenceData.buttons = [
+						{
+							label: "View Recording",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -415,12 +407,6 @@ presence.on("UpdateData", () => {
 					".cover-art-image > img"
 				);
 			presenceData.details = "Viewing release";
-			presenceData.buttons = [
-				{
-					label: "View Release",
-					url: href,
-				},
-			];
 			if (coverArtImage) presenceData.largeImageKey = coverArtImage.src;
 
 			switch ((pathname.match(/^\/release\/.*?\/(.*?)(\/.*?)?$/) || [])[1]) {
@@ -443,23 +429,26 @@ presence.on("UpdateData", () => {
 				case "add-cover-art":
 				case "edit-cover-art": {
 					presenceData.state = `Editing cover art for '${releaseName}'`;
-					delete presenceData.buttons;
 					break;
 				}
 				case "edit": {
 					presenceData.details = "Editing release";
 					presenceData.state = releaseName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "edit-relationships": {
 					presenceData.details = "Editing release relationships";
 					presenceData.state = releaseName;
-					delete presenceData.buttons;
 					break;
 				}
 				default: {
 					presenceData.state = releaseName;
+					presenceData.buttons = [
+						{
+							label: "View Release",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -470,12 +459,6 @@ presence.on("UpdateData", () => {
 					".cover-art-image > img"
 				);
 			presenceData.details = "Viewing release group";
-			presenceData.buttons = [
-				{
-					label: "View Release Group",
-					url: href,
-				},
-			];
 			if (coverArtImage) presenceData.largeImageKey = coverArtImage.src;
 
 			switch ((pathname.match(pathRegex) || [])[1]) {
@@ -491,19 +474,16 @@ presence.on("UpdateData", () => {
 				case "set-cover-art": {
 					presenceData.details = "Setting release group cover art";
 					presenceData.state = releaseGroupName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "edit": {
 					presenceData.details = "Editing release group";
 					presenceData.state = releaseGroupName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "edit_annotation": {
 					presenceData.details = "Editing release group annotation";
 					presenceData.state = releaseGroupName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "annotations": {
@@ -524,6 +504,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = releaseGroupName;
+					presenceData.buttons = [
+						{
+							label: "View Release Group",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -536,12 +522,6 @@ presence.on("UpdateData", () => {
 		case "series": {
 			const seriesName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing series";
-			presenceData.buttons = [
-				{
-					label: "View Series",
-					url: href,
-				},
-			];
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "tags":
@@ -554,13 +534,11 @@ presence.on("UpdateData", () => {
 				case "edit": {
 					presenceData.details = "Editing series";
 					presenceData.state = seriesName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "edit_annotation": {
 					presenceData.details = "Editing series annotation";
 					presenceData.state = seriesName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "annotations": {
@@ -585,6 +563,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = seriesName;
+					presenceData.buttons = [
+						{
+							label: "View Series",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -593,12 +577,6 @@ presence.on("UpdateData", () => {
 			const tagName =
 				document.querySelector<HTMLAnchorElement>("h1 > a").textContent;
 			presenceData.details = "Viewing tag";
-			presenceData.buttons = [
-				{
-					label: "View Tag",
-					url: href,
-				},
-			];
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "artist":
 				case "release-group":
@@ -618,6 +596,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = tagName;
+					presenceData.buttons = [
+						{
+							label: "View Tag",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
@@ -677,12 +661,6 @@ presence.on("UpdateData", () => {
 		case "work": {
 			const workName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing work";
-			presenceData.buttons = [
-				{
-					label: "View Work",
-					url: href,
-				},
-			];
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "tags":
@@ -695,13 +673,11 @@ presence.on("UpdateData", () => {
 				case "edit": {
 					presenceData.details = "Editing work";
 					presenceData.state = workName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "edit_annotation": {
 					presenceData.details = "Editing work annotation";
 					presenceData.state = workName;
-					delete presenceData.buttons;
 					break;
 				}
 				case "annotations": {
@@ -722,6 +698,12 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					presenceData.state = workName;
+					presenceData.buttons = [
+						{
+							label: "View Work",
+							url: href,
+						},
+					];
 				}
 			}
 			break;
