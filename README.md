@@ -48,4 +48,4 @@ presence
 Translate Presences by using our [Translator Tool](./TRANSLATOR.md)
 ## Committing
 
-This repository strictly enforces the use of commitlint. For more information read the [**Commit Convention guide**](./.github/COMMIT_CONVENTION.md)
+This repository strictly enforces the use of commitlint. For more information read the [Commit Convention guide](./.github/COMMIT_CONVENTION.md)
