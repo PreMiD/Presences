@@ -24,8 +24,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "area": {
-			const areaName = document.querySelector("bdi").textContent,
-				[, areaPath] = pathname.match(pathRegex) || [];
+			const areaName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing area";
 			presenceData.buttons = [
 				{
@@ -33,7 +32,7 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			switch (areaPath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "events":
 				case "labels":
@@ -57,8 +56,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "artist": {
-			const artistName = document.querySelector("bdi").textContent,
-				[, artistPath] = pathname.match(pathRegex) || [];
+			const artistName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing artist";
 			presenceData.buttons = [
 				{
@@ -66,7 +64,7 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			switch (artistPath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "works":
 				case "recordings":
 				case "events":
@@ -94,8 +92,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "collection": {
-			const collectionName = document.querySelector("bdi").textContent,
-				[, collectionPath] = pathname.match(pathRegex) || [];
+			const collectionName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing label";
 			if (
 				!document
@@ -109,7 +106,7 @@ presence.on("UpdateData", () => {
 					},
 				];
 			}
-			switch (collectionPath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "edit": {
 					presenceData.details = "Editing collection";
 					presenceData.state = collectionName;
@@ -130,8 +127,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "event": {
-			const eventName = document.querySelector("bdi").textContent,
-				[, eventPath] = pathname.match(pathRegex) || [];
+			const eventName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing event";
 			presenceData.buttons = [
 				{
@@ -139,7 +135,7 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			switch (eventPath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "tags":
 				case "ratings":
@@ -168,8 +164,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "genre": {
-			const genreName = document.querySelector("bdi").textContent,
-				[, genrePath] = pathname.match(pathRegex) || [];
+			const genreName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing genre";
 			presenceData.buttons = [
 				{
@@ -177,7 +172,7 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			switch (genrePath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "details": {
 					presenceData.state = `${document.querySelector(
@@ -192,8 +187,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "instrument": {
-			const instrumentName = document.querySelector("bdi").textContent,
-				[, instrumentPath] = pathname.match(pathRegex) || [];
+			const instrumentName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing instrument";
 			presenceData.buttons = [
 				{
@@ -201,7 +195,7 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			switch (instrumentPath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "artists":
 				case "releases":
@@ -220,8 +214,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "label": {
-			const labelName = document.querySelector("bdi").textContent,
-				[, labelPath] = pathname.match(pathRegex) || [];
+			const labelName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing label";
 			presenceData.buttons = [
 				{
@@ -229,7 +222,7 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			switch (labelPath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "tags":
 				case "relationships":
@@ -265,8 +258,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "recording": {
-			const recordingName = document.querySelector("bdi").textContent,
-				[, recordingPath] = pathname.match(pathRegex) || [];
+			const recordingName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing recording";
 			presenceData.smallImageKey = "https://i.imgur.com/ybpozZ6.png";
 			presenceData.smallImageText = `Artist: '${
@@ -280,7 +272,7 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			switch (recordingPath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "fingerprints":
 				case "aliases":
 				case "tags":
@@ -305,8 +297,6 @@ presence.on("UpdateData", () => {
 		}
 		case "release": {
 			const releaseName = document.querySelector("bdi").textContent,
-				[, releasePath] =
-					pathname.match(/^\/release\/.*?\/(.*?)(\/.*?)?$/) || [],
 				coverArtImage = document.querySelector<HTMLImageElement>(
 					".cover-art-image > img"
 				);
@@ -317,10 +307,9 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			if (coverArtImage) {
-				presenceData.largeImageKey = coverArtImage.src;
-			}
-			switch (releasePath) {
+			if (coverArtImage) presenceData.largeImageKey = coverArtImage.src;
+
+			switch ((pathname.match(/^\/release\/.*?\/(.*?)(\/.*?)?$/) || [])[1]) {
 				case "discids": {
 					presenceData.state = `Disc IDs for '${releaseName}'`;
 					break;
@@ -363,7 +352,6 @@ presence.on("UpdateData", () => {
 		}
 		case "release-group": {
 			const releaseGroupName = document.querySelector("bdi").textContent,
-				[, releaseGroupPath] = pathname.match(pathRegex) || [],
 				coverArtImage = document.querySelector<HTMLImageElement>(
 					".cover-art-image > img"
 				);
@@ -374,10 +362,9 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			if (coverArtImage) {
-				presenceData.largeImageKey = coverArtImage.src;
-			}
-			switch (releaseGroupPath) {
+			if (coverArtImage) presenceData.largeImageKey = coverArtImage.src;
+
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "tags":
 				case "ratings":
@@ -417,8 +404,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "series": {
-			const seriesName = document.querySelector("bdi").textContent,
-				[, seriesPath] = pathname.match(pathRegex) || [];
+			const seriesName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing series";
 			presenceData.buttons = [
 				{
@@ -426,7 +412,7 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			switch (seriesPath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "tags":
 				case "details": {
@@ -455,8 +441,7 @@ presence.on("UpdateData", () => {
 		}
 		case "tag": {
 			const tagName =
-					document.querySelector<HTMLAnchorElement>("h1 > a").textContent,
-				[, tagPath] = pathname.match(pathRegex) || [];
+				document.querySelector<HTMLAnchorElement>("h1 > a").textContent;
 			presenceData.details = "Viewing tag";
 			presenceData.buttons = [
 				{
@@ -464,7 +449,7 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			switch (tagPath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "artist":
 				case "release-group":
 				case "release":
@@ -488,11 +473,9 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "url": {
-			if (pathname.endsWith("/edit")) {
-				presenceData.details = "Editing URL";
-			} else {
-				presenceData.details = "Viewing URL";
-			}
+			if (pathname.endsWith("/edit")) presenceData.details = "Editing URL";
+			else presenceData.details = "Viewing URL";
+
 			presenceData.state = document.querySelector("bdi").textContent;
 			break;
 		}
@@ -513,20 +496,16 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					if (profilePath?.startsWith("subscriptions/")) {
-						const [, subscriptionType] = profilePath.match(
-							/^subscriptions\/(.*?)\/?$/
-						)[1];
-						presenceData.state = `${username}'s ${subscriptionType} subscriptions`;
-					} else {
-						presenceData.state = username;
-					}
+						presenceData.state = `${username}'s ${
+							profilePath.match(/^subscriptions\/(.*?)\/?$/)[1][1]
+						} subscriptions`;
+					} else presenceData.state = username;
 				}
 			}
 			break;
 		}
 		case "work": {
-			const workName = document.querySelector("bdi").textContent,
-				[, workPath] = pathname.match(pathRegex) || [];
+			const workName = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing work";
 			presenceData.buttons = [
 				{
@@ -534,7 +513,7 @@ presence.on("UpdateData", () => {
 					url: href,
 				},
 			];
-			switch (workPath) {
+			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "tags":
 				case "details": {
