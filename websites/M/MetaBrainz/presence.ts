@@ -8,9 +8,7 @@ presence.on("UpdateData", () => {
 			largeImageKey: "https://i.imgur.com/kQsG9xv.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ hostname, pathname, search } = window.location,
-		searchParams = new URLSearchParams(search);
-
+		{ hostname, pathname, search } = window.location;
 	switch (hostname) {
 		case "metabrainz.org": {
 			presenceData.details = "Browsing...";
@@ -21,7 +19,9 @@ presence.on("UpdateData", () => {
 				}
 				case "/profile": {
 					presenceData.details = "Viewing MetaBrainz profile";
-					presenceData.state = searchParams.get("musicbrainz_id");
+					presenceData.state = new URLSearchParams(search).get(
+						"musicbrainz_id"
+					);
 					break;
 				}
 				default: {
@@ -34,9 +34,8 @@ presence.on("UpdateData", () => {
 		}
 		case "blog.metabrainz.org": {
 			presenceData.details = "Reading blog";
-			if (pathname === "/") {
-				presenceData.state = "Home page";
-			} else if (pathname.startsWith("/author/")) {
+			if (pathname === "/") presenceData.state = "Home page";
+			else if (pathname.startsWith("/author/")) {
 				presenceData.state = `Viewing articles by ${
 					pathname.match(/^\/author\/(.*?)\//)[1]
 				}`;
@@ -65,12 +64,8 @@ presence.on("UpdateData", () => {
 		}
 		case "community.metabrainz.org": {
 			presenceData.details = "Browsing forum";
-			if (pathname === "/") {
-				presenceData.state = "Home page";
-			} else if (
-				pathname.startsWith("/c/") ||
-				/^\/tags\/c\/.+/.test(pathname)
-			) {
+			if (pathname === "/") presenceData.state = "Home page";
+			else if (pathname.startsWith("/c/") || /^\/tags\/c\/.+/.test(pathname)) {
 				presenceData.state = `Viewing category '${
 					document.querySelector<HTMLSpanElement>(".category-name").textContent
 				}'`;
@@ -82,11 +77,11 @@ presence.on("UpdateData", () => {
 					document.querySelector<HTMLSpanElement>(".group-info-name")
 						.textContent
 				}'`;
-			} else if (/^\/categories\/?/.test(pathname)) {
+			} else if (/^\/categories\/?/.test(pathname))
 				presenceData.state = "Viewing categories";
-			} else if (pathname === "/login-preferences") {
+			else if (pathname === "/login-preferences")
 				presenceData.state = "Logging in";
-			} else if (pathname.startsWith("/u/")) {
+			else if (pathname.startsWith("/u/")) {
 				presenceData.state = `Viewing profile of ${
 					document.querySelector<HTMLHeadingElement>(".username").textContent
 				}`;
@@ -103,9 +98,6 @@ presence.on("UpdateData", () => {
 		}
 	}
 
-	if (presenceData.details) {
-		presence.setActivity(presenceData);
-	} else {
-		presence.setActivity();
-	}
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
