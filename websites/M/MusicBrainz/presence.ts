@@ -116,6 +116,13 @@ presence.on("UpdateData", () => {
 					presenceData.state = artistName;
 					break;
 				}
+				case "create": {
+					presenceData.details = "Creating new artist";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						"#id-edit-artist\\.name"
+					).value;
+					break;
+				}
 				default: {
 					presenceData.state = artistName;
 					presenceData.buttons = [
@@ -215,6 +222,13 @@ presence.on("UpdateData", () => {
 				}
 				case "collections": {
 					presenceData.state = `Collections for '${eventName}'`;
+					break;
+				}
+				case "create": {
+					presenceData.details = "Creating new event";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						"#id-edit-event\\.name"
+					).value;
 					break;
 				}
 				default: {
@@ -331,6 +345,13 @@ presence.on("UpdateData", () => {
 					presenceData.state = `Subscribers for '${labelName}'`;
 					break;
 				}
+				case "create": {
+					presenceData.details = "Creating new label";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						"#id-edit-label\\.name"
+					).value;
+					break;
+				}
 				default: {
 					presenceData.state = labelName;
 					presenceData.buttons = [
@@ -389,6 +410,13 @@ presence.on("UpdateData", () => {
 					presenceData.state = `Collections for '${recordingName}'`;
 					break;
 				}
+				case "create": {
+					presenceData.details = "Creating new recording";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						"#id-edit-recording\\.name"
+					).value;
+					break;
+				}
 				default: {
 					presenceData.state = recordingName;
 					presenceData.buttons = [
@@ -439,6 +467,13 @@ presence.on("UpdateData", () => {
 				case "edit-relationships": {
 					presenceData.details = "Editing release relationships";
 					presenceData.state = releaseName;
+					break;
+				}
+				case "add": {
+					presenceData.details = "Creating new release";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						".row-form tr td:nth-of-type(2) input"
+					).value;
 					break;
 				}
 				default: {
@@ -502,6 +537,13 @@ presence.on("UpdateData", () => {
 					presenceData.state = `Collections for '${releaseGroupName}'`;
 					break;
 				}
+				case "create": {
+					presenceData.details = "Creating new release group";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						"#id-edit-release-group\\.name"
+					).value;
+					break;
+				}
 				default: {
 					presenceData.state = releaseGroupName;
 					presenceData.buttons = [
@@ -559,6 +601,13 @@ presence.on("UpdateData", () => {
 				}
 				case "subscribers": {
 					presenceData.state = `Subscribers for '${seriesName}'`;
+					break;
+				}
+				case "create": {
+					presenceData.details = "Creating new series";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						"#id-edit-series\\.name"
+					).value;
 					break;
 				}
 				default: {
@@ -694,6 +743,13 @@ presence.on("UpdateData", () => {
 				}
 				case "collections": {
 					presenceData.state = `Collections for '${workName}'`;
+					break;
+				}
+				case "create": {
+					presenceData.details = "Creating new work";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						"#id-edit-work\\.name"
+					).value;
 					break;
 				}
 				default: {
