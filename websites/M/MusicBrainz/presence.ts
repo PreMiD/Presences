@@ -12,7 +12,7 @@ presence.on("UpdateData", () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = window.location,
-		pathRegex = /^\/[\w-]+\/.*?\/(.*?)\/?$/;
+		pathRegex = /^\/[\w-]+\/.*?\/([\w-])\/?$/;
 
 	switch (pathname.split("/")[1]) {
 		case "": {
@@ -47,6 +47,18 @@ presence.on("UpdateData", () => {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
 					)} for ${areaName}`;
+					break;
+				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${areaName}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${areaName}'`;
+					break;
+				}
+				case "collections": {
+					presenceData.state = `Collections for '${areaName}'`;
 					break;
 				}
 				default: {
@@ -85,6 +97,32 @@ presence.on("UpdateData", () => {
 					delete presenceData.buttons;
 					break;
 				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${artistName}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${artistName}'`;
+					break;
+				}
+				case "collections": {
+					presenceData.state = `Collections for '${artistName}'`;
+					break;
+				}
+				case "subscribers": {
+					presenceData.state = `Subscribers for '${artistName}'`;
+					break;
+				}
+				case "split": {
+					presenceData.details = "Splitting artist";
+					presenceData.state = artistName;
+					break;
+				}
+				case "edit_annotation": {
+					presenceData.details = "Editing artist annotation";
+					presenceData.state = artistName;
+					break;
+				}
 				default: {
 					presenceData.state = artistName;
 				}
@@ -111,6 +149,18 @@ presence.on("UpdateData", () => {
 					presenceData.details = "Editing collection";
 					presenceData.state = collectionName;
 					delete presenceData.buttons;
+					break;
+				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${collectionName}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${collectionName}'`;
+					break;
+				}
+				case "subscribers": {
+					presenceData.state = `Subscribers for '${collectionName}'`;
 					break;
 				}
 				default: {
@@ -157,6 +207,22 @@ presence.on("UpdateData", () => {
 					delete presenceData.buttons;
 					break;
 				}
+				case "annotations": {
+					presenceData.state = `Annotation history for '${eventName}'`;
+					break;
+				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${eventName}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${eventName}'`;
+					break;
+				}
+				case "collections": {
+					presenceData.state = `Collections for '${eventName}'`;
+					break;
+				}
 				default: {
 					presenceData.state = eventName;
 				}
@@ -178,6 +244,14 @@ presence.on("UpdateData", () => {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
 					)} for ${genreName}`;
+					break;
+				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${genreName}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${genreName}'`;
 					break;
 				}
 				default: {
@@ -240,8 +314,7 @@ presence.on("UpdateData", () => {
 					break;
 				}
 				case "annotations": {
-					presenceData.details = "Viewing annotation history";
-					presenceData.state = labelName;
+					presenceData.state = `Annotation history for '${labelName}'`;
 					delete presenceData.buttons;
 					break;
 				}
@@ -249,6 +322,22 @@ presence.on("UpdateData", () => {
 					presenceData.details = "Editing label annotation";
 					presenceData.state = labelName;
 					delete presenceData.buttons;
+					break;
+				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${labelName}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${labelName}'`;
+					break;
+				}
+				case "collections": {
+					presenceData.state = `Collections for '${labelName}'`;
+					break;
+				}
+				case "subscribers": {
+					presenceData.state = `Subscribers for '${labelName}'`;
 					break;
 				}
 				default: {
@@ -287,6 +376,27 @@ presence.on("UpdateData", () => {
 					presenceData.details = "Editing release";
 					presenceData.state = recordingName;
 					delete presenceData.buttons;
+					break;
+				}
+				case "edit_annotation": {
+					presenceData.details = "Editing recording annotations";
+					presenceData.state = recordingName;
+					break;
+				}
+				case "annotations": {
+					presenceData.state = `Annotation history for '${recordingName}'`;
+					break;
+				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${recordingName}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${recordingName}'`;
+					break;
+				}
+				case "collections": {
+					presenceData.state = `Collections for '${recordingName}'`;
 					break;
 				}
 				default: {
@@ -392,6 +502,22 @@ presence.on("UpdateData", () => {
 					delete presenceData.buttons;
 					break;
 				}
+				case "annotations": {
+					presenceData.state = `Annotation history for '${releaseGroupName}'`;
+					break;
+				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${releaseGroupName}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${releaseGroupName}'`;
+					break;
+				}
+				case "collections": {
+					presenceData.state = `Collections for '${releaseGroupName}'`;
+					break;
+				}
 				default: {
 					presenceData.state = releaseGroupName;
 				}
@@ -433,6 +559,26 @@ presence.on("UpdateData", () => {
 					delete presenceData.buttons;
 					break;
 				}
+				case "annotations": {
+					presenceData.state = `Annotation history for '${seriesName}'`;
+					break;
+				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${seriesName}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${seriesName}'`;
+					break;
+				}
+				case "collections": {
+					presenceData.state = `Collections for '${seriesName}'`;
+					break;
+				}
+				case "subscribers": {
+					presenceData.state = `Subscribers for '${seriesName}'`;
+					break;
+				}
 				default: {
 					presenceData.state = seriesName;
 				}
@@ -472,11 +618,31 @@ presence.on("UpdateData", () => {
 			}
 			break;
 		}
+		case "taglookup": {
+			presenceData.details = "Viewing lookup results";
+			break;
+		}
 		case "url": {
-			if (pathname.endsWith("/edit")) presenceData.details = "Editing URL";
-			else presenceData.details = "Viewing URL";
-
-			presenceData.state = document.querySelector("bdi").textContent;
+			const url = document.querySelector("bdi").textContent;
+			presenceData.details = "Viewing URL";
+			switch ((pathname.match(pathRegex) || [])[1]) {
+				case "edit": {
+					presenceData.details = "Editing URL";
+					presenceData.state = url;
+					break;
+				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${url}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${url}'`;
+					break;
+				}
+				default: {
+					presenceData.state = url;
+				}
+			}
 			break;
 		}
 		case "user": {
@@ -532,6 +698,22 @@ presence.on("UpdateData", () => {
 					presenceData.details = "Editing work annotation";
 					presenceData.state = workName;
 					delete presenceData.buttons;
+					break;
+				}
+				case "annotations": {
+					presenceData.state = `Annotation history for '${workName}'`;
+					break;
+				}
+				case "open_edits": {
+					presenceData.state = `Open edits for '${workName}'`;
+					break;
+				}
+				case "edits": {
+					presenceData.state = `Edit history for '${workName}'`;
+					break;
+				}
+				case "collections": {
+					presenceData.state = `Collections for '${workName}'`;
 					break;
 				}
 				default: {
