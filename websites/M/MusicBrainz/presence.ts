@@ -11,7 +11,8 @@ presence.on("UpdateData", () => {
 			largeImageKey: "https://i.imgur.com/Fty4eZ8.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href, search } = window.location;
+		{ pathname, href, search } = window.location,
+		pathRegex = /^\/[\w-]+\/.*?\/(.*?)\/?$/;
 
 	switch (pathname.split("/")[1]) {
 		case "": {
@@ -24,7 +25,7 @@ presence.on("UpdateData", () => {
 		}
 		case "area": {
 			const areaName = document.querySelector("bdi").textContent,
-				[, areaPath] = pathname.match(/^\/area\/.*?\/(.*?)\/?$/) || [];
+				[, areaPath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing area";
 			presenceData.buttons = [
 				{
@@ -57,7 +58,7 @@ presence.on("UpdateData", () => {
 		}
 		case "artist": {
 			const artistName = document.querySelector("bdi").textContent,
-				[, artistPath] = pathname.match(/^\/artist\/.*?\/(.*?)\/?$/) || [];
+				[, artistPath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing artist";
 			presenceData.buttons = [
 				{
@@ -94,8 +95,7 @@ presence.on("UpdateData", () => {
 		}
 		case "collection": {
 			const collectionName = document.querySelector("bdi").textContent,
-				[, collectionPath] =
-					pathname.match(/^\/collection\/.*?\/(.*?)\/?$/) || [];
+				[, collectionPath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing label";
 			if (
 				!document
@@ -131,7 +131,7 @@ presence.on("UpdateData", () => {
 		}
 		case "event": {
 			const eventName = document.querySelector("bdi").textContent,
-				[, eventPath] = pathname.match(/^\/event\/.*?\/(.*?)\/?$/) || [];
+				[, eventPath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing event";
 			presenceData.buttons = [
 				{
@@ -169,7 +169,7 @@ presence.on("UpdateData", () => {
 		}
 		case "genre": {
 			const genreName = document.querySelector("bdi").textContent,
-				[, genrePath] = pathname.match(/^\/genre\/.*?\/(.*?)\/?$/) || [];
+				[, genrePath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing genre";
 			presenceData.buttons = [
 				{
@@ -193,8 +193,7 @@ presence.on("UpdateData", () => {
 		}
 		case "instrument": {
 			const instrumentName = document.querySelector("bdi").textContent,
-				[, instrumentPath] =
-					pathname.match(/^\/instrument\/.*?\/(.*?)\/?$/) || [];
+				[, instrumentPath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing instrument";
 			presenceData.buttons = [
 				{
@@ -222,7 +221,7 @@ presence.on("UpdateData", () => {
 		}
 		case "label": {
 			const labelName = document.querySelector("bdi").textContent,
-				[, labelPath] = pathname.match(/^\/label\/.*?\/(.*?)\/?$/) || [];
+				[, labelPath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing label";
 			presenceData.buttons = [
 				{
@@ -267,8 +266,7 @@ presence.on("UpdateData", () => {
 		}
 		case "recording": {
 			const recordingName = document.querySelector("bdi").textContent,
-				[, recordingPath] =
-					pathname.match(/^\/recording\/.*?\/(.*?)\/?$/) || [];
+				[, recordingPath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing recording";
 			presenceData.smallImageKey = "https://i.imgur.com/ybpozZ6.png";
 			presenceData.smallImageText = `Artist: '${
@@ -365,8 +363,7 @@ presence.on("UpdateData", () => {
 		}
 		case "release-group": {
 			const releaseGroupName = document.querySelector("bdi").textContent,
-				[, releaseGroupPath] =
-					pathname.match(/^\/release-group\/.*?\/(.*?)\/?$/) || [],
+				[, releaseGroupPath] = pathname.match(pathRegex) || [],
 				coverArtImage = document.querySelector<HTMLImageElement>(
 					".cover-art-image > img"
 				);
@@ -421,7 +418,7 @@ presence.on("UpdateData", () => {
 		}
 		case "series": {
 			const seriesName = document.querySelector("bdi").textContent,
-				[, seriesPath] = pathname.match(/^\/area\/.*?\/(.*?)\/?$/) || [];
+				[, seriesPath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing series";
 			presenceData.buttons = [
 				{
@@ -459,7 +456,7 @@ presence.on("UpdateData", () => {
 		case "tag": {
 			const tagName =
 					document.querySelector<HTMLAnchorElement>("h1 > a").textContent,
-				[, tagPath] = pathname.match(/^\/tag\/.*?\/(.*?)\/?$/) || [];
+				[, tagPath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing tag";
 			presenceData.buttons = [
 				{
@@ -500,7 +497,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "user": {
-			const [, profilePath] = pathname.match(/^\/user\/.*?\/(.*?)\/?$/) || [],
+			const [, profilePath] = pathname.match(pathRegex) || [],
 				username = document.querySelector("bdi").textContent;
 			presenceData.details = "Viewing user profile";
 			switch (profilePath) {
@@ -529,7 +526,7 @@ presence.on("UpdateData", () => {
 		}
 		case "work": {
 			const workName = document.querySelector("bdi").textContent,
-				[, workPath] = pathname.match(/^\/work\/.*?\/(.*?)\/?$/) || [];
+				[, workPath] = pathname.match(pathRegex) || [];
 			presenceData.details = "Viewing work";
 			presenceData.buttons = [
 				{
