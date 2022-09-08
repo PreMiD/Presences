@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 // TODO:
-// edit history, open edits, creations, collections, annotations, etc.
+// creations etc.
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
@@ -162,6 +162,10 @@ presence.on("UpdateData", () => {
 				case "subscribers": {
 					presenceData.state = `Subscribers for '${collectionName}'`;
 					break;
+				}
+				case "create": {
+					presenceData.details = "Creating new collection";
+					break
 				}
 				default: {
 					presenceData.state = collectionName;
