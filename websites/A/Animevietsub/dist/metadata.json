@@ -10,13 +10,10 @@
 		"vi_VN": "Xem anime online với phụ đề tiếng việt."
 	},
 	"url": "animevietsub.cc",
-	"version": "1.0.12",
+	"version": "1.0.0",
 	"logo": "https://i.imgur.com/trQFagl.jpeg",
 	"thumbnail": "https://i.imgur.com/cSWQACH.png",
 	"color": "#8b0000",
 	"category": "anime",
-	"tags": [
-		"animevietsub",
-		"anime"
-	]
+	"tags": ["animevietsub", "anime"]
 }
