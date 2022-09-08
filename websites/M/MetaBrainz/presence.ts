@@ -65,6 +65,40 @@ presence.on("UpdateData", () => {
 		}
 		case "community.metabrainz.org": {
 			presenceData.details = "Browsing forum";
+			if (pathname === "/") {
+				presenceData.state = "Home page";
+			} else if (
+				pathname.startsWith("/c/") ||
+				/^\/tags\/c\/.+/.test(pathname)
+			) {
+				presenceData.state = `Viewing category '${
+					document.querySelector<HTMLSpanElement>(".category-name").textContent
+				}'`;
+			} else if (pathname.startsWith("/t/")) {
+				presenceData.state =
+					document.querySelector<HTMLAnchorElement>(".fancy-title").textContent;
+			} else if (/^\/g\/.+/.test(pathname)) {
+				presenceData.state = `Viewing group '${
+					document.querySelector<HTMLSpanElement>(".group-info-name")
+						.textContent
+				}'`;
+			} else if (/^\/categories\/?/.test(pathname)) {
+				presenceData.state = "Viewing categories";
+			} else if (pathname === "/login-preferences") {
+				presenceData.state = "Logging in";
+			} else if (pathname.startsWith("/u/")) {
+				presenceData.state = `Viewing profile of ${
+					document.querySelector<HTMLHeadingElement>(".username").textContent
+				}`;
+				presenceData.smallImageKey =
+					document.querySelector<HTMLImageElement>(".avatar").src;
+				presenceData.smallImageText =
+					document.querySelector<HTMLHeadingElement>(".full-name").textContent;
+			} else {
+				presenceData.state = document.title.split(
+					" - MetaBrainz Community Discourse"
+				)[0];
+			}
 			break;
 		}
 	}
