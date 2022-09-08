@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 						)?.src,
 						guildName = document.querySelector<HTMLElement>(
 							"[data-premid-guildname]"
-						)?.innerText;
+						)?.textContent;
 					if (image && guildName) {
 						presenceData.details = "Daveti görüntülüyor:";
 						presenceData.state = guildName;
