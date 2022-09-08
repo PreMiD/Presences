@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Đang xem lịch chiếu anime";
 		else presenceData.details = "Đang xem trang chủ...";
 		presenceData.startTimestamp = browsingTimestamp;
-		presence.setActivity(presenceData, true);
+		presence.setActivity(presenceData);
 		return;
 	}
 	const [video] = document.querySelectorAll("video");
