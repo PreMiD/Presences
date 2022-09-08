@@ -40,7 +40,7 @@ presence.on("UpdateData", () => {
 				case "details": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${areaName}`;
+					)} for '${areaName}'`;
 					break;
 				}
 				case "open_edits": {
@@ -82,7 +82,7 @@ presence.on("UpdateData", () => {
 				case "releases": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${artistName}`;
+					)} for '${artistName}'`;
 					break;
 				}
 				case "edit": {
@@ -195,7 +195,7 @@ presence.on("UpdateData", () => {
 				case "details": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${eventName}`;
+					)} for '${eventName}'`;
 					break;
 				}
 				case "edit": {
@@ -251,7 +251,7 @@ presence.on("UpdateData", () => {
 				case "details": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${genreName}`;
+					)} for '${genreName}'`;
 					break;
 				}
 				case "open_edits": {
@@ -286,7 +286,7 @@ presence.on("UpdateData", () => {
 				case "details": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${instrumentName}`;
+					)} for '${instrumentName}'`;
 					break;
 				}
 				default: {
@@ -312,7 +312,7 @@ presence.on("UpdateData", () => {
 				case "details": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${labelName}`;
+					)} for '${labelName}'`;
 					break;
 				}
 				case "edit": {
@@ -381,7 +381,7 @@ presence.on("UpdateData", () => {
 				case "details": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${recordingName}`;
+					)} for '${recordingName}'`;
 					break;
 				}
 				case "edit": {
@@ -451,7 +451,7 @@ presence.on("UpdateData", () => {
 				case "details": {
 					presenceData.state = presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${releaseName}`;
+					)} for '${releaseName}'`;
 					break;
 				}
 				case "add-cover-art":
@@ -503,7 +503,7 @@ presence.on("UpdateData", () => {
 				case "details": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${releaseGroupName}`;
+					)} for '${releaseGroupName}'`;
 					break;
 				}
 				case "set-cover-art": {
@@ -570,7 +570,7 @@ presence.on("UpdateData", () => {
 				case "details": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${seriesName}`;
+					)} for '${seriesName}'`;
 					break;
 				}
 				case "edit": {
@@ -640,7 +640,7 @@ presence.on("UpdateData", () => {
 				case "event": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${tagName}`;
+					)} for '${tagName}'`;
 					break;
 				}
 				default: {
@@ -716,7 +716,7 @@ presence.on("UpdateData", () => {
 				case "details": {
 					presenceData.state = `${document.querySelector(
 						".sel bdi"
-					)} for ${workName}`;
+					)} for '${workName}'`;
 					break;
 				}
 				case "edit": {
