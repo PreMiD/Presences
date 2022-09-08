@@ -86,8 +86,9 @@ presence.on("UpdateData", () => {
 				presenceData.state = `Viewing profile of ${
 					document.querySelector<HTMLHeadingElement>(".username").textContent
 				}`;
-				presenceData.smallImageKey =
-					document.querySelector<HTMLImageElement>(".user-profile-avatar > img").src;
+				presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+					".user-profile-avatar > img"
+				).src;
 				presenceData.smallImageText =
 					document.querySelector<HTMLHeadingElement>(".full-name").textContent;
 			} else {
