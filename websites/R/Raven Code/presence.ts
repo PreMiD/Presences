@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 						)?.src,
 						userTag = document.querySelector<HTMLElement>(
 							"[data-premid-usertag]"
-						)?.innerText;
+						)?.textContent;
 					if (image && userTag) {
 						presenceData.details = "Kullanıcıyı görüntülüyor:";
 						presenceData.state = userTag;
