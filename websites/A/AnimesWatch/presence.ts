@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 	}
 	presenceData.startTimestamp = browsingTimestamp;
 	presenceData.buttons = [
-		{ label: "Sayfaya Git", url: document.location.href },
+		{ label: "Website", url: "https://animeswatch.com" },
 		{ label: "Discord", url: "https://animeswatch.com/discord" },
 	];
 	if (!button) delete presenceData.buttons;
