@@ -113,6 +113,14 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Tập: ${
 			document.querySelector<HTMLAnchorElement>(".episode.playing").textContent
 		}`;
+		if (button1) {
+			presenceData.buttons = [
+				{
+					label: "AnimeVsub",
+					url: `${link}`,
+				},
+			];
+		} else delete presenceData.buttons;
 		if (video.paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
