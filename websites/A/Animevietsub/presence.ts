@@ -19,7 +19,9 @@ async function getStrings() {
 }
 
 presence.on("UpdateData", async () => {
-	const playback =
+	const time = await presence.getSetting<boolean>("time"),
+		button1 = await presence.getSetting<boolean>("buttons"),
+		playback =
 			!!document.querySelector("#title") ||
 			(document.querySelectorAll("video").length &&
 				document.querySelectorAll("video")[0].className !== "previewVideo"),
@@ -67,6 +69,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Đang xem danh sách đã lưu trong hộp phim";
 		else if (curPath.startsWith("/season/"))
 			presenceData.details = "Đang chọn mùa phim";
+		else if (curPath.startsWith("/bang-xep-hang/"))
+			presenceData.details = "Đang xem bảng xếp hạng anime";
 		else if (curPath.startsWith("/phim/")) {
 			presenceData.details = `Định xem phim ${
 				document.querySelector<HTMLAnchorElement>(".Title").textContent
@@ -77,6 +81,18 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Đang xem lịch chiếu anime";
 		else presenceData.details = "Đang xem trang chủ...";
 		presenceData.startTimestamp = browsingTimestamp;
+		if (!time) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
+		if (button1) {
+			presenceData.buttons = [
+				{
+					label: "Animevietsub",
+					url: "https://www.animevietsub.cc",
+				},
+			];
+		}
 		presence.setActivity(presenceData);
 		return;
 	}
@@ -101,7 +117,14 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Tập: ${
 			document.querySelector<HTMLAnchorElement>(".episode.playing").textContent
 		}`;
-
+		if (button1) {
+			presenceData.buttons = [
+				{
+					label: "Animevietsub",
+					url: "https://www.animevietsub.cc",
+				},
+			];
+		} else delete presenceData.buttons;
 		if (video.paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;

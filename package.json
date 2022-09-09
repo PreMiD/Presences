@@ -54,5 +54,8 @@
 		"source-map-support": "^0.5.21",
 		"terser": "^5.15.0",
 		"typescript": "^4.6.2"
+	},
+	"dependencies": {
+		"package.json": "^2.0.1"
 	}
 }

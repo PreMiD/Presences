@@ -20,6 +20,18 @@
 		{
 			"id": "lang",
 			"multiLanguage": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"id": "time",
+			"title": "Show timestamps Menu",
+			"icon": "fad fa-stopwatch",
+			"value": true
 		}
 	]
 }
