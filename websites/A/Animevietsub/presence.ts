@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 	}
 	const [video] = document.querySelectorAll("video");
 
-	if (video && !isNaN(video.duration)) {
+	if (!isNaN(video?.duration)) {
 		const [titleArrOne] = (
 				document.querySelectorAll(".Title")
 					? document.querySelector(".Title").textContent
