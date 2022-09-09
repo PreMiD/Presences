@@ -36,7 +36,9 @@ presence.on("UpdateData", () => {
 						}
 					}
 				}
-			}
+			} else if (pathSplit[1] === "edit")
+				presenceData.details = "Editing profile";
+
 			break;
 		}
 		case "user": {
@@ -48,7 +50,7 @@ presence.on("UpdateData", () => {
 			} else {
 				presenceData.details = "Viewing a profile";
 				const username = document.querySelector("h2").textContent;
-				switch (pathSplit[2]) {
+				switch (pathSplit[2] || "") {
 					case "": {
 						presenceData.state = username;
 						break;
@@ -116,15 +118,16 @@ presence.on("UpdateData", () => {
 									presenceData.details = "Viewing review revision";
 									presenceData.state =
 										document.querySelector<HTMLAnchorElement>(
-											"dd a"
+											"h2 a"
 										).textContent;
 								}
 								break;
 							}
 							case "delete": {
 								presenceData.details = "Deleting review";
-								presenceData.state =
-									document.querySelector<HTMLAnchorElement>("dd a").textContent;
+								presenceData.state = document
+									.querySelector<HTMLParagraphElement>(".lead")
+									.textContent.match(/"(.*?)"/)[1];
 								break;
 							}
 						}
