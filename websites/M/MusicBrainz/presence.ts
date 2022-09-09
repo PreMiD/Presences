@@ -461,7 +461,7 @@ presence.on("UpdateData", () => {
 					case "aliases":
 					case "tags":
 					case "details": {
-						presenceData.state = presenceData.state = `${
+						presenceData.state = `${
 							document.querySelector(".sel bdi").textContent
 						} for '${releaseName}'`;
 						break;
