@@ -34,7 +34,10 @@ presence.on("UpdateData", () => {
 			presenseData.details = "Browsing documentation...";
 			if (pathname.match(/^(?:\/v[\d.]+)?\/[a-z]{2}\/(.*)/)[1] === "index.html")
 				presenseData.state = "Home page";
-			else presenseData.state = document.querySelector("h1").textContent;
+			else {
+				const { textContent } = document.querySelector("h1");
+				presenseData.state = textContent.substring(0, textContent.length - 1);
+			}
 			break;
 		}
 	}
