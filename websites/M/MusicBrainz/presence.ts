@@ -142,7 +142,7 @@ presence.on("UpdateData", () => {
 				break;
 			} else {
 				const collectionName = document.querySelector("bdi").textContent;
-				presenceData.details = "Viewing label";
+				presenceData.details = "Viewing collection";
 				switch ((pathname.match(pathRegex) || [])[1]) {
 					case "edit": {
 						presenceData.details = "Editing collection";
