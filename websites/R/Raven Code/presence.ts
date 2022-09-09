@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 						)?.textContent;
 					if (image && userTag) {
 						presenceData.details = "Kullanıcıyı görüntülüyor:";
-						presenceData.state = userTag ?? "logo";
+						presenceData.state = userTag;
 						presenceData.largeImageKey = image;
 					}
 				} else if (searchParams.has("invite_code")) {
