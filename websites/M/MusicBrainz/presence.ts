@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = window.location,
-		pathRegex = /^\/[\w-]+\/.*?\/([\w-])\/?$/;
+		pathRegex = /^\/[\w-]+\/.*?\/([\w-]+)\/?$/;
 
 	switch (pathname.split("/")[1]) {
 		case "": {
@@ -35,9 +35,9 @@ presence.on("UpdateData", () => {
 				case "recordings":
 				case "tags":
 				case "details": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${areaName}'`;
+					presenceData.state = `${
+						document.querySelector(".sel bdi").textContent
+					} for '${areaName}'`;
 					break;
 				}
 				case "open_edits": {
@@ -65,108 +65,69 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "artist": {
-			const artistName = document.querySelector("bdi").textContent;
-			presenceData.details = "Viewing artist";
-			switch ((pathname.match(pathRegex) || [])[1]) {
-				case "works":
-				case "recordings":
-				case "events":
-				case "relationships":
-				case "aliases":
-				case "tags":
-				case "ratings":
-				case "details":
-				case "releases": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${artistName}'`;
-					break;
-				}
-				case "edit": {
-					presenceData.state = "Editing artist";
-					presenceData.state = artistName;
-					break;
-				}
-				case "open_edits": {
-					presenceData.state = `Open edits for '${artistName}'`;
-					break;
-				}
-				case "edits": {
-					presenceData.state = `Edit history for '${artistName}'`;
-					break;
-				}
-				case "collections": {
-					presenceData.state = `Collections for '${artistName}'`;
-					break;
-				}
-				case "subscribers": {
-					presenceData.state = `Subscribers for '${artistName}'`;
-					break;
-				}
-				case "split": {
-					presenceData.details = "Splitting artist";
-					presenceData.state = artistName;
-					break;
-				}
-				case "edit_annotation": {
-					presenceData.details = "Editing artist annotation";
-					presenceData.state = artistName;
-					break;
-				}
-				case "create": {
-					presenceData.details = "Creating new artist";
-					presenceData.state = document.querySelector<HTMLInputElement>(
-						"#id-edit-artist\\.name"
-					).value;
-					break;
-				}
-				default: {
-					presenceData.state = artistName;
-					presenceData.buttons = [
-						{
-							label: "View Artist",
-							url: href,
-						},
-					];
-				}
-			}
-			break;
-		}
-		case "collection": {
-			const collectionName = document.querySelector("bdi").textContent;
-			presenceData.details = "Viewing label";
-			switch ((pathname.match(pathRegex) || [])[1]) {
-				case "edit": {
-					presenceData.details = "Editing collection";
-					presenceData.state = collectionName;
-					break;
-				}
-				case "open_edits": {
-					presenceData.state = `Open edits for '${collectionName}'`;
-					break;
-				}
-				case "edits": {
-					presenceData.state = `Edit history for '${collectionName}'`;
-					break;
-				}
-				case "subscribers": {
-					presenceData.state = `Subscribers for '${collectionName}'`;
-					break;
-				}
-				case "create": {
-					presenceData.details = "Creating new collection";
-					break;
-				}
-				default: {
-					presenceData.state = collectionName;
-					if (
-						!document
-							.querySelector<HTMLParagraphElement>(".subheader")
-							.textContent.includes("Private collection")
-					) {
+			if (pathname.startsWith("/artist/create")) {
+				presenceData.details = "Creating new artist";
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					"#id-edit-artist\\.name"
+				).value;
+			} else {
+				const artistName = document.querySelector("bdi").textContent;
+				presenceData.details = "Viewing artist";
+				switch ((pathname.match(pathRegex) || [])[1]) {
+					case "works":
+					case "recordings":
+					case "events":
+					case "relationships":
+					case "aliases":
+					case "tags":
+					case "ratings":
+					case "details":
+					case "releases": {
+						presenceData.state = `${
+							document.querySelector(".sel bdi").textContent
+						} for '${artistName}'`;
+						break;
+					}
+					case "edit": {
+						presenceData.state = "Editing artist";
+						presenceData.state = artistName;
+						break;
+					}
+					case "open_edits": {
+						presenceData.state = `Open edits for '${artistName}'`;
+						break;
+					}
+					case "edits": {
+						presenceData.state = `Edit history for '${artistName}'`;
+						break;
+					}
+					case "collections": {
+						presenceData.state = `Collections for '${artistName}'`;
+						break;
+					}
+					case "subscribers": {
+						presenceData.state = `Subscribers for '${artistName}'`;
+						break;
+					}
+					case "split": {
+						presenceData.details = "Splitting artist";
+						presenceData.state = artistName;
+						break;
+					}
+					case "edit_annotation": {
+						presenceData.details = "Editing artist annotation";
+						presenceData.state = artistName;
+						break;
+					}
+					case "annotations": {
+						presenceData.state = `Annotation history for '${artistName}'`;
+						break;
+					}
+					default: {
+						presenceData.state = artistName;
 						presenceData.buttons = [
 							{
-								label: "View Collection",
+								label: "View Artist",
 								url: href,
 							},
 						];
@@ -174,6 +135,50 @@ presence.on("UpdateData", () => {
 				}
 			}
 			break;
+		}
+		case "collection": {
+			if (pathname.startsWith("/collection/create")) {
+				presenceData.details = "Creating new collection";
+				break;
+			} else {
+				const collectionName = document.querySelector("bdi").textContent;
+				presenceData.details = "Viewing label";
+				switch ((pathname.match(pathRegex) || [])[1]) {
+					case "edit": {
+						presenceData.details = "Editing collection";
+						presenceData.state = collectionName;
+						break;
+					}
+					case "open_edits": {
+						presenceData.state = `Open edits for '${collectionName}'`;
+						break;
+					}
+					case "edits": {
+						presenceData.state = `Edit history for '${collectionName}'`;
+						break;
+					}
+					case "subscribers": {
+						presenceData.state = `Subscribers for '${collectionName}'`;
+						break;
+					}
+					default: {
+						presenceData.state = collectionName;
+						if (
+							!document
+								.querySelector<HTMLParagraphElement>(".subheader")
+								.textContent.includes("Private collection")
+						) {
+							presenceData.buttons = [
+								{
+									label: "View Collection",
+									url: href,
+								},
+							];
+						}
+					}
+				}
+				break;
+			}
 		}
 		case "doc": {
 			presenceData.details = "Viewing documentation";
@@ -183,62 +188,63 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "event": {
-			const eventName = document.querySelector("bdi").textContent;
-			presenceData.details = "Viewing event";
-			switch ((pathname.match(pathRegex) || [])[1]) {
-				case "aliases":
-				case "tags":
-				case "ratings":
-				case "details": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${eventName}'`;
-					break;
+			if (pathname.startsWith("/event/create")) {
+				presenceData.details = "Creating new event";
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					"#id-edit-event\\.name"
+				).value;
+				break;
+			} else {
+				const eventName = document.querySelector("bdi").textContent;
+				presenceData.details = "Viewing event";
+				switch ((pathname.match(pathRegex) || [])[1]) {
+					case "aliases":
+					case "tags":
+					case "ratings":
+					case "details": {
+						presenceData.state = `${
+							document.querySelector(".sel bdi").textContent
+						} for '${eventName}'`;
+						break;
+					}
+					case "edit": {
+						presenceData.details = "Editing event";
+						presenceData.state = eventName;
+						break;
+					}
+					case "edit_annotation": {
+						presenceData.details = "Editing event annotation";
+						presenceData.state = eventName;
+						break;
+					}
+					case "annotations": {
+						presenceData.state = `Annotation history for '${eventName}'`;
+						break;
+					}
+					case "open_edits": {
+						presenceData.state = `Open edits for '${eventName}'`;
+						break;
+					}
+					case "edits": {
+						presenceData.state = `Edit history for '${eventName}'`;
+						break;
+					}
+					case "collections": {
+						presenceData.state = `Collections for '${eventName}'`;
+						break;
+					}
+					default: {
+						presenceData.state = eventName;
+						presenceData.buttons = [
+							{
+								label: "View Event",
+								url: href,
+							},
+						];
+					}
 				}
-				case "edit": {
-					presenceData.details = "Editing event";
-					presenceData.state = eventName;
-					break;
-				}
-				case "edit_annotation": {
-					presenceData.details = "Editing event annotation";
-					presenceData.state = eventName;
-					break;
-				}
-				case "annotations": {
-					presenceData.state = `Annotation history for '${eventName}'`;
-					break;
-				}
-				case "open_edits": {
-					presenceData.state = `Open edits for '${eventName}'`;
-					break;
-				}
-				case "edits": {
-					presenceData.state = `Edit history for '${eventName}'`;
-					break;
-				}
-				case "collections": {
-					presenceData.state = `Collections for '${eventName}'`;
-					break;
-				}
-				case "create": {
-					presenceData.details = "Creating new event";
-					presenceData.state = document.querySelector<HTMLInputElement>(
-						"#id-edit-event\\.name"
-					).value;
-					break;
-				}
-				default: {
-					presenceData.state = eventName;
-					presenceData.buttons = [
-						{
-							label: "View Event",
-							url: href,
-						},
-					];
-				}
+				break;
 			}
-			break;
 		}
 		case "genre": {
 			const genreName = document.querySelector("bdi").textContent;
@@ -246,9 +252,9 @@ presence.on("UpdateData", () => {
 			switch ((pathname.match(pathRegex) || [])[1]) {
 				case "aliases":
 				case "details": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${genreName}'`;
+					presenceData.state = `${
+						document.querySelector(".sel bdi").textContent
+					} for '${genreName}'`;
 					break;
 				}
 				case "open_edits": {
@@ -281,9 +287,9 @@ presence.on("UpdateData", () => {
 				case "recordings":
 				case "tags":
 				case "details": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${instrumentName}'`;
+					presenceData.state = `${
+						document.querySelector(".sel bdi").textContent
+					} for '${instrumentName}'`;
 					break;
 				}
 				default: {
@@ -299,259 +305,263 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "label": {
-			const labelName = document.querySelector("bdi").textContent;
-			presenceData.details = "Viewing label";
-			switch ((pathname.match(pathRegex) || [])[1]) {
-				case "aliases":
-				case "tags":
-				case "relationships":
-				case "ratings":
-				case "details": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${labelName}'`;
-					break;
+			if (pathname.startsWith("/label/create")) {
+				presenceData.details = "Creating new label";
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					"#id-edit-label\\.name"
+				).value;
+				break;
+			} else {
+				const labelName = document.querySelector("bdi").textContent;
+				presenceData.details = "Viewing label";
+				switch ((pathname.match(pathRegex) || [])[1]) {
+					case "aliases":
+					case "tags":
+					case "relationships":
+					case "ratings":
+					case "details": {
+						presenceData.state = `${
+							document.querySelector(".sel bdi").textContent
+						} for '${labelName}'`;
+						break;
+					}
+					case "edit": {
+						presenceData.details = "Editing label";
+						presenceData.state = labelName;
+						break;
+					}
+					case "annotations": {
+						presenceData.state = `Annotation history for '${labelName}'`;
+						break;
+					}
+					case "edit_annotation": {
+						presenceData.details = "Editing label annotation";
+						presenceData.state = labelName;
+						break;
+					}
+					case "open_edits": {
+						presenceData.state = `Open edits for '${labelName}'`;
+						break;
+					}
+					case "edits": {
+						presenceData.state = `Edit history for '${labelName}'`;
+						break;
+					}
+					case "collections": {
+						presenceData.state = `Collections for '${labelName}'`;
+						break;
+					}
+					case "subscribers": {
+						presenceData.state = `Subscribers for '${labelName}'`;
+						break;
+					}
+					default: {
+						presenceData.state = labelName;
+						presenceData.buttons = [
+							{
+								label: "View Label",
+								url: href,
+							},
+						];
+					}
 				}
-				case "edit": {
-					presenceData.details = "Editing label";
-					presenceData.state = labelName;
-					break;
-				}
-				case "annotations": {
-					presenceData.state = `Annotation history for '${labelName}'`;
-					break;
-				}
-				case "edit_annotation": {
-					presenceData.details = "Editing label annotation";
-					presenceData.state = labelName;
-					break;
-				}
-				case "open_edits": {
-					presenceData.state = `Open edits for '${labelName}'`;
-					break;
-				}
-				case "edits": {
-					presenceData.state = `Edit history for '${labelName}'`;
-					break;
-				}
-				case "collections": {
-					presenceData.state = `Collections for '${labelName}'`;
-					break;
-				}
-				case "subscribers": {
-					presenceData.state = `Subscribers for '${labelName}'`;
-					break;
-				}
-				case "create": {
-					presenceData.details = "Creating new label";
-					presenceData.state = document.querySelector<HTMLInputElement>(
-						"#id-edit-label\\.name"
-					).value;
-					break;
-				}
-				default: {
-					presenceData.state = labelName;
-					presenceData.buttons = [
-						{
-							label: "View Label",
-							url: href,
-						},
-					];
-				}
+				break;
 			}
-			break;
 		}
 		case "recording": {
-			const recordingName = document.querySelector("bdi").textContent;
-			presenceData.details = "Viewing recording";
-			presenceData.smallImageKey = "https://i.imgur.com/ybpozZ6.png";
-			presenceData.smallImageText = `Artist: '${
-				document.querySelector(".artist bdi")?.textContent
-			}' Length: ${
-				document.querySelector<HTMLDivElement>(".length")?.textContent
-			}`;
-			switch ((pathname.match(pathRegex) || [])[1]) {
-				case "fingerprints":
-				case "aliases":
-				case "tags":
-				case "reviews":
-				case "details": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${recordingName}'`;
-					break;
+			if (pathname.startsWith("/recording/create")) {
+				presenceData.details = "Creating new recording";
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					"#id-edit-recording\\.name"
+				).value;
+				break;
+			} else {
+				const recordingName = document.querySelector("bdi").textContent;
+				presenceData.details = "Viewing recording";
+				presenceData.smallImageKey = "https://i.imgur.com/ybpozZ6.png";
+				presenceData.smallImageText = `Artist: '${
+					document.querySelector(".artist bdi")?.textContent
+				}' Length: ${
+					document.querySelector<HTMLDivElement>(".length")?.textContent
+				}`;
+				switch ((pathname.match(pathRegex) || [])[1]) {
+					case "fingerprints":
+					case "aliases":
+					case "tags":
+					case "reviews":
+					case "details": {
+						presenceData.state = `${
+							document.querySelector(".sel bdi").textContent
+						} for '${recordingName}'`;
+						break;
+					}
+					case "edit": {
+						presenceData.details = "Editing release";
+						presenceData.state = recordingName;
+						break;
+					}
+					case "edit_annotation": {
+						presenceData.details = "Editing recording annotations";
+						presenceData.state = recordingName;
+						break;
+					}
+					case "annotations": {
+						presenceData.state = `Annotation history for '${recordingName}'`;
+						break;
+					}
+					case "open_edits": {
+						presenceData.state = `Open edits for '${recordingName}'`;
+						break;
+					}
+					case "edits": {
+						presenceData.state = `Edit history for '${recordingName}'`;
+						break;
+					}
+					case "collections": {
+						presenceData.state = `Collections for '${recordingName}'`;
+						break;
+					}
+					default: {
+						presenceData.state = recordingName;
+						presenceData.buttons = [
+							{
+								label: "View Recording",
+								url: href,
+							},
+						];
+					}
 				}
-				case "edit": {
-					presenceData.details = "Editing release";
-					presenceData.state = recordingName;
-					break;
-				}
-				case "edit_annotation": {
-					presenceData.details = "Editing recording annotations";
-					presenceData.state = recordingName;
-					break;
-				}
-				case "annotations": {
-					presenceData.state = `Annotation history for '${recordingName}'`;
-					break;
-				}
-				case "open_edits": {
-					presenceData.state = `Open edits for '${recordingName}'`;
-					break;
-				}
-				case "edits": {
-					presenceData.state = `Edit history for '${recordingName}'`;
-					break;
-				}
-				case "collections": {
-					presenceData.state = `Collections for '${recordingName}'`;
-					break;
-				}
-				case "create": {
-					presenceData.details = "Creating new recording";
-					presenceData.state = document.querySelector<HTMLInputElement>(
-						"#id-edit-recording\\.name"
-					).value;
-					break;
-				}
-				default: {
-					presenceData.state = recordingName;
-					presenceData.buttons = [
-						{
-							label: "View Recording",
-							url: href,
-						},
-					];
-				}
+				break;
 			}
-			break;
 		}
 		case "release": {
-			const releaseName = document.querySelector("bdi").textContent,
-				coverArtImage = document.querySelector<HTMLImageElement>(
-					".cover-art-image > img"
-				);
-			presenceData.details = "Viewing release";
-			if (coverArtImage) presenceData.largeImageKey = coverArtImage.src;
+			if (pathname.startsWith("/release/add")) {
+				presenceData.details = "Creating new release";
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					".row-form tr td:nth-of-type(2) input"
+				).value;
+				break;
+			} else {
+				const releaseName = document.querySelector("bdi").textContent,
+					coverArtImage = document.querySelector<HTMLImageElement>(
+						".cover-art-image > img"
+					);
+				presenceData.details = "Viewing release";
+				if (coverArtImage) presenceData.largeImageKey = coverArtImage.src;
 
-			switch ((pathname.match(/^\/release\/.*?\/(.*?)(\/.*?)?$/) || [])[1]) {
-				case "discids": {
-					presenceData.state = `Disc IDs for '${releaseName}'`;
-					break;
+				switch ((pathname.match(/^\/release\/.*?\/(.*?)(\/.*?)?$/) || [])[1]) {
+					case "discids": {
+						presenceData.state = `Disc IDs for '${releaseName}'`;
+						break;
+					}
+					case "cover-art": {
+						presenceData.state = `Cover art for '${releaseName}'`;
+						break;
+					}
+					case "aliases":
+					case "tags":
+					case "details": {
+						presenceData.state = presenceData.state = `${
+							document.querySelector(".sel bdi").textContent
+						} for '${releaseName}'`;
+						break;
+					}
+					case "add-cover-art":
+					case "edit-cover-art": {
+						presenceData.state = `Editing cover art for '${releaseName}'`;
+						break;
+					}
+					case "edit": {
+						presenceData.details = "Editing release";
+						presenceData.state = releaseName;
+						break;
+					}
+					case "edit-relationships": {
+						presenceData.details = "Editing release relationships";
+						presenceData.state = releaseName;
+						break;
+					}
+					default: {
+						presenceData.state = releaseName;
+						presenceData.buttons = [
+							{
+								label: "View Release",
+								url: href,
+							},
+						];
+					}
 				}
-				case "cover-art": {
-					presenceData.state = `Cover art for '${releaseName}'`;
-					break;
-				}
-				case "aliases":
-				case "tags":
-				case "details": {
-					presenceData.state = presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${releaseName}'`;
-					break;
-				}
-				case "add-cover-art":
-				case "edit-cover-art": {
-					presenceData.state = `Editing cover art for '${releaseName}'`;
-					break;
-				}
-				case "edit": {
-					presenceData.details = "Editing release";
-					presenceData.state = releaseName;
-					break;
-				}
-				case "edit-relationships": {
-					presenceData.details = "Editing release relationships";
-					presenceData.state = releaseName;
-					break;
-				}
-				case "add": {
-					presenceData.details = "Creating new release";
-					presenceData.state = document.querySelector<HTMLInputElement>(
-						".row-form tr td:nth-of-type(2) input"
-					).value;
-					break;
-				}
-				default: {
-					presenceData.state = releaseName;
-					presenceData.buttons = [
-						{
-							label: "View Release",
-							url: href,
-						},
-					];
-				}
+				break;
 			}
-			break;
 		}
 		case "release-group": {
-			const releaseGroupName = document.querySelector("bdi").textContent,
-				coverArtImage = document.querySelector<HTMLImageElement>(
-					".cover-art-image > img"
-				);
-			presenceData.details = "Viewing release group";
-			if (coverArtImage) presenceData.largeImageKey = coverArtImage.src;
+			if (pathname.startsWith("/release-group/create")) {
+				presenceData.details = "Creating new release group";
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					"#id-edit-release-group\\.name"
+				).value;
+				break;
+			} else {
+				const releaseGroupName = document.querySelector("bdi").textContent,
+					coverArtImage = document.querySelector<HTMLImageElement>(
+						".cover-art-image > img"
+					);
+				presenceData.details = "Viewing release group";
+				if (coverArtImage) presenceData.largeImageKey = coverArtImage.src;
 
-			switch ((pathname.match(pathRegex) || [])[1]) {
-				case "aliases":
-				case "tags":
-				case "ratings":
-				case "details": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${releaseGroupName}'`;
-					break;
+				switch ((pathname.match(pathRegex) || [])[1]) {
+					case "aliases":
+					case "tags":
+					case "ratings":
+					case "details": {
+						presenceData.state = `${
+							document.querySelector(".sel bdi").textContent
+						} for '${releaseGroupName}'`;
+						break;
+					}
+					case "set-cover-art": {
+						presenceData.details = "Setting release group cover art";
+						presenceData.state = releaseGroupName;
+						break;
+					}
+					case "edit": {
+						presenceData.details = "Editing release group";
+						presenceData.state = releaseGroupName;
+						break;
+					}
+					case "edit_annotation": {
+						presenceData.details = "Editing release group annotation";
+						presenceData.state = releaseGroupName;
+						break;
+					}
+					case "annotations": {
+						presenceData.state = `Annotation history for '${releaseGroupName}'`;
+						break;
+					}
+					case "open_edits": {
+						presenceData.state = `Open edits for '${releaseGroupName}'`;
+						break;
+					}
+					case "edits": {
+						presenceData.state = `Edit history for '${releaseGroupName}'`;
+						break;
+					}
+					case "collections": {
+						presenceData.state = `Collections for '${releaseGroupName}'`;
+						break;
+					}
+					default: {
+						presenceData.state = releaseGroupName;
+						presenceData.buttons = [
+							{
+								label: "View Release Group",
+								url: href,
+							},
+						];
+					}
 				}
-				case "set-cover-art": {
-					presenceData.details = "Setting release group cover art";
-					presenceData.state = releaseGroupName;
-					break;
-				}
-				case "edit": {
-					presenceData.details = "Editing release group";
-					presenceData.state = releaseGroupName;
-					break;
-				}
-				case "edit_annotation": {
-					presenceData.details = "Editing release group annotation";
-					presenceData.state = releaseGroupName;
-					break;
-				}
-				case "annotations": {
-					presenceData.state = `Annotation history for '${releaseGroupName}'`;
-					break;
-				}
-				case "open_edits": {
-					presenceData.state = `Open edits for '${releaseGroupName}'`;
-					break;
-				}
-				case "edits": {
-					presenceData.state = `Edit history for '${releaseGroupName}'`;
-					break;
-				}
-				case "collections": {
-					presenceData.state = `Collections for '${releaseGroupName}'`;
-					break;
-				}
-				case "create": {
-					presenceData.details = "Creating new release group";
-					presenceData.state = document.querySelector<HTMLInputElement>(
-						"#id-edit-release-group\\.name"
-					).value;
-					break;
-				}
-				default: {
-					presenceData.state = releaseGroupName;
-					presenceData.buttons = [
-						{
-							label: "View Release Group",
-							url: href,
-						},
-					];
-				}
+				break;
 			}
-			break;
 		}
 		case "search": {
 			presenceData.details = "Searching";
@@ -559,65 +569,66 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "series": {
-			const seriesName = document.querySelector("bdi").textContent;
-			presenceData.details = "Viewing series";
-			switch ((pathname.match(pathRegex) || [])[1]) {
-				case "aliases":
-				case "tags":
-				case "details": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${seriesName}'`;
-					break;
+			if (pathname.startsWith("/series/create")) {
+				presenceData.details = "Creating new series";
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					"#id-edit-series\\.name"
+				).value;
+				break;
+			} else {
+				const seriesName = document.querySelector("bdi").textContent;
+				presenceData.details = "Viewing series";
+				switch ((pathname.match(pathRegex) || [])[1]) {
+					case "aliases":
+					case "tags":
+					case "details": {
+						presenceData.state = `${
+							document.querySelector(".sel bdi").textContent
+						} for '${seriesName}'`;
+						break;
+					}
+					case "edit": {
+						presenceData.details = "Editing series";
+						presenceData.state = seriesName;
+						break;
+					}
+					case "edit_annotation": {
+						presenceData.details = "Editing series annotation";
+						presenceData.state = seriesName;
+						break;
+					}
+					case "annotations": {
+						presenceData.state = `Annotation history for '${seriesName}'`;
+						break;
+					}
+					case "open_edits": {
+						presenceData.state = `Open edits for '${seriesName}'`;
+						break;
+					}
+					case "edits": {
+						presenceData.state = `Edit history for '${seriesName}'`;
+						break;
+					}
+					case "collections": {
+						presenceData.state = `Collections for '${seriesName}'`;
+						break;
+					}
+					case "subscribers": {
+						presenceData.state = `Subscribers for '${seriesName}'`;
+						break;
+					}
+					default: {
+						presenceData.state = seriesName;
+						presenceData.buttons = [
+							{
+								label: "View Series",
+								url: href,
+							},
+						];
+					}
 				}
-				case "edit": {
-					presenceData.details = "Editing series";
-					presenceData.state = seriesName;
-					break;
-				}
-				case "edit_annotation": {
-					presenceData.details = "Editing series annotation";
-					presenceData.state = seriesName;
-					break;
-				}
-				case "annotations": {
-					presenceData.state = `Annotation history for '${seriesName}'`;
-					break;
-				}
-				case "open_edits": {
-					presenceData.state = `Open edits for '${seriesName}'`;
-					break;
-				}
-				case "edits": {
-					presenceData.state = `Edit history for '${seriesName}'`;
-					break;
-				}
-				case "collections": {
-					presenceData.state = `Collections for '${seriesName}'`;
-					break;
-				}
-				case "subscribers": {
-					presenceData.state = `Subscribers for '${seriesName}'`;
-					break;
-				}
-				case "create": {
-					presenceData.details = "Creating new series";
-					presenceData.state = document.querySelector<HTMLInputElement>(
-						"#id-edit-series\\.name"
-					).value;
-					break;
-				}
-				default: {
-					presenceData.state = seriesName;
-					presenceData.buttons = [
-						{
-							label: "View Series",
-							url: href,
-						},
-					];
-				}
+				break;
 			}
-			break;
 		}
 		case "tag": {
 			const tagName =
@@ -635,9 +646,9 @@ presence.on("UpdateData", () => {
 				case "instrument":
 				case "series":
 				case "event": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${tagName}'`;
+					presenceData.state = `${
+						document.querySelector(".sel bdi").textContent
+					} for '${tagName}'`;
 					break;
 				}
 				default: {
@@ -705,61 +716,62 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "work": {
-			const workName = document.querySelector("bdi").textContent;
-			presenceData.details = "Viewing work";
-			switch ((pathname.match(pathRegex) || [])[1]) {
-				case "aliases":
-				case "tags":
-				case "details": {
-					presenceData.state = `${document.querySelector(
-						".sel bdi"
-					)} for '${workName}'`;
-					break;
+			if (pathname.startsWith("/work/create")) {
+				presenceData.details = "Creating new work";
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					"#id-edit-work\\.name"
+				).value;
+				break;
+			} else {
+				const workName = document.querySelector("bdi").textContent;
+				presenceData.details = "Viewing work";
+				switch ((pathname.match(pathRegex) || [])[1]) {
+					case "aliases":
+					case "tags":
+					case "details": {
+						presenceData.state = `${
+							document.querySelector(".sel bdi").textContent
+						} for '${workName}'`;
+						break;
+					}
+					case "edit": {
+						presenceData.details = "Editing work";
+						presenceData.state = workName;
+						break;
+					}
+					case "edit_annotation": {
+						presenceData.details = "Editing work annotation";
+						presenceData.state = workName;
+						break;
+					}
+					case "annotations": {
+						presenceData.state = `Annotation history for '${workName}'`;
+						break;
+					}
+					case "open_edits": {
+						presenceData.state = `Open edits for '${workName}'`;
+						break;
+					}
+					case "edits": {
+						presenceData.state = `Edit history for '${workName}'`;
+						break;
+					}
+					case "collections": {
+						presenceData.state = `Collections for '${workName}'`;
+						break;
+					}
+					default: {
+						presenceData.state = workName;
+						presenceData.buttons = [
+							{
+								label: "View Work",
+								url: href,
+							},
+						];
+					}
 				}
-				case "edit": {
-					presenceData.details = "Editing work";
-					presenceData.state = workName;
-					break;
-				}
-				case "edit_annotation": {
-					presenceData.details = "Editing work annotation";
-					presenceData.state = workName;
-					break;
-				}
-				case "annotations": {
-					presenceData.state = `Annotation history for '${workName}'`;
-					break;
-				}
-				case "open_edits": {
-					presenceData.state = `Open edits for '${workName}'`;
-					break;
-				}
-				case "edits": {
-					presenceData.state = `Edit history for '${workName}'`;
-					break;
-				}
-				case "collections": {
-					presenceData.state = `Collections for '${workName}'`;
-					break;
-				}
-				case "create": {
-					presenceData.details = "Creating new work";
-					presenceData.state = document.querySelector<HTMLInputElement>(
-						"#id-edit-work\\.name"
-					).value;
-					break;
-				}
-				default: {
-					presenceData.state = workName;
-					presenceData.buttons = [
-						{
-							label: "View Work",
-							url: href,
-						},
-					];
-				}
+				break;
 			}
-			break;
 		}
 		default: {
 			presenceData.details = "Browsing...";
