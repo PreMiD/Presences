@@ -2,6 +2,12 @@ const presence = new Presence({
 	clientId: "1014298173314961481",
 });
 
+interface Video {
+	time: number;
+	duration: number;
+	paused: boolean;
+}
+
 function timeToString(nbr: number): string {
 	let nbrCopy = nbr,
 		nbrString = "",
@@ -30,12 +36,6 @@ function timeToString(nbr: number): string {
 	return nbrString;
 }
 
-interface Video {
-	time: number;
-	duration: number;
-	paused: boolean;
-}
-
 let video: Video = null;
 
 presence.on("iFrameData", (data: Video) => {
@@ -55,9 +55,28 @@ presence.on("UpdateData", async () => {
 			switch (pathSplit[2]) {
 				case "episode": {
 					const episodeImage: string = document.querySelector<HTMLMetaElement>(
-							'meta[property="og:image"]'
-						).content,
-						{ paused, time, duration } = video;
+						'meta[property="og:image"]'
+					).content;
+					if (video === null) {
+						presenceData.details = `Regarde ${
+							document.querySelector<HTMLMetaElement>(
+								'meta[property="og:title"]'
+							).content
+						}`;
+						presenceData.largeImageKey =
+							episodeImage ===
+							"https://neko-sama.fr/images/default_thumbnail.png"
+								? "nekosama-icon"
+								: episodeImage;
+						presenceData.buttons = [
+							{
+								label: "Voir Épisode",
+								url: document.URL,
+							},
+						];
+						break;
+					}
+					const { paused, time, duration } = video;
 					if (!paused) {
 						const timestamps = presence.getTimestamps(time, duration);
 						presenceData.startTimestamp = timestamps[0];
