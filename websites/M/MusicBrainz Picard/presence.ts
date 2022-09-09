@@ -1,8 +1,9 @@
-const browsingTimestamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+		clientId: "1017593958546821160",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-new Presence({
-	clientId: "1017593958546821160",
-}).on("UpdateData", () => {
+presence.on("UpdateData", () => {
 	const presenseData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/hkrB6W8.png",
 			startTimestamp: browsingTimestamp,
@@ -37,4 +38,5 @@ new Presence({
 			break;
 		}
 	}
+	presence.setActivity(presenseData);
 });
