@@ -24,6 +24,10 @@ presence.on("UpdateData", async () => {
 			details: "Ana Sayfada Göz Gezdiriyor",
 		},
 		{ pathname } = document.location,
+		[button, timestamp] = await Promise.all([
+			presence.getSetting<boolean>("button"),
+			presence.getSetting<boolean>("timestamp"),
+		]),
 		title = document.title.slice(0, document.title.length - 14);
 
 	switch (pathname.split("/")[1]) {
@@ -65,13 +69,12 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Bir kullanıcıya bakıyor";
 			presenceData.state = title;
 	}
-	if (await presence.getSetting("timestamp"))
-		presenceData.startTimestamp = browsingTimestamp;
-	if (await presence.getSetting("button"))
-		presenceData.buttons = [
-			{ label: "Sayfaya Git", url: document.location.href },
-			{ label: "Discord", url: "https://animeswatch.com/discord" },
-		];
-
+	presenceData.startTimestamp = browsingTimestamp;
+	presenceData.buttons = [
+		{ label: "Sayfaya Git", url: document.location.href },
+		{ label: "Discord", url: "https://animeswatch.com/discord" },
+	];
+	if (!button) delete presenceData.buttons;
+	if (!timestamp) delete presenceData.startTimestamp;
 	presence.setActivity(presenceData);
 });
