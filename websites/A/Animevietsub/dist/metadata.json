@@ -26,12 +26,6 @@
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
-		},
-		{
-			"id": "time",
-			"title": "Show timestamps Home",
-			"icon": "fad fa-stopwatch",
-			"value": true
 		}
 	]
 }
