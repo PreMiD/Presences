@@ -3,7 +3,7 @@ const presence = new Presence({ clientId: "1016797607370162256" }),
 	staticPages: { [name: string]: string } = {
 		search: "Recherche un anime ou un scan",
 		"": "Visionne la page d'accueil",
-		planning: "Regarde le planing des sorties",
+		planning: "Regarde le planning des sorties",
 	};
 
 enum Assets {
