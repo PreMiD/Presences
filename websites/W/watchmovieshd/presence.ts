@@ -39,11 +39,9 @@ presence.on("UpdateData", async () => {
 			presenceData.state = season.textContent.split("-")[0].trim();
 			if (episode) presenceData.state += ` - ${episode.textContent.trim()}`;
 		}
-		if (image) {
-			presenceData.largeImageKey = document
-				.querySelector("meta[property='og:image']")
-				.getAttribute("content");
-		}
+		presenceData.largeImageKey = document
+			.querySelector("meta[property='og:image']")
+			.getAttribute("content");
 		if (!iFrameData?.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestamps(
 				iFrameData.currTime,
