@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 		]),
 		{ pathname } = window.location,
 		path = pathname.split("/"),
-		profileName = document.querySelector("div.XBGH5 h2");
+		[, profileName] = document.title.split("(");
 
 	if (elapsedTimeSetting) presenceData.startTimestamp = timestamp;
 
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 		pathname.startsWith("/direct/t")
 	)
 		presenceData.details = "Direct Messages";
-	else if (profileName?.textContent === path[1]) {
+	else if (profileName.split(")")[0].replace("@", "") === path[1]) {
 		const profilePicture =
 			document.querySelector<HTMLImageElement>("img._6q-tv");
 
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 				.querySelector("head > title")
 				?.textContent.split("(")[0]
 				.trim() ?? "Unknown"
-		} (@${profileName.textContent})`;
+		} (${profileName.split(")")[0]})`;
 
 		if (profilePicture)
 			presenceData.smallImageKey = await getShortURL(profilePicture.src);
