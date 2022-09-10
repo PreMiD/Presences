@@ -60,11 +60,9 @@ presence.on("UpdateData", async () => {
 			"#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
 		);
 		if (title) presenceData.details = title.textContent;
-		if (image) {
-			presenceData.largeImageKey = document
-				.querySelector("meta[property='og:image']")
-				.getAttribute("content");
-		}
+		presenceData.largeImageKey = document
+			.querySelector("meta[property='og:image']")
+			.getAttribute("content");
 		if (iFrameData && !iFrameData.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestamps(
 				iFrameData.currTime,
