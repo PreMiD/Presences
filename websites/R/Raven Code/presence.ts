@@ -20,10 +20,9 @@ presence.on("UpdateData", async () => {
 		{ pathname, search, host } = document.location,
 		searchParams = new URLSearchParams(search);
 
-	if (host === "docs.ravencode.live") {
-		presenceData.details = "docs.ravencode.live";
+	if (host === "docs.ravencode.live")
 		presenceData.state = document.title.replaceAll("-", "—");
-	} else if (host === "ravencode.live") {
+	else if (host === "ravencode.live") {
 		switch (pathname) {
 			case "/":
 				presenceData.details = "Anasayfayı görüntülüyor";
