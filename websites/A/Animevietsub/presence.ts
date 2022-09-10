@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Đang chọn phim";
 				presenceData.buttons = [
 					{
-						label: "Xem phim",
+						label: "Xem Phim",
 						url: href,
 					},
 				];
