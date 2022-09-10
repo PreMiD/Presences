@@ -70,14 +70,12 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.smallImageKey = "play";
 		} else presenceData.smallImageKey = "pause";
-		if (buttons) {
-			presenceData.buttons = [
-				{
-					label: "Watch Movie",
-					url: href,
-				},
-			];
-		}
+		presenceData.buttons = [
+			{
+				label: "Watch Movie",
+				url: href,
+			},
+		];
 	} else if (pathname === "/user/profile")
 		presenceData.details = "Checking Profile";
 	else if (pathname === "/user/favourite")
