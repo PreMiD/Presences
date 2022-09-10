@@ -49,14 +49,12 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.smallImageKey = "play";
 		} else presenceData.smallImageKey = "pause";
-		if (buttons) {
-			presenceData.buttons = [
-				{
-					label: "Watch Series",
-					url: href,
-				},
-			];
-		}
+		presenceData.buttons = [
+			{
+				label: "Watch Series",
+				url: href,
+			},
+		];
 	} else if (pathname.startsWith("/movie/")) {
 		const title = document.querySelector<HTMLHeadingElement>(
 			"#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
