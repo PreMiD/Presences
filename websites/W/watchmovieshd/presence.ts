@@ -87,8 +87,8 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "search";
 		}
 	}
-	if (!buttons) delete presenceData.buttons;
-	if (!image) delete presenceData.largeImageKey;
+if (!buttons) delete presenceData.buttons
+if (!image) delete presenceData.largeImageKey
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
