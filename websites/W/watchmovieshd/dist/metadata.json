@@ -6,7 +6,7 @@
 	},
 	"service": "watchmovieshd",
 	"description": {
-		"en": "This is a website where you can watch tv shows and movies for free"
+		"en": "Watch movies that get updated daily online in hd quality."
 	},
 	"url": "watchmovieshd.ru",
 	"version": "1.0.0",
