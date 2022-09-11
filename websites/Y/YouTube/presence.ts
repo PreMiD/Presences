@@ -8,6 +8,33 @@ function truncateAfter(str: string, pattern: string): string {
 	return str.slice(0, str.indexOf(pattern));
 }
 
+let cached: { id: string; uploader: string; channelURL: string };
+
+function cacheIt(hostname: string, shortsPath: string) {
+	if (!cached || cached.id !== shortsPath) {
+		const fetched = {
+			id: document.location.pathname.split("/shorts/")[1],
+			uploader: document
+				.querySelector("video")
+				.closest(".style-scope ytd-page-manager")
+				.querySelector(".style-scope ytd-channel-name")
+				.querySelector(
+					'[class="yt-simple-endpoint style-scope yt-formatted-string"]'
+				).textContent,
+			channelURL: `https://${hostname}${document
+				.querySelector("video")
+				.closest(".style-scope ytd-page-manager")
+				.querySelector('[class="style-scope ytd-channel-name"]')
+				.querySelector(
+					'[class="yt-simple-endpoint style-scope yt-formatted-string"]'
+				)
+				.getAttribute("href")}`,
+		};
+		cached = fetched;
+		return fetched;
+	} else return cached;
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -101,6 +128,7 @@ presence.on("UpdateData", async () => {
 		let oldYouTube: boolean = null,
 			YouTubeTV: boolean = null,
 			YouTubeEmbed: boolean = null,
+			YoutubeShorts: boolean = null,
 			title: HTMLElement,
 			pfp: string;
 
@@ -117,10 +145,26 @@ presence.on("UpdateData", async () => {
 			? (YouTubeEmbed = true)
 			: (YouTubeEmbed = false);
 
+		document.location.pathname.includes("/shorts/")
+			? (YoutubeShorts = true)
+			: (YoutubeShorts = false);
+
+		let fetcheds: { id: string; uploader: string; channelURL: string };
+		if (YoutubeShorts) {
+			fetcheds = await cacheIt(
+				document.location.hostname,
+				document.location.pathname.split("/shorts/")[1]
+			);
+		}
+
 		//* Due to differences between old and new YouTube, we should add different selectors.
 		// Get title
 		YouTubeEmbed
 			? (title = document.querySelector("div.ytp-title-text > a"))
+			: YoutubeShorts
+			? (title = document.querySelector(
+					'[class="ytp-title-link yt-uix-sessionlink"]'
+			  ))
 			: oldYouTube && document.location.pathname.includes("/watch")
 			? (title = document.querySelector(".watch-title"))
 			: YouTubeTV
@@ -134,6 +178,7 @@ presence.on("UpdateData", async () => {
 		let uploaderTV: Element | string,
 			uploaderMiniPlayer: HTMLElement,
 			uploader2: HTMLElement,
+			uploaderShorts: string,
 			edited: boolean,
 			uploaderEmbed: HTMLElement;
 		(edited = false),
@@ -142,6 +187,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector(
 					"ytd-video-owner-renderer  .ytd-channel-name a"
 				)),
+			(uploaderShorts = fetcheds?.uploader ?? cached?.uploader),
 			(uploaderEmbed = document.querySelector(
 				"div.ytp-title-expanded-heading > h2 > a"
 			)),
@@ -159,7 +205,8 @@ presence.on("UpdateData", async () => {
 		}
 
 		const uploader =
-				uploaderMiniPlayer && uploaderMiniPlayer.textContent.length > 0
+				uploaderShorts ??
+				(uploaderMiniPlayer && uploaderMiniPlayer.textContent.length > 0
 					? uploaderMiniPlayer
 					: uploader2 && uploader2.textContent.length > 0
 					? uploader2
@@ -173,7 +220,7 @@ presence.on("UpdateData", async () => {
 					: (uploaderTV = truncateAfter(
 							uploaderTV.textContent.replace(/\s+/g, ""),
 							pattern
-					  )),
+					  ))),
 			live = Boolean(document.querySelector(".ytp-live"));
 		let isPlaylistLoop = false;
 
@@ -192,13 +239,14 @@ presence.on("UpdateData", async () => {
 		let finalUploader =
 				edited === true
 					? uploaderMiniPlayer.getAttribute("premid-value")
-					: uploaderTV
-					? typeof uploaderTV === "string"
-						? uploaderTV
-						: uploaderTV.textContent
-					: typeof uploader === "string"
-					? uploader
-					: uploader.textContent,
+					: uploaderShorts ??
+					  (uploaderTV
+							? typeof uploaderTV === "string"
+								? uploaderTV
+								: uploaderTV.textContent
+							: typeof uploader === "string"
+							? uploader
+							: uploader.textContent),
 			finalTitle =
 				!title || title.textContent.replace(/\s+/g, "") === ""
 					? document.querySelector("div.ytp-title-text > a").textContent
@@ -242,16 +290,18 @@ presence.on("UpdateData", async () => {
 				unlistedBadgeElement &&
 				unlistedPathElement.getAttribute("d") ===
 					unlistedBadgeElement.getAttribute("d"),
-			videoId = document
-				.querySelector("#page-manager > ytd-watch-flexy")
-				.getAttribute("video-id"),
+			videoId =
+				document
+					.querySelector("#page-manager > ytd-watch-flexy")
+					?.getAttribute("video-id") ??
+				document.location.href.split("/shorts/")[1],
 			presenceData: PresenceData = {
 				details: vidDetail
-					.replace("%title%", finalTitle)
-					.replace("%uploader%", finalUploader),
+					.replace("%title%", finalTitle.trim())
+					.replace("%uploader%", finalUploader.trim()),
 				state: vidState
-					.replace("%title%", finalTitle)
-					.replace("%uploader%", finalUploader),
+					.replace("%title%", finalTitle.trim())
+					.replace("%uploader%", finalUploader.trim()),
 				largeImageKey:
 					unlistedVideo || logo === 0 || pfp === ""
 						? "yt_lg"
@@ -276,15 +326,6 @@ presence.on("UpdateData", async () => {
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;
-
-		presence.setTrayTitle(
-			video.paused
-				? ""
-				: finalTitle ??
-						document.querySelector(
-							".title.style-scope.ytd-video-primary-info-renderer"
-						).textContent
-		);
 
 		//* Remove timestamps if paused or live
 		if (video.paused || live) {
@@ -319,16 +360,26 @@ presence.on("UpdateData", async () => {
 				},
 				{
 					label: strings.viewChannelButton,
-					url: (
-						document.querySelector(
-							"#top-row > ytd-video-owner-renderer > a"
-						) as HTMLLinkElement
-					).href,
+					url:
+						fetcheds?.channelURL ??
+						cached?.channelURL ??
+						(
+							document.querySelector(
+								"#top-row > ytd-video-owner-renderer > a"
+							) as HTMLLinkElement
+						)?.href,
 				},
 			];
 		}
 		if (!time) {
 			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
+
+		if (YoutubeShorts) {
+			presenceData.largeImageKey = "https://i.imgur.com/c0W8Na8.png";
+			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 			delete presenceData.endTimestamp;
 		}
 
@@ -419,6 +470,18 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.pathname.includes("/community")) {
 				presenceData.details = strings.viewCPost;
 				presenceData.state = `${strings.ofChannel} ${user}`;
+				presenceData.largeImageKey =
+					logo === 1
+						? document
+								.querySelector('[id="post"]')
+								?.querySelectorAll("img")[1]
+								?.getAttribute("src")
+						: logo === 2
+						? document
+								.querySelector('[id="post"]')
+								?.querySelector("img")
+								?.getAttribute("src")
+						: "yt_lg";
 				presenceData.startTimestamp = browsingStamp;
 			} else if (document.location.pathname.includes("/about")) {
 				presenceData.details = strings.readChannel;
