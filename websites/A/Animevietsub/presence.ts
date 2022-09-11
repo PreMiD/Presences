@@ -16,10 +16,6 @@ async function getStrings() {
 	);
 }
 
-enum Assets {
-	Logo = "https://i.imgur.com/trQFagl.jpeg",
-}
-
 presence.on("UpdateData", async () => {
 	const playback =
 			!!document.querySelector("#title") ||
@@ -32,7 +28,7 @@ presence.on("UpdateData", async () => {
 		]),
 		splitPath = pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: Assets.Logo,
+			largeImageKey: "https://i.imgur.com/trQFagl.jpeg",
 			startTimestamp: browsingTimestamp,
 		};
 
