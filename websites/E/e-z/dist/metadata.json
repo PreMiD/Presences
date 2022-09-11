@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.7",
+    "author": {
+        "name": "tsoxas",
+        "id": "787787652644601857"
+    },
+    "service": "E-Z",
+    "description": {
+        "en": "E-Z is the home of e-z.host. e-z.host is a ShareX image uploader with many unique features and tons of domains."
+    },
+    "url": [
+        "e-z.host",
+        "e-z.bio"
+    ],
+    "version": "1.0.0",
+    "logo": "https://cdn.e-z.host/e-zimagehosting/ez256.png",
+    "thumbnail": "https://cdn.e-z.host/e-zimagehosting/e-z_host_banner.png",
+    "color": "#558dd2",
+    "category": "other",
+    "tags": [
+        "image-host",
+        "bio",
+        "sharex"
+    ]
+}
