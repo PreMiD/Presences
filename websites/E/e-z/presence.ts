@@ -9,8 +9,8 @@ presence.on("UpdateData", async () => {
 		username = document.querySelector("p[id=premid-username]")?.textContent,
 		uid = document.querySelector("p[id=premid-uid]")?.textContent;
 
-	switch (true) {
-		case document.location.hostname === "e-z.host":
+	switch (document.location.hostname) {
+		case "e-z.host":
 			presenceData.buttons = [
 				{
 					label: "e-z.host",
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 
-		case document.location.hostname === "e-z.bio":
+		case "e-z.bio":
 			if (document.location.pathname === "/") {
 				presenceData.details = "e-z.bio front page";
 				presenceData.buttons = [
