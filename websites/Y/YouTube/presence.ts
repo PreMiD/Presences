@@ -14,13 +14,19 @@ function cacheIt(hostname: string, shortsPath: string) {
 	if (!cached || cached.id !== shortsPath) {
 		const fetched = {
 			id: document.location.pathname.split("/shorts/")[1],
-			uploader: document
-				.querySelector("video")
-				.closest(".style-scope ytd-page-manager")
-				.querySelector(".style-scope ytd-channel-name")
-				.querySelector(
-					'[class="yt-simple-endpoint style-scope yt-formatted-string"]'
-				).textContent,
+			uploader:
+				document
+					.querySelector("video")
+					.closest(".style-scope ytd-page-manager")
+					.querySelector(".style-scope ytd-channel-name")
+					.querySelector(
+						'[class="yt-simple-endpoint style-scope yt-formatted-string"]'
+					)?.textContent ??
+				document
+					.querySelectorAll('div[class="style-scope ytd-channel-name"]')[2]
+					.querySelector(
+						'[class="yt-simple-endpoint style-scope yt-formatted-string"]'
+					)?.textContent,
 			channelURL: `https://${hostname}${document
 				.querySelector("video")
 				.closest(".style-scope ytd-page-manager")
