@@ -1,4 +1,4 @@
-const videoFrame = new iFrame();
+const iframe = new iFrame();
 
 videoFrame.on("UpdateData", async () => {
 	const video: HTMLVideoElement = document.querySelector("video");
