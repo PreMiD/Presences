@@ -26,10 +26,9 @@ presence.on("UpdateData", async () => {
 			(document.querySelectorAll("video").length &&
 				document.querySelectorAll("video")[0].className !== "previewVideo"),
 		{ pathname, href } = document.location,
-		[newLang, buttons, covers] = await Promise.all([
+		[newLang, buttons] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<boolean>("cover"),
 		]),
 		splitPath = pathname.split("/"),
 		presenceData: PresenceData = {
@@ -98,10 +97,6 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-				presenceData.largeImageKey =
-					document.querySelector<HTMLImageElement>(
-						'[class="attachment-img-mov-md size-img-mov-md wp-post-image"]'
-					)?.src ?? Assets.Logo;
 				break;
 			}
 			case "quen-mat-khau.html": {
@@ -156,10 +151,6 @@ presence.on("UpdateData", async () => {
 					: "Không tìm thấy còn cặc - Tập ?"
 			).split(" - ");
 			presenceData.smallImageKey = video.paused ? "pause" : "play";
-			presenceData.largeImageKey =
-				document.querySelector<HTMLImageElement>(
-					'[class="attachment-img-mov-md size-img-mov-md wp-post-image"]'
-				)?.src ?? Assets.Logo;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 			presenceData.endTimestamp = presence.getTimestamps(
 				Math.floor(video.currentTime),
@@ -180,7 +171,6 @@ presence.on("UpdateData", async () => {
 			if (video.paused) delete presenceData.endTimestamp;
 		}
 	}
-	if (!covers) presenceData.largeImageKey = Assets.Logo;
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

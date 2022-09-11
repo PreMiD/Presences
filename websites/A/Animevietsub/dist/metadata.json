@@ -22,7 +22,10 @@
 	"thumbnail": "https://i.imgur.com/cSWQACH.png",
 	"color": "#8b0000",
 	"category": "anime",
-	"tags": ["animevietsub", "anime"],
+	"tags": [
+		"animevietsub",
+		"anime"
+	],
 	"settings": [
 		{
 			"id": "lang",
@@ -32,12 +35,6 @@
 			"id": "buttons",
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
-			"value": true
-		},
-		{
-			"id": "cover",
-			"title": "Show Cover",
-			"icon": "fad fa-images",
 			"value": true
 		}
 	]
