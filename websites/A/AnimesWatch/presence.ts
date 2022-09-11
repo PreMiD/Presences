@@ -24,29 +24,24 @@ presence.on("UpdateData", async () => {
 			details: "Ana Sayfada Göz Gezdiriyor",
 		},
 		{ pathname } = document.location,
-		[button, timestamp] = await Promise.all([
-			presence.getSetting<boolean>("button"),
-			presence.getSetting<boolean>("timestamp"),
-		]),
-		title = document.title.slice(0, document.title.length - 14);
+		[timestamp] = await Promise.all([presence.getSetting<boolean>("button")]),
+		title = document.title.slice(0, document.title.length - 35);
 
+	presenceData.state = title;
 	switch (pathname.split("/")[1]) {
 		case "":
 			presenceData.details = "Ana Sayfada Göz Gezdiriyor";
 			break;
 		case "anime":
 			presenceData.details = "Bir animeye bakıyor";
-			presenceData.state = title;
 			break;
 		case "watch":
 			presenceData.details = "Bir anime izleme sayfasında";
-			presenceData.state = title;
-
 			if (video) {
 				presenceData.smallImageKey = video.paused ? "pause" : "play";
 				presenceData.smallImageText = video.paused
-					? (await strings).paused
-					: (await strings).playing;
+					? strings.paused
+					: strings.playing;
 				presenceData.details = "Anime izliyor";
 				if (!video.paused && video.duration) {
 					[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -59,22 +54,15 @@ presence.on("UpdateData", async () => {
 			break;
 		case "team":
 			presenceData.details = "Takım sayfasında";
-			presenceData.state = title;
 			break;
 		case "browse":
 			presenceData.details = "Bir anime arıyor";
-			presenceData.state = title;
 			break;
 		case "users":
 			presenceData.details = "Bir kullanıcıya bakıyor";
-			presenceData.state = title;
+			break;
 	}
 	presenceData.startTimestamp = browsingTimestamp;
-	presenceData.buttons = [
-		{ label: "Website", url: "https://animeswatch.com" },
-		{ label: "Discord", url: "https://animeswatch.com/discord" },
-	];
-	if (!button) delete presenceData.buttons;
 	if (!timestamp) delete presenceData.startTimestamp;
 	presence.setActivity(presenceData);
 });
