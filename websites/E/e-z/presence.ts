@@ -7,23 +7,30 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://cdn.e-z.host/e-zimagehosting/ez256.png",
 		},
 		username = document.querySelector("p[id=premid-username]")?.textContent,
-		uid = document.querySelector("p[id=premid-uid]")?.textContent;
+		uid = document.querySelector("p[id=premid-uid]")?.textContent,
+		{ pathname, href, hostname } = document.location;
 
-	switch (document.location.hostname) {
+	switch (hostname) {
 		case "e-z.host":
-			presenceData.buttons = [
-				{
-					label: "e-z.host",
-					url: "https://e-z.host",
-				},
-			];
-			if (typeof username !== "undefined" && typeof uid !== "undefined")
+			if (typeof username !== "undefined" && typeof uid !== "undefined") {
 				presenceData.details = `Username: ${username} | ${uid}`;
-			else presenceData.details = "Not logged in";
+				presenceData.buttons = [
+					{
+						label: "User Page",
+						url: `https://e-z.host/u/${username}`,
+					},
+				];
+			} else presenceData.details = "Not logged in";
 
-			switch (document.location.pathname) {
+			switch (pathname) {
 				case "/":
 					presenceData.state = "Viewing the home page";
+					presenceData.buttons = [
+						{
+							label: "Discord",
+							url: "https://discord.gg/ez",
+						},
+					];
 					break;
 				case "/dash":
 					presenceData.state = "Viewing the dashboard";
@@ -74,7 +81,7 @@ presence.on("UpdateData", async () => {
 					break;
 			}
 			if (!presenceData.state) {
-				if (document.location.pathname.includes("/u/")) {
+				if (pathname.includes("/u/")) {
 					presenceData.state = `Viewing ${
 						document.querySelector("#premid-pageusername")?.textContent
 					}'s user page`;
@@ -83,27 +90,23 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "e-z.bio":
-			if (document.location.pathname === "/") {
+			if (pathname === "/") {
 				presenceData.details = "e-z.bio front page";
 				presenceData.buttons = [
 					{
-						label: "e-z.bio",
-						url: "https://e-z.bio",
+						label: "Discord",
+						url: "https://discord.gg/ez",
 					},
 				];
 			} else {
-				presenceData.details = `Viewing ${document.location.pathname.replace(
+				presenceData.details = `Viewing ${pathname.replace(
 					"/",
 					""
 				)}'s bio page`;
 				presenceData.buttons = [
 					{
-						label: "e-z.bio",
-						url: "https://e-z.bio",
-					},
-					{
 						label: "View Page",
-						url: `https://e-z.bio${document.location.pathname}`,
+						url: href,
 					},
 				];
 			}
