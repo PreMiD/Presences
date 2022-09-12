@@ -64,10 +64,10 @@ presence.on("UpdateData", async () => {
 			.querySelector("meta[property='og:image']")
 			.getAttribute("content");
 		if (iFrameData && !iFrameData.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
+			presenceData.endTimestamp = presence.getTimestamps(
 				iFrameData.currTime,
 				iFrameData.duration
-			);
+			)[1];
 			presenceData.smallImageKey = "play";
 		} else presenceData.smallImageKey = "pause";
 		presenceData.buttons = [
