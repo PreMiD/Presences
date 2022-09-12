@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case "watch":
 			presenceData.details = "Bir anime izleme sayfasında";
-			if (video) {
+			if (video?.duration) {
 				presenceData.smallImageKey = video.paused ? "pause" : "play";
 				presenceData.smallImageText = video.paused
 					? strings.paused
