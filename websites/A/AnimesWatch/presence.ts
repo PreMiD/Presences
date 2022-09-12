@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			details: "Ana Sayfada Göz Gezdiriyor",
 		},
 		{ pathname } = document.location,
-		[timestamp] = await Promise.all([presence.getSetting<boolean>("button")]),
+		timestamp = await presence.getSetting<boolean>("button"),
 		title = document.title.slice(0, document.title.length - 35);
 
 	presenceData.state =  document.title.slice(0, document.title.length - 35);
