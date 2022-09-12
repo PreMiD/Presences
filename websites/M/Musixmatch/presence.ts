@@ -74,7 +74,7 @@ presence.on("UpdateData", () => {
 				"#site > #artist-page > #content h1"
 			).textContent;
 		}
-	} else if (hostname === "curators.musixmatch.com") {
+	} else if (hostname === "curators.musixmatch.com" || hostname === "curators-beta.musixmatch.com") {
 		if (pathname === "/" || pathname === "/missions")
 			presenceData.details = "Browsing curator's missions";
 		else if (pathname.includes("/tasks/")) {
