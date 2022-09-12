@@ -20,7 +20,7 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "animeswatch",
+			largeImageKey: "https://i.imgur.com/T1Vk10O.png",
 			details: "Ana Sayfada Göz Gezdiriyor",
 		},
 		{ pathname } = document.location,
