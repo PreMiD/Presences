@@ -22,6 +22,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/T1Vk10O.png",
 			details: "Ana Sayfada Göz Gezdiriyor",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
 		timestamp = await presence.getSetting<boolean>("button");
@@ -61,7 +62,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Bir kullanıcıya bakıyor";
 			break;
 	}
-	presenceData.startTimestamp = browsingTimestamp;
 	if (!timestamp) delete presenceData.startTimestamp;
 	presence.setActivity(presenceData);
 });
