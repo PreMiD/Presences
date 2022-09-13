@@ -56,14 +56,12 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Viewing profile";
 			}
 			presenceData.state = `from ${pathnameArray[2]}`;
-			if (showButton) {
-				presenceData.buttons = [
-					{
-						label: "View user's page",
-						url: document.location.href.replace(pathnameArray[3], ""),
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View user's page",
+					url: document.location.href.replace(pathnameArray[3], ""),
+				},
+			];
 			break;
 		}
 		case "search":
@@ -82,14 +80,12 @@ presence.on("UpdateData", async () => {
 					.querySelector(".cover")
 					.getAttribute("src");
 			}
-			if (showButton) {
-				presenceData.buttons = [
-					{
-						label: page === "anime" ? "View anime" : "View manga",
-						url: document.location.href,
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: page === "anime" ? "View anime" : "View manga",
+					url: document.location.href,
+				},
+			];
 			break;
 		case "character":
 		case "staff":
@@ -100,14 +96,12 @@ presence.on("UpdateData", async () => {
 					.querySelector(".image")
 					.getAttribute("src");
 			}
-			if (showButton) {
-				presenceData.buttons = [
-					{
-						label: page === "character" ? "View character" : "View staff",
-						url: document.location.href,
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: page === "character" ? "View character" : "View staff",
+					url: document.location.href,
+				},
+			];
 			break;
 		case "forum":
 			if (pathnameArray.length > 3) {
@@ -155,6 +149,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 			break;
 	}
+
+	if (!showButton) delete presenceData.buttons;
 
 	presence.setActivity(presenceData, true);
 });
