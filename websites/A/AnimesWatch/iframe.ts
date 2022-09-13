@@ -6,8 +6,8 @@ iframe.on("UpdateData", async () => {
 	if (video) {
 		iframe.send({
 			paused: video.paused,
-			duration: video.duration,
-			currentTime: video.currentTime,
+			duration: isNaN(video.duration) ? 0 : video.duration,
+			currentTime: isNaN(video.currentTime) ? 0 : video.currentTime,
 		});
 	}
 });
