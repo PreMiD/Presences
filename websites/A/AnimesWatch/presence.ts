@@ -24,9 +24,9 @@ presence.on("UpdateData", async () => {
 			details: "Ana Sayfada Göz Gezdiriyor",
 		},
 		{ pathname } = document.location,
-		timestamp = await presence.getSetting<boolean>("button"),
+		timestamp = await presence.getSetting<boolean>("button");
 
-	presenceData.state =  document.title.slice(0, document.title.length - 35);
+	presenceData.state = document.title.slice(0, document.title.length - 35);
 	switch (pathname.split("/")[1]) {
 		case "":
 			presenceData.details = "Ana Sayfada Göz Gezdiriyor";
