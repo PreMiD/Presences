@@ -19,18 +19,17 @@ presence.on("UpdateData", async () => {
 		},
 		pathnameArray = document.location.pathname.split("/"),
 		page = pathnameArray[1],
-		showCover = await presence.getSetting<boolean>("cover");
+		[showCover, showButton] = await Promise.all([
+			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("buttons"),
+		]);
 	strings = await getStrings();
 
 	switch (page) {
-		case "":
-			presenceData.details = strings.browsing;
-			presenceData.state = "Home";
-			break;
 		case "user": {
 			if (showCover) {
 				presenceData.largeImageKey = document
-					.querySelector(".avatar")
+					.querySelectorAll(".avatar")[1]
 					.getAttribute("src");
 				presenceData.smallImageKey = "anilist_lg";
 			}
@@ -57,12 +56,14 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Viewing profile";
 			}
 			presenceData.state = `from ${pathnameArray[2]}`;
-			presenceData.buttons = [
-				{
-					label: "View user's page",
-					url: document.location.href.replace(pathnameArray[3], ""),
-				},
-			];
+			if (showButton) {
+				presenceData.buttons = [
+					{
+						label: "View user's page",
+						url: document.location.href.replace(pathnameArray[3], ""),
+					},
+				];
+			}
 			break;
 		}
 		case "search":
@@ -81,12 +82,14 @@ presence.on("UpdateData", async () => {
 					.querySelector(".cover")
 					.getAttribute("src");
 			}
-			presenceData.buttons = [
-				{
-					label: page === "anime" ? "View anime" : "View manga",
-					url: document.location.href,
-				},
-			];
+			if (showButton) {
+				presenceData.buttons = [
+					{
+						label: page === "anime" ? "View anime" : "View manga",
+						url: document.location.href,
+					},
+				];
+			}
 			break;
 		case "character":
 		case "staff":
@@ -97,12 +100,14 @@ presence.on("UpdateData", async () => {
 					.querySelector(".image")
 					.getAttribute("src");
 			}
-			presenceData.buttons = [
-				{
-					label: page === "character" ? "View character" : "View staff",
-					url: document.location.href,
-				},
-			];
+			if (showButton) {
+				presenceData.buttons = [
+					{
+						label: page === "character" ? "View character" : "View staff",
+						url: document.location.href,
+					},
+				];
+			}
 			break;
 		case "forum":
 			if (pathnameArray.length > 3) {
@@ -144,6 +149,10 @@ presence.on("UpdateData", async () => {
 			break;
 		case "settings":
 			presenceData.details = "Changing settings";
+			break;
+		default:
+			presenceData.details = strings.browsing;
+			presenceData.state = "Home";
 			break;
 	}
 
