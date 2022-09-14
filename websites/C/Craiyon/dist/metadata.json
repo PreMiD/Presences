@@ -14,5 +14,10 @@
 	"thumbnail": "https://i.imgur.com/cDreT5W.png",
 	"color": "#ea580c",
 	"category": "other",
-	"tags": ["ai", "dalle", "image", "generation"]
+	"tags": [
+		"ai",
+		"dalle",
+		"image",
+		"generation"
+	]
 }
