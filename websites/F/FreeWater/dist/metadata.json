@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+	  "name": "Jamesiboi",
+	  "id": "785575171599499295"
+	},
+	"service": "FreeWater",
+	"description": {
+	  "en": "FreeWater is an advertising platform that utilizes premium spring water as a new type of advertising medium.",
+	  "sv": "FreeWater är en markandsförings plattform som använder premium källvatten som en ny marknadsföringsmedium."
+	},
+	"url": "www.freewater.io",
+	"version": "0.0.1",
+	"logo": "https://www.freewater.io/wp-content/uploads/2022/05/Logo_Freewater_Vert_Color-1.png",
+	"thumbnail": "https://www.freewater.io/wp-content/uploads/2022/05/Logo_Freewater_Vert_Color-1.png",
+	"color": "#6ac7ed",
+	"category": "other",
+	"tags": [
+	  "freewater",
+	  "water",
+	  "free",
+	  "website"
+	]
+  }
