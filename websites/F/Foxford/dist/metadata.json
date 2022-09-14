@@ -1,23 +1,23 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.7",
-    "author": {
-      "name": "cramatsu",
-      "id": "226622016986415104"
-    },
-    "service": "Foxford",
-    "description": {
-      "en": "Foxford is an online school for students in grades 1-11, teachers and parents.",
-      "ru": "Фоксфорд — онлайн-школа для учеников 1-11 классов, учителей и родителей."
-    },
-    "url": "foxford.ru",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/41WDw6H.jpeg",
-    "thumbnail": "https://i.imgur.com/41WDw6H.jpeg",
-    "color": "#ff9300",
-    "category": "other",
-    "tags": [
-      "school",
-      "online-shool",
-      "courses"
-    ]
-  }
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "cramatsu",
+		"id": "226622016986415104"
+	},
+	"service": "Foxford",
+	"description": {
+		"en": "Foxford is an online school for students in grades 1-11, teachers and parents.",
+		"ru": "Фоксфорд — онлайн-школа для учеников 1-11 классов, учителей и родителей."
+	},
+	"url": "foxford.ru",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/41WDw6H.jpeg",
+	"thumbnail": "https://i.imgur.com/41WDw6H.jpeg",
+	"color": "#ff9300",
+	"category": "other",
+	"tags": [
+		"school",
+		"online-shool",
+		"courses"
+	]
+}
