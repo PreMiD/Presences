@@ -12,10 +12,9 @@ presence.on("UpdateData", async () => {
 	};
 
 	switch (true) {
-		case pathHas("groups"): {
+		case pathHas("groups"):
 			presenceData.details = "Просматривает урок";
 			break;
-		}
 		case pathHas("conspects"):
 			presenceData.details = "Просматривает конспект";
 			break;
@@ -27,7 +26,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case pathHas("courses"):
 			presenceData.state = document.querySelector(
-				".Header_title__G-XGe"
+				".Header_title__G-XGe",
 			).textContent;
 			presenceData.details = "Просматривает курс";
 			break;
@@ -64,12 +63,14 @@ presence.on("UpdateData", async () => {
 		case pathHas("dashboard"):
 			presenceData.details = "Просматривает курсы";
 			break;
-
 		default:
 			presenceData.details = "Просматривает разделы сайта";
 			break;
 	}
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+	} else {
+		presence.setActivity();
+	}
 });
