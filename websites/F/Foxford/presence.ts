@@ -68,8 +68,9 @@ presence.on("UpdateData", async () => {
 			break;
 	}
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
-
-
+	if (presenceData.details) 
+		presence.setActivity(presenceData);
+	 else 
+		presence.setActivity();
+	
 });
