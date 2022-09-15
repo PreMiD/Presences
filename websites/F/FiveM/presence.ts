@@ -76,13 +76,13 @@ presence.on("UpdateData", async () => {
 				case "categories":
 				case "c": {
 					// categories
-					presenceData.details = "Viewing category";
+					presenceData.details = "Viewing forum category";
 					presenceData.state = document.querySelector(
 						'[class="category-name"]'
 					)?.textContent;
 					presenceData.buttons = [
 						{
-							label: "View Category",
+							label: "View Forum Category",
 							url: href,
 						},
 					];
@@ -175,6 +175,9 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Exploring ${
 					document.querySelector('[class="nav-item subnav-item active"]')
 						?.textContent ?? "all servers"
+				}`;
+				presenceData.state = `Sorted by ${
+					document.querySelector('[class="sort-by active"]')?.textContent
 				}`;
 				presenceData.buttons = [
 					{
