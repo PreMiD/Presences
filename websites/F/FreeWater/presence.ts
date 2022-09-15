@@ -15,7 +15,6 @@ presence.on("UpdateData", () => {
     switch (document.location.pathname) {
         case "/": {
             presenceData.details = "Viewing Home Page";
-            console.log("home page")
             break;
         }
         case "/advertise/": {
