@@ -42,7 +42,6 @@ presence.on("UpdateData", () => {
         }
         case "/contact-us/": {
             presenceData.details = "Viewing Contact Page";
-            console.log("contact page")
             break;
         }
         case "/newsletter-signup/": {
