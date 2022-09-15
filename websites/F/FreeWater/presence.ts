@@ -19,7 +19,6 @@ presence.on("UpdateData", () => {
         }
         case "/advertise/": {
             presenceData.details = "Viewing Advertisement Page";
-            console.log("advertisement page")
             break;
         }
         case "/distribute/": {
