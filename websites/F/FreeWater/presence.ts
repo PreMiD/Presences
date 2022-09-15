@@ -38,7 +38,6 @@ presence.on("UpdateData", () => {
         }
         case "/careers/": {
             presenceData.details = "Viewing Careers Page";
-            console.log("careers page")
             break;
         }
         case "/contact-us/": {
