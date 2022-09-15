@@ -4,8 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Crfg6sn.png",
-	},
+			largeImageKey: "https://i.imgur.com/Crfg6sn.png",
+		},
 		username = document.querySelector("p[id=premid-username]")?.textContent,
 		uid = document.querySelector("p[id=premid-uid]")?.textContent,
 		{ pathname, href, hostname } = document.location;
@@ -76,8 +76,9 @@ presence.on("UpdateData", async () => {
 			}
 			if (!presenceData.state) {
 				if (pathname.includes("/u/")) {
-					presenceData.state = `Viewing ${document.querySelector("#premid-pageusername")?.textContent
-						}'s user page`;
+					presenceData.state = `Viewing ${
+						document.querySelector("#premid-pageusername")?.textContent
+					}'s user page`;
 				} else presenceData.state = "Page not found";
 			}
 			break;
