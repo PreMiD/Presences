@@ -50,7 +50,7 @@ function applySubPathState(
 			presenceData.details = `Deleting a${n} ${type}`;
 			presenceData.state =
 				document.querySelector<HTMLHeadingElement>(
-					"h4"
+					".card-body h4"
 				).childNodes[7].textContent;
 			break;
 		}
@@ -77,7 +77,11 @@ presence.on("UpdateData", () => {
 		case "publisher":
 		case "series":
 		case "work": {
-			applySubPathState(presenceData, pathSplit[2], pathSplit[0]);
+			if (pathSplit[1] === "create") {
+				applySubPathState(presenceData, pathSplit[1], pathSplit[0]);
+			} else {
+				applySubPathState(presenceData, pathSplit[2], pathSplit[0]);
+			}
 			break;
 		}
 		case "editor": {
