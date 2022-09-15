@@ -77,11 +77,9 @@ presence.on("UpdateData", () => {
 		case "publisher":
 		case "series":
 		case "work": {
-			if (pathSplit[1] === "create") {
+			if (pathSplit[1] === "create")
 				applySubPathState(presenceData, pathSplit[1], pathSplit[0]);
-			} else {
-				applySubPathState(presenceData, pathSplit[2], pathSplit[0]);
-			}
+			else applySubPathState(presenceData, pathSplit[2], pathSplit[0]);
 			break;
 		}
 		case "editor": {
