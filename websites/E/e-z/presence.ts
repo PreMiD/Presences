@@ -4,15 +4,15 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Crfg6sn.png",
-		},
+		largeImageKey: "https://i.imgur.com/Crfg6sn.png",
+	},
 		username = document.querySelector("p[id=premid-username]")?.textContent,
 		uid = document.querySelector("p[id=premid-uid]")?.textContent,
 		{ pathname, href, hostname } = document.location;
 
 	switch (hostname) {
 		case "e-z.host":
-			if (typeof username !== "undefined" && typeof uid !== "undefined") {
+			if (username && uid) {
 				presenceData.details = `Username: ${username} | ${uid}`;
 				presenceData.buttons = [
 					{
@@ -25,12 +25,6 @@ presence.on("UpdateData", async () => {
 			switch (pathname) {
 				case "/":
 					presenceData.state = "Viewing the home page";
-					presenceData.buttons = [
-						{
-							label: "Discord",
-							url: "https://discord.gg/ez",
-						},
-					];
 					break;
 				case "/dash":
 					presenceData.state = "Viewing the dashboard";
@@ -82,23 +76,15 @@ presence.on("UpdateData", async () => {
 			}
 			if (!presenceData.state) {
 				if (pathname.includes("/u/")) {
-					presenceData.state = `Viewing ${
-						document.querySelector("#premid-pageusername")?.textContent
-					}'s user page`;
+					presenceData.state = `Viewing ${document.querySelector("#premid-pageusername")?.textContent
+						}'s user page`;
 				} else presenceData.state = "Page not found";
 			}
 			break;
 
 		case "e-z.bio":
-			if (pathname === "/") {
-				presenceData.details = "e-z.bio front page";
-				presenceData.buttons = [
-					{
-						label: "Discord",
-						url: "https://discord.gg/ez",
-					},
-				];
-			} else {
+			if (pathname === "/") presenceData.details = "e-z.bio front page";
+			else {
 				presenceData.details = `Viewing ${pathname.replace(
 					"/",
 					""
