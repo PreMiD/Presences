@@ -50,7 +50,6 @@ presence.on("UpdateData", () => {
         }
         case "/shop/": {
             presenceData.details = "Viewing Shop Page";
-            console.log("shop page")
             break;
         }
     }
