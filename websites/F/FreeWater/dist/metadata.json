@@ -6,8 +6,7 @@
 	},
 	"service": "FreeWater",
 	"description": {
-	  "en": "FreeWater is an advertising platform that utilizes premium spring water as a new type of advertising medium.",
-	  "sv": "FreeWater är en markandsförings plattform som använder premium källvatten som en ny marknadsföringsmedium."
+		"en": "FreeWater is an advertising platform that utilizes premium spring water as a new type of advertising medium."
 	},
 	"url": "www.freewater.io",
 	"version": "1.0.0",
