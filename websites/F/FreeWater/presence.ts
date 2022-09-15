@@ -46,7 +46,6 @@ presence.on("UpdateData", () => {
         }
         case "/newsletter-signup/": {
             presenceData.details = "Signing Up for Newsletter";
-            console.log("newsletter page")
             break;
         }
         case "/shop/": {
