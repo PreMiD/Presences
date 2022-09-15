@@ -6,7 +6,7 @@
 	},
 	"service": "watchmovieshd",
 	"description": {
-		"en": "Watch movies that get updated daily online in hd quality."
+		"en": "WatchMoviesHD is a free streaming service platform that allows its users to watch movies online for free."
 	},
 	"url": "watchmovieshd.ru",
 	"version": "1.0.0",
