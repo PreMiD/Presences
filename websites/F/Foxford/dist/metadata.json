@@ -15,9 +15,5 @@
 	"thumbnail": "https://i.imgur.com/41WDw6H.jpeg",
 	"color": "#ff9300",
 	"category": "other",
-	"tags": [
-		"school",
-		"online-shool",
-		"courses"
-	]
+	"tags": ["school", "online-shool", "courses"]
 }
