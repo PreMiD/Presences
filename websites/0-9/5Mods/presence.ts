@@ -24,8 +24,7 @@ presence.on("UpdateData", async () => {
 
 	if (privacy) {
 		presenceData.details = "Browsing";
-		presence.setActivity(presenceData);
-		return;
+		return presence.setActivity(presenceData);
 	}
 	switch (hostname.replace("www.", "")) {
 		case "forums.gta5-mods.com": {
