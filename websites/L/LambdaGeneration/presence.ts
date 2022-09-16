@@ -32,8 +32,7 @@ presence.on("UpdateData", async () => {
 		case 1: {
 			// if on the most basic of links, return just either what's in the sub-community dictionary or just that part of the link
 			Pagee[0] += ":";
-			if (SubComms[Splitted[0]])
-				Pagee[1] += ` in ${SubComms[Splitted[0]]}`;
+			if (SubComms[Splitted[0]]) Pagee[1] += ` in ${SubComms[Splitted[0]]}`;
 			else if (Splitted[0] !== "") Pagee[1] = Splitted[0];
 
 			break;
@@ -77,11 +76,7 @@ presence.on("UpdateData", async () => {
 			} else if (SubComms[Splitted[0]]) {
 				Pagee[0] += ":";
 				// below is where statuses with subcomms are made
-				if (
-					!Splitted[2] ||
-					Splitted[2] === "" ||
-					Splitted[2] === Splitted[1].substring(0, 3)
-				) {
+				if (!Splitted[2] || Splitted[2] === Splitted[1].substring(0, 3)) {
 					// if there isn't a third part to the path, then just work with the two (or if it's new news, just act like the "/new" isn't there)
 					Pagee[1] = `${Splitted[1]} in ${SubComms[Splitted[0]]}`;
 				} else {
