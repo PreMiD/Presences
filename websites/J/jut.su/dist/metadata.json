@@ -4,12 +4,6 @@
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
 	},
-	"contributors": [
-		{
-			"id": "226622016986415104",
-			"name": "cramatsu"
-		}
-	],
 	"service": "jut.su",
 	"description": {
 		"en": "Jut.su is Russian anime website",
@@ -22,5 +16,8 @@
 	"thumbnail": "https://i.imgur.com/NlBgvR0.png",
 	"color": "#c9e58b",
 	"category": "anime",
-	"tags": ["jutsu", "anime"]
+	"tags": [
+		"jutsu",
+		"anime"
+	]
 }
