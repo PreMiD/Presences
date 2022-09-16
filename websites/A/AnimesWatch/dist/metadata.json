@@ -23,10 +23,6 @@
 	"iframe": true,
 	"settings": [
 		{
-			"multiLanguage": true,
-			"id": "lang"
-		},
-		{
 			"id": "timestamp",
 			"title": "Süre",
 			"icon": "fas fa-timer",

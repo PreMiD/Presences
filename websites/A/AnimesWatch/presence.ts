@@ -7,7 +7,7 @@ const presence = new Presence({
 				playing: "general.playing",
 				paused: "general.paused",
 			},
-			await presence.getSetting<string>("lang").catch(() => "tr")
+			"tr"
 		),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
