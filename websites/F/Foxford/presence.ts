@@ -6,32 +6,37 @@ function pathHas(pathName: string): boolean {
 	return document.location.pathname.toLowerCase().includes(pathName);
 }
 
+const routes = {
+	conspects: "Просматривает конспект",
+	account: "Настраивает профиль",
+	externship: "Просматривает программу обучения",
+	calendar: "Смотрит календарь занятий",
+	"daily-plan": "Смотрит план занятий",
+	objectives: "Просматривает задания",
+	progress: "Просматривает успеваемость",
+	dashboard: "Просматривает курсы",
+} as const;
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "f1024",
 	};
 
 	switch (true) {
+		case location.pathname.split("/").pop() in routes:
+			presenceData.details =
+				routes[
+					location.pathname.split("/").pop() as unknown as keyof typeof routes
+				];
+			break;
 		case pathHas("groups"):
 			presenceData.details = "Просматривает урок";
-			break;
-		case pathHas("conspects"):
-			presenceData.details = "Просматривает конспект";
-			break;
-		case pathHas("account"):
-			presenceData.details = "Настраивает профиль";
-			break;
-		case pathHas("externship"):
-			presenceData.details = "Просматривает программу обучения";
 			break;
 		case pathHas("courses"):
 			presenceData.state = document.querySelector(
 				".Header_title__G-XGe"
 			).textContent;
 			presenceData.details = "Просматривает курс";
-			break;
-		case pathHas("calendar"):
-			presenceData.details = "Смотрит календарь занятий";
 			break;
 		case pathHas("users"):
 			presenceData.details = "Просматривает профиль";
@@ -50,18 +55,6 @@ presence.on("UpdateData", async () => {
 					url: document.location.href,
 				},
 			];
-			break;
-		case pathHas("daily-plan"):
-			presenceData.details = "Смотрит план занятий";
-			break;
-		case pathHas("objectives"):
-			presenceData.details = "Просматривает задания";
-			break;
-		case pathHas("progress"):
-			presenceData.details = "Просматривает успеваемость";
-			break;
-		case pathHas("dashboard"):
-			presenceData.details = "Просматривает курсы";
 			break;
 		default:
 			presenceData.details = "Просматривает разделы сайта";
