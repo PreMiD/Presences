@@ -19,18 +19,17 @@ presence.on("UpdateData", async () => {
 		},
 		pathnameArray = document.location.pathname.split("/"),
 		page = pathnameArray[1],
-		showCover = await presence.getSetting<boolean>("cover");
+		[showCover, showButton] = await Promise.all([
+			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("buttons"),
+		]);
 	strings = await getStrings();
 
 	switch (page) {
-		case "":
-			presenceData.details = strings.browsing;
-			presenceData.state = "Home";
-			break;
 		case "user": {
 			if (showCover) {
 				presenceData.largeImageKey = document
-					.querySelector(".avatar")
+					.querySelectorAll(".avatar")[1]
 					.getAttribute("src");
 				presenceData.smallImageKey = "anilist_lg";
 			}
@@ -145,7 +144,13 @@ presence.on("UpdateData", async () => {
 		case "settings":
 			presenceData.details = "Changing settings";
 			break;
+		default:
+			presenceData.details = strings.browsing;
+			presenceData.state = "Home";
+			break;
 	}
+
+	if (!showButton) delete presenceData.buttons;
 
 	presence.setActivity(presenceData, true);
 });
