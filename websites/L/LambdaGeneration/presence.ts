@@ -34,7 +34,8 @@ presence.on("UpdateData", async () => {
 			// return just either what's in the sub-community dictionary, if it's the LFT store, or just that part of the link
 			Pagee[0] += ":";
 			if (window.location.hostname.includes("lft")) Pagee[1] = "LFTs";
-			else if (SubComms[Splitted[0]]) Pagee[1] += ` in ${SubComms[Splitted[0]]}`;
+			else if (SubComms[Splitted[0]])
+				Pagee[1] += ` in ${SubComms[Splitted[0]]}`;
 			else if (Splitted[0] !== "") Pagee[1] = Splitted[0];
 
 			break;
