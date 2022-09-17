@@ -3,12 +3,23 @@ import "source-map-support/register";
 import { transformFileAsync as transform } from "@babel/core";
 import { blue, green, red, yellow } from "chalk";
 import { sync as glob } from "glob";
-import { AnyBulkWriteOperation, BulkWriteResult, DeleteResult, InsertManyResult, MongoClient } from "mongodb";
+import {
+	AnyBulkWriteOperation,
+	BulkWriteResult,
+	DeleteResult,
+	InsertManyResult,
+	MongoClient,
+} from "mongodb";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, normalize, resolve, sep } from "node:path";
 import { valid } from "semver";
 import { minify as terser } from "terser";
-import { CompilerOptions, createProgram, flattenDiagnosticMessageText, getPreEmitDiagnostics } from "typescript";
+import {
+	CompilerOptions,
+	createProgram,
+	flattenDiagnosticMessageText,
+	getPreEmitDiagnostics,
+} from "typescript";
 
 import { isValidJSON, Metadata, readFile, readJson } from "../util";
 
