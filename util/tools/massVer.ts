@@ -4,7 +4,7 @@ import { sync as glob } from "glob";
 import { existsSync as exists } from "node:fs";
 import { coerce, inc, valid } from "semver";
 
-import { isValidJSON, Metadata, readFile, writeJson } from "./util";
+import { isValidJSON, type Metadata, readFile, writeJson } from "./util";
 
 /*  NOTE: THIS IS A TOOL THAT IS ONLY MEANT TO BE USED
     BY THE DEVS AND REVIEWERS FOR DEPLOYMENT PURPOSES,
