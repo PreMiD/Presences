@@ -7,7 +7,7 @@ This repository contains the source code of all Presences that are available in 
 
 <div align="left">
     <a target="_blank" href="https://discord.premid.app/" title="Join our Discord!">
-        <img  src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" height="75px" draggable="false" alt="Join our Discord!">
+        <img  src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" height="76px" draggable="false" alt="Join our Discord!">
     </a>
 </div>
 
