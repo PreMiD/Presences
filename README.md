@@ -19,21 +19,17 @@ Please refer to our [documentation](https://docs.premid.app/dev/presence) to get
 
 ```bash
 presence
-├── dist
-│   └── metadata.json
-├── presence.ts
-└── tsconfig.json
+├── metadata.json
+└── presence.ts
 ```
 
 For Presences that require `iframe.ts`:
 
 ```bash
 presence
-├── dist
-│   └── metadata.json
+├── metadata.json
 ├── presence.ts
-├── iframe.ts
-└── tsconfig.json
+└── iframe.ts
 ```
 
 ---
