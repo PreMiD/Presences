@@ -21,7 +21,7 @@ Please refer to our [documentation](https://docs.premid.app/dev/presence) to get
 
 ## Translator Tool
 
-Translate Presences by using our [Translator Tool](./TRANSLATOR.md)
+Translate Presences by using `npx pmd` (or your package manager of choice).
 
 ## Committing
 
