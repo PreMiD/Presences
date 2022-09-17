@@ -11,26 +11,13 @@ This repository contains the source code of all Presences that are available in 
     </a>
 </div>
 
+---
+
 ## Getting started
 
 Please refer to our [documentation](https://docs.premid.app/dev/presence) to get started.
 
-## Folder structure
 
-```bash
-presence
-├── metadata.json
-└── presence.ts
-```
-
-For Presences that require `iframe.ts`:
-
-```bash
-presence
-├── metadata.json
-├── presence.ts
-└── iframe.ts
-```
 
 ---
 
