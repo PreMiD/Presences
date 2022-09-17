@@ -297,7 +297,6 @@ const writeJS = (path: string, code: string): void =>
 					updatedPresenceData.map<AnyBulkWriteOperation<DBdata>>(newData => ({
 						updateOne: {
 							filter: { name: newData.name },
-							//@ts-expect-error - This should work as they are the same types.
 							update: { $set: newData },
 						},
 					}))
