@@ -1,8 +1,8 @@
-import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import axios from "axios";
 import chalk from "chalk";
 import debug from "debug";
 import { prompt } from "enquirer";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import ora, { Ora } from "ora";
 
 /**
@@ -55,11 +55,11 @@ const spinnerSettings = {
 			readdirSync(`${src}/${letter}/`).forEach(async presence => {
 				const data = JSON.parse(
 					readFileSync(
-						`${src}/${letter}/${presence}/dist/metadata.json`,
+						`${src}/${letter}/${presence}/metadata.json`,
 						"utf8"
 					).toString()
 				);
-				data.path = `${src}/${letter}/${presence}/dist/metadata.json`;
+				data.path = `${src}/${letter}/${presence}/metadata.json`;
 				filesMap.set(presence, data);
 			});
 		});

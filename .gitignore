@@ -7,6 +7,8 @@ pnpm-lock.yaml
 
 # Compiled files
 **/*.js
+!websites/*/*.js
+!programs/*/*.js
 
 # MacOS-generated files
 .DS_Store

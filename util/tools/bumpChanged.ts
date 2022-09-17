@@ -1,9 +1,10 @@
 import "source-map-support/register";
 
+import axios from "axios";
+import debug from "debug";
 import { join, normalize, resolve, sep } from "node:path";
 import { coerce, inc } from "semver";
-import debug from "debug";
-import axios from "axios";
+
 import { getChangedFolders, readJson, writeJson } from "./util";
 
 const log = debug("BumpChanged");
@@ -18,7 +19,7 @@ async function increaseSemver(changedPresenceFiles: string[]): Promise<void> {
 		// Normalize the path and seperate it on OS specific seperator
 		try {
 			const normalizedPath = resolve(normalize(path)).split(sep),
-				metadataPath = join(normalizedPath.join(sep), "dist", "metadata.json"),
+				metadataPath = join(normalizedPath.join(sep), "metadata.json"),
 				metadata = readJson<Metadata>(metadataPath),
 				apiVersion = (
 					await axios.post<{

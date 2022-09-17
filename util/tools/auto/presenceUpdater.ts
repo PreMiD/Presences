@@ -1,26 +1,16 @@
 import "source-map-support/register";
 
+import { transformFileAsync as transform } from "@babel/core";
+import { blue, green, red, yellow } from "chalk";
+import { sync as glob } from "glob";
+import { AnyBulkWriteOperation, BulkWriteResult, DeleteResult, InsertManyResult, MongoClient } from "mongodb";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, normalize, resolve, sep } from "node:path";
-import { transformFileAsync as transform } from "@babel/core";
-import { green, yellow, red, blue } from "chalk";
-import { sync as glob } from "glob";
-import {
-	type AnyBulkWriteOperation,
-	type BulkWriteResult,
-	type DeleteResult,
-	type InsertManyResult,
-	MongoClient,
-} from "mongodb";
 import { valid } from "semver";
 import { minify as terser } from "terser";
-import {
-	type CompilerOptions,
-	createProgram,
-	flattenDiagnosticMessageText,
-	getPreEmitDiagnostics,
-} from "typescript";
-import { readFile, readJson, isValidJSON, type Metadata } from "../util";
+import { CompilerOptions, createProgram, flattenDiagnosticMessageText, getPreEmitDiagnostics } from "typescript";
+
+import { isValidJSON, Metadata, readFile, readJson } from "../util";
 
 const url = process.env.MONGO_URL,
 	dbName = "PreMiD",
@@ -134,9 +124,9 @@ const writeJS = (path: string, code: string): void =>
 				.find({}, { projection: { _id: 0, name: 1, "metadata.version": 1 } })
 				.toArray(),
 			presences = glob("./{websites,programs}/*/*/")
-				.filter(pF => existsSync(`${pF}dist/metadata.json`))
+				.filter(pF => existsSync(`${pF}/metadata.json`))
 				.map<[Metadata, string]>(pF => {
-					const file = readFile(`${pF}dist/metadata.json`);
+					const file = readFile(`${pF}/metadata.json`);
 					if (isValidJSON(file)) {
 						const data = JSON.parse(file);
 						delete data.$schema;
@@ -296,6 +286,7 @@ const writeJS = (path: string, code: string): void =>
 					updatedPresenceData.map<AnyBulkWriteOperation<DBdata>>(newData => ({
 						updateOne: {
 							filter: { name: newData.name },
+							//@ts-expect-error - This should work as they are the same types.
 							update: { $set: newData },
 						},
 					}))
