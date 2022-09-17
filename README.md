@@ -3,7 +3,7 @@
     <h1>PreMiD Presences</h1>
 </div>
 
-This repository contains the source code of all Presences that are available in [PreMiD's Store](https://premid.app/store). If you wish to **add** your Presence or **update** one, open a Pull Request.
+This repository contains the source code of all Presences that are available in [PreMiD's Store](https://premid.app/store). If you wish to add your Presence or update one, open a Pull Request.
 
 <div align="left">
     <a target="_blank" href="https://discord.premid.app/" title="Join our Discord!">
