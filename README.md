@@ -11,12 +11,6 @@ This repository contains the source code of all Presences that are available in 
     </a>
 </div>
 
-## Requirements to create a Presence
-- [Git](https://git-scm.com)
-- [Node.js](https://nodejs.org/)
-- [NPM](https://npmjs.org/) (Or any other package manager)
-- Basic knowledge of TypeScript
-
 ## Getting started
 
 Please refer to our [documentation](https://docs.premid.app/dev/presence) to get started.
