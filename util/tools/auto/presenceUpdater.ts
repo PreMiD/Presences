@@ -1,9 +1,7 @@
 import "source-map-support/register";
 
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { join, normalize, resolve, sep } from "node:path";
 import { transformFileAsync as transform } from "@babel/core";
-import { green, yellow, red, blue } from "chalk";
+import { blue, green, red, yellow } from "chalk";
 import { sync as glob } from "glob";
 import {
 	type AnyBulkWriteOperation,
@@ -12,6 +10,8 @@ import {
 	type InsertManyResult,
 	MongoClient,
 } from "mongodb";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { join, normalize, resolve, sep } from "node:path";
 import { valid } from "semver";
 import { minify as terser } from "terser";
 import {
@@ -20,7 +20,8 @@ import {
 	flattenDiagnosticMessageText,
 	getPreEmitDiagnostics,
 } from "typescript";
-import { readFile, readJson, isValidJSON, type Metadata } from "../util";
+
+import { isValidJSON, type Metadata, readFile, readJson } from "../util";
 
 const url = process.env.MONGO_URL,
 	dbName = "PreMiD",
@@ -134,9 +135,9 @@ const writeJS = (path: string, code: string): void =>
 				.find({}, { projection: { _id: 0, name: 1, "metadata.version": 1 } })
 				.toArray(),
 			presences = glob("./{websites,programs}/*/*/")
-				.filter(pF => existsSync(`${pF}dist/metadata.json`))
+				.filter(pF => existsSync(`${pF}/metadata.json`))
 				.map<[Metadata, string]>(pF => {
-					const file = readFile(`${pF}dist/metadata.json`);
+					const file = readFile(`${pF}/metadata.json`);
 					if (isValidJSON(file)) {
 						const data = JSON.parse(file);
 						delete data.$schema;
