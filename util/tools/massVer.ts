@@ -1,10 +1,10 @@
 import "source-map-support/register";
 
-import { sync as glob } from "glob";
 import { existsSync as exists } from "node:fs";
+import { sync as glob } from "glob";
 import { coerce, inc, valid } from "semver";
 
-import { isValidJSON, type Metadata, readFile, writeJson } from "./util";
+import { readFile, writeJson, type Metadata, isValidJSON } from "./util";
 
 /*  NOTE: THIS IS A TOOL THAT IS ONLY MEANT TO BE USED
     BY THE DEVS AND REVIEWERS FOR DEPLOYMENT PURPOSES,
@@ -13,7 +13,7 @@ import { isValidJSON, type Metadata, readFile, writeJson } from "./util";
     A DEV TO DO SO, WHICH WILL MOST LIKELY NEVER HAPPEN.  */
 
 const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
-		pF => !exists(`${pF}/metadata.json`)
+		pF => !exists(`${pF}/dist/metadata.json`)
 	),
 	allmeta: Array<[Metadata, string]> = glob(
 		"./{websites,programs}/*/*/*/metadata.json"
