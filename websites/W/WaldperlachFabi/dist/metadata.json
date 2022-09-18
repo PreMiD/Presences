@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "author": {
+    "name": "Waldperlach.Fabi",
+    "id": "736496751938240543"
+  },
+  "service": "WaldperlachFabi ",
+  "description": {
+    "en": "This Extension is for the Website WaldperlachFabi.de",
+    "de": "Dieses Plug-in wurde für die Website WaldperlachFabi.de entwickelt"
+  },
+  "url": [
+    "waldperlachfabi.de",
+    "download.waldperlachfabi.de",
+    "status.waldperlachfabi.de"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/TouLjPW.png",
+  "thumbnail": "https://i.imgur.com/TouLjPW.png",
+  "color": "#000000",
+  "category": "other",
+  "tags": [
+    "website"
+  ]
+}
