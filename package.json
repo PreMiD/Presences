@@ -15,7 +15,6 @@
 		"pu": "npm run compileTools && node ./util/tools/auto/presenceUpdater.js",
 		"ms": "npm run compileTools && node ./util/tools/metadataSorter.js",
 		"compile": "npm run compileTools && node ./util/tools/compileChanged.js",
-		"translator": "npm run compileTools && node ./util/tools/translator.js",
 		"prepare": "is-ci || husky install",
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
 	},
@@ -49,6 +48,7 @@
 		"jsonschema": "^1.4.1",
 		"mongodb": "^4.4.1",
 		"ora": "5.4.1",
+		"pmd": "github:PreMiD/pmd#main",
 		"prettier": "^2.7.1",
 		"semver": "^7.3.7",
 		"source-map-support": "^0.5.21",
