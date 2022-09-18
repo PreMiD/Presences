@@ -1,11 +1,12 @@
 import "source-map-support/register";
 
-import { existsSync, readFileSync } from "node:fs";
 import axios from "axios";
 import { blue, green, red, yellow } from "chalk";
 import ParseJSON, { ObjectNode } from "json-to-ast";
 import { validate } from "jsonschema";
+import { existsSync, readFileSync } from "node:fs";
 import { compare, diff } from "semver";
+
 import { createAnnotation, getChangedFolders, type Metadata } from "../util";
 
 const latestMetadataSchema = async (): Promise<string[]> => {
@@ -102,7 +103,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 				//TODO: Add support for programs in the future
 				.filter(p => p.includes("websites/"))
 		),
-		changedMetaFiles = changedFolders.map(p => (p += "/dist/metadata.json"));
+		changedMetaFiles = changedFolders.map(p => (p += "/metadata.json"));
 
 	console.log(blue("Getting latest schema..."));
 
