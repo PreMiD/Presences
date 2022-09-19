@@ -10,6 +10,9 @@ pnpm-lock.yaml
 !websites/*/*.js
 !programs/*/*.js
 */*/*/dist
+websites/**/*/tsconfig.json
+programs/**/*/tsconfig.json
+
 
 # MacOS-generated files
 .DS_Store
