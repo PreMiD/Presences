@@ -67,7 +67,7 @@ export async function getChangedFolders() {
 
 		// Pop off the presence/iframe.ts/metadata.json
 		normalizedPath.at(-1) === "metadata.json"
-			? normalizedPath.splice(normalizedPath.length - 2, 2)
+			? normalizedPath.splice(normalizedPath.length - 1, 1)
 			: normalizedPath.pop();
 
 		changedPresenceFolders[i] = normalizedPath.join("/");
