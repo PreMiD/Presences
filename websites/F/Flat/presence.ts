@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 			? `${name} (@${pathname.split("/")[1].slice(1)})`
 			: "Unknown user";
 		presenceData.smallImageKey = (
-			document.querySelector('[data-cy="user-info"] img') as HTMLImageElement
+			document.querySelector<HTMLImageElement>('[data-cy="user-info"] img')
 		)?.src;
 		presenceData.smallImageText = name;
 		if (pathname.includes("/likes"))
