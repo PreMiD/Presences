@@ -55,7 +55,7 @@
 		"voting.wolvesville.com",
 		"app.wolvesville.com"
 	],
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"logo": "https://i.imgur.com/yowEwrw.png",
 	"thumbnail": "https://i.imgur.com/s5NhKcP.png",
 	"color": "#FF4181",
@@ -107,15 +107,6 @@
 			},
 			"title": "Hide Name When Invisible",
 			"icon": "far fa-ghost",
-			"value": false
-		},
-		{
-			"id": "gameLang",
-			"if": {
-				"privacy": false
-			},
-			"title": "Show Game Language",
-			"icon": "far fa-flag",
 			"value": false
 		},
 		{
