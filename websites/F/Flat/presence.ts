@@ -4,16 +4,16 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "flat",
-	},
-	{ pathname } = location;
-	if (pathname === "/") 
-		presenceData.details = "Viewing the homepage";
+			largeImageKey: "flat",
+		},
+		{ pathname } = location;
+	if (pathname === "/") presenceData.details = "Viewing the homepage";
 	if (pathname === "/my-library")
 		presenceData.details = "Viewing their library";
 	if (pathname.startsWith("/collection/")) {
 		presenceData.details = "Viewing a collection:";
-		presenceData.state = document.querySelector(".collection-title")?.textContent;
+		presenceData.state =
+			document.querySelector(".collection-title")?.textContent;
 	}
 	if (pathname === "/shared-with-me")
 		presenceData.details = "Viewing shared scores";
@@ -33,14 +33,16 @@ presence.on("UpdateData", async () => {
 	}
 	if (pathname.startsWith("/settings"))
 		presenceData.details = "Viewing settings";
-	if (pathname.startsWith("/updates"))
-		presenceData.details = "Viewing updates";
+	if (pathname.startsWith("/updates")) presenceData.details = "Viewing updates";
 	if (pathname === "/settings/upgrade")
 		presenceData.details = "Viewing upgrade options";
 	if (pathname.startsWith("/community")) {
 		if (pathname.match(/^\/community\/popular(\/.+)?\/?$/)) {
 			presenceData.details = "Viewing community scores";
-			presenceData.state = `Since: ${document.querySelector('[data-cy="community-date-filter-btn"]')?.textContent}`;
+			presenceData.state = `Since: ${
+				document.querySelector('[data-cy="community-date-filter-btn"]')
+					?.textContent
+			}`;
 		}
 		if (pathname.includes("/challenges/"))
 			presenceData.details = "Viewing a challenge";
@@ -51,22 +53,32 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(".title")?.textContent;
 		} else {
 			presenceData.details = "Viewing a score:";
-			presenceData.state = document.querySelector(".sv-title > h1")?.textContent;
-			presenceData.smallImageKey = (document.querySelector(".user-pp img") as HTMLImageElement).src;
+			presenceData.state =
+				document.querySelector(".sv-title > h1")?.textContent;
+			presenceData.smallImageKey = (
+				document.querySelector(".user-pp img") as HTMLImageElement
+			).src;
 			presenceData.smallImageText = document.querySelector(".by")?.textContent;
 			if (document.querySelector(".sc-pause"))
 				presenceData.details = "Listening to:";
 		}
 	}
 	if (pathname.startsWith("/@")) {
-		const name = document.querySelector('[data-cy="printable-name"]')?.textContent;
+		const name = document.querySelector(
+			'[data-cy="printable-name"]'
+		)?.textContent;
 		presenceData.details = "Viewing a user:";
-		presenceData.state = name ? `${name} (@${pathname.split("/")[1].slice(1)})` : "Unknown user";
-		presenceData.smallImageKey = (document.querySelector('[data-cy="user-info"] img') as HTMLImageElement)?.src;
+		presenceData.state = name
+			? `${name} (@${pathname.split("/")[1].slice(1)})`
+			: "Unknown user";
+		presenceData.smallImageKey = (
+			document.querySelector('[data-cy="user-info"] img') as HTMLImageElement
+		)?.src;
 		presenceData.smallImageText = name;
 		if (pathname.includes("/likes"))
 			presenceData.details = "Viewing a user's liked scores:";
 	}
-	if (presenceData.details || presenceData.state) presence.setActivity(presenceData);
+	if (presenceData.details || presenceData.state)
+		presence.setActivity(presenceData);
 	else presence.setActivity();
 });
