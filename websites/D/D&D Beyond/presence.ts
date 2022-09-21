@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = window.location,
-		pathSplit = pathname.split("/").slice(1),
+		pathSplit = pathname.split("/").filter(path => path),
 		pageTitle = document
 			.querySelector<HTMLHeadingElement>(".page-title")
 			?.textContent.trim();
@@ -215,11 +215,29 @@ presence.on("UpdateData", async () => {
 		}
 		case "forums": {
 			if (pathSplit[1] === "search") {
-
+				presenceData.details = "Searching forums";
+				presenceData.state = new URLSearchParams(search).get("search");
 			} else if (pathSplit[1]) {
-
+				if (/^\d+-/.test(pathSplit[pathSplit.length - 1])) {
+					presenceData.details = "Reading a forum post";
+					presenceData.state = pageTitle;
+					presenceData.buttons = [
+						{
+							label: "Read post",
+							url: href,
+						},
+					];
+				} else if (pathSplit[pathSplit.length - 1] === "create-thread") {
+					presenceData.details = "Creating a forum post";
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("#field-title").value;
+				} else {
+					presenceData.details = "Browsing forums";
+					presenceData.state = pageTitle;
+				}
 			} else {
-
+				presenceData.details = "Browsing forums";
+				presenceData.state = "Main page";
 			}
 			break;
 		}
