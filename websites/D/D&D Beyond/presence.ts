@@ -49,6 +49,20 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "classes": {
+			if ((pathSplit[1] ?? "") === "") {
+				presenceData.details = "Browsing list of classes";
+			} else {
+				presenceData.details = "Viewing a class";
+				presenceData.state = pageTitle;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".image").src;
+				presenceData.buttons = [
+					{
+						label: "View class",
+						url: href,
+					},
+				];
+			}
 			break;
 		}
 		case "equipment": {
@@ -144,14 +158,8 @@ presence.on("UpdateData", async () => {
 			if ((pathSplit[1] ?? "") === "") {
 				presenceData.details = "Browsing list of races";
 			} else {
-				const raceTitleNodes =
-					document.querySelector<HTMLHeadingElement>(
-						"h1[data-text]"
-					).childNodes;
 				presenceData.details = "Viewing a race";
-				presenceData.state = (
-					raceTitleNodes.length === 5 ? raceTitleNodes[2] : raceTitleNodes[0]
-				).textContent.trim();
+				presenceData.state = pageTitle;
 				presenceData.largeImageKey =
 					document.querySelector<HTMLImageElement>(".image").src;
 				presenceData.buttons = [
@@ -226,7 +234,7 @@ presence.on("UpdateData", async () => {
 		}
 		default: {
 			presenceData.details = "Browsing";
-			presenceData.state = document.title.match(/^(.*?)( - D&D Beyond)?$/)[1];
+			presenceData.state = pageTitle ?? document.title.match(/^(.*?)( - D&D Beyond)?$/)[1];
 			break;
 		}
 	}
