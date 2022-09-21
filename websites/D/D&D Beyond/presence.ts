@@ -3,9 +3,14 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+enum Asset {
+	info = "https://i.imgur.com/eIFVRHe.png",
+	logo = "https://i.imgur.com/Phdro5V.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Phdro5V.png",
+			largeImageKey: Asset.logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = window.location,
@@ -51,6 +56,91 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "characters": {
+			if (pathSplit[1] === "builder") {
+				presenceData.details = "Creating a new character";
+			} else if (pathSplit[2] === "builder") {
+				const characterName = document.querySelector<HTMLDivElement>(
+					".character-builder-page-header-name"
+				).textContent;
+				presenceData.details = "Modifying a character";
+				presenceData.largeImageKey = getComputedStyle(
+					document.querySelector<HTMLDivElement>(
+						".ddbc-character-avatar__portrait"
+					)
+				).backgroundImage?.match(/url\("(.*?)"\)/)[1];
+				switch (pathSplit[3]) {
+					case "home": {
+						presenceData.state = `Basic preferences | ${characterName}`;
+						break;
+					}
+					case "race": {
+						if (pathSplit[4] === "manage") {
+							presenceData.state = `Racial traits | ${characterName}`;
+							presenceData.smallImageKey =
+								document.querySelector<HTMLImageElement>(
+									".race-detail-preview-img"
+								).src;
+							presenceData.smallImageText = document.querySelector(
+								".builder-page-header"
+							).textContent;
+						} else {
+							presenceData.state = `Choosing race | ${characterName}`;
+						}
+						break;
+					}
+					case "class": {
+						if (pathSplit[4] === "manage") {
+							presenceData.state = `Class features | ${characterName}`;
+						} else {
+							presenceData.state = `Choosing a class | ${characterName}`;
+						}
+						break;
+					}
+					case "ability-scores": {
+						presenceData.state = `Ability scores | ${characterName}`;
+						break;
+					}
+					case "description": {
+						presenceData.state = `Background | ${characterName}`;
+						presenceData.smallImageKey = Asset.info;
+						presenceData.smallImageText =
+							document.querySelector<HTMLSelectElement>(
+								".description-manage-background-chooser"
+							).value;
+						break;
+					}
+					case "equipment": {
+						presenceData.state = `Equipment | ${characterName}`;
+						break;
+					}
+					default: {
+						presenceData.state = characterName;
+						break;
+					}
+				}
+			} else if (pathSplit[1]) {
+				presenceData.details = "Viewing a character sheet";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".ddbc-character-tidbits__heading > h1"
+				).textContent;
+				presenceData.largeImageKey = getComputedStyle(
+					document.querySelector<HTMLDivElement>(
+						".ddbc-character-avatar__portrait"
+					)
+				).backgroundImage?.match(/url\("(.*?)"\)/)[1];
+				presenceData.smallImageKey = Asset.info;
+				presenceData.smallImageText = `${
+					document.querySelector<HTMLSpanElement>(
+						".ddbc-character-summary__race"
+					).textContent
+				} (${
+					document.querySelector<HTMLSpanElement>(
+						".ddbc-character-summary__classes"
+					).textContent
+				})`;
+			} else {
+				presenceData.details = "Browsing their characters";
+			}
 			break;
 		}
 		case "classes": {
