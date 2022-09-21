@@ -42,7 +42,6 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else presenceData.details = "Browsing list of backgrounds";
-
 			break;
 		}
 		case "changelog": {
@@ -50,7 +49,6 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Reading a changelog";
 				presenceData.state = pageTitle;
 			} else presenceData.details = "Browsing the changelog";
-
 			break;
 		}
 		case "characters": {
@@ -102,7 +100,7 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageText =
 							document.querySelector<HTMLSelectElement>(
 								".description-manage-background-chooser"
-							).value;
+							).selectedOptions[0].textContent;
 						break;
 					}
 					case "equipment": {
@@ -141,7 +139,6 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else presenceData.details = "Browsing their characters";
-
 			break;
 		}
 		case "classes": {
@@ -157,7 +154,6 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else presenceData.details = "Browsing list of classes";
-
 			break;
 		}
 		case "encounter-builder": {
@@ -194,7 +190,6 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else presenceData.details = "Browsing list of equipment";
-
 			break;
 		}
 		case "feats": {
@@ -210,7 +205,6 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else presenceData.details = "Browsing list of feats";
-
 			break;
 		}
 		case "forums": {
@@ -281,6 +275,11 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document.querySelector<HTMLInputElement>(
 						".ddb-homebrew-create-form-fields-item-input > input"
 					).value;
+					break;
+				}
+				default: {
+					presenceData.details = "Browsing Hombrew category";
+					presenceData.state = pageTitle;
 				}
 			}
 			break;
@@ -290,7 +289,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing a magic item";
 				presenceData.state = pageTitle;
 				presenceData.smallImageKey =
-					document.querySelector<HTMLImageElement>(".image").src;
+					document.querySelector<HTMLImageElement>(".magic-item-image").src;
 				presenceData.smallImageText = document
 					.querySelector<HTMLDivElement>(".item-info")
 					.textContent.trim();
@@ -301,7 +300,6 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else presenceData.details = "Browsing list of magic items";
-
 			break;
 		}
 		case "marketplace": {
@@ -317,10 +315,13 @@ presence.on("UpdateData", async () => {
 			else {
 				presenceData.details = "Browsing marketplace";
 				presenceData.state = pageTitle;
+				presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+					".product-hero-avatar__image"
+				).src;
 			}
 			break;
 		}
-		case "member": {
+		case "members": {
 			if (pathSplit[1]) {
 				const username = (presenceData.state = document
 					.querySelector<HTMLLIElement>(".username")
@@ -332,7 +333,6 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${username}'s posts`;
 				else presenceData.state = username;
 			} else presenceData.details = "Viewing list of members";
-
 			break;
 		}
 		case "monsters": {
@@ -340,7 +340,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing a monster";
 				presenceData.state = pageTitle;
 				presenceData.largeImageKey =
-					document.querySelector<HTMLImageElement>(".image").src;
+					document.querySelector<HTMLImageElement>(".monster-image").src;
 				presenceData.buttons = [
 					{
 						label: "View monster",
@@ -348,7 +348,6 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else presenceData.details = "Browsing list of monsters";
-
 			break;
 		}
 		case "my-collection": {
@@ -367,15 +366,19 @@ presence.on("UpdateData", async () => {
 			if (pathSplit[1]) {
 				presenceData.details = "Reading a post";
 				presenceData.state = pageTitle;
+				presenceData.buttons = [
+					{
+						label: "Read post",
+						url: href,
+					},
+				];
 			} else presenceData.details = "Browsing posts";
-
 			break;
 		}
 		case "private-messages": {
 			if (pathSplit[1] === "send")
 				presenceData.details = "Writing a direct message";
 			else presenceData.details = "Viewing direct messages";
-
 			break;
 		}
 		case "races": {
@@ -391,7 +394,6 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else presenceData.details = "Browsing list of races";
-
 			break;
 		}
 		case "search": {
@@ -423,7 +425,6 @@ presence.on("UpdateData", async () => {
 					];
 				}
 			} else presenceData.details = "Browsing list of sources";
-
 			break;
 		}
 		case "spells": {
@@ -467,7 +468,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing a vehicle";
 				presenceData.state = pageTitle;
 				presenceData.largeImageKey =
-					document.querySelector<HTMLImageElement>(".image").src;
+					document.querySelector<HTMLImageElement>(".monster-image").src;
 				presenceData.buttons = [
 					{
 						label: "View vehicle",
@@ -475,7 +476,6 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else presenceData.details = "Browsing list of vehicles";
-
 			break;
 		}
 		default: {
