@@ -70,6 +70,9 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "encounter-builder": {
+			break;
+		}
 		case "equipment": {
 			if (pathSplit[1]) {
 				presenceData.details = "Viewing an equipment";
@@ -131,6 +134,20 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "marketplace": {
+			if (pathSplit[1] === "redeem-key") {
+				presenceData.details = "Redeeming a product key";
+			} else if (
+				pathSplit[1] === "cart" ||
+				pathSplit[1] === "address" ||
+				pathSplit[1] === "checkout"
+			) {
+				presenceData.details = "Purchasing materials";
+			} else if (!pathSplit[1]) {
+				presenceData.details = "Browsing marketplace";
+			} else {
+				presenceData.details = "Browsing marketplace";
+				presenceData.state = pageTitle;
+			}
 			break;
 		}
 		case "member": {
@@ -166,6 +183,10 @@ presence.on("UpdateData", async () => {
 			} else {
 				presenceData.details = "Browsing list of monsters";
 			}
+			break;
+		}
+		case "my-encounters": {
+			presenceData.details = "Browsing their encounters";
 			break;
 		}
 		case "posts": {
