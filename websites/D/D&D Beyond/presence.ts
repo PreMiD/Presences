@@ -178,6 +178,11 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "private-messages": {
+			if (pathSplit[1] === "send") {
+				presenceData.details = "Writing a direct message";
+			} else {
+				presenceData.details = "Viewing direct messages";
+			}
 			break;
 		}
 		case "races": {
