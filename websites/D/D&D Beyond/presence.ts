@@ -138,6 +138,12 @@ presence.on("UpdateData", async () => {
 						".ddbc-character-summary__classes"
 					).textContent
 				})`;
+				presenceData.buttons = [
+					{
+						label: "View character sheet",
+						url: href,
+					},
+				];
 			} else {
 				presenceData.details = "Browsing their characters";
 			}
