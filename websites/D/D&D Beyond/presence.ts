@@ -26,9 +26,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "backgrounds": {
-			if ((pathSplit[1] ?? "") === "") {
-				presenceData.details = "Browsing list of backgrounds";
-			} else {
+			if (pathSplit[1]) {
 				presenceData.details = "Viewing a background";
 				presenceData.state = pageTitle;
 				presenceData.largeImageKey =
@@ -39,6 +37,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
+			} else {
+				presenceData.details = "Browsing list of backgrounds";
 			}
 			break;
 		}
@@ -49,9 +49,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "classes": {
-			if ((pathSplit[1] ?? "") === "") {
-				presenceData.details = "Browsing list of classes";
-			} else {
+			if (pathSplit[1]) {
 				presenceData.details = "Viewing a class";
 				presenceData.state = pageTitle;
 				presenceData.largeImageKey =
@@ -62,13 +60,13 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
+			} else {
+				presenceData.details = "Browsing list of classes";
 			}
 			break;
 		}
 		case "equipment": {
-			if ((pathSplit[1] ?? "") === "") {
-				presenceData.details = "Browsing list of equipment";
-			} else {
+			if (pathSplit[1]) {
 				presenceData.details = "Viewing an equipment";
 				presenceData.state = pageTitle;
 				presenceData.largeImageKey =
@@ -79,13 +77,13 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
+			} else {
+				presenceData.details = "Browsing list of equipment";
 			}
 			break;
 		}
 		case "feats": {
-			if ((pathSplit[1] ?? "") === "") {
-				presenceData.details = "Browsing list of feats";
-			} else {
+			if (pathSplit[1]) {
 				presenceData.details = "Viewing a feat";
 				presenceData.state = pageTitle;
 				presenceData.largeImageKey =
@@ -96,6 +94,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
+			} else {
+				presenceData.details = "Browsing list of feats";
 			}
 			break;
 		}
@@ -106,9 +106,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "magic-items": {
-			if ((pathSplit[1] ?? "") === "") {
-				presenceData.details = "Browsing list of magic items";
-			} else {
+			if (pathSplit[1]) {
 				presenceData.details = "Viewing a magic item";
 				presenceData.state = pageTitle;
 				presenceData.smallImageKey =
@@ -122,6 +120,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
+			} else {
+				presenceData.details = "Browsing list of magic items";
 			}
 			break;
 		}
@@ -129,27 +129,25 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "member": {
-			if ((pathSplit[1] ?? "") === "") {
-				presenceData.details = "Viewing list of members";
-			} else {
+			if (pathSplit[1]) {
 				const username = (presenceData.state = document
 					.querySelector<HTMLLIElement>(".username")
 					.textContent.trim());
 				presenceData.details = "Viewing a member's profile";
 				presenceData.largeImageKey =
 					document.querySelector<HTMLImageElement>(".user-avatar img").src;
-				if ((pathSplit[2] ?? "") === "posts") {
+				if (pathSplit[2] === "posts") {
 					presenceData.state = `${username}'s posts`;
 				} else {
 					presenceData.state = username;
 				}
+			} else {
+				presenceData.details = "Viewing list of members";
 			}
 			break;
 		}
 		case "monsters": {
-			if ((pathSplit[1] ?? "") === "") {
-				presenceData.details = "Browsing list of monsters";
-			} else {
+			if (pathSplit[1]) {
 				presenceData.details = "Viewing a monster";
 				presenceData.state = pageTitle;
 				presenceData.largeImageKey =
@@ -160,19 +158,25 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
+			} else {
+				presenceData.details = "Browsing list of monsters";
 			}
 			break;
 		}
 		case "posts": {
+			if (pathSplit[1]) {
+				presenceData.details = "Reading a post";
+				presenceData.state = pageTitle;
+			} else {
+				presenceData.details = "Browsing posts";
+			}
 			break;
 		}
 		case "private-messages": {
 			break;
 		}
 		case "races": {
-			if ((pathSplit[1] ?? "") === "") {
-				presenceData.details = "Browsing list of races";
-			} else {
+			if (pathSplit[1]) {
 				presenceData.details = "Viewing a race";
 				presenceData.state = pageTitle;
 				presenceData.largeImageKey =
@@ -183,6 +187,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
+			} else {
+				presenceData.details = "Browsing list of races";
 			}
 			break;
 		}
@@ -192,16 +198,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "sources": {
-			if ((pathSplit[2] ?? "") === "") {
-				presenceData.details = "Viewing table of contents for source";
-				presenceData.state = pageTitle;
-				presenceData.buttons = [
-					{
-						label: "View source",
-						url: href,
-					},
-				];
-			} else {
+			if (pathSplit[2]) {
 				presenceData.details = "Viewing a section of a source";
 				presenceData.state = document.querySelector<HTMLHeadingElement>(
 					".p-article-content > h1"
@@ -209,6 +206,15 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read section",
+						url: href,
+					},
+				];
+			} else {
+				presenceData.details = "Viewing table of contents for source";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [
+					{
+						label: "View source",
 						url: href,
 					},
 				];
@@ -252,9 +258,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "vehicles": {
-			if ((pathSplit[1] ?? "") === "") {
-				presenceData.details = "Browsing list of vehicles";
-			} else {
+			if (pathSplit[1]) {
 				presenceData.details = "Viewing a vehicle";
 				presenceData.state = pageTitle;
 				presenceData.largeImageKey =
@@ -265,6 +269,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
+			} else {
+				presenceData.details = "Browsing list of vehicles";
 			}
 			break;
 		}
