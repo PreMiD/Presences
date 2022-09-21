@@ -129,6 +129,21 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "member": {
+			if ((pathSplit[1] ?? "") === "") {
+				presenceData.details = "Viewing list of members";
+			} else {
+				const username = (presenceData.state = document
+					.querySelector<HTMLLIElement>(".username")
+					.textContent.trim());
+				presenceData.details = "Viewing a member's profile";
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".user-avatar img").src;
+				if ((pathSplit[2] ?? "") === "posts") {
+					presenceData.state = `${username}'s posts`;
+				} else {
+					presenceData.state = username;
+				}
+			}
 			break;
 		}
 		case "monsters": {
@@ -234,7 +249,8 @@ presence.on("UpdateData", async () => {
 		}
 		default: {
 			presenceData.details = "Browsing";
-			presenceData.state = pageTitle ?? document.title.match(/^(.*?)( - D&D Beyond)?$/)[1];
+			presenceData.state =
+				pageTitle ?? document.title.match(/^(.*?)( - D&D Beyond)?$/)[1];
 			break;
 		}
 	}
