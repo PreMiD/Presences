@@ -71,6 +71,24 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "encounter-builder": {
+			presenceData.details = "Creating an encounter";
+			presenceData.state =
+				document.querySelector<HTMLInputElement>("[name=encounterName]")
+					.value || "Untitled Encounter";
+			break;
+		}
+		case "encounters": {
+			if (pathSplit[2] === "edit") {
+				presenceData.details = "Editing an encounter";
+				presenceData.state =
+					document.querySelector<HTMLInputElement>("[name=encounterName]")
+						.value || "Untitled Encounter";
+			} else {
+				presenceData.details = "Viewing an encounter";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".ddb-page-header__title"
+				).textContent;
+			}
 			break;
 		}
 		case "equipment": {
