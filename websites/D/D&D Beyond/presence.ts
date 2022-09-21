@@ -190,6 +190,27 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "sources": {
+			if ((pathSplit[2] ?? "") === "") {
+				presenceData.details = "Viewing table of contents for source";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [
+					{
+						label: "View source",
+						url: href,
+					},
+				];
+			} else {
+				presenceData.details = "Viewing a section of a source";
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".p-article-content > h1"
+				).textContent;
+				presenceData.buttons = [
+					{
+						label: "Read section",
+						url: href,
+					},
+				];
+			}
 			break;
 		}
 		case "spells": {
@@ -222,9 +243,6 @@ presence.on("UpdateData", async () => {
 					];
 				}
 			}
-			break;
-		}
-		case "store": {
 			break;
 		}
 		case "tag": {
