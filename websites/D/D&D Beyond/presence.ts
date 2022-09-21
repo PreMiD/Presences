@@ -214,6 +214,13 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "forums": {
+			if (pathSplit[1] === "search") {
+
+			} else if (pathSplit[1]) {
+
+			} else {
+
+			}
 			break;
 		}
 		case "homebrew": {
