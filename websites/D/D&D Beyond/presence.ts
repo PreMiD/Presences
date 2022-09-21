@@ -41,24 +41,22 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else {
-				presenceData.details = "Browsing list of backgrounds";
-			}
+			} else presenceData.details = "Browsing list of backgrounds";
+
 			break;
 		}
 		case "changelog": {
 			if (pathSplit[1]) {
 				presenceData.details = "Reading a changelog";
 				presenceData.state = pageTitle;
-			} else {
-				presenceData.details = "Browsing the changelog";
-			}
+			} else presenceData.details = "Browsing the changelog";
+
 			break;
 		}
 		case "characters": {
-			if (pathSplit[1] === "builder") {
+			if (pathSplit[1] === "builder")
 				presenceData.details = "Creating a new character";
-			} else if (pathSplit[2] === "builder") {
+			else if (pathSplit[2] === "builder") {
 				const characterName = document.querySelector<HTMLDivElement>(
 					".character-builder-page-header-name"
 				).textContent;
@@ -83,17 +81,15 @@ presence.on("UpdateData", async () => {
 							presenceData.smallImageText = document.querySelector(
 								".builder-page-header"
 							).textContent;
-						} else {
-							presenceData.state = `Choosing race | ${characterName}`;
-						}
+						} else presenceData.state = `Choosing race | ${characterName}`;
+
 						break;
 					}
 					case "class": {
-						if (pathSplit[4] === "manage") {
+						if (pathSplit[4] === "manage")
 							presenceData.state = `Class features | ${characterName}`;
-						} else {
-							presenceData.state = `Choosing a class | ${characterName}`;
-						}
+						else presenceData.state = `Choosing a class | ${characterName}`;
+
 						break;
 					}
 					case "ability-scores": {
@@ -144,9 +140,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else {
-				presenceData.details = "Browsing their characters";
-			}
+			} else presenceData.details = "Browsing their characters";
+
 			break;
 		}
 		case "classes": {
@@ -161,9 +156,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else {
-				presenceData.details = "Browsing list of classes";
-			}
+			} else presenceData.details = "Browsing list of classes";
+
 			break;
 		}
 		case "encounter-builder": {
@@ -199,9 +193,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else {
-				presenceData.details = "Browsing list of equipment";
-			}
+			} else presenceData.details = "Browsing list of equipment";
+
 			break;
 		}
 		case "feats": {
@@ -216,9 +209,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else {
-				presenceData.details = "Browsing list of feats";
-			}
+			} else presenceData.details = "Browsing list of feats";
+
 			break;
 		}
 		case "forums": {
@@ -283,23 +275,21 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else {
-				presenceData.details = "Browsing list of magic items";
-			}
+			} else presenceData.details = "Browsing list of magic items";
+
 			break;
 		}
 		case "marketplace": {
-			if (pathSplit[1] === "redeem-key") {
+			if (pathSplit[1] === "redeem-key")
 				presenceData.details = "Redeeming a product key";
-			} else if (
+			else if (
 				pathSplit[1] === "cart" ||
 				pathSplit[1] === "address" ||
 				pathSplit[1] === "checkout"
-			) {
+			)
 				presenceData.details = "Purchasing materials";
-			} else if (!pathSplit[1]) {
-				presenceData.details = "Browsing marketplace";
-			} else {
+			else if (!pathSplit[1]) presenceData.details = "Browsing marketplace";
+			else {
 				presenceData.details = "Browsing marketplace";
 				presenceData.state = pageTitle;
 			}
@@ -313,14 +303,11 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing a member's profile";
 				presenceData.largeImageKey =
 					document.querySelector<HTMLImageElement>(".user-avatar img").src;
-				if (pathSplit[2] === "posts") {
+				if (pathSplit[2] === "posts")
 					presenceData.state = `${username}'s posts`;
-				} else {
-					presenceData.state = username;
-				}
-			} else {
-				presenceData.details = "Viewing list of members";
-			}
+				else presenceData.state = username;
+			} else presenceData.details = "Viewing list of members";
+
 			break;
 		}
 		case "monsters": {
@@ -335,9 +322,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else {
-				presenceData.details = "Browsing list of monsters";
-			}
+			} else presenceData.details = "Browsing list of monsters";
+
 			break;
 		}
 		case "my-collection": {
@@ -356,17 +342,15 @@ presence.on("UpdateData", async () => {
 			if (pathSplit[1]) {
 				presenceData.details = "Reading a post";
 				presenceData.state = pageTitle;
-			} else {
-				presenceData.details = "Browsing posts";
-			}
+			} else presenceData.details = "Browsing posts";
+
 			break;
 		}
 		case "private-messages": {
-			if (pathSplit[1] === "send") {
+			if (pathSplit[1] === "send")
 				presenceData.details = "Writing a direct message";
-			} else {
-				presenceData.details = "Viewing direct messages";
-			}
+			else presenceData.details = "Viewing direct messages";
+
 			break;
 		}
 		case "races": {
@@ -381,9 +365,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else {
-				presenceData.details = "Browsing list of races";
-			}
+			} else presenceData.details = "Browsing list of races";
+
 			break;
 		}
 		case "search": {
@@ -414,9 +397,8 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				}
-			} else {
-				presenceData.details = "Browsing list of sources";
-			}
+			} else presenceData.details = "Browsing list of sources";
+
 			break;
 		}
 		case "spells": {
@@ -467,9 +449,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else {
-				presenceData.details = "Browsing list of vehicles";
-			}
+			} else presenceData.details = "Browsing list of vehicles";
+
 			break;
 		}
 		default: {
@@ -480,5 +461,6 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
