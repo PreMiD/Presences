@@ -42,6 +42,12 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "changelog": {
+			if (pathSplit[1]) {
+				presenceData.details = "Reading a changelog";
+				presenceData.state = pageTitle;
+			} else {
+				presenceData.details = "Browsing the changelog";
+			}
 			break;
 		}
 		case "characters": {
