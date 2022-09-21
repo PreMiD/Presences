@@ -20,9 +20,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "account": {
-			break;
-		}
-		case "articles": {
+			presenceData.details = "Managing preferences";
+			presenceData.state = pageTitle;
 			break;
 		}
 		case "backgrounds": {
