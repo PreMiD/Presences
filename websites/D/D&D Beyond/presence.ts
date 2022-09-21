@@ -248,6 +248,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "tag": {
+			presenceData.details = `Browsing posts tagged '${pageTitle}'`;
 			break;
 		}
 		case "vehicles": {
