@@ -225,6 +225,47 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "homebrew": {
+			switch (pathSplit[1] ?? "") {
+				case "": {
+					presenceData.details = "Browsing Homebrew categories";
+					break;
+				}
+				case "creations": {
+					switch (pathSplit[2]) {
+						case "create-background": {
+							presenceData.details = "Creating a background";
+							break;
+						}
+						case "create-feat": {
+							presenceData.details = "Creating a feat";
+							break;
+						}
+						case "create-magic-item": {
+							presenceData.details = "Creating a magic item";
+							break;
+						}
+						case "create-monster": {
+							presenceData.details = "Creating a monster";
+							break;
+						}
+						case "create-race": {
+							presenceData.details = "Creating a race";
+							break;
+						}
+						case "create-spell": {
+							presenceData.details = "Creating a spell";
+							break;
+						}
+						case "create-subclass": {
+							presenceData.details = "Creating a subclass";
+							break;
+						}
+					}
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						".ddb-homebrew-create-form-fields-item-input > input"
+					).value;
+				}
+			}
 			break;
 		}
 		case "magic-items": {
@@ -297,6 +338,14 @@ presence.on("UpdateData", async () => {
 			} else {
 				presenceData.details = "Browsing list of monsters";
 			}
+			break;
+		}
+		case "my-collection": {
+			presenceData.details = "Browsing their Homebrew collection";
+			break;
+		}
+		case "my-creations": {
+			presenceData.details = "Browsing their Homebrew creations";
 			break;
 		}
 		case "my-encounters": {
