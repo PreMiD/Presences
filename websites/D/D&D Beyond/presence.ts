@@ -323,9 +323,9 @@ presence.on("UpdateData", async () => {
 		}
 		case "members": {
 			if (pathSplit[1]) {
-				const username = (presenceData.state = document
+				const username = document
 					.querySelector<HTMLLIElement>(".username")
-					.textContent.trim());
+					.textContent.trim();
 				presenceData.details = "Viewing a member's profile";
 				presenceData.largeImageKey =
 					document.querySelector<HTMLImageElement>(".user-avatar img").src;
