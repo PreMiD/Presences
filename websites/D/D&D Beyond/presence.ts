@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/Phdro5V.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = window.location,
+		{ pathname, href, search } = window.location,
 		pathSplit = pathname.split("/").slice(1),
 		pageTitle = document
 			.querySelector<HTMLHeadingElement>(".page-title")
@@ -187,6 +187,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "search": {
+			presenceData.details = "Searching";
+			presenceData.state = new URLSearchParams(search).get("q");
 			break;
 		}
 		case "sources": {
