@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 				endTimestamp,
 			});
 		}
-	} else {
+	}else {
 		if (
 			document.location.pathname.includes("/anime/") &&
 			document.querySelector("div.chapterdetails h1")
