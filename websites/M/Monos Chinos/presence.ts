@@ -19,7 +19,6 @@ const presence = new Presence({
 		playing: "general.playing",
 		paused: "general.paused",
 		browsing: "general.browsing",
-		searching: "general.searching",
 		episode: "presence.media.info.episode",
 	});
 let video: VideoContext = null,
@@ -42,7 +41,7 @@ presence.on("UpdateData", async () => {
 		actions: PageAction[] = [
 			{
 				id: "episode",
-				path: "/ver",
+				path: "/ver/",
 				text: (await strings).playing,
 			},
 			{
@@ -58,6 +57,12 @@ presence.on("UpdateData", async () => {
 				icon: "directory",
 			},
 			{
+				id: "seasonCalendar",
+				path: "/calendario",
+				text: "viendo el calendario",
+				icon: "season",
+			},
+			{
 				id: "directoryAnime",
 				path: "/anime/",
 				text: "viendo lista de episodios",
@@ -65,9 +70,14 @@ presence.on("UpdateData", async () => {
 			},
 			{
 				id: "search",
-				path: "/search",
-				text: (await strings).searching,
+				path: "/buscar",
+				text: "buscando animes:",
 				icon: "search",
+			},
+			{
+				id: "profile",
+				path: "/mi-perfil",
+				text: "Viendo perfil",
 			},
 		];
 	let action: PageAction = null;
@@ -82,7 +92,7 @@ presence.on("UpdateData", async () => {
 	if (action === null) Object.assign(presenceData, browsingData);
 	else if (action.id === "episode") {
 		const detailsMatch = document
-			.querySelector(".Title-epi")
+			.querySelector(".heromain_h1")
 			.textContent.match(/^([^\d]+).* (\d+).+$/);
 
 		if (!detailsMatch) return presence.setActivity(browsingData);
@@ -134,9 +144,30 @@ presence.on("UpdateData", async () => {
 	} else {
 		if (
 			document.location.pathname.includes("/anime/") &&
-			document.querySelector("h1.Title")
-		)
-			presenceData.state = document.querySelector("h1.Title").textContent;
+			document.querySelector("div.chapterdetails h1")
+		) {
+			presenceData.state = document.querySelector(
+				"div.chapterdetails h1"
+			).textContent;
+		}
+
+		if (
+			document.location.pathname.includes("/buscar") &&
+			document.querySelector("div.heroarea h1 span")
+		) {
+			presenceData.state = document.querySelector(
+				"div.heroarea h1 span"
+			).textContent;
+		}
+
+		if (
+			document.location.pathname.includes("/mi-perfil") &&
+			document.querySelector("div.profile div.promain h1")
+		) {
+			presenceData.state = document.querySelector(
+				"div.profile div.promain h1"
+			).textContent;
+		}
 
 		Object.assign(presenceData, {
 			details: action.text,
