@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLImageElement>(".image").src;
 				presenceData.buttons = [
 					{
-						label: "View background",
+						label: "View Background",
 						url: href,
 					},
 				];
