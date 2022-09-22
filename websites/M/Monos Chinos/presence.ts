@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 				id: "profile",
 				path: "/mi-perfil",
 				text: "Viendo perfil",
-			}
+			},
 		];
 	let action: PageAction = null;
 
@@ -141,24 +141,33 @@ presence.on("UpdateData", async () => {
 				endTimestamp,
 			});
 		}
-	}else {
+	} else {
 		if (
 			document.location.pathname.includes("/anime/") &&
 			document.querySelector("div.chapterdetails h1")
-		)
-			presenceData.state = document.querySelector("div.chapterdetails h1").textContent;	
+		) {
+			presenceData.state = document.querySelector(
+				"div.chapterdetails h1"
+			).textContent;
+		}
 
-		if(
+		if (
 			document.location.pathname.includes("/buscar") &&
 			document.querySelector("div.heroarea h1 span")
-		) 
-			presenceData.state = document.querySelector("div.heroarea h1 span").textContent;
+		) {
+			presenceData.state = document.querySelector(
+				"div.heroarea h1 span"
+			).textContent;
+		}
 
-		if(
+		if (
 			document.location.pathname.includes("/mi-perfil") &&
 			document.querySelector("div.profile div.promain h1")
-		) 
-			presenceData.state = document.querySelector("div.profile div.promain h1").textContent;
+		) {
+			presenceData.state = document.querySelector(
+				"div.profile div.promain h1"
+			).textContent;
+		}
 
 		Object.assign(presenceData, {
 			details: action.text,
