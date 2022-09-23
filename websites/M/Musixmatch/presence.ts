@@ -75,6 +75,7 @@ presence.on("UpdateData", () => {
 			).textContent;
 		} else if(pathname.includes("/album")) {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>("#site .mxm-main img").src;
+			presenceData.smallImageKey = "https://i.imgur.com/Yb4CWnm.png";
 			presenceData.details = "Browsing album";
 			presenceData.state = `${document.querySelector("#site .mxm-main a").textContent} - ${document.querySelector(
 				"#site .mxm-main h1"
