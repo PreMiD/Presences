@@ -37,7 +37,7 @@ presence.on("UpdateData", () => {
 			}
 		} else if (pathname.includes("/search")) {
 			presenceData.details = "Searching";
-			presenceData.state = pathname.split("/")[2].replaceAll("%20", " ");
+			presenceData.state = document.querySelector("#site span > span > span").textContent;
 		} else if (
 			pathname.includes("/lyrics") &&
 			pathname.includes("/translation/")
@@ -73,8 +73,14 @@ presence.on("UpdateData", () => {
 			presenceData.state = document.querySelector(
 				"#site > #artist-page > #content h1"
 			).textContent;
+		} else if(pathname.includes("/album")) {
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>("#site .mxm-main img").src;
+			presenceData.details = "Browsing album";
+			presenceData.state = `${document.querySelector("#site .mxm-main a").textContent} - ${document.querySelector(
+				"#site .mxm-main h1"
+			).textContent}`;
 		}
-	} else if (hostname === "curators.musixmatch.com") {
+	} else if (hostname === "curators.musixmatch.com" || hostname === "curators-beta.musixmatch.com") {
 		if (pathname === "/" || pathname === "/missions")
 			presenceData.details = "Browsing curator's missions";
 		else if (pathname.includes("/tasks/")) {
