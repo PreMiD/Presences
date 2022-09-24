@@ -248,6 +248,7 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else if (
+		document.location.href.includes("/profile.php?id=") ||
 		document.querySelector('[aria-label="Link to open profile cover photo"]') ||
 		document.querySelector('[style*="padding-top: 37"]') ||
 		document.querySelector('[style*="padding-top:37"]')
