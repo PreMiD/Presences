@@ -48,10 +48,9 @@ const presence = new Presence({
 		}
 	}
 
-	if (presenceData.details == null) {
+	if (presenceData.details) presence.setActivity(presenceData);
+	else {
 		presence.setTrayTitle();
 		presence.setActivity();
-	  } else {
-		presence.setActivity(presenceData);
-	  }
+	}
 });
