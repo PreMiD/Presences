@@ -98,15 +98,13 @@ presence.on("UpdateData", async () => {
 								break;
 							}
 							case "u": {
-								presenceData.details = `Viewing a user's profile`;
+								presenceData.details = "Viewing a user's profile";
 								presenceData.state =
 									document.querySelector<HTMLHeadingElement>("h1").textContent;
 								const profileImage = document.querySelector<HTMLImageElement>(
 									"img[src*='/members/']"
 								);
-								if (profileImage) {
-									presenceData.largeImageKey = profileImage.src;
-								}
+								if (profileImage) presenceData.largeImageKey = profileImage.src;
 								break;
 							}
 						}
@@ -149,9 +147,7 @@ presence.on("UpdateData", async () => {
 					const profileImage = document.querySelector<HTMLImageElement>(
 						"img[src*='/members/']"
 					);
-					if (profileImage) {
-						presenceData.largeImageKey = profileImage.src;
-					}
+					if (profileImage) presenceData.largeImageKey = profileImage.src;
 					break;
 				}
 				default: {
