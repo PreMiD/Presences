@@ -195,6 +195,11 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "docs.mod.io": {
+			presenceData.details = "Browsing documentation";
+			presenceData.state =
+				document.querySelector<HTMLAnchorElement>(
+					".active.toc-link"
+				).textContent;
 			break;
 		}
 		case "integrate.mod.io": {
