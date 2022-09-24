@@ -8,15 +8,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/kl7hgZe.png",
 			startTimestamp: browsingStamp,
 		},
-		{ pathname, href, hostname } = window.location,
-		pathSplit = pathname
-			.split("/")
-			.slice(1)
-			.filter(x => x);
+		{ pathname, href, hostname, search } = window.location,
+		pathSplit = pathname.split("/").filter(x => x);
 
 	switch (hostname) {
 		case "mod.io": {
-			switch (pathSplit[0]) {
+			switch (pathSplit[0] ?? "") {
 				case "": {
 					presenceData.details = "Browsing homepage";
 					break;
@@ -167,6 +164,34 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "blog.mod.io": {
+			switch (pathSplit[0] ?? "") {
+				case "": {
+					presenceData.details = "Browsing the blog";
+					presenceData.state = "Home page";
+					break;
+				}
+				case "search": {
+					presenceData.details = "Searching the blog";
+					presenceData.state = new URLSearchParams(search).get("q");
+					break;
+				}
+				case "tagged": {
+					presenceData.details = "Browsing articles by tag";
+					presenceData.state = pathSplit[1];
+					break;
+				}
+				default: {
+					presenceData.details = "Reading an article";
+					presenceData.state =
+						document.querySelector<HTMLHeadingElement>("h1").textContent;
+					presenceData.buttons = [
+						{
+							label: "Read article",
+							url: href,
+						},
+					];
+				}
+			}
 			break;
 		}
 		case "docs.mod.io": {
