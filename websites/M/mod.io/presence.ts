@@ -22,78 +22,96 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "g": {
-					const gameImageURL = getComputedStyle(
-							document.querySelector<HTMLDivElement>("#container [role=img]")
-						).backgroundImage.match(/url\("(.+)"\)/)[1],
-						gameName = document.querySelector<HTMLAnchorElement>(
-							"#container a[href*='/g/']"
-						).textContent;
-					switch (pathSplit[2] ?? "") {
-						case "": {
-							presenceData.details = `Browsing mods for ${gameName}`;
-							presenceData.largeImageKey = gameImageURL;
-							presenceData.buttons = [
-								{
-									label: "View game mods",
-									url: href,
-								},
-							];
-							break;
-						}
-						case "m": {
-							presenceData.details = `Viewing a mod for ${gameName}`;
-							presenceData.state =
-								document.querySelector<HTMLHeadingElement>("h1").textContent;
-							presenceData.smallImageKey = gameImageURL;
-							presenceData.smallImageText = gameName;
-							presenceData.largeImageKey = getComputedStyle(
-								document.querySelector<HTMLDivElement>(
-									"a[href*='/m/'] > div[role=img]"
-								)
-							).backgroundImage.match(/url\("(.+)"\)/)[1];
-							presenceData.buttons = [
-								{
-									label: "View mod",
-									url: href,
-								},
-							];
-							break;
-						}
-						case "r": {
-							if (pathSplit[3]) {
-								presenceData.details = `Reading a guide for ${gameName}`;
-								presenceData.state =
-									document.querySelector<HTMLHeadingElement>("h1").textContent;
-								presenceData.smallImageKey = gameImageURL;
-								presenceData.smallImageText = gameName;
-								presenceData.largeImageKey = getComputedStyle(
-									document.querySelector<HTMLDivElement>(
-										"a[href*='/r/'] > div[role=img]"
-									)
-								).backgroundImage.match(/url\("(.+)"\)/)[1];
+					if (pathSplit[1] === "add") {
+						presenceData.details = "Adding a game";
+						presenceData.state =
+							document.querySelector<HTMLHeadingElement>("h1").textContent;
+					} else {
+						const gameImageURL = getComputedStyle(
+								document.querySelector<HTMLDivElement>("#container [role=img]")
+							).backgroundImage.match(/url\("(.+)"\)/)[1],
+							gameName = document.querySelector<HTMLAnchorElement>(
+								"#container a[href*='/g/']"
+							).textContent;
+						switch (pathSplit[2] ?? "") {
+							case "": {
+								presenceData.details = `Browsing mods for ${gameName}`;
+								presenceData.largeImageKey = gameImageURL;
 								presenceData.buttons = [
 									{
-										label: "View guide",
+										label: "View game mods",
 										url: href,
 									},
 								];
-							} else {
-								presenceData.details = `Browsing guides for ${gameName}`;
-								presenceData.largeImageKey = gameImageURL;
+								break;
 							}
-							break;
-						}
-						case "u": {
-							presenceData.details = `Viewing a user's profile`;
-							presenceData.state =
-								document.querySelector<HTMLHeadingElement>("h1").textContent;
-							const profileImage = document.querySelector<HTMLImageElement>(
-								"img[src*='/members/']"
-							);
-							if (profileImage) {
-								presenceData.largeImageKey = profileImage.src;
+							case "m": {
+								if (pathSplit[4] === "admin") {
+									presenceData.details = "Managing a mod";
+									presenceData.state =
+										document.querySelector<HTMLHeadingElement>(
+											"h1"
+										).textContent;
+								} else {
+									presenceData.details = `Viewing a mod for ${gameName}`;
+									presenceData.state =
+										document.querySelector<HTMLHeadingElement>(
+											"h1"
+										).textContent;
+									presenceData.smallImageKey = gameImageURL;
+									presenceData.smallImageText = gameName;
+									presenceData.largeImageKey = getComputedStyle(
+										document.querySelector<HTMLDivElement>(
+											"a[href*='/m/'] > div[role=img]"
+										)
+									).backgroundImage.match(/url\("(.+)"\)/)[1];
+									presenceData.buttons = [
+										{
+											label: "View mod",
+											url: href,
+										},
+									];
+								}
+								break;
 							}
-							break;
+							case "r": {
+								if (pathSplit[3]) {
+									presenceData.details = `Reading a guide for ${gameName}`;
+									presenceData.state =
+										document.querySelector<HTMLHeadingElement>(
+											"h1"
+										).textContent;
+									presenceData.smallImageKey = gameImageURL;
+									presenceData.smallImageText = gameName;
+									presenceData.largeImageKey = getComputedStyle(
+										document.querySelector<HTMLDivElement>(
+											"a[href*='/r/'] > div[role=img]"
+										)
+									).backgroundImage.match(/url\("(.+)"\)/)[1];
+									presenceData.buttons = [
+										{
+											label: "View guide",
+											url: href,
+										},
+									];
+								} else {
+									presenceData.details = `Browsing guides for ${gameName}`;
+									presenceData.largeImageKey = gameImageURL;
+								}
+								break;
+							}
+							case "u": {
+								presenceData.details = `Viewing a user's profile`;
+								presenceData.state =
+									document.querySelector<HTMLHeadingElement>("h1").textContent;
+								const profileImage = document.querySelector<HTMLImageElement>(
+									"img[src*='/members/']"
+								);
+								if (profileImage) {
+									presenceData.largeImageKey = profileImage.src;
+								}
+								break;
+							}
 						}
 					}
 					break;
