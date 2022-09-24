@@ -9,8 +9,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingStamp,
 		},
 		{ pathname, href } = window.location,
-		pageTitle =
-			document.querySelector<HTMLHeadingElement>(".entry-title").textContent;
+		pageTitle = document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 
 	if (pathname === "/" || pathname.startsWith("/page/")) {
 		presenceData.details = "Browsing";
@@ -18,7 +17,7 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/author")) {
 		presenceData.details = "Viewing contributions by an author";
 		presenceData.state = pageTitle.match(/^Author: (.*?)$/)[1];
-	} else if (/^\/\d{4}\/\d{2}\/\d{2}\/?$/.test(pathname)) {
+	} else if (/^\/\d{4}(\/\d{2}\/?(\d{2})?)?\/?$/.test(pathname)) {
 		presenceData.details = "Viewing contributions by a date";
 		presenceData.state = pageTitle.match(/^.*?: (.*?)$/)[1];
 	} else if (/^\/\d{4}\/\d{2}\/\d{2}\/.*?\/$/.test(pathname)) {
