@@ -199,10 +199,130 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "old.mod.io": {
+			switch (pathSplit[0] ?? "") {
+				case "": {
+					presenceData.details = "Browsing";
+					presenceData.state = "Home page";
+					break;
+				}
+				case "games": {
+					if (pathSplit[1] === "add") {
+						presenceData.details = "Adding a game";
+						presenceData.state =
+							document.querySelector<HTMLInputElement>("#gamesname").value;
+					} else {
+						presenceData.details = "Browsing games";
+					}
+					break;
+				}
+				case "guides": {
+					presenceData.details = "Browsing guides";
+					break;
+				}
+				case "members": {
+					presenceData.details = "Viewing a user's profile";
+					presenceData.state =
+						document.querySelector<HTMLHeadingElement>("h1.title").textContent;
+					const profileImage = document.querySelector<HTMLImageElement>(
+						"img[src*='/members/']"
+					);
+					if (profileImage) presenceData.largeImageKey = profileImage.src;
+					break;
+				}
+				case "messages": {
+					presenceData.details = "Viewing their direct messages";
+					break;
+				}
+				default: {
+					presenceData.details = "Browsing";
+					presenceData.state = document.title.match(/(.*) - mod\.io/)[1];
+				}
+			}
 			break;
 		}
 		// Old subdomains
 		default: {
+			const gameName = document.querySelector<HTMLAnchorElement>(
+					".navbar-start .navbar-item[href*='.old.mod.io']"
+				).textContent,
+				gameImage =
+					document.querySelector<HTMLImageElement>("[src*='/games/']").src;
+			switch (pathSplit[0] ?? "") {
+				case "":
+				case "page": {
+					presenceData.details = `Browsing mods for ${gameName}`;
+					presenceData.largeImageKey = gameImage;
+					break;
+				}
+				case "guides": {
+					presenceData.largeImageKey = gameImage;
+					switch (pathSplit[1] ?? "") {
+						case "": {
+							presenceData.details = `Browsing guides for ${gameName}`;
+							break;
+						}
+						case "add": {
+							presenceData.details = `Creating a guide for ${gameName}`;
+							presenceData.state =
+								document.querySelector<HTMLInputElement>("#articlesname").value;
+							break;
+						}
+						default: {
+							presenceData.details = `Viewing a guide for ${gameName}`;
+							presenceData.state =
+								document.querySelector<HTMLHeadingElement>("h1").textContent;
+							presenceData.buttons = [
+								{
+									label: "Read guide",
+									url: href,
+								},
+							];
+							break;
+						}
+					}
+					break;
+				}
+				default: {
+					presenceData.state = document.querySelector<HTMLAnchorElement>(
+						".navbar-start > .navbar-item:nth-of-type(4)"
+					).textContent;
+					presenceData.largeImageKey = gameImage;
+					switch (pathSplit[1] ?? "") {
+						case "": {
+							presenceData.details = `Viewing a mod for ${gameName}`;
+							presenceData.smallImageKey = gameImage;
+							presenceData.smallImageText = gameName;
+							presenceData.largeImageKey =
+								document.querySelector<HTMLImageElement>("[src*='/mods/']").src;
+							presenceData.buttons = [
+								{
+									label: "View mod",
+									url: href,
+								},
+							];
+							break;
+						}
+						case "edit": {
+							presenceData.details = `Editing a mod for ${gameName}`;
+							presenceData.state =
+								document.querySelector<HTMLInputElement>("#modsname").value;
+							break;
+						}
+						case "history": {
+							presenceData.details = `Viewing the history of a mod for ${gameName}`;
+							break;
+						}
+						case "contact": {
+							presenceData.details = `Contacting a mod developer`;
+							break;
+						}
+						case "stats": {
+							presenceData.details = `Viewing the stats of a mod for ${gameName}`;
+							break;
+						}
+					}
+				}
+			}
 		}
 	}
 
