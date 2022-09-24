@@ -212,9 +212,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Adding a game";
 						presenceData.state =
 							document.querySelector<HTMLInputElement>("#gamesname").value;
-					} else {
-						presenceData.details = "Browsing games";
-					}
+					} else presenceData.details = "Browsing games";
 					break;
 				}
 				case "guides": {
@@ -315,7 +313,7 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "contact": {
-							presenceData.details = `Contacting a mod developer`;
+							presenceData.details = "Contacting a mod developer";
 							break;
 						}
 						case "stats": {
