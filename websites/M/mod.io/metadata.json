@@ -14,7 +14,7 @@
 		"blog.mod.io",
 		"old.mod.io"
 	],
-	"regExp": ".+\\.old\\.mod\\.io",
+	"regExp": "((([\\w-]+\\.)?old|blog|docs)\\.)?mod\\.io",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/kl7hgZe.png",
 	"thumbnail": "https://i.imgur.com/5uhAsD9.jpg",

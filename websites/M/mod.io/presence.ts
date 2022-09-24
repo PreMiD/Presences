@@ -23,12 +23,15 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Adding a game";
 						presenceData.state =
 							document.querySelector<HTMLHeadingElement>("h1").textContent;
+					} else if ((pathSplit[1] ?? "") === "") {
+						presenceData.details = "Browsing games";
+						break;
 					} else {
 						const gameImageURL = getComputedStyle(
 								document.querySelector<HTMLDivElement>("#container [role=img]")
-							).backgroundImage.match(/url\("(.+)"\)/)[1],
+							).backgroundImage.match(/url\("(.+)"\)/)?.[1],
 							gameName = document.querySelector<HTMLAnchorElement>(
-								"#container a[href*='/g/']"
+								"#container li > a[href*='/g/']"
 							).textContent;
 						switch (pathSplit[2] ?? "") {
 							case "": {
@@ -101,10 +104,10 @@ presence.on("UpdateData", async () => {
 								presenceData.details = "Viewing a user's profile";
 								presenceData.state =
 									document.querySelector<HTMLHeadingElement>("h1").textContent;
-								const profileImage = document.querySelector<HTMLImageElement>(
-									"img[src*='/members/']"
-								);
-								if (profileImage) presenceData.largeImageKey = profileImage.src;
+								presenceData.smallImageKey =
+									document.querySelector<HTMLImageElement>(
+										"#container img[src*='/members/']"
+									)?.src;
 								break;
 							}
 						}
@@ -144,10 +147,9 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Viewing a user's profile";
 					presenceData.state =
 						document.querySelector<HTMLHeadingElement>("h1").textContent;
-					const profileImage = document.querySelector<HTMLImageElement>(
-						"img[src*='/members/']"
-					);
-					if (profileImage) presenceData.largeImageKey = profileImage.src;
+					presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+						"#container img[src*='/members/']"
+					)?.src;
 					break;
 				}
 				default: {
@@ -222,11 +224,11 @@ presence.on("UpdateData", async () => {
 				case "members": {
 					presenceData.details = "Viewing a user's profile";
 					presenceData.state =
-						document.querySelector<HTMLHeadingElement>("h1.title").textContent;
+						document.querySelector<HTMLHeadingElement>("h2.title").textContent;
 					const profileImage = document.querySelector<HTMLImageElement>(
-						"img[src*='/members/']"
+						".container img[src*='/members/']"
 					);
-					if (profileImage) presenceData.largeImageKey = profileImage.src;
+					if (profileImage) presenceData.smallImageKey = profileImage.src;
 					break;
 				}
 				case "messages": {
