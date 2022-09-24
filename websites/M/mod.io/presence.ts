@@ -202,9 +202,6 @@ presence.on("UpdateData", async () => {
 				).textContent;
 			break;
 		}
-		case "integrate.mod.io": {
-			break;
-		}
 		case "old.mod.io": {
 			break;
 		}
