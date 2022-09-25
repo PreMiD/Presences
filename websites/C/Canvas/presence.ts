@@ -233,29 +233,43 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "assignments": {
-							if (pathSplit[3] === "new") {
-								presenceData.details = `Creating an assignment for course: ${firstPath}`;
-								presenceData.state =
-									document.querySelector<HTMLInputElement>(
-										"#assignment_name"
-									).value;
-							} else if (pathSplit[3]) {
-								if (pathSplit[4] === "edit") {
-									presenceData.details = `Editing an assignment for course: ${firstPath}`;
+							switch (pathSplit[3] ?? "") {
+								case "": {
+									presenceData.details = `Viewing assignments for course: ${firstPath}`;
+									break;
+								}
+								case "new": {
+									presenceData.details = `Creating an assignment for course: ${firstPath}`;
 									presenceData.state =
 										document.querySelector<HTMLInputElement>(
 											"#assignment_name"
 										).value;
-								} else if (pathSplit[4] === "submissions") {
-									presenceData.details = `Viewing submissions for assignment: ${topPath} in course: ${firstPath}`;
-								} else if (pathSplit[4] === "peer_reviews") {
-									presenceData.details = `Viewing peer reviews for assignment: ${topPath} in course: ${firstPath}`;
-								} else {
-									presenceData.details = `Viewing assignment for course: ${firstPath}`;
-									presenceData.state = topPath;
+									break;
 								}
-							} else {
-								presenceData.details = `Viewing assignments for course: ${firstPath}`;
+								default: {
+									switch (pathSplit[4]) {
+										case "edit": {
+											presenceData.details = `Editing an assignment for course: ${firstPath}`;
+											presenceData.state =
+												document.querySelector<HTMLInputElement>(
+													"#assignment_name"
+												).value;
+											break;
+										}
+										case "submissions": {
+											presenceData.details = `Viewing submissions for assignment: ${topPath} in course: ${firstPath}`;
+											break;
+										}
+										case "peer_reviews": {
+											presenceData.details = `Viewing peer reviews for assignment: ${topPath} in course: ${firstPath}`;
+											break;
+										}
+										default: {
+											presenceData.details = `Viewing assignment for course: ${firstPath}`;
+											presenceData.state = topPath;
+										}
+									}
+								}
 							}
 							break;
 						}
@@ -268,19 +282,25 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "gradebook": {
-							if (pathSplit[3] === "history") {
-								presenceData.details = `Viewing grade history for course: ${firstPath}`;
-							} else if (pathSplit[3] === "speed_grader") {
-								presenceData.details = `Grading assignment: ${
-									document.querySelector<HTMLHeadingElement>(
-										".assignmentDetails__Title"
-									).textContent
-								} in course: ${
-									document.querySelector<HTMLAnchorElement>("#context_title")
-										.textContent
-								}`;
-							} else {
-								presenceData.details = `Viewing gradebook for course: ${firstPath}`;
+							switch (pathSplit[3]) {
+								case "history": {
+									presenceData.details = `Viewing grade history for course: ${firstPath}`;
+									break;
+								}
+								case "speed_grader": {
+									presenceData.details = `Grading assignment: ${
+										document.querySelector<HTMLHeadingElement>(
+											".assignmentDetails__Title"
+										).textContent
+									} in course: ${
+										document.querySelector<HTMLAnchorElement>("#context_title")
+											.textContent
+									}`;
+									break;
+								}
+								default: {
+									presenceData.details = `Viewing gradebook for course: ${firstPath}`;
+								}
 							}
 							break;
 						}
