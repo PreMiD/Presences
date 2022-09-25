@@ -9,9 +9,9 @@ const presence = new Presence({
 		discussion: (
 			presenceData: PresenceData,
 			category: string,
-			discussion_path: string[]
+			discussionPath: string[]
 		) => {
-			switch (discussion_path[0] ?? "") {
+			switch (discussionPath[0] ?? "") {
 				case "": {
 					presenceData.details = `Viewing discussions for ${category}`;
 					break;
@@ -27,7 +27,7 @@ const presence = new Presence({
 					break;
 				}
 				default: {
-					if (discussion_path[1] === "edit") {
+					if (discussionPath[1] === "edit") {
 						presenceData.details = `Editing a ${
 							getNavigationPath()[1] === "Announcements"
 								? "announcement"
@@ -46,7 +46,7 @@ const presence = new Presence({
 						presenceData.state =
 							document.querySelector<HTMLHeadingElement>(
 								".discussion-title"
-							).innerText;
+							).textContent;
 					}
 				}
 			}
@@ -54,34 +54,31 @@ const presence = new Presence({
 		pages: (
 			presenceData: PresenceData,
 			category: string,
-			pages_path: string[]
+			pagesPath: string[]
 		) => {
-			if (pages_path[0]) {
-				if (pages_path[1] === "edit") {
+			if (pagesPath[0]) {
+				if (pagesPath[1] === "edit") {
 					presenceData.details = `Editing a page for ${category}`;
 					presenceData.state =
 						document.querySelector<HTMLInputElement>("#title").value;
 				} else {
 					presenceData.details = `Viewing a page for ${category}`;
 					presenceData.state =
-						document.querySelector<HTMLHeadingElement>(".page-title").innerText;
+						document.querySelector<HTMLHeadingElement>(
+							".page-title"
+						).textContent;
 				}
 			} else {
 				const titleInput = document.querySelector<HTMLInputElement>("#title");
 				if (titleInput) {
 					presenceData.details = `Creating a page for ${category}`;
 					presenceData.state = titleInput.value;
-				} else {
-					presenceData.details = `Viewing pages for ${category}`;
-				}
+				} else presenceData.details = `Viewing pages for ${category}`;
 			}
 		},
 		files: (presenceData: PresenceData, category: string = null) => {
-			if (category) {
-				presenceData.details = `Browsing files for ${category}`;
-			} else {
-				presenceData.details = "Browsing files";
-			}
+			if (category) presenceData.details = `Browsing files for ${category}`;
+			else presenceData.details = "Browsing files";
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#breadcrumbs>ul>li+li:last-of-type a"
 			).textContent;
@@ -100,9 +97,7 @@ const presence = new Presence({
 				presenceData.state = document.querySelector<HTMLInputElement>(
 					"[name='collaboration[title]']"
 				).value;
-			} else {
-				presenceData.details = `Browsing collaborations for ${category}`;
-			}
+			} else presenceData.details = `Browsing collaborations for ${category}`;
 		},
 		conferences: (presenceData: PresenceData, category: string) => {
 			const conferenceInput = document.querySelector<HTMLInputElement>(
@@ -117,9 +112,7 @@ const presence = new Presence({
 						: "Creating"
 				} a conference for ${category}`;
 				presenceData.state = conferenceInput.value;
-			} else {
-				presenceData.details = `Browsing conferences for ${category}`;
-			}
+			} else presenceData.details = `Browsing conferences for ${category}`;
 		},
 		people: (presenceData: PresenceData, category: string) => {
 			presenceData.details = `Browsing members of ${category}`;
@@ -212,9 +205,7 @@ presence.on("UpdateData", async () => {
 				if (conversationInput) {
 					presenceData.details = "Composing a message";
 					presenceData.state = conversationInput.value;
-				} else {
-					presenceData.details = "Viewing messages";
-				}
+				} else presenceData.details = "Viewing messages";
 				break;
 			}
 			case "courses": {
@@ -334,11 +325,10 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "modules": {
-							if (pathSplit[3] === "progressions") {
+							if (pathSplit[3] === "progressions")
 								presenceData.details = `Viewing module progression for course: ${firstPath}`;
-							} else {
+							else
 								presenceData.details = `Viewing modules for course: ${firstPath}`;
-							}
 							break;
 						}
 						case "outcomes": {
@@ -358,9 +348,8 @@ presence.on("UpdateData", async () => {
 							} else if (editOutcomeInput) {
 								presenceData.details = `Editing an outcome for course: ${firstPath}`;
 								presenceData.state = editOutcomeInput.value;
-							} else {
+							} else
 								presenceData.details = `Viewing outcomes for course: ${firstPath}`;
-							}
 							break;
 						}
 						case "pages": {
@@ -391,21 +380,20 @@ presence.on("UpdateData", async () => {
 											),
 											timeElapsedType = document
 												.querySelector<HTMLSpanElement>(".time_header")
-												.textContent.match(/(Running|Elapsed)/i)[1];
-										let [years, months, days, hours, minutes, seconds] =
-											document
+												.textContent.match(/(Running|Elapsed)/i)[1],
+											[years, months, days, hours, minutes, seconds] = document
 												.querySelector<HTMLDivElement>(".time_running")
 												.textContent.match(
 													/(?:([\d,]+) Years, )?(?:(\d+) Months, )?(?:(\d+) Days, )?(?:(\d+) Hours, )?(?:(\d+) Minutes, )?(\d+) Seconds/
 												)
-												.map(x => +x.replace(/,/g, ""));
-										const totalSeconds =
-											seconds +
-											minutes * 60 +
-											hours * 3600 +
-											days * 86400 +
-											months * 2592000 +
-											years * 31104000;
+												.map(x => +x.replaceAll(",", "")),
+											totalSeconds =
+												seconds +
+												minutes * 60 +
+												hours * 3600 +
+												days * 86400 +
+												months * 2592000 +
+												years * 31104000;
 										if (timeElapsedType === "Running") {
 											presenceData.endTimestamp =
 												Math.floor(Date.now() / 1000) + totalSeconds;
@@ -428,9 +416,8 @@ presence.on("UpdateData", async () => {
 										break;
 									}
 								}
-							} else {
+							} else
 								presenceData.details = `Viewing quizzes for course: ${firstPath}`;
-							}
 							break;
 						}
 						case "rubrics": {
@@ -444,9 +431,8 @@ presence.on("UpdateData", async () => {
 							} else if (pathSplit[3]) {
 								presenceData.details = `Viewing rubric for course: ${firstPath}`;
 								presenceData.state = topPath;
-							} else {
+							} else
 								presenceData.details = `Viewing rubrics for course: ${firstPath}`;
-							}
 							break;
 						}
 						case "settings": {
@@ -462,17 +448,15 @@ presence.on("UpdateData", async () => {
 								document.querySelector<HTMLIFrameElement>(
 									"#course_syllabus_body_ifr"
 								)
-							) {
+							)
 								presenceData.details = `Editing syllabus for course: ${firstPath}`;
-							} else {
+							else
 								presenceData.details = `Viewing syllabus for course: ${firstPath}`;
-							}
 							break;
 						}
 						case "users": {
-							if (pathSplit[3]) {
-								canvasDataFunctions.profile(presenceData);
-							} else {
+							if (pathSplit[3]) canvasDataFunctions.profile(presenceData);
+							else {
 								canvasDataFunctions.people(
 									presenceData,
 									`course: ${firstPath}`
@@ -481,9 +465,7 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 					}
-				} else {
-					presenceData.details = "Browsing all courses";
-				}
+				} else presenceData.details = "Browsing all courses";
 				break;
 			}
 			case "files": {
@@ -540,17 +522,13 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "users": {
-							if (pathSplit[3]) {
-								canvasDataFunctions.profile(presenceData);
-							} else {
+							if (pathSplit[3]) canvasDataFunctions.profile(presenceData);
+							else
 								canvasDataFunctions.people(presenceData, `group: ${firstPath}`);
-							}
 							break;
 						}
 					}
-				} else {
-					presenceData.details = "Viewing groups";
-				}
+				} else presenceData.details = "Viewing groups";
 				break;
 			}
 			case "profile": {
@@ -561,9 +539,7 @@ presence.on("UpdateData", async () => {
 						if (profileNameInput) {
 							presenceData.details = "Editing profile";
 							presenceData.state = profileNameInput.value;
-						} else {
-							canvasDataFunctions.profile(presenceData);
-						}
+						} else canvasDataFunctions.profile(presenceData);
 						break;
 					}
 					case "content_shares": {
