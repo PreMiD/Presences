@@ -273,12 +273,30 @@ presence.on("UpdateData", async () => {
 							}
 							break;
 						}
+						case "collaborations": {
+							canvasDataFunctions.collaborations(
+								presenceData,
+								`course: ${firstPath}`
+							);
+							break;
+						}
+						case "conferences": {
+							canvasDataFunctions.conferences(
+								presenceData,
+								`course: ${firstPath}`
+							);
+							break;
+						}
 						case "discussion_topics": {
 							canvasDataFunctions.discussion(
 								presenceData,
 								`course: ${firstPath}`,
 								pathSplit.slice(3)
 							);
+							break;
+						}
+						case "files": {
+							canvasDataFunctions.files(presenceData, `course: ${firstPath}`);
 							break;
 						}
 						case "gradebook": {
@@ -308,6 +326,64 @@ presence.on("UpdateData", async () => {
 							presenceData.details = `Viewing grades for course: ${firstPath}`;
 							break;
 						}
+						case "outcomes": {
+							const createOutcomeModal =
+									document.querySelector<HTMLSpanElement>(
+										"[data-testid='createOutcomeModal']"
+									),
+								editOutcomeInput = document.querySelector<HTMLInputElement>(
+									"[data-testid='name-input']"
+								);
+							if (createOutcomeModal) {
+								presenceData.details = `Creating an outcome for course: ${firstPath}`;
+								presenceData.state =
+									createOutcomeModal.querySelector<HTMLInputElement>(
+										"input"
+									).value;
+							} else if (editOutcomeInput) {
+								presenceData.details = `Editing an outcome for course: ${firstPath}`;
+								presenceData.state = editOutcomeInput.value;
+							} else {
+								presenceData.details = `Viewing outcomes for course: ${firstPath}`;
+							}
+							break;
+						}
+						case "pages": {
+							canvasDataFunctions.pages(
+								presenceData,
+								`course: ${firstPath}`,
+								pathSplit.slice(3)
+							);
+							break;
+						}
+						case "rubrics": {
+							const editRubricTitle =
+								document.querySelector<HTMLInputElement>("#rubric-title");
+							if (editRubricTitle) {
+								presenceData.details = `${
+									pathSplit[3] ? "Editing" : "Creating"
+								} a rubric for course: ${firstPath}`;
+								presenceData.state = editRubricTitle.value;
+							} else if (pathSplit[3]) {
+								presenceData.details = `Viewing rubric for course: ${firstPath}`;
+								presenceData.state = topPath;
+							} else {
+								presenceData.details = `Viewing rubrics for course: ${firstPath}`;
+							}
+							break;
+						}
+						case "syllabus": {
+							if (
+								document.querySelector<HTMLIFrameElement>(
+									"#course_syllabus_body_ifr"
+								)
+							) {
+								presenceData.details = `Editing syllabus for course: ${firstPath}`;
+							} else {
+								presenceData.details = `Viewing syllabus for course: ${firstPath}`;
+							}
+							break;
+						}
 						case "users": {
 							if (pathSplit[3]) {
 								canvasDataFunctions.profile(presenceData);
@@ -317,6 +393,7 @@ presence.on("UpdateData", async () => {
 									`course: ${firstPath}`
 								);
 							}
+							break;
 						}
 					}
 				} else {
