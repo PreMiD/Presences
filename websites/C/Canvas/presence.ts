@@ -3,17 +3,8 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	canvasDataFunctions = {
-		announcement: (
-			presenceData: PresenceData,
-			category: string,
-			announcement_path: string[]
-		) => {
-			switch (announcement_path[0] ?? "") {
-				case "": {
-					presenceData.details = `Viewing announcements for ${category}`;
-					break;
-				}
-			}
+		announcement: (presenceData: PresenceData, category: string) => {
+			return (presenceData.details = `Viewing announcements for ${category}`);
 		},
 		discussion: (
 			presenceData: PresenceData,
@@ -215,9 +206,102 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "conversations": {
+				const conversationInput = document.querySelector<HTMLInputElement>(
+					"#compose-message-subject"
+				);
+				if (conversationInput) {
+					presenceData.details = "Composing a message";
+					presenceData.state = conversationInput.value;
+				} else {
+					presenceData.details = "Viewing messages";
+				}
 				break;
 			}
 			case "courses": {
+				if (pathSplit[1]) {
+					switch (pathSplit[2] ?? "") {
+						case "": {
+							presenceData.details = "Viewing course";
+							presenceData.state = firstPath;
+							break;
+						}
+						case "announcements": {
+							canvasDataFunctions.announcement(
+								presenceData,
+								`course: ${firstPath}`
+							);
+							break;
+						}
+						case "assignments": {
+							if (pathSplit[3] === "new") {
+								presenceData.details = `Creating an assignment for course: ${firstPath}`;
+								presenceData.state =
+									document.querySelector<HTMLInputElement>(
+										"#assignment_name"
+									).value;
+							} else if (pathSplit[3]) {
+								if (pathSplit[4] === "edit") {
+									presenceData.details = `Editing an assignment for course: ${firstPath}`;
+									presenceData.state =
+										document.querySelector<HTMLInputElement>(
+											"#assignment_name"
+										).value;
+								} else if (pathSplit[4] === "submissions") {
+									presenceData.details = `Viewing submissions for assignment: ${topPath} in course: ${firstPath}`;
+								} else if (pathSplit[4] === "peer_reviews") {
+									presenceData.details = `Viewing peer reviews for assignment: ${topPath} in course: ${firstPath}`;
+								} else {
+									presenceData.details = `Viewing assignment for course: ${firstPath}`;
+									presenceData.state = topPath;
+								}
+							} else {
+								presenceData.details = `Viewing assignments for course: ${firstPath}`;
+							}
+							break;
+						}
+						case "discussion_topics": {
+							canvasDataFunctions.discussion(
+								presenceData,
+								`course: ${firstPath}`,
+								pathSplit.slice(3)
+							);
+							break;
+						}
+						case "gradebook": {
+							if (pathSplit[3] === "history") {
+								presenceData.details = `Viewing grade history for course: ${firstPath}`;
+							} else if (pathSplit[3] === "speed_grader") {
+								presenceData.details = `Grading assignment: ${
+									document.querySelector<HTMLHeadingElement>(
+										".assignmentDetails__Title"
+									).textContent
+								} in course: ${
+									document.querySelector<HTMLAnchorElement>("#context_title")
+										.textContent
+								}`;
+							} else {
+								presenceData.details = `Viewing gradebook for course: ${firstPath}`;
+							}
+							break;
+						}
+						case "grades": {
+							presenceData.details = `Viewing grades for course: ${firstPath}`;
+							break;
+						}
+						case "users": {
+							if (pathSplit[3]) {
+								canvasDataFunctions.profile(presenceData);
+							} else {
+								canvasDataFunctions.people(
+									presenceData,
+									`course: ${firstPath}`
+								);
+							}
+						}
+					}
+				} else {
+					presenceData.details = "Browsing all courses";
+				}
 				break;
 			}
 			case "files": {
@@ -235,8 +319,7 @@ presence.on("UpdateData", async () => {
 						case "announcements": {
 							canvasDataFunctions.announcement(
 								presenceData,
-								`group: ${topPath}`,
-								pathSplit.slice(3)
+								`group: ${topPath}`
 							);
 							break;
 						}
@@ -289,6 +372,11 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "profile": {
+				break;
+			}
+			case "search": {
+				// all_courses
+				// rubrics
 				break;
 			}
 			default: {
