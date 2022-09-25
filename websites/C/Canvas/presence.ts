@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/DRlJvzX.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, hostname } = window.location,
+		{ pathname, hostname, search } = window.location,
 		pathSplit = pathname.split("/").filter(val => val);
 
 	if (hostname === "www.canvas.net") {
@@ -554,11 +554,45 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "profile": {
+				switch (pathSplit[1] ?? "") {
+					case "": {
+						const profileNameInput =
+							document.querySelector<HTMLInputElement>("#name_input");
+						if (profileNameInput) {
+							presenceData.details = "Editing profile";
+							presenceData.state = profileNameInput.value;
+						} else {
+							canvasDataFunctions.profile(presenceData);
+						}
+						break;
+					}
+					case "content_shares": {
+						presenceData.details = "Viewing shared content";
+						break;
+					}
+					case "settings": {
+						presenceData.details = "Editing profile settings";
+						break;
+					}
+					case "qr_mobile_login": {
+						presenceData.details = "Viewing QR code";
+						break;
+					}
+				}
 				break;
 			}
 			case "search": {
-				// all_courses
-				// rubrics
+				switch (pathSplit[1]) {
+					case "all_courses": {
+						presenceData.details = "Searching all courses";
+						presenceData.state = new URLSearchParams(search).get("search");
+						break;
+					}
+					case "rubrics": {
+						presenceData.details = "Searching rubrics";
+						break;
+					}
+				}
 				break;
 			}
 			default: {
