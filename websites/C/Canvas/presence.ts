@@ -257,11 +257,13 @@ presence.on("UpdateData", async () => {
 											break;
 										}
 										case "submissions": {
-											presenceData.details = `Viewing submissions for assignment: ${topPath} in course: ${firstPath}`;
+											presenceData.details = `Viewing submissions for an assignment for course: ${firstPath}`;
+											presenceData.state = topPath;
 											break;
 										}
 										case "peer_reviews": {
-											presenceData.details = `Viewing peer reviews for assignment: ${topPath} in course: ${firstPath}`;
+											presenceData.details = `Viewing peer reviews for an assignment for course: ${firstPath}`;
+											presenceData.state = topPath;
 											break;
 										}
 										default: {
@@ -306,14 +308,14 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "speed_grader": {
-									presenceData.details = `Grading assignment: ${
-										document.querySelector<HTMLHeadingElement>(
-											".assignmentDetails__Title"
-										).textContent
-									} in course: ${
+									presenceData.details = `Grading an assignment for course: ${
 										document.querySelector<HTMLAnchorElement>("#context_title")
 											.textContent
 									}`;
+									presenceData.state =
+										document.querySelector<HTMLHeadingElement>(
+											".assignmentDetails__Title"
+										).textContent;
 									break;
 								}
 								default: {
@@ -354,6 +356,68 @@ presence.on("UpdateData", async () => {
 								`course: ${firstPath}`,
 								pathSplit.slice(3)
 							);
+							break;
+						}
+						case "quizzes": {
+							if (pathSplit[3]) {
+								switch (pathSplit[4] ?? "") {
+									case "": {
+										presenceData.details = `Viewing a quiz for course: ${firstPath}`;
+										presenceData.state = topPath;
+										break;
+									}
+									case "edit": {
+										presenceData.details = `Editing a quiz for course: ${firstPath}`;
+										presenceData.state = topPath;
+										break;
+									}
+									case "take": {
+										presenceData.details = `Taking a quiz for course: ${firstPath}`;
+										const currentQuestion = document.querySelector(
+												".current_question i"
+											),
+											timeElapsedType = document
+												.querySelector<HTMLSpanElement>(".time_header")
+												.textContent.match(/(Running|Elapsed)/i)[1];
+										let [years, months, days, hours, minutes, seconds] =
+											document
+												.querySelector<HTMLDivElement>(".time_running")
+												.textContent.match(
+													/(?:([\d,]+) Years, )?(?:(\d+) Months, )?(?:(\d+) Days, )?(?:(\d+) Hours, )?(?:(\d+) Minutes, )?(\d+) Seconds/
+												)
+												.map(x => +x.replace(/,/g, ""));
+										const totalSeconds =
+											seconds +
+											minutes * 60 +
+											hours * 3600 +
+											days * 86400 +
+											months * 2592000 +
+											years * 31104000;
+										if (timeElapsedType === "Running") {
+											presenceData.endTimestamp =
+												Math.floor(Date.now() / 1000) + totalSeconds;
+										} else {
+											presenceData.startTimestamp =
+												Math.floor(Date.now() / 1000) - totalSeconds;
+										}
+										presenceData.state = currentQuestion
+											? `${topPath} - ${currentQuestion.nextSibling.textContent}`
+											: topPath;
+										break;
+									}
+									case "history": {
+										presenceData.details = `Viewing an attempt for a quiz in course: ${firstPath}`;
+										presenceData.state = `${navigationPath[2]} - Attempt ${
+											document
+												.querySelector<HTMLAnchorElement>(".quiz_version")
+												.textContent.match(/(\d+):/)[1]
+										}`;
+										break;
+									}
+								}
+							} else {
+								presenceData.details = `Viewing quizzes for course: ${firstPath}`;
+							}
 							break;
 						}
 						case "rubrics": {
