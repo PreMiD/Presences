@@ -335,9 +335,8 @@ presence.on("UpdateData", async () => {
 							if (pathSplit[3]) {
 								presenceData.details = `Viewing student grades for course: ${firstPath}`;
 								presenceData.state = topPath;
-							} else {
+							} else
 								presenceData.details = `Viewing grades for course: ${firstPath}`;
-							}
 							break;
 						}
 						case "groups": {
@@ -433,7 +432,7 @@ presence.on("UpdateData", async () => {
 													.textContent.match(
 														/(?:([\d,]+) Years?, )?(?:(\d+) Months?, )?(?:(\d+) Days?, )?(?:(\d+) Hours?, )?(?:(\d+) Minutes?, )?(\d+) Seconds?/
 													)
-													.map(x => (x ? +x.replace(/,/g, "") : 0)),
+													.map(x => (x ? +x.replaceAll(",", "") : 0)),
 											timeElapsed = new Date(),
 											daySeconds =
 												seconds + minutes * 60 + hours * 3600 + days * 86400;
