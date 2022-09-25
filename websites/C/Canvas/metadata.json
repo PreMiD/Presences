@@ -13,7 +13,7 @@
     "canvas.instructure.com",
     "www.canvas.net"
   ],
-  "regExp": "(canvas\\.\\w+?\\.\\w+)|(\\w+?\\.instructure\\.com)",
+  "regExp": "(canvas\\.\\w+?\\(.\\w+)+)|(\\w+?\\.instructure\\.com)",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/DRlJvzX.png",
   "thumbnail": "https://i.imgur.com/VkwHvay.png",
