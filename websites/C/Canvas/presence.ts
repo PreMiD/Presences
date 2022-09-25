@@ -3,9 +3,88 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	canvasDataFunctions = {
-		announcement: (presenceData: PresenceData, category: string) => {},
-		discussion: (presenceData: PresenceData, category: string) => {},
-		pages: (presenceData: PresenceData, category: string) => {},
+		announcement: (
+			presenceData: PresenceData,
+			category: string,
+			announcement_path: string[]
+		) => {
+			switch (announcement_path[0] ?? "") {
+				case "": {
+					presenceData.details = `Viewing announcements for ${category}`;
+					break;
+				}
+			}
+		},
+		discussion: (
+			presenceData: PresenceData,
+			category: string,
+			discussion_path: string[]
+		) => {
+			switch (discussion_path[0] ?? "") {
+				case "": {
+					presenceData.details = `Viewing discussions for ${category}`;
+					break;
+				}
+				case "new": {
+					presenceData.details = `Creating a new ${
+						getNavigationPath()[1] === "Announcements"
+							? "announcement"
+							: "discussion"
+					} for ${category}`;
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("#discussion_title").value;
+					break;
+				}
+				default: {
+					if (discussion_path[1] === "edit") {
+						presenceData.details = `Editing a ${
+							getNavigationPath()[1] === "Announcements"
+								? "announcement"
+								: "discussion"
+						} for ${category}`;
+						presenceData.state =
+							document.querySelector<HTMLInputElement>(
+								"#discussion_title"
+							).value;
+					} else {
+						presenceData.details = `Viewing a ${
+							getNavigationPath()[1] === "Announcements"
+								? "announcement"
+								: "discussion"
+						} for ${category}`;
+						presenceData.state =
+							document.querySelector<HTMLHeadingElement>(
+								".discussion-title"
+							).innerText;
+					}
+				}
+			}
+		},
+		pages: (
+			presenceData: PresenceData,
+			category: string,
+			pages_path: string[]
+		) => {
+			if (pages_path[0]) {
+				if (pages_path[1] === "edit") {
+					presenceData.details = `Editing a page for ${category}`;
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("#title").value;
+				} else {
+					presenceData.details = `Viewing a page for ${category}`;
+					presenceData.state =
+						document.querySelector<HTMLHeadingElement>(".page-title").innerText;
+				}
+			} else {
+				const titleInput = document.querySelector<HTMLInputElement>("#title");
+				if (titleInput) {
+					presenceData.details = `Creating a page for ${category}`;
+					presenceData.state = titleInput.value;
+				} else {
+					presenceData.details = `Viewing pages for ${category}`;
+				}
+			}
+		},
 		files: (presenceData: PresenceData, category: string = null) => {
 			if (category) {
 				presenceData.details = `Browsing files for ${category}`;
@@ -17,10 +96,39 @@ const presence = new Presence({
 			).textContent;
 		},
 		collaborations: (presenceData: PresenceData, category: string) => {
-			presenceData.details = `Browsing collaborations for ${category}`;
+			const collaborationInput = document.querySelector<HTMLSelectElement>(
+				"#collaboration_collaboration_type"
+			);
+			if (collaborationInput) {
+				presenceData.details = `Creating a collaboration for ${category}`;
+				presenceData.state = collaborationInput.value;
+			} else if (
+				document.querySelector<HTMLFormElement>(".edit_collaboration")
+			) {
+				presenceData.details = `Editing a collaboration for ${category}`;
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					"[name='collaboration[title]']"
+				).value;
+			} else {
+				presenceData.details = `Browsing collaborations for ${category}`;
+			}
 		},
 		conferences: (presenceData: PresenceData, category: string) => {
-			presenceData.details = `Browsing conferences for ${category}`;
+			const conferenceInput = document.querySelector<HTMLInputElement>(
+				"#web_conference_title"
+			);
+			if (conferenceInput) {
+				presenceData.details = `${
+					document.querySelector<HTMLSelectElement>(
+						"#web_conference_conference_type"
+					).disabled
+						? "Editing"
+						: "Creating"
+				} a conference for ${category}`;
+				presenceData.state = conferenceInput.value;
+			} else {
+				presenceData.details = `Browsing conferences for ${category}`;
+			}
 		},
 		people: (presenceData: PresenceData, category: string) => {
 			presenceData.details = `Browsing members of ${category}`;
@@ -35,6 +143,14 @@ const presence = new Presence({
 			).backgroundImage.match(/url\("(.+)"\)/)[1];
 		},
 	};
+
+function getNavigationPath(): string[] {
+	return [...document.querySelector("#breadcrumbs > ul").children]
+		.slice(1)
+		.map(li => {
+			return li.textContent;
+		});
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -74,13 +190,10 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else {
-		const topPath = document.querySelector<HTMLAnchorElement>(
-				"#breadcrumbs>ul>li+li:last-of-type a"
-			)?.textContent,
-			firstPath = document.querySelector(
-				"#breadcrumbs li:nth-of-type(2)"
-			)?.textContent;
 		// All other canvas domains
+		const navigationPath = getNavigationPath(),
+			topPath = navigationPath[navigationPath.length - 1],
+			firstPath = navigationPath[0];
 		switch (pathSplit[0] ?? "") {
 			case "": {
 				presenceData.details = "Viewing dashboard";
@@ -120,14 +233,27 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "announcements": {
-							presenceData.state = `Announcements for ${firstPath}`;
+							canvasDataFunctions.announcement(
+								presenceData,
+								`group: ${topPath}`,
+								pathSplit.slice(3)
+							);
 							break;
 						}
 						case "pages": {
-							presenceData.state = `Pages for ${firstPath}`;
+							canvasDataFunctions.pages(
+								presenceData,
+								`group: ${topPath}`,
+								pathSplit.slice(3)
+							);
 							break;
 						}
 						case "discussion_topics": {
+							canvasDataFunctions.discussion(
+								presenceData,
+								`group: ${topPath}`,
+								pathSplit.slice(3)
+							);
 							break;
 						}
 						case "files": {
