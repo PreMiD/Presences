@@ -297,6 +297,11 @@ presence.on("UpdateData", async () => {
 							);
 							break;
 						}
+						case "external_tools": {
+							presenceData.details = `Viewing course: ${firstPath}`;
+							presenceData.state = topPath;
+							break;
+						}
 						case "files": {
 							canvasDataFunctions.files(presenceData, `course: ${firstPath}`);
 							break;
@@ -326,6 +331,14 @@ presence.on("UpdateData", async () => {
 						}
 						case "grades": {
 							presenceData.details = `Viewing grades for course: ${firstPath}`;
+							break;
+						}
+						case "modules": {
+							if (pathSplit[3] === "progressions") {
+								presenceData.details = `Viewing module progression for course: ${firstPath}`;
+							} else {
+								presenceData.details = `Viewing modules for course: ${firstPath}`;
+							}
 							break;
 						}
 						case "outcomes": {
@@ -434,6 +447,14 @@ presence.on("UpdateData", async () => {
 							} else {
 								presenceData.details = `Viewing rubrics for course: ${firstPath}`;
 							}
+							break;
+						}
+						case "settings": {
+							presenceData.details = `Managing settings for course: ${firstPath}`;
+							presenceData.state =
+								document.querySelector<HTMLLIElement>(
+									".ui-tabs-active"
+								).textContent;
 							break;
 						}
 						case "syllabus": {
