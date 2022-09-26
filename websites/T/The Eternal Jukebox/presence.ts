@@ -18,27 +18,37 @@ presence.on("UpdateData", async () => {
 		}
 		case "/jukebox_go.html": {
 			const [, hours, mins, secs] = document
-				.querySelector<HTMLSpanElement>("#time")
-				.textContent.match(/(\d+):(\d+):(\d+)/)
-				.map(x => +x);
-			presenceData.details = "Listening to a song";
-			presenceData.state =
-				document.querySelector<HTMLSpanElement>("#song-title").textContent;
-			presenceData.startTimestamp =
-				Math.floor(Date.now() / 1000) - hours * 3600 - mins * 60 - secs;
-			presenceData.buttons = [
-				{
-					label: "Listen",
-					url: href,
-				},
-				{
-					label: "View source",
-					url:
-						(await presence.getPageletiable<string>(
-							"jukeboxData.ogAudioURL"
-						)) || document.querySelector<HTMLAnchorElement>("#song-url").href,
-				},
-			];
+					.querySelector<HTMLSpanElement>("#time")
+					.textContent.match(/(\d+):(\d+):(\d+)/)
+					.map(x => +x),
+				totalSeconds = hours * 3600 + mins * 60 + secs,
+				title = document
+					.querySelector<HTMLSpanElement>("#song-title")
+					.textContent.trim();
+			if (title) {
+				presenceData.details = "Listening to a song";
+				presenceData.state = title;
+				if (totalSeconds > 0) {
+					presenceData.startTimestamp =
+						Math.floor(Date.now() / 1000) - totalSeconds;
+				}
+				presenceData.buttons = [
+					{
+						label: "Listen",
+						url: href,
+					},
+					{
+						label: "View source",
+						url:
+							(await presence.getPageletiable<string>(
+								"jukeboxData.ogAudioURL"
+							)) || document.querySelector<HTMLAnchorElement>("#song-url").href,
+					},
+				];
+			} else {
+				presenceData.details = "Listening to a song";
+				presenceData.state = "Loading...";
+			}
 			break;
 		}
 		case "/jukebox_search.html": {
