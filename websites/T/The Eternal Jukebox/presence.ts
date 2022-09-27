@@ -58,9 +58,13 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/faq.html": {
+			presenceData.details = "Browsing";
+			presenceData.state = "FAQ";
 			break;
 		}
 		case "/retro_index.html": {
+			presenceData.details = "Browsing";
+			presenceData.state = "The (Retro) Eternal Jukebox";
 			break;
 		}
 		case "/canonizer_index.html": {
