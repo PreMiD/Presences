@@ -81,14 +81,19 @@ presence.on("UpdateData", async () => {
 				audioSource = await presence.getPageletiable<string>(
 					"canonizerData.ogAudioURL"
 				);
-			if (totalSeconds > 0) {
+			if (
+				document.querySelector<SVGElement>("#tiles > svg")?.childElementCount >
+				5
+			) {
 				presenceData.details = "Listening to an autocanonized song";
 				presenceData.state = document
 					.querySelector<HTMLSpanElement>("#info")
 					.textContent.trim()
 					.replace(/\(autocanonized\) /, "");
-				presenceData.startTimestamp =
-					Math.floor(Date.now() / 1000) - totalSeconds;
+				if (totalSeconds > 0) {
+					presenceData.startTimestamp =
+						Math.floor(Date.now() / 1000) - totalSeconds;
+				}
 				presenceData.buttons = [
 					{
 						label: "Listen",
