@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/espirtf.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = document.location;
+		{ pathname, href, search } = document.location;
 
 	switch (pathname) {
 		case "/jukebox_index.html": {
@@ -68,12 +68,51 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/canonizer_index.html": {
+			presenceData.details = "Browsing";
+			presenceData.state = "The Autocanonizer";
 			break;
 		}
 		case "/canonizer_go.html": {
+			const [, hours, mins, secs] = document
+					.querySelector<HTMLSpanElement>("#mtime")
+					.textContent.match(/(\d+):(\d+):(\d+)/)
+					.map(x => +x),
+				totalSeconds = hours * 3600 + mins * 60 + secs,
+				audioSource = await presence.getPageletiable<string>(
+					"canonizerData.ogAudioURL"
+				);
+			if (totalSeconds > 0) {
+				presenceData.details = "Listening to an autocanonized song";
+				presenceData.state = document
+					.querySelector<HTMLSpanElement>("#info")
+					.textContent.trim()
+					.replace(/\(autocanonized\) /, "");
+				presenceData.startTimestamp =
+					Math.floor(Date.now() / 1000) - totalSeconds;
+				presenceData.buttons = [
+					{
+						label: "Listen",
+						url: href,
+					},
+					{
+						label: "View source",
+						url:
+							audioSource ??
+							`https://open.spotify.com/track/${new URLSearchParams(search).get(
+								"id"
+							)}`,
+					},
+				];
+			} else {
+				presenceData.details = "Listening to an autocanonized song";
+				presenceData.state = "Loading...";
+			}
 			break;
 		}
 		case "/canonizer_search.html": {
+			presenceData.details = "Searching for a song";
+			presenceData.state =
+				document.querySelector<HTMLInputElement>("#search").value;
 			break;
 		}
 	}
