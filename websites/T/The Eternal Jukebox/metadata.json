@@ -1,20 +1,20 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "service": "The Eternal Jukebox",
-  "author": {
-    "id": "193714715631812608",
-    "name": "theusaf#4322"
-  },
-  "description": {
-    "en": "For when your favorite song just isn't long enough"
-  },
-  "url": "eternalbox.dev",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/espirtf.png",
-  "thumbnail": "https://i.imgur.com/2NpjyLf.png",
-  "color": "#000",
-  "tags": [
-    "todo"
-  ],
-  "category": "music"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf#4322"
+	},
+	"service": "The Eternal Jukebox",
+	"description": {
+		"en": "For when your favorite song just isn't long enough"
+	},
+	"url": "eternalbox.dev",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/espirtf.png",
+	"thumbnail": "https://i.imgur.com/2NpjyLf.png",
+	"color": "#000",
+	"category": "music",
+	"tags": [
+		"todo"
+	]
 }
