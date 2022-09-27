@@ -12,9 +12,10 @@
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/espirtf.png",
 	"thumbnail": "https://i.imgur.com/2NpjyLf.png",
-	"color": "#000",
+	"color": "#2b3e50",
 	"category": "music",
 	"tags": [
-		"audio"
+		"audio",
+		"infinite"
 	]
 }
