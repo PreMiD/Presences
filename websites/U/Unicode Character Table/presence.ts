@@ -26,9 +26,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing alphabet";
 				presenceData.state =
 					document.querySelector<HTMLSpanElement>("h1").textContent;
-			} else {
-				presenceData.details = "Browsing list of alphabets";
-			}
+			} else presenceData.details = "Browsing list of alphabets";
 			break;
 		}
 		case "alt-codes": {
@@ -60,9 +58,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing holiday symbols";
 				presenceData.state =
 					document.querySelector<HTMLHeadingElement>("h1").textContent;
-			} else {
-				presenceData.details = "Browsing list of holiday sets";
-			}
+			} else presenceData.details = "Browsing list of holiday sets";
 			break;
 		}
 		case "html-entities": {
