@@ -10,7 +10,7 @@ const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
 		pF => !exists(`${pF}/metadata.json`)
 	),
 	allmeta: [Metadata, string][] = glob(
-		"./{websites,programs}/*/*/*/metadata.json"
+		"./{websites,programs}/*/*/metadata.json"
 	).reduce((result, pF) => {
 		const file = readFile(pF);
 		if (isValidJSON(file)) result.push([JSON.parse(file), pF]);
