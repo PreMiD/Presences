@@ -36,8 +36,9 @@ presence.on("UpdateData", async () => {
 		case "blocks": {
 			presenceData.details = "Browsing unicode blocks";
 			if (pathSplit[1]) {
-				`${(presenceData.state =
-					document.querySelector<HTMLHeadingElement>("h1").textContent)} (${
+				presenceData.state = `${
+					document.querySelector<HTMLHeadingElement>("h1").textContent
+				} (${
 					document
 						.querySelector<HTMLSpanElement>(".page-content__info-range")
 						.textContent.match(/([A-Z0-9]{4,6}—[A-Z0-9]{4,6})/)[1]
