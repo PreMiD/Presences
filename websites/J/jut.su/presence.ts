@@ -25,6 +25,12 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `«${search.value}»`;
 	} else if (pathname === "/")
 		presenceData.details = "Смотрит домашнюю страницу";
+	else if (pathname === "/pm/")
+		presenceData.details = "Просматривает сообщения";
+	else if (pathname.match(/read-[0-9]*/gm))
+		presenceData.details = "Учавствует в переписке";
+	else if (pathname.match(/\/user\//))
+		presenceData.details = `Смотрит профиль ${pathname.split("/")[2]}`;
 	else if (mangaTitle) {
 		presenceData.details = mangaTitle[0];
 		presenceData.state = mangaTitle[1];
@@ -43,7 +49,11 @@ presence.on("UpdateData", async () => {
 		const titles = name.textContent.replace(/[0-9]* сезон [0-9]* серия/g, "");
 		presenceData.details = titles;
 		presenceData.state = name.textContent.replace(titles, "");
-	} else if (title) presenceData.details = `Смотрит «${title.textContent}»`;
+	} else if (title) {
+		presenceData.details = `Смотрит «${
+			title.attributes.getNamedItem("content").value
+		}»`;
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
