@@ -87,11 +87,11 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "tools": {
-			if (pathSplit[1])
+			if (pathSplit[1]) {
 				presenceData.details = `Using the ${document
 					.querySelector<HTMLHeadingElement>("h1")
 					.textContent.trim()} tool`;
-			else presenceData.details = "Browsing list of tools";
+			} else presenceData.details = "Browsing list of tools";
 			break;
 		}
 		default: {
