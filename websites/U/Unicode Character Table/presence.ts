@@ -26,16 +26,15 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing alphabet";
 				presenceData.state =
 					document.querySelector<HTMLSpanElement>("h1").textContent;
-			} else presenceData.details = "Browsing list of alphabets";
-			break;
-		}
-		case "alt-codes": {
-			presenceData.details = "Browsing list of Windows alt codes";
+			} else {
+				presenceData.details = "Browsing";
+				presenceData.state = "Alphabets";
+			}
 			break;
 		}
 		case "blocks": {
-			presenceData.details = "Browsing unicode blocks";
 			if (pathSplit[1]) {
+				presenceData.details = "Browsing unicode block";
 				presenceData.state = `${
 					document.querySelector<HTMLHeadingElement>("h1").textContent
 				} (${
@@ -43,14 +42,20 @@ presence.on("UpdateData", async () => {
 						.querySelector<HTMLSpanElement>(".page-content__info-range")
 						.textContent.match(/([A-Z0-9]{4,6}—[A-Z0-9]{4,6})/)[1]
 				})`;
+			} else {
+				presenceData.details = "Browsing";
+				presenceData.state = "Unicode blocks";
 			}
 			break;
 		}
 		case "emoji": {
-			presenceData.details = "Browsing list of emojis";
 			if (pathSplit[1]) {
+				presenceData.details = "Browsing emojis";
 				presenceData.state =
 					document.querySelector<HTMLHeadingElement>("h1").textContent;
+			} else {
+				presenceData.details = "Browsing";
+				presenceData.state = "Emojis";
 			}
 			break;
 		}
@@ -59,15 +64,10 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing holiday symbols";
 				presenceData.state =
 					document.querySelector<HTMLHeadingElement>("h1").textContent;
-			} else presenceData.details = "Browsing list of holiday sets";
-			break;
-		}
-		case "html-entities": {
-			presenceData.details = "Browsing list of HTML entities";
-			break;
-		}
-		case "kaomoji": {
-			presenceData.details = "Browsing list of kaomoji";
+			} else {
+				presenceData.details = "Browsing";
+				presenceData.state = "Holiday sets";
+			}
 			break;
 		}
 		case "search": {
@@ -76,76 +76,22 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "sets": {
-			presenceData.details = "Browsing symbol sets";
 			if (pathSplit[1]) {
+				presenceData.details = "Browsing symbol set";
 				presenceData.state =
 					document.querySelector<HTMLHeadingElement>("h1").textContent;
+			} else {
+				presenceData.details = "Browsing";
+				presenceData.state = "Symbol sets";
 			}
-			break;
-		}
-		case "text-art": {
-			presenceData.details = "Browsing text art";
 			break;
 		}
 		case "tools": {
-			switch (pathSplit[1] ?? "") {
-				case "": {
-					presenceData.details = "Browsing list of tools";
-					break;
-				}
-				case "braile": {
-					presenceData.details = "Using the Braille translator";
-					break;
-				}
-				case "decoder": {
-					presenceData.details = "Using the Unicode decoder";
-					break;
-				}
-				case "encoder": {
-					presenceData.details = "Using the HTML encoder";
-					break;
-				}
-				case "flip": {
-					presenceData.details = "Using the flip text tool";
-					break;
-				}
-				case "generator": {
-					presenceData.details = "Using the Unicode table generator";
-					break;
-				}
-				case "gothic": {
-					presenceData.details = "Using the Gothic-style text generator";
-					break;
-				}
-				case "morse": {
-					presenceData.details = "Using the Morse code converter";
-					break;
-				}
-				case "nickname-generator": {
-					presenceData.details = "Using the stylish text generator";
-					break;
-				}
-				case "password-generator": {
-					presenceData.details = "Using the password generator";
-					break;
-				}
-				case "register-converter": {
-					presenceData.details = "Using the case converter";
-					break;
-				}
-				case "strikethrough-text": {
-					presenceData.details = "Using the strikethrough text generator";
-					break;
-				}
-				case "text-to-symbols": {
-					presenceData.details = "Using the text to symbols converter";
-					break;
-				}
-				case "word-counter": {
-					presenceData.details = "Using the word counter";
-					break;
-				}
-			}
+			if (pathSplit[1])
+				presenceData.details = `Using the ${document
+					.querySelector<HTMLHeadingElement>("h1")
+					.textContent.trim()} tool`;
+			else presenceData.details = "Browsing list of tools";
 			break;
 		}
 		default: {
