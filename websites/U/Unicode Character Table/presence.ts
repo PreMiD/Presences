@@ -91,7 +91,10 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Using the ${document
 					.querySelector<HTMLHeadingElement>("h1")
 					.textContent.trim()} tool`;
-			} else presenceData.details = "Browsing list of tools";
+			} else {
+				presenceData.details = "Browsing";
+				presenceData.state = "Tools";
+			}
 			break;
 		}
 		default: {
