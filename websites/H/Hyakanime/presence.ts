@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 		},
 		page = document.location.pathname;
 	if (page.startsWith("/anime/")) {
-        presenceData.details = "Regarde la fiche:";
+		presenceData.details = "Regarde la fiche:";
 		const anime = document.querySelector(
 			"#root > div.anime-body > div.anime-white-informations > div.anime-white-infos > div:nth-child(2) > h1"
 		).textContent;
