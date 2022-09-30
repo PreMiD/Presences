@@ -13,8 +13,7 @@ presence.on("UpdateData", async () => {
 	if (page.startsWith("/anime/")) {
 		const anime = document.querySelector(
 			"#root > div.anime-body > div.anime-white-informations > div.anime-white-infos > div:nth-child(2) > h1"
-		).textContent
-		 ;
+		).textContent;
 		presenceData.state = anime.split("Adulte")[0];
 		presenceData.buttons = [
 			{
