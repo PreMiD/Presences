@@ -16,8 +16,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Viewing Comic List";
 	else if (/^\/manga\/[0-9a-z-]+\/?$/i.test(pathname)) {
 		presenceData.details = "Viewing Comic Page";
-		presenceData.state = presenceData.state =
-			document.querySelector(".entry-title").textContent;
+		presenceData.state = document.querySelector(".entry-title").textContent;
 		presenceData.buttons = [
 			{
 				label: "Visit Comic Page",
