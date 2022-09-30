@@ -11,11 +11,11 @@ presence.on("UpdateData", async () => {
 		},
 		page = document.location.pathname;
 	if (page.startsWith("/anime/")) {
-		var anime = document.querySelector(
+		const anime = document.querySelector(
 			"#root > div.anime-body > div.anime-white-informations > div.anime-white-infos > div:nth-child(2) > h1"
-		).textContent;
-		var newanime = anime.split("Adulte");
-		presenceData.state = newanime[0];
+		).textContent
+		 ;
+		presenceData.state = anime.split("Adulte")[0];
 		presenceData.buttons = [
 			{
 				label: "Afficher la fiche",
