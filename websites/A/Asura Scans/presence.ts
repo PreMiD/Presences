@@ -10,11 +10,13 @@ presence.on("UpdateData", () => {
 			largeImageKey: "https://i.imgur.com/ewDJfwk.png",
 		};
 
-	if (/^\/(page\/\d+\/?)?$/.test(pathname)) details = "Viewing Home Page";
-	else if (/^\/manga\/?$/.test(pathname)) details = "Viewing Comic List";
+	if (/^\/(page\/\d+\/?)?$/.test(pathname))
+		presenceData.details = "Viewing Home Page";
+	else if (/^\/manga\/?$/.test(pathname))
+		presenceData.details = "Viewing Comic List";
 	else if (/^\/manga\/[0-9a-z-]+\/?$/i.test(pathname)) {
 		presenceData.details = "Viewing Comic Page";
-		presenceData.state = state =
+		presenceData.state = presenceData.state =
 			document.querySelector(".entry-title").textContent;
 		presenceData.buttons = [
 			{
@@ -45,8 +47,8 @@ presence.on("UpdateData", () => {
 	} else if (pathname.startsWith("/bookmarks"))
 		presenceData.details = "Viewing Bookmarks";
 	else {
-		details = "Browsing Asura Scans";
-		state = document.title;
+		presenceData.details = "Browsing Asura Scans";
+		presenceData.state = document.title;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
