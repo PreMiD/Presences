@@ -8,27 +8,54 @@ function truncateAfter(str: string, pattern: string): string {
 	return str.slice(0, str.indexOf(pattern));
 }
 
-let cached: { id: string; uploader: string; channelURL: string };
+let cached: { id: string; uploader: string; channelURL: string },
+	closest: Element;
 
-function cacheIt(hostname: string, shortsPath: string) {
-	if (!cached || cached.id !== shortsPath) {
-		const closest = document
-				.querySelectorAll("video")[1]
-				.closest(".player-container")
-				.parentElement.querySelector(
-					'[class="yt-simple-endpoint style-scope yt-formatted-string"]'
-				),
-			fetched = {
-				id: shortsPath,
-				uploader:
-					closest?.textContent ??
-					document
-						.querySelectorAll('div[class="style-scope ytd-channel-name"]')[2]
-						.querySelector(
-							'[class="yt-simple-endpoint style-scope yt-formatted-string"]'
-						)?.textContent,
-				channelURL: `https://${hostname}${closest?.getAttribute("href")}`,
-			};
+function delay(ms: number) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function cacheIt(hostname: string, shortsPath: string) {
+	if (!cached?.id || cached.id !== shortsPath) {
+		if (!cached) {
+			closest =
+				document
+					.querySelectorAll("video")[1]
+					?.closest("#player")
+					?.parentElement?.parentElement?.querySelector(
+						'[spellcheck="false"]'
+					) ??
+				document
+					.querySelectorAll("video")[0]
+					?.closest("#player")
+					?.parentElement?.parentElement?.querySelector('[spellcheck="false"]');
+		} else {
+			await delay(300);
+			closest =
+				document
+					.querySelectorAll("video")[1]
+					?.closest("#player")
+					?.parentElement?.parentElement?.querySelector(
+						'[class="yt-simple-endpoint style-scope yt-formatted-string"]'
+					) ??
+				document
+					.querySelectorAll("video")[0]
+					?.closest("#player")
+					?.parentElement?.parentElement?.querySelector(
+						'[class="yt-simple-endpoint style-scope yt-formatted-string"]'
+					);
+		}
+		const fetched = {
+			id: shortsPath,
+			uploader:
+				closest?.textContent ??
+				document
+					.querySelectorAll('div[class="style-scope ytd-channel-name"]')[2]
+					.querySelector(
+						'[class="yt-simple-endpoint style-scope yt-formatted-string"]'
+					)?.textContent,
+			channelURL: `https://${hostname}${closest?.getAttribute("href")}`,
+		};
 		cached = fetched;
 		return fetched;
 	} else return cached;
