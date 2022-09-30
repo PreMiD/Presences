@@ -5,9 +5,10 @@ presence.on("UpdateData", async () => {
     const presenceData = {
         largeImageKey: "applogo_7fac0ec4359bda8ccf0f",
         startTimestamp: browsingTimestamp,
-        details: "Regarde la fiche",
+        details: "Sur la page d'accueil",
     }, page = document.location.pathname;
     if (page.startsWith("/anime/")) {
+		presenceData.details = "Regarde la fiche:";
         var anime = document.querySelector("#root > div.anime-body > div.anime-white-informations > div.anime-white-infos > div:nth-child(2) > h1").textContent;
         var newanime = anime.split("Adulte");
         presenceData.state = newanime[0];
