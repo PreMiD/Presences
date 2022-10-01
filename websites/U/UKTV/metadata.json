@@ -8,13 +8,21 @@
 	"description": {
 		"en": "UKTV Play, the free on demand TV service. Watch the best comedy, drama, entertainment and documentaries from Dave, Drama, W and Yesterday. Watch on your TV, mobile, tablet, or online."
 	},
-	"url": ["uktvplay.uktv.co.uk", "uktvplay.co.uk"],
-	"version": "1.0.2",
+	"url": [
+		"uktvplay.uktv.co.uk",
+		"uktvplay.co.uk"
+	],
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/wjqmEQY.png",
 	"thumbnail": "https://i.imgur.com/mPSBoXK.png",
 	"color": "#00BAC6",
 	"category": "videos",
-	"tags": ["uktv", "streaming", "tv", "series"],
+	"tags": [
+		"uktv",
+		"streaming",
+		"tv",
+		"series"
+	],
 	"settings": [
 		{
 			"id": "lang",
