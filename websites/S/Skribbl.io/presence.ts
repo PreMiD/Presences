@@ -32,12 +32,12 @@ presence.on("UpdateData", async () => {
 		if (buttons) {
 			presenceData.buttons = [
 				{
-					label: (await strings).buttonJoinGame.replace(": {0}", ""),
+					label: strings.buttonJoinGame.replace(": {0}", ""),
 					url: document.location.href,
 				},
 			];
 		}
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-	} else presenceData.details = (await strings).viewHome;
+	} else presenceData.details = strings.viewHome;
 	presence.setActivity(presenceData);
 });
