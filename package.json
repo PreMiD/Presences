@@ -20,7 +20,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "7.19.1",
-		"@babel/preset-env": "7.19.1",
+		"@babel/preset-env": "7.19.3",
 		"@commitlint/cli": "17.1.2",
 		"@commitlint/config-angular": "17.1.0",
 		"@types/babel__core": "7.1.19",
