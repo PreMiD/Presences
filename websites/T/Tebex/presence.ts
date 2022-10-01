@@ -16,7 +16,10 @@ presence.on("UpdateData", async () => {
 		},
 		{ hostname, href, pathname } = document.location,
 		pathnameSplit = pathname.split("/"),
-		buttons = await presence.getSetting<boolean>("buttons");
+		buttons = await presence.getSetting<boolean>("buttons"),
+		search = document.querySelector<HTMLInputElement>(
+			'[autocapitalize="sentences"]'
+		);
 
 	switch (hostname) {
 		case "www.tebex.io":
@@ -38,12 +41,6 @@ presence.on("UpdateData", async () => {
 				}
 				case "games": {
 					presenceData.details = "Viewing all games";
-					presenceData.buttons = [
-						{
-							label: "View All Games",
-							url: href,
-						},
-					];
 					break;
 				}
 				case "game-studios": {
@@ -58,22 +55,10 @@ presence.on("UpdateData", async () => {
 				}
 				case "partners": {
 					presenceData.details = "Viewing partners";
-					presenceData.buttons = [
-						{
-							label: "View Partners",
-							url: href,
-						},
-					];
 					break;
 				}
 				case "contact": {
 					presenceData.details = "Viewing contact info";
-					presenceData.buttons = [
-						{
-							label: "View The Contact Page",
-							url: href,
-						},
-					];
 					break;
 				}
 				case "": {
@@ -91,9 +76,6 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "docs.tebex.io": {
-			const search = document.querySelector<HTMLInputElement>(
-				'[autocapitalize="sentences"]'
-			);
 			if (search?.value) {
 				presenceData.details = "Searching the docs for";
 				presenceData.state = search?.value;
@@ -105,7 +87,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = Assets.ReadingImage;
 				presenceData.buttons = [
 					{
-						label: "Read The Docs",
+						label: "Read Docs",
 						url: href,
 					},
 				];
@@ -123,12 +105,6 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "category": {
-					presenceData.buttons = [
-						{
-							label: "View Category",
-							url: href,
-						},
-					];
 					switch (pathnameSplit[2]) {
 						case "": {
 							presenceData.details = `${viewing} categories`;
@@ -162,7 +138,15 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 	}
-	if (!buttons) delete presenceData.buttons;
+	if (!search && buttons && !presenceData.buttons) {
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+	} else if (!buttons) delete presenceData.buttons;
+
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
