@@ -18,7 +18,13 @@ enum GameEvent {
 	end = 3,
 }
 
+enum GameType {
+	classic = "Classic",
+	ranked = "Ranked",
+}
+
 interface GameState {
+	scene: string;
 	page: string;
 	day: number;
 	type: string;
@@ -27,83 +33,106 @@ interface GameState {
 
 let elapsed = Math.round(Date.now() / 1000),
 	oldState: GameState = {
+		scene: "BigHome",
 		page: "Login",
 		day: 1,
-		type: "Classic",
-		state: 1,
+		type: GameType.classic,
+		state: GameEvent.day,
 	},
 	currentState = oldState,
 	logs: string[] = [];
 
-function decodeHex(hex: string): string {
-	const input = hex.split(" ");
-	let out = "";
-	for (let i = 0; i < input.length; i++) {
-		const encoded = input[i].replace(/0x/g, "").replace(/[0-9a-f]{2}/gi, "%$&");
-		try {
-			out += decodeURIComponent(encoded);
-		} catch (err) {
-			out += "§" + input[i] + "§";
-		}
-	}
-	return out;
-}
-
 function handleLog(log: string) {
-	if (log.startsWith("Switched to ")) {
-		const pageName = log.split(" \\n")[0].split("Switched to ")[1];
-		currentState.page = pageName;
-		if (pageName === "BigHome Scene") {
+	if (log.startsWith("Switched to ") || log.startsWith("Switched additively to")) {
+		const pageName = log.match(/^Switched( additively)? to( scene)? (.*) Scene$/m)[1].trim();
+		if (pageName === "BigHome") {
 			currentState.day = 1;
 			currentState.state = GameEvent.day;
-			currentState.type = "Classic";
+			currentState.type = GameType.classic;
+		}
+		currentState.scene = pageName;
+	} else if (log.startsWith("Entered HomeSceneController.ShowView()")) {
+		const pageName = log.match(/^Entered HomeSceneController.ShowView\(\) - View passed in: (.*)$/m)[1].trim();
+		currentState.page = pageName;
+	} else if (log.startsWith("Entered ")) {
+		const pageName = log.match(/^Entered (.*)$/m)[1].trim();
+		switch (pageName) {
+			case "HandleStartRanked": {
+				currentState.type = GameType.ranked;
+				break;
+			}
+			case "HandleOnLeaveRankedQueue": {
+				currentState.type = GameType.classic;
+				break;
+			}
 		}
 	} else if (log.startsWith("Creating lobby:")) {
 		const type = log.split(" |")[0].split(": ")[1];
 		currentState.type = type;
-	} else if (log.includes("[Network]") && log.includes("Bytes:")) {
-		const hex = log.split("Bytes: ")[1].split("</color>")[0],
-			out = decodeHex(hex);
-		if (out.includes("§")) {
-			const code = out.match(/§.*?§/g)[0];
-			switch (code.toLowerCase()) {
-				case "§0x91§": {
-					// night start
-					currentState.state = GameEvent.night;
-					break;
-				}
-				case "§0x92§": {
-					// day start
-					currentState.state = GameEvent.day;
-					currentState.day++;
-					break;
-				}
-				case "§0x93§": {
-					// voting end
-					currentState.state = GameEvent.day;
-					break;
-				}
-				case "§0x9b§": {
-					// voting starts
-					currentState.state = GameEvent.voting;
-					break;
-				}
-				case "§0xc2§": {
-					// end game
-					currentState.state = GameEvent.end;
-					break;
-				}
+	} else if (/\[Network\] <color=.*?>\[Received\] <b>/.test(log)) {
+		const action = log.match(/\[Network\] <color=.*?>\[Received\] <b>(.*?)<\/b>/)[1];
+		switch (action) {
+			case "RoleLotsInfo": {
+				break;
+			}
+			case "RoleAndPosition": {
+				break;
+			}
+			case "RoleList": {
+				break;
+			}
+			case "StartDay":
+			case "StartFirstDay": {
+				break;
+			}
+			case "StartNight": {
+				break;
+			}
+			case "StartDiscussion": {
+				break;
+			}
+			case "StartDefense": {
+				break;
+			}
+			case "StartJudgement": {
+				break;
+			}
+			case "TrialGuilty": {
+				break;
+			}
+			case "TrialNotGuilty": {
+				break;
+			}
+			case "LynchUser": {
+				break;
+			}
+			case "StartVoting": {
+				break;
+			}
+			case "WhoDiedAndHow": {
+				break;
+			}
+			case "DeathNote": {
+				break;
+			}
+			case "TellLastWill": {
+				break;
+			}
+			case "SendLastWill": {
+				break;
+			}
+			case "SomeoneHasWon": {
+				break;
+			}
+			case "AfterGameScreenData": {
+				break;
 			}
 		}
-	} else if (log.startsWith("Entered HandleStartRanked")) {
-		currentState.type = "Ranked";
-	} else if (log.startsWith("Entered HandleOnLeaveRankedQueue")) {
-		currentState.type = "Classic";
 	}
 }
 
 setInterval(async () => {
-	const latestLogs: string[] = await (
+	const latestLogs: string[] = (
 		await presence.getLogs()
 	).filter(log => {
 		return !/(Submitting chat)|(SocketSend\\.)|(Message received)|(> Potion ID)|(Number of)|(Adding game type)|(Clearing any)|(Initializing)|(Entering)|(Unloading)|(Preloading)|(Login Scene)|\\[ApplicationController]|\\[UnityCache]|\\[Subsystems]|\\[CachedXMLHttpRequest]/.test(
@@ -129,7 +158,7 @@ presence.on("UpdateData", () => {
 		};
 	} else {
 		try {
-			if (oldState.page !== currentState.page)
+			if (oldState.scene !== currentState.scene)
 				elapsed = Math.round(Date.now() / 1000);
 
 			let key = Assets.regularLogo;
