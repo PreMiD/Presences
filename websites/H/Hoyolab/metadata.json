@@ -6,18 +6,24 @@
 	},
 	"service": "Hoyolab",
 	"description": {
-		"en": "Genshin Impact Official Community is the official discussion forum for Genshin Impact, miHoYo's open-world action RPG.",
-		"nl": "Genshin Impact Official Community is het officiële discussieforum voor Genshin Impact, miHoYo's open-wereld actie RPG."
+		"en": "HoYoLAB is the gaming community forum for HoYoverse games, including Honkai Impact 3rd, Genshin Impact, and Tears of Themis, with official information about game events."
 	},
 	"url": "www.hoyolab.com",
 	"version": "1.0.11",
 	"logo": "https://i.imgur.com/NtPeZ9u.png",
 	"thumbnail": "https://i.imgur.com/oPFkbqC.png",
-	"color": "#2d2f33",
+	"color": "#657ef8",
 	"category": "games",
 	"tags": [
 		"games",
-		"forum",
+		"socials",
+		"forums",
 		"genshin"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
 	]
 }
