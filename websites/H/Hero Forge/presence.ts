@@ -13,21 +13,23 @@ setInterval(() => {
 				.find(listItem => {
 					return getComputedStyle(listItem).backgroundImage !== "none";
 				})
-				.textContent.trim(),
+				?.textContent.trim()
+				.toLowerCase(),
 			menuB = Array.from(
 				document.querySelectorAll<HTMLLIElement>("#menuB > li")
 			)
 				.find(listItem => {
 					return getComputedStyle(listItem).backgroundImage !== "none";
 				})
-				.textContent.trim(),
+				?.textContent.trim()
+				.toLowerCase(),
 			menuC = Array.from(
 				document.querySelectorAll<HTMLLIElement>("#menuC > li")
 			)
 				.find(listItem => {
 					return getComputedStyle(listItem).backgroundImage !== "none";
 				})
-				.textContent.trim()
+				?.textContent.trim()
 				.toLowerCase();
 		characterCreatorMenu = [menuA, menuB, menuC];
 	}
@@ -61,18 +63,18 @@ presence.on("UpdateData", async () => {
 						"#view span[style*='/static/svg/item-selected.svg']"
 					),
 					chosenItemImage =
-						chosenItemContainer.firstElementChild as HTMLImageElement,
+						chosenItemContainer?.firstElementChild as HTMLImageElement,
 					chosenItemName = chosenItemImage?.alt.match(/^(.*?) Add Part$/)[1];
 
-				let mainState: string, subState: string;
+				let mainState = "",
+					subState = "";
 				presenceData.details = `Modifying Character: ${characterName}`;
 				switch (characterCreatorMenu[0]) {
 					case "species": {
 						mainState = "Species";
 						if (chosenItemContainer) {
 							subState = `${
-								// TODO: fix this
-								/Femle_thumb/.test(chosenItemImage.src) ? "Femle" : "Mle"
+								/Female_thumb/.test(chosenItemImage.src) ? "Female" : "Male"
 							} ${
 								chosenItemContainer.parentElement.nextElementSibling.textContent
 							}`;
@@ -177,14 +179,22 @@ presence.on("UpdateData", async () => {
 					}
 					case "buy": {
 						mainState = "Buying Items";
-						const selecetedItem = document.querySelector<HTMLDivElement>(
-							"#view [class*=name]"
-						);
 						switch (characterCreatorMenu[1]) {
-							case "mini":
+							case "mini": {
+								const selectedMini = document.querySelector<HTMLDivElement>(
+									"#view [class*=name]"
+								);
+								if (selectedMini)
+									subState = `${characterCreatorMenu[1]} - ${selectedMini.textContent}`;
+								else subState = characterCreatorMenu[1];
+								break;
+							}
 							case "packs": {
-								if (selecetedItem)
-									subState = `${characterCreatorMenu[1]} - ${selecetedItem.textContent}`;
+								const selectedPack = document.querySelector<HTMLDivElement>(
+									"#view [class*=displayLabel]"
+								);
+								if (selectedPack)
+									subState = `${characterCreatorMenu[1]} - ${selectedPack.textContent}`;
 								else subState = characterCreatorMenu[1];
 								break;
 							}
@@ -204,7 +214,15 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 				}
-				presenceData.state = `${mainState}: ${subState}`;
+				if (subState) {
+					presenceData.state = `${mainState[0].toUpperCase()}${mainState.slice(
+						1
+					)}: ${subState[0].toUpperCase()}${subState.slice(1)}`;
+				} else {
+					presenceData.state = `${mainState[0].toUpperCase()}${mainState.slice(
+						1
+					)}`;
+				}
 			}
 			break;
 		}
