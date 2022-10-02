@@ -12,10 +12,17 @@ enum Assets {
 }
 
 enum GameEvent {
-	day = 1,
-	night = 0,
-	voting = 2,
-	end = 3,
+	night = "night",
+	day = "day",
+	voting = "voting",
+	end = "end",
+	judgement = "judgement",
+	discussion = "discussion",
+	defense = "defense",
+	afterGame = "afterGame",
+	viewingDeathNote = "viewingDeathNote",
+	viewingLastWill = "viewingLastWill",
+	preGame = "preGame",
 }
 
 enum GameType {
@@ -43,17 +50,19 @@ let elapsed = Math.round(Date.now() / 1000),
 	logs: string[] = [];
 
 function handleLog(log: string) {
-	if (log.startsWith("Switched to ") || log.startsWith("Switched additively to")) {
-		const pageName = log.match(/^Switched( additively)? to( scene)? (.*) Scene$/m)[1].trim();
-		if (pageName === "BigHome") {
-			currentState.day = 1;
-			currentState.state = GameEvent.day;
-			currentState.type = GameType.classic;
-		}
-		currentState.scene = pageName;
+	if (
+		log.startsWith("Switched to ") ||
+		log.startsWith("Switched additively to")
+	) {
+		currentState.scene = log
+			.match(/^Switched( additively)? to( scene)? (.*) Scene$/m)[1]
+			.trim();
 	} else if (log.startsWith("Entered HomeSceneController.ShowView()")) {
-		const pageName = log.match(/^Entered HomeSceneController.ShowView\(\) - View passed in: (.*)$/m)[1].trim();
-		currentState.page = pageName;
+		currentState.page = log
+			.match(
+				/^Entered HomeSceneController.ShowView\(\) - View passed in: (.*)$/m
+			)[1]
+			.trim();
 	} else if (log.startsWith("Entered ")) {
 		const pageName = log.match(/^Entered (.*)$/m)[1].trim();
 		switch (pageName) {
@@ -67,64 +76,66 @@ function handleLog(log: string) {
 			}
 		}
 	} else if (log.startsWith("Creating lobby:")) {
-		const type = log.split(" |")[0].split(": ")[1];
-		currentState.type = type;
+		currentState.type = log.match(/^Creating lobby: (.*?) \|/)[1];
 	} else if (/\[Network\] <color=.*?>\[Received\] <b>/.test(log)) {
-		const action = log.match(/\[Network\] <color=.*?>\[Received\] <b>(.*?)<\/b>/)[1];
+		const action = log.match(
+			/\[Network\] <color=.*?>\[Received\] <b>(.*?)<\/b>/
+		)[1];
 		switch (action) {
-			case "RoleLotsInfo": {
-				break;
-			}
-			case "RoleAndPosition": {
-				break;
-			}
+			case "RoleLotsInfo":
+			case "RoleAndPosition":
 			case "RoleList": {
+				currentState.page = action;
+				currentState.state = GameEvent.preGame;
 				break;
 			}
-			case "StartDay":
 			case "StartFirstDay": {
+				currentState.day = 0;
+				currentState.state = GameEvent.day;
+				break;
+			}
+			case "StartDay": {
+				currentState.day++;
+				currentState.state = GameEvent.day;
 				break;
 			}
 			case "StartNight": {
+				currentState.state = GameEvent.night;
 				break;
 			}
 			case "StartDiscussion": {
+				currentState.state = GameEvent.discussion;
 				break;
 			}
 			case "StartDefense": {
+				currentState.state = GameEvent.defense;
 				break;
 			}
 			case "StartJudgement": {
-				break;
-			}
-			case "TrialGuilty": {
-				break;
-			}
-			case "TrialNotGuilty": {
-				break;
-			}
-			case "LynchUser": {
+				currentState.state = GameEvent.judgement;
 				break;
 			}
 			case "StartVoting": {
+				currentState.state = GameEvent.voting;
 				break;
 			}
 			case "WhoDiedAndHow": {
 				break;
 			}
 			case "DeathNote": {
+				currentState.state = GameEvent.viewingDeathNote;
 				break;
 			}
 			case "TellLastWill": {
-				break;
-			}
-			case "SendLastWill": {
+				currentState.state = GameEvent.viewingLastWill;
 				break;
 			}
 			case "SomeoneHasWon": {
+				currentState.state = GameEvent.end;
 				break;
 			}
 			case "AfterGameScreenData": {
+				currentState.state = GameEvent.afterGame;
 				break;
 			}
 		}
@@ -132,9 +143,7 @@ function handleLog(log: string) {
 }
 
 setInterval(async () => {
-	const latestLogs: string[] = (
-		await presence.getLogs()
-	).filter(log => {
+	const latestLogs: string[] = (await presence.getLogs()).filter(log => {
 		return !/(Submitting chat)|(SocketSend\\.)|(Message received)|(> Potion ID)|(Number of)|(Adding game type)|(Clearing any)|(Initializing)|(Entering)|(Unloading)|(Preloading)|(Login Scene)|\\[ApplicationController]|\\[UnityCache]|\\[Subsystems]|\\[CachedXMLHttpRequest]/.test(
 			log
 		);
@@ -147,166 +156,16 @@ setInterval(async () => {
 }, 500);
 
 presence.on("UpdateData", () => {
-	let data: PresenceData = {};
+	let presenceData: PresenceData = {
+		largeImageKey: Assets.regularLogo,
+		startTimestamp: elapsed,
+	};
 
 	if (window.location.pathname !== "/TownOfSalem/") {
-		data = {
-			details: "Browsing BlankMediaGames",
-			state: document.title,
-			startTimestamp: elapsed,
-			largeImageKey: Assets.regularLogo,
-		};
+		presenceData.details = "Browsing BlankMediaGames";
+		presenceData.state = document.title;
 	} else {
-		try {
-			if (oldState.scene !== currentState.scene)
-				elapsed = Math.round(Date.now() / 1000);
-
-			let key = Assets.regularLogo;
-			if (currentState.type.search(/Coven/g) !== -1) key = Assets.covenLogo;
-
-			let gameType;
-			switch (currentState.type) {
-				case "ClassicTownTraitor": {
-					gameType = "Town Traitor";
-					break;
-				}
-				case "RankedPractice": {
-					gameType = "Ranked Practice";
-					break;
-				}
-				case "AllAny": {
-					gameType = "All Any";
-					break;
-				}
-				case "RapidMode": {
-					gameType = "Rapid Mode";
-					break;
-				}
-				case "DraculasPalace": {
-					gameType = "Dracula's Palace";
-					break;
-				}
-				case "CovenCustom": {
-					gameType = "Coven Custom";
-					break;
-				}
-				case "CovenLovers": {
-					gameType = "Lovers";
-					break;
-				}
-				case "CovenAllAny": {
-					gameType = "Coven All Any";
-					break;
-				}
-				case "CovenMafia": {
-					gameType = "Mafia Returns";
-					break;
-				}
-				case "CovenRankedPractice": {
-					gameType = "Coven Ranked Practice";
-					break;
-				}
-				case "CovenClassic": {
-					gameType = "Coven Classic";
-					break;
-				}
-				default: {
-					gameType = currentState.type;
-					break;
-				}
-			}
-			switch (currentState.page) {
-				case "Login": {
-					data = {
-						details: "Logging in",
-						largeImageKey: Assets.regularLogo,
-						smallImageKey: Assets.idle,
-						startTimestamp: elapsed,
-					};
-					break;
-				}
-				case "BigHome Scene": {
-					if (currentState.type === "Ranked") {
-						data = {
-							details: "In a Ranked match",
-							state: "Waiting in queue",
-							largeImageKey: Assets.regularLogo,
-							smallImageKey: Assets.idle,
-							startTimestamp: elapsed,
-						};
-					} else {
-						data = {
-							details: "Browsing Home Screen",
-							largeImageKey: Assets.regularLogo,
-							smallImageKey: Assets.idle,
-							startTimestamp: elapsed,
-						};
-					}
-					break;
-				}
-				case "BigLobby Scene": {
-					Object.assign(data, {
-						details: `In a ${gameType} match`,
-						state: "Waiting in lobby",
-						elapsed,
-						largeImageKey: key,
-						smallImageKey: Assets.idle,
-					});
-					break;
-				}
-				case "BigPreGame Scene": {
-					Object.assign(data, {
-						details: `In a ${gameType} match`,
-						largeImageKey: key,
-						startTimestamp: elapsed,
-					});
-					switch (currentState.state) {
-						case GameEvent.night: {
-							data.state = `Night ${currentState.day}`;
-							data.smallImageKey = Assets.night;
-							break;
-						}
-						case GameEvent.day: {
-							data.state = `Day ${currentState.day}`;
-							data.smallImageKey = Assets.day;
-							break;
-						}
-						case GameEvent.voting: {
-							data.state = `Day ${currentState.day} | Judgement`;
-							data.smallImageKey = Assets.voting;
-							break;
-						}
-						case GameEvent.end: {
-							data.state = `Day ${currentState.day} | Game End`;
-							data.smallImageKey = Assets.idle;
-							break;
-						}
-					}
-					break;
-				}
-				case "BigEndGame Scene": {
-					Object.assign(data, {
-						details: "Browsing End-Game Screen",
-						largeImageKey: key,
-						smallImageKey: Assets.idle,
-						startTimestamp: elapsed,
-					});
-					break;
-				}
-				default: {
-					throw new Error("");
-				}
-			}
-			oldState = currentState;
-		} catch (e) {
-			Object.assign(data, {
-				details: "Logging in",
-				largeImageKey: Assets.regularLogo,
-				smallImageKey: Assets.idle,
-				startTimestamp: elapsed,
-			});
-		}
 	}
 
-	presence.setActivity(data);
+	presence.setActivity(presenceData);
 });
