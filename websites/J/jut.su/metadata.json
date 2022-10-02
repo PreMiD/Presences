@@ -17,10 +17,13 @@
 		"nl": "Jut.su is een Russische anime-website"
 	},
 	"url": "jut.su",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"logo": "https://i.imgur.com/f3zxOuL.png",
 	"thumbnail": "https://i.imgur.com/NlBgvR0.png",
 	"color": "#c9e58b",
 	"category": "anime",
-	"tags": ["jutsu", "anime"]
+	"tags": [
+		"jutsu",
+		"anime"
+	]
 }
