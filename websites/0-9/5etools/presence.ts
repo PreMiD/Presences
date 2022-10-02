@@ -17,6 +17,30 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home page";
 			break;
 		}
+		case "backgrounds.html":
+		case "charcreationoptions.html":
+		case "conditionsdiseases.html":
+		case "feats.html":
+		case "items.html":
+		case "optionalfeatures.html":
+		// TODO: fix this
+		case "rces.html":
+		case "spells.html":
+		case "tables.html":
+		case "variantrules.html": {
+			const type =
+				document.querySelector<HTMLHeadingElement>(".page__title").textContent;
+			presenceData.details = `Browsing ${type}`;
+			presenceData.state =
+				document.querySelector<HTMLHeadingElement>(".stats-name").textContent;
+			presenceData.buttons = [
+				{
+					label: `View ${type.substring(0, type.length - 1)}`,
+					url: href,
+				},
+			];
+			break;
+		}
 		case "adventure.html": {
 			presenceData.details = `Browsing adventure: ${
 				document.querySelector<HTMLHeadingElement>(".page__title").textContent
@@ -58,27 +82,21 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
-		case "backgrounds.html":
-		case "charcreationoptions.html":
-		case "conditionsdiseases.html":
-		case "feats.html":
-		case "items.html":
-		case "optionalfeatures.html":
-		// TODO: fix this
-		case "rces.html":
-		case "spells.html":
-		case "tables.html":
-		case "variantrules.html": {
-			const type =
-				document.querySelector<HTMLHeadingElement>(".page__title").textContent;
-			presenceData.details = `Browsing ${type}`;
-			presenceData.state =
-				document.querySelector<HTMLHeadingElement>(".stats-name").textContent;
+		case "lifegen.html": {
+			presenceData.details = "Using character background generator";
+			break;
+		}
+		case "names.html": {
+			presenceData.details = "Browsing list of names";
+			presenceData.state = `${
+				document.querySelector<HTMLTableCaptionElement>("#pagecontent caption")
+					.textContent
+			} names`;
 			presenceData.buttons = [
 				{
-					label: `View ${type.substring(0, type.length - 1)}`,
+					label: "View Names",
 					url: href,
-				},
+				}
 			];
 			break;
 		}
