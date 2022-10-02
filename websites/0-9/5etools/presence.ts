@@ -9,11 +9,11 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = window.location,
-		pathSplit = pathname.split("/").filter(x => x),
+		pagePath = pathname.split("/").find(x => x),
 		pageTitle =
 			document.querySelector<HTMLHeadingElement>(".page__title")?.textContent;
 
-	switch (pathSplit[0] ?? "") {
+	switch (pagePath ?? "") {
 		case "":
 		case "index.html": {
 			presenceData.details = "Browsing";
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 		case "lootgen.html":
 		case "renderdemo.html": {
 			presenceData.details = `Using ${pageTitle}`;
-			switch (pathSplit[0]) {
+			switch (pagePath) {
 				case "crcalculator.html": {
 					presenceData.state = document.querySelector("h4").textContent;
 					break;
