@@ -18,15 +18,19 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "backgrounds.html":
+		case "bestiary.html":
 		case "charcreationoptions.html":
 		case "conditionsdiseases.html":
+		case "cultsboons.html":
 		case "feats.html":
 		case "items.html":
+		case "objects.html":
 		case "optionalfeatures.html":
 		// TODO: fix this
 		case "rces.html":
 		case "spells.html":
 		case "tables.html":
+		case "trapshazards.html":
 		case "variantrules.html": {
 			const type =
 				document.querySelector<HTMLHeadingElement>(".page__title").textContent;
@@ -82,8 +86,35 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
+		case "crcalculator.html": {
+			presenceData.details = "Using CR Calculator";
+			presenceData.state = document.querySelector("h4").textContent;
+			break;
+		}
+		case "dmscreen.html": {
+			presenceData.details = "Using DM Screen";
+			break;
+		}
+		case "encountergen.html": {
+			presenceData.details = "Using encounter generator";
+			presenceData.state = document.querySelector<HTMLTableCaptionElement>(
+				"#pagecontent caption"
+			).textContent;
+			break;
+		}
 		case "lifegen.html": {
 			presenceData.details = "Using character background generator";
+			break;
+		}
+		case "lootgen.html": {
+			presenceData.details = "Using loot generator";
+			presenceData.details = document.querySelector<HTMLButtonElement>(
+				"#lootgen-lhs .ui-tab__btn-tab-head"
+			).textContent;
+			break;
+		}
+		case "maps.html": {
+			presenceData.details = "Browsing maps";
 			break;
 		}
 		case "names.html": {
@@ -96,7 +127,7 @@ presence.on("UpdateData", async () => {
 				{
 					label: "View Names",
 					url: href,
-				}
+				},
 			];
 			break;
 		}
