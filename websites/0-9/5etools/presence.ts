@@ -9,10 +9,13 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = window.location,
-		pathSplit = pathname.split("/").filter(x => x);
+		pathSplit = pathname.split("/").filter(x => x),
+		pageTitle =
+			document.querySelector<HTMLHeadingElement>(".page__title")?.textContent;
 
 	switch (pathSplit[0] ?? "") {
-		case "": {
+		case "":
+		case "index.html": {
 			presenceData.details = "Browsing";
 			presenceData.state = "Home page";
 			break;
@@ -32,8 +35,7 @@ presence.on("UpdateData", async () => {
 		case "tables.html":
 		case "trapshazards.html":
 		case "variantrules.html": {
-			const type =
-				document.querySelector<HTMLHeadingElement>(".page__title").textContent;
+			const type = pageTitle;
 			presenceData.details = `Browsing ${type}`;
 			presenceData.state =
 				document.querySelector<HTMLHeadingElement>(".stats-name").textContent;
@@ -45,10 +47,38 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
+		case "blocklist.html":
+		case "converter.html":
+		case "crcalculator.html":
+		case "dmscreen.html":
+		case "encountergen.html":
+		case "inittrackerplayerview.html":
+		case "makecards.html":
+		case "lootgen.html":
+		case "renderdemo.html": {
+			presenceData.details = `Using ${pageTitle}`;
+			switch (pathSplit[0]) {
+				case "crcalculator.html": {
+					presenceData.state = document.querySelector("h4").textContent;
+					break;
+				}
+				case "encountergen.html": {
+					presenceData.state = document.querySelector<HTMLTableCaptionElement>(
+						"#pagecontent caption"
+					).textContent;
+					break;
+				}
+				case "lootgen.html": {
+					presenceData.state = document.querySelector<HTMLButtonElement>(
+						"#lootgen-lhs .ui-tab__btn-tab-head"
+					).textContent;
+					break;
+				}
+			}
+			break;
+		}
 		case "adventure.html": {
-			presenceData.details = `Browsing adventure: ${
-				document.querySelector<HTMLHeadingElement>(".page__title").textContent
-			}`;
+			presenceData.details = `Browsing adventure: ${pageTitle}`;
 			presenceData.state =
 				document.querySelector<HTMLSpanElement>(
 					".entry-title-inner"
@@ -60,9 +90,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "book.html": {
-			presenceData.details = `Browsing book: ${
-				document.querySelector<HTMLHeadingElement>(".page__title").textContent
-			}`;
+			presenceData.details = `Browsing book: ${pageTitle}`;
 			presenceData.state =
 				document.querySelector<HTMLSpanElement>(
 					".entry-title-inner"
@@ -86,35 +114,32 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
-		case "crcalculator.html": {
-			presenceData.details = "Using CR Calculator";
-			presenceData.state = document.querySelector("h4").textContent;
-			break;
-		}
-		case "dmscreen.html": {
-			presenceData.details = "Using DM Screen";
-			break;
-		}
-		case "encountergen.html": {
-			presenceData.details = "Using encounter generator";
-			presenceData.state = document.querySelector<HTMLTableCaptionElement>(
-				"#pagecontent caption"
-			).textContent;
-			break;
-		}
 		case "lifegen.html": {
 			presenceData.details = "Using character background generator";
 			break;
 		}
-		case "lootgen.html": {
-			presenceData.details = "Using loot generator";
-			presenceData.details = document.querySelector<HTMLButtonElement>(
-				"#lootgen-lhs .ui-tab__btn-tab-head"
-			).textContent;
+		case "makebrew.html": {
+			if (
+				document.querySelector<HTMLDivElement>("#page_main").style.display !==
+				"none"
+			) {
+				presenceData.details = "Editing Homebrew content";
+				presenceData.state = document.querySelector<HTMLButtonElement>(
+					"#content_input .active"
+				).textContent;
+			} else {
+				presenceData.details = "Creating Homebrew content";
+				presenceData.state =
+					document.querySelector<HTMLInputElement>("#page_source input").value;
+			}
 			break;
 		}
 		case "maps.html": {
 			presenceData.details = "Browsing maps";
+			break;
+		}
+		case "managehomebrew.html": {
+			presenceData.details = "Managing Homebrew content";
 			break;
 		}
 		case "names.html": {
@@ -131,6 +156,12 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
+		case "search.html": {
+			presenceData.details = "Searching for content";
+			presenceData.state =
+				document.querySelector<HTMLInputElement>(".pg-search__ipt").value;
+			break;
+		}
 		case "statgen.html": {
 			presenceData.details = "Using stat generator";
 			presenceData.details = document.querySelector<HTMLDivElement>(
@@ -145,6 +176,11 @@ presence.on("UpdateData", async () => {
 					".entry-title-inner"
 				).textContent;
 			break;
+		}
+		default: {
+			presenceData.details = "Browsing";
+			presenceData.state =
+				pageTitle ?? document.title.match(/^(.*) - 5etools$/)[1];
 		}
 	}
 
