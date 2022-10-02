@@ -3,35 +3,20 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let characterCreatorMenu: string[] = ["Species"];
+let characterCreatorMenu: string[] = ["species"];
 
 setInterval(() => {
 	if (window.location.pathname === "/") {
-		const menuA = Array.from(
-				document.querySelectorAll<HTMLLIElement>("#menuA > li")
-			)
-				.find(listItem => {
-					return getComputedStyle(listItem).backgroundImage !== "none";
-				})
-				?.textContent.trim()
-				.toLowerCase(),
-			menuB = Array.from(
-				document.querySelectorAll<HTMLLIElement>("#menuB > li")
-			)
-				.find(listItem => {
-					return getComputedStyle(listItem).backgroundImage !== "none";
-				})
-				?.textContent.trim()
-				.toLowerCase(),
-			menuC = Array.from(
-				document.querySelectorAll<HTMLLIElement>("#menuC > li")
-			)
+		characterCreatorMenu = [
+			...document.querySelectorAll<HTMLDivElement>("#menuA, #menuB, #menuC"),
+		].map(menu => {
+			return [...menu.children]
 				.find(listItem => {
 					return getComputedStyle(listItem).backgroundImage !== "none";
 				})
 				?.textContent.trim()
 				.toLowerCase();
-		characterCreatorMenu = [menuA, menuB, menuC];
+		});
 	}
 }, 1000);
 
@@ -265,5 +250,6 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
