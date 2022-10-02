@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 				}
 				case "lootgen.html": {
 					presenceData.state = document.querySelector<HTMLButtonElement>(
-						"#lootgen-lhs .ui-tab__btn-tab-head"
+						"#lootgen-lhs .ui-tab__btn-tab-head.active"
 					).textContent;
 					break;
 				}
@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "statgen.html": {
 			presenceData.details = "Using stat generator";
-			presenceData.details = document.querySelector<HTMLDivElement>(
+			presenceData.state = document.querySelector<HTMLDivElement>(
 				".ui-tab-side__disp-active-tab-name"
 			).textContent;
 			break;
