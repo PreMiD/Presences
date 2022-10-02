@@ -18,6 +18,7 @@
 	"thumbnail": "https://i.imgur.com/xdm53K3.jpg",
 	"color": "#F0B450",
 	"category": "games",
+	"readLogs": true,
 	"tags": [
 		"mafia",
 		"town",
