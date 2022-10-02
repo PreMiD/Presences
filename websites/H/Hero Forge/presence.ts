@@ -39,19 +39,19 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,
-		pathSplit = pathname.split("/").filter(x => x);
+		path = pathname.split("/").find(x => x);
 
-	switch (pathSplit[0] ?? "") {
+	switch (path ?? "") {
 		case "": {
 			if (
 				document.querySelector<HTMLImageElement>(
 					"[src='/static/svg/bug-white.svg']"
 				)
-			) {
+			)
 				presenceData.details = "Creating a bug report";
-			} else if (document.querySelector("[class*='characterFolder']")) {
+			else if (document.querySelector("[class*='characterFolder']"))
 				presenceData.details = "Viewing their characters";
-			} else {
+			else {
 				const characterName = document
 						.querySelector<HTMLDivElement>(
 							"img[src='/static/svg/character-menu/character.svg'] + div"
@@ -96,37 +96,26 @@ presence.on("UpdateData", async () => {
 								break;
 							}
 						}
-						if (chosenItemContainer) {
+						if (chosenItemContainer)
 							subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
-						} else {
-							subState = characterCreatorMenu[1];
-						}
+						else subState = characterCreatorMenu[1];
 						break;
 					}
 					case "body": {
 						mainState = "Body Features";
-						if (characterCreatorMenu[1] === "measure") {
+						if (characterCreatorMenu[1] === "measure")
 							subState = "Measurements";
-						} else {
-							if (chosenItemContainer) {
-								subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
-							} else {
-								subState = characterCreatorMenu[1];
-							}
-						}
+						else if (chosenItemContainer)
+							subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
+						else subState = characterCreatorMenu[1];
 						break;
 					}
 					case "clothing": {
 						mainState = "Clothing";
-						if (characterCreatorMenu[1] === "outfit") {
-							subState = "Outfit";
-						} else {
-							if (chosenItemContainer) {
-								subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
-							} else {
-								subState = characterCreatorMenu[1];
-							}
-						}
+						if (characterCreatorMenu[1] === "outfit") subState = "Outfit";
+						else if (chosenItemContainer)
+							subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
+						else subState = characterCreatorMenu[1];
 						break;
 					}
 					case "pose": {
@@ -134,11 +123,9 @@ presence.on("UpdateData", async () => {
 						switch (characterCreatorMenu[1]) {
 							case "body":
 							case "face": {
-								if (chosenItemContainer) {
+								if (chosenItemContainer)
 									subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
-								} else {
-									subState = characterCreatorMenu[1];
-								}
+								else subState = characterCreatorMenu[1];
 								break;
 							}
 							case "eyes": {
@@ -161,11 +148,9 @@ presence.on("UpdateData", async () => {
 								break;
 							}
 							case "decals": {
-								if (chosenItemContainer) {
+								if (chosenItemContainer)
 									subState = `decals - ${chosenItemName}`;
-								} else {
-									subState = "decals";
-								}
+								else subState = "decals";
 								break;
 							}
 							case "paints":
@@ -180,9 +165,7 @@ presence.on("UpdateData", async () => {
 											selectedPaintIcon.previousElementSibling as HTMLImageElement
 										).alt
 									}`;
-								} else {
-									subState = characterCreatorMenu[1];
-								}
+								} else subState = characterCreatorMenu[1];
 								break;
 							}
 						}
@@ -200,11 +183,9 @@ presence.on("UpdateData", async () => {
 						switch (characterCreatorMenu[1]) {
 							case "mini":
 							case "packs": {
-								if (selecetedItem) {
+								if (selecetedItem)
 									subState = `${characterCreatorMenu[1]} - ${selecetedItem.textContent}`;
-								} else {
-									subState = characterCreatorMenu[1];
-								}
+								else subState = characterCreatorMenu[1];
 								break;
 							}
 							case "dice": {
@@ -255,9 +236,9 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		default: {
-			if (pathSplit[0].startsWith("load_config")) {
+			if (path.startsWith("load_config"))
 				presenceData.details = "Loading character";
-			} else {
+			else {
 				presenceData.details = "Browsing";
 				presenceData.state = document.title.match(
 					/^(.*?)(?: \| Hero Forge®)?$/
