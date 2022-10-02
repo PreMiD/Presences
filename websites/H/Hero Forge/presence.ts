@@ -49,6 +49,8 @@ presence.on("UpdateData", async () => {
 				)
 			) {
 				presenceData.details = "Creating a bug report";
+			} else if (document.querySelector("[class*='characterFolder']")) {
+				presenceData.details = "Viewing their characters";
 			} else {
 				const characterName = document
 						.querySelector<HTMLDivElement>(
@@ -77,8 +79,23 @@ presence.on("UpdateData", async () => {
 						}
 						break;
 					}
-					case "head": {
-						mainState = "Facial Features";
+					case "head":
+					case "gear":
+					case "stage": {
+						switch (characterCreatorMenu[0]) {
+							case "head": {
+								mainState = "facial features";
+								break;
+							}
+							case "gear": {
+								mainState = "gear";
+								break;
+							}
+							case "stage": {
+								mainState = "stage";
+								break;
+							}
+						}
 						if (chosenItemContainer) {
 							subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
 						} else {
@@ -110,6 +127,100 @@ presence.on("UpdateData", async () => {
 								subState = characterCreatorMenu[1];
 							}
 						}
+						break;
+					}
+					case "pose": {
+						mainState = "Pose";
+						switch (characterCreatorMenu[1]) {
+							case "body":
+							case "face": {
+								if (chosenItemContainer) {
+									subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
+								} else {
+									subState = characterCreatorMenu[1];
+								}
+								break;
+							}
+							case "eyes": {
+								subState = "eyes";
+								break;
+							}
+							case "advanced": {
+								subState = "Advanced";
+								break;
+							}
+						}
+						break;
+					}
+					case "color": {
+						mainState = "Color";
+						switch (characterCreatorMenu[1]) {
+							case "body":
+							case "theme": {
+								subState = characterCreatorMenu[1];
+								break;
+							}
+							case "decals": {
+								if (chosenItemContainer) {
+									subState = `decals - ${chosenItemName}`;
+								} else {
+									subState = "decals";
+								}
+								break;
+							}
+							case "paints":
+							case "mix": {
+								const selectedPaintIcon =
+									document.querySelector<HTMLImageElement>(
+										"[src*='/static/svg/tools/paint-selection.svg']"
+									);
+								if (selectedPaintIcon) {
+									subState = `${characterCreatorMenu[1]} - ${
+										(
+											selectedPaintIcon.previousElementSibling as HTMLImageElement
+										).alt
+									}`;
+								} else {
+									subState = characterCreatorMenu[1];
+								}
+								break;
+							}
+						}
+						break;
+					}
+					case "booth": {
+						mainState = "Booth";
+						break;
+					}
+					case "buy": {
+						mainState = "Buying Items";
+						const selecetedItem = document.querySelector<HTMLDivElement>(
+							"#view [class*=name]"
+						);
+						switch (characterCreatorMenu[1]) {
+							case "mini":
+							case "packs": {
+								if (selecetedItem) {
+									subState = `${characterCreatorMenu[1]} - ${selecetedItem.textContent}`;
+								} else {
+									subState = characterCreatorMenu[1];
+								}
+								break;
+							}
+							case "dice": {
+								subState = "dice";
+								break;
+							}
+							case "gift cards": {
+								subState = "gift cards";
+								break;
+							}
+							case "digital credits": {
+								subState = "digital credits";
+								break;
+							}
+						}
+						break;
 					}
 				}
 				presenceData.state = `${mainState}: ${subState}`;
@@ -121,6 +232,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"[class*=sidenavContainer] [class*=itemActive]"
 			).textContent;
+			break;
+		}
+		case "cart": {
+			presenceData.details = "Viewing cart";
 			break;
 		}
 		case "intro": {
