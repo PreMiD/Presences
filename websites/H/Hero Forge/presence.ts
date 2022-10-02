@@ -51,22 +51,24 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Creating a bug report";
 			} else {
 				const characterName = document
-					.querySelector<HTMLDivElement>(
-						"img[src='/static/svg/character-menu/character.svg'] + div"
-					)
-					.textContent.match(/^(.*?)\*?$/)[1];
-				let details;
-				const chosenItemContainer = document.querySelector<HTMLSpanElement>(
+						.querySelector<HTMLDivElement>(
+							"img[src='/static/svg/character-menu/character.svg'] + div"
+						)
+						.textContent.match(/^(.*?)\*?$/)[1],
+					chosenItemContainer = document.querySelector<HTMLSpanElement>(
 						"#view span[style*='/static/svg/item-selected.svg']"
 					),
 					chosenItemImage =
 						chosenItemContainer.firstElementChild as HTMLImageElement,
 					chosenItemName = chosenItemImage?.alt.match(/^(.*?) Add Part$/)[1];
+
+				let mainState: string, subState: string;
+				presenceData.details = `Modifying Character: ${characterName}`;
 				switch (characterCreatorMenu[0]) {
 					case "species": {
-						details = "Choosing a species";
+						mainState = "Species";
 						if (chosenItemContainer) {
-							presenceData.state = `${
+							subState = `${
 								// TODO: fix this
 								/Femle_thumb/.test(chosenItemImage.src) ? "Femle" : "Mle"
 							} ${
@@ -76,41 +78,41 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "head": {
-						details = "Choosing facial features";
+						mainState = "Facial Features";
 						if (chosenItemContainer) {
-							presenceData.state = `${characterCreatorMenu[1]} - ${chosenItemName}`;
+							subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
 						} else {
-							presenceData.state = characterCreatorMenu[1];
+							subState = characterCreatorMenu[1];
 						}
 						break;
 					}
 					case "body": {
-						details = "Choosing body features";
+						mainState = "Body Features";
 						if (characterCreatorMenu[1] === "measure") {
-							presenceData.state = "Measurements";
+							subState = "Measurements";
 						} else {
 							if (chosenItemContainer) {
-								presenceData.state = `${characterCreatorMenu[1]} - ${chosenItemName}`;
+								subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
 							} else {
-								presenceData.state = characterCreatorMenu[1];
+								subState = characterCreatorMenu[1];
 							}
 						}
 						break;
 					}
 					case "clothing": {
-						details = "Choosing clothing";
+						mainState = "Clothing";
 						if (characterCreatorMenu[1] === "outfit") {
-							presenceData.state = "Outfit";
+							subState = "Outfit";
 						} else {
 							if (chosenItemContainer) {
-								presenceData.state = `${characterCreatorMenu[1]} - ${chosenItemName}`;
+								subState = `${characterCreatorMenu[1]} - ${chosenItemName}`;
 							} else {
-								presenceData.state = characterCreatorMenu[1];
+								subState = characterCreatorMenu[1];
 							}
 						}
 					}
 				}
-				presenceData.details = `${details} | ${characterName}`;
+				presenceData.state = `${mainState}: ${subState}`;
 			}
 			break;
 		}
