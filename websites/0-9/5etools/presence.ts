@@ -20,21 +20,28 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home page";
 			break;
 		}
+		case "actions.html":
 		case "backgrounds.html":
 		case "bestiary.html":
 		case "charcreationoptions.html":
 		case "conditionsdiseases.html":
 		case "cultsboons.html":
+		case "dieties.html":
 		case "feats.html":
 		case "items.html":
+		case "languages.html":
 		case "objects.html":
 		case "optionalfeatures.html":
+		case "psionics.html":
 		// TODO: fix this
 		case "rces.html":
+		case "recipes.html":
+		case "rewards.html":
 		case "spells.html":
 		case "tables.html":
 		case "trapshazards.html":
-		case "variantrules.html": {
+		case "variantrules.html":
+		case "vehicles.html": {
 			const type = pageTitle;
 			presenceData.details = `Browsing ${type}`;
 			presenceData.state =
