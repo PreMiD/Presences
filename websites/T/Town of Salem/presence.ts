@@ -103,9 +103,13 @@ function handleLog(log: string) {
 }
 
 setInterval(async () => {
-	const latestLogs: string[] = await presence.getLogs(
-		/(Submitting chat)|(SocketSend\\.)|(Message received)|(> Potion ID)|(Number of)|(Adding game type)|(Clearing any)|(Initializing)|(Entering)|(Unloading)|(Preloading)|(Login Scene)|\\[ApplicationController]|\\[UnityCache]|\\[Subsystems]|\\[CachedXMLHttpRequest]/gm
-	);
+	const latestLogs: string[] = await (
+		await presence.getLogs()
+	).filter(log => {
+		return !/(Submitting chat)|(SocketSend\\.)|(Message received)|(> Potion ID)|(Number of)|(Adding game type)|(Clearing any)|(Initializing)|(Entering)|(Unloading)|(Preloading)|(Login Scene)|\\[ApplicationController]|\\[UnityCache]|\\[Subsystems]|\\[CachedXMLHttpRequest]/.test(
+			log
+		);
+	});
 	for (let i = latestLogs.length - 1; i >= 0; i--) {
 		if (logs.includes(latestLogs[i])) continue;
 		handleLog(latestLogs[i]);
@@ -262,7 +266,6 @@ presence.on("UpdateData", () => {
 				}
 				default: {
 					throw new Error("");
-					break;
 				}
 			}
 			oldState = currentState;
