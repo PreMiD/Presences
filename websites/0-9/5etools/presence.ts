@@ -33,8 +33,7 @@ presence.on("UpdateData", async () => {
 		case "objects.html":
 		case "optionalfeatures.html":
 		case "psionics.html":
-		// TODO: fix this
-		case "rces.html":
+		case "races.html":
 		case "recipes.html":
 		case "rewards.html":
 		case "spells.html":
