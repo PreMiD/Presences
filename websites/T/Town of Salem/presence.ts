@@ -9,7 +9,7 @@ enum Assets {
 	voting = "https://i.imgur.com/QONtFlc.png",
 	judgement = "https://i.imgur.com/6VbV24O.png",
 	defense = "https://i.imgur.com/bsl0JU0.png",
-	regularLogo = "https://i.imgur.com/y7VYTQK.jpg",
+	logo = "https://i.imgur.com/y7VYTQK.jpg",
 }
 
 enum GameState {
@@ -158,8 +158,7 @@ setInterval(async () => {
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.regularLogo,
-		startTimestamp: elapsed,
+		largeImageKey: Assets.logo,
 	};
 
 	if (window.location.pathname !== "/TownOfSalem/") {
@@ -168,6 +167,7 @@ presence.on("UpdateData", () => {
 	} else {
 		if (oldState.scene !== currentState.scene)
 			elapsed = Math.round(Date.now() / 1000);
+		presenceData.startTimestamp = elapsed;
 		Object.assign(oldState, currentState);
 		switch (currentState.scene) {
 			case "BigLogin": {
