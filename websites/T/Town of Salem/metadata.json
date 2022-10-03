@@ -18,7 +18,6 @@
 	"thumbnail": "https://i.imgur.com/sy7mr8V.jpg",
 	"color": "#F0B450",
 	"category": "games",
-	"readLogs": true,
 	"tags": [
 		"mafia",
 		"town",
@@ -27,5 +26,6 @@
 		"popular",
 		"mafia",
 		"salem"
-	]
+	],
+	"readLogs": true
 }
