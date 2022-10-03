@@ -27,6 +27,7 @@ enum GameType {
 interface GameData {
 	scene: string;
 	page: string;
+	additionalDetails: string;
 	day: number;
 	type: string;
 	state: GameState;
@@ -43,6 +44,7 @@ let elapsed = Math.round(Date.now() / 1000),
 	oldState: GameData = {
 		scene: "BigLogin",
 		page: "",
+		additionalDetails: "",
 		day: 1,
 		type: GameType.classic,
 		state: GameState.day,
@@ -98,15 +100,22 @@ function handleLog(log: string) {
 			case "StartFirstDay": {
 				currentState.day = 0;
 				currentState.state = GameState.day;
+				currentState.page = "";
 				break;
 			}
 			case "StartDay": {
 				currentState.day++;
 				currentState.state = GameState.day;
+				currentState.page = "StartDiscussion";
 				break;
 			}
 			case "StartNight": {
 				currentState.state = GameState.night;
+				currentState.page = "";
+				break;
+			}
+			case "FullMoonNight": {
+				currentState.page = action;
 				break;
 			}
 			case "StartDiscussion": {
@@ -153,8 +162,13 @@ setInterval(async () => {
 	const latestLogs: string[] = await presence.getLogs(
 		/^Switched |^Entered |^Creating |\[Network\] <color=.*?>\[Received\] <b>/
 	);
+	let unmatchedLogs = 0;
 	for (let i = latestLogs.length - 1; i >= 0; i--) {
-		if (logs.includes(latestLogs[i])) continue;
+		if (logs.includes(latestLogs[i])) {
+			unmatchedLogs++;
+			if (unmatchedLogs > 5) break;
+			continue;
+		}
 		handleLog(latestLogs[i]);
 	}
 	logs = latestLogs;
@@ -228,6 +242,54 @@ presence.on("UpdateData", () => {
 								break;
 							}
 						}
+						break;
+					}
+					case GameState.day: {
+						presenceData.smallImageKey = Assets.day;
+						switch (currentState.page) {
+							case "StartDiscussion": {
+								presenceData.state = `Discussing | Day ${currentState.day}`;
+								break;
+							}
+							case "StartVoting": {
+								presenceData.state = `Voting | Day ${currentState.day}`;
+								break;
+							}
+							case "WhoDiedAndHow": {
+								presenceData.state = `Viewing a Death | Day ${currentState.day}`;
+								break;
+							}
+							case "DeathNote": {
+								presenceData.state = `Viewing a Death Note | Day ${currentState.day}`;
+								break;
+							}
+							case "TellLastWill": {
+								presenceData.state = `Viewing a Last Will | Day ${currentState.day}`;
+								break;
+							}
+							case "StartDefense": {
+								presenceData.state = `Defense | Day ${currentState.day}`;
+								break;
+							}
+							case "StartJudgement": {
+								presenceData.state = `Judgement | Day ${currentState.day}`;
+								break;
+							}
+						}
+						break;
+					}
+					case GameState.night: {
+						presenceData.state = `Night ${currentState.day}`;
+						presenceData.smallImageKey = Assets.night;
+						// TODO: do something with full moon
+						break;
+					}
+					case GameState.end: {
+						presenceData.state = "Viewing End Screen";
+						break;
+					}
+					case GameState.afterGame: {
+						presenceData.state = "Viewing After Game Screen";
 						break;
 					}
 				}
