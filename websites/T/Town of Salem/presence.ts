@@ -95,14 +95,13 @@ function handleLog(log: string) {
 		)[1];
 		switch (action) {
 			case "PickNames":
-			case "RoleLotsInfo":
 			case "RoleAndPosition": {
 				currentState.page = action;
 				currentState.state = GameState.preGame;
 				break;
 			}
 			case "StartFirstDay": {
-				currentState.day = 0;
+				currentState.day = 1;
 				currentState.state = GameState.day;
 				currentState.page = "StartDiscussion";
 				break;
@@ -123,18 +122,12 @@ function handleLog(log: string) {
 			case "StartDefense":
 			case "StartJudgement":
 			case "StartVoting":
-			case "WhoDiedAndHow":
-			case "DeathNote":
-			case "TellLastWill": {
+			case "WhoDiedAndHow": {
 				currentState.page = action;
 				break;
 			}
 			case "SomeoneHasWon": {
 				currentState.state = GameState.end;
-				break;
-			}
-			case "AfterGameScreenData": {
-				currentState.state = GameState.afterGame;
 				break;
 			}
 		}
@@ -145,16 +138,22 @@ setInterval(async () => {
 	const latestLogs: string[] = await presence.getLogs(
 		/^Switched |^Entered |^Creating |\[Network\] <color=.*?>\[Received\] <b>/
 	);
-	// assume that there is a max of 20 new logs in .5 seconds
-	// compare the first 20 logs to find offset
-	let offset = 0;
-	for (let i = 0; i < 20; i++) if (latestLogs[i] !== logs[i + offset]) offset++;
+	let offset = 0,
+		matchOffset = 0;
+	for (let i = 0; i < latestLogs.length; i++) {
+		if (!Object.hasOwnProperty.call(logs, i + offset)) break;
+		if (latestLogs[i] !== logs[i + offset]) {
+			offset += matchOffset + 1;
+			i -= matchOffset;
+			matchOffset = 0;
+		} else matchOffset++;
+	}
 
 	// using offset, scan the new logs in order
 	for (let i = latestLogs.length - offset; i < latestLogs.length; i++)
 		handleLog(latestLogs[i]);
 	logs = latestLogs;
-}, 500);
+}, 150);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
@@ -215,15 +214,11 @@ presence.on("UpdateData", () => {
 					case GameState.preGame: {
 						switch (currentState.page) {
 							case "PickNames": {
-								presenceData.state = "Picking Names";
-								break;
-							}
-							case "RoleLotsInfo": {
-								presenceData.state = "Picking Roles";
+								presenceData.state = "Choosing Names";
 								break;
 							}
 							case "RoleAndPosition": {
-								presenceData.state = "Viewing Chosen Role";
+								presenceData.state = "Getting a Role";
 								break;
 							}
 						}
@@ -234,30 +229,26 @@ presence.on("UpdateData", () => {
 						switch (currentState.page) {
 							case "StartDiscussion": {
 								presenceData.state = `Discussion | Day ${currentState.day}`;
+								presenceData.smallImageKey = Assets.discussion;
 								break;
 							}
 							case "StartVoting": {
 								presenceData.state = `Voting | Day ${currentState.day}`;
+								presenceData.smallImageKey = Assets.voting;
 								break;
 							}
 							case "WhoDiedAndHow": {
 								presenceData.state = `Viewing a Death | Day ${currentState.day}`;
 								break;
 							}
-							case "DeathNote": {
-								presenceData.state = `Viewing a Death Note | Day ${currentState.day}`;
-								break;
-							}
-							case "TellLastWill": {
-								presenceData.state = `Viewing a Last Will | Day ${currentState.day}`;
-								break;
-							}
 							case "StartDefense": {
 								presenceData.state = `Defense | Day ${currentState.day}`;
+								presenceData.smallImageKey = Assets.defense;
 								break;
 							}
 							case "StartJudgement": {
 								presenceData.state = `Judgement | Day ${currentState.day}`;
+								presenceData.smallImageKey = Assets.judgement;
 								break;
 							}
 						}
@@ -274,11 +265,11 @@ presence.on("UpdateData", () => {
 						presenceData.state = "Viewing End Screen";
 						break;
 					}
-					case GameState.afterGame: {
-						presenceData.state = "Viewing After Game Screen";
-						break;
-					}
 				}
+				break;
+			}
+			case "BigEndGame": {
+				presenceData.state = "Viewing After Game Screen";
 				break;
 			}
 		}
