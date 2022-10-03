@@ -204,6 +204,8 @@ presence.on("UpdateData", () => {
 			}
 			case "BigPreGame": {
 				presenceData.details = "Loading Game";
+				presenceData.state =
+					gameTypeNames[currentState.gameMode] ?? currentState.gameMode;
 				break;
 			}
 			case "BigGame": {
