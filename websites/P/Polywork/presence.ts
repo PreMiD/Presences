@@ -6,12 +6,12 @@ const presence = new Presence({
 
 	presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
-				largeImageKey: "polywork",
+				largeImageKey: "https://i.imgur.com/8KLMTMQ.png",
 				details: "Browsing..",
 				startTimestamp: browsingTimestamp,
 			}
 		
-			if (document.location.hostname == "polywork.com") {
+			if (document.location.hostname === "polywork.com") {
 				presenceData.details = "Home page";
 				presenceData.largeImageKey = "polywork";
 			if (document.location.pathname.includes("/feeds/")) {
