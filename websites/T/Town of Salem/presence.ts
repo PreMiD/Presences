@@ -277,6 +277,9 @@ presence.on("UpdateData", () => {
 								presenceData.smallImageKey = Assets.judgement;
 								break;
 							}
+							default: {
+								presenceData.state = `Day ${currentState.day}`;
+							}
 						}
 						break;
 					}
