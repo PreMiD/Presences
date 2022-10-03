@@ -27,7 +27,6 @@ enum GameType {
 interface GameData {
 	scene: string;
 	page: string;
-	additionalDetails: string;
 	day: number;
 	type: string;
 	state: GameState;
@@ -44,7 +43,6 @@ let elapsed = Math.round(Date.now() / 1000),
 	oldState: GameData = {
 		scene: "BigLogin",
 		page: "",
-		additionalDetails: "",
 		day: 1,
 		type: GameType.classic,
 		state: GameState.day,
@@ -279,9 +277,12 @@ presence.on("UpdateData", () => {
 						break;
 					}
 					case GameState.night: {
-						presenceData.state = `Night ${currentState.day}`;
 						presenceData.smallImageKey = Assets.night;
-						// TODO: do something with full moon
+						if (currentState.page === "FullMoonNight") {
+							presenceData.state = `Night ${currentState.day} (Full Moon)`;
+						} else {
+							presenceData.state = `Night ${currentState.day}`;
+						}
 						break;
 					}
 					case GameState.end: {
