@@ -104,13 +104,13 @@ function handleLog(log: string) {
 			case "StartFirstDay": {
 				currentState.day = 0;
 				currentState.state = GameState.day;
-				currentState.page = "";
+				currentState.page = "StartDiscussion";
 				break;
 			}
 			case "StartDay": {
 				currentState.day++;
 				currentState.state = GameState.day;
-				currentState.page = "StartDiscussion";
+				currentState.page = "";
 				break;
 			}
 			case "StartNight": {
