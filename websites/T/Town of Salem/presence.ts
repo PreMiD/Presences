@@ -33,6 +33,11 @@ interface GameData {
 	state: GameState;
 }
 
+interface Log {
+	content: string;
+	id: number;
+}
+
 const gameTypeNames: Record<string, string> = {
 		RankedPractice: "Ranked Practice",
 		RapidMode: "Custom Rapid Mode",
@@ -56,7 +61,7 @@ const gameTypeNames: Record<string, string> = {
 	currentState = Object.assign({}, oldState);
 
 let elapsed = Math.round(Date.now() / 1000),
-	logs: string[] = [];
+	lastId = -1;
 
 function handleLog(log: string) {
 	if (
@@ -134,26 +139,47 @@ function handleLog(log: string) {
 	}
 }
 
-setInterval(async () => {
-	const latestLogs: string[] = await presence.getLogs(
-		/^Switched |^Entered |^Creating |\[Network\] <color=.*?>\[Received\] <b>/
-	);
-	let offset = 0,
-		matchOffset = 0;
-	for (let i = 0; i < latestLogs.length; i++) {
-		if (!Object.hasOwnProperty.call(logs, i + offset)) break;
-		if (latestLogs[i] !== logs[i + offset]) {
-			offset += matchOffset + 1;
-			i -= matchOffset;
-			matchOffset = 0;
-		} else matchOffset++;
-	}
+/**
+ * Overwrites the default console.log to be able to read the logs.
+ * Built-in readLogs causes performance problems, as hundreds of logs can be created in half a second.
+ * It is also hard to determine which logs have not been read yet.
+ */
+const injectedLoggerScript = document.createElement("script");
+injectedLoggerScript.type = "text/javascript";
+injectedLoggerScript.textContent = `
+{
+	let counter = 0;
+	console.stdlog = console.log.bind(console);
+	console.logs = [];
+	console.log = function() {
+		const log = arguments[0];
+		if (/^Switched |^Entered |^Creating |\\[Network\\] <color=.*?>\\[Received\\] <b>/.test(log)) {
+			console.logs.push({
+				content: log,
+				id: counter,
+			});
+			counter++;
+		}
+		while (console.logs.length > 100) console.logs.shift();
+		console.stdlog.apply(console, arguments);
+	};
+}
+`;
+document.head.appendChild(injectedLoggerScript);
 
-	// using offset, scan the new logs in order
-	for (let i = latestLogs.length - offset; i < latestLogs.length; i++)
-		handleLog(latestLogs[i]);
-	logs = latestLogs;
-}, 150);
+setInterval(async () => {
+	const logs: Log[] = await presence.getPageletiable('console"]["logs');
+	let lastUnreadLogIndex = 0;
+	for (let i = logs.length - 1; i >= 0; i--) {
+		if (logs[i].id === lastId) {
+			lastUnreadLogIndex = i + 1;
+			break;
+		}
+	}
+	for (let i = lastUnreadLogIndex; i < logs.length; i++)
+		handleLog(logs[i].content);
+	if (logs.length > 0) lastId = logs[logs.length - 1].id;
+}, 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
