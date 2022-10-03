@@ -64,7 +64,7 @@ function handleLog(log: string) {
 		log.startsWith("Switched additively to")
 	) {
 		const scene = log
-			.match(/^Switched( additively)? to( scene)? (.*) Scene$/m)[1]
+			.match(/^Switched(?: additively)? to(?: scene)? (.*) Scene/m)[1]
 			.trim();
 		currentState.scene = scene;
 		if (scene === "BigPreGame") currentState.state = GameState.preGame;
@@ -145,15 +145,14 @@ setInterval(async () => {
 	const latestLogs: string[] = await presence.getLogs(
 		/^Switched |^Entered |^Creating |\[Network\] <color=.*?>\[Received\] <b>/
 	);
-	let unmatchedLogs = 0;
-	for (let i = latestLogs.length - 1; i >= 0; i--) {
-		if (logs.includes(latestLogs[i])) {
-			unmatchedLogs++;
-			if (unmatchedLogs > 5) break;
-			continue;
-		}
+	// assume that there is a max of 20 new logs in .5 seconds
+	// compare the first 20 logs to find offset
+	let offset = 0;
+	for (let i = 0; i < 20; i++) if (latestLogs[i] !== logs[i + offset]) offset++;
+
+	// using offset, scan the new logs in order
+	for (let i = latestLogs.length - offset; i < latestLogs.length; i++)
 		handleLog(latestLogs[i]);
-	}
 	logs = latestLogs;
 }, 500);
 
