@@ -32,6 +32,13 @@ interface GameData {
 	state: GameState;
 }
 
+const gameTypeNames: Record<string, string> = {
+	RankedPractice: "Ranked Practice",
+	RapidMode: "Custom Rapid Mode",
+	DraculasPalace: "Dracula's Palace",
+	ClassicTownTraitor: "Town Traitor",
+};
+
 let elapsed = Math.round(Date.now() / 1000),
 	oldState: GameData = {
 		scene: "BigLogin",
@@ -48,9 +55,13 @@ function handleLog(log: string) {
 		log.startsWith("Switched to ") ||
 		log.startsWith("Switched additively to")
 	) {
-		currentState.scene = log
+		const scene = log
 			.match(/^Switched( additively)? to( scene)? (.*) Scene$/m)[1]
 			.trim();
+		currentState.scene = scene;
+		if (scene === "BigPreGame") {
+			currentState.state = GameState.preGame;
+		}
 	} else if (log.startsWith("Entered HomeSceneController.ShowView()")) {
 		currentState.page = log
 			.match(
@@ -77,9 +88,9 @@ function handleLog(log: string) {
 			/\[Network\] <color=.*?>\[Received\] <b>(.*?)<\/b>/
 		)[1];
 		switch (action) {
+			case "PickNames":
 			case "RoleLotsInfo":
-			case "RoleAndPosition":
-			case "RoleList": {
+			case "RoleAndPosition": {
 				currentState.page = action;
 				currentState.state = GameState.preGame;
 				break;
@@ -190,29 +201,34 @@ presence.on("UpdateData", () => {
 			}
 			case "BigLobby": {
 				presenceData.details = "Waiting in a Lobby";
-				switch (currentState.type) {
-					case GameType.ranked: {
-						presenceData.state = "Ranked Queue";
+				presenceData.state =
+					gameTypeNames[currentState.type] ?? currentState.type;
+				break;
+			}
+			case "BigPreGame": {
+				presenceData.details = "Loading Game";
+				break;
+			}
+			case "BigGame": {
+				const gameType = gameTypeNames[currentState.type] ?? currentState.type;
+				presenceData.details = `Playing a ${gameType} Game`;
+				switch (currentState.state) {
+					case GameState.preGame: {
+						switch (currentState.page) {
+							case "PickNames": {
+								presenceData.state = "Picking Names";
+								break;
+							}
+							case "RoleLotsInfo": {
+								presenceData.state = "Picking Roles";
+								break;
+							}
+							case "RoleAndPosition": {
+								presenceData.state = "Viewing Chosen Role";
+								break;
+							}
+						}
 						break;
-					}
-					case "RankedPractice": {
-						presenceData.state = "Ranked Practice";
-						break;
-					}
-					case "RapidMode": {
-						presenceData.state = "Custom Rapid Mode";
-						break;
-					}
-					case "DraculasPalace": {
-						presenceData.state = "Dracula's Palace";
-						break;
-					}
-					case "ClassicTownTraitor": {
-						presenceData.state = "Town Traitor";
-						break;
-					}
-					default: {
-						presenceData.state = currentState.type;
 					}
 				}
 				break;
@@ -220,5 +236,6 @@ presence.on("UpdateData", () => {
 		}
 	}
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
