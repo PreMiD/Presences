@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			"/vtc/search": { details: "Searching for a VTC" },
 			"/vtc/create": { details: "Creating a VTC" },
 			"/blog": { details: "Browsing the blog" },
-			"/events": { details: "Viewing the events centre" },
+			"/events": { details: "Viewing the events system" },
 			"/events/manage": { details: "Managing their events" },
 			"/events/manage/past": { details: "Viewing their past events" },
 			"/events/create": { details: "Creating an event" },
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [{ label: "Read Article", url: document.URL }];
 					break;
 				case document.location.pathname === "/":
-					presenceData.details = "Browsing the website";
+					presenceData.details = "Browsing the homepage";
 			}
 			break;
 		case "forum.truckersmp.com":
