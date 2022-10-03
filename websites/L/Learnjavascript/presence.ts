@@ -5,7 +5,7 @@ browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
-	largeImageKey: "javascript",
+	largeImageKey: "https://i.imgur.com/03uHFM5.png",
 	startTimestamp: browsingTimestamp,
 };
 if (document.location.pathname === "/")
