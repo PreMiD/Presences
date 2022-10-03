@@ -139,7 +139,9 @@ function handleLog(log: string) {
 }
 
 setInterval(async () => {
-	const latestLogs: string[] = await presence.getLogs(/^Switched |^Entered |^Creating |\[Network\] <color=.*?>\[Received\] <b>/)
+	const latestLogs: string[] = await presence.getLogs(
+		/^Switched |^Entered |^Creating |\[Network\] <color=.*?>\[Received\] <b>/
+	);
 	for (let i = latestLogs.length - 1; i >= 0; i--) {
 		if (logs.includes(latestLogs[i])) continue;
 		handleLog(latestLogs[i]);
@@ -157,7 +159,8 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Browsing BlankMediaGames";
 		presenceData.state = document.title;
 	} else {
-		if (oldState.scene !== currentState.scene) elapsed = Math.round(Date.now() / 1000);
+		if (oldState.scene !== currentState.scene)
+			elapsed = Math.round(Date.now() / 1000);
 		oldState = currentState;
 		switch (currentState.scene) {
 			case "BigLogin": {
