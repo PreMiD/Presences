@@ -29,7 +29,7 @@ interface GameData {
 	scene: string;
 	page: string;
 	day: number;
-	type: string;
+	gameMode: string;
 	state: GameState;
 }
 
@@ -52,7 +52,7 @@ let elapsed = Math.round(Date.now() / 1000),
 		scene: "BigLogin",
 		page: "",
 		day: 1,
-		type: GameType.classic,
+		gameMode: GameType.classic,
 		state: GameState.day,
 	},
 	currentState = oldState,
@@ -80,17 +80,17 @@ function handleLog(log: string) {
 		switch (log.match(/^Entered (.*)$/m)[1].trim()) {
 			case "HandleStartRanked": {
 				currentState.scene = "BigLobby";
-				currentState.type = GameType.ranked;
+				currentState.gameMode = GameType.ranked;
 				break;
 			}
 			case "HandleOnLeaveRankedQueue": {
 				currentState.scene = "BigHome";
-				currentState.type = GameType.classic;
+				currentState.gameMode = GameType.classic;
 				break;
 			}
 		}
 	} else if (log.startsWith("Creating lobby:")) {
-		currentState.type = log.match(/^Creating lobby: (.*?) \|/)[1];
+		currentState.gameMode = log.match(/^Creating lobby: (.*?) \|/)[1];
 	} else if (/\[Network\] <color=.*?>\[Received\] <b>/.test(log)) {
 		const action = log.match(
 			/\[Network\] <color=.*?>\[Received\] <b>(.*?)<\/b>/
@@ -201,7 +201,7 @@ presence.on("UpdateData", () => {
 			case "BigLobby": {
 				presenceData.details = "Waiting in a Lobby";
 				presenceData.state =
-					gameTypeNames[currentState.type] ?? currentState.type;
+					gameTypeNames[currentState.gameMode] ?? currentState.gameMode;
 				break;
 			}
 			case "BigPreGame": {
@@ -210,7 +210,7 @@ presence.on("UpdateData", () => {
 			}
 			case "BigGame": {
 				presenceData.details = `Playing a ${
-					gameTypeNames[currentState.type] ?? currentState.type
+					gameTypeNames[currentState.gameMode] ?? currentState.gameMode
 				} Game`;
 				switch (currentState.state) {
 					case GameState.preGame: {
