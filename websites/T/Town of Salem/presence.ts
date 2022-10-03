@@ -60,10 +60,12 @@ function handleLog(log: string) {
 	} else if (log.startsWith("Entered ")) {
 		switch (log.match(/^Entered (.*)$/m)[1].trim()) {
 			case "HandleStartRanked": {
+				currentState.scene = "BigLobby";
 				currentState.type = GameType.ranked;
 				break;
 			}
 			case "HandleOnLeaveRankedQueue": {
+				currentState.scene = "BigHome";
 				currentState.type = GameType.classic;
 				break;
 			}
@@ -137,11 +139,7 @@ function handleLog(log: string) {
 }
 
 setInterval(async () => {
-	const latestLogs: string[] = (await presence.getLogs()).filter(log => {
-		return !/(Submitting chat)|(SocketSend\\.)|(Message received)|(> Potion ID)|(Number of)|(Adding game type)|(Clearing any)|(Initializing)|(Entering)|(Unloading)|(Preloading)|(Login Scene)|\\[ApplicationController]|\\[UnityCache]|\\[Subsystems]|\\[CachedXMLHttpRequest]/.test(
-			log
-		);
-	});
+	const latestLogs: string[] = await presence.getLogs(/^Switched |^Entered |^Creating |\[Network\] <color=.*?>\[Received\] <b>/)
 	for (let i = latestLogs.length - 1; i >= 0; i--) {
 		if (logs.includes(latestLogs[i])) continue;
 		handleLog(latestLogs[i]);
@@ -189,7 +187,32 @@ presence.on("UpdateData", () => {
 			}
 			case "BigLobby": {
 				presenceData.details = "Waiting in a Lobby";
-				switch (currentState.type) {}
+				switch (currentState.type) {
+					case GameType.ranked: {
+						presenceData.state = "Ranked Queue";
+						break;
+					}
+					case "RankedPractice": {
+						presenceData.state = "Ranked Practice";
+						break;
+					}
+					case "RapidMode": {
+						presenceData.state = "Custom Rapid Mode";
+						break;
+					}
+					case "DraculasPalace": {
+						presenceData.state = "Dracula's Palace";
+						break;
+					}
+					case "ClassicTownTraitor": {
+						presenceData.state = "Town Traitor";
+						break;
+					}
+					default: {
+						presenceData.state = currentState.type;
+					}
+				}
+				break;
 			}
 		}
 	}
