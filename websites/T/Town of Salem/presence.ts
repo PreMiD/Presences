@@ -34,20 +34,18 @@ interface GameData {
 }
 
 const gameTypeNames: Record<string, string> = {
-	RankedPractice: "Ranked Practice",
-	RapidMode: "Custom Rapid Mode",
-	DraculasPalace: "Dracula's Palace",
-	ClassicTownTraitor: "Town Traitor",
-	CovenClassic: "Classic Coven",
-	CovenRankedPractice: "Coven Ranked Practice",
-	CovenMafia: "Mafia Returns",
-	CovenCustom: "Custom Coven",
-	CovenTownTraitor: "Coven Town Traitor",
-	CovenAllAny: "Coven All Any",
-	AllAny: "All Any",
-};
-
-let elapsed = Math.round(Date.now() / 1000),
+		RankedPractice: "Ranked Practice",
+		RapidMode: "Custom Rapid Mode",
+		DraculasPalace: "Dracula's Palace",
+		ClassicTownTraitor: "Town Traitor",
+		CovenClassic: "Classic Coven",
+		CovenRankedPractice: "Coven Ranked Practice",
+		CovenMafia: "Mafia Returns",
+		CovenCustom: "Custom Coven",
+		CovenTownTraitor: "Coven Town Traitor",
+		CovenAllAny: "Coven All Any",
+		AllAny: "All Any",
+	},
 	oldState: GameData = {
 		scene: "BigLogin",
 		page: "",
@@ -55,7 +53,9 @@ let elapsed = Math.round(Date.now() / 1000),
 		gameMode: GameType.classic,
 		state: GameState.day,
 	},
-	currentState = oldState,
+	currentState = Object.assign({}, oldState);
+
+let elapsed = Math.round(Date.now() / 1000),
 	logs: string[] = [];
 
 function handleLog(log: string) {
@@ -67,9 +67,7 @@ function handleLog(log: string) {
 			.match(/^Switched( additively)? to( scene)? (.*) Scene$/m)[1]
 			.trim();
 		currentState.scene = scene;
-		if (scene === "BigPreGame") {
-			currentState.state = GameState.preGame;
-		}
+		if (scene === "BigPreGame") currentState.state = GameState.preGame;
 	} else if (log.startsWith("Entered HomeSceneController.ShowView()")) {
 		currentState.page = log
 			.match(
@@ -89,9 +87,9 @@ function handleLog(log: string) {
 				break;
 			}
 		}
-	} else if (log.startsWith("Creating lobby:")) {
+	} else if (log.startsWith("Creating lobby:"))
 		currentState.gameMode = log.match(/^Creating lobby: (.*?) \|/)[1];
-	} else if (/\[Network\] <color=.*?>\[Received\] <b>/.test(log)) {
+	else if (/\[Network\] <color=.*?>\[Received\] <b>/.test(log)) {
 		const action = log.match(
 			/\[Network\] <color=.*?>\[Received\] <b>(.*?)<\/b>/
 		)[1];
@@ -160,7 +158,7 @@ setInterval(async () => {
 }, 500);
 
 presence.on("UpdateData", () => {
-	let presenceData: PresenceData = {
+	const presenceData: PresenceData = {
 		largeImageKey: Assets.regularLogo,
 		startTimestamp: elapsed,
 	};
@@ -171,7 +169,7 @@ presence.on("UpdateData", () => {
 	} else {
 		if (oldState.scene !== currentState.scene)
 			elapsed = Math.round(Date.now() / 1000);
-		oldState = currentState;
+		Object.assign(oldState, currentState);
 		switch (currentState.scene) {
 			case "BigLogin": {
 				presenceData.details = "Logging in";
@@ -266,11 +264,9 @@ presence.on("UpdateData", () => {
 					}
 					case GameState.night: {
 						presenceData.smallImageKey = Assets.night;
-						if (currentState.page === "FullMoonNight") {
+						if (currentState.page === "FullMoonNight")
 							presenceData.state = `Night ${currentState.day} (Full Moon)`;
-						} else {
-							presenceData.state = `Night ${currentState.day}`;
-						}
+						else presenceData.state = `Night ${currentState.day}`;
 						break;
 					}
 					case GameState.end: {
