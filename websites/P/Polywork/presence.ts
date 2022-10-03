@@ -25,7 +25,7 @@ const presence = new Presence({
 					];
 				}
 
-				else if (document.location.pathname.includes("/collaborate/")) {
+				else if (document.location.href.includes("/collaborate/")) {
 				presenceData.details = "Looking for collaborators";
 				presenceData.state = document.title.split("|")[0];
 				presenceData.buttons = [
@@ -36,7 +36,7 @@ const presence = new Presence({
 				];
 			}
 		
-			else if (document.location.pathname.includes("/clubs/")) {
+			else if (document.location.href.includes("/clubs/")) {
 			presenceData.details = "Looking for clubs";
 			presenceData.state = document.title.split("|")[0];
 			presenceData.buttons = [
