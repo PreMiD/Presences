@@ -11,17 +11,11 @@ enum Assets {
 	regularLogo = "https://i.imgur.com/y7VYTQK.jpg",
 }
 
-enum GameEvent {
+enum GameState {
 	night = "night",
 	day = "day",
-	voting = "voting",
 	end = "end",
-	judgement = "judgement",
-	discussion = "discussion",
-	defense = "defense",
 	afterGame = "afterGame",
-	viewingDeathNote = "viewingDeathNote",
-	viewingLastWill = "viewingLastWill",
 	preGame = "preGame",
 }
 
@@ -30,21 +24,21 @@ enum GameType {
 	ranked = "Ranked",
 }
 
-interface GameState {
+interface GameData {
 	scene: string;
 	page: string;
 	day: number;
 	type: string;
-	state: GameEvent;
+	state: GameState;
 }
 
 let elapsed = Math.round(Date.now() / 1000),
-	oldState: GameState = {
-		scene: "BigHome",
-		page: "Login",
+	oldState: GameData = {
+		scene: "BigLogin",
+		page: "",
 		day: 1,
 		type: GameType.classic,
-		state: GameEvent.day,
+		state: GameState.day,
 	},
 	currentState = oldState,
 	logs: string[] = [];
@@ -64,8 +58,7 @@ function handleLog(log: string) {
 			)[1]
 			.trim();
 	} else if (log.startsWith("Entered ")) {
-		const pageName = log.match(/^Entered (.*)$/m)[1].trim();
-		switch (pageName) {
+		switch (log.match(/^Entered (.*)$/m)[1].trim()) {
 			case "HandleStartRanked": {
 				currentState.type = GameType.ranked;
 				break;
@@ -86,56 +79,57 @@ function handleLog(log: string) {
 			case "RoleAndPosition":
 			case "RoleList": {
 				currentState.page = action;
-				currentState.state = GameEvent.preGame;
+				currentState.state = GameState.preGame;
 				break;
 			}
 			case "StartFirstDay": {
 				currentState.day = 0;
-				currentState.state = GameEvent.day;
+				currentState.state = GameState.day;
 				break;
 			}
 			case "StartDay": {
 				currentState.day++;
-				currentState.state = GameEvent.day;
+				currentState.state = GameState.day;
 				break;
 			}
 			case "StartNight": {
-				currentState.state = GameEvent.night;
+				currentState.state = GameState.night;
 				break;
 			}
 			case "StartDiscussion": {
-				currentState.state = GameEvent.discussion;
+				currentState.page = action;
 				break;
 			}
 			case "StartDefense": {
-				currentState.state = GameEvent.defense;
+				currentState.page = action;
 				break;
 			}
 			case "StartJudgement": {
-				currentState.state = GameEvent.judgement;
+				currentState.page = action;
 				break;
 			}
 			case "StartVoting": {
-				currentState.state = GameEvent.voting;
+				currentState.page = action;
 				break;
 			}
 			case "WhoDiedAndHow": {
+				currentState.page = action;
 				break;
 			}
 			case "DeathNote": {
-				currentState.state = GameEvent.viewingDeathNote;
+				currentState.page = action;
 				break;
 			}
 			case "TellLastWill": {
-				currentState.state = GameEvent.viewingLastWill;
+				currentState.page = action;
 				break;
 			}
 			case "SomeoneHasWon": {
-				currentState.state = GameEvent.end;
+				currentState.state = GameState.end;
 				break;
 			}
 			case "AfterGameScreenData": {
-				currentState.state = GameEvent.afterGame;
+				currentState.state = GameState.afterGame;
 				break;
 			}
 		}
@@ -165,6 +159,39 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Browsing BlankMediaGames";
 		presenceData.state = document.title;
 	} else {
+		if (oldState.scene !== currentState.scene) elapsed = Math.round(Date.now() / 1000);
+		oldState = currentState;
+		switch (currentState.scene) {
+			case "BigLogin": {
+				presenceData.details = "Logging in";
+				break;
+			}
+			case "BigHome": {
+				switch (currentState.page) {
+					case "GameModeSelect": {
+						presenceData.details = "Selecting Game Mode";
+						break;
+					}
+					case "Customization": {
+						presenceData.details = "Customizing Character";
+						break;
+					}
+					case "Party": {
+						presenceData.details = "In a Party";
+						break;
+					}
+					default: {
+						presenceData.details = "Browsing Main Menu";
+						presenceData.state = currentState.page;
+					}
+				}
+				break;
+			}
+			case "BigLobby": {
+				presenceData.details = "Waiting in a Lobby";
+				switch (currentState.type) {}
+			}
+		}
 	}
 
 	presence.setActivity(presenceData);
