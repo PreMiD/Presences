@@ -1,13 +1,10 @@
 const presence = new Presence({
 		clientId: "619561001234464789",
-		injectOnComplete: true,
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000),
 	shortenedURLs: Record<string, string> = {};
 
-let title: string,
-	uploader: string,
-	search: HTMLInputElement,
+let search: HTMLInputElement,
 	recentlyCleared = 0;
 
 async function getShortURL(url: string) {
@@ -78,25 +75,14 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "spotify",
 		},
-		albumCover =
-			Array.from(document.querySelectorAll("a")).find(
-				a => a.dataset?.testid === "cover-art-link"
-			) ||
-			Array.from(document.querySelectorAll("a")).find(
-				a => a.dataset?.testid === "context-link"
-			);
-
-	let podcast = false,
-		searching = false;
+		albumCover = document.querySelector<HTMLAnchorElement>(
+			":is(a[data-testid=cover-art-link], a[data-testid=context-link])"
+		);
+	let searching = false;
 
 	if (
-		albumCover !== null &&
-		(albumCover.href.includes("/show/") ||
-			albumCover.href.includes("/episode/"))
-	)
-		podcast = true;
-
-	if (!podcast) {
+		!(albumCover && /\/(show|episode)\/|your-episodes\?/.test(albumCover.href))
+	) {
 		if (timestamps) presenceData.startTimestamp = browsingStamp;
 		presenceData.smallImageKey = "reading";
 		switch (document.location.hostname) {
@@ -150,18 +136,16 @@ presence.on("UpdateData", async () => {
 					presenceData.details = strings.browse;
 					presenceData.state = strings.podcastLike;
 				} else if (document.location.pathname.includes("/playlist/")) {
-					title = document.querySelector(
+					presenceData.details = strings.viewPlaylist;
+					presenceData.state = document.querySelector(
 						"div.main-view-container__scroll-node-child > section > div > div > span > button > h1"
 					).textContent;
-					presenceData.details = strings.viewPlaylist;
-					presenceData.state = title;
 					delete presenceData.smallImageKey;
 				} else if (document.location.pathname.includes("/show/")) {
-					title = document.querySelector(
+					presenceData.details = strings.show;
+					presenceData.state = document.querySelector(
 						"div.main-view-container__scroll-node-child > section > div > div > h1"
 					).textContent;
-					presenceData.details = strings.show;
-					presenceData.state = title;
 					delete presenceData.smallImageKey;
 				} else if (document.location.pathname.includes("/settings")) {
 					presenceData.details = strings.account;
@@ -254,16 +238,11 @@ presence.on("UpdateData", async () => {
 			),
 			duration = presence.timestampFromFormat(
 				document.querySelector(".playback-bar").children[2].textContent
-			);
-		let pause: boolean;
-
-		if (
-			document
-				.querySelector("div.player-controls__buttons")
-				?.children[1]?.getAttribute("aria-label") === "Play"
-		)
-			pause = true;
-		else pause = false;
+			),
+			pause =
+				document
+					.querySelector("[data-testid=control-button-playpause]")
+					.getAttribute("aria-label") === "Play";
 
 		presenceData.smallImageKey = pause ? "pause" : "play";
 		presenceData.smallImageText = pause ? strings.pause : strings.play;
@@ -283,29 +262,20 @@ presence.on("UpdateData", async () => {
 			);
 		}
 
-		title =
-			Array.from(document.querySelectorAll("a")).find(
-				a => a.dataset?.testid === "nowplaying-track-link"
-			)?.textContent ||
-			Array.from(document.querySelectorAll("a")).find(
-				a => a.dataset?.testid === "context-item-link"
-			)?.textContent;
-		uploader =
-			Array.from(document.querySelectorAll("div")).find(
-				a => a.dataset?.testid === "track-info-artists"
-			)?.textContent ||
-			Array.from(document.querySelectorAll("a")).find(
-				a => a.dataset?.testid === "context-item-info-show"
-			)?.textContent;
-		presenceData.details = title;
-		presenceData.state = uploader;
+		presenceData.details = document.querySelector(
+			":is(a[nowplaying-track-link], a[data-testid=context-item-link"
+		)?.textContent;
+		presenceData.state = document.querySelector(
+			":is(div[data-testid=track-info-artists], a[data-testid=context-item-info-show]"
+		)?.textContent;
 
 		if (privacy) {
 			presenceData.details = strings.listening;
 			delete presenceData.state;
 		}
 
-		if (title !== null && uploader !== null) presence.setActivity(presenceData);
+		if (presenceData.details && presenceData.state)
+			presence.setActivity(presenceData);
 		else presence.error("Error while getting podcast name and title");
 	}
 });
