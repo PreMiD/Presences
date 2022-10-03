@@ -3,11 +3,13 @@ const presence = new Presence({
 });
 
 enum Assets {
-	idle = "https://i.imgur.com/m7dbikM.png",
-	day = "https://i.imgur.com/cYUWU5G.png",
-	night = "https://i.imgur.com/DLiJ9VV.png",
-	voting = "https://i.imgur.com/FfmS4Ko.png",
-	covenLogo = "https://i.imgur.com/weE0OjD.png",
+	idle = "https://i.imgur.com/t6JPUsD.png",
+	day = "https://i.imgur.com/HfHbMyP.png",
+	discussion = "https://i.imgur.com/jPqjrgn.png",
+	night = "https://i.imgur.com/20YDTvV.png",
+	voting = "https://i.imgur.com/QONtFlc.png",
+	judgement = "https://i.imgur.com/6VbV24O.png",
+	defense = "https://i.imgur.com/bsl0JU0.png",
 	regularLogo = "https://i.imgur.com/y7VYTQK.jpg",
 }
 
