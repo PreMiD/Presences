@@ -3,7 +3,6 @@ const presence = new Presence({
 });
 
 enum Assets {
-	idle = "https://i.imgur.com/t6JPUsD.png",
 	day = "https://i.imgur.com/HfHbMyP.png",
 	discussion = "https://i.imgur.com/jPqjrgn.png",
 	night = "https://i.imgur.com/20YDTvV.png",
@@ -39,6 +38,13 @@ const gameTypeNames: Record<string, string> = {
 	RapidMode: "Custom Rapid Mode",
 	DraculasPalace: "Dracula's Palace",
 	ClassicTownTraitor: "Town Traitor",
+	CovenClassic: "Classic Coven",
+	CovenRankedPractice: "Coven Ranked Practice",
+	CovenMafia: "Mafia Returns",
+	CovenCustom: "Custom Coven",
+	CovenTownTraitor: "Coven Town Traitor",
+	CovenAllAny: "Coven All Any",
+	AllAny: "All Any",
 };
 
 let elapsed = Math.round(Date.now() / 1000),
@@ -114,34 +120,13 @@ function handleLog(log: string) {
 				currentState.page = "";
 				break;
 			}
-			case "FullMoonNight": {
-				currentState.page = action;
-				break;
-			}
-			case "StartDiscussion": {
-				currentState.page = action;
-				break;
-			}
-			case "StartDefense": {
-				currentState.page = action;
-				break;
-			}
-			case "StartJudgement": {
-				currentState.page = action;
-				break;
-			}
-			case "StartVoting": {
-				currentState.page = action;
-				break;
-			}
-			case "WhoDiedAndHow": {
-				currentState.page = action;
-				break;
-			}
-			case "DeathNote": {
-				currentState.page = action;
-				break;
-			}
+			case "FullMoonNight":
+			case "StartDiscussion":
+			case "StartDefense":
+			case "StartJudgement":
+			case "StartVoting":
+			case "WhoDiedAndHow":
+			case "DeathNote":
 			case "TellLastWill": {
 				currentState.page = action;
 				break;
@@ -224,8 +209,9 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "BigGame": {
-				const gameType = gameTypeNames[currentState.type] ?? currentState.type;
-				presenceData.details = `Playing a ${gameType} Game`;
+				presenceData.details = `Playing a ${
+					gameTypeNames[currentState.type] ?? currentState.type
+				} Game`;
 				switch (currentState.state) {
 					case GameState.preGame: {
 						switch (currentState.page) {
@@ -248,7 +234,7 @@ presence.on("UpdateData", () => {
 						presenceData.smallImageKey = Assets.day;
 						switch (currentState.page) {
 							case "StartDiscussion": {
-								presenceData.state = `Discussing | Day ${currentState.day}`;
+								presenceData.state = `Discussion | Day ${currentState.day}`;
 								break;
 							}
 							case "StartVoting": {
