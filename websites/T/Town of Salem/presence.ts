@@ -61,7 +61,7 @@ const gameTypeNames: Record<string, string> = {
 	currentState = Object.assign({}, oldState);
 
 let elapsed = Math.round(Date.now() / 1000),
-	lastId = -1;
+	lastId: number = null;
 
 function handleLog(log: string) {
 	if (
@@ -159,6 +159,7 @@ injectedLoggerScript.textContent = `
 				id: counter,
 			});
 			counter++;
+			if (counter > 10000) counter = 0;
 		}
 		while (console.logs.length > 100) console.logs.shift();
 		console.stdlog.apply(console, arguments);
@@ -189,6 +190,7 @@ presence.on("UpdateData", () => {
 	if (window.location.pathname !== "/TownOfSalem/") {
 		presenceData.details = "Browsing BlankMediaGames";
 		presenceData.state = document.title;
+		presenceData.startTimestamp = elapsed;
 	} else {
 		if (oldState.scene !== currentState.scene)
 			elapsed = Math.round(Date.now() / 1000);
@@ -298,6 +300,9 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "BigEndGame": {
+				presenceData.details = `Playing a ${
+					gameTypeNames[currentState.gameMode] ?? currentState.gameMode
+				} Game`;
 				presenceData.state = "Viewing After Game Screen";
 				break;
 			}
