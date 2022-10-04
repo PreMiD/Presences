@@ -4,25 +4,32 @@
 		"name": "Rick",
 		"id": "211982234964590592"
 	},
-	"service": "Anime Soul",
+ 	"contributors": [
+		{
+			"name": "Tranuka",
+			"id": "646006045579411481"
+		},
+	],
+	"service": "Shoob",
 	"description": {
-		"en": "The Largest Anime Discord Server in the World!",
-		"zh_CN": "世界上最大的动漫Discord服务器！",
-		"ga_IE": "An Freastalaí Discord Anime is Mó ar Domhan!",
-		"nl": "De grootste Anime Discord server ter wereld!",
-		"vi_VN": "Máy chủ Discord về Anime lớn nhất thế giới!"
+		"en": "Waifu Bot?! Anime Card Game by Anime Soul Discord! Connect with all Anime communities today!",
+		"zh_CN": "外福机器人？ ！动漫灵魂不和谐动漫纸牌游戏！立即与所有动漫社区联系！",
+		"ga_IE": "Waifu Bot?! Cluiche Cárta Anime ag Anime Soul Discord! Déan teagmháil le gach pobal Anime inniu!",
+		"nl": "Waifu-bot?! Anime-kaartspel van Anime Soul Discord! Maak vandaag nog contact met alle Anime-gemeenschappen!",
+		"vi_VN": "Bot Waifu ?! Game bài Anime của Anime Soul Discord! Kết nối với tất cả cộng đồng Anime ngay hôm nay!"
 	},
 	"url": [
-		"animesoul.com",
-		"shoob.gg"
+		"shoob.gg",
+
 	],
-	"version": "1.1.19",
-	"logo": "https://i.imgur.com/fd4DHxK.png",
-	"thumbnail": "https://i.imgur.com/jvhu7Ww.jpg",
-	"color": "#7289da",
+	"version": "1.0.2170",
+	"logo": "https://i.imgur.com/aI1Qn8s.png",
+	"thumbnail": "https://i.imgur.com/9uCvSeC.png",
+	"color": "#da9c72",
 	"category": "other",
 	"tags": [
 		"anime",
-		"discord-server"
+		"games"
+                "discord-server"
 	]
 }
