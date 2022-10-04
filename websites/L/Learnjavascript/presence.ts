@@ -11,17 +11,35 @@ presence.on("UpdateData", async () => {
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing home page";
 	else if (document.location.pathname === "/app.html") {
-		const currlesson = document.querySelector("body > div > nav > div > action-bar").shadowRoot.querySelector("div > track-preview").shadowRoot.querySelector("app-ripple > button > div.name").textContent;
-		const alllessons = document.querySelector("body > div > nav > course-sidebar").shadowRoot.querySelector("div#tracks > sidebar-tracks").shadowRoot.querySelector("div#start").querySelectorAll("sidebar-track");
-		for (let i = 0; i < alllessons.length; i++) {
-			if (alllessons[i].shadowRoot.querySelector("div > div > div > span.title").textContent === currlesson) {
+		const currlesson = document
+				.querySelector("body > div > nav > div > action-bar")
+				.shadowRoot.querySelector("div > track-preview")
+				.shadowRoot.querySelector("app-ripple > button > div.name").textContent,
+			alllessons = document
+				.querySelector("body > div > nav > course-sidebar")
+				.shadowRoot.querySelector("div#tracks > sidebar-tracks")
+				.shadowRoot.querySelector("div#start")
+				.querySelectorAll("sidebar-track");
+		for (const alllesson of alllessons) {
+			if (
+				alllesson.shadowRoot.querySelector("div > div > div > span.title")
+					.textContent === currlesson
+			)
 				presenceData.details = `Lesson: ${currlesson}`;
-			}
-			const steps = alllessons[i].shadowRoot.querySelector("div > div.steps-container").querySelectorAll("a");
+
+			const steps = alllesson.shadowRoot
+				.querySelector("div > div.steps-container")
+				.querySelectorAll("a");
 			for (let l = 0; l < steps.length; l++) {
-				if (steps[l].querySelector("div").getAttribute("class").includes("current")) {
-					console.log(steps[l].querySelector("div").getAttribute("class") + 'jest równy step current')
-					presenceData.state = `Learning: ${steps[l].querySelector("div").textContent} (Page ${l + 1} of ${steps.length})`;
+				if (
+					steps[l]
+						.querySelector("div")
+						.getAttribute("class")
+						.includes("current")
+				) {
+					presenceData.state = `Learning: ${
+						steps[l].querySelector("div").textContent
+					} (Page ${l + 1} of ${steps.length})`;
 				}
 			}
 		}
