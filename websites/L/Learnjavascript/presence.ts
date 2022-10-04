@@ -24,22 +24,24 @@ presence.on("UpdateData", async () => {
 			if (
 				alllesson.shadowRoot.querySelector("div > div > div > span.title")
 					.textContent === currlesson
-			)
-				presenceData.details = `Lesson: ${currlesson}`;
-
-			const steps = alllesson.shadowRoot
-				.querySelector("div > div.steps-container")
-				.querySelectorAll("a");
-			for (let l = 0; l < steps.length; l++) {
-				if (
-					steps[l]
-						.querySelector("div")
-						.getAttribute("class")
-						.includes("current")
-				) {
-					presenceData.state = `Learning: ${
-						steps[l].querySelector("div").textContent
-					} (Page ${l + 1} of ${steps.length})`;
+			) {
+				const steps = alllesson.shadowRoot
+					.querySelector("div > div.steps-container")
+					.querySelectorAll("a");
+				for (let l = 0; l < steps.length; l++) {
+					if (
+						steps[l]
+							.querySelector("div")
+							.getAttribute("class")
+							.includes("current")
+					) {
+						presenceData.state = `Learning: ${
+							steps[l].querySelector("div").textContent
+						}`;
+						presenceData.details = `Lesson: ${currlesson} (Page ${l + 1} of ${
+							steps.length
+						})`;
+					}
 				}
 			}
 		}
