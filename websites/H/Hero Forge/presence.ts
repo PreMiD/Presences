@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,
-		path = pathname.split("/")[1];
+		[, path] = pathname.split("/");
 
 	switch (path ?? "") {
 		case "": {
