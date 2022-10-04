@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = window.location,
-		pagePath = pathname.split("/").find(x => x),
+		pagePath = pathname.split("/")[1],
 		pageTitle =
 			document.querySelector<HTMLHeadingElement>(".page__title")?.textContent;
 
