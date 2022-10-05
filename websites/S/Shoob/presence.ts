@@ -1,10 +1,10 @@
 const presence = new Presence({
-    clientId: "719127768868061246" // Discord Bot ID
-  });
-browsingTimestamp = Math.floor(Date.now() / 1000);
+		clientId: "719127768868061246",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-const presenceData: PresenceData = {
+	const presenceData: PresenceData = {
     largeImageKey: "shooblb",
     startTimestamp: browsingTimestamp,
     details: "Viewing home page",
@@ -29,11 +29,9 @@ else if (document.location.pathname.includes("/market"))
 else if (document.location.pathname.includes("/notifications"))
     presenceData.details = "Viewing Notifications";
 else if (document.location.pathname.includes("/events"))
-    presenceData.details = "Viewing AS Events";
-/// Anime Soul anime section ///
+    presenceData.details = "Viewing Events";
 else if (document.location.pathname.includes("/anime"))
     presenceData.details = "Viewing Anime";
-/// Anime Soul shop section ///
 else if (document.location.pathname.includes("/shop"))
     presenceData.details = "Viewing the Shop";
 else if (document.location.pathname.includes("/bank"))
@@ -51,7 +49,7 @@ else if (document.location.pathname.includes("/fusion"))
 else if (document.location.pathname.includes("/auction"))
     presenceData.details = "Viewing the Auction";
 else if (document.location.pathname.includes("/trades"))
-    presenceData.details = "Viewing Trades List";
+    presenceData.details = "Viewing Trades";
 /// Anime Soul games section ///
 else if (document.location.pathname.includes("/this-or-that"))
     presenceData.details = "Playing This or That";
@@ -59,28 +57,29 @@ else if (document.location.pathname.includes("/mini-games"))
     presenceData.details = "Playing Mini Games";
 /// Anime Soul community section ///
 else if (document.location.pathname.includes("/creators"))
-    presenceData.details = "Viewing AS Creators";
+    presenceData.details = "Viewing Creators";
 else if (document.location.pathname.includes("/medals"))
-    presenceData.details = "Viewing AS Medals";
+    presenceData.details = "Viewing Medals";
 else if (document.location.pathname.includes("/friends"))
-    presenceData.details = "Viewing AS Friends";
+    presenceData.details = "Viewing Friends";
 else if (document.location.pathname.includes("/leaderboards"))
     presenceData.details = "Viewing Leaderboards";
+else if (document.location.pathname.includes("/cardmakers/leaderboard"))
+    presenceData.details = "Viewing CardMaker Leaderboards";
 else if (document.location.pathname.includes("/servers"))
-    presenceData.details = "Viewing AS Servers";
-/// Anime Soul support section ///
+    presenceData.details = "Viewing Servers";
 else if (document.location.pathname.includes("/appeals"))
     presenceData.details = "Viewing Appeals";
 else if (document.location.pathname.includes("/updates"))
     presenceData.details = "Viewing Updates";
-else if (document.location.pathname.includes("/guides"))
+else if (document.location.pathname.includes("/articles?category=Guides"))
     presenceData.details = "Viewing Guides";
 else if (document.location.pathname.includes("/rules"))
-    presenceData.details = "Reading the rules";
+    presenceData.details = "Reading the Rules";
 else if (document.location.pathname.includes("/staff-list"))
     presenceData.details = "Viewing Staff List";
 else if (document.location.pathname.includes("/staff"))
-    presenceData.details = "Viewing Hidden Page";
+    presenceData.details = "Viewing Staff Pages";
 
 if (!presenceData.details) presence.setActivity();
 else presence.setActivity(presenceData);
