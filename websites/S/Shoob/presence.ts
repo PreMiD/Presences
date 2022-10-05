@@ -8,13 +8,17 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/aI1Qn8s.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = window.location;
+		{ pathname, href } = window.location,
+		pageTitle = document.querySelector(
+			"[itemprop='breadcrumb'] > li:last-child"
+		)?.textContent;
 
 	if (pathname === "/" || pathname === "/home/")
 		presenceData.details = "Viewing home page";
-	else if (pathname.includes("/user"))
-		presenceData.details = `Viewing ${document.title}`;
-	else if (pathname.includes("/dashboard"))
+	else if (pathname.includes("/user")) {
+		presenceData.details = "Viewing a profile";
+		presenceData.state = pageTitle;
+	} else if (pathname.includes("/dashboard"))
 		presenceData.details = "Viewing the Dashboard";
 	else if (pathname.includes("/premium"))
 		presenceData.details = "Viewing Premium";
@@ -33,9 +37,20 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing the Shop";
 	else if (pathname.includes("/bank"))
 		presenceData.details = "Viewing the Bank";
-	else if (pathname.includes("/cards"))
-		presenceData.details = "Viewing the Cards";
-	else if (pathname.includes("/card-abilities"))
+	else if (pathname.includes("/cards")) {
+		if (pathname.includes("/info")) {
+			presenceData.details = "Viewing a Card";
+			presenceData.state = pageTitle;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>(".cardData > img").src;
+			presenceData.buttons = [
+				{
+					label: "View Card",
+					url: href,
+				},
+			];
+		} else presenceData.details = "Viewing the Cards";
+	} else if (pathname.includes("/card-abilities"))
 		presenceData.details = "Viewing Card Abilities";
 	else if (pathname.includes("/card-events"))
 		presenceData.details = "Viewing Card Events";
