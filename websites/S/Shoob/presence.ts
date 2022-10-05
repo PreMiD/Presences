@@ -77,6 +77,6 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/staff"))
 		presenceData.details = "Viewing Staff Pages";
 
-	if (!presenceData.details) presence.setActivity();
-	else presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
