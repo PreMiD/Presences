@@ -16,35 +16,28 @@ presence.on("UpdateData", async () => {
 
 	switch (pathSplit[0] ?? "") {
 		case "":
-		case "home": {
+		case "home":
 			presenceData.details = "Viewing home page";
 			break;
-		}
-		case "appeals": {
+		case "appeals":
 			presenceData.details = "Viewing Appeals";
 			break;
-		}
-		case "anime": {
+		case "anime":
 			presenceData.details = "Viewing Anime";
 			break;
-		}
-		case "articles": {
+		case "articles":
 			presenceData.details = "Viewing Guides";
 			break;
-		}
-		case "auction": {
+		case "auction":
 			presenceData.details = "Viewing the Auction";
 			break;
-		}
-		case "bank": {
+		case "bank":
 			presenceData.details = "Viewing the Bank";
 			break;
-		}
-		case "card-abilities": {
+		case "card-abilities":
 			presenceData.details = "Viewing Card Abilities";
 			break;
-		}
-		case "cards": {
+		case "cards":
 			if (pathSplit[1] === "info") {
 				presenceData.details = "Viewing a Card";
 				presenceData.state = pageTitle;
@@ -58,110 +51,83 @@ presence.on("UpdateData", async () => {
 				];
 			} else presenceData.details = "Viewing the Cards";
 			break;
-		}
-		case "card-events": {
+		case "card-events":
 			presenceData.details = "Viewing Card Events";
 			break;
-		}
-		case "cardmakers": {
-			if (pathSplit[1] === "leaderboard") {
+		case "cardmakers":
+			if (pathSplit[1] === "leaderboard")
 				presenceData.details = "Viewing CardMaker Leaderboards";
-			}
 			break;
-		}
-		case "creators": {
+		case "creators":
 			presenceData.details = "Viewing Creators";
 			break;
-		}
-		case "dashboard": {
+		case "dashboard":
 			presenceData.details = "Viewing the Dashboard";
 			break;
-		}
-		case "events": {
+		case "events":
 			presenceData.details = "Viewing Events";
 			break;
-		}
-		case "friends": {
+		case "friends":
 			presenceData.details = "Viewing Friends";
 			break;
-		}
-		case "fusion": {
+		case "fusion":
 			presenceData.details = "Fusing Cards";
 			break;
-		}
-		case "giveaway": {
+		case "giveaway":
 			presenceData.details = "Viewing Giveaways";
 			break;
-		}
-		case "inventory": {
+		case "inventory":
 			presenceData.details = "Viewing Inventory";
 			break;
-		}
-		case "leaderboards": {
+		case "leaderboards":
 			presenceData.details = "Viewing Leaderboards";
 			break;
-		}
-		case "market": {
+		case "market":
 			presenceData.details = "Viewing the Market";
 			break;
-		}
-		case "medals": {
+		case "medals":
 			presenceData.details = "Viewing Medals";
 			break;
-		}
-		case "mini-games": {
+		case "mini-games":
 			presenceData.details = "Playing Mini Games";
 			break;
-		}
-		case "notifications": {
+		case "notifications":
 			presenceData.details = "Viewing Notifications";
 			break;
-		}
-		case "premium": {
+		case "premium":
 			presenceData.details = "Viewing Premium";
 			break;
-		}
-		case "rules": {
+		case "rules":
 			presenceData.details = "Reading the Rules";
 			break;
-		}
-		case "servers": {
+		case "servers":
 			presenceData.details = "Viewing Servers";
 			break;
-		}
-		case "settings": {
+		case "settings":
 			presenceData.details = "Managing Settings";
 			break;
-		}
-		case "shop": {
+		case "shop":
 			presenceData.details = "Viewing the Shop";
 			break;
-		}
-		case "staff": {
+		case "staff":
 			presenceData.details = "Viewing Staff Pages";
 			break;
-		}
-		case "staff-list": {
+		case "staff-list":
 			presenceData.details = "Viewing Staff List";
 			break;
-		}
-		case "this-or-that": {
+		case "this-or-that":
 			presenceData.details = "Playing This or That";
 			break;
-		}
-		case "trades": {
+		case "trades":
 			presenceData.details = "Viewing Trades";
 			break;
-		}
-		case "updates": {
+		case "updates":
 			presenceData.details = "Viewing Updates";
 			break;
-		}
-		case "user": {
+		case "user":
 			presenceData.details = "Viewing a profile";
 			presenceData.state = pageTitle;
 			break;
-		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
