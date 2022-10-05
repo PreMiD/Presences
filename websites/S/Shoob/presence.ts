@@ -26,10 +26,19 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Anime";
 			break;
 		case "articles":
-			presenceData.details = "Viewing Guides";
+			if (pathSplit[1]) {
+				presenceData.details = "Reading an Article";
+				presenceData.state = pageTitle;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".articleimg-img").src;
+				presenceData.buttons = [{ label: "Read Article", url: href }];
+			} else presenceData.details = "Viewing Articles";
 			break;
 		case "auction":
-			presenceData.details = "Viewing the Auction";
+			if (pathSplit[1]) {
+				presenceData.details = "Viewing an Auction";
+				presenceData.state = pageTitle;
+			} else presenceData.details = "Viewing the Auction HQ";
 			break;
 		case "bank":
 			presenceData.details = "Viewing the Bank";
@@ -41,18 +50,24 @@ presence.on("UpdateData", async () => {
 			if (pathSplit[1] === "info") {
 				presenceData.details = "Viewing a Card";
 				presenceData.state = pageTitle;
-				presenceData.largeImageKey =
-					document.querySelector<HTMLImageElement>(".cardData > img").src;
-				presenceData.buttons = [
-					{
-						label: "View Card",
-						url: href,
-					},
-				];
+				presenceData.buttons = [{ label: "View Card", url: href }];
 			} else presenceData.details = "Viewing the Cards";
 			break;
 		case "card-events":
 			presenceData.details = "Viewing Card Events";
+			if (pathSplit[1]) {
+				if (pathSplit[2]) {
+					presenceData.details = "Viewing an Event Card";
+					presenceData.state = pageTitle;
+					presenceData.buttons = [{ label: "View Card", url: href }];
+				} else {
+					presenceData.state = `${
+						document.querySelector(
+							"[itemprop='breadcrumb'] [href*='/card-events/']"
+						).textContent
+					} Cards`;
+				}
+			}
 			break;
 		case "cardmakers":
 			if (pathSplit[1] === "leaderboard")
@@ -79,6 +94,9 @@ presence.on("UpdateData", async () => {
 		case "inventory":
 			presenceData.details = "Viewing Inventory";
 			break;
+		case "keygiveaways":
+			presenceData.details = "Viewing Key Giveaways";
+			break;
 		case "leaderboards":
 			presenceData.details = "Viewing Leaderboards";
 			break;
@@ -101,7 +119,11 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading the Rules";
 			break;
 		case "servers":
-			presenceData.details = "Viewing Servers";
+			if (pathSplit[1]) {
+				presenceData.details = "Viewing a Server";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [{ label: "View Server", url: href }];
+			} else presenceData.details = "Viewing Servers";
 			break;
 		case "settings":
 			presenceData.details = "Managing Settings";
@@ -109,11 +131,20 @@ presence.on("UpdateData", async () => {
 		case "shop":
 			presenceData.details = "Viewing the Shop";
 			break;
+		case "stacks":
+			presenceData.details = "Viewing Stacks";
+			break;
 		case "staff":
 			presenceData.details = "Viewing Staff Pages";
 			break;
 		case "staff-list":
 			presenceData.details = "Viewing Staff List";
+			break;
+		case "submit":
+			presenceData.details = "Submitting a Card";
+			break;
+		case "tasks":
+			presenceData.details = "Viewing Statistics & Tasks";
 			break;
 		case "this-or-that":
 			presenceData.details = "Playing This or That";
