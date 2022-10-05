@@ -150,10 +150,10 @@ if (host === "desu-online.pl") {
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestamps(video.current, video.duration);
 
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = "https://i.imgur.com/Zd2WTR1.png";
 		presenceData.smallImageText = "Odtwarzanie";
 		if (video.paused) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = "https://i.imgur.com/LV9xIjD.png";
 			presenceData.smallImageText = "Wstrzymano";
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
