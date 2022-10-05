@@ -104,7 +104,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Trades";
 			break;
 		}
-		// Shoob games section
 		case "this-or-that": {
 			presenceData.details = "Playing This or That";
 			break;
@@ -113,7 +112,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Playing Mini Games";
 			break;
 		}
-		// Shoob community section
 		case "creators": {
 			presenceData.details = "Viewing Creators";
 			break;
