@@ -4,6 +4,16 @@
 		"id": "293803241110503426",
 		"name": "weemizo"
 	},
+	"contributors": [
+		{
+			"name": "weemizo",
+			"id": "293803241110503426"
+		},
+		{
+			"name": "Meffiu",
+			"id": "334411435633541121"
+		}
+	],
 	"service": "Learnjavascript",
 	"description": {
 		"en": "The easiest way to  learn  &  practice  modern JavaScript. Learn in an interactive environment. Read short lessons, take notes, and complete challenges directly in your browser.",
