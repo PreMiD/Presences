@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"id": "334411435633541121",
-		"name": "Meffiu"
+		"name": "Meffiu#9999"
 	},
 	"service": "Desu-Online",
 	"description": {
@@ -11,7 +11,7 @@
 	},
 	"url": "desu-online.pl",
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/KEkxfKO.png",
+	"logo": "https://i.imgur.com/JC8ZxOH.png",
 	"thumbnail": "https://i.imgur.com/3XMqlXE.png",
 	"color": "#D9910F",
 	"category": "anime",
