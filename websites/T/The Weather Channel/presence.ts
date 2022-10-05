@@ -11,5 +11,50 @@ presence.on("UpdateData", async () => {
 	{ pathname } = window.location,
 	pathSplit = pathname.split("/").slice(1);
 
+	switch (pathSplit[0] ?? "") {
+		case "": {
+			presenceData.details = "Browsing";
+			presenceData.state = "Home page";
+			break;
+		}
+		case "deals": {
+			break;
+		}
+		case "forecast": {
+			break;
+		}
+		case "photos": {
+			break;
+		}
+		case "login":
+		case "signup": {
+			break;
+		}
+		case "maps": {
+			break;
+		}
+		case "member": {
+			break;
+		}
+		case "news": {
+			break;
+		}
+		case "safety": {
+			break;
+		}
+		case "slideshows": {
+			break;
+		}
+		case "storms": {
+			break;
+		}
+		case "weather": {
+			break;
+		}
+		default: {
+			break;
+		}
+	}
+
 	presence.setActivity(presenceData);
 });
