@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
 		case "inventory":
 			presenceData.details = "Viewing Inventory";
 			break;
-		case "keygiveaways":
+		case "keysgiveaways":
 			presenceData.details = "Viewing Key Giveaways";
 			break;
 		case "leaderboards":
@@ -158,6 +158,9 @@ presence.on("UpdateData", async () => {
 		case "user":
 			presenceData.details = "Viewing a profile";
 			presenceData.state = pageTitle;
+			presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+				".profile-avatar-pic img"
+			).src;
 			break;
 	}
 
