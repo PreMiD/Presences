@@ -124,12 +124,12 @@ presence.on("UpdateData", async () => {
 				"body > div > div > div > div > div > div > div > h3"
 			).textContent
 		}`;
-		presenceData.state = `Odcinek:${
-			document
-				.querySelector("body > div > div > div > div > div > div > div > span")
-				.textContent.split("-")[1]
-				.split("/")[0]
-		}`;
+		presenceData.state = `Odcinek:${document
+			.querySelector(
+				"body > div > div > div > div > div > div.episodelist > ul > li.selected > a > div.playinfo > span"
+			)
+			.textContent.split("-")[0]
+			.replace("Odc", "")}`;
 		presenceData.buttons = [
 			{ label: "Oglądaj", url: document.URL },
 			{
