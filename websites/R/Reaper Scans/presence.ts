@@ -68,7 +68,9 @@ presence.on("UpdateData", () => {
 				document.querySelectorAll<HTMLLIElement>("h2 + div li").length
 			} ${pathSplit[0]}s found`;
 		}
-	} else {
+	} else if (pathSplit[0] === "account")
+		presenceData.details = "Managing Account Settings";
+	else {
 		presenceData.details = "Browsing Reaper Scans";
 		presenceData.state = document.title;
 	}
