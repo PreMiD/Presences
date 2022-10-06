@@ -1,86 +1,169 @@
 const presence = new Presence({
-    clientId: "719127768868061246",
-  }),
-  browsingTimestamp = Math.floor(Date.now() / 1000);
+		clientId: "719127768868061246",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "shooblb",
-    startTimestamp: browsingTimestamp,
-    details: "Viewing home page",
-  };
-  if (
-    document.location.pathname === "/" ||
-    document.location.pathname === "/home/"
-  )
-    presenceData.details = "Viewing home page";
-  else if (document.location.pathname.includes("/user"))
-    presenceData.details = `Viewing ${document.title}`;
-  else if (document.location.pathname.includes("/dashboard"))
-    presenceData.details = "Viewing the Dashboard";
-  else if (document.location.pathname.includes("/premium"))
-    presenceData.details = "Viewing Premium";
-  else if (document.location.pathname.includes("/giveaway"))
-    presenceData.details = "Viewing Giveaways";
-  else if (document.location.pathname.includes("/settings"))
-    presenceData.details = "Viewing Settings";
-  else if (document.location.pathname.includes("/market"))
-    presenceData.details = "Viewing the Market";
-  else if (document.location.pathname.includes("/notifications"))
-    presenceData.details = "Viewing Notifications";
-  else if (document.location.pathname.includes("/events"))
-    presenceData.details = "Viewing Events";
-  else if (document.location.pathname.includes("/anime"))
-    presenceData.details = "Viewing Anime";
-  else if (document.location.pathname.includes("/shop"))
-    presenceData.details = "Viewing the Shop";
-  else if (document.location.pathname.includes("/bank"))
-    presenceData.details = "Viewing the Bank";
-  else if (document.location.pathname.includes("/cards"))
-    presenceData.details = "Viewing the Cards";
-  else if (document.location.pathname.includes("/card-abilities"))
-    presenceData.details = "Viewing Card Abilities";
-  else if (document.location.pathname.includes("/card-events"))
-    presenceData.details = "Viewing Card Events";
-  else if (document.location.pathname.includes("/inventory"))
-    presenceData.details = "Viewing Inventory";
-  else if (document.location.pathname.includes("/fusion"))
-    presenceData.details = "Fusing Cards";
-  else if (document.location.pathname.includes("/auction"))
-    presenceData.details = "Viewing the Auction";
-  else if (document.location.pathname.includes("/trades"))
-    presenceData.details = "Viewing Trades";
-  /// Anime Soul games section ///
-  else if (document.location.pathname.includes("/this-or-that"))
-    presenceData.details = "Playing This or That";
-  else if (document.location.pathname.includes("/mini-games"))
-    presenceData.details = "Playing Mini Games";
-  /// Anime Soul community section ///
-  else if (document.location.pathname.includes("/creators"))
-    presenceData.details = "Viewing Creators";
-  else if (document.location.pathname.includes("/medals"))
-    presenceData.details = "Viewing Medals";
-  else if (document.location.pathname.includes("/friends"))
-    presenceData.details = "Viewing Friends";
-  else if (document.location.pathname.includes("/leaderboards"))
-    presenceData.details = "Viewing Leaderboards";
-  else if (document.location.pathname.includes("/cardmakers/leaderboard"))
-    presenceData.details = "Viewing CardMaker Leaderboards";
-  else if (document.location.pathname.includes("/servers"))
-    presenceData.details = "Viewing Servers";
-  else if (document.location.pathname.includes("/appeals"))
-    presenceData.details = "Viewing Appeals";
-  else if (document.location.pathname.includes("/updates"))
-    presenceData.details = "Viewing Updates";
-  else if (document.location.pathname.includes("/articles?category=Guides"))
-    presenceData.details = "Viewing Guides";
-  else if (document.location.pathname.includes("/rules"))
-    presenceData.details = "Reading the Rules";
-  else if (document.location.pathname.includes("/staff-list"))
-    presenceData.details = "Viewing Staff List";
-  else if (document.location.pathname.includes("/staff"))
-    presenceData.details = "Viewing Staff Pages";
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/aI1Qn8s.png",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href } = window.location,
+		pathSplit = pathname.split("/").slice(1),
+		pageTitle = document.querySelector(
+			"[itemprop='breadcrumb'] > li:last-child"
+		)?.textContent;
 
-  if (!presenceData.details) presence.setActivity();
-  else presence.setActivity(presenceData);
+	switch (pathSplit[0] ?? "") {
+		case "":
+		case "home":
+			presenceData.details = "Viewing home page";
+			break;
+		case "appeals":
+			presenceData.details = "Viewing Appeals";
+			break;
+		case "anime":
+			presenceData.details = "Viewing Anime";
+			break;
+		case "articles":
+			if (pathSplit[1]) {
+				presenceData.details = "Reading an Article";
+				presenceData.state = pageTitle;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".articleimg-img").src;
+				presenceData.buttons = [{ label: "Read Article", url: href }];
+			} else presenceData.details = "Viewing Articles";
+			break;
+		case "auction":
+			if (pathSplit[1]) {
+				presenceData.details = "Viewing an Auction";
+				presenceData.state = pageTitle;
+			} else presenceData.details = "Viewing the Auction HQ";
+			break;
+		case "bank":
+			presenceData.details = "Viewing the Bank";
+			break;
+		case "card-abilities":
+			presenceData.details = "Viewing Card Abilities";
+			break;
+		case "cards":
+			if (pathSplit[1] === "info") {
+				presenceData.details = "Viewing a Card";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [{ label: "View Card", url: href }];
+			} else presenceData.details = "Viewing the Cards";
+			break;
+		case "card-events":
+			presenceData.details = "Viewing Card Events";
+			if (pathSplit[1]) {
+				if (pathSplit[2]) {
+					presenceData.details = "Viewing an Event Card";
+					presenceData.state = pageTitle;
+					presenceData.buttons = [{ label: "View Card", url: href }];
+				} else {
+					presenceData.state = `${
+						document.querySelector(
+							"[itemprop='breadcrumb'] [href*='/card-events/']"
+						).textContent
+					} Cards`;
+				}
+			}
+			break;
+		case "cardmakers":
+			if (pathSplit[1] === "leaderboard")
+				presenceData.details = "Viewing CardMaker Leaderboards";
+			break;
+		case "creators":
+			presenceData.details = "Viewing Creators";
+			break;
+		case "dashboard":
+			presenceData.details = "Viewing the Dashboard";
+			break;
+		case "events":
+			presenceData.details = "Viewing Events";
+			break;
+		case "friends":
+			presenceData.details = "Viewing Friends";
+			break;
+		case "fusion":
+			presenceData.details = "Fusing Cards";
+			break;
+		case "giveaway":
+			presenceData.details = "Viewing Giveaways";
+			break;
+		case "inventory":
+			presenceData.details = "Viewing Inventory";
+			break;
+		case "keysgiveaways":
+			presenceData.details = "Viewing Key Giveaways";
+			break;
+		case "leaderboards":
+			presenceData.details = "Viewing Leaderboards";
+			break;
+		case "market":
+			presenceData.details = "Viewing the Market";
+			break;
+		case "medals":
+			presenceData.details = "Viewing Medals";
+			break;
+		case "mini-games":
+			presenceData.details = "Playing Mini Games";
+			break;
+		case "notifications":
+			presenceData.details = "Viewing Notifications";
+			break;
+		case "premium":
+			presenceData.details = "Viewing Premium";
+			break;
+		case "rules":
+			presenceData.details = "Reading the Rules";
+			break;
+		case "servers":
+			if (pathSplit[1]) {
+				presenceData.details = "Viewing a Server";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [{ label: "View Server", url: href }];
+			} else presenceData.details = "Viewing Servers";
+			break;
+		case "settings":
+			presenceData.details = "Managing Settings";
+			break;
+		case "shop":
+			presenceData.details = "Viewing the Shop";
+			break;
+		case "stacks":
+			presenceData.details = "Viewing Stacks";
+			break;
+		case "staff":
+			presenceData.details = "Viewing Staff Pages";
+			break;
+		case "staff-list":
+			presenceData.details = "Viewing Staff List";
+			break;
+		case "submit":
+			presenceData.details = "Submitting a Card";
+			break;
+		case "tasks":
+			presenceData.details = "Viewing Statistics & Tasks";
+			break;
+		case "this-or-that":
+			presenceData.details = "Playing This or That";
+			break;
+		case "trades":
+			presenceData.details = "Viewing Trades";
+			break;
+		case "updates":
+			presenceData.details = "Viewing Updates";
+			break;
+		case "user":
+			presenceData.details = "Viewing a profile";
+			presenceData.state = pageTitle;
+			presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+				".profile-avatar-pic img"
+			).src;
+			break;
+	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
