@@ -18,68 +18,59 @@ presence.on("UpdateData", () => {
 		},
 		pathSplit = pathname.split("/").slice(1);
 
-	switch (pathSplit[0] ?? "") {
-		case "": {
-			presenceData.details = "Viewing Home Page";
-			break;
-		}
-		case "comics":
-		case "novels": {
-			const captitalized = `${pathSplit[0][0].toUpperCase()}${pathSplit[0].slice(
-				1
-			)}`;
-			if (pathSplit[1]) {
-				if (pathSplit[2] === "chapters") {
-					let progress =
-						(document.documentElement.scrollTop /
-							(document.querySelector(
-								pathSplit[0] === "comics"
-									? "main > div:not([id*='Ads'])"
-									: "article"
-							).scrollHeight -
-								window.innerHeight)) *
-						100;
-					progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
+	if ((pathSplit[0] ?? "") === "") presenceData.details = "Viewing Home Page";
+	else if (pathSplit[0] === "comics" || pathSplit[0] === "novels") {
+		const captitalized = `${pathSplit[0][0].toUpperCase()}${pathSplit[0].slice(
+			1
+		)}`;
+		if (pathSplit[1]) {
+			if (pathSplit[2] === "chapters") {
+				let progress =
+					(document.documentElement.scrollTop /
+						(document.querySelector(
+							pathSplit[0] === "comics"
+								? "main > div:not([id*='Ads'])"
+								: "article"
+						).scrollHeight -
+							window.innerHeight)) *
+					100;
+				progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
 
-					presenceData.details = `Reading a ${pathSplit[0]}`;
-					presenceData.state = `📖 ${
-						document.querySelector("h2").textContent
-					} ${document.querySelector("h1").textContent.trim()} 🔸 ${progress}%`;
-					presenceData.smallImageKey = Assets.read;
-					presenceData.buttons = [
-						{
-							label: `Visit ${captitalized} Page`,
-							url: document.querySelector<HTMLAnchorElement>("h2 + div > a")
-								.href,
-						},
-						{
-							label: "Visit Chapter",
-							url: href,
-						},
-					];
-				} else {
-					presenceData.details = `Viewing ${captitalized} Page`;
-					presenceData.state = document.querySelector("h1").textContent;
-					presenceData.smallImageKey = Assets.view;
-					presenceData.buttons = [
-						{
-							label: `Visit ${captitalized} Page`,
-							url: href,
-						},
-					];
-				}
+				presenceData.details = `Reading a ${pathSplit[0]}`;
+				presenceData.state = `📖 ${
+					document.querySelector("h2").textContent
+				} ${document.querySelector("h1").textContent.trim()} 🔸 ${progress}%`;
+				presenceData.smallImageKey = Assets.read;
+				presenceData.buttons = [
+					{
+						label: `Visit ${captitalized} Page`,
+						url: document.querySelector<HTMLAnchorElement>("h2 + div > a").href,
+					},
+					{
+						label: "Visit Chapter",
+						url: href,
+					},
+				];
 			} else {
-				presenceData.details = `Viewing ${captitalized} List`;
-				presenceData.state = `📋 ${
-					document.querySelectorAll<HTMLLIElement>("h2 + div li").length
-				} ${pathSplit[0]}s found`;
+				presenceData.details = `Viewing ${captitalized} Page`;
+				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.smallImageKey = Assets.view;
+				presenceData.buttons = [
+					{
+						label: `Visit ${captitalized} Page`,
+						url: href,
+					},
+				];
 			}
-			break;
+		} else {
+			presenceData.details = `Viewing ${captitalized} List`;
+			presenceData.state = `📋 ${
+				document.querySelectorAll<HTMLLIElement>("h2 + div li").length
+			} ${pathSplit[0]}s found`;
 		}
-		default: {
-			presenceData.details = "Browsing Reaper Scans";
-			presenceData.state = document.title;
-		}
+	} else {
+		presenceData.details = "Browsing Reaper Scans";
+		presenceData.state = document.title;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
