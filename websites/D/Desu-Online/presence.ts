@@ -130,7 +130,8 @@ presence.on("UpdateData", async () => {
 			)
 			.textContent.split("-");
 		presenceData.state = `Odcinek:${playinfo[0].replace("Odc", "")}`;
-		if (playinfo.length > 2) presenceData.state += ` - "${playinfo[1].slice(1, -1)}"`;
+		if (playinfo.length > 2)
+			presenceData.state += ` - "${playinfo[1].slice(1, -1)}"`;
 		presenceData.buttons = [
 			{ label: "Oglądaj", url: document.URL },
 			{
