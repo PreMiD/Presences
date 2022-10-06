@@ -233,7 +233,7 @@ presence.on("UpdateData", async () => {
 			);
 		}
 
-		if (!YoutubeShorts) uploaderShorts = void 0;
+		if (!YoutubeShorts) uploaderShorts = null;
 		const uploader =
 				uploaderShorts ??
 				(uploaderMiniPlayer && uploaderMiniPlayer.textContent.length > 0
