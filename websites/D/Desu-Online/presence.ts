@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, search } = document.location;
 	presenceData.smallImageKey =
-		"https://cdn-icons-png.flaticon.com/512/5611/5611971.png";
+		"https://i.imgur.com/1VwDv4D.png";
 	if (search !== "") {
 		presenceData.details = "Używa zaawansowanej wyszukiwarki...";
 		const searchvalues = search.split("&");
