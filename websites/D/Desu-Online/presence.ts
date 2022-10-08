@@ -9,13 +9,13 @@ let video = {
 	paused: true,
 };
 
-const image = {
-	search: "https://i.imgur.com/1VwDv4D.png",
-	home: "https://i.imgur.com/xVhTZcB.png",
-	play: "https://i.imgur.com/Zd2WTR1.png",
-	pause: "https://i.imgur.com/LV9xIjD.png",
-	logo: "https://i.imgur.com/KEkxfKO.png",
-};
+enum image {
+	search = "https://i.imgur.com/1VwDv4D.png",
+	home = "https://i.imgur.com/xVhTZcB.png",
+	play = "https://i.imgur.com/Zd2WTR1.png",
+	pause = "https://i.imgur.com/LV9xIjD.png",
+	logo = "https://i.imgur.com/KEkxfKO.png",
+}
 
 presence.on(
 	"iFrameData",
