@@ -112,10 +112,8 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes("page"))
 			presenceData.state += ` (Strona ${pathname.split("/")[4]})`;
 	} else if (
-		document.querySelectorAll("span.year")[0].textContent &&
-		document
-			.querySelectorAll("span.year")[0]
-			.textContent.includes("Dodane przez")
+		document.querySelector("span.year").textContent &&
+		document.querySelector("span.year").textContent.includes("Dodane przez")
 	) {
 		presenceData.details = `Ogląda: ${
 			document.querySelector(
