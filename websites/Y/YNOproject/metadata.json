@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "132835479497211904",
+		"name": "jvbf#0001"
+	},
+	"service": "YNOproject",
+	"description": {
+		"en": "YNOproject is a website that lets you play Yume Nikki and Yume Nikki fangames in multiplayer with your friends, no account or downloads required."
+	},
+	"url": "ynoproject.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/2LD3PQV.png",
+	"thumbnail": "https://i.imgur.com/A3ojCDY.png",
+	"color": "#563e37",
+	"category": "games",
+	"tags": [
+		"yume",
+		"nikki",
+		"2kki",
+		"dream",
+		"yno"
+	]
+}
