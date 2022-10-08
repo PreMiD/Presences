@@ -22,13 +22,8 @@ presence.on("UpdateData", async () => {
 
 	if (titleInfo.length > 1 && titleInfo[1] === "YNOproject" ? true : false) {
 		presenceData.details = `Dreaming on ${titleInfo[0]}`;
-		if (gamesWithIcons.includes(titleInfo[0])) {
-			presenceData.smallImageKey = `${titleInfo[0]
-				.toLowerCase()
-				.replace(" ", "")
-				.replace(".", "")}-icon`;
+			presenceData.smallImageKey = `https://${document.location.hostname}/images/logo_${document.location.href.split('/')[3]}.png`
 			presenceData.smallImageText = titleInfo[0];
-		}
 	} else presenceData.state = "Choosing a game...";
 
 	if (location?.textContent) presenceData.state = location.textContent;
