@@ -36,14 +36,16 @@ presence.on("UpdateData", () => {
 					100;
 				progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
 
-				presenceData.details = `Reading a ${pathSplit[0]}`;
-				presenceData.state = `📖 ${
+				presenceData.details = `Reading ${
 					document.querySelector("h2").textContent
-				} ${document.querySelector("h1").textContent.trim()} 🔸 ${progress}%`;
+				}`;
+				presenceData.state = `📖 ${document
+					.querySelector("h1")
+					.textContent.trim()} 🔸 ${progress}%`;
 				presenceData.smallImageKey = Assets.read;
 				presenceData.buttons = [
 					{
-						label: `Visit ${captitalized} Page`,
+						label: `Visit ${captitalized.slice(captitalized.length - 1)} Page`,
 						url: document.querySelector<HTMLAnchorElement>("h2 + div > a").href,
 					},
 					{
