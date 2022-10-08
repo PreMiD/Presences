@@ -1,17 +1,6 @@
 const presence = new Presence({
 		clientId: "1028080411772977212",
-	}),
-	gamesWithIcons = [
-		"Uneven Dream",
-		"Amillusion",
-		"Deep Dreams",
-		"Yume Nikki",
-		"Yume 2kki",
-		".flow",
-		"Someday",
-		"Answered Prayers",
-		"Braingirl",
-	];
+	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
