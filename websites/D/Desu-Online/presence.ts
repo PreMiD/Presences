@@ -9,6 +9,14 @@ let video = {
 	paused: true,
 };
 
+const image = {
+	search: "https://i.imgur.com/1VwDv4D.png",
+	home: "https://i.imgur.com/xVhTZcB.png",
+	play: "https://i.imgur.com/Zd2WTR1.png",
+	pause: "https://i.imgur.com/LV9xIjD.png",
+	logo: "https://i.imgur.com/KEkxfKO.png",
+};
+
 presence.on(
 	"iFrameData",
 	(data: { current: number; duration: number; paused: boolean }) => {
@@ -18,11 +26,11 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/KEkxfKO.png",
+			largeImageKey: image.logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
-	presenceData.smallImageKey = "https://i.imgur.com/1VwDv4D.png";
+	presenceData.smallImageKey = image.search;
 	if (search !== "") {
 		presenceData.details = "Używa zaawansowanej wyszukiwarki...";
 		const searchvalues = search.split("&");
@@ -43,8 +51,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname === "/") {
 		presenceData.details = "Przegląda stronę główną...";
-		presenceData.smallImageKey =
-			"https://cdn-icons-png.flaticon.com/512/5974/5974636.png";
+		presenceData.smallImageKey = image.home;
 	} else if (pathname.startsWith("/anime/")) {
 		if (pathname === "/anime/") presenceData.details = "Przegląda serie...";
 		else if (pathname === "/anime/list-mode/")
@@ -145,10 +152,10 @@ presence.on("UpdateData", async () => {
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestamps(video.current, video.duration);
 
-		presenceData.smallImageKey = "https://i.imgur.com/Zd2WTR1.png";
+		presenceData.smallImageKey = image.play;
 		presenceData.smallImageText = "Odtwarzanie";
 		if (video.paused) {
-			presenceData.smallImageKey = "https://i.imgur.com/LV9xIjD.png";
+			presenceData.smallImageKey = image.pause;
 			presenceData.smallImageText = "Wstrzymano";
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
