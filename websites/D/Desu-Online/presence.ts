@@ -123,14 +123,10 @@ presence.on("UpdateData", async () => {
 		document.querySelector("span.year").textContent.includes("Dodane przez")
 	) {
 		presenceData.details = `Ogląda: ${
-			document.querySelector(
-				"body > div > div > div > div > div > div > div > h3"
-			).textContent
+			document.querySelector("div.det > h3").textContent
 		}`;
 		const playinfo = document
-			.querySelector(
-				"body > div > div > div > div > div > div.episodelist > ul > li.selected > a > div.playinfo > span"
-			)
+			.querySelector("li.selected > a > div.playinfo > span")
 			.textContent.split("-");
 		presenceData.state = `Odcinek:${playinfo[0].replace("Odc", "")}`;
 		if (playinfo.length > 2)
@@ -139,11 +135,7 @@ presence.on("UpdateData", async () => {
 			{ label: "Oglądaj", url: document.URL },
 			{
 				label: "Cała seria",
-				url: document
-					.querySelector(
-						"body > div > div > div > div > div > div > div > h3 > a"
-					)
-					.getAttribute("href"),
+				url: document.querySelector("div.det > h3").getAttribute("href"),
 			},
 		];
 		presenceData.largeImageKey = document
