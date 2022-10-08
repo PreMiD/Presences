@@ -22,8 +22,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
-	presenceData.smallImageKey =
-		"https://i.imgur.com/1VwDv4D.png";
+	presenceData.smallImageKey = "https://i.imgur.com/1VwDv4D.png";
 	if (search !== "") {
 		presenceData.details = "Używa zaawansowanej wyszukiwarki...";
 		const searchvalues = search.split("&");
@@ -52,7 +51,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Przegląda listę serii...";
 		else {
 			presenceData.details = "Przegląda serię:";
-			presenceData.state = document.querySelectorAll("h1")[0].textContent;
+			presenceData.state = document.querySelector("h1.entry-title").textContent;
 			presenceData.largeImageKey = document
 				.querySelector("img.ts-post-image")
 				.getAttribute("src");
@@ -85,7 +84,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Przegląda gatunki...";
 	else if (pathname.startsWith("/season/")) {
 		presenceData.details = "Przegląda sezon:";
-		presenceData.state = document.querySelectorAll("h1")[0].textContent;
+		presenceData.state =
+			document.querySelector("div.newseason > h1").textContent;
 	} else if (pathname === "/sezony/")
 		presenceData.details = "Przegląda sezony...";
 	else if (pathname.startsWith("/label/")) {
@@ -99,20 +99,18 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Przegląda politykę prywatności...";
 	else if (pathname.startsWith("/genres/")) {
 		presenceData.details = "Przegląda gatunek:";
-		presenceData.state = `${document.querySelectorAll("h1")[0].textContent}`;
-		if (pathname.includes("page")) {
-			presenceData.state = `${
-				document.querySelectorAll("h1")[0].textContent
-			} (Strona ${pathname.split("/")[4]})`;
-		}
+		presenceData.state = `${
+			document.querySelector("div.releases > h1 > span").textContent
+		}`;
+		if (pathname.includes("page"))
+			presenceData.state += ` (Strona ${pathname.split("/")[4]})`;
 	} else if (pathname.startsWith("/studio/")) {
 		presenceData.details = "Przegląda studio:";
-		presenceData.state = `${document.querySelectorAll("h1")[0].textContent}`;
-		if (pathname.includes("page")) {
-			presenceData.state = `${
-				document.querySelectorAll("h1")[0].textContent
-			} (Strona ${pathname.split("/")[4]})`;
-		}
+		presenceData.state = `${
+			document.querySelector("div.releases > h1 > span").textContent
+		}`;
+		if (pathname.includes("page"))
+			presenceData.state += ` (Strona ${pathname.split("/")[4]})`;
 	} else if (
 		document.querySelectorAll("span.year")[0].textContent &&
 		document
