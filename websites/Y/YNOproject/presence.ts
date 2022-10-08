@@ -1,6 +1,6 @@
 const presence = new Presence({
-		clientId: "1028080411772977212",
-	});
+	clientId: "1028080411772977212",
+});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -11,8 +11,10 @@ presence.on("UpdateData", async () => {
 
 	if (titleInfo.length > 1 && titleInfo[1] === "YNOproject" ? true : false) {
 		presenceData.details = `Dreaming on ${titleInfo[0]}`;
-			presenceData.smallImageKey = `https://${document.location.hostname}/images/logo_${document.location.href.split('/')[3]}.png`
-			presenceData.smallImageText = titleInfo[0];
+		presenceData.smallImageKey = `https://${
+			document.location.hostname
+		}/images/door_${document.location.href.split("/")[3]}.gif`;
+		presenceData.smallImageText = titleInfo[0];
 	} else presenceData.state = "Choosing a game...";
 
 	if (location?.textContent) presenceData.state = location.textContent;
