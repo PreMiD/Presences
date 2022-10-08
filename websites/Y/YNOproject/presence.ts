@@ -31,8 +31,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else presenceData.state = "Choosing a game...";
 
-	if (location?.textContent)
-		presenceData.state = location.textContent;
+	if (location?.textContent) presenceData.state = location.textContent;
 
 	presence.setActivity(presenceData);
 });
