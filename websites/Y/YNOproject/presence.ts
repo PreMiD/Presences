@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "yno-logo",
+			largeImageKey: "https://i.imgur.com/2LD3PQV.png",
 		},
 		titleInfo = document.title.split(" - "),
 		location = document.querySelector("#locationText");
