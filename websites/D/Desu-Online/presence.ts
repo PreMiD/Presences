@@ -135,7 +135,7 @@ presence.on("UpdateData", async () => {
 			{ label: "Oglądaj", url: document.URL },
 			{
 				label: "Cała seria",
-				url: document.querySelector("div.det > h3").getAttribute("href"),
+				url: document.querySelector("div.det > h3 > a").getAttribute("href"),
 			},
 		];
 		presenceData.largeImageKey = document
