@@ -88,7 +88,6 @@ presence.on("UpdateData", async () => {
 					homepageName[pathList[1]]
 				}`;
 			}
-			// Formatter keeps yelling at me
 			homepageName;
 			break;
 		}
