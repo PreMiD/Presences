@@ -26,11 +26,11 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: image.logo,
+			largeImageKey: image.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
-	presenceData.smallImageKey = image.search;
+	presenceData.smallImageKey = image.Search;
 	if (search) {
 		presenceData.details = "Używa zaawansowanej wyszukiwarki...";
 		const searchvalues = search.split("&");
@@ -39,19 +39,17 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Wyszukuje po frazie:";
 				presenceData.state = searchvalue
 					.substring(2, searchvalue.length)
-					.replaceAll("+", " ")
-					.replaceAll("%20", " ");
+					.replace(/(%20)(\+)/gm, " ");
 			} else if (searchvalue.startsWith("?s=")) {
 				presenceData.details = "Wyszukuje po frazie:";
 				presenceData.state = searchvalue
 					.substring(3, searchvalue.length)
-					.replaceAll("+", " ")
-					.replaceAll("%20", " ");
+					.replace(/(%20)(\+)/gm, " ");
 			}
 		}
 	} else if (pathname === "/") {
 		presenceData.details = "Przegląda stronę główną...";
-		presenceData.smallImageKey = image.home;
+		presenceData.smallImageKey = image.Home;
 	} else if (pathname.startsWith("/anime/")) {
 		if (pathname === "/anime/") presenceData.details = "Przegląda serie...";
 		else if (pathname === "/anime/list-mode/")
@@ -144,10 +142,10 @@ presence.on("UpdateData", async () => {
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestamps(video.current, video.duration);
 
-		presenceData.smallImageKey = image.play;
+		presenceData.smallImageKey = image.Play;
 		presenceData.smallImageText = "Odtwarzanie";
 		if (video.paused) {
-			presenceData.smallImageKey = image.pause;
+			presenceData.smallImageKey = image.Pause;
 			presenceData.smallImageText = "Wstrzymano";
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
