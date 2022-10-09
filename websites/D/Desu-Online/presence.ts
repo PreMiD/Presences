@@ -10,11 +10,11 @@ let video = {
 };
 
 enum image {
-	search = "https://i.imgur.com/1VwDv4D.png",
-	home = "https://i.imgur.com/xVhTZcB.png",
-	play = "https://i.imgur.com/Zd2WTR1.png",
-	pause = "https://i.imgur.com/LV9xIjD.png",
-	logo = "https://i.imgur.com/KEkxfKO.png",
+	Search = "https://i.imgur.com/1VwDv4D.png",
+	Home = "https://i.imgur.com/xVhTZcB.png",
+	Play = "https://i.imgur.com/Zd2WTR1.png",
+	Pause = "https://i.imgur.com/LV9xIjD.png",
+	Logo = "https://i.imgur.com/KEkxfKO.png",
 }
 
 presence.on(
