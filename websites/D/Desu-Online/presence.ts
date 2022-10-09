@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, search } = document.location;
 	presenceData.smallImageKey = image.search;
-	if (search !== "") {
+	if (search) {
 		presenceData.details = "Używa zaawansowanej wyszukiwarki...";
 		const searchvalues = search.split("&");
 		for (const searchvalue of searchvalues) {
