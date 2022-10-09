@@ -3,26 +3,26 @@ const presence = new Presence({
 });
 
 enum Assets {
-	day = "https://i.imgur.com/HfHbMyP.png",
-	discussion = "https://i.imgur.com/jPqjrgn.png",
-	night = "https://i.imgur.com/20YDTvV.png",
-	voting = "https://i.imgur.com/QONtFlc.png",
-	judgement = "https://i.imgur.com/6VbV24O.png",
-	defense = "https://i.imgur.com/bsl0JU0.png",
-	logo = "https://i.imgur.com/y7VYTQK.jpg",
+	Day = "https://i.imgur.com/HfHbMyP.png",
+	Discussion = "https://i.imgur.com/jPqjrgn.png",
+	Night = "https://i.imgur.com/20YDTvV.png",
+	Voting = "https://i.imgur.com/QONtFlc.png",
+	Judgement = "https://i.imgur.com/6VbV24O.png",
+	Defense = "https://i.imgur.com/bsl0JU0.png",
+	Logo = "https://i.imgur.com/y7VYTQK.jpg",
 }
 
 enum GameState {
-	night = "night",
-	day = "day",
-	end = "end",
-	afterGame = "afterGame",
-	preGame = "preGame",
+	Night = "night",
+	Day = "day",
+	End = "end",
+	AfterGame = "afterGame",
+	PreGame = "preGame",
 }
 
 enum GameType {
-	classic = "Classic",
-	ranked = "Ranked",
+	Classic = "Classic",
+	Ranked = "Ranked",
 }
 
 interface GameData {
@@ -55,8 +55,8 @@ const gameTypeNames: Record<string, string> = {
 		scene: "BigLogin",
 		page: "",
 		day: 1,
-		gameMode: GameType.classic,
-		state: GameState.day,
+		gameMode: GameType.Classic,
+		state: GameState.Day,
 	},
 	currentState = Object.assign({}, oldState);
 
@@ -72,7 +72,7 @@ function handleLog(log: string) {
 			.match(/^Switched(?: additively)? to(?: scene)? (.*) Scene/m)[1]
 			.trim();
 		currentState.scene = scene;
-		if (scene === "BigPreGame") currentState.state = GameState.preGame;
+		if (scene === "BigPreGame") currentState.state = GameState.PreGame;
 	} else if (log.startsWith("Entered HomeSceneController.ShowView()")) {
 		currentState.page = log
 			.match(
@@ -83,12 +83,12 @@ function handleLog(log: string) {
 		switch (log.match(/^Entered (.*)$/m)[1].trim()) {
 			case "HandleStartRanked": {
 				currentState.scene = "BigLobby";
-				currentState.gameMode = GameType.ranked;
+				currentState.gameMode = GameType.Ranked;
 				break;
 			}
 			case "HandleOnLeaveRankedQueue": {
 				currentState.scene = "BigHome";
-				currentState.gameMode = GameType.classic;
+				currentState.gameMode = GameType.Classic;
 				break;
 			}
 		}
@@ -102,23 +102,23 @@ function handleLog(log: string) {
 			case "PickNames":
 			case "RoleAndPosition": {
 				currentState.page = action;
-				currentState.state = GameState.preGame;
+				currentState.state = GameState.PreGame;
 				break;
 			}
 			case "StartFirstDay": {
 				currentState.day = 1;
-				currentState.state = GameState.day;
+				currentState.state = GameState.Day;
 				currentState.page = "StartDiscussion";
 				break;
 			}
 			case "StartDay": {
 				currentState.day++;
-				currentState.state = GameState.day;
+				currentState.state = GameState.Day;
 				currentState.page = "";
 				break;
 			}
 			case "StartNight": {
-				currentState.state = GameState.night;
+				currentState.state = GameState.Night;
 				currentState.page = "";
 				break;
 			}
@@ -132,7 +132,7 @@ function handleLog(log: string) {
 				break;
 			}
 			case "SomeoneHasWon": {
-				currentState.state = GameState.end;
+				currentState.state = GameState.End;
 				break;
 			}
 		}
@@ -184,7 +184,7 @@ setInterval(async () => {
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.logo,
+		largeImageKey: Assets.Logo,
 	};
 
 	if (window.location.pathname !== "/TownOfSalem/") {
@@ -239,7 +239,7 @@ presence.on("UpdateData", () => {
 					gameTypeNames[currentState.gameMode] ?? currentState.gameMode
 				} Game`;
 				switch (currentState.state) {
-					case GameState.preGame: {
+					case GameState.PreGame: {
 						switch (currentState.page) {
 							case "PickNames": {
 								presenceData.state = "Choosing Names";
@@ -252,17 +252,17 @@ presence.on("UpdateData", () => {
 						}
 						break;
 					}
-					case GameState.day: {
-						presenceData.smallImageKey = Assets.day;
+					case GameState.Day: {
+						presenceData.smallImageKey = Assets.Day;
 						switch (currentState.page) {
 							case "StartDiscussion": {
 								presenceData.state = `Discussion | Day ${currentState.day}`;
-								presenceData.smallImageKey = Assets.discussion;
+								presenceData.smallImageKey = Assets.Discussion;
 								break;
 							}
 							case "StartVoting": {
 								presenceData.state = `Voting | Day ${currentState.day}`;
-								presenceData.smallImageKey = Assets.voting;
+								presenceData.smallImageKey = Assets.Voting;
 								break;
 							}
 							case "WhoDiedAndHow": {
@@ -271,12 +271,12 @@ presence.on("UpdateData", () => {
 							}
 							case "StartDefense": {
 								presenceData.state = `Defense | Day ${currentState.day}`;
-								presenceData.smallImageKey = Assets.defense;
+								presenceData.smallImageKey = Assets.Defense;
 								break;
 							}
 							case "StartJudgement": {
 								presenceData.state = `Judgement | Day ${currentState.day}`;
-								presenceData.smallImageKey = Assets.judgement;
+								presenceData.smallImageKey = Assets.Judgement;
 								break;
 							}
 							default: {
@@ -285,14 +285,14 @@ presence.on("UpdateData", () => {
 						}
 						break;
 					}
-					case GameState.night: {
-						presenceData.smallImageKey = Assets.night;
+					case GameState.Night: {
+						presenceData.smallImageKey = Assets.Night;
 						if (currentState.page === "FullMoonNight")
 							presenceData.state = `Night ${currentState.day} (Full Moon)`;
 						else presenceData.state = `Night ${currentState.day}`;
 						break;
 					}
-					case GameState.end: {
+					case GameState.End: {
 						presenceData.state = "Viewing End Screen";
 						break;
 					}
