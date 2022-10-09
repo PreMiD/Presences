@@ -4,17 +4,17 @@ const presence = new Presence({
 	elapsed = Math.floor(Date.now() / 1e3);
 
 enum Assets {
-	logo = "https://i.imgur.com/tPMtbjL.png",
-	search = "https://i.imgur.com/08wjeL0.png",
-	read = "https://i.imgur.com/Gglu4Tk.png",
-	view = "https://i.imgur.com/BMzYEcO.png",
+	Logo = "https://i.imgur.com/tPMtbjL.png",
+	Search = "https://i.imgur.com/08wjeL0.png",
+	Read = "https://i.imgur.com/Gglu4Tk.png",
+	View = "https://i.imgur.com/BMzYEcO.png",
 }
 
 presence.on("UpdateData", () => {
 	const { pathname, href } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: elapsed,
-			largeImageKey: Assets.logo,
+			largeImageKey: Assets.Logo,
 		},
 		pathSplit = pathname.split("/").slice(1);
 
@@ -42,7 +42,7 @@ presence.on("UpdateData", () => {
 				presenceData.state = `📖 ${document
 					.querySelector("h1")
 					.textContent.trim()} 🔸 ${progress}%`;
-				presenceData.smallImageKey = Assets.read;
+				presenceData.smallImageKey = Assets.Read;
 				presenceData.buttons = [
 					{
 						label: `Visit ${captitalized.slice(captitalized.length - 1)} Page`,
@@ -56,7 +56,7 @@ presence.on("UpdateData", () => {
 			} else {
 				presenceData.details = `Viewing ${captitalized} Page`;
 				presenceData.state = document.querySelector("h1").textContent;
-				presenceData.smallImageKey = Assets.view;
+				presenceData.smallImageKey = Assets.View;
 				presenceData.buttons = [
 					{
 						label: `Visit ${captitalized} Page`,
