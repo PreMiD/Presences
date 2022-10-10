@@ -46,11 +46,11 @@ presence.on("UpdateData", () => {
 						100;
 					progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
 
-					presenceData.details = `Reading ${
-						document.querySelector("h2").textContent
-					}`;
+					presenceData.details = `Reading ${document
+						.querySelector<HTMLParagraphElement>("main p")
+						.textContent.trim()}`;
 					presenceData.state = `📖 ${document
-						.querySelector("h1")
+						.querySelector<HTMLDivElement>("nav > div:nth-child(2)")
 						.textContent.trim()} 🔸 ${progress}%`;
 					presenceData.smallImageKey = Assets.Read;
 					presenceData.buttons = [
