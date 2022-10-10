@@ -21,7 +21,7 @@ const presence = new Presence({
 					presenceData.buttons = [
 						{
 							label: "Feed",
-							url: location.href,
+							url: href,
 						},
 					];
 				}
