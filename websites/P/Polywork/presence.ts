@@ -15,7 +15,7 @@ const presence = new Presence({
 			if (hostname === "polywork.com") {
 				presenceData.details = "Home page";
 				presenceData.largeImageKey = "polywork";
-			if (document.location.pathname.includes("/feeds/")) {
+			if (pathname.includes("/feeds/")) {
 					presenceData.details = "Read are news feeds";
 					presenceData.state = document.title.split("|")[0];
 					presenceData.buttons = [
