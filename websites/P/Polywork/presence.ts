@@ -32,7 +32,7 @@ const presence = new Presence({
 				presenceData.buttons = [
 					{
 						label: "Collaborate",
-						url: location.href,
+						url: href,
 					},
 				];
 			}
