@@ -43,7 +43,7 @@ const presence = new Presence({
 			presenceData.buttons = [
 				{
 					label: "Clubs",
-					url: location.href,
+					url: href,
 				},
 			];
 		}
