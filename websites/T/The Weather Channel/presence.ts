@@ -19,9 +19,18 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "deals": {
+				if (pathSplit[2] === "news") {
+					presenceData.details = "Reading about a deal";
+					presenceData.state = document.querySelector("h1").textContent;
+				} else {
+					presenceData.details = "Browsing deals";
+				}
 				break;
 			}
 			case "forecast": {
+				break;
+			}
+			case "health": {
 				break;
 			}
 			case "photos": {
