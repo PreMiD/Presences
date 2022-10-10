@@ -37,7 +37,7 @@ const presence = new Presence({
 				];
 			}
 		
-			else if (document.location.href.includes("/clubs/")) {
+			else if (href.includes("/clubs/")) {
 			presenceData.details = "Looking for clubs";
 			presenceData.state = document.title.split("|")[0];
 			presenceData.buttons = [
