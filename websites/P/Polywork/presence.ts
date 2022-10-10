@@ -12,7 +12,7 @@ const presence = new Presence({
 			},
 			[pathname, hostname, href, URL] = document.location
 		
-			if (document.location.hostname === "polywork.com") {
+			if (hostname === "polywork.com") {
 				presenceData.details = "Home page";
 				presenceData.largeImageKey = "polywork";
 			if (document.location.pathname.includes("/feeds/")) {
