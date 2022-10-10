@@ -9,7 +9,8 @@ const presence = new Presence({
 				largeImageKey: "https://i.imgur.com/8KLMTMQ.png",
 				details: "Browsing..",
 				startTimestamp: browsingTimestamp,
-			}
+			},
+			[pathname, hostname, href, URL] = document.location
 		
 			if (document.location.hostname === "polywork.com") {
 				presenceData.details = "Home page";
