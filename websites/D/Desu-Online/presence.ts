@@ -9,7 +9,7 @@ let video = {
 	paused: true,
 };
 
-enum image {
+enum Assets {
 	Search = "https://i.imgur.com/1VwDv4D.png",
 	Home = "https://i.imgur.com/xVhTZcB.png",
 	Play = "https://i.imgur.com/Zd2WTR1.png",
@@ -26,11 +26,11 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: image.Logo,
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
-	presenceData.smallImageKey = image.Search;
+	presenceData.smallImageKey = Assets.Search;
 	if (search) {
 		presenceData.details = "Używa zaawansowanej wyszukiwarki...";
 		const searchvalues = search.split("&");
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname === "/") {
 		presenceData.details = "Przegląda stronę główną...";
-		presenceData.smallImageKey = image.Home;
+		presenceData.smallImageKey = Assets.Home;
 	} else if (pathname.startsWith("/anime/")) {
 		if (pathname === "/anime/") presenceData.details = "Przegląda serie...";
 		else if (pathname === "/anime/list-mode/")
@@ -142,10 +142,10 @@ presence.on("UpdateData", async () => {
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestamps(video.current, video.duration);
 
-		presenceData.smallImageKey = image.Play;
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Odtwarzanie";
 		if (video.paused) {
-			presenceData.smallImageKey = image.Pause;
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Wstrzymano";
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
