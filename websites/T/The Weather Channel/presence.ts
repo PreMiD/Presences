@@ -57,6 +57,27 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "health": {
+				switch (pathSplit[1] ?? "") {
+					case "": {
+						presenceData.details = "Browsing health stories";
+						break;
+					}
+					case "cold-flu": {
+						if (pathSplit[2]) {
+							presenceData.details = "Reading about cold & flu";
+							presenceData.state = document.querySelector("h1").textContent;
+						} else {
+							presenceData.details = "Browsing cold & flu stories";
+							break;
+						}
+						break;
+					}
+					case "video": {
+						presenceData.details = "Watching a health video";
+						presenceData.state = document.querySelector("h1").textContent;
+						break;
+					}
+				}
 				break;
 			}
 			case "photos": {
@@ -89,6 +110,9 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "storms": {
+				break;
+			}
+			case "subscribe": {
 				break;
 			}
 			case "travel": {
