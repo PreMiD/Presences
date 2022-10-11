@@ -9,7 +9,10 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = window.location,
-		pathSplit = pathname.split("/").filter(x => x);
+		pathSplit = pathname.split("/").filter(x => x),
+		location = document.querySelector<HTMLSpanElement>(
+			"[class*='--locationName--']"
+		)?.textContent;
 
 	if (hostname === "weather.com") {
 		switch (pathSplit[0] ?? "") {
@@ -28,6 +31,29 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "forecast": {
+				switch (pathSplit[1]) {
+					case "air-quality": {
+						presenceData.details = "Viewing air quality forecast";
+						presenceData.state = location;
+						break;
+					}
+					case "allergy": {
+						presenceData.details = "Viewing allergy forecast";
+						presenceData.state = `${
+							document.querySelector("h2").textContent
+						} for ${location}`;
+						break;
+					}
+					case "cold-flu": {
+						presenceData.details = "Viewing cold & flu forecasts";
+						break;
+					}
+					case "news": {
+						presenceData.details = "Reading forecast news";
+						presenceData.state = document.querySelector("h1").textContent;
+						break;
+					}
+				}
 				break;
 			}
 			case "health": {
@@ -36,8 +62,12 @@ presence.on("UpdateData", async () => {
 			case "photos": {
 				break;
 			}
+			case "promos": {
+				break;
+			}
 			case "login":
 			case "signup": {
+				presenceData.details = "Logging in";
 				break;
 			}
 			case "maps": {
@@ -52,10 +82,16 @@ presence.on("UpdateData", async () => {
 			case "safety": {
 				break;
 			}
+			case "sports-recreation": {
+				break;
+			}
 			case "slideshows": {
 				break;
 			}
 			case "storms": {
+				break;
+			}
+			case "travel": {
 				break;
 			}
 			case "weather": {
@@ -65,8 +101,9 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 		}
-	} else {
+	} else if (hostname === "features.weather.com") {
 	}
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
