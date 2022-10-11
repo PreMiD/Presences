@@ -156,7 +156,7 @@ async function uploadImage(url: string): Promise<string> {
 }
 
 function isPrivateIp(ip = location.hostname) {
-	return /^(?:(?:10|127|192\.168|172\.(?:1[6-9]|2\d|3[01]))\.|localhost)/.test(
+	return /^(?:(?:10|127|192(\.|-)168|172(\.|-)(?:1[6-9]|2\d|3[01]))(\.|-)|localhost)/.test(
 		ip
 	);
 }
@@ -217,7 +217,7 @@ presence.on("UpdateData", async () => {
 				).textContent,
 				subTitle = Array.from(
 					document.querySelector(
-						'[class^=PlayerControlsMetadata] [data-testid="metadataTitleLink"] + span'
+						'[class^=PlayerControlsMetadata] :is([data-testid="metadataTitleLink"] + span, [data-testid="metadataTitleLink"] + div)'
 					).childNodes
 				)
 					.map(node => node.textContent)
