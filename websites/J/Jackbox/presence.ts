@@ -369,6 +369,18 @@ presence.on("UpdateData", async () => {
 							}
 							break;
 						}
+						case Games.YouDontKnowJack2015: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".ydkj-page:not(.pt-page-off)"
+								),
+								{ classList } = currentGamePage;
+							if (classList.contains("state-default")) {
+								presenceData.state = "Waiting in lobby";
+							} else if (classList.contains("state-jack-attack")) {
+								presenceData.state = "Playing Jack Attack";
+							}
+							break;
+						}
 						// Party Pack 2
 						case Games.Bidiots: {
 							break;
