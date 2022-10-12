@@ -170,6 +170,24 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "science": {
+				switch (pathSplit[1] ?? "") {
+					case "": {
+						presenceData.details = "Browsing science stories";
+						break;
+					}
+					case "video": {
+						presenceData.details = "Watching a science video";
+						presenceData.state = pageTitle;
+						presenceData.buttons = [{ label: "Watch Video", url: href }];
+						break;
+					}
+					case "news": {
+						presenceData.details = "Reading a science article";
+						presenceData.state = pageTitle;
+						presenceData.buttons = [{ label: "Read Article", url: href }];
+						break;
+					}
+				}
 				break;
 			}
 			case "sports-recreation": {
