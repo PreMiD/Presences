@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 					}
 					case "cold-flu": {
 						if (pathSplit[2]) {
-							presenceData.details = "Reading about cold & flu";
+							presenceData.details = "Reading cold & flu news";
 							presenceData.state = document.querySelector("h1").textContent;
 						} else {
 							presenceData.details = "Browsing cold & flu stories";
@@ -81,6 +81,12 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "photos": {
+				if (pathSplit[1] === "news") {
+					presenceData.details = "viewing a photo";
+					presenceData.state = document.querySelector("h1").textContent;
+				} else {
+					presenceData.details = "Browsing photo stories";
+				}
 				break;
 			}
 			case "promos": {
