@@ -52,12 +52,7 @@ presence.on("UpdateData", async () => {
 					case "news": {
 						presenceData.details = "Reading forecast news";
 						presenceData.state = pageTitle;
-						presenceData.buttons = [
-							{
-								label: "Read Article",
-								url: href,
-							},
-						];
+						presenceData.buttons = [{ label: "Read Article", url: href }];
 						break;
 					}
 				}
@@ -82,12 +77,7 @@ presence.on("UpdateData", async () => {
 					case "video": {
 						presenceData.details = "Watching a health video";
 						presenceData.state = pageTitle;
-						presenceData.buttons = [
-							{
-								label: "Watch Video",
-								url: href,
-							},
-						];
+						presenceData.buttons = [{ label: "Watch Video", url: href }];
 						break;
 					}
 				}
@@ -100,12 +90,7 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						"[id*='int-image'] img"
 					).src;
-					presenceData.buttons = [
-						{
-							label: "View Photo",
-							url: href,
-						},
-					];
+					presenceData.buttons = [{ label: "View Photo", url: href }];
 				} else {
 					presenceData.details = "Browsing photo stories";
 				}
@@ -120,12 +105,7 @@ presence.on("UpdateData", async () => {
 					case "video": {
 						presenceData.details = "Watching a promo video";
 						presenceData.state = pageTitle;
-						presenceData.buttons = [
-							{
-								label: "Watch Video",
-								url: href,
-							},
-						];
+						presenceData.buttons = [{ label: "Watch Video", url: href }];
 						break;
 					}
 				}
@@ -137,6 +117,9 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "maps": {
+				presenceData.details = "Viewing a map";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [{ label: "View Map", url: href }];
 				break;
 			}
 			case "member": {
