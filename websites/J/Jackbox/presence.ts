@@ -3,17 +3,20 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
-enum LayoutVersion {
-	New = "new",
-	Dictionarium = "dict",
-	Legacy = "legacy",
-	Guesspionage = "guesp",
-	DevilAndDetails = "devilanddetails",
-	DrawfulAnimate = "drawfulanimate",
-	EnormousWheel = "newer",
-	JobJob = "jobjob",
-	PollMine = "pollmine",
-	WeaponsDrawn = "weaponsdrawn",
+const LayoutVersion: Record<string, Function> = {
+	New: () => document.querySelector("#playername").textContent,
+	Dictionarium: () => `${document.querySelector("#playericon").className.split("_")[1]}${document
+		.querySelector("#playername")
+		.textContent.toLowerCase()}`,
+	Legacy: () => document.querySelector("#player").children[0].textContent,
+	Guesspionage: () => document.querySelector("#player").children[1].textContent,
+	DevilAndDetails: () => document.querySelector(".player-text").textContent,
+	// TODO: Find similarities?
+	DrawfulAnimate: () => document.querySelector(".header").textContent,
+	EnormousWheel: () => document.querySelector(".player.name").textContent,
+	JobJob: () => document.querySelector(".name").textContent,
+	PollMine: () => {},
+	WeaponsDrawn: () => document.querySelector(".avatar.header").textContent,
 }
 
 interface Game {
@@ -282,79 +285,30 @@ presence.on("UpdateData", async () => {
 
 	switch (window.location.hostname) {
 		case "jackbox.tv": {
-			let layout: LayoutVersion = LayoutVersion.New;
+			let getLayoutPlayerName = LayoutVersion.New;
 			const game = Object.values(Games).find(
-					game => document.querySelector(game.selector) !== null
-				),
-				{ layout: gamelayout, name, logo } = game;
-			if (gamelayout) layout = gamelayout;
-			if (logo) presenceData.largeImageKey = logo;
-			presenceData.details = `Playing ${name}`;
-			if (useName) {
-				switch (layout) {
-					case LayoutVersion.New: {
-						presenceData.state = `as ${
-							document.querySelector("#playername").textContent
-						}`;
-						break;
+				game => document.querySelector(game.selector) !== null
+			);
+			if (game) {
+				const { layout: gamelayout, name, logo } = game;
+				if (gamelayout) getLayoutPlayerName = gamelayout;
+				if (logo) presenceData.largeImageKey = logo;
+				if (name) presenceData.details = `Playing ${name}`;
+				if (useName) {
+					let playerName: string;
+					try {
+						const name = getLayoutPlayerName();
+						if (name) playerName = ` as ${name}`;
+					} catch (err) {
+						playerName = "";
 					}
-					case LayoutVersion.Legacy: {
-						presenceData.state = `as ${
-							document.querySelector("#player").children[0].textContent
-						}`;
-						break;
-					}
-					case LayoutVersion.Dictionarium: {
-						presenceData.state = `as ${
-							document.querySelector("#playericon").className.split("_")[1]
-						}${document
-							.querySelector("#playername")
-							.textContent.toLowerCase()}`;
-						break;
-					}
-					case LayoutVersion.Guesspionage: {
-						presenceData.state = `as ${
-							document.querySelector("#player").children[1].textContent
-						}`;
-						break;
-					}
-					case LayoutVersion.DevilAndDetails: {
-						presenceData.state = `as ${
-							document.querySelector(".player-text").textContent
-						}`;
-						break;
-					}
-					case LayoutVersion.DrawfulAnimate: {
-						presenceData.state = `as ${
-							document.querySelector(".header").textContent
-						}`;
-						break;
-					}
-					case LayoutVersion.EnormousWheel: {
-						presenceData.state = `as ${
-							document.querySelector(".player.name").textContent
-						}`;
-						break;
-					}
-					case LayoutVersion.JobJob: {
-						presenceData.state = `as ${
-							document.querySelector(".name").textContent
-						}`;
-						break;
-					}
-					case LayoutVersion.PollMine: {
-						// TODO: Implement
-						break;
-					}
-					case LayoutVersion.WeaponsDrawn: {
-						presenceData.state = `as ${
-							document.querySelector(".avatar.header").textContent
-						}`;
-					}
+					presenceData.details += playerName;
 				}
-			}
-			if (useDetails) {
-				// TODO: Add game details...
+				if (useDetails) {
+					// TODO: Add game details...
+				}
+			} else {
+				presenceData.details = "Idle";
 			}
 			break;
 		}
