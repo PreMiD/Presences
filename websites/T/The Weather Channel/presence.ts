@@ -191,6 +191,33 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "sports-recreation": {
+				switch (pathSplit[1] ?? "") {
+					case "": {
+						presenceData.details = "Browsing sports & recreation stories";
+						break;
+					}
+					case "video": {
+						presenceData.details = "Watching a sports & recreation video";
+						presenceData.state = pageTitle;
+						presenceData.buttons = [{ label: "Watch Video", url: href }];
+						break;
+					}
+					case "news": {
+						presenceData.details = "Reading a sports & recreation article";
+						presenceData.state = pageTitle;
+						presenceData.buttons = [{ label: "Read Article", url: href }];
+						break;
+					}
+					case "fishing": {
+						if (pathSplit[2] === "video") {
+							presenceData.details = "Watching a fishing video";
+							presenceData.state = pageTitle;
+							presenceData.buttons = [{ label: "Watch Video", url: href }];
+						} else {
+							presenceData.details = "Browsing fishing stories";
+						}
+					}
+				}
 				break;
 			}
 			case "slideshows": {
