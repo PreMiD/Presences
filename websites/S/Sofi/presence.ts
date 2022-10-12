@@ -108,41 +108,6 @@ presence.on("UpdateData", async () => {
 						userTag ? (presenceData.state = `Of ${userTag[0]}`) : null;
 					}
 				}
-
-			// if (pathname.split("/char/")[1]) {
-			// 	const [charName, charSeries] = await Promise.all([
-			// 		document.querySelector(
-			// 			'div.flex.text-xl.lg:text-2xl'
-			// 		),
-			// 		document.querySelector(
-			// 			'div.flex.flex-col.items-center.justify-center.text-light-400 h2[class="text-xl"]'
-			// 		),
-			// 	]);
-			// 	console.log(charName);
-			// 	console.log(charSeries);
-			// 	if (charName && charSeries) {
-			// 		presenceData.details = "Viewing Character";
-			// 		presenceData.state = `${
-			// 			charName.textContent.split("Name: ")[1]
-			// 		} from ${charSeries.textContent.split("Series: ")[1]}`;
-			// 		presenceData.buttons = [
-			// 			{
-			// 				label: "View Character",
-			// 				url: href,
-			// 			},
-			// 		];
-			// 	}
-			// } else if (pathname.startsWith("/char")) {
-			// 	presenceData.details = "Searching Characters";
-			// 	presenceData.smallImageKey = "https://i.imgur.com/0tmziN8.png";
-			// 	presenceData.smallImageText = "Searching...";
-			// 	presenceData.buttons = [
-			// 		{
-			// 			label: "Search Characters",
-			// 			url: href,
-			// 		},
-			// 	];
-			// }
 		}
 	} else if (host === "gems.sofi.gg") {
 		presenceData.details = "Buying Gems";
