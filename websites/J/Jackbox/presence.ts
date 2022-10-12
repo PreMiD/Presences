@@ -327,19 +327,6 @@ presence.on("UpdateData", async () => {
 				if (useDetails) {
 					presenceData.details += playerName;
 					switch (game) {
-						// Party Pack 1 (not implemented)
-						case Games.YouDontKnowJack2015: {
-							break;
-						}
-						case Games.Drawful: {
-							break;
-						}
-						case Games.LieSwatter: {
-							break;
-						}
-						case Games.WordSpud: {
-							break;
-						}
 						// Party Pack 2
 						case Games.Bidiots: {
 							break;
