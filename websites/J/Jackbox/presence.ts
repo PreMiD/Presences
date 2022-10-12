@@ -21,7 +21,7 @@ const LayoutVersion: Record<string, Function> = {
 
 interface Game {
 	name: string;
-	layout?: LayoutVersion;
+	layout?: Function;
 	selector: string;
 	logo: string;
 }
