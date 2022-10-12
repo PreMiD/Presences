@@ -133,7 +133,7 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "news": {
-						presenceData.details = "Reading news";
+						presenceData.details = "Reading a news article";
 						presenceData.state = pageTitle;
 						presenceData.buttons = [{ label: "Read Article", url: href }];
 						break;
@@ -149,6 +149,24 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "safety": {
+				switch (pathSplit[1] ?? "") {
+					case "": {
+						presenceData.details = "Browsing safety stories";
+						break;
+					}
+					case "video": {
+						presenceData.details = "Watching a safety video";
+						presenceData.state = pageTitle;
+						presenceData.buttons = [{ label: "Watch Video", url: href }];
+						break;
+					}
+					case "news": {
+						presenceData.details = "Reading a safety article";
+						presenceData.state = pageTitle;
+						presenceData.buttons = [{ label: "Read Article", url: href }];
+						break;
+					}
+				}
 				break;
 			}
 			case "science": {
