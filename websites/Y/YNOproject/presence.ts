@@ -41,14 +41,12 @@ presence.on("UpdateData", async () => {
 			document.querySelector("#chatInput:focus") &&
 			document.querySelector("#playerCountLabel")
 		) {
-			const playerCount = Math.max(
-				0,
+			const playerCount =
 				parseInt(
 					document.querySelector("#playerCountLabel").textContent.split(" ")[0]
-				) - 1
-			);
+				) - 1;
 			presenceData.details = `Chatting ${
-				playerCount === 0
+				playerCount <= 0
 					? "alone"
 					: playerCount === 1
 					? "with 1 player"
