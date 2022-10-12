@@ -123,9 +123,29 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "member": {
+				presenceData.details = "Managing account";
 				break;
 			}
 			case "news": {
+				switch (pathSplit[1] ?? "") {
+					case "": {
+						presenceData.details = "Browsing news";
+						break;
+					}
+					case "news": {
+						presenceData.details = "Reading news";
+						presenceData.state = pageTitle;
+						presenceData.buttons = [{ label: "Read Article", url: href }];
+						break;
+					}
+					default: {
+						if (pathname.includes("/video")) {
+							presenceData.details = "Watching a news video";
+							presenceData.state = pageTitle;
+							presenceData.buttons = [{ label: "Watch Video", url: href }];
+						}
+					}
+				}
 				break;
 			}
 			case "safety": {
