@@ -302,9 +302,11 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/SXfEdnL.png",
 		},
-		useName = await presence.getSetting<boolean>("useName"),
-		useTime = await presence.getSetting<boolean>("useTime"),
-		useDetails = await presence.getSetting<boolean>("useDetails");
+		[useName, useTime, useDetails] = await Promise.all([
+			presence.getSetting<boolean>("useName"),
+			presence.getSetting<boolean>("useTime"),
+			presence.getSetting<boolean>("useDetails"),
+		]);
 
 	if (useTime) presenceData.startTimestamp = browsingTimestamp;
 
