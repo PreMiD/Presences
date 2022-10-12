@@ -14,7 +14,8 @@ type LayoutName =
 	| "JobJob"
 	| "PollMine"
 	| "WeaponsDrawn";
-const LayoutVersion: Record<LayoutName, Function> = {
+type LayoutCallback = () => string;
+const LayoutVersion: Record<LayoutName, LayoutCallback> = {
 	New: () => document.querySelector("#playername").textContent,
 	Dictionarium: () =>
 		`${document.querySelector("#playericon").className.split("_")[1]}${document
@@ -27,13 +28,13 @@ const LayoutVersion: Record<LayoutName, Function> = {
 	DrawfulAnimate: () => document.querySelector(".header").textContent,
 	EnormousWheel: () => document.querySelector(".player.name").textContent,
 	JobJob: () => document.querySelector(".name").textContent,
-	PollMine: () => {},
+	PollMine: () => "",
 	WeaponsDrawn: () => document.querySelector(".avatar.header").textContent,
 };
 
 interface Game {
 	name: string;
-	layout?: Function;
+	layout?: LayoutCallback;
 	selector: string;
 	logo: string;
 }
@@ -285,6 +286,18 @@ const Games: Record<string, Game> = {
 	},
 };
 
+let game: Game,
+	getLayoutPlayerName = LayoutVersion.New;
+
+if (window.location.hostname === "jackbox.tv") {
+	setInterval(async () => {
+		getLayoutPlayerName = LayoutVersion.New;
+		game = Object.values(Games).find(
+			game => document.querySelector(game.selector) !== null
+		);
+	}, 500);
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/SXfEdnL.png",
@@ -297,14 +310,10 @@ presence.on("UpdateData", async () => {
 
 	switch (window.location.hostname) {
 		case "jackbox.tv": {
-			let getLayoutPlayerName = LayoutVersion.New;
-			const game = Object.values(Games).find(
-				game => document.querySelector(game.selector) !== null
-			);
 			if (game) {
-				const { layout: gameLayout, name, logo } = game;
+				const { layout, name, logo } = game;
 				let playerName: string;
-				getLayoutPlayerName = gameLayout;
+				getLayoutPlayerName = layout;
 				presenceData.largeImageKey = logo;
 				presenceData.details = `Playing ${name}`;
 				if (useName) {
@@ -318,7 +327,144 @@ presence.on("UpdateData", async () => {
 				if (useDetails) {
 					presenceData.details += playerName;
 					switch (game) {
-						// TODO
+						// Party Pack 1 (not implemented)
+						case Games.YouDontKnowJack2015: {
+							break;
+						}
+						case Games.Drawful: {
+							break;
+						}
+						case Games.LieSwatter: {
+							break;
+						}
+						case Games.WordSpud: {
+							break;
+						}
+						// Party Pack 2
+						case Games.Bidiots: {
+							break;
+						}
+						case Games.Fibbage: {
+							break;
+						}
+						case Games.Quiplash: {
+							break;
+						}
+						case Games.BompCorp: {
+							break;
+						}
+						case Games.Earwax: {
+							break;
+						}
+						// Party Pack 3
+						case Games.TeeKO: {
+							break;
+						}
+						case Games.FakinIt: {
+							break;
+						}
+						case Games.Guesspionage: {
+							break;
+						}
+						case Games.TriviaDeathParty: {
+							break;
+						}
+						// Party Pack 4
+						case Games.CivicDoodle: {
+							break;
+						}
+						case Games.Bracketeering: {
+							break;
+						}
+						case Games.MonsterSeekingMonster: {
+							break;
+						}
+						case Games.SurviveTheInternet: {
+							break;
+						}
+						case Games.Fibbage3: {
+							break;
+						}
+						// Party Pack 5
+						case Games.SplitTheRoom: {
+							break;
+						}
+						case Games.ZeepleDome: {
+							break;
+						}
+						case Games.PatentlyStupid: {
+							break;
+						}
+						case Games.MadVerseCity: {
+							break;
+						}
+						case Games.YouDontKnowJackFullStream: {
+							break;
+						}
+						// Party Pack 6
+						case Games.PushTheButton: {
+							break;
+						}
+						case Games.JokeBoat: {
+							break;
+						}
+						case Games.RoleModels: {
+							break;
+						}
+						case Games.TriviaDeathParty2: {
+							break;
+						}
+						case Games.Dictionarium: {
+							break;
+						}
+						// Party Pack 7
+						case Games.Quiplash3: {
+							break;
+						}
+						case Games.TalkingPoints: {
+							break;
+						}
+						case Games.BlatherRound: {
+							break;
+						}
+						case Games.TheDevilsAndTheDetails: {
+							break;
+						}
+						case Games.ChampdUp: {
+							break;
+						}
+						// Party Pack 8
+						case Games.WheelOfEnormousProportions: {
+							break;
+						}
+						case Games.WeaponsDrawn: {
+							break;
+						}
+						case Games.JobJob: {
+							break;
+						}
+						case Games.DrawfulAnimate: {
+							break;
+						}
+						case Games.ThePollMine: {
+							break;
+						}
+						// Party Pack 9
+						case Games.Fibbage4: {
+							break;
+						}
+						case Games.Quixort: {
+							break;
+						}
+						case Games.Nonsensory: {
+							break;
+						}
+						case Games.Junktopia: {
+							break;
+						}
+						case Games.Roomerang: {
+							break;
+						}
 					}
 				} else {
 					presenceData.state = playerName;
