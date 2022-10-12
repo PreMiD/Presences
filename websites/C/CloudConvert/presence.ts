@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/zn1sM5L.png",
 			startTimestamp: browsingTimestamp,
 		},
-		mainPath = window.location.pathname[1] ?? "";
+		mainPath = window.location.pathname.split("/")[1] ?? "";
 
 	switch (mainPath) {
 		case "register":
