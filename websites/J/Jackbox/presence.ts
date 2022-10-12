@@ -1,23 +1,24 @@
 const presence = new Presence({
 		clientId: "638118757453004820",
 	}),
-	browsingTimestamp = Math.round(Date.now() / 1000);
-
-const LayoutVersion: Record<string, Function> = {
-	New: () => document.querySelector("#playername").textContent,
-	Dictionarium: () => `${document.querySelector("#playericon").className.split("_")[1]}${document
-		.querySelector("#playername")
-		.textContent.toLowerCase()}`,
-	Legacy: () => document.querySelector("#player").children[0].textContent,
-	Guesspionage: () => document.querySelector("#player").children[1].textContent,
-	DevilAndDetails: () => document.querySelector(".player-text").textContent,
-	// TODO: Find similarities?
-	DrawfulAnimate: () => document.querySelector(".header").textContent,
-	EnormousWheel: () => document.querySelector(".player.name").textContent,
-	JobJob: () => document.querySelector(".name").textContent,
-	PollMine: () => {},
-	WeaponsDrawn: () => document.querySelector(".avatar.header").textContent,
-}
+	browsingTimestamp = Math.round(Date.now() / 1000),
+	LayoutVersion: Record<string, Function> = {
+		New: () => document.querySelector("#playername").textContent,
+		Dictionarium: () =>
+			`${
+				document.querySelector("#playericon").className.split("_")[1]
+			}${document.querySelector("#playername").textContent.toLowerCase()}`,
+		Legacy: () => document.querySelector("#player").children[0].textContent,
+		Guesspionage: () =>
+			document.querySelector("#player").children[1].textContent,
+		DevilAndDetails: () => document.querySelector(".player-text").textContent,
+		// TODO: Find similarities?
+		DrawfulAnimate: () => document.querySelector(".header").textContent,
+		EnormousWheel: () => document.querySelector(".player.name").textContent,
+		JobJob: () => document.querySelector(".name").textContent,
+		PollMine: () => {},
+		WeaponsDrawn: () => document.querySelector(".avatar.header").textContent,
+	};
 
 interface Game {
 	name: string;
