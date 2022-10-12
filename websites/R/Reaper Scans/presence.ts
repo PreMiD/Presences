@@ -49,9 +49,9 @@ presence.on("UpdateData", () => {
 					presenceData.details = `Reading ${document
 						.querySelector<HTMLParagraphElement>("main p")
 						.textContent.trim()}`;
-					presenceData.state = `📖 ${document
+					presenceData.state = `${document
 						.querySelector<HTMLDivElement>("nav > div:nth-child(2)")
-						.textContent.trim()} 🔸 ${progress}%`;
+						.textContent.trim()} - ${progress}%`;
 					presenceData.smallImageKey = Assets.Read;
 					presenceData.buttons = [
 						{
@@ -79,7 +79,7 @@ presence.on("UpdateData", () => {
 				}
 			} else {
 				presenceData.details = `Viewing ${captitalized} List`;
-				presenceData.state = `📋 ${
+				presenceData.state = `${
 					document.querySelectorAll<HTMLLIElement>("h2 + div li").length
 				} ${pathSplit[0]}s found`;
 			}
