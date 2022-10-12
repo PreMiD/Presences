@@ -83,6 +83,7 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 			}
+			case "slideshows":
 			case "photos": {
 				if (pathSplit[1] === "news") {
 					presenceData.details = "Viewing a photo";
@@ -220,10 +221,51 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 			}
-			case "slideshows": {
-				break;
-			}
 			case "storms": {
+				switch (pathSplit[1]) {
+					case "tornado": {
+						switch (pathSplit[2] ?? "") {
+							case "": {
+								presenceData.details = "Browsing tornado stories";
+								break;
+							}
+							case "video": {
+								presenceData.details = "Watching a tornado video";
+								presenceData.state = pageTitle;
+								presenceData.buttons = [{ label: "Watch Video", url: href }];
+								break;
+							}
+							case "news": {
+								presenceData.details = "Reading a tornado article";
+								presenceData.state = pageTitle;
+								presenceData.buttons = [{ label: "Read Article", url: href }];
+								break;
+							}
+						}
+						break;
+					}
+					case "hurricane": {
+						switch (pathSplit[2] ?? "") {
+							case "": {
+								presenceData.details = "Browsing hurricane stories";
+								break;
+							}
+							case "video": {
+								presenceData.details = "Watching a hurricane video";
+								presenceData.state = pageTitle;
+								presenceData.buttons = [{ label: "Watch Video", url: href }];
+								break;
+							}
+							case "news": {
+								presenceData.details = "Reading a hurricane article";
+								presenceData.state = pageTitle;
+								presenceData.buttons = [{ label: "Read Article", url: href }];
+								break;
+							}
+						}
+						break;
+					}
+				}
 				break;
 			}
 			case "subscribe": {
