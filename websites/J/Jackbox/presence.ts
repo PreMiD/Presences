@@ -8,6 +8,12 @@ enum LayoutVersion {
 	Dictionarium = "dict",
 	Legacy = "legacy",
 	Guesspionage = "guesp",
+	DevilAndDetails = "devilanddetails",
+	DrawfulAnimate = "drawfulanimate",
+	EnormousWheel = "newer",
+	JobJob = "jobjob",
+	PollMine = "pollmine",
+	WeaponsDrawn = "weaponsdrawn",
 }
 
 interface Game {
@@ -154,7 +160,7 @@ const Games: Game[] = [
 	// Party Pack 6
 	{
 		name: "Push the Button",
-		selector: ".Push\\.The\\.Button", // TODO: Verify
+		selector: ".pushthebutton", // TODO: Verify
 		logo: "https://i.imgur.com/OhgGmMQ.png",
 	},
 	{
@@ -181,54 +187,60 @@ const Games: Game[] = [
 	// Party Pack 7
 	{
 		name: "Quiplash 3",
-		selector: "TODO",
+		selector: ".quiplash3",
 		logo: "https://i.imgur.com/Jds4R56.png",
 	},
 	{
 		name: "Talking Points",
-		selector: "TODO",
+		selector: ".jackbox-talks",
 		logo: "https://i.imgur.com/8Amy9Di.png",
 	},
 	{
 		name: "Blather 'Round",
-		selector: "TODO",
+		selector: ".blanky-blank",
 		logo: "https://i.imgur.com/qLW2Fft.png",
 	},
 	{
 		name: "The Devils and the Details",
-		selector: "TODO",
+		selector: ".everyday",
 		logo: "https://i.imgur.com/tXkh58c.png",
+		layout: LayoutVersion.DevilAndDetails,
 	},
 	{
 		name: "Champ'd Up",
-		selector: "TODO",
+		selector: ".worldchamps",
 		logo: "https://i.imgur.com/KnAS7yD.png",
 	},
 	// Party Pack 8
 	{
 		name: "Wheel of Enormous Proportions",
-		selector: "TODO",
+		selector: ".wheel",
 		logo: "https://i.imgur.com/KnAS7yD.png",
+		layout: LayoutVersion.EnormousWheel,
 	},
 	{
 		name: "Weapons Drawn",
-		selector: "TODO",
+		selector: ".detectives",
 		logo: "https://i.imgur.com/yRXmXbf.png",
+		layout: LayoutVersion.WeaponsDrawn,
 	},
 	{
 		name: "Job Job",
-		selector: "TODO",
+		selector: ".apply-yourself",
 		logo: "https://i.imgur.com/FfZYRGL.png",
+		layout: LayoutVersion.JobJob
 	},
 	{
 		name: "Drawful Animate",
-		selector: "TODO",
+		selector: ".drawful-animate",
 		logo: "https://i.imgur.com/NtRvc93.png",
+		layout: LayoutVersion.DrawfulAnimate
 	},
 	{
 		name: "The Poll Mine",
-		selector: "TODO",
+		selector: ".poll-mine",
 		logo: "https://i.imgur.com/o4aaUox.png",
+		layout: LayoutVersion.PollMine
 	},
 	// Party Pack 9
 	{
@@ -306,6 +318,39 @@ presence.on("UpdateData", async () => {
 							document.querySelector("#player").children[1].textContent
 						}`;
 						break;
+					}
+					case LayoutVersion.DevilAndDetails: {
+						presenceData.state = `as ${
+							document.querySelector(".player-text").textContent
+						}`;
+						break;
+					}
+					case LayoutVersion.DrawfulAnimate: {
+						presenceData.state = `as ${
+							document.querySelector(".header").textContent
+						}`;
+						break;
+					}
+					case LayoutVersion.EnormousWheel: {
+						presenceData.state = `as ${
+							document.querySelector(".player.name").textContent
+						}`;
+						break;
+					}
+					case LayoutVersion.JobJob: {
+						presenceData.state = `as ${
+							document.querySelector(".name").textContent
+						}`;
+						break;
+					}
+					case LayoutVersion.PollMine: {
+						// TODO: Implement
+						break;
+					}
+					case LayoutVersion.WeaponsDrawn: {
+						presenceData.state = `as ${
+							document.querySelector(".avatar.header").textContent
+						}`;
 					}
 				}
 			}
