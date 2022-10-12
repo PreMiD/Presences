@@ -15,6 +15,20 @@ presence.on("UpdateData", async () => {
 		)?.textContent,
 		pageTitle = document.querySelector("h1")?.textContent;
 
+	function setNewsPresenceData(subPath: string[], type: string) {
+		if ((subPath ?? "") === "")
+			presenceData.details = `Browsing ${type} stories`;
+		else if (subPath.includes("video")) {
+			presenceData.details = `Watching a ${type} video`;
+			presenceData.state = pageTitle;
+			presenceData.buttons = [{ label: "Watch Video", url: href }];
+		} else if (subPath.includes("news")) {
+			presenceData.details = `Reading a ${type} article`;
+			presenceData.state = pageTitle;
+			presenceData.buttons = [{ label: "Read Article", url: href }];
+		}
+	}
+
 	if (hostname === "weather.com") {
 		switch (pathSplit[0] ?? "") {
 			case "": {
@@ -23,12 +37,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "deals": {
-				if (pathSplit[2] === "news") {
-					presenceData.details = "Reading about a deal";
-					presenceData.state = pageTitle;
-				} else {
-					presenceData.details = "Browsing deals";
-				}
+				setNewsPresenceData(pathSplit, "deal");
 				break;
 			}
 			case "forecast": {
@@ -49,67 +58,30 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Viewing cold & flu forecasts";
 						break;
 					}
-					case "news": {
-						presenceData.details = "Reading forecast news";
-						presenceData.state = pageTitle;
-						presenceData.buttons = [{ label: "Read Article", url: href }];
-						break;
+					default: {
+						setNewsPresenceData(pathSplit.slice(1), "forecast");
 					}
 				}
 				break;
 			}
 			case "health": {
-				switch (pathSplit[1] ?? "") {
-					case "": {
-						presenceData.details = "Browsing health stories";
-						break;
-					}
-					case "cold-flu": {
-						if (pathSplit[2]) {
-							presenceData.details = "Reading cold & flu news";
-							presenceData.state = pageTitle;
-						} else {
-							presenceData.details = "Browsing cold & flu stories";
-							break;
-						}
-						break;
-					}
-					case "video": {
-						presenceData.details = "Watching a health video";
-						presenceData.state = pageTitle;
-						presenceData.buttons = [{ label: "Watch Video", url: href }];
-						break;
-					}
-				}
+				if (pathSplit[1] === "cold-flu")
+					setNewsPresenceData(pathSplit.slice(2), "cold & flu");
+				else setNewsPresenceData(pathSplit.slice(1), "health");
 				break;
 			}
 			case "slideshows":
 			case "photos": {
+				setNewsPresenceData(pathSplit.slice(1), "photo");
 				if (pathSplit[1] === "news") {
-					presenceData.details = "Viewing a photo";
-					presenceData.state = pageTitle;
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						"[id*='int-image'] img"
 					).src;
-					presenceData.buttons = [{ label: "View Photo", url: href }];
-				} else {
-					presenceData.details = "Browsing photo stories";
 				}
 				break;
 			}
 			case "promos": {
-				switch (pathSplit[1] ?? "") {
-					case "": {
-						presenceData.details = "Browsing promos";
-						break;
-					}
-					case "video": {
-						presenceData.details = "Watching a promo video";
-						presenceData.state = pageTitle;
-						presenceData.buttons = [{ label: "Watch Video", url: href }];
-						break;
-					}
-				}
+				setNewsPresenceData(pathSplit.slice(1), "promo");
 				break;
 			}
 			case "login":
@@ -128,141 +100,31 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "news": {
-				switch (pathSplit[1] ?? "") {
-					case "": {
-						presenceData.details = "Browsing news";
-						break;
-					}
-					case "news": {
-						presenceData.details = "Reading a news article";
-						presenceData.state = pageTitle;
-						presenceData.buttons = [{ label: "Read Article", url: href }];
-						break;
-					}
-					default: {
-						if (pathname.includes("/video")) {
-							presenceData.details = "Watching a news video";
-							presenceData.state = pageTitle;
-							presenceData.buttons = [{ label: "Watch Video", url: href }];
-						}
-					}
-				}
+				setNewsPresenceData(pathSplit.slice(1), "news");
 				break;
 			}
 			case "safety": {
-				switch (pathSplit[1] ?? "") {
-					case "": {
-						presenceData.details = "Browsing safety stories";
-						break;
-					}
-					case "video": {
-						presenceData.details = "Watching a safety video";
-						presenceData.state = pageTitle;
-						presenceData.buttons = [{ label: "Watch Video", url: href }];
-						break;
-					}
-					case "news": {
-						presenceData.details = "Reading a safety article";
-						presenceData.state = pageTitle;
-						presenceData.buttons = [{ label: "Read Article", url: href }];
-						break;
-					}
-				}
+				setNewsPresenceData(pathSplit.slice(1), "safety");
 				break;
 			}
 			case "science": {
-				switch (pathSplit[1] ?? "") {
-					case "": {
-						presenceData.details = "Browsing science stories";
-						break;
-					}
-					case "video": {
-						presenceData.details = "Watching a science video";
-						presenceData.state = pageTitle;
-						presenceData.buttons = [{ label: "Watch Video", url: href }];
-						break;
-					}
-					case "news": {
-						presenceData.details = "Reading a science article";
-						presenceData.state = pageTitle;
-						presenceData.buttons = [{ label: "Read Article", url: href }];
-						break;
-					}
-				}
+				setNewsPresenceData(pathSplit.slice(1), "science");
 				break;
 			}
 			case "sports-recreation": {
-				switch (pathSplit[1] ?? "") {
-					case "": {
-						presenceData.details = "Browsing sports & recreation stories";
-						break;
-					}
-					case "video": {
-						presenceData.details = "Watching a sports & recreation video";
-						presenceData.state = pageTitle;
-						presenceData.buttons = [{ label: "Watch Video", url: href }];
-						break;
-					}
-					case "news": {
-						presenceData.details = "Reading a sports & recreation article";
-						presenceData.state = pageTitle;
-						presenceData.buttons = [{ label: "Read Article", url: href }];
-						break;
-					}
-					case "fishing": {
-						if (pathSplit[2] === "video") {
-							presenceData.details = "Watching a fishing video";
-							presenceData.state = pageTitle;
-							presenceData.buttons = [{ label: "Watch Video", url: href }];
-						} else {
-							presenceData.details = "Browsing fishing stories";
-						}
-					}
-				}
+				if (pathSplit[1] === "fishing")
+					setNewsPresenceData(pathSplit.slice(2), "fishing");
+				else setNewsPresenceData(pathSplit.slice(1), "sports & recreation");
 				break;
 			}
 			case "storms": {
 				switch (pathSplit[1]) {
 					case "tornado": {
-						switch (pathSplit[2] ?? "") {
-							case "": {
-								presenceData.details = "Browsing tornado stories";
-								break;
-							}
-							case "video": {
-								presenceData.details = "Watching a tornado video";
-								presenceData.state = pageTitle;
-								presenceData.buttons = [{ label: "Watch Video", url: href }];
-								break;
-							}
-							case "news": {
-								presenceData.details = "Reading a tornado article";
-								presenceData.state = pageTitle;
-								presenceData.buttons = [{ label: "Read Article", url: href }];
-								break;
-							}
-						}
+						setNewsPresenceData(pathSplit.slice(2), "tornado");
 						break;
 					}
 					case "hurricane": {
-						switch (pathSplit[2] ?? "") {
-							case "": {
-								presenceData.details = "Browsing hurricane stories";
-								break;
-							}
-							case "video": {
-								presenceData.details = "Watching a hurricane video";
-								presenceData.state = pageTitle;
-								presenceData.buttons = [{ label: "Watch Video", url: href }];
-								break;
-							}
-							case "news": {
-								presenceData.details = "Reading a hurricane article";
-								presenceData.state = pageTitle;
-								presenceData.buttons = [{ label: "Read Article", url: href }];
-								break;
-							}
-						}
+						setNewsPresenceData(pathSplit.slice(2), "hurricane");
 						break;
 					}
 				}
@@ -273,6 +135,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "travel": {
+				setNewsPresenceData(pathSplit.slice(1), "travel");
 				break;
 			}
 			case "weather": {
@@ -312,7 +175,9 @@ presence.on("UpdateData", async () => {
 			}
 			default: {
 				presenceData.details = "Browsing";
-				presenceData.state = document.title.match(/^(.*?)( \| The Weather Channel)?$/)[1];
+				presenceData.state = document.title.match(
+					/^(.*?)( \| The Weather Channel)?$/
+				)[1];
 				break;
 			}
 		}
