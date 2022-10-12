@@ -55,14 +55,22 @@ presence.on("UpdateData", async () => {
 				mainPath === "" ||
 				mainPath.endsWith("-converter") ||
 				/-to-/.test(mainPath)
-			)
+			) {
 				presenceData.details = "Converting files";
-			else if (
+				presenceData.state = [
+					...document.querySelectorAll<HTMLButtonElement>("h2 button"),
+				]
+					.map(button => button.textContent)
+					.join(" to ");
+			} else if (
 				mainPath === "save-website-pdf" ||
 				/^website-[a-z]+-screenshot$/.test(mainPath)
-			)
+			) {
 				presenceData.details = "Creating website screenshots";
-			else {
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					"[aria-describedby='button-add-url']"
+				).value;
+			} else {
 				presenceData.details = "Browsing";
 				presenceData.state = document.title.match(
 					/^(.*?)( \| CloudConvert)?$/
