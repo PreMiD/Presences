@@ -277,8 +277,8 @@ presence.on("UpdateData", async () => {
 				logo,
 			} = Games.find(game => document.querySelector(game.selector) !== null);
 			if (gamelayout) layout = gamelayout;
+			if (logo) presenceData.largeImageKey = logo;
 			presenceData.details = `Playing ${name}`;
-			presenceData.largeImageKey = logo;
 			if (useName) {
 				switch (layout) {
 					case LayoutVersion.New: {
