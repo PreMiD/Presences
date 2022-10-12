@@ -290,8 +290,8 @@ presence.on("UpdateData", async () => {
 				game => document.querySelector(game.selector) !== null
 			);
 			if (game) {
-				const { layout: gamelayout, name, logo } = game;
-				if (gamelayout) getLayoutPlayerName = gamelayout;
+				const { layout: gameLayout, name, logo } = game;
+				if (gameLayout) getLayoutPlayerName = gameLayout;
 				if (logo) presenceData.largeImageKey = logo;
 				if (name) presenceData.details = `Playing ${name}`;
 				if (useName) {
