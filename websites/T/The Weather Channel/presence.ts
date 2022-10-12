@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, hostname, href } = window.location,
 		pathSplit = pathname.split("/").filter(x => x),
-		location = document.querySelector<HTMLSpanElement>(
+		locationName = document.querySelector<HTMLSpanElement>(
 			"[class*='--locationName--']"
 		)?.textContent,
 		pageTitle = document.querySelector("h1")?.textContent;
@@ -35,14 +35,14 @@ presence.on("UpdateData", async () => {
 				switch (pathSplit[1]) {
 					case "air-quality": {
 						presenceData.details = "Viewing air quality forecast";
-						presenceData.state = location;
+						presenceData.state = locationName;
 						break;
 					}
 					case "allergy": {
 						presenceData.details = "Viewing allergy forecast";
 						presenceData.state = `${
 							document.querySelector("h2").textContent
-						} for ${location}`;
+						} for ${locationName}`;
 						break;
 					}
 					case "cold-flu": {
@@ -276,6 +276,38 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "weather": {
+				switch (pathSplit[1]) {
+					case "today": {
+						presenceData.details = "Browsing today's weather forecast";
+						presenceData.state = locationName;
+						break;
+					}
+					case "hourbyhour": {
+						presenceData.details = "Browsing hourly weather forecast";
+						presenceData.state = locationName;
+						break;
+					}
+					case "tenday": {
+						presenceData.details = "Browsing 10-day weather forecast";
+						presenceData.state = locationName;
+						break;
+					}
+					case "weekend": {
+						presenceData.details = "Browsing weekend weather forecast";
+						presenceData.state = locationName;
+						break;
+					}
+					case "monthly": {
+						presenceData.details = "Browsing monthly weather forecast";
+						presenceData.state = locationName;
+						break;
+					}
+					case "radar": {
+						presenceData.details = "Viewing weather radar";
+						presenceData.state = locationName;
+						break;
+					}
+				}
 				break;
 			}
 			default: {
