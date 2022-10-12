@@ -335,6 +335,48 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.Fibbage: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".fibbage-page:not(.pt-page-off)"
+								),
+								{ classList } = currentGamePage;
+							if (classList.contains("state-lobby")) {
+								presenceData.state = "Waiting in lobby";
+							} else if (classList.contains("state-round")) {
+								presenceData.state =
+									currentGamePage.querySelector("p").textContent;
+							} else if (classList.contains("state-notchoosing")) {
+								presenceData.state = `Waiting for ${
+									currentGamePage
+										.querySelector("span")
+										.textContent.match(/^(.*?) is picking a category$/)[1]
+								} to pick a category`;
+							} else if (classList.contains("state-nothing")) {
+								presenceData.state = "Waiting";
+							} else if (classList.contains("state-enterlie")) {
+								presenceData.state = "Entering a lie";
+							} else if (classList.contains("state-lyingdone")) {
+								presenceData.state = "Lying done";
+							} else if (classList.contains("state-liereceived")) {
+								presenceData.state = "Waiting for other players to enter lies";
+							} else if (
+								classList.contains("state-chooselie") ||
+								classList.contains("state-audience-chooselie")
+							) {
+								presenceData.state = "Finding the truth";
+							} else if (
+								classList.contains("state-chooselikes") ||
+								classList.contains("state-audience-chooselikes")
+							) {
+								presenceData.state = "Liking lies";
+							} else if (classList.contains("state-choosing")) {
+								presenceData.state = "Choosing a category";
+							} else if (classList.contains("state-pickbloop")) {
+								presenceData.state = "Chossing a sound";
+							} else if (classList.contains("state-audience-join")) {
+								presenceData.state = "Joining audience";
+							} else if (classList.contains("state-audience-score")) {
+								presenceData.state = "Viewing audience scores";
+							}
 							break;
 						}
 						case Games.Quiplash: {
