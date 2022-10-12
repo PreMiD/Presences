@@ -10,7 +10,7 @@ const presence = new Presence({
 				details: "Browsing..",
 				startTimestamp: browsingTimestamp,
 			},
-			[ pathname, hostname, href ] = document.location;
+			{ pathname, hostname, href } = document.location;
 		
 			if (hostname === "polywork.com") {
 				presenceData.details = "Home page";
