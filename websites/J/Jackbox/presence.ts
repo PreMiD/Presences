@@ -303,21 +303,25 @@ presence.on("UpdateData", async () => {
 			);
 			if (game) {
 				const { layout: gameLayout, name, logo } = game;
-				if (gameLayout) getLayoutPlayerName = gameLayout;
-				if (logo) presenceData.largeImageKey = logo;
-				if (name) presenceData.details = `Playing ${name}`;
+				let playerName: string;
+				getLayoutPlayerName = gameLayout;
+				presenceData.largeImageKey = logo;
+				presenceData.details = `Playing ${name}`;
 				if (useName) {
-					let playerName: string;
 					try {
 						const name = getLayoutPlayerName();
 						if (name) playerName = ` as ${name}`;
 					} catch (err) {
 						playerName = "";
 					}
-					presenceData.details += playerName;
 				}
 				if (useDetails) {
-					// TODO: Add game details...
+					presenceData.details += playerName;
+					switch (game) {
+						// TODO
+					}
+				} else {
+					presenceData.state = playerName;
 				}
 			} else {
 				presenceData.details = "Idle";
