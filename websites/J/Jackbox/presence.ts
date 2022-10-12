@@ -381,6 +381,47 @@ presence.on("UpdateData", async () => {
 							}
 							break;
 						}
+						case Games.Drawful: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".drawful-page:not(.pt-page-off)"
+								),
+								{ classList } = currentGamePage;
+							if (classList.contains("state-lobby")) {
+								presenceData.state = "Waiting in lobby";
+							} else if (
+								classList.contains("state-lyingdone") ||
+								classList.contains("state-nothing") ||
+								classList.contains("state-drawing-done")
+							) {
+								presenceData.state = "Waiting";
+							} else if (classList.contains("state-round")) {
+								presenceData.state =
+									currentGamePage.querySelector("span").textContent;
+							} else if (classList.contains("state-drawing-sent")) {
+								presenceData.state =
+									"Waiting for other players to finish drawing";
+							} else if (classList.contains("state-enterlie")) {
+								presenceData.state = "Entering a lie";
+							} else if (classList.contains("state-chooselie")) {
+								presenceData.state = "Looking for the truth";
+							} else if (classList.contains("state-chooselikes")) {
+								presenceData.state = "Liking lies";
+							} else if (classList.contains("state-liereceived")) {
+								presenceData.state = "Waiting for other players to enter lies";
+							} else if (classList.contains("state-notchoosing")) {
+								presenceData.state =
+									"Waiting for other players to discover the truth";
+							} else if (classList.contains("state-draw")) {
+								presenceData.state = "Drawing something";
+							} else if (classList.contains("state-audience-choose")) {
+								presenceData.state = "Choosing a lie";
+							} else if (currentGamePage.id === "state-ugc") {
+								presenceData.state = "Creating a custom game";
+							} else if (classList.contains("state-audience")) {
+								presenceData.state = "In the audience";
+							}
+							break;
+						}
 						// Party Pack 2
 						case Games.Bidiots: {
 							break;
