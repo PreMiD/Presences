@@ -10,6 +10,10 @@ enum Assets {
 	View = "https://i.imgur.com/BMzYEcO.png",
 }
 
+function capitalize(str: string) {
+	return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+}
+
 presence.on("UpdateData", () => {
 	const { pathname, href } = window.location,
 		presenceData: PresenceData = {
@@ -30,9 +34,7 @@ presence.on("UpdateData", () => {
 		}
 		case "comics":
 		case "novels": {
-			const captitalized = `${pathSplit[0][0].toUpperCase()}${pathSplit[0].slice(
-				1
-			)}`;
+			const captitalized = capitalize(pathSplit[0]);
 			if (pathSplit[1]) {
 				if (pathSplit[2] === "chapters") {
 					let progress =
@@ -84,6 +86,10 @@ presence.on("UpdateData", () => {
 				} ${pathSplit[0]}s found`;
 			}
 
+			break;
+		}
+		case "latest": {
+			presenceData.details = `Browsing Latest ${capitalize(pathSplit[1])}`;
 			break;
 		}
 		case "account": {
