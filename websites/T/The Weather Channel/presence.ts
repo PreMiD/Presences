@@ -269,18 +269,18 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "subscribe": {
+				presenceData.details = "Subscribing";
 				break;
 			}
 			case "travel": {
-				break;
-			}
-			case "tv": {
 				break;
 			}
 			case "weather": {
 				break;
 			}
 			default: {
+				presenceData.details = "Browsing";
+				presenceData.state = document.title.match(/^(.*?)( \| The Weather Channel)?$/)[1];
 				break;
 			}
 		}
