@@ -330,6 +330,45 @@ presence.on("UpdateData", async () => {
 				if (useDetails) {
 					presenceData.details += playerName;
 					switch (game) {
+						// Party Pack 1
+						case Games.LieSwatter: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".lieswatter-page:not(.pt-page-off)"
+								),
+								{ classList } = currentGamePage;
+							if (classList.contains("state-lobby")) {
+								presenceData.state = "Waiting in lobby";
+							} else if (classList.contains("state-answer")) {
+								presenceData.state = "Swatting lies";
+							} else if (classList.contains("state-nothing")) {
+								presenceData.state = "Waiting for other players";
+							}
+							break;
+						}
+						case Games.WordSpud: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".wordspud-page:not(.pt-page-off)"
+								),
+								{ classList } = currentGamePage;
+							if (classList.contains("state-waiting")) {
+								presenceData.state = "Waiting in lobby";
+							} else if (classList.contains("state-startbutton")) {
+								presenceData.state = "Waiting for other players to join";
+							} else if (classList.contains("state-writing")) {
+								presenceData.state = "Writing something";
+							} else if (classList.contains("state-vote")) {
+								presenceData.state = "Voting on a word";
+							} else if (classList.contains("state-vote-wait")) {
+								presenceData.state = "Being judged";
+							} else if (classList.contains("state-nothing")) {
+								presenceData.state = "Waiting";
+							} else if (classList.contains("state-voted")) {
+								presenceData.state = "Waiting for other players to vote";
+							} else if (classList.contains("state-gameover")) {
+								presenceData.state = "Game over";
+							}
+							break;
+						}
 						// Party Pack 2
 						case Games.Bidiots: {
 							break;
@@ -383,6 +422,33 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.BompCorp: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".bombintern-page:not(.pt-page-off)"
+								),
+								{ classList } = currentGamePage;
+							if (classList.contains("state-lobby")) {
+								presenceData.state = "Waiting in lobby";
+							} else if (classList.contains("state-dayend")) {
+								presenceData.state = "Day end";
+							} else if (classList.contains("state-gameover")) {
+								presenceData.state = "Game over";
+							} else if (classList.contains("state-nothing")) {
+								presenceData.state = "Waiting";
+							} else if (classList.contains("state-message")) {
+								presenceData.state = "Reading a message";
+							} else if (classList.contains("state-smashpuzzle")) {
+								presenceData.state = "Defusing a smash puzzle bomb";
+							} else if (classList.contains("state-wiredbomb")) {
+								presenceData.state = "Defusing a wired bomb";
+							} else if (classList.contains("state-coffeebomb")) {
+								presenceData.state = "Defusing a coffee bomb";
+							} else if (classList.contains("state-filingbomb")) {
+								presenceData.state = "Defusing a filing bomb";
+							} else if (classList.contains("state-keypadbomb")) {
+								presenceData.state = "Defusing a keypad bomb";
+							} else if (classList.contains("state-copierbomb")) {
+								presenceData.state = "Defusing a copier bomb";
+							}
 							break;
 						}
 						case Games.Earwax: {
