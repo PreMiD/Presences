@@ -11,16 +11,18 @@ presence.on("UpdateData", async () => {
 		},
 		page = document.location.pathname;
 	if (page.startsWith("/anime/")) {
-		presenceData.state = document.querySelector(
+		presenceData.details = "Regarde la fiche:";
+		const anime = document.querySelector(
 			"#root > div.anime-body > div.anime-white-informations > div.anime-white-infos > div:nth-child(2) > h1"
 		).textContent;
+		presenceData.state = anime.split("Adulte")[0];
 		presenceData.buttons = [
 			{
 				label: "Afficher la fiche",
 				url: document.location.href,
 			},
 		];
-	} else if (page.startsWith("/profil/")) {
+	} else if (page.startsWith("/profile/")) {
 		presenceData.details = "Regarde le profil de:";
 		presenceData.state = document.querySelector(
 			"#root > div:nth-child(3) > div.profil-banner-top > div > div.bloc-name-banner > h1"
@@ -38,19 +40,9 @@ presence.on("UpdateData", async () => {
 	else if (page.startsWith("/edit/")) presenceData.details = "Édit une fiche";
 	else if (page.startsWith("/bibliotheque"))
 		presenceData.details = "Regarde sa bibliothèque";
-	else if (page.startsWith("/diffusion/Crunchyroll"))
-		presenceData.details = "Regarde les fiches crunchyroll";
-	else if (page.startsWith("/diffusion/Wakanim"))
-		presenceData.details = "Regarde les fiches wakanim";
-	else if (page.startsWith("/diffusion/ADN"))
-		presenceData.details = "Regarde les fiches adn";
-	else if (page.startsWith("/diffusion/Netflix"))
-		presenceData.details = "Regarde les fiches netflix";
-	else if (page.startsWith("/diffusion/Prime"))
-		presenceData.details = "Regarde les fiches prime video";
 	else if (page.startsWith("/settings"))
 		presenceData.details = "Regarde ses paramètres";
-	else if (page.startsWith("/equipe"))
+	else if (page.startsWith("/team"))
 		presenceData.details = "Regarde l'équipe de modération";
 	else if (page.startsWith("/premium"))
 		presenceData.details = "Considère l'achat du premium";
