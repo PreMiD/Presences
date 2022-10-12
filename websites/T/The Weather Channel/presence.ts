@@ -182,6 +182,17 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else if (hostname === "features.weather.com") {
+		if (pathSplit[0] === "") {
+			presenceData.details = "Browsing";
+			presenceData.state = "All features and stories";
+		} else if (pathSplit[0] === "category") {
+			presenceData.details = "Browsing category";
+			presenceData.state = pageTitle.match(/: (.*)$/)[1];
+		} else {
+			presenceData.details = "Reading an article";
+			presenceData.state = pageTitle;
+			presenceData.buttons = [{ label: "Read Article", url: href }];
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
