@@ -290,11 +290,12 @@ let game: Game,
 	getLayoutPlayerName = LayoutVersion.New;
 
 if (window.location.hostname === "jackbox.tv") {
-	setInterval(async () => {
+	const gameDiscoveryInterval = setInterval(async () => {
 		getLayoutPlayerName = LayoutVersion.New;
 		game = Object.values(Games).find(
 			game => document.querySelector(game.selector) !== null
 		);
+		if (game) clearInterval(gameDiscoveryInterval);
 	}, 500);
 }
 
