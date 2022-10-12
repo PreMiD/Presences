@@ -8,11 +8,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/Zzh3YNq.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, hostname } = window.location,
+		{ pathname, hostname, href } = window.location,
 		pathSplit = pathname.split("/").filter(x => x),
 		location = document.querySelector<HTMLSpanElement>(
 			"[class*='--locationName--']"
-		)?.textContent;
+		)?.textContent,
+		pageTitle = document.querySelector("h1")?.textContent;
 
 	if (hostname === "weather.com") {
 		switch (pathSplit[0] ?? "") {
@@ -24,7 +25,7 @@ presence.on("UpdateData", async () => {
 			case "deals": {
 				if (pathSplit[2] === "news") {
 					presenceData.details = "Reading about a deal";
-					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.state = pageTitle;
 				} else {
 					presenceData.details = "Browsing deals";
 				}
@@ -50,7 +51,13 @@ presence.on("UpdateData", async () => {
 					}
 					case "news": {
 						presenceData.details = "Reading forecast news";
-						presenceData.state = document.querySelector("h1").textContent;
+						presenceData.state = pageTitle;
+						presenceData.buttons = [
+							{
+								label: "Read Article",
+								url: href,
+							},
+						];
 						break;
 					}
 				}
@@ -65,7 +72,7 @@ presence.on("UpdateData", async () => {
 					case "cold-flu": {
 						if (pathSplit[2]) {
 							presenceData.details = "Reading cold & flu news";
-							presenceData.state = document.querySelector("h1").textContent;
+							presenceData.state = pageTitle;
 						} else {
 							presenceData.details = "Browsing cold & flu stories";
 							break;
@@ -74,7 +81,13 @@ presence.on("UpdateData", async () => {
 					}
 					case "video": {
 						presenceData.details = "Watching a health video";
-						presenceData.state = document.querySelector("h1").textContent;
+						presenceData.state = pageTitle;
+						presenceData.buttons = [
+							{
+								label: "Watch Video",
+								url: href,
+							},
+						];
 						break;
 					}
 				}
@@ -82,14 +95,40 @@ presence.on("UpdateData", async () => {
 			}
 			case "photos": {
 				if (pathSplit[1] === "news") {
-					presenceData.details = "viewing a photo";
-					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.details = "Viewing a photo";
+					presenceData.state = pageTitle;
+					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+						"[id*='int-image'] img"
+					).src;
+					presenceData.buttons = [
+						{
+							label: "View Photo",
+							url: href,
+						},
+					];
 				} else {
 					presenceData.details = "Browsing photo stories";
 				}
 				break;
 			}
 			case "promos": {
+				switch (pathSplit[1] ?? "") {
+					case "": {
+						presenceData.details = "Browsing promos";
+						break;
+					}
+					case "video": {
+						presenceData.details = "Watching a promo video";
+						presenceData.state = pageTitle;
+						presenceData.buttons = [
+							{
+								label: "Watch Video",
+								url: href,
+							},
+						];
+						break;
+					}
+				}
 				break;
 			}
 			case "login":
@@ -109,6 +148,9 @@ presence.on("UpdateData", async () => {
 			case "safety": {
 				break;
 			}
+			case "science": {
+				break;
+			}
 			case "sports-recreation": {
 				break;
 			}
@@ -122,6 +164,9 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "travel": {
+				break;
+			}
+			case "tv": {
 				break;
 			}
 			case "weather": {
