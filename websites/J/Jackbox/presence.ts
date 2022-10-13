@@ -9,44 +9,30 @@ interface Game {
 }
 
 let gamePlayerState: {
-		playerName?: string;
-		username?: string;
-		state: string;
-		[x: string]: unknown;
-	} = {
-		playerName: null,
-		state: null,
-		username: null,
-	},
-	gameRoomState: {
-		state: string;
-		platformId: string;
-		[x: string]: unknown;
-	};
+	playerName?: string;
+	username?: string;
+	state: string;
+	[x: string]: unknown;
+} = {
+	playerName: null,
+	state: null,
+	username: null,
+};
 
 if (window.location.hostname === "jackbox.tv") {
 	setInterval(async () => {
 		const playerStateLogs = await presence.getLogs(
-				/recv <- .*?("key": "bc:customer:[a-z0-9-]+",)/s
-			),
-			roomStateLogs = await presence.getLogs(/recv <- .*?"key": "bc:room",/s);
+			/recv <- .*?("key": "bc:customer:[a-z0-9-]+",)/s
+		);
 		if (playerStateLogs.length > 0) {
 			const lastLog = playerStateLogs[playerStateLogs.length - 1];
 			if (/recv <- .*?"key": "bc:room",/s.test(lastLog)) {
-				const parsed = JSON.parse(lastLog.slice(8));
-				gameRoomState = parsed.result.entities["bc:room"][1].val;
-				gamePlayerState =
-					parsed.result.entities[
-						`bc:customer:${
-							lastLog.match(/"key": "bc:customer:([a-z0-9-]+)",/s)[1]
-						}`
-					][1].val;
+				gamePlayerState = JSON.parse(lastLog.slice(8)).result.entities[
+					`bc:customer:${
+						lastLog.match(/"key": "bc:customer:([a-z0-9-]+)",/s)[1]
+					}`
+				][1].val;
 			} else gamePlayerState = JSON.parse(lastLog.slice(8)).result.val;
-		}
-		if (roomStateLogs.length > 0) {
-			const lastLog = roomStateLogs[roomStateLogs.length - 1];
-			if (!/recv <- .*?("key": "bc:customer:[a-z0-9-]+",)/s.test(lastLog))
-				gameRoomState = JSON.parse(lastLog.slice(8)).result.val;
 		}
 	}, 2000);
 }
@@ -1005,21 +991,19 @@ presence.on("UpdateData", async () => {
 									const { html } = gamePlayerState.prompt as {
 										html: string;
 									};
-									if (html === "Press this to skip the tutorial...") {
+									if (html === "Press this to skip the tutorial...")
 										presenceData.state = "Watching the tutorial";
-									} else if (
+									else if (
 										html === "Did this person create an amusing scenario?"
-									) {
+									)
 										presenceData.state = "Rating the scenario";
-									} else if (
+									else if (
 										html.startsWith(
 											"For bonus points, which option do you think"
 										)
-									) {
+									)
 										presenceData.state = "Predicting a player's choice";
-									} else {
-										presenceData.state = "Responding to a scenario";
-									}
+									else presenceData.state = "Responding to a scenario";
 									break;
 								}
 								case "EnterSingleText": {
@@ -1060,31 +1044,33 @@ presence.on("UpdateData", async () => {
 									const { html } = gamePlayerState.prompt as {
 										html: string;
 									};
-									if (html === "") {
-										presenceData.state = "Watching the tutorial";
-									} else if (
-										html ===
-										"<div>Choose an Issue</div><div>to base your invention on.</div>"
-									) {
-										presenceData.state = "Choosing an issue to work on";
-									} else if (
-										html ===
-										"<div>Present your idea!</div><div>It's your turn to show off your invention!<br /><br />Would you like to present your invention, or would you like the game to do it for you?</div>"
-									) {
-										presenceData.state = "Choosing presentation options";
-									} else if (
-										html ===
-										"<div>Present your idea!</div><div>You can control the timing!<br />(Show elements in any order.)</div>"
-									) {
-										presenceData.state = "Presenting their invention";
-									} else if (
-										html.startsWith("<div>Invest in the best!</div>")
-									) {
-										presenceData.state = "Investing in an invention";
-									} else if (
-										/choose an issue.*?to base your invention on/is.test(html)
-									) {
-										presenceData.state = "Choosing the final issue to work on";
+									switch (html) {
+										case "": {
+											presenceData.state = "Watching the tutorial";
+											break;
+										}
+										case "<div>Choose an Issue</div><div>to base your invention on.</div>": {
+											presenceData.state = "Choosing an issue to work on";
+											break;
+										}
+										case "<div>Present your idea!</div><div>It's your turn to show off your invention!<br /><br />Would you like to present your invention, or would you like the game to do it for you?</div>": {
+											presenceData.state = "Choosing presentation options";
+											break;
+										}
+										case "<div>Present your idea!</div><div>You can control the timing!<br />(Show elements in any order.)</div>": {
+											presenceData.state = "Presenting their invention";
+											break;
+										}
+										default:
+											if (html.startsWith("<div>Invest in the best!</div>"))
+												presenceData.state = "Investing in an invention";
+											else if (
+												/choose an issue.*?to base your invention on/is.test(
+													html
+												)
+											)
+												presenceData.state =
+													"Choosing the final issue to work on";
 									}
 									break;
 								}
@@ -1092,14 +1078,14 @@ presence.on("UpdateData", async () => {
 									const { html } = gamePlayerState.prompt as {
 										html: string;
 									};
-									if (html.startsWith("<div>Fill in the Blank!</div>")) {
+									if (html.startsWith("<div>Fill in the Blank!</div>"))
 										presenceData.state = "Creating a problem";
-									} else if (
+									else if (
 										html ===
 										"<div>Write a title</div><div>for your invention</div>"
-									) {
+									)
 										presenceData.state = "Naming their invention";
-									} else if (
+									else if (
 										html ===
 										"<div>Write a tagline</div><div>for your invention</div>"
 									) {
@@ -1133,19 +1119,29 @@ presence.on("UpdateData", async () => {
 										text: string;
 										html: string;
 									};
-									if (text === "Press this button to skip the tutorial...") {
+									if (text === "Press this button to skip the tutorial...")
 										presenceData.state = "Skipping the tutorial";
-									} else if (
+									else if (
 										html ===
 										"Rapidly press these buttons to make weird stuff happen..."
-									) {
+									)
 										presenceData.state = "Making weird stuff happen";
-									} else if (text === "Listen to the RAP") {
-										presenceData.state = "Listening to the rap";
-									} else if (text === "Tap if you think this rhyme is DOPE") {
-										presenceData.state = "Voting on the rap";
-									} else if (text === "Who won this battle??") {
-										presenceData.state = "Voting on the winner of the battle";
+									else {
+										switch (text) {
+											case "Listen to the RAP": {
+												presenceData.state = "Listening to the rap";
+												break;
+											}
+											case "Tap if you think this rhyme is DOPE": {
+												presenceData.state = "Voting on the rap";
+												break;
+											}
+											case "Who won this battle??": {
+												presenceData.state =
+													"Voting on the winner of the battle";
+												break;
+											}
+										}
 									}
 									break;
 								}
