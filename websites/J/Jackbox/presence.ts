@@ -424,6 +424,26 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 2
 						case Games.Bidiots: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".auction-page:not(.pt-page-off)"
+								),
+								{ id } = currentGamePage;
+							if (id === "state-lobby") {
+								presenceData.state = "Waiting in lobby";
+							} else if (id === "state-logo") {
+								presenceData.state = "Watching tutorial";
+							} else if (id === "state-draw") {
+								presenceData.state = "Creating a piece of art";
+							} else if (id === "state-done-drawing") {
+								presenceData.state =
+									"Waiting for other players to finish drawing";
+							} else if (id === "state-auction") {
+								// TODO: Add current bid
+								presenceData.state = "Bidding on art";
+							} else if (id === "state-post-game") {
+								presenceData.state = "Viewing results";
+							}
+							// TODO: Add screw state
 							break;
 						}
 						case Games.Fibbage: {
