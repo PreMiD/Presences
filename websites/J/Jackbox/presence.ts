@@ -3,21 +3,8 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
-type LayoutName =
-	| "New"
-	| "Dictionarium"
-	| "VeryLegacy"
-	| "Legacy"
-	| "Guesspionage"
-	| "DevilAndDetails"
-	| "DrawfulAnimate"
-	| "EnormousWheel"
-	| "JobJob"
-	| "PollMine"
-	| "WeaponsDrawn"
-	| "CivicDoodle";
 type LayoutCallback = () => string;
-const LayoutVersion: Record<LayoutName, LayoutCallback> = {
+const LayoutVersion: Record<string, LayoutCallback> = {
 	New: () => "New",
 	Legacy: () => document.querySelector("#playername").textContent,
 	CivicDoodle: () => document.querySelector("#playername #body").textContent,
