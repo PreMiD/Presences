@@ -6,6 +6,7 @@ const presence = new Presence({
 type LayoutName =
 	| "New"
 	| "Dictionarium"
+	| "VeryLegacy"
 	| "Legacy"
 	| "Guesspionage"
 	| "DevilAndDetails"
@@ -17,13 +18,14 @@ type LayoutName =
 	| "CivicDoodle";
 type LayoutCallback = () => string;
 const LayoutVersion: Record<LayoutName, LayoutCallback> = {
-	New: () => document.querySelector("#playername").textContent,
+	New: () => "New",
+	Legacy: () => document.querySelector("#playername").textContent,
 	CivicDoodle: () => document.querySelector("#playername #body").textContent,
 	Dictionarium: () =>
 		`${document.querySelector("#playericon").className.split("_")[1]}${document
 			.querySelector("#playername")
 			.textContent.toLowerCase()}`,
-	Legacy: () => document.querySelector("#player").children[0].textContent,
+	VeryLegacy: () => document.querySelector("#player").children[0].textContent,
 	Guesspionage: () => document.querySelector("#player").children[1].textContent,
 	DevilAndDetails: () => document.querySelector(".player-text").textContent,
 	// TODO: Find similarities?
@@ -45,81 +47,81 @@ const Games: Record<string, Game> = {
 	// Party Pack 1
 	ydkj2015: {
 		name: "You Don't Know Jack 2015",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-ydkj2015",
 		logo: "https://i.imgur.com/EGnX1E5.png",
 	},
 	drawful2: {
 		name: "Drawful 2",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-drawful",
 		logo: "https://i.imgur.com/TOaYCE3.png",
 	},
 	drawful2international: {
 		name: "Drawful 2 International",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-drawful",
 		logo: "https://i.imgur.com/TOaYCE3.png",
 	},
 	drawful: {
 		name: "Drawful",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-drawful",
 		logo: "https://i.imgur.com/TOaYCE3.png",
 	},
 	wordspud: {
 		name: "Word Spud",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-wordspud",
 		logo: "https://i.imgur.com/gFUB4EX.png",
 	},
 	lieswatter: {
 		name: "Lie Swatter",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-lieswatter",
 		logo: "https://i.imgur.com/PavDjzP.png",
 	},
 	// Party Pack 2
 	auction: {
 		name: "Bidiots",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-auction",
 		logo: "https://i.imgur.com/CMcGDrM.png",
 	},
 	bombintern: {
 		name: "Bomb Corp",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-bombintern",
 		logo: "https://i.imgur.com/XkqOv6o.png",
 	},
 	earwax: {
 		name: "Earwax",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-earwax",
 		logo: "https://i.imgur.com/oEidNn6.png",
 	},
 	fibbage: {
 		name: "Fibbage XL",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-fibbage",
 		logo: "https://i.imgur.com/LxAtHuy.png",
 	},
 	fibbage2: {
 		name: "Fibbage 2",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-fibbage",
 		logo: "https://i.imgur.com/LxAtHuy.png",
 	},
 	// Party Pack 3
 	awshirt: {
 		name: "Tee K.O.",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-awshirt",
 		logo: "https://i.imgur.com/wGbJhoR.png",
 	},
 	fakinit: {
 		name: "Fakin' It",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-fakinit",
 		logo: "https://i.imgur.com/nDqnyqV.png",
 	},
@@ -131,25 +133,25 @@ const Games: Record<string, Game> = {
 	},
 	quiplash: {
 		name: "Quiplash XL",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-quiplash",
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
 	quiplash2: {
 		name: "Quiplash 2",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-quiplash",
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
 	"quiplash2-international": {
 		name: "Quiplash 2 Interlational",
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-quiplash",
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
 	triviadeath: {
 		name: "Trivia M Party", // TODO: Fix name
-		layout: LayoutVersion.Legacy,
+		layout: LayoutVersion.VeryLegacy,
 		selector: "#page-triviadeath",
 		logo: "https://i.imgur.com/zHOvymB.png",
 	},
@@ -164,81 +166,81 @@ const Games: Record<string, Game> = {
 		name: "Bracketeering",
 		selector: ".bracketeering",
 		logo: "https://i.imgur.com/oJJpQqi.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	monstermingle: {
 		name: "Monster Seeking Monster",
 		selector: ".monstermingle",
 		logo: "https://i.imgur.com/CPkaxX3.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	survivetheinternet: {
 		name: "Survive the Internet",
 		selector: ".surviveTheInternet",
 		logo: "https://i.imgur.com/eXCzZ2e.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	fibbage3: {
 		name: "Fibbage 3",
 		selector: ".fibbage3",
 		logo: "https://i.imgur.com/eTsm2zC.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	// Party Pack 5
 	splittheroom: {
 		name: "Split the Room",
 		selector: ".splittheroom",
 		logo: "https://i.imgur.com/YyhOPAp.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	slingshoot: {
 		name: "Zeeple Dome",
 		selector: ".slingshoot",
 		logo: "https://i.imgur.com/QqEKHgG.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	patentlystupid: {
 		name: "Patently Stupid",
 		selector: ".patentlystupid",
 		logo: "https://i.imgur.com/yGEE0Aw.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	rapbattle: {
 		name: "Mad Verse City",
 		selector: ".rapbattle",
 		logo: "https://i.imgur.com/Up8Paw8.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	ydkj2018: {
 		name: "You Don't Know Jack: Full Stream",
 		selector: ".ydkj2018",
 		logo: "https://i.imgur.com/Li8TLXI.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	// Party Pack 6
 	pushthebutton: {
 		name: "Push the Button",
 		selector: ".pushthebutton",
 		logo: "https://i.imgur.com/OhgGmMQ.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	jokeboat: {
 		name: "Joke Boat",
 		selector: ".jokeboat",
 		logo: "https://i.imgur.com/Cih6bqA.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	rolemodels: {
 		name: "Role Models",
 		selector: ".rolemodels",
 		logo: "https://i.imgur.com/sETBCgc.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	triviadeath2: {
 		name: "Trivia M Party 2", // TODO: Fix name
 		selector: ".triviadeath2",
 		logo: "https://i.imgur.com/9MmGVGD.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	ridictionary: {
 		name: "Dictionarium",
@@ -251,19 +253,19 @@ const Games: Record<string, Game> = {
 		name: "Quiplash 3",
 		selector: ".quiplash3",
 		logo: "https://i.imgur.com/Jds4R56.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	"jackbox-talks": {
 		name: "Talking Points",
 		selector: ".jackbox-talks",
 		logo: "https://i.imgur.com/8Amy9Di.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	"blanky-blank": {
 		name: "Blather 'Round",
 		selector: ".blanky-blank",
 		logo: "https://i.imgur.com/qLW2Fft.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	everyday: {
 		name: "The Devils and the Details",
@@ -275,7 +277,7 @@ const Games: Record<string, Game> = {
 		name: "Champ'd Up",
 		selector: ".worldchamps",
 		logo: "https://i.imgur.com/KnAS7yD.png",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion.Legacy,
 	},
 	// Party Pack 8
 	"the-wheel": {
@@ -313,7 +315,7 @@ const Games: Record<string, Game> = {
 		name: "Fibbage 4",
 		selector: "TODO",
 		logo: "TODO",
-		layout: LayoutVersion.New,
+		layout: LayoutVersion. New,
 	},
 	lineup: {
 		name: "Quixort",
@@ -355,7 +357,7 @@ presence.on("UpdateData", async () => {
 
 	switch (window.location.hostname) {
 		case "jackbox.tv": {
-			let getLayoutPlayerName = LayoutVersion.New;
+			let getLayoutPlayerName = LayoutVersion.Legacy;
 			const game =
 				Games[await presence.getPageletiable<string>('tv"]["storage"]["tag')];
 			if (game) {
@@ -868,6 +870,41 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.survivetheinternet: {
+							const playerIcon = document.querySelector<HTMLDivElement>("#playericon"),
+							currentGamePage = document.querySelector<HTMLDivElement>(
+								"#playerRegion + div"
+							),
+							{ classList, textContent } = currentGamePage;
+							if (playerIcon) {
+								presenceData.smallImageKey = getComputedStyle(playerIcon).backgroundImage.match(/^url\("(.*)"\)$/)[1];
+							}
+							if (classList.contains("Lobby")) {
+								presenceData.state = "Waiting in lobby";
+							} else if (classList.contains("Logo")) {
+								presenceData.state = "Waiting";
+							} else if (classList.contains("MakeSingleChoice")) {
+								if (/the tutorial\.\.\./.test(textContent)) {
+									presenceData.state = "Viewing the tutorial";
+								} else if (/ridiculous\?$/.test(currentGamePage.querySelector<HTMLDivElement>(".aboveBlackBox").textContent)) {
+									if (currentGamePage.querySelector<HTMLDivElement>(".makeSingleChoiceDone").style.display === "none") {
+										presenceData.state = "Voting for the most ridiculous answer";
+									} else {
+										presenceData.state = "Waiting for other players to vote";
+									}
+								} else if (currentGamePage.querySelector<HTMLDivElement>(".aboveBlackBox").textContent === "") {
+									presenceData.state = "Answering a photosharing prompt";
+								}
+							} else if (classList.contains("EnterSingleText")) {
+								if (currentGamePage.querySelector<HTMLFormElement>(".enterSingleTextForm").style.display === "none") {
+									presenceData.state = "Waiting for other players to answer their prompts";
+								} else {
+									if (currentGamePage.querySelector<HTMLDivElement>(".finalRoundImage") || currentGamePage.querySelector<HTMLDivElement>(".blackBox:not(.hide)")) {
+										presenceData.state = "Twisting another player's response";
+									} else {
+										presenceData.state = "Answering a prompt";
+									}
+								}
+							}
 							break;
 						}
 						case Games.fibbage3: {
