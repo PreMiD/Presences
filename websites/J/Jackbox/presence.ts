@@ -11,7 +11,14 @@ interface Game {
 let gamePlayerState: {
 	playerName?: string;
 	username?: string;
+	playerInfo?: {
+		username?: string;
+	};
 	state: string;
+	prompt?: {
+		text?: string;
+		html?: string;
+	};
 	[x: string]: unknown;
 } = {
 	playerName: null,
@@ -272,10 +279,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Playing ${name}`;
 				if (useName) {
 					const { playerName, username, playerInfo } = gamePlayerState,
-						realUsername =
-							playerName ??
-							username ??
-							(playerInfo as { username: string })?.username;
+						realUsername = playerName ?? username ?? playerInfo?.username;
 					if (realUsername) {
 						if (useDetails) presenceData.details += ` as ${realUsername}`;
 						else presenceData.state = `as ${realUsername}`;
@@ -767,7 +771,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									switch (gamePlayerState.text as string) {
+									switch (gamePlayerState.text) {
 										case "Which player's addition was better?": {
 											presenceData.state = "Voting for the best addition";
 											break;
@@ -988,9 +992,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const { html } = gamePlayerState.prompt as {
-										html: string;
-									};
+									const { html } = gamePlayerState.prompt;
 									if (html === "Press this to skip the tutorial...")
 										presenceData.state = "Watching the tutorial";
 									else if (
@@ -1041,9 +1043,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const { html } = gamePlayerState.prompt as {
-										html: string;
-									};
+									const { html } = gamePlayerState.prompt;
 									switch (html) {
 										case "": {
 											presenceData.state = "Watching the tutorial";
@@ -1068,16 +1068,15 @@ presence.on("UpdateData", async () => {
 												/choose an issue.*?to base your invention on/is.test(
 													html
 												)
-											)
+											) {
 												presenceData.state =
 													"Choosing the final issue to work on";
+											}
 									}
 									break;
 								}
 								case "EnterSingleText": {
-									const { html } = gamePlayerState.prompt as {
-										html: string;
-									};
+									const { html } = gamePlayerState.prompt;
 									if (html.startsWith("<div>Fill in the Blank!</div>"))
 										presenceData.state = "Creating a problem";
 									else if (
@@ -1115,10 +1114,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const { text, html } = gamePlayerState.prompt as {
-										text: string;
-										html: string;
-									};
+									const { text, html } = gamePlayerState.prompt;
 									if (text === "Press this button to skip the tutorial...")
 										presenceData.state = "Skipping the tutorial";
 									else if (
@@ -1147,9 +1143,7 @@ presence.on("UpdateData", async () => {
 								}
 								case "EnterSingleText": {
 									presenceData.state = `Entering a ${
-										(gamePlayerState.prompt as { html: string }).html.match(
-											/\((.+?)\)$/
-										)[1]
+										gamePlayerState.prompt.html.match(/\((.+?)\)$/)[1]
 									}`;
 									break;
 								}
