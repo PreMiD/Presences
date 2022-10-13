@@ -48,7 +48,7 @@ if (window.location.hostname === "jackbox.tv") {
 			if (!/recv <- .*?("key": "bc:customer:[a-z0-9-]+",)/s.test(lastLog))
 				gameRoomState = JSON.parse(lastLog.slice(8)).result.val;
 		}
-	}, 1500);
+	}, 2000);
 }
 
 const Games: Record<string, Game> = {
@@ -992,6 +992,41 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 5
 						case Games.splittheroom: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "MakeSingleChoice": {
+									const { html } = gamePlayerState.prompt as {
+										html: string;
+									};
+									if (html === "Press this to skip the tutorial...") {
+										presenceData.state = "Watching the tutorial";
+									} else if (
+										html === "Did this person create an amusing scenario?"
+									) {
+										presenceData.state = "Rating the scenario";
+									} else if (
+										html.startsWith(
+											"For bonus points, which option do you think"
+										)
+									) {
+										presenceData.state = "Predicting a player's choice";
+									} else {
+										presenceData.state = "Responding to a scenario";
+									}
+									break;
+								}
+								case "EnterSingleText": {
+									presenceData.state = "Completing a scenario";
+									break;
+								}
+							}
 							break;
 						}
 						case Games.slingshoot: {
