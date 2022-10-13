@@ -39,7 +39,6 @@ const LayoutVersion: Record<LayoutName, LayoutCallback> = {
 interface Game {
 	name: string;
 	layout?: LayoutCallback;
-	selector: string;
 	logo: string;
 }
 
@@ -48,296 +47,248 @@ const Games: Record<string, Game> = {
 	ydkj2015: {
 		name: "You Don't Know Jack 2015",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-ydkj2015",
 		logo: "https://i.imgur.com/EGnX1E5.png",
 	},
 	drawful2: {
 		name: "Drawful 2",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-drawful",
 		logo: "https://i.imgur.com/TOaYCE3.png",
 	},
 	drawful2international: {
 		name: "Drawful 2 International",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-drawful",
 		logo: "https://i.imgur.com/TOaYCE3.png",
 	},
 	drawful: {
 		name: "Drawful",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-drawful",
 		logo: "https://i.imgur.com/TOaYCE3.png",
 	},
 	wordspud: {
 		name: "Word Spud",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-wordspud",
 		logo: "https://i.imgur.com/gFUB4EX.png",
 	},
 	lieswatter: {
 		name: "Lie Swatter",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-lieswatter",
 		logo: "https://i.imgur.com/PavDjzP.png",
 	},
 	// Party Pack 2
 	auction: {
 		name: "Bidiots",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-auction",
 		logo: "https://i.imgur.com/CMcGDrM.png",
 	},
 	bombintern: {
 		name: "Bomb Corp",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-bombintern",
 		logo: "https://i.imgur.com/XkqOv6o.png",
 	},
 	earwax: {
 		name: "Earwax",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-earwax",
 		logo: "https://i.imgur.com/oEidNn6.png",
 	},
 	fibbage: {
 		name: "Fibbage XL",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-fibbage",
 		logo: "https://i.imgur.com/LxAtHuy.png",
 	},
 	fibbage2: {
 		name: "Fibbage 2",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-fibbage",
 		logo: "https://i.imgur.com/LxAtHuy.png",
 	},
 	// Party Pack 3
 	awshirt: {
 		name: "Tee K.O.",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-awshirt",
 		logo: "https://i.imgur.com/wGbJhoR.png",
 	},
 	fakinit: {
 		name: "Fakin' It",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-fakinit",
 		logo: "https://i.imgur.com/nDqnyqV.png",
 	},
 	pollposition: {
 		name: "Guesspionage",
 		layout: LayoutVersion.Guesspionage,
-		selector: "#page-pollposition",
 		logo: "https://i.imgur.com/nDqnyqV.png",
 	},
 	quiplash: {
 		name: "Quiplash XL",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-quiplash",
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
 	quiplash2: {
 		name: "Quiplash 2",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-quiplash",
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
 	"quiplash2-international": {
 		name: "Quiplash 2 Interlational",
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-quiplash",
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
 	triviadeath: {
 		name: "Trivia M Party", // TODO: Fix name
 		layout: LayoutVersion.VeryLegacy,
-		selector: "#page-triviadeath",
 		logo: "https://i.imgur.com/zHOvymB.png",
 	},
 	// Party Pack 4
 	overdrawn: {
 		name: "Civic Doodle",
-		selector: ".overdrawn",
 		logo: "https://i.imgur.com/6CBskbM.png",
 		layout: LayoutVersion.CivicDoodle,
 	},
 	bracketeering: {
 		name: "Bracketeering",
-		selector: ".bracketeering",
 		logo: "https://i.imgur.com/oJJpQqi.png",
 		layout: LayoutVersion.Legacy,
 	},
 	monstermingle: {
 		name: "Monster Seeking Monster",
-		selector: ".monstermingle",
 		logo: "https://i.imgur.com/CPkaxX3.png",
 		layout: LayoutVersion.Legacy,
 	},
 	survivetheinternet: {
 		name: "Survive the Internet",
-		selector: ".surviveTheInternet",
 		logo: "https://i.imgur.com/eXCzZ2e.png",
 		layout: LayoutVersion.Legacy,
 	},
 	fibbage3: {
 		name: "Fibbage 3",
-		selector: ".fibbage3",
 		logo: "https://i.imgur.com/eTsm2zC.png",
 		layout: LayoutVersion.Legacy,
 	},
 	// Party Pack 5
 	splittheroom: {
 		name: "Split the Room",
-		selector: ".splittheroom",
 		logo: "https://i.imgur.com/YyhOPAp.png",
 		layout: LayoutVersion.Legacy,
 	},
 	slingshoot: {
 		name: "Zeeple Dome",
-		selector: ".slingshoot",
 		logo: "https://i.imgur.com/QqEKHgG.png",
 		layout: LayoutVersion.Legacy,
 	},
 	patentlystupid: {
 		name: "Patently Stupid",
-		selector: ".patentlystupid",
 		logo: "https://i.imgur.com/yGEE0Aw.png",
 		layout: LayoutVersion.Legacy,
 	},
 	rapbattle: {
 		name: "Mad Verse City",
-		selector: ".rapbattle",
 		logo: "https://i.imgur.com/Up8Paw8.png",
 		layout: LayoutVersion.Legacy,
 	},
 	ydkj2018: {
 		name: "You Don't Know Jack: Full Stream",
-		selector: ".ydkj2018",
 		logo: "https://i.imgur.com/Li8TLXI.png",
 		layout: LayoutVersion.Legacy,
 	},
 	// Party Pack 6
 	pushthebutton: {
 		name: "Push the Button",
-		selector: ".pushthebutton",
 		logo: "https://i.imgur.com/OhgGmMQ.png",
 		layout: LayoutVersion.Legacy,
 	},
 	jokeboat: {
 		name: "Joke Boat",
-		selector: ".jokeboat",
 		logo: "https://i.imgur.com/Cih6bqA.png",
 		layout: LayoutVersion.Legacy,
 	},
 	rolemodels: {
 		name: "Role Models",
-		selector: ".rolemodels",
 		logo: "https://i.imgur.com/sETBCgc.png",
 		layout: LayoutVersion.Legacy,
 	},
 	triviadeath2: {
 		name: "Trivia M Party 2", // TODO: Fix name
-		selector: ".triviadeath2",
 		logo: "https://i.imgur.com/9MmGVGD.png",
 		layout: LayoutVersion.Legacy,
 	},
 	ridictionary: {
 		name: "Dictionarium",
-		selector: ".ridictionarium",
 		logo: "https://i.imgur.com/8S0aSTw.png",
 		layout: LayoutVersion.Dictionarium,
 	},
 	// Party Pack 7
 	quiplash3: {
 		name: "Quiplash 3",
-		selector: ".quiplash3",
 		logo: "https://i.imgur.com/Jds4R56.png",
 		layout: LayoutVersion.Legacy,
 	},
 	"jackbox-talks": {
 		name: "Talking Points",
-		selector: ".jackbox-talks",
 		logo: "https://i.imgur.com/8Amy9Di.png",
 		layout: LayoutVersion.Legacy,
 	},
 	"blanky-blank": {
 		name: "Blather 'Round",
-		selector: ".blanky-blank",
 		logo: "https://i.imgur.com/qLW2Fft.png",
 		layout: LayoutVersion.Legacy,
 	},
 	everyday: {
 		name: "The Devils and the Details",
-		selector: ".everyday",
 		logo: "https://i.imgur.com/tXkh58c.png",
 		layout: LayoutVersion.DevilAndDetails,
 	},
 	worldchamps: {
 		name: "Champ'd Up",
-		selector: ".worldchamps",
 		logo: "https://i.imgur.com/KnAS7yD.png",
 		layout: LayoutVersion.Legacy,
 	},
 	// Party Pack 8
 	"the-wheel": {
 		name: "The Wheel of Enormous Proportions",
-		selector: ".wheel",
 		logo: "https://i.imgur.com/KnAS7yD.png",
 		layout: LayoutVersion.EnormousWheel,
 	},
 	"murder-detectives": {
 		name: "Weapons Drawn",
-		selector: ".detectives",
 		logo: "https://i.imgur.com/yRXmXbf.png",
 		layout: LayoutVersion.WeaponsDrawn,
 	},
 	"apply-yourself": {
 		name: "Job Job",
-		selector: ".apply-yourself",
 		logo: "https://i.imgur.com/FfZYRGL.png",
 		layout: LayoutVersion.JobJob,
 	},
 	"drawful-animate": {
 		name: "Drawful Animate",
-		selector: ".drawful-animate",
 		logo: "https://i.imgur.com/NtRvc93.png",
 		layout: LayoutVersion.DrawfulAnimate,
 	},
 	"survey-bomb": {
 		name: "The Poll Mine",
-		selector: ".poll-mine",
 		logo: "https://i.imgur.com/o4aaUox.png",
 		layout: LayoutVersion.PollMine,
 	},
 	// Party Pack 9
 	fourbage: {
 		name: "Fibbage 4",
-		selector: "TODO",
 		logo: "TODO",
 		layout: LayoutVersion. New,
 	},
 	lineup: {
 		name: "Quixort",
-		selector: "TODO",
 		logo: "TODO",
 		layout: LayoutVersion.New,
 	},
 	"range-game": {
 		name: "Nonsensory",
-		selector: "TODO",
 		logo: "TODO",
 		layout: LayoutVersion.New,
 	},
 	"antique-freak": {
 		name: "Junktopia",
-		selector: "TODO",
 		logo: "TODO",
 		layout: LayoutVersion.New,
 	},
 	htmf: {
 		name: "Roomerang",
-		selector: "TODO",
 		logo: "TODO",
 		layout: LayoutVersion.New,
 	},
