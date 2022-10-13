@@ -43,264 +43,303 @@ interface Game {
 
 const Games: Record<string, Game> = {
 	// Party Pack 1
-	YouDontKnowJack2015: {
+	ydkj2015: {
 		name: "You Don't Know Jack 2015",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-ydkj2015",
 		logo: "https://i.imgur.com/EGnX1E5.png",
 	},
-	Drawful: {
-		name: "Drawful 1/2",
+	drawful2: {
+		name: "Drawful 2",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-drawful",
 		logo: "https://i.imgur.com/TOaYCE3.png",
 	},
-	WordSpud: {
+	drawful2international: {
+		name: "Drawful 2 International",
+		layout: LayoutVersion.Legacy,
+		selector: "#page-drawful",
+		logo: "https://i.imgur.com/TOaYCE3.png",
+	},
+	drawful: {
+		name: "Drawful",
+		layout: LayoutVersion.Legacy,
+		selector: "#page-drawful",
+		logo: "https://i.imgur.com/TOaYCE3.png",
+	},
+	wordspud: {
 		name: "Word Spud",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-wordspud",
 		logo: "https://i.imgur.com/gFUB4EX.png",
 	},
-	LieSwatter: {
+	lieswatter: {
 		name: "Lie Swatter",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-lieswatter",
 		logo: "https://i.imgur.com/PavDjzP.png",
 	},
 	// Party Pack 2
-	Bidiots: {
+	auction: {
 		name: "Bidiots",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-auction",
 		logo: "https://i.imgur.com/CMcGDrM.png",
 	},
-	BompCorp: {
+	bombintern: {
 		name: "Bomb Corp",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-bombintern",
 		logo: "https://i.imgur.com/XkqOv6o.png",
 	},
-	Earwax: {
+	earwax: {
 		name: "Earwax",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-earwax",
 		logo: "https://i.imgur.com/oEidNn6.png",
 	},
-	Fibbage: {
-		name: "Fibbage XL/2",
+	fibbage: {
+		name: "Fibbage XL",
+		layout: LayoutVersion.Legacy,
+		selector: "#page-fibbage",
+		logo: "https://i.imgur.com/LxAtHuy.png",
+	},
+	fibbage2: {
+		name: "Fibbage 2",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-fibbage",
 		logo: "https://i.imgur.com/LxAtHuy.png",
 	},
 	// Party Pack 3
-	TeeKO: {
+	awshirt: {
 		name: "Tee K.O.",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-awshirt",
 		logo: "https://i.imgur.com/wGbJhoR.png",
 	},
-	FakinIt: {
+	fakinit: {
 		name: "Fakin' It",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-fakinit",
 		logo: "https://i.imgur.com/nDqnyqV.png",
 	},
-	Guesspionage: {
+	pollposition: {
 		name: "Guesspionage",
 		layout: LayoutVersion.Guesspionage,
 		selector: "#page-pollposition",
 		logo: "https://i.imgur.com/nDqnyqV.png",
 	},
-	Quiplash: {
-		name: "Quiplash 1/2/XL",
+	quiplash: {
+		name: "Quiplash XL",
 		layout: LayoutVersion.Legacy,
 		selector: "#page-quiplash",
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
-	TriviaDeathParty: {
+	quiplash2: {
+		name: "Quiplash 2",
+		layout: LayoutVersion.Legacy,
+		selector: "#page-quiplash",
+		logo: "https://i.imgur.com/NAySr0E.png",
+	},
+	"quiplash2-international": {
+		name: "Quiplash 2 Interlational",
+		layout: LayoutVersion.Legacy,
+		selector: "#page-quiplash",
+		logo: "https://i.imgur.com/NAySr0E.png",
+	},
+	triviadeath: {
 		name: "Trivia M Party", // TODO: Fix name
 		layout: LayoutVersion.Legacy,
 		selector: "#page-triviadeath",
 		logo: "https://i.imgur.com/zHOvymB.png",
 	},
 	// Party Pack 4
-	CivicDoodle: {
+	overdrawn: {
 		name: "Civic Doodle",
 		selector: ".overdrawn",
 		logo: "https://i.imgur.com/6CBskbM.png",
-		layout: LayoutVersion.CivicDoodle
+		layout: LayoutVersion.CivicDoodle,
 	},
-	Bracketeering: {
+	bracketeering: {
 		name: "Bracketeering",
 		selector: ".bracketeering",
 		logo: "https://i.imgur.com/oJJpQqi.png",
+		layout: LayoutVersion.New,
 	},
-	MonsterSeekingMonster: {
+	monstermingle: {
 		name: "Monster Seeking Monster",
-		selector: ".MonsterMingle",
+		selector: ".monstermingle",
 		logo: "https://i.imgur.com/CPkaxX3.png",
+		layout: LayoutVersion.New,
 	},
-	SurviveTheInternet: {
+	survivetheinternet: {
 		name: "Survive the Internet",
-		selector: ".SurviveTheInternet",
+		selector: ".surviveTheInternet",
 		logo: "https://i.imgur.com/eXCzZ2e.png",
+		layout: LayoutVersion.New,
 	},
-	Fibbage3: {
+	fibbage3: {
 		name: "Fibbage 3",
-		selector: ".Fibbage3",
+		selector: ".fibbage3",
 		logo: "https://i.imgur.com/eTsm2zC.png",
+		layout: LayoutVersion.New,
 	},
 	// Party Pack 5
-	SplitTheRoom: {
+	splittheroom: {
 		name: "Split the Room",
-		selector: ".SplitTheRoom",
+		selector: ".splittheroom",
 		logo: "https://i.imgur.com/YyhOPAp.png",
+		layout: LayoutVersion.New,
 	},
-	ZeepleDome: {
+	slingshoot: {
 		name: "Zeeple Dome",
-		selector: ".SlingShoot",
+		selector: ".slingshoot",
 		logo: "https://i.imgur.com/QqEKHgG.png",
+		layout: LayoutVersion.New,
 	},
-	PatentlyStupid: {
+	patentlystupid: {
 		name: "Patently Stupid",
-		selector: ".PatentlyStupid",
+		selector: ".patentlystupid",
 		logo: "https://i.imgur.com/yGEE0Aw.png",
+		layout: LayoutVersion.New,
 	},
-	MadVerseCity: {
+	rapbattle: {
 		name: "Mad Verse City",
-		selector: ".RapBattle",
+		selector: ".rapbattle",
 		logo: "https://i.imgur.com/Up8Paw8.png",
+		layout: LayoutVersion.New,
 	},
-	YouDontKnowJackFullStream: {
+	ydkj2018: {
 		name: "You Don't Know Jack: Full Stream",
-		selector: ".YDKJ2018",
+		selector: ".ydkj2018",
 		logo: "https://i.imgur.com/Li8TLXI.png",
+		layout: LayoutVersion.New,
 	},
 	// Party Pack 6
-	PushTheButton: {
+	pushthebutton: {
 		name: "Push the Button",
-		selector: ".pushthebutton", // TODO: Verify
+		selector: ".pushthebutton",
 		logo: "https://i.imgur.com/OhgGmMQ.png",
+		layout: LayoutVersion.New,
 	},
-	JokeBoat: {
+	jokeboat: {
 		name: "Joke Boat",
-		selector: ".Jokeboat",
+		selector: ".jokeboat",
 		logo: "https://i.imgur.com/Cih6bqA.png",
+		layout: LayoutVersion.New,
 	},
-	RoleModels: {
+	rolemodels: {
 		name: "Role Models",
-		selector: ".RoleModels",
+		selector: ".rolemodels",
 		logo: "https://i.imgur.com/sETBCgc.png",
+		layout: LayoutVersion.New,
 	},
-	TriviaDeathParty2: {
+	triviadeath2: {
 		name: "Trivia M Party 2", // TODO: Fix name
-		selector: ".TriviaDeath2",
+		selector: ".triviadeath2",
 		logo: "https://i.imgur.com/9MmGVGD.png",
+		layout: LayoutVersion.New,
 	},
-	Dictionarium: {
+	ridictionary: {
 		name: "Dictionarium",
-		selector: ".Ridictionarium",
+		selector: ".ridictionarium",
 		logo: "https://i.imgur.com/8S0aSTw.png",
 		layout: LayoutVersion.Dictionarium,
 	},
 	// Party Pack 7
-	Quiplash3: {
+	quiplash3: {
 		name: "Quiplash 3",
 		selector: ".quiplash3",
 		logo: "https://i.imgur.com/Jds4R56.png",
+		layout: LayoutVersion.New,
 	},
-	TalkingPoints: {
+	"jackbox-talks": {
 		name: "Talking Points",
 		selector: ".jackbox-talks",
 		logo: "https://i.imgur.com/8Amy9Di.png",
+		layout: LayoutVersion.New,
 	},
-	BlatherRound: {
+	"blanky-blank": {
 		name: "Blather 'Round",
 		selector: ".blanky-blank",
 		logo: "https://i.imgur.com/qLW2Fft.png",
+		layout: LayoutVersion.New,
 	},
-	TheDevilsAndTheDetails: {
+	everyday: {
 		name: "The Devils and the Details",
 		selector: ".everyday",
 		logo: "https://i.imgur.com/tXkh58c.png",
 		layout: LayoutVersion.DevilAndDetails,
 	},
-	ChampdUp: {
+	worldchamps: {
 		name: "Champ'd Up",
 		selector: ".worldchamps",
 		logo: "https://i.imgur.com/KnAS7yD.png",
+		layout: LayoutVersion.New,
 	},
 	// Party Pack 8
-	WheelOfEnormousProportions: {
+	"the-wheel": {
 		name: "The Wheel of Enormous Proportions",
 		selector: ".wheel",
 		logo: "https://i.imgur.com/KnAS7yD.png",
 		layout: LayoutVersion.EnormousWheel,
 	},
-	WeaponsDrawn: {
+	"murder-detectives": {
 		name: "Weapons Drawn",
 		selector: ".detectives",
 		logo: "https://i.imgur.com/yRXmXbf.png",
 		layout: LayoutVersion.WeaponsDrawn,
 	},
-	JobJob: {
+	"apply-yourself": {
 		name: "Job Job",
 		selector: ".apply-yourself",
 		logo: "https://i.imgur.com/FfZYRGL.png",
 		layout: LayoutVersion.JobJob,
 	},
-	DrawfulAnimate: {
+	"drawful-animate": {
 		name: "Drawful Animate",
 		selector: ".drawful-animate",
 		logo: "https://i.imgur.com/NtRvc93.png",
 		layout: LayoutVersion.DrawfulAnimate,
 	},
-	ThePollMine: {
+	"survey-bomb": {
 		name: "The Poll Mine",
 		selector: ".poll-mine",
 		logo: "https://i.imgur.com/o4aaUox.png",
 		layout: LayoutVersion.PollMine,
 	},
 	// Party Pack 9
-	Fibbage4: {
+	fourbage: {
 		name: "Fibbage 4",
 		selector: "TODO",
 		logo: "TODO",
+		layout: LayoutVersion.New,
 	},
-	Quixort: {
+	lineup: {
 		name: "Quixort",
 		selector: "TODO",
 		logo: "TODO",
+		layout: LayoutVersion.New,
 	},
-	Nonsensory: {
+	"range-game": {
 		name: "Nonsensory",
 		selector: "TODO",
 		logo: "TODO",
+		layout: LayoutVersion.New,
 	},
-	Junktopia: {
+	"antique-freak": {
 		name: "Junktopia",
 		selector: "TODO",
 		logo: "TODO",
+		layout: LayoutVersion.New,
 	},
-	Roomerang: {
+	htmf: {
 		name: "Roomerang",
 		selector: "TODO",
 		logo: "TODO",
+		layout: LayoutVersion.New,
 	},
 };
-
-let game: Game,
-	getLayoutPlayerName = LayoutVersion.New;
-
-if (window.location.hostname === "jackbox.tv") {
-	const gameDiscoveryInterval = setInterval(async () => {
-		getLayoutPlayerName = LayoutVersion.New;
-		game = Object.values(Games).find(
-			game => document.querySelector(game.selector) !== null
-		);
-		if (game) clearInterval(gameDiscoveryInterval);
-	}, 500);
-}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -316,6 +355,9 @@ presence.on("UpdateData", async () => {
 
 	switch (window.location.hostname) {
 		case "jackbox.tv": {
+			let getLayoutPlayerName = LayoutVersion.New;
+			const game =
+				Games[await presence.getPageletiable<string>('tv"]["storage"]["tag')];
 			if (game) {
 				const { layout, name, logo } = game;
 				let playerName: string;
@@ -334,7 +376,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details += playerName;
 					switch (game) {
 						// Party Pack 1
-						case Games.LieSwatter: {
+						case Games.lieswatter: {
 							const { classList } = document.querySelector<HTMLDivElement>(
 								".lieswatter-page:not(.pt-page-off)"
 							);
@@ -346,7 +388,7 @@ presence.on("UpdateData", async () => {
 								presenceData.state = "Waiting for other players";
 							break;
 						}
-						case Games.WordSpud: {
+						case Games.wordspud: {
 							const { classList } = document.querySelector<HTMLDivElement>(
 								".wordspud-page:not(.pt-page-off)"
 							);
@@ -368,7 +410,7 @@ presence.on("UpdateData", async () => {
 								presenceData.state = "Game over";
 							break;
 						}
-						case Games.YouDontKnowJack2015: {
+						case Games.ydkj2015: {
 							const { classList } = document.querySelector<HTMLDivElement>(
 								".ydkj-page:not(.pt-page-off)"
 							);
@@ -378,7 +420,9 @@ presence.on("UpdateData", async () => {
 								presenceData.state = "Playing Jack Attack";
 							break;
 						}
-						case Games.Drawful: {
+						case Games.drawful2international:
+						case Games.drawuful:
+						case Games.drawful2: {
 							const currentGamePage = document.querySelector<HTMLDivElement>(
 									".drawful-page:not(.pt-page-off)"
 								),
@@ -419,7 +463,7 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						// Party Pack 2
-						case Games.Bidiots: {
+						case Games.auction: {
 							const { id } = document.querySelector<HTMLDivElement>(
 								".auction-page:not(.pt-page-off)"
 							);
@@ -454,7 +498,8 @@ presence.on("UpdateData", async () => {
 							// TODO: Add screw state
 							break;
 						}
-						case Games.Fibbage: {
+						case Games.fibbage:
+						case Games.fibbage2: {
 							const currentGamePage = document.querySelector<HTMLDivElement>(
 									".fibbage-page:not(.pt-page-off)"
 								),
@@ -498,7 +543,9 @@ presence.on("UpdateData", async () => {
 								presenceData.state = "Viewing audience scores";
 							break;
 						}
-						case Games.Quiplash: {
+						case Games.quiplash2:
+						case Games["quiplash2-international"]:
+						case Games.quiplash: {
 							const { id } = document.querySelector<HTMLDivElement>(
 								".quiplash-page:not(.pt-page-off)"
 							);
@@ -535,7 +582,7 @@ presence.on("UpdateData", async () => {
 							}
 							break;
 						}
-						case Games.BompCorp: {
+						case Games.bombintern: {
 							const { classList } = document.querySelector<HTMLDivElement>(
 								".bombintern-page:not(.pt-page-off)"
 							);
@@ -563,7 +610,7 @@ presence.on("UpdateData", async () => {
 								presenceData.state = "Defusing a copier bomb";
 							break;
 						}
-						case Games.Earwax: {
+						case Games.earwax: {
 							const { id, classList } = document.querySelector<HTMLDivElement>(
 								".earwax-page:not(.pt-page-off)"
 							);
@@ -603,7 +650,7 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						// Party Pack 3
-						case Games.TeeKO: {
+						case Games.awshirt: {
 							const { id } = document.querySelector<HTMLDivElement>(
 								".awshirt-page:not(.pt-page-off)"
 							);
@@ -678,7 +725,7 @@ presence.on("UpdateData", async () => {
 							// TODO: Verify
 							break;
 						}
-						case Games.FakinIt: {
+						case Games.fakinit: {
 							const currentGamePage = document.querySelector<HTMLDivElement>(
 									".fakinit-page:not(.pt-page-off)"
 								),
@@ -704,7 +751,7 @@ presence.on("UpdateData", async () => {
 								presenceData.state = "Viewing vote results";
 							break;
 						}
-						case Games.Guesspionage: {
+						case Games.pollposition: {
 							const currentGamePage = document.querySelector<HTMLDivElement>(
 									".pollposition-page:not(.pt-page-off)"
 								),
@@ -752,7 +799,7 @@ presence.on("UpdateData", async () => {
 								presenceData.state = "Choosing a character";
 							break;
 						}
-						case Games.TriviaDeathParty: {
+						case Games.triviadeath: {
 							const { id } = document.querySelector<HTMLDivElement>(
 								".triviadeath-page:not(.pt-page-off)"
 							);
@@ -793,8 +840,10 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						// Party Pack 4
-						case Games.CivicDoodle: {
-							const { classList } = document.querySelector<HTMLDivElement>("#playerRegion + div");
+						case Games.overdrawn: {
+							const { classList } = document.querySelector<HTMLDivElement>(
+								"#playerRegion + div"
+							);
 							if (classList.contains("Name")) {
 								presenceData.state = "Drawing nametag";
 							} else if (classList.contains("Lobby")) {
@@ -812,96 +861,96 @@ presence.on("UpdateData", async () => {
 							}
 							break;
 						}
-						case Games.Bracketeering: {
+						case Games.bracketeering: {
 							break;
 						}
-						case Games.MonsterSeekingMonster: {
+						case Games.monstermingle: {
 							break;
 						}
-						case Games.SurviveTheInternet: {
+						case Games.survivetheinternet: {
 							break;
 						}
-						case Games.Fibbage3: {
+						case Games.fibbage3: {
 							break;
 						}
 						// Party Pack 5
-						case Games.SplitTheRoom: {
+						case Games.splittheroom: {
 							break;
 						}
-						case Games.ZeepleDome: {
+						case Games.slingshoot: {
 							break;
 						}
-						case Games.PatentlyStupid: {
+						case Games.patentlystupid: {
 							break;
 						}
-						case Games.MadVerseCity: {
+						case Games.rapbattle: {
 							break;
 						}
-						case Games.YouDontKnowJackFullStream: {
+						case Games.ydkj2018: {
 							break;
 						}
 						// Party Pack 6
-						case Games.PushTheButton: {
+						case Games.pushthebutton: {
 							break;
 						}
-						case Games.JokeBoat: {
+						case Games.jokeboat: {
 							break;
 						}
-						case Games.RoleModels: {
+						case Games.rolemodels: {
 							break;
 						}
-						case Games.TriviaDeathParty2: {
+						case Games.triviadeath2: {
 							break;
 						}
-						case Games.Dictionarium: {
+						case Games.ridictionary: {
 							break;
 						}
 						// Party Pack 7
-						case Games.Quiplash3: {
+						case Games.quiplash3: {
 							break;
 						}
-						case Games.TalkingPoints: {
+						case Games["jackbox-talks"]: {
 							break;
 						}
-						case Games.BlatherRound: {
+						case Games["blanky-blank"]: {
 							break;
 						}
-						case Games.TheDevilsAndTheDetails: {
+						case Games.everyday: {
 							break;
 						}
-						case Games.ChampdUp: {
+						case Games.worldchamps: {
 							break;
 						}
 						// Party Pack 8
-						case Games.WheelOfEnormousProportions: {
+						case Games["the-wheel"]: {
 							break;
 						}
-						case Games.WeaponsDrawn: {
+						case Games["murder-detectives"]: {
 							break;
 						}
-						case Games.JobJob: {
+						case Games["apply-yourself"]: {
 							break;
 						}
-						case Games.DrawfulAnimate: {
+						case Games["drawful-animate"]: {
 							break;
 						}
-						case Games.ThePollMine: {
+						case Games["survey-bomb"]: {
 							break;
 						}
 						// Party Pack 9
-						case Games.Fibbage4: {
+						case Games.fourbage: {
 							break;
 						}
-						case Games.Quixort: {
+						case Games.lineup: {
 							break;
 						}
-						case Games.Nonsensory: {
+						case Games["range-game"]: {
 							break;
 						}
-						case Games.Junktopia: {
+						case Games["antique-freak"]: {
 							break;
 						}
-						case Games.Roomerang: {
+						case Games.htmf: {
 							break;
 						}
 					}
