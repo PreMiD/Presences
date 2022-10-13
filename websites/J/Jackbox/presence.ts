@@ -888,7 +888,6 @@ presence.on("UpdateData", async () => {
 					}
 				} else presenceData.state = playerName;
 			} else presenceData.details = "Idle";
-
 			break;
 		}
 		case "games.jackbox.tv": {
