@@ -700,6 +700,27 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.TriviaDeathParty: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".triviadeath-page:not(.pt-page-off)"
+								),
+								{ id } = currentGamePage;
+							if (id === "state-lobby") {
+								presenceData.state = "Waiting in lobby";
+							} else if (id === "state-logo") {
+								presenceData.state = "Waiting";
+							} else if (id === "state-make-single-choice") {
+								presenceData.state = "Answering a single choice question";
+							} else if (id === "state-make-many-choices") {
+								presenceData.state = "Answering a multiple choice question";
+							} else if (id === "state-enter-single-text") {
+								presenceData.state = "Answering a text prompt";
+							} else if (id === "state-enter-single-drawing") {
+								presenceData.state = "Drawing a picture";
+							} else if (id === "state-grid") {
+								presenceData.state = "Playing a grid game";
+							} else if (id === "state-game-results") {
+								presenceData.state = "Viewing game results";
+							}
 							break;
 						}
 						// Party Pack 4
