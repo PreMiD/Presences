@@ -492,6 +492,26 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.Quiplash: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".quiplash-page:not(.pt-page-off)"
+								),
+								{ id } = currentGamePage;
+							if (id === "state-lobby") {
+								presenceData.state = "Waiting in lobby";
+							} else if (id === "state-logo") {
+								presenceData.state = "Watching tutorial";
+							} else if (id === "state-round") {
+								presenceData.state = "TODO"; // Check image content
+							} else if (id === "state-answer-question-audience") {
+								presenceData.state = "Writing audience quip";
+							} else if (id === "state-answer-question") {
+								presenceData.state = "Writing quip";
+							} else if (id === "state-done-answering") {
+								presenceData.state = "Waiting for other players to answer";
+							} else if (id === "state-vote") {
+								// TODO: Add question and choices
+								presenceData.state = "Voting";
+							}
 							break;
 						}
 						case Games.BompCorp: {
