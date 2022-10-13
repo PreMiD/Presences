@@ -545,6 +545,32 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.Earwax: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".earwax-page:not(.pt-page-off)"
+								),
+								{ id, classList } = currentGamePage;
+							if (id === "state-lobby") {
+								presenceData.state = "Waiting in lobby";
+							} else if (id === "state-intro") {
+								presenceData.state = "Watching tutorial";
+							} else if (id === "state-logo" || id === "state-audience-wait") {
+								presenceData.state = "Waiting";
+							} else if (classList.contains("state-choosing")) {
+								presenceData.state = "Choosing a prompt";
+							} else if (classList.contains("state-notchoosing")) {
+								presenceData.state = "Waiting for the judge to choose a prompt";
+							} else if (classList.contains("state-notselectingsound")) {
+								presenceData.state = "Waiting for players to choose a sound";
+							} else if (
+								classList.contains("state-selectingsound") ||
+								id === "state-answer-question-audience"
+							) {
+								presenceData.state = "Choosing a sound";
+							} else if (classList.contains("state-audience-join")) {
+								presenceData.state = "Joining the audience";
+							} else if (id === "state-vote") {
+								presenceData.state = "Voting on a sound";
+							}
 							break;
 						}
 						// Party Pack 3
