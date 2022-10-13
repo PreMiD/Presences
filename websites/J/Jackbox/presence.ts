@@ -29,13 +29,17 @@ interface Game {
 	logo: string;
 }
 
-let gameState: string;
+let gameState: {
+	playerName: string,
+	state: string,
+	[x: string]: unknown
+};
 
 if (window.location.hostname === "jackbox.tv") {
 	setInterval(async () => {
-		const logs = await presence.getLogs(/recv <- /),
+		const logs = await presence.getLogs(/recv <- .*?"playerName":/s),
 			latestLog = logs[logs.length - 1];
-		gameState = JSON.parse(latestLog.slice(8)).result.entities["bc:room"][1].val.state
+		gameState = JSON.parse(latestLog.slice(8)).result.val;
 	}, 1000);
 }
 
@@ -791,8 +795,7 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 4
 						case Games.overdrawn: {
-							// TODO: Verify
-							switch (gameState) {
+							switch (gameState.state) {
 								case "Lobby": {
 									presenceData.state = "Waiting in lobby";
 									break;
@@ -809,8 +812,26 @@ presence.on("UpdateData", async () => {
 									presenceData.state = "Reacting to the drawings";
 									break;
 								}
-								case "Voting": {
-									presenceData.state = "Voting on the drawings";
+								case "MakeSingleChoice": {
+									const text = gameState.text as string;
+									switch (text) {
+										case "Which player's addition was better?": {
+											presenceData.state = "Voting for the best addition";
+											break;
+										}
+										case "You drew something this round, sit back and relax.": {
+											presenceData.state = "Waiting for other players to vote";
+											break;
+										}
+										case "Which title is best?": {
+											presenceData.state = "Voting for the best title";
+											break;
+										}
+									}
+									break;
+								}
+								case "EnterSingleText": {
+									presenceData.state = "Entering a title for their drawing";
 									break;
 								}
 							}
