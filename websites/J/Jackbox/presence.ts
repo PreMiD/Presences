@@ -25,15 +25,31 @@ let gamePlayerState: {
 if (window.location.hostname === "jackbox.tv") {
 	setInterval(async () => {
 		const playerStateLogs = await presence.getLogs(
-				/recv <- .*?"bc:customer:[a-z0-9-]+",/s
+				/recv <- .*?("key": "bc:customer:[a-z0-9-]+",)/s
 			),
 			roomStateLogs = await presence.getLogs(/recv <- .*?"key": "bc:room",/s);
-		gamePlayerState = JSON.parse(
-			playerStateLogs[playerStateLogs.length - 1].slice(8)
-		).result.val;
-		gameRoomState = JSON.parse(roomStateLogs[roomStateLogs.length - 1].slice(8))
-			.result.val;
-	}, 1000);
+		if (playerStateLogs.length > 0) {
+			const lastLog = playerStateLogs[playerStateLogs.length - 1];
+			if (/recv <- .*?"key": "bc:room",/s.test(lastLog)) {
+				const parsed = JSON.parse(lastLog.slice(8));
+				gameRoomState = parsed.result.entities["bc:room"][1].val;
+				gamePlayerState =
+					parsed.result.entities[
+						`bc:customer:${
+							lastLog.match(/"key": "bc:customer:([a-z0-9-]+)",/s)[1]
+						}`
+					][1].val;
+			} else {
+				gamePlayerState = JSON.parse(lastLog.slice(8)).result.val;
+			}
+		}
+		if (roomStateLogs.length > 0) {
+			const lastLog = roomStateLogs[roomStateLogs.length - 1];
+			if (!/recv <- .*?("key": "bc:customer:[a-z0-9-]+",)/s.test(lastLog)) {
+				gameRoomState = JSON.parse(lastLog.slice(8)).result.val;
+			}
+		}
+	}, 1500);
 }
 
 const Games: Record<string, Game> = {
@@ -254,8 +270,17 @@ presence.on("UpdateData", async () => {
 
 	switch (window.location.hostname) {
 		case "jackbox.tv": {
+			type JackboxStorageLetiable = {
+				tag: string;
+			};
 			const game =
-				Games[await presence.getPageletiable<string>('tv"]["storage"]["tag')];
+				Games[
+					(
+						await presence.getPageletiable<JackboxStorageLetiable>(
+							'tv"]["storage'
+						)
+					).tag
+				];
 			if (game) {
 				const { name, logo } = game;
 				presenceData.largeImageKey = logo;
