@@ -1015,6 +1015,48 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.rapbattle: {
+							presenceData.smallImageKey = getComputedStyle(
+								document.querySelector<HTMLDivElement>("#playericon")
+							).backgroundImage.match(/^url\("(.*)"\)$/)?.[1];
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "MakeSingleChoice": {
+									const { text, html } = gamePlayerState.prompt as {
+										text: string;
+										html: string;
+									};
+									if (text === "Press this button to skip the tutorial...") {
+										presenceData.state = "Skipping the tutorial";
+									} else if (
+										html ===
+										"Rapidly press these buttons to make weird stuff happen..."
+									) {
+										presenceData.state = "Making weird stuff happen";
+									} else if (text === "Listen to the RAP") {
+										presenceData.state = "Listening to the rap";
+									} else if (text === "Tap if you think this rhyme is DOPE") {
+										presenceData.state = "Voting on the rap";
+									} else if (text === "Who won this battle??") {
+										presenceData.state = "Voting on the winner of the battle";
+									}
+									break;
+								}
+								case "EnterSingleText": {
+									presenceData.state = `Entering a ${
+										(gamePlayerState.prompt as { html: string }).html.match(
+											/\((.+?)\)$/
+										)[1]
+									}`;
+									break;
+								}
+							}
 							break;
 						}
 						case Games.ydkj2018: {
