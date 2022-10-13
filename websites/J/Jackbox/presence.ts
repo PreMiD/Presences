@@ -270,7 +270,7 @@ const Games: Record<string, Game> = {
 	fourbage: {
 		name: "Fibbage 4",
 		logo: "TODO",
-		layout: LayoutVersion. New,
+		layout: LayoutVersion.New,
 	},
 	lineup: {
 		name: "Quixort",
@@ -797,21 +797,20 @@ presence.on("UpdateData", async () => {
 							const { classList } = document.querySelector<HTMLDivElement>(
 								"#playerRegion + div"
 							);
-							if (classList.contains("Name")) {
+							if (classList.contains("Name"))
 								presenceData.state = "Drawing nametag";
-							} else if (classList.contains("Lobby")) {
+							else if (classList.contains("Lobby"))
 								presenceData.state = "Waiting in lobby";
-							} else if (classList.contains("Logo")) {
+							else if (classList.contains("Logo"))
 								presenceData.state = "Waiting";
-							} else if (classList.contains("Draw")) {
+							else if (classList.contains("Draw"))
 								presenceData.state = "Drawing";
-							} else if (classList.contains("Reaction")) {
+							else if (classList.contains("Reaction"))
 								presenceData.state = "Reacting to the drawing";
-							} else if (classList.contains("MakeSingleChoice")) {
+							else if (classList.contains("MakeSingleChoice"))
 								presenceData.state = "Voting";
-							} else if (classList.contains("EnterSingleText")) {
+							else if (classList.contains("EnterSingleText"))
 								presenceData.state = "Entering a name for the drawing";
-							}
 							break;
 						}
 						case Games.bracketeering: {
@@ -821,40 +820,64 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.survivetheinternet: {
-							const playerIcon = document.querySelector<HTMLDivElement>("#playericon"),
-							currentGamePage = document.querySelector<HTMLDivElement>(
-								"#playerRegion + div"
-							),
-							{ classList, textContent } = currentGamePage;
-							if (playerIcon) {
-								presenceData.smallImageKey = getComputedStyle(playerIcon).backgroundImage.match(/^url\("(.*)"\)$/)[1];
-							}
-							if (classList.contains("Lobby")) {
+							const playerIcon =
+									document.querySelector<HTMLDivElement>("#playericon"),
+								currentGamePage = document.querySelector<HTMLDivElement>(
+									"#playerRegion + div"
+								),
+								{ classList, textContent } = currentGamePage;
+							if (playerIcon)
+								presenceData.smallImageKey =
+									getComputedStyle(playerIcon).backgroundImage.match(
+										/^url\("(.*)"\)$/
+									)[1];
+
+							if (classList.contains("Lobby"))
 								presenceData.state = "Waiting in lobby";
-							} else if (classList.contains("Logo")) {
+							else if (classList.contains("Logo"))
 								presenceData.state = "Waiting";
-							} else if (classList.contains("MakeSingleChoice")) {
-								if (/the tutorial\.\.\./.test(textContent)) {
+							else if (classList.contains("MakeSingleChoice")) {
+								if (/the tutorial\.\.\./.test(textContent))
 									presenceData.state = "Viewing the tutorial";
-								} else if (/ridiculous\?$/.test(currentGamePage.querySelector<HTMLDivElement>(".aboveBlackBox").textContent)) {
-									if (currentGamePage.querySelector<HTMLDivElement>(".makeSingleChoiceDone").style.display === "none") {
-										presenceData.state = "Voting for the most ridiculous answer";
-									} else {
-										presenceData.state = "Waiting for other players to vote";
-									}
-								} else if (currentGamePage.querySelector<HTMLDivElement>(".aboveBlackBox").textContent === "") {
+								else if (
+									/ridiculous\?$/.test(
+										currentGamePage.querySelector<HTMLDivElement>(
+											".aboveBlackBox"
+										).textContent
+									)
+								) {
+									if (
+										currentGamePage.querySelector<HTMLDivElement>(
+											".makeSingleChoiceDone"
+										).style.display === "none"
+									)
+										presenceData.state =
+											"Voting for the most ridiculous answer";
+									else presenceData.state = "Waiting for other players to vote";
+								} else if (
+									currentGamePage.querySelector<HTMLDivElement>(
+										".aboveBlackBox"
+									).textContent === ""
+								)
 									presenceData.state = "Answering a photosharing prompt";
-								}
 							} else if (classList.contains("EnterSingleText")) {
-								if (currentGamePage.querySelector<HTMLFormElement>(".enterSingleTextForm").style.display === "none") {
-									presenceData.state = "Waiting for other players to answer their prompts";
-								} else {
-									if (currentGamePage.querySelector<HTMLDivElement>(".finalRoundImage") || currentGamePage.querySelector<HTMLDivElement>(".blackBox:not(.hide)")) {
-										presenceData.state = "Twisting another player's response";
-									} else {
-										presenceData.state = "Answering a prompt";
-									}
-								}
+								if (
+									currentGamePage.querySelector<HTMLFormElement>(
+										".enterSingleTextForm"
+									).style.display === "none"
+								)
+									presenceData.state =
+										"Waiting for other players to answer their prompts";
+								else if (
+									currentGamePage.querySelector<HTMLDivElement>(
+										".finalRoundImage"
+									) ||
+									currentGamePage.querySelector<HTMLDivElement>(
+										".blackBox:not(.hide)"
+									)
+								)
+									presenceData.state = "Twisting another player's response";
+								else presenceData.state = "Answering a prompt";
 							}
 							break;
 						}
