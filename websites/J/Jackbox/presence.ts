@@ -8,19 +8,31 @@ interface Game {
 	logo: string;
 }
 
-let gameState: {
-	playerName: string;
-	state: string;
-	[x: string]: unknown;
-} = {
-	playerName: null,
-	state: null,
-};
+let gamePlayerState: {
+		playerName: string;
+		state: string;
+		[x: string]: unknown;
+	} = {
+		playerName: null,
+		state: null,
+	},
+	gameRoomState: {
+		state: string;
+		platformId: string;
+		[x: string]: unknown;
+	};
 
 if (window.location.hostname === "jackbox.tv") {
 	setInterval(async () => {
-		const logs = await presence.getLogs(/recv <- .*?"playerName":/s);
-		gameState = JSON.parse(logs[logs.length - 1].slice(8)).result.val;
+		const playerStateLogs = await presence.getLogs(
+				/recv <- .*?"bc:customer:[a-z0-9-]+",/s
+			),
+			roomStateLogs = await presence.getLogs(/recv <- .*?"key": "bc:room",/s);
+		gamePlayerState = JSON.parse(
+			playerStateLogs[playerStateLogs.length - 1].slice(8)
+		).result.val;
+		gameRoomState = JSON.parse(roomStateLogs[roomStateLogs.length - 1].slice(8))
+			.result.val;
 	}, 1000);
 }
 
@@ -249,7 +261,7 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = logo;
 				presenceData.details = `Playing ${name}`;
 				if (useName) {
-					const { playerName } = gameState;
+					const { playerName } = gamePlayerState;
 					if (playerName) {
 						if (useDetails) presenceData.details += ` as ${playerName}`;
 						else presenceData.state = `as ${playerName}`;
@@ -723,7 +735,7 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 4
 						case Games.overdrawn: {
-							switch (gameState.state) {
+							switch (gamePlayerState.state) {
 								case "Lobby": {
 									presenceData.state = "Waiting in lobby";
 									break;
@@ -741,7 +753,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									switch (gameState.text as string) {
+									switch (gamePlayerState.text as string) {
 										case "Which player's addition was better?": {
 											presenceData.state = "Voting for the best addition";
 											break;
@@ -835,6 +847,45 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.fibbage3: {
+							presenceData.smallImageKey = getComputedStyle(
+								document.querySelector<HTMLDivElement>("#playericon")
+							).backgroundImage.match(/^url\("(.*)"\)$/)[1];
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "EndShortie": {
+									presenceData.state = "Waiting for the next prompt";
+									break;
+								}
+								case "ChooseLike": {
+									presenceData.state = "Liking responses";
+									break;
+								}
+								case "ChooseLie": {
+									presenceData.state = "Looking for the truth";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "EnterText":
+								case "EnterTruth": {
+									presenceData.state = `Answering a prompt: ${gamePlayerState.question}`;
+									break;
+								}
+								case "CategorySelection": {
+									if (gamePlayerState.isChoosing) {
+										presenceData.state = "Choosing a category";
+									} else {
+										presenceData.state =
+											"Waiting for another player to choose a category";
+									}
+									break;
+								}
+							}
 							break;
 						}
 						// Party Pack 5
