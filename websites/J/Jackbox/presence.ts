@@ -575,6 +575,50 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 3
 						case Games.TeeKO: {
+							const currentGamePage = document.querySelector<HTMLDivElement>(
+									".awshirt-page:not(.pt-page-off)"
+								),
+								{ id } = currentGamePage;
+							if (id === "state-lobby") {
+								presenceData.state = "Waiting in lobby";
+							} else if (id === "state-logo") {
+								presenceData.state = "Waiting";
+							} else if (id === "state-audience") {
+								presenceData.state = "In the audience";
+							} else if (id === "state-draw") {
+								presenceData.state = "Drawing a shirt";
+							} else if (id === "state-drawing-done") {
+								presenceData.state =
+									"Waiting for other players to finish drawing their shirt";
+							} else if (id === "state-input") {
+								presenceData.state = "Creating taglines";
+							} else if (id === "state-prompts-done") {
+								presenceData.state =
+									"Waiting for other players to finish their taglines";
+							} else if (id === "state-shirt") {
+								presenceData.state = "Creating a t-shirt";
+							} else if (id === "state-shirt-done") {
+								presenceData.state =
+									"Waiting for other players to finish their t-shirts";
+							} else if (id === "state-vote") {
+								presenceData.state = "Voting on a t-shirt";
+							} else if (id === "state-voting-done") {
+								presenceData.state =
+									"Waiting for other players to finish voting";
+							} else if (id === "state-audience-suggestions") {
+								presenceData.state = "Entering a suggestion";
+							} else if (id === "state-round") {
+								presenceData.state = "TODO";
+							} else if (
+								id === "state-answer-question-audience" ||
+								id === "state-answer-question"
+							) {
+								presenceData.state = "Answering a question";
+							} else if (id === "state-done-answering") {
+								presenceData.state =
+									"Waiting for other players to finish answering";
+							}
+							// TODO: Verify
 							break;
 						}
 						case Games.FakinIt: {
