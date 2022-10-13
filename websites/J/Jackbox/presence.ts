@@ -777,6 +777,44 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.bracketeering: {
+							presenceData.smallImageKey = getComputedStyle(
+								document.querySelector<HTMLDivElement>("#playericon")
+							).backgroundImage.match(/^url\("(.*)"\)$/)[1];
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "MakeSingleChoice": {
+									if (
+										gamePlayerState.text === "Press this to skip the tutorial"
+									) {
+										presenceData.state = "Watching the tutorial";
+										break;
+									} else if (
+										(gamePlayerState.text as string).includes(
+											"Which answer will get the most votes?"
+										)
+									) {
+										presenceData.state = "Predicting the most popular answer";
+									} else if (
+										(gamePlayerState.text as string).includes(
+											"Vote for the answer that deserves to win."
+										)
+									) {
+										presenceData.state = "Voting on an answer";
+									}
+									break;
+								}
+								case "EnterSingleText": {
+									presenceData.state = "Answering a prompt";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+							}
 							break;
 						}
 						case Games.monstermingle: {
