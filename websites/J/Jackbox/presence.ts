@@ -256,11 +256,12 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("useName"),
 			presence.getSetting<boolean>("useTime"),
 			presence.getSetting<boolean>("useDetails"),
-		]);
+		]),
+		{ href, hostname } = window.location;
 
 	if (useTime) presenceData.startTimestamp = browsingTimestamp;
 
-	switch (window.location.hostname) {
+	switch (hostname) {
 		case "jackbox.tv": {
 			type JackboxStorageLetiable = {
 				tag: string;
@@ -1220,7 +1221,8 @@ presence.on("UpdateData", async () => {
 						case Games["the-wheel"]: {
 							break;
 						}
-						case Games["murder-detectives"]: {
+						case Games["mrder-detectives"]: {
+							// TODO: fix name
 							break;
 						}
 						case Games["apply-yourself"]: {
@@ -1255,6 +1257,16 @@ presence.on("UpdateData", async () => {
 		}
 		case "games.jackbox.tv": {
 			presenceData.details = "Looking at a past game";
+			presenceData.state = document.title;
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"[class*=-artifact] .image"
+			).src;
+			presenceData.buttons = [
+				{
+					label: "View Game",
+					url: href,
+				},
+			];
 			break;
 		}
 		case "www.jackboxgames.com": {
