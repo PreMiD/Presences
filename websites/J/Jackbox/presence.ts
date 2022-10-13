@@ -29,6 +29,16 @@ interface Game {
 	logo: string;
 }
 
+let gameState: string;
+
+if (window.location.hostname === "jackbox.tv") {
+	setInterval(async () => {
+		const logs = await presence.getLogs(/recv <- /),
+			latestLog = logs[logs.length - 1];
+		gameState = JSON.parse(latestLog.slice(8)).result.entities["bc:room"][1].val.state
+	}, 1000);
+}
+
 const Games: Record<string, Game> = {
 	// Party Pack 1
 	ydkj2015: {
@@ -781,23 +791,29 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 4
 						case Games.overdrawn: {
-							const { classList } = document.querySelector<HTMLDivElement>(
-								"#playerRegion + div"
-							);
-							if (classList.contains("Name"))
-								presenceData.state = "Drawing nametag";
-							else if (classList.contains("Lobby"))
-								presenceData.state = "Waiting in lobby";
-							else if (classList.contains("Logo"))
-								presenceData.state = "Waiting";
-							else if (classList.contains("Draw"))
-								presenceData.state = "Drawing";
-							else if (classList.contains("Reaction"))
-								presenceData.state = "Reacting to the drawing";
-							else if (classList.contains("MakeSingleChoice"))
-								presenceData.state = "Voting";
-							else if (classList.contains("EnterSingleText"))
-								presenceData.state = "Entering a name for the drawing";
+							// TODO: Verify
+							switch (gameState) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "Draw": {
+									presenceData.state = "Drawing";
+									break;
+								}
+								case "Reaction": {
+									presenceData.state = "Reacting to the drawings";
+									break;
+								}
+								case "Voting": {
+									presenceData.state = "Voting on the drawings";
+									break;
+								}
+							}
 							break;
 						}
 						case Games.bracketeering: {

@@ -28,6 +28,7 @@
 	"tags": [
 		"games"
 	],
+	"readLogs": true,
 	"settings": [
 		{
 			"id": "useName",
