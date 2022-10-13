@@ -332,116 +332,121 @@ presence.on("UpdateData", async () => {
 					switch (game) {
 						// Party Pack 1
 						case Games.LieSwatter: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".lieswatter-page:not(.pt-page-off)"
-								),
-								{ classList } = currentGamePage;
-							if (classList.contains("state-lobby")) {
+							const { classList } = document.querySelector<HTMLDivElement>(
+								".lieswatter-page:not(.pt-page-off)"
+							);
+							if (classList.contains("state-lobby"))
 								presenceData.state = "Waiting in lobby";
-							} else if (classList.contains("state-answer")) {
+							else if (classList.contains("state-answer"))
 								presenceData.state = "Swatting lies";
-							} else if (classList.contains("state-nothing")) {
+							else if (classList.contains("state-nothing"))
 								presenceData.state = "Waiting for other players";
-							}
 							break;
 						}
 						case Games.WordSpud: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".wordspud-page:not(.pt-page-off)"
-								),
-								{ classList } = currentGamePage;
-							if (classList.contains("state-waiting")) {
+							const { classList } = document.querySelector<HTMLDivElement>(
+								".wordspud-page:not(.pt-page-off)"
+							);
+							if (classList.contains("state-waiting"))
 								presenceData.state = "Waiting in lobby";
-							} else if (classList.contains("state-startbutton")) {
+							else if (classList.contains("state-startbutton"))
 								presenceData.state = "Waiting for other players to join";
-							} else if (classList.contains("state-writing")) {
+							else if (classList.contains("state-writing"))
 								presenceData.state = "Writing something";
-							} else if (classList.contains("state-vote")) {
+							else if (classList.contains("state-vote"))
 								presenceData.state = "Voting on a word";
-							} else if (classList.contains("state-vote-wait")) {
+							else if (classList.contains("state-vote-wait"))
 								presenceData.state = "Being judged";
-							} else if (classList.contains("state-nothing")) {
+							else if (classList.contains("state-nothing"))
 								presenceData.state = "Waiting";
-							} else if (classList.contains("state-voted")) {
+							else if (classList.contains("state-voted"))
 								presenceData.state = "Waiting for other players to vote";
-							} else if (classList.contains("state-gameover")) {
+							else if (classList.contains("state-gameover"))
 								presenceData.state = "Game over";
-							}
 							break;
 						}
 						case Games.YouDontKnowJack2015: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".ydkj-page:not(.pt-page-off)"
-								),
-								{ classList } = currentGamePage;
-							if (classList.contains("state-default")) {
+							const { classList } = document.querySelector<HTMLDivElement>(
+								".ydkj-page:not(.pt-page-off)"
+							);
+							if (classList.contains("state-default"))
 								presenceData.state = "Waiting in lobby";
-							} else if (classList.contains("state-jack-attack")) {
+							else if (classList.contains("state-jack-attack"))
 								presenceData.state = "Playing Jack Attack";
-							}
 							break;
 						}
 						case Games.Drawful: {
 							const currentGamePage = document.querySelector<HTMLDivElement>(
 									".drawful-page:not(.pt-page-off)"
 								),
-								{ classList } = currentGamePage;
-							if (classList.contains("state-lobby")) {
+								{ classList, id } = currentGamePage;
+							if (classList.contains("state-lobby"))
 								presenceData.state = "Waiting in lobby";
-							} else if (
+							else if (
 								classList.contains("state-lyingdone") ||
 								classList.contains("state-nothing") ||
 								classList.contains("state-drawing-done")
-							) {
+							)
 								presenceData.state = "Waiting";
-							} else if (classList.contains("state-round")) {
+							else if (classList.contains("state-round")) {
 								presenceData.state =
 									currentGamePage.querySelector("span").textContent;
 							} else if (classList.contains("state-drawing-sent")) {
 								presenceData.state =
 									"Waiting for other players to finish drawing";
-							} else if (classList.contains("state-enterlie")) {
+							} else if (classList.contains("state-enterlie"))
 								presenceData.state = "Entering a lie";
-							} else if (classList.contains("state-chooselie")) {
+							else if (classList.contains("state-chooselie"))
 								presenceData.state = "Looking for the truth";
-							} else if (classList.contains("state-chooselikes")) {
+							else if (classList.contains("state-chooselikes"))
 								presenceData.state = "Liking lies";
-							} else if (classList.contains("state-liereceived")) {
+							else if (classList.contains("state-liereceived"))
 								presenceData.state = "Waiting for other players to enter lies";
-							} else if (classList.contains("state-notchoosing")) {
+							else if (classList.contains("state-notchoosing")) {
 								presenceData.state =
 									"Waiting for other players to discover the truth";
-							} else if (classList.contains("state-draw")) {
+							} else if (classList.contains("state-draw"))
 								presenceData.state = "Drawing something";
-							} else if (classList.contains("state-audience-choose")) {
+							else if (classList.contains("state-audience-choose"))
 								presenceData.state = "Choosing a lie";
-							} else if (currentGamePage.id === "state-ugc") {
+							else if (id === "state-ugc")
 								presenceData.state = "Creating a custom game";
-							} else if (classList.contains("state-audience")) {
+							else if (classList.contains("state-audience"))
 								presenceData.state = "In the audience";
-							}
 							break;
 						}
 						// Party Pack 2
 						case Games.Bidiots: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".auction-page:not(.pt-page-off)"
-								),
-								{ id } = currentGamePage;
-							if (id === "state-lobby") {
-								presenceData.state = "Waiting in lobby";
-							} else if (id === "state-logo") {
-								presenceData.state = "Watching tutorial";
-							} else if (id === "state-draw") {
-								presenceData.state = "Creating a piece of art";
-							} else if (id === "state-done-drawing") {
-								presenceData.state =
-									"Waiting for other players to finish drawing";
-							} else if (id === "state-auction") {
-								// TODO: Add current bid
-								presenceData.state = "Bidding on art";
-							} else if (id === "state-post-game") {
-								presenceData.state = "Viewing results";
+							const { id } = document.querySelector<HTMLDivElement>(
+								".auction-page:not(.pt-page-off)"
+							);
+							switch (id) {
+								case "state-lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "state-logo": {
+									presenceData.state = "Watching tutorial";
+									break;
+								}
+								case "state-draw": {
+									presenceData.state = "Creating a piece of art";
+									break;
+								}
+								case "state-done-drawing": {
+									presenceData.state =
+										"Waiting for other players to finish drawing";
+									break;
+								}
+								case "state-auction": {
+									// TODO: Add current bid
+									presenceData.state = "Bidding on art";
+									break;
+								}
+								case "state-post-game": {
+									presenceData.state = "Viewing results";
+									break;
+								}
 							}
 							// TODO: Add screw state
 							break;
@@ -451,9 +456,9 @@ presence.on("UpdateData", async () => {
 									".fibbage-page:not(.pt-page-off)"
 								),
 								{ classList } = currentGamePage;
-							if (classList.contains("state-lobby")) {
+							if (classList.contains("state-lobby"))
 								presenceData.state = "Waiting in lobby";
-							} else if (classList.contains("state-round")) {
+							else if (classList.contains("state-round")) {
 								presenceData.state =
 									currentGamePage.querySelector("p").textContent;
 							} else if (classList.contains("state-notchoosing")) {
@@ -462,161 +467,210 @@ presence.on("UpdateData", async () => {
 										.querySelector("span")
 										.textContent.match(/^(.*?) is picking a category$/)[1]
 								} to pick a category`;
-							} else if (classList.contains("state-nothing")) {
+							} else if (classList.contains("state-nothing"))
 								presenceData.state = "Waiting";
-							} else if (classList.contains("state-enterlie")) {
+							else if (classList.contains("state-enterlie"))
 								presenceData.state = "Entering a lie";
-							} else if (classList.contains("state-lyingdone")) {
+							else if (classList.contains("state-lyingdone"))
 								presenceData.state = "Lying done";
-							} else if (classList.contains("state-liereceived")) {
+							else if (classList.contains("state-liereceived"))
 								presenceData.state = "Waiting for other players to enter lies";
-							} else if (
+							else if (
 								classList.contains("state-chooselie") ||
 								classList.contains("state-audience-chooselie")
-							) {
+							)
 								presenceData.state = "Finding the truth";
-							} else if (
+							else if (
 								classList.contains("state-chooselikes") ||
 								classList.contains("state-audience-chooselikes")
-							) {
+							)
 								presenceData.state = "Liking lies";
-							} else if (classList.contains("state-choosing")) {
+							else if (classList.contains("state-choosing"))
 								presenceData.state = "Choosing a category";
-							} else if (classList.contains("state-pickbloop")) {
+							else if (classList.contains("state-pickbloop"))
 								presenceData.state = "Chossing a sound";
-							} else if (classList.contains("state-audience-join")) {
+							else if (classList.contains("state-audience-join"))
 								presenceData.state = "Joining audience";
-							} else if (classList.contains("state-audience-score")) {
+							else if (classList.contains("state-audience-score"))
 								presenceData.state = "Viewing audience scores";
-							}
 							break;
 						}
 						case Games.Quiplash: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".quiplash-page:not(.pt-page-off)"
-								),
-								{ id } = currentGamePage;
-							if (id === "state-lobby") {
-								presenceData.state = "Waiting in lobby";
-							} else if (id === "state-logo") {
-								presenceData.state = "Watching tutorial";
-							} else if (id === "state-round") {
-								presenceData.state = "TODO"; // Check image content
-							} else if (id === "state-answer-question-audience") {
-								presenceData.state = "Writing audience quip";
-							} else if (id === "state-answer-question") {
-								presenceData.state = "Writing quip";
-							} else if (id === "state-done-answering") {
-								presenceData.state = "Waiting for other players to answer";
-							} else if (id === "state-vote") {
-								// TODO: Add question and choices
-								presenceData.state = "Voting";
+							const { id } = document.querySelector<HTMLDivElement>(
+								".quiplash-page:not(.pt-page-off)"
+							);
+							switch (id) {
+								case "state-lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "state-logo": {
+									presenceData.state = "Watching tutorial";
+									break;
+								}
+								case "state-round": {
+									presenceData.state = "TODO"; // Check image content
+									break;
+								}
+								case "state-answer-question-audience": {
+									presenceData.state = "Writing audience quip";
+									break;
+								}
+								case "state-answer-question": {
+									presenceData.state = "Writing quip";
+									break;
+								}
+								case "state-done-answering": {
+									presenceData.state = "Waiting for other players to answer";
+									break;
+								}
+								case "state-vote": {
+									// TODO: Add question and choices
+									presenceData.state = "Voting";
+									break;
+								}
 							}
 							break;
 						}
 						case Games.BompCorp: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".bombintern-page:not(.pt-page-off)"
-								),
-								{ classList } = currentGamePage;
-							if (classList.contains("state-lobby")) {
+							const { classList } = document.querySelector<HTMLDivElement>(
+								".bombintern-page:not(.pt-page-off)"
+							);
+							if (classList.contains("state-lobby"))
 								presenceData.state = "Waiting in lobby";
-							} else if (classList.contains("state-dayend")) {
+							else if (classList.contains("state-dayend"))
 								presenceData.state = "Day end";
-							} else if (classList.contains("state-gameover")) {
+							else if (classList.contains("state-gameover"))
 								presenceData.state = "Game over";
-							} else if (classList.contains("state-nothing")) {
+							else if (classList.contains("state-nothing"))
 								presenceData.state = "Waiting";
-							} else if (classList.contains("state-message")) {
+							else if (classList.contains("state-message"))
 								presenceData.state = "Reading a message";
-							} else if (classList.contains("state-smashpuzzle")) {
+							else if (classList.contains("state-smashpuzzle"))
 								presenceData.state = "Defusing a smash puzzle bomb";
-							} else if (classList.contains("state-wiredbomb")) {
+							else if (classList.contains("state-wiredbomb"))
 								presenceData.state = "Defusing a wired bomb";
-							} else if (classList.contains("state-coffeebomb")) {
+							else if (classList.contains("state-coffeebomb"))
 								presenceData.state = "Defusing a coffee bomb";
-							} else if (classList.contains("state-filingbomb")) {
+							else if (classList.contains("state-filingbomb"))
 								presenceData.state = "Defusing a filing bomb";
-							} else if (classList.contains("state-keypadbomb")) {
+							else if (classList.contains("state-keypadbomb"))
 								presenceData.state = "Defusing a keypad bomb";
-							} else if (classList.contains("state-copierbomb")) {
+							else if (classList.contains("state-copierbomb"))
 								presenceData.state = "Defusing a copier bomb";
-							}
 							break;
 						}
 						case Games.Earwax: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".earwax-page:not(.pt-page-off)"
-								),
-								{ id, classList } = currentGamePage;
-							if (id === "state-lobby") {
-								presenceData.state = "Waiting in lobby";
-							} else if (id === "state-intro") {
-								presenceData.state = "Watching tutorial";
-							} else if (id === "state-logo" || id === "state-audience-wait") {
-								presenceData.state = "Waiting";
-							} else if (classList.contains("state-choosing")) {
-								presenceData.state = "Choosing a prompt";
-							} else if (classList.contains("state-notchoosing")) {
-								presenceData.state = "Waiting for the judge to choose a prompt";
-							} else if (classList.contains("state-notselectingsound")) {
-								presenceData.state = "Waiting for players to choose a sound";
-							} else if (
-								classList.contains("state-selectingsound") ||
-								id === "state-answer-question-audience"
-							) {
-								presenceData.state = "Choosing a sound";
-							} else if (classList.contains("state-audience-join")) {
-								presenceData.state = "Joining the audience";
-							} else if (id === "state-vote") {
-								presenceData.state = "Voting on a sound";
+							const { id, classList } = document.querySelector<HTMLDivElement>(
+								".earwax-page:not(.pt-page-off)"
+							);
+							switch (id) {
+								case "state-lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "state-intro": {
+									presenceData.state = "Watching tutorial";
+									break;
+								}
+								case "state-logo":
+								case "state-audience-wait": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								default:
+									if (classList.contains("state-choosing"))
+										presenceData.state = "Choosing a prompt";
+									else if (classList.contains("state-notchoosing")) {
+										presenceData.state =
+											"Waiting for the judge to choose a prompt";
+									} else if (classList.contains("state-notselectingsound")) {
+										presenceData.state =
+											"Waiting for players to choose a sound";
+									} else if (
+										classList.contains("state-selectingsound") ||
+										id === "state-answer-question-audience"
+									)
+										presenceData.state = "Choosing a sound";
+									else if (classList.contains("state-audience-join"))
+										presenceData.state = "Joining the audience";
+									else if (id === "state-vote")
+										presenceData.state = "Voting on a sound";
 							}
 							break;
 						}
 						// Party Pack 3
 						case Games.TeeKO: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".awshirt-page:not(.pt-page-off)"
-								),
-								{ id } = currentGamePage;
-							if (id === "state-lobby") {
-								presenceData.state = "Waiting in lobby";
-							} else if (id === "state-logo") {
-								presenceData.state = "Waiting";
-							} else if (id === "state-audience") {
-								presenceData.state = "In the audience";
-							} else if (id === "state-draw") {
-								presenceData.state = "Drawing a shirt";
-							} else if (id === "state-drawing-done") {
-								presenceData.state =
-									"Waiting for other players to finish drawing their shirt";
-							} else if (id === "state-input") {
-								presenceData.state = "Creating taglines";
-							} else if (id === "state-prompts-done") {
-								presenceData.state =
-									"Waiting for other players to finish their taglines";
-							} else if (id === "state-shirt") {
-								presenceData.state = "Creating a t-shirt";
-							} else if (id === "state-shirt-done") {
-								presenceData.state =
-									"Waiting for other players to finish their t-shirts";
-							} else if (id === "state-vote") {
-								presenceData.state = "Voting on a t-shirt";
-							} else if (id === "state-voting-done") {
-								presenceData.state =
-									"Waiting for other players to finish voting";
-							} else if (id === "state-audience-suggestions") {
-								presenceData.state = "Entering a suggestion";
-							} else if (id === "state-round") {
-								presenceData.state = "TODO";
-							} else if (
-								id === "state-answer-question-audience" ||
-								id === "state-answer-question"
-							) {
-								presenceData.state = "Answering a question";
-							} else if (id === "state-done-answering") {
-								presenceData.state =
-									"Waiting for other players to finish answering";
+							const { id } = document.querySelector<HTMLDivElement>(
+								".awshirt-page:not(.pt-page-off)"
+							);
+							switch (id) {
+								case "state-lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "state-logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "state-audience": {
+									presenceData.state = "In the audience";
+									break;
+								}
+								case "state-draw": {
+									presenceData.state = "Drawing a shirt";
+									break;
+								}
+								case "state-drawing-done": {
+									presenceData.state =
+										"Waiting for other players to finish drawing their shirt";
+									break;
+								}
+								case "state-input": {
+									presenceData.state = "Creating taglines";
+									break;
+								}
+								case "state-prompts-done": {
+									presenceData.state =
+										"Waiting for other players to finish their taglines";
+									break;
+								}
+								case "state-shirt": {
+									presenceData.state = "Creating a t-shirt";
+									break;
+								}
+								case "state-shirt-done": {
+									presenceData.state =
+										"Waiting for other players to finish their t-shirts";
+									break;
+								}
+								case "state-vote": {
+									presenceData.state = "Voting on a t-shirt";
+									break;
+								}
+								case "state-voting-done": {
+									presenceData.state =
+										"Waiting for other players to finish voting";
+									break;
+								}
+								case "state-audience-suggestions": {
+									presenceData.state = "Entering a suggestion";
+									break;
+								}
+								case "state-round": {
+									presenceData.state = "TODO";
+									break;
+								}
+								case "state-answer-question-audience":
+								case "state-answer-question": {
+									presenceData.state = "Answering a question";
+									break;
+								}
+								case "state-done-answering": {
+									presenceData.state =
+										"Waiting for other players to finish answering";
+									break;
+								}
 							}
 							// TODO: Verify
 							break;
@@ -626,26 +680,25 @@ presence.on("UpdateData", async () => {
 									".fakinit-page:not(.pt-page-off)"
 								),
 								{ classList } = currentGamePage;
-							if (classList.contains("state-lobby")) {
+							if (classList.contains("state-lobby"))
 								presenceData.state = "Waiting in lobby";
-							} else if (classList.contains("state-nothing")) {
+							else if (classList.contains("state-nothing"))
 								presenceData.state = "Waiting";
-							} else if (classList.contains("state-gameplay")) {
+							else if (classList.contains("state-gameplay"))
 								presenceData.state = "Following instructions";
-							} else if (classList.contains("state-skip-instructions")) {
+							else if (classList.contains("state-skip-instructions"))
 								presenceData.state = "Watching the tutorial";
-							} else if (classList.contains("state-categories")) {
+							else if (classList.contains("state-categories"))
 								presenceData.state = "Choosing a category";
-							} else if (classList.contains("state-notchoosing")) {
+							else if (classList.contains("state-notchoosing"))
 								presenceData.state = "Waiting for a category to be chosen";
-							} else if (classList.contains("state-round")) {
+							else if (classList.contains("state-round")) {
 								presenceData.state =
 									currentGamePage.querySelector("p").textContent;
-							} else if (classList.contains("state-vote")) {
+							} else if (classList.contains("state-vote"))
 								presenceData.state = "Voting on a player";
-							} else if (classList.contains("state-vote-locked")) {
+							else if (classList.contains("state-vote-locked"))
 								presenceData.state = "Viewing vote results";
-							}
 							break;
 						}
 						case Games.Guesspionage: {
@@ -653,13 +706,13 @@ presence.on("UpdateData", async () => {
 									".pollposition-page:not(.pt-page-off)"
 								),
 								{ classList } = currentGamePage;
-							if (classList.contains("state-lobby")) {
+							if (classList.contains("state-lobby"))
 								presenceData.state = "Waiting in lobby";
-							} else if (classList.contains("state-post-lobby")) {
+							else if (classList.contains("state-post-lobby"))
 								presenceData.state = "Watching the tutorial";
-							} else if (classList.contains("state-nothing")) {
+							else if (classList.contains("state-nothing"))
 								presenceData.state = "Waiting";
-							} else if (classList.contains("state-round")) {
+							else if (classList.contains("state-round")) {
 								presenceData.state =
 									currentGamePage.querySelector("p").textContent;
 							} else if (
@@ -669,57 +722,70 @@ presence.on("UpdateData", async () => {
 								classList.contains("state-waitforaudience") ||
 								classList.contains("state-upordown-sent") ||
 								classList.contains("state-waitforallpercentages")
-							) {
+							)
 								presenceData.state = "Waiting for other players to decide";
-							} else if (classList.contains("state-choosecategory")) {
+							else if (classList.contains("state-choosecategory"))
 								presenceData.state = "Choosing a category";
-							} else if (classList.contains("state-waitforcategory")) {
+							else if (classList.contains("state-waitforcategory"))
 								presenceData.state = "Waiting for a category to be chosen";
-							} else if (classList.contains("state-showquestion")) {
+							else if (classList.contains("state-showquestion"))
 								presenceData.state = "Viewing a survey prompt";
-							} else if (classList.contains("state-waitforpercentage")) {
-								presenceData.state = "Viewing true percentage";
-							} else if (classList.contains("state-chooseupordown")) {
+							else if (classList.contains("state-chooseupordown")) {
 								presenceData.state =
 									"Deciding if the true percentage is higher or lower";
-							} else if (classList.contains("state-choosemultiple")) {
+							} else if (classList.contains("state-choosemultiple"))
 								presenceData.state = "Choosing multiple choices";
-							} else if (
+							else if (
 								classList.contains("state-audience-choice-sent") ||
 								classList.contains("state-waitformultiple")
 							) {
 								presenceData.state =
 									"Waiting for other players to choose their choices";
-							} else if (classList.contains("state-audience-wait")) {
+							} else if (classList.contains("state-audience-wait"))
 								presenceData.state = "In the audience";
-							} else if (classList.contains("state-audience-chose-option")) {
+							else if (classList.contains("state-audience-chose-option"))
 								presenceData.state = "Choosing an option in the audience";
-							} else if (classList.contains("state-choosecharacter")) {
+							else if (classList.contains("state-choosecharacter"))
 								presenceData.state = "Choosing a character";
-							}
 							break;
 						}
 						case Games.TriviaDeathParty: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".triviadeath-page:not(.pt-page-off)"
-								),
-								{ id } = currentGamePage;
-							if (id === "state-lobby") {
-								presenceData.state = "Waiting in lobby";
-							} else if (id === "state-logo") {
-								presenceData.state = "Waiting";
-							} else if (id === "state-make-single-choice") {
-								presenceData.state = "Answering a single choice question";
-							} else if (id === "state-make-many-choices") {
-								presenceData.state = "Answering a multiple choice question";
-							} else if (id === "state-enter-single-text") {
-								presenceData.state = "Answering a text prompt";
-							} else if (id === "state-enter-single-drawing") {
-								presenceData.state = "Drawing a picture";
-							} else if (id === "state-grid") {
-								presenceData.state = "Playing a grid game";
-							} else if (id === "state-game-results") {
-								presenceData.state = "Viewing game results";
+							const { id } = document.querySelector<HTMLDivElement>(
+								".triviadeath-page:not(.pt-page-off)"
+							);
+							switch (id) {
+								case "state-lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "state-logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "state-make-single-choice": {
+									presenceData.state = "Answering a single choice question";
+									break;
+								}
+								case "state-make-many-choices": {
+									presenceData.state = "Answering a multiple choice question";
+									break;
+								}
+								case "state-enter-single-text": {
+									presenceData.state = "Answering a text prompt";
+									break;
+								}
+								case "state-enter-single-drawing": {
+									presenceData.state = "Drawing a picture";
+									break;
+								}
+								case "state-grid": {
+									presenceData.state = "Playing a grid game";
+									break;
+								}
+								case "state-game-results": {
+									presenceData.state = "Viewing game results";
+									break;
+								}
 							}
 							break;
 						}
@@ -820,12 +886,9 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 					}
-				} else {
-					presenceData.state = playerName;
-				}
-			} else {
-				presenceData.details = "Idle";
-			}
+				} else presenceData.state = playerName;
+			} else presenceData.details = "Idle";
+
 			break;
 		}
 		case "games.jackbox.tv": {
