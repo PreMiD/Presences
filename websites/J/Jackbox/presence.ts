@@ -19,9 +19,8 @@ let gameState: {
 
 if (window.location.hostname === "jackbox.tv") {
 	setInterval(async () => {
-		const logs = await presence.getLogs(/recv <- .*?"playerName":/s),
-			latestLog = logs[logs.length - 1];
-		gameState = JSON.parse(latestLog.slice(8)).result.val;
+		const logs = await presence.getLogs(/recv <- .*?"playerName":/s);
+		gameState = JSON.parse(logs[logs.length - 1].slice(8)).result.val;
 	}, 1000);
 }
 
@@ -252,11 +251,8 @@ presence.on("UpdateData", async () => {
 				if (useName) {
 					const { playerName } = gameState;
 					if (playerName) {
-						if (useDetails) {
-							presenceData.details += ` as ${playerName}`;
-						} else {
-							presenceData.state = `as ${playerName}`;
-						}
+						if (useDetails) presenceData.details += ` as ${playerName}`;
+						else presenceData.state = `as ${playerName}`;
 					}
 				}
 				if (useDetails) {
@@ -745,8 +741,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const text = gameState.text as string;
-									switch (text) {
+									switch (gameState.text as string) {
 										case "Which player's addition was better?": {
 											presenceData.state = "Voting for the best addition";
 											break;
@@ -782,11 +777,12 @@ presence.on("UpdateData", async () => {
 									"#playerRegion + div"
 								),
 								{ classList, textContent } = currentGamePage;
-							if (playerIcon)
+							if (playerIcon) {
 								presenceData.smallImageKey =
 									getComputedStyle(playerIcon).backgroundImage.match(
 										/^url\("(.*)"\)$/
 									)[1];
+							}
 
 							if (classList.contains("Lobby"))
 								presenceData.state = "Waiting in lobby";
@@ -806,10 +802,11 @@ presence.on("UpdateData", async () => {
 										currentGamePage.querySelector<HTMLDivElement>(
 											".makeSingleChoiceDone"
 										).style.display === "none"
-									)
+									) {
 										presenceData.state =
 											"Voting for the most ridiculous answer";
-									else presenceData.state = "Waiting for other players to vote";
+									} else
+										presenceData.state = "Waiting for other players to vote";
 								} else if (
 									currentGamePage.querySelector<HTMLDivElement>(
 										".aboveBlackBox"
@@ -821,10 +818,10 @@ presence.on("UpdateData", async () => {
 									currentGamePage.querySelector<HTMLFormElement>(
 										".enterSingleTextForm"
 									).style.display === "none"
-								)
+								) {
 									presenceData.state =
 										"Waiting for other players to answer their prompts";
-								else if (
+								} else if (
 									currentGamePage.querySelector<HTMLDivElement>(
 										".finalRoundImage"
 									) ||
