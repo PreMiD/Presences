@@ -9,12 +9,14 @@ interface Game {
 }
 
 let gamePlayerState: {
-		playerName: string;
+		playerName?: string;
+		username?: string;
 		state: string;
 		[x: string]: unknown;
 	} = {
 		playerName: null,
 		state: null,
+		username: null,
 	},
 	gameRoomState: {
 		state: string;
@@ -39,15 +41,12 @@ if (window.location.hostname === "jackbox.tv") {
 							lastLog.match(/"key": "bc:customer:([a-z0-9-]+)",/s)[1]
 						}`
 					][1].val;
-			} else {
-				gamePlayerState = JSON.parse(lastLog.slice(8)).result.val;
-			}
+			} else gamePlayerState = JSON.parse(lastLog.slice(8)).result.val;
 		}
 		if (roomStateLogs.length > 0) {
 			const lastLog = roomStateLogs[roomStateLogs.length - 1];
-			if (!/recv <- .*?("key": "bc:customer:[a-z0-9-]+",)/s.test(lastLog)) {
+			if (!/recv <- .*?("key": "bc:customer:[a-z0-9-]+",)/s.test(lastLog))
 				gameRoomState = JSON.parse(lastLog.slice(8)).result.val;
-			}
 		}
 	}, 1500);
 }
@@ -286,10 +285,14 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = logo;
 				presenceData.details = `Playing ${name}`;
 				if (useName) {
-					const { playerName } = gamePlayerState;
-					if (playerName) {
-						if (useDetails) presenceData.details += ` as ${playerName}`;
-						else presenceData.state = `as ${playerName}`;
+					const { playerName, username, playerInfo } = gamePlayerState,
+						realUsername =
+							playerName ??
+							username ??
+							(playerInfo as { username: string })?.username;
+					if (realUsername) {
+						if (useDetails) presenceData.details += ` as ${realUsername}`;
+						else presenceData.state = `as ${realUsername}`;
 					}
 				}
 				if (useDetails) {
@@ -820,15 +823,14 @@ presence.on("UpdateData", async () => {
 										(gamePlayerState.text as string).includes(
 											"Which answer will get the most votes?"
 										)
-									) {
+									)
 										presenceData.state = "Predicting the most popular answer";
-									} else if (
+									else if (
 										(gamePlayerState.text as string).includes(
 											"Vote for the answer that deserves to win."
 										)
-									) {
+									)
 										presenceData.state = "Voting on an answer";
-									}
 									break;
 								}
 								case "EnterSingleText": {
@@ -873,13 +875,10 @@ presence.on("UpdateData", async () => {
 								}
 								case "chat": {
 									const mode = (gamePlayerState.chat as { mode: string })?.mode;
-									if (mode === "chat") {
-										presenceData.state = "Chatting";
-									} else if (mode === "browse") {
+									if (mode === "chat") presenceData.state = "Chatting";
+									else if (mode === "browse")
 										presenceData.state = "Browsing messages";
-									} else {
-										presenceData.state = "Choosing a date";
-									}
+									else presenceData.state = "Choosing a date";
 									break;
 								}
 							}
@@ -980,9 +979,9 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "CategorySelection": {
-									if (gamePlayerState.isChoosing) {
+									if (gamePlayerState.isChoosing)
 										presenceData.state = "Choosing a category";
-									} else {
+									else {
 										presenceData.state =
 											"Waiting for another player to choose a category";
 									}
@@ -996,6 +995,20 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.slingshoot: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "Shoot": {
+									presenceData.state = "Shooting";
+									break;
+								}
+							}
 							break;
 						}
 						case Games.patentlystupid: {
@@ -1005,6 +1018,37 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.ydkj2018: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "MakeSingleChoice": {
+									switch (gamePlayerState.roundType) {
+										case "Shortie": {
+											presenceData.state = "Answering a short trivia question";
+											break;
+										}
+										case "DisOrDat": {
+											presenceData.state = "Answering a dis-or-dat question";
+											break;
+										}
+										case "PlayersChoice": {
+											presenceData.state = "Choosing a type of question";
+											break;
+										}
+										case "JackAttack": {
+											presenceData.state = "Playing Jack Attack";
+											break;
+										}
+									}
+									break;
+								}
+							}
 							break;
 						}
 						// Party Pack 6
