@@ -3,36 +3,18 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
-type LayoutCallback = () => string;
-const LayoutVersion: Record<string, LayoutCallback> = {
-	New: () => "New",
-	Legacy: () => document.querySelector("#playername").textContent,
-	CivicDoodle: () => document.querySelector("#playername #body").textContent,
-	Dictionarium: () =>
-		`${document.querySelector("#playericon").className.split("_")[1]}${document
-			.querySelector("#playername")
-			.textContent.toLowerCase()}`,
-	VeryLegacy: () => document.querySelector("#player").children[0].textContent,
-	Guesspionage: () => document.querySelector("#player").children[1].textContent,
-	DevilAndDetails: () => document.querySelector(".player-text").textContent,
-	// TODO: Find similarities?
-	DrawfulAnimate: () => document.querySelector(".header").textContent,
-	EnormousWheel: () => document.querySelector(".player.name").textContent,
-	JobJob: () => document.querySelector(".name").textContent,
-	PollMine: () => "",
-	WeaponsDrawn: () => document.querySelector(".avatar.header").textContent,
-};
-
 interface Game {
 	name: string;
-	layout?: LayoutCallback;
 	logo: string;
 }
 
 let gameState: {
-	playerName: string,
-	state: string,
-	[x: string]: unknown
+	playerName: string;
+	state: string;
+	[x: string]: unknown;
+} = {
+	playerName: null,
+	state: null,
 };
 
 if (window.location.hostname === "jackbox.tv") {
@@ -47,251 +29,203 @@ const Games: Record<string, Game> = {
 	// Party Pack 1
 	ydkj2015: {
 		name: "You Don't Know Jack 2015",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/EGnX1E5.png",
 	},
 	drawful2: {
 		name: "Drawful 2",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/TOaYCE3.png",
 	},
 	drawful2international: {
 		name: "Drawful 2 International",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/TOaYCE3.png",
 	},
 	drawful: {
 		name: "Drawful",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/TOaYCE3.png",
 	},
 	wordspud: {
 		name: "Word Spud",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/gFUB4EX.png",
 	},
 	lieswatter: {
 		name: "Lie Swatter",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/PavDjzP.png",
 	},
 	// Party Pack 2
 	auction: {
 		name: "Bidiots",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/CMcGDrM.png",
 	},
 	bombintern: {
 		name: "Bomb Corp",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/XkqOv6o.png",
 	},
 	earwax: {
 		name: "Earwax",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/oEidNn6.png",
 	},
 	fibbage: {
 		name: "Fibbage XL",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/LxAtHuy.png",
 	},
 	fibbage2: {
 		name: "Fibbage 2",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/LxAtHuy.png",
 	},
 	// Party Pack 3
 	awshirt: {
 		name: "Tee K.O.",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/wGbJhoR.png",
 	},
 	fakinit: {
 		name: "Fakin' It",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/nDqnyqV.png",
 	},
 	pollposition: {
 		name: "Guesspionage",
-		layout: LayoutVersion.Guesspionage,
 		logo: "https://i.imgur.com/nDqnyqV.png",
 	},
 	quiplash: {
 		name: "Quiplash XL",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
 	quiplash2: {
 		name: "Quiplash 2",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
 	"quiplash2-international": {
 		name: "Quiplash 2 Interlational",
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
 	triviadeath: {
 		name: "Trivia M Party", // TODO: Fix name
-		layout: LayoutVersion.VeryLegacy,
 		logo: "https://i.imgur.com/zHOvymB.png",
 	},
 	// Party Pack 4
 	overdrawn: {
 		name: "Civic Doodle",
 		logo: "https://i.imgur.com/6CBskbM.png",
-		layout: LayoutVersion.CivicDoodle,
 	},
 	bracketeering: {
 		name: "Bracketeering",
 		logo: "https://i.imgur.com/oJJpQqi.png",
-		layout: LayoutVersion.Legacy,
 	},
 	monstermingle: {
 		name: "Monster Seeking Monster",
 		logo: "https://i.imgur.com/CPkaxX3.png",
-		layout: LayoutVersion.Legacy,
 	},
 	survivetheinternet: {
 		name: "Survive the Internet",
 		logo: "https://i.imgur.com/eXCzZ2e.png",
-		layout: LayoutVersion.Legacy,
 	},
 	fibbage3: {
 		name: "Fibbage 3",
 		logo: "https://i.imgur.com/eTsm2zC.png",
-		layout: LayoutVersion.Legacy,
 	},
 	// Party Pack 5
 	splittheroom: {
 		name: "Split the Room",
 		logo: "https://i.imgur.com/YyhOPAp.png",
-		layout: LayoutVersion.Legacy,
 	},
 	slingshoot: {
 		name: "Zeeple Dome",
 		logo: "https://i.imgur.com/QqEKHgG.png",
-		layout: LayoutVersion.Legacy,
 	},
 	patentlystupid: {
 		name: "Patently Stupid",
 		logo: "https://i.imgur.com/yGEE0Aw.png",
-		layout: LayoutVersion.Legacy,
 	},
 	rapbattle: {
 		name: "Mad Verse City",
 		logo: "https://i.imgur.com/Up8Paw8.png",
-		layout: LayoutVersion.Legacy,
 	},
 	ydkj2018: {
 		name: "You Don't Know Jack: Full Stream",
 		logo: "https://i.imgur.com/Li8TLXI.png",
-		layout: LayoutVersion.Legacy,
 	},
 	// Party Pack 6
 	pushthebutton: {
 		name: "Push the Button",
 		logo: "https://i.imgur.com/OhgGmMQ.png",
-		layout: LayoutVersion.Legacy,
 	},
 	jokeboat: {
 		name: "Joke Boat",
 		logo: "https://i.imgur.com/Cih6bqA.png",
-		layout: LayoutVersion.Legacy,
 	},
 	rolemodels: {
 		name: "Role Models",
 		logo: "https://i.imgur.com/sETBCgc.png",
-		layout: LayoutVersion.Legacy,
 	},
 	triviadeath2: {
 		name: "Trivia M Party 2", // TODO: Fix name
 		logo: "https://i.imgur.com/9MmGVGD.png",
-		layout: LayoutVersion.Legacy,
 	},
 	ridictionary: {
 		name: "Dictionarium",
 		logo: "https://i.imgur.com/8S0aSTw.png",
-		layout: LayoutVersion.Dictionarium,
 	},
 	// Party Pack 7
 	quiplash3: {
 		name: "Quiplash 3",
 		logo: "https://i.imgur.com/Jds4R56.png",
-		layout: LayoutVersion.Legacy,
 	},
 	"jackbox-talks": {
 		name: "Talking Points",
 		logo: "https://i.imgur.com/8Amy9Di.png",
-		layout: LayoutVersion.Legacy,
 	},
 	"blanky-blank": {
 		name: "Blather 'Round",
 		logo: "https://i.imgur.com/qLW2Fft.png",
-		layout: LayoutVersion.Legacy,
 	},
 	everyday: {
 		name: "The Devils and the Details",
 		logo: "https://i.imgur.com/tXkh58c.png",
-		layout: LayoutVersion.DevilAndDetails,
 	},
 	worldchamps: {
 		name: "Champ'd Up",
 		logo: "https://i.imgur.com/KnAS7yD.png",
-		layout: LayoutVersion.Legacy,
 	},
 	// Party Pack 8
 	"the-wheel": {
 		name: "The Wheel of Enormous Proportions",
 		logo: "https://i.imgur.com/KnAS7yD.png",
-		layout: LayoutVersion.EnormousWheel,
 	},
 	"murder-detectives": {
 		name: "Weapons Drawn",
 		logo: "https://i.imgur.com/yRXmXbf.png",
-		layout: LayoutVersion.WeaponsDrawn,
 	},
 	"apply-yourself": {
 		name: "Job Job",
 		logo: "https://i.imgur.com/FfZYRGL.png",
-		layout: LayoutVersion.JobJob,
 	},
 	"drawful-animate": {
 		name: "Drawful Animate",
 		logo: "https://i.imgur.com/NtRvc93.png",
-		layout: LayoutVersion.DrawfulAnimate,
 	},
 	"survey-bomb": {
 		name: "The Poll Mine",
 		logo: "https://i.imgur.com/o4aaUox.png",
-		layout: LayoutVersion.PollMine,
 	},
 	// Party Pack 9
 	fourbage: {
 		name: "Fibbage 4",
 		logo: "TODO",
-		layout: LayoutVersion.New,
 	},
 	lineup: {
 		name: "Quixort",
 		logo: "TODO",
-		layout: LayoutVersion.New,
 	},
 	"range-game": {
 		name: "Nonsensory",
 		logo: "TODO",
-		layout: LayoutVersion.New,
 	},
 	"antique-freak": {
 		name: "Junktopia",
 		logo: "TODO",
-		layout: LayoutVersion.New,
 	},
 	htmf: {
 		name: "Roomerang",
 		logo: "TODO",
-		layout: LayoutVersion.New,
 	},
 };
 
@@ -309,25 +243,23 @@ presence.on("UpdateData", async () => {
 
 	switch (window.location.hostname) {
 		case "jackbox.tv": {
-			let getLayoutPlayerName = LayoutVersion.Legacy;
 			const game =
 				Games[await presence.getPageletiable<string>('tv"]["storage"]["tag')];
 			if (game) {
-				const { layout, name, logo } = game;
-				let playerName: string;
-				getLayoutPlayerName = layout;
+				const { name, logo } = game;
 				presenceData.largeImageKey = logo;
 				presenceData.details = `Playing ${name}`;
 				if (useName) {
-					try {
-						const name = getLayoutPlayerName();
-						if (name) playerName = ` as ${name}`;
-					} catch (err) {
-						playerName = "";
+					const { playerName } = gameState;
+					if (playerName) {
+						if (useDetails) {
+							presenceData.details += ` as ${playerName}`;
+						} else {
+							presenceData.state = `as ${playerName}`;
+						}
 					}
 				}
 				if (useDetails) {
-					presenceData.details += playerName;
 					switch (game) {
 						// Party Pack 1
 						case Games.lieswatter: {
@@ -989,7 +921,7 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 					}
-				} else presenceData.state = playerName;
+				}
 			} else presenceData.details = "Idle";
 			break;
 		}
