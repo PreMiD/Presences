@@ -13,10 +13,12 @@ type LayoutName =
 	| "EnormousWheel"
 	| "JobJob"
 	| "PollMine"
-	| "WeaponsDrawn";
+	| "WeaponsDrawn"
+	| "CivicDoodle";
 type LayoutCallback = () => string;
 const LayoutVersion: Record<LayoutName, LayoutCallback> = {
 	New: () => document.querySelector("#playername").textContent,
+	CivicDoodle: () => document.querySelector("#playername #body").textContent,
 	Dictionarium: () =>
 		`${document.querySelector("#playericon").className.split("_")[1]}${document
 			.querySelector("#playername")
@@ -124,8 +126,9 @@ const Games: Record<string, Game> = {
 	// Party Pack 4
 	CivicDoodle: {
 		name: "Civic Doodle",
-		selector: ".Overdrawn",
+		selector: ".overdrawn",
 		logo: "https://i.imgur.com/6CBskbM.png",
+		layout: LayoutVersion.CivicDoodle
 	},
 	Bracketeering: {
 		name: "Bracketeering",
@@ -791,6 +794,22 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 4
 						case Games.CivicDoodle: {
+							const { classList } = document.querySelector<HTMLDivElement>("#playerRegion + div");
+							if (classList.contains("Name")) {
+								presenceData.state = "Drawing nametag";
+							} else if (classList.contains("Lobby")) {
+								presenceData.state = "Waiting in lobby";
+							} else if (classList.contains("Logo")) {
+								presenceData.state = "Waiting";
+							} else if (classList.contains("Draw")) {
+								presenceData.state = "Drawing";
+							} else if (classList.contains("Reaction")) {
+								presenceData.state = "Reacting to the drawing";
+							} else if (classList.contains("MakeSingleChoice")) {
+								presenceData.state = "Voting";
+							} else if (classList.contains("EnterSingleText")) {
+								presenceData.state = "Entering a name for the drawing";
+							}
 							break;
 						}
 						case Games.Bracketeering: {
