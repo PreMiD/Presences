@@ -13,7 +13,10 @@ let gamePlayerState: {
 		playerInfo?: {
 			username?: string;
 		};
-		state: string;
+		state?: string;
+		status?: string;
+		kind?: string;
+		category?: string;
 		prompt?: {
 			text?: string;
 			html?: string;
@@ -1876,13 +1879,78 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 8
 						case Games["the-wheel"]: {
-							switch (gamePlayerState.state) {
-								case "Lobby": {
+							switch (gamePlayerState.kind) {
+								case "lobby": {
 									presenceData.state = "Waiting in lobby";
 									break;
 								}
-								case "Logo": {
+								case "waiting": {
 									presenceData.state = "Waiting";
+									break;
+								}
+								case "singleTextEntry": {
+									if (gamePlayerState.category === "askTheWheel") {
+										presenceData.state = `Asking the wheel a question - '${
+											document.querySelector<HTMLTextAreaElement>(
+												".input-box textarea"
+											).value
+										}'`;
+									}
+									break;
+								}
+								case "choices": {
+									if (gamePlayerState.category === "skip-intro") {
+										presenceData.state = "Watching the tutorial";
+									}
+									break;
+								}
+								case "tappingList": {
+									presenceData.state = "Selecting answers";
+									break;
+								}
+								case "matching": {
+									const [a, b] = gamePlayerState.headers as string[];
+									presenceData.state = `Matching ${a} to ${b}`;
+									break;
+								}
+								case "placeSlices": {
+									presenceData.state = "Placing slices";
+									break;
+								}
+								case "spin": {
+									presenceData.state = "Spinning the wheel";
+									break;
+								}
+								case "numeric": {
+									presenceData.state = `Answering a numeric question - "${gamePlayerState.prompt}"`;
+									break;
+								}
+								case "postGame": {
+									presenceData.state = "Viewing the results";
+									break;
+								}
+								case "typingList": {
+									presenceData.state = "Typing answers";
+									break;
+								}
+								case "guessing": {
+									presenceData.state = "Guessing what the wheel is thinking of";
+									break;
+								}
+								case "singleTextEntry": {
+									presenceData.state = "Answering a question";
+									break;
+								}
+								case "tappingRapid": {
+									presenceData.state = "Tapping rapidly";
+									break;
+								}
+								case "choosePlayers": {
+									presenceData.state = "Choosing players";
+									break;
+								}
+								case "chooseSlices": {
+									presenceData.state = "Choosing slices";
 									break;
 								}
 							}
@@ -1890,52 +1958,34 @@ presence.on("UpdateData", async () => {
 						}
 						case Games["mrder-detectives"]: {
 							// TODO: fix name
-							switch (gamePlayerState.state) {
-								case "Lobby": {
-									presenceData.state = "Waiting in lobby";
-									break;
-								}
-								case "Logo": {
-									presenceData.state = "Waiting";
-									break;
-								}
-							}
 							break;
 						}
 						case Games["apply-yourself"]: {
-							switch (gamePlayerState.state) {
-								case "Lobby": {
-									presenceData.state = "Waiting in lobby";
-									break;
-								}
-								case "Logo": {
-									presenceData.state = "Waiting";
-									break;
-								}
-							}
 							break;
 						}
 						case Games["drawful-animate"]: {
-							switch (gamePlayerState.state) {
-								case "Lobby": {
-									presenceData.state = "Waiting in lobby";
-									break;
-								}
-								case "Logo": {
-									presenceData.state = "Waiting";
-									break;
-								}
-							}
 							break;
 						}
 						case Games["survey-bomb"]: {
-							switch (gamePlayerState.state) {
-								case "Lobby": {
+							switch (gamePlayerState.kind) {
+								case "lobby": {
 									presenceData.state = "Waiting in lobby";
 									break;
 								}
-								case "Logo": {
+								case "waiting": {
 									presenceData.state = "Waiting";
+									break;
+								}
+								case "choices": {
+									presenceData.state = "Selecting a door";
+									break;
+								}
+								case "survey": {
+									presenceData.state = "Completing survey";
+									break;
+								}
+								case "postGame": {
+									presenceData.state = "Viewing the results";
 									break;
 								}
 							}
