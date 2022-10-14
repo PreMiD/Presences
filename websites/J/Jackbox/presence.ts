@@ -28,6 +28,22 @@ let gamePlayerState: {
 	browsingTimestamp = Math.round(Date.now() / 1000),
 	gametag: string;
 
+const shortenedURLs: Record<string, string> = {};
+async function getShortURL(url: string) {
+	if (!url || url.length < 256) return url;
+	if (shortenedURLs[url]) return shortenedURLs[url];
+	try {
+		const pdURL = await (
+			await fetch(`https://pd.premid.app/create/${url}`)
+		).text();
+		shortenedURLs[url] = pdURL;
+		return pdURL;
+	} catch (err) {
+		presence.error(err);
+		return url;
+	}
+}
+
 if (window.location.hostname === "jackbox.tv") {
 	setInterval(async () => {
 		const playerStateLogs = await presence.getLogs(
@@ -1731,6 +1747,9 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.worldchamps: {
+							presenceData.smallImageKey = getComputedStyle(
+								document.querySelector("#playericon")
+							).backgroundImage.match(/^url\("(.*)"\)$/)?.[1];
 							switch (gamePlayerState.state) {
 								case "Lobby": {
 									presenceData.state = "Waiting in lobby";
@@ -1738,6 +1757,48 @@ presence.on("UpdateData", async () => {
 								}
 								case "Logo": {
 									presenceData.state = "Waiting";
+									break;
+								}
+								case "MakeSingleChoice": {
+									const choiceId = gamePlayerState.choiceId as string;
+									if (choiceId) {
+										if (choiceId.startsWith("FlipChoice")) {
+											presenceData.state = "Flipping their character";
+										}
+									} else {
+										if (
+											gamePlayerState.prompt.html?.startsWith("Who is <br>")
+										) {
+											presenceData.state = "Voting for the best champion";
+										} else if (
+											gamePlayerState.prompt.html?.startsWith(
+												"Swap your character or keep it in<br>"
+											)
+										) {
+											presenceData.state =
+												"Choosing whether to swap their character";
+										} else {
+											presenceData.state = "Watching the tutorial";
+										}
+									}
+									break;
+								}
+								case "Draw": {
+									const entryId = gamePlayerState.entryId as string;
+									if (entryId.startsWith("champion")) {
+										presenceData.state = "Drawing a champion";
+										break;
+									} else if (entryId.startsWith("challenger")) {
+										const imageLink =
+											document.querySelector<HTMLImageElement>(
+												".imageData"
+											)?.src;
+										if (imageLink) {
+											presenceData.largeImageKey = await getShortURL(imageLink);
+										}
+										presenceData.state = "Drawing a challenger";
+										break;
+									}
 									break;
 								}
 							}
