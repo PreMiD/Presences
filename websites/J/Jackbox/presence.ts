@@ -20,6 +20,7 @@ let gamePlayerState: {
 		};
 		entryId?: string;
 		choiceId?: string;
+		placeholder?: string;
 		choiceType?: string;
 		classes?: string[];
 		[x: string]: unknown;
@@ -74,9 +75,7 @@ if (window.location.hostname === "jackbox.tv") {
 			if (tag !== "@connect") {
 				game = Games[tag];
 				browsingTimestamp = Math.round(Date.now() / 1000);
-				if (!game) {
-					game = Games.unknown;
-				}
+				if (!game) game = Games.unknown;
 			}
 		}
 	}, 2000);
@@ -1241,12 +1240,12 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const choiceType = gamePlayerState.choiceType,
-										activeTest = (
-											gamePlayerState.gameInfo as { activeTest: string }
-										).activeTest;
+									const { choiceType, gameInfo, prompt } = gamePlayerState,
+										{ activeTest } = gameInfo as {
+											activeTest: string;
+										};
 									if (choiceType) {
-										switch (gamePlayerState.choiceType) {
+										switch (choiceType) {
 											case "TutorialOptOut": {
 												presenceData.state =
 													"Choosing whether to skip the tutorial";
@@ -1258,13 +1257,11 @@ presence.on("UpdateData", async () => {
 											}
 										}
 									} else if (activeTest) {
-										if (activeTest === "Push The Button") {
+										if (activeTest === "Push The Button")
 											presenceData.state = "Accusing players";
-										} else {
-											presenceData.state = `Taking the ${activeTest} test`;
-										}
+										else presenceData.state = `Taking the ${activeTest} test`;
 									} else {
-										const html = gamePlayerState.prompt?.html;
+										const html = prompt?.html;
 										if (
 											html ===
 											"You are the Captain.  What test would you like to perform?"
@@ -1281,12 +1278,11 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "EnterSingleText": {
-									const activeTest = (
-										gamePlayerState.gameInfo as { activeTest: string }
-									).activeTest;
-									if (activeTest) {
+									const { activeTest } = gamePlayerState.gameInfo as {
+										activeTest: string;
+									};
+									if (activeTest)
 										presenceData.state = `Taking the ${activeTest} test`;
-									}
 									break;
 								}
 								case "GameOver": {
@@ -1314,33 +1310,31 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const choiceId = gamePlayerState.choiceId;
-									if (choiceId === "ChooseCatchphrase") {
+									const { choiceId } = gamePlayerState;
+									if (choiceId === "ChooseCatchphrase")
 										presenceData.state = "Choosing a catchphrase";
-									} else if (choiceId.startsWith("Skip")) {
+									else if (choiceId.startsWith("Skip"))
 										presenceData.state = "Watching a tutorial";
-									} else if (choiceId.startsWith("ChooseSetup")) {
+									else if (choiceId.startsWith("ChooseSetup"))
 										presenceData.state = "Choosing a joke setup";
-									} else if (choiceId.startsWith("ChooseTopic")) {
+									else if (choiceId.startsWith("ChooseTopic"))
 										presenceData.state = "Choosing a topic for the joke";
-									} else if (choiceId.startsWith("ChooseAuthorReady")) {
+									else if (choiceId.startsWith("ChooseAuthorReady"))
 										presenceData.state = "Choosing how to tell the joke";
-									} else if (choiceId === "ChooseJoke") {
+									else if (choiceId === "ChooseJoke")
 										presenceData.state = "Voting on a joke";
-									} else if (choiceId === "ChoosePunchUpJoke") {
+									else if (choiceId === "ChoosePunchUpJoke")
 										presenceData.state = "Choosing a joke to one-up";
-									}
 									break;
 								}
 								case "EnterSingleText": {
-									const entryId = gamePlayerState.entryId;
-									if (entryId.startsWith("Topic")) {
-										presenceData.state = `Entering a topic (${gamePlayerState.placeholder})`;
-									} else if (entryId.startsWith("Punchline")) {
+									const { entryId, placeholder } = gamePlayerState;
+									if (entryId.startsWith("Topic"))
+										presenceData.state = `Entering a topic (${placeholder})`;
+									else if (entryId.startsWith("Punchline"))
 										presenceData.state = "Creating a punchline";
-									} else if (entryId === "PunchedUpLine") {
+									else if (entryId === "PunchedUpLine")
 										presenceData.state = "One-upping a joke";
-									}
 									break;
 								}
 							}
@@ -1407,9 +1401,9 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									if (gamePlayerState.roundType === "FinalRound") {
+									if (gamePlayerState.roundType === "FinalRound")
 										presenceData.state = "Answering the final trivia questions";
-									} else {
+									else {
 										switch (gamePlayerState.choiceType) {
 											case "SkipTutorial": {
 												presenceData.state = "Watching the intro";
@@ -1435,7 +1429,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "EnterSingleText": {
-									const entryId = gamePlayerState.entryId;
+									const { entryId } = gamePlayerState;
 									if (entryId.startsWith("MindMeld")) {
 										presenceData.state = "Playing the mind meld game";
 										break;
@@ -1446,9 +1440,7 @@ presence.on("UpdateData", async () => {
 									} else if (entryId === "Quiplash") {
 										presenceData.state = `Playing Quiplash - ${gamePlayerState.prompt.html}`;
 										break;
-									} else {
-										presenceData.state = "Playing a text death game";
-									}
+									} else presenceData.state = "Playing a text death game";
 									break;
 								}
 								case "Draw": {
@@ -1571,28 +1563,28 @@ presence.on("UpdateData", async () => {
 								}
 								default: {
 									if (gamePlayerState.validActions) {
-										const validActions = (
-											gamePlayerState.validActions as string[]
-										).join(",");
-										if (validActions === "toggle-visibility,new,load,exit") {
-											presenceData.state = "In the Custom Content menu";
-											break;
-										} else if (validActions === "title,close") {
-											presenceData.state = "Naming a custom Quiplash episode";
-											break;
-										} else if (
-											validActions === "add,toggle-visibility,close" ||
-											validActions === "add,remove,toggle-visibility,done"
+										switch (
+											(gamePlayerState.validActions as string[]).join(",")
 										) {
-											presenceData.state =
-												"Adding prompts to a custom Quiplash episode";
-											break;
-										} else if (
-											validActions ===
-											"submit,unlock,toggle-visibility,play,remove-content,episodes"
-										) {
-											presenceData.state = "Viewing a custom Quiplash episode";
-											break;
+											case "toggle-visibility,new,load,exit": {
+												presenceData.state = "In the Custom Content menu";
+												break;
+											}
+											case "title,close": {
+												presenceData.state = "Naming a custom Quiplash episode";
+												break;
+											}
+											case "add,toggle-visibility,close":
+											case "add,remove,toggle-visibility,done": {
+												presenceData.state =
+													"Adding prompts to a custom Quiplash episode";
+												break;
+											}
+											case "submit,unlock,toggle-visibility,play,remove-content,episodes": {
+												presenceData.state =
+													"Viewing a custom Quiplash episode";
+												break;
+											}
 										}
 									}
 								}
@@ -1614,14 +1606,13 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "EnterSingleText": {
-									const entryId = gamePlayerState.entryId;
-									if (entryId.startsWith("prompt")) {
+									const { entryId } = gamePlayerState;
+									if (entryId.startsWith("prompt"))
 										presenceData.state = "Creating topics";
-									} else if (entryId === "WriteQuote") {
+									else if (entryId === "WriteQuote")
 										presenceData.state = "Writing a quote about the talk";
-									} else if (entryId === "NameAward") {
+									else if (entryId === "NameAward")
 										presenceData.state = "Naming an award";
-									}
 									break;
 								}
 								case "Awards": {
@@ -1629,38 +1620,46 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const classes = gamePlayerState.classes;
+									const { classes, choices, prompt } = gamePlayerState;
 									if (
-										gamePlayerState.prompt.html ===
-										"PICK THE TITLE OF THE TALK YOU WILL GIVE"
-									) {
+										prompt.html === "PICK THE TITLE OF THE TALK YOU WILL GIVE"
+									)
 										presenceData.state = "Choosing a talk title";
-									} else if (classes[0] === "SkipTutorial") {
-										presenceData.state = "Watching the tutorial";
-									} else if (
-										(gamePlayerState.choices as { className: string }[])[0]
-											.className === "voteUp"
-									) {
-										presenceData.state = "Reacting to the speech";
-									} else if (classes[0] === "Presenter") {
-										if (
-											gamePlayerState.prompt.html.startsWith("RATE HOW WELL ")
-										) {
-											presenceData.state = "Rating their assistant";
-										} else if (gamePlayerState.prompt.text === "THANK YOU.") {
-											presenceData.state = "Presenting their talk - thank you";
-										} else {
-											presenceData.state =
-												"Presenting their talk - preparation";
-										}
-									} else if (classes[0] === "Assistant") {
-										if (
-											gamePlayerState.prompt.html ===
-											"PICK THE BEST PICTURE TO REPRESENT THE TALK"
-										) {
-											presenceData.state = "Choosing a picture for the talk";
-										} else {
-											presenceData.state = "Assisting their presenter";
+									else {
+										switch (classes[0]) {
+											case "SkipTutorial": {
+												presenceData.state = "Watching the tutorial";
+												break;
+											}
+											case "Presenter": {
+												if (prompt.html.startsWith("RATE HOW WELL "))
+													presenceData.state = "Rating their assistant";
+												else if (prompt.text === "THANK YOU.")
+													presenceData.state =
+														"Presenting their talk - thank you";
+												else {
+													presenceData.state =
+														"Presenting their talk - preparation";
+												}
+												break;
+											}
+											case "Assistant": {
+												if (
+													prompt.html ===
+													"PICK THE BEST PICTURE TO REPRESENT THE TALK"
+												)
+													presenceData.state =
+														"Choosing a picture for the talk";
+												else presenceData.state = "Assisting their presenter";
+												break;
+											}
+											default: {
+												if (
+													(choices as { className: string }[])[0].className ===
+													"voteUp"
+												)
+													presenceData.state = "Reacting to the speech";
+											}
 										}
 									}
 									break;
@@ -1742,11 +1741,9 @@ presence.on("UpdateData", async () => {
 											break;
 										}
 										default: {
-											if (gamePlayerState.choiceType === "SkipIntro") {
+											if (gamePlayerState.choiceType === "SkipIntro")
 												presenceData.state = "Watching the intro";
-											} else if (
-												gamePlayerState.choiceType === "ShowTutorial"
-											) {
+											else if (gamePlayerState.choiceType === "ShowTutorial") {
 												presenceData.state =
 													"Deciding if they want to watch the tutorial";
 											}
@@ -1841,31 +1838,26 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const choiceId = gamePlayerState.choiceId;
+									const { choiceId } = gamePlayerState;
 									if (choiceId) {
-										if (choiceId.startsWith("FlipChoice")) {
+										if (choiceId.startsWith("FlipChoice"))
 											presenceData.state = "Flipping their character";
-										}
-									} else {
-										if (
-											gamePlayerState.prompt.html?.startsWith("Who is <br>")
-										) {
-											presenceData.state = "Voting for the best champion";
-										} else if (
-											gamePlayerState.prompt.html?.startsWith(
-												"Swap your character or keep it in<br>"
-											)
-										) {
-											presenceData.state =
-												"Choosing whether to swap their character";
-										} else {
-											presenceData.state = "Watching the tutorial";
-										}
-									}
+									} else if (
+										gamePlayerState.prompt.html?.startsWith("Who is <br>")
+									)
+										presenceData.state = "Voting for the best champion";
+									else if (
+										gamePlayerState.prompt.html?.startsWith(
+											"Swap your character or keep it in<br>"
+										)
+									) {
+										presenceData.state =
+											"Choosing whether to swap their character";
+									} else presenceData.state = "Watching the tutorial";
 									break;
 								}
 								case "Draw": {
-									const entryId = gamePlayerState.entryId;
+									const { entryId } = gamePlayerState;
 									if (entryId.startsWith("champion")) {
 										presenceData.state = "Drawing a champion";
 										break;
@@ -1874,9 +1866,8 @@ presence.on("UpdateData", async () => {
 											document.querySelector<HTMLImageElement>(
 												".imageData"
 											)?.src;
-										if (imageLink) {
+										if (imageLink)
 											presenceData.largeImageKey = await getShortURL(imageLink);
-										}
 										presenceData.state = "Drawing a challenger";
 										break;
 									}
