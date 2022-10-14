@@ -2124,6 +2124,43 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games["range-game"]: {
+							switch (gamePlayerState.kind) {
+								case "lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "postGame": {
+									presenceData.state = "Viewing the results";
+									break;
+								}
+								case "drawing": {
+									presenceData.state = "Drawing a picture";
+									break;
+								}
+								case "guess": {
+									presenceData.state = "Guessing the value in the range";
+									break;
+								}
+								case "postGuess": {
+									presenceData.state = "Waiting for other players to guess";
+									break;
+								}
+								case "singleTextEntry": {
+									presenceData.state = "Answering a prompt";
+									break;
+								}
+								case "choices": {
+									if (gamePlayerState.category === "walkthrough") {
+										presenceData.state = "Watching the tutorial";
+									} else {
+										presenceData.state = "Making a choice";
+									}
+									break;
+								}
+								default: {
+									presenceData.state = "Waiting";
+								}
+							}
 							break;
 						}
 						case Games["antique-freak"]: {
