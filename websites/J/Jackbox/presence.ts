@@ -1195,6 +1195,88 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.ridictionary: {
+							presenceData.smallImageKey = getComputedStyle(
+								document.querySelector<HTMLDivElement>("#playericon")
+							).backgroundImage.match(/^url\("(.*)"\)$/)[1];
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "MakeSingleChoice": {
+									switch (gamePlayerState.choiceType) {
+										case "ChooseGameType": {
+											presenceData.state = "Choosing a game type";
+											break;
+										}
+										case "ChooseDefinition": {
+											presenceData.state = `Voting for a definition of "${
+												gamePlayerState.prompt.html.match(
+													/<div>(.*?)<\/div>$/
+												)[1]
+											}"`;
+											break;
+										}
+										case "LikeDefinition": {
+											presenceData.state = "Liking definitions";
+											break;
+										}
+										case "ChooseSynonym": {
+											presenceData.state = `Voting for a synonym of "${
+												gamePlayerState.prompt.html.match(
+													/<font.*?>(.*?)(?:: )?<\/font>$/
+												)[1]
+											}"`;
+											break;
+										}
+										case "LikeSynonym": {
+											presenceData.state = "Liking synonyms";
+											break;
+										}
+										case "LikeSentence": {
+											presenceData.state = "Liking sentences";
+											break;
+										}
+										case "ChooseSentence": {
+											presenceData.state = `Voting for a sentence with "${
+												gamePlayerState.prompt.html.match(
+													/<div>(.*?)<\/div>$/
+												)[1]
+											}"`;
+											break;
+										}
+									}
+									break;
+								}
+								case "EnterSingleText": {
+									switch (gamePlayerState.entryId) {
+										case "Definition": {
+											presenceData.state = `Creating a definition for "${
+												gamePlayerState.prompt.html.match(
+													/<font.*?>(.*?)<\/font>/
+												)[1]
+											}"`;
+											break;
+										}
+										case "Synonym": {
+											presenceData.state = `Creating a synonym for "${
+												gamePlayerState.prompt.html.match(
+													/<font.*?>(.*?)(?:: )?<\/font>/
+												)[1]
+											}"`;
+											break;
+										}
+										case "Sentence": {
+											presenceData.state = `Creating a sentence using "${gamePlayerState.word}"`;
+											break;
+										}
+									}
+								}
+							}
 							break;
 						}
 						// Party Pack 7
@@ -1251,7 +1333,6 @@ presence.on("UpdateData", async () => {
 			} else if (tag !== "@connect")
 				presenceData.state = `Playing an unsupported game (${tag})`;
 			else presenceData.details = "Idle";
-
 			break;
 		}
 		case "games.jackbox.tv": {
