@@ -56,11 +56,9 @@ if (window.location.hostname === "jackbox.tv") {
 		);
 		if (playerStateLogs.length > 0) {
 			const lastLog = playerStateLogs[playerStateLogs.length - 1];
-			if (/recv <- .*?"key": "(bc:)?room",/s.test(lastLog)) {
+			if (/recv <- .*?"entities": {\n/s.test(lastLog)) {
 				gamePlayerState = JSON.parse(lastLog.slice(8)).result.entities[
-					`bc:customer:${
-						lastLog.match(/"key": "(bc:customer:player):([a-z0-9-]+)",/s)[1]
-					}`
+					lastLog.match(/"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s)[1]
 				][1].val;
 			} else gamePlayerState = JSON.parse(lastLog.slice(8)).result.val;
 		}
@@ -72,7 +70,7 @@ if (window.location.hostname === "jackbox.tv") {
 				'tv"]["storage'
 			);
 			gametag = tag;
-			if (tag !== "@connect") {
+			if (tag && tag !== "@connect") {
 				game = Games[tag];
 				browsingTimestamp = Math.round(Date.now() / 1000);
 				if (!game) game = Games.unknown;
@@ -1878,19 +1876,69 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 8
 						case Games["the-wheel"]: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+							}
 							break;
 						}
 						case Games["mrder-detectives"]: {
 							// TODO: fix name
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+							}
 							break;
 						}
 						case Games["apply-yourself"]: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+							}
 							break;
 						}
 						case Games["drawful-animate"]: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+							}
 							break;
 						}
 						case Games["survey-bomb"]: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+							}
 							break;
 						}
 						// Party Pack 9
