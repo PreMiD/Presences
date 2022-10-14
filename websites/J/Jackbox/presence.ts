@@ -266,14 +266,10 @@ presence.on("UpdateData", async () => {
 			type JackboxStorageLetiable = {
 				tag: string;
 			};
-			const game =
-				Games[
-					(
-						await presence.getPageletiable<JackboxStorageLetiable>(
-							'tv"]["storage'
-						)
-					).tag
-				];
+			const { tag } = await presence.getPageletiable<JackboxStorageLetiable>(
+					'tv"]["storage'
+				),
+				game = Games[tag];
 			if (game) {
 				const { name, logo } = game;
 				presenceData.largeImageKey = logo;
@@ -1252,7 +1248,10 @@ presence.on("UpdateData", async () => {
 						}
 					}
 				}
-			} else presenceData.details = "Idle";
+			} else if (tag !== "@connect")
+				presenceData.state = `Playing an unsupported game (${tag})`;
+			else presenceData.details = "Idle";
+
 			break;
 		}
 		case "games.jackbox.tv": {
