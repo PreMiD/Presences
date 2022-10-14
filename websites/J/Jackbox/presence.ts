@@ -430,7 +430,6 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "state-auction": {
-									// TODO: Add current bid
 									presenceData.state = "Bidding on art";
 									break;
 								}
@@ -439,7 +438,6 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 							}
-							// TODO: Add screw state
 							break;
 						}
 						case Games.fibbage:
@@ -502,10 +500,6 @@ presence.on("UpdateData", async () => {
 									presenceData.state = "Watching tutorial";
 									break;
 								}
-								case "state-round": {
-									presenceData.state = "TODO"; // Check image content
-									break;
-								}
 								case "state-answer-question-audience": {
 									presenceData.state = "Writing audience quip";
 									break;
@@ -519,7 +513,6 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "state-vote": {
-									// TODO: Add question and choices
 									presenceData.state = "Voting";
 									break;
 								}
@@ -651,10 +644,6 @@ presence.on("UpdateData", async () => {
 									presenceData.state = "Entering a suggestion";
 									break;
 								}
-								case "state-round": {
-									presenceData.state = "TODO";
-									break;
-								}
 								case "state-answer-question-audience":
 								case "state-answer-question": {
 									presenceData.state = "Answering a question";
@@ -666,7 +655,6 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 							}
-							// TODO: Verify
 							break;
 						}
 						case Games.fakinit: {
