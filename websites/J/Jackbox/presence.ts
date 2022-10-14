@@ -53,6 +53,7 @@ async function getShortURL(url: string) {
 }
 
 if (window.location.hostname === "jackbox.tv") {
+	// TODO: Handle names from party pack 8+ (they're in the key "info:number")
 	setInterval(async () => {
 		const playerStateLogs = await presence.getLogs(
 			/recv <- .*?("key": "(bc:customer|player):[a-z0-9-]+",)/s
@@ -1958,6 +1959,37 @@ presence.on("UpdateData", async () => {
 						}
 						case Games["mrder-detectives"]: {
 							// TODO: fix name
+							presenceData.smallImageKey = getComputedStyle(
+								document.querySelector<HTMLDivElement>(".header.avatar"),
+								":after"
+							).backgroundImage.match(/^url\("(.*)"\)$/)[1];
+							switch (gamePlayerState.kind) {
+								case "lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "choosing": {
+									break;
+								}
+								case "drawing": {
+									presenceData.state = "Drawing their weapon clue";
+									break;
+								}
+								case "inspecting": {
+									break;
+								}
+								case "writing": {
+									presenceData.state = "Inviting accomplices";
+									break;
+								}
+								case "postGame": {
+									presenceData.state = "Viewing the results";
+									break;
+								}
+								default: {
+									presenceData.state = "Waiting";
+								}
+							}
 							break;
 						}
 						case Games["apply-yourself"]: {
