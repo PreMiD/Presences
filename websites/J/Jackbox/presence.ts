@@ -2100,9 +2100,6 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.lineup: {
-							break;
-						}
-						case Games["range-game"]: {
 							switch (gamePlayerState.kind) {
 								case "lobby": {
 									presenceData.state = "Waiting in lobby";
@@ -2124,6 +2121,9 @@ presence.on("UpdateData", async () => {
 									presenceData.state = "Waiting";
 								}
 							}
+							break;
+						}
+						case Games["range-game"]: {
 							break;
 						}
 						case Games["antique-freak"]: {
