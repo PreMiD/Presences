@@ -1186,6 +1186,54 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.jokeboat: {
+							const icon =
+								document.querySelector<HTMLDivElement>("#playericon");
+							if (icon) {
+								presenceData.smallImageKey =
+									getComputedStyle(icon).backgroundImage.match(
+										/^url\("(.*)"\)$/
+									)?.[1];
+							}
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "MakeSingleChoice": {
+									const choiceId = gamePlayerState.choiceId as string;
+									if (choiceId === "ChooseCatchphrase") {
+										presenceData.state = "Choosing a catchphrase";
+									} else if (choiceId.startsWith("Skip")) {
+										presenceData.state = "Watching a tutorial";
+									} else if (choiceId.startsWith("ChooseSetup")) {
+										presenceData.state = "Choosing a joke setup";
+									} else if (choiceId.startsWith("ChooseTopic")) {
+										presenceData.state = "Choosing a topic for the joke";
+									} else if (choiceId.startsWith("ChooseAuthorReady")) {
+										presenceData.state = "Choosing how to tell the joke";
+									} else if (choiceId === "ChooseJoke") {
+										presenceData.state = "Voting on a joke";
+									} else if (choiceId === "ChoosePunchUpJoke") {
+										presenceData.state = "Choosing a joke to one-up";
+									}
+									break;
+								}
+								case "EnterSingleText": {
+									const entryId = gamePlayerState.entryId as string;
+									if (entryId.startsWith("Topic")) {
+										presenceData.state = `Entering a topic (${gamePlayerState.placeholder})`;
+									} else if (entryId.startsWith("Punchline")) {
+										presenceData.state = "Creating a punchline";
+									} else if (entryId === "PunchedUpLine") {
+										presenceData.state = "One-upping a joke";
+									}
+									break;
+								}
+							}
 							break;
 						}
 						case Games.rolemodels: {
@@ -1214,11 +1262,11 @@ presence.on("UpdateData", async () => {
 											break;
 										}
 										case "ChooseDefinition": {
-											presenceData.state = `Voting for a definition of "${
+											presenceData.state = `Voting for a definition of ${
 												gamePlayerState.prompt.html.match(
 													/<div>(.*?)<\/div>$/
 												)[1]
-											}"`;
+											}`;
 											break;
 										}
 										case "LikeDefinition": {
@@ -1226,11 +1274,11 @@ presence.on("UpdateData", async () => {
 											break;
 										}
 										case "ChooseSynonym": {
-											presenceData.state = `Voting for a synonym of "${
+											presenceData.state = `Voting for a synonym of ${
 												gamePlayerState.prompt.html.match(
 													/<font.*?>(.*?)(?:: )?<\/font>$/
 												)[1]
-											}"`;
+											}`;
 											break;
 										}
 										case "LikeSynonym": {
@@ -1242,11 +1290,11 @@ presence.on("UpdateData", async () => {
 											break;
 										}
 										case "ChooseSentence": {
-											presenceData.state = `Voting for a sentence with "${
+											presenceData.state = `Voting for a sentence with ${
 												gamePlayerState.prompt.html.match(
 													/<div>(.*?)<\/div>$/
 												)[1]
-											}"`;
+											}`;
 											break;
 										}
 									}
@@ -1255,23 +1303,23 @@ presence.on("UpdateData", async () => {
 								case "EnterSingleText": {
 									switch (gamePlayerState.entryId) {
 										case "Definition": {
-											presenceData.state = `Creating a definition for "${
+											presenceData.state = `Creating a definition for ${
 												gamePlayerState.prompt.html.match(
 													/<font.*?>(.*?)<\/font>/
 												)[1]
-											}"`;
+											}`;
 											break;
 										}
 										case "Synonym": {
-											presenceData.state = `Creating a synonym for "${
+											presenceData.state = `Creating a synonym for ${
 												gamePlayerState.prompt.html.match(
 													/<font.*?>(.*?)(?:: )?<\/font>/
 												)[1]
-											}"`;
+											}`;
 											break;
 										}
 										case "Sentence": {
-											presenceData.state = `Creating a sentence using "${gamePlayerState.word}"`;
+											presenceData.state = `Creating a sentence using ${gamePlayerState.word}`;
 											break;
 										}
 									}
