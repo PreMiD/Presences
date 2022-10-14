@@ -81,8 +81,6 @@ presence.on("UpdateData", async () => {
 		else presenceData.details = "Bekijkt de weersgrafiek voor";
 	}
 
-	console.log(presenceData);
-
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
