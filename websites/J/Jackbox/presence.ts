@@ -1,7 +1,6 @@
 const presence = new Presence({
-		clientId: "638118757453004820",
-	}),
-	browsingTimestamp = Math.round(Date.now() / 1000);
+	clientId: "638118757453004820",
+});
 
 interface Game {
 	name: string;
@@ -9,22 +8,25 @@ interface Game {
 }
 
 let gamePlayerState: {
-	playerName?: string;
-	username?: string;
-	playerInfo?: {
+		playerName?: string;
 		username?: string;
-	};
-	state: string;
-	prompt?: {
-		text?: string;
-		html?: string;
-	};
-	[x: string]: unknown;
-} = {
-	playerName: null,
-	state: null,
-	username: null,
-};
+		playerInfo?: {
+			username?: string;
+		};
+		state: string;
+		prompt?: {
+			text?: string;
+			html?: string;
+		};
+		[x: string]: unknown;
+	} = {
+		playerName: null,
+		state: null,
+		username: null,
+	},
+	game: Game,
+	browsingTimestamp = Math.round(Date.now() / 1000),
+	gametag: string;
 
 if (window.location.hostname === "jackbox.tv") {
 	setInterval(async () => {
@@ -41,10 +43,30 @@ if (window.location.hostname === "jackbox.tv") {
 				][1].val;
 			} else gamePlayerState = JSON.parse(lastLog.slice(8)).result.val;
 		}
+		if (!game) {
+			type JackboxStorageLetiable = {
+				tag: string;
+			};
+			const { tag } = await presence.getPageletiable<JackboxStorageLetiable>(
+				'tv"]["storage'
+			);
+			gametag = tag;
+			if (tag !== "@connect") {
+				game = Games[tag];
+				browsingTimestamp = Math.round(Date.now() / 1000);
+				if (!game) {
+					game = Games.unknown;
+				}
+			}
+		}
 	}, 2000);
 }
 
 const Games: Record<string, Game> = {
+	unknown: {
+		name: "Unknown Game",
+		logo: "https://i.imgur.com/SXfEdnL.png",
+	},
 	// Party Pack 1
 	ydkj2015: {
 		name: "You Don't Know Jack 2015",
@@ -263,13 +285,6 @@ presence.on("UpdateData", async () => {
 
 	switch (hostname) {
 		case "jackbox.tv": {
-			type JackboxStorageLetiable = {
-				tag: string;
-			};
-			const { tag } = await presence.getPageletiable<JackboxStorageLetiable>(
-					'tv"]["storage'
-				),
-				game = Games[tag];
 			if (game) {
 				const { name, logo } = game;
 				presenceData.largeImageKey = logo;
@@ -284,6 +299,10 @@ presence.on("UpdateData", async () => {
 				}
 				if (useDetails) {
 					switch (game) {
+						case Games.unknown: {
+							presenceData.state = `Playing an unsupported game (${gametag})`;
+							break;
+						}
 						// Party Pack 1
 						case Games.lieswatter: {
 							const { classList } = document.querySelector<HTMLDivElement>(
@@ -1567,9 +1586,7 @@ presence.on("UpdateData", async () => {
 						}
 					}
 				}
-			} else if (tag !== "@connect")
-				presenceData.state = `Playing an unsupported game (${tag})`;
-			else presenceData.details = "Idle";
+			} else presenceData.details = "Idle";
 			break;
 		}
 		case "games.jackbox.tv": {
