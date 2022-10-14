@@ -31,14 +31,14 @@ let gamePlayerState: {
 if (window.location.hostname === "jackbox.tv") {
 	setInterval(async () => {
 		const playerStateLogs = await presence.getLogs(
-			/recv <- .*?("key": "bc:customer:[a-z0-9-]+",)/s
+			/recv <- .*?("key": "(bc:customer|player):[a-z0-9-]+",)/s
 		);
 		if (playerStateLogs.length > 0) {
 			const lastLog = playerStateLogs[playerStateLogs.length - 1];
-			if (/recv <- .*?"key": "bc:room",/s.test(lastLog)) {
+			if (/recv <- .*?"key": "(bc:)?room",/s.test(lastLog)) {
 				gamePlayerState = JSON.parse(lastLog.slice(8)).result.entities[
 					`bc:customer:${
-						lastLog.match(/"key": "bc:customer:([a-z0-9-]+)",/s)[1]
+						lastLog.match(/"key": "(bc:customer:player):([a-z0-9-]+)",/s)[1]
 					}`
 				][1].val;
 			} else gamePlayerState = JSON.parse(lastLog.slice(8)).result.val;
@@ -1537,18 +1537,170 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 7
 						case Games.quiplash3: {
+							presenceData.smallImageKey = getComputedStyle(
+								document.querySelector<HTMLDivElement>("#playericon")
+							).backgroundImage.match(/^url\("(.*)"\)$/)?.[1];
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "EnterSingleText": {
+									presenceData.state = "Answering a prompt";
+									break;
+								}
+								case "MakeSingleChoice": {
+									presenceData.state = "Voting for their favorite answer";
+									break;
+								}
+								case "EnterTextList": {
+									presenceData.state = "Answering a Thriplash prompt";
+									break;
+								}
+								default: {
+									if (gamePlayerState.validActions) {
+										const validActions = (
+											gamePlayerState.validActions as string[]
+										).join(",");
+										if (validActions === "toggle-visibility,new,load,exit") {
+											presenceData.state = "In the Custom Content menu";
+											break;
+										} else if (validActions === "title,close") {
+											presenceData.state = "Naming a custom Quiplash episode";
+											break;
+										} else if (
+											validActions === "add,toggle-visibility,close" ||
+											validActions === "add,remove,toggle-visibility,done"
+										) {
+											presenceData.state =
+												"Adding prompts to a custom Quiplash episode";
+											break;
+										} else if (
+											validActions ===
+											"submit,unlock,toggle-visibility,play,remove-content,episodes"
+										) {
+											presenceData.state = "Viewing a custom Quiplash episode";
+											break;
+										}
+									}
+								}
+							}
 							break;
 						}
 						case Games["jackbox-talks"]: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "Camera": {
+									presenceData.state = "Taking a profile picture";
+									break;
+								}
+								case "EnterSingleText": {
+									const entryId = gamePlayerState.entryId as string;
+									if (entryId.startsWith("prompt")) {
+										presenceData.state = "Creating topics";
+									} else if (entryId === "WriteQuote") {
+										presenceData.state = "Writing a quote about the talk";
+									} else if (entryId === "NameAward") {
+										presenceData.state = "Naming an award";
+									}
+									break;
+								}
+								case "Awards": {
+									presenceData.state = "Giving out their award";
+									break;
+								}
+								case "MakeSingleChoice": {
+									const classes = gamePlayerState.classes as string[];
+									if (
+										gamePlayerState.prompt.html ===
+										"PICK THE TITLE OF THE TALK YOU WILL GIVE"
+									) {
+										presenceData.state = "Choosing a talk title";
+									} else if (classes[0] === "SkipTutorial") {
+										presenceData.state = "Watching the tutorial";
+									} else if (
+										(gamePlayerState.choices as { className: string }[])[0]
+											.className === "voteUp"
+									) {
+										presenceData.state = "Reacting to the speech";
+									} else if (classes[0] === "Presenter") {
+										if (
+											gamePlayerState.prompt.html.startsWith("RATE HOW WELL ")
+										) {
+											presenceData.state = "Rating their assistant";
+										} else if (gamePlayerState.prompt.text === "THANK YOU.") {
+											presenceData.state = "Presenting their talk - thank you";
+										} else {
+											presenceData.state =
+												"Presenting their talk - preparation";
+										}
+									} else if (classes[0] === "Assistant") {
+										if (
+											gamePlayerState.prompt.html ===
+											"PICK THE BEST PICTURE TO REPRESENT THE TALK"
+										) {
+											presenceData.state = "Choosing a picture for the talk";
+										} else {
+											presenceData.state = "Assisting their presenter";
+										}
+									}
+									break;
+								}
+								case "Draw": {
+									presenceData.state = "Presenting their talk - slide";
+									break;
+								}
+							}
 							break;
 						}
 						case Games["blanky-blank"]: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+							}
 							break;
 						}
 						case Games.everyday: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+							}
 							break;
 						}
 						case Games.worldchamps: {
+							switch (gamePlayerState.state) {
+								case "Lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "Logo": {
+									presenceData.state = "Waiting";
+									break;
+								}
+							}
 							break;
 						}
 						// Party Pack 8
