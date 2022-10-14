@@ -1964,6 +1964,44 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games["drawful-animate"]: {
+							switch (gamePlayerState.kind) {
+								case "lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "waiting": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "drawing": {
+									if (gamePlayerState.prompt === "an animation of yourself") {
+										presenceData.state = "Drawing an animation of themselves";
+									} else {
+										presenceData.state = "Drawing an animation";
+									}
+									break;
+								}
+								case "writing": {
+									presenceData.state = "Guessing the original prompt";
+									break;
+								}
+								case "liking": {
+									presenceData.state = "Awarding likes to other's guesses";
+									break;
+								}
+								case "choosing": {
+									presenceData.state = "Looking for the true prompt";
+									break;
+								}
+								case "postGame": {
+									presenceData.state = "Viewing the results";
+									break;
+								}
+								case "ugc": {
+									presenceData.state = "Creating a custom game";
+									break;
+								}
+							}
 							break;
 						}
 						case Games["survey-bomb"]: {
