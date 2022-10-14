@@ -18,6 +18,10 @@ let gamePlayerState: {
 			text?: string;
 			html?: string;
 		};
+		entryId?: string;
+		choiceId?: string;
+		choiceType?: string;
+		classes?: string[];
 		[x: string]: unknown;
 	} = {
 		playerName: null,
@@ -1310,7 +1314,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const choiceId = gamePlayerState.choiceId as string;
+									const choiceId = gamePlayerState.choiceId;
 									if (choiceId === "ChooseCatchphrase") {
 										presenceData.state = "Choosing a catchphrase";
 									} else if (choiceId.startsWith("Skip")) {
@@ -1329,7 +1333,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "EnterSingleText": {
-									const entryId = gamePlayerState.entryId as string;
+									const entryId = gamePlayerState.entryId;
 									if (entryId.startsWith("Topic")) {
 										presenceData.state = `Entering a topic (${gamePlayerState.placeholder})`;
 									} else if (entryId.startsWith("Punchline")) {
@@ -1431,7 +1435,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "EnterSingleText": {
-									const entryId = gamePlayerState.entryId as string;
+									const entryId = gamePlayerState.entryId;
 									if (entryId.startsWith("MindMeld")) {
 										presenceData.state = "Playing the mind meld game";
 										break;
@@ -1610,7 +1614,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "EnterSingleText": {
-									const entryId = gamePlayerState.entryId as string;
+									const entryId = gamePlayerState.entryId;
 									if (entryId.startsWith("prompt")) {
 										presenceData.state = "Creating topics";
 									} else if (entryId === "WriteQuote") {
@@ -1625,7 +1629,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const classes = gamePlayerState.classes as string[];
+									const classes = gamePlayerState.classes;
 									if (
 										gamePlayerState.prompt.html ===
 										"PICK THE TITLE OF THE TALK YOU WILL GIVE"
@@ -1837,7 +1841,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "MakeSingleChoice": {
-									const choiceId = gamePlayerState.choiceId as string;
+									const choiceId = gamePlayerState.choiceId;
 									if (choiceId) {
 										if (choiceId.startsWith("FlipChoice")) {
 											presenceData.state = "Flipping their character";
@@ -1861,7 +1865,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "Draw": {
-									const entryId = gamePlayerState.entryId as string;
+									const entryId = gamePlayerState.entryId;
 									if (entryId.startsWith("champion")) {
 										presenceData.state = "Drawing a champion";
 										break;
