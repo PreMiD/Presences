@@ -1636,10 +1636,10 @@ presence.on("UpdateData", async () => {
 											case "Presenter": {
 												if (prompt.html.startsWith("RATE HOW WELL "))
 													presenceData.state = "Rating their assistant";
-												else if (prompt.text === "THANK YOU.")
+												else if (prompt.text === "THANK YOU.") {
 													presenceData.state =
 														"Presenting their talk - thank you";
-												else {
+												} else {
 													presenceData.state =
 														"Presenting their talk - preparation";
 												}
@@ -1649,10 +1649,10 @@ presence.on("UpdateData", async () => {
 												if (
 													prompt.html ===
 													"PICK THE BEST PICTURE TO REPRESENT THE TALK"
-												)
+												) {
 													presenceData.state =
 														"Choosing a picture for the talk";
-												else presenceData.state = "Assisting their presenter";
+												} else presenceData.state = "Assisting their presenter";
 												break;
 											}
 											default: {
@@ -1896,13 +1896,14 @@ presence.on("UpdateData", async () => {
 												".input-box textarea"
 											).value
 										}'`;
+									} else {
+										presenceData.state = "Answering a question";
 									}
 									break;
 								}
 								case "choices": {
-									if (gamePlayerState.category === "skip-intro") {
+									if (gamePlayerState.category === "skip-intro")
 										presenceData.state = "Watching the tutorial";
-									}
 									break;
 								}
 								case "tappingList": {
@@ -1938,10 +1939,6 @@ presence.on("UpdateData", async () => {
 									presenceData.state = "Guessing what the wheel is thinking of";
 									break;
 								}
-								case "singleTextEntry": {
-									presenceData.state = "Answering a question";
-									break;
-								}
 								case "tappingRapid": {
 									presenceData.state = "Tapping rapidly";
 									break;
@@ -1974,22 +1971,21 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "choosing": {
-									if (prompt === "Which case do you want to investigate?") {
+									if (prompt === "Which case do you want to investigate?")
 										presenceData.state = "Choosing a case to investigate";
-									} else if (
+									else if (
 										prompt ===
 											"[header]WRONG[/header][section]Try again in 5 seconds...[/section]" ||
 										prompt === "Choose a guest to target." ||
 										(prompt as string).startsWith(
 											"Guess which detective brought "
 										)
-									) {
+									)
 										presenceData.state = "Murdering guests";
-									} else if (
+									else if (
 										(prompt as string).startsWith("Who do you think murdered ")
-									) {
+									)
 										presenceData.state = "Deciding on the culprit";
-									}
 									break;
 								}
 								case "drawing": {
@@ -2062,11 +2058,9 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "drawing": {
-									if (gamePlayerState.prompt === "an animation of yourself") {
+									if (gamePlayerState.prompt === "an animation of yourself")
 										presenceData.state = "Drawing an animation of themselves";
-									} else {
-										presenceData.state = "Drawing an animation";
-									}
+									else presenceData.state = "Drawing an animation";
 									break;
 								}
 								case "writing": {
@@ -2196,11 +2190,9 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "choices": {
-									if (gamePlayerState.category === "walkthrough") {
+									if (gamePlayerState.category === "walkthrough")
 										presenceData.state = "Watching the tutorial";
-									} else {
-										presenceData.state = "Making a choice";
-									}
+									else presenceData.state = "Making a choice";
 									break;
 								}
 								default: {
