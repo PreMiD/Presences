@@ -32,8 +32,7 @@ presence.on("UpdateData", async () => {
 	if (hostname === "weather.com") {
 		switch (pathSplit[0] ?? "") {
 			case "": {
-				presenceData.details = "Browsing";
-				presenceData.state = "Home page";
+				presenceData.details = "Browsing homepage";
 				break;
 			}
 			case "deals": {
