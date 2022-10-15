@@ -2221,6 +2221,33 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.htmf: {
+							// TODO: Complete
+							switch (gamePlayerState.kind) {
+								case "lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "postGame": {
+									presenceData.state = "Viewing the results";
+									break;
+								}
+								case "eliminating": {
+									presenceData.state = "Voting to eliminate a player";
+									break;
+								}
+								case "choosing": {
+									presenceData.state = "Choosing a player";
+									break;
+								}
+								case "waiting": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "writing": {
+									presenceData.state = "Answering a prompt";
+									break;
+								}
+							}
 							break;
 						}
 					}
