@@ -9,9 +9,7 @@
 		"en": "Stake.com is the leading crypto casino and sports betting platform.",
 		"de": "Stake.com ist die führende online Krypto-Casino und Sportwetten-Plattform."
 	},
-	"url": [
-		"stake.com"
-	],
+	"url": "stake.com",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/hDqlusY.png",
 	"thumbnail": "https://i.imgur.com/ttxjIJA.png",
