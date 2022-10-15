@@ -19,7 +19,6 @@ presence.on("UpdateData", async () => {
 		window.location.pathname.includes("casino") &&
 		!window.location.pathname.includes("games")
 	) {
-
 		if (window.location.pathname.includes("group")) {
 			presenceData.state = `Browsing ${window.location.pathname
 				.split("/group/")
@@ -28,7 +27,6 @@ presence.on("UpdateData", async () => {
 				.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}...`;
 		} else presenceData.state = "Browsing Casino...";
 	} else if (window.location.pathname.includes("games")) {
-
 		if (showCurrentGame) {
 			presenceData.state = `Playing ${document
 				.querySelector("div.title-wrap > h1")
@@ -41,33 +39,28 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
-	} else if (window.location.pathname.includes("sports")) {
-
+	} else if (window.location.pathname.includes("sports"))
 		presenceData.state = "Browsing Sports...";
-	} else presenceData.state = "Browsing...";
+	else presenceData.state = "Browsing...";
 
 	if (showBal) {
-
 		const balance = document
 				.querySelector("div.currency > span.content > span")
 				.textContent.trim(),
-			//Get Currency
-
 			currency = document
 				.querySelector("div.currency > span.variant-subtle > svg > use")
 				.getAttributeNS("http://www.w3.org/1999/xlink", "href")
 				.replace("#icon-currency-", "")
 				.toUpperCase();
 
-		if (window.location.pathname.includes("games")) {
-
+		if (window.location.pathname.includes("games"))
 			presenceData.details = "Balance: (In Game)";
-		} else if (
+		else if (
 			!window.location.pathname.includes("games") &&
 			balance.includes(",")
-		) {
+		)
 			presenceData.details = `Balance: ${balance} (${currency})`;
-		} else presenceData.details = `Balance: ${balance} ${currency}`;
+		else presenceData.details = `Balance: ${balance} ${currency}`;
 
 		if (window.location.search.includes("modal=wallet"))
 			presenceData.state = "Checking Wallet...";
