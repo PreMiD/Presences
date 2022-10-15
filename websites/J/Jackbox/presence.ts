@@ -160,7 +160,7 @@ const Games: Record<string, Game> = {
 		logo: "https://i.imgur.com/NAySr0E.png",
 	},
 	triviadeath: {
-		name: "Trivia M Party", // TODO: Fix name
+		name: "Trivia Murder Party",
 		logo: "https://i.imgur.com/zHOvymB.png",
 	},
 	// Party Pack 4
@@ -219,7 +219,7 @@ const Games: Record<string, Game> = {
 		logo: "https://i.imgur.com/sETBCgc.png",
 	},
 	triviadeath2: {
-		name: "Trivia M Party 2", // TODO: Fix name
+		name: "Trivia Murder Party 2",
 		logo: "https://i.imgur.com/9MmGVGD.png",
 	},
 	ridictionary: {
@@ -1955,7 +1955,6 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games["murder-detectives"]: {
-							// TODO: fix name
 							const icon =
 									document.querySelector<HTMLDivElement>(".header.avatar"),
 								{ kind, prompt } = gamePlayerState;
