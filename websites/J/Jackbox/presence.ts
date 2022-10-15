@@ -1957,18 +1957,39 @@ presence.on("UpdateData", async () => {
 							}
 							break;
 						}
-						case Games["mrder-detectives"]: {
+						case Games["murder-detectives"]: {
 							// TODO: fix name
-							presenceData.smallImageKey = getComputedStyle(
-								document.querySelector<HTMLDivElement>(".header.avatar"),
-								":after"
-							).backgroundImage.match(/^url\("(.*)"\)$/)[1];
-							switch (gamePlayerState.kind) {
+							const icon =
+									document.querySelector<HTMLDivElement>(".header.avatar"),
+								{ kind, prompt } = gamePlayerState;
+							if (icon) {
+								presenceData.smallImageKey = getComputedStyle(
+									icon,
+									":after"
+								).backgroundImage.match(/^url\("(.*)"\)$/)?.[1];
+							}
+							switch (kind) {
 								case "lobby": {
 									presenceData.state = "Waiting in lobby";
 									break;
 								}
 								case "choosing": {
+									if (prompt === "Which case do you want to investigate?") {
+										presenceData.state = "Choosing a case to investigate";
+									} else if (
+										prompt ===
+											"[header]WRONG[/header][section]Try again in 5 seconds...[/section]" ||
+										prompt === "Choose a guest to target." ||
+										(prompt as string).startsWith(
+											"Guess which detective brought "
+										)
+									) {
+										presenceData.state = "Murdering guests";
+									} else if (
+										(prompt as string).startsWith("Who do you think murdered ")
+									) {
+										presenceData.state = "Deciding on the culprit";
+									}
 									break;
 								}
 								case "drawing": {
@@ -1976,6 +1997,7 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "inspecting": {
+									presenceData.state = "Inspecting the killing weapons";
 									break;
 								}
 								case "writing": {
