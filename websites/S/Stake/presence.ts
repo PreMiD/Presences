@@ -19,7 +19,6 @@ presence.on("UpdateData", async () => {
 		window.location.pathname.includes("casino") &&
 		!window.location.pathname.includes("games")
 	) {
-		//Browsing Casino / Games
 
 		if (window.location.pathname.includes("group")) {
 			presenceData.state = `Browsing ${window.location.pathname
@@ -29,7 +28,6 @@ presence.on("UpdateData", async () => {
 				.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}...`;
 		} else presenceData.state = "Browsing Casino...";
 	} else if (window.location.pathname.includes("games")) {
-		//Playing Casino Game
 
 		if (showCurrentGame) {
 			presenceData.state = `Playing ${document
@@ -44,13 +42,11 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (window.location.pathname.includes("sports")) {
-		//Browsing Sports
 
 		presenceData.state = "Browsing Sports...";
 	} else presenceData.state = "Browsing...";
 
 	if (showBal) {
-		//Display Balance
 
 		const balance = document
 				.querySelector("div.currency > span.content > span")
@@ -64,18 +60,14 @@ presence.on("UpdateData", async () => {
 				.toUpperCase();
 
 		if (window.location.pathname.includes("games")) {
-			//Balance In Game (Subject To Change)
 
 			presenceData.details = "Balance: (In Game)";
 		} else if (
 			!window.location.pathname.includes("games") &&
 			balance.includes(",")
 		) {
-			//Stake Account Balance
 			presenceData.details = `Balance: ${balance} (${currency})`;
 		} else presenceData.details = `Balance: ${balance} ${currency}`;
-
-		//Browsing Modals and Subsites
 
 		if (window.location.search.includes("modal=wallet"))
 			presenceData.state = "Checking Wallet...";
@@ -90,8 +82,6 @@ presence.on("UpdateData", async () => {
 		else if (window.location.pathname.includes("/settings/"))
 			presenceData.state = "Adjusting Settings...";
 	}
-
-	//Update Data
 
 	presence.setActivity(presenceData);
 });
