@@ -6,8 +6,8 @@ const presence = new Presence({
 enum Assets {
 	Logo = "https://i.imgur.com/tPMtbjL.png",
 	Search = "https://i.imgur.com/08wjeL0.png",
-	Read = "https://i.imgur.com/Gglu4Tk.png",
-	View = "https://i.imgur.com/BMzYEcO.png",
+	Reading = "https://i.imgur.com/Gglu4Tk.png",
+	Viewing = "https://i.imgur.com/BMzYEcO.png",
 }
 
 function capitalize(str: string) {
@@ -54,7 +54,7 @@ presence.on("UpdateData", () => {
 					presenceData.state = `${document
 						.querySelector<HTMLDivElement>("nav > div:nth-child(2)")
 						.textContent.trim()} - ${progress}%`;
-					presenceData.smallImageKey = Assets.Read;
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.buttons = [
 						{
 							label: `View ${captitalized.slice(
@@ -71,7 +71,7 @@ presence.on("UpdateData", () => {
 				} else {
 					presenceData.details = `Viewing ${captitalized} Page`;
 					presenceData.state = document.querySelector("h1").textContent;
-					presenceData.smallImageKey = Assets.View;
+					presenceData.smallImageKey = Assets.Viewing;
 					presenceData.buttons = [
 						{
 							label: `View ${captitalized} Page`,
