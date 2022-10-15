@@ -74,7 +74,8 @@ presence.on("UpdateData", async () => {
 
 			if (balance.includes(","))
 				presenceData.details = `Balance: ${balance} (${currency})`;
-			else presenceData.details = `Balance: ${balance} ${currency}`;
+			else if (!balance.includes(",")) 
+				presenceData.details = `Balance: ${balance} ${currency}`;
 		}
 
 		//Browsing Modals and Subsites
