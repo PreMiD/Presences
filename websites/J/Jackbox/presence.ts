@@ -2188,6 +2188,36 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games["antique-freak"]: {
+							// TODO: Verify this is correct
+							switch (gamePlayerState.kind) {
+								case "lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "postGame": {
+									presenceData.state = "Viewing the results";
+									break;
+								}
+								case "ranking": {
+									presenceData.state = "Ranking items";
+									break;
+								}
+								case "choosing": {
+									presenceData.state = "Choosing an item";
+									break;
+								}
+								case "fact": {
+									presenceData.state = "Presenting their item";
+									break;
+								}
+								case "writing": {
+									presenceData.state = "Creating a backstory for an item";
+									break;
+								}
+								default: {
+									presenceData.state = "Waiting";
+								}
+							}
 							break;
 						}
 						case Games.htmf: {
