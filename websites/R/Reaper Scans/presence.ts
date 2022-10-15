@@ -34,14 +34,17 @@ presence.on("UpdateData", () => {
 		}
 		case "comics":
 		case "novels": {
-			const captitalized = capitalize(pathSplit[0]);
+			const captitalized = capitalize(pathSplit[0]).slice(
+				0,
+				pathSplit[0].length - 1
+			);
 			if (pathSplit[1]) {
 				if (pathSplit[2] === "chapters") {
 					let progress =
 						(document.documentElement.scrollTop /
 							(document.querySelector(
 								pathSplit[0] === "comics"
-									? "main > div:not([id*='Ads'])"
+									? "main > div:nth-of-type(2)"
 									: "article"
 							).scrollHeight -
 								window.innerHeight)) *
@@ -52,16 +55,15 @@ presence.on("UpdateData", () => {
 						.querySelector<HTMLParagraphElement>("main p")
 						.textContent.trim()}`;
 					presenceData.state = `${document
-						.querySelector<HTMLDivElement>("nav > div:nth-child(2)")
+						.querySelector<HTMLDivElement>("main nav > div:nth-child(2)")
 						.textContent.trim()} - ${progress}%`;
 					presenceData.smallImageKey = Assets.Reading;
 					presenceData.buttons = [
 						{
-							label: `View ${captitalized.slice(
-								captitalized.length - 1
-							)} Page`,
-							url: document.querySelector<HTMLAnchorElement>("h2 + div > a")
-								.href,
+							label: `View ${captitalized} Page`,
+							url: document.querySelector<HTMLAnchorElement>(
+								"main nav > div:last-child > a"
+							).href,
 						},
 						{
 							label: "View Chapter",
@@ -85,7 +87,6 @@ presence.on("UpdateData", () => {
 					document.querySelectorAll<HTMLLIElement>("h2 + div li").length
 				} ${pathSplit[0]}s found`;
 			}
-
 			break;
 		}
 		case "latest": {
