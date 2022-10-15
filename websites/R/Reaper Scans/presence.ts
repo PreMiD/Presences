@@ -57,14 +57,14 @@ presence.on("UpdateData", () => {
 					presenceData.smallImageKey = Assets.Read;
 					presenceData.buttons = [
 						{
-							label: `Visit ${captitalized.slice(
+							label: `View ${captitalized.slice(
 								captitalized.length - 1
 							)} Page`,
 							url: document.querySelector<HTMLAnchorElement>("h2 + div > a")
 								.href,
 						},
 						{
-							label: "Visit Chapter",
+							label: "View Chapter",
 							url: href,
 						},
 					];
@@ -74,7 +74,7 @@ presence.on("UpdateData", () => {
 					presenceData.smallImageKey = Assets.View;
 					presenceData.buttons = [
 						{
-							label: `Visit ${captitalized} Page`,
+							label: `View ${captitalized} Page`,
 							url: href,
 						},
 					];
