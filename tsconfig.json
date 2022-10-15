@@ -11,6 +11,7 @@
 		"noUnusedParameters": true,
 		"typeRoots": ["@types"],
 		"esModuleInterop": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"inlineSourceMap": true
 	}
 }
