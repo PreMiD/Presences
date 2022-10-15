@@ -1,16 +1,16 @@
 const presence = new Presence({
-	clientId: "1030599970551771266",
-}),
+		clientId: "1030599970551771266",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	//Get Settings
 
 	const [showBal, showTimestamp, showCurrentGame] = await Promise.all([
-		presence.getSetting<boolean>("showBal"),
-		presence.getSetting<boolean>("showTimestamp"),
-		presence.getSetting<boolean>("showCurrentGame"),
-	]),
+			presence.getSetting<boolean>("showBal"),
+			presence.getSetting<boolean>("showTimestamp"),
+			presence.getSetting<boolean>("showCurrentGame"),
+		]),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
 		};
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 				.split("/group/")
 				.pop()
 				.replaceAll("-", " ")
-				.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())}...`;
+				.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}...`;
 		} else presenceData.state = "Browsing Casino...";
 	} else if (window.location.pathname.includes("games")) {
 		//Playing Casino Game
@@ -55,8 +55,8 @@ presence.on("UpdateData", async () => {
 		//Display Balance
 
 		const balance = document
-			.querySelector("div.currency > span.content > span")
-			.textContent.trim(),
+				.querySelector("div.currency > span.content > span")
+				.textContent.trim(),
 			//Get Currency
 
 			currency = document
@@ -93,7 +93,6 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Adjusting Settings...";
 	}
 
-	
 	//Update Data
 
 	presence.setActivity(presenceData);
