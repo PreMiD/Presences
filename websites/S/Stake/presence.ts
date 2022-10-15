@@ -75,9 +75,7 @@ presence.on("UpdateData", async () => {
 		) {
 			//Stake Account Balance
 			presenceData.details = `Balance: ${balance} (${currency})`;
-		} else 
-			presenceData.details = `Balance: ${balance} ${currency}`;
-		
+		} else presenceData.details = `Balance: ${balance} ${currency}`;
 
 		//Browsing Modals and Subsites
 
