@@ -69,14 +69,15 @@ presence.on("UpdateData", async () => {
 			//Balance In Game (Subject To Change)
 
 			presenceData.details = "Balance: (In Game)";
-		} else {
+		} else if (
+			!window.location.pathname.includes("games") &&
+			balance.includes(",")
+		) {
 			//Stake Account Balance
-
-			if (balance.includes(","))
-				presenceData.details = `Balance: ${balance} (${currency})`;
-			else if (!balance.includes(","))
-				presenceData.details = `Balance: ${balance} ${currency}`;
-		}
+			presenceData.details = `Balance: ${balance} (${currency})`;
+		} else 
+			presenceData.details = `Balance: ${balance} ${currency}`;
+		
 
 		//Browsing Modals and Subsites
 
