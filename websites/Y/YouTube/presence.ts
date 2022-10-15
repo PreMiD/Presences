@@ -183,7 +183,13 @@ presence.on("UpdateData", async () => {
 		//* Due to differences between old and new YouTube, we should add different selectors.
 		// Get title
 		YouTubeEmbed
-			? (title = document.querySelector("div.ytp-title-text > a"))
+			? (title = document
+					.querySelector(
+						'[class="reel-video-in-sequence style-scope ytd-shorts"]'
+					)
+					?.querySelector(
+						'[class="title style-scope ytd-reel-player-header-renderer"]'
+					))
 			: YoutubeShorts
 			? (title = document.querySelector(
 					'[class="ytp-title-link yt-uix-sessionlink"]'
@@ -227,6 +233,7 @@ presence.on("UpdateData", async () => {
 			);
 		}
 
+		if (!YoutubeShorts) uploaderShorts = null;
 		const uploader =
 				uploaderShorts ??
 				(uploaderMiniPlayer && uploaderMiniPlayer.textContent.length > 0
