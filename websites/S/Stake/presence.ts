@@ -93,6 +93,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Adjusting Settings...";
 	}
 
+	
 	//Update Data
 
 	presence.setActivity(presenceData);
