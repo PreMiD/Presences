@@ -2097,6 +2097,30 @@ presence.on("UpdateData", async () => {
 						}
 						// Party Pack 9
 						case Games.fourbage: {
+							switch (gamePlayerState.kind) {
+								case "lobby": {
+									presenceData.state = "Waiting in lobby";
+									break;
+								}
+								case "waiting": {
+									presenceData.state = "Waiting";
+									break;
+								}
+								case "choosing": {
+									break;
+								}
+								case "writing": {
+									presenceData.state = "Writing lies";
+									break;
+								}
+								case "voting": {
+									break;
+								}
+								case "postGame": {
+									presenceData.state = "Viewing the results";
+									break;
+								}
+							}
 							break;
 						}
 						case Games.lineup: {
