@@ -4,8 +4,6 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	//Get Settings
-
 	const [showBal, showTimestamp, showCurrentGame] = await Promise.all([
 			presence.getSetting<boolean>("showBal"),
 			presence.getSetting<boolean>("showTimestamp"),
