@@ -20,22 +20,22 @@ presence.on("UpdateData", async () => {
 				?.textContent
 		) {
 			case "Settings":
-				presenceData.state = `Changing settings`;
+				presenceData.state = "Changing settings";
 				break;
 			case "Rankings":
-				presenceData.state = `Viewing rankings`;
+				presenceData.state = "Viewing rankings";
 				break;
 			case "Badges":
-				presenceData.state = `Viewing badges`;
+				presenceData.state = "Viewing badges";
 				break;
 			case "Expeditions":
-				presenceData.state = `Viewing expeditions`;
+				presenceData.state = "Viewing expeditions";
 				break;
 			case "UI Theme":
-				presenceData.state = `Changing UI theme`;
+				presenceData.state = "Changing UI theme";
 				break;
 			case "Log In":
-				presenceData.state = `Logging in`;
+				presenceData.state = "Logging in";
 				break;
 		}
 
