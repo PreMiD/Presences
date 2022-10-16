@@ -9,31 +9,33 @@ presence.on("UpdateData", async () => {
 		titleInfo = document.title.split(" - "),
 		location = document.querySelector("#locationText");
 
+	if (location?.textContent)
+		presenceData.state = `Dreaming at ${location.textContent}`;
+	else presenceData.state = "Dreaming";
+
 	if (titleInfo.length > 1 && titleInfo[1] === "YNOproject" ? true : false) {
+		presenceData.details = `${titleInfo[0]}`;
 		switch (
 			document.querySelector("#modalContainer .modal:not(.hidden) .modalTitle")
 				?.textContent
 		) {
 			case "Settings":
-				presenceData.details = `Changing settings for ${titleInfo[0]}`;
+				presenceData.state = `Changing settings`;
 				break;
 			case "Rankings":
-				presenceData.details = `Viewing rankings for ${titleInfo[0]}`;
+				presenceData.state = `Viewing rankings`;
 				break;
 			case "Badges":
-				presenceData.details = `Viewing badges for ${titleInfo[0]}`;
+				presenceData.state = `Viewing badges`;
 				break;
 			case "Expeditions":
-				presenceData.details = `Viewing expeditions for ${titleInfo[0]}`;
+				presenceData.state = `Viewing expeditions`;
 				break;
 			case "UI Theme":
-				presenceData.details = `Changing UI theme for ${titleInfo[0]}`;
+				presenceData.state = `Changing UI theme`;
 				break;
 			case "Log In":
-				presenceData.details = `Logging in to ${titleInfo[0]}`;
-				break;
-			default:
-				presenceData.details = `Dreaming on ${titleInfo[0]}`;
+				presenceData.state = `Logging in`;
 				break;
 		}
 
@@ -41,17 +43,18 @@ presence.on("UpdateData", async () => {
 			document.querySelector("#chatInput:focus") &&
 			document.querySelector("#playerCountLabel")
 		) {
+			presenceData.details = `${titleInfo[0]}`;
 			const playerCount =
 				parseInt(
 					document.querySelector("#playerCountLabel").textContent.split(" ")[0]
 				) - 1;
-			presenceData.details = `Chatting ${
+			presenceData.state = `Chatting ${
 				playerCount <= 0
 					? "alone"
 					: playerCount === 1
 					? "with 1 player"
 					: `with ${playerCount} players`
-			} on ${titleInfo[0]}`;
+			}`;
 		}
 
 		presenceData.smallImageKey = `https://${
@@ -59,8 +62,6 @@ presence.on("UpdateData", async () => {
 		}/images/door_${document.location.href.split("/")[3]}.gif`;
 		presenceData.smallImageText = titleInfo[0];
 	} else presenceData.state = "Choosing a game...";
-
-	if (location?.textContent) presenceData.state = location.textContent;
 
 	presence.setActivity(presenceData);
 });
