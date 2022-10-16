@@ -32,7 +32,7 @@ function uploadImage(url: string) {
 					setTimeout(() => {
 						presence.info(uploadURL);
 						resolve(uploadURL);
-					}, 500);
+					}, 750);
 				});
 		} catch (err) {
 			presence.error(err);
@@ -76,9 +76,13 @@ presence.on("UpdateData", async () => {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
 					activityState = "results";
 				}
-				if (document.activeElement === input && input.textContent !== oldPrompt)
+				if (
+					document.activeElement === input &&
+					input.textContent !== oldPrompt
+				) {
 					presenceData.details = "Thinking of a new prompt";
-				else if (container.childElementCount > 3) {
+					slideshow.deleteAllSlides();
+				} else if (container.childElementCount > 3) {
 					presenceData.details = "Viewing results";
 					presenceData.state = `"${oldPrompt}"`;
 					const imageURLs = [...container.children].map(child => {
