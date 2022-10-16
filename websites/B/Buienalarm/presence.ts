@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Zoekt naar";
 			presenceData.state = search.value;
 		} else presenceData.details = "Aan het zoeken";
-		presenceData.smallImageKey = Assets.SearchImage;
+		presenceData.smallImageKey = Assets.Search;
 	} else if (locationScript === null) {
 		if (pathname === "/") presenceData.details = "Bekijkt de home pagina";
 		else presenceData.details = "Aan het browsen..";
