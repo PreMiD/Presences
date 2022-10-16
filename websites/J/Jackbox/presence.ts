@@ -300,7 +300,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("useTime"),
 			presence.getSetting<boolean>("useDetails"),
 		]),
-		{ href, hostname } = window.location;
+		{ href, hostname, pathname } = window.location,
+		pathSplit = pathname.split("/").slice(1);
 
 	if (useTime) presenceData.startTimestamp = browsingTimestamp;
 
@@ -2283,6 +2284,63 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.jackboxgames.com": {
+			switch (pathSplit[0] ?? "") {
+				case "": {
+					presenceData.details = "Browsing home page";
+					break;
+				}
+				case "author": {
+					presenceData.details = "Browsing blog posts by author";
+					presenceData.state = document
+						.querySelector("h1")
+						.textContent.match(/Author: (.*)/i)[1];
+					break;
+				}
+				case "blog": {
+					presenceData.details = "Browsing blog posts";
+					break;
+				}
+				case "category": {
+					presenceData.details = "Browsing blog category";
+					presenceData.state = document
+						.querySelector("h1")
+						.textContent.match(/Category: (.*)/i)[1];
+					break;
+				}
+				case "games": {
+					presenceData.details = "Browsing games";
+					break;
+				}
+				case "tag": {
+					presenceData.details = "Browsing blog posts by tag";
+					presenceData.state = document
+						.querySelector("h1")
+						.textContent.match(/Tag: (.*)/i)[1];
+					break;
+				}
+				default: {
+					if (/^\/\d{4}(\/\d{2})?(\/\d{2})?\/$/.test(pathname)) {
+						presenceData.details = "Browsing blog posts by date";
+						presenceData.state = document.querySelector("h1").textContent;
+					} else if (
+						document.body.getAttribute("itemtype") === "http://schema.org/Blog"
+					) {
+						presenceData.details = "Reading an article";
+						presenceData.state = document.querySelector("h1").textContent;
+						presenceData.buttons = [
+							{
+								label: "Read Article",
+								url: href,
+							},
+						];
+					} else {
+						presenceData.details = "Browsing";
+						presenceData.state = document.title.match(
+							/^(.*?)( - Jackbox Games)?$/
+						)[1];
+					}
+				}
+			}
 			break;
 		}
 	}
