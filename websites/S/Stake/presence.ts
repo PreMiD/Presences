@@ -11,22 +11,20 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/D4d2JSH.png",
-		};
+		},
+		{ pathname, search, href } = window.location;
 
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-	if (
-		window.location.pathname.includes("casino") &&
-		!window.location.pathname.includes("games")
-	) {
-		if (window.location.pathname.includes("group")) {
-			presenceData.state = `Browsing ${window.location.pathname
+	if (pathname.includes("casino") && !pathname.includes("games")) {
+		if (pathname.includes("group")) {
+			presenceData.state = `Browsing ${pathname
 				.split("/group/")
 				.pop()
 				.replaceAll("-", " ")
 				.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}...`;
 		} else presenceData.state = "Browsing Casino...";
-	} else if (window.location.pathname.includes("games")) {
+	} else if (pathname.includes("games")) {
 		if (showCurrentGame) {
 			presenceData.state = `Playing ${document
 				.querySelector("div.title-wrap > h1")
@@ -35,11 +33,11 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Play Game",
-					url: window.location.href,
+					url: href,
 				},
 			];
 		}
-	} else if (window.location.pathname.includes("sports"))
+	} else if (pathname.includes("sports"))
 		presenceData.state = "Browsing Sports...";
 	else presenceData.state = "Browsing...";
 
@@ -53,26 +51,22 @@ presence.on("UpdateData", async () => {
 				.replace("#icon-currency-", "")
 				.toUpperCase();
 
-		if (window.location.pathname.includes("games"))
-			presenceData.details = "Balance: (In Game)";
-		else if (
-			!window.location.pathname.includes("games") &&
-			balance.includes(",")
-		)
+		if (pathname.includes("games")) presenceData.details = "Balance: (In Game)";
+		else if (!pathname.includes("games") && balance.includes(","))
 			presenceData.details = `Balance: ${balance} (${currency})`;
 		else presenceData.details = `Balance: ${balance} ${currency}`;
 
-		if (window.location.search.includes("modal=wallet"))
+		if (search.includes("modal=wallet"))
 			presenceData.state = "Checking Wallet...";
-		else if (window.location.search.includes("modal=vault"))
+		else if (search.includes("modal=vault"))
 			presenceData.state = "Checking Vault...";
-		else if (window.location.search.includes("modal=vip"))
+		else if (search.includes("modal=vip"))
 			presenceData.state = "Checking VIP Progress...";
-		else if (window.location.search.includes("modal=user"))
+		else if (search.includes("modal=user"))
 			presenceData.state = "Checking Statistics...";
-		else if (window.location.pathname.includes("/transactions/"))
+		else if (pathname.includes("/transactions/"))
 			presenceData.state = "Viewing Transactions...";
-		else if (window.location.pathname.includes("/settings/"))
+		else if (pathname.includes("/settings/"))
 			presenceData.state = "Adjusting Settings...";
 	}
 
