@@ -2,7 +2,7 @@ import "source-map-support/register.js";
 
 import { transformFileAsync as transform } from "@babel/core";
 import chalk from "chalk";
-import { sync as glob } from "glob";
+import globModule from "glob";
 import {
 	type AnyBulkWriteOperation,
 	type BulkWriteResult,
@@ -23,7 +23,8 @@ import {
 
 import { isValidJSON, type Metadata, readFile, readJson } from "../util.js";
 
-const url = process.env.MONGO_URL,
+const { sync: glob } = globModule,
+	url = process.env.MONGO_URL,
 	dbName = "PreMiD",
 	client = new MongoClient(url, { appName: "PreMiD-PresenceUpdater" });
 
