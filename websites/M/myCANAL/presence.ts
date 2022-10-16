@@ -42,13 +42,12 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (video && !isNaN(video.duration)) {
-		const titleTvShows = document.querySelectorAll(".MGrm26svmXpUhj6dfbGN")
-			;
+		const titleTvShows = document.querySelectorAll(".MGrm26svmXpUhj6dfbGN");
 		let channelID = new URLSearchParams(window.location.search).get("channel");
 		switch (document.location.pathname) {
 			case containsTerm("live"):
 				channelID = `${channelID.charAt(0)} ${channelID.substring(1)}`;
-				presenceData.details = presenceData.details = document.querySelector(
+				presenceData.details = document.querySelector(
 					".A6AH2oNkXUuOKJN5IYrL"
 				).textContent;
 				presenceData.state = `sur ${
