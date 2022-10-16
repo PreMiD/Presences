@@ -34,7 +34,7 @@ presence.on("UpdateData", () => {
 		}
 		case "comics":
 		case "novels": {
-			const captitalized = capitalize(pathSplit[0]).slice(
+			const captitalizedPath = capitalize(pathSplit[0]).slice(
 				0,
 				pathSplit[0].length - 1
 			);
@@ -60,7 +60,7 @@ presence.on("UpdateData", () => {
 					presenceData.smallImageKey = Assets.Reading;
 					presenceData.buttons = [
 						{
-							label: `View ${captitalized} Page`,
+							label: `View ${captitalizedPath} Page`,
 							url: document.querySelector<HTMLAnchorElement>(
 								"main nav > div:last-child > a"
 							).href,
@@ -71,18 +71,18 @@ presence.on("UpdateData", () => {
 						},
 					];
 				} else {
-					presenceData.details = `Viewing ${captitalized} Page`;
+					presenceData.details = `Viewing ${captitalizedPath} Page`;
 					presenceData.state = document.querySelector("h1").textContent;
 					presenceData.smallImageKey = Assets.Viewing;
 					presenceData.buttons = [
 						{
-							label: `View ${captitalized} Page`,
+							label: `View ${captitalizedPath} Page`,
 							url: href,
 						},
 					];
 				}
 			} else {
-				presenceData.details = `Viewing ${captitalized} List`;
+				presenceData.details = `Viewing ${captitalizedPath} List`;
 				presenceData.state = `${
 					document.querySelectorAll<HTMLLIElement>("h2 + div li").length
 				} ${pathSplit[0]}s found`;
