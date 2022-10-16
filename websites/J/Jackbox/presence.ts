@@ -300,7 +300,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("useTime"),
 			presence.getSetting<boolean>("useDetails"),
 		]),
-		{ href, hostname, pathname } = window.location,
+		{ href, hostname, pathname, search } = window.location,
 		pathSplit = pathname.split("/").slice(1);
 
 	if (useTime) presenceData.startTimestamp = browsingTimestamp;
@@ -1897,9 +1897,7 @@ presence.on("UpdateData", async () => {
 												".input-box textarea"
 											).value
 										}'`;
-									} else {
-										presenceData.state = "Answering a question";
-									}
+									} else presenceData.state = "Answering a question";
 									break;
 								}
 								case "choices": {
@@ -2339,6 +2337,43 @@ presence.on("UpdateData", async () => {
 							/^(.*?)( - Jackbox Games)?$/
 						)[1];
 					}
+				}
+			}
+			break;
+		}
+		case "shop.jackboxgames.com": {
+			switch (pathSplit[0] ?? "") {
+				case "": {
+					presenceData.details = "Browsing store";
+					break;
+				}
+				case "cart": {
+					presenceData.details = "Viewing cart";
+					break;
+				}
+				case "collections": {
+					if (pathSplit[1]) {
+						if (pathSplit.includes("products")) {
+							presenceData.details = "Viewing a product";
+							presenceData.state = document.querySelector("h1").textContent;
+						} else {
+							presenceData.details = "Browsing collection";
+							presenceData.state = document.querySelector("h1").textContent;
+						}
+					} else presenceData.details = "Browsing collections";
+					break;
+				}
+				case "products": {
+					if (pathSplit[1]) {
+						presenceData.details = "Viewing a product";
+						presenceData.state = document.querySelector("h1").textContent;
+					} else presenceData.details = "Browsing collections";
+					break;
+				}
+				case "search": {
+					presenceData.details = "Searching store";
+					presenceData.state = new URLSearchParams(search).get("q");
+					break;
 				}
 			}
 			break;
