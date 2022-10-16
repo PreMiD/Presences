@@ -1,4 +1,4 @@
-import "source-map-support/register";
+import "source-map-support/register.js";
 
 import { transformFileAsync as transform } from "@babel/core";
 import chalk from "chalk";
@@ -21,7 +21,7 @@ import {
 	getPreEmitDiagnostics,
 } from "typescript";
 
-import { isValidJSON, type Metadata, readFile, readJson } from "../util";
+import { isValidJSON, type Metadata, readFile, readJson } from "../util.js";
 
 const url = process.env.MONGO_URL,
 	dbName = "PreMiD",

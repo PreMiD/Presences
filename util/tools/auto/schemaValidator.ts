@@ -1,4 +1,4 @@
-import "source-map-support/register";
+import "source-map-support/register.js";
 
 import axios from "axios";
 import chalk from "chalk";
@@ -7,7 +7,7 @@ import { validate } from "jsonschema";
 import { existsSync, readFileSync } from "node:fs";
 import { compare, diff } from "semver";
 
-import { createAnnotation, getChangedFolders, type Metadata } from "../util";
+import { createAnnotation, getChangedFolders, type Metadata } from "../util.js";
 
 const latestMetadataSchema = async (): Promise<string[]> => {
 		const versions = (

@@ -1,7 +1,7 @@
-import "source-map-support/register";
+import "source-map-support/register.js";
 
 import chalk from "chalk";
-import { createAnnotation, execShellCommand, getChangedFolders } from "./util";
+import { createAnnotation, execShellCommand, getChangedFolders } from "./util.js";
 import { rm, writeFile } from "fs/promises";
 import { resolve } from "path";
 
