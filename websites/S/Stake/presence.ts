@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showCurrentGame"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/D4d2JSH.png",
 		};
 
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
