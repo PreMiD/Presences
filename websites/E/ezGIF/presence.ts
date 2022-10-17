@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		pathSplit = window.location.pathname.split("/").slice(1),
-		showImages = await presence.getSetting("showImages");
+		showImages = await presence.getSetting<boolean>("showImages");
 
 	switch (pathSplit[0] ?? "") {
 		case "": {
@@ -25,7 +25,6 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Reading help article";
 				presenceData.state = document.querySelector("h1").textContent;
 			} else presenceData.details = "Browsing help and FAQ";
-
 			break;
 		}
 		case "split": {
