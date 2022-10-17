@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			messageContainer = document.querySelector<HTMLDivElement>("#message");
 
 		if (!isNaN(remainingSeconds))
-			presenceData.startTimestamp =
+			presenceData.endTimestamp =
 				Math.floor(Date.now() / 1000) + remainingSeconds;
 
 		if (document.querySelector<HTMLDivElement>("#report"))
