@@ -20,15 +20,36 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing archived tweets";
 			break;
 		}
-		case "maker": {
-			presenceData.details = "Creating a GIF";
+		case "help": {
 			if (pathSplit[1]) {
-				const outputImage =
-					document.querySelector<HTMLImageElement>("#output img");
-				if (outputImage && showImages)
-					presenceData.largeImageKey = outputImage.src;
-			}
+				presenceData.details = "Reading help article";
+				presenceData.state = document.querySelector("h1").textContent;
+			} else presenceData.details = "Browsing help and FAQ";
+
 			break;
+		}
+		case "split": {
+			presenceData.details = "Extracting a frame from a GIF";
+			break;
+		}
+		default: {
+			if (
+				document.querySelector<HTMLFormElement>("#main form") ||
+				pathSplit[1]
+			) {
+				presenceData.details = `Using the '${
+					document.querySelector("h1").textContent
+				}' tool`;
+				if (pathSplit[1]) {
+					const outputImage =
+						document.querySelector<HTMLImageElement>("#output img");
+					if (outputImage && showImages)
+						presenceData.largeImageKey = outputImage.src;
+				}
+			} else {
+				presenceData.details = "Browsing";
+				presenceData.state = document.querySelector("h1").textContent;
+			}
 		}
 	}
 
