@@ -36,16 +36,23 @@ let gamePlayerState: {
 	browsingTimestamp = Math.round(Date.now() / 1000),
 	gametag: string;
 
-const shortenedURLs: Record<string, string> = {};
-async function getShortURL(url: string) {
-	if (!url || url.length < 256) return url;
-	if (shortenedURLs[url]) return shortenedURLs[url];
+const uploadedFiles: Record<string, string> = {};
+async function uploadFile(url: string, defaultImage: string): Promise<string> {
+	if (uploadedFiles[url]) return uploadedFiles[url];
+	uploadedFiles[url] = defaultImage;
+
 	try {
-		const pdURL = await (
-			await fetch(`https://pd.premid.app/create/${url}`)
-		).text();
-		shortenedURLs[url] = pdURL;
-		return pdURL;
+		const data = await fetch(url).then(res => res.blob()),
+			resultURL = await fetch("https://bashupload.com/", {
+				method: "POST",
+				body: data,
+			})
+				.then(res => res.text())
+				.then(text => text.match(/https(.*)/)?.[0]);
+
+		presence.info(resultURL);
+		uploadedFiles[url] = resultURL;
+		return resultURL;
 	} catch (err) {
 		presence.error(err);
 		return url;
@@ -1869,8 +1876,12 @@ presence.on("UpdateData", async () => {
 											document.querySelector<HTMLImageElement>(
 												".imageData"
 											)?.src;
-										if (imageLink)
-											presenceData.largeImageKey = await getShortURL(imageLink);
+										if (imageLink) {
+											presenceData.largeImageKey = await uploadFile(
+												imageLink,
+												logo
+											);
+										}
 										presenceData.state = "Drawing a challenger";
 										break;
 									}
