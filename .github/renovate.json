@@ -1,5 +1,7 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["github>Recodive/Configs:renovate-config"],
-	"automerge": false
+	"addLabels": ["dependencies"],
+	"automerge": false,
+	"semanticCommits": "enabled",
+	"stabilityDays": 3
 }
