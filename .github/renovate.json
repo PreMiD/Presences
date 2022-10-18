@@ -3,5 +3,6 @@
 	"addLabels": ["dependencies"],
 	"automerge": false,
 	"semanticCommits": "enabled",
+	"configWarningReuseIssue": false,
 	"stabilityDays": 3
 }
