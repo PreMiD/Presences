@@ -1,20 +1,20 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "service": "Polywork",
-  "author": {
-    "id": "582211583938134028",
-    "name": "Yeikzy#0001"
-  },
-  "description": {
-    "en": "Polywork is a professional network where people highlight all kinds of ... me a line here if you want to learn more, or click here to view the job details."
-  },
-  "url": "polywork.com",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/8KLMTMQ.png",
-  "thumbnail": "https://i.imgur.com/9ZrWJdk.jpg",
-  "color": "#7119ff",
-  "tags": [
-    "fun"
-  ],
-  "category": "socials"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "582211583938134028",
+		"name": "Yeikzy#0001"
+	},
+	"service": "Polywork",
+	"description": {
+		"en": "Polywork is a professional network where people highlight all kinds of ... me a line here if you want to learn more, or click here to view the job details."
+	},
+	"url": "polywork.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/8KLMTMQ.png",
+	"thumbnail": "https://i.imgur.com/9ZrWJdk.jpg",
+	"color": "#7119ff",
+	"category": "socials",
+	"tags": [
+		"fun"
+	]
 }
