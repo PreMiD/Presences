@@ -1,10 +1,10 @@
-import "source-map-support/register";
+import "source-map-support/register.js";
 
-import { sync as glob } from "glob";
+import globModule from "glob";
 import { existsSync as exists } from "node:fs";
 import { coerce, inc, valid } from "semver";
 
-import { isValidJSON, type Metadata, readFile, writeJson } from "./util";
+import { isValidJSON, type Metadata, readFile, writeJson } from "./util.js";
 
 /*  NOTE: THIS IS A TOOL THAT IS ONLY MEANT TO BE USED
     BY THE DEVS AND REVIEWERS FOR DEPLOYMENT PURPOSES,
@@ -12,7 +12,8 @@ import { isValidJSON, type Metadata, readFile, writeJson } from "./util";
     REQUEST UNLESS YOU'VE BEEN EXPLICITLY INSTRUCTED BY
     A DEV TO DO SO, WHICH WILL MOST LIKELY NEVER HAPPEN.  */
 
-const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
+const { sync: glob } = globModule,
+	missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
 		pF => !exists(`${pF}/metadata.json`)
 	),
 	allmeta: Array<[Metadata, string]> = glob(

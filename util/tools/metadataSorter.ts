@@ -1,12 +1,13 @@
-import "source-map-support/register";
+import "source-map-support/register.js";
 
 import axios from "axios";
-import { sync as glob } from "glob";
+import globModule from "glob";
 import { existsSync as exists } from "node:fs";
 
-import { isValidJSON, type Metadata, readFile, writeJson } from "./util";
+import { isValidJSON, type Metadata, readFile, writeJson } from "./util.js";
 
-const missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
+const { sync: glob } = globModule,
+	missingMetadata: string[] = glob("./{websites,programs}/*/*/").filter(
 		pF => !exists(`${pF}/metadata.json`)
 	),
 	allmeta: [Metadata, string][] = glob(

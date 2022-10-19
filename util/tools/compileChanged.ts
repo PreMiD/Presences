@@ -1,7 +1,11 @@
-import "source-map-support/register";
+import "source-map-support/register.js";
 
-import { green, red } from "chalk";
-import { createAnnotation, execShellCommand, getChangedFolders } from "./util";
+import chalk from "chalk";
+import {
+	createAnnotation,
+	execShellCommand,
+	getChangedFolders,
+} from "./util.js";
 import { rm, writeFile } from "fs/promises";
 import { resolve } from "path";
 
@@ -13,7 +17,7 @@ async function main() {
 	await compileFile(0);
 	const presenceErrors = Object.keys(errors).length;
 	if (presenceErrors) console.log(errors.join("\n"));
-	else console.log(green("✔ All presences compiled successfully!"));
+	else console.log(chalk.green("✔ All presences compiled successfully!"));
 
 	async function compileFile(i: number): Promise<void> {
 		if (!changedFolders[i]) return;
@@ -31,7 +35,9 @@ async function main() {
 			await rm(resolve(changedFolders[i], "tsconfig.json"));
 
 			console.log(
-				green(`✔ Successfully compiled ${changedFolders[i].split("/").at(-1)}`)
+				chalk.green(
+					`✔ Successfully compiled ${changedFolders[i].split("/").at(-1)}`
+				)
 			);
 		} catch (err) {
 			const error = (err.stderr || err.stdout || "Couldn't find error")
@@ -66,7 +72,7 @@ async function main() {
 				});
 
 			console.error(
-				red(`✘ Error on ${changedFolders[i].split("/").at(-1)}:\n`),
+				chalk.red(`✘ Error on ${changedFolders[i].split("/").at(-1)}:\n`),
 				error
 			);
 		} finally {

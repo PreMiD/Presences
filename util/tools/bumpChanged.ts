@@ -1,11 +1,11 @@
-import "source-map-support/register";
+import "source-map-support/register.js";
 
 import axios from "axios";
 import debug from "debug";
 import { join, normalize, resolve, sep } from "node:path";
 import { coerce, inc } from "semver";
 
-import { getChangedFolders, readJson, writeJson } from "./util";
+import { getChangedFolders, readJson, writeJson } from "./util.js";
 
 const log = debug("BumpChanged");
 debug.enable("BumpChanged*");
