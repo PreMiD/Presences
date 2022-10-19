@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/D4d2JSH.png",
 		},
-		{ pathname, search, href } = window.location;
+		{ pathname, search } = window.location;
 
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
@@ -29,13 +29,6 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Playing ${document
 				.querySelector("div.title-wrap > h1")
 				.textContent.trim()}`;
-
-			presenceData.buttons = [
-				{
-					label: "Play Game",
-					url: href,
-				},
-			];
 		}
 	} else if (pathname.includes("sports"))
 		presenceData.state = "Browsing Sports...";
