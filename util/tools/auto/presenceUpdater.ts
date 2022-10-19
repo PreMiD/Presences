@@ -14,12 +14,10 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, normalize, resolve, sep } from "node:path";
 import { valid } from "semver";
 import { minify as terser } from "terser";
-import {
-	type CompilerOptions,
-	createProgram,
-	flattenDiagnosticMessageText,
-	getPreEmitDiagnostics,
-} from "typescript";
+import typescript from "typescript";
+import { type CompilerOptions } from "typescript";
+const { createProgram, flattenDiagnosticMessageText, getPreEmitDiagnostics } =
+	typescript;
 
 import { isValidJSON, type Metadata, readFile, readJson } from "../util.js";
 
