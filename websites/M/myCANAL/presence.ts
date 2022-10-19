@@ -1,3 +1,10 @@
+enum Assets {
+	Logo = "https://i.imgur.com/ZpDYxNn.png",
+	Pause = "https://i.imgur.com/noKfV57.png",
+	Play = "https://i.imgur.com/kmMmdW0.png",
+	Live = "https://i.imgur.com/wAc7YId.png",
+}
+
 const presence = new Presence({
 		clientId: "844106861711196179",
 	}),
@@ -14,7 +21,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: Assets.Logo,
 		},
 		video = document.querySelector<HTMLVideoElement>(".iIZX3IGkM2eBzzWle1QQ"),
 		showCover = await presence.getSetting<boolean>("cover"),
@@ -61,8 +68,8 @@ presence.on("UpdateData", async () => {
 					? document.querySelector<HTMLImageElement>(
 							`#\\3${channelID} > a > div > div > div > div > div > img`
 					  ).src
-					: "logo";
-				presenceData.smallImageKey = "live";
+					: Assets.Logo;
+				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = "En direct";
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
@@ -79,8 +86,8 @@ presence.on("UpdateData", async () => {
 							document.querySelector<HTMLMetaElement>(
 								"[property='og:image']"
 							)?.content)
-					: "logo";
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+					: Assets.Logo;
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
@@ -95,8 +102,8 @@ presence.on("UpdateData", async () => {
 							document.querySelector<HTMLMetaElement>(
 								"[property='og:image']"
 							)?.content)
-					: "logo";
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+					: Assets.Logo;
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
