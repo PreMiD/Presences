@@ -3,26 +3,26 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	content = {
-		viewingImage: "https://i.imgur.com/9WPWqvT.png",
-		buyingImage: "https://i.imgur.com/JKLNlvT.png",
-		viewingImageText: "Viewing...",
-		buyingImageText: "Buying...",
+		ViewingImage: "https://i.imgur.com/9WPWqvT.png",
+		BuyingImage: "https://i.imgur.com/JKLNlvT.png",
+		ViewingImageText: "Viewing...",
+		BuyingImageText: "Buying...",
 	};
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/IlUpO2s.png",
 		details: "Viewing Homepage",
-		smallImageKey: content.viewingImage,
-		smallImageText: content.viewingImageText,
+		smallImageKey: content.ViewingImage,
+		smallImageText: content.ViewingImageText,
 		startTimestamp: browsingTimestamp,
 	};
 	const { host, pathname, href } = document.location,
 		pages: Record<string, PresenceData> = {
 			"/backgrounds": {
 				details: "Viewing Backgrounds",
-				smallImageKey: content.viewingImage,
-				smallImageText: content.viewingImageText,
+				smallImageKey: content.ViewingImage,
+				smallImageText: content.ViewingImageText,
 				buttons: [
 					{
 						label: "View Backgrounds",
@@ -32,8 +32,8 @@ presence.on("UpdateData", async () => {
 			},
 			"/profilebg": {
 				details: "Viewing Profile Backgrounds",
-				smallImageKey: content.viewingImage,
-				smallImageText: content.viewingImageText,
+				smallImageKey: content.ViewingImage,
+				smallImageText: content.ViewingImageText,
 				buttons: [
 					{
 						label: "View Profile Backgrounds",
@@ -43,8 +43,8 @@ presence.on("UpdateData", async () => {
 			},
 			"/frames": {
 				details: "Viewing Frames",
-				smallImageKey: content.viewingImage,
-				smallImageText: content.viewingImageText,
+				smallImageKey: content.ViewingImage,
+				smallImageText: content.ViewingImageText,
 				buttons: [
 					{
 						label: "View Frames",
@@ -54,8 +54,8 @@ presence.on("UpdateData", async () => {
 			},
 			"/items": {
 				details: "Viewing Items",
-				smallImageKey: content.viewingImage,
-				smallImageText: content.viewingImageText,
+				smallImageKey: content.ViewingImage,
+				smallImageText: content.ViewingImageText,
 				buttons: [
 					{
 						label: "View Items",
@@ -76,8 +76,8 @@ presence.on("UpdateData", async () => {
 			},
 			"/team": {
 				details: "Viewing Team",
-				smallImageKey: content.viewingImage,
-				smallImageText: content.viewingImageText,
+				smallImageKey: content.ViewingImage,
+				smallImageText: content.ViewingImageText,
 				buttons: [
 					{
 						label: "View Sofi Team",
@@ -85,20 +85,17 @@ presence.on("UpdateData", async () => {
 					},
 				],
 			},
-			"/profile/settings": { details: "Viewing profile settings" },
-			"/vtc": { details: "Viewing the VTC center" },
-			"/vtc/search": { details: "Searching for a VTC" },
-			"/vtc/create": { details: "Creating a VTC" },
-			"/blog": { details: "Browsing the blog" },
-			"/events": { details: "Viewing the events system" },
-			"/events/manage": { details: "Managing their events" },
-			"/events/manage/past": { details: "Viewing their past events" },
-			"/events/create": { details: "Creating an event" },
-			"/events/search": { details: "Searching for an event" },
-			"/api": { details: "Viewing the API" },
-			"/live": { details: "Viewing the live stats" },
-			"/history": { details: "Viewing the history" },
-			"/settings": { details: "Viewing the settings" },
+			"/art": {
+				details: "Viewing Art Gallery",
+				smallImageKey: content.ViewingImage,
+				smallImageText: content.ViewingImageText,
+				buttons: [
+					{
+						label: "View Art Gallery",
+						url: href,
+					},
+				],
+			},
 		};
 
 	if (host === "sofi.gg") {
@@ -117,14 +114,30 @@ presence.on("UpdateData", async () => {
 				const userTag = data.textContent?.match(/.*#[0-9]+/gi);
 				userTag ? (presenceData.state = `Of ${userTag[0]}`) : null;
 			}
+		} else if (pathname.startsWith("/art")) {
+			const data = document.querySelector(
+				"div.w-full.font-inter.uppercase.font-bold.text-xl.lg\\:text-3xl.lg\\:relative.text-light-400.text-center"
+			);
+			presenceData.details = "Viewing Art Gallery";
+			presenceData.buttons = [
+				{
+					label: "View Art Gallery",
+					url: href,
+				},
+			];
+
+			if (data) {
+				const artName = data.textContent;
+				artName ? (presenceData.state = artName.toUpperCase()) : null;
+			}
 		}
 
 		for (const [path, data] of Object.entries(pages))
 			if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
 	} else if (host === "gems.sofi.gg") {
 		presenceData.details = "Buying Gems";
-		presenceData.smallImageKey = content.buyingImage;
-		presenceData.smallImageText = content.buyingImageText;
+		presenceData.smallImageKey = content.BuyingImage;
+		presenceData.smallImageText = content.BuyingImageText;
 		presenceData.buttons = [
 			{
 				label: "Buy Gems",
