@@ -4,63 +4,64 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
+	let searchText: HTMLInputElement, h1Title: Element, h2Title: Element;
 	const [time, accountValue, buttons] = await Promise.all([
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<number>("accountValue"),
 			presence.getSetting<boolean>("buttons"),
 		]),
-		search = document.querySelector<HTMLInputElement>('[aria-label="Search"]'),
-		searchSpecial =
-			document.querySelector<HTMLInputElement>(
-				'[class="input-block search"]'
-			) ?? document.querySelector<HTMLInputElement>("#inputQuery-bundle"),
-		searchAis = document.querySelector<HTMLInputElement>(
-			"input.ais-SearchBox-input"
-		)?.value,
-		jsTag = document.querySelector<HTMLSelectElement>("#js-tag-select"),
-		h2Title =
-			document.querySelector("h2.header-title")?.textContent ??
-			document.querySelector("h2.header-subtitle")?.textContent,
-		h1Title = [
-			document.querySelector("h1.header-title.flex-grow"),
-			document.querySelector("h1.header-title span"),
-			document.querySelector("h1.header-title"),
-		],
+		tagSelected = document.querySelector<HTMLSelectElement>("#js-tag-select"),
 		inputCategory = document.querySelector<HTMLSelectElement>("#inputCategory"),
-		inputType = document.querySelector<HTMLSelectElement>("#inputType"),
-		inputType2 = document.querySelector<HTMLSelectElement>("#inputType2"),
-		inputKeyName = document.querySelector<HTMLSelectElement>("#inputKeyName"),
-		inputOperator = document.querySelector<HTMLSelectElement>("#inputOperator"),
+		inputType =
+			document.querySelector<HTMLSelectElement>("#inputType2") ||
+			document.querySelector<HTMLSelectElement>("#inputType"),
+		inputKeyName =
+			document.querySelector<HTMLSelectElement>("#inputKeyName") ||
+			document.querySelector<HTMLSelectElement>("#inputKeyName2"),
+		inputOperator =
+			document.querySelector<HTMLSelectElement>("#inputOperator2") ||
+			document.querySelector<HTMLSelectElement>("#inputOperator"),
 		tabnavSelected = document.querySelector("a.tabnav-tab.selected"),
 		categorySelect = document.querySelector<HTMLSelectElement>(
 			"#js-category-select"
 		),
-		inputKeyName2 = document.querySelector<HTMLSelectElement>("#inputKeyName2"),
-		inputOperator2 =
-			document.querySelector<HTMLSelectElement>("#inputOperator2"),
+		allSearch = document.querySelectorAll<HTMLInputElement>(
+			'[aria-label="Search"],[type="search"],input.ais-SearchBox-input'
+		),
+		allH1 = document.querySelectorAll(
+			"h1.header-title,h1.header-title span,h1.header-title.flex-grow"
+		),
+		allH2 = document.querySelectorAll("h2.header-title,h2.header-subtitle"),
 		{ pathname, href, hostname } = document.location,
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/QUPRec4.png",
 			startTimestamp: browsingTimestamp,
 		};
 
+	for (const searchElement of allSearch)
+		if (searchElement?.value && !searchText) searchText = searchElement;
+
+	for (const h1Element of allH1)
+		if (h1Element?.textContent && !h1Title) h1Title = h1Element;
+
+	for (const h2Element of allH2)
+		if (h2Element?.textContent && !h2Title) h2Title = h2Element;
+
 	switch (hostname) {
 		case "steamdb.info":
 			{
-				if (search?.value) {
+				if (searchText?.value) {
 					presenceData.details = "Searching for";
-					presenceData.state = search?.value;
+					presenceData.state = searchText.value;
 					presenceData.smallImageKey = "https://i.imgur.com/oGQtnIY.png";
 					return presence.setActivity(presenceData);
 				}
-				if (searchSpecial?.value)
-					presenceData.state = `Search: ${searchSpecial.value}`;
 				switch (pathname.split("/")[1]) {
 					case "graph": {
 						presenceData.details = "Viewing Steam Charts";
-						if (jsTag.value !== "0") {
+						if (tagSelected.value !== "0") {
 							presenceData.state = `Filter: ${
-								jsTag.options[jsTag.selectedIndex].textContent
+								tagSelected.options[tagSelected.selectedIndex].textContent
 							}`;
 						}
 						if (categorySelect.value !== "0") {
@@ -71,8 +72,8 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "changelist": {
-						presenceData.details = h1Title[0]?.textContent;
-						presenceData.state = h2Title;
+						presenceData.details = h1Title?.textContent;
+						presenceData.state = h2Title?.textContent;
 						presenceData.buttons = [
 							{
 								label: "View Page",
@@ -136,7 +137,7 @@ presence.on("UpdateData", async () => {
 					}
 					case "apps": {
 						presenceData.details = "Browsing Applications";
-						presenceData.state = h2Title;
+						presenceData.state = h2Title?.textContent;
 						break;
 					}
 					case "sub": {
@@ -153,7 +154,7 @@ presence.on("UpdateData", async () => {
 					}
 					case "subs": {
 						presenceData.details = "Browsing Packages";
-						presenceData.state = h2Title;
+						presenceData.state = h2Title?.textContent;
 						break;
 					}
 					case "bundle": {
@@ -181,7 +182,7 @@ presence.on("UpdateData", async () => {
 						if (pathname === "/blog/") presenceData.details = "Browsing Blog";
 						else if (pathname.includes("/tag/")) {
 							presenceData.details = "Browsing Blog Tag";
-							presenceData.state = h1Title[1].textContent;
+							presenceData.state = h1Title?.textContent;
 						} else {
 							presenceData.details = "Viewing Blog Post";
 							presenceData.state =
@@ -197,12 +198,6 @@ presence.on("UpdateData", async () => {
 					}
 					case "faq": {
 						presenceData.details = "Viewing FAQ";
-						break;
-					}
-					case "instantsearch": {
-						presenceData.details = "Instant Search";
-						if (searchAis) presenceData.state = `Search: ${searchAis}`;
-
 						break;
 					}
 					case "donate": {
@@ -233,7 +228,7 @@ presence.on("UpdateData", async () => {
 					}
 					case "tag": {
 						presenceData.details = `Browsing Tag: ${
-							h1Title[0].textContent.split("»")[1]
+							h1Title?.textContent.split("»")[1]
 						}`;
 
 						break;
@@ -248,7 +243,7 @@ presence.on("UpdateData", async () => {
 									url: href,
 								},
 							];
-							const h1Split = h1Title[2].textContent.split("»")[2];
+							const h1Split = h1Title.textContent.split("»")[2];
 
 							switch (pathname.split("/")[2]) {
 								case "Engine": {
@@ -280,9 +275,9 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Browsing Patch Notes";
 						else {
 							presenceData.details = "Viewing Patchnote";
-							if (h2Title !== "\xa0")
-								presenceData.state = `${h1Title[2].firstElementChild.textContent} ${h2Title}`;
-							else presenceData.state = h1Title[2].textContent;
+							if (h2Title?.textContent !== "\xa0")
+								presenceData.state = `${h1Title.firstElementChild.textContent} ${h2Title?.textContent}`;
+							else presenceData.state = h1Title.textContent;
 
 							presenceData.buttons = [
 								{
@@ -304,8 +299,8 @@ presence.on("UpdateData", async () => {
 								url: href,
 							},
 						];
-						if (h1Title[2]?.textContent !== "Your watch list")
-							presenceData.details = `Viewing ${h1Title[2]?.textContent}`;
+						if (h1Title?.textContent !== "Your watch list")
+							presenceData.details = `Viewing ${h1Title?.textContent}`;
 						else presenceData.details = "Viewing their own watch list";
 						break;
 					}
@@ -325,10 +320,9 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Viewing Badge";
 						if (pathname.includes("/foil/")) {
 							presenceData.state = `${
-								h1Title[0].childNodes.item(4).textContent
+								h1Title.childNodes.item(4).textContent
 							} (Foil)`;
-						} else
-							presenceData.state = h1Title[0].childNodes.item(4).textContent;
+						} else presenceData.state = h1Title.childNodes.item(4).textContent;
 
 						presenceData.buttons = [
 							{
@@ -355,9 +349,9 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "upcoming": {
-						if (jsTag.value !== "0") {
+						if (tagSelected.value !== "0") {
 							presenceData.state = `Filter: ${
-								jsTag.options[jsTag.selectedIndex].textContent
+								tagSelected.options[tagSelected.selectedIndex].textContent
 							}`;
 						}
 						if (pathname.includes("/free/"))
@@ -410,9 +404,9 @@ presence.on("UpdateData", async () => {
 							}
 							case "releases": {
 								presenceData.details = "Viewing Game Release Summary";
-								if (jsTag.value !== "0") {
+								if (tagSelected.value !== "0") {
 									presenceData.state = `Filter: ${
-										jsTag.options[jsTag.selectedIndex].textContent
+										tagSelected.options[tagSelected.selectedIndex].textContent
 									}`;
 								}
 								break;
@@ -469,7 +463,7 @@ presence.on("UpdateData", async () => {
 							}
 							case "App Keys": {
 								presenceData.state = `${
-									inputType2.options[inputType2.selectedIndex].textContent
+									inputType.options[inputType.selectedIndex].textContent
 								} ${
 									inputKeyName.options[inputKeyName.selectedIndex].textContent
 								} ${
@@ -486,10 +480,9 @@ presence.on("UpdateData", async () => {
 							}
 							case "Package Keys": {
 								presenceData.state = `${
-									inputKeyName2.options[inputKeyName2.selectedIndex].textContent
+									inputKeyName.options[inputKeyName.selectedIndex].textContent
 								} ${
-									inputOperator2.options[inputOperator2.selectedIndex]
-										.textContent
+									inputOperator.options[inputOperator.selectedIndex].textContent
 								} ${
 									document.querySelector<HTMLInputElement>("#inputKeyValue2")
 										.value
