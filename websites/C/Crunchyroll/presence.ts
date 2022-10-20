@@ -11,9 +11,10 @@ async function getStrings() {
 			reading: "general.reading",
 			viewPage: "general.viewPage",
 			viewManga: "general.viewManga",
+			viewSeries: "general.buttonViewSeries",
 			watchEpisode: "general.buttonViewEpisode",
 			readingArticle: "general.readingArticle",
-			viewSeries: "general.buttonViewSeries",
+			viewCategory: "general.viewCategory",
 			chapter: "general.chapter",
 			search: "general.search",
 			manga: "general.manga",
@@ -183,8 +184,17 @@ presence.on("UpdateData", async () => {
 		presenceData.state =
 			document.querySelector<HTMLInputElement>(".search-input").value;
 		presenceData.smallImageKey = Assets.Search;
+	} else if (pathname.includes("/simulcasts")) {
+		presenceData.details = strings.viewPage;
+		presenceData.state = `${
+			document.querySelector("h1 + div span").textContent
+		}${document.querySelector("h1").textContent}`;
+	} else if (pathname.includes("/videos")) {
+		presenceData.details = strings.viewCategory;
+		presenceData.state = document.querySelector("h1").textContent;
 	} else {
 		presenceData.details = strings.browse;
+		presenceData.state = document.title;
 		presenceData.startTimestamp = browsingTimestamp;
 
 		delete presenceData.state;
