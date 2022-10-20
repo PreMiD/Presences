@@ -9,12 +9,14 @@ async function getStrings() {
 			pause: "general.paused",
 			browse: "general.browsing",
 			reading: "general.reading",
-			viewManga: "general.viewManga",
 			viewPage: "general.viewPage",
+			viewManga: "general.viewManga",
 			watchEpisode: "general.buttonViewEpisode",
+			readingArticle: "general.readingArticle",
 			viewSeries: "general.buttonViewSeries",
-			manga: "general.manga",
 			chapter: "general.chapter",
+			search: "general.search",
+			manga: "general.manga",
 			page: "general.page",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
@@ -123,15 +125,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.state;
 			delete presenceData.smallImageKey;
 		}
-	} else {
-		presenceData.details = strings.browse;
-		presenceData.startTimestamp = browsingTimestamp;
-
-		delete presenceData.state;
-		delete presenceData.smallImageKey;
-	}
-
-	if (
+	} else if (
 		iFrameVideo !== false &&
 		!isNaN(duration) &&
 		!pathname.includes("/series")
@@ -184,6 +178,17 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
+	} else if (pathname.includes("/search")) {
+		presenceData.details = strings.search;
+		presenceData.state =
+			document.querySelector<HTMLInputElement>(".search-input").value;
+		presenceData.smallImageKey = Assets.Search;
+	} else {
+		presenceData.details = strings.browse;
+		presenceData.startTimestamp = browsingTimestamp;
+
+		delete presenceData.state;
+		delete presenceData.smallImageKey;
 	}
 
 	if (!showCover) presenceData.largeImageKey = Assets.Logo;
