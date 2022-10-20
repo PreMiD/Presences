@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 	function isImageExist(tags: string) {
 		return document?.querySelector<HTMLImageElement>(tags) && !privacy && logo
 			? document?.querySelector<HTMLImageElement>(tags)?.src
-			: "shikimori_logo";
+			: "https://i.imgur.com/7tlc7or.png";
 	}
 
 	if (buttons && !privacy) {
