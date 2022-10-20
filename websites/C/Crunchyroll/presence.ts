@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
 	} else if (
 		iFrameVideo !== false &&
 		!isNaN(duration) &&
-		!pathname.includes("/series")
+		pathname.includes("/watch/")
 	) {
 		const videoTitle =
 			document.querySelector<HTMLHeadingElement>("a > h4").textContent;
@@ -188,13 +188,15 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.viewPage;
 		presenceData.state = `${
 			document.querySelector("h1 + div span").textContent
-		}${document.querySelector("h1").textContent}`;
+		} ${document.querySelector("h1").textContent}`;
 	} else if (pathname.includes("/videos")) {
 		presenceData.details = strings.viewCategory;
 		presenceData.state = document.querySelector("h1").textContent;
 	} else if (/\/anime-.*?\/\d{4}\//.test(pathname)) {
 		presenceData.details = strings.readingArticle;
-		presenceData.state = document.querySelector("h1").textContent;
+		presenceData.state = document.querySelector<HTMLHeadingElement>(
+			".crunchynews-header"
+		).textContent;
 		if (showCover) {
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>(".mug").src;
