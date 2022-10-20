@@ -29,7 +29,7 @@
 		"@types/debug": "4.1.7",
 		"@types/glob": "8.0.0",
 		"@types/json-to-ast": "2.1.2",
-		"@types/node": "18.11.2",
+		"@types/node": "18.11.3",
 		"@types/semver": "7.3.12",
 		"@typescript-eslint/eslint-plugin": "5.40.1",
 		"@typescript-eslint/parser": "5.40.1",
