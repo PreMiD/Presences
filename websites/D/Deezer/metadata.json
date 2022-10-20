@@ -8,10 +8,6 @@
 		{
 			"name": "Encrypted",
 			"id": "564434085708038144"
-		},
-		{
-			"name": "Alanexei ✔",
-			"id": "163319338403627008"
 		}
 	],
 	"service": "Deezer",
@@ -27,7 +23,7 @@
 		"ga_IE": "Éifeall na ceimhniú a thágthóg, uair éirinn."
 	},
 	"url": "www.deezer.com",
-	"version": "2.2.9",
+	"version": "2.2.10",
 	"logo": "https://i.imgur.com/GKMQi3h.png",
 	"thumbnail": "https://i.imgur.com/gVAvQ6k.png",
 	"color": "#A31D7C",

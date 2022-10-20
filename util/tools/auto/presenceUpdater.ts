@@ -1,8 +1,8 @@
-import "source-map-support/register";
+import "source-map-support/register.js";
 
 import { transformFileAsync as transform } from "@babel/core";
-import { blue, green, red, yellow } from "chalk";
-import { sync as glob } from "glob";
+import chalk from "chalk";
+import globModule from "glob";
 import {
 	type AnyBulkWriteOperation,
 	type BulkWriteResult,
@@ -14,16 +14,15 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, normalize, resolve, sep } from "node:path";
 import { valid } from "semver";
 import { minify as terser } from "terser";
-import {
-	type CompilerOptions,
-	createProgram,
-	flattenDiagnosticMessageText,
-	getPreEmitDiagnostics,
-} from "typescript";
+import typescript from "typescript";
+import { type CompilerOptions } from "typescript";
+const { createProgram, flattenDiagnosticMessageText, getPreEmitDiagnostics } =
+	typescript;
 
-import { isValidJSON, type Metadata, readFile, readJson } from "../util";
+import { isValidJSON, type Metadata, readFile, readJson } from "../util.js";
 
-const url = process.env.MONGO_URL,
+const { sync: glob } = globModule,
+	url = process.env.MONGO_URL,
 	dbName = "PreMiD",
 	client = new MongoClient(url, { appName: "PreMiD-PresenceUpdater" });
 
@@ -67,7 +66,9 @@ const writeJS = (path: string, code: string): void =>
 		});
 		if (result?.code?.length) writeJS(file, result.code);
 		else {
-			console.error(red(`Error. File ${file} was not minified, skipping...`));
+			console.error(
+				chalk.red(`Error. File ${file} was not minified, skipping...`)
+			);
 			appCode = 1;
 		}
 	},
@@ -79,7 +80,9 @@ const writeJS = (path: string, code: string): void =>
 			writeJS(file, result.code);
 			await minify(file);
 		} else {
-			console.error(red(`Error. File ${file} was not polyfilled, skipping...`));
+			console.error(
+				chalk.red(`Error. File ${file} was not polyfilled, skipping...`)
+			);
 			appCode = 1;
 		}
 	},
@@ -115,18 +118,18 @@ const writeJS = (path: string, code: string): void =>
 	main = async (): Promise<void> => {
 		if (!process.env.GITHUB_ACTIONS) {
 			console.log(
-				red(
+				chalk.red(
 					"\nPlease note that this script is ONLY supposed to run on a CI environment"
 				)
 			);
 		}
 
-		console.log(blue("\nFETCHING...\n"));
+		console.log(chalk.blue("\nFETCHING...\n"));
 
 		try {
 			await client.connect();
 		} catch (err) {
-			console.error(red(err.stack || err));
+			console.error(chalk.red(err.stack || err));
 			process.exit(1);
 		}
 
@@ -144,7 +147,7 @@ const writeJS = (path: string, code: string): void =>
 						return [data, pF];
 					} else {
 						console.error(
-							red(
+							chalk.red(
 								`Error. Folder ${pF} does not include a valid metadata file, skipping...`
 							)
 						);
@@ -173,12 +176,13 @@ const writeJS = (path: string, code: string): void =>
 				),
 			dbDiff = outdatedPresences.concat(newPresences);
 
-		console.log(green(`New additions: ${newPresences.length}`));
-		console.log(yellow(`To be updated: ${outdatedPresences.length}`));
-		console.log(red(`To be deleted: ${deletedPresences.length}`));
+		console.log(chalk.green(`New additions: ${newPresences.length}`));
+		console.log(chalk.yellow(`To be updated: ${outdatedPresences.length}`));
+		console.log(chalk.red(`To be deleted: ${deletedPresences.length}`));
 
-		if (dbDiff.length) console.log(blue("\nCOMPILING...\n"));
-		if (dbDiff.length > 5) console.log(yellow("This will take some time..."));
+		if (dbDiff.length) console.log(chalk.blue("\nCOMPILING...\n"));
+		if (dbDiff.length > 5)
+			console.log(chalk.yellow("This will take some time..."));
 
 		const compiledPresences = (
 			await Promise.all(
@@ -275,7 +279,9 @@ const writeJS = (path: string, code: string): void =>
 				newPresenceResult = database.insertMany(newPresenceData);
 				for (const presence of newPresenceData) {
 					console.log(
-						green(`ADD - "${presence.name}" @ ${presence.metadata.version}`)
+						chalk.green(
+							`ADD - "${presence.name}" @ ${presence.metadata.version}`
+						)
 					);
 				}
 			}
@@ -287,7 +293,7 @@ const writeJS = (path: string, code: string): void =>
 				for (const presence of deletedPresences) {
 					if (!presence?.name) continue;
 					console.log(
-						red(`DEL - "${presence.name}" @ ${presence.metadata.version}`)
+						chalk.red(`DEL - "${presence.name}" @ ${presence.metadata.version}`)
 					);
 				}
 			}
@@ -309,7 +315,7 @@ const writeJS = (path: string, code: string): void =>
 					);
 
 					console.log(
-						yellow(
+						chalk.yellow(
 							`UPD - "${presence.name}": ${oldPresence.version} => ${presence.metadata.version}`
 						)
 					);
