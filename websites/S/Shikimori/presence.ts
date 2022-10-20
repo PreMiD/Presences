@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 				case "critiques":
 				case "reviews":
 					presenceData.details = `Смотрит ${document
-						?.querySelector(".b-breadcrumbs")
+						.querySelector(".b-breadcrumbs")
 						?.lastChild.textContent.toLowerCase()} к ${
 						document.location.pathname.split("/")[1] === "mangas"
 							? "манге"
