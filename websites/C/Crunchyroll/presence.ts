@@ -192,6 +192,13 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.includes("/videos")) {
 		presenceData.details = strings.viewCategory;
 		presenceData.state = document.querySelector("h1").textContent;
+	} else if (/\/anime-.*?\/\d{4}\//.test(pathname)) {
+		presenceData.details = strings.readingArticle;
+		presenceData.state = document.querySelector("h1").textContent;
+		if (showCover) {
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>(".mug").src;
+		}
 	} else {
 		presenceData.details = strings.browse;
 		presenceData.state = document.title;
