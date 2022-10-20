@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "shikimori_logo",
+			largeImageKey: "https://i.imgur.com/7tlc7or.png",
 			details: "Где-то на сайте",
 		},
 		title = document
