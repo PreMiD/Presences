@@ -201,7 +201,6 @@ presence.on("UpdateData", async () => {
 		}
 	} else {
 		presenceData.details = strings.browse;
-		presenceData.state = document.title;
 		presenceData.startTimestamp = browsingTimestamp;
 
 		delete presenceData.state;
