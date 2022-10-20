@@ -4,12 +4,6 @@
 		"name": "Bas950",
 		"id": "241278257335500811"
 	},
-	"contributors": [
-		{
-			"name": "Alanexei ✔",
-			"id": "163319338403627008"
-		}
-	],
 	"service": "Twitter",
 	"altnames": [
 		"Tiwitɛri",
@@ -60,7 +54,7 @@
 		"twitter.com",
 		"tweetdeck.twitter.com"
 	],
-	"version": "2.0.15",
+	"version": "2.0.16",
 	"logo": "https://i.imgur.com/sm7Qccu.png",
 	"thumbnail": "https://i.imgur.com/0RULzdw.png",
 	"color": "#48C0EB",
