@@ -11,7 +11,8 @@ import {
 	MongoClient,
 } from "mongodb";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { join, normalize, resolve, sep } from "node:path";
+import { join, normalize, resolve, sep, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { valid } from "semver";
 import { minify as terser } from "terser";
 import typescript from "typescript";
@@ -21,7 +22,8 @@ const { createProgram, flattenDiagnosticMessageText, getPreEmitDiagnostics } =
 
 import { isValidJSON, type Metadata, readFile, readJson } from "../util.js";
 
-const { sync: glob } = globModule,
+const __dirname = dirname(fileURLToPath(import.meta.url)),
+	{ sync: glob } = globModule,
 	url = process.env.MONGO_URL,
 	dbName = "PreMiD",
 	client = new MongoClient(url, { appName: "PreMiD-PresenceUpdater" });
