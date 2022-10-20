@@ -114,7 +114,10 @@ presence.on("UpdateData", async () => {
 			if (document.location.pathname.split("/")[2]) {
 				presenceData.details = `Смотрит 
 				${document?.querySelector(".b-link span")?.textContent.toLowerCase()}`;
-				if (!privacy) presenceData.state = title;
+				if (!privacy) {
+					presenceData.state =
+						document?.querySelector(".l-page header h1").textContent;
+				}
 				presenceData.largeImageKey = isImageExist(".b-menu_logo img");
 			}
 			break;
