@@ -24,7 +24,6 @@ const schema = await getLatestSchema(),
 		properties?: actions.AnnotationProperties | undefined;
 	}[] = [];
 
-console.time();
 for (const presence of changedPresences) {
 	const presencePath = compiler.getPresenceFolder(presence);
 
@@ -142,20 +141,6 @@ for (const presence of changedPresences) {
 			},
 		});
 
-	//#endregion
-
-	//#region Presence folder Check
-	if (!/^[^\!]+$/g.test(basename(presencePath))) {
-		errors.push({
-			presence,
-			message:
-				"Presence folder name does not match metadata.service! (Without !)",
-			properties: {
-				file: presencePath,
-			},
-		});
-		continue;
-	}
 	//#endregion
 
 	//#region Presence language Check
