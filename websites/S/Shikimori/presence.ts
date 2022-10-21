@@ -15,12 +15,17 @@ presence.on("UpdateData", async () => {
 		title = document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content"),
-		{ pathname } = document.location,
-		isImageExist = (tags: string) => {
-			return document.querySelector<HTMLImageElement>(tags) && !privacy && logo
-				? document.querySelector<HTMLImageElement>(tags)?.src
-				: "https://i.imgur.com/7tlc7or.png";
-		};
+		{ pathname } = document.location;
+
+	function isImageExist(tags: string) {
+		return document.querySelector<HTMLImageElement>(tags) && !privacy && logo
+			? document.querySelector<HTMLImageElement>(tags)?.src
+			: "https://i.imgur.com/7tlc7or.png";
+	}
+
+	function textContent(tags: string) {
+		return document.querySelector(tags)?.textContent;
+	}
 
 	if (buttons && !privacy) {
 		presenceData.buttons = [
@@ -59,19 +64,14 @@ presence.on("UpdateData", async () => {
 					case "duration":
 					case "rating":
 					case "studio":
-						if (!privacy) {
-							presenceData.state =
-								document.querySelector("header > h1")?.textContent;
-						}
+						if (!privacy) presenceData.state = textContent("header > h1");
 						break;
 					default:
 						presenceData.details = `Смотрит страницу 
 							${
 								pathname.split("/")[1] === "mangas"
 									? "манги"
-									: document
-											.querySelector(".submenu-triangle > span")
-											?.textContent.toLowerCase()
+									: textContent(".submenu-triangle > span").toLowerCase()
 							}`;
 						if (!privacy) presenceData.state = title;
 						presenceData.largeImageKey = isImageExist(".c-poster img");
@@ -86,9 +86,7 @@ presence.on("UpdateData", async () => {
 						?.lastChild.textContent.toLowerCase()} к ${
 						pathname.split("/")[1] === "mangas"
 							? "манге"
-							: document
-									.querySelector(".b-breadcrumbs span span")
-									.textContent.toLowerCase()
+							: textContent(".b-breadcrumbs span span").toLowerCase()
 					}`;
 					if (!privacy) {
 						presenceData.state =
@@ -113,23 +111,20 @@ presence.on("UpdateData", async () => {
 			presenceData.details = title;
 			if (pathname.split("/")[2]) {
 				presenceData.details = `Смотрит 
-				${document.querySelector(".b-link span")?.textContent.toLowerCase()}`;
-				if (!privacy) {
-					presenceData.state =
-						document.querySelector(".l-page header h1")?.textContent;
-				}
+				${textContent(".b-link span").toLowerCase()}`;
+				if (!privacy) presenceData.state = textContent(".l-page header h1");
 				presenceData.largeImageKey = isImageExist(".b-menu_logo img");
 			}
 			break;
 		case "forum":
-			presenceData.details = `Смотрит ${document
-				.querySelector(".l-page header .b-link span")
-				?.textContent.toLowerCase()}`;
+			presenceData.details = `Смотрит ${textContent(
+				".l-page header .b-link span"
+			).toLowerCase()}`;
 			if (!privacy) {
 				switch (pathname.split("/")[2]) {
 					case "updates":
 					case "reviews":
-						presenceData.state = document.querySelector(".reload")?.textContent;
+						presenceData.state = textContent(".reload");
 						break;
 					default:
 						presenceData.state = title;
@@ -144,8 +139,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case "characters":
 		case "people":
-			presenceData.details =
-				document.querySelector(".l-page header p")?.textContent;
+			presenceData.details = textContent(".l-page header p");
 			if (!privacy) presenceData.state = title;
 			presenceData.largeImageKey = isImageExist(".c-poster img");
 			break;
@@ -172,11 +166,9 @@ presence.on("UpdateData", async () => {
 			break;
 		case "list":
 			if (pathname.split("/")[3].match(/anime|manga/)) {
-				presenceData.details = `Смотрит ${document
-					.querySelector(".submenu-triangle > span")
-					?.textContent.toLowerCase()} ${
-					!privacy ? pathname.split("/")[1] : "пользователя"
-				}`;
+				presenceData.details = `Смотрит ${textContent(
+					".submenu-triangle > span"
+				).toLowerCase()} ${!privacy ? pathname.split("/")[1] : "пользователя"}`;
 				presenceData.largeImageKey = isImageExist(".avatar img");
 				if (!privacy) {
 					switch (pathname.split("/")[5]) {
