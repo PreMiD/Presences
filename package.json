@@ -20,12 +20,12 @@
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
 	},
 	"devDependencies": {
-		"@babel/core": "7.19.3",
+		"@babel/core": "7.19.6",
 		"@babel/preset-env": "7.19.4",
 		"@commitlint/cli": "17.1.2",
 		"@commitlint/config-angular": "17.1.0",
 		"@types/babel__core": "7.1.19",
-		"@types/chrome": "0.0.198",
+		"@types/chrome": "0.0.199",
 		"@types/debug": "4.1.7",
 		"@types/glob": "8.0.0",
 		"@types/json-to-ast": "2.1.2",
@@ -45,7 +45,7 @@
 		"is-ci": "3.0.1",
 		"json-to-ast": "2.1.0",
 		"jsonschema": "1.4.1",
-		"mongodb": "4.10.0",
+		"mongodb": "4.11.0",
 		"pmd": "github:PreMiD/pmd#1.0.3",
 		"prettier": "2.7.1",
 		"semver": "7.3.8",
