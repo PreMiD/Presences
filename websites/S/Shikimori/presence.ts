@@ -52,6 +52,7 @@ presence.on("UpdateData", async () => {
 					? "манги"
 					: "ранобэ"
 			}`;
+
 			if (pathname.split("/")[2]) {
 				switch (pathname.split("/")[2]) {
 					case "genre":
@@ -71,33 +72,63 @@ presence.on("UpdateData", async () => {
 							${
 								pathname.split("/")[1] === "mangas"
 									? "манги"
-									: textContent(".submenu-triangle > span").toLowerCase()
+									: textContent(".submenu-triangle > span")?.toLowerCase()
 							}`;
 						if (!privacy) presenceData.state = title;
 						presenceData.largeImageKey = isImageExist(".c-poster img");
 						break;
 				}
 			}
+
 			switch (pathname.split("/")[3]) {
 				case "critiques":
 				case "reviews":
-					presenceData.details = `Смотрит ${document
-						.querySelector(".b-breadcrumbs")
-						?.lastChild.textContent.toLowerCase()} к ${
+					presenceData.details = `Смотрит ${textContent(
+						".b-breadcrumbs span:nth-last-child(1) span"
+					)?.toLowerCase()} к ${
 						pathname.split("/")[1] === "mangas"
 							? "манге"
-							: textContent(".b-breadcrumbs span span").toLowerCase()
+							: textContent(".b-breadcrumbs span span")?.toLowerCase()
 					}`;
 					if (!privacy) {
-						presenceData.state =
-							document.querySelector(
-								".b-breadcrumbs"
-							)?.lastChild.previousSibling.textContent;
+						presenceData.state = textContent(
+							".b-breadcrumbs span:nth-last-child(2) span"
+						);
 					}
 					presenceData.largeImageKey = isImageExist(".b-menu_logo img");
 					break;
+				case "characters":
+				case "chronology":
+				case "clubs":
+				case "collections":
+				case "favoured":
+				case "screenshots":
+				case "similar":
+				case "staff":
+				case "related":
+				case "videos":
+					presenceData.details = `Смотрит страницу 
+					${
+						pathname.split("/")[1] === "mangas"
+							? "манги"
+							: textContent(".submenu-triangle > span")?.toLowerCase()
+					} (${textContent(".subheadline")})`;
+					if (!privacy) {
+						presenceData.state = textContent(
+							".b-breadcrumbs span:last-child span"
+						);
+					}
+					presenceData.largeImageKey = isImageExist(".b-menu_logo img");
+					break;
+				case "franchise":
+					presenceData.details = "Смотрит франшизу";
+					if (!privacy) {
+						presenceData.state = textContent(
+							".b-breadcrumbs span:last-child span"
+						);
+					}
+					break;
 			}
-
 			break;
 		case "clubs":
 		case "collections":
@@ -108,10 +139,10 @@ presence.on("UpdateData", async () => {
 		case "achievements":
 		case "moderations":
 		case "kakie-anime-postmotret":
-			presenceData.details = title;
+			presenceData.details = `Смотрит ${title.toLowerCase()}`;
 			if (pathname.split("/")[2]) {
-				presenceData.details = `Смотрит 
-				${textContent(".b-link span").toLowerCase()}`;
+				presenceData.details = `Смотрит
+				${textContent(".b-link span:first-child")?.toLowerCase()}`;
 				if (!privacy) presenceData.state = textContent(".l-page header h1");
 				presenceData.largeImageKey = isImageExist(".b-menu_logo img");
 			}
@@ -119,7 +150,7 @@ presence.on("UpdateData", async () => {
 		case "forum":
 			presenceData.details = `Смотрит ${textContent(
 				".l-page header .b-link span"
-			).toLowerCase()}`;
+			)?.toLowerCase()}`;
 			if (!privacy) {
 				switch (pathname.split("/")[2]) {
 					case "updates":
@@ -134,23 +165,44 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case title.replace(" ", "+"):
-			presenceData.details = `В профиле ${!privacy ? title : "пользователя"}`;
+			presenceData.details = `Смотрит профиль ${
+				!privacy ? title : "пользователя"
+			}`;
 			presenceData.largeImageKey = isImageExist(".avatar img");
 			break;
 		case "characters":
 		case "people":
-			presenceData.details = textContent(".l-page header p");
+			presenceData.details = `Смотрит страницу ${textContent(
+				".l-page header p"
+			)?.toLowerCase()}`;
 			if (!privacy) presenceData.state = title;
 			presenceData.largeImageKey = isImageExist(".c-poster img");
+			if (!privacy && pathname.split("/")[3]) {
+				presenceData.details = `${presenceData.details} (${title})`;
+				presenceData.state = textContent(".b-breadcrumbs span:last-child span");
+				presenceData.largeImageKey = isImageExist(".b-menu_logo img");
+			}
 			break;
 	}
+
 	switch (pathname.split("/")[2]) {
+		case "achievements":
+		case "clubs":
+		case "comments":
+		case "favorites":
+		case "feed":
+		case "friends":
+		case "reviews":
+		case "versions":
+		case "topics":
+			presenceData.details = `Смотрит профиль ${
+				!privacy ? pathname.split("/")[1].replace("+", " ") : "пользователя"
+			}`;
+			if (!privacy) presenceData.state = title;
+			break;
 		case "edit":
 			presenceData.details = "Настраивает учётную запись";
 			if (!privacy) presenceData.state = title;
-			break;
-		case "friends":
-			presenceData.details = "Смотрит список друзей";
 			break;
 		case "dialogs":
 			presenceData.details = "Смотрит почту";
@@ -159,16 +211,19 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Смотрит ${title.toLowerCase()}`;
 			break;
 		case "history":
-			presenceData.details = "Смотрит историю списка пользователя";
-			if (!privacy)
-				presenceData.state = pathname.split("/")[1].replace("+", " ");
+			presenceData.details = `Смотрит профиль ${
+				!privacy ? pathname.split("/")[1].replace("+", " ") : "пользователя"
+			}`;
+			if (!privacy) presenceData.state = "Историю списка";
 			presenceData.largeImageKey = isImageExist(".submenu-triangle img");
 			break;
 		case "list":
 			if (pathname.split("/")[3].match(/anime|manga/)) {
 				presenceData.details = `Смотрит ${textContent(
-					".submenu-triangle > span"
-				).toLowerCase()} ${!privacy ? pathname.split("/")[1] : "пользователя"}`;
+					".subheadline"
+				)?.toLowerCase()} ${
+					!privacy ? pathname.split("/")[1] : "пользователя"
+				}`;
 				presenceData.largeImageKey = isImageExist(".avatar img");
 				if (!privacy) {
 					switch (pathname.split("/")[5]) {
