@@ -105,7 +105,7 @@ if (window.location.hostname === "jackbox.tv") {
 						updatedInfoState = true;
 					}
 				} else if (
-					/recv <- .*?"key": "info:\d+)",/s.test(latestLog) &&
+					/recv <- .*?"key": "info:\d+",/s.test(latestLog) &&
 					!updatedInfoState
 				) {
 					gamePlayerInfoState = JSON.parse(latestLog.slice(8)).result.val;
