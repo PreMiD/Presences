@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 		case "mangas":
 		case "ranobe":
 			presenceData.details = `В поисках ${
-				location.pathname.split("/")[1] === "animes"
+				pathname.split("/")[1] === "animes"
 					? "аниме"
 					: pathname.split("/")[1] === "mangas"
 					? "манги"
