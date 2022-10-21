@@ -23,6 +23,7 @@ let gamePlayerState: {
 		};
 		entryId?: string;
 		choiceId?: string;
+		responseKey?: string;
 		placeholder?: string;
 		choiceType?: string;
 		classes?: string[];
@@ -2256,8 +2257,8 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games["antique-freak"]: {
-							// TODO: Verify this is correct
-							switch (gamePlayerState.kind) {
+							const { prompt, kind, responseKey } = gamePlayerState;
+							switch (kind) {
 								case "lobby": {
 									presenceData.state = "Waiting in lobby";
 									break;
@@ -2271,19 +2272,37 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "choosing": {
-									presenceData.state = "Choosing an item";
+									if (responseKey.startsWith("skip"))
+										presenceData.state = "Watching the tutorial";
+									else if (responseKey.startsWith("shopping"))
+										presenceData.state = "Shopping for an item";
+									else if (responseKey.startsWith("presentationChoice")) {
+										if (prompt === "Ready to present?")
+											presenceData.state = "Preparing to present";
+										else presenceData.state = "Presenting their item";
+									} else if (responseKey.startsWith("reaction"))
+										presenceData.state = "Reacting to an item";
+									else if (responseKey.startsWith("voting"))
+										presenceData.state = "Voting on a collection";
 									break;
 								}
 								case "fact": {
-									presenceData.state = "Presenting their item";
+									presenceData.state = "Creating facts about an item";
 									break;
 								}
 								case "writing": {
-									presenceData.state = "Creating a backstory for an item";
+									if (prompt === "This piece is entitled:")
+										presenceData.state = "Naming their item";
+									else if (
+										prompt ===
+										'Your two items are part of a collection called "[blank][/blank]"'
+									)
+										presenceData.state = "Naming their collection";
 									break;
 								}
-								default: {
+								case "waiting": {
 									presenceData.state = "Waiting";
+									break;
 								}
 							}
 							break;
