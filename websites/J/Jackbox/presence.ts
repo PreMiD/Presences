@@ -123,11 +123,11 @@ const Games: Record<string, Game> = {
 	// Party Pack 2
 	auction: {
 		name: "Bidiots",
-		logo: "https://i.imgur.com/CMcGDrM.png",
+		logo: "https://i.imgur.com/baDEinm.png",
 	},
 	bombintern: {
 		name: "Bomb Corp",
-		logo: "https://i.imgur.com/XkqOv6o.png",
+		logo: "https://i.imgur.com/1srbKlq.png",
 	},
 	earwax: {
 		name: "Earwax",
@@ -148,7 +148,7 @@ const Games: Record<string, Game> = {
 	},
 	fakinit: {
 		name: "Fakin' It",
-		logo: "https://i.imgur.com/nDqnyqV.png",
+		logo: "https://i.imgur.com/hYcvY7w.png",
 	},
 	pollposition: {
 		name: "Guesspionage",
@@ -223,7 +223,7 @@ const Games: Record<string, Game> = {
 	},
 	rolemodels: {
 		name: "Role Models",
-		logo: "https://i.imgur.com/sETBCgc.png",
+		logo: "https://i.imgur.com/Utg6Fow.png",
 	},
 	triviadeath2: {
 		name: "Trivia Murder Party 2",
@@ -248,7 +248,7 @@ const Games: Record<string, Game> = {
 	},
 	everyday: {
 		name: "The Devils and the Details",
-		logo: "https://i.imgur.com/tXkh58c.png",
+		logo: "https://i.imgur.com/dcJq65O.png",
 	},
 	worldchamps: {
 		name: "Champ'd Up",
@@ -269,7 +269,7 @@ const Games: Record<string, Game> = {
 	},
 	"drawful-animate": {
 		name: "Drawful Animate",
-		logo: "https://i.imgur.com/NtRvc93.png",
+		logo: "https://i.imgur.com/7QPiNMv.png",
 	},
 	"survey-bomb": {
 		name: "The Poll Mine",
@@ -278,7 +278,7 @@ const Games: Record<string, Game> = {
 	// Party Pack 9
 	fourbage: {
 		name: "Fibbage 4",
-		logo: "https://i.imgur.com/ckDs9Ve.png",
+		logo: "https://i.imgur.com/DnqcuUX.png",
 	},
 	lineup: {
 		name: "Quixort",
@@ -290,7 +290,7 @@ const Games: Record<string, Game> = {
 	},
 	"antique-freak": {
 		name: "Junktopia",
-		logo: "https://i.imgur.com/PzIFq5d.png",
+		logo: "https://i.imgur.com/5vqvCuK.png",
 	},
 	htmf: {
 		name: "Roomerang",
