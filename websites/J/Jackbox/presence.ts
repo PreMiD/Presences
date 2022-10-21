@@ -32,6 +32,11 @@ let gamePlayerState: {
 		state: null,
 		username: null,
 	},
+	gamePlayerInfoState: {
+		name: string;
+	} = {
+		name: null,
+	},
 	game: Game,
 	browsingTimestamp = Math.round(Date.now() / 1000),
 	gametag: string;
@@ -60,10 +65,9 @@ async function uploadFile(url: string, defaultImage: string): Promise<string> {
 }
 
 if (window.location.hostname === "jackbox.tv") {
-	// TODO: Handle names from party pack 8+ (they're in the key "info:number")
 	setInterval(async () => {
 		const playerStateLogs = await presence.getLogs(
-			/recv <- .*?("key": "(bc:customer|player):[a-z0-9-]+",)/s
+			/recv <- .*?("key": "(bc:customer|player|info):[a-z0-9-]+",)/s
 		);
 		if (playerStateLogs.length > 0) {
 			const lastLog = playerStateLogs[playerStateLogs.length - 1];
@@ -71,7 +75,19 @@ if (window.location.hostname === "jackbox.tv") {
 				gamePlayerState = JSON.parse(lastLog.slice(8)).result.entities[
 					lastLog.match(/"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s)[1]
 				][1].val;
-			} else gamePlayerState = JSON.parse(lastLog.slice(8)).result.val;
+				gamePlayerInfoState =
+					JSON.parse(lastLog.slice(8)).result.entities[
+						lastLog.match(/"key": "(info:[a-z0-9-]+)",/s)?.[1]
+					]?.[1].val ?? {};
+			} else if (
+				/recv <- .*?"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s.test(
+					lastLog
+				)
+			) {
+				gamePlayerState = JSON.parse(lastLog.slice(8)).result.val;
+			} else {
+				gamePlayerInfoState = JSON.parse(lastLog.slice(8)).result.val;
+			}
 		}
 		if (!game) {
 			type JackboxStorageLetiable = {
@@ -320,7 +336,11 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Playing ${name}`;
 				if (useName) {
 					const { playerName, username, playerInfo } = gamePlayerState,
-						realUsername = playerName ?? username ?? playerInfo?.username;
+						realUsername =
+							playerName ??
+							username ??
+							playerInfo?.username ??
+							gamePlayerInfoState.name;
 					if (realUsername) {
 						if (useDetails) presenceData.details += ` as ${realUsername}`;
 						else presenceData.state = `as ${realUsername}`;
