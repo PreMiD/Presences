@@ -4,12 +4,6 @@
 		"name": "Bas950",
 		"id": "241278257335500811"
 	},
-	"contributors": [
-		{
-			"name": "Bryan",
-			"id": "293775922757238784"
-		}
-	],
 	"service": "NameMC",
 	"description": {
 		"en": "Check the availability of Minecraft names, look up the name history of Minecraft accounts, view Minecraft skins in 3D, convert UUIDs, and much more!",
@@ -17,7 +11,7 @@
 	},
 	"url": "namemc.com",
 	"regExp": "([a-z0-9-]+[.])*namemc[.]com[/]",
-	"version": "2.0.10",
+	"version": "2.0.11",
 	"logo": "https://i.imgur.com/9JDmZaF.png",
 	"thumbnail": "https://i.imgur.com/XIZsGTQ.png",
 	"color": "#000000",

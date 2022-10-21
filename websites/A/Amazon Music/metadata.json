@@ -8,10 +8,6 @@
 		{
 			"name": "Encrypted",
 			"id": "564434085708038144"
-		},
-		{
-			"name": "Bryan",
-			"id": "293775922757238784"
 		}
 	],
 	"service": "Amazon Music",
@@ -25,7 +21,7 @@
 	},
 	"url": "music.amazon.com",
 	"regExp": "music[.]amazon([.][a-z]+)+[/]",
-	"version": "2.1.5",
+	"version": "2.1.6",
 	"logo": "https://i.imgur.com/AUKbzxX.png",
 	"thumbnail": "https://i.imgur.com/htSGR6k.png",
 	"color": "#21293C",
