@@ -14,7 +14,8 @@ presence.on("UpdateData", async () => {
 		},
 		title = document
 			.querySelector("meta[property='og:title']")
-			.getAttribute("content");
+			.getAttribute("content"),
+		{ pathname } = document.location;
 
 	function isImageExist(tags: string) {
 		return document?.querySelector<HTMLImageElement>(tags) && !privacy && logo
@@ -33,7 +34,7 @@ presence.on("UpdateData", async () => {
 		];
 	}
 
-	switch (document.location.pathname.split("/")[1]) {
+	switch (pathname.split("/")[1]) {
 		case "":
 			presenceData.details = "На главной странице";
 			break;
@@ -41,14 +42,14 @@ presence.on("UpdateData", async () => {
 		case "mangas":
 		case "ranobe":
 			presenceData.details = `В поисках ${
-				document.location.pathname.split("/")[1] === "animes"
+				location.pathname.split("/")[1] === "animes"
 					? "аниме"
-					: document.location.pathname.split("/")[1] === "mangas"
+					: pathname.split("/")[1] === "mangas"
 					? "манги"
 					: "ранобэ"
 			}`;
-			if (document.location.pathname.split("/")[2]) {
-				switch (document.location.pathname.split("/")[2]) {
+			if (pathname.split("/")[2]) {
+				switch (pathname.split("/")[2]) {
 					case "genre":
 					case "kind":
 					case "status":
@@ -67,7 +68,7 @@ presence.on("UpdateData", async () => {
 					default:
 						presenceData.details = `Смотрит страницу 
 							${
-								document.location.pathname.split("/")[1] === "mangas"
+								pathname.split("/")[1] === "mangas"
 									? "манги"
 									: document
 											?.querySelector(".submenu-triangle > span")
@@ -78,13 +79,13 @@ presence.on("UpdateData", async () => {
 						break;
 				}
 			}
-			switch (document.location.pathname.split("/")[3]) {
+			switch (pathname.split("/")[3]) {
 				case "critiques":
 				case "reviews":
 					presenceData.details = `Смотрит ${document
 						.querySelector(".b-breadcrumbs")
 						?.lastChild.textContent.toLowerCase()} к ${
-						document.location.pathname.split("/")[1] === "mangas"
+						pathname.split("/")[1] === "mangas"
 							? "манге"
 							: document
 									.querySelector(".b-breadcrumbs span span")
@@ -111,7 +112,7 @@ presence.on("UpdateData", async () => {
 		case "moderations":
 		case "kakie-anime-postmotret":
 			presenceData.details = title;
-			if (document.location.pathname.split("/")[2]) {
+			if (pathname.split("/")[2]) {
 				presenceData.details = `Смотрит 
 				${document?.querySelector(".b-link span")?.textContent.toLowerCase()}`;
 				if (!privacy) {
@@ -126,7 +127,7 @@ presence.on("UpdateData", async () => {
 				?.querySelector(".l-page header .b-link span")
 				?.textContent.toLowerCase()}`;
 			if (!privacy) {
-				switch (document.location.pathname.split("/")[2]) {
+				switch (pathname.split("/")[2]) {
 					case "updates":
 					case "reviews":
 						presenceData.state = document?.querySelector(".reload").textContent;
@@ -150,7 +151,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = isImageExist(".c-poster img");
 			break;
 	}
-	switch (document.location.pathname.split("/")[2]) {
+	switch (pathname.split("/")[2]) {
 		case "edit":
 			presenceData.details = "Настраивает учётную запись";
 			if (!privacy) presenceData.state = title;
@@ -166,23 +167,20 @@ presence.on("UpdateData", async () => {
 			break;
 		case "history":
 			presenceData.details = "Смотрит историю списка пользователя";
-			if (!privacy) {
-				presenceData.state = document.location.pathname
-					.split("/")[1]
-					.replace("+", " ");
-			}
+			if (!privacy)
+				presenceData.state = pathname.split("/")[1].replace("+", " ");
 			presenceData.largeImageKey = isImageExist(".submenu-triangle img");
 			break;
 		case "list":
-			if (document.location.pathname.split("/")[3].match(/anime|manga/)) {
+			if (pathname.split("/")[3].match(/anime|manga/)) {
 				presenceData.details = `Смотрит ${document
 					.querySelector(".submenu-triangle > span")
 					.textContent.toLowerCase()} ${
-					!privacy ? document.location.pathname.split("/")[1] : "пользователя"
+					!privacy ? pathname.split("/")[1] : "пользователя"
 				}`;
 				presenceData.largeImageKey = isImageExist(".avatar img");
 				if (!privacy) {
-					switch (document.location.pathname.split("/")[5]) {
+					switch (pathname.split("/")[5]) {
 						case "planned":
 							presenceData.state = "Запланированно";
 							break;
