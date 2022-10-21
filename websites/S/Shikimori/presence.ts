@@ -15,13 +15,12 @@ presence.on("UpdateData", async () => {
 		title = document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content"),
-		{ pathname } = document.location;
-
-	function isImageExist(tags: string) {
-		return document?.querySelector<HTMLImageElement>(tags) && !privacy && logo
-			? document?.querySelector<HTMLImageElement>(tags)?.src
-			: "https://i.imgur.com/7tlc7or.png";
-	}
+		{ pathname } = document.location,
+		isImageExist = (tags: string) => {
+			return document.querySelector<HTMLImageElement>(tags) && !privacy && logo
+				? document.querySelector<HTMLImageElement>(tags)?.src
+				: "https://i.imgur.com/7tlc7or.png";
+		};
 
 	if (buttons && !privacy) {
 		presenceData.buttons = [
@@ -29,7 +28,7 @@ presence.on("UpdateData", async () => {
 				label: "Открыть страницу",
 				url: document
 					.querySelector("meta[property='og:url']")
-					.getAttribute("content"),
+					?.getAttribute("content"),
 			},
 		];
 	}
@@ -62,7 +61,7 @@ presence.on("UpdateData", async () => {
 					case "studio":
 						if (!privacy) {
 							presenceData.state =
-								document?.querySelector("header > h1")?.textContent;
+								document.querySelector("header > h1")?.textContent;
 						}
 						break;
 					default:
@@ -71,7 +70,7 @@ presence.on("UpdateData", async () => {
 								pathname.split("/")[1] === "mangas"
 									? "манги"
 									: document
-											?.querySelector(".submenu-triangle > span")
+											.querySelector(".submenu-triangle > span")
 											?.textContent.toLowerCase()
 							}`;
 						if (!privacy) presenceData.state = title;
@@ -93,7 +92,7 @@ presence.on("UpdateData", async () => {
 					}`;
 					if (!privacy) {
 						presenceData.state =
-							document?.querySelector(
+							document.querySelector(
 								".b-breadcrumbs"
 							)?.lastChild.previousSibling.textContent;
 					}
@@ -114,23 +113,23 @@ presence.on("UpdateData", async () => {
 			presenceData.details = title;
 			if (pathname.split("/")[2]) {
 				presenceData.details = `Смотрит 
-				${document?.querySelector(".b-link span")?.textContent.toLowerCase()}`;
+				${document.querySelector(".b-link span")?.textContent.toLowerCase()}`;
 				if (!privacy) {
 					presenceData.state =
-						document?.querySelector(".l-page header h1").textContent;
+						document.querySelector(".l-page header h1")?.textContent;
 				}
 				presenceData.largeImageKey = isImageExist(".b-menu_logo img");
 			}
 			break;
 		case "forum":
 			presenceData.details = `Смотрит ${document
-				?.querySelector(".l-page header .b-link span")
+				.querySelector(".l-page header .b-link span")
 				?.textContent.toLowerCase()}`;
 			if (!privacy) {
 				switch (pathname.split("/")[2]) {
 					case "updates":
 					case "reviews":
-						presenceData.state = document?.querySelector(".reload").textContent;
+						presenceData.state = document.querySelector(".reload")?.textContent;
 						break;
 					default:
 						presenceData.state = title;
@@ -146,7 +145,7 @@ presence.on("UpdateData", async () => {
 		case "characters":
 		case "people":
 			presenceData.details =
-				document?.querySelector(".l-page header p")?.textContent;
+				document.querySelector(".l-page header p")?.textContent;
 			if (!privacy) presenceData.state = title;
 			presenceData.largeImageKey = isImageExist(".c-poster img");
 			break;
@@ -175,7 +174,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.split("/")[3].match(/anime|manga/)) {
 				presenceData.details = `Смотрит ${document
 					.querySelector(".submenu-triangle > span")
-					.textContent.toLowerCase()} ${
+					?.textContent.toLowerCase()} ${
 					!privacy ? pathname.split("/")[1] : "пользователя"
 				}`;
 				presenceData.largeImageKey = isImageExist(".avatar img");
