@@ -2,3 +2,4 @@ node_modules
 *.js
 *.md
 *.json
+pnpm-lock.yaml

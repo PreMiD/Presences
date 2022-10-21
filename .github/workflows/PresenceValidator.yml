@@ -1,8 +1,8 @@
-name: Schema Validation Check
+name: Presence Validator
 on: pull_request
 jobs:
   validate:
-    name: Schema Validation Check
+    name: Presence Validator
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
@@ -16,7 +16,7 @@ jobs:
           cache: "yarn"
       - name: Install dependencies
         run: yarn
-      - name: Run SV
+      - name: Run Presence Validator
         run: |
           git config --global core.quotePath false
-          yarn sv ${{ github.event_name }}
+          yarn presenceValidator ${{ github.event_name }}

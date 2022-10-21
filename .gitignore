@@ -41,3 +41,6 @@ lerna-debug.log*
 
 # Exception for extension recommendations
 !**/.vscode/extensions.json
+
+# PresenceUpdater
+dist

@@ -1,0 +1,10 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"module": "ESNext",
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "node",
+		"strict": true,
+		"rootDir": "./"
+	}
+}

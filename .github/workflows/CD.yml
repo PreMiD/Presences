@@ -1,4 +1,4 @@
-name: DePloY
+name: CD
 on:
   push:
     branches:
@@ -7,9 +7,13 @@ on:
       - "**.ts"
       - "**.json"
 jobs:
-  UpdatePresences:
-    runs-on: ubuntu-18.04
-    if: github.repository_owner == 'PreMiD'
+  update:
+    name: Update Presences
+    runs-on: ubuntu-22.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
@@ -19,9 +23,10 @@ jobs:
           node-version: 16
           cache: "yarn"
       - name: Install dependencies
-        run: yarn
+        run: |
+          npm i -g yarn
+          yarn
       - name: Update Presences
         env:
           MONGO_URL: ${{ secrets.MONGO_URL }}
-          GHTOKEN: ${{ secrets.GHTOKEN }}
-        run: yarn pu
+        run: yarn presenceUpdater
