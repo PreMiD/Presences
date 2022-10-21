@@ -36,8 +36,6 @@ let client: MongoClient | null = null,
 	collection: Collection<DBdata> | null = null,
 	changedPresences = getDiff();
 
-console.log(changedPresences);
-
 if (!process.env.GITHUB_ACTIONS)
 	console.log(
 		chalk.yellowBright(
