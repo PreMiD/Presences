@@ -278,23 +278,23 @@ const Games: Record<string, Game> = {
 	// Party Pack 9
 	fourbage: {
 		name: "Fibbage 4",
-		logo: "TODO",
+		logo: "https://i.imgur.com/ckDs9Ve.png",
 	},
 	lineup: {
 		name: "Quixort",
-		logo: "TODO",
+		logo: "https://i.imgur.com/zqzsySL.png",
 	},
 	"range-game": {
 		name: "Nonsensory",
-		logo: "TODO",
+		logo: "https://i.imgur.com/JH3JgaM.png",
 	},
 	"antique-freak": {
 		name: "Junktopia",
-		logo: "TODO",
+		logo: "https://i.imgur.com/PzIFq5d.png",
 	},
 	htmf: {
 		name: "Roomerang",
-		logo: "TODO",
+		logo: "https://i.imgur.com/jZAqMNf.png",
 	},
 };
 
