@@ -75,7 +75,8 @@ if (window.location.hostname === "jackbox.tv") {
 			for (
 				let i = playerStateLogs.length - 1;
 				!(updatedInfoState && updatedMainState) &&
-				i >= playerStateLogs.length - 5;
+				i >= playerStateLogs.length - 6 &&
+				i >= 0;
 				i--
 			) {
 				const latestLog = playerStateLogs[i];
@@ -102,7 +103,7 @@ if (window.location.hostname === "jackbox.tv") {
 				) {
 					if (!updatedMainState) {
 						gamePlayerState = JSON.parse(latestLog.slice(8)).result.val;
-						updatedInfoState = true;
+						updatedMainState = true;
 					}
 				} else if (
 					/recv <- .*?"key": "info:\d+",/s.test(latestLog) &&
