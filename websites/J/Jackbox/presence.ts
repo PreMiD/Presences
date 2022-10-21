@@ -70,23 +70,47 @@ if (window.location.hostname === "jackbox.tv") {
 			/recv <- .*?("key": "(bc:customer|player|info):[a-z0-9-]+",)/s
 		);
 		if (playerStateLogs.length > 0) {
-			const lastLog = playerStateLogs[playerStateLogs.length - 1];
-			if (/recv <- .*?"entities": {\n/s.test(lastLog)) {
-				gamePlayerState = JSON.parse(lastLog.slice(8)).result.entities[
-					lastLog.match(/"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s)[1]
-				][1].val;
-				gamePlayerInfoState =
-					JSON.parse(lastLog.slice(8)).result.entities[
-						lastLog.match(/"key": "(info:[a-z0-9-]+)",/s)?.[1]
-					]?.[1].val ?? {};
-			} else if (
-				/recv <- .*?"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s.test(
-					lastLog
-				)
+			let updatedMainState = false,
+				updatedInfoState = false;
+			for (
+				let i = playerStateLogs.length - 1;
+				!(updatedInfoState && updatedMainState) &&
+				i >= playerStateLogs.length - 5;
+				i--
 			) {
-				gamePlayerState = JSON.parse(lastLog.slice(8)).result.val;
-			} else {
-				gamePlayerInfoState = JSON.parse(lastLog.slice(8)).result.val;
+				const latestLog = playerStateLogs[i];
+				if (/recv <- .*?"entities": {\n/s.test(latestLog)) {
+					if (!updatedMainState) {
+						gamePlayerState = JSON.parse(latestLog.slice(8)).result.entities[
+							latestLog.match(
+								/"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s
+							)[1]
+						][1].val;
+					}
+					if (!updatedInfoState) {
+						gamePlayerInfoState =
+							JSON.parse(latestLog.slice(8)).result.entities[
+								latestLog.match(/"key": "(info:\d+)",/s)?.[1]
+							]?.[1].val ?? {};
+					}
+					updatedInfoState = true;
+					updatedMainState = true;
+				} else if (
+					/recv <- .*?"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s.test(
+						latestLog
+					)
+				) {
+					if (!updatedMainState) {
+						gamePlayerState = JSON.parse(latestLog.slice(8)).result.val;
+						updatedInfoState = true;
+					}
+				} else if (
+					/recv <- .*?"key": "info:\d+)",/s.test(latestLog) &&
+					!updatedInfoState
+				) {
+					gamePlayerInfoState = JSON.parse(latestLog.slice(8)).result.val;
+					updatedInfoState = true;
+				}
 			}
 		}
 		if (!game) {
