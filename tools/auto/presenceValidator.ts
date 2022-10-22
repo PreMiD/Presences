@@ -6,7 +6,7 @@ import { readFile, stat } from "fs/promises";
 import got from "got";
 import jsonAst, { ObjectNode } from "json-to-ast";
 import { validate } from "jsonschema";
-import { basename, resolve } from "path";
+import { resolve } from "path";
 import { compare } from "semver";
 
 import PresenceCompiler from "../classes/PresenceCompiler.js";
