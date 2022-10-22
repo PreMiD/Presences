@@ -11,7 +11,7 @@ import * as earwax from "./Party Pack 2/earwax.js";
 import * as fibbage2 from "./Party Pack 2/fibbage2.js";
 import * as fibbage from "./Party Pack 2/fibbage.js";
 
-export const games = {
+export default {
 	unknown,
 	ydkj2015,
 	lieswatter,
