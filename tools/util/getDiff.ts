@@ -33,7 +33,7 @@ export default function getDiff(
 
 	if (!changedPresenceFolders.length) return [];
 
-	return [...new Set(changedPresenceFolders.map(f => basename(dirname(f))))]
+	return [...new Set(changedPresenceFolders.map(f => basename(dirname(f))))];
 }
 
 function validateArg(arg: string): ValidEventName {
