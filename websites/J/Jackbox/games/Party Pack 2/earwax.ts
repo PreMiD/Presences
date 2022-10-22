@@ -1,4 +1,3 @@
-export const tag = "earwax";
 export const name = "Earwax";
 export const logo = "https://i.imgur.com/oEidNn6.png";
 

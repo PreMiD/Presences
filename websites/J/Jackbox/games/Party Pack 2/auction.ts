@@ -1,4 +1,3 @@
-export const tag = "auction";
 export const name = "Bidiots";
 export const logo = "https://i.imgur.com/baDEinm.png";
 

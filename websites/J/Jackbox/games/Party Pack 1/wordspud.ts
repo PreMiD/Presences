@@ -1,4 +1,3 @@
-export const tag = "wordspud";
 export const name = "Word Spud";
 export const logo = "https://i.imgur.com/gFUB4EX.png";
 

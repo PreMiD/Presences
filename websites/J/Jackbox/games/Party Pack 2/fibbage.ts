@@ -1,4 +1,3 @@
-export const tag = "fibbage";
 export const name = "Fibbage XL";
 export const logo = "https://i.imgur.com/LxAtHuy.png";
 

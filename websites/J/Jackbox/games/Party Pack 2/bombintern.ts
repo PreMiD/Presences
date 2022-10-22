@@ -1,4 +1,3 @@
-export const tag = "bombintern";
 export const name = "Bomb Corp";
 export const logo = "https://i.imgur.com/1srbKlq.png";
 

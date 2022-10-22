@@ -1,4 +1,3 @@
-export const tag = "ydkj2015";
 export const name = "You Don't Know Jack 2015";
 export const logo = "https://i.imgur.com/EGnX1E5.png";
 
