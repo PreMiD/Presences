@@ -128,12 +128,11 @@ presence.on("UpdateData", async () => {
 			.textContent.split("-");
 		presenceData.state = `Odcinek:${playinfo[0].replace("Odc", "")}`;
 		if (playinfo.length > 2) {
-			let episodetitle = "";
-			for (let i = 0; i < playinfo.length; i++) {
-				if (i !== 0 && i !== playinfo.length - 1)
-					episodetitle += `${playinfo[i]}-`;
-			}
-			presenceData.state += ` - "${episodetitle.slice(1, -2)}"`;
+			presenceData.state += ` - "${document
+				.querySelector("li.selected > a > div.playinfo > span")
+				.textContent.match(/-.*-/gm)
+				.toString()
+				.slice(2, -2)}"`;
 		}
 		presenceData.buttons = [
 			{ label: "Oglądaj", url: document.URL },
