@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 
 				title = footerEles[2]?.querySelector("a>span")?.textContent.trim();
 
-				presenceData.state = `S${season}:E${episode[1].trim()} ${episode[0].trim()}`;
+				presenceData.state = `S${season}:E${episode?.[1]?.trim()} ${episode?.[0]?.trim()}`;
 				presenceData.buttons[0].label = "Watch Series";
 			} else if (pathname.includes("/filme/")) {
 				title = footerEles[2]?.querySelector("a>span")?.textContent.trim();
