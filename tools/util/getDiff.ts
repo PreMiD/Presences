@@ -12,7 +12,7 @@ export default function getDiff(
 ): string[] {
 	const commands: Record<ValidEventName, string> = {
 			push: "HEAD HEAD^",
-			pull_request: `origin..origin/${process.argv[3] ?? "main"}`,
+			pull_request: `origin..${process.argv[3] ?? "main"}`,
 			uncommitted: "HEAD --",
 		},
 		eventName = process.argv[2] ? validateArg(process.argv[2]) : "uncommitted",
