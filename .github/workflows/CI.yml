@@ -23,6 +23,6 @@ jobs:
       - name: Compile changed files
         run: |
           git config --global core.quotePath false
-          yarn compile ${{ github.event_name }} $GITHUB_BASE_REF
+          yarn compile ${{ github.event_name }} $GITHUB_HEAD_REF
       - name: Check Lint
         run: yarn lint:ci
