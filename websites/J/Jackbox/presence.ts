@@ -2328,7 +2328,8 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case Games.htmf: {
-							// TODO: Complete
+							presenceData.smallImageKey =
+								document.querySelector<HTMLImageElement>(".avatar > img")?.src;
 							switch (gamePlayerState.kind) {
 								case "lobby": {
 									presenceData.state = "Waiting in lobby";
@@ -2343,7 +2344,12 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "choosing": {
-									presenceData.state = "Choosing a player";
+									if (gamePlayerState.prompt === "")
+										presenceData.state = "Voting for a response";
+									else if (gamePlayerState.round === "firestarter")
+										presenceData.state = "Choosing a player to burn";
+									else if (gamePlayerState.round === "finale")
+										presenceData.state = "Deciding who should win";
 									break;
 								}
 								case "waiting": {
@@ -2351,7 +2357,40 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "writing": {
-									presenceData.state = "Answering a prompt";
+									if (gamePlayerState.isGoodbye)
+										presenceData.state = "Writing a goodbye message";
+									else {
+										switch (gamePlayerState.round) {
+											case "intro": {
+												presenceData.state = "Writing an introduction";
+												break;
+											}
+											case "connection": {
+												presenceData.state = "Writing about a connection";
+												break;
+											}
+											case "quickie": {
+												presenceData.state = "Writing an anonymous response";
+												break;
+											}
+											case "firestarter": {
+												presenceData.state = "Writing a dramatic response";
+												break;
+											}
+											case "finale": {
+												presenceData.state =
+													"Writing a response for the finale";
+												break;
+											}
+											case "": {
+												presenceData.state = "Writing a victory speech";
+												break;
+											}
+											default: {
+												presenceData.state = "Writing a response";
+											}
+										}
+									}
 									break;
 								}
 							}
