@@ -15,8 +15,7 @@ import getLatestSchema from "../util/getLatestSchema.js";
 
 const schema = await getLatestSchema(),
 	changedPresences = getDiff(),
-	storePresences = await getStorePresences(changedPresences),
-	validLangs = storePresences.data.langFiles.map(l => l.lang),
+	validLangs = await getValidLanguages(),
 	compiler = new PresenceCompiler(),
 	errors: {
 		presence: string;
@@ -39,7 +38,11 @@ for (const presence of changedPresences) {
 		continue;
 	}
 
-	let metadata: any | null;
+	interface SchemaMetadata extends Metadata {
+		$schema: string;
+	}
+
+	let metadata: SchemaMetadata;
 
 	try {
 		metadata = JSON.parse(
@@ -59,9 +62,9 @@ for (const presence of changedPresences) {
 	}
 	//#endregion
 
-	const storePresence = storePresences.data.presences.find(
-		p => p.metadata.service === metadata.service
-	);
+	const storePresence = (
+		await getStorePresence(metadata.service)
+	).data.presences.find(p => p.metadata.service === metadata.service);
 
 	//#region Schema Check
 	const result = validate(metadata, schema.schema);
@@ -204,17 +207,57 @@ if (errors.length) {
 	actions.setFailed("Some Presences failed to validate.");
 } else actions.info("All Presences validated successfully!");
 
-async function getStorePresences(presences: string[]) {
+async function getValidLanguages() {
+	return (
+		await got<{
+			data: {
+				langFiles: [
+					{
+						lang: string;
+					}
+				];
+			};
+		}>("https://api.premid.app/v3", {
+			method: "post",
+			responseType: "json",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				query: `
+					query {
+						langFiles(project: "presence") {
+							lang
+						}
+					}
+				`,
+			}),
+		})
+	).body.data.langFiles.map(l => l.lang);
+}
+
+async function getStorePresence(presences: string) {
 	try {
-		return JSON.parse(
-			(
-				await got("https://api.premid.app/v3", {
-					method: "post",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						query: `
+		return (
+			await got<{
+				data: {
+					presences: [
+						{
+							metadata: {
+								service: string;
+								version: string;
+							};
+						}
+					];
+				};
+			}>("https://api.premid.app/v3", {
+				method: "post",
+				responseType: "json",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					query: `
 					query getData($service: StringOrStringArray!) {
 						presences(service: $service) {
 							metadata {
@@ -222,34 +265,14 @@ async function getStorePresences(presences: string[]) {
 								version
 							}
 						}
-						langFiles(project: "presence") {
-							lang
-						}
 					}
 				`,
-						variables: {
-							service: presences,
-						},
-					}),
-				})
-			).body
-		) as {
-			data: {
-				presences: [
-					{
-						metadata: {
-							service: string;
-							version: string;
-						};
-					}
-				];
-				langFiles: [
-					{
-						lang: string;
-					}
-				];
-			};
-		};
+					variables: {
+						service: presences,
+					},
+				}),
+			})
+		).body;
 	} catch {
 		actions.setFailed("Could not fetch store data!");
 		process.exit();
