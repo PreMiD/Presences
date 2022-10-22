@@ -2178,6 +2178,26 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 								case "choosing": {
+									switch (gamePlayerState.context) {
+										case "pick-category": {
+											presenceData.state = "Choosing a category";
+											break;
+										}
+										case "pick-truth": {
+											presenceData.state = "Looking for the truth";
+											break;
+										}
+										case "pick-likes": {
+											presenceData.state = "Awarding likes to other's answers";
+											break;
+										}
+										case "final-round-1":
+										case "final-round-2": {
+											presenceData.state =
+												"Looking for the truth - Final Round";
+											break;
+										}
+									}
 									break;
 								}
 								case "writing": {
