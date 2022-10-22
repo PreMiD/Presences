@@ -34,7 +34,7 @@ const compiler = new PresenceCompiler();
 
 let client: MongoClient | null = null,
 	collection: Collection<DBdata> | null = null,
-	changedPresences = getDiff();
+	changedPresenceFolders = getDiff();
 
 if (!process.env.GITHUB_ACTIONS)
 	console.log(
@@ -73,14 +73,14 @@ try {
 	process.exit();
 }
 
-await compiler.compilePresence(changedPresences, {
+await compiler.compilePresence(changedPresenceFolders, {
 	transpileOnly: true,
 });
 
 let dbPresences: DBdata[] = [];
 
-for (const presence of changedPresences) {
-	const presenceFolder = compiler.getPresenceFolder(presence);
+for (const presenceFolderName of changedPresenceFolders) {
+	const presenceFolder = compiler.getPresenceFolder(presenceFolderName);
 
 	const metadata = JSON.parse(
 		await readFile(resolve(presenceFolder, "metadata.json"), "utf-8")
@@ -90,9 +90,9 @@ for (const presence of changedPresences) {
 		name: metadata.service,
 		metadata,
 		githubUri: `https://github.com/PreMiD/Presences/tree/main/websites/${getFolderLetter(
-			presence
-		)}/${presence}`,
-		folderName: presence,
+			presenceFolderName
+		)}/${presenceFolderName}`,
+		folderName: presenceFolderName,
 		url: `https://api.premid.app/v2/presences/${encodeURIComponent(
 			metadata.service
 		)}/`,
