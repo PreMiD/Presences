@@ -7,35 +7,45 @@ interface Game {
 	logo: string;
 }
 
-let gamePlayerState: {
-		playerName?: string;
+interface GamePlayerState {
+	playerName?: string;
+	username?: string;
+	playerInfo?: {
 		username?: string;
-		playerInfo?: {
-			username?: string;
-		};
-		state?: string;
-		status?: string;
-		kind?: string;
-		category?: string;
-		prompt?: {
-			text?: string;
-			html?: string;
-		};
-		entryId?: string;
-		choiceId?: string;
-		responseKey?: string;
-		placeholder?: string;
-		choiceType?: string;
-		classes?: string[];
-		[x: string]: unknown;
-	} = {
+	};
+	state?: string;
+	status?: string;
+	kind?: string;
+	category?: string;
+	prompt?: {
+		text?: string;
+		html?: string;
+	};
+	entryId?: string;
+	choiceId?: string;
+	responseKey?: string;
+	placeholder?: string;
+	choiceType?: string;
+	classes?: string[];
+	[x: string]: unknown;
+}
+
+interface GameInfoState {
+	name?: string;
+}
+
+interface GameCallbackParams {
+	playerState: GamePlayerState;
+	infoState: GameInfoState;
+	tag: string;
+}
+
+let gamePlayerState: GamePlayerState = {
 		playerName: null,
 		state: null,
 		username: null,
 	},
-	gamePlayerInfoState: {
-		name: string;
-	} = {
+	gamePlayerInfoState: GameInfoState = {
 		name: null,
 	},
 	game: Game,
@@ -133,56 +143,6 @@ if (window.location.hostname === "jackbox.tv") {
 }
 
 const Games: Record<string, Game> = {
-	unknown: {
-		name: "Unknown Game",
-		logo: "https://i.imgur.com/SXfEdnL.png",
-	},
-	// Party Pack 1
-	ydkj2015: {
-		name: "You Don't Know Jack 2015",
-		logo: "https://i.imgur.com/EGnX1E5.png",
-	},
-	drawful2: {
-		name: "Drawful 2",
-		logo: "https://i.imgur.com/TOaYCE3.png",
-	},
-	drawful2international: {
-		name: "Drawful 2 International",
-		logo: "https://i.imgur.com/TOaYCE3.png",
-	},
-	drawful: {
-		name: "Drawful",
-		logo: "https://i.imgur.com/TOaYCE3.png",
-	},
-	wordspud: {
-		name: "Word Spud",
-		logo: "https://i.imgur.com/gFUB4EX.png",
-	},
-	lieswatter: {
-		name: "Lie Swatter",
-		logo: "https://i.imgur.com/PavDjzP.png",
-	},
-	// Party Pack 2
-	auction: {
-		name: "Bidiots",
-		logo: "https://i.imgur.com/baDEinm.png",
-	},
-	bombintern: {
-		name: "Bomb Corp",
-		logo: "https://i.imgur.com/1srbKlq.png",
-	},
-	earwax: {
-		name: "Earwax",
-		logo: "https://i.imgur.com/oEidNn6.png",
-	},
-	fibbage: {
-		name: "Fibbage XL",
-		logo: "https://i.imgur.com/LxAtHuy.png",
-	},
-	fibbage2: {
-		name: "Fibbage 2",
-		logo: "https://i.imgur.com/LxAtHuy.png",
-	},
 	// Party Pack 3
 	awshirt: {
 		name: "Tee K.O.",
@@ -374,176 +334,7 @@ presence.on("UpdateData", async () => {
 				}
 				if (useDetails) {
 					switch (game) {
-						case Games.unknown: {
-							presenceData.state = `Playing an unsupported game (${gametag})`;
-							break;
-						}
-						// Party Pack 1
-						case Games.lieswatter: {
-							const { classList } = document.querySelector<HTMLDivElement>(
-								".lieswatter-page:not(.pt-page-off)"
-							);
-							if (classList.contains("state-lobby"))
-								presenceData.state = "Waiting in lobby";
-							else if (classList.contains("state-answer"))
-								presenceData.state = "Swatting lies";
-							else if (classList.contains("state-nothing"))
-								presenceData.state = "Waiting for other players";
-							break;
-						}
-						case Games.wordspud: {
-							const { classList } = document.querySelector<HTMLDivElement>(
-								".wordspud-page:not(.pt-page-off)"
-							);
-							if (classList.contains("state-waiting"))
-								presenceData.state = "Waiting in lobby";
-							else if (classList.contains("state-startbutton"))
-								presenceData.state = "Waiting for other players to join";
-							else if (classList.contains("state-writing"))
-								presenceData.state = "Writing something";
-							else if (classList.contains("state-vote"))
-								presenceData.state = "Voting on a word";
-							else if (classList.contains("state-vote-wait"))
-								presenceData.state = "Being judged";
-							else if (classList.contains("state-nothing"))
-								presenceData.state = "Waiting";
-							else if (classList.contains("state-voted"))
-								presenceData.state = "Waiting for other players to vote";
-							else if (classList.contains("state-gameover"))
-								presenceData.state = "Game over";
-							break;
-						}
-						case Games.ydkj2015: {
-							const { classList } = document.querySelector<HTMLDivElement>(
-								".ydkj-page:not(.pt-page-off)"
-							);
-							if (classList.contains("state-default"))
-								presenceData.state = "Waiting in lobby";
-							else if (classList.contains("state-jack-attack"))
-								presenceData.state = "Playing Jack Attack";
-							break;
-						}
-						case Games.drawful2international:
-						case Games.drawuful:
-						case Games.drawful2: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".drawful-page:not(.pt-page-off)"
-								),
-								{ classList, id } = currentGamePage;
-							if (classList.contains("state-lobby"))
-								presenceData.state = "Waiting in lobby";
-							else if (
-								classList.contains("state-lyingdone") ||
-								classList.contains("state-nothing") ||
-								classList.contains("state-drawing-done")
-							)
-								presenceData.state = "Waiting";
-							else if (classList.contains("state-round")) {
-								presenceData.state =
-									currentGamePage.querySelector("span").textContent;
-							} else if (classList.contains("state-drawing-sent")) {
-								presenceData.state =
-									"Waiting for other players to finish drawing";
-							} else if (classList.contains("state-enterlie"))
-								presenceData.state = "Entering a lie";
-							else if (classList.contains("state-chooselie"))
-								presenceData.state = "Looking for the truth";
-							else if (classList.contains("state-chooselikes"))
-								presenceData.state = "Liking lies";
-							else if (classList.contains("state-liereceived"))
-								presenceData.state = "Waiting for other players to enter lies";
-							else if (classList.contains("state-notchoosing")) {
-								presenceData.state =
-									"Waiting for other players to discover the truth";
-							} else if (classList.contains("state-draw"))
-								presenceData.state = "Drawing something";
-							else if (classList.contains("state-audience-choose"))
-								presenceData.state = "Choosing a lie";
-							else if (id === "state-ugc")
-								presenceData.state = "Creating a custom game";
-							else if (classList.contains("state-audience"))
-								presenceData.state = "In the audience";
-							break;
-						}
 						// Party Pack 2
-						case Games.auction: {
-							const { id } = document.querySelector<HTMLDivElement>(
-								".auction-page:not(.pt-page-off)"
-							);
-							switch (id) {
-								case "state-lobby": {
-									presenceData.state = "Waiting in lobby";
-									break;
-								}
-								case "state-logo": {
-									presenceData.state = "Watching tutorial";
-									break;
-								}
-								case "state-draw": {
-									presenceData.state = "Creating a piece of art";
-									break;
-								}
-								case "state-done-drawing": {
-									presenceData.state =
-										"Waiting for other players to finish drawing";
-									break;
-								}
-								case "state-auction": {
-									presenceData.state = "Bidding on art";
-									break;
-								}
-								case "state-post-game": {
-									presenceData.state = "Viewing results";
-									break;
-								}
-							}
-							break;
-						}
-						case Games.fibbage:
-						case Games.fibbage2: {
-							const currentGamePage = document.querySelector<HTMLDivElement>(
-									".fibbage-page:not(.pt-page-off)"
-								),
-								{ classList } = currentGamePage;
-							if (classList.contains("state-lobby"))
-								presenceData.state = "Waiting in lobby";
-							else if (classList.contains("state-round")) {
-								presenceData.state =
-									currentGamePage.querySelector("p").textContent;
-							} else if (classList.contains("state-notchoosing")) {
-								presenceData.state = `Waiting for ${
-									currentGamePage
-										.querySelector("span")
-										.textContent.match(/^(.*?) is picking a category$/)[1]
-								} to pick a category`;
-							} else if (classList.contains("state-nothing"))
-								presenceData.state = "Waiting";
-							else if (classList.contains("state-enterlie"))
-								presenceData.state = "Entering a lie";
-							else if (classList.contains("state-lyingdone"))
-								presenceData.state = "Lying done";
-							else if (classList.contains("state-liereceived"))
-								presenceData.state = "Waiting for other players to enter lies";
-							else if (
-								classList.contains("state-chooselie") ||
-								classList.contains("state-audience-chooselie")
-							)
-								presenceData.state = "Finding the truth";
-							else if (
-								classList.contains("state-chooselikes") ||
-								classList.contains("state-audience-chooselikes")
-							)
-								presenceData.state = "Liking lies";
-							else if (classList.contains("state-choosing"))
-								presenceData.state = "Choosing a category";
-							else if (classList.contains("state-pickbloop"))
-								presenceData.state = "Chossing a sound";
-							else if (classList.contains("state-audience-join"))
-								presenceData.state = "Joining audience";
-							else if (classList.contains("state-audience-score"))
-								presenceData.state = "Viewing audience scores";
-							break;
-						}
 						case Games.quiplash2:
 						case Games["quiplash2-international"]:
 						case Games.quiplash: {
@@ -575,73 +366,6 @@ presence.on("UpdateData", async () => {
 									presenceData.state = "Voting";
 									break;
 								}
-							}
-							break;
-						}
-						case Games.bombintern: {
-							const { classList } = document.querySelector<HTMLDivElement>(
-								".bombintern-page:not(.pt-page-off)"
-							);
-							if (classList.contains("state-lobby"))
-								presenceData.state = "Waiting in lobby";
-							else if (classList.contains("state-dayend"))
-								presenceData.state = "Day end";
-							else if (classList.contains("state-gameover"))
-								presenceData.state = "Game over";
-							else if (classList.contains("state-nothing"))
-								presenceData.state = "Waiting";
-							else if (classList.contains("state-message"))
-								presenceData.state = "Reading a message";
-							else if (classList.contains("state-smashpuzzle"))
-								presenceData.state = "Defusing a smash puzzle bomb";
-							else if (classList.contains("state-wiredbomb"))
-								presenceData.state = "Defusing a wired bomb";
-							else if (classList.contains("state-coffeebomb"))
-								presenceData.state = "Defusing a coffee bomb";
-							else if (classList.contains("state-filingbomb"))
-								presenceData.state = "Defusing a filing bomb";
-							else if (classList.contains("state-keypadbomb"))
-								presenceData.state = "Defusing a keypad bomb";
-							else if (classList.contains("state-copierbomb"))
-								presenceData.state = "Defusing a copier bomb";
-							break;
-						}
-						case Games.earwax: {
-							const { id, classList } = document.querySelector<HTMLDivElement>(
-								".earwax-page:not(.pt-page-off)"
-							);
-							switch (id) {
-								case "state-lobby": {
-									presenceData.state = "Waiting in lobby";
-									break;
-								}
-								case "state-intro": {
-									presenceData.state = "Watching tutorial";
-									break;
-								}
-								case "state-logo":
-								case "state-audience-wait": {
-									presenceData.state = "Waiting";
-									break;
-								}
-								default:
-									if (classList.contains("state-choosing"))
-										presenceData.state = "Choosing a prompt";
-									else if (classList.contains("state-notchoosing")) {
-										presenceData.state =
-											"Waiting for the judge to choose a prompt";
-									} else if (classList.contains("state-notselectingsound")) {
-										presenceData.state =
-											"Waiting for players to choose a sound";
-									} else if (
-										classList.contains("state-selectingsound") ||
-										id === "state-answer-question-audience"
-									)
-										presenceData.state = "Choosing a sound";
-									else if (classList.contains("state-audience-join"))
-										presenceData.state = "Joining the audience";
-									else if (id === "state-vote")
-										presenceData.state = "Voting on a sound";
 							}
 							break;
 						}
