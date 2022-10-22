@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/fMMsZfV.png",
 		},
 		{ pathname, href } = document.location;
 
@@ -32,7 +32,9 @@ presence.on("UpdateData", async () => {
 		if (!isNaN(duration)) {
 			const footerEles = document.querySelectorAll("li.ng-star-inserted");
 
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused
+				? "https://i.imgur.com/C6mbMYz.png"
+				: "https://i.imgur.com/crCKEaC.png";
 			presenceData.smallImageText = paused
 				? (await strings).pause
 				: (await strings).play;
@@ -76,7 +78,7 @@ presence.on("UpdateData", async () => {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = "https://i.imgur.com/C6mbMYz.png";
 				presenceData.smallImageText = (await strings).pause;
 			}
 		}
