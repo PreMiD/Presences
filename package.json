@@ -8,7 +8,7 @@
 		"lint": "prettier --write . && eslint --fix .",
 		"lint:ci": "prettier --check . && eslint .",
 		"format": "npm run metadataSorter && npm run lint",
-		"schemaEnforcer": "npm run format && npm run bumpChanged uncommitted",
+		"schemaEnforcer": "npm run format && npm run bumpChanged",
 		"compileTools": "tsc -p tools/tsconfig.json",
 		"bumpChanged": "npm run compileTools && node --enable-source-maps tools/bumpChanged.js",
 		"presenceValidator": "npm run compileTools && node --enable-source-maps tools/auto/presenceValidator.js",

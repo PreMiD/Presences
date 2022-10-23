@@ -1,7 +1,7 @@
 import { execSync } from "node:child_process";
 import { basename, dirname } from "node:path";
 
-export type ValidEventName = "push" | "pull_request" | "uncommitted";
+export type ValidEventName = "push" | "pull_request";
 
 export default function getDiff(
 	type: "addedModified" | "removed" | "all" = "addedModified"
@@ -9,9 +9,8 @@ export default function getDiff(
 	const commands: Record<ValidEventName, string> = {
 			push: "HEAD HEAD^",
 			pull_request: `origin/main HEAD`,
-			uncommitted: "HEAD --",
 		},
-		eventName = process.argv[2] ? validateArg(process.argv[2]) : "uncommitted",
+		eventName = process.argv[2] ? validateArg(process.argv[2]) : "pull_request",
 		changedPresenceFolders = execSync(
 			`git --no-pager diff --name-only --diff-filter=${
 				type === "addedModified"
@@ -33,7 +32,7 @@ export default function getDiff(
 }
 
 function validateArg(arg: string): ValidEventName {
-	if (!["push", "pull_request", "uncommitted"].includes(arg))
+	if (!["push", "pull_request"].includes(arg))
 		throw new Error(`CI was not called with a valid event name: ${arg}`);
 	return arg as ValidEventName;
 }
