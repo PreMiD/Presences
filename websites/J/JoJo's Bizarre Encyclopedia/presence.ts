@@ -5,9 +5,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {};
 
-	const showButtons = await presence.getSetting("showButtons");
-
-	const url = new URL(window.location.href);
+	const showButtons = await presence.getSetting("showButtons"),
+		url = new URL(window.location.href);
 
 	if (url.hostname === "jojowiki.com") {
 		presenceData = {
@@ -98,7 +97,7 @@ presence.on("UpdateData", async () => {
 			if (
 				window.location.pathname.toLowerCase().startsWith("/special:movepage/")
 			) {
-				let title = urlToTitle(window.location.pathname.substring(18));
+				const title = urlToTitle(window.location.pathname.substring(18));
 				presenceData.state = `Moving: ${title}`;
 				if (showButtons) {
 					presenceData.buttons = [
@@ -112,15 +111,14 @@ presence.on("UpdateData", async () => {
 				window.location.pathname
 					.toLowerCase()
 					.startsWith("/special:notifications")
-			) {
-				presenceData.state = `Checking Notifications`;
-			} else if (
+			)
+				presenceData.state = "Checking Notifications";
+			else if (
 				window.location.pathname
 					.toLowerCase()
 					.startsWith("/special:preferences")
-			) {
+			)
 				presenceData.state = "Viewing Settings";
-			}
 		} else if (
 			window.location.pathname.toLowerCase().startsWith("/user_talk:") ||
 			window.location.pathname.toLowerCase().startsWith("/userwiki:") ||
