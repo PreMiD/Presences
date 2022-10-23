@@ -44,12 +44,13 @@ export async function getPresenceData({
 			} else if (entryId.startsWith("challenger")) {
 				const imageLink =
 					document.querySelector<HTMLImageElement>(".imageData")?.src;
-				if (imageLink)
+				if (imageLink) {
 					presenceData.largeImageKey = await uploadFile(
 						imageLink,
 						"https://i.imgur.com/KnAS7yD.png",
 						presence
 					);
+				}
 
 				presenceData.state = "Drawing a challenger";
 				break;
