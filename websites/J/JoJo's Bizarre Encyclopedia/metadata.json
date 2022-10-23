@@ -25,9 +25,9 @@
 	],
 	"settings": [
 		{
-		  "id": "showButtons",
-		  "title": "Show Buttons",
-		  "value": true
+			"id": "showButtons",
+			"title": "Show Buttons",
+			"value": true
 		}
-	  ]
+	]
 }
