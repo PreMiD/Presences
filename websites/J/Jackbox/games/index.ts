@@ -16,6 +16,12 @@ import * as quiplash2international from "./Party Pack 3/quiplash2-international.
 import * as fakinit from "./Party Pack 3/fakinit.js";
 import * as awshirt from "./Party Pack 3/awshirt.js";
 import * as pollposition from "./Party Pack 3/pollposition.js";
+import * as triviadeath from "./Party Pack 3/triviadeath.js";
+import * as bracketeering from "./Party Pack 4/bracketeering.js";
+import * as overdrawn from "./Party Pack 4/overdrawn.js";
+import * as monstermingle from "./Party Pack 4/monstermingle.js";
+import * as survivetheinternet from "./Party Pack 4/survivetheinternet.js";
+import * as fibbage3 from "./Party Pack 4/fibbage3.js";
 
 export default {
 	unknown,
@@ -36,4 +42,10 @@ export default {
 	fakinit,
 	awshirt,
 	pollposition,
+	triviadeath,
+	bracketeering,
+	overdrawn,
+	monstermingle,
+	survivetheinternet,
+	fibbage3,
 };
