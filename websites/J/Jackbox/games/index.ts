@@ -41,7 +41,12 @@ import * as applyyourself from "./Party Pack 8/apply-yourself.js";
 import * as drawfulanimate from "./Party Pack 8/drawful-animate.js";
 import * as surveybomb from "./Party Pack 8/survey-bomb.js";
 import * as thewheel from "./Party Pack 8/the-wheel.js";
-// todo: weapons drawn import
+import * as murderdetectives from "./Party Pack 8/murder-detectives.js";
+import * as fourbage from "./Party Pack 9/fourbage.js";
+import * as htmf from "./Party Pack 9/htmf.js";
+import * as rangegame from "./Party Pack 9/range-game.js";
+import * as lineup from "./Party Pack 9/lineup.js";
+import * as antiquefreak from "./Party Pack 9/antique-freak.js";
 
 export default {
 	unknown,
@@ -87,4 +92,10 @@ export default {
 	"drawful-animate": drawfulanimate,
 	"survey-bomb": surveybomb,
 	"the-wheel": thewheel,
+	"murder-detectives": murderdetectives,
+	fourbage,
+	htmf,
+	"range-game": rangegame,
+	lineup,
+	"antique-freak": antiquefreak,
 };
