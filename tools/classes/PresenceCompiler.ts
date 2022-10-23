@@ -118,12 +118,12 @@ export default class PresenceCompiler {
 							...webpackConfig,
 							context: presencePath,
 							output: options.emit
-								? undefined
-								: {
+								? {
 										iife: false,
 										path: presencePath,
 										filename: "[name].js",
-								  },
+								  }
+								: undefined,
 							entry: {
 								presence: "./presence.ts",
 								...(existsSync(resolve(presencePath, "iframe.ts")) && {
