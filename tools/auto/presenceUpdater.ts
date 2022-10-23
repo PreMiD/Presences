@@ -9,8 +9,7 @@ import chalk from "chalk";
 import { config } from "dotenv";
 
 import PresenceCompiler, { Metadata } from "../classes/PresenceCompiler.js";
-import getDiff from "../util/getDiff.js";
-import getFolderLetter from "../util/getFolderLetter.js";
+import { getDiff, getFolderLetter } from "../util.js";
 
 const require = createRequire(import.meta.url);
 

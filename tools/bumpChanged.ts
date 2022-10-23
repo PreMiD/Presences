@@ -5,7 +5,7 @@ import { writeFile } from "node:fs/promises";
 import { coerce, inc } from "semver";
 
 import PresenceCompiler, { Metadata } from "./classes/PresenceCompiler.js";
-import getDiff from "./util/getDiff.js";
+import { getDiff } from "./util.js";
 
 const require = createRequire(import.meta.url),
 	compiler = new PresenceCompiler(),

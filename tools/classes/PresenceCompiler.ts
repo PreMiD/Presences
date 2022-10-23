@@ -10,8 +10,7 @@ import { config } from "dotenv";
 import webpack from "webpack";
 
 import { ErrorInfo } from "ts-loader/dist/interfaces";
-
-import getFolderLetter from "../util/getFolderLetter.js";
+import { getFolderLetter } from "../util.js";
 
 const require = createRequire(import.meta.url),
 	rootPath = resolve(fileURLToPath(new URL(".", import.meta.url)), "../..");
@@ -140,7 +139,7 @@ export default class PresenceCompiler {
 				if (job.error) throw job.error;
 
 				if (job.stats?.compilation.errors.length)
-					errors.push(...job.stats?.compilation?.errors);
+					errors.push(...(job.stats?.compilation?.errors || []));
 				else {
 					const { service } = require(resolve(presencePath, "metadata.json"));
 

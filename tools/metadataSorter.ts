@@ -3,7 +3,7 @@ import { writeFile } from "fs/promises";
 import glob from "glob";
 
 import { Metadata } from "./classes/PresenceCompiler.js";
-import getLatestSchema from "./util/getLatestSchema.js";
+import { getLatestSchema } from "./util.js";
 
 const require = createRequire(import.meta.url),
 	{ url: latestSchema } = await getLatestSchema(),

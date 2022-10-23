@@ -9,8 +9,7 @@ import { validate } from "jsonschema";
 import { compare } from "semver";
 
 import PresenceCompiler from "../classes/PresenceCompiler.js";
-import getDiff from "../util/getDiff.js";
-import getLatestSchema from "../util/getLatestSchema.js";
+import { getDiff, getLatestSchema } from "../util.js";
 
 const require = createRequire(import.meta.url),
 	schema = await getLatestSchema(),
