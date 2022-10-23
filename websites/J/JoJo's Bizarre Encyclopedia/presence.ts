@@ -6,9 +6,11 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {};
 
 	const showButtons = await presence.getSetting("showButtons"),
-		url = new URL(window.location.href);
+		{ hostname, pathname, origin, href, searchParams } = new URL(
+			window.location.href
+		);
 
-	if (url.hostname === "jojowiki.com") {
+	if (hostname === "jojowiki.com") {
 		presenceData = {
 			largeImageKey: "https://i.imgur.com/iBLgETb.png",
 			smallImageKey: "https://i.imgur.com/h5EZ0JB.png",
@@ -17,20 +19,19 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing JoJoWiki";
 
 		if (
-			window.location.pathname === "" ||
-			window.location.pathname === "/" ||
-			window.location.pathname === "/JoJo_Wiki" ||
-			(window.location.pathname === "/index.php" &&
-				!url.searchParams.get("action"))
+			pathname === "" ||
+			pathname === "/" ||
+			pathname === "/JoJo_Wiki" ||
+			(pathname === "/index.php" && !searchParams.get("action"))
 		)
 			presenceData.state = "Viewing homepage";
-		else if (window.location.pathname.toLowerCase().includes("/index.php")) {
-			const search = url.searchParams.get("search"),
-				action = url.searchParams.get("action");
+		else if (pathname.toLowerCase().includes("/index.php")) {
+			const search = searchParams.get("search"),
+				action = searchParams.get("action");
 
 			let title;
-			if (url.searchParams.get("title"))
-				title = urlToTitle(url.searchParams.get("title"));
+			if (searchParams.get("title"))
+				title = urlToTitle(searchParams.get("title"));
 			else title = "Homepage";
 
 			if (search?.length > 0) presenceData.state = `Searching "${search}"`;
@@ -40,7 +41,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: `${window.location.origin}/${titleToUrl(title)}`,
+							url: `${origin}/${titleToUrl(title)}`,
 						},
 					];
 				}
@@ -50,96 +51,78 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: `${window.location.origin}/${titleToUrl(title)}`,
+							url: `${origin}/${titleToUrl(title)}`,
 						},
 					];
 				}
 			}
-		} else if (window.location.pathname.toLowerCase().startsWith("/user:")) {
-			presenceData.state = `Viewing User: ${
-				window.location.pathname.match(/\/user:(.*)/i)[1]
-			}`;
+		} else if (pathname.toLowerCase().startsWith("/user:")) {
+			presenceData.state = `Viewing User: ${pathname.match(/\/user:(.*)/i)[1]}`;
 			if (showButtons) {
 				presenceData.buttons = [
 					{
 						label: "View User",
-						url: window.location.href,
+						url: href,
 					},
 				];
 			}
-		} else if (
-			window.location.pathname.toLowerCase().startsWith("/category:")
-		) {
+		} else if (pathname.toLowerCase().startsWith("/category:")) {
 			presenceData.state = `Viewing Category: ${urlToTitle(
-				window.location.pathname.match(/\/category:(.*)/i)[1]
+				pathname.match(/\/category:(.*)/i)[1]
 			)}`;
 			if (showButtons) {
 				presenceData.buttons = [
 					{
 						label: "View Category",
-						url: window.location.href,
+						url: href,
 					},
 				];
 			}
-		} else if (window.location.pathname.toLowerCase().startsWith("/file:")) {
-			presenceData.state = `Viewing File: ${
-				window.location.pathname.match(/\/file:(.*)/i)[1]
-			}`;
+		} else if (pathname.toLowerCase().startsWith("/file:")) {
+			presenceData.state = `Viewing File: ${pathname.match(/\/file:(.*)/i)[1]}`;
 			if (showButtons) {
 				presenceData.buttons = [
 					{
 						label: "View File",
-						url: window.location.href,
+						url: href,
 					},
 				];
 			}
-		} else if (window.location.pathname.toLowerCase().startsWith("/special:")) {
-			if (
-				window.location.pathname.toLowerCase().startsWith("/special:movepage/")
-			) {
-				const title = urlToTitle(window.location.pathname.substring(18));
+		} else if (pathname.toLowerCase().startsWith("/special:")) {
+			if (pathname.toLowerCase().startsWith("/special:movepage/")) {
+				const title = urlToTitle(pathname.substring(18));
 				presenceData.state = `Moving: ${title}`;
 				if (showButtons) {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: `${window.location.origin}/${titleToUrl(title)}`,
+							url: `${origin}/${titleToUrl(title)}`,
 						},
 					];
 				}
-			} else if (
-				window.location.pathname
-					.toLowerCase()
-					.startsWith("/special:notifications")
-			)
+			} else if (pathname.toLowerCase().startsWith("/special:notifications"))
 				presenceData.state = "Checking Notifications";
-			else if (
-				window.location.pathname
-					.toLowerCase()
-					.startsWith("/special:preferences")
-			)
+			else if (pathname.toLowerCase().startsWith("/special:preferences"))
 				presenceData.state = "Viewing Settings";
 		} else if (
-			window.location.pathname.toLowerCase().startsWith("/user_talk:") ||
-			window.location.pathname.toLowerCase().startsWith("/userwiki:") ||
-			window.location.pathname.toLowerCase().startsWith("/jojo_wiki:")
+			pathname.toLowerCase().startsWith("/user_talk:") ||
+			pathname.toLowerCase().startsWith("/userwiki:") ||
+			pathname.toLowerCase().startsWith("/jojo_wiki:")
 		) {
 			// nothing here, just used to ignore these as long as no functionality is applied to them.
 		} else if (
-			window.location.pathname
-				.toLowerCase()
-				.startsWith("/list_of_references_to_jojo")
+			pathname.toLowerCase().startsWith("/list_of_references_to_jojo")
 		) {
 			presenceData.state = "Browsing JoJo References 👀";
 			if (showButtons) {
 				presenceData.buttons = [
 					{
 						label: "Join The Fun!",
-						url: window.location.href,
+						url: href,
 					},
 				];
 			}
-		} else if (window.location.pathname.toLowerCase().startsWith("/talk:")) {
+		} else if (pathname.toLowerCase().startsWith("/talk:")) {
 			presenceData.state = `Discussing: ${document
 				.querySelector("#firstHeading")
 				.innerHTML.replace(/^Talk:/, "")}`;
@@ -147,7 +130,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Join The Discussion!",
-						url: window.location.href,
+						url: href,
 					},
 				];
 			}
@@ -155,15 +138,15 @@ presence.on("UpdateData", async () => {
 			const title = urlToTitle(location.pathname.substring(1));
 
 			if (
-				url.searchParams.get("veswitched")?.length ||
-				url.searchParams.get("veaction") === "edit"
+				searchParams.get("veswitched")?.length ||
+				searchParams.get("veaction") === "edit"
 			) {
 				presenceData.state = `Editing: ${title}`;
 				if (showButtons) {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: `${window.location.origin}/${titleToUrl(title)}`,
+							url: `${origin}/${titleToUrl(title)}`,
 						},
 					];
 				}
@@ -173,14 +156,14 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Page",
-							url: window.location.href,
+							url: href,
 						},
 					];
 				}
 			}
 		}
 	}
-	if (url.hostname === "jojo-news.com") {
+	if (hostname === "jojo-news.com") {
 		presenceData = {
 			largeImageKey: "https://i.imgur.com/iBLgETb.png",
 			smallImageKey: "https://i.imgur.com/lLWbSBd.png",
@@ -188,13 +171,9 @@ presence.on("UpdateData", async () => {
 		};
 		presenceData.details = "Browsing News";
 
-		if (
-			window.location.pathname === "" ||
-			window.location.pathname === "/" ||
-			window.location.pathname === "/JoJo_Wiki"
-		)
+		if (pathname === "" || pathname === "/" || pathname === "/JoJo_Wiki")
 			presenceData.state = "Viewing: Homepage";
-		else if (window.location.pathname.match(/^\/\d+\/\d+\/\d+\//)) {
+		else if (pathname.match(/^\/\d+\/\d+\/\d+\//)) {
 			presenceData.state = `Reading ${
 				document.querySelectorAll(".entry-title.entry--item.h2")[0].innerHTML
 			}`;
@@ -202,24 +181,22 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read Article",
-						url: window.location.href,
+						url: href,
 					},
 				];
 			}
-		} else if (window.location.pathname.toLowerCase() === "/fun/jojodle/") {
+		} else if (pathname.toLowerCase() === "/fun/jojodle/") {
 			presenceData.state = "Playing JoJodle!";
 			if (showButtons) {
 				presenceData.buttons = [
 					{
 						label: "Play Along!",
-						url: window.location.href,
+						url: href,
 					},
 				];
 			}
-		} else if (window.location.pathname.toLowerCase().includes("/category")) {
-			let category = window.location.pathname
-				.toLowerCase()
-				.match(/^\/category\/(.+)/)[1];
+		} else if (pathname.toLowerCase().includes("/category")) {
+			let category = pathname.toLowerCase().match(/^\/category\/(.+)/)[1];
 
 			category = newsUrlToCategory(category);
 
