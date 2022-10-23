@@ -12,17 +12,14 @@ const presence = new Presence({
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let title: string,
-	currentTime: number,
-	video: HTMLVideoElement,
-	duration: number,
-	paused: boolean,
+let video: HTMLVideoElement,
+	vidTitle: string,
 	strings: Awaited<ReturnType<typeof getStrings>> = null;
 
 presence.on("UpdateData", async () => {
 	const [startTimestamp, endTimestamp] = presence.getTimestamps(
-			Math.floor(currentTime),
-			Math.floor(duration)
+			Math.floor(video?.currentTime),
+			Math.floor(video?.duration)
 		),
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/fMMsZfV.png",
@@ -35,16 +32,15 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector(
 			"#bitmovinplayer-video-player_container"
 		) as HTMLVideoElement;
-		({ currentTime, duration, paused } = video);
 
-		if (!isNaN(duration)) {
+		if (!isNaN(video.duration)) {
 			const footerEles = document.querySelectorAll("li.ng-star-inserted"),
 				cover: HTMLImageElement = document.querySelector("img.dvd-cover");
 
-			presenceData.smallImageKey = paused
+			presenceData.smallImageKey = video.paused
 				? "https://i.imgur.com/C6mbMYz.png"
 				: "https://i.imgur.com/crCKEaC.png";
-			presenceData.smallImageText = paused ? strings.pause : strings.play;
+			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
 			presenceData.buttons = [
@@ -63,17 +59,17 @@ presence.on("UpdateData", async () => {
 						?.querySelector("span")
 						?.textContent.split(" Folge ");
 
-				title = footerEles[2]?.querySelector("a>span")?.textContent.trim();
+				vidTitle = footerEles[2]?.querySelector("a>span")?.textContent.trim();
 
 				presenceData.state = `S${season}:E${episode?.[1]?.trim()} ${episode?.[0]?.trim()}`;
 				presenceData.buttons[0].label = "Watch Series";
 			} else if (pathname.includes("/filme/")) {
-				title = footerEles[2]?.querySelector("a>span")?.textContent.trim();
+				vidTitle = footerEles[2]?.querySelector("a>span")?.textContent.trim();
 				presenceData.buttons[0].label = "Watch Movie";
 			}
 
-			if (!title) {
-				title = document.title
+			if (!vidTitle) {
+				vidTitle = document.title
 					.replace("im Online Stream | RTL+", "")
 					.replace("im Online Stream ansehen | RTL+", "")
 					.trim();
@@ -81,9 +77,9 @@ presence.on("UpdateData", async () => {
 
 			if (cover) presenceData.largeImageKey = cover.src;
 
-			presenceData.details = title;
+			presenceData.details = vidTitle;
 
-			if (duration <= 5) {
+			if (video.duration <= 5) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 
@@ -91,16 +87,9 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = strings.pause;
 			}
 		}
-	} else if (pathname === "/") {
-		presenceData.details = "Viewing main page";
-		presenceData.startTimestamp = browsingTimestamp;
-	} else if (pathname.includes("/serien/")) {
+	} else if (pathname === "/") presenceData.details = "Viewing main page";
+	else if (pathname.includes("/serien/")) {
 		presenceData.details = "Viewing series:";
-		presenceData.state =
-			document.querySelector(".ng-tns-c96-53")?.textContent ??
-			document.title.replace("im Online Stream ansehen | RTL+", "").trim();
-		presenceData.startTimestamp = browsingTimestamp;
-
 		presenceData.buttons = [
 			{
 				label: "View Series",
@@ -109,50 +98,43 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (pathname.includes("/shows/")) {
 		presenceData.details = "Viewing show:";
-		presenceData.state =
-			document.querySelectorAll("li.ng-star-inserted span.ng-star-inserted")[1]
-				?.textContent ??
-			document.title.replace("im Online Stream ansehen | RTL+", "").trim();
-		presenceData.startTimestamp = browsingTimestamp;
-
 		presenceData.buttons = [
 			{
 				label: "View Show",
 				url: href,
 			},
 		];
-	} else if (pathname.includes("/serien")) {
+	} else if (pathname.includes("/serien"))
 		presenceData.details = "Browsing series";
-		presenceData.startTimestamp = browsingTimestamp;
-	} else if (pathname.includes("/shows")) {
-		presenceData.details = "Browsing shows";
-		presenceData.startTimestamp = browsingTimestamp;
-	} else if (pathname.includes("/filme/")) {
+	else if (pathname.includes("/shows")) presenceData.details = "Browsing shows";
+	else if (pathname.includes("/filme/")) {
 		presenceData.details = "Viewing movie:";
-		presenceData.state =
-			document.querySelectorAll("li.ng-star-inserted span.ng-star-inserted")[1]
-				?.textContent ??
-			document.title.replace("im Online Stream ansehen | RTL+", "").trim();
-		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.buttons = [
 			{
 				label: "View Movie",
 				url: href,
 			},
 		];
-	} else if (pathname.includes("/filme")) {
+	} else if (pathname.includes("/filme"))
 		presenceData.details = "Browsing movies";
-		presenceData.startTimestamp = browsingTimestamp;
-	} else if (pathname.includes("/specials/")) {
+	else if (pathname.includes("/specials/")) {
 		presenceData.details = "Viewing special:";
-		presenceData.state = document.title;
-		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.buttons = [
 			{
 				label: "View Special",
 				url: href,
 			},
 		];
+	}
+
+	if (isNaN(video?.duration)) {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.state =
+			document.querySelector(".ng-tns-c96-53")?.textContent ??
+			document.title
+				.replace("im Online Stream | RTL+", "")
+				.replace("im Online Stream ansehen | RTL+", "")
+				.trim();
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
