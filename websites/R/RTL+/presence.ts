@@ -1,17 +1,23 @@
 const presence = new Presence({
 		clientId: "1033504954763198545",
 	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-	}),
+	getStrings = async () => {
+		return presence.getStrings(
+			{
+				play: "general.playing",
+				pause: "general.paused",
+			},
+			await presence.getSetting<string>("lang").catch(() => "en")
+		);
+	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let title: string,
 	currentTime: number,
 	video: HTMLVideoElement,
 	duration: number,
-	paused: boolean;
+	paused: boolean,
+	strings: Awaited<ReturnType<typeof getStrings>> = null;
 
 presence.on("UpdateData", async () => {
 	const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -22,6 +28,8 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/fMMsZfV.png",
 		},
 		{ pathname, href } = document.location;
+
+	if (!strings) strings = await getStrings();
 
 	if (document.querySelector("#bitmovinplayer-video-player_container")) {
 		video = document.querySelector(
@@ -36,9 +44,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = paused
 				? "https://i.imgur.com/C6mbMYz.png"
 				: "https://i.imgur.com/crCKEaC.png";
-			presenceData.smallImageText = paused
-				? (await strings).pause
-				: (await strings).play;
+			presenceData.smallImageText = paused ? strings.pause : strings.play;
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
 			presenceData.buttons = [
@@ -82,7 +88,7 @@ presence.on("UpdateData", async () => {
 				delete presenceData.endTimestamp;
 
 				presenceData.smallImageKey = "https://i.imgur.com/C6mbMYz.png";
-				presenceData.smallImageText = (await strings).pause;
+				presenceData.smallImageText = strings.pause;
 			}
 		}
 	} else if (pathname === "/") {
