@@ -42,7 +42,7 @@ if (!process.env.GITHUB_ACTIONS)
 		chalk.yellowBright(
 			`${chalk.bold(
 				"WARNING:"
-			)} This script is only meant to be run on GitHub Actions!`
+			)} This script is only meant to be run on GitHub Actions`
 		)
 	);
 
@@ -52,7 +52,7 @@ if (!getDiff().length && !getDiff("removed").length) {
 }
 
 if (!process.env.MONGO_URL) {
-	actions.setFailed(chalk.redBright("MONGO_URL is not set!"));
+	actions.setFailed(chalk.redBright("MONGO_URL is not set"));
 	process.exit();
 }
 
@@ -62,7 +62,7 @@ try {
 	actions.info(chalk.green("Connected to MongoDB"));
 } catch (e) {
 	actions.setFailed(
-		chalk.redBright(`Failed to connect to MongoDB! ${e.message}`)
+		chalk.redBright(`Failed to connect to MongoDB ${e.message}`)
 	);
 	process.exit();
 }
