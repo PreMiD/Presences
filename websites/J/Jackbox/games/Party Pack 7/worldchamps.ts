@@ -1,6 +1,8 @@
 import { uploadFile } from "../../util.js";
 
 export const name = "Champ'd Up";
+export const logo = "https://i.imgur.com/KnAS7yD.png";
+
 export async function getPresenceData({
 	playerState,
 	presence,
