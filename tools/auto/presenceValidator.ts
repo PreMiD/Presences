@@ -30,7 +30,7 @@ for (const presence of changedPresences) {
 	if (!existsSync(resolve(presencePath, "metadata.json"))) {
 		errors.push({
 			presence,
-			message: "Presence is missing metadata.json!",
+			message: "Presence is missing metadata.json",
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 			},
@@ -87,7 +87,7 @@ for (const presence of changedPresences) {
 	if (metadata.$schema !== schema.url) {
 		errors.push({
 			presence,
-			message: `Schema version is not up to date! - expected: ${schema.url}, got: ${metadata.$schema}`,
+			message: `Schema version is not up to date - expected: ${schema.url}, got: ${metadata.$schema}`,
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("$schema"),
@@ -202,7 +202,7 @@ for (const presence of changedPresences) {
 if (errors.length) {
 	for (const error of errors) actions.error(error.message, error.properties);
 	actions.setFailed("Some Presences failed to validate.");
-} else actions.info("All Presences validated successfully!");
+} else actions.info("All Presences validated successfully");
 
 async function getValidLanguages() {
 	return (

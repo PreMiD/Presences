@@ -149,12 +149,12 @@ export default class PresenceCompiler {
 			if (!errors.length) {
 				if (!options.transpileOnly)
 					actions.info(
-						chalk.green(`Successfully compiled ${presence.length} Presence(s)!`)
+						chalk.green(`Successfully compiled ${presence.length} Presence(s)`)
 					);
 				else
 					actions.info(
 						chalk.green(
-							`Successfully transpiled ${presence.length} Presence(s)!`
+							`Successfully transpiled ${presence.length} Presence(s)`
 						)
 					);
 			}
@@ -197,8 +197,8 @@ export default class PresenceCompiler {
 
 		if (!job.stats?.compilation.errors.length) {
 			if (!options.transpileOnly)
-				actions.info(chalk.green(`Successfully compiled ${presence}!`));
-			else actions.info(chalk.green(`Successfully transpiled ${presence}!`));
+				actions.info(chalk.green(`Successfully compiled ${presence}`));
+			else actions.info(chalk.green(`Successfully transpiled ${presence}`));
 		}
 
 		let errors = job.stats?.compilation.errors;
