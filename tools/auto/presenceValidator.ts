@@ -198,7 +198,7 @@ for (const presence of changedPresences) {
 			);
 	}
 
-	actions.info(`${presence} validated successfully`);
+	actions.info(`${metadata.service} validated successfully`);
 }
 
 if (errors.length) {
