@@ -197,6 +197,8 @@ for (const presence of changedPresences) {
 				AST.children.find(c => c.key.value === line)?.loc?.start?.line ?? 0
 			);
 	}
+
+	actions.info(`${presence} validated successfully`);
 }
 
 if (errors.length) {
