@@ -13,21 +13,18 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v2.2.4
-        with:
-          version: "*"
       - name: Use Node.js 16
         uses: actions/setup-node@v3.5.1
         with:
           node-version: 16
-          cache: "pnpm"
+          cache: npm
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
       - name: Start SE
         run: |
           git config --global core.quotePath false
           git config --global core.precomposeunicode true
-          pnpm schemaEnforcer
+          npm run schemaEnforcer
       - name: Commit any changes
         if: always()
         run: |
