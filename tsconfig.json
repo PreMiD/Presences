@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
-		"module": "CommonJS",
+		"module": "ESNext",
+		"moduleResolution": "Node",
 		"target": "ES2022",
 		"removeComments": true,
 		"noEmitOnError": true,
@@ -11,6 +12,7 @@
 		"noUnusedParameters": true,
 		"typeRoots": ["@types"],
 		"esModuleInterop": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"inlineSourceMap": true
 	}
 }

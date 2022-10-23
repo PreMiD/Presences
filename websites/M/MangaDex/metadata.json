@@ -14,10 +14,6 @@
 			"id": "256422547556401152"
 		},
 		{
-			"name": "Bryan",
-			"id": "293775922757238784"
-		},
-		{
 			"name": "meme8383",
 			"id": "105364720034275328"
 		}
@@ -33,7 +29,7 @@
 		"www.mangadex.org",
 		"mangadex.cc"
 	],
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"logo": "https://i.imgur.com/zs8myqz.png",
 	"thumbnail": "https://i.imgur.com/xiKNaUJ.png",
 	"color": "#F18F1E",

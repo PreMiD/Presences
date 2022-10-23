@@ -1,13 +1,13 @@
-import "source-map-support/register";
+import "source-map-support/register.js";
 
 import axios from "axios";
-import { blue, green, red, yellow } from "chalk";
+import chalk from "chalk";
 import ParseJSON, { ObjectNode } from "json-to-ast";
 import { validate } from "jsonschema";
 import { existsSync, readFileSync } from "node:fs";
 import { compare, diff } from "semver";
 
-import { createAnnotation, getChangedFolders, type Metadata } from "../util";
+import { createAnnotation, getChangedFolders, type Metadata } from "../util.js";
 
 const latestMetadataSchema = async (): Promise<string[]> => {
 		const versions = (
@@ -72,16 +72,16 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 		}
 	},
 	validated = (service: string): void => {
-		console.log(green(`✔ ${service}`));
+		console.log(chalk.green(`✔ ${service}`));
 		stats.validated++;
 	},
 	validatedWithWarnings = (service: string, warning: string): void => {
-		console.log(yellow(`✔ ${service}`));
+		console.log(chalk.yellow(`✔ ${service}`));
 		console.log(warning);
 		stats.validatedWithWarnings++;
 	},
 	failedToValidate = (service: string, errors: string[]): void => {
-		console.log(`::group::${red(`✖ ${service}`)}`);
+		console.log(`::group::${chalk.red(`✖ ${service}`)}`);
 		console.log(errors.join("\n"));
 		console.log("::endgroup::");
 		stats.failedToValidate++;
@@ -96,7 +96,7 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 	};
 
 (async (): Promise<void> => {
-	console.log(blue("Getting changed files..."));
+	console.log(chalk.blue("Getting changed files..."));
 
 	const changedFolders = await getChangedFolders().then(f =>
 			f
@@ -105,18 +105,20 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 		),
 		changedMetaFiles = changedFolders.map(p => (p += "/metadata.json"));
 
-	console.log(blue("Getting latest schema..."));
+	console.log(chalk.blue("Getting latest schema..."));
 
 	const [latestSchema, latestSchemaVersion] = await latestMetadataSchema(),
 		schema = (await axios.get(latestSchema)).data;
 
 	if (!changedMetaFiles.length) {
-		console.log(blue("There are no presences to validate, exiting..."));
+		console.log(chalk.blue("There are no presences to validate, exiting..."));
 		process.exit(0);
 	}
 
 	console.log(
-		blue(`Beginning validation of ${changedMetaFiles.length} presences...`)
+		chalk.blue(
+			`Beginning validation of ${changedMetaFiles.length} presences...`
+		)
 	);
 
 	for (const [index, metaFile] of changedMetaFiles.entries()) {
@@ -334,21 +336,25 @@ const latestMetadataSchema = async (): Promise<string[]> => {
 	}
 
 	console.log();
-	console.log(blue("Statistics:"));
+	console.log(chalk.blue("Statistics:"));
 	console.log(
-		green(`${stats.validated} fully validated\n`) +
-			yellow(`${stats.validatedWithWarnings} validated, but with warnings\n`) +
-			red(`${stats.failedToValidate} failed to validate`)
+		chalk.green(`${stats.validated} fully validated\n`) +
+			chalk.yellow(
+				`${stats.validatedWithWarnings} validated, but with warnings\n`
+			) +
+			chalk.red(`${stats.failedToValidate} failed to validate`)
 	);
 	console.log();
 
 	if (stats.failedToValidate > 0) {
-		console.log(red("One or more services failed to validate."));
+		console.log(chalk.red("One or more services failed to validate."));
 		process.exit(-1);
 	}
 
 	if (stats.validatedWithWarnings > 0)
-		console.log(yellow("One or more services validated, but with warnings."));
+		console.log(
+			chalk.yellow("One or more services validated, but with warnings.")
+		);
 })();
 
 type key = keyof Metadata;
