@@ -32,6 +32,11 @@ import * as pushthebutton from "./Party Pack 6/pushthebutton.js";
 import * as ridictionary from "./Party Pack 6/ridictionary.js";
 import * as rolemodels from "./Party Pack 6/rolemodels.js";
 import * as triviadeath2 from "./Party Pack 6/triviadeath2.js";
+import * as blankyblank from "./Party Pack 7/blanky-blank.js";
+import * as everyday from "./Party Pack 7/everyday.js";
+import * as jackboxtalks from "./Party Pack 7/jackbox-talks.js";
+import * as quiplash3 from "./Party Pack 7/quiplash3.js";
+import * as worldchamps from "./Party Pack 7/worldchamps.js";
 
 export default {
 	unknown,
@@ -68,4 +73,9 @@ export default {
 	ridictionary,
 	rolemodels,
 	triviadeath2,
+	"blanky-blank": blankyblank,
+	everyday,
+	"jackbox-talks": jackboxtalks,
+	quiplash3,
+	worldchamps,
 };
