@@ -2,6 +2,7 @@ import { execSync } from "node:child_process";
 import { existsSync, rmSync, writeFileSync } from "node:fs";
 import { basename, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
 import actions from "@actions/core";
 import chalk from "chalk";
@@ -12,7 +13,8 @@ import { ErrorInfo } from "ts-loader/dist/interfaces";
 
 import getFolderLetter from "../util/getFolderLetter.js";
 
-const rootPath = resolve(fileURLToPath(new URL(".", import.meta.url)), "../..");
+const require = createRequire(import.meta.url),
+	rootPath = resolve(fileURLToPath(new URL(".", import.meta.url)), "../..");
 
 if (!process.env.GITHUB_ACTIONS) config({ path: resolve(rootPath, ".env") });
 
@@ -137,7 +139,13 @@ export default class PresenceCompiler {
 
 				if (job.error) throw job.error;
 
-				errors.push(...(job.stats?.compilation?.errors || []));
+				if (job.stats?.compilation.errors.length)
+					errors.push(...job.stats?.compilation?.errors);
+				else {
+					const { service } = require(resolve(presencePath, "metadata.json"));
+
+					actions.info(chalk.green(`Successfully compiled ${service || p}`));
+				}
 			}
 
 			for (const p of presence)
