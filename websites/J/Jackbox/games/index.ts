@@ -37,6 +37,11 @@ import * as everyday from "./Party Pack 7/everyday.js";
 import * as jackboxtalks from "./Party Pack 7/jackbox-talks.js";
 import * as quiplash3 from "./Party Pack 7/quiplash3.js";
 import * as worldchamps from "./Party Pack 7/worldchamps.js";
+import * as applyyourself from "./Party Pack 8/apply-yourself.js";
+import * as drawfulanimate from "./Party Pack 8/drawful-animate.js";
+import * as surveybomb from "./Party Pack 8/survey-bomb.js";
+import * as thewheel from "./Party Pack 8/the-wheel.js";
+// todo: weapons drawn import
 
 export default {
 	unknown,
@@ -78,4 +83,8 @@ export default {
 	"jackbox-talks": jackboxtalks,
 	quiplash3,
 	worldchamps,
+	"apply-yourself": applyyourself,
+	"drawful-animate": drawfulanimate,
+	"survey-bomb": surveybomb,
+	"the-wheel": thewheel,
 };
