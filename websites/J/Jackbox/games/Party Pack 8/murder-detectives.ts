@@ -1,5 +1,5 @@
 export const name = "Weapons Drawn";
-export const logo = "https://i.imgur.com/yRXmXbf.png";
+export const logo = "https://i.imgur.com/O8CFQ15.png";
 
 export function getPresenceData({
 	playerState,

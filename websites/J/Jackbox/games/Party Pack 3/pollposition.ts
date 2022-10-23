@@ -1,5 +1,5 @@
 export const name = "Guesspionage";
-export const logo = "https://i.imgur.com/nDqnyqV.png";
+export const logo = "https://i.imgur.com/wp7HhjP.png";
 
 export function getPresenceData(): PresenceData {
 	const presenceData: PresenceData = {},

@@ -1,5 +1,5 @@
 export const name = "Talking Points";
-export const logo = "https://i.imgur.com/8Amy9Di.png";
+export const logo = "https://i.imgur.com/NMsM7Uo.png";
 
 export function getPresenceData({
 	playerState,
