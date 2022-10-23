@@ -27,6 +27,11 @@ import * as rapbattle from "./Party Pack 5/rapbattle.js";
 import * as slingshoot from "./Party Pack 5/slingshoot.js";
 import * as splittheroom from "./Party Pack 5/splittheroom.js";
 import * as ydkj2018 from "./Party Pack 5/ydkj2018.js";
+import * as jokeboat from "./Party Pack 6/jokeboat.js";
+import * as pushthebutton from "./Party Pack 6/pushthebutton.js";
+import * as ridictionary from "./Party Pack 6/ridictionary.js";
+import * as rolemodels from "./Party Pack 6/rolemodels.js";
+import * as triviadeath2 from "./Party Pack 6/triviadeath2.js";
 
 export default {
 	unknown,
@@ -58,4 +63,9 @@ export default {
 	slingshoot,
 	splittheroom,
 	ydkj2018,
+	jokeboat,
+	pushthebutton,
+	ridictionary,
+	rolemodels,
+	triviadeath2,
 };
