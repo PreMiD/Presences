@@ -30,7 +30,8 @@ presence.on("UpdateData", async () => {
 		({ currentTime, duration, paused } = video);
 
 		if (!isNaN(duration)) {
-			const footerEles = document.querySelectorAll("li.ng-star-inserted");
+			const footerEles = document.querySelectorAll("li.ng-star-inserted"),
+				cover: HTMLImageElement = document.querySelector("img.dvd-cover");
 
 			presenceData.smallImageKey = paused
 				? "https://i.imgur.com/C6mbMYz.png"
@@ -71,6 +72,8 @@ presence.on("UpdateData", async () => {
 					.replace("im Online Stream ansehen | RTL+", "")
 					.trim();
 			}
+
+			if (cover) presenceData.largeImageKey = cover.src;
 
 			presenceData.details = title;
 
