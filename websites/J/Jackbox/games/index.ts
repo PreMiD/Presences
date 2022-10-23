@@ -10,6 +10,12 @@ import * as bombintern from "./Party Pack 2/bombintern.js";
 import * as earwax from "./Party Pack 2/earwax.js";
 import * as fibbage2 from "./Party Pack 2/fibbage2.js";
 import * as fibbage from "./Party Pack 2/fibbage.js";
+import * as quiplash from "./Party Pack 3/quiplash.js";
+import * as quiplash2 from "./Party Pack 3/quiplash2.js";
+import * as quiplash2international from "./Party Pack 3/quiplash2-international.js";
+import * as fakinit from "./Party Pack 3/fakinit.js";
+import * as awshirt from "./Party Pack 3/awshirt.js";
+import * as pollposition from "./Party Pack 3/pollposition.js";
 
 export default {
 	unknown,
@@ -24,4 +30,10 @@ export default {
 	earwax,
 	fibbage2,
 	fibbage,
+	quiplash,
+	quiplash2,
+	"quiplash2-international": quiplash2international,
+	fakinit,
+	awshirt,
+	pollposition,
 };
