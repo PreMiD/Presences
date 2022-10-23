@@ -43,17 +43,16 @@ export function getPresenceData({
 					case "Presenter": {
 						if (prompt.html.startsWith("RATE HOW WELL "))
 							presenceData.state = "Rating their assistant";
-						else if (prompt.text === "THANK YOU.") {
+						else if (prompt.text === "THANK YOU.")
 							presenceData.state = "Presenting their talk - thank you";
-						} else {
-							presenceData.state = "Presenting their talk - preparation";
-						}
+						else presenceData.state = "Presenting their talk - preparation";
+
 						break;
 					}
 					case "Assistant": {
-						if (prompt.html === "PICK THE BEST PICTURE TO REPRESENT THE TALK") {
+						if (prompt.html === "PICK THE BEST PICTURE TO REPRESENT THE TALK")
 							presenceData.state = "Choosing a picture for the talk";
-						} else presenceData.state = "Assisting their presenter";
+						else presenceData.state = "Assisting their presenter";
 						break;
 					}
 					default: {

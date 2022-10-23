@@ -98,4 +98,4 @@ export default {
 	"range-game": rangegame,
 	lineup,
 	"antique-freak": antiquefreak,
-};
+} as Record<string, Game>;

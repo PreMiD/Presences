@@ -27,9 +27,9 @@ export function getPresenceData(): PresenceData {
 			if (
 				currentGamePage.querySelector<HTMLDivElement>(".makeSingleChoiceDone")
 					.style.display === "none"
-			) {
+			)
 				presenceData.state = "Voting for the most ridiculous answer";
-			} else presenceData.state = "Waiting for other players to vote";
+			else presenceData.state = "Waiting for other players to vote";
 		} else if (
 			currentGamePage.querySelector<HTMLDivElement>(".aboveBlackBox")
 				.textContent === ""
@@ -39,9 +39,9 @@ export function getPresenceData(): PresenceData {
 		if (
 			currentGamePage.querySelector<HTMLFormElement>(".enterSingleTextForm")
 				.style.display === "none"
-		) {
+		)
 			presenceData.state = "Waiting for other players to answer their prompts";
-		} else if (
+		else if (
 			currentGamePage.querySelector<HTMLDivElement>(".finalRoundImage") ||
 			currentGamePage.querySelector<HTMLDivElement>(".blackBox:not(.hide)")
 		)

@@ -4,8 +4,8 @@ export const logo = "https://i.imgur.com/CPkaxX3.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
-	const icon = document.querySelector<HTMLDivElement>(".chatAvatar.playerIcon");
+	const presenceData: PresenceData = {},
+		icon = document.querySelector<HTMLDivElement>(".chatAvatar.playerIcon");
 	if (icon) {
 		presenceData.smallImageKey =
 			getComputedStyle(icon).backgroundImage.match(/^url\("(.*)"\)$/)[1];

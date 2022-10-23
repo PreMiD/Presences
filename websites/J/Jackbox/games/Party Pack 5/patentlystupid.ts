@@ -36,9 +36,8 @@ export function getPresenceData({
 				default:
 					if (html.startsWith("<div>Invest in the best!</div>"))
 						presenceData.state = "Investing in an invention";
-					else if (/choose an issue.*?to base your invention on/is.test(html)) {
+					else if (/choose an issue.*?to base your invention on/is.test(html))
 						presenceData.state = "Choosing the final issue to work on";
-					}
 			}
 			break;
 		}
@@ -50,9 +49,9 @@ export function getPresenceData({
 				presenceData.state = "Naming their invention";
 			else if (
 				html === "<div>Write a tagline</div><div>for your invention</div>"
-			) {
+			)
 				presenceData.state = "Creating a tagline for their invention";
-			}
+
 			break;
 		}
 		case "Draw": {

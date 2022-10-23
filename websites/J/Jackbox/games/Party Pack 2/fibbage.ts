@@ -7,9 +7,9 @@ export function getPresenceData(): PresenceData {
 		),
 		{ classList } = currentGamePage;
 	if (classList.contains("state-lobby")) return { state: "Waiting in lobby" };
-	else if (classList.contains("state-round")) {
+	else if (classList.contains("state-round"))
 		return { state: currentGamePage.querySelector("p").textContent };
-	} else if (classList.contains("state-notchoosing")) {
+	else if (classList.contains("state-notchoosing")) {
 		return {
 			state: `Waiting for ${
 				currentGamePage

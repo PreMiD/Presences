@@ -1,3 +1,5 @@
+import games from "./games/index.js";
+
 const presence = new Presence({
 	clientId: "638118757453004820",
 });
@@ -5,6 +7,9 @@ const presence = new Presence({
 interface Game {
 	name: string;
 	logo: string;
+	getPresenceData: (
+		params: GameCallbackParams
+	) => Promise<PresenceData> | PresenceData;
 }
 
 interface GamePlayerState {
@@ -38,6 +43,7 @@ interface GameCallbackParams {
 	playerState: GamePlayerState;
 	infoState: GameInfoState;
 	tag: string;
+	presence: Presence;
 }
 
 let gamePlayerState: GamePlayerState = {
@@ -111,21 +117,19 @@ if (window.location.hostname === "jackbox.tv") {
 			);
 			gametag = tag;
 			if (tag && tag !== "@connect") {
-				game = Games[tag];
+				game = games[tag];
 				browsingTimestamp = Math.round(Date.now() / 1000);
-				if (!game) game = Games.unknown;
+				if (!game) game = games.unknown;
 			}
 		}
 	}, 2000);
 }
 
-const Games: Record<string, Game> = {};
-
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/SXfEdnL.png",
-		},
-		[useName, useTime, useDetails] = await Promise.all([
+	let presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/SXfEdnL.png",
+	};
+	const [useName, useTime, useDetails] = await Promise.all([
 			presence.getSetting<boolean>("useName"),
 			presence.getSetting<boolean>("useTime"),
 			presence.getSetting<boolean>("useDetails"),
@@ -154,6 +158,13 @@ presence.on("UpdateData", async () => {
 					}
 				}
 				if (useDetails) {
+					const gamePresenceData = await game.getPresenceData({
+						tag: gametag,
+						playerState: gamePlayerState,
+						infoState: gamePlayerInfoState,
+						presence,
+					});
+					presenceData = { ...presenceData, ...gamePresenceData };
 				}
 			} else presenceData.details = "Idle";
 			break;

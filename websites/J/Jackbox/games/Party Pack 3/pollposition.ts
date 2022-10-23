@@ -12,9 +12,9 @@ export function getPresenceData(): PresenceData {
 	else if (classList.contains("state-post-lobby"))
 		presenceData.state = "Watching the tutorial";
 	else if (classList.contains("state-nothing")) presenceData.state = "Waiting";
-	else if (classList.contains("state-round")) {
+	else if (classList.contains("state-round"))
 		presenceData.state = currentGamePage.querySelector("p").textContent;
-	} else if (
+	else if (
 		classList.contains("state-upordowndone") ||
 		classList.contains("state-waitforpercentage") ||
 		classList.contains("state-waitforupordown") ||
@@ -29,16 +29,16 @@ export function getPresenceData(): PresenceData {
 		presenceData.state = "Waiting for a category to be chosen";
 	else if (classList.contains("state-showquestion"))
 		presenceData.state = "Viewing a survey prompt";
-	else if (classList.contains("state-chooseupordown")) {
+	else if (classList.contains("state-chooseupordown"))
 		presenceData.state = "Deciding if the true percentage is higher or lower";
-	} else if (classList.contains("state-choosemultiple"))
+	else if (classList.contains("state-choosemultiple"))
 		presenceData.state = "Choosing multiple choices";
 	else if (
 		classList.contains("state-audience-choice-sent") ||
 		classList.contains("state-waitformultiple")
-	) {
+	)
 		presenceData.state = "Waiting for other players to choose their choices";
-	} else if (classList.contains("state-audience-wait"))
+	else if (classList.contains("state-audience-wait"))
 		presenceData.state = "In the audience";
 	else if (classList.contains("state-audience-chose-option"))
 		presenceData.state = "Choosing an option in the audience";

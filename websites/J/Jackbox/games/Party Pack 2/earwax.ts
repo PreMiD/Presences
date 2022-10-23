@@ -19,11 +19,11 @@ export function getPresenceData(): PresenceData {
 		default:
 			if (classList.contains("state-choosing"))
 				return { state: "Choosing a prompt" };
-			else if (classList.contains("state-notchoosing")) {
+			else if (classList.contains("state-notchoosing"))
 				return { state: "Waiting for the judge to choose a prompt" };
-			} else if (classList.contains("state-notselectingsound")) {
+			else if (classList.contains("state-notselectingsound"))
 				return { state: "Waiting for players to choose a sound" };
-			} else if (
+			else if (
 				classList.contains("state-selectingsound") ||
 				id === "state-answer-question-audience"
 			)

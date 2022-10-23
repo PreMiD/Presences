@@ -4,8 +4,8 @@ export const logo = "https://i.imgur.com/Cih6bqA.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
-	const icon = document.querySelector<HTMLDivElement>("#playericon");
+	const presenceData: PresenceData = {},
+		icon = document.querySelector<HTMLDivElement>("#playericon");
 	if (icon) {
 		presenceData.smallImageKey =
 			getComputedStyle(icon).backgroundImage.match(/^url\("(.*)"\)$/)?.[1];

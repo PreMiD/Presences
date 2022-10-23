@@ -1,7 +1,8 @@
 const uploadedFiles: Record<string, string> = {};
 export async function uploadFile(
 	url: string,
-	defaultImage: string
+	defaultImage: string,
+	presence: Presence
 ): Promise<string> {
 	if (uploadedFiles[url]) return uploadedFiles[url];
 	uploadedFiles[url] = defaultImage;

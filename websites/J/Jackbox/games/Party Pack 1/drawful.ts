@@ -13,11 +13,11 @@ export function getPresenceData(): PresenceData {
 		classList.contains("state-drawing-done")
 	)
 		return { state: "Waiting" };
-	else if (classList.contains("state-round")) {
+	else if (classList.contains("state-round"))
 		return { state: currentGamePage.querySelector("span").textContent };
-	} else if (classList.contains("state-drawing-sent")) {
+	else if (classList.contains("state-drawing-sent"))
 		return { state: "Waiting for other players to finish drawing" };
-	} else if (classList.contains("state-enterlie"))
+	else if (classList.contains("state-enterlie"))
 		return { state: "Entering a lie" };
 	else if (classList.contains("state-chooselie"))
 		return { state: "Looking for the truth" };
@@ -25,9 +25,9 @@ export function getPresenceData(): PresenceData {
 		return { state: "Liking lies" };
 	else if (classList.contains("state-liereceived"))
 		return { state: "Waiting for other players to enter lies" };
-	else if (classList.contains("state-notchoosing")) {
+	else if (classList.contains("state-notchoosing"))
 		return { state: "Waiting for other players to discover the truth" };
-	} else if (classList.contains("state-draw"))
+	else if (classList.contains("state-draw"))
 		return { state: "Drawing something" };
 	else if (classList.contains("state-audience-choose"))
 		return { state: "Choosing a lie" };

@@ -23,9 +23,8 @@ export function getPresenceData({
 				default: {
 					if (playerState.choiceType === "SkipIntro")
 						presenceData.state = "Watching the intro";
-					else if (playerState.choiceType === "ShowTutorial") {
+					else if (playerState.choiceType === "ShowTutorial")
 						presenceData.state = "Deciding if they want to watch the tutorial";
-					}
 				}
 			}
 			break;
