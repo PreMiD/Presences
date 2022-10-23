@@ -10,4 +10,5 @@ export function getPresenceData(): PresenceData {
 		return { state: "Swatting lies" };
 	else if (classList.contains("state-nothing"))
 		return { state: "Waiting for other players" };
+	return {};
 }

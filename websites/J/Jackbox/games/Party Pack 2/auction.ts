@@ -25,4 +25,5 @@ export function getPresenceData(): PresenceData {
 			return { state: "Viewing results" };
 		}
 	}
+	return {};
 }

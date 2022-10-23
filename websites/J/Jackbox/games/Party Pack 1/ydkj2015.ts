@@ -8,4 +8,5 @@ export function getPresenceData(): PresenceData {
 	if (classList.contains("state-default")) return { state: "Waiting in lobby" };
 	else if (classList.contains("state-jack-attack"))
 		return { state: "Playing Jack Attack" };
+	return {};
 }

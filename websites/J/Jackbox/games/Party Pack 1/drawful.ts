@@ -34,4 +34,5 @@ export function getPresenceData(): PresenceData {
 	else if (id === "state-ugc") return { state: "Creating a custom game" };
 	else if (classList.contains("state-audience"))
 		return { state: "In the audience" };
+	return {};
 }

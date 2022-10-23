@@ -42,4 +42,5 @@ export function getPresenceData(): PresenceData {
 		return { state: "Joining audience" };
 	else if (classList.contains("state-audience-score"))
 		return { state: "Viewing audience scores" };
+	return {};
 }

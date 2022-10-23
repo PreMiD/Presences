@@ -32,4 +32,5 @@ export function getPresenceData(): PresenceData {
 				return { state: "Joining the audience" };
 			else if (id === "state-vote") return { state: "Voting on a sound" };
 	}
+	return {};
 }

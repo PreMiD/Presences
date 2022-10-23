@@ -23,4 +23,5 @@ export function getPresenceData(): PresenceData {
 		return { state: "Defusing a keypad bomb" };
 	else if (classList.contains("state-copierbomb"))
 		return { state: "Defusing a copier bomb" };
+	return {};
 }

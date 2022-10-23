@@ -18,4 +18,5 @@ export function getPresenceData(): PresenceData {
 	else if (classList.contains("state-voted"))
 		return { state: "Waiting for other players to vote" };
 	else if (classList.contains("state-gameover")) return { state: "Game over" };
+	return {};
 }
