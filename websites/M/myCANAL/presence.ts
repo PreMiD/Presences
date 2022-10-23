@@ -14,10 +14,7 @@ const presence = new Presence({
 		live: "general.live",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-	containsTerm = (term: string) => {
-		if (document.location.pathname.includes(term))
-			return document.location.pathname;
-	};
+	containsTerm = (term: string) => document.location.pathname.includes(term);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -51,7 +48,7 @@ presence.on("UpdateData", async () => {
 	if (video && !isNaN(video.duration)) {
 		const titleTvShows = document.querySelectorAll(".MGrm26svmXpUhj6dfbGN");
 		let channelID = new URLSearchParams(window.location.search).get("channel");
-		switch (document.location.pathname) {
+		switch (true) {
 			case containsTerm("live"):
 				channelID = `${channelID.charAt(0)} ${channelID.substring(1)}`;
 				presenceData.details = document.querySelector(
