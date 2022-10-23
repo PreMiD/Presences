@@ -22,6 +22,11 @@ import * as overdrawn from "./Party Pack 4/overdrawn.js";
 import * as monstermingle from "./Party Pack 4/monstermingle.js";
 import * as survivetheinternet from "./Party Pack 4/survivetheinternet.js";
 import * as fibbage3 from "./Party Pack 4/fibbage3.js";
+import * as patentlystupid from "./Party Pack 5/patentlystupid.js";
+import * as rapbattle from "./Party Pack 5/rapbattle.js";
+import * as slingshoot from "./Party Pack 5/slingshoot.js";
+import * as splittheroom from "./Party Pack 5/splittheroom.js";
+import * as ydkj2018 from "./Party Pack 5/ydkj2018.js";
 
 export default {
 	unknown,
@@ -48,4 +53,9 @@ export default {
 	monstermingle,
 	survivetheinternet,
 	fibbage3,
+	patentlystupid,
+	rapbattle,
+	slingshoot,
+	splittheroom,
+	ydkj2018,
 };
