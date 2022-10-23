@@ -1,19 +1,20 @@
-import "source-map-support/register.js";
+import { existsSync, readFileSync } from "node:fs";
+import { createRequire } from "node:module";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
+import { MongoClient } from "mongodb";
 import actions from "@actions/core";
 import chalk from "chalk";
 import { config } from "dotenv";
-import { existsSync } from "fs";
-import { readFile } from "fs/promises";
-import { Collection, MongoClient } from "mongodb";
-import { resolve } from "path";
-import { fileURLToPath } from "url";
 
 import PresenceCompiler, { Metadata } from "../classes/PresenceCompiler.js";
 import getDiff from "../util/getDiff.js";
 import getFolderLetter from "../util/getFolderLetter.js";
 
-interface DBdata {
+const require = createRequire(import.meta.url);
+
+interface DbData {
 	name: string;
 	githubUri: string;
 	folderName: string;
@@ -30,10 +31,10 @@ const rootPath = resolve(
 
 if (!process.env.GITHUB_ACTIONS) config({ path: resolve(rootPath, ".env") });
 
-const compiler = new PresenceCompiler();
-
-let client: MongoClient | null = null,
-	collection: Collection<DBdata> | null = null,
+const compiler = new PresenceCompiler(),
+	client = new MongoClient(process.env.MONGO_URL!, {
+		appName: "Presence Updater",
+	}),
 	changedPresenceFolders = getDiff();
 
 if (!process.env.GITHUB_ACTIONS)
@@ -46,7 +47,7 @@ if (!process.env.GITHUB_ACTIONS)
 	);
 
 if (!getDiff().length && !getDiff("removed").length) {
-	actions.info(chalk.green("No Presence(s) changed, exiting..."));
+	actions.info(chalk.green("No Presences changed, exiting..."));
 	process.exit();
 }
 
@@ -56,35 +57,33 @@ if (!process.env.MONGO_URL) {
 }
 
 try {
-	client = new MongoClient(process.env.MONGO_URL!, {
-		appName: "Presence Updater",
-	});
 	await client.connect();
 
-	collection = client
-		.db("PreMiD" + (!process.env.GITHUB_ACTIONS ? "-DEV" : ""))
-		.collection("presences");
-
 	actions.info(chalk.green("Connected to MongoDB"));
-} catch (e: any) {
+} catch (e) {
 	actions.setFailed(
 		chalk.redBright(`Failed to connect to MongoDB! ${e.message}`)
 	);
 	process.exit();
 }
 
+const collection = client
+	.db("PreMiD" + (!process.env.GITHUB_ACTIONS ? "-DEV" : ""))
+	.collection("presences");
+
 await compiler.compilePresence(changedPresenceFolders, {
 	transpileOnly: true,
 });
 
-let dbPresences: DBdata[] = [];
+let dbPresences: DbData[] = [];
 
 for (const presenceFolderName of changedPresenceFolders) {
 	const presenceFolder = compiler.getPresenceFolder(presenceFolderName);
 
-	const metadata = JSON.parse(
-		await readFile(resolve(presenceFolder, "metadata.json"), "utf-8")
-	) as Metadata;
+	const metadata = require(resolve(
+		presenceFolder,
+		"metadata.json"
+	)) as Metadata;
 
 	dbPresences.push({
 		name: metadata.service,
@@ -96,9 +95,9 @@ for (const presenceFolderName of changedPresenceFolders) {
 		url: `https://api.premid.app/v2/presences/${encodeURIComponent(
 			metadata.service
 		)}/`,
-		presenceJs: await readFile(resolve(presenceFolder, "presence.js"), "utf-8"),
+		presenceJs: readFileSync(resolve(presenceFolder, "presence.js"), "utf-8"),
 		...(existsSync(resolve(presenceFolder, "iframe.js")) && {
-			iframeJs: await readFile(resolve(presenceFolder, "iframe.js"), "utf-8"),
+			iframeJs: readFileSync(resolve(presenceFolder, "iframe.js"), "utf-8"),
 		}),
 	});
 }

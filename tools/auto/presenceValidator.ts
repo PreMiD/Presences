@@ -1,19 +1,19 @@
-import "source-map-support/register.js";
+import { createRequire } from "module";
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 import actions from "@actions/core";
-import { existsSync, readFileSync } from "fs";
-import { readFile, stat } from "fs/promises";
 import got from "got";
 import jsonAst, { ObjectNode } from "json-to-ast";
 import { validate } from "jsonschema";
-import { resolve } from "path";
 import { compare } from "semver";
 
 import PresenceCompiler from "../classes/PresenceCompiler.js";
 import getDiff from "../util/getDiff.js";
 import getLatestSchema from "../util/getLatestSchema.js";
 
-const schema = await getLatestSchema(),
+const require = createRequire(import.meta.url),
+	schema = await getLatestSchema(),
 	changedPresences = getDiff(),
 	validLangs = await getValidLanguages(),
 	compiler = new PresenceCompiler(),
@@ -27,7 +27,7 @@ for (const presence of changedPresences) {
 	const presencePath = compiler.getPresenceFolder(presence);
 
 	//#region Metadata Check
-	if (!(await stat(resolve(presencePath, "metadata.json"))).isFile()) {
+	if (!existsSync(resolve(presencePath, "metadata.json"))) {
 		errors.push({
 			presence,
 			message: "Presence is missing metadata.json!",
@@ -45,15 +45,13 @@ for (const presence of changedPresences) {
 	let metadata: SchemaMetadata;
 
 	try {
-		metadata = JSON.parse(
-			await readFile(resolve(presencePath, "metadata.json"), "utf8")
-		);
+		metadata = require(resolve(presencePath, "metadata.json"));
 
 		metadata;
 	} catch {
 		errors.push({
 			presence,
-			message: "Presence metadata.json is not a valid JSON file!",
+			message: "Presence metadata.json is not a valid JSON file",
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 			},
@@ -89,7 +87,7 @@ for (const presence of changedPresences) {
 	if (metadata.$schema !== schema.url) {
 		errors.push({
 			presence,
-			message: `Schema version is not up to date! (Expected ${schema.url}, got ${metadata.$schema})`,
+			message: `Schema version is not up to date! - expected: ${schema.url}, got: ${metadata.$schema}`,
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("$schema"),
@@ -105,7 +103,7 @@ for (const presence of changedPresences) {
 		if (compare(metadata.version, storePresence.metadata.version) <= 0)
 			errors.push({
 				presence,
-				message: "Version has not been bumped!",
+				message: "Version has not been bumped",
 				properties: {
 					file: resolve(presencePath, "metadata.json"),
 					startLine: getLine("version"),
@@ -114,7 +112,7 @@ for (const presence of changedPresences) {
 	} else if (metadata.version !== "1.0.0")
 		errors.push({
 			presence,
-			message: "Initial version must be 1.0.0!",
+			message: "Initial version must be 1.0.0",
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("version"),
@@ -129,7 +127,7 @@ for (const presence of changedPresences) {
 	if (!existsSync(iframePath) && metadata.iframe)
 		errors.push({
 			presence,
-			message: "Presence is missing iframe.ts!",
+			message: "Presence is missing iframe.ts",
 			properties: {
 				file: iframePath,
 			},
@@ -138,7 +136,7 @@ for (const presence of changedPresences) {
 	if (!metadata.iframe && existsSync(iframePath))
 		errors.push({
 			presence,
-			message: "Presence has iframe.ts but metadata.iframe is set to false!",
+			message: "Presence has iframe.ts but metadata.iframe is set to false",
 			properties: {
 				file: iframePath,
 			},
@@ -153,7 +151,7 @@ for (const presence of changedPresences) {
 		if (!~index)
 			errors.push({
 				presence,
-				message: `Language ${lang} is not supported!`,
+				message: `Language ${lang} is not supported`,
 				properties: {
 					file: resolve(presencePath, "metadata.json"),
 					startLine: getLine("description", lang),
@@ -166,7 +164,6 @@ for (const presence of changedPresences) {
 		const AST = jsonAst(
 			readFileSync(resolve(presencePath, "metadata.json"), "utf-8"),
 			{
-				loc: true,
 				source: resolve(presencePath, "metadata.json"),
 			}
 		) as ObjectNode;
@@ -274,7 +271,7 @@ async function getStorePresence(presences: string) {
 			})
 		).body;
 	} catch {
-		actions.setFailed("Could not fetch store data!");
+		actions.setFailed("Could not fetch store data");
 		process.exit();
 	}
 }

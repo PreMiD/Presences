@@ -1,13 +1,14 @@
-import "source-map-support/register.js";
+import { createRequire } from "node:module";
+import { resolve } from "node:path";
+import { writeFile } from "node:fs/promises";
 
-import { readFile, writeFile } from "fs/promises";
-import { resolve } from "path";
 import { coerce, inc } from "semver";
 
 import PresenceCompiler, { Metadata } from "./classes/PresenceCompiler.js";
 import getDiff from "./util/getDiff.js";
 
-const compiler = new PresenceCompiler(),
+const require = createRequire(import.meta.url),
+	compiler = new PresenceCompiler(),
 	changedPresences = getDiff();
 
 for (const presence of changedPresences) {
@@ -15,7 +16,7 @@ for (const presence of changedPresences) {
 			compiler.getPresenceFolder(presence),
 			"metadata.json"
 		),
-		metadata = JSON.parse(await readFile(presencePath, "utf8")) as Metadata;
+		metadata = require(presencePath) as Metadata;
 
 	await writeFile(
 		presencePath,

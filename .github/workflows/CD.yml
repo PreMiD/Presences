@@ -8,8 +8,9 @@ on:
       - "**.json"
 jobs:
   update:
+    if: github.repository_owner == 'PreMiD'
     name: Update Presences
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
@@ -17,16 +18,17 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: "*"
       - name: Use Node.js 16
         uses: actions/setup-node@v3.5.1
         with:
           node-version: 16
-          cache: "yarn"
+          cache: pnpm
       - name: Install dependencies
-        run: |
-          npm i -g yarn
-          yarn
+        run: pnpm install --frozen-lockfile
       - name: Update Presences
         env:
           MONGO_URL: ${{ secrets.MONGO_URL }}
-        run: yarn presenceUpdater
+        run: pnpm presenceUpdater

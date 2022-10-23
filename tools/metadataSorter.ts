@@ -1,13 +1,13 @@
-import "source-map-support/register.js";
-
-import { readFile, writeFile } from "fs/promises";
+import { createRequire } from "module";
+import { writeFile } from "fs/promises";
 import glob from "glob";
 
 import { Metadata } from "./classes/PresenceCompiler.js";
 import getLatestSchema from "./util/getLatestSchema.js";
 
-const { url: latestSchema } = await getLatestSchema(),
-	presences = glob.sync("websites/*/*/metadata.json");
+const require = createRequire(import.meta.url),
+	{ url: latestSchema } = await getLatestSchema(),
+	presences = glob.sync("websites/*/*/metadata.json", { absolute: true });
 
 for (const presence of presences) {
 	const {
@@ -28,7 +28,7 @@ for (const presence of presences) {
 		tags,
 		url,
 		version,
-	} = JSON.parse(await readFile(presence, "utf8")) as Partial<Metadata>;
+	} = require(presence) as Metadata;
 
 	await writeFile(
 		presence,

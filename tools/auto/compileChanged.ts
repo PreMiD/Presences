@@ -1,6 +1,4 @@
-import "source-map-support/register.js";
-
-import * as actions from "@actions/core";
+import actions from "@actions/core";
 import chalk from "chalk";
 
 import PresenceCompiler from "../classes/PresenceCompiler.js";
@@ -10,15 +8,14 @@ const compiler = new PresenceCompiler(),
 	changedFolders = getDiff();
 
 if (!changedFolders.length)
-	actions.info(chalk.green("No Presence(s) changed, exiting..."));
+	actions.info(chalk.green("No Presences changed, exiting..."));
 else {
 	const errors = await compiler.compilePresence(changedFolders, {
-		noEmit: true,
+		emit: false,
 	});
 
-	if (errors.length) {
+	if (errors.length)
 		actions.setFailed(
-			chalk.redBright("Not all Presences compiled successfully!")
+			chalk.redBright("Some Presences failed to compile, exiting...")
 		);
-	}
 }

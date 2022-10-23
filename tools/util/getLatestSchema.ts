@@ -1,6 +1,7 @@
+import { extname } from "node:path";
+
 import actions from "@actions/core";
 import got from "got";
-import { extname } from "path";
 
 export default async function getLatestSchema() {
 	const schemas = await got(

@@ -1,12 +1,14 @@
+import { execSync } from "node:child_process";
+import { existsSync, rmSync, writeFileSync } from "node:fs";
+import { basename, dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
 import actions from "@actions/core";
 import chalk from "chalk";
-import { execSync } from "child_process";
 import { config } from "dotenv";
-import { existsSync } from "fs";
-import { rm, writeFile } from "fs/promises";
-import { basename, dirname, resolve } from "path";
-import { fileURLToPath } from "url";
 import webpack from "webpack";
+
+import { ErrorInfo } from "ts-loader/dist/interfaces";
 
 import getFolderLetter from "../util/getFolderLetter.js";
 
@@ -25,7 +27,6 @@ export default class PresenceCompiler {
 		public options?: {
 			cwd?: string;
 			webpack?: webpack.Configuration;
-			silent?: boolean;
 		}
 	) {
 		this.cwd = options?.cwd ?? rootPath;
@@ -40,9 +41,12 @@ export default class PresenceCompiler {
 		options: {
 			output?: string;
 			transpileOnly?: boolean;
-			noEmit?: boolean;
+			emit?: boolean;
 		} = {}
 	) {
+		options.emit ??= true;
+		options.transpileOnly ??= false;
+
 		const webpackConfig: webpack.Configuration = {
 			mode: "production",
 			devtool: "inline-source-map",
@@ -50,13 +54,13 @@ export default class PresenceCompiler {
 				extensions: [".ts"],
 			},
 
-			output: options.noEmit
-				? undefined
-				: {
+			output: options.emit
+				? {
 						iife: false,
 						path: options.output,
 						filename: "[name].js",
-				  },
+				  }
+				: undefined,
 			module: {
 				rules: [
 					{
@@ -65,7 +69,7 @@ export default class PresenceCompiler {
 						exclude: /node_modules/,
 						options: {
 							transpileOnly: options.transpileOnly,
-							errorFormatter: (error: any) => {
+							errorFormatter: (error: ErrorInfo) => {
 								actions.error(chalk.redBright(error.content), {
 									file: error.file,
 									title: `TS ${error.code}`,
@@ -92,10 +96,8 @@ export default class PresenceCompiler {
 					},
 				],
 			},
-			...(this.options?.webpack || {}),
+			...this.options?.webpack,
 		};
-
-		if (!options.transpileOnly) options.transpileOnly = false;
 
 		if (Array.isArray(presence)) {
 			let errors: webpack.WebpackError[] = [];
@@ -104,7 +106,7 @@ export default class PresenceCompiler {
 			for (const p of presence) {
 				const presencePath = this.getPresenceFolder(p);
 
-				await writeFile(resolve(presencePath, "tsconfig.json"), tsconfig);
+				writeFileSync(resolve(presencePath, "tsconfig.json"), tsconfig);
 				await this.installPresenceDependencies(p);
 
 				const job = await new Promise<{
@@ -115,7 +117,7 @@ export default class PresenceCompiler {
 						{
 							...webpackConfig,
 							context: presencePath,
-							output: options.noEmit
+							output: options.emit
 								? undefined
 								: {
 										iife: false,
@@ -124,9 +126,9 @@ export default class PresenceCompiler {
 								  },
 							entry: {
 								presence: "./presence.ts",
-								...(existsSync(resolve(presencePath, "iframe.ts"))
-									? { iframe: "./iframe.ts" }
-									: {}),
+								...(existsSync(resolve(presencePath, "iframe.ts")) && {
+									iframe: "./iframe.ts",
+								}),
 							},
 						},
 						(error, stats) => r({ error, stats })
@@ -140,7 +142,7 @@ export default class PresenceCompiler {
 
 			for (const p of presence)
 				if (existsSync(resolve(this.getPresenceFolder(p), "tsconfig.json")))
-					await rm(resolve(this.getPresenceFolder(p), "tsconfig.json"));
+					rmSync(resolve(this.getPresenceFolder(p), "tsconfig.json"));
 
 			errors = errors.filter(e => e.name !== "ModuleBuildError");
 
@@ -164,7 +166,7 @@ export default class PresenceCompiler {
 
 		if (!options.output) options.output = presencePath;
 
-		await writeFile(resolve(presencePath, "tsconfig.json"), tsconfig);
+		writeFileSync(resolve(presencePath, "tsconfig.json"), tsconfig);
 
 		await this.installPresenceDependencies(presence);
 
@@ -189,7 +191,7 @@ export default class PresenceCompiler {
 		});
 
 		if (existsSync(resolve(presencePath, "tsconfig.json")))
-			await rm(resolve(presencePath, "tsconfig.json"));
+			rmSync(resolve(presencePath, "tsconfig.json"));
 
 		if (job.err) throw job.err;
 
