@@ -21,18 +21,17 @@ presence.on("UpdateData", async () => {
 		if (timestamp) presenceData.startTimestamp = readingTimestamp;
 	} else if (pathname.includes("/manga")) {
 		const isReader = pathname.includes("/chapter"),
-		 isAdult =
-			document.querySelector("#premid-adult")?.innerText === "true",
-		 mangaTitle = document.querySelector("#premid-manga-title")?.innerText,
-		 mangaSlug = document.querySelector("#premid-manga-slug")?.innerText,
-		 mangaId = document.querySelector("#premid-manga-id")?.innerText,
+		 isAdult = document.querySelector("#premid-adult")?.textContent === "true",
+		 mangaTitle = document.querySelector("#premid-manga-title")?.textContent,
+		 mangaSlug = document.querySelector("#premid-manga-slug")?.textContent,
+		 mangaId = document.querySelector("#premid-manga-id")?.textContent,
 		 
 		 chapterNumber = document.querySelector(
 			"#premid-chapter-number"
-		)?.innerText,
+		)?.textContent,
 		 chapterTitle = document.querySelector(
 			"#premid-chapter-title"
-		)?.innerText;
+		)?.textContent;
 
 		if (images && !isAdult) {
 presenceData.largeImageKey = (
@@ -74,7 +73,7 @@ presenceData.buttons = [
 			];
 }
 	} else if (pathname.includes("/user")) {
-		const userName = document.querySelector("#premid-user-name")?.innerText
+		const userName = document.querySelector("#premid-user-name")?.textContent
 		 ;
 
 		presenceData.details = user ? `Perfil de ${userName}` : "Stalkeando Alguém";
@@ -146,7 +145,7 @@ presenceData.largeImageKey = (
 		presenceData.details = "Página de Configurações";
 		if (timestamp) presenceData.startTimestamp = readingTimestamp;
 	} else if (pathname.includes("/admin")) {
-		const isStaff = document.querySelector("#premid-admin-panel")?.innerText;
+		const isStaff = document.querySelector("#premid-admin-panel")?.textContent;
 
 		if (!isStaff) {
 			presenceData.details = "404";
