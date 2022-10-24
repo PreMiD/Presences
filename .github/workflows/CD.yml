@@ -24,7 +24,7 @@ jobs:
           node-version: 16
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        run: HUSKY=0 npm ci
       - name: Update Presences
         env:
           MONGO_URL: ${{ secrets.MONGO_URL }}

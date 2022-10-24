@@ -19,7 +19,7 @@ jobs:
           node-version: 16
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        run: HUSKY=0 npm ci
       - name: Start SE
         run: |
           git config --global core.quotePath false
