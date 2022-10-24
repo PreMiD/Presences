@@ -4,6 +4,6 @@
 	"automerge": false,
 	"semanticCommits": "enabled",
 	"configWarningReuseIssue": false,
-	"schedule": ["0 0 * * 5"],
+	"schedule": ["* 17 * * 5"],
 	"stabilityDays": 3
 }
