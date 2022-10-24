@@ -1,52 +1,55 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "service": "YomuMangás",
-  "author": {
-    "id": "293913134748401674",
-    "name": "Vitu™#2002"
-  },
-  "description": {
-    "en": "Read portuguese mangas and doujinshis online for free without ads at YomuMangás",
-    "pt_BR": "Leia mangás e doujinshis, de graça e sem anúncios na YomuMangás."
-  },
-  "url": ["yomumangas.com", "dev.yomumangas.com"],
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/RBkqiAg.png",
-  "thumbnail": "https://i.imgur.com/EqYC4Qo.png",
-  "color": "#121212",
-  "tags": [
-    "anime",
-    "manga",
-    "doushinji",
-    "geek",
-    "nsfw"
-  ],
-  "category": "anime",
-  "settings": [
-    {
-      "id": "images",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "293913134748401674",
+		"name": "Vitu™#2002"
+	},
+	"service": "YomuMangás",
+	"description": {
+		"en": "Read portuguese mangas and doujinshis online for free without ads at YomuMangás",
+		"pt_BR": "Leia mangás e doujinshis, de graça e sem anúncios na YomuMangás."
+	},
+	"url": [
+		"yomumangas.com",
+		"dev.yomumangas.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/RBkqiAg.png",
+	"thumbnail": "https://i.imgur.com/EqYC4Qo.png",
+	"color": "#121212",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"manga",
+		"doushinji",
+		"geek",
+		"nsfw"
+	],
+	"settings": [
+		{
+			"id": "images",
 			"title": "Mostrar Imagens (Avatars & Covers)",
 			"icon": "fad fa-images",
 			"value": true
-    },
+		},
 		{
 			"id": "manga",
 			"title": "Mostrar Manga",
 			"icon": "fad fa-book",
 			"value": true
 		},
-    {
-      "id": "chapter",
-      "title": "Mostrar Capítulo",
-      "icon": "fad fa-clone",
-      "value": true
-    },
-    {
-      "id": "user",
-      "title": "Mostrar Usuário",
-      "icon": "fad fa-user",
-      "value": true
-    },
+		{
+			"id": "chapter",
+			"title": "Mostrar Capítulo",
+			"icon": "fad fa-clone",
+			"value": true
+		},
+		{
+			"id": "user",
+			"title": "Mostrar Usuário",
+			"icon": "fad fa-user",
+			"value": true
+		},
 		{
 			"id": "timestamp",
 			"title": "Mostrar Timestamp",
@@ -59,7 +62,7 @@
 			"icon": "fad fa-exclamation-triangle",
 			"value": false
 		},
-    {
+		{
 			"id": "privacy",
 			"title": "Modo Privado",
 			"icon": "fad fa-user-secret",
