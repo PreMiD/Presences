@@ -1,9 +1,9 @@
 const presence = new Presence({ clientId: "869377195682983957" }),
-	readingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const { pathname } = window.location,
-		presenceData: PresenceData = { largeImageKey: "logo" },
+	const presenceData: PresenceData = { largeImageKey: "logo" },
+		{ pathname } = window.location,
 		[images, manga, chapter, user, timestamp, adult, privacy] =
 			await Promise.all([
 				presence.getSetting<boolean>("images"),
@@ -18,7 +18,6 @@ presence.on("UpdateData", async () => {
 	if (privacy) {
 		presenceData.details = "Criando um novo mundo!";
 		presenceData.state = "yomumangas.com";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
 	} else if (pathname.includes("/manga")) {
 		const isReader = pathname.includes("/chapter"),
 			isAdult = document.querySelector("#premid-adult")?.textContent === "true",
@@ -34,7 +33,7 @@ presence.on("UpdateData", async () => {
 
 		if (images && !isAdult) {
 			presenceData.largeImageKey = (
-				document.querySelector("#premid-manga-image") as HTMLAnchorElement
+				document.querySelector<HTMLAnchorElement>("#premid-manga-image")
 			)?.href;
 		}
 		if (!manga || (isAdult && !adult))
@@ -50,7 +49,7 @@ presence.on("UpdateData", async () => {
 			}`;
 		}
 		if (!chapter && isReader) presenceData.state = "Lendo Capítulo";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
+
 		if (manga && ((isAdult && adult) || !isAdult) && !(chapter && isReader)) {
 			presenceData.buttons = [
 				{
@@ -79,84 +78,56 @@ presence.on("UpdateData", async () => {
 		];
 		if (images && user) {
 			presenceData.largeImageKey = (
-				document.querySelector("#premid-user-image") as HTMLAnchorElement
+				document.querySelector<HTMLAnchorElement>("#premid-user-image")
 			)?.href;
 		}
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/signup")) {
+	} else if (pathname.includes("/signup"))
 		presenceData.details = "Registrando-se";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/recovery")) {
+	else if (pathname.includes("/recovery"))
 		presenceData.details = "Recuperando a Conta";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/login")) {
-		presenceData.details = "Fazendo Login";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/404")) {
+	else if (pathname.includes("/login")) presenceData.details = "Fazendo Login";
+	else if (pathname.includes("/404")) {
 		presenceData.details = "404";
 		presenceData.state = "Perdido no Mato";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/tutorial")) {
+	} else if (pathname.includes("/tutorial"))
 		presenceData.details = "Lendo o Tutorial";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/faq")) {
-		presenceData.details = "Lendo o FAQ";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/terms-of-use")) {
+	else if (pathname.includes("/faq")) presenceData.details = "Lendo o FAQ";
+	else if (pathname.includes("/terms-of-use"))
 		presenceData.details = "Lendo os Termos de Uso";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/privacy")) {
+	else if (pathname.includes("/privacy"))
 		presenceData.details = "Lendo as Políticas de Privacidade";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/dmca")) {
-		presenceData.details = "Lendo o DMCA";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/search")) {
+	else if (pathname.includes("/dmca")) presenceData.details = "Lendo o DMCA";
+	else if (pathname.includes("/search"))
 		presenceData.details = "Busca Avançada";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/about")) {
-		presenceData.details = "Sobra a Yomu";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/donate")) {
+	else if (pathname.includes("/about")) presenceData.details = "Sobra a Yomu";
+	else if (pathname.includes("/donate"))
 		presenceData.details = "Página de Doação";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/contact")) {
+	else if (pathname.includes("/contact"))
 		presenceData.details = "Página de Contato";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/ranks")) {
+	else if (pathname.includes("/ranks"))
 		presenceData.details = "Página de Ranks";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/minigames")) {
+	else if (pathname.includes("/minigames"))
 		presenceData.details = "Página de Minigames";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/donators")) {
+	else if (pathname.includes("/donators"))
 		presenceData.details = "Página de Doadores";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/staffs")) {
+	else if (pathname.includes("/staffs"))
 		presenceData.details = "Página da Equipe";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/partners")) {
+	else if (pathname.includes("/partners"))
 		presenceData.details = "Página de Parceiros";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/settings")) {
+	else if (pathname.includes("/settings"))
 		presenceData.details = "Página de Configurações";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	} else if (pathname.includes("/admin")) {
+	else if (pathname.includes("/admin")) {
 		const isStaff = document.querySelector("#premid-admin-panel")?.textContent;
 
 		if (!isStaff) {
 			presenceData.details = "404";
 			presenceData.state = "Perdido no Mato";
-			if (timestamp) presenceData.startTimestamp = readingTimestamp;
 		} else {
 			presenceData.details = "Painel Admin";
 			presenceData.state = isStaff;
-			if (timestamp) presenceData.startTimestamp = readingTimestamp;
 		}
-	} else {
-		presenceData.details = "Página Inicial";
-		if (timestamp) presenceData.startTimestamp = readingTimestamp;
-	}
+	} else presenceData.details = "Página Inicial";
 
+	if (timestamp) presenceData.startTimestamp = browsingStamp;
 	presence.setActivity(presenceData);
 });
