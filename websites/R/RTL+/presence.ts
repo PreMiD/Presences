@@ -16,30 +16,34 @@ let video: HTMLVideoElement,
 	vidTitle: string,
 	strings: Awaited<ReturnType<typeof getStrings>> = null;
 
+enum Assets {
+	Logo = "https://i.imgur.com/fMMsZfV.jpg",
+	Pause = "https://i.imgur.com/C6mbMYz.png",
+	Play = "https://i.imgur.com/crCKEaC.png",
+}
+
 presence.on("UpdateData", async () => {
 	const [startTimestamp, endTimestamp] = presence.getTimestamps(
 			Math.floor(video?.currentTime),
 			Math.floor(video?.duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/fMMsZfV.png",
+			largeImageKey: Assets.Logo,
 		},
 		{ pathname, href } = document.location;
 
 	if (!strings) strings = await getStrings();
 
 	if (document.querySelector("#bitmovinplayer-video-player_container")) {
-		video = document.querySelector(
+		video = document.querySelector<HTMLVideoElement>(
 			"#bitmovinplayer-video-player_container"
-		) as HTMLVideoElement;
+		);
 
 		if (!isNaN(video.duration)) {
 			const footerEles = document.querySelectorAll("li.ng-star-inserted"),
 				cover: HTMLImageElement = document.querySelector("img.dvd-cover");
 
-			presenceData.smallImageKey = video.paused
-				? "https://i.imgur.com/C6mbMYz.png"
-				: "https://i.imgur.com/crCKEaC.png";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
@@ -83,13 +87,13 @@ presence.on("UpdateData", async () => {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 
-				presenceData.smallImageKey = "https://i.imgur.com/C6mbMYz.png";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = strings.pause;
 			}
 		}
 	} else if (pathname === "/") presenceData.details = "Viewing main page";
 	else if (pathname.includes("/serien/")) {
-		presenceData.details = "Viewing series:";
+		presenceData.details = "Viewing series";
 		presenceData.buttons = [
 			{
 				label: "View Series",
@@ -97,7 +101,7 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (pathname.includes("/shows/")) {
-		presenceData.details = "Viewing show:";
+		presenceData.details = "Viewing show";
 		presenceData.buttons = [
 			{
 				label: "View Show",
@@ -108,7 +112,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing series";
 	else if (pathname.includes("/shows")) presenceData.details = "Browsing shows";
 	else if (pathname.includes("/filme/")) {
-		presenceData.details = "Viewing movie:";
+		presenceData.details = "Viewing movie";
 		presenceData.buttons = [
 			{
 				label: "View Movie",
@@ -118,7 +122,7 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.includes("/filme"))
 		presenceData.details = "Browsing movies";
 	else if (pathname.includes("/specials/")) {
-		presenceData.details = "Viewing special:";
+		presenceData.details = "Viewing special";
 		presenceData.buttons = [
 			{
 				label: "View Special",
