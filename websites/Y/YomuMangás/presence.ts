@@ -21,47 +21,46 @@ presence.on("UpdateData", async () => {
 		if (timestamp) presenceData.startTimestamp = readingTimestamp;
 	} else if (pathname.includes("/manga")) {
 		const isReader = pathname.includes("/chapter"),
-		 isAdult = document.querySelector("#premid-adult")?.textContent === "true",
-		 mangaTitle = document.querySelector("#premid-manga-title")?.textContent,
-		 mangaSlug = document.querySelector("#premid-manga-slug")?.textContent,
-		 mangaId = document.querySelector("#premid-manga-id")?.textContent,
-		 
-		 chapterNumber = document.querySelector(
-			"#premid-chapter-number"
-		)?.textContent,
-		 chapterTitle = document.querySelector(
-			"#premid-chapter-title"
-		)?.textContent;
+			isAdult = document.querySelector("#premid-adult")?.textContent === "true",
+			mangaTitle = document.querySelector("#premid-manga-title")?.textContent,
+			mangaSlug = document.querySelector("#premid-manga-slug")?.textContent,
+			mangaId = document.querySelector("#premid-manga-id")?.textContent,
+			chapterNumber = document.querySelector(
+				"#premid-chapter-number"
+			)?.textContent,
+			chapterTitle = document.querySelector(
+				"#premid-chapter-title"
+			)?.textContent;
 
 		if (images && !isAdult) {
-presenceData.largeImageKey = (
-			document.querySelector("#premid-manga-image") as HTMLAnchorElement
-		)?.href;
-}
+			presenceData.largeImageKey = (
+				document.querySelector("#premid-manga-image") as HTMLAnchorElement
+			)?.href;
+		}
 		if (!manga || (isAdult && !adult))
 			presenceData.details = isReader ? "Lendo um Mangá" : "Página de um Mangá";
 		if (manga && ((isAdult && adult) || !isAdult)) {
-presenceData.details = isReader
+			presenceData.details = isReader
 				? `Lendo ${mangaTitle}`
 				: `Página de ${mangaTitle}`;
-}
+		}
 		if (chapter && isReader) {
-presenceData.state = `Cap. ${chapterNumber}${
+			presenceData.state = `Cap. ${chapterNumber}${
 				chapterTitle ? ` - ${chapterTitle}` : ""
 			}`;
-}
+		}
 		if (!chapter && isReader) presenceData.state = "Lendo Capítulo";
 		if (timestamp) presenceData.startTimestamp = readingTimestamp;
 		if (manga && ((isAdult && adult) || !isAdult) && !(chapter && isReader)) {
-presenceData.buttons = [
+			presenceData.buttons = [
 				{
 					label: "Ver Mangá",
 					url: `https://yomumangas.com/manga/${mangaId}/${mangaSlug}`,
 				},
 			];
-}
+		}
 		if (manga && ((isAdult && adult) || !isAdult) && chapter && isReader) {
-presenceData.buttons = [
+			presenceData.buttons = [
 				{
 					label: "Ver Mangá",
 					url: `https://yomumangas.com/manga/${mangaId}/${mangaSlug}`,
@@ -71,20 +70,18 @@ presenceData.buttons = [
 					url: `https://yomumangas.com/manga/${mangaId}/${mangaSlug}/chapter/${chapterNumber}`,
 				},
 			];
-}
+		}
 	} else if (pathname.includes("/user")) {
-		const userName = document.querySelector("#premid-user-name")?.textContent
-		 ;
-
+		const userName = document.querySelector("#premid-user-name")?.textContent;
 		presenceData.details = user ? `Perfil de ${userName}` : "Stalkeando Alguém";
 		presenceData.buttons = [
 			{ label: "Ver Perfil", url: `https://yomumangas.com/user/${userName}` },
 		];
 		if (images && user) {
-presenceData.largeImageKey = (
-			document.querySelector("#premid-user-image") as HTMLAnchorElement
-		)?.href;
-}
+			presenceData.largeImageKey = (
+				document.querySelector("#premid-user-image") as HTMLAnchorElement
+			)?.href;
+		}
 		if (timestamp) presenceData.startTimestamp = readingTimestamp;
 	} else if (pathname.includes("/signup")) {
 		presenceData.details = "Registrando-se";
