@@ -15,34 +15,28 @@ presence.on("UpdateData", async () => {
 		title = document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content"),
-		{ pathname } = document.location,
+		{ pathname, href } = document.location,
 		typeContent =
 			pathname.split("/")[1] === "animes"
 				? "аниме"
 				: pathname.split("/")[1] === "mangas"
 				? "манги"
-				: "ранобэ";
+				: "ранобэ",
+		isImageExist = (tags: string) => {
+			return document.querySelector<HTMLImageElement>(tags) && !privacy && logo
+				? document.querySelector<HTMLImageElement>(tags)?.src
+				: "https://i.imgur.com/7tlc7or.png";
+		},
+		textContent = (tags: string) => {
+			return document.querySelector(tags)?.textContent;
+		};
 
-	function isImageExist(tags: string) {
-		return document.querySelector<HTMLImageElement>(tags) && !privacy && logo
-			? document.querySelector<HTMLImageElement>(tags)?.src
-			: "https://i.imgur.com/7tlc7or.png";
-	}
-
-	function textContent(tags: string) {
-		return document.querySelector(tags)?.textContent;
-	}
-
-	if (buttons && !privacy) {
-		presenceData.buttons = [
-			{
-				label: "Открыть страницу",
-				url: document
-					.querySelector("meta[property='og:url']")
-					?.getAttribute("content"),
-			},
-		];
-	}
+	presenceData.buttons = [
+		{
+			label: "Открыть страницу",
+			url: href,
+		},
+	];
 
 	switch (pathname.split("/")[1]) {
 		case "":
@@ -65,11 +59,11 @@ presence.on("UpdateData", async () => {
 					case "duration":
 					case "rating":
 					case "studio":
-						if (!privacy) presenceData.state = textContent("header > h1");
+						presenceData.state = textContent("header > h1");
 						break;
 					default:
 						presenceData.details = `Смотрит страницу ${typeContent}`;
-						if (!privacy) presenceData.state = title;
+						presenceData.state = title;
 						presenceData.largeImageKey = isImageExist(".c-poster img");
 						break;
 				}
@@ -81,11 +75,9 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `Смотрит ${textContent(
 						".b-breadcrumbs span:nth-last-child(1) span"
 					)?.toLowerCase()} ${typeContent}`;
-					if (!privacy) {
-						presenceData.state = textContent(
-							".b-breadcrumbs span:nth-last-child(2) span"
-						);
-					}
+					presenceData.state = textContent(
+						".b-breadcrumbs span:nth-last-child(2) span"
+					);
 					presenceData.largeImageKey = isImageExist(".b-menu_logo img");
 					break;
 				case "characters":
@@ -101,20 +93,16 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `Смотрит страницу ${typeContent} (${textContent(
 						".subheadline"
 					)})`;
-					if (!privacy) {
-						presenceData.state = textContent(
-							".b-breadcrumbs span:last-child span"
-						);
-					}
+					presenceData.state = textContent(
+						".b-breadcrumbs span:last-child span"
+					);
 					presenceData.largeImageKey = isImageExist(".b-menu_logo img");
 					break;
 				case "franchise":
 					presenceData.details = "Смотрит франшизу";
-					if (!privacy) {
-						presenceData.state = textContent(
-							".b-breadcrumbs span:last-child span"
-						);
-					}
+					presenceData.state = textContent(
+						".b-breadcrumbs span:last-child span"
+					);
 					break;
 			}
 			break;
@@ -131,7 +119,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.split("/")[2]) {
 				presenceData.details = `Смотрит
 				${textContent(".b-link span:first-child")?.toLowerCase()}`;
-				if (!privacy) presenceData.state = textContent(".l-page header h1");
+				presenceData.state = textContent(".l-page header h1");
 				presenceData.largeImageKey = isImageExist(".b-menu_logo img");
 			}
 			break;
@@ -139,17 +127,15 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Смотрит ${textContent(
 				".l-page header .b-link span"
 			)?.toLowerCase()}`;
-			if (!privacy) {
-				switch (pathname.split("/")[2]) {
-					case "updates":
-					case "reviews":
-						presenceData.state = textContent(".reload");
-						break;
-					default:
-						presenceData.state = title;
-						presenceData.largeImageKey = isImageExist(".b-menu_logo img");
-						break;
-				}
+			switch (pathname.split("/")[2]) {
+				case "updates":
+				case "reviews":
+					presenceData.state = textContent(".reload");
+					break;
+				default:
+					presenceData.state = title;
+					presenceData.largeImageKey = isImageExist(".b-menu_logo img");
+					break;
 			}
 			break;
 		case title.replace(" ", "+"):
@@ -163,7 +149,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Смотрит страницу ${textContent(
 				".l-page header p"
 			)?.toLowerCase()}`;
-			if (!privacy) presenceData.state = title;
+			presenceData.state = title;
 			presenceData.largeImageKey = isImageExist(".c-poster img");
 			if (!privacy && pathname.split("/")[3]) {
 				presenceData.details = `${presenceData.details} (${title})`;
@@ -186,11 +172,11 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Смотрит профиль ${
 				!privacy ? pathname.split("/")[1].replace("+", " ") : "пользователя"
 			}`;
-			if (!privacy) presenceData.state = title;
+			presenceData.state = title;
 			break;
 		case "edit":
 			presenceData.details = "Настраивает учётную запись";
-			if (!privacy) presenceData.state = title;
+			presenceData.state = title;
 			break;
 		case "dialogs":
 			presenceData.details = "Смотрит почту";
@@ -202,7 +188,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Смотрит профиль ${
 				!privacy ? pathname.split("/")[1].replace("+", " ") : "пользователя"
 			}`;
-			if (!privacy) presenceData.state = "Историю списка";
+			presenceData.state = "Историю списка";
 			presenceData.largeImageKey = isImageExist(".submenu-triangle img");
 			break;
 		case "list":
@@ -213,31 +199,31 @@ presence.on("UpdateData", async () => {
 					!privacy ? pathname.split("/")[1] : "пользователя"
 				}`;
 				presenceData.largeImageKey = isImageExist(".avatar img");
-				if (!privacy) {
-					switch (pathname.split("/")[5]) {
-						case "planned":
-							presenceData.state = "Запланированно";
-							break;
-						case "watching":
-							presenceData.state = "Смотрю";
-							break;
-						case "rewatching":
-							presenceData.state = "Пересматриваю";
-							break;
-						case "completed":
-							presenceData.state = "Просмотрено";
-							break;
-						case "on_hold":
-							presenceData.state = "Отложено";
-							break;
-						case "dropped":
-							presenceData.state = "Брошено";
-							break;
-					}
+				switch (pathname.split("/")[5]) {
+					case "planned":
+						presenceData.state = "Запланированно";
+						break;
+					case "watching":
+						presenceData.state = "Смотрю";
+						break;
+					case "rewatching":
+						presenceData.state = "Пересматриваю";
+						break;
+					case "completed":
+						presenceData.state = "Просмотрено";
+						break;
+					case "on_hold":
+						presenceData.state = "Отложено";
+						break;
+					case "dropped":
+						presenceData.state = "Брошено";
+						break;
 				}
 			}
 			break;
 	}
 
+	if (!buttons || privacy) delete presenceData.buttons;
+	if (privacy) delete presenceData.state;
 	presence.setActivity(presenceData);
 });
