@@ -26,11 +26,10 @@ const presence = new Presence({
 	},
 	capitalize = (text: string): string => {
 		return text.charAt(0).toUpperCase() + text.slice(1);
-	};
+	},
+	elapsed = Math.floor(Date.now() / 1000);
 
-let elapsed = Math.floor(Date.now() / 1000),
-	prevUrl = document.location.href,
-	strings: Awaited<ReturnType<typeof getStrings>>,
+let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 const statics = {
@@ -132,11 +131,6 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "soundcloud",
 		startTimestamp: elapsed,
 	};
-
-	if (document.location.href !== prevUrl) {
-		prevUrl = document.location.href;
-		elapsed = Math.floor(Date.now() / 1000);
-	}
 
 	if ((playing || (!playing && !showBrowsing)) && showSong) {
 		presenceData.details = getElement(
