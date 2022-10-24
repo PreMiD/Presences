@@ -15,7 +15,13 @@ presence.on("UpdateData", async () => {
 		title = document
 			.querySelector("meta[property='og:title']")
 			.getAttribute("content"),
-		{ pathname } = document.location;
+		{ pathname } = document.location,
+		typeContent =
+			pathname.split("/")[1] === "animes"
+				? "аниме"
+				: pathname.split("/")[1] === "mangas"
+				? "манги"
+				: "ранобэ";
 
 	function isImageExist(tags: string) {
 		return document.querySelector<HTMLImageElement>(tags) && !privacy && logo
@@ -45,13 +51,7 @@ presence.on("UpdateData", async () => {
 		case "animes":
 		case "mangas":
 		case "ranobe":
-			presenceData.details = `В поисках ${
-				pathname.split("/")[1] === "animes"
-					? "аниме"
-					: pathname.split("/")[1] === "mangas"
-					? "манги"
-					: "ранобэ"
-			}`;
+			presenceData.details = `В поиске ${typeContent}`;
 
 			if (pathname.split("/")[2]) {
 				switch (pathname.split("/")[2]) {
@@ -68,12 +68,7 @@ presence.on("UpdateData", async () => {
 						if (!privacy) presenceData.state = textContent("header > h1");
 						break;
 					default:
-						presenceData.details = `Смотрит страницу 
-							${
-								pathname.split("/")[1] === "mangas"
-									? "манги"
-									: textContent(".submenu-triangle > span")?.toLowerCase()
-							}`;
+						presenceData.details = `Смотрит страницу ${typeContent}`;
 						if (!privacy) presenceData.state = title;
 						presenceData.largeImageKey = isImageExist(".c-poster img");
 						break;
@@ -85,11 +80,7 @@ presence.on("UpdateData", async () => {
 				case "reviews":
 					presenceData.details = `Смотрит ${textContent(
 						".b-breadcrumbs span:nth-last-child(1) span"
-					)?.toLowerCase()} к ${
-						pathname.split("/")[1] === "mangas"
-							? "манге"
-							: textContent(".b-breadcrumbs span span")?.toLowerCase()
-					}`;
+					)?.toLowerCase()} ${typeContent}`;
 					if (!privacy) {
 						presenceData.state = textContent(
 							".b-breadcrumbs span:nth-last-child(2) span"
@@ -107,12 +98,9 @@ presence.on("UpdateData", async () => {
 				case "staff":
 				case "related":
 				case "videos":
-					presenceData.details = `Смотрит страницу 
-					${
-						pathname.split("/")[1] === "mangas"
-							? "манги"
-							: textContent(".submenu-triangle > span")?.toLowerCase()
-					} (${textContent(".subheadline")})`;
+					presenceData.details = `Смотрит страницу ${typeContent} (${textContent(
+						".subheadline"
+					)})`;
 					if (!privacy) {
 						presenceData.state = textContent(
 							".b-breadcrumbs span:last-child span"
