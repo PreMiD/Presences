@@ -10,12 +10,41 @@
 		"ru": "Шикимори — онлайн энциклопедия аниме и манги. Полный список популярной манги на русском. Shikimori.one — лучший аниме-форум для общения."
 	},
 	"url": "shikimori.one",
-	"version": "1.0.3",
+	"version": "1.1.0",
 	"logo": "https://i.imgur.com/7tlc7or.png",
 	"thumbnail": "https://i.imgur.com/jS5LyDW.png",
 	"color": "#4f4f4f",
 	"category": "anime",
 	"tags": [
-		"shikimori"
+		"shikimori",
+		"anime",
+		"manga",
+		"list"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Приватный режим",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "logo",
+			"if": {
+				"privacy": false
+			},
+			"title": "Показывать обложки",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Показывать кнопки",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
 	]
 }
