@@ -1,28 +1,25 @@
 const presence = new Presence({
 		clientId: "1028679580027977839",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	content = {
-		ViewingImage: "https://i.imgur.com/9WPWqvT.png",
-		BuyingImage: "https://i.imgur.com/JKLNlvT.png",
-		ViewingImageText: "Viewing...",
-		BuyingImageText: "Buying...",
-	};
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+enum Assets {
+	Viewing = "https://i.imgur.com/9WPWqvT.png",
+	Buying = "https://i.imgur.com/JKLNlvT.png",
+}
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/IlUpO2s.png",
 		details: "Viewing Homepage",
-		smallImageKey: content.ViewingImage,
-		smallImageText: content.ViewingImageText,
+		smallImageKey: Assets.Viewing,
 		startTimestamp: browsingTimestamp,
 	};
 	const { host, pathname, href } = document.location,
 		pages: Record<string, PresenceData> = {
 			"/backgrounds": {
 				details: "Viewing Backgrounds",
-				smallImageKey: content.ViewingImage,
-				smallImageText: content.ViewingImageText,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Backgrounds",
@@ -32,8 +29,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/profilebg": {
 				details: "Viewing Profile Backgrounds",
-				smallImageKey: content.ViewingImage,
-				smallImageText: content.ViewingImageText,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Profile Backgrounds",
@@ -43,8 +39,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/frames": {
 				details: "Viewing Frames",
-				smallImageKey: content.ViewingImage,
-				smallImageText: content.ViewingImageText,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Frames",
@@ -54,8 +49,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/items": {
 				details: "Viewing Items",
-				smallImageKey: content.ViewingImage,
-				smallImageText: content.ViewingImageText,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Items",
@@ -76,8 +70,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/team": {
 				details: "Viewing Team",
-				smallImageKey: content.ViewingImage,
-				smallImageText: content.ViewingImageText,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Sofi Team",
@@ -87,8 +80,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/art": {
 				details: "Viewing Art Gallery",
-				smallImageKey: content.ViewingImage,
-				smallImageText: content.ViewingImageText,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Art Gallery",
@@ -136,8 +128,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
 	} else if (host === "gems.sofi.gg") {
 		presenceData.details = "Buying Gems";
-		presenceData.smallImageKey = content.BuyingImage;
-		presenceData.smallImageText = content.BuyingImageText;
+		presenceData.smallImageKey = Assets.Buying;
 		presenceData.buttons = [
 			{
 				label: "Buy Gems",
