@@ -14,8 +14,8 @@
 		"vi_VN": "9anima là dịch vụ phát trực tuyến nơi bạn có thể xem anime thuyết minh bằng Tiếng Anh."
 	},
 	"url": "9anime.to",
-	"regExp": "([a-z0-9-]+[.])*9anime([.][a-z]+)+[/]",
-	"version": "1.3.1",
+	"regExp": "([a-z0-9-]+[.])?(9anime[.][a-z]+)",
+	"version": "1.4.0",
 	"logo": "https://i.imgur.com/jPl7EfZ.png",
 	"thumbnail": "https://i.imgur.com/RIGfshD.png",
 	"color": "#694ba1",
@@ -31,6 +31,12 @@
 			"id": "cover",
 			"title": "Show Cover",
 			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "timestamps",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
 			"value": true
 		},
 		{
