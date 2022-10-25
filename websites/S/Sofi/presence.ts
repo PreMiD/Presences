@@ -4,22 +4,24 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Assets {
-	Viewing = "https://i.imgur.com/9WPWqvT.png",
-	Buying = "https://i.imgur.com/JKLNlvT.png",
+	View = "https://i.imgur.com/9WPWqvT.png",
+	Buy = "https://i.imgur.com/JKLNlvT.png",
+	Submit = "https://i.imgur.com/wDDm0VX.png",
+	Edit = "https://i.imgur.com/TCJe2xJ.png",
 }
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/IlUpO2s.png",
 		details: "Viewing Homepage",
-		smallImageKey: Assets.Viewing,
+		smallImageKey: Assets.View,
 		startTimestamp: browsingTimestamp,
 	};
 	const { host, pathname, href } = document.location,
 		pages: Record<string, PresenceData> = {
 			"/backgrounds": {
 				details: "Viewing Backgrounds",
-				smallImageKey: Assets.Viewing,
+				smallImageKey: Assets.View,
 				buttons: [
 					{
 						label: "View Backgrounds",
@@ -27,9 +29,9 @@ presence.on("UpdateData", async () => {
 					},
 				],
 			},
-			"/profilebg": {
+			"/profile/background": {
 				details: "Viewing Profile Backgrounds",
-				smallImageKey: Assets.Viewing,
+				smallImageKey: Assets.View,
 				buttons: [
 					{
 						label: "View Profile Backgrounds",
@@ -39,7 +41,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/frames": {
 				details: "Viewing Frames",
-				smallImageKey: Assets.Viewing,
+				smallImageKey: Assets.View,
 				buttons: [
 					{
 						label: "View Frames",
@@ -49,7 +51,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/items": {
 				details: "Viewing Items",
-				smallImageKey: Assets.Viewing,
+				smallImageKey: Assets.View,
 				buttons: [
 					{
 						label: "View Items",
@@ -70,7 +72,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/team": {
 				details: "Viewing Team",
-				smallImageKey: Assets.Viewing,
+				smallImageKey: Assets.View,
 				buttons: [
 					{
 						label: "View Sofi Team",
@@ -78,12 +80,12 @@ presence.on("UpdateData", async () => {
 					},
 				],
 			},
-			"/art": {
-				details: "Viewing Art Gallery",
-				smallImageKey: Assets.Viewing,
+			"/event": {
+				details: "Viewing Event",
+				smallImageKey: Assets.View,
 				buttons: [
 					{
-						label: "View Art Gallery",
+						label: "View Event",
 						url: href,
 					},
 				],
@@ -106,6 +108,35 @@ presence.on("UpdateData", async () => {
 				const userTag = data.textContent?.match(/.*#[0-9]+/gi);
 				userTag ? (presenceData.state = `Of ${userTag[0]}`) : null;
 			}
+		} else if (
+			pathname.startsWith("/profile") &&
+			!pathname.endsWith("/background")
+		) {
+			const isOwnProfile = pathname === "profile",
+				data = document.querySelector("title"),
+				title = data ? data.textContent.replace(" Profile", "") : null;
+
+			presenceData.details = "Viewing Profile";
+			presenceData.state = isOwnProfile
+				? null
+				: `Of ${title.slice(0, title.length - 2)}`;
+			presenceData.buttons = [
+				{
+					label: isOwnProfile ? "View Profile" : `View ${title} Profile`,
+					url: href,
+				},
+			];
+			if (pathname.includes("/edit")) {
+				presenceData.details = "Editing Profile";
+				presenceData.smallImageKey = Assets.Edit;
+				presenceData.buttons = [
+					{
+						label: "Edit Profile",
+						url: href,
+					},
+				];
+				delete presenceData.state;
+			}
 		} else if (pathname.startsWith("/art")) {
 			const data = document.querySelector(
 				"div.w-full.font-inter.uppercase.font-bold.text-xl.lg\\:text-3xl.lg\\:relative.text-light-400.text-center"
@@ -114,7 +145,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Art Gallery",
-					url: href,
+					url: "https://sofi.gg/art",
 				},
 			];
 
@@ -122,13 +153,26 @@ presence.on("UpdateData", async () => {
 				const artName = data.textContent;
 				artName ? (presenceData.state = artName.toUpperCase()) : null;
 			}
+
+			if (pathname.includes("/submit")) {
+				presenceData.details = "Submitting Art";
+				presenceData.smallImageKey = Assets.Submit;
+				presenceData.buttons = [
+					{
+						label: "Submit Art",
+						url: href,
+					},
+				];
+				delete presenceData.state;
+			}
 		}
 
 		for (const [path, data] of Object.entries(pages))
 			if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
 	} else if (host === "gems.sofi.gg") {
+		if (pathname.includes("/orders")) return;
 		presenceData.details = "Buying Gems";
-		presenceData.smallImageKey = Assets.Buying;
+		presenceData.smallImageKey = Assets.Buy;
 		presenceData.buttons = [
 			{
 				label: "Buy Gems",
