@@ -27,6 +27,12 @@
 	],
 	"settings": [
 		{
+			"id": "privacy",
+			"title": "Modo Privado",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
 			"id": "images",
 			"title": "Mostrar Imagens (Avatars & Covers)",
 			"icon": "fad fa-images",
@@ -60,12 +66,6 @@
 			"id": "adult",
 			"title": "Mostrar NSFW (Nome)",
 			"icon": "fad fa-exclamation-triangle",
-			"value": false
-		},
-		{
-			"id": "privacy",
-			"title": "Modo Privado",
-			"icon": "fad fa-user-secret",
 			"value": false
 		}
 	]
