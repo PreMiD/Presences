@@ -8,6 +8,7 @@ enum Assets {
 	Buy = "https://i.imgur.com/JKLNlvT.png",
 	Submit = "https://i.imgur.com/wDDm0VX.png",
 	Edit = "https://i.imgur.com/TCJe2xJ.png",
+	Browse = "https://i.imgur.com/0tmziN8.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -187,7 +188,7 @@ presence.on("UpdateData", async () => {
 
 	if (privacy) {
 		presenceData.details = "Browsing...";
-		presenceData.smallImageKey = "https://i.imgur.com/0tmziN8.png";
+		presenceData.smallImageKey = Assets.Browse;
 		delete presenceData.smallImageText;
 		delete presenceData.state;
 		delete presenceData.buttons;
