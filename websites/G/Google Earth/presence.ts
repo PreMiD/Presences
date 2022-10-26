@@ -16,7 +16,8 @@ presence.on("UpdateData", async () => {
 		const appRoot = document.querySelector("earth-app").shadowRoot,
 			knowledgeCard = appRoot.querySelector("earth-knowledge-card"),
 			drawerContainer = appRoot.querySelector("paper-drawer-panel"),
-			drawerRoot = drawerContainer.querySelector("earth-drawer").shadowRoot;
+			drawerRoot = drawerContainer.querySelector("earth-drawer").shadowRoot,
+			topToolbarRoot = appRoot.querySelector("earth-top-toolbar").shadowRoot;
 		if (pathname.startsWith("/web/search/")) {
 			presenceData.details = "Searching";
 			presenceData.state = drawerRoot
@@ -46,6 +47,17 @@ presence.on("UpdateData", async () => {
 					expandedCartRoot.querySelector<HTMLDivElement>("#known-for")
 						.textContent
 				}`;
+			} else if (
+				topToolbarRoot
+					.querySelector("#navigation-action")
+					.getAttribute("action") ===
+				"USER_ACTION_NAVIGATION_BACK_VOYAGER_FEED_ITEM"
+			) {
+				presenceData.details = "Viewing a Voyager Feed";
+				presenceData.state =
+					topToolbarRoot.querySelector<HTMLHeadingElement>(
+						"toolbar-title"
+					).textContent;
 			} else {
 				presenceData.details = "Looking at a point on the map";
 				presenceData.state = document
