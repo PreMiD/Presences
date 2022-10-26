@@ -36,25 +36,37 @@
 			"id": "images",
 			"title": "Mostrar Imagens (Avatars & Covers)",
 			"icon": "fad fa-images",
-			"value": true
+			"value": true,
+			"if": {
+				"privacy": false
+			}
 		},
 		{
 			"id": "manga",
 			"title": "Mostrar Manga",
 			"icon": "fad fa-book",
-			"value": true
+			"value": true,
+			"if": {
+				"privacy": false
+			}
 		},
 		{
 			"id": "chapter",
 			"title": "Mostrar Capítulo",
 			"icon": "fad fa-clone",
-			"value": true
+			"value": true,
+			"if": {
+				"privacy": false
+			}
 		},
 		{
 			"id": "user",
 			"title": "Mostrar Usuário",
 			"icon": "fad fa-user",
-			"value": true
+			"value": true,
+			"if": {
+				"privacy": false
+			}
 		},
 		{
 			"id": "timestamp",
@@ -66,7 +78,10 @@
 			"id": "adult",
 			"title": "Mostrar NSFW (Nome)",
 			"icon": "fad fa-exclamation-triangle",
-			"value": false
+			"value": false,
+			"if": {
+				"privacy": false
+			}
 		}
 	]
 }
