@@ -15,7 +15,11 @@
 	"thumbnail": "https://i.imgur.com/ttxjIJA.png",
 	"color": "#1a2c3a",
 	"category": "games",
-	"tags": ["stake", "casino", "nsfw"],
+	"tags": [
+		"stake",
+		"casino",
+		"nsfw"
+	],
 	"settings": [
 		{
 			"id": "showBal",

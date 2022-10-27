@@ -25,32 +25,38 @@ presence.on("UpdateData", async () => {
 		title = document.querySelector(
 			"#g_player > div.play > div.j-flag.words > a"
 		).textContent;
-		songPath = document.querySelector(
-			"#g_player > div.play > div.j-flag.words > a"
-		).getAttribute("href");
+		songPath = document
+			.querySelector("#g_player > div.play > div.j-flag.words > a")
+			.getAttribute("href");
 		author = document.querySelector(
 			"#g_player > div.play > div.j-flag.words > span > span"
 		).textContent;
-		audioTime = presence.timestampFromFormat((document.querySelector(
-			"#g_player > div.play > div.m-pbar > span > em"
-		).textContent)) as unknown as number;
-		audioDuration = presence.timestampFromFormat(audioTimeLeft
-			.replace(/(.*)(?=\/)/, "")
-			.replace("/ ", "")) as unknown as number;
+		audioTime = presence.timestampFromFormat(
+			document.querySelector("#g_player > div.play > div.m-pbar > span > em")
+				.textContent
+		) as unknown as number;
+		audioDuration = presence.timestampFromFormat(
+			audioTimeLeft.replace(/(.*)(?=\/)/, "").replace("/ ", "")
+		) as unknown as number;
 
-		const [startTimestamp, endTimestamp] = presence.getTimestamps(audioTime, audioDuration),
+		const [startTimestamp, endTimestamp] = presence.getTimestamps(
+				audioTime,
+				audioDuration
+			),
 			presenceData: PresenceData = {
 				details: title,
 				state: author,
 				largeImageKey: "logo",
 				smallImageKey: paused ? "pause" : "play",
 				smallImageText: paused ? (await strings).pause : (await strings).play,
-				startTimestamp: startTimestamp,
-				endTimestamp: endTimestamp,
-				buttons: [{
-					label: (await strings).listen,
-					url: `https://music.163.com/#${songPath}`,
-				}]
+				startTimestamp,
+				endTimestamp,
+				buttons: [
+					{
+						label: (await strings).listen,
+						url: `https://music.163.com/#${songPath}`,
+					},
+				],
 			};
 
 		if (paused) {
