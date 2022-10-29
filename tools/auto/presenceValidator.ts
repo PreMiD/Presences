@@ -98,7 +98,7 @@ for (const presence of changedPresences) {
 
 	//#region Version bump Check
 	if (storePresence) {
-		if (compare(metadata.version, storePresence.metadata.version) <= 0)
+		if (compare(metadata.version, storePresence.metadata.version) <= 0) {
 			errors.push({
 				presence,
 				message: "Version has not been bumped",
@@ -107,7 +107,8 @@ for (const presence of changedPresences) {
 					startLine: getLine("version"),
 				},
 			});
-	} else if (metadata.version !== "1.0.0")
+		}
+	} else if (metadata.version !== "1.0.0") {
 		errors.push({
 			presence,
 			message: "Initial version must be 1.0.0",
@@ -116,13 +117,14 @@ for (const presence of changedPresences) {
 				startLine: getLine("version"),
 			},
 		});
+	}
 
 	//#endregion
 
 	//#region Presence iFrame Check
 	const iframePath = resolve(presencePath, "iframe.ts");
 
-	if (!existsSync(iframePath) && metadata.iframe)
+	if (!existsSync(iframePath) && metadata.iframe) {
 		errors.push({
 			presence,
 			message: "Presence is missing iframe.ts",
@@ -130,8 +132,9 @@ for (const presence of changedPresences) {
 				file: iframePath,
 			},
 		});
+	}
 
-	if (!metadata.iframe && existsSync(iframePath))
+	if (!metadata.iframe && existsSync(iframePath)) {
 		errors.push({
 			presence,
 			message: "Presence has iframe.ts but metadata.iframe is set to false",
@@ -139,6 +142,7 @@ for (const presence of changedPresences) {
 				file: iframePath,
 			},
 		});
+	}
 
 	//#endregion
 
@@ -146,7 +150,7 @@ for (const presence of changedPresences) {
 	Object.keys(metadata.description).forEach(lang => {
 		const index = validLangs.findIndex((l: string) => l === lang);
 
-		if (!~index)
+		if (!~index) {
 			errors.push({
 				presence,
 				message: `Language ${lang} is not supported`,
@@ -155,6 +159,7 @@ for (const presence of changedPresences) {
 					startLine: getLine("description", lang),
 				},
 			});
+		}
 	});
 	//#endregion
 
@@ -190,10 +195,11 @@ for (const presence of changedPresences) {
 					}
 				}
 			}
-		} else
+		} else {
 			return (
 				AST.children.find(c => c.key.value === line)?.loc?.start?.line ?? 0
 			);
+		}
 	}
 
 	actions.info(chalk.green(`${metadata.service} validated successfully`));

@@ -46,7 +46,7 @@ const compiler = new PresenceCompiler(),
 	}),
 	changedPresenceFolders = getDiff();
 
-if (!process.env.GITHUB_ACTIONS)
+if (!process.env.GITHUB_ACTIONS) {
 	console.log(
 		chalk.yellowBright(
 			`${chalk.bold(
@@ -54,6 +54,7 @@ if (!process.env.GITHUB_ACTIONS)
 			)} This script is only meant to be run on GitHub Actions`
 		)
 	);
+}
 
 try {
 	await client.connect();
@@ -109,9 +110,8 @@ await collection!.bulkWrite(
 
 const deletedPresences = getDiff("removed");
 if (deletedPresences.length) {
-	for (const presence of deletedPresences) {
+	for (const presence of deletedPresences)
 		await collection!.deleteOne({ folderName: presence });
-	}
 
 	actions.info(
 		chalk.redBright(`Deleted ${deletedPresences.length} Presence(s)`)

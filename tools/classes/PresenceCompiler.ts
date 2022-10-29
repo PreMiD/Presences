@@ -149,23 +149,25 @@ export default class PresenceCompiler {
 				}
 			}
 
-			for (const p of presences)
+			for (const p of presences) {
 				if (existsSync(resolve(this.getPresenceFolder(p), "tsconfig.json")))
 					rmSync(resolve(this.getPresenceFolder(p), "tsconfig.json"));
+			}
 
 			errors = errors.filter(e => e.name !== "ModuleBuildError");
 
 			if (!errors.length) {
-				if (!options.transpileOnly)
+				if (!options.transpileOnly) {
 					actions.info(
 						chalk.green(`Successfully compiled ${presences.length} Presence(s)`)
 					);
-				else
+				} else {
 					actions.info(
 						chalk.green(
 							`Successfully transpiled ${presences.length} Presence(s)`
 						)
 					);
+				}
 			}
 
 			return errors;
