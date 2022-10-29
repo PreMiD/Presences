@@ -24,4 +24,4 @@ jobs:
       - name: Update Presences
         env:
           MONGO_URL: ${{ secrets.MONGO_URL }}
-        run: npm run presenceUpdater
+        run: npm run presenceUpdater ${{ github.event_name }}
