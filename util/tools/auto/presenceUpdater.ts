@@ -15,13 +15,17 @@ import { join, normalize, resolve, sep, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { valid } from "semver";
 import { minify as terser } from "terser";
-import typescript from "typescript";
+import typescript, {
+	type ModuleResolutionKind as ModuleResolutionKindType,
+	type ScriptTarget as ScriptTargetType,
+} from "typescript";
 import { type CompilerOptions } from "typescript";
 const {
 	createProgram,
 	flattenDiagnosticMessageText,
 	getPreEmitDiagnostics,
 	ModuleResolutionKind,
+	ScriptTarget,
 } = typescript;
 
 import { isValidJSON, type Metadata, readFile, readJson } from "../util.js";
@@ -37,20 +41,32 @@ let exitCode = 0,
 
 const writeJS = (path: string, code: string): void =>
 		writeFileSync(path, code, { encoding: "utf8", flag: "w" }),
+	convertStringToApiEnum = <T>(
+		value: string | T,
+		object: Record<string, any>
+	): T => {
+		if (typeof value === "string") {
+			return object[
+				Object.keys(object).find(
+					key => key.toLowerCase() === value.toLowerCase()
+				)
+			];
+		} else {
+			return value;
+		}
+	},
 	compileFile = async (
 		fileNames: string[],
 		options: CompilerOptions
 	): Promise<void> => {
-		if (typeof options.moduleResolution === "string") {
-			options.moduleResolution =
-				ModuleResolutionKind[
-					Object.keys(ModuleResolutionKind).find(
-						key =>
-							key.toLowerCase() ===
-							(options.moduleResolution as unknown as string).toLowerCase()
-					) as keyof typeof ModuleResolutionKind
-				];
-		}
+		options.moduleResolution = convertStringToApiEnum<ModuleResolutionKindType>(
+			options.moduleResolution,
+			ModuleResolutionKind
+		);
+		options.target = convertStringToApiEnum<ScriptTargetType>(
+			options.target,
+			ScriptTarget
+		);
 		const program = createProgram(fileNames, options),
 			emitResult = program.emit(),
 			allDiagnostics = getPreEmitDiagnostics(program).concat(
