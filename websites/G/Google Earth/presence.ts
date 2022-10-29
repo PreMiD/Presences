@@ -23,7 +23,6 @@ presence.on("UpdateData", () => {
 			voyager = appRoot.querySelector<HTMLElement>("earth-voyager"),
 			measurementToolRoot =
 				drawerContainer.querySelector("earth-measure-tool").shadowRoot,
-			myPlaces = drawerRoot.querySelector("earth-my-places"),
 			fullscreenBalloon = appRoot.querySelector<HTMLElement>(
 				"earth-balloon-fullscreen"
 			);
@@ -122,7 +121,7 @@ presence.on("UpdateData", () => {
 							.shadowRoot.querySelector("#projects")
 							.getAttribute("active") === ""
 					) {
-						const root = myPlaces.shadowRoot,
+						const root = drawerRoot.querySelector("earth-my-places").shadowRoot,
 							projectPage = root.querySelector("earth-document-view"),
 							propertyEditor = root.querySelector("earth-property-editor");
 						if (projectPage.getAttribute("hidden") !== "true") {
