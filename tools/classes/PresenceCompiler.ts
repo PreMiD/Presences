@@ -1,8 +1,8 @@
 import { execSync } from "node:child_process";
 import { existsSync, rmSync, writeFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import { basename, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createRequire } from "node:module";
 
 import actions from "@actions/core";
 import chalk from "chalk";
