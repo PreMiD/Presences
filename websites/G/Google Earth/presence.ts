@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", async () => {
+presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/bsN9g4H.png",
 			startTimestamp: browsingTimestamp,
@@ -23,8 +23,17 @@ presence.on("UpdateData", async () => {
 			voyager = appRoot.querySelector<HTMLElement>("earth-voyager"),
 			measurementToolRoot =
 				drawerContainer.querySelector("earth-measure-tool").shadowRoot,
-			myPlaces = drawerRoot.querySelector("earth-my-places");
-		if (pathname.startsWith("/web/search/")) {
+			myPlaces = drawerRoot.querySelector("earth-my-places"),
+			fullscreenBalloon = appRoot.querySelector<HTMLElement>(
+				"earth-balloon-fullscreen"
+			);
+		if (
+			pathname.startsWith("/web/search/") &&
+			appRoot
+				.querySelector("earth-toolbar")
+				.shadowRoot.querySelector("#search")
+				.getAttribute("active") === ""
+		) {
 			presenceData.details = "Searching";
 			presenceData.state = drawerRoot
 				.querySelector("earth-search")
@@ -61,9 +70,8 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Viewing a Voyager Feed";
 					presenceData.state =
 						topToolbarRoot.querySelector<HTMLHeadingElement>(
-							"toolbar-title"
+							"#toolbar-title"
 						).textContent;
-
 					break;
 				}
 				case "USER_ACTION_NAVIGATION_BACK_PLAY_MODE": {
@@ -72,7 +80,6 @@ presence.on("UpdateData", async () => {
 						topToolbarRoot.querySelector<HTMLHeadingElement>(
 							"#project-title"
 						).textContent;
-
 					break;
 				}
 				case "USER_ACTION_NAVIGATION_BACK_STREET_VIEW": {
@@ -80,11 +87,10 @@ presence.on("UpdateData", async () => {
 					presenceData.state = topToolbarRoot
 						.querySelector("app-toolbar")
 						.getAttribute("aria-label");
-
 					break;
 				}
 				default:
-					if (imageLightBox.style.display !== "none") {
+					if (imageLightBox && imageLightBox.style.display !== "none") {
 						presenceData.details = "Viewing a photo";
 						presenceData.largeImageKey = imageLightBox.shadowRoot
 							.querySelector("#image")
@@ -96,8 +102,8 @@ presence.on("UpdateData", async () => {
 					)
 						presenceData.details = "Browsing Voyager";
 					else if (
-						appRoot.querySelector<HTMLElement>("earth-balloon-fullscreen").style
-							.display !== "none"
+						fullscreenBalloon &&
+						fullscreenBalloon.style.display !== "none"
 					)
 						presenceData.details = "Preparing Voyager";
 					else if (
@@ -110,17 +116,22 @@ presence.on("UpdateData", async () => {
 							measurementToolRoot.querySelector<HTMLSpanElement>(
 								"#formatted-distance"
 							).textContent;
-					} else if (getComputedStyle(myPlaces).display !== "none") {
+					} else if (
+						appRoot
+							.querySelector("earth-toolbar")
+							.shadowRoot.querySelector("#projects")
+							.getAttribute("active") === ""
+					) {
 						const root = myPlaces.shadowRoot,
 							projectPage = root.querySelector("earth-document-view"),
 							propertyEditor = root.querySelector("earth-property-editor");
-						if (projectPage.getAttribute("hidden") === "true") {
+						if (projectPage.getAttribute("hidden") !== "true") {
 							presenceData.details = "Viewing a project";
 							presenceData.state =
 								projectPage.shadowRoot.querySelector<HTMLHeadingElement>(
 									"#title"
 								).textContent;
-						} else if (propertyEditor.getAttribute("hidden") === "true") {
+						} else if (propertyEditor.getAttribute("hidden") !== "true") {
 							presenceData.details = "Adding something to a project";
 							presenceData.state = propertyEditor.shadowRoot
 								.querySelector("#content-panel")
@@ -129,13 +140,17 @@ presence.on("UpdateData", async () => {
 						} else presenceData.details = "Browsing their projects";
 					} else {
 						presenceData.details = "Looking at a point on the map";
-						presenceData.state = document
-							.querySelector<HTMLSpanElement>("#pointer-coordinates")
+						presenceData.state = appRoot
+							.querySelector("earth-view-status")
+							.shadowRoot.querySelector<HTMLSpanElement>("#pointer-coordinates")
 							.textContent.trim();
 					}
 			}
 		}
 	}
 
-	presence.setActivity(presenceData);
+	presence.info(presenceData.details);
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
