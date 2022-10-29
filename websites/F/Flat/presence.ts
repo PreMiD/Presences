@@ -77,7 +77,6 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes("/likes"))
 			presenceData.details = "Viewing a user's liked scores:";
 	}
-	if (presenceData.details || presenceData.state)
-		presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
