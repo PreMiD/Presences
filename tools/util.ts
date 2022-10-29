@@ -1,6 +1,5 @@
 import { execSync } from "node:child_process";
-import { basename, dirname } from "node:path";
-import { extname } from "node:path";
+import { basename, dirname, extname } from "node:path";
 
 import actions from "@actions/core";
 import got from "got";
