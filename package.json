@@ -3,7 +3,6 @@
 	"version": "3.0.0",
 	"author": "Timeraa",
 	"license": "MPL-2.0",
-	"type": "module",
 	"scripts": {
 		"lint": "prettier --write . && eslint --fix .",
 		"lint:ci": "prettier --check . && eslint .",
