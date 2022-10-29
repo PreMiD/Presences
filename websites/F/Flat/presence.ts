@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "flat",
+			largeImageKey: "https://i.imgur.com/pFfJvOZ.png",
 		},
 		{ pathname } = location;
 	if (pathname === "/") presenceData.details = "Viewing the homepage";
@@ -55,9 +55,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing a score:";
 			presenceData.state =
 				document.querySelector(".sv-title > h1")?.textContent;
-			presenceData.smallImageKey = (
-				document.querySelector(".user-pp img") as HTMLImageElement
-			).src;
+			presenceData.smallImageKey =
+				document.querySelector<HTMLImageElement>(".user-pp img").src;
 			presenceData.smallImageText = document.querySelector(".by")?.textContent;
 			if (document.querySelector(".sc-pause"))
 				presenceData.details = "Listening to:";
@@ -71,8 +70,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = name
 			? `${name} (@${pathname.split("/")[1].slice(1)})`
 			: "Unknown user";
-		presenceData.smallImageKey = (
-			document.querySelector<HTMLImageElement>('[data-cy="user-info"] img')
+		presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+			'[data-cy="user-info"] img'
 		)?.src;
 		presenceData.smallImageText = name;
 		if (pathname.includes("/likes"))
