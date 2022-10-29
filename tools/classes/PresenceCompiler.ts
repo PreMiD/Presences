@@ -149,9 +149,11 @@ export default class PresenceCompiler {
 				}
 			}
 
-			for (const p of presences) {
-				if (existsSync(resolve(this.getPresenceFolder(p), "tsconfig.json")))
-					rmSync(resolve(this.getPresenceFolder(p), "tsconfig.json"));
+			for (const presence of presences) {
+				if (
+					existsSync(resolve(this.getPresenceFolder(presence), "tsconfig.json"))
+				)
+					rmSync(resolve(this.getPresenceFolder(presence), "tsconfig.json"));
 			}
 
 			errors = errors.filter(e => e.name !== "ModuleBuildError");
