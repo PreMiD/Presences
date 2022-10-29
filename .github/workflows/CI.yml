@@ -23,6 +23,6 @@ jobs:
       - name: Compile changed files
         run: |
           git config --global core.quotePath false
-          npm run compile ${{ github.event_name }} $GITHUB_HEAD_REF
+          npm run compile ${{ github.event_name }}
       - name: Check Lint
         run: npm run lint:ci
