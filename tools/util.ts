@@ -11,7 +11,7 @@ export function getDiff(
 ): string[] {
 	const commands: Record<ValidEventName, string> = {
 			push: "HEAD HEAD^",
-			pull_request: `origin/main HEAD`,
+			pull_request: `HEAD origin/main`,
 		},
 		eventName = process.argv[2] ? validateArg(process.argv[2]) : "pull_request",
 		changedPresenceFolders = execSync(
