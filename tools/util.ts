@@ -43,8 +43,8 @@ function validateArg(arg: string): ValidEventName {
 export function getFolderLetter(service: string) {
 	const firstLetter = service.at(0)!.toUpperCase();
 
-	if (firstLetter.match(/[A-Z]/)) return firstLetter;
-	if (firstLetter.match(/[0-9]/)) return "0-9";
+	if (/^[a-zA-Z]/g.test(firstLetter)) return firstLetter;
+	if (/^[0-9]/g.test(firstLetter)) return "0-9";
 	return "#";
 }
 

@@ -38,7 +38,7 @@ export default class PresenceCompiler {
 	}
 
 	async compilePresence(
-		presence: string | string[],
+		presences: string | string[],
 		options: {
 			output?: string;
 			transpileOnly?: boolean;
@@ -100,15 +100,15 @@ export default class PresenceCompiler {
 			...this.options?.webpack,
 		};
 
-		if (Array.isArray(presence)) {
+		if (Array.isArray(presences)) {
 			let errors: webpack.WebpackError[] = [];
 
-			actions.info(chalk.yellow(`Compiling ${presence.length} Presence(s)`));
-			for (const p of presence) {
-				const presencePath = this.getPresenceFolder(p);
+			actions.info(chalk.yellow(`Compiling ${presences.length} Presence(s)`));
+			for (const presence of presences) {
+				const presencePath = this.getPresenceFolder(presence);
 
 				writeFileSync(resolve(presencePath, "tsconfig.json"), tsconfig);
-				await this.installPresenceDependencies(p);
+				await this.installPresenceDependencies(presence);
 
 				const job = await new Promise<{
 					error: Error | undefined;
@@ -143,11 +143,13 @@ export default class PresenceCompiler {
 				else {
 					const { service } = require(resolve(presencePath, "metadata.json"));
 
-					actions.info(chalk.green(`Successfully compiled ${service || p}`));
+					actions.info(
+						chalk.green(`Successfully compiled ${service || presence}`)
+					);
 				}
 			}
 
-			for (const p of presence)
+			for (const p of presences)
 				if (existsSync(resolve(this.getPresenceFolder(p), "tsconfig.json")))
 					rmSync(resolve(this.getPresenceFolder(p), "tsconfig.json"));
 
@@ -156,12 +158,12 @@ export default class PresenceCompiler {
 			if (!errors.length) {
 				if (!options.transpileOnly)
 					actions.info(
-						chalk.green(`Successfully compiled ${presence.length} Presence(s)`)
+						chalk.green(`Successfully compiled ${presences.length} Presence(s)`)
 					);
 				else
 					actions.info(
 						chalk.green(
-							`Successfully transpiled ${presence.length} Presence(s)`
+							`Successfully transpiled ${presences.length} Presence(s)`
 						)
 					);
 			}
@@ -169,15 +171,15 @@ export default class PresenceCompiler {
 			return errors;
 		}
 
-		const presencePath = this.getPresenceFolder(presence);
+		const presencePath = this.getPresenceFolder(presences);
 
 		if (!options.output) options.output = presencePath;
 
 		writeFileSync(resolve(presencePath, "tsconfig.json"), tsconfig);
 
-		await this.installPresenceDependencies(presence);
+		await this.installPresenceDependencies(presences);
 
-		actions.info(chalk.yellow(`Compiling ${presence}...`));
+		actions.info(chalk.yellow(`Compiling ${presences}...`));
 		const job = await new Promise<{
 			err: Error | undefined;
 			stats: webpack.Stats | undefined;
@@ -204,8 +206,8 @@ export default class PresenceCompiler {
 
 		if (!job.stats?.compilation.errors.length) {
 			if (!options.transpileOnly)
-				actions.info(chalk.green(`Successfully compiled ${presence}`));
-			else actions.info(chalk.green(`Successfully transpiled ${presence}`));
+				actions.info(chalk.green(`Successfully compiled ${presences}`));
+			else actions.info(chalk.green(`Successfully transpiled ${presences}`));
 		}
 
 		let errors = job.stats?.compilation.errors;

@@ -15,7 +15,5 @@ else {
 	});
 
 	if (errors.length)
-		actions.setFailed(
-			chalk.redBright("Some Presences failed to compile, exiting...")
-		);
+		actions.setFailed("Some Presences failed to compile, exiting...");
 }

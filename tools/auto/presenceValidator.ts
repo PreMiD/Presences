@@ -10,6 +10,7 @@ import { compare } from "semver";
 
 import PresenceCompiler from "../classes/PresenceCompiler.js";
 import { getDiff, getLatestSchema } from "../util.js";
+import chalk from "chalk";
 
 const require = createRequire(import.meta.url),
 	schema = await getLatestSchema(),
@@ -45,8 +46,6 @@ for (const presence of changedPresences) {
 
 	try {
 		metadata = require(resolve(presencePath, "metadata.json"));
-
-		metadata;
 	} catch {
 		errors.push({
 			presence,
@@ -197,7 +196,7 @@ for (const presence of changedPresences) {
 			);
 	}
 
-	actions.info(`${metadata.service} validated successfully`);
+	actions.info(chalk.green(`${metadata.service} validated successfully`));
 }
 
 if (errors.length) {

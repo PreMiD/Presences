@@ -15,7 +15,7 @@ const require = createRequire(import.meta.url);
 
 interface DbData {
 	name: string;
-	githubUri: string;
+	githubURL: string;
 	folderName: string;
 	url: string;
 	metadata: Metadata;
@@ -30,8 +30,18 @@ const rootPath = resolve(
 
 if (!process.env.GITHUB_ACTIONS) config({ path: resolve(rootPath, ".env") });
 
+if (!process.env.MONGO_URL) {
+	actions.setFailed("MONGO_URL is not set");
+	process.exit();
+}
+
+if (!getDiff().length && !getDiff("removed").length) {
+	actions.info(chalk.green("No Presences changed, exiting..."));
+	process.exit();
+}
+
 const compiler = new PresenceCompiler(),
-	client = new MongoClient(process.env.MONGO_URL!, {
+	client = new MongoClient(process.env.MONGO_URL, {
 		appName: "Presence Updater",
 	}),
 	changedPresenceFolders = getDiff();
@@ -45,24 +55,12 @@ if (!process.env.GITHUB_ACTIONS)
 		)
 	);
 
-if (!getDiff().length && !getDiff("removed").length) {
-	actions.info(chalk.green("No Presences changed, exiting..."));
-	process.exit();
-}
-
-if (!process.env.MONGO_URL) {
-	actions.setFailed(chalk.redBright("MONGO_URL is not set"));
-	process.exit();
-}
-
 try {
 	await client.connect();
 
 	actions.info(chalk.green("Connected to MongoDB"));
 } catch (e) {
-	actions.setFailed(
-		chalk.redBright(`Failed to connect to MongoDB ${e.message}`)
-	);
+	actions.setFailed(`Failed to connect to MongoDB ${e.message}`);
 	process.exit();
 }
 
@@ -87,7 +85,7 @@ for (const presenceFolderName of changedPresenceFolders) {
 	dbPresences.push({
 		name: metadata.service,
 		metadata,
-		githubUri: `https://github.com/PreMiD/Presences/tree/main/websites/${getFolderLetter(
+		githubURL: `https://github.com/PreMiD/Presences/tree/main/websites/${getFolderLetter(
 			presenceFolderName
 		)}/${presenceFolderName}`,
 		folderName: presenceFolderName,
@@ -106,7 +104,7 @@ await collection!.bulkWrite(
 		updateOne: {
 			filter: { name: p.name },
 			update: {
-				$set: { ...p },
+				$set: p,
 			},
 			upsert: true,
 		},
