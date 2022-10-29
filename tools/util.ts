@@ -13,24 +13,21 @@ export function getDiff(
 			push: "HEAD HEAD^",
 			pull_request: `HEAD origin/${process.argv[3] ? process.argv[3] : "main"}`,
 		},
-		eventName = process.argv[2] ? validateArg(process.argv[2]) : "pull_request";
-
-	console.log(
-		`git --no-pager diff --name-only --diff-filter=${
-			type === "addedModified" ? "ACMRTU" : type === "removed" ? "D" : "ACMRTUD"
-		} ${commands[eventName]}`
-	);
-
-	const changedPresenceFolders = execSync(
-		`git --no-pager diff --name-only --diff-filter=${
-			type === "addedModified" ? "ACMRTU" : type === "removed" ? "D" : "ACMRTUD"
-		} ${commands[eventName]}`
-	)
-		.toString()
-		.split("\n")
-		.filter(file =>
-			["presence.ts", "iframe.ts", "metadata.json"].includes(basename(file))
-		);
+		eventName = process.argv[2] ? validateArg(process.argv[2]) : "pull_request",
+		changedPresenceFolders = execSync(
+			`git --no-pager diff --name-only --diff-filter=${
+				type === "addedModified"
+					? "ACMRTU"
+					: type === "removed"
+					? "D"
+					: "ACMRTUD"
+			} ${commands[eventName]}`
+		)
+			.toString()
+			.split("\n")
+			.filter(file =>
+				["presence.ts", "iframe.ts", "metadata.json"].includes(basename(file))
+			);
 
 	if (!changedPresenceFolders.length) return [];
 
