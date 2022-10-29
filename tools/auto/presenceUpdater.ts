@@ -3,10 +3,10 @@ import { createRequire } from "node:module";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { MongoClient } from "mongodb";
 import actions from "@actions/core";
 import chalk from "chalk";
 import { config } from "dotenv";
+import { MongoClient } from "mongodb";
 
 import PresenceCompiler, { Metadata } from "../classes/PresenceCompiler.js";
 import { getDiff, getFolderLetter } from "../util.js";
