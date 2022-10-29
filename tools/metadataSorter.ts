@@ -1,5 +1,6 @@
-import { createRequire } from "module";
-import { writeFile } from "fs/promises";
+import { createRequire } from "node:module";
+import { writeFile } from "node:fs/promises";
+
 import glob from "glob";
 
 import { Metadata } from "./classes/PresenceCompiler.js";
