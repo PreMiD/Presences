@@ -71,7 +71,7 @@ export default class PresenceCompiler {
 						options: {
 							transpileOnly: options.transpileOnly,
 							errorFormatter: (error: ErrorInfo) => {
-								actions.error(chalk.redBright(error.content), {
+								actions.error(error.content, {
 									file: error.file,
 									title: `TS ${error.code}`,
 									startLine: error.line,
