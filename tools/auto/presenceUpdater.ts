@@ -15,7 +15,7 @@ const require = createRequire(import.meta.url);
 
 interface DbData {
 	name: string;
-	githubURL: string;
+	githubUrl: string;
 	folderName: string;
 	url: string;
 	metadata: Metadata;
@@ -75,17 +75,13 @@ await compiler.compilePresence(changedPresenceFolders, {
 let dbPresences: DbData[] = [];
 
 for (const presenceFolderName of changedPresenceFolders) {
-	const presenceFolder = compiler.getPresenceFolder(presenceFolderName);
-
-	const metadata = require(resolve(
-		presenceFolder,
-		"metadata.json"
-	)) as Metadata;
+	const presenceFolder = compiler.getPresenceFolder(presenceFolderName),
+		metadata = require(resolve(presenceFolder, "metadata.json")) as Metadata;
 
 	dbPresences.push({
 		name: metadata.service,
 		metadata,
-		githubURL: `https://github.com/PreMiD/Presences/tree/main/websites/${getFolderLetter(
+		githubUrl: `https://github.com/PreMiD/Presences/tree/main/websites/${getFolderLetter(
 			presenceFolderName
 		)}/${presenceFolderName}`,
 		folderName: presenceFolderName,

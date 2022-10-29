@@ -12,6 +12,10 @@ import PresenceCompiler from "../classes/PresenceCompiler.js";
 import { getDiff, getLatestSchema } from "../util.js";
 import chalk from "chalk";
 
+interface SchemaMetadata extends Metadata {
+	$schema: string;
+}
+
 const require = createRequire(import.meta.url),
 	schema = await getLatestSchema(),
 	changedPresences = getDiff(),
@@ -36,10 +40,6 @@ for (const presence of changedPresences) {
 			},
 		});
 		continue;
-	}
-
-	interface SchemaMetadata extends Metadata {
-		$schema: string;
 	}
 
 	let metadata: SchemaMetadata;
