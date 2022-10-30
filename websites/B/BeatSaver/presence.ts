@@ -196,6 +196,19 @@ presence.on("UpdateData", async () => {
 				url: document.location.href,
 			},
 		];
+	} else if (document.location.pathname.includes("/playlists/")) {
+		presenceData.details = "Viewing Playlist";
+		presenceData.state = document.querySelector(".ms-4")?.textContent;
+		presenceData.buttons = [
+			{
+				label: "View Playlist",
+				url: document.location.href,
+			},
+		];
+		if (cover) {
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("img[alt='Cover']")?.src;
+		}
 	} else if (document.location.pathname === "/") {
 		presenceData.details = "Browsing Beatmaps";
 		if (

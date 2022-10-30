@@ -305,7 +305,7 @@ presence.on("UpdateData", async () => {
 				if (presenceData.details.length < 3)
 					presenceData.details = ` ${presenceData.details}`;
 
-				if (presenceData.state.length < 3)
+				if (presenceData.state?.length < 3)
 					presenceData.state = ` ${presenceData.state}`;
 
 				if (showMovie) return presence.setActivity(presenceData);

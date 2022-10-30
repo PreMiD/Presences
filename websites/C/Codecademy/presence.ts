@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "736516965748834336",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	start = Date.now();
 let videoTitle: string,

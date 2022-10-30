@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 				"li.breadcrumb-item.dynamic-name.active"
 			),
 			episode = document.querySelector<HTMLSpanElement>(
-				"span#cm-episode-number"
+				"a.ep-item.active div.ssli-order"
 			);
 		if (title) presenceData.details = title.textContent;
 		if (episode) presenceData.state = `Episode ${episode.textContent}`;

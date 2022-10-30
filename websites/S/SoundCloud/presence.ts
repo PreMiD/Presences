@@ -112,12 +112,13 @@ const statics = {
 
 presence.on("UpdateData", async () => {
 	const path = location.pathname.replace(/\/?$/, "/"),
-		[showBrowsing, showSong, showTimestamps, cover, newLang] =
+		[showBrowsing, showSong, showTimestamps, showCover, showButtons, newLang] =
 			await Promise.all([
 				presence.getSetting<boolean>("browse"),
 				presence.getSetting<boolean>("song"),
 				presence.getSetting<boolean>("timestamp"),
 				presence.getSetting<boolean>("cover"),
+				presence.getSetting<boolean>("buttons"),
 				presence.getSetting<string>("lang").catch(() => "en"),
 			]),
 		playing = Boolean(document.querySelector(".playControls__play.playing"));
@@ -175,7 +176,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
 
-		if (cover) {
+		if (showCover) {
 			presenceData.largeImageKey =
 				document
 					.querySelector<HTMLSpanElement>(
@@ -187,12 +188,14 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = playing ? "play" : "pause";
 		presenceData.smallImageText = strings[playing ? "play" : "pause"];
 
-		presenceData.buttons = [
-			{
-				label: strings.listen,
-				url: `https://soundcloud.com${pathLinkSong}`,
-			},
-		];
+		if (showButtons) {
+			presenceData.buttons = [
+				{
+					label: strings.listen,
+					url: `https://soundcloud.com${pathLinkSong}`,
+				},
+			];
+		}
 	}
 
 	if ((!playing || !showSong) && showBrowsing) {

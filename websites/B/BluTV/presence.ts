@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "664216462038401066",
 	}),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
 	});
 
 function seriesName(name: string): string {
@@ -57,9 +57,8 @@ presence.on("UpdateData", async () => {
 
 	if (data) {
 		if (data.series) {
-			presenceData.details = data.series.name
-				? data.series.name
-				: seriesName(path.split("/")[3].replace(/-/gi, " "));
+			presenceData.details =
+				data.series.name ?? seriesName(path.split("/")[3].replace(/-/gi, " "));
 			presenceData.state = `${data.series.season} | ${data.series.ep}`;
 		} else {
 			presenceData.details = path.startsWith("/canli-yayin")
