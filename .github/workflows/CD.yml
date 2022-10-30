@@ -14,8 +14,6 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Use Node.js 16
         uses: actions/setup-node@v3.5.1
         with:
@@ -26,4 +24,4 @@ jobs:
       - name: Update Presences
         env:
           MONGO_URL: ${{ secrets.MONGO_URL }}
-        run: npm run presenceUpdater ${{ github.event_name }}
+        run: npm run presenceUpdater
