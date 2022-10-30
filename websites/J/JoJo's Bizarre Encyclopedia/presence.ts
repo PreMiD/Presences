@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Browsing category: ${category}`;
 		}
 	}
-	if (!buttons) delete presenceData.buttons;
+	if (!showButtons) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });
 
