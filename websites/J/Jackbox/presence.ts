@@ -1,4 +1,4 @@
-import games from "./games/index.js";
+import games from "./games/index";
 
 const presence = new Presence({
 	clientId: "638118757453004820",

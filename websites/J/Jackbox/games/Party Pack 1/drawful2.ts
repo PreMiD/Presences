@@ -1,7 +1,7 @@
 import {
 	logo as drawfulLogo,
 	getPresenceData as drawfulUpdateData,
-} from "./drawful.js";
+} from "./drawful";
 
 export const name = "Drawful 2";
 export const logo = drawfulLogo;

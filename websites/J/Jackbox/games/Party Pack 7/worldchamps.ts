@@ -1,4 +1,4 @@
-import { uploadFile } from "../../util.js";
+import { uploadFile } from "../../util";
 
 export const name = "Champ'd Up";
 export const logo = "https://i.imgur.com/KnAS7yD.png";

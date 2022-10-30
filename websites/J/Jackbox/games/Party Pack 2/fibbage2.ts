@@ -1,7 +1,7 @@
 import {
 	logo as fibbageLogo,
 	getPresenceData as fibbageDataGetter,
-} from "./fibbage.js";
+} from "./fibbage";
 
 export const name = "Fibbage 2";
 export const logo = fibbageLogo;
