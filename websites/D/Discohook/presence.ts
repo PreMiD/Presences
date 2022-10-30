@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/7JEHmcz.png",
 			startTimestamp: browsingTimestamp,
 		},
 		webhookCount = document.querySelectorAll(".evedhr > .dWrjaT").length,
