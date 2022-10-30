@@ -14,30 +14,11 @@ presence.on("UpdateData", async () => {
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: "hareshi",
+			details: "หน้าแรก",
 			startTimestamp: browsingTimestamp,
-		};
-	if (document.location.hostname === "www.hareshi.net") {
-		switch (pathArray[3]) {
-			case "browse":
-				presenceData.details = "เรียกดู";
-				if (pathArray[4] === "anime") {
-					presenceData.state =
-						document.querySelector("#anipop")?.textContent ?? "ไม่พบข้อมูล";
-				} else {
-					presenceData.state =
-						document.querySelector(
-							"#__layout > div > div > div > div.container > h1"
-						)?.textContent ?? "ไม่พบข้อมูล";
-				}
-				break;
-			case "calendar":
-				presenceData.details = "ตารางออกอากาศ";
-				break;
-			default:
-				presenceData.details = "หน้าแรก";
-				break;
-		}
-	} else if (document.location.hostname === "forum.hareshi.net") {
+		},
+		{ hostname, href, search } = document.location;
+	if (hostname === "forum.hareshi.net") {
 		switch (pathArray[3]) {
 			case "forums":
 				page = "ฟอรั่ม";
@@ -121,7 +102,7 @@ presence.on("UpdateData", async () => {
 		}
 		if (!privacy && pathArray[4] === "find-source") {
 			presenceData.smallImageKey = "reading";
-			switch (document.location.search) {
+			switch (search) {
 				case "?order=reply_count":
 					presenceData.smallImageText = "ยอดนิยม";
 					break;
@@ -149,9 +130,27 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `ดู${page}`,
-					url: document.location.href.replace(/#\d+/, ""),
+					url: href.replace(/#\d+/, ""),
 				},
 			];
+		}
+	} else {
+		switch (pathArray[3]) {
+			case "browse":
+				presenceData.details = "เรียกดู";
+				if (pathArray[4] === "anime") {
+					presenceData.state =
+						document.querySelector("#anipop")?.textContent ?? "ไม่พบข้อมูล";
+				} else {
+					presenceData.state =
+						document.querySelector(
+							"#__layout > div > div > div > div.container > h1"
+						)?.textContent ?? "ไม่พบข้อมูล";
+				}
+				break;
+			case "calendar":
+				presenceData.details = "ตารางออกอากาศ";
+				break;
 		}
 	}
 	if (!timestamps) {

@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "616754182858342426",
+		clientId: "1001112348192423946",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let lastPlaybackState,
@@ -45,7 +45,8 @@ presence.on("UpdateData", async () => {
 			);
 		presenceData.largeImageKey = document
 			.querySelector<HTMLMetaElement>('meta[property="og:image"]')
-			.getAttribute("content");
+			.getAttribute("content")
+			.replace("https:https:", "https:");
 
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused
@@ -111,7 +112,6 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-
 		if (videoTitle) presence.setActivity(presenceData, !video.paused);
 	}
 });

@@ -291,7 +291,7 @@ presence.on("UpdateData", async () => {
 
 				let user = getElement(".home-header-sticky .tw-title");
 				if (user) {
-					const tab = getElement(".tw-c-text-link"),
+					const tab = getElement('a[aria-selected="true"] > div > div > p'),
 						profilePic = document
 							.querySelector<HTMLImageElement>(
 								".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
@@ -319,12 +319,7 @@ presence.on("UpdateData", async () => {
 
 				if (path.includes("/settings/")) {
 					presenceData.details = strings.viewSettings;
-					presenceData.state = getElement(".tw-tab__link--active");
-				}
-
-				if (path.includes("/friends/")) {
-					presenceData.details = strings.viewFriends;
-					presenceData.state = getElement(".tw-tab__link--active");
+					presenceData.state = getElement('a[aria-selected="true"]');
 				}
 
 				let searching = false;
@@ -332,9 +327,8 @@ presence.on("UpdateData", async () => {
 					searching = true;
 
 					presenceData.details = strings.searchingFor;
-					presenceData.state = getElement(
-						".tw-combo-input__input > div > input"
-					);
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("input").value;
 					presenceData.smallImageKey = "search";
 				}
 
@@ -345,10 +339,11 @@ presence.on("UpdateData", async () => {
 					presenceData.details = strings.viewDropsComp;
 
 					let activeDrop = null;
+
 					for (const drop of document.querySelector(
-						".drops-root__content > div:nth-child(5)"
+						".drops-root__content > div:nth-child(4)"
 					).children) {
-						if (!drop.children[1].className.includes("tw-hide"))
+						if (drop.children[0].children[0].ariaExpanded === "true")
 							activeDrop = `${drop.firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild.children[0].textContent} (${drop.firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild.children[1].textContent})`;
 					}
 
@@ -356,44 +351,49 @@ presence.on("UpdateData", async () => {
 				}
 
 				if (path.includes("/subscriptions/")) {
-					const tab = getElement(".tw-tab__link--active");
+					const tab = getElement(
+						'li:not([data-a-target="paid"]) > button[aria-selected="true"]'
+					);
 
 					presenceData.details = strings.subs;
-					if (!tab.includes("Your"))
-						presenceData.state = tab.replace("Subscriptions", "");
+					if (tab)
+						presenceData.state = tab.replace(/(Subscriptions|Abonnements)/, "");
 				}
 
 				if (path.includes("/wallet/")) {
-					const tab = getElement(".tw-c-text-link");
+					const tab = getElement(
+						'li:not([data-index="0"]) > button[aria-selected="true"] > div > div > p'
+					);
 
 					presenceData.details = strings.viewWallet;
-					if (!tab.includes("Wallet")) presenceData.state = tab;
+					if (tab) presenceData.state = tab;
 				}
 
-				if (path.includes("/directory/")) {
-					presenceData.details = strings.browse;
-					presenceData.state = getElement(".tw-c-text-link");
-				}
-
-				if (path.includes("/directory/game/")) {
-					const category = getElement(".directory-header-new__banner-cover h1");
-					presenceData.details = strings.viewCategory;
-					presenceData.state =
-						category && `${category} (${getElement(".tw-c-text-link")})`;
-				}
-
-				if (path.includes("/directory/esports/")) {
-					presenceData.details = strings.viewEsports;
-					presenceData.state = getElement(
-						".esports-directory-single-category-header__info p"
-					);
-				}
-
+				const pathSplit = path.split("/");
 				if (path.includes("/directory/following/")) {
-					const tab = getElement(".tw-c-text-link");
+					const tab = getElement(
+						'li:not([data-index="0"]) > a[aria-selected="true"] > div > div > p'
+					);
 
 					presenceData.details = strings.viewFollow;
-					if (!tab.includes("Overview")) presenceData.state = tab;
+					if (tab) presenceData.state = tab;
+				} else if (path.includes("/directory/esports/")) {
+					presenceData.details = strings.viewEsports;
+					if (pathSplit.length > 4) {
+						presenceData.state = getElement(
+							`label[for="game_selector_${pathSplit[5]}"] > div > div > div.jnFWYC > p`
+						);
+					}
+				} else if (
+					["gaming", "irl", "music", "creative"].includes(pathSplit[2])
+				) {
+					presenceData.details = strings.viewCategory;
+					presenceData.state = getElement("h1.tw-title");
+				} else if (path.includes("/directory/")) {
+					presenceData.details = strings.browse;
+					presenceData.state = getElement(
+						'a[aria-selected="true"] > div > div > p'
+					);
 				}
 
 				if (privacy && searching) {
@@ -466,14 +466,12 @@ presence.on("UpdateData", async () => {
 						presenceData.largeImageKey =
 							profilePic ?? (logoArr[logo] || "twitch");
 					}
-					if (buttons) {
-						presenceData.buttons = [
-							{
-								label: strings.watchStream,
-								url: document.URL.split("?")[0],
-							},
-						];
-					}
+					presenceData.buttons = [
+						{
+							label: strings.watchStream,
+							url: document.URL.split("?")[0],
+						},
+					];
 				}
 
 				if (showVideo && !live) {
@@ -513,14 +511,12 @@ presence.on("UpdateData", async () => {
 					presenceData.startTimestamp = startTimestamp;
 					presenceData.endTimestamp = endTimestamp;
 
-					if (buttons) {
-						presenceData.buttons = [
-							{
-								label: strings.watchVideo,
-								url: document.URL.split("?")[0],
-							},
-						];
-					}
+					presenceData.buttons = [
+						{
+							label: strings.watchVideo,
+							url: document.URL.split("?")[0],
+						},
+					];
 				}
 
 				if (((showLive && live) || (showVideo && !live)) && video.paused) {
@@ -908,12 +904,12 @@ presence.on("UpdateData", async () => {
 		// No default
 	}
 
-	if (presenceData.details) {
-		if (!showTimestamps) {
-			delete presenceData.startTimestamp;
-			delete presenceData.endTimestamp;
-		}
+	if (!showTimestamps) {
+		delete presenceData.startTimestamp;
+		delete presenceData.endTimestamp;
+	}
+	if (privacy || !buttons) delete presenceData.buttons;
 
-		presence.setActivity(presenceData);
-	} else presence.setActivity();
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

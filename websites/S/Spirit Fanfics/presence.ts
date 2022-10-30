@@ -3,9 +3,9 @@ const presence = new Presence({
 	}),
 	{ pathname } = window.location,
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
-		searching: "presence.activity.searching",
-		reading: "presence.activity.reading",
+		browsing: "general.browsing",
+		searching: "general.searching",
+		reading: "general.reading",
 	});
 
 presence.on("UpdateData", async () => {

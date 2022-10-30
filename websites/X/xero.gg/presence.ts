@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "775372570563182592",
 	}),
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
+		browsing: "general.browsing",
 	});
 
 function getTimeStamp() {

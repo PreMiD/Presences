@@ -12,12 +12,13 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const settings = await getSettings(),
 		typing = document.querySelector(
-			"div#main footer div[contenteditable=true].copyable-text"
+			'span[class="selectable-text copyable-text"]'
 		);
 
 	let name =
 		settings.showRecipient &&
-		document.querySelector("div#main header span[title]")?.textContent;
+		document.querySelector('[data-testid="conversation-info-header"]')
+			.firstChild.firstChild?.textContent;
 
 	if (
 		settings.showNumbers === false &&
@@ -26,15 +27,26 @@ presence.on("UpdateData", async () => {
 	)
 		name = null;
 
-	if (!name && !typing) return presence.setActivity();
-	else {
+	if (!name && !typing) {
+		if (!document.querySelector('[data-testid="conversation-info-header"]')) {
+			presence.setActivity({
+				largeImageKey: "waweb-logo",
+				details: "Browsing...",
+				startTimestamp: Math.floor(Date.now() / 1000),
+			});
+		} else {
+			presence.setActivity({
+				largeImageKey: "waweb-logo",
+				details: "Texting with someone",
+				state: "Just reading...",
+				startTimestamp: Math.floor(Date.now() / 1000),
+			});
+		}
+	} else {
 		presence.setActivity({
 			largeImageKey: "waweb-logo",
 			details: `Texting with ${name || "someone"}`,
-			state:
-				(typing?.textContent && "Typing...") ||
-				(typing === null && "No type permission.") ||
-				"Just waiting...",
+			state: (typing?.textContent && "Typing...") || "Just reading...",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}

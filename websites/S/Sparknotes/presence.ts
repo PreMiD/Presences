@@ -187,10 +187,11 @@ presence.on("UpdateData", async () => {
 							);
 							presenceData.startTimestamp = browsingTimestamp;
 							presenceData.details = `Viewing: ${title.textContent}`;
-							titlePage = document.querySelector(
-								"body > header.interior-header > div > div.interior-header__title > div"
-							);
-							if (titlePage) presenceData.state = titlePage.textContent;
+							presenceData.state = `${document
+								.querySelector(".interior-header__title__umbrella-label")
+								.textContent.trim()} ${document
+								.querySelector(".interior-header__title__text__pagetitle")
+								.textContent.trim()}`;
 						} else if (path === "/login/") {
 							presenceData.startTimestamp = browsingTimestamp;
 							presenceData.details = "Login Unavailable";

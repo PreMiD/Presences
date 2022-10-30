@@ -1,8 +1,0 @@
-websites/** @PreMiD/presence-verifiers
-@types/** @PreMiD/administrators @PreMiD/presence-verifiers
-yarn.lock @PreMiD/administrators @PreMiD/presence-verifiers
-.eslintrc.json @PreMiD/administrators @PreMiD/presence-verifiers
-.github/CODEOWNERS @PreMiD/administrators
-.github/CONTRIBUTING.md @PreMiD/administrators @PreMiD/presence-verifiers
-util/tools/translator.ts @PreMiD/presence-verifiers
-util/tools/auto/** @PreMiD/presence-verifiers

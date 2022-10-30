@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 
 		return presence.setActivity({
 			details: "Editing/Writing How to",
-			state: `Topic: ${newTopic ? newTopic : "Unknown."} `,
+			state: `Topic: ${newTopic ?? "Unknown."} `,
 			largeImageKey: "banner",
 			smallImageKey: "logo",
 			smallImageText: decodeURIComponent(document.location.href),
