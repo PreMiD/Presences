@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "Discohook",
+  "author": {
+    "id": "150987570715688960",
+    "name": "Ninja#4321"
+  },
+  "description": {
+    "en": "Discohook is a free tool that allows you to personalise your server to make your server stand out from the crowd."
+  },
+  "url": "discohook.org",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/mQ5aH7h.png",
+  "thumbnail": "https://i.imgur.com/vsluUzl.png",
+  "color": "#58b9ff",
+  "tags": [
+    "discord",
+    "webhook",
+    "discohook",
+    "tools"
+  ],
+  "category": "other"
+}
