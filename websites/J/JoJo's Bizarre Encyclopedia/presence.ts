@@ -37,69 +37,57 @@ presence.on("UpdateData", async () => {
 			if (search?.length > 0) presenceData.state = `Searching "${search}"`;
 			else if (action === "history") {
 				presenceData.state = `Viewing history: ${title}`;
-				if (showButtons) {
-					presenceData.buttons = [
-						{
-							label: "View Page",
-							url: `${origin}/${titleToUrl(title)}`,
-						},
-					];
-				}
-			} else if (action === "purge") {
-				presenceData.state = `Purging: ${title}`;
-				if (showButtons) {
-					presenceData.buttons = [
-						{
-							label: "View Page",
-							url: `${origin}/${titleToUrl(title)}`,
-						},
-					];
-				}
-			}
-		} else if (pathname.toLowerCase().startsWith("/user:")) {
-			presenceData.state = `Viewing User: ${pathname.match(/\/user:(.*)/i)[1]}`;
-			if (showButtons) {
 				presenceData.buttons = [
 					{
-						label: "View User",
-						url: href,
+						label: "View Page",
+						url: `${origin}/${titleToUrl(title)}`,
+					},
+				];
+			} else if (action === "purge") {
+				presenceData.state = `Purging: ${title}`;
+				presenceData.buttons = [
+					{
+						label: "View Page",
+						url: `${origin}/${titleToUrl(title)}`,
 					},
 				];
 			}
+		} else if (pathname.toLowerCase().startsWith("/user:")) {
+			presenceData.state = `Viewing User: ${pathname.match(/\/user:(.*)/i)[1]}`;
+			presenceData.buttons = [
+				{
+					label: "View User",
+					url: href,
+				},
+			];
 		} else if (pathname.toLowerCase().startsWith("/category:")) {
 			presenceData.state = `Viewing Category: ${urlToTitle(
 				pathname.match(/\/category:(.*)/i)[1]
 			)}`;
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "View Category",
-						url: href,
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View Category",
+					url: href,
+				},
+			];
 		} else if (pathname.toLowerCase().startsWith("/file:")) {
 			presenceData.state = `Viewing File: ${pathname.match(/\/file:(.*)/i)[1]}`;
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "View File",
-						url: href,
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View File",
+					url: href,
+				},
+			];
 		} else if (pathname.toLowerCase().startsWith("/special:")) {
 			if (pathname.toLowerCase().startsWith("/special:movepage/")) {
 				const title = urlToTitle(pathname.substring(18));
 				presenceData.state = `Moving: ${title}`;
-				if (showButtons) {
-					presenceData.buttons = [
-						{
-							label: "View Page",
-							url: `${origin}/${titleToUrl(title)}`,
-						},
-					];
-				}
+				presenceData.buttons = [
+					{
+						label: "View Page",
+						url: `${origin}/${titleToUrl(title)}`,
+					},
+				];
 			} else if (pathname.toLowerCase().startsWith("/special:notifications"))
 				presenceData.state = "Checking Notifications";
 			else if (pathname.toLowerCase().startsWith("/special:preferences"))
@@ -114,26 +102,22 @@ presence.on("UpdateData", async () => {
 			pathname.toLowerCase().startsWith("/list_of_references_to_jojo")
 		) {
 			presenceData.state = "Browsing JoJo References 👀";
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "Join The Fun!",
-						url: href,
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "Join The Fun!",
+					url: href,
+				},
+			];
 		} else if (pathname.toLowerCase().startsWith("/talk:")) {
 			presenceData.state = `Discussing: ${document
 				.querySelector("#firstHeading")
 				.innerHTML.replace(/^Talk:/, "")}`;
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "Join The Discussion!",
-						url: href,
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "Join The Discussion!",
+					url: href,
+				},
+			];
 		} else {
 			const title = urlToTitle(location.pathname.substring(1));
 
@@ -142,24 +126,20 @@ presence.on("UpdateData", async () => {
 				searchParams.get("veaction") === "edit"
 			) {
 				presenceData.state = `Editing: ${title}`;
-				if (showButtons) {
-					presenceData.buttons = [
-						{
-							label: "View Page",
-							url: `${origin}/${titleToUrl(title)}`,
-						},
-					];
-				}
+				presenceData.buttons = [
+					{
+						label: "View Page",
+						url: `${origin}/${titleToUrl(title)}`,
+					},
+				];
 			} else {
 				presenceData.state = `Reading: ${title}`;
-				if (showButtons) {
-					presenceData.buttons = [
-						{
-							label: "View Page",
-							url: href,
-						},
-					];
-				}
+				presenceData.buttons = [
+					{
+						label: "View Page",
+						url: href,
+					},
+				];
 			}
 		}
 	}
@@ -177,24 +157,20 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Reading ${
 				document.querySelectorAll(".entry-title.entry--item.h2")[0].innerHTML
 			}`;
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "Read Article",
-						url: href,
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "Read Article",
+					url: href,
+				},
+			];
 		} else if (pathname.toLowerCase() === "/fun/jojodle/") {
 			presenceData.state = "Playing JoJodle!";
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "Play Along!",
-						url: href,
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "Play Along!",
+					url: href,
+				},
+			];
 		} else if (pathname.toLowerCase().includes("/category")) {
 			let category = pathname.toLowerCase().match(/^\/category\/(.+)/)[1];
 
@@ -203,6 +179,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Browsing category: ${category}`;
 		}
 	}
+	if (!buttons) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });
 
