@@ -15,10 +15,16 @@ presence.on("UpdateData", async () => {
 	if (document.location.hostname === "dsc.gg") {
 		if (document.location.pathname === "/") {
 			presenceData.state = "🏡 Home";
-			if (document.querySelector("h1.text-5xl")?.textContent === "Search Results") {
-				const searchResult = document.querySelector("input.py-4")?.getAttribute("searching");
+			if (
+				document.querySelector("h1.text-5xl")?.textContent === "Search Results"
+			) {
+				const searchResult = document
+					.querySelector("input.py-4")
+					?.getAttribute("searching");
 				presenceData.details = `🔎 Searching for: ${searchResult}`;
-				presenceData.state = `${document.querySelector("h2.text-lg")?.textContent}`;
+				presenceData.state = `${
+					document.querySelector("h2.text-lg")?.textContent
+				}`;
 				presenceData.smallImageKey = "search";
 			}
 		} else if (document.location.pathname === "/about") {
@@ -42,8 +48,13 @@ presence.on("UpdateData", async () => {
 				case "/dashboard": {
 					presenceData.details = "Viewing ⚙️ dashboard";
 					presenceData.state = "🔗 Links";
-					if (document.querySelector("h1.text-2xl")?.textContent === "Create a new link") {
-						const newLinkName = document.querySelector("input.p-2")?.getAttribute("value");
+					if (
+						document.querySelector("h1.text-2xl")?.textContent ===
+						"Create a new link"
+					) {
+						const newLinkName = document
+							.querySelector("input.p-2")
+							?.getAttribute("value");
 						presenceData.details = "New link creation:";
 						presenceData.state = `${newLinkName || "Loading..."}`;
 					}
