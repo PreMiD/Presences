@@ -4,13 +4,29 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
+	let presenceData: PresenceData = {
+		largeImageKey: "dscgg",
+		details: "Viewing 📰 page:",
+		state: "🛑 Unsupported",
+	};
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
-		presenceData: PresenceData = {
-			largeImageKey: "dscgg",
-			details: "Viewing 📰 page:",
-			state: "🛑 Unsupported",
+		pages: Record<string, PresenceData> = {
+			"/about": {
+				details: "📚 About",
+				buttons: [{ label: "View Page", url: document.location.href }],
+			},
+			"/premium": {
+				details: "💎 Premium",
+				buttons: [{ label: "View Page", url: document.location.href }],
+			},
 		};
+
+	for (const [path, data] of Object.entries(pages)) {
+		if (document.location.pathname.includes(path)) {
+			presenceData = { ...presenceData, ...data };
+		}
+	}
 
 	if (document.location.hostname === "dsc.gg") {
 		if (document.location.pathname === "/") {
@@ -26,22 +42,6 @@ presence.on("UpdateData", async () => {
 				}`;
 				presenceData.smallImageKey = "search";
 			}
-		} else if (document.location.pathname === "/about") {
-			presenceData.state = "📚 About";
-			presenceData.buttons = [
-				{
-					label: "View Page",
-					url: document.location.href,
-				},
-			];
-		} else if (document.location.pathname.includes("/premium")) {
-			presenceData.state = "💎 Premium";
-			presenceData.buttons = [
-				{
-					label: "View Page",
-					url: document.location.href,
-				},
-			];
 		} else {
 			switch (document.location.pathname) {
 				case "/dashboard": {
@@ -70,10 +70,11 @@ presence.on("UpdateData", async () => {
 								url: `https://dsc.gg/${link.split("/")[0]}`,
 							},
 						];
-					} else if (document.location.pathname === "/legal/privacy")
+					} else if (document.location.pathname === "/legal/privacy") {
 						presenceData.state = "📜 Privacy Policy";
-					else if (document.location.pathname === "/legal/tos")
+					} else if (document.location.pathname === "/legal/tos") {
 						presenceData.state = "📖 Terms of Service";
+					}
 			}
 		}
 	} else if (document.location.hostname === "docs.dsc.gg") {
@@ -114,6 +115,9 @@ presence.on("UpdateData", async () => {
 	if (!showButtons) delete presenceData.buttons;
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+	} else {
+		presence.setActivity();
+	}
 });
