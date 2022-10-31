@@ -14,17 +14,17 @@ presence.on("UpdateData", async () => {
 		pages: Record<string, PresenceData> = {
 			"/about": {
 				details: "📚 About",
-				buttons: [{label: "View Page", url: document.location.href}],
+				buttons: [{ label: "View Page", url: document.location.href }],
 			},
 			"/premium": {
 				details: "💎 Premium",
-				buttons: [{label: "View Page", url: document.location.href}],
+				buttons: [{ label: "View Page", url: document.location.href }],
 			},
 		};
 
 	for (const [path, data] of Object.entries(pages)) {
 		if (document.location.pathname.includes(path)) {
-			presenceData = {...presenceData, ...data};
+			presenceData = { ...presenceData, ...data };
 		}
 	}
 
