@@ -2,11 +2,37 @@ const presence = new Presence({
 	clientId: "1034799018980679680",
 });
 
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.watchingVid",
+			pause: "general.paused",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
 let video = {
-	duration: 0,
-	currentTime: 0,
-	paused: true,
-};
+		duration: 0,
+		currentTime: 0,
+		paused: true,
+	},
+	strings: Awaited<ReturnType<typeof getStrings>>;
+
+function textContent(tags: string) {
+	return document.querySelector(tags)?.textContent?.trim();
+}
+
+function pageTitle(string: string) {
+	return document
+		.querySelector<HTMLTitleElement>("title")
+		.textContent.split(string);
+}
+
+enum Assets {
+	Library = "https://i.imgur.com/FzNE1zD.png",
+	Movies = "https://i.imgur.com/EzwByrT.png",
+}
 
 presence.on(
 	"iFrameData",
@@ -24,23 +50,13 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("time"),
 		]),
-		{ hostname, pathname } = document.location,
-		textContent = (tags: string) => {
-			return document.querySelector(tags)?.textContent?.trim();
-		},
-		pageTitle = (string: string) => {
-			return document
-				.querySelector<HTMLTitleElement>("title")
-				.textContent.split(string);
-		},
-		strings = await presence.getStrings({
-			play: "general.watchingVid",
-			pause: "general.paused",
-		});
+		{ hostname, pathname } = document.location;
+
+	if (!strings) strings = await getStrings();
 
 	switch (hostname) {
 		case "www.kinopoisk.ru":
-			presenceData.largeImageKey = "https://i.imgur.com/FzNE1zD.png";
+			presenceData.largeImageKey = Assets.Library;
 			switch (pathname.split("/")[1]) {
 				case "":
 					presenceData.details = "На главной странице";
@@ -165,7 +181,7 @@ presence.on("UpdateData", async () => {
 
 		case "hd.kinopoisk.ru":
 			presenceData.details = "В онлайн-кинотеатре";
-			presenceData.largeImageKey = "https://i.imgur.com/EzwByrT.png";
+			presenceData.largeImageKey = Assets.Movies;
 
 			if (document.querySelector(".FilmContent_wrapper__EicQU")) {
 				presenceData.details = `Смотрит информацию ${textContent(
