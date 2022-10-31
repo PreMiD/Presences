@@ -10,13 +10,15 @@
 		"en": "Videoland. Know what's going on."
 	},
 	"url": [
+		"v2.videoland.com",
+		"www.v2.videoland.com",
 		"videoland.com",
 		"www.videoland.com"
 	],
-	"version": "1.1.0",
-	"logo": "https://i.imgur.com/0cFQK8O.png",
+	"version": "1.2.1",
+	"logo": "https://i.imgur.com/eq7dxH3.png",
 	"thumbnail": "https://i.imgur.com/E9XoF0u.png",
-	"color": "#ff0000",
+	"color": "#FF3746",
 	"category": "videos",
 	"tags": [
 		"nl",

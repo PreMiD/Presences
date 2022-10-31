@@ -1,8 +1,8 @@
 # General files
 .idea
 node_modules
-package-lock.json
-pnpm-lock.yaml
+pnpm-lock.json
+yarn.lock
 .env
 
 # Compiled files
@@ -41,3 +41,6 @@ lerna-debug.log*
 
 # Exception for extension recommendations
 !**/.vscode/extensions.json
+
+# PresenceUpdater
+dist
