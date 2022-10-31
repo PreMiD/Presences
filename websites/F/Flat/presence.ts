@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Contacting support";
 		else {
 			const title = document.querySelector(".page-title > h1")?.textContent;
-			presenceData.details = title ? "Viewing help" : "Viewing help";
+			presenceData.details = "Viewing help";
 			if (title)
 				presenceData.state = title.replace(/^((Flat|Platform) -|Help:) /, "");
 			if (presenceData.state === "Online Music Notation Software")
