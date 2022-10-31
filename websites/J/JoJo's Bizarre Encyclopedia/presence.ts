@@ -6,9 +6,8 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {};
 
 	const showButtons = await presence.getSetting("showButtons"),
-		{ hostname, pathname, origin, href, searchParams } = new URL(
-			window.location.href
-		);
+		{ hostname, pathname, origin, href, search } = document.location,
+		searchParams = new URLSearchParams(search)
 
 	if (hostname === "jojowiki.com") {
 		presenceData = {
