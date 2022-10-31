@@ -20,24 +20,24 @@ presence.on("UpdateData", async () => {
 		};
 
 	for (const [path, data] of Object.entries(pages)) {
-		if (document.location.pathname.includes(path)) 
+		if (document.location.pathname.includes(path))
 			presenceData = { ...presenceData, ...data };
-		
 	}
 
-	if (document.location.pathname === "/") 
+	if (document.location.pathname === "/")
 		presenceData.details = "Viewing home page";
-	 else if (document.location.pathname.includes("/u/")) {
+	else if (document.location.pathname.includes("/u/")) {
 		const username = document.querySelector(
-			"p.text-5xl.text-white"
-		)?.textContent;
-		presenceData.details = "Viewing user:";
-		presenceData.state = `${username || "Unknown"} - ❤️ ${
+				"p.text-5xl.text-white"
+			)?.textContent
+			;
+		presenceData.details = `Viewing user: ${username || "Unknown"}`;
+		presenceData.state = `${document.querySelector("p.mt-3")?.textContent} - ❤️ ${
 			document.querySelector("#likes-count")?.textContent || 0
 		}`;
 		presenceData.buttons = [
 			{
-				label: `View ${username}`,
+				label: `View ${username} Profile`,
 				url: document.location.href,
 			},
 		];
