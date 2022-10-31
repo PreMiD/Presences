@@ -4,11 +4,27 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
+	let presenceData: PresenceData = {
+		largeImageKey: "discordstyle_logo",
+	};
+
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
-		presenceData: PresenceData = {
-			largeImageKey: "discordstyle_logo",
+		pages: Record<string, PresenceData> = {
+			"/bot": {
+				details: "Viewing 🤖 bot page",
+				buttons: [{ label: "View Page", url: document.location.href }],
+			},
+			"/search": {
+				details: "Viewing search page",
+				buttons: [{ label: "View Page", url: document.location.href }],
+			},
 		};
+
+	for (const [path, data] of Object.entries(pages)) {
+		if (document.location.pathname.includes(path))
+			presenceData = { ...presenceData, ...data };
+	}
 
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing home page";
@@ -71,22 +87,6 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Latest",
-				url: document.location.href,
-			},
-		];
-	} else if (document.location.pathname.includes("/search")) {
-		presenceData.details = "Viewing search page";
-		presenceData.buttons = [
-			{
-				label: "View Page",
-				url: document.location.href,
-			},
-		];
-	} else if (document.location.pathname.includes("/bot")) {
-		presenceData.details = "Viewing 🤖 bot page";
-		presenceData.buttons = [
-			{
-				label: "View Page",
 				url: document.location.href,
 			},
 		];
