@@ -4,37 +4,40 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
+	let presenceData: PresenceData = {
+		largeImageKey: "caards_logo",
+		details: "Viewing unsupported page",
+	};
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
-		presenceData: PresenceData = {
-			largeImageKey: "caards_logo",
-			details: "Viewing unsupported page",
+		pages: Record<string, PresenceData> = {
+			"/popular": {
+				details: "Viewing:",
+				state: "Popular caards",
+				buttons: [
+					{ label: "View Popular Caards", url: document.location.href },
+				],
+			},
+			"/feed": { details: "Viewing feed" },
+			"/partners": {
+				details: "Viewing page:",
+				state: "Partners",
+				buttons: [{ label: "View Partners", url: document.location.href }],
+			},
+			"/privacy": { details: "Viewing:", state: "Privacy Policy" },
+			"/tos": { details: "Viewing:", state: "Terms of Service" },
+			"/signup": { details: "Signing up" },
 		};
+
+	for (const [path, data] of Object.entries(pages)) {
+		if (document.location.pathname.includes(path))
+			presenceData = { ...presenceData, ...data };
+	}
 
 	switch (document.location.hostname) {
 		case "www.caards.me": {
 			if (document.location.pathname === "/")
 				presenceData.details = "Viewing home page";
-			else if (document.location.pathname.includes("partners")) {
-				presenceData.details = "Viewing page:";
-				presenceData.state = "Partners";
-				presenceData.buttons = [
-					{
-						label: "View Partners",
-						url: document.location.href,
-					},
-				];
-			} else if (document.location.pathname === "/popular") {
-				presenceData.details = "Viewing:";
-				presenceData.state = "Popular caards";
-				presenceData.buttons = [
-					{
-						label: "View Popular Caards",
-						url: document.location.href,
-					},
-				];
-			} else if (document.location.pathname.includes("feed"))
-				presenceData.details = "Viewing feed";
 			else if (document.location.pathname.includes("/u/")) {
 				presenceData.smallImageKey = "reading";
 				presenceData.details = "Viewing profile:";
@@ -74,10 +77,6 @@ presence.on("UpdateData", async () => {
 				];
 			} else {
 				switch (document.location.pathname) {
-					case "/signup": {
-						presenceData.details = "Signing Up";
-						break;
-					}
 					case "/signin": {
 						const username = document.querySelector("input")?.value;
 						presenceData.details = "Signing In:";
@@ -87,19 +86,6 @@ presence.on("UpdateData", async () => {
 
 						break;
 					}
-					case "/privacy": {
-						presenceData.details = "Viewing:";
-						presenceData.state = "Privacy Policy";
-
-						break;
-					}
-					case "/tos": {
-						presenceData.details = "Viewing:";
-						presenceData.state = "Terms of Service";
-
-						break;
-					}
-					// No default
 				}
 			}
 			break;
@@ -122,7 +108,6 @@ presence.on("UpdateData", async () => {
 
 			break;
 		}
-		// No default
 	}
 
 	if (!showButtons) delete presenceData.buttons;
