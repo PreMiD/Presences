@@ -18,7 +18,6 @@ presence.on("UpdateData", async () => {
 			if (
 				document.querySelector("h1.text-5xl")?.textContent === "Search Results"
 			) {
-				
 				presenceData.details = `🔎 Searching for: ${document
 					.querySelector("input.py-4")
 					?.getAttribute("searching")}`;
@@ -52,11 +51,11 @@ presence.on("UpdateData", async () => {
 						document.querySelector("h1.text-2xl")?.textContent ===
 						"Create a new link"
 					) {
-						
 						presenceData.details = "New link creation:";
-						presenceData.state = `${document
-							.querySelector("input.p-2")
-							?.getAttribute("value") || "Loading..."}`;
+						presenceData.state = `${
+							document.querySelector("input.p-2")?.getAttribute("value") ||
+							"Loading..."
+						}`;
 					}
 					break;
 				}
@@ -71,11 +70,10 @@ presence.on("UpdateData", async () => {
 								url: `https://dsc.gg/${link.split("/")[0]}`,
 							},
 						];
-					} else if (document.location.pathname === "/legal/privacy") 
+					} else if (document.location.pathname === "/legal/privacy")
 						presenceData.state = "📜 Privacy Policy";
-					 else if (document.location.pathname === "/legal/tos") 
+					else if (document.location.pathname === "/legal/tos")
 						presenceData.state = "📖 Terms of Service";
-					
 			}
 		}
 	} else if (document.location.hostname === "docs.dsc.gg") {
@@ -116,9 +114,6 @@ presence.on("UpdateData", async () => {
 	if (!showButtons) delete presenceData.buttons;
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-	if (presenceData.details) 
-		presence.setActivity(presenceData);
-	 else 
-		presence.setActivity();
-	
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
