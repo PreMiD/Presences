@@ -49,24 +49,24 @@ presence.on("UpdateData", async () => {
 	}
 	if (pathname.startsWith("/score/")) {
 		if (pathname.includes("/edit")) {
-			presenceData.details = "Editing a score:";
+			presenceData.details = "Editing a score";
 			presenceData.state = document.querySelector(".title")?.textContent;
 		} else {
-			presenceData.details = "Viewing a score:";
+			presenceData.details = "Viewing a score";
 			presenceData.state =
 				document.querySelector(".sv-title > h1")?.textContent;
 			presenceData.smallImageKey =
 				document.querySelector<HTMLImageElement>(".user-pp img").src;
 			presenceData.smallImageText = document.querySelector(".by")?.textContent;
 			if (document.querySelector(".sc-pause"))
-				presenceData.details = "Listening to:";
+				presenceData.details = "Listening to a score";
 		}
 	}
 	if (pathname.startsWith("/@")) {
 		const name = document.querySelector(
 			'[data-cy="printable-name"]'
 		)?.textContent;
-		presenceData.details = "Viewing a user:";
+		presenceData.details = "Viewing a user";
 		presenceData.state = name
 			? `${name} (@${pathname.split("/")[1].slice(1)})`
 			: "Unknown user";
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 		)?.src;
 		presenceData.smallImageText = name;
 		if (pathname.includes("/likes"))
-			presenceData.details = "Viewing a user's liked scores:";
+			presenceData.details = "Viewing a user's liked scores";
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
