@@ -31,7 +31,7 @@ presence.on("UpdateData", () => {
 			appRoot
 				.querySelector("earth-toolbar")
 				.shadowRoot.querySelector("#search")
-				.getAttribute("active") === ""
+				.hasAttribute("active")
 		) {
 			presenceData.details = "Searching";
 			presenceData.state = drawerRoot
@@ -48,7 +48,7 @@ presence.on("UpdateData", () => {
 			} - ${
 				mainCardRoot.querySelector<HTMLDivElement>("#known-for").textContent
 			}`;
-		} else if (knowledgeCard.getAttribute("expanded") === "") {
+		} else if (knowledgeCard.hasAttribute("expanded")) {
 			const expandedCartRoot = document
 				.querySelector("earth-expanded-card")
 				.shadowRoot.querySelector("app-header-layout")
@@ -96,7 +96,7 @@ presence.on("UpdateData", () => {
 							.shadowRoot.querySelector<HTMLDivElement>("#sizedImgDiv")
 							.style.backgroundImage.match(/url\("(.+)"\)/)[1];
 					} else if (
-						voyager.getAttribute("enabled") === "" &&
+						voyager.hasAttribute("enabled") &&
 						voyager.style.display !== "none"
 					)
 						presenceData.details = "Browsing Voyager";
@@ -119,7 +119,7 @@ presence.on("UpdateData", () => {
 						appRoot
 							.querySelector("earth-toolbar")
 							.shadowRoot.querySelector("#projects")
-							.getAttribute("active") === ""
+							.hasAttribute("active")
 					) {
 						const root = drawerRoot.querySelector("earth-my-places").shadowRoot,
 							projectPage = root.querySelector("earth-document-view"),
