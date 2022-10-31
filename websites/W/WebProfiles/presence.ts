@@ -28,13 +28,12 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing home page";
 	else if (document.location.pathname.includes("/u/")) {
 		const username = document.querySelector(
-				"p.text-5xl.text-white"
-			)?.textContent
-			;
+			"p.text-5xl.text-white"
+		)?.textContent;
 		presenceData.details = `Viewing user: ${username || "Unknown"}`;
-		presenceData.state = `${document.querySelector("p.mt-3")?.textContent} - ❤️ ${
-			document.querySelector("#likes-count")?.textContent || 0
-		}`;
+		presenceData.state = `${
+			document.querySelector("p.mt-3")?.textContent
+		} - ❤️ ${document.querySelector("#likes-count")?.textContent || 0}`;
 		presenceData.buttons = [
 			{
 				label: `View ${username} Profile`,
