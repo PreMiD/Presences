@@ -13,19 +13,14 @@ presence.on("UpdateData", async () => {
 		};
 
 	if (document.location.hostname === "dsc.gg") {
-		if (document.location.pathname === "/") presenceData.state = "🏡 Home";
-		else if (document.location.pathname.includes("/search")) {
-			presenceData.details = "🔎 Searching for:";
-			presenceData.state = `🔗 ${
-				document.querySelector("#searchBar")?.getAttribute("value") || "Nothing"
-			}`;
-			presenceData.smallImageKey = "search";
-			presenceData.buttons = [
-				{
-					label: "View Results",
-					url: document.location.href,
-				},
-			];
+		if (document.location.pathname === "/") {
+			presenceData.state = "🏡 Home";
+			if (document.querySelector("h1.text-5xl")?.textContent === "Search Results") {
+				const searchResult = document.querySelector("input.py-4")?.getAttribute("searching");
+				presenceData.details = `🔎 Searching for: ${searchResult}`;
+				presenceData.state = `${document.querySelector("h2.text-lg")?.textContent}`;
+				presenceData.smallImageKey = "search";
+			}
 		} else if (document.location.pathname === "/about") {
 			presenceData.state = "📚 About";
 			presenceData.buttons = [
@@ -44,51 +39,32 @@ presence.on("UpdateData", async () => {
 			];
 		} else {
 			switch (document.location.pathname) {
-				case "/developers/about": {
-					presenceData.state = "💻 Developer";
-					presenceData.buttons = [
-						{
-							label: "View Page",
-							url: document.location.href,
-						},
-					];
-
-					break;
-				}
-				case "/developers/dashboard": {
-					presenceData.details = "Viewing ⚙️ dashboard";
-					presenceData.state = "🖥️ Developer";
-
-					break;
-				}
 				case "/dashboard": {
 					presenceData.details = "Viewing ⚙️ dashboard";
 					presenceData.state = "🔗 Links";
-
+					if (document.querySelector("h1.text-2xl")?.textContent === "Create a new link") {
+						const newLinkName = document.querySelector("input.p-2")?.getAttribute("value");
+						presenceData.details = "New link creation:";
+						presenceData.state = `${newLinkName || "Loading..."}`;
+					}
 					break;
 				}
 				default:
 					if (document.location.pathname.includes("/dashboard/l/")) {
 						const [, link] = document.location.pathname.split("/dashboard/l/");
-						presenceData.details = `Editing 🔗 ${link} link`;
-						presenceData.state = `🏓 Tab: ${
-							location.href.includes("#tab")
-								? location.href.replace(
-										`https://dsc.gg/dashboard/l/${link}#tab=`,
-										" "
-								  )
-								: "basic"
-						}`;
+						presenceData.details = `Editing 🔗 ${link.split("/")[0]} link`;
+						presenceData.state = `🏓 Tab: ${link.split("/")[1]}`;
 						presenceData.buttons = [
 							{
 								label: "Visit Link",
-								url: `https://dsc.gg/${link}`,
+								url: `https://dsc.gg/${link.split("/")[0]}`,
 							},
 						];
-					} else if (document.location.pathname === "/legal/privacy")
+					} else if (document.location.pathname === "/legal/privacy") {
 						presenceData.state = "📜 Privacy Policy";
-					else if (document.location.pathname === "/legal/tos")
+					} else if (document.location.pathname === "/legal/tos") {
 						presenceData.state = "📖 Terms of Service";
+					}
 			}
 		}
 	} else if (document.location.hostname === "docs.dsc.gg") {
@@ -123,13 +99,15 @@ presence.on("UpdateData", async () => {
 
 				break;
 			}
-			// No default
 		}
 	}
 
 	if (!showButtons) delete presenceData.buttons;
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+	} else {
+		presence.setActivity();
+	}
 });
