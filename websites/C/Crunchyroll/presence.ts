@@ -1,7 +1,6 @@
 const presence = new Presence({
-		clientId: "608065709741965327",
-	}),
-	logo = "https://i.imgur.com/8CpYMrh.png";
+	clientId: "608065709741965327",
+});
 
 async function getStrings() {
 	return presence.getStrings(
@@ -10,12 +9,15 @@ async function getStrings() {
 			pause: "general.paused",
 			browse: "general.browsing",
 			reading: "general.reading",
-			viewManga: "general.viewManga",
 			viewPage: "general.viewPage",
-			watchEpisode: "general.buttonViewEpisode",
+			viewManga: "general.viewManga",
 			viewSeries: "general.buttonViewSeries",
-			manga: "general.manga",
+			watchEpisode: "general.buttonViewEpisode",
+			readingArticle: "general.readingArticle",
+			viewCategory: "general.viewCategory",
 			chapter: "general.chapter",
+			search: "general.search",
+			manga: "general.manga",
 			page: "general.page",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
@@ -47,6 +49,14 @@ interface iFrameData {
 	};
 }
 
+enum Assets {
+	Logo = "https://i.imgur.com/yeWzAvq.png",
+	OpenBook = "https://i.imgur.com/vUGLDRM.png",
+	Pause = "https://i.imgur.com/0A75vqT.png",
+	Play = "https://i.imgur.com/Dj5dekr.png",
+	Search = "https://i.imgur.com/C3CetGw.png",
+}
+
 presence.on("iFrameData", (data: iFrameData) => {
 	playback = data.iFrameVideoData !== null ? true : false;
 
@@ -62,9 +72,9 @@ presence.on("iFrameData", (data: iFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: logo,
+			largeImageKey: Assets.Logo,
 		},
-		{ href, pathname, hostname } = document.location,
+		{ href, pathname } = window.location,
 		[newLang, showCover] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("cover"),
@@ -77,19 +87,21 @@ presence.on("UpdateData", async () => {
 
 	if (pathname.includes("/manga")) {
 		if (pathname.includes("/read")) {
-			const queryTitle: HTMLHeadingElement =
-				document.querySelector(".chapter-header h1");
+			const queryTitle =
+				document.querySelector<HTMLHeadingElement>(".chapter-header h1");
 			presenceData.details = queryTitle.children[0].textContent.trim();
 			presenceData.state = `${
 				strings.reading
 			} ${queryTitle.lastChild.textContent.trim()}`;
 			presenceData.startTimestamp = browsingTimestamp;
-			presenceData.smallImageKey = "book_open";
+			presenceData.smallImageKey = Assets.OpenBook;
 			const pageNumber: string =
-				document.querySelector(".first-page-number").textContent;
+				document.querySelector<HTMLOutputElement>(
+					".first-page-number"
+				).textContent;
 			presenceData.smallImageText = `${strings.page} ${
 				pageNumber === "" ? "1" : pageNumber
-			}/${document.querySelector(".images").children.length}`;
+			}/${document.querySelector<HTMLOListElement>(".images").children.length}`;
 			presenceData.buttons = [
 				{
 					label: `Read ${strings.chapter}`,
@@ -99,7 +111,7 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("/volumes")) {
 			presenceData.details = strings.viewManga;
 			presenceData.state = document
-				.querySelector(".ellipsis")
+				.querySelector<HTMLHeadingElement>(".ellipsis")
 				.textContent.split("Manga > ")[1];
 			presenceData.buttons = [
 				{
@@ -114,35 +126,14 @@ presence.on("UpdateData", async () => {
 			delete presenceData.state;
 			delete presenceData.smallImageKey;
 		}
-	} else {
-		presenceData.details = strings.browse;
-		presenceData.startTimestamp = browsingTimestamp;
-
-		delete presenceData.state;
-		delete presenceData.smallImageKey;
-	}
-
-	if (
+	} else if (
 		iFrameVideo !== false &&
 		!isNaN(duration) &&
-		!pathname.includes("/series")
+		pathname.includes("/watch/")
 	) {
-		let videoTitle, series: HTMLElement, seriesLink, episode;
-		if (hostname.startsWith("beta")) {
-			seriesLink =
-				document.location.origin +
-				document.querySelector(".show-title-link").getAttribute("href");
-			episode = document.querySelector("h1.title").textContent;
-			videoTitle = document.querySelector("a > h4").textContent;
-		} else {
-			series = document.querySelector(".ellipsis .text-link");
-			videoTitle = series.textContent;
-			seriesLink = series.getAttribute("href");
-			episode = `${
-				document.querySelectorAll("#showmedia_about_media h4")[1].textContent
-			} - ${document.querySelector("h4#showmedia_about_name").textContent}`;
-		}
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		const videoTitle =
+			document.querySelector<HTMLHeadingElement>("a > h4").textContent;
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.pause : strings.play;
 		[, presenceData.endTimestamp] = presence.getTimestamps(
 			Math.floor(currentTime),
@@ -150,11 +141,12 @@ presence.on("UpdateData", async () => {
 		);
 
 		presenceData.details = videoTitle ?? "Title not found...";
-		presenceData.state = episode;
+		presenceData.state =
+			document.querySelector<HTMLHeadingElement>("h1.title").textContent;
 
 		presenceData.largeImageKey =
 			document.querySelector<HTMLMetaElement>("[property='og:image']")
-				?.content ?? logo;
+				?.content ?? Assets.Logo;
 
 		if (paused) {
 			delete presenceData.startTimestamp;
@@ -169,25 +161,55 @@ presence.on("UpdateData", async () => {
 				},
 				{
 					label: strings.viewSeries,
-					url: seriesLink,
+					url: document.querySelector<HTMLAnchorElement>(".show-title-link")
+						.href,
 				},
 			];
 		}
 	} else if (pathname.includes("/series")) {
 		presenceData.details = strings.viewPage;
-		presenceData.state = document.querySelector("h1.title").textContent;
+		presenceData.state =
+			document.querySelector<HTMLHeadingElement>("h1.title").textContent;
 		presenceData.largeImageKey =
 			document.querySelector<HTMLMetaElement>("[property='og:image']")
-				?.content ?? logo;
+				?.content ?? Assets.Logo;
 		presenceData.buttons = [
 			{
 				label: strings.viewSeries,
 				url: href,
 			},
 		];
+	} else if (pathname.includes("/search")) {
+		presenceData.details = strings.search;
+		presenceData.state =
+			document.querySelector<HTMLInputElement>(".search-input").value;
+		presenceData.smallImageKey = Assets.Search;
+	} else if (pathname.includes("/simulcasts")) {
+		presenceData.details = strings.viewPage;
+		presenceData.state = `${
+			document.querySelector("h1 + div span").textContent
+		} ${document.querySelector("h1").textContent}`;
+	} else if (pathname.includes("/videos")) {
+		presenceData.details = strings.viewCategory;
+		presenceData.state = document.querySelector("h1").textContent;
+	} else if (/\/anime-.*?\/\d{4}\//.test(pathname)) {
+		presenceData.details = strings.readingArticle;
+		presenceData.state = document.querySelector<HTMLHeadingElement>(
+			".crunchynews-header"
+		).textContent;
+		if (showCover) {
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>(".mug").src;
+		}
+	} else {
+		presenceData.details = strings.browse;
+		presenceData.startTimestamp = browsingTimestamp;
+
+		delete presenceData.state;
+		delete presenceData.smallImageKey;
 	}
 
-	if (!showCover) presenceData.largeImageKey = logo;
+	if (!showCover) presenceData.largeImageKey = Assets.Logo;
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
