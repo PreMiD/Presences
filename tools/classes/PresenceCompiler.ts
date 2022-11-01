@@ -62,6 +62,19 @@ export default class PresenceCompiler {
 						filename: "[name].js",
 				  }
 				: undefined,
+			plugins: [
+				{
+					apply(compiler) {
+						compiler.hooks.emit.tap("PresenceCompiler", compilation => {
+							//* Add empty line after file content to prevent errors from PreMiD
+							for (const file in compilation.assets) {
+								//@ts-expect-error - This is defined. (ConcatSource class)
+								compilation.assets[file].add("\n");
+							}
+						});
+					},
+				},
+			],
 			module: {
 				rules: [
 					{
