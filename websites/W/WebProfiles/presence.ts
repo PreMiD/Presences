@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 			"/discover": { details: "Viewing page...", state: "Discover" },
 			"/@me/settings": { details: "Editing my profile..." },
 			"/login": { details: "Logging in..." },
-			register: { details: "Registering..." },
+			"/register": { details: "Registering..." },
 		};
 
 	for (const [path, data] of Object.entries(pages))
