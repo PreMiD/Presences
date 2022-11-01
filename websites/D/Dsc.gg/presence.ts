@@ -25,9 +25,8 @@ presence.on("UpdateData", async () => {
 			},
 		};
 
-	for (const [path, data] of Object.entries(pages)) 
+	for (const [path, data] of Object.entries(pages))
 		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
-	
 
 	if (host === "dsc.gg") {
 		if (pathname === "/") {
