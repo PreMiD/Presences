@@ -11,6 +11,17 @@ presence.on("UpdateData", async () => {
 		{ pathname, href, hostname } = window.location,
 		pathSplit = pathname.split("/").slice(1);
 
+	function useBlogPostState(namespace: string): void {
+		if (pathSplit[1] === "page" || pathSplit[1] === "") {
+			presenceData.details = `Browsing ${namespace} posts`;
+		} else {
+			presenceData.details = `Reading a ${namespace} post`;
+			presenceData.state = document.querySelector("h1").textContent;
+			presenceData.buttons = [{ label: "Read Post", url: href }];
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(".post-cover").src;
+		}
+	}
+
 	switch (hostname) {
 		case "fly.io":
 		case "www.fly.io": {
@@ -20,9 +31,24 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "blog": {
+					useBlogPostState("blog");
+					break;
+				}
+				case "phoenix-files": {
+					useBlogPostState("Phoenix Files");
+					break;
+				}
+				case "laravel-bytes": {
+					useBlogPostState("Laravel Bytes");
+					break;
+				}
+				case "ruby-dispatch": {
+					useBlogPostState("Ruby Dispatch");
 					break;
 				}
 				case "docs": {
+					presenceData.details = "Reading the documentation";
+					presenceData.state = document.querySelector("h1").textContent;
 					break;
 				}
 				default: {
