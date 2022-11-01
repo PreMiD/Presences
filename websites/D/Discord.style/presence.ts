@@ -9,8 +9,10 @@ presence.on("UpdateData", async () => {
 	};
 
 	const { href, pathname } = document.location,
-		showTimestamp = await presence.getSetting<boolean>("timestamp"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
+		[showTimestamp, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("buttons"),
+		]),
 		pages: Record<string, PresenceData> = {
 			"/bot": {
 				details: "Viewing 🤖 bot page",
