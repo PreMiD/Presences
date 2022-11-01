@@ -9,8 +9,10 @@ presence.on("UpdateData", async () => {
 	};
 
 	const { pathname, href } = document.location,
-		showTimestamp = await presence.getSetting<boolean>("timestamp"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
+		[showTimestamp, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("buttons"),
+		]),
 		pages: Record<string, PresenceData> = {
 			"/about/team": { details: "Viewing page...", state: "Team" },
 			"/about/partners": { details: "Viewing page...", state: "Partners" },
