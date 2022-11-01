@@ -11,24 +11,25 @@ presence.on("UpdateData", async () => {
 	};
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
+		doc = document.location,
 		pages: Record<string, PresenceData> = {
 			"/about": {
 				details: "📚 About",
-				buttons: [{ label: "View Page", url: document.location.href }],
+				buttons: [{ label: "View Page", url: doc.href }],
 			},
 			"/premium": {
 				details: "💎 Premium",
-				buttons: [{ label: "View Page", url: document.location.href }],
+				buttons: [{ label: "View Page", url: doc.href }],
 			},
 		};
 
 	for (const [path, data] of Object.entries(pages)) {
-		if (document.location.pathname.includes(path))
+		if (doc.pathname.includes(path))
 			presenceData = { ...presenceData, ...data };
 	}
 
-	if (document.location.hostname === "dsc.gg") {
-		if (document.location.pathname === "/") {
+	if (doc.hostname === "dsc.gg") {
+		if (doc.pathname === "/") {
 			presenceData.state = "🏡 Home";
 			if (
 				document.querySelector("h1.text-5xl")?.textContent === "Search Results"
@@ -42,7 +43,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "search";
 			}
 		} else {
-			switch (document.location.pathname) {
+			switch (doc.pathname) {
 				case "/dashboard": {
 					presenceData.details = "Viewing ⚙️ dashboard";
 					presenceData.state = "🔗 Links";
@@ -59,8 +60,8 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				default:
-					if (document.location.pathname.includes("/dashboard/l/")) {
-						const [, link] = document.location.pathname.split("/dashboard/l/");
+					if (doc.pathname.includes("/dashboard/l/")) {
+						const [, link] = doc.pathname.split("/dashboard/l/");
 						presenceData.details = `Editing 🔗 ${link.split("/")[0]} link`;
 						presenceData.state = `🏓 Tab: ${link.split("/")[1]}`;
 						presenceData.buttons = [
@@ -72,8 +73,8 @@ presence.on("UpdateData", async () => {
 					}
 			}
 		}
-	} else if (document.location.hostname === "docs.dsc.gg") {
-		switch (document.location.pathname) {
+	} else if (doc.hostname === "docs.dsc.gg") {
+		switch (doc.pathname) {
 			case "/": {
 				presenceData.details = "Viewing 📑 Documentation";
 				presenceData.state = `🌐 Content: ${
