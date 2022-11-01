@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "caards_logo",
+		largeImageKey: "https://i.imgur.com/14BIbky.png",
 		details: "Viewing unsupported page",
 	};
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
