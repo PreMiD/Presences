@@ -91,19 +91,40 @@ presence.on("UpdateData", async () => {
 				case "apps": {
 					const details: Record<string, string> = {
 						"": "Viewing app dashboard",
-						"monitoring": "Viewing app logs",
-						"metrics": "Viewing app metrics",
-						"certificates": "Viewing app certificates",
-						"scale": "Viewing app scaling",
-						"activity": "Viewing app activity",
-						"secrets": "Viewing app secrets",
-						"volumes": "Viewing app volumes",
-						"machines": "Viewing app machines",
-						"settings": "Viewing app settings",
+						monitoring: "Viewing app logs",
+						metrics: "Viewing app metrics",
+						certificates: "Viewing app certificates",
+						scale: "Viewing app scaling",
+						activity: "Viewing app activity",
+						secrets: "Viewing app secrets",
+						volumes: "Viewing app volumes",
+						machines: "Viewing app machines",
+						settings: "Viewing app settings",
 					};
 					presenceData.details = details[pathSplit[2] ?? ""];
 					if (privacyMode) {
-						presenceData.state = document.querySelector('[aria-label="Breadcrumb"] li:nth-child(3)').textContent.trim();
+						presenceData.state = document
+							.querySelector('[aria-label="Breadcrumb"] li:nth-child(3)')
+							.textContent.trim();
+					}
+					break;
+				}
+				case "organizations": {
+					if (pathSplit[1] === "new") {
+						presenceData.details = "Creating an organization";
+					} else {
+						presenceData.details = "Browsing their organizations";
+					}
+					break;
+				}
+				case "launch": {
+					if (pathSplit[1]) {
+						presenceData.details = `Launching a ${
+							document.querySelector("h1 > strong").textContent
+						}`;
+					} else {
+						presenceData.details = "Reading the documentation";
+						presenceData.state = document.querySelector("h1").textContent;
 					}
 					break;
 				}
