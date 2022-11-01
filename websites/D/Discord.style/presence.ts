@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "discordstyle_logo",
+		largeImageKey: "https://i.imgur.com/1wKlRwf.png",
 	};
 
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
