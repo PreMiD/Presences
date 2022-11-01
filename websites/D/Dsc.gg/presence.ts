@@ -9,27 +9,28 @@ presence.on("UpdateData", async () => {
 		details: "Viewing 📰 page:",
 		state: "🛑 Unsupported",
 	};
-	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
-		doc = document.location,
+	const { pathname, href, host } = document.location,
+		[showTimestamp, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("buttons"),
+		]),
 		pages: Record<string, PresenceData> = {
 			"/about": {
 				details: "📚 About",
-				buttons: [{ label: "View Page", url: doc.href }],
+				buttons: [{ label: "View Page", url: href }],
 			},
 			"/premium": {
 				details: "💎 Premium",
-				buttons: [{ label: "View Page", url: doc.href }],
+				buttons: [{ label: "View Page", url: href }],
 			},
 		};
 
-	for (const [path, data] of Object.entries(pages)) {
-		if (doc.pathname.includes(path))
-			presenceData = { ...presenceData, ...data };
-	}
+	for (const [path, data] of Object.entries(pages)) 
+		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	
 
-	if (doc.hostname === "dsc.gg") {
-		if (doc.pathname === "/") {
+	if (host === "dsc.gg") {
+		if (pathname === "/") {
 			presenceData.state = "🏡 Home";
 			if (
 				document.querySelector("h1.text-5xl")?.textContent === "Search Results"
@@ -43,7 +44,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "search";
 			}
 		} else {
-			switch (doc.pathname) {
+			switch (pathname) {
 				case "/dashboard": {
 					presenceData.details = "Viewing ⚙️ dashboard";
 					presenceData.state = "🔗 Links";
@@ -60,8 +61,8 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				default:
-					if (doc.pathname.includes("/dashboard/l/")) {
-						const [, link] = doc.pathname.split("/dashboard/l/");
+					if (pathname.includes("/dashboard/l/")) {
+						const [, link] = pathname.split("/dashboard/l/");
 						presenceData.details = `Editing 🔗 ${link.split("/")[0]} link`;
 						presenceData.state = `🏓 Tab: ${link.split("/")[1]}`;
 						presenceData.buttons = [
@@ -73,8 +74,8 @@ presence.on("UpdateData", async () => {
 					}
 			}
 		}
-	} else if (doc.hostname === "docs.dsc.gg") {
-		switch (doc.pathname) {
+	} else if (host === "docs.dsc.gg") {
+		switch (pathname) {
 			case "/": {
 				presenceData.details = "Viewing 📑 Documentation";
 				presenceData.state = `🌐 Content: ${
