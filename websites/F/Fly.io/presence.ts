@@ -128,6 +128,10 @@ presence.on("UpdateData", async () => {
 					}
 					break;
 				}
+				case "user": {
+					presenceData.details = "Managing their account";
+					break;
+				}
 				default: {
 					presenceData.details = "Browsing";
 					presenceData.state = document.title.match(/^(.*)( · .*?)?$/)[1];
