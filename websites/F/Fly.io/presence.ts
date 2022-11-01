@@ -9,7 +9,8 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, hostname } = window.location,
-		pathSplit = pathname.split("/").slice(1);
+		pathSplit = pathname.split("/").slice(1),
+		privacyMode = await presence.getSetting<boolean>("privacyMode");
 
 	function useBlogPostState(namespace: string): void {
 		if (pathSplit[1] === "page" || pathSplit[1] === "") {
@@ -58,6 +59,51 @@ presence.on("UpdateData", async () => {
 						presenceData.state = document.querySelector("h1").textContent;
 					} else {
 						presenceData.details = "Browsing jobs";
+					}
+					break;
+				}
+				case "dashboard": {
+					presenceData.details = "Using the dashboard";
+					switch (pathSplit[2]) {
+						case "billing": {
+							presenceData.state = "Viewing billing information";
+							break;
+						}
+						case "team": {
+							presenceData.state = "Viewing team members";
+							break;
+						}
+						case "documents": {
+							presenceData.state = "Viewing documents";
+							break;
+						}
+						case "settings": {
+							presenceData.state = "Viewing settings";
+							break;
+						}
+						case "launch": {
+							presenceData.state = "Launching an app";
+							break;
+						}
+					}
+					break;
+				}
+				case "apps": {
+					const details: Record<string, string> = {
+						"": "Viewing app dashboard",
+						"monitoring": "Viewing app logs",
+						"metrics": "Viewing app metrics",
+						"certificates": "Viewing app certificates",
+						"scale": "Viewing app scaling",
+						"activity": "Viewing app activity",
+						"secrets": "Viewing app secrets",
+						"volumes": "Viewing app volumes",
+						"machines": "Viewing app machines",
+						"settings": "Viewing app settings",
+					};
+					presenceData.details = details[pathSplit[2] ?? ""];
+					if (privacyMode) {
+						presenceData.state = document.querySelector('[aria-label="Breadcrumb"] li:nth-child(3)').textContent.trim();
 					}
 					break;
 				}

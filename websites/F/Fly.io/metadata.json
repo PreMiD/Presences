@@ -24,5 +24,12 @@
 		"database",
 		"server",
 		"apps"
+	],
+	"settings": [
+		{
+			"id": "privacyMode",
+			"title": "Privacy Mode",
+			"value": true
+		}
 	]
 }
