@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 						document.querySelector("h1.text-2xl")?.textContent ===
 						"Create a new link"
 					) {
-						presenceData.details = "New link creation:";
+						presenceData.details = "New link creation";
 						presenceData.state = `${
 							document.querySelector("input.p-2")?.getAttribute("value") ||
 							"Loading..."
