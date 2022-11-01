@@ -18,7 +18,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Reading a ${namespace} post`;
 			presenceData.state = document.querySelector("h1").textContent;
 			presenceData.buttons = [{ label: "Read Post", url: href }];
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(".post-cover").src;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>(".post-cover").src;
 		}
 	}
 
@@ -49,6 +50,15 @@ presence.on("UpdateData", async () => {
 				case "docs": {
 					presenceData.details = "Reading the documentation";
 					presenceData.state = document.querySelector("h1").textContent;
+					break;
+				}
+				case "jobs": {
+					if (pathSplit[1]) {
+						presenceData.details = "Viewing a job posting";
+						presenceData.state = document.querySelector("h1").textContent;
+					} else {
+						presenceData.details = "Browsing jobs";
+					}
 					break;
 				}
 				default: {
