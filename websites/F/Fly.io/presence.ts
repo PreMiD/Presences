@@ -13,9 +13,9 @@ presence.on("UpdateData", async () => {
 		privacyMode = await presence.getSetting<boolean>("privacyMode");
 
 	function useBlogPostState(namespace: string): void {
-		if (pathSplit[1] === "page" || pathSplit[1] === "") {
+		if (pathSplit[1] === "page" || pathSplit[1] === "")
 			presenceData.details = `Browsing ${namespace} posts`;
-		} else {
+		else {
 			presenceData.details = `Reading a ${namespace} post`;
 			presenceData.state = document.querySelector("h1").textContent;
 			presenceData.buttons = [{ label: "Read Post", url: href }];
@@ -57,9 +57,7 @@ presence.on("UpdateData", async () => {
 					if (pathSplit[1]) {
 						presenceData.details = "Viewing a job posting";
 						presenceData.state = document.querySelector("h1").textContent;
-					} else {
-						presenceData.details = "Browsing jobs";
-					}
+					} else presenceData.details = "Browsing jobs";
 					break;
 				}
 				case "dashboard": {
@@ -110,11 +108,9 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "organizations": {
-					if (pathSplit[1] === "new") {
+					if (pathSplit[1] === "new")
 						presenceData.details = "Creating an organization";
-					} else {
-						presenceData.details = "Browsing their organizations";
-					}
+					else presenceData.details = "Browsing their organizations";
 					break;
 				}
 				case "launch": {
