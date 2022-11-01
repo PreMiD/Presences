@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "dscgg",
+		largeImageKey: "https://i.imgur.com/6Nl9N2E.jpeg",
 		details: "Viewing 📰 page:",
 		state: "🛑 Unsupported",
 	};
@@ -23,8 +23,9 @@ presence.on("UpdateData", async () => {
 		};
 
 	for (const [path, data] of Object.entries(pages)) {
-		if (document.location.pathname.includes(path))
+		if (document.location.pathname.includes(path)) {
 			presenceData = { ...presenceData, ...data };
+		}
 	}
 
 	if (document.location.hostname === "dsc.gg") {
@@ -69,10 +70,7 @@ presence.on("UpdateData", async () => {
 								url: `https://dsc.gg/${link.split("/")[0]}`,
 							},
 						];
-					} else if (document.location.pathname === "/legal/privacy")
-						presenceData.state = "📜 Privacy Policy";
-					else if (document.location.pathname === "/legal/tos")
-						presenceData.state = "📖 Terms of Service";
+					}
 			}
 		}
 	} else if (document.location.hostname === "docs.dsc.gg") {
@@ -113,6 +111,9 @@ presence.on("UpdateData", async () => {
 	if (!showButtons) delete presenceData.buttons;
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+	} else {
+		presence.setActivity();
+	}
 });
