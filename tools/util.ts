@@ -4,7 +4,7 @@ import { basename, dirname, extname } from "node:path";
 import actions from "@actions/core";
 import got from "got";
 
-export type ValidEventName = "push" | "pull_request";
+export type ValidEventName = "push" | "pull_request" | "uncommitted";
 
 export function getDiff(
 	type: "addedModified" | "removed" | "all" = "addedModified"
@@ -12,6 +12,7 @@ export function getDiff(
 	const commands: Record<ValidEventName, string> = {
 			push: "HEAD HEAD^",
 			pull_request: `HEAD origin/${process.argv[3] ? process.argv[3] : "main"}`,
+			uncommitted: "HEAD",
 		},
 		eventName = process.argv[2] ? validateArg(process.argv[2]) : "pull_request",
 		changedPresenceFolders = execSync(
@@ -35,7 +36,7 @@ export function getDiff(
 }
 
 function validateArg(arg: string): ValidEventName {
-	if (!["push", "pull_request"].includes(arg))
+	if (!["push", "pull_request", "uncommitted"].includes(arg))
 		throw new Error(`CI was not called with a valid event name: ${arg}`);
 	return arg as ValidEventName;
 }
