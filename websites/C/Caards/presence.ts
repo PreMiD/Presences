@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		pages: Record<string, PresenceData> = {
 			"/popular": {
-				details: "Viewing:",
+				details: "Viewing",
 				state: "Popular caards",
 				buttons: [
 					{ label: "View Popular Caards", url: document.location.href },
@@ -20,12 +20,12 @@ presence.on("UpdateData", async () => {
 			},
 			"/feed": { details: "Viewing feed" },
 			"/partners": {
-				details: "Viewing page:",
+				details: "Viewing page",
 				state: "Partners",
 				buttons: [{ label: "View Partners", url: document.location.href }],
 			},
-			"/privacy": { details: "Viewing:", state: "Privacy Policy" },
-			"/tos": { details: "Viewing:", state: "Terms of Service" },
+			"/privacy": { details: "Viewing", state: "Privacy Policy" },
+			"/tos": { details: "Viewing", state: "Terms of Service" },
 			"/signup": { details: "Signing up" },
 		};
 
