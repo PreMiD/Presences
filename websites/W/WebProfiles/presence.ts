@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 		} - ❤️ ${document.querySelector("#likes-count")?.textContent || 0}`;
 		presenceData.buttons = [
 			{
-				label: `View ${username} Profile`,
+				label: `View Profile`,
 				url: document.location.href,
 			},
 		];
