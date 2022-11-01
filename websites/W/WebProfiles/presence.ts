@@ -8,44 +8,40 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "https://i.imgur.com/dPN4dbK.png",
 	};
 
-	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
+	const { pathname, href } = document.location,
+		showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		pages: Record<string, PresenceData> = {
-			"/about/team": { details: "Viewing page:", state: "Team" },
-			"/about/partners": { details: "Viewing page:", state: "Partners" },
-			"/discover": { details: "Viewing page:", state: "Discover" },
-			"/@me/settings": { details: "Editing my profile" },
+			"/about/team": { details: "Viewing page...", state: "Team" },
+			"/about/partners": { details: "Viewing page...", state: "Partners" },
+			"/discover": { details: "Viewing page...", state: "Discover" },
+			"/@me/settings": { details: "Editing my profile..." },
 			"/login": { details: "Logging in..." },
 			register: { details: "Registering..." },
 		};
 
-	for (const [path, data] of Object.entries(pages)) {
-		if (document.location.pathname.includes(path))
-			presenceData = { ...presenceData, ...data };
-	}
+	for (const [path, data] of Object.entries(pages))
+		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
 
-	if (document.location.pathname === "/")
-		presenceData.details = "Viewing home page";
-	else if (document.location.pathname.includes("/u/")) {
-		const username = document.querySelector(
-			"p.text-5xl.text-white"
-		)?.textContent;
-		presenceData.details = `Viewing user: ${username || "Unknown"}`;
+	if (pathname === "/") presenceData.details = "Viewing home page";
+	else if (pathname.includes("/u/")) {
+		presenceData.details = `Viewing user: ${
+			document.querySelector("p.text-5xl.text-white")?.textContent ?? "Unknown"
+		}`;
 		presenceData.state = `${
 			document.querySelector("p.mt-3")?.textContent
 		} - ❤️ ${document.querySelector("#likes-count")?.textContent || 0}`;
 		presenceData.buttons = [
 			{
-				label: `View Profile`,
-				url: document.location.href,
+				label: "View Profile",
+				url: href,
 			},
 		];
-	} else if (document.location.pathname.includes("/search")) {
+	} else if (pathname.includes("/search")) {
 		presenceData.details = "Searching for...";
-		presenceData.state =
-			document.location.href.split("/search/")[1] ?? "Unknown";
+		presenceData.state = href.split("/search/")[1] ?? "Unknown";
 		presenceData.smallImageKey = "search";
-	} else if (document.location.pathname === "/@me") {
+	} else if (pathname === "/@me") {
 		presenceData.details = "Viewing my profile";
 		presenceData.buttons = [
 			{
