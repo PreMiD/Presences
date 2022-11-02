@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
 						settings: "Viewing app settings",
 					};
 					presenceData.details = details[pathSplit[2] ?? ""];
-					if (privacyMode) {
+					if (!privacyMode) {
 						presenceData.state = document
 							.querySelector('[aria-label="Breadcrumb"] li:nth-child(3)')
 							.textContent.trim();
@@ -162,8 +162,9 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document.querySelector<HTMLAnchorElement>(
 						".user-nav > li > a.active"
 					).textContent;
-					presenceData.smallImageKey =
-						document.querySelector<HTMLImageElement>(".avatar").src;
+					presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+						".user-profile-avatar .avatar"
+					).src;
 					break;
 				}
 				case "badges": {
