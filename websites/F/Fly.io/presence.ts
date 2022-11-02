@@ -137,6 +137,65 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "community.fly.io": {
+			presenceData.details = "Browsing community forums";
+			switch (pathSplit[0]) {
+				case "top": {
+					presenceData.state = "Top posts";
+					break;
+				}
+				case "categories": {
+					presenceData.state = "Categories";
+					break;
+				}
+				case "c": {
+					presenceData.details = "Browsing forum category";
+					presenceData.state =
+						document.querySelector<HTMLSpanElement>(
+							".category-name"
+						).textContent;
+					break;
+				}
+				case "u": {
+					presenceData.details = `Viewing ${document
+						.querySelector<HTMLHeadingElement>(".username")
+						.textContent.trim()}'s profile`;
+					presenceData.state = document.querySelector<HTMLAnchorElement>(
+						".user-nav > li > a.active"
+					).textContent;
+					presenceData.smallImageKey =
+						document.querySelector<HTMLImageElement>(".avatar").src;
+					break;
+				}
+				case "badges": {
+					presenceData.details = "Viewing forum badges";
+					if (pathSplit[1])
+						presenceData.state =
+							document.querySelector<HTMLAnchorElement>(
+								".badge-link"
+							).textContent;
+					break;
+				}
+				case "t": {
+					presenceData.details = "Viewing a forum topic";
+					presenceData.state = document
+						.querySelector<HTMLAnchorElement>(".fancy-title")
+						.textContent.trim();
+					presenceData.buttons = [{ label: "View Topic", url: href }];
+					break;
+				}
+				case "tag": {
+					if (pathSplit[1]) {
+						presenceData.details = "Viewing forum posts by tag";
+						presenceData.state = document
+							.querySelector(".tag-drop-header")
+							.textContent.trim();
+					} else presenceData.details = "Browsing forum tags";
+					break;
+				}
+				default: {
+					presenceData.state = document.title.match(/^(.*)( - Fly\.io)?$/)[1];
+				}
+			}
 			break;
 		}
 	}
