@@ -16,17 +16,16 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp,
-	},
-	pathnameArray = document.location.pathname.split("/"),
-	[time, showCover, showButtons] = await Promise.all([
-		presence.getSetting<boolean>("time"),
-		presence.getSetting<boolean>("cover"),
-		presence.getSetting<boolean>("buttons"),
-	]);
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp,
+		},
+		pathnameArray = document.location.pathname.split("/"),
+		[time, showCover, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("time"),
+			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("buttons"),
+		]);
 
-	console.log(pathnameArray);
 	switch (pathnameArray[1]) {
 		case "":
 		case "index":
@@ -34,7 +33,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case "discover":
 		case "search":
-		    presenceData.details = "Recherche de nouveaux animes";
+			presenceData.details = "Recherche de nouveaux animes";
 			break;
 		case "tags": {
 			presenceData.details = "Recherche de nouveaux animes";
@@ -46,21 +45,28 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Parcours les catégories";
 			break;
 		case "anime":
-		    const AnimeName = document.querySelector("div.top h1").textContent.trim();
-		    presenceData.details = `Découvre ${AnimeName}`;
-		    presenceData.largeImageKey = document.querySelector("div.left img").getAttribute("src");
-		    presenceData.buttons = [
-		    	{
-		    		label: "Voir l'animé",
-		    		url: document.location.href
-		    	},
-		    ];
-		    break;
+			presenceData.details = `Découvre ${document
+				.querySelector("div.top h1")
+				.textContent.trim()}`;
+			presenceData.largeImageKey = document
+				.querySelector("div.left img")
+				.getAttribute("src");
+			presenceData.buttons = [
+				{
+					label: "Voir l'animé",
+					url: document.location.href,
+				},
+			];
+			break;
 		case "video": {
-			presenceData.details = `Regarde ${document.getElementById("anime_name").getAttribute("value")}`;
-			presenceData.state = `${document.getElementById("anime_season").getAttribute("value")}, ${
-				document.getElementById("anime_episode").getAttribute("value")
-			}`;
+			presenceData.details = `Regarde ${document
+				.querySelector("#anime_name")
+				.getAttribute("value")}`;
+			presenceData.state = `${document
+				.querySelector("#anime_season")
+				.getAttribute("value")}, ${document
+				.querySelector("#anime_episode")
+				.getAttribute("value")}`;
 
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(video.current, video.duration);
@@ -75,13 +81,15 @@ presence.on("UpdateData", async () => {
 				delete presenceData.endTimestamp;
 			}
 
-			presenceData.largeImageKey = document.querySelector("div.left img").getAttribute("src");
+			presenceData.largeImageKey = document
+				.querySelector("div.left img")
+				.getAttribute("src");
 
 			presenceData.buttons = [
 				{ label: "Voir l'épisode", url: document.location.href },
 				{
 					label: "Voir l'animé",
-					url: "https://oneanime.fr/anime/" + pathnameArray[2]
+					url: `https://oneanime.fr/anime/${pathnameArray[2]}`,
 				},
 			];
 			break;
