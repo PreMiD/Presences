@@ -169,11 +169,12 @@ presence.on("UpdateData", async () => {
 				}
 				case "badges": {
 					presenceData.details = "Viewing forum badges";
-					if (pathSplit[1])
+					if (pathSplit[1]) {
 						presenceData.state =
 							document.querySelector<HTMLAnchorElement>(
 								".badge-link"
 							).textContent;
+					}
 					break;
 				}
 				case "t": {
