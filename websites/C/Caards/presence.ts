@@ -9,8 +9,10 @@ presence.on("UpdateData", async () => {
 		details: "Viewing unsupported page",
 	};
 	const { pathname, href, host } = document.location,
-		showTimestamp = await presence.getSetting<boolean>("timestamp"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
+		[showTimestamp, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("buttons"),
+		]),
 		pages: Record<string, PresenceData> = {
 			"/popular": {
 				details: "Viewing",
