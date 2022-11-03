@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "1036732879725658213",
 });
 
-enum Assets {
+enum Content {
 	friends = "Друзья",
 	friendRequests = "Друзья",
 	pymk = "Друзья",
@@ -51,12 +51,15 @@ function textContent(tags: string) {
 }
 
 function typeContent(string: string) {
-	return Assets[string as keyof typeof Assets];
+	return Content[string as keyof typeof Content];
 }
 
 function getMillisecondsFromString(timeString: string): number {
-	const parsedText = timeString?.split(":");
-	return (Number(parsedText[0]) * 60 + Number(parsedText[1])) * 1000;
+	return (
+		(Number(timeString?.split(":")[0]) * 60 +
+			Number(timeString?.split(":")[1])) *
+		1000
+	);
 }
 
 presence.on(
@@ -69,7 +72,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey: "https://i.imgur.com/Jky2SvM.png",
+			largeImageKey: "https://i.imgur.com/CTUW5vP.png",
 		},
 		[musicMode, privacy, time, logo] = await Promise.all([
 			presence.getSetting<boolean>("musicMode"),
@@ -83,6 +86,10 @@ presence.on("UpdateData", async () => {
 			?.hasAttribute("playing");
 
 	function showMusic() {
+		const timeMusic = document
+			.querySelector<HTMLElement>("wm-player-duration .track .tooltip")
+			?.lastChild?.textContent?.split(" / ");
+
 		presenceData.details = textContent(".mini-player_name");
 		presenceData.state = textContent(".mini-player_artist");
 		presenceData.smallImageKey = playMusic ? "play" : "pause";
@@ -93,10 +100,6 @@ presence.on("UpdateData", async () => {
 				".mini-player_cover-img"
 			)?.src;
 		}
-
-		const timeMusic = document
-			.querySelector<HTMLElement>("wm-player-duration .track .tooltip")
-			?.lastChild?.textContent?.split(" / ");
 
 		if (timeMusic && playMusic) {
 			const startedAt = Date.now() - getMillisecondsFromString(timeMusic[0]);
