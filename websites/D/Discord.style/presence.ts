@@ -20,7 +20,6 @@ presence.on("UpdateData", async () => {
 			},
 			"/search": {
 				details: "Viewing 🔎 search page",
-				buttons: [{ label: "View Page", url: href }],
 			},
 		};
 
