@@ -55,7 +55,7 @@ function typeContent(string: string) {
 	return Assets[string as keyof typeof Assets];
 }
 
-function getMillisecondsFromString(timeString: string): number {
+function getMillisecondsFromString(timeString: string | undefined): number {
 	const parsedText = timeString.split(":");
 	return (Number(parsedText[0]) * 60 + Number(parsedText[1])) * 1000;
 }
@@ -176,7 +176,7 @@ presence.on("UpdateData", async () => {
 			case "notifications":
 				presenceData.details = "Смотрит оповещения";
 				presenceData.state = document.querySelector(
-					".nav-side.__navigation:not(.__user-main) .nav-side_i.__ac .tico"
+					".toolbar-layer_menu .nav-side_i.__ac .tico"
 				)?.lastChild?.textContent;
 				break;
 			case "game":
