@@ -44,8 +44,7 @@ let video = {
 		currentTime: 0,
 		paused: true,
 	},
-	strings: Awaited<ReturnType<typeof getStrings>>,
-	startedAt;
+	strings: Awaited<ReturnType<typeof getStrings>>;
 
 function textContent(tags: string) {
 	return document.querySelector(tags)?.textContent;
@@ -55,10 +54,8 @@ function typeContent(string: string) {
 	return Assets[string as keyof typeof Assets];
 }
 
-function getMillisecondsFromString(
-	timeString: string | null | undefined
-): number {
-	const parsedText = timeString.split(":");
+function getMillisecondsFromString(timeString: string): number {
+	const parsedText = timeString?.split(":");
 	return (Number(parsedText[0]) * 60 + Number(parsedText[1])) * 1000;
 }
 
@@ -88,33 +85,27 @@ presence.on("UpdateData", async () => {
 	function showMusic() {
 		presenceData.details = textContent(".mini-player_name");
 		presenceData.state = textContent(".mini-player_artist");
+		presenceData.smallImageKey = playMusic ? "play" : "pause";
+		presenceData.smallImageText = playMusic ? strings.playMusic : strings.pause;
+
 		if (logo) {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				".mini-player_cover-img"
 			)?.src;
 		}
-		presenceData.smallImageKey = playMusic ? "play" : "pause";
-		presenceData.smallImageText = playMusic ? strings.playMusic : strings.pause;
 
 		if (
 			document.querySelector("wm-player-duration .track .tooltip") &&
 			playMusic
 		) {
-			startedAt =
-				Date.now() -
-				getMillisecondsFromString(
-					document
-						.querySelector<HTMLElement>("wm-player-duration .track .tooltip")
-						?.lastChild?.textContent?.split(" / ")[0]
-				);
+			const timeMusic = document
+					.querySelector<HTMLElement>("wm-player-duration .track .tooltip")
+					?.lastChild?.textContent?.split(" / "),
+				startedAt = Date.now() - getMillisecondsFromString(timeMusic[0]);
+
 			presenceData.startTimestamp = startedAt;
 			presenceData.endTimestamp =
-				startedAt +
-				getMillisecondsFromString(
-					document
-						.querySelector<HTMLElement>("wm-player-duration .track .tooltip")
-						?.lastChild?.textContent?.split(" / ")[1]
-				);
+				startedAt + getMillisecondsFromString(timeMusic[1]);
 		}
 	}
 
@@ -126,8 +117,10 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Слушает музыку";
 				if (!privacy) showMusic();
 				break;
+
 			case "video":
 				presenceData.details = "Смотрит видео";
+
 				if (document.querySelector(".vp-layer")) {
 					presenceData.state = textContent(".vp-layer-info_h");
 					presenceData.smallImageKey = video.paused ? "pause" : "play";
@@ -141,10 +134,12 @@ presence.on("UpdateData", async () => {
 					}
 				}
 				break;
+
 			case "profile":
 				presenceData.details = `Смотрит профиль ${textContent(
 					".__user-profile-name-decorator"
 				)}`;
+
 				if (pathname.split("/")[3]) {
 					if (document.querySelector(".compact-profile")) {
 						presenceData.details = `Смотрит профиль ${
@@ -158,8 +153,10 @@ presence.on("UpdateData", async () => {
 					}
 					presenceData.state = typeContent(pathname.split("/")[3]);
 				}
+
 				if (privacy) presenceData.details = "Смотрит профиль пользователя";
 				break;
+
 			case "feed":
 			case "guests":
 			case "marks":
@@ -175,19 +172,23 @@ presence.on("UpdateData", async () => {
 			case "online":
 				presenceData.details = `Смотрит ${typeContent(pathname.split("/")[1])}`;
 				break;
+
 			case "notifications":
 				presenceData.details = "Смотрит оповещения";
 				presenceData.state = document.querySelector(
 					".toolbar-layer_menu .nav-side_i.__ac .tico"
 				)?.lastChild?.textContent;
 				break;
+
 			case "game":
 				presenceData.details = "Играет в игру";
 				break;
+
 			case "bookmarks":
 				presenceData.details = "Смотрит закладки";
 				presenceData.state = textContent(".nav-side_i.__ac div");
 				break;
+
 			case "settings":
 				presenceData.details = "Настраивает аккаунт";
 				presenceData.state = textContent(".nav-side_i.__ac .tico");
