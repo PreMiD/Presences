@@ -55,7 +55,9 @@ function typeContent(string: string) {
 	return Assets[string as keyof typeof Assets];
 }
 
-function getMillisecondsFromString(timeString: string | undefined): number {
+function getMillisecondsFromString(
+	timeString: string | null | undefined
+): number {
 	const parsedText = timeString.split(":");
 	return (Number(parsedText[0]) * 60 + Number(parsedText[1])) * 1000;
 }
