@@ -56,7 +56,6 @@ function typeContent(string: string) {
 
 function getMillisecondsFromString(timeString: string): number {
 	const parsedText = timeString?.split(":");
-	if (!parsedText) return;
 	return (Number(parsedText[0]) * 60 + Number(parsedText[1])) * 1000;
 }
 
@@ -95,15 +94,12 @@ presence.on("UpdateData", async () => {
 			)?.src;
 		}
 
-		if (
-			document.querySelector("wm-player-duration .track .tooltip") &&
-			playMusic
-		) {
-			const timeMusic = document
-					.querySelector<HTMLElement>("wm-player-duration .track .tooltip")
-					?.lastChild?.textContent?.split(" / "),
-				startedAt = Date.now() - getMillisecondsFromString(timeMusic[0]);
+		const timeMusic = document
+			.querySelector<HTMLElement>("wm-player-duration .track .tooltip")
+			?.lastChild?.textContent?.split(" / ");
 
+		if (timeMusic && playMusic) {
+			const startedAt = Date.now() - getMillisecondsFromString(timeMusic[0]);
 			presenceData.startTimestamp = startedAt;
 			presenceData.endTimestamp =
 				startedAt + getMillisecondsFromString(timeMusic[1]);
