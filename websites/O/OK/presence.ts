@@ -56,6 +56,7 @@ function typeContent(string: string) {
 
 function getMillisecondsFromString(timeString: string): number {
 	const parsedText = timeString?.split(":");
+	if (!parsedText) return;
 	return (Number(parsedText[0]) * 60 + Number(parsedText[1])) * 1000;
 }
 
