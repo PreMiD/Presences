@@ -2,6 +2,13 @@ const presence = new Presence({
 	clientId: "1036732879725658213",
 });
 
+enum Assets {
+	play = "https://i.imgur.com/6s4WyWY.png",
+	pause = "https://i.imgur.com/PrYtpQb.png",
+	reading = "https://i.imgur.com/wPUmqu5.png",
+	view = "https://i.imgur.com/hxvvGUi.png",
+}
+
 enum Content {
 	friends = "Друзья",
 	friendRequests = "Друзья",
@@ -36,6 +43,8 @@ async function getStrings() {
 		playVideo: "general.watchingVid",
 		playMusic: "general.playing",
 		pause: "general.paused",
+		viewing: "general.viewing",
+		reading: "general.reading",
 	});
 }
 
@@ -70,6 +79,7 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
+	if (!strings) strings = await getStrings();
 	const presenceData: PresenceData = {
 			details: "Где-то на сайте",
 			largeImageKey: "https://i.imgur.com/CTUW5vP.png",
@@ -92,7 +102,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = textContent(".mini-player_name");
 		presenceData.state = textContent(".mini-player_artist");
-		presenceData.smallImageKey = playMusic ? "play" : "pause";
+		presenceData.smallImageKey = playMusic ? Assets.play : Assets.pause;
 		presenceData.smallImageText = playMusic ? strings.playMusic : strings.pause;
 
 		if (logo) {
@@ -109,8 +119,6 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (!strings) strings = await getStrings();
-
 	if (!musicMode) {
 		switch (pathname.split("/")[1]) {
 			case "music":
@@ -120,10 +128,14 @@ presence.on("UpdateData", async () => {
 
 			case "video":
 				presenceData.details = "Смотрит видео";
+				presenceData.smallImageKey = Assets.view;
+				presenceData.smallImageText = strings.viewing;
 
 				if (document.querySelector(".vp-layer")) {
 					presenceData.state = textContent(".vp-layer-info_h");
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.pause
+						: Assets.play;
 					presenceData.smallImageText = video.paused
 						? strings.pause
 						: strings.playVideo;
@@ -139,6 +151,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Смотрит профиль ${textContent(
 					".__user-profile-name-decorator"
 				)}`;
+				presenceData.smallImageKey = Assets.view;
+				presenceData.smallImageText = strings.viewing;
 
 				if (pathname.split("/")[3]) {
 					if (document.querySelector(".compact-profile")) {
@@ -157,10 +171,8 @@ presence.on("UpdateData", async () => {
 				if (privacy) presenceData.details = "Смотрит профиль пользователя";
 				break;
 
-			case "feed":
 			case "guests":
 			case "marks":
-			case "messages":
 			case "vitrine":
 			case "gifts":
 			case "discovery":
@@ -171,13 +183,24 @@ presence.on("UpdateData", async () => {
 			case "payments":
 			case "online":
 				presenceData.details = `Смотрит ${typeContent(pathname.split("/")[1])}`;
+				presenceData.smallImageKey = Assets.view;
+				presenceData.smallImageText = strings.viewing;
+				break;
+
+			case "feed":
+			case "messages":
+				presenceData.details = `Читает ${typeContent(pathname.split("/")[1])}`;
+				presenceData.smallImageKey = Assets.reading;
+				presenceData.smallImageText = strings.reading;
 				break;
 
 			case "notifications":
-				presenceData.details = "Смотрит оповещения";
+				presenceData.details = "Читает оповещения";
 				presenceData.state = document.querySelector(
 					".toolbar-layer_menu .nav-side_i.__ac .tico"
 				)?.lastChild?.textContent;
+				presenceData.smallImageKey = Assets.reading;
+				presenceData.smallImageText = strings.reading;
 				break;
 
 			case "game":
@@ -187,6 +210,8 @@ presence.on("UpdateData", async () => {
 			case "bookmarks":
 				presenceData.details = "Смотрит закладки";
 				presenceData.state = textContent(".nav-side_i.__ac div");
+				presenceData.smallImageKey = Assets.view;
+				presenceData.smallImageText = strings.viewing;
 				break;
 
 			case "settings":
