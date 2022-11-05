@@ -7,8 +7,8 @@ presence.on("UpdateData", async () => {
 			.replace("/book/", "")
 			.replace(".html", ""),
 		presenceData: PresenceData = {
-			largeImageKey: "rust-logo-512",
-			smallImageKey: "ferris-512",
+			largeImageKey: "https://i.imgur.com/kTnc40Q.png", // rust logo 512x512
+			smallImageKey: "fhttps://i.imgur.com/B7Rip9I.png", // ferris 512x512
 			smallImageText: "Hi rustaceans!",
 			buttons: [
 				{
