@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 			smallImageText: "Hi rustaceans!",
 			buttons: [
 				{
-					label: "Read the book",
+					label: "Read Book",
 					url: window.location.href,
 				},
 			],
