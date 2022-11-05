@@ -19,4 +19,4 @@ jobs:
       - name: Run Presence Validator
         run: |
           git config --global core.quotePath false
-          npm run presenceValidator ${{ github.event_name }} $GITHUB_BASE_REF
+          npm run presenceValidator ${{ github.event_name }}
