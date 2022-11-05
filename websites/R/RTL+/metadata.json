@@ -27,5 +27,11 @@
 		"now",
 		"tvnow",
 		"rtl"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
 	]
 }
