@@ -35,28 +35,16 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "Viewing e-z.host's features";
 					break;
 
-				case "/privacy":
-					presenceData.state = "Viewing e-z.host's privacy policy";
-					break;
-
-				case "/tos":
-					presenceData.state = "Viewing e-z.host's terms of service";
-					break;
-
-				case "/resetpassword":
-					presenceData.state = "Resetting their password";
-					break;
-
 				case "/reseller":
 					presenceData.state = "Viewing info about e-z.host's reseller";
 					break;
 
 				case "/oliver":
-					presenceData.state = "Looking at pictures of oliver";
+					presenceData.state = "Looking at pictures of Oliver";
 					break;
 
 				case "/uploadsystems":
-					presenceData.state = "Reading about a shit host";
+					presenceData.state = "Reading about a terrible host";
 					break;
 
 				case "/dash":
