@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"id": "534614025271771158",
-		"name": "eli_yya#3893"
+		"name": "eli_yya"
 	},
 	"service": "Rust Lang Book",
 	"description": {
