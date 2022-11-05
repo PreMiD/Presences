@@ -133,12 +133,15 @@ presence.on("UpdateData", async () => {
 
 	if (isNaN(video?.duration)) {
 		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.state =
-			document.querySelector(".ng-tns-c96-53")?.textContent ??
-			document.title
-				.replace("im Online Stream | RTL+", "")
-				.replace("im Online Stream ansehen | RTL+", "")
-				.trim();
+
+		if (pathname !== "/") {
+			presenceData.state =
+				document.querySelector(".ng-tns-c96-53")?.textContent ??
+				document.title
+					.replace("im Online Stream | RTL+", "")
+					.replace("im Online Stream ansehen | RTL+", "")
+					.trim();
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
