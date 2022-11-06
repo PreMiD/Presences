@@ -157,9 +157,8 @@ presence.on("UpdateData", async () => {
 						.split("|")[0] || "Undefined"
 				}`,
 				serverServerName =
-					document
-						.querySelectorAll("title")[0]
-						?.textContent.split("|")[2] || "Undefined",
+					document.querySelectorAll("title")[0]?.textContent.split("|")[2] ||
+					"Undefined",
 				statics: {
 					[name: string]: PresenceData;
 				} = {
