@@ -9,7 +9,6 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/kTnc40Q.png", // rust logo 512x512
 			smallImageKey: "https://i.imgur.com/B7Rip9I.png", // ferris 512x512
-			smallImageText: "Hi rustaceans!",
 			buttons: [
 				{
 					label: "Read Book",
