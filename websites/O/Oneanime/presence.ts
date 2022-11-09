@@ -14,9 +14,16 @@ presence.on(
 	}
 );
 
+enum Assets {
+	Logo = "https://i.imgur.com/C3CetGw.png",
+	Pause = "https://i.imgur.com/0A75vqT.png",
+	Play = "https://i.imgur.com/Dj5dekr.png",
+	Search = "https://i.imgur.com/C3CetGw.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		pathnameArray = document.location.pathname.split("/"),
@@ -71,11 +78,11 @@ presence.on("UpdateData", async () => {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(video.current, video.duration);
 
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Lecture en cours";
 
 			if (video.paused) {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "En pause";
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
@@ -100,7 +107,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (!showCover) presenceData.largeImageKey = "logo";
+	if (!showCover) presenceData.largeImageKey = Assets.Logo;
 	if (!showButtons) delete presenceData.buttons;
 
 	if (presenceData.details) presence.setActivity(presenceData);
