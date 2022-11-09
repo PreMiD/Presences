@@ -5,16 +5,6 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/4hiyxuW.png",
-			buttons: [
-				{
-					label: "Visit Website",
-					url: "https://animeflix.live/",
-				},
-				{
-					label: "Join Discord",
-					url: "https://discord.gg/SKcb2C7HjH",
-				},
-			],
 		},
 		{ pathname } = document.location;
 
