@@ -4,6 +4,18 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	slideshow = presence.createSlideshow();
 
+function getImages() {
+	return [
+		...document.querySelectorAll<HTMLDivElement>(
+			".image-prompt-overlay-container"
+		),
+	].map(container => [
+		container.querySelector<HTMLImageElement>(".generated-image > img").src,
+		container.querySelector<HTMLDivElement>(".image-prompt-overlay")
+			.textContent,
+	]);
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/i6UPLX2.png",
@@ -14,17 +26,31 @@ presence.on("UpdateData", async () => {
 
 	if (pathname === "") {
 	} else if (pathname.startsWith("/history")) {
+		if (showImages) {
+			const images = getImages();
+			if (images.length > 0) {
+				for (let i = 0; i < images.length; i++) {
+					const [image, text] = images[i];
+					slideshow.addSlide(
+						i.toString(),
+						{
+							...presenceData,
+							details: "Viewing history",
+							state: text,
+							largeImageKey: image,
+						},
+						5000
+					);
+				}
+			} else {
+				presenceData.details = "Viewing history";
+			}
+		} else {
+			presenceData.details = "Viewing history";
+		}
 	} else if (pathname.startsWith("/c/")) {
 		if (showImages) {
-			const imageData = [
-				...document.querySelectorAll<HTMLDivElement>(
-					".image-prompt-overlay-container"
-				),
-			].map(container => [
-				container.querySelector<HTMLImageElement>(".generated-image > img").src,
-				container.querySelector<HTMLDivElement>(".image-prompt-overlay")
-					.textContent,
-			]);
+			const imageData = getImages();
 			for (let i = 0; i < imageData.length; i++) {
 				const [image, text] = imageData[i],
 					slide = {
@@ -36,7 +62,10 @@ presence.on("UpdateData", async () => {
 						largeImageKey: image,
 					};
 				if (
-					!document.querySelector<HTMLDivElement>(".collection-layout-private")
+					!document.querySelector<HTMLDivElement>(
+						".collection-layout-private"
+					) &&
+					!pathname.includes("/private")
 				) {
 					slide.buttons = [
 						{
@@ -61,5 +90,12 @@ presence.on("UpdateData", async () => {
 	} else {
 	}
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+		slideshow.deleteAllSlides();
+	} else if (slideshow.getSlides().length > 0) {
+		presence.setActivity(slideshow);
+	} else {
+		presence.setActivity();
+	}
 });
