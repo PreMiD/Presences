@@ -113,6 +113,16 @@ presence.on("UpdateData", async () => {
 			).value;
 		}
 	} else if (pathname.startsWith("/s/")) {
+		presenceData.details = "Viewing an image";
+		presenceData.state = document.querySelector<HTMLHeadingElement>(
+			".gen-detail-caption"
+		).textContent;
+		presenceData.buttons = [{ label: "View Image", url: href }];
+		if (showImages) {
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				".generated-image > img"
+			).src;
+		}
 	} else {
 	}
 
