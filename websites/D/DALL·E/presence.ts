@@ -31,15 +31,12 @@ presence.on("UpdateData", async () => {
 		if (input.value) {
 			presenceData.details = "Crafting a prompt";
 			presenceData.state = input.value;
-		} else {
-			presenceData.details = "Thinking of a prompt";
-		}
+		} else presenceData.details = "Thinking of a prompt";
 	} else if (pathname.startsWith("/history")) {
 		if (showImages) {
 			const images = getListImages();
 			if (images.length > 0) {
-				for (let i = 0; i < images.length; i++) {
-					const [image, text] = images[i];
+				for (const [i, [image, text]] of images.entries()) {
 					slideshow.addSlide(
 						i.toString(),
 						{
@@ -51,25 +48,19 @@ presence.on("UpdateData", async () => {
 						5000
 					);
 				}
-			} else {
-				presenceData.details = "Viewing history";
-			}
-		} else {
-			presenceData.details = "Viewing history";
-		}
+			} else presenceData.details = "Viewing history";
+		} else presenceData.details = "Viewing history";
 	} else if (pathname.startsWith("/c/")) {
 		if (showImages) {
-			const imageData = getListImages();
-			for (let i = 0; i < imageData.length; i++) {
-				const [image, text] = imageData[i],
-					slide = {
-						...presenceData,
-						details: `Viewing collection: ${
-							document.querySelector<HTMLDivElement>("[class*=h3]").textContent
-						}`,
-						state: text,
-						largeImageKey: image,
-					};
+			for (const [i, [image, text]] of getListImages().entries()) {
+				const slide = {
+					...presenceData,
+					details: `Viewing collection: ${
+						document.querySelector<HTMLDivElement>("[class*=h3]").textContent
+					}`,
+					state: text,
+					largeImageKey: image,
+				};
 				if (
 					!document.querySelector<HTMLDivElement>(
 						".collection-layout-private"
@@ -90,11 +81,11 @@ presence.on("UpdateData", async () => {
 			presenceData.state =
 				document.querySelector<HTMLDivElement>("[class*=h3]").textContent;
 		}
-	} else if (pathname.startsWith("/collections")) {
+	} else if (pathname.startsWith("/collections"))
 		presenceData.details = "Viewing collections";
-	} else if (pathname.startsWith("/account")) {
+	else if (pathname.startsWith("/account"))
 		presenceData.details = "Viewing their account";
-	} else if (pathname.startsWith("/e/")) {
+	else if (pathname.startsWith("/e/")) {
 		const input = document.querySelector<HTMLInputElement>(
 			".image-prompt-input"
 		).value;
@@ -108,14 +99,14 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Generating images";
 				presenceData.state = input;
 			} else {
-				for (let i = 0; i < images.length; i++) {
+				for (const [i, image] of images.entries()) {
 					slideshow.addSlide(
 						i.toString(),
 						{
 							...presenceData,
 							details: "Viewing a generation",
 							state: input,
-							largeImageKey: images[i],
+							largeImageKey: image,
 						},
 						5000
 					);
@@ -136,9 +127,9 @@ presence.on("UpdateData", async () => {
 				".generated-image > img"
 			).src;
 		}
-	} else if (pathname.startsWith("/editor")) {
+	} else if (pathname.startsWith("/editor"))
 		presenceData.details = "Using the image editor";
-	} else {
+	else {
 		presenceData.details = "Browsing";
 		presenceData.state = document.title.match(/^(.*)?( \| DALL·E)?$/)[1];
 	}
@@ -146,9 +137,6 @@ presence.on("UpdateData", async () => {
 	if (presenceData.details) {
 		presence.setActivity(presenceData);
 		slideshow.deleteAllSlides();
-	} else if (slideshow.getSlides().length > 0) {
-		presence.setActivity(slideshow);
-	} else {
-		presence.setActivity();
-	}
+	} else if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
+	else presence.setActivity();
 });
