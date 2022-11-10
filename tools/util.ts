@@ -10,8 +10,8 @@ export function getDiff(
 	type: "addedModified" | "removed" | "all" = "addedModified"
 ): string[] {
 	const commands: Record<ValidEventName, string> = {
-			push: "HEAD HEAD^",
-			pull_request: `HEAD origin/${process.argv[3] ? process.argv[3] : "main"}`,
+			push: "HEAD^ HEAD",
+			pull_request: `origin/${process.argv[3] ? process.argv[3] : "main"} HEAD`,
 			uncommitted: "HEAD",
 		},
 		eventName = process.argv[2] ? validateArg(process.argv[2]) : "pull_request",
