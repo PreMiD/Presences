@@ -136,6 +136,8 @@ presence.on("UpdateData", async () => {
 				".generated-image > img"
 			).src;
 		}
+	} else if (pathname.startsWith("/editor")) {
+		presenceData.details = "Using the image editor";
 	} else {
 		presenceData.details = "Browsing";
 		presenceData.state = document.title.match(/^(.*)?( \| DALL·E)?$/)[1];
