@@ -124,6 +124,8 @@ presence.on("UpdateData", async () => {
 			).src;
 		}
 	} else {
+		presenceData.details = "Browsing";
+		presenceData.state = document.title.match(/^(.*)?( \| DALL·E)?$/)[1];
 	}
 
 	if (presenceData.details) {
