@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 				case "/oliver":
 					presenceData.state = "Looking at pictures of Oliver";
 					break;
-					
+
 				case "/dash":
 					presenceData.state = "Viewing the dashboard";
 					break;
