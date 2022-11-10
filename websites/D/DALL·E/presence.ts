@@ -25,6 +25,15 @@ presence.on("UpdateData", async () => {
 		showImages = await presence.getSetting<boolean>("showImages");
 
 	if (pathname === "/") {
+		const input = document.querySelector<HTMLInputElement>(
+			".image-prompt-input"
+		);
+		if (input.value) {
+			presenceData.details = "Crafting a prompt";
+			presenceData.state = input.value;
+		} else {
+			presenceData.details = "Thinking of a prompt";
+		}
 	} else if (pathname.startsWith("/history")) {
 		if (showImages) {
 			const images = getListImages();
@@ -86,31 +95,35 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/account")) {
 		presenceData.details = "Viewing their account";
 	} else if (pathname.startsWith("/e/")) {
+		const input = document.querySelector<HTMLInputElement>(
+			".image-prompt-input"
+		).value;
 		if (showImages) {
 			const images = [
 				...document.querySelectorAll<HTMLImageElement>(
 					".generated-image > img"
 				),
 			].map(image => image.src);
-			for (let i = 0; i < images.length; i++) {
-				slideshow.addSlide(
-					i.toString(),
-					{
-						...presenceData,
-						details: "Viewing a generation",
-						state: document.querySelector<HTMLInputElement>(
-							".image-prompt-input"
-						).value,
-						largeImageKey: images[i],
-					},
-					5000
-				);
+			if (images.length === 0) {
+				presenceData.details = "Generating images";
+				presenceData.state = input;
+			} else {
+				for (let i = 0; i < images.length; i++) {
+					slideshow.addSlide(
+						i.toString(),
+						{
+							...presenceData,
+							details: "Viewing a generation",
+							state: input,
+							largeImageKey: images[i],
+						},
+						5000
+					);
+				}
 			}
 		} else {
 			presenceData.details = "Viewing a generation";
-			presenceData.state = document.querySelector<HTMLInputElement>(
-				".image-prompt-input"
-			).value;
+			presenceData.state = input;
 		}
 	} else if (pathname.startsWith("/s/")) {
 		presenceData.details = "Viewing an image";
