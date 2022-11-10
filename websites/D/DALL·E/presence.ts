@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	slideshow = presence.createSlideshow();
 
-function getImages() {
+function getListImages() {
 	return [
 		...document.querySelectorAll<HTMLDivElement>(
 			".image-prompt-overlay-container"
@@ -24,10 +24,10 @@ presence.on("UpdateData", async () => {
 		{ pathname, href } = window.location,
 		showImages = await presence.getSetting<boolean>("showImages");
 
-	if (pathname === "") {
+	if (pathname === "/") {
 	} else if (pathname.startsWith("/history")) {
 		if (showImages) {
-			const images = getImages();
+			const images = getListImages();
 			if (images.length > 0) {
 				for (let i = 0; i < images.length; i++) {
 					const [image, text] = images[i];
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname.startsWith("/c/")) {
 		if (showImages) {
-			const imageData = getImages();
+			const imageData = getListImages();
 			for (let i = 0; i < imageData.length; i++) {
 				const [image, text] = imageData[i],
 					slide = {
@@ -86,6 +86,32 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/account")) {
 		presenceData.details = "Viewing their account";
 	} else if (pathname.startsWith("/e/")) {
+		if (showImages) {
+			const images = [
+				...document.querySelectorAll<HTMLImageElement>(
+					".generated-image > img"
+				),
+			].map(image => image.src);
+			for (let i = 0; i < images.length; i++) {
+				slideshow.addSlide(
+					i.toString(),
+					{
+						...presenceData,
+						details: "Viewing a generation",
+						state: document.querySelector<HTMLInputElement>(
+							".image-prompt-input"
+						).value,
+						largeImageKey: images[i],
+					},
+					5000
+				);
+			}
+		} else {
+			presenceData.details = "Viewing a generation";
+			presenceData.state = document.querySelector<HTMLInputElement>(
+				".image-prompt-input"
+			).value;
+		}
 	} else if (pathname.startsWith("/s/")) {
 	} else {
 	}
