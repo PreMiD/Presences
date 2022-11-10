@@ -52,29 +52,36 @@ presence.on("UpdateData", async () => {
 		} else presenceData.details = "Viewing history";
 	} else if (pathname.startsWith("/c/")) {
 		if (showImages) {
-			for (const [i, [image, text]] of getListImages().entries()) {
-				const slide = {
-					...presenceData,
-					details: `Viewing collection: ${
-						document.querySelector<HTMLDivElement>("[class*=h3]").textContent
-					}`,
-					state: text,
-					largeImageKey: image,
-				};
-				if (
-					!document.querySelector<HTMLDivElement>(
-						".collection-layout-private"
-					) &&
-					!pathname.includes("/private")
-				) {
-					slide.buttons = [
-						{
-							label: "View Collection",
-							url: href,
-						},
-					];
+			const images = getListImages();
+			if (images.length === 0) {
+				presenceData.details = "Viewing a collection";
+				presenceData.state =
+					document.querySelector<HTMLDivElement>("[class*=h3]").textContent;
+			} else {
+				for (const [i, [image, text]] of images.entries()) {
+					const slide = {
+						...presenceData,
+						details: `Viewing collection: ${
+							document.querySelector<HTMLDivElement>("[class*=h3]").textContent
+						}`,
+						state: text,
+						largeImageKey: image,
+					};
+					if (
+						!document.querySelector<HTMLDivElement>(
+							".collection-layout-private"
+						) &&
+						!pathname.includes("/private")
+					) {
+						slide.buttons = [
+							{
+								label: "View Collection",
+								url: href,
+							},
+						];
+					}
+					slideshow.addSlide(i.toString(), slide, 5000);
 				}
-				slideshow.addSlide(i.toString(), slide, 5000);
 			}
 		} else {
 			presenceData.details = "Viewing a collection";
@@ -88,16 +95,22 @@ presence.on("UpdateData", async () => {
 	else if (pathname.startsWith("/e/")) {
 		const input = document.querySelector<HTMLInputElement>(
 			".image-prompt-input"
-		).value;
+		)?.value;
 		if (showImages) {
 			const images = [
-				...document.querySelectorAll<HTMLImageElement>(
-					".generated-image > img"
-				),
-			].map(image => image.src);
-			if (images.length === 0) {
+					...document.querySelectorAll<HTMLImageElement>(
+						".task-page-generations-img .generated-image > img"
+					),
+				].map(image => image.src),
+				centeredImage = document.querySelector<HTMLImageElement>(
+					".edit-page-image .generated-image > img"
+				);
+			if (images.length === 0 && !centeredImage) {
 				presenceData.details = "Generating images";
 				presenceData.state = input;
+			} else if (centeredImage) {
+				presenceData.details = "Viewing an image";
+				presenceData.largeImageKey = centeredImage.src;
 			} else {
 				for (const [i, image] of images.entries()) {
 					slideshow.addSlide(
