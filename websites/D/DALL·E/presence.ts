@@ -4,16 +4,36 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	slideshow = presence.createSlideshow();
 
-function getListImages() {
-	return [
-		...document.querySelectorAll<HTMLDivElement>(
-			".image-prompt-overlay-container"
-		),
-	].map(container => [
-		container.querySelector<HTMLImageElement>(".generated-image > img").src,
-		container.querySelector<HTMLDivElement>(".image-prompt-overlay")
-			.textContent,
-	]);
+async function getListImages() {
+	return await Promise.all(
+		[
+			...document.querySelectorAll<HTMLDivElement>(
+				".image-prompt-overlay-container"
+			),
+		].map(async container => [
+			await getShortURL(
+				container.querySelector<HTMLImageElement>(".generated-image > img").src
+			),
+			container.querySelector<HTMLDivElement>(".image-prompt-overlay")
+				.textContent,
+		])
+	);
+}
+
+const shortenedURLs: Record<string, string> = {};
+async function getShortURL(url: string) {
+	if (url.length < 256) return url;
+	if (shortenedURLs[url]) return shortenedURLs[url];
+	try {
+		const pdURL = await (
+			await fetch(`https://pd.premid.app/create/${url}`)
+		).text();
+		shortenedURLs[url] = pdURL;
+		return pdURL;
+	} catch (err) {
+		presence.error(err);
+		return url;
+	}
 }
 
 presence.on("UpdateData", async () => {
@@ -34,7 +54,7 @@ presence.on("UpdateData", async () => {
 		} else presenceData.details = "Thinking of a prompt";
 	} else if (pathname.startsWith("/history")) {
 		if (showImages) {
-			const images = getListImages();
+			const images = await getListImages();
 			if (images.length > 0) {
 				for (const [i, [image, text]] of images.entries()) {
 					slideshow.addSlide(
@@ -52,7 +72,7 @@ presence.on("UpdateData", async () => {
 		} else presenceData.details = "Viewing history";
 	} else if (pathname.startsWith("/c/")) {
 		if (showImages) {
-			const images = getListImages();
+			const images = await getListImages();
 			if (images.length === 0) {
 				presenceData.details = "Viewing a collection";
 				presenceData.state =
@@ -97,11 +117,13 @@ presence.on("UpdateData", async () => {
 			".image-prompt-input"
 		)?.value;
 		if (showImages) {
-			const images = [
-					...document.querySelectorAll<HTMLImageElement>(
-						".task-page-generations-img .generated-image > img"
-					),
-				].map(image => image.src),
+			const images = await Promise.all(
+					[
+						...document.querySelectorAll<HTMLImageElement>(
+							".task-page-generations-img .generated-image > img"
+						),
+					].map(image => getShortURL(image.src))
+				),
 				centeredImage = document.querySelector<HTMLImageElement>(
 					".edit-page-image .generated-image > img"
 				);
@@ -110,7 +132,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = input;
 			} else if (centeredImage) {
 				presenceData.details = "Viewing an image";
-				presenceData.largeImageKey = centeredImage.src;
+				presenceData.largeImageKey = await getShortURL(centeredImage.src);
 			} else {
 				for (const [i, image] of images.entries()) {
 					slideshow.addSlide(
@@ -136,9 +158,9 @@ presence.on("UpdateData", async () => {
 		).textContent;
 		presenceData.buttons = [{ label: "View Image", url: href }];
 		if (showImages) {
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				".generated-image > img"
-			).src;
+			presenceData.largeImageKey = await getShortURL(
+				document.querySelector<HTMLImageElement>(".generated-image > img").src
+			);
 		}
 	} else if (pathname.startsWith("/editor"))
 		presenceData.details = "Using the image editor";
