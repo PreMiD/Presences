@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/i6UPLX2.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = window.location,
+		{ pathname, href } = window.location,
 		showImages = await presence.getSetting<boolean>("showImages");
 
 	if (pathname === "") {
@@ -26,19 +26,26 @@ presence.on("UpdateData", async () => {
 					.textContent,
 			]);
 			for (let i = 0; i < imageData.length; i++) {
-				const [image, text] = imageData[i];
-				slideshow.addSlide(
-					i.toString(),
-					{
+				const [image, text] = imageData[i],
+					slide = {
 						...presenceData,
 						details: `Viewing collection: ${
 							document.querySelector<HTMLDivElement>("[class*=h3]").textContent
 						}`,
 						state: text,
 						largeImageKey: image,
-					},
-					5000
-				);
+					};
+				if (
+					!document.querySelector<HTMLDivElement>(".collection-layout-private")
+				) {
+					slide.buttons = [
+						{
+							label: "View Collection",
+							url: href,
+						},
+					];
+				}
+				slideshow.addSlide(i.toString(), slide, 5000);
 			}
 		} else {
 			presenceData.details = "Viewing a collection";
