@@ -4,37 +4,30 @@ export const logo = "https://i.imgur.com/Li8TLXI.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
 	switch (playerState.state) {
 		case "Lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return {state:"Waiting in lobby"};
 		}
 		case "Logo": {
-			presenceData.state = "Waiting";
-			break;
+			return {state:"Waiting"};
 		}
 		case "MakeSingleChoice": {
 			switch (playerState.roundType) {
 				case "Shortie": {
-					presenceData.state = "Answering a short trivia question";
-					break;
+					return {state:"Answering a short trivia question"};
 				}
 				case "DisOrDat": {
-					presenceData.state = "Answering a dis-or-dat question";
-					break;
+					return {state:"Answering a dis-or-dat question"};
 				}
 				case "PlayersChoice": {
-					presenceData.state = "Choosing a type of question";
-					break;
+					return {state:"Choosing a type of question"};
 				}
 				case "JackAttack": {
-					presenceData.state = "Playing Jack Attack";
-					break;
+					return {state:"Playing Jack Attack"};
 				}
 			}
 			break;
 		}
 	}
-	return presenceData;
+	return {};
 }

@@ -4,31 +4,26 @@ export const logo = "https://i.imgur.com/YyhOPAp.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
 	switch (playerState.state) {
 		case "Lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return {state:"Waiting in lobby" };
 		}
 		case "Logo": {
-			presenceData.state = "Waiting";
-			break;
+			return {state:"Waiting" };
 		}
 		case "MakeSingleChoice": {
 			const { html } = playerState.prompt;
 			if (html === "Press this to skip the tutorial...")
-				presenceData.state = "Watching the tutorial";
+				return {state:"Watching the tutorial" };
 			else if (html === "Did this person create an amusing scenario?")
-				presenceData.state = "Rating the scenario";
+				return {state:"Rating the scenario" };
 			else if (html.startsWith("For bonus points, which option do you think"))
-				presenceData.state = "Predicting a player's choice";
-			else presenceData.state = "Responding to a scenario";
-			break;
+				return {state:"Predicting a player's choice" };
+			else return {state:"Responding to a scenario" };
 		}
 		case "EnterSingleText": {
-			presenceData.state = "Completing a scenario";
-			break;
+			return {state:"Completing a scenario" };
 		}
 	}
-	return presenceData;
+	return {};
 }

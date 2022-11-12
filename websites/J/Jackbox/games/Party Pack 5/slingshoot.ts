@@ -4,20 +4,16 @@ export const logo = "https://i.imgur.com/QqEKHgG.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
 	switch (playerState.state) {
 		case "Lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return { state: "Waiting in lobby" };
 		}
 		case "Logo": {
-			presenceData.state = "Waiting";
-			break;
+			return { state: "Waiting" };
 		}
 		case "Shoot": {
-			presenceData.state = "Shooting";
-			break;
+			return { state: "Shooting" };
 		}
 	}
-	return presenceData;
+	return {};
 }
