@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
 
 				case "maps":
 					presenceData.details = "Яндекс Карты";
-					presenceData.state = presenceData.state = `В поиске: ${
+					presenceData.state = `В поиске: ${
 						document.querySelector<HTMLInputElement>("input")?.value
 					}`;
 					break;
