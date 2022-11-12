@@ -4,40 +4,31 @@ export const logo = "https://i.imgur.com/FfZYRGL.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
 	switch (playerState.kind) {
 		case "lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return {state:"Waiting in lobby"};
 		}
 		case "Logo": {
-			presenceData.state = "Waiting";
-			break;
+			return {state:"Waiting"};
 		}
 		case "writing": {
-			presenceData.state = "Writing a response";
-			break;
+			return {state:"Writing a response"};
 		}
 		case "voting": {
-			presenceData.state = "Voting for a response";
-			break;
+			return {state:"Voting for a response"};
 		}
 		case "magnets": {
-			presenceData.state = "Answering a prompt using magnets";
-			break;
+			return {state:"Answering a prompt using magnets"};
 		}
 		case "resumagnets": {
-			presenceData.state = "Filling out their resumé using magnets";
-			break;
+			return {state:"Filling out their resumé using magnets"};
 		}
 		case "done": {
-			presenceData.state = "Waiting for others to finish";
-			break;
+			return {state:"Waiting for others to finish"};
 		}
 		case "postGame": {
-			presenceData.state = "Viewing the results";
-			break;
+			return {state:"Viewing the results"};
 		}
 	}
-	return presenceData;
+	return {};
 }

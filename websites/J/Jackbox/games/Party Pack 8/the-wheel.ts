@@ -4,75 +4,60 @@ export const logo = "https://i.imgur.com/hoWsjON.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
 	switch (playerState.kind) {
 		case "lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return {state:"Waiting in lobby"};
 		}
 		case "waiting": {
-			presenceData.state = "Waiting";
-			break;
+			return {state:"Waiting"};
 		}
 		case "singleTextEntry": {
 			if (playerState.category === "askTheWheel") {
-				presenceData.state = `Asking the wheel a question - '${
+				return {state:`Asking the wheel a question - '${
 					document.querySelector<HTMLTextAreaElement>(".input-box textarea")
 						.value
-				}'`;
-			} else presenceData.state = "Answering a question";
-			break;
+				}'`};
+			} else return {state:"Answering a question"};
 		}
 		case "choices": {
 			if (playerState.category === "skip-intro")
-				presenceData.state = "Watching the tutorial";
+				return {state:"Watching the tutorial"};
 			break;
 		}
 		case "tappingList": {
-			presenceData.state = "Selecting answers";
-			break;
+			return {state:"Selecting answers"};
 		}
 		case "matching": {
 			const [a, b] = playerState.headers as string[];
-			presenceData.state = `Matching ${a} to ${b}`;
-			break;
+			return {state:`Matching ${a} to ${b}`};
 		}
 		case "placeSlices": {
-			presenceData.state = "Placing slices";
-			break;
+			return {state:"Placing slices"};
 		}
 		case "spin": {
-			presenceData.state = "Spinning the wheel";
-			break;
+			return {state:"Spinning the wheel"};
 		}
 		case "numeric": {
-			presenceData.state = `Answering a numeric question - "${playerState.prompt}"`;
-			break;
+			return {state:`Answering a numeric question - "${playerState.prompt}"`};
 		}
 		case "postGame": {
-			presenceData.state = "Viewing the results";
-			break;
+			return {state:"Viewing the results"};
 		}
 		case "typingList": {
-			presenceData.state = "Typing answers";
-			break;
+			return {state:"Typing answers"};
 		}
 		case "guessing": {
-			presenceData.state = "Guessing what the wheel is thinking of";
-			break;
+			return {state:"Guessing what the wheel is thinking of"};
 		}
 		case "tappingRapid": {
-			presenceData.state = "Tapping rapidly";
-			break;
+			return {state:"Tapping rapidly"};
 		}
 		case "choosePlayers": {
-			presenceData.state = "Choosing players";
-			break;
+			return {state:"Choosing players"};
 		}
 		case "chooseSlices": {
-			presenceData.state = "Choosing slices";
-			break;
+			return {state:"Choosing slices"};
 		}
 	}
-	return presenceData;
+	return {};
 }
