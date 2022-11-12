@@ -10,35 +10,31 @@ export function getPresenceData({
 	).backgroundImage.match(/^url\("(.*)"\)$/)[1];
 	switch (playerState.state) {
 		case "Lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return { state: "Waiting in lobby" };
 		}
 		case "MakeSingleChoice": {
 			if (playerState.text === "Press this to skip the tutorial") {
-				presenceData.state = "Watching the tutorial";
-				break;
+				return { state: "Watching the tutorial" };
 			} else if (
 				(playerState.text as string).includes(
 					"Which answer will get the most votes?"
 				)
 			)
-				presenceData.state = "Predicting the most popular answer";
+				return { state: "Predicting the most popular answer" }
 			else if (
 				(playerState.text as string).includes(
 					"Vote for the answer that deserves to win."
 				)
 			)
-				presenceData.state = "Voting on an answer";
+				return { state: "Voting on an answer" };
 			break;
 		}
 		case "EnterSingleText": {
-			presenceData.state = "Answering a prompt";
-			break;
+			return { state: "Answering a prompt" };
 		}
 		case "Logo": {
-			presenceData.state = "Waiting";
-			break;
+			return { state: "Waiting" };
 		}
 	}
-	return presenceData;
+	return {};
 }

@@ -38,7 +38,6 @@ export function getPresenceData({
 			if (playerState.isChoosing) presenceData.state = "Choosing a category";
 			else
 				presenceData.state = "Waiting for another player to choose a category";
-
 			break;
 		}
 	}
