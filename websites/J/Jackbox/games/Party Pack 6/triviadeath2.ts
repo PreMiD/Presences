@@ -4,62 +4,49 @@ export const logo = "https://i.imgur.com/9MmGVGD.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
 	switch (playerState.state) {
 		case "Lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return {state:"Waiting in lobby"};
 		}
 		case "Logo": {
-			presenceData.state = "Waiting";
-			break;
+			return {state:"Waiting"};
 		}
 		case "MakeSingleChoice": {
 			if (playerState.roundType === "FinalRound")
-				presenceData.state = "Answering the final trivia questions";
+				return {state:"Answering the final trivia questions"};
 			else {
 				switch (playerState.choiceType) {
 					case "SkipTutorial": {
-						presenceData.state = "Watching the intro";
-						break;
+						return {state:"Watching the intro"};
 					}
 					case "Question": {
-						presenceData.state = "Answering trivia";
-						break;
+						return {state:"Answering trivia"};
 					}
 					case "Rule": {
-						presenceData.state = "Playing a rule game";
-						break;
+						return {state:"Playing a rule game"};
 					}
 					case "PostGameChoice": {
-						presenceData.state = "Choosing a post-game option";
-						break;
+						return {state:"Choosing a post-game option"};
 					}
 					default: {
-						presenceData.state = "Playing a death game";
+						return {state:"Playing a death game"};
 					}
 				}
 			}
-			break;
 		}
 		case "EnterSingleText": {
 			const { entryId } = playerState;
 			if (entryId.startsWith("MindMeld")) {
-				presenceData.state = "Playing the mind meld game";
-				break;
+				return {state:"Playing the mind meld game"};
 			} else if (entryId === "CreatePassword") {
-				presenceData.state = "Creating a password for the password game";
-				break;
+				return {state:"Creating a password for the password game"};
 			} else if (entryId === "Quiplash") {
-				presenceData.state = `Playing Quiplash - ${playerState.prompt.html}`;
-				break;
-			} else presenceData.state = "Playing a text death game";
-			break;
+				return {state:`Playing Quiplash - ${playerState.prompt.html}`};
+			} else return {state:"Playing a text death game"};
 		}
 		case "Draw": {
-			presenceData.state = "Playing a drawing death game";
-			break;
+			return {state:"Playing a drawing death game"};
 		}
 	}
-	return presenceData;
+	return {};
 }

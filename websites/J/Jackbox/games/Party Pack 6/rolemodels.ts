@@ -4,53 +4,42 @@ export const logo = "https://i.imgur.com/Utg6Fow.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
 	switch (playerState.state) {
 		case "Lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return {state:"Waiting in lobby"};
 		}
 		case "Logo": {
-			presenceData.state = "Waiting";
-			break;
+			return {state:"Waiting"};
 		}
 		case "Camera": {
-			presenceData.state = "Taking a photo of themselves";
-			break;
+			return {state:"Taking a photo of themselves"};
 		}
 		case "Draw": {
-			presenceData.state = "Drawing a portrait of themselves";
-			break;
+			return {state:"Drawing a portrait of themselves"};
 		}
 		case "MakeSingleChoice": {
 			switch (playerState.choiceType) {
 				case "SkipTutorial": {
-					presenceData.state = "Watching the tutorial";
-					break;
+					return {state:"Watching the tutorial"};
 				}
 				case "Prompt": {
-					presenceData.state = "Choosing a category";
-					break;
+					return {state:"Choosing a category"};
 				}
 				case "TagResolution": {
-					presenceData.state = "Resolving a role conflict";
-					break;
+					return {state:"Resolving a role conflict"};
 				}
 				case "RoleModelsChoice": {
-					presenceData.state = "Choosing the role that fits best";
-					break;
+					return {state:"Choosing the role that fits best"};
 				}
 			}
 			break;
 		}
 		case "Sortable": {
-			presenceData.state = "Assigning roles to players";
-			break;
+			return {state:"Assigning roles to players"};
 		}
 		case "EnterSingleText": {
-			presenceData.state = "Answering a prompt";
-			break;
+			return {state:"Answering a prompt"};
 		}
 	}
-	return presenceData;
+	return {};
 }

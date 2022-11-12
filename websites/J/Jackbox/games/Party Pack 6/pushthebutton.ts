@@ -4,35 +4,27 @@ export const logo = "https://i.imgur.com/OhgGmMQ.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
 	switch (playerState.state) {
 		case "Lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return {state:"Waiting in lobby"};
 		}
 		case "Logo": {
-			presenceData.state = "Waiting";
-			break;
+			return {state:"Waiting"};
 		}
 		case "SuspicionVote": {
-			presenceData.state = "Voting on who seems suspicious";
-			break;
+			return {state:"Voting on who seems suspicious"};
 		}
 		case "Probe": {
-			presenceData.state = "Probing their fellow players";
-			break;
+			return {state:"Probing their fellow players"};
 		}
 		case "Draw": {
-			presenceData.state = "In the Drawing Quarters";
-			break;
+			return {state:"In the Drawing Quarters"};
 		}
 		case "AnalyzePlayer": {
-			presenceData.state = "Using the bioscanner - describing glyphs";
-			break;
+			return {state:"Using the bioscanner - describing glyphs"};
 		}
 		case "AnalysisReport": {
-			presenceData.state = "Using the bioscanner - reading report";
-			break;
+			return {state:"Using the bioscanner - reading report"};
 		}
 		case "MakeSingleChoice": {
 			const { choiceType, gameInfo, prompt } = playerState,
@@ -42,28 +34,24 @@ export function getPresenceData({
 			if (choiceType) {
 				switch (choiceType) {
 					case "TutorialOptOut": {
-						presenceData.state = "Choosing whether to skip the tutorial";
-						break;
+						return {state:"Choosing whether to skip the tutorial"};
 					}
 					case "ConfirmedIdentity": {
-						presenceData.state = "Confirming their identity";
-						break;
+						return {state:"Confirming their identity"};
 					}
 				}
 			} else if (activeTest) {
 				if (activeTest === "Push The Button")
-					presenceData.state = "Accusing players";
-				else presenceData.state = `Taking the ${activeTest} test`;
+					return {state:"Accusing players"};
+				else return {state:`Taking the ${activeTest} test`}
 			} else {
 				const html = prompt?.html;
 				if (
 					html === "You are the Captain.  What test would you like to perform?"
 				) {
-					presenceData.state = "Choosing a test to perform";
-					break;
+					return {state:"Choosing a test to perform"};
 				} else if (/^Select <strong>.*?<\/strong> to Test!$/.test(html)) {
-					presenceData.state = "Choosing players to test";
-					break;
+					return {state:"Choosing players to test"};
 				}
 			}
 			break;
@@ -72,12 +60,12 @@ export function getPresenceData({
 			const { activeTest } = playerState.gameInfo as {
 				activeTest: string;
 			};
-			if (activeTest) presenceData.state = `Taking the ${activeTest} test`;
+			if (activeTest) return {state:`Taking the ${activeTest} test`};
 			break;
 		}
 		case "GameOver": {
-			presenceData.state = `Viewing results - ${playerState.winningRole}s won`;
+			return {state:`Viewing results - ${playerState.winningRole}s won`};
 		}
 	}
-	return presenceData;
+	return {};
 }
