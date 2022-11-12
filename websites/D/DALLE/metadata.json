@@ -4,10 +4,10 @@
 		"id": "193714715631812608",
 		"name": "theusaf"
 	},
-	"service": "DALL·E",
+	"service": "DALLE",
 	"altnames": [
 		"DALL·E 2",
-		"DALLE",
+		"DALL·E",
 		"DALL-E",
 		"DALL-E 2"
 	],
@@ -15,7 +15,7 @@
 		"en": "DALL·E 2 is a new AI system that can create realistic images and art from a description in natural language."
 	},
 	"url": "labs.openai.com",
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"logo": "https://i.imgur.com/i6UPLX2.png",
 	"thumbnail": "https://i.imgur.com/8S3BxKR.jpg",
 	"color": "#fff",
