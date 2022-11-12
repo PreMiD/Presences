@@ -4,100 +4,79 @@ export const logo = "https://i.imgur.com/dcJq65O.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
 	switch (playerState.state) {
 		case "Lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return {state:"Waiting in lobby"};
 		}
 		case "Logo": {
-			presenceData.state = "Waiting";
-			break;
+			return {state:"Waiting"};
 		}
 		case "MakeSingleChoice": {
 			switch (playerState.choiceId) {
 				case "ChangeCharacter": {
-					presenceData.state = "Choosing a character";
-					break;
+					return {state:"Choosing a character"};
 				}
 				default: {
 					if (playerState.choiceType === "SkipIntro")
-						presenceData.state = "Watching the intro";
+						return {state:"Watching the intro"};
 					else if (playerState.choiceType === "ShowTutorial")
-						presenceData.state = "Deciding if they want to watch the tutorial";
+						return {state:"Deciding if they want to watch the tutorial"};
 				}
 			}
 			break;
 		}
 		case "CancelerMechanic": {
-			presenceData.state = "Blocking a member from their selfish task";
-			break;
+			return {state:"Blocking a member from their selfish task"};
 		}
 		case "TaskList": {
-			presenceData.state = "Choosing a task";
-			break;
+			return {state:"Choosing a task"};
 		}
 		case "NothingMechanic": {
-			presenceData.state = "Doing nothing";
-			break;
+			return {state:"Doing nothing"};
 		}
 		case "ScrubMechanic": {
-			presenceData.state = "Scrubbing something";
-			break;
+			return {state:"Scrubbing something"};
 		}
 		case "RotateMechanic": {
-			presenceData.state = "Rotating something";
-			break;
+			return {state:"Rotating something"};
 		}
 		case "TapMechanic": {
-			presenceData.state = "Tapping something";
-			break;
+			return {state:"Tapping something"};
 		}
 		case "SwipeMechanic": {
-			presenceData.state = "Swiping something";
-			break;
+			return {state:"Swiping something"};
 		}
 		case "TravelMechanicParticipant": {
-			presenceData.state = "Travelling as a passenger";
-			break;
+			return {state:"Travelling as a passenger"};
 		}
 		case "TravelMechanicCaptain": {
-			presenceData.state = "Travelling as the driver";
-			break;
+			return {state:"Travelling as the driver"};
 		}
 		case "PhoneMechanic": {
-			presenceData.state = "Calling someone";
-			break;
+			return {state:"Calling someone"};
 		}
 		case "DialogMechanic": {
-			presenceData.state = "Talking to someone";
-			break;
+			return {state:"Talking to someone"};
 		}
 		case "SearchMechanicCaptain":
 		case "SearchMechanicParticipant": {
-			presenceData.state = "Searching for something";
-			break;
+			return {state:"Searching for something"};
 		}
 		case "TextMechanicParticipant": {
-			presenceData.state = "Writing a text";
-			break;
+			return {state:"Writing a text"};
 		}
 		case "TextMechanicCaptain": {
-			presenceData.state = "Reading a text";
-			break;
+			return {state:"Reading a text"};
 		}
 		case "InstructionsMechanicCaptain": {
-			presenceData.state = "Following instructions";
-			break;
+			return {state:"Following instructions"};
 		}
 		case "InstructionsMechanicParticipant": {
-			presenceData.state = "Giving instructions";
-			break;
+			return {state:"Giving instructions"};
 		}
 		case "HoldMechanic": {
-			presenceData.state = "Holding something";
-			break;
+			return {state:"Holding something"};
 		}
 	}
-	return presenceData;
+	return {};
 }
