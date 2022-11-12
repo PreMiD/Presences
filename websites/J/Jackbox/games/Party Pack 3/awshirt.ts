@@ -3,8 +3,8 @@ export const logo = "https://i.imgur.com/wGbJhoR.png";
 
 export function getPresenceData(): PresenceData {
 	const { id } = document.querySelector<HTMLDivElement>(
-			".awshirt-page:not(.pt-page-off)"
-		);
+		".awshirt-page:not(.pt-page-off)"
+	);
 	switch (id) {
 		case "state-lobby": {
 			return { state: "Waiting in lobby" };
@@ -19,8 +19,9 @@ export function getPresenceData(): PresenceData {
 			return { state: "Drawing a shirt" };
 		}
 		case "state-drawing-done": {
-			return { state:
-				"Waiting for other players to finish drawing their shirt" };
+			return {
+				state: "Waiting for other players to finish drawing their shirt",
+			};
 		}
 		case "state-input": {
 			return { state: "Creating taglines" };

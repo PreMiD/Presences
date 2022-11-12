@@ -6,30 +6,30 @@ export function getPresenceData({
 }: GameCallbackParams): PresenceData {
 	switch (playerState.kind) {
 		case "lobby": {
-			return {state:"Waiting in lobby"};
+			return { state: "Waiting in lobby" };
 		}
 		case "waiting": {
-			return {state:"Waiting"};
+			return { state: "Waiting" };
 		}
 		case "drawing": {
 			if (playerState.prompt === "an animation of yourself")
-				return {state:"Drawing an animation of themselves"};
-			else return {state:"Drawing an animation"};
+				return { state: "Drawing an animation of themselves" };
+			else return { state: "Drawing an animation" };
 		}
 		case "writing": {
-			return {state:"Guessing the original prompt"};
+			return { state: "Guessing the original prompt" };
 		}
 		case "liking": {
-			return {state:"Awarding likes to other's guesses"};
+			return { state: "Awarding likes to other's guesses" };
 		}
 		case "choosing": {
-			return {state:"Looking for the true prompt"};
+			return { state: "Looking for the true prompt" };
 		}
 		case "postGame": {
-			return {state:"Viewing the results"};
+			return { state: "Viewing the results" };
 		}
 		case "ugc": {
-			return {state:"Creating a custom game"};
+			return { state: "Creating a custom game" };
 		}
 	}
 	return {};

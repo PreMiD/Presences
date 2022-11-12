@@ -6,37 +6,37 @@ export function getPresenceData({
 }: GameCallbackParams): PresenceData {
 	switch (playerState.kind) {
 		case "lobby": {
-			return {state:"Waiting in lobby"};
+			return { state: "Waiting in lobby" };
 		}
 		case "waiting": {
-			return {state:"Waiting"};
+			return { state: "Waiting" };
 		}
 		case "choosing": {
 			switch (playerState.context) {
 				case "pick-category": {
-					return {state:"Choosing a category"};
+					return { state: "Choosing a category" };
 				}
 				case "pick-truth": {
-					return {state:"Looking for the truth"};
+					return { state: "Looking for the truth" };
 				}
 				case "pick-likes": {
-					return {state:"Awarding likes to other's answers"};
+					return { state: "Awarding likes to other's answers" };
 				}
 				case "final-round-1":
 				case "final-round-2": {
-					return {state:"Looking for the truth - Final Round"};
+					return { state: "Looking for the truth - Final Round" };
 				}
 			}
 			break;
 		}
 		case "writing": {
-			return {state:"Writing lies"};
+			return { state: "Writing lies" };
 		}
 		case "voting": {
 			break;
 		}
 		case "postGame": {
-			return {state:"Viewing the results"};
+			return { state: "Viewing the results" };
 		}
 	}
 	return {};

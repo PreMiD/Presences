@@ -6,39 +6,39 @@ export function getPresenceData({
 }: GameCallbackParams): PresenceData {
 	switch (playerState.state) {
 		case "Lobby": {
-			return {state:"Waiting in lobby"};
+			return { state: "Waiting in lobby" };
 		}
 		case "Logo": {
-			return {state:"Waiting"};
+			return { state: "Waiting" };
 		}
 		case "Camera": {
-			return {state:"Taking a photo of themselves"};
+			return { state: "Taking a photo of themselves" };
 		}
 		case "Draw": {
-			return {state:"Drawing a portrait of themselves"};
+			return { state: "Drawing a portrait of themselves" };
 		}
 		case "MakeSingleChoice": {
 			switch (playerState.choiceType) {
 				case "SkipTutorial": {
-					return {state:"Watching the tutorial"};
+					return { state: "Watching the tutorial" };
 				}
 				case "Prompt": {
-					return {state:"Choosing a category"};
+					return { state: "Choosing a category" };
 				}
 				case "TagResolution": {
-					return {state:"Resolving a role conflict"};
+					return { state: "Resolving a role conflict" };
 				}
 				case "RoleModelsChoice": {
-					return {state:"Choosing the role that fits best"};
+					return { state: "Choosing the role that fits best" };
 				}
 			}
 			break;
 		}
 		case "Sortable": {
-			return {state:"Assigning roles to players"};
+			return { state: "Assigning roles to players" };
 		}
 		case "EnterSingleText": {
-			return {state:"Answering a prompt"};
+			return { state: "Answering a prompt" };
 		}
 	}
 	return {};

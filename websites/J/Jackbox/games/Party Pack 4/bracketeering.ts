@@ -20,7 +20,7 @@ export function getPresenceData({
 					"Which answer will get the most votes?"
 				)
 			)
-				return { state: "Predicting the most popular answer" }
+				return { state: "Predicting the most popular answer" };
 			else if (
 				(playerState.text as string).includes(
 					"Vote for the answer that deserves to win."

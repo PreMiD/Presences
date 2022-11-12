@@ -6,18 +6,18 @@ export function getPresenceData({
 }: GameCallbackParams): PresenceData {
 	switch (playerState.state) {
 		case "Lobby": {
-			return {state:"Waiting in lobby"};
+			return { state: "Waiting in lobby" };
 		}
 		case "Logo": {
-			return {state:"Waiting"};
+			return { state: "Waiting" };
 		}
 		case "MakeSingleChoice": {
 			switch (playerState.choiceType) {
 				case "skipTutorial": {
-					return {state:"Watching the tutorial"};
+					return { state: "Watching the tutorial" };
 				}
 				case "password": {
-					return {state:"Choosing a prompt"};
+					return { state: "Choosing a prompt" };
 				}
 			}
 			break;
@@ -25,22 +25,22 @@ export function getPresenceData({
 		case "MakeSentence": {
 			switch ((playerState.sentence as { type: string }).type) {
 				case "writing": {
-					return {state:"Crafting initial sentence"};
+					return { state: "Crafting initial sentence" };
 				}
 				case "call": {
-					return {state:"Crafting a sentence"};
+					return { state: "Crafting a sentence" };
 				}
 				case "response": {
-					return {state:"Crafting a sentence using players' guesses"};
+					return { state: "Crafting a sentence using players' guesses" };
 				}
 				case "mybad": {
-					return {state:"Deciding if they should have known the answer"};
+					return { state: "Deciding if they should have known the answer" };
 				}
 			}
 			break;
 		}
 		case "EnterSingleText": {
-			return {state:"Guessing the object"};
+			return { state: "Guessing the object" };
 		}
 	}
 	return {};

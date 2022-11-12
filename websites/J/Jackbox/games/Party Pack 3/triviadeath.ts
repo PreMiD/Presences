@@ -3,8 +3,8 @@ export const logo = "https://i.imgur.com/zHOvymB.png";
 
 export function getPresenceData(): PresenceData {
 	const { id } = document.querySelector<HTMLDivElement>(
-			".triviadeath-page:not(.pt-page-off)"
-		);
+		".triviadeath-page:not(.pt-page-off)"
+	);
 	switch (id) {
 		case "state-lobby": {
 			return { state: "Waiting in lobby" };

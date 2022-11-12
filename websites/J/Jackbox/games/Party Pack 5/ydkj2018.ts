@@ -6,24 +6,24 @@ export function getPresenceData({
 }: GameCallbackParams): PresenceData {
 	switch (playerState.state) {
 		case "Lobby": {
-			return {state:"Waiting in lobby"};
+			return { state: "Waiting in lobby" };
 		}
 		case "Logo": {
-			return {state:"Waiting"};
+			return { state: "Waiting" };
 		}
 		case "MakeSingleChoice": {
 			switch (playerState.roundType) {
 				case "Shortie": {
-					return {state:"Answering a short trivia question"};
+					return { state: "Answering a short trivia question" };
 				}
 				case "DisOrDat": {
-					return {state:"Answering a dis-or-dat question"};
+					return { state: "Answering a dis-or-dat question" };
 				}
 				case "PlayersChoice": {
-					return {state:"Choosing a type of question"};
+					return { state: "Choosing a type of question" };
 				}
 				case "JackAttack": {
-					return {state:"Playing Jack Attack"};
+					return { state: "Playing Jack Attack" };
 				}
 			}
 			break;

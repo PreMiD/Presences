@@ -6,30 +6,30 @@ export function getPresenceData({
 }: GameCallbackParams): PresenceData {
 	switch (playerState.kind) {
 		case "lobby": {
-			return {state:"Waiting in lobby"};
+			return { state: "Waiting in lobby" };
 		}
 		case "postGame": {
-			return {state:"Viewing the results"};
+			return { state: "Viewing the results" };
 		}
 		case "drawing": {
-			return {state:"Drawing a picture"};
+			return { state: "Drawing a picture" };
 		}
 		case "guess": {
-			return {state:"Guessing the value in the range"};
+			return { state: "Guessing the value in the range" };
 		}
 		case "postGuess": {
-			return {state:"Waiting for other players to guess"};
+			return { state: "Waiting for other players to guess" };
 		}
 		case "singleTextEntry": {
-			return {state:"Answering a prompt"};
+			return { state: "Answering a prompt" };
 		}
 		case "choices": {
 			if (playerState.category === "walkthrough")
-				return {state:"Watching the tutorial"};
-			else return {state:"Making a choice"};
+				return { state: "Watching the tutorial" };
+			else return { state: "Making a choice" };
 		}
 		default: {
-			return {state:"Waiting"};
+			return { state: "Waiting" };
 		}
 	}
 }

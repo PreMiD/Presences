@@ -6,23 +6,23 @@ export function getPresenceData({
 }: GameCallbackParams): PresenceData {
 	switch (playerState.state) {
 		case "Lobby": {
-			return {state:"Waiting in lobby" };
+			return { state: "Waiting in lobby" };
 		}
 		case "Logo": {
-			return {state:"Waiting" };
+			return { state: "Waiting" };
 		}
 		case "MakeSingleChoice": {
 			const { html } = playerState.prompt;
 			if (html === "Press this to skip the tutorial...")
-				return {state:"Watching the tutorial" };
+				return { state: "Watching the tutorial" };
 			else if (html === "Did this person create an amusing scenario?")
-				return {state:"Rating the scenario" };
+				return { state: "Rating the scenario" };
 			else if (html.startsWith("For bonus points, which option do you think"))
-				return {state:"Predicting a player's choice" };
-			else return {state:"Responding to a scenario" };
+				return { state: "Predicting a player's choice" };
+			else return { state: "Responding to a scenario" };
 		}
 		case "EnterSingleText": {
-			return {state:"Completing a scenario" };
+			return { state: "Completing a scenario" };
 		}
 	}
 	return {};

@@ -6,30 +6,30 @@ export function getPresenceData({
 }: GameCallbackParams): PresenceData {
 	switch (playerState.state) {
 		case "Lobby": {
-			return {state:"Waiting in lobby"};
+			return { state: "Waiting in lobby" };
 		}
 		case "Logo": {
-			return {state:"Waiting"};
+			return { state: "Waiting" };
 		}
 		case "MakeSingleChoice": {
 			if (playerState.roundType === "FinalRound")
-				return {state:"Answering the final trivia questions"};
+				return { state: "Answering the final trivia questions" };
 			else {
 				switch (playerState.choiceType) {
 					case "SkipTutorial": {
-						return {state:"Watching the intro"};
+						return { state: "Watching the intro" };
 					}
 					case "Question": {
-						return {state:"Answering trivia"};
+						return { state: "Answering trivia" };
 					}
 					case "Rule": {
-						return {state:"Playing a rule game"};
+						return { state: "Playing a rule game" };
 					}
 					case "PostGameChoice": {
-						return {state:"Choosing a post-game option"};
+						return { state: "Choosing a post-game option" };
 					}
 					default: {
-						return {state:"Playing a death game"};
+						return { state: "Playing a death game" };
 					}
 				}
 			}
@@ -37,15 +37,15 @@ export function getPresenceData({
 		case "EnterSingleText": {
 			const { entryId } = playerState;
 			if (entryId.startsWith("MindMeld")) {
-				return {state:"Playing the mind meld game"};
+				return { state: "Playing the mind meld game" };
 			} else if (entryId === "CreatePassword") {
-				return {state:"Creating a password for the password game"};
+				return { state: "Creating a password for the password game" };
 			} else if (entryId === "Quiplash") {
-				return {state:`Playing Quiplash - ${playerState.prompt.html}`};
-			} else return {state:"Playing a text death game"};
+				return { state: `Playing Quiplash - ${playerState.prompt.html}` };
+			} else return { state: "Playing a text death game" };
 		}
 		case "Draw": {
-			return {state:"Playing a drawing death game"};
+			return { state: "Playing a drawing death game" };
 		}
 	}
 	return {};

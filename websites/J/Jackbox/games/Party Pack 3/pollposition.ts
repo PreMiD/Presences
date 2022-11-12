@@ -6,8 +6,7 @@ export function getPresenceData(): PresenceData {
 			".pollposition-page:not(.pt-page-off)"
 		),
 		{ classList } = currentGamePage;
-	if (classList.contains("state-lobby"))
-		return { state: "Waiting in lobby" };
+	if (classList.contains("state-lobby")) return { state: "Waiting in lobby" };
 	else if (classList.contains("state-post-lobby"))
 		return { state: "Watching the tutorial" };
 	else if (classList.contains("state-nothing")) return { state: "Waiting" };
@@ -42,6 +41,6 @@ export function getPresenceData(): PresenceData {
 	else if (classList.contains("state-audience-chose-option"))
 		return { state: "Choosing an option in the audience" };
 	else if (classList.contains("state-choosecharacter"))
-		return { state: "Choosing a character" }
+		return { state: "Choosing a character" };
 	return {};
 }

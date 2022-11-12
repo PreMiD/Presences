@@ -6,19 +6,19 @@ export function getPresenceData({
 }: GameCallbackParams): PresenceData {
 	switch (playerState.kind) {
 		case "lobby": {
-			return {state:"Waiting in lobby"};
+			return { state: "Waiting in lobby" };
 		}
 		case "waiting": {
-			return {state:"Waiting"};
+			return { state: "Waiting" };
 		}
 		case "choices": {
-			return {state:"Selecting a door"};
+			return { state: "Selecting a door" };
 		}
 		case "survey": {
-			return {state:"Completing survey"};
+			return { state: "Completing survey" };
 		}
 		case "postGame": {
-			return {state:"Viewing the results"};
+			return { state: "Viewing the results" };
 		}
 	}
 	return {};

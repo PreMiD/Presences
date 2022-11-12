@@ -3,8 +3,8 @@ export const logo = "https://i.imgur.com/NAySr0E.png";
 
 export function getPresenceData(): PresenceData {
 	const { id } = document.querySelector<HTMLDivElement>(
-			".quiplash-page:not(.pt-page-off)"
-		);
+		".quiplash-page:not(.pt-page-off)"
+	);
 	switch (id) {
 		case "state-lobby": {
 			return { state: "Waiting in lobby" };

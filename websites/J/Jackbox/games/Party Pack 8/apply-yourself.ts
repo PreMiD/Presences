@@ -6,28 +6,28 @@ export function getPresenceData({
 }: GameCallbackParams): PresenceData {
 	switch (playerState.kind) {
 		case "lobby": {
-			return {state:"Waiting in lobby"};
+			return { state: "Waiting in lobby" };
 		}
 		case "Logo": {
-			return {state:"Waiting"};
+			return { state: "Waiting" };
 		}
 		case "writing": {
-			return {state:"Writing a response"};
+			return { state: "Writing a response" };
 		}
 		case "voting": {
-			return {state:"Voting for a response"};
+			return { state: "Voting for a response" };
 		}
 		case "magnets": {
-			return {state:"Answering a prompt using magnets"};
+			return { state: "Answering a prompt using magnets" };
 		}
 		case "resumagnets": {
-			return {state:"Filling out their resumé using magnets"};
+			return { state: "Filling out their resumé using magnets" };
 		}
 		case "done": {
-			return {state:"Waiting for others to finish"};
+			return { state: "Waiting for others to finish" };
 		}
 		case "postGame": {
-			return {state:"Viewing the results"};
+			return { state: "Viewing the results" };
 		}
 	}
 	return {};
