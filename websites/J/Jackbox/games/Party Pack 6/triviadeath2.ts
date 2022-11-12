@@ -36,13 +36,13 @@ export function getPresenceData({
 		}
 		case "EnterSingleText": {
 			const { entryId } = playerState;
-			if (entryId.startsWith("MindMeld")) {
+			if (entryId.startsWith("MindMeld"))
 				return { state: "Playing the mind meld game" };
-			} else if (entryId === "CreatePassword") {
+			else if (entryId === "CreatePassword")
 				return { state: "Creating a password for the password game" };
-			} else if (entryId === "Quiplash") {
+			else if (entryId === "Quiplash")
 				return { state: `Playing Quiplash - ${playerState.prompt.html}` };
-			} else return { state: "Playing a text death game" };
+			else return { state: "Playing a text death game" };
 		}
 		case "Draw": {
 			return { state: "Playing a drawing death game" };

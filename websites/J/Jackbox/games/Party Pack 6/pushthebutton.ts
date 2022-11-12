@@ -48,11 +48,10 @@ export function getPresenceData({
 				const html = prompt?.html;
 				if (
 					html === "You are the Captain.  What test would you like to perform?"
-				) {
+				)
 					return { state: "Choosing a test to perform" };
-				} else if (/^Select <strong>.*?<\/strong> to Test!$/.test(html)) {
+				else if (/^Select <strong>.*?<\/strong> to Test!$/.test(html))
 					return { state: "Choosing players to test" };
-				}
 			}
 			break;
 		}
