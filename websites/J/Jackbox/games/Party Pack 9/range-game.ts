@@ -4,41 +4,32 @@ export const logo = "https://i.imgur.com/JH3JgaM.png";
 export function getPresenceData({
 	playerState,
 }: GameCallbackParams): PresenceData {
-	const presenceData: PresenceData = {};
 	switch (playerState.kind) {
 		case "lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return {state:"Waiting in lobby"};
 		}
 		case "postGame": {
-			presenceData.state = "Viewing the results";
-			break;
+			return {state:"Viewing the results"};
 		}
 		case "drawing": {
-			presenceData.state = "Drawing a picture";
-			break;
+			return {state:"Drawing a picture"};
 		}
 		case "guess": {
-			presenceData.state = "Guessing the value in the range";
-			break;
+			return {state:"Guessing the value in the range"};
 		}
 		case "postGuess": {
-			presenceData.state = "Waiting for other players to guess";
-			break;
+			return {state:"Waiting for other players to guess"};
 		}
 		case "singleTextEntry": {
-			presenceData.state = "Answering a prompt";
-			break;
+			return {state:"Answering a prompt"};
 		}
 		case "choices": {
 			if (playerState.category === "walkthrough")
-				presenceData.state = "Watching the tutorial";
-			else presenceData.state = "Making a choice";
-			break;
+				return {state:"Watching the tutorial"};
+			else return {state:"Making a choice"};
 		}
 		default: {
-			presenceData.state = "Waiting";
+			return {state:"Waiting"};
 		}
 	}
-	return presenceData;
 }
