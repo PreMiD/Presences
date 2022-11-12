@@ -2,69 +2,54 @@ export const name = "Tee K.O.";
 export const logo = "https://i.imgur.com/wGbJhoR.png";
 
 export function getPresenceData(): PresenceData {
-	const presenceData: PresenceData = {},
-		{ id } = document.querySelector<HTMLDivElement>(
+	const { id } = document.querySelector<HTMLDivElement>(
 			".awshirt-page:not(.pt-page-off)"
 		);
 	switch (id) {
 		case "state-lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return { state: "Waiting in lobby" };
 		}
 		case "state-logo": {
-			presenceData.state = "Waiting";
-			break;
+			return { state: "Waiting" };
 		}
 		case "state-audience": {
-			presenceData.state = "In the audience";
-			break;
+			return { state: "In the audience" };
 		}
 		case "state-draw": {
-			presenceData.state = "Drawing a shirt";
-			break;
+			return { state: "Drawing a shirt" };
 		}
 		case "state-drawing-done": {
-			presenceData.state =
-				"Waiting for other players to finish drawing their shirt";
-			break;
+			return { state:
+				"Waiting for other players to finish drawing their shirt" };
 		}
 		case "state-input": {
-			presenceData.state = "Creating taglines";
-			break;
+			return { state: "Creating taglines" };
 		}
 		case "state-prompts-done": {
-			presenceData.state = "Waiting for other players to finish their taglines";
-			break;
+			return { state: "Waiting for other players to finish their taglines" };
 		}
 		case "state-shirt": {
-			presenceData.state = "Creating a t-shirt";
-			break;
+			return { state: "Creating a t-shirt" };
 		}
 		case "state-shirt-done": {
-			presenceData.state = "Waiting for other players to finish their t-shirts";
-			break;
+			return { state: "Waiting for other players to finish their t-shirts" };
 		}
 		case "state-vote": {
-			presenceData.state = "Voting on a t-shirt";
-			break;
+			return { state: "Voting on a t-shirt" };
 		}
 		case "state-voting-done": {
-			presenceData.state = "Waiting for other players to finish voting";
-			break;
+			return { state: "Waiting for other players to finish voting" };
 		}
 		case "state-audience-suggestions": {
-			presenceData.state = "Entering a suggestion";
-			break;
+			return { state: "Entering a suggestion" };
 		}
 		case "state-answer-question-audience":
 		case "state-answer-question": {
-			presenceData.state = "Answering a question";
-			break;
+			return { state: "Answering a question" };
 		}
 		case "state-done-answering": {
-			presenceData.state = "Waiting for other players to finish answering";
-			break;
+			return { state: "Waiting for other players to finish answering" };
 		}
 	}
-	return presenceData;
+	return {};
 }

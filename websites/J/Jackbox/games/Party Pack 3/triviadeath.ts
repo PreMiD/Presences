@@ -2,43 +2,34 @@ export const name = "Trivia Murder Party";
 export const logo = "https://i.imgur.com/zHOvymB.png";
 
 export function getPresenceData(): PresenceData {
-	const presenceData: PresenceData = {},
-		{ id } = document.querySelector<HTMLDivElement>(
+	const { id } = document.querySelector<HTMLDivElement>(
 			".triviadeath-page:not(.pt-page-off)"
 		);
 	switch (id) {
 		case "state-lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return { state: "Waiting in lobby" };
 		}
 		case "state-logo": {
-			presenceData.state = "Waiting";
-			break;
+			return { state: "Waiting" };
 		}
 		case "state-make-single-choice": {
-			presenceData.state = "Answering a single choice question";
-			break;
+			return { state: "Answering a single choice question" };
 		}
 		case "state-make-many-choices": {
-			presenceData.state = "Answering a multiple choice question";
-			break;
+			return { state: "Answering a multiple choice question" };
 		}
 		case "state-enter-single-text": {
-			presenceData.state = "Answering a text prompt";
-			break;
+			return { state: "Answering a text prompt" };
 		}
 		case "state-enter-single-drawing": {
-			presenceData.state = "Drawing a picture";
-			break;
+			return { state: "Drawing a picture" };
 		}
 		case "state-grid": {
-			presenceData.state = "Playing a grid game";
-			break;
+			return { state: "Playing a grid game" };
 		}
 		case "state-game-results": {
-			presenceData.state = "Viewing game results";
-			break;
+			return { state: "Viewing game results" };
 		}
 	}
-	return presenceData;
+	return {};
 }

@@ -2,35 +2,28 @@ export const name = "Quiplash XL";
 export const logo = "https://i.imgur.com/NAySr0E.png";
 
 export function getPresenceData(): PresenceData {
-	const presenceData: PresenceData = {},
-		{ id } = document.querySelector<HTMLDivElement>(
+	const { id } = document.querySelector<HTMLDivElement>(
 			".quiplash-page:not(.pt-page-off)"
 		);
 	switch (id) {
 		case "state-lobby": {
-			presenceData.state = "Waiting in lobby";
-			break;
+			return { state: "Waiting in lobby" };
 		}
 		case "state-logo": {
-			presenceData.state = "Watching tutorial";
-			break;
+			return { state: "Watching tutorial" };
 		}
 		case "state-answer-question-audience": {
-			presenceData.state = "Writing audience quip";
-			break;
+			return { state: "Writing audience quip" };
 		}
 		case "state-answer-question": {
-			presenceData.state = "Writing quip";
-			break;
+			return { state: "Writing quip" };
 		}
 		case "state-done-answering": {
-			presenceData.state = "Waiting for other players to answer";
-			break;
+			return { state: "Waiting for other players to answer" };
 		}
 		case "state-vote": {
-			presenceData.state = "Voting";
-			break;
+			return { state: "Voting" };
 		}
 	}
-	return presenceData;
+	return {};
 }
