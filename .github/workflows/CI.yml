@@ -21,8 +21,6 @@ jobs:
       - name: Install dependencies
         run: HUSKY=0 npm ci
       - name: Compile changed files
-        run: |
-          git config --global core.quotePath false
-          npm run compile ${{ github.event_name }} $GITHUB_BASE_REF
+        run: npm run compile ${{ github.event_name }} $GITHUB_BASE_REF
       - name: Check Lint
         run: npm run lint:ci
