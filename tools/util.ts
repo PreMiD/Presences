@@ -16,7 +16,7 @@ export function getDiff(
 		},
 		eventName = process.argv[2] ? validateArg(process.argv[2]) : "pull_request",
 		changedPresenceFolders = execSync(
-			`git --no-pager diff --name-only --diff-filter=${
+			`git -c core.quotePath=false --no-pager diff --name-only --diff-filter=${
 				type === "addedModified"
 					? "ACMRTU"
 					: type === "removed"
