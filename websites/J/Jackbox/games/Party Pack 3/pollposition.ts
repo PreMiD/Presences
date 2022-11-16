@@ -6,41 +6,57 @@ export function getPresenceData(): PresenceData {
 			".pollposition-page:not(.pt-page-off)"
 		),
 		{ classList } = currentGamePage;
-	if (classList.contains("state-lobby")) return { state: "Waiting in lobby" };
-	else if (classList.contains("state-post-lobby"))
-		return { state: "Watching the tutorial" };
-	else if (classList.contains("state-nothing")) return { state: "Waiting" };
-	else if (classList.contains("state-round"))
-		return { state: currentGamePage.querySelector("p").textContent };
-	else if (
-		classList.contains("state-upordowndone") ||
-		classList.contains("state-waitforpercentage") ||
-		classList.contains("state-waitforupordown") ||
-		classList.contains("state-waitforaudience") ||
-		classList.contains("state-upordown-sent") ||
-		classList.contains("state-waitforallpercentages")
-	)
-		return { state: "Waiting for other players to decide" };
-	else if (classList.contains("state-choosecategory"))
-		return { state: "Choosing a category" };
-	else if (classList.contains("state-waitforcategory"))
-		return { state: "Waiting for a category to be chosen" };
-	else if (classList.contains("state-showquestion"))
-		return { state: "Viewing a survey prompt" };
-	else if (classList.contains("state-chooseupordown"))
-		return { state: "Deciding if the true percentage is higher or lower" };
-	else if (classList.contains("state-choosemultiple"))
-		return { state: "Choosing multiple choices" };
-	else if (
-		classList.contains("state-audience-choice-sent") ||
-		classList.contains("state-waitformultiple")
-	)
-		return { state: "Waiting for other players to choose their choices" };
-	else if (classList.contains("state-audience-wait"))
-		return { state: "In the audience" };
-	else if (classList.contains("state-audience-chose-option"))
-		return { state: "Choosing an option in the audience" };
-	else if (classList.contains("state-choosecharacter"))
-		return { state: "Choosing a character" };
-	return {};
+	switch (true) {
+		case classList.contains("state-lobby"): {
+			return { state: "Waiting in lobby" };
+		}
+		case classList.contains("state-post-lobby"): {
+			return { state: "Watching the tutorial" };
+		}
+		case classList.contains("state-nothing"): {
+			return { state: "Waiting" };
+		}
+		case classList.contains("state-round"): {
+			return { state: currentGamePage.querySelector("p").textContent };
+		}
+		case classList.contains("state-upordowndone"):
+		case classList.contains("state-waitforpercentage"):
+		case classList.contains("state-waitforupordown"):
+		case classList.contains("state-waitforaudience"):
+		case classList.contains("state-upordown-sent"):
+		case classList.contains("state-waitforallpercentages"): {
+			return { state: "Waiting for other players to decide" };
+		}
+		case classList.contains("state-choosecategory"): {
+			return { state: "Choosing a category" };
+		}
+		case classList.contains("state-waitforcategory"): {
+			return { state: "Waiting for a category to be chosen" };
+		}
+		case classList.contains("state-showquestion"): {
+			return { state: "Viewing a survey prompt" };
+		}
+		case classList.contains("state-chooseupordown"): {
+			return { state: "Deciding if the true percentage is higher or lower" };
+		}
+		case classList.contains("state-choosemultiple"): {
+			return { state: "Choosing multiple choices" };
+		}
+		case classList.contains("state-audience-choice-sent") ||
+			classList.contains("state-waitformultiple"): {
+			return { state: "Waiting for other players to choose their choices" };
+		}
+		case classList.contains("state-audience-wait"): {
+			return { state: "In the audience" };
+		}
+		case classList.contains("state-audience-chose-option"): {
+			return { state: "Choosing an option in the audience" };
+		}
+		case classList.contains("state-choosecharacter"): {
+			return { state: "Choosing a character" };
+		}
+		default: {
+			return {};
+		}
+	}
 }
