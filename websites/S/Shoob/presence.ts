@@ -51,7 +51,20 @@ presence.on("UpdateData", async () => {
 		pathSplit = pathname.split("/").slice(1),
 		pageTitle = document.querySelector(
 			"[itemprop='breadcrumb'] > li:last-child"
-		)?.textContent;
+		)?.textContent,
+		profileImage = document.querySelector<HTMLImageElement>(".header-avatar");
+
+	if (profileImage) {
+		presenceData.smallImageKey = profileImage.src;
+		presenceData.smallImageText = `Wallet: ${
+			document.querySelector<HTMLSpanElement>(".header-wallet").textContent
+		} | Bank: ${
+			document.querySelector<HTMLSpanElement>(".header-bank:not(.orange)")
+				.textContent
+		} | Sōru: ${document
+			.querySelector<HTMLSpanElement>(".header-bank.orange")
+			.textContent.substring(1)}`;
+	}
 
 	for (const [path, data] of Object.entries(staticPages))
 		if (pathname.startsWith(path)) presenceData = { ...presenceData, ...data };
@@ -70,6 +83,7 @@ presence.on("UpdateData", async () => {
 			if (pathSplit[1]) {
 				presenceData.details = "Viewing an Auction";
 				presenceData.state = pageTitle;
+				presenceData.buttons = [{ label: "View Auction", url: href }];
 			} else presenceData.details = "Viewing the Auction HQ";
 			break;
 		case "cards":
@@ -112,6 +126,7 @@ presence.on("UpdateData", async () => {
 				case "thread": {
 					presenceData.details = "Viewing a Support Thread";
 					presenceData.state = pageTitle;
+					presenceData.buttons = [{ label: "View Thread", url: href }];
 					break;
 				}
 				default: {
@@ -125,6 +140,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
 				".profile-avatar-pic img"
 			).src;
+			presenceData.buttons = [{ label: "View Profile", url: href }];
 			break;
 	}
 
