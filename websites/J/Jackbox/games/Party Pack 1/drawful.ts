@@ -6,33 +6,50 @@ export function getPresenceData(): PresenceData {
 			".drawful-page:not(.pt-page-off)"
 		),
 		{ classList, id } = currentGamePage;
-	if (classList.contains("state-lobby")) return { state: "Waiting in lobby" };
-	else if (
-		classList.contains("state-lyingdone") ||
-		classList.contains("state-nothing") ||
-		classList.contains("state-drawing-done")
-	)
-		return { state: "Waiting" };
-	else if (classList.contains("state-round"))
-		return { state: currentGamePage.querySelector("span").textContent };
-	else if (classList.contains("state-drawing-sent"))
-		return { state: "Waiting for other players to finish drawing" };
-	else if (classList.contains("state-enterlie"))
-		return { state: "Entering a lie" };
-	else if (classList.contains("state-chooselie"))
-		return { state: "Looking for the truth" };
-	else if (classList.contains("state-chooselikes"))
-		return { state: "Liking lies" };
-	else if (classList.contains("state-liereceived"))
-		return { state: "Waiting for other players to enter lies" };
-	else if (classList.contains("state-notchoosing"))
-		return { state: "Waiting for other players to discover the truth" };
-	else if (classList.contains("state-draw"))
-		return { state: "Drawing something" };
-	else if (classList.contains("state-audience-choose"))
-		return { state: "Choosing a lie" };
-	else if (id === "state-ugc") return { state: "Creating a custom game" };
-	else if (classList.contains("state-audience"))
-		return { state: "In the audience" };
-	return {};
+	switch (true) {
+		case classList.contains("state-lobby"): {
+			return { state: "Waiting in lobby" };
+		}
+		case classList.contains("state-lyingdone"):
+		case classList.contains("state-nothing"):
+		case classList.contains("state-drawing-done"): {
+			return { state: "Waiting" };
+		}
+		case classList.contains("state-round"): {
+			return { state: currentGamePage.querySelector("span").textContent };
+		}
+		case classList.contains("state-drawing-sent"): {
+			return { state: "Waiting for other players to finish drawing" };
+		}
+		case classList.contains("state-enterlie"): {
+			return { state: "Entering a lie" };
+		}
+		case classList.contains("state-chooselie"): {
+			return { state: "Looking for the truth" };
+		}
+		case classList.contains("state-chooselikes"): {
+			return { state: "Liking lies" };
+		}
+		case classList.contains("state-liereceived"): {
+			return { state: "Waiting for other players to enter lies" };
+		}
+		case classList.contains("state-notchoosing"): {
+			return { state: "Waiting for other players to discover the truth" };
+		}
+		case classList.contains("state-draw"): {
+			return { state: "Drawing something" };
+		}
+		case classList.contains("state-audience-choose"): {
+			return { state: "Choosing a lie" };
+		}
+		case id === "state-ugc": {
+			return { state: "Creating a custom game" };
+		}
+		case classList.contains("state-audience"): {
+			return { state: "In the audience" };
+		}
+		default: {
+			return {};
+		}
+	}
 }
