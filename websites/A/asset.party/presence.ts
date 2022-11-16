@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Going through key torture...";
 		presenceData.state = `🔑${KeyDetails[0].innerHTML.match(/\d+/)[0]} 🧍 ${
 			KeyDetails[2].innerHTML.match(/\d+/)[0]
-		} 👀 ${KeyDetails[2].innerHTML.match(/\d+/)[0]} `;
+		} 👀 ${KeyDetails[3].innerHTML.match(/\d+/)[0]} `;
 		presenceData.smallImageKey = "key";
 		presenceData.smallImageText = "torture.";
 	} else if (pathname === "/api-history/")
