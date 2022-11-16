@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "521762564062052393",
+		"name": "Dwifte#0661"
+	},
+	"service": "asset.party",
+	"description": {
+		"en": "Presence showing your activity on SBOX"
+	},
+	"url": "asset.party",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/vWSslVh.png",
+	"thumbnail": "https://i.imgur.com/5IdCQ25.jpg",
+	"color": "#106df6",
+	"category": "games",
+	"tags": [
+		"sbox",
+		"gaming",
+		"garrys-mod"
+	]
+}
