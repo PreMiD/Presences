@@ -62,11 +62,12 @@ presence.on("UpdateData", async () => {
 	).textContent;
 
 	if (cover) {
-		presenceData.largeImageKey =
-			document.querySelector("figure[data-test=current-media-imagery] > div > div > div > img").getAttribute("src").replace(
-				"80x80",
-				"640x640"
-			);
+		presenceData.largeImageKey = document
+			.querySelector(
+				"figure[data-test=current-media-imagery] > div > div > div > img"
+			)
+			.getAttribute("src")
+			.replace("80x80", "640x640");
 	}
 	if (currentTimeSec > 0 || !paused) {
 		presenceData.endTimestamp =
