@@ -8,7 +8,10 @@
 	"description": {
 		"en": "Unlimited anime without ads!"
 	},
-	"url": ["animeflix.live", "www.animeflix.live"],
+	"url": [
+		"animeflix.live",
+		"www.animeflix.live"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/LxIgMzf.png",
 	"thumbnail": "https://i.imgur.com/XoKtZCC.jpg",
