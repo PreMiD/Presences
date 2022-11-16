@@ -5,11 +5,14 @@ const presence = new Presence({
 	staticPages: Record<string, PresenceData> = {
 		"/": { details: "Viewing homepage" },
 		"/home": { details: "Viewing homepage" },
+		"/achievements": { details: "Viewing achievements" },
 		"/appeals": { details: "Viewing Appeals" },
 		"/anime": { details: "Viewing Anime" },
 		"/bank": { details: "Viewing the Bank" },
+		"/bump": { details: "Bumping" },
 		"/card-abilities": { details: "Viewing Card Abilities" },
 		"/cardmakers/leaderboard": { details: "Viewing CardMaker Leaderboards" },
+		"/copyright": { details: "Viewing Copyright Policy" },
 		"/creators": { details: "Viewing Creators" },
 		"/dashboard": { details: "Viewing the Dashboard" },
 		"/events": { details: "Viewing Events" },
@@ -21,9 +24,11 @@ const presence = new Presence({
 		"/leaderboards": { details: "Viewing Leaderboards" },
 		"/market": { details: "Viewing the Market" },
 		"/medals": { details: "Viewing Medals" },
+		"/messages": { details: "Viewing Private Messages" },
 		"/mini-games": { details: "Viewing Mini-Games" },
 		"/notifications": { details: "Viewing Notifications" },
 		"/premium": { details: "Viewing Premium" },
+		"/privacy-policy": { details: "Viewing Privacy Policy" },
 		"/rules": { details: "Reading the Rules" },
 		"/settings": { details: "Managing Settings" },
 		"/shop": { details: "Viewing the Shop" },
@@ -96,6 +101,23 @@ presence.on("UpdateData", async () => {
 				presenceData.state = pageTitle;
 				presenceData.buttons = [{ label: "View Server", url: href }];
 			} else presenceData.details = "Viewing Servers";
+			break;
+		case "support":
+			switch (pathSplit[1]) {
+				case "category": {
+					presenceData.details = "Browsing a Support Category";
+					presenceData.state = pageTitle;
+					break;
+				}
+				case "thread": {
+					presenceData.details = "Viewing a Support Thread";
+					presenceData.state = pageTitle;
+					break;
+				}
+				default: {
+					presenceData.details = "Browsing Support";
+				}
+			}
 			break;
 		case "user":
 			presenceData.details = "Viewing a profile";
