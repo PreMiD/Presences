@@ -28,6 +28,7 @@ presence.on("UpdateData", async () => {
 		{ href, pathname } = window.location,
 		pathSplit = pathname.split("/").filter(Boolean),
 		lastPath = pathSplit[pathSplit.length - 1];
+	let slideshowUsed = false;
 
 	switch (pathSplit[0] ?? "") {
 		case "": {
@@ -41,6 +42,19 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLImageElement>(".thumbnail_link img").src
 			);
 			presenceData.buttons = [{ label: "View Artist", url: href }];
+			break;
+		}
+		case "digs": {
+			if (pathSplit[2]) {
+				presenceData.details = "Viewing a dig";
+				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.buttons = [{ label: "View Dig", url: href }];
+			} else if (pathSplit[1]) {
+				presenceData.details = "Browsing digs";
+				presenceData.state = document.querySelector("h1").textContent;
+			} else {
+				presenceData.details = "Browsing digs";
+			}
 			break;
 		}
 		case "hc": {
@@ -72,6 +86,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "label": {
 			if (lastPath === "images") {
+				slideshowUsed = true;
 				presenceData.details = "Viewing label images";
 				presenceData.state = document.querySelector("h2 > a").textContent;
 				const images =
@@ -145,11 +160,16 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: "View User", url: href }];
 			break;
 		}
+		default: {
+			presenceData.details = "Browsing";
+			presenceData.state = document.title.match(/^(.*?)( \| Discogs)?$/)[1];
+		}
 	}
 
-	if (slideshow.getSlides().length > 0) {
+	if (slideshowUsed) {
 		presence.setActivity(slideshow);
 	} else {
+		slideshow.deleteAllSlides();
 		presence.setActivity(presenceData);
 	}
 });
