@@ -87,18 +87,38 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "master": {
+			if (pathSplit[1] === "stats") {
+				presenceData.details = "Viewing stats for a master release";
+				presenceData.state = document.querySelector("h1 > a").textContent;
+			} else {
+				presenceData.details = "Viewing a master release";
+				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.largeImageKey = await getShortURL(
+					document.querySelector<HTMLImageElement>("picture > img").src
+				);
+				presenceData.buttons = [{ label: "View Release", url: href }];
+			}
+			break;
+		}
 		case "release": {
 			if (pathSplit[1] === "stats") {
 				presenceData.details = "Viewing stats for release";
 				presenceData.state = document.querySelector("h1 > a").textContent;
+			} else if (pathSplit[2] === "videos") {
+				presenceData.details = "Editing videos for release";
+				presenceData.state = [...document.querySelector("h1").children]
+					.slice(1)
+					.map(e => e.textContent)
+					.join(" ");
 			} else {
 				presenceData.details = "Viewing a release";
 				presenceData.state = document.querySelector("h1").textContent;
 				presenceData.largeImageKey = await getShortURL(
 					document.querySelector<HTMLImageElement>("picture > img").src
 				);
+				presenceData.buttons = [{ label: "View Release", url: href }];
 			}
-			presenceData.buttons = [{ label: "View Release", url: href }];
 			break;
 		}
 		case "user": {
