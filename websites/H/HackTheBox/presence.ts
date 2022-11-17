@@ -197,9 +197,9 @@ presence.on("UpdateData", async () => {
 
 		if (item) {
 			presenceData.details = item.details;
-			if (!item.stateMethod) 
+			if (item.stateMethod)
 				presenceData.state = methods[item.stateMethod as keyof IMethods]();
-			 else presenceData.state = item.state;
+			else presenceData.state = item.state;
 		}
 	}
 
