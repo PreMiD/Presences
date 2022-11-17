@@ -34,6 +34,33 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing home page";
 			break;
 		}
+		case "hc": {
+			switch (pathSplit[2] ?? "") {
+				case "": {
+					presenceData.details = "Browsing the help center";
+					break;
+				}
+				case "articles": {
+					presenceData.details = "Reading a help article";
+					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.buttons = [{ label: "Read Article", url: href }];
+					break;
+				}
+				case "categories":
+				case "sections": {
+					presenceData.details = "Browsing a help center category";
+					presenceData.state = document.querySelector("h1").textContent;
+					break;
+				}
+				case "search": {
+					presenceData.details = "Searching the help center";
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("#query").value;
+					break;
+				}
+			}
+			break;
+		}
 		case "label": {
 			if (lastPath === "images") {
 				presenceData.details = "Viewing label images";
