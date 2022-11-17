@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prefer-switch */
 const presence = new Presence({
 	clientId: "1042537481058394164",
 });
