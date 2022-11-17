@@ -9,6 +9,7 @@ const presence = new Presence({
 let strings: Awaited<ReturnType<typeof getStrings>>;
 
 enum Assets {
+	logo = "https://i.imgur.com/SFXKtLF.png",
 	search = "https://i.imgur.com/wYVlwJX.png",
 	view = "https://i.imgur.com/hxvvGUi.png",
 }
@@ -28,7 +29,7 @@ presence.on("UpdateData", async () => {
 	if (!strings) strings = await getStrings();
 
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/SFXKtLF.png",
+			largeImageKey: Assets.logo,
 			startTimestamp: browsingTimestamp,
 		},
 		[privacy, logo, time] = await Promise.all([
