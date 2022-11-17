@@ -33,13 +33,13 @@ presence.on("UpdateData", async () => {
 				document.querySelectorAll(".nav-thumb").length !== 0 &&
 				document.querySelectorAll(".page-header-block").length !== 0
 			) {
-				const Details = document.querySelectorAll(".page-header-block");
+				const packageDetails = document.querySelectorAll(".page-header-block");
 				if (
-					Details.length !== 0 &&
+					packageDetails.length !== 0 &&
 					document.querySelectorAll(".nav-thumb").length !== 0
 				) {
-					presenceData.details = `Viewing ${Details[2].innerHTML} `;
-					presenceData.state = `Developed by ${Details[1].innerHTML}`;
+					presenceData.details = `Viewing ${packageDetails[2].innerHTML} `;
+					presenceData.state = `Developed by ${packageDetails[1].innerHTML}`;
 					presenceData.buttons = [
 						{
 							label: "Open Project",
