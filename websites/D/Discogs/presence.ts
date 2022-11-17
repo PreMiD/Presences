@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/2LZSDR9.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ href, pathname } = window.location,
+		{ href, pathname, hash } = window.location,
 		pathSplit = pathname.split("/").filter(Boolean),
 		lastPath = pathSplit[pathSplit.length - 1];
 	let slideshowUsed = false;
@@ -42,6 +42,24 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLImageElement>(".thumbnail_link img").src
 			);
 			presenceData.buttons = [{ label: "View Artist", url: href }];
+			break;
+		}
+		case "developer": {
+			const [, currentPage, currentHeader] =
+				hash.match(/page:([^,]+).*?header:([^,]+)/) ?? [];
+			let state = "";
+			presenceData.details = "Viewing API documentation";
+			if (currentPage) {
+				state += document.querySelector<HTMLHeadingElement>(
+					`#${currentPage}`
+				).textContent;
+				if (currentHeader) {
+					state += ` - ${
+						document.querySelector<HTMLHeadingElement>(`#${currentHeader}`)
+							.textContent
+					}`;
+				}
+			}
 			break;
 		}
 		case "digs": {
