@@ -1,24 +1,24 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "service": "Pokeflix",
-  "author": {
-    "id": "521762564062052393",
-    "name": "Dwifte"
-  },
-  "description": {
-    "en": "Pokeflix is a site where you can watch official Pokémon movies and other Pokémon content."
-  },
-  "url": [
-    "pokeflix.tv",
-    "www.pokeflix.tv"
-  ],
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/6MdrOuM.png",
-  "thumbnail": "https://i.imgur.com/TfwYiR3.png",
-  "color": "#cd5241",
-  "tags": [
-    "pokemon",
-    "video"
-  ],
-  "category": "anime"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "521762564062052393",
+		"name": "Dwifte"
+	},
+	"service": "Pokeflix",
+	"description": {
+		"en": "Pokeflix is a site where you can watch official Pokémon movies and other Pokémon content."
+	},
+	"url": [
+		"pokeflix.tv",
+		"www.pokeflix.tv"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/6MdrOuM.png",
+	"thumbnail": "https://i.imgur.com/TfwYiR3.png",
+	"color": "#cd5241",
+	"category": "anime",
+	"tags": [
+		"pokemon",
+		"video"
+	]
 }
