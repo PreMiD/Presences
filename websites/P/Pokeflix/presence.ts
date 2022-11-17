@@ -2,12 +2,9 @@ const presence = new Presence({
 	clientId: "1042851981867360376",
 });
 
-enum Assets {
-	logo="https://i.imgur.com/6MdrOuM.png"
-}
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.logo,
+			largeImageKey: "https://i.imgur.com/6MdrOuM.png",
 		},
 		{ href } = document.location;
 	if (document.querySelectorAll("#my-video")[0]) {
