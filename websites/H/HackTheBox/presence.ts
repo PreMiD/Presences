@@ -202,12 +202,8 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	presenceData.largeImageKey = "icon";
+	presenceData.largeImageKey = "https://i.imgur.com/aMjnyic.png";
 	presenceData.buttons = [
-		{
-			label: "View Page",
-			url: document.location.href,
-		},
 		{
 			label: "My Profile",
 			url: `https://app.hackthebox.com/users/${getUserId()}`,
