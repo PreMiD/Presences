@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "Pokeflix",
+  "author": {
+    "id": "521762564062052393",
+    "name": "Dwifte#0661"
+  },
+  "description": {
+    "en": "Pokeflix"
+  },
+  "url": [
+    "pokeflix.tv",
+    "www.pokeflix.tv"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/6MdrOuM.png",
+  "thumbnail": "https://i.imgur.com/6MdrOuM.png",
+  "color": "#cd5241",
+  "tags": [
+    "pokemon",
+    "video"
+  ],
+  "category": "anime"
+}
