@@ -3,13 +3,13 @@ const presence = new Presence({
 });
 
 enum Assets {
-	logo = "https://i.imgur.com/o5viesK.png",
-	smallKey = "https://i.imgur.com/mflNxaO.png",
+	Logo = "https://i.imgur.com/o5viesK.png",
+	Key = "https://i.imgur.com/mflNxaO.png",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.logo,
+			largeImageKey: Assets.Logo,
 		},
 		{ pathname, href } = document.location,
 		pathSplit = pathname.split(/^.(.*)\/([^/]*)$/).filter(String);
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `🔑${keyDetails[0].innerHTML.match(/\d+/)[0]} 🧍 ${
 				keyDetails[2].innerHTML.match(/\d+/)[0]
 			} 👀 ${keyDetails[3].innerHTML.match(/\d+/)[0]} `;
-			presenceData.smallImageKey = Assets.smallKey;
+			presenceData.smallImageKey = Assets.Key;
 			presenceData.smallImageText = "You found the key!";
 
 			break;
