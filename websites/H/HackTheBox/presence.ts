@@ -169,7 +169,6 @@ function findPresence() {
 				new RegExp(item.path.replace("{}", ".+")).test(window.location.pathname)
 			)
 				return item;
-			else null;
 		} else if (document.location.pathname.endsWith(item.path)) return item;
 		else if (document.location.pathname.includes(item.path)) return item;
 		else return null;
