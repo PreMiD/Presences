@@ -34,6 +34,15 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing home page";
 			break;
 		}
+		case "artist": {
+			presenceData.details = "Viewing an artist";
+			presenceData.state = document.querySelector("h1").textContent;
+			presenceData.largeImageKey = await getShortURL(
+				document.querySelector<HTMLImageElement>(".thumbnail_link img").src
+			);
+			presenceData.buttons = [{ label: "View Artist", url: href }];
+			break;
+		}
 		case "hc": {
 			switch (pathSplit[2] ?? "") {
 				case "": {
@@ -91,6 +100,8 @@ presence.on("UpdateData", async () => {
 			if (pathSplit[1] === "stats") {
 				presenceData.details = "Viewing stats for a master release";
 				presenceData.state = document.querySelector("h1 > a").textContent;
+			} else if (pathSplit[1] === "create") {
+				presenceData.details = "Creating a master release";
 			} else {
 				presenceData.details = "Viewing a master release";
 				presenceData.state = document.querySelector("h1").textContent;
