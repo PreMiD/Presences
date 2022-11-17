@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "521762564062052393",
+		"name": "Dwifte#0661"
+	},
+	"service": "AnimeTvOnline",
+	"description": {
+		"en": "An Italian site to watch anime online."
+	},
+	"url": "animetvonline.org",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/b0PVWvC.png",
+	"thumbnail": "https://i.imgur.com/b0PVWvC.png",
+	"color": "#8d1d81",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"watch",
+		"italian"
+	]
+}
