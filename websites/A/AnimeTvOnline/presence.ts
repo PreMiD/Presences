@@ -3,11 +3,11 @@ const presence = new Presence({
 });
 
 enum Assets {
-	logo = "https://i.imgur.com/b0PVWvC.png"
+	Logo = "https://i.imgur.com/b0PVWvC.png",
 }
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.logo,
+			largeImageKey: Assets.Logo,
 		},
 		{ pathname, href } = document.location;
 
