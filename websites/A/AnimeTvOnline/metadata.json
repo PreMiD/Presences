@@ -8,7 +8,7 @@
 	"description": {
 		"en": "An Italian site to watch anime online."
 	},
-	"url": "animetvonline.org",
+	"url": ["www.animetvonline.org", "animetvonline.org"],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/b0PVWvC.png",
 	"thumbnail": "https://i.imgur.com/ey7mnmZ.png",
