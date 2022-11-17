@@ -8,8 +8,12 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href } = document.location,
 		pathSplit = pathname.split(/^.(.*)\/([^/]*)$/).filter(String);
-	if (pathname === "/") presenceData.details = "Exploring asset.party";
-	else if (pathname === "/get/developer/preview") {
+	switch (pathname) {
+	case "/": {
+	presenceData.details = "Exploring asset.party";
+	break;
+	}
+	case "/get/developer/preview": {
 		const keyDetails = document.querySelectorAll(".tag");
 		presenceData.details = "Trying to find the key...";
 		presenceData.state = `🔑${keyDetails[0].innerHTML.match(/\d+/)[0]} 🧍 ${
@@ -17,9 +21,14 @@ presence.on("UpdateData", async () => {
 		} 👀 ${keyDetails[3].innerHTML.match(/\d+/)[0]} `;
 		presenceData.smallImageKey = "https://i.imgur.com/mflNxaO.png";
 		presenceData.smallImageText = "You found the key!";
-	} else if (pathname === "/api-history/")
-		presenceData.details = "Viewing API History";
-	else if (
+	
+	break;
+	}
+	case "/api-history/": {
+	presenceData.details = "Viewing API History";
+	break;
+	}
+	default: if (
 		document.querySelectorAll(".nav-thumb").length !== 0 &&
 		document.querySelectorAll(".page-header-block").length !== 0
 	) {
@@ -48,6 +57,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
+	}
 	}
 
 	presence.setActivity(presenceData);
