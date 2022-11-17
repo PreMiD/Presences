@@ -6,11 +6,11 @@
 	},
 	"service": "asset.party",
 	"description": {
-		"en": "Presence showing your activity on SBOX"
+		"en": "asset.party is a website developed by Facepunch that allows you to browse through the S&Box documentation and user-generated content."
 	},
 	"url": "asset.party",
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/vWSslVh.png",
+	"logo": "https://i.imgur.com/o5viesK.png",
 	"thumbnail": "https://i.imgur.com/5IdCQ25.jpg",
 	"color": "#106df6",
 	"category": "games",

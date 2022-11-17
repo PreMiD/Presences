@@ -4,31 +4,19 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/o5viesK.png",
 		},
 		{ pathname, href } = document.location,
 		pathSplit = pathname.split(/^.(.*)\/([^/]*)$/).filter(String);
-	//  use if you want to add username support :)
-	//  showUsername = await presence.getSetting<boolean>("show-username"),
-	//  UsernameSelector = document.querySelectorAll(".username");
-	//  let Username = "";
-
-	// if (UsernameSelector.length !== 0 && showUsername === true ) {
-	// 	if (UsernameSelector[0] && UsernameSelector[0].innerHTML)
-	// 		Username = UsernameSelector[0].innerHTML;
-
-	// else
-	// 	console.log("failed!");
-	// }
 	if (pathname === "/") presenceData.details = "Exploring asset.party";
 	else if (pathname === "/get/developer/preview") {
-		const KeyDetails = document.querySelectorAll(".tag");
-		presenceData.details = "Going through key torture...";
-		presenceData.state = `🔑${KeyDetails[0].innerHTML.match(/\d+/)[0]} 🧍 ${
-			KeyDetails[2].innerHTML.match(/\d+/)[0]
-		} 👀 ${KeyDetails[3].innerHTML.match(/\d+/)[0]} `;
-		presenceData.smallImageKey = "key";
-		presenceData.smallImageText = "torture.";
+		const keyDetails = document.querySelectorAll(".tag");
+		presenceData.details = "Trying to find the key...";
+		presenceData.state = `🔑${keyDetails[0].innerHTML.match(/\d+/)[0]} 🧍 ${
+			keyDetails[2].innerHTML.match(/\d+/)[0]
+		} 👀 ${keyDetails[3].innerHTML.match(/\d+/)[0]} `;
+		presenceData.smallImageKey = "https://i.imgur.com/mflNxaO.png";
+		presenceData.smallImageText = "You found the key!";
 	} else if (pathname === "/api-history/")
 		presenceData.details = "Viewing API History";
 	else if (
