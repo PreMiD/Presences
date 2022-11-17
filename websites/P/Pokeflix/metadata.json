@@ -3,10 +3,10 @@
   "service": "Pokeflix",
   "author": {
     "id": "521762564062052393",
-    "name": "Dwifte#0661"
+    "name": "Dwifte"
   },
   "description": {
-    "en": "Pokeflix"
+    "en": "Pokeflix is a site where you can watch official Pokémon movies and other Pokémon content."
   },
   "url": [
     "pokeflix.tv",
@@ -14,7 +14,7 @@
   ],
   "version": "1.0.0",
   "logo": "https://i.imgur.com/6MdrOuM.png",
-  "thumbnail": "https://i.imgur.com/6MdrOuM.png",
+  "thumbnail": "https://i.imgur.com/TfwYiR3.png",
   "color": "#cd5241",
   "tags": [
     "pokemon",
