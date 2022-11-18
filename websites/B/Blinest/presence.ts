@@ -1,13 +1,16 @@
 const presence = new Presence({
-		clientId: "",
-	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	});
+	clientId: "828925279946801162",
+});
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {};
-
-	presence.setActivity(presenceData);
+	presence.setActivity({
+		details: "Blinest",
+		state: "Playing on Blinest",
+		buttons: [
+			{
+				label: "Play",
+				url: "https://blinest.com/",
+			},
+		],
+	});
 });
