@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "Blinest",
+  "author": {
+    "id": "828916578698526722",
+    "name": "blinest#3458"
+  },
+  "description": {
+    "en": "Blinest is a free multiplayer music quiz site."
+  },
+  "url": "blinest.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/tAwvgnB.png",
+  "thumbnail": "https://i.imgur.com/hIa6Wi1.png",
+  "color": "#171717",
+  "tags": [
+    "quiz",
+    "music",
+    "musical",
+    "blindtest",
+    "blind-test",
+    "music-quiz"
+  ],
+  "category": "games"
+}
