@@ -24,6 +24,10 @@
 	],
 	"settings": [
 		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
 			"id": "privacy",
 			"title": "Приватный режим",
 			"icon": "fad fa-user-secret",

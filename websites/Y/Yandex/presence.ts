@@ -6,8 +6,6 @@ const presence = new Presence({
 		document.querySelector<HTMLInputElement>('input[name="text"]'),
 	{ host, pathname } = document.location;
 
-let strings: Awaited<ReturnType<typeof getStrings>>;
-
 enum Assets {
 	logo = "https://i.imgur.com/SFXKtLF.png",
 	search = "https://i.imgur.com/wYVlwJX.png",
@@ -15,34 +13,48 @@ enum Assets {
 }
 
 async function getStrings() {
-	return presence.getStrings({
-		search: "general.search",
-		view: "general.viewing",
-	});
+	return presence.getStrings(
+		{
+			search: "general.search",
+			view: "general.viewing",
+			viewHome: "general.viewHome",
+			searchFor: "general.searchFor",
+			searchSomething: "general.searchSomething",
+			watching: "general.watching",
+		},
+		await presence.getSetting<string>("lang").catch(() => "ru")
+	);
 }
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 function textContent(tags: string) {
 	return document.querySelector(tags)?.textContent;
 }
 
 presence.on("UpdateData", async () => {
-	if (!strings) strings = await getStrings();
-
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.logo,
 			startTimestamp: browsingTimestamp,
 		},
-		[privacy, logo, time] = await Promise.all([
+		[newLang, privacy, logo, time] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "ru"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("logo"),
 			presence.getSetting<boolean>("time"),
 		]);
 
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+
 	switch (host) {
 		case "ya.ru":
-			presenceData.details = "На главной странице";
+			presenceData.details = strings.viewHome;
 			if (homepageInput?.value !== "") {
-				presenceData.state = `Будет искать: ${homepageInput?.value}`;
+				presenceData.state = `${strings.searchFor} ${homepageInput?.value}`;
 				presenceData.smallImageKey = Assets.search;
 				presenceData.smallImageText = strings.search;
 			}
@@ -53,17 +65,19 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = strings.search;
 			switch (pathname.split("/")[1]) {
 				case "search":
-					presenceData.details = `В поиске: ${
-						!privacy ? homepageInput?.value : ""
-					}`;
+					presenceData.details = !privacy
+						? `${strings.searchFor} ${homepageInput?.value}`
+						: strings.searchSomething;
 					presenceData.state = textContent(".serp-adv__found");
 					break;
 
 				case "images":
-					presenceData.details = "Яндекс Картинки";
-					presenceData.state = `В поиске: ${homepageInput?.value}`;
+					presenceData.details = "Yandex Images";
+					presenceData.state = `${strings.searchFor} ${homepageInput?.value}`;
 					if (document.querySelector(".CbirPreview-Preview")) {
-						presenceData.state = "В поиске по картинке";
+						presenceData.state = `${strings.search} ${
+							oldLang === "ru" ? "по картинке" : "by images"
+						}`;
 						if (logo && !privacy) {
 							presenceData.largeImageKey =
 								document.querySelector<HTMLImageElement>(
@@ -74,29 +88,31 @@ presence.on("UpdateData", async () => {
 					break;
 
 				case "video":
-					presenceData.details = "Яндекс Видео";
-					presenceData.state = `В поиске: ${homepageInput?.value}`;
+					presenceData.details = "Yandex Video";
+					presenceData.state = `${strings.searchFor} ${homepageInput?.value}`;
 					break;
 
 				case "maps":
-					presenceData.details = "Яндекс Карты";
-					presenceData.state = `В поиске: ${
+					presenceData.details = "Yandex Maps";
+					presenceData.state = `${strings.searchFor} ${
 						document.querySelector<HTMLInputElement>("input")?.value
 					}`;
 					break;
 
 				case "products":
-					presenceData.details = "Яндекс Маркет";
-					presenceData.state = `В поиске: ${homepageInput?.value}`;
+					presenceData.details = "Yandex Market";
+					presenceData.state = `${strings.searchFor} ${homepageInput?.value}`;
 					break;
 
 				case "blogs":
-					presenceData.details = "Яндекс Блоги";
-					presenceData.state = `В поиске: ${homepageInput?.value}`;
+					presenceData.details = "Yandex Blogs";
+					presenceData.state = `${strings.searchFor} ${homepageInput?.value}`;
 					break;
 
 				case "pogoda":
-					presenceData.details = "Смотрит погоду";
+					presenceData.details = `${strings.watching} ${
+						oldLang === "ru" ? "погоду" : "weather"
+					}`;
 					presenceData.state = document
 						.querySelector<HTMLTitleElement>("title")
 						.textContent.replace(" — Яндекс.Погода", "");
@@ -105,12 +121,16 @@ presence.on("UpdateData", async () => {
 					break;
 
 				case "collections":
-					presenceData.details = "Смотрит избранное";
+					presenceData.details = `${strings.watching} ${
+						oldLang === "ru" ? "избранное" : "favourites"
+					}`;
 					presenceData.state = document.querySelector(
 						".cl-cards-type-filter__button_active"
 					)?.firstChild?.textContent;
 					if (document.querySelector(".cl-board-header-title__name")) {
-						presenceData.details = "Смотрит папку в избранном";
+						presenceData.details = `${strings.watching} ${
+							oldLang === "ru" ? "папку в избранном" : "folder in favourites"
+						}`;
 						presenceData.state = document.querySelector(
 							".cl-board-header-title__name"
 						)?.textContent;
