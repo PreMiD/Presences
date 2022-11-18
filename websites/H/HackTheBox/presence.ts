@@ -133,40 +133,35 @@ function getUserId() {
 		.split("=")[1];
 }
 
-function executeMethod(): string {
-	const path = window.location.pathname,
-		userId = getUserId();
-
-	if (path === "/") return getHomePageDetails();
-	else if (path === "/home") return getHomePageDetails();
-	else if (path === "/profile/overview") return getPersonalProfileDetails();
-	else if (path.includes("/machines/")) return getMachineDetails();
-	else if (path.includes("/challenges/")) return getChallengeDetails();
-	else if (path.includes("/users/")) return userId;
-	else return "";
+function executeMethod(path: string): string {
+	switch(path) {
+		case "/home":
+			return getHomePageDetails();
+		case "/profile/overview":
+			return getPersonalProfileDetails();
+		case "/machines/{}":
+			return getMachineDetails();
+		case "/challenges/{}":
+			return getChallengeDetails();
+		case "/users/{}":
+			return ""
+		default:
+			return "";
+	}
 }
-
-interface IMethods {
-	[key: string]: () => string;
-}
-
-const methods: IMethods = {
-	getHomePageDetails,
-	getMachineDetails,
-	getChallengeDetails,
-	getPersonalProfileDetails,
-};
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {};
 
 	for (const [path, data] of Object.entries(presences)) {
-		if (document.location.pathname.includes(path) || path.includes("{}")) {
+		const regex = new RegExp(path.replace(/{}/g, ".*"), "g");
+		
+		if (document.location.pathname.includes(path) || regex.test(document.location.pathname)) {
 			presenceData = {
 				...presenceData,
 				...data,
-				...(!data.state && {
-					state: executeMethod(),
+				...((!data.state && path.includes("{}")) && {
+					state: executeMethod(path),
 				}),
 			};
 
