@@ -131,9 +131,9 @@ presence.on("UpdateData", async () => {
 
 				break;
 			}
-			case "/hub/tv-guide": {
+			case "/watch/tv-guide": {
 				presenceData.details = "Browsing ITV";
-				presenceData.state = "Viewing the TV-Guide";
+				presenceData.state = "Viewing the TV Guide";
 
 				break;
 			}
