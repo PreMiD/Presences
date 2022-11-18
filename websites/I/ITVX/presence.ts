@@ -52,6 +52,13 @@ interface ProgrammeNextData {
 	};
 }
 
+enum Assets {
+	logo = "https://i.imgur.com/XisKvdg.png",
+	live = "https://i.imgur.com/WTcQZS7.png",
+	paused = "https://i.imgur.com/T6jkHHy.png",
+	playing = "https://i.imgur.com/1CbifM8.png"
+}
+
 const presence = new Presence({
 		clientId: "1043125926793318420",
 	}),
@@ -79,7 +86,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "itv_logo",
+			largeImageKey: Assets.logo,
 			startTimestamp: Date.now(),
 		},
 		path = document.location.pathname,
@@ -125,7 +132,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = `Watching ${currentChannelMetadata.name} Live`;
 				presenceData.state = currentSlot.displayTitle;
-				presenceData.smallImageKey = "live";
+				presenceData.smallImageKey = Assets.live;
 				presenceData.smallImageText = "Live";
 
 				if (seriesNum && epNum)
@@ -173,10 +180,10 @@ presence.on("UpdateData", async () => {
 								Math.floor(video.duration)
 							);
 
-						presenceData.smallImageKey = "play";
+						presenceData.smallImageKey = Assets.playing;
 						presenceData.smallImageText = "Playing";
 					} else {
-						presenceData.smallImageKey = "pause";
+						presenceData.smallImageKey = Assets.paused;
 						presenceData.smallImageText = "Paused";
 					}
 				}
