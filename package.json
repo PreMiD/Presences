@@ -41,7 +41,7 @@
 		"@commitlint/config-angular": "17.1.0",
 		"@types/chrome": "0.0.202",
 		"@types/node": "18.11.4",
-		"@typescript-eslint/eslint-plugin": "5.40.1",
+		"@typescript-eslint/eslint-plugin": "5.43.0",
 		"@typescript-eslint/parser": "5.40.1",
 		"eslint": "8.25.0",
 		"eslint-config-prettier": "8.5.0",
