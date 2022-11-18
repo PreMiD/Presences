@@ -56,7 +56,7 @@ enum Assets {
 	logo = "https://i.imgur.com/XisKvdg.png",
 	live = "https://i.imgur.com/WTcQZS7.png",
 	paused = "https://i.imgur.com/T6jkHHy.png",
-	playing = "https://i.imgur.com/1CbifM8.png"
+	playing = "https://i.imgur.com/1CbifM8.png",
 }
 
 const presence = new Presence({
