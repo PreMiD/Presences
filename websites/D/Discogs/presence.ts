@@ -237,6 +237,12 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "settings": {
+			presenceData.details = `Managing ${document
+				.querySelector<HTMLLIElement>(".menu-item.current")
+				.textContent.trim()} settings`;
+			break;
+		}
 		case "user": {
 			if (lastPath === "reviews") {
 				presenceData.details = "Viewing reviews by user";
