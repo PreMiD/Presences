@@ -137,18 +137,6 @@ presence.on("UpdateData", async () => {
 
 				break;
 			}
-			case "/hub/shows": {
-				presenceData.details = "Browsing ITV";
-				presenceData.state = "Viewing shows";
-
-				break;
-			}
-			case "/hub/categories": {
-				presenceData.details = "Browsing ITV";
-				presenceData.state = "Viewing categories";
-
-				break;
-			}
 			default:
 				if (path.startsWith("/watch/collections/films")) {
 					presenceData.details = "Browsing ITVX";
