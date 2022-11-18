@@ -134,6 +134,14 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "marketplace": {
+			if (pathSplit[1] === "offers") {
+				presenceData.details = "Viewing their offers";
+			} else {
+				presenceData.details = "Browsing the marketplace";
+			}
+			break;
+		}
 		case "master": {
 			if (pathSplit[1] === "stats") {
 				presenceData.details = "Viewing stats for a master release";
@@ -169,6 +177,14 @@ presence.on("UpdateData", async () => {
 		}
 		case "sell": {
 			switch (pathSplit[1] ?? "") {
+				case "": {
+					presenceData.details = "Searching for an item to sell";
+					break;
+				}
+				case "billing": {
+					presenceData.details = "Viewing billing information";
+					break;
+				}
 				case "cart": {
 					presenceData.details = "Viewing their cart";
 					break;
@@ -178,6 +194,10 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document.querySelector("h3").textContent.trim();
 					break;
 				}
+				case "inventory": {
+					presenceData.details = "Viewing their inventory";
+					break;
+				}
 				case "mywants": {
 					presenceData.details = "Viewing their wishlist";
 					break;
@@ -185,6 +205,10 @@ presence.on("UpdateData", async () => {
 				case "list": {
 					presenceData.details = "Viewing items for sale";
 					presenceData.state = document.querySelector("h1").textContent;
+					break;
+				}
+				case "orders": {
+					presenceData.details = "Viewing their orders";
 					break;
 				}
 				case "post": {
