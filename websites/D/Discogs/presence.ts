@@ -28,7 +28,6 @@ presence.on("UpdateData", async () => {
 		{ href, pathname, hash } = window.location,
 		pathSplit = pathname.split("/").filter(Boolean),
 		lastPath = pathSplit[pathSplit.length - 1];
-	let slideshowUsed = false;
 
 	switch (pathSplit[0] ?? "") {
 		case "": {
@@ -60,6 +59,7 @@ presence.on("UpdateData", async () => {
 					}`;
 				}
 			}
+			if (state) presenceData.state = state;
 			break;
 		}
 		case "digs": {
@@ -104,16 +104,14 @@ presence.on("UpdateData", async () => {
 		}
 		case "label": {
 			if (lastPath === "images") {
-				slideshowUsed = true;
-				presenceData.details = "Viewing label images";
-				presenceData.state = document.querySelector("h2 > a").textContent;
 				const images =
 					document.querySelectorAll<HTMLImageElement>("#view_images img");
 				for (let i = 0; i < images.length; i++) {
 					slideshow.addSlide(
 						i.toString(),
 						{
-							...presenceData,
+							details: "Viewing label images",
+							state: document.querySelector("h2 > a").textContent,
 							largeImageKey: await getShortURL(images[i].src),
 						},
 						5000
@@ -184,10 +182,13 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (slideshowUsed) {
+	if (presenceData.details) {
+		slideshow.deleteAllSlides();
+		presence.setActivity(presenceData);
+	} else if (slideshow.getSlides().length) {
 		presence.setActivity(slideshow);
 	} else {
 		slideshow.deleteAllSlides();
-		presence.setActivity(presenceData);
+		presence.setActivity();
 	}
 });
