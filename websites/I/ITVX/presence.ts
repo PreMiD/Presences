@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.logo,
 			startTimestamp: Date.now(),
 		},
-		path = document.location.pathname,
+		{ pathname: path } = document.location,
 		privacyMode = await presence.getSetting<boolean>("privacy");
 
 	if (privacyMode) presenceData.details = "Watching ITVX";
