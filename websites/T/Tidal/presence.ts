@@ -53,19 +53,21 @@ presence.on("UpdateData", async () => {
 			.querySelector(
 				'div[data-test="play-controls"] > button[data-test="repeat"]'
 			)
-			.getAttribute("aria-label");
+			.getAttribute("data-type");
 
 	presenceData.details = songTitle.textContent;
+	// get artists
 	presenceData.state = document.querySelector(
 		'div[data-test="left-column-footer-player"] > div:nth-child(2) > div:nth-child(2) > span > span > span'
 	).textContent;
 
 	if (cover) {
-		presenceData.largeImageKey =
-			navigator.mediaSession.metadata.artwork[0].src.replace(
-				"160x160",
-				"640x640"
-			);
+		presenceData.largeImageKey = document
+			.querySelector(
+				"figure[data-test=current-media-imagery] > div > div > div > img"
+			)
+			.getAttribute("src")
+			.replace("80x80", "640x640");
 	}
 	if (currentTimeSec > 0 || !paused) {
 		presenceData.endTimestamp =
@@ -86,9 +88,9 @@ presence.on("UpdateData", async () => {
 			.getAttribute("aria-checked") === "true"
 	) {
 		presenceData.smallImageKey =
-			repeatType === "Repeat" ? "repeat" : "repeat-one";
+			repeatType === "button__repeatAll" ? "repeat" : "repeat-one";
 		presenceData.smallImageText =
-			repeatType === "Repeat" ? "Playlist on loop" : "On loop";
+			repeatType === "button__repeatAll" ? "Playlist on loop" : "On loop";
 
 		delete presenceData.endTimestamp;
 	}
