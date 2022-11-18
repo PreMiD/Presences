@@ -38,7 +38,7 @@
 	},
 	"dependencies": {
 		"@commitlint/cli": "17.2.0",
-		"@commitlint/config-angular": "17.1.0",
+		"@commitlint/config-angular": "17.2.0",
 		"@types/chrome": "0.0.202",
 		"@types/node": "18.11.9",
 		"@typescript-eslint/eslint-plugin": "5.43.0",
