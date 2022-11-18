@@ -134,7 +134,7 @@ function getUserId() {
 }
 
 function executeMethod(path: string): string {
-	switch(path) {
+	switch (path) {
 		case "/home":
 			return getHomePageDetails();
 		case "/profile/overview":
@@ -144,7 +144,7 @@ function executeMethod(path: string): string {
 		case "/challenges/{}":
 			return getChallengeDetails();
 		case "/users/{}":
-			return ""
+			return "";
 		default:
 			return "";
 	}
@@ -155,14 +155,18 @@ presence.on("UpdateData", async () => {
 
 	for (const [path, data] of Object.entries(presences)) {
 		const regex = new RegExp(path.replace(/{}/g, ".*"), "g");
-		
-		if (document.location.pathname.includes(path) || regex.test(document.location.pathname)) {
+
+		if (
+			document.location.pathname.includes(path) ||
+			regex.test(document.location.pathname)
+		) {
 			presenceData = {
 				...presenceData,
 				...data,
-				...((!data.state && path.includes("{}")) && {
-					state: executeMethod(path),
-				}),
+				...(!data.state &&
+					path.includes("{}") && {
+						state: executeMethod(path),
+					}),
 			};
 
 			break;
