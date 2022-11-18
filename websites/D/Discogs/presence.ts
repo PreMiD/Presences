@@ -20,6 +20,13 @@ async function getShortURL(url: string) {
 	}
 }
 
+function combineChildTexts(parent: HTMLElement) {
+	return [...parent.childNodes]
+		.map(node => node.textContent.replace(/\n/g, "").trim())
+		.join(" ")
+		.replace(/(?<=\s)\s+/g, " ");
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/2LZSDR9.png",
@@ -149,10 +156,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector("h1 > a").textContent;
 			} else if (pathSplit[2] === "videos") {
 				presenceData.details = "Editing videos for release";
-				presenceData.state = [...document.querySelector("h1").children]
-					.slice(1)
-					.map(e => e.textContent)
-					.join(" ");
+				presenceData.state = combineChildTexts(document.querySelector("h1"));
 			} else {
 				presenceData.details = "Viewing a release";
 				presenceData.state = document.querySelector("h1").textContent;
@@ -160,6 +164,52 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLImageElement>("picture > img").src
 				);
 				presenceData.buttons = [{ label: "View Release", url: href }];
+			}
+			break;
+		}
+		case "sell": {
+			switch (pathSplit[1] ?? "") {
+				case "cart": {
+					presenceData.details = "Viewing their cart";
+					break;
+				}
+				case "history": {
+					presenceData.details = "Viewing price history";
+					presenceData.state = document.querySelector("h3").textContent.trim();
+					break;
+				}
+				case "mywants": {
+					presenceData.details = "Viewing their wishlist";
+					break;
+				}
+				case "list": {
+					presenceData.details = "Viewing items for sale";
+					presenceData.state = document.querySelector("h1").textContent;
+					break;
+				}
+				case "post": {
+					presenceData.details = "Posting an item for sale";
+					presenceData.state = combineChildTexts(document.querySelector("h2"));
+					break;
+				}
+				case "purchases": {
+					presenceData.details = "Viewing their purchases";
+					break;
+				}
+				case "seller_feedback": {
+					presenceData.details = "Viewing seller feedback";
+					presenceData.state = document.querySelector("h1").textContent.trim();
+					break;
+				}
+				default: {
+					presenceData.details = "Viewing an item";
+					presenceData.state = combineChildTexts(document.querySelector("h1"));
+					presenceData.largeImageKey = await getShortURL(
+						document.querySelector<HTMLImageElement>(".thumbnail_link img").src
+					);
+					presenceData.buttons = [{ label: "View Item", url: href }];
+					break;
+				}
 			}
 			break;
 		}
