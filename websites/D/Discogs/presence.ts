@@ -158,6 +158,18 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "messages": {
+			if (pathSplit[1] === "compose") {
+				presenceData.details = "Composing a message";
+			} else {
+				presenceData.details = "Viewing messages";
+			}
+			break;
+		}
+		case "my": {
+			presenceData.details = "Viewing dashboard";
+			break;
+		}
 		case "release": {
 			if (pathSplit[1] === "stats") {
 				presenceData.details = "Viewing stats for release";
@@ -243,17 +255,41 @@ presence.on("UpdateData", async () => {
 				.textContent.trim()} settings`;
 			break;
 		}
+		case "submissions": {
+			presenceData.details = "Browsing submissions";
+			break;
+		}
 		case "user": {
-			if (lastPath === "reviews") {
-				presenceData.details = "Viewing reviews by user";
-			} else {
-				presenceData.details = "Viewing a user";
+			switch (lastPath) {
+				case "reviews": {
+					presenceData.details = "Viewing reviews by user";
+					break;
+				}
+				case "collection": {
+					presenceData.details = "Viewing user collection";
+					break;
+				}
+				case "drafts": {
+					presenceData.details = "Viewing user drafts";
+					break;
+				}
+				case "export": {
+					presenceData.details = "Viewing user export options";
+					break;
+				}
+				default: {
+					presenceData.details = "Viewing a user";
+					presenceData.state = document.querySelector("h1").textContent.trim();
+					presenceData.smallImageKey = await getShortURL(
+						document.querySelector<HTMLImageElement>(".user_avatar > img").src
+					);
+					presenceData.buttons = [{ label: "View User", url: href }];
+				}
 			}
-			presenceData.state = document.querySelector("h1").textContent.trim();
-			presenceData.smallImageKey = await getShortURL(
-				document.querySelector<HTMLImageElement>(".user_avatar > img").src
-			);
-			presenceData.buttons = [{ label: "View User", url: href }];
+			break;
+		}
+		case "wantlist": {
+			presenceData.details = "Viewing their wantlist";
 			break;
 		}
 		default: {
