@@ -82,6 +82,13 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "genre": {
+			presenceData.details = "Viewing a genre";
+			const title = document.querySelector("h1").textContent.trim().split(" ");
+			presenceData.state = title.slice(0, title.length - 1).join(" ");
+			presenceData.buttons = [{ label: "View Genre", url: href }];
+			break;
+		}
 		case "hc": {
 			switch (pathSplit[2] ?? "") {
 				case "": {
@@ -132,6 +139,10 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.buttons = [{ label: "View Label", url: href }];
 			}
+			break;
+		}
+		case "leaderboard": {
+			presenceData.details = "Viewing the leaderboard";
 			break;
 		}
 		case "marketplace": {
@@ -253,6 +264,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Managing ${document
 				.querySelector<HTMLLIElement>(".menu-item.current")
 				.textContent.trim()} settings`;
+			break;
+		}
+		case "style": {
+			presenceData.details = "Viewing a style";
+			const title = document.querySelector("h1").textContent.trim().split(" ");
+			presenceData.state = title.slice(0, title.length - 1).join(" ");
+			presenceData.buttons = [{ label: "View Style", url: href }];
 			break;
 		}
 		case "submissions": {
