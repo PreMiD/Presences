@@ -1,55 +1,55 @@
 interface ChannelSlotData {
-	displayTitle: string,
-	start: string,
-	end: string,
-	seriesNumber?: number,
-	episodeNumber?: number
+	displayTitle: string;
+	start: string;
+	end: string;
+	seriesNumber?: number;
+	episodeNumber?: number;
 }
 
 interface ChannelMetadata {
-	id: string,
-	name: string,
+	id: string;
+	name: string;
 	slots: {
-		now: ChannelSlotData,
-		next: ChannelSlotData
-	}
-	slug: string
+		now: ChannelSlotData;
+		next: ChannelSlotData;
+	};
+	slug: string;
 }
 
 interface LiveChannelNextData {
 	props: {
 		pageProps: {
-			channelSlug: string,
+			channelSlug: string;
 			channelsMetaData: {
-				channels: ChannelMetadata[],
-			}
-		}
-	}
+				channels: ChannelMetadata[];
+			};
+		};
+	};
 }
 
 interface CategoriesNextData {
 	props: {
 		pageProps: {
 			category: {
-				slug: string,
-				title: string
-			}
-		}
-	}
+				slug: string;
+				title: string;
+			};
+		};
+	};
 }
 
 interface ProgrammeNextData {
 	props: {
 		pageProps: {
 			title: {
-				CTAText?: string,
-				episodeNumber?: number,
-				programmeTitle: string,
-				seriesNumber?: number,
-				titleType: string
-			}
-		}
-	}
+				CTAText?: string;
+				episodeNumber?: number;
+				programmeTitle: string;
+				seriesNumber?: number;
+				titleType: string;
+			};
+		};
+	};
 }
 
 const presence = new Presence({
@@ -58,24 +58,21 @@ const presence = new Presence({
 	fetchLiveChannelNextData = (): LiveChannelNextData => {
 		const nextDataElement = document.querySelector("#__NEXT_DATA__");
 
-		if (!nextDataElement)
-			return null;
+		if (!nextDataElement) return null;
 
 		return JSON.parse(nextDataElement.textContent);
 	},
 	fetchCategoriesNextData = (): CategoriesNextData => {
 		const nextDataElement = document.querySelector("#__NEXT_DATA__");
 
-		if (!nextDataElement)
-			return null;
+		if (!nextDataElement) return null;
 
 		return JSON.parse(nextDataElement.textContent);
 	},
 	fetchProgrammeNextData = (): ProgrammeNextData => {
 		const nextDataElement = document.querySelector("#__NEXT_DATA__");
 
-		if (!nextDataElement)
-			return null;
+		if (!nextDataElement) return null;
 
 		return JSON.parse(nextDataElement.textContent);
 	};
@@ -100,8 +97,10 @@ presence.on("UpdateData", async () => {
 			case "/watch": {
 				const nextData = fetchLiveChannelNextData(),
 					// When you first go to watch a channel, the slug is null and the default channel is ITV1
-					currentChannelMetadata = nextData.props.pageProps.channelsMetaData.channels
-						.find(x => x.slug === (nextData.props.pageProps.channelSlug || "itv"));
+					currentChannelMetadata =
+						nextData.props.pageProps.channelsMetaData.channels.find(
+							x => x.slug === (nextData.props.pageProps.channelSlug || "itv")
+						);
 
 				// At the moment, it doesn't seem the title of the current programme changes when it transitions from one programme
 				// to the next. Use the channel slot data start and end times to determine which title to show.
@@ -109,15 +108,17 @@ presence.on("UpdateData", async () => {
 
 				const nowSlotTimestamps = [
 						new Date(currentChannelMetadata.slots.now.start).getTime(),
-						new Date(currentChannelMetadata.slots.now.end).getTime()
+						new Date(currentChannelMetadata.slots.now.end).getTime(),
 					],
 					timestampNow = Date.now();
 
 				// If the current timestamp is after the slot starts, and before it ends
-				if (timestampNow > nowSlotTimestamps[0] && timestampNow < nowSlotTimestamps[1])
+				if (
+					timestampNow > nowSlotTimestamps[0] &&
+					timestampNow < nowSlotTimestamps[1]
+				)
 					currentSlot = currentChannelMetadata.slots.now;
-				else
-					currentSlot = currentChannelMetadata.slots.next;
+				else currentSlot = currentChannelMetadata.slots.next;
 
 				const seriesNum = currentSlot.seriesNumber,
 					epNum = currentSlot.episodeNumber;
@@ -127,7 +128,8 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "live";
 				presenceData.smallImageText = "Live";
 
-				if (seriesNum && epNum) presenceData.state += ` (S${seriesNum} E${epNum})`;
+				if (seriesNum && epNum)
+					presenceData.state += ` (S${seriesNum} E${epNum})`;
 
 				break;
 			}
@@ -143,7 +145,9 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "Viewing Films";
 				} else if (path.startsWith("/watch/categories")) {
 					presenceData.details = "Browsing ITVX";
-					presenceData.state = `Viewing ${fetchCategoriesNextData().props.pageProps.category.title} Category`;
+					presenceData.state = `Viewing ${
+						fetchCategoriesNextData().props.pageProps.category.title
+					} Category`;
 				} else if (
 					/^[-+]?[0-9A-Fa-f]+\.?[0-9A-Fa-f]*?$/.test(
 						path.split("/")[path.split("/").length - 1]
@@ -154,7 +158,11 @@ presence.on("UpdateData", async () => {
 					const nextData = fetchProgrammeNextData();
 					presenceData.details = `Watching ${nextData.props.pageProps.title.programmeTitle}`;
 
-					if (nextData.props.pageProps.title.CTAText && nextData.props.pageProps.title.titleType !== "FILM") presenceData.state = nextData.props.pageProps.title.CTAText;
+					if (
+						nextData.props.pageProps.title.CTAText &&
+						nextData.props.pageProps.title.titleType !== "FILM"
+					)
+						presenceData.state = nextData.props.pageProps.title.CTAText;
 
 					const [video] = document.querySelectorAll("video");
 
