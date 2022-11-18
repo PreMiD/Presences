@@ -306,6 +306,10 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "users": {
+			presenceData.details = "Viewing their friends";
+			break;
+		}
 		case "wantlist": {
 			presenceData.details = "Viewing their wantlist";
 			break;
