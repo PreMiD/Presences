@@ -1,110 +1,81 @@
-const presences = [
-		{
-			path: "/challenges/retired",
+const presences: Record<string, PresenceData> = {
+		"/challenges/retired": {
 			details: "Challenges",
 			state: "Browsing retired challenges...",
 		},
-		{
-			path: "/challenges/todo",
+		"/challenges/todo": {
 			details: "Challenges",
 			state: "Browsing to-do list...",
 		},
-		{
-			path: "/login",
+		"/login": {
 			details: "Login",
 			state: "Logging in...",
 		},
-		{
-			path: "/fortresses",
+		"/fortresses": {
 			details: "Fortresses",
 			state: "Browsing fortresses...",
 		},
-		{
-			path: "/endgames",
+		"/endgames": {
 			details: "Endgames",
 			state: "Browsing endgames...",
 		},
-		{
-			path: "/starting-point",
+		"/starting-point": {
 			details: "Starting Point",
 			state: "Browsing starting points...",
 		},
-		{
-			path: "/rankings",
+		"/rankings": {
 			details: "Rankings",
 			state: "Browsing rankings...",
 		},
-		{
-			path: "/register",
+		"/register": {
 			details: "Register",
 			state: "Creating new account...",
 		},
-		{
-			path: "/machines/list/unreleased",
+		"/machines/list/unreleased": {
 			details: "Machines",
 			state: "Browsing scheduled machines...",
 		},
-		{
-			path: "/machines/list/active",
+		"/machines/list/active": {
 			details: "Machines",
 			state: "Browsing active machines...",
 		},
-		{
-			path: "/machines/list/retired",
+		"/machines/list/retired": {
 			details: "Machines",
 			state: "Browsing retired machines...",
 		},
-		{
-			path: "/machines/list/todo",
+		"/machines/list/todo": {
 			details: "Machines",
 			state: "Browsing machines to-do list...",
 		},
-		{
-			path: "/home",
+		"/home": {
 			details: "Homepage",
-			stateMethod: "getHomePageDetails",
 		},
-		{
-			path: "/machines/{}",
+		"/machines/{}": {
 			details: "Playing machine",
-			stateMethod: "getMachineDetails",
 		},
-		{
-			path: "/challenges/{}",
+		"/challenges/{}": {
 			details: "Playing challenge",
-			stateMethod: "getChallengeDetails",
 		},
-		{
-			path: "/profile/overview",
+		"/profile/overview": {
 			details: "Profile",
 			state: "Browsing profile overview...",
 		},
-		{
-			path: "/profile/settings",
+		"/profile/settings": {
 			details: "Profile",
 			state: "Changing profile settings...",
 		},
-		{
-			path: "/profile/settings",
-			details: "Profile",
-			state: "Browsing profile settings...",
-		},
-		{
-			path: "/profile/subscriptions/plans",
+		"/profile/subscriptions/plans": {
 			details: "Profile",
 			state: "Browsing subscriptions...",
 		},
-		{
-			path: "/users/{}",
+		"/users/{}": {
 			details: "Looking at profile",
-			stateMethod: "getPersonalProfileDetails",
 		},
-		{
-			path: "/tracks",
+		"/tracks": {
 			details: "Tracks",
 			state: "Browsing tracks...",
 		},
-	],
+	},
 	presence = new Presence({
 		clientId: "1042105891681472595",
 	});
@@ -162,19 +133,17 @@ function getUserId() {
 		.split("=")[1];
 }
 
-function findPresence() {
-	const item = presences.find(item => {
-		if (item.path.includes("{}")) {
-			if (
-				new RegExp(item.path.replace("{}", ".+")).test(window.location.pathname)
-			)
-				return item;
-		} else if (document.location.pathname.endsWith(item.path)) return item;
-		else if (document.location.pathname.includes(item.path)) return item;
-		else return null;
-	});
+function executeMethod(): string {
+	const path = window.location.pathname,
+		userId = getUserId();
 
-	return item;
+	if (path === "/") return getHomePageDetails();
+	else if (path === "/home") return getHomePageDetails();
+	else if (path === "/profile/overview") return getPersonalProfileDetails();
+	else if (path.includes("/machines/")) return getMachineDetails();
+	else if (path.includes("/challenges/")) return getChallengeDetails();
+	else if (path.includes("/users/")) return userId;
+	else return "";
 }
 
 interface IMethods {
@@ -189,27 +158,32 @@ const methods: IMethods = {
 };
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {};
+	let presenceData: PresenceData = {};
 
-	for (let i = 0; i < presences.length; i++) {
-		const item = findPresence();
+	for (const [path, data] of Object.entries(presences)) {
+		if (document.location.pathname.includes(path) || path.includes("{}")) {
+			presenceData = {
+				...presenceData,
+				...data,
+				...(!data.state && {
+					state: executeMethod(),
+				}),
+			};
 
-		if (item) {
-			presenceData.details = item.details;
-
-			if (item.stateMethod)
-				presenceData.state = methods[item.stateMethod as keyof IMethods]();
-			else presenceData.state = item.state;
+			break;
 		}
-	}
 
-	presenceData.largeImageKey = "https://i.imgur.com/aMjnyic.png";
-	presenceData.buttons = [
-		{
-			label: "My Profile",
-			url: `https://app.hackthebox.com/users/${getUserId()}`,
-		},
-	];
+		presenceData = {
+			...presenceData,
+			largeImageKey: "https://i.imgur.com/aMjnyic.png",
+			buttons: [
+				{
+					label: "My Profile",
+					url: `https://app.hackthebox.com/users/${getUserId()}`,
+				},
+			],
+		};
+	}
 
 	presence.setActivity(presenceData);
 });
