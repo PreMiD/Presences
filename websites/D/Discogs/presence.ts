@@ -27,6 +27,22 @@ function combineChildTexts(parent: HTMLElement) {
 		.replace(/(?<=\s)\s+/g, " ");
 }
 
+async function createImageSlideshow(type: string) {
+	for (const [i, image] of document
+		.querySelectorAll<HTMLImageElement>("#view_images img")
+		.entries()) {
+		slideshow.addSlide(
+			i.toString(),
+			{
+				details: `Viewing ${type} images`,
+				state: document.querySelector("#page_content h2 > a").textContent,
+				largeImageKey: await getShortURL(image.src),
+			},
+			5000
+		);
+	}
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/2LZSDR9.png",
@@ -43,12 +59,15 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "artist": {
-			presenceData.details = "Viewing an artist";
-			presenceData.state = pageTitle.textContent;
-			presenceData.largeImageKey = await getShortURL(
-				document.querySelector<HTMLImageElement>(".thumbnail_link img").src
-			);
-			presenceData.buttons = [{ label: "View Artist", url: href }];
+			if (lastPath === "images") await createImageSlideshow("artist");
+			else {
+				presenceData.details = "Viewing an artist";
+				presenceData.state = pageTitle.textContent;
+				presenceData.largeImageKey = await getShortURL(
+					document.querySelector<HTMLImageElement>(".thumbnail_link img").src
+				);
+				presenceData.buttons = [{ label: "View Artist", url: href }];
+			}
 			break;
 		}
 		case "developer": {
@@ -206,21 +225,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "label": {
-			if (lastPath === "images") {
-				for (const [i, image] of document
-					.querySelectorAll<HTMLImageElement>("#view_images img")
-					.entries()) {
-					slideshow.addSlide(
-						i.toString(),
-						{
-							details: "Viewing label images",
-							state: document.querySelector("h2 > a").textContent,
-							largeImageKey: await getShortURL(image.src),
-						},
-						5000
-					);
-				}
-			} else {
+			if (lastPath === "images") await createImageSlideshow("label");
+			else {
 				presenceData.details = "Viewing a label";
 				presenceData.state = pageTitle.textContent;
 				presenceData.largeImageKey = await getShortURL(
@@ -246,6 +252,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector("h1 > a").textContent;
 			} else if (pathSplit[1] === "create")
 				presenceData.details = "Creating a master release";
+			else if (lastPath === "images") await createImageSlideshow("master");
 			else {
 				presenceData.details = "Viewing a master release";
 				presenceData.state = pageTitle.textContent;
@@ -273,7 +280,8 @@ presence.on("UpdateData", async () => {
 			} else if (pathSplit[2] === "videos") {
 				presenceData.details = "Editing videos for release";
 				presenceData.state = combineChildTexts(pageTitle);
-			} else {
+			} else if (lastPath === "images") await createImageSlideshow("release");
+			else {
 				presenceData.details = "Viewing a release";
 				presenceData.state = pageTitle.textContent;
 				presenceData.largeImageKey = await getShortURL(
