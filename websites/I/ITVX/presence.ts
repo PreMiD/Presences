@@ -63,7 +63,7 @@ const presence = new Presence({
 	clientId: "1043125926793318420",
 });
 
-function fetchLiveChannelNextData (): LiveChannelNextData {
+function fetchLiveChannelNextData(): LiveChannelNextData {
 	const nextDataElement = document.querySelector("#__NEXT_DATA__");
 
 	if (!nextDataElement) return null;
@@ -71,7 +71,7 @@ function fetchLiveChannelNextData (): LiveChannelNextData {
 	return JSON.parse(nextDataElement.textContent);
 }
 
-function fetchCategoriesNextData (): CategoriesNextData {
+function fetchCategoriesNextData(): CategoriesNextData {
 	const nextDataElement = document.querySelector("#__NEXT_DATA__");
 
 	if (!nextDataElement) return null;
@@ -79,7 +79,7 @@ function fetchCategoriesNextData (): CategoriesNextData {
 	return JSON.parse(nextDataElement.textContent);
 }
 
-function fetchProgrammeNextData (): ProgrammeNextData {
+function fetchProgrammeNextData(): ProgrammeNextData {
 	const nextDataElement = document.querySelector("#__NEXT_DATA__");
 
 	if (!nextDataElement) return null;
