@@ -34,7 +34,8 @@ presence.on("UpdateData", async () => {
 		},
 		{ href, pathname, hash } = window.location,
 		pathSplit = pathname.split("/").filter(Boolean),
-		lastPath = pathSplit[pathSplit.length - 1];
+		lastPath = pathSplit[pathSplit.length - 1],
+		pageTitle = document.querySelector("h1");
 
 	switch (pathSplit[0] ?? "") {
 		case "": {
@@ -43,7 +44,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "artist": {
 			presenceData.details = "Viewing an artist";
-			presenceData.state = document.querySelector("h1").textContent;
+			presenceData.state = pageTitle.textContent;
 			presenceData.largeImageKey = await getShortURL(
 				document.querySelector<HTMLImageElement>(".thumbnail_link img").src
 			);
@@ -72,11 +73,11 @@ presence.on("UpdateData", async () => {
 		case "digs": {
 			if (pathSplit[2]) {
 				presenceData.details = "Viewing a dig";
-				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.state = pageTitle.textContent;
 				presenceData.buttons = [{ label: "View Dig", url: href }];
 			} else if (pathSplit[1]) {
 				presenceData.details = "Browsing digs";
-				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.state = pageTitle.textContent;
 			} else {
 				presenceData.details = "Browsing digs";
 			}
@@ -84,7 +85,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "genre": {
 			presenceData.details = "Viewing a genre";
-			const title = document.querySelector("h1").textContent.trim().split(" ");
+			const title = pageTitle.textContent.trim().split(" ");
 			presenceData.state = title.slice(0, title.length - 1).join(" ");
 			presenceData.buttons = [{ label: "View Genre", url: href }];
 			break;
@@ -125,7 +126,7 @@ presence.on("UpdateData", async () => {
 				}
 				case "thread": {
 					presenceData.details = "Viewing a group thread";
-					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.state = pageTitle.textContent;
 					presenceData.buttons = [{ label: "View Thread", url: href }];
 					break;
 				}
@@ -157,14 +158,14 @@ presence.on("UpdateData", async () => {
 				}
 				case "articles": {
 					presenceData.details = "Reading a help article";
-					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.state = pageTitle.textContent;
 					presenceData.buttons = [{ label: "Read Article", url: href }];
 					break;
 				}
 				case "categories":
 				case "sections": {
 					presenceData.details = "Browsing a help center category";
-					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.state = pageTitle.textContent;
 					break;
 				}
 				case "search": {
@@ -193,7 +194,7 @@ presence.on("UpdateData", async () => {
 				}
 			} else {
 				presenceData.details = "Viewing a label";
-				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.state = pageTitle.textContent;
 				presenceData.largeImageKey = await getShortURL(
 					document.querySelector<HTMLImageElement>(".thumbnail_link img").src
 				);
@@ -221,7 +222,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Creating a master release";
 			} else {
 				presenceData.details = "Viewing a master release";
-				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.state = pageTitle.textContent;
 				presenceData.largeImageKey = await getShortURL(
 					document.querySelector<HTMLImageElement>("picture > img").src
 				);
@@ -247,10 +248,10 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector("h1 > a").textContent;
 			} else if (pathSplit[2] === "videos") {
 				presenceData.details = "Editing videos for release";
-				presenceData.state = combineChildTexts(document.querySelector("h1"));
+				presenceData.state = combineChildTexts(pageTitle);
 			} else {
 				presenceData.details = "Viewing a release";
-				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.state = pageTitle.textContent;
 				presenceData.largeImageKey = await getShortURL(
 					document.querySelector<HTMLImageElement>("picture > img").src
 				);
@@ -287,7 +288,7 @@ presence.on("UpdateData", async () => {
 				}
 				case "list": {
 					presenceData.details = "Viewing items for sale";
-					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.state = pageTitle.textContent;
 					break;
 				}
 				case "orders": {
@@ -305,12 +306,12 @@ presence.on("UpdateData", async () => {
 				}
 				case "seller_feedback": {
 					presenceData.details = "Viewing seller feedback";
-					presenceData.state = document.querySelector("h1").textContent.trim();
+					presenceData.state = pageTitle.textContent.trim();
 					break;
 				}
 				default: {
 					presenceData.details = "Viewing an item";
-					presenceData.state = combineChildTexts(document.querySelector("h1"));
+					presenceData.state = combineChildTexts(pageTitle);
 					presenceData.largeImageKey = await getShortURL(
 						document.querySelector<HTMLImageElement>(".thumbnail_link img").src
 					);
@@ -328,7 +329,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "style": {
 			presenceData.details = "Viewing a style";
-			const title = document.querySelector("h1").textContent.trim().split(" ");
+			const title = pageTitle.textContent.trim().split(" ");
 			presenceData.state = title.slice(0, title.length - 1).join(" ");
 			presenceData.buttons = [{ label: "View Style", url: href }];
 			break;
@@ -357,7 +358,7 @@ presence.on("UpdateData", async () => {
 				}
 				default: {
 					presenceData.details = "Viewing a user";
-					presenceData.state = document.querySelector("h1").textContent.trim();
+					presenceData.state = pageTitle.textContent.trim();
 					presenceData.smallImageKey = await getShortURL(
 						document.querySelector<HTMLImageElement>(".user_avatar > img").src
 					);
