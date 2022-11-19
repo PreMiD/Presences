@@ -81,6 +81,37 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = "Browsing digs";
 			break;
 		}
+		case "forum": {
+			switch (pathSplit[1] ?? "") {
+				case "": {
+					presenceData.details = "Browsing the forums";
+					break;
+				}
+				case "thread": {
+					if (pathSplit[2] === "new")
+						presenceData.details = "Creating a new forum thread";
+					else {
+						presenceData.details = "Viewing a forum thread";
+						presenceData.state = pageTitle.textContent;
+						presenceData.buttons = [{ label: "View Thread", url: href }];
+					}
+					break;
+				}
+				case "topic": {
+					presenceData.details = "Viewing a forum topic";
+					presenceData.state = pageTitle.textContent.trim();
+					break;
+				}
+				case "search": {
+					presenceData.details = "Searching the forums";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						".search_table_field"
+					).value;
+					break;
+				}
+			}
+			break;
+		}
 		case "genre": {
 			presenceData.details = "Viewing a genre";
 			const title = pageTitle.textContent.trim().split(" ");
