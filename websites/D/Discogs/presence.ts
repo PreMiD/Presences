@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "1042567470738837534",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-	slideshow = presence.createSlideshow();
+	slideshow = presence.createSlideshow(),
+	shortenedURLs: Record<string, string> = {};
 
-const shortenedURLs: Record<string, string> = {};
 async function getShortURL(url: string) {
 	if (url.length < 256) return url;
 	if (shortenedURLs[url]) return shortenedURLs[url];
@@ -78,9 +78,7 @@ presence.on("UpdateData", async () => {
 			} else if (pathSplit[1]) {
 				presenceData.details = "Browsing digs";
 				presenceData.state = pageTitle.textContent;
-			} else {
-				presenceData.details = "Browsing digs";
-			}
+			} else presenceData.details = "Browsing digs";
 			break;
 		}
 		case "genre": {
@@ -135,11 +133,10 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				default: {
-					if (lastPath === "admin") {
-						presenceData.details = "Managing a group";
-					} else if (lastPath === "members") {
+					if (lastPath === "admin") presenceData.details = "Managing a group";
+					else if (lastPath === "members")
 						presenceData.details = "Viewing group members";
-					} else {
+					else {
 						presenceData.details = "Viewing a group";
 						presenceData.buttons = [{ label: "View Group", url: href }];
 					}
@@ -179,15 +176,15 @@ presence.on("UpdateData", async () => {
 		}
 		case "label": {
 			if (lastPath === "images") {
-				const images =
-					document.querySelectorAll<HTMLImageElement>("#view_images img");
-				for (let i = 0; i < images.length; i++) {
+				for (const [i, image] of document
+					.querySelectorAll<HTMLImageElement>("#view_images img")
+					.entries()) {
 					slideshow.addSlide(
 						i.toString(),
 						{
 							details: "Viewing label images",
 							state: document.querySelector("h2 > a").textContent,
-							largeImageKey: await getShortURL(images[i].src),
+							largeImageKey: await getShortURL(image.src),
 						},
 						5000
 					);
@@ -207,20 +204,18 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "marketplace": {
-			if (pathSplit[1] === "offers") {
+			if (pathSplit[1] === "offers")
 				presenceData.details = "Viewing their offers";
-			} else {
-				presenceData.details = "Browsing the marketplace";
-			}
+			else presenceData.details = "Browsing the marketplace";
 			break;
 		}
 		case "master": {
 			if (pathSplit[1] === "stats") {
 				presenceData.details = "Viewing stats for a master release";
 				presenceData.state = document.querySelector("h1 > a").textContent;
-			} else if (pathSplit[1] === "create") {
+			} else if (pathSplit[1] === "create")
 				presenceData.details = "Creating a master release";
-			} else {
+			else {
 				presenceData.details = "Viewing a master release";
 				presenceData.state = pageTitle.textContent;
 				presenceData.largeImageKey = await getShortURL(
@@ -231,11 +226,9 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "messages": {
-			if (pathSplit[1] === "compose") {
+			if (pathSplit[1] === "compose")
 				presenceData.details = "Composing a message";
-			} else {
-				presenceData.details = "Viewing messages";
-			}
+			else presenceData.details = "Viewing messages";
 			break;
 		}
 		case "my": {
@@ -384,9 +377,8 @@ presence.on("UpdateData", async () => {
 	if (presenceData.details) {
 		slideshow.deleteAllSlides();
 		presence.setActivity(presenceData);
-	} else if (slideshow.getSlides().length) {
-		presence.setActivity(slideshow);
-	} else {
+	} else if (slideshow.getSlides().length) presence.setActivity(slideshow);
+	else {
 		slideshow.deleteAllSlides();
 		presence.setActivity();
 	}
