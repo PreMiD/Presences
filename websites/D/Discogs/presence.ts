@@ -89,6 +89,66 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: "View Genre", url: href }];
 			break;
 		}
+		case "group": {
+			switch (pathSplit[1] ?? "") {
+				case "":
+				case "browse": {
+					presenceData.details = "Browsing groups";
+					break;
+				}
+				case "create": {
+					presenceData.details = "Creating a group";
+					break;
+				}
+				case "posted": {
+					presenceData.details = "Viewing threads they posted in";
+					break;
+				}
+				case "recent": {
+					presenceData.details = "Viewing recent group activity";
+					break;
+				}
+				case "saved": {
+					presenceData.details = "Viewing saved threads";
+					break;
+				}
+				case "search": {
+					presenceData.details = "Searching groups";
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						".search_table_field"
+					).value;
+					break;
+				}
+				case "started": {
+					presenceData.details = "Viewing threads they started";
+					break;
+				}
+				case "thread": {
+					presenceData.details = "Viewing a group thread";
+					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.buttons = [{ label: "View Thread", url: href }];
+					break;
+				}
+				case "watched": {
+					presenceData.details = "Viewing watched threads";
+					break;
+				}
+				default: {
+					if (lastPath === "admin") {
+						presenceData.details = "Managing a group";
+					} else if (lastPath === "members") {
+						presenceData.details = "Viewing group members";
+					} else {
+						presenceData.details = "Viewing a group";
+						presenceData.buttons = [{ label: "View Group", url: href }];
+					}
+					presenceData.state = document
+						.querySelector("h1")
+						.firstChild.textContent.trim();
+				}
+			}
+			break;
+		}
 		case "hc": {
 			switch (pathSplit[2] ?? "") {
 				case "": {
