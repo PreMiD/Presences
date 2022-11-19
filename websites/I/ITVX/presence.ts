@@ -60,29 +60,32 @@ enum Assets {
 }
 
 const presence = new Presence({
-		clientId: "1043125926793318420",
-	}),
-	fetchLiveChannelNextData = (): LiveChannelNextData => {
-		const nextDataElement = document.querySelector("#__NEXT_DATA__");
+	clientId: "1043125926793318420",
+});
 
-		if (!nextDataElement) return null;
+function fetchLiveChannelNextData (): LiveChannelNextData {
+	const nextDataElement = document.querySelector("#__NEXT_DATA__");
 
-		return JSON.parse(nextDataElement.textContent);
-	},
-	fetchCategoriesNextData = (): CategoriesNextData => {
-		const nextDataElement = document.querySelector("#__NEXT_DATA__");
+	if (!nextDataElement) return null;
 
-		if (!nextDataElement) return null;
+	return JSON.parse(nextDataElement.textContent);
+}
 
-		return JSON.parse(nextDataElement.textContent);
-	},
-	fetchProgrammeNextData = (): ProgrammeNextData => {
-		const nextDataElement = document.querySelector("#__NEXT_DATA__");
+function fetchCategoriesNextData (): CategoriesNextData {
+	const nextDataElement = document.querySelector("#__NEXT_DATA__");
 
-		if (!nextDataElement) return null;
+	if (!nextDataElement) return null;
 
-		return JSON.parse(nextDataElement.textContent);
-	};
+	return JSON.parse(nextDataElement.textContent);
+}
+
+function fetchProgrammeNextData (): ProgrammeNextData {
+	const nextDataElement = document.querySelector("#__NEXT_DATA__");
+
+	if (!nextDataElement) return null;
+
+	return JSON.parse(nextDataElement.textContent);
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
