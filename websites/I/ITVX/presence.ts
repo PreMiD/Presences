@@ -53,10 +53,10 @@ interface ProgrammeNextData {
 }
 
 enum Assets {
-	logo = "https://i.imgur.com/XisKvdg.png",
-	live = "https://i.imgur.com/WTcQZS7.png",
-	paused = "https://i.imgur.com/T6jkHHy.png",
-	playing = "https://i.imgur.com/1CbifM8.png",
+	Logo = "https://i.imgur.com/XisKvdg.png",
+	Live = "https://i.imgur.com/WTcQZS7.png",
+	Paused = "https://i.imgur.com/T6jkHHy.png",
+	Playing = "https://i.imgur.com/1CbifM8.png",
 }
 
 const presence = new Presence({
@@ -86,7 +86,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.logo,
+			largeImageKey: Assets.Logo,
 			startTimestamp: Date.now(),
 		},
 		{ pathname: path } = document.location,
@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = `Watching ${currentChannelMetadata.name} Live`;
 				presenceData.state = currentSlot.displayTitle;
-				presenceData.smallImageKey = Assets.live;
+				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = "Live";
 
 				if (seriesNum && epNum)
@@ -180,10 +180,10 @@ presence.on("UpdateData", async () => {
 								Math.floor(video.duration)
 							);
 
-						presenceData.smallImageKey = Assets.playing;
+						presenceData.smallImageKey = Assets.Playing;
 						presenceData.smallImageText = "Playing";
 					} else {
-						presenceData.smallImageKey = Assets.paused;
+						presenceData.smallImageKey = Assets.Paused;
 						presenceData.smallImageText = "Paused";
 					}
 				}
