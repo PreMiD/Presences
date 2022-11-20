@@ -2,16 +2,16 @@ const presence: Presence = new Presence({
 		clientId: "833430731816173669",
 	}),
 	levelImages: Record<string, string> = {
-		"10": "https://i.imgur.com/nQvo9Wo.png",
-		"20": "https://i.imgur.com/ag1vZVv.png",
-		"30": "https://i.imgur.com/FvJN63W.png",
-		"40": "https://i.imgur.com/pN5cZxs.png",
-		"50": "https://i.imgur.com/ETRB7TM.png",
-		"60": "https://i.imgur.com/WGCbykC.png",
-		"70": "https://i.imgur.com/7J4mGPp.png",
-		"80": "https://i.imgur.com/JOek4w6.png",
-		"90": "https://i.imgur.com/4s0tT5G.png",
-		"100": "https://i.imgur.com/VQHYuGy.png",
+		10: "https://i.imgur.com/nQvo9Wo.png",
+		20: "https://i.imgur.com/ag1vZVv.png",
+		30: "https://i.imgur.com/FvJN63W.png",
+		40: "https://i.imgur.com/pN5cZxs.png",
+		50: "https://i.imgur.com/ETRB7TM.png",
+		60: "https://i.imgur.com/WGCbykC.png",
+		70: "https://i.imgur.com/7J4mGPp.png",
+		80: "https://i.imgur.com/JOek4w6.png",
+		90: "https://i.imgur.com/4s0tT5G.png",
+		100: "https://i.imgur.com/VQHYuGy.png",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -42,8 +42,7 @@ presence.on("UpdateData", () => {
 			startTimestamp: browsingTimestamp,
 		};
 
-	if (hostname === "community.bunpro.jp") {
-	} else {
+	if (hostname === "community.bunpro.jp") {} else {
 		const level = +document
 			.querySelector<HTMLParagraphElement>(".header-user-level")
 			?.textContent.match(/\d+/)[0];
@@ -53,6 +52,10 @@ presence.on("UpdateData", () => {
 		}
 		switch (pathSplit[0]) {
 			case "": {
+				break;
+			}
+			case "bookmarks": {
+				presenceData.details = "Viewing their bookmarks";
 				break;
 			}
 			case "dashboard": {
@@ -65,11 +68,10 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "grammar_points": {
-				if (pathSplit[1]) {
+				if (pathSplit[1])
 					useGrammarInformation(presenceData);
-				} else {
+				 else
 					presenceData.details = "Browsing grammar points";
-				}
 				break;
 			}
 			case "lessons": {
@@ -80,20 +82,23 @@ presence.on("UpdateData", () => {
 				} else presenceData.details = "Viewing lessons";
 				break;
 			}
+			case "notifications": {
+				presenceData.details = "Viewing their notifications";
+				break;
+			}
 			case "paths": {
 				if (pathSplit[1]) {
-					if (pathSplit[2]) {
+					if (pathSplit[2])
 						useGrammarInformation(presenceData);
-					} else {
+					 else {
 						presenceData.details = "Viewing a grammar path";
 						presenceData.state = document
 							.querySelector<HTMLHeadingElement>("h1")
 							.childNodes[0].textContent.trim();
 						presenceData.buttons = [{ label: "View Grammar Path", url: href }];
 					}
-				} else {
+				} else
 					presenceData.details = "Browsing grammar paths";
-				}
 				break;
 			}
 			case "reading_passages": {
@@ -143,8 +148,7 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "login":
-			default: {
-			}
+			default: {}
 		}
 	}
 
