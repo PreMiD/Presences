@@ -13,7 +13,8 @@ const presence: Presence = new Presence({
 		90: "https://i.imgur.com/4s0tT5G.png",
 		100: "https://i.imgur.com/VQHYuGy.png",
 	},
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	slideshow = presence.createSlideshow();
 
 function getLevelIcon(level: number) {
 	let iconKey = levelImages["10"];
@@ -42,7 +43,8 @@ presence.on("UpdateData", () => {
 			startTimestamp: browsingTimestamp,
 		};
 
-	if (hostname === "community.bunpro.jp") {} else {
+	if (hostname === "community.bunpro.jp") {
+	} else {
 		const level = +document
 			.querySelector<HTMLParagraphElement>(".header-user-level")
 			?.textContent.match(/\d+/)[0];
@@ -68,10 +70,8 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "grammar_points": {
-				if (pathSplit[1])
-					useGrammarInformation(presenceData);
-				 else
-					presenceData.details = "Browsing grammar points";
+				if (pathSplit[1]) useGrammarInformation(presenceData);
+				else presenceData.details = "Browsing grammar points";
 				break;
 			}
 			case "lessons": {
@@ -88,17 +88,15 @@ presence.on("UpdateData", () => {
 			}
 			case "paths": {
 				if (pathSplit[1]) {
-					if (pathSplit[2])
-						useGrammarInformation(presenceData);
-					 else {
+					if (pathSplit[2]) useGrammarInformation(presenceData);
+					else {
 						presenceData.details = "Viewing a grammar path";
 						presenceData.state = document
 							.querySelector<HTMLHeadingElement>("h1")
 							.childNodes[0].textContent.trim();
 						presenceData.buttons = [{ label: "View Grammar Path", url: href }];
 					}
-				} else
-					presenceData.details = "Browsing grammar paths";
+				} else presenceData.details = "Browsing grammar paths";
 				break;
 			}
 			case "reading_passages": {
@@ -133,6 +131,74 @@ presence.on("UpdateData", () => {
 				} - ${document.querySelector("h1").textContent}`;
 				break;
 			}
+			case "user": {
+				if (pathSplit[1] === "feedback") {
+					presenceData.details = "Viewing their feedback";
+				} else {
+					switch (pathSplit[2] ?? "") {
+						case "": {
+							presenceData.details = "Viewing their profile";
+							const [daysStudied, studyStreak, level, xp] =
+								document.querySelector<HTMLDivElement>(
+									"h2 + div + div"
+								).children;
+							presenceData.state = `${
+								daysStudied.querySelector<HTMLDivElement>("h3 + div")
+									.textContent
+							} days studied | ${
+								studyStreak.querySelector<HTMLDivElement>("h3 + div")
+									.textContent
+							} streak | Level ${
+								level.querySelector<HTMLDivElement>("h3 + div").textContent
+							} (${
+								xp.querySelector<HTMLDivElement>("h3 + div").textContent
+							} XP)`;
+							break;
+						}
+						case "badges": {
+							const badges = document.querySelectorAll<HTMLDivElement>(
+								".bunpro-badge.user-badge"
+							);
+							for (let i = 0; i < badges.length; i++) {
+								const badgeContainer = badges[i];
+								slideshow.addSlide(
+									i.toString(),
+									{
+										...presenceData,
+										details: "Viewing their badges",
+										state: `${
+											badgeContainer.querySelector("h3").textContent
+										} - ${
+											badgeContainer.querySelector<HTMLDivElement>(
+												".badge-requirement"
+											).textContent
+										}`,
+										largeImageKey:
+											badgeContainer.querySelector<HTMLImageElement>(
+												".badge-icon"
+											).src,
+										smallImageText:
+											badgeContainer.querySelector<HTMLDivElement>(
+												".badge-flavor-text"
+											).textContent,
+									},
+									5000
+								);
+							}
+							break;
+						}
+						case "reset": {
+							presenceData.details = "Resetting their account";
+							break;
+						}
+						case "stats": {
+							presenceData.details = "Viewing their stats";
+							break;
+						}
+					}
+				}
+				break;
+			}
 			case "vocabs": {
 				if (pathSplit[1]) {
 					presenceData.details = "Viewing a vocabulary";
@@ -148,9 +214,18 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "login":
-			default: {}
+			default: {
+			}
 		}
 	}
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+		slideshow.deleteAllSlides();
+	} else if (slideshow.getSlides().length) {
+		presence.setActivity(slideshow);
+	} else {
+		presence.setActivity();
+		slideshow.deleteAllSlides();
+	}
 });
