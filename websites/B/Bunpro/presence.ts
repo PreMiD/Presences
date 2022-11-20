@@ -36,6 +36,23 @@ function useGrammarInformation(presenceData: PresenceData) {
 	}
 }
 
+function useReviewInformation(presenceData: PresenceData) {
+	const SRSLevel = document
+			.querySelector<HTMLDivElement>(".review__stats.srs-tracker")
+			?.textContent.trim(),
+		percent = document
+			.querySelector<HTMLDivElement>(".review__stats.review-percent")
+			.textContent.trim(),
+		[reviewsRemaining] = document
+			.querySelector<HTMLDivElement>("#reviews")
+			.textContent.match(/\d+/);
+	if (SRSLevel) {
+		presenceData.state = `${SRSLevel} | ${percent} correct | ${reviewsRemaining} remaining`;
+	} else {
+		presenceData.state = `${percent} correct | ${reviewsRemaining} remaining`;
+	}
+}
+
 presence.on("UpdateData", () => {
 	const { pathname, hostname, href } = window.location,
 		pathSplit = pathname.split("/").slice(1),
@@ -61,6 +78,18 @@ presence.on("UpdateData", () => {
 				presenceData.details = "Viewing their bookmarks";
 				break;
 			}
+			case "cram": {
+				presenceData.details = "Cramming";
+				if (
+					document.querySelector<HTMLDivElement>(".cram-start").style
+						.display === "none"
+				) {
+					presenceData.state = "Selecting grammar to cram";
+				} else {
+					useReviewInformation(presenceData);
+				}
+				break;
+			}
 			case "dashboard": {
 				presenceData.details = "Viewing dashboard";
 				presenceData.state = `${
@@ -79,14 +108,8 @@ presence.on("UpdateData", () => {
 				if (document.querySelector(".grammar-point-study")) {
 					useGrammarInformation(presenceData);
 				} else {
-					const percent = document
-							.querySelector<HTMLDivElement>(".review__stats.review-percent")
-							.textContent.trim(),
-						[remaining] = document
-							.querySelector<HTMLDivElement>("#reviews")
-							.textContent.match(/\d+/);
 					presenceData.details = "Learning new grammar";
-					presenceData.state = `${percent} correct | ${remaining} remaining`;
+					useReviewInformation(presenceData);
 				}
 				break;
 			}
@@ -120,17 +143,8 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "study": {
-				const SRSLevel = document.querySelector<HTMLDivElement>(
-						".review__stats.srs-tracker"
-					).textContent,
-					percent = document
-						.querySelector<HTMLDivElement>(".review__stats.review-percent")
-						.textContent.trim(),
-					[reviewsRemaining] = document
-						.querySelector<HTMLDivElement>("#reviews")
-						.textContent.match(/\d+/);
 				presenceData.details = "Doing reviews";
-				presenceData.state = `${SRSLevel} | ${percent} correct | ${reviewsRemaining} remaining`;
+				useReviewInformation(presenceData);
 				break;
 			}
 			case "summary": {
