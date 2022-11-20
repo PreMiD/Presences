@@ -72,7 +72,7 @@ for (const presence of changedPresences) {
 				message: error.message,
 				properties: {
 					file: resolve(presencePath, "metadata.json"),
-					startLine: getLine(error.argument),
+					startLine: getLine(...error.path)
 				},
 			});
 		}
@@ -163,7 +163,7 @@ for (const presence of changedPresences) {
 	});
 	//#endregion
 
-	function getLine(line: string, value?: string | number) {
+	function getLine(...paths: (string | number)[]): number | undefined {
 		const AST = jsonAst(
 			readFileSync(resolve(presencePath, "metadata.json"), "utf-8"),
 			{
@@ -171,25 +171,25 @@ for (const presence of changedPresences) {
 			}
 		) as ObjectNode;
 
-		if (value) {
-			const node = AST.children.find(c => c.key.value === line)?.value;
+		if (paths[1] !== undefined) {
+			const node = AST.children.find(c => c.key.value === paths[0])?.value;
 
 			switch (node?.type) {
 				case "Literal":
 					return node.loc?.start.line;
 				case "Object":
-					return node.children?.find(c => c.key.value === value)?.loc?.start
+					return node.children?.find(c => c.key.value === paths[1])?.loc?.start
 						.line;
 				case "Array": {
-					if (typeof value === "number")
-						return node?.children[value]?.loc?.start.line;
+					if (typeof paths[1] === "number")
+						return node?.children[paths[1]]?.loc?.start.line;
 					else {
 						return node.children.find(c => {
 							switch (c.type) {
 								case "Literal":
-									return c.value === value;
+									return c.value === paths[1];
 								case "Object":
-									return c.children.find(c => c.key.value === value);
+									return c.children.find(c => c.key.value === paths[1]);
 							}
 						})?.loc?.start.line;
 					}
@@ -197,9 +197,11 @@ for (const presence of changedPresences) {
 			}
 		} else {
 			return (
-				AST.children.find(c => c.key.value === line)?.loc?.start?.line ?? 0
+				AST.children.find(c => c.key.value === paths[0])?.loc?.start?.line ?? 0
 			);
 		}
+
+		return 0;
 	}
 
 	actions.info(chalk.green(`${metadata.service} validated successfully`));
