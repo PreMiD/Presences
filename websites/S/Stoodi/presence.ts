@@ -1,15 +1,15 @@
 const presence = new Presence({
-		clientId: "1043638037042712637",
-	}),
+	clientId: "1043638037042712637",
+}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-	}),
-	images = {
-		play: "https://i.imgur.com/o4FaGfB.png",
-		pause: "https://i.imgur.com/kK39yND.png",
-	};
+	});
+enum Images {
+	play = "https://i.imgur.com/o4FaGfB.png",
+	pause = "https://i.imgur.com/kK39yND.png",
+};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector(".fp-player video");
 
 			if (player) {
-				presenceData.smallImageKey = player.paused ? images.pause : images.play;
+				presenceData.smallImageKey = player.paused ? Images.pause : Images.play;
 				presenceData.smallImageText = player.paused
 					? (await strings).pause
 					: (await strings).play;
