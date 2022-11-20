@@ -97,9 +97,33 @@ presence.on("UpdateData", () => {
 				presenceData.details = "Browsing top topics";
 				break;
 			}
+			case "u": {
+				presenceData.details = `Viewing ${document
+					.querySelector("h1")
+					.textContent.trim()}'s community profile`;
+				presenceData.state = document.querySelector<HTMLAnchorElement>(
+					".user-primary-navigation .active"
+				).textContent;
+				presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+					".user-profile-avatar > img"
+				).src;
+				presenceData.smallImageText = `Level ${
+					document
+						.querySelector<HTMLDivElement>(".user-profile-avatar .avatar-flair")
+						.title.match(/\d+/)[0]
+				}`;
+				presenceData.buttons = [{ label: "View Profile", url: href }];
+				break;
+			}
 			case "unread": {
 				presenceData.details = "Browsing unread topics";
 				break;
+			}
+			default: {
+				presenceData.details = "Browsing the community";
+				presenceData.state = document.title.match(
+					/^(.*?)( - Bunpro Community)?$/
+				)[1];
 			}
 		}
 	} else {
