@@ -72,6 +72,14 @@ presence.on("UpdateData", () => {
 				}
 				break;
 			}
+			case "lessons": {
+				if (pathSplit[1]) {
+					presenceData.details = "Practicing reading";
+					presenceData.state = document.querySelector("h2").textContent.trim();
+					presenceData.buttons = [{ label: "View Lesson", url: href }];
+				} else presenceData.details = "Viewing lessons";
+				break;
+			}
 			case "paths": {
 				if (pathSplit[1]) {
 					if (pathSplit[2]) {
@@ -86,6 +94,10 @@ presence.on("UpdateData", () => {
 				} else {
 					presenceData.details = "Browsing grammar paths";
 				}
+				break;
+			}
+			case "reading_passages": {
+				presenceData.details = "Browsing practice reading passages";
 				break;
 			}
 			case "study": {
@@ -129,6 +141,9 @@ presence.on("UpdateData", () => {
 						document.querySelector<HTMLInputElement>("#query").value;
 				}
 				break;
+			}
+			case "login":
+			default: {
 			}
 		}
 	}
