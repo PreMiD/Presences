@@ -25,7 +25,7 @@ function getLevelIcon(level: number) {
 	return iconKey;
 }
 
-function useGrammarInformation(presenceData: PresenceData) {
+function applyGrammarPointDetails(presenceData: PresenceData) {
 	const { pathname, href } = window.location;
 	presenceData.details = "Viewing a grammar point";
 	presenceData.state = document
@@ -36,7 +36,7 @@ function useGrammarInformation(presenceData: PresenceData) {
 	}
 }
 
-function useReviewInformation(presenceData: PresenceData) {
+function applyGrammarReviewDetails(presenceData: PresenceData) {
 	const SRSLevel = document
 			.querySelector<HTMLDivElement>(".review__stats.srs-tracker")
 			?.textContent.trim(),
@@ -86,7 +86,7 @@ presence.on("UpdateData", () => {
 				) {
 					presenceData.state = "Selecting grammar to cram";
 				} else {
-					useReviewInformation(presenceData);
+					applyGrammarReviewDetails(presenceData);
 				}
 				break;
 			}
@@ -100,16 +100,16 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "grammar_points": {
-				if (pathSplit[1]) useGrammarInformation(presenceData);
+				if (pathSplit[1]) applyGrammarPointDetails(presenceData);
 				else presenceData.details = "Browsing grammar points";
 				break;
 			}
 			case "learn": {
 				if (document.querySelector(".grammar-point-study")) {
-					useGrammarInformation(presenceData);
+					applyGrammarPointDetails(presenceData);
 				} else {
 					presenceData.details = "Learning new grammar";
-					useReviewInformation(presenceData);
+					applyGrammarReviewDetails(presenceData);
 				}
 				break;
 			}
@@ -127,7 +127,7 @@ presence.on("UpdateData", () => {
 			}
 			case "paths": {
 				if (pathSplit[1]) {
-					if (pathSplit[2]) useGrammarInformation(presenceData);
+					if (pathSplit[2]) applyGrammarPointDetails(presenceData);
 					else {
 						presenceData.details = "Viewing a grammar path";
 						presenceData.state = document
@@ -144,7 +144,7 @@ presence.on("UpdateData", () => {
 			}
 			case "study": {
 				presenceData.details = "Doing reviews";
-				useReviewInformation(presenceData);
+				applyGrammarReviewDetails(presenceData);
 				break;
 			}
 			case "summary": {
