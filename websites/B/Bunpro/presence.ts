@@ -116,6 +116,20 @@ presence.on("UpdateData", () => {
 				} - ${document.querySelector("h1").textContent}`;
 				break;
 			}
+			case "vocabs": {
+				if (pathSplit[1]) {
+					presenceData.details = "Viewing a vocabulary";
+					presenceData.state = `${document.querySelector("h2").textContent} - ${
+						document.querySelector("h6").textContent
+					}`;
+					presenceData.buttons = [{ label: "View Vocabulary", url: href }];
+				} else {
+					presenceData.details = "Searching for vocabulary";
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("#query").value;
+				}
+				break;
+			}
 		}
 	}
 
