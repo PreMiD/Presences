@@ -6,7 +6,7 @@ const presence = new Presence({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
 	});
-enum Images {
+enum Assets {
 	play = "https://i.imgur.com/o4FaGfB.png",
 	pause = "https://i.imgur.com/kK39yND.png",
 }
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector(".fp-player video");
 
 			if (player) {
-				presenceData.smallImageKey = player.paused ? Images.pause : Images.play;
+				presenceData.smallImageKey = player.paused ? Assets.pause : Assets.play;
 				presenceData.smallImageText = player.paused
 					? (await strings).pause
 					: (await strings).play;
