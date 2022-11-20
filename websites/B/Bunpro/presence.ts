@@ -26,13 +26,14 @@ function getLevelIcon(level: number) {
 }
 
 function useGrammarInformation(presenceData: PresenceData) {
+	const { pathname, href } = window.location;
 	presenceData.details = "Viewing a grammar point";
 	presenceData.state = document
 		.querySelector<HTMLDivElement>("h1 > .grammar-point__text--main-kanji-new")
 		.textContent.trim();
-	presenceData.buttons = [
-		{ label: "View Grammar Point", url: window.location.href },
-	];
+	if (!pathname.startsWith("/learn")) {
+		presenceData.buttons = [{ label: "View Grammar Point", url: href }];
+	}
 }
 
 presence.on("UpdateData", () => {
@@ -74,6 +75,21 @@ presence.on("UpdateData", () => {
 				else presenceData.details = "Browsing grammar points";
 				break;
 			}
+			case "learn": {
+				if (document.querySelector(".grammar-point-study")) {
+					useGrammarInformation(presenceData);
+				} else {
+					const percent = document
+							.querySelector<HTMLDivElement>(".review__stats.review-percent")
+							.textContent.trim(),
+						[remaining] = document
+							.querySelector<HTMLDivElement>("#reviews")
+							.textContent.match(/\d+/);
+					presenceData.details = "Learning new grammar";
+					presenceData.state = `${percent} correct | ${remaining} remaining`;
+				}
+				break;
+			}
 			case "lessons": {
 				if (pathSplit[1]) {
 					presenceData.details = "Practicing reading";
@@ -104,10 +120,7 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "study": {
-				const hintText = document.querySelector<HTMLDivElement>(
-						".study-question-english-hint"
-					).textContent,
-					SRSLevel = document.querySelector<HTMLDivElement>(
+				const SRSLevel = document.querySelector<HTMLDivElement>(
 						".review__stats.srs-tracker"
 					).textContent,
 					percent = document
@@ -117,9 +130,7 @@ presence.on("UpdateData", () => {
 						.querySelector<HTMLDivElement>("#reviews")
 						.textContent.match(/\d+/);
 				presenceData.details = "Doing reviews";
-				presenceData.state = hintText
-					? `${hintText} (${SRSLevel}) - ${percent} correct, ${reviewsRemaining} remaining`
-					: `${SRSLevel} - ${percent} correct, ${reviewsRemaining} remaining`;
+				presenceData.state = `${SRSLevel} | ${percent} correct | ${reviewsRemaining} remaining`;
 				break;
 			}
 			case "summary": {
