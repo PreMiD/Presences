@@ -5,7 +5,11 @@ const presence = new Presence({
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-	});
+	}),
+	images = {
+		play: "https://i.imgur.com/o4FaGfB.png",
+		pause: "https://i.imgur.com/kK39yND.png",
+	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -15,7 +19,7 @@ presence.on("UpdateData", async () => {
 		},
 		url = document.location.pathname;
 
-	if (url === "/") presenceData.details = "Navegando pela Home...";
+	if (url === "/") presenceData.details = "Navegando pela Home";
 
 	if (url.includes("/materias")) {
 		const title = document.querySelector(".c-page-header__title")?.textContent;
@@ -47,7 +51,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector(".fp-player video");
 
 			if (player) {
-				presenceData.smallImageKey = player.paused ? "pause" : "play";
+				presenceData.smallImageKey = player.paused ? images.pause : images.play;
 				presenceData.smallImageText = player.paused
 					? (await strings).pause
 					: (await strings).play;
