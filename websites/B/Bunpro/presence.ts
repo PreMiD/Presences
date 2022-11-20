@@ -24,6 +24,16 @@ function getLevelIcon(level: number) {
 	return iconKey;
 }
 
+function useGrammarInformation(presenceData: PresenceData) {
+	presenceData.details = "Viewing a grammar point";
+	presenceData.state = document
+		.querySelector<HTMLDivElement>("h1 > .grammar-point__text--main-kanji-new")
+		.textContent.trim();
+	presenceData.buttons = [
+		{ label: "View Grammar Point", url: window.location.href },
+	];
+}
+
 presence.on("UpdateData", () => {
 	const { pathname, hostname, href } = window.location,
 		pathSplit = pathname.split("/").slice(1),
@@ -56,15 +66,25 @@ presence.on("UpdateData", () => {
 			}
 			case "grammar_points": {
 				if (pathSplit[1]) {
-					presenceData.details = "Viewing a grammar point";
-					presenceData.state = document
-						.querySelector<HTMLDivElement>(
-							"h1 > .grammar-point__text--main-kanji-new"
-						)
-						.textContent.trim();
-					presenceData.buttons = [{ label: "View Grammar Point", url: href }];
+					useGrammarInformation(presenceData);
 				} else {
 					presenceData.details = "Browsing grammar points";
+				}
+				break;
+			}
+			case "paths": {
+				if (pathSplit[1]) {
+					if (pathSplit[2]) {
+						useGrammarInformation(presenceData);
+					} else {
+						presenceData.details = "Viewing a grammar path";
+						presenceData.state = document
+							.querySelector<HTMLHeadingElement>("h1")
+							.childNodes[0].textContent.trim();
+						presenceData.buttons = [{ label: "View Grammar Path", url: href }];
+					}
+				} else {
+					presenceData.details = "Browsing grammar paths";
 				}
 				break;
 			}
