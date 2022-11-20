@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1043638037042712637",
-}),
+		clientId: "1043638037042712637",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
@@ -9,7 +9,7 @@ const presence = new Presence({
 enum Images {
 	play = "https://i.imgur.com/o4FaGfB.png",
 	pause = "https://i.imgur.com/kK39yND.png",
-};
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
