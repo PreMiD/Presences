@@ -238,8 +238,9 @@ presence.on("UpdateData", () => {
 				}
 				break;
 			}
-			case "login":
 			default: {
+				presenceData.details = "Browsing";
+				presenceData.state = document.querySelector("h1")?.textContent.trim();
 			}
 		}
 	}
