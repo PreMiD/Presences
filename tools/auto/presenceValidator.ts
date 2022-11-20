@@ -72,7 +72,7 @@ for (const presence of changedPresences) {
 				message: error.message,
 				properties: {
 					file: resolve(presencePath, "metadata.json"),
-					startLine: getLine(...error.path)
+					startLine: getLine(...error.path),
 				},
 			});
 		}
