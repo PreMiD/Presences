@@ -47,7 +47,7 @@ function applyGrammarReviewDetails(presenceData: PresenceData) {
 			.textContent.match(/\d+/);
 	if (SRSLevel)
 		presenceData.state = `${SRSLevel} | ${percent} correct | ${reviewsRemaining} remaining`;
-	 else
+	else
 		presenceData.state = `${percent} correct | ${reviewsRemaining} remaining`;
 }
 
@@ -59,7 +59,50 @@ presence.on("UpdateData", () => {
 			startTimestamp: browsingTimestamp,
 		};
 
-	if (hostname === "community.bunpro.jp") {} else {
+	if (hostname === "community.bunpro.jp") {
+		switch (pathSplit[0]) {
+			case "":
+			case "categories": {
+				presenceData.details = "Browsing the community";
+				break;
+			}
+			case "c": {
+				presenceData.details = "Browsing community category";
+				presenceData.state =
+					document.querySelector<HTMLSpanElement>(".category-name").textContent;
+				break;
+			}
+			case "latest": {
+				presenceData.details = "Browsing latest topics";
+				break;
+			}
+			case "new": {
+				presenceData.details = "Browsing new topics";
+				break;
+			}
+			case "search": {
+				presenceData.details = "Searching the community";
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					".search-bar > input"
+				).value;
+				break;
+			}
+			case "t": {
+				presenceData.details = "Viewing a community topic";
+				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.buttons = [{ label: "View Topic", url: href }];
+				break;
+			}
+			case "top": {
+				presenceData.details = "Browsing top topics";
+				break;
+			}
+			case "unread": {
+				presenceData.details = "Browsing unread topics";
+				break;
+			}
+		}
+	} else {
 		const level = +document
 			.querySelector<HTMLParagraphElement>(".header-user-level")
 			?.textContent.match(/\d+/)[0];
@@ -79,8 +122,7 @@ presence.on("UpdateData", () => {
 						.display === "none"
 				)
 					presenceData.state = "Selecting grammar to cram";
-				 else
-					applyGrammarReviewDetails(presenceData);
+				else applyGrammarReviewDetails(presenceData);
 				break;
 			}
 			case "dashboard": {
@@ -100,7 +142,7 @@ presence.on("UpdateData", () => {
 			case "learn": {
 				if (document.querySelector(".grammar-point-study"))
 					applyGrammarPointDetails(presenceData);
-				 else {
+				else {
 					presenceData.details = "Learning new grammar";
 					applyGrammarReviewDetails(presenceData);
 				}
@@ -152,7 +194,7 @@ presence.on("UpdateData", () => {
 			case "user": {
 				if (pathSplit[1] === "feedback")
 					presenceData.details = "Viewing their feedback";
-				 else {
+				else {
 					switch (pathSplit[2] ?? "") {
 						case "": {
 							presenceData.details = "Viewing their profile";
@@ -174,9 +216,9 @@ presence.on("UpdateData", () => {
 							break;
 						}
 						case "badges": {
-							for (const [i, badgeContainer] of document.querySelectorAll<HTMLDivElement>(
-								".bunpro-badge.user-badge"
-							).entries()) {
+							for (const [i, badgeContainer] of document
+								.querySelectorAll<HTMLDivElement>(".bunpro-badge.user-badge")
+								.entries()) {
 								slideshow.addSlide(
 									i.toString(),
 									{
@@ -239,9 +281,8 @@ presence.on("UpdateData", () => {
 	if (presenceData.details) {
 		presence.setActivity(presenceData);
 		slideshow.deleteAllSlides();
-	} else if (slideshow.getSlides().length)
-		presence.setActivity(slideshow);
-	 else {
+	} else if (slideshow.getSlides().length) presence.setActivity(slideshow);
+	else {
 		presence.setActivity();
 		slideshow.deleteAllSlides();
 	}
