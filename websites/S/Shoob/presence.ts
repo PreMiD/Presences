@@ -25,13 +25,11 @@ const presence = new Presence({
 		"/market": { details: "Viewing the Market" },
 		"/medals": { details: "Viewing Medals" },
 		"/messages": { details: "Viewing Private Messages" },
-		"/mini-games": { details: "Viewing Mini-Games" },
 		"/notifications": { details: "Viewing Notifications" },
 		"/premium": { details: "Viewing Premium" },
 		"/privacy-policy": { details: "Viewing Privacy Policy" },
 		"/rules": { details: "Reading the Rules" },
 		"/settings": { details: "Managing Settings" },
-		"/shop": { details: "Viewing the Shop" },
 		"/stacks": { details: "Viewing Stacks" },
 		"/staff": { details: "Viewing Staff Pages" },
 		"/staff-list": { details: "Viewing Staff List" },
@@ -49,21 +47,28 @@ presence.on("UpdateData", async () => {
 	};
 	const { pathname, href } = window.location,
 		pathSplit = pathname.split("/").slice(1),
-		pageTitle = document.querySelector(
+		pageTitle = document.querySelector<HTMLLIElement>(
 			"[itemprop='breadcrumb'] > li:last-child"
 		)?.textContent,
-		profileImage = document.querySelector<HTMLImageElement>(".header-avatar");
+		profileImage = document.querySelector<HTMLImageElement>(".header-avatar"),
+		currencyFormat = await presence.getSetting<string>("currencyFormat");
 
 	if (profileImage) {
 		presenceData.smallImageKey = profileImage.src;
-		presenceData.smallImageText = `Wallet: ${
-			document.querySelector<HTMLSpanElement>(".header-wallet").textContent
-		} | Bank: ${
-			document.querySelector<HTMLSpanElement>(".header-bank:not(.orange)")
-				.textContent
-		} | Sōru: ${document
-			.querySelector<HTMLSpanElement>(".header-bank.orange")
-			.textContent.substring(1)}`;
+		if (currencyFormat === "Wallet Only") {
+			presenceData.smallImageText = `🪙 ${
+				document.querySelector<HTMLSpanElement>(".header-wallet").textContent
+			}`;
+		} else {
+			presenceData.smallImageText = `💱 ${
+				+document.querySelector<HTMLSpanElement>(".header-wallet").textContent +
+				+document.querySelector<HTMLSpanElement>(".header-bank:not(.orange)")
+					.textContent +
+				4.2 *
+					+document.querySelector<HTMLSpanElement>(".header-bank.orange")
+						.textContent
+			}`;
+		}
 	}
 
 	for (const [path, data] of Object.entries(staticPages))
@@ -109,12 +114,38 @@ presence.on("UpdateData", async () => {
 				}
 			}
 			break;
+		case "market":
+			presenceData.details = "Viewing the Market";
+			presenceData.buttons = [{ label: "View Market", url: href }];
+			break;
+		case "mini-games":
+			if (pathSplit[1]) {
+				presenceData.details = "Playing a Mini Game";
+				presenceData.buttons = [{ label: "View Mini-Game", url: href }];
+			} else {
+				presenceData.details = "Viewing Mini-Games";
+				presenceData.buttons = [{ label: "View Mini-Games", url: href }];
+			}
+			break;
 		case "servers":
 			if (pathSplit[1]) {
 				presenceData.details = "Viewing a Server";
 				presenceData.state = pageTitle;
 				presenceData.buttons = [{ label: "View Server", url: href }];
 			} else presenceData.details = "Viewing Servers";
+			break;
+		case "shop":
+			if (pathSplit[1] === "category") {
+				presenceData.details = "Browsing a Shop Category";
+				presenceData.state = pageTitle;
+			} else if (pathSplit[1] === "item") {
+				presenceData.details = "Viewing a Shop Item";
+				presenceData.state = pageTitle;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".item-pic-img").src;
+				presenceData.buttons = [{ label: "View Item", url: href }];
+			} else presenceData.details = "Browsing the Shop";
+
 			break;
 		case "support":
 			switch (pathSplit[1]) {
@@ -134,14 +165,23 @@ presence.on("UpdateData", async () => {
 				}
 			}
 			break;
-		case "user":
-			presenceData.details = "Viewing a profile";
-			presenceData.state = pageTitle;
-			presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+		case "user": {
+			const tab = document.querySelector<HTMLButtonElement>(
+				"button.Mui-selected"
+			).textContent;
+			presenceData.details = `Viewing ${pageTitle}'s Profile`;
+			if (tab === "Info") {
+				const [, level, xp] = document
+					.querySelector<HTMLSpanElement>(".detailedStats > span")
+					.textContent.match(/(\d+)\s*level\s*\((\d+)\s*XP\)/);
+				presenceData.state = `🎚 Level ${level} ⚡${xp} XP`;
+			} else presenceData.state = tab;
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				".profile-avatar-pic img"
 			).src;
 			presenceData.buttons = [{ label: "View Profile", url: href }];
 			break;
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
