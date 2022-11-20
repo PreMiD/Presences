@@ -53,9 +53,10 @@ presence.on("UpdateData", async () => {
 					: (await strings).play;
 
 				delete presenceData.startTimestamp;
-				if (!player.paused)
+				if (!player.paused) {
 					presenceData.endTimestamp =
 						presence.getTimestampsfromMedia(player)[1];
+				}
 			}
 		}
 		if (url.includes("/exercicios")) {
