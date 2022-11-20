@@ -63,23 +63,7 @@ const presence = new Presence({
 	clientId: "1043125926793318420",
 });
 
-function fetchLiveChannelNextData(): LiveChannelNextData {
-	const nextDataElement = document.querySelector("#__NEXT_DATA__");
-
-	if (!nextDataElement) return null;
-
-	return JSON.parse(nextDataElement.textContent);
-}
-
-function fetchCategoriesNextData(): CategoriesNextData {
-	const nextDataElement = document.querySelector("#__NEXT_DATA__");
-
-	if (!nextDataElement) return null;
-
-	return JSON.parse(nextDataElement.textContent);
-}
-
-function fetchProgrammeNextData(): ProgrammeNextData {
+function fetchNextData<T>(): T {
 	const nextDataElement = document.querySelector("#__NEXT_DATA__");
 
 	if (!nextDataElement) return null;
@@ -105,7 +89,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "/watch": {
-				const nextData = fetchLiveChannelNextData(),
+				const nextData = fetchNextData<LiveChannelNextData>(),
 					// When you first go to watch a channel, the slug is null and the default channel is ITV1
 					currentChannelMetadata =
 						nextData.props.pageProps.channelsMetaData.channels.find(
@@ -156,7 +140,7 @@ presence.on("UpdateData", async () => {
 				} else if (path.startsWith("/watch/categories")) {
 					presenceData.details = "Browsing ITVX";
 					presenceData.state = `Viewing ${
-						fetchCategoriesNextData().props.pageProps.category.title
+						fetchNextData<CategoriesNextData>().props.pageProps.category.title
 					} Category`;
 				} else if (
 					/^[-+]?[0-9A-Fa-f]+\.?[0-9A-Fa-f]*?$/.test(
@@ -165,7 +149,7 @@ presence.on("UpdateData", async () => {
 				) {
 					delete presenceData.startTimestamp;
 
-					const nextData = fetchProgrammeNextData();
+					const nextData = fetchNextData<ProgrammeNextData>();
 					presenceData.details = `Watching ${nextData.props.pageProps.title.programmeTitle}`;
 
 					if (
