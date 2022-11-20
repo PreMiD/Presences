@@ -1,171 +1,103 @@
 const presence: Presence = new Presence({
 		clientId: "833430731816173669",
-		injectOnComplete: true,
 	}),
-	largeImageKey = "logo";
+	levelImages: Record<string, string> = {
+		"10": "https://i.imgur.com/nQvo9Wo.png",
+		"20": "https://i.imgur.com/ag1vZVv.png",
+		"30": "https://i.imgur.com/FvJN63W.png",
+		"40": "https://i.imgur.com/pN5cZxs.png",
+		"50": "https://i.imgur.com/ETRB7TM.png",
+		"60": "https://i.imgur.com/WGCbykC.png",
+		"70": "https://i.imgur.com/7J4mGPp.png",
+		"80": "https://i.imgur.com/JOek4w6.png",
+		"90": "https://i.imgur.com/4s0tT5G.png",
+		"100": "https://i.imgur.com/VQHYuGy.png",
+	},
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function getLevelIcon(level: number) {
-	let iconKey = "level-10";
-
+	let iconKey = levelImages["10"];
 	if (level >= 10 && level < 100)
-		iconKey = `level-${+(level / 100).toPrecision(1) * 100}`;
-
-	if (level < 10) iconKey = "level-10";
-
-	if (level >= 100) iconKey = "level-100";
-
+		iconKey = levelImages[`${Math.floor(level / 10) * 10}`];
+	if (level < 10) iconKey = levelImages["10"];
+	if (level >= 100) iconKey = levelImages["100"];
 	return iconKey;
 }
 
-function getLevelInHeader() {
-	const levelElement: HTMLDivElement =
-		document.querySelector(".navbar-user-level");
-
-	if (!levelElement) return null;
-
-	return +levelElement.textContent.slice(6);
-}
-
 presence.on("UpdateData", () => {
-	const { pathname } = window.location,
+	const { pathname, hostname, href } = window.location,
+		pathSplit = pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey,
-		},
-		level: number = getLevelInHeader();
+			largeImageKey: "https://i.imgur.com/NkfEDwV.png",
+			startTimestamp: browsingTimestamp,
+		};
 
-	let details: string,
-		state: string,
-		smallImageText: string,
-		startTimestamp: number;
-
-	if (/grammar_points\/\d+/i.test(pathname)) {
-		startTimestamp = Date.now();
-		details = "Doing Lessons";
-
-		const [lessonType, lessonProgress] = document
-			.querySelector(".header__lesson-progress")
-			.textContent.split(": ");
-
-		state = `Learning ${
-			document.querySelector(
-				".grammar-point__title.grammar-point__title--default"
-			).textContent
-		}`;
-
-		smallImageText = `${lessonType}: ${lessonProgress}`;
+	if (hostname === "community.bunpro.jp") {
 	} else {
-		switch (pathname) {
-			case "/study": {
-				startTimestamp = Date.now();
-				details = "Doing reviews";
-
-				const hintText = document.querySelector(
+		const level = +document
+			.querySelector<HTMLParagraphElement>(".header-user-level")
+			?.textContent.match(/\d+/)[0];
+		if (level) {
+			presenceData.smallImageKey = getLevelIcon(level);
+			presenceData.smallImageText = `Level ${level}`;
+		}
+		switch (pathSplit[0]) {
+			case "": {
+				break;
+			}
+			case "dashboard": {
+				presenceData.details = "Viewing dashboard";
+				presenceData.state = `${
+					document
+						.querySelector<HTMLAnchorElement>(".reviews-link")
+						.textContent.match(/\d+/)[0]
+				} reviews`;
+				break;
+			}
+			case "grammar_points": {
+				if (pathSplit[1]) {
+					presenceData.details = "Viewing a grammar point";
+					presenceData.state = document
+						.querySelector<HTMLDivElement>(
+							"h1 > .grammar-point__text--main-kanji-new"
+						)
+						.textContent.trim();
+					presenceData.buttons = [{ label: "View Grammar Point", url: href }];
+				} else {
+					presenceData.details = "Browsing grammar points";
+				}
+				break;
+			}
+			case "study": {
+				const hintText = document.querySelector<HTMLDivElement>(
 						".study-question-english-hint"
 					).textContent,
-					SRSLevel = document.querySelector(
+					SRSLevel = document.querySelector<HTMLDivElement>(
 						".review__stats.srs-tracker"
-					).textContent;
-
-				smallImageText = document.querySelector(
-					".review__stats.review-percent"
-				).textContent;
-
-				state = hintText ? `${hintText} (${SRSLevel})` : SRSLevel;
-
+					).textContent,
+					percent = document
+						.querySelector<HTMLDivElement>(".review__stats.review-percent")
+						.textContent.trim(),
+					[reviewsRemaining] = document
+						.querySelector<HTMLDivElement>("#reviews")
+						.textContent.match(/\d+/);
+				presenceData.details = "Doing reviews";
+				presenceData.state = hintText
+					? `${hintText} (${SRSLevel}) - ${percent} correct, ${reviewsRemaining} remaining`
+					: `${SRSLevel} - ${percent} correct, ${reviewsRemaining} remaining`;
 				break;
 			}
-			case "/bookmarks":
-			case "/lessons":
-			case "/grammar_points": {
-				details = "Browsing Grammar";
-
-				break;
-			}
-			case "/learn": {
-				startTimestamp = Date.now();
-
-				if (
-					(
-						document.querySelector(
-							"#learn-new-grammar-page"
-						) as HTMLStyleElement
-					).style.display === "block"
-				) {
-					details = "Learning New Grammar (Quiz)";
-					smallImageText = `${
-						document.querySelector(".review__stats#reviews").textContent
-					}`;
-				} else {
-					details = "Learning New Grammar";
-
-					let activeGrammarPoint: HTMLDivElement;
-
-					activeGrammarPoint = document.querySelector(
-						'.grammar-point-study[style*="display: block"]'
-					);
-
-					activeGrammarPoint ??= document.querySelector(".grammar-point-study");
-
-					smallImageText = activeGrammarPoint.querySelector(
-						".header__lesson-progress"
-					).textContent;
-				}
-
-				break;
-			}
-			case "/cram": {
-				if (
-					(document.querySelector(".cram-start") as HTMLStyleElement).style
-						.display !== "none"
-				) {
-					details = "Browsing Grammar";
-					break;
-				}
-
-				startTimestamp = Date.now();
-				details = "Doing Cram";
-
-				state = `Reviewing ${
-					document.querySelector(".study-question-english-hint").textContent
-				}`;
-
-				smallImageText = document.querySelector(
-					".review__stats#reviews"
-				).textContent;
-
-				break;
-			}
-			case "/":
-			case "/dashboard":
-			case "/login":
-			default: {
-				const reviews: HTMLDivElement = document.querySelector(
-					"#user-dashboard > div:nth-child(1) > div.col-lg-7.col-md-12.height-100.d-flex.flex-column.flex-grow-2.pl-0.pr-xl-3.pr-0 > div:nth-child(1) > div.col-md-6.col-12.pl-md-1.pr-md-0.pr-0.pl-0 > div > div:nth-child(3)"
-				);
-
-				if (reviews) {
-					details = "Viewing Dashboard";
-					state = `${reviews.textContent} reviews`;
-				} else details = "Browsing Pages";
-
+			case "summary": {
+				presenceData.details = "Viewing review summary";
+				presenceData.state = `${
+					document
+						.querySelector<HTMLDivElement>(".tab-highlight")
+						.textContent.match(/\w+(?=:)/)[0]
+				} - ${document.querySelector("h1").textContent}`;
 				break;
 			}
 		}
 	}
-
-	presenceData.details = details;
-
-	if (state) presenceData.state = state;
-
-	if (level) {
-		presenceData.smallImageKey = getLevelIcon(level);
-
-		smallImageText ??= `Level ${level}`;
-	}
-	if (smallImageText) presenceData.smallImageText = smallImageText;
-
-	if (startTimestamp)
-		presenceData.startTimestamp = Math.round(startTimestamp / 1000);
 
 	presence.setActivity(presenceData);
 });

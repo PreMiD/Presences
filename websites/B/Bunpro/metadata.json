@@ -4,6 +4,12 @@
 		"name": "JulianCDC",
 		"id": "159565307831123968"
 	},
+	"contributors": [
+		{
+			"id": "193714715631812608",
+			"name": "theusaf"
+		}
+	],
 	"service": "Bunpro",
 	"altnames": [
 		"文プロ"
@@ -17,11 +23,12 @@
 	},
 	"url": [
 		"www.bunpro.jp",
-		"bunpro.jp"
+		"bunpro.jp",
+		"community.bunpro.jp"
 	],
-	"version": "1.0.11",
+	"version": "2.0.0",
 	"logo": "https://i.imgur.com/NkfEDwV.png",
-	"thumbnail": "https://i.imgur.com/uKMafFN.png",
+	"thumbnail": "https://i.imgur.com/yIzLpIr.png",
 	"color": "#5e6266",
 	"category": "other",
 	"tags": [
