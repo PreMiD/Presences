@@ -4,7 +4,12 @@ import { resolve } from "node:path";
 
 import actions from "@actions/core";
 import got from "got";
-import jsonAst, { ObjectNode } from "json-to-ast";
+import jsonAst, {
+	ObjectNode,
+	ArrayNode,
+	LiteralNode,
+	PropertyNode,
+} from "json-to-ast";
 import { validate } from "jsonschema";
 import { compare } from "semver";
 
@@ -15,6 +20,8 @@ import chalk from "chalk";
 interface SchemaMetadata extends Metadata {
 	$schema: string;
 }
+
+type ValueNode = ObjectNode | ArrayNode | LiteralNode | PropertyNode;
 
 const require = createRequire(import.meta.url),
 	schema = await getLatestSchema(),
@@ -163,7 +170,7 @@ for (const presence of changedPresences) {
 	});
 	//#endregion
 
-	function getLine(...paths: (string | number)[]): number | undefined {
+	function getLine(...path: (string | number)[]): number | undefined {
 		const AST = jsonAst(
 			readFileSync(resolve(presencePath, "metadata.json"), "utf-8"),
 			{
@@ -171,37 +178,39 @@ for (const presence of changedPresences) {
 			}
 		) as ObjectNode;
 
-		if (paths[1] !== undefined) {
-			const node = AST.children.find(c => c.key.value === paths[0])?.value;
+		let currentNode: ValueNode | undefined = AST.children.find(
+				x => x.key.value === path[0]
+			),
+			isRoot = true;
 
-			switch (node?.type) {
-				case "Literal":
-					return node.loc?.start.line;
-				case "Object":
-					return node.children?.find(c => c.key.value === paths[1])?.loc?.start
-						.line;
-				case "Array": {
-					if (typeof paths[1] === "number")
-						return node?.children[paths[1]]?.loc?.start.line;
-					else {
-						return node.children.find(c => {
-							switch (c.type) {
-								case "Literal":
-									return c.value === paths[1];
-								case "Object":
-									return c.children.find(c => c.key.value === paths[1]);
-							}
-						})?.loc?.start.line;
-					}
-				}
+		for (const value of path) {
+			if (isRoot) {
+				isRoot = false;
+				continue;
 			}
-		} else {
-			return (
-				AST.children.find(c => c.key.value === paths[0])?.loc?.start?.line ?? 0
-			);
+
+			if (!currentNode) return 0;
+			else currentNode = findNodeLine(currentNode, value) as PropertyNode;
 		}
 
-		return 0;
+		return currentNode?.loc?.start.line;
+	}
+
+	function findNodeLine(
+		node: ValueNode,
+		value: string | number
+	): ValueNode | undefined {
+		switch (node.type) {
+			case "Property":
+				return findNodeLine(node.value, value);
+			case "Array":
+				if (Number.isInteger(value)) return node.children[value as number];
+				else return node.children.find(x => findNodeLine(x, value));
+			case "Object":
+				return node.children.find(x => x.key.value === value);
+			case "Literal":
+				return node;
+		}
 	}
 
 	actions.info(chalk.green(`${metadata.service} validated successfully`));
