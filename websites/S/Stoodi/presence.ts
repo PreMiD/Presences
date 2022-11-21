@@ -1,12 +1,9 @@
 const presence = new Presence({
 		clientId: "1043638037042712637",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	});
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 enum Assets {
+	Logo = "https://i.imgur.com/wC4AkjI.png",
 	Play = "https://i.imgur.com/o4FaGfB.png",
 	Pause = "https://i.imgur.com/kK39yND.png",
 }
@@ -14,7 +11,7 @@ enum Assets {
 presence.on("UpdateData", async () => {
 	const selector = document.querySelector,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/wC4AkjI.png",
+			largeImageKey: Assets.Logo,
 			details: "Vendo o Stoodi",
 			startTimestamp: browsingTimestamp,
 		},
@@ -52,9 +49,7 @@ presence.on("UpdateData", async () => {
 
 			if (player) {
 				presenceData.smallImageKey = player.paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = player.paused
-					? (await strings).pause
-					: (await strings).play;
+				presenceData.smallImageText = player.paused ? "Pausado" : "Tocando";
 
 				delete presenceData.startTimestamp;
 				if (!player.paused) {
