@@ -155,7 +155,13 @@ presence.on("UpdateData", async () => {
 					document.querySelector(".user_purchased + div + div b:nth-child(2)")
 						.textContent
 				}`;
-			} else presenceData.details = "Viewing Inventory";
+			} else {
+				presenceData.details = "Viewing Inventory";
+				presenceData.state = `${
+					document.querySelector<HTMLSpanElement>(".inventory-percent + span")
+						.textContent
+				} cards collected`;
+			}
 			break;
 		case "market":
 			presenceData.details = "Viewing the Market";
@@ -188,7 +194,6 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLImageElement>(".item-pic-img").src;
 				presenceData.buttons = [{ label: "View Item", url: href }];
 			} else presenceData.details = "Browsing the Shop";
-
 			break;
 		case "support":
 			switch (pathSplit[1]) {
@@ -218,7 +223,15 @@ presence.on("UpdateData", async () => {
 					.querySelector<HTMLSpanElement>(".detailedStats > span")
 					.textContent.match(/(\d+)\s*level\s*\((\d+)\s*XP\)/);
 				presenceData.state = `🎚 Level ${level} ⚡${xp} XP`;
-			} else presenceData.state = tab;
+			} else if (tab === "Cards") {
+				presenceData.state = `Their Cards (Total: ${
+					document
+						.querySelector<HTMLSpanElement>(
+							".tabpanel-content > div > div:nth-child(2) .MuiTypography-root"
+						)
+						.textContent.match(/\d+/)[0]
+				})`;
+			} else presenceData.state = `Their ${tab}`;
 			presenceData.buttons = [{ label: "View Profile", url: href }];
 			break;
 		}
