@@ -101,20 +101,21 @@ function getPersonalProfileDetails() {
 
 function getMachineDetails() {
 	const container = document.querySelectorAll(".text-left.pl-8.pt-3")[0],
-		
-		
 		status = document
 			.querySelectorAll(".htb-label2.offline-text.text-left.pl-3")[0]
 			.textContent.includes("offline")
 			? "offline"
 			: "online";
 
-	return `${container.querySelectorAll(".d-inline-block")[0].textContent} (${container.querySelectorAll(".d-inline-block")[1].textContent}) - ${status}`;
+	return `${container.querySelectorAll(".d-inline-block")[0].textContent} (${
+		container.querySelectorAll(".d-inline-block")[1].textContent
+	}) - ${status}`;
 }
 
 function getChallengeDetails() {
-	const 
-		name = document.querySelectorAll(".text-left.pl-8.pt-4")[0].querySelectorAll(".d-inline-block")[0].textContent;
+	const name = document
+		.querySelectorAll(".text-left.pl-8.pt-4")[0]
+		.querySelectorAll(".d-inline-block")[0].textContent;
 
 	return `${name} - ${
 		document.querySelectorAll(".htb-label2.offline-text.text-left.pl-3")[0]
@@ -163,7 +164,9 @@ presence.on("UpdateData", async () => {
 
 		if (
 			document.location.pathname.includes(path) ||
-			new RegExp(path.replace(/{}/g, ".*"), "g").test(document.location.pathname)
+			new RegExp(path.replace(/{}/g, ".*"), "g").test(
+				document.location.pathname
+			)
 		) {
 			presenceData = {
 				...presenceData,
