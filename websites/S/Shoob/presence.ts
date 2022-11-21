@@ -219,9 +219,6 @@ presence.on("UpdateData", async () => {
 					.textContent.match(/(\d+)\s*level\s*\((\d+)\s*XP\)/);
 				presenceData.state = `🎚 Level ${level} ⚡${xp} XP`;
 			} else presenceData.state = tab;
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				".profile-avatar-pic img"
-			).src;
 			presenceData.buttons = [{ label: "View Profile", url: href }];
 			break;
 		}
