@@ -1,51 +1,51 @@
 const presences: Record<string, PresenceData> = {
 		"/challenges/retired": {
 			details: "Challenges",
-			state: "Browsing retired challenges...",
+			state: "Browsing retired challenges",
 		},
 		"/challenges/todo": {
 			details: "Challenges",
-			state: "Browsing to-do list...",
+			state: "Browsing to-do list",
 		},
 		"/login": {
 			details: "Login",
-			state: "Logging in...",
+			state: "Logging in",
 		},
 		"/fortresses": {
 			details: "Fortresses",
-			state: "Browsing fortresses...",
+			state: "Browsing fortresses",
 		},
 		"/endgames": {
 			details: "Endgames",
-			state: "Browsing endgames...",
+			state: "Browsing endgames",
 		},
 		"/starting-point": {
 			details: "Starting Point",
-			state: "Browsing starting points...",
+			state: "Browsing starting points",
 		},
 		"/rankings": {
 			details: "Rankings",
-			state: "Browsing rankings...",
+			state: "Browsing rankings",
 		},
 		"/register": {
 			details: "Register",
-			state: "Creating new account...",
+			state: "Creating new account",
 		},
 		"/machines/list/unreleased": {
 			details: "Machines",
-			state: "Browsing scheduled machines...",
+			state: "Browsing scheduled machines",
 		},
 		"/machines/list/active": {
 			details: "Machines",
-			state: "Browsing active machines...",
+			state: "Browsing active machines",
 		},
 		"/machines/list/retired": {
 			details: "Machines",
-			state: "Browsing retired machines...",
+			state: "Browsing retired machines",
 		},
 		"/machines/list/todo": {
 			details: "Machines",
-			state: "Browsing machines to-do list...",
+			state: "Browsing machines to-do list",
 		},
 		"/home": {
 			details: "Homepage",
@@ -58,22 +58,22 @@ const presences: Record<string, PresenceData> = {
 		},
 		"/profile/overview": {
 			details: "Profile",
-			state: "Browsing profile overview...",
+			state: "Browsing profile overview",
 		},
 		"/profile/settings": {
 			details: "Profile",
-			state: "Changing profile settings...",
+			state: "Changing profile settings",
 		},
 		"/profile/subscriptions/plans": {
 			details: "Profile",
-			state: "Browsing subscriptions...",
+			state: "Browsing subscriptions",
 		},
 		"/users/{}": {
 			details: "Looking at profile",
 		},
 		"/tracks": {
 			details: "Tracks",
-			state: "Browsing tracks...",
+			state: "Browsing tracks",
 		},
 	},
 	presence = new Presence({
@@ -96,14 +96,10 @@ function getPersonalProfileDetails() {
 }
 
 function getMachineDetails() {
-	const diff = document.querySelectorAll(
-			".d-inline-block.pl-2.pr-2.borderRadius13.label-reset.no-space.color-main.htb-label.undefined.letterSpacingundefined.borderRadius4"
-		)[0].textContent,
-		name = document
-			.querySelectorAll(
-				".d-inline-block.pl-2.pr-2.borderRadius13.label-reset.no-space.color-white.fontSemiBold.letterSpacing0.borderRadius4"
-			)[1]
-			.querySelectorAll("span")[0].textContent,
+	const container = document.getElementsByClassName("text-left pl-8 pt-3")[0];
+	const diff =
+			container.getElementsByClassName("d-inline-block")[1].textContent,
+		name = container.getElementsByClassName("d-inline-block")[0].textContent,
 		status = document
 			.querySelectorAll(".htb-label2.offline-text.text-left.pl-3")[0]
 			.textContent.includes("offline")
@@ -114,11 +110,9 @@ function getMachineDetails() {
 }
 
 function getChallengeDetails() {
-	const name = document
-		.querySelectorAll(
-			".d-inline-block.pl-2.pr-2.borderRadius13.label-reset.no-space.color-white.fontSemiBold.letterSpacing0.borderRadius4"
-		)[1]
-		.querySelectorAll("span")[0].textContent;
+	const container = document.getElementsByClassName("text-left pl-8 pt-3")[0];
+	const name =
+		container.getElementsByClassName("d-inline-block")[0].textContent;
 
 	return `${name} - ${
 		document.querySelectorAll(".htb-label2.offline-text.text-left.pl-3")[0]
