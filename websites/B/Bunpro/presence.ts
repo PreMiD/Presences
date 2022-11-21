@@ -13,8 +13,10 @@ const presence: Presence = new Presence({
 		90: "https://i.imgur.com/4s0tT5G.png",
 		100: "https://i.imgur.com/VQHYuGy.png",
 	},
-	browsingTimestamp = Math.floor(Date.now() / 1000),
 	slideshow = presence.createSlideshow();
+
+let browsingTimestamp = Math.floor(Date.now() / 1000),
+	oldPath: string;
 
 function getLevelIcon(level: number) {
 	let iconKey = levelImages["10"];
@@ -28,8 +30,10 @@ function getLevelIcon(level: number) {
 function applyGrammarPointDetails(presenceData: PresenceData) {
 	const { pathname, href } = window.location;
 	presenceData.details = "Viewing a grammar point";
-	presenceData.state = document
-		.querySelector<HTMLDivElement>("h1 > .grammar-point__text--main-kanji-new")
+	presenceData.state = (
+		document.querySelector(".grammar-point-study[style*='block']") ?? document
+	)
+		.querySelector<HTMLDivElement>(".grammar-point__text--main-kanji-new")
 		.textContent.trim();
 	if (!pathname.startsWith("/learn"))
 		presenceData.buttons = [{ label: "View Grammar Point", url: href }];
@@ -58,6 +62,11 @@ presence.on("UpdateData", () => {
 			largeImageKey: "https://i.imgur.com/NkfEDwV.png",
 			startTimestamp: browsingTimestamp,
 		};
+
+	if (oldPath !== pathname) {
+		browsingTimestamp = Math.floor(Date.now() / 1000);
+		oldPath = pathname;
+	}
 
 	if (hostname === "community.bunpro.jp") {
 		switch (pathSplit[0]) {
@@ -143,7 +152,7 @@ presence.on("UpdateData", () => {
 				presenceData.details = "Cramming";
 				if (
 					document.querySelector<HTMLDivElement>(".cram-start").style
-						.display === "none"
+						.display !== "none"
 				)
 					presenceData.state = "Selecting grammar to cram";
 				else applyGrammarReviewDetails(presenceData);
@@ -155,7 +164,13 @@ presence.on("UpdateData", () => {
 					document
 						.querySelector<HTMLAnchorElement>(".reviews-link")
 						.textContent.match(/\d+/)[0]
-				} reviews`;
+				} review${
+					document
+						.querySelector<HTMLAnchorElement>(".reviews-link")
+						.textContent.match(/\d+/)[0] === "1"
+						? ""
+						: "s"
+				}`;
 				break;
 			}
 			case "grammar_points": {
