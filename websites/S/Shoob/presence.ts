@@ -19,7 +19,6 @@ const presence = new Presence({
 		"/friends": { details: "Viewing Friends" },
 		"/fusion": { details: "Fusing Cards" },
 		"/giveaway": { details: "Viewing Giveaways" },
-		"/inventory": { details: "Viewing Inventory" },
 		"/keysgiveaways": { details: "Viewing Key Giveaways" },
 		"/leaderboards": { details: "Viewing Leaderboards" },
 		"/market": { details: "Viewing the Market" },
@@ -41,14 +40,16 @@ const presence = new Presence({
 	};
 
 function convertSuffixedToNumber(amount: string): number {
-	const [, number, suffix] = amount.match(/([\d.]+)\s*([A-Z])?/),
-		amounts: Record<string, number> = {
+	const [, number, suffix] = amount.match(/([\d.]+)\s*([A-Z])?/);
+	return (
+		parseFloat(number) *
+		({
 			K: 1e3,
 			M: 1e6,
 			B: 1e9,
 			T: 1e12,
-		};
-	return parseFloat(number) * (amounts[suffix] ?? 1);
+		}[suffix] ?? 1)
+	);
 }
 
 function convertNumberToSuffixed(amount: number): string {
@@ -60,9 +61,8 @@ function convertNumberToSuffixed(amount: number): string {
 		},
 		suffixes = Object.keys(amounts).reverse();
 	for (const suffix of suffixes) {
-		if (amount >= amounts[suffix]) {
+		if (amount >= amounts[suffix])
 			return `${(amount / amounts[suffix]).toFixed(1)}${suffix}`;
-		}
 	}
 	return `${amount}`;
 }
@@ -129,6 +129,8 @@ presence.on("UpdateData", async () => {
 			if (pathSplit[1] === "info") {
 				presenceData.details = "Viewing a Card";
 				presenceData.state = pageTitle;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".cardData > img").src;
 				presenceData.buttons = [{ label: "View Card", url: href }];
 			} else presenceData.details = "Viewing the Cards";
 			break;
@@ -147,6 +149,17 @@ presence.on("UpdateData", async () => {
 					} Cards`;
 				}
 			}
+			break;
+		case "inventory":
+			if (pathSplit[1]) {
+				presenceData.details = "Viewing a card in their inventory";
+				presenceData.state = `${pageTitle}#${
+					document.querySelector(".user_purchased + div + div b:nth-child(2)")
+						.textContent
+				}`;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".cardData > img").src;
+			} else presenceData.details = "Viewing Inventory";
 			break;
 		case "market":
 			presenceData.details = "Viewing the Market";
