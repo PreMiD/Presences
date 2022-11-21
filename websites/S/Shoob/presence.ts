@@ -40,6 +40,33 @@ const presence = new Presence({
 		"/updates": { details: "Viewing Updates" },
 	};
 
+function convertSuffixedToNumber(amount: string): number {
+	const [, number, suffix] = amount.match(/([\d.]+)\s*([A-Z])?/),
+		amounts: Record<string, number> = {
+			K: 1e3,
+			M: 1e6,
+			B: 1e9,
+			T: 1e12,
+		};
+	return parseFloat(number) * (amounts[suffix] ?? 1);
+}
+
+function convertNumberToSuffixed(amount: number): string {
+	const amounts: Record<string, number> = {
+			K: 1e3,
+			M: 1e6,
+			B: 1e9,
+			T: 1e12,
+		},
+		suffixes = Object.keys(amounts).reverse();
+	for (const suffix of suffixes) {
+		if (amount >= amounts[suffix]) {
+			return `${(amount / amounts[suffix]).toFixed(1)}${suffix}`;
+		}
+	}
+	return `${amount}`;
+}
+
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/aI1Qn8s.png",
@@ -50,31 +77,38 @@ presence.on("UpdateData", async () => {
 		pageTitle = document.querySelector<HTMLLIElement>(
 			"[itemprop='breadcrumb'] > li:last-child"
 		)?.textContent,
-		profileImage = document.querySelector<HTMLImageElement>(".header-avatar"),
-		currencyFormat = await presence.getSetting<string>("currencyFormat");
+		profileImage = document.querySelector<HTMLAnchorElement>(".header-avatar"),
+		currencyFormat = await presence.getSetting<number>("currencyFormat");
 
 	if (profileImage) {
-		presenceData.smallImageKey = profileImage.src;
-		if (currencyFormat === "Wallet Only") {
+		presenceData.smallImageKey =
+			getComputedStyle(profileImage).backgroundImage.match(/url\("(.*)"\)/)[1];
+		if (currencyFormat === 0) {
 			presenceData.smallImageText = `🪙 ${
 				document.querySelector<HTMLSpanElement>(".header-wallet").textContent
 			}`;
 		} else {
-			presenceData.smallImageText = `💱 ${
-				+document.querySelector<HTMLSpanElement>(".header-wallet").textContent +
-				+document.querySelector<HTMLSpanElement>(".header-bank:not(.orange)")
-					.textContent +
-				4.2 *
-					+document.querySelector<HTMLSpanElement>(".header-bank.orange")
-						.textContent
-			}`;
+			presenceData.smallImageText = `💱 ${convertNumberToSuffixed(
+				convertSuffixedToNumber(
+					document.querySelector<HTMLSpanElement>(".header-wallet").textContent
+				) +
+					convertSuffixedToNumber(
+						document.querySelector<HTMLSpanElement>(".header-bank:not(.orange)")
+							.textContent
+					) +
+					4.2 *
+						convertSuffixedToNumber(
+							document.querySelector<HTMLSpanElement>(".header-bank.orange")
+								.textContent
+						)
+			)}`;
 		}
 	}
 
 	for (const [path, data] of Object.entries(staticPages))
 		if (pathname.startsWith(path)) presenceData = { ...presenceData, ...data };
 
-	switch (pathSplit[0] ?? "") {
+	switch (pathSplit[0]) {
 		case "articles":
 			if (pathSplit[1]) {
 				presenceData.details = "Reading an Article";

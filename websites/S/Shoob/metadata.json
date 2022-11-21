@@ -44,7 +44,8 @@
 			"values": [
 				"Wallet Only",
 				"All Combined"
-			]
+			],
+			"value": 0
 		}
 	]
 }
