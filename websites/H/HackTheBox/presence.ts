@@ -7,6 +7,10 @@ const presences: Record<string, PresenceData> = {
 			details: "Challenges",
 			state: "Browsing to-do list",
 		},
+		"/challenges": {
+			details: "Challenges",
+			state: "Browsing active challenges",
+		},
 		"/login": {
 			details: "Login",
 			state: "Logging in",
@@ -96,10 +100,9 @@ function getPersonalProfileDetails() {
 }
 
 function getMachineDetails() {
-	const container = document.getElementsByClassName("text-left pl-8 pt-3")[0];
-	const diff =
-			container.getElementsByClassName("d-inline-block")[1].textContent,
-		name = container.getElementsByClassName("d-inline-block")[0].textContent,
+	const container = document.querySelectorAll(".text-left.pl-8.pt-3")[0];
+	const diff = container.querySelectorAll(".d-inline-block")[1].textContent,
+		name = container.querySelectorAll(".d-inline-block")[0].textContent,
 		status = document
 			.querySelectorAll(".htb-label2.offline-text.text-left.pl-3")[0]
 			.textContent.includes("offline")
@@ -110,9 +113,8 @@ function getMachineDetails() {
 }
 
 function getChallengeDetails() {
-	const container = document.getElementsByClassName("text-left pl-8 pt-3")[0];
-	const name =
-		container.getElementsByClassName("d-inline-block")[0].textContent;
+	const container = document.querySelectorAll(".text-left.pl-8.pt-4")[0];
+	const name = container.querySelectorAll(".d-inline-block")[0].textContent;
 
 	return `${name} - ${
 		document.querySelectorAll(".htb-label2.offline-text.text-left.pl-3")[0]
@@ -150,22 +152,6 @@ presence.on("UpdateData", async () => {
 	for (const [path, data] of Object.entries(presences)) {
 		const regex = new RegExp(path.replace(/{}/g, ".*"), "g");
 
-		if (
-			document.location.pathname.includes(path) ||
-			regex.test(document.location.pathname)
-		) {
-			presenceData = {
-				...presenceData,
-				...data,
-				...(!data.state &&
-					path.includes("{}") && {
-						state: executeMethod(path),
-					}),
-			};
-
-			break;
-		}
-
 		presenceData = {
 			...presenceData,
 			largeImageKey: "https://i.imgur.com/aMjnyic.png",
@@ -176,6 +162,22 @@ presence.on("UpdateData", async () => {
 				},
 			],
 		};
+
+		if (
+			document.location.pathname.includes(path) ||
+			regex.test(document.location.pathname)
+		) {
+			presenceData = {
+				...presenceData,
+				...data,
+				...(!data.state &&
+					(path.includes("{}") || path === "/home") && {
+						state: executeMethod(path),
+					}),
+			};
+
+			break;
+		}
 	}
 
 	presence.setActivity(presenceData);
