@@ -84,11 +84,13 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey =
 			getComputedStyle(profileImage).backgroundImage.match(/url\("(.*)"\)/)[1];
 		if (currencyFormat === 0) {
-			presenceData.smallImageText = `🪙 ${
+			presenceData.smallImageText = `💴 ${
 				document.querySelector<HTMLSpanElement>(".header-wallet").textContent
 			}`;
 		} else {
-			presenceData.smallImageText = `💱 ${convertNumberToSuffixed(
+			presenceData.smallImageText = `💴 ${
+				document.querySelector<HTMLSpanElement>(".header-wallet").textContent
+			} 💱 ${convertNumberToSuffixed(
 				convertSuffixedToNumber(
 					document.querySelector<HTMLSpanElement>(".header-wallet").textContent
 				) +
