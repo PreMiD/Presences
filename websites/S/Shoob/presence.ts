@@ -129,8 +129,6 @@ presence.on("UpdateData", async () => {
 			if (pathSplit[1] === "info") {
 				presenceData.details = "Viewing a Card";
 				presenceData.state = pageTitle;
-				presenceData.largeImageKey =
-					document.querySelector<HTMLImageElement>(".cardData > img").src;
 				presenceData.buttons = [{ label: "View Card", url: href }];
 			} else presenceData.details = "Viewing the Cards";
 			break;
@@ -157,8 +155,6 @@ presence.on("UpdateData", async () => {
 					document.querySelector(".user_purchased + div + div b:nth-child(2)")
 						.textContent
 				}`;
-				presenceData.largeImageKey =
-					document.querySelector<HTMLImageElement>(".cardData > img").src;
 			} else presenceData.details = "Viewing Inventory";
 			break;
 		case "market":
