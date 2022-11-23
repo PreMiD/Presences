@@ -156,7 +156,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/aMjnyic.png",
 			buttons: [
 				{
-					label: "My Profile",
+					label: "View Profile",
 					url: `https://app.hackthebox.com/users/${getUserId()}`,
 				},
 			],
