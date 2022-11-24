@@ -96,17 +96,19 @@ for (const presenceFolderName of changedPresenceFolders) {
 	});
 }
 
-await collection!.bulkWrite(
-	dbPresences.map(p => ({
-		updateOne: {
-			filter: { name: p.name },
-			update: {
-				$set: p,
+if (dbPresences.length) {
+	await collection!.bulkWrite(
+		dbPresences.map(p => ({
+			updateOne: {
+				filter: { name: p.name },
+				update: {
+					$set: p,
+				},
+				upsert: true,
 			},
-			upsert: true,
-		},
-	}))
-);
+		}))
+	);
+}
 
 const deletedPresences = getDiff("removed");
 if (deletedPresences.length) {

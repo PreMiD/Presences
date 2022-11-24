@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Crfg6sn.png",
+			largeImageKey: "https://i.imgur.com/3r515eO.png",
 		},
 		username = document.querySelector("p[id=premid-username]")?.textContent,
 		uid = document.querySelector("p[id=premid-uid]")?.textContent,
@@ -26,6 +26,23 @@ presence.on("UpdateData", async () => {
 				case "/":
 					presenceData.state = "Viewing the home page";
 					break;
+
+				case "/faq":
+					presenceData.state = "Viewing frequently asked questions";
+					break;
+
+				case "/features":
+					presenceData.state = "Viewing e-z.host's features";
+					break;
+
+				case "/reseller":
+					presenceData.state = "Viewing info about e-z.host's reseller";
+					break;
+
+				case "/oliver":
+					presenceData.state = "Looking at pictures of Oliver";
+					break;
+
 				case "/dash":
 					presenceData.state = "Viewing the dashboard";
 					break;

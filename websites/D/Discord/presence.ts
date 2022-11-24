@@ -151,14 +151,14 @@ presence.on("UpdateData", async () => {
 						? true
 						: false,
 				serverChannel = `#${
-					Array.from(document.querySelectorAll("h3")).find(c =>
-						c.className?.includes("title")
-					)?.textContent || "Undefined"
+					document
+						.querySelectorAll("title")[0]
+						?.textContent.split("| #")[1]
+						.split("|")[0] || "Undefined"
 				}`,
 				serverServerName =
-					Array.from(document.querySelectorAll("h1")).find(c =>
-						c.className?.includes("name")
-					)?.textContent || "Undefined",
+					document.querySelectorAll("title")[0]?.textContent.split("|")[2] ||
+					"Undefined",
 				statics: {
 					[name: string]: PresenceData;
 				} = {

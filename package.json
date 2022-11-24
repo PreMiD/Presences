@@ -21,7 +21,7 @@
 		"@actions/core": "1.10.0",
 		"@types/glob": "8.0.0",
 		"@types/json-to-ast": "2.1.2",
-		"@types/semver": "7.3.12",
+		"@types/semver": "7.3.13",
 		"chalk": "5.1.2",
 		"copy-webpack-plugin": "11.0.0",
 		"dotenv": "16.0.3",
@@ -34,20 +34,20 @@
 		"semver": "7.3.8",
 		"ts-loader": "9.4.1",
 		"typescript": "4.8.4",
-		"webpack": "5.74.0"
+		"webpack": "5.75.0"
 	},
 	"dependencies": {
-		"@commitlint/cli": "17.1.2",
-		"@commitlint/config-angular": "17.1.0",
-		"@types/chrome": "0.0.199",
-		"@types/node": "18.11.4",
-		"@typescript-eslint/eslint-plugin": "5.40.1",
-		"@typescript-eslint/parser": "5.40.1",
-		"eslint": "8.25.0",
+		"@commitlint/cli": "17.2.0",
+		"@commitlint/config-angular": "17.2.0",
+		"@types/chrome": "0.0.202",
+		"@types/node": "18.11.9",
+		"@typescript-eslint/eslint-plugin": "5.43.0",
+		"@typescript-eslint/parser": "5.43.0",
+		"eslint": "8.27.0",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-no-one-time-vars": "2.4.2",
 		"eslint-plugin-unicorn": "44.0.2",
-		"husky": "8.0.1",
+		"husky": "8.0.2",
 		"prettier": "2.7.1"
 	}
 }

@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 	if (search?.value) {
 		presenceData.details = strings.search;
 		presenceData.state = search.value;
-		presenceData.smallImageKey = Assets.SearchImage;
+		presenceData.smallImageKey = Assets.Search;
 	} else if (video && !isNaN(video.duration)) {
 		presenceData.details = titleSplit[1];
 		presenceData.state = titleSplit[0];

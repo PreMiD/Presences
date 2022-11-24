@@ -10,13 +10,13 @@ export function getDiff(
 	type: "addedModified" | "removed" | "all" = "addedModified"
 ): string[] {
 	const commands: Record<ValidEventName, string> = {
-			push: "HEAD HEAD^",
-			pull_request: `HEAD origin/${process.argv[3] ? process.argv[3] : "main"}`,
+			push: "HEAD^ HEAD",
+			pull_request: `origin/${process.argv[3] ? process.argv[3] : "main"} HEAD`,
 			uncommitted: "HEAD",
 		},
 		eventName = process.argv[2] ? validateArg(process.argv[2]) : "pull_request",
 		changedPresenceFolders = execSync(
-			`git --no-pager diff --name-only --diff-filter=${
+			`git -c core.quotePath=false --no-pager diff --name-only --diff-filter=${
 				type === "addedModified"
 					? "ACMRTU"
 					: type === "removed"
