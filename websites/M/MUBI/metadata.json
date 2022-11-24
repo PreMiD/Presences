@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "MUBI",
+  "author": {
+    "id": "638080361179512853",
+    "name": "Dark_Ville#2756"
+  },
+  "description": {
+    "en": "Watch truly great cinema. Wherever you are. With no ads. Ever. From new directors to award-winners. Beautiful, interesting, incredible movies — a new film every single day. Stream Now. Download to watch Offline. Start your free 7 day trial now."
+  },
+  "url": "mubi.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/3gMd88s.png",
+  "thumbnail": "https://i.imgur.com/AEphouL.png",
+  "color": "#B4CDDB",
+  "tags": [
+    "mubi",
+    "video"
+  ],
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fas fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true,
+      "if": {
+        "privacy": false
+      }
+    },
+    {
+      "id": "covers",
+      "title": "Show Cover",
+      "icon": "fad fa-images",
+      "value": true,
+      "if": {
+        "privacy": false
+      }
+    }
+  ]
+}
