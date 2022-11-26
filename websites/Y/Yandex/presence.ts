@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 	switch (host) {
 		case "ya.ru":
 			presenceData.details = strings.viewHome;
-			if (homepageInput?.value !== "") {
+			if (homepageInput?.value) {
 				presenceData.state = `${strings.searchFor} ${homepageInput?.value}`;
 				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = strings.search;
