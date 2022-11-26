@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
 					document
 						.querySelector("#__NEXT_DATA__")
 						?.innerHTML?.match(
-							/https:\/\/images.mubicdn.net\/images\/(film|show)\/[0-9]*\/cache-[0-9]*-[0-9]*\/image-w1280[.]jpg/
+							/https:\/\/images[.]mubicdn[.]net\/images\/(film|show)\/[0-9]*\/cache-[0-9]*-[0-9]*\/image-w1280[.]jpg/
 						)
 						?.at(0) ?? Assets.Logo;
 				presenceData.smallImageKey = video.paused ? Assets.Paused : Assets.Play;
