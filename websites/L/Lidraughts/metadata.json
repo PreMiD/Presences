@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "Lidraughts",
+  "author": {
+    "id": "377284540420587541",
+    "name": "unicornbetrayal#7888"
+  },
+  "description": {
+    "en": "Lidraughts is a rewrite of lichess/lila for draughts, supporting both 10x10 and 8x8 boards.It features live games, computer opponents, tournaments, simuls, tactics, board editor, analysis (with engine), studies / shared analysis, coordinates training, forums and teams."
+  },
+  "url": "lidraughts.org",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/FgV8Qhq.png",
+  "thumbnail": "https://i.imgur.com/aXugkhh.png",
+  "color": "#FFFFFF",
+  "tags": [
+    "lidraughts",
+    "games",
+    "checkers",
+    "draughts"
+  ],
+  "category": "games"
+}
