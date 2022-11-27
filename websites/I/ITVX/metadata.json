@@ -4,7 +4,7 @@
 		"name": "dAn",
 		"id": "169516316124905473"
 	},
-	"service": "ITV Hub",
+	"service": "ITVX",
 	"description": {
 		"en": "Watch live and past ITV TV shows",
 		"nl": "Bekijk live en eerdere ITV-tv-shows"
@@ -13,14 +13,24 @@
 		"www.itv.com",
 		"itv.com"
 	],
-	"version": "1.4.14",
-	"logo": "https://i.imgur.com/5PShoo9.png",
-	"thumbnail": "https://i.imgur.com/WRttRBO.png",
-	"color": "#2ABEC9",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/XisKvdg.png",
+	"thumbnail": "https://i.imgur.com/jqV7iTp.jpg",
+	"color": "#102C3D",
 	"category": "videos",
 	"tags": [
 		"itv",
 		"itv-hub",
-		"itv-player"
+		"itv-player",
+		"itvx",
+		"itv-x"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		}
 	]
 }

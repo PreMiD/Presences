@@ -27,13 +27,25 @@
 		"vi_VN": "Bot Waifu ?! Game bài Anime của Anime Soul Discord! Kết nối với tất cả cộng đồng Anime ngay hôm nay!"
 	},
 	"url": "shoob.gg",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"logo": "https://i.imgur.com/aI1Qn8s.png",
-	"thumbnail": "https://i.imgur.com/9uCvSeC.png",
+	"thumbnail": "https://i.imgur.com/0z5JPNC.jpeg",
 	"color": "#da9c72",
 	"category": "anime",
 	"tags": [
 		"anime",
 		"games"
+	],
+	"settings": [
+		{
+			"id": "currencyFormat",
+			"icon": "fas fa-money-bills",
+			"title": "Currency Format",
+			"values": [
+				"Wallet Only",
+				"All Combined"
+			],
+			"value": 0
+		}
 	]
 }
