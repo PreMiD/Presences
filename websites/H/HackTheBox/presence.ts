@@ -145,6 +145,17 @@ function executeMethod(path: string): string {
 	}
 }
 
+interface IMethods {
+	[key: string]: () => string;
+}
+
+const methods: IMethods = {
+	getHomePageDetails,
+	getMachineDetails,
+	getChallengeDetails,
+	getPersonalProfileDetails,
+};
+
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {};
 
