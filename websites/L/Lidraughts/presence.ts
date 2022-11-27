@@ -11,17 +11,17 @@ const presence = new Presence({
 		"/study": "Study",
 		"/variant": "Rules & Variants",
 		"/tv": "Lidraughts TV",
-		"/games": "Current Games",
+		"/games": "Current games",
 		"/streamer": "Streamers",
 		"/broadcast": "Broadcasts",
 		"/player": "Players",
 		"/team/all": "Teams",
 		"/forum": "Forums",
 		"/faq": "FAQ",
-		"/analysis": "Analysis Board",
-		"/editor": "Board Editor",
-		"/paste": "Import Game",
-		"/games/search": "Advanced Search",
+		"/analysis": "Analysis board",
+		"/editor": "Board editor",
+		"/paste": "Import game",
+		"/games/search": "Advanced search",
 	};
 
 presence.on("UpdateData", async () => {
