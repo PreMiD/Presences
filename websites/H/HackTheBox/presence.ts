@@ -100,7 +100,7 @@ function getPersonalProfileDetails() {
 }
 
 function getMachineDetails() {
-	const container = document.querySelectorAll(".text-left.pl-8.pt-3")[0],
+	const container = document.querySelector(".text-left.pl-8.pt-3"),
 		status = document
 			.querySelectorAll(".htb-label2.offline-text.text-left.pl-3")[0]
 			.textContent.includes("offline")
@@ -115,7 +115,7 @@ function getMachineDetails() {
 function getChallengeDetails() {
 	const name = document
 		.querySelectorAll(".text-left.pl-8.pt-4")[0]
-		.querySelectorAll(".d-inline-block")[0].textContent;
+		.querySelector(".d-inline-block").textContent;
 
 	return `${name} - ${
 		document.querySelectorAll(".htb-label2.offline-text.text-left.pl-3")[0]
