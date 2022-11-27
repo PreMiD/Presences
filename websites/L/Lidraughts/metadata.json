@@ -6,7 +6,7 @@
 	},
 	"service": "Lidraughts",
 	"description": {
-		"en": "Lidraughts is a rewrite of lichess/lila for draughts, supporting both 10x10 and 8x8 boards.It features live games, computer opponents, tournaments, simuls, tactics, board editor, analysis (with engine), studies / shared analysis, coordinates training, forums and teams."
+		"en": "Lidraughts is a rewrite of lichess/lila for draughts, supporting both 10x10 and 8x8 boards. It features live games, computer opponents, tournaments, simuls, tactics, board editor, analysis (with engine), studies / shared analysis, coordinates training, forums and teams."
 	},
 	"url": "lidraughts.org",
 	"version": "1.0.0",
