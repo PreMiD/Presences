@@ -140,8 +140,6 @@ function executeMethod(path: string): string {
 			return getMachineDetails();
 		case "/challenges/{}":
 			return getChallengeDetails();
-		case "/users/{}":
-			return "";
 		default:
 			return "";
 	}
