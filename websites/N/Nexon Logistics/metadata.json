@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "Nexon Logistics",
+  "author": {
+    "id": "757284167972159489",
+    "name": "FaizurRahman#5151"
+  },
+  "description": {
+    "en": "Nexon Logistics is a virtual trucking company on TruckersMP."
+  },
+  "url": [
+    "nexonlogistics.com",
+    "hub.nexonlogistics.com"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/m740VV3.jpg",
+  "thumbnail": "https://i.imgur.com/m740VV3.jpg",
+  "color": "#85c441",
+  "category": "games",
+  "tags": [
+		"ets2",
+		"ats",
+		"scs",
+		"drive",
+		"truck"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"id": "timestamp",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		}
+	]
+}
