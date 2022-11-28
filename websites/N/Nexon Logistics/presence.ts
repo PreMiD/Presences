@@ -53,9 +53,9 @@ presence.on("UpdateData", async () => {
 					];
 					break;
 				case document.location.pathname.includes("/index"):
-					presenceData.details = "Browsing Nexon Homepage";
+					presenceData.details = "Viewing Nexon Homepage";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h1")[1].textContent;
+						document.querySelector<HTMLHeadingElement>("h1").textContent;
 					presenceData.buttons = [
 						{ label: "View Nexon Homepage", url: document.URL },
 					];
@@ -69,19 +69,19 @@ presence.on("UpdateData", async () => {
 				case document.location.pathname.includes("/profile/"):
 					presenceData.details = "Viewing a profile";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h4")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h4").textContent;
 					presenceData.buttons = [{ label: "View Profile", url: document.URL }];
 					break;
 				case document.location.pathname.includes("/jobs/"):
 					presenceData.details = "Viewing a job";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h3")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h3").textContent;
 					presenceData.buttons = [{ label: "View Job", url: document.URL }];
 					break;
 				case document.location.pathname.includes("/events"):
 					presenceData.details = "Viewing Calendar";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h2")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h2").textContent;
 					presenceData.buttons = [
 						{ label: "View Calendar", url: document.URL },
 					];
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 				case document.location.pathname.includes("/leaderboard"):
 					presenceData.details = "Viewing Leaderboard";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h2")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h2").textContent;
 					presenceData.buttons = [
 						{ label: "View Leaderboard", url: document.URL },
 					];
@@ -97,25 +97,25 @@ presence.on("UpdateData", async () => {
 				case document.location.pathname.includes("/events/"):
 					presenceData.details = "Viewing an Event";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h4")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h4").textContent;
 					presenceData.buttons = [{ label: "View Event", url: document.URL }];
 					break;
 				case document.location.pathname.includes("/members"):
 					presenceData.details = "Viewing Members Page";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h4")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h4").textContent;
 					presenceData.buttons = [{ label: "View Members", url: document.URL }];
 					break;
 				case document.location.pathname.includes("/jobs"):
 					presenceData.details = "Browsing Jobs";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h4")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h4").textContent;
 					presenceData.buttons = [{ label: "View Jobs", url: document.URL }];
 					break;
 				case document.location.pathname.includes("/downloads"):
 					presenceData.details = "Browsing Download Section";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h2")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h2").textContent;
 					presenceData.buttons = [
 						{ label: "View Downloads", url: document.URL },
 					];
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
 				case document.location.pathname.includes("/vtcrules"):
 					presenceData.details = "Browsing Knowlege Base";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h2")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h2").textContent;
 					presenceData.buttons = [
 						{ label: "View VTC Rules", url: document.URL },
 					];
@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 				case document.location.pathname.includes("/patreons"):
 					presenceData.details = "Viewing A Page";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h1")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h1").textContent;
 					presenceData.buttons = [
 						{ label: "View Patreons", url: document.URL },
 					];
@@ -139,19 +139,19 @@ presence.on("UpdateData", async () => {
 				case document.location.pathname.includes("/faqs"):
 					presenceData.details = "Viewing A Page";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h2")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h2").textContent;
 					presenceData.buttons = [{ label: "View FAQs", url: document.URL }];
 					break;
 				case document.location.pathname.includes("/news"):
 					presenceData.details = "Viewing A Page";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h2")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h2").textContent;
 					presenceData.buttons = [{ label: "View News", url: document.URL }];
 					break;
 				case document.location.pathname.includes("/loa"):
 					presenceData.details = "Applying For";
 					presenceData.state =
-						document.querySelectorAll<HTMLHeadingElement>("h2")[0].textContent;
+						document.querySelector<HTMLHeadingElement>("h2").textContent;
 					presenceData.buttons = [{ label: "View LOA", url: document.URL }];
 					break;
 				default:
@@ -160,8 +160,14 @@ presence.on("UpdateData", async () => {
 			break;
 		case "status.nexonlogistics.com":
 			switch (true) {
-				case document.location.pathname === "/":
-					presenceData.details = "Browsing Nexon Server Status";
+				case document.location.pathname.includes("/report"):
+					presenceData.details = "Viewing Server Report";
+					presenceData.state =
+						document.querySelector<HTMLTitleElement>("title").textContent;
+					presenceData.buttons = [{ label: "View Report", url: document.URL }];
+					break;
+				default:
+					presenceData.details = "Viewing Nexon Server Status";
 			}
 			break;
 	}
