@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
-	},
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp,
+		},
 		{ pathname, hostname } = window.location,
 		pathSplit = pathname.split("/").filter(x => x);
 
@@ -16,10 +16,12 @@ presence.on("UpdateData", async () => {
 			switch (pathSplit[0]) {
 				case "user": {
 					presenceData.details = `Browsing ${pathSplit[1]}'s profile`;
-					presenceData.buttons = [{
-						label: "Open profile",
-						url: `https://modrinth.com/user/${pathSplit[1]}`
-					}];
+					presenceData.buttons = [
+						{
+							label: "Open profile",
+							url: `https://modrinth.com/user/${pathSplit[1]}`,
+						},
+					];
 					break;
 				}
 				case "settings": {
@@ -31,11 +33,15 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "mod": {
-					presenceData.state = `${document.querySelector<HTMLHeadingElement>("h1.title").textContent}`;
-					presenceData.buttons = [{
-						label: "Open mod page",
-						url: `https://modrinth.com/mod/${pathSplit[1]}`
-					}];
+					presenceData.state = `${
+						document.querySelector<HTMLHeadingElement>("h1.title").textContent
+					}`;
+					presenceData.buttons = [
+						{
+							label: "Open mod page",
+							url: `https://modrinth.com/mod/${pathSplit[1]}`,
+						},
+					];
 
 					switch (pathSplit[2]) {
 						case "gallery": {
@@ -141,13 +147,20 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "blog.modrinth.com": {
-			presenceData.buttons = [{
-				label: "Read blog",
-				url: "https://blog.modrinth.com"
-			}];
-			if (document.querySelector<HTMLHeadingElement>("h1.post-title__text") !== null) {
+			presenceData.buttons = [
+				{
+					label: "Read blog",
+					url: "https://blog.modrinth.com",
+				},
+			];
+			if (
+				document.querySelector<HTMLHeadingElement>("h1.post-title__text") !==
+				null
+			) {
 				presenceData.details = "Reading blog post";
-				presenceData.state = document.querySelector<HTMLHeadingElement>("h1.post-title__text").textContent;
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					"h1.post-title__text"
+				).textContent;
 			} else presenceData.details = "Browse blog";
 		}
 	}
