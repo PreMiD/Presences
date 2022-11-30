@@ -34,9 +34,10 @@ presence.on("UpdateData", async () => {
 		const imgs = document.querySelectorAll(
 			"#content > div > div > article > div:nth-child(2) > div > div.thumbook > div > img"
 		);
-		for (const element of imgs)
-			if (element.getAttribute("src") != null)
+		for (const element of imgs) {
+			if (element.getAttribute("src") !== null)
 				presenceData.largeImageKey = element.getAttribute("src");
+		}
 		//Mangalar
 	} else if (
 		url.startsWith("manga.") &&
@@ -60,9 +61,10 @@ presence.on("UpdateData", async () => {
 		const imgs = document.querySelectorAll(
 			"#content > div > div > article > div:nth-child(2) > div > div.thumbook > div > img"
 		);
-		for (const element of imgs)
-			if (element.getAttribute("src") != null)
+		for (const element of imgs) {
+			if (element.getAttribute("src") !== null)
 				presenceData.largeImageKey = element.getAttribute("src");
+		}
 		//manga a-z listesi
 	} else if (pathname.includes("/a-z/"))
 		presenceData.details = "Manga A-Z Listesine bakıyor.";
@@ -80,10 +82,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document
 				.querySelector("#content > div > div > div > div > h1")
 				?.textContent.trim();
-		}
-	}
-	//Kitaplık
-	else if (pathname.includes("/kitaplik/"))
+		} //Kitaplık
+	} else if (pathname.includes("/kitaplik/"))
 		presenceData.details = "Kitaplığa bakıyor.";
 	//Takvim
 	else if (pathname.includes("/takvim/"))
@@ -99,10 +99,10 @@ presence.on("UpdateData", async () => {
 		!pathname.endsWith("/anasayfa/")
 	) {
 		try {
-			let title = document
-				.querySelector("#content > div > div > div > article > div > h1")
-				?.textContent.trim();
-			const tsplited = title.split(" ");
+			const title = document
+					.querySelector("#content > div > div > div > article > div > h1")
+					?.textContent.trim(),
+				tsplited = title.split(" ");
 			presenceData.details = title.replace(tsplited[tsplited.length - 1], "");
 			presenceData.state = `Bölüm ${tsplited[tsplited.length - 1]} Okuyor.`;
 			presenceData.buttons = [
