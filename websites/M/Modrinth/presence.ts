@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/D8A13bJ.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = window.location,
@@ -70,12 +70,114 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Looking for useful Plugins";
 					break;
 				}
+				case "plugin": {
+					presenceData.state = `${
+						document.querySelector<HTMLHeadingElement>("h1.title").textContent
+					}`;
+					presenceData.buttons = [
+						{
+							label: "Open plugin page",
+							url: `https://modrinth.com/plugin/${pathSplit[1]}`,
+						},
+					];
+
+					switch (pathSplit[2]) {
+						case "gallery": {
+							presenceData.details = "Browsing plugin gallery";
+							break;
+						}
+						case "changelog": {
+							presenceData.details = "Browsing plugin changelog";
+							break;
+						}
+						case "versions": {
+							presenceData.details = "Browsing plugin versions";
+							break;
+						}
+						case "settings": {
+							presenceData.details = "Browsing project settings";
+							break;
+						}
+						default: {
+							presenceData.details = "Browsing plugin description";
+						}
+					}
+					break;
+				}
 				case "resourcepacks": {
 					presenceData.details = "Looking for a beautiful Resourcepack";
 					break;
 				}
+				case "resourcepack": {
+					presenceData.state = `${
+						document.querySelector<HTMLHeadingElement>("h1.title").textContent
+					}`;
+					presenceData.buttons = [
+						{
+							label: "Open resourcepack page",
+							url: `https://modrinth.com/resourcepack/${pathSplit[1]}`,
+						},
+					];
+
+					switch (pathSplit[2]) {
+						case "gallery": {
+							presenceData.details = "Browsing resourcepack gallery";
+							break;
+						}
+						case "changelog": {
+							presenceData.details = "Browsing resourcepack changelog";
+							break;
+						}
+						case "versions": {
+							presenceData.details = "Browsing resourcepack versions";
+							break;
+						}
+						case "settings": {
+							presenceData.details = "Browsing project settings";
+							break;
+						}
+						default: {
+							presenceData.details = "Browsing resourcepack description";
+						}
+					}
+					break;
+				}
 				case "modpacks": {
 					presenceData.details = "Looking for a nice Modpack";
+					break;
+				}
+				case "modpack": {
+					presenceData.state = `${
+						document.querySelector<HTMLHeadingElement>("h1.title").textContent
+					}`;
+					presenceData.buttons = [
+						{
+							label: "Open modpack page",
+							url: `https://modrinth.com/modpack/${pathSplit[1]}`,
+						},
+					];
+
+					switch (pathSplit[2]) {
+						case "gallery": {
+							presenceData.details = "Browsing modpack gallery";
+							break;
+						}
+						case "changelog": {
+							presenceData.details = "Browsing modpack changelog";
+							break;
+						}
+						case "versions": {
+							presenceData.details = "Browsing modpack versions";
+							break;
+						}
+						case "settings": {
+							presenceData.details = "Browsing project settings";
+							break;
+						}
+						default: {
+							presenceData.details = "Browsing modpack description";
+						}
+					}
 					break;
 				}
 				case "notifications": {
@@ -147,21 +249,18 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "blog.modrinth.com": {
-			presenceData.buttons = [
-				{
-					label: "Read blog",
-					url: "https://blog.modrinth.com",
-				},
-			];
-			if (
-				document.querySelector<HTMLHeadingElement>("h1.post-title__text") !==
-				null
-			) {
+			if (document.querySelector<HTMLHeadingElement>("h1.post-title__text")) {
+				presenceData.buttons = [
+					{
+						label: "Open blog post",
+						url: `https://blog.modrinth.com/${pathSplit[0]}`,
+					},
+				];
 				presenceData.details = "Reading blog post";
 				presenceData.state = document.querySelector<HTMLHeadingElement>(
 					"h1.post-title__text"
 				).textContent;
-			} else presenceData.details = "Browse blog";
+			} else presenceData.details = "Browsing blog";
 		}
 	}
 
