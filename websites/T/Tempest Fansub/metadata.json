@@ -9,9 +9,10 @@
     "tr": "Tempest Fansub, türkçe altyazılı anime izleyebileceğiniz ve manga okuyabileceğiniz bir site.",
     "en": "Tempest Fansub is a site where you can watch anime and read manga with Turkish subtitles."
   },
-  "url": ["tempestfansub.com"
-,"manga.tempestfansub.com"
-],
+  "url": [
+    "tempestfansub.com",
+    "manga.tempestfansub.com"
+  ],
   "version": "1.0.0",
   "logo": "https://i.imgur.com/bhEsT7P.png",
   "thumbnail": "https://i.imgur.com/z01ju2D.png",

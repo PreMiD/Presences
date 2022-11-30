@@ -1,7 +1,7 @@
 /* eslint-disable no-eq-null */
 const presence = new Presence({
-	clientId: "1047102386478534727",
-}),
+		clientId: "1047102386478534727",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const { pathname } = window.location,
@@ -17,7 +17,12 @@ presence.on("UpdateData", async () => {
 	if (pathname.endsWith("/dinozor-oyunu/"))
 		presenceData.details = "Dino oynuyor.";
 	//Animeler
-	else if ((url === "tempestfansub.com" && pathname === "/" && !url.startsWith("manga.")) || pathname.endsWith("/anime/"))
+	else if (
+		(url === "tempestfansub.com" &&
+			pathname === "/" &&
+			!url.startsWith("manga.")) ||
+		pathname.endsWith("/anime/")
+	)
 		presenceData.details = "Animelere göz atıyor.";
 	//Bir Anime
 	else if (!location.href.endsWith("/anime/") && pathname.includes("/anime/")) {
@@ -27,11 +32,17 @@ presence.on("UpdateData", async () => {
 				"#content > div > div > article > div:nth-child(2) > div > div.infox > h1.entry-title"
 			)
 			?.textContent.trim();
-		const imgs = document.querySelectorAll("#content > div > div > article > div:nth-child(2) > div > div.thumbook > div > img");
+		const imgs = document.querySelectorAll(
+			"#content > div > div > article > div:nth-child(2) > div > div.thumbook > div > img"
+		);
 		for (const element of imgs)
-			if (element.getAttribute("src") != null) presenceData.largeImageKey = element.getAttribute("src");
+			if (element.getAttribute("src") != null)
+				presenceData.largeImageKey = element.getAttribute("src");
 		//Mangalar
-	} else if (url.startsWith("manga.") && (pathname.endsWith("/manga/") || pathname.endsWith("/anasayfa/")))
+	} else if (
+		url.startsWith("manga.") &&
+		(pathname.endsWith("/manga/") || pathname.endsWith("/anasayfa/"))
+	)
 		presenceData.details = "Mangalara göz atıyor.";
 	//Bir Manga
 	else if (pathname.includes("/manga/")) {
@@ -47,9 +58,12 @@ presence.on("UpdateData", async () => {
 				url: location.href,
 			},
 		];
-		const imgs = document.querySelectorAll("#content > div > div > article > div:nth-child(2) > div > div.thumbook > div > img");
+		const imgs = document.querySelectorAll(
+			"#content > div > div > article > div:nth-child(2) > div > div.thumbook > div > img"
+		);
 		for (const element of imgs)
-			if (element.getAttribute("src") != null) presenceData.largeImageKey = element.getAttribute("src");
+			if (element.getAttribute("src") != null)
+				presenceData.largeImageKey = element.getAttribute("src");
 		//manga a-z listesi
 	} else if (pathname.includes("/a-z/"))
 		presenceData.details = "Manga A-Z Listesine bakıyor.";
@@ -57,12 +71,15 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/az-listesi/"))
 		presenceData.details = "Anime A-Z Listesine bakıyor.";
 	//Anime tür listesi
-	else if (pathname.includes("/turler/") || pathname.includes("/genres/") || pathname.includes("/siniflandirma/")) {
+	else if (
+		pathname.includes("/turler/") ||
+		pathname.includes("/genres/") ||
+		pathname.includes("/siniflandirma/")
+	) {
 		presenceData.details = "Anime Türler Listesine bakıyor.";
 		if (pathname.includes("/genres/")) {
 			presenceData.state = document
-				.querySelector(
-					"#content > div > div > div > div > h1")
+				.querySelector("#content > div > div > div > div > h1")
 				?.textContent.trim();
 		}
 	}
@@ -76,7 +93,12 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/basvuru/"))
 		presenceData.details = "Ekip Başvuruya bakıyor.";
 	//Manga okuyor
-	else if (!pathname.includes("/manga/") && !pathname.includes("/anime/") && url.startsWith("manga.") && !pathname.endsWith("/anasayfa/")) {
+	else if (
+		!pathname.includes("/manga/") &&
+		!pathname.includes("/anime/") &&
+		url.startsWith("manga.") &&
+		!pathname.endsWith("/anasayfa/")
+	) {
 		try {
 			let title = document
 				.querySelector("#content > div > div > div > article > div > h1")
@@ -94,9 +116,7 @@ presence.on("UpdateData", async () => {
 					url: location.href,
 				},
 			];
-		}
-		catch
-		{
+		} catch {
 			presenceData.details = " Bilinmeyen Adress.";
 		}
 	} else presenceData.details = " Bilinmeyen Adress.";
