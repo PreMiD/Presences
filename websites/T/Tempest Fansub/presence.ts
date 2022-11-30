@@ -6,30 +6,22 @@ presence.on("UpdateData", async () => {
 	const { pathname } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/bhEsT7P.png",
-		};
-	let url: string;
-	if (location.origin.startsWith("https://"))
-		url = location.origin.replace("https://", "");
-	else url = location.origin;
+			largeImageKey: "https://i.imgur.com/MVWiX8p.png",
+		},
+		_host = location.host;
 	//Dino
-	if (pathname.endsWith("/dinozor-oyunu/"))
-		presenceData.details = "Dino oynuyor.";
+	if (pathname === "/dinozor-oyunu/") presenceData.details = "Dino oynuyor.";
 	//Animeler
 	else if (
-		(url === "tempestfansub.com" &&
-			pathname === "/" &&
-			!url.startsWith("manga.")) ||
+		(_host === "tempestfansub.com" && pathname === "/") ||
 		pathname.endsWith("/anime/")
 	)
 		presenceData.details = "Animelere göz atıyor.";
 	//Bir Anime
-	else if (!location.href.endsWith("/anime/") && pathname.includes("/anime/")) {
+	else if (!pathname.endsWith("/anime/") && pathname.includes("/anime/")) {
 		presenceData.details = "Bir animeye bakıyor.";
 		presenceData.state = document
-			.querySelector(
-				"#content > div > div > article > div:nth-child(2) > div > div.infox > h1.entry-title"
-			)
+			.querySelector("h1.entry-title")
 			?.textContent.trim();
 		const imgs = document.querySelectorAll(
 			"#content > div > div > article > div:nth-child(2) > div > div.thumbook > div > img"
@@ -40,7 +32,7 @@ presence.on("UpdateData", async () => {
 		}
 		//Mangalar
 	} else if (
-		url.startsWith("manga.") &&
+		_host.startsWith("manga.") &&
 		(pathname.endsWith("/manga/") || pathname.endsWith("/anasayfa/"))
 	)
 		presenceData.details = "Mangalara göz atıyor.";
@@ -48,9 +40,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/manga/")) {
 		presenceData.details = "Bir mangaya bakıyor.";
 		presenceData.state = document
-			.querySelector(
-				"#content > div > div > article > div:nth-child(2) > div > div.infox > h1.entry-title"
-			)
+			.querySelector("h1.entry-title")
 			?.textContent.trim();
 		presenceData.buttons = [
 			{
@@ -88,35 +78,43 @@ presence.on("UpdateData", async () => {
 	//Takvim
 	else if (pathname.includes("/takvim/"))
 		presenceData.details = "Takvime bakıyor.";
-	//Başvuru
+	//Anime EkipBaşvuru
 	else if (pathname.includes("/basvuru/"))
-		presenceData.details = "Ekip Başvuruya bakıyor.";
+		presenceData.details = "Anime ekip başvurusuna bakıyor.";
+	//Manga EkipBaşvuru
+	else if (pathname.includes("/manga-cevirmen-editor-basvuru/"))
+		presenceData.details = "Manga ekip başvurusuna bakıyor.";
 	//Manga okuyor
 	else if (
 		!pathname.includes("/manga/") &&
-		!pathname.includes("/anime/") &&
-		url.startsWith("manga.") &&
+		_host.startsWith("manga.") &&
 		!pathname.endsWith("/anasayfa/")
 	) {
 		try {
 			const title = document
-					.querySelector("#content > div > div > div > article > div > h1")
+					.querySelector("h1.entry-title")
 					?.textContent.trim(),
 				tsplited = title.split(" ");
 			presenceData.details = title.replace(tsplited[tsplited.length - 1], "");
 			presenceData.state = `Bölüm ${tsplited[tsplited.length - 1]} Okuyor.`;
 			presenceData.buttons = [
-				//{
-				//	label: "Mangayı Aç",
-				//	url: location.href
-				//},
 				{
 					label: "Bölümü Aç",
 					url: location.href,
 				},
 			];
+			const imgs = document.querySelectorAll("#readerarea > img");
+			for (const element of imgs) {
+				if (
+					element.getAttribute("src") !== null &&
+					element.getAttribute("data-index") === "0"
+				) {
+					presenceData.largeImageKey = element.getAttribute("src");
+					break;
+				}
+			}
 		} catch {
-			presenceData.details = " Bilinmeyen Adress.";
+			presenceData.details = "Bilinmeyen Adress.";
 		}
 	} else presenceData.details = " Bilinmeyen Adress.";
 
