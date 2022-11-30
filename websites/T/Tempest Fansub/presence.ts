@@ -1,4 +1,3 @@
-/* eslint-disable no-eq-null */
 const presence = new Presence({
 		clientId: "1047102386478534727",
 	}),
