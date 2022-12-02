@@ -6,16 +6,20 @@ const presence = new Presence({
 async function getStrings() {
 	return presence.getStrings(
 		{
-			play: "general.playing",
-			paused: "general.paused",
 			browse: "general.browsing",
 			buttonWatchVideo: "general.buttonWatchVideo",
-			viewShow: "general.viewShow",
-			search: "general.searchFor",
 			home: "general.viewHome",
+			paused: "general.paused",
+			play: "general.playing",
+			search: "general.searchFor",
+			viewShow: "general.viewShow",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
+}
+async function imgPath(path: string) {
+	if (path) return `https://${path.replace("//", "")}`;
+	else return Assets.Logo;
 }
 
 enum Assets {
@@ -66,21 +70,17 @@ presence.on("UpdateData", async () => {
 			presenceData.details = strings.home;
 			break;
 		}
-		case "shows":
 		case "documentaries": {
-			if (pathname === "/shows" || pathname === "/documentaries")
-				presenceData.details = "Viewing all documentaries";
-			else {
-				presenceData.details = `${strings.viewShow} ${
-					document
-						.querySelector('[id="hero-section"]')
-						.querySelector('[class*="Component-title-"]')?.textContent
-				}`;
-				presenceData.state = document
-					.querySelector('[aria-label="Select season dropdown"]')
-					?.textContent?.replace(/\)k/g, "")
-					.replace("(", " - ");
-			}
+			presenceData.details = `${strings.viewShow} ${
+				document
+					.querySelector('[id="hero-section"]')
+					.querySelector('[class*="Component-title-"]')?.textContent
+			}`;
+			presenceData.state = document
+				.querySelector('[aria-label="Select season dropdown"]')
+				?.textContent?.replace(/\)k/g, "")
+				.replace("(", " - ");
+
 			presenceData.buttons = [
 				{
 					label: "Browse",
@@ -102,40 +102,51 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
+		case "shows":
 		case "specials": {
-			const img = document
-				.querySelector('img[class*="Component-imageImg-"]')
-				?.getAttribute("src")
-				.slice(2);
-			if (img) presenceData.largeImageKey = `https://${img}`;
-			if (video?.duration) {
-				delete presenceData.startTimestamp;
-				presenceData.details = document.querySelector(
-					'[class*="Component-typeSectionTitleMd"]'
-				)?.textContent;
-				if (video.duration && !video.paused)
-					presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
-				presenceData.smallImageKey = video.paused ? Assets.Paused : Assets.Play;
-				presenceData.smallImageText = video.paused
-					? strings.paused
-					: strings.play;
-				presenceData.buttons = [
-					{
-						label: strings.buttonWatchVideo,
-						url: href,
-					},
-				];
-			} else {
-				presenceData.details = "Viewing show";
-				presenceData.state = document
-					.querySelector('[class*="Component-contentWrapper"]')
-					.querySelector('[data-testid="typography"]')?.textContent;
-				presenceData.buttons = [
-					{
-						label: "Browse",
-						url: href,
-					},
-				];
+			if (pathname === "/shows" || pathname === "/documentaries")
+				presenceData.details = "Viewing all documentaries";
+			else {
+				const img = await imgPath(
+					document
+						.querySelector('img[class*="Component-imageImg-"]')
+						?.getAttribute("src")
+						.slice(2)
+				);
+				if (img) presenceData.largeImageKey = `https://${img}`;
+				if (video?.duration) {
+					delete presenceData.startTimestamp;
+					presenceData.details = document.querySelector(
+						'[class*="Component-typeSectionTitleMd"]'
+					)?.textContent;
+					if (video.duration && !video.paused) {
+						presenceData.endTimestamp =
+							presence.getTimestampsfromMedia(video)[1];
+					}
+					presenceData.smallImageKey = video.paused
+						? Assets.Paused
+						: Assets.Play;
+					presenceData.smallImageText = video.paused
+						? strings.paused
+						: strings.play;
+					presenceData.buttons = [
+						{
+							label: strings.buttonWatchVideo,
+							url: href,
+						},
+					];
+				} else {
+					presenceData.details = "Viewing show";
+					presenceData.state = document
+						.querySelector('[class*="Component-contentWrapper"]')
+						?.querySelector('[data-testid="typography"]')?.textContent;
+					presenceData.buttons = [
+						{
+							label: "Browse",
+							url: href,
+						},
+					];
+				}
 			}
 			break;
 		}
