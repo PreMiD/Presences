@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 			const imgs = document.querySelectorAll("#readerarea > img");
 			for (const element of imgs) {
 				if (
-					element.getAttribute("src") !== null &&
+					element.getAttribute("src") &&
 					element.getAttribute("data-index") === "0"
 				) {
 					presenceData.largeImageKey = element.getAttribute("src");
