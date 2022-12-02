@@ -41,7 +41,9 @@ presence.on("UpdateData", async () => {
 		]),
 		search = document.querySelector<HTMLInputElement>(
 			'input[class*="Component-input-"]'
-		);
+		),
+		video =
+			document.querySelectorAll("video")[1] ?? document.querySelector("video");
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
@@ -51,7 +53,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 		return;
 	}
-	if (search?.value) {
+	if (search?.value && pathname.includes("search")) {
 		presenceData.details = strings.search;
 		presenceData.state = search.value;
 		presenceData.smallImageKey = Assets.Search;
@@ -66,7 +68,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "shows":
 		case "documentaries": {
-			if (pathname === "/shows" || pathname === "documentaries")
+			if (pathname === "/shows" || pathname === "/documentaries")
 				presenceData.details = "Viewing all documentaries";
 			else {
 				presenceData.details = `${strings.viewShow} ${
@@ -105,21 +107,41 @@ presence.on("UpdateData", async () => {
 				.querySelector('img[class*="Component-imageImg-"]')
 				?.getAttribute("src")
 				.slice(2);
-			presenceData.details = "Viewing show";
-			presenceData.state = document
-				.querySelector('[class*="Component-contentWrapper"]')
-				.querySelector('[data-testid="typography"]')?.textContent;
 			if (img) presenceData.largeImageKey = `https://${img}`;
-			presenceData.buttons = [
-				{
-					label: "Browse",
-					url: href,
-				},
-			];
+			if (video?.duration) {
+				delete presenceData.startTimestamp;
+				presenceData.details = document.querySelector(
+					'[class*="Component-typeSectionTitleMd"]'
+				)?.textContent;
+				if (video.duration && !video.paused)
+					presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
+				presenceData.smallImageKey = video.paused ? Assets.Paused : Assets.Play;
+				presenceData.smallImageText = video.paused
+					? strings.paused
+					: strings.play;
+				presenceData.buttons = [
+					{
+						label: strings.buttonWatchVideo,
+						url: href,
+					},
+				];
+			} else {
+				presenceData.details = "Viewing show";
+				presenceData.state = document
+					.querySelector('[class*="Component-contentWrapper"]')
+					.querySelector('[data-testid="typography"]')?.textContent;
+				presenceData.buttons = [
+					{
+						label: "Browse",
+						url: href,
+					},
+				];
+			}
 			break;
 		}
 		default: {
 			presenceData.details = strings.browse;
+			break;
 		}
 	}
 
