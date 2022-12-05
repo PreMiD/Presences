@@ -1,11 +1,7 @@
 const presence = new Presence({
 		clientId: "846282107462352927"
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
-	});
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData;
