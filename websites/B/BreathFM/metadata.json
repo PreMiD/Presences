@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "BreathFM",
+  "author": {
+    "id": "482621190519914506",
+    "name": "Optischa#5773"
+  },
+  "description": {
+    "en": "BreathFM is a web radio from Switzerland that streams to the whole world"
+  },
+  "url": "breathfm.de",
+  "version": "1.0.0",
+  "logo": "https://cdn.breathfm.de/logo/default.jpg",
+  "thumbnail": "https://cdn.breathfm.de/logo/thumbnail.jpg",
+  "color": "#2A2929",
+  "tags": [
+    "music"
+  ],
+  "category": "music"
+}
