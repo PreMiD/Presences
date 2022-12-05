@@ -130,7 +130,7 @@ presence.on("UpdateData", async () => {
 		} catch {
 			presenceData.details = "Bilinmeyen Adress.";
 		}
-	} else presenceData.details = " Bilinmeyen Adress.";
+	} else presenceData.details = "Bilinmeyen Adress.";
 
 	presence.setActivity(presenceData);
 });
