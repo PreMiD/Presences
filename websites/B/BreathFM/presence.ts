@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "846282107462352927"
+		clientId: "846282107462352927",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -14,20 +14,23 @@ presence.on("UpdateData", async () => {
 	} else if (location.pathname === "/history") {
 		presenceData = {
 			details: "Schaut die Historie an",
-			largeImageKey: "https://pbs.twimg.com/profile_images/1436408219904135171/8xqklEOk_400x400.jpg",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://pbs.twimg.com/profile_images/1436408219904135171/8xqklEOk_400x400.jpg",
+			startTimestamp: browsingTimestamp,
 		};
 	} else if (location.pathname === "/bots") {
 		presenceData = {
 			details: "Interresiert sich für die Bots",
-			largeImageKey: "https://pbs.twimg.com/profile_images/1436408219904135171/8xqklEOk_400x400.jpg",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://pbs.twimg.com/profile_images/1436408219904135171/8xqklEOk_400x400.jpg",
+			startTimestamp: browsingTimestamp,
 		};
 	} else {
 		presenceData = {
 			details: "Durch Stöbert die Webseite",
-			largeImageKey: "https://pbs.twimg.com/profile_images/1436408219904135171/8xqklEOk_400x400.jpg",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://pbs.twimg.com/profile_images/1436408219904135171/8xqklEOk_400x400.jpg",
+			startTimestamp: browsingTimestamp,
 		};
 	}
 	presence.setActivity(presenceData);
