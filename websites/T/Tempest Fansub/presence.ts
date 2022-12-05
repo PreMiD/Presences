@@ -11,8 +11,15 @@ presence.on("UpdateData", async () => {
 		_host = location.host;
 	//Dino
 	if (pathname === "/dinozor-oyunu/") presenceData.details = "Dino oynuyor.";
-	//Animeler
+	//Anime arama
 	else if (
+		location.search.includes("?s=") &&
+		location.host === "tempestfansub.com"
+	) {
+		presenceData.details = "Bir anime arıyor.";
+		presenceData.state = location.search.replace("?s=", "");
+		//Animeler
+	} else if (
 		(_host === "tempestfansub.com" && pathname === "/") ||
 		pathname.endsWith("/anime/")
 	)
@@ -30,6 +37,13 @@ presence.on("UpdateData", async () => {
 			if (element.getAttribute("src") !== null)
 				presenceData.largeImageKey = element.getAttribute("src");
 		}
+		//Manga arama
+	} else if (
+		location.search.includes("?s=") &&
+		location.host === "manga.tempestfansub.com"
+	) {
+		presenceData.details = "Bir manga arıyor.";
+		presenceData.state = location.search.replace("?s=", "");
 		//Mangalar
 	} else if (
 		_host.startsWith("manga.") &&
