@@ -32,9 +32,8 @@ presence.on("UpdateData", async () => {
 				break;
 			case "status":
 				for (let i = 0; i < children.length; i++) {
-					if (children.item(i).children.item(1).textContent === "Online") 
+					if (children.item(i).children.item(1).textContent === "Online")
 						onlineService++;
-					
 				}
 				presenceData.details = "Schaut sich den Status an...";
 				presenceData.state = `${onlineService} von ${children.length} Services Online`;
