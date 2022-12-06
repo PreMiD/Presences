@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 				case document.location.pathname.includes("/index"):
 					presenceData.details = "Viewing Nexon Homepage";
 					presenceData.state =
-						document.querySelector<HTMLHeadingElement>("h1").textContent;
+						document.querySelectorAll<HTMLHeadingElement>("h1")[1].textContent;
 					presenceData.buttons = [
 						{ label: "View Nexon Homepage", url: document.URL },
 					];
