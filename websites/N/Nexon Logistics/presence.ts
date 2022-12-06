@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [{ label: "View Job", url: document.URL }];
 					break;
 				case document.location.pathname.includes("/events"):
-					presenceData.details = "Viewing Calendar";
+					presenceData.details = "Viewing calendar";
 					presenceData.state =
 						document.querySelector<HTMLHeadingElement>("h2").textContent;
 					presenceData.buttons = [
