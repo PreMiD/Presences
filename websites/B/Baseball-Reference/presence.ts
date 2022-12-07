@@ -15,29 +15,29 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname === "")
 			presenceData.details = "Viewing home page";
 	} else if (document.location.pathname.includes("/players")) {
-		presenceData.details = `Viewing a Player:`;
+		presenceData.details = "Viewing a Player:";
 		presenceData.state =
-			document.querySelector("div#meta div h1 span").textContent +
-			" | " +
+			`${document.querySelector("div#meta div h1 span").textContent 
+			} | ${ 
 			document
 				.querySelector("div#meta div p strong")
 				.nextSibling.textContent.replace(/\s/g, " ")
-				.trim();
+				.trim()}`;
 		if (!presence.getActivity().largeImageKey)
 			presenceData.largeImageKey = image;
 		presenceData.buttons = [{ label: "View Player", url: document.URL }];
 
 		if (
-			document.querySelector("#meta > div:nth-child(2) > p:nth-child(5) > a") !=
+			document.querySelector("#meta > div:nth-child(2) > p:nth-child(5) > a") !==
 			null
 		) {
 			team = document.querySelector(
 				"#meta > div:nth-child(2) > p:nth-child(5) > a"
 			).textContent;
-			presenceData.state = presenceData.state + "\nFor The " + team;
+			presenceData.state = `${presenceData.state}\nFor The ${team}`;
 		}
 	} else if (document.location.pathname.includes("/managers")) {
-		presenceData.details = `Viewing a Manager:`;
+		presenceData.details = "Viewing a Manager:";
 		presenceData.state = document.querySelector(
 			"div#meta div h1 span"
 		).textContent;
@@ -45,29 +45,29 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = image;
 		presenceData.buttons = [{ label: "View Manager", url: document.URL }];
 	} else if (document.location.pathname.includes("/teams")) {
-		presenceData.details = `Viewing a Team:`;
+		presenceData.details = "Viewing a Team:";
 		presenceData.state =
-			document.querySelector("div#meta div h1 span").textContent +
-			" " +
+			`${document.querySelector("div#meta div h1 span").textContent 
+			} ${ 
 			document.querySelector("div#meta div h1 span").nextElementSibling
-				.textContent;
+				.textContent}`;
 		if (!presence.getActivity().largeImageKey)
 			presenceData.largeImageKey = image;
 		presenceData.buttons = [{ label: "View Team", url: document.URL }];
 	} else if (document.location.pathname.includes("/leagues")) {
-		presenceData.details = `Viewing Stats:`;
+		presenceData.details = "Viewing Stats:";
 		presenceData.state =
-			document.querySelector("div#meta div h1 span").textContent +
-			" " +
+			`${document.querySelector("div#meta div h1 span").textContent 
+			} ${ 
 			document.querySelector("div#meta div h1 span").nextElementSibling
-				.textContent +
-			" " +
-			document.querySelector("div#meta div h1 span.header_end").textContent;
+				.textContent 
+			} ${ 
+			document.querySelector("div#meta div h1 span.header_end").textContent}`;
 		if (!presence.getActivity().largeImageKey)
 			presenceData.largeImageKey = image;
 		presenceData.buttons = [{ label: "View Page", url: document.URL }];
 	} else if (document.location.pathname.includes("/boxes")) {
-		presenceData.details = `Viewing Box Score:`;
+		presenceData.details = "Viewing Box Score:";
 		presenceData.state = document
 			.querySelector("div h1")
 			.textContent.replace(" vs ", "@");
@@ -76,11 +76,11 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = image;
 		presenceData.buttons = [{ label: "View Box Score", url: document.URL }];
 	} else if (document.location.pathname.includes("/friv")) {
-		presenceData.details = `Viewing Misc:`;
+		presenceData.details = "Viewing Misc:";
 		presenceData.state = document.querySelector("div h1").textContent;
 		presenceData.buttons = [{ label: "View Page", url: document.URL }];
 	} else if (document.location.pathname.includes("/oracle")) {
-		presenceData.details = `Consulting the Oracle of Baseball`;
+		presenceData.details = "Consulting the Oracle of Baseball";
 		presenceData.state = document.querySelector("div h1").textContent;
 		presenceData.buttons = [{ label: "View Page", url: document.URL }];
 	}
