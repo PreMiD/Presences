@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "143542273609564161",
+		"name": "DjDrake8#2047"
+	},
+	"service": "Baseball-Reference",
+	"description": {
+		"en": "The complete source for current and historical baseball players, teams, scores and leaders."
+	},
+	"url": "www.baseball-reference.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/5ytJgW0.png",
+	"thumbnail": "https://i.imgur.com/5ytJgW0.png",
+	"color": "#ffaaaa",
+	"category": "other",
+	"tags": [
+		"baseball",
+		"sports",
+		"stats",
+		"reference"
+	]
+}
