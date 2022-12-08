@@ -14,11 +14,23 @@ presence.on("UpdateData", async () => {
 			largeImageKey: navigator.mediaSession.metadata.artwork[0].src,
 			details: navigator.mediaSession.metadata.title,
 			state: navigator.mediaSession.metadata.artist,
+			buttons: [
+				{
+					label: "Listen",
+					url: location.href,
+				},
+			]
 		};
 	} else {
 		presenceData = {
 			startTimestamp: browsingTimestamp,
 			largeImageKey: "https://i.imgur.com/C8eRVDU.jpg",
+			buttons: [
+				{
+					label: "View Site",
+					url: location.href,
+				},
+			]
 		};
 
 		switch (location.pathname.replace("/", "")) {
@@ -53,11 +65,5 @@ presence.on("UpdateData", async () => {
 				break;
 		}
 	}
-	presenceData.buttons = [
-		{
-			label: "Listen",
-			url: location.href,
-		},
-	];
 	presence.setActivity(presenceData);
 });
