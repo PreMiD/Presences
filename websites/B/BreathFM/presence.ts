@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData;
-	if ("mediaSession" in navigator && navigator.mediaSession.metadata !== null && !document.querySelector<HTMLAudioElement>("#root > audio")?.paused) {
+	if ("mediaSession" in navigator && navigator.mediaSession.metadata !== null && !document.querySelector<HTMLAudioElement>("audio")?.paused) {
 		presenceData = {
 			largeImageKey: navigator.mediaSession.metadata.artwork[0].src,
 			details: navigator.mediaSession.metadata.title,
