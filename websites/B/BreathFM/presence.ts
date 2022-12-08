@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 					label: "Listen",
 					url: location.href,
 				},
-			]
+			],
 		};
 	} else {
 		presenceData = {
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 					label: "View Site",
 					url: location.href,
 				},
-			]
+			],
 		};
 
 		switch (location.pathname.replace("/", "")) {
