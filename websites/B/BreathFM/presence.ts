@@ -5,7 +5,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData;
-	if ("mediaSession" in navigator && navigator.mediaSession.metadata !== null && !document.querySelector<HTMLAudioElement>("audio")?.paused) {
+	if (
+		"mediaSession" in navigator &&
+		navigator.mediaSession.metadata !== null &&
+		!document.querySelector<HTMLAudioElement>("audio")?.paused
+	) {
 		presenceData = {
 			largeImageKey: navigator.mediaSession.metadata.artwork[0].src,
 			details: navigator.mediaSession.metadata.title,
@@ -26,7 +30,11 @@ presence.on("UpdateData", async () => {
 				break;
 			case "status":
 				presenceData.details = "Schaut sich den Status an";
-				presenceData.state = `${document.querySelectorAll("[class=\"online\"]")?.length} von ${document.querySelectorAll("[class=\"monitor\"]")?.length} Services Online`;
+				presenceData.state = `${
+					document.querySelectorAll('[class="online"]')?.length
+				} von ${
+					document.querySelectorAll('[class="monitor"]')?.length
+				} Services Online`;
 				break;
 			case "impressum":
 				presenceData.details = "Schaut sich das Impressum an";
@@ -52,6 +60,4 @@ presence.on("UpdateData", async () => {
 		},
 	];
 	presence.setActivity(presenceData);
-
-})
-;
+});
