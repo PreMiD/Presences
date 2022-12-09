@@ -398,7 +398,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `💻 ${stats?.at(0)?.textContent?.replace(
 			"Servers",
 			" "
-		)} - 👍 ${stats[2]?.querySelector("span")?.textContent}`;
+		)} - 👍 ${stats?.at(2)?.querySelector("span")?.textContent}`;
 		presenceData.largeImageKey =
 			document.querySelector("div.bot-mx-bp")?.querySelector("img")?.src ??
 			Assets.Logo;
