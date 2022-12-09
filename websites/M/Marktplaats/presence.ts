@@ -116,9 +116,9 @@ presence.on("UpdateData", async () => {
 			!pathname.includes("/veiligheidscentrum/")
 		) {
 			presenceData.details = "Leest over";
-			presenceData.state = document
-				.querySelector<HTMLMetaElement>('meta[name="description"]')
-				.content.slice(0, 128);
+			presenceData.state = document.querySelector<HTMLMetaElement>(
+				'meta[name="description"]'
+			).content;
 			presenceData.smallImageKey = "read";
 			presenceData.buttons = [
 				{
