@@ -3,351 +3,516 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", async () => {
-	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
-		presenceData: PresenceData = {
-			largeImageKey: "discords_logo",
-		};
+enum Assets {
+	Logo = "https://i.imgur.com/ZjtyAQx.png",
+	Bot = "https://i.imgur.com/Z6ruEIy.png",
+	Heart = "https://i.imgur.com/bY8jPXF.png",
+}
 
-	if (document.location.pathname === "/")
+presence.on("UpdateData", async () => {
+	let presenceData: PresenceData = {
+		largeImageKey: Assets.Logo,
+	};
+
+	const { href, pathname } = document.location,
+		[showTimestamp, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("buttons"),
+		]),
+		pages: Record<string, PresenceData> = {
+			"/u/dashboard": {
+				details: "⚙️ Viewing: Dashboard",
+				buttons: [{ label: "View Page", url: href }],
+			},
+			"/premium": {
+				details: "💎 Viewing: Premium Plans",
+				buttons: [{ label: "View Page", url: href }],
+			},
+			"/emoji-list": {
+				details: "😃 Viewing: Emoji list",
+				buttons: [{ label: "View Emojis", url: href }],
+			},
+			"/sticker-list": {
+				details: "🖼️ Viewing: Sticker list",
+				buttons: [{ label: "View Stickers", url: href }],
+			},
+			"/bots": {
+				details: "🤖 Viewing: Bots",
+				buttons: [{ label: "View Bots", url: href }],
+			},
+			"/templates": {
+				details: "📁 Viewing: Templates",
+				buttons: [{ label: "View Templates", url: href }],
+			},
+			"/termsofservice": {
+				details: "📜 Viewing: Terms of Service",
+				buttons: [{ label: "View Page", url: href }],
+			},
+			"/verification": {
+				details: "🔐 Viewing: Verification",
+				buttons: [{ label: "View Page", url: href }],
+			},
+			"/apply": {
+				details: "📝 Applying for: Verification",
+				buttons: [{ label: "Apply", url: href }],
+			},
+		},
+		pageNumber = document.querySelector("li.page-item.active")?.textContent,
+		pageNumberBots = document.querySelector("li.active")?.textContent,
+		tagSearch = document
+			.querySelector("h1.text-md-left")
+			?.textContent.replace("Discord Servers", " "),
+		standardSearch = document
+			.querySelector("div.FMDiWzVk")
+			?.querySelector("input")
+			?.getAttribute("value");
+
+	for (const [path, data] of Object.entries(pages))
+		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+
+	if (pathname === "/") {
 		presenceData.details = "Viewing home page";
-	else if (document.location.pathname === "/servers/search") {
+
+		if (standardSearch) {
+			presenceData.details = `🔍 Searching for: ${standardSearch}`;
+			presenceData.buttons = [
+				{
+					label: "View Results",
+					url: href,
+				},
+			];
+		}
+	} else if (pathname === "/servers/search") {
 		presenceData.details = `🔍 Searching for: ${
 			document
 				.querySelector("h1.text-center")
 				?.textContent.replace("Discord Servers", " ") || "Nothing"
 		}`;
-		presenceData.state = `📖 Page ${
-			document.querySelector("li.page-item.active")?.textContent
-		}`;
+		presenceData.state = `📖 Page ${pageNumber}`;
 		presenceData.buttons = [
 			{
 				label: "View Results",
-				url: document.location.href,
+				url: href,
 			},
 		];
-	} else if (document.location.pathname.includes("/servers/tag/")) {
-		presenceData.details = `Viewing 📛 ${
-			document
-				.querySelector("h1.text-center")
-				?.textContent.replace("Discord Servers", " ") || "Nothing"
-		} tag`;
-		presenceData.state = `📖 Page ${
-			document.querySelector("li.page-item.active")?.textContent
-		}`;
+	} else if (pathname.includes("/servers/tag/")) {
+		if (tagSearch) presenceData.details = `🏷️ Viewing tag: ${tagSearch}`;
+		presenceData.state = `📖 Page ${pageNumber}`;
 		presenceData.buttons = [
 			{
 				label: "View Tag",
-				url: document.location.href,
+				url: href,
 			},
 		];
-	} else if (document.location.pathname.includes("/servers/tags/")) {
-		presenceData.details = `Viewing 🔑 ${
-			document
-				.querySelector("h1.text-center")
-				?.textContent.replace("Discord Servers", " ") || "Nothing"
-		} keyword`;
-		presenceData.state = `📖 Page ${
-			document.querySelector("li.page-item.active")?.textContent
-		}`;
+	} else if (pathname.includes("/servers/tags/")) {
+		if (tagSearch) presenceData.details = `🔑 Viewing keyword: ${tagSearch}`;
+		presenceData.state = `📖 Page ${pageNumber}`;
 		presenceData.buttons = [
 			{
 				label: "View Keyword",
-				url: document.location.href,
+				url: href,
 			},
 		];
-	} else if (document.location.pathname === "/servers/top-100") {
-		presenceData.details = "Viewing 🏅 top-100 servers";
-		presenceData.state = `📖 Page ${
-			document.querySelector("li.page-item.active")?.textContent
-		}`;
+	} else if (pathname === "/servers/top-100") {
+		presenceData.details = "🏅 Viewing: top-100 servers";
+		presenceData.state = `📖 Page ${pageNumber}`;
 		presenceData.buttons = [
 			{
 				label: "View Top-100",
-				url: document.location.href,
+				url: href,
 			},
 		];
-	} else if (document.location.pathname.includes("/join")) {
-		const serverNameJoin = document.querySelector("h2.mt-4")?.textContent;
-		presenceData.details = `Looking at 🚦 ${
-			serverNameJoin || "N/A"
-		}'s join page`;
-		if (serverNameJoin) {
-			presenceData.buttons = [
-				{
-					label: `Join ${serverNameJoin}`,
-					url: document.location.href,
-				},
+	} else if (pathname.includes("/join")) {
+		presenceData.details = "🔗 Joining";
+		presenceData.state = document
+			.querySelector("h2.__9ui9XW8A.mt-4")
+			?.textContent.slice(0, 128);
+		presenceData.largeImageKey =
+			document.querySelector("div.Xw20bfHH")?.querySelectorAll("img")[1]?.src ??
+			Assets.Logo;
+		presenceData.smallImageKey = Assets.Logo;
+		presenceData.smallImageText = "Discords";
+		presenceData.buttons = [
+			{
+				label: "Join Server",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/upvote")) {
+		presenceData.details = "🗳️ Upvoting";
+		presenceData.state = document.querySelector("h1.__9ui9XW8A")?.textContent;
+		presenceData.largeImageKey =
+			document.querySelector("div.Xw20bfHH")?.querySelectorAll("img")[1]?.src ??
+			Assets.Logo;
+		presenceData.smallImageKey = Assets.Logo;
+		presenceData.smallImageText = "Discords";
+		presenceData.buttons = [
+			{
+				label: "Upvote Server",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/servers/")) {
+		const details =
+			document.querySelectorAll("div.xt1RiTiJ")[
+				document.querySelectorAll("div.xt1RiTiJ")[2]?.querySelector("h5")
+					?.textContent === "Social Media"
+					? 3
+					: 2
 			];
-		}
-	} else if (document.location.pathname.includes("/upvote")) {
-		const serverNameUpvote = document.querySelector(
-			"h1.JoinUpvote_clickable-server-name__3l6Es"
-		)?.textContent;
-		presenceData.details = `Upvoting 🗳️ ${serverNameUpvote || "N/A"} `;
-		if (serverNameUpvote) {
-			presenceData.buttons = [
-				{
-					label: `Upvote ${serverNameUpvote}`,
-					url: document.location.href,
-				},
-			];
-		}
-	} else if (document.location.pathname.includes("/servers/")) {
-		presenceData.details = `Viewing 🎨 ${document
-			.querySelector("h1.servernameh1")
-			?.textContent.replace("PREMIUM", " ")}`;
-		presenceData.state = `${
-			document
-				.querySelectorAll("span.mr-2")[0]
-				?.textContent.replace(
-					`${document.querySelectorAll("span.mr-2")[0]?.textContent}`,
-					`${`👥 ${document.querySelectorAll("span.mr-2")[0]?.textContent}`}`
-				) || "0 members online"
-		}, ${
-			document
-				.querySelectorAll("span.mr-2")[1]
-				?.textContent.replace(
-					`${document.querySelectorAll("span.mr-2")[1]?.textContent}`,
-					`${`🎁 ${document.querySelectorAll("span.mr-2")[1]?.textContent}`}`
-				) || "0 members"
-		}, ${
-			document
-				.querySelectorAll("span.mr-2")[2]
-				?.textContent.replace(
-					`${document.querySelectorAll("span.mr-2")[2]?.textContent}`,
-					`${`💎 ${document.querySelectorAll("span.mr-2")[2]?.textContent}`}`
-				) || "0 boosts"
+		presenceData.details = document
+			.querySelector("div.i0dbWFw9")
+			?.querySelector("h1")
+			?.textContent.slice(0, 128);
+		presenceData.state = `👤 ${
+			details?.textContent
+				.split("Total Members:")[1]
+				.split("Online Members:")[0]
+		} - 👥 ${details?.textContent
+			.split("Total Members:")[1]
+			.split("Online Members:")[1]
+			.split("Boost Count" || "Language")[0]
+			.slice(0, 128)} ${
+			details?.textContent
+				.split("Total Members:")[1]
+				?.split("Online Members:")[1]
+				?.split("Boost Count:")[1]
+				?.split("Language")[0]
+				.slice(0, 128) !== null
+				? `💎 ${details?.textContent
+						.split("Total Members:")[1]
+						.split("Online Members:")[1]
+						.split("Boost Count:")[1]
+						.split("Language")[0]
+						.slice(0, 128)}`
+				: ""
+		}`;
+		presenceData.largeImageKey =
+			document.querySelector("div.Yzp7abwU")?.querySelectorAll("img")[1]?.src ??
+			Assets.Logo;
+		presenceData.smallImageKey = Assets.Logo;
+		presenceData.smallImageText = `Discords - ${
+			document.querySelector("div.JfFLrhpA")?.querySelector("a")
+				? "Premium"
+				: "Free"
 		}`;
 		presenceData.buttons = [
 			{
-				label: "View Page",
-				url: document.location.href,
+				label: "View Server",
+				url: href,
+			},
+			{
+				label: "Join Server",
+				url: `${href}/join`,
 			},
 		];
-	} else if (document.location.pathname.includes("/about")) {
-		presenceData.details = "Viewing 🎫 about page";
+	} else if (pathname.includes("/emoji-list/tag")) {
+		presenceData.details = `🏷️ Viewing emoji tag: ${
+			document
+				.querySelector("h2.text-center")
+				?.textContent.replace("Emoji List", " ") ?? "N/A"
+		}`;
+		presenceData.state = `📖 Page ${pageNumber}`;
 		presenceData.buttons = [
 			{
-				label: "View Page",
-				url: document.location.href,
+				label: "View Emoji Tag",
+				url: href,
 			},
 		];
-	} else if (document.location.pathname.includes("/payment")) {
-		presenceData.details = "Purchasing 💳 premium";
-		presenceData.buttons = [
-			{
-				label: "Purchase Premium",
-				url: document.location.href,
-			},
-		];
-	} else if (document.location.pathname === "/premium/") {
-		presenceData.details = "Viewing 💎 premium plans";
-		presenceData.buttons = [
-			{
-				label: "View Premium",
-				url: document.location.href,
-			},
-		];
-	} else if (document.location.pathname.includes("/partners")) {
-		presenceData.details = "Viewing 🤝 partners";
-		presenceData.buttons = [
-			{
-				label: "View Partners",
-				url: document.location.href,
-			},
-		];
-	} else {
-		switch (document.location.pathname) {
-			case "/u/dashboard": {
-				presenceData.details = "Viewing 👤 dashboard";
-				break;
-			}
-			case "/emoji-list": {
-				presenceData.details = "Viewing 😃 Emoji list";
-				presenceData.buttons = [
-					{
-						label: "View Emojis",
-						url: document.location.href,
-					},
-				];
+	} else if (pathname.includes("/emoji-list/search")) {
+		const emojiSearch = document
+			.querySelector("h2.XJYkMdaM.emojisearchcenter")
+			?.textContent?.split("Search:")[1];
 
-				break;
-			}
-			case "/emoji-list/search": {
-				presenceData.details = `🔍 Searching for emoji: ${
-					document
-						.querySelector("h2.EmoList_heading1__3KEr_")
-						?.textContent.replace("Emoji List", " ") || "N/A"
-				}`;
-				presenceData.state = `📖 Page ${
-					document.querySelector("li.page-item.active")?.textContent
-				}`;
-				presenceData.buttons = [
-					{
-						label: "View Results",
-						url: document.location.href,
-					},
-				];
+		if (emojiSearch) presenceData.details = `🔍 Searching for: ${emojiSearch}`;
+		presenceData.state = `📖 Page ${pageNumber}`;
+		presenceData.buttons = [
+			{
+				label: "View Results",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/sticker-list/tag")) {
+		presenceData.details = `🏷️ Viewing sticker tag: ${
+			document
+				.querySelector("h2.text-center")
+				?.textContent.replace("Sticker List", " ") ?? "N/A"
+		}`;
+		presenceData.state = `📖 Page ${pageNumber}`;
+		presenceData.buttons = [
+			{
+				label: "View Sticker Tag",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/sticker-list/search")) {
+		const stickSearch = document
+			.querySelector("h2.XJYkMdaM.emojisearchcenter")
+			?.textContent?.split("Search:")[1]
+			?.split("Servers")[0];
 
-				break;
-			}
-			default:
-				if (document.location.pathname.includes("/emoji-list/tag/")) {
-					presenceData.details = `Looking at 📛 ${
-						document
-							.querySelector("h2.EmoList_heading1__3KEr_")
-							?.textContent.replace("Emoji List", " ") || "N/A"
-					} emoji tag`;
-					presenceData.state = `📖 Page ${
-						document.querySelector("li.page-item.active")?.textContent
-					}`;
-					presenceData.buttons = [
-						{
-							label: "View Emoji Tag",
-							url: document.location.href,
-						},
-					];
-				} else if (document.location.pathname.includes("/termsofservice")) {
-					presenceData.details = "Viewing 👩‍⚖️ Terms of Service";
-					presenceData.buttons = [
-						{
-							label: "View Page",
-							url: document.location.href,
-						},
-					];
-					// discord.bio
-				} else if (document.location.pathname.includes("/profiles")) {
-					presenceData.largeImageKey = "discordbio_logo";
-					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = "Browsing...";
-					presenceData.details = "Browsing top bios";
-					presenceData.buttons = [
-						{
-							label: "View Bios",
-							url: document.location.href,
-						},
-					];
-				} else if (document.location.pathname === "/bio/premium") {
-					presenceData.largeImageKey = "discordbio_logo";
-					presenceData.details = "Viewing 💎 premium plans";
-					presenceData.buttons = [
-						{
-							label: "View Premium Plans",
-							url: document.location.href,
-						},
-					];
-				} else if (document.location.pathname.includes("/customise")) {
-					presenceData.largeImageKey = "discordbio_logo";
-					presenceData.details = "Editing bio";
-				} else if (document.location.pathname.includes("/settings")) {
-					presenceData.largeImageKey = "discordbio_logo";
-					presenceData.details = "Viewing ⚙️ settings";
-				} else if (document.location.pathname.includes("/p/")) {
-					presenceData.largeImageKey = "discordbio_logo";
-					const profileName = document.querySelector(
-						"span.text-white.font-bold.text-2xl"
-					)?.textContent;
-					presenceData.details = `Viewing ${
-						profileName
-							? profileName.endsWith("s")
-								? `${`${profileName}'`}`
-								: `${`${profileName}'s`}`
-							: "Unknown"
-					} bio`;
-					presenceData.state = `${
-						document.querySelector(
-							"div.text-xs.uppercase.tracking-widest.font-bold.text-blue-300"
-						)?.textContent
-							? "💎 Premium User"
-							: "🎟️ Normal User"
-					}`;
-					presenceData.buttons = [
-						{
-							label: "View Bio",
-							url: document.location.href,
-						},
-					];
-				} else if (document.location.pathname.includes("/bio")) {
-					presenceData.largeImageKey = "discordbio_logo";
-					presenceData.details = "Viewing home page";
-					// discord templates
-				} else if (document.location.pathname.includes("/edit")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
-					presenceData.details = "Editing a template";
-					presenceData.buttons = [
-						{
-							label: "View Template",
-							url: document.location.href.split("/edit")[0],
-						},
-					];
-				} else if (document.location.pathname.includes("/templates/id/new")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
-					presenceData.details = "Creating New Template:";
-					presenceData.state = `${
-						document.querySelector("h5.font-semibold.text-lg.truncate")
-							?.textContent ?? "Unknown"
-					}`;
-				} else if (document.location.pathname.includes("/templates/id/top")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
-					presenceData.details = "Viewing Top-10 templates";
-					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = "Browsing...";
-					presenceData.buttons = [
-						{
-							label: "View Top-10",
-							url: document.location.href,
-						},
-					];
-				} else if (document.location.pathname.includes("/templates/id/")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
-					presenceData.details = "Viewing Template:";
-					presenceData.state = `${
-						document.querySelector("h1.font-semibold.truncate")?.textContent ??
-						"Unknown"
-					}`;
-					presenceData.buttons = [
-						{
-							label: "View Template",
-							url: document.location.href,
-						},
-					];
-				} else if (document.location.pathname.includes("/templates/users/")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
-					presenceData.details = "Viewing User:";
-					presenceData.state = `${
-						document.querySelector("h1.text-3xl.font-semibold")?.textContent ??
-						"Unknown"
-					}`;
-					presenceData.buttons = [
-						{
-							label: "View User",
-							url: document.location.href,
-						},
-					];
-				} else if (document.location.pathname.includes("/templates/search/")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
-					presenceData.details = "Searching for:";
-					presenceData.state = `${
-						document.location.pathname.split("/templates/search/")[1] ??
-						"Unknown"
-					}`;
-					presenceData.smallImageKey = "search";
-					presenceData.smallImageText = "Searching...";
-				} else if (document.location.pathname.includes("/templates/tags/")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
-					presenceData.details = "Searching by tag:";
-					presenceData.state = `${
-						document.location.pathname.split("/templates/tags/")[1] ?? "Unknown"
-					}`;
-					presenceData.smallImageKey = "search";
-					presenceData.smallImageText = "Searching...";
-				} else if (document.location.pathname.includes("/templates")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
-					presenceData.details = "Viewing home page";
-				}
+		if (stickSearch) presenceData.details = `🔍 Searching for: ${stickSearch}`;
+		presenceData.state = `📖 Page ${pageNumber}`;
+		presenceData.buttons = [
+			{
+				label: "View Results",
+				url: href,
+			},
+		];
+	} else if (pathname === "/bio") {
+		presenceData.details = "🙂 Viewing: Bios";
+		presenceData.state = `📖 Page ${pageNumber}`;
+		presenceData.buttons = [
+			{
+				label: "View Bios",
+				url: href,
+			},
+		];
+
+		if (standardSearch) {
+			presenceData.details = `🔍 Searching for: ${standardSearch}`;
+			presenceData.buttons = [
+				{
+					label: "View Results",
+					url: href,
+				},
+			];
 		}
+	} else if (pathname.includes("/bio/p")) {
+		presenceData.details = document.querySelector("h1.HiVipESs")?.textContent;
+		presenceData.state = document
+			.querySelector("div.fHOTdnFx.g0pusrry")
+			?.textContent.slice(0, 128);
+		presenceData.largeImageKey =
+			document.querySelector("div.jYifcv4i")?.querySelectorAll("img")[1]?.src ??
+			Assets.Logo;
+		presenceData.smallImageKey = Assets.Heart;
+		presenceData.smallImageText =
+			document.querySelector("#like-button")?.textContent === "0"
+				? "Not Liked"
+				: document.querySelector("#like-button")?.textContent;
+		presenceData.buttons = [
+			{
+				label: "View Profile",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/bots/verification")) {
+		presenceData.details = "🤖 Viewing: Verification";
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+
+		if (pathname.includes("/apply")) {
+			presenceData.details = "🤖 Applying for Verification";
+			presenceData.buttons = [
+				{
+					label: "Apply for Verification",
+					url: href,
+				},
+			];
+		}
+	} else if (pathname.includes("/bots/search")) {
+		presenceData.details = `🔍 Searching for: ${pathname.split("/search/")[1]}`;
+		if (pageNumberBots) presenceData.state = `📖 Page ${pageNumberBots}`;
+		presenceData.smallImageKey =
+			"https://cdn-icons-png.flaticon.com/512/2021/2021646.png";
+		presenceData.smallImageText = `Found ${document
+			.querySelector("div.banner-left-hp")
+			?.querySelector("h1")
+			?.textContent?.split("you")[1]
+			.slice(0, 128)}`;
+		presenceData.buttons = [
+			{
+				label: "View Results",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/bots/user")) {
+		const userTitle = document
+			.querySelectorAll("p.title")[1]
+			?.textContent.includes("#")
+			? document.querySelectorAll("p.title")[1]?.textContent.slice(0, 128)
+			: "Unknown User";
+		presenceData.details = userTitle;
+		presenceData.state = document
+			.querySelector("p.subtitle")
+			?.textContent.slice(0, 128);
+		presenceData.largeImageKey =
+			document.querySelector("div.column.is-2")?.querySelector("img")?.src ??
+			Assets.Logo;
+		presenceData.smallImageKey = Assets.Logo;
+		presenceData.smallImageText = `Discords Bots - ${
+			document.querySelector("img.profilebadges")?.getAttribute("title") ??
+			"Unknown House"
+		}`;
+		presenceData.buttons = [
+			{
+				label: "View User",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/vote")) {
+		presenceData.details = "🗳️ Upvoting";
+		presenceData.state = document
+			.querySelector("div.container.is-fluid")
+			?.querySelector("h1")
+			?.textContent?.replace("Vote for", " ");
+		presenceData.largeImageKey =
+			document.querySelector("div.column.is-2")?.querySelector("img")?.src ??
+			Assets.Logo;
+		presenceData.smallImageKey = Assets.Logo;
+		presenceData.smallImageText = "Discords Bots";
+		presenceData.buttons = [
+			{
+				label: "Upvote Bot",
+				url: href,
+			},
+			{
+				label: "View Bot",
+				url: href.replace("/vote", ""),
+			},
+		];
+	} else if (pathname.includes("/bots/tag")) {
+		presenceData.details = `🏷️ Viewing bot tag: ${document
+			.querySelector("h1.title")
+			?.textContent.slice(0, 128)}`;
+		if (pageNumberBots) presenceData.state = `📖 Page ${pageNumberBots}`;
+		presenceData.buttons = [
+			{
+				label: "View Bot Tag",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/bots/bot")) {
+		const stats = document
+			.querySelector("div.stats-bp")
+			?.querySelector("ul")
+			?.querySelectorAll("li");
+		presenceData.details = document
+			.querySelector("div.bot-title-bp")
+			?.querySelector("h2")?.textContent;
+		presenceData.state = `💻 ${stats[0]?.textContent?.replace(
+			"Servers",
+			" "
+		)} - 👍 ${stats[2]?.querySelector("span")?.textContent}`;
+		presenceData.largeImageKey =
+			document.querySelector("div.bot-mx-bp")?.querySelector("img")?.src ??
+			Assets.Logo;
+		presenceData.smallImageKey = Assets.Logo;
+		presenceData.smallImageText = `Discords Bots - ${
+			window
+				.getComputedStyle(document.querySelector("a.status"), "::after")
+				.getPropertyValue("background-color") === "rgb(67, 181, 129)"
+				? "🟢 Online"
+				: "⚪ Offline"
+		}`;
+		presenceData.buttons = [
+			{
+				label: "View Bot",
+				url: href,
+			},
+			{
+				label: "Invite Bot",
+				url: document
+					.querySelector("a.invite-btn-bp.bot-btn-bp")
+					?.getAttribute("href"),
+			},
+		];
+	} else if (pathname.includes("/templates/search")) {
+		presenceData.details = `🔍 Searching for: ${document
+			.querySelector("h1.text-2xl")
+			?.textContent?.replace("Search results for", "")
+			?.replace(/['"]+/g, "")}`;
+		presenceData.buttons = [
+			{
+				label: "View Results",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/templates/id")) {
+		presenceData.details = document
+			.querySelector("h1.font-semibold")
+			?.textContent.slice(0, 128);
+		presenceData.state = document
+			.querySelector("p.line-clamp-3")
+			?.textContent.slice(0, 128);
+		presenceData.largeImageKey =
+			document
+				.querySelector("div.items-center.mb-4")
+				?.querySelector("img")
+				?.src?.replace(/^.*\.(jpg|JPG|svg)$/g, ".png") ?? Assets.Logo;
+		presenceData.smallImageKey = Assets.Logo;
+		presenceData.smallImageText = `Discords Templates - Used ${document
+			.querySelector("p.text-xl")
+			?.textContent.slice(0, 128)}`;
+		presenceData.buttons = [
+			{
+				label: "View Template",
+				url: href,
+			},
+		];
+
+		if (pathname.includes("/top")) {
+			presenceData.details = "📈 Top Templates";
+			presenceData.buttons = [
+				{
+					label: "View Top Templates",
+					url: href,
+				},
+			];
+
+			delete presenceData.smallImageKey;
+			delete presenceData.smallImageText;
+		}
+	} else if (pathname.includes("/templates/user")) {
+		const userWebsite = document
+			.querySelector("p.mx-auto")
+			?.querySelector("a")
+			?.getAttribute("href");
+		presenceData.details = document
+			.querySelector("h1.text-3xl")
+			?.textContent.slice(0, 128);
+		presenceData.state = document
+			.querySelector("p.mx-auto")
+			?.textContent.slice(0, 128);
+		presenceData.largeImageKey =
+			document.querySelector("figure.mx-auto")?.querySelector("img")?.src ??
+			Assets.Logo;
+		presenceData.smallImageKey = Assets.Logo;
+		presenceData.smallImageText = `Discords Templates - Total of ${
+			document
+				.querySelector("section.mt-4")
+				?.querySelector("div.space-x-2")
+				?.querySelectorAll("span")[1]?.textContent
+		}`;
+		presenceData.buttons = [
+			{
+				label: "View User",
+				url: href,
+			},
+		];
+
+		if (userWebsite) {
+			presenceData.buttons.push({
+				label: "View Website",
+				url: userWebsite,
+			});
+		}
+	} else if (pathname.includes("/templates/tags")) {
+		presenceData.details = `🏷️ Viewing template tag: ${document
+			.querySelector("a.nuxt-link-exact-active")
+			?.querySelectorAll("span")[1]
+			?.textContent.slice(0, 128)}`;
+		presenceData.buttons = [
+			{
+				label: "View Tag",
+				url: href,
+			},
+		];
 	}
 
 	if (!showButtons) delete presenceData.buttons;
