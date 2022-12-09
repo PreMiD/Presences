@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 		presenceData = {
 			startTimestamp: browsingTimestamp,
 			largeImageKey: "https://i.imgur.com/C8eRVDU.jpg",
-
+		};
 		switch (location.pathname.replace("/", "")) {
 			case "history":
 				presenceData.details = "Schaut die Historie an";
