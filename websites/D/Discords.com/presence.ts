@@ -395,10 +395,12 @@ presence.on("UpdateData", async () => {
 		presenceData.details = document
 			.querySelector("div.bot-title-bp")
 			?.querySelector("h2")?.textContent;
-		presenceData.state = `💻 ${stats?.at(0)?.textContent?.replace(
-			"Servers",
-			" "
-		)} - 👍 ${stats?.at(2)?.querySelector("span")?.textContent}`;
+		if (stats) {
+			presenceData.state = `💻 ${stats[0]?.textContent?.replace(
+				"Servers",
+				" "
+			)} - 👍 ${stats[2]?.querySelector("span")?.textContent}`;
+		}
 		presenceData.largeImageKey =
 			document.querySelector("div.bot-mx-bp")?.querySelector("img")?.src ??
 			Assets.Logo;
