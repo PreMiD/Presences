@@ -395,7 +395,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = document
 			.querySelector("div.bot-title-bp")
 			?.querySelector("h2")?.textContent;
-		presenceData.state = `💻 ${stats[0]?.textContent?.replace(
+		presenceData.state = `💻 ${stats.?at(0)?.textContent?.replace(
 			"Servers",
 			" "
 		)} - 👍 ${stats[2]?.querySelector("span")?.textContent}`;
