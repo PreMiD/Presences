@@ -62,7 +62,6 @@ presence.on("UpdateData", async () => {
 				break;
 			default:
 				presenceData.details = "Durch Stöbert die Webseite";
-				break;
 		}
 	}
 	presence.setActivity(presenceData);
