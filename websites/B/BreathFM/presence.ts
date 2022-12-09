@@ -25,13 +25,6 @@ presence.on("UpdateData", async () => {
 		presenceData = {
 			startTimestamp: browsingTimestamp,
 			largeImageKey: "https://i.imgur.com/C8eRVDU.jpg",
-			buttons: [
-				{
-					label: "View Site",
-					url: location.href,
-				},
-			],
-		};
 
 		switch (location.pathname.replace("/", "")) {
 			case "history":
