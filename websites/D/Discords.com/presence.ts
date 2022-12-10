@@ -25,35 +25,35 @@ presence.on("UpdateData", async () => {
 				buttons: [{ label: "View Page", url: href }],
 			},
 			"/premium": {
-				details: "💎 Viewing: Premium Plans",
+				details: "💎 Viewing Premium Plans",
 				buttons: [{ label: "View Page", url: href }],
 			},
 			"/emoji-list": {
-				details: "😃 Viewing: Emoji list",
+				details: "😃 Viewing Emoji list",
 				buttons: [{ label: "View Emojis", url: href }],
 			},
 			"/sticker-list": {
-				details: "🖼️ Viewing: Sticker list",
+				details: "🖼️ Viewing Sticker list",
 				buttons: [{ label: "View Stickers", url: href }],
 			},
 			"/bots": {
-				details: "🤖 Viewing: Bots",
+				details: "🤖 Viewing Bots",
 				buttons: [{ label: "View Bots", url: href }],
 			},
 			"/templates": {
-				details: "📁 Viewing: Templates",
+				details: "📁 Viewing Templates",
 				buttons: [{ label: "View Templates", url: href }],
 			},
 			"/termsofservice": {
-				details: "📜 Viewing: Terms of Service",
+				details: "📜 Viewing Terms of Service",
 				buttons: [{ label: "View Page", url: href }],
 			},
 			"/verification": {
-				details: "🔐 Viewing: Verification",
+				details: "🔐 Viewing Verification",
 				buttons: [{ label: "View Page", url: href }],
 			},
 			"/apply": {
-				details: "📝 Applying for: Verification",
+				details: "📝 Applying for Verification",
 				buttons: [{ label: "Apply", url: href }],
 			},
 		},
