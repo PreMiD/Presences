@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 		]),
 		pages: Record<string, PresenceData> = {
 			"/u/dashboard": {
-				details: "⚙️ Viewing: Dashboard",
+				details: "⚙️ Viewing Dashboard",
 				buttons: [{ label: "View Page", url: href }],
 			},
 			"/premium": {
@@ -124,9 +124,8 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (pathname.includes("/join")) {
 		presenceData.details = "🔗 Joining";
-		presenceData.state = document
-			.querySelector("h2.__9ui9XW8A.mt-4")
-			?.textContent;
+		presenceData.state =
+			document.querySelector("h2.__9ui9XW8A.mt-4")?.textContent;
 		presenceData.largeImageKey =
 			document.querySelector("div.Xw20bfHH")?.querySelectorAll("img")[1]?.src ??
 			Assets.Logo;
@@ -162,29 +161,29 @@ presence.on("UpdateData", async () => {
 			];
 		presenceData.details = document
 			.querySelector("div.i0dbWFw9")
-			?.querySelector("h1")
-			?.textContent;
+			?.querySelector("h1")?.textContent;
 		presenceData.state = `👤 ${
 			details?.textContent
 				.split("Total Members:")[1]
 				.split("Online Members:")[0]
-		} - 👥 ${details?.textContent
-			.split("Total Members:")[1]
-			.split("Online Members:")[1]
-			.split("Boost Count" || "Language")[0]
-			} ${
+		} - 👥 ${
+			details?.textContent
+				.split("Total Members:")[1]
+				.split("Online Members:")[1]
+				.split("Boost Count" || "Language")[0]
+		} ${
 			details?.textContent
 				.split("Total Members:")[1]
 				?.split("Online Members:")[1]
 				?.split("Boost Count:")[1]
-				?.split("Language")[0]
-				 !== null
-				? `💎 ${details?.textContent
-						.split("Total Members:")[1]
-						.split("Online Members:")[1]
-						.split("Boost Count:")[1]
-						.split("Language")[0]
-						}`
+				?.split("Language")[0] !== null
+				? `💎 ${
+						details?.textContent
+							.split("Total Members:")[1]
+							.split("Online Members:")[1]
+							.split("Boost Count:")[1]
+							.split("Language")[0]
+				  }`
 				: ""
 		}`;
 		presenceData.largeImageKey =
@@ -280,9 +279,9 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname.includes("/bio/p")) {
 		presenceData.details = document.querySelector("h1.HiVipESs")?.textContent;
-		presenceData.state = document
-			.querySelector("div.fHOTdnFx.g0pusrry")
-			?.textContent;
+		presenceData.state = document.querySelector(
+			"div.fHOTdnFx.g0pusrry"
+		)?.textContent;
 		presenceData.largeImageKey =
 			document.querySelector("div.jYifcv4i")?.querySelectorAll("img")[1]?.src ??
 			Assets.Logo;
@@ -320,11 +319,12 @@ presence.on("UpdateData", async () => {
 		if (pageNumberBots) presenceData.state = `📖 Page ${pageNumberBots}`;
 		presenceData.smallImageKey =
 			"https://cdn-icons-png.flaticon.com/512/2021/2021646.png";
-		presenceData.smallImageText = `Found ${document
-			.querySelector("div.banner-left-hp")
-			?.querySelector("h1")
-			?.textContent?.split("you")[1]
-			}`;
+		presenceData.smallImageText = `Found ${
+			document
+				.querySelector("div.banner-left-hp")
+				?.querySelector("h1")
+				?.textContent?.split("you")[1]
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Results",
@@ -338,9 +338,7 @@ presence.on("UpdateData", async () => {
 			? document.querySelectorAll("p.title")[1]?.textContent
 			: "Unknown User";
 		presenceData.details = userTitle;
-		presenceData.state = document
-			.querySelector("p.subtitle")
-			?.textContent;
+		presenceData.state = document.querySelector("p.subtitle")?.textContent;
 		presenceData.largeImageKey =
 			document.querySelector("div.column.is-2")?.querySelector("img")?.src ??
 			Assets.Logo;
@@ -377,9 +375,9 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (pathname.includes("/bots/tag")) {
-		presenceData.details = `🏷️ Viewing bot tag: ${document
-			.querySelector("h1.title")
-			?.textContent}`;
+		presenceData.details = `🏷️ Viewing bot tag: ${
+			document.querySelector("h1.title")?.textContent
+		}`;
 		if (pageNumberBots) presenceData.state = `📖 Page ${pageNumberBots}`;
 		presenceData.buttons = [
 			{
@@ -395,12 +393,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = document
 			.querySelector("div.bot-title-bp")
 			?.querySelector("h2")?.textContent;
-		if (stats) {
-			presenceData.state = `💻 ${stats[0]?.textContent?.replace(
-				"Servers",
-				" "
-			)} - 👍 ${stats[2]?.querySelector("span")?.textContent}`;
-		}
+		presenceData.state = `💻 ${stats?.[0]?.textContent?.replace(
+			"Servers",
+			" "
+		)} - 👍 ${stats?.[2]?.querySelector("span")?.textContent}`;
 		presenceData.largeImageKey =
 			document.querySelector("div.bot-mx-bp")?.querySelector("img")?.src ??
 			Assets.Logo;
@@ -436,21 +432,18 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (pathname.includes("/templates/id")) {
-		presenceData.details = document
-			.querySelector("h1.font-semibold")
-			?.textContent;
-		presenceData.state = document
-			.querySelector("p.line-clamp-3")
-			?.textContent;
+		presenceData.details =
+			document.querySelector("h1.font-semibold")?.textContent;
+		presenceData.state = document.querySelector("p.line-clamp-3")?.textContent;
 		presenceData.largeImageKey =
 			document
 				.querySelector("div.items-center.mb-4")
 				?.querySelector("img")
 				?.src?.replace(/^.*\.(jpg|JPG|svg)$/g, ".png") ?? Assets.Logo;
 		presenceData.smallImageKey = Assets.Logo;
-		presenceData.smallImageText = `Discords Templates - Used ${document
-			.querySelector("p.text-xl")
-			?.textContent}`;
+		presenceData.smallImageText = `Discords Templates - Used ${
+			document.querySelector("p.text-xl")?.textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Template",
@@ -475,12 +468,8 @@ presence.on("UpdateData", async () => {
 			.querySelector("p.mx-auto")
 			?.querySelector("a")
 			?.getAttribute("href");
-		presenceData.details = document
-			.querySelector("h1.text-3xl")
-			?.textContent;
-		presenceData.state = document
-			.querySelector("p.mx-auto")
-			?.textContent;
+		presenceData.details = document.querySelector("h1.text-3xl")?.textContent;
+		presenceData.state = document.querySelector("p.mx-auto")?.textContent;
 		presenceData.largeImageKey =
 			document.querySelector("figure.mx-auto")?.querySelector("img")?.src ??
 			Assets.Logo;
@@ -505,10 +494,11 @@ presence.on("UpdateData", async () => {
 			});
 		}
 	} else if (pathname.includes("/templates/tags")) {
-		presenceData.details = `🏷️ Viewing template tag: ${document
-			.querySelector("a.nuxt-link-exact-active")
-			?.querySelectorAll("span")[1]
-			?.textContent}`;
+		presenceData.details = `🏷️ Viewing template tag: ${
+			document
+				.querySelector("a.nuxt-link-exact-active")
+				?.querySelectorAll("span")[1]?.textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "View Tag",
