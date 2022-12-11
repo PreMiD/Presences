@@ -9,10 +9,12 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,
-		pathSplit = pathname.split("/").filter(x => x);
+		pathSplit = pathname.split("/").filter(x => x),
+		active = document.querySelector('[class*="is-active"]');
 
 	switch (hostname) {
 		case "modrinth.com": {
+			if (active?.textContent) presenceData.details = `Browsing ${pathSplit[0]} ${active?.textContent.toLowerCase()}`;
 			switch (pathSplit[0]) {
 				case "user": {
 					presenceData.details = `Browsing ${pathSplit[1]}'s profile`;
@@ -42,28 +44,6 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
-
-					switch (pathSplit[2]) {
-						case "gallery": {
-							presenceData.details = "Browsing mod gallery";
-							break;
-						}
-						case "changelog": {
-							presenceData.details = "Browsing mod changelog";
-							break;
-						}
-						case "versions": {
-							presenceData.details = "Browsing mod versions";
-							break;
-						}
-						case "settings": {
-							presenceData.details = "Browsing project settings";
-							break;
-						}
-						default: {
-							presenceData.details = "Browsing mod description";
-						}
-					}
 					break;
 				}
 				case "plugins": {
@@ -80,28 +60,6 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
-
-					switch (pathSplit[2]) {
-						case "gallery": {
-							presenceData.details = "Browsing plugin gallery";
-							break;
-						}
-						case "changelog": {
-							presenceData.details = "Browsing plugin changelog";
-							break;
-						}
-						case "versions": {
-							presenceData.details = "Browsing plugin versions";
-							break;
-						}
-						case "settings": {
-							presenceData.details = "Browsing project settings";
-							break;
-						}
-						default: {
-							presenceData.details = "Browsing plugin description";
-						}
-					}
 					break;
 				}
 				case "resourcepacks": {
@@ -118,28 +76,6 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
-
-					switch (pathSplit[2]) {
-						case "gallery": {
-							presenceData.details = "Browsing resourcepack gallery";
-							break;
-						}
-						case "changelog": {
-							presenceData.details = "Browsing resourcepack changelog";
-							break;
-						}
-						case "versions": {
-							presenceData.details = "Browsing resourcepack versions";
-							break;
-						}
-						case "settings": {
-							presenceData.details = "Browsing project settings";
-							break;
-						}
-						default: {
-							presenceData.details = "Browsing resourcepack description";
-						}
-					}
 					break;
 				}
 				case "modpacks": {
@@ -156,28 +92,6 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
-
-					switch (pathSplit[2]) {
-						case "gallery": {
-							presenceData.details = "Browsing modpack gallery";
-							break;
-						}
-						case "changelog": {
-							presenceData.details = "Browsing modpack changelog";
-							break;
-						}
-						case "versions": {
-							presenceData.details = "Browsing modpack versions";
-							break;
-						}
-						case "settings": {
-							presenceData.details = "Browsing project settings";
-							break;
-						}
-						default: {
-							presenceData.details = "Browsing modpack description";
-						}
-					}
 					break;
 				}
 				case "notifications": {
