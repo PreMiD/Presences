@@ -14,7 +14,11 @@ presence.on("UpdateData", async () => {
 
 	switch (hostname) {
 		case "modrinth.com": {
-			if (active?.textContent) presenceData.details = `Browsing ${pathSplit[0]} ${active?.textContent.toLowerCase()}`;
+			if (active?.textContent) {
+presenceData.details = `Browsing ${
+					pathSplit[0]
+				} ${active?.textContent.toLowerCase()}`;
+}
 			switch (pathSplit[0]) {
 				case "user": {
 					presenceData.details = `Browsing ${pathSplit[1]}'s profile`;
