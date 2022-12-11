@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/GnMSCG4.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, hostname } = document.location,
+		{ pathname, hostname, href } = document.location,
 		pathSplit = pathname.split("/").filter(x => x);
 
 	switch (hostname) {
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Profile",
-							url: `https://modrinth.com/user/${pathSplit[1]}`,
+							url: href,
 						},
 					];
 					break;
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Mod",
-							url: `https://modrinth.com/mod/${pathSplit[1]}`,
+							url: href,
 						},
 					];
 
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Plugin",
-							url: `https://modrinth.com/plugin/${pathSplit[1]}`,
+							url: href,
 						},
 					];
 
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Resourcepack",
-							url: `https://modrinth.com/resourcepack/${pathSplit[1]}`,
+							url: href,
 						},
 					];
 
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Modpack",
-							url: `https://modrinth.com/modpack/${pathSplit[1]}`,
+							url: href,
 						},
 					];
 
@@ -253,7 +253,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Blog Post",
-						url: `https://blog.modrinth.com/${pathSplit[0]}`,
+						url: href,
 					},
 				];
 				presenceData.details = "Reading blog post";
