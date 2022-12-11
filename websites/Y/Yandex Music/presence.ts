@@ -37,7 +37,7 @@ setInterval(async () => {
 	}
 
 	presenceData = {
-		largeImageKey: "og-image",
+		largeImageKey: (<HTMLImageElement>document.querySelector("body > div.page-root.page-root_no-player.deco-pane-back.theme.theme_dark.black > div.bar > div.bar__content > div.player-controls.deco-player-controls > div.player-controls__track-container > div > div > div.track.track_type_player > div.entity-cover.deco-entity-image-placeholder.track-cover.entity-cover_size_Large > a > img")).src.replace("50x50","100x100"),
 		smallImageKey: playing ? "play" : "pause",
 		smallImageText: playing ? (await strings).playing : (await strings).pause,
 		details: (document.querySelectorAll(".track__title")[0] as HTMLElement)
