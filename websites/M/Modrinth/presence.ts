@@ -14,11 +14,6 @@ presence.on("UpdateData", async () => {
 
 	switch (hostname) {
 		case "modrinth.com": {
-			if (active?.textContent) {
-				presenceData.details = `Browsing ${
-					pathSplit[0]
-				} ${active?.textContent.toLowerCase()}`;
-			}
 			switch (pathSplit[0]) {
 				case "user": {
 					presenceData.details = `Browsing ${pathSplit[1]}'s profile`;
@@ -48,6 +43,13 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
+					if (active?.textContent) {
+						presenceData.details = `Browsing ${
+							pathSplit[0]
+						} ${active?.textContent.toLowerCase()}`;
+						presence.setActivity(presenceData);
+						return;
+					}
 					break;
 				}
 				case "plugins": {
@@ -64,6 +66,13 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
+					if (active?.textContent) {
+						presenceData.details = `Browsing ${
+							pathSplit[0]
+						} ${active?.textContent.toLowerCase()}`;
+						presence.setActivity(presenceData);
+						return;
+					}
 					break;
 				}
 				case "resourcepacks": {
@@ -80,6 +89,13 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
+					if (active?.textContent) {
+						presenceData.details = `Browsing ${
+							pathSplit[0]
+						} ${active?.textContent.toLowerCase()}`;
+						presence.setActivity(presenceData);
+						return;
+					}
 					break;
 				}
 				case "modpacks": {
@@ -96,6 +112,13 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
+					if (active?.textContent) {
+						presenceData.details = `Browsing ${
+							pathSplit[0]
+						} ${active?.textContent.toLowerCase()}`;
+						presence.setActivity(presenceData);
+						return;
+					}
 					break;
 				}
 				case "notifications": {
