@@ -30,11 +30,13 @@ presence.on("UpdateData", async () => {
 		!isNaN(video.duration) &&
 		document.location.pathname.includes("/watch/")
 	) {
-		const [startTimestamp, endTimestamp] = presence.getTimestamps(
-				Math.floor(video.currentTime),
-				Math.floor(video.duration)
-			),
-			coverArt = document.querySelector<HTMLImageElement>("#w-info img")?.src,
+		delete presenceData.startTimestamp;
+		[, presenceData.endTimestamp] = presence.getTimestamps(
+			Math.floor(video.currentTime),
+			Math.floor(video.duration)
+		);
+		const coverArt =
+				document.querySelector<HTMLImageElement>("#w-info img")?.src,
 			seasonNumber = document.querySelector(".seasons.swiper-wrapper")
 				? String(
 						Array.from(
@@ -42,41 +44,42 @@ presence.on("UpdateData", async () => {
 						).findIndex(x => x.className.includes(" active")) + 1
 				  )
 				: "",
-			episodeNumber = document.querySelector(
-				"#w-servers .tip > div > b"
-			).textContent,
+			episodeNumber =
+				document
+					.querySelector("#w-servers .tip > div > b")
+					?.textContent.replace("Episode", "") ??
+				document
+					.querySelector('[class="item ep-item active"]')
+					?.getAttribute("data-number"),
 			episodeName = document.querySelector(
 				"li > a.active > .d-title"
 			)?.textContent;
 
-		presenceData.details = document.querySelector("#w-info .title").textContent;
-		presenceData.state = document
-			.querySelector<HTMLAnchorElement>(".bmeta > .meta a")
-			.href.endsWith("movie")
-			? "Movie"
-			: seasonNumber
-			? `S${seasonNumber}:E${episodeNumber.match(/[1-9]{1}[0-9]{0,}/)[0]} ${
-					episodeName ?? episodeNumber
-			  }`
-			: `${episodeNumber}${
-					!episodeName || episodeName === episodeNumber
-						? ""
-						: ` • ${episodeName}`
-			  }`;
+		presenceData.details =
+			document.querySelector("#w-info .title")?.textContent ??
+			document.querySelector('[class="film-name dynamic-name"]')?.textContent;
+		if (
+			!document
+				.querySelector('[class="breadcrumb"]')
+				?.textContent?.includes("Movie")
+		) {
+			presenceData.state = seasonNumber
+				? `S${seasonNumber}:E${episodeNumber.match(/[1-9]{1}[0-9]{0,}/)[0]} ${
+						episodeName ?? episodeNumber
+				  }`
+				: `Episode ${episodeNumber}${
+						!episodeName || episodeName === episodeNumber
+							? ""
+							: ` • ${episodeName}`
+				  }`;
+		} else presenceData.state = "Movie";
 
 		if (coverArt && showCover) presenceData.largeImageKey = coverArt;
 
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-		if (timestamps) {
-			presenceData.startTimestamp = startTimestamp;
-			presenceData.endTimestamp = endTimestamp;
-		}
 
-		if (video.paused) {
-			delete presenceData.startTimestamp;
-			delete presenceData.endTimestamp;
-		}
+		if (video.paused) delete presenceData.endTimestamp;
 	} else if (document.location.pathname.includes("/watch2gether/room/")) {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(
 				Math.floor(video.currentTime),
