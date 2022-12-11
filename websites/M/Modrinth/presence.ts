@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/GnMSCG4.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{pathname, hostname, href} = document.location,
+		{ pathname, hostname, href } = document.location,
 		pathSplit = pathname.split("/").filter(x => x),
 		active = document.querySelector('[class*="is-active"]');
 
