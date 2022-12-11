@@ -7,7 +7,7 @@ iframe.on("UpdateData", async () => {
 			current: video.currentTime,
 			duration: video.duration,
 			paused: video.paused,
-			isVideo: video ? true : false,
+			isVideo: true,
 		});
 	}
 });
