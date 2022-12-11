@@ -20,8 +20,8 @@ async function capitalizeFirstLetter(string: string) {
 	);
 }
 enum Assets {
-	Loading = "https://i.imgur.com/uh6vSQm.gif",
-	Logo = "https://i.imgur.com/AZVCG6a.png",
+	Loading = "https://i.imgur.com/Sn6KCPG.gif",
+	Logo = "https://i.imgur.com/I499MN5.png",
 	Reading = "https://i.imgur.com/8vMPNni.png",
 	Search = "https://i.imgur.com/oGQtnIY.png",
 }
@@ -29,7 +29,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,
@@ -150,21 +150,15 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "tutorials": {
-						switch (pathnameSplit[3]) {
-							// eslint-disable-next-line no-undefined
-							case undefined: {
-								presenceData.details = "Viewing all tutorials";
-								break;
-							}
-							default: {
-								presenceData.details = "Reading tutorials about:";
-								presenceData.state =
-									document.querySelector(
-										'div[dir="ltr"]'
-									)?.firstElementChild?.textContent;
-								presenceData.smallImageKey = Assets.Reading;
-							}
-						}
+						if (pathnameSplit[3] !== "") {
+							presenceData.details = "Reading tutorials about:";
+							presenceData.state =
+								document.querySelector(
+									'div[dir="ltr"]'
+								)?.firstElementChild?.textContent;
+							presenceData.smallImageKey = Assets.Reading;
+						} else presenceData.details = "Viewing all tutorials";
+
 						break;
 					}
 					default: {
@@ -183,7 +177,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = search.value;
 				presenceData.smallImageKey = Assets.Search;
 			} else if (document.querySelector('[class="article__title"]')) {
-				presenceData.details = "Reading support article about:";
+				presenceData.details = "Reading support article about";
 				presenceData.state = document.querySelector(
 					'[class="article__title"]'
 				)?.textContent;
