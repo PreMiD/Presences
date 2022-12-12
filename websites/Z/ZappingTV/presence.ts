@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1051342250870853702",
-}),
+		clientId: "1051342250870853702",
+	}),
 	elapsed = Math.floor(Date.now() / 1000),
 	getElement = (query: string): HTMLElement => {
 		return document.querySelector(query);
@@ -34,13 +34,13 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		smallImageKey: "1x1",
-		smallImageText: "Zapping TV",
-	},
-		coloredLogos: boolean = await presence.getSetting("coloredLogos"),
-		splitPathname = document.location.pathname.split("/");
+			smallImageKey: "1x1",
+			smallImageText: "Zapping TV",
+		},
+		coloredLogos: boolean = await presence.getSetting("coloredLogos")
+		;
 
-	switch (splitPathname[1]) {
+	switch (document.location.pathname.split("/")[1]) {
 		case "player": {
 			const { logo, title, channel } = await getAssets({ coloredLogos });
 			if (channel !== "" && title !== "" && logo !== "") {
