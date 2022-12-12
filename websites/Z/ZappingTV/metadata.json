@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "122463346418122752",
+		"name": "alvarowo"
+	},
+	"service": "ZappingTV",
+	"description": {
+		"en": "Zapping is a subscription live TV service. (Currently only available for Chile)",
+		"es": "Zapping es un servicio de TV en vivo por suscripción. (Actualmente solo disponible para Chile)"
+	},
+	"url": "app.zappingtv.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/5gyFfcd.png",
+	"thumbnail": "https://i.imgur.com/4Y7S0G0.jpg",
+	"color": "#EF426F",
+	"category": "videos",
+	"tags": [
+		"streaming",
+		"tv",
+		"iptv",
+		"chile",
+		"cable",
+		"operator"
+	],
+	"settings": [
+		{
+			"id": "coloredLogos",
+			"title": "Use colored logos",
+			"icon": "fas fa-palette",
+			"value": false
+		}
+	]
+}
