@@ -11,7 +11,7 @@ const presence = new Presence({
 			.map(x => parseInt(x));
 		return Math.floor(new Date().setHours(h, m, 0, 0) / 1000);
 	},
-	getAssets = async ({
+	getChannelData = async ({
 		coloredLogos = false,
 	}): Promise<{
 		logo: string;
@@ -30,22 +30,33 @@ const presence = new Presence({
 				"li.btn-channel.active > div.channel-data > div.name"
 			).textContent.trim(),
 		};
+	},
+	assets :{
+		logo: string,
+		sleep: string,
+	} = {
+		logo: "https://i.imgur.com/5gyFfcd.png",
+		sleep: "https://i.imgur.com/gWBjy43.png"
 	};
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			smallImageKey: "1x1",
+	const { logo: zappingLogo , sleep: zappingSleep } = assets,
+	presenceData: PresenceData = {
 			smallImageText: "Zapping TV",
+			largeImageKey: zappingLogo,
+			startTimestamp: elapsed,
 		},
 		coloredLogos: boolean = await presence.getSetting("coloredLogos");
+		
 
 	switch (document.location.pathname.split("/")[1]) {
 		case "player": {
-			const { logo, title, channel } = await getAssets({ coloredLogos });
+			const { logo, title, channel } = await getChannelData({ coloredLogos });
 			if (channel !== "" && title !== "" && logo !== "") {
 				presenceData.details = `${title}`;
 				presenceData.state = `En ${channel}`;
 				presenceData.largeImageKey = logo;
+				presenceData.smallImageKey = zappingLogo;
 				presenceData.endTimestamp = getEndTime();
 				presence.setActivity(presenceData);
 			} else presence.clearActivity();
@@ -54,14 +65,22 @@ presence.on("UpdateData", async () => {
 
 		case "dashboard": {
 			presenceData.details = "En el Dashboard";
-			presenceData.largeImageKey = "1x1";
-			presenceData.startTimestamp = elapsed;
+			presenceData.smallImageKey =  zappingSleep;
+			presenceData.smallImageText = "AFK";
 			presence.setActivity(presenceData);
 			break;
 		}
 
-		default: {
-			presence.clearActivity();
+		case "login": {
+			presenceData.details = "Iniciando sesión";
+			presence.setActivity(presenceData);
+			break;
+		}
+
+		case "": {
+			presenceData.details = "En la página principal";
+			presence.setActivity(presenceData);
+			break;
 		}
 	}
 });
