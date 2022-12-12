@@ -31,23 +31,22 @@ const presence = new Presence({
 			).textContent.trim(),
 		};
 	},
-	assets :{
-		logo: string,
-		sleep: string,
+	assets: {
+		logo: string;
+		sleep: string;
 	} = {
 		logo: "https://i.imgur.com/5gyFfcd.png",
-		sleep: "https://i.imgur.com/gWBjy43.png"
+		sleep: "https://i.imgur.com/gWBjy43.png",
 	};
 
 presence.on("UpdateData", async () => {
-	const { logo: zappingLogo , sleep: zappingSleep } = assets,
-	presenceData: PresenceData = {
+	const { logo: zappingLogo, sleep: zappingSleep } = assets,
+		presenceData: PresenceData = {
 			smallImageText: "Zapping TV",
 			largeImageKey: zappingLogo,
 			startTimestamp: elapsed,
 		},
 		coloredLogos: boolean = await presence.getSetting("coloredLogos");
-		
 
 	switch (document.location.pathname.split("/")[1]) {
 		case "player": {
@@ -65,7 +64,7 @@ presence.on("UpdateData", async () => {
 
 		case "dashboard": {
 			presenceData.details = "En el Dashboard";
-			presenceData.smallImageKey =  zappingSleep;
+			presenceData.smallImageKey = zappingSleep;
 			presenceData.smallImageText = "AFK";
 			presence.setActivity(presenceData);
 			break;
