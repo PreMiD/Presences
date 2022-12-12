@@ -37,8 +37,7 @@ presence.on("UpdateData", async () => {
 			smallImageKey: "1x1",
 			smallImageText: "Zapping TV",
 		},
-		coloredLogos: boolean = await presence.getSetting("coloredLogos")
-		;
+		coloredLogos: boolean = await presence.getSetting("coloredLogos");
 
 	switch (document.location.pathname.split("/")[1]) {
 		case "player": {
