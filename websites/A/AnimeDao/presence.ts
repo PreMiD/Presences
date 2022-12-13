@@ -50,7 +50,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "animedao_lg",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimeStamp,
 		},
 		{ pathname, hostname, href } = document.location,
