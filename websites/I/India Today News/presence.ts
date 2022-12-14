@@ -362,9 +362,9 @@ presence.on("UpdateData", async () => {
 			.querySelector("div.Story_story__author__cJoes")
 			?.querySelector("a.jsx-99cc083358cc2e2d")?.textContent,
 		multipleAuthors = document.querySelector("div.Story_authors__OqkJZ");
-
+	/* deepscan-disable-next-line CONSTANT_CONDITION */
 	if (oldLang !== newLang || !strings) {
-		oldLang = newLang;
+		oldLang = newLang; /* deepscan-disable-line UNUSED_VAR_ASSIGN */
 		strings = await getStrings();
 	}
 
@@ -405,7 +405,8 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes("s") && !pathname.includes("/photo/")) {
 			presenceData.details = `Viewing ${pathname
 				.split("/photos")[0]
-				?.replace("/", "")?.split("/")[1]
+				?.replace("/", "")
+				?.split("/")[1]
 				.toUpperCase()} Photo Gallery`;
 			presenceData.largeImageKey = Assets.Logo;
 			presenceData.smallImageKey = Assets.Reading;
@@ -446,7 +447,8 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes("s") && !pathname.includes("/video/")) {
 			presenceData.details = `Viewing ${pathname
 				.split("/videos")[0]
-				?.replace("/", "")?.split("/")[1]
+				?.replace("/", "")
+				?.split("/")[1]
 				.toUpperCase()} Videos`;
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "India Today News - Videos";
