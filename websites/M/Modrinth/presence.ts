@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "resourcepacks": {
-					presenceData.details = "Looking for a resourcepack";
+					presenceData.details = "Looking for resourcepack";
 					break;
 				}
 				case "resourcepack": {
