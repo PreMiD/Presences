@@ -13,7 +13,13 @@ async function getStrings() {
 	);
 }
 
-let video = {
+interface iFrameData {
+	duration: number;
+	currentTime: number;
+	paused: boolean;
+}
+
+let video: iFrameData = {
 	duration: 0,
 	currentTime: 0,
 	paused: true,
@@ -399,7 +405,7 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes("s") && !pathname.includes("/photo/")) {
 			presenceData.details = `Viewing ${pathname
 				.split("/photos")[0]
-				?.replace("/", "")
+				?.replace("/", "")?.split("/")[1]
 				.toUpperCase()} Photo Gallery`;
 			presenceData.largeImageKey = Assets.Logo;
 			presenceData.smallImageKey = Assets.Reading;
@@ -440,7 +446,7 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes("s") && !pathname.includes("/video/")) {
 			presenceData.details = `Viewing ${pathname
 				.split("/videos")[0]
-				?.replace("/", "")
+				?.replace("/", "")?.split("/")[1]
 				.toUpperCase()} Videos`;
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "India Today News - Videos";
