@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "mods": {
-					presenceData.details = "Looking for wonderful mods";
+					presenceData.details = "Looking for mods";
 					break;
 				}
 				case "mod": {
@@ -47,13 +47,12 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Browsing ${
 							pathSplit[0]
 						} ${active?.textContent.toLowerCase()}`;
-						presence.setActivity(presenceData);
 						return;
 					}
 					break;
 				}
 				case "plugins": {
-					presenceData.details = "Looking for useful plugins";
+					presenceData.details = "Looking for plugins";
 					break;
 				}
 				case "plugin": {
@@ -70,13 +69,12 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Browsing ${
 							pathSplit[0]
 						} ${active?.textContent.toLowerCase()}`;
-						presence.setActivity(presenceData);
 						return;
 					}
 					break;
 				}
 				case "resourcepacks": {
-					presenceData.details = "Looking for a beautiful resourcepack";
+					presenceData.details = "Looking for a resourcepack";
 					break;
 				}
 				case "resourcepack": {
@@ -93,13 +91,12 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Browsing ${
 							pathSplit[0]
 						} ${active?.textContent.toLowerCase()}`;
-						presence.setActivity(presenceData);
 						return;
 					}
 					break;
 				}
 				case "modpacks": {
-					presenceData.details = "Looking for a nice modpack";
+					presenceData.details = "Looking for a modpack";
 					break;
 				}
 				case "modpack": {
@@ -116,7 +113,6 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Browsing ${
 							pathSplit[0]
 						} ${active?.textContent.toLowerCase()}`;
-						presence.setActivity(presenceData);
 						return;
 					}
 					break;
@@ -126,7 +122,7 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "dashboard": {
-					presenceData.details = "Looking into dashboard";
+					presenceData.details = "View Dashboard";
 					break;
 				}
 				case "legal": {
