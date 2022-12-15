@@ -377,12 +377,6 @@ presence.on("UpdateData", async () => {
 		presenceData.state = pathname.split("/search/")[1];
 		presenceData.smallImageKey = Assets.Searching;
 		presenceData.smallImageText = "Searching";
-		presenceData.buttons = [
-			{
-				label: "View search results",
-				url: href,
-			},
-		];
 	} else if (pathname.includes("/photo")) {
 		presenceData.details = document.querySelector(
 			"h1.Photo_maintitle__G_cdj"
