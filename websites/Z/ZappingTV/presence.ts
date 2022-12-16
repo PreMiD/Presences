@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1051342250870853702",
-}),
+		clientId: "1051342250870853702",
+	}),
 	elapsed = Math.floor(Date.now() / 1000),
 	getElement = (query: string): HTMLElement => {
 		return document.querySelector(query);
@@ -38,10 +38,10 @@ enum Assets {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		smallImageText: "Zapping TV",
-		largeImageKey: Assets.ZappingLogo,
-		startTimestamp: elapsed,
-	},
+			smallImageText: "Zapping TV",
+			largeImageKey: Assets.ZappingLogo,
+			startTimestamp: elapsed,
+		},
 		coloredLogos: boolean = await presence.getSetting("coloredLogos"),
 		{ pathname } = document.location;
 
