@@ -1,6 +1,6 @@
 const presence = new Presence({
-		clientId: "1051342250870853702",
-	}),
+	clientId: "1051342250870853702",
+}),
 	elapsed = Math.floor(Date.now() / 1000),
 	getElement = (query: string): HTMLElement => {
 		return document.querySelector(query);
@@ -32,16 +32,16 @@ const presence = new Presence({
 		};
 	};
 enum Assets {
-	zappingLogo = "https://i.imgur.com/5gyFfcd.png",
-	zappingSleep = "https://i.imgur.com/gWBjy43.png",
+	ZappingLogo = "https://i.imgur.com/5gyFfcd.png",
+	ZappingSleep = "https://i.imgur.com/gWBjy43.png",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			smallImageText: "Zapping TV",
-			largeImageKey: Assets.zappingLogo,
-			startTimestamp: elapsed,
-		},
+		smallImageText: "Zapping TV",
+		largeImageKey: Assets.ZappingLogo,
+		startTimestamp: elapsed,
+	},
 		coloredLogos: boolean = await presence.getSetting("coloredLogos"),
 		{ pathname } = document.location;
 
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `${title}`;
 				presenceData.state = `En ${channel}`;
 				presenceData.largeImageKey = logo;
-				presenceData.smallImageKey = Assets.zappingLogo;
+				presenceData.smallImageKey = Assets.ZappingLogo;
 				presenceData.endTimestamp = getEndTime();
 			}
 			break;
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 
 		case "dashboard": {
 			presenceData.details = "En el Dashboard";
-			presenceData.smallImageKey = Assets.zappingSleep;
+			presenceData.smallImageKey = Assets.ZappingSleep;
 			presenceData.smallImageText = "AFK";
 			break;
 		}
