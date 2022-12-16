@@ -33,18 +33,18 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
 	current: number,
 	duration: number,
-	paused: boolean,
-	isVideo = false;
+	isVideo = false,
+	paused: boolean;
 
 presence.on(
 	"iFrameData",
 	(data: {
 		current: number;
 		duration: number;
-		paused: boolean;
 		isVideo: boolean;
+		paused: boolean;
 	}) => {
-		({ current, duration, paused, isVideo } = data);
+		({ current, duration, isVideo, paused } = data);
 	}
 );
 
