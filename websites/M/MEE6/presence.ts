@@ -8,15 +8,15 @@ async function getStrings() {
 			browse: "general.browsing",
 			search: "general.searchFor",
 			viewCategory: "general.viewCategory",
+			buttonViewPage: "general.buttonViewPage",
 			viewHome: "general.viewHome",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
-async function capitalizeFirstLetter(string: string) {
-	const stringTrimmed = string.trim();
+function capitalizeFirstLetter(string: string) {
 	return (
-		stringTrimmed.charAt(0).toUpperCase() + stringTrimmed.slice(1).toLowerCase()
+		string.charAt(0).toUpperCase().trim() + string.slice(1).toLowerCase().trim()
 	);
 }
 enum Assets {
@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "careers": {
-						presenceData.details = "Viewing open careere positions";
+						presenceData.details = "Viewing open careers";
 						break;
 					}
 					case "terms": {
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 					case "dashboard": {
 						switch (pathnameSplit[4]) {
 							case "": {
-								if (pathnameSplit[3] !== "") {
+								if (pathnameSplit[3]) {
 									presenceData.details = document.querySelector(
 										'[class*="whitespace-nowrap !text-whit"]'
 									)?.textContent;
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
 									pathname.includes("commands")
 								) {
 									presenceData.details = "Editing custom command";
-									presenceData.state = await capitalizeFirstLetter(
+									presenceData.state = capitalizeFirstLetter(
 										document.querySelector('[id="item_header__name"]')
 											.textContent
 									);
@@ -139,7 +139,7 @@ presence.on("UpdateData", async () => {
 									}
 								} else {
 									presenceData.details = "Viewing module";
-									presenceData.state = await capitalizeFirstLetter(
+									presenceData.state = capitalizeFirstLetter(
 										document.querySelector(
 											'[class="font-bold text-dark-100 text-h5"]'
 										)?.textContent ?? pathnameSplit[4].trim()
@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "tutorials": {
-						if (pathnameSplit[3] !== "") {
+						if (!pathnameSplit[3]) {
 							presenceData.details = "Reading tutorials about:";
 							presenceData.state =
 								document.querySelector(
@@ -187,10 +187,10 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (pathnameSplit[2] !== "") {
+	if (!pathnameSplit[2]) {
 		presenceData.buttons = [
 			{
-				label: "View Page",
+				label: strings.buttonViewPage,
 				url: href,
 			},
 		];
