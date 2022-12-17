@@ -14,11 +14,16 @@ async function getStrings() {
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
+
 function capitalizeFirstLetter(string: string) {
-	return (
-		string.charAt(0).toUpperCase().trim() + string.slice(1).toLowerCase().trim()
-	);
+	if (string) {
+		return (
+			string.trim().charAt(0).toUpperCase() +
+			string.trim().slice(1).toLowerCase()
+		);
+	}
 }
+
 enum Assets {
 	Loading = "https://i.imgur.com/Sn6KCPG.gif",
 	Logo = "https://i.imgur.com/I499MN5.png",
