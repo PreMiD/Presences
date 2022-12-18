@@ -1,9 +1,15 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"id": "638080361179512853",
-		"name": "Dark_Ville#2756"
+		"id": "194914323787808771",
+		"name": "Snowwy"
 	},
+	"contributors": [
+		{
+			"id": "638080361179512853",
+			"name": "Dark_Ville"
+		}
+	],
 	"service": "Cracked.io",
 	"description": {
 		"en": "Cracked.io is a cracking forum and community. We offer free premium accounts to everyone and we have a variation of cracked and leaked programs to choose from!"
@@ -56,8 +62,7 @@
 			"icon": "fad fa-images",
 			"value": false,
 			"if": {
-				"privacy": false,
-				"showDmUsername": true
+				"privacy": false
 			}
 		}
 	]
