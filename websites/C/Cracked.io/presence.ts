@@ -64,11 +64,6 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 		return;
 	}
-	// if (search?.value) {
-	// 	presenceData.details = strings.search;
-	// 	presenceData.state = search.value;
-	// 	presenceData.smallImageKey = Assets.Search;
-	// } else {
 	switch (pathname.split("/")[1]) {
 		case "search.php": {
 			if (search?.value) {
