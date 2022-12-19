@@ -13,7 +13,7 @@
 		"vi_VN": "Xem các tập và bộ phim anime phụ đề Tiếng Anh nhiều chất lượng trên mọi thiết bị: PC, máy tính bảng, điện thoại."
 	},
 	"url": "animedao.to",
-	"version": "2.0.0",
+	"version": "1.2.19",
 	"logo": "https://i.imgur.com/m1dumnr.png",
 	"thumbnail": "https://i.imgur.com/v6iZTmq.png",
 	"color": "#0ab4fc",
@@ -22,35 +22,5 @@
 		"anime",
 		"videos"
 	],
-	"iframe": true,
-	"settings": [
-		{
-			"id": "lang",
-			"multiLanguage": true
-		},
-		{
-			"id": "privacy",
-			"title": "Privacy Mode",
-			"icon": "fas fa-user-secret",
-			"value": false
-		},
-		{
-			"id": "buttons",
-			"title": "Show Buttons",
-			"icon": "fas fa-compress-arrows-alt",
-			"value": true,
-			"if": {
-				"privacy": false
-			}
-		},
-		{
-			"id": "covers",
-			"title": "Show Cover",
-			"icon": "fad fa-images",
-			"value": true,
-			"if": {
-				"privacy": false
-			}
-		}
-	]
+	"iframe": true
 }
