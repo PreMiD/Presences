@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-	const { pathname } = document.location,
+	const { pathname } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
 			largeImageKey: "https://i.imgur.com/MVWiX8p.png",
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 			"#content > div > div > article > div:nth-child(2) > div > div.thumbook > div > img"
 		);
 		for (const element of imgs) {
-			if (element.getAttribute("src"))
+			if (element.getAttribute("src") !== null)
 				presenceData.largeImageKey = element.getAttribute("src");
 		}
 		//Manga arama
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 			"#content > div > div > article > div:nth-child(2) > div > div.thumbook > div > img"
 		);
 		for (const element of imgs) {
-			if (element.getAttribute("src"))
+			if (element.getAttribute("src") !== null)
 				presenceData.largeImageKey = element.getAttribute("src");
 		}
 		//manga a-z listesi
