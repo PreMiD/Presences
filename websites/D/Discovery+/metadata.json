@@ -4,19 +4,17 @@
 		"id": "638080361179512853",
 		"name": "Dark_Ville#2756"
 	},
-	"service": "Discovery",
+	"service": "Discovery+",
 	"description": {
 		"en": "Watch HGTV, Food Network, TLC, ID and more plus exclusive originals, all in one place. Start your 7-day free trial today.",
-		"nl": "Welkom bij discovery, the home of real-life entertainment en sport. Abonneer nu en volg volledige seizoenen, bekijk programma’s alvast vooruit of kijk terug wat je hebt gemist."
+		"nl": "Welkom bij discovery+, the home of real-life entertainment en sport. Abonneer nu en volg volledige seizoenen, bekijk programma’s alvast vooruit of kijk terug wat je hebt gemist."
 	},
 	"url": [
 		"discoveryplus.com",
-		"www.discoveryplus.com",
-		"go.discovery.com",
-		"www.go.discovery.com"
+		"www.discoveryplus.com"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/ir2Ysr1.png",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/BQ1MBwk.png",
 	"thumbnail": "https://i.imgur.com/aFaOQgK.png",
 	"color": "#2175d9",
 	"category": "videos",
