@@ -411,94 +411,72 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Shop";
 			presenceData.state =
 				document.querySelector("a.localnav-title")?.textContent;
-		} else {
-			switch (urlpath[num]) {
-				case "studio": {
-					const product = document
-						.querySelector("div.as-designstudio-title>a>img")
-						?.getAttribute("alt");
+		} else if (urlpath[num] === "studio") {
+			const product = document
+				.querySelector("div.as-designstudio-title>a>img")
+				?.getAttribute("alt");
 
-					presenceData.details = strings.shopStudio;
-					presenceData.state = product;
+			presenceData.details = strings.shopStudio;
+			presenceData.state = product;
 
-					if (buttons) {
-						presenceData.buttons = [
-							{
-								label: strings.btnViewStudio.replace("{0}", product),
-								url: `https://www.apple.com/shop/studio/${urlpath[num + 1]}`,
-							},
-						];
-					}
-
-					break;
-				}
-				case "favorites": {
-					presenceData.details = "Shop";
-					presenceData.state = strings.shopFavorites;
-
-					break;
-				}
-				case "account": {
-					presenceData.details = "Shop";
-					presenceData.state = "Account";
-
-					break;
-				}
-				case "accessories": {
-					presenceData.details = "Shop";
-					presenceData.state = strings.shopAccessories;
-
-					break;
-				}
-				case "gift-cards": {
-					presenceData.details = "Shop";
-					presenceData.state = strings.shopGiftCards;
-
-					break;
-				}
-				default:
-					if (
-						urlpath[num] === "browse" &&
-						urlpath[num + 2] === "plan_your_visit"
-					) {
-						presenceData.details = "Shop";
-						presenceData.state = strings.shopPlanVisit;
-					} else if (urlpath[num] === "refurbished") {
-						presenceData.details = "Shop";
-						presenceData.state = strings.shopRefurbished;
-					} else if (urlpath[num] === "bag") {
-						let summary = document.querySelector(
-							"div.rs-summary-value"
-						)?.textContent;
-
-						const perMonth = document.querySelector(
-							"div.rs-summary-value span.nowrap span.visuallyhidden"
-						);
-
-						if (!summary) summary = "$0";
-						else {
-							summary = summary.replace(
-								document.querySelector(
-									"div.rs-summary-value span.nowrap span[aria-hidden='true']"
-								)?.textContent ?? "/mo.",
-								""
-							);
-
-							if (perMonth) {
-								summary = summary.replace(
-									perMonth.textContent,
-									` ${perMonth.textContent}`
-								);
-							}
-						}
-
-						presenceData.details = strings.shopBag;
-						presenceData.state = strings.shopBagSummary.replace("{0}", summary);
-					} else {
-						presenceData.details = "Shop";
-						presenceData.state = strings.other;
-					}
+			if (buttons) {
+				presenceData.buttons = [
+					{
+						label: strings.btnViewStudio.replace("{0}", product),
+						url: `https://www.apple.com/shop/studio/${urlpath[num + 1]}`,
+					},
+				];
 			}
+		} else if (urlpath[num] === "favorites") {
+			presenceData.details = "Shop";
+			presenceData.state = strings.shopFavorites;
+		} else if (urlpath[num] === "account") {
+			presenceData.details = "Shop";
+			presenceData.state = "Account";
+		} else if (urlpath[num] === "accessories") {
+			presenceData.details = "Shop";
+			presenceData.state = strings.shopAccessories;
+		} else if (urlpath[num] === "gift-cards") {
+			presenceData.details = "Shop";
+			presenceData.state = strings.shopGiftCards;
+		} else if (
+			urlpath[num] === "browse" &&
+			urlpath[num + 2] === "plan_your_visit"
+		) {
+			presenceData.details = "Shop";
+			presenceData.state = strings.shopPlanVisit;
+		} else if (urlpath[num] === "refurbished") {
+			presenceData.details = "Shop";
+			presenceData.state = strings.shopRefurbished;
+		} else if (urlpath[num] === "bag") {
+			let summary = document.querySelector("div.rs-summary-value")?.textContent;
+
+			const perMonth = document.querySelector(
+				"div.rs-summary-value span.nowrap span.visuallyhidden"
+			);
+
+			if (!summary) summary = "$0";
+			else {
+				summary = summary.replace(
+					document.querySelector(
+						"div.rs-summary-value span.nowrap span[aria-hidden='true']"
+					)?.textContent ?? "/mo.",
+					""
+				);
+
+				if (perMonth) {
+					summary = summary.replace(
+						perMonth.textContent,
+						` ${perMonth.textContent}`
+					);
+				}
+			}
+
+			presenceData.details = strings.shopBag;
+			presenceData.state = strings.shopBagSummary.replace("{0}", summary);
+		} else {
+			presenceData.details = "Shop";
+			presenceData.state = strings.other;
 		}
 	} else {
 		switch (window.location.hostname) {
