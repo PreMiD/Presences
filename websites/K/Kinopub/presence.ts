@@ -11,6 +11,8 @@ enum Assets {
 }
 
 enum Strings {
+	Play = "Смотрит",
+	Pause = "На паузе",
 	Home = "На главной странице",
 	View = "Смотрит",
 	Search = "Ищет",
@@ -27,6 +29,11 @@ enum Strings {
 	Instructions = "инструкции",
 	Settings = "В настройках",
 	Notifications = "оповещения",
+	OpenLink = "Открыть страницу",
+	Page = "страницу",
+	Serial = "сериала",
+	Movie = "фильма",
+	User = "пользователя",
 }
 
 let video = {
@@ -58,9 +65,10 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("cover"),
 		]),
-		serieName = textContent(".jw-title-primary");
+		serieName = textContent(".jw-title-primary"),
+		{ pathname, href } = document.location;
 
-	switch (document.location.pathname.split("/")[1]) {
+	switch (pathname.split("/")[1]) {
 		case "":
 			presenceData.details = Strings.Home;
 			break;
@@ -96,13 +104,6 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = Strings.View;
 			break;
 
-		case "watchlist":
-			presenceData.details = `${Strings.View} ${Strings.NewEpisodes}`;
-			presenceData.state = "Обновления просмотренного";
-			presenceData.smallImageKey = Assets.View;
-			presenceData.smallImageText = Strings.View;
-			break;
-
 		case "favorites":
 			presenceData.details = `${Strings.View} ${Strings.Bookmarks}`;
 			presenceData.state = document
@@ -118,9 +119,13 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.View;
 			presenceData.smallImageText = Strings.View;
 			break;
+
+		case "watchlist":
 		case "media":
 			presenceData.details = `${Strings.View} ${Strings.NewEpisodes}`;
-			presenceData.state = "Обновления сайта";
+			presenceData.state = `Обновления ${
+				pathname.split("/")[1] === "media" ? "сайта" : "просмотренного"
+			}`;
 			presenceData.smallImageKey = Assets.View;
 			presenceData.smallImageText = Strings.View;
 			break;
@@ -130,7 +135,7 @@ presence.on("UpdateData", async () => {
 				".page-content h3:first-child"
 			).toLowerCase()}`;
 			presenceData.state = textContent(".nav-link.active");
-			if (document.location.pathname.split("/")[2] === "view" && !privacy) {
+			if (pathname.split("/")[2] === "view" && !privacy) {
 				presenceData.details = `${Strings.View} ${Strings.SelectionOne}`;
 				presenceData.state = textContent(".page-content h3:first-child");
 			}
@@ -149,10 +154,10 @@ presence.on("UpdateData", async () => {
 
 		case "kinoblog":
 			presenceData.details = `${Strings.View} ${Strings.Kinoblog}`;
+			presenceData.state = textContent(".nav-link.active");
 			presenceData.smallImageKey = Assets.View;
 			presenceData.smallImageText = Strings.View;
-			presenceData.state = textContent(".nav-link.active");
-			if (document.location.pathname.split("/")[2] === "view") {
+			if (pathname.split("/")[2] === "view") {
 				presenceData.details = `${Strings.Read} ${Strings.Post}`;
 				presenceData.state = textContent(".text-success");
 				presenceData.smallImageKey = Assets.Read;
@@ -161,34 +166,44 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "plugin":
-			presenceData.details = `${Strings.View} ${Strings.Instructions}`;
+			presenceData.details = `${Strings.Read} ${Strings.Instructions}`;
+			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageText = Strings.Read;
 			break;
 
 		case "users":
-			presenceData.details = `${Strings.View} страницу ${
-				!privacy ? textContent(".page-title span") : "пользователя"
+			presenceData.details = `${Strings.View} ${Strings.Page} ${
+				!privacy ? textContent(".page-title span") : Strings.User
 			}`;
 			presenceData.state = textContent(".nav-link.active");
+			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageText = Strings.View;
 			break;
 
 		case "user":
 			presenceData.details = Strings.Settings;
 			presenceData.state = textContent(".nav-item.active");
+			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageText = Strings.View;
 			break;
 
 		case "notification":
 			presenceData.details = `${Strings.View} ${Strings.Notifications}`;
 			presenceData.state = textContent(".nav-link.active");
+			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageText = Strings.View;
 			break;
 
 		case "item":
-			if (document.location.pathname.split("/")[2] === "search") {
+			if (pathname.split("/")[2] === "search") {
 				presenceData.details = `${Strings.Search}: ${
 					document.querySelector<HTMLInputElement>('input[name="query"]').value
 				}`;
+				presenceData.smallImageKey = Assets.Search;
+				presenceData.smallImageText = Strings.Search;
 			} else {
-				presenceData.details = `${Strings.View} страницу ${
-					serieName ? "сериала" : "фильма"
+				presenceData.details = `${Strings.View} ${Strings.Page} ${
+					serieName ? Strings.Serial : Strings.Movie
 				}`;
 				presenceData.state =
 					document.querySelector(
@@ -203,8 +218,8 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = Strings.View;
 				presenceData.buttons = [
 					{
-						label: "Открыть страницу",
-						url: document.location.href,
+						label: Strings.OpenLink,
+						url: href,
 					},
 				];
 
@@ -217,7 +232,9 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = video.paused
 						? Assets.Pause
 						: Assets.Play;
-					presenceData.smallImageText = video.paused ? "На паузе" : "Смотрит";
+					presenceData.smallImageText = video.paused
+						? Strings.Pause
+						: Strings.Play;
 
 					if (video.paused || !time) {
 						delete presenceData.startTimestamp;
