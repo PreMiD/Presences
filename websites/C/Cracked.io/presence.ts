@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing rank upgrades";
 			presenceData.buttons = [
 				{
-					label: "View",
+					label: strings.buttonViewPage,
 					url: href,
 				},
 			];
@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing all help documents";
 				presenceData.buttons = [
 					{
-						label: "View",
+						label: strings.buttonViewPage,
 						url: href,
 					},
 				];
@@ -208,7 +208,6 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	}
-	// }
 
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 	if (!covers && presenceData.largeImageKey !== Assets.Logo)
