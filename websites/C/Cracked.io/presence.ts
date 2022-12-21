@@ -64,8 +64,8 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 		return;
 	}
-	switch (pathname.split("/")[1]) {
-		case "search.php": {
+	switch (pathname.split("/")[1].replace(/[.]php/gm, "")) {
+		case "search": {
 			if (search?.value) {
 				presenceData.details = strings.search;
 				presenceData.state = search.value;
@@ -73,8 +73,8 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Search;
 			break;
 		}
-		case "private.php":
-		case "index.php":
+		case "private":
+		case "index":
 		case "": {
 			const checkForChat = document.querySelector('[name="to"]');
 			if (href.includes("action=conversations"))
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = strings.viewHome;
 			break;
 		}
-		case "upgrade.php": {
+		case "upgrade": {
 			presenceData.details = "Viewing rank upgrades";
 			presenceData.buttons = [
 				{
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
-		case "misc.php": {
+		case "misc": {
 			if (
 				document.querySelector('[class="thead"]')?.textContent === "Forum Rules"
 			) {
