@@ -1,19 +1,19 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "service": "Kinopub",
-  "author": {
-    "id": "257151906038677504",
-    "name": "SHISEN#8023"
-  },
-  "description": {
-    "en": "Website for online watching movies, series, sports broadcasts and concerts",
-    "ru": "Сайт для онлайн просмотра фильмов, сериалов, спортивных трансляций и концертов"
-  },
-  "url": "kinopub.net",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/HAvvvj7.png",
-  "thumbnail": "https://i.imgur.com/TFaoJbL.png",
-  "color": "#1c202b",
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "257151906038677504",
+		"name": "SHISEN#8023"
+	},
+	"service": "Kinopub",
+	"description": {
+		"en": "Website for online watching movies, series, sports broadcasts and concerts",
+		"ru": "Сайт для онлайн просмотра фильмов, сериалов, спортивных трансляций и концертов"
+	},
+	"url": "kinopub.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/HAvvvj7.png",
+	"thumbnail": "https://i.imgur.com/TFaoJbL.png",
+	"color": "#1c202b",
 	"category": "videos",
 	"tags": [
 		"kinopub",
