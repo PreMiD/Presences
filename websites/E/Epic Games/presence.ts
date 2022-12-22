@@ -68,9 +68,7 @@ presence.on("UpdateData", async () => {
 					if (document.querySelector('[id="storeNews"]')) {
 						presenceData.details = "Reading about";
 						presenceData.smallImageKey = "https://i.imgur.com/nese1O7.png";
-						presenceData.state = document
-							.querySelector("title")
-							.textContent.slice(0, 128);
+						presenceData.state = document.querySelector("title").textContent;
 					} else presenceData.details = "Browsing all news";
 					presenceData.buttons = [
 						{
