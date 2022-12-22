@@ -14,6 +14,9 @@ async function getStrings() {
 			watchingLive: "general.watchingLive",
 			live: "general.live",
 			watchingVid: "general.watchingVid",
+			buttonViewPage: "general.buttonViewPage",
+			buttonWatchVideo: "general.buttonWatchVideo",
+			buttonReadArticle: "general.buttonReadArticle",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -68,9 +71,8 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<boolean>("privacy"),
 			]);
 
-	/* deepscan-disable-next-line CONSTANT_CONDITION */
 	if (oldLang !== newLang || !strings) {
-		oldLang = newLang; /* deepscan-disable-line UNUSED_VAR_ASSIGN */
+		oldLang = newLang;
 		strings = await getStrings();
 	}
 
@@ -84,7 +86,7 @@ presence.on("UpdateData", async () => {
 				details: "Viewing Photographical news",
 				buttons: [
 					{
-						label: "View page",
+						label: strings.buttonViewPage,
 						url: href,
 					},
 				],
@@ -93,7 +95,7 @@ presence.on("UpdateData", async () => {
 				details: "Viewing DIU news",
 				buttons: [
 					{
-						label: "View page",
+						label: strings.buttonViewPage,
 						url: href,
 					},
 				],
@@ -102,13 +104,12 @@ presence.on("UpdateData", async () => {
 				details: "Viewing news",
 				buttons: [
 					{
-						label: "View page",
+						label: strings.buttonViewPage,
 						url: href,
 					},
 				],
 			},
 		},
-		storyDate = document.querySelector("span.strydate")?.textContent,
 		authorTitle = document
 			.querySelector("div.Story_story__author__cJoes")
 			?.querySelector("a.jsx-99cc083358cc2e2d")?.textContent,
@@ -131,7 +132,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Viewing ${capitaliseFirstLetter(topic)} news`;
 		presenceData.buttons = [
 			{
-				label: "View page",
+				label: strings.buttonViewPage,
 				url: href,
 			},
 		];
@@ -184,7 +185,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 		presenceData.buttons = [
 			{
-				label: "Watch video",
+				label: strings.buttonWatchVideo,
 				url: href,
 			},
 		];
@@ -238,7 +239,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = document.querySelector(
 			"h1.Story_strytitle__MYXmR"
 		)?.textContent;
-		presenceData.state = storyDate;
+		presenceData.state = document.querySelector("span.strydate")?.textContent;
 		presenceData.largeImageKey = document
 			.querySelector("div.Story_associate__image__bYOH_")
 			?.querySelector("img")?.src;
@@ -261,7 +262,7 @@ presence.on("UpdateData", async () => {
 		}
 		presenceData.buttons = [
 			{
-				label: "Read Article",
+				label: strings.buttonReadArticle,
 				url: href,
 			},
 		];
