@@ -3,6 +3,7 @@ const presence = new Presence({
 });
 
 enum Assets {
+	Logo = "https://i.imgur.com/HAvvvj7.png",
 	Play = "https://i.imgur.com/6s4WyWY.png",
 	Pause = "https://i.imgur.com/PrYtpQb.png",
 	Read = "https://i.imgur.com/wPUmqu5.png",
@@ -56,8 +57,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey: "https://i.imgur.com/HAvvvj7.png",
-			smallImageText: "Kinopub",
+			largeImageKey: Assets.Logo,
 		},
 		[privacy, time, buttons, cover] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
