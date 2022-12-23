@@ -4,6 +4,12 @@
 		"name": "Bas950",
 		"id": "241278257335500811"
 	},
+	"contributors": [
+		{
+			"name": "Anaxes",
+			"id": "567885938160697377"
+		}
+	],
 	"service": "Spotify Podcasts",
 	"altnames": [
 		"스포티파이 팟캐스트"
@@ -23,9 +29,10 @@
 		"developer.spotify.com",
 		"investors.spotify.com",
 		"support.spotify.com",
-		"podcasters.spotify.com"
+		"podcasters.spotify.com",
+		"accounts.spotify.com"
 	],
-	"version": "2.2.12",
+	"version": "2.3.0",
 	"logo": "https://i.imgur.com/q3tKDRA.png",
 	"thumbnail": "https://i.imgur.com/AzNhQ4j.png",
 	"color": "#1ed760",
@@ -55,6 +62,12 @@
 			"id": "cover",
 			"title": "Show Cover",
 			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fad fa-compress-arrows-alt",
 			"value": true
 		}
 	]
