@@ -102,11 +102,11 @@ presence.on("UpdateData", async () => {
 		);
 
 		presenceData.details =
-			document.querySelector(".content strong h1.header a")?.textContent ??
-			"Bilinmeyen İsim";
-		presenceData.state = document.querySelector(
-			".content strong h1.header small"
-		)?.textContent;
+			document.querySelector('[class="ui medium header"]').querySelector("a")
+				?.textContent ?? "Bilinmeyen İsim";
+		presenceData.state = document
+			.querySelector('[class="ui medium header"]')
+			.querySelector("small")?.textContent;
 
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
