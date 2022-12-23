@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData;
 	if (
 		"mediaSession" in navigator &&
-		navigator.mediaSession.metadata !== null &&
+		navigator.mediaSession.metadata &&
 		!document.querySelector<HTMLAudioElement>("audio")?.paused
 	) {
 		presenceData = {
