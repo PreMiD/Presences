@@ -210,6 +210,16 @@ presence.on("UpdateData", async () => {
 					},
 				],
 			},
+			"/collection/episodes": {
+				details: strings.browse,
+				state: "my episodes",
+				buttons: [
+					{
+						label: strings.viewPage,
+						url: href,
+					},
+				],
+			},
 			"/setting": {
 				details: strings.account,
 				buttons: [
