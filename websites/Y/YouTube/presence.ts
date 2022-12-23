@@ -435,6 +435,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "search";
 			presenceData.startTimestamp = browsingStamp;
 		} else if (
+			pathname.includes("/@") ||
 			pathname.includes("/channel") ||
 			pathname.includes("/c") ||
 			pathname.includes("/user")
