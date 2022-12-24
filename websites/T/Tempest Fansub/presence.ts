@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-	const { pathname } = document.location,
+	const { pathname, hostname } = document.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
 			largeImageKey: "https://i.imgur.com/MVWiX8p.png",
@@ -13,14 +13,14 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/dinozor-oyunu/") presenceData.details = "Dino oynuyor.";
 	//arama
 	else if (searchParams.get("s")) {
-		if (location.host === "tempestfansub.com")
+		if (hostname === "tempestfansub.com")
 			presenceData.details = "Bir anime arıyor.";
-		if (location.host === "manga.tempestfansub.com")
+		if (hostname === "manga.tempestfansub.com")
 			presenceData.details = "Bir manga arıyor.";
 		presenceData.state = searchParams.get("s");
 		//Animeler
 	} else if (
-		(location.host === "tempestfansub.com" && pathname === "/") ||
+		(hostname === "tempestfansub.com" && pathname === "/") ||
 		pathname.endsWith("/anime/")
 	)
 		presenceData.details = "Animelere göz atıyor.";
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 		}
 		//Mangalar
 	} else if (
-		location.host.startsWith("manga.") &&
+		hostname.startsWith("manga.") &&
 		(pathname.endsWith("/manga/") || pathname.endsWith("/anasayfa/"))
 	)
 		presenceData.details = "Mangalara göz atıyor.";
@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
 	//Manga okuyor
 	else if (
 		!pathname.includes("/manga/") &&
-		location.host.startsWith("manga.") &&
+		hostname.startsWith("manga.") &&
 		!pathname.endsWith("/anasayfa/")
 	) {
 		try {
