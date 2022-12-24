@@ -23,7 +23,7 @@ function capitalizeFirstLetter(string: string) {
 			string.trim().charAt(0).toUpperCase() +
 			string.trim().slice(1).toLowerCase()
 		);
-	}
+	} else return "Undefined";
 }
 
 enum Assets {
@@ -91,13 +91,15 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing private messages";
 			else if (active) {
 				presenceData.details = strings.viewHome;
-				presenceData.state =
-					active.getAttribute("title")?.toLowerCase().replace("home", "") !== ""
-						? `Category ${active
-								.getAttribute("title")
-								?.toLowerCase()
-								.replace("home", "")}`
-						: "";
+				presenceData.state = !active
+					.getAttribute("title")
+					?.toLowerCase()
+					.replace("home", "")
+					? `Category ${active
+							.getAttribute("title")
+							?.toLowerCase()
+							.replace("home", "")}`
+					: "";
 			} else presenceData.details = strings.viewHome;
 			break;
 		}
