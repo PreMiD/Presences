@@ -103,23 +103,23 @@ presence.on("UpdateData", async () => {
 					?.textContent.trim(),
 				tsplited = title.split(" "),
 				_manga = document.querySelectorAll("div.allc > a");
-			let mangahref = "";
 			for (const element of _manga) {
-				if (element.getAttribute("href"))
-					mangahref = element.getAttribute("href");
+				if (element.getAttribute("href")) {
+					presenceData.buttons = [
+						{
+							label: "Bölümü Aç",
+							url: href,
+						},
+						{
+							label: "Mangayı Aç",
+							url: element.getAttribute("href"),
+						},
+					];
+					break;
+				}
 			}
 			presenceData.details = title.replace(tsplited[tsplited.length - 1], "");
 			presenceData.state = `Bölüm ${tsplited[tsplited.length - 1]} Okuyor.`;
-			presenceData.buttons = [
-				{
-					label: "Bölümü Aç",
-					url: href,
-				},
-				{
-					label: "Mangayı Aç",
-					url: mangahref,
-				},
-			];
 			const imgs = document.querySelectorAll("#readerarea > img");
 			for (const element of imgs) {
 				if (
