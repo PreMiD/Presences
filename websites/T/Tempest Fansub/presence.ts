@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-	const { pathname, hostname } = document.location,
+	const { pathname, hostname, href } = document.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
 			largeImageKey: "https://i.imgur.com/MVWiX8p.png",
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Mangayı Aç",
-				url: location.href,
+				url: href,
 			},
 		];
 		const imgs = document.querySelectorAll(
@@ -101,13 +101,23 @@ presence.on("UpdateData", async () => {
 			const title = document
 					.querySelector("h1.entry-title")
 					?.textContent.trim(),
-				tsplited = title.split(" ");
+				tsplited = title.split(" "),
+				_manga = document.querySelectorAll("div.allc > a");
+			let mangahref = "";
+			for (const element of _manga) {
+				if (element.getAttribute("href"))
+					mangahref = element.getAttribute("href");
+			}
 			presenceData.details = title.replace(tsplited[tsplited.length - 1], "");
 			presenceData.state = `Bölüm ${tsplited[tsplited.length - 1]} Okuyor.`;
 			presenceData.buttons = [
 				{
 					label: "Bölümü Aç",
-					url: location.href,
+					url: href,
+				},
+				{
+					label: "Mangayı Aç",
+					url: mangahref,
 				},
 			];
 			const imgs = document.querySelectorAll("#readerarea > img");
