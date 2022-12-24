@@ -23,12 +23,9 @@ async function getStrings() {
 }
 
 function capitaliseFirstLetter(string: string) {
-	if (string) {
-		return (
-			string.trim().charAt(0).toUpperCase() +
-			string.trim().slice(1).toLowerCase()
-		);
-	}
+	return (
+		string.trim().charAt(0).toUpperCase() + string.trim().slice(1).toLowerCase()
+	);
 }
 
 let video = {
@@ -172,7 +169,7 @@ presence.on("UpdateData", async () => {
 			];
 			delete presenceData.state;
 		}
-	} else if (video && !isNaN(video.duration) && pathname.includes("/video")) {
+	} else if (!isNaN(video?.duration) && pathname.includes("/video")) {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(
 			Math.floor(video.currentTime),
 			Math.floor(video.duration)
