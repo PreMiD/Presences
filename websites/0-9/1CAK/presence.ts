@@ -123,21 +123,6 @@ presence.on("UpdateData", async () => {
 			if (pathname.replace(/_/gm, "").includes(path))
 				presenceData = { ...presenceData, ...data };
 		}
-		// 	switch (pathname.split("/")[1]) {
-		// 		case "weeklytop":
-		// 			presenceData.details = "Viewing weekly top users";
-		// 			break;
-		// 		case "alltimetop":
-		// 			presenceData.details = "Viewing all time top users";
-		// 			break;
-		// 		case "privacy_setting":
-		// 		case "preferences":
-		// 			presenceData.details = "Settings";
-		// 			break;
-		// 		default:
-		// 			presenceData.details = strings.browse;
-		// 			break;
-		// 	}
 	}
 
 	if (pathname !== "/") {
