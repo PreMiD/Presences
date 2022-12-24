@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/videos/")) {
 		const video = document.querySelector("video"),
 			isLive = !!document.querySelector(
-				"div.j83agx80.rgmg9uty.pmk7jnqg.rnx8an3s.fcg2cn6m"
+				"div.x78zum5.xxk0z11 > div.x6s0dn4 > span.x193iq5w"
 			);
 
 		if (privacyMode)
@@ -63,10 +63,9 @@ presence.on("UpdateData", async () => {
 		else {
 			presenceData.details = `Watching a ${isLive ? "live" : "video"} on:`;
 			presenceData.state = `${
-				document.querySelector("span.nc684nl6 > span")?.textContent ??
-				document.querySelector("span.nc684nl6 > a > strong > span")
-					?.textContent ??
-				document.querySelector('[href*="?__tn__=-UC*F"]')?.textContent
+				document.querySelector("span.x193iq5w > strong > span")?.textContent ??
+				document.querySelector("span.x193iq5w > h2 > span > a > strong > span")
+					?.textContent
 			}'s profile`;
 
 			if (isLive) {
