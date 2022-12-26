@@ -249,5 +249,6 @@ presence.on("UpdateData", async () => {
 	if (!showCovers && presenceData.largeImageKey)
 		presenceData.largeImageKey = Assets.Logo;
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
