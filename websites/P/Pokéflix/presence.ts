@@ -20,9 +20,9 @@ async function getStrings() {
 
 enum Assets {
 	Logo = "https://i.imgur.com/cGjh8Tu.png",
-	Play = "https://i.imgur.com/6s4WyWY.png",
-	Pause = "https://i.imgur.com/PrYtpQb.png",
-	Search = "https://i.imgur.com/wYVlwJX.png",
+	Play = "https://i.imgur.com/vKd5zk4.png",
+	Pause = "https://i.imgur.com/GbAMPHI.png",
+	Search = "https://i.imgur.com/UhPgTRn.png",
 }
 
 let video = {
@@ -37,7 +37,7 @@ function textContent(tags: string) {
 }
 
 function capitalizeFirstLetter(string: string) {
-	return string.charAt(0).toUpperCase() + string.slice(1);
+	return string.trim().charAt(0).toUpperCase() + string.trim().slice(1);
 }
 
 presence.on(

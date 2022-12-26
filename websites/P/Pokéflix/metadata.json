@@ -37,7 +37,7 @@
 			"if": {
 				"privacy": false
 			},
-			"title": "Remaining watch time",
+			"title": "Show timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
 		},
