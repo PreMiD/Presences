@@ -32,15 +32,6 @@
 			"value": false
 		},
 		{
-			"id": "showDmUsername",
-			"title": "Show Dm Partner's Username",
-			"icon": "fas fa-message-slash",
-			"value": true,
-			"if": {
-				"privacy": false
-			}
-		},
-		{
 			"id": "buttons",
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
