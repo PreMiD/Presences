@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 			) {
 				pfname = document.querySelector(
 					"#responsive_page_template_content > div > div.profile_small_header_bg > div > div > span.profile_small_header_name > a"
-				).innerText;
+				)?.textContent.trim();
 				if (
 					document.location.pathname.includes("/badges") ||
 					document.location.pathname.includes("/gamecards")
