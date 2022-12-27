@@ -4,6 +4,12 @@
 		"name": "TheDrop.",
 		"id": "293828021134295040"
 	},
+	"contributors": [
+		{
+			"name": "Joony",
+			"id": "405028899798384640"
+		}
+	],
 	"service": "Steam",
 	"description": {
 		"en": "Steam is the ultimate destination for playing, discussing, and creating games.",
@@ -15,9 +21,10 @@
 	},
 	"url": [
 		"steamcommunity.com",
-		"store.steampowered.com"
+		"store.steampowered.com",
+		"help.steampowered.com"
 	],
-	"version": "2.2.14",
+	"version": "3.0.0",
 	"logo": "https://i.imgur.com/cek4hGt.png",
 	"thumbnail": "https://i.imgur.com/vChtnTL.png",
 	"color": "#000000",
