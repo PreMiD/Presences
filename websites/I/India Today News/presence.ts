@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = "India Today News - Photos";
 		presenceData.buttons = [
 			{
-				label: "View article",
+				label: strings.buttonReadArticle,
 				url: href,
 			},
 		];
