@@ -3,7 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	subsection = new URL(document.location.href).searchParams.get("subsection");
-let AppName: HTMLDivElement, title: HTMLTitleElement, pfname: HTMLAnchorElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -46,7 +45,7 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/awards")
 			) {
 				pfname = document
-					.querySelector(
+					.querySelector<HTMLAnchorElement>(
 						"#responsive_page_template_content > div > div.profile_small_header_bg > div > div > span.profile_small_header_name > a"
 					)
 					?.textContent.trim();
@@ -73,7 +72,9 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/videos") ||
 				pathname.includes("/myworkshopfiles")
 			) {
-				pfname = document.querySelector("#HeaderUserInfoName > a").textContent;
+				pfname = document.querySelector<HTMLAnchorElement>(
+					"#HeaderUserInfoName > a"
+				).textContent;
 				if (pathname.includes("/screenshots"))
 					presenceData.state = `Viewing ${pfname}'s screenshots`;
 				else if (pathname.includes("/images"))
@@ -91,7 +92,8 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/friends") ||
 				pathname.includes("/groups")
 			) {
-				title = document.querySelector("head > title").textContent;
+				title =
+					document.querySelector<HTMLTitleElement>("head > title").textContent;
 				if (pathname.includes("/friends")) {
 					if (pathname.includes("/common"))
 						presenceData.state = `Viewing ${title}'s friends in common`;
@@ -132,7 +134,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "search";
 		} else if (pathname.includes("/app/")) {
 			title = document
-				.querySelector("head > title")
+				.querySelector<HTMLTitleElement>("head > title")
 				.textContent.replace("Steam Community :: ", " ");
 			if (pathname.includes("/workshop/")) {
 				presenceData.details = "Steam Workshop";
@@ -214,7 +216,8 @@ presence.on("UpdateData", async () => {
 				).content;
 			} else presenceData.details = "Steam Community Market";
 		} else if (pathname.includes("/workshop")) {
-			title = document.querySelector("head > title").textContent;
+			title =
+				document.querySelector<HTMLTitleElement>("head > title").textContent;
 			presenceData.startTimestamp = browsingTimestamp;
 			if (pathname.includes("/browse/"))
 				presenceData.state = `Searching in ${title} workshop items`;
@@ -260,7 +263,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/app/")) {
-			AppName = document.querySelector("#appHubAppName");
+			AppName = document.querySelector<HTMLDivElement>("#appHubAppName");
 			presenceData.state = AppName.textContent;
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.smallImageKey = "lg";
@@ -312,7 +315,6 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Browsing PC Cafe games...";
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/tags")) {
-			const parts = href.split("/");
 			presenceData.details = "Browsing in Store Tags";
 			presenceData.state =
 				document.querySelector<HTMLTitleElement>("head > title").textContent;
