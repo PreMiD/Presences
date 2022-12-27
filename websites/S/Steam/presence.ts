@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/reviews") ||
 				pathname.includes("/awards")
 			) {
-				pfname = document
+				let pfname = document
 					.querySelector<HTMLAnchorElement>(
 						"#responsive_page_template_content > div > div.profile_small_header_bg > div > div > span.profile_small_header_name > a"
 					)
@@ -72,9 +72,7 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/videos") ||
 				pathname.includes("/myworkshopfiles")
 			) {
-				pfname = document.querySelector<HTMLAnchorElement>(
-					"#HeaderUserInfoName > a"
-				).textContent;
+				let pfname = document.querySelector<HTMLAnchorElement>("#HeaderUserInfoName > a").textContent;
 				if (pathname.includes("/screenshots"))
 					presenceData.state = `Viewing ${pfname}'s screenshots`;
 				else if (pathname.includes("/images"))
@@ -92,8 +90,7 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/friends") ||
 				pathname.includes("/groups")
 			) {
-				title =
-					document.querySelector<HTMLTitleElement>("head > title").textContent;
+				let title = document.querySelector<HTMLTitleElement>("head > title").textContent;
 				if (pathname.includes("/friends")) {
 					if (pathname.includes("/common"))
 						presenceData.state = `Viewing ${title}'s friends in common`;
@@ -133,7 +130,7 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.smallImageKey = "search";
 		} else if (pathname.includes("/app/")) {
-			title = document
+			let title = document
 				.querySelector<HTMLTitleElement>("head > title")
 				.textContent.replace("Steam Community :: ", " ");
 			if (pathname.includes("/workshop/")) {
@@ -216,8 +213,7 @@ presence.on("UpdateData", async () => {
 				).content;
 			} else presenceData.details = "Steam Community Market";
 		} else if (pathname.includes("/workshop")) {
-			title =
-				document.querySelector<HTMLTitleElement>("head > title").textContent;
+			let title = document.querySelector<HTMLTitleElement>("head > title").textContent;
 			presenceData.startTimestamp = browsingTimestamp;
 			if (pathname.includes("/browse/"))
 				presenceData.state = `Searching in ${title} workshop items`;
@@ -263,7 +259,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/app/")) {
-			AppName = document.querySelector<HTMLDivElement>("#appHubAppName");
+			let AppName = document.querySelector<HTMLDivElement>("#appHubAppName");
 			presenceData.state = AppName.textContent;
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.smallImageKey = "lg";
