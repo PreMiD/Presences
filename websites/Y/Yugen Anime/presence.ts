@@ -24,7 +24,6 @@ async function getStrings() {
 		{
 			viewHome: "general.viewHome",
 			viewAnime: "general.viewAnime",
-			watchingSeries: "general.watchingSeries",
 			browse: "general.browsing",
 			play: "general.playing",
 			pause: "general.paused",
