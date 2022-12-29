@@ -189,7 +189,7 @@ presence.on("iFrameData", (data: VideoContext) => {
 	frameData = data;
 });
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang");
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (newLang !== currentLang) {
 		currentLang = newLang;
 		localizedStrings = await presence.getStrings(

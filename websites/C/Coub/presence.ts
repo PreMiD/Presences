@@ -285,7 +285,7 @@ const pages: PageContext[] = [
 		PLAY: "playx1024",
 		PAUSE: "pausex1024",
 	};
-function getStrings(newLang?: string) {
+async function getStrings() {
 	return presence.getStrings(
 		{
 			browsing: "general.browsing",
@@ -293,17 +293,17 @@ function getStrings(newLang?: string) {
 			watchVideo: "general.buttonWatchVideo",
 			viewProfile: "general.buttonViewProfile",
 		},
-		newLang
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
-let currentLang: string,
-	localizedStrings: Awaited<ReturnType<typeof getStrings>>;
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 const startedBrowsingAt = new Date();
 presence.on("UpdateData", async () => {
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
-	if (!localizedStrings || newLang !== currentLang) {
-		currentLang = newLang;
-		localizedStrings = await getStrings(newLang);
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
 	}
 	const query: { [key: string]: unknown } = getQuery(),
 		context = pages.find(x => x.middleware(window, [query]));
@@ -320,7 +320,7 @@ presence.on("UpdateData", async () => {
 
 	const result = await Promise.resolve(
 		context.exec(presence, data, {
-			strings: localizedStrings,
+			strings: strings,
 			query,
 			images: presenceImageKeys,
 			showWatch: await presence
@@ -335,7 +335,7 @@ presence.on("UpdateData", async () => {
 	if (!result) {
 		presence.setActivity({
 			...data,
-			state: localizedStrings.browsing,
+			state: strings.browsing,
 		});
 	} else if (result.details) presence.setActivity(result);
 });
