@@ -93,6 +93,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 		return;
 	}
+	
 	const pages: Record<string, PresenceData> = {
 		"/about": {
 			details: strings.viewing,
