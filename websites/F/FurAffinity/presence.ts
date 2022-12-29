@@ -162,7 +162,7 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = strings.browse;
 		}
 	}
-	if (!search?.value && !presenceData.buttons && pathname !== "/") {
+	if (!presenceData.buttons && pathname !== "/") {
 		presenceData.buttons = [
 			{
 				label: strings.buttonViewPage,
