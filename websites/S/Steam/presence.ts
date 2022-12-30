@@ -72,7 +72,9 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/videos") ||
 				pathname.includes("/myworkshopfiles")
 			) {
-				let pfname = document.querySelector<HTMLAnchorElement>("#HeaderUserInfoName > a").textContent;
+				let pfname = document.querySelector<HTMLAnchorElement>(
+					"#HeaderUserInfoName > a"
+				).textContent;
 				if (pathname.includes("/screenshots"))
 					presenceData.state = `Viewing ${pfname}'s screenshots`;
 				else if (pathname.includes("/images"))
@@ -90,7 +92,8 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/friends") ||
 				pathname.includes("/groups")
 			) {
-				let title = document.querySelector<HTMLTitleElement>("head > title").textContent;
+				let title =
+					document.querySelector<HTMLTitleElement>("head > title").textContent;
 				if (pathname.includes("/friends")) {
 					if (pathname.includes("/common"))
 						presenceData.state = `Viewing ${title}'s friends in common`;
@@ -213,7 +216,8 @@ presence.on("UpdateData", async () => {
 				).content;
 			} else presenceData.details = "Steam Community Market";
 		} else if (pathname.includes("/workshop")) {
-			let title = document.querySelector<HTMLTitleElement>("head > title").textContent;
+			let title =
+				document.querySelector<HTMLTitleElement>("head > title").textContent;
 			presenceData.startTimestamp = browsingTimestamp;
 			if (pathname.includes("/browse/"))
 				presenceData.state = `Searching in ${title} workshop items`;
