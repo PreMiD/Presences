@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/reviews") ||
 				pathname.includes("/awards")
 			) {
-				let pfname = document
+				const pfname = document
 					.querySelector<HTMLAnchorElement>(
 						"#responsive_page_template_content > div > div.profile_small_header_bg > div > div > span.profile_small_header_name > a"
 					)
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/videos") ||
 				pathname.includes("/myworkshopfiles")
 			) {
-				let pfname = document.querySelector<HTMLAnchorElement>(
+				const pfname = document.querySelector<HTMLAnchorElement>(
 					"#HeaderUserInfoName > a"
 				).textContent;
 				if (pathname.includes("/screenshots"))
@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/friends") ||
 				pathname.includes("/groups")
 			) {
-				let title =
+				const title =
 					document.querySelector<HTMLTitleElement>("head > title").textContent;
 				if (pathname.includes("/friends")) {
 					if (pathname.includes("/common"))
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 			} else if (pathname.includes("/home"))
 				presenceData.state = "Browsing the activity page";
 			else {
-				presenceData.smallImageKey = "lg";
+				presenceData.smallImageKey = "https://i.imgur.com/cek4hGt.png";
 				presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 					"head > meta[property='og:image']"
 				).content;
@@ -133,7 +133,7 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.smallImageKey = "search";
 		} else if (pathname.includes("/app/")) {
-			let title = document
+			const title = document
 				.querySelector<HTMLTitleElement>("head > title")
 				.textContent.replace("Steam Community :: ", " ");
 			if (pathname.includes("/workshop/")) {
@@ -210,13 +210,13 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-				presenceData.smallImageKey = "lg";
+				presenceData.smallImageKey = "https://i.imgur.com/cek4hGt.png";
 				presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 					"head > meta[property='og:image']"
 				).content;
 			} else presenceData.details = "Steam Community Market";
 		} else if (pathname.includes("/workshop")) {
-			let title =
+			const title =
 				document.querySelector<HTMLTitleElement>("head > title").textContent;
 			presenceData.startTimestamp = browsingTimestamp;
 			if (pathname.includes("/browse/"))
@@ -263,10 +263,11 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/app/")) {
-			let AppName = document.querySelector<HTMLDivElement>("#appHubAppName");
-			presenceData.state = AppName.textContent;
+			presenceData.state = document.querySelector<HTMLDivElement>(
+				"#appHubAppName"
+			).textContent;
 			presenceData.startTimestamp = browsingTimestamp;
-			presenceData.smallImageKey = "lg";
+			presenceData.smallImageKey = "https://i.imgur.com/cek4hGt.png";
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 				"head > meta[property='og:image']"
 			).content;
@@ -361,8 +362,8 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("/news")) {
 			presenceData.state = "Reading the news...";
 			presenceData.startTimestamp = browsingTimestamp;
-		} else if (pathname.includes("/about")) {
-			presenceData.state = "About";
+		} else if (pathname === "/about") {
+			presenceData.state = "About Steam";
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/recommended")) {
 			presenceData.state = "Browsing recommended games...";
@@ -409,7 +410,7 @@ presence.on("UpdateData", async () => {
 					url: href,
 				},
 			];
-			presenceData.smallImageKey = "lg";
+			presenceData.smallImageKey = "https://i.imgur.com/cek4hGt.png";
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 				"head > meta[property='og:image']"
 			).content;
@@ -425,7 +426,7 @@ presence.on("UpdateData", async () => {
 					url: href,
 				},
 			];
-			presenceData.smallImageKey = "lg";
+			presenceData.smallImageKey = "https://i.imgur.com/cek4hGt.png";
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 				"head > meta[property='og:image']"
 			).content;
