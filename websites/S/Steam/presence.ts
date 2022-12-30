@@ -263,9 +263,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/app/")) {
-			presenceData.state = document.querySelector<HTMLDivElement>(
-				"#appHubAppName"
-			).textContent;
+			presenceData.state =
+				document.querySelector<HTMLDivElement>("#appHubAppName").textContent;
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.smallImageKey = "https://i.imgur.com/cek4hGt.png";
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
