@@ -19,8 +19,8 @@ presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
 			largeImageKey: "logo_big",
-		};
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
+		},
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
