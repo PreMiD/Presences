@@ -331,8 +331,8 @@ presence.on("UpdateData", async () => {
 									break;
 								}
 							}
-							break;
 						}
+						break;
 					}
 				}
 			}
@@ -620,8 +620,8 @@ presence.on("UpdateData", async () => {
 						} else {
 							presenceData.state =
 								"Top selling and top played games across Steam";
-							break;
 						}
+						break;
 					}
 					case "stats": {
 						presenceData.state = "Steam & Games Stats.";
