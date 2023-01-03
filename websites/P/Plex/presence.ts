@@ -181,7 +181,7 @@ async function getShortURL(url: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/FPxlGGE.png"
+		largeImageKey: "https://i.imgur.com/FPxlGGE.png",
 		startTimestamp: browsingTimestamp,
 	};
 

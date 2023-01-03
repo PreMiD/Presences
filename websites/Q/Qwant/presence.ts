@@ -29,7 +29,7 @@ interface ItemMap {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/peAp6sZ.png"
+		largeImageKey: "https://i.imgur.com/peAp6sZ.png",
 		startTimestamp: browsingTimestamp,
 	};
 

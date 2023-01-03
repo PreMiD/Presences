@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "651406405093425152",
 });
 let presenceData: PresenceData = {
-	largeImageKey: "https://i.imgur.com/UR8jlF9.png"
+	largeImageKey: "https://i.imgur.com/UR8jlF9.png",
 };
 
 presence.on("UpdateData", async () => {
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Looking at the download page";
 	else {
 		presenceData = {
-			largeImageKey: "https://i.imgur.com/UR8jlF9.png"
+			largeImageKey: "https://i.imgur.com/UR8jlF9.png",
 		};
 	}
 	presence.setActivity(presenceData);

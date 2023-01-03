@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "776113876605337660",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/hZc3Hcn.png"
+		largeImageKey: "https://i.imgur.com/hZc3Hcn.png",
 	};
 
 presence.on("UpdateData", async () => {

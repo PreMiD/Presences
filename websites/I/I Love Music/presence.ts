@@ -38,7 +38,7 @@ switch (language) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/jO86Aqk.png"
+		largeImageKey: "https://i.imgur.com/jO86Aqk.png",
 	};
 	if (parseInt(document.querySelector("#playstop").textContent) > 0) {
 		switch (language) {

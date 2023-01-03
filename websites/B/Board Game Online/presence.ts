@@ -104,7 +104,7 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/L6BgeAa.png"
+			largeImageKey: "https://i.imgur.com/L6BgeAa.png",
 		},
 		path = location.pathname,
 		query = location.search,

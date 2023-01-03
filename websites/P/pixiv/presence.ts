@@ -10,7 +10,7 @@ const typeURL = new URL(document.location.href),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/D8Lf2t2.png"
+			largeImageKey: "https://i.imgur.com/D8Lf2t2.png",
 		},
 		curPath = document.location.pathname;
 	if (lastPath !== curPath) {

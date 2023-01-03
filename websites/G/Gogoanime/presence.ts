@@ -342,7 +342,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/OnaEYdo.png"
+		largeImageKey: "https://i.imgur.com/OnaEYdo.png",
 		details: state[0],
 		state: detail,
 	};

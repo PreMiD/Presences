@@ -6,7 +6,7 @@ let login;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/rJxhNAw.png"
+		largeImageKey: "https://i.imgur.com/rJxhNAw.png",
 	};
 
 	if (document.location.pathname === "/") {

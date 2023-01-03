@@ -90,7 +90,7 @@ function setActivity(state: string) {
 	presence.setActivity({
 		details: formatDetails(),
 		state,
-		largeImageKey: "https://i.imgur.com/ZRf8Giq.png"
+		largeImageKey: "https://i.imgur.com/ZRf8Giq.png",
 		buttons: generateButtons(),
 	} as PresenceData);
 }

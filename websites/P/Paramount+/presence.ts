@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 	let video: HTMLVideoElement = null;
 	const vidArea = document.querySelector(".video__player-area"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/VWrl85V.jpg"
+			largeImageKey: "https://i.imgur.com/VWrl85V.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname: path } = window.location;

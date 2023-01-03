@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "631166262881550359",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Hjd1K2V.jpg"
+		largeImageKey: "https://i.imgur.com/Hjd1K2V.jpg",
 	},
 	paths = {
 		":": "Home Page",

@@ -30,10 +30,10 @@ presence.on("iFrameData", async (context: VideoContext) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/urgEiF7.png"
+			largeImageKey: "https://i.imgur.com/urgEiF7.png",
 		},
 		browsingData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/urgEiF7.png"
+			largeImageKey: "https://i.imgur.com/urgEiF7.png",
 			details: (await strings).browsing,
 			smallImageKey: "browsing",
 			smallImageText: (await strings).browsing,

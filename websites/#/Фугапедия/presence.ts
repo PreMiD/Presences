@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Делает что-то на Фугапедии",
-			largeImageKey: "https://i.imgur.com/L6kpaCb.jpg"
+			largeImageKey: "https://i.imgur.com/L6kpaCb.jpg",
 			startTimestamp: showTime ? browsingTimestamp : null,
 		},
 		generalSearch = document.querySelector<HTMLInputElement>("#general_search"),

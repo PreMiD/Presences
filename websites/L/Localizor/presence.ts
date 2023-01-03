@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "https://i.imgur.com/b7Go6NC.png"
+			largeImageKey: "https://i.imgur.com/b7Go6NC.png",
 			startTimestamp: browsingTimestamp,
 		},
 		page = document.location.pathname,

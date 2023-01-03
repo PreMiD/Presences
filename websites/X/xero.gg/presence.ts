@@ -11,7 +11,7 @@ function getTimeStamp() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/opZJy1Y.png"
+			largeImageKey: "https://i.imgur.com/opZJy1Y.png",
 		},
 		showChat = await presence.getSetting<boolean>("showchat"),
 		showProfile = await presence.getSetting<boolean>("showprofile");

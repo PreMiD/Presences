@@ -489,7 +489,7 @@ presence.on("UpdateData", async () => {
 		tDetail = await presence.getSetting<string>("tDetail"),
 		tState = await presence.getSetting<string>("tState"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/TblAuvW.png"
+			largeImageKey: "https://i.imgur.com/TblAuvW.png",
 		};
 
 	if (document.location.href.includes("about")) {

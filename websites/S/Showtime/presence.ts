@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 			"#main-container > div > video"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/NF61OBJ.png"
+			largeImageKey: "https://i.imgur.com/NF61OBJ.png",
 		};
 
 	let description;

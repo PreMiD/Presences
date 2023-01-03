@@ -11,7 +11,7 @@ let group: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/wgUEowI.png"
+		largeImageKey: "https://i.imgur.com/wgUEowI.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

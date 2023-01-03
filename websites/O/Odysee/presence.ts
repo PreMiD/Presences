@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
 			".content__viewer--floating"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/GEL8nqd.png"
+			largeImageKey: "https://i.imgur.com/GEL8nqd.png",
 		};
 	if (document.location.pathname === "/" && !floatingViewer)
 		presenceData.details = "Browsing homepage";

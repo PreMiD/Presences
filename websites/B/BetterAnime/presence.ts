@@ -66,7 +66,7 @@ const presence = new Presence({
 		oldLang: "",
 		startedSince: ~~(Date.now() / 1000),
 		presenceData: {
-			largeImageKey: "https://i.imgur.com/zIAmJZs.png"
+			largeImageKey: "https://i.imgur.com/zIAmJZs.png",
 			smallImageKey: "browse",
 		},
 	};

@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showReading"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/ePGzX1S.png"
+			largeImageKey: "https://i.imgur.com/ePGzX1S.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,

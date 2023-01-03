@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 
 	if (!video) {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/J9AyT9N.png"
+			largeImageKey: "https://i.imgur.com/J9AyT9N.png",
 		};
 
 		presenceData.startTimestamp = browsingTimestamp;
@@ -417,7 +417,7 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details: "",
 				state: "",
-				largeImageKey: "https://i.imgur.com/J9AyT9N.png"
+				largeImageKey: "https://i.imgur.com/J9AyT9N.png",
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause

@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/mD1fANc.jpg"
+			largeImageKey: "https://i.imgur.com/mD1fANc.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 

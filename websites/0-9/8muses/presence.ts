@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/GQF8Kiq.png"
+		largeImageKey: "https://i.imgur.com/GQF8Kiq.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (new URLSearchParams(window.location.search).has("s")) {

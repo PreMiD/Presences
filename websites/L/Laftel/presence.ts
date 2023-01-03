@@ -28,7 +28,7 @@ function getQuery() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/xGOEvzT.png"
+		largeImageKey: "https://i.imgur.com/xGOEvzT.png",
 	};
 
 	if (window.location.pathname === "/") presenceData.details = "메인";

@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				state: document.querySelector("body > div.menu.main > div > h2")
 					.textContent,
-				largeImageKey: "https://i.imgur.com/YOmF0LY.png"
+				largeImageKey: "https://i.imgur.com/YOmF0LY.png",
 				startTimestamp: timestamps[0],
 				endTimestamp: timestamps[1],
 				smallImageKey: video.paused ? "pause" : "play",

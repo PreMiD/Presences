@@ -9,7 +9,7 @@ let item: HTMLElement | Element | string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/eZf3wsO.png"
+		largeImageKey: "https://i.imgur.com/eZf3wsO.png",
 		startTimestamp: browsingTimestamp,
 	};
 

@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 		{
 			details,
 			state,
-			largeImageKey: "https://i.imgur.com/vAozqPN.png"
+			largeImageKey: "https://i.imgur.com/vAozqPN.png",
 			smallImageKey,
 			smallImageText,
 			startTimestamp,

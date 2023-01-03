@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/nDCQmhr.png"
+			largeImageKey: "https://i.imgur.com/nDCQmhr.png",
 		},
 		[page, section] = window.location.href
 			.replace("https://tugastrikes.com/", "")

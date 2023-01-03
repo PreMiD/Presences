@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 			},
 		};
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/mJTwQxZ.png"
+		largeImageKey: "https://i.imgur.com/mJTwQxZ.png",
 		smallImageKey: !privacy ? "home" : "",
 		details: "Browsing...",
 		state: "Home Page",

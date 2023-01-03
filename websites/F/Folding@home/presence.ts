@@ -8,7 +8,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/V6FvA5I.png"
+		largeImageKey: "https://i.imgur.com/V6FvA5I.png",
 	};
 
 	presenceData.details = `Contributing to: ${points}`;

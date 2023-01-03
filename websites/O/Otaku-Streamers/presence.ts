@@ -7,7 +7,7 @@ let title, video, timestamps, chapter, blog;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/uAylLfi.png"
+		largeImageKey: "https://i.imgur.com/uAylLfi.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "otaku-streamers.com") {

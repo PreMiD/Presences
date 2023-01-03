@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/LCjuLjp.png"
+			largeImageKey: "https://i.imgur.com/LCjuLjp.png",
 		};
 
 	if (document.location.href.includes("login.tech.tvnz.co.nz")) {

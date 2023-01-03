@@ -12,7 +12,7 @@ let oldLang: string,
 presence.on("UpdateData", async () => {
 	const path = current.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/rrIWGBq.png"
+			largeImageKey: "https://i.imgur.com/rrIWGBq.png",
 		};
 
 	oldLang = newLang;

@@ -44,7 +44,7 @@ presence.on("iFrameData", (data: Video) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/xC6MpG3.png"
+			largeImageKey: "https://i.imgur.com/xC6MpG3.png",
 			details: "Navigue sur Neko-sama",
 		},
 		{ pathname } = document.location,

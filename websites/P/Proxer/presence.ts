@@ -17,7 +17,7 @@ presence.on("iFrameData", (data: VideoData) => {
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/jx65gdz.png"
+			largeImageKey: "https://i.imgur.com/jx65gdz.png",
 			details: "Idle",
 			state: "Browsing Proxer.me",
 		},

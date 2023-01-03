@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 			".vp-video-wrapper .vp-video video"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/OJunR7n.png"
+			largeImageKey: "https://i.imgur.com/OJunR7n.png",
 		};
 
 	if (document.location.pathname === "/") presenceData.details = "Browsing...";

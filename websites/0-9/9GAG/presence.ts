@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 			"top",
 		],
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/t2BG2Fj.png"
+			largeImageKey: "https://i.imgur.com/t2BG2Fj.png",
 			startTimestamp: browsingTimestamp,
 		};
 

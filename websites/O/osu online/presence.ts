@@ -4,7 +4,7 @@ let gameArea: HTMLElement, pauseMenu: HTMLElement;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/P95A0bS.png"
+		largeImageKey: "https://i.imgur.com/P95A0bS.png",
 		startTimestamp: browsingTimestamp,
 	};
 

@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/1afZuaP.png"
+		largeImageKey: "https://i.imgur.com/1afZuaP.png",
 	};
 
 	if (document.querySelector('[style="opacity: .8; font-weight: bold;"]')) {

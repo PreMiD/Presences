@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 	playback = !!document.querySelector(".AT-player video");
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/QUWUPTI.jpg"
+		largeImageKey: "https://i.imgur.com/QUWUPTI.jpg",
 	};
 
 	if (!playback) {

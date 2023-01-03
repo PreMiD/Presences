@@ -22,7 +22,7 @@ let Routes: string[],
 presence.on("UpdateData", async () => {
 	// Presence Data
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/bQPdsZ1.png"
+		largeImageKey: "https://i.imgur.com/bQPdsZ1.png",
 	};
 
 	// Setup Routes & Query

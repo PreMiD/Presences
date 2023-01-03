@@ -15,7 +15,7 @@ let AppName: HTMLElement,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Unknown page",
-		largeImageKey: "https://i.imgur.com/cek4hGt.png"
+		largeImageKey: "https://i.imgur.com/cek4hGt.png",
 	};
 
 	if (document.location.hostname === "steamcommunity.com") {

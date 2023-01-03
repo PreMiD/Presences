@@ -17,7 +17,7 @@ const stripPlatziProfileFlags = (url: string) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/TmaFMhm.jpg"
+			largeImageKey: "https://i.imgur.com/TmaFMhm.jpg",
 		},
 		{ pathname } = document.location,
 		pathNameSplit = pathname.split("/").filter(Boolean);

@@ -6,7 +6,7 @@ const presence = new Presence({
 		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/dGFsGyk.png"
+		largeImageKey: "https://i.imgur.com/dGFsGyk.png",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "https://i.imgur.com/dGFsGyk.png"
+			largeImageKey: "https://i.imgur.com/dGFsGyk.png",
 		});
 	}
 });

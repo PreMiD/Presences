@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 			"div.content > div > div.top-sticky-content span.text-white.text-small"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/EqxZ0d3.png"
+			largeImageKey: "https://i.imgur.com/EqxZ0d3.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

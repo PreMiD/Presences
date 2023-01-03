@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/e8B18gA.png"
+		largeImageKey: "https://i.imgur.com/e8B18gA.png",
 	};
 
 	if (window.location.pathname.startsWith("/haber/")) {

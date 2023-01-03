@@ -26,7 +26,7 @@ let gameStartTimestamp: number = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/x2QZCXF.png"
+			largeImageKey: "https://i.imgur.com/x2QZCXF.png",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 

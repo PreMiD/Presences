@@ -6,7 +6,7 @@ const presence = new Presence({
 		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/3qXaosP.png"
+		largeImageKey: "https://i.imgur.com/3qXaosP.png",
 	};
 
 presence.on("UpdateData", async () => {
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "https://i.imgur.com/3qXaosP.png"
+			largeImageKey: "https://i.imgur.com/3qXaosP.png",
 		});
 	}
 });

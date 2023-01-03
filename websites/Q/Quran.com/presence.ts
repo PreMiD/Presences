@@ -13,7 +13,7 @@ function getElementByXpath(path: string) {
 }
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/9qpIurh.png"
+			largeImageKey: "https://i.imgur.com/9qpIurh.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location;

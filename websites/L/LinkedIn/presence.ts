@@ -11,7 +11,7 @@ function unescapeHTML(string: string): string {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/2E9VuHw.png"
+			largeImageKey: "https://i.imgur.com/2E9VuHw.png",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;

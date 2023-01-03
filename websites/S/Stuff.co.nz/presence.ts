@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/g1ncFAD.png"
+		largeImageKey: "https://i.imgur.com/g1ncFAD.png",
 	};
 
 	if (!document.querySelectorAll(".sics-component__headline__title")[0]) {

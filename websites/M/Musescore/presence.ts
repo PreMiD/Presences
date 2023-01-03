@@ -23,7 +23,7 @@ function getTimeLeft(Time: string[]): number[] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/tx2Qvq4.png"
+		largeImageKey: "https://i.imgur.com/tx2Qvq4.png",
 	};
 
 	// ALL ON THE .ORG website

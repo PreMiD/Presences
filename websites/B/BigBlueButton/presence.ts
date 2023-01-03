@@ -93,7 +93,7 @@ setInterval(getData, 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData = {
-		largeImageKey: "https://i.imgur.com/qjmxCvj.png"
+		largeImageKey: "https://i.imgur.com/qjmxCvj.png",
 		smallImageKey: inCall ? userState : "logo",
 		smallImageText: inCall
 			? userState === "screen"

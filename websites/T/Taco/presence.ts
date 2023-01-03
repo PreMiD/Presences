@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/L5J9p8y.png"
+		largeImageKey: "https://i.imgur.com/L5J9p8y.png",
 	};
 	switch (location.pathname.split("/")[1]) {
 		case "guide":

@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "622436057866043434",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/oSYAi8F.png"
+		largeImageKey: "https://i.imgur.com/oSYAi8F.png",
 	};
 
 presence.on("UpdateData", async () => {
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "https://i.imgur.com/oSYAi8F.png"
+			largeImageKey: "https://i.imgur.com/oSYAi8F.png",
 		});
 	}
 });

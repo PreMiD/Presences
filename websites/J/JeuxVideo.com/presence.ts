@@ -14,7 +14,7 @@ function truncateString(text: string, length: number): string {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/EnEXs1P.jpg"
+		largeImageKey: "https://i.imgur.com/EnEXs1P.jpg",
 	};
 
 	if (document.location.pathname === "/")

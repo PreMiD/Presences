@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 				document.querySelectorAll("video")[0].className !== "previewVideo"),
 		curPath = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/eL8ARU0.png"
+			largeImageKey: "https://i.imgur.com/eL8ARU0.png",
 		};
 
 	if (lastPath !== curPath || lastPlaybackState !== playback) {

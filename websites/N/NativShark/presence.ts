@@ -22,7 +22,7 @@ const presence: Presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/bnlBeoi.png"
+			largeImageKey: "https://i.imgur.com/bnlBeoi.png",
 			startTimestamp,
 		},
 		{ pathname } = window.location;

@@ -28,7 +28,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/hC6q0vV.png"
+		largeImageKey: "https://i.imgur.com/hC6q0vV.png",
 	};
 
 	if (document.location.pathname.includes("Player")) {

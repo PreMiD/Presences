@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
 	const path: string = document.location.pathname,
 		ayrac: string[] = path.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/CBsEtCf.png"
+			largeImageKey: "https://i.imgur.com/CBsEtCf.png",
 		};
 	// Hizmetlerimiz
 	if (path.startsWith("/Hizmetlerimiz")) {

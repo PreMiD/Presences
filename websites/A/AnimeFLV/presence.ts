@@ -21,7 +21,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Nsp0rTW.jpg"
+		largeImageKey: "https://i.imgur.com/Nsp0rTW.jpg",
 	};
 
 	if (

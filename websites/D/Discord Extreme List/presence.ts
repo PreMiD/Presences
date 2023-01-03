@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ewofSNN.png"
+		largeImageKey: "https://i.imgur.com/ewofSNN.png",
 	};
 
 	if ((await presence.getSetting<boolean>("incognito")) === false) {
