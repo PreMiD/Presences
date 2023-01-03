@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo_big",
 		};
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
-		if (oldLang !== newLang || !strings) {
+	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
@@ -111,6 +111,6 @@ async function getStrings(lang: string) {
 			browsing: "general.browsing",
 			reading: "general.reading",
 		},
-	   await presence.getSetting<string>("lang").catch(() => "en");
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
