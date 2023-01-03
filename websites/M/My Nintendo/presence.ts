@@ -2,6 +2,16 @@ const presence = new Presence({
 	clientId: "680498892651233310",
 });
 
+async function getStrings() {
+	return presence.getStrings(
+		{
+			browsing: "general.browsing",
+			reading: "general.reading",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
@@ -104,13 +114,3 @@ presence.on("UpdateData", async () => {
 			return presence.setActivity();
 	}
 });
-
-async function getStrings(lang: string) {
-	return presence.getStrings(
-		{
-			browsing: "general.browsing",
-			reading: "general.reading",
-		},
-		await presence.getSetting<string>("lang").catch(() => "en")
-	);
-}
