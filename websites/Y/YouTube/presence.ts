@@ -416,7 +416,7 @@ presence.on("UpdateData", async () => {
 		else presence.setActivity(presenceData);
 	} else if (hostname === "www.youtube.com" || hostname === "youtube.com") {
 		const presenceData: PresenceData = {
-				largeImageKey: "yt_lg",
+				largeImageKey: "https://i.imgur.com/o5injgg.png"
 			},
 			browsingStamp = Math.floor(Date.now() / 1000);
 		let searching = false;
@@ -646,7 +646,7 @@ presence.on("UpdateData", async () => {
 		else presence.setActivity(presenceData);
 	} else if (hostname === "studio.youtube.com") {
 		const presenceData: PresenceData = {
-				largeImageKey: "yt_lg",
+				largeImageKey: "https://i.imgur.com/o5injgg.png"
 				smallImageKey: "studio",
 				smallImageText: "Youtube Studio",
 			},

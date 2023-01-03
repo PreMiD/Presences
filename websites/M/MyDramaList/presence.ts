@@ -11,7 +11,7 @@ interface FilmData {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "mdl-logo",
+			largeImageKey: "https://i.imgur.com/EmAGyTj.png"
 			startTimestamp: browsingTimestamp,
 		},
 		coverEnabled = await presence.getSetting("cover");

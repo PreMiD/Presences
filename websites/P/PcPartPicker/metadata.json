@@ -10,7 +10,7 @@
 	},
 	"url": "pcpartpicker.com",
 	"regExp": "([a-z]{2}.|)pcpartpicker.com",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/Lpgj0ZZ.png",
 	"thumbnail": "https://i.imgur.com/vWF3XN6.png",
 	"color": "#c3a041",

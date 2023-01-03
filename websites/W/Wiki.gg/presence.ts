@@ -6,7 +6,7 @@ let title: string, wikiTitle: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/4YN40As.png"
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,

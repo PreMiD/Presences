@@ -16,7 +16,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "zdf",
+			largeImageKey: "https://i.imgur.com/5mxv8gX.png"
 		},
 		video = document.querySelector<HTMLVideoElement>(
 			"div.zdfplayer-video_wrapper video"

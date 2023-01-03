@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "main",
+		largeImageKey: "https://i.imgur.com/uryXMgr.png"
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	if (document.location.hostname === "superiorservers.co") {

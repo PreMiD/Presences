@@ -84,7 +84,7 @@ const presence = new AppleTV({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "apple-tv",
+		largeImageKey: "https://i.imgur.com/9yI21cv.png"
 		details: "Browsing...",
 		smallImageKey: "browse",
 		startTimestamp: data.startedSince,

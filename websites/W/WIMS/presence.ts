@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 		state: exercise,
 		startTimestamp: timestamp,
 		endTimestamp: timeleft,
-		largeImageKey: "wims_lg",
+		largeImageKey: "https://i.imgur.com/E9FdAjM.png"
 	};
 	if (loggedout) presence.setActivity();
 	else presence.setActivity(presenceData);

@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/i9pIvqR.png"
 		},
 		songTitle = document.querySelector<HTMLAnchorElement>(
 			'div[data-test="footer-track-title"] > a'

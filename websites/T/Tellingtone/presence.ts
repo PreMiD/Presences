@@ -21,7 +21,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/L4eWRh1.png"
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
