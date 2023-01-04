@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 	const incognito = await presence.getSetting<boolean>("incognito"),
 		showTimestamp = await presence.getSetting<boolean>("showTimestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
-		newLang = await presence.getSetting<string>("lang");
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (!oldLang || oldLang !== newLang) {
 		oldLang = newLang;
 		strings = await presence.getStrings(
