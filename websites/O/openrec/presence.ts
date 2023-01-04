@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = title ? title.textContent : "Title not found...";
 		presenceData.state = game ? game.textContent : "Game not found...";
-		presenceData.largeImageKey = "https://i.imgur.com/60hrnT3.jpg",
+		presenceData.largeImageKey = "https://i.imgur.com/60hrnT3.jpg";
 		presenceData.smallImageKey = live
 			? "live"
 			: video.paused

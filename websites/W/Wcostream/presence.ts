@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = "Searching";
 	}
-	if (!cover) presenceData.largeImageKey = "https://i.imgur.com/SDiZrOe.png",
+	if (!cover) presenceData.largeImageKey = "https://i.imgur.com/SDiZrOe.png";
 	if (!buttons) delete presenceData.buttons;
 	if (!timestamps) {
 		delete presenceData.startTimestamp;

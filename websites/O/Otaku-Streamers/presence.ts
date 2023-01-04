@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = "Unable to Read Page";
 		}
 	} else if (window.location.hostname === "beta.otaku-streamers.com") {
-		presenceData.largeImageKey = "https://i.imgur.com/uAylLfi.png",
+		presenceData.largeImageKey = "https://i.imgur.com/uAylLfi.png";
 		switch (path) {
 			case "/":
 			case "/index.php":

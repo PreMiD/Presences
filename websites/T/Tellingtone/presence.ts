@@ -94,7 +94,8 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (!showCover) presenceData.largeImageKey = "https://i.imgur.com/L4eWRh1.png",
+	if (!showCover)
+		presenceData.largeImageKey = "https://i.imgur.com/L4eWRh1.png";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
