@@ -29,7 +29,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = { largeImageKey: "logo" },
-		newLang = await presence.getSetting<string>("lang");
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
