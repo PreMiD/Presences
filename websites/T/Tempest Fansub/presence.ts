@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
 	const { pathname, hostname, href } = document.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/MVWiX8p.png",
+			largeImageKey: "https://i.imgur.com/ppTaAAl.png",
 		},
 		searchParams = new URLSearchParams(location.search);
 	//Dino
