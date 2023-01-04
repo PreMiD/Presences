@@ -63,7 +63,7 @@ function RefreshData() {
 				presenceData.state = `${extraPageNumber}.strana`;
 		}
 	}
-	presenceData.largeImageKey = "mojevideo";
+	presenceData.largeImageKey = "https://i.imgur.com/hZc3Hcn.png";
 }
 
 setInterval(RefreshData, 1000);

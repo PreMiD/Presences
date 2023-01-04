@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = title
 			? (title as HTMLElement).textContent
 			: "Title not found...";
-		presenceData.largeImageKey = "logo";
+		presenceData.largeImageKey = "https://i.imgur.com/oSYAi8F.png",
 
 		if (title) presence.setActivity(presenceData, !audio.paused);
 	} else {

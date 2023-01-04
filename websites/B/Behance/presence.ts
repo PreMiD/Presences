@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "reading";
 		}
 	}
-	if (!image) presenceData.largeImageKey = "logo";
+	if (!image) presenceData.largeImageKey = "https://i.imgur.com/XyGiJIR.png",
 	if (!buttons) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });

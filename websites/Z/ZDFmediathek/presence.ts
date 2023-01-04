@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 			}
 		} else {
 			// Video-on-demand
-			presenceData.largeImageKey = "zdf";
+			presenceData.largeImageKey = "https://i.imgur.com/5mxv8gX.png";
 			presenceData.smallImageKey = "play";
 			presenceData.smallImageText = (await strings).play;
 

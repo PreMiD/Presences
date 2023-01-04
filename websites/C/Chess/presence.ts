@@ -300,7 +300,8 @@ presence.on("UpdateData", async () => {
 											Math.floor(video.currentTime),
 											Math.floor(video.duration)
 										);
-									presenceData.largeImageKey = "chess";
+									presenceData.largeImageKey =
+										"https://i.imgur.com/LEtYrKg.png";
 									presenceData.details = "Watching video";
 									presenceData.state = document.title;
 									if (video.paused) {

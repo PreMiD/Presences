@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = (
 			document.querySelectorAll(".primary-relation-name")[0] as HTMLElement
 		).textContent;
-		presenceData.largeImageKey = "large_img";
+		presenceData.largeImageKey = "https://i.imgur.com/OCAWBbv.png";
 		presenceData.smallImageKey = video.paused ? "paused" : "playing";
 		presenceData.smallImageText = video.paused
 			? (await strings).pause

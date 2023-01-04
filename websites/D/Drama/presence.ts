@@ -13,7 +13,7 @@ presence.on("UpdateData", () => {
 
 	switch (true) {
 		case document.location.pathname.includes("/d/"):
-			presenceData.largeImageKey = "dramagg";
+			presenceData.largeImageKey = "https://i.imgur.com/tA4eeXJ.png";
 			presenceData.smallImageKey = "reading";
 			presenceData.smallImageText = "Reading a thread";
 			presenceData.details = `Viewing Thread: ${

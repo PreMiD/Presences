@@ -308,7 +308,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else {
 		//Generico
-		presenceData.largeImageKey = "logo_ds";
+		presenceData.largeImageKey = "https://i.imgur.com/vCJqRBO.png";
 		presenceData.smallImageText = "Navigando...";
 	}
 

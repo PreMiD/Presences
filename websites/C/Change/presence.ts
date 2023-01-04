@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".mbxs span strong") ??
 			document.querySelector<HTMLElement>("p.type-weak")
 		).textContent;
-		presenceData.largeImageKey = "logo";
+		presenceData.largeImageKey = "https://i.imgur.com/BwMtgWb.jpg",
 		presenceData.buttons = [
 			{
 				label: "View Petition",

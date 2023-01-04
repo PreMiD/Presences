@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/3K3skPd.png",
+			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -154,7 +154,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (!cover) presenceData.largeImageKey = "logo";
+	if (!cover) presenceData.largeImageKey = "https://i.imgur.com/3K3skPd.png",
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	if (presenceData.details) presence.setActivity(presenceData);

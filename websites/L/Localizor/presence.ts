@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
 
 	if (!time) delete presenceData.startTimestamp;
 	if (!images && presenceData.largeImageKey)
-		presenceData.largeImageKey = "logo";
+		presenceData.largeImageKey = "https://i.imgur.com/b7Go6NC.png",
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

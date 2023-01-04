@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
    theme = getCookie("nuxt-theme");
 
   if (!theme) 
-    presenceData.largeImageKey = "logo";
+    presenceData.largeImageKey = "https://i.imgur.com/6A7Q1dP.png",
    else 
     presenceData.largeImageKey = `${theme}`;
   

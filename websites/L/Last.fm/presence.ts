@@ -154,7 +154,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = artwork.includes("player_default_album")
 				? "lastfm"
 				: artwork.replace("/174s/", "/1024s/");
-		} else presenceData.largeImageKey = "lastfm";
+		} else presenceData.largeImageKey = "https://i.imgur.com/ZmDhLly.png";
 
 		presenceData.details = "Listening to:";
 		presenceData.state = document

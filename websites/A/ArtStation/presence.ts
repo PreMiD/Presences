@@ -171,7 +171,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "portfolio";
 		presenceData.smallImageText = "Viewing portfolio";
 	}
-	if (!image) presenceData.largeImageKey = "logo";
+	if (!image) presenceData.largeImageKey = "https://i.imgur.com/hHlsZac.png",
 	if (!button) delete presenceData.buttons;
 	if (!time) {
 		delete presenceData.startTimestamp;

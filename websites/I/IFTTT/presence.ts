@@ -202,7 +202,7 @@ presence.on("UpdateData", async () => {
 
 					presenceData.details = "My Services";
 					if (category) presenceData.state = category;
-					presenceData.largeImageKey = "logo_big";
+					presenceData.largeImageKey = "https://i.imgur.com/1d8TEw1.png";
 					presenceData.smallImageText = strings.browsing;
 					presenceData.smallImageKey = "reading";
 					break;
