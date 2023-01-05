@@ -25,8 +25,7 @@ async function getStrings() {
 function capitalizeFirstLetter(string: string) {
 	if (!string) return "Undefined";
 	return (
-		string.trim().charAt(0).toUpperCase() +
-		string.trim().slice(1).toLowerCase()
+		string.trim().charAt(0).toUpperCase() + string.trim().slice(1).toLowerCase()
 	);
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
