@@ -11,8 +11,9 @@
 		"de": "Beste Musik App für Charts, Rap und Gaming. Kostenlos Radio hören mit 15+ Musik-Streams. Höre auf verschiedenen Musik-Channels deinen Lieblingssound – täglich neu zusammengestellt von unseren Musikenthusiasten."
 	},
 	"url": [
-		"www.reyfm.de",
-		"status.reyfm.de"
+		"rey.fm",
+		"www.rey.fm",
+		"status.rey.fm"
 	],
 	"version": "1.3.3",
 	"logo": "https://i.imgur.com/hNoHWQK.png",
