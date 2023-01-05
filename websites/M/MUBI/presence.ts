@@ -98,9 +98,9 @@ presence.on("UpdateData", async () => {
 		case "notebook": {
 			if (document.querySelector('[class="css-dve9fb earvnqh7"]')) {
 				presenceData.details = "Reading notebook interview about:";
-				presenceData.state = document
-					.querySelector('[class="css-dve9fb earvnqh7"]')
-					?.textContent?.slice(0, 128);
+				presenceData.state = document.querySelector(
+					'[class="css-dve9fb earvnqh7"]'
+				)?.textContent;
 			} else presenceData.details = "Reading all notebook interviews";
 			presenceData.buttons = [
 				{

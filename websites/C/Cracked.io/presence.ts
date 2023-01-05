@@ -18,12 +18,11 @@ async function getStrings() {
 	);
 }
 function capitalizeFirstLetter(string: string) {
-	if (string) {
-		return (
-			string.trim().charAt(0).toUpperCase() +
-			string.trim().slice(1).toLowerCase()
-		);
-	}
+	if (!string)  return "Undefined"
+	return (
+		string.trim().charAt(0).toUpperCase() +
+		string.trim().slice(1).toLowerCase()
+	);
 }
 
 enum Assets {
@@ -91,13 +90,15 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing private messages";
 			else if (active) {
 				presenceData.details = strings.viewHome;
-				presenceData.state =
-					active.getAttribute("title")?.toLowerCase().replace("home", "") !== ""
-						? `Category ${active
-								.getAttribute("title")
-								?.toLowerCase()
-								.replace("home", "")}`
-						: "";
+				presenceData.state = !active
+					.getAttribute("title")
+					?.toLowerCase()
+					.replace("home", "")
+					? `Category ${active
+							.getAttribute("title")
+							?.toLowerCase()
+							.replace("home", "")}`
+					: "";
 			} else presenceData.details = strings.viewHome;
 			break;
 		}
