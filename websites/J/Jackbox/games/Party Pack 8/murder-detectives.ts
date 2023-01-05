@@ -19,12 +19,12 @@ export function getPresenceData({
 			break;
 		}
 		case "choosing": {
-			if (prompt === "Which case do you want to investigate?")
+			if (prompt.text === "Which case do you want to investigate?")
 				presenceData.state = "Choosing a case to investigate";
 			else if (
-				prompt ===
+				prompt.text ===
 					"[header]WRONG[/header][section]Try again in 5 seconds...[/section]" ||
-				prompt === "Choose a guest to target." ||
+				prompt.text === "Choose a guest to target." ||
 				(prompt as string).startsWith("Guess which detective brought ")
 			)
 				presenceData.state = "Murdering guests";
