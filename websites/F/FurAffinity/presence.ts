@@ -14,10 +14,9 @@ async function getStrings() {
 	);
 }
 function imgPath(path: string, hostname: string) {
-	if (path) {
-		if (path.includes(hostname)) return `https://${path.replace("//", "")}`;
-		else return `https://${hostname}${path}`;
-	} else return Assets.Logo;
+	if (!path) return Assets.Logo;
+	if (path.includes(hostname)) return `https://${path.replace("//", "")}`;
+	else return `https://${hostname}${path}`;
 }
 enum Assets {
 	Logo = "https://i.imgur.com/AYTzoMo.png",
