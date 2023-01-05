@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "695817459206324265",
+		"name": "parr1s"
+	},
+	"service": "CapCut",
+	"description": {
+		"en": "Free video editor for all your needs. A simple, efficient video editing platform that suits you"
+	},
+	"url": [
+		"capcut.com",
+		"www.capcut.com"
+	],
+    "version": "1.0.0",
+	"logo": "https://i.imgur.com/NER1VPJ.png",
+	"thumbnail": "https://i.imgur.com/n9RgZKI.png",
+	"color": "#383838",
+	"category": "other",
+	"tags": [
+		"video-editor",
+		"editor",
+		"online"
+	]
+}
