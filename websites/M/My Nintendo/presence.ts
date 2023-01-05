@@ -19,10 +19,9 @@ presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/eywFbXQ.png",
-		};
-
+		},
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	oldLang = newLang;
-	newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (!strings || oldLang !== newLang) strings = await getStrings();
 
 	switch (path[0]) {
