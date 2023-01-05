@@ -30,7 +30,7 @@ async function getStrings() {
 			buttonViewProfile: "general.buttonViewProfile",
 			viewSkin: "namemc.viewSkin",
 		},
-		await presence.getSetting<string>("lang")
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 
@@ -38,7 +38,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang"),
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (oldLang !== newLang || !strings) {

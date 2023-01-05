@@ -9,7 +9,7 @@ async function getStrings() {
 			viewSeries: "general.buttonViewSeries",
 			watchEpisode: "general.buttonViewEpisode",
 		},
-		await presence.getSetting<string>("lang")
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 		},
 		[buttons, newLang] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<string>("lang"),
+			presence.getSetting<string>("lang").catch(() => "en"),
 		]);
 
 	if (oldLang !== newLang || !strings) {

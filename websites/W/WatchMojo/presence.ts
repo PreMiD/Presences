@@ -23,7 +23,7 @@ const presence = new Presence({
 				buttonWatchVideo: "general.buttonWatchVideo",
 				buttonPlayTrivia: "watchmojo.buttonPlayTrivia",
 			},
-			await presence.getSetting<string>("lang")
+			await presence.getSetting<string>("lang").catch(() => "en")
 		);
 	},
 	capitalize = (s: string) => {
@@ -63,7 +63,7 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang"),
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		showBrowsing = await presence.getSetting<boolean>("browse"),
 		showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
