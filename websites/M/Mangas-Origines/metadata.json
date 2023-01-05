@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "Mangas-Origines",
+  "author": {
+    "id": "470569212453191698",
+    "name": "Onelots.#0007"
+  },
+  "description": {
+    "en": "Read Comics on Mangas-Origines."
+  },
+  "url": [
+    "mangas-origines.fr",
+    "x.mangas-origines.fr"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/MqvvhSw.png",
+  "thumbnail": "https://i.imgur.com/NInXya0.png",
+  "color": "#eb11ee",
+  "tags": [
+    "comics",
+    "manga",
+    "scantrad",
+    "origines",
+    "scans"
+  ],
+  "category": "other"
+}
