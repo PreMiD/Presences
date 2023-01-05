@@ -5,9 +5,11 @@ const presence = new Presence({
 // Redirect to iframe source, to prevent loss of progress
 if (
 	document.querySelectorAll("frame")[1] &&
-	document.baseURI !== document.querySelectorAll("frame")[1].src
+	document.baseURI !== document.querySelectorAll("frame")[1].getAttribute("src")
 )
-	window.location.replace(document.querySelectorAll("frame")[1].src);
+	window.location.replace(
+		document.querySelectorAll("frame")[1].getAttribute("src")
+	);
 
 // Check whether loggedout
 let loggedout = false;

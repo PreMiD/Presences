@@ -12,7 +12,7 @@ export function getPresenceData({
 			return { state: "Waiting" };
 		}
 		case "drawing": {
-			if (playerState.prompt === "an animation of yourself")
+			if (playerState.prompt.text === "an animation of yourself")
 				return { state: "Drawing an animation of themselves" };
 			else return { state: "Drawing an animation" };
 		}
