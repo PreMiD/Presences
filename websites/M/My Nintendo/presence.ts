@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 
 	oldLang = newLang;
 	newLang = await presence.getSetting<string>("lang").catch(() => "en");
-	if (!strings || oldLang !== newLang) strings = await getStrings(newLang);
+	if (!strings || oldLang !== newLang) strings = await getStrings();
 
 	switch (path[0]) {
 		// Reward Categories
