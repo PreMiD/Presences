@@ -33,8 +33,8 @@ else if (document.location.pathname.startsWith("/resource/")) {
 }  else if (document.location.pathname.startsWith("/editor/")) {
     presenceData.details = "Editing project :"
     //const name = document.querySelector(".arco-layout-header.top-nav .draft-input");
-    const name = document.querySelector("#arco-input arco-input-size-default draft-input");
-    presenceData.state = `${name.defaultValue}`
+    const name = document.querySelector<HTMLInputElement>("#arco-layout-header-top-nav-draft-input").defaultValue;
+    presenceData.state = `${name}`
 }
 else presenceData.details = "Browsing...";
 
