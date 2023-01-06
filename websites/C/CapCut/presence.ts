@@ -14,7 +14,7 @@ if (document.location.pathname === "/")
 
 else if (document.location.pathname.startsWith("/resource/")) {
         presenceData.details = "Viewing resource";
-            
+             
 } else if (document.location.pathname.startsWith("/tools/")) {
     presenceData.details = "Viewing tools";
 
@@ -32,8 +32,9 @@ else if (document.location.pathname.startsWith("/resource/")) {
 
 }  else if (document.location.pathname.startsWith("/editor/")) {
     presenceData.details = "Editing project :"
-    const name = document.querySelector(".arco-layout-header.top-nav .draft-input").defaultValue;
-    presenceData.state = `${name}`
+    //const name = document.querySelector(".arco-layout-header.top-nav .draft-input");
+    const name = document.querySelector("#arco-input arco-input-size-default draft-input");
+    presenceData.state = `${name.defaultValue}`
 }
 else presenceData.details = "Browsing...";
 
