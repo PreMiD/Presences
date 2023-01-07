@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "Vodafone FM",
+  "author": {
+    "id": "180867904135233536",
+    "name": "AnOmniMoose#9999"
+  },
+  "description": {
+    "en": "Vodafone FM Portuguese radio"
+  },
+  "url": "vodafone.fm",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/6IUf3O6.png",
+  "thumbnail": "https://i.imgur.com/nhRns9W.png",
+  "color": "#e60000",
+  "tags": [
+    "radio",
+    "vodafone",
+    "fm"
+  ],
+  "category": "music"
+}
