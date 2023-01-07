@@ -12,20 +12,18 @@ presence.on("UpdateData", async () => {
 		details: "Listening to music",
 	};
 
-	const playButton = document.getElementById("play");
-	if (playButton.classList.contains("hidden")) {
+	if (document.querySelector("#play").classList.contains("hidden")) {
 		presenceData.smallImageKey = "play";
-		presenceData.smallImageText = (await strings).play
+		presenceData.smallImageText = (await strings).play;
 	} else {
 		presenceData.smallImageKey = "pause";
 		presenceData.smallImageText = (await strings).pause;
 	}
 
-	const artistElement = document.getElementById("artist_name");
-	if (artistElement) {
-		const songElement = document.getElementById("song_name");
+	const artistElement = document.querySelector("#artist_name"),
+		songElement = document.querySelector("#song_name");
+	if (artistElement && songElement)
 		presenceData.state = `${artistElement.title} - ${songElement.title}`;
-	}
 
 	presence.setActivity(presenceData);
 });
