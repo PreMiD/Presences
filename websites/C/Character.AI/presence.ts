@@ -9,9 +9,9 @@ const presenceData: PresenceData = {
     startTimestamp: browsingTimestamp,
 };
 
-if (document.location.pathname === "/")
+if (document.location.pathname === "/"){
     presenceData.details = "In the Homepage";
-
+}
 else if (document.location.pathname.startsWith("/chat")) {
         presenceData.details = "Chatting with";
 
@@ -19,16 +19,15 @@ else if (document.location.pathname.startsWith("/chat")) {
         .querySelector("head > title")
         .textContent.replace("Character.AI - ", "");
         
+        let pict = document
+        .querySelector("meta[property='og:image']")
+        .getAttribute("content")
+
+        presenceData.largeImageKey = `${pict.replace("80", "400")}`
         presenceData.state = `${char}`;
-
-        let profile = document
-                .querySelector('meta[name="og:image"]')
-                .getAttribute("content");
-
-        presenceData.largeImageKey = `${profile.replace("80", "400")}`
         presenceData.buttons = [
             { label: `Chat ${char}`, url: document.location.href },
-        ];
+        ]; 
              
 } else if (document.location.pathname.startsWith("/feed")) {
     presenceData.details = "Browsing the feed";
