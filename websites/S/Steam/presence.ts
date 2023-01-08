@@ -308,9 +308,7 @@ presence.on("UpdateData", async () => {
 						presenceData.startTimestamp = browsingTimestamp;
 						if (pathArray[3])
 							presenceData.state = `Viewing "${gname}" group ${pathArray[3]}`;
-						else {
-							presenceData.state = `Viewing a group: ${gname}`;
-						}
+						else presenceData.state = `Viewing a group: ${gname}`;
 						break;
 					}
 				}
