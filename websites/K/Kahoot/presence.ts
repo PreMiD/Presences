@@ -61,7 +61,7 @@ async function getStrings() {
 			liveCourse: "kahoot.liveCourse",
 			liveCourseActivity: "kahoot.liveCourseActivity",
 		},
-		await presence.getSetting<string>("lang")
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 		},
 		[buttons, newLang] = await Promise.all([
 			await presence.getSetting<boolean>("buttons"),
-			await presence.getSetting<string>("lang"),
+			await presence.getSetting<string>("lang").catch(() => "en"),
 		]);
 
 	oldLang ??= newLang;
