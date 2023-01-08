@@ -20,10 +20,9 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = (await strings).pause;
 	}
 
-	const artistElement = document.querySelector("#artist_name"),
-		songElement = document.querySelector("#song_name");
-	if (artistElement && songElement)
-		presenceData.state = `${artistElement.title} - ${songElement.title}`;
+	const artist = document.querySelector("#artist_name")?.textContent,
+		song = document.querySelector("#song_name")?.textContent;
+	if (artist && song) presenceData.state = `${artist} - ${song}`;
 
 	presence.setActivity(presenceData);
 });
