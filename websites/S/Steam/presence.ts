@@ -306,31 +306,10 @@ presence.on("UpdateData", async () => {
 							.querySelector<HTMLTitleElement>("head > title")
 							.textContent.replace("Steam Community :: Group :: ", "");
 						presenceData.startTimestamp = browsingTimestamp;
-						if (pathArray[3] === undefined)
-							presenceData.state = `Viewing a group: ${gname}`;
+						if (pathArray[3])
+							presenceData.state = `Viewing "${gname}" group ${pathArray[3]}`;
 						else {
-							switch (pathArray[3]) {
-								case "announcements": {
-									presenceData.state = `Viewing "${gname}" group announcements`;
-									break;
-								}
-								case "discussions": {
-									presenceData.state = `Viewing "${gname}" group discussions`;
-									break;
-								}
-								case "events": {
-									presenceData.state = `Viewing "${gname}" group events`;
-									break;
-								}
-								case "members": {
-									presenceData.state = `Viewing "${gname}" group members`;
-									break;
-								}
-								case "comments": {
-									presenceData.state = `Viewing "${gname}" group comments`;
-									break;
-								}
-							}
+							presenceData.state = `Viewing a group: ${gname}`;
 						}
 						break;
 					}
