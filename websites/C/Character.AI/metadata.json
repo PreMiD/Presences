@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "695817459206324265",
+		"name": "parr1s"
+	},
+	"service": "Character.AI",
+	"description": {
+		"en": "Character.AI lets you create Characters and talk to them. Intelligent agents live here!",
+		"id": "Character.AI memungkinkan Anda membuat Karakter dan berbicara dengan mereka. Kecerdasan buatan disini!"
+	},
+	"url": [
+		"beta.character.ai"
+	],
+    "version": "1.0.0",
+	"logo": "https://i.imgur.com/eIpvMGf.png",
+	"thumbnail": "https://i.imgur.com/JLvKKH1.png",
+	"color": "#abc1ff",
+	"category": "other",
+	"tags": [
+		"artificial-intelligence",
+		"ai",
+		"social"
+	]
+}
