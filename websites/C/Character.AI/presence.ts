@@ -37,6 +37,7 @@ const presenceData: PresenceData = {
                     { label: `Chat ${char}`, url: document.location.href },
                 ]; 
             } else {
+                // group/rooms chat
                 presenceData.details = "Chatting in room";
                 presenceData.state = `${title}`;
             }
