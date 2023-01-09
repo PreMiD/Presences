@@ -6,53 +6,86 @@ browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 const presenceData: PresenceData = {
     largeImageKey: "https://i.imgur.com/eIpvMGf.png",
-
     startTimestamp: browsingTimestamp,
-};
+},
+{ pathname, href } = document.location;
 
-if (document.location.pathname === "/"){
-    presenceData.details = "In the Homepage";
-}
-else if (document.location.pathname.startsWith("/chat")) {
-        presenceData.details = "Chatting with";
+    switch (pathname.split("/")[1]) {
+        case "":
+            presenceData.details = "In the Homepage";
+            break;
 
-        let char = document
-        .querySelector("head > title")
-        .textContent.replace("Character.AI - ", "");
+        case "chat":
+            presenceData.details = "Chatting with";
+
+            let char = document
+            .querySelector("head > title")
+            .textContent.replace("Character.AI - ", "");
+            
+            let pict = document
+            .querySelector("meta[property='og:image']")
+            .getAttribute("content");
+
+            let title = document
+            .querySelector(".chattitle.p-0.pe-1.m-0")
+            .textContent;
+
+            if (pict = true){
+                presenceData.largeImageKey = `${pict.replace("80", "400")}`
+                presenceData.state = `${char}`;
+                presenceData.buttons = [
+                    { label: `Chat ${char}`, url: document.location.href },
+                ]; 
+            } else {
+                presenceData.details = "Chatting in room";
+                presenceData.state = `${title}`;
+            }
+            break;
         
-        let pict = document
-        .querySelector("meta[property='og:image']")
-        .getAttribute("content")
+        case "feed":
+            presenceData.details = "Browsing the feed";
+            break;
 
-        presenceData.largeImageKey = `${pict.replace("80", "400")}`
-        presenceData.state = `${char}`;
-        presenceData.buttons = [
-            { label: `Chat ${char}`, url: document.location.href },
-        ]; 
-             
-} else if (document.location.pathname.startsWith("/feed")) {
-    presenceData.details = "Browsing the feed";
+        case "post":
+            let user = document.querySelector(".p-0.m-0").textContent;
+            let title = document.querySelector(".pb-2").textContent;
+                
+            presenceData.details = "Viewing a post";
+            presenceData.state = `${title} - ${user}`
+            break;
 
-} else if (document.location.pathname.startsWith("/post")) {
-    presenceData.details = "Viewing a post";
+        case "posts":
+            let title = document.querySelector(".ps-2").textContent;
+            let pict = document.querySelector(".sb-avatar__image").src;
 
-} else if (document.location.pathname.startsWith("/signup")){
-    presenceData.details = "Signing up";
+            presenceData.details = "Browsing posts";
+            presenceData.state = `\"${title}\"`;
+            presenceData.smallImageKey = `${pict.replace("80", "400")}`;
+            break;
 
-} else if (document.location.pathname.startsWith("/character/create")){
-    presenceData.details = "Creating a character";
+        case "signup":
+            presenceData.details = "Signing up";
+            break;
 
-} else if (document.location.pathname.startsWith("/chats")){
-    presenceData.details = "Browsing chats";
+        case "character":
+            if (pathname.split("/")[2] === "create"){
+            presenceData.details = "Creating a character";
+                }
+            presenceData.details = "Creating a character";
+            break;
 
-} else if (document.location.pathname.startsWith("/community")) {
-    presenceData.details = "Viewing the community tab";
+        case "chats":
+            presenceData.details = "Browsing chats";
+            break;
 
-} else if (document.location.pathname.startsWith("/profile")) {
-    presenceData.details = "Viewing my profile";
-    
+        case "community":
+            presenceData.details = "Viewing the community tab";
+            break;
+
+        case "profile":
+            presenceData.details = "Viewing my profile";
+            break;
 }
-else presenceData.details = "Browsing...";
 
 if (presenceData.details) presence.setActivity(presenceData);
 else presence.setActivity();

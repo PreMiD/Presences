@@ -9,9 +9,7 @@
 		"en": "Character.AI lets you create Characters and talk to them. Intelligent agents live here!",
 		"id": "Character.AI memungkinkan Anda membuat Karakter dan berbicara dengan mereka. Kecerdasan buatan disini!"
 	},
-	"url": [
-		"beta.character.ai"
-	],
+	"url": "beta.character.ai",
     "version": "1.0.0",
 	"logo": "https://i.imgur.com/eIpvMGf.png",
 	"thumbnail": "https://i.imgur.com/JLvKKH1.png",
