@@ -8,7 +8,7 @@ const presenceData: PresenceData = {
     largeImageKey: "https://i.imgur.com/eIpvMGf.png",
     startTimestamp: browsingTimestamp,
 },
-{ pathname, href } = document.location;
+{ pathname } = document.location;
 
     switch (pathname.split("/")[1]) {
         case "":
@@ -22,25 +22,15 @@ const presenceData: PresenceData = {
             .querySelector("head > title")
             .textContent.replace("Character.AI - ", "");
             
-            let pict = document
+            let img = document
             .querySelector("meta[property='og:image']")
             .getAttribute("content");
 
-            let title = document
-            .querySelector(".chattitle.p-0.pe-1.m-0")
-            .textContent;
-
-            if (pict = true){
-                presenceData.largeImageKey = `${pict.replace("80", "400")}`
+                presenceData.largeImageKey = `${img.replace("80", "400")}`
                 presenceData.state = `${char}`;
                 presenceData.buttons = [
                     { label: `Chat ${char}`, url: document.location.href },
                 ]; 
-            } else {
-                // group/rooms chat
-                presenceData.details = "Chatting in room";
-                presenceData.state = `${title}`;
-            }
             break;
         
         case "feed":
@@ -48,16 +38,17 @@ const presenceData: PresenceData = {
             break;
 
         case "post":
-            let user = document.querySelector(".p-0.m-0").textContent;
-            let title = document.querySelector(".pb-2").textContent;
+            let title3 = document
+            .querySelector("head > title")
+            .textContent
                 
             presenceData.details = "Viewing a post";
-            presenceData.state = `${title} - ${user}`
+            presenceData.state = `${title3}`
             break;
 
         case "posts":
-            let title = document.querySelector(".ps-2").textContent;
-            let pict = document.querySelector(".sb-avatar__image").src;
+            let title = document.querySelector(".d-flex.flex-row.align-items-center").textContent;
+            let pict = document.querySelector(".sb-avatar__image").getAttribute("src");
 
             presenceData.details = "Browsing posts";
             presenceData.state = `\"${title}\"`;
