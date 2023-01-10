@@ -3,7 +3,8 @@ const presence = new Presence({
 	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		pause: "general.paused",
+		listeningMusic: "general.listeningMusic",
 	});
 
 presence.on("UpdateData", async () => {
