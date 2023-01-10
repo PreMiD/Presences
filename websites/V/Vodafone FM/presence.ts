@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.querySelector("#play").classList.contains("hidden")) {
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = "https://i.imgur.com/xiZprpt.png";
 		presenceData.smallImageText = (await strings).play;
 	} else {
 		presenceData.smallImageKey = "pause";
