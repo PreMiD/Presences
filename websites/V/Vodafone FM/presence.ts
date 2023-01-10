@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "https://i.imgur.com/xiZprpt.png";
 		presenceData.smallImageText = (await strings).play;
 	} else {
-		presenceData.smallImageKey = "pause";
+		presenceData.smallImageKey = "https://i.imgur.com/w1jwJTh.png";
 		presenceData.smallImageText = (await strings).pause;
 	}
 
