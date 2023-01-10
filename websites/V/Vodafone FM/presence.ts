@@ -29,6 +29,5 @@ presence.on("UpdateData", async () => {
 	if (cover && !cover.src.includes("/images/nocover.png"))
 		presenceData.largeImageKey = cover.src;
 
-
 	presence.setActivity(presenceData);
 });
