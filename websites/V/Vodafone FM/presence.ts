@@ -25,5 +25,10 @@ presence.on("UpdateData", async () => {
 		song = document.querySelector("#song_name")?.textContent;
 	if (artist && song) presenceData.state = `${artist} - ${song}`;
 
+	const cover = document.querySelector<HTMLImageElement>("#cover");
+	if (cover && !cover.src.includes("/images/nocover.png"))
+		presenceData.largeImageKey = cover.src;
+
+
 	presence.setActivity(presenceData);
 });
