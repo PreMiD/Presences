@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo_512",
+		largeImageKey: "https://i.imgur.com/6IUf3O6.png",
 		details: "Listening to music",
 	};
 
