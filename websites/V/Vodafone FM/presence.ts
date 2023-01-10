@@ -10,7 +10,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/6IUf3O6.png",
-		details: "Listening to music",
+		details: (await strings).listeningMusic,
 	};
 
 	if (document.querySelector("#play").classList.contains("hidden")) {
