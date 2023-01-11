@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 				const searchParam = new URLSearchParams(search).get("tab"),
 					profileName = document
 						.querySelector("span.p-nickname")
-						.textContent.trim();
+						?.textContent.trim();
 				presenceData.buttons = [{ label: "View Profile", url: href }];
 				if (cover) {
 					presenceData.largeImageKey = `${
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `Browsing repository ${repository.owner}/${repository.name}`;
 					presenceData.state = `Viewing file ${document
 						.querySelector("h2#blob-path > strong")
-						.textContent.trim()} at ${repository.target}`;
+						?.textContent.trim()} at ${repository.target}`;
 				} else if (pathname.includes("/issues")) {
 					if (pathname.includes("/issues/")) {
 						if (pathname.includes("new")) {
@@ -145,11 +145,13 @@ presence.on("UpdateData", async () => {
 							}
 							presenceData.details = `Looking at issue #${repository.id}`;
 							presenceData.state = `${
-								document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
-									.textContent
+								document
+									.querySelector<HTMLAnchorElement>("a.author")
+									?.textContent?.trim() ??
+								document.querySelector('[href="#top"]')?.textContent?.trim()
 							} - ${
 								document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
-									.textContent
+									?.textContent
 							}`;
 							presenceData.buttons = [{ label: "View Issue", url: href }];
 						}
@@ -181,12 +183,12 @@ presence.on("UpdateData", async () => {
 					}
 					presenceData.details = `Looking at pull request #${repository.id}`;
 					presenceData.state = `${
-						document.querySelectorAll<HTMLAnchorElement>(
-							"a.author.Link--primary"
-						)[0].textContent
+						document.querySelector<HTMLAnchorElement>("a.author.Link--primary")
+							?.textContent ??
+						document.querySelector('[class*="author Link"]')?.textContent
 					} - ${
 						document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
-							.textContent
+							?.textContent
 					}`;
 					presenceData.buttons = [{ label: "View Pull Request", url: href }];
 				} else if (pathname.endsWith("/discussions")) {
@@ -208,10 +210,10 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `Looking at discussion #${repository.id}`;
 					presenceData.state = `${
 						document.querySelectorAll<HTMLAnchorElement>("a.author")[0]
-							.textContent
+							?.textContent
 					} - ${
 						document.querySelector<HTMLHeadingElement>("h1.gh-header-title")
-							.textContent
+							?.textContent
 					}`;
 					presenceData.buttons = [{ label: "View Discussion", url: href }];
 				} else if (
@@ -235,7 +237,7 @@ presence.on("UpdateData", async () => {
 
 					presenceData.state = document.querySelector<HTMLAnchorElement>(
 						"nav a.js-selected-navigation-item.selected.menu-item"
-					).textContent;
+					)?.textContent;
 				} else {
 					if (privacy) {
 						presenceData.details = "Browsing a repository";
@@ -258,7 +260,7 @@ presence.on("UpdateData", async () => {
 				}
 				presenceData.details = "Viewing an organization";
 				presenceData.state =
-					document.querySelector<HTMLHeadingElement>("h1").textContent;
+					document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 				if (cover) {
 					presenceData.largeImageKey = `${
 						document.querySelector<HTMLImageElement>("div > img").src
@@ -309,7 +311,7 @@ presence.on("UpdateData", async () => {
 				const searchParam = new URLSearchParams(search).get("tab"),
 					profileName = document
 						.querySelector("span.p-nickname")
-						.textContent.trim();
+						?.textContent.trim();
 				presenceData.buttons = [{ label: "View Profile", url: href }];
 				if (cover) {
 					presenceData.largeImageKey = `${
