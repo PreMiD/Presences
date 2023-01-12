@@ -11,7 +11,7 @@
 		"nl": "FurAffinity is een furry kunst- en mediawebsite, waar je je eigen profiel kunt aanmaken en kunst van duizenden gebruikers kunt delen, liken en becommentariëren."
 	},
 	"url": "www.furaffinity.net",
-	"version": "1.0.10",
+	"version": "1.1.0",
 	"logo": "https://i.imgur.com/AYTzoMo.png",
 	"thumbnail": "https://i.imgur.com/qoVAM68.jpg",
 	"color": "#353b45",
@@ -22,58 +22,32 @@
 	],
 	"settings": [
 		{
-			"id": "browse",
-			"title": "Show Browsing Art",
-			"icon": "fas fa-paint-brush",
-			"value": true
+			"id": "lang",
+			"multiLanguage": true
 		},
 		{
-			"id": "category",
-			"title": "Show Browsing Category",
-			"icon": "fas fa-paint-brush",
-			"value": true
-		},
-		{
-			"id": "profile",
-			"title": "Show Browsing Profile",
-			"icon": "fas fa-user",
-			"value": true
-		},
-		{
-			"id": "journal",
-			"title": "Show Create Journal",
-			"icon": "fas fa-edit",
-			"value": true
-		},
-		{
-			"id": "search",
-			"title": "Show Search",
-			"icon": "fas fa-search",
-			"value": true
-		},
-		{
-			"id": "account",
-			"title": "Account Settings",
-			"icon": "fas fa-id-card",
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
 			"value": false
 		},
 		{
-			"id": "notes",
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
 			"if": {
-				"account": true
-			},
-			"title": "Show Notes",
-			"icon": "fas fa-sticky-note",
-			"value": false
+				"privacy": false
+			}
 		},
 		{
-			"id": "submissions",
+			"id": "covers",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": false,
 			"if": {
-				"account": true
-			},
-			"title": "Show Latest Submissions",
-			"icon": "fas fa-paint-brush",
-			"value": false
+				"privacy": false
+			}
 		}
 	]
 }
