@@ -17,12 +17,11 @@ async function getStrings() {
 	);
 }
 function capitalizeFirstLetter(string: string) {
-	if (string) {
-		return (
-			string.trim().charAt(0).toUpperCase() +
-			string.trim().slice(1).toLowerCase()
-		);
-	} else return "Undefined";
+	if (!string) return "Undefined";
+	return (
+		string.trim().charAt(0).toUpperCase() +
+		string.trim().slice(1).toLowerCase()
+	);
 }
 function imgPath(path: string, hostname: string) {
 	if (!path) return Assets.Logo;
