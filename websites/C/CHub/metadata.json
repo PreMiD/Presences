@@ -1,0 +1,51 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "873178118213472286",
+		"name": "CharlesWithC#7777"
+	},
+	"service": "CHub",
+	"description": {
+		"en": "CHub is the most advanced Drivers Hub solution for Euro Truck Simulator 2 / American Truck Simulator Virtual Trucking Companies."
+	},
+	"url": [
+		"drivershub.charlws.com",
+		"map.charlws.com",
+		"wiki.charlws.com",
+		"hub.atmvtc.com",
+		"hub.gokboru.net.tr",
+		"hub.lsavtc.com",
+		"hub.globaltrucking.uk",
+		"hub.mdlogistics.ga",
+		"drivershub.ets2mcg.org"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/Ut1y4n3.png",
+	"thumbnail": "https://i.imgur.com/jez4qv5.png",
+	"color": "#2fc1f7",
+	"category": "games",
+	"tags": [
+		"ets2",
+		"ats",
+		"scs",
+		"drive",
+		"truck",
+		"hub",
+		"vtc"
+	],
+	"readLogs": true,
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"id": "timestamp",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		}
+	]
+}
