@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 	path = path.replaceAll("/nighty", "");
 	if (title.length === 2) dhname = title[1].replace(/^[.\s]+|[.\s]+$/g, "");
 	let presenceData: PresenceData = {
-		largeImageKey: "chub",
+		largeImageKey: "https://i.imgur.com/Ut1y4n3.png",
 		smallImageText: "chub.page",
 		details: dhname,
 		buttons: [{ label: "View Drivers Hub", url: document.URL }],
