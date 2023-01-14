@@ -1,13 +1,13 @@
 const presence = new Presence({
-    clientId: "1061324603022114998",
-  }),
+  clientId: "1061324603022114998",
+}),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-      largeImageKey: "https://i.imgur.com/eIpvMGf.png",
-      startTimestamp: browsingTimestamp,
-    },
+    largeImageKey: "https://i.imgur.com/eIpvMGf.png",
+    startTimestamp: browsingTimestamp,
+  },
     { pathname } = document.location;
 
   switch (pathname.split("/")[1]) {
@@ -19,8 +19,8 @@ presence.on("UpdateData", () => {
       presenceData.details = "Chatting with";
 
       let char = document
-          .querySelector("head > title")
-          .textContent.replace("Character.AI - ", ""),
+        .querySelector("head > title")
+        .textContent.replace("Character.AI - ", ""),
         img = document
           .querySelector("meta[property='og:image']")
           .getAttribute("content");
