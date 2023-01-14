@@ -20,9 +20,8 @@ const presenceData: PresenceData = {
 
             let char = document
             .querySelector("head > title")
-            .textContent.replace("Character.AI - ", "");
-            
-            let img = document
+            .textContent.replace("Character.AI - ", ""),
+            img = document
             .querySelector("meta[property='og:image']")
             .getAttribute("content");
 
