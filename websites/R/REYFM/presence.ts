@@ -107,15 +107,15 @@ presence.on("UpdateData", async () => {
 	let showFormat3 = false;
 
 	if (info) {
-		if (document.location.hostname === "status.reyfm.de")
+		if (document.location.hostname === "status.rey.fm")
 			presenceData.details = "Viewing status page";
-		else if (document.location.hostname === "www.reyfm.de") {
+		else if (document.location.hostname === "rey.fm") {
 			if (document.location.pathname.includes("/bots")) {
 				presenceData.details = "Viewing bots";
 				presenceData.buttons = [
 					{
 						label: "View Bots",
-						url: "https://www.reyfm.de/bots",
+						url: "https://rey.fm/bots",
 					},
 				];
 			} else if (document.location.pathname.includes("/discord-bot")) {
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Bot",
-						url: "https://www.reyfm.de/discord-bot",
+						url: "https://rey.fm/discord-bot",
 					},
 				];
 			} else if (document.location.pathname.includes("/partner"))
@@ -146,7 +146,7 @@ presence.on("UpdateData", async () => {
 	if (elapsed) presenceData.startTimestamp = browsingTimestamp;
 
 	if (
-		document.location.hostname === "www.reyfm.de" &&
+		document.location.hostname === "rey.fm" &&
 		document.location.pathname === "/"
 	) {
 		if (
@@ -173,7 +173,7 @@ presence.on("UpdateData", async () => {
 					presenceData.endTimestamp = Date.parse(channel.timeEnd);
 					showFormat3 = true;
 					presenceData.buttons = [
-						{ label: "Listen along!", url: `https://reyfm.de/${channel.name}` },
+						{ label: "Listen along!", url: `https://rey.fm/station/${channel.name}` },
 					];
 				} else {
 					artist = document.querySelector(
@@ -216,7 +216,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = cover;
 		}
 	} else if (
-		document.location.hostname === "www.reyfm.de" &&
+		document.location.hostname === "rey.fm" &&
 		document.querySelector("#channel-player") !== null
 	) {
 		const channel = channels.find(
