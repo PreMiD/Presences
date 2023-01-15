@@ -102,18 +102,18 @@ presence.on("UpdateData", async () => {
 	}
 
 	const Domain2Abbr: { [key: string]: string } = {
-		"drivershub.charlws.com": "chub",
-		"hub.atmvtc.com": "atm",
-		"hub.gokboru.net.tr": "gokboru",
-		"hub.lsavtc.com": "lsa",
-		"hub.globaltrucking.uk": "gt",
-		"hub.mdlogistics.ga": "md",
-		"drivershub.ets2mcg.org": "ets2mcg",
+		"drivershub.charlws.com": "https://i.imgur.com/Ut1y4n3.png",
+		"hub.atmvtc.com": "https://i.imgur.com/lpMijkw.png",
+		"hub.gokboru.net.tr": "https://i.imgur.com/Qdw8368.png",
+		"hub.lsavtc.com": "https://i.imgur.com/HMsiMjy.png",
+		"hub.globaltrucking.uk": "https://i.imgur.com/36CrJ31.png",
+		"hub.mdlogistics.ga": "https://i.imgur.com/1Np33gE.jpg",
+		"drivershub.ets2mcg.org": "https://i.imgur.com/sHkVyEL.png",
 	};
 	if (Object.keys(Domain2Abbr).includes(host))
 		presenceData.largeImageKey = Domain2Abbr[host];
 	if (!host.endsWith(".charlws.com") && Object.keys(Domain2Abbr).includes(host))
-		presenceData.smallImageKey = "chub";
+		presenceData.smallImageKey = "https://i.imgur.com/Ut1y4n3.png";
 
 	if (!buttons) delete presenceData.buttons;
 	if (timestamp) presenceData.startTimestamp = browsingTimestamp;
