@@ -173,7 +173,10 @@ presence.on("UpdateData", async () => {
 					presenceData.endTimestamp = Date.parse(channel.timeEnd);
 					showFormat3 = true;
 					presenceData.buttons = [
-						{ label: "Listen along!", url: `https://rey.fm/station/${channel.name}` },
+						{
+							label: "Listen along!",
+							url: `https://rey.fm/station/${channel.name}`,
+						},
 					];
 				} else {
 					artist = document.querySelector(
