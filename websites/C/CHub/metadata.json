@@ -33,7 +33,6 @@
 		"hub",
 		"vtc"
 	],
-	"readLogs": true,
 	"settings": [
 		{
 			"id": "buttons",
