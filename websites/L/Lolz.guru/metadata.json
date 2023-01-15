@@ -4,12 +4,16 @@
 		"name": "Livixx",
 		"id": "502948927809781763"
 	},
-	"service": "Lolz.guru",
+	"service": "Lolzteam",
 	"description": {
 		"en": "LZT (lolzteam) - a forum about games, ways to earn and giveaways",
 		"ru": "LZT (lolzteam, лолзтим) - форум об играх, способы заработка и раздачи"
 	},
-	"url": "lolz.guru",
+	"url": [
+		"lolz.guru",
+		"zelenka.guru",
+		"lolz.live"
+	],
 	"version": "1.0.5",
 	"logo": "https://i.imgur.com/du58qsy.jpg",
 	"thumbnail": "https://i.imgur.com/7yywlIW.jpg",
