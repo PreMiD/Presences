@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
 		case "chat":
 			presenceData.details = "Chatting with";
 
-			let char = document
+			const char = document
 					.querySelector("head > title")
 					.textContent.replace("Character.AI - ", ""),
 				img = document
@@ -37,20 +37,20 @@ presence.on("UpdateData", () => {
 			break;
 
 		case "post":
-			let title3 = document.querySelector("head > title").textContent;
+			const title3 = document.querySelector("head > title").textContent;
 
 			presenceData.details = "Viewing a post";
 			presenceData.state = `${title3}`;
 			break;
 
 		case "posts":
-			let title = document.querySelector(
+			const title = document.querySelector(
 					".d-flex.flex-row.align-items-center"
 				).textContent,
 				pict = document.querySelector(".sb-avatar__image").getAttribute("src");
 
 			presenceData.details = "Browsing posts";
-			presenceData.state = `\"${title}\"`;
+			presenceData.state = `"${title}"`;
 			presenceData.smallImageKey = `${pict.replace("80", "400")}`;
 			break;
 
