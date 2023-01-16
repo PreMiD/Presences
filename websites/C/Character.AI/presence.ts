@@ -18,17 +18,17 @@ presence.on("UpdateData", () => {
 		case "chat":
 			presenceData.details = "Chatting with";
 
-			const char = document
+			/*const char = document
 					.querySelector("head > title")
 					.textContent.replace("Character.AI - ", ""),
 				img = document
 					.querySelector("meta[property='og:image']")
-					.getAttribute("content");
+					.getAttribute("content");*/
 
-			presenceData.largeImageKey = `${img.replace("80", "400")}`;
-			presenceData.state = `${char}`;
+			presenceData.largeImageKey = `${document.querySelector("meta[property='og:image']").getAttribute("content").replace("80", "400")}`;
+			presenceData.state = `${document.querySelector("head > title").textContent.replace("Character.AI - ", "")}`;
 			presenceData.buttons = [
-				{ label: `Chat ${char}`, url: document.location.href },
+				{ label: `Chat ${document.querySelector("head > title").textContent.replace("Character.AI - ", "")}`, url: document.location.href },
 			];
 			break;
 
@@ -37,21 +37,21 @@ presence.on("UpdateData", () => {
 			break;
 
 		case "post":
-			const title3 = document.querySelector("head > title").textContent;
+			//const title3 = document.querySelector("head > title").textContent;
 
 			presenceData.details = "Viewing a post";
-			presenceData.state = `${title3}`;
+			presenceData.state = `${document.querySelector("head > title").textContent}`;
 			break;
 
 		case "posts":
-			const title = document.querySelector(
+			/*const title = document.querySelector(
 					".d-flex.flex-row.align-items-center"
 				).textContent,
-				pict = document.querySelector(".sb-avatar__image").getAttribute("src");
+				pict = document.querySelector(".sb-avatar__image").getAttribute("src");*/
 
 			presenceData.details = "Browsing posts";
-			presenceData.state = `"${title}"`;
-			presenceData.smallImageKey = `${pict.replace("80", "400")}`;
+			presenceData.state = `"${document.querySelector(".d-flex.flex-row.align-items-center").textContent}"`;
+			presenceData.smallImageKey = `${document.querySelector(".sb-avatar__image").getAttribute("src").replace("80", "400")}`;
 			break;
 
 		case "signup":
@@ -59,10 +59,9 @@ presence.on("UpdateData", () => {
 			break;
 
 		case "character":
-			if (pathname.split("/")[2] === "create") {
-				presenceData.details = "Creating a character";
-			}
 			presenceData.details = "Creating a character";
+			if (pathname.split("/")[2] === "create")
+				presenceData.details = "Creating a character";
 			break;
 
 		case "chats":
