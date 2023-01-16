@@ -601,7 +601,7 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "stats": {
-						presenceData.state = "Steam & Games Stats.";
+						presenceData.state = "Steam & Games Stats";
 						presenceData.startTimestamp = browsingTimestamp;
 						break;
 					}
