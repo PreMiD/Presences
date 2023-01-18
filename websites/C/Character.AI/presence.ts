@@ -37,7 +37,8 @@ presence.on("UpdateData", async () => {
 					label: `Chat ${document
 						.querySelector("head > title")
 						.textContent.replace("Character.AI - ", "")}`,
-					url: document.location.href,
+					// eslint-disable-next-line unicorn/consistent-destructuring
+					url: `${document.location.href}`,
 				},
 			];
 			break;
