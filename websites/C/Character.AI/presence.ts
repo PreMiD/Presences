@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "feed":
-			presenceData.details = "Browsing the feed";
+			presenceData.details = "Browsing the feed ";
 			break;
 
 		case "post":
