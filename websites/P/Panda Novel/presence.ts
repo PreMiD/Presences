@@ -3,11 +3,43 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+async function getStrings() {
+	return presence.getStrings(
+		{
+			viewHome: "general.viewHome",
+			buttonViewPage: "general.buttonViewPage",
+			viewing: "general.viewing",
+			reading: "general.reading",
+			search: "general.search",
+			searchFor: "general.searchFor",
+			searchSomething: "general.searchSomething",
+			chapter: "general.chapter",
+			manga: "general.manga",
+			viewAccount: "general.viewAccount",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>;
+
 enum Assets {
 	Logo = "https://i.imgur.com/0gC8SLN.png",
 	Reading = "https://i.imgur.com/wPUmqu5.png",
 	Searching = "https://i.imgur.com/UhPgTRn.png",
 	Viewing = "https://i.imgur.com/RMg2Qgg.png",
+}
+
+enum NotTranslated {
+	Authors = "authors",
+	Comments = "comments",
+	Library = "library",
+	Novel = "novel",
+	NovelPage = "novel page",
+	PopularManga = "popular manga",
+	ThisWeeksNewNovels = "this weeks new novels",
+	TopNovelsRead = "top novels read",
+	WorksOfTheAuthor = "works of the author",
 }
 
 function textContent(tags: string) {
@@ -28,36 +60,37 @@ presence.on("UpdateData", async () => {
 		{ pathname, href } = document.location,
 		path = pathname.split("/");
 
+	if (!strings) strings = await getStrings();
+
 	switch (path[1]) {
 		case "top":
-			presenceData.details = "Home";
+			presenceData.details = strings.viewHome;
 			break;
 
 		case "details":
-			presenceData.details = "Viewing novel page";
+			presenceData.details = `${strings.viewing} ${NotTranslated.NovelPage}`;
 			presenceData.state = textContent(".novel-desc h1");
-			if (logo && !privacy) {
-				presenceData.largeImageKey =
-					document.querySelector<HTMLImageElement>(
-						".novel-cover i"
-					)?.dataset?.src;
-			}
-			presenceData.smallImageKey =
-				logo && !privacy ? Assets.Logo : Assets.Viewing;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>(
+					".novel-cover i"
+				)?.dataset?.src;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";
-			presenceData.buttons = [{ label: "Open novel page", url: href }];
+			presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
 			break;
 
 		case "content":
-			presenceData.details = privacy
-				? "Reading novel"
-				: textContent(".breadcrumb li:nth-child(2) h1");
+			presenceData.details = `${strings.reading} ${
+				privacy
+					? NotTranslated.Novel
+					: textContent(".breadcrumb li:nth-child(2) h1")
+			}`;
 			presenceData.state = textContent(".breadcrumb li:nth-child(3) span");
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			presenceData.buttons = [
 				{
-					label: "Open novel page",
+					label: strings.buttonViewPage,
 					url: document.querySelector<HTMLLinkElement>(
 						".breadcrumb li:nth-child(2) a"
 					)?.href,
@@ -66,39 +99,39 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "browsenovel":
-			presenceData.details = "Searching novel";
+			presenceData.details = !privacy
+				? strings.searchFor
+				: strings.searchSomething;
 			presenceData.state = textContent(".filter-list .current");
 			presenceData.smallImageKey = Assets.Searching;
 			presenceData.smallImageText = "Searching";
 			break;
 
 		case "rankings":
-			presenceData.details = "Viewing reading top";
+			presenceData.details = `${strings.viewing} ${NotTranslated.TopNovelsRead}`;
 			presenceData.state = textContent(".ranking-tabs .current");
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";
 			break;
 
 		case "author":
-			presenceData.details = "Searching author";
-			presenceData.state = textContent(".ranking-tabs .current");
+			presenceData.details = !privacy
+				? `${strings.searchFor} ${NotTranslated.Authors}`
+				: strings.searchSomething;
 			presenceData.smallImageKey = Assets.Searching;
 			presenceData.smallImageText = "Searching";
 			if (path[2] === "works") {
-				presenceData.details = "Viewing works of the author";
+				presenceData.details = `${strings.viewing} ${NotTranslated.WorksOfTheAuthor}`;
 				presenceData.state = textContent(".author-desc dl dd h4");
-				if (logo && !privacy) {
-					presenceData.largeImageKey =
-						document.querySelector<HTMLImageElement>(
-							".author-portrait i"
-						)?.dataset?.src;
-				}
-				presenceData.smallImageKey =
-					logo && !privacy ? Assets.Logo : Assets.Viewing;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(
+						".author-portrait i"
+					)?.dataset?.src;
+				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = "Viewing";
 				presenceData.buttons = [
 					{
-						label: "Open author page",
+						label: strings.buttonViewPage,
 						url: href,
 					},
 				];
@@ -106,13 +139,15 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "manga":
-			presenceData.details = "Viewing popular manga";
+			presenceData.details = `${strings.viewing} ${NotTranslated.PopularManga}`;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";
 			switch (path[2]) {
 				case "details":
 				case "novel":
-					presenceData.details = `Viewing chapters of ${textContent(
+					presenceData.details = `${
+						strings.viewing
+					} ${strings.chapter.toLowerCase()} ${textContent(
 						".details-tabs .current"
 					).toLowerCase()}`;
 					presenceData.state = textContent(".section-title span");
@@ -120,24 +155,24 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageText = "Viewing";
 					presenceData.buttons = [
 						{
-							label: `Open ${textContent(
-								".details-tabs .current"
-							).toLowerCase()} page`,
+							label: strings.buttonViewPage,
 							url: href,
 						},
 					];
 					break;
 
 				case "content":
-					presenceData.details = privacy
-						? "Reading manga"
-						: textContent(".breadcrumb li:nth-child(2) h1");
+					presenceData.details = `${strings.reading} ${
+						privacy
+							? strings.manga.toLowerCase()
+							: textContent(".breadcrumb li:nth-child(2) h1")
+					}`;
 					presenceData.state = textContent(".breadcrumb li:nth-child(3) span");
 					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = "Reading";
 					presenceData.buttons = [
 						{
-							label: "Open manga page",
+							label: strings.buttonViewPage,
 							url: document.querySelector<HTMLLinkElement>(
 								".breadcrumb li:nth-child(2) a"
 							)?.href,
@@ -148,14 +183,16 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "newnovel":
-			presenceData.details = "Viewing week new novels";
+			presenceData.details = `${strings.viewing} ${NotTranslated.ThisWeeksNewNovels}`;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";
 			break;
 
 		case "presearch":
 		case "search":
-			presenceData.details = "Searching novel";
+			presenceData.details = !privacy
+				? `${strings.searchFor} ${NotTranslated.Novel}`
+				: strings.searchSomething;
 			presenceData.state =
 				document.querySelector<HTMLInputElement>("input")?.value;
 			presenceData.smallImageKey = Assets.Searching;
@@ -164,24 +201,26 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "ucenter":
-			presenceData.details = "Viewing profile";
+			presenceData.details = strings.viewAccount;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";
 			if (path[2] === "reviews") {
-				presenceData.details = "Viewing comments";
+				presenceData.details = `${strings.viewing} ${NotTranslated.Comments}`;
 				presenceData.state = textContent(".header-tabs .current");
 			}
 			break;
 
 		case "library":
 		case "history":
-			presenceData.details = "Viewing library";
+			presenceData.details = `${strings.viewing} ${NotTranslated.Library}`;
 			presenceData.state = textContent(".header-tabs .current");
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";
 			break;
 	}
 
+	if ((!logo || privacy) && presenceData.largeImageKey !== Assets.Logo)
+		presenceData.largeImageKey = Assets.Logo;
 	if (!buttons || privacy) delete presenceData.buttons;
 	if (time) presenceData.startTimestamp = browsingTimestamp;
 	if (privacy) delete presenceData.state;
