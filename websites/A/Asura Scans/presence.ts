@@ -24,7 +24,9 @@ presence.on("UpdateData", () => {
 				url: href,
 			},
 		];
-	} else if (/\/[a-z-\d]+(chapter|ch|bolum)[a-z-\d]*-[0-9]+\/?$/i.test(pathname)) {
+	} else if (
+		/\/[a-z-\d]+(chapter|ch|bolum)[a-z-\d]*-[0-9]+\/?$/i.test(pathname)
+	) {
 		const progress =
 			(document.documentElement.scrollTop /
 				(document.querySelector<HTMLDivElement>("#readerarea").scrollHeight -
