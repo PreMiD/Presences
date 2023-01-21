@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 			for (const [p, data] of Object.entries(appages))
 				if (path.includes(p)) presenceData = { ...presenceData, ...data };
 			presenceData.buttons = [
-				{ label: "View CHub", url: "https://drivershub.charlws.com" }
+				{ label: "View CHub", url: "https://drivershub.charlws.com" },
 			];
 			break;
 		case "map.charlws.com":
