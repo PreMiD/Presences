@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = "The Nexus";
 		presenceData.state = "(Selecting Game)";
-	} else if (document.title.split(" - ")[0].toString() != "YNOproject") {
+	} else if (document.title.split(" - ")[0].toString() !== "YNOproject") {
 		presenceData.details = document.title.split(" - ")[0].toString();
 		if (document.querySelector("#locationText").textContent)
 			presenceData.state = document.querySelector("#locationText").textContent;
