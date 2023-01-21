@@ -9,7 +9,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "yume",
+		largeImageKey: "https://i.imgur.com/wnQfBTV.png",
 		startTimestamp: elapsed,
 	};
 
