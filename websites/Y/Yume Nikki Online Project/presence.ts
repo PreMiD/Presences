@@ -1,11 +1,7 @@
 const presence = new Presence({
 		clientId: "1060269808383430696",
 	}),
-	elapsed = Math.floor(Date.now() / 1000),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	});
+	elapsed = Math.floor(Date.now() / 1000)
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
