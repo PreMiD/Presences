@@ -21,8 +21,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "(Selecting Game)";
 	} else if (document.title.split(" - ")[0].toString() != "YNOproject") {
 		presenceData.details = document.title.split(" - ")[0].toString();
-		if (document.querySelector("#locationText").innerText)
-			presenceData.state = document.querySelector("#locationText").innerText;
+		if (document.querySelector("#locationText").textContent)
+			presenceData.state = document.querySelector("#locationText").textContent;
 		else presenceData.state = "In Menu";
 	} else presenceData.details = "Loading...";
 
