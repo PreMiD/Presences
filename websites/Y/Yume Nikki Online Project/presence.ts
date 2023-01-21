@@ -9,22 +9,22 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/wnQfBTV.png",
+		largeImageKey: "yume",
 		startTimestamp: elapsed,
 	};
 
-	if (location.pathname === "/" || location.href.split(location.host)[1].toLowerCase() === "/index") {
+	if (
+		location.pathname === "/" ||
+		location.href.split(location.host)[1].toLowerCase() === "/index"
+	) {
 		presenceData.details = "The Nexus";
 		presenceData.state = "(Selecting Game)";
-
 	} else if (document.title.split(" - ")[0].toString() != "YNOproject") {
 		presenceData.details = document.title.split(" - ")[0].toString();
-		if (document.getElementById("locationText").innerText) {presenceData.state = document.getElementById("locationText").innerText;}
-		else {presenceData.state = "In Menu"}
-
-	} else {
-		presenceData.details = "Loading..."
-	}
+		if (document.querySelector("#locationText").innerText)
+			presenceData.state = document.querySelector("#locationText").innerText;
+		else presenceData.state = "In Menu";
+	} else presenceData.details = "Loading...";
 
 	presence.setActivity(presenceData);
 });
