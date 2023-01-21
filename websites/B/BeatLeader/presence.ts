@@ -10,39 +10,135 @@ enum Assets {
 	Replay = "https://i.imgur.com/UxmT8G2.png",
 	"360DegreeEasy" = "https://i.imgur.com/DVJ8DrX.png",
 	"360DegreeExpert" = "https://i.imgur.com/TfqWdfp.png",
-	"360DegreeExpert+" = "https://i.imgur.com/NA06k7F.png",
+	"360DegreeExpertPlus" = "https://i.imgur.com/NA06k7F.png",
 	"360DegreeHard" = "https://i.imgur.com/YPJtpLN.png",
 	"360DegreeNormal" = "https://i.imgur.com/yQJMy15.png",
 	"90DegreeEasy" = "https://i.imgur.com/Fo03ZyU.png",
 	"90DegreeExpert" = "https://i.imgur.com/pQel27h.png",
-	"90DegreeExpert+" = "https://i.imgur.com/VKgWOzs.png",
+	"90DegreeExpertPlus" = "https://i.imgur.com/VKgWOzs.png",
 	"90DegreeHard" = "https://i.imgur.com/QG5xcsL.png",
 	"90DegreeNormal" = "https://i.imgur.com/v6JkOai.png",
+	Generated360DegreeEasy = "https://i.imgur.com/DVJ8DrX.png",
+	Generated360DegreeExpert = "https://i.imgur.com/TfqWdfp.png",
+	Generated360DegreeExpertPlus = "https://i.imgur.com/NA06k7F.png",
+	Generated360DegreeHard = "https://i.imgur.com/YPJtpLN.png",
+	Generated360DegreeNormal = "https://i.imgur.com/yQJMy15.png",
+	Generated90DegreeEasy = "https://i.imgur.com/Fo03ZyU.png",
+	Generated90DegreeExpert = "https://i.imgur.com/pQel27h.png",
+	Generated90DegreeExpertPlus = "https://i.imgur.com/VKgWOzs.png",
+	Generated90DegreeHard = "https://i.imgur.com/QG5xcsL.png",
+	Generated90DegreeNormal = "https://i.imgur.com/v6JkOai.png",
 	LawlessEasy = "https://i.imgur.com/VkQqgWI.png",
 	LawlessExpert = "https://i.imgur.com/Nc3MWRg.png",
-	"LawlessExpert+" = "https://i.imgur.com/6Vkd5bU.png",
+	LawlessExpertPlus = "https://i.imgur.com/6Vkd5bU.png",
 	LawlessHard = "https://i.imgur.com/ndA08Dj.png",
 	LawlessNormal = "https://i.imgur.com/rMaDUFX.png",
 	LightShowEasy = "https://i.imgur.com/xc1Topa.png",
 	LightShowExpert = "https://i.imgur.com/cJKkojn.png",
-	"LightShowExpert+" = "https://i.imgur.com/rF4tn28.png",
+	LightShowExpertPlus = "https://i.imgur.com/rF4tn28.png",
 	LightShowHard = "https://i.imgur.com/awviQ8Y.png",
 	LightShowNormal = "https://i.imgur.com/J5qLp9b.png",
 	NoArrowsEasy = "https://i.imgur.com/7fM9HNb.png",
 	NoArrowsExpert = "https://i.imgur.com/aLfl2ix.png",
-	"NoArrowsExpert+" = "https://i.imgur.com/WR2pnWY.png",
+	NoArrowsExpertPlus = "https://i.imgur.com/WR2pnWY.png",
 	NoArrowsHard = "https://i.imgur.com/tiIyXay.png",
 	NoArrowsNormal = "https://i.imgur.com/k2t9Lac.png",
 	OneSaberEasy = "https://i.imgur.com/BpKnvbM.png",
 	OneSaberExpert = "https://i.imgur.com/aWrR0ln.png",
-	"OneSaberExpert+" = "https://i.imgur.com/SEdFi3h.png",
+	OneSaberExpertPlus = "https://i.imgur.com/SEdFi3h.png",
 	OneSaberHard = "https://i.imgur.com/ZfZATnl.png",
 	OneSaberNormal = "https://i.imgur.com/qcILmPs.png",
 	StandardEasy = "https://i.imgur.com/2J4LtXj.png",
 	StandardExpert = "https://i.imgur.com/HVzq27X.png",
-	"StandardExpert+" = "https://i.imgur.com/wcL9Uar.png",
+	StandardExpertPlus = "https://i.imgur.com/wcL9Uar.png",
 	StandardHard = "https://i.imgur.com/dxfOJXE.png",
 	StandardNormal = "https://i.imgur.com/KOgMFdx.png",
+	HorizontalStandardEasy = "https://i.imgur.com/hA9LD1z.png",
+	HorizontalStandardHard = "https://i.imgur.com/IdpA9PH.png",
+	HorizontalStandardExpert = "https://i.imgur.com/2Zxpaxr.png",
+	HorizontalStandardNormal = "https://i.imgur.com/UjuuZMC.png",
+	HorizontalStandardExpertPlus = "https://i.imgur.com/0VIJU1e.png",
+	VerticalStandardHard = "https://i.imgur.com/0MvOIBI.png",
+	VerticalStandardEasy = "https://i.imgur.com/UDX5c2c.png",
+	VerticalStandardExpertPlus = "https://i.imgur.com/z4LXkrs.png",
+	VerticalStandardExpert = "https://i.imgur.com/PEczYdN.png",
+	VerticalStandardNormal = "https://i.imgur.com/bYfuH9U.png",
+	InvertedStandardExpert = "https://i.imgur.com/7OPKRus.png",
+	InvertedStandardEasy = "https://i.imgur.com/mKgZt2H.png",
+	InvertedStandardExpertPlus = "https://i.imgur.com/ok4CZZR.png",
+	InvertedStandardNormal = "https://i.imgur.com/WNnRVMk.png",
+	InvertedStandardHard = "https://i.imgur.com/mH9dCd8.png",
+	InverseStandardHard = "https://i.imgur.com/zIDoBFP.png",
+	InverseStandardExpertPlus = "https://i.imgur.com/SCJE2Af.png",
+	InverseStandardEasy = "https://i.imgur.com/b7RzTZ5.png",
+	InverseStandardExpert = "https://i.imgur.com/X6e7flW.png",
+	InverseStandardNormal = "https://i.imgur.com/slXKlY2.png",
+	HorizontalLawlessEasy = "https://i.imgur.com/hA9LD1z.png",
+	HorizontalLawlessHard = "https://i.imgur.com/IdpA9PH.png",
+	HorizontalLawlessExpert = "https://i.imgur.com/2Zxpaxr.png",
+	HorizontalLawlessNormal = "https://i.imgur.com/UjuuZMC.png",
+	HorizontalLawlessExpertPlus = "https://i.imgur.com/0VIJU1e.png",
+	VerticalLawlessHard = "https://i.imgur.com/0MvOIBI.png",
+	VerticalLawlessEasy = "https://i.imgur.com/UDX5c2c.png",
+	VerticalLawlessExpertPlus = "https://i.imgur.com/z4LXkrs.png",
+	VerticalLawlessExpert = "https://i.imgur.com/PEczYdN.png",
+	VerticalLawlessNormal = "https://i.imgur.com/bYfuH9U.png",
+	InvertedLawlessExpert = "https://i.imgur.com/7OPKRus.png",
+	InvertedLawlessEasy = "https://i.imgur.com/mKgZt2H.png",
+	InvertedLawlessExpertPlus = "https://i.imgur.com/ok4CZZR.png",
+	InvertedLawlessNormal = "https://i.imgur.com/WNnRVMk.png",
+	InvertedLawlessHard = "https://i.imgur.com/mH9dCd8.png",
+	InverseLawlessHard = "https://i.imgur.com/zIDoBFP.png",
+	InverseLawlessExpertPlus = "https://i.imgur.com/SCJE2Af.png",
+	InverseLawlessEasy = "https://i.imgur.com/b7RzTZ5.png",
+	InverseLawlessExpert = "https://i.imgur.com/X6e7flW.png",
+	InverseLawlessNormal = "https://i.imgur.com/slXKlY2.png",
+	HorizontalNoArrowsEasy = "https://i.imgur.com/hA9LD1z.png",
+	HorizontalNoArrowsHard = "https://i.imgur.com/IdpA9PH.png",
+	HorizontalNoArrowsExpert = "https://i.imgur.com/2Zxpaxr.png",
+	HorizontalNoArrowsNormal = "https://i.imgur.com/UjuuZMC.png",
+	HorizontalNoArrowsExpertPlus = "https://i.imgur.com/0VIJU1e.png",
+	VerticalNoArrowsHard = "https://i.imgur.com/0MvOIBI.png",
+	VerticalNoArrowsEasy = "https://i.imgur.com/UDX5c2c.png",
+	VerticalNoArrowsExpertPlus = "https://i.imgur.com/z4LXkrs.png",
+	VerticalNoArrowsExpert = "https://i.imgur.com/PEczYdN.png",
+	VerticalNoArrowsNormal = "https://i.imgur.com/bYfuH9U.png",
+	InvertedNoArrowsExpert = "https://i.imgur.com/7OPKRus.png",
+	InvertedNoArrowsEasy = "https://i.imgur.com/mKgZt2H.png",
+	InvertedNoArrowsExpertPlus = "https://i.imgur.com/ok4CZZR.png",
+	InvertedNoArrowsNormal = "https://i.imgur.com/WNnRVMk.png",
+	InvertedNoArrowsHard = "https://i.imgur.com/mH9dCd8.png",
+	InverseNoArrowsHard = "https://i.imgur.com/zIDoBFP.png",
+	InverseNoArrowsExpertPlus = "https://i.imgur.com/SCJE2Af.png",
+	InverseNoArrowsEasy = "https://i.imgur.com/b7RzTZ5.png",
+	InverseNoArrowsExpert = "https://i.imgur.com/X6e7flW.png",
+	InverseNoArrowsNormal = "https://i.imgur.com/slXKlY2.png",
+	HorizontalOneSaberEasy = "https://i.imgur.com/hA9LD1z.png",
+	HorizontalOneSaberHard = "https://i.imgur.com/IdpA9PH.png",
+	HorizontalOneSaberExpert = "https://i.imgur.com/2Zxpaxr.png",
+	HorizontalOneSaberNormal = "https://i.imgur.com/UjuuZMC.png",
+	HorizontalOneSaberExpertPlus = "https://i.imgur.com/0VIJU1e.png",
+	VerticalOneSaberHard = "https://i.imgur.com/0MvOIBI.png",
+	VerticalOneSaberEasy = "https://i.imgur.com/UDX5c2c.png",
+	VerticalOneSaberExpertPlus = "https://i.imgur.com/z4LXkrs.png",
+	VerticalOneSaberExpert = "https://i.imgur.com/PEczYdN.png",
+	VerticalOneSaberNormal = "https://i.imgur.com/bYfuH9U.png",
+	InvertedOneSaberExpert = "https://i.imgur.com/7OPKRus.png",
+	InvertedOneSaberEasy = "https://i.imgur.com/mKgZt2H.png",
+	InvertedOneSaberExpertPlus = "https://i.imgur.com/ok4CZZR.png",
+	InvertedOneSaberNormal = "https://i.imgur.com/WNnRVMk.png",
+	InvertedOneSaberHard = "https://i.imgur.com/mH9dCd8.png",
+	InverseOneSaberHard = "https://i.imgur.com/zIDoBFP.png",
+	InverseOneSaberExpertPlus = "https://i.imgur.com/SCJE2Af.png",
+	InverseOneSaberEasy = "https://i.imgur.com/b7RzTZ5.png",
+	InverseOneSaberExpert = "https://i.imgur.com/X6e7flW.png",
+	InverseOneSaberNormal = "https://i.imgur.com/slXKlY2.png",
+	RhythmGameStandardEasy = "https://i.imgur.com/SN0SB82.png",
+	RhythmGameStandardNormal = "https://i.imgur.com/8q69Irt.png",
+	RhythmGameStandardHard = "https://i.imgur.com/fGdRJFi.png",
+	RhythmGameStandardExpert = "https://i.imgur.com/cMSJmN2.png",
+	RhythmGameStandardExpertPlus = "https://i.imgur.com/I7C5hh5.png",
+	undefinedundefined = "https://i.imgur.com/TWPjaYR.png",
 }
 
 presence.info("Presence loaded");
@@ -109,6 +205,11 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "leaderboard": {
+				const previewURL = new URL(
+					document.querySelector<HTMLAnchorElement>(
+						'a[href^="https://skystudioapps.com"]'
+					)?.href
+				);
 				presenceData.details =
 					document.querySelector(".title .name")?.textContent;
 				presenceData.state =
@@ -123,22 +224,13 @@ presence.on("UpdateData", async () => {
 				}`;
 				presenceData.smallImageKey =
 					Assets[
-						`${
-							document
-								.querySelector(".diff > .diff")
-								.textContent.replaceAll(" ", "")
-								.split("/")[1] ?? "Standard"
-						}${
-							document
-								.querySelector(".diff > .diff")
-								.textContent.replaceAll(" ", "")
-								.split("/")[0]
-						}` as keyof typeof Assets
+						`${previewURL.searchParams.get(
+							"charName"
+						)}${previewURL.searchParams.get("diffName")}` as keyof typeof Assets
 					];
-				if (cover) {
-					presenceData.largeImageKey = document
-						.querySelector<HTMLDivElement>(".leaderboard.content-box")
-						?.style?.backgroundImage?.match(/url\(["']?([^"']*)["']?\)/)[1];
+				if (cover && document.querySelector<HTMLImageElement>("img.dummy")) {
+					presenceData.largeImageKey =
+						document.querySelector<HTMLImageElement>("img.dummy")?.src;
 				}
 				presenceData.buttons = [
 					{
@@ -191,6 +283,10 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "dashboard": {
+				presenceData.details = "Viewing dashboard";
+				break;
+			}
+			case "": {
 				presenceData.details = "Viewing dashboard";
 				break;
 			}
@@ -332,5 +428,35 @@ presence.on("UpdateData", async () => {
 		delete presenceData.endTimestamp;
 	}
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
-	presence.setActivity(presenceData);
+
+	let presenceText = "\n";
+	if (presenceData.details) presenceText += `${presenceData.details}\n`;
+	if (presenceData.state) presenceText += `${presenceData.state}\n`;
+	if (presenceData.smallImageText)
+		presenceText += `${presenceData.smallImageText}\n`;
+	if (presenceData.smallImageKey)
+		presenceText += `${presenceData.smallImageKey}\n`;
+	if (presenceData.largeImageKey)
+		presenceText += `${presenceData.largeImageKey}\n`;
+	let previewURL;
+	if (
+		document.querySelector<HTMLAnchorElement>(
+			'a[href^="https://skystudioapps.com"]'
+		)?.href
+	) {
+		previewURL = new URL(
+			document.querySelector<HTMLAnchorElement>(
+				'a[href^="https://skystudioapps.com"]'
+			)?.href
+		);
+	}
+	if (previewURL) {
+		presenceText += `${previewURL.searchParams.get(
+			"charName"
+		)}${previewURL.searchParams.get("diffName")}`;
+	}
+	presence.info(presenceText);
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
