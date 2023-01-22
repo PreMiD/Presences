@@ -85,7 +85,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Смотрит страницу аниме";
 			presenceData.state = title.attributes.getNamedItem("content").value;
 	}
-
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
