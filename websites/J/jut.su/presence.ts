@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `«${search.value}»`;
 			break;
 		case pathname === "/":
-			presenceData.details = "Смотрит домашнюю страницу";
+			presenceData.details = "На домашней странице";
 			break;
 		case pathname === "/pm/":
 			presenceData.details = "Просматривает сообщения";
