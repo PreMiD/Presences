@@ -189,7 +189,7 @@ presence.on("UpdateData", async () => {
 					details: "Viewing the support page",
 				},
 				teams: {
-					details: "Viewing the nuxt.js team",
+					details: "Viewing the Nuxt.js team",
 				},
 				videocourses: {
 					details: "Viewing all video coruses",
