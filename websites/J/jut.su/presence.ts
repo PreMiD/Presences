@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case !!pathname.match(/\/user\//):
 			presenceData.details = "Смотрит профиль";
-				presenceData.state = pathname.split("/")[2].replace(/\+/g, " ");
+			presenceData.state = pathname.split("/")[2].replace(/\+/g, " ");
 			break;
 		case !!pathname.match(/\/rewards\//):
 			presenceData.details = "Смотрит награды пользователя";
