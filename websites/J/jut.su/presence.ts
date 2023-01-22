@@ -36,14 +36,12 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Учавствует в переписке";
 			break;
 		case !!pathname.match(/\/user\//):
-			presenceData.details = `Смотрит профиль ${pathname
-				.split("/")[2]
-				.replace(/\+/g, " ")}`;
+			presenceData.details = "Смотрит профиль";
+				presenceData.state = pathname.split("/")[2].replace(/\+/g, " ");
 			break;
 		case !!pathname.match(/\/rewards\//):
-			presenceData.details = `Смотрит награды пользователя ${pathname
-				.split("/")[2]
-				.replace(/\+/g, " ")}`;
+			presenceData.details = "Смотрит награды пользователя";
+			presenceData.state = pathname.split("/")[2].replace(/\+/g, " ");
 			break;
 		case !!pathname.match(/\/tests\//):
 			presenceData.details = "Проходит тест";
@@ -84,9 +82,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case !!title:
-			presenceData.details = `Смотрит страницу аниме «${
-				title.attributes.getNamedItem("content").value
-			}»`;
+			presenceData.details = "Смотрит страницу аниме";
+			presenceData.state = title.attributes.getNamedItem("content").value;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
