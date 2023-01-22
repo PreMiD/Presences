@@ -94,24 +94,17 @@ presence.on("UpdateData", async () => {
 		return;
 	}
 
-	const pages: Record<string, PresenceData> = {
-		"/about": {
-			details: strings.viewing,
-			state: "About Serial Podcast",
-			buttons: [
-				{
-					label: strings.buttonViewPage,
-					url: href,
-				},
-			],
-		},
-	};
-
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
-
 	if (pathname === "/") presenceData.details = strings.viewHome;
-	else if (
+	else if (pathname === "/about") {
+		presenceData.details = strings.viewing;
+		presenceData.state = "About Serial Podcast";
+		presenceData.buttons = [
+			{
+				label: strings.buttonViewEpisode,
+				url: href
+			}
+		];
+	} else if (
 		pathname.includes("/season") &&
 		pathname.match(/([0-9]|[1-9][0-9]|[1-9][0-9][0-9])/gm)
 	) {
