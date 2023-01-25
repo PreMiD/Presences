@@ -16,7 +16,11 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "rio-logo",
 		},
-		{ pathname } = location;
+		{ pathname, href } = location,
+		settings = {
+			showJoinRoomButton: await presence.getSetting("join-room-button"),
+			showProfileButton: await presence.getSetting("profile-button"),
+		};
 
 	if (pathname.includes("/store")) {
 		presenceData.details = "Store";
@@ -52,11 +56,33 @@ presence.on("UpdateData", async () => {
 
 		if (!startTimestamp) startTimestamp = Date.now();
 		presenceData.startTimestamp = startTimestamp;
+
+		const gameSettings = document
+			.querySelector("#app > div > div > div:nth-child(3)")
+			?.textContent?.includes("Game settings");
+
+		if (settings.showJoinRoomButton === true && gameSettings === true) {
+			presenceData.buttons = [
+				{
+					label: "Join Room",
+					url: href,
+				},
+			];
+		}
 	} else if (pathname.includes("/profile/")) {
 		presenceData.details = "Viewing a profile";
 		presenceData.state = document.querySelector(
 			"header > div > :last-child > span"
 		).textContent;
+
+		if (settings.showProfileButton === true) {
+			presenceData.buttons = [
+				{
+					label: "View Profile",
+					url: href,
+				},
+			];
+		}
 	} else if (pages[pathname]) {
 		presenceData.details = "Viewing a page";
 		presenceData.state = pages[pathname];

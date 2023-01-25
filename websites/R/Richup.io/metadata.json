@@ -16,5 +16,19 @@
   "tags": [
     "monopoly"
   ],
+  "settings": [
+    {
+      "id": "profile-button",
+      "title": "Show Profile Button",
+      "icon": "fas fa-user",
+      "value": true
+    },
+    {
+      "id": "join-room-button",
+      "title": "Show Join Room Button",
+      "icon": "fas fa-door-open",
+      "value": true
+    }
+  ],
   "category": "games"
 }
