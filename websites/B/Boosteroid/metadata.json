@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "boosteroid",
+  "author": {
+    "id": "256422547556401152",
+    "name": "Saith#0001"
+  },
+  "description": {
+    "en": "Boosteroid is a cloud gaming platform that provides two-click access to high-end video games and brings lots of positive emotions and experiences. Play your favorite games at 60 fps (Full HD 1080p) on a PC, laptop, tablet, Android TV, or even phone.",
+    "pt_BR": "Boosteroid é uma plataforma de jogos em nuvem que fornece acesso com dois cliques a jogos de última geração trazendo bastante emoções e experiencias incriveis. Jogue seus jogos favoritos a 60 fps (Full HD 1080p) em um PC, notebook, tablet, Android TV ou até mesmo em seu celular"
+  },
+  "url": "cloud.boosteroid.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/ANfYbcV.jpg",
+  "thumbnail": "https://i.imgur.com/rhxqdVF.jpg",
+  "color": "#071126",
+  "tags": [
+    "gaming",
+    "streaming"
+  ],
+  "category": "games"
+}
