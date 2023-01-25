@@ -10,6 +10,11 @@ presence.on("UpdateData", async () => {
 		icon: string;
 	}
 
+	enum assets {
+		logo = "https://i.imgur.com/Ldqj50W.png",
+		unknownGame = "https://i.imgur.com/cnczdmM.png",
+	}
+
 	async function getGame(id: number): Promise<Game | null> {
 		const response = await fetch("https://github.saith.dev/games.json");
 		if (!response.ok) return null;
@@ -21,7 +26,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-			largeImageKey: "icon",
+			largeImageKey: assets.logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
@@ -33,7 +38,7 @@ presence.on("UpdateData", async () => {
 				(document.querySelector("button.tab-button--active") as HTMLElement)
 					.innerHTML
 			}`;
-			presenceData.largeImageKey = "https://i.imgur.com/Ldqj50W.png";
+			presenceData.largeImageKey = assets.logo;
 			break;
 		}
 		case pathname.startsWith("/application/"): {
@@ -41,12 +46,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = (
 				document.querySelector("h1") as HTMLElement
 			).innerHTML;
-			presenceData.largeImageKey = "https://i.imgur.com/Ldqj50W.png";
+			presenceData.largeImageKey = assets.logo;
 			break;
 		}
 		case pathname === "/profile/account/main": {
 			presenceData.details = "Browsing";
-			presenceData.largeImageKey = "https://i.imgur.com/Ldqj50W.png";
+			presenceData.largeImageKey = assets.logo;
 			break;
 		}
 		case pathname === "/static/streaming/streaming.html": {
@@ -55,7 +60,7 @@ presence.on("UpdateData", async () => {
 			);
 			if (!gameid) {
 				presenceData.details = "Unknown Game";
-				presenceData.largeImageKey = "https://i.imgur.com/cnczdmM.png";
+				presenceData.largeImageKey = assets.unknownGame;
 			} else {
 				const gameid = await getGame(
 					Number(window.localStorage.getItem("appId"))
