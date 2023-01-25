@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "899051140157681726"
+		clientId: "899051140157681726",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	forumurl = "mgservers.de",
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "mgs-normal",
 			smallImageKey: "mgs-normal",
 			smallImageText: "MGS",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (privacy) {
@@ -80,22 +80,22 @@ presence.on("UpdateData", async () => {
 		if (document.URL.includes("conversation")) {
 			presenceData.state = "Liest eine Konversation";
 			presenceData.buttons = [
-				{ label: "Forum", url: `https://${forumurl}/forum` }
+				{ label: "Forum", url: `https://${forumurl}/forum` },
 			];
 		} else if (document.URL.includes("global-jcoins-statement-list")) {
 			presenceData.state = "Kontoauszüge";
 			presenceData.buttons = [
-				{ label: "Forum", url: `https://${forumurl}/forum` }
+				{ label: "Forum", url: `https://${forumurl}/forum` },
 			];
 		} else if (document.URL.includes("acp")) {
 			presenceData.state = "Administrationsoberfläche";
 			presenceData.buttons = [
-				{ label: "Forum", url: `https://${forumurl}/forum` }
+				{ label: "Forum", url: `https://${forumurl}/forum` },
 			];
 		} else if (document.URL.includes("moderation-list")) {
 			presenceData.state = "Moderation";
 			presenceData.buttons = [
-				{ label: "Forum", url: `https://${forumurl}/forum` }
+				{ label: "Forum", url: `https://${forumurl}/forum` },
 			];
 		}
 	}
@@ -105,48 +105,48 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Forum",
-					url: `https://${forumurl}/forum`
+					url: `https://${forumurl}/forum`,
 				},
 				{
 					label: "Aktuelle Seite",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 			if (document.URL.includes("conversation")) {
 				presenceData.state = "Liest eine Konversation";
 				presenceData.buttons = [
-					{ label: "Forum", url: `https://${forumurl}/forum` }
+					{ label: "Forum", url: `https://${forumurl}/forum` },
 				];
 			} else if (document.URL.includes("global-jcoins-statement-list")) {
 				presenceData.state = "Kontoauszüge";
 				presenceData.buttons = [
-					{ label: "Forum", url: `https://${forumurl}/forum` }
+					{ label: "Forum", url: `https://${forumurl}/forum` },
 				];
 			} else if (document.URL.includes("acp")) {
 				presenceData.state = "Administrationsoberfläche";
 				presenceData.buttons = [
-					{ label: "Forum", url: `https://${forumurl}/forum` }
+					{ label: "Forum", url: `https://${forumurl}/forum` },
 				];
 			} else if (document.URL.includes("moderation-list")) {
 				presenceData.state = "Moderation";
 				presenceData.buttons = [
-					{ label: "Forum", url: `https://${forumurl}/forum` }
+					{ label: "Forum", url: `https://${forumurl}/forum` },
 				];
 			}
 		} else {
 			presenceData.buttons = [
 				{
 					label: "Forum",
-					url: `https://${forumurl}`
-				}
+					url: `https://${forumurl}`,
+				},
 			];
 		}
 	} else {
 		presenceData.buttons = [
 			{
 				label: "Forum",
-				url: `https://${forumurl}`
-			}
+				url: `https://${forumurl}`,
+			},
 		];
 	}
 

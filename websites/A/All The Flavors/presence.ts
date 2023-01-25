@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "631122124630654979"
+		clientId: "631122124630654979",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") {
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 			"/users",
 			"/contests",
 			"/vendors",
-			"/top100"
+			"/top100",
 		].includes(document.location.pathname)
 	) {
 		let dstate;
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 			"/getting_started",
 			"/help/how_to_mix",
 			"/go_pro",
-			"/help/report_recipe"
+			"/help/report_recipe",
 		].includes(document.location.pathname)
 	) {
 		presenceData.details = "Browing help ";

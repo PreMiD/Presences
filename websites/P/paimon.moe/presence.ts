@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "859781231351693312"
+		clientId: "859781231351693312",
 	}),
 	timer = Math.floor(Date.now() / 1000),
 	characterList = [
@@ -45,14 +45,14 @@ const presence = new Presence({
 		"traveler_electro",
 		"sangonomiya_kokomi",
 		"sayu",
-		"aloy"
+		"aloy",
 	],
 	validCharacter = characterList.includes(document.URL.match(/\w+/gi).pop());
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: timer
+			startTimestamp: timer,
 		},
 		// {hostname} = document.location,
 		{ pathname } = window.location;
@@ -67,17 +67,46 @@ presence.on("UpdateData", async () => {
 			const original = document.URL.match(/(\/\w+)/gi)
 				.pop()
 				.substr(1);
-			if (original === "traveler_anemo") stateText = "Anemo Traveler";
-			else if (original === "traveler_geo") stateText = "Geo Traveler";
-			else if (original === "kaedehara_kazuha") stateText = "Kaedehara Kazuha";
-			else if (original === "hu_tao") stateText = "Hu Tao";
-			else if (original === "raiden_shogun") stateText = "Raiden Shogun (Baal)";
-			else if (original === "kujou_sara") stateText = "Kujou Sara";
-			else if (original === "traveler_electro") stateText = "Electro Traveler";
-			else if (original === "kamisato_ayaka") stateText = "Kamisato Ayaka";
-			else if (original === "sangonomiya_kokomi")
-				stateText = "Sangonomiya Kokomi";
-			else stateText = original.charAt(0).toUpperCase() + original.slice(1);
+			switch (original) {
+				case "traveler_anemo": {
+					stateText = "Anemo Traveler";
+					break;
+				}
+				case "traveler_geo": {
+					stateText = "Geo Traveler";
+					break;
+				}
+				case "kaedehara_kazuha": {
+					stateText = "Kaedehara Kazuha";
+					break;
+				}
+				case "hu_tao": {
+					stateText = "Hu Tao";
+					break;
+				}
+				case "raiden_shogun": {
+					stateText = "Raiden Shogun (Baal)";
+					break;
+				}
+				case "kujou_sara": {
+					stateText = "Kujou Sara";
+					break;
+				}
+				case "traveler_electro": {
+					stateText = "Electro Traveler";
+					break;
+				}
+				case "kamisato_ayaka": {
+					stateText = "Kamisato Ayaka";
+					break;
+				}
+				case "sangonomiya_kokomi": {
+					stateText = "Sangonomiya Kokomi";
+					break;
+				}
+				default:
+					stateText = original.charAt(0).toUpperCase() + original.slice(1);
+			}
 
 			presenceData.details = "Viewing the character details:";
 			presenceData.state = stateText;
@@ -113,11 +142,11 @@ presence.on("UpdateData", async () => {
 	)
 		presenceData.details = "🌏 Global Wish Tally";
 	else if (pathname.startsWith("/wish") || pathname.startsWith("/wish/")) {
-		const [, , , number] = document
+		const number = document
 			.querySelector(
 				"#sapper > main > div > div.flex.flex-col.xl\\:flex-row > div.grid.gap-4.grid-cols-1.md\\:grid-cols-2.xl\\:grid-cols-3.max-w-screen-xl > div:nth-child(6) > div.bg-item.rounded-xl.p-4.flex.items-center.w-full.text-white"
 			)
-			.textContent.split(" ");
+			.textContent.split(" ")[3];
 
 		presenceData.details = "Viewing at the Wish Counter";
 		presenceData.state = `Wishes Worth: ✧ ${number}`;

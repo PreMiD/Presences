@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "631523770988888074"
+	clientId: "631523770988888074",
 });
 
 function capitalize(string: string): string {
@@ -12,7 +12,7 @@ let data;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") {
@@ -52,12 +52,12 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/encyclopedia/")) {
 		presenceData.details = "Browsing Encyclopedia";
 		presenceData.state = `for ${
-			document.getElementById("page_header").textContent
+			document.querySelector("#page_header").textContent
 		}`;
 	} else if (document.location.pathname.startsWith("/MyAnime/")) {
 		presenceData.details = "Browsing Animes";
 		presenceData.state = `for ${
-			document.getElementById("page_header").textContent
+			document.querySelector("#page_header").textContent
 		}`;
 	}
 

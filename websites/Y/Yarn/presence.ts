@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "690635264124518493"
+	clientId: "690635264124518493",
 });
 
 function parseQueryString(queryString?: string): {
@@ -11,18 +11,18 @@ function parseQueryString(queryString?: string): {
 			[name: string]: string;
 		} = {},
 		queries = queryString.split("&");
-	queries.forEach((indexQuery: string) => {
+	for (const indexQuery in queries) {
 		const indexPair = indexQuery.split("=");
 		params[decodeURIComponent(indexPair[0])] = decodeURIComponent(
 			indexPair.length > 1 ? indexPair[1] : ""
 		);
-	});
+	}
 	return params;
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		route = document.location.pathname.split("/");
 
@@ -30,9 +30,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Home";
 		presenceData.state = parseQueryString(document.location.hash).q
 			? `Searching ${parseQueryString(document.location.hash).q} (page ${
-					parseQueryString(document.location.hash).p
-						? parseQueryString(document.location.hash).p
-						: "0"
+					parseQueryString(document.location.hash).p ?? "0"
 			  })`
 			: "Navigate...";
 		presenceData.smallImageKey = parseQueryString(document.location.hash).q

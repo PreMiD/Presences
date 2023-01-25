@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "846385772688834591"
+	clientId: "846385772688834591",
 });
 
 interface interfaceMapping {
@@ -43,7 +43,7 @@ const boardTypeMapping: interfaceMapping = {
 		BlockHistory: "View Block History",
 		RandomPage: "View Random Page",
 		Upload: "Upload file",
-		License: "View License"
+		License: "View License",
 	},
 	// /member/(action)
 	validateMembershipUrl = /\/member\/(.+)/,
@@ -58,7 +58,7 @@ const boardTypeMapping: interfaceMapping = {
 		// eslint-disable-next-line camelcase
 		change_password: "Change Password",
 		// eslint-disable-next-line camelcase
-		activate_otp: "Activate OTP"
+		activate_otp: "Activate OTP",
 	},
 	// /RecentChanges?logtype=(search)
 	changesMapping: interfaceMapping = {
@@ -66,7 +66,7 @@ const boardTypeMapping: interfaceMapping = {
 		create: "Created Documents",
 		delete: "Deleted Documents",
 		move: "Moved Documents",
-		revert: "Reverted Documents"
+		revert: "Reverted Documents",
 	},
 	// /RecentDiscuss?logtype=(search)
 	discussMapping: interfaceMapping = {
@@ -83,7 +83,7 @@ const boardTypeMapping: interfaceMapping = {
 		// eslint-disable-next-line camelcase
 		closed_editrequest: "Closed Edit Request",
 		// eslint-disable-next-line camelcase
-		old_editrequest: "Old Edit Request"
+		old_editrequest: "Old Edit Request",
 	},
 	// /contribution/(type)/(username)/(contributeType)
 	validateContributeUrl = /\/contribution\/(.+)\/(.+)\/(.+)/;
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 	 * Setting Details & State
 	 *
 	 */
-	presenceData.details = !details ? "Unknown Action" : details;
+	presenceData.details = details ?? "Unknown Action";
 
 	let page: RegExpExecArray | string = validateContributeUrl.exec(path);
 	/* View Contribute */
@@ -116,31 +116,41 @@ presence.on("UpdateData", async () => {
 		/* View Membership */
 		presenceData.details = "Member Page";
 		page = membersMapping[page[1]];
-
-		/* Searching */
-		// /Search?q=(search)
-	} else if (action === "Search") {
-		page = getParam(params, "q");
-		if (page.length === 0) page = "Blank Query...";
-
-		/* View Recent Discuss History */
-	} else if (action === "RecentDiscuss")
-		page = discussMapping[getParam(params, "logtype")];
-	/* Recent Changes History */ else if (action === "RecentChanges")
-		page = changesMapping[getParam(params, "logtype")];
-	/* View Discuss Thread */ else if (
-		action === "thread" ||
-		action === "edit_request"
-	)
-		page = document.querySelector("h1 > a").textContent;
-	// H1 Tag Only one
-	/* Other */ else if (details)
-		page = decodeURI(path.substring(`/${action}/`.length));
-	else page = null;
+	} else {
+		switch (action) {
+			/* Searching */
+			// /Search?q=(search)
+			case "Search": {
+				page = getParam(params, "q");
+				if (page.length === 0) page = "Blank Query...";
+				break;
+			}
+			/* View Recent Discuss History */
+			case "RecentDiscuss": {
+				page = discussMapping[getParam(params, "logtype")];
+				break;
+			}
+			/* Recent Changes History */
+			case "RecentChanges": {
+				page = changesMapping[getParam(params, "logtype")];
+				break;
+			}
+			/* View Discuss Thread */
+			case "thread":
+			case "edit_request": {
+				page = document.querySelector("h1 > a").textContent;
+				break;
+			}
+			/* Other */
+			default:
+				if (details) page = decodeURI(path.substring(`/${action}/`.length));
+				else page = null;
+		}
+	}
 
 	if (action === "w") {
 		presenceData.buttons = [
-			{ label: "View Page", url: document.location.href }
+			{ label: "View Page", url: document.location.href },
 		];
 	}
 	if (page) {
@@ -155,9 +165,9 @@ presence.on("UpdateData", async () => {
 	 */
 	if (details) {
 		const members = document.querySelectorAll(
-			"#app > div > div > nav > ul[class=r] > li > div > div > div"
+			"#app > div > div > nav > ul > li > div > div > div"
 		);
-		if (members[1].textContent.indexOf("Please login!") === -1) {
+		if (!members[1].textContent.includes("Please login!")) {
 			presenceData.smallImageKey = "user";
 			if (!privacy) presenceData.smallImageText = members[0].textContent;
 		}

@@ -1,18 +1,17 @@
 const presence = new Presence({
-		clientId: "752464948965408768"
+		clientId: "752464948965408768",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
-	};
+			largeImageKey: "logo",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, hostname } = document.location;
 
-	if (document.location.hostname.includes("itch.io")) {
-		const { pathname } = document.location;
-
-		if (document.location.hostname.split(".")[0] !== "itch") {
+	if (hostname.includes("itch.io")) {
+		if (hostname.split(".")[0] !== "itch") {
 			if (pathname === "/") {
 				presenceData.details = "Viewing Developer Profile";
 				presenceData.state = document.title.replace(" - itch.io", "");

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "878203434468245545"
+		clientId: "878203434468245545",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -23,9 +23,9 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = location,
+		{ pathname, href, search, hostname } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (document.querySelector("ul.search-main-menu.active")) {
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 		if (searchBar && searchBar.value) presenceData.state = searchBar.value;
 		presenceData.smallImageText = presenceData.smallImageKey = "search";
 	} else if (pathname === "/") {
-		if (location.search) {
+		if (search) {
 			const results = document.querySelector<HTMLHeadingElement>("h1.h4");
 			presenceData.details = "Looking at";
 			if (results) presenceData.state = results.textContent;
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 			category
 				? category.textContent
 				: ""
-		} ${location.hostname.endsWith(".com") ? "Manhwas" : "Mangas"}`;
+		} ${hostname.endsWith(".com") ? "Manhwas" : "Mangas"}`;
 		if (order) presenceData.state = `Ordered By ${order.textContent}`;
 		presenceData.smallImageText = presenceData.smallImageKey = "looking";
 	} else if (
@@ -88,8 +88,8 @@ presence.on("UpdateData", async () => {
 					{ label: "Read Manga", url: href },
 					{
 						label: "Read Summary",
-						url: href.substring(0, href.lastIndexOf("chapter"))
-					}
+						url: href.substring(0, href.lastIndexOf("chapter")),
+					},
 				];
 			}
 		} else if (location.hash) {

@@ -1,262 +1,452 @@
 const presence = new Presence({
-		clientId: "848293229409337444"
+		clientId: "848293229409337444",
 	}),
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
-let translatePageTitle: HTMLElement | null,
-	translatingFile: HTMLElement,
-	translateProject: HTMLElement,
-	translatingLanguage: HTMLElement,
-	profileName: HTMLElement,
-	profileNickname: HTMLElement | null;
-
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		details: "Unknown page",
-		largeImageKey: "crowdin",
-		startTimestamp: browsingTimestamp
-	};
+			largeImageKey: "crowdin",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, host, href } = document.location,
+		pathnameSplit = pathname.split("/"),
+		[showProject, showManager, showConversations] = await Promise.all([
+			presence.getSetting<boolean>("showProject"),
+			presence.getSetting<boolean>("showManager"),
+			presence.getSetting<boolean>("showConversations"),
+		]);
 
-	if (document.location.host === "support.crowdin.com") {
-		if (!document.location.pathname || document.location.pathname === "/")
-			presenceData.details = "On the main support page";
-		else if (
-			document.location.pathname.includes("/api/v2/") ||
-			document.location.pathname.includes("/enterprise/api/")
-		) {
-			const [activeLabel] = Array.from(
-				document.querySelectorAll("label")
-			).filter(c => c.className?.includes("active"));
-			presenceData.details = "Reading more about API V2";
-			presenceData.state =
-				activeLabel?.children.length >= 2
-					? activeLabel?.children[1].textContent
-						? activeLabel?.children[1].textContent
-						: activeLabel?.children[0].textContent
-					: activeLabel?.textContent;
-			presenceData.smallImageKey = "reading";
-			if (activeLabel) {
-				presenceData.buttons = [
-					{
-						label: "View section",
-						url: document.URL
-					}
-				];
-			}
-		} else if (document.location.pathname.includes("/search")) {
-			presenceData.details = "Searching support";
-			presenceData.state = (
-				document.querySelector(
+	switch (host) {
+		case "support.crowdin.com": {
+			const isEnterprise = pathnameSplit.includes("enterprise");
+			if (!pathname || pathname === "/")
+				presenceData.details = "On the main support page";
+			else if (
+				pathname.includes("/api/v2/") ||
+				pathname.includes("/enterprise/api/")
+			) {
+				const activeLabel = [...document.querySelectorAll("label")].find(c =>
+					c.className?.includes("active")
+				);
+
+				presenceData.details = `Reading the ${
+					isEnterprise ? "Enterprise " : ""
+				}API documentation`;
+
+				presenceData.state = [...(activeLabel?.children ?? [])]
+					.map((c, i, a) =>
+						a.length >= 1 && i === 0
+							? c.textContent.toUpperCase()
+							: c.textContent
+					)
+					.join(" ");
+				presenceData.smallImageKey = "reading";
+				if (activeLabel) {
+					presenceData.buttons = [
+						{
+							label: "Read more",
+							url: href,
+						},
+					];
+				}
+			} else if (pathname.includes("/search")) {
+				presenceData.details = "Searching support";
+				presenceData.state = document.querySelector<HTMLInputElement>(
 					".form-control.form-control__result.input-lg"
-				) as HTMLInputElement | null
-			)?.value;
-			presenceData.smallImageKey = "search";
-		} else {
-			presenceData.details = "Reading support article";
-			presenceData.state = document.querySelector(".hero")?.textContent;
-			presenceData.smallImageKey = "reading";
-			presenceData.buttons = [
-				{
-					label: "View article",
-					url: document.URL
-				}
-			];
-		}
-	} else if (document.location.host === "store.crowdin.com") {
-		presenceData.details = "Browsing the store";
-		if (!document.location.pathname || document.location.pathname === "/")
-			presenceData.details = "On the main store page";
-		else if (document.location.pathname.includes("/collections/")) {
-			const isApp = !!document.querySelector(".product-single__title");
-			presenceData.details = isApp ? "Viewing app" : "Browsing apps";
-			presenceData.state =
-				document.querySelector(".product-single__title")?.textContent ||
-				(
-					document.querySelector("[role=text]") as HTMLElement | null
-				)?.textContent.split("\n")?.[1];
-			if (isApp) {
+				)?.value;
+				presenceData.smallImageKey = "search";
+			} else {
+				presenceData.details = `Reading ${
+					isEnterprise ? "an Enterprise" : "a"
+				} support article`;
+				presenceData.state = document.querySelector(".hero")?.textContent;
+				presenceData.smallImageKey = "reading";
 				presenceData.buttons = [
 					{
-						label: "View app",
-						url: document.URL
-					}
+						label: "View article",
+						url: href,
+					},
 				];
 			}
-		} else if (document.location.pathname.includes("/search")) {
-			presenceData.details = "Searching the store";
-			presenceData.state = (
-				document.querySelector(".search__input") as HTMLInputElement | null
-			)?.value;
-			presenceData.smallImageKey = "search";
+
+			break;
 		}
-	} else if (document.location.host === "status.crowdin.com") {
-		// TODO add incident page (when they have an incident to report lol)
-		presenceData.details = "Viewing Crowdin's status";
-		if (document.location.pathname === "/subscribe")
-			presenceData.details = "Subscribing to status reports";
-	} else if (document.location.host === "blog.crowdin.com") {
-		presenceData.smallImageKey = "reading";
-		if (document.location.pathname === "/")
-			presenceData.details = "Browsing the blog";
-		else if (document.location.pathname.includes("/tag/")) {
-			presenceData.details = "Viewing tag";
-			presenceData.state = document
-				.querySelector(".text-center.home-bg.home-bg--tags")
-				?.textContent.split(":")[1];
-			presenceData.buttons = [
-				{
-					label: "View tag",
-					url: document.URL
+		case "store.crowdin.com": {
+			const appName = document
+				.querySelector("marketplace-item.hydrated")
+				?.shadowRoot.querySelector("h1")
+				.childNodes[0].textContent.trim();
+
+			if (!pathname || pathname === "/")
+				presenceData.details = "On the main store page";
+			else if (pathname.includes("/author/")) {
+				presenceData.details = "Viewing developer";
+				presenceData.state = document
+					.querySelectorAll("div.sc-marketplace-author")[1]
+					?.querySelector("h1").childNodes[0].textContent;
+				presenceData.buttons = [{ label: "View developer", url: href }];
+			} else if (appName) {
+				presenceData.details = "Viewing app";
+				presenceData.state = appName;
+				presenceData.buttons = [{ label: "View app", url: href }];
+			} else {
+				// Tags and other filter elements are intentionally not supported despite there being pathnames for them
+				// This is because they are customizable beyond the preset URLs and it would be hard to display all possibilities
+				const category = document
+					.querySelector("#category-select")
+					?.shadowRoot.querySelector(
+						"div.select-wrapper.select-wrapper--borderless > div"
+					).textContent;
+				presenceData.details = "Browsing the store";
+				presenceData.state =
+					category &&
+					`${
+						category.includes("categories") ? category : `${category} category`
+					}`;
+			}
+
+			break;
+		}
+		case "status.crowdin.com": {
+			// TODO add incident page (when they have an incident to report lol)
+			presenceData.details = "Viewing Crowdin's status";
+			if (pathname === "/subscribe")
+				presenceData.details = "Subscribing to status reports";
+
+			break;
+		}
+		case "blog.crowdin.com": {
+			presenceData.smallImageKey = "reading";
+			if (pathname === "/") presenceData.details = "Browsing the blog";
+			else if (pathname.includes("/tag/")) {
+				presenceData.details = "Viewing tag";
+				presenceData.state = document
+					.querySelector(".text-center.home-bg.home-bg--tags")
+					?.textContent.split(":")[1];
+				presenceData.buttons = [
+					{
+						label: "View tag",
+						url: href,
+					},
+				];
+			} else if (pathname.includes("/search")) {
+				presenceData.details = "Searching the blog";
+				presenceData.state =
+					document.querySelector<HTMLInputElement>(".form-control")?.value;
+				presenceData.smallImageKey = "search";
+			} else if (document.querySelector(".hero > h1")) {
+				presenceData.details = "Reading blog post";
+				presenceData.state = document.querySelector(".hero > h1").textContent;
+				presenceData.buttons = [
+					{
+						label: "View blog post",
+						url: href,
+					},
+				];
+			} else {
+				presenceData.details = "Unknown page";
+				delete presenceData.smallImageKey;
+			}
+
+			break;
+		}
+		default:
+			if (pathname === "/" || !pathname) presenceData.details = "Website Home";
+			else if (pathname.includes("/project/")) {
+				if (document.querySelector(".not-found-header"))
+					presenceData.details = "Viewing an invalid project";
+				else {
+					if (showProject) {
+						presenceData.details =
+							document.querySelector(".project-name__title__text")
+								?.textContent ??
+							document.querySelector<HTMLAnchorElement>(
+								"#wrap > div.section.project-page > div > div.clearfix.mb-2 > div > div:nth-child(2) > a"
+							).outerText;
+						presenceData.buttons = [
+							{
+								label: "View project",
+								url:
+									document.location.origin +
+									pathnameSplit.filter((_, i) => i <= 2).join("/"),
+							},
+						];
+					}
+					if (pathname.includes("/activity-stream"))
+						presenceData.state = "Viewing activity";
+					else if (pathname.includes("/discussions")) {
+						if (parseInt(pathnameSplit.at(-1))) {
+							const author = document
+								.querySelector(".author-info-section > span")
+								.parentElement.querySelector(".user-name").textContent;
+
+							if (showProject) presenceData.details += " - Discussions";
+							else presenceData.details = "Viewing a project's discussion";
+							presenceData.state = `${
+								(
+									document.querySelector(
+										"#topic-view-container > div > div > h3"
+									) ??
+									document.querySelector(
+										"#topic-view-container > div > div > div.topic-title-closed > h3"
+									)
+								).textContent
+							} - ${
+								author === "You"
+									? document.querySelector<HTMLImageElement>(
+											".textarea-toolbar > .author-avatar > img"
+									  ).title
+									: author
+							}`;
+						} else presenceData.state = "Browsing discussions";
+					} else if (pathname.includes("/tasks")) {
+						if (parseInt(pathnameSplit.at(-1))) {
+							if (showProject) presenceData.details += " - Tasks";
+							else presenceData.details = "Viewing a project's task";
+							presenceData.state =
+								document.querySelector("#task-title").textContent;
+						} else presenceData.state = "Browsing tasks";
+					} else if (pathname.includes("/reports")) {
+						const currentReport = pathnameSplit.at(-1);
+						if (showProject) presenceData.details += " - Reports";
+						else presenceData.details = "Viewing a project's reports";
+						presenceData.state =
+							!showManager &&
+							["cost-estimate", "abuse-report"].includes(currentReport)
+								? "Project Status"
+								: !showManager && currentReport === "translation-cost"
+								? "My Contribution"
+								: document.querySelector(".nav-item.active").textContent;
+					} else if (pathnameSplit.length === 3)
+						presenceData.state = "Viewing project home";
+					else if (
+						document.querySelector(
+							"#wrap > div.section.project-page > div > h1"
+						)
+					) {
+						presenceData.state = `${await getLanguageName(
+							pathnameSplit.at(-1)
+						)} translation`;
+					} else presenceData.state = "In project home";
+
+					if (showManager) {
+						if (pathname.includes("/content")) {
+							const managedContent =
+								document.querySelector(".nav-item.active").textContent;
+							if (showProject) {
+								presenceData.details += " - Content";
+								presenceData.state = `Managing ${managedContent}`;
+							} else {
+								presenceData.details = `Managing a project's ${managedContent}`;
+								delete presenceData.state;
+							}
+						} else if (pathname.includes("/resources"))
+							presenceData.state = "Viewing resources";
+						else if (pathname.includes("/members"))
+							presenceData.state = "Managing members";
+						else if (pathname.includes("/tools")) {
+							// Unfortunately every app has a different selector, so it's virtually impossible to support them all
+							presenceData.state = "Managing tools";
+						} else if (pathname.includes("/apps")) {
+							if (showProject) presenceData.details += " - Integrations";
+							else presenceData.details = "Managing a project's integrations";
+							presenceData.state = `Managing ${
+								document.querySelector(
+									".integration-details > .description > h3"
+								).textContent
+							}`;
+						} else if (pathname.includes("/settings"))
+							presenceData.state = "Managing project settings";
+					}
+					if (!presenceData.details && presenceData.state) {
+						const stateSplit = presenceData.state.split(" ");
+						if (!stateSplit.includes("project"))
+							stateSplit.splice(1, 0, "a project's");
+						else stateSplit[stateSplit.indexOf("project")] = "a project's";
+						presenceData.details = stateSplit.join(" ");
+						delete presenceData.state;
+					}
 				}
-			];
-		} else if (document.location.pathname.includes("/search")) {
-			presenceData.details = "Searching the blog";
-			presenceData.state = (
-				document.querySelector(".form-control") as HTMLInputElement | null
-			)?.value;
-			presenceData.smallImageKey = "search";
-		} else if (document.querySelector(".hero > h1")) {
-			presenceData.details = "Reading blog post";
-			presenceData.state = document.querySelector(".hero > h1").textContent;
-			presenceData.buttons = [
-				{
-					label: "View blog post",
-					url: document.URL
+			} else if (
+				pathname.includes("/translate") ||
+				pathname.includes("/proofread")
+			) {
+				// Ensure the editor has loaded to prevent undefined text
+				if (!document.querySelector("#crowdin-editor-wrapper")) return;
+				const fileName = document.querySelector(".file-name")?.textContent,
+					languageName = document.querySelector(
+						".language-name-wrapper.text-overflow"
+					)?.textContent;
+
+				if (pathname.includes("/proofread"))
+					presenceData.details = `Proofreading ${fileName}`;
+				else presenceData.details = `Translating ${fileName}`;
+
+				if (showProject) {
+					presenceData.state = `${document.title
+						.split("-")[1]
+						?.trim()} - ${languageName}`;
+				} else presenceData.state = languageName;
+				presenceData.smallImageKey = "writing";
+				presenceData.buttons = [
+					{
+						label: "Translate project",
+						url: href,
+					},
+				];
+			} else if (pathname.includes("/profile")) {
+				if (document.querySelector(".error-page"))
+					presenceData.details = "Viewing an invalid profile";
+				else {
+					const profileName = document.querySelector(".username"),
+						profileNickname = document.querySelector(".user-login");
+
+					if (
+						// check if "To Do" nav item (third) is present. If so, profile is own profile
+						document.querySelectorAll(".nav-item")[2]
+					) {
+						if (pathname.includes("/activity"))
+							presenceData.details = "Viewing own activity";
+						else presenceData.details = "Viewing own profile";
+					} else if (pathname.includes("/activity"))
+						presenceData.details = "Viewing user activity";
+					else presenceData.details = "Viewing a profile";
+
+					presenceData.state = `${profileName?.textContent}${
+						profileNickname ? ` - ${profileNickname.textContent}` : ""
+					}`;
+
+					presenceData.buttons = [
+						{
+							label: "View profile",
+							// We can't just use href because own profile may not have the nickname at the end
+							url: `https://crowdin.com/profile/${
+								(profileNickname ?? profileName).textContent
+							}`,
+						},
+					];
 				}
-			];
-		} else {
-			presenceData.details = "Unknown page";
-			presenceData.smallImageKey = "";
-		}
-	} else if (
-		(document.location.pathname === "/" || !document.location.pathname) &&
-		document.location.host === "crowdin.com"
-	)
-		presenceData.details = "Website Home";
-	else if (
-		document.location.pathname.includes("/project/") ||
-		(document.location.host !== "crowdin.com" &&
-			document.location.pathname === "/")
-	) {
-		translateProject =
-			document.querySelector(
-				".title-name.project-name-preview.text-overflow"
-			) || document.querySelector(".project-name-text.text-overflow");
+			} else if (pathname.includes("/messages")) {
+				const participants = [
+						...document
+							.querySelector(".messages-members-status")
+							.querySelectorAll(".messages-single-member-status"),
+					]
+						.map(e => e.textContent)
+						// The elements already come with commas and spaces so we don't need to modify anything. This also accounts for the "X more" button and for single users
+						.join(""),
+					subject = document.querySelector("#subject-text > h3").textContent;
+				if (
+					parseInt(
+						document.querySelector(".users-counter > :nth-child(2)").textContent
+					) === 1
+				) {
+					if (showConversations) {
+						presenceData.details = "Messaging user";
+						presenceData.state = `${subject} - ${participants}`;
+					} else presenceData.details = "Messaging a user";
+				} else if (showConversations) {
+					presenceData.details = "Messaging group";
+					presenceData.state = `${subject} - ${participants}`;
+				} else presenceData.details = "Messaging a group";
 
-		translatePageTitle = document.querySelector(
-			".language-header.no-margin-top.margin-bottom"
-		);
+				presenceData.smallImageKey = "writing";
+			} else if (pathname.includes("/projects")) {
+				const searchValue = document.querySelector<HTMLInputElement>(
+					"#search_query > input"
+				).value;
 
-		presenceData.details = translateProject?.textContent;
-		presenceData.buttons = [
-			{
-				label: "View project",
-				url: document.URL
-			}
-		];
-		if (document.location.pathname.includes("activity_stream"))
-			presenceData.state = "Viewing activity";
-		else if (document.location.pathname.includes("reports"))
-			presenceData.state = "Viewing reports";
-		else if (document.location.pathname.includes("discussions"))
-			presenceData.state = "Viewing discussions";
-		else if (document.location.pathname.includes("tasks"))
-			presenceData.state = "Viewing tasks";
-		else {
-			presenceData.state =
-				translatePageTitle?.textContent || "Viewing project home";
-		}
-	} else if (document.location.pathname.includes("/translate")) {
-		translatingFile = document.querySelector(".file-name");
-		translatingLanguage = document.querySelector(
-			".language-name-wrapper.text-overflow"
-		);
-		translateProject = document.querySelector("title");
+				presenceData.details = "Exploring projects";
+				presenceData.state =
+					document.querySelector(".nav-item.active").textContent;
 
-		presenceData.details = `Translating ${translatingFile?.textContent}`;
-		presenceData.state = `${translateProject?.textContent
-			.split("-")[1]
-			?.trim()} (${translatingLanguage?.textContent})`;
-		presenceData.smallImageKey = "writing";
-		presenceData.buttons = [
-			{
-				label: "Translate project",
-				url: document.URL
+				if (searchValue) {
+					presenceData.state += ` - ${searchValue}`;
+					presenceData.smallImageKey = "search";
+				}
+			} else if (pathname.includes("/resources")) {
+				presenceData.details = "Viewing resources";
+				presenceData.state =
+					document.querySelector<HTMLLIElement>(".active")?.textContent;
+			} else if (pathname.includes("/release-notes")) {
+				presenceData.details = "Reading release notes";
+				presenceData.state = document.querySelector<HTMLAnchorElement>(
+					".selected-release-item"
+				)?.textContent;
+				presenceData.smallImageKey = "reading";
+				presenceData.buttons = [
+					{
+						label: "View release notes",
+						url: href,
+					},
+				];
+			} else if (pathname === "/features")
+				presenceData.details = "Viewing Crowdin's features";
+			else if (pathname === "/demo-request")
+				presenceData.details = "Requesting a demo";
+			else if (pathname.includes("/page/") || pathname.includes("/teams/")) {
+				presenceData.details = "Reading page";
+				// The header of each page is inconsistent and sometimes too big, thus we use the document title
+				presenceData.state = document.title.split("|")[0];
+				presenceData.smallImageKey = "reading";
+				presenceData.buttons = [
+					{
+						label: "View page",
+						url: href,
+					},
+				];
+			} else if (pathname.includes("/pricing"))
+				presenceData.details = "Viewing pricing";
+			else if (pathname.includes("/enterprise"))
+				presenceData.details = "Viewing enterprise";
+			else if (pathname.includes("/contacts"))
+				presenceData.details = "Contacting Crowdin";
+			else if (pathname.includes("/feature-request"))
+				presenceData.details = "Viewing feature requests";
+			else if (pathname === "/createproject")
+				presenceData.details = "Creating a project";
+			else {
+				presence.info(
+					"This page is currently not supported in the Crowdin presence! Please open an issue on GitHub about this."
+				);
+				presenceData.details = "Viewing an unsupported page";
 			}
-		];
-	} else if (document.location.pathname.includes("/profile")) {
-		profileName = document.querySelector(".username.s-margin-bottom");
-		profileNickname = document.querySelector(".user-login");
-
-		if (document.location.pathname.includes("/activity")) {
-			presenceData.details = "Viewing activity";
-			presenceData.state = `${profileName?.textContent}${
-				profileNickname ? ` - ${profileNickname.textContent}` : ""
-			}`;
-		} else if (document.querySelector(".static-icon.static-icon-plus")) {
-			presenceData.details = "Viewing own profile";
-			presenceData.state = `${profileName?.textContent}${
-				profileNickname ? ` - ${profileNickname.textContent}` : ""
-			}`;
-		} else {
-			presenceData.details = "Viewing a profile";
-			presenceData.state = `${profileName?.textContent}${
-				profileNickname ? ` - ${profileNickname.textContent}` : ""
-			}`;
-		}
-	} else if (document.location.pathname.includes("/projects")) {
-		presenceData.details = "Exploring projects";
-		presenceData.state =
-			document.querySelector("#showcase_current").parentElement.parentElement
-				.className === "tab-pane active"
-				? document.querySelector("#showcase_current")?.textContent
-				: document.querySelector(".active")?.textContent;
-		presenceData.smallImageKey = "search";
-	} else if (document.location.pathname.includes("/resources")) {
-		presenceData.details = "Viewing resources";
-		presenceData.state = (
-			document.querySelector(".active") as HTMLLIElement | null
-		)?.textContent;
-	} else if (document.location.pathname === "/release-notes") {
-		presenceData.details = "Reading release notes";
-		presenceData.state = (
-			document.querySelector(
-				".selected-release-item"
-			) as HTMLAnchorElement | null
-		)?.textContent;
-		presenceData.smallImageKey = "reading";
-		presenceData.buttons = [
-			{
-				label: "View release notes",
-				url: document.URL
-			}
-		];
-	} else if (document.location.pathname === "/features")
-		presenceData.details = "Viewing Crowdin's features";
-	else if (document.location.pathname === "/demo-request")
-		presenceData.details = "Requesting a demo";
-	else if (document.location.pathname.includes("/page/")) {
-		presenceData.details = "Reading page";
-		presenceData.state =
-			document.querySelector(".text-center > h1")?.textContent ??
-			(document.querySelector(".row > h1") as HTMLElement | null)?.textContent
-				.split("\n")
-				.join(" ");
-		presenceData.smallImageKey = "reading";
-		presenceData.buttons = [
-			{
-				label: "View page",
-				url: document.URL
-			}
-		];
-	} else if (document.location.pathname.includes("/pricing"))
-		presenceData.details = "Viewing pricing";
-	else if (document.location.pathname.includes("/enterprise"))
-		presenceData.details = "Viewing enterprise";
-	else if (document.location.pathname.includes("/contacts"))
-		presenceData.details = "Contacting Crowdin";
-	else if (document.location.pathname.includes("/feature-request"))
-		presenceData.details = "Viewing feature requests";
+	}
 
 	presence.setActivity(presenceData);
 });
+
+async function getLanguageName(id: string) {
+	const languages = await fetch(
+		"https://api.crowdin.com/api/v2/languages?limit=500",
+		{
+			headers: { Accept: "application/json" },
+		}
+	)
+		.then(
+			r =>
+				r.json() as Promise<{
+					data: { data: CrowdinLanguage }[];
+					pagination: { limit: number; offset: number };
+				}>
+		)
+		.then(r => r.data.map(l => l.data));
+	return languages.find(l => l.id === id)?.name;
+}
+
+interface CrowdinLanguage {
+	id: string;
+	name: string;
+	editorCode: string;
+	twoLettersCode: string;
+	threeLettersCode: string;
+	locale: string;
+	androidCode: string;
+	osxCode: string;
+	osxLocale: string;
+	pluralCategoryNames: string[];
+	pluralRules: string;
+	pluralExamples: string[];
+	textDirection: string;
+	dialectOf: string;
+}

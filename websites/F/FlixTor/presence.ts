@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "616754182858342426"
+		clientId: "1001112348192423946",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let lastPlaybackState,
@@ -18,7 +18,7 @@ if (lastPlaybackState !== playback) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Unknown page",
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		},
 		video: HTMLVideoElement = document.querySelector(
 			"#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
@@ -43,6 +43,10 @@ presence.on("UpdateData", async () => {
 			episode: HTMLElement = document.querySelector(
 				"#playercontainer span.outPep"
 			);
+		presenceData.largeImageKey = document
+			.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+			.getAttribute("content")
+			.replace("https:https:", "https:");
 
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused
@@ -58,24 +62,56 @@ presence.on("UpdateData", async () => {
 			presenceData.details = videoTitle
 				? videoTitle.textContent
 				: "Title not found...";
-			presenceData.state = `Season ${season.textContent}, Episode ${episode.textContent}`;
+			presenceData.state = `Season ${season.textContent} Episode ${episode.textContent}`;
+			presenceData.buttons = [
+				{
+					label:
+						presenceData.details.length >= 30
+							? "View Now"
+							: presenceData.details,
+					url: document.location.href.split("/season/")[0],
+				},
+				{
+					label: presenceData.state,
+					url: document.location.href,
+				},
+			];
 		} else if (!season && episode) {
 			presenceData.details = videoTitle
 				? videoTitle.textContent
 				: "Title not found...";
 			presenceData.state = `Episode ${episode.textContent}`;
+			presenceData.buttons = [
+				{
+					label:
+						presenceData.details.length >= 30
+							? "View Now"
+							: presenceData.details,
+					url: document.location.href.split("/episode/")[0],
+				},
+				{
+					label: presenceData.state,
+					url: document.location.href,
+				},
+			];
 		} else {
 			presenceData.details = "Watching";
 			presenceData.state = videoTitle
 				? videoTitle.textContent
 				: "Title not found...";
+			presenceData.buttons = [
+				{
+					label:
+						presenceData.state.length >= 30 ? "Watch Now" : presenceData.state,
+					url: document.location.href,
+				},
+			];
 		}
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-
 		if (videoTitle) presence.setActivity(presenceData, !video.paused);
 	}
 });

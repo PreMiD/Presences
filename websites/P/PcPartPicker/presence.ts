@@ -1,14 +1,14 @@
 const presence = new Presence({
-		clientId: "857912880947265566"
+		clientId: "857912880947265566",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "pcpartpicker_logo_",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location;
+		{ pathname, href } = document.location;
 
 	if (pathname === "/") presenceData.details = "Browsing Home Page";
 	else if (pathname.startsWith("/guide/")) {
@@ -25,8 +25,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Browse Guide",
-				url: document.location.href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/b/")) {
 		const build: HTMLHeadingElement = document.querySelector(
@@ -42,8 +42,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Build",
-				url: document.location.href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/product/")) {
 		const productType: HTMLAnchorElement = document.querySelector(
@@ -56,8 +56,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Look at product",
-				url: document.location.href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/products/")) {
 		presenceData.details =
@@ -69,15 +69,15 @@ presence.on("UpdateData", async () => {
 						.join(" ")
 						.replace(/\b\w/g, c => c.toUpperCase())}`; // Capitalize first char of every word
 	} else if (pathname.startsWith("/user/")) {
-		const [, , username, section = ""] = pathname.split("/");
-		presenceData.details = `Viewing ${username}'s ${
+		const section = pathname.split("'/")[3];
+		presenceData.details = `Viewing ${pathname.split("/")[2]}'s ${
 			section === "" ? "profile" : section
 		}`;
 		presenceData.buttons = [
 			{
 				label: "View User",
-				url: document.location.href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/list/")) {
 		const price: HTMLTableDataCellElement = document.querySelector(
@@ -92,8 +92,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View System",
-					url: link.value
-				}
+					url: link.value,
+				},
 			];
 		}
 	} else if (pathname.startsWith("/forums/")) {
@@ -104,8 +104,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Thread",
-					url: document.location.href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (pathname.startsWith("/trends/")) {
@@ -118,8 +118,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Trends",
-				url: document.location.href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/builds/"))
 		presenceData.details = "Viewing Completed Builds";

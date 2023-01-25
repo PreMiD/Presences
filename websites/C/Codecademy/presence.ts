@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "736516965748834336"
+		clientId: "736516965748834336",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
-	start = new Date().getTime();
+	start = Date.now();
 let videoTitle: string,
 	videoCurrentTime: number,
 	videoDuration: number,
@@ -25,7 +25,7 @@ presence.on("iFrameData", (data: DataInterface) => {
 });
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		pathArray: string[] = window.location.pathname
 			.replace(/^\/|\/$/g, "")
@@ -86,18 +86,16 @@ presence.on("UpdateData", async () => {
 			premiumPath = false;
 			if (heading.className.startsWith("trackTitle__")) premiumPath = true;
 			heading = heading.textContent;
-			if (pathArray[0] === "courses") {
-				if (heading.startsWith("Learn ")) {
-					presenceData.smallImageKey = heading
-						.split(" ")
-						.slice(1)
-						.join(" ")
-						.toLowerCase()
-						.replace(" ", "_")
-						.replace("+", "plus")
-						.replace("#", "sharp");
-					presenceData.smallImageText = heading.split(" ").slice(1).join(" ");
-				}
+			if (pathArray[0] === "courses" && heading.startsWith("Learn ")) {
+				presenceData.smallImageKey = heading
+					.split(" ")
+					.slice(1)
+					.join(" ")
+					.toLowerCase()
+					.replace(" ", "_")
+					.replace("+", "plus")
+					.replace("#", "sharp");
+				presenceData.smallImageText = heading.split(" ").slice(1).join(" ");
 			}
 			presenceData.details = heading.startsWith("Learn ")
 				? `Learning ${heading.split(" ").slice(1).join(" ")}`

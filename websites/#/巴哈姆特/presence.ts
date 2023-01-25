@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "647973934603567130"
+		clientId: "647973934603567130",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLElement | Element | string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bahamut"
+		largeImageKey: "bahamut",
 	};
 
 	if (document.location.hostname === "forum.gamer.com.tw") {
@@ -37,8 +37,8 @@ presence.on("UpdateData", async () => {
 					.querySelector("div.BH-menu > ul.BH-menuE > li > a[title]")
 					.getAttribute("title");
 				presenceData.details = title;
-				presenceData.state = document.getElementsByClassName(
-					"c-post__header__title"
+				presenceData.state = document.querySelectorAll(
+					".c-post__header__title"
 				)[0].textContent;
 				presence.setActivity(presenceData);
 				presenceData.smallImageKey = "reading";

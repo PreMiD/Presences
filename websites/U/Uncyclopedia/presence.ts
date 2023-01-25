@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "643159616498171934"
+		clientId: "643159616498171934",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: string;
@@ -9,7 +9,7 @@ const actionURL = new URL(document.location.href),
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	title = (
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = "Viewing revision history of:";
 		if (title2Result.includes("_"))
-			presenceData.state = title2Result.replace(/_/g, " ");
+			presenceData.state = title2Result.replaceAll("_", " ");
 		else presenceData.state = title2Result;
 	} else if (
 		actionResult === "edit" &&
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = "Editing a page:";
 		if (title2Result.includes("_"))
-			presenceData.state = title2Result.replace(/_/g, " ");
+			presenceData.state = title2Result.replaceAll("_", " ");
 		else presenceData.state = title2Result;
 	}
 

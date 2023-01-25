@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "768710795449335818"
+		clientId: "768710795449335818",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
 	});
 
 /**
@@ -20,10 +20,9 @@ let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "starz-logo"
+			largeImageKey: "starz-logo",
 		},
-		{ href } = window.location,
-		path = window.location.pathname;
+		{ href, pathname: path } = window.location;
 
 	if (href !== oldUrl) {
 		oldUrl = href;

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "758692661846081615"
+		clientId: "758692661846081615",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "ifi-logo"
+		largeImageKey: "ifi-logo",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	pages: { [page: string]: string } = {
@@ -21,7 +21,7 @@ const presence = new Presence({
 		"/yabanci-dizi-izle": "Yabancı Diziler",
 		"/haberler": "Haberler",
 		"/iletisim": "İletişim",
-		"/efsane-filmler": "Efsane Filmler"
+		"/efsane-filmler": "Efsane Filmler",
 	},
 	video: { [k: string]: string | boolean | number } = {};
 

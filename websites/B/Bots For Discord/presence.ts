@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "806926545771167774"
+		clientId: "806926545771167774",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "botsfordiscord.com") {
 		presenceData.details = "Viewing page:";
@@ -77,11 +77,12 @@ presence.on("UpdateData", async () => {
 					.split("/search/")[1]
 					.trim()}` + ")";
 		}
-	} else if (window.location.hostname === "docs.botsfordiscord.com") {
-		if (window.location.pathname.startsWith("/")) {
-			presenceData.details = "API Docs | Viewing page:";
-			presenceData.state = document.querySelector("h1 span").textContent.trim();
-		}
+	} else if (
+		window.location.hostname === "docs.botsfordiscord.com" &&
+		window.location.pathname.startsWith("/")
+	) {
+		presenceData.details = "API Docs | Viewing page:";
+		presenceData.state = document.querySelector("h1 span").textContent.trim();
 	}
 	if (!presenceData.state) presence.setActivity();
 	else presence.setActivity(presenceData);

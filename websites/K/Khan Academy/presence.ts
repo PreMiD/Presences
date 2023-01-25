@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "900882829154598952"
+		clientId: "900882829154598952",
 	}),
 	strings = presence.getStrings({
 		homepage: "general.viewHome",
@@ -7,13 +7,13 @@ const presence = new Presence({
 		watching: "general.watching",
 		reading: "general.readingAbout",
 		writing: "general.writing",
-		profile: "general.viewProfile"
+		profile: "general.viewProfile",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "khanacademy",
-		details: (await strings).watching
+		details: (await strings).watching,
 	};
 
 	if (document.location.pathname === "/")

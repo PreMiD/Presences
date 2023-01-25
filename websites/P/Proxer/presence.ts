@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "776479405009666098"
+		clientId: "776479405009666098",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -19,7 +19,7 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "proxer_icon",
 			details: "Idle",
-			state: "Browsing Proxer.me"
+			state: "Browsing Proxer.me",
 		},
 		path = document.location.pathname;
 

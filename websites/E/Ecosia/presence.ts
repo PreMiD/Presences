@@ -1,12 +1,12 @@
 const browsingTimestamp = Math.floor(Date.now() / 1000),
 	presence = new Presence({
-		clientId: "629653820405710848"
+		clientId: "629653820405710848",
 	});
 presence.on("UpdateData", () => {
 	const urlParams = new URLSearchParams(window.location.search),
 		presenceData: PresenceData = {
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 	if (document.location.pathname === "/") presenceData.details = "Home";
 	else if (
@@ -15,7 +15,7 @@ presence.on("UpdateData", () => {
 	) {
 		presenceData.details = `Searching for ${urlParams.get("q")}`;
 		presenceData.state =
-			document.getElementsByClassName("result-count")[0].textContent;
+			document.querySelectorAll(".result-count")[0].textContent;
 
 		presenceData.smallImageKey = "search";
 	} else if (

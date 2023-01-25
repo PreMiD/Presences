@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "660894911331172372"
+		clientId: "660894911331172372",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let priceEls;
@@ -7,7 +7,7 @@ let priceEls;
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "bots.discordlabs.org") {
@@ -18,10 +18,10 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Viewing Page:";
 			presenceData.state = "DiscordLabs Partners";
 		} else if (document.location.pathname.includes("/profile/")) {
-			priceEls = document.getElementsByClassName("uname");
-			for (let i = 0; i < priceEls.length; i++) {
+			priceEls = document.querySelectorAll(".uname");
+			for (const priceEl of priceEls) {
 				presenceData.details = "Viewing a profile:";
-				presenceData.state = (priceEls[i] as HTMLElement).textContent;
+				presenceData.state = (priceEl as HTMLElement).textContent;
 			}
 		} else if (document.location.pathname.includes("/submit/")) {
 			presenceData.details = "Viewing Page:";
@@ -33,12 +33,12 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Search for:";
 			presenceData.state = window.location.href
 				.slice(39)
-				.replace(/\+|%20/g, " ");
+				.replaceAll("+|%20", " ");
 		} else if (document.location.pathname.includes("/bot/")) {
-			priceEls = document.getElementsByClassName("botname");
-			for (let i = 0; i < priceEls.length; i++) {
+			priceEls = document.querySelectorAll(".botname");
+			for (const priceEl of priceEls) {
 				presenceData.details = "Viewing a Discord bot:";
-				presenceData.state = (priceEls[i] as HTMLElement).textContent;
+				presenceData.state = (priceEl as HTMLElement).textContent;
 			}
 		}
 	}

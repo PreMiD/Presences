@@ -1,12 +1,12 @@
 const presence = new Presence({
-	clientId: "726570008037163100"
+	clientId: "726570008037163100",
 });
 
 function pathStarts(string: string): boolean {
 	return document.location.pathname.startsWith(string);
 }
 function isHome(string: string): boolean {
-	if (string === "/") if (document.location.pathname === "/") return true;
+	if (string === "/" && document.location.pathname === "/") return true;
 
 	return false;
 }
@@ -25,7 +25,7 @@ function getGuildTitle(): string {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "aminoapps",
-		startTimestamp: new Date().getTime()
+		startTimestamp: Date.now(),
 	};
 	if (document.location.hostname === "aminoapps.com") {
 		switch (true) {

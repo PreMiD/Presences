@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "786770326234464256"
+		clientId: "786770326234464256",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		paths = document.location.pathname.split("/");
 
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
 			default: {
 				presenceData.largeImageKey = "homepage";
 
-				const [, , , , tech] = paths;
+				const tech = paths[4];
 
 				if (paths[5]) {
 					paths.splice(0, 5);

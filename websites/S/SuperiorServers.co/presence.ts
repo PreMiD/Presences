@@ -1,12 +1,12 @@
 /* eslint-disable no-one-time-vars/no-one-time-vars */
 const presence = new Presence({
-	clientId: "792094839414980639"
+	clientId: "792094839414980639",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "main",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	if (document.location.hostname === "superiorservers.co") {
 		presenceData.largeImageKey = "main";

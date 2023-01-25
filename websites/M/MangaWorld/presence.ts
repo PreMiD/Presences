@@ -1,17 +1,17 @@
 const presence = new Presence({
-		clientId: "860298084512038964"
+		clientId: "860298084512038964",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "mangaworld_logo_dark"
+			largeImageKey: "mangaworld_logo_dark",
 		},
 		/* Query dell'URI - URI query */
 		searchParams = new URLSearchParams(
 			decodeURIComponent(document.location.search)
 				.replace("?", "")
-				.replace(/-/g, " ")
+				.replaceAll("-", " ")
 		);
 
 	/* Homepage */
@@ -24,23 +24,22 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "bookmark";
 		presenceData.smallImageText = "Preferiti";
 		presenceData.details = "Sfogliando i preferiti";
-		let filter;
 
-		if (document.location.href.endsWith("RE-READING")) filter = "In rilettura";
-		else if (document.location.href.endsWith("COMPLETED"))
-			filter = "Completati";
-		else if (document.location.href.endsWith("ON_HOLD")) filter = "In pausa";
-		else if (document.location.href.endsWith("PLAN_TO_READ"))
-			filter = "Da leggere";
-		else if (document.location.href.endsWith("DROPPED")) filter = "Droppati";
-		else if (document.location.href.endsWith("READING")) filter = "In lettura";
-
-		presenceData.state = filter;
+		const categories: { [page: string]: string } = {
+				"RE-READING": "In rilettura",
+				COMPLETED: "Completati",
+				ON_HOLD: "In pausa",
+				PLAN_TO_READ: "Da leggere",
+				DROPPED: "Droppati",
+				READING: "In lettura",
+			},
+			category = document.location.pathname.split("/")[3];
+		if (category in categories) presenceData.state = categories[category];
 	} else if (document.location.href.includes("keyword=")) {
 		/* ----- ARCHIVIO - ARCHIVE ----- */
 		/* Ricerca per nome - Search by name */
 		presenceData.smallImageKey = "search";
-		presenceData.smallImageText = "Ricerca";
+		presenceData.smallImageText = "Ricerca per nome";
 		presenceData.details = "Cercando:";
 		presenceData.state = `"${searchParams.get("keyword")}"`;
 	} else if (document.location.href.includes("author=")) {
@@ -57,14 +56,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = searchParams.get("artist");
 	} else if (document.location.href.includes("genre=")) {
 		/* Ricerca per genere - Search by genre */
-		const words = searchParams.get("genre").split(" ");
-		for (let i = 0; i < words.length; i++)
-			words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-
+		const genre = searchParams.get("genre").split(" ");
+		for (let i = 0; i < genre.length; i++)
+			genre[i] = genre[i][0].toUpperCase() + genre[i].substr(1);
 		presenceData.smallImageKey = "tags";
 		presenceData.smallImageText = "Ricerca per genere";
 		presenceData.details = "Sfogliando i contenuti del genere:";
-		presenceData.state = words.join(" ");
+		presenceData.state = genre.join(" ");
 	} else if (document.location.href.includes("year=")) {
 		/* Ricerca per anno - Search by year of release */
 		presenceData.smallImageKey = "calendar2";
@@ -73,43 +71,44 @@ presence.on("UpdateData", async () => {
 		presenceData.state = searchParams.get("year");
 	} else if (document.location.href.includes("status=")) {
 		/* Ricerca per stato - Search by status */
-		const statusQuery = searchParams.get("status");
 		presenceData.smallImageKey = "slash";
 		presenceData.smallImageText = "Ricerca per stato";
 		presenceData.details = "Sfogliando i contenuti:";
-		let status;
 
-		if (statusQuery === "dropped") status = "Droppati";
-		else if (statusQuery === "ongoing") status = "In corso d'opera";
-		else if (statusQuery === "completed") status = "Finiti";
-		else if (statusQuery === "paused") status = "In pausa";
-		else if (statusQuery === "canceled") status = "Cancellati";
-
-		presenceData.state = status;
+		const statuses: { [value: string]: string } = {
+				dropped: "Droppati",
+				ongoing: "In corso d'opera",
+				completed: "Finiti",
+				paused: "In pausa",
+				canceled: "Cancellati",
+			},
+			status = searchParams.get("status");
+		if (status in statuses) presenceData.state = statuses[status];
 	} else if (document.location.href.includes("type=")) {
-		/* Ricerca per tipo - Search by type/format */
+		/* Ricerca per formato - Search by format */
 		const rawtype = searchParams.get("type");
-
 		presenceData.smallImageKey = "file3";
 		presenceData.smallImageText = "Ricerca per formato";
 		presenceData.details = "Sfogliando i contenuti in formato:";
 		presenceData.state = rawtype[0].toUpperCase() + rawtype.substring(1);
 	} else if (document.location.href.includes("sort=")) {
 		/* Ricerca per ordinamento - Order by */
-		const sortQuery = searchParams.get("sort");
 		presenceData.smallImageKey = "sort";
 		presenceData.smallImageText = "Ricerca per ordinamento";
 		presenceData.details = "Sfogliando i contenuti:";
-		let query;
 
-		if (sortQuery === "a z") query = "Ordinati dalla A alla Z";
-		else if (sortQuery === "z a") query = "Ordinati dalla Z alla A";
-		else if (sortQuery === "most_read") query = "Più letti";
-		else if (sortQuery === "less_read") query = "Meno letti";
-		else if (sortQuery === "newest") query = "Più recenti";
-		else if (sortQuery === "oldest") query = "Meno recenti";
-
-		presenceData.state = query;
+		const sorts: { [page: string]: string } = {
+				"a z": "Ordinati dalla A alla Z",
+				"z a": "Ordinati dalla Z alla A",
+				// eslint-disable-next-line camelcase
+				most_read: "Più letti",
+				// eslint-disable-next-line camelcase
+				less_read: "Meno letti",
+				newest: "Più recenti",
+				oldest: "Meno recenti",
+			},
+			sort = searchParams.get("sort");
+		if (sort in sorts) presenceData.state = sorts[sort];
 	} else if (document.location.href.includes("archive")) {
 		/* Pagina principale - Main page */
 		presenceData.smallImageKey = "archive";
@@ -128,11 +127,10 @@ presence.on("UpdateData", async () => {
 					.replace(" Scan ITA - MangaWorld", "")
 					.split("Capitolo");
 			let chapter = chapter0n;
-
 			if (parseInt(chapter0n, 10) < 10) chapter = chapter0n.replace("0", "");
-
 			let chapterString = "Capitolo";
-			if (!chapter0n) (chapterString = "Oneshot"), (chapter = "");
+			if (typeof chapter0n === "undefined")
+				(chapterString = "Oneshot"), (chapter = "");
 
 			presenceData.smallImageKey = "book3";
 			presenceData.smallImageText = mangaName;
@@ -143,12 +141,12 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Leggilo anche tu!",
-					url: document.location.href.replace(/.$/, "1")
+					url: document.location.href.replace(/.$/, "1"),
 				},
 				{
-					label: "Vai alla pagina dell'opera!",
-					url: document.location.href.replace(/read\/.*/g, "")
-				}
+					label: "Vai alla pagina del manga!",
+					url: document.location.href.replace(/read\/.*/g, ""),
+				},
 			];
 		} else {
 			/* Nella pagina principale del manga - In the manga's main page */
@@ -159,9 +157,9 @@ presence.on("UpdateData", async () => {
 			presenceData.state = pageName;
 			presenceData.buttons = [
 				{
-					label: "Vai alla pagina dell'opera!",
-					url: document.location.href
-				}
+					label: "Vai alla pagina del manga!",
+					url: document.location.href,
+				},
 			];
 		}
 	} else {

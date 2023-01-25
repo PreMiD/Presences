@@ -1,13 +1,13 @@
 const presence = new Presence({
-		clientId: "682593223948238849"
+		clientId: "682593223948238849",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function getRow(row: number) {
-	const metas = document.getElementsByTagName("meta");
-	for (let i = 0; i < metas.length; i++) {
-		if (metas[i].getAttribute("property") === `premid:row${row}`)
-			return metas[i].getAttribute("content");
+	const metas = document.querySelectorAll("meta");
+	for (const meta of metas) {
+		if (meta.getAttribute("property") === `premid:row${row}`)
+			return meta.getAttribute("content");
 	}
 	return;
 }
@@ -15,7 +15,7 @@ function getRow(row: number) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	presenceData.details = getRow(1);
 	presenceData.state = getRow(2);

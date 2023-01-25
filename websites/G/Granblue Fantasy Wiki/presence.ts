@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "914354609370329098"
+		clientId: "914354609370329098",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "vyrnball",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/Main_Page")
@@ -34,16 +34,16 @@ presence.on("UpdateData", () => {
 		).value;
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = "Searching";
-	} else if (document.location.href.indexOf("Special:Preferences") > -1)
+	} else if (document.location.href.includes("Special:Preferences"))
 		presenceData.details = "Editing preferences";
-	else if (document.location.href.indexOf("Special:Watchlist") > -1)
+	else if (document.location.href.includes("Special:Watchlist"))
 		presenceData.details = "Viewing watchlist";
-	else if (document.location.href.indexOf("Special:Contributions") > -1)
+	else if (document.location.href.includes("Special:Contributions"))
 		presenceData.details = "Looking up contributions";
-	else if (document.location.href.indexOf("history") > -1) {
+	else if (document.location.href.includes("history")) {
 		presenceData.details = "Viewing revision history of:";
 		presenceData.state = document.querySelector(".firstHeading").textContent;
-	} else if (document.location.href.indexOf("edit") > -1) {
+	} else if (document.location.href.includes("edit")) {
 		presenceData.details = "Editing:";
 		presenceData.state = document.querySelector(".firstHeading").textContent;
 		presenceData.smallImageKey = "edit";

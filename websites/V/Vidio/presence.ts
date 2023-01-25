@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "795564487910227968"
+		clientId: "795564487910227968",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "vidio",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {
@@ -87,8 +87,8 @@ presence.on("UpdateData", async () => {
 					"#livestreaming-player__player_html5_api"
 				) as HTMLVideoElement;
 				if (video) {
-					presenceData.details = document.getElementsByClassName(
-						"b-livestreaming-detail__title section__title"
+					presenceData.details = document.querySelectorAll(
+						".b-livestreaming-detail__title.section__title"
 					)[1].textContent;
 					presenceData.state = document.querySelector(
 						".b-livestreaming-user__name"

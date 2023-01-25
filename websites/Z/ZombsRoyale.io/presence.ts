@@ -1,82 +1,125 @@
 const presence = new Presence({
-	clientId: "845354103118364672"
+	clientId: "845354103118364672",
 });
 
 let matchStart: number = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		currentGameState = await getPageletiable("game.currentGameState");
 
-	if (currentGameState === "loading" || currentGameState === "UiLoadingOverlay")
-		presenceData.details = "Loading...";
-	else if (currentGameState === "MainMenu")
-		presenceData.details = "Lurking in main menu";
-	else if (
-		currentGameState === "Cosmetics" ||
-		currentGameState === "UiCosmeticSelectorOverlay"
-	)
-		presenceData.details = "Viewing cosmetics";
-	else if (currentGameState === "Profile")
-		presenceData.details = "Viewing their profile";
-	else if (
-		currentGameState === "Shop" ||
-		currentGameState === "UiPreviewPackOverlay"
-	)
-		presenceData.details = "Browsing Shop";
-	else if (
-		currentGameState === "Friends" ||
-		currentGameState === "UiFriendAddOverlay"
-	)
-		presenceData.details = "Viewing their friends";
-	else if (currentGameState === "Leaderboards")
-		presenceData.details = "Browsing leaderboards";
-	else if (currentGameState === "UiLoginOverlay")
-		presenceData.details = "Loging in";
-	else if (currentGameState === "UiSettingsOverlay")
-		presenceData.details = "Changing settings";
-	else if (currentGameState === "UiSeasonPurchaseOverlay")
-		presenceData.details = "Buying a Battle Pass";
-	else if (
-		currentGameState.startsWith("UiSeason") ||
-		currentGameState === "UiPreviewItemOverlay"
-	)
-		presenceData.details = "Viewing Battle Pass";
-	else if (currentGameState === "UiChallengesOverlay")
-		presenceData.details = "Viewing challenges";
-	else if (currentGameState === "UiBuyGemsOverlay")
-		presenceData.details = "Buying gems";
-	else if (currentGameState === "VideoAd")
-		presenceData.details = "Watching video ad";
-	else if (currentGameState === "Countdown" || currentGameState === "Lobby") {
-		presenceData.details = "In Lobby";
-		presenceData.state = "Waiting for game to start";
-	} else if (
-		currentGameState === "Game" ||
-		currentGameState === "UiReportPlayerOverlay" ||
-		currentGameState === "UiLeaveOverlay"
-	)
-		presenceData.details = "In Game";
-	else if (currentGameState === "Plane") {
-		presenceData.details = "In Game";
-		presenceData.state = "Flying plane";
-	} else if (currentGameState === "Parachute") {
-		presenceData.details = "In Game";
-		presenceData.state = "Parachuting";
-	} else if (
-		currentGameState === "Dead" ||
-		currentGameState === "UiGameOver" ||
-		currentGameState === "UiSpectator" ||
-		currentGameState === "UiFeedbackOverlay"
-	) {
-		presenceData.details = "In Game";
-		presenceData.state = "Dead";
-	} else if (currentGameState === "UiMapOverlay") {
-		presenceData.details = "In Game";
-		presenceData.state = "Viewing map";
-	} else presence.error(`Unknown state: ${currentGameState}`);
+	switch (currentGameState) {
+		case "loading":
+		case "UiLoadingOverlay": {
+			presenceData.details = "Loading...";
+			break;
+		}
+		case "MainMenu": {
+			presenceData.details = "Lurking in main menu";
+			break;
+		}
+		case "Cosmetics":
+		case "UiCosmeticSelectorOverlay": {
+			presenceData.details = "Viewing cosmetics";
+			break;
+		}
+		case "Profile": {
+			presenceData.details = "Viewing their profile";
+			break;
+		}
+		case "Shop":
+		case "UiPreviewPackOverlay": {
+			presenceData.details = "Browsing Shop";
+			break;
+		}
+		case "Friends":
+		case "UiFriendAddOverlay": {
+			presenceData.details = "Viewing their friends";
+			break;
+		}
+		case "Leaderboards": {
+			presenceData.details = "Browsing leaderboards";
+			break;
+		}
+		case "UiLoginOverlay": {
+			presenceData.details = "Loging in";
+			break;
+		}
+		case "UiSettingsOverlay": {
+			presenceData.details = "Changing settings";
+			break;
+		}
+		case "UiSeasonPurchaseOverlay": {
+			presenceData.details = "Buying a Battle Pass";
+			break;
+		}
+		default:
+			if (
+				currentGameState.startsWith("UiSeason") ||
+				currentGameState === "UiPreviewItemOverlay"
+			)
+				presenceData.details = "Viewing Battle Pass";
+			else {
+				switch (currentGameState) {
+					case "UiChallengesOverlay": {
+						presenceData.details = "Viewing challenges";
+						break;
+					}
+					case "UiBuyGemsOverlay": {
+						presenceData.details = "Buying gems";
+						break;
+					}
+					case "VideoAd": {
+						presenceData.details = "Watching video ad";
+						break;
+					}
+					case "Countdown":
+					case "Lobby": {
+						presenceData.details = "In Lobby";
+						presenceData.state = "Waiting for game to start";
+
+						break;
+					}
+					case "Game":
+					case "UiReportPlayerOverlay":
+					case "UiLeaveOverlay": {
+						presenceData.details = "In Game";
+						break;
+					}
+					case "Plane": {
+						presenceData.details = "In Game";
+						presenceData.state = "Flying plane";
+
+						break;
+					}
+					case "Parachute": {
+						presenceData.details = "In Game";
+						presenceData.state = "Parachuting";
+
+						break;
+					}
+					case "Dead":
+					case "UiGameOver":
+					case "UiSpectator":
+					case "UiFeedbackOverlay": {
+						presenceData.details = "In Game";
+						presenceData.state = "Dead";
+
+						break;
+					}
+					case "UiMapOverlay": {
+						presenceData.details = "In Game";
+						presenceData.state = "Viewing map";
+
+						break;
+					}
+					default:
+						presence.error(`Unknown state: ${currentGameState}`);
+				}
+			}
+	}
 
 	const playing =
 		presenceData.details === "In Game" || presenceData.details === "In Lobby";

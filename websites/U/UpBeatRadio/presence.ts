@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "682781181863133220"
+		clientId: "682781181863133220",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "upbeat"
+			largeImageKey: "upbeat",
 		},
 		[format1, format2, elapsed, format, info, dj] = await Promise.all([
 			presence.getSetting<string>("sFormatNoDj1"),
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("tElapsed"),
 			presence.getSetting<string>("sFormat"),
 			presence.getSetting<boolean>("sInfo"),
-			presence.getSetting<boolean>("sDJ")
+			presence.getSetting<boolean>("sDJ"),
 		]);
 	let djType;
 
@@ -76,10 +76,10 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (document.location.pathname.includes("/News.Article")) {
 			presenceData.details = `Reading article: ${document
-				.querySelector(".title")
+				.querySelector("#newsTitle")
 				.textContent.trim()}`;
 			presenceData.state = `Written by: ${document
-				.querySelector(".info > a")
+				.querySelector("#newsInfo > a")
 				.textContent.trim()}`;
 			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/Account.Profile")) {
@@ -124,6 +124,7 @@ presence.on("UpdateData", async () => {
 		} else if (document.querySelector(".bigTitle")) {
 			let type = document.querySelector(".bigTitle").textContent.toLowerCase();
 			if (type === "faq's") type = "FAQ's";
+			if (type === "all media") type = "Articles List";
 			presenceData.details = "Viewing the";
 			presenceData.state = type;
 			presenceData.smallImageKey = "reading";

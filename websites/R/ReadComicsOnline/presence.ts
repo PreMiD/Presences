@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "868465354014359672"
+		clientId: "868465354014359672",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	setCookie = (name: string, value: string, days: number) => {
@@ -15,8 +15,7 @@ const presence = new Presence({
 	getCookie = (name: string) => {
 		const nameEQ = `${name}=`,
 			ca = document.cookie.split(";");
-		for (let i = 0; i < ca.length; i++) {
-			let c = ca[i];
+		for (let c of ca) {
 			while (c.charAt(0) === " ") c = c.substring(1, c.length);
 
 			if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
@@ -27,9 +26,9 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "rco_logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = location,
+		{ pathname, href } = location,
 		input = document.querySelector<HTMLInputElement>("input#keyword"),
 		buttons = await presence.getSetting<boolean>("buttons"),
 		cookies = await presence.getSetting<boolean>("cookies");
@@ -152,12 +151,12 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "Read Comic",
-									url: location.href
+									url: href,
 								},
 								{
 									label: "Check Description",
-									url: title.href
-								}
+									url: title.href,
+								},
 							];
 						}
 					}
@@ -169,8 +168,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Check Description",
-								url: location.href
-							}
+								url: href,
+							},
 						];
 					}
 				}

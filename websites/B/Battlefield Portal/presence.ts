@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "919182644296683520"
+	clientId: "919182644296683520",
 });
 interface PlaygoundInfo {
 	playgroundId?: string;
@@ -24,14 +24,14 @@ const editingStamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "img1"
+			largeImageKey: "img1",
 		},
 		[block, time, buttons, name, description] = await Promise.all([
 			presence.getSetting<boolean>("block"),
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("name"),
-			presence.getSetting<boolean>("desc")
+			presence.getSetting<boolean>("desc"),
 		]),
 		url = document.URL;
 
@@ -73,26 +73,26 @@ presence.on("UpdateData", async () => {
 				const blocklyText = selected.querySelectorAll(
 					"text[class=blocklyText]"
 				);
-				blocklyText.forEach(element => {
+				for (const element of blocklyText) {
 					if (
 						element.parentElement.getAttribute("transform") ===
 						"translate(126.36666870117188,18)"
 					)
 						presenceData.state = `in Subroutine ${element.textContent}`;
-				});
+				}
 			} else if (
 				selected.querySelector(".ruleBlockRuleText")?.textContent === "RULE"
 			) {
 				const blocklyText = selected.querySelectorAll(
 					"text[class=blocklyText]"
 				);
-				blocklyText.forEach(element => {
+				for (const element of blocklyText) {
 					if (
 						element.parentElement.getAttribute("transform") ===
 						"translate(72.78333282470703,8.5)"
 					)
 						presenceData.state = `in RULE ${element.textContent}`;
-				});
+				}
 			} else if (description) {
 				//todo: need to implement if a single block is selected
 				presenceData.state = info.playgroundDescription;

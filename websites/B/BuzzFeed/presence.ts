@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "650492842615242765"
+		clientId: "650492842615242765",
 	}),
 	pages: {
 		[name: string]: string;
@@ -12,7 +12,7 @@ const presence = new Presence({
 		"/shopping": "Shopping ",
 		"/tvandmovies": "Tv & Movies ",
 		"/celebrity": "Celebrity ",
-		"/newsletters": "Newsletter "
+		"/newsletters": "Newsletter ",
 	};
 
 presence.on("UpdateData", async () => {
@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 		),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (posttitle && posttitle.textContent !== "") {

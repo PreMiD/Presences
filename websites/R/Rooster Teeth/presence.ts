@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "703697546794631209"
+		clientId: "703697546794631209",
 	}),
 	elapsed = Math.floor(Date.now() / 1000);
 
@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
 		presenceData: PresenceData = {
 			largeImageKey: "roosterteeth",
 			details: "Browsing Rooster Teeth",
-			startTimestamp: elapsed
+			startTimestamp: elapsed,
 		};
 	if (window.location.hash.includes("#search?term=")) {
 		presenceData.details = "Searching For:";
@@ -61,16 +61,16 @@ presence.on("UpdateData", () => {
 		}
 	} else if (path.includes("/schedule")) {
 		presenceData.details = "Viewing Schedule";
-		for (const x in document.getElementsByClassName("schedule-day")) {
+		for (const x in document.querySelectorAll(".schedule-day")) {
 			// eslint-disable-next-line no-prototype-builtins
-			if (document.getElementsByClassName("schedule-day").hasOwnProperty(x)) {
+			if (document.querySelectorAll(".schedule-day").hasOwnProperty(x)) {
 				const position = document
-					.getElementsByClassName("schedule-day")
+					.querySelectorAll(".schedule-day")
 
 					[x].getBoundingClientRect();
 				if (position.top < window.innerHeight && position.bottom >= 0) {
 					presenceData.state = document
-						.getElementsByClassName("schedule-day")
+						.querySelectorAll(".schedule-day")
 
 						[x].querySelector(".schedule-day__heading")
 						.textContent.toLowerCase();

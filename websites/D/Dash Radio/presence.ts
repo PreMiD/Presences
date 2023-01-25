@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "761889098490183691"
+		clientId: "761889098490183691",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let songName: HTMLElement,
@@ -13,14 +13,14 @@ let songName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	songName = document.querySelector(
 		"header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Title-Text"
 	);
 	if (!songName) {
-		(songNameS = document.getElementById("marquee1").textContent),
+		(songNameS = document.querySelector("#marquee1").textContent),
 			(songNameS = songNameS.replace("<span>", "")),
 			(songNameS = songNameS.replace("</span>", ""));
 		if (songNameS === "") songNameS = "None";
@@ -30,8 +30,8 @@ presence.on("UpdateData", async () => {
 		"header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Artist-Text"
 	);
 	if (!songArtist) {
-		(songArtistS = document.getElementById("marquee2").textContent),
-			(songArtistS = songArtistS.replace(/&amp;/g, "&")),
+		(songArtistS = document.querySelector("#marquee2").textContent),
+			(songArtistS = songArtistS.replaceAll("&amp;", "&")),
 			(songArtistS = songArtistS.replace('<span class="artist">', "")),
 			(songArtistS = songArtistS.replace("</span>", ""));
 		if (songNameS === "") songArtistS = "None";

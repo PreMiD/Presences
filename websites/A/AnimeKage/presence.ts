@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "640244531346014214"
+		clientId: "640244531346014214",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -31,7 +31,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 			iFrameVideo,
 			paused,
 			currTime: currentTime,
-			dur: duration
+			dur: duration,
 		} = data.iframeVideo);
 	}
 });
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 	}
 	const presenceData: PresenceData = {
 		largeImageKey: "ak",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (
@@ -64,11 +64,8 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = title.textContent;
 
-			air = document.querySelector(
-				"body > div:nth-child(2) > div > div > div > div > div > div > div > div:nth-child(3) > div > div.row > div:nth-child(3) > div"
-			);
-
-			presenceData.state = `Aired on: ${air.textContent}`;
+			air = document.querySelector("div > div.row > div:nth-child(3)");
+			presenceData.state = `Aired on: ${air?.textContent?.trim()}`;
 
 			if (paused) {
 				delete presenceData.startTimestamp;

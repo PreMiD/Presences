@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "685054359200858241"
+		clientId: "685054359200858241",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "deflyicon",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname.includes("/gamemode-rules"))

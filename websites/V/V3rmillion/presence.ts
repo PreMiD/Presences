@@ -1,6 +1,6 @@
 /* Global variables */
 const presence = new Presence({
-		clientId: "650569876993343529"
+		clientId: "650569876993343529",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let profile: HTMLElement, title: HTMLElement;
@@ -8,7 +8,7 @@ let profile: HTMLElement, title: HTMLElement;
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo-512"
+		largeImageKey: "logo-512",
 	};
 	presenceData.startTimestamp = browsingTimestamp;
 	if (document.location.hostname.includes("v3rmillion.net")) {

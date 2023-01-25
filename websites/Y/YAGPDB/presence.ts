@@ -1,34 +1,43 @@
 const presence = new Presence({
-		clientId: "633795089600348160"
+		clientId: "633795089600348160",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo_y"
+		largeImageKey: "logo_y",
 	};
 
 	if (document.location.hostname === "yagpdb.xyz") {
 		presenceData.startTimestamp = browsingTimestamp;
-		if (document.URL === "yagpdb.xyz")
-			presenceData.details = "Viewing the homepage";
-		else if (document.URL === "yagpdb.xyz/#features")
-			presenceData.details = "Viewing the features";
-		else if (document.URL === "yagpdb.xyz/#about")
-			presenceData.details = "Viewing the about section";
-		else if (document.querySelector("#main-content > header > h2")) {
-			title = document.querySelector("#main-content > header > h2");
-			presenceData.details = "Control Panel - Editing:";
-			presenceData.smallImageKey = "writing";
-			presenceData.state = title.textContent;
-			if (title.textContent === "News and updates") {
-				presenceData.details = "Reading the news";
-				presenceData.smallImageKey = "reading";
-				delete presenceData.state;
+		switch (document.URL) {
+			case "yagpdb.xyz": {
+				presenceData.details = "Viewing the homepage";
+				break;
 			}
-		} else if (document.location.pathname.includes("/manage/"))
-			presenceData.details = "Viewing the Control Panel";
+			case "yagpdb.xyz/#features": {
+				presenceData.details = "Viewing the features";
+				break;
+			}
+			case "yagpdb.xyz/#about": {
+				presenceData.details = "Viewing the about section";
+				break;
+			}
+			default:
+				if (document.querySelector("#main-content > header > h2")) {
+					title = document.querySelector("#main-content > header > h2");
+					presenceData.details = "Control Panel - Editing:";
+					presenceData.smallImageKey = "writing";
+					presenceData.state = title.textContent;
+					if (title.textContent === "News and updates") {
+						presenceData.details = "Reading the news";
+						presenceData.smallImageKey = "reading";
+						delete presenceData.state;
+					}
+				} else if (document.location.pathname.includes("/manage/"))
+					presenceData.details = "Viewing the Control Panel";
+		}
 	} else if (document.location.hostname === "docs.yagpdb.xyz") {
 		title = document.querySelector("head > title");
 		search = document.querySelector(

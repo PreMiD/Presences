@@ -1,9 +1,9 @@
 const presence = new Presence({
-	clientId: "731659541904621708"
+	clientId: "731659541904621708",
 });
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		startTimestamp: Date.now()
+		startTimestamp: Date.now(),
 	};
 	let path = document.location.pathname;
 	if (path.startsWith("/fortnite")) {
@@ -86,29 +86,42 @@ presence.on("UpdateData", async () => {
 		if (path.length === 0) {
 			presenceData.details = "Viewing homepage";
 			presenceData.state = "Fall Guys";
-		} else if (path === "/all") presenceData.details = "Viewing all skins";
-		else if (path === "/unreleased")
-			presenceData.details = "Viewing unreleased skins";
-		else if (path === "/shop") {
-			presenceData.details = "Viewing item shop";
-			presenceData.state =
-				document.querySelector(".shop-date-small").textContent;
-		} else if (
-			path.startsWith("/top/") ||
-			path.startsWith("/bottom") ||
-			path.startsWith("/pattern") ||
-			path.startsWith("/emote") ||
-			path.startsWith("/faceplate") ||
-			path.startsWith("/colour") ||
-			path.startsWith("/celebration")
-		) {
-			presenceData.details = `Viewing ${
-				document.querySelector(".skin-name").textContent
-			}`;
-			presenceData.state = `${
-				document.querySelector(".skin-rarity-string > .rarity-label")
-					.textContent
-			} ${document.querySelector(".skin-type-string").textContent}`;
+		} else {
+			switch (path) {
+				case "/all": {
+					presenceData.details = "Viewing all skins";
+					break;
+				}
+				case "/unreleased": {
+					presenceData.details = "Viewing unreleased skins";
+					break;
+				}
+				case "/shop": {
+					presenceData.details = "Viewing item shop";
+					presenceData.state =
+						document.querySelector(".shop-date-small").textContent;
+
+					break;
+				}
+				default:
+					if (
+						path.startsWith("/top/") ||
+						path.startsWith("/bottom") ||
+						path.startsWith("/pattern") ||
+						path.startsWith("/emote") ||
+						path.startsWith("/faceplate") ||
+						path.startsWith("/colour") ||
+						path.startsWith("/celebration")
+					) {
+						presenceData.details = `Viewing ${
+							document.querySelector(".skin-name").textContent
+						}`;
+						presenceData.state = `${
+							document.querySelector(".skin-rarity-string > .rarity-label")
+								.textContent
+						} ${document.querySelector(".skin-type-string").textContent}`;
+					}
+			}
 		}
 	} else {
 		presenceData.largeImageKey = "skindb";

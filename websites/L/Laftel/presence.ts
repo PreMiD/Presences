@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "755666356141293568"
+	clientId: "755666356141293568",
 });
 
 let prev = "";
@@ -20,15 +20,15 @@ let lastEpisode: Episode = {};
 function getQuery() {
 	return JSON.parse(
 		`{"${decodeURI(location.search.substring(1))
-			.replace(/"/g, '\\"')
-			.replace(/&/g, '","')
-			.replace(/=/g, '":"')}"}`
+			.replaceAll('"', '\\"')
+			.replaceAll("&", '","')
+			.replaceAll("=", '":"')}"}`
 	);
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (window.location.pathname === "/") presenceData.details = "메인";
@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
 					}/detail/`,
 					{
 						headers: {
-							laftel: "TeJava"
-						}
+							laftel: "TeJava",
+						},
 					}
 				)
 			).json();
@@ -66,8 +66,8 @@ presence.on("UpdateData", async () => {
 						}`,
 						{
 							headers: {
-								laftel: "TeJava"
-							}
+								laftel: "TeJava",
+							},
 						}
 					)
 				).json();

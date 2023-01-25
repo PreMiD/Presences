@@ -1,6 +1,6 @@
 const PREMID_DEBUG_LOGGING = true,
 	presence = new Presence({
-		clientId: "676560908578717702"
+		clientId: "676560908578717702",
 	});
 
 function getNumberWithOrdinal(n: number): string {
@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
 				smallImageKey: loggedIn ? "user" : "guest",
 				smallImageText: loggedIn
 					? document.querySelector(".dropdown--account span").textContent
-					: "Racing as a guest"
+					: "Racing as a guest",
 			},
 			path = location.pathname;
 		try {
@@ -45,7 +45,7 @@ presence.on("UpdateData", () => {
 				presenceData.state = `${pName} (${(pName === "Summary"
 					? document.querySelector(".prog-points").textContent
 					: document.querySelector(".twb").textContent
-				).replace(/ /g, "")})`;
+				).replaceAll(" ", "")})`;
 			} else if (path.startsWith("/dealership"))
 				presenceData.details = "Browsing the Dealership";
 			else if (path.startsWith("/friends"))
@@ -91,7 +91,7 @@ presence.on("UpdateData", () => {
 						.querySelector(
 							".gridTable-row.is-self > div:nth-child(4) > div:nth-child(2) > div:nth-child(2)"
 						)
-						.textContent.replace(/ /g, "")
+						.textContent.replaceAll(" ", "")
 						.replace(/\n/g, " ")}`;
 				}
 			} else if (PREMID_DEBUG_LOGGING) presenceData.details = path;

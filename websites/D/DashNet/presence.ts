@@ -21,7 +21,7 @@ presenceSet();
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "dashnet",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	presenceSet();

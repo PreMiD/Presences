@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "852245069984825394"
+	clientId: "852245069984825394",
 });
 
 presence.on("UpdateData", () => {
@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
 		smallImageKey: "search",
 		smallImageText: "Looking for a thread",
 		details: "Looking for drama!",
-		state: "Browsing"
+		state: "Browsing",
 	};
 
 	switch (true) {
@@ -25,8 +25,8 @@ presence.on("UpdateData", () => {
 			presenceData.buttons = [
 				{
 					label: "View Post",
-					url: `${document.URL}`
-				}
+					url: `${document.URL}`,
+				},
 			];
 			break;
 		case document.location.pathname.includes("/u/"):

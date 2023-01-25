@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "813038241451343882"
+		clientId: "813038241451343882",
 	}),
 	startsTime = Math.floor(Date.now() / 1000),
 	ShowData = {
@@ -8,7 +8,6 @@ const presence = new Presence({
 		duration: 0,
 		currentTime: 0,
 		paused: true,
-		playback: false
 	},
 	getStrings = async () =>
 		presence.getStrings(
@@ -23,22 +22,17 @@ const presence = new Presence({
 				viewEpisode: "general.buttonViewEpisode",
 				viewSeries: "general.viewSeries",
 				reading: "general.reading",
-				viewPage: "general.viewPage"
+				viewPage: "general.viewPage",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
-
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 presence.on("iFrameData", (data: Data) => {
-	ShowData.playback = !isNaN(data.iframeVideo.duration) ? true : false;
-
-	if (ShowData.playback) {
-		ShowData.duration = data.iframeVideo.duration;
-		ShowData.paused = data.iframeVideo.paused;
-		ShowData.currentTime = data.iframeVideo.currentTime;
-	}
+	ShowData.duration = data.iframeVideo.duration;
+	ShowData.paused = data.iframeVideo.paused;
+	ShowData.currentTime = data.iframeVideo.currentTime;
 });
 
 presence.on("UpdateData", async () => {
@@ -47,103 +41,114 @@ presence.on("UpdateData", async () => {
 			details: "Browsing",
 			smallImageText: "Browsing",
 			smallImageKey: "reading",
-			startTimestamp: startsTime
+			startTimestamp: startsTime,
 		},
-		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
-		{ pathname } = document.location;
+		[covers, buttons, newLang] = await Promise.all([
+			presence.getSetting<boolean>("covers"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<string>("lang").catch(() => "en"),
+		]),
+		{ pathname, search, href } = document.location;
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
 
-	if (pathname.includes("running-man")) presenceData.largeImageKey = "rm";
-
 	if (pathname.includes("/drama-detail")) {
-		presenceData.smallImageText = (await strings).reading;
+		presenceData.smallImageText = strings.reading;
 
-		presenceData.details = (await strings).viewSeries;
+		presenceData.details = strings.viewSeries;
 		presenceData.state = document.querySelector("h1").textContent;
 
 		presenceData.buttons = [
 			{
-				label: (await strings).viewSeriesButton,
-				url: document.URL
-			}
+				label: strings.viewSeriesButton,
+				url: document.URL,
+			},
 		];
 	} else if (pathname.includes("/search")) {
-		presenceData.details = (await strings).searchFor;
-		presenceData.state = document.location.search.includes("movies")
-			? "Movies"
-			: "Stars";
+		presenceData.details = strings.searchFor;
+		presenceData.state = search.includes("movies") ? "Movies" : "Stars";
 
 		presenceData.smallImageKey = "search";
-		presenceData.smallImageText = (await strings).searching;
-	} else if (pathname.match("/([a-z0-9-]+)-episode-([0-9]+).html")) {
-		ShowData.title = document.querySelector("div.category > a")?.textContent;
-
-		if (ShowData.playback) {
+		presenceData.smallImageText = strings.searching;
+	} else if (pathname.match("/([a-z0-9-]+)-episode-([0-9]+)")) {
+		ShowData.title =
+			document.querySelector("div.category a")?.textContent ??
+			JSON.parse(
+				document
+					.querySelector('[class="yoast-schema-graph"]')
+					.innerHTML.replace(/@/gm, "")
+			).graph[3].itemListElement[1].name.replace(/Episode [0-9]*/gm, "");
+		if (ShowData.duration) {
 			ShowData.ep = (document.title.match(
-				/Episode ?([1-9]?[0-9]?[0-9])?( & )?([1-9]?[0-9]?[0-9])/g
-			) || document.URL.match(/episode-?([1-9]?[0-9]?[0-9])/g))[0].replace(
+				/Episode ?([1-9][0-9]?[0-9]?)?( & )?([1-9][0-9]?[0-9]?)/g
+			) || document.URL.match(/episode-?([1-9][0-9]?[0-9]?)/g))[0].replace(
 				/(episode)(-)?/i,
 				""
 			);
 
 			presenceData.smallImageKey = ShowData.paused ? "pause" : "play";
 			presenceData.smallImageText = ShowData.paused
-				? (await strings).paused
-				: (await strings).play;
+				? strings.paused
+				: strings.play;
 
 			presenceData.details = ShowData.title;
-			presenceData.state = `${(await strings).episode} ${ShowData.ep}`;
+			presenceData.state = `${strings.episode} ${ShowData.ep}`;
 
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(ShowData.currentTime, ShowData.duration);
 
 			presenceData.buttons = [
 				{
-					label: (await strings).viewEpisode,
-					url: document.baseURI
+					label: strings.viewEpisode,
+					url: href,
 				},
 				{
-					label: (await strings).viewSeriesButton,
-					url: document.querySelector<HTMLAnchorElement>("div.category > a")
-						.href
-				}
+					label: strings.viewSeriesButton,
+					url: document
+						.querySelector('[class="Category"]')
+						.firstElementChild.firstElementChild.getAttribute("href"),
+				},
 			];
+
+			if (covers) {
+				presenceData.largeImageKey =
+					document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+						?.content ?? "dramacool_logo_b";
+			}
 
 			if (ShowData.paused) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
 		} else if (ShowData.title) {
-			presenceData.smallImageText = (await strings).reading;
+			presenceData.smallImageText = strings.reading;
 
-			presenceData.details = (await strings).viewSeries;
+			presenceData.details = strings.viewSeries;
 			presenceData.state = ShowData.title;
 
 			presenceData.buttons = [
 				{
-					label: (await strings).viewSeriesButton,
-					url: document.URL
-				}
+					label: strings.viewSeriesButton,
+					url: document.URL,
+				},
 			];
 		}
 	} else if (pathname.includes("/calendar")) {
-		presenceData.details = (await strings).viewPage;
+		presenceData.details = strings.viewPage;
 
 		presenceData.state = "Calendar";
 		presenceData.buttons = [
 			{
 				label: "View Calendar",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	}
 
-	if (!showButtons && presenceData.buttons) delete presenceData.buttons;
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
 });

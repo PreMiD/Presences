@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "693097839424831489"
+		clientId: "693097839424831489",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement | Element, thread: HTMLElement | Element;
@@ -7,7 +7,7 @@ let user: HTMLElement | Element, thread: HTMLElement | Element;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "mccentrallogo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "mccentral.org") {
@@ -85,146 +85,199 @@ presence.on("UpdateData", async () => {
 		else if (document.location.pathname.includes("/general/")) {
 			presenceData.details = "Viewing:";
 			presenceData.state = "General Discussion forums";
-		} else if (document.location.pathname === "/community/forums/skyblock/") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Skyblock Discussion forums";
-		} else if (document.location.pathname === "/community/forums/creative/") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Creative Discussion forums";
-		} else if (document.location.pathname === "/community/forums/kitpvp/") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "KitPvP Discussion forums";
-		} else if (document.location.pathname === "/community/forums/survival/") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Survival Discussion forums";
-		} else if (document.location.pathname === "/community/forums/prison/") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Prison Discussion forums";
-		} else if (document.location.pathname === "/community/forums/factions/") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Factions Discussion forums";
-		} else if (document.location.pathname === "/community/forums/minigames/") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Minigames Discussion forums";
-		} else if (document.location.pathname.includes("/off-topic/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Off Topic forums";
-		} else if (document.location.pathname.includes("/giveaways/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Giveaways forums";
-		} else if (document.location.pathname.includes("/suggestions/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Server Suggestions forums";
-		} else if (document.location.pathname.includes("/maps/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Map Submission forums";
-		} else if (document.location.pathname.includes("/community-ticket/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Community Ticket forums";
-		} else if (
-			document.location.pathname.includes("/forms/community-ticket.18/")
-		)
-			presenceData.details = "Sending a Community Ticket";
-		else if (document.location.pathname.includes("/staff/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Staff Members page";
-		} else if (document.location.pathname.includes("/rules/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Rules page";
-		} else if (document.location.pathname.includes("/vote/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Voting page";
-		} else if (document.location.pathname === "/community/leaderboards/") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Leaderboards page";
-		} else if (document.location.pathname.includes("/guilds/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Guilds leaderboards";
-		} else if (document.location.pathname.includes("/survivalgames/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Survival Games leaderboards";
-		} else if (document.location.pathname.includes("/skywars/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Skywars leaderboards";
-		} else if (document.location.pathname.includes("/walls/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Speedy Walls leaderboards";
-		} else if (document.location.pathname.includes("/ctf/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "CTF leaderboards";
-		} else if (document.location.pathname.includes("/murder/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Murder Mayhem leaderboards";
-		} else if (document.location.pathname.includes("/championbuilder/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Champion Builder leaderboards";
-		} else if (document.location.pathname.includes("/cakewars/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Cakewars leaderboards";
-		} else if (document.location.pathname.includes("/uhc/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "UHC leaderboards";
-		} else if (
-			document.location.pathname === "/community/leaderboards/skyblock/"
-		) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Skyblock leaderboards";
-		} else if (
-			document.location.pathname === "/community/leaderboards/survival/"
-		) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Survival leaderboards";
-		} else if (
-			document.location.pathname === "/community/leaderboards/factions/"
-		) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Factions leaderboards";
-		} else if (
-			document.location.pathname === "/community/leaderboards/prison/"
-		) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Prison leaderboards";
-		} else if (
-			document.location.pathname === "/community/leaderboards/kitpvp/"
-		) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "KitPvP leaderboards";
-		} else if (
-			document.location.pathname === "/community/leaderboards/arenapvp/"
-		) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "ArenaPvP leaderboards";
-		} else if (document.location.pathname === "/community/account/")
-			presenceData.details = "Changing personal details";
-		else if (document.location.pathname.includes("/account/alerts")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Latest alerts";
-		} else if (document.location.pathname === "/community/conversations/") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Conversations";
-		} else if (document.location.pathname === "/community/conversations/add") {
-			presenceData.details = "Starting a:";
-			presenceData.state = "New conversation...";
-		} else if (document.location.pathname.includes("/account/")) {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Account details";
-		} else if (document.location.pathname === "/community/watched/threads") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Unread watched threads";
-		} else if (document.location.pathname === "/community/watched/forums") {
-			presenceData.details = "Viewing:";
-			presenceData.state = "Watched forums";
-		} else if (document.location.pathname.includes("/members/")) {
-			user = document.querySelector(".mainText > h1");
-			presenceData.details = "Viewing:";
-			presenceData.state = `${
-				(user as HTMLElement).textContent
-			}'s profile page`;
-		} else if (document.location.pathname.includes("/search/search")) {
-			presenceData.details = "Searching for:";
-			presenceData.state = "No results.";
-		} else if (document.location.pathname.includes("/search/"))
-			presenceData.details = "Searching...";
+		} else {
+			switch (document.location.pathname) {
+				case "/community/forums/skyblock/": {
+					presenceData.details = "Viewing:";
+					presenceData.state = "Skyblock Discussion forums";
+
+					break;
+				}
+				case "/community/forums/creative/": {
+					presenceData.details = "Viewing:";
+					presenceData.state = "Creative Discussion forums";
+
+					break;
+				}
+				case "/community/forums/kitpvp/": {
+					presenceData.details = "Viewing:";
+					presenceData.state = "KitPvP Discussion forums";
+
+					break;
+				}
+				case "/community/forums/survival/": {
+					presenceData.details = "Viewing:";
+					presenceData.state = "Survival Discussion forums";
+
+					break;
+				}
+				case "/community/forums/prison/": {
+					presenceData.details = "Viewing:";
+					presenceData.state = "Prison Discussion forums";
+
+					break;
+				}
+				case "/community/forums/factions/": {
+					presenceData.details = "Viewing:";
+					presenceData.state = "Factions Discussion forums";
+
+					break;
+				}
+				case "/community/forums/minigames/": {
+					presenceData.details = "Viewing:";
+					presenceData.state = "Minigames Discussion forums";
+
+					break;
+				}
+				default:
+					if (document.location.pathname.includes("/off-topic/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Off Topic forums";
+					} else if (document.location.pathname.includes("/giveaways/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Giveaways forums";
+					} else if (document.location.pathname.includes("/suggestions/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Server Suggestions forums";
+					} else if (document.location.pathname.includes("/maps/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Map Submission forums";
+					} else if (
+						document.location.pathname.includes("/community-ticket/")
+					) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Community Ticket forums";
+					} else if (
+						document.location.pathname.includes("/forms/community-ticket.18/")
+					)
+						presenceData.details = "Sending a Community Ticket";
+					else if (document.location.pathname.includes("/staff/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Staff Members page";
+					} else if (document.location.pathname.includes("/rules/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Rules page";
+					} else if (document.location.pathname.includes("/vote/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Voting page";
+					} else if (
+						document.location.pathname === "/community/leaderboards/"
+					) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Leaderboards page";
+					} else if (document.location.pathname.includes("/guilds/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Guilds leaderboards";
+					} else if (document.location.pathname.includes("/survivalgames/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Survival Games leaderboards";
+					} else if (document.location.pathname.includes("/skywars/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Skywars leaderboards";
+					} else if (document.location.pathname.includes("/walls/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Speedy Walls leaderboards";
+					} else if (document.location.pathname.includes("/ctf/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "CTF leaderboards";
+					} else if (document.location.pathname.includes("/murder/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Murder Mayhem leaderboards";
+					} else if (document.location.pathname.includes("/championbuilder/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Champion Builder leaderboards";
+					} else if (document.location.pathname.includes("/cakewars/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "Cakewars leaderboards";
+					} else if (document.location.pathname.includes("/uhc/")) {
+						presenceData.details = "Viewing:";
+						presenceData.state = "UHC leaderboards";
+					} else {
+						switch (document.location.pathname) {
+							case "/community/leaderboards/skyblock/": {
+								presenceData.details = "Viewing:";
+								presenceData.state = "Skyblock leaderboards";
+
+								break;
+							}
+							case "/community/leaderboards/survival/": {
+								presenceData.details = "Viewing:";
+								presenceData.state = "Survival leaderboards";
+
+								break;
+							}
+							case "/community/leaderboards/factions/": {
+								presenceData.details = "Viewing:";
+								presenceData.state = "Factions leaderboards";
+
+								break;
+							}
+							case "/community/leaderboards/prison/": {
+								presenceData.details = "Viewing:";
+								presenceData.state = "Prison leaderboards";
+
+								break;
+							}
+							case "/community/leaderboards/kitpvp/": {
+								presenceData.details = "Viewing:";
+								presenceData.state = "KitPvP leaderboards";
+
+								break;
+							}
+							case "/community/leaderboards/arenapvp/": {
+								presenceData.details = "Viewing:";
+								presenceData.state = "ArenaPvP leaderboards";
+
+								break;
+							}
+							case "/community/account/": {
+								presenceData.details = "Changing personal details";
+								break;
+							}
+							default:
+								if (document.location.pathname.includes("/account/alerts")) {
+									presenceData.details = "Viewing:";
+									presenceData.state = "Latest alerts";
+								} else if (
+									document.location.pathname === "/community/conversations/"
+								) {
+									presenceData.details = "Viewing:";
+									presenceData.state = "Conversations";
+								} else if (
+									document.location.pathname === "/community/conversations/add"
+								) {
+									presenceData.details = "Starting a:";
+									presenceData.state = "New conversation...";
+								} else if (document.location.pathname.includes("/account/")) {
+									presenceData.details = "Viewing:";
+									presenceData.state = "Account details";
+								} else if (
+									document.location.pathname === "/community/watched/threads"
+								) {
+									presenceData.details = "Viewing:";
+									presenceData.state = "Unread watched threads";
+								} else if (
+									document.location.pathname === "/community/watched/forums"
+								) {
+									presenceData.details = "Viewing:";
+									presenceData.state = "Watched forums";
+								} else if (document.location.pathname.includes("/members/")) {
+									user = document.querySelector(".mainText > h1");
+									presenceData.details = "Viewing:";
+									presenceData.state = `${
+										(user as HTMLElement).textContent
+									}'s profile page`;
+								} else if (
+									document.location.pathname.includes("/search/search")
+								) {
+									presenceData.details = "Searching for:";
+									presenceData.state = "No results.";
+								} else if (document.location.pathname.includes("/search/"))
+									presenceData.details = "Searching...";
+						}
+					}
+			}
+		}
 	} else if (document.location.hostname === "buy.mccentral.org") {
 		if (document.location.pathname === "/") {
 			presenceData.details = "Viewing:";

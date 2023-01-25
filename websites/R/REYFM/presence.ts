@@ -3,13 +3,14 @@ interface Channel {
 	name: string;
 	track: string;
 	artist: string;
+	cover: string;
 	listeners: number;
 	timeStart: string;
 	timeEnd: string;
 }
 
 const presence = new Presence({
-		clientId: "748660637021896835"
+		clientId: "748660637021896835",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -23,26 +24,28 @@ function newStats(): void {
 			totalListeners = data.all_listeners;
 			const channelList: string[] = data.sequence,
 				channelArray: Channel[] = [];
-			channelList.forEach(channel => {
+			for (const channel of channelList) {
 				channelArray.push({
 					id: channel,
 					name: "",
 					track: "",
 					artist: "",
+					cover: "",
 					listeners: 0,
 					timeStart: "",
-					timeEnd: ""
+					timeEnd: "",
 				});
-			});
-			channelArray.forEach(channel => {
+			}
+			for (const channel of channelArray) {
 				const channelData = data.channels[`${channel.id}`];
 				channel.name = channelData.name;
 				channel.listeners = channelData.listeners;
 				channel.track = channelData.now.title;
 				channel.artist = channelData.now.artist;
+				channel.cover = channelData.now.cover_urls["500x500"];
 				channel.timeStart = channelData.now.time.start;
 				channel.timeEnd = channelData.now.time.end;
-			});
+			}
 			channels = channelArray;
 		});
 }
@@ -83,7 +86,7 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<string>("sFormat2"),
 				presence.getSetting<string>("sListeners"),
 				presence.getSetting<boolean>("buttons"),
-				presence.getSetting<number>("logo")
+				presence.getSetting<number>("logo"),
 			]),
 		logoArr = [
 			"reywhitebacksmall",
@@ -94,34 +97,34 @@ presence.on("UpdateData", async () => {
 			"reycolorback",
 			"reywhite",
 			"reyblack",
-			"rey"
+			"rey",
 		],
 		presenceData: PresenceData = {
 			largeImageKey: logoArr[logo] || "reywhitebacksmall",
-			smallImageKey: "reading"
+			smallImageKey: "reading",
 		};
 
 	let showFormat3 = false;
 
 	if (info) {
-		if (document.location.hostname === "status.reyfm.de")
+		if (document.location.hostname === "status.rey.fm")
 			presenceData.details = "Viewing status page";
-		else if (document.location.hostname === "www.reyfm.de") {
+		else if (document.location.hostname === "rey.fm") {
 			if (document.location.pathname.includes("/bots")) {
 				presenceData.details = "Viewing bots";
 				presenceData.buttons = [
 					{
 						label: "View Bots",
-						url: "https://www.reyfm.de/bots"
-					}
+						url: "https://rey.fm/bots",
+					},
 				];
 			} else if (document.location.pathname.includes("/discord-bot")) {
 				presenceData.details = "Viewing the Discord bot";
 				presenceData.buttons = [
 					{
 						label: "View Bot",
-						url: "https://www.reyfm.de/discord-bot"
-					}
+						url: "https://rey.fm/discord-bot",
+					},
 				];
 			} else if (document.location.pathname.includes("/partner"))
 				presenceData.details = "Viewing partners";
@@ -143,24 +146,24 @@ presence.on("UpdateData", async () => {
 	if (elapsed) presenceData.startTimestamp = browsingTimestamp;
 
 	if (
-		document.location.hostname === "www.reyfm.de" &&
+		document.location.hostname === "rey.fm" &&
 		document.location.pathname === "/"
 	) {
 		if (
 			document.querySelector<HTMLElement>("#player").style.cssText !==
 			"display: none;"
 		) {
-			const paused = document
-				.querySelector<HTMLImageElement>("#miniplayer-play")
-				.src.includes("play.png");
+			let track: string, artist: string, cover: string;
 
-			let track: string, artist: string;
-
-			if (!paused) {
+			if (
+				!document
+					.querySelector<HTMLImageElement>("#miniplayer-play")
+					.src.includes("play.png")
+			) {
 				const channelID = findChannel();
 				if (channelID !== "YOU FAILED") {
 					const channel = channels.find(channel => channel.id === channelID);
-					({ track, artist } = channel);
+					({ track, artist, cover } = channel);
 
 					presenceData.smallImageKey = "play";
 					presenceData.smallImageText = format3
@@ -170,7 +173,10 @@ presence.on("UpdateData", async () => {
 					presenceData.endTimestamp = Date.parse(channel.timeEnd);
 					showFormat3 = true;
 					presenceData.buttons = [
-						{ label: "Listen along!", url: `https://reyfm.de/${channel.name}` }
+						{
+							label: "Listen along!",
+							url: `https://rey.fm/station/${channel.name}`,
+						},
 					];
 				} else {
 					artist = document.querySelector(
@@ -179,6 +185,11 @@ presence.on("UpdateData", async () => {
 					track = document.querySelector(
 						"#player > div.wrapper > div.current > span.title"
 					).textContent;
+					cover = document
+						.querySelector(
+							"#player > div.wrapper > div.cover > img#player-coverart"
+						)
+						.getAttribute("src");
 					presenceData.smallImageKey = "play";
 					presenceData.smallImageText = "Loading statistics...";
 				}
@@ -189,6 +200,11 @@ presence.on("UpdateData", async () => {
 				track = document.querySelector(
 					"#player > div.wrapper > div.current > span.title"
 				).textContent;
+				cover = document
+					.querySelector(
+						"#player > div.wrapper > div.cover > img#player-coverart"
+					)
+					.getAttribute("src");
 				presenceData.smallImageKey = "pause";
 				presenceData.smallImageText = `Total Listeners: ${totalListeners}`;
 				delete presenceData.startTimestamp;
@@ -200,15 +216,19 @@ presence.on("UpdateData", async () => {
 			presenceData.state = format2
 				.replace("%title%", track)
 				.replace("%artist%", artist);
+			presenceData.largeImageKey = cover;
 		}
 	} else if (
-		document.location.hostname === "www.reyfm.de" &&
+		document.location.hostname === "rey.fm" &&
 		document.querySelector("#channel-player") !== null
 	) {
-		const channelID = document
-				.querySelector("#channel-player")
-				.className.replace("shadow channel-color-", ""),
-			channel = channels.find(channel => channel.id === channelID),
+		const channel = channels.find(
+				channel =>
+					channel.id ===
+					document
+						.querySelector("#channel-player")
+						.className.replace("shadow channel-color-", "")
+			),
 			paused = document
 				.querySelector<HTMLImageElement>("#play")
 				.src.includes("play.png");
@@ -227,6 +247,8 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = format3
 			.replace("%listeners%", `${channel.listeners}`)
 			.replace("%totalListeners%", `${totalListeners}`);
+
+		presenceData.largeImageKey = channel.cover;
 
 		showFormat3 = true;
 

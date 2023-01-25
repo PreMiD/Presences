@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "918337184929546322"
+		clientId: "918337184929546322",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[shortTitle] = document.title.split(/[|/]/, 1);
 
@@ -53,7 +53,7 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [{ label: "View Ship", url: document.URL }];
 	} else if (
 		document.querySelector("body > div.fade.modal-backdrop.show") &&
-		document.location.href.indexOf("skins") > -1
+		document.location.href.includes("skins")
 	) {
 		presenceData.details = "Viewing skin";
 		presenceData.state = document
@@ -71,56 +71,73 @@ presence.on("UpdateData", () => {
 		presenceData.largeImageKey = "ships";
 		presenceData.smallImageKey = "skins";
 		presenceData.smallImageText = "Viewing skins";
-	} else if (document.location.pathname === "/skins") {
-		presenceData.details = "Viewing skins";
-		presenceData.largeImageKey = "ships";
-		presenceData.smallImageKey = "skins";
-		presenceData.smallImageText = "Viewing skins";
-	} else if (document.location.pathname === "/stats") {
-		presenceData.details = "Viewing stats";
-		presenceData.largeImageKey = "ships";
-		presenceData.smallImageKey = "stats";
-		presenceData.smallImageText = "Viewing stats";
-	} else if (document.location.pathname === "/tier-list") {
-		presenceData.details = "Viewing the tier list";
-		presenceData.largeImageKey = "ships";
-		presenceData.smallImageKey = "tierlist";
-		presenceData.smallImageText = "Viewing tier list";
-	} else if (document.location.pathname === "/guides") {
-		presenceData.details = "Finding guides";
-		presenceData.largeImageKey = "ships";
-		presenceData.smallImageKey = "guide";
-		presenceData.smallImageText = "Viewing guides";
-	} else if (document.location.pathname.startsWith("/guides")) {
-		presenceData.details = "Reading a guide:";
-		presenceData.state = shortTitle;
-		presenceData.largeImageKey = "guide";
-		presenceData.smallImageKey = "ships";
-		presenceData.smallImageText = "Prydwen Institute";
-		presenceData.buttons = [{ label: "Read Guide", url: document.URL }];
-	} else if (document.location.pathname === "/blog") {
-		presenceData.details = "Finding blogs";
-		presenceData.largeImageKey = "ships";
-		presenceData.smallImageKey = "blogs";
-		presenceData.smallImageText = "Viewing blogs";
-	} else if (document.location.pathname.startsWith("/blog")) {
-		presenceData.details = "Reading a blog:";
-		presenceData.state = shortTitle;
-		presenceData.largeImageKey = "blogs";
-		presenceData.smallImageKey = "ships";
-		presenceData.smallImageText = "Prydwen Institute";
-		presenceData.buttons = [{ label: "Read Blog", url: document.URL }];
-	} else if (document.location.href.indexOf("gear-builder") > -1) {
-		presenceData.details = "Making a Gear Builder template";
-		presenceData.largeImageKey = "ships";
-		presenceData.smallImageKey = "gearbuilder";
-		presenceData.smallImageText = "Gear building";
-	} else if (document.location.href === "https://www.prydwen.co/") {
-		presenceData.details = "Viewing home page";
-		presenceData.largeImageKey = "ships";
 	} else {
-		presenceData.details = "Browsing the wiki";
-		presenceData.largeImageKey = "ships";
+		switch (document.location.pathname) {
+			case "/skins": {
+				presenceData.details = "Viewing skins";
+				presenceData.largeImageKey = "ships";
+				presenceData.smallImageKey = "skins";
+				presenceData.smallImageText = "Viewing skins";
+
+				break;
+			}
+			case "/stats": {
+				presenceData.details = "Viewing stats";
+				presenceData.largeImageKey = "ships";
+				presenceData.smallImageKey = "stats";
+				presenceData.smallImageText = "Viewing stats";
+
+				break;
+			}
+			case "/tier-list": {
+				presenceData.details = "Viewing the tier list";
+				presenceData.largeImageKey = "ships";
+				presenceData.smallImageKey = "tierlist";
+				presenceData.smallImageText = "Viewing tier list";
+
+				break;
+			}
+			case "/guides": {
+				presenceData.details = "Finding guides";
+				presenceData.largeImageKey = "ships";
+				presenceData.smallImageKey = "guide";
+				presenceData.smallImageText = "Viewing guides";
+
+				break;
+			}
+			default:
+				if (document.location.pathname.startsWith("/guides")) {
+					presenceData.details = "Reading a guide:";
+					presenceData.state = shortTitle;
+					presenceData.largeImageKey = "guide";
+					presenceData.smallImageKey = "ships";
+					presenceData.smallImageText = "Prydwen Institute";
+					presenceData.buttons = [{ label: "Read Guide", url: document.URL }];
+				} else if (document.location.pathname === "/blog") {
+					presenceData.details = "Finding blogs";
+					presenceData.largeImageKey = "ships";
+					presenceData.smallImageKey = "blogs";
+					presenceData.smallImageText = "Viewing blogs";
+				} else if (document.location.pathname.startsWith("/blog")) {
+					presenceData.details = "Reading a blog:";
+					presenceData.state = shortTitle;
+					presenceData.largeImageKey = "blogs";
+					presenceData.smallImageKey = "ships";
+					presenceData.smallImageText = "Prydwen Institute";
+					presenceData.buttons = [{ label: "Read Blog", url: document.URL }];
+				} else if (document.location.href.includes("gear-builder")) {
+					presenceData.details = "Making a Gear Builder template";
+					presenceData.largeImageKey = "ships";
+					presenceData.smallImageKey = "gearbuilder";
+					presenceData.smallImageText = "Gear building";
+				} else if (document.location.href === "https://www.prydwen.co/") {
+					presenceData.details = "Viewing home page";
+					presenceData.largeImageKey = "ships";
+				} else {
+					presenceData.details = "Browsing the wiki";
+					presenceData.largeImageKey = "ships";
+				}
+		}
 	}
 	presence.setActivity(presenceData);
 });

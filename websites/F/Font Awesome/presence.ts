@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "820023496934817804"
+		clientId: "820023496934817804",
 	}),
 	pBrowsing = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "icon2",
-			startTimestamp: pBrowsing
+			startTimestamp: pBrowsing,
 		},
 		pPage = window.location.pathname;
 
@@ -31,29 +31,48 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Icon",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 		} else {
 			presenceData.details = "Searching:";
 			presenceData.state = myParam;
 		}
-	} else if (pPage === "/start") {
-		presenceData.details = "Browsing Page:";
-		presenceData.state = "Start";
-	} else if (pPage === "/support") {
-		presenceData.details = "Browsing Page:";
-		presenceData.state = "Support";
-	} else if (pPage === "/plans") {
-		presenceData.details = "Browsing Page:";
-		presenceData.state = "Plans";
-	} else if (pPage === "/plans/standard") {
-		presenceData.details = "Browsing Page:";
-		presenceData.state = "Plan Standard";
-	} else if (pPage === "/sessions/sign-in") {
-		presenceData.details = "Browsing Page:";
-		presenceData.state = "Sign In";
+	} else {
+		switch (pPage) {
+			case "/start": {
+				presenceData.details = "Browsing Page:";
+				presenceData.state = "Start";
+
+				break;
+			}
+			case "/support": {
+				presenceData.details = "Browsing Page:";
+				presenceData.state = "Support";
+
+				break;
+			}
+			case "/plans": {
+				presenceData.details = "Browsing Page:";
+				presenceData.state = "Plans";
+
+				break;
+			}
+			case "/plans/standard": {
+				presenceData.details = "Browsing Page:";
+				presenceData.state = "Plan Standard";
+
+				break;
+			}
+			case "/sessions/sign-in": {
+				presenceData.details = "Browsing Page:";
+				presenceData.state = "Sign In";
+
+				break;
+			}
+			// No default
+		}
 	}
 
 	if (!presenceData.details) presence.setActivity();

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "619219701146583080"
+		clientId: "619219701146583080",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "ebaylogo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[, page] = location.pathname.split("/");
 
@@ -14,88 +14,99 @@ presence.on("UpdateData", async () => {
 		if (!page) {
 			presenceData.details = "Viewing the";
 			presenceData.state = "Homepage";
-		} else if (page === "itm") {
-			const seller = (document.querySelector(".mbg > a") as HTMLAnchorElement)
-				?.href;
+		} else {
+			switch (page) {
+				case "itm": {
+					presenceData.details = document
+						.querySelector("#itemTitle")
+						.textContent.replace(
+							document.querySelector("#itemTitle > span").textContent,
+							""
+						);
+					presenceData.buttons = [
+						{ label: "View Item", url: location.href },
+						{
+							label: "View Seller",
+							url: document.querySelector<HTMLAnchorElement>(".mbg > a")?.href,
+						},
+					];
 
-			presenceData.details = document
-				.querySelector("#itemTitle")
-				.textContent.replace(
-					document.querySelector("#itemTitle > span").textContent,
-					""
-				);
-			presenceData.buttons = [
-				{ label: "View Item", url: location.href },
-				{
-					label: "View Seller",
-					url: seller
-				}
-			];
-
-			if (document.querySelector("#vi-cdown_timeLeft")) {
-				delete presenceData.startTimestamp;
-				presenceData.state =
-					document.querySelector("#vi-cdown_timeLeft").textContent;
-			}
-		} else if (page === "sch") {
-			if (location.pathname.includes("/i.html")) {
-				presenceData.details = `Searching: ${
-					document.querySelector(
-						".srp-controls__count-heading .BOLD:nth-child(2)"
-					)?.textContent
-				}`;
-				presenceData.state = `${
-					document.querySelector(".srp-controls__count-heading .BOLD")
-						?.textContent
-				} Results`;
-				presenceData.smallImageKey = "search";
-			} else if (location.pathname.includes("/m.html")) {
-				const seller = document.querySelector(".mbid") as HTMLAnchorElement;
-
-				presenceData.details = "Viewing listed products of:";
-				presenceData.state = seller.textContent;
-				presenceData.buttons = [
-					{ label: "View List", url: location.href },
-					{
-						label: "View Seller",
-						url: seller.href
+					if (document.querySelector("#vi-cdown_timeLeft")) {
+						delete presenceData.startTimestamp;
+						presenceData.state =
+							document.querySelector("#vi-cdown_timeLeft").textContent;
 					}
-				];
+
+					break;
+				}
+				case "sch": {
+					if (location.pathname.includes("/i.html")) {
+						presenceData.details = `Searching: ${
+							document.querySelector(
+								".srp-controls__count-heading .BOLD:nth-child(2)"
+							)?.textContent
+						}`;
+						presenceData.state = `${
+							document.querySelector(".srp-controls__count-heading .BOLD")
+								?.textContent
+						} Results`;
+						presenceData.smallImageKey = "search";
+					} else if (location.pathname.includes("/m.html")) {
+						const seller = document.querySelector(".mbid") as HTMLAnchorElement;
+
+						presenceData.details = "Viewing listed products of:";
+						presenceData.state = seller.textContent;
+						presenceData.buttons = [
+							{ label: "View List", url: location.href },
+							{
+								label: "View Seller",
+								url: seller.href,
+							},
+						];
+					}
+
+					break;
+				}
+				case "usr": {
+					presenceData.details = "User:";
+					presenceData.state = document
+						.querySelector(".mbg-id")
+						.textContent.replace(
+							document.querySelector(".mbg-id > span").textContent,
+							""
+						);
+					presenceData.buttons = [{ label: "View User", url: location.href }];
+
+					break;
+				}
+				default:
+					if (location.pathname.includes("/myb/")) {
+						presenceData.details = "Viewing their:";
+						presenceData.state = document.querySelector(
+							"#top-nav > div.topTitle > h1 > span.page-name"
+						).textContent;
+					} else if (
+						location.pathname.includes("/sns") ||
+						location.pathname.includes("/b/Stores-Hub/")
+					)
+						presenceData.details = "Viewing stores";
+					else if (location.pathname.includes("/sl/")) {
+						presenceData.details = "eBay Sell";
+						presenceData.state = "Listing an item";
+					} else if (location.pathname.includes("/b/")) {
+						presenceData.details = "Viewing category:";
+						presenceData.state = document.querySelector(
+							".b-pageheader__text"
+						).textContent;
+					} else if (location.pathname.includes("/help/"))
+						presenceData.details = "eBay Help";
+					else if (location.pathname.includes("/deals")) {
+						presenceData.details = "Viewing the latest";
+						presenceData.state = "eBay deals";
+					} else if (location.pathname.includes("/allcategories"))
+						presenceData.details = "Viewing all categories";
 			}
-		} else if (page === "usr") {
-			presenceData.details = "User:";
-			presenceData.state = document
-				.querySelector(".mbg-id")
-				.textContent.replace(
-					document.querySelector(".mbg-id > span").textContent,
-					""
-				);
-			presenceData.buttons = [{ label: "View User", url: location.href }];
-		} else if (location.pathname.includes("/myb/")) {
-			presenceData.details = "Viewing their:";
-			presenceData.state = document.querySelector(
-				"#top-nav > div.topTitle > h1 > span.page-name"
-			).textContent;
-		} else if (
-			location.pathname.includes("/sns") ||
-			location.pathname.includes("/b/Stores-Hub/")
-		)
-			presenceData.details = "Viewing stores";
-		else if (location.pathname.includes("/sl/")) {
-			presenceData.details = "eBay Sell";
-			presenceData.state = "Listing an item";
-		} else if (location.pathname.includes("/b/")) {
-			presenceData.details = "Viewing category:";
-			presenceData.state = document.querySelector(
-				".b-pageheader__text"
-			).textContent;
-		} else if (location.pathname.includes("/help/"))
-			presenceData.details = "eBay Help";
-		else if (location.pathname.includes("/deals")) {
-			presenceData.details = "Viewing the latest";
-			presenceData.state = "eBay deals";
-		} else if (location.pathname.includes("/allcategories"))
-			presenceData.details = "Viewing all categories";
+		}
 	} else if (page === "str") {
 		presenceData.details = "eBay Store";
 		presenceData.state = document.querySelector(
@@ -141,12 +152,10 @@ presence.on("UpdateData", async () => {
 				{ label: "View Post", url: location.href },
 				{
 					label: "View Author",
-					url: (
-						document.querySelector(
-							".lia-component-message-view-widget-author-username > a"
-						) as HTMLAnchorElement
-					)?.href
-				}
+					url: document.querySelector<HTMLAnchorElement>(
+						".lia-component-message-view-widget-author-username > a"
+					)?.href,
+				},
 			];
 		} else if (location.pathname.includes("/user/")) {
 			presenceData.details = "eBay Forum Author:";

@@ -1,104 +1,110 @@
 const presence = new Presence({
-		clientId: "843711390539841577"
+		clientId: "843711390539841577",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
-		presenceData: PresenceData = {
-			largeImageKey: "dscgg",
-			details: "Viewing 📰 page:",
-			state: "🛑 Unsupported"
+	let presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/6Nl9N2E.jpeg",
+		details: "Viewing 📰 page:",
+		state: "🛑 Unsupported",
+	};
+	const { pathname, href, host } = document.location,
+		[showTimestamp, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("buttons"),
+		]),
+		pages: Record<string, PresenceData> = {
+			"/about": {
+				details: "📚 About",
+				buttons: [{ label: "View Page", url: href }],
+			},
+			"/premium": {
+				details: "💎 Premium",
+				buttons: [{ label: "View Page", url: href }],
+			},
 		};
 
-	if (document.location.hostname === "dsc.gg") {
-		if (document.location.pathname === "/") presenceData.state = "🏡 Home";
-		else if (document.location.pathname.includes("/search")) {
-			presenceData.details = "🔎 Searching for:";
-			presenceData.state = `🔗 ${
-				document.getElementById("searchBar")?.getAttribute("value") || "Nothing"
-			}`;
-			presenceData.smallImageKey = "search";
-			presenceData.buttons = [
-				{
-					label: "View Results",
-					url: document.location.href
+	for (const [path, data] of Object.entries(pages))
+		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+
+	if (host === "dsc.gg") {
+		if (pathname === "/") {
+			presenceData.state = "🏡 Home";
+			if (
+				document.querySelector("h1.text-5xl")?.textContent === "Search Results"
+			) {
+				presenceData.details = `🔎 Searching for: ${document
+					.querySelector("input.py-4")
+					?.getAttribute("searching")}`;
+				presenceData.state = `${
+					document.querySelector("h2.text-lg")?.textContent
+				}`;
+				presenceData.smallImageKey = "search";
+			}
+		} else {
+			switch (pathname) {
+				case "/dashboard": {
+					presenceData.details = "Viewing ⚙️ dashboard";
+					presenceData.state = "🔗 Links";
+					if (
+						document.querySelector("h1.text-2xl")?.textContent ===
+						"Create a new link"
+					) {
+						presenceData.details = "New link creation";
+						presenceData.state = `${
+							document.querySelector("input.p-2")?.getAttribute("value") ||
+							"Loading..."
+						}`;
+					}
+					break;
 				}
-			];
-		} else if (document.location.pathname === "/about") {
-			presenceData.state = "📚 About";
-			presenceData.buttons = [
-				{
-					label: "View Page",
-					url: document.location.href
-				}
-			];
-		} else if (document.location.pathname.includes("/premium")) {
-			presenceData.state = "💎 Premium";
-			presenceData.buttons = [
-				{
-					label: "View Page",
-					url: document.location.href
-				}
-			];
-		} else if (document.location.pathname === "/developers/about") {
-			presenceData.state = "💻 Developer";
-			presenceData.buttons = [
-				{
-					label: "View Page",
-					url: document.location.href
-				}
-			];
-		} else if (document.location.pathname === "/developers/dashboard") {
-			presenceData.details = "Viewing ⚙️ dashboard";
-			presenceData.state = "🖥️ Developer";
-		} else if (document.location.pathname === "/dashboard") {
-			presenceData.details = "Viewing ⚙️ dashboard";
-			presenceData.state = "🔗 Links";
-		} else if (document.location.pathname.includes("/dashboard/l/")) {
-			const [, link] = document.location.pathname.split("/dashboard/l/");
-			presenceData.details = `Editing 🔗 ${link} link`;
-			presenceData.state = `🏓 Tab: ${
-				location.href.includes("#tab")
-					? location.href.replace(
-							`https://dsc.gg/dashboard/l/${link}#tab=`,
-							" "
-					  )
-					: "basic"
-			}`;
-			presenceData.buttons = [
-				{
-					label: "Visit Link",
-					url: `https://dsc.gg/${link}`
-				}
-			];
-		} else if (document.location.pathname === "/legal/privacy")
-			presenceData.state = "📜 Privacy Policy";
-		else if (document.location.pathname === "/legal/tos")
-			presenceData.state = "📖 Terms of Service";
-	} else if (document.location.hostname === "docs.dsc.gg") {
-		if (document.location.pathname === "/") {
-			presenceData.details = "Viewing 📑 Documentation";
-			presenceData.state = `🌐 Content: ${
-				location.href.includes("#")
-					? location.href.replace("https://docs.dsc.gg/#", " ")
-					: "📧 Introduction"
-			}`;
-		} else if (document.location.pathname === "/endpoints") {
-			presenceData.details = "Viewing 🔗 endpoints";
-			presenceData.state = `🌐 Content: ${
-				location.href.includes("#")
-					? location.href.replace("https://docs.dsc.gg/endpoints#", " ")
-					: "None"
-			}`;
-		} else if (document.location.pathname === "/widgets") {
-			presenceData.details = "Viewing 🖼️ widgets";
-			presenceData.state = `🌐 Content: ${
-				location.href.includes("#")
-					? location.href.replace("https://docs.dsc.gg/widgets#", " ")
-					: "None"
-			}`;
+				default:
+					if (pathname.includes("/dashboard/l/")) {
+						const [, link] = pathname.split("/dashboard/l/");
+						presenceData.details = `Editing 🔗 ${link.split("/")[0]} link`;
+						presenceData.state = `🏓 Tab: ${link.split("/")[1]}`;
+						presenceData.buttons = [
+							{
+								label: "Visit Link",
+								url: `https://dsc.gg/${link.split("/")[0]}`,
+							},
+						];
+					}
+			}
+		}
+	} else if (host === "docs.dsc.gg") {
+		switch (pathname) {
+			case "/": {
+				presenceData.details = "Viewing 📑 Documentation";
+				presenceData.state = `🌐 Content: ${
+					location.href.includes("#")
+						? location.href.replace("https://docs.dsc.gg/#", " ")
+						: "📧 Introduction"
+				}`;
+
+				break;
+			}
+			case "/endpoints": {
+				presenceData.details = "Viewing 🔗 endpoints";
+				presenceData.state = `🌐 Content: ${
+					location.href.includes("#")
+						? location.href.replace("https://docs.dsc.gg/endpoints#", " ")
+						: "None"
+				}`;
+
+				break;
+			}
+			case "/widgets": {
+				presenceData.details = "Viewing 🖼️ widgets";
+				presenceData.state = `🌐 Content: ${
+					location.href.includes("#")
+						? location.href.replace("https://docs.dsc.gg/widgets#", " ")
+						: "None"
+				}`;
+
+				break;
+			}
 		}
 	}
 

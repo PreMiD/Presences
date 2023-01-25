@@ -1,14 +1,14 @@
 const presence = new Presence({
-	clientId: "777530802887983124"
+	clientId: "777530802887983124",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "google_podcast_logo"
+			largeImageKey: "google_podcast_logo",
 		},
 		podcastTitle =
-			document.getElementsByClassName("Ut8Gr").length > 0 &&
-			document.getElementsByClassName("Ut8Gr")[1].textContent;
+			document.querySelectorAll(".Ut8Gr").length > 0 &&
+			document.querySelectorAll(".Ut8Gr")[1].textContent;
 
 	if (podcastTitle) {
 		presenceData.details = (
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = isPaused ? "pause" : "play";
 		if (!isPaused) {
 			presenceData.smallImageKey = "play";
-			const ts = Math.round(new Date().getTime() / 1000),
+			const ts = Math.round(Date.now() / 1000),
 				elapsedSeconds = parseLength(
 					document.querySelector(".oG0wpe").children[0].textContent
 				);
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing podcast";
 		// It's quite tricky to locate the right podcast title because
 		// website makes new element for each of them
-		for (const element of document.getElementsByClassName("dbCu3e")) {
+		for (const element of document.querySelectorAll(".dbCu3e")) {
 			if (element.children[0].textContent === document.title)
 				presenceData.state = `${document.title} by ${element.children[1].textContent}`;
 		}
@@ -61,11 +61,9 @@ presence.on("UpdateData", async () => {
 
 // Function that convert lengths like 01:13 to seconds like 73
 function parseLength(length: string) {
-	const elements = length.split(":").reverse();
 	let result = 0;
-	for (let i = 0; i < elements.length; i++) {
-		const element = elements[i];
+	for (const [i, element] of length.split(":").reverse().entries())
 		if (!isNaN(Number(element))) result += Number(element) * Math.pow(60, i);
-	}
+
 	return result;
 }

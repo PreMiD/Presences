@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "611657413350654010"
+		clientId: "611657413350654010",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let lastPlaybackState = null,
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
 			largeImageKey: "lg",
 			details: "Browsing...",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 		delete presenceData.state;
@@ -47,19 +47,19 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			),
 			presenceData: PresenceData = {
-				details: videoTitle.innerText,
-				state: episode.innerText,
+				details: videoTitle.textContent,
+				state: episode.textContent,
 				largeImageKey: "lg",
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause
 					: (await strings).play,
 				startTimestamp,
-				endTimestamp
+				endTimestamp,
 			};
 
-		presenceData.details = videoTitle.innerText;
-		presenceData.state = episode.innerText;
+		presenceData.details = videoTitle.textContent;
+		presenceData.state = episode.textContent;
 		presenceData.startTimestamp = browsingTimestamp;
 
 		if (video.paused) {

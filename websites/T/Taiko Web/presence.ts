@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "858246998561783828"
+		clientId: "858246998561783828",
 	}),
 	slideshow = presence.createSlideshow(),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -7,7 +7,7 @@ const presence = new Presence({
 		2: "Easy",
 		3: "Normal",
 		4: "Hard",
-		5: "Extreme"
+		5: "Extreme",
 	};
 
 interface Song {
@@ -66,7 +66,7 @@ async function getSong(id: number) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "taiko_logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		canvas = document.querySelector<HTMLCanvasElement>("canvas"),
 		initialLoading = document.querySelector<HTMLSpanElement>("span.percentage"),
@@ -102,13 +102,37 @@ presence.on("UpdateData", async () => {
 
 				if (songId !== -1)
 					presenceData.details = `Selecting Song ${selectedSong.title_lang.en}`;
-				else if (songIndex === 201 || songIndex === 207)
-					presenceData.details = "Back to homescreen";
-				else if (songIndex === 202) presenceData.details = "Random Song";
-				else if (songIndex === 203) presenceData.details = "How to Play";
-				else if (songIndex === 204) presenceData.details = "About Simulator";
-				else if (songIndex === 205) presenceData.details = "Game Settings";
-				else if (songIndex === 206) presenceData.details = "Custom Songs";
+				else {
+					switch (songIndex) {
+						case 201:
+						case 207: {
+							presenceData.details = "Back to homescreen";
+							break;
+						}
+						case 202: {
+							presenceData.details = "Random Song";
+							break;
+						}
+						case 203: {
+							presenceData.details = "How to Play";
+							break;
+						}
+						case 204: {
+							presenceData.details = "About Simulator";
+							break;
+						}
+						case 205: {
+							presenceData.details = "Game Settings";
+							break;
+						}
+						case 206:
+							{
+								presenceData.details = "Custom Songs";
+								// No default
+							}
+							break;
+					}
+				}
 
 				break;
 			}
@@ -134,7 +158,7 @@ presence.on("UpdateData", async () => {
 						details: `Category: ${selectedSong.category}`,
 						state: `Difficulty: ${
 							difficulty[parseInt(localStorage.getItem("selectedDiff"))]
-						}`
+						}`,
 					},
 					3500
 				);
@@ -156,8 +180,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Join the game",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	}
 

@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "842704573877714974"
+	clientId: "842704573877714974",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "app"
+		largeImageKey: "app",
 	};
 
 	if (document.location.hostname === "roulette.hitmaps.com") {
@@ -16,16 +16,32 @@ presence.on("UpdateData", async () => {
 				document.querySelector("h1").textContent.split("CURRENT MISSION:")[1]
 			}`;
 		}
-	} else if (document.location.pathname === "/")
-		presenceData.details = "Viewing home page";
-	else if (document.location.pathname === "/support-the-site")
-		presenceData.details = "Viewing donation page";
-	else if (document.location.pathname === "/brand")
-		presenceData.details = "Viewing branding page";
-	else if (document.location.pathname === "/privacy-policy")
-		presenceData.details = "Reading the privacy policy";
-	else if (document.location.pathname === "/terms-of-use")
-		presenceData.details = "Reading the terms of use";
+	} else {
+		switch (document.location.pathname) {
+			case "/": {
+				presenceData.details = "Viewing home page";
+				break;
+			}
+			case "/support-the-site": {
+				presenceData.details = "Viewing donation page";
+				break;
+			}
+			case "/brand": {
+				presenceData.details = "Viewing branding page";
+				break;
+			}
+			case "/privacy-policy": {
+				presenceData.details = "Reading the privacy policy";
+				break;
+			}
+			case "/terms-of-use":
+				{
+					presenceData.details = "Reading the terms of use";
+					// No default
+				}
+				break;
+		}
+	}
 
 	if (document.location.pathname.split("/games/")[1]) {
 		switch (document.location.pathname.split("/games/")[1].split("/")[0]) {
@@ -58,25 +74,24 @@ presence.on("UpdateData", async () => {
 			document.location.pathname
 				.split("/")[3]
 				.replace(/[0-9]/g, "")
-				.replace(/-/g, " ")
+				.replaceAll("-", " ")
 		);
 
 		if (document.title.includes(" | HITMAPS™"))
 			presenceData.state += ` - ${document.title.split(" | HITMAPS™")[0]}`;
 		else if (document.location.pathname.split("/")[4]) {
 			presenceData.state += ` - ${capitaliseEachWord(
-				document.location.pathname.split("/")[4].replace(/-/g, " ")
+				document.location.pathname.split("/")[4].replaceAll("-", " ")
 			)}`;
 		}
-		if (document.querySelector('meta[property="og:image"]')) {
-			if (
-				document
-					.querySelector('meta[property="og:image"]')
-					.getAttribute("content")
-					.includes("elusive")
-			)
-				presenceData.state += " (Elusive Target)";
-		}
+		if (
+			document.querySelector('meta[property="og:image"]') &&
+			document
+				.querySelector('meta[property="og:image"]')
+				.getAttribute("content")
+				.includes("elusive")
+		)
+			presenceData.state += " (Elusive Target)";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

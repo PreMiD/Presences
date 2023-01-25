@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "653639828826750976" // Contact if you want me to edit the discord assets/keys/whatever
+		clientId: "653639828826750976", // Contact if you want me to edit the discord assets/keys/whatever
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 function getTimes(time: number): Record<string, number> {
@@ -19,7 +19,7 @@ function getTimes(time: number): Record<string, number> {
 	return {
 		sec: seconds,
 		min: minutes,
-		hrs: hours
+		hrs: hours,
 	};
 }
 
@@ -51,7 +51,7 @@ const matches: MatchList = {
 	"docs.google": { display: "Google Drive", imageKey: "cytube_service_gd" },
 	googleusercontent: {
 		display: "Google Drive",
-		imageKey: "cytube_service_gd"
+		imageKey: "cytube_service_gd",
 	},
 
 	appspot: { display: "Google Cloud", imageKey: "cytube_service_gc" },
@@ -65,18 +65,17 @@ const matches: MatchList = {
 
 	discordapp: { display: "Discord", imageKey: "cytube_service_dc" },
 
-	"vimeo-prod-": { display: "Vimeo", imageKey: "cytube_service_ve" }
+	"vimeo-prod-": { display: "Vimeo", imageKey: "cytube_service_ve" },
 };
 
 function service(service: string): Match {
 	let returnMatch: Match = {
 		display: "Unknown Service",
-		imageKey: "cytube_service_uk"
+		imageKey: "cytube_service_uk",
 	};
 
-	Object.keys(matches).forEach(key => {
+	for (const key of Object.keys(matches))
 		service.includes(key) && (returnMatch = matches[key]);
-	});
 
 	return returnMatch;
 }
@@ -100,18 +99,18 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "cytube_logo",
 			details: "loading",
-			state: "CyTube"
+			state: "CyTube",
 		},
 		translate = {
 			pause: (await strings).pause,
-			play: (await strings).play
+			play: (await strings).play,
 		};
 
 	async function setVideo(data: VideoData) {
 		const currentService: Match = service(data.site);
 
 		presenceData.details = `Watching ${document
-			.getElementById("currenttitle")
+			.querySelector("#currenttitle")
 			.textContent.replace("Currently Playing:", "")}
             - ${currentService.display}`;
 
@@ -136,16 +135,16 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path.includes("/r/")) {
-		presenceData.state = `${document.getElementById("motd").textContent} - /r/${
+		presenceData.state = `${document.querySelector("#motd").textContent} - /r/${
 			path.split("r/")[0]
 		}`;
 		if (
 			document.body.className.includes("chatOnly") ||
-			!document.getElementById("videowrap")
+			!document.querySelector("#videowrap")
 		) {
 			presenceData.details = "Chatting";
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-		} else if (!document.getElementById("videowrap").querySelector("video")) {
+		} else if (!document.querySelector("#videowrap").querySelector("video")) {
 			presenceData.details = "Waiting to Start";
 			presenceData.smallImageKey = "presence_playback_waiting";
 			presenceData.smallImageText = "Waiting";
@@ -153,14 +152,14 @@ presence.on("UpdateData", async () => {
 
 			if (iFrameResponse?.site) setVideo(iFrameResponse);
 		} else {
-			const video = document.getElementById("videowrap").querySelector("video");
+			const video = document.querySelector("#videowrap").querySelector("video");
 
 			setVideo({
 				audio: false,
 				currentTime: video.currentTime,
 				duration: video.duration,
 				paused: video.paused,
-				site: video.src
+				site: video.src,
 			});
 		}
 	} else if (path === "/") {

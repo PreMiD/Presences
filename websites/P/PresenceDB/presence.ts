@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "840759396103749633"
+		clientId: "840759396103749633",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -70,31 +70,47 @@ async function getTranslation(name: string) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
-	if (window.location.pathname === "/")
-		presenceData.details = await getTranslation("home");
-	else if (window.location.pathname === "/search")
-		presenceData.details = await getTranslation("search");
-	else if (window.location.pathname === "/faq")
-		presenceData.details = await getTranslation("faq");
-	else if (window.location.pathname.includes("/activity/")) {
-		if (!document.getElementById("activityName")) return;
-		presenceData.details = await getTranslation("activity");
-		presenceData.state = document.getElementById("activityName").textContent;
-		presenceData.buttons = [
-			{ label: await getTranslation("viewActivity"), url: window.location.href }
-		];
-	} else if (window.location.pathname.includes("/user/")) {
-		if (!document.getElementById("userName")) return;
-		presenceData.details = await getTranslation("user");
-		presenceData.state = document.getElementById("userName").textContent;
-		presenceData.buttons = [
-			{ label: await getTranslation("viewUser"), url: window.location.href }
-		];
-	} else if (window.location.pathname === "/settings")
-		presenceData.details = await getTranslation("settings");
+	switch (window.location.pathname) {
+		case "/": {
+			presenceData.details = await getTranslation("home");
+			break;
+		}
+		case "/search": {
+			presenceData.details = await getTranslation("search");
+			break;
+		}
+		case "/faq": {
+			presenceData.details = await getTranslation("faq");
+			break;
+		}
+		default:
+			if (window.location.pathname.includes("/activity/")) {
+				if (!document.querySelector("#activityName")) return;
+				presenceData.details = await getTranslation("activity");
+				presenceData.state =
+					document.querySelector("#activityName").textContent;
+				presenceData.buttons = [
+					{
+						label: await getTranslation("viewActivity"),
+						url: window.location.href,
+					},
+				];
+			} else if (window.location.pathname.includes("/user/")) {
+				if (!document.querySelector("#userName")) return;
+				presenceData.details = await getTranslation("user");
+				presenceData.state = document.querySelector("#userName").textContent;
+				presenceData.buttons = [
+					{
+						label: await getTranslation("viewUser"),
+						url: window.location.href,
+					},
+				];
+			} else if (window.location.pathname === "/settings")
+				presenceData.details = await getTranslation("settings");
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

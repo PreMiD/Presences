@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "629380028576301093"
+	clientId: "629380028576301093",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "dblregular"
+		largeImageKey: "dblregular",
 	};
 	presenceData.details = "Viewing Page:";
 
@@ -13,24 +13,40 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing DBL Staff section:";
 		presenceData.largeImageKey = "dblstaff";
 
-		if (window.location.pathname === "/moderation") {
-			const personalquota =
-				document.getElementsByClassName("quotaindiv")[0].textContent;
+		switch (window.location.pathname) {
+			case "/moderation": {
+				const personalquota =
+					document.querySelectorAll(".quotaindiv")[0].textContent;
 
-			presenceData.state = `Reviewed ${personalquota.substring(
-				personalquota.indexOf("reviewed") + 9,
-				personalquota.indexOf("/")
-			)} bots this week`;
-		} else if (window.location.pathname === "/moderation/approve")
-			presenceData.state = "Verification Queue";
-		else if (window.location.pathname === "/moderation/certify")
-			presenceData.state = "Certification Queue";
-		else if (window.location.pathname === "/moderation/reports")
-			presenceData.state = "Reports Queue";
-		else if (window.location.pathname === "/moderation/reviews")
-			presenceData.state = "Reviews Dashboard";
-		else if (window.location.pathname.startsWith("/moderation/decline"))
-			presenceData.state = document.querySelector("#botlistitle").textContent;
+				presenceData.state = `Reviewed ${personalquota.substring(
+					personalquota.indexOf("reviewed") + 9,
+					personalquota.indexOf("/")
+				)} bots this week`;
+
+				break;
+			}
+			case "/moderation/approve": {
+				presenceData.state = "Verification Queue";
+				break;
+			}
+			case "/moderation/certify": {
+				presenceData.state = "Certification Queue";
+				break;
+			}
+			case "/moderation/reports": {
+				presenceData.state = "Reports Queue";
+				break;
+			}
+			case "/moderation/reviews": {
+				presenceData.state = "Reviews Dashboard";
+				break;
+			}
+			default:
+				if (window.location.pathname.startsWith("/moderation/decline")) {
+					presenceData.state =
+						document.querySelector("#botlistitle").textContent;
+				}
+		}
 	} else if (window.location.pathname.startsWith("/bot/")) {
 		if (window.location.pathname.endsWith("/edit")) {
 			presenceData.details = "Editing a Discord bot:";

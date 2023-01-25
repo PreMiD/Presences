@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "660519861742731264"
+	clientId: "660519861742731264",
 });
 
 let oldLang: string,
@@ -10,7 +10,7 @@ let oldLang: string,
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "logo_big"
+			largeImageKey: "logo_big",
 		};
 
 	oldLang = newLang;
@@ -35,9 +35,9 @@ presence.on("UpdateData", async () => {
 		// Startpage, Radio station, Region, Unknown
 		default: {
 			const region = [
-					...document.querySelectorAll<HTMLAnchorElement>(".region-btn")
+					...document.querySelectorAll<HTMLAnchorElement>(".region-btn"),
 				]
-					.filter(e => e.classList.contains("active"))[0]
+					.find(e => e.classList.contains("active"))
 					.pathname?.slice(1),
 				station =
 					document.querySelector<HTMLSpanElement>(".song-name")?.textContent;
@@ -90,7 +90,7 @@ async function getStrings(lang: string) {
 			play: "general.playing",
 			pause: "general.paused",
 			search: "general.searching",
-			browsing: "general.browsing"
+			browsing: "general.browsing",
 		},
 		lang
 	);

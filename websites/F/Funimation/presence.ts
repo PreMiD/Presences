@@ -1,87 +1,66 @@
 const presence = new Presence({
-		clientId: "640161890059812865"
+		clientId: "640161890059812865",
 	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
-	});
+	getStrings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let browsingTimestamp = Math.floor(Date.now() / 1000),
-	iFrameVideo: boolean,
-	currentTime: number,
-	duration: number,
-	paused: boolean,
-	lastPlaybackState: boolean,
-	playback: boolean;
-
-interface IFrameData {
-	iFrameVideo: {
-		dur: number;
-		iFrameVideo: boolean;
-		paused: boolean;
-		currTime: number;
-	};
-}
-
-presence.on("iFrameData", (data: IFrameData) => {
-	playback = data.iFrameVideo.dur !== null ? true : false;
-	if (lastPlaybackState !== playback) {
-		lastPlaybackState = playback;
-		browsingTimestamp = Math.floor(Date.now() / 1000);
-	}
-
-	if (playback) {
-		({ iFrameVideo, paused } = data.iFrameVideo);
-		currentTime = data.iFrameVideo.currTime;
-		duration = data.iFrameVideo.dur;
-	}
-});
+let prevTitle: string, prevEpisode: string, strings: Awaited<typeof getStrings>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "fun",
-		startTimestamp: browsingTimestamp
-	};
+			largeImageKey: "fun",
+			startTimestamp: browsingTimestamp,
+		},
+		showPoster = await presence.getSetting("poster"),
+		video = document.querySelector<HTMLVideoElement>("video.vjs-tech");
 
-	if (
-		document.querySelector(".meta-overlay > div > div > ul > li > h1") !== null
-	) {
-		if (iFrameVideo === true && !isNaN(duration)) {
-			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused
-				? (await strings).pause
-				: (await strings).play;
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
+	strings ??= await getStrings;
 
-			presenceData.details = document.querySelector(
+	if (location.pathname.includes("/v/") && video) {
+		const poster = document.querySelector<HTMLElement>(".vjs-poster"),
+			title = document.querySelector(
 				".meta-overlay > div > div > ul > li > h1"
-			).textContent;
-			presenceData.state = document
+			)?.textContent,
+			episode = document
 				.querySelector(".meta-overlay > div > div > ul > li > p")
-				.textContent.trim()
-				.replaceAll("\n               ", "");
+				?.textContent?.replace(/\s+/g, " ");
 
-			if (paused) {
-				delete presenceData.startTimestamp;
-				delete presenceData.endTimestamp;
-			}
-		} else if (iFrameVideo === null && isNaN(duration)) {
-			presenceData.startTimestamp = browsingTimestamp;
-			presenceData.details = "Looking at: ";
-			presenceData.state = `${
-				document.querySelector(".meta-overlay > div > div > ul > li > h1")
-					.textContent
-			} ${document
-				.querySelector(".meta-overlay > div > div > ul > li > p")
-				.textContent.trim()
-				.replaceAll("\n               ", "")}`;
-			presenceData.smallImageKey = "reading";
+		if (title) prevTitle = title;
+		if (episode) prevEpisode = episode;
+
+		if (showPoster && poster?.style?.backgroundImage) {
+			presenceData.largeImageKey =
+				poster.style.backgroundImage.match(/"(.*)"/)[1];
+		}
+
+		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageText = video.paused ? strings.pause : strings.play;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestampsfromMedia(video);
+
+		presenceData.details = prevTitle;
+		presenceData.state = prevEpisode;
+
+		if (video.paused) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
 		}
 	} else if (document.location.pathname.includes("/shows/")) {
 		if (
 			document.querySelector('h1[data-test="content-hero__title"]') !== null
 		) {
+			const poster = document.querySelector<HTMLElement>(
+				".v-image__image.v-image__image--contain"
+			);
+
+			if (showPoster && poster?.style?.backgroundImage) {
+				presenceData.largeImageKey =
+					poster.style.backgroundImage.match(/"(.*)"/)[1];
+			}
+
 			presenceData.details = "Viewing show:";
 			presenceData.state = document.querySelector(
 				'h1[data-test="content-hero__title"]'

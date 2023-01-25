@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "630570838084812801"
+	clientId: "630570838084812801",
 });
 
 presence.on("UpdateData", async () => {
@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "banner",
 			smallImageKey: "logo",
 			smallImageText: decodeURIComponent(document.location.href),
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 
@@ -36,23 +36,23 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "banner",
 			smallImageKey: "logo",
 			smallImageText: decodeURIComponent(document.location.href),
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 
 	if (path === "/index.php") {
 		// Note that I (EGGSY) didn't work on this part, I don't know if it's working on the main site but I'm sure it doesn't work on Spanish version.
-		const newTopic = document.getElementsByClassName("firstHeading")[0]
-			? document.getElementsByClassName("firstHeading")[0].textContent
+		const newTopic = document.querySelectorAll(".firstHeading")[0]
+			? document.querySelectorAll(".firstHeading")[0].textContent
 			: null;
 
 		return presence.setActivity({
 			details: "Editing/Writing How to",
-			state: `Topic: ${newTopic ? newTopic : "Unknown."} `,
+			state: `Topic: ${newTopic ?? "Unknown."} `,
 			largeImageKey: "banner",
 			smallImageKey: "logo",
 			smallImageText: decodeURIComponent(document.location.href),
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "banner",
 			smallImageKey: "logo",
 			smallImageText: "Searching...",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 
@@ -77,6 +77,6 @@ presence.on("UpdateData", async () => {
 		state: "Homepage",
 		largeImageKey: "banner",
 		smallImageKey: "logo",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	});
 });

@@ -2,39 +2,43 @@
 //       maybe at some point he'll finish it and this will need updating.
 
 const presence = new Presence({
-		clientId: "629355416714739732" // Contact if you want me to edit the discord assets/keys/whatever
-	}),
-	waitStrings = async (lang: string) =>
-		presence.getStrings(
-			{
-				play: "presence.playback.playing",
-				pause: "presence.playback.paused",
-				browse: "general.browsing",
-				page: "general.page",
-				episode: "general.episode",
-				watching: "general.watching",
-				watchingMovie: "general.watchingMovie",
-				viewing: "general.viewing",
-				viewGenre: "general.viewGenre",
-				viewCategory: "general.viewCategory",
-				viewPage: "general.viewPage",
-				viewMovie: "general.viewMovie",
-				watchEpisode: "general.buttonViewEpisode",
-				watchMovie: "general.buttonViewMovie",
-				latest: "animepahe.latestRelease",
-				season: "animepahe.season",
-				special: "animepahe.special",
-				viewOn: "animepahe.view",
-				timeSeason: "animepahe.timeSeason"
-			},
-			lang
-		);
+	clientId: "629355416714739732",
+});
 
-let iframeResponse = {
-	paused: true,
-	duration: 0,
-	currentTime: 0
-};
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			browse: "general.browsing",
+			page: "general.page",
+			episode: "general.episode",
+			watching: "general.watching",
+			watchingMovie: "general.watchingMovie",
+			viewing: "general.viewing",
+			viewGenre: "general.viewGenre",
+			viewCategory: "general.viewCategory",
+			viewPage: "general.viewPage",
+			viewMovie: "general.viewMovie",
+			watchEpisode: "general.buttonViewEpisode",
+			watchMovie: "general.buttonViewMovie",
+			latest: "animepahe.latestRelease",
+			season: "animepahe.season",
+			special: "animepahe.special",
+			viewOn: "animepahe.view",
+			timeSeason: "animepahe.timeSeason",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null,
+	iframeResponse = {
+		paused: true,
+		duration: 0,
+		currentTime: 0,
+	};
 
 type storeType = Record<
 	string,
@@ -49,14 +53,11 @@ class AnimeStorage {
 		else if (!listing) return;
 		else {
 			this.list[title] = {
-				id: parseInt(
-					(
-						document.getElementsByClassName("modal-body")[1].lastElementChild
-							.lastElementChild as HTMLAnchorElement
-					).href.split("/a/")[1]
+				id: Number(
+					document.querySelector<HTMLMetaElement>("meta[name=id]").content
 				),
 				listing,
-				time: Date.now()
+				time: Date.now(),
 			};
 
 			// Removes the oldest stored anime if the store length has exceeded 10
@@ -101,7 +102,7 @@ function getTimes(time: number): Record<string, number> {
 	return {
 		sec: seconds,
 		min: minutes,
-		hrs: hours
+		hrs: hours,
 	};
 }
 
@@ -125,7 +126,7 @@ function parseInfo(dom: HTMLParagraphElement[]) {
 		let title = entry.children[0].textContent.slice(0, -1);
 		const [, secondChild] = entry.childNodes;
 
-		if (title.indexOf(" ") !== -1) {
+		if (title.includes(" ")) {
 			title = title
 				.split(" ")
 				.map(e => uncapitalize(e))
@@ -161,12 +162,16 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "animepahe",
 			details: "loading",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
-		strings = await waitStrings(
-			await presence.getSetting<string>("lang").catch(() => "en")
-		),
-		viewing = strings.viewing.slice(0, -1);
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
+
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+
+	const viewing = strings.viewing.slice(0, -1);
 	let playback = false;
 
 	switch (path[0]) {
@@ -211,7 +216,7 @@ presence.on("UpdateData", async () => {
 								// viewing anime/time season
 								presenceData.details = `${viewing} Anime ${strings.timeSeason}:`;
 								presenceData.state =
-									document.getElementsByTagName("h1")[0].textContent;
+									document.querySelectorAll("h1")[0].textContent;
 								presenceData.smallImageKey = "presence_browsing_time";
 								presenceData.smallImageText = strings.browse;
 							}
@@ -225,26 +230,24 @@ presence.on("UpdateData", async () => {
 								// viewing a misc. category (eg. Airing, TV, etc)
 								presenceData.details = strings.viewCategory;
 
-								const heading =
-									document.getElementsByTagName("h1")[0].textContent;
-								presenceData.state =
-									heading.indexOf(" ") !== -1
-										? heading
-												.split(" ")
-												.map(s => capitalize(s))
-												.join(" ")
-										: capitalize(heading);
+								const heading = document.querySelectorAll("h1")[0].textContent;
+								presenceData.state = heading.includes(" ")
+									? heading
+											.split(" ")
+											.map(s => capitalize(s))
+											.join(" ")
+									: capitalize(heading);
 								presenceData.smallImageKey = "presence_browsing_all";
 								presenceData.smallImageText = strings.browse;
 							} else {
 								// viewing specific
 								const info = parseInfo(
-										document.getElementsByClassName("anime-info")[0]
+										document.querySelectorAll(".anime-info")[0]
 											.children as unknown as HTMLParagraphElement[]
 									),
 									title =
-										document.getElementsByClassName("title-wrapper")[0]
-											.children[1].textContent,
+										document.querySelectorAll(".title-wrapper")[0].children[1]
+											.textContent,
 									listing = (() => {
 										const links = info.external_links as HTMLAnchorElement[];
 
@@ -287,12 +290,12 @@ presence.on("UpdateData", async () => {
 										label: strings.viewOn.replace("{0}", "Pahe"),
 										url: `https://pahe.win/a/${
 											animeStore.anime(title, listing).id
-										}`
+										}`,
 									},
 									{
 										label: strings.viewOn.replace("{0}", listing[0]),
-										url: listing[1]
-									}
+										url: listing[1],
+									},
 								];
 							}
 						}
@@ -304,14 +307,14 @@ presence.on("UpdateData", async () => {
 		case "play":
 			{
 				const movie: boolean =
-						document.getElementsByClassName("anime-status")[0].firstElementChild
+						document.querySelectorAll(".anime-status")[0].firstElementChild
 							.textContent === "Movie",
 					title =
-						document.getElementsByClassName("theatre-info")[0].children[1]
+						document.querySelectorAll(".theatre-info")[0].children[1]
 							.children[1].textContent,
 					episode = parseInt(
 						document
-							.getElementById("episodeMenu")
+							.querySelector("#episodeMenu")
 							.textContent.split("Episode ")[1]
 							.replace(/^\s+|\s+$/g, "")
 					);
@@ -354,12 +357,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: movie ? strings.watchMovie : strings.watchEpisode,
-							url: `https://pahe.win/a/${anime.id}/${episode}`
+							url: `https://pahe.win/a/${anime.id}/${episode}`,
 						},
 						{
 							label: strings.viewOn.replace("{0}", anime.listing[0]),
-							url: anime.listing[1]
-						}
+							url: anime.listing[1],
+						},
 					];
 				}
 
@@ -368,7 +371,7 @@ presence.on("UpdateData", async () => {
 			break;
 		default: {
 			presenceData.details = strings.viewPage;
-			presenceData.state = document.getElementsByTagName("h1")[0].textContent;
+			presenceData.state = document.querySelectorAll("h1")[0].textContent;
 		}
 	}
 	presence.setActivity(presenceData, playback);

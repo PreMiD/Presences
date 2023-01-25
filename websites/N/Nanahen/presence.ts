@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "898197972490256404"
+		clientId: "898197972490256404",
 	}),
 	presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 					"body > main > div > div > div.container > div > div.series-flexright > div.series-title > h2"
 				).textContent;
 				presenceData.buttons = [
-					{ label: "View Manga", url: document.location.href }
+					{ label: "View Manga", url: document.location.href },
 				];
 			}
 			if (document.querySelector(".reader-area")) {
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 					"#chapnav > div > div.infox > span.chapter"
 				).textContent;
 				presenceData.buttons = [
-					{ label: "Read Manga", url: document.location.href }
+					{ label: "Read Manga", url: document.location.href },
 				];
 			}
 			break;

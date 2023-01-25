@@ -16,7 +16,7 @@ const multiUploader = document.querySelector("div.members-info");
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bb"
+		largeImageKey: "bb",
 	};
 
 	async function getTimestamps() {
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 							"#member-container > div:nth-child(1) > div > a"
 						);
 						uploaderName = `${uploader.textContent} + ${
-							document.getElementsByClassName("up-card").length
+							document.querySelectorAll(".up-card").length
 						} more`;
 					} else {
 						uploader = document.querySelector("a.username");
@@ -76,12 +76,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Video", // getString() later
-							url: `https://www.bilibili.com/video/${urlpath[2]}`
+							url: `https://www.bilibili.com/video/${urlpath[2]}`,
 						},
 						{
 							label: "View Space", // getString() later
-							url: `https:${uploaderLink}`
-						}
+							url: `https:${uploaderLink}`,
+						},
 					];
 					break;
 				}
@@ -100,8 +100,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Space", // getString() later
-					url: `https://space.bilibili.com/${urlpath[1]}`
-				}
+					url: `https://space.bilibili.com/${urlpath[1]}`,
+				},
 			];
 			break;
 		}

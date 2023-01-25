@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "670669014363668481"
+		clientId: "670669014363668481",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	actionURL = new URL(document.location.href),
@@ -9,7 +9,7 @@ let title: HTMLElement;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	title = document.querySelector("h1#firstHeading");
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing revision history of:";
 
 		if (title2Result.includes("_"))
-			presenceData.state = title2Result.replace(/_/g, " ");
+			presenceData.state = title2Result.replaceAll("_", " ");
 		else presenceData.state = title2Result;
 	} else if (
 		actionResult === "edit" &&
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Editing a page:";
 
 		if (title2Result.includes("_"))
-			presenceData.state = title2Result.replace(/_/g, " ");
+			presenceData.state = title2Result.replaceAll("_", " ");
 		else presenceData.state = title2Result;
 	} else if (
 		actionResult === "formedit" &&
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Form editing a page:";
 
 		if (title2Result.includes("_"))
-			presenceData.state = title2Result.replace(/_/g, " ");
+			presenceData.state = title2Result.replaceAll("_", " ");
 		else presenceData.state = title2Result;
 	}
 

@@ -1,20 +1,20 @@
 const presence = new Presence({
-	clientId: "656959119118565406"
+	clientId: "656959119118565406",
 });
 
 // Redirect to iframe source, to prevent loss of progress
-if (document.getElementsByTagName("frame")[1]) {
-	if (document.baseURI !== document.getElementsByTagName("frame")[1].src)
-		window.location.replace(document.getElementsByTagName("frame")[1].src);
-}
+if (
+	document.querySelectorAll("frame")[1] &&
+	document.baseURI !== document.querySelectorAll("frame")[1].src
+)
+	window.location.replace(document.querySelectorAll("frame")[1].src);
 
 // Check whether loggedout
 let loggedout = false;
 if (
 	(document.baseURI.match(/module=adm/) &&
 		document.baseURI.match(/(type=|classes)/)) ||
-	(document.getElementsByClassName("menuitem")[1] as HTMLElement)
-		.textContent === ""
+	(document.querySelectorAll(".menuitem")[1] as HTMLElement).textContent === ""
 )
 	loggedout = true;
 
@@ -50,9 +50,9 @@ if (!loggedout) {
 
 	// Set Worksheet
 	if (document.baseURI.match(/sh=/)) {
-		WSNo = document.baseURI.match(/sh=(.?.?)/)[1].replace(/&|#/g, "");
+		WSNo = document.baseURI.match(/sh=(.?.?)/)[1].replaceAll("&|#", "");
 		worksheet = `- ${
-			document.getElementsByClassName("text_item ")[1].textContent
+			document.querySelectorAll(".text_item")[1].textContent
 		}${WSNo}`;
 		exercise = "...";
 	} else if (document.baseURI.match(/(worksheet=|reply)/)) {
@@ -61,7 +61,7 @@ if (!loggedout) {
 		WSNo = document
 			.querySelector<HTMLAnchorElement>(".sheet")
 			.href.match(/sh=(.?.?)/)[1]
-			.replace(/&|#/g, "");
+			.replaceAll("&|#", "");
 		worksheet = `- ${
 			document.querySelector<HTMLElement>(".sheet").textContent
 		} ${WSNo}`;
@@ -75,16 +75,14 @@ if (!loggedout) {
 		if (document.querySelector(".main_body .titre")) {
 			if (
 				document.querySelector(".main_body .titre") &&
-				document.getElementsByTagName("kbd")[1] &&
+				document.querySelectorAll("kbd")[1] &&
 				!document.querySelector(".answer")
 			) {
-				[EXNo] = document
-					.getElementsByTagName("kbd")[1]
-					.textContent.match(/\d+/);
+				[EXNo] = document.querySelectorAll("kbd")[1].textContent.match(/\d+/);
 				exercise = `${document
 					.querySelector<HTMLAnchorElement>(".sheet")
 					.href.match(/#ex(.?.?)/)[1]
-					.replace(/&|#/g, "")}.${EXNo}: ${
+					.replaceAll("&|#", "")}.${EXNo}: ${
 					document.querySelector<HTMLElement>(".main_body .titre").textContent
 				}`;
 			} else {
@@ -95,12 +93,10 @@ if (!loggedout) {
 		if (document.querySelector(".oeftitle")) {
 			if (
 				document.querySelector(".oeftitle") &&
-				document.getElementsByTagName("kbd")[1] &&
+				document.querySelectorAll("kbd")[1] &&
 				!document.querySelector(".oefanswer")
 			) {
-				[EXNo] = document
-					.getElementsByTagName("kbd")[1]
-					.textContent.match(/\d+/);
+				[EXNo] = document.querySelectorAll("kbd")[1].textContent.match(/\d+/);
 				exercise = `${
 					document.querySelector<HTMLElement>(".oeftitle").textContent
 				}: ${EXNo}`;
@@ -145,7 +141,7 @@ presence.on("UpdateData", async () => {
 		state: exercise,
 		startTimestamp: timestamp,
 		endTimestamp: timeleft,
-		largeImageKey: "wims_lg"
+		largeImageKey: "wims_lg",
 	};
 	if (loggedout) presence.setActivity();
 	else presence.setActivity(presenceData);

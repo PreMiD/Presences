@@ -2,6 +2,7 @@ const iframe = new iFrame();
 let videos: HTMLCollectionOf<HTMLVideoElement>;
 
 iframe.on("UpdateData", async () => {
+	// eslint-disable-next-line unicorn/prefer-query-selector
 	videos = document.getElementsByTagName("video");
 
 	if (videos.length > 0) {
@@ -13,8 +14,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					paused: video.paused,
-					duration: video.duration
-				}
+					duration: video.duration,
+				},
 			});
 		}
 	}

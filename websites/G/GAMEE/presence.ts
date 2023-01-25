@@ -1,15 +1,15 @@
 const presence = new Presence({
-		clientId: "865212562130862120"
+		clientId: "865212562130862120",
 	}),
 	timer = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "gamee_logo",
-			startTimestamp: timer
+			startTimestamp: timer,
 		},
-		{ pathname } = location,
-		[, , IDs] = pathname.split("/");
+		{ pathname, href } = document.location,
+		IDs = pathname.split("/")[2];
 
 	if (pathname === "/") presenceData.details = "Viewing homepage";
 	else if (pathname.includes("/prizes"))
@@ -49,8 +49,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: `View ${name.textContent}'s profile`,
-				url: location.href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.includes(`/game/${IDs}`)) {
 		presenceData.details = "Playing a game:";

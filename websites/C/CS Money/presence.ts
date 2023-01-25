@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "922108073533898763"
+		clientId: "922108073533898763",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (
 		document.querySelector("#modal > div.styles_overlay__3KR4i") &&
-		document.location.href.indexOf("csgo") > -1
+		document.location.href.includes("csgo")
 	) {
 		presenceData.details = `Inspecting skin: ${
 			document.querySelector(
@@ -25,18 +25,18 @@ presence.on("UpdateData", () => {
 				label: "Inspect 3D",
 				url: document.querySelector<HTMLAnchorElement>(
 					"#modal > div > div.styles_wrapper__1pcux > div > div > div > div.ItemDetailsLayout_item_visual__2lBPE > div:nth-child(3) > div > a:nth-child(3)"
-				).href
+				).href,
 			},
 			{
 				label: "More details",
 				url: document.querySelector<HTMLAnchorElement>(
 					"#modal > div > div.styles_wrapper__1pcux > div > div > div > div.ItemDetailsLayout_item_visual__2lBPE > div:nth-child(3) > div > a:nth-child(4)"
-				).href
-			}
+				).href,
+			},
 		];
 	} else if (
 		document.querySelector("#modal > div.styles_overlay__3KR4i") &&
-		document.location.href.indexOf("dota") > -1
+		document.location.href.includes("dota")
 	) {
 		presenceData.details = `Inspecting item: ${
 			document.querySelector(
@@ -46,17 +46,17 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.querySelector(
 			"#modal > div > div.styles_wrapper__1pcux > div > div > div > div.ItemDetailsLayout_item_numerical__2-JYQ > div:nth-child(5) > div.ItemDetailsLayout_price_block__37gpv > div.styles_price_wrap__7fZ5J > div.styles_information__TKFXx > div.styles_price_container__3Fc2t > span > span"
 		).textContent;
-	} else if (document.location.href.indexOf("trade") > -1)
+	} else if (document.location.href.includes("trade"))
 		presenceData.details = "Making a trade offer";
-	else if (document.location.href.indexOf("store") > -1)
+	else if (document.location.href.includes("store"))
 		presenceData.details = "Browsing the store";
-	else if (document.location.href.indexOf("sell") > -1)
+	else if (document.location.href.includes("sell"))
 		presenceData.details = "Selling items";
-	else if (document.location.href.indexOf("auction") > -1)
+	else if (document.location.href.includes("auction"))
 		presenceData.details = "Joining an auction";
-	else if (document.location.href.indexOf("personal-info") > -1)
+	else if (document.location.href.includes("personal-info"))
 		presenceData.details = "Viewing personal info";
-	else if (document.location.href.indexOf("transactions") > -1)
+	else if (document.location.href.includes("transactions"))
 		presenceData.details = "Viewing transactions";
 	else if (document.location.hostname === "3d.cs.money") {
 		presenceData.details = "Inspecting 3D";

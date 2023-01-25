@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "783702757021581352"
+		clientId: "783702757021581352",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ let currencyTitle, currencyEffort, effortType, wallet24Revenue: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	switch (window.location.pathname) {
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `Effort (${effortType}): ${currencyEffort}%`;
 				}
 				presenceData.details = currencyTitle;
-				[, , presenceData.smallImageKey] = window.location.pathname.split("/");
+				presenceData.smallImageKey = window.location.pathname.split("/")[2];
 				presenceData.smallImageText = currencyTitle;
 			} else {
 				presenceData.startTimestamp = browsingTimestamp;

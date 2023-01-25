@@ -1,47 +1,49 @@
 const presence = new Presence({
-		clientId: "767402228825980929"
+		clientId: "767402228825980929",
 	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
-		search: "presence.activity.searching"
-	});
+	newStrings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
+	}),
+	elapsed = Math.floor(Date.now() / 1000);
 
-let elapsed: number, oldUrl: string;
+let strings: Awaited<typeof newStrings>;
 
 presence.on("UpdateData", async () => {
-	let video: HTMLVideoElement = null,
-		// eslint-disable-next-line no-one-time-vars/no-one-time-vars
-		details,
-		state,
-		smallImageKey,
-		smallImageText,
-		startTimestamp,
-		endTimestamp;
+	let extra = "...";
 
-	const { href } = window.location,
-		path = window.location.pathname,
+	const path = window.location.pathname,
 		presenceData: PresenceData = {
 			largeImageKey: "peacock",
-			details
+			startTimestamp: elapsed,
 		};
 
-	if (href !== oldUrl) {
-		oldUrl = href;
-		elapsed = Math.floor(Date.now() / 1000);
-	}
+	strings ??= await newStrings;
 
-	presenceData.startTimestamp = elapsed;
+	if (path.includes("/movies/highlights")) extra = " Movies";
+	else if (path.includes("/watch/tv/highlights")) extra = " TV Shows";
+	else if (path.includes("/watch/kids/highlights")) extra = " Kids";
+	else if (path.includes("/watch/sports/highlights")) extra = " Sports";
+	else if (path.includes("/watch/latino/highlights")) extra = " Latino";
+
+	presenceData.details = `Browsing${extra}`;
+
+	if (path.includes("/watch/search")) presenceData.details = "Searching...";
 
 	if (path.includes("/watch/playback") || path.includes("/watch/asset")) {
-		video = document.querySelector(".video-player-component video");
+		const video = document.querySelector<HTMLVideoElement>(
+			".video-player-component video"
+		);
 		if (video) {
-			const [startTimestamp, endTimestamp] = presence.getTimestamps(
+			const title =
+					document.querySelector(".playback-header__title") ||
+					document.querySelector(".playback-metadata__container-title"),
+				timestamps = presence.getTimestamps(
 					Math.floor(video.currentTime),
 					Math.floor(video.duration)
 				),
-				live = endTimestamp === Infinity,
+				live = timestamps[1] === Infinity,
 				desc =
 					document.querySelector(
 						".playback-metadata__container-episode-metadata-info"
@@ -51,18 +53,28 @@ presence.on("UpdateData", async () => {
 						".swiper-slide-active .playlist-item-overlay__container-title"
 					);
 
-			if (desc) state = desc.textContent;
+			if (desc) presenceData.state = desc.textContent;
 
-			smallImageKey = live ? "live" : video.paused ? "pause" : "play";
-			smallImageText = live
-				? (await strings).live
+			if (title) {
+				presenceData.details = title.textContent;
+				if (path.includes("/watch/playback/playlist"))
+					presenceData.details += " Playlist";
+			}
+
+			presenceData.smallImageKey = live
+				? "live"
 				: video.paused
-				? (await strings).pause
-				: (await strings).play;
-			presenceData.startTimestamp = live ? elapsed : startTimestamp;
-			presenceData.endTimestamp = endTimestamp;
+				? "pause"
+				: "play";
+			presenceData.smallImageText = live
+				? strings.live
+				: video.paused
+				? strings.pause
+				: strings.play;
 
-			if (live) delete presenceData.endTimestamp;
+			if (!live)
+				[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+
 			if (video.paused) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
@@ -70,11 +82,5 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	presenceData.state = state;
-	presenceData.smallImageKey = smallImageKey;
-	presenceData.smallImageText = smallImageText;
-	presenceData.startTimestamp = startTimestamp;
-	presenceData.endTimestamp = endTimestamp;
-
-	presence.setActivity(presenceData, video ? !video.paused : true);
+	presence.setActivity(presenceData);
 });

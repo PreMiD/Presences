@@ -1,13 +1,13 @@
 const presence = new Presence({
-	clientId: "691593596692070420"
+	clientId: "691593596692070420",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
-	if (!document.getElementsByClassName("sics-component__headline__title")[0]) {
+	if (!document.querySelectorAll(".sics-component__headline__title")[0]) {
 		if (
 			document.URL === "https://www.stuff.co.nz/" ||
 			document.URL === "https://www.stuff.co.nz"
@@ -46,7 +46,7 @@ presence.on("UpdateData", () => {
 			} else if (document.location.href.includes("/weather")) {
 				presenceData.details = "Viewing the weather...";
 				presenceData.state =
-					document.getElementsByClassName("section-location-header")[0]
+					document.querySelectorAll(".section-location-header")[0]
 						.textContent || "National Forecast";
 			} else if (document.location.href.includes("/quizzies")) {
 				presenceData.details = "Looking at quizzes";
@@ -267,8 +267,8 @@ presence.on("UpdateData", () => {
 		}
 	} else {
 		presenceData.details = "Reading an article...";
-		presenceData.state = document.getElementsByClassName(
-			"sics-component__headline__title"
+		presenceData.state = document.querySelectorAll(
+			".sics-component__headline__title"
 		)[0].textContent;
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 	}

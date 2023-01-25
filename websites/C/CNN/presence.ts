@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "839539095393796116"
+		clientId: "839539095393796116",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,11 +8,11 @@ presence.on("UpdateData", async function () {
 			timeElapsed: await presence.getSetting<boolean>("timeElapsed"),
 			showButtons: await presence.getSetting<boolean>("showButtons"),
 			logo: await presence.getSetting<0 | 1>("logo"),
-			privacy: await presence.getSetting<boolean>("privacy")
+			privacy: await presence.getSetting<boolean>("privacy"),
 		},
 		urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: ["logo", "logo-transp"][setting.logo] || "logo"
+			largeImageKey: ["logo", "logo-transp"][setting.logo] || "logo",
 		};
 
 	if (setting.timeElapsed && !setting.privacy)
@@ -56,8 +56,8 @@ presence.on("UpdateData", async function () {
 			presenceData.buttons = [
 				{
 					label: "View Category",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (
@@ -78,8 +78,8 @@ presence.on("UpdateData", async function () {
 			presenceData.buttons = [
 				{
 					label: "View Article",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (urlpath[1] === "profiles") {
@@ -94,8 +94,8 @@ presence.on("UpdateData", async function () {
 			presenceData.buttons = [
 				{
 					label: "View Profile",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (urlpath[1] === "specials") {
@@ -121,8 +121,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Special",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else presenceData.details = "Specials";
@@ -147,24 +147,36 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Results",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else presenceData.state = "Other";
-	} else if (urlpath[1] === "interactive")
-		presenceData.details = "Interactive Article";
-	else if (urlpath[1] === "account") {
-		presenceData.details = "Account";
-		if (urlpath[2] === "register" && !setting.privacy)
-			presenceData.state = "Register";
-		else if (urlpath[2] === "confirm" && !setting.privacy)
-			presenceData.state = "Confirming E-Mail";
-		else if (urlpath[2] === "settings" && !setting.privacy)
-			presenceData.state = "Settings";
-	} else if (urlpath[1] === "newsletters")
-		presenceData.details = "Browsing Newsletters";
-	else presenceData.details = "Other";
+	} else {
+		switch (urlpath[1]) {
+			case "interactive": {
+				presenceData.details = "Interactive Article";
+				break;
+			}
+			case "account": {
+				presenceData.details = "Account";
+				if (urlpath[2] === "register" && !setting.privacy)
+					presenceData.state = "Register";
+				else if (urlpath[2] === "confirm" && !setting.privacy)
+					presenceData.state = "Confirming E-Mail";
+				else if (urlpath[2] === "settings" && !setting.privacy)
+					presenceData.state = "Settings";
+
+				break;
+			}
+			case "newsletters": {
+				presenceData.details = "Browsing Newsletters";
+				break;
+			}
+			default:
+				presenceData.details = "Other";
+		}
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

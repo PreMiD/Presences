@@ -1,26 +1,26 @@
 const presence = new Presence({
-		clientId: "736620343279484959"
+		clientId: "736620343279484959",
 	}),
 	_preStrings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 
 // Pre-declare variable
 let radioStation = "",
-	startTimeStamp = new Date().getTime();
+	startTimeStamp = Date.now();
 
 presence.on("UpdateData", async () => {
 	// code
 	const preStrings = await _preStrings,
 		presenceData: PresenceData = {
-			largeImageKey: "largeimage"
+			largeImageKey: "largeimage",
 		};
 
 	// In Radio
 	if (
-		(document.getElementById("stream-player") as HTMLElement).style.display ===
+		(document.querySelector("#stream-player") as HTMLElement).style.display ===
 		"block"
 	) {
 		const [codeChannel] = document
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			// This logic make timestamp can't changed.
 			if (codeChannel !== radioStation) {
 				radioStation = codeChannel;
-				startTimeStamp = new Date().getTime();
+				startTimeStamp = Date.now();
 			}
 
 			presenceData.details = `Listening to ${radioStation} channel.`;
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 			// If pause
 			if (codeChannel !== "___PAUSED___") {
 				radioStation = "___PAUSED___";
-				startTimeStamp = new Date().getTime();
+				startTimeStamp = Date.now();
 			}
 
 			presenceData.details = "Paused.";

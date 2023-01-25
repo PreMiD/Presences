@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "607719679011848220"
+		clientId: "607719679011848220",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
-		search: "presence.activity.searching"
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
+		search: "general.searching",
 	});
 
 function capitalize(text: string): string {
@@ -24,9 +24,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp,
 		endTimestamp;
 
-	const { href } = window.location,
-		path = window.location.pathname;
-
+	const { href, pathname: path } = window.location;
 	if (href !== oldUrl) {
 		oldUrl = href;
 		elapsed = Math.floor(Date.now() / 1000);
@@ -183,7 +181,7 @@ presence.on("UpdateData", async () => {
 			smallImageKey,
 			smallImageText,
 			startTimestamp,
-			endTimestamp
+			endTimestamp,
 		},
 		video ? !video.paused : true
 	);

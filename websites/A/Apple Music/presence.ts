@@ -1,80 +1,66 @@
 const presence = new Presence({
-		clientId: "842112189618978897"
+		clientId: "842112189618978897",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
-
-function getTime(list: string[]): number {
-	let ret = 0;
-	for (let index = list.length - 1; index >= 0; index--)
-		ret += parseInt(list[index]) * 60 ** index;
-
-	return ret;
-}
-
-function getTimestamps(audioDuration: string): number[] {
-	return [
-		Math.floor(Date.now() / 1000),
-		Math.floor(Date.now() / 1000) + getTime(audioDuration.split(":").reverse())
-	];
-}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "applemusic-logo"
-	};
-
-	if (
-		!document.querySelector(
-			"div.web-chrome-playback-lcd__playback-description.playback-description-not-loaded"
-		)
-	) {
-		const audioTime = document.querySelector(
-				".web-chrome-playback-lcd__time-end"
-			)?.textContent,
-			paused = document.querySelector(
-				".web-chrome-playback-controls__playback-btn[aria-label='Play']"
-			),
-			artwork = document
-				.querySelector(
-					".media-artwork-v2:not(.media-artwork-v2--profile-badge) > picture > source"
-				)
-				?.getAttribute("srcset")
-				.split(" ")[0]
-				.replace("44x44bb", "1024x1024bb");
-
-		presenceData.details = document
-			.querySelector(
-				".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
+			largeImageKey: "applemusic-logo",
+		},
+		[timestamps, cover] = await Promise.all([
+			presence.getSetting<boolean>("timestamps"),
+			presence.getSetting<boolean>("cover"),
+		]),
+		audio = document.querySelector<HTMLAudioElement>(
+			"audio#apple-music-player"
+		),
+		video = document
+			.querySelector("apple-music-video-player")
+			?.shadowRoot.querySelector(
+				"amp-window-takeover > .container > amp-video-player-internal"
 			)
-			?.textContent.trim();
-		presenceData.state =
-			document
-				.querySelector(
-					".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
-				)
-				?.textContent.split("—")[0] ??
-			document.querySelector(
-				".ember-view.web-chrome-playback-lcd__sub-copy-scroll-link"
-			)?.textContent;
+			?.shadowRoot.querySelector("amp-video-player")
+			?.shadowRoot.querySelector("div#video-container")
+			?.querySelector<HTMLVideoElement>("video#apple-music-video-player");
+	if (video?.title || audio?.title) {
+		const media = video || audio,
+			timestamp = document
+				.querySelector("amp-lcd.lcd.lcd__music")
+				?.shadowRoot.querySelector<HTMLInputElement>(
+					"input#playback-progress[aria-valuenow][aria-valuemax]"
+				),
+			paused = media.paused || media.readyState <= 2;
+
+		presenceData.details = navigator.mediaSession.metadata.title;
+		presenceData.state = navigator.mediaSession.metadata.artist;
+
 		presenceData.smallImageKey = paused ? "pause" : "play";
 		presenceData.smallImageText = paused
 			? (await strings).pause
 			: (await strings).play;
-		presenceData.largeImageKey = artwork ?? "applemusic-logo";
-		if (audioTime) {
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				getTimestamps(audioTime);
+
+		if (cover) {
+			presenceData.largeImageKey =
+				navigator.mediaSession.metadata.artwork[0].src.replace(
+					/[0-9]{1,2}x[0-9]{1,2}[a-z]{1,2}/,
+					"1024x1024"
+				);
 		}
 
-		if (paused) {
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(
+				Number(timestamp ? timestamp.ariaValueNow : media.currentTime),
+				Number(timestamp ? timestamp.ariaValueMax : media.duration)
+			);
+
+		if (paused || !timestamps) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-
-		if (!presenceData.details) presence.clearActivity();
-		else presence.setActivity(presenceData);
-	} else presence.clearActivity();
+		presence.setActivity(presenceData);
+	} else if (presence.getExtensionVersion() < 224) presence.setActivity();
+	else presence.clearActivity();
 });

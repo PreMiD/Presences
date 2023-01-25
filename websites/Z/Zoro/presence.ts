@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "859440340683325491"
+		clientId: "859440340683325491",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -23,9 +23,9 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location,
+		{ pathname, href, search } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (pathname === "/" || pathname === "/home")
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname === "/search") {
 		presenceData.details = "Searching";
-		presenceData.state = document.location.search.substring(9);
+		presenceData.state = search.substring(9);
 	} else if (pathname.startsWith("/user")) {
 		const profile = document.querySelector<HTMLDivElement>("div.ph-title"),
 			link = document
@@ -81,20 +81,18 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLHeadingElement>("h2.film-name");
 			presenceData.details = "In a room";
 			if (filmName) presenceData.state = `Watching ${filmName.textContent}`;
-			if (data) {
-				if (!data.paused) {
-					[, presenceData.endTimestamp] = presence.getTimestamps(
-						data.currTime,
-						data.duration
-					);
-				}
+			if (data && !data.paused) {
+				[, presenceData.endTimestamp] = presence.getTimestamps(
+					data.currTime,
+					data.duration
+				);
 			}
 			if (buttons) {
 				presenceData.buttons = [
 					{
 						label: "Join Room",
-						url: document.location.href
-					}
+						url: href,
+					},
 				];
 			}
 		}
@@ -103,24 +101,22 @@ presence.on("UpdateData", async () => {
 				"li.breadcrumb-item.dynamic-name.active"
 			),
 			episode = document.querySelector<HTMLSpanElement>(
-				"span#cm-episode-number"
+				"a.ep-item.active div.ssli-order"
 			);
 		if (title) presenceData.details = title.textContent;
 		if (episode) presenceData.state = `Episode ${episode.textContent}`;
-		if (data) {
-			if (!data.paused) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					data.currTime,
-					data.duration
-				);
-			}
+		if (data && !data.paused) {
+			[, presenceData.endTimestamp] = presence.getTimestamps(
+				data.currTime,
+				data.duration
+			);
 		}
 		if (buttons) {
 			presenceData.buttons = [
 				{
 					label: "Watch Episode",
-					url: document.location.href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (pathname === "/events") presenceData.details = "Looking at events";
@@ -140,8 +136,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Check Synopsis",
-						url: document.location.href
-					}
+						url: href,
+					},
 				];
 			}
 		}

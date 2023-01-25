@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "642119548803219466"
+		clientId: "642119548803219466",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "fa",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "flipanim.com") {

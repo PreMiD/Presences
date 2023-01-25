@@ -1,5 +1,6 @@
+// eslint-disable-next-line no-one-time-vars/no-one-time-vars
 const presence = new Presence({
-		clientId: "631259475038175232"
+		clientId: "631259475038175232",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +9,7 @@ let x: string;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/The_Cutting_Room_Floor") {
 		presenceData.details = "browsing TCRF";
@@ -31,7 +32,7 @@ presence.on("UpdateData", async () => {
 			.join(" ")}`;
 	} else {
 		const name = document
-			.getElementById("firstHeading")
+			.querySelector("#firstHeading")
 			.textContent.replace(")", "")
 			.split("(");
 		if (name[0].startsWith("Prerelease:")) {

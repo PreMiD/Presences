@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "630023998767497217" // CLIENT ID FOR YOUR PRESENCE
+		clientId: "630023998767497217", // CLIENT ID FOR YOUR PRESENCE
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "primemc",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "primemc.org") {
 		if (document.location.pathname.includes("/threads/")) {

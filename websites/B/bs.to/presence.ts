@@ -1,15 +1,20 @@
 const presence = new Presence({
-		clientId: "639568013590528030"
+		clientId: "639568013590528030",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let user: HTMLElement, title: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bs"
+		largeImageKey: "bs",
 	};
 
-	if (document.location.hostname === "bs.to") {
+	if (document.location.hostname === "burningseries.domains") {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "Viewing burning series domains";
+	} else if (
+		document.location.hostname.match(/(bs|burningseries)[.]([a-z0-9-])+/g)
+	) {
 		presenceData.startTimestamp = browsingTimestamp;
 		if (document.location.pathname === "/")
 			presenceData.details = "Viewing home page";

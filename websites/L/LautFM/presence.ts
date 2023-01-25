@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "640997739689279498"
+		clientId: "640997739689279498",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	switch (
 		document
-			.getElementsByClassName("btn playbutton")[0]
+			.querySelectorAll(".btn.playbutton")[0]
 			.getAttributeNode("data-trackingaction").textContent
 	) {
 		case "stop": {

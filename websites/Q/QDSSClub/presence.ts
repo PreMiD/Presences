@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "674236194053160971"
+		clientId: "674236194053160971",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "qdss",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
-		{ href } = document.location;
+		{ href, pathname } = document.location;
 
-	if (document.location.pathname === "/") {
+	if (pathname === "/") {
 		if (href.startsWith("https://www.qdssclub.com/?page=")) {
 			presenceData.details = "Nella homepage";
 			presenceData.state = `Sfoglia il forum. Pag: ${href.replace(
@@ -24,21 +24,21 @@ presence.on("UpdateData", async () => {
 				""
 			)}`;
 		} else presenceData.details = "Nella homepage";
-	} else if (document.location.pathname.startsWith("/faq"))
+	} else if (pathname.startsWith("/faq"))
 		presenceData.details = "Nella scheda FAQ";
-	else if (document.location.pathname.startsWith("/contatti")) {
+	else if (pathname.startsWith("/contatti")) {
 		presenceData.details = "Vuole contattare";
 		presenceData.state = "Quei Due Sul Server";
-	} else if (document.location.pathname.startsWith("/utente/profilo")) {
+	} else if (pathname.startsWith("/utente/profilo")) {
 		presenceData.details = "Sta visualizzando";
 		presenceData.state = "il suo profilo";
-	} else if (document.location.pathname.startsWith("/cookies")) {
+	} else if (pathname.startsWith("/cookies")) {
 		presenceData.details = "Legge le informazioni";
 		presenceData.state = "sui Cookies";
-	} else if (document.location.pathname.startsWith("/privacy")) {
+	} else if (pathname.startsWith("/privacy")) {
 		presenceData.details = "Legge le informazioni";
 		presenceData.state = "sulla Privcay";
-	} else if (document.location.pathname.startsWith("/disclaimer")) {
+	} else if (pathname.startsWith("/disclaimer")) {
 		presenceData.details = "Legge i Termini e le";
 		presenceData.state = "Condizioni di utilizzo";
 	} else if (href.endsWith("/forums")) {
@@ -141,22 +141,22 @@ presence.on("UpdateData", async () => {
 			"https://www.qdssclub.com/forums/category/conosciamocipage=",
 			""
 		)}`;
-	} else if (document.location.pathname.startsWith("/forums/discussion/")) {
+	} else if (pathname.startsWith("/forums/discussion/")) {
 		presenceData.details = "Legge la discussione:";
 		presenceData.state = document.querySelector(".text-center h1").textContent;
-	} else if (document.location.pathname.startsWith("/articolo")) {
+	} else if (pathname.startsWith("/articolo")) {
 		presenceData.details = "Legge l'articolo:";
 		presenceData.state = document.querySelector(".text-center h3").textContent;
-	} else if (document.location.pathname.startsWith("/login")) {
+	} else if (pathname.startsWith("/login")) {
 		presenceData.details = "Sta cercando di fare";
 		presenceData.state = "l'accesso";
-	} else if (document.location.pathname.startsWith("/password")) {
+	} else if (pathname.startsWith("/password")) {
 		presenceData.details = "Sta cercando di fare";
 		presenceData.state = "l'accesso";
-	} else if (document.location.pathname.startsWith("/register")) {
+	} else if (pathname.startsWith("/register")) {
 		presenceData.details = "Sta cercando di";
 		presenceData.state = "registrarsi";
-	} else if (document.location.pathname.startsWith("/convalida")) {
+	} else if (pathname.startsWith("/convalida")) {
 		presenceData.details = "Sta cercando di";
 		presenceData.state = "registrarsi";
 	} else presenceData.details = "Navigando...";

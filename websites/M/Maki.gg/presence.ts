@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "563434444321587202"
+		clientId: "563434444321587202",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	// Default data
 	const presenceData: PresenceData = {
 		largeImageKey: "maki",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") {
@@ -22,8 +22,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Invite",
-				url: "https://maki.gg/invite"
-			}
+				url: "https://maki.gg/invite",
+			},
 		];
 		if (document.location.pathname === "/dashboard") {
 			// Server selection
@@ -119,62 +119,79 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/premium")) {
 			presenceData.details = "Taking a look at the amazing features of";
 			presenceData.state = "Maki premium";
-		} else if (document.location.pathname === "/commands") {
-			presenceData.details = "Reading";
-			presenceData.state = "Commands page";
-		} else if (document.location.pathname === "/status") {
-			presenceData.details = "Reading";
-			presenceData.state = "Status page";
-		} else if (document.location.pathname === "/profile") {
-			presenceData.details = `Looking at the profile of ${
-				document.querySelector(
-					"body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.justify-content-start > div > div.mb-1 > h4"
-				).textContent
-			}`;
-			presenceData.state =
-				`Level ${
-					document.querySelector(
-						"body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div.d-flex.align-items-center.mr-2 > div.ml-1 > h5"
-					).textContent
-				} | ` +
-				`Xp ${
-					document.querySelector(
-						"body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div:nth-child(2) > div.ml-1 > h5"
-					).textContent
-				}`;
-		} else if (document.location.pathname === "/verify") {
-			presenceData.details = "In the process to";
-			presenceData.state = "Verify";
-		} else if (document.location.pathname.includes("/leaderboard")) {
-			// Global leaderboard
-			if (document.location.pathname === "/leaderboard") {
-				presenceData.details = "Looking at the";
-				presenceData.state = "Global leaderboard";
-			} else {
-				presenceData.details = "Looking at";
-				presenceData.state = `${
-					document.querySelector(
-						"body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div:nth-child(1) > div > div > div > div.col-12.col-sm-9.col-md-6.col-lg-5 > div.card-title"
-					).textContent
-				}'s leaderboard`;
+		} else {
+			switch (document.location.pathname) {
+				case "/commands": {
+					presenceData.details = "Reading";
+					presenceData.state = "Commands page";
+
+					break;
+				}
+				case "/status": {
+					presenceData.details = "Reading";
+					presenceData.state = "Status page";
+
+					break;
+				}
+				case "/profile": {
+					presenceData.details = `Looking at the profile of ${
+						document.querySelector(
+							"body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.justify-content-start > div > div.mb-1 > h4"
+						).textContent
+					}`;
+					presenceData.state =
+						`Level ${
+							document.querySelector(
+								"body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div.d-flex.align-items-center.mr-2 > div.ml-1 > h5"
+							).textContent
+						} | ` +
+						`Xp ${
+							document.querySelector(
+								"body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div.col-md-7.col-lg-8.col-xl-9.col-12 > div > div > div > div.d-flex.justify-content-between.flex-column.col-xl-6.col-21 > div.d-flex.align-items-center.mt-2 > div:nth-child(2) > div.ml-1 > h5"
+							).textContent
+						}`;
+
+					break;
+				}
+				case "/verify": {
+					presenceData.details = "In the process to";
+					presenceData.state = "Verify";
+
+					break;
+				}
+				default:
+					if (document.location.pathname.includes("/leaderboard")) {
+						// Global leaderboard
+						if (document.location.pathname === "/leaderboard") {
+							presenceData.details = "Looking at the";
+							presenceData.state = "Global leaderboard";
+						} else {
+							presenceData.details = "Looking at";
+							presenceData.state = `${
+								document.querySelector(
+									"body > div.app-content.content > div.content-wrapper > div.content-body > section > div > div:nth-child(1) > div > div > div > div.col-12.col-sm-9.col-md-6.col-lg-5 > div.card-title"
+								).textContent
+							}'s leaderboard`;
+						}
+					} else if (document.location.pathname.includes("/knowledge")) {
+						// Main knowledge page
+						if (document.location.pathname === "/knowledge") {
+							presenceData.details = "Browsing through the";
+							presenceData.state = "Knowledge page";
+						} else {
+							presenceData.details = "Reading a knowledge page:";
+							presenceData.state = document.querySelector(
+								"#knowledge-base-question > div > div.col-lg-9.col-md-7.col-12 > div > div > div > h1"
+							).textContent;
+						}
+					} else if (document.location.pathname === "/terms") {
+						presenceData.details = "Reading";
+						presenceData.state = "The boring terms of service";
+					} else if (document.location.pathname === "/team") {
+						presenceData.details = "Looking at the";
+						presenceData.state = "Team";
+					}
 			}
-		} else if (document.location.pathname.includes("/knowledge")) {
-			// Main knowledge page
-			if (document.location.pathname === "/knowledge") {
-				presenceData.details = "Browsing through the";
-				presenceData.state = "Knowledge page";
-			} else {
-				presenceData.details = "Reading a knowledge page:";
-				presenceData.state = document.querySelector(
-					"#knowledge-base-question > div > div.col-lg-9.col-md-7.col-12 > div > div > div > h1"
-				).textContent;
-			}
-		} else if (document.location.pathname === "/terms") {
-			presenceData.details = "Reading";
-			presenceData.state = "The boring terms of service";
-		} else if (document.location.pathname === "/team") {
-			presenceData.details = "Looking at the";
-			presenceData.state = "Team";
 		}
 	}
 

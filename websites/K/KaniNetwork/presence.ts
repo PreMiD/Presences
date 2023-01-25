@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "801742167608787015"
+		clientId: "801742167608787015",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
 		sprivacy = await presence.getSetting<boolean>("super-privacy");
@@ -44,8 +44,9 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "with the KaniShiel's dashboard";
 			} else {
 				presenceData.details = "Using the KaniShiel's dashboard of :";
-				presenceData.state =
-					document.getElementById("563749920683720709").textContent;
+				presenceData.state = document.querySelector(
+					"#563749920683720709"
+				).textContent;
 			}
 		} else {
 			presenceData.details = "Viewing a page:";

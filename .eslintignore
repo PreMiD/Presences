@@ -1,4 +1,5 @@
 node_modules
-util
+tools
 .vscode
-dist/*.js
+**/*.js
+*.json

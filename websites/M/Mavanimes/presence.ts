@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "814986239681626143"
+	clientId: "814986239681626143",
 });
 let video: {
 	currentTime?: number;
@@ -14,7 +14,7 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		params = new URLSearchParams(new URL(window.location.href).search);
 	if (document.location.pathname === "/") {
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 	else {
 		presenceData.details = "Regarde un animé :";
 		presenceData.state =
-			document.getElementsByClassName("entry-title")[0].textContent;
+			document.querySelectorAll(".entry-title")[0].textContent;
 		const timestamps = presence.getTimestamps(
 			Math.floor(video.currentTime),
 			Math.floor(video.duration)

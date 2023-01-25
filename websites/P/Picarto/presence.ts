@@ -1,23 +1,23 @@
 const presence = new Presence({
-		clientId: "630771716058120192"
+		clientId: "630771716058120192",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const video = document.querySelector<HTMLVideoElement>(
-		"#picarto-player-1_html5_api"
-	);
+	const video = document.querySelector<HTMLVideoElement>(".mistvideo-video");
 	if (video && !isNaN(video.duration)) {
-		const title = document.querySelector<HTMLElement>(".d-flex h4"),
+		const title = document.querySelector<HTMLElement>(
+				".styled__StreamTitle-sc-sf47ty-9"
+			),
 			uploader = document.querySelector<HTMLElement>(
-				"#userbar-name .d-flex .d-inline-block"
+				".ChannelToolbarTitle__ChannelTitle-sc-146631g-3"
 			);
 		presenceData.details = title ? title.textContent : "Title not found...";
 		presenceData.state = uploader
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		});
 	}
 });

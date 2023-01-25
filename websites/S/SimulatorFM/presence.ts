@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "790721299126943744"
+		clientId: "790721299126943744",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "largelogo"
+		largeImageKey: "largelogo",
 	};
 
 	if (document.querySelector<HTMLElement>(".fa-pause")) {
@@ -17,41 +17,63 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLElement>("#dj_name").textContent
 		}`;
 		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/") {
-		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.details = "Viewing";
-		presenceData.state = "Recently Played";
-		presenceData.smallImageKey = "reading";
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/request") {
-		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.details = "Typing";
-		presenceData.state = "A Request";
-		presenceData.smallImageKey = "reading";
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/timetable") {
-		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.details = "Viewing";
-		presenceData.state = "Timetable";
-		presenceData.smallImageKey = "reading";
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/team") {
-		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.details = "Viewing";
-		presenceData.state = "Team Page";
-		presenceData.smallImageKey = "reading";
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/apply") {
-		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.details = "Viewing";
-		presenceData.state = "Apply to become a presenter";
-		presenceData.smallImageKey = "reading";
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/contact-us") {
-		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.details = "Viewing";
-		presenceData.state = "Contact Page";
-		presenceData.smallImageKey = "reading";
-		presence.setActivity(presenceData);
+	} else {
+		switch (document.location.pathname) {
+			case "/": {
+				presenceData.startTimestamp = browsingTimestamp;
+				presenceData.details = "Viewing";
+				presenceData.state = "Recently Played";
+				presenceData.smallImageKey = "reading";
+				presence.setActivity(presenceData);
+
+				break;
+			}
+			case "/request": {
+				presenceData.startTimestamp = browsingTimestamp;
+				presenceData.details = "Typing";
+				presenceData.state = "A Request";
+				presenceData.smallImageKey = "reading";
+				presence.setActivity(presenceData);
+
+				break;
+			}
+			case "/timetable": {
+				presenceData.startTimestamp = browsingTimestamp;
+				presenceData.details = "Viewing";
+				presenceData.state = "Timetable";
+				presenceData.smallImageKey = "reading";
+				presence.setActivity(presenceData);
+
+				break;
+			}
+			case "/team": {
+				presenceData.startTimestamp = browsingTimestamp;
+				presenceData.details = "Viewing";
+				presenceData.state = "Team Page";
+				presenceData.smallImageKey = "reading";
+				presence.setActivity(presenceData);
+
+				break;
+			}
+			case "/apply": {
+				presenceData.startTimestamp = browsingTimestamp;
+				presenceData.details = "Viewing";
+				presenceData.state = "Apply to become a presenter";
+				presenceData.smallImageKey = "reading";
+				presence.setActivity(presenceData);
+
+				break;
+			}
+			case "/contact-us": {
+				presenceData.startTimestamp = browsingTimestamp;
+				presenceData.details = "Viewing";
+				presenceData.state = "Contact Page";
+				presenceData.smallImageKey = "reading";
+				presence.setActivity(presenceData);
+
+				break;
+			}
+			// No default
+		}
 	}
 });

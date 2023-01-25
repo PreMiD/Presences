@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "700338425953386587"
+		clientId: "700338425953386587",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
-		searching: "presence.activity.searching",
-		reading: "presence.activity.reading"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
+		searching: "general.searching",
+		reading: "general.reading",
 	});
 
 function parseQueryString(queryString?: string) {
@@ -14,18 +14,18 @@ function parseQueryString(queryString?: string) {
 
 	const params: { [queryKey: string]: string } = {},
 		queries = queryString.split("&");
-	queries.forEach((indexQuery: string) => {
+	for (const indexQuery in queries) {
 		const indexPair = indexQuery.split("=");
 		params[decodeURIComponent(indexPair[0])] = decodeURIComponent(
 			indexPair.length > 1 ? indexPair[1] : ""
 		);
-	});
+	}
 	return params;
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		pageTitle = document.querySelector("title").textContent.split(" | "),
 		browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -49,15 +49,15 @@ presence.on("UpdateData", async () => {
 				"18",
 				"18-gore",
 				"18-insolite",
-				"18-vr"
+				"18-vr",
 			];
-			routes.forEach(r => {
+			for (const r of routes) {
 				if (route[3] === `${r}`) {
 					presenceData.state = `${pageTitle[0]} - page ${
 						route[4] ? route[5] : 1
 					}`;
 				}
-			});
+			}
 			presenceData.startTimestamp = browsingTimestamp;
 		} else {
 			const video: HTMLVideoElement = document.querySelector(

@@ -3,14 +3,14 @@ iframe.on("UpdateData", async () => {
 	const videoElement: HTMLVideoElement =
 		document.querySelector("#player video");
 	if (
-		!(document.querySelector("div.ytp-title-text > a") as HTMLAnchorElement) ||
+		!document.querySelector<HTMLAnchorElement>("div.ytp-title-text > a") ||
 		!videoElement
 	)
 		return;
 	iframe.send({
 		title: videoElement.textContent,
-		duration: videoElement.duration ? videoElement.duration : null,
+		duration: videoElement.duration ?? null,
 		currentTime: videoElement.currentTime,
-		paused: videoElement.paused
+		paused: videoElement.paused,
 	});
 });

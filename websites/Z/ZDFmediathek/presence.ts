@@ -2,21 +2,21 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const presence = new Presence({
-		clientId: "854999470357217290"
+		clientId: "854999470357217290",
 	}),
 	// TODO: Add multiLang
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 		browsing: "general.browsing",
 		browsingThrough: "discord.browseThrough",
 		buttonWatchVideo: "general.buttonWatchVideo",
-		buttonWatchStream: "general.buttonWatchStream"
+		buttonWatchStream: "general.buttonWatchStream",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "zdf"
+			largeImageKey: "zdf",
 		},
 		video = document.querySelector<HTMLVideoElement>(
 			"div.zdfplayer-video_wrapper video"
@@ -35,23 +35,21 @@ presence.on("UpdateData", async () => {
 						"div.item.livetv-item.js-livetv-scroller-cell.m-active-done.m-activated-done.m-activated.m-active h2[class='visuallyhidden']"
 					)
 					.textContent.replace(/ {2}/g, " ")
-					.replace(/ im Livestream/g, "")
-					.replace(/ Livestream/g, ""),
-				videoInfoResults = document.getElementsByClassName(
-					"zdfplayer-teaser-title"
-				);
+					.replaceAll(" im Livestream", "")
+					.replaceAll(" Livestream", ""),
+				videoInfoResults = document.querySelectorAll(".zdfplayer-teaser-title");
 
 			let videoInfoTag = null;
-			for (let i = 0; i < videoInfoResults.length; i++) {
+			for (const videoInfoResult of videoInfoResults) {
 				if (
-					videoInfoResults[i].textContent
+					videoInfoResult.textContent
 						.toLowerCase()
 						.includes(` ${mediathekLivechannel.toLowerCase()} `) ||
-					videoInfoResults[i].textContent
+					videoInfoResult.textContent
 						.toLowerCase()
 						.includes(`>${mediathekLivechannel.toLowerCase()}<`)
 				) {
-					videoInfoTag = videoInfoResults[i].textContent;
+					videoInfoTag = videoInfoResult.textContent;
 					break;
 				}
 			}
@@ -65,7 +63,7 @@ presence.on("UpdateData", async () => {
 				.trim();
 			presenceData.startTimestamp = elapsed;
 			presenceData.buttons = [
-				{ label: (await strings).buttonWatchStream, url: prevUrl }
+				{ label: (await strings).buttonWatchStream, url: prevUrl },
 			];
 
 			if (
@@ -106,7 +104,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			);
 			presenceData.buttons = [
-				{ label: (await strings).buttonWatchVideo, url: prevUrl }
+				{ label: (await strings).buttonWatchVideo, url: prevUrl },
 			];
 			if (video.paused) {
 				presenceData.smallImageKey = "pause";

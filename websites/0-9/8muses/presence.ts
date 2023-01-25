@@ -1,15 +1,15 @@
 const presence = new Presence({
-		clientId: "717563140300210196"
+		clientId: "717563140300210196",
 	}),
 	strings = presence.getStrings({
-		search: "presence.activity.searching"
+		search: "general.searching",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (new URLSearchParams(window.location.search).has("s")) {
 		presenceData.details = "Searching for:";
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname.split("/")[2].includes("")) {
 			presenceData.details = `${comicName} - ${document.location.pathname
 				.split("/")[2]
-				.replace(/_/g, " ")}`;
+				.replaceAll("_", " ")}`;
 			presenceData.state = issueNumber;
 			presenceData.smallImageKey = "reading";
 		} else {

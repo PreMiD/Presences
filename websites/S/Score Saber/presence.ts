@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "833644176967991346"
+		clientId: "833644176967991346",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 		cover = await presence.getSetting<boolean>("cover"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 	if (document.querySelector("[class*='is-visible']")) {
 		presenceData.details = "Searching";
@@ -33,9 +33,9 @@ presence.on("UpdateData", async () => {
 			}`;
 		} else if (document.querySelector("[class^='chip']")) {
 			let filters = "";
-			document.querySelectorAll("[class^='chip']").forEach(function (element) {
+			for (const element of document.querySelectorAll("[class^='chip']"))
 				filters += `${element.textContent.slice(0, -2)},`;
-			});
+
 			presenceData.state = `${filters.slice(0, -1)}`;
 		}
 	} else if (document.location.pathname.includes("/leaderboard")) {
@@ -67,8 +67,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			if (cover) {
 				presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
@@ -96,16 +96,16 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname.includes("/u/")) {
 		presenceData.details = "Viewing User";
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 		if (
 			document.querySelector(
@@ -128,11 +128,12 @@ presence.on("UpdateData", async () => {
 				).textContent
 			} (${document.querySelector("[class^='title-header pp']").textContent})`;
 		}
-	} else if (document.location.pathname.includes("/legal/privacy")) {
-		presenceData.details = "Reading Privacy Policy?";
-		presenceData.state = "People read this?!";
-	} else if (document.location.pathname.includes("/team"))
+	} else if (document.location.pathname.includes("/legal/privacy"))
+		presenceData.details = "Viewing Privacy Policy";
+	else if (document.location.pathname.includes("/team"))
 		presenceData.details = "Viewing ScoreSaber Team";
+	else if (document.location.pathname.startsWith("/scores"))
+		presenceData.details = "Viewing Score Feed";
 	else if (document.location.pathname === "/")
 		presenceData.details = "Viewing Homepage";
 

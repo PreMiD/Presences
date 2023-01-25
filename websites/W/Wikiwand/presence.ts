@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "731472884337475596"
+	clientId: "731472884337475596",
 });
 
 let currentURL = new URL(document.location.href),
@@ -8,7 +8,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
 	details: "Viewing an unsupported page",
 	largeImageKey: "lg",
-	startTimestamp: browsingTimestamp
+	startTimestamp: browsingTimestamp,
 };
 const updateCallback = {
 		_function: null as () => void,
@@ -20,7 +20,7 @@ const updateCallback = {
 		},
 		get present(): boolean {
 			return this._function !== null;
-		}
+		},
 	},
 	/**
 	 * Initialize/reset presenceData.
@@ -29,7 +29,7 @@ const updateCallback = {
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		}
 	): void => {
 		currentURL = new URL(document.location.href);
@@ -43,7 +43,7 @@ const updateCallback = {
 	try {
 		title = document.querySelector("h1.firstHeading span").textContent;
 	} catch (e) {
-		title = decodeURI(currentPath.slice(1).join("/").replace(/_/g, " "));
+		title = decodeURI(currentPath.slice(1).join("/").replaceAll("_", " "));
 	}
 
 	if (currentPath[0] === "") presenceData.details = "On the main page";

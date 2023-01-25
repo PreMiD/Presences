@@ -9,8 +9,8 @@ iframe.on("UpdateData", () => {
 				duration: video.duration,
 				currentTime: video.currentTime,
 				paused: video.paused,
-				title: document.querySelector("span.link_title")?.textContent
-			}
+				title: document.querySelector("span.link_title")?.textContent,
+			},
 		});
 	}
 
@@ -26,8 +26,8 @@ iframe.on("UpdateData", () => {
 				)?.textContent.trim(),
 				article: document
 					.querySelector("strong.tit_info > b")
-					?.textContent.trim()
-			}
+					?.textContent.trim(),
+			},
 		});
 	}
 });

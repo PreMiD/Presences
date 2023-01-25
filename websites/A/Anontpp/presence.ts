@@ -1,33 +1,31 @@
 const presence = new Presence({
-		clientId: "708314580304003124"
+		clientId: "708314580304003124",
 	}),
-	strings: Promise<{ [key: string]: string }> = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browse: "presence.activity.browsing",
-		search: "presence.activity.searching"
+	newStrings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+		browse: "general.browsing",
+		search: "general.search",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);
 		if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
 		else return "Loading...";
-	},
-	videoStatus = (video: HTMLVideoElement): string => {
-		return video.paused ? "pause" : "play";
 	};
 
-let oldUrl: string, elapsed: number;
+let oldUrl: string, elapsed: number, strings: Awaited<typeof newStrings>;
 
 presence.on("UpdateData", async () => {
 	const path = location.pathname.replace(/\/?$/, "/"),
 		video: HTMLVideoElement = document.querySelector("video"),
-		[showSearchInfo, showBrowseInfo, showVideoInfo] = await Promise.all([
+		[showSearchInfo, showBrowseInfo, showVideoInfo, cover] = await Promise.all([
 			presence.getSetting<boolean>("search"),
 			presence.getSetting<boolean>("browse"),
-			presence.getSetting<boolean>("video")
+			presence.getSetting<boolean>("video"),
+			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "anontpp"
+			largeImageKey: "anontpp",
 		};
 
 	if (oldUrl !== path) {
@@ -35,67 +33,54 @@ presence.on("UpdateData", async () => {
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 
-	if (elapsed) presenceData.startTimestamp = elapsed;
+	strings ??= await newStrings;
 
-	const parseVideo = async (): Promise<void> => {
-		const status = videoStatus(video);
+	if (elapsed) presenceData.startTimestamp = elapsed;
+	if (showBrowseInfo && path === "/") presenceData.details = "Browsing";
+
+	if (showVideoInfo && video) {
+		const state = Array.from(
+				document.querySelector<HTMLElement>("#infotitle").childNodes
+			).flatMap(node => node.textContent.trim() || []),
+			status = video.paused ? "pause" : "play";
+
 		presenceData.smallImageKey = status;
-		presenceData.smallImageText = (await strings)[status];
+		presenceData.smallImageText = strings[status];
 		if (status === "play") {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(video.currentTime, video.duration);
 		}
-	};
 
-	/* Browsing Info */
-	if (showBrowseInfo) if (path === "/") presenceData.details = "Browsing";
+		if (getElement("#episodetitle") !== "Feature Film") {
+			presenceData.details = state[1];
+			presenceData.state = state[2];
+		} else presenceData.details = state[1];
 
-	/* Video Info */
-	if (showVideoInfo) {
-		if (video) {
-			const state = (
-				document.querySelector("#infotitle") as HTMLElement
-			).textContent.split("\n");
-			if (getElement("#episodetitle") !== "Feature Film") {
-				// Show Logic
-				presenceData.details = "Watching Show";
-				try {
-					presenceData.state = `${state[0]} (${state[1]})`;
-					await parseVideo();
-				} catch {
-					// deepscan
-				}
-			} else {
-				// Movie Logic
-				presenceData.details = "Watching Movie";
-				try {
-					[presenceData.state] = state;
-					await parseVideo();
-				} catch {
-					// deepscan
-				}
-			}
+		if (cover) {
+			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+				"meta[property='og:image']"
+			).content;
 		}
 	}
 
 	/* Search Info */
-	if (showSearchInfo) {
-		if (getElement("#indextitle").split("\n")[0] === "Search Results") {
-			presenceData.details = "Searching for";
-			presenceData.state = (
-				document.querySelector("input") as HTMLInputElement
-			).value;
-		}
+	if (
+		showSearchInfo &&
+		getElement("#indextitle").split("\n")[0] === "Search Results"
+	) {
+		presenceData.details = "Searching for";
+		presenceData.state =
+			document.querySelector<HTMLInputElement>("input").value;
 	}
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
 			presenceData.smallImageKey = "reading";
-			presenceData.smallImageText = (await strings).browse;
+			presenceData.smallImageText = strings.browse;
 		}
 		if (presenceData.details.includes("Searching")) {
 			presenceData.smallImageKey = "search";
-			presenceData.smallImageText = (await strings).search;
+			presenceData.smallImageText = strings.search;
 		}
 
 		presence.setActivity(presenceData);

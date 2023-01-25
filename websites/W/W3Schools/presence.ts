@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "630239297521319953"
+		clientId: "630239297521319953",
 	}),
 	capitalize = (text: string): string => {
 		return text
@@ -19,7 +19,7 @@ presence.on("UpdateData", () => {
 	}
 	const presenceData: PresenceData = {
 			largeImageKey: "w3schools",
-			startTimestamp: elapsed
+			startTimestamp: elapsed,
 		},
 		language = document.querySelector(".w3-bar-item.w3-button.active"),
 		lesson = document.querySelector("#main > h1"),
@@ -29,7 +29,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = `Learning ${capitalize(
 			language.textContent.toLowerCase()
 		)}`;
-		if (whitelist.some(lang => lang === language.textContent))
+		if (whitelist.includes(language.textContent))
 			presenceData.details = `Learning ${language.textContent}`;
 	}
 

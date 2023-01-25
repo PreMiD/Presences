@@ -1,14 +1,14 @@
 const presence = new Presence({
-		clientId: "836589763896541195"
+		clientId: "836589763896541195",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location;
+		{ pathname, search } = document.location;
 
 	if (pathname === "/") presenceData.details = "Ana Sayfa";
 	else if (pathname === "/fansublar")
@@ -33,23 +33,18 @@ presence.on("UpdateData", async () => {
 			.replace("SAYFA", "")}`;
 		presenceData.smallImageKey = "read";
 		presenceData.buttons = [
-			{ label: "Sayfaya Git", url: window.location.href }
+			{ label: "Sayfaya Git", url: window.location.href },
 		];
 	} else if (pathname.startsWith("/manga/")) {
 		presenceData.buttons = [
-			{ label: "Sayfaya Git", url: window.location.href }
+			{ label: "Sayfaya Git", url: window.location.href },
 		];
 		presenceData.details = "Çeviri mangaya:";
 		presenceData.state = document.querySelector(".name").textContent;
 		presenceData.smallImageKey = "view";
-	} else if (
-		pathname === "/mangalar" &&
-		document.location?.search?.substr(0, 7) === "?search"
-	) {
+	} else if (pathname === "/mangalar" && search?.substr(0, 7) === "?search") {
 		presenceData.details = "Arıyor:";
-		presenceData.state = new URLSearchParams(document.location.search).get(
-			"search"
-		);
+		presenceData.state = new URLSearchParams(search).get("search");
 		presenceData.smallImageKey = "search";
 	} else if (pathname === "/mangalar")
 		presenceData.details = "Mangaya Göz Atıyor";

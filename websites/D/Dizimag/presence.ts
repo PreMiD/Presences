@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "777146104117854230"
+	clientId: "777146104117854230",
 });
 
 let stream: { duration: number; currentTime: number; paused: boolean };
@@ -13,16 +13,16 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const path: string = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "dizimag"
+			largeImageKey: "dizimag",
 		};
 	if (path.startsWith("/uye-ol")) {
 		presenceData.details = "Bir sayfaya bakıyor:";
 		presenceData.state = "Üye Ol";
 		presenceData.startTimestamp = Date.now();
 	} else if (path.startsWith("/profil")) {
-		const name: string = document.querySelector("span.text-medium").textContent;
 		presenceData.details = "Profilini inceliyor:";
-		presenceData.state = name || "Bulunamadı";
+		presenceData.state =
+			document.querySelector("span.text-medium").textContent || "Bulunamadı";
 		presenceData.startTimestamp = Date.now();
 	} else if (path === "/") {
 		presenceData.details = "Bir sayfaya bakıyor:";
@@ -49,21 +49,19 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Trendler";
 		presenceData.startTimestamp = Date.now();
 	} else if (path.startsWith("/uye")) {
-		const name: string = document.querySelector("span.text-white").textContent;
 		presenceData.details = "Bir profile bakıyor:";
-		presenceData.state = name;
+		presenceData.state = document.querySelector("span.text-white").textContent;
 		presenceData.startTimestamp = Date.now();
 	} else if (path.startsWith("/oyuncu")) {
-		const name: string = document.querySelector(
-			"div.text-orange > div.pull-left"
-		).textContent;
 		presenceData.details = "Bir oyuncuya bakıyor:";
-		presenceData.state = name || "Bulunamadı";
+		presenceData.state =
+			document.querySelector("div.text-orange > div.pull-left").textContent ||
+			"Bulunamadı";
 		presenceData.startTimestamp = Date.now();
 	} else if (path.startsWith("/dizi") && path.split("/")[3] === "") {
-		const name: string = document.querySelector("h1.text-nowrap").textContent;
 		presenceData.details = "Bir diziye bakıyor:";
-		presenceData.state = name || "Bulunamadı";
+		presenceData.state =
+			document.querySelector("h1.text-nowrap").textContent || "Bulunamadı";
 		presenceData.startTimestamp = Date.now();
 	} else if (
 		!isNaN(stream.duration) &&
@@ -86,8 +84,8 @@ presence.on("UpdateData", async () => {
 					label: "Diziyi Görüntüle",
 					url: `${document.location.origin}/${
 						document.location.pathname.split("/")[1]
-					}/${document.location.pathname.split("/")[2]}`
-				}
+					}/${document.location.pathname.split("/")[2]}`,
+				},
 			];
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
@@ -100,8 +98,8 @@ presence.on("UpdateData", async () => {
 					label: "Diziyi Görüntüle",
 					url: `${document.location.origin}/${
 						document.location.pathname.split("/")[1]
-					}/${document.location.pathname.split("/")[2]}`
-				}
+					}/${document.location.pathname.split("/")[2]}`,
+				},
 			];
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(

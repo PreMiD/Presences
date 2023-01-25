@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "782358522628145153" //Presence Application ID on Discord Developers.
+		clientId: "782358522628145153", //Presence Application ID on Discord Developers.
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ let projectName: string;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "jira_logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 						burnup = "Analyzing Burnup report.",
 						burndown = "Analyzing Burndown report.",
 						velocity = "Analyzing Velocity report.",
-						cumulative = "Analyzing Cumulative report."
+						cumulative = "Analyzing Cumulative report.",
 					}
 
 					presenceData.details =
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 								details = "Editing Details settings.",
 								access = "Editing Access settings.",
 								notifications = "Editing Notifications settings.",
-								features = "Editing Features settings."
+								features = "Editing Features settings.",
 							}
 
 							presenceData.details =
@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 						roadmap = "Viewing Roadmap.",
 						backlog = "Viewing Backlog.",
 						code = "Reviewing Code.",
-						pages = "Viewing Pages."
+						pages = "Viewing Pages.",
 					}
 
 					presenceData.details =
@@ -129,55 +129,77 @@ presence.on("UpdateData", async () => {
 			} else if (path.includes("/browse/")) {
 				//Browsing Issue section.
 				presenceData.details = `Viewing Issue ${path.split("/").pop()}`;
-			} else if (path === "/issues/") {
-				//Advanced Issues section.
-				enum issuesSection {
-					"My open issues." = -1,
-					"Reported by me." = -2,
-					"Viewed recently." = -3,
-					"All issues." = -4,
-					"Open issues." = -5,
-					"Created recently." = -6,
-					"Resolved recently." = -7,
-					"Updated recently." = -8,
-					"Done issues." = -9
-				}
+			} else {
+				switch (path) {
+					case "/issues/": {
+						//Advanced Issues section.
+						enum issuesSection {
+							"My open issues." = -1,
+							"Reported by me." = -2,
+							"Viewed recently." = -3,
+							"All issues." = -4,
+							"Open issues." = -5,
+							"Created recently." = -6,
+							"Resolved recently." = -7,
+							"Updated recently." = -8,
+							"Done issues." = -9,
+						}
 
-				presenceData.details = "Tracking global Issues:";
-				presenceData.state =
-					issuesSection[
-						parseInt(document.location.search.split("=", 2).pop().substr(0, 2))
-					] || "Searching for an issue.";
-			} else if (path === "/secure/ManageFilters.jspa") {
-				//Filters section.
-				presenceData.details = "Managing Filters.";
-			} else if (path === "/jira/dashboards") {
-				//Dashboards homepage section.
-				presenceData.details = "Browsing Dashboards.";
-			} else if (path === "/secure/Dashboard.jspa") {
-				//Dashboard section.
-				presenceData.details = "Viewing a Dashboard:";
-				presenceData.state = document.querySelector(
-					"#dashboard-content > div:first-child > div > div:first-child > h1"
-				).textContent;
-			} else if (path === "/jira/people/search") {
-				//People homepage section. (yeah, path is correct, don't ask me why there is a "search", ~isladot)
-				presenceData.details = "Browsing Users.";
-			} else if (path.match(/\/jira\/people\/[a-z0-9]+$/)) {
-				//User profile page section.
-				presenceData.details = "Viewing a User:";
-				presenceData.state = document.querySelector(
-					'#jira-frontend > #helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div > div > div > div > div:nth-child(2) > aside > div:first-child > div > div:nth-child(2) > h2'
-				).textContent;
-			} else if (path.match(/\/jira\/people\/team\/[a-z0-9-]+$/)) {
-				//Team profile page section.
-				presenceData.details = "Viewing a Team:";
-				presenceData.state = document.querySelector(
-					'#helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div > div > div > div:nth-child(2) > aside > div:first-child > div > div:first-child > form > div > div > div > div'
-				).textContent;
-			} else if (path === "/secure/ViewPersonalSettings.jspa") {
-				//Personal settings section.
-				presenceData.details = "Editing Personal settings.";
+						presenceData.details = "Tracking global Issues:";
+						presenceData.state =
+							issuesSection[
+								parseInt(
+									document.location.search.split("=", 2).pop().substr(0, 2)
+								)
+							] || "Searching for an issue.";
+
+						break;
+					}
+					case "/secure/ManageFilters.jspa": {
+						//Filters section.
+						presenceData.details = "Managing Filters.";
+
+						break;
+					}
+					case "/jira/dashboards": {
+						//Dashboards homepage section.
+						presenceData.details = "Browsing Dashboards.";
+
+						break;
+					}
+					case "/secure/Dashboard.jspa": {
+						//Dashboard section.
+						presenceData.details = "Viewing a Dashboard:";
+						presenceData.state = document.querySelector(
+							"#dashboard-content > div:first-child > div > div:first-child > h1"
+						).textContent;
+
+						break;
+					}
+					case "/jira/people/search": {
+						//People homepage section. (yeah, path is correct, don't ask me why there is a "search", ~isladot)
+						presenceData.details = "Browsing Users.";
+
+						break;
+					}
+					default:
+						if (path.match(/\/jira\/people\/[a-z0-9]+$/)) {
+							//User profile page section.
+							presenceData.details = "Viewing a User:";
+							presenceData.state = document.querySelector(
+								'#jira-frontend > #helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div > div > div > div > div:nth-child(2) > aside > div:first-child > div > div:nth-child(2) > h2'
+							).textContent;
+						} else if (path.match(/\/jira\/people\/team\/[a-z0-9-]+$/)) {
+							//Team profile page section.
+							presenceData.details = "Viewing a Team:";
+							presenceData.state = document.querySelector(
+								'#helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div > div > div > div:nth-child(2) > aside > div:first-child > div > div:first-child > form > div > div > div > div'
+							).textContent;
+						} else if (path === "/secure/ViewPersonalSettings.jspa") {
+							//Personal settings section.
+							presenceData.details = "Editing Personal settings.";
+						}
+				}
 			}
 		} else {
 			//If user is creating a new issue.

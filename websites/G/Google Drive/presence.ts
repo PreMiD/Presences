@@ -1,19 +1,21 @@
 const presence = new Presence({
-	clientId: "630494559956107285"
+	clientId: "630494559956107285",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "drivenewlogo",
-			details: "Viewing page:"
+			details: "Viewing page:",
 		},
 		path = document.location.pathname
 			.toLowerCase()
-			.replace(/(\/u\/([0-9])+)/g, "");
+			.replace(/(\/u\/([0-9])+)/g, ""),
+		privacy = await presence.getSetting<boolean>("privacy");
 
 	if (path.startsWith("/drive/folders")) {
-		presenceData.details = "Viewing folder:";
-		presenceData.state = document.title.replace("- Google Drive", "");
+		presenceData.details = "Viewing a folder";
+		if (!privacy)
+			presenceData.state = document.title.replace("- Google Drive", "");
 	} else if (path.startsWith("/drive/computer"))
 		presenceData.state = "Linked computers";
 	else if (path.startsWith("/drive/shared-with-me"))
@@ -28,15 +30,17 @@ presence.on("UpdateData", async () => {
 	else if (path.startsWith("/drive/quota"))
 		presenceData.state = "Storage quota";
 	else if (path.startsWith("/file/")) {
-		const main = document.title.split("."),
-			fileExtension = main.slice(-1).toString().replace("- Google Drive", "");
-
-		presenceData.details = "Viewing a file:";
-		presenceData.state = (await presence.getSetting<boolean>("filename"))
-			? `${
-					main.length === 2 ? main[0] : main.slice(0, -1).join("").toString()
-			  }.${fileExtension.toUpperCase()}`
-			: `unknown.${fileExtension.toUpperCase()} (File name hidden)`;
+		const main = document.title.split(".");
+		presenceData.details = "Viewing a file";
+		if (!privacy) {
+			presenceData.state = `${
+				main.length === 2 ? main[0] : main.slice(0, -1).join("").toString()
+			}.${main
+				.slice(-1)
+				.toString()
+				.replace("- Google Drive", "")
+				.toUpperCase()}`;
+		}
 	} else presenceData.details = "Browsing...";
 
 	presence.setActivity(presenceData);

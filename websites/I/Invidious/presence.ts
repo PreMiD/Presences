@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "761617743593209869"
+	clientId: "761617743593209869",
 });
 
 function getTime() {
 	const time = document
-		.getElementsByClassName("vjs-current-time-display")[0]
+		.querySelectorAll(".vjs-current-time-display")[0]
 		.textContent.split(":")
 		.map(n => Number(n));
 	if (time.length === 3)
@@ -15,7 +15,7 @@ function getTime() {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "icon",
-		smallImageKey: "more"
+		smallImageKey: "more",
 	};
 	let clear = false;
 
@@ -54,29 +54,27 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "watch":
-			presenceData.smallImageKey = document.getElementsByClassName(
-				"vjs-playing"
-			)[0]
+			presenceData.smallImageKey = document.querySelectorAll(".vjs-playing")[0]
 				? "play"
 				: "pause";
 			presenceData.details = document
-				.getElementsByTagName("h1")[0]
+				.querySelectorAll("h1")[0]
 				.textContent.trim();
-			presenceData.state = document.getElementById("channel-name").textContent;
-			if (document.getElementsByClassName("vjs-playing")[0])
+			presenceData.state = document.querySelector("#channel-name").textContent;
+			if (document.querySelectorAll(".vjs-playing")[0])
 				presenceData.startTimestamp = getTime();
 
 			break;
 
 		case "playlist":
 			presenceData.details = "Viewing playlist";
-			presenceData.state = document.getElementsByTagName("h3")[0].textContent;
+			presenceData.state = document.querySelectorAll("h3")[0].textContent;
 			break;
 
 		case "channel":
 			presenceData.details = "Viewing channel";
 			presenceData.state = document
-				.getElementsByClassName("channel-profile")[0]
+				.querySelectorAll(".channel-profile")[0]
 				.textContent.trim();
 			break;
 

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "814919836835905566"
+		clientId: "814919836835905566",
 	}),
 	tmb = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "favicon",
 			smallImageKey: "google",
-			startTimestamp: tmb
+			startTimestamp: tmb,
 		},
 		path = document.location.pathname.toLowerCase(),
 		showButton = await presence.getSetting<boolean>("showButton");
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 			.querySelector(
 				"#main-content > gf-global-toolbar > div.global-toolbar__filters-area > gf-global-filters-row > div > div > gf-toolbar-category-filter > button > span.mat-button-wrapper"
 			)
-			.getElementsByClassName("gf-outlined-menu-button-content")[0].textContent;
+			.querySelectorAll(".gf-outlined-menu-button-content")[0].textContent;
 		if (categ === " Categories ") presenceData.state = "All categories";
 		else if (categ.includes("+")) {
 			presenceData.state = `Categories: ${new URL(
@@ -33,26 +33,26 @@ presence.on("UpdateData", async () => {
 				.textContent
 		}`;
 		presenceData.state = `Viewing the "${document
-			.getElementsByClassName("gf-nav__link--active")[0]
+			.querySelectorAll(".gf-nav__link--active")[0]
 			.textContent.trim()}" tab`;
 		if (showButton) {
 			presenceData.buttons = [
 				{
 					label: "View font",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (path === "/featured")
 		presenceData.details = "Looking at the featured fonts";
 	else if (path.includes("/featured/")) {
 		let featuredFonts;
-		if (document.getElementsByClassName("gmat-headline-1")[0]) {
+		if (document.querySelectorAll(".gmat-headline-1")[0]) {
 			featuredFonts =
-				document.getElementsByClassName("gmat-headline-1")[0].textContent;
-		} else if (!document.getElementsByClassName("gmat-headline-1")[0]) {
+				document.querySelectorAll(".gmat-headline-1")[0].textContent;
+		} else if (!document.querySelectorAll(".gmat-headline-1")[0]) {
 			featuredFonts =
-				document.getElementsByClassName("gmat-headline-4")[0].textContent;
+				document.querySelectorAll(".gmat-headline-4")[0].textContent;
 		}
 		presenceData.details = "Looking at a featured font:";
 		presenceData.state = featuredFonts;
@@ -61,18 +61,18 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View featured font",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (path === "/icons") {
 		if (
 			new URL(document.location.href).searchParams.get("icon.query") === null
 		) {
-			if (document.getElementsByClassName("mdc-chip--selected")[0]) {
+			if (document.querySelectorAll(".mdc-chip--selected")[0]) {
 				presenceData.details = "Browsing Material icons"; // The icons are named "Material icons" like this on the Fonts website
 				presenceData.state = `Looking at the ${document
-					.getElementsByClassName("mdc-chip--selected")[0]
+					.querySelectorAll(".mdc-chip--selected")[0]
 					.textContent.toLowerCase()} icons`;
 			} else {
 				presenceData.details = "Browsing Material icons";

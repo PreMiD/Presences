@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "876239113307709493"
+		clientId: "876239113307709493",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -10,7 +10,7 @@ async function getStrings() {
 			user: "general.viewUser",
 			call: "general.inCall",
 			reading: "general.readingAbout",
-			browsing: "general.browsing"
+			browsing: "general.browsing",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -21,7 +21,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey: "lg",
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
@@ -32,35 +32,47 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	if (document.location.hostname === "giggl.app") {
-		switch (document.location.pathname) {
-			case "/":
-				presenceData.details = (await strings).home;
-				break;
-			case "/jobs":
-				presenceData.details = `${(await strings).reading} Jobs`;
-				break;
-			case "/isp":
-				presenceData.details = `${(await strings).reading} Giggl Networking`;
-				break;
-		}
-	} else if (document.location.hostname === "canary.giggl.app") {
-		presenceData.details = (await strings).browsing;
+	switch (document.location.hostname) {
+		case "giggl.app": {
+			switch (document.location.pathname) {
+				case "/":
+					presenceData.details = (await strings).home;
+					break;
+				case "/jobs":
+					presenceData.details = `${(await strings).reading} Jobs`;
+					break;
+				case "/isp":
+					presenceData.details = `${(await strings).reading} Giggl Networking`;
+					break;
+			}
 
-		if (document.location.pathname.startsWith("/portal")) {
-			presenceData.details = "In a Portal";
-			[presenceData.state] = document
-				.querySelector("title")
-				.textContent.split(" • ");
-		} else if (document.querySelector("svg.feather.feather-phone-missed")) {
-			presenceData.smallImageKey = "call";
-			presenceData.smallImageText = (await strings).call;
-		} else if (document.querySelector(".feather.feather-map-pin")) {
-			presenceData.details = (await strings).user;
-			presenceData.state = document.querySelector("p").textContent;
+			break;
 		}
-	} else if (document.location.hostname === "status.giggl.app")
-		presenceData.details = "Viewing the status page";
+		case "canary.giggl.app": {
+			presenceData.details = (await strings).browsing;
+
+			if (document.location.pathname.startsWith("/portal")) {
+				presenceData.details = "In a Portal";
+				[presenceData.state] = document
+					.querySelector("title")
+					.textContent.split(" • ");
+			} else if (document.querySelector("svg.feather.feather-phone-missed")) {
+				presenceData.smallImageKey = "call";
+				presenceData.smallImageText = (await strings).call;
+			} else if (document.querySelector(".feather.feather-map-pin")) {
+				presenceData.details = (await strings).user;
+				presenceData.state = document.querySelector("p").textContent;
+			}
+
+			break;
+		}
+		case "status.giggl.app":
+			{
+				presenceData.details = "Viewing the status page";
+				// No default
+			}
+			break;
+	}
 
 	if (privacy) delete presenceData.state;
 	if (timestamps) presenceData.startTimestamp = browsingTimestamp;

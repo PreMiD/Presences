@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "698217762660548799"
+		clientId: "698217762660548799",
 	}),
 	browsingTimestamp = ~~(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "mangakakalot",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (location.hostname) {
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document
 					.querySelector(".title.update-title")
 					.textContent.split(" ")[1]
-					.replace(/_/g, " ");
+					.replaceAll("_", " ");
 				presenceData.smallImageKey = "search";
 			} else presenceData.details = "Browsing...";
 			break;
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".panel-breadcrumb")
 					.childNodes[4].textContent.split(":")[1]
 					.trim()
-					.replace(/_/g, " ");
+					.replaceAll("_", " ");
 				presenceData.smallImageKey = "search";
 			} else presenceData.details = "Browsing...";
 

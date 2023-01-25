@@ -1,32 +1,33 @@
 const presence = new Presence({
-	clientId: "889780989386170420"
+	clientId: "889780989386170420",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "tomshardware"
-	};
+			largeImageKey: "tomshardware",
+		},
+		{ href } = document.location;
 
 	let { pathname } = document.location;
 
 	if (pathname.includes("uk/")) pathname = pathname.replace("uk/", "");
 	if (pathname.includes("uk")) pathname = pathname.replace("uk", "");
 
-	if (document.location.href.includes("news")) {
+	if (href.includes("news")) {
 		if (pathname.split("/")[2]) {
 			presenceData.details = "Reading an article...";
 			presenceData.state = `Article: '${pathname
 				.split("/")[2]
 				.replace(".html", "")}'`;
 		} else presenceData.details = "Scrolling through news articles...";
-	} else if (document.location.href.includes("reviews")) {
+	} else if (href.includes("reviews")) {
 		if (pathname.split("/")[2]) {
 			presenceData.details = "Reading a review...";
 			presenceData.state = `Review: '${pathname
 				.split("/")[2]
 				.replace(".html", "")}'`;
 		} else presenceData.details = "Scrolling through reviews...";
-	} else if (document.location.href.includes("best-picks")) {
+	} else if (href.includes("best-picks")) {
 		if (pathname.split("/")[2]) {
 			presenceData.details = "Looking at best picks...";
 			presenceData.state = `The best picks for: '${pathname
@@ -34,7 +35,7 @@ presence.on("UpdateData", async () => {
 				.replace(".html", "")
 				.replace("best-", "")}'`;
 		} else presenceData.details = "Scrolling through best picks...";
-	} else if (document.location.href.includes("coupons")) {
+	} else if (href.includes("coupons")) {
 		if (pathname.includes("?")) presenceData.details = "Looking at a coupon...";
 		else if (pathname.split("/")[2]) {
 			presenceData.details = "Looking at coupons...";
@@ -42,7 +43,7 @@ presence.on("UpdateData", async () => {
 				.split("/")[3]
 				.replace(".html", "")}'`;
 		} else presenceData.details = "Scrolling through coupons...";
-	} else if (document.location.href.includes("forums.")) {
+	} else if (href.includes("forums.")) {
 		if (pathname.includes("forums")) {
 			presenceData.state = `Category: '${pathname
 				.split("/")[2]
@@ -68,16 +69,16 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Registering an account...";
 
 		presenceData.details = "Visiting the forums...";
-	} else if (document.location.href.includes("topics")) {
+	} else if (href.includes("topics")) {
 		if (pathname.split("/")[3]) {
 			presenceData.state = `Subcategory: '${pathname
 				.split("/")[3]
 				.replace(".html", "")}'`;
 		}
 		presenceData.details = `Looking at the topic: ${pathname.split("/")[2]}`;
-	} else if (document.location.href.includes("feeds"))
+	} else if (href.includes("feeds"))
 		presenceData.details = "Visiting the RSS page...";
-	else if (document.location.href.includes("search")) {
+	else if (href.includes("search")) {
 		if (pathname.split("=")[1]) {
 			presenceData.state = `Searching Term: '${pathname
 				.split("=")[1]

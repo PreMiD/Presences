@@ -1,37 +1,45 @@
 const presence = new Presence({
-	clientId: "813110347165728849"
+	clientId: "813110347165728849",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "bol",
-		buttons: [{ label: "Pagina bekijken", url: document.location.href }]
+		buttons: [{ label: "Pagina bekijken", url: document.location.href }],
 	};
-
 	presenceData.details = "Bladert op bol.com";
 	presenceData.state = `Pagina '${
 		document.title.replace("| ", "|").replace(" |", "|").split("|")[1]
 	}'`;
-	if (
+	if (document.querySelector<HTMLInputElement>("#searchfor").textContent) {
+		presenceData.details = "Zoekt voor:";
+		presenceData.state =
+			document.querySelector<HTMLInputElement>("#searchfor").textContent;
+		presenceData.smallImageKey = "search";
+	} else if (
 		document.location.pathname === "/" ||
 		document.location.pathname === "/nl/"
 	)
 		presenceData.state = "Startpagina";
-
-	if (document.querySelector("span[class*=h-boxed][data-test*=title]")) {
+	else if (
+		document.querySelector(
+			"#mainContent > div > div.constrain.u-pb--m > div.pdp-header.slot.slot--pdp-header.js_slot-title > h1 > span"
+		)
+	) {
+		presenceData.largeImageKey =
+			document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+				?.content ?? "bol";
 		presenceData.details = `Bekijkt '${
-			document.querySelector("span[class*=h-boxed][data-test*=title]")
-				.textContent
+			document.querySelector(
+				"#mainContent > div > div.constrain.u-pb--m > div.pdp-header.slot.slot--pdp-header.js_slot-title > h1 > span"
+			).textContent
 		}'`;
 		presenceData.state = `In ${
-			document
-				.querySelector("ul[class*=breadcrumbs][data-test*=breadcrumb]")
-				.lastElementChild.querySelector(
-					"span[class*=breadcrumbs][data-test*=breadcrumb-name]"
-				).textContent
+			document.querySelector("#option_block_4").lastElementChild
+				.lastElementChild.textContent
 		}`;
 		presenceData.buttons = [
-			{ label: "Product bekijken", url: document.location.href }
+			{ label: "Product bekijken", url: document.location.href },
 		];
 	} else if (
 		document.querySelector("h1[class*=bol_header][data-test*=page-title]")
@@ -42,11 +50,9 @@ presence.on("UpdateData", async () => {
 		}`;
 		delete presenceData.state;
 		presenceData.buttons = [
-			{ label: "Categorie bekijken", url: document.location.href }
+			{ label: "Categorie bekijken", url: document.location.href },
 		];
-	}
-
-	if (document.location.pathname.toLowerCase().includes("basket"))
+	} else if (document.location.pathname.toLowerCase().includes("basket"))
 		presenceData.details = "Bekijkt winkelwagentje";
 	else if (document.location.pathname.toLowerCase().includes("lijstje"))
 		presenceData.details = "Bekijkt verlanglijstje";

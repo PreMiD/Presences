@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "700596580218175548"
+		clientId: "700596580218175548",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	titulo = document.title,
@@ -18,17 +18,17 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "axn-logo"
+		largeImageKey: "axn-logo",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
 
-	if (document.location.pathname.indexOf("anime") !== -1) {
+	if (document.location.pathname.includes("anime")) {
 		presenceData.details = obraanimeR;
 		presenceData.state = `Episódio ${capituloR}`;
 	} else if (document.location.pathname.startsWith("/search")) {
-		if (document.location.pathname.indexOf("/search/label/") !== -1) {
-			if (document.location.pathname.indexOf("/In%C3%ADcio") !== -1)
+		if (document.location.pathname.includes("/search/label/")) {
+			if (document.location.pathname.includes("/In%C3%ADcio"))
 				presenceData.details = "Página inícial";
 			else {
 				presenceData.details = "Vendo a lista de";

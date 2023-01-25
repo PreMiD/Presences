@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "614389710625964045"
+		clientId: "614389710625964045",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 			smallImageKey: paused ? "pause" : "play",
 			smallImageText: paused ? (await strings).pause : (await strings).play,
 			startTimestamp: timestamps[0],
-			endTimestamp: timestamps[1]
+			endTimestamp: timestamps[1],
 		};
 	if (
 		document.location.pathname.includes(".html") &&
@@ -100,79 +100,99 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		}
-	} else if (document.location.pathname === "/") {
-		presenceData.details = "Browsing through";
-		presenceData.state = "the main page";
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "reading";
+	} else {
+		switch (document.location.pathname) {
+			case "/": {
+				presenceData.details = "Browsing through";
+				presenceData.state = "the main page";
+				delete presenceData.endTimestamp;
+				presenceData.startTimestamp = browsingTimestamp;
+				delete presenceData.smallImageText;
+				presenceData.smallImageKey = "reading";
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/list/view") {
-		presenceData.details = "Browsing through";
-		presenceData.state = "the most viewed shows";
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "reading";
+				presence.setActivity(presenceData);
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/list/rate") {
-		presenceData.details = "Browsing through";
-		presenceData.state = "the highest rated shows";
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "reading";
+				break;
+			}
+			case "/list/view": {
+				presenceData.details = "Browsing through";
+				presenceData.state = "the most viewed shows";
+				delete presenceData.endTimestamp;
+				presenceData.startTimestamp = browsingTimestamp;
+				delete presenceData.smallImageText;
+				presenceData.smallImageKey = "reading";
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/list") {
-		presenceData.details = "Browsing through";
-		presenceData.state = "the latest shows";
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "reading";
+				presence.setActivity(presenceData);
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname === "/show-list") {
-		presenceData.details = "Browsing through";
-		presenceData.state = "a list of all shows";
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "reading";
+				break;
+			}
+			case "/list/rate": {
+				presenceData.details = "Browsing through";
+				presenceData.state = "the highest rated shows";
+				delete presenceData.endTimestamp;
+				presenceData.startTimestamp = browsingTimestamp;
+				delete presenceData.smallImageText;
+				presenceData.smallImageKey = "reading";
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/category/")) {
-		views = document.querySelector(
-			"#wrap > div.container.content > div > div.col.s12.m12.l8.content-left > div.content-list.z-depth-1 > h5"
-		);
+				presence.setActivity(presenceData);
 
-		presenceData.details = "Browsing through all episodes of:";
-		presenceData.state = views.textContent
-			.replace("CATEGORY: ", "")
-			.replace("▼", "");
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "reading";
+				break;
+			}
+			case "/list": {
+				presenceData.details = "Browsing through";
+				presenceData.state = "the latest shows";
+				delete presenceData.endTimestamp;
+				presenceData.startTimestamp = browsingTimestamp;
+				delete presenceData.smallImageText;
+				presenceData.smallImageKey = "reading";
 
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/search/")) {
-		views = document.querySelector(
-			"#wrap > div.container.content > div > div.col.s12.m12.l8.content-left > div.content-list.z-depth-1 > h5"
-		);
+				presence.setActivity(presenceData);
 
-		presenceData.details = "Searching for:";
-		presenceData.state = views.textContent
-			.replace("Search by Keywords: ", "")
-			.replace("▼", "");
-		delete presenceData.endTimestamp;
-		presenceData.startTimestamp = browsingTimestamp;
-		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "search";
-		presence.setActivity(presenceData);
-	} else presence.setActivity();
+				break;
+			}
+			case "/show-list": {
+				presenceData.details = "Browsing through";
+				presenceData.state = "a list of all shows";
+				delete presenceData.endTimestamp;
+				presenceData.startTimestamp = browsingTimestamp;
+				delete presenceData.smallImageText;
+				presenceData.smallImageKey = "reading";
+
+				presence.setActivity(presenceData);
+
+				break;
+			}
+			default:
+				if (document.location.pathname.includes("/category/")) {
+					views = document.querySelector(
+						"#wrap > div.container.content > div > div.col.s12.m12.l8.content-left > div.content-list.z-depth-1 > h5"
+					);
+
+					presenceData.details = "Browsing through all episodes of:";
+					presenceData.state = views.textContent
+						.replace("CATEGORY: ", "")
+						.replace("▼", "");
+					delete presenceData.endTimestamp;
+					presenceData.startTimestamp = browsingTimestamp;
+					delete presenceData.smallImageText;
+					presenceData.smallImageKey = "reading";
+
+					presence.setActivity(presenceData);
+				} else if (document.location.pathname.includes("/search/")) {
+					views = document.querySelector(
+						"#wrap > div.container.content > div > div.col.s12.m12.l8.content-left > div.content-list.z-depth-1 > h5"
+					);
+
+					presenceData.details = "Searching for:";
+					presenceData.state = views.textContent
+						.replace("Search by Keywords: ", "")
+						.replace("▼", "");
+					delete presenceData.endTimestamp;
+					presenceData.startTimestamp = browsingTimestamp;
+					delete presenceData.smallImageText;
+					presenceData.smallImageKey = "search";
+					presence.setActivity(presenceData);
+				} else presence.setActivity();
+		}
+	}
 });

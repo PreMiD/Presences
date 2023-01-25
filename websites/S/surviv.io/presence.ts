@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "640711877609127976"
+	clientId: "640711877609127976",
 });
 
 let gametypequery: string,
@@ -14,11 +14,11 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: "logo",
 		},
 		broadcasttc = await presence.getSetting<boolean>("broadcasttc"),
 		active =
-			window.getComputedStyle(document.getElementById("start-menu-wrapper"))
+			window.getComputedStyle(document.querySelector("#start-menu-wrapper"))
 				.display === "none";
 	presenceData.startTimestamp = browsingTimestamp;
 
@@ -40,8 +40,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Join Game",
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 				presenceData.smallImageKey = gametype.toLowerCase();
 				presenceData.smallImageText =

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "618212337895079996"
+		clientId: "618212337895079996",
 	}),
 	elapsed = Math.floor(Date.now() / 1000);
 let text;
@@ -7,15 +7,13 @@ let text;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "banner",
-		startTimestamp: elapsed
+		startTimestamp: elapsed,
 	};
 
 	if (document.location.pathname === "/home") {
-		if (
-			document.getElementsByTagName("p")[1].textContent.includes("Welcome back")
-		)
-			text = document.getElementsByTagName("p")[1].textContent;
-		else text = document.getElementsByTagName("p")[3].textContent;
+		if (document.querySelectorAll("p")[1].textContent.includes("Welcome back"))
+			text = document.querySelectorAll("p")[1].textContent;
+		else text = document.querySelectorAll("p")[3].textContent;
 
 		if (localStorage.getItem("name"))
 			localStorage.setItem("name", text.split(",")[1]);
@@ -32,32 +30,32 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/editor")) {
 		presenceData.details = "Building Decks";
 		presenceData.state = `Editing: ${
-			document.getElementsByTagName("strong")[0].textContent
+			document.querySelectorAll("strong")[0].textContent
 		}`;
 		presenceData.smallImageKey = "logo";
 		presenceData.smallImageText = "in game";
 	} else if (document.location.pathname.includes("/game")) {
-		let opponent = document.getElementById("game-opponent-name").textContent;
-		const mylife = document.getElementById("game-life-player").textContent,
-			opplife = document.getElementById("game-life-opponent").textContent;
-		let myname = document.getElementById("game-player-name").textContent,
+		let opponent = document.querySelector("#game-opponent-name").textContent;
+		const mylife = document.querySelector("#game-life-player").textContent,
+			opplife = document.querySelector("#game-life-opponent").textContent;
+		let myname = document.querySelector("#game-player-name").textContent,
 			state,
 			status;
 
 		if (myname === "Player" || myname === "Opponent") {
-			myname = document.getElementById(
-				"game-room-player1-username"
+			myname = document.querySelector(
+				"#game-room-player1-username"
 			).textContent;
 		}
 		if (opponent === "Opponent" || opponent === "Player") {
 			if (
-				document.getElementById("game-room-player2-username").textContent ===
+				document.querySelector("#game-room-player2-username").textContent ===
 				"---"
 			)
 				opponent = "waiting..";
 			else {
-				opponent = document.getElementById(
-					"game-room-player2-username"
+				opponent = document.querySelector(
+					"#game-room-player2-username"
 				).textContent;
 			}
 		}

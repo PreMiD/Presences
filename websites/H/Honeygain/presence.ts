@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "703447484025798717"
+		clientId: "703447484025798717",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,23 +8,23 @@ presence.on("UpdateData", () => {
 		presenceData: PresenceData = {
 			largeImageKey: "honeygain",
 			details: "Browsing Honeygain",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (document.location.hostname === "www.honeygain.com") {
-		if (document.getElementById("comp-jvf30y3iinlineContent"))
+		if (document.querySelector("#comp-jvf30y3iinlineContent"))
 			presenceData.details = "Reading Privacy Policy";
-		else if (document.getElementById("comp-jvf2al4einlineContent"))
+		else if (document.querySelector("#comp-jvf2al4einlineContent"))
 			presenceData.details = "Reading Terms of Use";
 		else if (path === "/") {
 			const estEarningsPos = document
-					.getElementById("comp-jv3eiz6p")
+					.querySelector("#comp-jv3eiz6p")
 					.getBoundingClientRect(),
 				whatIsHGPos = document
-					.getElementById("comp-jv0xq201")
+					.querySelector("#comp-jv0xq201")
 					.getBoundingClientRect(),
 				howItWorksPos = document
-					.getElementById("comp-jvgnw4tj")
+					.querySelector("#comp-jvgnw4tj")
 					.getBoundingClientRect();
 			if (estEarningsPos.top < window.innerHeight && estEarningsPos.bottom >= 0)
 				presenceData.details = "Estimating Earnings";
@@ -43,27 +43,27 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Viewing Dashboard";
 		presenceData.state = `Balance: ${
 			document
-				.getElementsByClassName("sc-dnqmqq kpUaxq")[0]
+				.querySelectorAll(".sc-dnqmqq.kpUaxq")[0]
 				.textContent.split("Equals to ")[1]
 		}`;
 		presenceData.state += `, Gathered Today: ${
 			document
-				.getElementsByClassName("sc-dnqmqq kpUaxq")[1]
+				.querySelectorAll(".sc-dnqmqq.kpUaxq")[1]
 				.textContent.split("Equals to ")[1]
 		}`;
 	} else if (path.includes("/transactions")) {
 		presenceData.details = "Viewing Transaction History";
 		presenceData.state = `Balance: ${
 			document
-				.getElementsByClassName("sc-dnqmqq kpUaxq")[1]
+				.querySelectorAll(".sc-dnqmqq.kpUaxq")[1]
 				.textContent.split("Equals to ")[1]
 		}`;
 	} else if (path.includes("/referrals")) {
 		presenceData.details = "Viewing Referrals";
 		presenceData.state = `Referral Code: ${
 			(
-				document.getElementsByClassName(
-					"sc-RefOD izklIM sc-bwCtUz gqfLZQ"
+				document.querySelectorAll(
+					".sc-RefOD.izklIM.sc-bwCtUz.gqfLZQ"
 				)[0] as HTMLInputElement
 			).value.split("https://r.honeygain.money/")[1]
 		}`;

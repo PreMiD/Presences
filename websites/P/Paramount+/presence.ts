@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "821433038335377418"
+		clientId: "821433038335377418",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
-		search: "presence.activity.searching"
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
+		search: "general.searching",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -20,10 +20,9 @@ presence.on("UpdateData", async () => {
 	const vidArea = document.querySelector(".video__player-area"),
 		presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
-		{ href } = window.location,
-		path = window.location.pathname;
+		{ href, pathname: path } = window.location;
 
 	if (href !== oldUrl) oldUrl = href;
 
@@ -87,13 +86,13 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (path.includes("/live")) {
 		vidMdTl = document
-			.getElementsByClassName("video__player-area")[0]
+			.querySelectorAll(".video__player-area")[0]
 			.querySelector("h1");
 		presenceData.smallImageKey = "live";
 		presenceData.smallImageText = (await strings).live;
 		presenceData.details = "Watching WCBS Live";
 		presenceData.state = document
-			.getElementsByClassName("video__player-area")[0]
+			.querySelectorAll(".video__player-area")[0]
 			.querySelector("span.subTitle").textContent;
 
 		if (path.includes("/cbsn/")) {

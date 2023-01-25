@@ -5,7 +5,7 @@ presence.on("UpdateData", async () => {
 		[subdomain] = location.host.split("."),
 		presenceData: PresenceData = {
 			largeImageKey: "tailwind-logo",
-			startTimestamp: Math.round(Date.now() / 1000)
+			startTimestamp: Math.round(Date.now() / 1000),
 		};
 
 	if (location.host === "tailwindui.com") {
@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 				const pathnames = location.pathname.split("/");
 				presenceData.details = "Viewing component:";
 				presenceData.state = `${pathnames[pathnames.length - 2]
-					.replace(/-/g, " ")
+					.replaceAll("-", " ")
 					.replace(/(^\w|\s\w)/g, m => m.toUpperCase())} - ${
 					document.querySelector("main .max-w-8xl h2")?.textContent ||
 					"Unknown component"
@@ -24,10 +24,24 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing components";
 				presenceData.smallImageKey = "search";
 			}
-		} else if (path === "/pricing")
-			presenceData.state = "Tailwind UI - Pricing";
-		else if (path === "/login") presenceData.state = "Tailwind UI - Login";
-		else if (path === "/") presenceData.state = "Tailwind UI - Home";
+		} else {
+			switch (path) {
+				case "/pricing": {
+					presenceData.state = "Tailwind UI - Pricing";
+					break;
+				}
+				case "/login": {
+					presenceData.state = "Tailwind UI - Login";
+					break;
+				}
+				case "/":
+					{
+						presenceData.state = "Tailwind UI - Home";
+						// No default
+					}
+					break;
+			}
+		}
 	} else if (subdomain === "blog") {
 		if (path !== "/") {
 			presenceData.details = "Reading an article:";

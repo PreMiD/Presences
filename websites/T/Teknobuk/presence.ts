@@ -2,19 +2,30 @@ const presence = new Presence({ clientId: "658192386899312651" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
 		largeImageKey: "buk-logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 function makeRPC(title: string, category: string): void {
-	if (category === "kategori") {
-		presenceData.details = "Bir kategoriye göz atıyor:";
-		presenceData.state = title;
-	} else if (category === "etiket") {
-		presenceData.details = "Bir etikete göz atıyor:";
-		presenceData.state = title;
-	} else if (category === "author") {
-		presenceData.details = "Bir yazara göz atıyor:";
-		presenceData.state = title;
+	switch (category) {
+		case "kategori": {
+			presenceData.details = "Bir kategoriye göz atıyor:";
+			presenceData.state = title;
+
+			break;
+		}
+		case "etiket": {
+			presenceData.details = "Bir etikete göz atıyor:";
+			presenceData.state = title;
+
+			break;
+		}
+		case "author": {
+			presenceData.details = "Bir yazara göz atıyor:";
+			presenceData.state = title;
+
+			break;
+		}
+		// No default
 	}
 }
 
@@ -91,7 +102,7 @@ presence.on("UpdateData", () => {
 	if (!presenceData.details) {
 		presence.setActivity({
 			largeImageKey: "buk-logo",
-			details: "Bilinmeyen bir sayfada..."
+			details: "Bilinmeyen bir sayfada...",
 		});
 	} else presence.setActivity(presenceData);
 });

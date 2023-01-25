@@ -1,19 +1,19 @@
 const presence = new Presence({
-		clientId: "794408060847390760"
+		clientId: "794408060847390760",
 	}),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
-		episode: "presence.media.info.episode"
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
+		episode: "presence.media.info.episode",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "exxen"
+		largeImageKey: "exxen",
 	};
-	if (document.location.pathname.indexOf("watch") > -1) {
+	if (document.location.pathname.includes("watch")) {
 		const video: HTMLVideoElement = document.querySelector(".rmp-video"),
 			episodeName = document.querySelector(".content-name").textContent,
 			episode = episodeName.split(".Bölüm")[0].split(" ")[
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = (await strings).browsing;
-		if (document.location.pathname.indexOf("detail") > -1)
+		if (document.location.pathname.includes("detail"))
 			presenceData.state = document.querySelector(".title").textContent;
 	}
 	presence.setActivity(presenceData);

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "661150919584514067"
+		clientId: "661150919584514067",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "usercord.org") {
 		presenceData.details = "Viewing Page:";
@@ -19,7 +19,7 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Searching for user:";
 			presenceData.state = window.location.href
 				.slice(31)
-				.replace(/\+|%20/g, " ");
+				.replaceAll("+|%20", " ");
 		} else if (document.location.pathname.includes("/member")) {
 			presenceData.details = "Viewing Page:";
 			presenceData.state = "UserCord Member List";
@@ -39,10 +39,10 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Joining Discord..";
 			presenceData.state = "Name: DiscordLabs";
 		} else if (document.location.pathname.includes("/u/")) {
-			const priceEls = document.getElementsByClassName("usertitle");
-			for (let i = 0; i < priceEls.length; i++) {
+			const priceEls = document.querySelectorAll(".usertitle");
+			for (const priceEl of priceEls) {
 				presenceData.details = "Viewing a profile:";
-				presenceData.state = priceEls[i].textContent;
+				presenceData.state = priceEl.textContent;
 			}
 		}
 	}

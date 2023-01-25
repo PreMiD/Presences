@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "858886158045806602"
+	clientId: "858886158045806602",
 });
 
 let prevURL = "",
@@ -16,29 +16,29 @@ presence.on("UpdateData", async () => {
 		details = "Netacad Portal";
 	else if (window.location.pathname.startsWith("/course/")) {
 		details = "Viewing course";
-		state = document.getElementsByTagName("h3")[0].textContent;
+		state = document.querySelectorAll("h3")[0].textContent;
 	} else if (window.location.pathname.startsWith("/grade/report/")) {
 		details = "Viewing grades";
-		state = document.getElementsByTagName("h3")[0].textContent;
+		state = document.querySelectorAll("h3")[0].textContent;
 	} else if (window.location.pathname.startsWith("/local/mail/"))
 		details = "Viewing messages";
 	else if (window.location.pathname.startsWith("/calendar/")) {
 		details = "Viewing calendar";
-		state = document.getElementsByTagName("h3")[0].textContent;
+		state = document.querySelectorAll("h3")[0].textContent;
 	} else if (window.location.pathname.startsWith("/mod/")) {
 		if (
 			document
-				.getElementsByTagName("h2")[0]
+				.querySelectorAll("h2")[0]
 				.textContent.toUpperCase()
 				.includes("EXAM")
 		)
 			details = "Viewing exam";
 		else details = "Viewing course content";
 
-		state = document.getElementsByTagName("h3")[0].textContent;
+		state = document.querySelectorAll("h3")[0].textContent;
 	} else if (window.location.pathname.startsWith("/srwe-dl/")) {
 		details = "Viewing course content";
-		state = document.getElementsByTagName("h1")[0].textContent;
+		state = document.querySelectorAll("h1")[0].textContent;
 	} else if (window.location.pathname.includes("assessment_history"))
 		details = "Viewing Assesment History";
 	else details = "Browsing";
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "netacadlogo",
 		details,
 		state,
-		startTimestamp: timestamp
+		startTimestamp: timestamp,
 	};
 	if (!state) delete presenceData.state;
 

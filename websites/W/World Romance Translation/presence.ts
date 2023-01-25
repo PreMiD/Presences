@@ -1,20 +1,21 @@
 const presence = new Presence({
-		clientId: "857964031700238356"
+		clientId: "857964031700238356",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "wrt_icon",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location;
+		{ pathname, href } = document.location;
 
 	if (pathname === "/") {
 		const searchQuery =
 			document.querySelector<HTMLHeadingElement>("div.releases > h1");
 		if (!searchQuery) presenceData.details = "Melihat Homepage";
 		else {
+			// eslint-disable-next-line unicorn/prefer-dom-node-text-content
 			const { innerText } = searchQuery;
 			presenceData.details = `Sedang Mencari ${innerText.substring(
 				innerText.indexOf("'") + 1,
@@ -47,8 +48,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Lihat Manga",
-				url: document.location.href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/manga/")) {
 		const mangaName =
@@ -60,21 +61,39 @@ presence.on("UpdateData", async () => {
 			{
 				label:
 					pathname === "/manga/" ? "Lihat Daftar Manga" : "Lihat Detail Manga",
-				url: document.location.href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/bookmark/"))
 		presenceData.details = "Membuka Bookmarks";
-	else if (pathname === "/project-wrt/") {
-		presenceData.details = "Melihat Project WRT";
-		presenceData.state = "Lihat Daftar Project WRT";
-	} else if (pathname === "/recruitment/")
-		presenceData.details = "Membuka Halaman Join Us";
-	else if (pathname === "/contact-us/")
-		presenceData.details = "Membuka Halaman Contact Us";
-	else if (pathname === "/privacy-policy/")
-		presenceData.details = "Melihat Kebijakan Privasi";
-	else if (pathname === "/dmca/") presenceData.details = "Melihat DMCA";
+	else {
+		switch (pathname) {
+			case "/project-wrt/": {
+				presenceData.details = "Melihat Project WRT";
+				presenceData.state = "Lihat Daftar Project WRT";
+
+				break;
+			}
+			case "/recruitment/": {
+				presenceData.details = "Membuka Halaman Join Us";
+				break;
+			}
+			case "/contact-us/": {
+				presenceData.details = "Membuka Halaman Contact Us";
+				break;
+			}
+			case "/privacy-policy/": {
+				presenceData.details = "Melihat Kebijakan Privasi";
+				break;
+			}
+			case "/dmca/":
+				{
+					presenceData.details = "Melihat DMCA";
+					// No default
+				}
+				break;
+		}
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

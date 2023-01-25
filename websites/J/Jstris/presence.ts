@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "754149249335296010"
+		clientId: "754149249335296010",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "bigdefault"
+			largeImageKey: "bigdefault",
 		},
 		pathname = document.location.pathname.split("/").splice(1),
 		queryString = document.location.search.substring(1);
@@ -16,14 +16,14 @@ presence.on("UpdateData", async () => {
 		//Inits temporary button array that is to be applied to presenceData later.
 		tempButtons = new Array(0),
 		//Sets button for joining.
-		joinLinkArr = document.getElementsByClassName("joinLink"),
+		joinLinkArr = document.querySelectorAll(".joinLink"),
 		//Sets username
 		username = getUsername();
 
 	if (joinLinkArr.length !== 0) {
 		tempButtons.push({
 			label: "Join",
-			url: joinLinkArr[joinLinkArr.length - 1].textContent
+			url: joinLinkArr[joinLinkArr.length - 1].textContent,
 		});
 	}
 	//Sets button for viewing profile.
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 	if (typeof username !== "undefined") {
 		tempButtons.push({
 			label: "View Profile",
-			url: `${BaseUrl}/u/${username}`
+			url: `${BaseUrl}/u/${username}`,
 		});
 	}
 
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 						if (tempButtons.length !== 2) {
 							tempButtons.unshift({
 								label: "Play Map",
-								url: `${BaseUrl}/?play=6&map=${queryObj.map}`
+								url: `${BaseUrl}/?play=6&map=${queryObj.map}`,
 							});
 						}
 						break;
@@ -133,8 +133,8 @@ presence.on("UpdateData", async () => {
 function getUsername() {
 	try {
 		return document
-			.getElementsByClassName("navbar-right")[0]
-			.getElementsByClassName("dropdown-toggle")[1]
+			.querySelectorAll(".navbar-right")[0]
+			.querySelectorAll(".dropdown-toggle")[1]
 			.textContent.replace(/\n/g, "");
 	} catch (err) {
 		return;
@@ -143,7 +143,7 @@ function getUsername() {
 
 function parseQuery(search: string) {
 	return JSON.parse(
-		`{"${search.replace(/&/g, '","').replace(/=/g, '":"')}"}`,
+		`{"${search.replaceAll("&", '","').replaceAll("=", '":"')}"}`,
 		function (key, value) {
 			return key === "" ? value : decodeURIComponent(value);
 		}

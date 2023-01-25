@@ -1,14 +1,14 @@
 const presence = new Presence({
-		clientId: "869131200948756500"
+		clientId: "869131200948756500",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = location,
+		{ pathname, href } = location,
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (pathname.startsWith("/index")) {
@@ -73,8 +73,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Listen",
-						url: location.href
-					}
+						url: href,
+					},
 				];
 			}
 		}
@@ -112,8 +112,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Listen",
-					url: location.href
-				}
+					url: href,
+				},
 			];
 		}
 	} else presenceData.details = document.title; // for resources in languages other than English

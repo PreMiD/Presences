@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "721986767322087464"
+		clientId: "721986767322087464",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let currentURL = new URL(document.location.href),
@@ -7,7 +7,7 @@ let currentURL = new URL(document.location.href),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
 		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 const updateCallback = {
 		_function: null as () => void,
@@ -19,7 +19,7 @@ const updateCallback = {
 		},
 		get present(): boolean {
 			return this._function !== null;
-		}
+		},
 	},
 	/**
 	 * Initialize/reset presenceData.
@@ -28,7 +28,7 @@ const updateCallback = {
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
 			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		}
 	): void => {
 		currentURL = new URL(document.location.href);
@@ -108,7 +108,7 @@ const updateCallback = {
 			"Edit Post": "postedit",
 			"Report Problem": "reportproblem",
 			"News Archive": "newssearch",
-			"Track Replay Info": "trackreplayshow"
+			"Track Replay Info": "trackreplayshow",
 		};
 
 		if (
@@ -191,134 +191,204 @@ const updateCallback = {
 				document.querySelector("h1").textContent === "Server Error")
 		)
 			presenceData.details = "On a non-existent page";
-		else if (pageType === "home") presenceData.details = "On the home page";
-		else if (pageType === "login") presenceData.details = "Logging in";
-		else if (pageType === "register")
-			presenceData.details = "Registering an account";
-		else if (pageType === "forget")
-			presenceData.details = "Figuring out the password";
-		else if (pageType === "trackshow") {
-			presenceData.details = document.querySelector(
-				`#${idPrefix}_ShowTrackName`
-			).textContent;
-			presenceData.state = document.querySelector(
-				"tr.WindowTableCell1:nth-child(3) > td:nth-child(2) > a:nth-child(3)"
-			).textContent;
-		} else if (pageType === "tracksearch") {
-			let searchSummary: string;
-			if (
-				document.querySelector(`#${idPrefix}_ShowSummary > b:nth-child(1)`)
-					.textContent === "tracks"
-			) {
-				searchSummary = document
-					.querySelector(`#${idPrefix}_ShowSummary`)
-					.textContent.slice(15, this.length - 4);
-			} else {
-				searchSummary = document
-					.querySelector(`#${idPrefix}_ShowSummary`)
-					.textContent.slice(8, this.length - 4);
+		else {
+			switch (pageType) {
+				case "home": {
+					presenceData.details = "On the home page";
+					break;
+				}
+				case "login": {
+					presenceData.details = "Logging in";
+					break;
+				}
+				case "register": {
+					presenceData.details = "Registering an account";
+					break;
+				}
+				case "forget": {
+					presenceData.details = "Figuring out the password";
+					break;
+				}
+				case "trackshow": {
+					presenceData.details = document.querySelector(
+						`#${idPrefix}_ShowTrackName`
+					).textContent;
+					presenceData.state = document.querySelector(
+						"tr.WindowTableCell1:nth-child(3) > td:nth-child(2) > a:nth-child(3)"
+					).textContent;
+
+					break;
+				}
+				case "tracksearch": {
+					let searchSummary: string;
+					if (
+						document.querySelector(`#${idPrefix}_ShowSummary > b:nth-child(1)`)
+							.textContent === "tracks"
+					) {
+						searchSummary = document
+							.querySelector(`#${idPrefix}_ShowSummary`)
+							.textContent.slice(15, this.length - 4);
+					} else {
+						searchSummary = document
+							.querySelector(`#${idPrefix}_ShowSummary`)
+							.textContent.slice(8, this.length - 4);
+					}
+					presenceData.details = "Searching for a track";
+					if (document.querySelector(".TextFilter")) {
+						presenceData.state = `${document
+							.querySelector(".TextFilter")
+							.textContent.slice(9, this.length - 1)}, ${searchSummary}`;
+					} else {
+						presenceData.state =
+							searchSummary[0].toUpperCase() + searchSummary.slice(1);
+					}
+
+					break;
+				}
+				case "tracksigns": {
+					presenceData.details = "Viewing track signs";
+					break;
+				}
+				case "trackuploadtrack": {
+					presenceData.details = "Uploading a track";
+					break;
+				}
+				case "recordmassupload": {
+					presenceData.details = "Submitting replays";
+					break;
+				}
+				case "userrecords": {
+					const searchSummary = document
+						.querySelector(`#${idPrefix}_ShowSummary`)
+						.textContent.slice(16, this.length - 4);
+					presenceData.details = "Viewing the leaderboards";
+					if (
+						(document.querySelector(`#${idPrefix}_GetUser`) as HTMLInputElement)
+							.value
+					) {
+						presenceData.state = `${
+							(
+								document.querySelector(
+									`#${idPrefix}_GetUser`
+								) as HTMLInputElement
+							).value
+						}, ${searchSummary}`;
+					} else {
+						presenceData.state =
+							searchSummary[0].toUpperCase() + searchSummary.slice(1);
+					}
+
+					break;
+				}
+				case "forumshow":
+				case "forumsshow": {
+					presenceData.details = "Viewing the forums";
+					if (pageType === "forumshow") {
+						presenceData.state = document
+							.querySelector(".WindowTitle")
+							.textContent.trim();
+					}
+
+					break;
+				}
+				case "threadshow": {
+					presenceData.details = "Viewing a thread";
+					presenceData.state = document.querySelector(
+						`#${idPrefix}_ShowSubject`
+					).textContent;
+
+					break;
+				}
+				case "playpal": {
+					presenceData.details = "Viewing PlayPal";
+					break;
+				}
+				case "playpalonline": {
+					presenceData.details = "Viewing PlayPal Online";
+					break;
+				}
+				case "trackbeta": {
+					presenceData.details = "Viewing TrackBeta";
+					break;
+				}
+				case "usersearch": {
+					const searchSummary = document
+						.querySelector(`#${idPrefix}_ShowSummary`)
+						.textContent.slice(15, this.length - 4);
+					presenceData.details = "Searching for a user";
+					if (document.querySelector(`#${idPrefix}_ShowName`)) {
+						presenceData.state = `${
+							document.querySelector(`#${idPrefix}_ShowName`).textContent
+						}, ${searchSummary}`;
+					} else {
+						presenceData.state =
+							searchSummary[0].toUpperCase() + searchSummary.slice(1);
+					}
+
+					break;
+				}
+				case "usershow": {
+					presenceData.details = "Viewing a user's info";
+					presenceData.state = document.querySelector(
+						`#${idPrefix}_ShowLoginId`
+					).textContent;
+
+					break;
+				}
+				case "trackpacksearch": {
+					const searchSummary = document
+						.querySelector(`#${idPrefix}_ShowSummary`)
+						.textContent.slice(20, this.length - 4);
+					presenceData.details = "Searching for a user pack";
+					if (document.querySelector(`#${idPrefix}_ShowName`)) {
+						presenceData.state = `${
+							document.querySelector(`#${idPrefix}_ShowName`).textContent
+						}, ${searchSummary}`;
+					} else {
+						presenceData.state =
+							searchSummary[0].toUpperCase() + searchSummary.slice(1);
+					}
+
+					break;
+				}
+				case "postupdate": {
+					presenceData.details = "Writing a private message";
+					break;
+				}
+				case "trackpackshow": {
+					presenceData.details = "Viewing a track pack";
+					presenceData.state = `${
+						document.querySelector(`#${idPrefix}_ShowPackName`).textContent
+					} by ${
+						document.querySelector(
+							"#Table7 > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > a:nth-child(3)"
+						).textContent
+					}`;
+
+					break;
+				}
+				case "postedit": {
+					presenceData.details = "Editing a post";
+					break;
+				}
+				case "reportproblem": {
+					presenceData.details = "Reporting something";
+					break;
+				}
+				case "newssearch": {
+					presenceData.details = "Viewing the news archive";
+					break;
+				}
+				case "trackreplayshow": {
+					presenceData.details = "Viewing the replay history";
+					presenceData.state = document.querySelector(
+						`#${idPrefix}_Windowrow10 a`
+					).textContent;
+
+					break;
+				}
+				// No default
 			}
-			presenceData.details = "Searching for a track";
-			if (document.querySelector(".TextFilter")) {
-				presenceData.state = `${document
-					.querySelector(".TextFilter")
-					.textContent.slice(9, this.length - 1)}, ${searchSummary}`;
-			} else {
-				presenceData.state =
-					searchSummary[0].toUpperCase() + searchSummary.slice(1);
-			}
-		} else if (pageType === "tracksigns")
-			presenceData.details = "Viewing track signs";
-		else if (pageType === "trackuploadtrack")
-			presenceData.details = "Uploading a track";
-		else if (pageType === "recordmassupload")
-			presenceData.details = "Submitting replays";
-		else if (pageType === "userrecords") {
-			const searchSummary = document
-				.querySelector(`#${idPrefix}_ShowSummary`)
-				.textContent.slice(16, this.length - 4);
-			presenceData.details = "Viewing the leaderboards";
-			if (
-				(document.querySelector(`#${idPrefix}_GetUser`) as HTMLInputElement)
-					.value
-			) {
-				presenceData.state = `${
-					(document.querySelector(`#${idPrefix}_GetUser`) as HTMLInputElement)
-						.value
-				}, ${searchSummary}`;
-			} else {
-				presenceData.state =
-					searchSummary[0].toUpperCase() + searchSummary.slice(1);
-			}
-		} else if (pageType === "forumshow" || pageType === "forumsshow") {
-			presenceData.details = "Viewing the forums";
-			if (pageType === "forumshow") {
-				presenceData.state = document
-					.querySelector(".WindowTitle")
-					.textContent.trim();
-			}
-		} else if (pageType === "threadshow") {
-			presenceData.details = "Viewing a thread";
-			presenceData.state = document.querySelector(
-				`#${idPrefix}_ShowSubject`
-			).textContent;
-		} else if (pageType === "playpal") presenceData.details = "Viewing PlayPal";
-		else if (pageType === "playpalonline")
-			presenceData.details = "Viewing PlayPal Online";
-		else if (pageType === "trackbeta")
-			presenceData.details = "Viewing TrackBeta";
-		else if (pageType === "usersearch") {
-			const searchSummary = document
-				.querySelector(`#${idPrefix}_ShowSummary`)
-				.textContent.slice(15, this.length - 4);
-			presenceData.details = "Searching for a user";
-			if (document.querySelector(`#${idPrefix}_ShowName`)) {
-				presenceData.state = `${
-					document.querySelector(`#${idPrefix}_ShowName`).textContent
-				}, ${searchSummary}`;
-			} else {
-				presenceData.state =
-					searchSummary[0].toUpperCase() + searchSummary.slice(1);
-			}
-		} else if (pageType === "usershow") {
-			presenceData.details = "Viewing a user's info";
-			presenceData.state = document.querySelector(
-				`#${idPrefix}_ShowLoginId`
-			).textContent;
-		} else if (pageType === "trackpacksearch") {
-			const searchSummary = document
-				.querySelector(`#${idPrefix}_ShowSummary`)
-				.textContent.slice(20, this.length - 4);
-			presenceData.details = "Searching for a user pack";
-			if (document.querySelector(`#${idPrefix}_ShowName`)) {
-				presenceData.state = `${
-					document.querySelector(`#${idPrefix}_ShowName`).textContent
-				}, ${searchSummary}`;
-			} else {
-				presenceData.state =
-					searchSummary[0].toUpperCase() + searchSummary.slice(1);
-			}
-		} else if (pageType === "postupdate")
-			presenceData.details = "Writing a private message";
-		else if (pageType === "trackpackshow") {
-			presenceData.details = "Viewing a track pack";
-			presenceData.state = `${
-				document.querySelector(`#${idPrefix}_ShowPackName`).textContent
-			} by ${
-				document.querySelector(
-					"#Table7 > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > a:nth-child(3)"
-				).textContent
-			}`;
-		} else if (pageType === "postedit") presenceData.details = "Editing a post";
-		else if (pageType === "reportproblem")
-			presenceData.details = "Reporting something";
-		else if (pageType === "newssearch")
-			presenceData.details = "Viewing the news archive";
-		else if (pageType === "trackreplayshow") {
-			presenceData.details = "Viewing the replay history";
-			presenceData.state = document.querySelector(
-				`#${idPrefix}_Windowrow10 a`
-			).textContent;
 		}
 	}
 })();

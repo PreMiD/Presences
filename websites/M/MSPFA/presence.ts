@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "717795432251654200"
+		clientId: "717795432251654200",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	// This is better than having a lot of (almost) empty switch cases
@@ -23,13 +23,13 @@ const presence = new Presence({
 		"/privacy/": "Reading the privacy policy",
 		"/terms/": "Reading the ToS",
 		"/log/": "Reading an adventure log",
-		"/search/": "Searching an adventure"
+		"/search/": "Searching an adventure",
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	switch (document.location.pathname) {
 		case "/stories/":

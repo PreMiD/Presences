@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "635876670146084880"
+	clientId: "635876670146084880",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "coin"
+			largeImageKey: "coin",
 		},
 		q = new URLSearchParams(window.location.search);
 
@@ -15,25 +15,28 @@ presence.on("UpdateData", async () => {
 			window.location.pathname.toLowerCase() === "/weekly"
 		) {
 			presenceData.state = `🔽 ${
-				document.getElementsByClassName("inline smaller spaced")[0].textContent
-			} | 👍 ${
-				document.getElementsByClassName("inline smaller spaced")[1]
-			} | 🔵 ${document.getElementsByClassName("orbs")[1].textContent}`;
+				document.querySelectorAll(".inline.smaller.spaced")[0].textContent
+			} | 👍 ${document.querySelectorAll(".inline.smaller.spaced")[1]} | 🔵 ${
+				document.querySelectorAll(".orbs")[1].textContent
+			}`;
 			presenceData.details = `${
-				document.getElementsByTagName("h1")[0].textContent
-			} ${document.getElementById("authorLink").textContent}`;
+				document.querySelectorAll("h1")[0].textContent
+			} ${document.querySelector("#authorLink").textContent}`;
 			presenceData.smallImageKey = `diff_${document
-				.getElementById("difficultytext")
+				.querySelector("#difficultytext")
 				.textContent.toLowerCase()
 				.replace("<br>", "_")}`;
 			presenceData.smallImageText = `${document
-				.getElementById("difficultytext")
+				.querySelector("#difficultytext")
 				.textContent.replace("<br>", " ")}`;
 		}
 
 		// Homepage
 		if (window.location.pathname.toLowerCase() === "/") {
-			if (document.getElementById("credits").style.display === "block") {
+			if (
+				document.querySelector<HTMLElement>("#credits").style.display ===
+				"block"
+			) {
 				presenceData.details = "Viewing the credits";
 				presenceData.state = "❤";
 			} else presenceData.details = "Viewing the homepage";
@@ -118,7 +121,7 @@ presence.on("UpdateData", async () => {
 								break;
 							default:
 								presenceData.state = `Searching for ${
-									document.getElementById("header").textContent
+									document.querySelector("#header").textContent
 								}`;
 								break;
 						}

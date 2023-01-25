@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "760591393281277983"
+		clientId: "721748388143562852",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	}),
 	media: MediaObj = {
 		// anyone is welcome to suggest more metadata via GH issues
@@ -20,7 +20,7 @@ const presence = new Presence({
 		trackNumber: null,
 		showName: null,
 		seasonNumber: null,
-		episodeNumber: null
+		episodeNumber: null,
 	};
 let isShow = false,
 	isSong = false,
@@ -40,10 +40,7 @@ function decodeReq(entity: Element): string {
 	return txt.textContent;
 }
 
-function getTag(
-	collection: HTMLCollectionOf<Element>,
-	tagName: string
-): Element {
+function getTag(collection: NodeListOf<Element>, tagName: string): Element {
 	for (const tag of collection)
 		if (tag.getAttribute("name") === tagName) return tag;
 }
@@ -54,7 +51,7 @@ presence.on("UpdateData", async () => {
 		document.querySelector(".footer").textContent.includes("VLC")
 	) {
 		const presenceData: PresenceData = {
-			largeImageKey: "vlc"
+			largeImageKey: "vlc",
 		};
 
 		if (media.state !== prev) {
@@ -68,11 +65,9 @@ presence.on("UpdateData", async () => {
 					media.album = null;
 
 				presenceData.details =
-					(media.title
-						? media.title
-						: media.trackNumber
-						? `Track N°${media.trackNumber}`
-						: "A song") + (media.album ? ` on ${media.album}` : "");
+					((media.title ?? "") +
+						(media.trackNumber ? ` Track N°${media.trackNumber}` : "") ||
+						"A song") + (media.album ? ` on ${media.album}` : "");
 				media.artist
 					? (presenceData.state = `by ${media.artist}`)
 					: media.filename
@@ -164,21 +159,20 @@ const getStatus = setLoop(function () {
 				if (req.status === 200) {
 					if (i > 0) i = 0;
 
-					req.responseXML.getElementsByTagName("state")[0].textContent.length >
-					0
+					req.responseXML.querySelectorAll("state")[0].textContent.length > 0
 						? (media.state =
-								req.responseXML.getElementsByTagName("state")[0].textContent)
+								req.responseXML.querySelectorAll("state")[0].textContent)
 						: (media.state = "stopped");
 
 					if (media.state !== "stopped") {
 						media.time =
-							req.responseXML.getElementsByTagName("time")[0].textContent;
+							req.responseXML.querySelectorAll("time")[0].textContent;
 						media.length =
-							req.responseXML.getElementsByTagName("length")[0].textContent;
+							req.responseXML.querySelectorAll("length")[0].textContent;
 						media.loop =
-							req.responseXML.getElementsByTagName("loop")[0].textContent;
+							req.responseXML.querySelectorAll("loop")[0].textContent;
 						media.repeat =
-							req.responseXML.getElementsByTagName("repeat")[0].textContent;
+							req.responseXML.querySelectorAll("repeat")[0].textContent;
 					} else {
 						media.time = null;
 						media.length = null;
@@ -186,8 +180,8 @@ const getStatus = setLoop(function () {
 						media.repeat = null;
 					}
 
-					if (navigator.userAgent.toLowerCase().indexOf("firefox") > -1) {
-						const collection = req.responseXML.getElementsByTagName("info");
+					if (navigator.userAgent.toLowerCase().includes("firefox")) {
+						const collection = req.responseXML.querySelectorAll("info");
 
 						// basically the same thing but with a Firefox workaround because it's annoying
 
@@ -275,9 +269,9 @@ const getStatus = setLoop(function () {
 							media.album = null;
 						}
 
-						req.responseXML.getElementsByName("trackNumber")[0]
+						req.responseXML.getElementsByName("track_number")[0]
 							? (media.trackNumber = decodeReq(
-									req.responseXML.getElementsByName("trackNumber")[0]
+									req.responseXML.getElementsByName("track_number")[0]
 							  ))
 							: (media.trackNumber = null);
 
@@ -298,6 +292,8 @@ const getStatus = setLoop(function () {
 							media.episodeNumber = null;
 						}
 					}
+					for (const key of Object.keys(media))
+						media[key] = media[key]?.replace("&#39;", "'");
 				} else {
 					i++;
 					if (i > 4) {
@@ -320,13 +316,13 @@ const getStatus = setLoop(function () {
 		req.open(
 			"GET",
 			`${document.location.protocol}//${document.location.hostname}:${
-				document.location.port ? document.location.port : ""
+				document.location.port ?? ""
 			}/requests/status.xml`,
 			true
 		);
 		req.send();
 	}
-}, (navigator.userAgent.toLowerCase().indexOf("firefox") > -1 ? 5 : 2) * 1000);
+}, (navigator.userAgent.toLowerCase().includes("firefox") ? 5 : 2) * 1000);
 
 interface MediaObj {
 	time?: string;
@@ -342,4 +338,5 @@ interface MediaObj {
 	showName?: string;
 	seasonNumber?: string;
 	episodeNumber?: string;
+	[key: string]: string;
 }
