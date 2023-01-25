@@ -48,6 +48,7 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname === "/profile/account/main": {
 			presenceData.details = "Browsing";
+                        presenceData.largeImageKey = "https://i.imgur.com/Ldqj50W.png";
 			break;
 		}
 		case pathname === "/static/streaming/streaming.html": {
