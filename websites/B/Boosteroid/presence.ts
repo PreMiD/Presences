@@ -34,7 +34,6 @@ presence.on("UpdateData", async () => {
 					.innerHTML
 			}`;
 			presenceData.largeImageKey = "https://i.imgur.com/Ldqj50W.png";
-			presence.setActivity(presenceData);
 			break;
 		}
 		case pathname.startsWith("/application/"): {
@@ -43,7 +42,6 @@ presence.on("UpdateData", async () => {
 				document.querySelector("h1") as HTMLElement
 			).innerHTML;
 			presenceData.largeImageKey = "https://i.imgur.com/Ldqj50W.png";
-			presence.setActivity(presenceData);
 			break;
 		}
 		case pathname === "/profile/account/main": {
@@ -58,7 +56,6 @@ presence.on("UpdateData", async () => {
 			if (!gameid) {
 				presenceData.details = "Unknown Game";
 				presenceData.largeImageKey = "https://i.imgur.com/cnczdmM.png";
-				presence.setActivity(presenceData);
 			} else {
 				const gameid = await getGame(
 					Number(window.localStorage.getItem("appId"))
@@ -66,9 +63,9 @@ presence.on("UpdateData", async () => {
 				presenceData.details = gameid.name;
 				presenceData.state = `Platform: ${gameid.platform}`;
 				presenceData.largeImageKey = gameid.icon;
-				presence.setActivity(presenceData);
 			}
 			break;
 		}
 	}
+	presence.setActivity(presenceData);
 });
