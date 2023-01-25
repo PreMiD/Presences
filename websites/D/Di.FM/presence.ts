@@ -16,11 +16,13 @@ presence.on("UpdateData", () => {
 		presenceData.state =
 			document.querySelectorAll(".track-name")[0].textContent;
 		presenceData.smallImageKey = "play";
-		let str1 = document.querySelector("div > section.track-region.col > div > div.artwork > div > img");
-		let str = str1.outerHTML
-		let match = str.match(/"(.*?)"/);
-		let betweenQuotes = match[1].replace(/"/g,'');
-		presenceData.largeImageKey = 'https:' + betweenQuotes
+		
+		const str = document.querySelector(
+			"div > section.track-region.col > div > div.artwork > div > img"
+		).outerHTML
+		 
+		 ;
+		presenceData.largeImageKey = `https:${str.match(/"(.*?)"/)[1].replace(/"/g, "")}`;
 	} else {
 		presenceData.state = "Browsing...";
 		presenceData.smallImageKey = "pause";
