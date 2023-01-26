@@ -91,5 +91,8 @@ presence.on("UpdateData", async () => {
 		return;
 	}
 
+	/* Reset timestamp */
+	if (!pathname.includes("/room")) startTimestamp = null;
+
 	presence.setActivity(presenceData);
 });
