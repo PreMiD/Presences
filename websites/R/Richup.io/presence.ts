@@ -17,10 +17,10 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "rio-logo",
 		},
 		{ pathname, href } = location,
-		settings = {
-			showJoinRoomButton: await presence.getSetting("join-room-button"),
-			showProfileButton: await presence.getSetting("profile-button"),
-		};
+		[showJoinRoomButton, showProfileButton] = await Promise.all([
+			presence.getSetting("join-room-button"),
+			presence.getSetting("profile-button"),
+		]);
 
 	if (pathname.includes("/store")) {
 		presenceData.details = "Store";
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 			.querySelector("#app > div > div > div:nth-child(3)")
 			?.textContent?.includes("Game settings");
 
-		if (settings.showJoinRoomButton === true && gameSettings === true) {
+		if (showJoinRoomButton === true && gameSettings === true) {
 			presenceData.buttons = [
 				{
 					label: "Join Room",
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 			"header > div > :last-child > span"
 		).textContent;
 
-		if (settings.showProfileButton === true) {
+		if (showProfileButton === true) {
 			presenceData.buttons = [
 				{
 					label: "View Profile",
