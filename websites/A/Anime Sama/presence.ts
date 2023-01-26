@@ -1,13 +1,15 @@
 const presence = new Presence({ clientId: "1016797607370162256" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	staticPages: { [name: string]: string } = {
-		search: "Recherche un anime ou un scan",
 		"": "Visionne la page d'accueil",
 		planning: "Regarde le planning des sorties",
+		aide: "Lit la page d'aide",
+		profil: "visionne son profil",
+		catalogue: "Parcourir le catalogue",
 	};
 
 enum Assets {
-	Logo = "https://i.imgur.com/Q4kwFRA.jpg",
+	Logo = "https://i.imgur.com/BRpmbpT.png",
 	Pause = "https://i.imgur.com/BtWUfrZ.png",
 	Play = "https://i.imgur.com/KNneWuF.png",
 	Reading = "https://i.imgur.com/53N4eY6.png",
@@ -36,69 +38,53 @@ presence.on("UpdateData", async () => {
 		pathArr = pathname.split("/"),
 		showButtons = await presence.getSetting<boolean>("buttons");
 
-	switch (pathArr[1]) {
-		case "anime":
-			if (pathArr.length === 3) presenceData.details = "Parcours les animés";
-			else if (pathArr.length === 4) {
-				presenceData.details = "Regarde la page de l'animé";
-				presenceData.state = document.querySelector("h5").textContent;
-				presenceData.buttons = [{ label: "Voir la Page", url: href }];
-			} else {
-				const [anime, season] = document
-						.querySelector(".soustitreaccueil")
-						.textContent.split(" - "),
-					selectEps = document.querySelector<HTMLSelectElement>("#selectEps"),
-					selectLecteur =
-						document.querySelector<HTMLSelectElement>("#selectLecteurs");
-				presenceData.details = `Regarde ${anime}`;
-				presenceData.state = `${
-					season ? `${season[0].toUpperCase() + season.slice(1)} - ` : ""
-				}${selectEps.options[selectEps.selectedIndex].value}`;
+	if (Object.keys(staticPages).includes(pathArr[1]) && pathArr.length <= 3)
+		presenceData.details = staticPages[pathArr[1]];
+	else if (pathArr.length === 4) {
+		presenceData.details =
+			document.querySelector("h2.border-slate-500")?.textContent === "Anime"
+				? "Regarde la page de l'anime"
+				: "Regarde la page du manga";
+		presenceData.state = document
+			.querySelector("#titreOeuvre")
+			.textContent.trim();
+		presenceData.buttons = [{ label: "Voir la Page", url: href }];
+	} else if (document.querySelector<HTMLSelectElement>("#selectEpisodes")) {
+		const season = document.querySelector("#avOeuvre").textContent,
+			selectEps = document.querySelector<HTMLSelectElement>("#selectEpisodes"),
+			selectLecteur =
+				document.querySelector<HTMLSelectElement>("#selectLecteurs");
+		presenceData.details = `Regarde ${
+			document.querySelector("#titreOeuvre").textContent
+		}`;
+		presenceData.state = `${season ? `${season} - ` : ""}${
+			selectEps.options[selectEps.selectedIndex].value
+		}`;
 
-				presenceData.buttons = [{ label: "Voir l'Anime", url: href }];
-				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText =
-					selectLecteur.options[selectLecteur.selectedIndex].value;
+		presenceData.buttons = [{ label: "Voir l'Anime", url: href }];
+		presenceData.smallImageKey = Assets.Pause;
+		presenceData.smallImageText =
+			selectLecteur.options[selectLecteur.selectedIndex].value;
 
-				if (!paused) {
-					[presenceData.startTimestamp, presenceData.endTimestamp] =
-						presence.getTimestamps(currentTime, duration);
-					presenceData.smallImageKey = Assets.Play;
-				}
-			}
-			break;
-		case "scan":
-			if (pathArr.length === 3) presenceData.details = "Parcours les scans";
-			else {
-				const selectEps =
-						document.querySelector<HTMLSelectElement>("#selectChap"),
-					selectLang =
-						document.querySelector<HTMLSelectElement>("#selectLanguesScan"),
-					chapter = selectEps.options[selectEps.selectedIndex].value.trim(),
-					scanTitle = document.querySelector("h5").textContent;
-				if (chapter === "Choisissez un chapitre") {
-					presenceData.details = "Regarde la page du scan";
-					presenceData.state = scanTitle;
-				} else {
-					presenceData.details = `Lit ${scanTitle}`;
-					presenceData.state = `${chapter} - ${
-						selectLang.options[selectLang.selectedIndex].value
-					}`;
-
-					const selectLecteur = document.querySelector<HTMLSelectElement>(
-						"#selectLecteursScan"
-					);
-					presenceData.smallImageKey = Assets.Reading;
-					presenceData.smallImageText =
-						selectLecteur.options[selectLecteur.selectedIndex].value;
-				}
-
-				presenceData.buttons = [{ label: "Voir le Scan", url: href }];
-			}
-			break;
-		default:
-			if (Object.keys(staticPages).includes(pathArr[1]))
-				presenceData.details = staticPages[pathArr[1]];
+		if (!paused) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(currentTime, duration);
+			presenceData.smallImageKey = Assets.Play;
+		}
+	} else {
+		const selectChapitres =
+			document.querySelector<HTMLSelectElement>("#selectChapitres");
+		presenceData.details = `Lit ${
+			document.querySelector("#titreOeuvre").textContent
+		}`;
+		presenceData.state =
+			selectChapitres.options[selectChapitres.selectedIndex].value.trim();
+		const selectLecteur =
+			document.querySelector<HTMLSelectElement>("#selectLecteurs");
+		presenceData.smallImageKey = Assets.Reading;
+		presenceData.smallImageText =
+			selectLecteur.options[selectLecteur.selectedIndex].value;
+		presenceData.buttons = [{ label: "Voir le Scan", url: href }];
 	}
 
 	if (!showButtons) delete presenceData.buttons;
