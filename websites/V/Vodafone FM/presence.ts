@@ -29,7 +29,10 @@ presence.on("UpdateData", async () => {
 
 	const artist = document.querySelector("#artist_name")?.textContent,
 		song = document.querySelector("#song_name")?.textContent;
-	if (artist && song) presenceData.state = `${artist} - ${song}`;
+	if (artist && song) {
+		presenceData.details = song;
+		presenceData.state = artist;
+	}
 
 	const cover = document.querySelector<HTMLImageElement>("#cover");
 	if (cover && !cover.src.includes("/images/nocover.png"))
