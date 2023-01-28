@@ -7,7 +7,7 @@ const presence = new Presence({
 				buttonListenAlong: "general.buttonListenAlong",
 				listeningMusic: "general.listeningMusic",
 				pause: "general.paused",
-				play: "general.playing",
+				live: "general.live",
 				viewPage: "general.viewPage",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.querySelector("#play").classList.contains("hidden")) {
 		presenceData.smallImageKey = "https://i.imgur.com/xiZprpt.png";
-		presenceData.smallImageText = strings.play;
+		presenceData.smallImageText = strings.live;
 	} else {
 		presenceData.smallImageKey = "https://i.imgur.com/w1jwJTh.png";
 		presenceData.smallImageText = strings.pause;
