@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  
+  "author": {
+    "name": "I Am Lel#5090",
+    "id": "850319718920224798"
+
+  },
+  "service": "Kemono.Party",
+  "description": {
+    "en": "Welcome to Kemono, a scraper for Patreon, Pixiv Fanbox, SubscribeStar, Gumroad, Discord, DLsite, and Fantia."
+  },
+  "url": "kemono.party",
+  "regExp": "([a-z0-9-]+[.])*kemono[.]party[/]",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/mwpEkf3.png",
+  "thumbnail": "https://i.imgur.com/7oehiJm.png",
+  "color": "#F05E16",
+  "category": "anime",
+  "tags": [
+    "nsfw",
+    "patreon",
+    "pixiv",
+    "fanbox",
+    "subscribestar",
+    "gumroad",
+    "discord",
+    "dlsite",
+    "fantia",
+    "anime",
+    "art"
+  ]
+  
+}
