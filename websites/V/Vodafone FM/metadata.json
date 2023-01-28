@@ -19,5 +19,11 @@
 		"radio",
 		"vodafone",
 		"fm"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
 	]
 }
