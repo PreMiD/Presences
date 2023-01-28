@@ -4,20 +4,24 @@ const presence = new Presence({
 	getStrings = async () =>
 		presence.getStrings(
 			{
-				play: "general.playing",
-				pause: "general.paused",
+				buttonListenAlong: "general.buttonListenAlong",
 				listeningMusic: "general.listeningMusic",
+				pause: "general.paused",
+				play: "general.playing",
+				viewPage: "general.viewPage",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
-let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
-	strings = await getStrings();
-	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/6IUf3O6.png",
-		details: strings.listeningMusic,
-	};
+	const [strings, buttons] = await Promise.all([
+			getStrings(),
+			presence.getSetting<boolean>("buttons"),
+		]),
+		presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/6IUf3O6.png",
+			details: strings.listeningMusic,
+		};
 
 	if (document.querySelector("#play").classList.contains("hidden")) {
 		presenceData.smallImageKey = "https://i.imgur.com/xiZprpt.png";
@@ -37,6 +41,15 @@ presence.on("UpdateData", async () => {
 	const cover = document.querySelector<HTMLImageElement>("#cover");
 	if (cover && !cover.src.includes("/images/nocover.png"))
 		presenceData.largeImageKey = cover.src;
+
+	if (buttons) {
+		presenceData.buttons = [
+			{
+				label: strings.buttonListenAlong,
+				url: document.URL,
+			},
+		];
+	}
 
 	presence.setActivity(presenceData);
 });
