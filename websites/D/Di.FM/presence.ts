@@ -17,13 +17,11 @@ presence.on("UpdateData", () => {
 			document.querySelectorAll(".track-name")[0].textContent;
 		presenceData.smallImageKey = "play";
 
-		const str = document.querySelector(
-			"div > section.track-region.col > div > div.artwork > div > img"
-		).outerHTML;
-
-		presenceData.largeImageKey = `https:${str
-			.match(/"(.*?)"/)[1]
-			.replace(/"/g, "")}`;
+		presenceData.largeImageKey = (<HTMLImageElement>(
+			document.querySelector(
+				"div > section.track-region.col > div > div.artwork > div > img"
+			)
+		)).src;
 	} else {
 		presenceData.state = "Browsing...";
 		presenceData.smallImageKey = "pause";
