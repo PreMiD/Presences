@@ -4,54 +4,29 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
+	let presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/mwpEkf3.png",
 		startTimestamp: browsingTimestamp,
 	};
+	
+	const pages: Record<string, PresenceData> = {
+			"/": { details: "Viewing Home Page" },
+			"/importer": { details: "importing from Paysite" },
+			"/importer/tutorial": { details: "Reading FAQ" },
+			"/account": { details: "Checking out their account" },
+			"/account/keys": { details: "Checking out their keys" },
+			"/posts": { details: "Browsing through posts" },
+			"/artists": { details: "Browsing through artists" },
+			"/artists/updated": { details: "Browsing through updated artists" },
+			"/favorites": { details: "Checking out their favorites" },
+			"/dmca": { details: "Reading DMCA notice" }
+		};
+
+	for (const [path, data] of Object.entries(pages))
+		if (location.pathname === path) presenceData = { ...presenceData, ...data };
+
 	switch (document.location.hostname) {
 		case "kemono.party": {
-			switch (document.location.pathname) {
-				case "/": {
-					presenceData.details = "Viewing home page";
-					break;
-				}
-				case "/importer": {
-					presenceData.details = "Importing from Paysite";
-					break;
-				}
-				case "/importer/tutorial": {
-					presenceData.details = "Reading FAQ";
-					break;
-				}
-				case "/account/": {
-					presenceData.details = "Checking out their account";
-					break;
-				}
-				case "/account/keys": {
-					presenceData.details = "Checking out their keys";
-					break;
-				}
-				case "/posts": {
-					presenceData.details = "Browsing through posts";
-					break;
-				}
-				case "/favorites": {
-					presenceData.details = "Checking out their favorites";
-					break;
-				}
-				case "/dmca": {
-					presenceData.details = "Reading DMCA notice";
-					break;
-				}
-				case "/artists": {
-					presenceData.details = "Browsing through artists";
-					break;
-				}
-				case "/artists/updated": {
-					presenceData.details = "Browsing through updated artists";
-					break;
-				}
-				default:
 					if (location.pathname.includes("/user/")) {
 						if (location.pathname.includes("/post/")) {
 							presenceData.details = `${
@@ -78,7 +53,7 @@ presence.on("UpdateData", async () => {
 							}`;
 						}
 					}
-			}
+			
 			break;
 		}
 		case "status.kemono.party": {
