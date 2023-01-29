@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "brfmlogo",
+			largeImageKey: "https://i.imgur.com/2GSzYEu.png",
 			startTimestamp: browsingTimestamp,
 		},
 		spotifyUrl = document

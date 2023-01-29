@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "pastebinlogo",
+			largeImageKey: "https://i.imgur.com/Y0yUAW1.png",
 			startTimestamp: browsingTimestamp,
 		},
 		urlData = window.location.pathname.replace(/^\/([^/]*).*$/, "$1");

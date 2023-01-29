@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 		document.querySelector(".footer").textContent.includes("VLC")
 	) {
 		const presenceData: PresenceData = {
-			largeImageKey: "vlc",
+			largeImageKey: "https://i.imgur.com/WuzLOQu.png",
 		};
 
 		if (media.state !== prev) {

@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 
 	const path = window.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "peacock",
+			largeImageKey: "https://i.imgur.com/6t52fkP.png",
 			startTimestamp: elapsed,
 		};
 

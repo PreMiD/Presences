@@ -15,7 +15,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "ard_mediathek",
+			largeImageKey: "https://i.imgur.com/baUokNs.png",
 		},
 		path = location.pathname.replace(/\/?$/, "/");
 

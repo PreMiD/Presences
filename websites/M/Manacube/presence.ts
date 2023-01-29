@@ -7,7 +7,7 @@ let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "manacube",
+		largeImageKey: "https://i.imgur.com/sBgHblJ.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "manacube.com")

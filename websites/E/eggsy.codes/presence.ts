@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 
 		if (state && details) {
 			presence.setActivity({
-				largeImageKey: "ec-logo",
+				largeImageKey: "https://i.imgur.com/MziDVWO.png",
 				details,
 				state,
 				smallImageKey: smallImage ?? "SOMETHING-SKETCHY",
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 			});
 		} else {
 			presence.setActivity({
-				largeImageKey: "ec-logo",
+				largeImageKey: "https://i.imgur.com/MziDVWO.png",
 				details: "Viewing a page:",
 				state: "Homepage",
 				startTimestamp: Math.floor(Date.now() / 1000),

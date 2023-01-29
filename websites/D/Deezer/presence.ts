@@ -10,7 +10,7 @@ let oldLang: string = null,
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-			largeImageKey: "deezer",
+			largeImageKey: "https://i.imgur.com/GKMQi3h.png",
 		},
 		strings = await getStrings(),
 		paused = false;

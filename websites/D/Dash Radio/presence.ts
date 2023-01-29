@@ -13,7 +13,7 @@ let songName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/o4Ea2f9.png",
 	};
 
 	songName = document.querySelector(

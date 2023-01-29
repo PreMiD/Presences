@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("roomCode"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/nq0goQ9.png",
 			startTimestamp: browsingStamp,
 		};
 

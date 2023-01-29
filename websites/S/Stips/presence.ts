@@ -339,7 +339,7 @@ presence.on("UpdateData", () => {
 
 	presence.setActivity({
 		details: details ?? translate(isMale).default,
-		largeImageKey: "stips",
+		largeImageKey: "https://i.imgur.com/xARdqan.png",
 		smallImageKey: hasDark ? "stipspin_dark" : "stipspin_light",
 		startTimestamp: elapsed,
 		smallImageText,

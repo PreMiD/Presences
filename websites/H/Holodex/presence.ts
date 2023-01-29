@@ -356,7 +356,7 @@ presence.on("UpdateData", async () => {
 	dataUpdater.updateAll();
 
 	const presenceData: PresenceData = {
-		largeImageKey: "largeimage",
+		largeImageKey: "https://i.imgur.com/ywSCOHi.png",
 		smallImageKey: data.smallimage.image,
 		smallImageText: data.smallimage.hover,
 		details: data.details,

@@ -46,7 +46,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/ZvjZHER.png",
 			startTimestamp: browsingTimestamp,
 		},
 		path = window.location.href,

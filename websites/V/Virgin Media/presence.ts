@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "virginmedia",
+			largeImageKey: "https://i.imgur.com/dQ4c4gs.png",
 		},
 		pageTitle = document.title;
 	let currentPage;

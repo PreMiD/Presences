@@ -7,7 +7,7 @@ let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "archon",
+		largeImageKey: "https://i.imgur.com/2DuBBUW.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

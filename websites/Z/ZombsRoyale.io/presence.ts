@@ -6,7 +6,7 @@ let matchStart: number = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/KPoJ18U.png",
 		},
 		currentGameState = await getPageletiable("game.currentGameState");
 

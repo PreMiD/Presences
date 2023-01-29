@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
 			details: "Other",
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/TS5xvXb.png",
 			startTimestamp: browsingTimestamp,
 			buttons: [
 				{

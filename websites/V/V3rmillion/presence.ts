@@ -8,7 +8,7 @@ let profile: HTMLElement, title: HTMLElement;
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo-512",
+		largeImageKey: "https://i.imgur.com/XILEaPE.png",
 	};
 	presenceData.startTimestamp = browsingTimestamp;
 	if (document.location.hostname.includes("v3rmillion.net")) {

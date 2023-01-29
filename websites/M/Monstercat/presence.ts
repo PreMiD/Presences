@@ -14,7 +14,7 @@ lastState = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "monstercat",
+		largeImageKey: "https://i.imgur.com/WpweZsv.png",
 	};
 
 	if (document.location.hostname === "www.monstercat.com") {

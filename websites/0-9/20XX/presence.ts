@@ -80,7 +80,7 @@ let gameStartTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "20xx",
+		largeImageKey: "https://i.imgur.com/yamlw9T.png",
 	};
 
 	if (data20XX) {

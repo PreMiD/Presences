@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "sharex-logo",
+			largeImageKey: "https://i.imgur.com/ODHNsqP.png",
 			smallImageKey: "sharex-white-logo",
 			smallImageText: "Navigating on getsharex.com",
 			buttons: [

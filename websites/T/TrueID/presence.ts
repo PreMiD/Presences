@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 		path = document.location,
 		lang = path.pathname.substring(1, 6),
 		presenceData: PresenceData = {
-			largeImageKey: "index",
+			largeImageKey: "https://i.imgur.com/5975C9m.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 

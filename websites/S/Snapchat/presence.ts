@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Other",
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/dr9SkT5.png",
 			startTimestamp: browsingTimestamp,
 		},
 		activeChat = document.querySelector<HTMLDivElement>(
