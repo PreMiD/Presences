@@ -1,24 +1,24 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "service": "Panda Novel",
-  "author": {
-    "id": "257151906038677504",
-    "name": "SHISEN"
-  },
-  "description": {
-    "en": "Explore the wonderful novel world at Panda Novel. Read free light novels of Chinese, Korean and Japanese in English translation online"
-  },
-  "url": "www.panda-novel.com",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/0gC8SLN.png",
-  "thumbnail": "https://i.imgur.com/ByRt6MF.png",
-  "color": "#77d48f",
-  "category": "anime",
-  "tags": [
-    "panda",
-    "novel",
-    "manga"
-  ],
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "257151906038677504",
+		"name": "SHISEN"
+	},
+	"service": "Panda Novel",
+	"description": {
+		"en": "Explore the wonderful novel world at Panda Novel. Read free light novels of Chinese, Korean and Japanese in English translation online"
+	},
+	"url": "www.panda-novel.com",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/0gC8SLN.png",
+	"thumbnail": "https://i.imgur.com/ByRt6MF.png",
+	"color": "#77d48f",
+	"category": "anime",
+	"tags": [
+		"panda",
+		"novel",
+		"manga"
+	],
 	"settings": [
 		{
 			"id": "lang",
