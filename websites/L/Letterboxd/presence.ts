@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 	path.pop();
 
 	const presenceData: PresenceData = {
-		largeImageKey: "final",
+		largeImageKey: "https://i.imgur.com/nbvB9cV.png",
 		startTimestamp: browsingTimestamp,
 	};
 

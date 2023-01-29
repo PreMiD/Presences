@@ -5,7 +5,7 @@ let deck;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "banner",
+		largeImageKey: "https://i.imgur.com/RPjfGtz.png",
 		smallImageKey: "icon",
 	};
 

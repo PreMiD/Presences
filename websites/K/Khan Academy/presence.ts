@@ -12,7 +12,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "khanacademy",
+		largeImageKey: "https://i.imgur.com/747RYiz.png",
 		details: (await strings).watching,
 	};
 

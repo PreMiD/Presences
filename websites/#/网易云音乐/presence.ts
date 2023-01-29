@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details: title,
 				state: author,
-				largeImageKey: "logo",
+				largeImageKey: "https://i.imgur.com/L7WOrIG.png",
 				smallImageKey: paused ? "pause" : "play",
 				smallImageText: paused ? (await strings).pause : (await strings).play,
 				startTimestamp,

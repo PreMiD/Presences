@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "htmlcsscolor",
+		largeImageKey: "https://i.imgur.com/Kk099mM.png",
 	};
 
 	// My special Format

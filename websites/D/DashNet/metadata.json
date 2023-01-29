@@ -14,7 +14,7 @@
 	},
 	"url": "dashnet.org",
 	"regExp": "([a-z0-9-]+[.])*dashnet[.]org[/]",
-	"version": "1.3.5",
+	"version": "1.3.6",
 	"logo": "https://i.imgur.com/xcK0UqX.png",
 	"thumbnail": "https://i.imgur.com/PnsZ4Nv.png",
 	"color": "#042B48",

@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
 			]
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "thesite",
+			largeImageKey: "https://i.imgur.com/XpFN1EZ.png",
 		};
 
 	if (oldUrl !== path) {

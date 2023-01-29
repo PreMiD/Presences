@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 	const details = document.querySelector("#trackInfo > a"),
 		state = document.querySelector("#trackInfo > span > a"),
 		presenceData = {
-			largeImageKey: "mini_logo",
+			largeImageKey: "https://i.imgur.com/MkYz91m.png",
 			smallImageKey: document.querySelector("a.btnPlayer.playPause.pause")
 				? "play"
 				: "pause",

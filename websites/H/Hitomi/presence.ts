@@ -62,7 +62,7 @@ const hitomiTypeMapping: interfaceMapping = {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "app",
+		largeImageKey: "https://i.imgur.com/sQZ65FE.png",
 	};
 
 	presenceData.details = "Viewing recently added list";

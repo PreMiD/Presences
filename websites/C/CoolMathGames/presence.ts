@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 	presence.setActivity({
 		details,
 		state,
-		largeImageKey: "coolmathgames",
+		largeImageKey: "https://i.imgur.com/gg4LsW0.png",
 		startTimestamp: elapsed,
 	});
 });

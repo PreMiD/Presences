@@ -11,7 +11,7 @@ function findElement(tagName: string, className: string): Element {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "key",
+			largeImageKey: "https://i.imgur.com/VdcSlNL.png",
 			details: "Browsing...",
 			startTimestamp: browsingTimestamp,
 		},

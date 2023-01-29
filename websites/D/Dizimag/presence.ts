@@ -13,7 +13,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const path: string = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "dizimag",
+			largeImageKey: "https://i.imgur.com/ioA6fNx.png",
 		};
 	if (path.startsWith("/uye-ol")) {
 		presenceData.details = "Bir sayfaya bakıyor:";

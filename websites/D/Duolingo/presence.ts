@@ -62,7 +62,7 @@ const presence = new Presence({
 		"vocabulary",
 	],
 	presenceData: PresenceData = {
-		largeImageKey: "icon",
+		largeImageKey: "https://i.imgur.com/YKAf42L.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	},
 	language = {

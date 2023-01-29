@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timeLeft"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/Vks89dr.png",
 			startTimestamp: browsingStamp,
 		};
 

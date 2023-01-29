@@ -15,7 +15,7 @@
 	},
 	"url": "wikinews.org",
 	"regExp": "([a-z0-9-]+[.])+wikinews[.]org[/]",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"logo": "https://i.imgur.com/GVgGEKB.png",
 	"thumbnail": "https://i.imgur.com/r6l2Z7m.png",
 	"color": "#f9f9f9",

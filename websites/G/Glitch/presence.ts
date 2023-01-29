@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "glitchlogo",
+		largeImageKey: "https://i.imgur.com/YFnN57M.png",
 	};
 
 	if (window.location.href.includes(".glitch.me")) {

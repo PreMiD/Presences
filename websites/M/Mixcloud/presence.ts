@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
 			details: title,
 			state: author,
-			largeImageKey: "mixcloud",
+			largeImageKey: "https://i.imgur.com/I3yX6NQ.png",
 			smallImageKey: isPlaying ? "play" : "pause",
 			smallImageText: isPlaying ? (await strings).play : (await strings).pause,
 			buttons: [{ label: openUrlText, url }],

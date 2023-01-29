@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 	else details = "Browsing";
 
 	const presenceData: PresenceData = {
-		largeImageKey: "netacadlogo",
+		largeImageKey: "https://i.imgur.com/pvz4KSf.png",
 		details,
 		state,
 		startTimestamp: timestamp,

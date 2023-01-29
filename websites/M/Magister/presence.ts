@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "app",
+		largeImageKey: "https://i.imgur.com/jk4XMSO.png",
 	};
 
 	if (document.location.href.includes("account/login"))

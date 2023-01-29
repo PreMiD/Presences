@@ -11,7 +11,7 @@
 		"vi_VN": "Google Domains là dịch vụ đăng ký tên miền được cung cấp bởi Google. Google Domains cung cấp đăng kí tên miền, tổ chức DNS, DNSSEC, DNS động, chuyển tên miền, và chuyển tiếp thư điện tử."
 	},
 	"url": "domains.google.com",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://i.imgur.com/345qLaW.jpg",
 	"thumbnail": "https://i.imgur.com/5EXKSHI.png",
 	"color": "#FCBC03",

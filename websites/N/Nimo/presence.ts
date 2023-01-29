@@ -48,7 +48,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/dXRRZoM.png",
 			startTimestamp: elapsed,
 		},
 		{ pathname, href } = document.location,

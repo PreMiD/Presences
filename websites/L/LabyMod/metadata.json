@@ -17,7 +17,7 @@
 	},
 	"url": "www.labymod.net",
 	"regExp": "([a-z0-9-]+[.])*labymod[.]net[/]",
-	"version": "1.2.15",
+	"version": "1.2.16",
 	"logo": "https://i.imgur.com/PHdC5bf.png",
 	"thumbnail": "https://i.imgur.com/SDMxfEg.png",
 	"color": "#008fe8",

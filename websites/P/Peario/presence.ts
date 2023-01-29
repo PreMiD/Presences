@@ -42,7 +42,7 @@ async function fetchWithVideo(video: HTMLMediaElement) {
 }
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/LPckbQY.png",
 			startTimestamp: browsingTimestamp,
 		},
 		video = document.querySelector<HTMLVideoElement>(

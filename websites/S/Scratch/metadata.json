@@ -11,7 +11,7 @@
 	},
 	"url": "scratch.mit.edu",
 	"regExp": "([a-z0-9-]+[.])*(scratch|scratchfoundation|scratch-wiki|donationpay|scratched[.]gse[.]harvard|scratchjr)[.](mit[.]edu|org|info|edu)[/]",
-	"version": "1.3.1",
+	"version": "1.3.2",
 	"logo": "https://i.imgur.com/8ENJO3c.png",
 	"thumbnail": "https://i.imgur.com/WREKZyg.png",
 	"color": "#fc8c03",

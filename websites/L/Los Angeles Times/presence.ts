@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 		{ pathname, href, search } = window.location,
 		path = pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/Z6MOTZp.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 

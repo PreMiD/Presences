@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "spiderum",
+		largeImageKey: "https://i.imgur.com/b1NnqZa.jpg",
 	};
 
 	if (document.location.hostname === "spiderum.com") {

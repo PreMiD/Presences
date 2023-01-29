@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "dilogo",
+		largeImageKey: "https://i.imgur.com/T1Zi3qF.png",
 	};
 	if (
 		document.querySelector("#webplayer-region").getAttribute("data-state") ===

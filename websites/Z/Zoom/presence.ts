@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "zoom_logo",
+		largeImageKey: "https://i.imgur.com/K1OGlrP.png",
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing home page";

@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "kshowonline",
+			largeImageKey: "https://i.imgur.com/fqNzu3W.png",
 			smallImageKey: paused ? "pause" : "play",
 			smallImageText: paused ? (await strings).pause : (await strings).play,
 			startTimestamp: timestamps[0],
