@@ -24,7 +24,7 @@ presence.on("iFrameData", (msg: Video) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "turkanime",
+			largeImageKey: "https://i.imgur.com/N9oAnuS.png",
 		},
 		title =
 			document

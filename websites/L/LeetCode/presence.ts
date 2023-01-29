@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 	// default settings
 	const presenceData: PresenceData = {
 		details: document.title,
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/v6f2jQA.png",
 		startTimestamp: timeElapsed,
 	};
 

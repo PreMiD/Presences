@@ -12,7 +12,7 @@
 	},
 	"url": "javx.net",
 	"regExp": "([a-z0-9-]+[.])*javx([.][a-z]+)+[/]",
-	"version": "1.1.10",
+	"version": "1.1.11",
 	"logo": "https://i.imgur.com/0Jwz0Ct.png",
 	"thumbnail": "https://i.imgur.com/9UFz4Bl.png",
 	"color": "#262626",

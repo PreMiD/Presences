@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "dramagg",
+		largeImageKey: "https://i.imgur.com/tA4eeXJ.png",
 		smallImageKey: "search",
 		smallImageText: "Looking for a thread",
 		details: "Looking for drama!",
@@ -13,7 +13,7 @@ presence.on("UpdateData", () => {
 
 	switch (true) {
 		case document.location.pathname.includes("/d/"):
-			presenceData.largeImageKey = "dramagg";
+			presenceData.largeImageKey = "https://i.imgur.com/tA4eeXJ.png";
 			presenceData.smallImageKey = "reading";
 			presenceData.smallImageText = "Reading a thread";
 			presenceData.details = `Viewing Thread: ${

@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 	const info = await presence.getSetting<boolean>("eSI"),
 		classInfo = await presence.getSetting<boolean>("eCI"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/FDv2y9V.png",
 		};
 	if (info) {
 		if (document.location.pathname === "/")

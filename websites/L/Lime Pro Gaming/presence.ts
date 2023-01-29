@@ -7,7 +7,7 @@ let productName, productBrand, blogTitle, blogAuthor;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/IZlOaJU.png",
 		startTimestamp: browsingTimestamp,
 	};
 

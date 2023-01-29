@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "kosmimain",
+		largeImageKey: "https://i.imgur.com/RdGpMdg.png",
 		smallImageKey,
 		details,
 		state,

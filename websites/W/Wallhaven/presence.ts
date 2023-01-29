@@ -143,7 +143,7 @@ const pages: PageContext[] = [
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/SsIZl80.png",
 	};
 	if (document.location.hostname === "wallhaven.cc") {
 		const query: { [key: string]: unknown } = getQuery(),

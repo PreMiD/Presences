@@ -57,7 +57,7 @@ setInterval(updateData, 1e3);
 presence.on("UpdateData", () => {
 	if (!pageLoaded) return;
 	const presenceData: PresenceData = {
-		largeImageKey: "main-logo",
+		largeImageKey: "https://i.imgur.com/O99W6aY.png",
 		smallImageKey: rpaImage.general.browse,
 		smallImageText: "Browsing",
 		details: "Browsing",

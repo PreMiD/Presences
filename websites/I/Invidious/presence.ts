@@ -14,7 +14,7 @@ function getTime() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon",
+		largeImageKey: "https://i.imgur.com/Cfm6lRV.png",
 		smallImageKey: "more",
 	};
 	let clear = false;

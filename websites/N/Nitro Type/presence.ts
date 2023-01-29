@@ -14,7 +14,7 @@ presence.on("UpdateData", () => {
 		//log("UpdateData called")
 		const loggedIn = !!document.querySelector(".dropdown--account span"),
 			presenceData: PresenceData = {
-				largeImageKey: "nt",
+				largeImageKey: "https://i.imgur.com/CCu7nqD.png",
 				smallImageKey: loggedIn ? "user" : "guest",
 				smallImageText: loggedIn
 					? document.querySelector(".dropdown--account span").textContent

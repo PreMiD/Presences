@@ -14,7 +14,7 @@
 		"forum.hareshi.net"
 	],
 	"regExp": "([a-z0-9-]+[.])*hareshi[.]net[/]",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/Rj3w0bs.jpg",
 	"thumbnail": "https://i.imgur.com/9TONSpq.jpg",
 	"color": "#ff6c96",

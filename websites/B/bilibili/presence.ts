@@ -16,7 +16,7 @@ const multiUploader = document.querySelector("div.members-info");
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bb",
+		largeImageKey: "https://i.imgur.com/w7q6IS0.png",
 	};
 
 	async function getTimestamps() {

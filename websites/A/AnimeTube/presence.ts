@@ -14,7 +14,7 @@ presence.on("iFrameData", (data: typeof videoData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "animetube",
+		largeImageKey: "https://i.imgur.com/9MxXOK3.png",
 	};
 
 	if (document.location.pathname === "/") {

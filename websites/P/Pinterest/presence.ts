@@ -8,7 +8,7 @@ let user: Element | HTMLElement | string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "pinterest",
+		largeImageKey: "https://i.imgur.com/DiUTf7t.png",
 	};
 	presenceData.startTimestamp = browsingTimestamp;
 	if (document.location.hostname === "help.pinterest.com") {

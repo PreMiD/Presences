@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
 		if (children[i].id === "stopButton") paused = false;
 
 	const presenceData: PresenceData = {
-		largeImageKey: "lg",
+		largeImageKey: "https://i.imgur.com/EHQLUof.png",
 		smallImageKey: paused ? "pause" : "play",
 		smallImageText: paused ? "Pausiert" : "Spielt",
 		details: `Channel: ${

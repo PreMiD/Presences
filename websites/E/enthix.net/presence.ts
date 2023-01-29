@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/pFmxUh4.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "enthix.net") {

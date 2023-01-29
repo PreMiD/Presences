@@ -14,7 +14,7 @@
 	},
 	"url": "cs.money",
 	"regExp": "([a-z0-9]+[.])?cs[.]money",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/y7THfIx.png",
 	"thumbnail": "https://i.imgur.com/Ob8gt4E.png",
 	"color": "#4214AC",

@@ -21,7 +21,7 @@
 	},
 	"url": "docs.google.com",
 	"regExp": "docs[.]google([.][a-z]+)+[/]",
-	"version": "1.4.18",
+	"version": "1.4.19",
 	"logo": "https://i.imgur.com/m768cDN.png",
 	"thumbnail": "https://i.imgur.com/jbuIiwv.jpg",
 	"color": "#3a404a",

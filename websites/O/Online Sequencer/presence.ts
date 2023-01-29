@@ -11,7 +11,7 @@ function refreshTime() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "online_sequencer_icon",
+		largeImageKey: "https://i.imgur.com/E4dzY6x.png",
 		startTimestamp: timestart,
 	};
 	if (document.querySelectorAll(".fas.fa-stop")[0]) {

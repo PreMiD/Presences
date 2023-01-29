@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/1SIuzpu.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/wishlist")) presenceData.details = "Wishlist";
 
 	if (!buttons) delete presenceData.buttons;
-	if (!covers) presenceData.largeImageKey = "logo";
+	if (!covers) presenceData.largeImageKey = "https://i.imgur.com/1SIuzpu.png";
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

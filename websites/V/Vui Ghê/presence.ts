@@ -10,7 +10,7 @@ let user: HTMLElement | Element | string, title: HTMLElement | Element | string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "vg",
+		largeImageKey: "https://i.imgur.com/Iikp0zo.png",
 	};
 
 	if (document.location.hostname === "vuighe.net") {

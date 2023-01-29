@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
 	const { pathname, origin } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/5tfjCTi.png",
 		};
 	if (document.querySelector(".navbar-form input") === document.activeElement) {
 		presenceData.details = "Searching:";
