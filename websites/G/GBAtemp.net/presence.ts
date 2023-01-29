@@ -12,7 +12,7 @@ let threadName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "tempy",
+		largeImageKey: "https://i.imgur.com/Q8Jx76k.jpg",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname.startsWith("/threads")) {

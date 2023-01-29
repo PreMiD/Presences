@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "stats_fm",
+			largeImageKey: "https://i.imgur.com/WkUe5aL.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location;

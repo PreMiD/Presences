@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "app",
+		largeImageKey: "https://i.imgur.com/CgaXYn2.png",
 	};
 
 	if (document.location.hostname === "roulette.hitmaps.com") {

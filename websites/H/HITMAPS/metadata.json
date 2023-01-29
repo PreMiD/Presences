@@ -14,7 +14,7 @@
 		"roulette.hitmaps.com"
 	],
 	"regExp": "([a-z0-9]+)[.]hitmaps[.]com",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/CgaXYn2.png",
 	"thumbnail": "https://i.imgur.com/S6DAuSR.png",
 	"color": "#fb0111",

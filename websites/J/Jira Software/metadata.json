@@ -12,7 +12,7 @@
 	},
 	"url": "www.atlassian.com",
 	"regExp": "[a-z0-9]+[.]atlassian[.]net",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/ZPX99We.png",
 	"thumbnail": "https://i.imgur.com/lRV5RQt.png",
 	"color": "#2684FF",

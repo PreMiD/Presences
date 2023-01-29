@@ -28,7 +28,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "vizer_logo",
+		largeImageKey: "https://i.imgur.com/Hi3hvJk.png",
 	};
 
 	let title;

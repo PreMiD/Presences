@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "zarp-512x512",
+		largeImageKey: "https://i.imgur.com/GKOegt1.jpg",
 	};
 	switch (window.location.host) {
 		case "zarpgaming.com":

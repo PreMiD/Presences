@@ -12,7 +12,7 @@ let details: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "hb",
+			largeImageKey: "https://i.imgur.com/vTQeYvH.png",
 		},
 		showTime = await presence.getSetting<boolean>("stamp");
 

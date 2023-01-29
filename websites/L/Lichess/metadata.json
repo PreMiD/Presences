@@ -11,7 +11,7 @@
 		"nl": "Lichess is een open-source internet-schaakserver. Iedereen kan anoniem spelen, hoewel spelers een account op de site kunnen registreren om beoordeelde spellen te spelen."
 	},
 	"url": "lichess.org",
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/dw8pZ1d.png",
 	"thumbnail": "https://i.imgur.com/kXZgHJS.png",
 	"color": "#c5c5c5",

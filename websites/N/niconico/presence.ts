@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 					presenceData: PresenceData = {
 						details: document.querySelector(".VideoTitle").textContent,
 						state: `${owner} - ${location.pathname.match(/..\d+$/)[0]}`,
-						largeImageKey: "niconico",
+						largeImageKey: "https://i.imgur.com/If04KDa.png",
 						smallImageKey: isPlaying ? "play" : "pause",
 						smallImageText: isPlaying
 							? (await strings).play
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 							document.querySelector("[class^='___group-name-anchor___']")
 						).textContent
 					} - ${location.pathname.match(/lv\d+/)[0]}`,
-					largeImageKey: "niconico",
+					largeImageKey: "https://i.imgur.com/If04KDa.png",
 					smallImageKey: "live",
 					smallImageText: (await strings).live,
 					startTimestamp:
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
 
 		case "seiga.nicovideo.jp": {
 			const presenceData: PresenceData = {
-				largeImageKey: "niconico",
+				largeImageKey: "https://i.imgur.com/If04KDa.png",
 			};
 			if (location.pathname.startsWith("/seiga/im")) {
 				presenceData.details = document.querySelector(".title").textContent;

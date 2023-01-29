@@ -8,7 +8,7 @@ const viewString = "Viewing ",
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/FGXtWsm.png",
 		startTimestamp: browsingTimestamp,
 	};
 

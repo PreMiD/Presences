@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
 	const [, pathCheck, mainPath, namespace] =
 			window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/Ms5CNEN.png",
 			startTimestamp,
 		};
 

@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 	if (elapsed) browsingTimestamp = Math.floor(Date.now() / 1000);
 
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/bEtLVB2.png",
 	};
 	if (info) {
 		switch (document.location.pathname) {

@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 	const host = window.location.hostname.split("."),
 		path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "logo_big",
+			largeImageKey: "https://i.imgur.com/3IBLlpc.png",
 		};
 
 	oldLang = newLang;

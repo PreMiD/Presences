@@ -29,7 +29,7 @@ let lastlobbyName = "",
 	lastName = "Unnamed";
 
 const presenceData: PresenceData = {
-	largeImageKey: "index",
+	largeImageKey: "https://i.imgur.com/Qdjm4j8.png",
 	startTimestamp: Date.now(),
 	details: "Main Menu",
 	state: "Just Started Playing",

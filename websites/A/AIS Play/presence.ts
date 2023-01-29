@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity({
 			details: "Searching for :",
 			state: document.location.search.replace("?q=", ""),
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/HQs4uPj.png",
 			smallImageKey: "search",
 			smallImageText: "Searching...",
 		});
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity({
 			details: "Browsing for :",
 			state: document.querySelector(".default-title").textContent || "",
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/HQs4uPj.png",
 		});
 	}
 

@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "ya",
+			largeImageKey: "https://i.imgur.com/12xbQOt.png",
 			startTimestamp: browsingTimestamp,
 		};
 

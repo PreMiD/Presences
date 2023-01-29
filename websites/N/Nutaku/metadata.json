@@ -14,7 +14,7 @@
 		"www.nutaku.net"
 	],
 	"regExp": "([a-z]+[.])nutaku.net[/]",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"logo": "https://i.imgur.com/fvSnqjK.png",
 	"thumbnail": "https://i.imgur.com/ypxOFV9.jpg",
 	"color": "#E53155",

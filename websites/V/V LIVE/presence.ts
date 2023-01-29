@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 	]);
 
 	let presenceData: PresenceData = {
-			largeImageKey: "vlive2",
+			largeImageKey: "https://i.imgur.com/K6z2UeE.png",
 			startTimestamp: elapsed,
 		},
 		searchPageValue: string;

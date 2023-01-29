@@ -26,7 +26,7 @@ let strings: Awaited<ReturnType<typeof getStrings>> = null,
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "tsr",
+		largeImageKey: "https://i.imgur.com/n3TBX8g.png",
 		startTimestamp: browsingTimestamp,
 	};
 

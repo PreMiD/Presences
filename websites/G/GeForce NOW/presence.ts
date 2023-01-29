@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 	const privacy: boolean = await presence.getSetting<boolean>("privacy"),
 		showTimestamp: boolean = await presence.getSetting<boolean>("timestamp"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/a1L2Mi2.png",
 			smallImageKey: "small",
 			startTimestamp: browsingTimestamp,
 		};

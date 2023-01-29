@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Genshin Impact Map",
-			largeImageKey: "main",
+			largeImageKey: "https://i.imgur.com/6XrkcZs.png",
 			smallImageKey: "search",
 			startTimestamp: browsingTimestamp,
 		},

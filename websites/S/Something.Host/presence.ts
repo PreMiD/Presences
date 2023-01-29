@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "vector",
+		largeImageKey: "https://i.imgur.com/il2R4FQ.png",
 	};
 
 	// Support - support.something.host

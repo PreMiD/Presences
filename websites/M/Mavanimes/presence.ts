@@ -14,7 +14,7 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/o4qNo1n.png",
 		},
 		params = new URLSearchParams(new URL(window.location.href).search);
 	if (document.location.pathname === "/") {

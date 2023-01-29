@@ -14,7 +14,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/85KSQGS.png",
 		},
 		broadcasttc = await presence.getSetting<boolean>("broadcasttc"),
 		active =

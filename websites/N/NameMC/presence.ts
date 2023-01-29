@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: "namemc",
+		largeImageKey: "https://i.imgur.com/9JDmZaF.png",
 		startTimestamp: browsingTimestamp,
 	};
 

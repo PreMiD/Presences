@@ -45,7 +45,7 @@ const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "s-logo",
+			largeImageKey: "https://i.imgur.com/8JBfyCa.jpg",
 			startTimestamp,
 		},
 		settings = {

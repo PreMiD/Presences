@@ -15,7 +15,7 @@ let tsData: TrickSplitData = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "tricksplit",
+		largeImageKey: "https://i.imgur.com/JdlCrl8.png",
 	};
 
 	if (tsData && tsData.connected) {

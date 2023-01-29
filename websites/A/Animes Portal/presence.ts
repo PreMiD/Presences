@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/EwyBmHJ.png",
 		},
 		{ pathname, href } = document.location,
 		[showThumb, showMessaging] = await Promise.all([
@@ -216,7 +216,7 @@ interface IFrameData {
 presence.on("iFrameData", async (data: IFrameData) => {
 	if (!data.currentTime || !data.duration) return;
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/EwyBmHJ.png",
 		},
 		showThumb = await presence.getSetting<boolean>("showthumb"),
 		epInfo = getInfo(),

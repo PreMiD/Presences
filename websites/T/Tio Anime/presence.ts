@@ -18,7 +18,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "tioanimelogo",
+			largeImageKey: "https://i.imgur.com/KJUHptb.png",
 			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),

@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
 			location: { pathname: page },
 		} = document,
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/DySHxnW.png",
 			startTimestamp: timeStamp,
 		},
 		arr = page.split("/").filter(String),

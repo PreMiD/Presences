@@ -1,0 +1,58 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "257151906038677504",
+		"name": "SHISEN"
+	},
+	"service": "Panda Novel",
+	"description": {
+		"en": "Explore the wonderful novel world at Panda Novel. Read free light novels of Chinese, Korean and Japanese in English translation online"
+	},
+	"url": "www.panda-novel.com",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/0gC8SLN.png",
+	"thumbnail": "https://i.imgur.com/ByRt6MF.png",
+	"color": "#77d48f",
+	"category": "anime",
+	"tags": [
+		"panda",
+		"novel",
+		"manga"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "logo",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show covers",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show buttons",
+			"icon": "fad fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

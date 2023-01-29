@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 			events: "Events",
 		},
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/NtPeZ9u.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ location } = document,
