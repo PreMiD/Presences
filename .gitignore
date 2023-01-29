@@ -44,3 +44,6 @@ lerna-debug.log*
 
 # PresenceUpdater
 dist
+
+# Package-lock
+**package-lock.json
