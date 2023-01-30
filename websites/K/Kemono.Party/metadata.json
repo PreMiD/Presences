@@ -10,7 +10,7 @@
 	},
 	"url": "kemono.party",
 	"regExp": "([a-z0-9-]+[.])*kemono[.]party[/]",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"logo": "https://i.imgur.com/mwpEkf3.png",
 	"thumbnail": "https://i.imgur.com/7oehiJm.png",
 	"color": "#F05E16",
