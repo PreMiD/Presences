@@ -13,10 +13,14 @@ const presence = new Presence({
 		installapp: { details: "ComicK App" },
 	};
 
+enum Assets {
+	Logo = "https://i.imgur.com/DeNqLCB.png",
+}
+
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		details: "Browsing",
-		largeImageKey: "https://i.imgur.com/DeNqLCB.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 	const { pathname, href } = document.location,
@@ -96,7 +100,8 @@ presence.on("UpdateData", async () => {
 				presenceData = { ...presenceData, ...staticPages[arrPath[1]] };
 	}
 
-	if (!image) presenceData.largeImageKey = "https://i.imgur.com/DeNqLCB.png";
+	if (!image && presenceData.largeImageKey !== Assets.Logo)
+		presenceData.largeImageKey = Assets.Logo;
 	if (!buttons) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });
