@@ -87,9 +87,9 @@ presence.on("UpdateData", async () => {
 		case "user":
 			presenceData.details = "Viewing their profile";
 			if (arrPath.length > 2) {
-				presenceData.details = `Viewing ${
-					document.querySelector<HTMLHeadingElement>("h1").textContent
-				}`;
+				presenceData.details = "Viewing";
+				presenceData.state =
+					document.querySelector<HTMLHeadingElement>("h1").textContent;
 				presenceData.largeImageKey = document
 					.querySelector<HTMLImageElement>("#__next div > div > img")
 					.src.replace("size=200", "size=640");
@@ -102,6 +102,6 @@ presence.on("UpdateData", async () => {
 
 	if (!image && presenceData.largeImageKey !== Assets.Logo)
 		presenceData.largeImageKey = Assets.Logo;
-	if (!buttons) delete presenceData.buttons;
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });
