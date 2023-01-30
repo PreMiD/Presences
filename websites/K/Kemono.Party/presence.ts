@@ -9,18 +9,29 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	const pages: Record<string, PresenceData> = {
-		"/": { details: "Viewing Home Page" },
-		"/importer": { details: "importing from Paysite" },
-		"/importer/tutorial": { details: "Reading FAQ" },
-		"/account": { details: "Checking out their account" },
-		"/account/keys": { details: "Checking out their keys" },
-		"/posts": { details: "Browsing through posts" },
-		"/artists": { details: "Browsing through artists" },
-		"/artists/updated": { details: "Browsing through updated artists" },
-		"/favorites": { details: "Checking out their favorites" },
-		"/dmca": { details: "Reading DMCA notice" },
-	};
+	const service: Record<string, PresenceData> = {
+			"Patreon ": { state: "Patreon" },
+			"Pixiv Fanbox": { state: "Pixiv Fanbox" },
+			"Gumroad ": { state: "Gumroad" },
+			"Subscribestar ": { state: "SubscribeStar" },
+			"Dlsite ": { state: "DLsite" },
+			"Discord ": { state: "Discord" },
+			"Fantia ": { state: "Fantia" },
+			"Boosty ": { state: "Boosty" },
+			"Aftian ": { state: "Aftian" },
+		},
+		pages: Record<string, PresenceData> = {
+			"/": { details: "Viewing Home Page" },
+			"/importer": { details: "importing from Paysite" },
+			"/importer/tutorial": { details: "Reading FAQ" },
+			"/account": { details: "Checking out their account" },
+			"/account/keys": { details: "Checking out their keys" },
+			"/posts": { details: "Browsing through posts" },
+			"/artists": { details: "Browsing through artists" },
+			"/artists/updated": { details: "Browsing through updated artists" },
+			"/favorites": { details: "Checking out their favorites" },
+			"/dmca": { details: "Reading DMCA notice" },
+		};
 
 	for (const [path, data] of Object.entries(pages))
 		if (location.pathname === path) presenceData = { ...presenceData, ...data };
@@ -38,8 +49,7 @@ presence.on("UpdateData", async () => {
 						.querySelector("a[class='post__user-name']")
 						.textContent.replace(/\s+/g, "")}`;
 				} else {
-					presenceData.details = "Checking out:";
-					presenceData.state = `${
+					presenceData.details = `${
 						document.querySelector(
 							"#user-header__info-top > a > span:nth-child(2)"
 						).textContent
@@ -51,9 +61,16 @@ presence.on("UpdateData", async () => {
 							)
 						)).src
 					}`;
+					for (const [platform, name] of Object.entries(service)) {
+						if (
+							document
+								.querySelector("head > title")
+								.textContent.includes(platform)
+						)
+							presenceData = { ...presenceData, ...name };
+					}
 				}
 			}
-
 			break;
 		}
 		case "status.kemono.party": {
