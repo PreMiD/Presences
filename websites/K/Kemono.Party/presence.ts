@@ -41,34 +41,30 @@ presence.on("UpdateData", async () => {
 			if (location.pathname.includes("/user/")) {
 				if (location.pathname.includes("/post/")) {
 					presenceData.details = `${
-						document.querySelector(
-							"#page > header > div.post__info > h1 > span:nth-child(1)"
-						).textContent
+						document.querySelector("{[class=post__title] > span:nth-child(1)}")
+							.textContent
 					}`;
 					presenceData.state = `${document
 						.querySelector("a[class='post__user-name']")
 						.textContent.replace(/\s+/g, "")}`;
 				} else {
 					presenceData.details = `${
-						document.querySelector(
-							"#user-header__info-top > a > span:nth-child(2)"
-						).textContent
+						document.querySelector("[itemprop=name]").textContent
 					}`;
-					presenceData.largeImageKey = `${
-						(<HTMLImageElement>(
-							document.querySelector(
-								"#main > section > header > a > picture > img"
-							)
-						)).src
-					}`;
-					for (const [platform, name] of Object.entries(service)) {
-						if (
-							document
-								.querySelector("head > title")
-								.textContent.includes(platform)
-						)
-							presenceData = { ...presenceData, ...name };
-					}
+				}
+				presenceData.largeImageKey = `${
+					(<HTMLImageElement>(
+						document.querySelector("a > [class=fancy-image__picture] > img")
+					)).src
+				}`;
+
+				for (const [platform, name] of Object.entries(service)) {
+					if (
+						document
+							.querySelector("head > title")
+							.textContent.includes(platform)
+					)
+						presenceData = { ...presenceData, ...name };
 				}
 			}
 			break;
