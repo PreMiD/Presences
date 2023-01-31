@@ -13,13 +13,9 @@ presence.on("UpdateData", async () => {
 			label: "View Website",
 			url: "https://night.design/",
 		},
-		{
-			label: "Actually Page",
-			url: document.location.href,
-		},
 	];
 
-	let domain = document.location.pathname.slice(3);
+	const domain = document.location.pathname.slice(3);
 
 	if (domain === "/home") {
 		presenceData.details = "View the Homepage";
