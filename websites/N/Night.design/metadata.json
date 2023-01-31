@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "BassKatze",
+		"id": "766213190332710913"
+	},
+	"contributors": [
+		{
+			"name": "Lena the fauli",
+			"id": "241278257335500811"
+		}
+	],
+	"service": "night.design",
+	"description": {
+        "en": "Night.design is a collection of textures like capes, bandanas and shields to use in Minecraft."
+	},
+	"url": "night.design",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/4mDvKNa.png",
+	"thumbnail": "https://i.imgur.com/AbDSDug.png",
+	"color": "#0303fc",
+	"category": "other",
+	"tags": [
+		"minecraft",
+		"design",
+		"capes",
+		"bandanas",
+		"shields"
+	]
+}
