@@ -14,10 +14,8 @@ class AppleTV extends Presence {
 	}
 
 	getTitle(eyebrow = false) {
-		if (this.isWatching() && eyebrow) {
-			const title = this.getVideoTitle();
-			if (title || eyebrow) return title;
-		}
+		if (this.isWatching() && eyebrow) return this.getVideoTitle();
+
 		const title = document.querySelector(
 			"div.product-header__image-logo.clr-primary-text-on-dark > span"
 		)?.textContent;
