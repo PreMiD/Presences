@@ -1,38 +1,41 @@
-const presence = new Presence({
-		clientId: "808668919635247104",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+/* eslint-disable one-var */
+const garticPlayingTimestamp = Math.floor(Date.now() / 1000);
+const getGarticPresence = (): PresenceData => {
+	const path = document.location.pathname,
+		base: PresenceData = {
+			largeImageKey: "https://i.imgur.com/JkOc5Vo.png",
+			startTimestamp: garticPlayingTimestamp,
+		};
+
+	// The homepage
+	if (path === "/") return { ...base, details: "Viewing the Homepage" };
+
+	// The rooms selection page
+	if (path === "/rooms") return { ...base, details: "Browsing rooms" };
+
+	// Not in any room???
+	if (path !== "/room" && !path.match(/^\/[0-9a-zA-Z]{8}/))
+		return { ...base, details: "Somewhere on the site" };
+
+	const user = document.querySelector(".user.you");
+	const data: PresenceData = {
+		...base,
+		details: `In a room / ${user.querySelector(".nick").textContent} / ${user
+			.querySelector(".points")
+			.textContent.replace("pts", "points")}`,
+	};
+
+	if (user.classList.contains("turn"))
+		return { ...data, state: "🖌️ Currently drawing" };
+
+	if (user.classList.contains("hit"))
+		return { ...data, state: "✅ Guessed the word" };
+
+	return { ...data, state: "🤔 Guessing the word" };
+};
+
+const presence = new Presence({ clientId: "808668919635247104" });
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/JkOc5Vo.png",
-			startTimestamp: browsingTimestamp,
-		},
-		path = document.location.pathname;
-	if (path === "/") presenceData.details = "Viewing the Homepage";
-	else if (path === "/rooms") presenceData.details = "Viewing Rooms";
-	else if (
-		document.location.pathname.split("/")[1].match(/^\d/) ||
-		path === "/room"
-	) {
-		if (document.querySelector(".infosUsers")) {
-			presenceData.details = "Setting up Info to Join";
-			presenceData.state = `Players: ${
-				document.querySelector(".infosRoom li:last-child span strong")
-					.textContent
-			}`;
-		} else {
-			presenceData.details = `${
-				document.querySelector(".you .nick").textContent
-			} - ${document
-				.querySelector(".you .points")
-				.textContent.split("pts")[0]
-				.trim()} points`;
-			presenceData.state = `Lobby: ${
-				document.querySelector("title").textContent.split("-")[0]
-			}`;
-		}
-	} else presenceData.details = "Somewhere on-site";
-
-	presence.setActivity(presenceData);
+	presence.setActivity(getGarticPresence());
 });
