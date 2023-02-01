@@ -24,7 +24,7 @@ function getCurrentPlayer() {
 		element: playerElement,
 		name: playerNameElement.textContent.substring(
 			0,
-			playerNameElement.textContent.length - 5
+			playerNameElement.textContent.length - 6
 		),
 		rank: +playerElement
 			.querySelector(".player-rank")
@@ -147,8 +147,10 @@ presence.on("UpdateData", async () => {
 			case GamePhase.Gameplay: {
 				if (isUserDrawer()) presenceData.details = "Drawing";
 				else {
+					const currentWord = getCurrentWord();
 					presenceData.details = "Guessing the word";
-					presenceData.state = `Current word: ${getCurrentWord()}`;
+					if (/_/.test(currentWord))
+						presenceData.state = `Current word: ${currentWord}`;
 				}
 				presenceData.endTimestamp = presence.getTimestamps(
 					0,
