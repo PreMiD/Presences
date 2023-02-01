@@ -96,12 +96,17 @@ function getGamePhase() {
 	return GamePhase.Gameplay;
 }
 
+enum Assets {
+	Logo = "https://i.imgur.com/au4OO2A.jpg",
+	Avatar = "https://i.imgur.com/oMq5qpz.png",
+}
+
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/au4OO2A.jpg",
+			largeImageKey: Assets.Logo,
 		},
 		buttons = await presence.getSetting<boolean>("buttons"),
 		newLang = await presence.getSetting<string>("lang").catch(() => "en");
@@ -112,6 +117,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (isInGame()) {
+		const currentPlayer = getCurrentPlayer();
 		if (buttons) {
 			presenceData.buttons = [
 				{
@@ -152,6 +158,12 @@ presence.on("UpdateData", async () => {
 			}
 		}
 		presenceData.details += ` - ${getGameRound()}`;
+		presenceData.smallImageKey = Assets.Avatar;
+		presenceData.smallImageText =
+			`Rank: ${currentPlayer.rank} | Score: ${currentPlayer.score} | Name: ${currentPlayer.name}`.substring(
+				0,
+				127
+			);
 	} else presenceData.details = strings.viewHome;
 	presence.setActivity(presenceData);
 });
