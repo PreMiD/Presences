@@ -31,49 +31,41 @@ presence.on("UpdateData", async () => {
 			"/artists/updated": { details: "Browsing through updated artists" },
 			"/favorites": { details: "Checking out their favorites" },
 			"/dmca": { details: "Reading DMCA notice" },
-		};
+		},
+		{ hostname, pathname } = location;
 
 	for (const [path, data] of Object.entries(pages))
-		if (location.pathname === path) presenceData = { ...presenceData, ...data };
+		if (pathname === path) presenceData = { ...presenceData, ...data };
 
-	switch (document.location.hostname) {
-		case "kemono.party": {
-			if (location.pathname.includes("/user/")) {
-				if (location.pathname.includes("/post/")) {
-					presenceData.details = `${
-						document.querySelector("{[class=post__title] > span:nth-child(1)}")
-							.textContent
-					}`;
-					presenceData.state = `${document
-						.querySelector("a[class='post__user-name']")
-						.textContent.replace(/\s+/g, "")}`;
-				} else {
-					presenceData.details = `${
-						document.querySelector("[itemprop=name]").textContent
-					}`;
-				}
-				presenceData.largeImageKey = `${
-					(<HTMLImageElement>(
-						document.querySelector("a > [class=fancy-image__picture] > img")
-					)).src
+	if (hostname === "kemono.party") {
+		if (pathname.includes("/user/")) {
+			if (pathname.includes("/post/")) {
+				presenceData.details = `${
+					document.querySelector("{[class=post__title] > span:nth-child(1)}")
+						.textContent
 				}`;
-
-				for (const [platform, name] of Object.entries(service)) {
-					if (
-						document
-							.querySelector("head > title")
-							.textContent.includes(platform)
-					)
-						presenceData = { ...presenceData, ...name };
-				}
+				presenceData.state = `${document
+					.querySelector("a[class='post__user-name']")
+					.textContent.replace(/\s+/g, "")}`;
+			} else {
+				presenceData.details = `${
+					document.querySelector("[itemprop=name]").textContent
+				}`;
 			}
-			break;
+			presenceData.largeImageKey = `${
+				(<HTMLImageElement>(
+					document.querySelector("a > [class=fancy-image__picture] > img")
+				)).src
+			}`;
+
+			for (const [platform, name] of Object.entries(service)) {
+				if (document.title.includes(platform))
+					presenceData = { ...presenceData, ...name };
+			}
 		}
-		case "status.kemono.party": {
-			presenceData.details = "Checking server status";
-			break;
-		}
-	}
+	} else if (hostname === "status.kemono.party")
+		presenceData.details = "Checking server status";
+
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
