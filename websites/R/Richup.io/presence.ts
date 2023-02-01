@@ -14,7 +14,7 @@ let startTimestamp: number;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "rio-logo",
+			largeImageKey: "https://i.imgur.com/1I3O248.png",
 		},
 		{ pathname, href } = location,
 		[showJoinRoomButton, showProfileButton] = await Promise.all([
@@ -54,14 +54,14 @@ presence.on("UpdateData", async () => {
 			presenceData.state = latestInfo ? `🎲 ${latestInfo}` : "";
 		}
 
-		if (!startTimestamp) startTimestamp = Date.now();
+		if (!startTimestamp) startTimestamp = Date.now() / 1000;
 		presenceData.startTimestamp = startTimestamp;
 
 		const gameSettings = document
 			.querySelector("#app > div > div > div:nth-child(3)")
 			?.textContent?.includes("Game settings");
 
-		if (showJoinRoomButton === true && gameSettings === true) {
+		if (showJoinRoomButton && gameSettings) {
 			presenceData.buttons = [
 				{
 					label: "Join Room",
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 			"header > div > :last-child > span"
 		).textContent;
 
-		if (showProfileButton === true) {
+		if (showProfileButton) {
 			presenceData.buttons = [
 				{
 					label: "View Profile",
