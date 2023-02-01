@@ -8,6 +8,10 @@
 		{
 			"name": "Encrypted",
 			"id": "564434085708038144"
+		},
+		{
+			"name": "theusaf",
+			"id": "193714715631812608"
 		}
 	],
 	"service": "Skribbl.io",
@@ -35,6 +39,12 @@
 			"id": "buttons",
 			"title": "Show Invite Link",
 			"icon": "fas fa-compress-arrows-alt",
+			"value": false
+		},
+		{
+			"id": "showCurrentDrawing",
+			"title": "Show Current Drawing",
+			"icon": "fas fa-paintbrush-fine",
 			"value": false
 		}
 	]

@@ -17,20 +17,21 @@ function getInviteLink() {
 }
 
 function getCurrentPlayer() {
-	const playerNameElement = document
-			.querySelector(".player-name.me"),
-		playerName = playerNameElement.textContent.substring(
+	const playerNameElement = document.querySelector(".player-name.me"),
+		playerElement = playerNameElement.closest(".player");
+
+	return {
+		element: playerElement,
+		name: playerNameElement.textContent.substring(
 			0,
 			playerNameElement.textContent.length - 5
 		),
-		playerElement = playerNameElement.closest(".player"),
-		playerRank = +playerElement.querySelector(".player-rank").textContent.match(/\d+/)[0],
-		playerScore = +playerElement.querySelector(".player-score").textContent.match(/\d+/)[0];
-	return {
-		element: playerElement,
-		name: playerName,
-		rank: playerRank,
-		score: playerScore,
+		rank: +playerElement
+			.querySelector(".player-rank")
+			.textContent.match(/\d+/)[0],
+		score: +playerElement
+			.querySelector(".player-score")
+			.textContent.match(/\d+/)[0],
 	};
 }
 
@@ -39,7 +40,11 @@ function isUserDrawer() {
 }
 
 function getDrawer() {
-	return document.querySelector(".player-avatar-container .drawing:not([style*='display: none'])")?.closest(".player");
+	return document
+		.querySelector(
+			".player-avatar-container .drawing:not([style*='display: none'])"
+		)
+		?.closest(".player");
 }
 
 function getTimeRemaining() {
@@ -53,7 +58,9 @@ function isInGame() {
 }
 
 function getCurrentWord() {
-	return [...document.querySelectorAll("#game-word .hints [class*='hint']")].map(e => e.textContent).join("");
+	return [...document.querySelectorAll("#game-word .hints [class*='hint']")]
+		.map(e => e.textContent)
+		.join("");
 }
 
 function getRevealedWord() {
@@ -74,7 +81,7 @@ enum GamePhase {
 	RevealAnswer,
 	GameResults,
 	PrivateRoom,
-	Browsing,
+	Gameplay,
 }
 
 function getGamePhase() {
@@ -84,35 +91,10 @@ function getGamePhase() {
 	}
 	if (document.querySelector(".reveal.show")) return GamePhase.RevealAnswer;
 	if (document.querySelector(".result.show")) return GamePhase.GameResults;
-	if (document.querySelector("#game-word .description.waiting")) return GamePhase.WaitingForDrawer;
-	return GamePhase.Browsing;
+	if (document.querySelector("#game-word .description.waiting"))
+		return GamePhase.WaitingForDrawer;
+	return GamePhase.Gameplay;
 }
-
-// game clock: #game-clock
-// canvas: #game-canvas > canvas
-// - overlay: .overlay.show
-// - overlay: .overlay-content
-//   - private game: .room.show
-//   - choosing word: .words.show
-// - reveal: .reveal.show
-//   - word: .word
-// - result: .result.show
-//   - winner: .podest-1
-//     - name: .rank-name
-// invite link: #input-invite | .value to get link
-// game round: #game-round (Game Round N)
-// game word: #game-word
-// - .description
-//   - .waiting (waiting)
-// - .hints
-//   - [class*="hint"] (hint)
-// .player
-// - .player-rank (rank) {#N}
-// - .player-score (score) {N points}
-// - .player-name (name)
-// player name: .player-name.me | <name> (You)
-// drawer: .player-avatar-container .drawing:not([style*="display: none"])
-// language doesn't matter... assuming english
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
@@ -122,25 +104,54 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/au4OO2A.jpg",
 		},
 		buttons = await presence.getSetting<boolean>("buttons"),
-		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		round = document.querySelector("#round").textContent;
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
 
-	if (document.querySelector("#containerGamePlayers").textContent && !round) {
-		presenceData.details = round;
+	if (isInGame()) {
 		if (buttons) {
 			presenceData.buttons = [
 				{
 					label: strings.buttonJoinGame.replace(": {0}", ""),
-					url: document.location.href,
+					url: getInviteLink(),
 				},
 			];
 		}
-		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+		switch (getGamePhase()) {
+			case GamePhase.WaitingForDrawer:
+				presenceData.details = "Waiting for drawer to choose a word";
+				break;
+			case GamePhase.ChoosingWord:
+				presenceData.details = "Choosing a word";
+				break;
+			case GamePhase.RevealAnswer:
+				presenceData.details = "Viewing the answer";
+				presenceData.state = `The word was ${getRevealedWord()}`;
+				break;
+			case GamePhase.GameResults:
+				presenceData.details = "Viewing game results";
+				presenceData.state = `Winner: ${getGameWinner()}`;
+				break;
+			case GamePhase.PrivateRoom:
+				presenceData.details = "Setting up a private room";
+				break;
+			case GamePhase.Gameplay: {
+				if (isUserDrawer()) presenceData.details = "Drawing";
+				else {
+					presenceData.details = "Guessing the word";
+					presenceData.state = `Current word: ${getCurrentWord()}`;
+				}
+				presenceData.endTimestamp = presence.getTimestamps(
+					0,
+					getTimeRemaining()
+				)[1];
+				break;
+			}
+		}
+		presenceData.details += ` - ${getGameRound()}`;
 	} else presenceData.details = strings.viewHome;
 	presence.setActivity(presenceData);
 });
