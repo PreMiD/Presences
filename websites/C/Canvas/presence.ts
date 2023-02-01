@@ -39,11 +39,12 @@ const presence = new Presence({
 						category,
 						private
 					);
-					if (!private)
+					if (!private) {
 						presenceData.state =
 							document.querySelector<HTMLInputElement>(
 								"#discussion-title"
 							).value;
+					}
 					break;
 				}
 				default: {
@@ -57,11 +58,12 @@ const presence = new Presence({
 							category,
 							private
 						);
-						if (!private)
+						if (!private) {
 							presenceData.state =
 								document.querySelector<HTMLInputElement>(
 									"#discussion-title"
 								).value;
+						}
 					} else {
 						presenceData.details = applyPrivacy(
 							`Viewing a ${
@@ -72,11 +74,12 @@ const presence = new Presence({
 							category,
 							private
 						);
-						if (!private)
+						if (!private) {
 							presenceData.state =
 								document.querySelector<HTMLHeadingElement>(
 									".discussion-title"
 								).textContent;
+						}
 					}
 				}
 			}
@@ -94,20 +97,22 @@ const presence = new Presence({
 						category,
 						private
 					);
-					if (!private)
+					if (!private) {
 						presenceData.state =
 							document.querySelector<HTMLInputElement>("#title").value;
+					}
 				} else {
 					presenceData.details = applyPrivacy(
 						"Viewing a page",
 						category,
 						private
 					);
-					if (!private)
+					if (!private) {
 						presenceData.state =
 							document.querySelector<HTMLHeadingElement>(
 								".page-title"
 							).textContent;
+					}
 				}
 			} else {
 				const titleInput = document.querySelector<HTMLInputElement>("#title");
@@ -118,12 +123,13 @@ const presence = new Presence({
 						private
 					);
 					if (!private) presenceData.state = titleInput.value;
-				} else
+				} else {
 					presenceData.details = applyPrivacy(
 						"Viewing pages",
 						category,
 						private
 					);
+				}
 			}
 		},
 		files: (
@@ -131,17 +137,18 @@ const presence = new Presence({
 			category: string = null,
 			private: boolean
 		) => {
-			if (category)
+			if (category) {
 				presenceData.details = applyPrivacy(
 					"Browsing files",
 					category,
 					private
 				);
-			else presenceData.details = "Browsing files";
-			if (!private)
+			} else presenceData.details = "Browsing files";
+			if (!private) {
 				presenceData.state = document.querySelector<HTMLAnchorElement>(
 					"#breadcrumbs>ul>li+li:last-of-type a"
 				).textContent;
+			}
 		},
 		collaborations: (
 			presenceData: PresenceData,
@@ -157,10 +164,11 @@ const presence = new Presence({
 					category,
 					private
 				);
-				if (!private)
+				if (!private) {
 					presenceData.state = document.querySelector<HTMLSelectElement>(
 						"#collaboration_collaboration_type"
 					).value;
+				}
 			} else if (
 				document.querySelector<HTMLFormElement>(".edit_collaboration")
 			) {
@@ -169,16 +177,18 @@ const presence = new Presence({
 					category,
 					private
 				);
-				if (!private)
+				if (!private) {
 					presenceData.state = document.querySelector<HTMLInputElement>(
 						"[name='collaboration[title]']"
 					).value;
-			} else
+				}
+			} else {
 				presenceData.details = applyPrivacy(
 					"Browsing collaborations",
 					category,
 					private
 				);
+			}
 		},
 		conferences: (
 			presenceData: PresenceData,
@@ -194,16 +204,18 @@ const presence = new Presence({
 					category,
 					private
 				);
-				if (!private)
+				if (!private) {
 					presenceData.state = document.querySelector<HTMLInputElement>(
 						"#web_conference_title"
 					).value;
-			} else
+				}
+			} else {
 				presenceData.details = applyPrivacy(
 					"Browsing conferences",
 					category,
 					private
 				);
+			}
 		},
 		people: (
 			presenceData: PresenceData,
@@ -346,11 +358,12 @@ presence.on("UpdateData", async () => {
 										`course: ${firstPath}`,
 										privacyMode
 									);
-									if (!privacyMode)
+									if (!privacyMode) {
 										presenceData.state =
 											document.querySelector<HTMLInputElement>(
 												"#assignment_name"
 											).value;
+									}
 									break;
 								}
 								case "syllabus": {
@@ -358,18 +371,19 @@ presence.on("UpdateData", async () => {
 										document.querySelector<HTMLIFrameElement>(
 											"#course_syllabus_body_ifr"
 										)
-									)
+									) {
 										presenceData.details = applyPrivacy(
 											"Editing syllabus",
 											`course: ${firstPath}`,
 											privacyMode
 										);
-									else
+									} else {
 										presenceData.details = applyPrivacy(
 											"Viewing syllabus",
 											`course: ${firstPath}`,
 											privacyMode
 										);
+									}
 									break;
 								}
 								default: {
@@ -380,11 +394,12 @@ presence.on("UpdateData", async () => {
 												`course: ${firstPath}`,
 												privacyMode
 											);
-											if (!privacyMode)
+											if (!privacyMode) {
 												presenceData.state =
 													document.querySelector<HTMLInputElement>(
 														"#assignment_name"
 													).value;
+											}
 											break;
 										}
 										case "submissions": {
@@ -476,11 +491,12 @@ presence.on("UpdateData", async () => {
 										}`,
 										privacyMode
 									);
-									if (!privacyMode)
+									if (!privacyMode) {
 										presenceData.state =
 											document.querySelector<HTMLHeadingElement>(
 												".assignmentDetails__Title"
 											).textContent;
+									}
 									break;
 								}
 								default: {
@@ -501,12 +517,13 @@ presence.on("UpdateData", async () => {
 									privacyMode
 								);
 								if (!privacyMode) presenceData.state = topPath;
-							} else
+							} else {
 								presenceData.details = applyPrivacy(
 									"Viewing grades",
 									`course: ${firstPath}`,
 									privacyMode
 								);
+							}
 							break;
 						}
 						case "groups": {
@@ -518,18 +535,19 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "modules": {
-							if (pathSplit[3] === "progressions")
+							if (pathSplit[3] === "progressions") {
 								presenceData.details = applyPrivacy(
 									"Viewing module progression",
 									`course: ${firstPath}`,
 									privacyMode
 								);
-							else
+							} else {
 								presenceData.details = applyPrivacy(
 									"Viewing modules",
 									`course: ${firstPath}`,
 									privacyMode
 								);
+							}
 							break;
 						}
 						case "outcomes": {
@@ -546,11 +564,12 @@ presence.on("UpdateData", async () => {
 									`course: ${firstPath}`,
 									privacyMode
 								);
-								if (!privacyMode)
+								if (!privacyMode) {
 									presenceData.state =
 										createOutcomeModal.querySelector<HTMLInputElement>(
 											"input"
 										).value;
+								}
 							} else if (editOutcomeInput) {
 								presenceData.details = applyPrivacy(
 									"Editing an outcome",
@@ -558,12 +577,13 @@ presence.on("UpdateData", async () => {
 									privacyMode
 								);
 								if (!privacyMode) presenceData.state = editOutcomeInput.value;
-							} else
+							} else {
 								presenceData.details = applyPrivacy(
 									"Viewing outcomes",
 									`course: ${firstPath}`,
 									privacyMode
 								);
+							}
 							break;
 						}
 						case "pages": {
@@ -602,7 +622,7 @@ presence.on("UpdateData", async () => {
 											/* in */ `course: ${firstPath}`,
 											privacyMode
 										);
-										if (!privacyMode)
+										if (!privacyMode) {
 											presenceData.state = `${navigationPath[2]} - Attempt ${
 												document
 													.querySelector<HTMLAnchorElement>(
@@ -610,6 +630,7 @@ presence.on("UpdateData", async () => {
 													)
 													.textContent.match(/(\d+):/)[1]
 											}`;
+										}
 										break;
 									}
 									case "moderate": {
@@ -694,19 +715,21 @@ presence.on("UpdateData", async () => {
 												timeElapsed.getTime() / 1000
 											);
 										}
-										if (!privacyMode)
+										if (!privacyMode) {
 											presenceData.state = currentQuestion
 												? `${topPath} - ${currentQuestion.nextSibling.textContent}`
 												: topPath;
+										}
 										break;
 									}
 								}
-							} else
+							} else {
 								presenceData.details = applyPrivacy(
 									"Viewing quizzes",
 									`course: ${firstPath}`,
 									privacyMode
 								);
+							}
 							break;
 						}
 						case "rubrics": {
@@ -716,11 +739,12 @@ presence.on("UpdateData", async () => {
 									`course: ${firstPath}`,
 									privacyMode
 								);
-								if (!privacyMode)
+								if (!privacyMode) {
 									presenceData.state =
 										document.querySelector<HTMLInputElement>(
 											"#rubric-title"
 										).value;
+								}
 							} else if (pathSplit[3]) {
 								presenceData.details = applyPrivacy(
 									"Viewing rubric",
@@ -728,12 +752,13 @@ presence.on("UpdateData", async () => {
 									privacyMode
 								);
 								if (!privacyMode) presenceData.state = topPath;
-							} else
+							} else {
 								presenceData.details = applyPrivacy(
 									"Viewing rubrics",
 									`course: ${firstPath}`,
 									privacyMode
 								);
+							}
 							break;
 						}
 						case "settings": {
@@ -742,11 +767,12 @@ presence.on("UpdateData", async () => {
 								`course: ${firstPath}`,
 								privacyMode
 							);
-							if (!privacyMode)
+							if (!privacyMode) {
 								presenceData.state =
 									document.querySelector<HTMLLIElement>(
 										".ui-tabs-active"
 									).textContent;
+							}
 							break;
 						}
 						case "users": {
@@ -830,12 +856,13 @@ presence.on("UpdateData", async () => {
 						case "users": {
 							if (pathSplit[3])
 								canvasDataFunctions.profile(presenceData, privacyMode);
-							else
+							else {
 								canvasDataFunctions.people(
 									presenceData,
 									`group: ${firstPath}`,
 									privacyMode
 								);
+							}
 							break;
 						}
 					}
@@ -888,10 +915,11 @@ presence.on("UpdateData", async () => {
 			}
 			default: {
 				presenceData.details = "Browsing";
-				if (!privacyMode)
+				if (!privacyMode) {
 					presenceData.state =
 						document.querySelector<HTMLHeadingElement>("h2")?.textContent ??
 						document.title;
+				}
 			}
 		}
 	}
