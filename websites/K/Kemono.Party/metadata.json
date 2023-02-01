@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "I Am Lel#5090",
+		"name": "I Am Lel",
 		"id": "850319718920224798"
 	},
 	"service": "Kemono.Party",
@@ -11,7 +11,7 @@
 	"url": "kemono.party",
 	"regExp": "([a-z0-9-]+[.])*kemono[.]party[/]",
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/mwpEkf3.png",
+	"logo": "https://i.imgur.com/uLaGoCX.png",
 	"thumbnail": "https://i.imgur.com/7oehiJm.png",
 	"color": "#F05E16",
 	"category": "anime",
