@@ -45,29 +45,63 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Read the Privacy Policy from Night.design";
 	} else if (pathname === "/legal/imprint") {
 		presenceData.details = "Read the Imprint from Night.design";
-	} else if (pathname === `/resources/${document.location.pathname.split("/")[3]}`) {
-		presenceData.details = document.getElementsByClassName("m-b-10")[0].innerHTML;
+	} else if (
+		pathname === `/resources/${document.location.pathname.split("/")[3]}`
+	) {
+		presenceData.details =
+			document.getElementsByClassName("m-b-10")[0].innerHTML;
 		let pic = document.getElementById("prev") as HTMLImageElement;
 		presenceData.largeImageKey = pic.src;
-	} else if (pathname === `/u/${document.location.pathname.split("/")[3]}/activities`) {
-		let image = document.getElementsByClassName("rounded-circle  ng-lazyloaded")[0] as HTMLImageElement;
+	} else if (
+		pathname === `/u/${document.location.pathname.split("/")[3]}/activities`
+	) {
+		let image = document.getElementsByClassName(
+			"rounded-circle  ng-lazyloaded"
+		)[0] as HTMLImageElement;
 		presenceData.largeImageKey = image.src;
-		presenceData.details = `View ${document.location.pathname.split("/")[3]}'s activitys`;
-	} else if (pathname === `/u/${document.location.pathname.split("/")[3]}/resources`) {
-		let image = document.getElementsByClassName("rounded-circle  ng-lazyloaded")[0] as HTMLImageElement;
+		presenceData.details = `View ${
+			document.location.pathname.split("/")[3]
+		}'s activitys`;
+	} else if (
+		pathname === `/u/${document.location.pathname.split("/")[3]}/resources`
+	) {
+		let image = document.getElementsByClassName(
+			"rounded-circle  ng-lazyloaded"
+		)[0] as HTMLImageElement;
 		presenceData.largeImageKey = image.src;
-		presenceData.details = `View ${document.location.pathname.split("/")[3]}'s designs`;
-	} else if (pathname === `/u/${document.location.pathname.split("/")[3]}/connected-accounts`) {
-		let image = document.getElementsByClassName("rounded-circle  ng-lazyloaded")[0] as HTMLImageElement;
+		presenceData.details = `View ${
+			document.location.pathname.split("/")[3]
+		}'s designs`;
+	} else if (
+		pathname ===
+		`/u/${document.location.pathname.split("/")[3]}/connected-accounts`
+	) {
+		let image = document.getElementsByClassName(
+			"rounded-circle  ng-lazyloaded"
+		)[0] as HTMLImageElement;
 		presenceData.largeImageKey = image.src;
-		presenceData.details = `View ${document.location.pathname.split("/")[3]}'s connections`;
-	} else if(pathname === `/modder/${document.location.pathname.split("/")[3]}/statistics`) {
+		presenceData.details = `View ${
+			document.location.pathname.split("/")[3]
+		}'s connections`;
+	} else if (
+		pathname ===
+		`/modder/${document.location.pathname.split("/")[3]}/statistics`
+	) {
 		presenceData.details = "View my Application Statistics";
-	} else if(pathname === `/modder/${document.location.pathname.split("/")[3]}/moderation/queue`) {
+	} else if (
+		pathname ===
+		`/modder/${document.location.pathname.split("/")[3]}/moderation/queue`
+	) {
 		presenceData.details = "Manage moderations for my Application";
-	} else if(pathname ===`/modder/${document.location.pathname.split("/")[3]}/settings/basic`) {
+	} else if (
+		pathname ===
+		`/modder/${document.location.pathname.split("/")[3]}/settings/basic`
+	) {
 		presenceData.details = "Manage Settings for my Application";
-	} else if(pathname === `/modder/${document.location.pathname.split("/")[3]}/settings/members`) {
+	} else if (
+		pathname ===
+		`/modder/${document.location.pathname.split("/")[3]}/settings/members`
+	) {
 		presenceData.details = "Manage Members for my Application";
 	} else {
 		presenceData.details = "Nothing Found";
