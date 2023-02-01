@@ -3,50 +3,80 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	canvasDataFunctions = {
-		announcement: (presenceData: PresenceData, category: string) => {
-			return (presenceData.details = `Viewing announcements for ${category}`);
+		announcement: (
+			presenceData: PresenceData,
+			category: string,
+			private: boolean
+		) => {
+			return (presenceData.details = applyPrivacy(
+				"Viewing announcements",
+				category,
+				private
+			));
 		},
 		discussion: (
 			presenceData: PresenceData,
 			category: string,
-			discussionPath: string[]
+			discussionPath: string[],
+			private: boolean
 		) => {
 			switch (discussionPath[0] ?? "") {
 				case "": {
-					presenceData.details = `Viewing discussions for ${category}`;
+					presenceData.details = applyPrivacy(
+						"Viewing discussions",
+						category,
+						private
+					);
 					break;
 				}
 				case "new": {
-					presenceData.details = `Creating a new ${
-						getNavigationPath()[1] === "Announcements"
-							? "announcement"
-							: "discussion"
-					} for ${category}`;
-					presenceData.state =
-						document.querySelector<HTMLInputElement>("#discussion-title").value;
-					break;
-				}
-				default: {
-					if (discussionPath[1] === "edit") {
-						presenceData.details = `Editing a ${
+					presenceData.details = applyPrivacy(
+						`Creating a new ${
 							getNavigationPath()[1] === "Announcements"
 								? "announcement"
 								: "discussion"
-						} for ${category}`;
+						}`,
+						category,
+						private
+					);
+					if (!private)
 						presenceData.state =
 							document.querySelector<HTMLInputElement>(
 								"#discussion-title"
 							).value;
+					break;
+				}
+				default: {
+					if (discussionPath[1] === "edit") {
+						presenceData.details = applyPrivacy(
+							`Editing a ${
+								getNavigationPath()[1] === "Announcements"
+									? "announcement"
+									: "discussion"
+							}`,
+							category,
+							private
+						);
+						if (!private)
+							presenceData.state =
+								document.querySelector<HTMLInputElement>(
+									"#discussion-title"
+								).value;
 					} else {
-						presenceData.details = `Viewing a ${
-							getNavigationPath()[1] === "Announcements"
-								? "announcement"
-								: "discussion"
-						} for ${category}`;
-						presenceData.state =
-							document.querySelector<HTMLHeadingElement>(
-								".discussion-title"
-							).textContent;
+						presenceData.details = applyPrivacy(
+							`Viewing a ${
+								getNavigationPath()[1] === "Announcements"
+									? "announcement"
+									: "discussion"
+							}`,
+							category,
+							private
+						);
+						if (!private)
+							presenceData.state =
+								document.querySelector<HTMLHeadingElement>(
+									".discussion-title"
+								).textContent;
 					}
 				}
 			}
@@ -54,79 +84,154 @@ const presence = new Presence({
 		pages: (
 			presenceData: PresenceData,
 			category: string,
-			pagesPath: string[]
+			pagesPath: string[],
+			private: boolean
 		) => {
 			if (pagesPath[0]) {
 				if (pagesPath[1] === "edit") {
-					presenceData.details = `Editing a page for ${category}`;
-					presenceData.state =
-						document.querySelector<HTMLInputElement>("#title").value;
+					presenceData.details = applyPrivacy(
+						"Editing a page",
+						category,
+						private
+					);
+					if (!private)
+						presenceData.state =
+							document.querySelector<HTMLInputElement>("#title").value;
 				} else {
-					presenceData.details = `Viewing a page for ${category}`;
-					presenceData.state =
-						document.querySelector<HTMLHeadingElement>(
-							".page-title"
-						).textContent;
+					presenceData.details = applyPrivacy(
+						"Viewing a page",
+						category,
+						private
+					);
+					if (!private)
+						presenceData.state =
+							document.querySelector<HTMLHeadingElement>(
+								".page-title"
+							).textContent;
 				}
 			} else {
 				const titleInput = document.querySelector<HTMLInputElement>("#title");
 				if (titleInput) {
-					presenceData.details = `Creating a page for ${category}`;
-					presenceData.state = titleInput.value;
-				} else presenceData.details = `Viewing pages for ${category}`;
+					presenceData.details = applyPrivacy(
+						"Creating a page",
+						category,
+						private
+					);
+					if (!private) presenceData.state = titleInput.value;
+				} else
+					presenceData.details = applyPrivacy(
+						"Viewing pages",
+						category,
+						private
+					);
 			}
 		},
-		files: (presenceData: PresenceData, category: string = null) => {
-			if (category) presenceData.details = `Browsing files for ${category}`;
+		files: (
+			presenceData: PresenceData,
+			category: string = null,
+			private: boolean
+		) => {
+			if (category)
+				presenceData.details = applyPrivacy(
+					"Browsing files",
+					category,
+					private
+				);
 			else presenceData.details = "Browsing files";
-			presenceData.state = document.querySelector<HTMLAnchorElement>(
-				"#breadcrumbs>ul>li+li:last-of-type a"
-			).textContent;
+			if (!private)
+				presenceData.state = document.querySelector<HTMLAnchorElement>(
+					"#breadcrumbs>ul>li+li:last-of-type a"
+				).textContent;
 		},
-		collaborations: (presenceData: PresenceData, category: string) => {
+		collaborations: (
+			presenceData: PresenceData,
+			category: string,
+			private: boolean
+		) => {
 			if (
 				document.querySelector<HTMLFormElement>("#new_collaboration").style
 					.display !== "none"
 			) {
-				presenceData.details = `Creating a collaboration for ${category}`;
-				presenceData.state = document.querySelector<HTMLSelectElement>(
-					"#collaboration_collaboration_type"
-				).value;
+				presenceData.details = applyPrivacy(
+					"Creating a collaboration",
+					category,
+					private
+				);
+				if (!private)
+					presenceData.state = document.querySelector<HTMLSelectElement>(
+						"#collaboration_collaboration_type"
+					).value;
 			} else if (
 				document.querySelector<HTMLFormElement>(".edit_collaboration")
 			) {
-				presenceData.details = `Editing a collaboration for ${category}`;
-				presenceData.state = document.querySelector<HTMLInputElement>(
-					"[name='collaboration[title]']"
-				).value;
-			} else presenceData.details = `Browsing collaborations for ${category}`;
+				presenceData.details = applyPrivacy(
+					"Editing a collaboration",
+					category,
+					private
+				);
+				if (!private)
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						"[name='collaboration[title]']"
+					).value;
+			} else
+				presenceData.details = applyPrivacy(
+					"Browsing collaborations",
+					category,
+					private
+				);
 		},
-		conferences: (presenceData: PresenceData, category: string) => {
+		conferences: (
+			presenceData: PresenceData,
+			category: string,
+			private: boolean
+		) => {
 			const conferenceInput = document.querySelector<HTMLSelectElement>(
 				"#web_conference_conference_type"
 			);
 			if (conferenceInput) {
-				presenceData.details = `${
-					conferenceInput.disabled ? "Editing" : "Creating"
-				} a conference for ${category}`;
-				presenceData.state = document.querySelector<HTMLInputElement>(
-					"#web_conference_title"
-				).value;
-			} else presenceData.details = `Browsing conferences for ${category}`;
+				presenceData.details = applyPrivacy(
+					`${conferenceInput.disabled ? "Editing" : "Creating"} a conference`,
+					category,
+					private
+				);
+				if (!private)
+					presenceData.state = document.querySelector<HTMLInputElement>(
+						"#web_conference_title"
+					).value;
+			} else
+				presenceData.details = applyPrivacy(
+					"Browsing conferences",
+					category,
+					private
+				);
 		},
-		people: (presenceData: PresenceData, category: string) => {
-			presenceData.details = `Browsing members of ${category}`;
+		people: (
+			presenceData: PresenceData,
+			category: string,
+			private: boolean
+		) => {
+			presenceData.details = applyPrivacy(
+				"Browsing members",
+				category,
+				private
+			);
 		},
-		profile: (presenceData: PresenceData) => {
+		profile: (presenceData: PresenceData, private: boolean) => {
 			presenceData.details = "Viewing a user's profile";
-			presenceData.state = document
-				.querySelector<HTMLHeadingElement>("h2")
-				.textContent.trim();
-			presenceData.smallImageKey = getComputedStyle(
-				document.querySelector<HTMLAnchorElement>(".avatar")
-			).backgroundImage.match(/url\("(.+)"\)/)[1];
+			if (!private) {
+				presenceData.state = document
+					.querySelector<HTMLHeadingElement>("h2")
+					.textContent.trim();
+				presenceData.smallImageKey = getComputedStyle(
+					document.querySelector<HTMLAnchorElement>(".avatar")
+				).backgroundImage.match(/url\("(.+)"\)/)[1];
+			}
 		},
 	};
+
+function applyPrivacy(input: string, detail: string, private: boolean) {
+	return private ? input : `${input} for ${detail}`;
+}
 
 function getNavigationPath(): string[] {
 	return [...(document.querySelector("#breadcrumbs > ul")?.children ?? [])]
@@ -141,8 +246,9 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/DRlJvzX.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, hostname, search } = window.location,
-		pathSplit = pathname.split("/").filter(val => val);
+		{ pathname, hostname, search } = document.location,
+		pathSplit = pathname.split("/").filter(val => val),
+		privacyMode = await presence.getSetting<boolean>("privacyMode");
 
 	if (hostname === "www.canvas.net") {
 		switch (pathSplit[0] ?? "") {
@@ -184,7 +290,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "about": {
-				canvasDataFunctions.profile(presenceData);
+				canvasDataFunctions.profile(presenceData, privacyMode);
 				break;
 			}
 			case "account_notifications": {
@@ -219,7 +325,8 @@ presence.on("UpdateData", async () => {
 						case "announcements": {
 							canvasDataFunctions.announcement(
 								presenceData,
-								`course: ${firstPath}`
+								`course: ${firstPath}`,
+								privacyMode
 							);
 							break;
 						}
@@ -280,14 +387,16 @@ presence.on("UpdateData", async () => {
 						case "collaborations": {
 							canvasDataFunctions.collaborations(
 								presenceData,
-								`course: ${firstPath}`
+								`course: ${firstPath}`,
+								privacyMode
 							);
 							break;
 						}
 						case "conferences": {
 							canvasDataFunctions.conferences(
 								presenceData,
-								`course: ${firstPath}`
+								`course: ${firstPath}`,
+								privacyMode
 							);
 							break;
 						}
@@ -295,7 +404,8 @@ presence.on("UpdateData", async () => {
 							canvasDataFunctions.discussion(
 								presenceData,
 								`course: ${firstPath}`,
-								pathSplit.slice(3)
+								pathSplit.slice(3),
+								privacyMode
 							);
 							break;
 						}
@@ -305,7 +415,11 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "files": {
-							canvasDataFunctions.files(presenceData, `course: ${firstPath}`);
+							canvasDataFunctions.files(
+								presenceData,
+								`course: ${firstPath}`,
+								privacyMode
+							);
 							break;
 						}
 						case "gradebook": {
@@ -375,7 +489,8 @@ presence.on("UpdateData", async () => {
 							canvasDataFunctions.pages(
 								presenceData,
 								`course: ${firstPath}`,
-								pathSplit.slice(3)
+								pathSplit.slice(3),
+								privacyMode
 							);
 							break;
 						}
@@ -503,11 +618,13 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "users": {
-							if (pathSplit[3]) canvasDataFunctions.profile(presenceData);
+							if (pathSplit[3])
+								canvasDataFunctions.profile(presenceData, privacyMode);
 							else {
 								canvasDataFunctions.people(
 									presenceData,
-									`course: ${firstPath}`
+									`course: ${firstPath}`,
+									privacyMode
 								);
 							}
 							break;
@@ -517,7 +634,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "files": {
-				canvasDataFunctions.files(presenceData);
+				canvasDataFunctions.files(presenceData, null, privacyMode);
 				break;
 			}
 			case "groups": {
@@ -531,7 +648,8 @@ presence.on("UpdateData", async () => {
 						case "announcements": {
 							canvasDataFunctions.announcement(
 								presenceData,
-								`group: ${firstPath}`
+								`group: ${firstPath}`,
+								privacyMode
 							);
 							break;
 						}
@@ -539,7 +657,8 @@ presence.on("UpdateData", async () => {
 							canvasDataFunctions.pages(
 								presenceData,
 								`group: ${firstPath}`,
-								pathSplit.slice(3)
+								pathSplit.slice(3),
+								privacyMode
 							);
 							break;
 						}
@@ -547,32 +666,44 @@ presence.on("UpdateData", async () => {
 							canvasDataFunctions.discussion(
 								presenceData,
 								`group: ${firstPath}`,
-								pathSplit.slice(3)
+								pathSplit.slice(3),
+								privacyMode
 							);
 							break;
 						}
 						case "files": {
-							canvasDataFunctions.files(presenceData, `group: ${firstPath}`);
+							canvasDataFunctions.files(
+								presenceData,
+								`group: ${firstPath}`,
+								privacyMode
+							);
 							break;
 						}
 						case "collaborations": {
 							canvasDataFunctions.collaborations(
 								presenceData,
-								`group: ${firstPath}`
+								`group: ${firstPath}`,
+								privacyMode
 							);
 							break;
 						}
 						case "conferences": {
 							canvasDataFunctions.conferences(
 								presenceData,
-								`group: ${firstPath}`
+								`group: ${firstPath}`,
+								privacyMode
 							);
 							break;
 						}
 						case "users": {
-							if (pathSplit[3]) canvasDataFunctions.profile(presenceData);
+							if (pathSplit[3])
+								canvasDataFunctions.profile(presenceData, privacyMode);
 							else
-								canvasDataFunctions.people(presenceData, `group: ${firstPath}`);
+								canvasDataFunctions.people(
+									presenceData,
+									`group: ${firstPath}`,
+									privacyMode
+								);
 							break;
 						}
 					}
@@ -587,7 +718,7 @@ presence.on("UpdateData", async () => {
 						if (profileNameInput) {
 							presenceData.details = "Editing profile";
 							presenceData.state = profileNameInput.value;
-						} else canvasDataFunctions.profile(presenceData);
+						} else canvasDataFunctions.profile(presenceData, privacyMode);
 						break;
 					}
 					case "communication": {
