@@ -7,13 +7,10 @@ const presence = new Presence({ clientId: "808668919635247104" }),
 				startTimestamp: garticPlayingTimestamp,
 			};
 
-		// The homepage
 		if (path === "/") return { ...base, details: "Viewing the Homepage" };
 
-		// The rooms selection page
 		if (path === "/rooms") return { ...base, details: "Browsing rooms" };
 
-		// Not in any room???
 		if (path !== "/room" && !path.match(/^\/[0-9a-zA-Z]{8}/))
 			return { ...base, details: "Somewhere on the site" };
 
