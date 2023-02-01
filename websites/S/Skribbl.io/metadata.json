@@ -40,12 +40,6 @@
 			"title": "Show Invite Link",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": false
-		},
-		{
-			"id": "showCurrentDrawing",
-			"title": "Show Current Drawing",
-			"icon": "fas fa-paintbrush-fine",
-			"value": false
 		}
 	]
 }
