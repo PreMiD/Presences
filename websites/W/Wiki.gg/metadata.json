@@ -16,7 +16,11 @@
 	"thumbnail": "https://i.imgur.com/0Gq1Ra5.jpg",
 	"color": "#ff1980",
 	"category": "other",
-	"tags": ["wiki", "wikis", "terraria"],
+	"tags": [
+		"wiki",
+		"wikis",
+		"terraria"
+	],
 	"settings": [
 		{
 			"id": "lang",
