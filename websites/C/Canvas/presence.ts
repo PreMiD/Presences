@@ -333,15 +333,24 @@ presence.on("UpdateData", async () => {
 						case "assignments": {
 							switch (pathSplit[3] ?? "") {
 								case "": {
-									presenceData.details = `Viewing assignments for course: ${firstPath}`;
+									presenceData.details = applyPrivacy(
+										"Viewing assignments",
+										`course: ${firstPath}`,
+										privacyMode
+									);
 									break;
 								}
 								case "new": {
-									presenceData.details = `Creating an assignment for course: ${firstPath}`;
-									presenceData.state =
-										document.querySelector<HTMLInputElement>(
-											"#assignment_name"
-										).value;
+									presenceData.details = applyPrivacy(
+										"Creating an assignment",
+										`course: ${firstPath}`,
+										privacyMode
+									);
+									if (!privacyMode)
+										presenceData.state =
+											document.querySelector<HTMLInputElement>(
+												"#assignment_name"
+											).value;
 									break;
 								}
 								case "syllabus": {
@@ -350,34 +359,59 @@ presence.on("UpdateData", async () => {
 											"#course_syllabus_body_ifr"
 										)
 									)
-										presenceData.details = `Editing syllabus for course: ${firstPath}`;
+										presenceData.details = applyPrivacy(
+											"Editing syllabus",
+											`course: ${firstPath}`,
+											privacyMode
+										);
 									else
-										presenceData.details = `Viewing syllabus for course: ${firstPath}`;
+										presenceData.details = applyPrivacy(
+											"Viewing syllabus",
+											`course: ${firstPath}`,
+											privacyMode
+										);
 									break;
 								}
 								default: {
 									switch (pathSplit[4]) {
 										case "edit": {
-											presenceData.details = `Editing an assignment for course: ${firstPath}`;
-											presenceData.state =
-												document.querySelector<HTMLInputElement>(
-													"#assignment_name"
-												).value;
+											presenceData.details = applyPrivacy(
+												"Editing an assignment",
+												`course: ${firstPath}`,
+												privacyMode
+											);
+											if (!privacyMode)
+												presenceData.state =
+													document.querySelector<HTMLInputElement>(
+														"#assignment_name"
+													).value;
 											break;
 										}
 										case "submissions": {
-											presenceData.details = `Viewing submissions for an assignment for course: ${firstPath}`;
-											presenceData.state = navigationPath[2];
+											presenceData.details = applyPrivacy(
+												"Viewing submissions for an assignment",
+												`course: ${firstPath}`,
+												privacyMode
+											);
+											if (!privacyMode) presenceData.state = navigationPath[2];
 											break;
 										}
 										case "peer_reviews": {
-											presenceData.details = `Viewing peer reviews for an assignment for course: ${firstPath}`;
-											presenceData.state = topPath;
+											presenceData.details = applyPrivacy(
+												"Viewing peer reviews for an assignment",
+												`course: ${firstPath}`,
+												privacyMode
+											);
+											if (!privacyMode) presenceData.state = topPath;
 											break;
 										}
 										default: {
-											presenceData.details = `Viewing assignment for course: ${firstPath}`;
-											presenceData.state = topPath;
+											presenceData.details = applyPrivacy(
+												"Viewing assignment",
+												`course: ${firstPath}`,
+												privacyMode
+											);
+											if (!privacyMode) presenceData.state = topPath;
 										}
 									}
 								}
@@ -425,43 +459,77 @@ presence.on("UpdateData", async () => {
 						case "gradebook": {
 							switch (pathSplit[3]) {
 								case "history": {
-									presenceData.details = `Viewing grade history for course: ${firstPath}`;
+									presenceData.details = applyPrivacy(
+										"Viewing grade history",
+										`course: ${firstPath}`,
+										privacyMode
+									);
 									break;
 								}
 								case "speed_grader": {
-									presenceData.details = `Grading an assignment for course: ${
-										document.querySelector<HTMLAnchorElement>("#context_title")
-											.textContent
-									}`;
-									presenceData.state =
-										document.querySelector<HTMLHeadingElement>(
-											".assignmentDetails__Title"
-										).textContent;
+									presenceData.details = applyPrivacy(
+										"Grading an assignment",
+										`course: ${
+											document.querySelector<HTMLAnchorElement>(
+												"#context_title"
+											).textContent
+										}`,
+										privacyMode
+									);
+									if (!privacyMode)
+										presenceData.state =
+											document.querySelector<HTMLHeadingElement>(
+												".assignmentDetails__Title"
+											).textContent;
 									break;
 								}
 								default: {
-									presenceData.details = `Viewing gradebook for course: ${firstPath}`;
+									presenceData.details = applyPrivacy(
+										"Viewing gradebook",
+										`course: ${firstPath}`,
+										privacyMode
+									);
 								}
 							}
 							break;
 						}
 						case "grades": {
 							if (pathSplit[3]) {
-								presenceData.details = `Viewing student grades for course: ${firstPath}`;
-								presenceData.state = topPath;
+								presenceData.details = applyPrivacy(
+									"Viewing student grades",
+									`course: ${firstPath}`,
+									privacyMode
+								);
+								if (!privacyMode) presenceData.state = topPath;
 							} else
-								presenceData.details = `Viewing grades for course: ${firstPath}`;
+								presenceData.details = applyPrivacy(
+									"Viewing grades",
+									`course: ${firstPath}`,
+									privacyMode
+								);
 							break;
 						}
 						case "groups": {
-							presenceData.details = `Viewing groups for course: ${firstPath}`;
+							presenceData.details = applyPrivacy(
+								"Viewing groups",
+								`course: ${firstPath}`,
+								privacyMode
+							);
 							break;
 						}
 						case "modules": {
 							if (pathSplit[3] === "progressions")
-								presenceData.details = `Viewing module progression for course: ${firstPath}`;
+								presenceData.details = applyPrivacy(
+									"Viewing module progression",
+									`course: ${firstPath}`,
+									privacyMode
+								);
 							else
-								presenceData.details = `Viewing modules for course: ${firstPath}`;
+								presenceData.details = applyPrivacy(
+									"Viewing modules",
+									`course: ${firstPath}`,
+									privacyMode
+								);
 							break;
 						}
 						case "outcomes": {
@@ -473,16 +541,29 @@ presence.on("UpdateData", async () => {
 									"[data-testid='name-input']"
 								);
 							if (createOutcomeModal) {
-								presenceData.details = `Creating an outcome for course: ${firstPath}`;
-								presenceData.state =
-									createOutcomeModal.querySelector<HTMLInputElement>(
-										"input"
-									).value;
+								presenceData.details = applyPrivacy(
+									"Creating an outcome",
+									`course: ${firstPath}`,
+									privacyMode
+								);
+								if (!privacyMode)
+									presenceData.state =
+										createOutcomeModal.querySelector<HTMLInputElement>(
+											"input"
+										).value;
 							} else if (editOutcomeInput) {
-								presenceData.details = `Editing an outcome for course: ${firstPath}`;
-								presenceData.state = editOutcomeInput.value;
+								presenceData.details = applyPrivacy(
+									"Editing an outcome",
+									`course: ${firstPath}`,
+									privacyMode
+								);
+								if (!privacyMode) presenceData.state = editOutcomeInput.value;
 							} else
-								presenceData.details = `Viewing outcomes for course: ${firstPath}`;
+								presenceData.details = applyPrivacy(
+									"Viewing outcomes",
+									`course: ${firstPath}`,
+									privacyMode
+								);
 							break;
 						}
 						case "pages": {
@@ -498,43 +579,73 @@ presence.on("UpdateData", async () => {
 							if (pathSplit[3]) {
 								switch (pathSplit[4] ?? "") {
 									case "": {
-										presenceData.details = `Viewing a quiz for course: ${firstPath}`;
-										presenceData.state = topPath;
+										presenceData.details = applyPrivacy(
+											"Viewing a quiz",
+											`course: ${firstPath}`,
+											privacyMode
+										);
+										if (!privacyMode) presenceData.state = topPath;
 										break;
 									}
 									case "edit": {
-										presenceData.details = `Editing a quiz for course: ${firstPath}`;
-										presenceData.state = topPath;
+										presenceData.details = applyPrivacy(
+											"Editing a quiz",
+											`course: ${firstPath}`,
+											privacyMode
+										);
+										if (!privacyMode) presenceData.state = topPath;
 										break;
 									}
 									case "history": {
-										presenceData.details = `Viewing an attempt for a quiz in course: ${firstPath}`;
-										presenceData.state = `${navigationPath[2]} - Attempt ${
-											document
-												.querySelector<HTMLAnchorElement>(
-													".quiz_version.selected"
-												)
-												.textContent.match(/(\d+):/)[1]
-										}`;
+										presenceData.details = applyPrivacy(
+											"Viewing an attempt for a quiz",
+											/* in */ `course: ${firstPath}`,
+											privacyMode
+										);
+										if (!privacyMode)
+											presenceData.state = `${navigationPath[2]} - Attempt ${
+												document
+													.querySelector<HTMLAnchorElement>(
+														".quiz_version.selected"
+													)
+													.textContent.match(/(\d+):/)[1]
+											}`;
 										break;
 									}
 									case "moderate": {
-										presenceData.details = `Moderating a quiz for course: ${firstPath}`;
-										presenceData.state = navigationPath[2];
+										presenceData.details = applyPrivacy(
+											"Moderating a quiz",
+											`course: ${firstPath}`,
+											privacyMode
+										);
+										if (!privacyMode) presenceData.state = navigationPath[2];
 										break;
 									}
 									case "statistics": {
-										presenceData.details = `Viewing statistics for a quiz in course: ${firstPath}`;
-										presenceData.state = navigationPath[2];
+										presenceData.details = applyPrivacy(
+											"Viewing statistics for a quiz",
+											/* in */ `course: ${firstPath}`,
+											privacyMode
+										);
+										if (!privacyMode) presenceData.state = navigationPath[2];
 										break;
 									}
 									case "submissions": {
-										presenceData.details = `Viewing quiz log for course: ${firstPath}`;
-										presenceData.state = `${navigationPath[2]} - ${navigationPath[3]}`;
+										presenceData.details = applyPrivacy(
+											"Viewing quiz log",
+											`course: ${firstPath}`,
+											privacyMode
+										);
+										if (!privacyMode)
+											presenceData.state = `${navigationPath[2]} - ${navigationPath[3]}`;
 										break;
 									}
 									case "take": {
-										presenceData.details = `Taking a quiz for course: ${firstPath}`;
+										presenceData.details = applyPrivacy(
+											"Taking a quiz",
+											`course: ${firstPath}`,
+											privacyMode
+										);
 										const currentQuestion = document.querySelector(
 												".current_question i"
 											),
@@ -583,38 +694,59 @@ presence.on("UpdateData", async () => {
 												timeElapsed.getTime() / 1000
 											);
 										}
-										presenceData.state = currentQuestion
-											? `${topPath} - ${currentQuestion.nextSibling.textContent}`
-											: topPath;
+										if (!privacyMode)
+											presenceData.state = currentQuestion
+												? `${topPath} - ${currentQuestion.nextSibling.textContent}`
+												: topPath;
 										break;
 									}
 								}
 							} else
-								presenceData.details = `Viewing quizzes for course: ${firstPath}`;
+								presenceData.details = applyPrivacy(
+									"Viewing quizzes",
+									`course: ${firstPath}`,
+									privacyMode
+								);
 							break;
 						}
 						case "rubrics": {
 							if (document.querySelector<HTMLDivElement>("#rubric_new")) {
-								presenceData.details = `${
-									pathSplit[3] ? "Editing" : "Creating"
-								} a rubric for course: ${firstPath}`;
-								presenceData.state =
-									document.querySelector<HTMLInputElement>(
-										"#rubric-title"
-									).value;
+								presenceData.details = applyPrivacy(
+									`${pathSplit[3] ? "Editing" : "Creating"} a rubric`,
+									`course: ${firstPath}`,
+									privacyMode
+								);
+								if (!privacyMode)
+									presenceData.state =
+										document.querySelector<HTMLInputElement>(
+											"#rubric-title"
+										).value;
 							} else if (pathSplit[3]) {
-								presenceData.details = `Viewing rubric for course: ${firstPath}`;
-								presenceData.state = topPath;
+								presenceData.details = applyPrivacy(
+									"Viewing rubric",
+									`course: ${firstPath}`,
+									privacyMode
+								);
+								if (!privacyMode) presenceData.state = topPath;
 							} else
-								presenceData.details = `Viewing rubrics for course: ${firstPath}`;
+								presenceData.details = applyPrivacy(
+									"Viewing rubrics",
+									`course: ${firstPath}`,
+									privacyMode
+								);
 							break;
 						}
 						case "settings": {
-							presenceData.details = `Managing settings for course: ${firstPath}`;
-							presenceData.state =
-								document.querySelector<HTMLLIElement>(
-									".ui-tabs-active"
-								).textContent;
+							presenceData.details = applyPrivacy(
+								"Managing settings",
+								`course: ${firstPath}`,
+								privacyMode
+							);
+							if (!privacyMode)
+								presenceData.state =
+									document.querySelector<HTMLLIElement>(
+										".ui-tabs-active"
+									).textContent;
 							break;
 						}
 						case "users": {
@@ -642,7 +774,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Viewing a group";
 					switch (pathSplit[2] ?? "") {
 						case "": {
-							presenceData.state = topPath;
+							if (!privacyMode) presenceData.state = topPath;
 							break;
 						}
 						case "announcements": {
@@ -717,7 +849,7 @@ presence.on("UpdateData", async () => {
 							document.querySelector<HTMLInputElement>("#name_input");
 						if (profileNameInput) {
 							presenceData.details = "Editing profile";
-							presenceData.state = profileNameInput.value;
+							if (!privacyMode) presenceData.state = profileNameInput.value;
 						} else canvasDataFunctions.profile(presenceData, privacyMode);
 						break;
 					}
@@ -756,9 +888,10 @@ presence.on("UpdateData", async () => {
 			}
 			default: {
 				presenceData.details = "Browsing";
-				presenceData.state =
-					document.querySelector<HTMLHeadingElement>("h2")?.textContent ??
-					document.title;
+				if (!privacyMode)
+					presenceData.state =
+						document.querySelector<HTMLHeadingElement>("h2")?.textContent ??
+						document.title;
 			}
 		}
 	}
