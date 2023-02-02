@@ -255,7 +255,7 @@ function getNavigationPath(): string[] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/DRlJvzX.png",
+			largeImageKey: "https://i.imgur.com/Bqsnmop.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, search } = document.location,
