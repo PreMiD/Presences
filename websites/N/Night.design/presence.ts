@@ -61,36 +61,44 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Read the Imprint from Night.design";
 			break;
 		case `/resources/${document.location.pathname.split("/")[3]}`:
-			const pic = document.querySelector(".img-fluid") as HTMLImageElement;
-			presenceData.largeImageKey = pic.src;
-			presenceData.details = document.querySelector(".m-b-10").innerHTML;
+			{
+				const pic = document.querySelector(".img-fluid") as HTMLImageElement;
+				presenceData.largeImageKey = pic.src;
+				presenceData.details = document.querySelector(".m-b-10").innerHTML;
+			}
 			break;
 		case `/u/${document.location.pathname.split("/")[3]}/activities`:
-			const image = document.querySelectorAll(
-				".rounded-circle"
-			)[0] as HTMLImageElement;
-			presenceData.largeImageKey = image.src;
-			presenceData.details = `View ${
-				document.location.pathname.split("/")[3]
-			}'s activitys`;
+			{
+				const image = document.querySelectorAll(
+					".rounded-circle"
+				)[0] as HTMLImageElement;
+				presenceData.largeImageKey = image.src;
+				presenceData.details = `View ${
+					document.location.pathname.split("/")[3]
+				}'s activitys`;
+			}
 			break;
 		case `/u/${document.location.pathname.split("/")[3]}/resources`:
-			const image1 = document.querySelectorAll(
-				".rounded-circle"
-			)[0] as HTMLImageElement;
-			presenceData.largeImageKey = image1.src;
-			presenceData.details = `View ${
-				document.location.pathname.split("/")[3]
-			}'s designs`;
+			{
+				const image1 = document.querySelectorAll(
+					".rounded-circle"
+				)[0] as HTMLImageElement;
+				presenceData.largeImageKey = image1.src;
+				presenceData.details = `View ${
+					document.location.pathname.split("/")[3]
+				}'s designs`;
+			}
 			break;
 		case `/u/${document.location.pathname.split("/")[3]}/connected-accounts`:
-			const image2 = document.querySelectorAll(
-				".rounded-circle"
-			)[0] as HTMLImageElement;
-			presenceData.largeImageKey = image2.src;
-			presenceData.details = `View ${
-				document.location.pathname.split("/")[3]
-			}'s connections`;
+			{
+				const image2 = document.querySelectorAll(
+					".rounded-circle"
+				)[0] as HTMLImageElement;
+				presenceData.largeImageKey = image2.src;
+				presenceData.details = `View ${
+					document.location.pathname.split("/")[3]
+				}'s connections`;
+			}
 			break;
 		case `/modder/${document.location.pathname.split("/")[3]}/statistics`:
 			presenceData.details = "View my Application Statistics";
