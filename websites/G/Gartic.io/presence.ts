@@ -3,7 +3,7 @@ const presence = new Presence({ clientId: "808668919635247104" }),
 	getGarticPresence = (): PresenceData => {
 		const path = document.location.pathname,
 			base: PresenceData = {
-				largeImageKey: "https://i.imgur.com/JkOc5Vo.png",
+				largeImageKey: "https://i.imgur.com/3rfHXtU.png",
 				startTimestamp: garticPlayingTimestamp,
 			};
 
