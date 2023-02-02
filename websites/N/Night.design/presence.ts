@@ -42,15 +42,14 @@ presence.on("UpdateData", async () => {
 	else if (
 		pathname === `/resources/${document.location.pathname.split("/")[3]}`
 	) {
-		presenceData.details =
-			document.getElementsByClassName("m-b-10")[0].innerHTML;
-		const pic = document.getElementById("prev") as HTMLImageElement;
+		presenceData.details = document.querySelector(".m-b-10").innerHTML;
+		const pic = document.querySelector(".img-fluid") as HTMLImageElement;
 		presenceData.largeImageKey = pic.src;
 	} else if (
 		pathname === `/u/${document.location.pathname.split("/")[3]}/activities`
 	) {
-		const image = document.getElementsByClassName(
-			"rounded-circle  ng-lazyloaded"
+		const image = document.querySelectorAll(
+			".rounded-circle"
 		)[0] as HTMLImageElement;
 		presenceData.largeImageKey = image.src;
 		presenceData.details = `View ${
@@ -59,8 +58,8 @@ presence.on("UpdateData", async () => {
 	} else if (
 		pathname === `/u/${document.location.pathname.split("/")[3]}/resources`
 	) {
-		const image = document.getElementsByClassName(
-			"rounded-circle  ng-lazyloaded"
+		const image = document.querySelectorAll(
+			".rounded-circle"
 		)[0] as HTMLImageElement;
 		presenceData.largeImageKey = image.src;
 		presenceData.details = `View ${
@@ -70,8 +69,8 @@ presence.on("UpdateData", async () => {
 		pathname ===
 		`/u/${document.location.pathname.split("/")[3]}/connected-accounts`
 	) {
-		const image = document.getElementsByClassName(
-			"rounded-circle  ng-lazyloaded"
+		const image = document.querySelectorAll(
+			".rounded-circle"
 		)[0] as HTMLImageElement;
 		presenceData.largeImageKey = image.src;
 		presenceData.details = `View ${
