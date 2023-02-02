@@ -98,7 +98,7 @@ function getGamePhase() {
 
 enum Assets {
 	Logo = "https://i.imgur.com/EYcWQmj.png",
-	Avatar = "https://i.imgur.com/oMq5qpz.png",
+	Avatar = "https://i.imgur.com/Uunb9C6.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
