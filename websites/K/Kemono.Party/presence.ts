@@ -56,10 +56,10 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `${
 					document.querySelector("[itemprop=name]").textContent
 				}`;
-			presenceData.largeImageKey = `${
-				(<HTMLImageElement>document.querySelector(".user-header__avatar img"))
-					.src
-			}`;
+				presenceData.largeImageKey = `${
+					(<HTMLImageElement>document.querySelector(".user-header__avatar img"))
+						.src
+				}`;
 			}
 			for (const [platform, name] of Object.entries(service)) {
 				if (document.title.includes(platform))
