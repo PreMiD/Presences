@@ -4,58 +4,52 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/4mDvKNa.png",
 	};
 
 	presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
 	const pathname = document.location.pathname.slice(3);
 
-	if (pathname === "/home") {
-		presenceData.details = "View the Homepage";
-	} else if (pathname === "/resources") {
-		if (!document.location.search) {
-			presenceData.details = "Search...";
-		}
-	} else if (pathname === "/settings/account") {
+	if (pathname === "/home") presenceData.details = "View the Homepage";
+	else if (pathname === "/resources") presenceData.details = "Search...";
+	else if (pathname === "/settings/account")
 		presenceData.details = "Change my Account Settings";
-	} else if (pathname === "/settings/notifications") {
+	else if (pathname === "/settings/notifications")
 		presenceData.details = "Change my notifications Settings";
-	} else if (pathname === "/settings/connected-accounts") {
+	else if (pathname === "/settings/connected-accounts")
 		presenceData.details = "Add a user connection to my account";
-	} else if (pathname === "/settings/account-security") {
+	else if (pathname === "/settings/account-security")
 		presenceData.details = "Change my Account Security Settings";
-	} else if (pathname === "/password-forgotten") {
+	else if (pathname === "/password-forgotten")
 		presenceData.details = "Change my Password";
-	} else if (pathname === "/login") {
+	else if (pathname === "/login")
 		presenceData.details = "Sign in with my Account";
-	} else if (pathname === "/register") {
+	else if (pathname === "/register")
 		presenceData.details = "Create a new Account";
-	} else if (pathname === "/dashboard") {
+	else if (pathname === "/dashboard")
 		presenceData.details = "View my Dashboard";
-	} else if (pathname === "/creator") {
-		presenceData.details = "View Creator page";
-	} else if (pathname === "/modder") {
-		presenceData.details = "View Modder Page";
-	} else if (pathname === "/modder/publisher") {
+	else if (pathname === "/creator") presenceData.details = "View Creator page";
+	else if (pathname === "/modder") presenceData.details = "View Modder Page";
+	else if (pathname === "/modder/publisher")
 		presenceData.details = "Apply to become a Modder";
-	} else if (pathname === "/legal/terms-of-service") {
+	else if (pathname === "/legal/terms-of-service")
 		presenceData.details = "Read the Terms of Service from Night.design";
-	} else if (pathname === "/legal/privacy-policy") {
+	else if (pathname === "/legal/privacy-policy")
 		presenceData.details = "Read the Privacy Policy from Night.design";
-	} else if (pathname === "/legal/imprint") {
+	else if (pathname === "/legal/imprint")
 		presenceData.details = "Read the Imprint from Night.design";
-	} else if (
+	else if (
 		pathname === `/resources/${document.location.pathname.split("/")[3]}`
 	) {
 		presenceData.details =
 			document.getElementsByClassName("m-b-10")[0].innerHTML;
-		let pic = document.getElementById("prev") as HTMLImageElement;
+		const pic = document.getElementById("prev") as HTMLImageElement;
 		presenceData.largeImageKey = pic.src;
 	} else if (
 		pathname === `/u/${document.location.pathname.split("/")[3]}/activities`
 	) {
-		let image = document.getElementsByClassName(
+		const image = document.getElementsByClassName(
 			"rounded-circle  ng-lazyloaded"
 		)[0] as HTMLImageElement;
 		presenceData.largeImageKey = image.src;
@@ -65,7 +59,7 @@ presence.on("UpdateData", async () => {
 	} else if (
 		pathname === `/u/${document.location.pathname.split("/")[3]}/resources`
 	) {
-		let image = document.getElementsByClassName(
+		const image = document.getElementsByClassName(
 			"rounded-circle  ng-lazyloaded"
 		)[0] as HTMLImageElement;
 		presenceData.largeImageKey = image.src;
@@ -76,7 +70,7 @@ presence.on("UpdateData", async () => {
 		pathname ===
 		`/u/${document.location.pathname.split("/")[3]}/connected-accounts`
 	) {
-		let image = document.getElementsByClassName(
+		const image = document.getElementsByClassName(
 			"rounded-circle  ng-lazyloaded"
 		)[0] as HTMLImageElement;
 		presenceData.largeImageKey = image.src;
@@ -86,25 +80,24 @@ presence.on("UpdateData", async () => {
 	} else if (
 		pathname ===
 		`/modder/${document.location.pathname.split("/")[3]}/statistics`
-	) {
+	)
 		presenceData.details = "View my Application Statistics";
-	} else if (
+	else if (
 		pathname ===
 		`/modder/${document.location.pathname.split("/")[3]}/moderation/queue`
-	) {
+	)
 		presenceData.details = "Manage moderations for my Application";
-	} else if (
+	else if (
 		pathname ===
 		`/modder/${document.location.pathname.split("/")[3]}/settings/basic`
-	) {
+	)
 		presenceData.details = "Manage Settings for my Application";
-	} else if (
+	else if (
 		pathname ===
 		`/modder/${document.location.pathname.split("/")[3]}/settings/members`
-	) {
+	)
 		presenceData.details = "Manage Members for my Application";
-	} else {
-		presenceData.details = "Nothing Found";
-	}
+	else presenceData.details = "Nothing Found";
+
 	presence.setActivity(presenceData);
 });
