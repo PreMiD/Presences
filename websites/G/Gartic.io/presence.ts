@@ -7,21 +7,30 @@ const presence = new Presence({ clientId: "808668919635247104" }),
 				startTimestamp: garticPlayingTimestamp,
 			};
 
-		if (path === "/") return { ...base, details: "Viewing the Homepage" };
+		if (path === "/") return { ...base, details: "Viewing the homepage" };
 
 		if (path === "/rooms") return { ...base, details: "Browsing rooms" };
 
-		if (path !== "/room" && !path.match(/^\/[0-9a-zA-Z]{8}/))
+		if (path !== "/room" && !path.match(/^\/[0-9a-zA-Z]{6,}/))
 			return { ...base, details: "Somewhere on the site" };
 
 		const user = document.querySelector(".user.you"),
+			medal =
+				Object.entries({
+					first: "🥇",
+					second: "🥈",
+					third: "🥉",
+				})
+					.filter(([key]) => user.classList.contains(key))
+					.map(([, value]) => value)
+					.find(() => true) ?? "",
+			wins = Number(user.querySelector(".win")?.textContent ?? "0"),
 			data: PresenceData = {
 				...base,
-				details: `In a room / ${
-					user.querySelector(".nick").textContent
-				} / ${user
+				details: `${user.querySelector(".nick").textContent} | ${medal} ${user
 					.querySelector(".points")
-					.textContent.replace("pts", "points")}`,
+					.textContent.replace("pts", "points")} 
+					${wins > 0 ? ` | 🏆 ${wins} wins` : ""}`,
 			};
 
 		if (user.classList.contains("turn"))
