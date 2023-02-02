@@ -41,23 +41,20 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes("/user/")) {
 			if (pathname.includes("/post/")) {
 				presenceData.details = `${
-					document.querySelector("{[class=post__title] > span:nth-child(1)}")
-						.textContent
+					document.querySelector("#page h1 span:nth-child(1)").textContent
 				}`;
 				presenceData.state = `${document
-					.querySelector("a[class='post__user-name']")
-					.textContent.replace(/\s+/g, "")}`;
+					.querySelector("a.post__user-name")
+					.textContent.trim()}`;
 			} else {
 				presenceData.details = `${
 					document.querySelector("[itemprop=name]").textContent
 				}`;
 			}
 			presenceData.largeImageKey = `${
-				(<HTMLImageElement>(
-					document.querySelector("a > [class=fancy-image__picture] > img")
-				)).src
+				(<HTMLImageElement>document.querySelector(".user-header__avatar img"))
+					.src
 			}`;
-
 			for (const [platform, name] of Object.entries(service)) {
 				if (document.title.includes(platform))
 					presenceData = { ...presenceData, ...name };
