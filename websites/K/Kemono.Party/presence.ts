@@ -46,15 +46,21 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${document
 					.querySelector("a.post__user-name")
 					.textContent.trim()}`;
+
+				presenceData.largeImageKey = `${
+					(<HTMLImageElement>(
+						document.querySelector("#page .post__user a picture img")
+					)).src
+				}`;
 			} else {
 				presenceData.details = `${
 					document.querySelector("[itemprop=name]").textContent
 				}`;
-			}
 			presenceData.largeImageKey = `${
 				(<HTMLImageElement>document.querySelector(".user-header__avatar img"))
 					.src
 			}`;
+			}
 			for (const [platform, name] of Object.entries(service)) {
 				if (document.title.includes(platform))
 					presenceData = { ...presenceData, ...name };
