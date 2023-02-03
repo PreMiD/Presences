@@ -62,16 +62,15 @@ presence.on("UpdateData", async () => {
 			break;
 		case `/resources/${document.location.pathname.split("/")[3]}`:
 			{
-				const pic = document.querySelector(".img-fluid") as HTMLImageElement;
+				const pic = document.querySelector<HTMLImageElement>(".img-fluid");
 				presenceData.largeImageKey = pic.src;
 				presenceData.details = document.querySelector(".m-b-10").innerHTML;
 			}
 			break;
 		case `/u/${document.location.pathname.split("/")[3]}/activities`:
 			{
-				const image = document.querySelectorAll(
-					".rounded-circle"
-				)[0] as HTMLImageElement;
+				const image =
+					document.querySelector<HTMLImageElement>(".rounded-circle");
 				presenceData.largeImageKey = image.src;
 				presenceData.details = `View ${
 					document.location.pathname.split("/")[3]
@@ -80,9 +79,8 @@ presence.on("UpdateData", async () => {
 			break;
 		case `/u/${document.location.pathname.split("/")[3]}/resources`:
 			{
-				const image1 = document.querySelectorAll(
-					".rounded-circle"
-				)[0] as HTMLImageElement;
+				const image1 =
+					document.querySelector<HTMLImageElement>(".rounded-circle");
 				presenceData.largeImageKey = image1.src;
 				presenceData.details = `View ${
 					document.location.pathname.split("/")[3]
@@ -91,9 +89,8 @@ presence.on("UpdateData", async () => {
 			break;
 		case `/u/${document.location.pathname.split("/")[3]}/connected-accounts`:
 			{
-				const image2 = document.querySelectorAll(
-					".rounded-circle"
-				)[0] as HTMLImageElement;
+				const image2 =
+					document.querySelector<HTMLImageElement>(".rounded-circle");
 				presenceData.largeImageKey = image2.src;
 				presenceData.details = `View ${
 					document.location.pathname.split("/")[3]
