@@ -1,25 +1,27 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "service": "Anime Genzai",
-  "author": {
-    "id": "257151906038677504",
-    "name": "SHISEN#8023"
-  },
-  "description": {
-    "en": "Discover the best subtitles and dubbed Anime series and movies with advanced filters and watch them in HD."
-  },
-  "url": "animegenzai.net",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/dtmYEl8.png",
-  "thumbnail": "https://i.imgur.com/irueb07.png",
-  "color": "#f5c518",
-  "tags": [
-    "animegenzai",
-    "anime"
-  ],
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "257151906038677504",
+		"name": "SHISEN"
+	},
+	"service": "Anime Genzai",
+	"description": {
+		"en": "Discover the best subtitles and dubbed Anime series and movies with advanced filters and watch them in HD.",
+		"es": "Descubre las mejores series y peliculas de Anime subtituladas y dobladas con filtros avanzados y míralas en HD."
+	},
+	"url": "animegenzai.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/dtmYEl8.png",
+	"thumbnail": "https://i.imgur.com/irueb07.png",
+	"color": "#f5c518",
+	"category": "anime",
+	"tags": [
+		"animegenzai",
+		"anime",
+		"video"
+	],
 	"iframe": true,
-  "category": "anime",
-  "settings": [
+	"settings": [
 		{
 			"id": "lang",
 			"multiLanguage": true
