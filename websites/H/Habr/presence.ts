@@ -56,6 +56,7 @@ presence.on("UpdateData", async () => {
 		case "news":
 		case "hubs":
 		case "companies":
+		case "feed":
 			presenceData.details = privacy
 				? strings.viewHome
 				: `${strings.viewing} ${strings.chapter.toLowerCase()} ${textContent(
@@ -103,9 +104,10 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector(
 					".tm-tabs__tab-link_active"
 				)?.firstChild?.textContent;
-				presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-					".tm-entity-image__pic"
-				)?.src;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(
+						".tm-user-card__header-data .tm-entity-image__pic"
+					)?.src || Assets.Logo;
 				presenceData.buttons = [
 					{
 						label: strings.buttonViewPage,
@@ -113,6 +115,15 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			}
+			break;
+
+		case "auth":
+			presenceData.details = `${strings.viewing} ${textContent(
+				".tm-section-name__text"
+			)}`;
+			presenceData.state = textContent(".tm-tabs__tab-link_active");
+			presenceData.smallImageKey = Assets.Viewing;
+			presenceData.smallImageText = strings.viewing;
 			break;
 
 		case "hub":
@@ -133,7 +144,7 @@ presence.on("UpdateData", async () => {
 				".tm-tabs__tab-link_active"
 			)?.firstChild?.textContent;
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				".tm-entity-image__pic"
+				".tm-company-card__header .tm-entity-image__pic"
 			)?.src;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = strings.viewing;
