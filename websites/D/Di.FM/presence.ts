@@ -17,11 +17,10 @@ presence.on("UpdateData", () => {
 			document.querySelectorAll(".track-name")[0].textContent;
 		presenceData.smallImageKey = "play";
 
-		presenceData.largeImageKey = (<HTMLImageElement>(
-			document.querySelector(
+		presenceData.largeImageKey = 
+			document.querySelector<HTMLImageElement>(
 				"div > section.track-region.col > div > div.artwork > div > img"
-			)
-		)).src;
+			).src;
 	} else {
 		presenceData.state = "Browsing...";
 		presenceData.smallImageKey = "pause";
