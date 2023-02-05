@@ -14,12 +14,11 @@ async function getStrings() {
 			play: "general.watchingVid",
 			pause: "general.paused",
 			searchSomething: "general.searchSomething",
-			watchingMovie: "general.watchingMovie",
 			watchVideoButton: "general.buttonWatchVideo",
+			watchingSeries: "general.watchingSeries",
+			watchingMovie: "general.watchingMovie",
 			buttonViewPage: "general.buttonViewPage",
 			viewPage: "general.viewPage",
-			viewMovie: "general.viewMovie",
-			chapter: "general.chapter",
 			viewThread: "general.viewThread",
 			viewProfile: "general.viewProfile",
 		},
@@ -41,7 +40,8 @@ let video = {
 		currentTime: 0,
 		paused: true,
 	},
-	strings: Awaited<ReturnType<typeof getStrings>>;
+	strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 function textContent(tags: string) {
 	return document.querySelector(tags)?.textContent?.trim();
@@ -65,7 +65,8 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 		},
-		[privacy, logo, time, buttons] = await Promise.all([
+		[newLang, privacy, logo, time, buttons] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "es"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("logo"),
 			presence.getSetting<boolean>("time"),
@@ -74,7 +75,10 @@ presence.on("UpdateData", async () => {
 		{ pathname, href } = document.location,
 		path = pathname.split("/")[1];
 
-	if (!strings) strings = await getStrings();
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
 	switch (path) {
 		case "":
@@ -144,7 +148,8 @@ presence.on("UpdateData", async () => {
 				".profile-content .username"
 			)}`;
 			presenceData.state = textContent(".nav.pt-0 li .active");
-			presenceData.largeImageKey = getImage(".profile-avatar .avatar");
+			presenceData.largeImageKey =
+				getImage(".profile-avatar .avatar") || Assets.Logo;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = strings.viewing;
 			break;
@@ -173,13 +178,14 @@ presence.on("UpdateData", async () => {
 			];
 
 			if (!privacy && video.currentTime > 0) {
-				presenceData.details = textContent(".caption-content a h1");
+				presenceData.details = `${strings.watchingSeries} ${textContent(
+					".caption-content a h1"
+				)}`;
 				presenceData.state = `${textContent(
 					".episodes .active .active .episode"
 				)} ${textContent(".episodes .active .active .name")}`;
 			} else if (privacy && video.currentTime > 0)
-				presenceData.details = `${strings.viewing} ${strings.anime}`;
-
+				presenceData.details = strings.watchingSeries;
 			break;
 
 		case "movie":
@@ -195,7 +201,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 
-			if (video.currentTime > 0) presenceData.details = strings.viewMovie;
+			if (video.currentTime > 0) presenceData.details = strings.watchingMovie;
 			break;
 	}
 
