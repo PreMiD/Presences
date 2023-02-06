@@ -76,6 +76,7 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "seriale":
+		case "szukaj":
 			presenceData.details = strings.searchSomething;
 			if (genres && !privacy) {
 				presenceData.details = strings.viewGenre;
