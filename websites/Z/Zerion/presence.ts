@@ -22,7 +22,7 @@ async function getStrings() {
 }
 
 enum Assets {
-	Logo = "https://i.imgur.com/z81cOIW.png",
+	Logo = "https://i.imgur.com/MpeS5tp.png",
 	Searching = "https://i.imgur.com/UhPgTRn.png",
 	Viewing = "https://i.imgur.com/RMg2Qgg.png",
 	Play = "https://i.imgur.com/juDzimk.png",
