@@ -21,7 +21,8 @@ async function getStrings() {
 	);
 }
 
-let strings: Awaited<ReturnType<typeof getStrings>>;
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 enum Assets {
 	Logo = "https://i.imgur.com/DrxgYIA.png",
@@ -39,7 +40,8 @@ presence.on("UpdateData", async () => {
 			details: "Где-то на сайте",
 			largeImageKey: Assets.Logo,
 		},
-		[privacy, logo, time, buttons] = await Promise.all([
+		[newLang, privacy, logo, time, buttons] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "ru"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("logo"),
 			presence.getSetting<boolean>("time"),
@@ -48,7 +50,10 @@ presence.on("UpdateData", async () => {
 		{ pathname, href } = document.location,
 		path = pathname.split("/");
 
-	if (!strings) strings = await getStrings();
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
 	switch (path[2]) {
 		case "all":
