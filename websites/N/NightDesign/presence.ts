@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 	if (maybeSupportedPageLanguage.length === 2)
 		path = path.replace(`/${maybeSupportedPageLanguage}`, "");
 
-	if (path !== "home") {
+	if (path !== "/home") {
 		presenceData.buttons = [
 			{
 				label: "Visit page",
