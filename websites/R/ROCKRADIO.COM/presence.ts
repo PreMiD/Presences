@@ -9,7 +9,7 @@ let user: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/fEecbHy.png",
+		largeImageKey: "rock",
 	};
 
 	if (document.location.hostname === "www.rockradio.com") {

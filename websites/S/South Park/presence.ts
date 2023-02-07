@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 	SouthParkData ??= await presence.getPageletiable<Data>("__DATA__");
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/h6b3eEW.jpg",
+		largeImageKey: "south_park_logo",
 		details: "Browsing...",
 		smallImageKey: "reading",
 		startTimestamp: startTime,

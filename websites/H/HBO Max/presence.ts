@@ -154,7 +154,7 @@ async function fetchVideoInfo() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/UxH7DDE.png",
+			largeImageKey: "lg",
 		},
 		video = document.querySelector("video"),
 		path = document.location.pathname;

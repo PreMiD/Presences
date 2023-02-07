@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/0qpwOvt.jpg",
+		largeImageKey: "animep_logo",
 		details: strings.browse,
 		smallImageKey: "reading",
 		startTimestamp: startsTime,

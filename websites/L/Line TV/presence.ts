@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/F2sWIqN.png",
+		largeImageKey: "linetv_logo",
 		startTimestamp: browsingTimestamp,
 		details: strings.browse,
 	};

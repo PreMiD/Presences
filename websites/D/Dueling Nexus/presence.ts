@@ -6,7 +6,7 @@ let text;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/zE6MjUq.png",
+		largeImageKey: "banner",
 		startTimestamp: elapsed,
 	};
 

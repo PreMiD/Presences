@@ -7,7 +7,7 @@ let title: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/zjbM0Um.png",
+		largeImageKey: "4gamers",
 	};
 
 	if (document.location.hostname === "www.4gamers.com.tw") {

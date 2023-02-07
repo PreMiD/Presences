@@ -7,7 +7,7 @@ let lobbyStartTime: number, gameStartTime: number;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/qYm3qWs.jpg",
+		largeImageKey: "logo",
 		startTimestamp: generalStartTime,
 	};
 

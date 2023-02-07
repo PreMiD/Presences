@@ -6,7 +6,7 @@ let elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/p3ZpoFY.png",
+			largeImageKey: "logo",
 		},
 		path = document.location.pathname;
 	if (path === "/") {

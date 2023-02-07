@@ -10,7 +10,7 @@ let user: string, title: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/QckmKnj.png",
+		largeImageKey: "svt",
 	};
 
 	if (document.location.hostname === "www.svtplay.se") {

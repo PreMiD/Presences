@@ -309,7 +309,7 @@ presence.on("UpdateData", async () => {
 		context = pages.find(x => x.middleware(window, [query]));
 	if (!context) return;
 	const data: PresenceData = {
-			largeImageKey: "https://i.imgur.com/HRAGMzw.png",
+			largeImageKey: "logo",
 		},
 		showStartedBrowsing = await presence
 			.getSetting<boolean>("show_startedBrowsing")

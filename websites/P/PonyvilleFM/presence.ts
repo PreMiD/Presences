@@ -30,14 +30,14 @@ presence.on("UpdateData", async () => {
 			if (!listeningCheck) {
 				presence.setActivity({
 					details: stationStatus,
-					largeImageKey: "https://i.imgur.com/WAIEF55.png",
+					largeImageKey: "pvfm",
 					smallImageKey: "pause",
 				});
 			} else {
 				const presenceData: PresenceData = {
 					details: stationStatus,
 					state: `On air: ${onAir.textContent}`,
-					largeImageKey: "https://i.imgur.com/WAIEF55.png",
+					largeImageKey: "pvfm",
 					smallImageKey: "play",
 					startTimestamp: timeElapsed,
 				};
@@ -67,14 +67,14 @@ presence.on("UpdateData", async () => {
 			if (!listeningCheck) {
 				presence.setActivity({
 					details: stationStatus,
-					largeImageKey: "https://i.imgur.com/WAIEF55.png",
+					largeImageKey: "pvfm",
 					smallImageKey: "pause",
 				});
 			} else {
 				const presenceData: PresenceData = {
 					details: stationStatus,
 					state: `On air: ${onAir.textContent}`,
-					largeImageKey: "https://i.imgur.com/WAIEF55.png",
+					largeImageKey: "pvfm",
 					smallImageKey: "play",
 					startTimestamp: timeElapsed,
 				};
@@ -104,14 +104,14 @@ presence.on("UpdateData", async () => {
 			if (!listeningCheck) {
 				presence.setActivity({
 					details: stationStatus,
-					largeImageKey: "https://i.imgur.com/WAIEF55.png",
+					largeImageKey: "pvfm",
 					smallImageKey: "pause",
 				});
 			} else {
 				const presenceData: PresenceData = {
 					details: stationStatus,
 					state: `On air: ${onAir.textContent}`,
-					largeImageKey: "https://i.imgur.com/WAIEF55.png",
+					largeImageKey: "pvfm",
 					smallImageKey: "play",
 					startTimestamp: timeElapsed,
 				};

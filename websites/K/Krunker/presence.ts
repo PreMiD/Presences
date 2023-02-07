@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/pvjY5Ox.png",
+			largeImageKey: "krunker",
 		},
 		gameInfo = document.querySelector("#curGameInfo");
 

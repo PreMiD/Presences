@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Yzr4SeJ.png",
+			largeImageKey: "reddit_lg",
 			startTimestamp,
 		},
 		{ pathname } = window.location;

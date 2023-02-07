@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		pause: "general.paused",
 	});
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/f22N41q.png",
+		largeImageKey: "peloton",
 		startTimestamp: browsingTimestamp,
 	};
 

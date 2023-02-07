@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/0GEzMXM.png",
+			largeImageKey: "salty",
 		};
 	switch (document.location.pathname) {
 		case "/":

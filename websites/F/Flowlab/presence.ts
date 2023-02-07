@@ -3,7 +3,7 @@ const presence = new Presence({ clientId: "991160367629750372" }),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/XpyDbbv.png",
+			largeImageKey: "icon",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = document.location;

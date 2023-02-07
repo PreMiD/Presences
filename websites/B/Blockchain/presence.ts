@@ -20,7 +20,7 @@ let currencyTitle: string, pageStatus: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/rmmWPPP.png",
+		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp,
 	};
 

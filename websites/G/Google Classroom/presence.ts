@@ -27,7 +27,7 @@ let strings: Awaited<ReturnType<typeof getStrings>> = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/cZ0dXeF.png",
+			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname.split("/"),

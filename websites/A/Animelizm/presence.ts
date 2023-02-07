@@ -22,7 +22,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/zgNeFww.png",
+		largeImageKey: "logo",
 	};
 
 	if (isNaN(video.duration) || video.duration <= 0) {

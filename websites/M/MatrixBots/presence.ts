@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/KjLAKp8.png",
+			largeImageKey: "logo",
 			startTimestamp: matrixBrowsing,
 		},
 		matrixPage = window.location.pathname;

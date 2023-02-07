@@ -24,7 +24,7 @@ function getTitleText() {
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/mZSiamM.png",
+			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		},
 		path = window.location.pathname.split("/wiki/index.php/")[1] ?? "";

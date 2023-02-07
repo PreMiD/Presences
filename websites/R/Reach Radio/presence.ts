@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/4OAAc9O.png",
+			largeImageKey: "reach2",
 		},
 		[info, elapsed, format1, format2] = await Promise.all([
 			presence.getSetting<boolean>("sInfo"),

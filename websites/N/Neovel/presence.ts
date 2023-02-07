@@ -6,11 +6,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/CYk2ZDX.jpg",
+			largeImageKey: "neovel_logo",
 			startTimestamp: browsingTimestamp,
 		},
 		presenceDataSlide: PresenceData = {
-			largeImageKey: "https://i.imgur.com/CYk2ZDX.jpg",
+			largeImageKey: "neovel_logo",
 			startTimestamp: browsingTimestamp,
 		},
 		pathnameArray = document.location.pathname.split("/"),

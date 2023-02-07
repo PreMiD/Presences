@@ -36,7 +36,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Bf7TsWG.png",
+		largeImageKey: "codenames",
 	};
 
 	const buttons = await presence.getSetting<boolean>("buttons");

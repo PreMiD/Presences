@@ -25,7 +25,7 @@ presence.on("iFrameData", (data: VideoData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/mhjMnnU.png",
+		largeImageKey: "oa",
 	};
 
 	if (video && !isNaN(video.duration) && video.duration > 0) {

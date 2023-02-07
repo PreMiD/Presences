@@ -44,7 +44,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/dv1nn7J.png",
+			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;

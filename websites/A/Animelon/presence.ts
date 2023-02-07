@@ -47,7 +47,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/5gunVuc.png",
+			largeImageKey: "animelon",
 			startTimestamp: browsingTimestamp,
 		},
 		[buttons, newLang] = await Promise.all([

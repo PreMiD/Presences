@@ -20,7 +20,7 @@ presenceSet();
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/xcK0UqX.png",
+		largeImageKey: "dashnet",
 		startTimestamp: browsingTimestamp,
 	};
 

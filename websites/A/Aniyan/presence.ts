@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 
 	if (!playback) {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/x5yDUF9.png",
+			largeImageKey: "lg",
 			details: "Browsing...",
 			startTimestamp: browsingTimestamp,
 		};
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details: videoTitle.textContent,
 				state: episode.textContent,
-				largeImageKey: "https://i.imgur.com/x5yDUF9.png",
+				largeImageKey: "lg",
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause

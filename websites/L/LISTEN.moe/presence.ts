@@ -7,7 +7,7 @@ const presence: Presence = new Presence({
 		live: "general.live",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/MMBVkQu.jpg",
+		largeImageKey: "listen_moe_lg",
 	},
 	audio: HTMLAudioElement = document.querySelector("audio");
 let path: string,

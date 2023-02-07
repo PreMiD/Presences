@@ -6,7 +6,7 @@ let priceEls;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/f22iobC.png",
+		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp,
 	};
 

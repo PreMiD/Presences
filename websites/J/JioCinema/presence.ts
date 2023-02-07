@@ -9,7 +9,7 @@ const presence: Presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/vP9Hh5d.png",
+			largeImageKey: "large_img",
 			startTimestamp,
 		},
 		url = window.location.href;
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		const [video] = document.querySelectorAll("video");
 		presenceData.details =
 			document.querySelectorAll(".meta-data-title")[0].textContent;
-		presenceData.largeImageKey = "https://i.imgur.com/vP9Hh5d.png";
+		presenceData.largeImageKey = "large_img";
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused
 			? (await strings).pause

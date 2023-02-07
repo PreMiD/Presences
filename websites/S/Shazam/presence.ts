@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 		songPlaying = song ? !song.paused : false;
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/GpU3LIg.png",
+		largeImageKey: "shazam",
 		startTimestamp: elapsed,
 	};
 

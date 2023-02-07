@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 
 	if (!playback) {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/pScqtTz.png",
+			largeImageKey: "lg",
 		};
 
 		presenceData.details = "Browsing...";
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.querySelector("video.dplayer-video.dplayer-video-current")) {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/pScqtTz.png",
+			largeImageKey: "lg",
 			smallImageKey: "live",
 		};
 

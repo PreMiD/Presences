@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "655480486046466098" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/IOeHPUb.png",
+		largeImageKey: "gly-logo",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -62,7 +62,7 @@ presence.on("UpdateData", () => {
 		presence.setActivity({
 			details: "Bilinmeyen bir sayfada...",
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/IOeHPUb.png",
+			largeImageKey: "gly-logo",
 		});
 	}
 });

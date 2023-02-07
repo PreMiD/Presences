@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "629413852391669791",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/LlascQj.png",
+		largeImageKey: "kitsu_lg",
 	};
 
 let path, user: string;

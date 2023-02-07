@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/g5Y299F.png",
+			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		},
 		search = document.querySelector<HTMLInputElement>(

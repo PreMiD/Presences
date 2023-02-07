@@ -31,7 +31,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/LXjbZoN.png",
+		largeImageKey: "logo",
 	};
 	if (document.location.pathname.includes("/videos")) {
 		if (playback === true && !isNaN(duration)) {

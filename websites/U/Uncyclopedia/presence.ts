@@ -8,7 +8,7 @@ const actionURL = new URL(document.location.href),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/e8b5Yvs.png",
+		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp,
 	};
 

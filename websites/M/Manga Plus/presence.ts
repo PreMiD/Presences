@@ -7,7 +7,7 @@ let cacheMangaURL: string, cacheMangaChapter: string;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Browsing",
-			largeImageKey: "https://i.imgur.com/W3vFfFi.png",
+			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,

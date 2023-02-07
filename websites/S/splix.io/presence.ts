@@ -6,7 +6,7 @@ let ui: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/rD9lZrN.png",
+		largeImageKey: "splix",
 	};
 
 	if (document.location.pathname === "/") {

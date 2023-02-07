@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		video = document.querySelector("video"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/cTa4588.png",
+			largeImageKey: "ud-logo",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

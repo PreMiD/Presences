@@ -29,7 +29,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 presence.on("UpdateData", async () => {
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/BY7MROC.png",
+			largeImageKey: "main",
 			startTimestamp: browsingTimestamp,
 		},
 		{ hostname, href, pathname } = document.location,

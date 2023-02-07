@@ -19,7 +19,7 @@
 						document.querySelector(".backInfoTxt2").textContent
 					}`,
 					state: document.querySelector(".backInfoTxt3").textContent,
-					largeImageKey: "https://i.imgur.com/6sp3k8m.png",
+					largeImageKey: "danime",
 					smallImageKey: isPlaying ? "play" : "pause",
 					smallImageText: isPlaying
 						? (await strings).play

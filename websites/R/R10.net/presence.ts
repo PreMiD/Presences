@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			"body > main > div > form > div > div.head"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/dhdxyGa.png",
+			largeImageKey: "logo_beyaz",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

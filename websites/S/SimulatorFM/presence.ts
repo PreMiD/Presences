@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/yKFc2V1.png",
+		largeImageKey: "largelogo",
 	};
 
 	if (document.querySelector<HTMLElement>(".fa-pause")) {

@@ -8,7 +8,7 @@ const presence: Presence = new Presence({
 		paused: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/m98ne7Q.png",
+		largeImageKey: "yay_lg",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 let playback: boolean,

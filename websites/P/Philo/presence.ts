@@ -11,7 +11,7 @@ let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Np5TVJB.png",
+			largeImageKey: "philo",
 		},
 		{ href, pathname: path } = window.location;
 

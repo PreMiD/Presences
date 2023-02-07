@@ -20,7 +20,7 @@ let channel: string,
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/JhRi5x4.png",
+		largeImageKey: "tv",
 	};
 
 	const pages: Record<string, PresenceData> = {

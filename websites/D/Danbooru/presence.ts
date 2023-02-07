@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/pniknY6.png",
+			largeImageKey: "danbooru",
 			startTimestamp: browsingTimestamp,
 		},
 		[shortTitle] = document.title.split(/[|]/, 1),

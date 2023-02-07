@@ -146,7 +146,7 @@ function resolveLanguage(lang: string): keyof typeof waitingString {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/TFduNvD.png",
+		largeImageKey: "logo",
 	};
 
 	path = document.location.pathname.split("/");

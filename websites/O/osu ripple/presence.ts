@@ -10,7 +10,7 @@ let customData = false,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/bj86lDJ.png",
+		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp,
 	};
 	customData = false;

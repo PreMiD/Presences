@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ZmDhLly.png",
+		largeImageKey: "lastfm",
 		smallImageKey: "browse",
 		startTimestamp: browsingTimestamp,
 	};
@@ -154,7 +154,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = artwork.includes("player_default_album")
 				? "lastfm"
 				: artwork.replace("/174s/", "/1024s/");
-		} else presenceData.largeImageKey = "https://i.imgur.com/ZmDhLly.png";
+		} else presenceData.largeImageKey = "lastfm";
 
 		presenceData.details = "Listening to:";
 		presenceData.state = document

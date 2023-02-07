@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/hcw43Xf.png",
+			largeImageKey: "personality-database",
 			startTimestamp: browsingTimestamp,
 		},
 		useOnlyFirstPersonalityType = await presence.getSetting<boolean>(

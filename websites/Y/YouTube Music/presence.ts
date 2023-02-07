@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 		if (privacyMode) {
 			return presence.setActivity({
 				...(mediaSession.playbackState === "playing" && {
-					largeImageKey: "https://i.imgur.com/31gvH2b.png",
+					largeImageKey: "ytm_lg",
 					details: "Listening to music",
 				}),
 			});
@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
 	} else if (showBrowsing) {
 		if (privacyMode) {
 			return presence.setActivity({
-				largeImageKey: "https://i.imgur.com/31gvH2b.png",
+				largeImageKey: "ytm_lg",
 				details: "Browsing YouTube Music",
 			});
 		}
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presenceData = {
-			largeImageKey: "https://i.imgur.com/31gvH2b.png",
+			largeImageKey: "ytm_lg",
 			details: "Browsing",
 			startTimestamp,
 		};

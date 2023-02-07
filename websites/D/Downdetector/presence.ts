@@ -13,7 +13,7 @@ let title;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ba5AI1b.png",
+		largeImageKey: "logo",
 		startTimestamp: browsingTimestamp,
 	};
 

@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/SMaNfT2.png",
+			largeImageKey: "logo",
 		},
 		itemsetting = await presence.getSetting<boolean>("items"),
 		languagesetting = await presence.getSetting<string>("language");

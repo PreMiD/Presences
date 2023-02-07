@@ -32,7 +32,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/DfHT5E8.png",
+		largeImageKey: "icon",
 	};
 
 	// Presence

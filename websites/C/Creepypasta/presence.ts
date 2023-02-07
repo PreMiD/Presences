@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/WYcFqyS.png",
+			largeImageKey: "logo",
 			startTimestamp: browsingStamp,
 		},
 		orderBy = document.getElementsByName("_orderby")[0] as HTMLSelectElement;

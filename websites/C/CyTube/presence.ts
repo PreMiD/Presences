@@ -97,7 +97,7 @@ presence.on("iFrameData", (data: VideoData) => {
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/gp4nfwi.png",
+			largeImageKey: "cytube_logo",
 			details: "loading",
 			state: "CyTube",
 		},

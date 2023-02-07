@@ -14,7 +14,7 @@ presence.on("iFrameData", (data: { timeLeft: string; paused: boolean }) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/SDiZrOe.png",
+			largeImageKey: "logo",
 			details: "Browsing...",
 			startTimestamp: browsingTimestamp,
 		},
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = "Searching";
 	}
-	if (!cover) presenceData.largeImageKey = "https://i.imgur.com/SDiZrOe.png";
+	if (!cover) presenceData.largeImageKey = "logo";
 	if (!buttons) delete presenceData.buttons;
 	if (!timestamps) {
 		delete presenceData.startTimestamp;

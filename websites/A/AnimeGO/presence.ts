@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey: "https://i.imgur.com/B32aOhi.jpg",
+			largeImageKey: "animego_logo",
 			smallImageText: "AnimeGO",
 		},
 		typeContent = document

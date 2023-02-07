@@ -11,7 +11,7 @@ let user: string, title: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/WTfjamG.png",
+		largeImageKey: "sh",
 	};
 
 	if (document.location.hostname === "www.skillshare.com") {

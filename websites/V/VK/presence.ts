@@ -78,7 +78,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/4s4Zbf6.png",
+			largeImageKey: "vk_logo",
 		},
 		gstrings = await presence.getStrings({
 			play: "general.playing",

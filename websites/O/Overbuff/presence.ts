@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ceCTdEn.png",
+		largeImageKey: "overbuff",
 	};
 
 	if (window.location.pathname.includes("/players/")) {

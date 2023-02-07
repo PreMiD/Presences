@@ -37,7 +37,7 @@ setInterval(async () => {
 	}
 
 	presenceData = {
-		largeImageKey: "https://i.imgur.com/d1za28M.png",
+		largeImageKey: "og-image",
 		smallImageKey: playing ? "play" : "pause",
 		smallImageText: playing ? (await strings).playing : (await strings).pause,
 		details: (document.querySelectorAll(".track__title")[0] as HTMLElement)

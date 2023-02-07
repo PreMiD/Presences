@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector("#info > h1")?.textContent ?? "desconhecido",
 		path = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/5U9jD9W.jpg",
+			largeImageKey: "site",
 			startTimestamp: browsingTimestamp,
 		};
 

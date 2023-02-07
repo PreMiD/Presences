@@ -24,7 +24,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/XyGiJIR.png",
+			largeImageKey: "logo",
 			details: "Browsing",
 			startTimestamp: browsingTimestamp,
 		},
@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "reading";
 		}
 	}
-	if (!image) presenceData.largeImageKey = "https://i.imgur.com/XyGiJIR.png";
+	if (!image) presenceData.largeImageKey = "logo";
 	if (!buttons) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });

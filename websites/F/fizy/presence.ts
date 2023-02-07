@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		) as HTMLAudioElement,
 		playing = player ? (player.paused ? false : true) : false,
 		data: { [k: string]: string | number } = {
-			largeImageKey: "https://i.imgur.com/hObvLZB.png",
+			largeImageKey: "fizy-logo",
 		},
 		songName = document.querySelector(
 			"body > div.main-wrapper.ng-scope > ui-view > main > div > media-player > div > div.player > div.player__wrapper > div.player__metadata > div > div.player__media-name.radio__media-name > a"

@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 	// Define presence data
 	const presenceData: PresenceData = {
 		details: "Browsing...",
-		largeImageKey: "https://i.imgur.com/Tt7iIYq.png",
+		largeImageKey: "pandora",
 	};
 
 	// Define whether or not we're currently playing

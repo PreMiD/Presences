@@ -25,7 +25,7 @@ presence.on("iFrameData", (data: DataInterface) => {
 });
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/oew3JqR.png",
+			largeImageKey: "logo",
 		},
 		pathArray: string[] = window.location.pathname
 			.replace(/^\/|\/$/g, "")

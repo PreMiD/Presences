@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		startTimestamp: browsingTimestamp,
-		largeImageKey: "https://i.imgur.com/6ChenmJ.jpg",
+		largeImageKey: "main",
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the home page";

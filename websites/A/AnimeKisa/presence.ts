@@ -27,7 +27,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ac0KCKY.png",
+		largeImageKey: "akisa",
 	};
 	if (
 		document.querySelector(".infoan2") &&

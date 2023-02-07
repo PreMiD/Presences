@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	if (isHostSP) presenceData.largeImageKey = "https://i.imgur.com/egrBdbu.png";
+	if (isHostSP) presenceData.largeImageKey = "starplus-logo";
 
 	// Star+ videos
 	if (isHostSP && location.pathname.includes("/video/")) {

@@ -47,7 +47,7 @@ presence.on("iFrameData", async (msg: Data | null) => {
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/THrSw57.png",
+			largeImageKey: "blutv",
 		};
 
 	if (!path.includes("izle")) {

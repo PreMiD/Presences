@@ -34,7 +34,7 @@ if (lastPlaybackState !== reading) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/o9joHZX.png",
+		largeImageKey: "largeimage",
 	};
 
 	tabTitle = document.title;

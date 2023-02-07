@@ -9,7 +9,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	data.privacyMode = await presence.getSetting<boolean>("privacy");
 	data.presenceData = {
-		largeImageKey: "https://i.imgur.com/24ELNgo.jpg",
+		largeImageKey: "logo",
 	};
 
 	if (matchPage("/")) updateData("Viewing page:", "Homepage", false);

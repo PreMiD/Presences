@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/0WHU4T5.png",
+			largeImageKey: "malltvlogo",
 		},
 		strings = await presence.getStrings({
 			browsing: "general.browsing",

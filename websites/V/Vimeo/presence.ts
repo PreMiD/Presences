@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 			".vp-video-wrapper .vp-video video"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/OJunR7n.png",
+			largeImageKey: "logo",
 		};
 
 	if (document.location.pathname === "/") presenceData.details = "Browsing...";
@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			);
 		presenceData.details = title;
 		presenceData.state = uploader;
-		presenceData.largeImageKey = "https://i.imgur.com/OJunR7n.png";
+		presenceData.largeImageKey = "vimeo-logo";
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused
 			? (await strings).pause

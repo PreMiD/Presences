@@ -9,7 +9,7 @@ const startTime: number = Date.now();
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/MVpfVss.jpg",
+		largeImageKey: "logo",
 		startTimestamp: startTime,
 	};
 	// Getting Data

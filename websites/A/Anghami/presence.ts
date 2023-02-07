@@ -26,7 +26,7 @@ function getTimestamps(audioTime: string, audioDuration: string): number[] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/PzxFsAZ.png",
+			largeImageKey: "anlg",
 		},
 		playback = !!document.querySelector("anghami-player");
 

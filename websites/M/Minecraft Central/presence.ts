@@ -6,7 +6,7 @@ let user: HTMLElement | Element, thread: HTMLElement | Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/W7XIUCd.png",
+		largeImageKey: "mccentrallogo",
 		startTimestamp: browsingTimestamp,
 	};
 

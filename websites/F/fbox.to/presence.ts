@@ -19,7 +19,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/HXOjyCu.png",
+			largeImageKey: "fbox_logo",
 		},
 		{ pathname, href } = document.location,
 		[buttons, image] = await Promise.all([

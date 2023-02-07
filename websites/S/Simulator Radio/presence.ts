@@ -46,7 +46,7 @@ let lastTitle = "",
 
 presence.on("UpdateData", function () {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/fUvjEoV.png",
+		largeImageKey: "srlogo",
 	};
 
 	if (

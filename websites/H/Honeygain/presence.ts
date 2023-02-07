@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
 	const path = window.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/GUMs8VF.png",
+			largeImageKey: "honeygain",
 			details: "Browsing Honeygain",
 			startTimestamp: browsingTimestamp,
 		};

@@ -9,7 +9,7 @@ let oldLang: string,
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/1d8TEw1.png",
+			largeImageKey: "logo_big",
 		};
 
 	oldLang = newLang;
@@ -202,7 +202,7 @@ presence.on("UpdateData", async () => {
 
 					presenceData.details = "My Services";
 					if (category) presenceData.state = category;
-					presenceData.largeImageKey = "https://i.imgur.com/1d8TEw1.png";
+					presenceData.largeImageKey = "logo_big";
 					presenceData.smallImageText = strings.browsing;
 					presenceData.smallImageKey = "reading";
 					break;

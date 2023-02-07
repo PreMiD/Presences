@@ -6,7 +6,7 @@ let chapter, titlePage, title, subject;
 const path = document.location.pathname;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/jZEhnvk.png",
+		largeImageKey: "logo",
 	};
 	function subjectCondition(subject: string): string {
 		title = document.querySelector(

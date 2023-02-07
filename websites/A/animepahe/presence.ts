@@ -160,7 +160,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/LBb6FrK.png",
+			largeImageKey: "animepahe",
 			details: "loading",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		},

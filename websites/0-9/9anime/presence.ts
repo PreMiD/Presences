@@ -17,7 +17,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/jPl7EfZ.png",
+			largeImageKey: "9anime",
 		},
 		[showCover, timestamps, joinButton] = await Promise.all([
 			presence.getSetting<boolean>("cover"),

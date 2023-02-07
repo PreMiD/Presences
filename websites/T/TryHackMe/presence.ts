@@ -3,7 +3,7 @@ const presence = new Presence({
 		//Enable use and detection of media key presses
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/gqL7pDD.png",
+		largeImageKey: "icon",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 let customData = false;
@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			presence.setActivity({
 				details: "Completing room:",
 				state: title.textContent,
-				largeImageKey: "https://i.imgur.com/gqL7pDD.png",
+				largeImageKey: "icon",
 				startTimestamp: browsingTimestamp,
 			});
 		} else presenceData.details = "Looking at rooms!";

@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/myBgo2K.png",
+			largeImageKey: "photopea",
 		},
 		Path = document.location.pathname;
 	presenceData.startTimestamp = Math.floor(Date.now() / 1000);

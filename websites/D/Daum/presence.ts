@@ -92,7 +92,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/UFpDEUR.png",
+		largeImageKey: "daum",
 		startTimestamp: startTime,
 	};
 

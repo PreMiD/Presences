@@ -16,7 +16,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/au4OO2A.jpg",
+			largeImageKey: "logo",
 		},
 		buttons = await presence.getSetting<boolean>("buttons"),
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),

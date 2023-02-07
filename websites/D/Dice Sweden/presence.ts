@@ -11,7 +11,7 @@ let articleTitle: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/gDWQwS4.png",
+			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		},
 		showButtons = await presence.getSetting<boolean>("buttons"),

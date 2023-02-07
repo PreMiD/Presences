@@ -35,7 +35,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/44orW6Y.png",
+		largeImageKey: "genoanime",
 		startTimestamp: browsingTimestamp,
 	}; //title of the page
 	if (document.location.pathname === "/")

@@ -36,7 +36,7 @@ const gain = new Presence({
 gain.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/S1ftiFE.jpg",
+			largeImageKey: "g-logo",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		settings = await gainSettings();

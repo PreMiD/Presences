@@ -40,7 +40,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/5pg4mIv.png",
+			largeImageKey: "logo",
 		},
 		query = new URLSearchParams(document.location.search),
 		paths: string[] = document.location.pathname.split("/");

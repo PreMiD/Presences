@@ -5,11 +5,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/uryXMgr.png",
+		largeImageKey: "main",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	if (document.location.hostname === "superiorservers.co") {
-		presenceData.largeImageKey = "https://i.imgur.com/uryXMgr.png";
+		presenceData.largeImageKey = "main";
 		presenceData.details = "Portal";
 		if (
 			(document.location.pathname === "/" || !document.location.pathname) &&

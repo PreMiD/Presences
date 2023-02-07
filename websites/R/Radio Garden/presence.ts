@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details,
 				state,
-				largeImageKey: "https://i.imgur.com/Q2l6Bw8.png",
+				largeImageKey: "bigglobe",
 				startTimestamp: elapsed,
 			};
 		currentState = document

@@ -30,7 +30,7 @@ function getText(selector: string): string {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/f2PMsG4.jpg",
+			largeImageKey: "logo",
 		},
 		showPrivButton = await presence.getSetting<boolean>("privateRoom"),
 		showButtons = await presence.getSetting<boolean>("showButtons"),

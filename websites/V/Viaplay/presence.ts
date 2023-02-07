@@ -20,7 +20,7 @@ function capitalise(splitStr: string[]): string {
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ChKRz5r.png",
+		largeImageKey: "large_img",
 		startTimestamp,
 	};
 	const url = window.location.href;
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			tokens = url.split("/");
 		presenceData = {
 			details: capitalise(tokens[6].split("-")),
-			largeImageKey: "https://i.imgur.com/ChKRz5r.png",
+			largeImageKey: "large_img",
 			smallImageKey: video.paused ? "pause" : "play",
 			smallImageText: video.paused
 				? (await strings).pause

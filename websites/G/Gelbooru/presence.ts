@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/CgGzxXy.png",
+			largeImageKey: "lg-gb",
 		},
 		urlParams = new URLSearchParams(window.location.search);
 	if (document.location.pathname === "/")

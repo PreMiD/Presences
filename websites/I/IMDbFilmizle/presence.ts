@@ -6,7 +6,7 @@ const presence = new Presence({
 		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/cIr56HO.png",
+		largeImageKey: "ifi-logo",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	pages: { [page: string]: string } = {

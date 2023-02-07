@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/YeXjpVB.jpg",
+		largeImageKey: "uselesslogo",
 	};
 
 	if (window.location.href.toLowerCase().includes("theuselessweb.com"))

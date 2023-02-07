@@ -6,7 +6,7 @@ let title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/yQShI1r.png",
+		largeImageKey: "logo_y",
 	};
 
 	if (document.location.hostname === "yagpdb.xyz") {

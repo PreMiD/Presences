@@ -7,7 +7,7 @@ let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/XNUEGd9.png",
+		largeImageKey: "primemc",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "primemc.org") {
