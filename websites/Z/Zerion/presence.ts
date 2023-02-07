@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "serial":
-			presenceData.details = `${strings.viewPage}`;
+			presenceData.details = strings.viewPage;
 			presenceData.state =
 				textContent("#series-page .info .title-original") ||
 				textContent("#series-page .info .title");
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = strings.viewing;
 
 			if (path[3]) {
-				presenceData.details = `${strings.viewPage}`;
+				presenceData.details = strings.viewPage;
 				presenceData.state = textContent(".info .title");
 				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = strings.viewing;
