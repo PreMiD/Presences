@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "author": {
+    "id": "766213190332710913",
+    "name": "BassKatze#0001"
+  },
+  "service": "NightDesign",
+  "description": {
+    "en": "NightDesign is a Minecraft Cosmetics and Social-Network Website"
+  },
+  "url": [
+    "night.design",
+    "dev.night.design"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/cspBuGx.png",
+  "thumbnail": "https://i.imgur.com/bxLwjnQ.png",
+  "color": "#16355D",
+  "category": "games",
+  "tags": [
+    "minecraft",
+    "cosmetics",
+    "forge",
+    "fabric",
+    "cloaks",
+    "capes",
+    "bandanas",
+    "shields",
+    "labymod",
+    "cosmeticsmod",
+    "morecosmetics"
+  ]
+}
