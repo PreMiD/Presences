@@ -18,34 +18,45 @@ const presence = new Presence({
 	};
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-		// R/a/dio logo
-		largeImageKey: "logo",
-		// Small image text when hover
-		smallImageText: playStatus(),
-		// Current player status
-		details: playStatus(),
-	};
-
-	// Only add bottom row status and timestamp if playing
-	if (presenceData.details === "Playing") {
-		presenceData.state = currentSong();
-
-		const timestamps = presence.getTimestamps(
-			presence.timestampFromFormat(
-				document.querySelector("#progress-current").textContent
-			),
-			presence.timestampFromFormat(
-				document.querySelector("#progress-length").textContent
-			)
+	const path = window.location.pathname,
+		presenceData: PresenceData = {
+			// R/a/dio logo
+			largeImageKey: "logo",
+		};
+	// On News page
+	if (path.includes("/news")) {
+		presenceData.details = "Reading news...";
+		const titleElement = document.querySelector(
+			"#radio-container > section > div.container.main > div > div.panel.panel-default > div.panel-heading > h4 > a"
 		);
-		presenceData.startTimestamp = timestamps[0];
-		presenceData.endTimestamp = timestamps[1];
+		if (titleElement) presenceData.state = titleElement.textContent; // TODO: Title doesn't disappear when back to news main page
+	} else {
+		// Small image text when hover
+		presenceData.smallImageText = playStatus();
+		// Current player status
+		presenceData.details = playStatus();
+
+		// Only add bottom row status and timestamp if playing
+		if (presenceData.details === "Playing") {
+			presenceData.state = currentSong();
+
+			const timestamps = presence.getTimestamps(
+				presence.timestampFromFormat(
+					document.querySelector("#progress-current").textContent
+				),
+				presence.timestampFromFormat(
+					document.querySelector("#progress-length").textContent
+				)
+			);
+			presenceData.startTimestamp = timestamps[0];
+			presenceData.endTimestamp = timestamps[1];
+		}
 	}
 
 	// Update the presence with all the values from the presenceData object
 	// Set second parameter to true since we provide timestamps according to PreMiD documentation
-	if (presenceData.details) presence.setActivity(presenceData, presenceData.details === "Playing");
+	if (presenceData.details)
+		presence.setActivity(presenceData, presenceData.details === "Playing");
 	// Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name
 	else presence.setActivity();
 });
