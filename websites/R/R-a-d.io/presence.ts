@@ -50,6 +50,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Looking at favorites";
 		const query = path.split("/");
 		if (query[2]) presenceData.details = `Looking at ${query[2]}'s favorites`;
+	} else if (path.includes("/staff")) {
+		// On staff page
+		presenceData.details = "Looking at staff list";
 	} else {
 		// Small image text when hover
 		presenceData.smallImageText = playStatus();
