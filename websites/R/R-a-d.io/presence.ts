@@ -46,7 +46,11 @@ presence.on("UpdateData", async () => {
 			"#radio-container > section > div > div > ul > li.active"
 		)}`;
 	} else if (path.includes("/queue")) presenceData.details = "Looking at queue";
-	else {
+	else if (path.includes("/faves")) {
+		presenceData.details = "Looking at favorites";
+		const query = path.split("/");
+		if (query[2]) presenceData.details = `Looking at ${query[2]}'s favorites`;
+	} else {
 		// Small image text when hover
 		presenceData.smallImageText = playStatus();
 		// Current player status
