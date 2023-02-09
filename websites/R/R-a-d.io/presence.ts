@@ -53,6 +53,9 @@ presence.on("UpdateData", async () => {
 	} else if (path.includes("/staff")) {
 		// On staff page
 		presenceData.details = "Looking at staff list";
+	} else if (path.includes("/submit")) {
+		// On submission page
+		presenceData.details = "Submitting a song...";
 	} else {
 		// Small image text when hover
 		presenceData.smallImageText = playStatus();
