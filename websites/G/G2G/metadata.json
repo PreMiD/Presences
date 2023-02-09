@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "G2G",
+  "author": {
+    "id": "283757164923715587",
+    "name": "Mattis.#0001"
+  },
+  "description": {
+    "en": "G2G is a world-leading digital marketplace, founded by serious technopreneurs."
+  },
+  "url": "www.g2g.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/XkzTOsp.png",
+  "thumbnail": "https://i.imgur.com/4JlsyFM.png",
+  "color": "#f03827",
+  "tags": [
+    "marketplace",
+    "deals",
+    "games"
+  ],
+  "category": "games"
+}
