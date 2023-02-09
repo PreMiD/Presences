@@ -30,6 +30,9 @@ presence.on("UpdateData", async () => {
 			"#radio-container > section > div.container.main > div > div.panel.panel-default > div.panel-heading > h4 > a"
 		);
 		if (titleElement) presenceData.state = titleElement.textContent; // TODO: Title doesn't disappear when back to news main page
+	} else if (path.includes("/irc")) {
+		// On Chat page
+		presenceData.details = "Chatting...";
 	} else {
 		// Small image text when hover
 		presenceData.smallImageText = playStatus();
