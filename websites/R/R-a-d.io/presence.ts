@@ -23,8 +23,8 @@ presence.on("UpdateData", async () => {
 			// R/a/dio logo
 			largeImageKey: "logo",
 		};
-	// On News page
 	if (path.includes("/news")) {
+		// On News page
 		presenceData.details = "Reading news...";
 		const titleElement = document.querySelector(
 			"#radio-container > section > div.container.main > div > div.panel.panel-default > div.panel-heading > h4 > a"
@@ -40,6 +40,7 @@ presence.on("UpdateData", async () => {
 		if (query[2]) presenceData.details = `Searching for: ${query[2]}`;
 		else presenceData.details = "Searching...";
 	} else if (path.includes("/last-played")) {
+		// On last played page
 		presenceData.details = "Looking at last played songs";
 		// For page number
 		presenceData.state = `On page ${document.querySelector(
@@ -47,6 +48,7 @@ presence.on("UpdateData", async () => {
 		)}`;
 	} else if (path.includes("/queue")) presenceData.details = "Looking at queue";
 	else if (path.includes("/faves")) {
+		// On favorite page
 		presenceData.details = "Looking at favorites";
 		const query = path.split("/");
 		if (query[2]) presenceData.details = `Looking at ${query[2]}'s favorites`;
