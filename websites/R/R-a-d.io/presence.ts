@@ -45,7 +45,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `On page ${document.querySelector(
 			"#radio-container > section > div > div > ul > li.active"
 		)}`;
-	} else {
+	} else if (path.includes("/queue")) presenceData.details = "Looking at queue";
+	else {
 		// Small image text when hover
 		presenceData.smallImageText = playStatus();
 		// Current player status
