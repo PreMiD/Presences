@@ -17,17 +17,12 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		//The large image on the presence. This can be a key of an image uploaded on the Discord Developer Portal - Rich Presence - Art Assets, or a URL to an image
+		// R/a/dio logo
 		largeImageKey: "logo",
-		//The text which is displayed when hovering over the small image
+		// Small image text when hover
 		smallImageText: playStatus(),
-		//The upper section of the presence text
+		// Current player status
 		details: playStatus(),
-		//The unix epoch timestamp for when to start counting from
-		// startTimestamp: 3133657200000,
-		//If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
-		// endTimestamp: 3133700400000,
-		//Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceData.type = "blahblah"; type examples: details, state, etc.
 	};
 	if (presenceData.details === "Playing") {
 		presenceData.state = currentSong();
