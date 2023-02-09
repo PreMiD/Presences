@@ -33,6 +33,12 @@ presence.on("UpdateData", async () => {
 	} else if (path.includes("/irc")) {
 		// On Chat page
 		presenceData.details = "Chatting...";
+	} else if (path.includes("/search")) {
+		// On Search page
+		const query = path.split("/");
+		// If searching for something
+		if (query[2]) presenceData.details = `Searching for: ${query[2]}`;
+		else presenceData.details = "Searching...";
 	} else {
 		// Small image text when hover
 		presenceData.smallImageText = playStatus();
