@@ -39,6 +39,12 @@ presence.on("UpdateData", async () => {
 		// If searching for something
 		if (query[2]) presenceData.details = `Searching for: ${query[2]}`;
 		else presenceData.details = "Searching...";
+	} else if (path.includes("/last-played")) {
+		presenceData.details = "Looking at last played songs";
+		// For page number
+		presenceData.state = `On page ${document.querySelector(
+			"#radio-container > section > div > div > ul > li.active"
+		)}`;
 	} else {
 		// Small image text when hover
 		presenceData.smallImageText = playStatus();
