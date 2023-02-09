@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Luscarvalho",
+		"id": "458776046184169473"
+	},
+	"service": "Nix Mangas",
+	"description": {
+		"en": "Nix Mangas is a site to read manga and manhwas without ads",
+		"pt_BR": "Nix Mangás é um site para ler mangás e manhwas sem anúncios"
+	},
+	"url": "nixmangas.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/7ooKWuO.png",
+	"thumbnail": "https://i.imgur.com/IjZZNY4.png",
+	"color": "#0e0e12",
+	"category": "other",
+	"tags": [
+		"manhwa",
+		"manga"
+	]
+}
