@@ -2,6 +2,7 @@ const presence = new Presence({
 		//The client ID of the Application created at https://discordapp.com/developers/applications
 		clientId: "1073136952905318401",
 	}),
+	// Get current player status
 	playStatus = (): string => {
 		let status: string;
 		const playButtonText: string =
@@ -11,6 +12,7 @@ const presence = new Presence({
 		else status = playButtonText;
 		return status;
 	},
+	// Get current song playing
 	currentSong = (): string => {
 		return document.querySelector("#np").textContent;
 	};
@@ -24,6 +26,8 @@ presence.on("UpdateData", async () => {
 		// Current player status
 		details: playStatus(),
 	};
+
+	// Only add bottom row status and timestamp if playing
 	if (presenceData.details === "Playing") {
 		presenceData.state = currentSong();
 
@@ -39,8 +43,9 @@ presence.on("UpdateData", async () => {
 		presenceData.endTimestamp = timestamps[1];
 	}
 
-	//Update the presence with all the values from the presenceData object
-	if (presenceData.details) presence.setActivity(presenceData);
-	//Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name
+	// Update the presence with all the values from the presenceData object
+	// Set second parameter to true since we provide timestamps according to PreMiD documentation
+	if (presenceData.details) presence.setActivity(presenceData, presenceData.details === "Playing");
+	// Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name
 	else presence.setActivity();
 });
