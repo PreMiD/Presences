@@ -9,52 +9,87 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	switch (window.location.hostname) {
-		case "www.g2g.com": {
-			const path = document.location.pathname.split("/");
-			if (document.location.pathname === "/") {
+	switch (document.location.pathname.split("/")[1]) {
+		case "search": {
+			presenceData.details = "Searching something to buy";
+			presenceData.state = new URLSearchParams(document.location.search).get(
+				"q"
+			);
+			presenceData.startTimestamp = browsingTimestamp;
+			break;
+		}
+		case "categories": {
+			presenceData.details = "Browsing a category";
+			presenceData.state =
+				document.querySelector<HTMLHeadingElement>("title").textContent;
+			presenceData.startTimestamp = browsingTimestamp;
+			break;
+		}
+		case "offer": {
+			presenceData.details = "Viewing an offer";
+			presenceData.state =
+				document.querySelector<HTMLHeadingElement>("title").textContent;
+			presenceData.buttons = [
+				{
+					label: "View Offer",
+					url: document.location.href,
+				},
+			];
+			presenceData.startTimestamp = browsingTimestamp;
+			break;
+		}
+		case "seller": {
+			presenceData.details = "Want to sell something";
+			presenceData.state = "Browsing...";
+			presenceData.startTimestamp = browsingTimestamp;
+			break;
+		}
+		case "chat": {
+			presenceData.details = "Chatting with a sellet";
+			presenceData.state = "Browsing...";
+			presenceData.startTimestamp = browsingTimestamp;
+			break;
+		}
+		case "account": {
+			presenceData.details = "Viewing their account";
+			presenceData.state = "Browsing...";
+			presenceData.startTimestamp = browsingTimestamp;
+			break;
+		}
+		case "trending": {
+			presenceData.details = "Viewing a trending offer";
+			presenceData.state =
+				document.querySelector<HTMLBodyElement>("div.text-h4").textContent;
+			presenceData.buttons = [
+				{
+					label: "View Trending",
+					url: document.location.href,
+				},
+			];
+			presenceData.startTimestamp = browsingTimestamp;
+			break;
+		}
+		case "secure": {
+			const item: string =
+				document.querySelector<HTMLBodyElement>("div.col-8.row").textContent;
+			presenceData.details = `Buying ${item}`;
+			presenceData.startTimestamp = browsingTimestamp;
+			break;
+		}
+		default: {
+			const elem = document.location.pathname.split("/")[1];
+			if (elem === "") {
 				presenceData.details = "Viewing the homepage";
 				presenceData.state = "Browsing...";
 				presenceData.startTimestamp = browsingTimestamp;
-			} else if (document.location.pathname.includes("search")) {
-				presenceData.details = "Searching something to buy";
-				presenceData.state = new URLSearchParams(document.location.search).get(
-					"q"
-				);
-				presenceData.startTimestamp = browsingTimestamp;
-			} else if (document.location.pathname.includes("categories")) {
-				presenceData.details = "Browsing a category";
-				presenceData.state =
-					document.querySelector<HTMLHeadingElement>("title").textContent;
-				presenceData.startTimestamp = browsingTimestamp;
-			} else if (document.location.pathname.includes("offer")) {
-				presenceData.details = "Viewing an offer";
-				presenceData.state =
-					document.querySelector<HTMLHeadingElement>("title").textContent;
-				presenceData.startTimestamp = browsingTimestamp;
-			} else if (document.location.pathname.includes("seller")) {
-				presenceData.details = "Want to sell something";
-				presenceData.state = "Browsing...";
-				presenceData.startTimestamp = browsingTimestamp;
-			} else if (document.location.pathname.includes("chat")) {
-				presenceData.details = "Chatting with a seller";
-				presenceData.state =
-					document.querySelector<HTMLHeadingElement>("title").textContent;
-				presenceData.startTimestamp = browsingTimestamp;
-			} else if (document.location.pathname.includes("account")) {
-				presenceData.details = "Viewing their account";
-				presenceData.startTimestamp = browsingTimestamp;
-			} else if (document.location.pathname.includes("trending")) {
-				presenceData.details = "Viewing trending offers";
-				presenceData.state =
-					document.querySelector<HTMLBodyElement>("div.text-h4").textContent;
-			} else if (document.location.pathname.includes("secure")) {
-				const item: string =
-					document.querySelector<HTMLBodyElement>("div.col-8.row").textContent;
-				presenceData.details = `Buying ${item}`;
-				presenceData.startTimestamp = browsingTimestamp;
-			} else if (path[1] !== "") {
-				presenceData.details = `Viewing ${path[1]}'s profile`;
+			} else {
+				presenceData.details = `Viewing ${elem}'s profile`;
+				presenceData.buttons = [
+					{
+						label: "View Profile",
+						url: document.location.href,
+					},
+				];
 				presenceData.startTimestamp = browsingTimestamp;
 			}
 			break;
