@@ -1,8 +1,8 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "Mattis.",
-		"id": "283757164923715587"
+		"id": "283757164923715587",
+		"name": "Mattis.#0001"
 	},
 	"service": "G2G",
 	"description": {
@@ -10,26 +10,13 @@
 	},
 	"url": "www.g2g.com",
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/U0FQhL3.png",
+	"logo": "https://i.imgur.com/XkzTOsp.png",
 	"thumbnail": "https://i.imgur.com/4JlsyFM.png",
 	"color": "#f03827",
 	"category": "games",
-	"tags": ["marketplace", "deals", "games"],
-	"settings": [
-		{
-			"id": "privacy",
-			"title": "Privacy Mode",
-			"icon": "fas fa-user-secret",
-			"value": false
-		},
-		{
-			"id": "buttons",
-			"title": "Show Buttons",
-			"icon": "fas fa-compress-arrows-alt",
-			"value": true,
-			"if": {
-				"privacy": false
-			}
-		}
+	"tags": [
+		"marketplace",
+		"deals",
+		"games"
 	]
 }
