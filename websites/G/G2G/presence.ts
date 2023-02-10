@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "seller": {
-			presenceData.details = "Want to sell something";
+			presenceData.details = "Selling something";
 			break;
 		}
 		case "chat": {
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "secure": {
 			presenceData.details = `Buying ${
-				document.querySelector<HTMLBodyElement>("div.col-8.row").textContent
+				document.querySelector<HTMLDivElement>("div.col-8.row").textContent
 			}`;
 			break;
 		}
