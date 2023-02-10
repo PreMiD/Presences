@@ -15,7 +15,6 @@ presence.on("UpdateData", async () => {
 			presenceData.state = new URLSearchParams(document.location.search).get(
 				"q"
 			);
-			presenceData.startTimestamp = browsingTimestamp;
 			break;
 		}
 		case "categories": {
@@ -28,7 +27,6 @@ presence.on("UpdateData", async () => {
 					url: document.location.href,
 				},
 			];
-			presenceData.startTimestamp = browsingTimestamp;
 			break;
 		}
 		case "offer": {
@@ -41,25 +39,21 @@ presence.on("UpdateData", async () => {
 					url: document.location.href,
 				},
 			];
-			presenceData.startTimestamp = browsingTimestamp;
 			break;
 		}
 		case "seller": {
 			presenceData.details = "Want to sell something";
 			presenceData.state = "Browsing...";
-			presenceData.startTimestamp = browsingTimestamp;
 			break;
 		}
 		case "chat": {
 			presenceData.details = "Chatting with a sellet";
 			presenceData.state = "Browsing...";
-			presenceData.startTimestamp = browsingTimestamp;
 			break;
 		}
 		case "account": {
 			presenceData.details = "Viewing their account";
 			presenceData.state = "Browsing...";
-			presenceData.startTimestamp = browsingTimestamp;
 			break;
 		}
 		case "trending": {
@@ -72,14 +66,12 @@ presence.on("UpdateData", async () => {
 					url: document.location.href,
 				},
 			];
-			presenceData.startTimestamp = browsingTimestamp;
 			break;
 		}
 		case "secure": {
-			const item: string =
-				document.querySelector<HTMLBodyElement>("div.col-8.row").textContent;
-			presenceData.details = `Buying ${item}`;
-			presenceData.startTimestamp = browsingTimestamp;
+			presenceData.details = `Buying ${
+				document.querySelector<HTMLBodyElement>("div.col-8.row").textContent
+			}`;
 			break;
 		}
 		default: {
@@ -87,7 +79,6 @@ presence.on("UpdateData", async () => {
 			if (elem === "") {
 				presenceData.details = "Viewing the homepage";
 				presenceData.state = "Browsing...";
-				presenceData.startTimestamp = browsingTimestamp;
 			} else {
 				presenceData.details = `Viewing ${elem}'s profile`;
 				presenceData.buttons = [
@@ -96,7 +87,6 @@ presence.on("UpdateData", async () => {
 						url: document.location.href,
 					},
 				];
-				presenceData.startTimestamp = browsingTimestamp;
 			}
 			break;
 		}
