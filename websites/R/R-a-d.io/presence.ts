@@ -85,8 +85,5 @@ presence.on("UpdateData", async () => {
 
 	// Update the presence with all the values from the presenceData object
 	// Set second parameter to true since we provide timestamps according to PreMiD documentation
-	if (presenceData.details)
-		presence.setActivity(presenceData, presenceData.details === "Playing");
-	// Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name
-	else presence.setActivity();
+	presence.setActivity(presenceData, presenceData.details === "Playing");
 });
