@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	const { pathname, href, search } = document.location;
+	{ pathname, href, search } = document.location;
 
 	switch (pathname.split("/")[1]) {
 		case "search": {
