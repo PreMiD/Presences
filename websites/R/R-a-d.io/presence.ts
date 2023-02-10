@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 		// For page number
 		presenceData.state = `On page ${document.querySelector(
 			"#radio-container > section > div > div > ul > li.active"
-		)}`;
+		).textContent}`;
 	} else if (path.includes("/queue")) presenceData.details = "Looking at queue";
 	else if (path.includes("/faves")) {
 		// On favorite page
