@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "chat": {
-			presenceData.details = "Chatting with a sellet";
+			presenceData.details = "Chatting with a seller";
 			presenceData.state = "Browsing...";
 			break;
 		}
