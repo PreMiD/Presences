@@ -5,16 +5,16 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/XkzTOsp.png",
+		largeImageKey: "https://i.imgur.com/U0FQhL3.png",
 		startTimestamp: browsingTimestamp,
 	};
 
-	switch (document.location.pathname.split("/")[1]) {
+	const { pathname, href, search } = document.location;
+
+	switch (pathname.split("/")[1]) {
 		case "search": {
 			presenceData.details = "Searching something to buy";
-			presenceData.state = new URLSearchParams(document.location.search).get(
-				"q"
-			);
+			presenceData.state = new URLSearchParams(search).get("q");
 			break;
 		}
 		case "categories": {
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Category",
-					url: document.location.href,
+					url: href,
 				},
 			];
 			break;
@@ -36,34 +36,31 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Offer",
-					url: document.location.href,
+					url: href,
 				},
 			];
 			break;
 		}
 		case "seller": {
 			presenceData.details = "Want to sell something";
-			presenceData.state = "Browsing...";
 			break;
 		}
 		case "chat": {
 			presenceData.details = "Chatting with a seller";
-			presenceData.state = "Browsing...";
 			break;
 		}
 		case "account": {
 			presenceData.details = "Viewing their account";
-			presenceData.state = "Browsing...";
 			break;
 		}
 		case "trending": {
 			presenceData.details = "Viewing a trending offer";
 			presenceData.state =
-				document.querySelector<HTMLBodyElement>("div.text-h4").textContent;
+				document.querySelector<HTMLDivElement>("div.text-h4").textContent;
 			presenceData.buttons = [
 				{
 					label: "View Trending",
-					url: document.location.href,
+					url: href,
 				},
 			];
 			break;
@@ -75,7 +72,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		default: {
-			const elem = document.location.pathname.split("/")[1];
+			const elem = pathname.split("/")[1];
 			if (elem === "") {
 				presenceData.details = "Viewing the homepage";
 				presenceData.state = "Browsing...";
@@ -84,7 +81,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Profile",
-						url: document.location.href,
+						url: href,
 					},
 				];
 			}
