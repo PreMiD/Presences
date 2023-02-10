@@ -5,19 +5,15 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/U0FQhL3.png",
-		startTimestamp: browsingTimestamp,
-	},
+			largeImageKey: "https://i.imgur.com/U0FQhL3.png",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href, search } = document.location;
 
-	 { pathname, href, search } = document.location;
-
-	
 	switch (pathname.split("/")[1]) {
 		case "search": {
 			presenceData.details = "Searching something to buy";
-			presenceData.state = new URLSearchParams(search).get(
-				"q"
-			);
+			presenceData.state = new URLSearchParams(search).get("q");
 			break;
 		}
 		case "categories": {
