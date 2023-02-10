@@ -22,6 +22,12 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing a category";
 			presenceData.state =
 				document.querySelector<HTMLHeadingElement>("title").textContent;
+				presenceData.buttons = [
+				{
+					label: "View Category",
+					url: document.location.href,
+				},
+			];
 			presenceData.startTimestamp = browsingTimestamp;
 			break;
 		}
