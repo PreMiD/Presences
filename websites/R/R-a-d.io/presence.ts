@@ -44,9 +44,11 @@ presence.on("UpdateData", async () => {
 		// On last played page
 		presenceData.details = "Looking at last played songs";
 		// For page number
-		presenceData.state = `On page ${document.querySelector(
-			"#radio-container > section > div > div > ul > li.active"
-		).textContent}`;
+		presenceData.state = `On page ${
+			document.querySelector(
+				"#radio-container > section > div > div > ul > li.active"
+			).textContent
+		}`;
 	} else if (path.includes("/queue")) presenceData.details = "Looking at queue";
 	else if (path.includes("/faves")) {
 		// On favorite page

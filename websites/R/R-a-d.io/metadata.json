@@ -1,22 +1,22 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "service": "R-a-d.io",
-  "author": {
-    "id": "191388216509595648",
-    "name": "awooooool#2686"
-  },
-  "description": {
-    "en": "An online radio focused on Japanese songs"
-  },
-  "url": "r-a-d.io",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/Gax8mal.png",
-  "thumbnail": "https://i.imgur.com/uWxLHyf.jpg",
-  "color": "#df4c3a",
-  "tags": [
-    "radio",
-    "music",
-    "japanese"
-  ],
-  "category": "music"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "191388216509595648",
+		"name": "awooooool#2686"
+	},
+	"service": "R-a-d.io",
+	"description": {
+		"en": "An online radio focused on Japanese songs"
+	},
+	"url": "r-a-d.io",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/Gax8mal.png",
+	"thumbnail": "https://i.imgur.com/uWxLHyf.jpg",
+	"color": "#df4c3a",
+	"category": "music",
+	"tags": [
+		"radio",
+		"music",
+		"japanese"
+	]
 }
