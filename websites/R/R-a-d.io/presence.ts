@@ -18,6 +18,7 @@ const presence = new Presence({
 	};
 
 presence.on("UpdateData", async () => {
+	// Current path
 	const path = window.location.pathname,
 		presenceData: PresenceData = {
 			// R/a/dio logo
