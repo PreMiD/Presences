@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Reading news";
 		// Current article title if currently being open
 		const titleElement = document.querySelector('[class="panel-title"] > a');
-		if (titleElement) presenceData.state = titleElement.textContent; // TODO: Title doesn't disappear when back to news main page
+		if (titleElement) presenceData.state = titleElement.textContent;
 	} else if (path.includes("/irc")) {
 		// On Chat page
 		presenceData.details = "Chatting";
