@@ -1,5 +1,4 @@
 const presence = new Presence({
-		//The client ID of the Application created at https://discordapp.com/developers/applications
 		clientId: "1073136952905318401",
 	}),
 	// Get current player status
