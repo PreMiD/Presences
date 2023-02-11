@@ -26,20 +26,20 @@ presence.on("UpdateData", async () => {
 		};
 	if (path.includes("/news")) {
 		// On News page
-		presenceData.details = "Reading news...";
+		presenceData.details = "Reading news";
 		const titleElement = document.querySelector(
 			"#radio-container > section > div.container.main > div > div.panel.panel-default > div.panel-heading > h4 > a"
 		);
 		if (titleElement) presenceData.state = titleElement.textContent; // TODO: Title doesn't disappear when back to news main page
 	} else if (path.includes("/irc")) {
 		// On Chat page
-		presenceData.details = "Chatting...";
+		presenceData.details = "Chatting";
 	} else if (path.includes("/search")) {
 		// On Search page
 		const query = path.split("/");
 		// If searching for something
 		if (query[2]) presenceData.details = `Searching for: ${query[2]}`;
-		else presenceData.details = "Searching...";
+		else presenceData.details = "Searching";
 	} else if (path.includes("/last-played")) {
 		// On last played page
 		presenceData.details = "Looking at last played songs";
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Looking at staff list";
 	} else if (path.includes("/submit")) {
 		// On submission page
-		presenceData.details = "Submitting a song...";
+		presenceData.details = "Submitting a song";
 	} else if (path === "/") {
 		// On root page
 		// Small image text when hover
