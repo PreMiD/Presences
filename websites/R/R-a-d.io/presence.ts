@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
 			// R/a/dio logo
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/o6JjbtH.png",
 		};
 	if (path.includes("/news")) {
 		// On News page
