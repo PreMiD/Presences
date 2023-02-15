@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = strings.resource.replace(
 					"$0",
-textContent('[class="page-header-title"]')?.split(": ")[1]
+					textContent('[class="page-header-title"]')?.split(": ")[1]
 				);
 				presenceData.state = strings.stateResources
 					.replace(
@@ -71,18 +71,13 @@ textContent('[class="page-header-title"]')?.split(": ")[1]
 							)
 						)
 					)
-					.replace(
-						"$1",
-						textContent('[class="d-inline-block"] > h6')
-					);
+					.replace("$1", textContent('[class="d-inline-block"] > h6'));
 				break;
 
 			case "server":
 				presenceData.details = data.replace(
 					"$0",
-					textContent(
-						"div.page-header > div > div > div.col-md-4 > ul > li:nth-child(3)"
-					)
+					textContent('[class="page-header-title"]')
 				);
 				presenceData.state = toTitleCase(pathSegments.slice(-1)[0]);
 				break;
@@ -102,10 +97,9 @@ textContent('[class="page-header-title"]')?.split(": ")[1]
 
 	if (!presenceData.details)
 		presenceData.details = document.title.split(" | ")[0] ?? "Night.design";
-	else {
-		presenceData.details =
-			`${strings.prefix}  ${presenceData.details} ${strings.suffix}`;
-	}
+	else 
+		presenceData.details = `${strings.prefix}  ${presenceData.details} ${strings.suffix}`;
+	
 
 	lastPath = path;
 	presence.setActivity(presenceData);
