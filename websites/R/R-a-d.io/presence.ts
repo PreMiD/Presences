@@ -63,8 +63,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Submitting a song";
 	} else if (path === "/") {
 		// On root page
-		// Small image text when hover
-		presenceData.smallImageText = playStatus();
 		// Current player status
 		presenceData.details = playStatus();
 
