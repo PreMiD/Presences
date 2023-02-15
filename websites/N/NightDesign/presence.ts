@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 			case "server":
 				presenceData.details = data.replace(
 					"$0",
-					textContent('[class="page-header-title"]')
+					textContent('[class="page-header-title"]')?.split(", ")[0]
 				);
 				presenceData.state = toTitleCase(pathSegments.slice(-1)[0]);
 				break;
@@ -97,9 +97,8 @@ presence.on("UpdateData", async () => {
 
 	if (!presenceData.details)
 		presenceData.details = document.title.split(" | ")[0] ?? "Night.design";
-	else 
+	else
 		presenceData.details = `${strings.prefix}  ${presenceData.details} ${strings.suffix}`;
-	
 
 	lastPath = path;
 	presence.setActivity(presenceData);
