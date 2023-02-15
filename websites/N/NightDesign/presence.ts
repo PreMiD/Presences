@@ -73,7 +73,7 @@ textContent('[class="page-header-title"]')?.split(": ")[1]
 					)
 					.replace(
 						"$1",
-						textContent("div.card.mini-profile > div > div > h6 > span > span")
+						textContent('[class="d-inline-block"] > h6')
 					);
 				break;
 
