@@ -60,9 +60,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = strings.resource.replace(
 					"$0",
-					textContent(
-						"div.page-header > div > div > div.col-md-4 > ul > li:nth-child(4) > a"
-					)
+textContent('[class="page-header-title"]')?.split(": ")[1]
 				);
 				presenceData.state = strings.stateResources
 					.replace(
