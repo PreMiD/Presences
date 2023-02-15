@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = document.title.split(" | ")[0] ?? "Night.design";
 	else {
 		presenceData.details =
-			strings.prefix + presenceData.details + strings.suffix;
+			`${strings.prefix}  ${presenceData.details} ${strings.suffix}`;
 	}
 
 	lastPath = path;
