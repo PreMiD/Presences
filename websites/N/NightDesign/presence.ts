@@ -90,7 +90,7 @@ textContent('[class="page-header-title"]')?.split(": ")[1]
 			case "u":
 				presenceData.details = data.replace(
 					"$0",
-					textContent("div.page-header > div > div > div.col-md-8 > div > h5")
+					textContent('[class="page-header-title"]')
 				);
 				presenceData.state = toTitleCase(pathSegments.slice(-1)[0]);
 				break;
