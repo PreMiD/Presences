@@ -1,7 +1,10 @@
 const presence = new Presence({
 		clientId: "1073136952905318401",
 	}),
-	// Get current player status
+	/**
+	 * Returns current player status
+	 * @returns {string} either "Stopped", "Playing", or "Connecting..."
+	 */
 	playStatus = (): string => {
 		let status: string;
 		const playButtonText: string =
@@ -11,7 +14,10 @@ const presence = new Presence({
 		else status = playButtonText;
 		return status;
 	},
-	// Get current song playing
+	/**
+	 * Returns current song playing
+	 * @returns {string} Current song, usually in "{artist} - {title}" format
+	 */
 	currentSong = (): string => {
 		return document.querySelector("#np").textContent;
 	};
