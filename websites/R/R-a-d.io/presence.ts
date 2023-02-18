@@ -69,7 +69,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Submitting a song";
 	} else if (path === "/") {
 		// On root page
-		// Current player status
 		presenceData.details = playStatus();
 
 		// Only add bottom row status and timestamp if playing
