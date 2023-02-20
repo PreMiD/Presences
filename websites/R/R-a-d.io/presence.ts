@@ -42,9 +42,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Chatting";
 	} else if (path.includes("/search")) {
 		// On Search page
-		const query = path.split("/");
+		const title = path.split("/")[2];
 		// If searching for something
-		if (query[2]) presenceData.details = `Searching for: ${query[2]}`;
+		if (title) presenceData.details = `Searching for: ${title}`;
 		else presenceData.details = "Searching";
 	} else if (path.includes("/last-played")) {
 		// On last played page
@@ -59,8 +59,8 @@ presence.on("UpdateData", async () => {
 	else if (path.includes("/faves")) {
 		// On favorite page
 		presenceData.details = "Looking at favorites";
-		const query = path.split("/");
-		if (query[2]) presenceData.details = `Looking at ${query[2]}'s favorites`;
+		const username = path.split("/")[2];
+		if (username) presenceData.details = `Looking at ${username}'s favorites`;
 	} else if (path.includes("/staff")) {
 		// On staff page
 		presenceData.details = "Looking at staff list";
