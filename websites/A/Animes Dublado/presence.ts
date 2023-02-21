@@ -1,6 +1,6 @@
 const presence = new Presence({
-		clientId: "861544419005169675",
-	}),
+	clientId: "861544419005169675",
+}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let iframeData: {
@@ -18,28 +18,28 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/byl8bvz.png",
-			startTimestamp: browsingTimestamp,
-		},
+		largeImageKey: "https://i.imgur.com/h38pIwh.png",
+		startTimestamp: browsingTimestamp,
+	},
 		{ pathname, search, href } = document.location;
 
 	switch (pathname) {
 		case "/": {
 			presenceData.details = search
 				? `Procurando por ${search.substring(3)}`
-				: "Explorando MyAnimeList.vip";
+				: "Explorando animesdublado.com";
 
 			break;
 		}
-		case "/animes-legendado": {
-			presenceData.details = "Procurando por Legendados";
+		case "/lista-de-animes": {
+			presenceData.details = "Procurando por Animes";
 			break;
 		}
-		case "/animes-dublado": {
-			presenceData.details = "Procurando por Dublados";
+		case "/lista-de-desenhos": {
+			presenceData.details = "Procurando por Desenhos";
 			break;
 		}
-		case "/filme": {
+		case "/lista-de-filmes": {
 			presenceData.details = "Procurando por Filmes";
 			break;
 		}
@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/lancamento"))
 				presenceData.details = "Últimos Lancamentos";
 			else if (
-				pathname.startsWith("/animes/") ||
-				pathname.startsWith("/episodio/")
+				pathname.startsWith("/anime/") ||
+				pathname.startsWith("/video/")
 			) {
 				if (!document.querySelector("iframe")) {
 					const title: HTMLHeadingElement = document.querySelector(
