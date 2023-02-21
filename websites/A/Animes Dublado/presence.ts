@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "861544419005169675",
-}),
+		clientId: "861544419005169675",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let iframeData: {
@@ -18,9 +18,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/h38pIwh.png",
-		startTimestamp: browsingTimestamp,
-	},
+			largeImageKey: "https://i.imgur.com/h38pIwh.png",
+			startTimestamp: browsingTimestamp,
+		},
 		{ pathname, search, href } = document.location;
 
 	switch (pathname) {
