@@ -6,8 +6,22 @@ const presence = new Presence({
 		pause: "general.paused",
 		browsing: "general.browsing",
 	}),
-	path = document.location.pathname,
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	pathArr = document.location.pathname.split("/"),
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	pages: Record<string, PresenceData> = {
+		"liste-danimes": {
+			details: "Visite la page :",
+			state: "Listes d'animes",
+		},
+		"nouveaux-ajouts": {
+			details: "Visite la page :",
+			state: "Nouveaux animes",
+		},
+		prochainement: {
+			details: "Visite la page :",
+			state: "Prochains animes",
+		},
+	};
 
 let video = {
 	duration: 0,
@@ -23,79 +37,69 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
+	let presenceData: PresenceData = {
+		details: "Page d'accueil",
 		largeImageKey: "https://i.imgur.com/Db6EmSA.png",
 		startTimestamp: browsingTimestamp,
 	};
+	switch (pathArr[1]) {
+		case "anime": {
+			const title = document.querySelector("ol > li:nth-child(2) > a");
 
-	if (path.includes("/liste-danimes")) {
-		presenceData.details = "Visite la page :";
-		presenceData.state = "Listes d'animes";
-	} else if (path.includes("/nouveaux-ajouts")) {
-		presenceData.details = "Visite la page :";
-		presenceData.state = "Nouveaux animes";
-	} else if (path.includes("/prochainement")) {
-		presenceData.details = "Visite la page :";
-		presenceData.state = "Prochains animes";
-	} else if (document.location.search.startsWith("?s")) {
-		presenceData.details = "Recherche un anime :";
-		presenceData.state = new URLSearchParams(document.location.search).get("s");
-		presenceData.smallImageKey = "search";
-	} else if (path.includes("/anime/")) {
-		const title = document.querySelector(
-			"#manga-reading-nav-head > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li:nth-child(2) > a"
-		)?.textContent;
-
-		presenceData.details = "Visite la page de l'anime :";
-		presenceData.state = document.querySelector(
-			"body > div.wrap > div > div.site-content > div > div.profile-manga > div > div > div > div.post-title > h1"
-		)?.textContent;
-		if (!isNaN(video.duration) && title) {
-			const [startTimestamp, endTimestamp] = presence.getTimestamps(
+			presenceData.details = "Visite la page de l'anime :";
+			presenceData.state = document.querySelector(
+				"div.post-title > h1"
+			)?.textContent;
+			if (!isNaN(video.duration) && title) {
+				const [startTimestamp, endTimestamp] = presence.getTimestamps(
 					video.currentTime,
 					video.duration
-				),
-				[, epAndSeason] = document
-					.querySelector(
-						"#manga-reading-nav-head > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li.active"
-					)
-					.textContent.split("-");
+				);
 
-			presenceData.details = title;
-			presenceData.state = epAndSeason;
-			presenceData.startTimestamp = startTimestamp;
-			presenceData.endTimestamp = endTimestamp;
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
-			presenceData.smallImageText = video.paused
-				? (await strings).pause
-				: (await strings).play;
-			presenceData.buttons = [
-				{
-					label: "Regarder l'épisode",
-					url: document.location.href,
-				},
-				{
-					label: "Voir l'anime",
-					url: document
-						.querySelector(
-							"#manga-reading-nav-head > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li:nth-child(2) > a"
-						)
-						.getAttribute("href"),
-				},
-			];
-			if (video.paused) {
-				delete presenceData.startTimestamp;
-				delete presenceData.endTimestamp;
+				presenceData.details = title.textContent;
+				presenceData.state = document
+					.querySelector("li.active")
+					.textContent.split("-")[1];
+				presenceData.startTimestamp = startTimestamp;
+				presenceData.endTimestamp = endTimestamp;
+				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageText = video.paused
+					? (await strings).pause
+					: (await strings).play;
+				presenceData.buttons = [
+					{
+						label: "Regarder l'épisode",
+						url: document.location.href,
+					},
+					{
+						label: "Voir l'anime",
+						url: title.getAttribute("href"),
+					},
+				];
+				if (video.paused) {
+					delete presenceData.startTimestamp;
+					delete presenceData.endTimestamp;
+				}
 			}
+			break;
 		}
-	} else if (path.includes("/anime-genre")) {
-		presenceData.details = "Visite la page :";
-		presenceData.state = `Listes d'animes du genre "${
-			document.querySelector(
-				"body > div.wrap > div.body-wrap > div.site-content > div.c-page-content.style-1 > div > div > div > div.main-col.col-md-8.col-sm-8 > div.main-col-inner > div > div.entry-header > div > div > h1"
-			)?.textContent
-		}"`;
-	} else presenceData.details = "Page d'accueil";
+		case "anime-genre":
+			presenceData.details = "Visite la page :";
+			presenceData.state = `Listes d'animes du genre "${
+				document.querySelector("h1")?.textContent
+			}"`;
+			break;
+		default:
+			if (document.location.search.startsWith("?s")) {
+				presenceData.details = "Recherche un anime :";
+				presenceData.state = new URLSearchParams(document.location.search).get(
+					"s"
+				);
+				presenceData.smallImageKey = "search";
+			} else if (Object.keys(pages).includes(pathArr[1]))
+				presenceData = { ...presenceData, ...pages[pathArr[1]] };
+			break;
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
