@@ -101,6 +101,13 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "guides":
+			presenceData.details = "Parcours les guides";
+			if (pathArr.length > 2) {
+				presenceData.details = "Lit le guide";
+				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>("div > img").src;
+			}
 			break;
 		default:
 			if (Object.keys(staticPages).includes(pathArr[1]))
