@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamps = Math.floor(Date.now() / 1000);
 
 enum Assets {
-	Logo = "https://i.imgur.com/CSan6Ae.png",
+	Logo = "https://i.imgur.com/mzqXcKZ.png",
 	Playing = "https://i.imgur.com/KNneWuF.png",
 	Paused = "https://i.imgur.com/BtWUfrZ.png",
 }
@@ -72,9 +72,6 @@ presence.on("UpdateData", async () => {
 				presence.getTimestamps(video.currentTime, video.duration);
 			presenceData.smallImageKey = Assets.Playing;
 			presenceData.smallImageText = strings.playing;
-			presenceData.largeImageKey = document
-				.querySelector('meta[property="og:image"]')
-				.getAttribute("content");
 
 			presenceData.buttons = [
 				{ label: strings.buttonViewEpisode, url: href },
