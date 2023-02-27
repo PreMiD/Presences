@@ -21,51 +21,48 @@ presence.on("UpdateData", async () => {
 		case !urlpath[1]:
 			presenceData.details = "Home";
 			break;
-		default:
-			if (urlpath[1].startsWith("members")) {
-				presenceData.details = `In ${
-					urlpath[3].length > 0 ? urlpath[3].replace("bp-", "") : "profile"
-				}`;
-				presenceData.state = urlpath[2];
-				break;
+		case urlpath[1].startsWith("members"):
+			presenceData.details = `In ${
+				document.querySelector('[class="data"]')?.textContent
+			}`;
+			presenceData.state = urlpath[2];
+			break;
+		case urlpath[1].startsWith("forums"):
+			if (urlpath[2]) {
+				if (urlpath[2].startsWith("search")) {
+					presenceData.details = "Searching for:";
+					presenceData.state = decodeURI(urlpath[3]).replace("+", " ");
+					break;
+				} else {
+					presenceData.details = `In a discussion of ${
+						document.querySelector<HTMLHeadingElement>("a.bbp-breadcrumb-forum")
+							?.textContent
+					}:`;
+					presenceData.state =
+						document.querySelector<HTMLHeadingElement>(
+							"h1.entry-title"
+						)?.textContent;
+					break;
+				}
 			}
-			if (urlpath[1].startsWith("forums")) {
-				if (urlpath[2]) {
-					if (urlpath[2].startsWith("search")) {
-						presenceData.details = "Searching for:";
-						presenceData.state = decodeURI(urlpath[3]).replace("+", " ");
-						break;
-					} else {
-						presenceData.details = `In a discussion of ${
+			if (urlpath[3]) {
+				presenceData.details = "In forum:";
+				presenceData.state = urlpath[4]
+					? `${
 							document.querySelector<HTMLHeadingElement>(
 								"a.bbp-breadcrumb-forum"
 							)?.textContent
-						}:`;
-						presenceData.state =
-							document.querySelector<HTMLHeadingElement>(
-								"h1.entry-title"
-							)?.textContent;
-						break;
-					}
-				}
-				if (urlpath[3]) {
-					presenceData.details = "In forum:";
-					presenceData.state = urlpath[4]
-						? `${
-								document.querySelector<HTMLHeadingElement>(
-									"a.bbp-breadcrumb-forum"
-								)?.textContent
-						  } - ${
-								document.querySelector<HTMLHeadingElement>("h1.entry-title")
-									?.textContent
-						  }`
-						: document.querySelector<HTMLHeadingElement>("h1.entry-title")
-								?.textContent;
-					break;
-				}
-				presenceData.details = "In Forums";
+					  } - ${
+							document.querySelector<HTMLHeadingElement>("h1.entry-title")
+								?.textContent
+					  }`
+					: document.querySelector<HTMLHeadingElement>("h1.entry-title")
+							?.textContent;
 				break;
 			}
+			presenceData.details = "In Forums";
+			break;
+		default:
 			if (urlpath[1] && !urlpath[2]) {
 				switch (urlpath[1]) {
 					case "register":
@@ -88,7 +85,7 @@ presence.on("UpdateData", async () => {
 				switch (urlpath[2]) {
 					case "mods": {
 						if (urlpath[3] !== "categories") {
-							presenceData.details = `Viewing Mod of ${
+							presenceData.details = `Viewing mod of ${
 								document.querySelector<HTMLHeadingElement>("h1")?.textContent
 							}`;
 							presenceData.state = document.querySelector<HTMLHeadingElement>(
@@ -99,19 +96,19 @@ presence.on("UpdateData", async () => {
 								?.getAttribute("src");
 							break;
 						} else {
-							presenceData.details = "Viewing Mods of";
+							presenceData.details = "Viewing mods of";
 							presenceData.state =
 								document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 							break;
 						}
 					}
 					case "upload-mod":
-						presenceData.details = "Uploading Mod of";
+						presenceData.details = "Uploading mod of";
 						presenceData.state =
 							document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 						break;
 					case "manage-mods":
-						presenceData.details = "Managing Mods of";
+						presenceData.details = "Managing mods of";
 						presenceData.state =
 							document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 						break;
