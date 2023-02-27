@@ -39,12 +39,12 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `In a discussion of ${
 							document.querySelector<HTMLHeadingElement>(
 								"a.bbp-breadcrumb-forum"
-							)?.innerText
+							)?.textContent
 						}:`;
 						presenceData.state =
 							document.querySelector<HTMLHeadingElement>(
 								"h1.entry-title"
-							)?.innerText;
+							)?.textContent;
 						break;
 					}
 				}
@@ -54,13 +54,13 @@ presence.on("UpdateData", async () => {
 						? `${
 								document.querySelector<HTMLHeadingElement>(
 									"a.bbp-breadcrumb-forum"
-								)?.innerText
+								)?.textContent
 						  } - ${
 								document.querySelector<HTMLHeadingElement>("h1.entry-title")
-									?.innerText
+									?.textContent
 						  }`
 						: document.querySelector<HTMLHeadingElement>("h1.entry-title")
-								?.innerText;
+								?.textContent;
 					break;
 				}
 				presenceData.details = "In Forums";
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 					default:
 						presenceData.details = "Viewing Page of";
 						presenceData.state =
-							document.querySelector<HTMLHeadingElement>("h1")?.innerText;
+							document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 						break;
 				}
 			}
@@ -89,11 +89,11 @@ presence.on("UpdateData", async () => {
 					case "mods": {
 						if (urlpath[3] !== "categories") {
 							presenceData.details = `Viewing Mod of ${
-								document.querySelector<HTMLHeadingElement>("h1")?.innerText
+								document.querySelector<HTMLHeadingElement>("h1")?.textContent
 							}`;
 							presenceData.state = document.querySelector<HTMLHeadingElement>(
 								"div.site-content h1"
-							)?.innerText;
+							)?.textContent;
 							presenceData.largeImageKey = document
 								.querySelector<HTMLImageElement>("div.modsmedia img")
 								?.getAttribute("src");
@@ -101,45 +101,45 @@ presence.on("UpdateData", async () => {
 						} else {
 							presenceData.details = "Viewing Mods of";
 							presenceData.state =
-								document.querySelector<HTMLHeadingElement>("h1")?.innerText;
+								document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 							break;
 						}
 					}
 					case "upload-mod":
 						presenceData.details = "Uploading Mod of";
 						presenceData.state =
-							document.querySelector<HTMLHeadingElement>("h1")?.innerText;
+							document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 						break;
 					case "manage-mods":
 						presenceData.details = "Managing Mods of";
 						presenceData.state =
-							document.querySelector<HTMLHeadingElement>("h1")?.innerText;
+							document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 						break;
 					case "modder":
 						presenceData.details = `Viewing ${
-							document.querySelector<HTMLHeadingElement>("h1")?.innerText
+							document.querySelector<HTMLHeadingElement>("h1")?.textContent
 						} mods by Modder`;
 						presenceData.state = document.querySelector<HTMLHeadingElement>(
 							"div.modderprofilebox h2"
-						)?.innerText;
+						)?.textContent;
 						break;
 					case "category":
 						switch (urlpath[3]) {
 							case "guides":
 								presenceData.details = "Viewing Guides of";
 								presenceData.state =
-									document.querySelector<HTMLHeadingElement>("h1")?.innerText;
+									document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 								break;
 							case "updates":
 								presenceData.details = "Viewing Updates of";
 								presenceData.state =
-									document.querySelector<HTMLHeadingElement>("h1")?.innerText;
+									document.querySelector<HTMLHeadingElement>("h1")?.textContent;
 								break;
 						}
 						break;
 					default:
 						presenceData.details = `Viewing ${
-							document.querySelector<HTMLHeadingElement>("h1")?.innerText
+							document.querySelector<HTMLHeadingElement>("h1")?.textContent
 						}`;
 						presenceData.largeImageKey =
 							document
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state =
 							document.querySelector<HTMLHeadingElement>(
 								"h1.entry-title"
-							)?.innerText;
+							)?.textContent;
 				}
 				break;
 			}
