@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "897580799593938965",
+		"name": "Mur"
+	},
+	"service": "Construct 3",
+	"description": {
+		"en": "Construct 3 is the worlds best game making software. Make your own game in your browser without coding or with Javascript."
+	},
+	"url": "editor.construct.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/Z9DRjUb.png",
+	"thumbnail": "https://i.imgur.com/Z9DRjUb.png",
+	"color": "#D3E1F1",
+	"category": "games",
+	"tags": ["game", "engine", "construct", "construct3", "scirra"]
+}
