@@ -259,12 +259,12 @@ presence.on("UpdateData", async () => {
 function updateSongTimestamps() {
 	const element = document
 			.querySelector<HTMLSpanElement>("#left-controls > span")
-			.textContent.trim(),
-		currTimes = element.match(/(\d{1,2}):(\d{1,2})/),
-		totalTimes = element.match(/(\d{1,2}):(\d{1,2})$/);
+			.textContent.trim()
+			.split(" / "),
+		[currTimes, totalTimes] = element;
 
 	mediaTimestamps = presence.getTimestamps(
-		parseInt(currTimes[1]) * 60 + parseInt(currTimes[2]),
-		parseInt(totalTimes[1]) * 60 + parseInt(totalTimes[2])
+		presence.timestampFromFormat(currTimes),
+		presence.timestampFromFormat(totalTimes)
 	);
 }
