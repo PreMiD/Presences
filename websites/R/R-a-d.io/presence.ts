@@ -23,7 +23,6 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
-			// R/a/dio logo
 			largeImageKey: "https://i.imgur.com/o6JjbtH.png",
 		};
 	if (path.includes("/news")) {
