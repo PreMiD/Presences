@@ -21,29 +21,29 @@ const presence = new Presence({
 	};
 
 presence.on("UpdateData", async () => {
-	const path = document.location.pathname,
+	const { pathname } = document.location,
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/o6JjbtH.png",
 		};
-	if (path.includes("/news")) {
+	if (pathname.includes("/news")) {
 		// On News page
 		presenceData.details = "Reading news";
 		// Current article title if currently being open
-		if (path.split("/").length === 3) {
+		if (pathname.split("/").length === 3) {
 			presenceData.state = document.querySelector(
 				'[class="panel-title"] > a'
 			).textContent;
 		}
-	} else if (path.includes("/irc")) {
+	} else if (pathname.includes("/irc")) {
 		// On Chat page
 		presenceData.details = "Chatting";
-	} else if (path.includes("/search")) {
+	} else if (pathname.includes("/search")) {
 		// On Search page
-		const title = path.split("/")[2];
+		const title = pathname.split("/")[2];
 		// If searching for something
 		if (title) presenceData.details = `Searching for: ${title}`;
 		else presenceData.details = "Searching";
-	} else if (path.includes("/last-played")) {
+	} else if (pathname.includes("/last-played")) {
 		// On last played page
 		presenceData.details = "Looking at last played songs";
 		// For page number
@@ -52,19 +52,20 @@ presence.on("UpdateData", async () => {
 				"#radio-container > section > div > div > ul > li.active"
 			).textContent
 		}`;
-	} else if (path.includes("/queue")) presenceData.details = "Looking at queue";
-	else if (path.includes("/faves")) {
+	} else if (pathname.includes("/queue"))
+		presenceData.details = "Looking at queue";
+	else if (pathname.includes("/faves")) {
 		// On favorite page
 		presenceData.details = "Looking at favorites";
-		const username = path.split("/")[2];
+		const username = pathname.split("/")[2];
 		if (username) presenceData.details = `Looking at ${username}'s favorites`;
-	} else if (path.includes("/staff")) {
+	} else if (pathname.includes("/staff")) {
 		// On staff page
 		presenceData.details = "Looking at staff list";
-	} else if (path.includes("/submit")) {
+	} else if (pathname.includes("/submit")) {
 		// On submission page
 		presenceData.details = "Submitting a song";
-	} else if (path === "/") {
+	} else if (pathname === "/") {
 		// On root page
 		presenceData.details = playStatus();
 
