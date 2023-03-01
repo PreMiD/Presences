@@ -3,7 +3,6 @@ const presence = new Presence({
 	}),
 	/**
 	 * Returns current player status
-	 * @returns {string} either "Stopped", "Playing", or "Connecting..."
 	 */
 	playStatus = (): string => {
 		let status: string;
@@ -16,7 +15,6 @@ const presence = new Presence({
 	},
 	/**
 	 * Returns current song playing
-	 * @returns {string} Current song, usually in "{artist} - {title}" format
 	 */
 	currentSong = (): string => {
 		return document.querySelector("#np").textContent;
