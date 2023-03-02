@@ -1,4 +1,4 @@
-const presence = new Presence({ clientId: "1080885668248559648", }),
+const presence = new Presence({ clientId: "1080885668248559648" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Assets {
@@ -8,60 +8,103 @@ enum Assets {
 }
 
 presence.on("UpdateData", async () => {
-	const {pathname} = document.location,
+	const { pathname } = document.location,
 		pathArr = pathname.split("/"),
-		{details, smallImageKey, largeImageKey, state} = getPageData(
+		{ details, smallImageKey, largeImageKey, state } = getPageData(
 			pathArr[1],
 			pathArr[2],
 			document.querySelector(".name")?.textContent
-		), presenceData: PresenceData = {
+		),
+		presenceData: PresenceData = {
 			largeImageKey: largeImageKey || Assets.Logo,
 			startTimestamp: browsingTimestamp,
-			details
+			details,
 		};
 
-	if (smallImageKey)
-		presenceData.smallImageKey = smallImageKey;
+	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 
-	if (state)
-		presenceData.state = state;
+	if (state) presenceData.state = state;
 
-	if (details)
-		presence.setActivity(presenceData);
+	if (details) presence.setActivity(presenceData);
 });
 function getPageData(page: string, pageDetails: string, title: string) {
 	switch (page) {
-		case "home": return {details: "Viewing home"};
-		case "filter": return {details: "Filtering manga...", smallImageKey: Assets.Searching};
-		case "type": return {details: `Browsing ${pageDetails}...`, smallImageKey: Assets.Searching};
-		case "genre": return {details: `Browsing ${pageDetails} genre...`, smallImageKey: Assets.Searching};
-		case "newest": return {details: "Browsing latest releases...", smallImageKey: Assets.Searching};
-		case "updated": return {details: "Browsing recently updated...", smallImageKey: Assets.Searching};
-		case "added": return {details: "Browsing recently added...", smallImageKey: Assets.Searching};
-		case "az-list": return {details: "Browsing AZ-list...", smallImageKey: Assets.Searching};
+		case "home":
+			return { details: "Viewing home" };
+		case "filter":
+			return { details: "Filtering manga...", smallImageKey: Assets.Searching };
+		case "type":
+			return {
+				details: `Browsing ${pageDetails}...`,
+				smallImageKey: Assets.Searching,
+			};
+		case "genre":
+			return {
+				details: `Browsing ${pageDetails} genre...`,
+				smallImageKey: Assets.Searching,
+			};
+		case "newest":
+			return {
+				details: "Browsing latest releases...",
+				smallImageKey: Assets.Searching,
+			};
+		case "updated":
+			return {
+				details: "Browsing recently updated...",
+				smallImageKey: Assets.Searching,
+			};
+		case "added":
+			return {
+				details: "Browsing recently added...",
+				smallImageKey: Assets.Searching,
+			};
+		case "az-list":
+			return {
+				details: "Browsing AZ-list...",
+				smallImageKey: Assets.Searching,
+			};
 		case "manga":
 			return {
-				details: `Viewing ${document.querySelector("span:nth-child(2)")?.textContent}...`,
+				details: `Viewing ${
+					document.querySelector("span:nth-child(2)")?.textContent
+				}...`,
 				state: title,
-				largeImageKey: document.querySelector<HTMLImageElement>("div>img")?.src};
+				largeImageKey: document.querySelector<HTMLImageElement>("div>img")?.src,
+			};
 		case "read":
 			return {
-				details: `Reading ${title} (${document.querySelector("span:nth-child(3)").textContent})`,
-				state: `${document.querySelector(".number-current-type")?.textContent} ${document.querySelector(".number-current")?.textContent}...`};
-		case "user": return getProfileDetail(pageDetails);
-		case "terms": return {details: "Reading terms and conditions..."};
-		case "contact": return {details: "Filling up the contact form..."};
-		default: return {details: "Browsing...", smallImageKey: Assets.Searching};
+				details: `Reading ${title} (${
+					document.querySelector("span:nth-child(3)").textContent
+				})`,
+				state: `${
+					document.querySelector(".number-current-type")?.textContent
+				} ${document.querySelector(".number-current")?.textContent}...`,
+			};
+		case "user":
+			return getProfileDetail(pageDetails);
+		case "terms":
+			return { details: "Reading terms and conditions..." };
+		case "contact":
+			return { details: "Filling up the contact form..." };
+		default:
+			return { details: "Browsing...", smallImageKey: Assets.Searching };
 	}
 }
 function getProfileDetail(pageDetails: string) {
 	switch (pageDetails) {
-		case "profile": return { details: "Viewing their profile settings..."};
-		case "reading": return { details: "Viewing their list of continue watching..."};
-		case "bookmark": return { details: "Viewing their bookmarks..."};
-		case "notification": return { details: "Viewing their notifications..."};
-		case "mal": return { details: "Importing their MyAnimeList..."};
-		case "settings": return { details: "Viewing their general settings..."};
-		default: return { details: "Changing settings..."};
+		case "profile":
+			return { details: "Viewing their profile settings..." };
+		case "reading":
+			return { details: "Viewing their list of continue watching..." };
+		case "bookmark":
+			return { details: "Viewing their bookmarks..." };
+		case "notification":
+			return { details: "Viewing their notifications..." };
+		case "mal":
+			return { details: "Importing their MyAnimeList..." };
+		case "settings":
+			return { details: "Viewing their general settings..." };
+		default:
+			return { details: "Changing settings..." };
 	}
 }
