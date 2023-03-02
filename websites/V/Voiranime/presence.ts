@@ -1,11 +1,6 @@
 const presence = new Presence({
 		clientId: "867411016836186112",
 	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		browsing: "general.browsing",
-	}),
 	pathArr = document.location.pathname.split("/"),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	pages: Record<string, PresenceData> = {
@@ -24,10 +19,12 @@ const presence = new Presence({
 	};
 
 let video = {
-	duration: 0,
-	currentTime: 0,
-	paused: true,
-};
+		duration: 0,
+		currentTime: 0,
+		paused: true,
+	},
+	currentLang: string,
+	strings: { [key: string]: string };
 
 presence.on(
 	"iFrameData",
@@ -42,6 +39,25 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "https://i.imgur.com/Db6EmSA.png",
 		startTimestamp: browsingTimestamp,
 	};
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
+	if (newLang !== currentLang) {
+		currentLang = newLang;
+		strings = await presence.getStrings(
+			{
+				browsing: "general.browsing",
+				watchingMovie: "general.watchingMovie",
+				watchingSeries: "general.watchingSeries",
+				buttonViewMovie: "general.buttonViewMovie",
+				buttonViewSeries: "general.buttonViewSeries",
+				buttonViewPage: "general.buttonViewPage",
+				viewPage: "general.viewPage",
+				playing: "general.playing",
+				searching: "general.search",
+				searchFor: "general.searchFor",
+			},
+			newLang
+		);
+	}
 	switch (pathArr[1]) {
 		case "anime": {
 			const title = document.querySelector("ol > li:nth-child(2) > a");
@@ -64,8 +80,8 @@ presence.on("UpdateData", async () => {
 				presenceData.endTimestamp = endTimestamp;
 				presenceData.smallImageKey = video.paused ? "pause" : "play";
 				presenceData.smallImageText = video.paused
-					? (await strings).pause
-					: (await strings).play;
+					? strings.pause
+					: strings.play;
 				presenceData.buttons = [
 					{
 						label: "Regarder l'épisode",
