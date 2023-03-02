@@ -79,6 +79,7 @@ function getPageData(page: string, pageDetails: string, title: string) {
 				state: `${
 					document.querySelector(".number-current-type")?.textContent
 				} ${document.querySelector(".number-current")?.textContent}...`,
+				smallImageKey: Assets.Reading
 			};
 		case "user":
 			return getProfileDetail(pageDetails);
