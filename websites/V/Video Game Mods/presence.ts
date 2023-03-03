@@ -11,11 +11,11 @@ presence.on("UpdateData", async () => {
 			buttons: [
 				{
 					label: "View Page",
-					url: window.location.href,
+					url: document.location.href,
 				},
 			],
 		},
-		urlpath = window.location.pathname.split("/");
+		urlpath = document.location.pathname.split("/");
 
 	switch (true) {
 		case !urlpath[1]:
