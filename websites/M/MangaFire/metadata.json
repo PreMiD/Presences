@@ -29,9 +29,9 @@
 	],
 	"settings": [
 		{
-			"id": "cover",
-			"title": "Show Manga Cover",
-			"icon": "fas fa-images",
+			"id": "details",
+			"title": "Show details",
+			"icon": "fas fa-eye-slash",
 			"value": true
 		}
 	]

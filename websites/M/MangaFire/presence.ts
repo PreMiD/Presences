@@ -20,12 +20,15 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details,
 		},
-		[showCover] = await Promise.all([presence.getSetting<boolean>("cover")]);
-
-	if (!showCover) presenceData.largeImageKey = Assets.Logo;
-
+		[showDetail] = await Promise.all([presence.getSetting<boolean>("details")]);
 	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 	if (state) presenceData.state = state;
+
+	if (!showDetail && (pathArr[1] === "manga" || pathArr[1] === "read")) {
+		presenceData.largeImageKey = Assets.Logo;
+		presenceData.details = "Reading manga...";
+		presenceData.state = "";
+	}
 
 	if (details) presence.setActivity(presenceData);
 });
