@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 function getPageData(page: string, pageDetails: string, title: string) {
 	switch (page) {
 		case "home":
-			return { details: "Viewing home" };
+			return { details: "Viewing home..." };
 		case "filter":
 			return { details: "Filtering manga...", smallImageKey: Assets.Searching };
 		case "type":
