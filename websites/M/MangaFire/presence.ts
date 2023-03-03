@@ -13,7 +13,14 @@ presence.on("UpdateData", async () => {
 		{ details, smallImageKey, largeImageKey, state } = getPageData(
 			pathArr[1],
 			pathArr[2],
-			document.querySelector(".name")?.textContent
+			document.querySelector(".name")?.textContent,
+			document.querySelector("span:nth-child(2)")?.textContent,
+			document.querySelector<HTMLImageElement>("div>img")?.src,
+			document.querySelector("span:nth-child(3)").textContent,
+			document.querySelector(".number-current-type")?.textContent,
+			document.querySelector(".number-current")?.textContent,
+			document.querySelector("#hz-view-ctl-form > input[type=text]").getAttribute("placeholder"),
+			document.querySelector("#hz-view-ctl-form > span > span").textContent
 		),
 		presenceData: PresenceData = {
 			largeImageKey: largeImageKey || Assets.Logo,
@@ -27,7 +34,18 @@ presence.on("UpdateData", async () => {
 
 	if (details) presence.setActivity(presenceData);
 });
-function getPageData(page: string, pageDetails: string, title: string) {
+function getPageData(
+	page: string,
+	pageDetails: string,
+	title: string,
+	mangaType: string,
+	cover: string,
+	language: string,
+	volumeOrChapter: string,
+	currentNumber: string,
+	currentPageNumber: string,
+	totalPageNumber: string
+) {
 	switch (page) {
 		case "home":
 			return { details: "Viewing home..." };
@@ -65,20 +83,14 @@ function getPageData(page: string, pageDetails: string, title: string) {
 			};
 		case "manga":
 			return {
-				details: `Viewing ${
-					document.querySelector("span:nth-child(2)")?.textContent
-				}...`,
+				details: `Viewing ${mangaType}...`,
 				state: title,
-				largeImageKey: document.querySelector<HTMLImageElement>("div>img")?.src,
+				largeImageKey: cover,
 			};
 		case "read":
 			return {
-				details: `Reading ${title} (${
-					document.querySelector("span:nth-child(3)").textContent
-				})`,
-				state: `${
-					document.querySelector(".number-current-type")?.textContent
-				} ${document.querySelector(".number-current")?.textContent}...`,
+				details: `Reading ${title} (${language})`,
+				state: `${volumeOrChapter} ${currentNumber} page (${currentPageNumber}/${totalPageNumber})`,
 				smallImageKey: Assets.Reading,
 			};
 		case "user":
