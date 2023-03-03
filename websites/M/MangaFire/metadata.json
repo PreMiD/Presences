@@ -26,5 +26,13 @@
 		"reading",
 		"free",
 		"nsfw"
+	],
+	"settings": [
+		{
+			"id": "cover",
+			"title": "Show Manga Cover",
+			"icon": "fas fa-images",
+			"value": true
+		}
 	]
 }

@@ -13,39 +13,23 @@ presence.on("UpdateData", async () => {
 		{ details, smallImageKey, largeImageKey, state } = getPageData(
 			pathArr[1],
 			pathArr[2],
-			document.querySelector(".name")?.textContent,
-			document.querySelector("span:nth-child(2)")?.textContent,
-			document.querySelector<HTMLImageElement>("div>img")?.src,
-			document.querySelector("span:nth-child(3)").textContent,
-			document.querySelector(".number-current-type")?.textContent,
-			document.querySelector(".number-current")?.textContent,
-			document.querySelector("#hz-view-ctl-form > input[type=text]").getAttribute("placeholder"),
-			document.querySelector("#hz-view-ctl-form > span > span").textContent
+			document.querySelector(".name")?.textContent
 		),
 		presenceData: PresenceData = {
 			largeImageKey: largeImageKey || Assets.Logo,
 			startTimestamp: browsingTimestamp,
 			details,
-		};
+		},
+		[showCover] = await Promise.all([presence.getSetting<boolean>("cover")]);
+
+	if (!showCover) presenceData.largeImageKey = Assets.Logo;
 
 	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
-
 	if (state) presenceData.state = state;
 
 	if (details) presence.setActivity(presenceData);
 });
-function getPageData(
-	page: string,
-	pageDetails: string,
-	title: string,
-	mangaType: string,
-	cover: string,
-	language: string,
-	volumeOrChapter: string,
-	currentNumber: string,
-	currentPageNumber: string,
-	totalPageNumber: string
-) {
+function getPageData(page: string, pageDetails: string, title: string) {
 	switch (page) {
 		case "home":
 			return { details: "Viewing home..." };
@@ -83,14 +67,23 @@ function getPageData(
 			};
 		case "manga":
 			return {
-				details: `Viewing ${mangaType}...`,
+				details: `Viewing ${
+					document.querySelector("span:nth-child(2)")?.textContent //manga type
+				}...`,
 				state: title,
-				largeImageKey: cover,
+				largeImageKey: document.querySelector<HTMLImageElement>("div>img")?.src, //manga cover
 			};
 		case "read":
 			return {
-				details: `Reading ${title} (${language})`,
-				state: `${volumeOrChapter} ${currentNumber} page (${currentPageNumber}/${totalPageNumber})`,
+				details: `Reading ${title} (${
+					document.querySelector("span:nth-child(3)").textContent //language
+				})`,
+				state: `[${document
+					.querySelector("#hz-view-ctl-form > input[type=text]")
+					.getAttribute("placeholder")}/${
+					//current page number
+					document.querySelector("#hz-view-ctl-form > span > span").textContent //total page number
+				}] ${document.querySelector("li > a.active").textContent}`, //Chapter or Volume content details
 				smallImageKey: Assets.Reading,
 			};
 		case "user":
