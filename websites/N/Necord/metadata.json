@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "someone",
+		"id": "235413185639874561"
+	},
+	"service": "Necord",
+	"description": {
+		"en": "A module for creating Discord bots using NestJS, based on Discord.js"
+	},
+	"url": "necord.org",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/QkxCnmF.png",
+	"thumbnail": "https://i.imgur.com/9xM4W3z.png",
+	"color": "#c12549",
+	"category": "other",
+	"tags": [
+		"open-source",
+    "documentation",
+		"discord.js",
+		"discord"
+	]
+}
