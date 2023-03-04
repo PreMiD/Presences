@@ -4,7 +4,7 @@
 		"name": "someone",
 		"id": "235413185639874561"
 	},
-	"service": "NECORD",
+	"service": "Necord",
 	"description": {
 		"en": "A module for creating Discord bots using NestJS, based on Discord.js"
 	},
