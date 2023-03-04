@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 	if (state) presenceData.state = state;
 
 	if (
-		![await presence.getSetting<boolean>("details")][0] &&
+		!(await presence.getSetting<boolean>("details")) &&
 		(pathArr[1] === "manga" || pathArr[1] === "read")
 	) {
 		presenceData.largeImageKey = Assets.Logo;
