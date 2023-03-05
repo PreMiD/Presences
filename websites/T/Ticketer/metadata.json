@@ -1,23 +1,23 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "service": "Ticketer",
-  "author": {
-    "id": "347077478726238228",
-    "name": "Dominik#5555"
-  },
-  "description": {
-    "en": "Simplifies ticketing for customer support, sales, and suggestions",
-    "de": "Vereinfacht das Ticketing für Kundensupport, Verkauf und Vorschläge"
-  },
-  "url": "ticketerbot.com",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/2dILrRV.png",
-  "thumbnail": "https://i.imgur.com/HoFreB1.png",
-  "color": "#5865f2",
-  "tags": [
-    "discord",
-    "bot",
-    "ticketer"
-  ],
-  "category": "other"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "347077478726238228",
+		"name": "Dominik#5555"
+	},
+	"service": "Ticketer",
+	"description": {
+		"en": "Simplifies ticketing for customer support, sales, and suggestions",
+		"de": "Vereinfacht das Ticketing für Kundensupport, Verkauf und Vorschläge"
+	},
+	"url": "ticketerbot.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/2dILrRV.png",
+	"thumbnail": "https://i.imgur.com/HoFreB1.png",
+	"color": "#5865f2",
+	"category": "other",
+	"tags": [
+		"discord",
+		"bot",
+		"ticketer"
+	]
 }
