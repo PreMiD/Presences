@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = title.textContent;
 				presenceData.smallImageKey = logo.getAttribute("src");
 			}
-			if (dashboardInfo?.textContent === null) return;
+			if (!dashboardInfo?.textContent) return;
 			switch (dashboardInfo.textContent) {
 				case "Stats": {
 					presenceData.details = "Server Stats - Viewing:";
