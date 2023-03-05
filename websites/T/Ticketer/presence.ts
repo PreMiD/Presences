@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/dashboard": {
-			presenceData.details = "Visiting the dashboard";
+			presenceData.details = "Browsing the dashboard";
 			break;
 		}
 		case `/dashboard/${document.URL.slice(34)}`: {
