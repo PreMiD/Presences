@@ -12,15 +12,15 @@ presence.on("UpdateData", async () => {
 	presenceData.startTimestamp = browsingUnix;
 	switch (pathname) {
 		case "/commands": {
-			presenceData.details = "Viewing the commands-page";
+			presenceData.details = "Viewing the commands page";
 			break;
 		}
 		case "/changelog": {
-			presenceData.details = "Viewing the changelog-page";
+			presenceData.details = "Viewing the changelog page";
 			break;
 		}
 		case "/contribute": {
-			presenceData.details = "Viewing the contribution-page";
+			presenceData.details = "Viewing the contribution page";
 			break;
 		}
 		case "/dashboard": {
