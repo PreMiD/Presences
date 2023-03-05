@@ -5,59 +5,57 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/XDt1aUu.png",
-	};
+			largeImageKey: "https://i.imgur.com/XDt1aUu.png",
+		},
+		{ pathname } = document.location;
 	let title: HTMLElement, logo: HTMLElement, dashboardInfo: HTMLElement;
+	presenceData.startTimestamp = browsingUnix;
+	switch (pathname) {
+		case "/commands": {
+			presenceData.details = "Viewing the commands-page";
+			break;
+		}
+		case "/changelog": {
+			presenceData.details = "Viewing the changelog-page";
+			break;
+		}
+		case "/contribute": {
+			presenceData.details = "Viewing the contribution-page";
+			break;
+		}
+		case "/dashboard": {
+			presenceData.details = "Visiting the dashboard";
+			break;
+		}
+		case `/dashboard/${document.URL.slice(34)}`: {
+			if (document.querySelector(".server-info > h3")) {
+				title = document.querySelector(".server-info > h3");
+				logo = document.querySelector(".server-info > img");
+				dashboardInfo = document.querySelector(".informations-nav > h2");
 
-	if (document.location.hostname === "ticketerbot.com") {
-		presenceData.startTimestamp = browsingUnix;
-		switch (document.URL) {
-			case "https://ticketerbot.com/commands": {
-				presenceData.details = "Viewing the commands-page";
-				break;
+				presenceData.details = "Server Settings - Editing:";
+				presenceData.state = title.textContent;
+				presenceData.smallImageKey = logo.getAttribute("src");
 			}
-			case "https://ticketerbot.com/changelog": {
-				presenceData.details = "Viewing the changelog-page";
-				break;
-			}
-			case "https://ticketerbot.com/contribute": {
-				presenceData.details = "Viewing the contribution-page";
-				break;
-			}
-			case "https://ticketerbot.com/dashboard": {
-				presenceData.details = "Visiting the dashboard";
-				break;
-			}
-			case `https://ticketerbot.com/dashboard/${document.URL.slice(34)}`: {
-				if (document.querySelector(".server-info > h3")) {
-					title = document.querySelector(".server-info > h3");
-					logo = document.querySelector(".server-info > img");
-					dashboardInfo = document.querySelector(".informations-nav > h2");
-
-					presenceData.details = "Server Settings - Editing:";
-					presenceData.state = title.textContent;
-					presenceData.smallImageKey = logo.getAttribute("src");
+			if (dashboardInfo.textContent === null) return;
+			switch (dashboardInfo.textContent) {
+				case "Stats": {
+					presenceData.details = "Server Stats - Viewing:";
+					break;
 				}
-				if (dashboardInfo.textContent === null) return;
-				switch (dashboardInfo.textContent) {
-					case "Stats": {
-						presenceData.details = "Server Stats - Viewing:";
-						break;
-					}
-					case "Tickets": {
-						presenceData.details = "Ticket History - Viewing:";
-						break;
-					}
-					case "Staff": {
-						presenceData.details = "Staff Actvity - Viewing:";
-						break;
-					}
+				case "Tickets": {
+					presenceData.details = "Ticket History - Viewing:";
+					break;
 				}
-				break;
+				case "Staff": {
+					presenceData.details = "Staff Actvity - Viewing:";
+					break;
+				}
 			}
-			default: {
-				presenceData.details = "Viewing the homepage";
-			}
+			break;
+		}
+		default: {
+			presenceData.details = "Viewing the homepage";
 		}
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
