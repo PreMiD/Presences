@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Show Results",
-						url: location.href,
+						url: href,
 					},
 				];
 			}
