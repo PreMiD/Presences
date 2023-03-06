@@ -27,6 +27,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ href, pathname, search } = document.location,
 		title = document.title.split(" | ")[0],
+		privacy = await presence.getSetting("privacy"),
 		[
 			isSearchPublic,
 			isCurrentPagePublic,
@@ -34,7 +35,9 @@ presence.on("UpdateData", async () => {
 			isSidebarPublic,
 			isIdlingPublic,
 		] = await Promise.all(
-			settings.map(setting => presence.getSetting(setting))
+			!privacy
+				? settings.map(setting => presence.getSetting(setting))
+				: [].fill(true, 0, settings.length)
 		);
 
 	switch (true) {
