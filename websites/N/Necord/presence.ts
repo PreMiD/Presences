@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/LY804vK.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, search } = window.location,
+		{ href, pathname, search } = document.location,
 		title = document.title.split(" | ")[0],
 		[
 			isSearchPublic,
