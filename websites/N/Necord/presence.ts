@@ -8,7 +8,14 @@ const presence = new Presence({
 		clientId: "1081479845940314114",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-	IDLE_TIMEOUT = 10 * 60 * 1000;
+	IDLE_TIMEOUT = 10 * 60 * 1000,
+	settings = [
+		"search",
+		"docs-page",
+		"docs-page-content",
+		"docs-page-sidebar",
+		"idling",
+	];
 
 let sidebar: string = null,
 	scrollPercentage = 0,
@@ -20,10 +27,19 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = window.location,
-		title = document.title.split(" | ")[0];
+		title = document.title.split(" | ")[0],
+		[
+			isSearchPublic,
+			isCurrentPagePublic,
+			isCurrentContentPublic,
+			isSidebarPublic,
+			isIdlingPublic,
+		] = await Promise.all(
+			settings.map(setting => presence.getSetting(setting))
+		);
 
 	switch (true) {
-		case lastActivity + IDLE_TIMEOUT < Date.now(): {
+		case lastActivity + IDLE_TIMEOUT < Date.now() && isIdlingPublic: {
 			presenceData.smallImageKey = SmallImageKeys.Idle;
 			presenceData.smallImageText = "Idling...";
 			presenceData.details = "Idling at page: ";
@@ -38,7 +54,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Searching...";
 			presenceData.details = "Searching for something...";
 
-			if (search) {
+			if (search && isSearchPublic) {
 				presenceData.details = "Searching for:";
 				presenceData.state = [
 					search.split("q=")[1],
@@ -59,7 +75,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 
-		case !!sidebar: {
+		case !!sidebar && isSidebarPublic: {
 			presenceData.smallImageKey = SmallImageKeys.Search;
 			presenceData.smallImageText = "Searching...";
 			presenceData.details = "Selecting a category:";
@@ -77,11 +93,12 @@ presence.on("UpdateData", async () => {
 
 			presenceData.smallImageKey = SmallImageKeys.Read;
 			presenceData.smallImageText = "Reading...";
-			presenceData.details = `Reading ${title} page:`;
-			presenceData.state = [
-				topmostElem.textContent,
-				`(${scrollPercentage.toFixed(2)}%)`,
-			].join(" ");
+			presenceData.details = `Reading ${
+				isCurrentPagePublic ? title : "a"
+			} page${isCurrentContentPublic ? ":" : "..."}`;
+			presenceData.state = isCurrentContentPublic
+				? `${topmostElem.textContent} (${scrollPercentage.toFixed(2)}%)`
+				: null;
 			presenceData.buttons = [
 				{
 					label: "Read Page",
