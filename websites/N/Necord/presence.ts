@@ -50,8 +50,8 @@ presence.on("UpdateData", async () => {
 
 		case pathname.startsWith("/search"): {
 			presenceData.smallImageKey = SmallImageKeys.Search;
-			presenceData.smallImageText = "Searching...";
-			presenceData.details = "Searching for something...";
+			presenceData.smallImageText = "Searching";
+			presenceData.details = "Searching for something";
 
 			if (search && isSearchPublic) {
 				presenceData.details = "Searching for:";
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 
 		case !!sidebar && isSidebarPublic: {
 			presenceData.smallImageKey = SmallImageKeys.Search;
-			presenceData.smallImageText = "Searching...";
+			presenceData.smallImageText = "Searching";
 			presenceData.details = "Selecting a category:";
 			presenceData.state = sidebar;
 
@@ -91,10 +91,10 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLLinkElement>(".table-of-contents__link");
 
 			presenceData.smallImageKey = SmallImageKeys.Read;
-			presenceData.smallImageText = "Reading...";
+			presenceData.smallImageText = "Reading";
 			presenceData.details = `Reading ${
 				isCurrentPagePublic ? title : "a"
-			} page${isCurrentContentPublic ? ":" : "..."}`;
+			} page${isCurrentContentPublic ? ":" : ""}`;
 			presenceData.state = isCurrentContentPublic
 				? `${topmostElem.textContent} (${getScrollPercentage().toFixed(2)}%)`
 				: null;
