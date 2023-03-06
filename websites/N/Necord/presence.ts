@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 	switch (true) {
 		case lastActivity + IDLE_TIMEOUT < Date.now() && isIdlingPublic: {
 			presenceData.smallImageKey = SmallImageKeys.Idle;
-			presenceData.smallImageText = "Idling...";
+			presenceData.smallImageText = "Idling";
 			presenceData.details = "Idling at page: ";
 			presenceData.state = title;
 			presenceData.startTimestamp = Math.floor(lastActivity / 1000);
