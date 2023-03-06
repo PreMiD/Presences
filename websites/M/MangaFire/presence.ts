@@ -2,7 +2,7 @@ const presence = new Presence({ clientId: "1080885668248559648" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Assets {
-	Logo = "https://i.imgur.com/KXGOlbM.png",
+	Logo = "https://i.imgur.com/356Spon.png",
 	Searching = "https://i.imgur.com/OIgfjTG.png",
 	Reading = "https://i.imgur.com/53N4eY6.png",
 }
