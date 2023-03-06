@@ -8,7 +8,10 @@
 	"description": {
 		"en": "A module for creating Discord bots using NestJS, based on Discord.js"
 	},
-	"url": "necord.org",
+	"url": [
+		"necord.org",
+		"www.necord.org"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/QkxCnmF.png",
 	"thumbnail": "https://i.imgur.com/9xM4W3z.png",
