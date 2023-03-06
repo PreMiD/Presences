@@ -1,3 +1,9 @@
+enum SmallImageKeys {
+	Idle = "idle",
+	Search = "search",
+	Read = "read",
+}
+
 const presence = new Presence({
 		clientId: "1081479845940314114",
 	}),
@@ -18,7 +24,7 @@ presence.on("UpdateData", async () => {
 
 	switch (true) {
 		case lastActivity + IDLE_TIMEOUT < Date.now(): {
-			presenceData.smallImageKey = "idle";
+			presenceData.smallImageKey = SmallImageKeys.Idle;
 			presenceData.smallImageText = "Idling...";
 			presenceData.details = "Idling at page: ";
 			presenceData.state = title;
@@ -28,7 +34,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		case pathname.startsWith("/search"): {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = SmallImageKeys.Search;
 			presenceData.smallImageText = "Searching...";
 			presenceData.details = "Searching for something...";
 
@@ -54,7 +60,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		case !!sidebar: {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = SmallImageKeys.Search;
 			presenceData.smallImageText = "Searching...";
 			presenceData.details = "Selecting a category:";
 			presenceData.state = sidebar;
@@ -69,7 +75,7 @@ presence.on("UpdateData", async () => {
 				) ??
 				document.querySelector<HTMLLinkElement>(".table-of-contents__link");
 
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = SmallImageKeys.Read;
 			presenceData.smallImageText = "Reading...";
 			presenceData.details = `Reading ${title} page:`;
 			presenceData.state = [
