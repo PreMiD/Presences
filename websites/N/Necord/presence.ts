@@ -18,7 +18,6 @@ const presence = new Presence({
 	];
 
 let sidebar: string = null,
-	scrollPercentage = 0,
 	lastActivity: number = Date.now();
 
 presence.on("UpdateData", async () => {
@@ -97,7 +96,7 @@ presence.on("UpdateData", async () => {
 				isCurrentPagePublic ? title : "a"
 			} page${isCurrentContentPublic ? ":" : "..."}`;
 			presenceData.state = isCurrentContentPublic
-				? `${topmostElem.textContent} (${scrollPercentage.toFixed(2)}%)`
+				? `${topmostElem.textContent} (${getScrollPercentage().toFixed(2)}%)`
 				: null;
 			presenceData.buttons = [
 				{
@@ -123,11 +122,9 @@ document.addEventListener("mouseover", e => {
 	lastActivity = Date.now();
 });
 
-document.addEventListener("scroll", () => {
+function getScrollPercentage() {
 	const { scrollY, innerHeight } = window,
 		{ scrollHeight } = document.body;
 
-	scrollPercentage = (scrollY / (scrollHeight - innerHeight)) * 100;
-
-	lastActivity = Date.now();
-});
+	return ((scrollY / (scrollHeight - innerHeight)) * 100) | 100;
+}
