@@ -59,6 +59,8 @@ presence.on("UpdateData", async () => {
 		}
 
 		case !!sidebar: {
+			presenceData.smallImageKey = "search";
+			presenceData.smallImageText = "Searching...";
 			presenceData.details = "Selecting a category:";
 			presenceData.state = sidebar;
 
