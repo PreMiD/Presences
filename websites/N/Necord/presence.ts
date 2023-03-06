@@ -1,7 +1,7 @@
 enum SmallImageKeys {
-	Idle = "idle",
-	Search = "search",
-	Read = "read",
+	Idle = "https://i.imgur.com/6A9pxAR.png",
+	Search = "https://i.imgur.com/T9NzckB.png",
+	Read = "https://i.imgur.com/ULFqucm.png",
 }
 
 const presence = new Presence({
@@ -23,7 +23,7 @@ let sidebar: string = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "large",
+			largeImageKey: "https://i.imgur.com/LY804vK.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = window.location,
