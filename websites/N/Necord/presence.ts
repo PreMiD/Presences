@@ -124,7 +124,8 @@ document.addEventListener("mouseover", e => {
 
 function getScrollPercentage() {
 	const { scrollY, innerHeight } = window,
-		{ scrollHeight } = document.body;
+		{ scrollHeight } = document.body,
+		percentage = (scrollY / (scrollHeight - innerHeight)) * 100;
 
-	return ((scrollY / (scrollHeight - innerHeight)) * 100) | 100;
+	return percentage === 0 ? 0 : percentage || 100;
 }
