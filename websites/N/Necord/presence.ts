@@ -1,8 +1,3 @@
-interface AnchorItem {
-	text: string;
-	id: string;
-}
-
 const presence = new Presence({
 		clientId: "1081479845940314114",
 	}),
@@ -68,43 +63,23 @@ presence.on("UpdateData", async () => {
 		}
 
 		default: {
-			const contents = [
-				...document.querySelectorAll<HTMLDivElement>(".anchor").values(),
-			];
-
-			let topmost: AnchorItem = null;
-
-			if (contents.length) {
-				const topmostElem = [...contents].sort((a, b) => {
-					const [{ y: y1, h: h1 }, { y: y2, h: h2 }] = [a, b].map(e => ({
-						y: e.getBoundingClientRect().y,
-						h: e.clientHeight + parseInt(getComputedStyle(e).marginTop) * 5,
-					}));
-
-					if (y1 < h1 && y2 < h2) return y2 - y1;
-
-					return y1 - y2;
-				});
-
-				topmost = {
-					text: topmostElem[0].textContent,
-					id: topmostElem[0].id,
-				};
-			}
+			const topmostElem =
+				document.querySelector<HTMLLinkElement>(
+					".table-of-contents__link--active"
+				) ??
+				document.querySelector<HTMLLinkElement>(".table-of-contents__link");
 
 			presenceData.smallImageKey = "read";
 			presenceData.smallImageText = "Reading...";
 			presenceData.details = `Reading ${title} page:`;
 			presenceData.state = [
-				topmost?.text ?? null,
+				topmostElem.textContent,
 				`(${scrollPercentage.toFixed(2)}%)`,
-			]
-				.filter(Boolean)
-				.join(" ");
+			].join(" ");
 			presenceData.buttons = [
 				{
 					label: "Read Page",
-					url: [location.href, topmost?.id].filter(Boolean).join("#"),
+					url: topmostElem.href,
 				},
 			];
 
