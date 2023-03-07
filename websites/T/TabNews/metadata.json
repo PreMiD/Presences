@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "TabNews",
+  "author": {
+    "id": "354233941550694400",
+    "name": "Kuriel#1411"
+  },
+  "description": {
+    "en": "TabNews is a website with content for those who work with Programming and Technology."
+  },
+  "url": "tabnews.com.br",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/YlPvIIb.png",
+  "thumbnail": "https://i.imgur.com/vUlsC33.png",
+  "color": "#ffffff",
+  "tags": [
+    "programmming"
+  ],
+  "category": "socials"
+}
