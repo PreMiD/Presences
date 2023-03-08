@@ -6,9 +6,10 @@
     "name": "Kuriel#1411"
   },
   "description": {
-    "en": "TabNews is a website with content for those who work with Programming and Technology."
+    "en": "TabNews is a website with content for those who work with Programming and Technology.",
+    "pt": ""
   },
-  "url": "tabnews.com.br",
+  "url": "www.tabnews.com.br",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/YlPvIIb.png",
   "thumbnail": "https://i.imgur.com/vUlsC33.png",
@@ -16,5 +17,13 @@
   "tags": [
     "programmming"
   ],
-  "category": "socials"
+  "category": "socials",
+  "settings": [
+		{
+			"id": "count",
+			"title": "Show donated amount",
+			"icon": "fas fa-dollar-sign",
+			"value": true
+		}
+	]
 }
