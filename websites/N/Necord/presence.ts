@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 		] = await Promise.all(
 			!privacy
 				? settings.map(setting => presence.getSetting(setting))
-				: [].fill(true, 0, settings.length)
+				: Array(settings.length).fill(false)
 		);
 
 	switch (true) {
