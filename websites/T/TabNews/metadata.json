@@ -7,7 +7,7 @@
   },
   "description": {
     "en": "TabNews is a website with content for those who work with Programming and Technology.",
-    "pt": ""
+    "pt_BR": "TabNews é um site com conteúdo para quem trabalha com Programação e Tecnologia."
   },
   "url": "www.tabnews.com.br",
   "version": "1.0.0",
@@ -20,10 +20,10 @@
   "category": "socials",
   "settings": [
 		{
-			"id": "count",
-			"title": "Show donated amount",
-			"icon": "fas fa-dollar-sign",
-			"value": true
+			"id": "privacy",
+			"title": "Modo de privacidade",
+			"icon": "fa-solid fa-eye",
+			"value": false
 		}
 	]
 }
