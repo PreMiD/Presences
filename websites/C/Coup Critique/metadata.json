@@ -9,7 +9,10 @@
 		"en": "Tutorial list about Pokemon strategy and french competitive scene. You will find helpful vocabulary articles and practices in the Pokemon strategy.",
 		"fr": "Liste des guides sur la stratégie Pokémon et la scène compétitive française. Vous y retrouverez des articles d'aide sur le vocabulaire et les pratiques de la stratégie Pokémon."
 	},
-	"url": "www.coupcritique.fr",
+	"url": [
+		"www.coupcritique.fr",
+		"coupcritique.fr"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/oo2fig0.png",
 	"thumbnail": "https://i.imgur.com/sh2ACY3.png",
