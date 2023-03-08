@@ -4,11 +4,20 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	staticPages: Record<string, PresenceData> = {
 		"": { details: "Parcours la page d'accueil" },
+		resources: { details: "Parcours les liens utiles" },
+		user: { details: "Consulte son profil" },
+		notifications: { details: "Consulte ses notifications" },
+		remerciements: { details: "Lit les remerciements" },
+	},
+	staticDatas: Record<string, string[]> = {
+		guides: ["Parcours les guides", "Lit le guide"],
+		actualities: ["Parcours les actualités", "Lit l'actualité"],
+		tournaments: ["Parcours les tournois", "Lit la page du tournoi"],
 	},
 	slideshow = new Slideshow();
 
 enum Assets {
-	Logo = "https://i.imgur.com/iWiBLBu.png",
+	Logo = "https://i.imgur.com/oo2fig0.png",
 	Reading = "https://i.imgur.com/53N4eY6.png",
 }
 
@@ -19,16 +28,18 @@ presence.on("UpdateData", async () => {
 	};
 	const { pathname, href } = document.location,
 		pathArr = pathname.replace("entity/", "").split("/"),
+		startPath = pathArr[1],
 		presenceDataSlide: PresenceData = {
 			startTimestamp: browsingTimestamp,
 			largeImageKey: Assets.Logo,
 		},
-		[showImg, showButtons] = await Promise.all([
+		[privacy, showImg, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("image"),
 			presence.getSetting<boolean>("buttons"),
 		]);
 
-	switch (pathArr[1]) {
+	switch (startPath) {
 		case "teams":
 			presenceData.details = "Parcours les équipes";
 			if (pathArr[2] === "create") {
@@ -74,7 +85,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case "items":
 		case "moves": {
-			const caseString = pathArr[1] === "moves" ? "capacités" : "objets";
+			const caseString = startPath === "moves" ? "capacités" : "objets";
 			presenceData.details = `Parcours la liste des ${caseString}`;
 			if (pathArr.length > 2) {
 				presenceData.details = `Lit la fiche ${caseString.substring(
@@ -89,7 +100,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "abilities":
 		case "types": {
-			const caseString = pathArr[1] === "types" ? "types" : "talents";
+			const caseString = startPath === "types" ? "types" : "talents";
 			presenceData.details = `Regarde la liste des ${caseString}`;
 			if (pathArr.length > 2) {
 				presenceData.details = `Parcours la liste du ${caseString.substring(
@@ -100,22 +111,43 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "videos": {
+			presenceData.details = presenceDataSlide.details = "Parcours les vidéos";
+			const categories =
+					document.querySelector<HTMLLinkElement>('div[name="tags"] a'),
+				author = document.querySelector<HTMLDivElement>(
+					'div[label="Auteur"] div[class="text"]'
+				);
+			if (categories) {
+				presenceData.state = `Catégorie ${categories.textContent}`;
+				slideshow.addSlide("categoriesSlide", presenceData, 5000);
+			}
+			if (author) {
+				presenceDataSlide.state = `Par ${author.textContent}`;
+				slideshow.addSlide("authorSlide", presenceDataSlide, 5000);
+			}
+			break;
+		}
 		case "guides":
-			presenceData.details = "Parcours les guides";
+		case "actualities":
+		case "tournaments":
+			presenceData.details = staticDatas[startPath][0];
 			if (pathArr.length > 2) {
-				presenceData.details = "Lit le guide";
+				presenceData.details = staticDatas[startPath][1];
 				presenceData.state = document.querySelector("h1").textContent;
 				presenceData.largeImageKey =
 					document.querySelector<HTMLImageElement>("div > img").src;
+				presenceData.buttons = [{ label: "Consulter la page", url: href }];
 			}
 			break;
 		default:
-			if (Object.keys(staticPages).includes(pathArr[1]))
-				presenceData = { ...presenceData, ...staticPages[pathArr[1]] };
+			if (Object.keys(staticPages).includes(startPath))
+				presenceData = { ...presenceData, ...staticPages[startPath] };
 	}
 
-	if (!showButtons && presenceData.buttons) delete presenceData.buttons;
-	if (!showImg && presenceData.largeImageKey)
+	if ((privacy || !showButtons) && presenceData.buttons)
+		delete presenceData.buttons;
+	if ((privacy || !showImg) && presenceData.largeImageKey)
 		presenceData.largeImageKey = Assets.Logo;
 
 	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
