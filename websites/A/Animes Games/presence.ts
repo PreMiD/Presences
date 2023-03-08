@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 				if (search) {
 					presenceData.details = "Procurando";
 					presenceData.state = `Procurando por ${search.substring(3)}`;
-				} else presenceData.details = "Explorando AnimeOnline.Games";
+				} else presenceData.details = "Explorando animesgames.net";
 
 				break;
 			}
