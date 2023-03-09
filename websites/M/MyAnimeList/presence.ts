@@ -3,82 +3,82 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-	if (document.location.pathname === "/") {
+	const { pathname } = document.location,
+		logo = "https://i.imgur.com/AoF1JnY.png";
+	if (pathname === "/") {
 		presence.setActivity({
 			details: "Viewing the homepage",
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+			largeImageKey: logo,
 		});
 	} else if (
-		document.location.pathname === "/anime.php" ||
-		document.location.pathname.startsWith("/topanime") ||
-		document.location.pathname.startsWith("/watch")
+		pathname === "/anime.php" ||
+		pathname.startsWith("/topanime") ||
+		pathname.startsWith("/watch")
 	) {
 		presence.setActivity({
 			details: "Looking for anime",
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+			largeImageKey: logo,
 		});
 	} else if (
-		document.location.pathname === "/manga.php" ||
-		document.location.pathname.startsWith("/topmanga") ||
-		document.location.pathname.startsWith("/store")
+		pathname === "/manga.php" ||
+		pathname.startsWith("/topmanga") ||
+		pathname.startsWith("/store")
 	) {
 		presence.setActivity({
 			details: "Looking for manga",
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+			largeImageKey: logo,
 		});
-	} else if (document.location.pathname.startsWith("/forum")) {
+	} else if (pathname.startsWith("/forum")) {
 		const presenceData: PresenceData = {
 			details: "Viewing the forums",
 			state: document
 				.querySelector("meta[property='og:title']")
 				.getAttribute("content"),
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+			largeImageKey: logo,
 		};
 		presence.setActivity(presenceData);
-	} else if (document.location.pathname.startsWith("/clubs.php")) {
+	} else if (pathname.startsWith("/clubs.php")) {
 		if (document.querySelectorAll(".normal_header")[1]) {
 			const presenceData: PresenceData = {
 				details: "Viewing an club",
-				state: document.querySelectorAll(".h1")[0].textContent,
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				state: document.querySelector(".h1").textContent,
+				largeImageKey: logo,
 			};
 			presence.setActivity(presenceData);
 		} else if (
-			document.querySelectorAll(".h1-title")[0].textContent === "Invitations"
+			document.querySelector(".h1-title").textContent === "Invitations"
 		) {
 			presence.setActivity({
 				details: "Viewing club Invitations",
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				largeImageKey: logo,
 			});
-		} else if (
-			document.querySelectorAll(".h1-title")[0].textContent === "My Clubs"
-		) {
+		} else if (document.querySelector(".h1-title").textContent === "My Clubs") {
 			presence.setActivity({
 				details: "Viewing my clubs",
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				largeImageKey: logo,
 			});
 		} else {
 			presence.setActivity({
 				details: "Looking for clubs",
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				largeImageKey: logo,
 			});
 		}
-	} else if (document.location.pathname.startsWith("/blog.php")) {
+	} else if (pathname.startsWith("/blog.php")) {
 		presence.setActivity({
 			details: "Viewing the blogs",
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+			largeImageKey: logo,
 		});
-	} else if (document.location.pathname.startsWith("/users.php")) {
+	} else if (pathname.startsWith("/users.php")) {
 		presence.setActivity({
 			details: "Searching for users",
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+			largeImageKey: logo,
 		});
-	} else if (document.location.pathname.startsWith("/news")) {
+	} else if (pathname.startsWith("/news")) {
 		presence.setActivity({
 			details: "Viewing the news",
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+			largeImageKey: logo,
 		});
-	} else if (document.location.pathname.startsWith("/featured")) {
+	} else if (pathname.startsWith("/featured")) {
 		if (
 			document
 				.querySelector("meta[property='og:title']")
@@ -87,37 +87,37 @@ presence.on("UpdateData", async () => {
 		) {
 			presence.setActivity({
 				details: "Viewing featured articles",
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				largeImageKey: logo,
 			});
 		} else {
 			const presenceData: PresenceData = {
 				details: "Viewing an article",
-				state: document.querySelectorAll(".title")[0].textContent,
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				state: document.querySelector(".title").textContent,
+				largeImageKey: logo,
 			};
 			presence.setActivity(presenceData);
 		}
-	} else if (document.location.pathname.startsWith("/people")) {
-		if (document.querySelectorAll(".h1")[0].textContent === "People") {
+	} else if (pathname.startsWith("/people")) {
+		if (document.querySelector(".h1").textContent === "People") {
 			presence.setActivity({
 				details: "Viewing peoples",
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				largeImageKey: logo,
 			});
 		} else {
 			const presenceData: PresenceData = {
 				details: "Viewing a person",
 				state: document
-					.querySelectorAll(".title-name")[0]
+					.querySelector(".title-name")
 					.textContent.replace(/(<([^>]+)>)/gi, ""),
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				largeImageKey: logo,
 			};
 			presence.setActivity(presenceData);
 		}
-	} else if (document.location.pathname.startsWith("/character")) {
-		if (document.querySelectorAll(".h1")[0].textContent === "Characters") {
+	} else if (pathname.startsWith("/character")) {
+		if (document.querySelector(".h1").textContent === "Characters") {
 			presence.setActivity({
 				details: "Looking for characters",
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				largeImageKey: logo,
 			});
 		} else {
 			const presenceData: PresenceData = {
@@ -125,68 +125,65 @@ presence.on("UpdateData", async () => {
 				state: document
 					.querySelectorAll(".normal_header")[2]
 					.textContent.replace(/(<([^>]+)>)/gi, ""),
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				largeImageKey: logo,
 			};
 			presence.setActivity(presenceData);
 		}
-	} else if (document.location.pathname.startsWith("/profile")) {
-		const presenceData: PresenceData = {
+	} else if (pathname.startsWith("/profile")) {
+		presence.setActivity({
 			details: "Viewing a profile",
-			state: document.location.pathname.split("/")[2],
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
-		};
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.startsWith("/animelist")) {
-		const presenceData: PresenceData = {
+			state: pathname.split("/")[2],
+			largeImageKey: logo,
+		});
+	} else if (pathname.startsWith("/animelist")) {
+		presence.setActivity({
 			details: "Viewing an anime list",
-			state: document.location.pathname.split("/")[2],
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
-		};
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.startsWith("/mangalist")) {
-		const presenceData: PresenceData = {
+			state: pathname.split("/")[2],
+			largeImageKey: logo,
+		});
+	} else if (pathname.startsWith("/mangalist")) {
+		presence.setActivity({
 			details: "Viewing a manga list",
-			state: document.location.pathname.split("/")[2],
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
-		};
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.startsWith("/anime")) {
-		// TODO: The if loop to check if thhe user is really on the page of an anime is currently always true for some reason which results in the presence going away when the user is for example in the anime directory
-		if (document.querySelectorAll(".js-anime-edit-info-button")[0]) {
+			state: pathname.split("/")[2],
+			largeImageKey: logo,
+		});
+	} else if (pathname.startsWith("/anime")) {
+		// TODO: The if loop to check if the user is really on the page of an anime is currently always true for some reason which results in the presence going away when the user is for example in the anime directory
+		if (document.querySelector(".js-anime-edit-info-button")) {
 			const presenceData: PresenceData = {
 				details: "Viewing an anime",
-				state:
-					document.querySelectorAll(".header-right")[0].parentNode.childNodes[1]
-						.textContent,
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				state: `${document.querySelector(".title-name").textContent} ${
+					document.querySelector(".title-english")?.textContent ?? ""
+				}`.trim(),
+				largeImageKey: logo,
 			};
 			presence.setActivity(presenceData);
 		} else {
 			presence.setActivity({
 				details: "Looking for anime",
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				largeImageKey: logo,
 			});
 		}
-	} else if (document.location.pathname.startsWith("/manga")) {
-		// TODO: The if loop to check if thhe user is really on the page of an anime is currently always true for some reason which results in the presence going away when the user is for example in the anime directory
-		if (document.querySelectorAll(".js-manga-edit-info-button")[0]) {
+	} else if (pathname.startsWith("/manga")) {
+		// TODO: The if loop to check if the user is really on the page of an anime is currently always true for some reason which results in the presence going away when the user is for example in the anime directory
+		if (document.querySelector(".js-manga-edit-info-button")) {
 			const presenceData: PresenceData = {
 				details: "Viewing a manga",
-				state:
-					document.querySelectorAll(".header-right")[0].parentNode.childNodes[1]
-						.textContent,
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				state: `${document.querySelector(".title-name").textContent} ${
+					document.querySelector(".title-english")?.textContent ?? ""
+				}`.trim(),
+				largeImageKey: logo,
 			};
 			presence.setActivity(presenceData);
 		} else {
 			presence.setActivity({
 				details: "Looking for manga",
-				largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+				largeImageKey: logo,
 			});
 		}
 	} else {
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+			largeImageKey: logo,
 		});
 	}
 });
