@@ -1,14 +1,14 @@
 const presence = new Presence({
-		clientId: "1083051669996187748",
-	}),
+	clientId: "1083051669996187748",
+}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			details: "Outros",
-			largeImageKey: "https://i.imgur.com/pQeO9sn.png",
-			startTimestamp: browsingTimestamp
-		},
+		details: "Outros",
+		largeImageKey: "https://i.imgur.com/pQeO9sn.png",
+		startTimestamp: browsingTimestamp
+	},
 		urlpath = document.location.pathname.split("/"),
 		privacyMode = await presence.getSetting<boolean>("privacy");
 
@@ -54,6 +54,14 @@ presence.on("UpdateData", async () => {
 							presenceData.state = !privacyMode
 								? document.querySelector<HTMLHeadingElement>("h1")?.textContent
 								: "Anônimo";
+							if (!privacyMode) {
+								presenceData.buttons = [
+									{
+										label: "Ver perfil",
+										url: document.location.href,
+									},
+								];
+							}
 						} else presenceData.details = "Vendo outros conteúdos";
 						break;
 				}
@@ -61,9 +69,8 @@ presence.on("UpdateData", async () => {
 			if (urlpath[2]) {
 				switch (urlpath[2]) {
 					case "pagina": {
-						presenceData.details = `Vendo perfil de ${
-							!privacyMode ? urlpath[1] : "Anônimo"
-						} `;
+						presenceData.details = `Vendo perfil de ${!privacyMode ? urlpath[1] : "Anônimo"
+							} `;
 						presenceData.state = `Página ${urlpath[3]}`;
 						break;
 					}
@@ -75,10 +82,22 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Lendo resposta a:";
 							presenceData.state =
 								document.querySelector("strong")?.textContent;
+							presenceData.buttons = [
+								{
+									label: "Ver resposta",
+									url: document.location.href,
+								},
+							];
 						} else {
 							presenceData.details = "Lendo o conteúdo:";
 							presenceData.state =
 								document.querySelector<HTMLHeadingElement>("h1")?.textContent;
+							presenceData.buttons = [
+								{
+									label: "Ver conteúdo",
+									url: document.location.href,
+								},
+							];
 						}
 						break;
 				}
