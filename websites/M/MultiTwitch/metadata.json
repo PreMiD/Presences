@@ -22,5 +22,22 @@
 		"video",
 		"streaming",
 		"entertainment"
+	],
+	"settings": [
+		{
+			"id": "showStreamers",
+			"title": "Show streams",
+			"icon": "fa-duotone fa-screen-users",
+			"value": true
+		},
+		{
+			"id": "showButton",
+			"if": {
+				"showStreamers": true
+			},
+			"title": "Show 'Open' button",
+			"value": false,
+			"icon": "fa-duotone fa-eye"
+		}
 	]
 }
