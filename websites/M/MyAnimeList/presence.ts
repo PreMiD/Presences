@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/clubs.php")) {
 		if (document.querySelectorAll(".normal_header")[1]) {
 			const presenceData: PresenceData = {
-				details: "Viewing an club",
+				details: "Viewing a club",
 				state: document.querySelector(".h1").textContent,
 				largeImageKey: logo,
 			};
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/people")) {
 		if (document.querySelector(".h1").textContent === "People") {
 			presence.setActivity({
-				details: "Viewing peoples",
+				details: "Viewing people",
 				largeImageKey: logo,
 			});
 		} else {
@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
 			});
 		} else {
 			const presenceData: PresenceData = {
-				details: "Viewing an character",
+				details: "Viewing a character",
 				state: document
 					.querySelectorAll(".normal_header")[2]
 					.textContent.replace(/(<([^>]+)>)/gi, ""),
