@@ -7,13 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Outros",
 			largeImageKey: "https://i.imgur.com/pQeO9sn.png",
-			startTimestamp: browsingTimestamp,
-			buttons: [
-				{
-					label: "Ver conteúdo",
-					url: document.location.href,
-				},
-			],
+			startTimestamp: browsingTimestamp
 		},
 		urlpath = document.location.pathname.split("/"),
 		privacyMode = await presence.getSetting<boolean>("privacy");
