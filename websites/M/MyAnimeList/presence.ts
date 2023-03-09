@@ -91,19 +91,23 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/anime")) {
 		// TODO: The if loop to check if the user is really on the page of an anime is currently always true for some reason which results in the presence going away when the user is for example in the anime directory
 		if (document.querySelector(".js-anime-edit-info-button")) {
+			const englishTitle =
+				document.querySelector(".title-english")?.textContent;
 			presenceData.details = "Viewing an anime";
 			presenceData.state = `${
 				document.querySelector(".title-name").textContent
-			} ${document.querySelector(".title-english")?.textContent ?? ""}`.trim();
+			} ${englishTitle ? `| ${englishTitle}` : ""}`.trim();
 			presenceData.buttons = [{ label: "View Anime", url: href }];
 		} else presenceData.details = "Looking for anime";
 	} else if (pathname.startsWith("/manga")) {
 		// TODO: The if loop to check if the user is really on the page of an anime is currently always true for some reason which results in the presence going away when the user is for example in the anime directory
 		if (document.querySelector(".js-manga-edit-info-button")) {
+			const englishTitle =
+				document.querySelector(".title-english")?.textContent;
 			presenceData.details = "Viewing a manga";
 			presenceData.state = `${
 				document.querySelector(".title-name").textContent
-			} ${document.querySelector(".title-english")?.textContent ?? ""}`.trim();
+			} ${englishTitle ? ` | ${englishTitle}` : ""}`.trim();
 			presenceData.buttons = [{ label: "View Mange", url: href }];
 		} else presenceData.details = "Looking for manga";
 	}
