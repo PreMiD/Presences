@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "signed.host",
+  "altnames": ["bio.signed.host"],
+  "author": {
+    "id": "439084103690616844",
+    "name": "MalwarePad#0001"
+  },
+  "description": {
+    "en": "Signed.host is a private media, and bio page hosting service."
+  },
+  "url": ["signed.host", "bio.signed.host"],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/0CyTL1E.png",
+  "thumbnail": "https://i.imgur.com/6F2gWZR.png",
+  "color": "#37b2eb",
+  "tags": [
+    "signed",
+    "media",
+    "bio",
+    "image",
+    "hosting"
+  ],
+  "category": "socials"
+}
