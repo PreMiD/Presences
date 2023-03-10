@@ -1,10 +1,6 @@
 const presence = new Presence({
-		clientId: "1000664778404016230",
-	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	});
+	clientId: "1000664778404016230",
+});
 
 let lastUnique: string | undefined,
 	lastTimestamp: number | undefined = Date.now();
