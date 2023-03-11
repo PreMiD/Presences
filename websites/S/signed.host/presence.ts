@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 		case "bio.signed.host":
 			if (pathname === "/") {
 				details = "Viewing the front bio page";
-				return;
+				break;
 			}
 			details = `Viewing ${
 				document
