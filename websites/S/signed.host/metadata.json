@@ -9,7 +9,7 @@
   "description": {
     "en": "Signed.host is a private media, and bio page hosting service."
   },
-  "url": ["signed.host", "bio.signed.host"],
+  "url": ["www.signed.host","signed.host", "bio.signed.host"],
   "version": "1.0.0",
   "logo": "https://i.imgur.com/0CyTL1E.png",
   "thumbnail": "https://i.imgur.com/6F2gWZR.png",
