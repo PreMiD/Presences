@@ -1,29 +1,29 @@
 const presence = new Presence({
-		clientId: "1083051669996187748",
-	}),
+	clientId: "1083051669996187748",
+}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			details: "Outros",
-			largeImageKey: "https://i.imgur.com/pQeO9sn.png",
-			startTimestamp: browsingTimestamp,
-		},
-		urlpath = document.location.pathname.split("/"),
+		details: "Outros",
+		largeImageKey: "https://i.imgur.com/pQeO9sn.png",
+		startTimestamp: browsingTimestamp,
+	},
+		[topLevelPath, secondLevelPath, thirdLevelPath, fourLevelPath] = document.location.pathname.split("/"),
 		privacyMode = await presence.getSetting<boolean>("privacy");
 
 	switch (true) {
-		case !urlpath[1] || urlpath[1] === "pagina":
+		case !topLevelPath || secondLevelPath === "pagina":
 			presenceData.details = "Vendo conteúdos relevantes";
-			if (urlpath[1] === "pagina") presenceData.state = `Página ${urlpath[2]}`;
+			if (secondLevelPath === "pagina") presenceData.state = `Página ${thirdLevelPath}`;
 			break;
-		case urlpath[1].startsWith("recentes"):
+		case secondLevelPath.startsWith("recentes"):
 			presenceData.details = "Vendo conteúdos recentes";
-			if (urlpath[3]) presenceData.state = `Página ${urlpath[3]}`;
+			if (fourLevelPath) presenceData.state = `Página ${fourLevelPath}`;
 			break;
 		default:
-			if (urlpath[1] && !urlpath[2]) {
-				switch (urlpath[1]) {
+			if (secondLevelPath && !thirdLevelPath) {
+				switch (secondLevelPath) {
 					case "publicar":
 						presenceData.details = "Publicando novo conteúdo";
 						break;
@@ -66,13 +66,12 @@ presence.on("UpdateData", async () => {
 						break;
 				}
 			}
-			if (urlpath[2]) {
-				switch (urlpath[2]) {
+			if (thirdLevelPath) {
+				switch (thirdLevelPath) {
 					case "pagina": {
-						presenceData.details = `Vendo perfil de ${
-							!privacyMode ? urlpath[1] : "Anônimo"
-						}`;
-						presenceData.state = `Página ${urlpath[3]}`;
+						presenceData.details = `Vendo perfil de ${!privacyMode ? secondLevelPath : "Anônimo"
+							}`;
+						presenceData.state = `Página ${fourLevelPath}`;
 						break;
 					}
 					case "rss":
