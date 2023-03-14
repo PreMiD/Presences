@@ -20,14 +20,18 @@
 		"www.sho.com",
 		"www.showtime.com"
 	],
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"logo": "https://i.imgur.com/NF61OBJ.png",
 	"thumbnail": "https://i.imgur.com/PrH5IJL.png",
 	"color": "#B20000",
 	"category": "videos",
 	"tags": [
 		"video",
-		"media"
+		"media",
+		"sky",
+		"skyshowtime",
+		"sho",
+		"showtime"
 	],
 	"settings": [
 		{
@@ -57,6 +61,21 @@
 			"if": {
 				"privacy": false
 			}
+		},
+		{
+			"id": "logo",
+			"if": {
+				"privacy": false
+			},
+			"title": "Logo",
+			"icon": "fad fa-images",
+			"value": 0,
+			"values": [
+				"Red",
+				"White",
+				"Black",
+				"Skyshowtime"
+			]
 		}
 	]
 }
