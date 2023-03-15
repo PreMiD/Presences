@@ -13,9 +13,6 @@ const presence = new Presence({
 		else status = playButtonText;
 		return status;
 	},
-	/**
-	 * Returns current song playing
-	 */
 	currentSong = (): string => {
 		return document.querySelector("#np").textContent;
 	};
@@ -26,7 +23,6 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/o6JjbtH.png",
 		};
 	if (pathname.includes("/news")) {
-		// On News page
 		presenceData.details = "Reading news";
 		// Current article title if currently being open
 		if (pathname.split("/").length === 3) {
@@ -35,16 +31,13 @@ presence.on("UpdateData", async () => {
 			).textContent;
 		}
 	} else if (pathname.includes("/irc")) {
-		// On Chat page
 		presenceData.details = "Chatting";
 	} else if (pathname.includes("/search")) {
-		// On Search page
 		const title = pathname.split("/")[2];
 		// If searching for something
 		if (title) presenceData.details = `Searching for: ${title}`;
 		else presenceData.details = "Searching";
 	} else if (pathname.includes("/last-played")) {
-		// On last played page
 		presenceData.details = "Looking at last played songs";
 		// For page number
 		presenceData.state = `On page ${
@@ -55,18 +48,14 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.includes("/queue"))
 		presenceData.details = "Looking at queue";
 	else if (pathname.includes("/faves")) {
-		// On favorite page
 		presenceData.details = "Looking at favorites";
 		const username = pathname.split("/")[2];
 		if (username) presenceData.details = `Looking at ${username}'s favorites`;
 	} else if (pathname.includes("/staff")) {
-		// On staff page
 		presenceData.details = "Looking at staff list";
 	} else if (pathname.includes("/submit")) {
-		// On submission page
 		presenceData.details = "Submitting a song";
 	} else if (pathname === "/") {
-		// On root page
 		presenceData.details = playStatus();
 
 		// Only add bottom row status and timestamp if playing
