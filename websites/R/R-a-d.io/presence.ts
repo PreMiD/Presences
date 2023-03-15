@@ -30,9 +30,8 @@ presence.on("UpdateData", async () => {
 				'[class="panel-title"] > a'
 			).textContent;
 		}
-	} else if (pathname.includes("/irc")) {
-		presenceData.details = "Chatting";
-	} else if (pathname.includes("/search")) {
+	} else if (pathname.includes("/irc")) presenceData.details = "Chatting";
+	else if (pathname.includes("/search")) {
 		const title = pathname.split("/")[2];
 		// If searching for something
 		if (title) presenceData.details = `Searching for: ${title}`;
@@ -51,11 +50,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Looking at favorites";
 		const username = pathname.split("/")[2];
 		if (username) presenceData.details = `Looking at ${username}'s favorites`;
-	} else if (pathname.includes("/staff")) {
+	} else if (pathname.includes("/staff"))
 		presenceData.details = "Looking at staff list";
-	} else if (pathname.includes("/submit")) {
+	else if (pathname.includes("/submit"))
 		presenceData.details = "Submitting a song";
-	} else if (pathname === "/") {
+	else if (pathname === "/") {
 		presenceData.details = playStatus();
 
 		// Only add bottom row status and timestamp if playing
