@@ -1,21 +1,23 @@
 const presence = new Presence({
-	clientId: "1083051669996187748",
-}),
+		clientId: "1083051669996187748",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		details: "Outros",
-		largeImageKey: "https://i.imgur.com/pQeO9sn.png",
-		startTimestamp: browsingTimestamp,
-	},
-		[topLevelPath, secondLevelPath, thirdLevelPath, fourLevelPath] = document.location.pathname.split("/"),
+			details: "Outros",
+			largeImageKey: "https://i.imgur.com/pQeO9sn.png",
+			startTimestamp: browsingTimestamp,
+		},
+		[topLevelPath, secondLevelPath, thirdLevelPath, fourLevelPath] =
+			document.location.pathname.split("/"),
 		privacyMode = await presence.getSetting<boolean>("privacy");
 
 	switch (true) {
 		case !topLevelPath || secondLevelPath === "pagina":
 			presenceData.details = "Vendo conteúdos relevantes";
-			if (secondLevelPath === "pagina") presenceData.state = `Página ${thirdLevelPath}`;
+			if (secondLevelPath === "pagina")
+				presenceData.state = `Página ${thirdLevelPath}`;
 			break;
 		case secondLevelPath.startsWith("recentes"):
 			presenceData.details = "Vendo conteúdos recentes";
@@ -69,8 +71,9 @@ presence.on("UpdateData", async () => {
 			if (thirdLevelPath) {
 				switch (thirdLevelPath) {
 					case "pagina": {
-						presenceData.details = `Vendo perfil de ${!privacyMode ? secondLevelPath : "Anônimo"
-							}`;
+						presenceData.details = `Vendo perfil de ${
+							!privacyMode ? secondLevelPath : "Anônimo"
+						}`;
 						presenceData.state = `Página ${fourLevelPath}`;
 						break;
 					}
