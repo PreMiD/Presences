@@ -460,8 +460,7 @@ presence.on("UpdateData", async () => {
 				.querySelector(
 					'[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]'
 				)
-				?.textContent?.trim()
-				?.toLowerCase();
+				?.textContent?.trim();
 			//Sometimes causes problems
 			let user: string;
 			//get channel name when viewing a community post
@@ -511,7 +510,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.includes("/videos")) {
 				presenceData.details = `${
 					strings.browsingThrough
-				} ${tabSelected?.toLowerCase()} ${document
+				} ${tabSelected} ${document
 					.querySelector(
 						'[class="style-scope ytd-c4-tabbed-header-renderer iron-selected"]'
 					)
