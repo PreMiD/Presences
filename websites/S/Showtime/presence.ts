@@ -6,6 +6,7 @@ async function getStrings() {
 	return presence.getStrings(
 		{
 			browse: "general.browsing",
+			buttonViewEpisode: "general.buttonViewEpisode",
 			buttonWatchVideo: "general.buttonWatchVideo",
 			paused: "general.paused",
 			play: "general.playing",
@@ -20,8 +21,25 @@ async function getStrings() {
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
+
+enum Logo {
+	RedShowtime = "https://i.imgur.com/u1ASDz8.png",
+	WhiteShowtime = "https://i.imgur.com/a0ls8Jh.png",
+	BlackShowtime = "https://i.imgur.com/JJjrlfR.png",
+	SkyShowtime = "https://i.imgur.com/x32sZlD.png",
+}
+function logoCheck(logoNumber: number) {
+	return logoNumber === 0 // Red
+		? Logo.RedShowtime
+		: logoNumber === 1 // White
+		? Logo.WhiteShowtime
+		: logoNumber === 2 // Black
+		? Logo.BlackShowtime
+		: logoNumber === 3 // SkyShowtime
+		? Logo.SkyShowtime
+		: Logo.RedShowtime; // Default (Red)
+}
 enum Assets {
-	Logo = "https://i.imgur.com/NF61OBJ.png",
 	Search = "https://i.imgur.com/oGQtnIY.png",
 	Read = "https://i.imgur.com/8vMPNni.png",
 	Paused = "https://i.imgur.com/4iyMINk.png",
@@ -32,16 +50,17 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	pathSplit: string[];
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			largeImageKey: Assets.Logo,
-		},
-		{ pathname, hostname, href } = document.location,
-		[newLang, privacy, buttons, covers] = await Promise.all([
+	const [newLang, privacy, buttons, covers, logo] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("covers"),
+			presence.getSetting<number>("logo"),
 		]),
+		presenceData: PresenceData = {
+			largeImageKey: logoCheck(logo),
+		},
+		{ pathname, hostname, href } = document.location,
 		episodeEtc = document
 			.querySelector(
 				'[class="item playback-metadata__container-episode-metadata-info"]'
@@ -123,7 +142,7 @@ presence.on("UpdateData", async () => {
 								'[class="program-details__title program-details__title-logo visible"]'
 							)
 							?.getAttribute("src")
-							?.replace("webp", "png") ?? Assets.Logo;
+							?.replace("webp", "png") ?? logoCheck(logo);
 					presenceData.state = title;
 
 					break;
@@ -238,6 +257,13 @@ presence.on("UpdateData", async () => {
 												url: href,
 											},
 										];
+									} else {
+										presenceData.buttons = [
+											{
+												label: strings.buttonViewEpisode,
+												url: href,
+											},
+										];
 									}
 									presenceData.details = privacy
 										? strings.watchingVid
@@ -261,11 +287,9 @@ presence.on("UpdateData", async () => {
 													.replace("Episode", ":E")}`
 											: title[1];
 									presenceData.largeImageKey =
-										JSON.parse(
-											document.querySelector(
-												'script[type="application/ld+json"]'
-											)?.innerHTML
-										)?.video?.thumbnailUrl ?? Assets.Logo;
+										document
+											.querySelector('meta[property="og:image"]')
+											?.getAttribute("content") ?? logoCheck(logo);
 									break;
 								}
 							}
@@ -283,8 +307,11 @@ presence.on("UpdateData", async () => {
 	if (privacy && presenceData.state) delete presenceData.state;
 	if ((!buttons || privacy) && presenceData.buttons)
 		delete presenceData.buttons;
-	if ((!covers || privacy) && presenceData.largeImageKey !== Assets.Logo)
-		presenceData.largeImageKey = Assets.Logo;
+	if (
+		(!covers || privacy) &&
+		!Object.values(Logo).includes(presenceData.largeImageKey as Logo)
+	)
+		presenceData.largeImageKey = logoCheck(logo);
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
