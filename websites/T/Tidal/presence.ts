@@ -57,9 +57,11 @@ presence.on("UpdateData", async () => {
 
 	presenceData.details = songTitle.textContent;
 	// get artists
-	presenceData.state = document.querySelector(
-		'div[data-test="left-column-footer-player"] > div:nth-child(2) > div:nth-child(2) > span > span > span'
-	).textContent;
+	presenceData.state = Array.from(
+		document.querySelectorAll<HTMLAnchorElement>("#footerPlayer .artist-link a")
+	)
+		.map(artist => artist.textContent)
+		.join(", ");
 
 	if (cover) {
 		presenceData.largeImageKey = document
