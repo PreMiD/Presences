@@ -34,13 +34,6 @@ async function getStrings() {
 	);
 }
 
-function imgPath(path: string, hostname: string) {
-	if (path) {
-		if (path.includes(hostname)) return `https://${path.replace("//", "")}`;
-		else return `https://${hostname}${path}`;
-	} else return Assets.Logo;
-}
-
 enum Assets {
 	MessengerLogo = "https://i.imgur.com/AwwqHgg.png",
 	WatchLogo = "https://i.imgur.com/qrU1IRd.png",
@@ -235,14 +228,12 @@ presence.on("UpdateData", async () => {
 						}
 						default: {
 							const allVideos: NodeListOf<HTMLVideoElement> =
-								document.querySelectorAll("video");
-							let videoArray: HTMLVideoElement[] = [],
-								vidElement: HTMLVideoElement,
-								i: any;
-							for (i in allVideos) {
+									document.querySelectorAll("video"),
+								videoArray: HTMLVideoElement[] = [];
+							let vidElement: HTMLVideoElement;
+							for (const i in allVideos)
 								videoArray.push(allVideos[i] as HTMLVideoElement);
-								i++;
-							}
+
 							for (vidElement of videoArray)
 								if (!vidElement.paused) playingVid = vidElement;
 						}
@@ -251,7 +242,7 @@ presence.on("UpdateData", async () => {
 					switch (true) {
 						case playingVid &&
 							(!cached ||
-								cached.id !== playingVid?.getAttribute("src") ||
+								cached.id !== playingVid.getAttribute("src") ||
 								cached.element !== playingVid): {
 							cached = {
 								id: playingVid.getAttribute("src"),
