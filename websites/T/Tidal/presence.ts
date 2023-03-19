@@ -1,6 +1,5 @@
-const presence = new Presence({
-	clientId: "901591802342150174",
-});
+const LOGO_URL = "https://i.imgur.com/i9pIvqR.png",
+	presence = new Presence({ clientId: "901591802342150174" });
 
 async function getStrings() {
 	return presence.getStrings(
@@ -18,7 +17,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	if (!document.querySelector("#footerPlayer"))
-		return presence.setActivity({ largeImageKey: "logo" });
+		return presence.setActivity({ largeImageKey: LOGO_URL });
 
 	const [newLang, timestamps, cover, buttons] = await Promise.all([
 		presence.getSetting<string>("lang").catch(() => "en"),
@@ -32,7 +31,7 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/i9pIvqR.png",
+			largeImageKey: LOGO_URL,
 		},
 		songTitle = document.querySelector<HTMLAnchorElement>(
 			'div[data-test="footer-track-title"] > a'
