@@ -33,20 +33,18 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Managing account settings";
 						}
 					}
-
 					break;
 				}
 				case "decks": {
 					switch (pathList[1] ?? "") {
 						case "": {
 							presenceData.details = "Browsing decks";
-							const [dueItems, newItems] = [
+							const [newItems, dueItems] = [
 								...document.querySelectorAll(".deckDueNumber"),
 							].reduce(
 								(current, item, index) => {
 									if (index % 2) current[0] += +item.textContent;
 									else current[1] += +item.textContent;
-
 									return current;
 								},
 								[0, 0]
@@ -59,13 +57,11 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 					}
-
 					break;
 				}
 				case "search": {
 					presenceData.details = "Searching for cards";
 					presenceData.state = document.querySelector("small").textContent;
-
 					break;
 				}
 				case "shared": {
@@ -88,10 +84,8 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 					}
-
 					break;
 				}
-				// No default
 			}
 			break;
 		}
