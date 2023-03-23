@@ -56,6 +56,20 @@ presence.on("UpdateData", async () => {
 				} else presenceData.details = "Browsing courses";
 				break;
 			}
+			case /\/games\//.test(pathname): {
+				if (
+					document.querySelector<HTMLButtonElement>(
+						"[class*='PrimaryActionButton']"
+					)?.textContent === "Play"
+				) {
+					presenceData.details = "Preparing to play a game";
+					presenceData.state = document.querySelector("h1").textContent;
+				} else {
+					presenceData.details = "Playing a game";
+					presenceData.state = document.querySelector("h1").textContent;
+				}
+				break;
+			}
 			case pathList[0] === "dashboard": {
 				if (pathList[1] === "settings")
 					presenceData.details = "Managing account settings";
