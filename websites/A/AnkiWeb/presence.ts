@@ -134,6 +134,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "changes.ankiweb.net": {
+			presenceData.details = "Browsing the changelog";
+			presenceData.state = document.querySelector("h1").textContent;
 			break;
 		}
 		case "docs.ankiweb.net": {
@@ -143,6 +145,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "faqs.ankiweb.net": {
+			presenceData.details = "Reading the FAQs";
+			presenceData.state = document.querySelector("h1").textContent;
 			break;
 		}
 	}
