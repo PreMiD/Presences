@@ -84,6 +84,31 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "ankiuser.net": {
+			switch (pathList[0]) {
+				case "study": {
+					switch (pathList[1] ?? "") {
+						case "": {
+							presenceData.details = "Studying";
+							presenceData.state = `${document
+								.querySelector<HTMLSpanElement>("#rightStudyMenu")
+								.textContent.match(/\d+/g)
+								.reduce(
+									(current, item) => current + +item,
+									0
+								)} cards remaining`;
+							break;
+						}
+						case "finished": {
+							presenceData.details = "Finished studying";
+							break;
+						}
+						case "options": {
+							presenceData.details = "Changing study options";
+							break;
+						}
+					}
+				}
+			}
 			break;
 		}
 		case "apps.ankiweb.net": {
