@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 
 	if (hostname === "chessly.com") {
 		switch (true) {
-			case /\/courses\//.test(pathname): {
+			case /\/courses(\/|$)/.test(pathname): {
 				const i = pathList.indexOf("courses");
 				if (pathList[i + 1]) {
 					const courseImage = document.querySelector<HTMLImageElement>(
