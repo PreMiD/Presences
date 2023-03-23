@@ -71,9 +71,19 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case pathList[0] === "dashboard": {
-				if (pathList[1] === "settings")
-					presenceData.details = "Managing account settings";
-				else presenceData.details = "Browsing the dashboard";
+				switch (pathList[1]) {
+					case "analysis": {
+						presenceData.details = "Analyzing a game";
+						break;
+					}
+					case "settings": {
+						presenceData.details = "Managing account settings";
+						break;
+					}
+					default: {
+						presenceData.details = "Browsing the dashboard";
+					}
+				}
 				break;
 			}
 			case pathList[0] === "faq": {
