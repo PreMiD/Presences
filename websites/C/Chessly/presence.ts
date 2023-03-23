@@ -5,7 +5,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 	oldPath: string = null;
 
 presence.on("UpdateData", async () => {
-	const { pathname, hostname } = document.location;
+	const { pathname, hostname, href } = document.location;
 	if (oldPath !== pathname) {
 		browsingTimestamp = Math.floor(Date.now() / 1000);
 		oldPath = pathname;
@@ -99,6 +99,23 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else if (hostname === "feedback.chessly.com") {
+		switch (pathList[0] ?? "") {
+			case "": {
+				presenceData.details = "Browsing feedback and suggestions";
+				break;
+			}
+			case "suggestions": {
+				if (pathList[1] === "add") {
+					presenceData.details = "Creating a suggestion";
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("#suggestionTitle").value;
+				} else {
+					presenceData.details = "Viewing a suggestion";
+					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.buttons = [{ label: "View Suggestion", url: href }];
+				}
+			}
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
