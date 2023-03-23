@@ -12,66 +12,57 @@ presence.on("UpdateData", async () => {
 		pathList = pathname.split("/").filter(path => path !== "");
 
 	if (hostname === "chessly.com") {
-		switch (pathList[0]) {
-			case "dashboard": {
-				switch (pathList[1]) {
-					case "settings": {
-						presenceData.details = "Managing account settings";
-						break;
-					}
-					case "shop": {
-						if (pathList[2] === "courses") {
-							if (pathList[3]) {
-								const courseImage = document.querySelector<HTMLImageElement>(
-									"[class*='_imageWrapper'] img"
-								);
-								switch (pathList[4]) {
-									case "gift-checkout":
-									case "checkout": {
-										presenceData.details = "Purchasing a course";
-										presenceData.state = courseImage.alt;
-										presenceData.largeImageKey = courseImage.src;
-										const backLink = document.querySelector<HTMLAnchorElement>(
-											"[class*='CourseCheckout_link'] a"
-										);
-										if (backLink) {
-											presenceData.buttons = [
-												{
-													label: "View Course",
-													url: backLink.href,
-												},
-											];
-										}
-										break;
-									}
-									default: {
-										presenceData.details = "Viewing a course";
-										presenceData.state =
-											document.querySelector("h1").textContent;
-										presenceData.largeImageKey = courseImage.src;
-										presenceData.buttons = [
-											{ label: "View Course", url: href },
-										];
-									}
-								}
-							} else {
-								presenceData.details = "Browsing the shop";
-								presenceData.state = "Courses";
+		switch (true) {
+			case /\/courses\//.test(pathname): {
+				let i = pathList.indexOf("courses");
+				if (pathList[i + 1]) {
+					const courseImage = document.querySelector<HTMLImageElement>(
+						"[class*='_imageWrapper'] img"
+					);
+					switch (pathList[i + 2]) {
+						case "gift-checkout":
+						case "checkout": {
+							presenceData.details = "Purchasing a course";
+							presenceData.state = courseImage.alt;
+							presenceData.largeImageKey = courseImage.src;
+							const backLink = document.querySelector<HTMLAnchorElement>(
+								"[class*='CourseCheckout_link'] a"
+							);
+							if (backLink) {
+								presenceData.buttons = [
+									{
+										label: "View Course",
+										url: backLink.href,
+									},
+								];
 							}
+							break;
 						}
-						break;
+						default: {
+							presenceData.details = "Viewing a course";
+							presenceData.state = document.querySelector("h1").textContent;
+							presenceData.largeImageKey = courseImage.src;
+							presenceData.buttons = [{ label: "View Course", url: href }];
+						}
 					}
-					default: {
-						presenceData.details = "Browsing the dashboard";
-					}
+				} else {
+					presenceData.details = "Browsing courses";
 				}
 				break;
 			}
-			case "faq": {
+			case pathList[0] === "dashboard": {
+				if (pathList[1] === "settings") {
+					presenceData.details = "Managing account settings";
+				} else {
+					presenceData.details = "Browsing the dashboard";
+				}
+				break;
+			}
+			case pathList[0] === "faq": {
 				presenceData.details = "Reading the FAQ";
 				break;
 			}
-			case "login": {
+			case pathList[0] === "login": {
 				presenceData.details = "Logging in";
 				break;
 			}
