@@ -1,20 +1,25 @@
 const presence = new Presence({
-		clientId: "1078446138966954085",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	clientId: "1078446138966954085",
+});
+let browsingTimestamp = Math.floor(Date.now() / 1000),
+	oldPath: string = null;
 
 presence.on("UpdateData", async () => {
+	const { pathname, hostname } = document.location;
+	if (oldPath !== pathname) {
+		browsingTimestamp = Math.floor(Date.now() / 1000);
+		oldPath = pathname;
+	}
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/Wp8c2G4.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, hostname, href } = document.location,
 		pathList = pathname.split("/").filter(path => path !== "");
 
 	if (hostname === "chessly.com") {
 		switch (true) {
 			case /\/courses\//.test(pathname): {
-				let i = pathList.indexOf("courses");
+				const i = pathList.indexOf("courses");
 				if (pathList[i + 1]) {
 					const courseImage = document.querySelector<HTMLImageElement>(
 						"[class*='_imageWrapper'] img"
@@ -25,37 +30,36 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Purchasing a course";
 							presenceData.state = courseImage.alt;
 							presenceData.largeImageKey = courseImage.src;
-							const backLink = document.querySelector<HTMLAnchorElement>(
-								"[class*='CourseCheckout_link'] a"
-							);
-							if (backLink) {
-								presenceData.buttons = [
-									{
-										label: "View Course",
-										url: backLink.href,
-									},
-								];
-							}
+							break;
+						}
+						case "lessons": {
+							presenceData.details = "Doing a lesson";
+							presenceData.state = `${[
+								...document.querySelectorAll<HTMLAnchorElement>(
+									"[class*='UserViewLessonHeader'] a[class*='UserViewLessonHeader_breadcrumbItem']"
+								),
+							]
+								.map(e => e.textContent)
+								.join(", ")} - ${
+								document.querySelector<HTMLDivElement>(
+									"header > [class*='UserViewLessonHeader'] > [class*='UserViewLessonHeader']"
+								).textContent
+							}`;
 							break;
 						}
 						default: {
 							presenceData.details = "Viewing a course";
 							presenceData.state = document.querySelector("h1").textContent;
 							presenceData.largeImageKey = courseImage.src;
-							presenceData.buttons = [{ label: "View Course", url: href }];
 						}
 					}
-				} else {
-					presenceData.details = "Browsing courses";
-				}
+				} else presenceData.details = "Browsing courses";
 				break;
 			}
 			case pathList[0] === "dashboard": {
-				if (pathList[1] === "settings") {
+				if (pathList[1] === "settings")
 					presenceData.details = "Managing account settings";
-				} else {
-					presenceData.details = "Browsing the dashboard";
-				}
+				else presenceData.details = "Browsing the dashboard";
 				break;
 			}
 			case pathList[0] === "faq": {
@@ -70,7 +74,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing";
 			}
 		}
-	} else {
+	} else if (hostname === "feedback.chessly.com") {
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
