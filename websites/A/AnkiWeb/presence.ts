@@ -1,13 +1,37 @@
 const presence = new Presence({
-		clientId: "",
+		clientId: "1050466196220289104",
 	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	});
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {};
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/zg32aGw.png",
+		startTimestamp: browsingTimestamp,
+	},
+	{ pathname, hostname } = document.location;
 
-	presence.setActivity(presenceData);
+	switch (hostname) {
+		case "ankiweb.net": {
+			break;
+		}
+		case "ankiuser.net": {
+			break;
+		}
+		case "apps.ankiweb.net": {
+			presenceData.details = "Downloading Anki";
+			break;
+		}
+		case "changes.ankiweb.net": {
+			break;
+		}
+		case "docs.ankiweb.net": {
+			break;
+		}
+		case "faqs.ankiweb.net": {
+			break;
+		}
+	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
