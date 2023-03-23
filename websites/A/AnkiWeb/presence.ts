@@ -25,6 +25,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "docs.ankiweb.net": {
+			presenceData.details = "Reading the docs";
+			presenceData.state = document.querySelector<HTMLAnchorElement>(".header").textContent;
 			break;
 		}
 		case "faqs.ankiweb.net": {
