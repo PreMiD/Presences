@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/zg32aGw.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, hostname } = document.location,
+		{ pathname, hostname, href } = document.location,
 		pathList = pathname.split("/").filter(x => x);
 
 	switch (hostname) {
@@ -50,6 +50,33 @@ presence.on("UpdateData", async () => {
 							[0, 0]
 						);
 						presenceData.state = `${dueItems} due, ${newItems} new`;
+						break;
+					}
+					case "share": {
+						presenceData.details = "Sharing a deck";
+						break;
+					}
+				}
+			} else if (pathList[0] === "search") {
+				presenceData.details = "Searching for cards";
+				presenceData.state = document.querySelector("small").textContent;
+			} else if (pathList[0] === "shared") {
+				switch (pathList[1]) {
+					case "decks": {
+						if (pathList[2]) {
+							presenceData.details = "Viewing shared decks by term";
+							presenceData.state = document.querySelector("h1").textContent;
+						}
+						break;
+					}
+					case "info": {
+						presenceData.details = "Viewing a shared deck";
+						presenceData.state = document.querySelector("h1").textContent;
+						presenceData.buttons = [{ label: "View Deck", url: href }];
+						break;
+					}
+					case "mine": {
+						presenceData.details = "Viewing their shared decks";
 						break;
 					}
 				}
