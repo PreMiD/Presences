@@ -143,6 +143,78 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector("h1").textContent;
 			break;
 		}
+		case "forums.ankiweb.net": {
+			switch (pathList[0] ?? "") {
+				case "badges": {
+					presenceData.details = "Browsing badges";
+					break;
+				}
+				case "c": {
+					presenceData.details = "Browsing a category";
+					presenceData.state =
+						document.querySelector<HTMLSpanElement>(
+							".category-name"
+						).textContent;
+					break;
+				}
+				case "cakeday": {
+					presenceData.details = `Browsing ${
+						document.querySelector<HTMLHeadingElement>(".cakeday-header")
+							.textContent
+					}`;
+					break;
+				}
+				case "g": {
+					if (pathList[1]) {
+						presenceData.details = "Viewing a group";
+						presenceData.state =
+							document.querySelector<HTMLSpanElement>(
+								".group-info-name"
+							).textContent;
+					} else presenceData.details = "Browsing groups";
+					break;
+				}
+				case "":
+				case "latest":
+				case "new": {
+					presenceData.details = "Browsing the latest posts";
+					break;
+				}
+				case "unread": {
+					presenceData.details = "Browsing unread posts";
+					break;
+				}
+				case "t": {
+					presenceData.details = "Browsing a topic";
+					presenceData.state = document
+						.querySelector<HTMLSpanElement>(".fancy-title")
+						.textContent.trim();
+					presenceData.buttons = [{ label: "View Topic", url: href }];
+					break;
+				}
+				case "top": {
+					presenceData.details = "Browsing top posts";
+					break;
+				}
+				case "u": {
+					if (pathList[1]) {
+						presenceData.details = "Viewing a user's profile";
+						presenceData.state = document.querySelector<HTMLSpanElement>(
+							".user-profile-names > .username"
+						).textContent;
+						presenceData.smallImageKey =
+							document.querySelector<HTMLImageElement>(
+								".user-profile-avatar > img"
+							).src;
+					} else presenceData.details = "Browsing users";
+					break;
+				}
+				default: {
+					presenceData.details = "Browsing the forums";
+				}
+			}
+			break;
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
