@@ -1,7 +1,7 @@
 const presence = new Presence({
 		clientId: "1088185685682430002",
 	}),
-	logoKey = "papermc-logomark-500-b69f67cabd469b3d0485c20a912e84fc_1_",
+	logoURL = "https://i.imgur.com/R08CsA6.png",
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	// https://stackoverflow.com/a/7224605
 	// to always return type string event when s may be falsy other than empty-string
@@ -18,7 +18,7 @@ enum PageType {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: logoKey,
+			largeImageKey: logoURL,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 					`[alt=${pathSplit[0]}]`
 				).src;
-				presenceData.smallImageKey = logoKey;
+				presenceData.smallImageKey = logoURL;
 			} else if (pageType === PageType.User) {
 				const memberSince = new Date(
 						[...document.querySelectorAll("span")]
@@ -267,7 +267,7 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						`[alt=${username}]`
 					).src;
-					presenceData.smallImageKey = logoKey;
+					presenceData.smallImageKey = logoURL;
 					break;
 				}
 				default: {
