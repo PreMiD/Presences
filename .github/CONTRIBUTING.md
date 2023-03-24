@@ -37,7 +37,7 @@ The general rules of presence development are as follows:
 ```bash
 presence
 ├── metadata.json
-├── presence.ts
+└── presence.ts
 ```
 
 or if you're using a `iframe.ts` file:
@@ -46,7 +46,7 @@ or if you're using a `iframe.ts` file:
 presence
 ├── metadata.json
 ├── presence.ts
-├── iframe.ts
+└── iframe.ts
 ```
 
 ## [**metadata.json**](https://docs.premid.app/dev/presence/metadata)
