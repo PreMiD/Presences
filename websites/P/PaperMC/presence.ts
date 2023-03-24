@@ -240,14 +240,9 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "jd.papermc.io": {
-			switch (pathSplit[0]) {
-				default: {
-					presenceData.details = "Browsing Javadocs";
-					presenceData.state =
-						document.querySelector<HTMLHeadingElement>("h1").textContent;
-					break;
-				}
-			}
+			presenceData.details = "Browsing Javadocs";
+			presenceData.state =
+				document.querySelector<HTMLHeadingElement>("h1").textContent;
 			break;
 		}
 		case "forums.papermc.io": {
