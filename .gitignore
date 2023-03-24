@@ -1,7 +1,7 @@
 # General files
 .idea
 node_modules
-pnpm-lock.json
+pnpm-lock.yaml
 yarn.lock
 .env
 
