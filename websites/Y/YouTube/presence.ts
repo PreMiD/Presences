@@ -433,7 +433,7 @@ presence.on("UpdateData", async () => {
 		else presence.setActivity(presenceData);
 	} else if (hostname === "www.youtube.com" || hostname === "youtube.com") {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/o5injgg.png",
+			largeImageKey: Assets.Logo,
 		};
 		let searching = false;
 
