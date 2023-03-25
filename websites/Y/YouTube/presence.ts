@@ -2,7 +2,8 @@ const presence = new Presence({
 		clientId: "463097721130188830",
 	}),
 	// YouTube TV separator pattern
-	pattern = "•";
+	pattern = "•",
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function truncateAfter(str: string, pattern: string): string {
 	return str.slice(0, str.indexOf(pattern));
@@ -393,7 +394,7 @@ presence.on("UpdateData", async () => {
 
 			delete presenceData.state;
 			presenceData.largeImageKey = Assets.Logo;
-			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+			presenceData.startTimestamp = browsingTimestamp;
 			delete presenceData.endTimestamp;
 		} else if (buttons && !unlistedVideo) {
 			presenceData.buttons = [
@@ -432,9 +433,8 @@ presence.on("UpdateData", async () => {
 		else presence.setActivity(presenceData);
 	} else if (hostname === "www.youtube.com" || hostname === "youtube.com") {
 		const presenceData: PresenceData = {
-				largeImageKey: "https://i.imgur.com/o5injgg.png",
-			},
-			browsingStamp = Math.floor(Date.now() / 1000);
+			largeImageKey: "https://i.imgur.com/o5injgg.png",
+		};
 		let searching = false;
 
 		if (pathname.includes("/results")) {
@@ -449,7 +449,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = strings.search;
 			presenceData.state = search.value;
 			presenceData.smallImageKey = Assets.Search;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (
 			pathname.includes("/@") ||
 			pathname.includes("/channel") ||
@@ -517,15 +517,15 @@ presence.on("UpdateData", async () => {
 					?.textContent?.trim()
 					?.toLowerCase()}`;
 				presenceData.state = `${strings.ofChannel} ${user}`;
-				presenceData.startTimestamp = browsingStamp;
+				presenceData.startTimestamp = browsingTimestamp;
 			} else if (pathname.includes("/shorts")) {
 				presenceData.details = strings.browseShorts;
 				presenceData.state = `${strings.ofChannel} ${user}`;
-				presenceData.startTimestamp = browsingStamp;
+				presenceData.startTimestamp = browsingTimestamp;
 			} else if (pathname.includes("/playlists")) {
 				presenceData.details = strings.browsingPlayl;
 				presenceData.state = `${strings.ofChannel} ${user}`;
-				presenceData.startTimestamp = browsingStamp;
+				presenceData.startTimestamp = browsingTimestamp;
 			} else if (pathname.includes("/community")) {
 				presenceData.details = strings.viewCPost;
 				presenceData.state = `${strings.ofChannel} ${user}`;
@@ -541,23 +541,23 @@ presence.on("UpdateData", async () => {
 								?.querySelector("img")
 								?.getAttribute("src")
 						: Assets.Logo;
-				presenceData.startTimestamp = browsingStamp;
+				presenceData.startTimestamp = browsingTimestamp;
 			} else if (pathname.includes("/about")) {
 				presenceData.details = strings.readChannel;
 				presenceData.state = user;
 				presenceData.smallImageKey = Assets.Read;
-				presenceData.startTimestamp = browsingStamp;
+				presenceData.startTimestamp = browsingTimestamp;
 			} else if (pathname.includes("/search")) {
 				searching = true;
 
 				presenceData.details = strings.searchChannel.replace("{0}", user);
 				presenceData.state = document.URL.split("search?query=")[1];
 				presenceData.smallImageKey = Assets.Search;
-				presenceData.startTimestamp = browsingStamp;
+				presenceData.startTimestamp = browsingTimestamp;
 			} else {
 				presenceData.details = strings.viewChannel;
 				presenceData.state = user;
-				presenceData.startTimestamp = browsingStamp;
+				presenceData.startTimestamp = browsingTimestamp;
 			}
 			if (channelPic) {
 				const channelImg =
@@ -584,26 +584,26 @@ presence.on("UpdateData", async () => {
 			const selector: Node = document.querySelector("#author-text");
 			presenceData.state =
 				(selector && `${strings.ofChannel} ${selector.textContent}`) || null;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/feed/trending")) {
 			presenceData.details = strings.trending;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/feed/subscriptions")) {
 			presenceData.details = strings.browsingThrough;
 			presenceData.state = strings.subscriptions;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/feed/library")) {
 			presenceData.details = strings.browsingThrough;
 			presenceData.state = strings.library;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/feed/history")) {
 			presenceData.details = strings.browsingThrough;
 			presenceData.state = strings.history;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/feed/purchases")) {
 			presenceData.details = strings.browsingThrough;
 			presenceData.state = strings.purchases;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/playlist")) {
 			presenceData.details = strings.viewPlaylist;
 
@@ -612,23 +612,23 @@ presence.on("UpdateData", async () => {
 				title = document.querySelector("#title > yt-formatted-string > a");
 
 			presenceData.state = title.textContent;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/premium")) {
 			presenceData.details = strings.readAbout;
 			presenceData.state = "Youtube Premium";
 			presenceData.smallImageKey = Assets.Read;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/gaming")) {
 			presenceData.details = strings.browsingThrough;
 			presenceData.state = "Youtube Gaming";
 			presenceData.smallImageKey = Assets.Read;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/account")) {
 			presenceData.details = strings.viewAccount;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/reporthistory")) {
 			presenceData.details = strings.reports;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/intl")) {
 			presenceData.details = strings.readAbout;
 			presenceData.state = document.title.substr(
@@ -636,7 +636,7 @@ presence.on("UpdateData", async () => {
 				document.title.lastIndexOf(" - YouTube")
 			);
 			presenceData.smallImageKey = Assets.Read;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (document.URL === "https://www.youtube.com/") {
 			const child =
 				document.querySelector(
@@ -654,23 +654,23 @@ presence.on("UpdateData", async () => {
 					child?.textContent?.trim()?.toLowerCase()
 				);
 			} else presenceData.details = strings.viewHome;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/upload")) {
 			presenceData.details = strings.upload;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.smallImageKey = Assets.Write;
 		} else if (pathname.includes("/view_all_playlists")) {
 			presenceData.details = strings.viewAllPlayL;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/my_live_events")) {
 			presenceData.details = strings.viewEvent;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/live_dashboard")) {
 			presenceData.details = strings.viewLiveDash;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/audiolibrary")) {
 			presenceData.details = strings.viewAudio;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		}
 
 		if (privacy) {
@@ -697,14 +697,14 @@ presence.on("UpdateData", async () => {
 				smallImageKey: Assets.Studio,
 				smallImageText: "Youtube Studio",
 			},
-			browsingStamp = Math.floor(Date.now() / 1000);
+			browsingTimestamp = Math.floor(Date.now() / 1000);
 
 		if (pathname.includes("/videos")) {
 			presenceData.details = strings.studioVid;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/video")) {
 			const title: HTMLElement = document.querySelector("#entity-name");
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 			if (pathname.includes("/edit")) {
 				presenceData.details = strings.studioEdit;
 				presenceData.state = title.textContent;
@@ -721,22 +721,22 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("/analytics")) {
 			presenceData.details = strings.studioTheir;
 			presenceData.state = strings.studioCAnaly;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/comments")) {
 			presenceData.details = strings.studioTheir;
 			presenceData.state = strings.studioCComments;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/translations")) {
 			presenceData.details = strings.studioTheir;
 			presenceData.state = strings.studioCTranslate;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/channel")) {
 			presenceData.details = strings.studioDash;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/artist")) {
 			presenceData.details = strings.studioTheir;
 			presenceData.state = strings.studioArtist;
-			presenceData.startTimestamp = browsingStamp;
+			presenceData.startTimestamp = browsingTimestamp;
 		}
 
 		if (privacy) {
