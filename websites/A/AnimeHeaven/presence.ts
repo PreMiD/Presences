@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "816042675626442783",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -120,7 +120,7 @@ const paths = {
 presence.on("UpdateData", async () => {
 	const buttons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/K5IdObW.png",
 			state: "Browsing...",
 			startTimestamp: browsingTimestamp,
 		};

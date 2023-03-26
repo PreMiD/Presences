@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "775372570563182592",
 	}),
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
+		browsing: "general.browsing",
 	});
 
 function getTimeStamp() {
@@ -11,7 +11,7 @@ function getTimeStamp() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "xero",
+			largeImageKey: "https://i.imgur.com/opZJy1Y.png",
 		},
 		showChat = await presence.getSetting<boolean>("showchat"),
 		showProfile = await presence.getSetting<boolean>("showprofile");

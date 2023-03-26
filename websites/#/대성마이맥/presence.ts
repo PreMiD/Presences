@@ -2,14 +2,14 @@ const presence = new Presence({
 		clientId: "867795822711013387",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/hsnSDNo.png",
 	};
 
 	if (document.location.pathname.includes("/common/aquaplayer/")) {

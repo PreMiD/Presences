@@ -2,16 +2,16 @@ const presence = new Presence({
 		clientId: "844108776793178122",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
 	});
 
 let title, author;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/mcwhb4p.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	if (

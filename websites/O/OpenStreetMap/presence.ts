@@ -35,7 +35,7 @@ setInterval(() => {
 presence.on("UpdateData", async () => {
 	const privacySettings = await presence.getSetting<boolean>("privacy");
 	let presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/mlLReW9.png",
 		startTimestamp: browsingTimestamp,
 		details: "Viewing:",
 	};

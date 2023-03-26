@@ -78,11 +78,11 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "vk_logo",
+			largeImageKey: "https://i.imgur.com/4s4Zbf6.png",
 		},
 		gstrings = await presence.getStrings({
-			play: "presence.playback.playing",
-			pause: "presence.playback.paused",
+			play: "general.playing",
+			pause: "general.paused",
 		});
 
 	if (

@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "NMW03",
+		"id": "534099893979971584"
+	},
+	"service": "Downdetector",
+	"description": {
+		"en": "Real-time problem & outage monitoring",
+		"nl": "Real-time probleem- en uitvalbewaking"
+	},
+	"url": "downdetector.com",
+	"version": "1.2.14",
+	"logo": "https://i.imgur.com/ba5AI1b.png",
+	"thumbnail": "https://i.imgur.com/Qy1lbXE.png",
+	"color": "#FF160A",
+	"category": "other",
+	"tags": [
+		"status",
+		"monitoring"
+	]
+}

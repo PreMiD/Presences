@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "721740741570986016",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 
 function getTime(list: string[]): number {
@@ -26,7 +26,7 @@ function getTimestamps(audioTime: string, audioDuration: string): number[] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "anlg",
+			largeImageKey: "https://i.imgur.com/PzxFsAZ.png",
 		},
 		playback = !!document.querySelector("anghami-player");
 

@@ -2,13 +2,13 @@ const presence = new Presence({
 		clientId: "779397757928210472",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "storyfire",
+			largeImageKey: "https://i.imgur.com/1RGQMmt.png",
 		},
 		video: HTMLVideoElement = document.querySelector(
 			"#storyfire-player_html5_api"

@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "MaaKoo",
+		"id": "243728573624614912"
+	},
+	"service": "Doronime",
+	"description": {
+		"en": "Download anime, anime music, anime ongoing, or anime batch with Indonesian subtitle",
+		"id": "Unduh anime, anime musik, anime ongoing, atau anime batch dengan subtitle Indonesia"
+	},
+	"url": "doronime.id",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/vLys7Ng.png",
+	"thumbnail": "https://i.imgur.com/IbgeB5v.png",
+	"color": "#b11415",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"music",
+		"ost",
+		"other"
+	]
+}

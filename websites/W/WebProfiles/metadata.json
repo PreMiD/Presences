@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Anaxes",
+		"id": "567885938160697377"
+	},
+	"service": "WebProfiles",
+	"description": {
+		"en": "Let people know which social accounts are really you"
+	},
+	"url": "webprofiles.me",
+	"version": "1.1.2",
+	"logo": "https://i.imgur.com/dPN4dbK.png",
+	"thumbnail": "https://i.imgur.com/n0olPse.png",
+	"color": "#1E1E40",
+	"category": "socials",
+	"tags": [
+		"profiles",
+		"social-media",
+		"links"
+	],
+	"settings": [
+		{
+			"id": "timestamp",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

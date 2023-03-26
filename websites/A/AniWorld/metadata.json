@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Emijor",
+		"id": "466885774621540372"
+	},
+	"service": "AniWorld",
+	"description": {
+		"en": "Watch now over 1,000+ animes for free on AniWorld. Anime Video-On Demand: ✓ 100% Free ✓ Instantly Online ✓ Exclusive Animes",
+		"de": "Jetzt über 1.000+ Animes als Stream kostenlos bei AniWorld ansehen. Anime Video-On-Demand: ✓ 100% Kostenlos ✓ Sofort online ✓ Exklusive Animes",
+		"nl": "Bekijk nu meer dan 1.000+ animes gratis op AniWorld. Anime Video-On Demand: 100% Gratis ✓ Direct Online ✓ Exclusieve Animes",
+		"vi_VN": "Xem ngay hơn 1,000+ bộ anime tại AniWorld hoàn toàn miễn phí. Anime theo nhu cầu: ✓ 100% miễn phí ✓ Trực tuyến ✓ Những bộ anime độc quyền"
+	},
+	"url": "aniworld.to",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/fM3E5Iv.png",
+	"thumbnail": "https://i.imgur.com/G1wy3w7.png",
+	"color": "#637cf9",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"streaming",
+		"anicloud",
+		"aniworld"
+	],
+	"iframe": true
+}

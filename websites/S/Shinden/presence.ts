@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "694885187116597309",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let iFrameVideo: boolean,
@@ -33,7 +33,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "shinden",
+		largeImageKey: "https://i.imgur.com/sGSeLBJ.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

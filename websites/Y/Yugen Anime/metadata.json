@@ -1,0 +1,63 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Anaxes",
+		"id": "567885938160697377"
+	},
+	"service": "Yugen Anime",
+	"description": {
+		"en": "Track, discover, share and watch high quality anime with YugenAnime."
+	},
+	"url": "yugen.to",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/m5UhwNJ.png",
+	"thumbnail": "https://i.imgur.com/Cok059a.png",
+	"color": "#07bf67",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"yugen",
+		"streaming",
+		"videos"
+	],
+	"iframe": true,
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "timestamp",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "covers",
+			"title": "Show Covers",
+			"icon": "fas fa-images",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		}
+	]
+}

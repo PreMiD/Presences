@@ -2,39 +2,43 @@
 //       maybe at some point he'll finish it and this will need updating.
 
 const presence = new Presence({
-		clientId: "629355416714739732", // Contact if you want me to edit the discord assets/keys/whatever
-	}),
-	waitStrings = async (lang: string) =>
-		presence.getStrings(
-			{
-				play: "presence.playback.playing",
-				pause: "presence.playback.paused",
-				browse: "general.browsing",
-				page: "general.page",
-				episode: "general.episode",
-				watching: "general.watching",
-				watchingMovie: "general.watchingMovie",
-				viewing: "general.viewing",
-				viewGenre: "general.viewGenre",
-				viewCategory: "general.viewCategory",
-				viewPage: "general.viewPage",
-				viewMovie: "general.viewMovie",
-				watchEpisode: "general.buttonViewEpisode",
-				watchMovie: "general.buttonViewMovie",
-				latest: "animepahe.latestRelease",
-				season: "animepahe.season",
-				special: "animepahe.special",
-				viewOn: "animepahe.view",
-				timeSeason: "animepahe.timeSeason",
-			},
-			lang
-		);
+	clientId: "629355416714739732",
+});
 
-let iframeResponse = {
-	paused: true,
-	duration: 0,
-	currentTime: 0,
-};
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			browse: "general.browsing",
+			page: "general.page",
+			episode: "general.episode",
+			watching: "general.watching",
+			watchingMovie: "general.watchingMovie",
+			viewing: "general.viewing",
+			viewGenre: "general.viewGenre",
+			viewCategory: "general.viewCategory",
+			viewPage: "general.viewPage",
+			viewMovie: "general.viewMovie",
+			watchEpisode: "general.buttonViewEpisode",
+			watchMovie: "general.buttonViewMovie",
+			latest: "animepahe.latestRelease",
+			season: "animepahe.season",
+			special: "animepahe.special",
+			viewOn: "animepahe.view",
+			timeSeason: "animepahe.timeSeason",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null,
+	iframeResponse = {
+		paused: true,
+		duration: 0,
+		currentTime: 0,
+	};
 
 type storeType = Record<
 	string,
@@ -156,14 +160,18 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "animepahe",
+			largeImageKey: "https://i.imgur.com/LBb6FrK.png",
 			details: "loading",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		},
-		strings = await waitStrings(
-			await presence.getSetting<string>("lang").catch(() => "en")
-		),
-		viewing = strings.viewing.slice(0, -1);
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
+
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+
+	const viewing = strings.viewing.slice(0, -1);
 	let playback = false;
 
 	switch (path[0]) {

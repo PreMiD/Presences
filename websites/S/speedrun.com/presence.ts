@@ -6,7 +6,7 @@ let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "run",
+		largeImageKey: "https://i.imgur.com/MExOoiX.png",
 	};
 
 	if (document.location.hostname === "www.speedrun.com") {

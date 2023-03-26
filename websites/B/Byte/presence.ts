@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "671199009674756146",
 	}),
 	strings = presence.getStrings({
-		browse: "presence.activity.browsing",
-		search: "presence.activity.searching",
+		browse: "general.browsing",
+		search: "general.searching",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			details: detailsObj.details,
 			state: detailsObj.state,
-			largeImageKey: "byte",
+			largeImageKey: "https://i.imgur.com/oX5socK.png",
 		};
 
 	if (oldUrl !== path) {

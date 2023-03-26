@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "326694667003363328",
+		"name": "Micotsu"
+	},
+	"service": "Animeflix",
+	"description": {
+		"en": "Unlimited anime without ads!"
+	},
+	"url": [
+		"animeflix.live",
+		"www.animeflix.live"
+	],
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/LxIgMzf.png",
+	"thumbnail": "https://i.imgur.com/XoKtZCC.jpg",
+	"color": "#E50914",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"streaming",
+		"animeflix",
+		"netflix"
+	]
+}

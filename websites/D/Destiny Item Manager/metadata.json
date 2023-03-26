@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Hibanka",
+		"id": "467658348158779393"
+	},
+	"service": "Destiny Item Manager",
+	"description": {
+		"en": "Swap items, check stats, and build the loadout to Become Legend with DIM",
+		"nl": "Verwissel items, check stats, en bouw de uitrusting om Legend te worden met DIM"
+	},
+	"url": [
+		"destinyitemmanager.com",
+		"app.destinyitemmanager.com"
+	],
+	"version": "1.0.11",
+	"logo": "https://i.imgur.com/OwMBJAm.png",
+	"thumbnail": "https://i.imgur.com/rKhKMNY.jpg",
+	"color": "#ee6d0d",
+	"category": "games",
+	"tags": [
+		"destiny2"
+	]
+}

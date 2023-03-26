@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "872656825890254849",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 
 let video = {
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "site",
+			largeImageKey: "https://i.imgur.com/mD1fANc.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 

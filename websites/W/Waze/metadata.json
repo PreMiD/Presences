@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "RedS",
+		"id": "389383409430167562"
+	},
+	"contributors": [
+		{
+			"name": "frnk",
+			"id": "232904284004548608"
+		}
+	],
+	"service": "Waze",
+	"description": {
+		"en": "Get driving directions, a live traffic map & road alerts.",
+		"fr": "Obtenez des itinéraires, une carte du trafic en direct et des alertes routières."
+	},
+	"url": [
+		"www.waze.com",
+		"beta.waze.com"
+	],
+	"version": "1.2.3",
+	"logo": "https://i.imgur.com/H814ZfW.png",
+	"thumbnail": "https://i.imgur.com/t1HF0dC.png",
+	"color": "#33ccff",
+	"category": "other",
+	"tags": [
+		"navigation",
+		"waze",
+		"live",
+		"map"
+	]
+}

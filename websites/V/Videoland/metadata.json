@@ -1,0 +1,56 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"service": "Videoland",
+	"description": {
+		"nl": "Videoland. Weet wat speelt.",
+		"en": "Videoland. Know what's going on."
+	},
+	"url": [
+		"v2.videoland.com",
+		"www.v2.videoland.com",
+		"videoland.com",
+		"www.videoland.com"
+	],
+	"version": "1.2.2",
+	"logo": "https://i.imgur.com/eq7dxH3.png",
+	"thumbnail": "https://i.imgur.com/E9XoF0u.png",
+	"color": "#FF3746",
+	"category": "videos",
+	"tags": [
+		"nl",
+		"dutch",
+		"nederlands",
+		"kijk",
+		"video"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "covers",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		}
+	]
+}

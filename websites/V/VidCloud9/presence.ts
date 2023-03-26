@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "697552926876368917",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let iFrameVideo: boolean,
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 		presence.info("Elapsed Off");
 	}
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/AEOuBRB.png",
 	};
 	if (videoTime) {
 		presence.info("Video Time is On");

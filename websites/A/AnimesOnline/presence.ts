@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "874161536074145833",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector("#info > h1")?.textContent ?? "desconhecido",
 		path = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "site",
+			largeImageKey: "https://i.imgur.com/5U9jD9W.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 

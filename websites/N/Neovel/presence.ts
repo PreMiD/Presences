@@ -6,22 +6,21 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "neovel_logo",
+			largeImageKey: "https://i.imgur.com/CYk2ZDX.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		presenceDataSlide: PresenceData = {
-			largeImageKey: "neovel_logo",
+			largeImageKey: "https://i.imgur.com/CYk2ZDX.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		pathnameArray = document.location.pathname.split("/"),
-		[privacy, time] = await Promise.all([
+		[privacy, time, showCover] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("time"),
-		]);
-	if (!time) {
-		delete presenceData.startTimestamp;
-		delete presenceDataSlide.startTimestamp;
-	}
+			presence.getSetting<boolean>("cover"),
+		]),
+		bookCoverPath =
+			"https://neovel.io/V2/book/image?bookId=%bookId%&oldApp=false&imageExtension=1";
 
 	switch (pathnameArray[1]) {
 		case "discover":
@@ -39,7 +38,10 @@ presence.on("UpdateData", async () => {
 						document.querySelector(`option[value="${pathnameArray[2]}"]`)
 							.textContent
 					} [${pathnameArray[3]}]`;
-					presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+					presenceData.largeImageKey = bookCoverPath.replace(
+						"%bookId%",
+						pathnameArray[2]
+					);
 				}
 			} else {
 				presenceData.details = presenceDataSlide.details =
@@ -47,9 +49,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = presenceDataSlide.buttons = [
 					{ label: "View Book", url: document.documentURI },
 				];
-				presenceData.largeImageKey =
-					presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
-
+				presenceData.largeImageKey = presenceDataSlide.largeImageKey =
+					bookCoverPath.replace("%bookId%", pathnameArray[2]);
 				presenceData.state = `from ${
 					document.querySelector("a.author-element span").textContent
 				} [${pathnameArray[3]}]`;
@@ -77,13 +78,12 @@ presence.on("UpdateData", async () => {
 				: [
 						{ label: "View Chapter", url: document.documentURI },
 						{
-							label: "Go to book page",
+							label: "View Book",
 							url: `https://neovel.io/book/${pathnameArray[2]}/${pathnameArray[3]}`,
 						},
 				  ];
-			presenceData.largeImageKey =
-				presenceDataSlide.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
-
+			presenceData.largeImageKey = presenceDataSlide.largeImageKey =
+				bookCoverPath.replace("%bookId%", pathnameArray[2]);
 			presenceData.state = `from ${
 				document.querySelector("div.book-info span").textContent
 			} [${pathnameArray[3]}]`;
@@ -148,7 +148,10 @@ presence.on("UpdateData", async () => {
 					document.querySelector("div.card-title strong.neovel-font-big")
 						.textContent
 				}"`;
-				presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+				presenceData.largeImageKey = bookCoverPath.replace(
+					"%bookId%",
+					pathnameArray[2]
+				);
 			}
 			break;
 		case "dashboard":
@@ -157,7 +160,10 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `from ${
 					document.querySelector("div.book-detail-container h2").textContent
 				} [${pathnameArray[3]}]`;
-				presenceData.largeImageKey = `https://neovel.io/V2/book/image?bookId=${pathnameArray[2]}&oldApp=false&imageExtension=1`;
+				presenceData.largeImageKey = bookCoverPath.replace(
+					"%bookId%",
+					pathnameArray[2]
+				);
 			}
 			break;
 		case "contact_us":
@@ -169,6 +175,15 @@ presence.on("UpdateData", async () => {
 			else if (pathnameArray[1].includes("search"))
 				presenceData.details = "Looking for a book";
 			break;
+	}
+
+	if (!time) {
+		delete presenceData.startTimestamp;
+		delete presenceDataSlide.startTimestamp;
+	}
+	if (!showCover) {
+		presenceData.largeImageKey = presenceDataSlide.largeImageKey =
+			"neovel_logo";
 	}
 
 	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);

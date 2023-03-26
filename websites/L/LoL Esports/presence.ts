@@ -18,7 +18,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lolesports",
+			largeImageKey: "https://i.imgur.com/BGc0jtj.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
@@ -29,7 +29,9 @@ presence.on("UpdateData", async () => {
 	else if (path.includes("/schedule"))
 		presenceData.details = "Browsing the schedule";
 	else if (path.includes("/live/")) {
-		presenceData.details = "Watching Live";
+		if (path.includes("/worlds")) presenceData.details = "Watching Worlds";
+		else presenceData.details = "Watching Live";
+
 		presenceData.state = document
 			.querySelector("div.teams")
 			.textContent.replace("VS", " vs ");

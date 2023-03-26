@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "impsy",
+		"id": "114894715106623491"
+	},
+	"service": "Dungeon Crawl Stone Soup",
+	"description": {
+		"en": "An open source roguelike adventure through dungeons filled with dangerous monsters in a quest to find the mystifyingly fabulous Orb of Zot."
+	},
+	"url": [
+		"crawl.akrasiac.org",
+		"crawl.project357.org",
+		"cbro.berotato.org",
+		"crawl.xtahua.com",
+		"underhound.eu",
+		"webzook.net",
+		"lazy-life.ddo.jp",
+		"crawl.kelbi.org"
+	],
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/eGKg2B0.png",
+	"thumbnail": "https://i.imgur.com/9QXAATX.png",
+	"color": "#f00f0f",
+	"category": "games",
+	"tags": [
+		"crawl"
+	]
+}

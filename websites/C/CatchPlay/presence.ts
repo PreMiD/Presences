@@ -2,14 +2,14 @@ const presence = new Presence({
 		clientId: "758234121574678588",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "cp",
+			largeImageKey: "https://i.imgur.com/hAt97QK.png",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 

@@ -17,10 +17,11 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "9anime",
+			largeImageKey: "https://i.imgur.com/jPl7EfZ.png",
 		},
-		[showCover, joinButton] = await Promise.all([
+		[showCover, timestamps, joinButton] = await Promise.all([
 			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("watch2getherJoinRoomButton"),
 		]);
 
@@ -58,15 +59,19 @@ presence.on("UpdateData", async () => {
 					episodeName ?? episodeNumber
 			  }`
 			: `${episodeNumber}${
-					episodeName === episodeNumber ? "" : ` • ${episodeName}`
+					!episodeName || episodeName === episodeNumber
+						? ""
+						: ` • ${episodeName}`
 			  }`;
 
 		if (coverArt && showCover) presenceData.largeImageKey = coverArt;
 
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
+		if (timestamps) {
+			presenceData.startTimestamp = startTimestamp;
+			presenceData.endTimestamp = endTimestamp;
+		}
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;
@@ -89,8 +94,10 @@ presence.on("UpdateData", async () => {
 
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
+		if (timestamps) {
+			presenceData.startTimestamp = startTimestamp;
+			presenceData.endTimestamp = endTimestamp;
+		}
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;

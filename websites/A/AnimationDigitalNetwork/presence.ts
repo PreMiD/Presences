@@ -2,14 +2,14 @@ const presence = new Presence({
 		clientId: "808758769424138252",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const video: HTMLVideoElement = document.querySelector("video.vjs-tech"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/JnLqL7n.png",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 

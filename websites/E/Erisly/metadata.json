@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Bas950",
+		"id": "241278257335500811"
+	},
+	"service": "Erisly",
+	"description": {
+		"en": "Hiya! My name is Erisly, your friendly neighbourhood goddess! I use my powers and talents to play as a \"Discord Bot\", where I provide you some quality features and commands for your Discord Server!",
+		"nl": "Hiya! Mijn naam is Erisly, jullie vriendelijke buurtgodin! Ik gebruik mijn krachten en talenten om als een \"Discord Bot\" te spelen, waar ik jullie een aantal kwaliteitsfuncties en commando's voor jullie Discord Server geef!"
+	},
+	"url": [
+		"erisly.com",
+		"giveaways.erisly.com",
+		"translate.erisly.com",
+		"wiki.erisly.com"
+	],
+	"version": "1.1.11",
+	"logo": "https://i.imgur.com/kN9Y2bv.png",
+	"thumbnail": "https://i.imgur.com/MxsShw4.png",
+	"color": "#FF6394",
+	"category": "other",
+	"tags": [
+		"discord",
+		"bot"
+	]
+}

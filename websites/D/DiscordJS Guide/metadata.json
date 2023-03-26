@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "OGMatrix",
+		"id": "657290880947978241"
+	},
+	"service": "DiscordJS Guide",
+	"description": {
+		"en": "A guide made by the community of discord.js for its users.",
+		"de": "Ein Leitfaden der Community von discord.js für ihre Benutzer.",
+		"nl": "Een gids gemaakt door de gemeenschap van discord.js voor haar gebruikers."
+	},
+	"url": "discordjs.guide",
+	"version": "1.0.11",
+	"logo": "https://i.imgur.com/Zt4i2l3.png",
+	"thumbnail": "https://i.imgur.com/ojmsp7f.png",
+	"color": "#20f856",
+	"category": "other",
+	"tags": [
+		"discordjs",
+		"discord",
+		"guide"
+	]
+}

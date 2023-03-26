@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "The Weather Channel",
+	"description": {
+		"en": "The Weather Channel and weather.com provide a national and local weather forecast for cities, as well as weather radar, report and hurricane coverage"
+	},
+	"url": [
+		"weather.com",
+		"features.weather.com"
+	],
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/Zzh3YNq.png",
+	"thumbnail": "https://i.imgur.com/L52nvWT.png",
+	"color": "#014F9D",
+	"category": "other",
+	"tags": [
+		"news",
+		"forecase",
+		"weather"
+	]
+}

@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "Discogs",
+	"description": {
+		"en": "Discover music on Discogs, the largest online music database. Buy and sell music with collectors in the Marketplace."
+	},
+	"url": "www.discogs.com",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/2LZSDR9.png",
+	"thumbnail": "https://i.imgur.com/E2ZZ2hV.png",
+	"color": "#333",
+	"category": "music",
+	"tags": [
+		"database",
+		"collection",
+		"vinyl",
+		"discography"
+	]
+}

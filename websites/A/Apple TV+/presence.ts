@@ -4,36 +4,20 @@ class AppleTV extends Presence {
 	}
 
 	getVideo() {
-		return document
-			.querySelector("apple-tv-plus-player")
-			.shadowRoot.querySelector("amp-video-player-internal")
-			?.shadowRoot.querySelector("amp-video-player")
-			?.shadowRoot.querySelector<HTMLVideoElement>("#apple-music-video-player");
+		return document.querySelector<HTMLMediaElement>(
+			".video-player__content #apple-music-video-player"
+		);
 	}
 
 	getVideoType() {
-		return document
-			.querySelector("apple-tv-plus-player")
-			.shadowRoot.querySelector(".container.takeover")?.classList[2];
+		return this.getEpisodeTitle() ? "show" : "movie";
 	}
 
 	getTitle(eyebrow = false) {
-		if (this.isWatching()) {
-			const title = document
-				.querySelector("apple-tv-plus-player")
-				.shadowRoot.querySelector("amp-video-player-internal")
-				?.shadowRoot.querySelector("div.info__eyebrow")?.textContent;
+		if (this.isWatching() && eyebrow) return this.getVideoTitle();
 
-			if (title || eyebrow) return title;
-			else {
-				return document
-					.querySelector("apple-tv-plus-player")
-					.shadowRoot.querySelector("amp-video-player-internal")
-					?.shadowRoot.querySelector("div.info__title")?.textContent;
-			}
-		}
 		const title = document.querySelector(
-			"div.product-header__image-logo.clr-primary-text-on-dark > a > h2"
+			"div.product-header__image-logo.clr-primary-text-on-dark > span"
 		)?.textContent;
 
 		return (
@@ -48,17 +32,19 @@ class AppleTV extends Presence {
 	}
 
 	getEpisodeTitle() {
-		return document
-			.querySelector("apple-tv-plus-player")
-			.shadowRoot.querySelector("amp-video-player-internal")
-			?.shadowRoot.querySelector("div.info__title")?.textContent;
+		return document.querySelector(
+			".video-player__content .scrim__footer .scrim-footer__info-subtitle-text"
+		)?.textContent;
+	}
+
+	getVideoTitle() {
+		return document.querySelector(
+			".video-player__content .scrim__footer #video-player-title"
+		)?.textContent;
 	}
 
 	isWatching() {
-		return !!document
-			.querySelector("apple-tv-plus-player")
-			.shadowRoot.querySelector("amp-video-player-internal")
-			?.shadowRoot.querySelector("div.info__title")?.textContent;
+		return !!this.getVideoTitle();
 	}
 }
 
@@ -84,7 +70,7 @@ const presence = new AppleTV({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "apple-tv",
+		largeImageKey: "https://i.imgur.com/9yI21cv.png",
 		details: "Browsing...",
 		smallImageKey: "browse",
 		startTimestamp: data.startedSince,
@@ -98,15 +84,13 @@ presence.on("UpdateData", async () => {
 					[, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
 
-					if (presence.getTitle(true)) {
-						presenceData.details = presence.getTitle();
-						presenceData.state = `${presence.getEpisodeTitle()}`;
-					} else {
-						presenceData.details = document.querySelector(
-							"#about-footer > div.product-footer__info > div > div.review-card__title.typ-headline-emph > span"
-						).textContent;
-						presenceData.state = `Trailer • ${presence.getTitle()}`;
-					}
+					const title = presence.getTitle(),
+						videoTitle = presence.getTitle(true),
+						ep = presence.getEpisodeTitle();
+					presenceData.details = videoTitle || title;
+					presenceData.state = ep
+						? `${ep}`
+						: `Trailer • ${videoTitle || title}`;
 
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 					presenceData.smallImageKey = video.paused ? "pause" : "play";

@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "NMW03",
+		"id": "534099893979971584"
+	},
+	"contributors": [
+		{
+			"name": "Bas950",
+			"id": "241278257335500811"
+		}
+	],
+	"service": "Altdentifier",
+	"description": {
+		"en": "The best Discord security and checkpoint bot!",
+		"nl": "De beste Discord-beveiligings- en checkpoint-bot!",
+		"zh_CN": "最好的Discord安全检查机器人！",
+		"zh_TW": "最好-最安全的Discord賬號驗證机器人！",
+		"ga_IE": "An bot slándála Discpoint agus seicphointe is fearr!",
+		"vi_VN": "Bot bảo mật tốt nhất Discord!"
+	},
+	"url": "altdentifier.com",
+	"version": "1.2.14",
+	"logo": "https://i.imgur.com/GT29NDe.png",
+	"thumbnail": "https://i.imgur.com/Pbld3Tr.png",
+	"color": "#7289D9",
+	"category": "other",
+	"tags": [
+		"bot",
+		"discord"
+	]
+}

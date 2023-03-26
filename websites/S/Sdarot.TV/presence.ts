@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "641969062083035146",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -17,7 +17,7 @@ let user: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "sdarot",
+		largeImageKey: "https://i.imgur.com/iHYxLW2.png",
 	};
 
 	if (

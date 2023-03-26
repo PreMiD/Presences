@@ -90,7 +90,7 @@ function isPodcast(): boolean {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg",
+			largeImageKey: "https://i.imgur.com/dcx0aN7.png",
 			startTimestamp: timestamp,
 		},
 		buttons = await presence.getSetting<boolean>("buttons");

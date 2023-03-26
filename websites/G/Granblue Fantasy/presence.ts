@@ -55,7 +55,7 @@ addEventListener(eventId, (data: CustomEvent) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/XyHgDQX.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href } = document.location,

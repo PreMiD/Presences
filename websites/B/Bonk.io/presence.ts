@@ -19,7 +19,7 @@ let gameStartTimestamp: number = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bonk",
+		largeImageKey: "https://i.imgur.com/rGFRJec.png",
 	};
 
 	if (ifd?.id) {

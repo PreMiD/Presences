@@ -2,11 +2,11 @@ const presence = new Presence({
 		clientId: "611668948131512321",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/3qXaosP.png",
 	};
 
 presence.on("UpdateData", async () => {
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = uploader
 			? (uploader as HTMLElement).textContent
 			: "Uploader not found...";
-		presenceData.largeImageKey = "logo";
+		presenceData.largeImageKey = "https://i.imgur.com/3qXaosP.png";
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/3qXaosP.png",
 		});
 	}
 });

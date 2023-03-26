@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "juke-crown",
+		largeImageKey: "https://i.imgur.com/axm6M00.png",
 		buttons: [{ label: "Radio luisteren", url: document.location.href }],
 	};
 

@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Luis Gabriel",
+		"id": "403648338286870529"
+	},
+	"service": "Broken Picturephone",
+	"description": {
+		"en": "A online game that you can draw, guess and send words to your friends guess.",
+		"nl": "Een online spel waar je kunt tekenen, raden en woorden naar je vrienden kunt sturen.",
+		"vi_VN": "Trò chơi trực tuyến nơi bạn có thể vẽ, đoán và gửi từ ngữ cho bạn bè của mình đoán."
+	},
+	"url": "www.brokenpicturephone.com",
+	"version": "1.1.12",
+	"logo": "https://i.imgur.com/34NoyFW.png",
+	"thumbnail": "https://i.imgur.com/kzYyxMn.png",
+	"color": "#FC6807",
+	"category": "games",
+	"tags": [
+		"games",
+		"game",
+		"phone",
+		"broken",
+		"picturephone",
+		"telefone",
+		"sem",
+		"fio"
+	]
+}

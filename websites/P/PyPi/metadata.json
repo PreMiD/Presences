@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Jake.",
+		"id": "480407581085532180"
+	},
+	"service": "PyPi",
+	"description": {
+		"en": "The Python Package Index (PyPI) is a repository of software for the Python programming language.",
+		"nl": "De Python Package Index (PyPI) is een opslagplaats van software voor de programmeertaal Python."
+	},
+	"url": "pypi.org",
+	"version": "1.4.14",
+	"logo": "https://i.imgur.com/PWiUxFD.png",
+	"thumbnail": "https://i.imgur.com/asXjia1.jpg",
+	"color": "#ebcc34",
+	"category": "other",
+	"tags": [
+		"developing",
+		"modules",
+		"packages",
+		"coding"
+	]
+}

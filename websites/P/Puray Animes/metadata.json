@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Luscarvalho",
+		"id": "458776046184169473"
+	},
+	"service": "Puray Animes",
+	"description": {
+		"en": "Puray Animes is a site to watch anime without ads.",
+		"pt_BR": "Puray Animes é um site para ver animes sem anúncios."
+	},
+	"url": "puray.moe",
+	"version": "1.1.2",
+	"logo": "https://i.imgur.com/8MP205p.png",
+	"thumbnail": "https://i.imgur.com/yBlcW8a.png",
+	"color": "#0e0e12",
+	"category": "anime",
+	"tags": [
+		"video",
+		"anime",
+		"manga"
+	]
+}

@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "735229766701154357",
 	}),
 	strings = presence.getStrings({
-		browse: "presence.activity.browsing",
-		search: "presence.activity.searching",
+		browse: "general.browsing",
+		search: "general.searching",
 	}),
 	getElement = (query: string): string | undefined => {
 		return document.querySelector(query)?.textContent;
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 		showTimestamps = await presence.getSetting<boolean>("timestamp");
 
 	let presenceData: PresenceData = {
-		largeImageKey: "userbenchmark",
+		largeImageKey: "https://i.imgur.com/4TBit6H.png",
 		startTimestamp: elapsed,
 	};
 

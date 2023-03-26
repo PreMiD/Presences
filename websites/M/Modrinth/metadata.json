@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "424508522542137345",
+		"name": "ダニル"
+	},
+	"service": "Modrinth",
+	"description": {
+		"en": "Search and browse thousands of Minecraft mods on Modrinth with instant, accurate search results!"
+	},
+	"url": [
+		"modrinth.com",
+		"docs.modrinth.com",
+		"blog.modrinth.com"
+	],
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/GnMSCG4.png",
+	"thumbnail": "https://i.imgur.com/A5EVBsZ.png",
+	"color": "#1bd96a",
+	"category": "games",
+	"tags": [
+		"minecraft",
+		"mods",
+		"modpacks",
+		"plugins",
+		"forge",
+		"fabric",
+		"quilt",
+		"spigot"
+	]
+}

@@ -1,0 +1,51 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"service": "Worldhideaway",
+	"description": {
+		"en": "Hotel Hideaway Social Network",
+		"nl": "Hotel Hideaway Sociaal Network",
+		"es": "La Red Social de Hotel Hideaway"
+	},
+	"url": "worldhideaway.com",
+	"version": "1.1.1",
+	"logo": "https://i.imgur.com/P3S7UhZ.png",
+	"thumbnail": "https://i.imgur.com/Y8UI0wf.jpg",
+	"color": "#9ed2de",
+	"category": "other",
+	"tags": [
+		"world",
+		"hideaway",
+		"hide",
+		"travel"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Modo Privado",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"title": "Mostrar Botones",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "covers",
+			"title": "Mostrar Portada",
+			"icon": "fad fa-images",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		}
+	]
+}

@@ -2,13 +2,13 @@ const presence = new Presence({
 		clientId: "630533580119998496",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "comedycentral",
+		largeImageKey: "https://i.imgur.com/NJ6Ezno.png",
 	};
 
 	if (document.location.pathname.startsWith("/episodes")) {

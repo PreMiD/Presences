@@ -3,8 +3,8 @@ const presence = new Presence({
 	}),
 	path: string = document.location.pathname,
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	details = { view: "Viewing anime:", stream: "Watching anime:" };
 
@@ -30,7 +30,7 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "kayo",
+		largeImageKey: "https://i.imgur.com/aEsTuLn.png",
 		startTimestamp: Date.now(),
 	};
 

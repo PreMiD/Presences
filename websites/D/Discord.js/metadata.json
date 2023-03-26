@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Deivid",
+		"id": "406184197405802497"
+	},
+	"service": "Discord.js",
+	"description": {
+		"en": "Discord.js is a powerful node.js module that allows you to interact with the Discord API very easily.",
+		"es": "Discord.js es un módulo poderoso de node.js que te permite interactuar con la API de Discord de fácilmente.",
+		"nl": "Discord.js is een krachtige node.js module die je toelaat om zeer eenvoudig te interageren met de Discord API."
+	},
+	"url": "discord.js.org",
+	"version": "1.2.14",
+	"logo": "https://i.imgur.com/v4Qb6IT.png",
+	"thumbnail": "https://i.imgur.com/lXDvidg.png",
+	"color": "#8dd6f1",
+	"category": "other",
+	"tags": [
+		"other",
+		"development",
+		"discord-js",
+		"d-js",
+		"programming"
+	]
+}

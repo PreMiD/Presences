@@ -2,19 +2,27 @@ const presence = new Presence({
 	clientId: "680498892651233310",
 });
 
-let oldLang: string,
-	newLang: string,
-	strings: Awaited<ReturnType<typeof getStrings>>;
+async function getStrings() {
+	return presence.getStrings(
+		{
+			browsing: "general.browsing",
+			reading: "general.reading",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "logo_big",
-		};
-
+			largeImageKey: "https://i.imgur.com/eywFbXQ.png",
+		},
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	oldLang = newLang;
-	newLang = await presence.getSetting<string>("lang").catch(() => "en");
-	if (!strings || oldLang !== newLang) strings = await getStrings(newLang);
+	if (!strings || oldLang !== newLang) strings = await getStrings();
 
 	switch (path[0]) {
 		// Reward Categories
@@ -104,13 +112,3 @@ presence.on("UpdateData", async () => {
 			return presence.setActivity();
 	}
 });
-
-async function getStrings(lang: string) {
-	return presence.getStrings(
-		{
-			browsing: "general.browsing",
-			reading: "general.reading",
-		},
-		lang
-	);
-}

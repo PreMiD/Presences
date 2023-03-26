@@ -44,7 +44,7 @@ async function getStrings() {
 			followed: "v live.followed",
 			policies: "v live.policies",
 		},
-		await presence.getSetting<string>("lang")
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 
@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 	]);
 
 	let presenceData: PresenceData = {
-			largeImageKey: "vlive2",
+			largeImageKey: "https://i.imgur.com/K6z2UeE.png",
 			startTimestamp: elapsed,
 		},
 		searchPageValue: string;

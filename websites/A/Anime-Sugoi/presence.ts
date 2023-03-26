@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "709308577701036074",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	title1 =
@@ -32,7 +32,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon",
+		largeImageKey: "https://i.imgur.com/DfHT5E8.png",
 	};
 
 	// Presence

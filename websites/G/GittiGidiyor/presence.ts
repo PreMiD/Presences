@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 			"#store-page-title > div.store-name > h1"
 		) as HTMLElement,
 		data: { [k: string]: string | number } = {
-			largeImageKey: "gg-logo",
+			largeImageKey: "https://i.imgur.com/4XOmMIy.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

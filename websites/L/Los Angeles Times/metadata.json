@@ -1,0 +1,49 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "N0chteil ^^",
+		"id": "495901098926669825"
+	},
+	"service": "Los Angeles Times",
+	"description": {
+		"en": "The Los Angeles Times is a daily newspaper that started publishing in Los Angeles in 1881 and is now based in the adjacent suburb of El Segundo. It has the fifth-largest circulation in the U.S. and is the largest American newspaper not headquartered on the East Coast."
+	},
+	"url": "www.latimes.com",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/Z6MOTZp.jpg",
+	"thumbnail": "https://i.imgur.com/ecj5NkY.png",
+	"color": "#ffffff",
+	"category": "other",
+	"tags": [
+		"news",
+		"latimes",
+		"la-times",
+		"articles"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"id": "articleAuthor",
+			"title": "Show Article Author",
+			"icon": "fas fa-address-card",
+			"value": true
+		},
+		{
+			"id": "moreDetails",
+			"title": "Show more Details",
+			"icon": "fas fa-newspaper",
+			"value": false
+		}
+	]
+}

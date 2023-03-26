@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "5etools",
+	"description": {
+		"en": "A suite of browser-based tools for 5th Edition  Dungeons &amp; Dragons players and Dungeon Masters."
+	},
+	"url": "5e.tools",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/HBcKcfS.png",
+	"thumbnail": "https://i.imgur.com/LlrbrrQ.png",
+	"color": "#1e90ff",
+	"category": "games",
+	"tags": [
+		"dungeons",
+		"dragons",
+		"dnd",
+		"calculator",
+		"guide"
+	]
+}

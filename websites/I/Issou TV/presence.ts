@@ -2,11 +2,11 @@ const presence = new Presence({
 		clientId: "700338425953386587",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
-		searching: "presence.activity.searching",
-		reading: "presence.activity.reading",
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
+		searching: "general.searching",
+		reading: "general.reading",
 	});
 
 function parseQueryString(queryString?: string) {
@@ -25,7 +25,7 @@ function parseQueryString(queryString?: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/eOauOMV.png",
 		},
 		pageTitle = document.querySelector("title").textContent.split(" | "),
 		browsingTimestamp = Math.floor(Date.now() / 1000),

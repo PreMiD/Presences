@@ -3,12 +3,12 @@ const presence: Presence = new Presence({
 	}),
 	path: string = window.location.pathname,
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
+		browsing: "general.browsing",
+		playing: "general.playing",
+		paused: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "yay_lg",
+		largeImageKey: "https://i.imgur.com/m98ne7Q.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 let playback: boolean,

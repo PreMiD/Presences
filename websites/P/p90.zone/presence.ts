@@ -10,9 +10,9 @@ function getTimestamps(curr: number, dura: number): number[] {
 presence.on("UpdateData", async () => {
 	const video = document.querySelector("video"),
 		strings = await presence.getStrings({
-			playing: "presence.playback.playing",
-			paused: "presence.playback.paused",
-			browsing: "presence.activity.browsing",
+			playing: "general.playing",
+			paused: "general.paused",
+			browsing: "general.browsing",
 		});
 
 	if (video) {
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				state: document.querySelector("body > div.menu.main > div > h2")
 					.textContent,
-				largeImageKey: "logo",
+				largeImageKey: "https://i.imgur.com/YOmF0LY.png",
 				startTimestamp: timestamps[0],
 				endTimestamp: timestamps[1],
 				smallImageKey: video.paused ? "pause" : "play",

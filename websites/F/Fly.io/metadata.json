@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "Fly.io",
+	"description": {
+		"en": "Run your full stack apps (and databases!) all over the world. No ops required."
+	},
+	"url": [
+		"fly.io",
+		"www.fly.io",
+		"community.fly.io"
+	],
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/1rey7rc.png",
+	"thumbnail": "https://i.imgur.com/dzdFwMd.png",
+	"color": "#24185B",
+	"category": "other",
+	"tags": [
+		"hosting",
+		"cloud",
+		"database",
+		"server",
+		"apps"
+	],
+	"settings": [
+		{
+			"id": "privacyMode",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": true
+		}
+	]
+}

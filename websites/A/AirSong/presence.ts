@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 					.textContent
 			),
 			presenceData: PresenceData = {
-				largeImageKey: "logo",
+				largeImageKey: "https://i.imgur.com/rLh25vA.png",
 			},
 			paused = document
 				.querySelector<HTMLAnchorElement>("#as-player-play")

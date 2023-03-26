@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Bas950",
+		"id": "241278257335500811"
+	},
+	"service": "Shinden",
+	"description": {
+		"en": "Polish site where you can watch anime",
+		"nl": "Poolse site waar je anime kunt bekijken",
+		"pl": "Polska strona, na której można obejrzeć anime"
+	},
+	"url": [
+		"shinden.pl",
+		"forum.shinden.pl"
+	],
+	"version": "1.0.13",
+	"logo": "https://i.imgur.com/sGSeLBJ.png",
+	"thumbnail": "https://i.imgur.com/atx9P8n.png",
+	"color": "#6a2b8b",
+	"category": "anime",
+	"tags": [
+		"polish",
+		"anime"
+	],
+	"iframe": true
+}

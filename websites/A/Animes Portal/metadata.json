@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Angelo II",
+		"id": "698966790356729907"
+	},
+	"service": "Animes Portal",
+	"description": {
+		"en": "Anime, manga and Asian culture",
+		"bg": "Аниме, манга и азиатска култура"
+	},
+	"url": "animes-portal.info",
+	"version": "1.0.9",
+	"logo": "https://i.imgur.com/EwyBmHJ.png",
+	"thumbnail": "https://i.imgur.com/Nr3XhzA.jpg",
+	"color": "#365AA8",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"online",
+		"otaku",
+		"animes-portal",
+		"manga",
+		"asia",
+		"japan"
+	],
+	"iframe": true,
+	"settings": [
+		{
+			"id": "showthumb",
+			"title": "Show thumbnails",
+			"icon": "fas fa-image",
+			"value": true
+		},
+		{
+			"id": "showmessaging",
+			"title": "Show chats",
+			"icon": "fas fa-comments",
+			"value": true
+		}
+	]
+}

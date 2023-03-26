@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "skyhan",
+		"id": "949705281863032872"
+	},
+	"service": "Raven Code",
+	"description": {
+		"en": "Raven Code is an extraordinary community that aims to thrive. Our Discord server has nice channels where you can chat with someone. This server is a warm place where you can meet good friends.",
+		"tr": "Raven Code gelişmeyi hedefleyen olağanüstü bir topluluktur. Discord sunucumuzda birileriyle sohbet edebileceğin güzel kanallar var. Bu sunucu, iyi arkadaşlıklar kurabileceğin sıcak bir ortamdır."
+	},
+	"url": "ravencode.live",
+	"version": "2.0.4",
+	"logo": "https://i.imgur.com/74Calja.png",
+	"thumbnail": "https://i.imgur.com/LabRRNC.png",
+	"color": "#121316",
+	"category": "other",
+	"tags": [
+		"discord",
+		"kod-paylaşım",
+		"raven-code"
+	]
+}

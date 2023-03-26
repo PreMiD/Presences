@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Kabal",
+		"id": "269581360316940299"
+	},
+	"service": "BluTV",
+	"description": {
+		"tr": "BluTV, Türkiye'de bulunan bir dizi, film ve televizyon kanallarını izleyebileceğiniz bir platformdur.",
+		"en": "BluTV is a platform where you can watch series, movies and television channels in Turkey.",
+		"nl": "BluTV is een platform waar je series, films en televisiekanalen in Turkije kunt kijken.",
+		"vi_VN": "BluTV là nền tảng xem phim, sê-ri và truyền hình trong Tiếng Thổ Nhĩ Kỳ."
+	},
+	"url": [
+		"blutv.com",
+		"www.blutv.com"
+	],
+	"version": "1.1.17",
+	"logo": "https://i.imgur.com/THrSw57.png",
+	"thumbnail": "https://i.imgur.com/LDoVybq.jpg",
+	"color": "#2d2e42",
+	"category": "videos",
+	"tags": [
+		"blutv",
+		"series",
+		"television",
+		"movie",
+		"video"
+	],
+	"iframe": true
+}

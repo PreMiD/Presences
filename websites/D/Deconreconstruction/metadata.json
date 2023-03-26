@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "john",
+		"id": "156937406375919616"
+	},
+	"service": "Deconreconstruction",
+	"description": {
+		"en": "The hub site for the webcomic Vast Error and its spinoff projects."
+	},
+	"url": [
+		"www.deconreconstruction.com",
+		"deconreconstruction.com"
+	],
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/tT341UZ.png",
+	"thumbnail": "https://i.imgur.com/YAxHA04.png",
+	"color": "#000000",
+	"category": "other",
+	"tags": [
+		"webcomic",
+		"comic",
+		"vast-error",
+		"snowbound-blood",
+		"thaumatrope",
+		"mspaintadventures"
+	]
+}

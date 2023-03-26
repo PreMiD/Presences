@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "696085711148941344",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 let iFrameVideo: boolean,
 	currentTime: number,
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 	if (elapsed) browsingTimestamp = Math.floor(Date.now() / 1000);
 
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/bEtLVB2.png",
 	};
 	if (info) {
 		switch (document.location.pathname) {

@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Viruz",
+		"id": "158973226465230848"
+	},
+	"service": "Spirit Fanfics",
+	"description": {
+		"en": "Spirit Fanfics is a self-publishing book platform, wheter they are in Fanfic or Original Story format.",
+		"pt_BR": "Spirit Fanfics é uma plataforma de autopublicação de livros, sejam eles no formato de Fanfics ou de Histórias Originais.",
+		"nl": "Spirit Fanfics is een platform voor zelfpublicatie van boeken, of ze nu in Fanfic- of Original Story-formaat zijn."
+	},
+	"url": "www.spiritfanfiction.com",
+	"version": "1.2.15",
+	"logo": "https://i.imgur.com/RDZSlTX.png",
+	"thumbnail": "https://i.imgur.com/yo3y40n.png",
+	"color": "#008080",
+	"category": "other",
+	"tags": [
+		"fanfic",
+		"stories"
+	]
+}

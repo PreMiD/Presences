@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dzlandis",
+		"id": "259708781166985217"
+	},
+	"service": "Brain.fm",
+	"description": {
+		"en": "Use Brain.fm's functional music to help you focus relax and sleep better, using cutting edge neuroscience to get results."
+	},
+	"url": [
+		"www.brain.fm",
+		"my.brain.fm",
+		"try.brain.fm"
+	],
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/eX5kOQU.png",
+	"thumbnail": "https://i.imgur.com/mBXVqed.png",
+	"color": "#952fc0",
+	"category": "music",
+	"tags": [
+		"music",
+		"brain",
+		"fm",
+		"brainfm",
+		"brain-fm",
+		"meditation",
+		"focus",
+		"relax",
+		"media"
+	]
+}

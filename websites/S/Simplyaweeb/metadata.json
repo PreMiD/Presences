@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "RisingSunLight",
+		"id": "240521747852558347"
+	},
+	"service": "Simplyaweeb",
+	"description": {
+		"en": "Weebs only one stop to get updated with the latest anime content, meme and bang on the latest anime music. More features coming soon so stay tuned.",
+		"fr": "Weebs sont à un seul arrêt pour être à jour avec les derniers animes, les memes et se balancer sur les dernières musiques d'animes. Plus de fonctionnalités sont à venir, donc restez à l'écoute."
+	},
+	"url": "simplyaweeb.to",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/LdUPH9K.png",
+	"thumbnail": "https://i.imgur.com/yXqDlOS.jpg",
+	"color": "#04fd5b",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"manga",
+		"memes",
+		"music",
+		"videos"
+	],
+	"iframe": true,
+	"settings": [
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "time",
+			"title": "Show Timestamp",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		}
+	]
+}

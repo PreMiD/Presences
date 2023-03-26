@@ -9,7 +9,7 @@ async function getStrings() {
 			viewSeries: "general.buttonViewSeries",
 			watchEpisode: "general.buttonViewEpisode",
 		},
-		await presence.getSetting<string>("lang")
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 
@@ -47,12 +47,12 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "animelon",
+			largeImageKey: "https://i.imgur.com/5gunVuc.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[buttons, newLang] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<string>("lang"),
+			presence.getSetting<string>("lang").catch(() => "en"),
 		]);
 
 	if (oldLang !== newLang || !strings) {

@@ -3,11 +3,11 @@ const presence: Presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
-		largeImageKey: "webtoon_lg",
+		largeImageKey: "https://i.imgur.com/Ickm2Yv.jpg",
 		startTimestamp: browsingTimestamp,
 	},
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
+		browsing: "general.browsing",
 	}),
 	path: string = window.location.pathname;
 let webtoon: string, chapter: string, seriesPage: string;

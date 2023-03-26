@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "523553075680772106",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 let video = {
 	duration: 0,
@@ -21,7 +21,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "animetw",
+		largeImageKey: "https://i.imgur.com/L1fhc3r.jpg",
 	};
 
 	if (

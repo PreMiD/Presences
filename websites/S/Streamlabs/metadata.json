@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "The Gamerzs",
+		"id": "730142125181894657"
+	},
+	"service": "Streamlabs",
+	"description": {
+		"en": "Streamlabs makes the best streaming software tools.",
+		"nl": "Streamlabs maakt de beste streaming software tools."
+	},
+	"url": [
+		"streamlabs.com",
+		"dev.streamlabs.com",
+		"howto.streamlabs.com",
+		"ideas.streamlabs.com",
+		"support.streamlabs.com"
+	],
+	"version": "1.1.16",
+	"logo": "https://i.imgur.com/LvPRxYG.png",
+	"thumbnail": "https://i.imgur.com/IuULwTC.png",
+	"color": "#80F5D2",
+	"category": "videos",
+	"tags": [
+		"games",
+		"social",
+		"videos",
+		"streaming"
+	]
+}

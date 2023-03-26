@@ -18,7 +18,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "yaay-logo",
+			largeImageKey: "https://i.imgur.com/KbcxoIV.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		page = document.location.pathname,

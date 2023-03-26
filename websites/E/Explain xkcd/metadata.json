@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "theusaf",
+		"id": "193714715631812608"
+	},
+	"service": "Explain xkcd",
+	"description": {
+		"en": "Explain xkcd is a wiki dedicated to explaining the webcomic xkcd. Go figure."
+	},
+	"url": [
+		"www.explainxkcd.com",
+		"explainxkcd.com"
+	],
+	"version": "1.0.4",
+	"logo": "https://i.imgur.com/mZSiamM.png",
+	"thumbnail": "https://i.imgur.com/MUuSnky.png",
+	"color": "#ffffff",
+	"category": "other",
+	"tags": [
+		"comic",
+		"wiki"
+	]
+}

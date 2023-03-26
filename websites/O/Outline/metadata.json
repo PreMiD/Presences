@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Hans5958",
+		"id": "279855717203050496"
+	},
+	"service": "Outline",
+	"description": {
+		"en": "Outline is a free service for reading and annotating news articles. We remove the clutter so you can analyze and comment on the content.",
+		"nl": "Outline is een gratis dienst voor het lezen en annoteren van nieuwsartikelen. We verwijderen de rommel zodat u de inhoud kunt analyseren en erop kunt reageren."
+	},
+	"url": [
+		"www.outline.com",
+		"outline.com"
+	],
+	"version": "1.0.14",
+	"logo": "https://i.imgur.com/Mvhpsh0.png",
+	"thumbnail": "https://i.imgur.com/0DB2tk4.png",
+	"color": "#ffffff",
+	"category": "other",
+	"tags": [
+		"clean",
+		"links",
+		"readable",
+		"readability",
+		"medium",
+		"typography",
+		"annotations",
+		"annotate",
+		"news",
+		"reading",
+		"read"
+	]
+}

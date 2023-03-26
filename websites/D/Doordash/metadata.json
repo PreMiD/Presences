@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "astrid",
+		"id": "852656702037164053"
+	},
+	"service": "Doordash",
+	"description": {
+		"en": "Delivery & takeout from the best local restaurants. Breakfast, lunch, dinner and more, delivered safely to your door."
+	},
+	"url": "www.doordash.com",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/Kif7kro.png",
+	"thumbnail": "https://i.imgur.com/Sc5sj8U.jpg",
+	"color": "#ff3008",
+	"category": "other",
+	"tags": [
+		"food",
+		"delivery",
+		"restaurant"
+	],
+	"settings": [
+		{
+			"id": "hideFood",
+			"title": "Hide Food Selection",
+			"value": false
+		},
+		{
+			"id": "hideSearch",
+			"title": "Hide Search Results",
+			"value": false
+		}
+	]
+}

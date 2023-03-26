@@ -1,8 +1,8 @@
 const presence = new Presence({ clientId: "980817205480550410" }),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
 		anime: "general.anime",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
@@ -16,7 +16,7 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "anizm",
+			largeImageKey: "https://i.imgur.com/TZZcyOQ.png",
 		},
 		title = document.querySelector(
 			"html > body > main > #pageContent > div > h2 > a"

@@ -20,7 +20,7 @@ function getVideoData(element: HTMLElement): [string?, HTMLVideoElement?] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "facebook",
+			largeImageKey: "https://i.imgur.com/nS9sZn6.png",
 			startTimestamp: browsingTimestamp,
 		},
 		privacyMode = await presence.getSetting<boolean>("privacyMode"),
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/videos/")) {
 		const video = document.querySelector("video"),
 			isLive = !!document.querySelector(
-				"div.j83agx80.rgmg9uty.pmk7jnqg.rnx8an3s.fcg2cn6m"
+				"div.x78zum5.xxk0z11 > div.x6s0dn4 > span.x193iq5w"
 			);
 
 		if (privacyMode)
@@ -63,8 +63,9 @@ presence.on("UpdateData", async () => {
 		else {
 			presenceData.details = `Watching a ${isLive ? "live" : "video"} on:`;
 			presenceData.state = `${
-				document.querySelector("span.nc684nl6 > span")?.textContent ||
-				document.querySelector("span.nc684nl6 > a > strong > span")?.textContent
+				document.querySelector("span.x193iq5w > strong > span")?.textContent ??
+				document.querySelector("span.x193iq5w > h2 > span > a > strong > span")
+					?.textContent
 			}'s profile`;
 
 			if (isLive) {
@@ -89,14 +90,16 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
-	} else if (document.location.pathname.includes("/photo/")) {
+	} else if (document.location.pathname.includes("/photo")) {
 		if (privacyMode) presenceData.details = "Viewing a photo";
 		else {
 			presenceData.details = "Viewing a photo on:";
 			presenceData.state = `${
-				document.querySelector("span.nc684nl6 > span")?.textContent ||
-				document.querySelector("span.nc684nl6 > a > strong > span")?.textContent
-			}'s profile'`;
+				document.querySelector("span.nc684nl6 > span")?.textContent ??
+				document.querySelector("span.nc684nl6 > a > strong > span")
+					?.textContent ??
+				document.querySelector('[href*="?__tn__=-UC*F"]')?.textContent
+			}'s profile`;
 
 			presenceData.buttons = [
 				{
@@ -108,8 +111,8 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/watch")) {
 		const search = new URLSearchParams(location.search).get("q"),
 			videoId = new URLSearchParams(location.search).get("v");
-
-		if (!videoId && !search) {
+		presenceData.largeImageKey = "https://i.imgur.com/FMIfiPA.png";
+		if (!videoId && !search && document.location.href.includes("?v=")) {
 			const videoFrame = Array.from(
 				document.querySelectorAll('div[class="l9j0dhe7"]')
 			).find(
@@ -130,7 +133,7 @@ presence.on("UpdateData", async () => {
 						isLive ? "live" : "video"
 					}`;
 				} else if (isLive) {
-					presenceData.details = "Wattch - Watching a live:";
+					presenceData.details = "Watch - Watching a live:";
 					presenceData.state = description || user;
 
 					presenceData.smallImageKey = "live";
@@ -173,6 +176,25 @@ presence.on("UpdateData", async () => {
 		} else if (search && !privacyMode) {
 			presenceData.details = "Watch - Searching for:";
 			presenceData.state = showSeachQuery ? decodeURI(search) : "(Hidden)";
+		} else if (privacyMode)
+			presenceData.details = "Watch - Viewing a user's page";
+		else {
+			presenceData.details = "Watch";
+			const queryUserName =
+				document.querySelector("h2 > span.d2edcug0.hzawbc8m > span") ??
+				document.querySelector('span > a[role="link"] > span');
+			presenceData.state = `Viewing ${queryUserName.textContent.trim()}'s page`;
+			presenceData.buttons = [
+				{ label: "View User", url: document.location.href },
+			];
+		}
+	} else if (document.location.pathname.includes("/reel")) {
+		presenceData.details = "Watching a reel";
+		presenceData.largeImageKey = "https://i.imgur.com/x2Mx3si.png";
+		if (!privacyMode) {
+			presenceData.state = `From ${document
+				.querySelector<HTMLLinkElement>("h2 > span > span > a.oajrlxb2")
+				.textContent.trim()}`;
 		}
 	} else if (document.location.pathname.includes("/marketplace/")) {
 		presenceData.startTimestamp = browsingTimestamp;
@@ -225,6 +247,7 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else if (
+		document.location.href.includes("/profile.php?id=") ||
 		document.querySelector('[aria-label="Link to open profile cover photo"]') ||
 		document.querySelector('[style*="padding-top: 37"]') ||
 		document.querySelector('[style*="padding-top:37"]')

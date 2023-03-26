@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "fror",
+		"id": "515668127829458945"
+	},
+	"service": "Chaturbate",
+	"description": {
+		"en": "Chaturbate is a popular webcam site which launched in 2011 where amateurs livestream erotic or pornographic performances.",
+		"nl": "Chaturbate is een populaire webcamsite die in 2011 werd gelanceerd en waar amateurs erotische of pornografische uitvoeringen livestreamen.",
+		"vi_VN": "Chaturbate là trò chơi webcam nổi tiếng được phát hành năm 2011 nơi các người nghiệp dư có thể tự phát trực tiếp phim khiêu dâm."
+	},
+	"url": "chaturbate.com",
+	"regExp": "([a-z0-9-]+[.])*chaturbate([.][a-z]+)+[/]",
+	"version": "1.2.22",
+	"logo": "https://i.imgur.com/PjQ6k9n.png",
+	"thumbnail": "https://i.imgur.com/iszRY6f.png",
+	"color": "#f68a1a",
+	"category": "videos",
+	"tags": [
+		"nsfw",
+		"webcam",
+		"live-streaming"
+	]
+}

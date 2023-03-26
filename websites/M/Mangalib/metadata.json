@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Mirax",
+		"id": "223355525826347018"
+	},
+	"service": "Mangalib",
+	"description": {
+		"ru": "Сайт для прочтения манги на русском языке.",
+		"en": "Website for reading manga in Russian",
+		"nl": "Website voor het lezen van manga in het Russisch"
+	},
+	"url": "mangalib.me",
+	"version": "1.4.13",
+	"logo": "https://i.imgur.com/bQPdsZ1.png",
+	"thumbnail": "https://i.imgur.com/0U4JNOJ.png",
+	"color": "#ff8c00",
+	"category": "other",
+	"tags": [
+		"manga",
+		"mangalib",
+		"read",
+		"anime"
+	]
+}

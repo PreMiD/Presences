@@ -1,11 +1,6 @@
 const presence = new Presence({
 		clientId: "879535934977245244",
 	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
-	}),
 	slugs: { [key: string]: string } = {
 		home: "Home",
 		series: "Series",
@@ -45,7 +40,14 @@ const presence = new Presence({
 		"looney-tunes": "Looney Tunes",
 		crunchyroll: "Crunchyroll Collection",
 	},
-	coverUrls: Record<string, string> = {};
+	videosInfo: Record<
+		string,
+		{
+			coverArt?: string;
+			title?: string;
+			subtitle?: string;
+		}
+	> = {};
 
 let isFetching = false;
 
@@ -94,9 +96,14 @@ function fetchClientConfig(
 			).get("country-code"),
 		}));
 }
+async function fetchVideoInfo() {
+	if (isFetching) return { coverArt: "lg", title: "" };
 
-async function fetchCover() {
-	let output: string;
+	let output: {
+		coverArt?: string;
+		title?: string;
+		subtitle?: string;
+	} = {};
 
 	const accessToken = await fetchToken(),
 		{ routeKey, countryCode } = await fetchClientConfig(accessToken);
@@ -104,22 +111,41 @@ async function fetchCover() {
 	isFetching = true;
 
 	try {
-		const response = await fetch(
-			`https://comet${routeKey}.api.hbo.com/express-content/${
-				location.pathname.split("/")[2]
-			}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=${countryCode}&language=en-us`,
-			{
-				headers: {
-					authorization: `Bearer ${accessToken}`,
-				},
-			}
-		).then(res => res.json());
+		const mediaInfo = (
+			await fetch(
+				`https://comet${routeKey}.api.hbo.com/express-content/${
+					location.pathname.split("/")[2]
+				}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=${countryCode}&language=en-us`,
+				{
+					headers: {
+						authorization: `Bearer ${accessToken}`,
+					},
+				}
+			).then(res => res.json())
+		)[0].body;
 
-		output = `https://artist.api.cdn.hbo.com/images/${
-			response[0].body.references.series.match(/series:([^:]+)/)[1]
-		}/tileburnedin?size=1024x1024`;
+		output = {
+			coverArt: (() => {
+				if (location.pathname.includes(":episode:")) {
+					return `https://artist.api.cdn.hbo.com/images/${
+						mediaInfo.references.series.match(/series:([^:]+)/)[1]
+					}/tileburnedin?size=1024x1024`;
+				} else if (location.pathname.includes(":feature:")) {
+					return `https://artist.api.cdn.hbo.com/images/${
+						location.pathname.match(/:feature:([^:]+)/)[1]
+					}/tileburnedin?size=1024x1024`;
+				} else return "lg";
+			})(),
+			title: (mediaInfo.seriesTitles || mediaInfo.titles).full,
+			subtitle: mediaInfo.seriesTitles
+				? `S${mediaInfo.seasonNumber}:E${mediaInfo.numberInSeason} ${mediaInfo.titles.full}`
+				: "",
+		};
 	} catch {
-		output = "lg";
+		output = { coverArt: "lg" };
+		presence.error(
+			"Unable to fetch video info. Please open an issue here https://github.com/PreMiD/Presences/issues"
+		);
 	}
 
 	isFetching = false;
@@ -128,12 +154,10 @@ async function fetchCover() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg",
+			largeImageKey: "https://i.imgur.com/UxH7DDE.png",
 		},
 		video = document.querySelector("video"),
 		path = document.location.pathname;
-
-	let titles, hasEpisode, timestamps, pageSlug;
 
 	switch (true) {
 		case path === "/profileSelect":
@@ -145,45 +169,31 @@ presence.on("UpdateData", async () => {
 			Object.assign(presenceData, {
 				details: "Searching",
 				smallImageKey: "search",
-				smallImageText: (await strings).browsing,
+				smallImageText: "Browsing...",
 			});
 			break;
-		case !!video:
-			(titles = Array.from(
-				document.querySelectorAll("[role=heading]:first-child span span")
-			)
-				.map(z => z.textContent)
-				.filter(z => z.length > 1 && !/\d \/ \d+/.test(z))), // Test for "d / d" ex.: 01:45 / 01:30:00
-				(hasEpisode = titles.length > 1);
+		case !!video: {
+			const timestamps = presence.getTimestampsfromMedia(video),
+				videoId = location.pathname.match(/:[a-z]+:([^:]+)$/)[1];
 
-			timestamps = presence.getTimestampsfromMedia(video);
+			videosInfo[videoId] ??= await fetchVideoInfo();
+
+			const videoInfo = videosInfo[videoId];
 
 			Object.assign(presenceData, {
-				details: titles[0],
-				state: hasEpisode ? titles[1] : "Watching movie",
+				details: videoInfo.title,
+				state:
+					videoInfo.subtitle ||
+					(location.pathname.includes(":feature:") ? "Movie" : "Extra"),
 				smallImageKey: video.paused ? "pause" : "play",
-				smallImageText: video.paused
-					? (await strings).pause
-					: (await strings).play,
+				smallImageText: video.paused ? "Paused" : "Playing",
 			});
 
 			if (
 				[":episode:", ":feature:"].some(x => location.pathname.includes(x)) &&
 				(await presence.getSetting<boolean>("cover"))
-			) {
-				if (location.pathname.includes(":feature:")) {
-					presenceData.largeImageKey = `https://artist.api.cdn.hbo.com/images/${
-						location.pathname.match(/:feature:([^:]+)/)[1]
-					}/tileburnedin?size=1024x1024`;
-				} else {
-					const episodeId = location.pathname.match(/:episode:([^:]+)/)[1];
-
-					if (isFetching) return;
-					coverUrls[episodeId] ??= await fetchCover();
-
-					presenceData.largeImageKey = coverUrls[episodeId];
-				}
-			}
+			)
+				presenceData.largeImageKey = videoInfo.coverArt;
 
 			if (!video.paused) {
 				Object.assign(presenceData, {
@@ -191,11 +201,42 @@ presence.on("UpdateData", async () => {
 					endTimestamp: timestamps[1],
 				});
 			}
-			break;
 
+			break;
+		}
+		case /(type:[a-z]+)$/.test(path) && document.title.includes(" • "): {
+			const title = document.title
+				.split(" • ")
+				.shift()
+				.match(/.+?(?=,)|^(?!,).*$/g)
+				.join("");
+
+			switch (/(type:[a-z]+)$/.exec(path)[0]) {
+				case "type:episode":
+				case "type:series":
+					Object.assign(presenceData, {
+						details: "Viewing series:",
+						state: title,
+					});
+					break;
+				case "type:feature":
+					Object.assign(presenceData, {
+						details: "Viewing movie:",
+						state: title,
+					});
+					break;
+				case "type:extra":
+					Object.assign(presenceData, {
+						details: "Viewing extra video:",
+						state: title,
+					});
+					break;
+			}
+			break;
+		}
 		default: {
 			Object.assign(presenceData, { details: "Browsing" });
-			pageSlug = Object.keys(slugs).find(z =>
+			const pageSlug = Object.keys(slugs).find(z =>
 				window.location.href.includes(`:page:${z}`)
 			);
 
@@ -204,5 +245,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 	}
-	presence.setActivity(presenceData);
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

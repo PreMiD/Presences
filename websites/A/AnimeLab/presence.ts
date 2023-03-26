@@ -2,14 +2,14 @@ const presence = new Presence({
 		clientId: "641432995764633612",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "al",
+		largeImageKey: "https://i.imgur.com/Fj1RBAc.png",
 		startTimestamp: browsingTimestamp,
 	};
 

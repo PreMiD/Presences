@@ -5,8 +5,8 @@ const presence: Presence = new Presence({
 
 async function getStrings() {
 	return presence.getStrings({
-		browsing: "presence.activity.browsing",
-		reading: "presence.activity.reading",
+		browsing: "general.browsing",
+		reading: "general.reading",
 	});
 }
 
@@ -14,23 +14,22 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "anilist_lg",
+			largeImageKey: "https://i.imgur.com/fqyhsZ5.png",
 			startTimestamp,
 		},
 		pathnameArray = document.location.pathname.split("/"),
 		page = pathnameArray[1],
-		showCover = await presence.getSetting<boolean>("cover");
+		[showCover, showButton] = await Promise.all([
+			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("buttons"),
+		]);
 	strings = await getStrings();
 
 	switch (page) {
-		case "":
-			presenceData.details = strings.browsing;
-			presenceData.state = "Home";
-			break;
 		case "user": {
 			if (showCover) {
 				presenceData.largeImageKey = document
-					.querySelector(".avatar")
+					.querySelectorAll(".avatar")[1]
 					.getAttribute("src");
 				presenceData.smallImageKey = "anilist_lg";
 			}
@@ -145,7 +144,13 @@ presence.on("UpdateData", async () => {
 		case "settings":
 			presenceData.details = "Changing settings";
 			break;
+		default:
+			presenceData.details = strings.browsing;
+			presenceData.state = "Home";
+			break;
 	}
+
+	if (!showButton) delete presenceData.buttons;
 
 	presence.setActivity(presenceData, true);
 });

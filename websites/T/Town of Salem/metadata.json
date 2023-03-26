@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "theusaf",
+		"id": "193714715631812608"
+	},
+	"service": "Town of Salem",
+	"description": {
+		"en": "Town of Salem is a browser-based game that challenges players on their ability to convincingly lie as well as detect when other players are lying.",
+		"nl": "Town of Salem is een browsergebaseerd spel dat spelers uitdaagt op hun vermogen om overtuigend te liegen en om te detecteren wanneer andere spelers liegen."
+	},
+	"url": [
+		"blankmediagames.com",
+		"www.blankmediagames.com"
+	],
+	"version": "1.1.1",
+	"logo": "https://i.imgur.com/y7VYTQK.jpg",
+	"thumbnail": "https://i.imgur.com/sy7mr8V.jpg",
+	"color": "#F0B450",
+	"category": "games",
+	"tags": [
+		"mafia",
+		"town",
+		"game",
+		"deception",
+		"popular",
+		"mafia",
+		"salem"
+	]
+}

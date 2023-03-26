@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "745261937092198532",
 	}),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		playing: "general.playing",
+		pause: "general.paused",
 	});
 
 let presenceData: PresenceData;
@@ -37,7 +37,7 @@ setInterval(async () => {
 	}
 
 	presenceData = {
-		largeImageKey: "og-image",
+		largeImageKey: "https://i.imgur.com/d1za28M.png",
 		smallImageKey: playing ? "play" : "pause",
 		smallImageText: playing ? (await strings).playing : (await strings).pause,
 		details: (document.querySelectorAll(".track__title")[0] as HTMLElement)

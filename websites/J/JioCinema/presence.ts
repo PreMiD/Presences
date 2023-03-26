@@ -2,14 +2,14 @@ const presence: Presence = new Presence({
 		clientId: "632479205707350037",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "large_img",
+			largeImageKey: "https://i.imgur.com/vP9Hh5d.png",
 			startTimestamp,
 		},
 		url = window.location.href;
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		const [video] = document.querySelectorAll("video");
 		presenceData.details =
 			document.querySelectorAll(".meta-data-title")[0].textContent;
-		presenceData.largeImageKey = "large_img";
+		presenceData.largeImageKey = "https://i.imgur.com/vP9Hh5d.png";
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
 		presenceData.smallImageText = video.paused
 			? (await strings).pause

@@ -2,13 +2,13 @@ const presence = new Presence({
 		clientId: "717563140300210196",
 	}),
 	strings = presence.getStrings({
-		search: "presence.activity.searching",
+		search: "general.searching",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/GQF8Kiq.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (new URLSearchParams(window.location.search).has("s")) {

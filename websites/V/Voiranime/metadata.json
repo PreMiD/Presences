@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Kozou",
+		"id": "379362415428632576"
+	},
+	"contributors": [
+		{
+			"name": "DooMLorD",
+			"id": "654398152513945611"
+		},
+		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
+		}
+	],
+	"service": "Voiranime",
+	"description": {
+		"en": "Voiranime is a streaming website where you can watch VF and VOSTFR anime.",
+		"fr": "Voiranime est un site pour regarder des animes gratuits en streaming VF VOSTFR.",
+		"ga_IE": "Is suíomh Gréasáin sruthú é Voiranime inar féidir leat féachaint ar VF agus VOSTFR anime.",
+		"nl": "Voiranime is een streamingwebsite waar je VF- en VOSTFR-anime kunt bekijken."
+	},
+	"url": "v2.voiranime.com",
+	"regExp": "([a-z0-9-]+[.])*voiranime[.]com[/]",
+	"version": "2.1.0",
+	"logo": "https://i.imgur.com/Db6EmSA.png",
+	"thumbnail": "https://i.imgur.com/566TY04.png",
+	"color": "#1a1920",
+	"category": "anime",
+	"tags": [
+		"voiranime",
+		"streaming",
+		"french"
+	],
+	"iframe": true
+}

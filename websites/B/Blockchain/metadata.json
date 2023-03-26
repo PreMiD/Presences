@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "The Gamerzs",
+		"id": "730142125181894657"
+	},
+	"service": "Blockchain",
+	"description": {
+		"en": "The World's Most Popular Way to Buy, Hold, and Use Crypto",
+		"nl": "De meest populaire manier ter wereld om cryptovaluta te kopen, vast te houden en te gebruiken",
+		"vi_VN": "Phương thức nổi tiếng nhất thế giới để mua, cất giữ, và sử dụng tiền ảo"
+	},
+	"url": [
+		"www.blockchain.com",
+		"login.blockchain.com",
+		"exchange.blockchain.com",
+		"support.blockchain.com",
+		"www.blockchain-status.com"
+	],
+	"version": "1.0.11",
+	"logo": "https://i.imgur.com/rmmWPPP.png",
+	"thumbnail": "https://i.imgur.com/1W01XgV.png",
+	"color": "#3d89f5",
+	"category": "other",
+	"tags": [
+		"crypto",
+		"mining",
+		"blockchain",
+		"network",
+		"exchange"
+	]
+}

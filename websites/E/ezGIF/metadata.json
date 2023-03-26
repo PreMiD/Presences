@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "ezGIF",
+	"description": {
+		"en": "Ezgif.com is a simple online GIF maker and toolset for basic animated GIF editing. Here you can create, resize, crop, reverse, optimize, and apply some effects to GIFs."
+	},
+	"url": "ezgif.com",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/lu1BuFT.png",
+	"thumbnail": "https://i.imgur.com/BbvXq2a.png",
+	"color": "#222",
+	"category": "other",
+	"tags": [
+		"video",
+		"animation",
+		"image",
+		"editing"
+	],
+	"settings": [
+		{
+			"id": "showImages",
+			"value": false,
+			"title": "Display Images in Status",
+			"icon": "fas fa-images"
+		}
+	]
+}

@@ -12,7 +12,7 @@ setInterval(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/74Calja.png",
 			details: "Geziniyor",
 			startTimestamp,
 		},

@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "614387676467953674",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
 	});
 
 let title: HTMLInputElement, video: HTMLVideoElement;
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 
 	if (!video) {
 		const presenceData: PresenceData = {
-			largeImageKey: "viki",
+			largeImageKey: "https://i.imgur.com/J9AyT9N.png",
 		};
 
 		presenceData.startTimestamp = browsingTimestamp;
@@ -417,7 +417,7 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details: "",
 				state: "",
-				largeImageKey: "viki",
+				largeImageKey: "https://i.imgur.com/J9AyT9N.png",
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause

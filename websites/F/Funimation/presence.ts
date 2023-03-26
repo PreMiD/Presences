@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "640161890059812865",
 	}),
 	getStrings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,7 +11,7 @@ let prevTitle: string, prevEpisode: string, strings: Awaited<typeof getStrings>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "fun",
+			largeImageKey: "https://i.imgur.com/WYKbg0v.png",
 			startTimestamp: browsingTimestamp,
 		},
 		showPoster = await presence.getSetting("poster"),

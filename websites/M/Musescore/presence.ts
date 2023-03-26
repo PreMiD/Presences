@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "629473655218241557",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 function getTime(timegone: string[], timetotal: string[]): number[] {
@@ -23,7 +23,7 @@ function getTimeLeft(Time: string[]): number[] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "musescore",
+		largeImageKey: "https://i.imgur.com/tx2Qvq4.png",
 	};
 
 	// ALL ON THE .ORG website

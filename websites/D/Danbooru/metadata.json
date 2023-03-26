@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Kyrie",
+		"id": "368399721494216706"
+	},
+	"service": "Danbooru",
+	"description": {
+		"en": "Danbooru is an English-based image board website specializing in erotic manga fan art.",
+		"vi_VN": "Danbooru là bảng hình ảnh bằng Tiếng Anh tập trung vào ảnh vẽ gợi tình."
+	},
+	"url": "danbooru.donmai.us",
+	"version": "1.1.6",
+	"logo": "https://i.imgur.com/pniknY6.png",
+	"thumbnail": "https://i.imgur.com/T1pAw9x.jpg",
+	"color": "#006FFA",
+	"category": "socials",
+	"tags": [
+		"art",
+		"anime",
+		"fanart",
+		"manga",
+		"board",
+		"nsfw"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

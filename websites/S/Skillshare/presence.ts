@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "642122988925485086",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,7 +11,7 @@ let user: string, title: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "sh",
+		largeImageKey: "https://i.imgur.com/WTfjamG.png",
 	};
 
 	if (document.location.hostname === "www.skillshare.com") {

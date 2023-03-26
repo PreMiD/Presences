@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "890325980126789663",
+		"name": "Luiz ♡"
+	},
+	"service": "Stoodi",
+	"description": {
+		"en": "Stoodi is a platform to prepare you for exams and ENEM in Brazil.",
+		"pt_BR": "Stoodi é uma plataforma para te preparar para provas e ENEM no Brazil"
+	},
+	"url": "www.stoodi.com.br",
+	"regExp": "([a-z0-9]+)[.]stoodi[.]com[.]br",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/gcfZTn4.png",
+	"thumbnail": "https://i.imgur.com/K35Q2iX.png",
+	"color": "#004EFF",
+	"category": "other",
+	"tags": [
+		"enem",
+		"brazilian",
+		"school",
+		"study",
+		"exams"
+	]
+}

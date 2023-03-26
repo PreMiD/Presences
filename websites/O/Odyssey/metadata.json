@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"service": "Odyssey",
+	"description": {
+		"nl": "Odyssey is een Minecraft community opgericht om een leuke en veilige omgeving te bieden voor mensen over de hele wereld. Onze belangrijkste focus is om de best mogelijke ervaring voor onze spelers te bieden en onze bloeiende gemeenschap te onderhouden.",
+		"en": "Odyssey is a Minecraft community created to provide a fun and safe environment for people around the globe. Our main focus is to provide the best experience possible for our players and maintain our thriving community."
+	},
+	"url": [
+		"store.odyssey.gg",
+		"install.odyssey.gg"
+	],
+	"version": "1.0.3",
+	"logo": "https://i.imgur.com/VD9G5DE.png",
+	"thumbnail": "https://i.imgur.com/1qjZ8jL.jpg",
+	"color": "#ff0000",
+	"category": "games",
+	"tags": [
+		"odyssey",
+		"pixelmon",
+		"minecraft"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

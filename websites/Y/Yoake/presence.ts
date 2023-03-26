@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "787715073007026187",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let lastPlaybackState: boolean,
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 				document.querySelectorAll("video")[0].className !== "previewVideo"),
 		curPath = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/eL8ARU0.png",
 		};
 
 	if (lastPath !== curPath || lastPlaybackState !== playback) {

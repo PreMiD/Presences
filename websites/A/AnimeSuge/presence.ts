@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		epNumber = page.slice(page.length - 5).replace(/^\D+/g, ""),
 		presenceData: PresenceData = {
-			largeImageKey: "animesuge",
+			largeImageKey: "https://i.imgur.com/TQPRXrN.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		search: URLSearchParams = new URLSearchParams(

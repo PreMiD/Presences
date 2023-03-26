@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "bossatossa",
+		"id": "514756351327731729"
+	},
+	"contributors": [
+		{
+			"name": "fror",
+			"id": "515668127829458945"
+		},
+		{
+			"name": "Bas950",
+			"id": "241278257335500811"
+		}
+	],
+	"service": "Rádio Animu",
+	"description": {
+		"en": "The most moe radio in Brazil",
+		"pt_BR": "A rádio mais moe do Brasil",
+		"nl": "De meest moe radio in Brazilië"
+	},
+	"url": "www.animu.com.br",
+	"version": "1.2.19",
+	"logo": "https://i.imgur.com/SHAH0WR.png",
+	"thumbnail": "https://i.imgur.com/YS3pllQ.png",
+	"color": "#2c004b",
+	"category": "music",
+	"tags": [
+		"brasil",
+		"anime",
+		"radio",
+		"moe"
+	],
+	"iframe": true
+}

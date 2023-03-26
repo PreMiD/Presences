@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "radiot",
+		largeImageKey: "https://i.imgur.com/nhxjVmG.png",
 	};
 	if (document.location.hostname === "www.radio-suomi.com") {
 		if (document.location.pathname === "/") {

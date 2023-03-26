@@ -30,7 +30,7 @@ presence.on("iFrameData", (data: iframeData) => {
 const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "sdlogo",
+			largeImageKey: "https://i.imgur.com/z1VZysP.jpg",
 			startTimestamp,
 		},
 		{ search, pathname: page } = document.location;
@@ -102,11 +102,11 @@ presence.on("UpdateData", async () => {
 		);
 
 		presenceData.details =
-			document.querySelector(".content strong h1.header a")?.textContent ??
-			"Bilinmeyen İsim";
-		presenceData.state = document.querySelector(
-			".content strong h1.header small"
-		)?.textContent;
+			document.querySelector('[class="ui medium header"]').querySelector("a")
+				?.textContent ?? "Bilinmeyen İsim";
+		presenceData.state = document
+			.querySelector('[class="ui medium header"]')
+			.querySelector("small")?.textContent;
 
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;

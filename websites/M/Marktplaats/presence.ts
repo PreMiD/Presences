@@ -6,7 +6,7 @@ let search: HTMLInputElement, title: Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/K0yeNeC.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[privacy, buttons] = await Promise.all([
@@ -116,9 +116,9 @@ presence.on("UpdateData", async () => {
 			!pathname.includes("/veiligheidscentrum/")
 		) {
 			presenceData.details = "Leest over";
-			presenceData.state = document
-				.querySelector<HTMLMetaElement>('meta[name="description"]')
-				.content.slice(0, 128);
+			presenceData.state = document.querySelector<HTMLMetaElement>(
+				'meta[name="description"]'
+			).content;
 			presenceData.smallImageKey = "read";
 			presenceData.buttons = [
 				{

@@ -2,11 +2,11 @@ const presence = new Presence({
 		clientId: "758692661846081615",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "ifi-logo",
+		largeImageKey: "https://i.imgur.com/cIr56HO.png",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	pages: { [page: string]: string } = {

@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"contributors": [
+		{
+			"name": "Minh",
+			"id": "457040540421324812"
+		}
+	],
+	"service": "Animevietsub",
+	"description": {
+		"en": "Watch your favorite anime online with Vietnamese subtitle!",
+		"vi_VN": "Xem anime online với phụ đề tiếng việt.",
+		"nl": "Bekijk jouw favoriete anime online met Vietnamese ondertiteling!"
+	},
+	"url": "animevietsub.cc",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/trQFagl.jpeg",
+	"thumbnail": "https://i.imgur.com/cSWQACH.png",
+	"color": "#8b0000",
+	"category": "anime",
+	"tags": [
+		"animevietsub",
+		"anime"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

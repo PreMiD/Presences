@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "RisingSunLight",
+		"id": "240521747852558347"
+	},
+	"service": "Anime Sama",
+	"description": {
+		"en": "Your streaming website for animes and scans without ad.",
+		"fr": "Votre site de streaming préféré pour vos animes et scans sans pubs."
+	},
+	"url": "anime-sama.fr",
+	"version": "1.1.1",
+	"logo": "https://i.imgur.com/BRpmbpT.png",
+	"thumbnail": "https://i.imgur.com/skGNh5Y.png",
+	"color": "#0063c0",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"anime-sama",
+		"scan",
+		"vf",
+		"vostfr"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*((sendvid)|(sibnet)|(myvi)).*",
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

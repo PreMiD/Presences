@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "639131130703904808",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	pages: { [k: string]: string } = {
 		"/": "Homepage",
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		video = document.querySelector("video"),
 		presenceData: PresenceData = {
-			largeImageKey: "ud-logo",
+			largeImageKey: "https://i.imgur.com/cTa4588.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

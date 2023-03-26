@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Funeoz",
+		"id": "256093420206948352"
+	},
+	"service": "Chess",
+	"description": {
+		"en": "Chess.com is the main internet chess server. It is also an Internet forum and a social network dedicated to chess.",
+		"fr": "Chess.com est le principal serveur internet d'échecs. C'est également un forum internet et un réseau social consacré aux échecs.",
+		"es": "Chess.com es el principal servidor web para el ajedrez. Es también un foro web y un red social dedicado al ajedrez.",
+		"nl": "Chess.com is de belangrijkste schaakserver op internet. Het is ook een internetforum en een sociaal netwerk gewijd aan schaken.",
+		"vi_VN": "Chess.com là máy chủ cờ vua chính trên Internet. Nó cũng là một diễn đàn và mạng xã hội dành riêng cho bộ môn cờ vua."
+	},
+	"url": "www.chess.com",
+	"version": "1.2.13",
+	"logo": "https://i.imgur.com/LEtYrKg.png",
+	"thumbnail": "https://i.imgur.com/boFdmKN.png",
+	"color": "#4d7737",
+	"category": "games",
+	"tags": [
+		"chess",
+		"games"
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "unicornbetrayal",
+		"id": "377284540420587541"
+	},
+	"service": "Merriam-Webster",
+	"description": {
+		"en": "The dictionary by Merriam-Webster is America's most trusted online dictionary for English word definitions, meanings, and pronunciation."
+	},
+	"url": "www.merriam-webster.com",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/Iw9ZHAJ.png",
+	"thumbnail": "https://i.imgur.com/0gUOyxz.jpg",
+	"color": "#d8121b",
+	"category": "other",
+	"tags": [
+		"dictionary",
+		"thesaurus",
+		"words"
+	]
+}

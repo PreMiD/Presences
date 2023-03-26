@@ -61,7 +61,7 @@ async function getStrings() {
 			liveCourse: "kahoot.liveCourse",
 			liveCourseActivity: "kahoot.liveCourseActivity",
 		},
-		await presence.getSetting<string>("lang")
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 
@@ -75,12 +75,12 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "kahoot",
+			largeImageKey: "https://i.imgur.com/yrWMYRs.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[buttons, newLang] = await Promise.all([
 			await presence.getSetting<boolean>("buttons"),
-			await presence.getSetting<string>("lang"),
+			await presence.getSetting<string>("lang").catch(() => "en"),
 		]);
 
 	oldLang ??= newLang;

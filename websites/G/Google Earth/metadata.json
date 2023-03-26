@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "Google Earth",
+	"description": {
+		"en": "Explore worldwide satellite imagery and 3D buildings and terrain for hundreds of cities. Zoom to your house or anywhere else, then dive in for a 360° perspective with Street View. "
+	},
+	"url": "earth.google.com",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/bsN9g4H.png",
+	"thumbnail": "https://i.imgur.com/FyntULt.jpg",
+	"color": "#255FDB",
+	"category": "other",
+	"tags": [
+		"3d",
+		"space",
+		"explore",
+		"map",
+		"satellite"
+	]
+}

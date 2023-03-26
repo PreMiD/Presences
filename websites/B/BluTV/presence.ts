@@ -2,9 +2,9 @@ const presence = new Presence({
 		clientId: "664216462038401066",
 	}),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
 	});
 
 function seriesName(name: string): string {
@@ -47,7 +47,7 @@ presence.on("iFrameData", async (msg: Data | null) => {
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "blutv",
+			largeImageKey: "https://i.imgur.com/THrSw57.png",
 		};
 
 	if (!path.includes("izle")) {

@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Bas950",
+		"id": "241278257335500811"
+	},
+	"service": "TrueSteamAchievements",
+	"description": {
+		"en": "TrueSteamAchievements is the home of Steam news, achievement lists and guides, reviews, interviews, leaderboards and more.",
+		"nl": "TrueSteamAchievements is de plaats voor Steam nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer."
+	},
+	"url": "truesteamachievements.com",
+	"version": "1.0.15",
+	"logo": "https://i.imgur.com/8EEEcoh.png",
+	"thumbnail": "https://i.imgur.com/emAb1iF.jpg",
+	"color": "#FFF",
+	"category": "other",
+	"tags": [
+		"true",
+		"achievements",
+		"steam"
+	]
+}

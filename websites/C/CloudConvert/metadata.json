@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "CloudConvert",
+	"description": {
+		"en": "CloudConvert is an online file converter. We support nearly all audio, video, document, ebook, archive, image, spreadsheet, and presentation formats. "
+	},
+	"url": [
+		"www.cloudconvert.com",
+		"cloudconvert.com"
+	],
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/zn1sM5L.png",
+	"thumbnail": "https://i.imgur.com/k4NfnLr.png",
+	"color": "#b53836",
+	"category": "other",
+	"tags": [
+		"convert",
+		"file",
+		"online"
+	]
+}

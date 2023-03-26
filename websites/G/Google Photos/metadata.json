@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Kyrie",
+		"id": "368399721494216706"
+	},
+	"service": "Google Photos",
+	"description": {
+		"en": "Google Photos is the home for all your photos and videos, automatically organized and easy to share.",
+		"vi_VN": "Google Photos là nơi cho tất cả các bức ảnh và video của bạn, được tự động sắp xếp và dễ dàng chia sẻ"
+	},
+	"url": "photos.google.com",
+	"version": "1.0.6",
+	"logo": "https://i.imgur.com/H4jjKhD.png",
+	"thumbnail": "https://i.imgur.com/bDLIxDm.jpg",
+	"color": "#FFFFFF",
+	"category": "socials",
+	"tags": [
+		"google",
+		"photos",
+		"images",
+		"videos",
+		"storage",
+		"share"
+	],
+	"settings": [
+		{
+			"id": "albumname",
+			"title": "Show Album Name",
+			"icon": "fas fa-images",
+			"value": false
+		}
+	]
+}

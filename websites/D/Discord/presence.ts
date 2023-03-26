@@ -54,7 +54,7 @@ async function getStrings() {
 			viewing: "general.viewing",
 			uptime: "general.uptimeHistory",
 			incident: "general.incidentHistory",
-			incidentView: "general.incidentView",
+			viewAnIncident: "general.viewAnIncident",
 			helpCenter: "discord.support",
 			viewCategory: "general.viewCategory",
 			searchFor: "general.searchFor",
@@ -133,12 +133,10 @@ presence.on("UpdateData", async () => {
 								"input[name=channel_name]"
 							) as HTMLInputElement
 					  )?.value || "Undefined"
-					: `@${
-							document.querySelector("[aria-label='Channel header']")
-								?.firstElementChild?.children[2]?.textContent ||
+					: `${
 							document.querySelector("head > title")?.textContent === "Discord"
-								? "undefined"
-								: document.querySelector("head > title")?.textContent
+								? ""
+								: `@${document.querySelector("head > title")?.textContent}`
 					  }`,
 				serverTyping =
 					Array.from(
@@ -153,98 +151,106 @@ presence.on("UpdateData", async () => {
 						? true
 						: false,
 				serverChannel = `#${
-					Array.from(document.querySelectorAll("h3")).find(c =>
-						c.className?.includes("title")
-					)?.textContent || "Undefined"
+					document
+						.querySelectorAll("title")[0]
+						?.textContent.split("| #")[1]
+						.split("|")[0] || "Undefined"
 				}`,
 				serverServerName =
-					Array.from(document.querySelectorAll("h1")).find(c =>
-						c.className?.includes("name")
-					)?.textContent || "Undefined",
+					document.querySelectorAll("title")[0]?.textContent.split("|")[2] ||
+					"Undefined",
 				statics: {
 					[name: string]: PresenceData;
 				} = {
 					"/": {
-						details: (await strings).browse,
+						details: strings.browse,
 					},
 					"/channels/(\\d*)/(\\d*)/": {
 						details: serverTyping
-							? (await strings).channelTyping
+							? strings.channelTyping
 									.split("{0}")[0]
 									.replace("{1}", serverChannel)
 									.replace("{2}", serverServerName)
-							: (await strings).channelReading
+							: strings.channelReading
 									.split("{0}")[0]
 									.replace("{1}", serverChannel)
 									.replace("{2}", serverServerName),
 						state: serverTyping
-							? (await strings).channelTyping
+							? strings.channelTyping
 									.split("{0}")[1]
 									?.replace("{1}", serverChannel)
 									.replace("{2}", serverServerName)
-							: (await strings).channelReading
+							: strings.channelReading
 									.split("{0}")[1]
 									?.replace("{1}", serverChannel)
 									.replace("{2}", serverServerName),
 						smallImageKey: serverTyping ? "writing" : "reading",
-						smallImageText: serverTyping
-							? (await strings).writing
-							: (await strings).reading,
+						smallImageText: serverTyping ? strings.writing : strings.reading,
 					},
 					"/channels/@me/": {
-						details: (await strings).friends,
+						details: strings.friends,
 					},
 					"/channels/@me/(\\d*)/": {
 						details: dmsTyping
 							? groupDm
-								? (await strings).dmGroupTyping
+								? strings.dmGroupTyping
 										.split("{0}")[0]
 										.replace("{1}", dmsUserGroupName)
-								: (await strings).dmTyping
+								: strings.dmTyping
 										.split("{0}")[0]
 										.replace("{1}", dmsUserGroupName)
 							: groupDm
-							? (await strings).dmGroupReading
-									.split("{0}")[0]
-									.replace("{1}", dmsUserGroupName)
-							: (await strings).dmReading
+							? document.querySelector("head > title")?.textContent ===
+							  "Discord"
+								? ""
+								: strings.dmGroupReading
+										.split("{0}")[0]
+										.replace("{1}", dmsUserGroupName)
+							: document.querySelector("head > title")?.textContent ===
+							  "Discord"
+							? ""
+							: strings.dmReading
 									.split("{0}")[0]
 									.replace("{1}", dmsUserGroupName),
 						state: dmsTyping
 							? groupDm
-								? (await strings).dmGroupTyping
+								? strings.dmGroupTyping
 										.split("{0}")[1]
 										?.replace("{1}", dmsUserGroupName)
-								: (await strings).dmTyping
+								: strings.dmTyping
 										.split("{0}")[1]
 										?.replace("{1}", dmsUserGroupName)
 							: groupDm
-							? (await strings).dmGroupReading
-									.split("{0}")[1]
-									?.replace("{1}", dmsUserGroupName)
-							: (await strings).dmReading
+							? document.querySelector("head > title")?.textContent ===
+							  "Discord"
+								? ""
+								: strings.dmGroupReading
+										.split("{0}")[1]
+										?.replace("{1}", dmsUserGroupName)
+							: document.querySelector("head > title")?.textContent ===
+							  "Discord"
+							? ""
+							: strings.dmReading
 									.split("{0}")[1]
 									?.replace("{1}", dmsUserGroupName),
 						smallImageKey: dmsTyping ? "writing" : "reading",
-						smallImageText: dmsTyping
-							? (await strings).writing
-							: (await strings).reading,
+						smallImageText: dmsTyping ? strings.writing : strings.reading,
 					},
 					"/invite/(\\w*\\d*)/": {
 						details: showInvites
-							? (await strings).invite
+							? strings.invite
 									.split("{0}")[0]
 									.replace("{1}", document.URL.split("/")[4])
 									.replace("{2}", document.title)
-							: (await strings).inviteServer
+							: strings.inviteServer
 									.split("{0}")[0]
 									.replace("{1}", document.title),
 						state: showInvites
-							? (await strings).invite
+							? strings.invite
 									.split("{0}")[1]
 									?.replace("{1}", document.URL.split("/")[4])
 									.replace("{2}", document.title)
-							: (await strings).inviteServer
+							: strings.inviteServer
 									.split("{0}")[1]
 									?.replace("{1}", document.title),
 						smallImageKey: "reading",
@@ -253,109 +259,109 @@ presence.on("UpdateData", async () => {
 						buttons: showInvites
 							? [
 									{
-										label: (await strings).buttonInvite,
+										label: strings.buttonInvite,
 										url: document.URL,
 									},
 							  ]
 							: [],
 					},
 					"/store/": {
-						details: (await strings).nitro,
+						details: strings.nitro,
 					},
 					"/nitro/": {
-						details: (await strings).nitro,
+						details: strings.nitro,
 					},
 					"/download/": {
-						details: (await strings).browseThrough,
-						state: (await strings).download,
+						details: strings.browseThrough,
+						state: strings.download,
 					},
 					"/why-discord-is-different/": {
-						details: (await strings).browseThrough,
-						state: (await strings).why,
+						details: strings.browseThrough,
+						state: strings.why,
 					},
 					"/safety/": {
-						details: (await strings).browseThrough,
-						state: (await strings).safety,
+						details: strings.browseThrough,
+						state: strings.safety,
 					},
 					"/jobs/": {
-						details: (await strings).browseThrough,
-						state: (await strings).jobs,
+						details: strings.browseThrough,
+						state: strings.jobs,
 					},
 					"/company/": {
-						details: (await strings).browseThrough,
-						state: (await strings).company,
+						details: strings.browseThrough,
+						state: strings.company,
 					},
 					"/branding/": {
-						details: (await strings).browseThrough,
-						state: (await strings).branding,
+						details: strings.browseThrough,
+						state: strings.branding,
 					},
 					"/inspiration/": {
-						details: (await strings).browseThrough,
-						state: (await strings).inspiration,
+						details: strings.browseThrough,
+						state: strings.inspiration,
 					},
 					"/college/": {
-						details: (await strings).browseThrough,
-						state: (await strings).college,
+						details: strings.browseThrough,
+						state: strings.college,
 					},
 					"/newsroom/": {
-						details: (await strings).browseThrough,
-						state: (await strings).newsroom,
+						details: strings.browseThrough,
+						state: strings.newsroom,
 					},
 					"/partners/": {
-						details: (await strings).browseThrough,
-						state: (await strings).partner,
+						details: strings.browseThrough,
+						state: strings.partner,
 					},
 					"/verification/": {
-						details: (await strings).browseThrough,
-						state: (await strings).verification,
+						details: strings.browseThrough,
+						state: strings.verification,
 					},
 					"/streamkit/": {
-						details: (await strings).browseThrough,
-						state: (await strings).streamkit,
+						details: strings.browseThrough,
+						state: strings.streamkit,
 					},
 					"/open-source/": {
-						details: (await strings).browseThrough,
-						state: (await strings).opensource,
+						details: strings.browseThrough,
+						state: strings.opensource,
 					},
 					"/security/": {
-						details: (await strings).browseThrough,
-						state: (await strings).security,
+						details: strings.browseThrough,
+						state: strings.security,
 					},
 					"/moderation/": {
-						details: (await strings).browseThrough,
-						state: (await strings).moderation,
+						details: strings.browseThrough,
+						state: strings.moderation,
 					},
 					"/rich-presence/": {
-						details: (await strings).browseThrough,
-						state: (await strings).rpc,
+						details: strings.browseThrough,
+						state: strings.rpc,
 					},
 					"/terms/": {
-						details: (await strings).browseThrough,
-						state: (await strings).policies,
+						details: strings.browseThrough,
+						state: strings.policies,
 					},
 					"/privacy/": {
-						details: (await strings).browseThrough,
-						state: (await strings).policies,
+						details: strings.browseThrough,
+						state: strings.policies,
 					},
 					"/guidelines/": {
-						details: (await strings).browseThrough,
-						state: (await strings).policies,
+						details: strings.browseThrough,
+						state: strings.policies,
 					},
 					"/acknowledgements/": {
-						details: (await strings).browseThrough,
-						state: (await strings).policies,
+						details: strings.browseThrough,
+						state: strings.policies,
 					},
 					"/licenses/": {
-						details: (await strings).browseThrough,
-						state: (await strings).policies,
+						details: strings.browseThrough,
+						state: strings.policies,
 					},
 					"/developers/applications/": {
-						details: (await strings).portal,
-						state: (await strings).appsBrowse,
+						details: strings.portal,
+						state: strings.appsBrowse,
 					},
 					"/developers/applications/(\\d*)/": {
-						details: (await strings).portal,
-						state: (await strings).appsEdit.replace(
+						details: strings.portal,
+						state: strings.appsEdit.replace(
 							"{0}",
 							Array.from(document.querySelectorAll("div")).find(c =>
 								c.className?.includes("appDetails")
@@ -364,24 +370,24 @@ presence.on("UpdateData", async () => {
 						smallImageKey: "writing",
 					},
 					"/developers/teams/": {
-						details: (await strings).portal,
-						state: (await strings).teamsBrowse,
+						details: strings.portal,
+						state: strings.teamsBrowse,
 					},
 					"/developers/teams/(\\d*)/": {
-						details: (await strings).portal,
-						state: (await strings).teamsEdit.replace(
+						details: strings.portal,
+						state: strings.teamsEdit.replace(
 							"{0}",
 							document.querySelector("div.Select-value")?.textContent
 						),
 						smallImageKey: "writing",
 					},
 					"/developers/servers/": {
-						details: (await strings).portal,
-						state: (await strings).serversBrowse,
+						details: strings.portal,
+						state: strings.serversBrowse,
 					},
 					"/developers/servers/(\\d*)/": {
-						details: (await strings).portal,
-						state: (await strings).serversEdit.replace(
+						details: strings.portal,
+						state: strings.serversEdit.replace(
 							"{0}",
 							Array.from(document.querySelectorAll("div")).find(c =>
 								c.className.includes("itemName")
@@ -390,10 +396,10 @@ presence.on("UpdateData", async () => {
 						smallImageKey: "reading",
 					},
 					"/developers/docs/": {
-						details: (await strings).portal,
-						state: (await strings).docs,
+						details: strings.portal,
+						state: strings.docs,
 						smallImageKey: "reading",
-						smallImageText: (await strings).reading,
+						smallImageText: strings.reading,
 					},
 				};
 
@@ -404,9 +410,9 @@ presence.on("UpdateData", async () => {
 				)
 			) {
 				if (privacy) {
-					presenceData.details = (await strings).inCall;
+					presenceData.details = strings.inCall;
 					presenceData.smallImageKey = "call";
-					presenceData.smallImageText = (await strings).calling;
+					presenceData.smallImageText = strings.calling;
 				} else {
 					const connectedTo = Array.from(
 							Array.from(document.querySelectorAll("div"))
@@ -426,10 +432,10 @@ presence.on("UpdateData", async () => {
 					}
 
 					presenceData.details = connectedToDm
-						? (await strings).voiceConnectedWith
+						? strings.voiceConnectedWith
 								.split("{0}")[0]
 								.replace("{1}", connectedTo.textContent)
-						: (await strings).voiceConnectedTo
+						: strings.voiceConnectedTo
 								.split("{0}")[0]
 								.replace(
 									"{1}",
@@ -440,10 +446,10 @@ presence.on("UpdateData", async () => {
 								)
 								.replace("{2}", connectedTo.textContent.split(" / ").pop());
 					presenceData.state = connectedToDm
-						? (await strings).voiceConnectedWith
+						? strings.voiceConnectedWith
 								.split("{0}")[1]
 								?.replace("{1}", connectedTo.textContent)
-						: (await strings).voiceConnectedTo
+						: strings.voiceConnectedTo
 								.split("{0}")[1]
 								?.replace(
 									"{1}",
@@ -454,14 +460,14 @@ presence.on("UpdateData", async () => {
 								)
 								.replace("{2}", connectedTo.textContent.split(" / ").pop());
 					presenceData.smallImageKey = "call";
-					presenceData.smallImageText = (await strings).calling;
+					presenceData.smallImageText = strings.calling;
 				}
 				//* Normal browsing status
 			} else if (showBrowsing) {
 				if (privacy) {
-					presenceData.details = (await strings).browse;
+					presenceData.details = strings.browse;
 					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = (await strings).browse;
+					presenceData.smallImageText = strings.browse;
 				} else if (
 					Array.from(document.querySelectorAll("div[aria-controls]")).find(c =>
 						Object.values(c.attributes).find(
@@ -469,9 +475,9 @@ presence.on("UpdateData", async () => {
 						)
 					)
 				) {
-					presenceData.details = (await strings).settings;
+					presenceData.details = strings.settings;
 					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = (await strings).browse;
+					presenceData.smallImageText = strings.browse;
 				} else if (
 					Array.from(document.querySelectorAll("div[aria-controls]")).find(c =>
 						Object.values(c.attributes).find(
@@ -483,14 +489,14 @@ presence.on("UpdateData", async () => {
 						Array.from(document.querySelectorAll("h1")).find(c =>
 							c.className?.includes("name")
 						)?.textContent || "Undefined";
-					presenceData.details = (await strings).serverSettings
+					presenceData.details = strings.serverSettings
 						.split("{0}")[0]
 						.replace("{1}", server);
-					presenceData.state = (await strings).serverSettings
+					presenceData.state = strings.serverSettings
 						.split("{0}")[1]
 						?.replace("{1}", server);
 					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = (await strings).browse;
+					presenceData.smallImageText = strings.browse;
 				} else {
 					for (const [k, v] of Object.entries(statics)) {
 						if (
@@ -504,7 +510,7 @@ presence.on("UpdateData", async () => {
 							presenceData = { ...presenceData, ...v };
 							if (!presenceData.smallImageKey) {
 								presenceData.smallImageKey = "reading";
-								presenceData.smallImageText = (await strings).browse;
+								presenceData.smallImageText = strings.browse;
 							}
 						}
 					}
@@ -518,28 +524,28 @@ presence.on("UpdateData", async () => {
 				[name: string]: PresenceData;
 			} = {
 				"/": {
-					details: (await strings).status,
-					state: (await strings).browse,
+					details: strings.status,
+					state: strings.browse,
 				},
 				"/uptime/": {
-					details: (await strings).status,
-					state: `${(await strings).viewing} ${(await strings).uptime}`,
+					details: strings.status,
+					state: `${strings.viewing} ${strings.uptime}`,
 				},
 				"/history/": {
-					details: (await strings).status,
-					state: `${(await strings).viewing} ${(await strings).incident}`,
+					details: strings.status,
+					state: `${strings.viewing} ${strings.incident}`,
 				},
 				"/incidents/": {
-					details: (await strings).status,
-					state: (await strings).incidentView,
+					details: strings.status,
+					state: strings.viewAnIncident,
 				},
 			};
 			if (showBrowsing) {
 				if (privacy) {
-					presenceData.details = (await strings).status;
-					presenceData.state = (await strings).browse;
+					presenceData.details = strings.status;
+					presenceData.state = strings.browse;
 					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = (await strings).browse;
+					presenceData.smallImageText = strings.browse;
 				} else {
 					for (const [k, v] of Object.entries(statics)) {
 						if (
@@ -553,7 +559,7 @@ presence.on("UpdateData", async () => {
 							presenceData = { ...presenceData, ...v };
 							if (!presenceData.smallImageKey) {
 								presenceData.smallImageKey = "reading";
-								presenceData.smallImageText = (await strings).browse;
+								presenceData.smallImageText = strings.browse;
 							}
 						}
 					}
@@ -567,38 +573,38 @@ presence.on("UpdateData", async () => {
 				[name: string]: PresenceData;
 			} = {
 				"/": {
-					details: (await strings).helpCenter,
-					state: (await strings).browse,
+					details: strings.helpCenter,
+					state: strings.browse,
 				},
 				"/categories/": {
-					details: (await strings).helpCenter,
-					state: `${(await strings).viewCategory} ${
+					details: strings.helpCenter,
+					state: `${strings.viewCategory} ${
 						document.querySelector("h1")?.textContent
 					}`,
 				},
 				"/search/": {
-					details: (await strings).helpCenter,
-					state: `${(await strings).searchFor} ${
+					details: strings.helpCenter,
+					state: `${strings.searchFor} ${
 						(document.querySelector("#query") as HTMLInputElement)?.value
 					}`,
 					smallImageKey: "search",
-					smallImageText: (await strings).searching,
+					smallImageText: strings.searching,
 				},
 				"/articles/": {
-					details: (await strings).helpCenter,
-					state: `${(await strings).readingArticle} ${document
+					details: strings.helpCenter,
+					state: `${strings.readingArticle} ${document
 						.querySelector("h1")
 						?.textContent.trim()}`,
 					smallImageKey: "reading",
-					smallImageText: (await strings).reading,
+					smallImageText: strings.reading,
 				},
 			};
 			if (showBrowsing) {
 				if (privacy) {
-					presenceData.details = (await strings).helpCenter;
-					presenceData.state = (await strings).browse;
+					presenceData.details = strings.helpCenter;
+					presenceData.state = strings.browse;
 					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = (await strings).browse;
+					presenceData.smallImageText = strings.browse;
 				} else {
 					for (const [k, v] of Object.entries(statics)) {
 						if (
@@ -612,7 +618,7 @@ presence.on("UpdateData", async () => {
 							presenceData = { ...presenceData, ...v };
 							if (!presenceData.smallImageKey) {
 								presenceData.smallImageKey = "reading";
-								presenceData.smallImageText = (await strings).browse;
+								presenceData.smallImageText = strings.browse;
 							}
 						}
 					}
@@ -626,41 +632,41 @@ presence.on("UpdateData", async () => {
 				[name: string]: PresenceData;
 			} = {
 				"/": {
-					details: (await strings).blog,
+					details: strings.blog,
 					state:
 						document.querySelector("h1")?.textContent !== "Discord Blog"
-							? `${(await strings).readingArticle} ${
+							? `${strings.readingArticle} ${
 									document.querySelector("h1").textContent
 							  }`
-							: (await strings).browse,
+							: strings.browse,
 				},
 				"/product-posts/": {
-					details: (await strings).blog,
-					state: `${(await strings).viewCategory} Product posts`,
+					details: strings.blog,
+					state: `${strings.viewCategory} Product posts`,
 				},
 				"/company-posts/": {
-					details: (await strings).blog,
-					state: `${(await strings).viewCategory} Company posts`,
+					details: strings.blog,
+					state: `${strings.viewCategory} Company posts`,
 				},
 				"/education-posts/": {
-					details: (await strings).blog,
-					state: `${(await strings).viewCategory} Education posts`,
+					details: strings.blog,
+					state: `${strings.viewCategory} Education posts`,
 				},
 				"/community-posts/": {
-					details: (await strings).blog,
-					state: `${(await strings).viewCategory} Community posts`,
+					details: strings.blog,
+					state: `${strings.viewCategory} Community posts`,
 				},
 				"/engineering-posts/": {
-					details: (await strings).blog,
-					state: `${(await strings).viewCategory} Engineering posts`,
+					details: strings.blog,
+					state: `${strings.viewCategory} Engineering posts`,
 				},
 			};
 			if (showBrowsing) {
 				if (privacy) {
-					presenceData.details = (await strings).blog;
-					presenceData.state = (await strings).browse;
+					presenceData.details = strings.blog;
+					presenceData.state = strings.browse;
 					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = (await strings).browse;
+					presenceData.smallImageText = strings.browse;
 				} else {
 					for (const [k, v] of Object.entries(statics)) {
 						if (
@@ -674,7 +680,7 @@ presence.on("UpdateData", async () => {
 							presenceData = { ...presenceData, ...v };
 							if (!presenceData.smallImageKey) {
 								presenceData.smallImageKey = "reading";
-								presenceData.smallImageText = (await strings).browse;
+								presenceData.smallImageText = strings.browse;
 							}
 						}
 					}
@@ -688,46 +694,46 @@ presence.on("UpdateData", async () => {
 				[name: string]: PresenceData;
 			} = {
 				"/": {
-					details: (await strings).merch,
-					state: (await strings).browse,
+					details: strings.merch,
+					state: strings.browse,
 				},
 				"/products/": {
-					details: (await strings).merch,
-					state: `${(await strings).product} ${
+					details: strings.merch,
+					state: `${strings.product} ${
 						document.querySelector("h1")?.textContent
 					}`,
 				},
 				"/collections/": {
-					details: (await strings).merch,
-					state: `${(await strings).collection} ${
+					details: strings.merch,
+					state: `${strings.collection} ${
 						document.querySelector("h1")?.textContent
 					}`,
 				},
 				"/pages/": {
-					details: (await strings).merch,
-					state: `${(await strings).viewPage} ${
+					details: strings.merch,
+					state: `${strings.viewPage} ${
 						document.querySelector("h1")?.textContent
 					}`,
 				},
 				"/cart/": {
-					details: (await strings).merch,
-					state: `${(await strings).viewing} ${(await strings).shopCart}`,
+					details: strings.merch,
+					state: `${strings.viewing} ${strings.shopCart}`,
 				},
 				"/search/": {
-					details: (await strings).merch,
-					state: `${(await strings).searchFor} ${
+					details: strings.merch,
+					state: `${strings.searchFor} ${
 						(document.querySelector("input") as HTMLInputElement)?.value
 					}`,
 					smallImageKey: "search",
-					smallImageText: (await strings).searching,
+					smallImageText: strings.searching,
 				},
 			};
 			if (showBrowsing) {
 				if (privacy) {
-					presenceData.details = (await strings).status;
-					presenceData.state = (await strings).browse;
+					presenceData.details = strings.status;
+					presenceData.state = strings.browse;
 					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = (await strings).browse;
+					presenceData.smallImageText = strings.browse;
 				} else {
 					for (const [k, v] of Object.entries(statics)) {
 						if (
@@ -741,7 +747,7 @@ presence.on("UpdateData", async () => {
 							presenceData = { ...presenceData, ...v };
 							if (!presenceData.smallImageKey) {
 								presenceData.smallImageKey = "reading";
-								presenceData.smallImageText = (await strings).browse;
+								presenceData.smallImageText = strings.browse;
 							}
 						}
 					}

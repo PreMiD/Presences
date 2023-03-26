@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "NMW03",
+		"id": "534099893979971584"
+	},
+	"contributors": [
+		{
+			"name": "a＠a",
+			"id": "405028899798384640"
+		}
+	],
+	"service": "ProBot",
+	"description": {
+		"en": "Welcome images, moderation, leveling, reaction roles, logs, high quality music and many many more!",
+		"nl": "Welkomstafbeeldingen, moderatie, niveaus, reactie rollen, logboeken, muziek van hoge kwaliteit en nog veel meer!"
+	},
+	"url": "probot.io",
+	"version": "2.0.2",
+	"logo": "https://i.imgur.com/Oq9jXbz.png",
+	"thumbnail": "https://i.imgur.com/NMMkmv0.png",
+	"color": "#450F40",
+	"category": "other",
+	"tags": [
+		"bot",
+		"discord"
+	]
+}

@@ -6,7 +6,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 	path = document.location.pathname;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/t370zFk.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (path === "/") presenceData.details = "Viewing Home";

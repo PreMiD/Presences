@@ -26,7 +26,6 @@ const presence = new Presence({
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
-
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
@@ -38,22 +37,23 @@ presence.on("iFrameData", (data: Data) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "dramacool_logo_b",
+			largeImageKey: "https://i.imgur.com/Bn5qNZO.png",
 			details: "Browsing",
 			smallImageText: "Browsing",
 			smallImageKey: "reading",
 			startTimestamp: startsTime,
 		},
-		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
-		{ pathname, search } = document.location;
+		[covers, buttons, newLang] = await Promise.all([
+			presence.getSetting<boolean>("covers"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<string>("lang").catch(() => "en"),
+		]),
+		{ pathname, search, href } = document.location;
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
-
-	if (pathname.includes("running-man")) presenceData.largeImageKey = "rm";
 
 	if (pathname.includes("/drama-detail")) {
 		presenceData.smallImageText = strings.reading;
@@ -74,8 +74,13 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = strings.searching;
 	} else if (pathname.match("/([a-z0-9-]+)-episode-([0-9]+)")) {
-		ShowData.title = document.querySelector("div.category a").textContent;
-
+		ShowData.title =
+			document.querySelector("div.category a")?.textContent ??
+			JSON.parse(
+				document
+					.querySelector('[class="yoast-schema-graph"]')
+					.innerHTML.replace(/@/gm, "")
+			).graph[3].itemListElement[1].name.replace(/Episode [0-9]*/gm, "");
 		if (ShowData.duration) {
 			ShowData.ep = (document.title.match(
 				/Episode ?([1-9][0-9]?[0-9]?)?( & )?([1-9][0-9]?[0-9]?)/g
@@ -98,13 +103,21 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.viewEpisode,
-					url: document.URL,
+					url: href,
 				},
 				{
 					label: strings.viewSeriesButton,
-					url: document.querySelector<HTMLAnchorElement>("div.category a").href,
+					url: document
+						.querySelector('[class="Category"]')
+						.firstElementChild.firstElementChild.getAttribute("href"),
 				},
 			];
+
+			if (covers) {
+				presenceData.largeImageKey =
+					document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+						?.content ?? "dramacool_logo_b";
+			}
 
 			if (ShowData.paused) {
 				delete presenceData.startTimestamp;
@@ -135,7 +148,7 @@ presence.on("UpdateData", async () => {
 		];
 	}
 
-	if (!showButtons && presenceData.buttons) delete presenceData.buttons;
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
 });

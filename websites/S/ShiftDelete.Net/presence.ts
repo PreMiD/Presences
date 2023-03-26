@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 			time.textContent !== ""
 		) {
 			presence.setActivity({
-				largeImageKey: "sd-logo",
+				largeImageKey: "https://i.imgur.com/xqgfIoI.png",
 				details: title.textContent || "Belirsiz",
 				state: `Yazar: ${author.textContent.replace(
 					"yazar",
@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
 			const title = document.title.split(" ");
 
 			presence.setActivity({
-				largeImageKey: "sd-logo",
+				largeImageKey: "https://i.imgur.com/xqgfIoI.png",
 				details: "Bir yazara bakıyor:",
 				state:
 					title.slice(0, title.indexOf("Yazıları")).join(" ") ?? "Belirsiz",
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 			);
 
 			presence.setActivity({
-				largeImageKey: "sd-logo",
+				largeImageKey: "https://i.imgur.com/xqgfIoI.png",
 				details: "Bir şey arıyor:",
 				state:
 					searchingFor && searchingFor.textContent
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
 			});
 		} else if (pages[page] || pages[page.slice(0, -1)]) {
 			presence.setActivity({
-				largeImageKey: "sd-logo",
+				largeImageKey: "https://i.imgur.com/xqgfIoI.png",
 				details: "Bir sayfaya göz atıyor:",
 				state: pages[page] || pages[page.slice(0, -1)],
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
 
 		if (page.includes("/members/") && user && user.textContent !== "") {
 			presence.setActivity({
-				largeImageKey: "sd-logo",
+				largeImageKey: "https://i.imgur.com/xqgfIoI.png",
 				details: "Bir kullanıcıya bakıyor:",
 				state: user.textContent,
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -139,7 +139,7 @@ presence.on("UpdateData", async () => {
 			) as HTMLInputElement;
 
 			presence.setActivity({
-				largeImageKey: "sd-logo",
+				largeImageKey: "https://i.imgur.com/xqgfIoI.png",
 				details: "Yeni bir forum gönderisi açıyor:",
 				state:
 					newTitle && newTitle.value !== ""
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 			);
 
 			presence.setActivity({
-				largeImageKey: "sd-logo",
+				largeImageKey: "https://i.imgur.com/xqgfIoI.png",
 				details: "Bir foruma göz atıyor:",
 				state:
 					forumTitle && forumTitle.textContent
@@ -171,7 +171,7 @@ presence.on("UpdateData", async () => {
 				);
 
 			presence.setActivity({
-				largeImageKey: "sd-logo",
+				largeImageKey: "https://i.imgur.com/xqgfIoI.png",
 				details:
 					title && title.textContent !== ""
 						? title.textContent
@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
 			);
 
 			presence.setActivity({
-				largeImageKey: "sd-logo",
+				largeImageKey: "https://i.imgur.com/xqgfIoI.png",
 				details: "Forumda bir gönderi arıyor:",
 				state:
 					searchingFor && searchingFor.textContent !== ""
@@ -202,7 +202,7 @@ presence.on("UpdateData", async () => {
 			});
 		} else if (pages[page] || pages[page.slice(0, -1)]) {
 			presence.setActivity({
-				largeImageKey: "sd-logo",
+				largeImageKey: "https://i.imgur.com/xqgfIoI.png",
 				details: "Bir sayfaya göz atıyor:",
 				state: pages[page] || pages[page.slice(0, -1)],
 				smallImageKey: "forum",

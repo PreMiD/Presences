@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Aesthetic",
+		"id": "268914030528299008"
+	},
+	"contributors": [
+		{
+			"name": "Bas950",
+			"id": "241278257335500811"
+		}
+	],
+	"service": "AnimeKisa",
+	"description": {
+		"en": "Unlike many other websites AnimeKisa has a tiny amount of ads. Find streamable servers and watch the anime you love, subbed or dubbed in HD.",
+		"ga_IE": "Murab ionann agus go leor suíomhanna Gréasáin eile tá méid beag fógraí ag AnimeKisa. Faigh freastalaithe in-shruthlaithe agus féach ar an anime is breá leat, subbed nó dubáilte i HD.",
+		"nl": "In tegenstelling tot veel andere websites heeft AnimeKisa een klein aantal advertenties. Vind streambare servers en bekijk de anime waar je van houdt, ondertiteld of nagesynchroniseerd in HD.",
+		"vi_VN": "Không như các trang khác AnimeKisa có lượng quảng cáo rất nhỏ. Tìm máy chủ phát trực tuyến và xem các bộ anime bạn yêu thích, phụ đề hoặc thuyết minh bằng HD."
+	},
+	"url": "animekisa.tv",
+	"version": "1.0.15",
+	"logo": "https://i.imgur.com/ac0KCKY.png",
+	"thumbnail": "https://i.imgur.com/mgcsfhc.png",
+	"color": "#FF0000",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"animekisa"
+	],
+	"iframe": true
+}

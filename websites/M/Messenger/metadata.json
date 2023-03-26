@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Bas950",
+		"id": "241278257335500811"
+	},
+	"contributors": [
+		{
+			"name": "Kyrie",
+			"id": "368399721494216706"
+		}
+	],
+	"service": "Messenger",
+	"description": {
+		"en": "Instantly reach the people in your life—for free. Messenger is just like texting, but you don't have to pay for every message (it works with your data plan).",
+		"nl": "Bereik onmiddellijk de mensen in uw leven - gratis. Messenger is net als sms'en, maar je hoeft niet voor elk bericht te betalen (het werkt met je data-abonnement).",
+		"vi_VN": "Liên lạc với các người thân của bạn ngay lập tức—miễn phí. Messenger cũng giống như nhắn tin, nhưng bạn không phải trả phí cho từng tin nhắn (mà qua gói dữ liệu bạn có)."
+	},
+	"url": "www.messenger.com",
+	"version": "1.2.7",
+	"logo": "https://i.imgur.com/Ij0u52Z.png",
+	"thumbnail": "https://i.imgur.com/sISR62A.jpg",
+	"color": "#00a3ff",
+	"category": "socials",
+	"tags": [
+		"facebook",
+		"messenger"
+	],
+	"settings": [
+		{
+			"id": "message",
+			"title": "Show Message Recipient",
+			"icon": "fas fa-comments",
+			"value": false
+		},
+		{
+			"id": "call",
+			"title": "Show Call Recipient",
+			"icon": "fas fa-phone-alt",
+			"value": false
+		}
+	]
+}

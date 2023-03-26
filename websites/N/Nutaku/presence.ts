@@ -176,12 +176,12 @@ const IMAGES = {
 	BROWSE: "browsex1024",
 };
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang");
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (newLang !== currentLang) {
 		currentLang = newLang;
 		localizedStrings = await presence.getStrings(
 			{
-				browsing: "presence.activity.browsing",
+				browsing: "general.browsing",
 				playing: "general.playing",
 				readingArticle: "general.readingArticle",
 				readingArticleButton: "general.buttonReadArticle",

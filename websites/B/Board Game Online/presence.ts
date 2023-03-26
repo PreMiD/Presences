@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "684570342085099546",
 	}),
 	strings = presence.getStrings({
-		browse: "presence.activity.browsing",
+		browse: "general.browsing",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);
@@ -104,7 +104,7 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "boardgameonline",
+			largeImageKey: "https://i.imgur.com/L6BgeAa.png",
 		},
 		path = location.pathname,
 		query = location.search,

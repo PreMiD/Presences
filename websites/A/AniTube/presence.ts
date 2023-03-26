@@ -2,7 +2,7 @@ const presence = new Presence({ clientId: "801135853433913394" });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/HgVnakc.png",
 		},
 		tempo = Math.floor(Date.now() / 1000),
 		titulo = document.title;

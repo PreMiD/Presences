@@ -7,7 +7,7 @@ const presence = new Presence({
 				play: "general.playing",
 				pause: "general.paused",
 			},
-			await presence.getSetting<string>("lang")
+			await presence.getSetting<string>("lang").catch(() => "en")
 		),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -16,7 +16,7 @@ let oldLang: string = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "radiooooo_logo",
+			largeImageKey: "https://i.imgur.com/EktlHNP.png",
 			details: "Idling",
 			startTimestamp: browsingTimestamp,
 		},
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			[songDetails, songState, newLang] = await Promise.all([
 				presence.getSetting<string>("song1"),
 				presence.getSetting<string>("song2"),
-				presence.getSetting<string>("lang"),
+				presence.getSetting<string>("lang").catch(() => "en"),
 			]);
 
 		if (oldLang !== newLang || !strings) {

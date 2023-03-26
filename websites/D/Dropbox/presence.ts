@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "dropbox_logo",
+			largeImageKey: "https://i.imgur.com/oFRDuay.png",
 		},
 		showFileNames = await presence.getSetting<boolean>("showFileNames");
 

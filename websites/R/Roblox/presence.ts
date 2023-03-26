@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Unknown page",
-			largeImageKey: "lg",
+			largeImageKey: "https://i.imgur.com/75dFVYB.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,

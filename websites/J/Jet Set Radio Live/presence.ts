@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "782853565550034954",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	stationIDMap: { [key: string]: string } = {
 		olliolliworld: "OlliOlli World",
@@ -51,7 +51,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "jsrl",
+			largeImageKey: "https://i.imgur.com/ZiIN6t9.png",
 		},
 		audio = document.querySelector<HTMLAudioElement>("#audioPlayer"),
 		songName = document.querySelector(

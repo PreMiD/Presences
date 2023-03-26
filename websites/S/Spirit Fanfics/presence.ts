@@ -3,14 +3,14 @@ const presence = new Presence({
 	}),
 	{ pathname } = window.location,
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
-		searching: "presence.activity.searching",
-		reading: "presence.activity.reading",
+		browsing: "general.browsing",
+		searching: "general.searching",
+		reading: "general.reading",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "spirit_lg",
+			largeImageKey: "https://i.imgur.com/RDZSlTX.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 			details: (await strings).browsing,
 		},

@@ -1,0 +1,60 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "257151906038677504",
+		"name": "SHISEN"
+	},
+	"service": "Zerion",
+	"description": {
+		"en": "Zerion.cc gives you access to online content so you can watch your favorite series and TV shows wherever you have Internet access.",
+		"pl": "Zerion.cc zapewnia dostęp do treści online, dzięki czemu możesz oglądać swoje ulubione seriale i programy telewizyjne, gdziekolwiek masz dostęp do Internetu."
+	},
+	"url": "zerion.cc",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/MpeS5tp.png",
+	"thumbnail": "https://i.imgur.com/OGI2WEB.png",
+	"color": "#aa1717",
+	"category": "videos",
+	"tags": [
+		"zerion",
+		"video",
+		"serials"
+	],
+	"iframe": true,
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "logo",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show covers",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

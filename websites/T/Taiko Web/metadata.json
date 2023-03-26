@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "वाह्य",
+		"id": "819696394180100106"
+	},
+	"service": "Taiko Web",
+	"description": {
+		"en": "A web-based Taiko no Tatsujin simulator."
+	},
+	"url": "taiko.bui.pm",
+	"version": "1.0.11",
+	"logo": "https://i.imgur.com/YOBgufd.png",
+	"thumbnail": "https://i.imgur.com/P1f5v3g.png",
+	"color": "#f40101",
+	"category": "games",
+	"tags": [
+		"taiko-no-tatsujin-simulator",
+		"browser-game",
+		"online-multiplayer",
+		"web-based"
+	]
+}

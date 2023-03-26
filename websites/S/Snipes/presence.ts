@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async function () {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/9HmTAOR.png",
 		},
 		setTimeElapsed = await presence.getSetting<boolean>("timeElapsed"),
 		setShowButtons = await presence.getSetting<boolean>("showButtons"),
@@ -43,29 +43,45 @@ presence.on("UpdateData", async function () {
 			];
 		}
 
-		if (urlpath[num] === "new") presenceData.details = "New";
-		else if (urlpath[num] === "shoes") presenceData.details = "Shoes";
-		else if (urlpath[num] === "clothing") presenceData.details = "Clothing";
-		else if (urlpath[num] === "accessories")
-			presenceData.details = "Accessoires";
-		else if (urlpath[urlpNum + 2] === "brands") {
-			presenceData.details = "Brands";
-			if (urlpath[urlpNum + 3]) {
-				presenceData.state = document.querySelector(
-					"li.b-breadcrumb-item>span.b-breadcrumb-text"
-				).textContent;
+		switch (urlpath[num]) {
+			case "new": {
+				presenceData.details = "New";
+				break;
 			}
-		} else if (urlpath[urlpNum + 2] === "sale") presenceData.details = "Sale";
-		else if (urlpath[urlpNum + 2] === "deals") presenceData.details = "Deals";
-		else if (urlpath[urlpNum + 2] === "musthaves")
-			presenceData.details = "Must haves";
-		else if (
-			document.querySelector("li.b-breadcrumb-item>span.b-breadcrumb-text")
-		) {
-			presenceData.details = "Category:";
-			presenceData.state = document.querySelector(
-				"li.b-breadcrumb-item>span.b-breadcrumb-text"
-			).textContent;
+			case "shoes": {
+				presenceData.details = "Shoes";
+				break;
+			}
+			case "clothing": {
+				presenceData.details = "Clothing";
+				break;
+			}
+			case "accessories": {
+				presenceData.details = "Accessoires";
+				break;
+			}
+			default:
+				if (urlpath[urlpNum + 2] === "brands") {
+					presenceData.details = "Brands";
+					if (urlpath[urlpNum + 3]) {
+						presenceData.state = document.querySelector(
+							"li.b-breadcrumb-item>span.b-breadcrumb-text"
+						).textContent;
+					}
+				} else if (urlpath[urlpNum + 2] === "sale")
+					presenceData.details = "Sale";
+				else if (urlpath[urlpNum + 2] === "deals")
+					presenceData.details = "Deals";
+				else if (urlpath[urlpNum + 2] === "musthaves")
+					presenceData.details = "Must haves";
+				else if (
+					document.querySelector("li.b-breadcrumb-item>span.b-breadcrumb-text")
+				) {
+					presenceData.details = "Category:";
+					presenceData.state = document.querySelector(
+						"li.b-breadcrumb-item>span.b-breadcrumb-text"
+					).textContent;
+				}
 		}
 	} else if (urlpath[urlpNum + 1] === "p") {
 		const brand = document.querySelector("div.js-target>a").textContent;

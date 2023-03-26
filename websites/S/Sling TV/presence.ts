@@ -2,10 +2,10 @@ const presence = new Presence({
 		clientId: "764916517895798796",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
-		search: "presence.activity.searching",
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
+		search: "general.searching",
 	});
 
 /**
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			details,
 			state,
-			largeImageKey: "slingtv",
+			largeImageKey: "https://i.imgur.com/iTHexWR.png",
 			smallImageKey,
 			smallImageText,
 			startTimestamp,

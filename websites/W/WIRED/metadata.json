@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "eaz",
+		"id": "234339792773578762"
+	},
+	"service": "WIRED",
+	"description": {
+		"en": "An American science and technology magazine and website.",
+		"ga_IE": "Iris agus suíomh Gréasáin eolaíochta agus teicneolaíochta Mheiriceá.",
+		"nl": "Een Amerikaans tijdschrift over wetenschap en technologie en een website."
+	},
+	"url": "www.wired.com",
+	"version": "1.2.16",
+	"logo": "https://i.imgur.com/gRExMjS.png",
+	"thumbnail": "https://i.imgur.com/YWSISdY.png",
+	"color": "#ffffff",
+	"category": "other",
+	"tags": [
+		"news",
+		"articles"
+	]
+}

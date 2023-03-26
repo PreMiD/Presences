@@ -6,7 +6,7 @@ let currentURL = new URL(document.location.href),
 	currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
-		largeImageKey: "lg",
+		largeImageKey: "https://i.imgur.com/KPcs9y1.png",
 		startTimestamp: browsingTimestamp,
 	};
 const updateCallback = {
@@ -27,7 +27,7 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "lg",
+			largeImageKey: "https://i.imgur.com/KPcs9y1.png",
 			startTimestamp: browsingTimestamp,
 		}
 	): void => {

@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "608109837657702566",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 function stripText(element: HTMLElement, id = "None", log = true) {
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 	// Define presence data
 	const presenceData: PresenceData = {
 		details: "Browsing...",
-		largeImageKey: "pandora",
+		largeImageKey: "https://i.imgur.com/Tt7iIYq.png",
 	};
 
 	// Define whether or not we're currently playing

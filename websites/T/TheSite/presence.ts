@@ -2,10 +2,10 @@ const presence = new Presence({
 		clientId: "702668334990098523",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browse: "presence.activity.browsing",
-		search: "presence.activity.searching",
+		play: "general.playing",
+		pause: "general.paused",
+		browse: "general.browsing",
+		search: "general.searching",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);
@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
 			]
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "thesite",
+			largeImageKey: "https://i.imgur.com/XpFN1EZ.png",
 		};
 
 	if (oldUrl !== path) {

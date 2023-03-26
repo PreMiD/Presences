@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bigdefault",
+		largeImageKey: "https://i.imgur.com/Brh0MPv.png",
 	};
 
 	if (document.location.hostname === "spinsha.re") {
