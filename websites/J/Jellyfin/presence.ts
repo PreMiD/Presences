@@ -565,6 +565,9 @@ async function handleItemDetails(): Promise<void> {
 			default:
 				presenceData.state = "No further information available";
 		}
+
+		if (await presence.getSetting("showThumbnails"))
+			presenceData.largeImageKey = await mediaPrimaryImage(data);
 	}
 }
 
