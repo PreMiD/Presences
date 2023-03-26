@@ -178,6 +178,8 @@ interface Chapter {
 interface MediaInfo {
 	AlbumArtist: string;
 	AlbumArtists: { Name: string; Id: string }[];
+	AlbumId: string;
+	AlbumPrimaryImageTag: string;
 	ArtistsItems: { Name: string; Id: string }[];
 	Artists: string[];
 	Name: string;
@@ -212,7 +214,16 @@ interface MediaInfo {
 	IsHD: boolean;
 	IsFolder: boolean;
 	ParentId: string;
-	Type: string;
+	Type:
+		| "Audio"
+		| "MusicAlbum"
+		| "MusicArtist"
+		| "Movie"
+		| "Series"
+		| "Season"
+		| "Episode"
+		| "TvChannel"
+		| "Person";
 	People: Person[];
 	// Studios: Array;
 	// GenreItems: Array;
