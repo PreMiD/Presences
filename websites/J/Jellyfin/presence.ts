@@ -567,7 +567,7 @@ async function handleItemDetails(): Promise<void> {
 		}
 
 		if (await presence.getSetting("showThumbnails"))
-			presenceData.largeImageKey = await mediaPrimaryImage(data);
+			presenceData.largeImageKey = mediaPrimaryImage(data);
 	}
 }
 
