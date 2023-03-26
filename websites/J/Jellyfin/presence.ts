@@ -312,7 +312,20 @@ function jellyfinBasenameUrl(): string {
 /**
  * Obtain the url of the primary image of a media given its id
  */
-function mediaPrimaryImage(mediaId: string): string {
+function mediaPrimaryImage(mediaInfo: MediaInfo): string {
+	let mediaId: string;
+
+	switch (mediaInfo.Type) {
+		case "Episode":
+			mediaId = mediaInfo.SeriesId;
+			break;
+		case "Audio":
+			mediaId = mediaInfo.AlbumId;
+			break;
+		default:
+			mediaId = mediaInfo.Id;
+	}
+
 	return `${jellyfinBasenameUrl()}Items/${mediaId}/Images/Primary?fillHeight=256&fillWidth=256`;
 }
 
@@ -578,8 +591,6 @@ async function setPresenceByMediaId(mediaId: string): Promise<void> {
 			subtitle = `${/S[0-9]+:E[0-9]+/.exec(
 				document.querySelector<HTMLHeadingElement>(".pageTitle").textContent
 			)} - ${mediaInfo.Name}`;
-			mediaId = mediaInfo.SeriesId;
-
 			break;
 		case "TvChannel":
 			presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
@@ -591,7 +602,7 @@ async function setPresenceByMediaId(mediaId: string): Promise<void> {
 	}
 
 	if (await presence.getSetting("showThumbnails"))
-		presenceData.largeImageKey = mediaPrimaryImage(mediaId);
+		presenceData.largeImageKey = mediaPrimaryImage(mediaInfo);
 
 	if (mediaInfo.Type !== "TvChannel") {
 		const mediaElement =
