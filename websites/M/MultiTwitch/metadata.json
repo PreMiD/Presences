@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "181381194070491136",
+		"name": "3Tau"
+	},
+	"service": "MultiTwitch",
+	"description": {
+		"en": "Watch and enjoy an unlimited number of your favorite Twitch streams simultaneously."
+	},
+	"url": [
+		"multitwitch.tv",
+		"www.multitwitch.tv"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/LbEs7M6.png",
+	"thumbnail": "https://i.imgur.com/EV30id3.png",
+	"color": "#6441a5",
+	"category": "videos",
+	"tags": [
+		"twitch",
+		"video",
+		"streaming",
+		"entertainment"
+	],
+	"settings": [
+		{
+			"id": "showStreamers",
+			"title": "Show streams",
+			"icon": "fa-duotone fa-screen-users",
+			"value": true
+		},
+		{
+			"id": "showButton",
+			"if": {
+				"showStreamers": true
+			},
+			"title": "Show 'Open' button",
+			"value": false,
+			"icon": "fa-duotone fa-eye"
+		}
+	]
+}
