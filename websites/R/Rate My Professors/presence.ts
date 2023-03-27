@@ -52,6 +52,15 @@ presence.on("UpdateData", async () => {
 				}`;
 				break;
 			}
+			case "submit-correction": {
+				switch (pathList[1]) {
+					case "campus": {
+						presenceData.details = "Submitting a correction for a campus";
+						break;
+					}
+				}
+				break;
+			}
 			default: {
 				presenceData.details = "Browsing";
 			}
