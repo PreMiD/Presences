@@ -31,11 +31,10 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "flag": {
-				switch (pathList[1]) {
-					case "school-rating": {
-						presenceData.details = "Reporting a rating for a school";
-						break;
-					}
+				if (pathList[1] === "school-rating") {
+					presenceData.details = "Reporting a rating for a school";
+				} else {
+					presenceData.details = "Reporting a rating for a professor";
 				}
 				break;
 			}
