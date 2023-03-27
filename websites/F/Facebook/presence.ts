@@ -30,7 +30,7 @@ async function getStrings() {
 			watchingVid: "general.watchingVid",
 			ofUser: "general.ofUser",
 		},
-		await presence.getSetting<string>("lang").catch(() => "en")
+		"en"
 	);
 }
 
@@ -49,8 +49,9 @@ enum Assets {
 	MarketplaceLogo = "https://i.imgur.com/3AbfNnr.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
-	oldLang: string = null,
-	cached: { id: string; element: HTMLVideoElement };
+	cached: { id: string; element: HTMLVideoElement },
+	playingVid: HTMLVideoElement,
+	playingVidClose: HTMLElement;
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
@@ -58,7 +59,6 @@ presence.on("UpdateData", async () => {
 	};
 	const { pathname, href } = document.location,
 		[
-			newLang,
 			privacyMode,
 			showCover,
 			showTimestamp,
@@ -66,7 +66,6 @@ presence.on("UpdateData", async () => {
 			messagerUsername,
 			showButtons,
 		] = await Promise.all([
-			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacyMode"),
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("timestamp"),
@@ -81,10 +80,7 @@ presence.on("UpdateData", async () => {
 
 	let dontShowTmp = false;
 
-	if (oldLang !== newLang || !strings) {
-		oldLang = newLang;
-		strings = await getStrings();
-	}
+	if (!strings) strings = await getStrings();
 
 	switch (true) {
 		case pathname === "/": {
@@ -208,13 +204,42 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname.includes("/watch"): {
 			presenceData.largeImageKey = Assets.WatchLogo;
-			switch (
-				href
-					.replace(/\/[?]ref=.*/gm, "")
-					.replace("web.facebook.com", "www.facebook.com")
-			) {
-				case "https://www.facebook.com/watch": {
-					let playingVid: HTMLVideoElement, playingVidClose: HTMLElement;
+			const hrefReplaced = href
+				.replace(/\/[?]ref=.*/gm, "")
+				.replace("web.facebook.com", "www.facebook.com");
+			switch (true) {
+				case !!hrefReplaced.match(/watch[?]v=[0-9]{15}/gm)?.[0]: {
+					delete presenceData.startTimestamp;
+					playingVid = document.querySelector<HTMLVideoElement>("video");
+					presenceData.details = `Watch - ${strings.watchingVid} ${
+						document.querySelector('[class="xzueoph x1k70j0n"]')?.textContent
+					}`;
+					presenceData.smallImageKey = playingVid.paused
+						? Assets.Pause
+						: Assets.Play;
+					presenceData.state = `Uploaded by ${
+						document
+							.querySelector('[id="watch_feed"]')
+							?.querySelector('[class="x78zum5 xdt5ytf xz62fqu x16ldp7u"]')
+							?.querySelector('[class="xt0psk2"]')?.textContent ?? "Unknown"
+					}`;
+					if (!playingVid.paused) {
+						[, presenceData.endTimestamp] =
+							presence.getTimestampsfromMedia(playingVid);
+					}
+					presenceData.buttons = [
+						{
+							label: strings.buttonWatchVideo,
+							// short link:
+							url: document
+								.querySelector('[class="xh99ass"]')
+								?.parentElement?.querySelector("a")
+								?.getAttribute("href"),
+						},
+					];
+					break;
+				}
+				case hrefReplaced === "https://www.facebook.com/watch": {
 					switch (true) {
 						case !!document
 							.querySelector('[aria-label*="ause"]')
@@ -223,7 +248,7 @@ presence.on("UpdateData", async () => {
 							playingVid = document
 								.querySelector('[aria-label*="ause"]')
 								?.closest('[class="x78zum5 xdt5ytf"]')
-								?.querySelector("video");
+								?.querySelector<HTMLVideoElement>("video");
 							break;
 						}
 						default: {
@@ -240,30 +265,8 @@ presence.on("UpdateData", async () => {
 					}
 
 					switch (true) {
-						case playingVid &&
-							(!cached ||
-								cached.id !== playingVid.getAttribute("src") ||
-								cached.element !== playingVid): {
-							cached = {
-								id: playingVid.getAttribute("src"),
-								element: playingVid,
-							};
-							playingVidClose = playingVid.closest(
-								'div[class="x78zum5 xdt5ytf"]'
-							);
-
-							presenceData.details = `Watch - ${strings.watchingVid}: ${
-								playingVidClose?.querySelector('[class="x14vqqas"]')
-									?.textContent
-							}`;
-							presenceData.smallImageKey = Assets.Play;
-							presenceData.state = `Uploaded by: ${playingVidClose
-								?.querySelector('[class="xh8yej3"]')
-								?.querySelector('a[aria-label*=" "]')
-								?.getAttribute("aria-label")}`;
-							break;
-						}
 						case cached?.element && !!cached?.id: {
+							console.log("yes cache");
 							delete presenceData.startTimestamp;
 							playingVidClose = cached.element.closest(
 								'div[class="x78zum5 xdt5ytf"]'
@@ -272,6 +275,7 @@ presence.on("UpdateData", async () => {
 								playingVidClose?.querySelector('[class="x14vqqas"]')
 									?.textContent
 							}`;
+							console.log(cached.element);
 							presenceData.smallImageKey = cached.element.paused
 								? Assets.Pause
 								: Assets.Play;
@@ -300,6 +304,33 @@ presence.on("UpdateData", async () => {
 							];
 							break;
 						}
+						case !!playingVid.getAttribute("src") &&
+							(!cached ||
+								cached.id !== playingVid.getAttribute("src") ||
+								cached.element !== playingVid): {
+							console.log(playingVid);
+							console.log("no cache");
+							cached = {
+								id: playingVid.getAttribute("src"),
+								element: playingVid,
+							};
+							playingVidClose = playingVid.closest(
+								'div[class="x78zum5 xdt5ytf"]'
+							);
+
+							presenceData.details = `Watch - ${strings.watchingVid}: ${
+								playingVidClose?.querySelector('[class="x14vqqas"]')
+									?.textContent
+							}`;
+							presenceData.smallImageKey = playingVid.paused
+								? Assets.Pause
+								: Assets.Play;
+							presenceData.state = `Uploaded by: ${playingVidClose
+								?.querySelector('[class="xh8yej3"]')
+								?.querySelector('a[aria-label*=" "]')
+								?.getAttribute("aria-label")}`;
+							break;
+						}
 						default: {
 							presenceData.details = `Watch - ${strings.browse}`;
 						}
@@ -307,15 +338,15 @@ presence.on("UpdateData", async () => {
 
 					break;
 				}
-				case "https://www.facebook.com/watch/saved": {
+				case hrefReplaced === "https://www.facebook.com/watch/saved": {
 					presenceData.details = "Watch - Viewing saved videos";
 					break;
 				}
-				case "https://www.facebook.com/watch/shows": {
+				case hrefReplaced === "https://www.facebook.com/watch/shows": {
 					presenceData.details = "Watch - Browsing shows";
 					break;
 				}
-				case "https://www.facebook.com/watch/live": {
+				case hrefReplaced === "https://www.facebook.com/watch/live": {
 					const parseInfo = document.querySelector(
 						'[data-bootloader-hash="UhexK6g"]'
 					)?.nextElementSibling?.nextElementSibling?.nextElementSibling
