@@ -53,15 +53,12 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "search": {
-				switch (pathList[1]) {
-					case "teachers": {
-						presenceData.details = "Searching for a professor";
-						presenceData.state = document
-							.querySelector("h1 > span > b")
-							.textContent.replace(/^\s*"(.*)"\s*$/, "$1");
-						break;
-					}
-				}
+				presenceData.details = `Searching for a ${
+					pathList[1] === "teachers" ? "professor" : "school"
+				}`;
+				presenceData.state = document
+					.querySelector("h1 > span > b")
+					.textContent.replace(/^\s*"(.*)"\s*$/, "$1");
 				break;
 			}
 			case "submit-correction": {
