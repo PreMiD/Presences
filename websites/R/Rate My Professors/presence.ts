@@ -19,14 +19,21 @@ presence.on("UpdateData", async () => {
 	if (hostname === "www.ratemyprofessors.com") {
 		switch (pathList[0]) {
 			case "add": {
-				switch (pathList[1]) {
-					case "school-rating": {
-						presenceData.details = "Rating a school";
-						presenceData.state = document.querySelector<HTMLSpanElement>(
+				if (pathList[1] === "school-rating") {
+					presenceData.details = "Rating a school";
+					presenceData.state = document.querySelector<HTMLSpanElement>(
+						"[class*='HeaderDescription__StyledTitleName'] span"
+					).textContent;
+				} else {
+					presenceData.details = "Rating a professor";
+					presenceData.state = [
+						...document.querySelectorAll(
 							"[class*='HeaderDescription__StyledTitleName'] span"
-						).textContent;
-						break;
-					}
+						),
+					]
+						.map(e => e.textContent)
+						.join(" ")
+						.trim();
 				}
 				break;
 			}
