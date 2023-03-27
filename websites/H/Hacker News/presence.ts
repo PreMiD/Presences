@@ -118,6 +118,22 @@ presence.on("UpdateData", async () => {
 				searchParams.get("comments") ? "threads" : "discussions"
 			}`;
 			presenceData.state = searchParams.get("id");
+			break;
+		}
+		case "/item": {
+			const link = document.querySelector<HTMLAnchorElement>(".titleline a");
+			presenceData.details = "Viewing a discussion";
+			presenceData.state = link.textContent;
+			presenceData.buttons = [{ label: "View Discussion", url: href }];
+			if (document.querySelector<HTMLSpanElement>(".sitebit.comhead")) {
+				presenceData.buttons.push({ label: "Read Article", url: link.href });
+			}
+			break;
+		}
+		case "/from": {
+			presenceData.details = "Browsing discussions from a website";
+			presenceData.state = searchParams.get("site");
+			break;
 		}
 	}
 
