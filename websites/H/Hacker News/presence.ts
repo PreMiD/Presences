@@ -1,7 +1,28 @@
 const presence = new Presence({
 		clientId: "1089948109225861200",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	staticPages: Record<string, PresenceData> = {
+		"/": { details: "Browsing the main feed" },
+		"/news": { details: "Browsing the main feed" },
+		"/newest": { details: "Browsing the newest discussions" },
+		"/newcomments": { details: "Browsing new comments" },
+		"/ask": { details: "Browsing Ask HN discussions" },
+		"/show": { details: "Browsing Show HN discussions" },
+		"/jobs": { details: "Browsing job discussions" },
+		"/pool": { details: "Browsing second-chance discussions" },
+		"/invited": { details: "Browsing reposted links" },
+		"/best": { details: "Browsing best discussions" },
+		"/active": { details: "Browsing active discussions" },
+		"/bestcomments": { details: "Browsing best comments" },
+		"/asknew": { details: "Browsing new Ask HN discussions" },
+		"/shownew": { details: "Browsing new Show HN discussions" },
+		"/noobstories": { details: "Browsing submissions by new users" },
+		"/noobcomments": { details: "Browsing comments by new users" },
+		"/leaders": { details: "Browsing top users" },
+		"/whoishiring": { details: "Browsing 'Who Is Hiring?' discussions" },
+		"/launches": { details: "Browsing Launch HN discussions" },
+	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -11,16 +32,9 @@ presence.on("UpdateData", async () => {
 		{ pathname, href, search } = document.location,
 		searchParams = new URLSearchParams(search);
 
+	if (staticPages[pathname]) Object.assign(presenceData, staticPages[pathname]);
+
 	switch (pathname) {
-		case "/":
-		case "/news": {
-			presenceData.details = "Browsing the main feed";
-			break;
-		}
-		case "/newest": {
-			presenceData.details = "Browsing the newest discussions";
-			break;
-		}
 		case "/submitted": {
 			presenceData.details = "Browsing submissions by a user";
 			presenceData.state = searchParams.get("id");
@@ -38,22 +52,6 @@ presence.on("UpdateData", async () => {
 			).firstChild.textContent;
 			break;
 		}
-		case "/newcomments": {
-			presenceData.details = "Browsing new comments";
-			break;
-		}
-		case "/ask": {
-			presenceData.details = "Browsing Ask HN discussions";
-			break;
-		}
-		case "/show": {
-			presenceData.details = "Browsing Show HN discussions";
-			break;
-		}
-		case "/jobs": {
-			presenceData.details = "Browsing job discussions";
-			break;
-		}
 		case "/submit": {
 			presenceData.details = "Creating a new discussions";
 			presenceData.state =
@@ -63,54 +61,6 @@ presence.on("UpdateData", async () => {
 		case "/user": {
 			presenceData.details = "Viewing a user's profile";
 			presenceData.state = searchParams.get("id");
-			break;
-		}
-		case "/pool": {
-			presenceData.details = "Browsing second-chance discussions";
-			break;
-		}
-		case "/invited": {
-			presenceData.details = "Browsing reposted links";
-			break;
-		}
-		case "/best": {
-			presenceData.details = "Browsing best discussions";
-			break;
-		}
-		case "/active": {
-			presenceData.details = "Browsing active discussions";
-			break;
-		}
-		case "/bestcomments": {
-			presenceData.details = "Browsing best comments";
-			break;
-		}
-		case "/asknew": {
-			presenceData.details = "Browsing new Ask HN discussions";
-			break;
-		}
-		case "/shownew": {
-			presenceData.details = "Browsing new Show HN discussions";
-			break;
-		}
-		case "/noobstories": {
-			presenceData.details = "Browsing submissions by new users";
-			break;
-		}
-		case "/noobcomments": {
-			presenceData.details = "Browsing comments by new users";
-			break;
-		}
-		case "/leaders": {
-			presenceData.details = "Browsing top users";
-			break;
-		}
-		case "/whoishiring": {
-			presenceData.details = "Browsing 'Who Is Hiring?' discussions";
-			break;
-		}
-		case "/launches": {
-			presenceData.details = "Browsing Launch HN discussions";
 			break;
 		}
 		case "/favorites": {
@@ -125,9 +75,9 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing a discussion";
 			presenceData.state = link.textContent;
 			presenceData.buttons = [{ label: "View Discussion", url: href }];
-			if (document.querySelector<HTMLSpanElement>(".sitebit.comhead")) {
+			if (document.querySelector<HTMLSpanElement>(".sitebit.comhead"))
 				presenceData.buttons.push({ label: "Read Article", url: link.href });
-			}
+
 			break;
 		}
 		case "/from": {
