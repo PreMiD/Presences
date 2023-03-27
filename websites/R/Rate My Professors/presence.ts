@@ -39,6 +39,19 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 			}
+			case "professor": {
+				presenceData.details = "Viewing a professor";
+				presenceData.state = document
+					.querySelector<HTMLDivElement>("[class*='NameTitle__Name']")
+					.textContent.trim();
+				presenceData.smallImageKey = Assets.Info;
+				presenceData.smallImageText = `Quality: ${
+					document.querySelector<HTMLDivElement>(
+						"[class*='RatingValue__Numerator']"
+					).textContent
+				} / 5`;
+				break;
+			}
 			case "school": {
 				presenceData.details = "Viewing a school";
 				presenceData.state = document.querySelector<HTMLDivElement>(
