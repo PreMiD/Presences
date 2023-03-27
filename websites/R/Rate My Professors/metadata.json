@@ -21,19 +21,5 @@
 		"feedback",
 		"rating",
 		"vote"
-	],
-	"settings": [
-		{
-			"id": "privacy",
-			"title": "Privacy Mode",
-			"value": true,
-			"icon": "fas fa-user-secret"
-		},
-		{
-			"id": "useButtons",
-			"title": "Show Buttons",
-			"value": false,
-			"icon": "far fa-eye"
-		}
 	]
 }
