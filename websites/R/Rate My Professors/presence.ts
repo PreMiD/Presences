@@ -18,6 +18,27 @@ presence.on("UpdateData", async () => {
 
 	if (hostname === "www.ratemyprofessors.com") {
 		switch (pathList[0]) {
+			case "account": {
+				switch (pathList[1]) {
+					case "profile": {
+						presenceData.details = "Viewing their profile";
+						break;
+					}
+					case "settings": {
+						presenceData.details = "Managing their settings";
+						break;
+					}
+					case "ratings": {
+						presenceData.details = "Viewing their ratings";
+						break;
+					}
+					case "saved-professors": {
+						presenceData.details = "Viewing their saved professors";
+						break;
+					}
+				}
+				break;
+			}
 			case "add": {
 				switch (pathList[1]) {
 					case "school-rating": {
