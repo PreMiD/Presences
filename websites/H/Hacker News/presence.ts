@@ -27,35 +27,35 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/front": {
-			presenceData.details = "Browsing past threads";
+			presenceData.details = "Browsing top threads";
 			presenceData.state = document.querySelector<HTMLDivElement>(
 				"#pagespace + tr div"
 			).firstChild.textContent;
 			break;
 		}
-		case "newcomments": {
+		case "/newcomments": {
 			presenceData.details = "Browsing new comments";
 			break;
 		}
-		case "ask": {
+		case "/ask": {
 			presenceData.details = "Browsing Ask HN threads";
 			break;
 		}
-		case "show": {
+		case "/show": {
 			presenceData.details = "Browsing Show HN threads";
 			break;
 		}
-		case "jobs": {
+		case "/jobs": {
 			presenceData.details = "Browsing job threads";
 			break;
 		}
-		case "submit": {
+		case "/submit": {
 			presenceData.details = "Creating a new thread";
 			presenceData.state =
 				document.querySelector<HTMLInputElement>("[name='title']").value;
 			break;
 		}
-		case "user": {
+		case "/user": {
 			presenceData.details = "Viewing a user's profile";
 			presenceData.state = searchParams.get("id");
 			break;
