@@ -18,7 +18,12 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/newest": {
-			presenceData.details = "Browsing the newest threads";
+			presenceData.details = "Browsing the newest discussions";
+			break;
+		}
+		case "/submitted": {
+			presenceData.details = "Browsing submissions by a user";
+			presenceData.state = searchParams.get("id");
 			break;
 		}
 		case "/threads": {
@@ -27,7 +32,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/front": {
-			presenceData.details = "Browsing top threads";
+			presenceData.details = "Browsing top discussions";
 			presenceData.state = document.querySelector<HTMLDivElement>(
 				"#pagespace + tr div"
 			).firstChild.textContent;
@@ -38,19 +43,19 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/ask": {
-			presenceData.details = "Browsing Ask HN threads";
+			presenceData.details = "Browsing Ask HN discussions";
 			break;
 		}
 		case "/show": {
-			presenceData.details = "Browsing Show HN threads";
+			presenceData.details = "Browsing Show HN discussions";
 			break;
 		}
 		case "/jobs": {
-			presenceData.details = "Browsing job threads";
+			presenceData.details = "Browsing job discussions";
 			break;
 		}
 		case "/submit": {
-			presenceData.details = "Creating a new thread";
+			presenceData.details = "Creating a new discussions";
 			presenceData.state =
 				document.querySelector<HTMLInputElement>("[name='title']").value;
 			break;
@@ -61,19 +66,19 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/pool": {
-			presenceData.details = "Browsing second-chance threads";
+			presenceData.details = "Browsing second-chance discussions";
 			break;
 		}
 		case "/invited": {
-			presenceData.details = "Browsing reposted threads";
+			presenceData.details = "Browsing reposted links";
 			break;
 		}
 		case "/best": {
-			presenceData.details = "Browsing best threads";
+			presenceData.details = "Browsing best discussions";
 			break;
 		}
 		case "/active": {
-			presenceData.details = "Browsing active threads";
+			presenceData.details = "Browsing active discussions";
 			break;
 		}
 		case "/bestcomments": {
@@ -81,15 +86,15 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/asknew": {
-			presenceData.details = "Browsing new Ask HN threads";
+			presenceData.details = "Browsing new Ask HN discussions";
 			break;
 		}
 		case "/shownew": {
-			presenceData.details = "Browsing new Show HN threads";
+			presenceData.details = "Browsing new Show HN discussions";
 			break;
 		}
 		case "/noobstories": {
-			presenceData.details = "Browsing threads by new users";
+			presenceData.details = "Browsing submissions by new users";
 			break;
 		}
 		case "/noobcomments": {
@@ -101,12 +106,18 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/whoishiring": {
-			presenceData.details = "Browsing 'Who Is Hiring?' threads";
+			presenceData.details = "Browsing 'Who Is Hiring?' discussions";
 			break;
 		}
 		case "/launches": {
-			presenceData.details = "Browsing Launch HN threads";
+			presenceData.details = "Browsing Launch HN discussions";
 			break;
+		}
+		case "/favorites": {
+			presenceData.details = `Browsing a user's favorite ${
+				searchParams.get("comments") ? "threads" : "discussions"
+			}`;
+			presenceData.state = searchParams.get("id");
 		}
 	}
 
