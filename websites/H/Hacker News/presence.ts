@@ -60,6 +60,54 @@ presence.on("UpdateData", async () => {
 			presenceData.state = searchParams.get("id");
 			break;
 		}
+		case "/pool": {
+			presenceData.details = "Browsing second-chance threads";
+			break;
+		}
+		case "/invited": {
+			presenceData.details = "Browsing reposted threads";
+			break;
+		}
+		case "/best": {
+			presenceData.details = "Browsing best threads";
+			break;
+		}
+		case "/active": {
+			presenceData.details = "Browsing active threads";
+			break;
+		}
+		case "/bestcomments": {
+			presenceData.details = "Browsing best comments";
+			break;
+		}
+		case "/asknew": {
+			presenceData.details = "Browsing new Ask HN threads";
+			break;
+		}
+		case "/shownew": {
+			presenceData.details = "Browsing new Show HN threads";
+			break;
+		}
+		case "/noobstories": {
+			presenceData.details = "Browsing threads by new users";
+			break;
+		}
+		case "/noobcomments": {
+			presenceData.details = "Browsing comments by new users";
+			break;
+		}
+		case "/leaders": {
+			presenceData.details = "Browsing top users";
+			break;
+		}
+		case "/whoishiring": {
+			presenceData.details = "Browsing 'Who Is Hiring?' threads";
+			break;
+		}
+		case "/launches": {
+			presenceData.details = "Browsing Launch HN threads";
+			break;
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
