@@ -18,6 +18,15 @@ presence.on("UpdateData", async () => {
 
 	if (hostname === "www.ratemyprofessors.com") {
 		switch (pathList[0]) {
+			case "flag": {
+				switch (pathList[1]) {
+					case "school-rating": {
+						presenceData.details = "Reporting a rating for a school";
+						break;
+					}
+				}
+				break;
+			}
 			case "school": {
 				presenceData.details = "Viewing a school";
 				presenceData.state = document.querySelector<HTMLDivElement>(
