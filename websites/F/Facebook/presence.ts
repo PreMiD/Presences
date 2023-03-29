@@ -266,7 +266,6 @@ presence.on("UpdateData", async () => {
 
 					switch (true) {
 						case cached?.element && !!cached?.id: {
-							console.log("yes cache");
 							delete presenceData.startTimestamp;
 							playingVidClose = cached.element.closest(
 								'div[class="x78zum5 xdt5ytf"]'
@@ -275,7 +274,6 @@ presence.on("UpdateData", async () => {
 								playingVidClose?.querySelector('[class="x14vqqas"]')
 									?.textContent
 							}`;
-							console.log(cached.element);
 							presenceData.smallImageKey = cached.element.paused
 								? Assets.Pause
 								: Assets.Play;
@@ -308,8 +306,6 @@ presence.on("UpdateData", async () => {
 							(!cached ||
 								cached.id !== playingVid.getAttribute("src") ||
 								cached.element !== playingVid): {
-							console.log(playingVid);
-							console.log("no cache");
 							cached = {
 								id: playingVid.getAttribute("src"),
 								element: playingVid,
