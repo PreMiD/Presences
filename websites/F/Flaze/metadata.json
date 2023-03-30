@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "Flaze",
+  "author": {
+    "id": "371231980286640129",
+    "name": "BENZOOgataga#8666"
+  },
+  "description": {
+    "en": "FlazeBot is a radio-based Discord bot. It lets you play music following the genre you want to listen to within the limits of what we offer."
+  },
+  "url": "flazebot.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/C2gdkI4.png",
+  "thumbnail": "https://i.imgur.com/uxTdIsM.png",
+  "color": "#ffd700",
+  "tags": [
+    "discord",
+    "music",
+    "radio",
+    "bot"
+  ],
+  "category": "music"
+}
