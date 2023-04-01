@@ -1,30 +1,30 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
-  "author": {
-    "id": "193714715631812608",
-    "name": "theusaf"
-  },
-  "service": "AnkiWeb",
-  "description": {
-    "en": "Anki is a program which makes remembering things easy. Because it's a lot more efficient than traditional study methods, you can either greatly decrease your time spent studying, or greatly increase the amount you learn."
-  },
-  "url": [
-    "faqs.ankiweb.net",
-    "ankiweb.net",
-    "ankiuser.net",
-    "docs.ankiweb.net",
-    "changes.ankiweb.net",
-    "forums.ankiweb.net"
-  ],
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/zg32aGw.png",
-  "thumbnail": "https://i.imgur.com/Tbg47wu.png",
-  "color": "#0059b1",
-  "category": "other",
-  "tags": [
-    "language",
-    "memory",
-    "app",
-    "study"
-  ]
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "AnkiWeb",
+	"description": {
+		"en": "Anki is a program which makes remembering things easy. Because it's a lot more efficient than traditional study methods, you can either greatly decrease your time spent studying, or greatly increase the amount you learn."
+	},
+	"url": [
+		"faqs.ankiweb.net",
+		"ankiweb.net",
+		"ankiuser.net",
+		"docs.ankiweb.net",
+		"changes.ankiweb.net",
+		"forums.ankiweb.net"
+	],
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/zg32aGw.png",
+	"thumbnail": "https://i.imgur.com/Tbg47wu.png",
+	"color": "#0059b1",
+	"category": "other",
+	"tags": [
+		"language",
+		"memory",
+		"app",
+		"study"
+	]
 }
