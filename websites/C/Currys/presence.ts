@@ -1,8 +1,9 @@
 const presence = new Presence({
 		clientId: "996516483150663721",
 	}),
+	{pathname, host} = document.location,
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-const { pathname, host } = document.location;
+
 presence.on("UpdateData", async () => {
 	const presenceData = {
 		smallImageKey: "search",
@@ -81,7 +82,6 @@ presence.on("UpdateData", async () => {
 			.textContent.replace(/["]/g, " ")
 			.replace("Showing results for", "");
 
-		console.log(replaced);
 		presenceData.details = "Searching for:";
 		presenceData.state = replaced;
 	}
