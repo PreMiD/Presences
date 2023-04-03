@@ -1,20 +1,21 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.5",
-  "author": {
-    "name": "PXSTY",
-    "id": "571041849326698496"
-  },
-  "url": "teknofest.org",
-  "description": {
-    "tr": "TEKNOFEST Havacılık, Uzay ve Teknoloji Festivali",
-    "en": "TEKNOFEST Havacılık, Uzay ve Teknoloji Festivali",
-    "nl": "TEKNOFEST Havacılık, Uzay ve Teknoloji Festivali"
-  },
-  "service": "Teknofest",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/b4It2CL.jpg",
-  "thumbnail": "https://i.imgur.com/b4It2CL.jpg",
-  "color": "#3b1b8a",
-  "tags": ["turkish", "teknofest", "t3vakfi"],
-  "category": "other"
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "PXSTY",
+		"id": "571041849326698496"
+	},
+	"service": "Teknofest",
+	"description": {
+		"tr": "TEKNOFEST Havacılık, Uzay ve Teknoloji Festivali",
+		"en": "TEKNOFEST Havacılık, Uzay ve Teknoloji Festivali",
+		"nl": "TEKNOFEST Havacılık, Uzay ve Teknoloji Festivali"
+	},
+	"url": ["teknofest.org"],
+	"version": "1.0.12",
+	"logo": "https://i.imgur.com/b4It2CL.jpg",
+	"thumbnail": "https://i.imgur.com/b4It2CL.jpg",
+	"color": "#3b1b8a",
+	"category": "other",
+	"tags": ["turkish", "teknofest", "t3vakfi", "pxsty"],
+	"iframe": false
 }
