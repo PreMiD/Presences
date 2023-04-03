@@ -24,9 +24,9 @@ presence.on("UpdateData", async () => {
 			".amp-herobanner-headline"
 		).textContent;
 	}
-	if (document.querySelector(".plp-heading")) 
+	if (document.querySelector(".plp-heading"))
 		presenceData.state = document.querySelector(".plp-heading").textContent;
-	
+
 	if (document.querySelector("#clp-row-1 > div > div > h1")) {
 		presenceData.state = document.querySelector(
 			"#clp-row-1 > div > div > h1"
