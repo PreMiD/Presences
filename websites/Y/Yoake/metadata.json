@@ -12,7 +12,7 @@
 	},
 	"url": "yoake.moe",
 	"regExp": "([a-z0-9-]+[.])*yoake.moe",
-	"version": "1.1.13",
+	"version": "1.1.14",
 	"logo": "https://i.imgur.com/eL8ARU0.png",
 	"thumbnail": "https://i.imgur.com/un3I1sl.jpeg",
 	"color": "#ffb6c1",

@@ -16,7 +16,7 @@
 		"status.glitch.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*glitch([.][a-z]+)+[/]",
-	"version": "1.8.15",
+	"version": "1.8.16",
 	"logo": "https://i.imgur.com/YFnN57M.png",
 	"thumbnail": "https://i.imgur.com/mnilDhS.png",
 	"color": "#f003fc",

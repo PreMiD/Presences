@@ -11,7 +11,7 @@ let prev: string, elapsed: number, path: string, gender: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "ch",
+			largeImageKey: "https://i.imgur.com/PjQ6k9n.png",
 		},
 		video: HTMLVideoElement = document.querySelector("video[id$='_html5_api']");
 

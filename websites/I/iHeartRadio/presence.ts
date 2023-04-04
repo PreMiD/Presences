@@ -37,7 +37,7 @@ let elapsed = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/VhqYveJ.png",
 	};
 	if (!document.querySelector('[data-test="player-container"]')) {
 		const playerText = document.querySelector('[data-test="player-text"]');

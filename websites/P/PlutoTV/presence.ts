@@ -21,7 +21,7 @@ oldTitle = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "plutotv",
+		largeImageKey: "https://i.imgur.com/oIasj8d.png",
 	};
 
 	if (document.location.hostname === "pluto.tv") {

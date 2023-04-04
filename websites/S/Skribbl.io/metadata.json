@@ -8,6 +8,10 @@
 		{
 			"name": "Encrypted",
 			"id": "564434085708038144"
+		},
+		{
+			"name": "theusaf",
+			"id": "193714715631812608"
 		}
 	],
 	"service": "Skribbl.io",
@@ -17,8 +21,8 @@
 		"nl": "Skribbl.io is een gratis multiplayer teken- en raadspel. Teken en raad woorden met je vrienden en mensen van over de hele wereld! Scoor de meeste punten en wees de winnaar!"
 	},
 	"url": "skribbl.io",
-	"version": "1.1.21",
-	"logo": "https://i.imgur.com/au4OO2A.jpg",
+	"version": "1.2.0",
+	"logo": "https://i.imgur.com/EYcWQmj.png",
 	"thumbnail": "https://i.imgur.com/sDWwUZk.png",
 	"color": "#245195",
 	"category": "games",
@@ -33,7 +37,7 @@
 		},
 		{
 			"id": "buttons",
-			"title": "Show Buttons",
+			"title": "Show Invite Link",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": false
 		}

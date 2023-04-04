@@ -6,7 +6,7 @@ let search: HTMLInputElement, title: Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/K0yeNeC.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[privacy, buttons] = await Promise.all([

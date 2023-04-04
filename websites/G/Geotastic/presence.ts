@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/2gjiXL9.png",
 		details: "Viewing an unsupported page",
 		startTimestamp: browsingTimestamp,
 	};

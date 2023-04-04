@@ -37,7 +37,7 @@ presence.on("iFrameData", (data: Data) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "dramacool_logo_b",
+			largeImageKey: "https://i.imgur.com/Bn5qNZO.png",
 			details: "Browsing",
 			smallImageText: "Browsing",
 			smallImageKey: "reading",

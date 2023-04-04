@@ -16,7 +16,7 @@ let oldLang: string = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "radiooooo_logo",
+			largeImageKey: "https://i.imgur.com/EktlHNP.png",
 			details: "Idling",
 			startTimestamp: browsingTimestamp,
 		},

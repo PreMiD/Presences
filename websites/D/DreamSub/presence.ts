@@ -28,7 +28,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo_ds", // Banner
+		largeImageKey: "https://i.imgur.com/vCJqRBO.png", // Banner
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -308,7 +308,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else {
 		//Generico
-		presenceData.largeImageKey = "logo_ds";
+		presenceData.largeImageKey = "https://i.imgur.com/vCJqRBO.png";
 		presenceData.smallImageText = "Navigando...";
 	}
 

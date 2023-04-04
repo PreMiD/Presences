@@ -10,9 +10,9 @@ iframe.on("UpdateData", async () => {
 			OneNoteSubtopic: document.querySelector(
 				'#NavPaneSectionList > div.sectionList [aria-label~="Selected."]'
 			).textContent,
-			OneNoteTitle: document.querySelector(
-				'#PageList > div [aria-label~="Selected."]'
-			)?.textContent,
+			OneNoteTitle:
+				document.querySelector('[name="fileName"]')?.getAttribute("value") ??
+				document.querySelector("title")?.textContent?.split(".")[0],
 		});
 	} else if (
 		document.querySelector(

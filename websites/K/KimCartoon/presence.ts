@@ -41,7 +41,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "kim",
+		largeImageKey: "https://i.imgur.com/0oTbCN4.png",
 	};
 
 	if (

@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "teamseas",
+			largeImageKey: "https://i.imgur.com/nTbCh82.png",
 		},
 		currentCount = await presence.getSetting<boolean>("count");
 

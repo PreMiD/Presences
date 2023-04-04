@@ -7,7 +7,7 @@ let from: string, to: string, typet: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "yt",
+		largeImageKey: "https://i.imgur.com/kAHbOW1.png",
 	};
 
 	switch (document.location.pathname) {

@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 
 	if (page.includes("/show/") && showTitle && showTitle.textContent !== "") {
 		presence.setActivity({
-			largeImageKey: "wh-logo",
+			largeImageKey: "https://i.imgur.com/XGGf0Xq.png",
 			details: "Bir diziyi inceliyor:",
 			state: showTitle.textContent || "Bilinmeyen",
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -37,14 +37,14 @@ presence.on("UpdateData", async () => {
 		username.textContent !== ""
 	) {
 		presence.setActivity({
-			largeImageKey: "wh-logo",
+			largeImageKey: "https://i.imgur.com/XGGf0Xq.png",
 			details: "Bir üyenin profiline bakıyor:",
 			state: username.textContent.trim() || "Bilinmeyen",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/search/")) {
 		presence.setActivity({
-			largeImageKey: "wh-logo",
+			largeImageKey: "https://i.imgur.com/XGGf0Xq.png",
 			details: "Bir şey arıyor:",
 			state:
 				decodeURI(page.replace("/search/", ""))
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 		);
 
 		presence.setActivity({
-			largeImageKey: "wh-logo",
+			largeImageKey: "https://i.imgur.com/XGGf0Xq.png",
 			details: "Bir kategoriye göz atıyor:",
 			state:
 				categoryName && categoryName.textContent !== ""
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			),
 			presenceData: PresenceData = {
-				largeImageKey: "wh-logo",
+				largeImageKey: "https://i.imgur.com/XGGf0Xq.png",
 				details:
 					title && title.textContent !== "" ? title.textContent : "Bilinmeyen",
 				state: `IMDb: ${
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			),
 			data: { [k: string]: string | number } = {
-				largeImageKey: "wh-logo",
+				largeImageKey: "https://i.imgur.com/XGGf0Xq.png",
 				details:
 					showName && showName.textContent !== ""
 						? showName.textContent.trim()
@@ -149,14 +149,14 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(data);
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
-			largeImageKey: "wh-logo",
+			largeImageKey: "https://i.imgur.com/XGGf0Xq.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "wh-logo",
+			largeImageKey: "https://i.imgur.com/XGGf0Xq.png",
 			details: "Bir sayafaya göz atıyor:",
 			state: "Ana Sayfa",
 			startTimestamp: Math.floor(Date.now() / 1000),

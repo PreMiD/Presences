@@ -12,7 +12,7 @@
 	},
 	"url": "fandom.com",
 	"regExp": "[a-z0-9-]+[.]fandom[.]com[/]",
-	"version": "1.2.16",
+	"version": "1.2.17",
 	"logo": "https://i.imgur.com/sko4P3c.png",
 	"thumbnail": "https://i.imgur.com/VrVSD2b.png",
 	"color": "#002A32",

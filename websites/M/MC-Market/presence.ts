@@ -8,7 +8,7 @@ let user: HTMLElement | Element | string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "mc-market",
+		largeImageKey: "https://i.imgur.com/W9zIBqd.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "www.mc-market.org") {

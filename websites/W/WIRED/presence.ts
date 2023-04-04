@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 
 	const { title } = document,
 		presenceData: PresenceData = {
-			largeImageKey: "wired",
+			largeImageKey: "https://i.imgur.com/gRExMjS.png",
 			startTimestamp: elapsed,
 		};
 

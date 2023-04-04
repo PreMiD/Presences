@@ -29,7 +29,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 });
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "hwnew",
+		largeImageKey: "https://i.imgur.com/2DEdIVo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

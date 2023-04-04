@@ -2,7 +2,7 @@ const presence = new Presence({ clientId: "898448802829189172" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "minehut-main",
+			largeImageKey: "https://i.imgur.com/FOvZNY6.png",
 			startTimestamp: browsingTimestamp,
 		},
 		f = document.location.pathname.split("/");

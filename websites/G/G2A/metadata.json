@@ -11,7 +11,7 @@
 	},
 	"url": "www.g2a.com",
 	"regExp": "([a-z0-9-]+[.])*g2a[.]com[/]",
-	"version": "1.2.13",
+	"version": "1.2.14",
 	"logo": "https://i.imgur.com/TJO23bI.png",
 	"thumbnail": "https://i.imgur.com/z6IBeG6.png",
 	"color": "#f05f00",

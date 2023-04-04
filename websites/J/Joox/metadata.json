@@ -12,7 +12,7 @@
 	},
 	"url": "www.joox.com",
 	"regExp": "([a-z0-9-]+[.])*joox[.]com[/]",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"logo": "https://i.imgur.com/yoQPcUK.png",
 	"thumbnail": "https://i.imgur.com/CZeMH5Q.jpg",
 	"color": "#5abf77",

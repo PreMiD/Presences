@@ -12,7 +12,7 @@
 		"nl": "Yandex-streamingdienst waarmee u naar muziektracks, albums en verzamelingen muziektracks kunt luisteren en persoonlijke aanbevelingen kunt krijgen."
 	},
 	"url": "music.yandex.ru",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/d1za28M.png",
 	"thumbnail": "https://i.imgur.com/JohXxhi.png",
 	"color": "#FDCD01",

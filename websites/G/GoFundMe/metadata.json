@@ -10,7 +10,7 @@
 	},
 	"url": "gofundme.com",
 	"regExp": "([a-z0-9]+)[.]gofundme[.]com",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/5z37NtP.png",
 	"thumbnail": "https://i.imgur.com/EytuDmf.png",
 	"color": "#00b640",

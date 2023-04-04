@@ -24,7 +24,7 @@ const currentTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/txJayic.jpg",
 		smallImageText: `Current Presenter: ${presenter}`,
 		smallImageKey: "play",
 		startTimestamp: currentTime,

@@ -11,9 +11,9 @@
 	},
 	"url": [
 		"tempestfansub.com",
-		"manga.tempestfansub.com"
+		"tempestscans.com"
 	],
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/ppTaAAl.png",
 	"thumbnail": "https://i.imgur.com/z01ju2D.png",
 	"color": "#349eeb",
@@ -25,6 +25,7 @@
 		"türk",
 		"türkçe",
 		"tempest",
-		"tempestfansub"
+		"tempestfansub",
+		"tempestscans"
 	]
 }

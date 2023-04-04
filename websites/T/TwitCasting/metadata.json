@@ -11,7 +11,7 @@
 	},
 	"url": "twitcasting.tv",
 	"regExp": "([a-z0-9]+[.])?twitcasting[.]tv",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/Jd4Pyyx.png",
 	"thumbnail": "https://i.imgur.com/3P8di7c.png",
 	"color": "#0280FC",

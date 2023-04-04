@@ -9,7 +9,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	if (document.location.pathname.includes("/wordle")) {
 		const presenceData: PresenceData = {
-				largeImageKey: "logo",
+				largeImageKey: "https://i.imgur.com/N19NFSF.png",
 				startTimestamp: browsingTimestamp,
 			},
 			guess = await presence.getSetting<boolean>("guess");

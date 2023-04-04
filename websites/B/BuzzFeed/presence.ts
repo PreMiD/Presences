@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			"body > main > div > div > div > div.user-info.xs-px2.sm-p0.xs-mb3.md-mb4 > div > div.xs-ml2.xs-flex.xs-flex-column > div > h1"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/RpYIaJm.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

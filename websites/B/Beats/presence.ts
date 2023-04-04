@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			timestamp: await presence.getSetting<boolean>("timestamp"),
 		},
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/36Ln5RE.png",
 			details: settings.details,
 			state: settings.state,
 			smallImageText: `${

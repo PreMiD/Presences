@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/t7j0bcF.png",
 		};
 
 	if (document.URL === "https://www.threenow.co.nz/") {

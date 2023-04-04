@@ -19,7 +19,7 @@ for (let i = 0; i < tags.length; i++) crossover.push([`/crossovers${tags[i]}`]);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "banner",
+		largeImageKey: "https://i.imgur.com/bKSkTgk.png",
 		startTimestamp: browsingTimetsamp,
 	};
 

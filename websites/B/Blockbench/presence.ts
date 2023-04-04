@@ -16,7 +16,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "blockbench-logo",
+			largeImageKey: "https://i.imgur.com/isuRsRF.png",
 			startTimestamp: browsingTimestamp,
 		},
 		pluginHeader = document.querySelector(

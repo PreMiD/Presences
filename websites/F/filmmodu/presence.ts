@@ -23,7 +23,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "fm-logo",
+			largeImageKey: "https://i.imgur.com/JV9Ef1p.png",
 			startTimestamp: browsingTimetsamp,
 		},
 		page = document.location.pathname,

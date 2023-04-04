@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 		if (privacyMode) {
 			return presence.setActivity({
 				...(mediaSession.playbackState === "playing" && {
-					largeImageKey: "ytm_lg",
+					largeImageKey: "https://i.imgur.com/31gvH2b.png",
 					details: "Listening to music",
 				}),
 			});
@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
 	} else if (showBrowsing) {
 		if (privacyMode) {
 			return presence.setActivity({
-				largeImageKey: "ytm_lg",
+				largeImageKey: "https://i.imgur.com/31gvH2b.png",
 				details: "Browsing YouTube Music",
 			});
 		}
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presenceData = {
-			largeImageKey: "ytm_lg",
+			largeImageKey: "https://i.imgur.com/31gvH2b.png",
 			details: "Browsing",
 			startTimestamp,
 		};
@@ -259,12 +259,12 @@ presence.on("UpdateData", async () => {
 function updateSongTimestamps() {
 	const element = document
 			.querySelector<HTMLSpanElement>("#left-controls > span")
-			.textContent.trim(),
-		currTimes = element.match(/(\d{1,2}):(\d{1,2})/),
-		totalTimes = element.match(/(\d{1,2}):(\d{1,2})$/);
+			.textContent.trim()
+			.split(" / "),
+		[currTimes, totalTimes] = element;
 
 	mediaTimestamps = presence.getTimestamps(
-		parseInt(currTimes[1]) * 60 + parseInt(currTimes[2]),
-		parseInt(totalTimes[1]) * 60 + parseInt(totalTimes[2])
+		presence.timestampFromFormat(currTimes),
+		presence.timestampFromFormat(totalTimes)
 	);
 }

@@ -121,7 +121,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "main",
+			largeImageKey: "https://i.imgur.com/oNNkTu6.png",
 			startTimestamp: browsingTimestamp,
 		},
 		paths: string[] = window.location.pathname.split("/").splice(1);

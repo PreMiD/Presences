@@ -6,7 +6,7 @@ let actionTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "gitbookw",
+		largeImageKey: "https://i.imgur.com/1h1N9Rp.png",
 	};
 
 	if (location.hostname === "app.gitbook.com") {

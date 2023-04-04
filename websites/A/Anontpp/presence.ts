@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "anontpp",
+			largeImageKey: "https://i.imgur.com/Sr0u6MC.png",
 		};
 
 	if (oldUrl !== path) {

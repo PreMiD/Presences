@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsedTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "ralexlogo",
+		largeImageKey: "https://i.imgur.com/VEX5zcU.jpg",
 	};
 	if (document.location.hostname === "bot.ralex.xyz") {
 		presenceData.startTimestamp = browsedTimestamp;

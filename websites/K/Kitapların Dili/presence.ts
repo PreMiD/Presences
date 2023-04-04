@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 			.join(" ");
 
 		presence.setActivity({
-			largeImageKey: "kd-logo",
+			largeImageKey: "https://i.imgur.com/vVYzTFE.png",
 			details: "Bir türü inceliyor:",
 			state: genre || "Bilinmeyen Tür",
 			startTimestamp: Date.now(),
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 		const letter = page.split("/")?.[page.split("/").length - 1]?.toUpperCase();
 
 		presence.setActivity({
-			largeImageKey: "kd-logo",
+			largeImageKey: "https://i.imgur.com/vVYzTFE.png",
 			details: "Arşivi inceliyor:",
 			state: letter ? `Harf: ${letter}` : "Bilinmeyen Harf",
 			smallImageKey: "search",
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (page.includes("/search")) {
 		presence.setActivity({
-			largeImageKey: "kd-logo",
+			largeImageKey: "https://i.imgur.com/vVYzTFE.png",
 			details: "Bir şey arıyor:",
 			state:
 				document.title.replace(" - Kitapların Dili", "") || "Bilinmeyen Terim",
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (page.includes("/country/")) {
 		presence.setActivity({
-			largeImageKey: "kd-logo",
+			largeImageKey: "https://i.imgur.com/vVYzTFE.png",
 			details: "Bir dili inceliyor:",
 			state:
 				document
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (page.includes("/star/")) {
 		presence.setActivity({
-			largeImageKey: "kd-logo",
+			largeImageKey: "https://i.imgur.com/vVYzTFE.png",
 			details: "Bir yazarı inceliyor:",
 			state:
 				document.querySelector(".page-title > font")?.textContent?.trim() ||
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
 
 		if (!video) {
 			return presence.setActivity({
-				largeImageKey: "kd-logo",
+				largeImageKey: "https://i.imgur.com/vVYzTFE.png",
 				details: bookName,
 				smallImageKey: "question",
 				smallImageText: "Video verisi alınamıyor",
@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			),
 			presenceData: PresenceData = {
-				largeImageKey: "kd-logo",
+				largeImageKey: "https://i.imgur.com/vVYzTFE.png",
 				details: bookName,
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
 		kitapPages[page.replace(".html", "")]
 	) {
 		presence.setActivity({
-			largeImageKey: "kd-logo",
+			largeImageKey: "https://i.imgur.com/vVYzTFE.png",
 			details: "Bir sayfaya göz atıyor:",
 			state:
 				kitapPages[page] ||
@@ -145,7 +145,7 @@ presence.on("UpdateData", async () => {
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "kd-logo",
+			largeImageKey: "https://i.imgur.com/vVYzTFE.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
 			startTimestamp: Date.now(),

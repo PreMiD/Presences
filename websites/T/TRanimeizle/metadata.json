@@ -11,11 +11,11 @@
 		"nl": "TRanimeizle is een Turkse anime-website om online animaties te zoeken en te bekijken."
 	},
 	"url": [
-		"www.tranimeizle.net",
-		"tranimeizle.net"
+		"www.tranimeizle.co",
+		"tranimeizle.co"
 	],
-	"version": "1.0.10",
-	"logo": "https://i.imgur.com/TsLirN4.jpg",
+	"version": "1.0.12",
+	"logo": "https://i.imgur.com/BnMRZ49.png",
 	"thumbnail": "https://i.imgur.com/tvxzX3S.png",
 	"color": "#eb0254",
 	"category": "anime",

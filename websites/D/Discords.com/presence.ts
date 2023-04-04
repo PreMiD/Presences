@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "discords_logo",
+			largeImageKey: "https://i.imgur.com/ZjtyAQx.png",
 		};
 
 	if (document.location.pathname === "/")

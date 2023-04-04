@@ -17,7 +17,7 @@
 	},
 	"url": "jellyfin.org",
 	"regExp": "(jellyfin.org)|(.*[/]web[/]index[.]html)",
-	"version": "1.7.0",
+	"version": "1.8.0",
 	"logo": "https://i.imgur.com/nPzEemG.png",
 	"thumbnail": "https://i.imgur.com/J61378N.png",
 	"color": "#00698c",
@@ -42,36 +42,9 @@
 			"value": true
 		},
 		{
-			"id": "showRichImages",
-			"title": "Show rich images",
-			"icon": "fad fa-sparkles",
-			"value": true
-		},
-		{
-			"if": {
-				"showRichImages": true
-			},
-			"id": "showAlbumart",
-			"title": "Rich images for music",
-			"icon": "fad fa-album",
-			"value": true
-		},
-		{
-			"if": {
-				"showRichImages": true
-			},
-			"id": "showMoviePoster",
-			"title": "Rich images for movies",
-			"icon": "fad fa-film",
-			"value": true
-		},
-		{
-			"if": {
-				"showRichImages": true
-			},
-			"id": "showTvShowPoster",
-			"title": "Rich images for TV Shows",
-			"icon": "fad fa-tv-retro",
+			"id": "showThumbnails",
+			"title": "Show thumbnails",
+			"icon": "fad fa-image",
 			"value": true
 		}
 	]

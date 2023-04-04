@@ -31,7 +31,7 @@ const presence = new Presence({
 	];
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "load",
+			largeImageKey: "https://i.imgur.com/S8ZbIgk.png",
 			smallImageKey: "smallimagekey",
 			smallImageText: "CodeSandbox",
 			details: "Loading",

@@ -9,7 +9,7 @@ let currentURL = new URL(document.location.href),
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
 	details: "Viewing an unsupported page",
-	largeImageKey: "lg",
+	largeImageKey: "https://i.imgur.com/Zew5cN7.png",
 	startTimestamp: browsingTimestamp,
 };
 const updateCallback = {
@@ -30,7 +30,7 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "lg",
+			largeImageKey: "https://i.imgur.com/Zew5cN7.png",
 			startTimestamp: browsingTimestamp,
 		}
 	): void => {

@@ -6,7 +6,7 @@ let user: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "valtox",
+		largeImageKey: "https://i.imgur.com/N9hqBPt.png",
 	};
 
 	switch (document.location.hostname) {

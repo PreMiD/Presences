@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/BtSGm7r.png",
 			startTimestamp: browsingTimestamp,
 		};
 	presenceData.details = document.location.pathname.split("/")[1];

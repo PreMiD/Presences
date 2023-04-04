@@ -30,7 +30,7 @@ presence.on("iFrameData", (data: iframeData) => {
 const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "sdlogo",
+			largeImageKey: "https://i.imgur.com/z1VZysP.jpg",
 			startTimestamp,
 		},
 		{ search, pathname: page } = document.location;

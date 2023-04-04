@@ -120,7 +120,7 @@ const paths = {
 presence.on("UpdateData", async () => {
 	const buttons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/K5IdObW.png",
 			state: "Browsing...",
 			startTimestamp: browsingTimestamp,
 		};

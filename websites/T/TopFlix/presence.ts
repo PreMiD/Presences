@@ -30,7 +30,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "topflix",
+		largeImageKey: "https://i.imgur.com/GA1Vftf.png",
 	};
 
 	let title;

@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			)
 			?.textContent.trim(),
 		presenceData: PresenceData = {
-			largeImageKey: "lc-logo",
+			largeImageKey: "https://i.imgur.com/dw8pZ1d.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

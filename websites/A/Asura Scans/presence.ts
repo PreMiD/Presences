@@ -24,7 +24,9 @@ presence.on("UpdateData", () => {
 				url: href,
 			},
 		];
-	} else if (/\/[a-z-19]+(chapter|ch)-[0-9]+\/?$/i.test(pathname)) {
+	} else if (
+		/\/[a-z-\d]+(chapter|ch|bolum)[a-z-\d]*-[0-9]+\/?$/i.test(pathname)
+	) {
 		const progress =
 			(document.documentElement.scrollTop /
 				(document.querySelector<HTMLDivElement>("#readerarea").scrollHeight -
@@ -44,7 +46,7 @@ presence.on("UpdateData", () => {
 				url: href,
 			},
 		];
-	} else if (pathname.startsWith("/bookmarks"))
+	} else if (pathname.startsWith("/bookmark"))
 		presenceData.details = "Viewing Bookmarks";
 	else {
 		presenceData.details = "Browsing Asura Scans";

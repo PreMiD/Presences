@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
 	const urlParams = new URLSearchParams(window.location.search);
 	let presenceData: PresenceData = {
-		largeImageKey: "lg",
+		largeImageKey: "https://i.imgur.com/g09SOs0.png",
 	};
 	if (document.location.pathname === "/") presence.setActivity(presenceData);
 	else if (
@@ -18,13 +18,13 @@ presence.on("UpdateData", () => {
 				presenceData = {
 					details: "Searching...",
 					state: urlParams.get("tags").replace(" ", ", "),
-					largeImageKey: "lg",
+					largeImageKey: "https://i.imgur.com/g09SOs0.png",
 				};
 				presence.setActivity(presenceData);
 			} else {
 				presenceData = {
 					details: "Viewing Posts List...",
-					largeImageKey: "lg",
+					largeImageKey: "https://i.imgur.com/g09SOs0.png",
 				};
 				presence.setActivity(presenceData);
 			}
@@ -32,18 +32,18 @@ presence.on("UpdateData", () => {
 			presenceData = {
 				details: "Viewing a Post...",
 				state: `Post ${urlParams.get("id")}`,
-				largeImageKey: "lg",
+				largeImageKey: "https://i.imgur.com/g09SOs0.png",
 			};
 			presence.setActivity(presenceData);
 		} else {
 			presenceData = {
-				largeImageKey: "lg",
+				largeImageKey: "https://i.imgur.com/g09SOs0.png",
 			};
 			presence.setActivity(presenceData);
 		}
 	} else {
 		presenceData = {
-			largeImageKey: "lg",
+			largeImageKey: "https://i.imgur.com/g09SOs0.png",
 		};
 		presence.setActivity(presenceData);
 	}

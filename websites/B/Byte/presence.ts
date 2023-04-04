@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			details: detailsObj.details,
 			state: detailsObj.state,
-			largeImageKey: "byte",
+			largeImageKey: "https://i.imgur.com/oX5socK.png",
 		};
 
 	if (oldUrl !== path) {

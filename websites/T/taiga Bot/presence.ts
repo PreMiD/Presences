@@ -14,7 +14,7 @@ function getRow(row: number) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "lg",
+		largeImageKey: "https://i.imgur.com/EYWqVuf.png",
 		startTimestamp: browsingTimestamp,
 	};
 	presenceData.details = getRow(1);

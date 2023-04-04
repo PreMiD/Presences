@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		return str;
 	}
 	const presenceData: PresenceData = {
-		largeImageKey: "icon",
+		largeImageKey: "https://i.imgur.com/imTvu2G.png",
 		startTimestamp: Date.now(),
 	};
 	let loc = window.location.href;

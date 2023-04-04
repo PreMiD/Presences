@@ -36,7 +36,7 @@ let watchStamp = 0;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "icon",
+			largeImageKey: "https://i.imgur.com/WAOvAe6.png",
 			details: constructAction[getAction()],
 		},
 		showTitle = await presence.getSetting<boolean>("title");

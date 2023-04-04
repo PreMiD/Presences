@@ -54,7 +54,7 @@ async function getStrings() {
 			viewing: "general.viewing",
 			uptime: "general.uptimeHistory",
 			incident: "general.incidentHistory",
-			incidentView: "general.incidentView",
+			viewAnIncident: "general.viewAnIncident",
 			helpCenter: "discord.support",
 			viewCategory: "general.viewCategory",
 			searchFor: "general.searchFor",
@@ -537,7 +537,7 @@ presence.on("UpdateData", async () => {
 				},
 				"/incidents/": {
 					details: strings.status,
-					state: strings.incidentView,
+					state: strings.viewAnIncident,
 				},
 			};
 			if (showBrowsing) {

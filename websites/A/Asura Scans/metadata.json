@@ -12,9 +12,10 @@
 	"url": [
 		"asurascans.com",
 		"www.asurascans.com",
-		"asura.gg"
+		"asura.gg",
+		"asurascanstr.com"
 	],
-	"version": "1.1.0",
+	"version": "1.2.1",
 	"logo": "https://i.imgur.com/ewDJfwk.png",
 	"thumbnail": "https://i.imgur.com/FjiRGf6.png",
 	"color": "#6E3CAA",

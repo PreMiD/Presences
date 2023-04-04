@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 		);
 
 		presence.setActivity({
-			largeImageKey: "wt-logo",
+			largeImageKey: "https://i.imgur.com/ONnE8dp.png",
 			details: "Bir yazara göz atıyor:",
 			state:
 				author && author.textContent !== "" ? author.textContent : "Belirsiz",
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (title && title.textContent !== "") {
 		presence.setActivity({
-			largeImageKey: "wt-logo",
+			largeImageKey: "https://i.imgur.com/ONnE8dp.png",
 			details: `${title.textContent}`,
 			state: `Yazar: ${
 				document.querySelector(
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (videoTitle && videoTitle.textContent !== "") {
 		presence.setActivity({
-			largeImageKey: "wt-logo",
+			largeImageKey: "https://i.imgur.com/ONnE8dp.png",
 			details: `${videoTitle.textContent}`,
 			state: `Yazar: ${
 				document.querySelector(
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "wt-logo",
+			largeImageKey: "https://i.imgur.com/ONnE8dp.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)] || "Ana Sayfa",
 			smallImageKey:

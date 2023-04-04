@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity({
 			details: "Viewing a page...",
 			state: pageText,
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/pDL6BY7.png",
 		});
 	}
 });

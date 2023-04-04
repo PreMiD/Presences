@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "612042450785271811",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/BwMtgWb.jpg",
 	};
 
 presence.on("UpdateData", async () => {
@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".mbxs span strong") ??
 			document.querySelector<HTMLElement>("p.type-weak")
 		).textContent;
-		presenceData.largeImageKey = "logo";
+		presenceData.largeImageKey = "https://i.imgur.com/BwMtgWb.jpg";
 		presenceData.buttons = [
 			{
 				label: "View Petition",
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/BwMtgWb.jpg",
 		});
 	}
 });

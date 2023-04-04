@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
 	const { pathname } = window.location,
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/8MP205p.png",
 			startTimestamp: browsingTimestamp,
 		};
 	if (document.querySelector("input[id^=headlessui]"))

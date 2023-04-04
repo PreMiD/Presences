@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "comedycentral",
+		largeImageKey: "https://i.imgur.com/NJ6Ezno.png",
 	};
 
 	if (document.location.pathname.startsWith("/episodes")) {

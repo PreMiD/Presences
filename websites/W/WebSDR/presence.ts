@@ -31,7 +31,7 @@ function updateMode(): void {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "favicon",
+		largeImageKey: "https://i.imgur.com/duTGqD6.png",
 		//smallImageKey: "key",
 		smallImageText: "University of Twente SDR",
 		startTimestamp: browsingTimestamp,

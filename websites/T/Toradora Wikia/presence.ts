@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity({
 			details: "Viewing a page...",
 			state: page,
-			largeImageKey: "lg-twiki",
+			largeImageKey: "https://i.imgur.com/nJ5f03L.png",
 		});
 	}
 	germanPresence.on("UpdateData", async () => {
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			germanPresence.setActivity({
 				details: "Schaut eine Seite an...",
 				state: page,
-				largeImageKey: "lg-twiki",
+				largeImageKey: "https://i.imgur.com/nJ5f03L.png",
 			});
 		}
 	});

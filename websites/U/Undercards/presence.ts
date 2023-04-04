@@ -46,7 +46,7 @@ function getText(selector: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/xahtF8Y.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/")

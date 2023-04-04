@@ -10,7 +10,7 @@
 	},
 	"url": "www.audible.com",
 	"regExp": "www[.]audible([.][a-z]+)",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"logo": "https://i.imgur.com/TTg4B0Q.png",
 	"thumbnail": "https://i.imgur.com/6X2aW6B.png",
 	"color": "#f7991c",

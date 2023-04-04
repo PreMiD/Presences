@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		buttons = await presence.getSetting<boolean>("buttons"),
 		cover = await presence.getSetting<boolean>("cover"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/paPCAuE.png",
 			startTimestamp: browsingTimestamp,
 		};
 	if (document.querySelector("[class*='is-visible']")) {

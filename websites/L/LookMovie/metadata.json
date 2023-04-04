@@ -15,7 +15,7 @@
 		"playerwatchlm25.xyz"
 	],
 	"regExp": "(playerwatch[0-9]*.xyz)|(playerwatchlm[0-9]*.xyz)|(lookmovie[0-9]?[.][A-z]{2})",
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"logo": "https://i.imgur.com/vlSumUl.png",
 	"thumbnail": "https://i.imgur.com/nseTbMZ.png",
 	"color": "#ffcc00",

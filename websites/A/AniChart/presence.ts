@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "795125406264066099",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "anichart",
+		largeImageKey: "https://i.imgur.com/8jwNL3C.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 

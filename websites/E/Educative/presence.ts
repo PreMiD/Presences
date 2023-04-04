@@ -37,7 +37,7 @@ setInterval(setCourseInfo, 2000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "educativelogo",
+		largeImageKey: "https://i.imgur.com/vYEoDm5.png",
 		startTimestamp: time,
 	};
 

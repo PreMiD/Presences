@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const data: PresenceData = {
-      largeImageKey: "djs",
+      largeImageKey: "https://i.imgur.com/v4Qb6IT.png",
       startTimestamp: browsingStamp
     },
     route = document.location.hash.split("/");

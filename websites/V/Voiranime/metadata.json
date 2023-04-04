@@ -8,6 +8,10 @@
 		{
 			"name": "DooMLorD",
 			"id": "654398152513945611"
+		},
+		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
 		}
 	],
 	"service": "Voiranime",
@@ -17,11 +21,9 @@
 		"ga_IE": "Is suíomh Gréasáin sruthú é Voiranime inar féidir leat féachaint ar VF agus VOSTFR anime.",
 		"nl": "Voiranime is een streamingwebsite waar je VF- en VOSTFR-anime kunt bekijken."
 	},
-	"url": [
-		"voiranime.com",
-		"www.voiranime.com"
-	],
-	"version": "2.0.10",
+	"url": "v2.voiranime.com",
+	"regExp": "([a-z0-9-]+[.])*voiranime[.]com[/]",
+	"version": "2.1.0",
 	"logo": "https://i.imgur.com/Db6EmSA.png",
 	"thumbnail": "https://i.imgur.com/566TY04.png",
 	"color": "#1a1920",

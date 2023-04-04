@@ -5,7 +5,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "destiny",
+		largeImageKey: "https://i.imgur.com/pSEZ2Cm.png",
 		smallImageKey: "really_bad_d_gg_logo_upscale",
 		startTimestamp: browsingTimestamp,
 	};

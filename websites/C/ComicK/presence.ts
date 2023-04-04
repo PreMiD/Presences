@@ -1,128 +1,107 @@
 const presence = new Presence({
 		clientId: "866604211248824371",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	staticPages: Record<string, PresenceData> = {
+		home: { details: "Browsing Homepage" },
+		list: { details: "Viewing Followed List" },
+		ranking: { details: "Looking at rankings" },
+		commentlist: { details: "Looking at comment list" },
+		settings: { details: "Settings" },
+		languages: { details: "Languages" },
+		privacy: { details: "Privacy Policy" },
+		installapp: { details: "ComicK App" },
+	};
+
+enum Assets {
+	Logo = "https://i.imgur.com/DeNqLCB.png",
+}
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			details: "Browsing",
-			largeImageKey: "large",
-			startTimestamp: browsingTimestamp,
-		},
-		{ pathname, href } = document.location,
+	let presenceData: PresenceData = {
+		details: "Browsing",
+		largeImageKey: Assets.Logo,
+		startTimestamp: browsingTimestamp,
+	};
+	const { pathname, href } = document.location,
+		arrPath = pathname.replace("_", "").split("/"),
 		[image, buttons] = await Promise.all([
 			presence.getSetting<boolean>("image"),
 			presence.getSetting<boolean>("buttons"),
 		]);
 
-	if (pathname === "/") presenceData.details = "Browsing Homepage";
-	else if (pathname === "/list") presenceData.details = "Viewing Followed List";
-	else if (pathname.startsWith("/comic")) {
-		if (document.querySelector(".images-reader-container")) {
-			const infoReader = document.querySelector(".info-reader-container"),
-				imageReader = document.querySelector(".images-reader-container");
-			if (infoReader) {
-				const title = infoReader.querySelector<HTMLAnchorElement>("a"),
-					chapter = infoReader.querySelector<HTMLHeadingElement>("h1");
-				if (title) presenceData.details = `Reading ${title.textContent}`;
-				if (chapter) presenceData.state = chapter.textContent;
-			} else if (imageReader) {
-				const img = imageReader.querySelectorAll<HTMLImageElement>("img")[1],
-					chapter = document.querySelector<HTMLHeadingElement>("h1");
-				if (img) {
-					presenceData.details = `Reading ${img.alt.substring(
-						0,
-						img.alt.indexOf("chapter")
-					)}`;
-				}
-				if (chapter) presenceData.state = chapter.textContent;
-			}
-			if (image) {
-				presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
-					"meta[property='og:image']"
-				).content;
-			} else presenceData.smallImageKey = "small";
-			presenceData.buttons = [
-				{
-					label: "Read Chapter",
-					url: href,
-				},
-				{
-					label: "Read Description",
-					url: href.split(/(.+)[\\/]/)[1],
-				},
-			];
-		} else {
+	switch (arrPath[1]) {
+		case "comic": {
 			const title = document.querySelector<HTMLHeadingElement>("h1");
 			if (title) {
 				presenceData.details = "Reading Description";
 				presenceData.state = title.textContent;
-				if (image) {
-					presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
-						"meta[property='og:image']"
-					).content;
-				}
+				presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+					"meta[property='og:image']"
+				).content;
 				presenceData.buttons = [
 					{
 						label: "Read Description",
 						url: href,
 					},
 				];
+			} else if (document.querySelector(".images-reader-container")) {
+				const img = document.querySelectorAll<HTMLImageElement>(
+					".images-reader-container img"
+				)[1];
+				presenceData.details = `Reading ${img.alt.substring(
+					0,
+					img.alt.indexOf("chapter")
+				)}`;
+				presenceData.state = img.alt.substring(
+					img.alt.indexOf("chapter"),
+					img.alt.indexOf(",")
+				);
+				presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+					"meta[property='og:image']"
+				).content;
+				presenceData.buttons = [
+					{
+						label: "Read Chapter",
+						url: href,
+					},
+					{
+						label: "Read Description",
+						url: href.split(/(.+)[\\/]/)[1],
+					},
+				];
 			}
+			break;
 		}
-	} else if (pathname.startsWith("/group")) {
-		presenceData.details = "Looking at group";
-		presenceData.state =
-			document.querySelector<HTMLHeadingElement>("h1").textContent;
-	} else if (pathname.startsWith("/search")) {
-		presenceData.details = "Searching";
-		for (const t of document.querySelectorAll("h1.mb-3 > div")) {
-			if (t.textContent) {
-				presenceData.state = t.textContent;
-				break;
-			}
+		case "group":
+			presenceData.details = "Looking at group";
+			presenceData.state =
+				document.querySelector<HTMLHeadingElement>("h1").textContent;
+			break;
+		case "search": {
+			presenceData.details = "Searching";
+			const research = document.querySelector("div > h1")?.textContent;
+			if (research) presenceData.state = research;
+			break;
 		}
-	} else if (pathname.startsWith("/user") && pathname !== "/user") {
-		presenceData.details = `Viewing ${
-			document.querySelector<HTMLHeadingElement>("h1").textContent
-		}`;
-		if (image) {
-			presenceData.largeImageKey = document
-				.querySelector<HTMLImageElement>("#__next div > div > img")
-				.src.replace("size=200", "size=640");
-		}
-	} else {
-		switch (pathname) {
-			case "/ranking": {
-				presenceData.details = "Looking at rankings";
-				break;
+		case "user":
+			presenceData.details = "Viewing their profile";
+			if (arrPath.length > 2) {
+				presenceData.details = "Viewing";
+				presenceData.state =
+					document.querySelector<HTMLHeadingElement>("h1").textContent;
+				presenceData.largeImageKey = document
+					.querySelector<HTMLImageElement>("#__next div > div > img")
+					.src.replace("size=200", "size=640");
 			}
-			case "/comment_list": {
-				presenceData.details = "Looking at comment list";
-				break;
-			}
-			case "/settings": {
-				presenceData.details = "Settings";
-				break;
-			}
-			case "/languages": {
-				presenceData.details = "Languages";
-				break;
-			}
-			case "/privacy": {
-				presenceData.details = "Privacy POlicy";
-				break;
-			}
-			case "/install_app": {
-				presenceData.details = "ComicK App";
-				break;
-			}
-			case "/user": {
-				presenceData.details = "Viewing their profile";
-				break;
-			}
-		}
+			break;
+		default:
+			if (Object.keys(staticPages).includes(arrPath[1]))
+				presenceData = { ...presenceData, ...staticPages[arrPath[1]] };
 	}
-	if (!buttons) delete presenceData.buttons;
+
+	if (!image && presenceData.largeImageKey !== Assets.Logo)
+		presenceData.largeImageKey = Assets.Logo;
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });

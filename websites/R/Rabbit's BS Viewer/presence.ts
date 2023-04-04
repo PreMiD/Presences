@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		privacy = await presence.getSetting<boolean>("privacy"),
 		buttons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/FDP38pa.png",
 			startTimestamp: browsingTimestamp,
 		};
 

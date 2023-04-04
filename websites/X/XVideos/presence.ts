@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details: title ?? "Title not found...",
 				state: uploader ? uploader.textContent : "Uploader not found...",
-				largeImageKey: "lg",
+				largeImageKey: "https://i.imgur.com/3NVSLWV.png",
 				smallImageKey: video.paused ? "pause" : "play",
 				smallImageText: video.paused
 					? (await strings).pause

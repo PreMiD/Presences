@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/HnZw53P.png",
 		},
 		songName = `${document.querySelector("#npArtist").textContent} ${
 			document.querySelector("#npTitle").textContent

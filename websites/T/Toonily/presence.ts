@@ -22,7 +22,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/kKn9z4w.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search, hostname } = document.location,

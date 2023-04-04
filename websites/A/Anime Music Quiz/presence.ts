@@ -12,7 +12,7 @@ let lobbyNumber,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "amq",
+		largeImageKey: "https://i.imgur.com/oaRshoy.png",
 	};
 	if (!navigator.language.includes("it-IT")) {
 		// English

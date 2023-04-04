@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 			"body > div:nth-child(5) > form > table > tbody > tr:nth-child(1) > td"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "tht-logo",
+			largeImageKey: "https://i.imgur.com/8Lcggfs.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

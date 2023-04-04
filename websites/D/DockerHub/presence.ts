@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 		details: "Unknown page", // Left here as a clue to find missing possible states
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/xr2Gulz.png",
 	};
 
 	if (document.location.host === "hub.docker.com") {

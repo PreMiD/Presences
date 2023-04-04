@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bol",
+		largeImageKey: "https://i.imgur.com/HWwm0q0.png",
 		buttons: [{ label: "Pagina bekijken", url: document.location.href }],
 	};
 	presenceData.details = "Bladert op bol.com";

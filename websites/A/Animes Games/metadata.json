@@ -4,14 +4,14 @@
 		"name": "वाह्य",
 		"id": "819696394180100106"
 	},
-	"service": "AnimesOnlineGames",
+	"service": "Animes Games",
 	"description": {
 		"en": "One of the sites with the largest anime catalog to watch in Brazil for free.",
 		"pt_BR": "Um dos sites com o maior catálogo de animes para assistir gratuitamente no Brasil.",
 		"vi_VN": "Một trong những trang với thư viện anime lớn nhất Brazil hoàn toàn miễn phí."
 	},
-	"url": "animesonlinegames.com",
-	"version": "1.0.10",
+	"url": "animesgames.net",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/R56JzLO.png",
 	"thumbnail": "https://i.imgur.com/W8bQjFZ.png",
 	"color": "#229050",

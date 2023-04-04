@@ -43,7 +43,7 @@ const emanate = new Emanate({
 
 emanate.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/yFQLKFU.png",
 			startTimestamp: emanate.startTime,
 		},
 		pages = {

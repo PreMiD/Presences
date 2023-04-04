@@ -23,7 +23,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "tiktok",
+			largeImageKey: "https://i.imgur.com/KBAjCOX.png",
 			startTimestamp: browsingTimestamp,
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),

@@ -4,7 +4,7 @@ presence.on("UpdateData", async () => {
 	const path = location.pathname,
 		[subdomain] = location.host.split("."),
 		presenceData: PresenceData = {
-			largeImageKey: "tailwind-logo",
+			largeImageKey: "https://i.imgur.com/gUxU2Oh.png",
 			startTimestamp: Math.round(Date.now() / 1000),
 		};
 

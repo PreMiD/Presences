@@ -17,7 +17,7 @@ let user: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "sdarot",
+		largeImageKey: "https://i.imgur.com/iHYxLW2.png",
 	};
 
 	if (

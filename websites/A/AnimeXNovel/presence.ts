@@ -18,7 +18,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "axn-logo",
+		largeImageKey: "https://i.imgur.com/LCiiBcG.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

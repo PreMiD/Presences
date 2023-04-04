@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "mangaworld_logo_dark",
+			largeImageKey: "https://i.imgur.com/y53UAth.png",
 		},
 		/* Query dell'URI - URI query */
 		searchParams = new URLSearchParams(

@@ -1,23 +1,27 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "Dark_Ville",
-		"id": "638080361179512853"
+		"name": "stavzdev",
+		"id": "291568379423096832"
 	},
 	"contributors": [
 		{
 			"id": "226622016986415104",
 			"name": "cramatsu"
+		},
+		{
+			"id": "638080361179512853",
+			"name": "Dark_Ville"
 		}
 	],
 	"service": "jut.su",
 	"description": {
 		"en": "Jut.su is Russian anime website",
-		"ru": "Jut.su — это русский сайт аниме",
+		"ru": "Jut.su — это русский сайт с аниме",
 		"nl": "Jut.su is een Russische anime-website"
 	},
 	"url": "jut.su",
-	"version": "2.0.2",
+	"version": "3.0.0",
 	"logo": "https://i.imgur.com/f3zxOuL.png",
 	"thumbnail": "https://i.imgur.com/NlBgvR0.png",
 	"color": "#c9e58b",

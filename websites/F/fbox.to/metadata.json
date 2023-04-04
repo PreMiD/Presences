@@ -14,8 +14,9 @@
 	"description": {
 		"en": "fbox online is free movies streaming website with zero ads, it allows you watch free movies online, watch free tv series online in high quality for free"
 	},
-	"url": "www4.fbox.to",
-	"version": "1.2.3",
+	"url": "fbox.to",
+	"regExp": "(www([0-9]*)?[.])?fbox[.]to",
+	"version": "1.2.5",
 	"logo": "https://i.imgur.com/HXOjyCu.png",
 	"thumbnail": "https://i.imgur.com/bCuViFL.png",
 	"color": "#565c67",

@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "storyfire",
+			largeImageKey: "https://i.imgur.com/1RGQMmt.png",
 		},
 		video: HTMLVideoElement = document.querySelector(
 			"#storyfire-player_html5_api"

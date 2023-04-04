@@ -9,7 +9,7 @@ let gameName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/beLx5ko.png",
 		startTimestamp: browsingTimestamp,
 	};
 

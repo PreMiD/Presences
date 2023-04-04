@@ -38,7 +38,7 @@ if (document.location.pathname.includes(".html")) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "ksow123stack",
+		largeImageKey: "https://i.imgur.com/xYJbv9k.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

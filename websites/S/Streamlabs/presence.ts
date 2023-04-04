@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 		pause: "general.paused",
 	});
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/LvPRxYG.png",
 	};
 
 	switch (window.location.hostname) {

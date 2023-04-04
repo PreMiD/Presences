@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bonkleagues",
+		largeImageKey: "https://i.imgur.com/NSmuGT9.png",
 	};
 
 	if (document.location.pathname.startsWith("/skins.html")) {

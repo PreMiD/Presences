@@ -17,7 +17,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/PfvR7jD.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 

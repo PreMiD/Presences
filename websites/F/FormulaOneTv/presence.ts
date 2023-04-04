@@ -133,7 +133,7 @@ async function setBrowsingActivity(presenceData: PresenceData) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo_512",
+		largeImageKey: "https://i.imgur.com/opuHbca.png",
 	};
 	let contentId = "";
 

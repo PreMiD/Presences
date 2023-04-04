@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 			"#root > div.story.story-container > h1"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "hn-logo",
+			largeImageKey: "https://i.imgur.com/SyFFEUw.png",
 			startTimestamp: browsingTimestamp,
 		};
 

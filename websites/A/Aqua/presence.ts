@@ -32,7 +32,7 @@ let lastTitle: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/dBqeZ3q.png",
 		},
 		[changeDetails, changeState, changeSmallText] = await Promise.all([
 			presence.getSetting<string>("changedetails"),

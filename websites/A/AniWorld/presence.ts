@@ -47,7 +47,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "aniworld-logo",
+			largeImageKey: "https://i.imgur.com/fM3E5Iv.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 	if (page === "/") presenceData.details = "Betrachtet die Startseite";

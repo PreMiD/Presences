@@ -19,7 +19,7 @@ async function shortenURL(url: string, fallback?: string): Promise<string> {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/HnhrAbV.png",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname,

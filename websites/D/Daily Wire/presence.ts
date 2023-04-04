@@ -10,7 +10,7 @@ presence.on("UpdateData", async function () {
 		},
 		urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/BevxEyq.png",
 		};
 
 	if (setting.timeElapsed) presenceData.startTimestamp = browsingTimestamp;

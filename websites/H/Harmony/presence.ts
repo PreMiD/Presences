@@ -21,7 +21,7 @@ setInterval(fetchStats, 10000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "default",
+		largeImageKey: "https://i.imgur.com/lI0bLxr.png",
 		smallImageKey: "live",
 	};
 

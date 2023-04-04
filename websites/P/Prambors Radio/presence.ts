@@ -5,7 +5,7 @@ const presence = new Presence({
 		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/1aHDZrS.png",
 	};
 
 let timestamp: number;

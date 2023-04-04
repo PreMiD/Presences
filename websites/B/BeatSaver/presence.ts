@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/1dBCcdI.png",
 			startTimestamp: browsingTimestamp,
 		};
 

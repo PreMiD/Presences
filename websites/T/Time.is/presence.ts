@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "time",
+			largeImageKey: "https://i.imgur.com/L1202fr.png",
 		},
 		clock =
 			document.querySelector("#clock0_bg") ||

@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "gfycat",
+		largeImageKey: "https://i.imgur.com/PRr2kHO.png",
 	};
 
 	if (document.location.pathname.startsWith("/discover")) {

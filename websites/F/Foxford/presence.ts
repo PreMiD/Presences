@@ -19,7 +19,7 @@ const routes = {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "f1024",
+		largeImageKey: "https://i.imgur.com/41WDw6H.jpg",
 	};
 
 	switch (true) {

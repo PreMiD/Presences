@@ -18,13 +18,11 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "logo_big",
+			largeImageKey: "https://i.imgur.com/eywFbXQ.png",
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en");
-	if (oldLang !== newLang || !strings) {
-		oldLang = newLang;
-		strings = await getStrings();
-	}
+	oldLang = newLang;
+	if (!strings || oldLang !== newLang) strings = await getStrings();
 
 	switch (path[0]) {
 		// Reward Categories

@@ -10,7 +10,7 @@ let timestamp: [number, number],
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/6bm1P3r.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ hash, hostname, href } = document.location,

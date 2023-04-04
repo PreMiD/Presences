@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 
 	if (page.includes("/yardim/sorular/")) {
 		presence.setActivity({
-			largeImageKey: "ty-logo",
+			largeImageKey: "https://i.imgur.com/UDMEG42.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Yardım & Sorular",
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 		(searchingFor && searchingFor.textContent !== "")
 	) {
 		presence.setActivity({
-			largeImageKey: "ty-logo",
+			largeImageKey: "https://i.imgur.com/UDMEG42.png",
 			details: "Bir şey arıyor:",
 			state: searchingFor.textContent || "Belirsiz",
 			smallImageKey: "search",
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (category && category.textContent !== "") {
 		presence.setActivity({
-			largeImageKey: "ty-logo",
+			largeImageKey: "https://i.imgur.com/UDMEG42.png",
 			details: "Bir kategoriye göz atıyor:",
 			state: category.textContent || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
 		product2.textContent !== ""
 	) {
 		presence.setActivity({
-			largeImageKey: "ty-logo",
+			largeImageKey: "https://i.imgur.com/UDMEG42.png",
 			details: "Bir ürüne göz atıyor:",
 			state: `${product.textContent} | ${product2.textContent} ${
 				price && price.textContent !== "" ? `(${price.textContent})` : null
@@ -99,14 +99,14 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
-			largeImageKey: "ty-logo",
+			largeImageKey: "https://i.imgur.com/UDMEG42.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "ty-logo",
+			largeImageKey: "https://i.imgur.com/UDMEG42.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
 			startTimestamp: Math.floor(Date.now() / 1000),

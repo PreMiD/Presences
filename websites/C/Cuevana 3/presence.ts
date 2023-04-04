@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 	let strings = await getStrings();
 	if (document.location.hostname === "m4.cuevana3.me") {
 		const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/uu5XX85.png",
 		};
 
 		if (
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/uu5XX85.png",
 	};
 
 	if (

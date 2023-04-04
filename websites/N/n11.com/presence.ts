@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			)?.content as unknown as Element
 		)?.textContent,
 		presenceData: PresenceData = {
-			largeImageKey: "n11-logo",
+			largeImageKey: "https://i.imgur.com/mmVwCu6.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

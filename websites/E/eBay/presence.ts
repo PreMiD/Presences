@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "ebaylogo",
+			largeImageKey: "https://i.imgur.com/FuSdtYk.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[, page] = location.pathname.split("/");

@@ -24,7 +24,7 @@ jobs:
         run: |
           git config --global core.quotePath false
           git config --global core.precomposeunicode true
-          npm run schemaEnforcer
+          npm run schemaEnforcer uncommitted
       - name: Commit any changes
         if: always()
         run: |

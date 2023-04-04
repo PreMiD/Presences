@@ -7,7 +7,7 @@ let isInGame = false,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/8on5V0y.png",
 		},
 		playerName = document.querySelector(
 			"#component_top_right_loginasname_text"

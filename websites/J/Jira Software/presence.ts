@@ -7,7 +7,7 @@ let projectName: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "jira_logo",
+			largeImageKey: "https://i.imgur.com/ZPX99We.png",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;

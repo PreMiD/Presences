@@ -1,10 +1,14 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "Bas950",
-		"id": "241278257335500811"
+		"name": "RisingSunLight",
+		"id": "240521747852558347"
 	},
 	"contributors": [
+		{
+			"name": "Bas950",
+			"id": "241278257335500811"
+		},
 		{
 			"name": "Moe Kotoki",
 			"id": "276627005280092162"
@@ -23,7 +27,7 @@
 	},
 	"url": "www.pixiv.net",
 	"regExp": "([a-z0-9-]+[.])*pixiv[.]net[/]",
-	"version": "1.1.16",
+	"version": "2.0.0",
 	"logo": "https://i.imgur.com/D8Lf2t2.png",
 	"thumbnail": "https://i.imgur.com/Ggekra0.png",
 	"color": "#009cff",
@@ -32,5 +36,13 @@
 		"novels",
 		"pics",
 		"artworks"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
 	]
 }

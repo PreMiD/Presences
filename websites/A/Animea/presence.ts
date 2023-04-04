@@ -16,7 +16,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/lpx1Af4.png",
 			startTimestamp: browsingTimestamp,
 		},
 		pathnameArray = document.location.pathname.split("/"),
@@ -119,7 +119,8 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (!showCover) presenceData.largeImageKey = "logo";
+	if (!showCover)
+		presenceData.largeImageKey = "https://i.imgur.com/lpx1Af4.png";
 	if (!showButtons) delete presenceData.buttons;
 
 	if (presenceData.details) presence.setActivity(presenceData);

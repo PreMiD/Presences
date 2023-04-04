@@ -6,10 +6,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "clouds",
+			largeImageKey: "https://i.imgur.com/pAEVAX8.png",
 		},
 		presenceDataSlide: PresenceData = {
-			largeImageKey: "clouds",
+			largeImageKey: "https://i.imgur.com/pAEVAX8.png",
 		};
 
 	if (document.querySelector(".player_playing__N2IaC")) {

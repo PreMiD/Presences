@@ -18,7 +18,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "simplyaweeb_logo",
+			largeImageKey: "https://i.imgur.com/LdUPH9K.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[showCover, time] = await Promise.all([

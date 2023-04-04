@@ -7,7 +7,7 @@ let currencyTitle, currencyEffort, effortType, wallet24Revenue: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/l9DGMzK.png",
 	};
 
 	switch (window.location.pathname) {

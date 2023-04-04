@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo_anime",
+			largeImageKey: "https://i.imgur.com/R56JzLO.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search, href } = document.location,
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 				if (search) {
 					presenceData.details = "Procurando";
 					presenceData.state = `Procurando por ${search.substring(3)}`;
-				} else presenceData.details = "Explorando AnimeOnline.Games";
+				} else presenceData.details = "Explorando animesgames.net";
 
 				break;
 			}

@@ -9,7 +9,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "cp",
+			largeImageKey: "https://i.imgur.com/hAt97QK.png",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 

@@ -177,7 +177,7 @@ presence.on("UpdateData", async () => {
 		{
 			details,
 			state,
-			largeImageKey: "hulu",
+			largeImageKey: "https://i.imgur.com/kJKqfdw.png",
 			smallImageKey,
 			smallImageText,
 			startTimestamp,

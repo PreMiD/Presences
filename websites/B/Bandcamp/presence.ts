@@ -11,7 +11,7 @@ let min: number,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "bc",
+			largeImageKey: "https://i.imgur.com/FozA4oY.png",
 			startTimestamp: browsingTimestamp,
 		},
 		cover = await presence.getSetting<boolean>("cover");

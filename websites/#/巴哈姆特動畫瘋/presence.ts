@@ -11,7 +11,7 @@ let user: HTMLElement | Element | string, title: HTMLElement | Element | string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "ani",
+		largeImageKey: "https://i.imgur.com/24VLERu.png",
 	};
 
 	if (document.location.hostname === "ani.gamer.com.tw") {

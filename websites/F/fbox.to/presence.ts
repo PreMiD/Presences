@@ -16,18 +16,31 @@ presence.on(
 	}
 );
 
+enum Assets {
+	Logo = "https://i.imgur.com/HXOjyCu.png",
+	Play = "https://i.imgur.com/6s4WyWY.png",
+	Pause = "https://i.imgur.com/PrYtpQb.png",
+	Search = "https://i.imgur.com/wYVlwJX.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "fbox_logo",
+			largeImageKey: Assets.Logo,
 		},
 		{ pathname, href } = document.location,
 		[buttons, image] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("image"),
-		]);
+		]),
+		search = document.querySelector<HTMLInputElement>('[type="text"]');
 
-	if (pathname === "/home") presenceData.details = "Browsing";
+	if (search?.value) {
+		presenceData.details = "Searching for:";
+		presenceData.state = search.value;
+		presenceData.smallImageKey = Assets.Search;
+	} else if (pathname === "/home" || pathname === "/")
+		presenceData.details = "Browsing";
 	else if (pathname.startsWith("/series/")) {
 		const title = document.querySelector<HTMLHeadingElement>(
 				"#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
@@ -40,17 +53,18 @@ presence.on("UpdateData", async () => {
 			if (episode) presenceData.state += ` - ${episode.textContent.trim()}`;
 		}
 		if (image) {
-			presenceData.largeImageKey = document
-				.querySelector("meta[property='og:image']")
-				.getAttribute("content");
+			presenceData.largeImageKey =
+				document
+					.querySelector("meta[property='og:image']")
+					?.getAttribute("content") ?? Assets.Logo;
 		}
 		if (iFrameData && !iFrameData.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestamps(
 				iFrameData.currTime,
 				iFrameData.duration
 			);
-			presenceData.smallImageKey = "play";
-		} else presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Play;
+		} else presenceData.smallImageKey = Assets.Pause;
 		if (buttons) {
 			presenceData.buttons = [
 				{
@@ -65,17 +79,18 @@ presence.on("UpdateData", async () => {
 		);
 		if (title) presenceData.details = title.textContent;
 		if (image) {
-			presenceData.largeImageKey = document
-				.querySelector("meta[property='og:image']")
-				.getAttribute("content");
+			presenceData.largeImageKey =
+				document
+					.querySelector("meta[property='og:image']")
+					?.getAttribute("content") ?? Assets.Logo;
 		}
 		if (iFrameData && !iFrameData.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestamps(
 				iFrameData.currTime,
 				iFrameData.duration
 			);
-			presenceData.smallImageKey = "play";
-		} else presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Play;
+		} else presenceData.smallImageKey = Assets.Pause;
 		if (buttons) {
 			presenceData.buttons = [
 				{
@@ -92,7 +107,7 @@ presence.on("UpdateData", async () => {
 		const genre = document.querySelector<HTMLHeadingElement>("section.bl h1");
 		if (genre) {
 			presenceData.details = genre.textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

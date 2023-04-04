@@ -6,7 +6,7 @@ let user: HTMLElement, title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "hltv",
+		largeImageKey: "https://i.imgur.com/ATYXE8g.png",
 	};
 
 	if (document.location.hostname === "www.hltv.org") {

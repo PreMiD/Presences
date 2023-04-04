@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/ptddTU8.png",
 	};
 	const [buttons, timestamp, privacy] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),

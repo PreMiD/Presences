@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "776113876605337660",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "mojevideo",
+		largeImageKey: "https://i.imgur.com/hZc3Hcn.png",
 	};
 
 presence.on("UpdateData", async () => {
@@ -63,7 +63,7 @@ function RefreshData() {
 				presenceData.state = `${extraPageNumber}.strana`;
 		}
 	}
-	presenceData.largeImageKey = "mojevideo";
+	presenceData.largeImageKey = "https://i.imgur.com/hZc3Hcn.png";
 }
 
 setInterval(RefreshData, 1000);

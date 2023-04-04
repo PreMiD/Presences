@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "streamable",
+			largeImageKey: "https://i.imgur.com/D38h5SR.png",
 		},
 		player = document.querySelector<HTMLVideoElement>(".video-player-tag");
 

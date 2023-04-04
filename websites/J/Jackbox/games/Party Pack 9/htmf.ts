@@ -21,7 +21,7 @@ export function getPresenceData({
 			break;
 		}
 		case "choosing": {
-			if (playerState.prompt === "")
+			if (playerState.prompt.text === "")
 				presenceData.state = "Voting for a response";
 			else if (playerState.round === "firestarter")
 				presenceData.state = "Choosing a player to burn";

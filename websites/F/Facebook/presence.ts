@@ -20,7 +20,7 @@ function getVideoData(element: HTMLElement): [string?, HTMLVideoElement?] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "facebook",
+			largeImageKey: "https://i.imgur.com/nS9sZn6.png",
 			startTimestamp: browsingTimestamp,
 		},
 		privacyMode = await presence.getSetting<boolean>("privacyMode"),

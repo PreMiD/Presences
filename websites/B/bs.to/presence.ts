@@ -6,7 +6,7 @@ let user: HTMLElement, title: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bs",
+		largeImageKey: "https://i.imgur.com/vgjlpJn.png",
 	};
 
 	if (document.location.hostname === "burningseries.domains") {

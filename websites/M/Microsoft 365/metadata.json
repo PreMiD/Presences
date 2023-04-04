@@ -4,9 +4,9 @@
 		"name": "Kyrie",
 		"id": "368399721494216706"
 	},
-	"service": "Office",
+	"service": "Microsoft 365",
 	"description": {
-		"en": "Microsoft Office, or simply Office, is a family of client software, server software, and services developed by Microsoft."
+		"en": "Microsoft 365 is a product family of productivity software, collaboration and cloud-based services owned by Microsoft."
 	},
 	"url": [
 		"www.office.com",
@@ -14,8 +14,8 @@
 		"onedrive.live.com"
 	],
 	"regExp": "www[.]office[.]com|([a-z0-9-_]+)[-]my[.]sharepoint[.]com|onedrive[.]live[.]com",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/PB21xZi.png",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/E2tzaTW.png",
 	"thumbnail": "https://i.imgur.com/t3LDGbp.png",
 	"color": "#DE5001",
 	"category": "other",

@@ -21,7 +21,7 @@ let qzData: QuizletData = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "quizlet",
+			largeImageKey: "https://i.imgur.com/5K8iXcX.png",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 

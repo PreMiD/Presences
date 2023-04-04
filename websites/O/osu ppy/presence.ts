@@ -16,7 +16,7 @@ let beatmapTitle: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/IWWqSYR.png",
 	};
 
 	if (document.location.pathname === "/home") {

@@ -6,7 +6,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "lg",
+		largeImageKey: "https://i.imgur.com/cr3bzXB.png",
 	};
 	const pages: Record<string, PresenceData> = {
 			login: {

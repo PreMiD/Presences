@@ -21,7 +21,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/L4eWRh1.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
@@ -94,7 +94,8 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (!showCover) presenceData.largeImageKey = "logo";
+	if (!showCover)
+		presenceData.largeImageKey = "https://i.imgur.com/L4eWRh1.png";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

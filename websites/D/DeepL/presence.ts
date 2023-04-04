@@ -9,11 +9,11 @@ presence.on("UpdateData", async () => {
 				document.querySelectorAll(".translate_from")[0].parentNode.textContent,
 			state:
 				document.querySelectorAll(".translate_to")[0].parentNode.textContent,
-			largeImageKey: "lg-deepl",
+			largeImageKey: "https://i.imgur.com/Jkb5SDd.png",
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "lg-deepl",
+			largeImageKey: "https://i.imgur.com/Jkb5SDd.png",
 		});
 	}
 });

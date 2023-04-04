@@ -25,7 +25,7 @@ function parseQueryString(queryString?: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/eOauOMV.png",
 		},
 		pageTitle = document.querySelector("title").textContent.split(" | "),
 		browsingTimestamp = Math.floor(Date.now() / 1000),

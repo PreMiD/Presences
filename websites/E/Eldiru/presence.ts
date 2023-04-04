@@ -7,7 +7,7 @@ let course, sub: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/yQiWgOw.png",
 		startTimestamp: browsingTimestamp,
 	};
 

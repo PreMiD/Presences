@@ -33,7 +33,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "shinden",
+		largeImageKey: "https://i.imgur.com/sGSeLBJ.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

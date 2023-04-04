@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 		valor = document.querySelectorAll("button").length,
 		players = document.querySelectorAll(".userActive"),
 		presenceData: PresenceData = {
-			largeImageKey: "large_image",
+			largeImageKey: "https://i.imgur.com/34NoyFW.png",
 			startTimestamp: browsingTimestamp,
 		};
 

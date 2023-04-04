@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const button = await presence.getSetting<boolean>("button"),
 		presenceData: PresenceData = {
-			largeImageKey: "mplogo",
+			largeImageKey: "https://i.imgur.com/aBu33JP.png",
 			startTimestamp: browsingTimestamp,
 		},
 		title = document.querySelector(

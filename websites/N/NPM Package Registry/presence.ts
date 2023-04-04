@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "lg-npm",
+		largeImageKey: "https://i.imgur.com/XaosIBS.png",
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the homepage";

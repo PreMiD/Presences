@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
 		(category && category.textContent !== "")
 	) {
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey: "https://i.imgur.com/lutK4xu.png",
 			details: "Bir kategoriye göz atıyor:",
 			state: category.textContent.trim() || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 		(searchingFor && searchingFor.textContent !== "")
 	) {
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey: "https://i.imgur.com/lutK4xu.png",
 			details: "Bir şey arıyor:",
 			state:
 				searchingFor && searchingFor.textContent
@@ -126,7 +126,7 @@ presence.on("UpdateData", async () => {
 			);
 
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey: "https://i.imgur.com/lutK4xu.png",
 			details: "Bir ilana göz atıyor:",
 			state:
 				stuff && stuff.textContent !== ""
@@ -140,7 +140,7 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey: "https://i.imgur.com/lutK4xu.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -150,14 +150,14 @@ presence.on("UpdateData", async () => {
 		document.location.pathname === "/"
 	) {
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey: "https://i.imgur.com/lutK4xu.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Bana Özel",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey: "https://i.imgur.com/lutK4xu.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
 			startTimestamp: Math.floor(Date.now() / 1000),

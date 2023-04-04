@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "bfnews-logo",
+			largeImageKey: "https://i.imgur.com/5qKNHPi.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

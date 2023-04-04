@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const path = window.location.hash.substr(1),
 		presenceData: PresenceData = {
-			largeImageKey: "icon",
+			largeImageKey: "https://i.imgur.com/h06H563.jpg",
 		};
 
 	if (path === "action=watch") {

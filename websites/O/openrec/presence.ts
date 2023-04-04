@@ -7,7 +7,7 @@ const presence = new Presence({
 		live: "general.live",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/60hrnT3.jpg",
 	};
 
 presence.on("UpdateData", async () => {
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = title ? title.textContent : "Title not found...";
 		presenceData.state = game ? game.textContent : "Game not found...";
-		presenceData.largeImageKey = "logo";
+		presenceData.largeImageKey = "https://i.imgur.com/60hrnT3.jpg";
 		presenceData.smallImageKey = live
 			? "live"
 			: video.paused
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/60hrnT3.jpg",
 		});
 	}
 });

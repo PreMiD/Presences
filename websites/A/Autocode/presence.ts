@@ -12,7 +12,7 @@ const presence = new Presence({ clientId: "858292108195921920" }),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "autocode",
+			largeImageKey: "https://i.imgur.com/KNLjAwu.jpg",
 			startTimestamp: startedAt,
 		},
 		{ pathname, hostname } = window.location,

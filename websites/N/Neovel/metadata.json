@@ -12,7 +12,7 @@
 	},
 	"url": "neovel.io",
 	"regExp": "([a-z]*[.])*(neovel|neopload.neovel)[.]io",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"logo": "https://i.imgur.com/CYk2ZDX.jpg",
 	"thumbnail": "https://i.imgur.com/Ei5H8Zz.jpg",
 	"color": "#041a26",

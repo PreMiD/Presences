@@ -18,7 +18,7 @@ function parseQueryString(queryString?: string): { [key: string]: string } {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/RqcY9ZL.png",
 		},
 		route = document.location.pathname.split("/");
 

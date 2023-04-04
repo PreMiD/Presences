@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: "soundcloud",
+		largeImageKey: "https://i.imgur.com/KgOkfIz.png",
 		startTimestamp: elapsed,
 	};
 

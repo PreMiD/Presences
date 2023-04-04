@@ -4,7 +4,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 	});
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey: "https://i.imgur.com/oOfAfMP.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "pxls.space") {

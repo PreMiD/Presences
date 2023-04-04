@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "image",
+			largeImageKey: "https://i.imgur.com/CFAKdIH.png",
 		},
 		showISP = await presence.getSetting<boolean>("showISP");
 
