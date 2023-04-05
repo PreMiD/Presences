@@ -54,16 +54,21 @@ presence.on("UpdateData", async () => {
 	for (const [path, data] of Object.entries(pages))
 		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
 
-	// Search Term
-	if (location.href.includes("search")) {
-		// Searching product
-		const replaced = document
-			.querySelector(".plp-heading")
-			.textContent.replace(/["]/g, " ")
-			.replace("Showing results for", "");
-
+	// When searching for product
+	const search = document.querySelector<HTMLInputElement>('[id="Search"]');
+	if (search?.value) {
 		presenceData.details = "Searching for:";
-		presenceData.state = replaced;
+		presenceData.state = search.value;
+		presenceData.smallImageKey = "https://i.imgur.com/B5iUj20.png";
+		return presence.setActivity(presenceData);
+	}
+
+	if (pathname === "search") {
+		presenceData.details = "Viewing search results for:";
+		presenceData.state = document
+			.querySelector('[class="breadcrumb"]')
+			.lastElementChild?.textContent?.trim();
+		presenceData.smallImageKey = "https://i.imgur.com/B5iUj20.png";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
