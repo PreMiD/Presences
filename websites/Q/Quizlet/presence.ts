@@ -11,7 +11,7 @@ interface QuizletData {
 		studyableType?: string;
 	};
 	searchLayer?: {
-		search_term: string;
+		searchTerm: string;
 	};
 }
 /* eslint-enable camelcase */
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "search";
 				presenceData.smallImageText = "Searching";
 				presenceData.details = "Searching";
-				presenceData.state = qzData.searchLayer.search_term;
+				presenceData.state = qzData.searchLayer.searchTerm;
 				actionTimestamp = null;
 				break;
 			case "Sets":

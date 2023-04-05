@@ -14,7 +14,7 @@
 	},
 	"url": "itsbeats.net",
 	"regExp": "([a-z0-9-]+[.])*(itsbeats[.]net)[/]",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/36Ln5RE.png",
 	"thumbnail": "https://i.imgur.com/audBuMC.png",
 	"color": "#32a852",

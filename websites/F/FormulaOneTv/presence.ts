@@ -14,7 +14,7 @@ interface VideoDetails {
 				| "PRESS CONFERENCE";
 			duration: number;
 			emfAttributes: {
-				Global_Meeting_Name: string;
+				globalMeetingName: string;
 				Series: "FORMULA 1" | "FORMULA 2" | "FORMULA 3";
 			};
 		};
@@ -80,7 +80,7 @@ async function setWatchingVideoActivity(
 				"FORMULA 2": "F2",
 				"FORMULA 3": "F3",
 			}[videoMetadata.emfAttributes.Series]
-		} - ${videoMetadata.emfAttributes.Global_Meeting_Name}`;
+		} - ${videoMetadata.emfAttributes.globalMeetingName}`;
 	} else {
 		// Show which type of video is being watched; Examples include "Watching Documentary", "Watching Show", "Watching Highlights"
 		presenceData.details = `Watching ${capitaliseFirstLetters(

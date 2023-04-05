@@ -9,15 +9,15 @@ let data: {
 	listeners: {
 		total: string;
 	};
-	now_playing: {
+	nowPlaying: {
 		song: {
 			artist: string;
 			title: string;
 		};
 	};
 	live: {
-		is_live: boolean;
-		streamer_name: string;
+		isLive: boolean;
+		streamerName: string;
 	};
 };
 /* eslint-enable camelcase */
@@ -32,12 +32,12 @@ presence.on("UpdateData", async () => {
 				data.listeners.total
 			),
 			state: (await presence.getSetting<string>("state"))
-				.replace("%artist%", data.now_playing.song.artist || "Artist")
+				.replace("%artist%", data.nowPlaying.song.artist || "Artist")
 				.replace(
 					"%songText%",
-					`${data.now_playing.song.artist} - ${data.now_playing.song.title}`
+					`${data.nowPlaying.song.artist} - ${data.nowPlaying.song.title}`
 				)
-				.replace("%title%", data.now_playing.song.title || "Title"),
+				.replace("%title%", data.nowPlaying.song.title || "Title"),
 			timestamp: await presence.getSetting<boolean>("timestamp"),
 		},
 		presenceData: PresenceData = {
@@ -45,12 +45,12 @@ presence.on("UpdateData", async () => {
 			details: settings.details,
 			state: settings.state,
 			smallImageText: `${
-				data.live.is_live ? data.live.streamer_name : "AutoDJ"
+				data.live.isLive ? data.live.streamerName : "AutoDJ"
 			} is live!`,
 		};
 
 	if (settings.timestamp) presenceData.startTimestamp = timestamp;
-	if (data.live.is_live) presenceData.smallImageKey = "live";
+	if (data.live.isLive) presenceData.smallImageKey = "live";
 	else delete presenceData.smallImageText;
 
 	presence.setActivity(presenceData);

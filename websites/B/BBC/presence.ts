@@ -234,7 +234,7 @@ presence.on("UpdateData", async () => {
 
 		if (path.includes("/play/")) {
 			const isLive = path.includes("live:");
-			setCover(soundData.programmes.current.image_url);
+			setCover(soundData.programmes.current.imageUrl);
 
 			if (isLive) {
 				presenceData.details =
@@ -736,7 +736,6 @@ interface IPlayerData {
 			portrait?: string;
 			standard: string;
 			promotional: string;
-			promotional_with_logo: string;
 		};
 		labels?: {
 			category: string;
@@ -791,7 +790,7 @@ interface MediaData {
 interface SoundData {
 	programmes: {
 		current: {
-			image_url: string;
+			imageUrl: string;
 			titles: {
 				primary?: string;
 				secondary?: string;

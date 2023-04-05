@@ -9,7 +9,7 @@ let data: {
 	listeners: {
 		unique: number;
 	};
-	now_playing: {
+	nowPlaying: {
 		song: {
 			artist: string;
 			text: string;
@@ -17,8 +17,8 @@ let data: {
 		};
 	};
 	live: {
-		is_live: boolean;
-		streamer_name: string;
+		isLive: boolean;
+		streamerName: string;
 	};
 };
 
@@ -29,14 +29,14 @@ presence.on("UpdateData", async () => {
 	const settings = {
 			details: (await presence.getSetting<string>("details"))
 				.replace("%listeners%", `${data.listeners?.unique ?? "Listeners"}`)
-				.replace("%artist%", data.now_playing?.song.artist || "Artist")
-				.replace("%songText%", data.now_playing.song.text || "Song")
-				.replace("%title%", data.now_playing?.song.title || "Title"),
+				.replace("%artist%", data.nowPlaying?.song.artist || "Artist")
+				.replace("%songText%", data.nowPlaying.song.text || "Song")
+				.replace("%title%", data.nowPlaying?.song.title || "Title"),
 			state: (await presence.getSetting<string>("state"))
 				.replace("%listeners%", `${data.listeners?.unique ?? "Listeners"}`)
-				.replace("%artist%", data.now_playing?.song.artist || "Artist")
-				.replace("%songText%", data.now_playing.song.text || "Song")
-				.replace("%title%", data.now_playing?.song.title || "Title"),
+				.replace("%artist%", data.nowPlaying?.song.artist || "Artist")
+				.replace("%songText%", data.nowPlaying.song.text || "Song")
+				.replace("%title%", data.nowPlaying?.song.title || "Title"),
 			timestamp: await presence.getSetting<boolean>("timestamp"),
 		},
 		presenceData: PresenceData = {
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 			details: settings.details,
 			state: settings.state,
 			smallImageText: `${
-				data.live.is_live ? data.live.streamer_name : "AutoDJ"
+				data.live.isLive ? data.live.streamerName : "AutoDJ"
 			} is live!`,
 			buttons: [
 				{
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 		};
 
 	if (settings.timestamp) presenceData.startTimestamp = timestamp;
-	if (data.live.is_live && data.live.streamer_name !== "Admin")
+	if (data.live.isLive && data.live.streamerName !== "Admin")
 		presenceData.smallImageKey = "live";
 	else delete presenceData.smallImageText;
 

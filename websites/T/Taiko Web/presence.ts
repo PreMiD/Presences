@@ -11,11 +11,11 @@ const presence = new Presence({
 	};
 
 interface Song {
-	category_id: number;
+	categoryId: number;
 	id: number;
 	title: string;
 
-	title_lang: Record<string, string>;
+	titleLang: Record<string, string>;
 	category: string;
 }
 /* eslint-enable camelcase */
@@ -49,9 +49,9 @@ async function getSongs() {
 			songIndexToSongId = songs
 				.sort((a, b) => {
 					return (
-						a.category_id * songs.length +
+						a.categoryId * songs.length +
 						a.id -
-						(b.category_id * songs.length + b.id)
+						(b.categoryId * songs.length + b.id)
 					);
 				})
 				.map(song => song.id);
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 				}
 
 				if (songId !== -1)
-					presenceData.details = `Selecting Song ${selectedSong.title_lang.en}`;
+					presenceData.details = `Selecting Song ${selectedSong.titleLang.en}`;
 				else {
 					switch (songIndex) {
 						case 201:
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
 					lastId = songId;
 				}
 
-				presenceData.details = `Playing ${selectedSong.title_lang.en}`;
+				presenceData.details = `Playing ${selectedSong.titleLang.en}`;
 				presenceData.smallImageKey = "taiko_logo";
 				presenceData.smallImageText = selectedSong.title;
 
