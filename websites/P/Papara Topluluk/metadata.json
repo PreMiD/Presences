@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "Papara Topluluk",
+  "author": {
+    "id": "162969778699501569",
+    "name": "EGGSY#3388"
+  },
+  "description": {
+    "en": "Papara Community where you can ask questions to other users, get instant answers and share your ideas about the application, shape the future of Papara.",
+    "tr": "Diğer kullanıcılara soru sorabileceğiniz, anında yanıt alabileceğiniz ve uygulama ile ilgili fikirlerinizi paylaşabileceğiniz Papara Topluluğu, Papara'nın geleceğini şekillendiriyor."
+  },
+  "url": "topluluk.papara.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/wsEA3eB.png",
+  "thumbnail": "https://i.imgur.com/PWJiszf.png",
+  "color": "#8C00A1",
+  "tags": [
+    "turkish",
+    "community",
+    "forum"
+  ],
+  "settings": [
+    {
+      "id": "privacyMode",
+      "title": "Gizlilik Modu",
+      "icon": "fas fa-eye",
+      "value": false
+    }
+  ],
+  "category": "socials"
+}
