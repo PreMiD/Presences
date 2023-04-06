@@ -1,265 +1,331 @@
 const presence = new Presence({
-  clientId: "799629862620758046"
+	clientId: "799629862620758046",
 });
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			browsing: "general.browsing",
+			live: "general.live",
+			searching: "general.search",
+			viewMovie: "general.viewMovie",
+			watchingMovie: "general.watchingMovie",
+			watchingSeries: "general.watchingSeries",
+			watchMovie: "general.buttonViewMovie",
+			watchSeries: "general.buttonViewSeries",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
+
 presence.on("UpdateData", async function () {
-  const presenceData = {
-      largeImageKey: "logo"
-    },
-    set_timeRemaining = await presence.getSetting("timeRemaining"),
-    set_showButtons = await presence.getSetting("showButtons"),
-    urlpath = window.location.pathname.split("/"),
-    video = document.querySelector("div video");
-  if (
-    document.location.hostname == "www.joyn.de" ||
-    document.location.hostname == "joyn.de"
-  ) {
-    if (document.querySelector(".lk71lm-0.htJLsh")) {
-      presenceData.details = "Suche";
-      presenceData.state = document.querySelector(".search-input").value;
-    } else if (
-      (urlpath[1] == "" || document.location.pathname.includes("/#home")) &&
-      urlpath[2] != ""
-    ) {
-      presenceData.details = "Durchstöbert";
-    } else if (urlpath[1] == "compilation") {
-      const compilation = document.querySelector(".artLogo");
-      presenceData.details = "Betrachtet Compilation:";
-      if (compilation) presenceData.state = compilation.alt;
-      if (!compilation)
-        presenceData.state = document.querySelector(".hXdaOG").textContent;
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/SrAaJDz.jpg",
+		},
+		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+		setting = {
+			timeRemaining: await presence.getSetting<boolean>("timeRemaining"),
+			showButtons: await presence.getSetting<boolean>("showButtons"),
+		},
+		urlpath = window.location.pathname.split("/"),
+		video: HTMLVideoElement = document.querySelector("div video");
 
-      if (set_showButtons) {
-        presenceData.buttons = [
-          {
-            label: "Compilation anschauen",
-            url: "https://www.joyn.de/compilation/" + urlpath[2]
-          }
-        ];
-      }
-    } else if (urlpath[1] == "filme") {
-      const film = document.querySelector(".artLogo");
-      presenceData.details = "Betrachtet Film:";
-      if (film) presenceData.state = film.alt;
-      if (!film)
-        presenceData.state = document.querySelector(".hXdaOG").textContent;
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
-      if (set_showButtons) {
-        presenceData.buttons = [
-          {
-            label: "Film anschauen",
-            url: "https://www.joyn.de/filme/" + urlpath[2]
-          }
-        ];
-      }
-    } else if (urlpath[1] == "serien") {
-      const serie = document.querySelector(".artLogo");
-      presenceData.details = "Betrachtet Serie:";
-      if (serie) presenceData.state = serie.alt;
-      if (!serie)
-        presenceData.state = document.querySelector(".hXdaOG").textContent;
+	if (
+		document.location.hostname === "www.joyn.de" ||
+		document.location.hostname === "joyn.de"
+	) {
+		if (document.querySelector(".lk71lm-0.htJLsh")) {
+			presenceData.details = (await strings).searching;
+			presenceData.state =
+				document.querySelector<HTMLInputElement>(".search-input").value;
+		} else if (
+			(urlpath[1] === "" || document.location.pathname.includes("/#home")) &&
+			urlpath[2] !== ""
+		)
+			presenceData.details = (await strings).browsing;
+		else {
+			switch (urlpath[1]) {
+				case "compilation": {
+					const compilation = document.querySelector(".artLogo");
+					presenceData.details = "Viewing Compilation:";
+					if (compilation)
+						presenceData.state = (compilation as HTMLImageElement).alt;
+					if (!compilation)
+						presenceData.state = document.querySelector(".hXdaOG").textContent;
 
-      if (set_showButtons) {
-        presenceData.buttons = [
-          {
-            label: "Serie anschauen",
-            url: "https://www.joyn.de/serien/" + urlpath[2]
-          }
-        ];
-      }
-    } else if (
-      urlpath[1] != "play" &&
-      (document.location.pathname.includes("/serien") ||
-        document.location.pathname.includes("/filme") ||
-        document.location.pathname.includes("/sport"))
-    ) {
-      presenceData.details = "Durchstöbert";
-    } else if (urlpath[1] == "channels") {
-      presenceData.details = "Durchstöbert";
-      presenceData.state = document.querySelector(".bISbKZ").textContent;
-    } else if (urlpath[1] == "play" && urlpath[2] == "filme") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
-          video.currentTime +
-          video.duration;
-      presenceData.details = document.title.replace("streamen | Joyn", "");
-      presenceData.state = "Film";
-      if (!video.paused) {
-        if (set_timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
-        }
-        presenceData.smallImageKey = "play";
-        presenceData.smallImageText = "Wiedergabe";
-      } else {
-        presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = "Pausiert";
-      }
-      if (set_showButtons) {
-        presenceData.buttons = [
-          {
-            label: "Film anschauen",
-            url: "https://www.joyn.de/filme/" + urlpath[3]
-          }
-        ];
-      }
-    } else if (urlpath[1] == "play" && urlpath[2] == "serien") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
-          video.currentTime +
-          video.duration;
-      presenceData.details = document.title.replace("streamen", "");
-      presenceData.state = "Serie";
-      if (!video.paused) {
-        if (set_timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
-        }
-        presenceData.smallImageKey = "play";
-        presenceData.smallImageText = "Wiedergabe";
-      } else {
-        presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = "Pausiert";
-      }
+					if (setting.showButtons) {
+						presenceData.buttons = [
+							{
+								label: "Watch Compilation",
+								url: `https://www.joyn.de/compilation/${urlpath[2]}`,
+							},
+						];
+					}
 
-      if (set_showButtons) {
-        presenceData.buttons = [
-          {
-            label: "Serie anschauen",
-            url: "https://www.joyn.de/serien/" + urlpath[3]
-          }
-        ];
-      }
-    } else if (urlpath[1] == "play" && urlpath[2] == "trailer") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
-          video.currentTime +
-          video.duration;
-      presenceData.details = document.title.replace("Trailer | Joyn", "");
-      presenceData.state = "Trailer";
-      if (!video.paused) {
-        if (set_timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
-        }
-        presenceData.smallImageKey = "play";
-        presenceData.smallImageText = "Wiedergabe";
-      } else {
-        presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = "Pausiert";
-      }
-    } else if (urlpath[1] == "play" && urlpath[2] == "live-tv") {
-      presenceData.details = document.title.replace(
-        "im Livestream anschauen | Joyn",
-        ""
-      );
-      presenceData.state = "Live-TV";
-      presenceData.smallImageKey = "live";
-      presenceData.smallImageText = "Live";
+					break;
+				}
+				case "filme": {
+					const film = document.querySelector(".artLogo");
+					presenceData.details = (await strings).viewMovie;
+					if (film) presenceData.state = (film as HTMLImageElement).alt;
+					if (!film)
+						presenceData.state = document.querySelector(".hXdaOG").textContent;
 
-      if (set_showButtons) {
-        presenceData.buttons = [
-          {
-            label: "Sendung anschauen",
-            url: window.location.href
-          }
-        ];
-      }
-    } else if (urlpath[1] == "play" && urlpath[2] == "compilation") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
-          video.currentTime +
-          video.duration;
-      presenceData.details = document.title.replace("| Joyn", "");
-      presenceData.state = "Compilation";
-      if (!video.paused) {
-        if (set_timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
-        }
-        presenceData.smallImageKey = "play";
-        presenceData.smallImageText = "Wiedergabe";
-      } else {
-        presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = "Pausiert";
-      }
+					if (setting.showButtons) {
+						presenceData.buttons = [
+							{
+								label: (await strings).watchMovie,
+								url: `https://www.joyn.de/filme/${urlpath[2]}`,
+							},
+						];
+					}
 
-      if (set_showButtons) {
-        presenceData.buttons = [
-          {
-            label: "Compilation anschauen",
-            url: "https://www.joyn.de/compilation/" + urlpath[3]
-          }
-        ];
-      }
-    } else if (urlpath[1] == "play" && urlpath[2] == "sport") {
-      const video_startTime = Date.now(),
-        video_endTime =
-          Math.floor(video_startTime / 1000) -
-          video.currentTime +
-          video.duration;
-      presenceData.details = document.querySelector(
-        ".metadataWrapper .metadataTitle"
-      ).textContent;
-      presenceData.state = "Sport";
-      if (!video.paused) {
-        if (set_timeRemaining) {
-          presenceData.startTimestamp = video_startTime;
-          presenceData.endTimestamp = video_endTime;
-        }
-        presenceData.smallImageKey = "play";
-        presenceData.smallImageText = "Wiedergabe";
-      } else {
-        presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = "Pausiert";
-      }
+					break;
+				}
+				case "serien": {
+					const serie = document.querySelector(".artLogo");
+					presenceData.details = "Viewing Series:";
+					if (serie) presenceData.state = (serie as HTMLImageElement).alt;
+					if (!serie)
+						presenceData.state = document.querySelector(".hXdaOG").textContent;
 
-      if (set_showButtons) {
-        presenceData.buttons = [
-          {
-            label: "Sportsendung anschauen",
-            url: window.location.href
-          }
-        ];
-      }
-    } else if (urlpath[1] == "mein-account") {
-      if (urlpath[2] == "details") {
-        presenceData.details = "Mein Account";
-        presenceData.state = "Details";
-      } else {
-        presenceData.details = "Mein Account";
-      }
-    } else if (urlpath[1] == "abo") {
-      if (urlpath[2] == "bezahlung") {
-        presenceData.details = "Mein Account";
-        presenceData.state = "Bezahlungsmethode";
-      } else if (urlpath[2] == "rechnung") {
-        presenceData.details = "Mein Account";
-        presenceData.state = "Rechnungen";
-      } else {
-        presenceData.details = "Mein Account";
-        presenceData.state = "Mitgliedschaft";
-      }
-    } else if (urlpath[1] == "fsk") {
-      presenceData.details = "Mein Account";
-      presenceData.state = "FSK Einstellungen";
-    } else if (urlpath[1] == "ueber-joyn") {
-      presenceData.details = "Über Joyn";
-    } else if (urlpath[1] == "jugendschutz") {
-      presenceData.details = "Jugendschutz";
-    } else if (urlpath[1] == "datenschutz") {
-      presenceData.details = "Datenschutzerklärung";
-    } else if (urlpath[1] == "agb") {
-      presenceData.details = "AGB's";
-    }
-  }
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+					if (setting.showButtons) {
+						presenceData.buttons = [
+							{
+								label: (await strings).watchSeries,
+								url: `https://www.joyn.de/serien/${urlpath[2]}`,
+							},
+						];
+					}
+
+					break;
+				}
+				default:
+					if (
+						urlpath[1] !== "play" &&
+						(document.location.pathname.includes("/serien") ||
+							document.location.pathname.includes("/filme") ||
+							document.location.pathname.includes("/sport"))
+					)
+						presenceData.details = (await strings).browsing;
+					else if (urlpath[1] === "channels") {
+						presenceData.details = (await strings).browsing;
+						presenceData.state = document.querySelector(".bISbKZ").textContent;
+					} else if (urlpath[1] === "play" && urlpath[2] === "filme") {
+						const videoStartTime = Date.now();
+						presenceData.details = document.title.replace(
+							"streamen | Joyn",
+							""
+						);
+						presenceData.state = "Movie";
+						if (!video.paused) {
+							if (setting.timeRemaining) {
+								presenceData.startTimestamp = videoStartTime;
+								presenceData.endTimestamp =
+									Math.floor(videoStartTime / 1000) -
+									video.currentTime +
+									video.duration;
+							}
+							presenceData.smallImageKey = "play";
+							presenceData.smallImageText = (await strings).play;
+						} else {
+							presenceData.smallImageKey = "pause";
+							presenceData.smallImageText = (await strings).pause;
+						}
+						if (setting.showButtons) {
+							presenceData.buttons = [
+								{
+									label: (await strings).watchMovie,
+									url: `https://www.joyn.de/filme/${urlpath[3]}`,
+								},
+							];
+						}
+					} else if (urlpath[1] === "play" && urlpath[2] === "serien") {
+						const videoStartTime = Date.now();
+
+						presenceData.details = document.title.replace("streamen", "");
+						presenceData.state = "Series";
+						if (!video.paused) {
+							if (setting.timeRemaining) {
+								presenceData.startTimestamp = videoStartTime;
+								presenceData.endTimestamp =
+									Math.floor(videoStartTime / 1000) -
+									video.currentTime +
+									video.duration;
+							}
+							presenceData.smallImageKey = "play";
+							presenceData.smallImageText = (await strings).play;
+						} else {
+							presenceData.smallImageKey = "pause";
+							presenceData.smallImageText = (await strings).pause;
+						}
+
+						if (setting.showButtons) {
+							presenceData.buttons = [
+								{
+									label: (await strings).watchSeries,
+									url: `https://www.joyn.de/serien/${urlpath[3]}`,
+								},
+							];
+						}
+					} else if (urlpath[1] === "play" && urlpath[2] === "trailer") {
+						const videoStartTime = Date.now();
+						presenceData.details = document.title.replace("Trailer | Joyn", "");
+						presenceData.state = "Trailer";
+						if (!video.paused) {
+							if (setting.timeRemaining) {
+								presenceData.startTimestamp = videoStartTime;
+								presenceData.endTimestamp =
+									Math.floor(videoStartTime / 1000) -
+									video.currentTime +
+									video.duration;
+							}
+							presenceData.smallImageKey = "play";
+							presenceData.smallImageText = (await strings).play;
+						} else {
+							presenceData.smallImageKey = "pause";
+							presenceData.smallImageText = (await strings).pause;
+						}
+					} else if (urlpath[1] === "play" && urlpath[2] === "live-tv") {
+						presenceData.details = document.title.replace(
+							"im Livestream anschauen | Joyn",
+							""
+						);
+						presenceData.state = "Live-TV";
+						presenceData.smallImageKey = "live";
+						presenceData.smallImageText = (await strings).live;
+
+						if (setting.showButtons) {
+							presenceData.buttons = [
+								{
+									label: "Watch show",
+									url: window.location.href,
+								},
+							];
+						}
+					} else if (urlpath[1] === "play" && urlpath[2] === "compilation") {
+						const videoStartTime = Date.now();
+						presenceData.details = document.title.replace("| Joyn", "");
+						presenceData.state = "Compilation";
+						if (!video.paused) {
+							if (setting.timeRemaining) {
+								presenceData.startTimestamp = videoStartTime;
+								presenceData.endTimestamp =
+									Math.floor(videoStartTime / 1000) -
+									video.currentTime +
+									video.duration;
+							}
+							presenceData.smallImageKey = "play";
+							presenceData.smallImageText = (await strings).play;
+						} else {
+							presenceData.smallImageKey = "pause";
+							presenceData.smallImageText = (await strings).pause;
+						}
+
+						if (setting.showButtons) {
+							presenceData.buttons = [
+								{
+									label: "Watch Compilation",
+									url: `https://www.joyn.de/compilation/${urlpath[3]}`,
+								},
+							];
+						}
+					} else if (urlpath[1] === "play" && urlpath[2] === "sport") {
+						presenceData.details = document.querySelector(
+							".metadataWrapper .metadataTitle"
+						).textContent;
+						presenceData.state = "Sport";
+						if (!video.paused) {
+							if (setting.timeRemaining) {
+								presenceData.startTimestamp = Date.now();
+								presenceData.endTimestamp =
+									Math.floor(Date.now() / 1000) -
+									video.currentTime +
+									video.duration;
+							}
+							presenceData.smallImageKey = "play";
+							presenceData.smallImageText = (await strings).play;
+						} else {
+							presenceData.smallImageKey = "pause";
+							presenceData.smallImageText = (await strings).pause;
+						}
+
+						if (setting.showButtons) {
+							presenceData.buttons = [
+								{
+									label: "Watch sports show",
+									url: window.location.href,
+								},
+							];
+						}
+					} else if (urlpath[1] === "collections" && urlpath[2]) {
+						presenceData.details = "Viewing Collection:";
+						presenceData.state = document.querySelector(
+							"h1.sc-eqamei-0.cdfQp"
+						)?.textContent;
+					} else {
+						switch (urlpath[1]) {
+							case "mein-account": {
+								if (urlpath[2] === "details") {
+									presenceData.details = "My Account";
+									presenceData.state = "Details";
+								} else presenceData.details = "My Account";
+
+								break;
+							}
+							case "abo": {
+								if (urlpath[2] === "bezahlung") {
+									presenceData.details = "My Account";
+									presenceData.state = "Payment method";
+								} else if (urlpath[2] === "rechnung") {
+									presenceData.details = "My Account";
+									presenceData.state = "Bills";
+								} else {
+									presenceData.details = "My Account";
+									presenceData.state = "Membership";
+								}
+
+								break;
+							}
+							case "fsk": {
+								presenceData.details = "My Account";
+								presenceData.state = "FSK Settings";
+
+								break;
+							}
+							case "ueber-joyn": {
+								presenceData.details = "About Joyn";
+								break;
+							}
+							case "jugendschutz": {
+								presenceData.details = "Youth protection";
+								break;
+							}
+							case "datenschutz": {
+								presenceData.details = "Privacy policy";
+								break;
+							}
+							case "agb":
+								{
+									presenceData.details = "Terms of service";
+									// No default
+								}
+								break;
+						}
+					}
+			}
+		}
+	}
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

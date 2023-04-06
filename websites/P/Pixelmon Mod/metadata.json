@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"service": "Pixelmon Mod",
+	"description": {
+		"en": "Pixelmon adds many aspects of Pokémon into Minecraft, including the Pokémon themselves, battling, trading, and breeding.",
+		"nl": "Pixelmon voegt veel aspecten van Pokémon toe aan Minecraft, zoals Pokémon zelf, vechten, ruilen en fokken."
+	},
+	"url": "pixelmonmod.com",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/49VYHIM.png",
+	"thumbnail": "https://i.imgur.com/TdkLc6t.jpg",
+	"color": "#F27635",
+	"category": "games",
+	"tags": [
+		"pixelmon",
+		"pokemon"
+	]
+}

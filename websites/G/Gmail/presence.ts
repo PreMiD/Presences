@@ -1,123 +1,113 @@
 const presence = new Presence({
-    clientId: "808667100319186964"
-  }),
-  elapsed = Math.floor(Date.now() / 1000);
+		clientId: "808667100319186964",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
-    path = window.location.href,
-    emailCheck = window.location.href.split("/").length == 7 ? false : true;
+async function getStrings() {
+	return presence.getStrings(
+		{
+			categoryPrimary: "gmail.categoryPrimary",
+			categorySocial: "gmail.categorySocial",
+			categoryUpdates: "gmail.categoryUpdates",
+			categoryPromotions: "gmail.categoryPromotions",
+			categoryForum: "gmail.categoryForum",
+			inLabel: "gmail.inLabel",
+			generalSettings: "gmail.generalSettings",
+			labelSettings: "gmail.labelSettings",
+			inboxSettings: "gmail.inboxSettings",
+			accountSetting: "gmail.accountSetting",
+			filterSettings: "gmail.filterSettings",
+			fwdAndPOPSettings: "gmail.fwdAndPOPSettings",
+			addonsSettings: "gmail.addonsSettings",
+			chatSettings: "gmail.chatSettings",
+			advancedSettings: "gmail.advancedSettings",
+			offlineSettings: "gmail.offlineSettings",
+			themesSettings: "gmail.themesSettings",
+			lookingForEmail: "gmail.lookingForEmail",
+			viewingEmail: "gmail.viewingEmail",
+			viewingStarredEmails: "gmail.viewingStarredEmails",
+			viewingSentEmails: "gmail.viewingSentEmails",
+			viewingSnoozedEmails: "gmail.viewingSnoozedEmails",
+			viewingDrafts: "gmail.viewingDrafts",
+			viewingImportantEmails: "gmail.viewingImportantEmails",
+			viewingTrash: "gmail.viewingTrash",
+			viewingChats: "gmail.viewingChats",
+			viewingScheduled: "gmail.viewingScheduled",
+			viewingSpam: "gmail.viewingSpam",
+			viewingAllEmails: "gmail.viewingAllEmails",
+			composingEmail: "gmail.composingEmail",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
 
-  if (emailCheck) {
-    if (path.endsWith("#category/social")) {
-      presenceData.details = "Viewing Social Mails";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("#category/updates")) {
-      presenceData.details = "Viewing Updates Mails";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("#category/forums")) {
-      presenceData.details = "Viewing Forums Mails";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("#category/promotions")) {
-      presenceData.details = "Viewing Promotions Mails";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.match("/#label/")) {
-      const labelname = document.querySelector("head > title").textContent;
-      presenceData.details = "In the Label: ";
-      presenceData.state = labelname.replace('"', "").split('" - ')[0];
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/general")) {
-      presenceData.details = "In the General settings";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/labels")) {
-      presenceData.details = "In the Labels settings";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/inbox")) {
-      presenceData.details = "In the settings of the";
-      presenceData.state = "Inbox Mails";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/accounts")) {
-      presenceData.details = "In the Account settings";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/filters")) {
-      presenceData.details = "In the Filter settings";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/fwdandpop")) {
-      presenceData.details = "In the settings:";
-      presenceData.state = "POP and IMAP";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/addons")) {
-      presenceData.details = "In the Addons settings";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/chat")) {
-      presenceData.details = "In the Chat settings";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/labs")) {
-      presenceData.details = "In the Advanced settings";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/offline")) {
-      presenceData.details = "In the Offline settings";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.endsWith("/#settings/oldthemes")) {
-      presenceData.details = "In the Themes settings";
-      presenceData.startTimestamp = elapsed;
-    } else if (path.match("/#search/")) {
-      presenceData.details = "Looking for a mail";
-      presenceData.startTimestamp = elapsed;
-    } else {
-      presenceData.details = "Viewing an Email";
-      presenceData.startTimestamp = elapsed;
-    }
-  } else if (path.endsWith("inbox")) {
-    presenceData.details = "Viewing Inbox";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("compose=new")) {
-    presenceData.details = "Composing a New Email";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("starred")) {
-    presenceData.details = "Viewing Starred";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("snoozed")) {
-    presenceData.details = "Viewing Snoozed";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("sent")) {
-    presenceData.details = "Viewing Sent";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("drafts")) {
-    presenceData.details = "Viewing Drafts";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("imp")) {
-    presenceData.details = "Viewing Important";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("chats")) {
-    presenceData.details = "Viewing Chats";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("scheduled")) {
-    presenceData.details = "Viewing Scheduled";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("all")) {
-    presenceData.details = "Viewing All Mail";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("spam")) {
-    presenceData.details = "Viewing Spam";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("trash")) {
-    presenceData.details = "Viewing Trash";
-    presenceData.startTimestamp = elapsed;
-  } else if (path.endsWith("#category/social")) {
-    presenceData.details = "Viewing Social Mails";
-    presenceData.startTimestamp = elapsed;
-  } else {
-    presenceData.details = "Viewing Mail";
-    presenceData.startTimestamp = elapsed;
-  }
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+presence.on("UpdateData", async () => {
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/ZvjZHER.png",
+			startTimestamp: browsingTimestamp,
+		},
+		path = window.location.href,
+		[newLang, privacy, time] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("time"),
+		]);
+
+	if (!time) delete presenceData.startTimestamp;
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+
+	const pages: Record<string, string> = {
+			"category/primary": strings.categoryPrimary,
+			"category/social": strings.categorySocial,
+			"category/updates": strings.categoryUpdates,
+			"category/promotions": strings.categoryPromotions,
+			"category/forum": strings.categoryForum,
+			"settings/general": strings.generalSettings,
+			settings: strings.generalSettings,
+			"settings/labels": strings.labelSettings,
+			"settings/inbox": strings.inboxSettings,
+			"settings/accounts": strings.accountSetting,
+			"settings/filters": strings.filterSettings,
+			"settings/fwdandpop": strings.fwdAndPOPSettings,
+			"settings/addons": strings.addonsSettings,
+			"settings/chat": strings.chatSettings,
+			"settings/advanced": strings.advancedSettings,
+			"settings/offline": strings.offlineSettings,
+			"settings/oldthemes": strings.themesSettings,
+			inbox: strings.categoryPrimary,
+			starred: strings.viewingStarredEmails,
+			snoozed: strings.viewingSnoozedEmails,
+			sent: strings.viewingSentEmails,
+			drafts: strings.viewingDrafts,
+			imp: strings.viewingImportantEmails,
+			chats: strings.viewingChats,
+			scheduled: strings.viewingScheduled,
+			all: strings.viewingAllEmails,
+			spam: strings.viewingSpam,
+			trash: strings.viewingTrash,
+		},
+		currentPage = path.split("#")[1];
+
+	if (pages[currentPage]) presenceData.details = pages[currentPage];
+	else if (path.includes("compose="))
+		presenceData.details = strings.composingEmail;
+	else if (path.match("#search"))
+		presenceData.details = strings.lookingForEmail;
+	else if (path.match("#label")) {
+		presenceData.details = strings.inLabel;
+		if (!privacy) {
+			presenceData.state = document
+				.querySelector<HTMLDivElement>("div.aim.ain > div")
+				.getAttribute("data-tooltip");
+		}
+	} else presenceData.details = strings.viewingEmail;
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

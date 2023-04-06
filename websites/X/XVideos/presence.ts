@@ -1,65 +1,43 @@
-var presence = new Presence({
-    clientId: "605119835751579649"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+const presence = new Presence({
+		clientId: "605119835751579649",
+	}),
+	strings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+	});
 
 presence.on("UpdateData", async () => {
-  var video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
-  if (video !== null && !isNaN(video.duration)) {
-    var title: any;
-    title = document.querySelector(".video-page #main .page-title");
+	const video = document.querySelector<HTMLVideoElement>(".video-bg-pic video");
+	if (video && !isNaN(video.duration)) {
+		const title = document.querySelector<HTMLElement>(
+				".video-page #main .page-title"
+			)?.textContent,
+			uploader = document.querySelector(
+				".video-page #main .video-metadata .uploader-tag .name"
+			),
+			[startTimestamp, endTimestamp] = presence.getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			),
+			presenceData: PresenceData = {
+				details: title ?? "Title not found...",
+				state: uploader ? uploader.textContent : "Uploader not found...",
+				largeImageKey: "https://i.imgur.com/3NVSLWV.png",
+				smallImageKey: video.paused ? "pause" : "play",
+				smallImageText: video.paused
+					? (await strings).pause
+					: (await strings).play,
+				startTimestamp,
+				endTimestamp,
+			};
 
-    var uploader = document.querySelector(
-        ".video-page #main .video-metadata .uploader-tag .name"
-      ),
-      timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
-      presenceData: PresenceData = {
-        details: title !== null ? title.innerText : "Title not found...",
-        state:
-          uploader !== null ? uploader.textContent : "Uploader not found...",
-        largeImageKey: "lg",
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
-      };
+		//* Remove timestamps if paused
+		if (video.paused) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
 
-    presence.setTrayTitle(video.paused ? "" : title.innerText);
-
-    //* Remove timestamps if paused
-    if (video.paused) {
-      delete presenceData.startTimestamp;
-      delete presenceData.endTimestamp;
-    }
-
-    //* If tags are not "null"
-    if (title !== null && uploader !== null) {
-      presence.setActivity(presenceData, !video.paused);
-    }
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+		//* If tags are not "null"
+		if (title && uploader) presence.setActivity(presenceData, !video.paused);
+	} else presence.setActivity();
 });

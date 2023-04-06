@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Greep",
+		"id": "330030648456642562"
+	},
+	"service": "Trackmania.io",
+	"description": {
+		"en": "Trackmania.io is an overview of the Trackmania Live services into your website. This service is provided by OpenPlanet.",
+		"fr": "Trackmania.io est une vue d'ensemble sur les services live de Trackmania dans votre navigateur. Ce service est offert par OpenPlanet.",
+		"nl": "Trackmania.io is een overzicht van de Trackmania Live-services op uw website. Deze dienst wordt geleverd door OpenPlanet."
+	},
+	"url": [
+		"trackmania.io",
+		"www.trackmania.io"
+	],
+	"version": "1.2.7",
+	"logo": "https://i.imgur.com/W99K52i.jpg",
+	"thumbnail": "https://i.imgur.com/oCyBucc.jpg",
+	"color": "#0A7FB4",
+	"category": "games",
+	"tags": [
+		"cars",
+		"racing",
+		"tm",
+		"trackmania",
+		"ubisoft",
+		"nadeo"
+	]
+}

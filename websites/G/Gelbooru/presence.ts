@@ -1,51 +1,28 @@
-var presence = new Presence({
-  clientId: "620294187878711313"
+const presence = new Presence({
+	clientId: "620294187878711313",
 });
 
 presence.on("UpdateData", () => {
-  var presenceData: PresenceData = {
-    details: "Viewing the homepage...",
-    largeImageKey: "lg-gb"
-  };
-
-  var urlParams = new URLSearchParams(window.location.search);
-  if (document.location.pathname == "/") {
-    presenceData = {
-      details: "Viewing the homepage...",
-      largeImageKey: "lg-gb"
-    };
-    presence.setActivity(presenceData);
-  } else if (
-    urlParams.get("page") &&
-    urlParams.get("s") &&
-    urlParams.get("page") == "post"
-  ) {
-    if (urlParams.get("s") == "list") {
-      if (urlParams.get("tags")) {
-        presenceData = {
-          details: "Searching...",
-          state: urlParams.get("tags").replace(" ", ", "),
-          largeImageKey: "lg-gb"
-        };
-        presence.setActivity(presenceData);
-      } else {
-        presenceData = {
-          details: "Viewing Posts List...",
-          largeImageKey: "lg-gb"
-        };
-        presence.setActivity(presenceData);
-      }
-    } else if (urlParams.get("s") == "view" && urlParams.get("id")) {
-      presenceData = {
-        details: "Viewing a Post...",
-        state: "Post " + urlParams.get("id"),
-        largeImageKey: "lg-gb"
-      };
-      presence.setActivity(presenceData);
-    } else {
-      presence.setActivity(presenceData);
-    }
-  } else {
-    presence.setActivity(presenceData);
-  }
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/CgGzxXy.png",
+		},
+		urlParams = new URLSearchParams(window.location.search);
+	if (document.location.pathname === "/")
+		presenceData.details = "Viewing the homepage...";
+	else if (
+		urlParams.get("page") &&
+		urlParams.get("s") &&
+		urlParams.get("page") === "post"
+	) {
+		if (urlParams.get("s") === "list") {
+			if (urlParams.get("tags")) {
+				presenceData.details = "Searching...";
+				presenceData.state = urlParams.get("tags").replace(" ", ", ");
+			} else presenceData.details = "Viewing Posts List...";
+		} else if (urlParams.get("s") === "view" && urlParams.get("id")) {
+			presenceData.details = "Viewing a Post...";
+			presenceData.state = `Post ${urlParams.get("id")}`;
+		} else presenceData.details = "Viewing the homepage...";
+	} else presenceData.details = "Viewing the homepage...";
+	presence.setActivity(presenceData);
 });

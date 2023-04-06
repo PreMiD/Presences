@@ -1,99 +1,110 @@
 const presence = new Presence({
-    clientId: "836962986451140609"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "836962986451140609",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const v2icons = await presence.getSetting("v2icons"),
-    logo = await presence.getSetting("logo"),
-    buttons = await presence.getSetting("buttons"),
-    data: PresenceData = {
-      largeImageKey: !logo ? "logo" : "logo-v2",
-      startTimestamp: browsingStamp
-    },
-    pathname = document.location.pathname;
+	const [logo, buttons] = await Promise.all([
+			presence.getSetting<number>("logo"),
+			presence.getSetting<boolean>("buttons"),
+		]),
+		presenceData: PresenceData = {
+			largeImageKey: !logo ? "logo" : "logo-v2",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location;
 
-  if (pathname === "/" && window.location.search.substr(0, 2) == "?s") {
-    const urlParams = new URLSearchParams(window.location.search),
-      nsfw = urlParams.get("adult"),
-      search =
-        nsfw === "1" ? "nsfw" : nsfw === "0" ? "non nsfw" : urlParams.get("s"),
-      results = document
-        .querySelector(".c-blog__heading > .h4")
-        .textContent.split(" ")[1];
-    data.details = "Searching:";
-    data.state = search + " 🔸 " + results + " results";
-    data.smallImageKey = "search";
-  } else if (pathname === "/") data.details = "Viewing the homepage";
-  else if (pathname.endsWith("/webtoons/")) {
-    const results = document.querySelector(".c-blog__heading > .h4")
-      .textContent;
-    data.details = "Browsing all webtoons";
-    data.state = results;
-  } else if (pathname.startsWith("/webtoon-genre/")) {
-    const genre = document.querySelector(".item-title").textContent,
-      results = document.querySelector(".c-blog__heading > .h4").textContent;
-    data.details = "Browsing " + genre + " webtoons";
-    data.state = "📋 " + results;
-    data.smallImageKey = "search";
-  } else if (pathname === "/completed-webtoons/") {
-    data.details = "Browsing:";
-    data.state = "Completed webtoons";
-    data.smallImageKey = "search";
-  } else if (pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0) {
-    const title = document
-        .querySelector("#chapter-heading")
-        .textContent.split("-")[0],
-      chapter = document
-        .querySelector("#chapter-heading")
-        .textContent.split("-")[1];
-    let progress =
-      (document.documentElement.scrollTop /
-        (document.querySelector(".reading-content").scrollHeight -
-          window.innerHeight)) *
-      100;
-    progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
-    data.details = title;
-    data.state = "📖 " + chapter + " 🔸 " + progress + "%";
-    data.largeImageKey = title.includes("Solo Leveling")
-      ? "solo"
-      : logo == 0
-      ? "logo"
-      : "logo-v2";
-    data.smallImageKey = "read";
-    if (buttons)
-      data.buttons = [{ label: "Read Webtoon", url: window.location.href }];
-  } else if (pathname.startsWith("/read")) {
-    const title = document.querySelector(".post-title").textContent;
-    data.details = "Viewing:";
-    data.state = title;
-    data.smallImageKey = "view";
-    data.largeImageKey = title.includes("Solo Leveling")
-      ? "solo"
-      : logo == 0
-      ? "logo"
-      : "logo-v2";
-    if (buttons)
-      data.buttons = [{ label: "View Webtoon", url: window.location.href }];
-  } else if (pathname === "/user-settings/") {
-    data.smallImageKey = "settings";
-    switch (window.location.search) {
-      case "?tab=history":
-        data.details = "User settings:";
-        data.state = "History";
-        break;
-      case "?tab=bookmark":
-        data.details = "User settings:";
-        data.state = "Bookmarks";
-        break;
-      case "?tab=account-settings":
-        data.details = "User settings:";
-        data.state = "Account settings";
-        break;
-      default:
-        data.details = "User settings:";
-        data.state = "Bookmarks";
-    }
-  }
-  presence.setActivity(data);
+	if (pathname === "/" && window.location.search.substr(0, 2) === "?s") {
+		const urlParams = new URLSearchParams(window.location.search),
+			nsfw = urlParams.get("adult");
+		presenceData.details = "Searching:";
+		presenceData.state = `${
+			nsfw === "1" ? "nsfw" : nsfw === "0" ? "non nsfw" : urlParams.get("s")
+		} 🔸 ${
+			document.querySelector(".c-blog__heading > .h4").textContent.split(" ")[0]
+		} results`;
+		presenceData.smallImageKey = "search";
+	} else if (pathname === "/") presenceData.details = "Viewing the homepage";
+	else if (pathname.endsWith("/webtoons/")) {
+		presenceData.details = "Browsing all webtoons";
+		presenceData.state = document.querySelector(
+			".c-blog__heading > .h4"
+		).textContent;
+	} else if (pathname.startsWith("/webtoon-genre/")) {
+		presenceData.details = `Browsing ${
+			document.querySelector(".item-title").textContent
+		} webtoons`;
+		presenceData.state = `📋 ${
+			document.querySelector(".c-blog__heading > .h4").textContent
+		}`;
+		presenceData.smallImageKey = "search";
+	} else if (pathname === "/completed-webtoons/") {
+		presenceData.details = "Browsing:";
+		presenceData.state = "Completed webtoons";
+		presenceData.smallImageKey = "search";
+	} else if (pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0) {
+		const [title, chapter] = document
+			.querySelector("#chapter-heading")
+			.textContent.split("-");
+		let progress =
+			(document.documentElement.scrollTop /
+				(document.querySelector(".reading-content").scrollHeight -
+					window.innerHeight)) *
+			100;
+		progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
+		presenceData.details = title;
+		presenceData.state = `📖 ${chapter} 🔸 ${progress}%`;
+		presenceData.largeImageKey = title.includes("Solo Leveling")
+			? "solo"
+			: logo === 0
+			? "logo"
+			: "logo-v2";
+		presenceData.smallImageKey = "read";
+		if (buttons) {
+			presenceData.buttons = [
+				{
+					label: "Read Webtoon",
+					url: window.location.href,
+				},
+			];
+		}
+	} else if (pathname.startsWith("/read")) {
+		const title = document.querySelector(".post-title").textContent;
+		presenceData.details = "Viewing:";
+		presenceData.state = title;
+		presenceData.smallImageKey = "view";
+		presenceData.largeImageKey = title.includes("Solo Leveling")
+			? "solo"
+			: logo === 0
+			? "logo"
+			: "logo-v2";
+		if (buttons) {
+			presenceData.buttons = [
+				{
+					label: "View Webtoon",
+					url: window.location.href,
+				},
+			];
+		}
+	} else if (pathname === "/user-settings/") {
+		presenceData.smallImageKey = "settings";
+		switch (window.location.search) {
+			case "?tab=history":
+				presenceData.details = "User settings:";
+				presenceData.state = "History";
+				break;
+			case "?tab=bookmark":
+				presenceData.details = "User settings:";
+				presenceData.state = "Bookmarks";
+				break;
+			case "?tab=account-settings":
+				presenceData.details = "User settings:";
+				presenceData.state = "Account settings";
+				break;
+			default:
+				presenceData.details = "User settings:";
+				presenceData.state = "Bookmarks";
+		}
+	}
+	presence.setActivity(presenceData);
 });

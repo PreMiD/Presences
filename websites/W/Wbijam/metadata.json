@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "xKubson_",
+		"id": "404217213873029120"
+	},
+	"service": "Wbijam",
+	"description": {
+		"en": "Website for watching anime in Polish language",
+		"pl": "Strona do oglądania anime w języku polskim"
+	},
+	"url": "wbijam.pl",
+	"regExp": "([a-z0-9.]*)wbijam[.]pl",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/RRphyk6.png",
+	"thumbnail": "https://i.imgur.com/PhjCcuX.png",
+	"color": "#00b3ff",
+	"category": "videos",
+	"tags": [
+		"videos",
+		"anime"
+	],
+	"iframe": true
+}

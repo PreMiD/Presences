@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Shuichi",
+		"id": "179440483796385792"
+	},
+	"service": "Novel Mania",
+	"description": {
+		"en": "Read webnovels in Portuguese anywhere and anytime.",
+		"pt_BR": "Leia webnovels em português a qualquer momento e a qualquer hora.",
+		"nl": "Lees overal en altijd webnovels in het Portugees."
+	},
+	"url": "novelmania.com.br",
+	"version": "1.0.12",
+	"logo": "https://i.imgur.com/qAjg3Ws.png",
+	"thumbnail": "https://i.imgur.com/lxuE4zN.jpg",
+	"color": "#008cff",
+	"category": "other",
+	"tags": [
+		"novel",
+		"mania",
+		"translator"
+	]
+}

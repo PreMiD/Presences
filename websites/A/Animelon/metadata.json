@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Striker",
+		"id": "215509157837537280"
+	},
+	"service": "Animelon",
+	"description": {
+		"en": "Animelon is a streaming website which provides subtitles with translations to help learners of Japanese",
+		"ga_IE": "Is suíomh Gréasáin sruthú é Animelon a sholáthraíonn aistriúcháin le fotheidil chun cabhrú le foghlaimeoirí na Seapáine",
+		"nl": "Animelon is een streamingwebsite die ondertiteling met vertalingen biedt om studenten helpen Japans te leren.",
+		"vi_VN": "Animelon là trang phát trực tuyến cung cấp phụ đề và bản dịch để giúp người xem học Tiếng Nhật"
+	},
+	"url": "animelon.com",
+	"regExp": "([a-z0-9-]+[.])*animelon([.][a-z]+)+[/]",
+	"version": "1.0.16",
+	"logo": "https://i.imgur.com/5gunVuc.png",
+	"thumbnail": "https://i.imgur.com/sT2xcZP.jpg",
+	"color": "#D34344",
+	"category": "videos",
+	"tags": [
+		"anime",
+		"videos",
+		"movies"
+	],
+	"iframe": true,
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

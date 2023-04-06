@@ -1,52 +1,46 @@
 const presence = new Presence({
-    clientId: "630239297521319953"
-  }),
-  capitalize = (text: string): string => {
-    const texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
-    return texts
-      .map((str) => {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-      })
-      .join(" ");
-  },
-  whitelist = ["HTML", "CSS", "SQL", "PHP", "W3.CSS", "JQUERY", "XML"];
+		clientId: "630239297521319953",
+	}),
+	capitalize = (text: string): string => {
+		return text
+			.replace(/[[{(_)}\]]/g, " ")
+			.split(" ")
+			.map(str => str.charAt(0).toUpperCase() + str.slice(1))
+			.join(" ");
+	},
+	whitelist = ["HTML", "CSS", "SQL", "PHP", "W3.CSS", "JQUERY", "XML"];
 
 let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", () => {
-  let details = undefined,
-    state = undefined;
+	if (window.location.href !== oldUrl) {
+		oldUrl = window.location.href;
+		elapsed = Math.floor(Date.now() / 1000);
+	}
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/gTv6Nu3.png",
+			startTimestamp: elapsed,
+		},
+		language = document.querySelector(".w3-bar-item.w3-button.active"),
+		lesson = document.querySelector("#main > h1"),
+		exercise = document.querySelector("#completedExercisesNo");
 
-  if (window.location.href !== oldUrl) {
-    oldUrl = window.location.href;
-    elapsed = Math.floor(Date.now() / 1000);
-  }
+	if (language) {
+		presenceData.details = `Learning ${capitalize(
+			language.textContent.toLowerCase()
+		)}`;
+		if (whitelist.includes(language.textContent))
+			presenceData.details = `Learning ${language.textContent}`;
+	}
 
-  const language = document.querySelector(".w3-bar-item.w3-button.active"),
-    lesson = document.querySelector("#main > h1"),
-    exercise = document.querySelector("#completedExercisesNo");
+	if (lesson) presenceData.state = lesson.textContent;
 
-  if (language) {
-    details = "Learning " + capitalize(language.textContent.toLowerCase());
-    if (whitelist.some((lang) => lang === language.textContent))
-      details = "Learning " + language.textContent;
-  }
+	if (exercise) {
+		presenceData.details = `${capitalize(
+			window.location.pathname.split("/")[1]
+		)} Exercise`;
+		[presenceData.state] = exercise.textContent.match("[0-9](.*)[0-9]");
+	}
 
-  if (lesson) {
-    state = lesson.textContent;
-  }
-
-  if (exercise) {
-    details = `${capitalize(window.location.pathname.split("/")[1])} Exercise`;
-    state = exercise.textContent.match("[0-9](.*)[0-9]")[0];
-  }
-
-  const data: PresenceData = {
-    details: details,
-    state: state,
-    largeImageKey: "w3schools",
-    startTimestamp: elapsed
-  };
-
-  presence.setActivity(data);
+	presence.setActivity(presenceData);
 });

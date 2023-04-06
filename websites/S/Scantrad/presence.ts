@@ -1,57 +1,70 @@
 const presence = new Presence({
-    clientId: "817856303719907389"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "817856303719907389",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	path = document.location.pathname,
+	mangaName = path.split("/")[2];
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  };
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/SJmPvgX.png",
+		startTimestamp: browsingTimestamp,
+	};
 
-  if (document.location.pathname.includes("/mangas")) {
-    const chapter = document.querySelector("label.chapitre-main"),
-      page = document.getElementById("selectPg") as HTMLSelectElement;
+	if (document.body.contains(document.querySelector(".titre"))) {
+		presenceData.details = "Visite la page du manga :";
+		presenceData.state =
+			document.querySelector<HTMLElement>(".titre").textContent;
+	} else if (path.includes("/forum")) {
+		presenceData.details = "Visite une page :";
+		presenceData.state = "Page du Forum";
+		if (path.includes("/forum/d")) {
+			presenceData.details = "Lis un topic du forum :";
+			presenceData.state = `[${document
+				.querySelector(".TagLabel-text")
+				.textContent.trim()}] ${
+				document.querySelector(".DiscussionHero-title").textContent
+			}`;
+			presenceData.smallImageKey = "reading";
+		}
+	} else if (path.includes("mangas/") + mangaName) {
+		presenceData.details = `Entrain de lire ${mangaName
+			.split("-")
+			.map(value =>
+				value.replace(value.charAt(0), value.charAt(0).toUpperCase())
+			)
+			.join(" ")} :`;
+		presenceData.state = `${
+			document.querySelector<HTMLElement>(".chapitre-main").textContent
+		} | ${document.querySelector<HTMLElement>(".pageLinkAct").textContent}`;
+		presenceData.smallImageKey = "reading";
+		presenceData.smallImageText = "Lis un scan";
+		presenceData.buttons = [
+			{
+				label: "Lire le chapitre",
+				url: document.location.href,
+			},
+		];
+	} else if (path.startsWith("/mangas")) {
+		presenceData.details = "Visite une page :";
+		presenceData.state = "Liste des mangas";
+	} else if (
+		path.includes("/connexion") ||
+		document.location.pathname.includes("/inscription")
+	) {
+		presenceData.details = "Visite une page :";
+		presenceData.state = "Page de Login";
+	} else if (path.includes("/planning")) {
+		presenceData.details = "Visite une page :";
+		presenceData.state = "Page du Planning";
+	} else if (path.includes("/rejoindre")) {
+		presenceData.details = "Visite une page :";
+		presenceData.state = "Page Nous Rejoindre";
+	} else {
+		presenceData.details = "Visite une page :";
+		presenceData.state = "Page d'accueil";
+	}
 
-    presenceData.details =
-      "Reading " +
-      document
-        .querySelector("title")
-        .textContent.replace(
-          /^Scan Chapitre \d+ de (.+) - Scantrad France$/,
-          "$1"
-        ) +
-      ":";
-    presenceData.state =
-      chapter.textContent.replace("Chapitre", "Chapter") +
-      " | " +
-      page.options[page.selectedIndex].text;
-    presenceData.smallImageKey = "reading";
-    presenceData.smallImageText = "Reading a scan";
-  } else if (
-    document.location.pathname.includes("/connexion") ||
-    document.location.pathname.includes("/inscription")
-  ) {
-    presenceData.details = "Viewing Page:";
-    presenceData.state = "Login page";
-  } else if (document.location.pathname.includes("/planning")) {
-    presenceData.details = "Viewing Page:";
-    presenceData.state = "Planning page";
-  } else if (document.location.pathname.includes("/rejoindre")) {
-    presenceData.details = "Viewing Page:";
-    presenceData.state = "Jobs page";
-  } else if (document.location.pathname.includes("/dons")) {
-    presenceData.details = "Viewing Page:";
-    presenceData.state = "Donation page";
-  } else {
-    presenceData.details = "Viewing Page:";
-    presenceData.state = "Home page";
-  }
-
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

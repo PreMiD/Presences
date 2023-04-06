@@ -1,155 +1,122 @@
 const presence = new Presence({
-    clientId: "619455837198483459"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "808749649325719562",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let username: string;
+let username: string,
+	mangaId: string = null,
+	coverFileName: string = null;
+
+enum Assets {
+	Logo = "https://i.imgur.com/zs8myqz.png",
+	Reading = "https://i.imgur.com/53N4eY6.png",
+	Searching = "https://i.imgur.com/OIgfjTG.png",
+}
+
+async function getCoverImage(newMangaId: string) {
+	/**
+	 * Use MangaDex API to get the fileName of the cover to obtain the image.
+	 * More here : https://api.mangadex.org/docs/get-covers/
+	 */
+	if (mangaId === newMangaId)
+		return `https://uploads.mangadex.org/covers/${mangaId}/${coverFileName}`;
+	mangaId = newMangaId;
+	const req = await fetch(
+		`https://api.mangadex.org/manga/${mangaId}?includes%5B%5D=cover_art`
+	);
+	if (!req.ok) return Assets.Logo;
+	const { relationships } = (await req.json()).data;
+	coverFileName = relationships.find(
+		(relation: { type: string }) => relation.type === "cover_art"
+	).attributes.fileName;
+	return `https://uploads.mangadex.org/covers/${mangaId}/${coverFileName}`;
+}
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "mangadex-logo"
-  };
+	const presenceData: PresenceData = {
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href } = document.location,
+		pathArr = pathname.split("/"),
+		[showCover, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("buttons"),
+		]);
 
-  if (document.location.pathname == "/") {
-    data.details = "Viewing the Homepage";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/settings")) {
-    data.details = "Viewing the Settings Page";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/affiliates")) {
-    data.details = "Viewing Affiliates Page";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/changelog")) {
-    data.details = "Viewing Changelog";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/about")) {
-    data.details = "Viewing About Page";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/rules")) {
-    data.details = "Viewing Rules";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.startsWith("/stats")) {
-    if (document.location.pathname.endsWith("/trending")) {
-      data.details = "Viewing Trending Chapters";
-      data.startTimestamp = browsingStamp;
-    } else {
-      data.details = "Viewing Top Chapters";
-      data.startTimestamp = browsingStamp;
-    }
-  } else if (document.location.pathname.endsWith("/updates")) {
-    data.details = "Browsing Latest Manga";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/featured")) {
-    data.details = "Browsing Featured Manga";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/manga")) {
-    const randomManga = document.querySelector(".card-header span.mx-1")
-      .textContent;
-    data.details = "Viewing a Random Manga";
-    data.state = randomManga;
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/manga_new")) {
-    data.details = "Adding a New Manga";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/follows")) {
-    data.details = "Viewing Follows";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.startsWith("/title")) {
-    if (document.location.pathname.endsWith("/titles")) {
-      data.details = "Browsing Manga";
-      data.startTimestamp = browsingStamp;
-    } else {
-      const manga = document.querySelector(".card-header span.mx-1")
-        .textContent;
-      data.details = "Viewing a Manga:";
-      data.state = manga;
-      data.startTimestamp = browsingStamp;
-    }
-  } else if (document.location.pathname.startsWith("/chapter")) {
-    const title = document.querySelector(".manga-link").textContent,
-      chapter = (document.querySelector(
-        "head > title"
-      ) as HTMLElement).innerText
-        .replace(title + " -", "")
-        .replace(" - MangaDex", "");
-    data.details = title;
-    data.state = chapter;
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.startsWith("/genre")) {
-    const genre = document.querySelector(".card-header").textContent.trim();
-    data.details = "Viewing Genre (" + genre + ")";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.endsWith("/history")) {
-    data.details = "Viewing History";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.startsWith("/list")) {
-    data.details = "Viewing an MDList";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.startsWith("/social")) {
-    if (document.location.pathname.endsWith("/blocked")) {
-      data.details = "Viewing Blocked Users";
-      data.startTimestamp = browsingStamp;
-    } else {
-      data.details = "Viewing Friends";
-      data.startTimestamp = browsingStamp;
-    }
-  } else if (document.location.pathname.startsWith("/support")) {
-    data.details = "Viewing Support Page";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.startsWith("/shop")) {
-    data.details = "Viewing the Shop";
-    data.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/messages")) {
-    if (document.location.pathname.endsWith("/notifications")) {
-      data.details = "Viewing Notifications";
-      data.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/send")) {
-      data.details = "Sending a Message";
-      data.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.endsWith("/bin")) {
-      data.details = "Viewing Trash Bin";
-      data.startTimestamp = browsingStamp;
-    } else {
-      data.details = "Viewing Inbox";
-      data.startTimestamp = browsingStamp;
-    }
-  } else if (document.location.pathname.startsWith("/user")) {
-    if (document.location.pathname.startsWith("/users")) {
-      data.details = "Viewing Users";
-      data.startTimestamp = browsingStamp;
-    } else {
-      username = document.querySelector(".card-header span.mx-1").textContent;
-      data.details = "Viewing User Profile";
-      data.state = username;
-      data.startTimestamp = browsingStamp;
-    }
-  } else if (document.location.pathname.startsWith("/group")) {
-    if (document.location.pathname.startsWith("/groups")) {
-      data.details = "Viewing Groups";
-      data.startTimestamp = browsingStamp;
-    } else {
-      username = document.querySelector(".card-header span.mx-1").textContent;
-      data.details = "Viewing a Group";
-      data.state = username;
-      data.startTimestamp = browsingStamp;
-    }
-  } else if (document.location.pathname.startsWith("/forum")) {
-    if (document.location.pathname.includes("/forum/")) {
-      const forum = document.querySelector(".breadcrumb-item:last-child")
-        .textContent;
-      data.details = "Viewing a Forum";
-      data.state = forum;
-      data.startTimestamp = browsingStamp;
-    } else {
-      data.details = "Viewing the Forums";
-      data.startTimestamp = browsingStamp;
-    }
-  } else if (document.location.pathname.startsWith("/thread")) {
-    const thread = document.querySelector(".breadcrumb-item:last-child")
-      .textContent;
-    data.details = "Viewing a thread";
-    data.state = thread;
-    data.startTimestamp = browsingStamp;
-  }
-  presence.setActivity(data);
+	switch (pathArr[1]) {
+		case "title":
+			presenceData.details = `Viewing a ${
+				pathArr[2] === "random" ? "Random" : ""
+			} Manga:`;
+			presenceData.state = document
+				.querySelector("head > title")
+				.textContent.replace(" - MangaDex", "");
+			presenceData.buttons = [{ label: "View Manga", url: href }];
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("img.rounded").src;
+			break;
+		case "titles":
+			presenceData.details = {
+				"": "Browsing Manga",
+				latest: "Browsing Latest Manga",
+				feed: "Viewing Feed",
+				recent: "Browsing Recents Mangas",
+				follows: "Viewing their Library",
+			}[pathArr[2]];
+			presenceData.smallImageKey = Assets.Searching;
+			break;
+		case "chapter": {
+			const title = document.querySelector(".text-primary").textContent.trim();
+			presenceData.details = `Reading ${title}`;
+			presenceData.state = `Page ${document
+				.querySelector("head > title")
+				.textContent.replace(` - ${title} - MangaDex`, "")}`;
+			presenceData.largeImageKey = await getCoverImage(
+				document.querySelector<HTMLLinkElement>("span > a").href.split("/")[4]
+			);
+			presenceData.smallImageKey = Assets.Reading;
+			presenceData.buttons = [{ label: "Read Chapter", url: href }];
+			break;
+		}
+		case "tag":
+			presenceData.details = "Viewing a Tag";
+			presenceData.state = document
+				.querySelector("head > title")
+				.textContent.replace(" - MangaDex", "");
+			break;
+		case "group":
+		case "user":
+			username = document
+				.querySelector("head > title")
+				.textContent.replace(" - MangaDex", "");
+			presenceData.details = `Viewing ${
+				pathArr[1] === "group" ? "Viewing a Group" : "User Profile"
+			}`;
+			presenceData.state = username;
+			break;
+		case "my":
+			presenceData.details = {
+				history: "Viewing History",
+				lists: "Viewing Lists",
+				groups: "Viewing Followed Groups",
+			}[pathArr[2]];
+			break;
+		default:
+			presenceData.details = {
+				"": "Viewing the Homepage",
+				settings: "Viewing the Settings Page",
+				about: "Viewing About Page",
+				rules: "Viewing Rules",
+				list: "Viewing an MDList",
+				users: "Viewing Users",
+				groups: "Viewing Groups",
+			}[pathArr[1]];
+	}
+
+	if (!showCover) presenceData.largeImageKey = Assets.Logo;
+	if (!showButtons) delete presenceData.buttons;
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

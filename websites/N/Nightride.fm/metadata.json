@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Tofuine",
+		"id": "734631480541708291"
+	},
+	"service": "Nightride.fm",
+	"description": {
+		"en": "Nightride.FM is an independently owned and operated synthwave internet radio station."
+	},
+	"url": "nightride.fm",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/HnZw53P.png",
+	"thumbnail": "https://i.imgur.com/z1GvSQG.png",
+	"color": "#c240a6",
+	"category": "music",
+	"tags": [
+		"radio",
+		"synthwave"
+	]
+}

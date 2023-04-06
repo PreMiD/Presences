@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "KnuffelBeestje",
+		"id": "219155156569161731"
+	},
+	"service": "VRChat",
+	"description": {
+		"en": "VRChat is a free-to-play massively multiplayer online virtual reality social platform. It allows players to interact with others as 3D character models.",
+		"nl": "VRChat is een gratis te spelen massaal multiplayer online virtual reality sociaal platform. Hiermee kunnen spelers met anderen communiceren als 3D-personagemodellen.",
+		"ga_IE": "Is éard atá i VRChat ardán sóisialta réaltachta fíorúil il-imreora ar líne saor in aisce. Ligeann sé d’imreoirí idirghníomhú le daoine eile mar mhúnlaí carachtar 3D."
+	},
+	"url": [
+		"vrchat.com",
+		"hello.vrchat.com",
+		"feedback.vrchat.com"
+	],
+	"version": "1.0.18",
+	"logo": "https://i.imgur.com/J54T2Wn.png",
+	"thumbnail": "https://i.imgur.com/PdmE1EK.png",
+	"color": "#0B5286",
+	"category": "games",
+	"tags": [
+		"vrchat",
+		"vr",
+		"social",
+		"games",
+		"hangout"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		}
+	]
+}

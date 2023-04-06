@@ -1,21 +1,18 @@
-var presence = new Presence({
-  clientId: "639659455126044672"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "639659455126044672"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  let route = document.location.hash.split("/");
-
-  let data: PresenceData = {
-    largeImageKey: "djs",
-    startTimestamp: browsingStamp
-  };
-
-  if (route.length === 1 || route[1] === "") {
+  const data: PresenceData = {
+      largeImageKey: "https://i.imgur.com/v4Qb6IT.png",
+      startTimestamp: browsingStamp
+    },
+    route = document.location.hash.split("/");
+  if (route.length === 1 || route[1] === "")
     data.details = "Browsing the main page...";
-  } else if (route[1] === "docs") {
-    data.smallImageKey = route[2];
+  else if (route[1] === "docs") {
+    [, , data.smallImageKey] = route;
     data.smallImageText = `${route[2].replace(/^[a-z]/i, (c) =>
       c.toUpperCase()
     )} - ${Number(route[3][0]) ? `v${route[3]}` : `${route[3]}`}`;

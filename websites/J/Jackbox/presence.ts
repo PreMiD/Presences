@@ -1,199 +1,245 @@
+import games from "./games/index";
+
 const presence = new Presence({
-  clientId: "638118757453004820"
+	clientId: "638118757453004820",
 });
 
-// TODO: Game List
-// PP6
-// [x] TMP2
-// [x] Dictionarium
-// [x] Role Models
-// [x] Joke Boat
-// [x] Push The Button
-//
-// PP5
-// [x] YDKJ: Full Stream
-// [x] Patently Stupid
-// [x] Mad Verse City
-// [x] Zeeple Dome
-// [x] Split The Room
-//
-// PP4
-// [x] Fibbage 3
-// [x] Survive The Internet
-// [x] Monster Seeking Monster
-// [x] Bracketeering
-// [x] Civic Doodle
-//
-// PP3
-// [x] TMP
-// [x] Quiplash 2
-// [x] Guesspionage
-// [x] Tee K.O.
-// [x] Fakin' It
-//
-// PP2
-// [x] Fibbage 2
-// [x] Quiplash XL
-// [x] Earwax
-// [x] Bidiots
-// [x] Bomb Corp
-//
-// PP1
-// [x] YDKJ 2015
-// [x] Drawful
-// [x] Word Spud
-// [x] Lie Swatter
-// [x] Fibbage XL
-//
-// Standalone
-// [x] Drawful 2
-// [x] Quiplash
+let gamePlayerState: GamePlayerState = {
+		playerName: null,
+		state: null,
+		username: null,
+	},
+	gamePlayerInfoState: GameInfoState = {
+		name: null,
+	},
+	game: Game,
+	browsingTimestamp = Math.round(Date.now() / 1000),
+	gametag: string;
 
-let layout: string;
-const elapsed: number = Math.round(new Date().getTime() / 1000);
+if (window.location.hostname === "jackbox.tv") {
+	setInterval(async () => {
+		const playerStateLogs = await presence.getLogs(
+			/recv <- .*?("key": "(bc:customer|player|info):[a-z0-9-]+",)/s
+		);
+		if (playerStateLogs.length > 0) {
+			let updatedMainState = false,
+				updatedInfoState = false;
+			for (
+				let i = playerStateLogs.length - 1;
+				!(updatedInfoState && updatedMainState) &&
+				i >= playerStateLogs.length - 6 &&
+				i >= 0;
+				i--
+			) {
+				const latestLog = playerStateLogs[i];
+				if (/recv <- .*?"entities": {\n/s.test(latestLog)) {
+					if (!updatedMainState) {
+						gamePlayerState = JSON.parse(latestLog.slice(8)).result.entities[
+							latestLog.match(
+								/"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s
+							)[1]
+						][1].val;
+					}
+					if (!updatedInfoState) {
+						gamePlayerInfoState =
+							JSON.parse(latestLog.slice(8)).result.entities[
+								latestLog.match(/"key": "(info:\d+)",/s)?.[1]
+							]?.[1].val ?? {};
+					}
+					updatedInfoState = true;
+					updatedMainState = true;
+				} else if (
+					/recv <- .*?"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s.test(
+						latestLog
+					)
+				) {
+					if (!updatedMainState) {
+						gamePlayerState = JSON.parse(latestLog.slice(8)).result.val;
+						updatedMainState = true;
+					}
+				} else if (
+					/recv <- .*?"key": "info:\d+",/s.test(latestLog) &&
+					!updatedInfoState
+				) {
+					gamePlayerInfoState = JSON.parse(latestLog.slice(8)).result.val;
+					updatedInfoState = true;
+				}
+			}
+		}
+		if (!game) {
+			type JackboxStorageLetiable = {
+				tag: string;
+			};
+			const { tag } = await presence.getPageletiable<JackboxStorageLetiable>(
+				'tv"]["storage'
+			);
+			gametag = tag;
+			if (tag && tag !== "@connect") {
+				game = games[tag];
+				browsingTimestamp = Math.round(Date.now() / 1000);
+				if (!game) game = games.unknown;
+			}
+		}
+	}, 2000);
+}
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "jackbox"
-  };
+	let presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/SXfEdnL.png",
+	};
+	const [useName, useTime, useDetails] = await Promise.all([
+			presence.getSetting<boolean>("useName"),
+			presence.getSetting<boolean>("useTime"),
+			presence.getSetting<boolean>("useDetails"),
+		]),
+		{ href, hostname, pathname, search } = window.location,
+		pathSplit = pathname.split("/").slice(1);
 
-  // Check for presence setting
-  const useName: boolean = await presence.getSetting("useName");
-  const useTime: boolean = await presence.getSetting("useTime");
+	if (useTime) presenceData.startTimestamp = browsingTimestamp;
 
-  if (useTime) {
-    presenceData.startTimestamp = elapsed;
-  }
+	switch (hostname) {
+		case "jackbox.tv": {
+			if (game) {
+				const { name, logo } = game;
+				presenceData.largeImageKey = logo;
+				presenceData.details = `Playing ${name}`;
+				if (useName) {
+					const { playerName, username, playerInfo } = gamePlayerState,
+						realUsername =
+							playerName ??
+							username ??
+							playerInfo?.username ??
+							gamePlayerInfoState.name;
+					if (realUsername) {
+						if (useDetails) presenceData.details += ` as ${realUsername}`;
+						else presenceData.state = `as ${realUsername}`;
+					}
+				}
+				if (useDetails) {
+					const gamePresenceData = await game.getPresenceData({
+						tag: gametag,
+						playerState: gamePlayerState,
+						infoState: gamePlayerInfoState,
+						presence,
+					});
+					presenceData = { ...presenceData, ...gamePresenceData };
+				}
+			} else presenceData.details = "Idle";
+			break;
+		}
+		case "games.jackbox.tv": {
+			presenceData.details = "Looking at a past game";
+			presenceData.state = document.title;
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"[class*=-artifact] .image"
+			).src;
+			presenceData.buttons = [
+				{
+					label: "View Game",
+					url: href,
+				},
+			];
+			break;
+		}
+		case "www.jackboxgames.com": {
+			switch (pathSplit[0] ?? "") {
+				case "": {
+					presenceData.details = "Browsing home page";
+					break;
+				}
+				case "author": {
+					presenceData.details = "Browsing blog posts by author";
+					presenceData.state = document
+						.querySelector("h1")
+						.textContent.match(/Author: (.*)/i)[1];
+					break;
+				}
+				case "blog": {
+					presenceData.details = "Browsing blog posts";
+					break;
+				}
+				case "category": {
+					presenceData.details = "Browsing blog category";
+					presenceData.state = document
+						.querySelector("h1")
+						.textContent.match(/Category: (.*)/i)[1];
+					break;
+				}
+				case "games": {
+					presenceData.details = "Browsing games";
+					break;
+				}
+				case "tag": {
+					presenceData.details = "Browsing blog posts by tag";
+					presenceData.state = document
+						.querySelector("h1")
+						.textContent.match(/Tag: (.*)/i)[1];
+					break;
+				}
+				default: {
+					if (/^\/\d{4}(\/\d{2})?(\/\d{2})?\/$/.test(pathname)) {
+						presenceData.details = "Browsing blog posts by date";
+						presenceData.state = document.querySelector("h1").textContent;
+					} else if (
+						document.body.getAttribute("itemtype") === "http://schema.org/Blog"
+					) {
+						presenceData.details = "Reading an article";
+						presenceData.state = document.querySelector("h1").textContent;
+						presenceData.buttons = [
+							{
+								label: "Read Article",
+								url: href,
+							},
+						];
+					} else {
+						presenceData.details = "Browsing";
+						presenceData.state = document.title.match(
+							/^(.*?)( - Jackbox Games)?$/
+						)[1];
+					}
+				}
+			}
+			break;
+		}
+		case "shop.jackboxgames.com": {
+			switch (pathSplit[0] ?? "") {
+				case "": {
+					presenceData.details = "Browsing store";
+					break;
+				}
+				case "cart": {
+					presenceData.details = "Viewing cart";
+					break;
+				}
+				case "collections": {
+					if (pathSplit[1]) {
+						if (pathSplit.includes("products")) {
+							presenceData.details = "Viewing a product";
+							presenceData.state = document.querySelector("h1").textContent;
+						} else {
+							presenceData.details = "Browsing collection";
+							presenceData.state = document.querySelector("h1").textContent;
+						}
+					} else presenceData.details = "Browsing collections";
+					break;
+				}
+				case "products": {
+					if (pathSplit[1]) {
+						presenceData.details = "Viewing a product";
+						presenceData.state = document.querySelector("h1").textContent;
+					} else presenceData.details = "Browsing collections";
+					break;
+				}
+				case "search": {
+					presenceData.details = "Searching store";
+					presenceData.state = new URLSearchParams(search).get("q");
+					break;
+				}
+			}
+			break;
+		}
+	}
 
-  // PP6
-  if (document.getElementsByClassName("Ridictionary").length > 0) {
-    presenceData.details = "Playing Dictionarium";
-    layout = "dict";
-  } else if (document.getElementsByClassName("TriviaDeath2").length > 0) {
-    presenceData.details = "Playing Trivia Murder Party 2";
-    layout = "new";
-  } else if (document.getElementsByClassName("RoleModels").length > 0) {
-    presenceData.details = "Playing Role Models";
-    layout = "new";
-  } else if (document.getElementsByClassName("Jokeboat").length > 0) {
-    presenceData.details = "Playing Joke Boat";
-    layout = "new";
-  } else if (document.getElementsByClassName("Push The Button").length > 0) {
-    presenceData.details = "Playing Push The Button";
-    layout = "new";
-
-    // PP5
-  } else if (document.getElementsByClassName("YDKJ2018").length > 0) {
-    presenceData.details = "Playing You Don't Know Jack: Full Stream";
-    layout = "new";
-  } else if (document.getElementsByClassName("RapBattle").length > 0) {
-    presenceData.details = "Playing Mad Verse City";
-    layout = "new";
-  } else if (document.getElementsByClassName("PatentlyStupid").length > 0) {
-    presenceData.details = "Playing Patently Stupid";
-    layout = "new";
-  } else if (document.getElementsByClassName("SlingShoot").length > 0) {
-    presenceData.details = "Playing Zeeple Dome";
-    layout = "new";
-  } else if (document.getElementsByClassName("SplitTheRoom").length > 0) {
-    presenceData.details = "Playing Split The Room";
-    layout = "new";
-
-    // PP4
-  } else if (document.getElementsByClassName("Fibbage3").length > 0) {
-    presenceData.details = "Playing Fibbage 3";
-    layout = "new";
-  } else if (document.getElementsByClassName("SurviveTheInternet").length > 0) {
-    presenceData.details = "Playing Survive The Internet";
-    layout = "new";
-  } else if (document.getElementsByClassName("MonsterMingle").length > 0) {
-    presenceData.details = "Playing Monster Seeking Monster";
-    layout = "new";
-  } else if (document.getElementsByClassName("bracketeering").length > 0) {
-    presenceData.details = "Playing Bracketeering";
-    layout = "new";
-  } else if (document.getElementsByClassName("Overdrawn").length > 0) {
-    presenceData.details = "Playing Civic Doodle";
-    layout = "new";
-
-    // PP3
-  } else if (document.getElementById("page-quiplash")) {
-    presenceData.details = "Playing Quiplash 1/XL/2";
-    layout = "legacy";
-  } else if (document.getElementById("page-triviadeath")) {
-    presenceData.details = "Playing Trivia Murder Party";
-    layout = "legacy";
-  } else if (document.getElementById("page-pollposition")) {
-    presenceData.details = "Playing Guesspionage";
-    layout = "guessp";
-  } else if (document.getElementById("page-fakinit")) {
-    presenceData.details = "Playing Fakin' It";
-    layout = "legacy";
-  } else if (document.getElementById("page-awshirt")) {
-    presenceData.details = "Playing Tee K.O.";
-    layout = "legacy";
-
-    // PP2
-  } else if (document.getElementById("page-fibbage")) {
-    presenceData.details = "Playing Fibbage XL/2";
-    layout = "legacy";
-  } else if (document.getElementById("page-earwax")) {
-    presenceData.details = "Playing Earwax";
-    layout = "legacy";
-  } else if (document.getElementById("page-auction")) {
-    presenceData.details = "Playing Bidiots";
-    layout = "legacy";
-  } else if (document.getElementById("page-bombintern")) {
-    presenceData.details = "Playing Bomb Corp";
-    layout = "legacy";
-
-    // PP1
-  } else if (document.getElementById("page-ydkj2015")) {
-    presenceData.details = "Playing You Don't Know Jack 2015";
-    layout = "legacy";
-  } else if (document.getElementById("page-drawful")) {
-    presenceData.details = "Playing Drawful 1/2";
-    layout = "legacy";
-  } else if (document.getElementById("page-wordspud")) {
-    presenceData.details = "Playing Word Spud";
-    layout = "legacy";
-  } else if (document.getElementById("page-lieswatter")) {
-    presenceData.details = "Playing Lie Swatter";
-    layout = "legacy";
-
-    // Other
-  } else if (window.location.href.includes("games.jackbox.tv")) {
-    presenceData.details = "Looking at a past game";
-  } else {
-    presenceData.details = "Idle";
-  }
-
-  if (useName && layout == "new") {
-    presenceData.state =
-      "as " + document.getElementById("playername").innerHTML;
-  }
-
-  if (useName && layout == "legacy") {
-    presenceData.state =
-      "as " + document.getElementById("player").children[0].innerHTML;
-  }
-
-  if (useName && layout == "dict") {
-    presenceData.state =
-      "as " +
-      document.getElementById("playericon").className.split("_")[1] +
-      document.getElementById("playername").innerHTML.toLowerCase();
-  }
-
-  if (useName && layout == "guessp") {
-    presenceData.state =
-      "as " + document.getElementById("player").children[1].innerHTML;
-  }
-
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

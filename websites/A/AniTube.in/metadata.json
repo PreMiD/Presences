@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "वाह्य",
+		"id": "819696394180100106"
+	},
+	"service": "AniTube.in",
+	"description": {
+		"en": "Anitube.in is a Portuguese(language) website where anyone can stream and download anime/dramas for Free.",
+		"vi_VN": "Anitube.in là trang web Tiếng Bồ Đào nha nơi mọi người có thể xem trực tuyến và tải về anime/drama miễn phí."
+	},
+	"url": "www.anitube.in",
+	"version": "1.0.11",
+	"logo": "https://i.imgur.com/pL1fgAo.png",
+	"thumbnail": "https://i.imgur.com/nRikMNR.png",
+	"color": "#0fa6a9",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"stream"
+	]
+}

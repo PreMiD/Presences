@@ -1,299 +1,314 @@
 const presence = new Presence({
-  clientId: "754771926857285782"
+	clientId: "754771926857285782",
 });
 
-interface GameState {
-  page: string;
-  day: number;
-  type: string;
-  state: number;
+enum Assets {
+	Day = "https://i.imgur.com/HfHbMyP.png",
+	Discussion = "https://i.imgur.com/jPqjrgn.png",
+	Night = "https://i.imgur.com/20YDTvV.png",
+	Voting = "https://i.imgur.com/QONtFlc.png",
+	Judgement = "https://i.imgur.com/6VbV24O.png",
+	Defense = "https://i.imgur.com/bsl0JU0.png",
+	Logo = "https://i.imgur.com/y7VYTQK.jpg",
 }
 
-// This will be how the site talks to the extension.
-// JSON data will be written to the output.value
-const output = document.createElement("textarea");
-output.id = "PreMiD_Salem_Out";
-output.style.display = "none";
-document.body.append(output);
+enum GameState {
+	Night = "night",
+	Day = "day",
+	End = "end",
+	AfterGame = "afterGame",
+	PreGame = "preGame",
+}
 
-// Overwrites console.log to get data from Town of Salem
-// This is because the game information is not global and everything is rendered on a canvas.
-// However, it seems that every event is logged to the console.
-const s = document.createElement("script");
-s.innerHTML = `(()=>{
-  const mainObject = {
-    page: "Login",
-    day: 1,
-    type: "Classic",
-    state: 1 // 1 = day, 0 = night, 2 = vote, 3 = end
-  };
+enum GameType {
+	Classic = "Classic",
+	Ranked = "Ranked",
+}
 
-  /**
-   * decodeHex - Converts a string of hex values to utf8
-   *
-   * @param  {string} hex The hex string
-   * @returns {string} The utf8 string
-   */
-  function decodeHex(hex){
-    const input = hex.split(" ");
-    let out = "";
-    for(let i = 0;i<input.length;i++){
-      const encoded = input[i].replace(/0x/g,"").replace(/[0-9a-f]{2}/gi,"%$&");
-      try{
-        out += decodeURIComponent(encoded);
-      }catch(err){
-        out += "§"+input[i]+"§";
-      }
-    }
-    return out;
-  }
+interface GameData {
+	scene: string;
+	page: string;
+	day: number;
+	gameMode: string;
+	state: GameState;
+}
 
-  const output = document.getElementById("PreMiD_Salem_Out");
-  output.value = JSON.stringify(mainObject);
-  // messages that can be ignored by this program
-  const ignoreRegex = /(Submitting chat)|(SocketSend\\.)|(Message received)|(> Potion ID)|(Number of)|(Adding game type)|(Clearing any)|(Initializing)|(Entering)|(Unloading)|(Preloading)|(Login Scene)|\\[ApplicationController]|\\[UnityCache]|\\[Subsystems]|\\[CachedXMLHttpRequest]/gm,
-    oldLog = console.log;
+interface Log {
+	content: string;
+	id: number;
+}
 
-  console.log = function(...args){
-    try{
-      if(args[0].search(ignoreRegex) !== -1){
-        // return;
-      }else if(args[0].search(/^Switched to /gm) === 0){
-        const page = args[0].split(" \\n")[0].split("Switched to ")[1];
-        mainObject.page = page;
-        if(page === "BigHome Scene"){
-          mainObject.day = 1;
-          mainObject.state = 1;
-          mainObject.type = "Classic";
-        }
-        output.value = JSON.stringify(mainObject);
-      }else if(args[0].search(/^Creating lobby:/gm) === 0){
-        const type = args[0].split(" |")[0].split(": ")[1];
-        mainObject.type = type;
-        output.value = JSON.stringify(mainObject);
-      }else if(args[0].search(/\\[Network]/gm) !== -1 && args[0].search(/Bytes:/gm) !== -1){
-        const hex = args[0].split("Bytes: ")[1].split("</color>")[0],
-          out = decodeHex(hex);
-        // console.warn("Network Log: " + out);
-        if(out.includes("§")){
-          const code = out.match(/§.*?§/g)[0];
-          switch (code.toLowerCase()) {
-            case "§0x91§":{ // night start
-              mainObject.state = 0;
-              break;
-            }
-            case "§0x92§":{ // day start
-              mainObject.state = 1;
-              mainObject.day++;
-              break;
-            }
-            case "§0x93§":{ // voting end
-              mainObject.state = 1;
-              break;
-            }
-            case "§0x9b§":{ // voting starts
-              mainObject.state = 2;
-              break;
-            }
-            case "§0xc2§":{ // end game
-              mainObject.state = 3;
-              break;
-            }
-          }
-          output.value = JSON.stringify(mainObject);
-        }
-      }else if(args[0].search(/Entered HandleStartRanked/gm) === 0){
-        mainObject.type = "Ranked";
-        output.value = JSON.stringify(mainObject);
-      }else if(args[0].search(/Entered HandleOnLeaveRankedQueue/gm) === 0){
-        mainObject.type = "Classic";
-        output.value = JSON.stringify(mainObject);
-      }
-    }catch(err){
-      // console.error(err);
-    }
-
-    // Log original message
-    oldLog(...args);
-  };
-})();`;
-document.body.append(s);
+const gameTypeNames: Record<string, string> = {
+		RankedPractice: "Ranked Practice",
+		RapidMode: "Custom Rapid Mode",
+		DraculasPalace: "Dracula's Palace",
+		ClassicTownTraitor: "Town Traitor",
+		CovenClassic: "Classic Coven",
+		CovenRankedPractice: "Coven Ranked Practice",
+		CovenMafia: "Mafia Returns",
+		CovenCustom: "Custom Coven",
+		CovenTownTraitor: "Coven Town Traitor",
+		CovenAllAny: "Coven All Any",
+		AllAny: "All Any",
+	},
+	oldState: GameData = {
+		scene: "BigLogin",
+		page: "",
+		day: 1,
+		gameMode: GameType.Classic,
+		state: GameState.Day,
+	},
+	currentState = Object.assign({}, oldState);
 
 let elapsed = Math.round(Date.now() / 1000),
-  oldState: GameState = {
-    page: "Login",
-    day: 1,
-    type: "Classic",
-    state: 1
-  };
+	lastId: number = null;
+
+function handleLog(log: string) {
+	if (
+		log.startsWith("Switched to ") ||
+		log.startsWith("Switched additively to")
+	) {
+		const scene = log
+			.match(/^Switched(?: additively)? to(?: scene)? (.*) Scene/m)[1]
+			.trim();
+		currentState.scene = scene;
+		if (scene === "BigPreGame") currentState.state = GameState.PreGame;
+	} else if (log.startsWith("Entered HomeSceneController.ShowView()")) {
+		currentState.page = log
+			.match(
+				/^Entered HomeSceneController.ShowView\(\) - View passed in: (.*)$/m
+			)[1]
+			.trim();
+	} else if (log.startsWith("Entered ")) {
+		switch (log.match(/^Entered (.*)$/m)[1].trim()) {
+			case "HandleStartRanked": {
+				currentState.scene = "BigLobby";
+				currentState.gameMode = GameType.Ranked;
+				break;
+			}
+			case "HandleOnLeaveRankedQueue": {
+				currentState.scene = "BigHome";
+				currentState.gameMode = GameType.Classic;
+				break;
+			}
+		}
+	} else if (log.startsWith("Creating lobby:"))
+		currentState.gameMode = log.match(/^Creating lobby: (.*?) \|/)[1];
+	else if (/\[Network\] <color=.*?>\[Received\] <b>/.test(log)) {
+		const action = log.match(
+			/\[Network\] <color=.*?>\[Received\] <b>(.*?)<\/b>/
+		)[1];
+		switch (action) {
+			case "PickNames":
+			case "RoleAndPosition": {
+				currentState.page = action;
+				currentState.state = GameState.PreGame;
+				break;
+			}
+			case "StartFirstDay": {
+				currentState.day = 1;
+				currentState.state = GameState.Day;
+				currentState.page = "StartDiscussion";
+				break;
+			}
+			case "StartDay": {
+				currentState.day++;
+				currentState.state = GameState.Day;
+				currentState.page = "";
+				break;
+			}
+			case "StartNight": {
+				currentState.state = GameState.Night;
+				currentState.page = "";
+				break;
+			}
+			case "FullMoonNight":
+			case "StartDiscussion":
+			case "StartDefense":
+			case "StartJudgement":
+			case "StartVoting":
+			case "WhoDiedAndHow": {
+				currentState.page = action;
+				break;
+			}
+			case "SomeoneHasWon": {
+				currentState.state = GameState.End;
+				break;
+			}
+		}
+	}
+}
+
+/**
+ * Overwrites the default console.log to be able to read the logs.
+ * Built-in readLogs causes performance problems, as hundreds of logs can be created in half a second.
+ * It is also hard to determine which logs have not been read yet.
+ */
+const injectedLoggerScript = document.createElement("script");
+injectedLoggerScript.type = "text/javascript";
+injectedLoggerScript.textContent = `
+{
+	let counter = 0;
+	console.stdlog = console.log.bind(console);
+	console.logs = [];
+	console.log = function() {
+		const log = arguments[0];
+		if (/^Switched |^Entered |^Creating |\\[Network\\] <color=.*?>\\[Received\\] <b>/.test(log)) {
+			console.logs.push({
+				content: log,
+				id: counter,
+			});
+			counter++;
+			if (counter > 10000) counter = 0;
+		}
+		while (console.logs.length > 100) console.logs.shift();
+		console.stdlog.apply(console, arguments);
+	};
+}
+`;
+document.head.appendChild(injectedLoggerScript);
+
+setInterval(async () => {
+	const logs: Log[] = await presence.getPageletiable('console"]["logs');
+	let lastUnreadLogIndex = 0;
+	for (let i = logs.length - 1; i >= 0; i--) {
+		if (logs[i].id === lastId) {
+			lastUnreadLogIndex = i + 1;
+			break;
+		}
+	}
+	for (let i = lastUnreadLogIndex; i < logs.length; i++)
+		handleLog(logs[i].content);
+	if (logs.length > 0) lastId = logs[logs.length - 1].id;
+}, 1000);
 
 presence.on("UpdateData", () => {
-  let data = {} as PresenceData;
+	const presenceData: PresenceData = {
+		largeImageKey: Assets.Logo,
+	};
 
-  if (window.location.pathname !== "/TownOfSalem/") {
-    data = {
-      details: "Browsing BlankMediaGames",
-      state: document.title,
-      startTimestamp: elapsed,
-      largeImageKey: "regular"
-    };
-  } else {
-    try {
-      const e = document.getElementById(
-          "PreMiD_Salem_Out"
-        ) as HTMLTextAreaElement,
-        info = JSON.parse(e.value);
-      if (oldState.page != info.page) {
-        elapsed = Math.round(Date.now() / 1000);
-      }
-      let key = "regular";
-      if (info.type.search(/Coven/g) !== -1) {
-        key = "coven";
-      }
-      let gameType = "Classic";
-      switch (info.type) {
-        case "ClassicTownTraitor": {
-          gameType = "Town Traitor";
-          break;
-        }
-        case "RankedPractice": {
-          gameType = "Ranked Practice";
-          break;
-        }
-        case "AllAny": {
-          gameType = "All Any";
-          break;
-        }
-        case "RapidMode": {
-          gameType = "Rapid Mode";
-          break;
-        }
-        case "DraculasPalace": {
-          gameType = "Dracula's Palace";
-          break;
-        }
-        case "CovenCustom": {
-          gameType = "Coven Custom";
-          break;
-        }
-        case "CovenLovers": {
-          gameType = "Lovers";
-          break;
-        }
-        case "CovenAllAny": {
-          gameType = "Coven All Any";
-          break;
-        }
-        case "CovenMafia": {
-          gameType = "Mafia Returns";
-          break;
-        }
-        case "CovenRankedPractice": {
-          gameType = "Coven Ranked Practice";
-          break;
-        }
-        case "CovenClassic": {
-          gameType = "Coven Classic";
-          break;
-        }
-        default: {
-          gameType = info.type;
-          break;
-        }
-      }
-      switch (info.page) {
-        case "Login": {
-          data = {
-            details: "Logging in",
-            largeImageKey: "regular",
-            smallImageKey: "idle",
-            startTimestamp: elapsed
-          };
-          break;
-        }
-        case "BigHome Scene": {
-          if (info.type === "Ranked") {
-            data = {
-              details: "In a Ranked match",
-              state: "Waiting in queue",
-              largeImageKey: "regular",
-              smallImageKey: "idle",
-              startTimestamp: elapsed
-            };
-          } else {
-            data = {
-              details: "Browsing Home Screen",
-              largeImageKey: "regular",
-              smallImageKey: "idle",
-              startTimestamp: elapsed
-            };
-          }
-          break;
-        }
-        case "BigLobby Scene": {
-          Object.assign(data, {
-            details: `In a ${gameType} match`,
-            state: "Waiting in lobby",
-            elapsed,
-            largeImageKey: key,
-            smallImageKey: "idle"
-          });
-          break;
-        }
-        case "BigPreGame Scene": {
-          Object.assign(data, {
-            details: `In a ${gameType} match`,
-            largeImageKey: key,
-            startTimestamp: elapsed
-          });
-          switch (info.state) {
-            case 0: {
-              data.state = "Night " + info.day;
-              data.smallImageKey = "night";
-              break;
-            }
-            case 1: {
-              data.state = "Day " + info.day;
-              data.smallImageKey = "day";
-              break;
-            }
-            case 2: {
-              data.state = "Day " + info.day + " | Judgement";
-              data.smallImageKey = "voting";
-              break;
-            }
-            case 3: {
-              data.state = "Day " + info.day + " | Game End";
-              data.smallImageKey = "idle";
-              break;
-            }
-          }
-          break;
-        }
-        case "BigEndGame Scene": {
-          Object.assign(data, {
-            details: "Browsing End-Game Screen",
-            largeImageKey: key,
-            smallImageKey: "idle",
-            startTimestamp: elapsed
-          });
-          break;
-        }
-        default: {
-          throw "";
-          break;
-        }
-      }
-      oldState = info;
-    } catch (e) {
-      Object.assign(data, {
-        details: "Logging in.",
-        largeImageKey: "regular",
-        smallImageKey: "idle",
-        startTimestamp: elapsed
-      });
-    }
-  }
+	if (window.location.pathname !== "/TownOfSalem/") {
+		presenceData.details = "Browsing BlankMediaGames";
+		presenceData.state = document.title;
+		presenceData.startTimestamp = elapsed;
+	} else {
+		if (oldState.scene !== currentState.scene)
+			elapsed = Math.round(Date.now() / 1000);
+		presenceData.startTimestamp = elapsed;
+		Object.assign(oldState, currentState);
+		switch (currentState.scene) {
+			case "BigLogin": {
+				presenceData.details = "Logging in";
+				break;
+			}
+			case "BigHome": {
+				switch (currentState.page) {
+					case "GameModeSelect": {
+						presenceData.details = "Selecting Game Mode";
+						break;
+					}
+					case "Customization": {
+						presenceData.details = "Customizing Character";
+						break;
+					}
+					case "Party": {
+						presenceData.details = "In a Party";
+						break;
+					}
+					default: {
+						presenceData.details = "Browsing Main Menu";
+						presenceData.state = currentState.page;
+					}
+				}
+				break;
+			}
+			case "BigLobby": {
+				presenceData.details = "Waiting in a Lobby";
+				presenceData.state =
+					gameTypeNames[currentState.gameMode] ?? currentState.gameMode;
+				break;
+			}
+			case "BigPreGame": {
+				presenceData.details = "Loading Game";
+				presenceData.state =
+					gameTypeNames[currentState.gameMode] ?? currentState.gameMode;
+				break;
+			}
+			case "BigGame": {
+				presenceData.details = `Playing a ${
+					gameTypeNames[currentState.gameMode] ?? currentState.gameMode
+				} Game`;
+				switch (currentState.state) {
+					case GameState.PreGame: {
+						switch (currentState.page) {
+							case "PickNames": {
+								presenceData.state = "Choosing Names";
+								break;
+							}
+							case "RoleAndPosition": {
+								presenceData.state = "Getting a Role";
+								break;
+							}
+						}
+						break;
+					}
+					case GameState.Day: {
+						presenceData.smallImageKey = Assets.Day;
+						switch (currentState.page) {
+							case "StartDiscussion": {
+								presenceData.state = `Discussion | Day ${currentState.day}`;
+								presenceData.smallImageKey = Assets.Discussion;
+								break;
+							}
+							case "StartVoting": {
+								presenceData.state = `Voting | Day ${currentState.day}`;
+								presenceData.smallImageKey = Assets.Voting;
+								break;
+							}
+							case "WhoDiedAndHow": {
+								presenceData.state = `Viewing a Death | Day ${currentState.day}`;
+								break;
+							}
+							case "StartDefense": {
+								presenceData.state = `Defense | Day ${currentState.day}`;
+								presenceData.smallImageKey = Assets.Defense;
+								break;
+							}
+							case "StartJudgement": {
+								presenceData.state = `Judgement | Day ${currentState.day}`;
+								presenceData.smallImageKey = Assets.Judgement;
+								break;
+							}
+							default: {
+								presenceData.state = `Day ${currentState.day}`;
+							}
+						}
+						break;
+					}
+					case GameState.Night: {
+						presenceData.smallImageKey = Assets.Night;
+						if (currentState.page === "FullMoonNight")
+							presenceData.state = `Night ${currentState.day} (Full Moon)`;
+						else presenceData.state = `Night ${currentState.day}`;
+						break;
+					}
+					case GameState.End: {
+						presenceData.state = "Viewing End Screen";
+						break;
+					}
+				}
+				break;
+			}
+			case "BigEndGame": {
+				presenceData.details = `Playing a ${
+					gameTypeNames[currentState.gameMode] ?? currentState.gameMode
+				} Game`;
+				presenceData.state = "Viewing After Game Screen";
+				break;
+			}
+		}
+	}
 
-  presence.setActivity(data);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

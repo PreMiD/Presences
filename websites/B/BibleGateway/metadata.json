@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "theusaf",
+		"id": "193714715631812608"
+	},
+	"service": "BibleGateway",
+	"description": {
+		"en": "Read, hear, and study Scripture at the world's most-visited Christian website. Grow your faith with devotionals, Bible reading plans, and mobile apps."
+	},
+	"url": "www.biblegateway.com",
+	"version": "1.0.3",
+	"logo": "https://i.imgur.com/zaxEjvB.png",
+	"thumbnail": "https://i.imgur.com/N203oXY.png",
+	"color": "#952004",
+	"category": "other",
+	"tags": [
+		"religion",
+		"book",
+		"scripture"
+	]
+}

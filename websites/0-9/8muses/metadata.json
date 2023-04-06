@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "fror",
+		"id": "515668127829458945"
+	},
+	"service": "8muses",
+	"description": {
+		"en": "Free Sex Comics, Adult Cartoons, 3D Porn and More.",
+		"ga_IE": "Comics Gnéis In Aisce, Cartúin do Dhaoine Fásta, Porn 3D agus Níos Mó.",
+		"nl": "Gratis Sex Stripboeken, Volwassen Tekenfilms, 3D Porno en Meer.",
+		"vi_VN": "Truyện tranh khiêu dâm miễn phí, hoạt hình người lớn, phim 3D khiêu dâm và hơn nữa."
+	},
+	"url": "8muses.io",
+	"version": "1.0.16",
+	"logo": "https://i.imgur.com/GQF8Kiq.png",
+	"thumbnail": "https://i.imgur.com/gba6Qsp.png",
+	"color": "#2caae1",
+	"category": "other",
+	"tags": [
+		"nsfw",
+		"comics",
+		"cartoons",
+		"sex",
+		"deepfakes",
+		"3d",
+		"porn"
+	]
+}

@@ -1,94 +1,295 @@
-var presence = new Presence({
-    clientId: "612071822321647648"
-  }),
-  presenceData: PresenceData = {
-    largeImageKey: "logo"
-  },
-  pageData: PresenceData = {
-    largeImageKey: "logo"
-  };
+/* eslint-disable no-one-time-vars/no-one-time-vars */
+const presence = new Presence({
+		clientId: "909577563234508910",
+	}),
+	FLAG_ICONS = [
+		"ar",
+		"ca",
+		"cs",
+		"cy",
+		"da",
+		"de",
+		"dn",
+		"el",
+		"en",
+		"eo",
+		"es",
+		"fr",
+		"ga",
+		"gn",
+		"he",
+		"hi",
+		"hu",
+		"hv",
+		"hw",
+		"id",
+		"it",
+		"ja",
+		"kl",
+		"ko",
+		"nb",
+		"nv",
+		"pl",
+		"pt",
+		"ro",
+		"ru",
+		"sv",
+		"sw",
+		"tr",
+		"uk",
+		"vi",
+		"zs",
+	],
+	INFO_PAGES = [
+		"approach",
+		"contact",
+		"cookies",
+		"efficacy",
+		"guidelines",
+		"info",
+		"mobile",
+		"privacy",
+		"team",
+		"terms",
+	],
+	API_ENDPOINTS = [
+		"2017-06-30",
+		"api",
+		"friendships",
+		"login",
+		"switch_language",
+		"users",
+		"vocabulary",
+	],
+	presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/YKAf42L.png",
+		startTimestamp: Math.floor(Date.now() / 1000),
+	},
+	language = {
+		imageKey: null as string,
+		name: null as string,
+	};
 
-const lang = new Map();
-lang.set("de", "German");
-lang.set("es", "Spanish");
-lang.set("fr", "French");
-lang.set("ja", "Japanese");
-lang.set("it", "Italian");
-lang.set("ko", "Korean");
-lang.set("zs", "Chinese");
-lang.set("ru", "Russian");
-lang.set("pt", "Portuguese");
-lang.set("tr", "Turkish");
-lang.set("dn", "Dutch");
-lang.set("sv", "Swedish");
-lang.set("el", "Greek");
-lang.set("hi", "Hindi");
-lang.set("hv", "high valyrian");
-lang.set("ga", "Irish");
-lang.set("pl", "Polish");
-lang.set("he", "Hebrew");
-lang.set("nb", "Norwegian");
-lang.set("vi", "Vietnamese");
-lang.set("ar", "Arabic");
-lang.set("hw", "Hawaiian");
-lang.set("da", "Danish");
-lang.set("kl", "Klingon");
-lang.set("ro", "Romanian");
-lang.set("cs", "Czech");
-lang.set("sw", "Swahili");
-lang.set("cy", "Walsh");
-lang.set("id", "Indonesian");
-lang.set("hu", "Hungarian");
-lang.set("uk", "Ukrainian");
-lang.set("eo", "Esperanto");
-lang.set("nv", "Navajo");
-lang.set("en", "English");
+function updateLanguage() {
+	const state = JSON.parse(window.localStorage.getItem("duo.state")),
+		courseId = state?.user?.currentCourseId;
+	if (!courseId) return;
+
+	const course = state.courses?.[courseId];
+	if (!course) return;
+
+	const languageId = course.learningLanguage;
+	if (FLAG_ICONS.includes(languageId)) language.imageKey = `flag_${languageId}`;
+	else if (languageId) language.imageKey = "flag_unknown";
+	else language.imageKey = null;
+	language.name = course.title ?? null;
+}
+updateLanguage();
+setInterval(updateLanguage, 1000);
+
+function capitalize(str: string): string {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function checkBasicPages(path: string[]): boolean {
+	if (path.length === 0) {
+		if (
+			new URL(document.location.href).searchParams.get("isLoggingIn") === "true"
+		) {
+			presenceData.details = "Logging in";
+			return true;
+		}
+		presenceData.details = "Viewing the home page";
+		return true;
+	} else if (INFO_PAGES.includes(path[0])) {
+		presenceData.details = `Viewing the ${path[0]} page`;
+		return true;
+	} else {
+		switch (path[0]) {
+			case "courses": {
+				presenceData.details = "Viewing available courses";
+				return true;
+			}
+			case "abc": {
+				presenceData.details = "Looking into Duolingo ABC";
+				return true;
+			}
+			case "plus": {
+				presenceData.details = "Looking into Duolingo Plus";
+				return true;
+			}
+			case "dictionary": {
+				presenceData.details = "Looking up a word";
+				if (path.length >= 3) presenceData.state = `${path[1]}: ${path[2]}`;
+				return true;
+			}
+			case "profile": {
+				if (path.length < 2) return true;
+				presenceData.details = "Viewing a profile";
+				[, presenceData.state] = path;
+				if (path.length >= 3) {
+					presenceData.details += " section";
+					presenceData.state += `'s ${path[2]}`;
+				}
+				return true;
+			}
+			case "friend-updates": {
+				presenceData.details = "Viewing friend updates";
+				return true;
+			}
+			case "user-search": {
+				presenceData.details = "Searching for a user";
+				return true;
+			}
+			case "settings": {
+				presenceData.details = "Adjusting settings";
+				if (path.length >= 2) {
+					const [, page] = path;
+					presenceData.state = `Section: ${capitalize(page)}`;
+				}
+				return true;
+			}
+			default:
+				if (document.title.startsWith("Error")) {
+					presenceData.details = "Watching Duo cry :(";
+					presenceData.state = document.title;
+					return true;
+				} else if (API_ENDPOINTS.includes(path[0])) {
+					presenceData.details = "Viewing an API response";
+					presenceData.state = `Endpoint: /${path[0]}`;
+					return true;
+				} else if (path[0] === "log-in") {
+					presenceData.details = "Logging in";
+					return true;
+				} else if (["forgot_password", "reset_password"].includes(path[0])) {
+					presenceData.details = "Resetting their password";
+					return true;
+				} else if (path[0] === "course") {
+					presenceData.details = "Considering a course";
+					if (path.length < 4) return true;
+
+					const courseSplit = path[3].split("-");
+					if (courseSplit.length < 2) return true;
+					presenceData.state = capitalize(courseSplit[1]);
+					return true;
+				}
+		}
+	}
+
+	return false;
+}
+
+function checkLearningPages(path: string[]): boolean {
+	function set(details: string) {
+		presenceData.details = details;
+		presenceData.state = `Learning ${language.name}`;
+		return true;
+	}
+
+	switch (path[0]) {
+		case "learn": {
+			// Update the language in case the user just logged in
+			updateLanguage();
+			return set("Choosing something to learn");
+		}
+		case "practice":
+			return set("Practicing everything learned");
+		case "skill": {
+			if (path.length < 3) return;
+
+			const lesson = path[2]
+				.replace(/([a-z]+)([A-Z]|-\d)/g, "$1 $2")
+				.replace(/-(\d)/g, "$1");
+			if (path.length >= 4) {
+				switch (path[3]) {
+					case "tips":
+						return set(`Reading tips for ${lesson}`);
+					case "practice":
+						return set(`Practicing ${lesson}`);
+					case "test":
+						return set(`Testing out of ${lesson}`);
+					// No default
+				}
+			}
+			return set(`In a lesson: ${lesson}`);
+		}
+		case "shop":
+			return set("In the shop");
+		case "words":
+			return set("Viewing all learned words");
+		case "stories": {
+			if (path.length < 2) return set("Choosing a story to read");
+
+			const phrases = document.querySelectorAll(
+				`body > ${"div > ".repeat(11)} .phrase`
+			);
+			if (phrases.length !== 0) {
+				return set(
+					`Reading ${Array.from(phrases)
+						.map(p => p.textContent)
+						.join(" ")}`
+				);
+			}
+			return set("Reading a story");
+		}
+		case "mistakes-review":
+			return set("Reviewing past mistakes");
+		case "checkpoint": {
+			if (path.length < 4) return;
+
+			const checkpoint = parseInt(path[2], 10) + 1;
+			if (path[3] === "practice")
+				return set(`Practicing Checkpoint ${checkpoint}`);
+			else if (path[3] === "bigtest")
+				return set(`Taking the Checkpoint ${checkpoint} test`);
+			return;
+		}
+		// No default
+	}
+
+	return false;
+}
+
+function checkStartingPages(path: string[]): boolean {
+	function set(state: string) {
+		presenceData.details = "Getting started";
+		presenceData.state = state;
+		return true;
+	}
+
+	switch (path[0]) {
+		case "register":
+			return set("Choosing a language");
+		case "welcome":
+			return set("Answering some questions");
+		case "placement":
+			return set("Taking the placement test");
+		// No default
+	}
+
+	return false;
+}
+
+function determineText(path: string[]) {
+	if (checkBasicPages(path)) return;
+	else if (checkLearningPages(path)) return;
+	else if (checkStartingPages(path)) return;
+}
 
 presence.on("UpdateData", async () => {
-  var path1 = document.location.pathname;
+	if (!language.imageKey || !language.name) {
+		delete presenceData.smallImageKey;
+		delete presenceData.smallImageText;
+	} else {
+		presenceData.smallImageKey = language.imageKey;
+		presenceData.smallImageText = `Learning ${language.name}`;
+	}
+	delete presenceData.details;
+	delete presenceData.state;
 
-  if (path1.split("/")[2] == null) {
-    if (document.location.pathname.startsWith("/learn")) {
-      pageData.details = "Choosing level to learn..";
-      presence.setActivity(pageData);
-    } else if (document.location.pathname.startsWith("/shop")) {
-      pageData.details = "Browsing shop..";
-      presence.setActivity(pageData);
-    } else if (document.location.pathname.includes("/dictionary")) {
-      pageData.details = "Using dictionary..";
-      pageData.state = "Language: " + document.location.pathname.split("/")[2];
-      presence.setActivity(pageData);
-    } else if (document.location.pathname.includes("/profile")) {
-      pageData.details = "Browsing profile..";
-      pageData.state = "Browsing: " + document.location.pathname.split("/")[2];
-      presence.setActivity(pageData);
-    } else if (document.location.pathname.includes("/words")) {
-      presenceData.details = "Checking words...";
-      presenceData.largeImageKey = "logo";
-      presence.setActivity(presenceData);
-    } else if (
-      document.location.pathname == "/" ||
-      !document.location.pathname
-    ) {
-      presence.setActivity(pageData);
-    }
-  } else {
-    if (
-      path1.length > 1 &&
-      path1.split("/")[2] !== null &&
-      path1.split("/")[2].length == 2
-    ) {
-      var language: string;
-      for (const value of lang.keys()) {
-        if (path1.split("/")[2] == value) {
-          language = lang.get(value);
-          break;
-        }
-      }
-      presenceData.details = "Taking a lesson";
-      presenceData.state = "Language: " + language;
-      presenceData.largeImageKey = "logo";
-      presence.setActivity(presenceData);
-    }
-  }
+	let path = decodeURI(window.location.pathname).split("/");
+	path = path.filter(p => p !== "");
+
+	determineText(path);
+	presence.setActivity(presenceData);
 });

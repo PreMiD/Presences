@@ -1,0 +1,69 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Faelayis",
+		"id": "328731868096888833"
+	},
+	"service": "vscode.dev",
+	"description": {
+		"en": "Visual Studio Code for the Web Anywhere anytime, entirely in your browser [Parameters for Customisation](https://github.com/PreMiD/Presences/blob/master/websites/V/vscode.dev/README.md)"
+	},
+	"url": "vscode.dev",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/MhJueq3.png",
+	"thumbnail": "https://i.imgur.com/TinZgqx.png",
+	"color": "#3eaaf2",
+	"category": "other",
+	"tags": [
+		"coding",
+		"vscode"
+	],
+	"settings": [
+		{
+			"id": "customIdling",
+			"title": "Details Idling",
+			"icon": "fas fa-comment-alt-edit",
+			"value": "Idling",
+			"placeholder": ""
+		},
+		{
+			"id": "customDetail",
+			"title": "Presence Details row1",
+			"icon": "fas fa-comment-alt-edit",
+			"value": "Editing %file%",
+			"placeholder": "Use %lang% or %encoding%"
+		},
+		{
+			"id": "customState",
+			"title": "Presence Details row2",
+			"icon": "fas fa-comment-alt-edit",
+			"value": "Workspace: %workspace%",
+			"placeholder": "Use %branch% or %file%"
+		},
+		{
+			"id": "customImageText",
+			"title": "Small Image Text",
+			"icon": "fas fa-comment-alt-edit",
+			"value": "Editing a %lang% file (%selection%)",
+			"placeholder": "Use %error% or %problems%"
+		},
+		{
+			"id": "customEmpty",
+			"title": "Text empty",
+			"icon": "fas fa-comment-alt-edit",
+			"value": ""
+		},
+		{
+			"id": "timeStamps",
+			"title": "Show TimeStamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Harold",
+		"id": "141206144264699904"
+	},
+	"contributors": [
+		{
+			"name": "theusaf",
+			"id": "193714715631812608"
+		}
+	],
+	"service": "Reaper Scans",
+	"description": {
+		"en": "Read Comics and Novels on Reaper Scans."
+	},
+	"url": "reaperscans.com",
+	"version": "1.1.1",
+	"logo": "https://i.imgur.com/tPMtbjL.png",
+	"thumbnail": "https://i.imgur.com/AzryXJa.jpg",
+	"color": "#6E3CAA",
+	"category": "other",
+	"tags": [
+		"comic",
+		"scanlation",
+		"manga",
+		"manhua",
+		"manhwa",
+		"novel"
+	]
+}

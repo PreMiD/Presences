@@ -1,158 +1,144 @@
 const presence = new Presence({
-  clientId: "711393222252822539"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "711393222252822539",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
-    largeImageKey: "logo"
-  };
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/QQWLe6D.png",
+			startTimestamp: browsingTimestamp,
+		},
+		path = document.location.pathname;
+	if (
+		window.location.hostname === "bungie.net" ||
+		window.location.hostname === "www.bungie.net"
+	)
+		presenceData.details = "Viewing the Bungie.net Homepage";
+	else if (window.location.hostname === "comics.bungie.net")
+		presenceData.details = "Readig Destiny Comics";
 
-  //This is just here so that I can have "changes"  to push to GitHub
-  //This is just to push to GitHub
-  const path = document.location.pathname;
-  if (
-    window.location.hostname == "bungie.net" ||
-    window.location.hostname == "www.bungie.net"
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing the Bungie.net Homepage";
-  } else if (window.location.hostname == "comics.bungie.net") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Readig Destiny Comics";
-  }
-  if (path == "/7/en/Destiny/NewLight") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Looking at Destiny Two NewLight";
-  } else if (path == "/7/en/Destiny/Shadowkeep") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Checking out Destiny Two Shadowkeep";
-  } else if (path == "/7/en/Destiny/Forsaken") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Checking out Destiny Two Forsaken";
-  } else if (path == "/7/en/Seasons/SeasonOfTheWorthy") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Checking out Destiny Two Season of the Worthy";
-  } else if (path == "/7/en/Seasons/SeasonOfDawn") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Checking out Destiny Two Season of Dawn";
-  } else if (path == "/7/en/Seasons/SeasonOfTheUndying") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Checking out Destiny Two Season of the Undying";
-  } else if (path.includes("/en/Explore/Detail/News/")) {
-    const title = document.querySelector("#article-container > h1").innerHTML;
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading " + title;
-  } else if (path == "/en/News") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Cheking out news from Bungie";
-  } else if (path == "/en/ClanV2/Chat") {
-    const titleSix = document.querySelector(
-      "#clanSideBar > div.container-left.customScroll.customScrollOff > a > div.compact-clanidentity-containter > div.clanNameContainer > h2"
-    ).innerHTML;
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details =
-      "Looking at thier clan:  " +
-      titleSix.replace("<span>", "").replace("</span>", "");
-  } else if (path.includes("/en/Forums/Topics")) {
-    const titleThirteen = document.querySelector("head > title");
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Looking at " + titleThirteen.innerHTML;
-  } else if (path.includes("/en/Forums/Post/")) {
-    const titleFourteen = document.querySelector(
-      "#topicPost > div > div.threadMeta > div > div > div.authorMeta > a"
-    );
-    const titleTwo = document.querySelector(
-      "#topicPost > div > div.threadMeta > div > h1"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details =
-      "Looking at: " + titleTwo.innerHTML + "By: " + titleFourteen.innerHTML;
-  } else if (path.includes("/en/ClanV2/MyClans")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Looking at the clans they are apart of";
-  } else if (path.includes("/en/ClanV2/Index")) {
-    const titleSeven = document.querySelector(
-      "#mainContent > div.darkThemeContent.grid.full-screen > div > div.container_bodyContent.customScroll > div.header > div.clanIdentity > h1"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Concerding joining clan " + titleSeven;
-  } else if (path.includes("/en/ClanV2/Fireteam")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Checking out the available fireteams";
-  } else if (path.includes("/en/ClanV2/PublicFireteam")) {
-    const titleNine = document.querySelector(
-      "#clan-container > div > div > div > div > div.activity-header > h2"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Interested in in fireteam " + titleNine.innerHTML;
-  } else if (path.includes("en/Groups/SuggestedGroups")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Looking at the groups Bungie suggested to them";
-  } else if (path.includes("en/Groups/MyGroups")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Searching for groups";
-  } else if (path.includes("en/Groups/Popular")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Looking at the groups they're apart of";
-  } else if (path.includes("/en/Groups/Search")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Searching for groups";
-  } else if (path.includes("/en/Groups/Chat")) {
-    const titleTen = document.querySelector("#groupName");
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Interested/Joined group " + titleTen.innerHTML;
-  } else if (path.includes("/en/Community/Creations")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Looking at the creations the community made";
-  } else if (path.includes("/en/Community/Detail")) {
-    const titleEleven = document.querySelector(
-      "#mainContent > div.community-detail-header > div > div > div.community-details.flex > div.title"
-    );
-    const titleTwelve = document.querySelector(
-      "#mainContent > div.community-detail-header > div > div > div.community-meta > span:nth-child(1) > a"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details =
-      "Looking at " + titleEleven.innerHTML + " By: " + titleTwelve.innerHTML;
-  } else if (path == "/en/Help") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Getting help from Bungie";
-  } else if (path == "/en/Support") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Getting help from Bungie";
-  } else if (path.includes("/en/Help/Index")) {
-    const titleFifteen = document.querySelector("#searchValue");
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Helpful " + titleFifteen.innerHTML;
-  } else if (path.includes("/en/Help/Article/")) {
-    const titleSeventeen = document.querySelector(
-      "#mainContent > div.content_main > div.container_help.grid > div.container_helpContent.grid-col-9.grid-col-9-medium.grid-col-12-mobile > div.content_help > div > div.HelpItemTitle"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading " + titleSeventeen.innerHTML;
-  } else if (path.includes("/en/guide/destiny2")) {
-    const titleEighteen = document.querySelector(
-      "#guide-container > div.header > h1"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading " + titleEighteen.innerHTML;
-  } else if (path.includes("/en/Help/Troubleshoot")) {
-    const titleNinteen = document.querySelector(
-      "#mainContent > div.content_main > div.container_help.grid > div.container_helpContent.grid-col-9.grid-col-9-medium.grid-col-12-mobile > div.troubleshootStep > h3"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading " + titleNinteen.innerHTML;
-  } else if (path.includes("/en/Support/Troubleshoot")) {
-    const titleTwenty = document.querySelector(
-      "#mainContent > div.content_main > div.container_help.grid > div.container_helpContent.grid-col-9.grid-col-9-medium.grid-col-12-mobile > div.troubleshootStep > h3"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading " + titleTwenty.innerHTML;
-  }
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+	switch (path) {
+		case "/7/en/Destiny/NewLight": {
+			presenceData.details = "Looking at Destiny Two NewLight";
+			break;
+		}
+		case "/7/en/Destiny/Shadowkeep": {
+			presenceData.details = "Checking out Destiny Two Shadowkeep";
+			break;
+		}
+		case "/7/en/Destiny/Forsaken": {
+			presenceData.details = "Checking out Destiny Two Forsaken";
+			break;
+		}
+		case "/7/en/Seasons/SeasonOfTheWorthy": {
+			presenceData.details = "Checking out Destiny Two Season of the Worthy";
+			break;
+		}
+		case "/7/en/Seasons/SeasonOfDawn": {
+			presenceData.details = "Checking out Destiny Two Season of Dawn";
+			break;
+		}
+		case "/7/en/Seasons/SeasonOfTheUndying": {
+			presenceData.details = "Checking out Destiny Two Season of the Undying";
+			break;
+		}
+		default:
+			if (path.includes("/en/Explore/Detail/News/")) {
+				presenceData.details = `Reading ${
+					document.querySelector("#article-container > h1").textContent
+				}`;
+			} else if (path === "/en/News")
+				presenceData.details = "Cheking out news from Bungie";
+			else if (path === "/en/ClanV2/Chat") {
+				presenceData.details = `Looking at thier clan:  ${document
+					.querySelector(
+						"#clanSideBar > div.container-left.customScroll.customScrollOff > a > div.compact-clanidentity-containter > div.clanNameContainer > h2"
+					)
+					.textContent.replace("<span>", "")
+					.replace("</span>", "")}`;
+			} else if (path.includes("/en/Forums/Topics")) {
+				presenceData.details = `Looking at ${
+					document.querySelector("head > title").textContent
+				}`;
+			} else if (path.includes("/en/Forums/Post/")) {
+				presenceData.details = `Looking at: ${
+					document.querySelector("#topicPost > div > div.threadMeta > div > h1")
+						.textContent
+				}By: ${
+					document.querySelector(
+						"#topicPost > div > div.threadMeta > div > div > div.authorMeta > a"
+					).textContent
+				}`;
+			} else if (path.includes("/en/ClanV2/MyClans"))
+				presenceData.details = "Looking at the clans they are apart of";
+			else if (path.includes("/en/ClanV2/Index")) {
+				presenceData.details = `Concerding joining clan ${document.querySelector(
+					"#mainContent > div.darkThemeContent.grid.full-screen > div > div.container_bodyContent.customScroll > div.header > div.clanIdentity > h1"
+				)}`;
+			} else if (path.includes("/en/ClanV2/Fireteam"))
+				presenceData.details = "Checking out the available fireteams";
+			else if (path.includes("/en/ClanV2/PublicFireteam")) {
+				presenceData.details = `Interested in in fireteam ${
+					document.querySelector(
+						"#clan-container > div > div > div > div > div.activity-header > h2"
+					).textContent
+				}`;
+			} else if (path.includes("en/Groups/SuggestedGroups"))
+				presenceData.details = "Looking at the groups Bungie suggested to them";
+			else if (path.includes("en/Groups/MyGroups"))
+				presenceData.details = "Searching for groups";
+			else if (path.includes("en/Groups/Popular"))
+				presenceData.details = "Looking at the groups they're apart of";
+			else if (path.includes("/en/Groups/Search"))
+				presenceData.details = "Searching for groups";
+			else if (path.includes("/en/Groups/Chat")) {
+				presenceData.details = `Interested/Joined group ${
+					document.querySelector("#groupName").textContent
+				}`;
+			} else if (path.includes("/en/Community/Creations"))
+				presenceData.details = "Looking at the creations the community made";
+			else if (path.includes("/en/Community/Detail")) {
+				presenceData.details = `Looking at ${
+					document.querySelector(
+						"#mainContent > div.community-detail-header > div > div > div.community-details.flex > div.title"
+					).textContent
+				} By: ${
+					document.querySelector(
+						"#mainContent > div.community-detail-header > div > div > div.community-meta > span:nth-child(1) > a"
+					).textContent
+				}`;
+			} else if (path === "/en/Help")
+				presenceData.details = "Getting help from Bungie";
+			else if (path === "/en/Support")
+				presenceData.details = "Getting help from Bungie";
+			else if (path.includes("/en/Help/Index")) {
+				presenceData.details = `Helpful ${
+					document.querySelector("#searchValue").textContent
+				}`;
+			} else if (path.includes("/en/Help/Article/")) {
+				presenceData.details = `Reading ${
+					document.querySelector(
+						"#mainContent > div.content_main > div.container_help.grid > div.container_helpContent.grid-col-9.grid-col-9-medium.grid-col-12-mobile > div.content_help > div > div.HelpItemTitle"
+					).textContent
+				}`;
+			} else if (path.includes("/en/guide/destiny2")) {
+				presenceData.details = `Reading ${
+					document.querySelector("#guide-container > div.header > h1")
+						.textContent
+				}`;
+			} else if (path.includes("/en/Help/Troubleshoot")) {
+				presenceData.details = `Reading ${
+					document.querySelector(
+						"#mainContent > div.content_main > div.container_help.grid > div.container_helpContent.grid-col-9.grid-col-9-medium.grid-col-12-mobile > div.troubleshootStep > h3"
+					).textContent
+				}`;
+			} else if (path.includes("/en/Support/Troubleshoot")) {
+				presenceData.details = `Reading ${
+					document.querySelector(
+						"#mainContent > div.content_main > div.container_help.grid > div.container_helpContent.grid-col-9.grid-col-9-medium.grid-col-12-mobile > div.troubleshootStep > h3"
+					).textContent
+				}`;
+			}
+	}
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

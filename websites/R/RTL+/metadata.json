@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "N0chteil ^^",
+		"id": "495901098926669825"
+	},
+	"contributors": [
+		{
+			"name": "Bas950",
+			"id": "241278257335500811"
+		}
+	],
+	"service": "RTL+",
+	"description": {
+		"en": "RTL+ offers you exciting films and series. Also many shows and documentaries can be found in the online stream! Watch your favorite show online now!",
+		"nl": "RTL+ biedt spannende films en series. Ook zijn er veel shows en documentaires te vinden in de online stream! Bekijk nu uw favoriete programma online!",
+		"de": "RTL+ bietet Dir spannende Filme und Serien. Auch viele Shows und Dokus sind im Online-Stream zu finden! Deine Lieblingssendung jetzt online anschauen!"
+	},
+	"url": "www.tvnow.de",
+	"version": "1.1.2",
+	"logo": "https://i.imgur.com/fMMsZfV.png",
+	"thumbnail": "https://i.imgur.com/ciqmYEY.jpg",
+	"color": "#ffbc2d",
+	"category": "videos",
+	"tags": [
+		"tv",
+		"now",
+		"tvnow",
+		"rtl"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
+	]
+}

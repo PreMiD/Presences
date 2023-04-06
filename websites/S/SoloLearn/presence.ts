@@ -1,167 +1,146 @@
 const presence = new Presence({
-    clientId: "668173626775830529"
-  }),
-  strings = presence.getStrings({
-    browsing: "presence.activity.browsing"
-  }),
-  getElement = (query: string): string | undefined => {
-    const element = document.querySelector(query);
-    return element?.textContent.trimStart().trimEnd();
-  },
-  stripCourse = (course: string | undefined): string | undefined => {
-    return course
-      ?.replace("Tutorial", "")
-      .replace("Fundamentals", "")
-      .trimEnd();
-  };
+		clientId: "668173626775830529",
+	}),
+	strings = presence.getStrings({
+		browsing: "general.browsing",
+	}),
+	getElement = (query: string): string | undefined =>
+		document.querySelector(query)?.textContent.trimStart().trimEnd(),
+	stripCourse = (course: string | undefined): string | undefined =>
+		course?.replace("Tutorial", "").replace("Fundamentals", "").trimEnd();
 
 let elapsed = Math.floor(Date.now() / 1000),
-  prevUrl = document.location.href;
+	prevUrl = document.location.href;
 
 const statics = {
-  "/User/Login": {
-    details: "Logging In..."
-  },
-  "/User/Register": {
-    details: "Registering..."
-  },
-  "/User/Logout": {
-    details: "Logging Out..."
-  },
-  "/User/Edit": {
-    details: "Editing Profile..."
-  },
-  "/Courses/": {
-    details: "Browsing...",
-    state: "Courses"
-  },
-  "/Features/": {
-    details: "Viewing...",
-    state: "Features"
-  },
-  "/Contact/": {
-    details: "Viewing...",
-    state: "Contact"
-  },
-  "/Terms-of-Use/": {
-    details: "Viewing...",
-    state: "Terms of Use"
-  },
-  "/faq/": {
-    details: "Viewing...",
-    state: "FAQ"
-  }
+	"/User/Login": {
+		details: "Logging In...",
+	},
+	"/User/Register": {
+		details: "Registering...",
+	},
+	"/User/Logout": {
+		details: "Logging Out...",
+	},
+	"/User/Edit": {
+		details: "Editing Profile...",
+	},
+	"/Courses/": {
+		details: "Browsing...",
+		state: "Courses",
+	},
+	"/Features/": {
+		details: "Viewing...",
+		state: "Features",
+	},
+	"/Contact/": {
+		details: "Viewing...",
+		state: "Contact",
+	},
+	"/Terms-of-Use/": {
+		details: "Viewing...",
+		state: "Terms of Use",
+	},
+	"/faq/": {
+		details: "Viewing...",
+		state: "FAQ",
+	},
 };
 
 presence.on("UpdateData", async () => {
-  const host = location.host,
-    path = location.pathname.replace(/\/?$/, "/"),
-    showBrowsing = await presence.getSetting("browse"),
-    showCourses = await presence.getSetting("course"),
-    showCodes = await presence.getSetting("code"),
-    showTimestamps = await presence.getSetting("timestamp");
+	const { host, pathname, href } = document.location,
+		path = pathname.replace(/\/?$/, "/"),
+		showBrowsing = await presence.getSetting<boolean>("browse"),
+		showCourses = await presence.getSetting<boolean>("course"),
+		showCodes = await presence.getSetting<boolean>("code"),
+		showTimestamps = await presence.getSetting<boolean>("timestamp");
 
-  let data: PresenceData = {
-    details: undefined,
-    state: undefined,
-    largeImageKey: "sololearn",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: elapsed,
-    endTimestamp: undefined
-  };
+	let presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/MPEOcif.png",
+		startTimestamp: elapsed,
+	};
 
-  if (document.location.href !== prevUrl) {
-    prevUrl = document.location.href;
-    elapsed = Math.floor(Date.now() / 1000);
-  }
+	if (href !== prevUrl) {
+		prevUrl = href;
+		elapsed = Math.floor(Date.now() / 1000);
+	}
 
-  if (showBrowsing) {
-    if (host === "www.sololearn.com") {
-      for (const [k, v] of Object.entries(statics)) {
-        if (path.match(k)) {
-          data = { ...data, ...v };
-        }
-      }
+	if (showBrowsing && host === "www.sololearn.com") {
+		for (const [k, v] of Object.entries(statics))
+			if (path.match(k)) presenceData = { ...presenceData, ...v };
 
-      if (path === "/") {
-        data.details = "Browsing...";
-        data.state = "Home";
-      }
+		if (path === "/") {
+			presenceData.details = "Browsing...";
+			presenceData.state = "Home";
+		}
 
-      if (path.includes("/Codes/")) {
-        data.details = "Browsing Code Playground...";
-        data.state = getElement(".tab.active");
-      }
+		if (path.includes("/Codes/")) {
+			presenceData.details = "Browsing Code Playground...";
+			presenceData.state = getElement(".tab.active");
+		}
 
-      if (path.includes("/Discuss/")) {
-        data.details = "Browsing Discussions...";
-        data.state = getElement(".tab.active");
+		if (path.includes("/Discuss/")) {
+			presenceData.details = "Browsing Discussions...";
+			presenceData.state = getElement(".tab.active");
 
-        if (document.querySelector(".post")) {
-          data.details = "Browsing Discussion...";
-          data.state = getElement(".detailsWrapper > .header");
-        }
-      }
+			if (document.querySelector(".post")) {
+				presenceData.details = "Browsing Discussion...";
+				presenceData.state = getElement(".detailsWrapper > .header");
+			}
+		}
 
-      if (path.includes("/Leaderboard/")) {
-        data.details = "Browsing Leaderboard...";
-        data.state = stripCourse(getElement(".nameTitle"));
-      }
+		if (path.includes("/Leaderboard/")) {
+			presenceData.details = "Browsing Leaderboard...";
+			presenceData.state = stripCourse(getElement(".nameTitle"));
+		}
 
-      if (path.includes("/Blog/")) {
-        data.details = "Browsing Blogs...";
+		if (path.includes("/Blog/")) {
+			presenceData.details = "Browsing Blogs...";
 
-        if (document.querySelector(".post")) {
-          data.details = "Browsing Blog...";
-          data.state = getElement(".articleTitle");
-        }
-      }
+			if (document.querySelector(".post")) {
+				presenceData.details = "Browsing Blog...";
+				presenceData.state = getElement(".articleTitle");
+			}
+		}
 
-      if (path.includes("/Course/")) {
-        data.details = "Browsing Course...";
-        data.state = getElement(".courseDescription > h1");
-      }
+		if (path.includes("/Course/")) {
+			presenceData.details = "Browsing Course...";
+			presenceData.state = getElement(".courseDescription > h1");
+		}
 
-      if (path.includes("/Profile/")) {
-        data.details = "Browsing Profile...";
+		if (path.includes("/Profile/")) {
+			presenceData.details = "Browsing Profile...";
 
-        const course = getElement(".course .name");
-        data.state = getElement(".user .name");
-        data.state += course ? ` (${stripCourse(course)})` : "";
-      }
-    }
-  }
+			const course = getElement(".course .name");
+			presenceData.state = getElement(".user .name");
+			presenceData.state += course ? ` (${stripCourse(course)})` : "";
+		}
+	}
 
-  if (showCourses) {
-    if (path.includes("/Play/")) {
-      const icon: HTMLImageElement = document.querySelector(".content > .icon");
-      data.details = `Learning ${stripCourse(icon.alt)}`;
-      data.state = getElement(".title");
-    }
-  }
+	if (showCourses && path.includes("/Play/")) {
+		presenceData.details = `Learning ${stripCourse(
+			document.querySelector<HTMLImageElement>(".content > .icon").alt
+		)}`;
+		presenceData.state = getElement(".title");
+	}
 
-  if (showCodes) {
-    if (host === "code.sololearn.com") {
-      data.details = "Viewing Code...";
-      data.state = `${getElement(".codeName")} (${getElement(
-        ".tab-box.active"
-      )})`;
-    }
-  }
+	if (showCodes && host === "code.sololearn.com") {
+		presenceData.details = "Viewing Code...";
+		presenceData.state = `${getElement(".codeName")} (${getElement(
+			".tab-box.active"
+		)})`;
+	}
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
-    }
-    if (!showTimestamps) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-    }
+	if (presenceData.details) {
+		if (presenceData.details.match("(Browsing|Viewing)")) {
+			presenceData.smallImageKey = "reading";
+			presenceData.smallImageText = (await strings).browsing;
+		}
+		if (!showTimestamps) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
 
-    presence.setActivity(data);
-  } else {
-    presence.setActivity();
-  }
+		presence.setActivity(presenceData);
+	} else presence.setActivity();
 });

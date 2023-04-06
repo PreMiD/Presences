@@ -1,56 +1,60 @@
-var presence = new Presence({
-    clientId: "662841394171346955"
-  }),
-  strings = presence.getStrings({
-    browsing: "presence.activity.browsing",
-    paused: "presence.playback.paused",
-    playing: "presence.playback.playing"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+		clientId: "662841394171346955",
+	}),
+	strings = presence.getStrings({
+		browsing: "general.browsing",
+		paused: "general.paused",
+		playing: "general.playing",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function capitalize(str: string): string {
-  var text = str.toLowerCase().split(" ");
-  for (var i = 0, x = text.length; i < x; i++) {
-    text[i] = text[i][0].toUpperCase() + text[i].substr(1);
-  }
+	const text = str.toLowerCase().split(" ");
+	for (let i = 0; i < text.length; i++)
+		text[i] = text[i].charAt(0).toUpperCase() + text[i].substr(1);
 
-  return text.join(" ");
+	return text.join(" ");
 }
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = { largeImageKey: "wakanim" };
-  var path = document.location.pathname;
-  var video = document.querySelector("video");
-  var title = document.querySelector(".episode_title");
-  var subtitle = document.querySelector(".episode_subtitle") as HTMLElement;
+	const presenceData: PresenceData = { largeImageKey: "wakanim" },
+		video = document.querySelector<HTMLVideoElement>("video"),
+		title = document.querySelector<HTMLSpanElement>(".episode_title"),
+		subtitle = document.querySelector<HTMLSpanElement>(".episode_subtitle");
 
-  if (path.includes("/v2/catalogue/episode/") && video != null && title) {
-    browsingStamp = Math.floor(Date.now() / 1000);
-    presenceData.details = title.innerHTML;
-    if (subtitle && subtitle.innerText) {
-      presenceData.state = capitalize(subtitle.innerText);
-    }
+	if (
+		document.location.pathname.includes("/v2/catalogue/episode/") &&
+		video &&
+		title
+	) {
+		presenceData.details = title.textContent;
 
-    if (video.paused) {
-      presenceData.smallImageKey = "paused";
-      presenceData.smallImageText = (await strings).paused;
-    } else {
-      presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      presenceData.endTimestamp = Math.floor(
-        presenceData.startTimestamp + (video.duration - video.currentTime)
-      );
-      presenceData.smallImageKey = "playing";
-      presenceData.smallImageText = (await strings).playing;
-    }
-  } else {
-    presenceData.details = (await strings).browsing;
-    presenceData.startTimestamp = browsingStamp;
-  }
+		if (await presence.getSetting("thumbnail")) {
+			presenceData.largeImageKey =
+				document.querySelector<HTMLMetaElement>(
+					".episode > .container > [itemprop=thumbnailUrl]"
+				).content ?? "wakanim";
+		}
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+		if (subtitle && subtitle.textContent)
+			presenceData.state = capitalize(subtitle.textContent);
+
+		if (video.paused) {
+			presenceData.smallImageKey = "paused";
+			presenceData.smallImageText = (await strings).paused;
+		} else {
+			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+			presenceData.endTimestamp = Math.floor(
+				presenceData.startTimestamp + (video.duration - video.currentTime)
+			);
+			presenceData.smallImageKey = "playing";
+			presenceData.smallImageText = (await strings).playing;
+		}
+	} else {
+		presenceData.details = (await strings).browsing;
+		presenceData.startTimestamp = browsingTimestamp;
+	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

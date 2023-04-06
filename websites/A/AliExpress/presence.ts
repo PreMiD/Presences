@@ -1,242 +1,261 @@
-var presence = new Presence({
-  clientId: "618569989842010122" // CLIENT ID FOR YOUR PRESENCE
-});
-
-var item: any, typing: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+		clientId: "618569989842010122",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+let item, typing: HTMLElement;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "aliexpress"
-  };
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/2LONg2Y.png",
+	};
 
-  presenceData.startTimestamp = browsingStamp;
+	presenceData.startTimestamp = browsingTimestamp;
 
-  if (
-    document.location.hostname == "ru.aliexpress.com" ||
-    document.location.hostname == "pt.aliexpress.com" ||
-    document.location.hostname == "es.aliexpress.com" ||
-    document.location.hostname == "fr.aliexpress.com" ||
-    document.location.hostname == "de.aliexpress.com" ||
-    document.location.hostname == "it.aliexpress.com" ||
-    document.location.hostname == "nl.aliexpress.com" ||
-    document.location.hostname == "tr.aliexpress.com" ||
-    document.location.hostname == "ja.aliexpress.com" ||
-    document.location.hostname == "ko.aliexpress.com" ||
-    document.location.hostname == "th.aliexpress.com" ||
-    document.location.hostname == "vi.aliexpress.com" ||
-    document.location.hostname == "ar.aliexpress.com" ||
-    document.location.hostname == "he.aliexpress.com" ||
-    document.location.hostname == "pl.aliexpress.com" ||
-    document.location.hostname == "www.aliexpress.com"
-  ) {
-    if (document.location.pathname.includes("/item/")) {
-      item = document.querySelector(
-        "#root > div > div.product-main > div > div.product-info > div.product-title"
-      );
+	switch (document.location.hostname) {
+		case "ru.aliexpress.com":
+		case "pt.aliexpress.com":
+		case "es.aliexpress.com":
+		case "fr.aliexpress.com":
+		case "de.aliexpress.com":
+		case "it.aliexpress.com":
+		case "nl.aliexpress.com":
+		case "tr.aliexpress.com":
+		case "ja.aliexpress.com":
+		case "ko.aliexpress.com":
+		case "th.aliexpress.com":
+		case "vi.aliexpress.com":
+		case "ar.aliexpress.com":
+		case "he.aliexpress.com":
+		case "pl.aliexpress.com":
+		case "www.aliexpress.com": {
+			if (document.location.pathname.includes("/item/")) {
+				item = document.querySelector(
+					"#root > div > div.product-main > div > div.product-info > div.product-title"
+				) as HTMLElement;
 
-      presenceData.details = "Viewing product:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+				presenceData.details = "Viewing product:";
+				if (item.textContent.length > 128)
+					presenceData.state = `${item.textContent.substring(0, 125)}...`;
+				else presenceData.state = item.textContent;
 
-      delete presenceData.smallImageKey;
+				delete presenceData.smallImageKey;
 
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/store/")) {
-      item = document.querySelector(
-        "#hd > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(1) > span"
-      );
-      presenceData.details = "Viewing store:";
-      presenceData.state = item.innerText;
+				presence.setActivity(presenceData);
+			} else if (document.location.pathname.includes("/store/")) {
+				item = document.querySelector(
+					"#hd > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(1) > span"
+				) as HTMLElement;
+				presenceData.details = "Viewing store:";
+				presenceData.state = item.textContent;
 
-      delete presenceData.smallImageKey;
+				delete presenceData.smallImageKey;
 
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/category/")) {
-      item = document.querySelector(
-        "#root > div > div > div.main-content > div.right-menu > div > div.top-container > div.nav-breadcrumb > div > div > span > span > span"
-      );
+				presence.setActivity(presenceData);
+			} else if (document.location.pathname.includes("/category/")) {
+				item = document.querySelector(
+					"#root > div > div > div.main-content > div.right-menu > div > div.top-container > div.nav-breadcrumb > div > div > span > span > span"
+				) as HTMLElement;
 
-      presenceData.details = "Viewing category:";
-      presenceData.state = item.innerText;
+				presenceData.details = "Viewing category:";
+				presenceData.state = item.textContent;
 
-      delete presenceData.smallImageKey;
+				delete presenceData.smallImageKey;
 
-      presence.setActivity(presenceData);
-    } else if (
-      document.location.pathname.includes("/wholesale") &&
-      document.location.search.includes("SearchText")
-    ) {
-      item = document.querySelector("#search-key");
+				presence.setActivity(presenceData);
+			} else if (
+				document.location.pathname.includes("/wholesale") &&
+				document.location.search.includes("SearchText")
+			) {
+				item = document.querySelector("#search-key") as HTMLInputElement;
 
-      presenceData.details = "Searching for:";
-      presenceData.state = item.value;
+				presenceData.details = "Searching for:";
+				presenceData.state = item.value;
 
-      presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = "search";
 
-      presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else if (
-    document.location.hostname == "message.aliexpress.com" ||
-    document.location.hostname == "msg.aliexpress.com"
-  ) {
-    if (
-      document.querySelector(
-        "#root > div > div > div > span > div.message-view > div.message-view-title > div.message-view-title__content"
-      ) !== null
-    ) {
-      item = document.querySelector(
-        "#root > div > div > div > span > div.message-view > div.message-view-title > div.message-view-title__content"
-      );
-      typing = document.querySelector("#buyer_msg_send_btn");
-      if (typing !== null) {
-        typing = document.querySelector("#buyer_msg_send_btn").className;
-        if (typing.baseVal.includes("icon-plane disable")) {
-          presenceData.details = "Reading dms with:";
-          presenceData.state = item.innerText;
-        } else {
-          presenceData.details = "Typing in dms to:";
-          presenceData.state = item.innerText;
-        }
-      } else {
-        presenceData.details = "Message Center";
-        delete presenceData.state;
-      }
+				presence.setActivity(presenceData);
+			} else presence.setActivity();
 
-      delete presenceData.smallImageKey;
+			break;
+		}
+		case "message.aliexpress.com":
+		case "msg.aliexpress.com": {
+			if (
+				document.querySelector(
+					"#root > div > div > div > span > div.message-view > div.message-view-title > div.message-view-title__content"
+				)
+			) {
+				item = document.querySelector(
+					"#root > div > div > div > span > div.message-view > div.message-view-title > div.message-view-title__content"
+				) as HTMLElement;
+				typing = document.querySelector(
+					"#buyer_msg_send_btn"
+				) as HTMLButtonElement;
+				if (typing) {
+					if (typing.className.includes("icon-plane disable")) {
+						presenceData.details = "Reading dms with:";
+						presenceData.state = item.textContent;
+					} else {
+						presenceData.details = "Typing in dms to:";
+						presenceData.state = item.textContent;
+					}
+				} else {
+					presenceData.details = "Message Center";
+					delete presenceData.state;
+				}
 
-      presence.setActivity(presenceData);
-    } else {
-      presenceData.details = "Message Center";
-      delete presenceData.state;
+				delete presenceData.smallImageKey;
 
-      delete presenceData.smallImageKey;
+				presence.setActivity(presenceData);
+			} else {
+				presenceData.details = "Message Center";
+				delete presenceData.state;
 
-      presence.setActivity(presenceData);
-    }
-  } else if (document.location.hostname == "sale.aliexpress.com") {
-    presenceData.details = "Browsing through the sale";
-    delete presenceData.state;
+				delete presenceData.smallImageKey;
 
-    delete presenceData.smallImageKey;
+				presence.setActivity(presenceData);
+			}
 
-    presence.setActivity(presenceData);
-  } else if (document.location.hostname == "shoppingcart.aliexpress.com") {
-    presenceData.details = "Viewing their shoppingcart";
-    delete presenceData.state;
+			break;
+		}
+		case "sale.aliexpress.com": {
+			presenceData.details = "Browsing through the sale";
+			delete presenceData.state;
 
-    delete presenceData.smallImageKey;
+			delete presenceData.smallImageKey;
 
-    presence.setActivity(presenceData);
-  } else if (document.location.hostname == "my.aliexpress.com") {
-    if (document.location.pathname.includes("/wishlist")) {
-      presenceData.details = "Viewing their wishlist";
-      delete presenceData.state;
+			presence.setActivity(presenceData);
 
-      delete presenceData.smallImageKey;
+			break;
+		}
+		case "shoppingcart.aliexpress.com": {
+			presenceData.details = "Viewing their shoppingcart";
+			delete presenceData.state;
 
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/mytrace")) {
-      presenceData.details = "Viewing their recently";
-      presenceData.state = "viewed products";
+			delete presenceData.smallImageKey;
 
-      delete presenceData.smallImageKey;
+			presence.setActivity(presenceData);
 
-      presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else if (
-    document.location.hostname == "home.aliexpress.com" ||
-    document.location.hostname == "star.aliexpress.com"
-  ) {
-    presenceData.details = "Viewing their AliExpress";
-    presenceData.state = "page / account /profile";
+			break;
+		}
+		case "my.aliexpress.com": {
+			if (document.location.pathname.includes("/wishlist")) {
+				presenceData.details = "Viewing their wishlist";
+				delete presenceData.state;
 
-    delete presenceData.smallImageKey;
+				delete presenceData.smallImageKey;
 
-    presence.setActivity(presenceData);
-  } else if (document.location.hostname == "feedback.aliexpress.com") {
-    presenceData.details = "AliExpress Feedback";
-    delete presenceData.state;
+				presence.setActivity(presenceData);
+			} else if (document.location.pathname.includes("/mytrace")) {
+				presenceData.details = "Viewing their recently";
+				presenceData.state = "viewed products";
 
-    delete presenceData.smallImageKey;
+				delete presenceData.smallImageKey;
 
-    presence.setActivity(presenceData);
-  } else if (document.location.hostname == "trade.aliexpress.com") {
-    if (
-      document.location.pathname.includes("order_list.htm") ||
-      document.location.pathname.includes("orderList.htm")
-    ) {
-      presenceData.details = "Viewing their orders";
-      delete presenceData.state;
+				presence.setActivity(presenceData);
+			} else presence.setActivity();
 
-      delete presenceData.smallImageKey;
+			break;
+		}
+		case "home.aliexpress.com":
+		case "star.aliexpress.com": {
+			presenceData.details = "Viewing their AliExpress";
+			presenceData.state = "page / account /profile";
 
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/issue/")) {
-      presenceData.details = "Viewing their";
-      presenceData.state = "Refunds & Disputes";
+			delete presenceData.smallImageKey;
 
-      delete presenceData.smallImageKey;
+			presence.setActivity(presenceData);
 
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/ordertrash/")) {
-      presenceData.details = "Viewing their";
-      presenceData.state = "deleted orders";
+			break;
+		}
+		case "feedback.aliexpress.com": {
+			presenceData.details = "AliExpress Feedback";
+			delete presenceData.state;
 
-      delete presenceData.smallImageKey;
+			delete presenceData.smallImageKey;
 
-      presence.setActivity(presenceData);
-    } else {
-      presenceData.details = "AliExpress Trade Center";
-      delete presenceData.state;
+			presence.setActivity(presenceData);
 
-      delete presenceData.smallImageKey;
+			break;
+		}
+		case "trade.aliexpress.com": {
+			if (
+				document.location.pathname.includes("order_list.htm") ||
+				document.location.pathname.includes("orderList.htm")
+			) {
+				presenceData.details = "Viewing their orders";
+				delete presenceData.state;
 
-      presence.setActivity(presenceData);
-    }
-  } else if (document.location.hostname == "coupon.aliexpress.com") {
-    presenceData.details = "Viewing their coupons";
-    delete presenceData.state;
+				delete presenceData.smallImageKey;
 
-    delete presenceData.smallImageKey;
+				presence.setActivity(presenceData);
+			} else if (document.location.pathname.includes("/issue/")) {
+				presenceData.details = "Viewing their";
+				presenceData.state = "Refunds & Disputes";
 
-    presence.setActivity(presenceData);
-  } else if (document.location.hostname == "ilogisticsaddress.aliexpress.com") {
-    presenceData.details = "Viewing their adress";
-    delete presenceData.state;
+				delete presenceData.smallImageKey;
 
-    delete presenceData.smallImageKey;
+				presence.setActivity(presenceData);
+			} else if (document.location.pathname.includes("/ordertrash/")) {
+				presenceData.details = "Viewing their";
+				presenceData.state = "deleted orders";
 
-    presence.setActivity(presenceData);
-  } else if (document.location.hostname == "helppage.aliexpress.com") {
-    presenceData.details = "AliExpress Help Center";
-    delete presenceData.state;
+				delete presenceData.smallImageKey;
 
-    delete presenceData.smallImageKey;
+				presence.setActivity(presenceData);
+			} else {
+				presenceData.details = "AliExpress Trade Center";
+				delete presenceData.state;
 
-    presence.setActivity(presenceData);
-  } else if (
-    document.location.hostname == "sell.aliexpress.com" ||
-    document.location.hostname == "seller.aliexpress.com"
-  ) {
-    presenceData.details = "AliExpress Sell Center";
-    delete presenceData.state;
+				delete presenceData.smallImageKey;
 
-    delete presenceData.smallImageKey;
+				presence.setActivity(presenceData);
+			}
 
-    presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+			break;
+		}
+		case "coupon.aliexpress.com": {
+			presenceData.details = "Viewing their coupons";
+			delete presenceData.state;
+
+			delete presenceData.smallImageKey;
+
+			presence.setActivity(presenceData);
+
+			break;
+		}
+		case "ilogisticsaddress.aliexpress.com": {
+			presenceData.details = "Viewing their adress";
+			delete presenceData.state;
+
+			delete presenceData.smallImageKey;
+
+			presence.setActivity(presenceData);
+
+			break;
+		}
+		case "helppage.aliexpress.com": {
+			presenceData.details = "AliExpress Help Center";
+			delete presenceData.state;
+
+			delete presenceData.smallImageKey;
+
+			presence.setActivity(presenceData);
+
+			break;
+		}
+		case "sell.aliexpress.com":
+		case "seller.aliexpress.com": {
+			presenceData.details = "AliExpress Sell Center";
+			delete presenceData.state;
+
+			delete presenceData.smallImageKey;
+
+			presence.setActivity(presenceData);
+
+			break;
+		}
+		default:
+			presence.setActivity();
+	}
 });

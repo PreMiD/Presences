@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Snazzah",
+		"id": "158049329150427136"
+	},
+	"service": "Quizlet",
+	"description": {
+		"en": "Quizlet makes simple learning tools that let you study anything. Start learning today with flashcards, games and learning tools — all for free.",
+		"ga_IE": "Quizlet makes simple learning tools that let you study anything. Start learning today with flashcards, games and learning tools — all for free.",
+		"nl": "Quizlet maakt eenvoudige leermiddelen waarmee je alles kunt bestuderen. Begin vandaag met leren met flashcards, games en leermiddelen - helemaal gratis.",
+		"vi_VN": "Quizlet cung cấp các công cụ đơn giản để giúp bạn học tất cả mọi thứ. Hãy bắt đầu học tập từ ngay hôm nay với các thẻ ghi nhớ, trò chơi và công cụ học tập — tất cả đều miễn phí."
+	},
+	"url": "quizlet.com",
+	"version": "1.1.13",
+	"logo": "https://i.imgur.com/5K8iXcX.png",
+	"thumbnail": "https://i.imgur.com/Bnxt3z4.png",
+	"color": "#4257B2",
+	"category": "other",
+	"tags": [
+		"learn",
+		"study"
+	],
+	"iframe": true,
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Display Join Party Button",
+			"icon": "fas fa-plus-square",
+			"value": true
+		}
+	]
+}

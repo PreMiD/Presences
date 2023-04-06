@@ -1,21 +1,13 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-  const { hostname } = window.location;
-  if (
-    hostname === `vcdn.space` ||
-    hostname === `streamtape.com` ||
-    hostname == `mixdrop.to`
-  ) {
-    const video = document.querySelector(`video`);
-    if (video != null) {
-      const played = video.currentTime != 0;
-      iframe.send({
-        current: video.currentTime,
-        duration: video.duration,
-        paused: video.paused,
-        played
-      });
-    }
-  }
+	const video = document.querySelector("video");
+	if (video) {
+		iframe.send({
+			current: video.currentTime,
+			duration: video.duration,
+			isVideo: true,
+			paused: video.paused,
+		});
+	}
 });

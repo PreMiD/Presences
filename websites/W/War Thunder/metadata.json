@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "theusaf",
+		"id": "193714715631812608"
+	},
+	"service": "War Thunder",
+	"description": {
+		"en": "War Thunder is a World War II and Cold War-inspired massively multiplayer online combat game developed by Gaijin Network Ltd. for Microsoft Windows, OS X, Linux, PlayStation 4 and Shield Android TV."
+	},
+	"url": [
+		"warthunder.com",
+		"forum.warthunder.com",
+		"live.warthunder.com",
+		"tss.warthunder.com",
+		"wiki.warthunder.com"
+	],
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/LWQZ2xQ.png",
+	"thumbnail": "https://i.imgur.com/M0BOK9r.jpg",
+	"color": "#e53935",
+	"category": "games",
+	"tags": [
+		"tank",
+		"combat",
+		"simulation",
+		"multiplayer",
+		"airplane",
+		"battleship"
+	]
+}

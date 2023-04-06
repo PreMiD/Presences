@@ -1,152 +1,114 @@
 const presence = new Presence({
-    clientId: "680498892651233310"
-  }),
-  strings = presence.getStrings({
-    browsing: "presence.activity.browsing",
-    reading: "presence.activity.reading"
-  });
+	clientId: "680498892651233310",
+});
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			browsing: "general.browsing",
+			reading: "general.reading",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const path = window.location.pathname.split("/").slice(1);
-  const presenceData: PresenceData = {
-    details: "My Nintendo",
-    largeImageKey: "logo_big"
-  };
+	const path = window.location.pathname.split("/").slice(1),
+		presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/eywFbXQ.png",
+		},
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
+	oldLang = newLang;
+	if (!strings || oldLang !== newLang) strings = await getStrings();
 
-  if (path.length > 0) {
-    //Subpages
-    switch (path[0]) {
-      //Reward Categories
-      case "reward_categories":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).browsing;
+	switch (path[0]) {
+		// Reward Categories
+		case "reward_categories":
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
+				document.title;
+			presenceData.smallImageText = strings.browsing;
+			presenceData.smallImageKey = "reading";
 
-        presenceData.details = document.getElementsByClassName(
-          "PageHeader_title"
-        )[0].textContent;
+			if (path.length > 1) {
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".PageSubHeader_title"
+				)?.textContent;
+			}
+			break;
+		// Rewards
+		case "rewards":
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
+				document.title;
+			presenceData.smallImageText = strings.browsing;
+			presenceData.smallImageKey = "reading";
 
-        if (path.length > 1)
-          presenceData.state = document.getElementsByClassName(
-            "PageSubHeader_title"
-          )[0].textContent;
-        break;
-      //Rewards
-      case "rewards":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).reading;
+			if (path.length > 1) {
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".RewardHeader_title"
+				).textContent;
+			}
+			break;
+		// Missions
+		case "missions":
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
+				document.title;
 
-        if (!path.includes("media")) {
-          presenceData.details = document.getElementsByClassName(
-            "PageHeader_title"
-          )[0].textContent;
+			presenceData.smallImageKey = strings.reading;
+			presenceData.smallImageText = "reading";
+			break;
+		// Points
+		case "point":
+			if (path.length < 2) return presence.setActivity();
 
-          if (path.length > 1)
-            presenceData.state = document.getElementsByClassName(
-              "RewardHeader_title"
-            )[0].textContent;
-        }
-        break;
-      //Missions
-      case "missions":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).browsing;
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1").textContent;
+			presenceData.state =
+				document.querySelector<HTMLHeadingElement>("h2")?.textContent;
+			break;
+		// News
+		case "news":
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
+				document.title;
+			presenceData.smallImageText = strings.reading;
+			presenceData.smallImageKey = "reading";
 
-        presenceData.details = document.getElementsByClassName(
-          "PageHeader_title"
-        )[0].textContent;
-        break;
-      //Points
-      case "point":
-        if (path.length > 1) {
-          switch (path[1]) {
-            //Wallet
-            case "wallet":
-              presenceData.details = document.getElementsByClassName(
-                "PageHeader_title"
-              )[0].textContent;
-              presenceData.state = document.getElementsByClassName(
-                "PageSubHeader_title"
-              )[0].textContent;
-              break;
-            //Unknown
-            default:
-              presence.setTrayTitle();
-              presence.setActivity();
-              return;
-          }
-        } else {
-          presence.setTrayTitle();
-          presence.setActivity();
-          return;
-        }
-        break;
-      //News
-      case "news":
-        presenceData.details = document.getElementsByClassName(
-          "PageHeader_title"
-        )[0].textContent;
+			if (path.length > 1) {
+				presenceData.state =
+					document.querySelector<HTMLHeadingElement>(
+						".NewsDetail_title"
+					)?.textContent;
+			} else {
+				presenceData.state = document.querySelector<HTMLHeadingElement>(
+					".PageSubHeader_title"
+				)?.textContent;
+			}
+			break;
+		// Redeem Point Codes
+		case "serial_number":
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
+				document.title;
+			break;
+		// Getting Started, About Points, About Gold Points
+		case "getting_started":
+		case "about_point":
+		case "about_gold_point":
+			presenceData.details =
+				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
+				document.title;
 
-        if (path.length > 1) {
-          presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).reading;
-
-          presenceData.state = document.getElementsByClassName(
-            "NewsDetail_title"
-          )[0].textContent;
-        } else {
-          presenceData.smallImageKey = "reading";
-          presenceData.smallImageText = (await strings).browsing;
-
-          presenceData.state = document.getElementsByClassName(
-            "PageSubHeader_title"
-          )[0].textContent;
-        }
-        break;
-      //Redeem Point Codes
-      case "serial_number":
-        presenceData.details = document.getElementsByClassName(
-          "PageHeader_title"
-        )[0].textContent;
-        break;
-      //Getting Started
-      case "getting_started":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).reading;
-
-        presenceData.details = document.getElementsByClassName(
-          "PageHeader_title"
-        )[0].textContent;
-        break;
-      //About Points
-      case "about_point":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).reading;
-
-        presenceData.details = document.getElementsByClassName(
-          "PageHeader_title"
-        )[0].textContent;
-        break;
-      //About Gold Points
-      case "about_gold_point":
-        presenceData.smallImageKey = "reading";
-        presenceData.smallImageText = (await strings).reading;
-
-        presenceData.details = document.getElementsByClassName(
-          "PageHeader_title"
-        )[0].textContent;
-        break;
-      //Unknown
-      default:
-        presence.setTrayTitle();
-        presence.setActivity();
-        return;
-    }
-  } else {
-    //Homepage
-    presence.setTrayTitle();
-    presence.setActivity();
-    return;
-  }
-
-  presence.setActivity(presenceData);
+			presenceData.smallImageKey = strings.reading;
+			presenceData.smallImageText = "reading";
+			break;
+		// Startpage, Unknown
+		default:
+			return presence.setActivity();
+	}
 });

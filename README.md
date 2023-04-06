@@ -3,10 +3,7 @@
     <h1>PreMiD Presences</h1>
 </div>
 
-This repository contains the source code of all presences that are available in
-PreMiD Store. If you would like to <strong>publish</strong> your presence,
-please feel free to open a
-<a href="https://github.com/PreMiD/Presences/pulls">pull request</a>.
+This repository contains the source code of all Presences that are available in [PreMiD's Store](https://premid.app/store). If you wish to add your Presence or update one, open a Pull Request.
 
 <div align="left">
     <a target="_blank" href="https://discord.premid.app/" title="Join our Discord!">
@@ -14,58 +11,18 @@ please feel free to open a
     </a>
 </div>
 
-## Requirements to create a presence
-
-- You must have the
-  [latest TypeScript compiler](https://www.typescriptlang.org/#download-links)
-  version installed
-- Basic knowlege of TypeScript
+---
 
 ## Getting started
 
-We made a documentation to make your development process a little bit better and
-faster. You can see it [**here**](https://docs.premid.app/dev/presence).
-
-## Folder structure
-
-```bash
-presence
-├── dist
-│   └── metadata.json
-├── presence.ts
-└── tsconfig.json
-```
-
-For presences with `iframe.ts`:
-
-```bash
-presence
-├── dist
-│   └── metadata.json
-├── presence.ts
-├── iframe.ts
-└── tsconfig.json
-```
+Please refer to our [documentation](https://docs.premid.app/dev/presence) to get started.
 
 ---
 
-## Translator Tool Guide
+## Translator Tool
 
-### Setup
+Translate Presences by using `npx pmd` (or your package manager of choice).
 
-- Clone the PreMiD repository to your system.
-- Install repository modules with `yarn` or `npm install`.
+## Committing
 
-### Using the script
-
-- Open up a terminal and run `yarn translator` or `npm run translator`
-- When prompted, select the **Language Code** for the language you are
-  translated (e.g `ga_IE` for Irish)
-- Once selected. The script will first cache all presences metadata files, it
-  will then go through each one and remove the files containing the language you
-  inputted from the cache.
-- You will then be prompted to select a mode, afterwards you might get asked
-  some aditional information to finalize your filter.
-- Then at last you will be asked to fill in you translations. (You can type
-  "skip" to skip)
-- To stop at any time, hit `ctrl+c` or type `stop`.
+This repository strictly enforces the use of commitlint. For more information read the [Commit Convention guide](./.github/COMMIT_CONVENTION.md)

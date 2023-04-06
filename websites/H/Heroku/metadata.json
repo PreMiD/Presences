@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "theusaf",
+		"id": "193714715631812608"
+	},
+	"service": "Heroku",
+	"description": {
+		"en": "Heroku is a cloud platform that lets companies build, deliver, monitor and scale apps."
+	},
+	"url": [
+		"www.heroku.com",
+		"blog.heroku.com",
+		"brand.heroku.com",
+		"dashboard.heroku.com",
+		"data.heroku.com",
+		"devcenter.heroku.com",
+		"elements.heroku.com",
+		"help.heroku.com",
+		"status.heroku.com"
+	],
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/V7ZULKG.png",
+	"thumbnail": "https://i.imgur.com/06zNE4U.png",
+	"color": "#211746",
+	"category": "other",
+	"tags": [
+		"hosting",
+		"application",
+		"web"
+	],
+	"settings": [
+		{
+			"id": "showNames",
+			"value": false,
+			"multiLanguage": false,
+			"title": "Show Application Names",
+			"icon": "fas fa-text"
+		}
+	]
+}

@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "!HVN丶nayumi#4378",
+		"id": "895438058621665331"
+	},
+	"service": "HentaiVN",
+	"description": {
+		"en": "HentaiVN is the largest Otaku forum and Hentai manga website in Vietnam",
+		"vi_VN": "HentaiVN là website đọc truyện Hentai lớn nhất Việt Nam, nó cũng là diễn đàn dành cho wibu hàng đầu cả nước."
+	},
+	"url": "hentaivn.fun",
+	"version": "2.0.2",
+	"logo": "https://i.imgur.com/Ihee8C2.png",
+	"thumbnail": "https://i.imgur.com/TkWSqnL.png",
+	"color": "#299CEE",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"manga",
+		"asia",
+		"asian-content",
+		"pictures",
+		"images",
+		"doujinshi",
+		"nsfw",
+		"vietnam",
+		"wibu",
+		"hentai"
+	]
+}

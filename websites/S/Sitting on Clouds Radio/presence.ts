@@ -1,31 +1,32 @@
-var presence = new Presence({
-  clientId: "689724677274337290"
-});
-
-const timeElapsed = Math.floor(Date.now() / 1000);
-let songName, albumName, artistName;
+const presence = new Presence({
+		clientId: "689724677274337290",
+	}),
+	timeElapsed = Math.floor(Date.now() / 1000),
+	slideshow = presence.createSlideshow();
 
 presence.on("UpdateData", async () => {
-  songName = document.querySelector(
-    "span#cardTitle.card-title.playerText.truncate"
-  );
-  albumName = document.querySelector("p#cardAlbum.playerText.truncate");
-  artistName = document.querySelector("p#cardArtist.playerText.truncate");
-  if (albumName.innerText == "Press the Play button to start the radio") {
-    const presenceData: PresenceData = {
-      details: "Not tuned in.",
-      largeImageKey: "clouds",
-      smallImageKey: "pause"
-    };
-    presence.setActivity(presenceData);
-  } else {
-    const presenceData: PresenceData = {
-      details: songName.innerText,
-      state: artistName.innerText + " - " + albumName.innerText,
-      largeImageKey: "clouds",
-      smallImageKey: "live",
-      startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-  }
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/pAEVAX8.png",
+		},
+		presenceDataSlide: PresenceData = {
+			largeImageKey: "https://i.imgur.com/pAEVAX8.png",
+		};
+
+	if (document.querySelector(".player_playing__N2IaC")) {
+		const songInfoArray = document.querySelectorAll(".marquee_marquee__1MS_n");
+		presenceData.details = presenceDataSlide.details =
+			songInfoArray[1].textContent;
+		presenceData.state = `By ${songInfoArray[0].textContent}`;
+		presenceDataSlide.state = `From ${songInfoArray[2].textContent}`;
+		presenceData.smallImageKey = presenceDataSlide.smallImageKey = "live";
+		presenceData.startTimestamp = presenceDataSlide.startTimestamp =
+			timeElapsed;
+		slideshow.addSlide("slideArtist", presenceData, 5000);
+		slideshow.addSlide("slideAlbum", presenceDataSlide, 5000);
+	} else {
+		presenceData.details = "Not tuned in.";
+		presenceData.smallImageKey = "pause";
+	}
+	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
+	else presence.setActivity(presenceData);
 });

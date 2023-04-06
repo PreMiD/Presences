@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "2Lost4Discord",
+		"id": "421991668556759042"
+	},
+	"service": "Discord Resources",
+	"description": {
+		"en": "A list of tons of useful Discord resources and utilities for all types of users, from beginners to power users."
+	},
+	"url": "discordresources.com",
+	"version": "1.0.4",
+	"logo": "https://i.imgur.com/LzdNPBJ.png",
+	"thumbnail": "https://i.imgur.com/LCBideV.png",
+	"color": "#ba6ec4",
+	"category": "other",
+	"tags": [
+		"wiki",
+		"resources",
+		"discord"
+	]
+}

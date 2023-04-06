@@ -1,76 +1,66 @@
 const presence = new Presence({
-    clientId: "621819308481445934"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
-function getTime(list: string[]): number {
-  let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}
-
-function getTimestamps(audioDuration: string): Array<number> {
-  const splitAudioDuration = audioDuration.split(":").reverse();
-
-  const parsedAudioDuration = getTime(splitAudioDuration);
-
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+		clientId: "842112189618978897",
+	}),
+	strings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+	});
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "applemusic-logo"
-  };
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/06HbqaF.png",
+		},
+		[timestamps, cover] = await Promise.all([
+			presence.getSetting<boolean>("timestamps"),
+			presence.getSetting<boolean>("cover"),
+		]),
+		audio = document.querySelector<HTMLAudioElement>(
+			"audio#apple-music-player"
+		),
+		video = document
+			.querySelector("apple-music-video-player")
+			?.shadowRoot.querySelector(
+				"amp-window-takeover > .container > amp-video-player-internal"
+			)
+			?.shadowRoot.querySelector("amp-video-player")
+			?.shadowRoot.querySelector("div#video-container")
+			?.querySelector<HTMLVideoElement>("video#apple-music-video-player");
+	if (video?.title || audio?.title) {
+		const media = video || audio,
+			timestamp = document
+				.querySelector("amp-lcd.lcd.lcd__music")
+				?.shadowRoot.querySelector<HTMLInputElement>(
+					"input#playback-progress[aria-valuenow][aria-valuemax]"
+				),
+			paused = media.paused || media.readyState <= 2;
 
-  const playerCheck = document.querySelector(
-    ".web-chrome-playback-controls__playback-btn[disabled]"
-  )
-    ? false
-    : true;
-  if (playerCheck) {
-    const title = document
-      .querySelector(
-        ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
-      )
-      .textContent.trim();
-    const author = document
-      .querySelector(
-        ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
-      )
-      .textContent.split("—")[0];
-    const audioTime = document.querySelector(
-      ".web-chrome-playback-lcd__time-end"
-    ).textContent;
-    const timestamps = getTimestamps(audioTime);
-    const paused = document.querySelector(
-      ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
-    )
-      ? true
-      : false;
+		presenceData.details = navigator.mediaSession.metadata.title;
+		presenceData.state = navigator.mediaSession.metadata.artist;
 
-    data.details = title;
-    data.state = author;
-    (data.smallImageKey = paused ? "pause" : "play"),
-      (data.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play),
-      (data.startTimestamp = timestamps[0]),
-      (data.endTimestamp = timestamps[1]);
+		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageText = paused
+			? (await strings).pause
+			: (await strings).play;
 
-    if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-    }
+		if (cover) {
+			presenceData.largeImageKey =
+				navigator.mediaSession.metadata.artwork[0].src.replace(
+					/[0-9]{1,2}x[0-9]{1,2}[a-z]{1,2}/,
+					"1024x1024"
+				);
+		}
 
-    presence.setActivity(data);
-  } else {
-    presence.clearActivity();
-  }
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(
+				Number(timestamp ? timestamp.ariaValueNow : media.currentTime),
+				Number(timestamp ? timestamp.ariaValueMax : media.duration)
+			);
+
+		if (paused || !timestamps) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
+		presence.setActivity(presenceData);
+	} else if (presence.getExtensionVersion() < 224) presence.setActivity();
+	else presence.clearActivity();
 });

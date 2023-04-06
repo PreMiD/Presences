@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "critamine",
+		"id": "713445497846759467"
+	},
+	"service": "ArchLinux",
+	"description": {
+		"en": "Arch Linux, a lightweight and flexible Linux® distribution that tries to Keep It Simple."
+	},
+	"url": "archlinux.org",
+	"regExp": "([a-z0-9-]+[.])*archlinux[.]org[/]",
+	"version": "1.0.4",
+	"logo": "https://i.imgur.com/GiMACbc.png",
+	"thumbnail": "https://i.imgur.com/DXVGQFR.png",
+	"color": "#1793d1",
+	"category": "other",
+	"tags": [
+		"arch",
+		"linux",
+		"aur",
+		"archwiki",
+		"btw"
+	]
+}

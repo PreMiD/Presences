@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "LighTender",
+		"id": "338768773865537536"
+	},
+	"service": "CodinGame",
+	"description": {
+		"en": "CodinGame is a web site to learn programing",
+		"fr": "CodinGame est un site pour apprendre la programmation"
+	},
+	"url": "www.codingame.com",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/gExMIw0.png",
+	"thumbnail": "https://i.imgur.com/5MRH08P.png",
+	"color": "#c4bf1c",
+	"category": "games",
+	"tags": [
+		"code",
+		"games"
+	]
+}

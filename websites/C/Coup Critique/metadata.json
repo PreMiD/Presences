@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "240521747852558347",
+		"name": "RisingSunLight"
+	},
+	"service": "Coup Critique",
+	"description": {
+		"en": "Tutorial list about Pokemon strategy and french competitive scene. You will find helpful vocabulary articles and practices in the Pokemon strategy.",
+		"fr": "Liste des guides sur la stratégie Pokémon et la scène compétitive française. Vous y retrouverez des articles d'aide sur le vocabulaire et les pratiques de la stratégie Pokémon."
+	},
+	"url": [
+		"www.coupcritique.fr",
+		"coupcritique.fr"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/oo2fig0.png",
+	"thumbnail": "https://i.imgur.com/sh2ACY3.png",
+	"color": "#f38532",
+	"category": "other",
+	"tags": [
+		"game",
+		"strategy",
+		"pokemon",
+		"tutorials"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "image",
+			"title": "Show Images",
+			"icon": "fad fa-images",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		}
+	]
+}

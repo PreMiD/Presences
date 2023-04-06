@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "tuhana",
+		"id": "852582281112715284"
+	},
+	"service": "OMG! Ubuntu!",
+	"description": {
+		"en": "OMGUbuntu! is an online news site covering Ubuntu and related activities.",
+		"nl": "OMGUbuntu! is een online nieuwssite over Ubuntu en aanverwante activiteiten.",
+		"tr": "OMGUbuntu!, Ubuntu ve ilgili faaliyetleri kapsayan çevrimiçi bir haber sitesidir."
+	},
+	"url": "www.omgubuntu.co.uk",
+	"version": "1.1.10",
+	"logo": "https://i.imgur.com/hI4bcJC.png",
+	"thumbnail": "https://i.imgur.com/PknGVGT.png",
+	"color": "#FF9900",
+	"category": "other",
+	"tags": [
+		"technology",
+		"linux",
+		"ubuntu"
+	]
+}

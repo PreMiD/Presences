@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "TheDrop.",
+		"id": "293828021134295040"
+	},
+	"service": "Aniyan",
+	"description": {
+		"en": "Aniyan is a brazillian anime streaming site.",
+		"de": "Aniyan ist eine brasilianische Anime Streaming Seite.",
+		"ro": "Aniyan este un site de streaming brazilian pentru anime.",
+		"pt_BR": "Aniyan é um site brasileiro de streaming de animes.",
+		"nl": "Aniyan is een braziliaanse anime streaming website.",
+		"vi_VN": "Aniyan là trang xem anime trực tuyến Tiếng Brazil."
+	},
+	"url": "www.aniyan.net",
+	"version": "1.0.7",
+	"logo": "https://i.imgur.com/x5yDUF9.png",
+	"thumbnail": "https://i.imgur.com/c3ELKV2.png",
+	"color": "#1384c3",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"hentai",
+		"nsfw"
+	]
+}

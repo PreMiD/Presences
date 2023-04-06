@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Slowlife",
+		"id": "374905512661221377"
+	},
+	"service": "South Park",
+	"description": {
+		"en": "South Park. Every episode of this critically acclaimed and award-winning show is packed with unforgettable adventures, cutting satire, and hilarious absurdity",
+		"nl": "South Park. Elke aflevering van deze veelgeprezen en bekroonde show zit boordevol onvergetelijke avonturen, scherpe satire en hilarische absurditeit",
+		"es": "South Park. Cada episodio de este programa galardonado y aclamado por las críticas está repleto de aventuras inolvidables, una sátira grosera y absurdidad graciosa."
+	},
+	"url": [
+		"www.southparkstudios.com",
+		"www.southpark.lat",
+		"southpark.cc.com"
+	],
+	"regExp": "([a-z]{2,}[.])?southpark(studios)?([.][a-z]{2,}){1,2}",
+	"version": "1.1.4",
+	"logo": "https://i.imgur.com/h6b3eEW.jpg",
+	"thumbnail": "https://i.imgur.com/No75MzW.jpg",
+	"color": "#b6122a",
+	"category": "videos",
+	"tags": [
+		"south-park",
+		"animation"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

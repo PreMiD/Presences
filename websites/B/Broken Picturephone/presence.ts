@@ -1,60 +1,44 @@
 const presence = new Presence({
-  clientId: "756196794727399617"
+	clientId: "756196794727399617",
 });
 
 presence.on("UpdateData", async () => {
-  const browsingStamp = Math.floor(Date.now() / 1000),
-    button = document.getElementsByTagName("button"),
-    valor = button.length,
-    players = document.getElementsByClassName("userActive"),
-    data: PresenceData = {
-      largeImageKey: "large_image",
-      startTimestamp: browsingStamp
-    };
+	const browsingTimestamp = Math.floor(Date.now() / 1000),
+		valor = document.querySelectorAll("button").length,
+		players = document.querySelectorAll(".userActive"),
+		presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/34NoyFW.png",
+			startTimestamp: browsingTimestamp,
+		};
 
-  if (valor == 1) {
-    data.details = "Creating a room";
-    data.smallImageKey = "home";
-    data.smallImageText = "On homepage";
-  }
-  if (valor >= 6) {
-    const limitPlayers = document.querySelector(".line b").textContent,
-      numLimit = parseFloat(limitPlayers),
-      nump = `(${players.length} of ${numLimit})`;
-    data.details = "Waiting";
-    data.state = `Playing ${nump}`;
-    data.smallImageKey = "playing";
-    data.smallImageText = "On game";
+	if (valor === 1) {
+		presenceData.details = "Creating a room";
+		presenceData.smallImageKey = "home";
+		presenceData.smallImageText = "On homepage";
+	}
+	if (valor >= 6) {
+		const numLimit = parseFloat(document.querySelector(".line b").textContent);
+		presenceData.details = "Waiting";
+		presenceData.state = `Playing ${`(${players.length} of ${numLimit})`}`;
+		presenceData.smallImageKey = "playing";
+		presenceData.smallImageText = "On game";
 
-    if (players.length > numLimit) {
-      data.state = `(${numLimit} of ${numLimit} players)`;
-    }
-  }
+		if (players.length > numLimit)
+			presenceData.state = `(${numLimit} of ${numLimit} players)`;
+	}
 
-  const typing = document.getElementById("writeEntryundefined"),
-    drawing = document.getElementsByClassName("ptro-crp-el"),
-    valueDraw = drawing.length,
-    presenting = document.getElementsByClassName("presentationSection"),
-    presentingValue = presenting.length,
-    waitlist = document.getElementsByClassName("waitingSet rounded"),
-    waitValue = waitlist.length;
+	if (document.querySelector("#writeEntryundefined"))
+		presenceData.details = "Typing...";
 
-  if (typing) {
-    data.details = "Typing...";
-  }
-  if (valueDraw >= 1) {
-    data.details = "Drawing";
-  }
-  if (presentingValue >= 1) {
-    data.details = "Viewing the presentation";
-  }
-  if (waitValue >= 1) {
-    data.details = "On waitlist";
-  }
-  if (data.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(data);
-  }
+	if (document.querySelectorAll(".ptro-crp-el").length >= 1)
+		presenceData.details = "Drawing";
+
+	if (document.querySelectorAll(".presentationSection").length >= 1)
+		presenceData.details = "Viewing the presentation";
+
+	if (document.querySelectorAll(".waitingSet.rounded").length >= 1)
+		presenceData.details = "On waitlist";
+
+	if (!presenceData.details) presence.setActivity();
+	else presence.setActivity(presenceData);
 });

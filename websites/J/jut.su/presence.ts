@@ -1,99 +1,90 @@
 const presence = new Presence({
-    clientId: "658971769285115957"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "general.paused"
-  }),
-  startBrowsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "1066684228726698014",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
-    path = document.location.pathname;
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/f3zxOuL.png",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location,
+		title =
+			document.querySelector('[class="b-b-title center"]') ??
+			document.querySelector('[itemprop="name"]'),
+		search = document.querySelector<HTMLInputElement>('[name="ystext"]'),
+		mangaTitle = document
+			.querySelector("#the_manga_title")
+			?.textContent.split(":"),
+		video = document.querySelector<HTMLVideoElement>(
+			'[id="my-player_html5_api"]'
+		),
+		name = document.querySelector("#dle-content > div > h1 > span");
 
-  if (path == "/") {
-    presenceData.startTimestamp = startBrowsingStamp;
-    presenceData.details = `Смотрит домашнюю страницу`;
-  } else if (path == "/anime") {
-    presenceData.startTimestamp = startBrowsingStamp;
-    presenceData.details = `Выбирает аниме`;
-  } else if (path == "/manga") {
-    presenceData.startTimestamp = startBrowsingStamp;
-    presenceData.details = `Выбирает мангу`;
-  } else {
-    const mangaTitle = document.getElementById("the_manga_title");
+	switch (true) {
+		case !!search?.value:
+			presenceData.details = "Ищет по запросу";
+			presenceData.state = `«${search.value}»`;
+			break;
+		case pathname === "/":
+			presenceData.details = "На домашней странице";
+			break;
+		case pathname === "/pm/":
+			presenceData.details = "Просматривает сообщения";
+			break;
+		case !!pathname.match(/read-[0-9]*/gm):
+			presenceData.details = "Учавствует в переписке";
+			break;
+		case !!pathname.match(/\/user\//):
+			presenceData.details = "Смотрит профиль";
+			presenceData.state = pathname.split("/")[2].replace(/\+/g, " ");
+			break;
+		case !!pathname.match(/\/rewards\//):
+			presenceData.details = "Смотрит награды пользователя";
+			presenceData.state = pathname.split("/")[2].replace(/\+/g, " ");
+			break;
+		case !!pathname.match(/\/tests\//):
+			presenceData.details = "Проходит тест";
+			break;
+		case pathname === "/anime/":
+			presenceData.details = "Смотрит список аниме";
+			break;
+		case pathname === "/manga/":
+			presenceData.details = "Смотрит список манги Наруто";
+			break;
+		case pathname === "/novels/":
+			presenceData.details = "Смотрит список новелл";
+			break;
+		case !!mangaTitle:
+			presenceData.details = `Читает мангу «${mangaTitle[0]}»`;
+			presenceData.state = mangaTitle[1];
+			break;
+		case !!video: {
+			delete presenceData.startTimestamp;
 
-    if (mangaTitle) {
-      const nameArray = mangaTitle.childNodes[0].nodeValue
-          .trim()
-          .substring(0, mangaTitle.childNodes[0].nodeValue.trim().length - 1)
-          .split(" "),
-        chapter = nameArray[nameArray.indexOf("глава") - 1];
-      presenceData.state = `${chapter} глава`;
-
-      const mangaName = nameArray.splice(nameArray.indexOf("манги") + 1);
-      presenceData.details = mangaName.join(" ");
-    } else {
-      const video = document.querySelector("#my-player_html5_api");
-
-      if (video) {
-        const timestamps = presence.getTimestampsfromMedia(
-            video as HTMLMediaElement
-          ),
-          isVideoPlaying = (video: HTMLVideoElement) =>
-            !!(
-              video.currentTime > 0 &&
-              !video.paused &&
-              !video.ended &&
-              video.readyState > 2
-            );
-
-        if (isVideoPlaying(video as HTMLVideoElement)) {
-          presenceData.endTimestamp = Number.isNaN(timestamps[1])
-            ? null
-            : timestamps[1];
-          presenceData.smallImageKey = "play";
-          presenceData.smallImageText = (await strings).play;
-        } else {
-          delete presenceData.endTimestamp;
-          presenceData.smallImageKey = "pause";
-          presenceData.smallImageText = (await strings).pause;
-        }
-      }
-
-      const name = document.querySelector('[itemprop="name"]');
-
-      if (name) {
-        const nameArray = name.textContent.trim().split(" ");
-        nameArray.shift();
-
-        const episode = nameArray[nameArray.indexOf("серия") - 1],
-          season = nameArray[nameArray.indexOf("сезон") - 1];
-
-        nameArray.splice(nameArray.indexOf("сезон") - 1, season ? 4 : 2);
-        presenceData.details = nameArray.join(" ");
-
-        if (episode)
-          presenceData.state = `${
-            season ? `${season} сезон ` : ""
-          }${episode} серия`;
-      }
-
-      const namePreview = document.querySelector(
-        ".header_video.allanimevideo.anime_padding_for_title"
-      );
-
-      if (namePreview) {
-        const namePreviewArray = namePreview.textContent.trim().split(" ");
-        namePreviewArray.shift();
-
-        namePreviewArray.splice(namePreviewArray.indexOf("все"));
-        presenceData.details = namePreviewArray.join(" ");
-      }
-    }
-  }
-
-  presence.setActivity(presenceData);
+			if (!video.paused && !isNaN(Number(video.duration))) {
+				presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
+				presenceData.smallImageKey = "play";
+				presenceData.smallImageText = "Воспроизводится";
+			} else {
+				delete presenceData.endTimestamp;
+				presenceData.smallImageKey = "pause";
+				presenceData.smallImageText = "Приостановлено";
+			}
+			const titles = name.textContent
+				.replace(/смотреть\s/i, "")
+				.replace(/([0-9]* сезон)?\s?[0-9]* серия|[0-9] фильм/g, "")
+				.trim();
+			presenceData.details = `Смотрит аниме «${titles}»`;
+			presenceData.state = name.textContent
+				.replace(/смотреть\s/i, "")
+				.replace(titles, "");
+			break;
+		}
+		case !!title:
+			presenceData.details = "Смотрит страницу аниме";
+			presenceData.state = title.attributes.getNamedItem("content").value;
+	}
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

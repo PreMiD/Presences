@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Snazzah",
+		"id": "158049329150427136"
+	},
+	"service": "Taco",
+	"description": {
+		"en": "Manage Trello boards and get notified of board updates straight from Discord!",
+		"nl": "Beheer Trello-borden en ontvang rechtstreeks vanuit Discord op de hoogte van bordupdates!"
+	},
+	"url": "tacobot.app",
+	"version": "1.0.11",
+	"logo": "https://i.imgur.com/L5J9p8y.png",
+	"thumbnail": "https://i.imgur.com/b0fX8RB.png",
+	"color": "#93A01E",
+	"category": "other",
+	"tags": [
+		"discord",
+		"bot",
+		"trello"
+	]
+}

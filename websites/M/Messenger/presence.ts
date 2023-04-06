@@ -1,59 +1,53 @@
-var presence = new Presence({
-  clientId: "630896385889271819"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user: any;
-var typing: any;
+const presence = new Presence({
+		clientId: "630896385889271819",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {};
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/Ij0u52Z.png",
+			startTimestamp: browsingTimestamp,
+		},
+		[messageRecipient, callRecipient] = await Promise.all([
+			presence.getSetting<boolean>("message"),
+			presence.getSetting<boolean>("call"),
+		]);
 
-  if (document.location.pathname.includes("/videocall/")) {
-    presenceData.largeImageKey = "messenger";
-    presenceData.startTimestamp = browsingStamp;
-    user = document.querySelector(
-      "#u_0_0 > div.r30xiam5.m0q0jmkx.alrytcbg.hp5uecnq.g2121wdl > div > div:nth-child(5) > div > div > div > div > div.prklkq8o.t7elcel3.sd0tyowg.ocjcko58.p3f4w9ai.f5zavhip.foed1vyy > div > div > div.ocjcko58.foed1vyy > div > p"
-    );
-    if (user == null || user.innerText == null) {
-      //presenceData.details = "In a video call or";
-      user = "user not found.";
-      presenceData.details = "In videocall with someone";
-      presenceData.smallImageKey = "videocall";
-    } else {
-      //presenceData.details = "In call with:";
-      user = user.innerText;
-      presenceData.details = "In call with someone";
-      presenceData.smallImageKey = "call";
-    }
-    //presenceData.state = user;
-    presenceData.state = "(Hidden until presence settings.)"; // Add setting for this when presence settings are a thing!!
-  } else if (document.location.pathname.includes("/t/")) {
-    presenceData.largeImageKey = "messenger";
-    presenceData.startTimestamp = browsingStamp;
-    user = document.querySelector("._3oh-");
-    typing = document.querySelector(
-      "body > div > div > div > div:nth-child(2) > span > div._20bp > div._4_j4 > div._4rv3._7og6 > div > div._7kpk > div > div > div:nth-child(1) > div > div > div > div > div > div > span > span"
-    );
-    if (typing == null) {
-      presenceData.details = "Reading messages from:";
-      presenceData.smallImageKey = "reading";
-    } else {
-      presenceData.details = "Writing to:";
-      presenceData.smallImageKey = "writing";
-    }
-    //presenceData.state = user.innerText;
-    presenceData.state = "(Hidden until presence settings.)"; // Add setting for this when presence settings are a thing!!
-  } else if (document.location.pathname.includes("/new")) {
-    presenceData.largeImageKey = "messenger";
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Composing a new message";
-    presenceData.smallImageKey = "writing";
-  } else if (document.location.pathname.includes("/about")) {
-    presenceData.largeImageKey = "messenger";
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing the about page";
-  }
+	if (document.location.pathname.includes("/groupcall/")) {
+		const users = document
+			.querySelector("div > div > span")
+			?.textContent?.split(", ")
+			?.slice(1);
+		if (users) {
+			if (new URLSearchParams(location.search).get("has_video") === "true") {
+				presenceData.details = "In a video call with:";
+				presenceData.smallImageKey = "videocall";
+			} else {
+				presenceData.details = "In a call with:";
+				presenceData.smallImageKey = "call";
+			}
+			presenceData.state = callRecipient ? users.join(", ") : "(Hidden)";
+		} else if (document.querySelector("span")?.textContent) {
+			presenceData.details = "In a Messenger room";
+			presenceData.smallImageKey = "call";
+		} else presenceData.details = "Joining a call...";
+	} else if (document.location.pathname.includes("/t/")) {
+		if (!document.querySelector('[data-text="true"]')?.textContent) {
+			presenceData.details = "Reading messages from:";
+			presenceData.smallImageKey = "reading";
+		} else {
+			presenceData.details = "Writing to:";
+			presenceData.smallImageKey = "writing";
+		}
+		presenceData.state = messageRecipient
+			? document.querySelector("div.t6p9ggj4.tkr6xdv7 span > span")
+					?.textContent ?? "Unknown"
+			: "(Hidden)";
+	} else if (document.location.pathname.includes("/new")) {
+		presenceData.details = "Composing a new message";
+		presenceData.smallImageKey = "writing";
+	} else if (document.location.pathname.includes("/about"))
+		presenceData.details = "Viewing the about page";
 
-  presence.setActivity(presenceData);
+	presence.setActivity(presenceData);
 });

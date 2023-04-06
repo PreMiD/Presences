@@ -1,51 +1,41 @@
-var presence = new Presence({
-  clientId: "608043966285348944"
+const presence = new Presence({
+	clientId: "608043966285348944",
 });
+let lastPlaybackState = null,
+	reading,
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-var lastPlaybackState = null;
-var reading;
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-if (lastPlaybackState != reading) {
-  lastPlaybackState = reading;
-  browsingStamp = Math.floor(Date.now() / 1000);
+if (lastPlaybackState !== reading) {
+	lastPlaybackState = reading;
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-  reading =
-    document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
+	const presenceData: PresenceData = {};
 
-  var something: any, a: any, b: any;
+	reading =
+		document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
 
-  if (reading) {
-    something = document.querySelectorAll(".margin-bottom-12 h1 a");
-    a = something[0];
-    b = something[1];
+	if (reading) {
+		const [a, b] = document.querySelectorAll<HTMLElement>(
+			".margin-bottom-12 h1 a"
+		);
 
-    var page = document
-      .querySelector(".page-jump.text-center")
-      .getAttribute("value");
+		presenceData.details = a.textContent;
+		presenceData.state = `${b.textContent} [Page: ${
+			document.querySelector<HTMLInputElement>(".page-jump.text-center").value
+		}]`;
+		presenceData.largeImageKey = "https://i.imgur.com/rs9kEod.png";
+		presenceData.startTimestamp = browsingTimestamp;
+	} else {
+		const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/rs9kEod.png",
+		};
 
-    const presenceData: PresenceData = {
-      details: a.innerText,
-      state: b.innerText + " [Page: " + page + "]",
-      largeImageKey: "lg"
-    };
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = browsingTimestamp;
+	}
 
-    presenceData.startTimestamp = browsingStamp;
-
-    presence.setActivity(presenceData, true);
-  } else {
-    const presenceData: PresenceData = {
-      largeImageKey: "lg"
-    };
-
-    presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
-
-    presence.setActivity(presenceData, true);
-  }
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

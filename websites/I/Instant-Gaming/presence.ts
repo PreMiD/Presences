@@ -1,42 +1,35 @@
 const presence = new Presence({
-    clientId: "702978839722197012"
-  }),
-  strings = presence.getStrings({
-    browsing: "presence.activity.browsing"
-  });
+		clientId: "702978839722197012",
+	}),
+	strings = presence.getStrings({
+		browsing: "general.browsing",
+	});
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "instantgaming"
-  };
-  try {
-    const product_title = document.querySelector(
-      "div.product > div.infos > div.shadow.mainshadow > div.title > h1"
-    ).textContent;
-    const product_price = document.querySelector("div.price").textContent;
-    var product_platform = document.querySelector("div.subinfos > a.platform")
-      .textContent;
-    if (product_platform.startsWith("Other")) {
-      product_platform = "N/A";
-    }
-    presenceData.details = "Viewing a product:";
-    presenceData.state = `[${product_platform}] ${product_title} (${product_price})`;
-  } catch {
-    if (window.location.pathname.includes("/user/")) {
-      const profile_name = document.querySelector(
-        "div.ig-profile-info-nick > span"
-      ).textContent;
-      presenceData.details = "Viewing a profile:";
-      presenceData.state = profile_name;
-    } else {
-      presenceData.details = (await strings).browsing;
-    }
-  }
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/3htcFSM.png",
+	};
+	try {
+		let productPlatform = document.querySelector(
+			"div.subinfos > a.platform"
+		).textContent;
+		if (productPlatform.startsWith("Other")) productPlatform = "N/A";
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+		presenceData.details = "Viewing a product:";
+		presenceData.state = `[${productPlatform}] ${
+			document.querySelector(
+				"div.product > div.infos > div.shadow.mainshadow > div.title > h1"
+			).textContent
+		} (${document.querySelector("div.price").textContent})`;
+	} catch {
+		if (window.location.pathname.includes("/user/")) {
+			presenceData.details = "Viewing a profile:";
+			presenceData.state = document.querySelector(
+				"div.ig-profile-info-nick > span"
+			).textContent;
+		} else presenceData.details = (await strings).browsing;
+	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

@@ -1,159 +1,162 @@
 const presence = new Presence({
-    clientId: "640150336547454976"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+	clientId: "640150336547454976",
+});
 
-let browsingStamp = Math.floor(Date.now() / 1000);
-let iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-
-let lastPlaybackState = null;
-let playback;
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+enum Assets {
+	Logo = "https://i.imgur.com/p6Xv2Bv.png",
+	Searching = "https://i.imgur.com/OIgfjTG.png",
+	Playing = "https://i.imgur.com/KNneWuF.png",
+	Paused = "https://i.imgur.com/BtWUfrZ.png",
+	Reading = "https://i.imgur.com/53N4eY6.png",
 }
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+async function getStrings() {
+	return presence.getStrings(
+		{
+			viewing: "general.viewing",
+			play: "general.playing",
+			pause: "general.paused",
+			viewHome: "general.viewHome",
+			viewSeries: "general.viewSeries",
+			buttonViewSeries: "general.buttonViewSeries",
+			buttonViewEpisode: "general.buttonViewEpisode",
+			searchFor: "general.searchFor",
+			search: "general.search",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
 
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
-  }
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null,
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	iFrameVideo: boolean,
+	currentTime: number,
+	duration: number,
+	paused: boolean,
+	lastPlaybackState: boolean,
+	playback: boolean;
 
-  if (lastPlaybackState != playback) {
-    lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
-  }
+interface IFrameData {
+	iframeVideo: {
+		iFrameVideo: boolean;
+		currentTime: number;
+		duration: number;
+		paused: boolean;
+	};
+}
+presence.on("iFrameData", (data: IFrameData) => {
+	playback = data.iframeVideo.duration !== null ? true : false;
+
+	if (playback)
+		({ iFrameVideo, currentTime, duration, paused } = data.iframeVideo);
+
+	if (lastPlaybackState !== playback) {
+		lastPlaybackState = playback;
+		browsingTimestamp = Math.floor(Date.now() / 1000);
+	}
 });
 
 presence.on("UpdateData", async () => {
-  const timestamps = getTimestamps(
-      Math.floor(currentTime),
-      Math.floor(duration)
-    ),
-    presenceData: PresenceData = {
-      largeImageKey: "vrv"
-    };
+	const presenceData: PresenceData = {
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ href, pathname } = document.location,
+		[newLang, time, showCover, showButtons, showSearch] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("time"),
+			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("search"),
+		]);
 
-  presenceData.startTimestamp = browsingStamp;
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
-  if (document.location.pathname.includes("/watch/")) {
-    if (iFrameVideo == true && !isNaN(duration)) {
-      presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+	switch (pathname.split("/")[1]) {
+		case "watch": {
+			presenceData.details = strings.viewing;
+			presenceData.smallImageKey = Assets.Reading;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("img.c-content-image")?.src ??
+				Assets.Logo;
 
-      if (
-        document.querySelector(
-          ".content > div > div > .episode-info > .season"
-        ) !== null
-      ) {
-        presenceData.details =
-          document.querySelector(
-            ".content > div > div > .episode-info > .series"
-          ).textContent +
-          " - S" +
-          document
-            .querySelector(".content > div > div > .episode-info > .season")
-            .textContent.toLowerCase()
-            .replace("season", "")
-            .trim() +
-          document
-            .querySelector(".content > div > div > .title")
-            .textContent.split(" - ")[0];
-        presenceData.state = document
-          .querySelector(".content > div > div > .title")
-          .textContent.split(" - ")[1];
-      } else {
-        presenceData.details = document.querySelector(
-          ".content > div > div > .episode-info > .series"
-        ).textContent;
-        presenceData.state = document.querySelector(
-          ".content > div > div > .title"
-        ).textContent;
-      }
+			presenceData.buttons = [{ label: strings.buttonViewEpisode, url: href }];
 
-      if (paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
-    } else if (iFrameVideo == null && isNaN(duration)) {
-      presenceData.details = "Looking at: ";
+			const seriesName: string =
+					document.querySelector("span.series").textContent,
+				episode: string = document.querySelector("h2.title").textContent,
+				season: HTMLSpanElement = document.querySelector("span.season");
 
-      if (
-        document.querySelector(
-          ".content > div > div > .episode-info > .season"
-        ) !== null
-      ) {
-        presenceData.state =
-          document.querySelector(
-            ".content > div > div > .episode-info > .series"
-          ).textContent +
-          " - S" +
-          document
-            .querySelector(".content > div > div > .episode-info > .season")
-            .textContent.toLowerCase()
-            .replace("season", "")
-            .trim() +
-          document
-            .querySelector(".content > div > div > .title")
-            .textContent.split(" - ")[0] +
-          " " +
-          document
-            .querySelector(".content > div > div > .title")
-            .textContent.split(" - ")[1];
-      } else {
-        presenceData.state =
-          document.querySelector(
-            ".content > div > div > .episode-info > .series"
-          ).textContent +
-          " - " +
-          document.querySelector(".content > div > div > .title").textContent;
-      }
-      presenceData.smallImageKey = "reading";
-    }
-  } else if (document.location.pathname.includes("/serie")) {
-    presenceData.details = "Viewing series:";
-    presenceData.state = document.querySelector(
-      "#content > div > div.app-body-wrapper > div > div.content > div.series-metadata > div.text-wrapper > div.erc-series-info > div.series-title"
-    ).textContent;
-  } else if (
-    document.querySelector(".item-type") !== null &&
-    document.querySelector(".item-type").textContent == "Channel"
-  ) {
-    presenceData.details = "Viewing channel:";
-    presenceData.state = document.querySelector(".item-title").textContent;
-  } else if (document.location.pathname.includes("/watchlist")) {
-    presenceData.details = "Viewing their watchlist";
-    presenceData.smallImageKey = "reading";
-  } else if (document.location.pathname == "/") {
-    presenceData.details = "Viewing the homepage";
-    presenceData.smallImageKey = "reading";
-  }
+			presenceData.state = season
+				? `${seriesName} - S${season.textContent.split(" ")[1]} ${episode}`
+				: `${seriesName} - ${episode}`;
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+			if (iFrameVideo && !isNaN(duration)) {
+				presenceData.smallImageKey = paused ? Assets.Paused : Assets.Playing;
+				presenceData.smallImageText = paused ? strings.pause : strings.play;
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
+
+				presenceData.details = season
+					? `${seriesName} - S${season.textContent.split(" ")[1]} ${episode}`
+					: seriesName;
+				presenceData.state = season ? episode.split(" - ")[1] : episode;
+
+				if (paused) {
+					delete presenceData.startTimestamp;
+					delete presenceData.endTimestamp;
+				}
+			}
+			break;
+		}
+		case "series":
+			presenceData.details = strings.viewSeries;
+			presenceData.state =
+				document.querySelector("div.series-title").textContent;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("img.c-content-image")?.src ??
+				Assets.Logo;
+			presenceData.buttons = [{ label: strings.buttonViewSeries, url: href }];
+			break;
+		case "watchlist":
+			presenceData.details = "Viewing their watchlist";
+			presenceData.smallImageKey = Assets.Reading;
+			break;
+		case "":
+			presenceData.details = strings.viewHome;
+			presenceData.smallImageKey = Assets.Reading;
+			break;
+		default:
+			if (document.querySelector(".item-type")?.textContent === "Channel") {
+				presenceData.details = "Viewing channel:";
+				presenceData.state = document.querySelector(".item-title").textContent;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>("img").src;
+			}
+	}
+
+	if (href.includes("?q=") && showSearch) {
+		presenceData.details = strings.searchFor;
+		presenceData.state = href.split("?q=")[1];
+		presenceData.startTimestamp = browsingTimestamp;
+		delete presenceData.endTimestamp;
+		presenceData.largeImageKey = Assets.Logo;
+		presenceData.smallImageKey = Assets.Searching;
+		presenceData.smallImageText = strings.search;
+		delete presenceData.buttons;
+	}
+
+	if (!showCover) presenceData.largeImageKey = Assets.Logo;
+	if (!showButtons) delete presenceData.buttons;
+	if (!time) {
+		delete presenceData.startTimestamp;
+		delete presenceData.endTimestamp;
+	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

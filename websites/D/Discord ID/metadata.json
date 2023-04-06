@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"service": "Discord ID",
+	"description": {
+		"en": "Lookup a Discord User or Bot ID."
+	},
+	"url": [
+		"wiki.discord.id",
+		"discord.id"
+	],
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/O06B09v.png",
+	"thumbnail": "https://i.imgur.com/Y8sQNb9.png",
+	"color": "#7289da",
+	"category": "other",
+	"tags": [
+		"discord",
+		"id"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "idAndTag",
+			"title": "Disable Tag/ID Mode",
+			"icon": "fad fa-hashtag-lock",
+			"value": true
+		},
+		{
+			"id": "cover",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Cover",
+			"icon": "fad fa-album",
+			"value": false
+		}
+	]
+}

@@ -1,30 +1,25 @@
 const presence = new Presence({
-  clientId: "729279760596729858"
-});
+		clientId: "729279760596729858",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let formula: HTMLInputElement, formulaName: HTMLElement;
-const startStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/rtkOdlB.png",
+		startTimestamp: browsingTimestamp,
+	};
 
-  formula = document.getElementById("formula") as HTMLInputElement;
+	formula = document.querySelector("#formula") as HTMLInputElement;
 
-  formulaName =
-    document.querySelector("span#elements-body > details > summary") ??
-    document.querySelector("span#elements-body");
+	formulaName =
+		document.querySelector("span#elements-body > details > summary") ??
+		document.querySelector("span#elements-body");
 
-  presenceData.details = formula.value;
-  presenceData.state = formulaName.innerText;
+	presenceData.details = formula.value;
+	presenceData.state = formulaName.textContent;
 
-  presenceData.startTimestamp = startStamp;
-
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

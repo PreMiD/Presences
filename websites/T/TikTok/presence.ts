@@ -1,133 +1,119 @@
-interface LangStrings {
-  browse: string;
-  forYou: string;
-  following: string;
-  buttonViewProfile: string;
-  viewProfile: string;
-  viewTikTok: string;
-  buttonViewTikTok: string;
+const presence = new Presence({
+		clientId: "809093093600133165",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			browse: "general.browsing",
+			forYou: "tiktok.forYou",
+			following: "tiktok.following",
+			buttonViewProfile: "general.buttonViewProfile",
+			viewProfile: "general.viewProfile",
+			viewTikTok: "tiktok.viewing",
+			buttonViewTikTok: "tiktok.buttonViewTikTok",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
 }
 
-const presence = new Presence({
-    clientId: "809093093600133165"
-  }),
-  getStrings = async (): Promise<LangStrings> => {
-    return presence.getStrings(
-      {
-        browse: "general.browsing",
-        forYou: "tiktok.forYou",
-        following: "tiktok.following",
-        buttonViewProfile: "general.buttonViewProfile",
-        viewProfile: "general.viewProfile",
-        viewTikTok: "tiktok.viewing",
-        buttonViewTikTok: "tiktok.buttonViewTikTok"
-      },
-      await presence.getSetting("lang")
-    );
-  };
-
-let browsingStamp = Math.floor(Date.now() / 1000),
-  prevUrl = document.URL,
-  strings: Promise<LangStrings> = getStrings(),
-  oldLang: string = null;
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang"),
-    buttons = await presence.getSetting("buttons");
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/KBAjCOX.png",
+			startTimestamp: browsingTimestamp,
+		},
+		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+		[, page, pageType] = location.pathname.split("/");
 
-  if (document.URL !== prevUrl) {
-    prevUrl = document.location.href;
-    browsingStamp = Math.floor(Date.now() / 1000);
-  }
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
-  }
+	if (!page || page === "foryou") {
+		const [detail, state] = (await strings).forYou.split("{0}");
 
-  let presenceData: PresenceData = {
-    largeImageKey: "tiktok",
-    startTimestamp: browsingStamp
-  };
+		presenceData.details = detail;
+		presenceData.state = state;
+	} else if (page.startsWith("@")) {
+		//User
 
-  const path = location.href
-      .replace(/\/?$/, "/")
-      .replace("https://" + location.hostname, "")
-      .replace("?", "/")
-      .replace("@", "@/")
-      .replace("#", ""),
-    currentVidElements = Array.from(document.querySelectorAll("a")).filter(
-      (a) =>
-        a.href?.includes(
-          path.split(path.match("/@/(.*)/video/")?.[0])[1]?.split("/")[0]
-        ) && a.href?.includes(`@${path.match("/@/(.*)/video/")?.[1]}`)
-    ),
-    statics: {
-      [name: string]: PresenceData;
-    } = {
-      "/": {
-        details: (await strings).forYou.split("{0}")[0],
-        state: (await strings).forYou.split("{0}")[1],
-        smallImageText: (await strings).browse,
-        smallImageKey: "reading"
-      },
-      "/following/": {
-        details: (await strings).following.split("{0}")[0],
-        state: (await strings).following.split("{0}")[1],
-        smallImageText: (await strings).browse,
-        smallImageKey: "reading"
-      },
-      "/@/": {
-        details: (await strings).viewProfile,
-        state: `${document
-          .querySelector(".share-sub-title")
-          ?.textContent.trim()} (@${document
-          .querySelector(".share-title")
-          ?.textContent.trim()})`,
-        buttons: [
-          {
-            label: (await strings).buttonViewProfile,
-            url: document.URL.split("?")[0]
-          }
-        ]
-      },
-      "/@/(.*)/video/": {
-        details: (await strings).viewTikTok,
-        state: `${
-          currentVidElements
-            .find((v) => v.className.includes("video-card"))
-            ?.parentElement.parentElement.parentElement.firstElementChild.children[1].textContent.split(
-              "·"
-            )[0]
-        } (@${
-          currentVidElements.find((v) => v.className.includes("video-card"))
-            ?.parentElement.parentElement.parentElement.firstElementChild
-            .children[0].textContent
-        })`,
-        smallImageKey: (currentVidElements.find((v) =>
-          v.className.includes("video-card")
-        )?.firstElementChild?.firstElementChild
-          ?.firstElementChild as HTMLVideoElement)?.paused
-          ? "pause"
-          : "play",
-        buttons: [
-          {
-            label: (await strings).buttonViewTikTok,
-            url: `https://www.tiktok.com${document.URL.split("#")[1]}/`
-          }
-        ]
-      }
-    };
+		if (pageType === "video") {
+			//Video
 
-  for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
-      presenceData = { ...presenceData, ...v };
-    }
-  }
+			const video = document.querySelector<HTMLVideoElement>(".video-player");
 
-  if (!buttons) delete presenceData.buttons;
+			delete presenceData.startTimestamp;
+			presenceData.details =
+				document.querySelector(".video-meta-title:nth-child(1)")
+					?.firstElementChild?.textContent ??
+				document.querySelector(".tt-video-meta-caption")?.firstElementChild
+					?.textContent;
+			presenceData.state = `@${
+				document.querySelector(".user-username")?.textContent ??
+				document.querySelector(".author-uniqueId")?.textContent
+			}`;
+			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			if (!video.paused)
+				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+			presenceData.buttons = [
+				{
+					label: (await strings).buttonViewTikTok,
+					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`,
+				},
+				{
+					label: (await strings).buttonViewProfile,
+					url: document.URL.split("?")[0],
+				},
+			];
+		} else if (pageType === "live") {
+			//Live
+			delete presenceData.startTimestamp;
+			presenceData.details = document.querySelector(".live-title")?.textContent;
+			presenceData.state = `@${
+				document.querySelector(".user-uniqueId")?.textContent
+			}`;
+			presenceData.smallImageKey = "live";
 
-  presence.setActivity(presenceData);
+			presenceData.buttons = [
+				{
+					label: (await strings).buttonViewTikTok,
+					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`,
+				},
+				{
+					label: (await strings).buttonViewProfile,
+					url: document.URL.split("?")[0],
+				},
+			];
+		} else {
+			presenceData.details = (await strings).viewProfile;
+			presenceData.state = `${
+				document.querySelector('h2[data-e2e="user-title"]').textContent
+			} (@${
+				document.querySelector('h1[data-e2e="user-subtitle"]').textContent
+			})`;
+			presenceData.buttons = [
+				{
+					label: (await strings).buttonViewProfile,
+					url: document.URL.split("?")[0],
+				},
+			];
+		}
+	} else if (page === "following") {
+		const [detail, state] = (await strings).following.split("{0}");
+
+		presenceData.details = detail;
+		presenceData.state = state;
+		presenceData.smallImageText = (await strings).browse;
+		presenceData.smallImageKey = "reading";
+	}
+
+	const buttons = await presence.getSetting<boolean>("buttons");
+	if (!buttons) delete presenceData.buttons;
+
+	presence.setActivity(presenceData);
 });

@@ -1,109 +1,91 @@
-var presence = new Presence({
-    clientId: "630874255990587402"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+const presence = new Presence({
+		clientId: "630874255990587402",
+	}),
+	strings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+	});
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "gfycat"
-  };
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/PRr2kHO.png",
+	};
 
-  if (document.location.pathname.startsWith("/discover")) {
-    var section = document.querySelector(".multiple-view__title").textContent;
-    if (section) {
-      data.state = section;
-    }
+	if (document.location.pathname.startsWith("/discover")) {
+		const section = document.querySelector(".multiple-view__title").textContent;
+		if (section) presenceData.state = section;
 
-    data.details = "Browsing...";
-    data.startTimestamp = Date.now();
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = Date.now();
 
-    presence.setActivity(data);
-  } else if (document.location.pathname.startsWith("/gifs/search")) {
-    var searchText = document.querySelector(".feed-with-player__title")
-      .textContent;
+		presence.setActivity(presenceData);
+	} else if (document.location.pathname.startsWith("/gifs/search")) {
+		const searchText = document.querySelector(
+			".feed-with-player__title"
+		).textContent;
 
-    data.details = "Searching...";
-    if (searchText) {
-      data.state = searchText;
-    }
-    data.startTimestamp = Date.now();
-    data.smallImageKey = "search";
-    data.smallImageText = "Searching";
+		presenceData.details = "Searching...";
+		if (searchText) presenceData.state = searchText;
 
-    presence.setActivity(data);
-  } else if (
-    document.location.pathname.startsWith("/upload") ||
-    document.location.pathname.startsWith("/create")
-  ) {
-    data.details = "Uploading...";
-    data.startTimestamp = Date.now();
+		presenceData.startTimestamp = Date.now();
+		presenceData.smallImageKey = "search";
+		presenceData.smallImageText = "Searching";
 
-    presence.setActivity(data);
-  } else if (document.location.pathname.startsWith("/@")) {
-    var profile = document.querySelector(
-      ".profile-container .profile-info-container .name"
-    ).textContent;
+		presence.setActivity(presenceData);
+	} else if (
+		document.location.pathname.startsWith("/upload") ||
+		document.location.pathname.startsWith("/create")
+	) {
+		presenceData.details = "Uploading...";
+		presenceData.startTimestamp = Date.now();
 
-    data.details = "Viewing profile";
-    data.state = profile;
-    data.startTimestamp = Date.now();
+		presence.setActivity(presenceData);
+	} else if (document.location.pathname.startsWith("/@")) {
+		presenceData.details = "Viewing profile";
+		presenceData.state = document.querySelector(
+			".profile-container .profile-info-container .name"
+		).textContent;
+		presenceData.startTimestamp = Date.now();
 
-    presence.setActivity(data);
-  } else if (document.location.pathname.startsWith("/jobs")) {
-    data.details = "Browsing jobs";
-    data.startTimestamp = Date.now();
+		presence.setActivity(presenceData);
+	} else if (document.location.pathname.startsWith("/jobs")) {
+		presenceData.details = "Browsing jobs";
+		presenceData.startTimestamp = Date.now();
 
-    presence.setActivity(data);
-  } else {
-    var player: HTMLVideoElement = document.querySelector(
-      ".video-player-wrapper video"
-    );
+		presence.setActivity(presenceData);
+	} else {
+		const player: HTMLVideoElement = document.querySelector(
+			".video-player-wrapper video"
+		);
 
-    if (player) {
-      var title = document.querySelector(".gif-info .title").textContent;
-      var views = document.querySelector(".gif-info .gif-views").textContent;
-      var timestamps = getTimestamps(
-        Math.floor(player.currentTime),
-        Math.floor(player.duration)
-      );
+		if (player) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(
+					Math.floor(player.currentTime),
+					Math.floor(player.duration)
+				);
 
-      data.details = title;
-      data.state = views;
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
-      data.smallImageKey = player.paused ? "pause" : "play";
-      data.smallImageText = player.paused
-        ? (await strings).pause
-        : (await strings).play;
+			presenceData.details =
+				document.querySelector(".gif-info .title").textContent;
+			presenceData.state = document.querySelector(
+				".gif-info .gif-views"
+			).textContent;
+			presenceData.smallImageKey = player.paused ? "pause" : "play";
+			presenceData.smallImageText = player.paused
+				? (await strings).pause
+				: (await strings).play;
 
-      if (player.paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
-      }
+			if (player.paused) {
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
+			}
 
-      presence.setActivity(data);
-    } else {
-      data.details = "Browsing...";
-      data.startTimestamp = Date.now();
+			presence.setActivity(presenceData);
+		} else {
+			presenceData.details = "Browsing...";
+			presenceData.startTimestamp = Date.now();
 
-      presence.setActivity(data);
-    }
-  }
+			presence.setActivity(presenceData);
+		}
+	}
 });

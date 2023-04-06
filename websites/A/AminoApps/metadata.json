@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "FelipeSazz",
+		"id": "326123612153053184"
+	},
+	"service": "AminoApps",
+	"description": {
+		"en": "Amino's network of communities lets you explore, discover, and obsess over the things you're into.",
+		"pt_BR": "Amino permite que você explore, descubra e fique obcecado com o que você gosta.",
+		"ga_IE": "Ligeann líonra pobail Amino duit iniúchadh a dhéanamh, fáil amach agus obsess faoi na rudaí a bhfuil tú iontu.",
+		"nl": "Met Amino's netwerk van communities kun je de dingen die je leuk vindt verkennen, ontdekken en geobsedeerd over raken.",
+		"vi_VN": "Mạng lưới giao tiếp của Amino giúp bạn khám phá, tìm hiểu, và ám ảnh về những sở thích của bạn."
+	},
+	"url": "aminoapps.com",
+	"version": "1.0.14",
+	"logo": "https://i.imgur.com/hMk54q9.png",
+	"thumbnail": "https://i.imgur.com/3bOMfHi.png",
+	"color": "#00FFA2",
+	"category": "socials",
+	"tags": [
+		"social",
+		"aminoapps",
+		"community"
+	]
+}

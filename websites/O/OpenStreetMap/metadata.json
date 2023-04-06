@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "frnk",
+		"id": "232904284004548608"
+	},
+	"service": "OpenStreetMap",
+	"description": {
+		"en": "OpenStreetMap is a collaborative online mapping project where every user can contribute to the map.",
+		"fr": "OpenStreetMap est un projet de cartographie collaboratif en ligne où chaque utilisateur peut contribuer à la carte."
+	},
+	"url": "openstreetmap.org",
+	"regExp": "([a-z0-9]+)[.]openstreetmap[.]org",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/mlLReW9.png",
+	"thumbnail": "https://i.imgur.com/2gZwZlU.png",
+	"color": "#7ebc6f",
+	"category": "other",
+	"tags": [
+		"map",
+		"openstreetmap",
+		"mapping",
+		"osm"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Hide map location",
+			"icon": "fa-duotone fa-shield-halved",
+			"value": false
+		}
+	]
+}

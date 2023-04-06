@@ -1,136 +1,167 @@
 const presence = new Presence({
-    clientId: "799635921522655262"
-  }),
-  browsingStamp: number = Math.floor(Date.now() / 1000);
+		clientId: "799635921522655262",
+	}),
+	browsingTimestamp: number = Math.floor(Date.now() / 1000);
 
 let details: string,
-  state: string,
-  lives: string,
-  level: string,
-  strikes: string = "0 of 3",
-  numbers: string = "4";
+	state: string,
+	lives: string,
+	level: string,
+	strikes = "0 of 3",
+	numbers = "4";
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "hb"
-    },
-    showTime: boolean = await presence.getSetting("stamp");
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/vTQeYvH.png",
+		},
+		showTime = await presence.getSetting<boolean>("stamp");
 
-  presenceData.startTimestamp = showTime ? browsingStamp : null;
-  if (presenceData.startTimestamp == null) delete presenceData.startTimestamp;
+	if (showTime) presenceData.startTimestamp = browsingTimestamp;
 
-  if (document.location.pathname == "/") {
-    details = "Browsing...";
-    state = "On the homepage";
-  } else if (document.location.pathname == "/tests/reactiontime") {
-    if (document.querySelector(".css-0") == null) {
-      details = "Testing...";
-      state = "Reaction Speed";
-    } else {
-      details = "Viewing Results (Reaction Speed)";
-      state = `Time: ${document.querySelector(".css-0").innerHTML}`;
-    }
-  } else if (document.location.pathname == "/tests/sequence") {
-    if (document.querySelector(".css-0") == null) {
-      details = "Testing...";
-      state = "Sequence Memory";
-    } else {
-      details = "Viewing Results (Sequence Memory)";
-      state = `${document.querySelector(".css-0").innerHTML}`;
-    }
-  } else if (document.location.pathname == "/tests/aim") {
-    if (document.querySelector(".css-0") == null) {
-      details = "Playing...";
-      state = "Aim Trainer";
-    } else {
-      details = "Viewing Results (Aim Trainer)";
-      state = `Average Time: ${document.querySelector(".css-0").innerHTML}`;
-    }
-  } else if (document.location.pathname == "/tests/number-memory") {
-    if (document.querySelector(".level") == null) {
-      details = "Testing...";
-      state = "Number Memory";
-    } else {
-      details = "Viewing Results (Number Memory)";
-      state = `${document.querySelector(".level > span").innerHTML} ${
-        document.querySelector(".level > .number").innerHTML
-      }`;
-    }
-  } else if (document.location.pathname == "/tests/chimp") {
-    if (
-      document.querySelector(".css-0") == null &&
-      document.querySelector(".css-1tl77r2") == null
-    ) {
-      details = "Testing...";
-      state = `Chimp Test (${numbers} numbers, ${strikes} strikes)`;
-    } else if (document.querySelector(".css-1tl77r2") != null) {
-      numbers = document.querySelector(".css-0").innerHTML;
-      strikes = document.querySelector(".css-1tl77r2").innerHTML;
-      details = "Testing...";
-      state = `Chimp Test (${numbers} numbers, ${strikes} strikes)`;
-    } else if (
-      document.querySelector(".css-1tl77r2") == null &&
-      document.querySelector(".css-0") != null
-    ) {
-      details = "Viewing Results (Chimp Test)";
-      state = `Score: ${document.querySelector(".css-0").innerHTML}`;
-    }
-  } else if (document.location.pathname == "/tests/memory") {
-    if (
-      document.querySelector(".css-0") == null &&
-      document.querySelector(".big-score") == null
-    ) {
-      details = "Testing...";
-      state = `Visual Memory`;
-    } else if (document.querySelector(".big-score") != null) {
-      lives = document
-        .querySelector(".big-score")
-        .getElementsByClassName("score")
-        .item(1)
-        .textContent.split("  ")
-        .join(" ");
-      level = document
-        .querySelector(".big-score")
-        .getElementsByClassName("score")
-        .item(0)
-        .textContent.split("  ")
-        .join(" ");
-      details = "Testing...";
-      state = `Visual Memory (${level}, ${lives})`;
-    } else {
-      details = "Viewing Results (Visual Memory)";
-      state = `${document.querySelector(".css-0").innerHTML}`;
-    }
-  } else if (document.location.pathname == "/tests/hearing") {
-    if (document.querySelector(".css-0") == null) {
-      details = "Testing...";
-      state = "Hearing";
-    } else {
-      details = "Viewing Results (Hearing)";
-      state = `Heard the frequency at: ${
-        document.querySelector(".css-0").innerHTML
-      }`;
-    }
-  } else if (document.location.pathname == "/tests/typing") {
-    if (document.querySelector(".css-0") == null) {
-      details = "Testing...";
-      state = "Typing";
-    } else {
-      details = "Viewing Results (Typing)";
-      state = `WPM: ${
-        document.querySelector(".css-0").innerHTML.split("wpm")[0]
-      }`;
-    }
-  } else if (document.location.pathname == "/dashboard") {
-    details = "Browsing...";
-    state = "User's Dashboard";
-  } else {
-    details = "Browsing...";
-    state = "An Unsupported Page";
-  }
+	switch (document.location.pathname) {
+		case "/": {
+			details = "Browsing...";
+			state = "On the homepage";
 
-  presenceData.details = details;
-  presenceData.state = state;
+			break;
+		}
+		case "/tests/reactiontime": {
+			if (!document.querySelector(".css-0")) {
+				details = "Testing...";
+				state = "Reaction Speed";
+			} else {
+				details = "Viewing Results (Reaction Speed)";
+				state = `Time: ${document.querySelector(".css-0").textContent}`;
+			}
 
-  presence.setActivity(presenceData);
+			break;
+		}
+		case "/tests/sequence": {
+			if (!document.querySelector(".css-0")) {
+				details = "Testing...";
+				state = "Sequence Memory";
+			} else {
+				details = "Viewing Results (Sequence Memory)";
+				state = `${document.querySelector(".css-0").textContent}`;
+			}
+
+			break;
+		}
+		case "/tests/aim": {
+			if (!document.querySelector(".css-0")) {
+				details = "Playing...";
+				state = "Aim Trainer";
+			} else {
+				details = "Viewing Results (Aim Trainer)";
+				state = `Average Time: ${document.querySelector(".css-0").textContent}`;
+			}
+
+			break;
+		}
+		case "/tests/number-memory": {
+			if (!document.querySelector(".level")) {
+				details = "Testing...";
+				state = "Number Memory";
+			} else {
+				details = "Viewing Results (Number Memory)";
+				state = `${document.querySelector(".level > span").textContent} ${
+					document.querySelector(".level > .number").textContent
+				}`;
+			}
+
+			break;
+		}
+		case "/tests/chimp": {
+			if (
+				!document.querySelector(".css-0") &&
+				!document.querySelector(".css-1tl77r2")
+			) {
+				details = "Testing...";
+				state = `Chimp Test (${numbers} numbers, ${strikes} strikes)`;
+			} else if (document.querySelector(".css-1tl77r2")) {
+				numbers = document.querySelector(".css-0").textContent;
+				strikes = document.querySelector(".css-1tl77r2").textContent;
+				details = "Testing...";
+				state = `Chimp Test (${numbers} numbers, ${strikes} strikes)`;
+			} else if (
+				!document.querySelector(".css-1tl77r2") &&
+				document.querySelector(".css-0")
+			) {
+				details = "Viewing Results (Chimp Test)";
+				state = `Score: ${document.querySelector(".css-0").textContent}`;
+			}
+
+			break;
+		}
+		case "/tests/memory": {
+			if (
+				!document.querySelector(".css-0") &&
+				!document.querySelector(".big-score")
+			) {
+				details = "Testing...";
+				state = "Visual Memory";
+			} else if (document.querySelector(".big-score")) {
+				lives = document
+					.querySelector(".big-score")
+					.querySelectorAll(".score")
+					.item(1)
+					.textContent.split("  ")
+					.join(" ");
+				level = document
+					.querySelector(".big-score")
+					.querySelectorAll(".score")
+					.item(0)
+					.textContent.split("  ")
+					.join(" ");
+				details = "Testing...";
+				state = `Visual Memory (${level}, ${lives})`;
+			} else {
+				details = "Viewing Results (Visual Memory)";
+				state = `${document.querySelector(".css-0").textContent}`;
+			}
+
+			break;
+		}
+		case "/tests/hearing": {
+			if (!document.querySelector(".css-0")) {
+				details = "Testing...";
+				state = "Hearing";
+			} else {
+				details = "Viewing Results (Hearing)";
+				state = `Heard the frequency at: ${
+					document.querySelector(".css-0").textContent
+				}`;
+			}
+
+			break;
+		}
+		case "/tests/typing": {
+			if (!document.querySelector(".css-0")) {
+				details = "Testing...";
+				state = "Typing";
+			} else {
+				details = "Viewing Results (Typing)";
+				state = `WPM: ${
+					document.querySelector(".css-0").textContent.split("wpm")[0]
+				}`;
+			}
+
+			break;
+		}
+		case "/dashboard": {
+			details = "Browsing...";
+			state = "User's Dashboard";
+
+			break;
+		}
+		default: {
+			details = "Browsing...";
+			state = "An Unsupported Page";
+		}
+	}
+
+	presenceData.details = details;
+	presenceData.state = state;
+
+	presence.setActivity(presenceData);
 });

@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "fror",
+		"id": "515668127829458945"
+	},
+	"service": "OKanime",
+	"description": {
+		"en": "OKanime is an anime streaming website with arabic subs/dubs",
+		"nl": "OKanime is een anime-streamingwebsite met Arabische subs / dubs"
+	},
+	"url": [
+		"okanime.tv",
+		"www.okanime.tv"
+	],
+	"version": "1.1.21",
+	"logo": "https://i.imgur.com/mhjMnnU.png",
+	"thumbnail": "https://i.imgur.com/NAiM77y.png",
+	"color": "#a5173b",
+	"category": "anime",
+	"tags": [
+		"embedded-links",
+		"okanime",
+		"streaming"
+	],
+	"iframe": true
+}

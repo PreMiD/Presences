@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Vallee152",
+		"id": "473562596310646805"
+	},
+	"service": "LambdaGeneration",
+	"description": {
+		"en": "The Ultimate Half-Life Community. Sharing Valve news and community content."
+	},
+	"url": "lambdageneration.com",
+	"regExp": "[a-z0-9.]+lambdageneration.com",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/XSPtxro.png",
+	"thumbnail": "https://i.imgur.com/CwVR4rW.png",
+	"color": "#f37b21",
+	"category": "socials",
+	"tags": [
+		"lambda",
+		"generation",
+		"half-life",
+		"halflife",
+		"half",
+		"life",
+		"lambdageneration",
+		"lambda-generation"
+	]
+}

@@ -1,121 +1,88 @@
 const presence = new Presence({
-    clientId: "708314580304003124"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused",
-    browse: "presence.activity.browsing",
-    search: "presence.activity.searching"
-  }),
-  getElement = (query: string): string => {
-    const element = document.querySelector(query);
-    if (element) {
-      return element.textContent.replace(/^\s+|\s+$/g, "");
-    } else return "Loading...";
-  },
-  videoStatus = (video: HTMLVideoElement): string => {
-    return video.paused ? "pause" : "play";
-  };
+		clientId: "708314580304003124",
+	}),
+	newStrings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+		browse: "general.browsing",
+		search: "general.search",
+	}),
+	getElement = (query: string): string => {
+		const element = document.querySelector(query);
+		if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
+		else return "Loading...";
+	};
 
-let oldUrl: string, elapsed: number;
+let oldUrl: string, elapsed: number, strings: Awaited<typeof newStrings>;
 
 presence.on("UpdateData", async () => {
-  const path = location.pathname.replace(/\/?$/, "/"),
-    video: HTMLVideoElement = document.querySelector("video"),
-    search: HTMLInputElement = document.querySelector("input"),
-    showSearchInfo = await presence.getSetting("search"),
-    showBrowseInfo = await presence.getSetting("browse"),
-    showVideoInfo = await presence.getSetting("video"),
-    data: PresenceData = {
-      details: undefined,
-      state: undefined,
-      largeImageKey: "anontpp",
-      smallImageKey: undefined,
-      smallImageText: undefined,
-      startTimestamp: undefined,
-      endTimestamp: undefined
-    };
+	const path = location.pathname.replace(/\/?$/, "/"),
+		video: HTMLVideoElement = document.querySelector("video"),
+		[showSearchInfo, showBrowseInfo, showVideoInfo, cover] = await Promise.all([
+			presence.getSetting<boolean>("search"),
+			presence.getSetting<boolean>("browse"),
+			presence.getSetting<boolean>("video"),
+			presence.getSetting<boolean>("cover"),
+		]),
+		presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/Sr0u6MC.png",
+		};
 
-  if (oldUrl !== path) {
-    oldUrl = path;
-    elapsed = Math.floor(Date.now() / 1000);
-  }
+	if (oldUrl !== path) {
+		oldUrl = path;
+		elapsed = Math.floor(Date.now() / 1000);
+	}
 
-  if (elapsed) {
-    data.startTimestamp = elapsed;
-  }
+	strings ??= await newStrings;
 
-  const parseVideo = async (): Promise<void> => {
-    const status = videoStatus(video);
-    data.smallImageKey = status;
-    data.smallImageText = (await strings)[status];
-    if (status === "play") {
-      const timestamps = presence.getTimestamps(
-        video.currentTime,
-        video.duration
-      );
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
-    }
-  };
+	if (elapsed) presenceData.startTimestamp = elapsed;
+	if (showBrowseInfo && path === "/") presenceData.details = "Browsing";
 
-  /* Browsing Info */
-  if (showBrowseInfo) {
-    if (path === "/") {
-      data.details = "Browsing";
-    }
-  }
+	if (showVideoInfo && video) {
+		const state = Array.from(
+				document.querySelector<HTMLElement>("#infotitle").childNodes
+			).flatMap(node => node.textContent.trim() || []),
+			status = video.paused ? "pause" : "play";
 
-  /* Video Info */
-  if (showVideoInfo) {
-    if (video) {
-      const show = getElement("#episodetitle") !== "Feature Film",
-        state = (document.querySelector(
-          "#infotitle"
-        ) as HTMLElement).innerText.split("\n");
-      if (show) {
-        // Show Logic
-        data.details = "Watching Show";
-        try {
-          data.state = `${state[0]} (${state[1]})`;
-          await parseVideo();
-        } catch {
-          // deepscan
-        }
-      } else {
-        // Movie Logic
-        data.details = "Watching Movie";
-        try {
-          data.state = state[0];
-          await parseVideo();
-        } catch {
-          // deepscan
-        }
-      }
-    }
-  }
+		presenceData.smallImageKey = status;
+		presenceData.smallImageText = strings[status];
+		if (status === "play") {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(video.currentTime, video.duration);
+		}
 
-  /* Search Info */
-  if (showSearchInfo) {
-    if (getElement("#indextitle").split("\n")[0] === "Search Results") {
-      data.details = "Searching for";
-      data.state = search.value;
-    }
-  }
+		if (getElement("#episodetitle") !== "Feature Film") {
+			presenceData.details = state[1];
+			presenceData.state = state[2];
+		} else presenceData.details = state[1];
 
-  if (data.details !== undefined) {
-    if (data.details.match("(Browsing|Viewing)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
-    }
-    if (data.details.includes("Searching")) {
-      data.smallImageKey = "search";
-      data.smallImageText = (await strings).search;
-    }
+		if (cover) {
+			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+				"meta[property='og:image']"
+			).content;
+		}
+	}
 
-    presence.setActivity(data);
-  } else {
-    presence.setTrayTitle();
-    presence.setActivity();
-  }
+	/* Search Info */
+	if (
+		showSearchInfo &&
+		getElement("#indextitle").split("\n")[0] === "Search Results"
+	) {
+		presenceData.details = "Searching for";
+		presenceData.state =
+			document.querySelector<HTMLInputElement>("input").value;
+	}
+
+	if (presenceData.details) {
+		if (presenceData.details.match("(Browsing|Viewing)")) {
+			presenceData.smallImageKey = "reading";
+			presenceData.smallImageText = strings.browse;
+		}
+		if (presenceData.details.includes("Searching")) {
+			presenceData.smallImageKey = "search";
+			presenceData.smallImageText = strings.search;
+		}
+
+		presence.setActivity(presenceData);
+	} else presence.setActivity();
 });

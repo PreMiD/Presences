@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "author": {
+    "id": "193714715631812608",
+    "name": "theusaf"
+  },
+  "service": "Chessly",
+  "description": {
+    "en": "Chess learning made fun and easy."
+  },
+  "url": [
+    "chessly.com",
+    "feedback.chessly.com"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/Wp8c2G4.png",
+  "thumbnail": "https://i.imgur.com/zQXkxNB.png",
+  "color": "#d1007e",
+  "category": "games",
+  "tags": [
+    "chess",
+    "study",
+    "repertoire",
+    "video",
+    "theory",
+    "lesson",
+    "stockfish",
+    "quiz",
+    "course"
+  ]
+}

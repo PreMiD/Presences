@@ -1,0 +1,56 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"contributors": [
+		{
+			"name": "Voknehzyr",
+			"id": "213305189657083905"
+		}
+	],
+	"service": "e621",
+	"description": {
+		"en": "e621 is a mature image board replacement for the image board Sidechan. A general audience image board, e926 (formerly e961) complements this site. E621 runs off of the Ouroboros platform, a danbooru styled software specifically designed for the site.",
+		"nl": "e621 is een volwassen imageboardvervanger voor het imageboard Sidechan. Een image board voor algemeen publiek, e926 (voorheen e961) vult deze site aan. E621 draait op het Ouroboros platform, een danbooru-achtige software speciaal ontworpen voor de site."
+	},
+	"url": "e621.net",
+	"version": "2.3.1",
+	"logo": "https://i.imgur.com/NrwboRR.png",
+	"thumbnail": "https://i.imgur.com/m0h7xnO.png",
+	"color": "#284A81",
+	"category": "socials",
+	"tags": [
+		"social",
+		"imageboard",
+		"nsfw",
+		"e621"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "covers",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": false,
+			"if": {
+				"privacy": false
+			}
+		}
+	]
+}

@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Holfz",
+		"id": "405397046691102740"
+	},
+	"service": "AIS Play",
+	"description": {
+		"en": "AIS Play is a thailand streaming service offered to a series, television providers, anime, much more.",
+		"ga_IE": "Is seirbhís sruthú Téalainn é AIS Play a chuirtear ar fáil do shraith, soláthraithe teilifíse, anime, i bhfad níos mó.",
+		"nl": "AIS Play is een streamingdienst in Thailand die series, televisieaanbieders, anime en nog veel meer aanbied.",
+		"vi_VN": "AIS Play là dịch vụ phát trực tuyến của Thái Lan cung cấp các sê-ri, truyền hình, anime và nhiều hơn nữa."
+	},
+	"url": "aisplay.ais.co.th",
+	"version": "1.0.14",
+	"logo": "https://i.imgur.com/HQs4uPj.png",
+	"thumbnail": "https://i.imgur.com/ZYS9jRi.png",
+	"color": "#B0B72A",
+	"category": "videos",
+	"tags": [
+		"video",
+		"media"
+	],
+	"iframe": true
+}

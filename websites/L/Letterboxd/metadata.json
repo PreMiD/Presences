@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "324468886357540865",
+		"name": "Skaytacium"
+	},
+	"service": "Letterboxd",
+	"description": {
+		"en": "The social network for film lovers."
+	},
+	"url": "letterboxd.com",
+	"version": "1.0.8",
+	"logo": "https://i.imgur.com/nbvB9cV.png",
+	"thumbnail": "https://i.imgur.com/Mx9K2lU.png",
+	"color": "#202830",
+	"category": "socials",
+	"tags": [
+		"movies",
+		"social",
+		"friends",
+		"films",
+		"network"
+	],
+	"settings": [
+		{
+			"id": "show_buttons",
+			"title": "Show buttons",
+			"value": true
+		}
+	]
+}

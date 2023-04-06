@@ -1,50 +1,45 @@
 const presence = new Presence({
-  clientId: "719119956486258749"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "719119956486258749",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/Sl7M64D.png",
+	};
 
-  if (document.location.pathname == "/") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Home";
-  } else if (document.location.pathname.includes("/show/")) {
-    const postTitle = (document.querySelector(
-      "#postcontent > h3"
-    ) as HTMLElement).innerText;
-    const userName = (document.querySelector(
-      "#user-info > div > h4 > a:nth-child(1)"
-    ) as HTMLElement).innerText;
-    const userHandle = (document.querySelector(
-      "#user-info > div > h4 > a:nth-child(2)"
-    ) as HTMLElement).innerText;
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Reading an post";
-    presenceData.state =
-      postTitle + " by " + userName + " (" + userHandle + ")";
-    presenceData.smallImageKey = "reading";
-  } else if (document.location.pathname.includes("/about")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "About";
-  } else if (document.location.pathname.includes("/privacy")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Privacy";
-  } else if (document.location.pathname.includes("/ad-free")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Ad-free";
-  } else if (document.location.pathname.includes("/post")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Writing an Post";
-  }
+	if (document.location.pathname === "/") {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "Home";
+	} else if (document.location.pathname.includes("/show/")) {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "Reading an post";
+		presenceData.state = `${
+			document.querySelector<HTMLElement>("#postcontent > h3").textContent
+		} by ${
+			document.querySelector<HTMLElement>(
+				"#user-info > div > h4 > a:nth-child(1)"
+			).textContent
+		} (${
+			document.querySelector<HTMLElement>(
+				"#user-info > div > h4 > a:nth-child(2)"
+			).textContent
+		})`;
+		presenceData.smallImageKey = "reading";
+	} else if (document.location.pathname.includes("/about")) {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "About";
+	} else if (document.location.pathname.includes("/privacy")) {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "Privacy";
+	} else if (document.location.pathname.includes("/ad-free")) {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "Ad-free";
+	} else if (document.location.pathname.includes("/post")) {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "Writing an Post";
+	}
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

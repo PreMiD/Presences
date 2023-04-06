@@ -1,29 +1,25 @@
-var presence = new Presence({
-    clientId: "622436057866043434"
-  }),
-  presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+const presence = new Presence({
+		clientId: "622436057866043434",
+	}),
+	presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/oSYAi8F.png",
+	};
 
 presence.on("UpdateData", async () => {
-  var audio: HTMLAudioElement = document.querySelector("#jp_audio_0");
-  if (audio !== null) {
-    var title: HTMLElement = document.querySelector(".brg-player-title");
+	const audio: HTMLAudioElement = document.querySelector("#jp_audio_0");
+	if (audio) {
+		const title: HTMLElement = document.querySelector(".brg-player-title");
 
-    presenceData.details =
-      title !== null ? (title as HTMLElement).innerText : "Title not found...";
-    presenceData.largeImageKey = "logo";
+		presenceData.details = title
+			? (title as HTMLElement).textContent
+			: "Title not found...";
+		presenceData.largeImageKey = "https://i.imgur.com/oSYAi8F.png";
 
-    presence.setTrayTitle(audio.paused ? "" : title.innerText);
-
-    if (title !== null) {
-      presence.setActivity(presenceData, !audio.paused);
-    }
-  } else {
-    var pageData: PresenceData = {
-      details: "Browsing..",
-      largeImageKey: "logo"
-    };
-    presence.setActivity(pageData);
-  }
+		if (title) presence.setActivity(presenceData, !audio.paused);
+	} else {
+		presence.setActivity({
+			details: "Browsing..",
+			largeImageKey: "https://i.imgur.com/oSYAi8F.png",
+		});
+	}
 });

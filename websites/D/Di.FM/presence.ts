@@ -1,26 +1,27 @@
 const presence = new Presence({
-  clientId: "630542731701387276"
+	clientId: "630542731701387276",
 });
 
 presence.on("UpdateData", () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "dilogo"
-  };
-  if (
-    document.getElementById("webplayer-region").getAttribute("data-state") ===
-    "playing"
-  ) {
-    const tracka = document
-      .getElementsByClassName("artist-name")[0]
-      .innerHTML.replace("-", "");
-    const trackt = document.getElementsByClassName("track-name")[0].innerHTML;
-    presenceData.details = tracka;
-    presenceData.state = trackt;
-    presenceData.smallImageKey = "play";
-  } else {
-    presenceData.state = "Browsing...";
-    presenceData.smallImageKey = "pause";
-  }
-
-  presence.setActivity(presenceData);
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/T1Zi3qF.png",
+	};
+	if (
+		document.querySelector("#webplayer-region").getAttribute("data-state") ===
+		"playing"
+	) {
+		presenceData.details = document
+			.querySelectorAll(".artist-name")[0]
+			.textContent.replace("-", "");
+		presenceData.state =
+			document.querySelectorAll(".track-name")[0].textContent;
+		presenceData.smallImageKey = "play";
+		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+			"div > section.track-region.col > div > div.artwork > div > img"
+		).src;
+	} else {
+		presenceData.state = "Browsing...";
+		presenceData.smallImageKey = "pause";
+	}
+	presence.setActivity(presenceData);
 });

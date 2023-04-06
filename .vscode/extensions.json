@@ -1,8 +1,8 @@
 {
-  "recommendations": [
-    "editorconfig.editorconfig",
-    "esbenp.prettier-vscode",
-    "deepscan.vscode-deepscan",
-    "dbaeumer.vscode-eslint"
-  ]
+	"recommendations": [
+		"editorconfig.editorconfig",
+		"esbenp.prettier-vscode",
+		"deepscan.vscode-deepscan",
+		"dbaeumer.vscode-eslint"
+	]
 }

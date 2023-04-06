@@ -1,104 +1,104 @@
 const presence = new Presence({
-  clientId: "630550023133724692"
+	clientId: "630550023133724692",
 });
-var deck;
+let deck;
 
 presence.on("UpdateData", async () => {
-  if (document.location.pathname == "/") {
-    const presenceData: PresenceData = {
-      details: "Browsing Decks..",
-      state: "at Homepage",
-      //largeImageKey: "banner",
-      largeImageKey: "banner",
-      smallImageKey: "icon",
-      smallImageText: "browsing"
-    };
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/RPjfGtz.png",
+		smallImageKey: "icon",
+	};
 
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/decklists") {
-    var pagenumber = document.getElementsByClassName("current")[0]
-      .firstElementChild.textContent;
-    var no1 = document.getElementById("deck_lists").lastElementChild
-      .firstElementChild.children[2].textContent;
-    var auth = document.getElementById("deck_lists").lastElementChild
-      .firstElementChild.children[1].ENTITY_NODE;
-    var deckurl = (document.getElementById("deck_lists").lastElementChild
-      .firstElementChild.children[2].firstElementChild as HTMLLinkElement).href;
-    const presenceData: PresenceData = {
-      details: "Looking at Decklists",
-      state: `Page: ${pagenumber} top: ${no1} by ${auth}`,
-      //largeImageKey: "banner",
-      largeImageKey: "banner",
-      smallImageKey: "icon",
-      smallImageText: deckurl
-    };
+	switch (document.location.pathname) {
+		case "/": {
+			presenceData.details = "Browsing Decks..";
+			presenceData.state = "at Homepage";
+			presenceData.smallImageText = "browsing";
 
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/top_decks") {
-    const top = document
-      .getElementsByClassName("sortable")[0]
-      .children[1].firstElementChild.children[1].textContent.replace(
-        "Most Used Cards",
-        ""
-      );
-    const presenceData: PresenceData = {
-      details: "Looking at Top decks",
-      state: `Current Meta: ${top}`,
-      //largeImageKey: "banner",
-      largeImageKey: "banner",
-      smallImageKey: "icon",
-      smallImageText: "looking"
-    };
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/top_cards") {
-    const top = document.getElementsByClassName("sortable")[0].children[1]
-      .firstElementChild.children[2].textContent;
-    var price = document.getElementsByClassName("sortable")[0].children[1]
-      .firstElementChild.children[4].textContent;
-    const presenceData: PresenceData = {
-      details: "Looking at Top Cards",
-      state: `Top Card: ${top} Price: ${price}`,
-      //largeImageKey: "banner",
-      largeImageKey: "banner",
-      smallImageKey: "icon",
-      smallImageText: "looking"
-    };
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/new_deck") {
-    deck = (document.getElementsByName("deck_name")[0] as HTMLInputElement)
-      .value;
-    const presenceData: PresenceData = {
-      details: "Building Deck",
-      state: `Editing: ${deck}`,
-      //largeImageKey: "banner",
-      largeImageKey: "banner",
-      smallImageKey: "icon",
-      smallImageText: "creating deck"
-    };
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/deck")) {
-    if (/\d/.test("/deck/8205")) {
-      deck = document.getElementsByClassName("large-12 columns panel")[0]
-        .firstElementChild.textContent;
-      var by = document.getElementsByClassName("large-12 columns panel")[0]
-        .children[1].children[1].textContent;
-      var archetype = document.getElementsByClassName(
-        "large-12 columns panel"
-      )[0].children[1].children[10].textContent;
-      var value = document
-        .getElementsByClassName("large-12 columns panel")[1]
-        .children[1].textContent.replace("\n", ":")
-        .split(":")[1];
+			break;
+		}
+		case "/decklists": {
+			presenceData.details = "Looking at Decklists";
+			presenceData.state = `Page: ${
+				document.querySelectorAll(".current")[0].firstElementChild.textContent
+			} top: ${
+				document.querySelector("#deck_lists").lastElementChild.firstElementChild
+					.children[2].textContent
+			} by ${
+				document.querySelector("#deck_lists").lastElementChild.firstElementChild
+					.children[1].ENTITY_NODE
+			}`;
+			presenceData.smallImageText = (
+				document.querySelector("#deck_lists").lastElementChild.firstElementChild
+					.children[2].firstElementChild as HTMLLinkElement
+			).href;
 
-      const presenceData: PresenceData = {
-        details: `Viewing deck: ${deck} (archetype: ${archetype})`,
-        state: `by: ${by}, price: ${value}`,
-        //largeImageKey: "banner",
-        largeImageKey: "banner",
-        smallImageKey: "icon",
-        smallImageText: document.location.href
-      };
-      presence.setActivity(presenceData);
-    }
-  }
+			break;
+		}
+		case "/top_decks": {
+			presenceData.details = "Looking at Top decks";
+			presenceData.state = `Current Meta: ${document
+				.querySelectorAll(".sortable")[0]
+				.children[1].firstElementChild.children[1].textContent.replace(
+					"Most Used Cards",
+					""
+				)}`;
+			presenceData.largeImageKey = "banner";
+			presenceData.smallImageKey = "icon";
+			presenceData.smallImageText = "looking";
+
+			break;
+		}
+		case "/top_cards": {
+			presenceData.details = "Looking at Top Cards";
+			(presenceData.state = `Top Card: ${
+				document.querySelectorAll(".sortable")[0].children[1].firstElementChild
+					.children[2].textContent
+			} Price: ${
+				document.querySelectorAll(".sortable")[0].children[1].firstElementChild
+					.children[4].textContent
+			}`),
+				(presenceData.largeImageKey = "banner");
+			presenceData.smallImageKey = "icon";
+			presenceData.smallImageText = "looking";
+
+			break;
+		}
+		case "/new_deck": {
+			deck = (document.getElementsByName("deck_name")[0] as HTMLInputElement)
+				.value;
+			presenceData.details = "Building Deck";
+			presenceData.state = `Editing: ${deck}`;
+			presenceData.largeImageKey = "banner";
+			presenceData.smallImageKey = "icon";
+			presenceData.smallImageText = "creating deck";
+
+			break;
+		}
+		default:
+			if (
+				document.location.pathname.includes("/deck") &&
+				/\d/.test("/deck/8205")
+			) {
+				deck = document.querySelectorAll(".large-12.columns.panel")[0]
+					.firstElementChild.textContent;
+				presenceData.details = `Viewing deck: ${deck} (archetype: ${
+					document.querySelectorAll(".large-12.columns.panel")[0].children[1]
+						.children[10].textContent
+				})`;
+				presenceData.state = `by: ${
+					document.querySelectorAll(".large-12.columns.panel")[0].children[1]
+						.children[1].textContent
+				}, price: ${
+					document
+						.querySelectorAll(".large-12.columns.panel")[1]
+						.children[1].textContent.replace("\n", ":")
+						.split(":")[1]
+				}`;
+				presenceData.largeImageKey = "banner";
+				presenceData.smallImageKey = "icon";
+				presenceData.smallImageText = document.location.href;
+			}
+	}
+	presence.setActivity(presenceData);
 });

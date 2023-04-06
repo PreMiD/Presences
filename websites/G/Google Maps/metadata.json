@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Tofuine",
+		"id": "734631480541708291"
+	},
+	"service": "Google Maps",
+	"description": {
+		"en": "Google Maps is a web mapping platform and consumer application offered by Google. It offers satellite imagery, aerial photography, street maps, 360° interactive panoramic views of streets, real-time traffic conditions, and route planning for traveling by foot, car, bike, air and public transportation."
+	},
+	"url": "www.google.com",
+	"regExp": "www\\.google\\.com\\/maps",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/RI6Wn79.png",
+	"thumbnail": "https://i.imgur.com/u7oLYw6.png",
+	"color": "#4e85f2",
+	"category": "other",
+	"tags": [
+		"maps",
+		"navigation"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": true
+		}
+	]
+}

@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"service": "Peario",
+	"description": {
+		"nl": "Deel je streams. Peario zorgt er voor dat je Stremio-streams kunt delen met je vrienden.",
+		"en": "Share your streams. Peario allows you to watch Stremio streams with your friends."
+	},
+	"url": "peario.xyz",
+	"version": "1.0.3",
+	"logo": "https://i.imgur.com/LPckbQY.png",
+	"thumbnail": "https://i.imgur.com/tlXaZ4m.png",
+	"color": "#BEFDEB",
+	"category": "videos",
+	"tags": [
+		"streamio",
+		"peario",
+		"videos",
+		"streams"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

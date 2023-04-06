@@ -1,72 +1,66 @@
 const presence = new Presence({
-    clientId: "736620343279484959"
-  }),
-  _preStrings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused",
-    browsing: "presence.activity.browsing"
-  });
+		clientId: "736620343279484959",
+	}),
+	_preStrings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
+	});
 
 // Pre-declare variable
 let radioStation = "",
-  startTimeStamp = new Date().getTime();
+	startTimeStamp = Date.now();
 
 presence.on("UpdateData", async () => {
-  // code
-  const preStrings = await _preStrings,
-    streamPlayer = document.getElementById("stream-player") as HTMLElement,
-    whenPlayerIsOn = streamPlayer.style.display,
-    state: PresenceData = {
-      largeImageKey: "largeimage"
-    };
+	// code
+	const preStrings = await _preStrings,
+		presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/2jmN74S.png",
+		};
 
-  // In Radio
-  if (whenPlayerIsOn === "block") {
-    const _showTitle = document.querySelector(
-        "a.slick-slide:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"
-      ) as HTMLElement,
-      showTitle = _showTitle.textContent,
-      codeChannel = document
-        .querySelector("a.slick-slide:nth-child(1)")
-        .getAttribute("href")
-        .split("/")
-        .slice(-1)[0],
-      ifPlayed = document
-        .querySelector(".icon--play-02")
-        .classList.contains("on");
-    // If play
-    if (ifPlayed) {
-      // This logic make timestamp can't changed.
-      if (codeChannel !== radioStation) {
-        radioStation = codeChannel;
-        startTimeStamp = new Date().getTime();
-      }
+	// In Radio
+	if (
+		(document.querySelector("#stream-player") as HTMLElement).style.display ===
+		"block"
+	) {
+		const [codeChannel] = document
+			.querySelector("a.slick-slide:nth-child(1)")
+			.getAttribute("href")
+			.split("/")
+			.slice(-1);
+		// If play
+		if (document.querySelector(".icon--play-02").classList.contains("on")) {
+			// This logic make timestamp can't changed.
+			if (codeChannel !== radioStation) {
+				radioStation = codeChannel;
+				startTimeStamp = Date.now();
+			}
 
-      state.details = `Listening to ${radioStation} channel.`;
-      state.state = showTitle;
-      state.smallImageKey = "spiriteplay";
-      state.smallImageText = preStrings.play;
-      state.startTimestamp = startTimeStamp;
-    }
-    // If pause
-    else {
-      if (codeChannel !== "___PAUSED___") {
-        radioStation = "___PAUSED___";
-        startTimeStamp = new Date().getTime();
-      }
+			presenceData.details = `Listening to ${radioStation} channel.`;
+			presenceData.state = document.querySelector<HTMLElement>(
+				"a.slick-slide:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"
+			).textContent;
+			presenceData.smallImageKey = "spiriteplay";
+			presenceData.smallImageText = preStrings.play;
+			presenceData.startTimestamp = startTimeStamp;
+		} else {
+			// If pause
+			if (codeChannel !== "___PAUSED___") {
+				radioStation = "___PAUSED___";
+				startTimeStamp = Date.now();
+			}
 
-      state.details = "Paused.";
-      state.state = `${codeChannel} channel.`;
-      state.smallImageKey = "spiritepause";
-      state.smallImageText = preStrings.pause;
-    }
-  }
-  // Idling state
-  else {
-    state.details = "Idling";
-    state.smallImageKey = "spiriteidling";
-    state.smallImageText = preStrings.browsing;
-  }
+			presenceData.details = "Paused.";
+			presenceData.state = `${codeChannel} channel.`;
+			presenceData.smallImageKey = "spiritepause";
+			presenceData.smallImageText = preStrings.pause;
+		}
+	} else {
+		// Idling state
+		presenceData.details = "Idling";
+		presenceData.smallImageKey = "spiriteidling";
+		presenceData.smallImageText = preStrings.browsing;
+	}
 
-  presence.setActivity(state);
+	presence.setActivity(presenceData);
 });

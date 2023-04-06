@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Bashiku",
+		"id": "531417292446105620"
+	},
+	"service": "AnizmTV",
+	"description": {
+		"tr": "AnizmTV türkçe altyazılı animeyi kaliteli ve güncel izleyebileceğiniz sitedir.",
+		"en": "AnizmTV is a website which enables you to watch subtitled anime with high quality broadcasting and up-to-date episodes.",
+		"ga_IE": "Is suíomh Gréasáin é AnizmTV a chuireann ar do chumas féachaint ar anime le fotheidil le craoladh ar ardchaighdeán agus le heachtraí cothrom le dáta.",
+		"nl": "AnizmTV is een website waarmee u ondertitelde anime kunt bekijken met uitzendingen van hoge kwaliteit en actuele afleveringen.",
+		"vi_VN": "AnizmTV là trang web giúp bạn xem anime phụ đề mới nhất với chất lượng cao."
+	},
+	"url": [
+		"anizm.info",
+		"anizm.net",
+		"anizm.tv",
+		"puffytr.com",
+		"anizle.com",
+		"anizm.pro",
+		"turkanime.info",
+		"turkanime.pro",
+		"turkanime.shop",
+		"turkanime.xyz",
+		"turkanime.store",
+		"anizm.store",
+		"tranimeizle.org",
+		"animetr.fun",
+		"tranimeizle.xyz",
+		"turkanime.fun",
+		"turkceanimeizle.org"
+	],
+	"version": "2.0.2",
+	"logo": "https://i.imgur.com/TZZcyOQ.png",
+	"thumbnail": "https://i.imgur.com/o4P1a0J.png",
+	"color": "#fc9003",
+	"category": "videos",
+	"tags": [
+		"anime",
+		"türk",
+		"anizm",
+		"anizmtv"
+	],
+	"iframe": true
+}

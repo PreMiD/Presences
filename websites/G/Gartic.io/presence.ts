@@ -1,42 +1,38 @@
 const presence = new Presence({
-    clientId: "808668919635247104"
-  }),
-  elapsed = Math.floor(Date.now() / 1000);
+		clientId: "808668919635247104",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-      largeImageKey: "logo"
-    },
-    path = document.location.pathname,
-    gameLink = document.location.pathname.split("/")[1].match(/^\d/)
-      ? true
-      : false;
-  if (path == "/") {
-    data.details = "Viewing the Homepage";
-    data.startTimestamp = elapsed;
-  } else if (path == "/rooms") {
-    data.details = "Viewing Rooms";
-    data.startTimestamp = elapsed;
-  } else if (gameLink || path == "/room") {
-    const inSetup = document.querySelector(".infosUsers") ? true : false;
-    if (inSetup) {
-      const players = document.querySelector(
-        ".infosRoom li:last-child span strong"
-      ).textContent;
-      data.details = "Setting up Info to Join";
-      data.state = "Players: " + players;
-      data.startTimestamp = elapsed;
-    } else {
-      const user = document.querySelector(".you .nick").textContent,
-        points = document.querySelector(".you .points").textContent,
-        lobby = document.querySelector("title").innerText;
-      data.details = user + " - " + points.split("pts")[0].trim() + " points";
-      data.state = "Lobby: " + lobby.split("-")[0];
-      data.startTimestamp = elapsed;
-    }
-  } else {
-    data.details = "Somewhere on-site";
-    data.startTimestamp = elapsed;
-  }
-  presence.setActivity(data);
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/JkOc5Vo.png",
+			startTimestamp: browsingTimestamp,
+		},
+		path = document.location.pathname;
+	if (path === "/") presenceData.details = "Viewing the Homepage";
+	else if (path === "/rooms") presenceData.details = "Viewing Rooms";
+	else if (
+		document.location.pathname.split("/")[1].match(/^\d/) ||
+		path === "/room"
+	) {
+		if (document.querySelector(".infosUsers")) {
+			presenceData.details = "Setting up Info to Join";
+			presenceData.state = `Players: ${
+				document.querySelector(".infosRoom li:last-child span strong")
+					.textContent
+			}`;
+		} else {
+			presenceData.details = `${
+				document.querySelector(".you .nick").textContent
+			} - ${document
+				.querySelector(".you .points")
+				.textContent.split("pts")[0]
+				.trim()} points`;
+			presenceData.state = `Lobby: ${
+				document.querySelector("title").textContent.split("-")[0]
+			}`;
+		}
+	} else presenceData.details = "Somewhere on-site";
+
+	presence.setActivity(presenceData);
 });

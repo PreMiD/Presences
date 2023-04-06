@@ -1,459 +1,481 @@
-var presence = new Presence({
-    clientId: "631803867708915732"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+const presence = new Presence({
+		clientId: "631803867708915732",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+function getVideoData(element: HTMLElement): [string?, HTMLVideoElement?] {
+	if (!element) return [];
+	let result = element;
+
+	for (let num = 0; num < 13; num++) result = result.parentElement;
+
+	return [
+		(
+			result.querySelector("div.n1l5q3vz > span") ??
+			result.querySelector("div.i1fnvgqd.j83agx80 div.w0hvl6rk.qjjbsfad > span")
+		).textContent,
+		result.querySelector("video"),
+	];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
-var typing: any;
-var replace: any;
-var search: any;
-var video: any,
-  videoDuration: any,
-  videoCurrentTime: any,
-  videoPaused: any,
-  timestamps: any;
-
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "facebook"
-  };
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/nS9sZn6.png",
+			startTimestamp: browsingTimestamp,
+		},
+		privacyMode = await presence.getSetting<boolean>("privacyMode"),
+		showTimestamp = await presence.getSetting<boolean>("timestamp"),
+		showSeachQuery = await presence.getSetting<boolean>("searchQuery"),
+		messagerUsername = await presence.getSetting<boolean>("messagerUsername");
 
-  if (document.location.pathname.includes("/messages/")) {
-    if (document.location.pathname.includes("/videocall/")) {
-      presenceData.largeImageKey = "messenger";
-      presenceData.startTimestamp = browsingStamp;
-      user = document.querySelector(
-        "#u_0_0 > div.r30xiam5.m0q0jmkx.alrytcbg.hp5uecnq.g2121wdl > div > div:nth-child(5) > div > div > div > div > div.prklkq8o.t7elcel3.sd0tyowg.ocjcko58.p3f4w9ai.f5zavhip.foed1vyy > div > div > div.ocjcko58.foed1vyy > div > p"
-      );
-      if (user == null || user.innerText == null) {
-        //presenceData.details = "In a video call or";
-        user = "user not found.";
-        presenceData.details = "In videocall with someone";
-        presenceData.smallImageKey = "videocall";
-      } else {
-        //presenceData.details = "In call with:";
-        user = user.innerText;
-        presenceData.details = "In call with someone";
-        presenceData.smallImageKey = "call";
-      }
-      //presenceData.state = user;
-      presenceData.state = "(Hidden until presence settings.)"; // Add setting for this when presence settings are a thing!!
-    } else if (document.location.pathname.includes("/t/")) {
-      presenceData.largeImageKey = "messenger";
-      presenceData.startTimestamp = browsingStamp;
-      user = document.querySelector("._3oh-");
-      typing = document.querySelector(
-        "body > div > div > div > div:nth-child(2) > span > div._20bp > div._4_j4 > div._4rv3._7og6 > div > div._7kpk > div > div > div:nth-child(1) > div > div > div > div > div > div > span > span"
-      );
-      if (typing == null) {
-        presenceData.details = "Reading messages from:";
-        presenceData.smallImageKey = "reading";
-      } else {
-        presenceData.details = "Writing to:";
-        presenceData.smallImageKey = "writing";
-      }
-      //presenceData.state = user.innerText;
-      presenceData.state = "(Hidden until presence settings.)"; // Add setting for this when presence settings are a thing!!
-    } else if (document.location.pathname.includes("/new")) {
-      presenceData.largeImageKey = "messenger";
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Composing a new message";
-      presenceData.smallImageKey = "writing";
-    } else if (document.location.pathname.includes("/about")) {
-      presenceData.largeImageKey = "messenger";
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing the about page";
-    }
-  } else if (
-    document.querySelector("#seo_h1_tag > a > span") !== null ||
-    document.querySelector("#fb-timeline-cover-name > a") !== null
-  ) {
-    //Profile page finder (It is their username)
-    user = document.querySelector("#seo_h1_tag > a > span");
-    if (user == null) {
-      user = document.querySelector("#fb-timeline-cover-name > a");
-    }
-    video = document.querySelector(
-      "body > div > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div > div > div > div > div > video"
-    );
-    if (document.querySelector("#fbPhotoSnowliftAuthorName > a") !== null) {
-      title = document.querySelector("#fbPhotoSnowliftAuthorName > a");
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing photo by user:";
-      presenceData.state = user.innerText;
-    } else if (video !== null) {
-      title = document.querySelector(
-        "body > div:nth-child(2) > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div > span > span"
-      );
-      if (title == null) {
-        title = document.querySelector(
-          "body > div:nth-child(2) > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div:nth-child(3) > div:nth-child(2) > div > div > div > div > div > span > span"
-        );
-      }
-      videoCurrentTime = video.currentTime;
-      videoDuration = video.duration;
-      videoPaused = video.paused;
-      timestamps = getTimestamps(
-        Math.floor(videoCurrentTime),
-        Math.floor(videoDuration)
-      );
-      presenceData.smallImageKey = videoPaused ? "pause" : "play";
-      presenceData.smallImageText = videoPaused
-        ? (await strings).pause
-        : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
-      presenceData.state = user.innerText;
-      if (videoPaused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
-    } else if (document.location.pathname.includes("/videos")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing video's by user:";
-      presenceData.state = user.innerText;
-    } else if (document.location.pathname.includes("/friends")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing friends of user:";
-      presenceData.state = user.innerText;
-    } else if (document.location.pathname.includes("/shop")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing shop by user:";
-      presenceData.state = user.innerText;
-    } else if (document.location.pathname.includes("/posts")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing posts by user:";
-      presenceData.state = user.innerText;
-    } else if (document.location.pathname.includes("/photos")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing photos by user:";
-      presenceData.state = user.innerText;
-    } else if (document.location.pathname.includes("/community")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing community of:";
-      presenceData.state = user.innerText;
-    } else if (document.location.pathname.includes("/about")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Reading about user:";
-      presenceData.state = user.innerText;
-      presenceData.smallImageKey = "reading";
-    } else {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing user:";
-      presenceData.state = user.innerText;
-    }
-  } else if (document.location.pathname.includes("/videos/")) {
-    video = document.querySelector(
-      "body > div > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div > div > div > video"
-    );
-    user = document.querySelector(
-      "body > div:nth-child(2) > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div:nth-child(3) > div:nth-child(2) > div > div > div:nth-child(2) > span > a"
-    );
-    if (user == null) {
-      user = document.querySelector(
-        "body > div:nth-child(2) > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > span > a"
-      );
-    }
-    if (user == null) {
-      user = document.querySelector(
-        "body > div:nth-child(2) > div:nth-child(6) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(4) > form > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(2) > h5 > span > span > span > a"
-      );
-    }
-    if (user == null) {
-      user = document.querySelector(
-        "body > div:nth-child(2) > div:nth-child(6) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(4) > form > div > div > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(2) > h5 > span > span > span > a"
-      );
-    }
-    if (user == null) {
-      user = document.querySelector(".profileLink");
-    }
-    title = document.querySelector(
-      "body > div:nth-child(2) > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div > span > span"
-    );
-    if (title == null) {
-      title = document.querySelector(
-        "body > div:nth-child(2) > div:nth-child(8) > div:nth-child(2) > div > div > div > div > div:nth-child(3) > div:nth-child(2) > div > div > div > div > div > span > span"
-      );
-    }
-    if (title == null) {
-      title = document.querySelector(
-        "body > div:nth-child(2) > div:nth-child(6) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(4) > form > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div"
-      );
-    }
-    if (title == null) {
-      title = document.querySelector(
-        "body > div:nth-child(2) > div:nth-child(6) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div:nth-child(4) > form > div > div > div > div > div"
-      );
-    }
-    if (title == null) {
-      title = document.querySelector("#u_2_d > div._1rgv > div._1rgw");
-    }
-    if (title == null) {
-      title = document.querySelector("._1rgw");
-    }
-    if (video == null) {
-      delete presenceData.startTimestamp;
-      delete presenceData.endTimestamp;
-      presenceData.smallImageKey = "live";
-      presenceData.smallImageText = "live";
-      if (title.innerText.length > 128) {
-        presenceData.details = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.details = title.innerText;
-      }
-      presenceData.state = user.innerText;
-    } else {
-      videoCurrentTime = video.currentTime;
-      videoDuration = video.duration;
-      videoPaused = video.paused;
-      timestamps = getTimestamps(
-        Math.floor(videoCurrentTime),
-        Math.floor(videoDuration)
-      );
-      presenceData.smallImageKey = videoPaused ? "pause" : "play";
-      presenceData.smallImageText = videoPaused
-        ? (await strings).pause
-        : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
-      if (title.innerText.length > 128) {
-        presenceData.details = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.details = title.innerText;
-      }
-      presenceData.state = user.innerText;
-      if (videoPaused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
-    }
-  } else if (document.location.pathname.includes("/watch/")) {
-    search = document.querySelector(".inputtext");
-    video = document.querySelector(
-      "body > div > div:nth-child(3) > div > div > div:nth-child(2) > div > div > div > div > div > div:nth-child(2) > div > div > div > video"
-    );
-    if (video !== null) {
-      user = document.querySelector(
-        "#content > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div > a"
-      );
-      title = document.querySelector(
-        "#content > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div > div"
-      );
-      videoCurrentTime = video.currentTime;
-      videoDuration = video.duration;
-      videoPaused = video.paused;
-      timestamps = getTimestamps(
-        Math.floor(videoCurrentTime),
-        Math.floor(videoDuration)
-      );
-      presenceData.smallImageKey = videoPaused ? "pause" : "play";
-      presenceData.smallImageText = videoPaused
-        ? (await strings).pause
-        : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
-      if (title.innerText.length > 128) {
-        presenceData.details = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.details = title.innerText;
-      }
-      presenceData.state = user.innerText;
-      if (videoPaused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-        delete presenceData.smallImageKey;
-        delete presenceData.smallImageText;
-        presenceData.details = "Browsing through";
-        presenceData.state = "Facebook Watch";
-        presenceData.startTimestamp = browsingStamp;
-      }
-    } else if (search.value !== null && search.value.length >= 2) {
-      presenceData.smallImageKey = "search";
-      presenceData.details = "Watch - Searching for:";
-      presenceData.state = search.value;
-      presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/latest")) {
-      presenceData.details = "Watch - Viewing:";
-      presenceData.state = "Recently added";
-      presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/saved")) {
-      presenceData.details = "Watch - Viewing:";
-      presenceData.state = "Saved videos";
-      presenceData.startTimestamp = browsingStamp;
-    } else {
-      presenceData.details = "Browsing through";
-      presenceData.state = "Facebook Watch";
-      presenceData.startTimestamp = browsingStamp;
-    }
-  } else if (document.location.pathname.includes("/marketplace/")) {
-    presenceData.startTimestamp = browsingStamp;
-    if (document.location.pathname.includes("/search/")) {
-      search = document.querySelector(
-        "#content > div > div > div:nth-child(2) > div > div > div:nth-child(4) > div > div > span > span > label > input"
-      );
-      presenceData.smallImageKey = "search";
-      if (search.value.length >= 2) {
-        presenceData.details = "Marketplace - Searching for:";
-        presenceData.state = search.value;
-      } else {
-        presenceData.details = "Marketplace - Going to";
-        presenceData.state = "search something up";
-      }
-    } else if (document.location.pathname.includes("/item/")) {
-      presenceData.details = "Marketplace - Viewing item:";
-      title = document.querySelector("#marketplace-modal-dialog-title > span");
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
-    } else if (document.location.pathname.includes("/groups/")) {
-      presenceData.details = "Marketplace - Viewing groups";
-    } else if (document.location.pathname.includes("/stores/")) {
-      presenceData.details = "Marketplace - Viewing stores";
-    } else if (document.location.pathname.includes("/buying/")) {
-      presenceData.details = "Marketplace - Viewing buying";
-    } else if (document.location.pathname.includes("/selling/")) {
-      presenceData.details = "Marketplace - Viewing selling";
-    } else if (document.location.pathname.includes("/saved/")) {
-      presenceData.details = "Marketplace - Viewing saved";
-    } else {
-      presenceData.details = "Marketplace - Browsing...";
-    }
-  } else if (document.location.pathname.includes("/groups/")) {
-    presenceData.startTimestamp = browsingStamp;
-    replace = document.location.pathname.split("/");
-    if (replace[2] !== undefined && replace[2] !== "") {
-      title = document.querySelector("#seo_h1_tag > a");
-      presenceData.details = "Groups - Viewing:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
-    } else {
-      presenceData.details = "Groups - Browsing...";
-    }
-  } else if (document.location.pathname.includes("/groups_browse/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Groups - Browsing category:";
-    title = document.querySelector(
-      "#content > div > div > div:nth-child(3) > div > div:nth-child(3) > span"
-    );
-    if (title.innerText.length > 128) {
-      presenceData.state = title.innerText.substring(0, 125) + "...";
-    } else {
-      presenceData.state = title.innerText;
-    }
-  } else if (document.location.pathname.includes("/pages/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Pages - Browsing...";
-  } else if (document.location.pathname.includes("/oculus/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "oculus - Browsing...";
-  } else if (document.location.pathname.includes("/events/")) {
-    presenceData.startTimestamp = browsingStamp;
-    replace = document.location.pathname.split("/");
-    if (replace[2] !== undefined && replace[2] !== "") {
-      title = document.querySelector("#seo_h1_tag");
-      presenceData.details = "Events - Viewing:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
-    } else if (document.location.pathname.includes("/calendar/")) {
-      presenceData.details = "Events - Viewing calendar";
-    } else if (document.location.pathname.includes("/birthdays/")) {
-      presenceData.details = "Events - Viewing birthdays";
-    } else if (document.location.pathname.includes("/discovery/")) {
-      presenceData.details = "Events - Viewing discovery";
-    } else if (document.location.pathname.includes("/hosting/")) {
-      presenceData.details = "Events - Viewing hosting";
-    } else {
-      presenceData.details = "Events - Browsing...";
-    }
-  } else if (document.location.pathname.includes("/fundraisers/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Fundraisers - Browsing...";
-  } else if (document.location.pathname.includes("/donate/")) {
-    presenceData.startTimestamp = browsingStamp;
-    title = document.querySelector(
-      "#info_section > div.clearfix > div > div > div:nth-child(2) > div > h1"
-    );
-    presenceData.details = "Fundraisers - Viewing:";
-    if (title.innerText.length > 128) {
-      presenceData.state = title.innerText.substring(0, 125) + "...";
-    } else {
-      presenceData.state = title.innerText;
-    }
-  } else if (document.location.pathname.includes("/games/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Games - Browsing...";
-  } else if (document.location.pathname.includes("/gaming/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Gaming - Browsing...";
-  } else if (document.location.pathname.includes("/salegroups/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "SaleGroups - Browsing...";
-  } else if (document.location.pathname.includes("/jobs/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Jobs - Browsing...";
-  } else if (document.location.pathname.includes("/ads/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Ads - Browsing...";
-  } else if (document.location.pathname.includes("/weather/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing todays weather";
-  } else if (document.location.pathname.includes("/saved/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Saved - Browsing...";
-  } else if (document.location.pathname.includes("/offers/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Offers - Browsing...";
-  } else if (document.location.pathname.includes("/recommendations/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Recommendations - Browsing...";
-  } else if (document.location.pathname.includes("/saved/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Saved - Browsing...";
-  } else if (document.location.pathname.includes("/crisisresponse/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "CrisisResponse - Browsing...";
-  } else if (document.location.pathname == "/") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing home page";
-  }
+	let dontShowTmp = false;
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+	if (document.location.pathname.includes("/messages/")) {
+		presenceData.largeImageKey = "messenger";
+
+		if (document.location.pathname.includes("/t/")) {
+			const username = document
+				.querySelector("div.t6p9ggj4.tkr6xdv7")
+				.querySelector("span > span")?.textContent;
+			if (document.querySelector('[data-text="true"]')?.textContent) {
+				if (privacyMode) presenceData.details = "Writing to someone";
+				else {
+					presenceData.details = "Writing to:";
+					presenceData.state = messagerUsername ? username : "(Hidden)";
+				}
+			} else if (privacyMode) presenceData.details = "Reading messages";
+			else {
+				presenceData.details = "Reading messages from:";
+				presenceData.state = messagerUsername ? username : "(Hidden)";
+			}
+		} else if (document.location.pathname.includes("/new"))
+			presenceData.details = "Composing a new message";
+		else if (document.location.pathname.includes("/groupcall/"))
+			presenceData.details = "In a group call";
+	} else if (document.location.pathname.includes("/videos/")) {
+		const video = document.querySelector("video"),
+			isLive = !!document.querySelector(
+				"div.x78zum5.xxk0z11 > div.x6s0dn4 > span.x193iq5w"
+			);
+
+		if (privacyMode)
+			presenceData.details = `Watching a ${isLive ? "live" : "video"}`;
+		else {
+			presenceData.details = `Watching a ${isLive ? "live" : "video"} on:`;
+			presenceData.state = `${
+				document.querySelector("span.x193iq5w > strong > span")?.textContent ??
+				document.querySelector("span.x193iq5w > h2 > span > a > strong > span")
+					?.textContent
+			}'s profile`;
+
+			if (isLive) {
+				presenceData.smallImageKey = "live";
+				presenceData.smallImageText = "Live";
+			} else {
+				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageText = video.paused ? "Paused" : "Playing";
+
+				if (video.paused) dontShowTmp = true;
+				else {
+					presenceData.endTimestamp = presence
+						.getTimestampsfromMedia(video)
+						.pop();
+				}
+			}
+
+			presenceData.buttons = [
+				{
+					label: `Watch ${isLive ? "live" : "video"}`,
+					url: window.location.href,
+				},
+			];
+		}
+	} else if (document.location.pathname.includes("/photo")) {
+		if (privacyMode) presenceData.details = "Viewing a photo";
+		else {
+			presenceData.details = "Viewing a photo on:";
+			presenceData.state = `${
+				document.querySelector("span.nc684nl6 > span")?.textContent ??
+				document.querySelector("span.nc684nl6 > a > strong > span")
+					?.textContent ??
+				document.querySelector('[href*="?__tn__=-UC*F"]')?.textContent
+			}'s profile`;
+
+			presenceData.buttons = [
+				{
+					label: "View photo",
+					url: window.location.href,
+				},
+			];
+		}
+	} else if (document.location.pathname.includes("/watch")) {
+		const search = new URLSearchParams(location.search).get("q"),
+			videoId = new URLSearchParams(location.search).get("v");
+		presenceData.largeImageKey = "https://i.imgur.com/FMIfiPA.png";
+		if (!videoId && !search && document.location.href.includes("?v=")) {
+			const videoFrame = Array.from(
+				document.querySelectorAll('div[class="l9j0dhe7"]')
+			).find(
+				x => !x.parentElement.querySelector("video")?.paused
+			)?.parentElement;
+
+			if (videoFrame) {
+				const user = videoFrame.querySelector(
+						"span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.ltmttdrg.g0qnabr5"
+					)?.textContent,
+					description = videoFrame.querySelector("div.n1l5q3vz")?.textContent,
+					isLive = !!videoFrame.querySelector(
+						"div.j83agx80.rgmg9uty.pmk7jnqg.rnx8an3s.fcg2cn6m"
+					);
+
+				if (privacyMode) {
+					presenceData.details = `Watch - Watching a ${
+						isLive ? "live" : "video"
+					}`;
+				} else if (isLive) {
+					presenceData.details = "Watch - Watching a live:";
+					presenceData.state = description || user;
+
+					presenceData.smallImageKey = "live";
+					presenceData.smallImageText = "Live";
+				} else {
+					presenceData.details = "Watch - Watching a video:";
+					presenceData.state = description || user;
+
+					presenceData.smallImageText = "Playing";
+					presenceData.smallImageKey = "play";
+
+					presenceData.endTimestamp = presence
+						.getTimestampsfromMedia(videoFrame.querySelector("video"))
+						.pop();
+				}
+			} else if (location.pathname.includes("/live")) {
+				presenceData.details = "Watch - Watching a live";
+
+				presenceData.smallImageKey = "live";
+				presenceData.smallImageText = "Live";
+			} else presenceData.details = "Watch - Browsing";
+		} else if (videoId) {
+			const [title, video] = getVideoData(
+				Array.from(document.querySelectorAll("video")).find(x => !x.paused)
+			);
+
+			if (title && !privacyMode) {
+				presenceData.details = "Watch - Watching a video:";
+				presenceData.state = title;
+
+				presenceData.smallImageText = "Playing";
+				presenceData.smallImageKey = "play";
+
+				presenceData.endTimestamp = presence
+					.getTimestampsfromMedia(video)
+					.pop();
+			} else if (title && privacyMode)
+				presenceData.details = "Watch - Watching a video";
+			else presenceData.details = "Watch - Browsing";
+		} else if (search && !privacyMode) {
+			presenceData.details = "Watch - Searching for:";
+			presenceData.state = showSeachQuery ? decodeURI(search) : "(Hidden)";
+		} else if (privacyMode)
+			presenceData.details = "Watch - Viewing a user's page";
+		else {
+			presenceData.details = "Watch";
+			const queryUserName =
+				document.querySelector("h2 > span.d2edcug0.hzawbc8m > span") ??
+				document.querySelector('span > a[role="link"] > span');
+			presenceData.state = `Viewing ${queryUserName.textContent.trim()}'s page`;
+			presenceData.buttons = [
+				{ label: "View User", url: document.location.href },
+			];
+		}
+	} else if (document.location.pathname.includes("/reel")) {
+		presenceData.details = "Watching a reel";
+		presenceData.largeImageKey = "https://i.imgur.com/x2Mx3si.png";
+		if (!privacyMode) {
+			presenceData.state = `From ${document
+				.querySelector<HTMLLinkElement>("h2 > span > span > a.oajrlxb2")
+				.textContent.trim()}`;
+		}
+	} else if (document.location.pathname.includes("/marketplace/")) {
+		presenceData.startTimestamp = browsingTimestamp;
+		if (document.location.pathname.includes("/search/") && !privacyMode) {
+			presenceData.smallImageKey = "search";
+
+			presenceData.details = "Marketplace - Searching for:";
+			presenceData.state = showSeachQuery
+				? decodeURI(new URLSearchParams(location.search).get("q"))
+				: "(Hidden)";
+		} else if (document.location.pathname.includes("/item/")) {
+			if (privacyMode) presenceData.details = "Marketplace - Viewing item";
+			else {
+				presenceData.details = "Marketplace - Viewing item:";
+				presenceData.state = document.querySelector(
+					".dati1w0a.qt6c0cv9.hv4rvrfc.discj3wi span"
+				)?.textContent;
+			}
+		} else if (document.location.pathname.includes("/groups/"))
+			presenceData.details = "Marketplace - Viewing groups";
+		else if (document.location.pathname.includes("/stores/"))
+			presenceData.details = "Marketplace - Viewing stores";
+		else if (document.location.pathname.includes("/buying/"))
+			presenceData.details = "Marketplace - Viewing buying";
+		else if (document.location.pathname.includes("/selling/"))
+			presenceData.details = "Marketplace - Viewing selling";
+		else if (document.location.pathname.includes("/saved/"))
+			presenceData.details = "Marketplace - Viewing saved";
+		else presenceData.details = "Marketplace - Browsing";
+	} else if (document.location.pathname.includes("/groups/")) {
+		switch (location.pathname.split("/")[2]) {
+			case "discover":
+				presenceData.details = "Groups - Discover";
+				break;
+			case "feed":
+				presenceData.details = "Groups - Feed";
+				break;
+			case "notifications":
+				presenceData.details = "Groups - Notifications";
+				break;
+			default: {
+				const groupName = document.querySelector(
+					"div:nth-child(1) > div div:nth-child(1) > h1 > span > div"
+				)?.textContent;
+
+				if (groupName && !privacyMode) {
+					presenceData.details = "Viewing group:";
+					presenceData.state = groupName;
+				} else presenceData.details = "Groups";
+			}
+		}
+	} else if (
+		document.location.href.includes("/profile.php?id=") ||
+		document.querySelector('[aria-label="Link to open profile cover photo"]') ||
+		document.querySelector('[style*="padding-top: 37"]') ||
+		document.querySelector('[style*="padding-top:37"]')
+	) {
+		const selected = document.querySelector(
+				"[style='background-color: var(--accent);']"
+			)?.parentElement?.textContent,
+			profileUsername = document
+				.querySelector("head > title")
+				.innerHTML.replace(/(\(.*\))/gm, "")
+				.replace("| Facebook", "")
+				.trim();
+		if (
+			document
+				.querySelector('[role="banner"]')
+				.children[1]?.getAttribute("aria-hidden") === "false"
+		) {
+			if (privacyMode) presenceData.details = "Viewing Profile";
+			else if (selected)
+				presenceData.details = `Viewing ${profileUsername}'s ${selected}`;
+			else presenceData.details = `Viewing ${profileUsername}'s Profile`;
+		}
+	} else if (document.location.pathname.includes("/friends")) {
+		presenceData.details = "Friends";
+
+		if (document.location.pathname.includes("/friends/requests")) {
+			if (
+				document.querySelector(
+					"div.cjfnh4rs.l9j0dhe7.du4w35lb.j83agx80.cbu4d94t"
+				)
+			)
+				presenceData.state = "Sent requests";
+			else presenceData.state = "Requests";
+		} else if (document.location.pathname.includes("/friends/suggestions"))
+			presenceData.state = "Suggestions";
+		else if (document.location.pathname.includes("/friends/list"))
+			presenceData.state = "All friends";
+		else if (document.location.pathname.includes("/friends/birthdays"))
+			presenceData.state = "Birthdays";
+		else if (document.location.pathname.includes("/friends/friendlist"))
+			presenceData.state = "Custom lists";
+		else if (presenceData.state) delete presenceData.state;
+	} else if (document.location.pathname.includes("/events")) {
+		presenceData.details = "Events";
+		presenceData.state = "Home";
+
+		if (document.location.pathname.includes("/events/calendar/"))
+			presenceData.state = "Calendar";
+		else if (document.location.pathname.includes("/events/going"))
+			presenceData.state = "Confirmed";
+		else if (document.location.pathname.includes("/events/invites"))
+			presenceData.state = "Invites";
+		else if (document.location.pathname.includes("/events/interested"))
+			presenceData.state = "Interested";
+		else if (document.location.pathname.includes("/events/hosting"))
+			presenceData.state = "Self-hosted events";
+		else if (document.location.pathname.includes("/events/past"))
+			presenceData.state = "Past events";
+		else if (document.location.pathname.includes("/events/birthdays"))
+			presenceData.state = "Birthdays";
+		else if (document.location.pathname.includes("/events/notifications"))
+			presenceData.state = "Notifications";
+		else if (document.location.pathname.includes("/events/create"))
+			presenceData.state = "Creating event";
+		else if (document.location.pathname.includes("/events/search")) {
+			if (!privacyMode) {
+				presenceData.details = "Events - Search";
+				presenceData.state = document.querySelectorAll<HTMLInputElement>(
+					"label.rq0escxv.a8c37x1j.a5nuqjux.l9j0dhe7.k4urcfbm > input.oajrlxb2.rq0escxv.f1sip0of.hidtqoto[type='search']"
+				)?.[1]?.value;
+			} else presenceData.state = "Search";
+		} else if (/events\/[0-9]/g.test(document.location.pathname)) {
+			if (!privacyMode) {
+				presenceData.details = "Events - Viewing";
+				presenceData.state = document.querySelector(
+					"span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.pby63qed"
+				)?.textContent;
+
+				presenceData.buttons = [
+					{
+						label: "View Event",
+						url: `https://www.facebook.com/events/${document.location.pathname.replace(
+							/^\D+/g,
+							""
+						)}`,
+					},
+				];
+			} else presenceData.state = "Viewing event";
+		}
+	} else if (document.location.pathname.includes("/pages/"))
+		presenceData.details = "Pages - Browsing";
+	else if (document.location.pathname.includes("/oculus/"))
+		presenceData.details = "oculus - Browsing";
+	else if (document.location.pathname.includes("/events/"))
+		presenceData.details = "Events - Browsing";
+	else if (document.location.pathname.includes("/games/"))
+		presenceData.details = "Games - Browsing";
+	else if (document.location.pathname.includes("/gaming/")) {
+		presenceData.details = "Gaming";
+
+		if (document.location.pathname.includes("/gaming/feed"))
+			presenceData.state = "Feed";
+		else if (document.location.pathname.includes("/gaming/following"))
+			presenceData.state = "Following";
+		else if (document.location.pathname.includes("/gaming/browse/")) {
+			presenceData.details = "Gaming - Browsing";
+
+			if (document.location.pathname.includes("/gaming/browse/games"))
+				presenceData.state = "Games";
+			else if (document.location.pathname.includes("/gaming/browse/live"))
+				presenceData.state = "Livestreams";
+			else if (document.location.pathname.includes("/gaming/browse/streamers"))
+				presenceData.state = "Streamers";
+		} else if (document.location.pathname.includes("/gaming/recent/")) {
+			presenceData.details = "Gaming - Recent";
+
+			if (document.location.pathname.includes("/gaming/recent/activity"))
+				presenceData.state = "Activity";
+			else if (document.location.pathname.includes("/gaming/recent/streamers"))
+				presenceData.state = "Streamer";
+			else if (document.location.pathname.includes("/gaming/recent/history"))
+				presenceData.state = "Videos";
+		} else if (document.location.pathname.includes("/gaming/tournaments")) {
+			presenceData.details = "Gaming - Tournaments";
+
+			if (document.location.pathname.includes("/gaming/tournaments/hosted"))
+				presenceData.state = "Self-hosted";
+			else if (
+				document.location.pathname.includes("/gaming/tournaments/registered")
+			)
+				presenceData.state = "Participated";
+			else if (
+				document.location.pathname.includes("/gaming/tournaments/completed")
+			)
+				presenceData.state = "Completed";
+			else {
+				presenceData.details = "Gaming";
+				presenceData.state = "Tournaments";
+			}
+		} else if (document.location.pathname.includes("/gaming/play")) {
+			presenceData.details = "Gaming - Play";
+
+			if (/gaming\/play\/[0-9]/g.test(document.location.pathname)) {
+				if (!privacyMode) {
+					presenceData.state = document.querySelector(
+						"span > span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7.ltmttdrg.g0qnabr5.ojkyduve"
+					)?.textContent;
+
+					presenceData.buttons = [
+						{
+							label: "Play Game",
+							url: `https://www.facebook.com/gaming/play/${document.location.pathname.replace(
+								/^\D+/g,
+								""
+							)}`,
+						},
+					];
+				} else {
+					presenceData.details = "Gaming";
+					presenceData.state = "Play";
+				}
+			} else if (document.location.pathname.includes("/gaming/play/registered"))
+				presenceData.state = "Participated";
+			else if (document.location.pathname.includes("/gaming/play/completed"))
+				presenceData.state = "Completed";
+			else {
+				presenceData.details = "Gaming";
+				presenceData.state = "Play";
+			}
+		} else if (document.location.pathname.includes("/gaming/instantgames/"))
+			presenceData.state = "Instant games";
+	} else if (document.location.pathname.includes("/salegroups/"))
+		presenceData.details = "SaleGroups - Browsing";
+	else if (document.location.pathname.includes("/jobs/"))
+		presenceData.details = "Jobs - Browsing";
+	else if (document.location.pathname.includes("/ads/"))
+		presenceData.details = "Ads - Browsing";
+	else if (document.location.pathname.includes("/weather/"))
+		presenceData.details = "Viewing todays weather";
+	else if (document.location.pathname.includes("/saved/"))
+		presenceData.details = "Saved - Browsing";
+	else if (document.location.pathname.includes("/offers/"))
+		presenceData.details = "Offers - Browsing";
+	else if (document.location.pathname.includes("/recommendations/"))
+		presenceData.details = "Recommendations - Browsing";
+	else if (document.location.pathname.includes("/bookmarks"))
+		presenceData.details = "Bookmarks - Browsing";
+	else if (document.location.pathname.includes("/news"))
+		presenceData.details = "News - Browsing";
+	else if (document.location.pathname.includes("/search")) {
+		presenceData.smallImageKey = "search";
+		if (privacyMode) presenceData.details = "Searching for something";
+		else {
+			presenceData.details = "Searching for:";
+			presenceData.state = showSeachQuery
+				? new URLSearchParams(location.search).get("q")
+				: "(Hidded)";
+		}
+	} else if (
+		document.querySelector(
+			"h2.gmql0nx0.l94mrbxd.p1ri9a11.lzcic4wl.d2edcug0.hpfvmrgz span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.embtmqzv.hrzyx87i.m6dqt4wy.h7mekvxk.hnhda86s.oo9gr5id.hzawbc8m > span"
+		) ||
+		document.querySelector(
+			"span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.lr9zc1uh.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.fe6kdd0r.mau55g9w.c8b282yb.l1jc4y16.rwim8176.mhxlubs3.p5u9llcw.hnhda86s.oo9gr5id.hzawbc8m > h1"
+		) ||
+		document.querySelectorAll('[data-pagelet="ProfileActions"]')[0]
+	) {
+		const hasCommentInput = document.querySelector(
+			"div.m9osqain.a5q79mjw.gy2v8mqq.jm1wdb64.k4urcfbm.qv66sw1b span.a8c37x1j.ni8dbmo4.stjgntxs.l9j0dhe7"
+		);
+
+		presenceData.details = `Viewing ${hasCommentInput ? "user" : "page"}${
+			privacyMode ? "" : ":"
+		}`;
+		if (!privacyMode)
+			presenceData.state = document.title.slice(0, -11) || "Unknown";
+	} else if (document.location.pathname.includes("/settings"))
+		presenceData.details = "Settings";
+	else if (document.location.pathname.includes("/places"))
+		presenceData.details = "Places";
+	else if (document.location.pathname === "/")
+		presenceData.details = "Viewing home page";
+
+	if (!showTimestamp || dontShowTmp) {
+		delete presenceData.startTimestamp;
+		delete presenceData.endTimestamp;
+	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

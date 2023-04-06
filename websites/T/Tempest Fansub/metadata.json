@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "272665050672660501",
+		"name": "Shiroko"
+	},
+	"service": "Tempest Fansub",
+	"description": {
+		"tr": "Tempest Fansub, türkçe altyazılı anime izleyebileceğiniz ve manga okuyabileceğiniz bir site.",
+		"en": "Tempest Fansub is a site where you can watch anime and read manga with Turkish subtitles."
+	},
+	"url": [
+		"tempestfansub.com",
+		"tempestscans.com"
+	],
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/ppTaAAl.png",
+	"thumbnail": "https://i.imgur.com/z01ju2D.png",
+	"color": "#349eeb",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"manga",
+		"turk",
+		"türk",
+		"türkçe",
+		"tempest",
+		"tempestfansub",
+		"tempestscans"
+	]
+}

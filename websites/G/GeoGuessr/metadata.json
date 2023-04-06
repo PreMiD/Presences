@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Hans5958",
+		"id": "279855717203050496"
+	},
+	"service": "GeoGuessr",
+	"description": {
+		"en": "GeoGuessr is a web-based geographic discovery game designed by Anton Wallén, a Swedish IT consultant, released on 9 May 2013.",
+		"nl": "GeoGuessr is een webgebaseerd geografisch ontdekkingsspel ontworpen door Anton Wallén, een Zweedse IT-consultant, uitgebracht op 9 mei 2013."
+	},
+	"url": [
+		"www.geoguessr.com",
+		"geoguessr.com"
+	],
+	"version": "1.2.19",
+	"logo": "https://i.imgur.com/Zew5cN7.png",
+	"thumbnail": "https://i.imgur.com/3C7yuPw.png",
+	"color": "#CC2F2F",
+	"category": "games",
+	"tags": [
+		"geography",
+		"maps",
+		"guessing"
+	]
+}

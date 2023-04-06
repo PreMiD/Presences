@@ -1,219 +1,168 @@
 const presence = new Presence({
-    clientId: "811572600294735902"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "811572600294735902",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement, title: Element;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
-    page = window.location.pathname,
-    host = document.location.hostname;
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/K0yeNeC.png",
+			startTimestamp: browsingTimestamp,
+		},
+		[privacy, buttons] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("buttons"),
+		]),
+		{ pathname, hostname, href } = document.location,
+		active = document.querySelector("[class='hz-TabNext hz-TabNext--active']");
+	if (privacy) presenceData.details = "Aan het browsen";
+	else if (hostname === "www.marktplaats.nl") {
+		search = document.querySelector('[data-role="searchForm-autocomplete"]');
+		if (search?.value) {
+			const script = JSON.parse(
+				document.querySelector("[type='application/ld+json']").textContent
+			).itemListElement[1].name;
+			if (pathname.includes("/q/") && search?.value === script) {
+				presenceData.details = "Bekijkt resultaten voor:";
+				presenceData.state = script;
+			} else {
+				presenceData.details = "Zoekt naar:";
+				presenceData.state = search.value;
+				presenceData.smallImageKey = "searching";
+			}
+		} else if (pathname === "/") presenceData.details = "Homepagina";
+		else if (pathname.includes("/plaats")) {
+			presenceData.state = "Verkoop een Artikel";
+			presenceData.smallImageKey = "writing";
+		} else if (pathname.includes("/auto-kopen"))
+			presenceData.details = `Bekijkt ${active.textContent}`;
+		else if (pathname.includes("/cp/")) {
+			presenceData.buttons = [
+				{
+					label: "Bekijk Categorie",
+					url: href,
+				},
+			];
+			presenceData.details = document.querySelector(
+				"[class='CategoryBreadcrumbs-categoryTitle']"
+			).textContent;
+			presenceData.state = active.textContent;
+		} else if (pathname.includes("/l/")) {
+			presenceData.details = "Bekijkt categorie";
+			presenceData.state = document
+				.querySelector(
+					"#content > div.mp-Page-element.mp-Page-element--full-width.mp-Page-element--breadCrumbAndSaveSearch > div.mp-Nav-breadcrumb"
+				)
+				.lastChild.textContent.replace(/[0-9]*.[0-9]* resultaten/gm, "")
+				.trim();
+		} else if (pathname.includes("/v/")) {
+			presenceData.buttons = [
+				{
+					label: "Bekijk Product",
+					url: href,
+				},
+			];
+			const product = JSON.parse(
+				document.querySelectorAll("[type='application/ld+json']")[1].textContent
+			).name.toLowerCase();
+			presenceData.details = "Bekijkt product";
+			presenceData.state = `${product
+				.charAt(0)
+				.toUpperCase()}${product.substring(1)}`;
+		} else if (pathname.includes("/u/")) {
+			presenceData.details = "Bekijkt gebruiker";
+			presenceData.state = document.querySelector(
+				'[class="mp-TopSection-TitleWrap-Name"]'
+			).textContent;
+		} else if (pathname.includes("/messages")) {
+			const adCheck = document.querySelector(
+				'[class="AdvertisementSnippetMolecule-title"]'
+			);
+			if (
+				document.querySelector<HTMLInputElement>('[data-sem="sendMessageText"]')
+					?.textContent
+			) {
+				presenceData.smallImageKey = "writing";
+				presenceData.details = "Schrijft bericht naar verkoper over";
+			} else {
+				presenceData.smallImageKey = "read";
+				presenceData.details = "Leest berichten over";
+			}
+			if (adCheck) {
+				presenceData.state = adCheck.textContent;
+				presenceData.buttons = [
+					{
+						label: "Bekijk Product",
+						url:
+							document
+								.querySelector('[data-sem="advertisementDisplayAction"]')
+								?.getAttribute("href") ?? href,
+					},
+				];
+			} else presenceData.state = "Alle chats";
+		} else if (pathname.includes("/my-account/")) {
+			presenceData.details = "Bekijkt";
+			presenceData.state = `Mijn ${
+				document.querySelector('[class="mp-Tab is-selected"]').textContent
+			}`;
+		} else if (pathname.includes("/notifications")) {
+			presenceData.details = "Bekijkt";
+			presenceData.state = "Mijn notificaties";
+		} else if (pathname.includes("/experiences/")) {
+			presenceData.details = "Bekijkt";
+			presenceData.state = "Mijn ervaringen";
+		} else if (
+			pathname.includes("/m/") &&
+			!pathname.includes("/veiligheidscentrum/")
+		) {
+			presenceData.details = "Leest over";
+			presenceData.state = document.querySelector<HTMLMetaElement>(
+				'meta[name="description"]'
+			).content;
+			presenceData.smallImageKey = "read";
+			presenceData.buttons = [
+				{
+					label: "Lees Artikel",
+					url: href,
+				},
+			];
+		} else if (
+			pathname.includes("/m") ||
+			pathname.includes("/veiligheidscentrum/")
+		) {
+			presenceData.buttons = [
+				{
+					label: "Bekijk het Veiligheidscentrum",
+					url: href,
+				},
+			];
+			presenceData.details = "Bekijkt";
+			presenceData.state = "Marktplaats Veiligheidscentrum";
+		}
+	} else if (hostname === "help.marktplaats.nl") {
+		presenceData.buttons = [
+			{
+				label: "Bekijk Helpdesk",
+				url: href,
+			},
+		];
+		search = document.querySelector("input");
+		title = document.querySelector("head > title");
+		if (pathname === "/s/") {
+			if (search.textContent) {
+				presenceData.details = "Zoekt in de Helpdesk naar";
+				presenceData.state = search.value;
+				presenceData.smallImageKey = "searching";
+			} else presenceData.details = "Bekijkt de Helpdesk";
+		}
+		if (pathname.includes("/topic/") || pathname.includes("/article/")) {
+			presenceData.details = "Leest een artikel over";
+			presenceData.state = title.textContent.replace(" | Helpdesk", "");
+			presenceData.smallImageKey = "reading";
+		}
+	}
 
-  presenceData.startTimestamp = browsingStamp;
-  if (host == "www.marktplaats.nl") {
-    if (page == "/") {
-      search = document.querySelector("#category-keywords");
-      if (search.value != "") {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Searching For:";
-        presenceData.state = search.value;
-        presenceData.smallImageKey = "searching";
-      } else {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing:";
-        presenceData.state = "The homepage";
-      }
-    }
-    if (page == "/plaats") {
-      search = document.querySelector("#category-keywords");
-      if (search.value != "") {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Selling:";
-        presenceData.state = search.value;
-        presenceData.smallImageKey = "writing";
-      } else {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing:";
-        presenceData.state = "Sell an item";
-        presenceData.smallImageKey = "writing";
-      }
-    }
-    if (page == "/m/auto/auto-verkopen/" || page == "/m/auto/auto-verkopen") {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing:";
-      presenceData.state = "Selling a car";
-      presenceData.smallImageKey = "writing";
-    }
-    if (page.includes("/c/")) {
-      if (page.includes("/auto-s/")) {
-        presenceData.details = "Viewing Category:";
-        presenceData.state = "Auto's";
-      } else {
-        const numberPat = "[0-9]+",
-          r = new RegExp("/c" + numberPat),
-          r2 = new RegExp("/c" + numberPat + "/");
-        if (r2.test(page)) {
-          title = document.querySelector(
-            "div.bucket-page.active > h2.bucket-title.heading.heading-3"
-          );
-          if (title.textContent.includes("Alle categorieën in")) {
-            title.textContent = title.textContent.replace(
-              "Alle categorieën in",
-              ""
-            );
-          }
-          presenceData.details = "Viewing Category:";
-          presenceData.state = title.textContent;
-        } else if (r.test(page)) {
-          title = document.querySelector("#content > h1");
-          presenceData.details = "Viewing Category:";
-          presenceData.state = title.textContent;
-        }
-      }
-    } else if (page.includes("/a/")) {
-      title = document.querySelector("#title");
-      presenceData.details = "Viewing Item:";
-      presenceData.state = title.textContent;
-    } else if (page.includes("/u/")) {
-      title = document.querySelector(
-        "#content > section > div > div.mp-TopSection > div > div"
-      );
-      presenceData.details = "Viewing User:";
-      presenceData.state = title.textContent;
-    }
-    if (page.includes("/q/")) {
-      search = document.querySelector("#input");
-      if (search.value != "") {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Searching For:";
-        presenceData.state = search.value;
-        presenceData.smallImageKey = "searching";
-      } else {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing Items About:";
-        presenceData.state = window.location.href
-          .replace("https://www.marktplaats.nl/q/", "")
-          .replace("/", "");
-      }
-    }
-    if (page.includes("/l/auto-s/")) {
-      search = document.querySelector("#input");
-      if (search.value != "") {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Searching For:";
-        presenceData.state = search.value;
-        presenceData.smallImageKey = "searching";
-      } else {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing:";
-        presenceData.state = "Auto's";
-      }
-    }
-    if (page.includes("/veilig-en-succesvol/")) {
-      title = document.querySelector(
-        "#hero-top > section > div > div.column > div > div:nth-child(1) > h1"
-      );
-      presenceData.details = "Reading about:";
-      presenceData.state = title.textContent;
-      presenceData.smallImageKey = "reading";
-    }
-    if (page == "/i/help/contact/") {
-      presenceData.details = "Reading about:";
-      presenceData.state = "Contact";
-      presenceData.smallImageKey = "reading";
-    } else if (page.includes("/i/help/")) {
-      if (
-        page ==
-        "/i/help/over-marktplaats/voorwaarden-en-privacybeleid/privacyverklaring/"
-      ) {
-        presenceData.details = "Reading about:";
-        presenceData.state = "Privacyverklaring";
-        presenceData.smallImageKey = "reading";
-      } else if (page.includes("/voorwaarden-en-privacybeleid/")) {
-        title = document.querySelector(
-          "#content > div.tabs-submenu > div.main-content > h3"
-        );
-        if (title == null) {
-          title = document.querySelector(
-            "#page-wrapper > div > div.content > main > h2"
-          );
-          if (title == null) {
-            title = document.querySelector(
-              "#page-wrapper > div > div.content > main > h3"
-            );
-          }
-        }
-        presenceData.details = "Reading about:";
-        presenceData.state = title.textContent;
-        presenceData.smallImageKey = "reading";
-      } else {
-        title = document.querySelector(
-          "#page-wrapper > div > div.content > main > div > h3"
-        );
-        presenceData.details = "Reading about:";
-        presenceData.state = title.textContent;
-        presenceData.smallImageKey = "reading";
-      }
-    }
-    if (page == "/messages") {
-      presenceData.details = "Viewing:";
-      presenceData.state = "My Messages";
-    } else if (page.includes("/messages/")) {
-      title = document.querySelector("div.AdvertisementSnippetMolecule-title");
-      presenceData.details = "Viewing messages about:";
-      presenceData.state = title.textContent;
-    }
-    if (page == "/notifications") {
-      presenceData.details = "Viewing:";
-      presenceData.state = "My Notifications";
-    }
-    if (page.includes("/sell/")) {
-      presenceData.details = "Viewing:";
-      presenceData.state = "My Ads";
-    } else if (page.includes("/favorites/")) {
-      presenceData.details = "Viewing:";
-      presenceData.state = "My Favourites";
-    } else if (page.includes("/saved-searches/")) {
-      presenceData.details = "Viewing:";
-      presenceData.state = "My Saved Searches";
-    } else if (page.includes("/favorite-sellers/")) {
-      presenceData.details = "Viewing:";
-      presenceData.state = "My Favourite Sellers";
-    } else if (page.includes("/recently-viewed/")) {
-      presenceData.details = "Viewing:";
-      presenceData.state = "My Recently Seen Ads";
-    } else if (page.includes("/profile/")) {
-      presenceData.details = "Viewing:";
-      presenceData.state = "My Profile";
-    }
-  } else if (host == "help.marktplaats.nl") {
-    search = document.querySelector("#\\31 37\\:0");
-    title = document.querySelector("head > title");
-    if (page == "/s/") {
-      if (search.value != "") {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Helpdesk searching for:";
-        presenceData.state = search.value;
-        presenceData.smallImageKey = "searching";
-      } else {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Checking out the helpdesk";
-      }
-    }
-    if (page.includes("/topic/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Helpdesk viewing:";
-      presenceData.state = title.textContent.replace(" | Helpdesk", "");
-      presenceData.smallImageKey = "reading";
-    }
-  }
-
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+	if (!buttons) delete presenceData.buttons;
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

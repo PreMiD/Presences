@@ -1,56 +1,68 @@
 const presence = new Presence({
-    clientId: "835652520637890620"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "835652520637890620",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-      largeImageKey: "logo",
-      startTimestamp: browsingStamp
-    },
-    pathname = document.location.pathname;
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/8toUcRE.png",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, search } = document.location;
 
-  if (pathname === "/" && document.location.search.substr(0, 2) == "?q") {
-    const query = document.querySelector(".caption").textContent;
-    data.details = "Searching:";
-    data.state = query;
-    data.smallImageKey = "search";
-  } else if (pathname === "/") {
-    data.details = "Viewing the Homepage";
-  } else if (pathname.startsWith("/app")) {
-    data.details = "Viewing app page";
-  } else if (pathname.startsWith("/ads")) {
-    data.details = "Viewing ads page";
-  } else if (pathname.startsWith("/podcast")) {
-    const title = document.querySelector(".caption").textContent,
-      link = window.location.href;
-    data.details = "Viewing:";
-    data.state = title;
-    data.smallImageKey = "view";
-    data.buttons = [{ label: "View Podcast", url: link }];
-  } else if (pathname.startsWith("/episode")) {
-    const title = document.querySelector(".pure-button").innerHTML,
-      episode = document.querySelector(".title").textContent,
-      playPause = document.querySelector("#play-pause-button"),
-      link = window.location.href,
-      remainingTime = presence.timestampFromFormat(
-        document.querySelector("#remainingTime").textContent.substr(1)
-      ),
-      elapsedTime = presence.timestampFromFormat(
-        document.querySelector("#elapsedTime").textContent
-      ),
-      timestamps = presence.getTimestamps(
-        elapsedTime,
-        remainingTime + elapsedTime
-      );
+	if (pathname === "/" && search.substr(0, 2) === "?q") {
+		presenceData.details = "Searching:";
+		presenceData.state = document.querySelector(".caption").textContent;
+		presenceData.smallImageKey = "search";
+	} else if (pathname === "/") presenceData.details = "Viewing the homepage";
+	else if (pathname.startsWith("/app"))
+		presenceData.details = "Reading the app page";
+	else if (pathname.startsWith("/ads"))
+		presenceData.details = "Reading the ads page";
+	else if (pathname.startsWith("/privacy"))
+		presenceData.details = "Reading the privacy policy & ToS page";
+	else if (pathname.startsWith("/submit"))
+		presenceData.details = "Reading the podcast submission page";
+	else if (pathname.startsWith("/podcasters"))
+		presenceData.details = "Reading the podcasters page";
+	else if (pathname.startsWith("/premium"))
+		presenceData.details = "Reading the premium page";
+	else if (pathname.startsWith("/faq"))
+		presenceData.details = "Reading the FAQ page";
+	else if (pathname.startsWith("/changelog"))
+		presenceData.details = "Reading the changelog page";
+	else if (pathname.startsWith("/contact"))
+		presenceData.details = "Reading the contact page";
+	else if (pathname.startsWith("/podcast")) {
+		presenceData.details = "Viewing:";
+		presenceData.state = document.querySelector(".caption").textContent;
+		presenceData.smallImageKey = "view";
+		presenceData.buttons = [
+			{ label: "View Podcast", url: window.location.href },
+		];
+	} else if (pathname.startsWith("/episode")) {
+		const elapsedTime = presence.timestampFromFormat(
+			document.querySelector("#elapsedTime").textContent
+		);
 
-    data.buttons = [{ label: "Listen Along", url: link }];
-    data.details = title;
-    data.state = episode;
-    if (!playPause.classList.contains("fa-play-circle")) {
-      data.endTimestamp = timestamps[1];
-      data.smallImageKey = "play";
-    } else data.smallImageKey = "pause";
-  }
-  presence.setActivity(data);
+		presenceData.buttons = [
+			{ label: "Listen Along", url: window.location.href },
+		];
+		presenceData.details = document.querySelector(".pure-button").textContent;
+		presenceData.state = document.querySelector(".title").textContent;
+		if (
+			!document
+				.querySelector("#play-pause-button")
+				.classList.contains("fa-play-circle")
+		) {
+			[, presenceData.endTimestamp] = presence.getTimestamps(
+				elapsedTime,
+				presence.timestampFromFormat(
+					document.querySelector("#remainingTime").textContent.substr(1)
+				) + elapsedTime
+			);
+			presenceData.smallImageKey = "play";
+		} else presenceData.smallImageKey = "pause";
+	}
+	presence.setActivity(presenceData);
 });

@@ -1,0 +1,55 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Striker",
+		"id": "215509157837537280"
+	},
+	"contributors": [
+		{
+			"name": "RisingSunLight",
+			"id": "240521747852558347"
+		},
+		{
+			"name": "Aya",
+			"id": "256422547556401152"
+		},
+		{
+			"name": "meme8383",
+			"id": "105364720034275328"
+		}
+	],
+	"service": "MangaDex",
+	"description": {
+		"en": "Read manga online for free at MangaDex with no ads, high quality images and support scanlation groups!",
+		"fr": "Lisez des mangas en ligne gratuitement sur MangaDex sans pubs, des images de haute qualité et supporte les groupes de scantrad !",
+		"nl": "Lees manga gratis online op MangaDex zonder advertenties, afbeeldingen van hoge kwaliteit en ondersteunende scanlatiegroepen!"
+	},
+	"url": [
+		"mangadex.org",
+		"www.mangadex.org",
+		"mangadex.cc"
+	],
+	"version": "3.0.3",
+	"logo": "https://i.imgur.com/zs8myqz.png",
+	"thumbnail": "https://i.imgur.com/xiKNaUJ.png",
+	"color": "#F18F1E",
+	"category": "anime",
+	"tags": [
+		"mangadex",
+		"reading"
+	],
+	"settings": [
+		{
+			"id": "cover",
+			"title": "Show Manga Cover",
+			"icon": "fas fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fad fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

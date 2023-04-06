@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Striker",
+		"id": "215509157837537280"
+	},
+	"service": "Metastream",
+	"description": {
+		"en": "Watch and listen to your favorite content with friends.",
+		"nl": "Bekijk en luister naar uw favoriete inhoud met vrienden."
+	},
+	"url": [
+		"getmetastream.com",
+		"app.getmetastream.com"
+	],
+	"version": "1.2.18",
+	"logo": "https://i.imgur.com/vAozqPN.png",
+	"thumbnail": "https://i.imgur.com/CGjj2MG.png",
+	"color": "#DAAFB9",
+	"category": "videos",
+	"tags": [
+		"streaming",
+		"video"
+	]
+}

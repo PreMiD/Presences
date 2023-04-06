@@ -1,94 +1,75 @@
-var presence = new Presence({
-    clientId: "641969062083035146"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+const presence = new Presence({
+		clientId: "641969062083035146",
+	}),
+	strings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
+let user: string,
+	title: string,
+	currentTime: number,
+	duration: number,
+	paused: boolean,
+	startTimestamp: number,
+	endTimestamp: number;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "sdarot"
-  };
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/iHYxLW2.png",
+	};
 
-  if (
-    document.location.pathname == "/" ||
-    document.location.pathname == "/index"
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "צופה בדף הבית";
-  } else if (document.location.pathname == "/series") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "צופה ברשימת הסדרות";
-  } else if (document.location.pathname.includes("/watch/")) {
-    var currentTime: any,
-      duration: any,
-      paused: any,
-      timestamps: any,
-      video: HTMLVideoElement;
-    video = document.querySelector("#playerDiv > div > video");
-    if (video == null) {
-      video = document.querySelector("#videojs_html5_api");
-    }
-    title = document.querySelector("#watchEpisode > div.poster > div > h1")
-      .textContent;
-    user = document.querySelector("#player > div.head > p").textContent;
-    if (user.includes(" - ")) {
-      user = user.split(" - ")[1];
-    }
+	if (
+		document.location.pathname === "/" ||
+		document.location.pathname === "/index"
+	) {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "צופה בדף הבית";
+	} else if (document.location.pathname === "/series") {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "צופה ברשימת הסדרות";
+	} else if (document.location.pathname.includes("/watch/")) {
+		const video =
+			document.querySelector<HTMLVideoElement>("#playerDiv > div > video") ??
+			document.querySelector("#videojs_html5_api");
 
-    if (video !== null) {
-      currentTime = video.currentTime;
-      duration = video.duration;
-      paused = video.paused;
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
-    }
+		title = document.querySelector(
+			"#watchEpisode > div.poster > div > h1"
+		).textContent;
+		user = document.querySelector("#player > div.head > p").textContent;
+		if (user.includes(" - ")) [, user] = user.split(" - ");
 
-    if (!isNaN(duration)) {
-      presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText = paused
-        ? (await strings).pause
-        : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+		if (video) {
+			({ currentTime, duration, paused } = video);
+			[startTimestamp, endTimestamp] = presence.getTimestamps(
+				Math.floor(currentTime),
+				Math.floor(duration)
+			);
+		}
 
-      presenceData.details = title;
-      presenceData.state = user;
+		if (!isNaN(duration)) {
+			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageText = paused
+				? (await strings).pause
+				: (await strings).play;
+			presenceData.startTimestamp = startTimestamp;
+			presenceData.endTimestamp = endTimestamp;
 
-      if (paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
-    } else if (isNaN(duration)) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = ":צופה ב";
-      presenceData.state = title + " - " + user;
-    }
-  }
+			presenceData.details = title;
+			presenceData.state = user;
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+			if (paused) {
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
+			}
+		} else if (isNaN(duration)) {
+			presenceData.startTimestamp = browsingTimestamp;
+			presenceData.details = ":צופה ב";
+			presenceData.state = `${title} - ${user}`;
+		}
+	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

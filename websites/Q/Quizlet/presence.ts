@@ -1,151 +1,156 @@
 const presence = new Presence({
-  clientId: "719784356725653504"
+	clientId: "719784356725653504",
 });
 
 interface QuizletData {
-  layer?: {
-    path?: string;
-    event: string;
+	layer?: {
+		path?: string;
+		event: string;
 
-    studyableTitle?: string;
-    studyableType?: string;
-  };
-  searchLayer?: {
-    search_term: string;
-  };
+		studyableTitle?: string;
+		studyableType?: string;
+	};
+	searchLayer?: {
+		search_term: string;
+	};
 }
+/* eslint-enable camelcase */
 
-let qzData: QuizletData = null;
-let actionTimestamp: number = null;
+let qzData: QuizletData = null,
+	actionTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-      largeImageKey: "quizlet"
-    },
-    buttons = await presence.getSetting("buttons");
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/5K8iXcX.png",
+		},
+		buttons = await presence.getSetting<boolean>("buttons");
 
-  if (qzData && qzData.layer) {
-    const pathSplits = qzData.layer.path.split("/");
-    switch (pathSplits[0]) {
-      case "StudyFeed":
-        data.details = "Dashboard";
-        actionTimestamp = null;
-        break;
-      case "Settings":
-        data.details = "Settings";
-        actionTimestamp = null;
-        break;
-      case "Profile":
-        data.details = "Viewing profile";
-        data.state = document.querySelector(
-          ".ProfileHeader-username"
-        ).textContent;
-        if (buttons)
-          data.buttons = [
-            {
-              label: "View Profile",
-              url: document.URL
-            }
-          ];
-        actionTimestamp = null;
-        break;
-      case "Topic":
-        data.details = "Browsing sets on";
-        data.state = document.querySelector("h1").textContent;
-        actionTimestamp = null;
-        break;
-      case "Search":
-        data.smallImageKey = "search";
-        data.smallImageText = "Searching";
-        data.details = "Searching";
-        data.state = qzData.searchLayer.search_term;
-        actionTimestamp = null;
-        break;
-      case "Sets":
-        switch (pathSplits[1]) {
-          case "show":
-            if (!actionTimestamp) actionTimestamp = Date.now();
-            data.details = "Viewing a set";
-            data.state = qzData.layer.studyableTitle;
-            if (buttons)
-              data.buttons = [
-                {
-                  label: "View Set",
-                  url: document.URL
-                }
-              ];
-            break;
-          case "new":
-            data.details = "Creating a set";
-            actionTimestamp = null;
-            break;
-        }
-        break;
-      case "Gravity": // Set > Gravity
-        if (!actionTimestamp) actionTimestamp = Date.now();
-        data.smallImageKey = "gravity";
-        data.smallImageText = "Gravity";
-        data.details = "Playing Gravity";
-        data.state = `with "${qzData.layer.studyableTitle}" set`;
-        break;
-      case "Match": // Set > Match
-        if (!actionTimestamp) actionTimestamp = Date.now();
-        data.smallImageKey = "match";
-        data.smallImageText = "Match";
-        data.details = "Playing Match";
-        data.state = `with "${qzData.layer.studyableTitle}" set`;
-        break;
-      case "LiveGame": // Set > Live
-        if (!actionTimestamp) actionTimestamp = Date.now();
-        data.smallImageKey = "live";
-        data.smallImageText = "Quizlet Live";
-        data.details = "Hosting a live game";
-        data.state = `with "${qzData.layer.studyableTitle}" set`;
-        break;
-      case "Assistant": // Set > Learn
-        if (!actionTimestamp) actionTimestamp = Date.now();
-        data.smallImageKey = "learn";
-        data.smallImageText = "Learn";
-        data.details = "Learning set";
-        data.state = qzData.layer.studyableTitle;
-        break;
-      case "Cards": // Set > Flashcards
-        if (!actionTimestamp) actionTimestamp = Date.now();
-        data.smallImageKey = "flashcards";
-        data.smallImageText = "Flashcards";
-        data.details = "Reviewing flashcards";
-        data.state = `on ${qzData.layer.studyableTitle}`;
-        break;
-      case "Test": // Set > Test
-        if (!actionTimestamp) actionTimestamp = Date.now();
-        data.smallImageKey = "test";
-        data.smallImageText = "Test";
-        data.details = "Testing";
-        data.state = `on ${qzData.layer.studyableTitle}`;
-        break;
-      case "Learn": // Set > Write
-        if (!actionTimestamp) actionTimestamp = Date.now();
-        data.smallImageKey = "write";
-        data.smallImageText = "Writing";
-        data.details = "Writing";
-        data.state = `on ${qzData.layer.studyableTitle}`;
-        break;
-      case "Spell": // Set > Spell
-        if (!actionTimestamp) actionTimestamp = Date.now();
-        data.smallImageKey = "spell";
-        data.smallImageText = "Spell";
-        data.details = "Spelling";
-        data.state = `on ${qzData.layer.studyableTitle}`;
-        break;
-    }
-    data.startTimestamp = actionTimestamp;
-  }
+	if (qzData?.layer) {
+		const pathSplits = qzData.layer.path.split("/");
+		switch (pathSplits[0]) {
+			case "StudyFeed":
+				presenceData.details = "Dashboard";
+				actionTimestamp = null;
+				break;
+			case "Settings":
+				presenceData.details = "Settings";
+				actionTimestamp = null;
+				break;
+			case "Profile":
+				presenceData.details = "Viewing profile";
+				presenceData.state = document.querySelector(
+					".ProfileHeader-username"
+				).textContent;
+				if (buttons) {
+					presenceData.buttons = [
+						{
+							label: "View Profile",
+							url: document.URL,
+						},
+					];
+				}
+				actionTimestamp = null;
+				break;
+			case "Topic":
+				presenceData.details = "Browsing sets on";
+				presenceData.state = document.querySelector("h1").textContent;
+				actionTimestamp = null;
+				break;
+			case "Search":
+				presenceData.smallImageKey = "search";
+				presenceData.smallImageText = "Searching";
+				presenceData.details = "Searching";
+				presenceData.state = qzData.searchLayer.search_term;
+				actionTimestamp = null;
+				break;
+			case "Sets":
+				switch (pathSplits[1]) {
+					case "show":
+						actionTimestamp ??= Date.now();
+						presenceData.details = "Viewing a set";
+						presenceData.state = qzData.layer.studyableTitle;
+						if (buttons) {
+							presenceData.buttons = [
+								{
+									label: "View Set",
+									url: document.URL,
+								},
+							];
+						}
+						break;
+					case "new":
+						presenceData.details = "Creating a set";
+						actionTimestamp = null;
+						break;
+				}
+				break;
+			case "Gravity": // Set > Gravity
+				actionTimestamp ??= Date.now();
+				presenceData.smallImageKey = "gravity";
+				presenceData.smallImageText = "Gravity";
+				presenceData.details = "Playing Gravity";
+				presenceData.state = `with "${qzData.layer.studyableTitle}" set`;
+				break;
+			case "Match": // Set > Match
+				actionTimestamp ??= Date.now();
+				presenceData.smallImageKey = "match";
+				presenceData.smallImageText = "Match";
+				presenceData.details = "Playing Match";
+				presenceData.state = `with "${qzData.layer.studyableTitle}" set`;
+				break;
+			case "LiveGame": // Set > Live
+				actionTimestamp ??= Date.now();
+				presenceData.smallImageKey = "live";
+				presenceData.smallImageText = "Quizlet Live";
+				presenceData.details = "Hosting a live game";
+				presenceData.state = `with "${qzData.layer.studyableTitle}" set`;
+				break;
+			case "Assistant": // Set > Learn
+				actionTimestamp ??= Date.now();
+				presenceData.smallImageKey = "learn";
+				presenceData.smallImageText = "Learn";
+				presenceData.details = "Learning set";
+				presenceData.state = qzData.layer.studyableTitle;
+				break;
+			case "Cards": // Set > Flashcards
+				actionTimestamp ??= Date.now();
+				presenceData.smallImageKey = "flashcards";
+				presenceData.smallImageText = "Flashcards";
+				presenceData.details = "Reviewing flashcards";
+				presenceData.state = `on ${qzData.layer.studyableTitle}`;
+				break;
+			case "Test": // Set > Test
+				actionTimestamp ??= Date.now();
+				presenceData.smallImageKey = "test";
+				presenceData.smallImageText = "Test";
+				presenceData.details = "Testing";
+				presenceData.state = `on ${qzData.layer.studyableTitle}`;
+				break;
+			case "Learn": // Set > Write
+				actionTimestamp ??= Date.now();
+				presenceData.smallImageKey = "write";
+				presenceData.smallImageText = "Writing";
+				presenceData.details = "Writing";
+				presenceData.state = `on ${qzData.layer.studyableTitle}`;
+				break;
+			case "Spell": // Set > Spell
+				actionTimestamp ??= Date.now();
+				presenceData.smallImageKey = "spell";
+				presenceData.smallImageText = "Spell";
+				presenceData.details = "Spelling";
+				presenceData.state = `on ${qzData.layer.studyableTitle}`;
+				break;
+		}
+		presenceData.startTimestamp = actionTimestamp;
+	}
 
-  // If data doesn't exist clear else set activity to the presence data
-  if (data.details == null) {
-    presence.setTrayTitle(); // Clear tray
-    presence.setActivity(); // Clear activity
-  } else presence.setActivity(data);
+	// If data doesn't exist clear else set activity to the presence data
+	if (!presenceData.details) {
+		// Clear tray
+		presence.setActivity(); // Clear activity
+	} else presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", (data: QuizletData) => (qzData = data));
+presence.on("iFrameData", (data: QuizletData) => {
+	qzData = data;
+});

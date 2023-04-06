@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Harry.",
+		"id": "428450288668508160"
+	},
+	"service": "Sparked Host",
+	"description": {
+		"en": "Sparking your ideas to life by providing the most powerful, most reliable, and highest quality hosting at the most affordable price since 2017.",
+		"nl": "Uw ideeën tot leven brengen door de krachtigste, betrouwbaarste en meest kwalitatieve hosting aan te bieden tegen de meest betaalbare prijs sinds 2017."
+	},
+	"url": "sparkedhost.com",
+	"regExp": "([a-z0-9-]+[.])*sparkedhost[.](com|us)[/]|([a-z0-9-]+[.])*altar[.](com|us)|([a-z0-9-]+[.])*cloud852[.](com|us)",
+	"version": "1.1.13",
+	"logo": "https://i.imgur.com/LIRCNuJ.png",
+	"thumbnail": "https://i.imgur.com/uVujqhk.png",
+	"color": "#FF9F00",
+	"category": "games",
+	"tags": [
+		"minecraft",
+		"server",
+		"hosting"
+	]
+}

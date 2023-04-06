@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "EGGSY",
+		"id": "162969778699501569"
+	},
+	"service": "yabancıdizi",
+	"description": {
+		"en": "yabancıdizi is one of the biggest Turkish foreign TV show providers on internet.",
+		"tr": "yabancıdizi, son çıkan, güncel ve bir çok yabancı diziyi izleyebileceğiniz bir yabancı dizi sitesidir.",
+		"zh_CN": "yabancıdizi 是土耳其最大国外电视节目秀提供商之一",
+		"ga_IE": "Tá yabancıdizi ar cheann de na soláthraithe seó teilifíse eachtrach Tuircis is mó ar an idirlíon.",
+		"nl": "yabancıdizi is een van de grootste Turkse buitenlandse tv-showproviders op internet."
+	},
+	"url": "yabancidizi.pro",
+	"version": "1.1.20",
+	"logo": "https://i.imgur.com/L51zWz0.png",
+	"thumbnail": "https://i.imgur.com/G8um9Ng.png",
+	"color": "#14161d",
+	"category": "videos",
+	"tags": [
+		"video",
+		"tvshows",
+		"turkish"
+	],
+	"iframe": true
+}

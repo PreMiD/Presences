@@ -1,29 +1,25 @@
-var presence = new Presence({
-  clientId: "631970829348896769"
+const presence = new Presence({
+	clientId: "631970829348896769",
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "krunker"
-  };
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/pvjY5Ox.png",
+		},
+		gameInfo = document.querySelector("#curGameInfo");
 
-  var gameInfo = document.querySelector("#curGameInfo");
+	if (gameInfo) {
+		presenceData.details = gameInfo.textContent.replace("on ", " on ");
+		presenceData.state = `${
+			document.querySelector("#menuClassName").textContent
+		} (${document.querySelector("#menuClassSubtext").textContent})`;
+		presenceData.startTimestamp = Date.now();
 
-  if (gameInfo) {
-    var className = document.querySelector("#menuClassName");
-    var classSubtext = document.querySelector("#menuClassSubtext");
-    var playerInfo =
-      className.textContent + " (" + classSubtext.textContent + ")";
+		presence.setActivity(presenceData);
+	} else {
+		presenceData.details = "In the menus";
+		presenceData.startTimestamp = Date.now();
 
-    data.details = gameInfo.textContent.replace("on ", " on ");
-    data.state = playerInfo;
-    data.startTimestamp = Date.now();
-
-    presence.setActivity(data);
-  } else {
-    data.details = "In the menus";
-    data.startTimestamp = Date.now();
-
-    presence.setActivity(data);
-  }
+		presence.setActivity(presenceData);
+	}
 });

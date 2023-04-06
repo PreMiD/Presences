@@ -1,35 +1,36 @@
-var presence = new Presence({
-  clientId: "620084360120369172"
-});
-
-var elapsed = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+		clientId: "844109673618735144",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "yahoomail-logo"
-  };
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/1uePEgT.png",
+			startTimestamp: browsingTimestamp,
+		},
+		privacy = await presence.getSetting("privacy"),
+		{ pathname } = document.location;
+	if (document.querySelector('[data-test-id="message-group-subject-text"]')) {
+		presenceData.details = "Reading an email";
+		presenceData.smallImageKey = "reading";
+	} else if (
+		document.querySelector<HTMLInputElement>('[role="combobox"]')?.value
+	) {
+		presenceData.details = "Searching";
+		presenceData.smallImageKey = "search";
+	} else if (document.querySelector('[data-test-id="recipient-input"]'))
+		presenceData.details = "Composing an email";
+	else if (privacy) {
+		if (pathname.includes("/folders/") || pathname.includes("/search/")) {
+			if (pathname.includes("messages"))
+				presenceData.details = "Viewing an email";
+			else presenceData.details = "Viewing mail";
+		} else presenceData.details = "Browsing";
+	} else if (document.querySelector('[data-test-is-active="true"]')) {
+		presenceData.details = `Viewing ${document
+			.querySelector('[data-test-is-active="true"]')
+			.textContent.replace(/[0-9]*/gm, "")}`;
+	} else presenceData.details = "Browsing";
 
-  var path = document.location.pathname;
-  if (path.includes("/folders/") || path.includes("/search/")) {
-    if (path.includes("messages")) {
-      data.details = "Viewing an Email";
-      data.startTimestamp = elapsed;
-    } else {
-      data.details = "Viewing Mail";
-      data.startTimestamp = elapsed;
-    }
-  } else if (path.includes("/compose/")) {
-    data.details = "Composing a New Email";
-    data.startTimestamp = elapsed;
-  } else if (path.includes("/settings/")) {
-    data.details = "Viewing Settings";
-    data.startTimestamp = elapsed;
-  } else if (path.includes("/contacts")) {
-    data.details = "Viewing Contacts";
-    data.startTimestamp = elapsed;
-  } else {
-    data.details = "Viewing Mail";
-    data.startTimestamp = elapsed;
-  }
-  presence.setActivity(data);
+	presence.setActivity(presenceData);
 });

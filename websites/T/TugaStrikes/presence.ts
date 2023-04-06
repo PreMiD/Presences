@@ -1,39 +1,44 @@
 const presence = new Presence({
-  clientId: "630098355145539595"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "630098355145539595",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "lg"
-  };
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/nDCQmhr.png",
+		},
+		[page, section] = window.location.href
+			.replace("https://tugastrikes.com/", "")
+			.split("/");
 
-  const domain = "https://tugastrikes.com/";
-  const url = window.location.href.replace(domain, "");
-  const parts = url.split("/");
-  const section = parts[1];
-  const page = parts[0];
-  let state;
-  if (section == "skins") {
-    state = "Skins";
-  } else if (section == "myskins") {
-    state = "My Skins";
-  } else if (section == "buyskins") {
-    state = "Buy Skins";
-  } else if (section == "sellskins") {
-    state = "Sell Skins";
-  } else {
-    state = "Home Page";
-  }
-  if (page == "market") {
-    presenceData.details = "Market";
-  }
+	let state;
+	switch (section) {
+		case "skins": {
+			state = "Skins";
+			break;
+		}
+		case "myskins": {
+			state = "My Skins";
+			break;
+		}
+		case "buyskins": {
+			state = "Buy Skins";
+			break;
+		}
+		case "sellskins": {
+			state = "Sell Skins";
+			break;
+		}
+		default:
+			state = "Home Page";
+	}
 
-  presenceData.state = state;
+	if (page === "market") presenceData.details = "Market";
 
-  presenceData.startTimestamp = browsingStamp;
-  delete presenceData.smallImageKey;
+	presenceData.state = state;
 
-  presence.setActivity(presenceData, true);
+	presenceData.startTimestamp = browsingTimestamp;
+	delete presenceData.smallImageKey;
+
+	presence.setActivity(presenceData, true);
 });

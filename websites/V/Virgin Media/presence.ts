@@ -1,24 +1,23 @@
 const presence = new Presence({
-  clientId: "630505174032449537"
+	clientId: "630505174032449537",
 });
 
 presence.on("UpdateData", () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "virginmedia"
-  };
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/dQ4c4gs.png",
+		},
+		pageTitle = document.title;
+	let currentPage;
 
-  const pageTitle = document.title;
-  let currentPage;
+	presenceData.details = "Viewing a page";
 
-  presenceData.details = "Viewing a page";
+	if (pageTitle.includes("Virgin Media - ")) {
+		currentPage = "Homepage";
+		presenceData.state = currentPage;
+	} else {
+		currentPage = pageTitle.substring(0, pageTitle.length - 15);
+		presenceData.state = currentPage;
+	}
 
-  if (pageTitle.includes("Virgin Media - ")) {
-    currentPage = "Homepage";
-    presenceData.state = currentPage;
-  } else {
-    currentPage = pageTitle.substring(0, pageTitle.length - 15);
-    presenceData.state = currentPage;
-  }
-
-  presence.setActivity(presenceData);
+	presence.setActivity(presenceData);
 });

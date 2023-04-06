@@ -1,0 +1,57 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"service": "LookMovie",
+	"description": {
+		"en": "Watch all new and old movies on line in FHD quality and subtitles for free.",
+		"nl": "Bekijk gratis alle nieuwe en oude films online in HD-kwaliteit en ondertitels."
+	},
+	"url": [
+		"lookmovie2.to",
+		"lookmovies.ru",
+		"playerwatchlm25.xyz"
+	],
+	"regExp": "(playerwatch[0-9]*.xyz)|(playerwatchlm[0-9]*.xyz)|(lookmovie[0-9]?[.][A-z]{2})",
+	"version": "1.5.1",
+	"logo": "https://i.imgur.com/vlSumUl.png",
+	"thumbnail": "https://i.imgur.com/nseTbMZ.png",
+	"color": "#ffcc00",
+	"category": "videos",
+	"tags": [
+		"lookmovie",
+		"streaming"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "covers",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		}
+	]
+}

@@ -1,70 +1,66 @@
 const presence = new Presence({
-  clientId: "783325015860838452"
+	clientId: "783325015860838452",
 });
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "vector"
-  };
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/il2R4FQ.png",
+	};
 
-  // Support - support.something.host
-  if (window.location.hostname == "support.something.host") {
-    data.details = "Helpdesk";
+	// Support - support.something.host
+	if (window.location.hostname === "support.something.host") {
+		presenceData.details = "Helpdesk";
 
-    if (window.location.pathname.includes("/article")) {
-      data.state =
-        "Article: " +
-        document.querySelector("html > body > nav > div > div >div > div > h1")
-          .textContent;
-    } else if (window.location.pathname.includes("/category")) {
-      data.state =
-        "Category: " +
-        document.querySelector(
-          "body > nav > div > div > div > div > span.csh-navigation-title-list-subject > span.csh-category-badge.csh-font-sans-semibold"
-        ).textContent;
-    } else {
-      data.state = "Browsing";
-    }
-  }
+		if (window.location.pathname.includes("/article")) {
+			presenceData.state = `Article: ${
+				document.querySelector("html > body > nav > div > div >div > div > h1")
+					.textContent
+			}`;
+		} else if (window.location.pathname.includes("/category")) {
+			presenceData.state = `Category: ${
+				document.querySelector(
+					"body > nav > div > div > div > div > span.csh-navigation-title-list-subject > span.csh-category-badge.csh-font-sans-semibold"
+				).textContent
+			}`;
+		} else presenceData.state = "Browsing";
+	}
 
-  // Landing Site - something.host
-  if (window.location.hostname == "something.host") {
-    data.details = "Landing Site";
+	// Landing Site - something.host
+	if (window.location.hostname === "something.host") {
+		presenceData.details = "Landing Site";
 
-    if (
-      document.querySelector("head > title").textContent ==
-      "Home || SomethingHost"
-    ) {
-      data.state = "Home";
-    } else {
-      data.state = document
-        .querySelector("head > title")
-        .textContent.replace("SomethingHost", "")
-        .replace("|", "");
-    }
-  }
+		if (
+			document.querySelector("head > title").textContent ===
+			"Home || SomethingHost"
+		)
+			presenceData.state = "Home";
+		else {
+			presenceData.state = document
+				.querySelector("head > title")
+				.textContent.replace("SomethingHost", "")
+				.replace("|", "");
+		}
+	}
 
-  // CDN - content.something.host
-  if (window.location.hostname == "content.something.host") {
-    data.details = "Content";
-  }
+	// CDN - content.something.host
+	if (window.location.hostname === "content.something.host")
+		presenceData.details = "Content";
 
-  // Files - files.something.host
-  if (window.location.hostname == "files.something.host") {
-    data.details = "File Manager";
-  }
+	// Files - files.something.host
+	if (window.location.hostname === "files.something.host")
+		presenceData.details = "File Manager";
 
-  // Control Panel - cp.something.host
-  if (window.location.hostname == "cp.something.host") {
-    data.details = "Control Panel";
+	// Control Panel - cp.something.host
+	if (window.location.hostname === "cp.something.host") {
+		presenceData.details = "Control Panel";
 
-    if (window.location.pathname.startsWith("/profile")) {
-      data.state = "Profile";
-    } else {
-      data.state = document
-        .querySelector("head > title")
-        .textContent.replace("SomethingCP - ", "");
-    }
-  }
-  presence.setActivity(data);
+		if (window.location.pathname.startsWith("/profile"))
+			presenceData.state = "Profile";
+		else {
+			presenceData.state = document
+				.querySelector("head > title")
+				.textContent.replace("SomethingCP - ", "");
+		}
+	}
+	presence.setActivity(presenceData);
 });

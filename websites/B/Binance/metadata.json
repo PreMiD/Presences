@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Hibanka",
+		"id": "467658348158779393"
+	},
+	"service": "Binance",
+	"description": {
+		"en": "The world's largest crypto exchange",
+		"ru": "Крупнейшая в мире криптобиржа",
+		"uk_UA": "Найбільша в світі кріптобіржа",
+		"nl": "De grootste crypto uitwisseling ter wereld",
+		"vi_VN": "Sàn giao dịch tiền ảo lớn nhất thế giới"
+	},
+	"url": [
+		"www.binance.com",
+		"voptions.binance.com",
+		"cloud.binance.com",
+		"pool.binance.com",
+		"academy.binance.com",
+		"launchpad.binance.com",
+		"research.binance.com"
+	],
+	"version": "1.0.17",
+	"logo": "https://i.imgur.com/3uoPh09.png",
+	"thumbnail": "https://i.imgur.com/m5v9X9P.jpg",
+	"color": "#f0b90b",
+	"category": "other",
+	"tags": [
+		"crypto",
+		"mining",
+		"exchange"
+	]
+}

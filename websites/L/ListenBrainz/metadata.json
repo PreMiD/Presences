@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "theusaf",
+		"id": "193714715631812608"
+	},
+	"service": "ListenBrainz",
+	"description": {
+		"en": "ListenBrainz keeps track of music you listen to and provides you with insights into your listening habits."
+	},
+	"url": "listenbrainz.org",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/LDfzrVM.png",
+	"thumbnail": "https://i.imgur.com/prXFkkP.png",
+	"color": "#353070",
+	"category": "music",
+	"tags": [
+		"community",
+		"habits",
+		"tracking",
+		"data"
+	]
+}

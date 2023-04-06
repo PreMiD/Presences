@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "ACertainCoder",
+		"id": "320507572455079949"
+	},
+	"service": "Radio.net",
+	"description": {
+		"en": "Radio.net brings together more than 30,000 radio stations and podcasts. It has 4 million monthly users worldwide and has been downloaded more than 20 million times.",
+		"de": "Radio.net bietet Zugang zu mehr als 30.000 Sender und Podcasts und hat weltweit 4 Millionen monatliche Nutzer und über 24 Millionen App Downloads.",
+		"zh_CN": "Radio.net汇集了30,000多个广播电台和播客。 它在全球每月有400万用户，已被下载超过2000万次。",
+		"nl": "Radio.net brengt meer dan 30.000 radiostations en podcasts samen. Het heeft wereldwijd 4 miljoen maandelijkse gebruikers en is meer dan 20 miljoen keer gedownload."
+	},
+	"url": "www.radio.net",
+	"regExp": "((www|uk|au|nz|ie|za|ca|co|mx|br|nl|za)[.]radio[.]net|www[.]radio[.](de|dk|at|es|fr|it|pl|pt|se)|corporate[.]radio[.](net|de))[/]",
+	"version": "4.0.5",
+	"logo": "https://i.imgur.com/3IBLlpc.png",
+	"thumbnail": "https://i.imgur.com/pYZzRDV.png",
+	"color": "#64e646",
+	"category": "music",
+	"tags": [
+		"radio",
+		"podcast",
+		"music",
+		"stream"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
+	]
+}

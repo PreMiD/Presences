@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Rick",
+		"id": "211982234964590592"
+	},
+	"service": "Anime Soul",
+	"description": {
+		"en": "The Largest Anime Discord Server in the World!",
+		"zh_CN": "世界上最大的动漫Discord服务器！",
+		"ga_IE": "An Freastalaí Discord Anime is Mó ar Domhan!",
+		"nl": "De grootste Anime Discord server ter wereld!",
+		"vi_VN": "Máy chủ Discord về Anime lớn nhất thế giới!"
+	},
+	"url": "animesoul.com",
+	"version": "1.2.1",
+	"logo": "https://i.imgur.com/fd4DHxK.png",
+	"thumbnail": "https://i.imgur.com/jvhu7Ww.jpg",
+	"color": "#7289da",
+	"category": "other",
+	"tags": [
+		"anime",
+		"discord-server"
+	]
+}

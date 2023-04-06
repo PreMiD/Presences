@@ -1,209 +1,328 @@
 const presence: Presence = new Presence({
-    clientId: "833430731816173669",
-    injectOnComplete: true
-  }),
-  largeImageKey = "logo";
+		clientId: "833430731816173669",
+	}),
+	levelImages: Record<string, string> = {
+		10: "https://i.imgur.com/nQvo9Wo.png",
+		20: "https://i.imgur.com/ag1vZVv.png",
+		30: "https://i.imgur.com/FvJN63W.png",
+		40: "https://i.imgur.com/pN5cZxs.png",
+		50: "https://i.imgur.com/ETRB7TM.png",
+		60: "https://i.imgur.com/WGCbykC.png",
+		70: "https://i.imgur.com/7J4mGPp.png",
+		80: "https://i.imgur.com/JOek4w6.png",
+		90: "https://i.imgur.com/4s0tT5G.png",
+		100: "https://i.imgur.com/VQHYuGy.png",
+	},
+	slideshow = presence.createSlideshow();
+
+let browsingTimestamp = Math.floor(Date.now() / 1000),
+	oldPath: string;
 
 function getLevelIcon(level: number) {
-  let iconKey = "level-10";
-
-  if (level >= 10 && level < 100)
-    iconKey = `level-${+(level / 100).toPrecision(1) * 100}`;
-
-  if (level < 10) iconKey = "level-10";
-
-  if (level >= 100) iconKey = "level-100";
-
-  return iconKey;
+	let iconKey = levelImages["10"];
+	if (level >= 10 && level < 100)
+		iconKey = levelImages[`${Math.floor(level / 10) * 10}`];
+	if (level < 10) iconKey = levelImages["10"];
+	if (level >= 100) iconKey = levelImages["100"];
+	return iconKey;
 }
 
-function getLevelInHeader() {
-  const levelElement: HTMLDivElement = document.querySelector(
-    ".navbar-user-level"
-  );
+function applyGrammarPointDetails(presenceData: PresenceData) {
+	const { pathname, href } = window.location;
+	presenceData.details = "Viewing a grammar point";
+	presenceData.state = (
+		document.querySelector(".grammar-point-study[style*='block']") ?? document
+	)
+		.querySelector<HTMLDivElement>(".grammar-point__text--main-kanji-new")
+		.textContent.trim();
+	if (!pathname.startsWith("/learn"))
+		presenceData.buttons = [{ label: "View Grammar Point", url: href }];
+}
 
-  return +levelElement.innerText.slice(6);
+function applyGrammarReviewDetails(presenceData: PresenceData) {
+	const SRSLevel = document
+			.querySelector<HTMLDivElement>(".review__stats.srs-tracker")
+			?.textContent.trim(),
+		percent = document
+			.querySelector<HTMLDivElement>(".review__stats.review-percent")
+			.textContent.trim(),
+		[reviewsRemaining] = document
+			.querySelector<HTMLDivElement>("#reviews")
+			.textContent.match(/\d+/);
+	if (SRSLevel)
+		presenceData.state = `${SRSLevel} | ${percent} correct | ${reviewsRemaining} remaining`;
+	else
+		presenceData.state = `${percent} correct | ${reviewsRemaining} remaining`;
 }
 
 presence.on("UpdateData", () => {
-  const { pathname } = window.location,
-    data: PresenceData = {
-      largeImageKey
-    },
-    level: number = getLevelInHeader();
+	const { pathname, hostname, href } = window.location,
+		pathSplit = pathname.split("/").slice(1),
+		presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/NkfEDwV.png",
+			startTimestamp: browsingTimestamp,
+		};
 
-  let details: string,
-    state: string,
-    smallImageText: string,
-    startTimestamp: number;
+	if (oldPath !== pathname) {
+		browsingTimestamp = Math.floor(Date.now() / 1000);
+		oldPath = pathname;
+	}
 
-  if (/grammar_points\/\d+/i.test(pathname)) {
-    startTimestamp = Date.now();
-    details = "Doing Lessons";
+	if (hostname === "community.bunpro.jp") {
+		switch (pathSplit[0]) {
+			case "":
+			case "categories": {
+				presenceData.details = "Browsing the community";
+				break;
+			}
+			case "c": {
+				presenceData.details = "Browsing community category";
+				presenceData.state =
+					document.querySelector<HTMLSpanElement>(".category-name").textContent;
+				break;
+			}
+			case "latest": {
+				presenceData.details = "Browsing latest topics";
+				break;
+			}
+			case "new": {
+				presenceData.details = "Browsing new topics";
+				break;
+			}
+			case "search": {
+				presenceData.details = "Searching the community";
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					".search-bar > input"
+				).value;
+				break;
+			}
+			case "t": {
+				presenceData.details = "Viewing a community topic";
+				presenceData.state = document.querySelector("h1").textContent;
+				presenceData.buttons = [{ label: "View Topic", url: href }];
+				break;
+			}
+			case "top": {
+				presenceData.details = "Browsing top topics";
+				break;
+			}
+			case "u": {
+				presenceData.details = `Viewing ${document
+					.querySelector("h1")
+					.textContent.trim()}'s community profile`;
+				presenceData.state = document.querySelector<HTMLAnchorElement>(
+					".user-primary-navigation .active"
+				).textContent;
+				presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+					".user-profile-avatar > img"
+				).src;
+				presenceData.smallImageText = `Level ${
+					document
+						.querySelector<HTMLDivElement>(".user-profile-avatar .avatar-flair")
+						.title.match(/\d+/)[0]
+				}`;
+				presenceData.buttons = [{ label: "View Profile", url: href }];
+				break;
+			}
+			case "unread": {
+				presenceData.details = "Browsing unread topics";
+				break;
+			}
+			default: {
+				presenceData.details = "Browsing the community";
+				presenceData.state = document.title.match(
+					/^(.*?)( - Bunpro Community)?$/
+				)[1];
+			}
+		}
+	} else {
+		const level = +document
+			.querySelector<HTMLParagraphElement>(".header-user-level")
+			?.textContent.match(/\d+/)[0];
+		if (level) {
+			presenceData.smallImageKey = getLevelIcon(level);
+			presenceData.smallImageText = `Level ${level}`;
+		}
+		switch (pathSplit[0]) {
+			case "bookmarks": {
+				presenceData.details = "Viewing their bookmarks";
+				break;
+			}
+			case "cram": {
+				presenceData.details = "Cramming";
+				if (
+					document.querySelector<HTMLDivElement>(".cram-start").style
+						.display !== "none"
+				)
+					presenceData.state = "Selecting grammar to cram";
+				else applyGrammarReviewDetails(presenceData);
+				break;
+			}
+			case "dashboard": {
+				presenceData.details = "Viewing dashboard";
+				presenceData.state = `${
+					document
+						.querySelector<HTMLAnchorElement>(".reviews-link")
+						.textContent.match(/\d+/)[0]
+				} review${
+					document
+						.querySelector<HTMLAnchorElement>(".reviews-link")
+						.textContent.match(/\d+/)[0] === "1"
+						? ""
+						: "s"
+				}`;
+				break;
+			}
+			case "grammar_points": {
+				if (pathSplit[1]) applyGrammarPointDetails(presenceData);
+				else presenceData.details = "Browsing grammar points";
+				break;
+			}
+			case "learn": {
+				if (document.querySelector(".grammar-point-study"))
+					applyGrammarPointDetails(presenceData);
+				else {
+					presenceData.details = "Learning new grammar";
+					applyGrammarReviewDetails(presenceData);
+				}
+				break;
+			}
+			case "lessons": {
+				if (pathSplit[1]) {
+					presenceData.details = "Practicing reading";
+					presenceData.state = document.querySelector("h2").textContent.trim();
+					presenceData.buttons = [{ label: "View Lesson", url: href }];
+				} else presenceData.details = "Viewing lessons";
+				break;
+			}
+			case "notifications": {
+				presenceData.details = "Viewing their notifications";
+				break;
+			}
+			case "paths": {
+				if (pathSplit[1]) {
+					if (pathSplit[2]) applyGrammarPointDetails(presenceData);
+					else {
+						presenceData.details = "Viewing a grammar path";
+						presenceData.state = document
+							.querySelector<HTMLHeadingElement>("h1")
+							.childNodes[0].textContent.trim();
+						presenceData.buttons = [{ label: "View Grammar Path", url: href }];
+					}
+				} else presenceData.details = "Browsing grammar paths";
+				break;
+			}
+			case "reading_passages": {
+				presenceData.details = "Browsing practice reading passages";
+				break;
+			}
+			case "study": {
+				presenceData.details = "Doing reviews";
+				applyGrammarReviewDetails(presenceData);
+				break;
+			}
+			case "summary": {
+				presenceData.details = "Viewing review summary";
+				presenceData.state = `${
+					document
+						.querySelector<HTMLDivElement>(".tab-highlight")
+						.textContent.match(/\w+(?=:)/)[0]
+				} - ${document.querySelector("h1").textContent}`;
+				break;
+			}
+			case "user": {
+				if (pathSplit[1] === "feedback")
+					presenceData.details = "Viewing their feedback";
+				else {
+					switch (pathSplit[2] ?? "") {
+						case "": {
+							presenceData.details = "Viewing their profile";
+							const [daysStudied, studyStreak, level, xp] =
+								document.querySelector<HTMLDivElement>(
+									"h2 + div + div"
+								).children;
+							presenceData.state = `${
+								daysStudied.querySelector<HTMLDivElement>("h3 + div")
+									.textContent
+							} days studied | ${
+								studyStreak.querySelector<HTMLDivElement>("h3 + div")
+									.textContent
+							} streak | Level ${
+								level.querySelector<HTMLDivElement>("h3 + div").textContent
+							} (${
+								xp.querySelector<HTMLDivElement>("h3 + div").textContent
+							} XP)`;
+							break;
+						}
+						case "badges": {
+							for (const [i, badgeContainer] of document
+								.querySelectorAll<HTMLDivElement>(".bunpro-badge.user-badge")
+								.entries()) {
+								slideshow.addSlide(
+									i.toString(),
+									{
+										...presenceData,
+										details: "Viewing their badges",
+										state: `${
+											badgeContainer.querySelector("h3").textContent
+										} - ${
+											badgeContainer.querySelector<HTMLDivElement>(
+												".badge-requirement"
+											).textContent
+										}`,
+										largeImageKey:
+											badgeContainer.querySelector<HTMLImageElement>(
+												".badge-icon"
+											).src,
+										smallImageText:
+											badgeContainer.querySelector<HTMLDivElement>(
+												".badge-flavor-text"
+											).textContent,
+									},
+									5000
+								);
+							}
+							break;
+						}
+						case "reset": {
+							presenceData.details = "Resetting their account";
+							break;
+						}
+						case "stats": {
+							presenceData.details = "Viewing their stats";
+							break;
+						}
+					}
+				}
+				break;
+			}
+			case "vocabs": {
+				if (pathSplit[1]) {
+					presenceData.details = "Viewing a vocabulary";
+					presenceData.state = `${document.querySelector("h2").textContent} - ${
+						document.querySelector("h6").textContent
+					}`;
+					presenceData.buttons = [{ label: "View Vocabulary", url: href }];
+				} else {
+					presenceData.details = "Searching for vocabulary";
+					presenceData.state =
+						document.querySelector<HTMLInputElement>("#query").value;
+				}
+				break;
+			}
+			default: {
+				presenceData.details = "Browsing";
+				presenceData.state = document.querySelector("h1")?.textContent.trim();
+			}
+		}
+	}
 
-    const grammarPointElement: HTMLSpanElement = document.querySelector(
-        ".grammar-point__title.grammar-point__title--default"
-      ),
-      grammarPoint = grammarPointElement.innerText,
-      lessonProgressElement: HTMLDivElement = document.querySelector(
-        ".header__lesson-progress"
-      ),
-      [lessonType, lessonProgress] = lessonProgressElement.innerText.split(
-        ": "
-      );
-
-    state = `Learning ${grammarPoint}`;
-
-    smallImageText = `${lessonType}: ${lessonProgress}`;
-  } else {
-    switch (pathname) {
-      case "/study": {
-        startTimestamp = Date.now();
-        details = "Doing reviews";
-
-        const hint: HTMLDivElement = document.querySelector(
-            ".study-question-english-hint"
-          ),
-          hintText = hint.innerText,
-          SRS: HTMLDivElement = document.querySelector(
-            ".review__stats.srs-tracker"
-          ),
-          SRSLevel = SRS.innerText,
-          successRate: HTMLDivElement = document.querySelector(
-            ".review__stats.review-percent"
-          );
-
-        smallImageText = successRate.innerText;
-
-        state = hintText ? `${hintText} (${SRSLevel})` : SRSLevel;
-
-        break;
-      }
-      case "/bookmarks":
-      case "/lessons":
-      case "/grammar_points": {
-        details = "Browsing Grammar";
-
-        break;
-      }
-      case "/learn": {
-        startTimestamp = Date.now();
-
-        const checkQuizzElement: HTMLDivElement = document.querySelector(
-            "#learn-new-grammar-page"
-          ),
-          isOnQuizz = checkQuizzElement.style.display === "block";
-
-        if (isOnQuizz) {
-          details = "Learning New Grammar (Quizz)";
-
-          const grammarPointElement: HTMLDivElement = document.querySelector(
-              ".study-question-english-hint"
-            ),
-            grammarPoint = grammarPointElement.innerText,
-            lessonProgressElement: HTMLDivElement = document.querySelector(
-              ".review__stats#reviews"
-            ),
-            lessonProgress = lessonProgressElement.innerText;
-
-          state = `${grammarPoint}`;
-
-          smallImageText = `${lessonProgress}`;
-        } else {
-          details = "Learning New Grammar";
-
-          let activeGrammarPoint: HTMLDivElement;
-
-          activeGrammarPoint = document.querySelector(
-            `.grammar-point-study[style*="display: block"]`
-          );
-
-          if (!activeGrammarPoint) {
-            activeGrammarPoint = document.querySelector(".grammar-point-study");
-          }
-
-          const grammarPointElement: HTMLSpanElement = activeGrammarPoint.querySelector(
-              ".grammar-point__title.grammar-point__title--default"
-            ),
-            grammarPoint = grammarPointElement.innerText,
-            lessonProgressElement: HTMLDivElement = activeGrammarPoint.querySelector(
-              ".header__lesson-progress"
-            ),
-            lessonProgress = lessonProgressElement.innerText,
-            activeTabElement: HTMLLIElement = activeGrammarPoint.querySelector(
-              ".navbar_option--active-tab"
-            ),
-            activeTab = activeTabElement.innerText;
-
-          state = `${grammarPoint} | ${activeTab}`;
-
-          smallImageText = lessonProgress;
-        }
-
-        break;
-      }
-      case "/cram": {
-        const cramStartElement: HTMLDivElement = document.querySelector(
-          ".cram-start"
-        );
-
-        if (cramStartElement.style.display !== "none") {
-          details = "Browsing Grammar";
-          break;
-        }
-
-        startTimestamp = Date.now();
-        details = "Doing Cram";
-
-        const grammarPointElement: HTMLDivElement = document.querySelector(
-            ".study-question-english-hint"
-          ),
-          grammarPoint = grammarPointElement.innerText,
-          lessonProgressElement: HTMLDivElement = document.querySelector(
-            ".review__stats#reviews"
-          ),
-          lessonType = lessonProgressElement.innerText;
-
-        state = `Reviewing ${grammarPoint}`;
-
-        smallImageText = `${lessonType}`;
-
-        break;
-      }
-      case "/":
-      case "/dashboard":
-      case "/login":
-      default: {
-        const reviews: HTMLDivElement = document.querySelector(
-          "#user-dashboard > div:nth-child(1) > div.col-lg-7.col-md-12.height-100.d-flex.flex-column.flex-grow-2.pl-0.pr-xl-3.pr-0 > div:nth-child(1) > div.col-md-6.col-12.pl-md-1.pr-md-0.pr-0.pl-0 > div > div:nth-child(3)"
-        );
-
-        if (reviews) {
-          const reviewsCount: string = reviews.innerText;
-
-          details = "Viewing Dashboard";
-          state = `${reviewsCount} reviews`;
-        } else {
-          details = "Browsing Pages";
-        }
-
-        break;
-      }
-    }
-  }
-
-  data.details = details;
-
-  if (state) data.state = state;
-
-  if (level) {
-    data.smallImageKey = getLevelIcon(level);
-
-    if (!smallImageText) smallImageText = `Level ${level}`;
-  }
-  if (smallImageText) data.smallImageText = smallImageText;
-
-  if (startTimestamp) data.startTimestamp = Math.round(startTimestamp / 1000);
-
-  presence.setActivity(data);
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+		slideshow.deleteAllSlides();
+	} else if (slideshow.getSlides().length) presence.setActivity(slideshow);
+	else {
+		presence.setActivity();
+		slideshow.deleteAllSlides();
+	}
 });

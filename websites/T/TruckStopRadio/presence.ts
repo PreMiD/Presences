@@ -1,55 +1,184 @@
 const presence = new Presence({
-    clientId: "765735268421468190"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  dj = document.querySelector("#presenter-name") as HTMLElement;
+		clientId: "639107568672702484",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let title: HTMLElement, artist: HTMLElement, player: HTMLAudioElement;
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			browse: "general.browsing",
+			listen: "general.buttonListenAlong",
+			viewPage: "general.viewPage",
+			btnViewPage: "general.buttonViewPage",
+			readArticle: "general.readingArticle",
+			btnReadArticle: "general.buttonReadArticle",
+			viewProfile: "general.viewProfile",
+			btnViewProfile: "general.buttonViewProfile",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>> = null,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  player = document.querySelector(".uil-pause");
-  title = document.querySelector("#song-title");
-  artist = document.querySelector("#song-artist");
+	let presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/n3TBX8g.png",
+		startTimestamp: browsingTimestamp,
+	};
 
-  const presenceData: PresenceData = {
-    largeImageKey: "largelogo"
-  };
+	const [newLang, details, state, browse, timestamp, buttons, cover] =
+			await Promise.all([
+				presence.getSetting<string>("lang").catch(() => "en"),
+				presence.getSetting<string>("details"),
+				presence.getSetting<string>("state"),
+				presence.getSetting<boolean>("browse"),
+				presence.getSetting<boolean>("timestamp"),
+				presence.getSetting<boolean>("buttons"),
+				presence.getSetting<boolean>("cover"),
+			]),
+		playing = document
+			.querySelector(".play-btn")
+			.textContent.toLowerCase()
+			.includes("pause");
 
-  if (player) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details =
-      "Listening to " + title.textContent + " by " + artist.textContent;
-    presenceData.state = "Presented by " + dj.innerText;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/home") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing";
-    presenceData.state = "Recently Played";
-    presenceData.smallImageKey = "reading";
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/timetable") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing";
-    presenceData.state = "Timetable";
-    presenceData.smallImageKey = "reading";
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/team") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing";
-    presenceData.state = "Team Page";
-    presenceData.smallImageKey = "reading";
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/apply") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing";
-    presenceData.state = "Apply to become a presenter";
-    presenceData.smallImageKey = "reading";
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/contact") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing";
-    presenceData.state = "Contact Page";
-    presenceData.smallImageKey = "reading";
-    presence.setActivity(presenceData);
-  }
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+
+	if (!browse || playing) {
+		if (details !== "{0}") presenceData.details = replacePlaceholders(details);
+		if (state !== "{0}") presenceData.state = replacePlaceholders(state);
+
+		presenceData.smallImageKey = playing ? "play" : "pause";
+		presenceData.smallImageText = playing ? strings.play : strings.pause;
+
+		if (cover) {
+			presenceData.largeImageKey = document
+				.querySelector<HTMLDivElement>(".now-playing-img")
+				.style.backgroundImage.match(/url\("(.*)"\)/)[1];
+		}
+
+		presenceData.buttons = [
+			{
+				label: strings.listen,
+				url: "https://truckstopradio.co.uk/",
+			},
+		];
+	} else {
+		for (const [k, v] of Object.entries(
+			((): {
+				[name: string]: PresenceData;
+			} => ({
+				"/": {
+					details: strings.browse,
+				},
+				"/timetable": {
+					details: strings.viewPage,
+					state: "Timetable",
+					buttons: [
+						{
+							label: strings.btnViewPage,
+							url: location.href,
+						},
+					],
+				},
+				"/team": {
+					details: strings.viewPage,
+					state: "Team",
+					buttons: [
+						{
+							label: strings.btnViewPage,
+							url: location.href,
+						},
+					],
+				},
+				"/applications": {
+					details: strings.viewPage,
+					state: "Applications",
+					buttons: [
+						{
+							label: strings.btnViewPage,
+							url: location.href,
+						},
+					],
+				},
+				"/contact": {
+					details: strings.viewPage,
+					state: "Contact",
+					buttons: [
+						{
+							label: strings.btnViewPage,
+							url: location.href,
+						},
+					],
+				},
+				"/news": {
+					details: strings.viewPage,
+					state: "News",
+					buttons: [
+						{
+							label: strings.btnViewPage,
+							url: location.href,
+						},
+					],
+				},
+				"/article": {
+					details: strings.readArticle,
+					state: document.querySelector(".post-header > h1")?.textContent,
+					smallImageKey: "reading",
+					buttons: [
+						{
+							label: strings.btnReadArticle,
+							url: location.href,
+						},
+					],
+				},
+				"/presenter": {
+					details: strings.viewProfile,
+					state: document.querySelector(".presenter-name")?.textContent,
+					buttons: [
+						{
+							label: strings.btnViewProfile,
+							url: location.href,
+						},
+					],
+				},
+			}))()
+		)) {
+			if (
+				location.href
+					.replace(/\/?$/, "/")
+					.replace(`https://${document.location.hostname}`, "")
+					.replace("?", "/")
+					.replace("=", "/")
+					.match(k)
+			) {
+				presenceData.smallImageKey = "reading";
+				presenceData.smallImageText = strings.browse;
+				presenceData = { ...presenceData, ...v };
+			}
+		}
+	}
+
+	if (!timestamp) delete presenceData.startTimestamp;
+	if (!buttons) delete presenceData.buttons;
+
+	presence.setActivity(presenceData);
 });
+
+function replacePlaceholders(string: string): string {
+	for (const [k, v] of Object.entries({
+		"%artist%": ".now-playing-artist",
+		"%title%": ".now-playing-title",
+		"%presenter%": ".live-presenter",
+		"%description%": ".live-description",
+	}))
+		string = string.replace(k, document.querySelector(v).textContent);
+
+	return string;
+}

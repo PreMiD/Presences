@@ -1,0 +1,62 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Bas950",
+		"id": "241278257335500811"
+	},
+	"contributors": [
+		{
+			"name": "Callum",
+			"id": "506899274748133376"
+		},
+		{
+			"name": "Striker",
+			"id": "215509157837537280"
+		},
+		{
+			"name": "Vasilis",
+			"id": "241929388403195914"
+		}
+	],
+	"service": "Google Translate",
+	"description": {
+		"en": "Google's free service instantly translates words, phrases, and web pages between English and over 100 other languages.",
+		"nl": "De gratis service van Google kan woorden, zinnen en webpagina's onmiddellijk vertalen tussen het Engels en meer dan 100 andere talen.",
+		"ga_IE": "Aistríonn seirbhís saor in aisce Google focail, frásaí agus leathanaigh ghréasáin go tapa idir an Béarla agus níos mó ná 100 teanga eile.",
+		"vi_VN": "Dịch vụ miễn phí của Google phiên dịch ngay lập tức các từ ngữ, cụm từ, và trang web từ Tiếng Anh và hơn 100 ngôn ngữ khác."
+	},
+	"url": "translate.google.com",
+	"regExp": "translate.google([.][a-z]+)+[/]",
+	"version": "3.0.9",
+	"logo": "https://i.imgur.com/TblAuvW.png",
+	"thumbnail": "https://i.imgur.com/HSrkJq0.png",
+	"color": "#4c8bf5",
+	"category": "other",
+	"tags": [
+		"translate",
+		"google",
+		"utility"
+	],
+	"settings": [
+		{
+			"id": "tDetail",
+			"title": "Translation Details row 1",
+			"icon": "fas fa-comment-alt-edit",
+			"value": "Translating",
+			"placeholder": "Use %from% or %to%"
+		},
+		{
+			"id": "tState",
+			"title": "Translation State row 2",
+			"icon": "fas fa-comment-alt-edit",
+			"value": "From %from% to %to%",
+			"placeholder": "Use %from%, %to% or {0} to delete the row completely"
+		},
+		{
+			"id": "stamp",
+			"title": "Show time elapsed",
+			"icon": "fas fa-stopwatch",
+			"value": true
+		}
+	]
+}

@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Kabal",
+		"id": "269581360316940299"
+	},
+	"contributors": [
+		{
+			"name": "Atlassian",
+			"id": "191388216509595648"
+		}
+	],
+	"service": "Telegram",
+	"description": {
+		"en": "Telegram is a secure instant messaging service with multi-platform support.",
+		"tr": "Telegram, çoklu platform desteği sunan, güvenli anlık mesajlaşma servisidir.",
+		"ru": "Telegram - это безопасный сервис обмена мгновенными сообщениями с поддержкой нескольких платформ.",
+		"uk_UA": "Telegram - це безпечний та мультиплатформенний сервіс обміну миттєвими повідомленнями.",
+		"nl": "Telegram is een veilige instant messaging-service met ondersteuning voor meerdere platforms.",
+		"vi_VN": "Telegram là dịch vụ nhắn tin bảo mật và xuyên nền tảng."
+	},
+	"url": "web.telegram.org",
+	"version": "2.0.3",
+	"logo": "https://i.imgur.com/3hsUon3.png",
+	"thumbnail": "https://i.imgur.com/aTmmCpt.png",
+	"color": "#33abe0",
+	"category": "socials",
+	"tags": [
+		"telegram",
+		"message",
+		"social"
+	],
+	"settings": [
+		{
+			"id": "name",
+			"title": "Show name",
+			"icon": "fas fa-user",
+			"value": true
+		}
+	]
+}

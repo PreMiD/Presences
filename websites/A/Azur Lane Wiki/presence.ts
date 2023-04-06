@@ -1,26 +1,21 @@
 const presence = new Presence({
-  clientId: "670325644319522816"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "670325644319522816",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "azurlogo"
-  };
-  presenceData.startTimestamp = browsingStamp;
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/GjwdD5u.png",
+		startTimestamp: browsingTimestamp,
+	};
 
-  if (document.location.pathname == "/Azur_Lane_Wiki") {
-    presenceData.details = "Viewing Wiki home page";
-  } else if (document.querySelector(".firstHeading") !== null) {
-    presenceData.details = "Viewing page:";
-    presenceData.state = document.querySelector(".firstHeading").textContent;
-  }
+	if (document.location.pathname === "/Azur_Lane_Wiki")
+		presenceData.details = "Viewing Wiki home page";
+	else if (document.querySelector(".firstHeading")) {
+		presenceData.details = "Viewing page:";
+		presenceData.state = document.querySelector(".firstHeading").textContent;
+	}
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

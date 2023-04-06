@@ -1,23 +1,20 @@
 const presence = new Presence({
-  clientId: "701623299460825108"
+	clientId: "701623299460825108",
 });
 
-let dSong: string, dArtist: string, dListeners: number, dDJ: string;
+let title = "Loading SimulatorHits",
+	artist = "",
+	presenter = "AutoDJ";
 
 function getSongData(): void {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function (): void {
-    if (this.readyState == 4 && this.status == 200) {
-      const data = JSON.parse(this.responseText);
-      dSong = data.song.name;
-      dArtist = data.song.artist;
-      dListeners = data.listeners;
-      dDJ = data.presenter.name;
-    }
-  };
-  xhttp.open("GET", "https://api.simulatorhits.com/v1/now-playing", true);
-  xhttp.withCredentials = true;
-  xhttp.send();
+	fetch("https://api.simulatorhits.dev/now-playing?override").then(response => {
+		if (response.status === 200) {
+			response.json().then(data => {
+				({ title, artist } = data.song);
+				presenter = data.presenter.username;
+			});
+		}
+	});
 }
 
 setInterval(getSongData, 10000);
@@ -26,65 +23,52 @@ getSongData();
 const currentTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/txJayic.jpg",
+		smallImageText: `Current Presenter: ${presenter}`,
+		smallImageKey: "play",
+		startTimestamp: currentTime,
+	};
 
-  presenceData.smallImageText = dListeners + " Listeners";
-  presenceData.startTimestamp = currentTime;
+	if (document.location.hostname === "simulatorhits.com") {
+		switch (document.location.pathname) {
+			case "/schedule": {
+				presenceData.details = "Viewing Schedule";
+				presenceData.smallImageKey = "reading";
 
-  if (document.location.hostname == "simulatorhits.com") {
-    if (document.getElementById("artwork").classList.contains("rotateImg")) {
-      presenceData.smallImageKey = "play";
-    } else {
-      presenceData.smallImageKey = "pause";
-    }
+				break;
+			}
+			case "/news": {
+				presenceData.details = "Reading News";
+				presenceData.smallImageKey = "reading";
 
-    if (document.location.pathname.includes("/team")) {
-      presenceData.details = "Viewing the Staff Team";
-      presenceData.smallImageKey = "search";
-    } else if (document.location.pathname.includes("/profile")) {
-      presenceData.details =
-        document.getElementById("name").innerText + "'s Profile";
-      presenceData.state = document.getElementById("position").innerText;
-      presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/timetable")) {
-      presenceData.details = "Viewing Schedule";
-      presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/terms")) {
-      presenceData.details = "Viewing Terms of Service";
-      presenceData.smallImageKey = "reading";
-    } else {
-      presenceData.details = dSong + " - " + dArtist;
-      presenceData.state = "Presenter: " + dDJ;
-    }
-  } else if (document.location.hostname == "panel.simulatorhits.com") {
-    if (document.location.pathname.includes("/dashboard")) {
-      presenceData.details = "Staff Dashboard";
-      presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/timetable")) {
-      presenceData.details = "Staff Timetable";
-      if (document.getElementById("book-modal").classList.contains("show")) {
-        presenceData.state = "Booking a Slot";
-      } else {
-        presenceData.state = "Viewing";
-      }
-      presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/admin")) {
-      presenceData.details = "Admin Area";
-      presenceData.state = "Doing Secret Things";
-      presenceData.smallImageKey = "reading";
-    } else {
-      presenceData.details = dSong + " - " + dArtist;
-      presenceData.state = "Presenter: " + dDJ;
-      presenceData.smallImageKey = "reading";
-    }
-  }
+				break;
+			}
+			case "/about/meet-the-team": {
+				presenceData.details = "Viewing Staff Team";
+				presenceData.smallImageKey = "reading";
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+				break;
+			}
+			case "/request": {
+				presenceData.details = "Making a Request";
+				presenceData.smallImageKey = "writing";
+
+				break;
+			}
+			case "/streamers": {
+				presenceData.details = "Viewing Streamers";
+				presenceData.smallImageKey = "reading";
+
+				break;
+			}
+			default: {
+				presenceData.details = title;
+				presenceData.state = artist;
+			}
+		}
+	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

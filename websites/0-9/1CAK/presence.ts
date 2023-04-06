@@ -1,106 +1,138 @@
 const presence = new Presence({
-  clientId: "634332519398899724"
-});
-const presenceData: PresenceData = {
-  largeImageKey: "logo"
-};
+		clientId: "634332519398899724",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			privacy: "general.privacy",
+			terms: "general.terms",
+			browse: "general.browsing",
+			search: "general.searchFor",
+			viewHome: "general.viewHome",
+			buttonViewPage: "general.buttonViewPage",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+enum Assets {
+	Logo = "https://i.imgur.com/BQPTByr.png",
+	Search = "https://i.imgur.com/oGQtnIY.png",
+	Reading = "https://i.imgur.com/8vMPNni.png",
+}
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const startTimestamp: number = Date.now();
-  presenceData.startTimestamp = startTimestamp;
-  switch (
-    document.location.pathname.endsWith("/") &&
-    document.location.pathname.length > 1
-      ? document.location.pathname.slice(
-          0,
-          document.location.pathname.length - 1
-        )
-      : document.location.pathname
-  ) {
-    case "/":
-      presenceData.details = "Viewing fun through homepage";
-      break;
-    case "/trends":
-      presenceData.details = "Looking at fun that is trending";
-      break;
-    case "/recent":
-      presenceData.details = "Viewing recently uploaded fun";
-      break;
-    case "/tv":
-      presenceData.details = "Viewing fun videos";
-      break;
-    case "/tvvote":
-      presenceData.details = "Viewing fun videos";
-      break;
-    case "/friends":
-      presenceData.details = "My friend list";
-      break;
-    case "rules":
-      presenceData.details = "Reading the rules";
-      break;
-    case "/notifications":
-      presenceData.details = "Viewing notifications";
-      break;
-    case "/upload":
-      presenceData.details = "Going to upload something fun";
-      break;
-    case "/about":
-      presenceData.details = "About 1CAK/1CUK";
-      break;
-    case "/terms":
-      presenceData.details = "Terms of Service";
-      break;
-    case "/privacy":
-      presenceData.details = "Privacy Policy";
-      break;
-    case "/disclaimer":
-      presenceData.details = "Disclaimer";
-      break;
-    case "/advertise":
-      presenceData.details = "Advertise with us";
-      break;
-    case "/weeklytop":
-      presenceData.details = "Viewing weekly top users";
-      break;
-    case "/alltimetop":
-      presenceData.details = "Viewing all time top users";
-      break;
-    case "/preferences":
-      presenceData.details = "Settings";
-      break;
-    case "/privacy_setting":
-      presenceData.details = "Settings";
-      break;
-  }
+	let presenceData: PresenceData = {
+		largeImageKey: Assets.Logo,
+		startTimestamp: browsingTimestamp,
+	};
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+		{ pathname, href } = document.location;
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
-  if (document.location.pathname.slice(1).startsWith("of")) {
-    presenceData.details = document
-      .querySelector("#content > h3")
-      .textContent.trim();
-  } else if (document.location.pathname.slice(1).startsWith("saved")) {
-    if (!document.querySelector("#content > p")) {
-      presenceData.details = "My saved funs";
-    }
-  } else if (document.location.pathname.slice(1).startsWith("voteof")) {
-    if (!document.querySelector("#content > p")) {
-      presenceData.details = "My funned funs";
-    }
-  } else if (!isNaN(parseInt(document.location.pathname.slice(1)))) {
-    const author = document
-      .querySelector(
-        "#content > div > table > tbody > tr > td > div > .blur a > b"
-      )
-      .textContent.trim();
-    presenceData.details = `Viewing ${author}'s fun`;
-  } else if (document.location.pathname.slice(1).startsWith("legendary")) {
-    presenceData.details = "Viewing the most legendary fun";
-  } else if (document.location.pathname.slice(1).startsWith("search")) {
-    const query = document.location.pathname.slice(
-      10,
-      document.location.pathname.length
-    );
-    presenceData.details = "Searching fun:";
-    presenceData.state = query;
-  }
-  presence.setActivity(presenceData);
+	if (pathname.includes("of")) {
+		if (pathname === "of") {
+			presenceData.details = document
+				.querySelector("#content > h3")
+				.textContent.trim();
+		} else {
+			presenceData.details = document.querySelector(
+				"#content > div > table > tbody > tr > td > div > .blur a > b"
+			)?.textContent;
+		}
+	} else if (pathname.includes("saved")) {
+		if (!document.querySelector("#content > p"))
+			presenceData.details = "Viewing their saved posts";
+		else presenceData.details = "Viewing saved posts";
+	} else if (pathname.includes("voteof")) {
+		if (!document.querySelector("#content > p"))
+			presenceData.details = "Viewing their liked posts";
+		else presenceData.details = "Viewing liked posts";
+	} else if (pathname.includes("legendary"))
+		presenceData.details = "Viewing legendary posts";
+	else if (pathname.includes("search")) {
+		presenceData.smallImageKey = Assets.Search;
+		presenceData.details = strings.search;
+		presenceData.state = pathname.slice(10, pathname.length);
+	} else {
+		const pages: Record<string, PresenceData> = {
+			"": {
+				details: strings.viewHome,
+			},
+			trends: {
+				details: "Viewing trending posts",
+			},
+			trending: {
+				details: "Viewing trending posts",
+			},
+			recent: {
+				details: "Viewing recent uploads",
+			},
+			tvvote: {
+				details: "Viewing fun videos",
+			},
+			friends: {
+				details: "Viewing their friend list",
+			},
+			rules: {
+				details: "Reading the rules",
+				smallImageKey: Assets.Reading,
+			},
+			notifications: {
+				details: "Viewing notifications",
+			},
+			upload: {
+				details: "Viewing the upload section",
+			},
+			about: {
+				details: "About 1CAK/1CUK",
+			},
+			terms: {
+				details: strings.terms,
+			},
+			privacy: {
+				details: strings.privacy,
+			},
+			disclaimer: {
+				details: "Reading the disclaimer",
+				smallImageKey: Assets.Reading,
+			},
+			advertise: {
+				details: "Advertising on 1CAK",
+			},
+			weeklytop: {
+				details: "Viewing weekly top users",
+			},
+			alltimetop: {
+				details: "Viewing all time top users",
+			},
+			privacysettings: {
+				details: "Viewing their settings",
+			},
+			preferences: {
+				details: "Viewing their settings",
+			},
+		};
+		for (const [path, data] of Object.entries(pages)) {
+			if (pathname.replace(/_/gm, "").includes(path))
+				presenceData = { ...presenceData, ...data };
+		}
+	}
+
+	if (pathname !== "/") {
+		presenceData.buttons = [
+			{
+				label: strings.buttonViewPage,
+				url: href,
+			},
+		];
+	}
+	if (!presenceData.details) presenceData.details = strings.browse;
+	presence.setActivity(presenceData);
 });

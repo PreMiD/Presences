@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Nick",
+		"id": "193909360219389952"
+	},
+	"service": "SuperiorServers.co",
+	"description": {
+		"en": "SuperiorServers.co! The #1 DarkRP Garry's Mod Server!",
+		"nl": "SuperiorServers.co! De #1 DarkRP Garry's Mod Server!"
+	},
+	"url": [
+		"forum.superiorservers.co",
+		"superiorservers.co"
+	],
+	"version": "1.0.10",
+	"logo": "https://i.imgur.com/uryXMgr.png",
+	"thumbnail": "https://i.imgur.com/vyjsudO.png",
+	"color": "#273341",
+	"category": "other",
+	"tags": [
+		"forums",
+		"gmod",
+		"superiorservers"
+	]
+}

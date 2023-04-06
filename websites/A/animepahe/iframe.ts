@@ -4,23 +4,23 @@
 const iframe = new iFrame();
 
 let sendback: {
-  current_time: number;
-  duration: number;
-  paused: boolean;
+	currentTime: number;
+	duration: number;
+	paused: boolean;
 };
 
 function send(): void {
-  iframe.send(sendback);
+	iframe.send(sendback);
 }
 
 iframe.on("UpdateData", () => {
-  if (document.querySelector("#kwikPlayer")) {
-    const video: HTMLVideoElement = document.querySelector("#kwikPlayer");
-    sendback = {
-      current_time: video.currentTime,
-      duration: video.duration,
-      paused: video.paused
-    };
-    send();
-  }
+	if (document.querySelector("#kwikPlayer")) {
+		const video: HTMLVideoElement = document.querySelector("#kwikPlayer");
+		sendback = {
+			currentTime: video.currentTime,
+			duration: video.duration,
+			paused: video.paused,
+		};
+		send();
+	}
 });

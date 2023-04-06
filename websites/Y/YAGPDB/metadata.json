@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Bas950",
+		"id": "241278257335500811"
+	},
+	"service": "YAGPDB",
+	"description": {
+		"en": "YAGPDB is a multi-purpose Discord Bot.",
+		"nl": "YAGPDB is een multifunctionele Discord Bot.",
+		"zh_CN": "YAGPDB 是一个多用途的 Discord 机器人",
+		"ga_IE": "Is Bot Discord ilchuspóireach é YAGPDB."
+	},
+	"url": [
+		"yagpdb.xyz",
+		"docs.yagpdb.xyz"
+	],
+	"version": "1.2.16",
+	"logo": "https://i.imgur.com/yQShI1r.png",
+	"thumbnail": "https://i.imgur.com/7vDKD0t.png",
+	"color": "#ec7760",
+	"category": "other",
+	"tags": [
+		"bot",
+		"discord"
+	]
+}

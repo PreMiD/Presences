@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Rodry",
+		"id": "240875059953139714"
+	},
+	"service": "Hypixel Studios",
+	"description": {
+		"en": "Our mission: empowering players",
+		"pt": "A nossa missão: empoderar os jogadores",
+		"nl": "Onze missie: spelers versterken"
+	},
+	"url": "hypixelstudios.com",
+	"version": "1.0.12",
+	"logo": "https://i.imgur.com/ThI2LFZ.jpg",
+	"thumbnail": "https://i.imgur.com/DVmrFaP.jpg",
+	"color": "#15243A",
+	"category": "games",
+	"tags": [
+		"hytale",
+		"riot",
+		"games",
+		"hypixel",
+		"studios"
+	]
+}

@@ -1,86 +1,64 @@
-var presence = new Presence({
-    clientId: "607881666836561930"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+const presence = new Presence({
+		clientId: "607881666836561930",
+	}),
+	strings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+	});
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let lastPlaybackState = null,
+	playback: boolean,
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-if (lastPlaybackState != playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+if (lastPlaybackState !== playback) {
+	lastPlaybackState = playback;
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-  playback = document.querySelector(".AT-player video") !== null ? true : false;
+	playback = !!document.querySelector(".AT-player video");
 
-  var presenceData: PresenceData = {
-    largeImageKey: "lg"
-  };
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/QUWUPTI.jpg",
+	};
 
-  if (!playback) {
-    presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
+	if (!playback) {
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = browsingTimestamp;
 
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
+		delete presenceData.state;
+		delete presenceData.smallImageKey;
 
-    presence.setActivity(presenceData, true);
-  }
+		presence.setActivity(presenceData, true);
+	}
 
-  var video: HTMLVideoElement = document.querySelector(".AT-player video");
+	const video = document.querySelector<HTMLVideoElement>(".AT-player video");
 
-  if (video !== null && !isNaN(video.duration)) {
-    var videoTitle: any;
-    var seasonepisode;
+	if (video && !isNaN(video.duration)) {
+		const videoTitle =
+				document.querySelector<HTMLElement>(".series-title span")?.textContent,
+			[startTimestamp, endTimestamp] = presence.getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			);
 
-    videoTitle = document.querySelector(".series-title span");
-    seasonepisode = document.querySelector(".series-episode");
+		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageText = video.paused
+			? (await strings).pause
+			: (await strings).play;
+		presenceData.startTimestamp = startTimestamp;
+		presenceData.endTimestamp = endTimestamp;
 
-    var timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+		presenceData.details = videoTitle ?? "Title not found...";
+		presenceData.state =
+			document.querySelector<HTMLElement>(".series-episode")?.textContent ??
+			"Episode not found...";
 
-    presenceData.smallImageKey = video.paused ? "pause" : "play";
-    presenceData.smallImageText = video.paused
-      ? (await strings).pause
-      : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+		if (video.paused) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
 
-    presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
-
-    presenceData.details =
-      videoTitle !== null ? videoTitle.innerText : "Title not found...";
-    presenceData.state =
-      seasonepisode !== null ? seasonepisode.innerText : "Episode not found...";
-
-    if (video.paused) {
-      delete presenceData.startTimestamp;
-      delete presenceData.endTimestamp;
-    }
-
-    if (videoTitle !== null) {
-      presence.setActivity(presenceData, !video.paused);
-    }
-  }
+		if (videoTitle) presence.setActivity(presenceData);
+	}
 });

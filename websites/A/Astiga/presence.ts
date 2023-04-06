@@ -1,168 +1,150 @@
-var presence = new Presence({
-    clientId: "612746548631044116"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+const presence = new Presence({
+		clientId: "612746548631044116",
+	}),
+	strings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+	}),
+	truncateBefore = function (str: string, pattern: string): string {
+		return str.slice(str.indexOf(pattern) + pattern.length);
+	},
+	truncateAfter = function (str: string, pattern: string): string {
+		return str.slice(0, str.indexOf(pattern));
+	},
+	getSeconds = function (minutes: number, seconds: number): number {
+		return Number(Math.floor(minutes * 60)) + Number(seconds);
+	},
+	pattern = ":";
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getSeconds(minutes: number, seconds: number): number {
-  var minutesToSeconds = Number(Math.floor(minutes * 60));
-
-  var result = minutesToSeconds + Number(seconds);
-
-  return result;
-}
-
-var truncateBefore = function (str, pattern): string {
-  return str.slice(str.indexOf(pattern) + pattern.length);
-};
-
-var truncateAfter = function (str, pattern): string {
-  return str.slice(0, str.indexOf(pattern));
-};
-
-var musicTitle: any;
-
-var pattern = ":";
-
-var minutesDuration: any,
-  minutesDurationString: any,
-  secondsDuration: any,
-  secondsDurationString: any;
-
-var currentMinutes: any,
-  currentMinutesString: any,
-  currentSeconds: any,
-  currentSecondsString: any;
-
-var duration: any, currentTime: any;
-
-var play: any;
-
-var currentUser: any, albumName: any, currentArtist: any;
-
-var playback = false;
+let musicTitle: HTMLElement,
+	minutesDuration: string,
+	minutesDurationString: HTMLElement,
+	secondsDuration: string,
+	secondsDurationString: HTMLElement,
+	currentMinutes: string,
+	currentMinutesString: HTMLElement,
+	currentSeconds: string,
+	currentSecondsString: HTMLElement,
+	duration: number,
+	currentTime: number,
+	play: HTMLElement,
+	currentUser: HTMLElement,
+	albumName: HTMLElement,
+	currentArtist: HTMLElement,
+	playback = false;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    details: "Unknown page",
-    largeImageKey: "lg"
-  };
+	const presenceData: PresenceData = {
+		details: "Unknown page",
+		largeImageKey: "https://i.imgur.com/5cNh7kv.png",
+	};
 
-  currentUser = document.querySelector(
-    "#jp_container_1 > div.wrapper > aside.main-sidebar > section > div > div.pull-left.info > p"
-  );
+	currentUser = document.querySelector(
+		"#jp_container_1 > div.wrapper > aside.main-sidebar > section > div > div.pull-left.info > p"
+	);
 
-  currentArtist = document.querySelector(
-    "#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-artist.menu-item"
-  );
+	currentArtist = document.querySelector(
+		"#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-artist.menu-item"
+	);
 
-  musicTitle = document.querySelector(
-    "#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div.song-title.overflow"
-  );
+	musicTitle = document.querySelector(
+		"#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div.song-title.overflow"
+	);
 
-  albumName = document.querySelector(
-    "footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-album.menu-item"
-  );
+	albumName = document.querySelector(
+		"footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-album.menu-item"
+	);
 
-  if (musicTitle.innerText.length > 1) {
-    play = document.querySelector(
-      "footer > div.jp-controls > div.btn-music-container > div:nth-child(2) > a.jp-play.btn.btn-music.btn-sm"
-    );
+	if (musicTitle.textContent.length > 1) {
+		play = document.querySelector(
+			"footer > div.jp-controls > div.btn-music-container > div:nth-child(2) > a.jp-play.btn.btn-music.btn-sm"
+		);
 
-    currentMinutesString = document.querySelector(
-      "#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-current-time"
-    );
+		currentMinutesString = document.querySelector(
+			"#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-current-time"
+		);
 
-    currentMinutes = truncateAfter(currentMinutesString.innerText, pattern);
+		currentMinutes = truncateAfter(currentMinutesString.textContent, pattern);
 
-    currentSecondsString = document.querySelector(
-      "#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-current-time"
-    );
+		currentSecondsString = document.querySelector(
+			"#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-current-time"
+		);
 
-    currentSeconds = truncateBefore(currentSecondsString.innerText, pattern);
+		currentSeconds = truncateBefore(currentSecondsString.textContent, pattern);
 
-    minutesDurationString = document.querySelector(
-      "#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-duration"
-    );
+		minutesDurationString = document.querySelector(
+			"#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-duration"
+		);
 
-    minutesDuration = truncateAfter(minutesDurationString.innerText, pattern);
+		minutesDuration = truncateAfter(minutesDurationString.textContent, pattern);
 
-    secondsDurationString = document.querySelector(
-      "#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-duration"
-    );
+		secondsDurationString = document.querySelector(
+			"#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-duration"
+		);
 
-    secondsDuration = truncateBefore(secondsDurationString.innerText, pattern);
+		secondsDuration = truncateBefore(
+			secondsDurationString.textContent,
+			pattern
+		);
 
-    currentTime = getSeconds(currentMinutes, currentSeconds);
+		currentTime = getSeconds(
+			parseInt(currentMinutes),
+			parseInt(currentSeconds)
+		);
 
-    duration = getSeconds(minutesDuration, secondsDuration);
+		duration = getSeconds(parseInt(minutesDuration), parseInt(secondsDuration));
 
-    if (!play.style.display || currentTime == 0) {
-      playback = false;
-    } else {
-      playback = true;
-    }
+		if (!play.style.display || currentTime === 0) playback = false;
+		else playback = true;
 
-    var timestamps = getTimestamps(currentTime, duration);
+		const [startTimestamp, endTimestamp] = presence.getTimestamps(
+			currentTime,
+			duration
+		);
 
-    presenceData.details = "Song: " + musicTitle.innerText;
+		presenceData.details = `Song: ${musicTitle.textContent}`;
 
-    if (albumName.innerText.length > 0 && currentArtist.innerText.length > 0) {
-      presenceData.state =
-        currentArtist.innerText + " / " + albumName.innerText;
-    } else if (
-      albumName.innerText.length == 0 &&
-      currentArtist.innerText.length > 0
-    ) {
-      presenceData.state = currentArtist.innerText + " / No album";
-    } else if (
-      albumName.innerText.length > 0 &&
-      currentArtist.innerText.length == 0
-    ) {
-      presenceData.state = "No artist / " + albumName.innerText;
-    } else if (
-      albumName.innerText.length == 0 &&
-      currentArtist.innerText.length == 0
-    ) {
-      presenceData.state = "No artist / No album";
-    }
+		if (
+			albumName.textContent.length > 0 &&
+			currentArtist.textContent.length > 0
+		)
+			presenceData.state = `${currentArtist.textContent} / ${albumName.textContent}`;
+		else if (
+			albumName.textContent.length === 0 &&
+			currentArtist.textContent.length > 0
+		)
+			presenceData.state = `${currentArtist.textContent} / No album`;
+		else if (
+			albumName.textContent.length > 0 &&
+			currentArtist.textContent.length === 0
+		)
+			presenceData.state = `No artist / ${albumName.textContent}`;
+		else if (
+			albumName.textContent.length === 0 &&
+			currentArtist.textContent.length === 0
+		)
+			presenceData.state = "No artist / No album";
 
-    presenceData.smallImageKey = playback ? "play" : "pause";
+		presenceData.smallImageKey = playback ? "play" : "pause";
 
-    presenceData.smallImageText = playback
-      ? (await strings).play
-      : (await strings).pause;
+		presenceData.smallImageText = playback
+			? (await strings).play
+			: (await strings).pause;
 
-    presenceData.startTimestamp = timestamps[0];
+		presenceData.startTimestamp = startTimestamp;
 
-    presenceData.endTimestamp = timestamps[1];
+		presenceData.endTimestamp = endTimestamp;
 
-    if (playback == false) {
-      delete presenceData.startTimestamp;
+		if (playback === false) {
+			delete presenceData.startTimestamp;
 
-      delete presenceData.endTimestamp;
-    }
-  } else {
-    presenceData.details = "No music playing.";
+			delete presenceData.endTimestamp;
+		}
+	} else {
+		presenceData.details = "No music playing.";
 
-    presenceData.state = "Logged in user: " + currentUser.innerText;
-  }
+		presenceData.state = `Logged in user: ${currentUser.textContent}`;
+	}
 
-  presence.setActivity(presenceData);
+	presence.setActivity(presenceData);
 });

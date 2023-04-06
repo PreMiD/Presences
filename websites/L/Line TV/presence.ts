@@ -1,301 +1,105 @@
 const presence = new Presence({
-    clientId: "813392002526871592"
-  }),
-  getStrings = async () =>
-    presence.getStrings(
-      {
-        play: "general.playing",
-        paused: "general.paused",
-        browse: "general.browsing",
-        episode: "general.episode",
-        searchFor: "general.searchFor",
-        viewEpisode: "general.buttonViewEpisode",
-        reading: "general.reading",
-        viewMove: "general.buttonViewMovie",
-        viewPage: "general.viewPage",
-        watchStream: "general.buttonWatchStream",
-        viewVideo: "general.buttonWatchVideo",
-        viewSong: "general.buttonViewSong",
-        searching: "general.search"
-      },
-      await presence.getSetting("lang")
-    ),
-  browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "813392002526871592",
+	}),
+	getStrings = async () =>
+		presence.getStrings(
+			{
+				play: "general.playing",
+				paused: "general.paused",
+				browse: "general.browsing",
+				viewSeries: "general.viewSeries",
+				searchSomething: "general.searchSomething",
+				buttonViewEpisode: "general.buttonViewEpisode",
+			},
+			await presence.getSetting<string>("lang").catch(() => "en")
+		),
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	shortenedURLs: Record<string, string> = {};
+
+async function shortenURL(url: string) {
+	if (!url || url.length < 256) return url;
+	if (shortenedURLs[url]) return shortenedURLs[url];
+	try {
+		const pdURL = await (
+			await fetch(`https://pd.premid.app/create/${url}`)
+		).text();
+		return (shortenedURLs[url] = pdURL);
+	} catch (err) {
+		presence.error(err);
+		return url;
+	}
+}
 
 let oldLang: string = null,
-  strings = getStrings();
+	strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "linetv_logo",
-      startTimestamp: browsingStamp,
-      details: (await strings).browse
-    },
-    videoData = await presence.getPageletiable("ghtEnv"),
-    pathname = document.location.pathname,
-    newLang = await presence.getSetting("lang"),
-    showButton = await presence.getSetting("Buttons"),
-    showSearch = await presence.getSetting("searchQuery"),
-    pDetail = await presence.getSetting("detail");
+	const { pathname } = document.location,
+		[newLang, showButton, cover] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("cover"),
+		]);
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = getStrings();
-  }
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
-  if (pathname.includes("/v/") || pathname.includes("/special/")) {
-    const video = document.querySelector("video"),
-      videoD: VideoDType = {
-        title: (videoData.sClipTitle.match(/.+?(?=\[|【|「)/) || [
-          videoData.sClipTitle
-        ])[0],
-        playList: (document.querySelector("tooltip") as HTMLElement)?.title,
-        aTitle: videoData.sClipTitle,
-        isTeaser: videoData.sClipTitle.toLowerCase().includes("teaser"),
-        isTrailer: videoData.sClipTitle.toLowerCase().includes("trailer"),
-        isHighligh:
-          (document.querySelector("tooltip") as HTMLElement)?.title
-            .toLowerCase()
-            .includes("highlight") ||
-          videoData.sClipTitle.toLowerCase().includes("highlight"),
-        isLowerThan1_5mins: video ? video.duration < 90 : false,
-        episodes: null,
-        buttonLabel: (await strings).viewEpisode,
-        smallImagePlay: "play",
-        epText: null,
-        id: videoData.nClipNo,
-        genre: videoData.sCategoryCode
-      },
-      timestamps = video
-        ? presence.getTimestampsfromMedia(video)
-        : [browsingStamp, null];
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/F2sWIqN.png",
+		startTimestamp: browsingTimestamp,
+		details: strings.browse,
+	};
 
-    if (videoD.title.includes("["))
-      videoD.title = videoD.title.replace(/(\[.+\])/g, "");
-    if (videoD.title.includes("EP."))
-      videoD.title = videoD.title.replace(
-        /(ตอนต่อไป EP.[1-9]?[0-9]?[0-9]|EP.[1-9]?[0-9]?[0-9])/,
-        ""
-      );
-    if (videoD.title.match(/ \| | \|(?!.)/))
-      videoD.title = videoD.title.replace(/ \| | \|(?!.)/, " ");
-    if (videoD.title.match(/(highlight)/i))
-      videoD.title = videoD.title.replace(/(highlight)/i, "");
-    if (
-      videoD.aTitle.match(
-        /(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9])/g
-      )
-    )
-      videoD.episodes = videoD.aTitle.match(
-        /(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9]|\([1-9]\/[1-9]\))/g
-      );
-    if (videoD.episodes)
-      videoD.epText =
-        videoD.episodes[0].includes("[") || videoD.episodes[0].includes("(")
-          ? ` ${videoD.episodes[0]}`
-          : ` ${videoD.episodes[0].match(/[1-9]?[0-9]?[0-9]/)[0]}${
-              videoD.episodes.length > 1 ? ` | ${videoD.episodes[1]}` : ""
-            }`;
+	if (pathname.includes("/drama/")) {
+		const video = document.querySelector("video"),
+			title = document
+				.querySelector("h2.font-700.text-24.break-all")
+				.textContent.split("："),
+			episodeTitle = title.pop(); // eslint-disable-line no-one-time-vars/no-one-time-vars
 
-    if (video) {
-      if (videoD.isTrailer) videoD.genre = "TRAILER";
-      else if (videoD.isTeaser) videoD.genre = "TEASER";
-      else if (videoD.isHighligh && !videoD.episodes)
-        videoD.genre = "HIGHLIGHT";
-      else if (videoD.isHighligh && videoD.episodes)
-        videoD.genre = "HIGHLIGHT_";
-      else if (videoData.sLiveStatus) videoD.genre = "LIVE";
-      else if (
-        videoD.isLowerThan1_5mins &&
-        !videoD.isHighligh &&
-        !videoD.isTrailer &&
-        video.currentTime &&
-        videoD.episodes
-      )
-        videoD.genre = "PREVIEW";
+		if (video) {
+			presenceData.details = title.join("：");
+			presenceData.state = episodeTitle;
 
-      videoD.title = pDetail
-        .replace("%title%", videoD.title)
-        .replace("%fullTitle%", videoD.aTitle)
-        .replace("%playlist%", videoD.playList);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
 
-      switch (videoD.genre) {
-        case "DRAMA":
-          presenceData.details = videoD.title;
-          presenceData.state =
-            videoD.epText?.startsWith(" [") && videoD.episodes
-              ? `Drama | ${videoD.epText}`
-              : videoD.episodes
-              ? `${(await strings).episode} ${videoD.epText}`
-              : "Highlight";
-          break;
+			presenceData.largeImageKey = cover
+				? await shortenURL(
+						document.querySelector<HTMLImageElement>(
+							`img[alt='${title.join("：")}']`
+						).src
+				  )
+				: "linetv_logo";
 
-        case "ARTIST":
-          presenceData.details = videoD.title;
-          presenceData.state = `Music ${
-            videoD.episodes
-              ? ` | ${(await strings).episode}${videoD.epText}`
-              : ""
-          }`;
-          videoD.buttonLabel = videoD.epText
-            ? (await strings).viewEpisode
-            : (await strings).viewSong;
-          break;
+			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageText = video.paused
+				? strings.paused
+				: strings.play;
 
-        case "ENTERTAINMENT":
-          presenceData.details = videoD.title;
-          presenceData.state = videoD.epText
-            ? `${(await strings).episode} ${videoD.epText}`
-            : "Entertainment";
-          videoD.buttonLabel = videoD.epText
-            ? videoD.buttonLabel
-            : (await strings).viewVideo;
-          break;
+			if (video.paused) {
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
+			}
 
-        case "LIFE":
-          presenceData.details = videoD.title;
-          presenceData.state = `${
-            videoD.episodes
-              ? `${(await strings).episode} ${videoD.epText}`
-              : "Life style"
-          }`;
-          videoD.buttonLabel = videoD.episodes
-            ? (await strings).viewEpisode
-            : (await strings).viewVideo;
-          break;
+			if (showButton) {
+				presenceData.buttons = [
+					{
+						label: strings.buttonViewEpisode,
+						url: location.href,
+					},
+				];
+			} else delete presenceData.buttons;
+		} else {
+			presenceData.details = strings.viewSeries;
+			presenceData.state = title.join("：");
+		}
+	} else if (pathname.includes("/search")) {
+		presenceData.details = strings.searchSomething;
+		presenceData.smallImageKey = "search";
+	}
 
-        case "HIGHLIGHT":
-          presenceData.details = videoD.title;
-          presenceData.state = "Highlight";
-          videoD.buttonLabel = (await strings).viewVideo;
-          break;
-
-        case "HIGHLIGHT_":
-          presenceData.details = videoD.title;
-          presenceData.state = `${(await strings).episode}${
-            videoD.epText
-          } | Highlight`;
-          videoD.buttonLabel = (await strings).viewVideo;
-          break;
-
-        case "TRAILER":
-          presenceData.details = videoD.title;
-          presenceData.state = "Trailer";
-          videoD.buttonLabel = (await strings).viewVideo;
-          break;
-
-        case "TEASER":
-          presenceData.details = videoD.title;
-          presenceData.state = "Teaser";
-          videoD.buttonLabel = (await strings).viewVideo;
-          break;
-
-        case "MOVIE":
-          presenceData.details = videoD.title;
-          presenceData.state = `${
-            videoD.episodes
-              ? `Movie Clip ${
-                  videoD.epText.startsWith(" [") ||
-                  videoD.epText.startsWith(" (")
-                    ? `|${videoD.epText}`
-                    : `| ${(await strings).episode}${videoD.epText}`
-                }`
-              : ""
-          }`;
-          videoD.buttonLabel = (await strings).viewVideo;
-          break;
-
-        case "LIVE":
-          presenceData.details = videoD.title;
-          presenceData.state = `Live ${
-            videoD.episodes
-              ? ` | ${(await strings).episode}${videoD.epText}`
-              : ""
-          }`;
-          videoD.smallImagePlay = "live";
-          videoD.buttonLabel = (await strings).watchStream;
-          break;
-
-        case "PREVIEW":
-          presenceData.details = videoD.title;
-          presenceData.state = `${(await strings).episode} ${
-            videoD.epText
-          } | Preview`;
-          break;
-
-        default:
-          presenceData.details = videoD.title;
-          presenceData.state = `${(await strings).episode} ${videoD.epText}`;
-          break;
-      }
-
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
-
-      presenceData.smallImageKey = video.paused
-        ? "pause"
-        : videoD.smallImagePlay;
-      presenceData.smallImageText = video.paused
-        ? (await strings).paused
-        : (await strings).play;
-
-      if (video.paused || videoD.genre === "LIVE") {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
-
-      if (showButton) {
-        presenceData.buttons = [
-          {
-            label: videoD.buttonLabel,
-            url:
-              document.baseURI.length > 512
-                ? `https://tv.line.me/v/${videoD.id}`
-                : document.baseURI
-          }
-        ];
-      } else delete presenceData.buttons;
-    } else {
-      presenceData.details = (await strings).viewPage;
-      presenceData.state = videoD.title;
-      presenceData.smallImageText = (await strings).reading;
-    }
-  } else if (pathname.includes("/search")) {
-    const query = decodeURI(document.location.search.replace("?query=", "")),
-      resutls = parseInt(document.querySelector("em.ea")?.textContent, 10);
-
-    presenceData.details = `${(await strings).searchFor} ${
-      showSearch ? query : "(Hidden)"
-    }`;
-    presenceData.smallImageKey = "search";
-    presenceData.smallImageText = (await strings).searching;
-
-    if (resutls) {
-      presenceData.state = `${resutls} matching ${
-        resutls > 1 ? "results" : "result"
-      }`;
-    } else {
-      presenceData.state = "No matching result";
-    }
-  }
-
-  presence.setActivity(presenceData);
+	presence.setActivity(presenceData);
 });
-
-interface VideoDType {
-  title: string;
-  aTitle: string;
-  isTrailer: boolean;
-  isHighligh: boolean;
-  isTeaser: boolean;
-  isLowerThan1_5mins: boolean;
-  episodes: string[];
-  playList: string;
-  buttonLabel: string;
-  smallImagePlay: string;
-  epText: string;
-  genre: string;
-  id: number;
-}

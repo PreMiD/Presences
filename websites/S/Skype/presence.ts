@@ -1,100 +1,82 @@
-var presence = new Presence({
-  clientId: "617500416887881748" // CLIENT ID FOR YOUR PRESENCE
-});
+const presence = new Presence({
+		clientId: "617500416887881748",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-var typing: any, user: any, bot: any;
+async function getStrings() {
+	return presence.getStrings(
+		{
+			browse: "general.browsing",
+			search: "general.searchFor",
+			readDm: "general.readingDM",
+			typeDm: "general.typeDM",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+enum Assets {
+	Logo = "https://i.imgur.com/Q4myT8y.png",
+	SearchImage = "https://i.imgur.com/oGQtnIY.png",
+	ReadingImage = "https://i.imgur.com/nese1O7.png",
+}
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "fror_why"
-  };
+	const presenceData: PresenceData = {
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		[newLang, privacy] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("privacy"),
+		]),
+		typing = document.querySelector(
+			'[class="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"]'
+		),
+		user =
+			document.querySelectorAll('button[aria-label*=":"]')[1] ??
+			document.querySelectorAll('button[aria-label*=","]')[6],
+		search = document.querySelector<HTMLInputElement>('input[type="text"]');
 
-  presenceData.startTimestamp = browsingStamp;
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
-  if (document.location.hostname == "web.skype.com") {
-    user = document.querySelector(
-      "body > div.app-container > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > button > div > div"
-    );
-    typing = document.querySelector(
-      "body > div.app-container > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div:nth-child(2) > div > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div > div > div:nth-child(2) > div:nth-child(3) > div > div > div:nth-child(2) > div > div > div > div > div > div > span > br"
-    );
-    bot = document.querySelector(
-      "body > div.app-container > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > button > div > div"
-    );
-    if (user !== null) {
-      if (typing == null) {
-        presenceData.details = "Typing in chat:";
-        presenceData.state = user.innerText;
+	if (privacy) {
+		presenceData.details = strings.browse;
+		presence.setActivity(presenceData);
+		return;
+	}
 
-        delete presenceData.smallImageKey;
+	switch (document.location.hostname) {
+		case "preview.web.skype.com":
+		case "web.skype.com": {
+			if (search?.value) {
+				presenceData.details = strings.search;
+				presenceData.state = search.value;
+				presenceData.smallImageKey = Assets.SearchImage;
+			} else if (user) {
+				if (typing?.textContent) presenceData.details = strings.typeDm;
+				else {
+					presenceData.details = strings.readDm;
+					presenceData.smallImageKey = Assets.ReadingImage;
+				}
+				presenceData.state = user.textContent;
+			} else presenceData.details = strings.browse;
+			break;
+		}
+		case "www.skype.com": {
+			presenceData.details = "Skype";
+			presenceData.state = "Browsing...";
 
-        presence.setActivity(presenceData);
-      } else {
-        presenceData.details = "Reading chat:";
-        presenceData.state = user.innerText;
-
-        presenceData.smallImageKey = "reading";
-
-        presence.setActivity(presenceData);
-      }
-    } else if (bot !== null) {
-      if (typing == null) {
-        presenceData.details = "Typing in chat:";
-        presenceData.state = bot.innerText;
-
-        delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
-      } else {
-        presenceData.details = "Reading chat:";
-        presenceData.state = bot.innerText;
-
-        presenceData.smallImageKey = "reading";
-
-        presence.setActivity(presenceData);
-      }
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else if (document.location.hostname == "preview.web.skype.com") {
-    user = document.querySelector(
-      "body > div.app-container > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > button > div > div"
-    );
-    typing = document.querySelector(
-      "body > div.app-container > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1) > div > div:nth-child(2) > div > div:nth-child(2) > div > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(1) > div > div > div > div > div:nth-child(2) > div:nth-child(3) > div > div > div:nth-child(2) > div > div > div > div > div > div > span > span"
-    );
-    if (user !== null) {
-      if (typing !== null) {
-        presenceData.details = "Typing in chat:";
-        presenceData.state = user.innerText;
-
-        delete presenceData.smallImageKey;
-
-        presence.setActivity(presenceData);
-      } else {
-        presenceData.details = "Reading chat:";
-        presenceData.state = user.innerText;
-
-        presenceData.smallImageKey = "reading";
-
-        presence.setActivity(presenceData);
-      }
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else if (document.location.hostname == "www.skype.com") {
-    presenceData.details = "Skype";
-    presenceData.state = "Browsing...";
-
-    delete presenceData.smallImageKey;
-
-    presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+			break;
+		}
+		default:
+			presenceData.details = strings.browse;
+	}
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

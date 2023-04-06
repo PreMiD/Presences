@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"service": "Minecraft Menu",
+	"description": {
+		"nl": "Minecraft Menu is de beste plek in 2022 om Minecraft-servers te vinden.",
+		"en": "Minecraft Menu is the best place in 2022 to find Minecraft Servers."
+	},
+	"url": [
+		"minecraft.menu",
+		"www.minecraft.menu"
+	],
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/g5Y299F.png",
+	"thumbnail": "https://i.imgur.com/3UaTpMU.jpg",
+	"color": "#DD1500",
+	"category": "games",
+	"tags": [
+		"minecraft",
+		"menu",
+		"server",
+		"serverlist",
+		"list"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

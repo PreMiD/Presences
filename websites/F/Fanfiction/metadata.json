@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Nekolen",
+		"id": "270125856679002113"
+	},
+	"contributors": [
+		{
+			"name": "Bas950",
+			"id": "241278257335500811"
+		}
+	],
+	"service": "Fanfiction",
+	"description": {
+		"en": "FanFiction | unleash your imagination",
+		"nl": "FanFiction | laat je fantasie de vrije loop"
+	},
+	"url": "www.fanfiction.net",
+	"version": "1.2.13",
+	"logo": "https://i.imgur.com/bKSkTgk.png",
+	"thumbnail": "https://i.imgur.com/5dQGIS1.png",
+	"color": "#0000FF",
+	"category": "other",
+	"tags": [
+		"fanfics",
+		"story",
+		"entertainment",
+		"reading"
+	]
+}

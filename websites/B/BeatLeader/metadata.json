@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "205984221859151873",
+		"name": "joerkig"
+	},
+	"service": "BeatLeader",
+	"description": {
+		"en": "BeatLeader is a open source Beat Saber leaderboard!"
+	},
+	"url": [
+		"www.beatleader.xyz",
+		"replay.beatleader.xyz",
+		"royale.beatleader.xyz"
+	],
+	"version": "1.2.0",
+	"logo": "https://i.imgur.com/ogoDV1c.png",
+	"thumbnail": "https://i.imgur.com/uODy4II.png",
+	"color": "#c81c9f",
+	"category": "games",
+	"tags": [
+		"beatsaber",
+		"leaderboard",
+		"replay"
+	],
+	"iframe": true,
+	"settings": [
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		}
+	]
+}

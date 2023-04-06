@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "RisingSunLight",
+		"id": "240521747852558347"
+	},
+	"service": "Artfight",
+	"description": {
+		"en": "The annual art trading game, starting on July 1st!",
+		"fr": "Le jeu annuel d'échange artistique, débute le 1ier juillet !"
+	},
+	"url": "artfight.net",
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/eABLEqd.jpg",
+	"thumbnail": "https://i.imgur.com/6YslHn6.jpg",
+	"color": "#a65178",
+	"category": "other",
+	"tags": [
+		"artfight",
+		"art",
+		"drawing",
+		"game"
+	],
+	"settings": [
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fad fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

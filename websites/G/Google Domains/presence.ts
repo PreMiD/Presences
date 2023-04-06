@@ -1,101 +1,89 @@
 const presence = new Presence({
-    clientId: "735878480318955660"
-  }),
-  strings = presence.getStrings({
-    browse: "presence.activity.browsing",
-    search: "presence.activity.searching"
-  }),
-  getElement = (query: string): string | undefined => {
-    return document.querySelector(query)?.textContent.trim();
-  };
+		clientId: "735878480318955660",
+	}),
+	strings = presence.getStrings({
+		browse: "general.browsing",
+		search: "general.searching",
+	}),
+	getElement = (query: string): string | undefined => {
+		return document.querySelector(query)?.textContent.trim();
+	};
 
 let elapsed = Math.floor(Date.now() / 1000),
-  prevUrl = document.location.href;
+	prevUrl = document.location.href;
 
 const statics = {
-  "/tos/": {
-    details: "Viewing Page...",
-    state: "Terms of Service"
-  }
+	"/tos/": {
+		details: "Viewing Page...",
+		state: "Terms of Service",
+	},
 };
 
 presence.on("UpdateData", async () => {
-  const path = location.pathname.replace(/\/?$/, "/"),
-    showDomain = await presence.getSetting("domain"),
-    showSearch = await presence.getSetting("search"),
-    showTimestamps = await presence.getSetting("timestamp");
+	const path = location.pathname.replace(/\/?$/, "/"),
+		showDomain = await presence.getSetting<boolean>("domain"),
+		showSearch = await presence.getSetting<boolean>("search"),
+		showTimestamps = await presence.getSetting<boolean>("timestamp");
 
-  let data: PresenceData = {
-    details: undefined,
-    state: undefined,
-    largeImageKey: "googledomains",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: elapsed,
-    endTimestamp: undefined
-  };
+	let presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/345qLaW.jpg",
+		startTimestamp: elapsed,
+	};
 
-  if (document.location.href !== prevUrl) {
-    prevUrl = document.location.href;
-    elapsed = Math.floor(Date.now() / 1000);
-  }
+	if (document.location.href !== prevUrl) {
+		prevUrl = document.location.href;
+		elapsed = Math.floor(Date.now() / 1000);
+	}
 
-  for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
-      data = { ...data, ...v };
-    }
-  }
+	for (const [k, v] of Object.entries(statics))
+		if (path.match(k)) presenceData = { ...presenceData, ...v };
 
-  if (path.includes("/m/registrar/")) {
-    const domainName = getElement(".domain-header-title > span");
-    data.details = domainName ? "Browsing Domain..." : "Browsing...";
+	if (path.includes("/m/registrar/")) {
+		const domainName = getElement(".domain-header-title > span");
+		presenceData.details = domainName ? "Browsing Domain..." : "Browsing...";
 
-    const tab =
-      getElement(".dreg-ogb-menu-item-selected") ||
-      getElement(".partner-header") ||
-      getElement(".gb_bd");
-    data.state =
-      domainName && showDomain ? `${domainName} (${tab})` : tab && `${tab} tab`;
-  }
+		const tab =
+			getElement(".dreg-ogb-menu-item-selected") ||
+			getElement(".partner-header") ||
+			getElement(".gb_bd");
+		presenceData.state =
+			domainName && showDomain ? `${domainName} (${tab})` : tab && `${tab} tab`;
+	}
 
-  if (path.includes("/m/registrar/cart/")) {
-    data.details = "Viewing Cart...";
-    data.state = getElement(".item-count")?.slice(1, -1);
-  }
+	if (path.includes("/m/registrar/cart/")) {
+		presenceData.details = "Viewing Cart...";
+		presenceData.state = getElement(".item-count")?.slice(1, -1);
+	}
 
-  if (path.includes("/m/registrar/checkout/")) {
-    data.details = "Viewing Checkout...";
-  }
+	if (path.includes("/m/registrar/checkout/"))
+		presenceData.details = "Viewing Checkout...";
 
-  if (path.includes("/m/registrar/search/")) {
-    data.details = "Searching...";
-    data.state = showSearch && document.querySelector("input")?.value;
-  }
+	if (path.includes("/m/registrar/search/")) {
+		presenceData.details = "Searching...";
+		presenceData.state = showSearch && document.querySelector("input")?.value;
+	}
 
-  if (path.includes("/m/registrar/search/favorites/")) {
-    data.details = "Viewing Favorites...";
-    data.state = getElement(".mat-tab-label-active");
-  }
+	if (path.includes("/m/registrar/search/favorites/")) {
+		presenceData.details = "Viewing Favorites...";
+		presenceData.state = getElement(".mat-tab-label-active");
+	}
 
-  if (data.details) {
-    if (data.details.match("(Browsing|Viewing)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browse;
-    }
-    if (data.details.match("(Searching)")) {
-      data.smallImageKey = "search";
-      data.smallImageText = (await strings).search;
-    }
-    if (!showTimestamps) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-    }
+	if (presenceData.details) {
+		if (presenceData.details.match("(Browsing|Viewing)")) {
+			presenceData.smallImageKey = "reading";
+			presenceData.smallImageText = (await strings).browse;
+		}
+		if (presenceData.details.match("(Searching)")) {
+			presenceData.smallImageKey = "search";
+			presenceData.smallImageText = (await strings).search;
+		}
+		if (!showTimestamps) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
 
-    !data.state && delete data.state;
+		!presenceData.state && delete presenceData.state;
 
-    presence.setActivity(data);
-  } else {
-    presence.setActivity();
-    presence.setTrayTitle();
-  }
+		presence.setActivity(presenceData);
+	} else presence.setActivity();
 });

@@ -1,16 +1,14 @@
 const presence = new Presence({
-  clientId: "587347620574265498"
+	clientId: "587347620574265498",
 });
 
-let gameData: PresenceData = null;
+let presenceData: PresenceData = null;
 
 presence.on("UpdateData", async () => {
-  if (!gameData || gameData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(gameData);
-  }
+	if (!presenceData || !presenceData.details) presence.setActivity();
+	else presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", (data: PresenceData) => (gameData = data));
+presence.on("iFrameData", (data: PresenceData) => {
+	presenceData = data;
+});

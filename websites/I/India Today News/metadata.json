@@ -1,0 +1,62 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Anaxes",
+		"id": "567885938160697377"
+	},
+	"service": "India Today News",
+	"description": {
+		"en": "Story by story. Edition by edition."
+	},
+	"url": "www.indiatoday.in",
+	"version": "1.0.1",
+	"logo": "https://i.imgur.com/JJHnTn3.png",
+	"thumbnail": "https://i.imgur.com/P40hpr1.png",
+	"color": "#fc3b43",
+	"category": "other",
+	"tags": [
+		"news",
+		"indiannews",
+		"newstoday"
+	],
+	"iframe": true,
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "timestamp",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "author",
+			"title": "Hide Author",
+			"icon": "fas fa-user",
+			"value": false,
+			"if": {
+				"privacy": false
+			}
+		}
+	]
+}

@@ -1,232 +1,137 @@
 const presence = new Presence({
-  clientId: "714194261679276094"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
+		clientId: "714194261679276094",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  if (document.location.pathname == "/") {
-    const presenceData: PresenceData = {
-      details: "play.gardenmc.fr",
-      state: "https://gardenmc.fr",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/p/rules") {
-    const presenceData: PresenceData = {
-      state: "Règles",
-      details: "Lit les règles",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/blog")) {
-    const presenceData: PresenceData = {
-      state: "Blog",
-      details: "Lit les news",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/user")) {
-    const presenceData: PresenceData = {
-      details: "Consulte un profil",
-      state: "Profil",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/topic/add/")) {
-    const presenceData: PresenceData = {
-      details: "Écrit un nouveau topic",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/vote") {
-    const presenceData: PresenceData = {
-      details: "En train de Voter",
-      state: "Vote",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/message") {
-    const presenceData: PresenceData = {
-      details: "Consulte ses messages",
-      state: "MP",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/support") {
-    const presenceData: PresenceData = {
-      details: "Consulte le support",
-      state: "Support",
-      largeImageKey: "gardenpresence"
-    };
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/support/create") {
-    const presenceData: PresenceData = {
-      details: "Écrit un ticket au support",
-      state: "Support",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/message/new") {
-    const presenceData: PresenceData = {
-      details: "Écrit un message privé",
-      state: "MP",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/list") {
-    const presenceData: PresenceData = {
-      details: "Consulte la liste des membres",
-      state: "List",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/stats") {
-    const presenceData: PresenceData = {
-      details: "Consultes les stats du site",
-      state: "Statistiques",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/profile") {
-    const presenceData: PresenceData = {
-      details: "Consulte son profil",
-      state: "Profil",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/shop") {
-    const presenceData: PresenceData = {
-      details: "Consulte la boutique",
-      state: "Shop",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/faq") {
-    const presenceData: PresenceData = {
-      largeImageKey: "gardenpresence",
-      state: "F.A.Q",
-      details: "Consulte la F.A.Q"
-    };
-    //Forum
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum") {
-    const presenceData: PresenceData = {
-      details: "Consulte le forum",
-      state: "Forum",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum/Informations.4/") {
-    const presenceData: PresenceData = {
-      details: "Consulte les infos",
-      state: "Informations",
-      largeImageKey: "gardenpresence"
-    };
-    //Candidatures
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/forum/Candidatures.5/")) {
-    const presenceData: PresenceData = {
-      details: "Parcourt les candidatures",
-      state: "Candidatures",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/topic/Candi")) {
-    const presenceData: PresenceData = {
-      details: "Lit une candidature",
-      state: "Candidatures",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/topic/candi")) {
-    const presenceData: PresenceData = {
-      details: "Lit une candidature",
-      state: "Candidatures",
-      largeImageKey: "gardenpresence"
-    };
-    // Fin Candidatures
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/topic")) {
-    const presenceData: PresenceData = {
-      details: "Lit un topic",
-      state: "Topic",
-      largeImageKey: "gardenpresence"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/forum/Boite")) {
-    const presenceData: PresenceData = {
-      largeImageKey: "gardenpresence",
-      state: "Boite à idées",
-      details: "Consulte la boite à idée"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/forum/Bugs.7/")) {
-    const presenceData: PresenceData = {
-      largeImageKey: "gardenpresence",
-      state: "Bugs",
-      details: "Consulte la section Bug"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (
-    document.location.pathname.includes("/forum/Demande-de-Debannissement-.15/")
-  ) {
-    const presenceData: PresenceData = {
-      largeImageKey: "gardenpresence",
-      state: "Demande deban",
-      details: "Consulte la section unban"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/forum/Aide.10/")) {
-    const presenceData: PresenceData = {
-      largeImageKey: "gardenpresence",
-      state: "Aides",
-      details: "Consulte la section aide"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/forum/Cr")) {
-    const presenceData: PresenceData = {
-      largeImageKey: "gardenpresence",
-      state: "Créations",
-      details: "Consulte les projets"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum/Taverne.12/") {
-    const presenceData: PresenceData = {
-      largeImageKey: "gardenpresence",
-      state: "Taverne",
-      details: "Boit un verre"
-    };
-    presenceData.startTimestamp = browsingStamp;
-    presence.setActivity(presenceData);
-  } else {
-    const presenceData: PresenceData = {
-      largeImageKey: "gardenpresence"
-    };
-    presence.setActivity(presenceData);
-  }
+	const presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/PNc2c41.png",
+		startTimestamp: browsingTimestamp,
+	};
+	if (document.location.pathname === "/")
+		presenceData.details = "play.gardenmc.fr";
+	else if (document.location.pathname === "/p/rules") {
+		presenceData.details = "Lit les règles";
+		presenceData.state = "Règles";
+	} else if (document.location.pathname.includes("/blog")) {
+		presenceData.details = "Lit les news";
+		presenceData.state = "Blog";
+	} else if (document.location.pathname.includes("/user")) {
+		presenceData.details = "Consulte un profil";
+		presenceData.state = "Profil";
+	} else if (document.location.pathname.includes("/topic/add/"))
+		presenceData.details = "Écrit un nouveau topic";
+	else {
+		switch (document.location.pathname) {
+			case "/vote": {
+				presenceData.details = "En train de Voter";
+				presenceData.state = "Vote";
+
+				break;
+			}
+			case "/message": {
+				presenceData.details = "Consulte ses messages";
+				presenceData.state = "MP";
+
+				break;
+			}
+			case "/support": {
+				presenceData.details = "Consulte le support";
+				presenceData.state = "Support";
+
+				break;
+			}
+			case "/support/create": {
+				presenceData.details = "Écrit un ticket au support";
+				presenceData.state = "Support";
+
+				break;
+			}
+			case "/message/new": {
+				presenceData.details = "Écrit un message privé";
+				presenceData.state = "MP";
+
+				break;
+			}
+			case "/list": {
+				presenceData.details = "Consulte la liste des membres";
+				presenceData.state = "List";
+
+				break;
+			}
+			case "/stats": {
+				presenceData.details = "Consultes les stats du site";
+				presenceData.state = "Statistiques";
+
+				break;
+			}
+			case "/profile": {
+				presenceData.details = "Consulte son profil";
+				presenceData.state = "Profil";
+
+				break;
+			}
+			case "/shop": {
+				presenceData.details = "Consulte la boutique";
+				presenceData.state = "Shop";
+
+				break;
+			}
+			case "/faq": {
+				presenceData.state = "F.A.Q";
+				presenceData.details = "Consulte la F.A.Q";
+
+				break;
+			}
+			case "/forum": {
+				presenceData.details = "Consulte le forum";
+				presenceData.state = "Forum";
+
+				break;
+			}
+			case "/forum/Informations.4/": {
+				presenceData.details = "Consulte les infos";
+				presenceData.state = "Informations";
+
+				break;
+			}
+			default:
+				if (document.location.pathname.includes("/forum/Candidatures.5/")) {
+					presenceData.details = "Parcourt les candidatures";
+					presenceData.state = "Candidatures";
+				} else if (document.location.pathname.includes("/topic/Candi")) {
+					presenceData.details = "Lit une candidature";
+					presenceData.state = "Candidatures";
+				} else if (document.location.pathname.includes("/topic/candi")) {
+					presenceData.details = "Lit une candidature";
+					presenceData.state = "Candidatures";
+				} else if (document.location.pathname.includes("/topic")) {
+					presenceData.details = "Lit un topic";
+					presenceData.state = "Topic";
+				} else if (document.location.pathname.includes("/forum/Boite")) {
+					presenceData.state = "Boite à idées";
+					presenceData.details = "Consulte la boite à idée";
+				} else if (document.location.pathname.includes("/forum/Bugs.7/")) {
+					presenceData.details = "Consulte la section Bug";
+					presenceData.state = "Bugs";
+				} else if (
+					document.location.pathname.includes(
+						"/forum/Demande-de-Debannissement-.15/"
+					)
+				) {
+					presenceData.state = "Demande deban";
+					presenceData.details = "Consulte la section unban";
+				} else if (document.location.pathname.includes("/forum/Aide.10/")) {
+					presenceData.state = "Aides";
+					presenceData.details = "Consulte la section aide";
+				} else if (document.location.pathname.includes("/forum/Cr")) {
+					presenceData.state = "Créations";
+					presenceData.details = "Consulte les projets";
+				} else if (document.location.pathname === "/forum/Taverne.12/") {
+					presenceData.state = "Taverne";
+					presenceData.details = "Boit un verre";
+				}
+		}
+	}
+	presence.setActivity(presenceData);
 });

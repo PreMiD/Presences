@@ -1,18 +1,14 @@
-var presence = new Presence({
-  clientId: "637737627151368202"
+const presence = new Presence({
+	clientId: "637737627151368202",
 });
 
 presence.on("UpdateData", async () => {
-  var presenceData = {
-    largeImageKey: "large",
-    details: "Using Jummbox",
-    state: "Making a Beep"
-  };
+	const presenceData = {
+		largeImageKey: "https://i.imgur.com/sjvwfGn.png",
+		details: "Using Jummbox",
+		state: "Making a Beep",
+	};
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

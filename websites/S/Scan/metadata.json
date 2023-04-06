@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "DubStepMad",
+		"id": "118810952530395136"
+	},
+	"service": "Scan",
+	"description": {
+		"en": "Official Scan computer parts, computing services and business.",
+		"nl": "Officiële Scan computeronderdelen, computerdiensten en zaken."
+	},
+	"url": "www.scan.co.uk",
+	"version": "1.0.9",
+	"logo": "https://i.imgur.com/14KOuEk.png",
+	"thumbnail": "https://i.imgur.com/egAfDfZ.png",
+	"color": "#4085bc",
+	"category": "other",
+	"tags": [
+		"scan",
+		"components",
+		"gaming",
+		"audio",
+		"video",
+		"computersystems",
+		"computing",
+		"computerbuilding"
+	]
+}

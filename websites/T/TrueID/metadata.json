@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Faelayis",
+		"id": "328731868096888833"
+	},
+	"service": "TrueID",
+	"description": {
+		"en": "True ID experience a new entertainment center more than and better privileges For every lifestyle, easy to use, complete in one place.",
+		"th": "ทรูไอดี สัมผัสประสบการณ์ใหม่ของศูนย์รวมความบันเทิงที่สุดกว่า และสิทธิพิเศษที่ดีกว่า เพื่อทุกไลฟ์สไตล์ ใช้งานง่าย จบครบในที่เดียว."
+	},
+	"url": [
+		"home.trueid.net",
+		"movie.trueid.net",
+		"tv.trueid.net"
+	],
+	"version": "1.0.9",
+	"logo": "https://i.imgur.com/5975C9m.jpg",
+	"thumbnail": "https://i.imgur.com/4RlMDGT.jpg",
+	"color": "#e0081a",
+	"category": "videos",
+	"tags": [
+		"tv",
+		"thai",
+		"video",
+		"media"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "timestamps",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

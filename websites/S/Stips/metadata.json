@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "Verify.",
+		"id": "297961554673008641"
+	},
+	"service": "Stips",
+	"altnames": [
+		"סטיפס"
+	],
+	"description": {
+		"en": "Come share your knowledge and ideas with the world, meet new people and opinions",
+		"he_IL": "בואו לשתף את הידע והרעיונות שלכם עם העולם, להכיר אנשים חדשים ודעות חדשות",
+		"nl": "Kom uw kennis en ideeën delen met de wereld, ontmoet nieuwe mensen en meningen"
+	},
+	"url": [
+		"stips.co.il",
+		"www.stips.co.il",
+		"stipscdn-stips.netdna-ssl.com"
+	],
+	"version": "1.0.14",
+	"logo": "https://i.imgur.com/xARdqan.png",
+	"thumbnail": "https://i.imgur.com/JwKSAnv.png",
+	"color": "#04d09d",
+	"category": "socials",
+	"tags": [
+		"israel"
+	]
+}

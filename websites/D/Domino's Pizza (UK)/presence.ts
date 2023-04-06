@@ -1,103 +1,158 @@
 const presence = new Presence({
-  clientId: "650464804276011009"
+	clientId: "650464804276011009",
 });
 
 presence.on("UpdateData", () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "large_logo",
-    startTimestamp: new Date().getTime()
-  };
+	const presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/GYkNfcY.png",
+			startTimestamp: Date.now(),
+		},
+		path = document.location.pathname;
 
-  const path = document.location.pathname;
+	switch (path) {
+		case "/": {
+			presenceData.details = "Browing Domino's Pizza";
+			presenceData.state = "Home Page";
 
-  if (path === "/") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Home Page";
-  } else if (path === "/menu") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Menu";
-  } else if (path === "/deals/storedeals") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Viewing in-store deals";
-  } else if (path.startsWith("/menu/pizza/999")) {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Creating a custom pizza";
-  } else if (
-    path.startsWith("/deals/deal") &&
-    Number(path.split("/")[path.split("/").length - 1])
-  ) {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Customising a deal";
-  } else if (path === "/user/login") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Logging in...";
-  } else if (path === "/user/register") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Creating an account";
-  } else if (path === "/welcome") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Home Page";
-  } else if (path === "/store/moreinfo") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Viewing store info";
-  } else if (path.startsWith("/storefinder/bystoreid")) {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Finding stores";
-  } else if (path === "/mydominos/addressbook") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Viewing my addresses";
-  } else if (path === "/mydominos") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Viewing my profile";
-  } else if (path === "/mydominos/favourites") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Viewing my favourited orders";
-  } else if (path === "/mydominos/offers") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Entering a promo code";
-  } else if (path === "/mydominos/paymentmethods") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Adding a payment method";
-  } else if (path === "/mydominos/personaldetails") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Editing personal details";
-  } else if (path === "/mydominos/savedpizzas") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Viewing saved pizzas";
-  } else if (path === "/mydominos/security") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Changing password";
-  } else if (path === "/contact") {
-    presenceData.details = "Browing Domino's Pizza";
-    presenceData.state = "Contacting support";
-  } else if (path === "/basketdetails/show") {
-    const price = document.getElementsByClassName(
-      "new-basket-total-price basket-price"
-    )[0];
-    const saving = document.getElementsByClassName(
-      "new-basket-total-price basket-alt-price"
-    )[0];
+			break;
+		}
+		case "/menu": {
+			presenceData.details = "Browing Domino's Pizza";
+			presenceData.state = "Menu";
 
-    let priceText, savingText;
+			break;
+		}
+		case "/deals/storedeals": {
+			presenceData.details = "Browing Domino's Pizza";
+			presenceData.state = "Viewing in-store deals";
 
-    if (price) {
-      priceText = price.innerHTML;
-    }
-    if (saving) {
-      savingText = saving.innerHTML;
-    }
-    presenceData.details = "Viewing cart";
-    presenceData.state = `Total: ${priceText} ${
-      saving ? `(${savingText} saved)` : ""
-    }`;
-  } else {
-    presenceData.details = "Browing Domino's Pizza";
-  }
+			break;
+		}
+		default:
+			if (path.startsWith("/menu/pizza/999")) {
+				presenceData.details = "Browing Domino's Pizza";
+				presenceData.state = "Creating a custom pizza";
+			} else if (
+				path.startsWith("/deals/deal") &&
+				Number(path.split("/")[path.split("/").length - 1])
+			) {
+				presenceData.details = "Browing Domino's Pizza";
+				presenceData.state = "Customising a deal";
+			} else {
+				switch (path) {
+					case "/user/login": {
+						presenceData.details = "Browing Domino's Pizza";
+						presenceData.state = "Logging in...";
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+						break;
+					}
+					case "/user/register": {
+						presenceData.details = "Browing Domino's Pizza";
+						presenceData.state = "Creating an account";
+
+						break;
+					}
+					case "/welcome": {
+						presenceData.details = "Browing Domino's Pizza";
+						presenceData.state = "Home Page";
+
+						break;
+					}
+					case "/store/moreinfo": {
+						presenceData.details = "Browing Domino's Pizza";
+						presenceData.state = "Viewing store info";
+
+						break;
+					}
+					default:
+						if (path.startsWith("/storefinder/bystoreid")) {
+							presenceData.details = "Browing Domino's Pizza";
+							presenceData.state = "Finding stores";
+						} else {
+							switch (path) {
+								case "/mydominos/addressbook": {
+									presenceData.details = "Browing Domino's Pizza";
+									presenceData.state = "Viewing my addresses";
+
+									break;
+								}
+								case "/mydominos": {
+									presenceData.details = "Browing Domino's Pizza";
+									presenceData.state = "Viewing my profile";
+
+									break;
+								}
+								case "/mydominos/favourites": {
+									presenceData.details = "Browing Domino's Pizza";
+									presenceData.state = "Viewing my favourited orders";
+
+									break;
+								}
+								case "/mydominos/offers": {
+									presenceData.details = "Browing Domino's Pizza";
+									presenceData.state = "Entering a promo code";
+
+									break;
+								}
+								case "/mydominos/paymentmethods": {
+									presenceData.details = "Browing Domino's Pizza";
+									presenceData.state = "Adding a payment method";
+
+									break;
+								}
+								case "/mydominos/personaldetails": {
+									presenceData.details = "Browing Domino's Pizza";
+									presenceData.state = "Editing personal details";
+
+									break;
+								}
+								case "/mydominos/savedpizzas": {
+									presenceData.details = "Browing Domino's Pizza";
+									presenceData.state = "Viewing saved pizzas";
+
+									break;
+								}
+								case "/mydominos/security": {
+									presenceData.details = "Browing Domino's Pizza";
+									presenceData.state = "Changing password";
+
+									break;
+								}
+								case "/contact": {
+									presenceData.details = "Browing Domino's Pizza";
+									presenceData.state = "Contacting support";
+
+									break;
+								}
+								case "/basketdetails/show": {
+									const [price] = document.querySelectorAll(
+											".new-basket-total-price.basket-price"
+										),
+										[saving] = document.querySelectorAll(
+											".new-basket-total-price.basket-alt-price"
+										);
+
+									let priceText, savingText;
+
+									if (price) priceText = price.textContent;
+
+									if (saving) savingText = saving.textContent;
+
+									presenceData.details = "Viewing cart";
+									presenceData.state = `Total: ${priceText} ${
+										saving ? `(${savingText} saved)` : ""
+									}`;
+
+									break;
+								}
+								default:
+									presenceData.details = "Browing Domino's Pizza";
+							}
+						}
+				}
+			}
+	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
