@@ -45,9 +45,12 @@ presence.on("UpdateData", async () => {
 	if (path === "/") presenceData.details = (await strings).home;
 	else if (path === "/new") {
 		presenceData.details = (await strings).newLyrics;
-		presenceData.state = `${document.querySelector<HTMLInputElement>(
-			"#song_primary_artist"
-		).value || "[empty]"} - ${document.querySelector<HTMLInputElement>("#song_title").value || "[empty]"}`;
+		presenceData.state = `${
+			document.querySelector<HTMLInputElement>("#song_primary_artist").value ||
+			"[empty]"
+		} - ${
+			document.querySelector<HTMLInputElement>("#song_title").value || "[empty]"
+		}`;
 	} else if (path.startsWith("/a/")) {
 		let article = document.querySelector("h1.article_title").textContent;
 		if (article.length > 128) article = `${article.substring(0, 125)}...`;
