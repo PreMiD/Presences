@@ -17,6 +17,7 @@ async function getStrings() {
 			viewLyrics: "genius.viewLyrics",
 			home: "genius.viewHome",
 			viewAlbum: "genius.viewAlbum",
+			newLyrics: "genius.newLyrics",
 			buttonAlbum: "general.buttonViewAlbum",
 		},
 		await presence.getSetting<string>("lang")
@@ -42,7 +43,12 @@ presence.on("UpdateData", async () => {
 		path = document.location.pathname;
 
 	if (path === "/") presenceData.details = (await strings).home;
-	else if (path.startsWith("/a/")) {
+	else if (path === "/new") {
+		presenceData.details = (await strings).newLyrics;
+		presenceData.state = `${document.querySelector<HTMLInputElement>(
+			"#song_primary_artist"
+		).value} - ${document.querySelector<HTMLInputElement>("#song_title").value}`;
+	} else if (path.startsWith("/a/")) {
 		let article = document.querySelector("h1.article_title").textContent;
 		if (article.length > 128) article = `${article.substring(0, 125)}...`;
 
