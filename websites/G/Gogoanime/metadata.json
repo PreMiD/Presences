@@ -20,8 +20,8 @@
 		"gogoanime.vc",
 		"gogoanime.news"
 	],
-	"regExp": "[0-9w]{0,6}.*gogoanime[s]*.[a-z]+",
-	"version": "2.0.18",
+	"regExp": "[0-9w]{0,6}.*gogoanime([s])|(.*)*(.[a-z]+)+",
+	"version": "2.1.0",
 	"logo": "https://i.imgur.com/OnaEYdo.png",
 	"thumbnail": "https://i.imgur.com/RZwilwc.png",
 	"color": "#FFC119",
