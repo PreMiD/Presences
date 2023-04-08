@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity(presenceData);
 	}
 
-	if (pathname === "search") {
+	if (pathname === "/search") {
 		presenceData.details = "Viewing search results for:";
 		presenceData.state = document
 			.querySelector('[class="breadcrumb"]')
