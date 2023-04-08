@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						default: {
-							if (!!lowerCaseIt(subTitle).replace(lowerCaseIt(selected), "")) {
+							if (lowerCaseIt(subTitle).replace(lowerCaseIt(selected), "")) {
 								presenceData.details = privacy
 									? strings.viewCategory.replace(":", "")
 									: `Viewing ${selected} in category:`;
@@ -163,7 +163,7 @@ presence.on("UpdateData", async () => {
 
 							presenceData.state = lowerCaseIt(subTitle)
 								.replace(lowerCaseIt(selected), "")
-								.replace(/\&/gm, " & ");
+								.replace(/&/gm, " & ");
 						}
 					}
 				}
