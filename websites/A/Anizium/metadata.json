@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "Anizium",
+  "author": {
+    "id": "708746139092123679",
+    "name": "Mert^^#0123"
+  },
+  "description": {
+    "en": "Anizium is a website where you can watch anime with Turkish subtitles."
+  },
+  "url": "anizium.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/Z3G1Ubm.png",
+  "thumbnail": "https://i.imgur.com/Z3G1Ubm.png",
+  "color": "#8223a4",
+  "tags": [
+    "turkish",
+    "anime",
+    "videp"
+  ],
+  "category": "anime",
+  "iframe": true
+}
