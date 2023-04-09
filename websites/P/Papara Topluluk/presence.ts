@@ -38,11 +38,19 @@ presence.on("UpdateData", async () => {
 
 	if (page.includes("/t/")) {
 		presenceData.details = reading;
+		presenceData.smallImageKey = "reading";
 		presenceData.state = document.querySelector(
 			".title-wrapper .fancy-title"
 		).textContent;
 
-		presenceData.smallImageKey = "reading";
+		if (!privacyMode) {
+			presenceData.buttons = [
+				{
+					label: "Konuyu Görüntüle",
+					url: document.location.href,
+				},
+			];
+		}
 	} else if (page.includes("/c/")) {
 		presenceData.details = "Bir kategoriye göz atıyor:";
 		presenceData.state = document.querySelector(".category-name").textContent;
@@ -74,6 +82,11 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
 			".details .user-profile-avatar img"
 		).src;
+	} else if (page.includes("/g/")) {
+		presenceData.details = "Bir gruba göz atıyor:";
+		presenceData.state = document.querySelector(
+			".group-info-names .group-info-name"
+		)?.textContent;
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presenceData.details = "Bir sayfaya göz atıyor:";
 		presenceData.state = pages[page] || pages[page.slice(0, -1)];
