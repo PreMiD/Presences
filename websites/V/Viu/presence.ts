@@ -169,12 +169,13 @@ presence.on("UpdateData", async () => {
 					seriesInfo?.[0].series_cover_portrait_image_url,
 				coverLandscapeImage = seriesInfo?.[0].series_cover_landscape_image_url;
 
-			if (presenceLogo > 1)
+			if (presenceLogo > 1) {
 				presenceData.largeImageKey =
 					[
 						coverPortraitImage || coverLandscapeImage,
 						coverLandscapeImage || coverPortraitImage,
 					][presenceLogo - 2] || "viu_logo";
+			}
 
 			presenceData.smallImageKey = video.paused ? "pause" : "play";
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
