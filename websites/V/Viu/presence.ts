@@ -90,6 +90,7 @@ async function generateToken() {
 	return response.json().then(x => x.token);
 }
 
+/* eslint-disable camelcase */
 interface SeriesInfo {
 	is_movie: number;
 	series_id: string;
@@ -99,6 +100,7 @@ interface SeriesInfo {
 	series_cover_portrait_image_url?: string;
 	number?: string;
 }
+/* eslint-enable camelcase */
 
 presence.on("UpdateData", async () => {
 	const [newLang, buttonsOn, presenceLogo] = await Promise.all([
