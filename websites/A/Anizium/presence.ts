@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Paketlere bakıyor";
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 	} else if (window.location.pathname.startsWith("/hemenizle") && animeInfo) {
-		const epNum = animeInfo.match(/[0-9]+\.Bölüm/g);
+		const epNum = animeInfo.match(/[0-9]+\.Bölüm/g) || animeInfo.match(/[0-9]+\. Bölüm/g);
 
 
 		presenceData.details = `${animeInfo.split("->")[2]} izliyor`;
