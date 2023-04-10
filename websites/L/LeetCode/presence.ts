@@ -18,10 +18,8 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.startsWith("/problemset"))
 		presenceData.details = "Viewing Problems";
 	else if (document.location.pathname.startsWith("/problems")) {
-		presenceData.details = document.querySelectorAll(
-			"div[data-cy=question-title]"
-		)[0].textContent;
-		presenceData.state = document.querySelectorAll("div[diff]")[0].textContent;
+		// Read problem name based on title, HTML is too messy to parse
+		presenceData.details = document.title.slice(0, -10);
 	} else if (document.location.pathname.startsWith("/explore")) {
 		presenceData.details = "Explore";
 
