@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "3388",
+  "author": {
+    "id": "356827694572503051",
+    "name": "xela#0049"
+  },
+  "description": {
+    "en": "3388 is a streaming service for movies and TV."
+  },
+  "url": "3388.to",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/FhGHKTn.png",
+  "thumbnail": "https://i.imgur.com/x3ZeXf5.png",
+  "color": "#c13f34",
+  "tags": [
+    "streaming",
+    "movies",
+    "tv",
+    "3388"
+  ],
+  "category": "videos"
+}
