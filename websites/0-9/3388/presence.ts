@@ -4,8 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/FhGHKTn.png",
-			smallImageKey: "search",
+			largeImageKey: "https://i.imgur.com/h8N7txd.png",
+			smallImageKey: "https://i.imgur.com/5f3sdaH.png",
 			smallImageText: "Browsing...",
 		},
 		{ pathname } = document.location;
@@ -64,7 +64,9 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			".mbu-bg.blur-small img"
 		).src;
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused
+			? "https://i.imgur.com/aO2ZCME.png"
+			: "https://i.imgur.com/UG7M2Ho.png";
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 		if (!video.paused) {
