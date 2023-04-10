@@ -8,7 +8,10 @@
   "description": {
     "en": "3388 is a streaming service for movies and TV."
   },
-  "url": "3388.to",
+  "url": [
+    "3388.to",
+    "www.3388.to"
+  ],
   "version": "1.0.0",
   "logo": "https://i.imgur.com/FhGHKTn.png",
   "thumbnail": "https://i.imgur.com/x3ZeXf5.png",
