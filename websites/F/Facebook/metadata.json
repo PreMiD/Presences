@@ -21,8 +21,11 @@
 		"zh_CN": "与朋友、家人和其他你认识的人联系。分享照片和视频、发送消息和获取更新。",
 		"vi_VN": "Kết nối với bạn bè, người thân và những người khác bạn biết. Chia sẻ hình ảnh và video, gửi tin nhắn và nhận các thông báo."
 	},
-	"url": "www.facebook.com",
-	"version": "3.6.4",
+	"url": [
+		"www.facebook.com",
+		"web.facebook.com"
+	],
+	"version": "3.7.0",
 	"logo": "https://i.imgur.com/nS9sZn6.png",
 	"thumbnail": "https://i.imgur.com/iftQq6r.jpg",
 	"color": "#4267B2",
@@ -39,22 +42,49 @@
 			"value": false
 		},
 		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": false,
+			"if": {
+				"privacyMode": false
+			}
+		},
+		{
 			"icon": "fas fa-user",
 			"title": "Show Username in Messenger",
 			"id": "messagerUsername",
-			"value": false
+			"value": true,
+			"if": {
+				"privacyMode": false
+			}
 		},
 		{
 			"icon": "fas fa-search",
 			"title": "Show Search Query",
 			"id": "searchQuery",
-			"value": true
+			"value": true,
+			"if": {
+				"privacyMode": false
+			}
 		},
 		{
 			"icon": "fad fa-stopwatch",
 			"title": "Show Timestamps",
 			"id": "timestamp",
-			"value": true
+			"value": true,
+			"if": {
+				"privacyMode": false
+			}
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacyMode": false
+			}
 		}
 	]
 }
