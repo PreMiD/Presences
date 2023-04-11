@@ -8,7 +8,10 @@
 	"description": {
 		"en": "Learn a language as it's used now. Immerse yourself in lessons that feature videos of native speakers, so you start speaking real life language, fast."
 	},
-	"url": "app.memrise.com",
+	"url": [
+		"app.memrise.com",
+		"memrise.com"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/Kbhd9t6.jpg",
 	"thumbnail": "https://i.imgur.com/JcDjRfn.png",
@@ -25,5 +28,13 @@
 		"vocabulary",
 		"grammar",
 		"native"
+	],
+	"settings": [
+		{
+			"id": "details",
+			"title": "Show details",
+			"icon": "fas fa-eye-slash",
+			"value": true
+		}
 	]
 }

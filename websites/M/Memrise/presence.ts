@@ -1,8 +1,8 @@
-const presence = new Presence({ clientId: "1080885668248559648" }),
+const presence = new Presence({ clientId: "1095377958241304586" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Assets {
-	Logo = "https://i.imgur.com/356Spon.png",
+	Logo = "https://i.imgur.com/Kbhd9t6.jpg",
 	Searching = "https://i.imgur.com/OIgfjTG.png",
 	Reading = "https://i.imgur.com/53N4eY6.png",
 }
@@ -10,32 +10,60 @@ enum Assets {
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
 		pathArr = pathname.split("/"),
-		{ details, smallImageKey } = getPageData(
+		{ details, smallImageKey, largeImageKey, state, buttons } = getPageData(
 			pathArr[1],
+			pathArr[2],
+			pathArr[3],
 		),
 		presenceData: PresenceData = {
+			largeImageKey: largeImageKey || Assets.Logo,
 			startTimestamp: browsingTimestamp,
 			details,
 		};
-	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 
-	if ( // test
-		!(await presence.getSetting<boolean>("details")) &&
-		(pathArr[1] === "manga" || pathArr[1] === "read")
-	) {
-		presenceData.largeImageKey = Assets.Logo;
-		presenceData.details = "Reading manga...";
-		presenceData.state = "";
-	}
+	if (buttons)
+		presenceData.buttons = buttons;
+
+	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
+	if (state) presenceData.state = state;
 
 	if (details) presence.setActivity(presenceData);
 });
 
-function getPageData(page: string) {
+function getPageData(page: string, pageDetail: string, title: string): {
+	details?: string;
+	smallImageKey?: string;
+	largeImageKey?: string;
+	state?: string;
+	buttons?: [ButtonData, ButtonData?];
+} {
 	switch (page) {
 		case "dashboard":
-			return { details: "Viewing dashboard..." };
+			return {
+				details: `Viewing ${page}...`,
+				state: document.querySelector("h1").textContent
+			};
+		case "course":
+			return {
+				details: document.querySelector(".course-name")?.textContent,
+				state: document.querySelector(".progress-box-title")?.textContent,
+				largeImageKey: document.querySelector<HTMLImageElement>(".course-photo img")?.src,
+				buttons: [
+					{
+						label: "Go to Course",
+						url: `https://app.memrise.com/course/${pageDetail}/${title}`,
+					},
+				],
+			};
+		case "aprender":
+			return {
+				details: document.querySelector("header > div > a").textContent,
+				state: document.querySelector("div.sc-1jv6lv2-0.cMpBZY > h2").textContent
+			};
+		case "user":
+			return {
+				details: `Viewing ${page}...`};
 		default:
-			return { details: "Browsing...", smallImageKey: Assets.Searching };
+			return { details: "Browsing...", smallImageKey: Assets.Reading };
 	}
 }
