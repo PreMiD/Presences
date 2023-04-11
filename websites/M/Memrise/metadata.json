@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "135058085386387457",
+		"name": "Extiriority"
+	},
+	"service": "Memrise",
+	"description": {
+		"en": "Learn a language as it's used now. Immerse yourself in lessons that feature videos of native speakers, so you start speaking real life language, fast."
+	},
+	"url": "app.memrise.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/Kbhd9t6.jpg",
+	"thumbnail": "https://i.imgur.com/JcDjRfn.png",
+	"color": "#ffda3e",
+	"category": "other",
+	"tags": [
+		"education",
+		"languange",
+		"learning",
+		"courses",
+		"practice",
+		"decks",
+		"cards",
+		"vocabulary",
+		"grammar",
+		"native"
+	]
+}
