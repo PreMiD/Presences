@@ -1,14 +1,33 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-	const videoInfos: HTMLVideoElement =
-		document.querySelector("div.jw-media.jw-reset > video") ??
-		document.querySelector("div.html5-video-container > video"); // youtube embed
+	const videoInfos =
+			document.querySelector<HTMLVideoElement>("video") ??
+			document.querySelector<HTMLVideoElement>('[class*="jw-video]'),
+		dur = document.querySelector("[jw-text-duration]");
 	if (videoInfos && !isNaN(videoInfos.duration)) {
 		iframe.send({
-			duration: videoInfos.duration,
-			currentTime: videoInfos.currentTime,
-			paused: videoInfos.paused,
+			iframeVideo: {
+				version: 0,
+				currentTime: videoInfos.currentTime,
+				duration: videoInfos.duration,
+				paused: videoInfos.paused,
+			},
+		});
+	} else if (!videoInfos && dur) {
+		iframe.send({
+			iframeVideo: {
+				version: 1,
+				currentTime2: document.querySelector("[class*='jw-text-elapsed']")
+					?.textContent,
+				duration2: dur.textContent,
+				paused: document
+					.querySelector('[id="mediaplayer"]')
+					?.className?.toLowerCase()
+					.includes("-paused")
+					? true
+					: false,
+			},
 		});
 	}
 });

@@ -1,41 +1,16 @@
-interface GogoanimeApiResponse {
-	error: boolean;
-	errors: {
-		message: string;
-		code: string;
-	}[];
-	payload: {
-		allDomains: string[];
-		activeDomains: string[];
-		asianServers: string[];
-		northAmericanServers: string[];
-	};
-	date: {
-		data: number;
-	};
-}
-
-interface DomainCheckState {
-	invalid: boolean;
-	validDomains: string[];
-}
-
 const presence = new Presence({
-	clientId: "696341580096733185",
-	appMode: true,
-});
+		clientId: "696341580096733185",
+		appMode: true,
+	}),
+	browsingTimeStamp = Math.floor(Date.now() / 1000);
 
-let videoInfos = {
-		duration: 0,
-		currentTime: 0,
-		paused: false,
-	},
-	framaDataUpdated = false,
-	isDomainChecked = false, // we only need to verify the authenticity of the domain ONCE
-	isClone = false, // true if the current gogoanime domain is a clone
-	oldTime = 0;
+let currentTime = 0,
+	currentTime2 = "00:00",
+	duration = 0,
+	duration2 = "00:00",
+	paused = true; // true if the current gogoanime domain is a clone
 
-const states = {
+const detailed = {
 	// both the state and logo to use
 	NOTFOUND: ["404", ""],
 	BROWSING: ["Browsing...", "browsing"],
@@ -48,17 +23,37 @@ const states = {
 	REQUESTING: ["Requesting an anime...", "request"],
 	CONTACTING: ["Contacting the support...", "contact"],
 };
+interface IFrameData {
+	iframeVideo: {
+		version: number;
+		currentTime: number;
+		currentTime2: string;
+		duration: number;
+		duration2: string;
+		paused: boolean;
+	};
+}
 
-presence.on(
-	"iFrameData",
-	(videoData: { duration: number; currentTime: number; paused: boolean }) => {
-		videoInfos = videoData;
-		framaDataUpdated = true;
+presence.on("iFrameData", (data: IFrameData) => {
+	if (data.iframeVideo.version === 0) {
+		if (data.iframeVideo.duration) {
+			({
+				paused: paused,
+				currentTime: currentTime,
+				duration: duration,
+			} = data.iframeVideo);
+		}
+	} else {
+		({
+			paused: paused,
+			currentTime2: currentTime2,
+			duration2: duration2,
+		} = data.iframeVideo);
 	}
-);
+});
 
 function upperCaseFirstChar(word: string) {
-	return `${word[0].toUpperCase()}${word.slice(1, word.length)}`;
+	if (word) return `${word[0].toUpperCase()}${word.slice(1, word.length)}`;
 }
 
 function formatStr(anime: string[]): string {
@@ -69,114 +64,219 @@ function formatStr(anime: string[]): string {
 		.replaceAll("Dub", "(Dub)");
 }
 
-function parseCookieString(cookie: string): Record<string, string>[] {
-	const dict: Record<string, string>[] = [];
-	if (cookie) {
-		const cookies = cookie.split(";");
-		for (const cooky of cookies) {
-			const parts = cooky.split("=");
-			if (parts.length === 2) {
-				dict.push({
-					key: parts[0].trimStart(),
-					value: parts[1],
-				});
-			}
-		}
-	}
-	return dict;
-}
-
-async function sendRequestToDomainAPI(): Promise<Response> {
-	const response = await fetch("https://yuabot.com/weeb/api/v1/meta/domains", {
-		method: "GET",
-		mode: "cors",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
-	return response;
-}
-
-async function checkDomain(): Promise<DomainCheckState> {
-	const result: DomainCheckState = { invalid: true, validDomains: null },
-		cookies = parseCookieString(document.cookie),
-		cookieName = "PMD_GOGOANIME_VALID_DOMAINS";
-	let currentDomain = document.location.hostname;
-	if (currentDomain.split(".").length > 2) {
-		currentDomain = document.location.hostname.substring(
-			document.location.hostname.indexOf(".") + 1
-		); // ignore the subdomain;
-	}
-
-	for (const cooky of cookies) {
-		if (
-			cooky.key === cookieName &&
-			(result.validDomains = cooky.textContent.split("-")).includes(
-				currentDomain
-			)
-		) {
-			result.invalid = false;
-			return result;
-		}
-	}
-
-	await sendRequestToDomainAPI().then(async body => {
-		if (body.status !== 200) return;
-
-		const data: GogoanimeApiResponse = await body.json();
-		if (data) {
-			result.validDomains = data.payload.allDomains;
-			document.cookie = `${cookieName}=${result.validDomains.join(
-				"-"
-			)}; max-age=1800`;
-			if (result.validDomains.includes(currentDomain)) result.invalid = false;
-		}
-	});
-	return result;
-}
-
-function getEndTime(current: number, duration: number): number {
-	return Date.now() / 1000 + (duration - current);
-}
-
-function getTimestampAsString(duration: number, current: number) {
-	return new Date((duration - current) * 1000).toISOString().substr(11, 8);
-}
-
 presence.on("UpdateData", async () => {
-	if (!isDomainChecked) {
-		isDomainChecked = true;
-		await checkDomain().then(result => {
-			isClone = result.invalid;
-			if (isClone) {
-				presence.error(
-					`The following gogoanime domain is a clone therefore not supported by this extension. The valid domains are:\n${result.validDomains.join(
-						"\n"
-					)}`
-				);
-			} else {
-				presence.success(
-					"The following gogoanime domain is supported by this extension."
-				);
-			}
-		});
+	const { pathname, href } = document.location,
+		dataPage = document
+			.querySelector('[class="pagination-list"]')
+			?.querySelector("a")
+			?.getAttribute("data-page"),
+		dataMaxPage = document
+			.querySelector('[class="pagination-list"]')
+			?.lastElementChild?.querySelector("a")
+			?.getAttribute("data-page");
 
-		if (isClone) presence.clearActivity();
-	}
+	let usedSearchEl: HTMLInputElement;
+	if (!pathname.includes("login.html")) {
+		const allInput: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+				'input[type="search"],input[name="keyword"]'
+			),
+			inputArray: HTMLInputElement[] = [];
+		let inputElement: HTMLInputElement;
+		for (const i in allInput) inputArray.push(allInput[i] as HTMLInputElement);
 
-	if (isClone) return;
-
-	const currentPath = document.location.pathname;
-	let detail: string,
-		state: string[] = states.BROWSING;
+		for (inputElement of inputArray) {
+			if (
+				inputElement?.value?.trim()?.length >= 2 &&
+				inputElement.className !== "btngui" &&
+				inputElement.className !== "reset"
+			)
+				usedSearchEl = inputElement;
+		}
+	} else usedSearchEl = null;
+	let state: string,
+		detail: string[] = detailed.BROWSING;
 	if (
 		document.querySelector("#wrapper_bg > section h1.entry-title")
 			?.textContent === "404"
 	)
-		state = states.NOTFOUND;
+		detail = detailed.NOTFOUND;
 	else {
-		switch (currentPath) {
-			case "/": {
+		switch (true) {
+			case pathname.includes("/watch/"):
+			case document.querySelector('[class="title_name"]') !== null:
+			case document.querySelector('[class="anime_video_body_watch"]') !== null:
+			case document.querySelector('[class="anime_muti_link"]') !== null: {
+				const anime = pathname.includes("/movie/")
+						? pathname.split("/")[2]
+						: pathname.split("/")[1],
+					title =
+						document.querySelector('[class="anime-info"]')?.querySelector("a")
+							?.textContent ??
+						document.querySelector('[class="title_name"]')?.textContent ??
+						anime.replace(/-/gm, " ").replace(/\(dub\)/gm, ""),
+					titleReplaced =
+						document
+							.querySelector('[class="each_episode active"]')
+							?.textContent?.trim() ??
+						document.querySelector('[class="active"]')?.textContent?.trim() ??
+						document
+							.querySelector('[class="anime_video_body"] > h1')
+							?.textContent?.toLowerCase()
+							?.replace(
+								/(for free on gogoanime at gogoanime)|(english subbed at gogoanime)|(watch)/gm,
+								""
+							);
+				detail = detailed.WATCHING;
+				state = titleReplaced
+					? `${upperCaseFirstChar(title?.toLowerCase())} | ${upperCaseFirstChar(
+							titleReplaced
+								.toLowerCase()
+								?.replace(/(sub)|(dub)(ova)/gm, "")
+								?.replace("ep ", "Episode ")
+					  )}`
+					: `${upperCaseFirstChar(title?.toLowerCase())}`;
+				break;
+			}
+			case pathname.includes("/anime-list"): {
+				state = "The anime list";
+				break;
+			}
+			case pathname.includes("/new-season"):
+			case pathname.includes("/recent-release-anime"): {
+				state = "Most recent anime";
+				break;
+			}
+			case pathname.includes("/anime-movies"): {
+				state = "Anime movies";
+				break;
+			}
+			case pathname.includes("/popular"): {
+				state = "Most popular anime";
+				break;
+			}
+			case pathname.includes("/news/reviews"): {
+				state = "Anime reviews";
+				break;
+			}
+			case pathname.includes("/news/trailers"): {
+				state = "Anime trailers";
+				break;
+			}
+			case pathname.includes("/requested-list"): {
+				state = "The requested anime list";
+				break;
+			}
+			case pathname.includes("/upcoming-anime"): {
+				state = "Upcoming anime";
+				break;
+			}
+			case pathname.includes("/genre/"): {
+				// element otherwise use the url path as fallback
+				state = `Anime: ${
+					document.querySelector(
+						"#wrapper_bg > section > section.content_left > div.main_body > div:nth-child(2) > div.anime_info_body_bg > h1"
+					)?.textContent ?? formatStr(pathname.split("/").pop().split("-"))
+				}`;
+				break;
+			}
+			case pathname.includes("/season/"):
+			case pathname.includes("/sub-category/"): {
+				state = `${formatStr(pathname.split("/").pop().split("-"))}`;
+				break;
+			}
+			case pathname === "/announcement.html": {
+				state = "Announcements";
+				break;
+			}
+			case pathname === "/news.html": {
+				state = "News";
+				break;
+			}
+			case pathname === "/privacy.html": {
+				state = "Announcements";
+				break;
+			}
+			case pathname === "/about.html":
+			case pathname === "/about-us.html": {
+				state = "About us";
+				break;
+			}
+			case pathname === "contact-us.html": {
+				detail = detailed.CONTACTING;
+				break;
+			}
+			case pathname === "/login.html": {
+				detail = detailed.LOGIN;
+				break;
+			}
+			case pathname === "/register.html": {
+				detail = detailed.SIGNUP;
+				break;
+			}
+			case pathname === "/user/bookmark": {
+				detail = detailed.BOOKMARK;
+				break;
+			}
+			case pathname === "//search.html": {
+				detail = detailed.SEARCHING;
+				state = `Keyword: ${formatStr(
+					new URLSearchParams(window.location.search).get("keyword").split(" ")
+				)}`;
+
+				break;
+			}
+			case pathname === "/request-anime.html": {
+				detail = detailed.REQUESTING;
+
+				state = `Anime: ${
+					(document.getElementsByName("title")[0] as HTMLInputElement)?.value
+				}`;
+				break;
+			}
+			case pathname.includes("/requested/"): {
+				state = `Requested anime: ${
+					document.querySelector(
+						"#wrapper_bg > section > section.content_left > div > div.anime_info_body > div > h1"
+					)?.textContent ?? formatStr(pathname.split("/").pop().split("-"))
+				}`;
+				break;
+			}
+			case pathname.includes("/news/"): {
+				detail = detailed.READING;
+				state = `News: ${
+					document.querySelector(
+						"#wrapper_bg > section > section.content_left > div > div.page_content > h1"
+					).textContent
+				}`;
+				break;
+			}
+			case pathname.includes("/announcement/"): {
+				detail = detailed.READING;
+				state = `Announcement: ${
+					document.querySelector(
+						"#wrapper_bg > section > section.content_left > div > div.page_content > h1"
+					).textContent
+				}`;
+				break;
+			}
+			case pathname.includes("/reviews/"): {
+				detail = detailed.READING;
+				state = `Review Of: ${
+					document.querySelector(
+						"#wrapper_bg > section > section.content_left > div > div.page_content > h1"
+					).textContent
+				}`;
+				break;
+			}
+			case pathname.includes("/trailers/"): {
+				detail = detailed.WATCHING;
+				const anime = document.querySelector(
+					"#wrapper_bg > section > section.content_right.block_mb > div:nth-child(1) > div > div.related_right.center_col1 > div > ul > li > div.name > a > h4"
+				).textContent;
+				state = `Trailer Of: ${anime}`;
+				break;
+			}
+			case pathname === "/": {
 				const sel = document.querySelector(
 					"#load_recent_release > div.anime_name.recent_release > h2"
 				)?.children;
@@ -185,199 +285,77 @@ presence.on("UpdateData", async () => {
 						if (child.className.includes("active")) {
 							switch (child.textContent) {
 								case "DUB":
-									detail = "Recent Dubbed anime releases";
+									state =
+										dataPage && dataMaxPage
+											? `Recent dubbed anime releases (page ${dataPage}/${dataMaxPage})`
+											: "Recent dubbed anime releases";
 									break;
 								case "Chinese":
-									detail = "Recent Chinese anime releases";
+									state =
+										dataPage && dataMaxPage
+											? `Recent Chinese anime releases (page ${dataPage}/${dataMaxPage})`
+											: "Recent Chinese anime releases";
 									break;
 								default:
-									detail = "Recent anime releases";
+									state =
+										dataPage && dataMaxPage
+											? `Recent anime releases (page ${dataPage}/${dataMaxPage})`
+											: "Recent anime releases";
 									break;
 							}
 							break;
 						}
 					}
-				} else detail = "Home";
+				} else state = "Home";
 
 				break;
 			}
-			case "/anime-list.html": {
-				detail = "The anime list";
-				break;
-			}
-			case "/new-season.html":
-			case "/recent-release-anime": {
-				detail = "Most recent anime";
-				break;
-			}
-			case "/anime-movies.html": {
-				detail = "Anime movies";
-				break;
-			}
-			case "/popular.html": {
-				detail = "Most popular anime";
-				break;
-			}
-			case "/news/reviews": {
-				detail = "Anime reviews";
-				break;
-			}
-			case "/news/trailers": {
-				detail = "Anime trailers";
-				break;
-			}
-			case "/requested-list.html": {
-				detail = "The requested anime list";
-				break;
-			}
-			case "/upcoming-anime": {
-				detail = "Upcoming anime";
-				break;
-			}
-			default:
-				if (currentPath.includes("/genre/")) {
-					detail = `Anime genre: ${upperCaseFirstChar(
-						currentPath.split("/").pop()
-					)}`;
-				} else if (currentPath.includes("/category/")) {
-					const anime =
-						document.querySelector(
-							"#wrapper_bg > section > section.content_left > div.main_body > div:nth-child(2) > div.anime_info_body_bg > h1"
-						)?.textContent ??
-						formatStr(currentPath.split("/").pop().split("-")); // use the url path as fallback
-					detail = `Anime: ${anime}`;
-				} else if (
-					currentPath.includes("/sub-category/") ||
-					currentPath.includes("/season/")
-				)
-					detail = `${formatStr(currentPath.split("/").pop().split("-"))}`;
-				else if (currentPath === "/announcement.html") detail = "Announcements";
-				else if (currentPath === "/news.html") detail = "Latest News";
-				else if (currentPath.includes("/requested/")) {
-					detail = `Requested anime: ${
-						document.querySelector(
-							"#wrapper_bg > section > section.content_left > div > div.anime_info_body > div > h1"
-						)?.textContent ?? formatStr(currentPath.split("/").pop().split("-"))
-					}`;
-				} else if (currentPath.includes("/announcement/")) {
-					state = states.READING;
-					detail = `Announcement: ${
-						document.querySelector(
-							"#wrapper_bg > section > section.content_left > div > div.page_content > h1"
-						).textContent
-					}`;
-				} else if (currentPath.includes("/reviews/")) {
-					state = states.READING;
-					detail = `Review Of: ${
-						document.querySelector(
-							"#wrapper_bg > section > section.content_left > div > div.page_content > h1"
-						).textContent
-					}`;
-				} else if (currentPath.includes("/news/")) {
-					state = states.READING;
-					detail = `News: ${
-						document.querySelector(
-							"#wrapper_bg > section > section.content_left > div > div.page_content > h1"
-						).textContent
-					}`;
-				} else if (currentPath.includes("/privacy.html")) {
-					state = states.READING;
-					detail = "The website's privacy notes";
-				} else if (currentPath.includes("/about-us.html")) {
-					state = states.READING;
-					detail = "The website's about us";
-				} else if (currentPath.includes("/request-anime.html")) {
-					state = states.REQUESTING;
-
-					detail = `Anime: ${
-						(document.getElementsByName("title")[0] as HTMLInputElement)?.value
-					}`;
-				} else {
-					switch (currentPath) {
-						case "contact-us.html": {
-							state = states.CONTACTING;
-							break;
-						}
-						case "/login.html": {
-							state = states.LOGIN;
-							break;
-						}
-						case "/register.html": {
-							state = states.SIGNUP;
-							break;
-						}
-						case "/user/bookmark": {
-							state = states.BOOKMARK;
-							break;
-						}
-						case "//search.html": {
-							state = states.SEARCHING;
-							detail = `Keyword: ${formatStr(
-								new URLSearchParams(window.location.search)
-									.get("keyword")
-									.split(" ")
-							)}`;
-
-							break;
-						}
-						default:
-							if (currentPath.includes("/trailers/")) {
-								state = states.WATCHING;
-								const anime = document.querySelector(
-									"#wrapper_bg > section > section.content_right.block_mb > div:nth-child(1) > div > div.related_right.center_col1 > div > ul > li > div.name > a > h4"
-								).textContent;
-								detail = `Trailer Of: ${anime}`;
-							} else {
-								state = states.WATCHING;
-								const anime = currentPath.split("/").pop().split("-");
-								detail = `${formatStr(
-									anime.slice(0, anime.length - 2)
-								)}: ${upperCaseFirstChar(
-									`${anime[anime.length - 2]} ${anime[anime.length - 1]}`
-								)}`;
-							}
-					}
-				}
 		}
 	}
-
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/OnaEYdo.png",
-		details: state[0],
-		state: detail,
+		state,
+		details: detail[0],
 	};
-
-	if (state === states.NOTFOUND) presence.setActivity({});
-	else if (state === states.WATCHING && videoInfos) {
-		presenceData.buttons = [
-			{
-				label: "Watch",
-				url: document.location.href,
-			},
-		];
-
-		if (
-			videoInfos.paused ||
-			(framaDataUpdated && videoInfos.currentTime === oldTime)
-		) {
+	if (usedSearchEl?.value) {
+		presenceData.details = "Searching for:";
+		presenceData.state = usedSearchEl.value.replace(/ /gm, "");
+		presenceData.smallImageKey = "searching";
+		return presence.setActivity(presenceData);
+	}
+	if (detail === detailed.NOTFOUND) presence.setActivity();
+	else if (duration || duration2) {
+		if (!duration && duration2) {
+			duration = presence.timestampFromFormat(duration2);
+			currentTime = presence.timestampFromFormat(currentTime2);
+		}
+		if (paused) {
 			presenceData.smallImageKey = "pause";
-			presenceData.smallImageText = `${getTimestampAsString(
-				videoInfos.duration,
-				videoInfos.currentTime
-			)} left`;
+			presenceData.smallImageText = `${
+				presence.getTimestamps(currentTime, duration)[1]
+			} left`;
 		} else {
 			presenceData.smallImageKey = "play";
-			presenceData.endTimestamp = getEndTime(
-				videoInfos.currentTime,
-				videoInfos.duration
+			[, presenceData.endTimestamp] = presence.getTimestamps(
+				currentTime,
+				duration
 			);
-			oldTime = videoInfos.currentTime;
-			framaDataUpdated = false;
 		}
-		presence.setActivity(presenceData, !videoInfos.paused);
-	} else {
-		[, presenceData.smallImageKey] = state;
-		presenceData.startTimestamp = Date.now();
+		presenceData.buttons = [
+			{
+				label: "Watch Video",
+				url: href,
+			},
+		];
 		presence.setActivity(presenceData);
+	} else {
+		presenceData.startTimestamp = browsingTimeStamp;
+		presence.setActivity(presenceData);
+		presenceData.buttons = [
+			{
+				label: "Browse",
+				url: href,
+			},
+		];
 	}
 });
