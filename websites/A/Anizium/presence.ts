@@ -19,35 +19,32 @@ presence.on("iFrameData", (msg: Video) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Z3G1Ubm.png",
-	},
-
-	 haberAd: string =
-		document
-			.querySelector(
-				"body > div.haberler > div > div > div:nth-child(7) > div > div > div.kart-header > h2"
-			)
-			?.textContent.trim() || null,
-	 haberDetay: string =
-		document
-			.querySelector(
-				"body > div.haberler > div > div > div:nth-child(7) > div > div > div.kart-body > p:nth-child(4)"
-			)
-			?.textContent.trim() || null,
-
-	 animeInfo: string =
-		document
-			.querySelector(
-				"body > div.container-fluid > div > div > div:nth-child(2) > div:nth-child(1) > span"
-			)
-			?.textContent.trim() || null,
-
-	 profilAd: string =
-		document
-			.querySelector(
-				"body > div.container-fluid > div.row > div.col-md-10 > div:nth-child(6) > div:nth-child(1) > label"
-			)
-			?.textContent.trim() || null;
+			largeImageKey: "https://i.imgur.com/Z3G1Ubm.png",
+		},
+		haberAd: string =
+			document
+				.querySelector(
+					"body > div.haberler > div > div > div:nth-child(7) > div > div > div.kart-header > h2"
+				)
+				?.textContent.trim() || null,
+		haberDetay: string =
+			document
+				.querySelector(
+					"body > div.haberler > div > div > div:nth-child(7) > div > div > div.kart-body > p:nth-child(4)"
+				)
+				?.textContent.trim() || null,
+		animeInfo: string =
+			document
+				.querySelector(
+					"body > div.container-fluid > div > div > div:nth-child(2) > div:nth-child(1) > span"
+				)
+				?.textContent.trim() || null,
+		profilAd: string =
+			document
+				.querySelector(
+					"body > div.container-fluid > div.row > div.col-md-10 > div:nth-child(6) > div:nth-child(1) > label"
+				)
+				?.textContent.trim() || null;
 
 	if (
 		window.location.pathname === "/" ||
@@ -63,9 +60,8 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 	} else if (window.location.pathname.startsWith("/haberoku") && haberAd) {
 		presenceData.details = `Haber başlığı: ${haberAd}`;
-		if (haberDetay) 
-			presenceData.state = haberDetay;
-		
+		if (haberDetay) presenceData.state = haberDetay;
+
 		presenceData.buttons = [
 			{
 				label: "Haber",
@@ -81,9 +77,8 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = `${animeInfo.split("->")[2]} izliyor`;
 
-		if (epNum) 
-			presenceData.state = `Bölüm ${epNum[0].split(".")[0]}`;
-		
+		if (epNum) presenceData.state = `Bölüm ${epNum[0].split(".")[0]}`;
+
 		presenceData.buttons = [
 			{
 				label: "Anime",
