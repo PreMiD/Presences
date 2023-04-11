@@ -58,7 +58,12 @@ function getPageData(page: string, pageDetail: string, title: string): {
 		case "aprender":
 			return {
 				details: document.querySelector("header > div > a").textContent,
-				state: document.querySelector("div.sc-1jv6lv2-0.cMpBZY > h2").textContent
+				state: `${document.querySelector("#__next > div > div > div > div > div > div > div > div > div > div > div > h2").textContent}`
+			};
+		case "courses":
+			return {
+				details: "Viewing...",
+				state: `Different language ${page}`,
 			};
 		case "user":
 			return {
