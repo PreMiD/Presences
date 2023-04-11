@@ -2,11 +2,18 @@ const presence = new Presence({
 	clientId: "1094931941616267344",
 });
 
+enum Icons {
+	Logo = "https://i.imgur.com/h8N7txd.png",
+	Search = "https://i.imgur.com/5f3sdaH.png",
+	Pause = "https://i.imgur.com/aO2ZCME.png",
+	Play = "https://i.imgur.com/UG7M2Ho.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/h8N7txd.png",
-			smallImageKey: "https://i.imgur.com/5f3sdaH.png",
-			smallImageText: "Browsing...",
+			largeImageKey: Icons.Logo,
+			smallImageKey: Icons.Search,
+			smallImageText: "Browsing",
 		},
 		{ pathname } = document.location;
 
@@ -33,7 +40,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presenceData.details = `Viewing ${
-			!document.querySelector("#season-list") ? "a Movie..." : "a TV Show..."
+			!document.querySelector("#season-list") ? "a Movie" : "a TV Show"
 		}`;
 		presenceData.state = name;
 	} else if (pathname.includes("/watch/")) {
@@ -64,9 +71,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			".mbu-bg.blur-small img"
 		).src;
-		presenceData.smallImageKey = video.paused
-			? "https://i.imgur.com/aO2ZCME.png"
-			: "https://i.imgur.com/UG7M2Ho.png";
+		presenceData.smallImageKey = video.paused ? Icons.Pause : Icons.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 		if (!video.paused) {
@@ -74,10 +79,10 @@ presence.on("UpdateData", async () => {
 			presenceData.endTimestamp = endTimestamp;
 		}
 	} else if (pathname === "/movies")
-		presenceData.details = "Browsing Movies...";
+		presenceData.details = "Browsing Movies";
 	else if (pathname === "/tv-shows")
-		presenceData.details = "Browsing TV Shows...";
-	else presenceData.details = "Browsing...";
+		presenceData.details = "Browsing TV Shows";
+	else presenceData.details = "Browsing";
 
 	presence.setActivity(presenceData);
 });
