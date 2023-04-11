@@ -78,10 +78,8 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
 		}
-	} else if (pathname === "/movies")
-		presenceData.details = "Browsing Movies";
-	else if (pathname === "/tv-shows")
-		presenceData.details = "Browsing TV Shows";
+	} else if (pathname === "/movies") presenceData.details = "Browsing Movies";
+	else if (pathname === "/tv-shows") presenceData.details = "Browsing TV Shows";
 	else presenceData.details = "Browsing";
 
 	presence.setActivity(presenceData);
