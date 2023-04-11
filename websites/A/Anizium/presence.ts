@@ -4,12 +4,14 @@ interface Video {
 	currentTime: number;
 }
 
+enum Assets {
+	Logo = "https://i.imgur.com/Z3G1Ubm.png",
+	Pause = "https://i.imgur.com/0A75vqT.png",
+	Play = "https://i.imgur.com/Dj5dekr.png",
+}
 const presence = new Presence({
-		clientId: "1094616557763710976",
-	}),
-	strings = presence.getStrings({
-		viewHome: "general.viewHome",
-	});
+	clientId: "1094616557763710976",
+});
 
 let video: Video;
 
@@ -19,8 +21,9 @@ presence.on("iFrameData", (msg: Video) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Z3G1Ubm.png",
+			largeImageKey: Assets.Logo,
 		},
+		{ href, pathname } = document.location,
 		haberAd: string =
 			document
 				.querySelector(
@@ -46,32 +49,29 @@ presence.on("UpdateData", async () => {
 				)
 				?.textContent.trim() || null;
 
-	if (
-		window.location.pathname === "/" ||
-		window.location.pathname.startsWith("/index")
-	) {
-		presenceData.details = (await strings).viewHome;
+	if (pathname === "/" || pathname.startsWith("/index")) {
+		presenceData.details = "Anasayfaya bakıyor";
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-	} else if (window.location.pathname.startsWith("/animeler")) {
+	} else if (pathname.startsWith("/animeler")) {
 		presenceData.details = "Animelere bakıyor";
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-	} else if (window.location.pathname.startsWith("/haberler")) {
+	} else if (pathname.startsWith("/haberler")) {
 		presenceData.details = "Haberlere bakıyor";
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-	} else if (window.location.pathname.startsWith("/haberoku") && haberAd) {
+	} else if (pathname.startsWith("/haberoku") && haberAd) {
 		presenceData.details = `Haber başlığı: ${haberAd}`;
 		if (haberDetay) presenceData.state = haberDetay;
 
 		presenceData.buttons = [
 			{
 				label: "Haber",
-				url: document.URL,
+				url: href,
 			},
 		];
-	} else if (window.location.pathname.startsWith("/paketler")) {
+	} else if (pathname.startsWith("/paketler")) {
 		presenceData.details = "Paketlere bakıyor";
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-	} else if (window.location.pathname.startsWith("/hemenizle") && animeInfo) {
+	} else if (pathname.startsWith("/hemenizle") && animeInfo) {
 		const epNum =
 			animeInfo.match(/[0-9]+\.Bölüm/g) || animeInfo.match(/[0-9]+\. Bölüm/g);
 
@@ -82,15 +82,15 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Anime",
-				url: document.URL,
+				url: href,
 			},
 		];
-	} else if (window.location.pathname.startsWith("/profile") && profilAd) {
+	} else if (pathname.startsWith("/profile") && profilAd) {
 		presenceData.state = `${profilAd} profilinde`;
 		presenceData.buttons = [
 			{
 				label: "Profil",
-				url: document.URL,
+				url: href,
 			},
 		];
 	} else {
@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (video) {
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Duraklatıldı" : "Oynatılıyor";
 
 		if (!video.paused && video.duration) {
