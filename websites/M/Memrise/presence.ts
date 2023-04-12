@@ -45,7 +45,7 @@ function getPageData(
 			return {
 				details: `Viewing their ${page}...`,
 				state: document.querySelector("h1").textContent,
-				smallImageKey: Assets.Searching
+				smallImageKey: Assets.Searching,
 			};
 		case "course":
 			return {
@@ -62,30 +62,29 @@ function getPageData(
 			};
 		case "aprender": {
 			const translate = document.querySelector(
-				"#__next > div > div > div > div > div > div > div > div > div > div > div > h2"
-			),
+					"#__next > div > div > div > div > div > div > div > div > div > div > div > h2"
+				),
 				points = document.querySelector(
-				"#__next > div > div > div > div > div > div > div > div > div > span > div"
-			),
-			 	completed = document.querySelector(
-				"#__next > div > div > div > div > div > div > div > h2"
-			);
+					"#__next > div > div > div > div > div > div > div > div > div > span > div"
+				),
+				completed = document.querySelector(
+					"#__next > div > div > div > div > div > div > div > h2"
+				);
 			let state = "";
 			if (translate?.textContent && points?.textContent)
 				state = `translate: ${translate.textContent} | ${points.textContent} points`;
-			else if (completed?.textContent)
-				state = completed.textContent;
+			else if (completed?.textContent) state = completed.textContent;
 			return {
 				details: document.querySelector("header > div > a").textContent,
 				state,
-				smallImageKey: Assets.Reviewing
+				smallImageKey: Assets.Reviewing,
 			};
 		}
 		case "courses":
 			return {
 				details: "Browsing...",
 				state: document.querySelector(".category-header").textContent,
-				smallImageKey: Assets.Searching
+				smallImageKey: Assets.Searching,
 			};
 		case "user":
 			return {
@@ -101,7 +100,7 @@ function getPageData(
 		case "settings":
 			return getSettingsDetail(pageDetail);
 		case "about":
-			return { details: "Viewing About us page..."}; //record and its not in app.memrise.com so remove app?
+			return { details: "Viewing About us page..." }; //record and its not in app.memrise.com so remove app?
 		default:
 			return { details: "Browsing...", smallImageKey: Assets.Searching };
 	}
@@ -112,17 +111,29 @@ function getHomeDetail(pageDetail: string) {
 			return {
 				details: "Viewing their learning stats...",
 				state: `${document.querySelector(".rank").textContent} 
-				[Best Streak ${document.querySelector("#attendance-grid-label2 .large").textContent} | 
-				Current ${document.querySelector("#attendance-grid-label3 .large").textContent} | 
-				Total ${document.querySelector("#attendance-grid-label1 .large").textContent} days the last 365 days]`
+				[Best Streak ${
+					document.querySelector("#attendance-grid-label2 .large").textContent
+				} | 
+				Current ${
+					document.querySelector("#attendance-grid-label3 .large").textContent
+				} | 
+				Total ${
+					document.querySelector("#attendance-grid-label1 .large").textContent
+				} days the last 365 days]`,
 			};
 		case "difficult-words":
-			return { details: `Viewing their ${document.querySelector(".tabbed-main > div.left").textContent}`};
+			return {
+				details: `Viewing their ${
+					document.querySelector(".tabbed-main > div.left").textContent
+				}`,
+			};
 		case "leaderboard":
 			return {
 				details: "Viewing their group leaderboard...",
-				state: `${document.querySelector("li.btn.btn-small.active").textContent}: 
-				${document.querySelector(".row-points").textContent} points`
+				state: `${
+					document.querySelector("li.btn.btn-small.active").textContent
+				}: 
+				${document.querySelector(".row-points").textContent} points`,
 			};
 		default:
 			return { details: "browsing home..." };
