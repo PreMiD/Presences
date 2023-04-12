@@ -22,7 +22,6 @@ presence.on("UpdateData", async () => {
 		};
 
 	if (buttons) presenceData.buttons = buttons;
-
 	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 	if (state) presenceData.state = state;
 
@@ -100,7 +99,16 @@ function getPageData(
 		case "settings":
 			return getSettingsDetail(pageDetail);
 		case "about":
-			return { details: "Viewing About us page..." }; //record and its not in app.memrise.com so remove app?
+			return { details: "Viewing About us page..." };
+		case "team":
+			return { details: `Viewing Memrise ${page}...` };
+		case "jobs":
+			return { details: `Viewing Memrise ${page}...` };
+		case "blog":
+			return {
+				details: `Viewing Memrise ${page}s...`,
+				state: document.querySelector("#hs_cos_wrapper_name").textContent //blog title
+			};
 		default:
 			return { details: "Browsing...", smallImageKey: Assets.Searching };
 	}
