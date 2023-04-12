@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 		{ details, smallImageKey, largeImageKey, state, buttons } = getPageData(
 			pathArr[1],
 			pathArr[2],
-			pathArr[3],
+			pathArr[3]
 		),
 		presenceData: PresenceData = {
 			largeImageKey: largeImageKey || Assets.Logo,
@@ -21,8 +21,7 @@ presence.on("UpdateData", async () => {
 			details,
 		};
 
-	if (buttons)
-		presenceData.buttons = buttons;
+	if (buttons) presenceData.buttons = buttons;
 
 	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 	if (state) presenceData.state = state;
@@ -30,7 +29,11 @@ presence.on("UpdateData", async () => {
 	if (details) presence.setActivity(presenceData);
 });
 
-function getPageData(page: string, pageDetail: string, title: string): {
+function getPageData(
+	page: string,
+	pageDetail: string,
+	title: string
+): {
 	details?: string;
 	smallImageKey?: string;
 	largeImageKey?: string;
@@ -41,13 +44,14 @@ function getPageData(page: string, pageDetail: string, title: string): {
 		case "dashboard":
 			return {
 				details: `Viewing ${page}...`,
-				state: document.querySelector("h1").textContent
+				state: document.querySelector("h1").textContent,
 			};
 		case "course":
 			return {
 				details: document.querySelector(".course-name")?.textContent,
 				state: document.querySelector(".progress-box-title")?.textContent,
-				largeImageKey: document.querySelector<HTMLImageElement>(".course-photo img")?.src,
+				largeImageKey:
+					document.querySelector<HTMLImageElement>(".course-photo img")?.src,
 				buttons: [
 					{
 						label: "Go to Course",
@@ -58,7 +62,11 @@ function getPageData(page: string, pageDetail: string, title: string): {
 		case "aprender":
 			return {
 				details: document.querySelector("header > div > a").textContent,
-				state: `${document.querySelector("#__next > div > div > div > div > div > div > div > div > div > div > div > h2").textContent}`
+				state: `${
+					document.querySelector(
+						"#__next > div > div > div > div > div > div > div > div > div > div > div > h2"
+					).textContent
+				}`,
 			};
 		case "courses":
 			return {
@@ -67,7 +75,17 @@ function getPageData(page: string, pageDetail: string, title: string): {
 			};
 		case "user":
 			return {
-				details: `Viewing ${page}...`};
+				details: "Viewing profile...",
+				state: `Learned ${
+					document.querySelector("li:nth-child(3) > div > strong").textContent
+				} words | ${
+					document.querySelector(".stat-value-xs").textContent
+				} points`,
+			};
+		case "settings":
+			return {
+				details: `Viewing ${page}...`,
+			};
 		default:
 			return { details: "Browsing...", smallImageKey: Assets.Reading };
 	}
