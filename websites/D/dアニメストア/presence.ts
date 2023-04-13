@@ -1,29 +1,34 @@
-const presence = new Presence({
-  clientId: "611012705306017792"
-});
+// ファイルをモジュールとしてエクスポートする
+export {};
 
-const strings = await presence.getStrings({
-  play: "general.playing",
-  pause: "general.paused",
+// presence.ts
+const presence = new Presence({
+    clientId: "864287927847170068"
 });
 
 presence.on("UpdateData", async () => {
-  if (
-    location.pathname.startsWith("/animestore/sc_d_pc") &&
-    document.querySelector("#dplayer_video_box video")
-  ) {
-    const video = document.querySelector("#dplayer_video_box video"),
-          isPlaying = !video.paused,
-          presenceData = {
-            details: `${document.querySelector(".backInfoTxt1").textContent} - ${document.querySelector(".backInfoTxt2").textContent}`,
-            state: document.querySelector(".backInfoTxt3").textContent,
-            largeImageKey: "https://i.imgur.com/6sp3k8m.png",
-            smallImageKey: isPlaying ? "play" : "pause",
-            smallImageText: isPlaying ? (await strings).play : (await strings).pause,
-            startTimestamp: isPlaying ? Math.floor(Date.now() / 1000) - Math.floor(video.currentTime) : undefined
-          };
-    presence.setActivity(presenceData);
-  } else {
-    presence.setActivity();
-  }
+    const video = document.querySelector<HTMLVideoElement>(".d-animeMovie video");
+
+    // ビデオが存在している場合
+    if (video) {
+        const presenceData: PresenceData = {
+            details: "Watching a video on dアニメストア",
+            state: video.currentTime > 0 && !video.paused ? `Playing` : `Paused`,
+            timestamps: {
+                start: Math.floor(Date.now() / 1000) - video.currentTime
+            },
+            // サムネイル画像を表示
+            largeImageKey: "d-animestore",
+            smallImageKey: video.paused ? "paused" : "play",
+            smallImageText: video.paused ? "Paused" : "Playing"
+        };
+
+        presence.setActivity(presenceData);
+    } else {
+        presence.setTrayTitle();
+        presence.setActivity();
+    }
 });
+
+// ページ読み込み時に presence を開始
+presence.start();
