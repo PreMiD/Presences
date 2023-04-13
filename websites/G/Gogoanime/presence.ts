@@ -106,14 +106,19 @@ presence.on("UpdateData", async () => {
 			case document.querySelector('[class="title_name"]') !== null:
 			case document.querySelector('[class="anime_video_body_watch"]') !== null:
 			case document.querySelector('[class="anime_muti_link"]') !== null: {
-				const anime = pathname.includes("/movie/")
-						? pathname.split("/")[2]
-						: pathname.split("/")[1],
-					title =
+				const title =
 						document.querySelector('[class="anime-info"]')?.querySelector("a")
 							?.textContent ??
 						document.querySelector('[class="title_name"]')?.textContent ??
-						anime.replace(/-/gm, " ").replace(/\(dub\)/gm, ""),
+						pathname.includes("/movie/")
+							? pathname
+									.split("/")[2]
+									.replace(/-/gm, " ")
+									.replace(/\(dub\)/gm, "")
+							: pathname
+									.split("/")[1]
+									.replace(/-/gm, " ")
+									.replace(/\(dub\)/gm, ""),
 					titleReplaced =
 						document
 							.querySelector('[class="each_episode active"]')
