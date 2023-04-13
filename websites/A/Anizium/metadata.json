@@ -2,22 +2,22 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"id": "708746139092123679",
-		"name": "Mert^^#0123"
+		"name": "Mert^^"
 	},
 	"service": "Anizium",
 	"description": {
-		"en": "Anizium is a website where you can watch anime with 4K Turkish subtitles and dubs."
+		"en": "Anizium is a website where you can watch anime with 4K Turkish subtitles and dubs.",
+		"tr": "Anizium animeleri 4K, türkçe altyazılı ve dublajlı olarak izleyebileceğiniz bir sitedir."
 	},
-	"url": "anizium.com",
+	"url": [
+		"www.anizium.com",
+		"anizium.com"
+	],
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/a26rizM.png",
-	"thumbnail": "https://i.imgur.com/Z3G1Ubm.png",
+	"logo": "https://i.imgur.com/ciDtrpY.png",
+	"thumbnail": "https://i.imgur.com/ykaqwBO.png",
 	"color": "#8223a4",
 	"category": "anime",
-	"tags": [
-		"turkish",
-		"anime",
-		"video"
-	],
+	"tags": ["turkish", "anime", "video"],
 	"iframe": true
 }
