@@ -85,6 +85,16 @@ function getPageData(
 				state: document.querySelector(".category-header").textContent,
 				smallImageKey: Assets.Searching,
 			};
+		case "dictionary": {
+			const lang = pageDetail.charAt(0).toUpperCase() + pageDetail.slice(1);
+			if (!pageDetail && !title) return { details: "Viewing all language phrasebooks..."};
+			if (!title) return { details: `Looking up ${lang} phrases...`};
+			return {
+				details: `Learning ${lang} phrase:`,
+				state: `${document.querySelector("mark:nth-child(1)").textContent} = 
+				${document.querySelector("h2").textContent}`
+			};
+		}
 		case "user":
 			return {
 				details: "Viewing profile...",
