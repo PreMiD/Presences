@@ -75,10 +75,16 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "link": {
-			presenceData.state = document.querySelector("#link_url").textContent;
+			presenceData.state =
+				document.querySelector('[aria-expanded="true"]')?.textContent ?? "";
 			if (pathname.endsWith("statistics"))
-				presenceData.details = "Viewing statistics of link";
-			else presenceData.details = "Editing link";
+				presenceData.details = `Viewing statistics of link: ${
+					document.querySelector('[id="link_url"]')?.textContent
+				}`;
+			else
+				presenceData.details = `Editing link: ${
+					document.querySelector("#link_url").textContent
+				}`;
 			break;
 		}
 		case "tools": {
@@ -106,7 +112,7 @@ presence.on("UpdateData", async () => {
 			} else if (active) presenceData.details = active.textContent.trim();
 		}
 	}
-	if (!buttons) delete presenceData.buttons;
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
