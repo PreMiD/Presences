@@ -102,13 +102,23 @@ function getPageData(
 			return { details: "Viewing About us page..." };
 		case "team":
 			return { details: `Viewing Memrise ${page}...` };
+		case "philosophy":
+			return { details: `Reading Memrise ${page}...` };
 		case "jobs":
-			return { details: `Viewing Memrise ${page}...` };
+			return { details: `Searching Memrise ${page}...` };
 		case "blog":
 			return {
-				details: `Viewing Memrise ${page}s...`,
+				details: `Reading Memrise ${page}s...`,
 				state: document.querySelector("#hs_cos_wrapper_name").textContent //blog title
 			};
+		case "contact":
+			return { details: `Viewing Memrise ${page} page` };
+		case "terms":
+			return { details: `Reading Memrise ${page}` };
+		case "privacy":
+			return { details: `Reading Memrise ${page} policy` };
+		case "cookies":
+			return { details: `Reading Memrise ${page} policy` };
 		default:
 			return { details: "Browsing...", smallImageKey: Assets.Searching };
 	}
@@ -151,13 +161,13 @@ function getHomeDetail(pageDetail: string) {
 function getSettingsDetail(pageDetails: string) {
 	switch (pageDetails) {
 		case "":
-			return { details: "Viewing their profile settings..." };
+			return { details: "Changing their profile settings..." };
 		case "personal_data":
 			return { details: "Requesting their Personal Data..." };
 		case "premium":
-			return { details: "Viewing their subscription settings..." };
+			return { details: "Changing their subscription settings..." };
 		case "change_password":
-			return { details: "Viewing their password settings..." };
+			return { details: "Changing their password settings..." };
 		case "deactivate":
 			return { details: "Viewing their delete account settings..." };
 		default:
