@@ -77,14 +77,15 @@ presence.on("UpdateData", async () => {
 		case "link": {
 			presenceData.state =
 				document.querySelector('[aria-expanded="true"]')?.textContent ?? "";
-			if (pathname.endsWith("statistics"))
+			if (pathname.endsWith("statistics")) {
 				presenceData.details = `Viewing statistics of link: ${
 					document.querySelector('[id="link_url"]')?.textContent
 				}`;
-			else
+			} else {
 				presenceData.details = `Editing link: ${
 					document.querySelector("#link_url").textContent
 				}`;
+			}
 			break;
 		}
 		case "tools": {
