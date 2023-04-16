@@ -9,7 +9,7 @@ const strings = await presence.getStrings({
 
 presence.on("UpdateData", async () => {
   if (
-    location.pathname.startsWith("/animestore/sc_d_pc") &&
+    location.pathname.startsWith("/animestore/tp_mn") &&
     document.querySelector("#dplayer_video_box video")
   ) {
     const video = document.querySelector("#dplayer_video_box video"),
