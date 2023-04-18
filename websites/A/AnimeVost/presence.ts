@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = `🔎 В поисках аниме жанра ${animegenre}`;
 		}
 		if (websiteloc[1] === "god")
-			presenceData.details = `🔎 В поисках аниме ${websiteloc[2]}года`;
+			presenceData.details = `🔎 В поисках аниме ${websiteloc[2]} года`;
 		if (websiteloc[1] === "ongoing") {
 			presenceData.details = "🔎 В поисках онгоинга";
 			presenceData.smallImageKey = "ongoing";
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
 				.getElementsByClassName("shortstoryHead")[0]
 				.textContent.split("/")[0]
 				.trim();
-		presenceData.details = "В поисках " + animetype + "a";
+		presenceData.details = `В поисках ${animetype} a`;
 		if (websiteloc[3] !== "") {
 			const animeposter = (<HTMLImageElement>(
 				document.querySelector(".imgRadius")
