@@ -16,7 +16,7 @@ let video = {
 	},
 	strings: Awaited<ReturnType<typeof getStrings>>;
 
-const animetypes: { [key: string]: any } = {
+const animetypes: { [key: string]: string } = {
 		tv: "ТВ-сериал",
 		"tv-speshl": "ТВ-спешл",
 		ova: "OVA",
@@ -25,7 +25,7 @@ const animetypes: { [key: string]: any } = {
 		"korotkometrazhnyy-film": "Фильм",
 		dunkhua: "Дунху",
 	},
-	animegenres: { [key: string]: any } = {
+	animegenres: { [key: string]: string } = {
 		"boyevyye-iskusstva": "Боевые искусства",
 		voyna: "Война",
 		drama: "Драма",
@@ -54,7 +54,7 @@ const animetypes: { [key: string]: any } = {
 		shkola: "Школа",
 		etti: "Эччи",
 	};
-var strtstamp = Math.floor(Date.now() / 1000),
+let strtstamp = Math.floor(Date.now() / 1000),
 	pausestamp = false;
 
 presence.on(
@@ -79,35 +79,35 @@ presence.on("UpdateData", async () => {
 		websiteloc = document.location.pathname.split("/");
 	if (!strings) strings = await getStrings();
 	if (!privacy) {
-		if (websiteloc[1] == "") {
-			presenceData.details = "На главной странице";
-		}
-		if (websiteloc[1] == "zhanr") {
-			let animegenre = animegenres[websiteloc[2]];
-			presenceData.details = "🔎 В поисках аниме жанра " + animegenre;
+		if (websiteloc[1] === "") presenceData.details = "На главной странице";
+		if (websiteloc[1] === "zhanr") {
+			const animegenre = animegenres[websiteloc[2]];
+			presenceData.details = `🔎 В поисках аниме жанра ${animegenre}`;
 			presenceData.smallImageKey = websiteloc[2];
 			presenceData.smallImageText = `🔎 В поисках аниме жанра ${animegenre}`;
 		}
-		if (websiteloc[1] == "god") {
-			presenceData.details = "🔎 В поисках аниме " + websiteloc[2] + " года";
-		}
-		if (websiteloc[1] == "ongoing") {
+		if (websiteloc[1] === "god")
+			presenceData.details = `🔎 В поисках аниме ${websiteloc[2]}года`;
+		if (websiteloc[1] === "ongoing") {
 			presenceData.details = "🔎 В поисках онгоинга";
 			presenceData.smallImageKey = "ongoing";
 			presenceData.smallImageText = "🔎 В поисках Онгоинга";
 		}
-		if (websiteloc[1] == "preview") {
+		if (websiteloc[1] === "preview") {
 			presenceData.details = "🔎 В поисках анонса";
 			presenceData.smallImageKey = "anons";
 			presenceData.smallImageText = "🔎 В поисках Анонса";
 		}
-		if (websiteloc[1] == "user") {
-			presenceData.details =
-				"На странице пользователя " + decodeURIComponent(websiteloc[2]);
-			if(logo){
-			    presenceData.largeImageKey = document.querySelector('.userinfoCenterAva').querySelector('img').src;
-			    presenceData.smallImageKey = "https://i.imgur.com/9KbVqtj.png";
-			    presenceData.smallImageText = "🏴‍☠️ AnimeVost";
+		if (websiteloc[1] === "user") {
+			presenceData.details = `На странице пользователя ${decodeURIComponent(
+				websiteloc[2]
+			)}`;
+			if (logo) {
+				presenceData.largeImageKey = document
+					.querySelector(".userinfoCenterAva")
+					.querySelector("img").src;
+				presenceData.smallImageKey = "https://i.imgur.com/9KbVqtj.png";
+				presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 			}
 		}
 	} else {
@@ -118,16 +118,17 @@ presence.on("UpdateData", async () => {
 		delete presenceData.endTimestamp;
 		delete presenceData.state;
 	}
-	if (websiteloc[1] == "tip" && websiteloc[2] != "") {
-		let animetype = animetypes[document.location.pathname.split("/")[2]],
+	if (websiteloc[1] === "tip" && websiteloc[2] !== "") {
+		const animetype = animetypes[document.location.pathname.split("/")[2]],
 			animename = document
 				.getElementsByClassName("shortstoryHead")[0]
 				.textContent.split("/")[0]
 				.trim();
 		presenceData.details = "В поисках " + animetype + "a";
-		if (websiteloc[3] != "") {
-			let animeposter = (<HTMLImageElement>document.querySelector(".imgRadius"))
-				.src;
+		if (websiteloc[3] !== "") {
+			const animeposter = (<HTMLImageElement>(
+				document.querySelector(".imgRadius")
+			)).src;
 			if (!privacy && logo) {
 				presenceData.largeImageKey = animeposter;
 				presenceData.smallImageKey = "https://i.imgur.com/9KbVqtj.png";
@@ -137,7 +138,7 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = "https://i.imgur.com/9KbVqtj.png";
 			}
 			if (video.duration) {
-				let episode = document.querySelector(".active").textContent;
+				const episode = document.querySelector(".active").textContent;
 				presenceData.details = `Смотрит ${animetype} ${
 					!privacy ? animename : ""
 				}`;
@@ -174,11 +175,7 @@ presence.on("UpdateData", async () => {
 				url: document.location.href,
 			},
 		];
-	} else {
-		delete presenceData.buttons;
-	}
-	if (time) {
-		presenceData.startTimestamp = strtstamp;
-	}
+	} else delete presenceData.buttons;
+	if (time) presenceData.startTimestamp = strtstamp;
 	presence.setActivity(presenceData);
 });
