@@ -59,6 +59,8 @@ enum Assets {
 	vostlogo = "https://i.imgur.com/wStmaRE.png",
 	play = "https://i.imgur.com/JmYolkt.png",
 	pause = "https://i.imgur.com/cElKgU7.png",
+	ongoing = "https://i.imgur.com/bdSukvD.png",
+	anons = "https://i.imgur.com/8vJY6ok.png",
 	"boyevyye-iskusstva" = "https://i.imgur.com/fIFC4Bn.png",
 	"voyna" = "https://i.imgur.com/6wcT9gr.png",
 	"drama" = "https://i.imgur.com/FGNTKQ1.png",
@@ -86,8 +88,6 @@ enum Assets {
 	"fentezi" = "https://i.imgur.com/15VWbYX.png",
 	"shkola" = "https://i.imgur.com/mk3INxH.png",
 	"etti" = "https://i.imgur.com/CyjLJJj.png",
-	"ongoing" = "https://i.imgur.com/bdSukvD.png",
-	"anons" = "https://i.imgur.com/8vJY6ok.png",
 }
 
 let strtstamp = Math.floor(Date.now() / 1000),
@@ -126,12 +126,12 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `🔎 В поисках аниме ${websiteloc[2]} года`;
 		if (websiteloc[1] === "ongoing") {
 			presenceData.details = "🔎 В поисках онгоинга";
-			presenceData.smallImageKey = Assets["ongoing"];
+			presenceData.smallImageKey = Assets.ongoing;
 			presenceData.smallImageText = "🔎 В поисках Онгоинга";
 		}
 		if (websiteloc[1] === "preview") {
 			presenceData.details = "🔎 В поисках анонса";
-			presenceData.smallImageKey = Assets["anons"];
+			presenceData.smallImageKey = Assets.anons;
 			presenceData.smallImageText = "🔎 В поисках Анонса";
 		}
 		if (websiteloc[1] === "user") {
