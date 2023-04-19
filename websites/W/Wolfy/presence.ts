@@ -207,7 +207,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Participe à un évènement";
 			presenceData.state = `Top ${parseInt(
 				document.querySelector(
-					"div[class*='Event_lineLeaderboard'] > div[class*='Event_rank']"
+					"div[class*='Event_lineLeaderboard'][class*='Event_me'] > div[class*='Event_rank']"
 				).textContent
 			).toLocaleString()} - ${parseInt(
 				document.querySelector(
