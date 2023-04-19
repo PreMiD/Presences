@@ -61,7 +61,8 @@ async function addJoinGameButton(presenceData: PresenceData, gameId: string) {
 	if (!(await presence.getSetting("joinGameButton"))) return;
 	addButton(
 		presenceData,
-		`(${document.querySelector("div[class*='Header_timeState']")?.textContent
+		`(${
+			document.querySelector("div[class*='Header_timeState']")?.textContent
 		}) Rejoindre la partie`,
 		`https://wolfy.net/game/${gameId}`
 	);
@@ -101,10 +102,16 @@ async function handleCheckingLeaderboard(
 
 	if (!username) {
 		presenceData.details = "Regarde le classement";
-		presenceData.state = `Niveau ${document.querySelector("div[class*='ProfilePicture_levelMarker']").textContent}`;
+		presenceData.state = `Niveau ${
+			document.querySelector("div[class*='ProfilePicture_levelMarker']")
+				.textContent
+		}`;
 	} else {
 		presenceData.details = `Regarde le profil de ${username}`;
-		presenceData.state = `Niveau ${document.querySelector("div[class*='ProfilePicture_levelMarker']").textContent}`;
+		presenceData.state = `Niveau ${
+			document.querySelector("div[class*='ProfilePicture_levelMarker']")
+				.textContent
+		}`;
 		await addVisitProfilButton(presenceData, username);
 	}
 }
@@ -170,7 +177,9 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 			prevState = presenceData.state;
 			cp = Date.now();
-			currTime = document.querySelector("div[class*='Header_timer']").textContent;
+			currTime = document.querySelector(
+				"div[class*='Header_timer']"
+			).textContent;
 		}
 
 		await addVisitProfilButton(
@@ -181,8 +190,9 @@ presence.on("UpdateData", async () => {
 		if (
 			isWaitingGame(presenceData.state, document.querySelector("html")?.lang)
 		) {
-			presenceData.state += ` (${document.querySelector("div[class*='Header_timeState']")?.textContent
-				})`;
+			presenceData.state += ` (${
+				document.querySelector("div[class*='Header_timeState']")?.textContent
+			})`;
 			await addJoinGameButton(presenceData, path[1]);
 		}
 
