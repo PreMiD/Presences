@@ -56,9 +56,9 @@ const animetypes: { [key: string]: string } = {
 	};
 
 enum Assets {
-	"vostlogo" = "https://i.imgur.com/wStmaRE.png",
-	"play" = "https://i.imgur.com/JmYolkt.png",
-	"pause" = "https://i.imgur.com/cElKgU7.png",
+	vostlogo = "https://i.imgur.com/wStmaRE.png",
+	play = "https://i.imgur.com/JmYolkt.png",
+	pause = "https://i.imgur.com/cElKgU7.png",
 	"boyevyye-iskusstva" = "https://i.imgur.com/fIFC4Bn.png",
 	"voyna" = "https://i.imgur.com/6wcT9gr.png",
 	"drama" = "https://i.imgur.com/FGNTKQ1.png",
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey: Assets["vostlogo"],
+			largeImageKey: Assets.vostlogo,
 			smallImageText: "🏴‍☠️ AnimeVost",
 		},
 		websiteloc = document.location.pathname.split("/");
@@ -142,12 +142,12 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document
 					.querySelector(".userinfoCenterAva")
 					.querySelector("img").src;
-				presenceData.smallImageKey = Assets["vostlogo"];
+				presenceData.smallImageKey = Assets.vostlogo;
 				presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 			}
 		}
 	} else {
-		presenceData.largeImageKey = Assets["vostlogo"];
+		presenceData.largeImageKey = Assets.vostlogo;
 		presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 		presenceData.details = "Где-то на сайте";
 		delete presenceData.startTimestamp;
@@ -167,11 +167,11 @@ presence.on("UpdateData", async () => {
 			)).src;
 			if (!privacy && logo) {
 				presenceData.largeImageKey = animeposter;
-				presenceData.smallImageKey = Assets["vostlogo"];
+				presenceData.smallImageKey = Assets.vostlogo;
 				presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 			} else {
 				delete presenceData.smallImageKey;
-				presenceData.largeImageKey = Assets["vostlogo"];
+				presenceData.largeImageKey = Assets.vostlogo;
 			}
 			if (video.duration) {
 				const episode = document.querySelector(".active").textContent;
@@ -180,8 +180,8 @@ presence.on("UpdateData", async () => {
 				}`;
 				presenceData.state = episode;
 				presenceData.smallImageKey = video.paused
-					? Assets["pause"]
-					: Assets["play"];
+					? Assets.pause
+					: Assets.play;
 				presenceData.smallImageText = video.paused
 					? strings.play
 					: strings.pause;
