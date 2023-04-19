@@ -183,8 +183,8 @@ presence.on("UpdateData", async () => {
 					? Assets.pause
 					: Assets.play;
 				presenceData.smallImageText = video.paused
-					? strings.play
-					: strings.pause;
+					? strings.pause
+					: strings.play;
 				if (video.currentTime && time) {
 					if (video.paused) {
 						delete presenceData.startTimestamp;
