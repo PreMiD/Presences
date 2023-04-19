@@ -54,6 +54,42 @@ const animetypes: { [key: string]: string } = {
 		shkola: "Школа",
 		etti: "Эччи",
 	};
+
+enum Assets {
+	"vostlogo" = "https://i.imgur.com/wStmaRE.png",
+	"play" = "https://i.imgur.com/JmYolkt.png",
+	"pause" = "https://i.imgur.com/cElKgU7.png",
+	"boyevyye-iskusstva" = "https://i.imgur.com/fIFC4Bn.png",
+	"voyna" = "https://i.imgur.com/6wcT9gr.png",
+	"drama" = "https://i.imgur.com/FGNTKQ1.png",
+	"detektiv" = "https://i.imgur.com/BKwNjnY.png",
+	"istoriya" = "https://i.imgur.com/JOsx01C.png",
+	"komediya" = "https://i.imgur.com/rRRyu7f.png",
+	"mekha" = "https://i.imgur.com/9fdLLtU.png",
+	"mistika" = "https://i.imgur.com/X1eLf8t.png",
+	"makho-sedze" = "https://i.imgur.com/9sY7vjV.png",
+	"muzykalnyy" = "https://i.imgur.com/666pMbJ.png",
+	"povsednevnost" = "https://i.imgur.com/RZZu69w.png",
+	"priklyucheniya" = "https://i.imgur.com/K2wO9ee.png",
+	"parodiya" = "https://i.imgur.com/mY2G4I0.png",
+	"romantika" = "https://i.imgur.com/OHBxChU.png",
+	"senen" = "https://i.imgur.com/MAAaPUs.png",
+	"sedze" = "https://i.imgur.com/iFPQWgg.png",
+	"sport" = "https://i.imgur.com/DuiA8DC.png",
+	"skazka" = "https://i.imgur.com/83cdZB7.png",
+	"sedze-ay" = "https://i.imgur.com/iFPQWgg.png",
+	"senen-ay" = "https://i.imgur.com/MAAaPUs.png",
+	"samurai" = "https://i.imgur.com/3ylfSzz.png",
+	"triller" = "https://i.imgur.com/SgicPul.png",
+	"uzhasy" = "https://i.imgur.com/HGQntrC.png",
+	"fantastika" = "https://i.imgur.com/taH6syX.png",
+	"fentezi" = "https://i.imgur.com/15VWbYX.png",
+	"shkola" = "https://i.imgur.com/mk3INxH.png",
+	"etti" = "https://i.imgur.com/CyjLJJj.png",
+	"ongoing" = "https://i.imgur.com/bdSukvD.png",
+	"anons" = "https://i.imgur.com/8vJY6ok.png",
+}
+
 let strtstamp = Math.floor(Date.now() / 1000),
 	pausestamp = false;
 
@@ -73,7 +109,7 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey: "https://i.imgur.com/9KbVqtj.png",
+			largeImageKey: Assets["vostlogo"],
 			smallImageText: "🏴‍☠️ AnimeVost",
 		},
 		websiteloc = document.location.pathname.split("/");
@@ -90,12 +126,12 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `🔎 В поисках аниме ${websiteloc[2]} года`;
 		if (websiteloc[1] === "ongoing") {
 			presenceData.details = "🔎 В поисках онгоинга";
-			presenceData.smallImageKey = "ongoing";
+			presenceData.smallImageKey = Assets["ongoing"];
 			presenceData.smallImageText = "🔎 В поисках Онгоинга";
 		}
 		if (websiteloc[1] === "preview") {
 			presenceData.details = "🔎 В поисках анонса";
-			presenceData.smallImageKey = "anons";
+			presenceData.smallImageKey = Assets["anons"];
 			presenceData.smallImageText = "🔎 В поисках Анонса";
 		}
 		if (websiteloc[1] === "user") {
@@ -106,12 +142,12 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document
 					.querySelector(".userinfoCenterAva")
 					.querySelector("img").src;
-				presenceData.smallImageKey = "https://i.imgur.com/9KbVqtj.png";
+				presenceData.smallImageKey = Assets["vostlogo"];
 				presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 			}
 		}
 	} else {
-		presenceData.largeImageKey = "https://i.imgur.com/9KbVqtj.png";
+		presenceData.largeImageKey = Assets["vostlogo"];
 		presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 		presenceData.details = "Где-то на сайте";
 		delete presenceData.startTimestamp;
@@ -131,11 +167,11 @@ presence.on("UpdateData", async () => {
 			)).src;
 			if (!privacy && logo) {
 				presenceData.largeImageKey = animeposter;
-				presenceData.smallImageKey = "https://i.imgur.com/9KbVqtj.png";
+				presenceData.smallImageKey = Assets["vostlogo"];
 				presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 			} else {
 				delete presenceData.smallImageKey;
-				presenceData.largeImageKey = "https://i.imgur.com/9KbVqtj.png";
+				presenceData.largeImageKey = Assets["vostlogo"];
 			}
 			if (video.duration) {
 				const episode = document.querySelector(".active").textContent;
@@ -143,7 +179,9 @@ presence.on("UpdateData", async () => {
 					!privacy ? animename : ""
 				}`;
 				presenceData.state = episode;
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused
+					? Assets["pause"]
+					: Assets["play"];
 				presenceData.smallImageText = video.paused
 					? strings.play
 					: strings.pause;

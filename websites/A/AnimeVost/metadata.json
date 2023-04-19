@@ -2,18 +2,19 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"id": "296716315547402240",
-		"name": "ZebroUnion#2632"
+		"name": "ZebroUnion"
 	},
 	"service": "AnimeVost",
 	"altnames": [
 		"АнимеВост"
 	],
 	"description": {
-		"en": "AnimeVost - Base №1 to watch anime online for free on Russian.",
-		"ru": "AnimeVost - База №1 для просмотра аниме онлайн бесплатно на Русском."
+		"en": "AnimeVost - Best website to watch anime online for free in Russian.",
+		"ru": "AnimeVost - Лучший сайт для просмотра аниме онлайн бесплатно на Русском."
 	},
 	"url": [
 		"animevost.org",
+		"www.animevost.org",
 		"v2.vost.pw"
 	],
 	"version": "1.0.0",
