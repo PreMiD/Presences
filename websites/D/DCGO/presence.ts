@@ -4,6 +4,7 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/81z9xFR.png",
 	};
+
 	if (window.location.pathname.toLowerCase() === "/") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Anasayfa";
