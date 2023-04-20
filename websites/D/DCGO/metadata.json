@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "service": "DCGO",
+  "author": {
+    "id": "162740870607536128",
+    "name": "Türker#0001"
+  },
+  "description": {
+    "en": "See instant server ranking with DiscordGO.",
+    "tr": "DiscordGO ile anlık sunucu sıralamasını görün."
+  },
+  "url": "discordgo.net",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/81z9xFR.png",
+  "thumbnail": "https://i.imgur.com/81z9xFR.png",
+  "color": "#385ee8",
+  "tags": [
+    "server"
+  ],
+  "category": "other"
+}
