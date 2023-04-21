@@ -71,7 +71,6 @@ presence.on("UpdateData", async () => {
 			? true
 			: false,
 		search = document.querySelector<HTMLInputElement>('[type="search"]'),
-		match = !!pathname.match(/[0-9]{9}/gm)?.[0],
 		moduleList = document.querySelector(
 			'[class*="Breadcrumbs-ds2-module_list__"]'
 		),
@@ -93,7 +92,7 @@ presence.on("UpdateData", async () => {
 		case type: {
 			switch (true) {
 				// if a book is viewed
-				case match: {
+				case !!pathname.match(/[0-9]{9}/gm)?.[0]: {
 					presenceData.details = privacy
 						? "Viewing a book"
 						: `Viewing ${removePlural(
