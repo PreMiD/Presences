@@ -12,10 +12,11 @@
 	"url": [
 		"app.memrise.com",
 		"memrise.com",
-		"www.memrise.com"
+		"www.memrise.com",
+		"community.memrise.com"
 	],
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/Kbhd9t6.jpg",
+	"logo": "https://i.imgur.com/emLcjZT.png",
 	"thumbnail": "https://i.imgur.com/JcDjRfn.png",
 	"color": "#ffda3e",
 	"category": "other",
@@ -30,13 +31,5 @@
 		"vocabulary",
 		"grammar",
 		"native"
-	],
-	"settings": [
-		{
-			"id": "details",
-			"title": "Show details",
-			"icon": "fas fa-eye-slash",
-			"value": true
-		}
 	]
 }

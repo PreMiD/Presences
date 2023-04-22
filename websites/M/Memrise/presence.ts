@@ -2,7 +2,7 @@ const presence = new Presence({ clientId: "1095377958241304586" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Assets {
-	Logo = "https://i.imgur.com/Kbhd9t6.jpg",
+	Logo = "https://i.imgur.com/emLcjZT.png",
 	Searching = "https://i.imgur.com/OIgfjTG.png",
 	Reviewing = "https://i.imgur.com/53N4eY6.png",
 }
@@ -13,7 +13,8 @@ presence.on("UpdateData", async () => {
 		{ details, smallImageKey, largeImageKey, state, buttons } = getPageData(
 			pathArr[1],
 			pathArr[2],
-			pathArr[3]
+			pathArr[3],
+			pathArr[4]
 		),
 		presenceData: PresenceData = {
 			largeImageKey: largeImageKey || Assets.Logo,
@@ -31,7 +32,8 @@ presence.on("UpdateData", async () => {
 function getPageData(
 	page: string,
 	pageDetail: string,
-	title: string
+	title: string,
+	subtitle: string
 ): {
 	details?: string;
 	smallImageKey?: string;
@@ -87,13 +89,19 @@ function getPageData(
 			};
 		case "dictionary": {
 			const lang = pageDetail.charAt(0).toUpperCase() + pageDetail.slice(1);
-			if (!pageDetail && !title) return { details: "Viewing all language phrasebooks..."};
-			if (!title) return { details: `Looking up ${lang} phrases...`};
-			return {
-				details: `Learning ${lang} phrase:`,
-				state: `${document.querySelector("mark:nth-child(1)").textContent} = 
-				${document.querySelector("h2").textContent}`
-			};
+			return title
+				? {
+						details: `Learning ${lang} phrase:`,
+						state: `${
+							document.querySelector("mark:nth-child(1)").textContent
+						} = 
+				${document.querySelector("h2").textContent}`,
+						smallImageKey: Assets.Reviewing,
+				  }
+				: {
+						details: `Looking up ${lang} phrases...`,
+						smallImageKey: Assets.Searching,
+				  };
 		}
 		case "user":
 			return {
@@ -108,7 +116,66 @@ function getPageData(
 			return getHomeDetail(pageDetail);
 		case "settings":
 			return getSettingsDetail(pageDetail);
-		case "about":
+		case "categories": // community domain
+			return {
+				details: "Browsing Community forums...",
+				state: "All categories",
+				smallImageKey: Assets.Searching,
+			};
+		case "top":
+			return {
+				details: "Browsing Community forums...",
+				state: "Top posted",
+				smallImageKey: Assets.Searching,
+			};
+		case "latest":
+			return {
+				details: "Browsing Community forums...",
+				state: "Latest posts",
+				smallImageKey: Assets.Searching,
+			};
+		case "badges":
+			return {
+				details: "Browsing Community forums...",
+				state: "All badges",
+				smallImageKey: Assets.Searching,
+			};
+		case "tags":
+			return {
+				details: "Browsing Community forums...",
+				state: "Filter tags",
+				smallImageKey: Assets.Searching,
+			};
+		case "c": {
+			// category, topic and post forum level
+			return subtitle
+				? {
+						details: `Forum: ${pageDetail.replaceAll("-", " ")}`,
+						state: `Topic: ${title.replaceAll("-", " ")}`,
+						smallImageKey: Assets.Searching,
+				  }
+				: {
+						details: "Browsing forum category...",
+						state: pageDetail.replaceAll("-", " "),
+						smallImageKey: Assets.Searching,
+				  };
+		}
+		case "t": {
+			return {
+				details: `Forum: ${
+					document.querySelector(
+						"a:nth-child(1) > span.badge-category.clear-badge > span"
+					).textContent
+				} > ${
+					document.querySelector(
+						"a:nth-child(2) > span.badge-category.clear-badge > span"
+					).textContent
+				}`,
+				state: `Post: ${document.querySelector(".fancy-title").textContent}`,
+				smallImageKey: Assets.Reviewing,
+			};
+		}
+		case "about": // general memrise domain
 			return { details: "Viewing About us page..." };
 		case "team":
 			return { details: `Viewing Memrise ${page}...` };
@@ -119,7 +186,8 @@ function getPageData(
 		case "blog":
 			return {
 				details: `Reading Memrise ${page}s...`,
-				state: document.querySelector("#hs_cos_wrapper_name").textContent //blog title
+				state: document.querySelector("#hs_cos_wrapper_name").textContent, //blog title
+				smallImageKey: Assets.Reviewing,
 			};
 		case "contact":
 			return { details: `Viewing Memrise ${page} page` };
