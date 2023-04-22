@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
 		if (websiteloc[1] === "zhanr") {
 			const animegenre = animegenres[websiteloc[2]];
 			presenceData.details = `🔎 В поисках аниме жанра ${animegenre}`;
-			presenceData.smallImageKey = websiteloc[2];
+			presenceData.smallImageKey = Assets[websiteloc[2] as keyof typeof Assets];
 			presenceData.smallImageText = `🔎 В поисках аниме жанра ${animegenre}`;
 		}
 		if (websiteloc[1] === "god")
@@ -179,12 +179,10 @@ presence.on("UpdateData", async () => {
 					!privacy ? animename : ""
 				}`;
 				presenceData.state = episode;
-				presenceData.smallImageKey = video.paused
-					? Assets.pause
-					: Assets.play;
+				presenceData.smallImageKey = video.paused ? Assets.pause : Assets.play;
 				presenceData.smallImageText = video.paused
-					? strings.pause
-					: strings.play;
+					? strings.play
+					: strings.pause;
 				if (video.currentTime && time) {
 					if (video.paused) {
 						delete presenceData.startTimestamp;
