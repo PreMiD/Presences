@@ -10,7 +10,7 @@
 		"en": "Mavanimes is a streaming website where you can watch VF and VOSTFR anime."
 	},
 	"url": "www.mavanimes.co",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/o4qNo1n.png",
 	"thumbnail": "https://i.imgur.com/oeUAnJ2.png",
 	"color": "#0f61b8",
@@ -23,5 +23,6 @@
 		"streaming",
 		"french"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
