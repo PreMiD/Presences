@@ -10,7 +10,7 @@
 		"es": "Descubre las mejores series y peliculas de Anime subtituladas y dobladas con filtros avanzados y míralas en HD."
 	},
 	"url": "animegenzai.net",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/dtmYEl8.png",
 	"thumbnail": "https://i.imgur.com/irueb07.png",
 	"color": "#f5c518",
@@ -21,6 +21,7 @@
 		"video"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "lang",
