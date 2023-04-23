@@ -15,7 +15,7 @@
 	},
 	"url": "ak151.anime-kage.eu",
 	"regExp": "([a-z0-9-]+[.])*anime-kage[.]eu[/]",
-	"version": "1.2.18",
+	"version": "1.2.20",
 	"logo": "https://i.imgur.com/zVbpanX.png",
 	"thumbnail": "https://i.imgur.com/0pir8CX.png",
 	"color": "#2bb4ba",
@@ -24,5 +24,6 @@
 		"anime",
 		"videos"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }

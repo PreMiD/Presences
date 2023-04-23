@@ -10,7 +10,7 @@
 		"fr": "Weebs sont à un seul arrêt pour être à jour avec les derniers animes, les memes et se balancer sur les dernières musiques d'animes. Plus de fonctionnalités sont à venir, donc restez à l'écoute."
 	},
 	"url": "simplyaweeb.to",
-	"version": "1.0.2",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/LdUPH9K.png",
 	"thumbnail": "https://i.imgur.com/yXqDlOS.jpg",
 	"color": "#04fd5b",
@@ -23,6 +23,7 @@
 		"videos"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "cover",

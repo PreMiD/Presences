@@ -10,7 +10,7 @@
 		"fr": "Regardez des films en HD avec des options de langues, doublage et sous-titres."
 	},
 	"url": "animea.site",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/lpx1Af4.png",
 	"thumbnail": "https://i.imgur.com/wTDGhqJ.png",
 	"color": "#45A8FC",
@@ -22,6 +22,7 @@
 		"films"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "time",

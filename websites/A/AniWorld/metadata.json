@@ -12,7 +12,7 @@
 		"vi_VN": "Xem ngay hơn 1,000+ bộ anime tại AniWorld hoàn toàn miễn phí. Anime theo nhu cầu: ✓ 100% miễn phí ✓ Trực tuyến ✓ Những bộ anime độc quyền"
 	},
 	"url": "aniworld.to",
-	"version": "1.0.2",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/fM3E5Iv.png",
 	"thumbnail": "https://i.imgur.com/G1wy3w7.png",
 	"color": "#637cf9",
@@ -23,5 +23,6 @@
 		"anicloud",
 		"aniworld"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
