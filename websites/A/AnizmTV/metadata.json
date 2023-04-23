@@ -31,7 +31,7 @@
 		"turkanime.fun",
 		"turkceanimeizle.org"
 	],
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"logo": "https://i.imgur.com/TZZcyOQ.png",
 	"thumbnail": "https://i.imgur.com/o4P1a0J.png",
 	"color": "#fc9003",
@@ -42,5 +42,6 @@
 		"anizm",
 		"anizmtv"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
