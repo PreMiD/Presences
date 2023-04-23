@@ -12,7 +12,7 @@
 		"vi_VN": "Kiểm soát tế bào của bạn và ăn thịt người chơi khác để lớn hơn! Chơi cùng hàng triệu người chơi khác toàn cầu và trở thành tế bào lớn hơn cả!"
 	},
 	"url": "agar.io",
-	"version": "1.2.15",
+	"version": "1.2.16",
 	"logo": "https://i.imgur.com/x2QZCXF.png",
 	"thumbnail": "https://i.imgur.com/R1Ytqci.png",
 	"color": "#ED1C24",
@@ -23,6 +23,7 @@
 		"agario"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "showName",
