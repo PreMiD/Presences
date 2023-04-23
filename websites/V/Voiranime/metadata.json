@@ -23,7 +23,7 @@
 	},
 	"url": "v2.voiranime.com",
 	"regExp": "([a-z0-9-]+[.])*voiranime[.]com[/]",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"logo": "https://i.imgur.com/Db6EmSA.png",
 	"thumbnail": "https://i.imgur.com/566TY04.png",
 	"color": "#1a1920",
@@ -33,5 +33,6 @@
 		"streaming",
 		"french"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
