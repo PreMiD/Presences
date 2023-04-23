@@ -11,7 +11,7 @@
 		"nl": "Vidstreaming is een website waar je de nieuwste anime kunt vinden die is uitgebracht."
 	},
 	"url": "gogoplay1.com",
-	"version": "2.0.23",
+	"version": "2.0.24",
 	"logo": "https://i.imgur.com/bEtLVB2.png",
 	"thumbnail": "https://i.imgur.com/xRsdose.png",
 	"color": "#ff9200",
@@ -22,6 +22,7 @@
 		"streaming"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "sSI",
