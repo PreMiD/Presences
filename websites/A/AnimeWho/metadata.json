@@ -22,7 +22,7 @@
 		"www.animewho.com",
 		"animewho.com"
 	],
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"logo": "https://i.imgur.com/y0RA8SX.jpg",
 	"thumbnail": "https://i.imgur.com/HmLMCzv.png",
 	"color": "#fc0043",
@@ -36,5 +36,6 @@
 		"izle",
 		"oku"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
