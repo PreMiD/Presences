@@ -11,7 +11,7 @@
 		"nl": "Onlineversies van populaire bordspellen"
 	},
 	"url": "meme-police.ru",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://i.imgur.com/8T258D8.png",
 	"thumbnail": "https://i.imgur.com/5N7oOem.png",
 	"color": "#9C27B0",
@@ -20,5 +20,6 @@
 		"games",
 		"meme-police"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
