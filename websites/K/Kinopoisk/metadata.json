@@ -13,7 +13,7 @@
 		"www.kinopoisk.ru",
 		"hd.kinopoisk.ru"
 	],
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/FzNE1zD.png",
 	"thumbnail": "https://i.imgur.com/0QcOFgj.png",
 	"color": "#ff5900",
@@ -25,6 +25,7 @@
 		"media"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "privacy",
