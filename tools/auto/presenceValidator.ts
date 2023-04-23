@@ -32,6 +32,11 @@ const require = createRequire(import.meta.url),
 		presence: string;
 		message: string | Error;
 		properties?: actions.AnnotationProperties | undefined;
+	}[] = [],
+	warnings: {
+		presence: string;
+		message: string | Error;
+		properties?: actions.AnnotationProperties | undefined;
 	}[] = [];
 
 for (const presence of changedPresences) {
@@ -151,6 +156,41 @@ for (const presence of changedPresences) {
 		});
 	}
 
+	if (metadata.iFrameRegExp === ".*") {
+		errors.push({
+			presence,
+			message:
+				"Presence has metadata.iFrameRegExp set to '.*', this is no longer allowed",
+			properties: {
+				file: resolve(presencePath, "metadata.json"),
+				startLine: getLine("iFrameRegExp"),
+			},
+		});
+	}
+
+	if (metadata.iFrameRegExp && !metadata.iframe) {
+		errors.push({
+			presence,
+			message:
+				"Presence has metadata.iFrameRegExp set but metadata.iframe is set to false",
+			properties: {
+				file: resolve(presencePath, "metadata.json"),
+				startLine: getLine("iFrameRegExp"),
+			},
+		});
+	}
+
+	if (!metadata.iFrameRegExp && metadata.iframe) {
+		warnings.push({
+			presence,
+			message:
+				"Presence has metadata.iframe set to true but metadata.iFrameRegExp is not set, you may want to set it",
+			properties: {
+				file: resolve(presencePath, "metadata.json"),
+				startLine: getLine("iFrameRegExp"),
+			},
+		});
+	}
 	//#endregion
 
 	//#region Presence language Check
@@ -216,6 +256,9 @@ for (const presence of changedPresences) {
 	actions.info(chalk.green(`${metadata.service} validated successfully`));
 }
 
+if (warnings.length)
+	for (const warning of warnings)
+		actions.warning(warning.message, warning.properties);
 if (errors.length) {
 	for (const error of errors) actions.error(error.message, error.properties);
 	actions.setFailed("Some Presences failed to validate.");
