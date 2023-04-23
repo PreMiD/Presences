@@ -11,7 +11,7 @@
 		"nl": "Gratis en open Duitse Anime-community"
 	},
 	"url": "proxer.me",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/jx65gdz.png",
 	"thumbnail": "https://i.imgur.com/j0hV7nO.png",
 	"color": "#8A0E0E",
@@ -22,5 +22,6 @@
 		"proxer",
 		"proxerme"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
