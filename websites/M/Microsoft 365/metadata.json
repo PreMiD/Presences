@@ -14,7 +14,7 @@
 		"onedrive.live.com"
 	],
 	"regExp": "www[.]office[.]com|([a-z0-9-_]+)[-]my[.]sharepoint[.]com|onedrive[.]live[.]com",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/E2tzaTW.png",
 	"thumbnail": "https://i.imgur.com/t3LDGbp.png",
 	"color": "#DE5001",
@@ -26,6 +26,7 @@
 		"document"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "privacy",
