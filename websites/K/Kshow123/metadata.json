@@ -10,7 +10,7 @@
 		"nl": "Bekijk online Koreaanse shows met Engelse ondertiteling in hoge kwaliteit."
 	},
 	"url": "kshow123.net",
-	"version": "2.2.15",
+	"version": "2.2.16",
 	"logo": "https://i.imgur.com/xYJbv9k.png",
 	"thumbnail": "https://i.imgur.com/JMRVXls.png",
 	"color": "#2daae1",
@@ -20,5 +20,6 @@
 		"media",
 		"kpop"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
