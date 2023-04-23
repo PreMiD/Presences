@@ -16,7 +16,7 @@
 		"www.aniturk.net",
 		"aniturk.net"
 	],
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://i.imgur.com/xg4r7tM.png",
 	"thumbnail": "https://i.imgur.com/0VdI8Mq.png",
 	"color": "#ff31cb",
@@ -26,5 +26,6 @@
 		"türk",
 		"aniturk"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
