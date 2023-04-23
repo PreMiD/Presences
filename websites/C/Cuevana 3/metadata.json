@@ -14,7 +14,7 @@
 		"m4.cuevana3.me",
 		"ww3.cuevana.pro"
 	],
-	"version": "3.0.2",
+	"version": "3.0.3",
 	"logo": "https://i.imgur.com/uu5XX85.png",
 	"thumbnail": "https://i.imgur.com/TckG8Jd.png",
 	"color": "#007AFF",
@@ -25,5 +25,6 @@
 		"movies",
 		"series"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
