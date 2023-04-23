@@ -40,7 +40,7 @@
 		"cafe.naver.com"
 	],
 	"regExp": "((section)[.])?([a-z]+)[.]naver[.]([a-z0-9]+)",
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://i.imgur.com/jhOVwwe.png",
 	"thumbnail": "https://i.imgur.com/QZs7QHH.png",
 	"color": "#03d05a",
