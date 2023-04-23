@@ -14,7 +14,7 @@
 		"diziroll.com",
 		"www.diziroll.com"
 	],
-	"version": "1.0.13",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/PY7u54F.png",
 	"thumbnail": "https://i.imgur.com/YsL5RgB.jpg",
 	"color": "#1a1d30",
@@ -25,5 +25,6 @@
 		"tv-series",
 		"turkish"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }

@@ -10,7 +10,7 @@
 		"nl": "Content Sharing Platform met brede platformondersteuning om tegelijkertijd te genieten van video's/muziek met een live chat en tal van aanpassingstools/moderatietools"
 	},
 	"url": "cytu.be",
-	"version": "1.1.18",
+	"version": "1.1.20",
 	"logo": "https://i.imgur.com/gp4nfwi.png",
 	"thumbnail": "https://i.imgur.com/kKZRocg.png",
 	"color": "#263144",
@@ -20,5 +20,6 @@
 		"music",
 		"media"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }

@@ -14,7 +14,7 @@
 		"www.codecademy.com",
 		"news.codecademy.com"
 	],
-	"version": "1.1.16",
+	"version": "1.1.18",
 	"logo": "https://i.imgur.com/oew3JqR.png",
 	"thumbnail": "https://i.imgur.com/Npzs51Y.png",
 	"color": "#152B39",
@@ -25,5 +25,6 @@
 		"computer",
 		"learn"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }

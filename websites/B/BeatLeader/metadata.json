@@ -13,7 +13,7 @@
 		"replay.beatleader.xyz",
 		"royale.beatleader.xyz"
 	],
-	"version": "1.2.0",
+	"version": "1.2.2",
 	"logo": "https://i.imgur.com/ogoDV1c.png",
 	"thumbnail": "https://i.imgur.com/uODy4II.png",
 	"color": "#c81c9f",
@@ -24,6 +24,7 @@
 		"replay"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "time",

@@ -10,7 +10,7 @@
 		"ru": "Сайт для онлайн просмотра фильмов, сериалов, спортивных трансляций и концертов"
 	},
 	"url": "kinopub.net",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/HAvvvj7.png",
 	"thumbnail": "https://i.imgur.com/TFaoJbL.png",
 	"color": "#1c202b",
@@ -22,6 +22,7 @@
 		"media"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "privacy",

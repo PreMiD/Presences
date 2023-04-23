@@ -14,7 +14,7 @@
 		"maliki.com",
 		"malimode.maliki.com"
 	],
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/QDOaEbp.jpg",
 	"thumbnail": "https://i.imgur.com/gNKV8NF.jpg",
 	"color": "#f576ab",
@@ -24,6 +24,7 @@
 		"dessin"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "privacy",
