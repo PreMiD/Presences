@@ -10,7 +10,7 @@
 		"bg": "Аниме, манга и азиатска култура"
 	},
 	"url": "animes-portal.info",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/EwyBmHJ.png",
 	"thumbnail": "https://i.imgur.com/Nr3XhzA.jpg",
 	"color": "#365AA8",
@@ -25,6 +25,7 @@
 		"japan"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "showthumb",
