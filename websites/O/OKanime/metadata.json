@@ -13,7 +13,7 @@
 		"okanime.tv",
 		"www.okanime.tv"
 	],
-	"version": "1.1.21",
+	"version": "1.1.22",
 	"logo": "https://i.imgur.com/mhjMnnU.png",
 	"thumbnail": "https://i.imgur.com/NAiM77y.png",
 	"color": "#a5173b",
@@ -23,5 +23,6 @@
 		"okanime",
 		"streaming"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
