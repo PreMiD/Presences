@@ -21,7 +21,7 @@
 		"gogoanime.news"
 	],
 	"regExp": "((w)?ww([0-9]*)?[.])?(gogoanime[s]?)([0-9]+)?([.].*)",
-	"version": "2.1.1",
+	"version": "2.1.2",
 	"logo": "https://i.imgur.com/OnaEYdo.png",
 	"thumbnail": "https://i.imgur.com/RZwilwc.png",
 	"color": "#FFC119",
@@ -31,5 +31,6 @@
 		"video",
 		"streaming"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
