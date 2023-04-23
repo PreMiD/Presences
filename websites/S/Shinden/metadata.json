@@ -14,7 +14,7 @@
 		"shinden.pl",
 		"forum.shinden.pl"
 	],
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"logo": "https://i.imgur.com/sGSeLBJ.png",
 	"thumbnail": "https://i.imgur.com/atx9P8n.png",
 	"color": "#6a2b8b",
@@ -23,5 +23,6 @@
 		"polish",
 		"anime"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
