@@ -17,7 +17,7 @@
 	},
 	"url": "www.daum.net",
 	"regExp": "(top[.])?([a-z]+)([.]v)?[.]daum[.]([a-z0-9]+)",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/UFpDEUR.png",
 	"thumbnail": "https://i.imgur.com/OF0PaMd.png",
 	"color": "#f4f7fb",
@@ -28,6 +28,7 @@
 		"blog"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "timestamp",
