@@ -11,7 +11,7 @@
 	},
 	"url": "wbijam.pl",
 	"regExp": "([a-z0-9.]*)wbijam[.]pl",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/RRphyk6.png",
 	"thumbnail": "https://i.imgur.com/PhjCcuX.png",
 	"color": "#00b3ff",
@@ -20,5 +20,6 @@
 		"videos",
 		"anime"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
