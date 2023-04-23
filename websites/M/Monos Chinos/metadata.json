@@ -10,7 +10,7 @@
 		"nl": "Monos Chinos is een streamingwebsite waar je anime kunt kijken met Spaanse ondertitels."
 	},
 	"url": "monoschinos2.com",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://i.imgur.com/urgEiF7.png",
 	"thumbnail": "https://i.imgur.com/togvEtr.png",
 	"color": "#ff6348",
@@ -20,5 +20,6 @@
 		"streaming",
 		"embedded-links"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
