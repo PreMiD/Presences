@@ -20,9 +20,7 @@ interface LiveChannelNextData {
 	props: {
 		pageProps: {
 			channelSlug: string;
-			channelsMetaData: {
-				channels: ChannelMetadata[];
-			};
+			channels: ChannelMetadata[];
 		};
 	};
 }
@@ -92,7 +90,7 @@ presence.on("UpdateData", async () => {
 				const nextData = fetchNextData<LiveChannelNextData>(),
 					// When you first go to watch a channel, the slug is null and the default channel is ITV1
 					currentChannelMetadata =
-						nextData.props.pageProps.channelsMetaData.channels.find(
+						nextData.props.pageProps.channels.find(
 							x => x.slug === (nextData.props.pageProps.channelSlug || "itv")
 						);
 
