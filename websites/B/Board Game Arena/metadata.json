@@ -14,9 +14,5 @@
 	"thumbnail": "https://i.imgur.com/VZOq3Fm.png",
 	"color": "#4871b6",
 	"category": "games",
-	"tags": [
-		"online",
-		"board",
-		"community"
-	]
+	"tags": ["online", "board", "community"]
 }
