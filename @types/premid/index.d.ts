@@ -340,6 +340,7 @@ declare class Presence {
 	 * @link https://docs.premid.app/presence-development/coding/presence-class#getpageletiable-string
 	 */
 	getPageletiable<T>(letiable: string): Promise<T>;
+	getPageVariable<T extends Record<string,unknown>>(...variables: string[]): Promise<T>
 	/**
 	 * Returns an array of the past 100 logs, you can filter these logs with a RegExp.
 	 * @param regExp Filter of the logs
