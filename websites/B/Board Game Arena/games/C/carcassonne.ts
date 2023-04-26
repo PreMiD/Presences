@@ -8,8 +8,8 @@ import {
 	getUserPlayerId,
 } from "../../util";
 
-const tickettoride: GamePresence = {
-	logo: "https://i.imgur.com/xzGOJRZ.png",
+const carcassonne: GamePresence = {
+	logo: "https://i.imgur.com/QDG9D5h.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -21,24 +21,27 @@ const tickettoride: GamePresence = {
 			};
 		if (activePlayer === userPlayer) {
 			switch (gameState) {
-				case "chooseInitialDestinations":
-					data.state = "Choosing initial destinations";
+				case "playTile":
+					data.state = "Placing a tile";
 					break;
-				case "chooseAction":
-					data.state = "Choosing an action";
+				case "canPlayPartisan":
+					data.state = "Placing a partisan on the tile";
 					break;
-				case "drawSecondCard":
-					data.state = "Drawing a train card";
+				case "dragonWalkPlayerChoice":
+					data.state = "Moving the dragon";
 					break;
-				case "chooseAdditionalDestinations":
-					data.state = "Choosing additional destinations";
+				case "scorePoints":
+					data.state = "Scoring points";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
 					break;
 			}
 		} else data.state = `Waiting for ${activePlayerData.name}`;
+		if (gameState === "unachievedCount") {
+			data.state = "Calculating unachieved points";
+		}
 		return data;
 	},
 };
-export default tickettoride;
+export default carcassonne;
