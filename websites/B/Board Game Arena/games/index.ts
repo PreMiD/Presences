@@ -1,4 +1,5 @@
 import azul from "./A/azul";
+import catan from "./C/catan";
 import wingspan from "./W/wingspan";
 import yatzy from "./Y/yatzy";
 
@@ -11,6 +12,7 @@ const games: Record<string, GamePresence> = {
 	wingspan,
 	yatzy,
 	azul,
+	catan,
 };
 
 export default function getGame(key: string) {
