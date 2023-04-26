@@ -8,21 +8,21 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/uCstmQE.png",
-		startTimestamp: browsingTimestamp,
-	};
-	const { pathname, href } = document.location;
-	const pathList = pathname.split("/").filter(x => x);
+			largeImageKey: "https://i.imgur.com/uCstmQE.png",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href } = document.location,
+		pathList = pathname.split("/").find(x => x);
 
 	switch (true) {
-		case pathList[0] === "tutorial": {
+		case pathList === "tutorial": {
 			presenceData.details = `Playing tutorial for ${await getMetadata<string>(
 				presence,
 				"game_name_displayed"
 			)}`;
 			break;
 		}
-		case pathList[0] === "gamepanel": {
+		case pathList === "gamepanel": {
 			presenceData.details = "Viewing game panel";
 			presenceData.state =
 				document.querySelector<HTMLSpanElement>(
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
-		case pathList[0] === "player": {
+		case pathList === "player": {
 			presenceData.details = "Viewing player profile";
 			presenceData.state = document
 				.querySelector<HTMLSpanElement>("#player_name")
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLImageElement>("#player_avatar img").src;
 			break;
 		}
-		case /^\d+$/.test(pathList[0]): {
+		case /^\d+$/.test(pathList): {
 			const game = getGame(await getGameTag(presence));
 			presenceData.details = `Playing ${await getMetadata<string>(
 				presence,

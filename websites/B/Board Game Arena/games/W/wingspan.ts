@@ -15,19 +15,19 @@ function getPlayerData(presence: Presence, id: number) {
 const wingspan: GamePresence = {
 	logo: "https://i.imgur.com/r49yEME.png",
 	async getData(presence: Presence) {
-		const gameState = await getGameData<string>(presence, "gamestate.name");
-		const activePlayer = await getGameData<number>(presence, "active_player");
-		const userPlayer = await getMetadata<number>(presence, "player_id");
-		const activePlayerData = await getPlayerData(presence, activePlayer);
-		const data: PresenceData = {
-			smallImageKey: document.querySelector<HTMLImageElement>(
-				`avatar_${userPlayer}`
-			).src,
-			smallImageText: `Score: ${
-				document.querySelector<HTMLSpanElement>(`#player_score_${userPlayer}`)
-					.textContent
-			}`,
-		};
+		const gameState = await getGameData<string>(presence, "gamestate.name"),
+			activePlayer = await getGameData<number>(presence, "active_player"),
+			userPlayer = await getMetadata<number>(presence, "player_id"),
+			activePlayerData = await getPlayerData(presence, activePlayer),
+			data: PresenceData = {
+				smallImageKey: document.querySelector<HTMLImageElement>(
+					`avatar_${userPlayer}`
+				).src,
+				smallImageText: `Score: ${
+					document.querySelector<HTMLSpanElement>(`#player_score_${userPlayer}`)
+						.textContent
+				}`,
+			};
 		if (activePlayer === userPlayer) {
 			switch (gameState) {
 				case "gameSetup":
@@ -62,9 +62,7 @@ const wingspan: GamePresence = {
 					data.state = "Viewing game results";
 					break;
 			}
-		} else {
-			data.state = `Waiting for ${activePlayerData.name}`;
-		}
+		} else data.state = `Waiting for ${activePlayerData.name}`;
 		return data;
 	},
 };

@@ -1,4 +1,4 @@
-export interface GameMetadata extends Record<string, any> {
+export interface GameMetadata extends Record<string, unknown> {
 	bRealtime: number;
 	bTutorial: boolean;
 	channel: string;
@@ -15,10 +15,10 @@ export interface GameMetadata extends Record<string, any> {
 	is_solo: boolean;
 	metasiteurl: string;
 	player_id: number;
-	gamedatas: Record<string, any>;
+	gamedatas: Record<string, unknown>;
 }
 
-let dataCache: GameMetadata,
+const dataCache: GameMetadata = {} as GameMetadata,
 	dataCacheTime: Record<string, number> = {};
 
 export function getGameTag(presence: Presence) {
@@ -29,7 +29,7 @@ function getCachedItem(key: string) {
 	return dataCache[key];
 }
 
-function setCachedItem(key: string, value: any) {
+function setCachedItem(key: string, value: unknown) {
 	dataCache[key] = value;
 }
 
@@ -58,9 +58,7 @@ export async function getMetadata<E>(
 		const data = await presence.getPageVariable(`gameui.${key}`);
 		setCachedItem(key, data);
 		return data as E;
-	} else {
-		return getCachedItem(key) as E;
-	}
+	} else return getCachedItem(key) as E;
 }
 
 /**
