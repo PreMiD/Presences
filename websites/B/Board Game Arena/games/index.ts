@@ -1,4 +1,5 @@
 import wingspan from "./W/wingspan";
+import yatzy from "./Y/yatzy";
 
 export interface GamePresence {
 	logo: string;
@@ -7,6 +8,7 @@ export interface GamePresence {
 
 const games: Record<string, GamePresence> = {
 	wingspan,
+	yatzy,
 };
 
 export default function getGame(key: string) {

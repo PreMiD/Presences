@@ -95,3 +95,12 @@ export function getActivePlayerId(presence: Presence) {
 export function getUserPlayerId(presence: Presence) {
 	return getMetadata<number>(presence, "player_id");
 }
+
+export function getPlayerAvatar(id: number) {
+	return document.querySelector<HTMLImageElement>(`avatar_${id}`).src;
+}
+
+export function getPlayerScore(id: number) {
+	return document.querySelector<HTMLSpanElement>(`#player_score_${id}`)
+		.textContent;
+}

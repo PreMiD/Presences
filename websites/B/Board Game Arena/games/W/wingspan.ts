@@ -2,7 +2,9 @@ import { GamePresence } from "..";
 import {
 	getActivePlayerId,
 	getCurrentGameState,
+	getPlayerAvatar,
 	getPlayerData,
+	getPlayerScore,
 	getUserPlayerId,
 } from "../../util";
 
@@ -14,13 +16,8 @@ const wingspan: GamePresence = {
 			userPlayer = await getUserPlayerId(presence),
 			activePlayerData = await getPlayerData(presence, activePlayer),
 			data: PresenceData = {
-				smallImageKey: document.querySelector<HTMLImageElement>(
-					`avatar_${userPlayer}`
-				).src,
-				smallImageText: `Score: ${
-					document.querySelector<HTMLSpanElement>(`#player_score_${userPlayer}`)
-						.textContent
-				}`,
+				smallImageKey: getPlayerAvatar(userPlayer),
+				smallImageText: `Score: ${getPlayerScore(userPlayer)}`,
 			};
 		if (activePlayer === userPlayer) {
 			switch (gameState) {
