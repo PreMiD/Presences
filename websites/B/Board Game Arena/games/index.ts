@@ -1,6 +1,7 @@
 import azul from "./A/azul";
 import carcassonne from "./C/carcassonne";
 import catan from "./C/catan";
+import splendor from "./S/splendor";
 import tickettoride from "./T/tickettoride";
 import wingspan from "./W/wingspan";
 import yatzy from "./Y/yatzy";
@@ -17,6 +18,7 @@ const games: Record<string, GamePresence> = {
 	catan,
 	tickettoride,
 	carcassonne,
+	splendor,
 };
 
 export default function getGame(key: string) {
