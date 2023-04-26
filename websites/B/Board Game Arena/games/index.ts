@@ -2,7 +2,7 @@ import wingspan from "./W/wingspan";
 
 export interface GamePresence {
 	logo: string;
-	getData(): Promise<PresenceData> | PresenceData;
+	getData(presence: Presence): Promise<PresenceData> | PresenceData;
 }
 
 const games: Record<string, GamePresence> = {

@@ -8,23 +8,25 @@ interface PlayerData {
 	avatar: string;
 }
 
-function getPlayerData(id: number) {
-	return getGameData<PlayerData>(`players.${id}`);
+function getPlayerData(presence: Presence, id: number) {
+	return getGameData<PlayerData>(presence, `players.${id}`);
 }
 
 const wingspan: GamePresence = {
 	logo: "https://i.imgur.com/r49yEME.png",
-	async getData() {
-		const gameState = await getGameData<string>("gamestate.name");
-		const activePlayer = await getGameData<number>("active_player");
-		const userPlayer = await getMetadata<number>("player_id");
-		const userPlayerData = await getPlayerData(userPlayer);
-		const activePlayerData = await getPlayerData(activePlayer);
+	async getData(presence: Presence) {
+		const gameState = await getGameData<string>(presence, "gamestate.name");
+		const activePlayer = await getGameData<number>(presence, "active_player");
+		const userPlayer = await getMetadata<number>(presence, "player_id");
+		const activePlayerData = await getPlayerData(presence, activePlayer);
 		const data: PresenceData = {
 			smallImageKey: document.querySelector<HTMLImageElement>(
 				`avatar_${userPlayer}`
 			).src,
-			smallImageText: `Score: ${userPlayerData.score}`,
+			smallImageText: `Score: ${
+				document.querySelector<HTMLSpanElement>(`#player_score_${userPlayer}`)
+					.textContent
+			}`,
 		};
 		if (activePlayer === userPlayer) {
 			switch (gameState) {

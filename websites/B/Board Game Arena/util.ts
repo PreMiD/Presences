@@ -21,8 +21,8 @@ export interface GameMetadata extends Record<string, any> {
 let dataCache: GameMetadata,
 	dataCacheTime: Record<string, number> = {};
 
-export function getGameTag() {
-	return getMetadata<string>("game_name");
+export function getGameTag(presence: Presence) {
+	return getMetadata<string>(presence, "game_name");
 }
 
 function getCachedItem(key: string) {
@@ -44,10 +44,14 @@ function setCacheTime(key: string, time: number) {
 /**
  * Fetches metadata about the current game.
  *
+ * @param presence
  * @param key
  * @returns
  */
-export async function getMetadata<E>(key: string): Promise<E> {
+export async function getMetadata<E>(
+	presence: Presence,
+	key: string
+): Promise<E> {
 	const now = Date.now();
 	if (now - getCacheTime(key) > 1000) {
 		setCacheTime(key, now);
@@ -63,9 +67,10 @@ export async function getMetadata<E>(key: string): Promise<E> {
  * Fetches data from the game's data object.
  * This includes game-specific data.
  *
+ * @param presence
  * @param key
  * @returns
  */
-export function getGameData<E>(key: string) {
-	return getMetadata<E>(`gamedatas.${key}`);
+export function getGameData<E>(presence: Presence, key: string) {
+	return getMetadata<E>(presence, `gamedatas.${key}`);
 }
