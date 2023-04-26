@@ -12,17 +12,21 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
-		pathList = pathname.split("/").find(x => x);
+		pathList = pathname.split("/").filter(x => x !== "");
 
-	switch (true) {
-		case pathList === "tutorial": {
+	switch (pathList[0] ?? "welcome") {
+		case "welcome": {
+			presenceData.details = "Browsing homepage";
+			break;
+		}
+		case "tutorial": {
 			presenceData.details = `Playing tutorial for ${await getMetadata<string>(
 				presence,
 				"game_name_displayed"
 			)}`;
 			break;
 		}
-		case pathList === "gamepanel": {
+		case "gamepanel": {
 			presenceData.details = "Viewing game panel";
 			presenceData.state =
 				document.querySelector<HTMLSpanElement>(
@@ -36,26 +40,72 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
-		case pathList === "player": {
+		case "player": {
 			presenceData.details = "Viewing player profile";
 			presenceData.state = document
 				.querySelector<HTMLSpanElement>("#player_name")
 				.textContent.trim();
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("#player_avatar img").src;
+			presenceData.buttons = [
+				{
+					label: "View Profile",
+					url: href,
+				},
+			];
 			break;
 		}
-		case /^\d+$/.test(pathList): {
-			const game = getGame(await getGameTag(presence));
-			presenceData.details = `Playing ${await getMetadata<string>(
-				presence,
-				"game_name_displayed"
-			)}`;
-			presenceData.largeImageKey = game.logo;
-			Object.assign(presenceData, await game.getData(presence));
+		case "table": {
+			presenceData.details = "Viewing a table";
+			presenceData.state =
+				document.querySelector<HTMLHeadingElement>("#table_name").textContent;
+			presenceData.buttons = [
+				{
+					label: "Join Table",
+					url: href,
+				},
+			];
 			break;
+		}
+		case "gamelist": {
+			presenceData.details = "Viewing game list";
+			break;
+		}
+		case "lobby": {
+			presenceData.details = "Viewing lobby";
+			break;
+		}
+		case "forum": {
+			switch (pathList[1] ?? "") {
+				case "": {
+					presenceData.details = "Browsing the forum";
+					break;
+				}
+				case "viewforum": {
+					presenceData.details = "Viewing a forum category";
+					presenceData.state =
+						document.querySelector<HTMLHeadingElement>(
+							".forum-title"
+						).textContent;
+					break;
+				}
+			}
+			break;
+		}
+		default: {
+			if (/^\d+$/.test(pathList[0])) {
+				const game = getGame(await getGameTag(presence));
+				presenceData.details = `Playing ${await getMetadata<string>(
+					presence,
+					"game_name_displayed"
+				)}`;
+				presenceData.largeImageKey = game.logo;
+				Object.assign(presenceData, await game.getData(presence));
+				break;
+			}
 		}
 	}
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
