@@ -88,6 +88,10 @@ export function getCurrentGameState(presence: Presence) {
 	return getGameData<string>(presence, "gamestate.name");
 }
 
+export function getCurrentGameStateType(presence: Presence) {
+	return getGameData<string>(presence, "gamestate.type");
+}
+
 export function getActivePlayerId(presence: Presence) {
 	return getGameData<number>(presence, "gamestate.active_player");
 }
