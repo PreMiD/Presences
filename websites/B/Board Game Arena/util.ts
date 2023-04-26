@@ -72,3 +72,26 @@ export async function getMetadata<E>(
 export function getGameData<E>(presence: Presence, key: string) {
 	return getMetadata<E>(presence, `gamedatas.${key}`);
 }
+
+export interface PlayerData {
+	name: string;
+	id: number;
+	score: string;
+	avatar: string;
+}
+
+export function getPlayerData(presence: Presence, id: number) {
+	return getGameData<PlayerData>(presence, `players.${id}`);
+}
+
+export function getCurrentGameState(presence: Presence) {
+	return getGameData<string>(presence, "gamestate.name");
+}
+
+export function getActivePlayerId(presence: Presence) {
+	return getGameData<number>(presence, "gamestate.active_player");
+}
+
+export function getUserPlayerId(presence: Presence) {
+	return getMetadata<number>(presence, "player_id");
+}

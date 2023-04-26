@@ -6,8 +6,8 @@ import {
 	getUserPlayerId,
 } from "../../util";
 
-const wingspan: GamePresence = {
-	logo: "https://i.imgur.com/r49yEME.png",
+const yatzy: GamePresence = {
+	logo: "https://i.imgur.com/cOG3G3P.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,33 +24,8 @@ const wingspan: GamePresence = {
 			};
 		if (activePlayer === userPlayer) {
 			switch (gameState) {
-				case "gameSetup":
-					data.state = "Loading";
-					break;
-				case "playerInitialDiscard":
-					data.state = "Selecting initial birds";
-					break;
-				case "playerNormalTurn":
-					data.state = "Choosing an action";
-					break;
-				case "playerDrawBirds":
-					data.state = "Drawing birds";
-					break;
-				case "playerPowerWhite":
-				case "playerPowerBrown":
-				case "playerPowerPink":
-				case "playerPowerAllPlayers":
-				case "processActionEffect":
-				case "processPowerEffectWhite":
-				case "processPowerEffectBrown":
-				case "processPowerEffectPink":
-					data.state = "Activating a power";
-					break;
-				case "playerGainFromFeeder":
-					data.state = "Gaining food from the bird feeder";
-					break;
-				case "playerDiscardBird":
-					data.state = "Discarding a bird";
+				case "playerTurn":
+					data.state = "Rolling dice";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
@@ -60,5 +35,4 @@ const wingspan: GamePresence = {
 		return data;
 	},
 };
-
-export default wingspan;
+export default yatzy;
