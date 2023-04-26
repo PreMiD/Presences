@@ -20,10 +20,13 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "tutorial": {
+			const game = getGame(await getGameTag(presence));
 			presenceData.details = `Playing tutorial for ${await getMetadata<string>(
 				presence,
 				"game_name_displayed"
 			)}`;
+			presenceData.largeImageKey = game.logo;
+			Object.assign(presenceData, await game.getData(presence));
 			break;
 		}
 		case "gamepanel": {
