@@ -9,6 +9,7 @@
 		"en": "Play board games online!"
 	},
 	"url": "boardgamearena.com",
+	"regExp": "[a-z]*[.]?boardgamearena[.]com",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/uCstmQE.png",
 	"thumbnail": "https://i.imgur.com/VZOq3Fm.png",
