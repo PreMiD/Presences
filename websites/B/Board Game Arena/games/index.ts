@@ -23,6 +23,7 @@ import sevenwondersduel from "./S/sevenwondersduel";
 import spacebase from "./S/spacebase";
 import splendor from "./S/splendor";
 import spots from "./S/spots";
+import stoneage from "./S/stoneage";
 import tickettoride from "./T/tickettoride";
 import welcometo from "./W/welcometo";
 import wingspan from "./W/wingspan";
@@ -63,6 +64,7 @@ const games: Record<string, GamePresence> = {
 	patchwork,
 	architectsofthewestkingdom,
 	raceforthegalaxy,
+	stoneage,
 };
 
 export default function getGame(key: string) {
