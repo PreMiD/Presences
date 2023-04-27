@@ -9,6 +9,7 @@ import catan from "./C/catan";
 import gizmos from "./G/gizmos";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import sechsnimmt from "./S/sechsnimmt";
+import sevenwonders from "./S/sevenwonders";
 import sevenwondersduel from "./S/sevenwondersduel";
 import spacebase from "./S/spacebase";
 import splendor from "./S/splendor";
@@ -39,6 +40,7 @@ const games: Record<string, GamePresence> = {
 	akropolis,
 	cantstop,
 	gizmos,
+	sevenwonders,
 };
 
 export default function getGame(key: string) {
