@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const butterfly: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/MbgQzjR.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,95 +23,14 @@ const butterfly: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
 				case "placeHedgehog":
-					/*
-					{
-	"name": "placeHedgehog",
-	"description": "${actplayer} must place the hedgehog",
-	"descriptionmyturn": "${you} must place the hedgehog",
-	"type": "activeplayer",
-	"possibleactions": [
-		"placeHedgehog"
-	],
-	"transitions": {
-		"moveHedgehog": 11
-	}
-}
-					*/
+					data.state = "Placing the hedgehog";
 					break;
 				case "moveHedgehog":
-					/*
-					{
-	"name": "moveHedgehog",
-	"description": "${actplayer} must move the hedgehog",
-	"descriptionmyturn": "${you} must move the hedgehog",
-	"type": "activeplayer",
-	"args": "argPlayerTurn",
-	"possibleactions": [
-		"moveHedgehog"
-	],
-	"transitions": {
-		"moveHedgehog": 11,
-		"drawConfirm": 4,
-		"gameEnd": 99
-	}
-}
-					*/
+					data.state = "Moving the hedgehog";
 					break;
 				case "drawConfirm":
-					/*
-					{
-	"name": "drawConfirm",
-	"description": "${actplayer} passed over a butterfly net and may decide to draw a tile",
-	"descriptionmyturn": "${you} may draw a bonus tile for passing over a net",
-	"type": "activeplayer",
-	"possibleactions": [
-		"drawTile"
-	],
-	"transitions": {
-		"confirmDraw": 11,
-		"gameEnd": 99
-	}
-}
-					*/
-					break;
-				case "nextPlayer":
-					/*
-					{
-	"name": "nextPlayer",
-	"type": "game",
-	"action": "stNextPlayer",
-	"updateGameProgression": true,
-	"transitions": {
-		"moveHedgehog": 3,
-		"gameEnd": 99
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Drawing a tile";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

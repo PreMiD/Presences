@@ -23,6 +23,48 @@ import assyria from "./A/assyria";
 import astra from "./A/astra";
 import automobiles from "./A/automobiles";
 import azul from "./A/azul";
+import babydinosaurrescue from "./B/babydinosaurrescue";
+import backgammon from "./B/backgammon";
+import bahamataxi from "./B/bahamataxi";
+import balloonpop from "./B/balloonpop";
+import bandada from "./B/bandada";
+import bandido from "./B/bandido";
+import bang from "./B/bang";
+import baolakiswahili from "./B/baolakiswahili";
+import barbu from "./B/barbu";
+import barenpark from "./B/barenpark";
+import barrage from "./B/barrage";
+import battleforhill from "./B/battleforhill";
+import battleoflits from "./B/battleoflits";
+import battleship from "./B/battleship";
+import belote from "./B/belote";
+import betta from "./B/betta";
+import beyondthesun from "./B/beyondthesun";
+import bids from "./B/bids";
+import bigmonster from "./B/bigmonster";
+import bigtimesoccer from "./B/bigtimesoccer";
+import bigtwo from "./B/bigtwo";
+import biyi from "./B/biyi";
+import blackjack from "./B/blackjack";
+import blaze from "./B/blaze";
+import bloodrage from "./B/bloodrage";
+import blooms from "./B/blooms";
+import blueskies from "./B/blueskies";
+import bobail from "./B/bobail";
+import bombay from "./B/bombay";
+import boomerangaustralia from "./B/boomerangaustralia";
+import boomerangeurope from "./B/boomerangeurope";
+import boomerangusa from "./B/boomerangusa";
+import boop from "./B/boop";
+import bossquest from "./B/bossquest";
+import breakthecode from "./B/breakthecode";
+import briscola from "./B/briscola";
+import bubbleepop from "./B/bubbleepop";
+import bug from "./B/bug";
+import burglebros from "./B/burglebros";
+import butterfly from "./B/butterfly";
+import buttons from "./B/buttons";
+import buyword from "./B/buyword";
 import cantstop from "./C/cantstop";
 import carcassonne from "./C/carcassonne";
 import castlesofburgundy from "./C/castlesofburgundy";
@@ -105,6 +147,48 @@ const games: Record<string, GamePresence> = {
 	assyria,
 	astra,
 	automobiles,
+	babydinosaurrescue,
+	backgammon,
+	bahamataxi,
+	balloonpop,
+	bandada,
+	bandido,
+	bang,
+	baolakiswahili,
+	barbu,
+	barenpark,
+	barrage,
+	battleforhill,
+	battleoflits,
+	battleship,
+	belote,
+	betta,
+	beyondthesun,
+	bids,
+	bigmonster,
+	bigtimesoccer,
+	bigtwo,
+	biyi,
+	blackjack,
+	blaze,
+	bloodrage,
+	blooms,
+	blueskies,
+	bobail,
+	bombay,
+	boomerangaustralia,
+	boomerangeurope,
+	boomerangusa,
+	boop,
+	bossquest,
+	breakthecode,
+	briscola,
+	bubbleepop,
+	bug,
+	burglebros,
+	butterfly,
+	buttons,
+	buyword,
 };
 
 export default function getGame(key: string) {

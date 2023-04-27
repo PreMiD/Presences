@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const breakthecode: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/3bMvSY0.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,98 +23,11 @@ const breakthecode: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
 				case "playerTurn":
-					/*
-					{
-	"name": "playerTurn",
-	"description": "${actplayer} must ask a question or guess the tiles.",
-	"descriptionmyturn": "${you} must ask a question or guess the tiles.",
-	"type": "activeplayer",
-	"possibleactions": [
-		"AskQuestion",
-		"GuessTile"
-	],
-	"transitions": {
-		"NextPlayer": 3,
-		"GuessTile": 4,
-		"GameEnd": 99
-	}
-}
-					*/
-					break;
-				case "NextPlayer":
-					/*
-					{
-	"name": "NextPlayer",
-	"description": "Changing active player...",
-	"type": "game",
-	"action": "stNextPlayer",
-	"updateGameProgression": true,
-	"transitions": {
-		"playerTurn": 2,
-		"GameEnd": 99
-	}
-}
-					*/
+					data.state = "Asking a question or guessing the tiles";
 					break;
 				case "GuessTile":
-					/*
-					{
-	"name": "GuessTile",
-	"description": "${actplayer} must guess the tiles.",
-	"descriptionmyturn": "${you} must guess the tiles.",
-	"type": "activeplayer",
-	"args": "argGuessTile",
-	"possibleactions": [
-		"Back",
-		"GuessTile"
-	],
-	"transitions": {
-		"NextPlayer": 3,
-		"NextPlayer2": 5,
-		"playerTurn": 2,
-		"GameEnd": 99
-	}
-}
-					*/
-					break;
-				case "NextPlayer2":
-					/*
-					{
-	"name": "NextPlayer2",
-	"description": "Changing active player...",
-	"type": "game",
-	"action": "stNextPlayer2",
-	"updateGameProgression": true,
-	"transitions": {
-		"GuessTile": 4
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Guessing the tiles";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
