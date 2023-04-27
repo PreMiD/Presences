@@ -6,6 +6,7 @@ import cantstop from "./C/cantstop";
 import carcassonne from "./C/carcassonne";
 import castlesofburgundy from "./C/castlesofburgundy";
 import catan from "./C/catan";
+import gizmos from "./G/gizmos";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import sechsnimmt from "./S/sechsnimmt";
 import sevenwondersduel from "./S/sevenwondersduel";
@@ -37,6 +38,7 @@ const games: Record<string, GamePresence> = {
 	sechsnimmt,
 	akropolis,
 	cantstop,
+	gizmos,
 };
 
 export default function getGame(key: string) {
