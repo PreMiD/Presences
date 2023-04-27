@@ -215,7 +215,7 @@ function getHomeDetail(pageDetail: string) {
 				} | 
 				Total ${
 					document.querySelector("#attendance-grid-label1 .large").textContent
-				} days in the last 365 days]`,
+				} days the last 365 days]`,
 			};
 		case "difficult-words":
 			return {
