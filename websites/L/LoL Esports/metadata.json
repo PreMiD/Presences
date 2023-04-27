@@ -11,7 +11,7 @@
 		"nl": "De beste plek om League of Legends esports te bekijken en beloningen te verdienen!"
 	},
 	"url": "lolesports.com",
-	"version": "1.1.11",
+	"version": "1.1.13",
 	"logo": "https://i.imgur.com/BGc0jtj.jpg",
 	"thumbnail": "https://i.imgur.com/R1psydE.jpg",
 	"color": "#061A25",
@@ -23,5 +23,6 @@
 		"riot",
 		"riotgames"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }

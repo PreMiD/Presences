@@ -14,7 +14,7 @@
 		"www.tranimeizle.co",
 		"tranimeizle.co"
 	],
-	"version": "1.0.12",
+	"version": "1.0.14",
 	"logo": "https://i.imgur.com/BnMRZ49.png",
 	"thumbnail": "https://i.imgur.com/tvxzX3S.png",
 	"color": "#eb0254",
@@ -23,5 +23,6 @@
 		"turkish",
 		"anime"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }

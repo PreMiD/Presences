@@ -10,7 +10,7 @@
 		"ru": "AnimeGO — смотреть аниме онлайн бесплатно."
 	},
 	"url": "animego.org",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/B32aOhi.jpg",
 	"thumbnail": "https://i.imgur.com/xwYpmDF.png",
 	"color": "#ff5c57",
@@ -20,6 +20,7 @@
 		"anime"
 	],
 	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "privacy",
