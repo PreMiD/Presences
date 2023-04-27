@@ -1,3 +1,4 @@
+import agricola from "./A/agricola";
 import azul from "./A/azul";
 import carcassonne from "./C/carcassonne";
 import castlesofburgundy from "./C/castlesofburgundy";
@@ -27,6 +28,7 @@ const games: Record<string, GamePresence> = {
 	sevenwondersduel,
 	castlesofburgundy,
 	spacebase,
+	agricola,
 };
 
 export default function getGame(key: string) {
