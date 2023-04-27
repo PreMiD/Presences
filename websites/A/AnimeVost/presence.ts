@@ -157,7 +157,7 @@ presence.on("UpdateData", async () => {
 	if (websiteloc[1] === "tip" && websiteloc[2] !== "") {
 		const animetype = animetypes[document.location.pathname.split("/")[2]],
 			animename = document
-				.getElementsByClassName("shortstoryHead")[0]
+				.querySelectorAll(".shortstoryHead")[0]
 				.textContent.split("/")[0]
 				.trim();
 		presenceData.details = `В поисках ${animetype} a`;
