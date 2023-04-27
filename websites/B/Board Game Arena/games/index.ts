@@ -12,6 +12,7 @@ import hanabi from "./H/hanabi";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import kingoftokyo from "./K/kingoftokyo";
 import luckynumbers from "./L/luckynumbers";
+import patchwork from "./P/patchwork";
 import potionexplosion from "./P/potionexplosion";
 import sechsnimmt from "./S/sechsnimmt";
 import sevenwonders from "./S/sevenwonders";
@@ -57,6 +58,7 @@ const games: Record<string, GamePresence> = {
 	sevenwondersarchitects,
 	greatwesterntrail,
 	potionexplosion,
+	patchwork,
 };
 
 export default function getGame(key: string) {
