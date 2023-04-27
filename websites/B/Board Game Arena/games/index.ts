@@ -10,6 +10,7 @@ import gizmos from "./G/gizmos";
 import hanabi from "./H/hanabi";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import kingoftokyo from "./K/kingoftokyo";
+import luckynumbers from "./L/luckynumbers";
 import sechsnimmt from "./S/sechsnimmt";
 import sevenwonders from "./S/sevenwonders";
 import sevenwondersduel from "./S/sevenwondersduel";
@@ -45,6 +46,7 @@ const games: Record<string, GamePresence> = {
 	sevenwonders,
 	hanabi,
 	kingoftokyo,
+	luckynumbers,
 };
 
 export default function getGame(key: string) {
