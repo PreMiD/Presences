@@ -18,6 +18,7 @@ import spacebase from "./S/spacebase";
 import splendor from "./S/splendor";
 import spots from "./S/spots";
 import tickettoride from "./T/tickettoride";
+import welcometo from "./W/welcometo";
 import wingspan from "./W/wingspan";
 import yatzy from "./Y/yatzy";
 
@@ -49,6 +50,7 @@ const games: Record<string, GamePresence> = {
 	kingoftokyo,
 	luckynumbers,
 	spots,
+	welcometo,
 };
 
 export default function getGame(key: string) {
