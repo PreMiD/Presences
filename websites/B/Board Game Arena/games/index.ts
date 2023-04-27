@@ -1,7 +1,27 @@
+import abalone from "./A/abalone";
+import abandonallartichokes from "./A/abandonallartichokes";
+import abyss from "./A/abyss";
+import ageofcivilization from "./A/ageofcivilization";
 import agricola from "./A/agricola";
+import akeruption from "./A/akeruption";
+import aknile from "./A/aknile";
 import akropolis from "./A/akropolis";
+import alhambra from "./A/alhambra";
+import almadi from "./A/almadi";
+import alveole from "./A/alveole";
+import amyitis from "./A/amyitis";
+import anachrony from "./A/anachrony";
+import apocalypseazcc from "./A/apocalypseazcc";
+import applejack from "./A/applejack";
 import architectsofthewestkingdom from "./A/architectsofthewestkingdom";
+import arcticscavengers from "./A/arcticscavengers";
+import armadora from "./A/armadora";
 import arnak from "./A/arnak";
+import artdecko from "./A/artdecko";
+import artthief from "./A/artthief";
+import assyria from "./A/assyria";
+import astra from "./A/astra";
+import automobiles from "./A/automobiles";
 import azul from "./A/azul";
 import cantstop from "./C/cantstop";
 import carcassonne from "./C/carcassonne";
@@ -65,6 +85,26 @@ const games: Record<string, GamePresence> = {
 	architectsofthewestkingdom,
 	raceforthegalaxy,
 	stoneage,
+	abalone,
+	abandonallartichokes,
+	abyss,
+	ageofcivilization,
+	akeruption,
+	aknile,
+	alhambra,
+	almadi,
+	alveole,
+	amyitis,
+	anachrony,
+	apocalypseazcc,
+	applejack,
+	arcticscavengers,
+	armadora,
+	artdecko,
+	artthief,
+	assyria,
+	astra,
+	automobiles,
 };
 
 export default function getGame(key: string) {
