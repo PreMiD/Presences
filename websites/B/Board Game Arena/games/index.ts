@@ -1,5 +1,6 @@
 import azul from "./A/azul";
 import carcassonne from "./C/carcassonne";
+import castlesofburgundy from "./C/castlesofburgundy";
 import catan from "./C/catan";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import sevenwondersduel from "./S/sevenwondersduel";
@@ -23,6 +24,7 @@ const games: Record<string, GamePresence> = {
 	splendor,
 	itsawonderfulworld,
 	sevenwondersduel,
+	castlesofburgundy,
 };
 
 export default function getGame(key: string) {
