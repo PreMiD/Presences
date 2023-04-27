@@ -16,6 +16,7 @@ import sevenwonders from "./S/sevenwonders";
 import sevenwondersduel from "./S/sevenwondersduel";
 import spacebase from "./S/spacebase";
 import splendor from "./S/splendor";
+import spots from "./S/spots";
 import tickettoride from "./T/tickettoride";
 import wingspan from "./W/wingspan";
 import yatzy from "./Y/yatzy";
@@ -47,6 +48,7 @@ const games: Record<string, GamePresence> = {
 	hanabi,
 	kingoftokyo,
 	luckynumbers,
+	spots,
 };
 
 export default function getGame(key: string) {
