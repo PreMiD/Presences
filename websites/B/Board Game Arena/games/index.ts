@@ -1,5 +1,6 @@
 import agricola from "./A/agricola";
 import akropolis from "./A/akropolis";
+import architectsofthewestkingdom from "./A/architectsofthewestkingdom";
 import arnak from "./A/arnak";
 import azul from "./A/azul";
 import cantstop from "./C/cantstop";
@@ -59,6 +60,7 @@ const games: Record<string, GamePresence> = {
 	greatwesterntrail,
 	potionexplosion,
 	patchwork,
+	architectsofthewestkingdom,
 };
 
 export default function getGame(key: string) {
