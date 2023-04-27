@@ -14,7 +14,7 @@ const luckynumbers: GamePresence = {
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
-      gameStateType = await getCurrentGameStateType(presence),
+			gameStateType = await getCurrentGameStateType(presence),
 			userPlayer = await getUserPlayerId(presence),
 			activePlayerData = await getPlayerData(presence, activePlayer),
 			data: PresenceData = {
@@ -23,20 +23,20 @@ const luckynumbers: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-        case "simpleSetup":
-        case "gameSetup":
-        case "allPlayersDrawATile":
-          data.state = "Setting up the game";
-          break;
-        case "playersInitialTurns":
-          data.state = "Placing initial clover";
-          break;
-        case "playerDrawsOrPlaysFromTable":
-          data.state = "Drawing or picking up a clover";
-          break;
-        case "placeOnBoardOrTable":
-          data.state = "Placing a clover";
-          break;
+				case "simpleSetup":
+				case "gameSetup":
+				case "allPlayersDrawATile":
+					data.state = "Setting up the game";
+					break;
+				case "playersInitialTurns":
+					data.state = "Placing initial clover";
+					break;
+				case "playerDrawsOrPlaysFromTable":
+					data.state = "Drawing or picking up a clover";
+					break;
+				case "placeOnBoardOrTable":
+					data.state = "Placing a clover";
+					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
 					break;

@@ -14,7 +14,7 @@ const patchwork: GamePresence = {
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
-      gameStateType = await getCurrentGameStateType(presence),
+			gameStateType = await getCurrentGameStateType(presence),
 			userPlayer = await getUserPlayerId(presence),
 			activePlayerData = await getPlayerData(presence, activePlayer),
 			data: PresenceData = {
@@ -23,13 +23,13 @@ const patchwork: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-        case "playerTurn":
-          data.state = "Performing an action";
-          break;
-        case "playerPatchOne":
-          data.state = "Placing a special patch";
-          break;
-        case "playerGameEnd":
+				case "playerTurn":
+					data.state = "Performing an action";
+					break;
+				case "playerPatchOne":
+					data.state = "Placing a special patch";
+					break;
+				case "playerGameEnd":
 				case "gameEnd":
 					data.state = "Viewing game results";
 					break;

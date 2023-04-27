@@ -14,7 +14,7 @@ const cantstop: GamePresence = {
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
-      gameStateType = await getCurrentGameStateType(presence),
+			gameStateType = await getCurrentGameStateType(presence),
 			userPlayer = await getUserPlayerId(presence),
 			activePlayerData = await getPlayerData(presence, activePlayer),
 			data: PresenceData = {
@@ -23,15 +23,15 @@ const cantstop: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-        case "playerChoice":
-          data.state = "Choosing to stop or continue";
-          break;
-        case "comboChoice":
-          data.state = "Choosing a dice combination";
-          break;
-        case "tutorialStart":
-          data.state = "Choosing to start the tutorial";
-          break;
+				case "playerChoice":
+					data.state = "Choosing to stop or continue";
+					break;
+				case "comboChoice":
+					data.state = "Choosing a dice combination";
+					break;
+				case "tutorialStart":
+					data.state = "Choosing to start the tutorial";
+					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
 					break;

@@ -14,7 +14,7 @@ const sevenwonders: GamePresence = {
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
-      gameStateType = await getCurrentGameStateType(presence),
+			gameStateType = await getCurrentGameStateType(presence),
 			userPlayer = await getUserPlayerId(presence),
 			activePlayerData = await getPlayerData(presence, activePlayer),
 			data: PresenceData = {
@@ -23,18 +23,18 @@ const sevenwonders: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-        case "chooseWonderSide":
-          data.state = "Choosing a wonder side";
-          break;
-        case "playerTurn":
-          data.state = "Choosing a card to play";
-          break;
-        case "pickDiscard":
-          data.state = "Picking a card from the discard pile";
-          break;
-        case "playerSeventhCard":
-          data.state = "Playing their last card";
-          break;
+				case "chooseWonderSide":
+					data.state = "Choosing a wonder side";
+					break;
+				case "playerTurn":
+					data.state = "Choosing a card to play";
+					break;
+				case "pickDiscard":
+					data.state = "Picking a card from the discard pile";
+					break;
+				case "playerSeventhCard":
+					data.state = "Playing their last card";
+					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
 					break;

@@ -14,7 +14,7 @@ const akropolis: GamePresence = {
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
-      gameStateType = await getCurrentGameStateType(presence),
+			gameStateType = await getCurrentGameStateType(presence),
 			userPlayer = await getUserPlayerId(presence),
 			activePlayerData = await getPlayerData(presence, activePlayer),
 			data: PresenceData = {
@@ -23,9 +23,9 @@ const akropolis: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-        case "placeTile":
-          data.state = "Placing a tile in their city";
-          break;
+				case "placeTile":
+					data.state = "Placing a tile in their city";
+					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
 					break;

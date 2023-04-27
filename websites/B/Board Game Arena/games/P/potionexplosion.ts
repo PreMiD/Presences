@@ -14,7 +14,7 @@ const potionexplosion: GamePresence = {
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
-      gameStateType = await getCurrentGameStateType(presence),
+			gameStateType = await getCurrentGameStateType(presence),
 			userPlayer = await getUserPlayerId(presence),
 			activePlayerData = await getPlayerData(presence, activePlayer),
 			data: PresenceData = {
@@ -23,18 +23,18 @@ const potionexplosion: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-        case "potionSelection":
-          data.state = "Selecting a potion";
-          break;
-        case "playerTurnA":
-          data.state = "Performing an action";
-          break;
-        case "newPotionSelection":
-          data.state = "Selecting a new potion";
-          break;
-        case "potionUsageA":
-          data.state = "Using a potion";
-          break;
+				case "potionSelection":
+					data.state = "Selecting a potion";
+					break;
+				case "playerTurnA":
+					data.state = "Performing an action";
+					break;
+				case "newPotionSelection":
+					data.state = "Selecting a new potion";
+					break;
+				case "potionUsageA":
+					data.state = "Using a potion";
+					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
 					break;

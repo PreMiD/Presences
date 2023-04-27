@@ -14,7 +14,7 @@ const spots: GamePresence = {
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
-      gameStateType = await getCurrentGameStateType(presence),
+			gameStateType = await getCurrentGameStateType(presence),
 			userPlayer = await getUserPlayerId(presence),
 			activePlayerData = await getPlayerData(presence, activePlayer),
 			data: PresenceData = {
@@ -23,12 +23,12 @@ const spots: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-        case "statePlayerTurn":
-          data.state = "Performing an action";
-          break;
-        case "statePerformTrick":
-          data.state = "Performing a trick";
-          break;
+				case "statePlayerTurn":
+					data.state = "Performing an action";
+					break;
+				case "statePerformTrick":
+					data.state = "Performing a trick";
+					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
 					break;
