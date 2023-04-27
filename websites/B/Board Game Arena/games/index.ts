@@ -5,6 +5,7 @@ import carcassonne from "./C/carcassonne";
 import castlesofburgundy from "./C/castlesofburgundy";
 import catan from "./C/catan";
 import itsawonderfulworld from "./I/itsawonderfulworld";
+import sechsnimmt from "./S/sechsnimmt";
 import sevenwondersduel from "./S/sevenwondersduel";
 import spacebase from "./S/spacebase";
 import splendor from "./S/splendor";
@@ -31,6 +32,7 @@ const games: Record<string, GamePresence> = {
 	spacebase,
 	agricola,
 	arnak,
+	sechsnimmt,
 };
 
 export default function getGame(key: string) {
