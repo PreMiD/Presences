@@ -15,6 +15,7 @@ import kingoftokyo from "./K/kingoftokyo";
 import luckynumbers from "./L/luckynumbers";
 import patchwork from "./P/patchwork";
 import potionexplosion from "./P/potionexplosion";
+import raceforthegalaxy from "./R/raceforthegalaxy";
 import sechsnimmt from "./S/sechsnimmt";
 import sevenwonders from "./S/sevenwonders";
 import sevenwondersarchitects from "./S/sevenwondersarchitects";
@@ -61,6 +62,7 @@ const games: Record<string, GamePresence> = {
 	potionexplosion,
 	patchwork,
 	architectsofthewestkingdom,
+	raceforthegalaxy,
 };
 
 export default function getGame(key: string) {
