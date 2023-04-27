@@ -7,6 +7,7 @@ import carcassonne from "./C/carcassonne";
 import castlesofburgundy from "./C/castlesofburgundy";
 import catan from "./C/catan";
 import gizmos from "./G/gizmos";
+import hanabi from "./H/hanabi";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import sechsnimmt from "./S/sechsnimmt";
 import sevenwonders from "./S/sevenwonders";
@@ -41,6 +42,7 @@ const games: Record<string, GamePresence> = {
 	cantstop,
 	gizmos,
 	sevenwonders,
+	hanabi,
 };
 
 export default function getGame(key: string) {
