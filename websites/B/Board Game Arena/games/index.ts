@@ -13,6 +13,7 @@ import kingoftokyo from "./K/kingoftokyo";
 import luckynumbers from "./L/luckynumbers";
 import sechsnimmt from "./S/sechsnimmt";
 import sevenwonders from "./S/sevenwonders";
+import sevenwondersarchitects from "./S/sevenwondersarchitects";
 import sevenwondersduel from "./S/sevenwondersduel";
 import spacebase from "./S/spacebase";
 import splendor from "./S/splendor";
@@ -51,6 +52,7 @@ const games: Record<string, GamePresence> = {
 	luckynumbers,
 	spots,
 	welcometo,
+	sevenwondersarchitects,
 };
 
 export default function getGame(key: string) {
