@@ -4,6 +4,7 @@ import castlesofburgundy from "./C/castlesofburgundy";
 import catan from "./C/catan";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import sevenwondersduel from "./S/sevenwondersduel";
+import spacebase from "./S/spacebase";
 import splendor from "./S/splendor";
 import tickettoride from "./T/tickettoride";
 import wingspan from "./W/wingspan";
@@ -25,6 +26,7 @@ const games: Record<string, GamePresence> = {
 	itsawonderfulworld,
 	sevenwondersduel,
 	castlesofburgundy,
+	spacebase,
 };
 
 export default function getGame(key: string) {
