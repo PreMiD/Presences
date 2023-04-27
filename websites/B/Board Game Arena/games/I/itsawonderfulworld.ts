@@ -13,7 +13,7 @@ const itsawonderfulworld: GamePresence = {
 	logo: "https://i.imgur.com/86gIb0W.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
-      gameStateType = await getCurrentGameStateType(presence),
+			gameStateType = await getCurrentGameStateType(presence),
 			activePlayer = await getActivePlayerId(presence),
 			userPlayer = await getUserPlayerId(presence),
 			activePlayerData = await getPlayerData(presence, activePlayer),
@@ -23,21 +23,21 @@ const itsawonderfulworld: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-        case "stateDraft":
-          data.state = "Drafting a card";
-          break;
-        case "statePlanning":
-          data.state = "Using cards";
-          break;
-        case "statePlanDiscard":
-          data.state = "Choosing a card to keep";
-          break;
-        case "stateProductionBonus":
-          data.state = "Choosing a supremacy bonus";
-          break;
-        case "stateProduction":
-          data.state = "Placing a production cube";
-          break;
+				case "stateDraft":
+					data.state = "Drafting a card";
+					break;
+				case "statePlanning":
+					data.state = "Using cards";
+					break;
+				case "statePlanDiscard":
+					data.state = "Choosing a card to keep";
+					break;
+				case "stateProductionBonus":
+					data.state = "Choosing a supremacy bonus";
+					break;
+				case "stateProduction":
+					data.state = "Placing a production cube";
+					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
 					break;
