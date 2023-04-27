@@ -2,6 +2,7 @@ import agricola from "./A/agricola";
 import akropolis from "./A/akropolis";
 import arnak from "./A/arnak";
 import azul from "./A/azul";
+import cantstop from "./C/cantstop";
 import carcassonne from "./C/carcassonne";
 import castlesofburgundy from "./C/castlesofburgundy";
 import catan from "./C/catan";
@@ -35,6 +36,7 @@ const games: Record<string, GamePresence> = {
 	arnak,
 	sechsnimmt,
 	akropolis,
+	cantstop,
 };
 
 export default function getGame(key: string) {
