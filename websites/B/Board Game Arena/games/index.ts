@@ -7,6 +7,7 @@ import carcassonne from "./C/carcassonne";
 import castlesofburgundy from "./C/castlesofburgundy";
 import catan from "./C/catan";
 import gizmos from "./G/gizmos";
+import greatwesterntrail from "./G/greatwesterntrail";
 import hanabi from "./H/hanabi";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import kingoftokyo from "./K/kingoftokyo";
@@ -53,6 +54,7 @@ const games: Record<string, GamePresence> = {
 	spots,
 	welcometo,
 	sevenwondersarchitects,
+	greatwesterntrail,
 };
 
 export default function getGame(key: string) {
