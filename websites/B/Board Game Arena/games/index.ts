@@ -65,10 +65,66 @@ import burglebros from "./B/burglebros";
 import butterfly from "./B/butterfly";
 import buttons from "./B/buttons";
 import buyword from "./B/buyword";
+import cacao from "./C/cacao";
+import canosa from "./C/canosa";
 import cantstop from "./C/cantstop";
+import cantstopexpress from "./C/cantstopexpress";
+import capereurope from "./C/capereurope";
+import caravan from "./C/caravan";
 import carcassonne from "./C/carcassonne";
+import carcassonnehuntersandgatherers from "./C/carcassonnehuntersandgatherers";
+import cardiceo from "./C/cardiceo";
+import caribbeanallfours from "./C/caribbeanallfours";
+import carnegie from "./C/carnegie";
+import carrara from "./C/carrara";
 import castlesofburgundy from "./C/castlesofburgundy";
+import castlesofcaleira from "./C/castlesofcaleira";
 import catan from "./C/catan";
+import catcafe from "./C/catcafe";
+import caverna from "./C/caverna";
+import caylus from "./C/caylus";
+import celestia from "./C/celestia";
+import century from "./C/century";
+import cephalopod from "./C/cephalopod";
+import chakra from "./C/chakra";
+import checkers from "./C/checkers";
+import chess from "./C/chess";
+import chicagoexpress from "./C/chicagoexpress";
+import chimerastation from "./C/chimerastation";
+import chinagold from "./C/chinagold";
+import chinesecheckers from "./C/chinesecheckers";
+import chocolatefactory from "./C/chocolatefactory";
+import chromino from "./C/chromino";
+import cinco from "./C/cinco";
+import circleoflife from "./C/circleoflife";
+import cityofthebigshoulders from "./C/cityofthebigshoulders";
+import clansofcaledonia from "./C/clansofcaledonia";
+import clashofdecks from "./C/clashofdecks";
+import classicgo from "./C/classicgo";
+import cloudcity from "./C/cloudcity";
+import codexnaturalis from "./C/codexnaturalis";
+import coinche from "./C/coinche";
+import coins from "./C/coins";
+import coloretto from "./C/coloretto";
+import colorflush from "./C/colorflush";
+import colorpop from "./C/colorpop";
+import coltexpress from "./C/coltexpress";
+import commanderchess from "./C/commanderchess";
+import concept from "./C/concept";
+import connectfour from "./C/connectfour";
+import connectsix from "./C/connectsix";
+import consonar from "./C/consonar";
+import conspiracy from "./C/conspiracy";
+import copenhagen from "./C/copenhagen";
+import cosmosempires from "./C/cosmosempires";
+import coupcitystate from "./C/coupcitystate";
+import coupell from "./C/coupell";
+import crazyfarmers from "./C/crazyfarmers";
+import cribbage from "./C/cribbage";
+import crimezoom from "./C/crimezoom";
+import crusadersthywillbedone from "./C/crusadersthywillbedone";
+import cubirds from "./C/cubirds";
+import cubosaurs from "./C/cubosaurs";
 import gizmos from "./G/gizmos";
 import greatwesterntrail from "./G/greatwesterntrail";
 import hanabi from "./H/hanabi";
@@ -164,10 +220,66 @@ const games: Record<string, GamePresence> = {
 	butterfly,
 	buttons,
 	buyword,
+	cacao,
+	canosa,
 	cantstop,
+	cantstopexpress,
+	capereurope,
+	caravan,
 	carcassonne,
+	carcassonnehuntersandgatherers,
+	cardiceo,
+	caribbeanallfours,
+	carnegie,
+	carrara,
 	castlesofburgundy,
+	castlesofcaleira,
 	catan,
+	catcafe,
+	caverna,
+	caylus,
+	celestia,
+	century,
+	cephalopod,
+	chakra,
+	checkers,
+	chess,
+	chicagoexpress,
+	chimerastation,
+	chinagold,
+	chinesecheckers,
+	chocolatefactory,
+	chromino,
+	cinco,
+	circleoflife,
+	cityofthebigshoulders,
+	clansofcaledonia,
+	clashofdecks,
+	classicgo,
+	cloudcity,
+	codexnaturalis,
+	coinche,
+	coins,
+	coloretto,
+	colorflush,
+	colorpop,
+	coltexpress,
+	commanderchess,
+	concept,
+	connectfour,
+	connectsix,
+	consonar,
+	conspiracy,
+	copenhagen,
+	cosmosempires,
+	coupcitystate,
+	coupell,
+	crazyfarmers,
+	cribbage,
+	crimezoom,
+	crusadersthywillbedone,
+	cubirds,
+	cubosaurs,
 	gizmos,
 	greatwesterntrail,
 	hanabi,

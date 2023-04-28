@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const crimezoom: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/1vafE65.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,91 +23,14 @@ const crimezoom: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
 				case "playerTurn":
-					/*
-					{
-	"name": "playerTurn",
-	"description": "${actplayer} may perform an investigation",
-	"descriptionmyturn": "${you} may perform an investigation",
-	"type": "multipleactiveplayer",
-	"action": "st_MultiPlayerInit",
-	"args": "argNumRemaining",
-	"possibleactions": [
-		"togglePin",
-		"clearPin",
-		"investigate",
-		"followLead",
-		"startQuestionnaire"
-	],
-	"transitions": {
-		"loopback": 2,
-		"startQuestionnaire": 3
-	}
-}
-					*/
+					data.state = "Performing an investigation";
 					break;
 				case "questionnaire":
-					/*
-					{
-	"name": "questionnaire",
-	"description": "${actplayer} must answer the questionnaire",
-	"descriptionmyturn": "${you} must answer the questionnaire",
-	"type": "multipleactiveplayer",
-	"args": "argNumRemaining",
-	"possibleactions": [
-		"togglePin",
-		"clearPin",
-		"submit",
-		"assignCardToQuestion",
-		"assignValueToQuestion"
-	],
-	"transitions": {
-		"loopback": 3,
-		"submit": 4
-	}
-}
-					*/
+					data.state = "Answering the questionnaire";
 					break;
 				case "epilogue":
-					/*
-					{
-	"name": "epilogue",
-	"description": "${actplayer} must read the epilogue",
-	"descriptionmyturn": "${you} must read the epilogue",
-	"type": "multipleactiveplayer",
-	"args": "argEpilogue",
-	"possibleactions": [
-		"end"
-	],
-	"transitions": {
-		"end": 99
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Reading the epilogue";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
