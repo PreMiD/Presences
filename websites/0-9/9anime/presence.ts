@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("watch2getherJoinRoomButton"),
 			presence.getSetting<boolean>("buttons"),
 		]),
-		{ href } = document.location;
+		{ pathname, href } = document.location;
 
 	if (video.exists) {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-	} else if (document.location.pathname.includes("/watch2gether/room/")) {
+	} else if (pathname.includes("/watch2gether/room/")) {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
