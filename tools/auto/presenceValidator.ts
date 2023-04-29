@@ -157,10 +157,10 @@ for (const presence of changedPresences) {
 	}
 
 	if (metadata.iFrameRegExp === ".*") {
-		errors.push({
+		warnings.push({
 			presence,
 			message:
-				"Presence has metadata.iFrameRegExp set to '.*', this is no longer allowed",
+				"Presence has metadata.iFrameRegExp set to '.*', pleaase change this if possible",
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("iFrameRegExp"),
