@@ -6,31 +6,31 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/NPVqgsx.png",
 	};
-	if (window.location.pathname.toLowerCase() === "/") {
+	if (document.location.pathname.toLowerCase() === "/") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Anasayfa";
-	} else if (window.location.pathname.toLowerCase() === "/team") {
+	} else if (document.location.pathname.toLowerCase() === "/team") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Ekibimiz";
-	} else if (window.location.pathname.toLowerCase() === "/servers") {
+	} else if (document.location.pathname.toLowerCase() === "/servers") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Sunucu Sıralaması";
-	} else if (window.location.pathname.toLowerCase() === "/profile-options") {
+	} else if (document.location.pathname.toLowerCase() === "/profile-options") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Profil Ayarları";
-	} else if (window.location.pathname.toLowerCase() === "/terms-of-service") {
+	} else if (document.location.pathname.toLowerCase() === "/terms-of-service") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Kullanım Şartları";
-	} else if (window.location.pathname.toLowerCase() === "/privacy-policy") {
+	} else if (document.location.pathname.toLowerCase() === "/privacy-policy") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Gizlilik Politikası";
-	} else if (window.location.pathname.toLowerCase() === "/profile-settings") {
+	} else if (document.location.pathname.toLowerCase() === "/profile-settings") {
 		presenceData.details = "Bir ayar görüntülüyor:";
 		presenceData.state = "Bağlantılar";
-	} else if (window.location.pathname.toLowerCase() === "/help") {
+	} else if (document.location.pathname.toLowerCase() === "/help") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Yardım Sayfası";
-	} else if (window.location.pathname.toLowerCase().includes("/profile")) {
+	} else if (document.location.pathname.toLowerCase().includes("/profile")) {
 		presenceData.details = "Bir kullanıcı profili görüntülüyor:";
 		presenceData.state = `${
 			document.querySelector(
@@ -38,7 +38,7 @@ presence.on("UpdateData", () => {
 			).textContent
 		}`;
 	} else if (
-		window.location.pathname.toLowerCase().includes("/server-details")
+		document.location.pathname.toLowerCase().includes("/server-details")
 	) {
 		presenceData.details = "Bir sunucu görüntülüyor:";
 		presenceData.state = `${
