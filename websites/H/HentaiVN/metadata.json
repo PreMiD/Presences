@@ -9,11 +9,11 @@
 		"en": "HentaiVN is the largest Otaku forum and Hentai manga website in Vietnam",
 		"vi_VN": "HentaiVN là website đọc truyện Hentai lớn nhất Việt Nam, nó cũng là diễn đàn dành cho wibu hàng đầu cả nước."
 	},
-	"url": {
+	"url": [
 		"hentaivn.tv",
 		"hentaivn.site",
 		"hentaivn.run"
-	},
+	],
 	"version": "2.1.0",
 	"logo": "https://i.imgur.com/Ihee8C2.png",
 	"thumbnail": "https://i.imgur.com/TkWSqnL.png",
