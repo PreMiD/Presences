@@ -1,7 +1,9 @@
 const presence = new Presence({ clientId: "869377195682983957" });
 
 presence.on("UpdateData", async () => {
-	let presenceData: PresenceData = { largeImageKey: "yomu" };
+	let presenceData: PresenceData = {
+		largeImageKey: "https://i.imgur.com/qmIiWoY.png",
+	};
 	const { pathname, href } = window.location,
 		[privacy, nsfw] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
@@ -36,8 +38,9 @@ presence.on("UpdateData", async () => {
 					: isNaN(Number(chapter))
 					? chapter
 					: `Capítulo ${chapter}`;
-				presenceData.largeImageKey = isNsfw || !image ? "yumu-park" : image;
-				presenceData.smallImageKey = "yomu-sky";
+				presenceData.largeImageKey =
+					isNsfw || !image ? "https://i.imgur.com/usrs3S5.png" : image;
+				presenceData.smallImageKey = "https://i.imgur.com/wRRMpKc.png";
 				if (!isNsfw) {
 					presenceData.buttons = [
 						{ label: "Acessar Obra", url: href.split("/chapter/")[0] },
@@ -58,8 +61,8 @@ presence.on("UpdateData", async () => {
 				: "Vizualizando";
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("#premid-user-avatar")?.src ||
-				"yomu-figurant";
-			presenceData.smallImageKey = "yomu-sky";
+				"https://i.imgur.com/1Os7taV.png";
+			presenceData.smallImageKey = "https://i.imgur.com/wRRMpKc.png";
 			presenceData.buttons = [
 				{
 					label: "Ver Perfil",

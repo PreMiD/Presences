@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
 		"id": "293913134748401674",
-		"name": "Vitu™#2002"
+		"name": "Vitu™"
 	},
 	"service": "YomuMangás",
 	"altnames": [
@@ -17,7 +17,7 @@
 	},
 	"url": "yomumangas.com",
 	"version": "1.2.7",
-	"logo": "https://i.imgur.com/RBkqiAg.png",
+	"logo": "https://i.imgur.com/wRRMpKc.png",
 	"thumbnail": "https://i.imgur.com/fGZJErh.png",
 	"color": "#121212",
 	"category": "anime",
