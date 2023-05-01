@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 		let title = document.querySelector("h1"),
 			season = document.querySelector("#season_id");
 
-		presenceData.smallImageKey = "preview";
+		presenceData.smallImageKey = Assets.Preview;
 		presenceData.smallImageText= "Serie";
 		presenceData.details = `A punto de ver ${title.textContent}`
 		presenceData.state = `Temporada ${season.textContent}`
