@@ -6,25 +6,26 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/NPVqgsx.png",
 	};
-	if (document.location.pathname.toLowerCase() === "/") {
+	const { pathname } = document.location;
+	if (pathname.toLowerCase() === "/") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Anasayfa";
-	} else if (document.location.pathname.toLowerCase() === "/team") {
+	} else if (pathname.toLowerCase() === "/team") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Ekibimiz";
-	} else if (document.location.pathname.toLowerCase() === "/servers") {
+	} else if (pathname.toLowerCase() === "/servers") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Sunucu Sıralaması";
-	} else if (document.location.pathname.toLowerCase() === "/profile-options") {
+	} else if (pathname.toLowerCase() === "/profile-options") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Profil Ayarları";
-	} else if (document.location.pathname.toLowerCase() === "/terms-of-service") {
+	} else if (pathname.toLowerCase() === "/terms-of-service") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Kullanım Şartları";
-	} else if (document.location.pathname.toLowerCase() === "/privacy-policy") {
+	} else if (pathname.toLowerCase() === "/privacy-policy") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Gizlilik Politikası";
-	} else if (document.location.pathname.toLowerCase() === "/profile-settings") {
+	} else if (pathname.toLowerCase() === "/profile-settings") {
 		presenceData.details = "Bir ayar görüntülüyor:";
 		presenceData.state = "Bağlantılar";
 	} else if (document.location.pathname.toLowerCase() === "/help") {
