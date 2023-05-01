@@ -16,7 +16,7 @@
 		"pt_BR": "YomuMangás, sua biblioteca virtual de mangás, manhwas, manhuas, novels, doujins e hentais."
 	},
 	"url": "yomumangas.com",
-	"version": "1.1.0",
+	"version": "1.2.7",
 	"logo": "https://i.imgur.com/RBkqiAg.png",
 	"thumbnail": "https://i.imgur.com/fGZJErh.png",
 	"color": "#121212",
@@ -26,8 +26,8 @@
 		"manga",
 		"manhwa",
 		"manhua",
-		"doushinji",
-		"nsfw"
+		"doujin",
+		"yomu"
 	],
 	"settings": [
 		{
@@ -40,7 +40,7 @@
 			"id": "nsfw",
 			"title": "Mostrar NSFW",
 			"icon": "fad fa-exclamation-triangle",
-			"value": true,
+			"value": false,
 			"if": {
 				"privacy": false
 			}
