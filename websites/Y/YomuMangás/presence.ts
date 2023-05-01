@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 				chapter =
 					document.querySelector("#premid-manga-chapter")?.textContent || "0",
 				image = document.querySelector<HTMLImageElement>(
-					"#premid-manga-chapter"
+					"#premid-manga-cover"
 				)?.src;
 			if (!isNsfw || (isNsfw && nsfw)) {
 				presenceData.details =
@@ -58,8 +58,8 @@ presence.on("UpdateData", async () => {
 				? "Configurando"
 				: "Vizualizando";
 			presenceData.largeImageKey =
-				document.querySelector<HTMLImageElement>("#premid-manga-chapter")
-					?.src || "yomu-figurant";
+				document.querySelector<HTMLImageElement>("#premid-user-avatar")?.src ||
+				"yomu-figurant";
 			presenceData.smallImageKey = "yomu-sky";
 			presenceData.buttons = [
 				{
