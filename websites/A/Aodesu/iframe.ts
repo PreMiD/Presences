@@ -2,7 +2,7 @@ const iframe = new iFrame();
 let video: HTMLVideoElement;
 
 iframe.on("UpdateData", async () => {
-    if (document.querySelector("#mainvideo")) {
+	if (document.querySelector("#mainvideo")) {
 		// Streamtape
 		video = document.querySelector("#mainvideo");
 		if (video && !isNaN(video.duration)) {
@@ -12,12 +12,12 @@ iframe.on("UpdateData", async () => {
 					currTime: video.currentTime,
 					duration: video.duration,
 					paused: video.paused,
-                    reproductor: "Streamtape"
+					reproductor: "Streamtape",
 				},
 			});
 		}
 	}
-    if (document.querySelector(".jw-media > video")) {
+	if (document.querySelector(".jw-media > video")) {
 		// Generic
 		video = document.querySelector(".jw-media > video");
 		if (video && !isNaN(video.duration)) {
@@ -27,12 +27,12 @@ iframe.on("UpdateData", async () => {
 					currTime: video.currentTime,
 					duration: video.duration,
 					paused: video.paused,
-                    reproductor: "un reproductor genérico"
+					reproductor: "un reproductor genérico",
 				},
 			});
 		}
 	}
-    if (document.querySelector(".html5-video-container > video")) {
+	if (document.querySelector(".html5-video-container > video")) {
 		// YouTube
 		video = document.querySelector(".html5-video-container > video");
 		if (video && !isNaN(video.duration)) {
@@ -42,7 +42,7 @@ iframe.on("UpdateData", async () => {
 					currTime: video.currentTime,
 					duration: video.duration,
 					paused: video.paused,
-                    reproductor: "Drive"
+					reproductor: "Drive",
 				},
 			});
 		}
