@@ -3,6 +3,7 @@ const presence = new Presence({
 });
 
 let video = {
+	exists: false,
 	duration: 0,
 	currentTime: 0,
 	paused: true,
@@ -10,31 +11,50 @@ let video = {
 
 presence.on(
 	"iFrameData",
-	(data: { duration: number; currentTime: number; paused: boolean }) => {
+	(data: {
+		exists: boolean;
+		duration: number;
+		currentTime: number;
+		paused: boolean;
+	}) => {
 		video = data;
 	}
 );
 
+enum Assets {
+	Logo = "https://i.imgur.com/jPl7EfZ.png",
+	Play = "https://i.imgur.com/6s4WyWY.png",
+	Pause = "https://i.imgur.com/PrYtpQb.png",
+	Search = "https://i.imgur.com/wYVlwJX.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/jPl7EfZ.png",
+			largeImageKey: Assets.Logo,
 		},
-		[showCover, timestamps, joinButton] = await Promise.all([
+		[showCover, timestamps, joinButton, buttons] = await Promise.all([
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("watch2getherJoinRoomButton"),
-		]);
+			presence.getSetting<boolean>("buttons"),
+		]),
+		{ pathname, href } = document.location;
 
-	if (
-		video &&
-		!isNaN(video.duration) &&
-		document.location.pathname.includes("/watch/")
-	) {
+	if (video.exists) {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			),
-			coverArt = document.querySelector<HTMLImageElement>("#w-info img")?.src,
+			coverArt =
+				document.querySelector<HTMLImageElement>("#w-info img")?.src ??
+				document
+					.querySelector('[class="anime-poster"]')
+					?.querySelector("img")
+					?.getAttribute("src") ??
+				document
+					.querySelector('[class="row"]')
+					?.querySelector("img")
+					?.getAttribute("src"),
 			seasonNumber = document.querySelector(".seasons.swiper-wrapper")
 				? String(
 						Array.from(
@@ -42,31 +62,50 @@ presence.on("UpdateData", async () => {
 						).findIndex(x => x.className.includes(" active")) + 1
 				  )
 				: "",
-			episodeNumber = document.querySelector(
-				"#w-servers .tip > div > b"
-			).textContent,
+			episodeNumber =
+				document
+					.querySelector("#w-servers .tip > div > b")
+					?.textContent?.match(/[1-9]{1}[0-9]{0,}/)?.[0] ??
+				document
+					.querySelector('a[class*="active"]')
+					?.textContent?.match(/[1-9]{1}[0-9]{0,}/)?.[0] ??
+				document
+					.querySelector('[class="item ep-item active"]')
+					?.textContent?.match(/[1-9]{1}[0-9]{0,}/)?.[0],
 			episodeName = document.querySelector(
 				"li > a.active > .d-title"
 			)?.textContent;
 
-		presenceData.details = document.querySelector("#w-info .title").textContent;
-		presenceData.state = document
-			.querySelector<HTMLAnchorElement>(".bmeta > .meta a")
-			.href.endsWith("movie")
-			? "Movie"
-			: seasonNumber
-			? `S${seasonNumber}:E${episodeNumber.match(/[1-9]{1}[0-9]{0,}/)[0]} ${
-					episodeName ?? episodeNumber
-			  }`
-			: `${episodeNumber}${
-					!episodeName || episodeName === episodeNumber
-						? ""
-						: ` • ${episodeName}`
-			  }`;
+		presenceData.details =
+			document.querySelector("#w-info .title")?.textContent ??
+			document.querySelector('[class="film-name dynamic-name"]')?.textContent ??
+			document.querySelector('[class="title"]')?.textContent ??
+			"Undefined";
+		presenceData.state =
+			seasonNumber && episodeNumber
+				? `S${seasonNumber}:E${episodeNumber}`
+				: !episodeNumber && seasonNumber && !episodeName
+				? `Season ${seasonNumber}`
+				: !seasonNumber && !episodeNumber && episodeName
+				? episodeName
+				: !seasonNumber && episodeNumber && !episodeName
+				? `Episode ${episodeNumber}`
+				: !seasonNumber && episodeNumber && episodeName
+				? `Episode ${episodeNumber} (${episodeName})`
+				: href.endsWith("Movie")
+				? "Movie"
+				: "Undefined";
 
 		if (coverArt && showCover) presenceData.largeImageKey = coverArt;
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.buttons = [
+			{
+				label: "Watch Video",
+				url: href,
+			},
+		];
+
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 		if (timestamps) {
 			presenceData.startTimestamp = startTimestamp;
@@ -77,7 +116,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-	} else if (document.location.pathname.includes("/watch2gether/room/")) {
+	} else if (pathname.includes("/watch2gether/room/")) {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
@@ -92,7 +131,7 @@ presence.on("UpdateData", async () => {
 
 		if (coverArt && showCover) presenceData.largeImageKey = coverArt;
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 		if (timestamps) {
 			presenceData.startTimestamp = startTimestamp;
@@ -108,14 +147,16 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Join Room",
-					url: location.href,
+					url: href,
 				},
 			];
 		}
 	} else {
 		presenceData.details = "Browsing...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	}
 
+	if (!buttons && !joinButton && presenceData.buttons)
+		delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });
