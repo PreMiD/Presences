@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 		let search = document.querySelector<HTMLInputElement>("div.search-bar > input[type=text]").value
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText= "Buscador";
-		presenceData.details = "Buscando...";
+		presenceData.details = "Buscando";
 		presenceData.state = search;
 	}else if (document.location.pathname.startsWith("/watch/")){
 		let title = document.querySelector(".reproductor-container > div:nth-child(2) > div.reproductor-centralizer > div > a");
