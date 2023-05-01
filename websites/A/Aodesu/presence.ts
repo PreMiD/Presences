@@ -10,6 +10,19 @@ let iFrameVideo: boolean,
 	playback: boolean,
 	reproductor: string;
 
+enum Assets {
+	Logo = "https://i.imgur.com/CyVxys5.jpg",
+	Home = "https://i.imgur.com/i2EEGId.jpg",
+	Pause = "https://i.imgur.com/V8aOlhf.jpg",
+	Play = "https://i.imgur.com/vS09FhM.jpg",
+	Search = "https://i.imgur.com/BSHGBn1.jpg",
+	Emitting = "https://i.imgur.com/TNrq2vU.jpg",
+	Login = "https://i.imgur.com/aY4bjzh.jpg",
+	Register = "https://i.imgur.com/hdtAwWr.jpg",
+	Settings = "https://i.imgur.com/T91Uhm5.jpg",
+	Preview = "https://i.imgur.com/1RLd82M.jpg"
+}
+
 presence.on(
 	"iFrameData",
 	(data: {
@@ -21,7 +34,7 @@ presence.on(
 			reproductor: string;
 		};
 	}) => {
-		playback = data.iframeVideo.duration !== null ? true : false;
+		playback = data.iframeVideo !== null;
 		reproductor = data.iframeVideo.reproductor;
 		if (playback) {
 			({ iFrameVideo, paused, duration } = data.iframeVideo);
@@ -32,41 +45,50 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/CyVxys5.jpg",
-	};
+		largeImageKey: Assets.Logo,
+		startTimestamp: browsingTimestamp,
+	},
+	{ href, pathname } = window.location;
 
-	presenceData.startTimestamp = browsingTimestamp;
-
-	if (document.location.pathname === "/") {
-		presenceData.smallImageKey = "home";
+	if (pathname === "/") {
+		// Home Page
+		presenceData.smallImageKey = Assets.Home;
 		presenceData.smallImageText = "Página de inicio";
 		presenceData.details = "Viendo la página de inicio";
-	}else if(document.location.pathname === "/emitiendo"){
-		presenceData.smallImageKey = "emitting";
+	}else if(pathname === "/emitiendo"){
+		// Emitting animes Page
+		presenceData.smallImageKey = Assets.Emitting;
 		presenceData.smallImageText = "En Emisión";
 		presenceData.details = "Explorando animes en emisión";
-	}else if(document.location.pathname.startsWith("/ajustes")){
-		if(document.location.pathname === "/ajustes"){
-			presenceData.smallImageKey = "settings";
+	}else if(pathname.startsWith("/ajustes")){
+		// Settings Page
+		if(pathname === "/ajustes"){
+			// Appearance
+			presenceData.smallImageKey = Assets.Settings;
 			presenceData.smallImageText = "Ajustes";
 			presenceData.details = "Personalizando uwu"
-		}else if(document.location.pathname === "/ajustes/privacidad"){
+		}else if(pathname === "/ajustes/privacidad"){
+			// Privacy
 			presenceData.details = "Informandose 🧐"
 			presenceData.state = "Politicas de privacidad"
 		}
-	}else if(document.location.pathname.startsWith("/auth/")){
-		if(document.location.pathname === "/auth/iniciar-sesion"){
-			presenceData.smallImageKey = "login";
+	}else if(pathname.startsWith("/auth/")){
+		// Auth Page
+		if(pathname === "/auth/iniciar-sesion"){
+			// Login
+			presenceData.smallImageKey = Assets.Login;
 			presenceData.smallImageText = "Inicio de sesión";
 			presenceData.details = "Iniciando sesión";
-		}else if(document.location.pathname === "/auth/registrarse"){
-			presenceData.smallImageKey = "register";
+		}else if(pathname === "/auth/registrarse"){
+			// Register
+			presenceData.smallImageKey = Assets.Register;
 			presenceData.smallImageText = "Registro de usuario";
 			presenceData.details = "¡Creando nueva cuenta!";
 		}
-	}else if(document.location.pathname.startsWith("/serie/")){
-		let title = document.querySelector("h1");
-		let season = document.querySelector("#season_id");
+	}else if(pathname.startsWith("/serie/")){
+		let title = document.querySelector("h1"),
+			season = document.querySelector("#season_id");
+
 		presenceData.smallImageKey = "preview";
 		presenceData.smallImageText= "Serie";
 		presenceData.details = `A punto de ver ${title.textContent}`
@@ -74,47 +96,55 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 					label: "¡Ver También!",
-					url: `https://aodesu.com${document.location.pathname}`
+					url: href,
 				}
 			]
-	}else if(document.location.pathname.startsWith("/buscar")){
+	}else if(pathname.startsWith("/buscar")){
 		let search = document.querySelector<HTMLInputElement>("div.search-bar > input[type=text]").value
 		presenceData.smallImageKey = "search";
 		presenceData.smallImageText= "Buscador";
-		presenceData.details = "Buscando...";
+		presenceData.details = "Buscando";
 		presenceData.state = search;
-	}else if (document.location.pathname.startsWith("/watch/")){
-		let title = document.querySelector(".reproductor-container > div:nth-child(2) > div.reproductor-centralizer > div > a");
-		let cap = document.location.pathname.split("/")[2].split("-")[2];
-		let timestamps = presence.getTimestamps(
-			Math.floor(currentTime),
-			Math.floor(duration)
-		)
+	}else if (pathname.startsWith("/watch/")
+	){
+		let title = document.querySelector(".reproductor-container > div:nth-child(2) > div.reproductor-centralizer > div > a").textContent;
+		let cap = pathname.split("/")[2].split("-")[2];
 
-		presenceData.state = `Cargando capitulo ${cap}...`
+		presenceData.details = `Viendo ${title}`
 
-		if(iFrameVideo === true && !isNaN(duration)){
-			if (currentTime === duration) {
-				presenceData.smallImageKey = "settings";
-				presenceData.smallImageText = `${title.textContent}｜Episodio: ${cap}`;
-				presenceData.details = `Pausado: ${title.textContent}`;
-				presenceData.state = `Cap. ${cap}`;
-			} else if (currentTime !== duration) {
-				presenceData.smallImageKey = paused ? "pause" : "play";
-				presenceData.smallImageKey = paused ? "pause" : "play";
-				presenceData.smallImageText = `${title.textContent}｜Episodio: ${cap}`;
-				presenceData.details = `Viendo: ${title.textContent}`;
-				presenceData.startTimestamp = paused ? null : timestamps[0];
-				presenceData.state = paused
-					? `Cap. ${cap}｜Pausado`
-					: `Cap. ${cap}｜Reproduciendose desde: ${reproductor}`;
-				presenceData.endTimestamp = paused ? null : timestamps[1];
-			}
-		}	else {
-			presenceData.smallImageKey = "play";
-			presenceData.smallImageText = `${title}Capitulo: ${cap}`;
-			presenceData.details = `Viendo: ${title.textContent}`;
+		if(iFrameVideo && !isNaN(duration)){
+	
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageText = paused ? 'Pausado' : 'Reproduciendo';
+			[, presenceData.endTimestamp] = presence.getTimestamps(
+				Math.floor(currentTime),
+				Math.floor(duration)
+			)
+	
+			presenceData.details = title ??  "Titulo no encontrado.";
+			presenceData.state = paused
+			? `Cap. ${cap}｜Pausado`
+			: `Cap. ${cap}｜Reproduciendose desde: ${reproductor}`;
 		}
+
+		if(paused){
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
+		
+		if(title){
+			presenceData.buttons = [
+				{
+					label: "Ver Episodio",
+					url: href,
+				},
+				{
+					label: "Ver serie",
+					url: document.querySelector<HTMLAnchorElement>(".reproductor-container > div:nth-child(2) > div.reproductor-centralizer > div > a").href,
+				}
+			]
+		}
+
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

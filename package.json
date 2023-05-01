@@ -19,8 +19,6 @@
 	},
 	"devDependencies": {
 		"@actions/core": "1.10.0",
-		"@commitlint/cli": "^17.6.1",
-		"@commitlint/config-conventional": "^17.6.1",
 		"@types/glob": "8.0.0",
 		"@types/json-to-ast": "2.1.2",
 		"@types/semver": "7.3.13",
@@ -29,7 +27,6 @@
 		"dotenv": "16.0.3",
 		"glob": "8.0.3",
 		"got": "12.5.3",
-		"husky": "^8.0.3",
 		"json-to-ast": "2.1.0",
 		"jsonschema": "1.4.1",
 		"mongodb": "4.12.1",
@@ -39,6 +36,7 @@
 		"webpack": "5.76.0"
 	},
 	"dependencies": {
+		"@commitlint/cli": "17.3.0",
 		"@commitlint/config-angular": "17.3.0",
 		"@types/chrome": "0.0.204",
 		"@types/node": "18.11.15",
@@ -48,6 +46,7 @@
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-no-one-time-vars": "2.4.2",
 		"eslint-plugin-unicorn": "45.0.2",
+		"husky": "8.0.2",
 		"pmd": "github:PreMiD/pmd#1.1.2",
 		"prettier": "2.8.1"
 	}
