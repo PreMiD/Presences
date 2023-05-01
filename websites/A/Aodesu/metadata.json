@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "892219412302671913",
+		"name": "Ao"
+	},
+	"service": "Aodesu",
+	"description": {
+		"en": "Aodesu is a streaming website where you can watch anime with Spanish subtitle or Dubs in Spanish.",
+		"es": "Aodesu es un sitio web de streaming donde podrás ver anime subtitulado al español o doblados al español."
+	},
+	"url": [
+		"aodesu.com",
+		"www.aodesu.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/CyVxys5.jpg",
+	"thumbnail": "https://i.imgur.com/3utIKC9.png",
+	"color": "#4169e1",
+	"category": "anime",
+	"tags": [
+		"aodesu",
+		"streaming",
+		"videos"
+	],
+	"iframe": true,
+	"iFrameRegExp": "(yourupload[.]com)|(guccihide[.]com)|(streamtape[.]com)|(vidcache[.]net)|(burstcloud[.]co)|((.*[.])?google[.]com)"
+}
