@@ -35,9 +35,8 @@ presence.on(
 		};
 	}) => {
 		playback = data.iframeVideo !== null;
-		reproductor = data.iframeVideo.reproductor;
 		if (playback) {
-			({ iFrameVideo, paused, duration } = data.iframeVideo);
+			({ iFrameVideo, paused, duration, reproductor } = data.iframeVideo);
 			currentTime = data.iframeVideo.currTime;
 		}
 	}
@@ -86,7 +85,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "¡Creando nueva cuenta!";
 		}
 	} else if (pathname.startsWith("/serie/")) {
-		let title = document.querySelector("h1"),
+		const title = document.querySelector("h1"),
 			season = document.querySelector("#season_id");
 
 		presenceData.smallImageKey = Assets.Preview;
@@ -108,10 +107,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Buscando";
 		presenceData.state = search;
 	} else if (pathname.startsWith("/watch/")) {
-		let title = document.querySelector(
-			".reproductor-container > div:nth-child(2) > div.reproductor-centralizer > div > a"
-		).textContent;
-		let cap = pathname.split("/")[2].split("-")[2];
+		const title = document.querySelector(
+				".reproductor-container > div:nth-child(2) > div.reproductor-centralizer > div > a"
+			).textContent,
+			cap = pathname.split("/")[2].split("-")[2];
 
 		presenceData.details = `Viendo ${title}`;
 
