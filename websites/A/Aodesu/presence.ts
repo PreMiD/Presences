@@ -50,36 +50,28 @@ presence.on("UpdateData", async () => {
 		{ href, pathname } = document.location;
 
 	if (pathname === "/") {
-		// Home Page
 		presenceData.smallImageKey = Assets.Home;
 		presenceData.smallImageText = "Página de inicio";
 		presenceData.details = "Viendo la página de inicio";
 	} else if (pathname === "/emitiendo") {
-		// Emitting animes Page
 		presenceData.smallImageKey = Assets.Emitting;
 		presenceData.smallImageText = "En Emisión";
 		presenceData.details = "Explorando animes en emisión";
 	} else if (pathname.startsWith("/ajustes")) {
-		// Settings Page
 		if (pathname === "/ajustes") {
-			// Appearance
 			presenceData.smallImageKey = Assets.Settings;
 			presenceData.smallImageText = "Ajustes";
 			presenceData.details = "Personalizando uwu";
 		} else if (pathname === "/ajustes/privacidad") {
-			// Privacy
 			presenceData.details = "Informandose 🧐";
 			presenceData.state = "Politicas de privacidad";
 		}
 	} else if (pathname.startsWith("/auth/")) {
-		// Auth Page
 		if (pathname === "/auth/iniciar-sesion") {
-			// Login
 			presenceData.smallImageKey = Assets.Login;
 			presenceData.smallImageText = "Inicio de sesión";
 			presenceData.details = "Iniciando sesión";
 		} else if (pathname === "/auth/registrarse") {
-			// Register
 			presenceData.smallImageKey = Assets.Register;
 			presenceData.smallImageText = "Registro de usuario";
 			presenceData.details = "¡Creando nueva cuenta!";
@@ -102,7 +94,7 @@ presence.on("UpdateData", async () => {
 		const search = document.querySelector<HTMLInputElement>(
 			"div.search-bar > input[type=text]"
 		).value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Buscador";
 		presenceData.details = "Buscando";
 		presenceData.state = search;
