@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (pathname.startsWith("/buscar")) {
-		let search = document.querySelector<HTMLInputElement>(
+		const search = document.querySelector<HTMLInputElement>(
 			"div.search-bar > input[type=text]"
 		).value;
 		presenceData.smallImageKey = "search";
