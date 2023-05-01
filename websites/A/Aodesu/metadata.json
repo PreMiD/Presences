@@ -24,5 +24,5 @@
 		"videos"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": "(yourupload[.]com)|(guccihide[.]com)|(streamtape[.]com)|(vidcache[.]net)|(burstcloud[.]co)|((.*[.])?google[.]com)"
 }
