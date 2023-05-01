@@ -29,7 +29,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Bir ayar görüntülüyor:";
 		presenceData.state = "Bağlantılar";
 	} else if (document.location.pathname.toLowerCase() === "/help") {
-		presenceData.details = "Bir sayfa görüntülüyor:";
+		presenceData.details = "Bir sayfa görüntülüyor:"; 
 		presenceData.state = "Yardım Sayfası";
 	} else if (document.location.pathname.toLowerCase().includes("/profile")) {
 		presenceData.details = "Bir kullanıcı profili görüntülüyor:";
