@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 		const search = document.querySelector<HTMLInputElement>(
 			"div.search-bar > input[type=text]"
 		).value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Buscador";
 		presenceData.details = "Buscando";
 		presenceData.state = search;
