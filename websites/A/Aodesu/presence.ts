@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	},
-	{ href, pathname } = window.location;
+	{ href, pathname } = document.location;
 
 	if (pathname === "/") {
 		// Home Page
