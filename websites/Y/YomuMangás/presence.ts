@@ -1,11 +1,7 @@
 const presence = new Presence({ clientId: "869377195682983957" });
 
 presence.on("UpdateData", async () => {
-	let presenceData: PresenceData = {
-		largeImageKey: "yomu",
-		details: "Sua biblioteca virtual de mangás",
-		state: "manhwas, hentais, doujin e mais!",
-	};
+	let presenceData: PresenceData = { largeImageKey: "yomu" };
 	const { pathname, href } = window.location,
 		[privacy, nsfw] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
@@ -48,7 +44,10 @@ presence.on("UpdateData", async () => {
 						{ label: "Ler Capítulo", url: href },
 					];
 				}
-				if (!isNsfw && isChapter) presenceData.buttons?.pop();
+				if (!isNsfw && !isChapter) presenceData.buttons?.pop();
+			} else {
+				presenceData.details = "Sua biblioteca virtual de mangás";
+				presenceData.state = "manhwas, hentais, doujin e mais!";
 			}
 		} else if (pathname.startsWith("/user")) {
 			const username =
@@ -73,6 +72,9 @@ presence.on("UpdateData", async () => {
 					presenceData = { ...presenceData, ...data };
 			}
 		}
+	} else {
+		presenceData.details = "Sua biblioteca virtual de mangás";
+		presenceData.state = "manhwas, hentais, doujin e mais!";
 	}
 
 	presence.setActivity(presenceData);
