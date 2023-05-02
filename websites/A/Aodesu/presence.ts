@@ -79,8 +79,12 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/serie/")) {
 		presenceData.smallImageKey = Assets.Preview;
 		presenceData.smallImageText = "Serie";
-		presenceData.details = `A punto de ver ${document.querySelector("h1").textContent}`;
-		presenceData.state = `Temporada ${document.querySelector("#season_id").textContent}`;
+		presenceData.details = `A punto de ver ${
+			document.querySelector("h1").textContent
+		}`;
+		presenceData.state = `Temporada ${
+			document.querySelector("#season_id").textContent
+		}`;
 		presenceData.buttons = [
 			{
 				label: "¡Ver También!",
@@ -107,6 +111,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = paused ? "Pausado" : "Reproduciendo";
 			[, presenceData.endTimestamp] = presence.getTimestamps(
 				Math.floor(currentTime),
+
 				Math.floor(duration)
 			);
 
