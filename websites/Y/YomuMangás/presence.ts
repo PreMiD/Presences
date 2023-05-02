@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 					? chapter
 					: `Capítulo ${chapter}`;
 				presenceData.largeImageKey =
-					isNsfw || !image ? "https://i.imgur.com/usrs3S5.png" : image;
+					isNsfw || !image ? "https://i.imgur.com/npT1CuI.png" : image;
 				presenceData.smallImageKey = "https://i.imgur.com/wRRMpKc.png";
 				if (!isNsfw) {
 					presenceData.buttons = [
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 				: "Vizualizando";
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("#premid-user-avatar")?.src ||
-				"https://i.imgur.com/1Os7taV.png";
+				"https://i.imgur.com/Z9LxQZD.png";
 			presenceData.smallImageKey = "https://i.imgur.com/wRRMpKc.png";
 			presenceData.buttons = [
 				{
