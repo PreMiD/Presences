@@ -4,7 +4,7 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/qmIiWoY.png",
 	};
-	const { pathname, href } = window.location,
+	const { pathname, href } = document.location,
 		[privacy, nsfw] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("nsfw"),
