@@ -125,6 +125,40 @@ import crimezoom from "./C/crimezoom";
 import crusadersthywillbedone from "./C/crusadersthywillbedone";
 import cubirds from "./C/cubirds";
 import cubosaurs from "./C/cubosaurs";
+import darkagent from "./D/darkagent";
+import detectivepoker from "./D/detectivepoker";
+import deus from "./D/deus";
+import diablo from "./D/diablo";
+import diams from "./D/diams";
+import diceathlon from "./D/diceathlon";
+import dicedtomatoes from "./D/dicedtomatoes";
+import diceforge from "./D/diceforge";
+import dicehospital from "./D/dicehospital";
+import dicehospitaler from "./D/dicehospitaler";
+import dicesummoners from "./D/dicesummoners";
+import dicethemepark from "./D/dicethemepark";
+import dingosdreams from "./D/dingosdreams";
+import dinnerinparis from "./D/dinnerinparis";
+import dinosaurteaparty from "./D/dinosaurteaparty";
+import djambi from "./D/djambi";
+import dobble from "./D/dobble";
+import dodo from "./D/dodo";
+import dontgointhere from "./D/dontgointhere";
+import dotsandboxes from "./D/dotsandboxes";
+import downforce from "./D/downforce";
+import draftcider from "./D/draftcider";
+import draftosaurus from "./D/draftosaurus";
+import dragonbridge from "./D/dragonbridge";
+import dragoncastle from "./D/dragoncastle";
+import dragonheart from "./D/dragonheart";
+import dragonkeeper from "./D/dragonkeeper";
+import dragonline from "./D/dragonline";
+import dragonwood from "./D/dragonwood";
+import dronesvsseagulls from "./D/dronesvsseagulls";
+import dudo from "./D/dudo";
+import dungeonpetz from "./D/dungeonpetz";
+import dungeonroll from "./D/dungeonroll";
+import dungeontwister from "./D/dungeontwister";
 import gizmos from "./G/gizmos";
 import greatwesterntrail from "./G/greatwesterntrail";
 import hanabi from "./H/hanabi";
@@ -280,6 +314,40 @@ const games: Record<string, GamePresence> = {
 	crusadersthywillbedone,
 	cubirds,
 	cubosaurs,
+	darkagent,
+	detectivepoker,
+	deus,
+	diablo,
+	diams,
+	diceathlon,
+	dicedtomatoes,
+	diceforge,
+	dicehospital,
+	dicehospitaler,
+	dicesummoners,
+	dicethemepark,
+	dingosdreams,
+	dinnerinparis,
+	dinosaurteaparty,
+	djambi,
+	dobble,
+	dodo,
+	dontgointhere,
+	dotsandboxes,
+	downforce,
+	draftcider,
+	draftosaurus,
+	dragonbridge,
+	dragoncastle,
+	dragonheart,
+	dragonkeeper,
+	dragonline,
+	dragonwood,
+	dronesvsseagulls,
+	dudo,
+	dungeonpetz,
+	dungeonroll,
+	dungeontwister,
 	gizmos,
 	greatwesterntrail,
 	hanabi,
