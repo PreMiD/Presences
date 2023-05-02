@@ -77,13 +77,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "¡Creando nueva cuenta!";
 		}
 	} else if (pathname.startsWith("/serie/")) {
-		const title = document.querySelector("h1"),
-			season = document.querySelector("#season_id");
-
 		presenceData.smallImageKey = Assets.Preview;
 		presenceData.smallImageText = "Serie";
-		presenceData.details = `A punto de ver ${title.textContent}`;
-		presenceData.state = `Temporada ${season.textContent}`;
+		presenceData.details = `A punto de ver ${document.querySelector("h1").textContent}`;
+		presenceData.state = `Temporada ${document.querySelector("#season_id").textContent}`;
 		presenceData.buttons = [
 			{
 				label: "¡Ver También!",
@@ -91,13 +88,12 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (pathname.startsWith("/buscar")) {
-		const search = document.querySelector<HTMLInputElement>(
-			"div.search-bar > input[type=text]"
-		).value;
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Buscador";
 		presenceData.details = "Buscando";
-		presenceData.state = search;
+		presenceData.state = document.querySelector<HTMLInputElement>(
+			"div.search-bar > input[type=text]"
+		).value;
 	} else if (pathname.startsWith("/watch/")) {
 		const title = document.querySelector(
 				".reproductor-container > div:nth-child(2) > div.reproductor-centralizer > div > a"
