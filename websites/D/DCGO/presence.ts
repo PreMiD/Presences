@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
 	};
 
 	const { pathname } = document.location;
-	if (pathname.toLowerCase() === "/") {
+	if (pathnameLowercase  === "/") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Anasayfa";
 	} else if (pathname.toLowerCase() === "/team") {
