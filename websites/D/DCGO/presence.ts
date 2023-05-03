@@ -14,25 +14,25 @@ presence.on("UpdateData", () => {
 	} else if (pathname.toLowerCase() === "/team") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Ekibimiz";
-	} else if (pathname.toLowerCase() === "/servers") {
+	} else if (pathnameLowerCase === "/servers") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Sunucu Sıralaması";
-	} else if (pathname.toLowerCase() === "/profile-options") {
+	} else if (pathnameLowerCase === "/profile-options") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Profil Ayarları";
-	} else if (pathname.toLowerCase() === "/terms-of-service") {
+	} else if (pathnameLowerCase === "/terms-of-service") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Kullanım Şartları";
-	} else if (pathname.toLowerCase() === "/privacy-policy") {
+	} else if (pathnameLowerCase === "/privacy-policy") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Gizlilik Politikası";
-	} else if (pathname.toLowerCase() === "/profile-settings") {
+	} else if (pathnameLowerCase === "/profile-settings") {
 		presenceData.details = "Bir ayar görüntülüyor:";
 		presenceData.state = "Bağlantılar";
-	} else if (document.location.pathname.toLowerCase() === "/help") {
+	} else if (pathnameLowerCase === "/help") {
 		presenceData.details = "Bir sayfa görüntülüyor:"; 
 		presenceData.state = "Yardım Sayfası";
-	} else if (document.location.pathname.toLowerCase().includes("/profile")) {
+	} else if (pathnameLowerCase.includes("/profile")) {
 		presenceData.details = "Bir kullanıcı profili görüntülüyor:";
 		presenceData.state = `${
 			document.querySelector(
@@ -40,7 +40,7 @@ presence.on("UpdateData", () => {
 			).textContent
 		}`;
 	} else if (
-		document.location.pathname.toLowerCase().includes("/server-details")
+		pathnameLowerCase.includes("/server-details")
 	) {
 		presenceData.details = "Bir sunucu görüntülüyor:";
 		presenceData.state = `${
