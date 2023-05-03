@@ -5,9 +5,9 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/NPVqgsx.png",
-	};
-
-	const { pathname } = document.location;
+	},
+	 { pathname } = document.location,
+	pathnameLowercase = pathname.toLowerCase();
 	if (pathnameLowercase  === "/") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Anasayfa";
