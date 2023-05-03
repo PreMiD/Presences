@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
 		largeImageKey: "https://i.imgur.com/NPVqgsx.png",
 	},
 	 { pathname } = document.location,
-	pathnameLowercase = pathname.toLowerCase();
+	pathnameLowerCase = pathname.toLowerCase();
 	if (pathnameLowercase  === "/") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Anasayfa";
