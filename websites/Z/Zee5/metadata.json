@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "993170607841746974",
+		"name": "பில்லி கசாப்புக்காரன்"
+	},
+	"service": "Zee5",
+	"description": {
+		"en": "Zee5 is an OTT platform"
+	},
+	"url": "www.zee5.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/H9fXid0.png",
+	"thumbnail": "https://i.imgur.com/H9fXid0.png",
+	"color": "#000000",
+	"category": "videos",
+	"tags": [
+		"zee5",
+		"zee",
+		"zeefive",
+		"ott"
+	]
+}
