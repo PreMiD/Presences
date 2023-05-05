@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 	if (document.location.pathname === "/")
 		presenceData.details = "Browsing home page";
 	else if (document.location.pathname === "/movies")
-		presenceData.details = "Browsing  movies";
+		presenceData.details = "Browsing movies";
 	else if (document.location.pathname.includes("/movies/details")) {
 		const currentPresenceData = getVideoStatus(
 			presenceData,
