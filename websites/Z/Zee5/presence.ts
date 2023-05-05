@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 		);
 		currentPresenceData.details = "Watching";
 		currentPresenceData.state = document.querySelector<HTMLElement>(
-			"div.movieDetailContainer > div > div > div > div.metaDataDiv > div.consumptionMetaDiv >  div  > h1 "
+			"div.movieDetailContainer > div > div > div > div.metaDataDiv > div.consumptionMetaDiv > div > h1 "
 		).textContent;
 	} else if (document.location.pathname.includes("tv-shows/details")) {
 		const currentPresenceData = getVideoStatus(
