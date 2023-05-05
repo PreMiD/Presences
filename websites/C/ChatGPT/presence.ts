@@ -5,7 +5,9 @@ enum Assets {
 }
 presence.on("UpdateData", async () => {
 	const showTitle = await presence.getSetting<boolean>("showTitle"),
-		isTalking = document.querySelector('[class*="text-2xl"] > span:nth-child(3)');
+		isTalking = document.querySelector(
+			'[class*="text-2xl"] > span:nth-child(3)'
+		);
 
 	let words = 0;
 	for (const element of document.querySelectorAll(
@@ -23,8 +25,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp: Math.floor(Date.now() / 1000),
 		details: showTitle
 			? `${
-					document.querySelector("li a button > svg")?.closest("li")
-						.textContent
+					document.querySelector("li a button > svg")?.closest("li").textContent
 			  }`
 			: "Talking with AI about something",
 		state: isTalking
