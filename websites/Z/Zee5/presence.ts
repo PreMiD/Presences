@@ -5,8 +5,8 @@ const presence = new Presence({
 
 enum Assets {
 	Logo = "https://i.imgur.com/rMcEfBA.jpg",
-	Paused = "paused",
-	Playing = "playing",
+	Pause = "https://i.imgur.com/0A75vqT.png",
+	Play = "https://i.imgur.com/Dj5dekr.png",
 }
 
 function getTimestamps(videoTime: number, videoDuration: number): number[] {
@@ -22,8 +22,8 @@ const getVideoStatus = (
 	video: HTMLVideoElement
 ) => {
 	if (video.paused) {
-		presenceData.smallImageKey = Assets.Paused;
-		presenceData.smallImageText = Assets.Paused;
+		presenceData.smallImageKey = Assets.Pause;
+		presenceData.smallImageText = "paused";
 		delete presenceData.startTimestamp;
 	} else {
 		const [startTimestamp, endTimestamp] = getTimestamps(
@@ -32,8 +32,8 @@ const getVideoStatus = (
 		);
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
-		presenceData.smallImageKey = Assets.Playing;
-		presenceData.smallImageText = Assets.Playing;
+		presenceData.smallImageKey = Assets.Play;
+		presenceData.smallImageText = "playing";
 	}
 	return presenceData;
 };
