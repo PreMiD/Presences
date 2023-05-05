@@ -34,15 +34,14 @@ const getVideoStatus = (
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/H9fXid0.png",
-		startTimestamp: browsingTimestamp,
-	};
+			largeImageKey: "https://i.imgur.com/H9fXid0.png",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location;
 
-	if (document.location.pathname === "/")
-		presenceData.details = "Browsing home page";
-	else if (document.location.pathname === "/movies")
-		presenceData.details = "Browsing movies";
-	else if (document.location.pathname.includes("/movies/details")) {
+	if (pathname === "/") presenceData.details = "Browsing home page";
+	else if (pathname === "/movies") presenceData.details = "Browsing movies";
+	else if (pathname.includes("/movies/details")) {
 		const currentPresenceData = getVideoStatus(
 			presenceData,
 			document.querySelector<HTMLVideoElement>(
@@ -53,7 +52,7 @@ presence.on("UpdateData", async () => {
 		currentPresenceData.state = document.querySelector<HTMLElement>(
 			"div.movieDetailContainer > div > div > div > div.metaDataDiv > div.consumptionMetaDiv > div > h1 "
 		).textContent;
-	} else if (document.location.pathname.includes("tv-shows/details")) {
+	} else if (pathname.includes("tv-shows/details")) {
 		const currentPresenceData = getVideoStatus(
 			presenceData,
 			document.querySelector<HTMLVideoElement>(
@@ -64,7 +63,7 @@ presence.on("UpdateData", async () => {
 		currentPresenceData.state = document.querySelector<HTMLElement>(
 			"div.episodeDetailContainer > div > div > div > div.metaDataDiv > div.consumptionMetaDiv >  div  > h1 "
 		).textContent;
-	} else if (document.location.pathname.includes("web-series/details")) {
+	} else if (pathname.includes("web-series/details")) {
 		const currentPresenceData = getVideoStatus(
 			presenceData,
 			document.querySelector<HTMLVideoElement>(
@@ -85,14 +84,13 @@ presence.on("UpdateData", async () => {
 				" div > div > div > div.metaDataDiv > div.consumptionMetaDiv >  div  > p "
 			).textContent
 		}`;
-	} else if (document.location.pathname === "tv-shows")
+	} else if (pathname === "tv-shows")
 		presenceData.details = "Browsing Tv shows";
-	else if (document.location.pathname.includes("/premium"))
+	else if (pathname.includes("/premium"))
 		presenceData.details = "Browsing premium";
-	else if (document.location.pathname.includes("/web-series"))
+	else if (pathname.includes("/web-series"))
 		presenceData.details = "Browsing web series";
-	else if (document.location.pathname.includes("/news"))
-		presenceData.details = "Browsing news";
+	else if (pathname.includes("/news")) presenceData.details = "Browsing news";
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
