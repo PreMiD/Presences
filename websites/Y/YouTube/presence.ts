@@ -265,7 +265,7 @@ presence.on("UpdateData", async () => {
 							uploaderEmbed.textContent.length > 0)
 					? uploaderEmbed
 					: (uploaderTV = truncateAfter(
-							uploaderTV.textContent.replace(/\s+/g, ""),
+							uploaderTV?.textContent.replace(/\s+/g, "") ?? "Undefined",
 							pattern
 					  ))),
 			live = Boolean(document.querySelector(".ytp-live"));
@@ -437,7 +437,25 @@ presence.on("UpdateData", async () => {
 		};
 		let searching = false;
 
-		if (pathname.includes("/results")) {
+		if (document.URL === "https://www.youtube.com/") {
+			const child =
+				document.querySelector(
+					'[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]'
+				) ?? null; // Select selected child
+			if (
+				(child &&
+					Array.prototype.indexOf.call(child.parentElement?.children, child)) ??
+				0 > 0
+			) {
+				// Get index of child element from parent
+				// if the current child index is bigger than 0 continue
+				presenceData.details = strings.browsingTypeVideos.replace(
+					"{0}",
+					child?.textContent?.trim()?.toLowerCase()
+				);
+			} else presenceData.details = strings.viewHome;
+			presenceData.startTimestamp = browsingTimestamp;
+		} else if (pathname.includes("/results")) {
 			searching = true;
 			let search: HTMLInputElement;
 			//When searching something
@@ -636,24 +654,6 @@ presence.on("UpdateData", async () => {
 				document.title.lastIndexOf(" - YouTube")
 			);
 			presenceData.smallImageKey = Assets.Read;
-			presenceData.startTimestamp = browsingTimestamp;
-		} else if (document.URL === "https://www.youtube.com/") {
-			const child =
-				document.querySelector(
-					'[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]'
-				) ?? null; // Select selected child
-			if (
-				(child &&
-					Array.prototype.indexOf.call(child.parentElement?.children, child)) ??
-				0 > 0
-			) {
-				// Get index of child element from parent
-				// if the current child index is bigger than 0 continue
-				presenceData.details = strings.browsingTypeVideos.replace(
-					"{0}",
-					child?.textContent?.trim()?.toLowerCase()
-				);
-			} else presenceData.details = strings.viewHome;
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/upload")) {
 			presenceData.details = strings.upload;
