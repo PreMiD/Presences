@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 		const currentPresenceData = getVideoStatus(
 			presenceData,
 			document.querySelector<HTMLVideoElement>(
-				"div.playerContainer > div >video"
+				"div.playerContainer > div > video"
 			)
 		);
 		currentPresenceData.details = "Watching";
