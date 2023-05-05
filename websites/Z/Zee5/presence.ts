@@ -3,6 +3,12 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+enum Assets {
+	Logo = "https://i.imgur.com/H9fXid0.png",
+	Paused = "paused",
+	Playing = "playing",
+}
+
 function getTimestamps(videoTime: number, videoDuration: number): number[] {
 	const startTime = Date.now();
 	return [
@@ -16,8 +22,8 @@ const getVideoStatus = (
 	video: HTMLVideoElement
 ) => {
 	if (video.paused) {
-		presenceData.smallImageKey = "paused";
-		presenceData.smallImageText = "paused";
+		presenceData.smallImageKey = Assets.Paused;
+		presenceData.smallImageText = Assets.Paused;
 		delete presenceData.startTimestamp;
 	} else {
 		const [startTimestamp, endTimestamp] = getTimestamps(
@@ -26,15 +32,15 @@ const getVideoStatus = (
 		);
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
-		presenceData.smallImageKey = "playing";
-		presenceData.smallImageText = "playing";
+		presenceData.smallImageKey = Assets.Playing;
+		presenceData.smallImageText = Assets.Playing;
 	}
 	return presenceData;
 };
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/H9fXid0.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
@@ -44,45 +50,37 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/movies/details")) {
 		const currentPresenceData = getVideoStatus(
 			presenceData,
-			document.querySelector<HTMLVideoElement>(
-				"div.playerContainer > div > video"
-			)
+			document.querySelector<HTMLVideoElement>("video")
 		);
 		currentPresenceData.details = "Watching";
-		currentPresenceData.state = document.querySelector<HTMLElement>(
-			"div.movieDetailContainer > div > div > div > div.metaDataDiv > div.consumptionMetaDiv > div > h1 "
+		currentPresenceData.state = document.querySelector(
+			"div.consumptionMetaDiv > div > h1"
 		).textContent;
 	} else if (pathname.includes("tv-shows/details")) {
 		const currentPresenceData = getVideoStatus(
 			presenceData,
-			document.querySelector<HTMLVideoElement>(
-				"div.playerContainer > div >video"
-			)
+			document.querySelector<HTMLVideoElement>("video")
 		);
-		currentPresenceData.details = "Watching";
-		currentPresenceData.state = document.querySelector<HTMLElement>(
-			'[class="title"]'
-		).textContent;
+		currentPresenceData.details = `Watching ${
+			document.querySelector("div.consumptionMetaDiv >  a  > h2").textContent
+		}`;
+		currentPresenceData.state = `${
+			document.querySelector("div.consumptionMetaDiv >  div  > h1").textContent
+		} ${
+			document.querySelector("div.consumptionMetaDiv >  div  > p").textContent
+		}`;
 	} else if (pathname.includes("web-series/details")) {
 		const currentPresenceData = getVideoStatus(
 			presenceData,
-			document.querySelector<HTMLVideoElement>(
-				"div.playerContainer > div >video"
-			)
+			document.querySelector<HTMLVideoElement>("video")
 		);
 		currentPresenceData.details = `Watching ${
-			document.querySelector<HTMLElement>(
-				" div > div > div > div.metaDataDiv > div.consumptionMetaDiv >  a  > h2 "
-			).textContent
+			document.querySelector("div.consumptionMetaDiv >  a  > h2").textContent
 		}`;
 		currentPresenceData.state = `${
-			document.querySelector<HTMLElement>(
-				" div > div > div > div.metaDataDiv > div.consumptionMetaDiv >  div  > h1 "
-			).textContent
+			document.querySelector("div.consumptionMetaDiv >  div  > h1").textContent
 		} ${
-			document.querySelector<HTMLElement>(
-				" div > div > div > div.metaDataDiv > div.consumptionMetaDiv >  div  > p "
-			).textContent
+			document.querySelector("div.consumptionMetaDiv >  div  > p").textContent
 		}`;
 	} else if (pathname === "tv-shows")
 		presenceData.details = "Browsing Tv shows";
