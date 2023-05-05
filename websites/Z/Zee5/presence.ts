@@ -3,11 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
 function getTimestamps(videoTime: number, videoDuration: number): number[] {
 	const startTime = Date.now();
 	return [
