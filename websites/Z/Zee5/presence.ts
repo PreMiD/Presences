@@ -9,14 +9,6 @@ enum Assets {
 	Play = "https://i.imgur.com/Dj5dekr.png",
 }
 
-function getTimestamps(videoTime: number, videoDuration: number): number[] {
-	const startTime = Date.now();
-	return [
-		Math.floor(startTime / 1000),
-		Math.floor(startTime / 1000) - videoTime + videoDuration,
-	];
-}
-
 const getVideoStatus = (
 	presenceData: PresenceData,
 	video: HTMLVideoElement
@@ -26,7 +18,7 @@ const getVideoStatus = (
 		presenceData.smallImageText = "paused";
 		delete presenceData.startTimestamp;
 	} else {
-		const [startTimestamp, endTimestamp] = getTimestamps(
+		const [startTimestamp, endTimestamp] = presence.getTimestamps(
 			Math.floor(video.currentTime),
 			Math.floor(video.duration)
 		);
