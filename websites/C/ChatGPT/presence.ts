@@ -17,15 +17,14 @@ presence.on("UpdateData", async () => {
 			'[class*="text-2xl"] > span:nth-child(3)'
 		);
 
-	let words = 0;
+	let wordCount = 0;
 	for (const element of document.querySelectorAll(
 		'[class*="flex flex-col items-center"] > *'
 	)) {
-		const text = element.textContent.replace(
-			/([.])|(\n)|([0-9]*)|(\/)|()/gm,
-			""
-		);
-		words += text.split(" ").slice(2, text.split(" ").length).length;
+		const text = element.textContent
+			.replace(/(, )|(,\n)|(,)|([.] )|([.])/gm, " ")
+			.replace(/([0-9]*)|(\/)|(')|(,)|( )/gm, "");
+		wordCount += text.split(" ").slice(2, text.split(" ").length).length;
 	}
 
 	if (pathname.split("/")[1] === "c") {
@@ -37,7 +36,7 @@ presence.on("UpdateData", async () => {
 			: `asked (${
 					Number(document.querySelectorAll('[class*="group w-full"]').length) /
 					2
-			  }) times | (${words}) words`;
+			  }) times | (${wordCount}) words`;
 		presenceData.smallImageKey = isTalking ? Assets.Talking : null;
 	} else {
 		presenceData.details = "Start new conversation";
