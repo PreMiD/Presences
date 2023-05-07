@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector("div.consumptionMetaDiv >  div  > p").textContent
 		}`;
 	} else if (pathname === "tv-shows")
-		presenceData.details = "Browsing Tv shows";
+		presenceData.details = "Browsing TV shows";
 	else if (pathname.includes("/premium"))
 		presenceData.details = "Browsing premium";
 	else if (pathname.includes("/web-series"))
