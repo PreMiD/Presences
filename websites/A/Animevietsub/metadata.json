@@ -8,6 +8,10 @@
 		{
 			"name": "Minh",
 			"id": "457040540421324812"
+		},
+		{
+			"name": "DinoVN",
+			"id": "476883022994472970"
 		}
 	],
 	"service": "Animevietsub",
@@ -17,7 +21,7 @@
 		"nl": "Bekijk jouw favoriete anime online met Vietnamese ondertiteling!"
 	},
 	"url": "animevietsub.im",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/trQFagl.jpeg",
 	"thumbnail": "https://i.imgur.com/cSWQACH.png",
 	"color": "#8b0000",
