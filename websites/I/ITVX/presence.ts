@@ -51,7 +51,7 @@ interface ProgrammeNextData {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/XisKvdg.png",
+	Logo = "https://i.imgur.com/xUkE69G.png",
 }
 
 const presence = new Presence({
