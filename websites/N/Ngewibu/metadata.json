@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "456298243618504707",
+		"name": "sinkaroid"
+	},
+	"service": "Ngewibu",
+	"description": {
+		"en": "Watch anime with Indonesian subtitles easily."
+	},
+	"url": "ngewibu.tv",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/UihLFSx.png",
+	"thumbnail": "https://i.imgur.com/mEef0Q3.png",
+	"color": "#ffffff",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"videos",
+		"streaming",
+		"indonesia"
+	]
+}
