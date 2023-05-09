@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 		privacy = await presence.getSetting<boolean>("privacy"),
 		hideButtons = await presence.getSetting<boolean>("hideButtons"),
 		currentSearch = new URL(document.location.href).searchParams.get("q"),
-		pageInput = document.querySelector(".md\\:mb-md") as HTMLInputElement,
+		pageInput = document.querySelector<HTMLInputElement>(".md\\:mb-md"),
 		currentThread = document.location.pathname.match(threadExportRegex);
 
 	if (currentSearch && currentSearch !== recentSearchQuery)
