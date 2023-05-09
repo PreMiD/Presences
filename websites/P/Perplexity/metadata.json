@@ -14,10 +14,7 @@
 	"thumbnail": "https://i.imgur.com/hkZPlxM.png",
 	"color": "#202025",
 	"category": "other",
-	"tags": [
-		"search",
-		"ai"
-	],
+	"tags": ["search", "ai"],
 	"settings": [
 		{
 			"id": "privacy",

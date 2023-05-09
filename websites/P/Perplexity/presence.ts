@@ -54,8 +54,7 @@ presence.on("UpdateData", async () => {
 		if (presenceData.details.includes("Searching for"))
 			presenceData.details = "Searching";
 	}
-	if (hideButtons)
-		delete presenceData.buttons;
+	if (hideButtons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
 });
