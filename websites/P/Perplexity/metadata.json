@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "431524485548736535",
+		"name": "0x796935"
+	},
+	"service": "Perplexity",
+	"description": {
+		"en": "Perplexity AI is an AI chat tool that acts as a powerful search engine."
+	},
+	"url": "www.perplexity.ai",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/nvNxRFc.jpeg",
+	"thumbnail": "https://i.imgur.com/hkZPlxM.png",
+	"color": "#202025",
+	"category": "other",
+	"tags": [
+		"search",
+		"ai"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Search Privacy\n(includes btns)",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "hideButtons",
+			"title": "Hide Buttons",
+			"icon": "fad fa-eye-slash",
+			"value": false
+		}
+	]
+}
