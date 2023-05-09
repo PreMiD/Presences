@@ -23,10 +23,10 @@ async function getStrings() {
 
 enum Assets {
 	Logo = "https://i.imgur.com/MpeS5tp.png",
-	Searching = "https://i.imgur.com/UhPgTRn.png",
-	Viewing = "https://i.imgur.com/RMg2Qgg.png",
-	Play = "https://i.imgur.com/juDzimk.png",
-	Pause = "https://i.imgur.com/GbAMPHI.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Viewing = "https://i.imgur.com/sNXN6K4.png",
 }
 
 let video = {
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = strings.viewGenre;
 				presenceData.state = genres;
 			}
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 			break;
 

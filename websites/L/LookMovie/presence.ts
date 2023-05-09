@@ -17,9 +17,9 @@ async function getStrings() {
 }
 enum Assets {
 	Logo = "https://i.imgur.com/vlSumUl.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 	if (search?.value) {
 		presenceData.details = strings.search;
 		presenceData.state = search.value;
-		presenceData.smallImageKey = Assets.SearchImage;
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.includes("/view/")) {
 		presenceData.details = `Viewing ${document
 			.querySelector('[class*="active"]')
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 				.querySelector("head > title")
 				?.textContent.replace(" | LookMovie", "");
 
-		presenceData.smallImageKey = video.paused ? Assets.Paused : Assets.Play;
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? strings.paused : strings.play;
 		[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 		presenceData.largeImageKey =

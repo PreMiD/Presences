@@ -20,9 +20,9 @@ async function getStrings() {
 
 enum Assets {
 	Logo = "https://i.imgur.com/cGjh8Tu.png",
-	Play = "https://i.imgur.com/vKd5zk4.png",
-	Pause = "https://i.imgur.com/GbAMPHI.png",
-	Search = "https://i.imgur.com/UhPgTRn.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 }
 
 let video = {

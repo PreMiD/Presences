@@ -49,10 +49,10 @@ let video = {
 
 enum Assets {
 	Logo = "https://i.imgur.com/m5UhwNJ.png",
-	Pause = "https://i.imgur.com/NyZsbVO.png",
-	Play = "https://i.imgur.com/Y1m0KVP.png",
-	Searching = "https://i.imgur.com/oGQtnIY.png",
-	Reading = "https://i.imgur.com/8vMPNni.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
 }
 
 presence.on(
@@ -214,7 +214,7 @@ presence.on("UpdateData", async () => {
 			?.textContent.split("for");
 		presenceData.details = strings.searchFor;
 		presenceData.state = searchContent?.[1];
-		presenceData.smallImageKey = Assets.Searching;
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = searchContent?.[0];
 	} else if (pathname.includes("/review")) {
 		presenceData.details = "Viewing a review";

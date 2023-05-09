@@ -4,25 +4,26 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Assets {
-	View = "https://i.imgur.com/9WPWqvT.png",
+	Viewing = "https://i.imgur.com/sNXN6K4.png",
 	Buy = "https://i.imgur.com/JKLNlvT.png",
 	Submit = "https://i.imgur.com/wDDm0VX.png",
 	Edit = "https://i.imgur.com/TCJe2xJ.png",
 	Browse = "https://i.imgur.com/0tmziN8.png",
+	Logo = "https://i.imgur.com/IlUpO2s.png",
 }
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/IlUpO2s.png",
+		largeImageKey: Assets.Logo,
 		details: "Viewing Homepage",
-		smallImageKey: Assets.View,
+		smallImageKey: Assets.Viewing,
 		startTimestamp: browsingTimestamp,
 	};
 	const { host, pathname, href } = document.location,
 		pages: Record<string, PresenceData> = {
 			"/backgrounds": {
 				details: "Viewing Backgrounds",
-				smallImageKey: Assets.View,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Backgrounds",
@@ -32,7 +33,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/profile/background": {
 				details: "Viewing Profile Backgrounds",
-				smallImageKey: Assets.View,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Profile Backgrounds",
@@ -42,7 +43,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/frames": {
 				details: "Viewing Frames",
-				smallImageKey: Assets.View,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Frames",
@@ -52,7 +53,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/items": {
 				details: "Viewing Items",
-				smallImageKey: Assets.View,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Items",
@@ -73,7 +74,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/team": {
 				details: "Viewing Team",
-				smallImageKey: Assets.View,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Sofi Team",
@@ -83,7 +84,7 @@ presence.on("UpdateData", async () => {
 			},
 			"/event": {
 				details: "Viewing Event",
-				smallImageKey: Assets.View,
+				smallImageKey: Assets.Viewing,
 				buttons: [
 					{
 						label: "View Event",

@@ -19,8 +19,7 @@ async function getStrings() {
 function capitalizeFirstLetter(string: string) {
 	if (!string) return "Undefined";
 	return (
-		string.trim().charAt(0).toUpperCase() +
-		string.trim().slice(1).toLowerCase()
+		string.trim().charAt(0).toUpperCase() + string.trim().slice(1).toLowerCase()
 	);
 }
 function imgPath(path: string, hostname: string) {
@@ -30,8 +29,8 @@ function imgPath(path: string, hostname: string) {
 }
 enum Assets {
 	Logo = "https://i.imgur.com/6A7Q1dP.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
-	Read = "https://i.imgur.com/wPUmqu5.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -80,7 +79,7 @@ presence.on("UpdateData", async () => {
 	switch (pathname.split("/")[1].replace(/-/gm, "")) {
 		case "casestudies": {
 			if (!docusContent) {
-				presenceData.smallImageKey = Assets.Read;
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.details = "Reading a case studie about";
 				presenceData.state = ogTitle;
 				presenceData.buttons = [
@@ -94,7 +93,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "deployments": {
 			if (!docusContent) {
-				presenceData.smallImageKey = Assets.Read;
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.details = `Reading about ${ogTitle} nuxt deployment`;
 				if (subActive?.textContent) presenceData.state = subActive.textContent;
 				presenceData.buttons = [
@@ -109,7 +108,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "announcements": {
 			if (!docusContent) {
-				presenceData.smallImageKey = Assets.Read;
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.details = "Reading announcement about";
 				if (subActive?.textContent)
 					presenceData.state = `${ogTitle} - ${subActive.textContent}`;
@@ -204,7 +203,7 @@ presence.on("UpdateData", async () => {
 					details: "Viewing all themes",
 				},
 				testimonials: {
-					smallImageKey: Assets.Read,
+					smallImageKey: Assets.Reading,
 					details: "Reading all testimonials",
 					buttons: [
 						{

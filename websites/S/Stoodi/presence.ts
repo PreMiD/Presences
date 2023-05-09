@@ -4,8 +4,8 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 enum Assets {
 	Logo = "https://i.imgur.com/wC4AkjI.png",
-	Play = "https://i.imgur.com/o4FaGfB.png",
-	Pause = "https://i.imgur.com/kK39yND.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
 }
 
 presence.on("UpdateData", async () => {

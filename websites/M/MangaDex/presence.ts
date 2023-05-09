@@ -9,8 +9,8 @@ let username: string,
 
 enum Assets {
 	Logo = "https://i.imgur.com/zs8myqz.png",
-	Reading = "https://i.imgur.com/53N4eY6.png",
-	Searching = "https://i.imgur.com/OIgfjTG.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
 }
 
 async function getCoverImage(newMangaId: string) {
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 				recent: "Browsing Recents Mangas",
 				follows: "Viewing their Library",
 			}[pathArr[2]];
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		case "chapter": {
 			const title = document.querySelector(".text-primary").textContent.trim();

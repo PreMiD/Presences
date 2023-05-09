@@ -4,10 +4,10 @@ const presence = new Presence({
 
 enum Assets {
 	Logo = "https://i.imgur.com/p6Xv2Bv.png",
-	Searching = "https://i.imgur.com/OIgfjTG.png",
-	Playing = "https://i.imgur.com/KNneWuF.png",
-	Paused = "https://i.imgur.com/BtWUfrZ.png",
-	Reading = "https://i.imgur.com/53N4eY6.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
 }
 
 async function getStrings() {
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
 				: `${seriesName} - ${episode}`;
 
 			if (iFrameVideo && !isNaN(duration)) {
-				presenceData.smallImageKey = paused ? Assets.Paused : Assets.Playing;
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused ? strings.pause : strings.play;
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
@@ -145,7 +145,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = browsingTimestamp;
 		delete presenceData.endTimestamp;
 		presenceData.largeImageKey = Assets.Logo;
-		presenceData.smallImageKey = Assets.Searching;
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.search;
 		delete presenceData.buttons;
 	}

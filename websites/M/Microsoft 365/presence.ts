@@ -16,10 +16,10 @@ enum Assets {
 	Microsoft = "https://i.imgur.com/E2tzaTW.png",
 	OneNote = "https://i.imgur.com/LqrhRhD.png",
 	PowerPoint = "https://i.imgur.com/GAiZFPR.png",
-	Read = "https://i.imgur.com/wPUmqu5.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
 	Word = "https://i.imgur.com/Ec78aqz.png",
-	Writing = "https://i.imgur.com/RImaCYq.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
+	Writing = "https://i.imgur.com/jMdmkI9.png",
 }
 
 presence.on(
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Browsing ${
 				document.title.split("|")[0]
 			} documents`;
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Browsing";
 		} else if (pathname.startsWith("/search")) {
 			presenceData.smallImageKey = Assets.Search;

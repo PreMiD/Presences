@@ -25,9 +25,9 @@ enum Assets {
 	Loading = "https://i.imgur.com/uh6vSQm.gif",
 	LogoDiscoveryPlus = "https://i.imgur.com/BQ1MBwk.png",
 	LogoDiscovery = "https://i.imgur.com/ir2Ysr1.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
@@ -152,7 +152,7 @@ presence.on("UpdateData", async () => {
 							?.getAttribute("src");
 						if (video && !isNaN(video.duration)) {
 							presenceData.smallImageKey = video.paused
-								? Assets.Paused
+								? Assets.Pause
 								: Assets.Play;
 							presenceData.smallImageText = video.paused
 								? strings.paused
@@ -257,7 +257,7 @@ presence.on("UpdateData", async () => {
 									presenceData.smallImageKey = Assets.Loading;
 								} else {
 									presenceData.smallImageKey = video.paused
-										? Assets.Paused
+										? Assets.Pause
 										: Assets.Play;
 									presenceData.smallImageText = video.paused
 										? strings.paused

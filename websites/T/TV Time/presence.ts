@@ -5,7 +5,7 @@ const presence = new Presence({
 
 enum Assets {
 	Logo = "https://i.imgur.com/KuPkyx2.png",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 	else if (search?.value) {
 		presenceData.details = "Searching for";
 		presenceData.state = search?.value;
-		presenceData.smallImageKey = Assets.SearchImage;
+		presenceData.smallImageKey = Assets.Search;
 	} else if (
 		pathname === `/${document.querySelector("html").getAttribute("lang")}`
 	)

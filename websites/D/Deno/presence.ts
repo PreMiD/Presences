@@ -7,8 +7,8 @@ enum Assets {
 	Logo = "https://i.imgur.com/LF4eDYG.png",
 	NewsLogo = "https://i.imgur.com/aBbfq11.png",
 	MerchLogo = "https://i.imgur.com/GOPd2Ep.png",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
-	ReadingImage = "https://i.imgur.com/nese1O7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 			if (search?.value) {
 				presenceData.details = "Searching for";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = Assets.SearchImage;
+				presenceData.smallImageKey = Assets.Search;
 			} else if (pathname.includes("/manual")) {
 				presenceData.buttons = [
 					{
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 				];
 				presenceData.state = "Manual";
 				presenceData.smallImageKey = "reading";
-				presenceData.smallImageText = Assets.ReadingImage;
+				presenceData.smallImageText = Assets.Reading;
 				presenceData.details =
 					document.querySelector('[class="anchor"]').parentElement.textContent;
 			} else {
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 						];
 						presenceData.details = "Reading the blog";
 						presenceData.smallImageKey = "reading";
-						presenceData.smallImageText = Assets.ReadingImage;
+						presenceData.smallImageText = Assets.Reading;
 						break;
 					}
 					case "x": {
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 								?.textContent.split("|")[0];
 						} else {
 							presenceData.smallImageKey = "reading";
-							presenceData.smallImageText = Assets.ReadingImage;
+							presenceData.smallImageText = Assets.Reading;
 							presenceData.details = "Reading about third party modules";
 						}
 						break;
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
 						},
 					];
 					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = Assets.ReadingImage;
+					presenceData.smallImageText = Assets.Reading;
 					if (document.querySelector("article")) {
 						presenceData.details = "Reading an article about";
 						presenceData.state =
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
 								},
 							];
 							presenceData.smallImageKey = "reading";
-							presenceData.smallImageText = Assets.ReadingImage;
+							presenceData.smallImageText = Assets.Reading;
 							presenceData.details = "Reading an article about";
 							presenceData.state =
 								document.querySelector("article").firstElementChild.textContent;

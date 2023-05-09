@@ -56,11 +56,11 @@ const animetypes: { [key: string]: string } = {
 	};
 
 enum Assets {
-	vostlogo = "https://i.imgur.com/wStmaRE.png",
-	play = "https://i.imgur.com/JmYolkt.png",
-	pause = "https://i.imgur.com/cElKgU7.png",
-	ongoing = "https://i.imgur.com/bdSukvD.png",
-	anons = "https://i.imgur.com/8vJY6ok.png",
+	VostLogo = "https://i.imgur.com/wStmaRE.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Ongoing = "https://i.imgur.com/bdSukvD.png",
+	Anons = "https://i.imgur.com/8vJY6ok.png",
 	"boyevyye-iskusstva" = "https://i.imgur.com/fIFC4Bn.png",
 	"voyna" = "https://i.imgur.com/6wcT9gr.png",
 	"drama" = "https://i.imgur.com/FGNTKQ1.png",
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey: Assets.vostlogo,
+			largeImageKey: Assets.VostLogo,
 			smallImageText: "🏴‍☠️ AnimeVost",
 		},
 		websiteloc = document.location.pathname.split("/");
@@ -126,12 +126,12 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `🔎 В поисках аниме ${websiteloc[2]} года`;
 		if (websiteloc[1] === "ongoing") {
 			presenceData.details = "🔎 В поисках онгоинга";
-			presenceData.smallImageKey = Assets.ongoing;
+			presenceData.smallImageKey = Assets.Ongoing;
 			presenceData.smallImageText = "🔎 В поисках Онгоинга";
 		}
 		if (websiteloc[1] === "preview") {
 			presenceData.details = "🔎 В поисках анонса";
-			presenceData.smallImageKey = Assets.anons;
+			presenceData.smallImageKey = Assets.Anons;
 			presenceData.smallImageText = "🔎 В поисках Анонса";
 		}
 		if (websiteloc[1] === "user") {
@@ -142,12 +142,12 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document
 					.querySelector(".userinfoCenterAva")
 					.querySelector("img").src;
-				presenceData.smallImageKey = Assets.vostlogo;
+				presenceData.smallImageKey = Assets.VostLogo;
 				presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 			}
 		}
 	} else {
-		presenceData.largeImageKey = Assets.vostlogo;
+		presenceData.largeImageKey = Assets.VostLogo;
 		presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 		presenceData.details = "Где-то на сайте";
 		delete presenceData.startTimestamp;
@@ -165,18 +165,18 @@ presence.on("UpdateData", async () => {
 			if (!privacy && logo) {
 				presenceData.largeImageKey =
 					document.querySelector<HTMLImageElement>(".imgRadius").src;
-				presenceData.smallImageKey = Assets.vostlogo;
+				presenceData.smallImageKey = Assets.VostLogo;
 				presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 			} else {
 				delete presenceData.smallImageKey;
-				presenceData.largeImageKey = Assets.vostlogo;
+				presenceData.largeImageKey = Assets.VostLogo;
 			}
 			if (video.duration) {
 				presenceData.details = `Смотрит ${animetype} ${
 					!privacy ? animename : ""
 				}`;
 				presenceData.state = document.querySelector(".active").textContent;
-				presenceData.smallImageKey = video.paused ? Assets.pause : Assets.play;
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? strings.pause
 					: strings.play;

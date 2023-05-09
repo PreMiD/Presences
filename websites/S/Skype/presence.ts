@@ -17,8 +17,8 @@ async function getStrings() {
 
 enum Assets {
 	Logo = "https://i.imgur.com/Q4myT8y.png",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
-	ReadingImage = "https://i.imgur.com/nese1O7.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
@@ -57,12 +57,12 @@ presence.on("UpdateData", async () => {
 			if (search?.value) {
 				presenceData.details = strings.search;
 				presenceData.state = search.value;
-				presenceData.smallImageKey = Assets.SearchImage;
+				presenceData.smallImageKey = Assets.Search;
 			} else if (user) {
 				if (typing?.textContent) presenceData.details = strings.typeDm;
 				else {
 					presenceData.details = strings.readDm;
-					presenceData.smallImageKey = Assets.ReadingImage;
+					presenceData.smallImageKey = Assets.Reading;
 				}
 				presenceData.state = user.textContent;
 			} else presenceData.details = strings.browse;

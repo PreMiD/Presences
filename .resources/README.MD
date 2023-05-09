@@ -24,7 +24,7 @@ In this folder you can find resource images which you can use to display the sta
 | <img src="repeat-one.png" style="background-color: rgba(0,0,0,25);" height="50px">    | [repeat-one.png](repeat-one.png)       |
 | <img src="premiere.png" style="background-color: rgba(0,0,0,25);" height="50px">      | [premiere.png](premiere.png)           |
 | <img src="premiere-live.png" style="background-color: rgba(0,0,0,25);" height="50px"> | [premiere-live.png](premiere-live.png) |
-
+| <img src="viewing.png" style="background-color: rgba(0,0,0,25);" height="50px"> | [viewing.png](viewing.png) |
 
 ```ts
 enum Assets {
@@ -44,5 +44,6 @@ enum Assets {
 	RepeatOne = "https://i.imgur.com/kKqrQlA.png",
 	Premiere = "https://i.imgur.com/qiO6Yc0.png",
 	PremiereLive = "https://i.imgur.com/W97FVF6.png",
+	Viewing = "https://i.imgur.com/sNXN6K4.png",
 }
 ```

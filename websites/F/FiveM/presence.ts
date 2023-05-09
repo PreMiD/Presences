@@ -5,8 +5,8 @@ const presence = new Presence({
 
 enum Assets {
 	Logo = "https://i.imgur.com/BvGqA4s.png",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
-	ReadingImage = "https://i.imgur.com/nese1O7.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			if (pathname === "/") presenceData.details = "Viewing home Page";
 			else if (pathname.includes("terms")) {
 				presenceData.details = "Reading terms";
-				presenceData.smallImageKey = Assets.ReadingImage;
+				presenceData.smallImageKey = Assets.Reading;
 			}
 			break;
 		}
@@ -42,13 +42,13 @@ presence.on("UpdateData", async () => {
 			if (search?.value) {
 				presenceData.details = "Searchin for";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = Assets.SearchImage;
+				presenceData.smallImageKey = Assets.Search;
 			} else if (pathname.startsWith("/docs/")) {
 				presenceData.details = "Reading documentation about";
 				presenceData.state = document.querySelector(
 					'[class="docContent"]'
 				)?.firstChild?.textContent;
-				presenceData.smallImageKey = Assets.ReadingImage;
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.buttons = [
 					{
 						label: "Read Docs",
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 			if (search?.value) {
 				presenceData.details = "Searchin for";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = Assets.SearchImage;
+				presenceData.smallImageKey = Assets.Search;
 				presence.setActivity(presenceData);
 				return;
 			}
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document.querySelector(
 						'[class="fancy-title"]'
 					)?.textContent;
-					presenceData.smallImageKey = Assets.ReadingImage;
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.buttons = [
 						{
 							label: "Reading Post",
@@ -157,7 +157,7 @@ presence.on("UpdateData", async () => {
 			if (search?.value) {
 				presenceData.details = "Searchin for";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = Assets.SearchImage;
+				presenceData.smallImageKey = Assets.Search;
 			} else if (pathname.startsWith("/servers/detail/")) {
 				presenceData.largeImageKey = document
 					.querySelector('[class="icon"]')

@@ -3,8 +3,8 @@ const presence = new Presence({ clientId: "1080885668248559648" }),
 
 enum Assets {
 	Logo = "https://i.imgur.com/356Spon.png",
-	Searching = "https://i.imgur.com/OIgfjTG.png",
-	Reading = "https://i.imgur.com/53N4eY6.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -39,36 +39,36 @@ function getPageData(page: string, pageDetails: string, title: string) {
 		case "home":
 			return { details: "Viewing home..." };
 		case "filter":
-			return { details: "Filtering manga...", smallImageKey: Assets.Searching };
+			return { details: "Filtering manga...", smallImageKey: Assets.Search };
 		case "type":
 			return {
 				details: `Browsing ${pageDetails}...`,
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "genre":
 			return {
 				details: `Browsing ${pageDetails} genre...`,
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "newest":
 			return {
 				details: "Browsing latest releases...",
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "updated":
 			return {
 				details: "Browsing recently updated...",
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "added":
 			return {
 				details: "Browsing recently added...",
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "az-list":
 			return {
 				details: "Browsing AZ-list...",
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "manga":
 			return {
@@ -98,7 +98,7 @@ function getPageData(page: string, pageDetails: string, title: string) {
 		case "contact":
 			return { details: "Filling up the contact form..." };
 		default:
-			return { details: "Browsing...", smallImageKey: Assets.Searching };
+			return { details: "Browsing...", smallImageKey: Assets.Search };
 	}
 }
 function getProfileDetail(pageDetails: string) {

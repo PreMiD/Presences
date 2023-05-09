@@ -26,9 +26,9 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 enum Assets {
 	Logo = "https://i.imgur.com/DrxgYIA.png",
-	Reading = "https://i.imgur.com/wPUmqu5.png",
-	Searching = "https://i.imgur.com/UhPgTRn.png",
-	Viewing = "https://i.imgur.com/RMg2Qgg.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
+	Viewing = "https://i.imgur.com/sNXN6K4.png",
 }
 
 function textContent(tags: string) {
@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
 				: strings.searchFor;
 			presenceData.state =
 				document.querySelector<HTMLInputElement>("input")?.value;
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 			break;
 	}

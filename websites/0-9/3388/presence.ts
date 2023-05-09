@@ -4,9 +4,9 @@ const presence = new Presence({
 
 enum Icons {
 	Logo = "https://i.imgur.com/h8N7txd.png",
-	Search = "https://i.imgur.com/5f3sdaH.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 	Pause = "https://i.imgur.com/aO2ZCME.png",
-	Play = "https://i.imgur.com/UG7M2Ho.png",
+	Play = "https://i.imgur.com/lytENvp.png",
 }
 
 presence.on("UpdateData", async () => {

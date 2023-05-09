@@ -19,10 +19,10 @@ async function getStrings() {
 }
 enum Assets {
 	Logo = "https://i.imgur.com/PfRmgZm.png",
-	Live = "https://i.imgur.com/gYNKPnn.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
+	Live = "https://i.imgur.com/n1AUYFX.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 	if (search?.value) {
 		presenceData.details = strings.search;
 		presenceData.state = search.value;
-		presenceData.smallImageKey = Assets.SearchImage;
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.includes("/category/")) {
 		presenceData.details = strings.viewCategory;
 		presenceData.state = document.querySelector<HTMLMetaElement>(
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 			'meta[property="og:title"]'
 		).content;
 		if (!pathname.includes("live")) {
-			presenceData.smallImageKey = video.paused ? Assets.Paused : Assets.Play;
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? strings.paused
 				: strings.play;

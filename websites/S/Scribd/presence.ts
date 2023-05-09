@@ -34,9 +34,9 @@ function removePlural(string: string) {
 }
 enum Assets {
 	Logo = "https://i.imgur.com/T4XfJhX.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>;
 

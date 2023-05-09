@@ -5,9 +5,9 @@ const presence = new Presence({
 
 enum Assets {
 	Logo = "https://i.imgur.com/tPMtbjL.png",
-	Search = "https://i.imgur.com/08wjeL0.png",
-	Reading = "https://i.imgur.com/Gglu4Tk.png",
-	Viewing = "https://i.imgur.com/BMzYEcO.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
+	Viewing = "https://i.imgur.com/sNXN6K4.png",
 }
 
 function capitalize(str: string) {

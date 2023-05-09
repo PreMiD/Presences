@@ -121,15 +121,15 @@ async function getStrings() {
 
 enum Assets {
 	Logo = "https://i.imgur.com/o5injgg.png",
-	Repeat = "https://i.imgur.com/yb5dxsB.png",
-	RepeatOne = "https://i.imgur.com/ehcoy72.png",
-	Play = "https://i.imgur.com/6s4WyWY.png",
-	Live = "https://i.imgur.com/xHn9QgH.png",
-	Pause = "https://i.imgur.com/PrYtpQb.png",
-	Read = "https://i.imgur.com/wPUmqu5.png",
-	Search = "https://i.imgur.com/wYVlwJX.png",
 	Studio = "https://i.imgur.com/T2uW4AB.png",
-	Write = "https://i.imgur.com/yIseBVu.png",
+	Repeat = "https://i.imgur.com/mJ1qyqC.png",
+	RepeatOne = "https://i.imgur.com/kKqrQlA.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Live = "https://i.imgur.com/n1AUYFX.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
+	Writing = "https://i.imgur.com/jMdmkI9.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -563,7 +563,7 @@ presence.on("UpdateData", async () => {
 			} else if (pathname.includes("/about")) {
 				presenceData.details = strings.readChannel;
 				presenceData.state = user;
-				presenceData.smallImageKey = Assets.Read;
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.startTimestamp = browsingTimestamp;
 			} else if (pathname.includes("/search")) {
 				searching = true;
@@ -634,12 +634,12 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("/premium")) {
 			presenceData.details = strings.readAbout;
 			presenceData.state = "Youtube Premium";
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/gaming")) {
 			presenceData.details = strings.browsingThrough;
 			presenceData.state = "Youtube Gaming";
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/account")) {
 			presenceData.details = strings.viewAccount;
@@ -653,12 +653,12 @@ presence.on("UpdateData", async () => {
 				0,
 				document.title.lastIndexOf(" - YouTube")
 			);
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/upload")) {
 			presenceData.details = strings.upload;
 			presenceData.startTimestamp = browsingTimestamp;
-			presenceData.smallImageKey = Assets.Write;
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (pathname.includes("/view_all_playlists")) {
 			presenceData.details = strings.viewAllPlayL;
 			presenceData.startTimestamp = browsingTimestamp;

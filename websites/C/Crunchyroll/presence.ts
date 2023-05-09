@@ -51,10 +51,10 @@ interface iFrameData {
 
 enum Assets {
 	Logo = "https://i.imgur.com/yeWzAvq.png",
-	OpenBook = "https://i.imgur.com/vUGLDRM.png",
-	Pause = "https://i.imgur.com/0A75vqT.png",
-	Play = "https://i.imgur.com/Dj5dekr.png",
-	Search = "https://i.imgur.com/C3CetGw.png",
+	OpenBook = "https://i.imgur.com/H4ZhsMF.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 }
 
 presence.on("iFrameData", (data: iFrameData) => {

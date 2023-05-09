@@ -25,9 +25,9 @@ async function imgPath(path: string, hostname: string) {
 }
 enum Assets {
 	Logo = "https://i.imgur.com/m1dumnr.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 					hostname
 				)) ?? Assets.Logo;
 			if (isVideo) {
-				presenceData.smallImageKey = paused ? Assets.Paused : Assets.Play;
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused ? strings.paused : strings.play;
 				if (!isNaN(duration) && !paused) {
 					[, presenceData.endTimestamp] = presence.getTimestamps(

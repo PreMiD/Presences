@@ -5,9 +5,9 @@ const presence = new Presence({
 
 enum Assets {
 	Logo = "https://i.imgur.com/ogoDV1c.png",
-	Playing = "https://i.imgur.com/xiZprpt.png",
-	Paused = "https://i.imgur.com/w1jwJTh.png",
-	Replay = "https://i.imgur.com/UxmT8G2.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Replay = "https://i.imgur.com/lytENvp.png",
 	"360DegreeEasy" = "https://i.imgur.com/DVJ8DrX.png",
 	"360DegreeExpert" = "https://i.imgur.com/TfqWdfp.png",
 	"360DegreeExpertPlus" = "https://i.imgur.com/NA06k7F.png",
@@ -355,9 +355,7 @@ presence.on("UpdateData", async () => {
 				(preview.difficulty === preview.customDifficulty
 					? `${preview.gameMode} ${preview.difficulty}`
 					: `${preview.customDifficulty}`);
-			presenceData.smallImageKey = preview.playing
-				? Assets.Playing
-				: Assets.Paused;
+			presenceData.smallImageKey = preview.playing ? Assets.Play : Assets.Pause;
 			presenceData.smallImageText = preview.playing ? "Playing" : "Paused";
 			if (preview.playing) {
 				const timestamps = presence.getTimestamps(
@@ -380,8 +378,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = document.querySelector("#songName").textContent;
 		presenceData.state = document.querySelector("#playerName").textContent;
 		presenceData.smallImageKey = document.querySelector("div.btn.play")
-			? Assets.Paused
-			: Assets.Playing;
+			? Assets.Pause
+			: Assets.Play;
 		presenceData.smallImageText = document.querySelector("div.btn.play")
 			? "Paused"
 			: "Playing";
@@ -411,8 +409,8 @@ presence.on("UpdateData", async () => {
 			document.querySelectorAll(".playerTableRow")?.length
 		} player royale`;
 		presenceData.smallImageKey = document.querySelector("div.btn.play")
-			? Assets.Paused
-			: Assets.Playing;
+			? Assets.Pause
+			: Assets.Play;
 		presenceData.smallImageText = document.querySelector("div.btn.play")
 			? "Paused"
 			: "Playing";

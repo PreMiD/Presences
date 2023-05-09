@@ -24,10 +24,10 @@ async function getShortURL(url: string) {
 
 enum Assets {
 	Logo = "https://i.imgur.com/q3tKDRA.png",
-	Reading = "https://i.imgur.com/8vMPNni.png",
-	Searching = "https://i.imgur.com/oGQtnIY.png",
-	Pause = "https://i.imgur.com/NyZsbVO.png",
-	Play = "https://i.imgur.com/Y1m0KVP.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
 }
 
 async function getStrings() {
@@ -254,11 +254,11 @@ presence.on("UpdateData", async () => {
 					presenceData.details = strings.searchFor;
 					presenceData.state = search.value;
 					if (search.value.length <= 3) presenceData.state = "something...";
-					presenceData.smallImageKey = Assets.Searching;
+					presenceData.smallImageKey = Assets.Search;
 				} else if (pathname.includes("/search")) {
 					searching = true;
 					presenceData.details = strings.search;
-					presenceData.smallImageKey = Assets.Searching;
+					presenceData.smallImageKey = Assets.Search;
 				} else if (pathname.includes("/playlist/")) {
 					const playlistCover = await getShortURL(
 						document

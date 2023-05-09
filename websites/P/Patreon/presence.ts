@@ -13,7 +13,7 @@ const presence = new Presence({ clientId: "1013183483750907904" }),
 
 enum Assets {
 	Logo = "https://i.imgur.com/XIq6vjx.png",
-	Searching = "https://i.imgur.com/OIgfjTG.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `Query: ${document
 					.querySelector("input")
 					.getAttribute("value")}`;
-				presenceData.smallImageKey = Assets.Searching;
+				presenceData.smallImageKey = Assets.Search;
 			} else presenceData.details = "On searching page";
 			break;
 		case "posts":

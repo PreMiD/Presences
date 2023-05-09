@@ -45,11 +45,11 @@ presence.on(
 
 enum Assets {
 	Logo = "https://i.imgur.com/JJHnTn3.png",
-	Reading = "https://i.imgur.com/8vMPNni.png",
-	Searching = "https://i.imgur.com/oGQtnIY.png",
-	Pause = "https://i.imgur.com/NyZsbVO.png",
-	Play = "https://i.imgur.com/Y1m0KVP.png",
-	Live = "https://i.imgur.com/a1VVpnH.png",
+	Live = "https://i.imgur.com/n1AUYFX.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/search/")) {
 		presenceData.details = strings.search;
 		presenceData.state = pathname.split("/search/")[1];
-		presenceData.smallImageKey = Assets.Searching;
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 	} else if (pathname.includes(`/${topic}`)) {
 		presenceData.details = `Viewing ${capitaliseFirstLetter(topic)} news`;

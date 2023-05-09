@@ -14,8 +14,6 @@ async function getStrings() {
 
 enum Assets {
 	Logo = "https://i.imgur.com/mqJJ4p9.png",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
-	ReadingImage = "https://i.imgur.com/nese1O7.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,

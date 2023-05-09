@@ -3,10 +3,10 @@ const presence = new Presence({
 });
 
 enum Assets {
-	play = "https://i.imgur.com/6s4WyWY.png",
-	pause = "https://i.imgur.com/PrYtpQb.png",
-	reading = "https://i.imgur.com/wPUmqu5.png",
-	view = "https://i.imgur.com/hxvvGUi.png",
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
+	Viewing = "https://i.imgur.com/sNXN6K4.png",
 }
 
 enum Content {
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = textContent(".mini-player_name");
 		presenceData.state = textContent(".mini-player_artist");
-		presenceData.smallImageKey = playMusic ? Assets.play : Assets.pause;
+		presenceData.smallImageKey = playMusic ? Assets.Play : Assets.Pause;
 		presenceData.smallImageText = playMusic ? strings.playMusic : strings.pause;
 
 		if (logo) {
@@ -128,14 +128,14 @@ presence.on("UpdateData", async () => {
 
 			case "video":
 				presenceData.details = "Смотрит видео";
-				presenceData.smallImageKey = Assets.view;
+				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = strings.viewing;
 
 				if (document.querySelector(".vp-layer")) {
 					presenceData.state = textContent(".vp-layer-info_h");
 					presenceData.smallImageKey = video.paused
-						? Assets.pause
-						: Assets.play;
+						? Assets.Pause
+						: Assets.Play;
 					presenceData.smallImageText = video.paused
 						? strings.pause
 						: strings.playVideo;
@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Смотрит профиль ${textContent(
 					".__user-profile-name-decorator"
 				)}`;
-				presenceData.smallImageKey = Assets.view;
+				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = strings.viewing;
 
 				if (pathname.split("/")[3]) {
@@ -183,14 +183,14 @@ presence.on("UpdateData", async () => {
 			case "payments":
 			case "online":
 				presenceData.details = `Смотрит ${typeContent(pathname.split("/")[1])}`;
-				presenceData.smallImageKey = Assets.view;
+				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = strings.viewing;
 				break;
 
 			case "feed":
 			case "messages":
 				presenceData.details = `Читает ${typeContent(pathname.split("/")[1])}`;
-				presenceData.smallImageKey = Assets.reading;
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.reading;
 				break;
 
@@ -199,7 +199,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector(
 					".toolbar-layer_menu .nav-side_i.__ac .tico"
 				)?.lastChild?.textContent;
-				presenceData.smallImageKey = Assets.reading;
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.reading;
 				break;
 
@@ -210,7 +210,7 @@ presence.on("UpdateData", async () => {
 			case "bookmarks":
 				presenceData.details = "Смотрит закладки";
 				presenceData.state = textContent(".nav-side_i.__ac div");
-				presenceData.smallImageKey = Assets.view;
+				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = strings.viewing;
 				break;
 

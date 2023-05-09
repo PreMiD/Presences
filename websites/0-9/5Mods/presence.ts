@@ -5,8 +5,6 @@ const presence = new Presence({
 
 enum Assets {
 	Logo = "https://i.imgur.com/7IjImjZ.jpg",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
-	ReadingImage = "https://i.imgur.com/nese1O7.png",
 }
 
 presence.on("UpdateData", async () => {

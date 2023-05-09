@@ -3,8 +3,8 @@ const presence = new Presence({ clientId: "1007662369058594937" }),
 
 enum Assets {
 	Logo = "https://i.imgur.com/1yBi5L5.jpg",
-	Searching = "https://i.imgur.com/OIgfjTG.png",
-	Reading = "https://i.imgur.com/53N4eY6.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 		case "Search":
 			presenceData.details = "Searching for mangas";
 			presenceData.state = pageDetails;
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		case "Manga": {
 			presenceData.details = "Viewing a manga";
