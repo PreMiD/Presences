@@ -39,10 +39,10 @@ presence.on("UpdateData", async () => {
 		presenceData.state = recentSearchQuery;
 		if (
 			pageInput &&
-			pageInput.innerText &&
-			pageInput.innerText !== recentSearchQuery
+			pageInput.textContent &&
+			pageInput.textContent !== recentSearchQuery
 		)
-			presenceData.state = pageInput.innerText;
+			presenceData.state = pageInput.textContent;
 	}
 
 	if (document.location.pathname.toLowerCase().includes("/threads"))
