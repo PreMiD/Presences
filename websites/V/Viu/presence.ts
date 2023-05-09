@@ -90,7 +90,7 @@ async function generateToken() {
 	return response.json().then(x => x.token);
 }
 
- 
+/* eslint-disable camelcase */
 interface SeriesInfo {
 	is_movie: number;
 	series_id: string;
