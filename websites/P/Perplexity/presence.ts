@@ -2,10 +2,8 @@ const presence = new Presence({
 		clientId: "893871116945350726",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-	threadRegex =
-		/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/,
 	threadExportRegex = /([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})/i;
-var recentSearchQuery: string = null;
+let recentSearchQuery: string = null;
 // strings = presence.getStrings({
 // 	play: "presence.playback.playing",
 // 	pause: "presence.playback.paused",
@@ -21,8 +19,9 @@ presence.on("UpdateData", async () => {
 		pageInput = document.querySelector(".md\\:mb-md") as HTMLInputElement,
 		currentThread = document.location.pathname.match(threadExportRegex);
 
-	if (currentSearch && currentSearch != recentSearchQuery)
+	if (currentSearch && currentSearch !== recentSearchQuery){
 		recentSearchQuery = currentSearch;
+	}
 
 	presenceData.details = "Home";
 
@@ -41,13 +40,14 @@ presence.on("UpdateData", async () => {
 		if (
 			pageInput &&
 			pageInput.innerText &&
-			pageInput.innerText != recentSearchQuery
+			pageInput.innerText !== recentSearchQuery
 		)
 			presenceData.state = pageInput.innerText;
 	}
 
-	if (document.location.pathname.toLowerCase().includes("/threads"))
+	if (document.location.pathname.toLowerCase().includes("/threads")){
 		presenceData.details = "Searching threads";
+	}
 
 	if (privacy) {
 		delete presenceData.state;
@@ -55,7 +55,9 @@ presence.on("UpdateData", async () => {
 		if (presenceData.details.includes("Searching for"))
 			presenceData.details = "Searching";
 	}
-	if (hideButtons) delete presenceData.buttons;
+	if (hideButtons){
+		delete presenceData.buttons;
+	}
 
 	presence.setActivity(presenceData);
 });
