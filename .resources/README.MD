@@ -2,6 +2,8 @@
 
 In this folder you can find resource images which you can use to display the status of what the user is doing.
 
+[Imgur Album](https://imgur.com/a/5heP8LE)
+
 ## These Include:
 
 | IMAGE                                                                                 | NAME                                   |
@@ -22,3 +24,25 @@ In this folder you can find resource images which you can use to display the sta
 | <img src="repeat-one.png" style="background-color: rgba(0,0,0,25);" height="50px">    | [repeat-one.png](repeat-one.png)       |
 | <img src="premiere.png" style="background-color: rgba(0,0,0,25);" height="50px">      | [premiere.png](premiere.png)           |
 | <img src="premiere-live.png" style="background-color: rgba(0,0,0,25);" height="50px"> | [premiere-live.png](premiere-live.png) |
+
+
+```ts
+enum Assets {
+	Play = "https://i.imgur.com/lytENvp.png",
+	Pause = "https://i.imgur.com/NT77akx.png",
+	Stop = "https://i.imgur.com/8p9PINr.png",
+	Search = "https://i.imgur.com/ZVhazc7.png",
+	Question = "https://i.imgur.com/lqguVta.png",
+	Live = "https://i.imgur.com/n1AUYFX.png",
+	Reading = "https://i.imgur.com/PcbCZRj.png",
+	Writing = "https://i.imgur.com/jMdmkI9.png",
+	Call = "https://i.imgur.com/ujw4zJ9.png",
+	Vcall = "https://i.imgur.com/Lvxb6qi.png",
+	Downloading = "https://i.imgur.com/qPZwsd6.png",
+	Uploading = "https://i.imgur.com/ZdDRxeo.png",
+	Repeat = "https://i.imgur.com/mJ1qyqC.png",
+	RepeatOne = "https://i.imgur.com/kKqrQlA.png",
+	Premiere = "https://i.imgur.com/qiO6Yc0.png",
+	PremiereLive = "https://i.imgur.com/W97FVF6.png",
+}
+```
