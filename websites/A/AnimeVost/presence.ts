@@ -162,11 +162,9 @@ presence.on("UpdateData", async () => {
 				.trim();
 		presenceData.details = `В поисках ${animetype} a`;
 		if (websiteloc[3] !== "") {
-			const animeposter = (<HTMLImageElement>(
-				document.querySelector(".imgRadius")
-			)).src;
 			if (!privacy && logo) {
-				presenceData.largeImageKey = animeposter;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".imgRadius").src;
 				presenceData.smallImageKey = Assets.vostlogo;
 				presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 			} else {
@@ -174,11 +172,10 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = Assets.vostlogo;
 			}
 			if (video.duration) {
-				const episode = document.querySelector(".active").textContent;
 				presenceData.details = `Смотрит ${animetype} ${
 					!privacy ? animename : ""
 				}`;
-				presenceData.state = episode;
+				presenceData.state = document.querySelector(".active").textContent;
 				presenceData.smallImageKey = video.paused ? Assets.pause : Assets.play;
 				presenceData.smallImageText = video.paused
 					? strings.pause
