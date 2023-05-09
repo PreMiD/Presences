@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector<HTMLVideoElement>("video"),
 		search = document.querySelector<HTMLInputElement>("[id='search-input']");
 	if (search?.value) {
-		presenceData.details = "Searching for:";
+		presenceData.details = "Searching for";
 		presenceData.state = search?.value;
 		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.startsWith("/play")) {
