@@ -19,22 +19,22 @@ presence.on("UpdateData", async () => {
 		pageInput = document.querySelector(".md\\:mb-md") as HTMLInputElement,
 		currentThread = document.location.pathname.match(threadExportRegex);
 
-	if (currentSearch && currentSearch !== recentSearchQuery){
+	if (currentSearch && currentSearch !== recentSearchQuery)
 		recentSearchQuery = currentSearch;
-	}
 
 	presenceData.details = "Home";
 
 	if (document.location.pathname.toLowerCase().includes("/search")) {
 		presenceData.details = "Searching for";
 
-		if (currentThread)
+		if (currentThread) {
 			presenceData.buttons = [
 				{
 					label: "Open thread",
 					url: `https://www.perplexity.ai/search/${currentThread[0]}`,
 				},
 			];
+		}
 
 		presenceData.state = recentSearchQuery;
 		if (
@@ -45,9 +45,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = pageInput.innerText;
 	}
 
-	if (document.location.pathname.toLowerCase().includes("/threads")){
+	if (document.location.pathname.toLowerCase().includes("/threads"))
 		presenceData.details = "Searching threads";
-	}
 
 	if (privacy) {
 		delete presenceData.state;
@@ -55,9 +54,8 @@ presence.on("UpdateData", async () => {
 		if (presenceData.details.includes("Searching for"))
 			presenceData.details = "Searching";
 	}
-	if (hideButtons){
+	if (hideButtons)
 		delete presenceData.buttons;
-	}
 
 	presence.setActivity(presenceData);
 });
