@@ -4,10 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	threadExportRegex = /([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})/i;
 let recentSearchQuery: string = null;
-// strings = presence.getStrings({
-// 	play: "presence.playback.playing",
-// 	pause: "presence.playback.paused",
-// });
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "lg",
