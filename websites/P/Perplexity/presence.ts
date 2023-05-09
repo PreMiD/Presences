@@ -1,8 +1,9 @@
 const presence = new Presence({
-	clientId: "893871116945350726",
-}),
+		clientId: "893871116945350726",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-	threadRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/,
+	threadRegex =
+		/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/,
 	threadExportRegex = /([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})/i;
 var recentSearchQuery: string = null;
 // strings = presence.getStrings({
@@ -11,9 +12,9 @@ var recentSearchQuery: string = null;
 // });
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp,
-	},
+			largeImageKey: "lg",
+			startTimestamp: browsingTimestamp,
+		},
 		privacy = await presence.getSetting<boolean>("privacy"),
 		hideButtons = await presence.getSetting<boolean>("hideButtons"),
 		currentSearch = new URL(document.location.href).searchParams.get("q"),
@@ -31,13 +32,17 @@ presence.on("UpdateData", async () => {
 		if (currentThread)
 			presenceData.buttons = [
 				{
-					"label": "Open thread",
-					"url": `https://www.perplexity.ai/search/${currentThread[0]}`,
+					label: "Open thread",
+					url: `https://www.perplexity.ai/search/${currentThread[0]}`,
 				},
 			];
 
 		presenceData.state = recentSearchQuery;
-		if (pageInput && pageInput.innerText && pageInput.innerText != recentSearchQuery)
+		if (
+			pageInput &&
+			pageInput.innerText &&
+			pageInput.innerText != recentSearchQuery
+		)
 			presenceData.state = pageInput.innerText;
 	}
 
@@ -50,7 +55,7 @@ presence.on("UpdateData", async () => {
 		if (presenceData.details.includes("Searching for"))
 			presenceData.details = "Searching";
 	}
-	if(hideButtons) delete presenceData.buttons;
+	if (hideButtons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
 });
