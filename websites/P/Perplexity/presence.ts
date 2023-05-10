@@ -7,15 +7,17 @@ let recentSearchQuery: string = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg",
+			largeImageKey: "https://i.imgur.com/gdCcljx.png",
 			startTimestamp: browsingTimestamp,
 		},
-		privacy = await presence.getSetting<boolean>("privacy"),
-		hideButtons = await presence.getSetting<boolean>("hideButtons"),
-		currentSearch = new URL(document.location.href).searchParams.get("q"),
+		[privacy, hideButtons] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("hideButtons"),
+		]),
+		currentSearch = new URL(href).searchParams.get("q"),
 		pageInput = document.querySelector<HTMLInputElement>(".md\\:mb-md"),
-		currentThread = document.location.pathname.match(threadExportRegex),
-		currentPage = document.location.pathname.split("/")[1];
+		currentThread = pathname.match(threadExportRegex),
+		currentPage = pathname.split("/")[1];
 
 	if (currentSearch && currentSearch !== recentSearchQuery)
 		recentSearchQuery = currentSearch;
@@ -26,14 +28,14 @@ presence.on("UpdateData", async () => {
 
 	switch (currentPage.toLowerCase()) {
 		case "search":
-			presenceData.details = "Searching for";
-			presenceData.smallImageKey = "search";
+			presenceData.details = privacy ? "Searching" : "Searching for";
+			presenceData.smallImageKey = "https://i.imgur.com/wYVlwJX.png";
 
 			if (currentThread) {
 				presenceData.buttons = [
 					{
 						label: "Open thread",
-						url: `https://www.perplexity.ai/search/${currentThread[0]}`,
+						url: href,
 					},
 				];
 			}
@@ -49,7 +51,7 @@ presence.on("UpdateData", async () => {
 
 		case "threads":
 			presenceData.details = "Searching threads";
-			presenceData.smallImageKey = "threads";
+			presenceData.smallImageKey = "https://i.imgur.com/3FPH9L0.png";
 			break;
 
 		case "about":
@@ -74,13 +76,8 @@ presence.on("UpdateData", async () => {
 			break;
 	}
 
-	if (privacy) {
-		delete presenceData.state;
-		delete presenceData.buttons;
-		if (presenceData.details.includes("Searching for"))
-			presenceData.details = "Searching";
-	}
-	if (hideButtons) delete presenceData.buttons;
+	if (privacy && presenceData.state) delete presenceData.state;
+	if (hideButtons && presenceData.buttons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
 });
