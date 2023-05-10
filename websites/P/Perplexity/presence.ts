@@ -6,11 +6,7 @@ const presence = new Presence({
 let recentSearchQuery: string = null;
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/gdCcljx.png",
-			startTimestamp: browsingTimestamp,
-		},
-		{ href, pathname } = document.location,
+	const { href, pathname } = document.location,
 		[privacy, hideButtons, iconType] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("hideButtons"),
