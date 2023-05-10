@@ -6,21 +6,25 @@ const presence = new Presence({
 let recentSearchQuery: string = null;
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/gdCcljx.png",
-			startTimestamp: browsingTimestamp,
-		},
-		{ pathname } = document.location,
+	const { pathname } = document.location,
 		{ href } = document.location,
-		[privacy, hideButtons] = await Promise.all([
+		[privacy, hideButtons, iconType] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("hideButtons"),
+			presence.getSetting<number>("iconType"),
 		]),
 		currentSearch = new URL(href).searchParams.get("q"),
 		pageInput = document.querySelector<HTMLInputElement>(".md\\:mb-md"),
 		currentThread = pathname.match(threadExportRegex),
-		currentPage = pathname.split("/")[1];
-
+		currentPage = pathname.split("/")[1],
+		largeImage =
+			["https://i.imgur.com/gdCcljx.png", "https://i.imgur.com/xp4o0wQ.png"][
+				iconType
+			] || "https://i.imgur.com/gdCcljx.png",
+		presenceData: PresenceData = {
+			largeImageKey: largeImage,
+			startTimestamp: browsingTimestamp,
+		};
 	if (currentSearch && currentSearch !== recentSearchQuery)
 		recentSearchQuery = currentSearch;
 
