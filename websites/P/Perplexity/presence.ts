@@ -10,8 +10,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/gdCcljx.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location,
-		{ href } = document.location,
+		{ href, pathname } = document.location,
 		[privacy, hideButtons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("hideButtons"),
