@@ -5,8 +5,8 @@ const presence = new Presence({
 
 enum Assets {
 	Logo = "https://i.imgur.com/rMcEfBA.jpg",
-	Pause = "https://i.imgur.com/0A75vqT.png",
-	Play = "https://i.imgur.com/Dj5dekr.png",
+	Pause = "https://i.imgur.com/y2t3fmX.png",
+	Play = "https://i.imgur.com/ZPrPVKx.png",
 }
 
 const getVideoStatus = (
