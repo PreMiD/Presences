@@ -18,7 +18,7 @@
 	"settings": [
 		{
 			"id": "privacy",
-			"title": "Search Privacy\n(includes btns)",
+			"title": "Search Privacy (includes btns)",
 			"icon": "fad fa-user-secret",
 			"value": false
 		},

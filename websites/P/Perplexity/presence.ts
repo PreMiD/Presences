@@ -14,36 +14,65 @@ presence.on("UpdateData", async () => {
 		hideButtons = await presence.getSetting<boolean>("hideButtons"),
 		currentSearch = new URL(document.location.href).searchParams.get("q"),
 		pageInput = document.querySelector<HTMLInputElement>(".md\\:mb-md"),
-		currentThread = document.location.pathname.match(threadExportRegex);
+		currentThread = document.location.pathname.match(threadExportRegex),
+		currentPage = document.location.pathname.split("/")[1];
 
 	if (currentSearch && currentSearch !== recentSearchQuery)
 		recentSearchQuery = currentSearch;
 
 	presenceData.details = "Home";
 
-	if (document.location.pathname.toLowerCase().includes("/search")) {
-		presenceData.details = "Searching for";
+	if (!currentPage) return presence.setActivity(presenceData);
 
-		if (currentThread) {
-			presenceData.buttons = [
-				{
-					label: "Open thread",
-					url: `https://www.perplexity.ai/search/${currentThread[0]}`,
-				},
-			];
-		}
+	switch (currentPage.toLowerCase()) {
+		case "search":
+			presenceData.details = "Searching for";
+			presenceData.smallImageKey = "search";
 
-		presenceData.state = recentSearchQuery;
-		if (
-			pageInput &&
-			pageInput.textContent &&
-			pageInput.textContent !== recentSearchQuery
-		)
-			presenceData.state = pageInput.textContent;
+			if (currentThread) {
+				presenceData.buttons = [
+					{
+						label: "Open thread",
+						url: `https://www.perplexity.ai/search/${currentThread[0]}`,
+					},
+				];
+			}
+
+			presenceData.state = recentSearchQuery;
+			if (
+				pageInput &&
+				pageInput.textContent &&
+				pageInput.textContent !== recentSearchQuery
+			)
+				presenceData.state = pageInput.textContent;
+			break;
+
+		case "threads":
+			presenceData.details = "Searching threads";
+			presenceData.smallImageKey = "threads";
+			break;
+
+		case "about":
+			presenceData.details = "Reading about";
+			break;
+
+		case "blog":
+			presenceData.details = "Reading blog";
+			break;
+
+		case "privacy":
+			presenceData.details = "Reading privacy policy";
+			break;
+
+		case "tos":
+			presenceData.details = "Reading terms of service";
+			break;
+
+		default:
+			presenceData.details = "Browsing";
+			presenceData.state = currentPage;
+			break;
 	}
-
-	if (document.location.pathname.toLowerCase().includes("/threads"))
-		presenceData.details = "Searching threads";
 
 	if (privacy) {
 		delete presenceData.state;
