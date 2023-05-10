@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 
   switch (page) {
     case "anime": {
-      presenceData.details = `Watching an anime`;
+      presenceData.details = "Watching an anime";
       presenceData.state = document
         .querySelector("h3.titleA")
         .textContent.trim();
@@ -34,9 +34,8 @@ presence.on("UpdateData", async () => {
           .querySelector(".cover")
           .getAttribute("src");
       }
-      if (episode) {
+      if (episode)
         presenceData.state += ` - Episode ${episode}`;
-      }
       break;
     }
     default:
