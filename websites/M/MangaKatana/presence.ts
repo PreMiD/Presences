@@ -128,11 +128,13 @@ presence.on("UpdateData", async () => {
 				presenceData.state = textContent(
 					"ol.uk-breadcrumb li:nth-child(3) span"
 				);
+
 				if (pages) {
 					for (const page of document.querySelectorAll("#imgs img"))
 						observer.observe(page);
 					presenceData.largeImageKey = localStorage.getItem("currentMangaPage");
 				} else presenceData.largeImageKey = Assets.Logo;
+
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.reading;
 				presenceData.buttons = [
