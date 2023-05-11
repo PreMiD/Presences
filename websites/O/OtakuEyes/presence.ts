@@ -1,6 +1,6 @@
 const presence = new Presence({
-    clientId: "784067980086607952",
-  }),
+  clientId: "784067980086607952",
+}),
   startTimestamp: number = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
@@ -12,14 +12,14 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "https://i.imgur.com/wFmlFjg.png",
+    largeImageKey: "https://i.imgur.com/b3H1vRU.png",
     startTimestamp,
   };
   const pathnameArray = document.location.pathname.split("/");
   const page = pathnameArray[1];
   const episode = pathnameArray[3];
   const [showCover] = await Promise.all([
-    presence.getSetting < boolean > "cover",
+    presence.getSetting <boolean>("cover"),
   ]);
   strings = await getStrings();
 

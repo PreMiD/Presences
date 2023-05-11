@@ -6,8 +6,8 @@
 	},
 	"service": "OtakuEyes",
 	"description": {
-		"en": "My own platform for watching animes",
-		"fr": "Mon site pour regarder des animes"
+		"en": "OtakuEyes is a web application that allows you to watch anime online. OtakuEyes have the most differents anime sources.",
+		"fr": "Otaku Eyes est une application web qui vous permet de regarder des anime en ligne. Otaku Eyes a les sources d'anime les plus différentes."
 	},
 	"url": "192.168.0.7",
 	"version": "1.0.0",
