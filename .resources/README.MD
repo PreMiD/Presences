@@ -2,8 +2,6 @@
 
 In this folder you can find resource images which you can use to display the status of what the user is doing.
 
-[Imgur Album](https://imgur.com/a/MG4wtTg)
-
 ## These Include:
 
 | IMAGE                                                                                 | NAME                                   |
@@ -24,7 +22,7 @@ In this folder you can find resource images which you can use to display the sta
 | <img src="repeat-one.png" style="background-color: rgba(0,0,0,25);" height="50px">    | [repeat-one.png](repeat-one.png)       |
 | <img src="premiere.png" style="background-color: rgba(0,0,0,25);" height="50px">      | [premiere.png](premiere.png)           |
 | <img src="premiere-live.png" style="background-color: rgba(0,0,0,25);" height="50px"> | [premiere-live.png](premiere-live.png) |
-| <img src="viewing.png" style="background-color: rgba(0,0,0,25);" height="50px"> | [viewing.png](viewing.png) |
+| <img src="viewing.png" style="background-color: rgba(0,0,0,25);" height="50px">       | [viewing.png](viewing.png) |
 
 ```ts
 enum Assets {
@@ -38,7 +36,7 @@ enum Assets {
 	Writing = "https://i.imgur.com/iVwT1cq.png",
 	Call = "https://i.imgur.com/ybYPnY6.png",
 	Vcall = "https://i.imgur.com/n90m9dC.png",
-	Downloading = "https://i.imgur.com/yu07ClA.png",
+	Downloading = "https://i.imgur.com/3GxnxJl.png",
 	Uploading = "https://i.imgur.com/8TdAXtD.png",
 	Repeat = "https://i.imgur.com/lStzn9U.png",
 	RepeatOne = "https://i.imgur.com/wp6u4L5.png",
