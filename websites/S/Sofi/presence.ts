@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Assets {
-	Viewing = "https://i.imgur.com/sNXN6K4.png",
+	Viewing = "https://i.imgur.com/jw8hU7y.png",
 	Buy = "https://i.imgur.com/JKLNlvT.png",
 	Submit = "https://i.imgur.com/wDDm0VX.png",
 	Edit = "https://i.imgur.com/TCJe2xJ.png",

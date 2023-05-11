@@ -3,8 +3,8 @@ const presence = new Presence({ clientId: "1007662369058594937" }),
 
 enum Assets {
 	Logo = "https://i.imgur.com/1yBi5L5.jpg",
-	Search = "https://i.imgur.com/ZVhazc7.png",
-	Reading = "https://i.imgur.com/PcbCZRj.png",
+	Search = "https://i.imgur.com/MVpU1DJ.png",
+	Reading = "https://i.imgur.com/YJBDFSZ.png",
 }
 
 presence.on("UpdateData", async () => {

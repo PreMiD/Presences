@@ -57,8 +57,8 @@ const animetypes: { [key: string]: string } = {
 
 enum Assets {
 	VostLogo = "https://i.imgur.com/wStmaRE.png",
-	Play = "https://i.imgur.com/lytENvp.png",
-	Pause = "https://i.imgur.com/NT77akx.png",
+	Play = "https://i.imgur.com/C30VYuh.png",
+	Pause = "https://i.imgur.com/yjIdXJ3.png",
 	Ongoing = "https://i.imgur.com/bdSukvD.png",
 	Anons = "https://i.imgur.com/8vJY6ok.png",
 	"boyevyye-iskusstva" = "https://i.imgur.com/fIFC4Bn.png",

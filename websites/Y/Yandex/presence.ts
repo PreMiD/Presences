@@ -8,8 +8,8 @@ const presence = new Presence({
 
 enum Assets {
 	Logo = "https://i.imgur.com/SFXKtLF.png",
-	Search = "https://i.imgur.com/ZVhazc7.png",
-	Viewing = "https://i.imgur.com/sNXN6K4.png",
+	Search = "https://i.imgur.com/MVpU1DJ.png",
+	Viewing = "https://i.imgur.com/jw8hU7y.png",
 }
 
 async function getStrings() {

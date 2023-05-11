@@ -40,10 +40,10 @@ function logoCheck(logoNumber: number) {
 		: Logo.RedShowtime; // Default (Red)
 }
 enum Assets {
-	Play = "https://i.imgur.com/lytENvp.png",
-	Pause = "https://i.imgur.com/NT77akx.png",
-	Search = "https://i.imgur.com/ZVhazc7.png",
-	Reading = "https://i.imgur.com/PcbCZRj.png",
+	Play = "https://i.imgur.com/C30VYuh.png",
+	Pause = "https://i.imgur.com/yjIdXJ3.png",
+	Search = "https://i.imgur.com/MVpU1DJ.png",
+	Reading = "https://i.imgur.com/YJBDFSZ.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,

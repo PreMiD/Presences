@@ -25,9 +25,9 @@ enum Assets {
 	Loading = "https://i.imgur.com/uh6vSQm.gif",
 	LogoDiscoveryPlus = "https://i.imgur.com/BQ1MBwk.png",
 	LogoDiscovery = "https://i.imgur.com/ir2Ysr1.png",
-	Play = "https://i.imgur.com/lytENvp.png",
-	Pause = "https://i.imgur.com/NT77akx.png",
-	Search = "https://i.imgur.com/ZVhazc7.png",
+	Play = "https://i.imgur.com/C30VYuh.png",
+	Pause = "https://i.imgur.com/yjIdXJ3.png",
+	Search = "https://i.imgur.com/MVpU1DJ.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;

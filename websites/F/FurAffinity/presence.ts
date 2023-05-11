@@ -20,7 +20,7 @@ function imgPath(path: string, hostname: string) {
 }
 enum Assets {
 	Logo = "https://i.imgur.com/AYTzoMo.png",
-	Search = "https://i.imgur.com/ZVhazc7.png",
+	Search = "https://i.imgur.com/MVpU1DJ.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,

@@ -2,7 +2,7 @@
 
 In this folder you can find resource images which you can use to display the status of what the user is doing.
 
-[Imgur Album](https://imgur.com/a/5heP8LE)
+[Imgur Album](https://imgur.com/a/MG4wtTg)
 
 ## These Include:
 
@@ -28,22 +28,22 @@ In this folder you can find resource images which you can use to display the sta
 
 ```ts
 enum Assets {
-	Play = "https://i.imgur.com/lytENvp.png",
-	Pause = "https://i.imgur.com/NT77akx.png",
-	Stop = "https://i.imgur.com/8p9PINr.png",
-	Search = "https://i.imgur.com/ZVhazc7.png",
-	Question = "https://i.imgur.com/lqguVta.png",
-	Live = "https://i.imgur.com/n1AUYFX.png",
-	Reading = "https://i.imgur.com/PcbCZRj.png",
-	Writing = "https://i.imgur.com/jMdmkI9.png",
-	Call = "https://i.imgur.com/ujw4zJ9.png",
-	Vcall = "https://i.imgur.com/Lvxb6qi.png",
-	Downloading = "https://i.imgur.com/qPZwsd6.png",
-	Uploading = "https://i.imgur.com/ZdDRxeo.png",
-	Repeat = "https://i.imgur.com/mJ1qyqC.png",
-	RepeatOne = "https://i.imgur.com/kKqrQlA.png",
-	Premiere = "https://i.imgur.com/qiO6Yc0.png",
-	PremiereLive = "https://i.imgur.com/W97FVF6.png",
-	Viewing = "https://i.imgur.com/sNXN6K4.png",
+	Play = "https://i.imgur.com/C30VYuh.png",
+	Pause = "https://i.imgur.com/yjIdXJ3.png,
+	Stop = "https://i.imgur.com/QYXwv1U.png",
+	Search = "https://i.imgur.com/MVpU1DJ.png",
+	Question = "https://i.imgur.com/MVpU1DJ.png",
+	Live = "https://i.imgur.com/039FHPW.png",
+	Reading = "https://i.imgur.com/YJBDFSZ.png",
+	Writing = "https://i.imgur.com/iVwT1cq.png",
+	Call = "https://i.imgur.com/ybYPnY6.png",
+	Vcall = "https://i.imgur.com/n90m9dC.png",
+	Downloading = "https://i.imgur.com/yu07ClA.png",
+	Uploading = "https://i.imgur.com/8TdAXtD.png",
+	Repeat = "https://i.imgur.com/lStzn9U.png",
+	RepeatOne = "https://i.imgur.com/wp6u4L5.png",
+	Premiere = "https://i.imgur.com/WoxOoYQ.png",
+	PremiereLive = "https://i.imgur.com/hAOiR34.png",
+	Viewing = "https://i.imgur.com/jw8hU7y.png",
 }
 ```

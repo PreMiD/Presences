@@ -26,9 +26,9 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 enum Assets {
 	Logo = "https://i.imgur.com/DrxgYIA.png",
-	Search = "https://i.imgur.com/ZVhazc7.png",
-	Reading = "https://i.imgur.com/PcbCZRj.png",
-	Viewing = "https://i.imgur.com/sNXN6K4.png",
+	Search = "https://i.imgur.com/MVpU1DJ.png",
+	Reading = "https://i.imgur.com/YJBDFSZ.png",
+	Viewing = "https://i.imgur.com/jw8hU7y.png",
 }
 
 function textContent(tags: string) {
