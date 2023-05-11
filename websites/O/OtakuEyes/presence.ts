@@ -8,9 +8,8 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "https://i.imgur.com/b3H1vRU.png",
 		startTimestamp,
 	};
-	const pathnameArray = document.location.pathname.split("/");
-	const page = pathnameArray[1];
-	const episode = pathnameArray[3];
+
+	const [page, , episode] = document.location.pathname.split("/").slice(1, 4);
 	const [showCover] = await Promise.all([
 		presence.getSetting<boolean>("cover"),
 	]);
