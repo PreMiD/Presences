@@ -14,7 +14,6 @@ presence.on("UpdateData", async () => {
 		]),
 		currentSearch = new URL(href).searchParams.get("q"),
 		pageInput = document.querySelector<HTMLInputElement>(".md\\:mb-md"),
-		currentThread = pathname.match(threadExportRegex),
 		currentPage = pathname.split("/")[1],
 		largeImage =
 			["https://i.imgur.com/gdCcljx.png", "https://i.imgur.com/xp4o0wQ.png"][
