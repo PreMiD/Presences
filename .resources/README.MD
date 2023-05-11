@@ -29,7 +29,7 @@ In this folder you can find resource images which you can use to display the sta
 ```ts
 enum Assets {
 	Play = "https://i.imgur.com/C30VYuh.png",
-	Pause = "https://i.imgur.com/yjIdXJ3.png,
+	Pause = "https://i.imgur.com/yjIdXJ3.png",
 	Stop = "https://i.imgur.com/QYXwv1U.png",
 	Search = "https://i.imgur.com/MVpU1DJ.png",
 	Question = "https://i.imgur.com/MVpU1DJ.png",
