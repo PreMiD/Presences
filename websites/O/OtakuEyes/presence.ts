@@ -9,10 +9,8 @@ presence.on("UpdateData", async () => {
 		startTimestamp,
 	};
 
-	const [page, , episode] = document.location.pathname.split("/").slice(1, 4);
-	const [showCover] = await Promise.all([
-		presence.getSetting<boolean>("cover"),
-	]);
+	const [page, , episode] = document.location.pathname.split("/").slice(1, 4),
+		[showCover] = await Promise.all([presence.getSetting<boolean>("cover")]);
 
 	switch (page) {
 		case "anime": {
