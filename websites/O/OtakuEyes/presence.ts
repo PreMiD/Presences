@@ -4,13 +4,12 @@ const presence = new Presence({
 	startTimestamp: number = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/b3H1vRU.png",
-		startTimestamp,
-	};
-
 	const [page, , episode] = document.location.pathname.split("/").slice(1, 4),
-		[showCover] = await Promise.all([presence.getSetting<boolean>("cover")]);
+		[showCover] = await Promise.all([presence.getSetting<boolean>("cover")]),
+		presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/b3H1vRU.png",
+			startTimestamp,
+		};
 
 	switch (page) {
 		case "anime": {
