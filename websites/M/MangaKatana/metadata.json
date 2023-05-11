@@ -31,7 +31,7 @@
 			"value": false
 		},
 		{
-			"id": "logo",
+			"id": "cover",
 			"if": {
 				"privacy": false
 			},
@@ -59,7 +59,7 @@
 			"if": {
 				"privacy": false
 			},
-			"title": "Show the page of the manga you are currently reading",
+			"title": "Show the page of the manga currently reading",
 			"icon": "fad fa-images",
 			"value": false
 		}

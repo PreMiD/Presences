@@ -29,10 +29,10 @@ async function getStrings() {
 }
 
 enum Assets {
-	Logo = "https://i.imgur.com/41vZ7bA.png",
-	Searching = "https://i.imgur.com/UhPgTRn.png",
-	Viewing = "https://i.imgur.com/RMg2Qgg.png",
-	Reading = "https://i.imgur.com/wPUmqu5.png",
+	Cover = "https://i.imgur.com/41vZ7bA.png",
+	Search = "https://i.imgur.com/MVpU1DJ.png",
+	Viewing = "https://i.imgur.com/jw8hU7y.png",
+	Reading = "https://i.imgur.com/YJBDFSZ.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -59,13 +59,13 @@ const observer = new IntersectionObserver(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.Logo,
+			largeImageKey: Assets.Cover,
 			startTimestamp: browsingTimestamp,
 		},
-		[newLang, privacy, logo, time, buttons, pages] = await Promise.all([
+		[newLang, privacy, cover, time, buttons, pages] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("logo"),
+			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("pages"),
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = privacy
 				? strings.searchSomething
 				: strings.searchFor;
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 			presenceData.state = getSearchState();
 
@@ -133,7 +133,7 @@ presence.on("UpdateData", async () => {
 					for (const page of document.querySelectorAll("#imgs img"))
 						observer.observe(page);
 					presenceData.largeImageKey = localStorage.getItem("currentMangaPage");
-				} else presenceData.largeImageKey = Assets.Logo;
+				} else presenceData.largeImageKey = Assets.Cover;
 
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.reading;
@@ -154,7 +154,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = privacy
 				? strings.searchSomething
 				: strings.searchFor;
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 			presenceData.state = getSearchState();
 			break;
@@ -163,7 +163,7 @@ presence.on("UpdateData", async () => {
 		case "bookmarks":
 			presenceData.details = strings.editing;
 			presenceData.state = title;
-			presenceData.smallImageKey = Assets.Logo;
+			presenceData.smallImageKey = Assets.Cover;
 			break;
 	}
 
@@ -171,12 +171,12 @@ presence.on("UpdateData", async () => {
 		presenceData.details = privacy
 			? strings.searchSomething
 			: strings.searchFor;
-		presenceData.smallImageKey = Assets.Searching;
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.search;
 		presenceData.state = searchInput;
 	}
 
-	if (!logo || privacy) presenceData.largeImageKey = Assets.Logo;
+	if (!cover || privacy) presenceData.largeImageKey = Assets.Cover;
 	if (!buttons || privacy) delete presenceData.buttons;
 	if (!time) delete presenceData.startTimestamp;
 	if (privacy) delete presenceData.state;
