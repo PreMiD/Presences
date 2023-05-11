@@ -3,13 +3,6 @@ const presence = new Presence({
 	}),
 	startTimestamp: number = Math.floor(Date.now() / 1000);
 
-async function getStrings() {
-	return presence.getStrings({
-		browsing: "general.browsing",
-	});
-}
-let strings: Awaited<ReturnType<typeof getStrings>>;
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/b3H1vRU.png",
@@ -21,7 +14,6 @@ presence.on("UpdateData", async () => {
 	const [showCover] = await Promise.all([
 		presence.getSetting<boolean>("cover"),
 	]);
-	strings = await getStrings();
 
 	switch (page) {
 		case "anime": {
