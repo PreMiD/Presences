@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = privacy ? "Searching" : "Searching for";
 			presenceData.smallImageKey = "https://i.imgur.com/wYVlwJX.png";
 
-			if (currentThread) {
+			if (pathname.match(threadExportRegex)) {
 				presenceData.buttons = [
 					{
 						label: "Open thread",
