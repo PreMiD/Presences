@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = title;
 			presenceData.smallImageKey = Assets.Search;
 		} else if (pathname.includes("wiki") && main !== "main page") {
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			const firstHeading = document
 				.querySelector("#firstHeading")
 				.textContent?.toLowerCase();
