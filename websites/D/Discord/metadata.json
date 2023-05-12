@@ -23,7 +23,7 @@
 	},
 	"url": "discord.com",
 	"regExp": "([a-z0-9-]+[.])*(discord[.]com|discord[.]gg|discordapp[.]com|discordmerch[.]com|discordstatus[.]com)[/]",
-	"version": "3.0.24",
+	"version": "3.0.25",
 	"logo": "https://i.imgur.com/MysN6Lu.png",
 	"thumbnail": "https://i.imgur.com/0v13nHT.png",
 	"color": "#7289DA",

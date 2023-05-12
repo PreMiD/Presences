@@ -15,7 +15,7 @@
 	},
 	"url": "wiktionary.org",
 	"regExp": "([a-z0-9-]+[.])+wiktionary[.]org[/]",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://i.imgur.com/veGwn6G.png",
 	"thumbnail": "https://i.imgur.com/dqjnnV8.png",
 	"color": "#f9f9f9",

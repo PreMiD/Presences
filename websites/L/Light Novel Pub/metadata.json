@@ -13,7 +13,7 @@
 		"lightnovelpub.com"
 	],
 	"regExp": "([a-z0-9]+[.])?lightnovelpub[.]com",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/JgWlu7j.png",
 	"thumbnail": "https://i.imgur.com/mulJD3I.png",
 	"color": "#546573",

@@ -10,7 +10,7 @@
 	},
 	"url": "server.pro",
 	"regExp": "([a-z0-9-]+[.])*server[.]pro[/]",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/EhKZen3.png",
 	"thumbnail": "https://i.imgur.com/akAwZ0m.png",
 	"color": "#418AC9",

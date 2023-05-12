@@ -13,7 +13,7 @@
 	},
 	"url": "quora.com",
 	"regExp": "([a-z0-9]+)[.]quora[.]com",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/WBwFUzx.png",
 	"thumbnail": "https://i.imgur.com/rrhEpI3.png",
 	"color": "#A70000",

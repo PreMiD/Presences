@@ -17,7 +17,7 @@
 		"playvalorant.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*(riotgames|leagueoflegends|playruneterra|playvalorant)[.]com[/]",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/ren8U6k.png",
 	"thumbnail": "https://i.imgur.com/rP0vQlr.jpg",
 	"color": "#d13639",

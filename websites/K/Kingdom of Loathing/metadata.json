@@ -15,7 +15,7 @@
 	},
 	"url": "kingdomofloathing.com",
 	"regExp": "([a-z0-9]+\\.)*kingdomofloathing.com|(127\\.0\\.0\\.1|localhost):6008\\d",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/ZRf8Giq.png",
 	"thumbnail": "https://i.imgur.com/ZhJPGTN.png",
 	"color": "#0000ff",

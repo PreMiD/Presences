@@ -17,7 +17,7 @@
 	},
 	"url": "kissasian.li",
 	"regExp": "kissasian([.][a-z]+)+[/]",
-	"version": "3.0.11",
+	"version": "3.0.12",
 	"logo": "https://i.imgur.com/B8evsEL.png",
 	"thumbnail": "https://i.imgur.com/AG3nCsQ.png",
 	"color": "#f5d80b",
