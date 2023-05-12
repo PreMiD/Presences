@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 		presenceData = {
 			details: capitalise(tokens[6].split("-")),
 			largeImageKey: "https://i.imgur.com/ChKRz5r.png",
-			smallImageKey: video.paused ? "pause" : "play",
+			smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 			smallImageText: video.paused
 				? (await strings).pause
 				: (await strings).play,

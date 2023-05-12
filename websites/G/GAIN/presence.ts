@@ -74,7 +74,7 @@ gain.on("UpdateData", async () => {
 				Math.floor(video?.duration)
 			);
 
-			presenceData.smallImageKey = video?.paused ? "pause" : "play";
+			presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video?.paused
 				? (await gainStrings).pause
 				: (await gainStrings).play;

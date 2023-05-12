@@ -10,6 +10,10 @@ const presence = new Presence({
 		else return;
 	};
 
+enum Assets {
+	Logo = "https://i.imgur.com/L6BgeAa.png",
+}
+
 function setObject(path: string) {
 	switch (path) {
 		case "/": {
@@ -104,7 +108,7 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/L6BgeAa.png",
+			largeImageKey: Assets.Logo,
 		},
 		path = location.pathname,
 		query = location.search,

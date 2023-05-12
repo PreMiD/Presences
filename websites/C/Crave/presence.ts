@@ -1,10 +1,14 @@
 const presence = new Presence({
 		clientId: "1001288215388495953",
 	}),
-	browsingStamp = Date.now();
+	browsingStamp = Math.floor(Date.now() / 1000);
+
+enum Assets {
+	Logo = "https://i.imgur.com/uMjBwfF.png",
+}
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = { largeImageKey: "crave_logo" };
+	const presenceData: PresenceData = { largeImageKey: Assets.Logo };
 
 	if (document.querySelector(".jw-video")) {
 		// if contains video

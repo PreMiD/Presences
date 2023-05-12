@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 				""
 			);
 
-			presenceData.smallImageKey = ShowData.paused ? "pause" : "play";
+			presenceData.smallImageKey = ShowData.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = ShowData.paused
 				? strings.paused
 				: strings.play;

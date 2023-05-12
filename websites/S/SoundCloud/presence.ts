@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
 					.style.backgroundImage.match(/"(.*)"/)?.[1]
 					.replace("-t50x50.jpg", "-t500x500.jpg") ?? "soundcloud";
 		}
-		presenceData.smallImageKey = playing ? "play" : "pause";
+		presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 		presenceData.smallImageText = strings[playing ? "play" : "pause"];
 
 		if (showButtons) {

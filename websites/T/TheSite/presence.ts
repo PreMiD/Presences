@@ -13,7 +13,7 @@ const presence = new Presence({
 		else return "Loading...";
 	},
 	videoStatus = (video: HTMLVideoElement): string => {
-		return video.paused ? "pause" : "play";
+		return video.paused ? Assets.Pause : Assets.Play;
 	};
 
 let oldUrl: string,

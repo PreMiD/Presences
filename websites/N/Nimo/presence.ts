@@ -188,7 +188,7 @@ presence.on("UpdateData", async () => {
 					{ label: strings.watchVideo, url: document.URL },
 				];
 			} else presenceData.details = strings.watchingVid;
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;
 		} else {
 			if (!privacy) {

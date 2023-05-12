@@ -12,6 +12,9 @@ const presence = new Presence({
 		if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
 		else return "Loading...";
 	};
+enum Assets {
+	Logo = "https://i.imgur.com/Sr0u6MC.png",
+}
 
 let oldUrl: string, elapsed: number, strings: Awaited<typeof newStrings>;
 
@@ -25,7 +28,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Sr0u6MC.png",
+			largeImageKey: Assets.Logo,
 		};
 
 	if (oldUrl !== path) {
@@ -44,7 +47,7 @@ presence.on("UpdateData", async () => {
 			).flatMap(node => node.textContent.trim() || []),
 			status = video.paused ? "pause" : "play";
 
-		presenceData.smallImageKey = status;
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = strings[status];
 		if (status === "play") {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =

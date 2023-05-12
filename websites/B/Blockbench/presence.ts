@@ -13,10 +13,14 @@ const presence = new Presence({
 	},
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
+enum Assets {
+	Logo = "https://i.imgur.com/isuRsRF.png",
+}
+
 presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/isuRsRF.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		pluginHeader = document.querySelector(

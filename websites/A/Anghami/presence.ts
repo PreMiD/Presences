@@ -7,6 +7,10 @@ const presence = new Presence({
 		browsing: "general.browsing",
 	});
 
+enum Assets {
+	Logo = "https://i.imgur.com/PzxFsAZ.png",
+}
+
 function getTime(list: string[]): number {
 	let ret = 0;
 	for (let index = list.length - 1; index >= 0; index--)
@@ -26,7 +30,7 @@ function getTimestamps(audioTime: string, audioDuration: string): number[] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/PzxFsAZ.png",
+			largeImageKey: Assets.Logo,
 		},
 		playback = !!document.querySelector("anghami-player");
 
@@ -43,7 +47,7 @@ presence.on("UpdateData", async () => {
 		selector = document.querySelector("anghami-player .action-artist .trim");
 		presenceData.state = (selector && selector.textContent) || null;
 
-		presenceData.smallImageKey = playing ? "play" : "pause";
+		presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 		presenceData.smallImageText = playing
 			? (await strings).play
 			: (await strings).pause;

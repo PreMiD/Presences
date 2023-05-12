@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 				url: document.location.href,
 			},
 		];
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "En pause" : "En cours";
 
 		if (!button) delete presenceData.buttons;

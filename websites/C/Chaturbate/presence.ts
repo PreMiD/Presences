@@ -9,9 +9,13 @@ const presence = new Presence({
 	});
 let prev: string, elapsed: number, path: string, gender: string;
 
+enum Assets {
+	Logo = "https://i.imgur.com/PjQ6k9n.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/PjQ6k9n.png",
+			largeImageKey: Assets.Logo,
 		},
 		video: HTMLVideoElement = document.querySelector("video[id$='_html5_api']");
 
@@ -186,7 +190,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Watching a clip";
 			presenceData.state = document.querySelector("h1").textContent;
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;

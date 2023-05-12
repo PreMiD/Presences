@@ -3,6 +3,10 @@ const presence = new Presence({
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 
+enum Assets {
+	Logo = "https://i.imgur.com/nofcCPt.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -22,12 +26,6 @@ async function imgPath(path: string) {
 	else return Assets.Logo;
 }
 
-enum Assets {
-	Logo = "https://i.imgur.com/nofcCPt.png",
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Pause = "https://i.imgur.com/mcEXiZk.pngg",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-}
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 

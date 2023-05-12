@@ -24,10 +24,13 @@ presence.on(
 		video = data;
 	}
 );
+enum Assets {
+	Logo = "https://i.imgur.com/ac0KCKY.png",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ac0KCKY.png",
+		largeImageKey: Assets.Logo,
 	};
 	if (
 		document.querySelector(".infoan2") &&
@@ -45,7 +48,7 @@ presence.on("UpdateData", async () => {
 			.querySelector("#main > div.now2 > div")
 			.textContent.split(" - ");
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

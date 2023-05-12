@@ -13,9 +13,13 @@ const presence = new Presence({
 		buttonWatchStream: "general.buttonWatchStream",
 	});
 
+enum Assets {
+	Logo = "https://i.imgur.com/baUokNs.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/baUokNs.png",
+			largeImageKey: Assets.Logo,
 		},
 		path = location.pathname.replace(/\/?$/, "/");
 

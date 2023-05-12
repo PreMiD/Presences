@@ -3,26 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Pause = "https://i.imgur.com/mcEXiZk.png",
-	Stop = "https://i.imgur.com/aLYu3Af.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Question = "https://i.imgur.com/pIIJniP.png",
-	Live = "https://i.imgur.com/0HVm46z.png",
-	Reading = "https://i.imgur.com/5m10TTT.png",
-	Writing = "https://i.imgur.com/Pa00qZh.png",
-	Call = "https://i.imgur.com/y4YKRZG.png",
-	Vcall = "https://i.imgur.com/6wG9ZvM.png",
-	Downloading = "https://i.imgur.com/ryrDrz4.png",
-	Uploading = "https://i.imgur.com/SwNDR5U.png",
-	Repeat = "https://i.imgur.com/Ikh95KU.png",
-	RepeatOne = "https://i.imgur.com/qkODaWg.png",
-	Premiere = "https://i.imgur.com/Zf8FSUR.png",
-	PremiereLive = "https://i.imgur.com/yC4j9Lg.png",
-	Viewing = "https://i.imgur.com/fpZutq6.png",
-}
-
 function lowercaseIt(str: string) {
 	if (!str) return "";
 	else return str.toLowerCase();
@@ -55,16 +35,12 @@ async function getStrings() {
 }
 
 enum Assets {
+	Logo = "https://i.imgur.com/nS9sZn6.png",
 	MessengerLogo = "https://i.imgur.com/AwwqHgg.png",
 	WatchLogo = "https://i.imgur.com/qrU1IRd.png",
 	ReelLogo = "https://i.imgur.com/5hLDaM3.png",
 	GamingLogo = "https://i.imgur.com/yhPO44a.png",
 	MarketplaceLogo = "https://i.imgur.com/3AbfNnr.png",
-	Logo = "https://i.imgur.com/nS9sZn6.png",
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Live = "https://i.imgur.com/0HVm46z.png",
-	Pause = "https://i.imgur.com/PrYtpQb.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	cached: { id: string; element: HTMLVideoElement },

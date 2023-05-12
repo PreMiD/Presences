@@ -2,26 +2,6 @@ const presence = new Presence({
 	clientId: "612793327510749210",
 });
 
-enum Assets {
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Pause = "https://i.imgur.com/mcEXiZk.png",
-	Stop = "https://i.imgur.com/aLYu3Af.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Question = "https://i.imgur.com/pIIJniP.png",
-	Live = "https://i.imgur.com/0HVm46z.png",
-	Reading = "https://i.imgur.com/5m10TTT.png",
-	Writing = "https://i.imgur.com/Pa00qZh.png",
-	Call = "https://i.imgur.com/y4YKRZG.png",
-	Vcall = "https://i.imgur.com/6wG9ZvM.png",
-	Downloading = "https://i.imgur.com/ryrDrz4.png",
-	Uploading = "https://i.imgur.com/SwNDR5U.png",
-	Repeat = "https://i.imgur.com/Ikh95KU.png",
-	RepeatOne = "https://i.imgur.com/qkODaWg.png",
-	Premiere = "https://i.imgur.com/Zf8FSUR.png",
-	PremiereLive = "https://i.imgur.com/yC4j9Lg.png",
-	Viewing = "https://i.imgur.com/fpZutq6.png",
-}
-
 function findRanking(rankingSelector: Element) {
 	return (
 		rankingSelector.textContent === strings.stString ||
@@ -85,26 +65,6 @@ async function getStrings() {
 	);
 }
 
-enum Assets {
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Pause = "https://i.imgur.com/mcEXiZk.png",
-	Stop = "https://i.imgur.com/aLYu3Af.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Question = "https://i.imgur.com/pIIJniP.png",
-	Live = "https://i.imgur.com/0HVm46z.png",
-	Reading = "https://i.imgur.com/5m10TTT.png",
-	Writing = "https://i.imgur.com/Pa00qZh.png",
-	Call = "https://i.imgur.com/y4YKRZG.png",
-	Vcall = "https://i.imgur.com/6wG9ZvM.png",
-	Downloading = "https://i.imgur.com/ryrDrz4.png",
-	Uploading = "https://i.imgur.com/SwNDR5U.png",
-	Repeat = "https://i.imgur.com/Ikh95KU.png",
-	RepeatOne = "https://i.imgur.com/qkODaWg.png",
-	Premiere = "https://i.imgur.com/Zf8FSUR.png",
-	PremiereLive = "https://i.imgur.com/yC4j9Lg.png",
-	Viewing = "https://i.imgur.com/fpZutq6.png",
-}
-
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
 	browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -146,26 +106,6 @@ presence.on("UpdateData", async () => {
 				// Set start timestamp after joining game
 				if (timestampUpdateState === 0) {
 					browsingTimestamp = Math.floor(Date.now() / 1000);
-
-					enum Assets {
-						Play = "https://i.imgur.com/q57RJjs.png",
-						Pause = "https://i.imgur.com/mcEXiZk.png",
-						Stop = "https://i.imgur.com/aLYu3Af.png",
-						Search = "https://i.imgur.com/B7FxcD4.png",
-						Question = "https://i.imgur.com/pIIJniP.png",
-						Live = "https://i.imgur.com/0HVm46z.png",
-						Reading = "https://i.imgur.com/5m10TTT.png",
-						Writing = "https://i.imgur.com/Pa00qZh.png",
-						Call = "https://i.imgur.com/y4YKRZG.png",
-						Vcall = "https://i.imgur.com/6wG9ZvM.png",
-						Downloading = "https://i.imgur.com/ryrDrz4.png",
-						Uploading = "https://i.imgur.com/SwNDR5U.png",
-						Repeat = "https://i.imgur.com/Ikh95KU.png",
-						RepeatOne = "https://i.imgur.com/qkODaWg.png",
-						Premiere = "https://i.imgur.com/Zf8FSUR.png",
-						PremiereLive = "https://i.imgur.com/yC4j9Lg.png",
-						Viewing = "https://i.imgur.com/fpZutq6.png",
-					}
 					timestampUpdateState = 1;
 				}
 			} else if (pathname.includes("/start")) {
@@ -280,25 +220,6 @@ presence.on("UpdateData", async () => {
 					if (timestampUpdateState === 0) {
 						browsingTimestamp = Math.floor(Date.now() / 1000);
 
-						enum Assets {
-							Play = "https://i.imgur.com/q57RJjs.png",
-							Pause = "https://i.imgur.com/mcEXiZk.png",
-							Stop = "https://i.imgur.com/aLYu3Af.png",
-							Search = "https://i.imgur.com/B7FxcD4.png",
-							Question = "https://i.imgur.com/pIIJniP.png",
-							Live = "https://i.imgur.com/0HVm46z.png",
-							Reading = "https://i.imgur.com/5m10TTT.png",
-							Writing = "https://i.imgur.com/Pa00qZh.png",
-							Call = "https://i.imgur.com/y4YKRZG.png",
-							Vcall = "https://i.imgur.com/6wG9ZvM.png",
-							Downloading = "https://i.imgur.com/ryrDrz4.png",
-							Uploading = "https://i.imgur.com/SwNDR5U.png",
-							Repeat = "https://i.imgur.com/Ikh95KU.png",
-							RepeatOne = "https://i.imgur.com/qkODaWg.png",
-							Premiere = "https://i.imgur.com/Zf8FSUR.png",
-							PremiereLive = "https://i.imgur.com/yC4j9Lg.png",
-							Viewing = "https://i.imgur.com/fpZutq6.png",
-						}
 						presenceData.startTimestamp = browsingTimestamp;
 						timestampUpdateState = 1;
 					}

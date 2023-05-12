@@ -133,7 +133,9 @@ presence.on("UpdateData", async () => {
 						if (iFrameVideo && !isNaN(duration) && title && video) {
 							if (!paused) {
 								presenceData.details = "Watching:";
-								presenceData.smallImageKey = paused ? "pause" : "play";
+								presenceData.smallImageKey = paused
+									? Assets.Pause
+									: Assets.Play;
 								if (videoTime) {
 									presenceData.smallImageText = paused
 										? (await strings).pause

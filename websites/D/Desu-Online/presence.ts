@@ -3,26 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Pause = "https://i.imgur.com/mcEXiZk.png",
-	Stop = "https://i.imgur.com/aLYu3Af.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Question = "https://i.imgur.com/pIIJniP.png",
-	Live = "https://i.imgur.com/0HVm46z.png",
-	Reading = "https://i.imgur.com/5m10TTT.png",
-	Writing = "https://i.imgur.com/Pa00qZh.png",
-	Call = "https://i.imgur.com/y4YKRZG.png",
-	Vcall = "https://i.imgur.com/6wG9ZvM.png",
-	Downloading = "https://i.imgur.com/ryrDrz4.png",
-	Uploading = "https://i.imgur.com/SwNDR5U.png",
-	Repeat = "https://i.imgur.com/Ikh95KU.png",
-	RepeatOne = "https://i.imgur.com/qkODaWg.png",
-	Premiere = "https://i.imgur.com/Zf8FSUR.png",
-	PremiereLive = "https://i.imgur.com/yC4j9Lg.png",
-	Viewing = "https://i.imgur.com/fpZutq6.png",
-}
-
 let video = {
 	current: 0,
 	duration: 0,
@@ -30,11 +10,8 @@ let video = {
 };
 
 enum Assets {
-	Search = "https://i.imgur.com/1VwDv4D.png",
-	Home = "https://i.imgur.com/xVhTZcB.png",
-	Play = "https://i.imgur.com/Zd2WTR1.png",
-	Pause = "https://i.imgur.com/LV9xIjD.png",
 	Logo = "https://i.imgur.com/KEkxfKO.png",
+	Home = "https://i.imgur.com/xVhTZcB.png",
 }
 
 presence.on(

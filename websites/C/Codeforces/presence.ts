@@ -4,9 +4,13 @@ const presence = new Presence({
 	path = location.pathname,
 	timeElapsed = ~~(Date.now() / 1000);
 
+enum Assets {
+	Logo = "https://i.imgur.com/2S8IXoa.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/2S8IXoa.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: timeElapsed,
 	};
 

@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = showName?.textContent || "Bilinmeyen Dizi";
 		presenceData.state = episode?.textContent || "Bilinmeyen Bölüm";
 
-		presenceData.smallImageKey = video?.paused ? "pause" : "play";
+		presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video?.paused
 			? (await strings).pause
 			: (await strings).play;

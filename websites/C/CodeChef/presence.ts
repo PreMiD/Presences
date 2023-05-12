@@ -3,9 +3,13 @@ const presence = new Presence({
 	}),
 	timeElapsed: number = ~~(Date.now() / 1000);
 
+enum Assets {
+	Logo = "https://i.imgur.com/yErRb6J.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/yErRb6J.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: timeElapsed,
 	};
 

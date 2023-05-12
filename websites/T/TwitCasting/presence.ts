@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 						Date.now() / 1000 + duration - currentTime;
 				}
 
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused ? strings.paused : strings.playing;
 				presenceData.buttons = [
 					{ label: strings.buttonWatchVideo, url: document.URL },

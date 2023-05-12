@@ -3,36 +3,13 @@ const presence = new Presence({
 });
 
 enum Assets {
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Pause = "https://i.imgur.com/mcEXiZk.png",
-	Stop = "https://i.imgur.com/aLYu3Af.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Question = "https://i.imgur.com/pIIJniP.png",
-	Live = "https://i.imgur.com/0HVm46z.png",
-	Reading = "https://i.imgur.com/5m10TTT.png",
-	Writing = "https://i.imgur.com/Pa00qZh.png",
-	Call = "https://i.imgur.com/y4YKRZG.png",
-	Vcall = "https://i.imgur.com/6wG9ZvM.png",
-	Downloading = "https://i.imgur.com/ryrDrz4.png",
-	Uploading = "https://i.imgur.com/SwNDR5U.png",
-	Repeat = "https://i.imgur.com/Ikh95KU.png",
-	RepeatOne = "https://i.imgur.com/qkODaWg.png",
-	Premiere = "https://i.imgur.com/Zf8FSUR.png",
-	PremiereLive = "https://i.imgur.com/yC4j9Lg.png",
-	Viewing = "https://i.imgur.com/fpZutq6.png",
-}
-
-enum Icons {
 	Logo = "https://i.imgur.com/h8N7txd.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Pause = "https://i.imgur.com/aO2ZCME.png",
-	Play = "https://i.imgur.com/q57RJjs.png",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Icons.Logo,
-			smallImageKey: Icons.Search,
+			largeImageKey: Assets.Logo,
+			smallImageKey: Assets.Search,
 			smallImageText: "Browsing",
 		},
 		{ pathname } = document.location;
@@ -91,7 +68,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			".mbu-bg.blur-small img"
 		).src;
-		presenceData.smallImageKey = video.paused ? Icons.Pause : Icons.Play;
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 		if (!video.paused) {

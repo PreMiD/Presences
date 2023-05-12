@@ -4,23 +4,13 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Assets {
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Pause = "https://i.imgur.com/mcEXiZk.png",
-	Stop = "https://i.imgur.com/aLYu3Af.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Question = "https://i.imgur.com/pIIJniP.png",
-	Live = "https://i.imgur.com/0HVm46z.png",
-	Reading = "https://i.imgur.com/5m10TTT.png",
-	Writing = "https://i.imgur.com/Pa00qZh.png",
-	Call = "https://i.imgur.com/y4YKRZG.png",
-	Vcall = "https://i.imgur.com/6wG9ZvM.png",
-	Downloading = "https://i.imgur.com/ryrDrz4.png",
-	Uploading = "https://i.imgur.com/SwNDR5U.png",
-	Repeat = "https://i.imgur.com/Ikh95KU.png",
-	RepeatOne = "https://i.imgur.com/qkODaWg.png",
-	Premiere = "https://i.imgur.com/Zf8FSUR.png",
-	PremiereLive = "https://i.imgur.com/yC4j9Lg.png",
-	Viewing = "https://i.imgur.com/fpZutq6.png",
+	Logo = "https://i.imgur.com/CyVxys5.jpg",
+	Home = "https://i.imgur.com/i2EEGId.jpg",
+	Emitting = "https://i.imgur.com/TNrq2vU.jpg",
+	Login = "https://i.imgur.com/aY4bjzh.jpg",
+	Register = "https://i.imgur.com/hdtAwWr.jpg",
+	Settings = "https://i.imgur.com/T91Uhm5.jpg",
+	Preview = "https://i.imgur.com/1RLd82M.jpg",
 }
 
 let iFrameVideo: boolean,
@@ -29,19 +19,6 @@ let iFrameVideo: boolean,
 	paused: boolean,
 	playback: boolean,
 	reproductor: string;
-
-enum Assets {
-	Logo = "https://i.imgur.com/CyVxys5.jpg",
-	Home = "https://i.imgur.com/i2EEGId.jpg",
-	Pause = "https://i.imgur.com/V8aOlhf.jpg",
-	Play = "https://i.imgur.com/vS09FhM.jpg",
-	Search = "https://i.imgur.com/BSHGBn1.jpg",
-	Emitting = "https://i.imgur.com/TNrq2vU.jpg",
-	Login = "https://i.imgur.com/aY4bjzh.jpg",
-	Register = "https://i.imgur.com/hdtAwWr.jpg",
-	Settings = "https://i.imgur.com/T91Uhm5.jpg",
-	Preview = "https://i.imgur.com/1RLd82M.jpg",
-}
 
 presence.on(
 	"iFrameData",

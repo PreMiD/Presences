@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 					data.details = title.find(Boolean);
 					data.state = title[0] ? `${title[2]} ${title[1]}` : "Film";
 
-					data.smallImageKey = video.paused ? "pause" : "play";
+					data.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 					data.smallImageText = video.paused ? "Paused" : "Playing";
 
 					if (cover && coverUrl)

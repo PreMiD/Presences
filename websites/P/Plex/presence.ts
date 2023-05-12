@@ -7,26 +7,6 @@ const presence = new Presence({
 //nl = Nederlands
 //Language list can be found here: https://api.premid.app/v2/langFile/list
 
-enum Assets {
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Pause = "https://i.imgur.com/mcEXiZk.png",
-	Stop = "https://i.imgur.com/aLYu3Af.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Question = "https://i.imgur.com/pIIJniP.png",
-	Live = "https://i.imgur.com/0HVm46z.png",
-	Reading = "https://i.imgur.com/5m10TTT.png",
-	Writing = "https://i.imgur.com/Pa00qZh.png",
-	Call = "https://i.imgur.com/y4YKRZG.png",
-	Vcall = "https://i.imgur.com/6wG9ZvM.png",
-	Downloading = "https://i.imgur.com/ryrDrz4.png",
-	Uploading = "https://i.imgur.com/SwNDR5U.png",
-	Repeat = "https://i.imgur.com/Ikh95KU.png",
-	RepeatOne = "https://i.imgur.com/qkODaWg.png",
-	Premiere = "https://i.imgur.com/Zf8FSUR.png",
-	PremiereLive = "https://i.imgur.com/yC4j9Lg.png",
-	Viewing = "https://i.imgur.com/fpZutq6.png",
-}
-
 /**
  * Get Translation
  * @param stringName Name of string you want to get
@@ -229,7 +209,7 @@ presence.on("UpdateData", async () => {
 				);
 			}
 
-			presenceData.smallImageKey = media.paused ? "pause" : "play";
+			presenceData.smallImageKey = media.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = media.paused ? "Paused" : "Playing";
 
 			const title = document.querySelector(

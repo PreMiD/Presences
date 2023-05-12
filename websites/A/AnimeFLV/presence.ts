@@ -12,6 +12,10 @@ let video = {
 	paused: true,
 };
 
+enum Assets {
+	Logo = "https://i.imgur.com/Nsp0rTW.jpg",
+}
+
 presence.on(
 	"iFrameData",
 	(data: { duration: number; currentTime: number; paused: boolean }) => {
@@ -21,7 +25,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Nsp0rTW.jpg",
+		largeImageKey: Assets.Logo,
 	};
 
 	if (
@@ -38,7 +42,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = document.querySelector(
 			"#XpndCn .Title, .CapiCnt .Title"
 		).textContent;
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

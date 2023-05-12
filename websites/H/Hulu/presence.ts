@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
 			if (content && content.textContent.length > 0)
 				state = content.textContent;
 
-			smallImageKey = live ? "live" : video.paused ? "pause" : "play";
+			smallImageKey = live ? "live" : video.paused ? Assets.Pause : Assets.Play;
 			smallImageText = live
 				? (await strings).live
 				: video.paused
@@ -159,7 +159,11 @@ presence.on("UpdateData", async () => {
 				if (content && content.textContent.length > 0)
 					state = content.textContent;
 
-				smallImageKey = live ? "live" : video.paused ? "pause" : "play";
+				smallImageKey = live
+					? "live"
+					: video.paused
+					? Assets.Pause
+					: Assets.Play;
 				smallImageText = live
 					? (await strings).live
 					: video.paused

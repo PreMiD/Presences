@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details =
 			document.querySelectorAll(".meta-data-title")[0].textContent;
 		presenceData.largeImageKey = "https://i.imgur.com/vP9Hh5d.png";
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

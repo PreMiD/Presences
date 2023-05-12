@@ -25,6 +25,10 @@ const presence = new Presence({
 		"/upcoming": "Searching upcoming animes",
 	};
 
+enum Assets {
+	Logo = "https://i.imgur.com/TQPRXrN.png",
+}
+
 let timeEnd: number, currentTime: number, paused: boolean;
 
 presence.on(
@@ -38,7 +42,7 @@ presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		epNumber = page.slice(page.length - 5).replace(/^\D+/g, ""),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/TQPRXrN.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		search: URLSearchParams = new URLSearchParams(
@@ -58,9 +62,9 @@ presence.on("UpdateData", async () => {
 		else presenceData.state = `Episode ${epNumber}`;
 
 		if (!paused) {
-			presenceData.smallImageKey = Assets.Play[
-				(presenceData.startTimestamp, presenceData.endTimestamp)
-			] = presence.getTimestamps(currentTime, timeEnd);
+			presenceData.smallImageKey = Assets.Play;
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(currentTime, timeEnd);
 		} else {
 			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
@@ -89,12 +93,14 @@ presence.on("UpdateData", async () => {
 			case "/faq": {
 				presenceData.details = pages[page];
 				presenceData.state = "Reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				break;
 			}
 			case "/contact": {
 				presenceData.details = pages[page];
 				presenceData.state = "Reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				break;
 			}

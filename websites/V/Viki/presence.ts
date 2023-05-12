@@ -418,7 +418,7 @@ presence.on("UpdateData", async () => {
 				details: "",
 				state: "",
 				largeImageKey: "https://i.imgur.com/J9AyT9N.png",
-				smallImageKey: video.paused ? "pause" : "play",
+				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused
 					? (await strings).pause
 					: (await strings).play,

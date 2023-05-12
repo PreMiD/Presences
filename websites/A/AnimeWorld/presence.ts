@@ -3,26 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Pause = "https://i.imgur.com/mcEXiZk.png",
-	Stop = "https://i.imgur.com/aLYu3Af.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Question = "https://i.imgur.com/pIIJniP.png",
-	Live = "https://i.imgur.com/0HVm46z.png",
-	Reading = "https://i.imgur.com/5m10TTT.png",
-	Writing = "https://i.imgur.com/Pa00qZh.png",
-	Call = "https://i.imgur.com/y4YKRZG.png",
-	Vcall = "https://i.imgur.com/6wG9ZvM.png",
-	Downloading = "https://i.imgur.com/ryrDrz4.png",
-	Uploading = "https://i.imgur.com/SwNDR5U.png",
-	Repeat = "https://i.imgur.com/Ikh95KU.png",
-	RepeatOne = "https://i.imgur.com/qkODaWg.png",
-	Premiere = "https://i.imgur.com/Zf8FSUR.png",
-	PremiereLive = "https://i.imgur.com/yC4j9Lg.png",
-	Viewing = "https://i.imgur.com/fpZutq6.png",
-}
-
 let iFrameVideo: boolean,
 	currentTime: number,
 	duration: number,
@@ -410,7 +390,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Guardando: ${animename}`;
 						presenceData.state = `Ep. ${animenumber}｜Finito`;
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = `${animename}｜Episodio: ${animenumber}`;
 						presenceData.details = `Guardando: ${animename}`;
 						presenceData.startTimestamp = paused ? null : timestamps[0];
@@ -454,7 +434,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Guardando: ${moviename}`;
 						presenceData.state = "Film ｜Finito";
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = moviename;
 						presenceData.details = `Guardando: ${moviename}`;
 						presenceData.state = paused
@@ -500,7 +480,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Guardando: ${oavname}`;
 						presenceData.state = `${oavnumber}° OAV｜Finito`;
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = `${oavname}｜${oavnumber}° OAV`;
 						presenceData.details = `Guardando: ${oavname}`;
 						presenceData.startTimestamp = paused ? null : timestamps[0];
@@ -547,7 +527,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Guardando: ${onaname}`;
 						presenceData.state = `${onanumber}° ONA｜Finito`;
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = `${onaname}｜${onanumber}° ONA`;
 						presenceData.details = `Guardando: ${onaname}`;
 						presenceData.state = paused
@@ -595,7 +575,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Guardando: ${specialname}`;
 						presenceData.state = `${specialnumber}° Special｜Finito`;
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = `${specialname}｜${specialnumber}° Special`;
 						presenceData.details = `Guardando: ${specialname}`;
 						presenceData.state = paused
@@ -640,7 +620,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Guardando: ${previewname}`;
 						presenceData.state = "Preview｜Finito";
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = previewname;
 						presenceData.details = `Guardando: ${previewname}`;
 						presenceData.state = paused
