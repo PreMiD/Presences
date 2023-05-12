@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData, !video.paused);
 	} else if (location.pathname.startsWith("/search")) {
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 		presenceData.details = `Searching: ${document
 			.querySelector(".heading")
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 			}`;
 		} else presenceData.state = "Results: Nothing";
 	} else if (location.pathname.includes("/download")) {
-		presenceData.smallImageKey = "download";
+		presenceData.smallImageKey = Assets.Downloading;
 		presenceData.smallImageText = "Downloading";
 		presenceData.details = document.querySelector(".heading > a").textContent;
 		presenceData.state = "Downloading Anime";

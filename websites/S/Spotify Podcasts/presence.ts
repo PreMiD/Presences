@@ -350,7 +350,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.smallImageKey;
 				} else if (pathname.includes("/download")) {
 					presenceData.details = strings.download;
-					presenceData.smallImageKey = "downloading";
+					presenceData.smallImageKey = Assets.Downloading;
 				} else if (pathname.includes("/account")) {
 					presenceData.details = strings.account;
 					delete presenceData.smallImageKey;

@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = "Liest Artikel:";
 			presenceData.state = user.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/videos/")) {
 			const video: HTMLVideoElement = document.querySelector(
 					"#playerID > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"

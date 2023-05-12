@@ -67,7 +67,7 @@ const paths = {
 	},
 	"/search"(presenceData: PresenceData) {
 		presenceData.state = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		let searchQuery = new URLSearchParams(window.location.search).get("q");
 

@@ -24,10 +24,10 @@ presence.on("UpdateData", async () => {
 			)[0];
 			presenceData.endTimestamp = presence.getTimestamps(elapsed, duration)[1];
 
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 		} else {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 		}
 

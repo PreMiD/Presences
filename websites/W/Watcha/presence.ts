@@ -93,8 +93,8 @@ class Watcha extends Presence {
 	}
 
 	async setData(params: SetDataParams) {
-		params.data.largeImageKey ??= params.assets.logo;
-		params.data.smallImageKey ??= params.assets.browse;
+		params.data.largeImageKey ??= params.Assets.logo;
+		params.data.smallImageKey ??= params.Assets.browse;
 
 		if (!params.noStartTime) params.data.startTimestamp = this.startedAt;
 
@@ -248,7 +248,7 @@ app.on("UpdateData", async () => {
 						else delete app.meta.episodeTitle;
 
 						const data: PresenceData = {
-							smallImageKey: video.paused ? assets.pause : assets.play,
+							smallImageKey: video.paused ? Assets.pause : Assets.play,
 							endTimestamp: app.getTimestampsfromMedia(video).pop(),
 						};
 

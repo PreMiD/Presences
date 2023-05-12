@@ -174,7 +174,7 @@ presence.on("UpdateData", async () => {
 				? decodeURI(new URLSearchParams(document.location.search).get("query"))
 				: "( Hidden )"
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		if (result) {
 			presenceData.state = `${result} matching ${

@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 		} else if (search?.value) presenceData.state = search?.value;
 		else delete presenceData.details;
 
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname === "/") presenceData.details = "Viewing the Home page";
 	else if (pathname.includes("/category/")) {
 		if (pathname === "/category/all")

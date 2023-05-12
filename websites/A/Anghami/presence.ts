@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData, playback);
 	} else {
 		presenceData.details = (await strings).browsing;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).browsing;
 		presence.setActivity(presenceData);
 	}

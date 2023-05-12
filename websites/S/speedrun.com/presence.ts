@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 			title = document.querySelector(
 				"#centerbar > div > div:nth-child(1) > span"
 			);
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing forum post:";
 			if (title.textContent.length > 128)

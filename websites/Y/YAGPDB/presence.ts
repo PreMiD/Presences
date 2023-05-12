@@ -28,11 +28,11 @@ presence.on("UpdateData", async () => {
 				if (document.querySelector("#main-content > header > h2")) {
 					title = document.querySelector("#main-content > header > h2");
 					presenceData.details = "Control Panel - Editing:";
-					presenceData.smallImageKey = "writing";
+					presenceData.smallImageKey = Assets.Writing;
 					presenceData.state = title.textContent;
 					if (title.textContent === "News and updates") {
 						presenceData.details = "Reading the news";
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						delete presenceData.state;
 					}
 				} else if (document.location.pathname.includes("/manage/"))
@@ -48,17 +48,17 @@ presence.on("UpdateData", async () => {
 			if (search.value !== "") {
 				presenceData.details = "Docs searching for:";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = "searching";
+				presenceData.smallImageKey = Assets.Search;
 			} else {
 				presenceData.details = "Docs going to search something up";
-				presenceData.smallImageKey = "searching";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else if (title.textContent === "MEE6 Helpdesk")
 			presenceData.details = "Browsing the helpdesk";
 		else {
 			presenceData.details = "Docs viewing:";
 			presenceData.state = title.textContent.replace(" - YAGPDB", "");
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	}
 

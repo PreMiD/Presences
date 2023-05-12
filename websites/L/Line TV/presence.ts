@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname.includes("/search")) {
 		presenceData.details = strings.searchSomething;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	}
 
 	presence.setActivity(presenceData);

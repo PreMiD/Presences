@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 	if (document.location.pathname === "/") {
 		presenceData.details = "Browing Homepage";
 		presenceData.state = "at Homepage";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "browsing";
 	} else if (
 		[
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			""
 		)} `;
 		presenceData.state = dstate;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "browsing";
 	} else if (
 		[
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 			.split("_")
 			.join(" ")
 			.replace("/", "")}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "browsing";
 	} else if (document.location.pathname.startsWith("/flavors/")) {
 		presenceData.details = "Browing Flavors ";
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 			.split("-")
 			.join(" ")
 			.replace("/", "")}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "browsing";
 	} else if (document.location.pathname.startsWith("/recipes/")) {
 		const data = document.location.hash
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 			.split("_by_");
 		presenceData.details = `Recipe : ${data[0].split("_").join(" ")} `;
 		presenceData.state = `Creator: ${data[1].split("_").join(" ")}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "browsing";
 	}
 	if (presenceData.details) presence.setActivity(presenceData);

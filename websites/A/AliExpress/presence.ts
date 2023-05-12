@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Searching for:";
 				presenceData.state = item.value;
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			} else presence.setActivity();

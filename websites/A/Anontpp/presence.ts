@@ -75,11 +75,11 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = strings.browse;
 		}
 		if (presenceData.details.includes("Searching")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 		}
 

@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 				.display !== "none";
 		presenceData.smallImageKey = isPaused ? "pause" : "play";
 		if (!isPaused) {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			const ts = Math.round(Date.now() / 1000),
 				elapsedSeconds = parseLength(
 					document.querySelector(".oG0wpe").children[0].textContent

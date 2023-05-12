@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = detail;
 		presenceData.state = state;
 		presenceData.smallImageText = (await strings).browse;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	const buttons = await presence.getSetting<boolean>("buttons");

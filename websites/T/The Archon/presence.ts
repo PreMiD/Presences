@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${title.textContent.substring(0, 125)}...`;
 			else presenceData.state = title.textContent;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/trending/")) {
 			presenceData.details = "Forums, Viewing the list of";
@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${title.textContent.substring(0, 125)}...`;
 				else presenceData.state = title.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else {
@@ -143,14 +143,14 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Forums, searching for:";
 				presenceData.state = search.textContent;
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			} else {
 				presenceData.details = "Forums, about to search";
 				presenceData.state = "something up";
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			}

@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.searchFor;
 		presenceData.state = search.includes("movies") ? "Movies" : "Stars";
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.searching;
 	} else if (pathname.match("/([a-z0-9-]+)-episode-([0-9]+)")) {
 		ShowData.title =

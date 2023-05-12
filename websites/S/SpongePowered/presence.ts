@@ -47,14 +47,14 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Forums, Searching for:";
 					presenceData.state = search.textContent;
 
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 
 					presence.setActivity(presenceData);
 				} else {
 					presenceData.details = "Forums, Going to search";
 					presenceData.state = "something up";
 
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 
 					presence.setActivity(presenceData);
 				}
@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Docs, reading:";
 				presenceData.state = title.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else {
@@ -196,7 +196,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Ore, searching for:";
 				presenceData.state = search.textContent;
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			} else {

@@ -255,7 +255,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Reading about Imgur";
 				delete presenceData.state;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			}
@@ -287,7 +287,7 @@ presence.on("UpdateData", async () => {
 					)}...`;
 				} else presenceData.state = (item as HTMLElement).textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (item) {
@@ -370,7 +370,7 @@ presence.on("UpdateData", async () => {
 					)}...`;
 				} else presenceData.state = (item as HTMLElement).textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/categories")) {
@@ -398,7 +398,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Community, Reading rules";
 				delete presenceData.state;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/c/")) {
@@ -429,7 +429,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading the API Docs";
 			delete presenceData.state;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 

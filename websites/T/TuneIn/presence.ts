@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 			if (author.length > 128)
 				presenceData.state = `${author.substring(0, 125)}...`;
 			if (pauseCheck[0]) {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).pause;
 			} else {
 				presenceData.smallImageKey = "live";
@@ -70,10 +70,10 @@ presence.on("UpdateData", async () => {
 			if (paused[0]) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).pause;
 			} else {
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = (await strings).play;
 			}
 			presenceData.endTimestamp = timestamps.pop();

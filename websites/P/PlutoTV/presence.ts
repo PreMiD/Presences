@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = title.textContent;
 			presenceData.state = `${progress}% progressed`;
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 		} else if (playing === true && paused === true) {
 			title = document.querySelector(
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = title.textContent;
 			presenceData.state = `${progress}% progressed`;
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 		} else if (document.location.pathname.includes("/on-demand/movies/")) {
 			video = document.querySelector(
@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
 					oldTitle = title.textContent;
 				}
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		} else if (document.location.pathname.includes("/trending")) {
 			presenceData.startTimestamp = browsingTimestamp;

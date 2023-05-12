@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 			else {
 				presenceData.details = "Searching for";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = "searching";
+				presenceData.smallImageKey = Assets.Search;
 			}
 			break;
 		}

@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 			)
 			.textContent.split(":")
 			.map(Number);
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		if (time.length === 3) {
 			presenceData.startTimestamp =
 				Date.now() - (time[0] * 3600 + time[1] * 60 + time[2]) * 1000;
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"div.podcast-title-date > span"
 		).textContent;
-		presenceData.smallImageKey = "pause";
+		presenceData.smallImageKey = Assets.Pause;
 		delete presenceData.startTimestamp;
 	}
 	if (document.querySelector(".controls").ariaLabel.includes("Paused")) {

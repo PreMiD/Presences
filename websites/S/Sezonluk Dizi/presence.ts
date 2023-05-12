@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 			document.title.indexOf("Türündeki")
 		);
 	} else if (search.includes("?adi=") && !/\?.*?&/g.test(search)) {
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		presenceData.details = "Bir şey arıyor";
 		presenceData.state = search.replace("?adi=", "");
@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state =
 			document.querySelector(".ui.stackable.cards .card .content a.header")
 				?.textContent ?? "Bilinmeyen Dizi";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Bir tartışma okuyor";
 	} else if (Object.keys(video || {}).length > 0) {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(

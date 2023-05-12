@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing:";
 	} else if (path.includes("/search")) {
 		presenceData.details = "Searching";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).search;
 	} else if (path.includes("/account")) {
 		presenceData.details = "Viewing Account";

@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Bir şey arıyor:";
 			presenceData.state =
 				query[0].toUpperCase() + query.slice(1).toLowerCase();
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else {
 			presenceData.details = "Bir sayfaya göz atıyor:";
 			presenceData.state = "Arşiv";

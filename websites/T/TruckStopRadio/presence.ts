@@ -158,7 +158,7 @@ presence.on("UpdateData", async () => {
 					.replace("=", "/")
 					.match(k)
 			) {
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.browse;
 				presenceData = { ...presenceData, ...v };
 			}

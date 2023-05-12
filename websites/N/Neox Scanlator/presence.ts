@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 				"body > div.wrap > div.body-wrap > div > div.c-search-header__wrapper > div > div > form > label > input"
 			);
 			presenceData.details = "Pesquisando por:";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Em pesquisa";
 			presenceData.state = PesquisaTexto.value;
 		} else presenceData.state = "Página inicial";

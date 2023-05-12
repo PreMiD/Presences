@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"body > div.container > div:nth-child(3) > div > div.movie-info > div > div.block-wrapper.page-single > div > div.block-movie-info.movie-info-box > div > div.col-6.movie-detail > h1 > span.title-1"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (
 		document.querySelector(
 			"body > div.container > ol > li:nth-child(5) > a > span"
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 			title = document.querySelector("head > title").textContent;
 
 			presenceData.state = title;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (document.location.pathname === "/")
 		presenceData.details = "Đang xem trang chủ";

@@ -80,14 +80,14 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.includes("/upload")) {
 		[presenceData.details] = pageTitle;
-		presenceData.smallImageKey = "uploading";
+		presenceData.smallImageKey = Assets.Uploading;
 	} else {
 		[presenceData.details] = pageTitle;
 		presenceData.state = (await strings).reading;
 		presenceData.startTimestamp = browsingTimestamp;
 	}
 	if (query) {
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).searching;
 		presenceData.details = `${(await strings).searching} : ${query}`;
 	}

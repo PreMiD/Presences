@@ -287,7 +287,7 @@ const // official website
 		write: "writing",
 	},
 	presenceData: PresenceData = {
-		largeImageKey: PRESENCE_ART_ASSETS.logo,
+		largeImageKey: PRESENCE_ART_Assets.logo,
 	};
 
 let presence: Presence, ApiClient: ApiClient;
@@ -308,11 +308,11 @@ function handleOfficialWebsite(): void {
 			break;
 		case "/blog.html":
 			presenceData.state = "Reading the blog";
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.read;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.read;
 			break;
 		case "/download.html":
 			presenceData.state = "On downloads";
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.download;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.download;
 			break;
 		case "/premiere.html":
 		case "/premiere-ext.html": // extended premiere options
@@ -331,7 +331,7 @@ function handleOfficialWebsite(): void {
 				document.querySelector(".w-pagehead > h1").textContent === "Emby Blog"
 			) {
 				presenceData.state = "Reading the blog";
-				presenceData.smallImageKey = PRESENCE_ART_ASSETS.read;
+				presenceData.smallImageKey = PRESENCE_ART_Assets.read;
 			}
 	}
 }
@@ -404,7 +404,7 @@ async function handleAudioPlayback(): Promise<void> {
 
 		// playing
 		if (!audioElement.paused) {
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.play;
 			presenceData.smallImageText = "Playing";
 
 			if (await presence.getSetting<boolean>("showMediaTimestamps")) {
@@ -414,7 +414,7 @@ async function handleAudioPlayback(): Promise<void> {
 
 			// paused
 		} else {
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.pause;
 			presenceData.smallImageText = "Paused";
 
 			delete presenceData.endTimestamp;
@@ -501,7 +501,7 @@ async function handleVideoPlayback(): Promise<void> {
 	// this variables content will be replaced in details and status properties on presenceData
 	let title,
 		subtitle,
-		largeImage = PRESENCE_ART_ASSETS.logo;
+		largeImage = PRESENCE_ART_Assets.logo;
 
 	const regexResult = /\/Items\/(\d+)\//.exec(
 		document.querySelector<HTMLDivElement>(".pageTitle").style.backgroundImage
@@ -549,12 +549,12 @@ async function handleVideoPlayback(): Promise<void> {
 
 		// watching live tv
 		if (mediaInfo && mediaInfo.Type === "TvChannel") {
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.live;
 			presenceData.smallImageText = "Live TV";
 
 			// playing
 		} else if (!videoPlayerElem.paused) {
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.play;
 			presenceData.smallImageText = "Playing";
 
 			if (await presence.getSetting<boolean>("showMediaTimestamps")) {
@@ -564,7 +564,7 @@ async function handleVideoPlayback(): Promise<void> {
 
 			// paused
 		} else {
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.pause;
 			presenceData.smallImageText = "Paused";
 
 			delete presenceData.endTimestamp;
@@ -662,7 +662,7 @@ async function handleWebClient(): Promise<void> {
 			break;
 		case "search":
 			presenceData.state = "Searching";
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.search;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.search;
 			break;
 
 		// user preferences
@@ -744,7 +744,7 @@ async function handleWebClient(): Promise<void> {
  * setDefaultsToPresence - set defaul values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
-	presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
+	presenceData.largeImageKey = PRESENCE_ART_Assets.logo;
 
 	if (presenceData.smallImageKey) delete presenceData.smallImageKey;
 
@@ -779,8 +779,8 @@ async function updateData(): Promise<void> {
 
 	// hide start timestamp on media playback
 	if (
-		presenceData.smallImageKey === PRESENCE_ART_ASSETS.play ||
-		presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause
+		presenceData.smallImageKey === PRESENCE_ART_Assets.play ||
+		presenceData.smallImageKey === PRESENCE_ART_Assets.pause
 	)
 		delete presenceData.startTimestamp;
 

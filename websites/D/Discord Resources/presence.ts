@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname === "/search": {
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching...";
 			if (search) {
 				presenceData.details = "Searching for:";

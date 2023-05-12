@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = new URLSearchParams(document.location.search).get(
 					"s"
 				);
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else if (Object.keys(pages).includes(pathArr[1]))
 				presenceData = { ...presenceData, ...pages[pathArr[1]] };
 			break;

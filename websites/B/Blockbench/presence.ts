@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [{ label: "View Plugin", url: location.href }];
 	} else if (page.includes("/wiki")) {
 		presenceData.details = "Blockbench Wiki";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 		presenceData.state =
 			document.querySelector(

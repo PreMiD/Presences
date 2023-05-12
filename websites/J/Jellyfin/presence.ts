@@ -290,7 +290,7 @@ const // official website
 		write: "writing",
 	},
 	presenceData: PresenceData = {
-		largeImageKey: PRESENCE_ART_ASSETS.logo,
+		largeImageKey: PRESENCE_ART_Assets.logo,
 	};
 
 let ApiClient: ApiClient,
@@ -357,15 +357,15 @@ function handleOfficialWebsite(): void {
 			break;
 		case "/posts/":
 			presenceData.state = "Reading the latest posts";
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.read;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.read;
 			break;
 		case "/clients/":
 			presenceData.state = "Checking clients";
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.search;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.search;
 			break;
 		case "/downloads/":
 			presenceData.state = "On downloads";
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.download;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.download;
 			break;
 		case "/contribute/":
 			presenceData.state = "Learning how to contribute";
@@ -379,7 +379,7 @@ function handleOfficialWebsite(): void {
 				presenceData.state = `Reading the docs: ${document.title
 					.split("|")[0]
 					.trim()}`;
-				presenceData.smallImageKey = PRESENCE_ART_ASSETS.read;
+				presenceData.smallImageKey = PRESENCE_ART_Assets.read;
 			}
 	}
 }
@@ -596,7 +596,7 @@ async function setPresenceByMediaId(mediaId: string): Promise<void> {
 			)} - ${mediaInfo.Name}`;
 			break;
 		case "TvChannel":
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.live;
 			presenceData.smallImageText = "Live TV";
 			break;
 		default:
@@ -619,12 +619,12 @@ async function setPresenceByMediaId(mediaId: string): Promise<void> {
 						.classList.contains("play_arrow");
 
 		if (paused) {
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.pause;
 			presenceData.smallImageText = "Paused";
 
 			delete presenceData.endTimestamp;
 		} else {
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.play;
 			presenceData.smallImageText = "Playing";
 
 			// TODO: worth setting timestamps on remote playback? Requires WS connection
@@ -708,7 +708,7 @@ async function handleWebClient(): Promise<void> {
 			break;
 		case "search.html":
 			presenceData.state = "Searching";
-			presenceData.smallImageKey = PRESENCE_ART_ASSETS.search;
+			presenceData.smallImageKey = PRESENCE_ART_Assets.search;
 			break;
 
 		// user preferences
@@ -795,7 +795,7 @@ async function handleWebClient(): Promise<void> {
  * Sets default values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
-	presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
+	presenceData.largeImageKey = PRESENCE_ART_Assets.logo;
 
 	if (presenceData.smallImageKey) delete presenceData.smallImageKey;
 
@@ -856,8 +856,8 @@ async function updateData(): Promise<void> {
 
 	// hide start timestamp on media playback
 	if (
-		presenceData.smallImageKey === PRESENCE_ART_ASSETS.play ||
-		presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause
+		presenceData.smallImageKey === PRESENCE_ART_Assets.play ||
+		presenceData.smallImageKey === PRESENCE_ART_Assets.pause
 	)
 		delete presenceData.startTimestamp;
 

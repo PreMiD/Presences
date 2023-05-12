@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 				}`;
 			} else {
 				presenceData.details = "Browsing components";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else {
 			switch (path) {
@@ -48,10 +48,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state =
 				document.querySelector("article header div div h1")?.textContent ||
 				"Unknown article";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else {
 			presenceData.details = "Browsing articles";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (subdomain === "play") presenceData.details = "In Tailwind Play";
 	else if (path.includes("/docs")) {

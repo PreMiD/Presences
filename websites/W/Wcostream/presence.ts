@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 	} else if (pathname === "/") presenceData.details = "Home page";
 	else if (pathname.startsWith("/search")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.startsWith("/anime")) {
 		presenceData.details = "Viewing a Series:";
 		presenceData.state = document.querySelector<HTMLHeadingElement>(
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			"#cat-img-desc > div:nth-child(1) > img"
 		).src;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.buttons = [{ label: "View Series", url: document.URL }];
 	} else if (
 		document.querySelector<HTMLAnchorElement>(
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector<HTMLAnchorElement>(
 			"table > tbody > tr > td > h2 > a"
 		).textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 	}
 	if (!cover) presenceData.largeImageKey = "https://i.imgur.com/SDiZrOe.png";

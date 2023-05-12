@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 							.textContent,
 						""
 					);
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else presenceData.details = "Viewing recent articles";
 		} else if (document.location.pathname.includes("/series")) {
 			if (document.querySelector(".page-title")) {

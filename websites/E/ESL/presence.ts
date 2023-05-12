@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "ESL Pros, reading:";
 				presenceData.state = `${item.textContent} news, ${item2.textContent}`;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (
@@ -197,7 +197,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${item.textContent.substring(0, 125)}...`;
 				else presenceData.state = item.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/tour/")) {
@@ -223,7 +223,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "ESL Intel Grand Slam";
 				presenceData.state = "Reading the rules";
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/history/")) {
@@ -246,7 +246,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${item.textContent.substring(0, 125)}...`;
 				else presenceData.state = item.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else {
@@ -343,7 +343,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${item.textContent.substring(0, 125)}...`;
 				else presenceData.state = item.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else {
@@ -363,7 +363,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "ESL ONE";
 				presenceData.state = "Reading legal stuff";
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (
@@ -375,7 +375,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${item.textContent.substring(0, 125)}...`;
 				else presenceData.state = item.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (item2.textContent.includes(" - ")) {
@@ -509,7 +509,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing through games";
 				delete presenceData.state;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/help")) {
@@ -585,7 +585,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${item.textContent.substring(0, 125)}...`;
 				else presenceData.state = item.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/category/")) {
@@ -609,7 +609,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${item.textContent.substring(0, 125)}...`;
 				else presenceData.state = item.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/categories/")) {
@@ -667,7 +667,7 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.details = "ESL - Schulmeisterschaft";
 				presenceData.state = `Reading: ${item.textContent}`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/team/")) {

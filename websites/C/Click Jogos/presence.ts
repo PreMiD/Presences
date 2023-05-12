@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/busca/")) {
 		presenceData.details = "Pesquisando por:";
 		presenceData.state = document.querySelector("input").value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).search;
 	} else if (document.location.pathname.includes("/jogos/")) {
 		if (

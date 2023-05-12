@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = title.textContent;
 			} else {
 				presenceData.details = "Error";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = "Error";
 			}
 		} else if (path.includes("/watch/")) {
@@ -35,14 +35,14 @@ presence.on("UpdateData", async () => {
 				timestamps = presence.getTimestamps(video.currentTime, video.duration);
 				if (video.paused && title && video.currentTime !== 0) {
 					presenceData.details = "Paused";
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = "Paused";
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
 					presenceData.state = `${title.textContent} ${chapter.textContent}`;
 				} else if (!video.paused && title && video.currentTime !== 0) {
 					presenceData.details = "Playing";
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = "Playing";
 					[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 					presenceData.state = `${title.textContent} ${chapter.textContent}`;
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 					blog = document.querySelector("#blog_title") as HTMLTextAreaElement;
 					if (blog) presenceData.state = blog.textContent;
 				}
-				presenceData.smallImageKey = "read";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Reading";
 			} else presenceData.details = "Unable to Read Page";
 		}
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 							" - Otaku-Streamers",
 							""
 						);
-						presenceData.smallImageKey = "read";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = "Reading";
 					} else presenceData.details = "Reading a discusion";
 				} else if (path.includes("/title/")) {

@@ -124,13 +124,13 @@ presence.on("UpdateData", async () => {
 						if (elapsedTime === null)
 							elapsedTime = Math.floor(Date.now() / 1000);
 
-						presenceData.smallImageKey = "playing";
+						presenceData.smallImageKey = Assets.Play;
 						presenceData.smallImageText = "Live!";
 
 						if (await presence.getSetting<boolean>("show_timestamps"))
 							presenceData.startTimestamp = elapsedTime;
 					} else {
-						presenceData.smallImageKey = "paused";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = "Paused";
 
 						if (await presence.getSetting<boolean>("show_timestamps"))

@@ -58,11 +58,11 @@ presence.on("UpdateData", async () => {
 		else presenceData.state = `Episode ${epNumber}`;
 
 		if (!paused) {
-			presenceData.smallImageKey = "play";
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(currentTime, timeEnd);
+			presenceData.smallImageKey = Assets.Play[
+				(presenceData.startTimestamp, presenceData.endTimestamp)
+			] = presence.getTimestamps(currentTime, timeEnd);
 		} else {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 	} else if (page.includes("/search")) {
 		presenceData.details = pages[page];
 		presenceData.state = `Searching: "${search.get("keyword")}"`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 	} else {
 		switch (page) {

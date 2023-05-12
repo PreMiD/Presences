@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 			);
 			if (s) {
 				presenceData.state = `Searching for ${s}...`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = "Searching...";
 			}
 		}

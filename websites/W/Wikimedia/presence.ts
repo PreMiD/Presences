@@ -89,7 +89,7 @@ const updateCallback = {
 			case "diff.wikimedia.org":
 			case "techblog.wikimedia.org": {
 				let siteName: string;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				if (currentURL.hostname === "diff.wikimedia.org") siteName = "Diff";
 				else if (currentURL.hostname === "techblog.wikimedia.org")
 					siteName = "[[WM:TECHBLOG]]";

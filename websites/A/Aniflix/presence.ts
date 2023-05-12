@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.state = `${title.textContent} (${views.textContent})`;
 			delete presenceData.smallImageText;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 		}
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.endTimestamp;
 		presenceData.startTimestamp = browsingTimestamp;
 		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presence.setActivity(presenceData);
 	} else if (
 		document.location.pathname.includes("/show/") &&
@@ -167,7 +167,7 @@ presence.on("UpdateData", async () => {
 				delete presenceData.endTimestamp;
 				presenceData.startTimestamp = browsingTimestamp;
 				delete presenceData.smallImageText;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 
@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
 				delete presenceData.endTimestamp;
 				presenceData.startTimestamp = browsingTimestamp;
 				delete presenceData.smallImageText;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 

@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 		case "searchuser.php":
 			presenceData.details = "Searching for user:";
 			presenceData.state = typeURL.searchParams.get("nick");
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		case "dashboard":
 			if (arrPath[2] === "works") {
@@ -139,7 +139,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case "artworks":
 			presenceData.details = "Viewing artwork:";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.state = `${document.querySelector("h1").textContent} (${
 				document.querySelector("div:nth-child(2) > a > div").textContent
 			})`;
@@ -169,7 +169,8 @@ presence.on("UpdateData", async () => {
 				presenceData = { ...presenceData, ...staticPages[arrPath[1]] };
 	}
 
-	if (hostname === "sketch.pixiv.net") presenceData.smallImageKey = "writing";
+	if (hostname === "sketch.pixiv.net")
+		presenceData.smallImageKey = Assets.Writing;
 	if (
 		(pathname === "/" || pathname.includes("/public")) &&
 		hostname === "sketch.pixiv.net"

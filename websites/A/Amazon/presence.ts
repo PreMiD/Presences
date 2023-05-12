@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Searching for:"; //general.searchFor
 		presenceData.state = item.textContent;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.querySelector("#gc-asin-title")) {
 		item = document.querySelector("#gc-asin-title");
 

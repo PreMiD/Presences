@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Forums, searching for:";
 				[presenceData.state] = search.textContent.split("'");
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/profile/")) {
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Docs, reading:";
 			presenceData.state = title.textContent;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 

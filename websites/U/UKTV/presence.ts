@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 	else if (search) {
 		presenceData.details = "Searching for";
 		presenceData.state = search.value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (video?.duration) {
 		const title = document.querySelector<HTMLMetaElement>(
 				'[property="og:title"]'
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 			},
 		];
 		presenceData.details = strings.browse;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.browse;
 		presenceData.buttons = [
 			{

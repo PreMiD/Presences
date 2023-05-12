@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/search/")) {
 		delete presenceData.details;
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.state = `Looking${
 			document
 				.querySelectorAll(".ipsType_reset.ipsType_large")[0]

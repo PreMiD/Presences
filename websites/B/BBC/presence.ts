@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
 
 					setCover(iPlayer.episode?.images?.standard);
 
-					presenceData.smallImageKey = assets.LIVE;
+					presenceData.smallImageKey = Assets.LIVE;
 				} else if (!iPlayer.channel) {
 					setCover(
 						iPlayer.episode?.images?.promotional ??
@@ -240,7 +240,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details =
 					SoundMedia.title ?? soundData.programmes.current.titles.primary;
 				presenceData.state = soundData.programmes.current.titles.secondary;
-				presenceData.smallImageKey = assets.LIVE;
+				presenceData.smallImageKey = Assets.LIVE;
 			} else {
 				presenceData.details =
 					SoundMedia.title ?? soundData.programmes.current.titles.primary;
@@ -275,7 +275,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (path.includes("/sport")) {
 		presenceData.details = strings.browse;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 
 		const title = document.querySelector("h1")?.textContent;
 
@@ -601,7 +601,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (path.includes("/news")) {
 		presenceData.details = strings.browse;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 
 		const title = document.querySelector("h1")?.textContent,
 			newsPages: {
@@ -714,7 +714,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.searchFor;
 		presenceData.state =
 			document.querySelector<HTMLInputElement>("#search-input")?.value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	}
 
 	if (!buttons) delete presenceData.buttons;

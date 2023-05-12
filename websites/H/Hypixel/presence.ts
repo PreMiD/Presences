@@ -93,14 +93,14 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Forums, searching for:";
 					presenceData.state = search.value;
 
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 
 					presence.setActivity(presenceData);
 				} else {
 					presenceData.details = "Forums, about to search";
 					presenceData.state = "something up";
 
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 
 					presence.setActivity(presenceData);
 				}
@@ -201,7 +201,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = `${title.substring(0, 125)}...`;
 					else presenceData.state = title;
 
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 
 					presence.setActivity(presenceData);
 				} else {

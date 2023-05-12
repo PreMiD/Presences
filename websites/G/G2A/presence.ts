@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = (title as HTMLElement).textContent
 					.replace('" - G2A.COM', "")
 					.replace('Search results - "', "");
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else if (document.location.pathname.includes("/category")) {
 				presenceData.details = "Viewing category:";
 				title = document.querySelector("head > title");
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 				else {
 					presenceData.details = "News - Reading:";
 					presenceData.state = (title as HTMLElement).textContent;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				}
 			}
 

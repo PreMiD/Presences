@@ -24,12 +24,12 @@ presence.on("UpdateData", async () => {
 		if (title && chapter) {
 			presenceData.details = title.textContent;
 			presenceData.state = chapter.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (title && subTitle) {
 			presenceData.details = title.textContent;
 			presenceData.state = subTitle.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (quiz) presenceData.details = "Taking a Quiz";
 		else {
@@ -52,12 +52,12 @@ presence.on("UpdateData", async () => {
 		if (title && chapter) {
 			presenceData.details = title.textContent;
 			presenceData.state = chapter.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (title && subTitle) {
 			presenceData.details = title.textContent;
 			presenceData.state = subTitle.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (quiz) presenceData.details = "Taking a Quiz";
 		else presenceData.details = "Viewing Test Prep";
@@ -75,12 +75,12 @@ presence.on("UpdateData", async () => {
 		if (title && chapter) {
 			presenceData.details = title.textContent;
 			presenceData.state = chapter.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (title && subTitle) {
 			presenceData.details = title.textContent;
 			presenceData.state = subTitle.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (quiz) presenceData.details = "Taking a Quiz";
 		else presenceData.details = "Viewing Study Guides";
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 		if (search) {
 			presenceData.details = "Searching:";
 			presenceData.state = search.textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
 		}
 	} else if (path.includes("/discover-")) {

@@ -266,7 +266,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = getTranslation("Search");
 			presenceData.state = search.textContent.split('"')[1].replace('"', "");
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.URL.includes("/com.plexapp.plugins.library")) {
 			presenceData.details = getTranslation("Library");
 			presenceData.state = document.querySelector(

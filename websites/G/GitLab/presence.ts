@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 					) as HTMLTextAreaElement;
 					presenceData.details = "Searching";
 					presenceData.state = title.textContent;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Searching";
 
 					break;

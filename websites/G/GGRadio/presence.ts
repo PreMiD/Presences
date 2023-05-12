@@ -72,16 +72,16 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#top > div.p-body > div > div.p-body-header > div.p-title"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/members")) {
 			presenceData.details = "Forums - Viewing member:";
 			presenceData.state = document.querySelector(
 				"#top > div.p-body > div > div.p-body-main > div > div > div > div > div > div > div.memberHeader-main > div > h1"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/account")) {
 			presenceData.details = "Viewing their account";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname === "/")
 			presenceData.details = "Browsing...";
 	} else presenceData.details = "Browsing...";

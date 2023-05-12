@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 					},
 				];
 				presenceData.state = "Manual";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = Assets.Reading;
 				presenceData.details =
 					document.querySelector('[class="anchor"]').parentElement.textContent;
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 							},
 						];
 						presenceData.details = "Reading the blog";
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = Assets.Reading;
 						break;
 					}
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
 								.querySelector("title")
 								?.textContent.split("|")[0];
 						} else {
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 							presenceData.smallImageText = Assets.Reading;
 							presenceData.details = "Reading about third party modules";
 						}
@@ -114,7 +114,7 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = Assets.Reading;
 					if (document.querySelector("article")) {
 						presenceData.details = "Reading an article about";
@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
 									url: href,
 								},
 							];
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 							presenceData.smallImageText = Assets.Reading;
 							presenceData.details = "Reading an article about";
 							presenceData.state =

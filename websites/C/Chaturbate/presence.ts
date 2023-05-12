@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 		document.querySelector("#header div.logo-zone") !== null
 	) {
 		presenceData.details = (await strings).browsing;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).browsing;
 
 		if (path.includes("/p/")) {
@@ -146,7 +146,7 @@ presence.on("UpdateData", async () => {
 				case "/law_enforcement/":
 					presenceData.details = "Reading";
 					presenceData.state = "Law and meta pages";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = "Reading";
 					break;
 				case "/tube/":
@@ -175,7 +175,7 @@ presence.on("UpdateData", async () => {
 		if (!video && path.includes("/photo_videos/photo/")) {
 			presenceData.details = "Looking at a photo";
 			presenceData.state = document.querySelector("h1").textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = (await strings).browsing;
 		} else if (video && path.includes("/photo_videos/photo/")) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -198,7 +198,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.details = (await strings).browsing;
 			presenceData.state = "Photosets";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = (await strings).browsing;
 		}
 	} else if (path.split("/")[2] === null || path.split("/")[2].length === 0) {
@@ -214,14 +214,14 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "live";
 			presenceData.smallImageText = (await strings).live;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = (await strings).browsing;
 			presenceData.state = (await strings).browsing;
 		}
 	} else {
 		presenceData.details = (await strings).browsing;
 		presenceData.state = "Cams";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).browsing;
 	}
 

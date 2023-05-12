@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading the";
 			presenceData.state = "global chat";
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/private-accounts/"))
@@ -36,14 +36,14 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Searching for:";
 				presenceData.state = search.textContent;
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			} else {
 				presenceData.details = "Going to search";
 				presenceData.state = "something up";
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			}
@@ -181,7 +181,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${title.textContent.substring(0, 125)}...`;
 				else presenceData.state = title.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			}
@@ -375,7 +375,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Reading conversation:";
 				presenceData.state = title.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			}

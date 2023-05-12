@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 		case "blog": {
 			// ? https://blog.codechef.com
 			presenceData.details = "Viewing Blogs";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			if (location.pathname.split("/")[1] === "all-blogs")
 				presenceData.details = "Viewing All Blogs";
 			else if (location.pathname.split("/")[1] === "author") {
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `Author: ${
 					document.querySelector(".author-username").textContent
 				}`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 			break;
 		}
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			if (location.pathname.split("/")[1] === "t") {
 				presenceData.details = "Reading Discussions:";
 				presenceData.state = document.querySelector(".fancy-title").textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 			break;
 		}

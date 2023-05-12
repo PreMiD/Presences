@@ -21,12 +21,12 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `DJ: ${
 			dj.textContent
 		} Listeners: ${listeners.textContent.replace(" Listeners", "")}`;
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 	} else if (document.location.pathname.includes("/recent")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Viewing the recently";
 		presenceData.state = "played songs";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/team")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Viewing the staff team";
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/about")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Reading about TSFM";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/schedule")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Viewing the schedule";
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/contact")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Contacting TSR";
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 	} else if (document.location.pathname.includes("/modifications")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Viewing the offical";

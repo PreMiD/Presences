@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = "Editing profile";
 	} else if (document.location.href.includes("project/new")) {
 		presenceData.details = "Uploading an artwork";
-		presenceData.smallImageKey = "upload";
+		presenceData.smallImageKey = Assets.Uploading;
 		presenceData.smallImageText = "Uploading artwork";
 	} else if (document.location.hostname === "magazine.artstation.com") {
 		presenceData.details = "Reading magazines";

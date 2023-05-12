@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
 				document.title;
 			presenceData.smallImageText = strings.browsing;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			if (path.length > 1) {
 				presenceData.state = document.querySelector<HTMLHeadingElement>(
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
 				document.title;
 			presenceData.smallImageText = strings.browsing;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			if (path.length > 1) {
 				presenceData.state = document.querySelector<HTMLHeadingElement>(
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
 				document.title;
 			presenceData.smallImageText = strings.reading;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			if (path.length > 1) {
 				presenceData.state =

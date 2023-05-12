@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "search": {
 			presenceData.details = "Searching";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
 			break;
 		}

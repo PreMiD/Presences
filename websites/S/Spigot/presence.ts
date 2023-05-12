@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Forums, searching for:";
 				presenceData.state = search.textContent;
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/members/")) {
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Using SpigotSearchEngine:";
 						presenceData.state = search.textContent;
 
-						presenceData.smallImageKey = "search";
+						presenceData.smallImageKey = Assets.Search;
 
 						presence.setActivity(presenceData);
 					} else {
@@ -189,7 +189,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = `${title.textContent.substring(0, 125)}...`;
 					else presenceData.state = title.textContent;
 
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 
 					presence.setActivity(presenceData);
 				} else {

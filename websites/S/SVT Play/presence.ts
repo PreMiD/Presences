@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#play_main-content > section > h2.play_search-page__header.play_search-page__header--match > span"
 			).textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

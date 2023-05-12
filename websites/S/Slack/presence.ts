@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Reading DMs from:";
 				presenceData.state = `${user.textContent} (Workspace: ${group.textContent})`;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			}
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Reading channel messages:";
 				presenceData.state = `#${chat.textContent} (Workspace: ${group.textContent})`;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			}
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Slack Blog";
 		presenceData.state = `Searching for: ${path[2]}`;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		presence.setActivity(presenceData);
 	} else if (
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Slack Blog";
 		presenceData.state = `Searching with role: ${path[2]}`;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		presence.setActivity(presenceData);
 	} else if (
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Slack Blog";
 		presenceData.state = `Searching with tag: ${path[2]}`;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		presence.setActivity(presenceData);
 	} else if (
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Slack Blog";
 		presenceData.state = `Searching with category: ${path[2]}`;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.hostname === "slackhq.com") {
@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Slack Blog";
 			presenceData.state = `Reading article: ${group.textContent}`;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 		} else {
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Slack Help Center";
 		presenceData.state = `Searching for: ${search.textContent}`;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.hostname === "get.slack.help") {
@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Slack api";
 			presenceData.state = `Reading article: ${group.textContent}`;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 		} else {
@@ -233,7 +233,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Slack";
 			presenceData.state = `Reading article: ${group.textContent}`;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 		} else presence.setActivity();
@@ -247,7 +247,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Slack";
 			presenceData.state = `Reading article: ${group.textContent}`;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 		} else presence.setActivity();
@@ -263,7 +263,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Slack";
 			presenceData.state = `Reading article: ${group.textContent}`;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 		} else presence.setActivity();

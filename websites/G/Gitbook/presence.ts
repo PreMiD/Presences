@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 				: "In a Dashboard";
 			actionTimestamp = null;
 		} else {
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			presenceData.smallImageText = "Editing";
 
 			const docName = document.querySelector("[class*='logoText-'] span"),
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = actionTimestamp;
 		}
 	} else {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Viewing";
 
 		const docName = document.querySelector("[class*='logoText-'] span"),

@@ -54,12 +54,12 @@ presence.on("UpdateData", async () => {
 
 	if (page.includes("/courses/search")) {
 		presenceData.details = "Searching for:";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.state =
 			new URLSearchParams(location.search).get("q")?.split("+")?.join(" ") ||
 			"Something";
 	} else if (page.includes("/courses/")) {
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.state =
 			document.querySelector("div h1[class*=category--heading-primary] a")
 				?.textContent || "Unknown Category";

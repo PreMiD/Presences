@@ -210,7 +210,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = strings.searchSomething;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.searching;
 	}
 

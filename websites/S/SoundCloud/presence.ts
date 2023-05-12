@@ -262,13 +262,13 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing|Discovering)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = strings.browse;
 		} else if (presenceData.details.match("(Searching)")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 		} else if (presenceData.details.match("(Uploading)")) {
-			presenceData.smallImageKey = "uploading";
+			presenceData.smallImageKey = Assets.Uploading;
 			presenceData.smallImageText = "Uploading..."; // no string available
 		} else if (!showTimestamps || (!playing && !showBrowsing)) {
 			delete presenceData.startTimestamp;

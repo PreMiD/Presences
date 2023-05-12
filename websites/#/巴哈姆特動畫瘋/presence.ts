@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 					"#BH_background > div.container-player > div.anime-title > div.anime-option > section.videoname > div.anime_name > h1"
 				);
 				presenceData.state = title.textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		} else if (document.location.pathname.includes("/animeList")) {
 			presenceData.startTimestamp = browsingTimestamp;

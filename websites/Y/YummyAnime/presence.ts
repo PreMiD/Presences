@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
 				"body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
 			);
 			presenceData.state = title.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (document.location.pathname.includes("/movie")) {
 		presenceData.details = "Browsing through";
@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
 		);
 		presenceData.details = "Searching for:";
 		presenceData.state = search.value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/ongoing")) {
 		presenceData.details = "Browsing through";
 		presenceData.state = "ongoing animes";
@@ -128,14 +128,14 @@ presence.on("UpdateData", async () => {
 			);
 
 		presenceData.state = title.textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/post"))
 		presenceData.details = "Viewing posts";
 	else if (document.location.pathname.includes("/top"))
 		presenceData.details = "Viewing the top";
 	else if (document.URL === "https://otakustream.tv/") {
 		presenceData.details = "Browsing...";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

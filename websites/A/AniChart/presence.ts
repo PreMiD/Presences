@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 		default: {
 			if ((document.querySelector(".input") as HTMLInputElement)?.value) {
 				presenceData.details = "Searching anime";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.state = (
 					document.querySelector(".input") as HTMLInputElement
 				).value;

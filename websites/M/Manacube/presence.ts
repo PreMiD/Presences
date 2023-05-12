@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Forums, Searching For:";
 			presenceData.state = search.textContent;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.includes("/members/")) {
 		user = document.querySelector(

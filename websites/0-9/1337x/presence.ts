@@ -54,13 +54,13 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Uploading something...";
 	else if (document.location.pathname.includes("/rules")) {
 		presenceData.details = "Reading the rules";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/contact")) {
 		presenceData.details = "Writing to 1337x";
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 	} else if (document.location.pathname.includes("/about")) {
 		presenceData.details = "Reading about 1337x";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/torrent/")) {
 		presenceData.details = "Viewing torrent:";
 		title = document.querySelector(
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Searching for:";
 		presenceData.state = search.textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

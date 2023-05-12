@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 		).textContent;
 	} else if (document.location.pathname.includes("/ReportError")) {
 		presenceData.details = "Reporting an error";
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

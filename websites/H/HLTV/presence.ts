@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 				"body > div.bgPadding > div > div.colCon > div.contentCol > article > h1"
 			);
 			presenceData.state = title.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/profile/")) {
 			title = document.querySelector(
 				"body > div.bgPadding > div > div.colCon > div.contentCol > div > div.top-info > div > div.info.col > div.headline"
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.details = "Reading forum thread:";
 				presenceData.state = title.textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				title = document.querySelector(
 					"body > div.bgPadding > div > div.colCon > div.contentCol > div > span:nth-child(2)"
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = "Searching for:";
 			presenceData.state = search.value;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

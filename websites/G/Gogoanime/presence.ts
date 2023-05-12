@@ -325,7 +325,7 @@ presence.on("UpdateData", async () => {
 	if (usedSearchEl?.value) {
 		presenceData.details = "Searching for:";
 		presenceData.state = usedSearchEl.value.replace(/ /gm, "");
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search
 		return presence.setActivity(presenceData);
 	}
 	if (detail === detailed.NOTFOUND) presence.setActivity();
@@ -335,12 +335,12 @@ presence.on("UpdateData", async () => {
 			currentTime = presence.timestampFromFormat(currentTime2);
 		}
 		if (paused) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause
 			presenceData.smallImageText = `${
 				presence.getTimestamps(currentTime, duration)[1]
 			} left`;
 		} else {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play
 			[, presenceData.endTimestamp] = presence.getTimestamps(
 				currentTime,
 				duration

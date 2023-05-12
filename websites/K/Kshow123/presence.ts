@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.includes("/pages/")
 	) {
 		presenceData.details = "Reading the FAQs";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes(".html")) {
 		if (iFrameVideo === true && !isNaN(duration)) {
 			presenceData.smallImageKey = paused ? "pause" : "play";
@@ -98,42 +98,42 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#player > div.alert.alert-info.hidden-xs > div.media > div > a > h1"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else {
 		switch (document.location.pathname) {
 			case "/": {
 				presenceData.details = "Browsing through";
 				presenceData.state = "the main page";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				break;
 			}
 			case "/show/latest/": {
 				presenceData.details = "Browsing through";
 				presenceData.state = "the latest shows";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				break;
 			}
 			case "/show/popular/": {
 				presenceData.details = "Browsing through";
 				presenceData.state = "the most popular shows";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				break;
 			}
 			case "/show/rated/": {
 				presenceData.details = "Browsing through";
 				presenceData.state = "the highest rated shows";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				break;
 			}
 			case "/show/": {
 				presenceData.details = "Browsing through";
 				presenceData.state = "a list of all shows";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				break;
 			}
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document.querySelector(
 						"#info > div.media > div > h1 > a"
 					).textContent;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 
 					presence.setActivity(presenceData);
 				} else if (document.location.pathname.includes("/search/")) {
@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document.querySelector(
 						"#featured > div.page-header > h3"
 					).textContent;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 				}
 		}
 	}

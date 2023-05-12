@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 	} else if (path.includes("/article/")) {
 		presenceData.details = "Reading news article:";
 		presenceData.state = document.querySelector("div.title").textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (path.includes("/vods/")) {
 		presenceData.details = "VODS";
 		presenceData.state = "Looking at past matches";

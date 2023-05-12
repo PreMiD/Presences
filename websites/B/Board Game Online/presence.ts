@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browse;
 		}
 		presence.setActivity(presenceData);

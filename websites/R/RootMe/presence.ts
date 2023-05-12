@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 		else if (parseQueryString(document.location.hash).page === "faq")
 			presenceData.state = document.querySelector("h1.crayon").textContent;
 
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		switch (
 			document.querySelector("img.grayscale").getAttribute("alt") ||
 			document.querySelector("img.grayscale").getAttribute("title")

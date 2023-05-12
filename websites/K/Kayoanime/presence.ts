@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 			break;
 	}
 	if (document.location.search.startsWith("?s")) {
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.details = "Searching for:";
 		presenceData.state = document
 			.querySelector("label input")

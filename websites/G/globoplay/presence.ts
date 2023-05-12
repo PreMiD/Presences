@@ -28,11 +28,11 @@ presence.on("UpdateData", async () => {
 			if (categoryName) {
 				presenceData.details = "Vendo a categoria:";
 				presenceData.state = categoryName;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (categoryNamealt) {
 				presenceData.details = "Vendo a categoria:";
 				presenceData.state = categoryNamealt.textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else presenceData.details = "Categorias";
 		} else if (document.location.pathname.includes("/busca/")) {
 			presenceData.details = "Se preparando para";
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			if (search.value.length > 2) {
 				presenceData.details = "Pesquisando por:";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else if (document.location.pathname.includes("/programacao"))
 			presenceData.details = "Programação";
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 			user = document.querySelector(".media-cover__header-text");
 			presenceData.details = "Vendo o programa/filme:";
 			presenceData.state = user.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/v/")) {
 			const video = document.querySelector<HTMLVideoElement>(
 					".id-playback > video"

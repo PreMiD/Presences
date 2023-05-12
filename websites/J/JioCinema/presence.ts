@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (url.includes("/search/")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else presenceData.details = "Browsing";
 
 	presence.setActivity(presenceData, true);

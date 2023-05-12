@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 			);
 
 			presenceData.state = title.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (document.location.pathname === "/") {
 		presenceData.details = "Viewing main page";

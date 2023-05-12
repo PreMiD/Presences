@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = setTimestamp();
 	} else if (document.location.href.includes("?q=")) {
 		presenceData.startTimestamp = setTimestamp();
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		if (document.location.href.includes("/images/"))
 			presenceData.details = await handleFormatting("imageSearch");

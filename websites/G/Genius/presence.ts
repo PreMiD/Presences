@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = strings.article;
 		presenceData.state = article;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = strings.reading;
 	} else if (path.startsWith("/artists/")) {
 		presenceData.details = strings.profile;
@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"h2.search_results_page-header"
 		).textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.searching;
 	}
 

@@ -55,10 +55,10 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			if (video.paused) {
 				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 			} else if (!video.paused) {
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 			}
 		} else {
 			presenceData.largeImageKey =
