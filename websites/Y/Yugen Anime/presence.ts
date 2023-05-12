@@ -49,10 +49,10 @@ let video = {
 
 enum Assets {
 	Logo = "https://i.imgur.com/m5UhwNJ.png",
-	Play = "https://i.imgur.com/C30VYuh.png",
-	Pause = "https://i.imgur.com/yjIdXJ3.png",
-	Search = "https://i.imgur.com/MVpU1DJ.png",
-	Reading = "https://i.imgur.com/YJBDFSZ.png",
+	Play = "https://i.imgur.com/q57RJjs.png",
+	Pause = "https://i.imgur.com/mcEXiZk.pngg",
+	Search = "https://i.imgur.com/B7FxcD4.png",
+	Reading = "https://i.imgur.com/5m10TTT.png",
 }
 
 presence.on(

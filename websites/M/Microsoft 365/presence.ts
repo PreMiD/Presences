@@ -17,9 +17,9 @@ enum Assets {
 	OneNote = "https://i.imgur.com/LqrhRhD.png",
 	PowerPoint = "https://i.imgur.com/GAiZFPR.png",
 	Word = "https://i.imgur.com/Ec78aqz.png",
-	Search = "https://i.imgur.com/MVpU1DJ.png",
-	Reading = "https://i.imgur.com/YJBDFSZ.png",
-	Writing = "https://i.imgur.com/iVwT1cq.png",
+	Search = "https://i.imgur.com/B7FxcD4.png",
+	Reading = "https://i.imgur.com/5m10TTT.png",
+	Writing = "https://i.imgur.com/Pa00qZh.png",
 }
 
 presence.on(

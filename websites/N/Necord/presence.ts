@@ -1,6 +1,6 @@
 enum SmallImageKeys {
 	Idle = "https://i.imgur.com/6A9pxAR.png",
-	Search = "https://i.imgur.com/MVpU1DJ.png",
+	Search = "https://i.imgur.com/B7FxcD4.png",
 	Read = "https://i.imgur.com/ULFqucm.png",
 }
 

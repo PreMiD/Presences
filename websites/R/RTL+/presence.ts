@@ -18,8 +18,8 @@ let video: HTMLVideoElement,
 
 enum Assets {
 	Logo = "https://i.imgur.com/fMMsZfV.jpg",
-	Play = "https://i.imgur.com/C30VYuh.png",
-	Pause = "https://i.imgur.com/yjIdXJ3.png",
+	Play = "https://i.imgur.com/q57RJjs.png",
+	Pause = "https://i.imgur.com/mcEXiZk.pngg",
 }
 
 presence.on("UpdateData", async () => {

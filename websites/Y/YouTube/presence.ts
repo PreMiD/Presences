@@ -122,14 +122,14 @@ async function getStrings() {
 enum Assets {
 	Logo = "https://i.imgur.com/o5injgg.png",
 	Studio = "https://i.imgur.com/T2uW4AB.png",
-	Repeat = "https://i.imgur.com/lStzn9U.png",
-	RepeatOne = "https://i.imgur.com/wp6u4L5.png",
-	Play = "https://i.imgur.com/C30VYuh.png",
-	Pause = "https://i.imgur.com/yjIdXJ3.png",
-	Search = "https://i.imgur.com/MVpU1DJ.png",
-	Live = "https://i.imgur.com/039FHPW.png",
-	Reading = "https://i.imgur.com/YJBDFSZ.png",
-	Writing = "https://i.imgur.com/iVwT1cq.png",
+	Repeat = "https://i.imgur.com/Ikh95KU.png",
+	RepeatOne = "https://i.imgur.com/wh885z3.png",
+	Play = "https://i.imgur.com/q57RJjs.png",
+	Pause = "https://i.imgur.com/mcEXiZk.pngg",
+	Search = "https://i.imgur.com/B7FxcD4.png",
+	Live = "https://i.imgur.com/0HVm46z.png",
+	Reading = "https://i.imgur.com/5m10TTT.png",
+	Writing = "https://i.imgur.com/Pa00qZh.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,

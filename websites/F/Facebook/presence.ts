@@ -41,9 +41,9 @@ enum Assets {
 	GamingLogo = "https://i.imgur.com/yhPO44a.png",
 	MarketplaceLogo = "https://i.imgur.com/3AbfNnr.png",
 	Logo = "https://i.imgur.com/nS9sZn6.png",
-	Play = "https://i.imgur.com/C30VYuh.png",
-	Search = "https://i.imgur.com/MVpU1DJ.png",
-	Live = "https://i.imgur.com/039FHPW.png",
+	Play = "https://i.imgur.com/q57RJjs.png",
+	Search = "https://i.imgur.com/B7FxcD4.png",
+	Live = "https://i.imgur.com/0HVm46z.png",
 	Pause = "https://i.imgur.com/PrYtpQb.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,

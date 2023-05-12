@@ -9,7 +9,7 @@ const presence = new Presence({ clientId: "1014873319419424869" }),
 
 enum Assets {
 	Logo = "https://i.imgur.com/3ltOcr0.png",
-	Reading = "https://i.imgur.com/YJBDFSZ.png",
+	Reading = "https://i.imgur.com/5m10TTT.png",
 }
 
 presence.on("UpdateData", async () => {

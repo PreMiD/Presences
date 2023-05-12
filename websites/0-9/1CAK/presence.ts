@@ -18,8 +18,8 @@ async function getStrings() {
 }
 enum Assets {
 	Logo = "https://i.imgur.com/BQPTByr.png",
-	Search = "https://i.imgur.com/MVpU1DJ.png",
-	Reading = "https://i.imgur.com/YJBDFSZ.png",
+	Search = "https://i.imgur.com/B7FxcD4.png",
+	Reading = "https://i.imgur.com/5m10TTT.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;

@@ -23,9 +23,9 @@ presence.on(
 
 enum Assets {
 	Logo = "https://i.imgur.com/jPl7EfZ.png",
-	Play = "https://i.imgur.com/C30VYuh.png",
-	Pause = "https://i.imgur.com/yjIdXJ3.png",
-	Search = "https://i.imgur.com/MVpU1DJ.png",
+	Play = "https://i.imgur.com/q57RJjs.png",
+	Pause = "https://i.imgur.com/mcEXiZk.pngg",
+	Search = "https://i.imgur.com/B7FxcD4.png",
 }
 
 presence.on("UpdateData", async () => {

@@ -10,9 +10,9 @@ const presence = new Presence({ clientId: "1016797607370162256" }),
 
 enum Assets {
 	Logo = "https://i.imgur.com/BRpmbpT.png",
-	Play = "https://i.imgur.com/C30VYuh.png",
-	Pause = "https://i.imgur.com/yjIdXJ3.png",
-	Reading = "https://i.imgur.com/YJBDFSZ.png",
+	Play = "https://i.imgur.com/q57RJjs.png",
+	Pause = "https://i.imgur.com/mcEXiZk.pngg",
+	Reading = "https://i.imgur.com/5m10TTT.png",
 }
 
 interface IFrameData {

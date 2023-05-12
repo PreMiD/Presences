@@ -7,8 +7,8 @@ enum Assets {
 	Logo = "https://i.imgur.com/LF4eDYG.png",
 	NewsLogo = "https://i.imgur.com/aBbfq11.png",
 	MerchLogo = "https://i.imgur.com/GOPd2Ep.png",
-	Reading = "https://i.imgur.com/YJBDFSZ.png",
-	Search = "https://i.imgur.com/MVpU1DJ.png",
+	Reading = "https://i.imgur.com/5m10TTT.png",
+	Search = "https://i.imgur.com/B7FxcD4.png",
 }
 
 presence.on("UpdateData", async () => {

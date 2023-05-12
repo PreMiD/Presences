@@ -5,9 +5,9 @@ const presence = new Presence({
 
 enum Assets {
 	Logo = "https://i.imgur.com/ogoDV1c.png",
-	Play = "https://i.imgur.com/C30VYuh.png",
-	Pause = "https://i.imgur.com/yjIdXJ3.png",
-	Replay = "https://i.imgur.com/C30VYuh.png",
+	Play = "https://i.imgur.com/q57RJjs.png",
+	Pause = "https://i.imgur.com/mcEXiZk.pngg",
+	Replay = "https://i.imgur.com/q57RJjs.png",
 	"360DegreeEasy" = "https://i.imgur.com/DVJ8DrX.png",
 	"360DegreeExpert" = "https://i.imgur.com/TfqWdfp.png",
 	"360DegreeExpertPlus" = "https://i.imgur.com/NA06k7F.png",

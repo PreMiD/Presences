@@ -9,8 +9,8 @@ let username: string,
 
 enum Assets {
 	Logo = "https://i.imgur.com/zs8myqz.png",
-	Search = "https://i.imgur.com/MVpU1DJ.png",
-	Reading = "https://i.imgur.com/YJBDFSZ.png",
+	Search = "https://i.imgur.com/B7FxcD4.png",
+	Reading = "https://i.imgur.com/5m10TTT.png",
 }
 
 async function getCoverImage(newMangaId: string) {
