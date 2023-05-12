@@ -9,6 +9,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+enum Assets {
+	Play = "https://i.imgur.com/q57RJjs.png",
+	Pause = "https://i.imgur.com/mcEXiZk.png",
+	Search = "https://i.imgur.com/B7FxcD4.png",
+	Live = "https://i.imgur.com/0HVm46z.png",
+}
+
 let title: string, seasonEpisode: string, liveTitle: string;
 
 function pathIncludes(path: string, str: string) {
@@ -22,18 +29,18 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/VWrl85V.jpg",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname: path } = window.location;
+		{ pathname: path } = document.location;
 
 	switch (true) {
 		case pathIncludes(path, "/home"):
-			presenceData.details = "Browsing...";
+			presenceData.details = "Browsing";
 			presenceData.state = "Viewing home page";
 			break;
 
 		case pathIncludes(path, "/search"):
-			presenceData.details = "Searching...";
-			presenceData.smallImageKey = "search";
-			presenceData.smallImageText = "Looking for something good...";
+			presenceData.details = "Searching";
+			presenceData.smallImageKey = Assets.Search;
+			presenceData.smallImageText = "Looking for something good";
 			break;
 
 		case pathIncludes(path, "/shows"): {
@@ -52,7 +59,7 @@ presence.on("UpdateData", async () => {
 
 				if (seasonEpisode) presenceData.state = seasonEpisode;
 
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
@@ -70,25 +77,24 @@ presence.on("UpdateData", async () => {
 				!vidArea &&
 				document.querySelector('[type="application/ld+json"]') !== null
 			) {
-				presenceData.details = "Viewing series...";
+				presenceData.details = "Viewing series";
 				presenceData.state = JSON.parse(
 					document.querySelector('[type="application/ld+json"]').textContent
 				).name;
 			} else {
-				presenceData.details = "Browsing...";
+				presenceData.details = "Browsing";
 				presenceData.state = "Viewing Shows";
 			}
 			break;
 		}
 
 		case pathIncludes(path, "/movies"):
-			// check if the video area is present and if the video's class is "marqueeVideo"
 			if (
 				vidArea &&
 				document.querySelector("video.marqueeVideo") &&
 				!vidArea.querySelector("video")
 			) {
-				presenceData.details = "Previewing a movie...";
+				presenceData.details = "Previewing a movie";
 				presenceData.state = JSON.parse(
 					document.querySelector('[type="application/ld+json"]').textContent
 				).name;
@@ -102,7 +108,7 @@ presence.on("UpdateData", async () => {
 				if (movData.name) presenceData.state = movData.name;
 				presenceData.details = "Watching a movie";
 
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
@@ -115,7 +121,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.endTimestamp;
 				}
 			} else {
-				presenceData.details = "Browsing...";
+				presenceData.details = "Browsing";
 				presenceData.state = "Viewing Movies";
 			}
 			break;
@@ -127,7 +133,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Watching Live TV";
 			presenceData.state = liveTitle;
-			presenceData.smallImageKey = "live";
+			presenceData.smallImageKey = Assets.Live;
 
 			break;
 
@@ -135,27 +141,27 @@ presence.on("UpdateData", async () => {
 			if (path.includes("/cbs/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "CBS";
-				presenceData.smallImageKey = "cbs";
+				presenceData.largeImageKey = "https://i.imgur.com/BfxpVej.png";
 			} else if (path.includes("/bet/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "BET";
-				presenceData.smallImageKey = "bet";
+				presenceData.largeImageKey = "https://i.imgur.com/SBl99Dz.png";
 			} else if (path.includes("/comedy-central/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "Comedy Central";
-				presenceData.smallImageKey = "comedycentral";
+				presenceData.largeImageKey = "https://i.imgur.com/936hLEE.png";
 			} else if (path.includes("/mtv/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "MTV";
-				presenceData.smallImageKey = "mtv";
+				presenceData.largeImageKey = "https://i.imgur.com/uCpqd3d.png";
 			} else if (path.includes("/nickelodeon/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "Nickelodeon";
-				presenceData.smallImageKey = "nickeloden";
+				presenceData.largeImageKey = "https://i.imgur.com/SwkpkrM.png";
 			} else if (path.includes("/smithsonian-channel/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "Smithsonian Channel";
-				presenceData.smallImageKey = "smithsonian";
+				presenceData.largeImageKey = "https://i.imgur.com/1TfaVpT.png";
 			} else {
 				presenceData.details = "Browsing Brands";
 				presenceData.state = "Viewing Brands";
