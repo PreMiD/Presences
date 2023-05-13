@@ -28,10 +28,10 @@ presence.on("UpdateData", async () => {
 				'[data-rt="video-player-channels"]'
 			);
 			title = document.querySelector(
-				"#play_main-content > div > div.sc-b35938a7-1.bTCBgw > div > div > div.sc-2c367a6f-0.dxLhHV > h2"
+				"#play_main-content > div > div > div > div > div > h2"
 			).textContent;
 			user = document.querySelector(
-				"#play_main-content > div > div.sc-b35938a7-1.bTCBgw > div > div > div.sc-2c367a6f-0.dxLhHV > p"
+				"#play_main-content > div > div > div > div > div > p"
 			).textContent;
 			if (video) {
 				presenceData.smallImageKey = "live";
