@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "242621043561201666",
+		"name": "GreenMan36"
+	},
+	"service": "Phind",
+	"description": {
+		"en": "Phind is an AI-powered search engine that provides immediate, detailed answers to various questions. Drawing from multiple internet sources, it ensures up-to-date and accurate information, making the search for answers as simple and interactive as having a conversation with a friend."
+	},
+	"url": "www.phind.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/6fdQsQJ.png",
+	"thumbnail": "https://i.imgur.com/QtMoo9B.png",
+	"color": "#000000",
+	"category": "other",
+	"tags": [
+		"search",
+		"coding",
+		"programming",
+		"ai",
+		"gpt"
+	],
+	"settings": [
+		{
+			"id": "displayTime",
+			"title": "Display time spent",
+			"icon": "fa-duotone fa-clock",
+			"value": true
+		},
+		{
+			"id": "displaySearch",
+			"title": "Display search query",
+			"icon": "fa-duotone fa-align-left",
+			"value": true
+		},
+		{
+			"id": "shareSearch",
+			"title": "Share search",
+			"icon": "fa-duotone fa-share-from-square",
+			"value": true
+		},
+		{
+			"id": "privateMode",
+			"title": "Hide all activity",
+			"icon": "fa-duotone fa-user-secret",
+			"value": false
+		}
+	]
+}
