@@ -70,9 +70,7 @@ presence.on("UpdateData", async () => {
 			title = document.querySelector(
 				'[data-rt="program-info-title"] > a'
 			).textContent;
-			user = document.querySelector(
-				'[data-rt="episode-link"]'
-			).textContent;
+			user = document.querySelector('[data-rt="episode-link"]').textContent;
 			if (video) {
 				if (!video.duration) {
 					time = false;
