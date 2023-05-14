@@ -17,11 +17,7 @@
 	"thumbnail": "https://i.imgur.com/2nENqtm.png",
 	"color": "#6AAA64",
 	"category": "games",
-	"tags": [
-		"word",
-		"guessing",
-		"game"
-	],
+	"tags": ["word", "guessing", "game"],
 	"settings": [
 		{
 			"id": "guess",
