@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Looking their ${pathName}`;
 
 	} else if (document.location.pathname === "/search") {
-		const searchInput = document.querySelectorAll(".search__input")[0].getAttribute("value");
+		const searchInput = document.querySelector(".search__input").getAttribute("value");
 		presenceData.smallImageText = "Search";
 		presenceData.details = `Searching ${searchInput}`;
 
