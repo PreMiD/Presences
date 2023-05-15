@@ -251,7 +251,21 @@ import hoola from "./H/hoola";
 import hungariantarokk from "./H/hungariantarokk";
 import hydroracers from "./H/hydroracers";
 import hypnosia from "./H/hypnosia";
+import iceandthesky from "./I/iceandthesky";
+import icebreaker from "./I/icebreaker";
+import icecoldicehockey from "./I/icecoldicehockey";
+import illustori from "./I/illustori";
+import imhotep from "./I/imhotep";
+import impasse from "./I/impasse";
+import imtheboss from "./I/imtheboss";
+import incangold from "./I/incangold";
+import innovation from "./I/innovation";
+import insert from "./I/insert";
+import intheyearofthedragon from "./I/intheyearofthedragon";
+import inventors from "./I/inventors";
+import isaac from "./I/isaac";
 import itsawonderfulworld from "./I/itsawonderfulworld";
+import iwari from "./I/iwari";
 import kingoftokyo from "./K/kingoftokyo";
 import luckynumbers from "./L/luckynumbers";
 import patchwork from "./P/patchwork";
@@ -529,7 +543,21 @@ const games: Record<string, GamePresence> = {
 	hungariantarokk,
 	hydroracers,
 	hypnosia,
+	iceandthesky,
+	icebreaker,
+	icecoldicehockey,
+	illustori,
+	imhotep,
+	impasse,
+	imtheboss,
+	incangold,
+	innovation,
+	insert,
+	intheyearofthedragon,
+	inventors,
+	isaac,
 	itsawonderfulworld,
+	iwari,
 	kingoftokyo,
 	luckynumbers,
 	patchwork,
