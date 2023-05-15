@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const herooj: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/HYFRuUf.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,64 +23,8 @@ const herooj: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
 				case "playerTurn":
-					/*
-					{
-	"name": "playerTurn",
-	"description": "${actplayer} must move his piece",
-	"descriptionmyturn": "${you} must move your piece",
-	"type": "activeplayer",
-	"action": "stplayerTurn",
-	"args": "argplayerTurn",
-	"updateGameProgression": true,
-	"possibleactions": [
-		"MovePiece",
-		"Withdraw"
-	],
-	"transitions": {
-		"NextPlayer": 3,
-		"GameEnd": 99
-	}
-}
-					*/
-					break;
-				case "NextPlayer":
-					/*
-					{
-	"name": "NextPlayer",
-	"type": "game",
-	"action": "stNextPlayer",
-	"updateGameProgression": true,
-	"transitions": {
-		"NextPlayer": 2,
-		"GameEnd": 99
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Moving a piece";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

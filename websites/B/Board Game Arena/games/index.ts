@@ -224,7 +224,33 @@ import grosstarock from "./G/grosstarock";
 import guildes from "./G/guildes";
 import guile from "./G/guile";
 import gyges from "./G/gyges";
+import hacktrick from "./H/hacktrick";
+import hadara from "./H/hadara";
+import hadron from "./H/hadron";
+import haggis from "./H/haggis";
+import haiclue from "./H/haiclue";
 import hanabi from "./H/hanabi";
+import hanamikoji from "./H/hanamikoji";
+import handandfoot from "./H/handandfoot";
+import happycity from "./H/happycity";
+import hardback from "./H/hardback";
+import hawaii from "./H/hawaii";
+import hearts from "./H/hearts";
+import heckinhounds from "./H/heckinhounds";
+import herd from "./H/herd";
+import heroesofhellas from "./H/heroesofhellas";
+import herooj from "./H/herooj";
+import herrlof from "./H/herrlof";
+import hex from "./H/hex";
+import hive from "./H/hive";
+import hoarders from "./H/hoarders";
+import hokito from "./H/hokito";
+import homesteaders from "./H/homesteaders";
+import homeworlds from "./H/homeworlds";
+import hoola from "./H/hoola";
+import hungariantarokk from "./H/hungariantarokk";
+import hydroracers from "./H/hydroracers";
+import hypnosia from "./H/hypnosia";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import kingoftokyo from "./K/kingoftokyo";
 import luckynumbers from "./L/luckynumbers";
@@ -476,7 +502,33 @@ const games: Record<string, GamePresence> = {
 	guildes,
 	guile,
 	gyges,
+	hacktrick,
+	hadara,
+	hadron,
+	haggis,
+	haiclue,
 	hanabi,
+	hanamikoji,
+	handandfoot,
+	happycity,
+	hardback,
+	hawaii,
+	hearts,
+	heckinhounds,
+	herd,
+	heroesofhellas,
+	herooj,
+	herrlof,
+	hex,
+	hive,
+	hoarders,
+	hokito,
+	homesteaders,
+	homeworlds,
+	hoola,
+	hungariantarokk,
+	hydroracers,
+	hypnosia,
 	itsawonderfulworld,
 	kingoftokyo,
 	luckynumbers,

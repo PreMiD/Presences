@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const hypnosia: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/lQIYV88.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,104 +23,11 @@ const hypnosia: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
-				case "playerDiceTurn":
-					/*
-					{
-	"name": "playerDiceTurn",
-	"description": "",
-	"type": "game",
-	"action": "stRollDice",
-	"transitions": {
-		"rollDice": 3,
-		"zombiePass": 5
-	}
-}
-					*/
-					break;
 				case "playerSelectTurn":
-					/*
-					{
-	"name": "playerSelectTurn",
-	"description": "${actplayer} must select pawn",
-	"descriptionmyturn": "${you} must select pawn",
-	"type": "activeplayer",
-	"action": "stPlayerSelectTurn",
-	"possibleactions": [
-		"selectPawn",
-		"endVote"
-	],
-	"args": "argPlayerSelectTurn",
-	"transitions": {
-		"selectPawn": 4,
-		"cantSelect": 5,
-		"endVote": 3,
-		"zombiePass": 5
-	}
-}
-					*/
+					data.state = "Selecting a pawn";
 					break;
 				case "playerMoveTurn":
-					/*
-					{
-	"name": "playerMoveTurn",
-	"description": "${actplayer} must move pawn",
-	"descriptionmyturn": "${you} must move pawn",
-	"type": "activeplayer",
-	"possibleactions": [
-		"movePawn",
-		"cancelSelection",
-		"endVote"
-	],
-	"args": "argPlayerMoveTurn",
-	"transitions": {
-		"movePawn1": 3,
-		"movePawn2": 5,
-		"cancel": 3,
-		"endVote": 4,
-		"zombiePass": 5
-	}
-}
-					*/
-					break;
-				case "nextPlayer":
-					/*
-					{
-	"name": "nextPlayer",
-	"description": "",
-	"type": "game",
-	"action": "stNextPlayer",
-	"updateGameProgression": true,
-	"transitions": {
-		"endGame": 99,
-		"nextPlayer": 2,
-		"cantPlay": 5
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Moving a pawn";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

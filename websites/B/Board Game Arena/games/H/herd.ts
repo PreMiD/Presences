@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const herd: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/f3JVt09.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,105 +23,12 @@ const herd: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
 				case "placeStoneFirstTurn":
-					/*
-					{
-	"name": "placeStoneFirstTurn",
-	"description": "${actplayer} must place a stone.",
-	"descriptionmyturn": "${you} must place a stone.",
-	"type": "activeplayer",
-	"args": "argPlaceStone",
-	"possibleactions": [
-		"placeStone"
-	],
-	"transitions": {
-		"placeStone": 5,
-		"placeLastStone": 6,
-		"zombiePass": 6
-	}
-}
-					*/
+				case "placeStone":
+					data.state = "Placing a stone";
 					break;
 				case "removeStone":
-					/*
-					{
-	"name": "removeStone",
-	"description": "${actplayer} must remove an enemy stone.",
-	"descriptionmyturn": "${you} must remove an enemy stone.",
-	"type": "activeplayer",
-	"args": "argRemoveStone",
-	"possibleactions": [
-		"removeStone"
-	],
-	"updateGameProgression": true,
-	"transitions": {
-		"removeStone": 4,
-		"removeLastStone": 5,
-		"removeLastStone_noPlacementsAvailable": 6,
-		"zombiePass": 6
-	}
-}
-					*/
-					break;
-				case "placeStone":
-					/*
-					{
-	"name": "placeStone",
-	"description": "${actplayer} must place a stone.",
-	"descriptionmyturn": "${you} must place a stone.",
-	"type": "activeplayer",
-	"args": "argplaceStone",
-	"possibleactions": [
-		"placeStone"
-	],
-	"updateGameProgression": true,
-	"transitions": {
-		"placeStone": 5,
-		"placeLastStone": 6,
-		"zombiePass": 6,
-		"endGame": 99
-	}
-}
-					*/
-					break;
-				case "nextPlayer":
-					/*
-					{
-	"name": "nextPlayer",
-	"type": "game",
-	"action": "stNextPlayer",
-	"updateGameProgression": true,
-	"transitions": {
-		"nextTurn": 4,
-		"nextTurn_noEnemyStonesToRemove": 5,
-		"cantPlay": 6
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Removing an enemy stone";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
