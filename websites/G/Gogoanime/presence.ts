@@ -110,17 +110,17 @@ presence.on("UpdateData", async () => {
 					document.querySelector('[class="anime-info"] > a')?.textContent ??
 					document.querySelector('[class="title_name"]')?.textContent;
 
-				!title
-					? (title = pathname.includes("/movie/")
-							? pathname
-									.split("/")?.[2]
-									?.replace(/-/gm, " ")
-									?.replace(/\(dub\)/gm, "")
-							: pathname
-									.split("/")?.[1]
-									?.replace(/-/gm, " ")
-									?.replace(/\(dub\)/gm, ""))
-					: title;
+				if (!title) {
+					title = pathname.includes("/movie/")
+						? pathname
+								.split("/")?.[2]
+								?.replace(/-/gm, " ")
+								?.replace(/\(dub\)/gm, "")
+						: pathname
+								.split("/")?.[1]
+								?.replace(/-/gm, " ")
+								?.replace(/\(dub\)/gm, "");
+				}
 				const titleReplaced =
 					document
 						.querySelector('[id="episode_related"] > li > [class*="active"]')
