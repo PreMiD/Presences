@@ -5,7 +5,7 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://i.imgur.com/ogoDV1c.png",
-	Replay = "https://i.imgur.com/q57RJjs.png",
+	Replay = "https://cdn.rcd.gg/PreMiD/resources/play.png",
 }
 
 enum OtherAssets {

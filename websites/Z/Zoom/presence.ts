@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 		else {
 			if (videoEnabled()) {
 				presenceData.details = "In video meeting";
-				presenceData.smallImageKey = Assets.Vcall;
+				presenceData.smallImageKey = Assets.VideoCall;
 			} else {
 				presenceData.details = "In meeting";
 				presenceData.smallImageKey = Assets.Call;
