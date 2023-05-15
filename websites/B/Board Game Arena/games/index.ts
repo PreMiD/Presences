@@ -159,6 +159,21 @@ import dudo from "./D/dudo";
 import dungeonpetz from "./D/dungeonpetz";
 import dungeonroll from "./D/dungeonroll";
 import dungeontwister from "./D/dungeontwister";
+import earth from "./E/earth";
+import egocentricworld from "./E/egocentricworld";
+import eightmastersrevenge from "./E/eightmastersrevenge";
+import ekonos from "./E/ekonos";
+import elfenland from "./E/elfenland";
+import elgrande from "./E/elgrande";
+import emdomicrocosm from "./E/emdomicrocosm";
+import eminentdomain from "./E/eminentdomain";
+import epizodiak from "./E/epizodiak";
+import equinox from "./E/equinox";
+import eriantys from "./E/eriantys";
+import escapefromthehiddencastle from "./E/escapefromthehiddencastle";
+import evl from "./E/evl";
+import evogamenoname from "./E/evogamenoname";
+import explorationwarzone from "./E/explorationwarzone";
 import gizmos from "./G/gizmos";
 import greatwesterntrail from "./G/greatwesterntrail";
 import hanabi from "./H/hanabi";
@@ -348,6 +363,21 @@ const games: Record<string, GamePresence> = {
 	dungeonpetz,
 	dungeonroll,
 	dungeontwister,
+	earth,
+	egocentricworld,
+	eightmastersrevenge,
+	ekonos,
+	elfenland,
+	elgrande,
+	emdomicrocosm,
+	eminentdomain,
+	epizodiak,
+	equinox,
+	eriantys,
+	escapefromthehiddencastle,
+	evl,
+	evogamenoname,
+	explorationwarzone,
 	gizmos,
 	greatwesterntrail,
 	hanabi,
@@ -371,7 +401,10 @@ const games: Record<string, GamePresence> = {
 	yatzy,
 };
 
-export default function getGame(key: string) {
+export default function getGame(key: string): {
+	logo: string;
+	getData(presence: Presence): Promise<PresenceData> | PresenceData;
+} {
 	if (games[key]) return games[key];
 	else {
 		return {
