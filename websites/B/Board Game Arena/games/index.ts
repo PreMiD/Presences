@@ -174,6 +174,28 @@ import escapefromthehiddencastle from "./E/escapefromthehiddencastle";
 import evl from "./E/evl";
 import evogamenoname from "./E/evogamenoname";
 import explorationwarzone from "./E/explorationwarzone";
+import factum from "./F/factum";
+import faifo from "./F/faifo";
+import fairytrails from "./F/fairytrails";
+import farmclub from "./F/farmclub";
+import feastforodin from "./F/feastforodin";
+import fifteendays from "./F/fifteendays";
+import fightthelandlord from "./F/fightthelandlord";
+import finity from "./F/finity";
+import fistfulofgold from "./F/fistfulofgold";
+import flamingpyramids from "./F/flamingpyramids";
+import fleet from "./F/fleet";
+import florenzacardgame from "./F/florenzacardgame";
+import flume from "./F/flume";
+import fluxx from "./F/fluxx";
+import forbiddenisland from "./F/forbiddenisland";
+import forex from "./F/forex";
+import forsale from "./F/forsale";
+import fortheking from "./F/fortheking";
+import fourcolorcards from "./F/fourcolorcards";
+import fractal from "./F/fractal";
+import frenchtarot from "./F/frenchtarot";
+import fruitpicking from "./F/fruitpicking";
 import gizmos from "./G/gizmos";
 import greatwesterntrail from "./G/greatwesterntrail";
 import hanabi from "./H/hanabi";
@@ -378,6 +400,28 @@ const games: Record<string, GamePresence> = {
 	evl,
 	evogamenoname,
 	explorationwarzone,
+	factum,
+	faifo,
+	fairytrails,
+	farmclub,
+	feastforodin,
+	fifteendays,
+	fightthelandlord,
+	finity,
+	fistfulofgold,
+	flamingpyramids,
+	fleet,
+	florenzacardgame,
+	flume,
+	fluxx,
+	forbiddenisland,
+	forex,
+	forsale,
+	fortheking,
+	fourcolorcards,
+	fractal,
+	frenchtarot,
+	fruitpicking,
 	gizmos,
 	greatwesterntrail,
 	hanabi,
