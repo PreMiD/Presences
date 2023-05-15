@@ -56,9 +56,11 @@ const animetypes: { [key: string]: string } = {
 
 const enum Assets {
 	VostLogo = "https://i.imgur.com/wStmaRE.png",
-
 	Ongoing = "https://i.imgur.com/bdSukvD.png",
 	Anons = "https://i.imgur.com/8vJY6ok.png",
+}
+
+enum otherAssets {
 	"boyevyye-iskusstva" = "https://i.imgur.com/fIFC4Bn.png",
 	"voyna" = "https://i.imgur.com/6wcT9gr.png",
 	"drama" = "https://i.imgur.com/FGNTKQ1.png",
@@ -117,7 +119,8 @@ presence.on("UpdateData", async () => {
 		if (websiteloc[1] === "zhanr") {
 			const animegenre = animegenres[websiteloc[2]];
 			presenceData.details = `🔎 В поисках аниме жанра ${animegenre}`;
-			presenceData.smallImageKey = Assets[websiteloc[2] as keyof typeof Assets];
+			presenceData.smallImageKey =
+				otherAssets[websiteloc[2] as keyof typeof otherAssets];
 			presenceData.smallImageText = `🔎 В поисках аниме жанра ${animegenre}`;
 		}
 		if (websiteloc[1] === "god")

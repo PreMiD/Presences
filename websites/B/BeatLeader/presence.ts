@@ -6,6 +6,9 @@ const presence = new Presence({
 const enum Assets {
 	Logo = "https://i.imgur.com/ogoDV1c.png",
 	Replay = "https://i.imgur.com/q57RJjs.png",
+}
+
+enum OtherAssets {
 	"360DegreeEasy" = "https://i.imgur.com/DVJ8DrX.png",
 	"360DegreeExpert" = "https://i.imgur.com/TfqWdfp.png",
 	"360DegreeExpertPlus" = "https://i.imgur.com/NA06k7F.png",
@@ -221,10 +224,12 @@ presence.on("UpdateData", async () => {
 						?.textContent
 				}`;
 				presenceData.smallImageKey =
-					Assets[
+					OtherAssets[
 						`${previewURL.searchParams.get(
 							"charName"
-						)}${previewURL.searchParams.get("diffName")}` as keyof typeof Assets
+						)}${previewURL.searchParams.get(
+							"diffName"
+						)}` as keyof typeof OtherAssets
 					];
 				if (cover && document.querySelector<HTMLImageElement>("img.dummy")) {
 					presenceData.largeImageKey =
