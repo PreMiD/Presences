@@ -32,5 +32,5 @@
 		"streaming"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": "(gogo(hd)?[.][a-z]*)|(sbplay([0-9]*)?[.][a-z]*)|(fembed(-hd)?[.][a-z]*)|(mp4(-)?upload[.][a-z]*)|(.*)"
 }
