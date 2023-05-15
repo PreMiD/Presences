@@ -31,64 +31,91 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Explore";
 		presenceData.details = "On the explore";
-	} else if (pathname === "/public/local") {
-		presenceData.smallImageText = "Local timeline";
-		presenceData.details = "Looking in local timeline";
-	} else if (pathname === "/public") {
-		presenceData.largeImageKey = Assets.FediverseLogo;
-		presenceData.smallImageText = "Fediverse";
-		presenceData.details = "Looking in fediverse";
-	} else if (
-		pathname === "/bookmarks" ||
-		pathname === "/favourites" ||
-		pathname === "/lists"
-	) {
-		const pathName = pathname.split("/")[1];
-		presenceData.smallImageText = pathName;
-		presenceData.details = `Looking their ${pathName}`;
-	} else if (pathname === "/search") {
-		const searchInput = document
-			.querySelector(".search__input")
-			.getAttribute("value");
-		presenceData.smallImageText = "Search";
-		presenceData.details = `Searching ${searchInput}`;
-	} else if (pathname.startsWith("/@")) {
-		const userName = pathname.split(/[@,/]+/)[1];
-		presenceData.smallImageKey = document
-			.querySelectorAll(".account__avatar")
-			[checkPositionAccountAvatar()].querySelector("img")
-			.getAttribute("src");
-		presenceData.smallImageText = `${document.location}`;
+	} else {
+		switch (pathname) {
+			case "/public/local": {
+				presenceData.smallImageText = "Local timeline";
+				presenceData.details = "Looking in local timeline";
 
-		presenceData.details = `Viewing ${userName}'s profile`;
-	} else if (pathname.startsWith("/settings")) {
-		presenceData.smallImageText = "Settings";
-		presenceData.details = "Viewing their settings";
-	} else if (pathname === "/relationships") {
-		presenceData.smallImageText = "Relationships";
-		presenceData.details = "Viewing their followers";
-	} else if (pathname.startsWith("/tags")) {
-		const tag = pathname.split("/")[2];
-		presenceData.smallImageText = "tags";
-		presenceData.details = `Searching ${tag} tag`;
-	} else if (pathname === "/about") {
-		const instanceName = document.location.hostname;
-		presenceData.smallImageKey = document
-			.querySelectorAll(".account__avatar")
-			[checkPositionAccountAvatar()].querySelector("img")
-			.getAttribute("src");
-		presenceData.largeImageKey = document
-			.querySelector(".about__header__hero")
-			.querySelector("img")
-			.getAttribute("src");
-		presenceData.smallImageText = `About ${instanceName}`;
-		presenceData.details = `About ${instanceName}`;
-	} else if (pathname === "/directory") {
-		presenceData.smallImageText = "Directory";
-		presenceData.details = "On the directory";
-	} else if (pathname === "/privacy-policy") {
-		presenceData.smallImageText = "Privacy and Policy";
-		presenceData.details = "Reading Privacy and Policy";
+				break;
+			}
+			case "/public": {
+				presenceData.largeImageKey = Assets.FediverseLogo;
+				presenceData.smallImageText = "Fediverse";
+				presenceData.details = "Looking in fediverse";
+
+				break;
+			}
+			case "/bookmarks":
+			case "/favourites":
+			case "/lists": {
+				const pathName = pathname.split("/")[1];
+				presenceData.smallImageText = pathName;
+				presenceData.details = `Looking their ${pathName}`;
+
+				break;
+			}
+			case "/search": {
+				presenceData.smallImageText = "Search";
+				presenceData.details = `Searching ${document
+					.querySelector(".search__input")
+					.getAttribute("value")}`;
+
+				break;
+			}
+			default:
+				if (pathname.startsWith("/@")) {
+					presenceData.smallImageKey = document
+						.querySelectorAll(".account__avatar")
+						[checkPositionAccountAvatar()].querySelector("img")
+						.getAttribute("src");
+					presenceData.smallImageText = `${document.location}`;
+
+					presenceData.details = `Viewing ${
+						pathname.split(/[@,/]+/)[1]
+					}'s profile`;
+				} else if (pathname.startsWith("/settings")) {
+					presenceData.smallImageText = "Settings";
+					presenceData.details = "Viewing their settings";
+				} else if (pathname === "/relationships") {
+					presenceData.smallImageText = "Relationships";
+					presenceData.details = "Viewing their followers";
+				} else if (pathname.startsWith("/tags")) {
+					presenceData.smallImageText = "tags";
+					presenceData.details = `Searching ${pathname.split("/")[2]} tag`;
+				} else {
+					switch (pathname) {
+						case "/about": {
+							const { hostname } = document.location;
+							presenceData.smallImageKey = document
+								.querySelectorAll(".account__avatar")
+								[checkPositionAccountAvatar()].querySelector("img")
+								.getAttribute("src");
+							presenceData.largeImageKey = document
+								.querySelector(".about__header__hero")
+								.querySelector("img")
+								.getAttribute("src");
+							presenceData.smallImageText = `About ${hostname}`;
+							presenceData.details = `About ${hostname}`;
+
+							break;
+						}
+						case "/directory": {
+							presenceData.smallImageText = "Directory";
+							presenceData.details = "On the directory";
+
+							break;
+						}
+						case "/privacy-policy": {
+							presenceData.smallImageText = "Privacy and Policy";
+							presenceData.details = "Reading Privacy and Policy";
+
+							break;
+						}
+						// No default
+					}
+				}
+		}
 	}
 
 	presence.setActivity(presenceData);
