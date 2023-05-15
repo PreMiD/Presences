@@ -19,9 +19,9 @@ function checkPositionAccountAvatar() {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
-	};
+	},
 
-	const pathname = document.location.pathname;
+	{ pathname } = document.location;
 	
 	if (pathname === "/home") {
 		presenceData.smallImageText = "Home";
