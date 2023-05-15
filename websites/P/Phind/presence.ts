@@ -1,6 +1,7 @@
 const presence = new Presence({
 		clientId: "1106990410838065172",
 	}),
+	slideshow = presence.createSlideshow(),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -40,18 +41,13 @@ presence.on("UpdateData", async () => {
 	if (pathDetails) {
 		presenceData.details = pathDetails[1]; // display text of /path
 		presenceData.state = pathname; // display /path
+		slideshow.deleteAllSlides();
 	} else if (searchResults.length > 0 && !privateMode) {
 		// we must be on /search and arn't in private mode
 		// presenceData.details = "Searching";
 		presenceData.details = displaySearch ? "Searching for:" : "Searching";
 		presenceData.smallImageKey = assets.search;
 		presenceData.smallImageText = "Searching";
-		if (displaySearch) {
-			// share search query text
-			presenceData.state = searchResults[
-				searchResults.length - 1
-			].querySelector("span.fw-bold.fs-3.mb-3").textContent;
-		}
 		if (shareSearch) {
 			// share search query with button
 			presenceData.buttons = [
@@ -61,6 +57,16 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
+		if (displaySearch) {
+			// share search query text using slideshow
+			for (const [i, result] of searchResults.entries()) {
+				const newPresenceData: PresenceData = { ...presenceData };
+				newPresenceData.state = `${i + 1}. ${
+					result.querySelector("span.fw-bold.fs-3.mb-3").textContent
+				}`;
+				slideshow.addSlide(i.toString(), newPresenceData, 5000);
+			}
+		} else slideshow.deleteAllSlides();
 	}
 
 	if (privateMode) {
@@ -74,5 +80,6 @@ presence.on("UpdateData", async () => {
 		delete presenceData.endTimestamp;
 	}
 
-	presence.setActivity(presenceData);
+	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
+	else presence.setActivity(presenceData);
 });
