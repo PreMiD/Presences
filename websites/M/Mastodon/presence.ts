@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: Assets.Logo,
 	};
 
-	const { pathname } = document.location;
+	const pathname = document.location.pathname;
 	
 	if (pathname === "/home") {
 		presenceData.smallImageText = "Home";
