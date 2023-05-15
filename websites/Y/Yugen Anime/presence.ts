@@ -47,7 +47,7 @@ let video = {
 	strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/m5UhwNJ.png",
 }
 

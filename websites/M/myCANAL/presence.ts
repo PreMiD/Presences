@@ -9,7 +9,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	containsTerm = (term: string) => document.location.pathname.includes(term);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/ZpDYxNn.png",
 }
 

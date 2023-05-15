@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
+const enum Assets {
 	Buy = "https://i.imgur.com/JKLNlvT.png",
 	Submit = "https://i.imgur.com/wDDm0VX.png",
 	Edit = "https://i.imgur.com/TCJe2xJ.png",

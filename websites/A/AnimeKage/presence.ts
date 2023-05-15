@@ -36,7 +36,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 	}
 });
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/zVbpanX.png",
 }
 

@@ -25,7 +25,7 @@ const presence = new Presence({
 		"/upcoming": "Searching upcoming animes",
 	};
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/TQPRXrN.png",
 }
 

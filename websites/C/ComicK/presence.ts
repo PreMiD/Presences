@@ -12,7 +12,7 @@ const presence = new Presence({
 		privacy: { details: "Privacy Policy" },
 		installapp: { details: "ComicK App" },
 	};
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/DeNqLCB.png",
 }
 

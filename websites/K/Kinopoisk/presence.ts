@@ -29,7 +29,7 @@ function pageTitle(string: string) {
 		.textContent.split(string);
 }
 
-enum Assets {
+const enum Assets {
 	Library = "https://i.imgur.com/FzNE1zD.png",
 	Movies = "https://i.imgur.com/EzwByrT.png",
 }

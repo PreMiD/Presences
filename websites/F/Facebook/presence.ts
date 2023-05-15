@@ -34,7 +34,7 @@ async function getStrings() {
 	);
 }
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/nS9sZn6.png",
 	MessengerLogo = "https://i.imgur.com/AwwqHgg.png",
 	WatchLogo = "https://i.imgur.com/qrU1IRd.png",

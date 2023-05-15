@@ -12,7 +12,7 @@ const presence = new Presence({
 		if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
 		else return "Loading...";
 	};
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/Sr0u6MC.png",
 }
 

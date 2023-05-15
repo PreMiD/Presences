@@ -39,7 +39,7 @@ if (
 	});
 }
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/lza7ROE.png",
 }
 

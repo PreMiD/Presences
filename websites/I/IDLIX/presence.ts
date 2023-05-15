@@ -21,7 +21,7 @@ async function getStrings() {
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
-enum Assets {
+const enum Assets {
 	Ad = "https://i.imgur.com/woctRCn.png",
 	Logo = "https://i.imgur.com/nolTGp7.png",
 }

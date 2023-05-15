@@ -24,7 +24,7 @@ presence.on(
 		video = data;
 	}
 );
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/ac0KCKY.png",
 }
 

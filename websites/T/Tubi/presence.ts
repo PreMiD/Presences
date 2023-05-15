@@ -17,7 +17,7 @@ async function getStrings() {
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/PfRmgZm.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,

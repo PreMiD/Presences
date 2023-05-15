@@ -10,7 +10,7 @@ let lastPlaybackState = null,
 	playback,
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/x5yDUF9.png",
 }
 

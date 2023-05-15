@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	elapsed = Math.floor(Date.now() / 1e3);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/tPMtbjL.png",
 }
 

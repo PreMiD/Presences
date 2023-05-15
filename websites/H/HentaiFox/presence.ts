@@ -27,7 +27,7 @@ const pattern = "- Page",
 		return str.slice(0, str.indexOf(pattern));
 	};
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/o9joHZX.png",
 }
 

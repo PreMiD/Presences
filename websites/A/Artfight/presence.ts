@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	slideshow = new Slideshow();
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/eABLEqd.jpg",
 }
 

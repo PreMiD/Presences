@@ -12,7 +12,7 @@ let video = {
 	paused: true,
 };
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/Nsp0rTW.jpg",
 }
 

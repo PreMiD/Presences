@@ -32,7 +32,7 @@ function removePlural(string: string) {
 	else if (string.slice(-1) === "s") return string.slice(0, -1);
 	else return string;
 }
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/T4XfJhX.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>;

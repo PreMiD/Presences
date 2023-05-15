@@ -46,7 +46,7 @@ const presence = new Presence({
 		"ranking.php": { details: "Viewing novels ranking" },
 	};
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/D8Lf2t2.png",
 }
 

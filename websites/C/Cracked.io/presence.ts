@@ -24,7 +24,7 @@ function capitalizeFirstLetter(string: string) {
 	);
 }
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/3dmXmx0.png",
 }
 

@@ -19,7 +19,7 @@ presence.on(
 	}
 );
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/L1fhc3r.jpg",
 }
 

@@ -13,7 +13,7 @@ const presence = new Presence({
 		buttonWatchStream: "general.buttonWatchStream",
 	});
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/baUokNs.png",
 }
 

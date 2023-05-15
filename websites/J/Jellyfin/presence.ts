@@ -275,7 +275,7 @@ interface Server {
 }
 
 // #endregion
-enum Assets {
+const enum Assets {
 	logo = "https://i.imgur.com/nPzEemG.png",
 }
 const JELLYFIN_URL = "jellyfin.org",

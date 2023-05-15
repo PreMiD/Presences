@@ -5,7 +5,7 @@ const presence = new Presence({ clientId: "1035124482735607838" }),
 		listen: "general.buttonListenAlong",
 	});
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/L7WOrIG.png",
 }
 

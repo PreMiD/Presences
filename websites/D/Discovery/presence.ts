@@ -21,7 +21,7 @@ async function capitalizeFirstLetter(string: string) {
 	const stringTrimmed = string.trim();
 	return stringTrimmed.charAt(0).toUpperCase() + stringTrimmed.slice(1);
 }
-enum Assets {
+const enum Assets {
 	Loading = "https://i.imgur.com/uh6vSQm.gif",
 	LogoDiscoveryPlus = "https://i.imgur.com/BQ1MBwk.png",
 	LogoDiscovery = "https://i.imgur.com/ir2Ysr1.png",

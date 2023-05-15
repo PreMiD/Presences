@@ -10,7 +10,7 @@ const presence = new Presence({ clientId: "1013183483750907904" }),
 		login: "Log in Patreon",
 	},
 	slideshow = presence.createSlideshow();
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/XIq6vjx.png",
 }
 

@@ -54,7 +54,7 @@ const animetypes: { [key: string]: string } = {
 		etti: "Эччи",
 	};
 
-enum Assets {
+const enum Assets {
 	VostLogo = "https://i.imgur.com/wStmaRE.png",
 
 	Ongoing = "https://i.imgur.com/bdSukvD.png",

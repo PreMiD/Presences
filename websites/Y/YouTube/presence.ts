@@ -5,7 +5,7 @@ const presence = new Presence({
 	pattern = "•",
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/o5injgg.png",
 	Studio = "https://i.imgur.com/T2uW4AB.png",
 }

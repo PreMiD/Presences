@@ -1,4 +1,4 @@
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/sko4P3c.png",
 }
 if (

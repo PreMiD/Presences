@@ -34,7 +34,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 	lastTeamLog: availableColors = "beige",
 	currentlySetColor: availableColors = "beige";
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/Bf7TsWG.png",
 }
 

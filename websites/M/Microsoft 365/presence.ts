@@ -11,7 +11,7 @@ let microsoft = {
 	ExcelActiveTab: "",
 };
 
-enum Assets {
+const enum Assets {
 	Excel = "https://i.imgur.com/Vm9mwZG.png",
 	Microsoft = "https://i.imgur.com/E2tzaTW.png",
 	OneNote = "https://i.imgur.com/LqrhRhD.png",

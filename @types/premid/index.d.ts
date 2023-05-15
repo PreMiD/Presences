@@ -75,7 +75,7 @@ interface PresenceOptions {
 	appMode?: boolean;
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-enum Assets {
+const enum Assets {
 	Play = "https://i.imgur.com/q57RJjs.png",
 	Pause = "https://i.imgur.com/mcEXiZk.png",
 	Stop = "https://i.imgur.com/aLYu3Af.png",

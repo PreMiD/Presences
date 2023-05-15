@@ -13,7 +13,7 @@ const presence = new Presence({
 	},
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/isuRsRF.png",
 }
 

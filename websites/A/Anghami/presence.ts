@@ -7,7 +7,7 @@ const presence = new Presence({
 		browsing: "general.browsing",
 	});
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/PzxFsAZ.png",
 }
 

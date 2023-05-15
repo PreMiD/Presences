@@ -10,7 +10,7 @@ const presence = new Presence({
 		else return;
 	};
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/L6BgeAa.png",
 }
 

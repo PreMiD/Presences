@@ -10,7 +10,7 @@ async function getStrings() {
 	});
 }
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/uu5XX85.png",
 }
 

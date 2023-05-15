@@ -16,7 +16,7 @@ const presence = new Presence({
 	},
 	slideshow = new Slideshow();
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/oo2fig0.png",
 }
 

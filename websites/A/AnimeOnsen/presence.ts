@@ -30,7 +30,7 @@ let playerData: PlayerData,
 
 presence.info("PreMiD extension has loaded");
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/O99W6aY.png",
 }
 

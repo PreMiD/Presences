@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/ogoDV1c.png",
 	Replay = "https://i.imgur.com/q57RJjs.png",
 	"360DegreeEasy" = "https://i.imgur.com/DVJ8DrX.png",

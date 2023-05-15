@@ -22,7 +22,7 @@ async function getShortURL(url: string) {
 	}
 }
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/q3tKDRA.png",
 }
 

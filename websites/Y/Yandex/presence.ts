@@ -6,7 +6,7 @@ const presence = new Presence({
 		document.querySelector<HTMLInputElement>('input[name="text"]'),
 	{ host, pathname } = document.location;
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/SFXKtLF.png",
 }
 

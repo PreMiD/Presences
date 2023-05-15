@@ -4,7 +4,7 @@ const presence = new Presence({
 	path = location.pathname,
 	timeElapsed = ~~(Date.now() / 1000);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/2S8IXoa.png",
 }
 

@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "934701636251680768",
 });
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/jPl7EfZ.png",
 }
 

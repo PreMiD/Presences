@@ -25,7 +25,7 @@ In this folder you can find resource images which you can use to display the sta
 | <img src="viewing.png" style="background-color: rgba(0,0,0,25);" height="50px">       | [viewing.png](viewing.png) |
 
 ```ts
-enum Assets {
+const enum Assets {
 	Play = "https://i.imgur.com/q57RJjs.png",
 	Pause = "https://i.imgur.com/mcEXiZk.png",
 	Stop = "https://i.imgur.com/aLYu3Af.png",

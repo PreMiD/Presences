@@ -9,7 +9,7 @@ const presence = new Presence({
 	});
 let prev: string, elapsed: number, path: string, gender: string;
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/PjQ6k9n.png",
 }
 

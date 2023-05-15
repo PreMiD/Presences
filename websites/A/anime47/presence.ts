@@ -6,7 +6,7 @@ const presence = new Presence({
 		pause: "general.paused",
 	});
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/Vmm3C6N.png",
 }
 

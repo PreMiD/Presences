@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "817063719288700939",
 });
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/h9AaSGw.png",
 }
 let lastPath: string,
