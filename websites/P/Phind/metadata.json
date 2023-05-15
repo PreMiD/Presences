@@ -35,6 +35,12 @@
 			"value": true
 		},
 		{
+			"id": "cycleSearch",
+			"title": "Cycle search queries",
+			"icon": "fa-duotone fa-line-height",
+			"value": true
+		},
+		{
 			"id": "shareSearch",
 			"title": "Share search",
 			"icon": "fa-duotone fa-share-from-square",

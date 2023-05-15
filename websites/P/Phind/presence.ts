@@ -29,12 +29,14 @@ presence.on("UpdateData", async () => {
 			pathname.startsWith(pathPrefix)
 		),
 		searchResults = document.querySelectorAll("div.row[name^='answer-']"),
-		[displayTime, displaySearch, shareSearch, privateMode] = await Promise.all([
-			presence.getSetting("displayTime"), // shows/hides the time spent on the site
-			presence.getSetting("displaySearch"), // shows/hides your search query text
-			presence.getSetting("shareSearch"), // shares your search with a button
-			presence.getSetting("privateMode"), // hides the querry, button and what exact page you are on
-		]);
+		[displayTime, displaySearch, cycleSearch, shareSearch, privateMode] =
+			await Promise.all([
+				presence.getSetting("displayTime"), // shows/hides the time spent on the site
+				presence.getSetting("displaySearch"), // shows/hides your search query text
+				presence.getSetting("cycleSearch"), // cycles through all the search query on the page
+				presence.getSetting("shareSearch"), // shares your search with a button
+				presence.getSetting("privateMode"), // hides the querry, button and what exact page you are on
+			]);
 
 	if (displayTime) presenceData.startTimestamp = browsingTimestamp;
 
@@ -57,7 +59,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
-		if (displaySearch) {
+		if (displaySearch && cycleSearch) {
 			// share search query text using slideshow
 			for (const [i, result] of searchResults.entries()) {
 				const newPresenceData: PresenceData = { ...presenceData };
@@ -66,7 +68,13 @@ presence.on("UpdateData", async () => {
 				}`;
 				slideshow.addSlide(i.toString(), newPresenceData, 5000);
 			}
-		} else slideshow.deleteAllSlides();
+		} else if (displaySearch) {
+			// share search query text
+			presenceData.state = searchResults[0].querySelector(
+				"span.fw-bold.fs-3.mb-3"
+			).textContent;
+		}
+		if (!cycleSearch) slideshow.deleteAllSlides();
 	}
 
 	if (privateMode) {
@@ -78,6 +86,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.buttons;
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
+		slideshow.deleteAllSlides();
 	}
 
 	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
