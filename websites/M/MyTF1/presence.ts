@@ -42,12 +42,12 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLImageElement>(
 				"[class*=LiveShowCardsSlider_list__card_uOvlu] picture img"
 			).src
-		)
+		) {
 			presenceData.largeImageKey = document
 				.querySelectorAll(".LiveShowCardsSlider_list__card_uOvlu")[0]
 				.querySelector("picture")
 				.querySelector("img").src;
-		else presenceData.largeImageKey = "https://i.imgur.com/kSpxrRD.png";
+		} else presenceData.largeImageKey = "https://i.imgur.com/kSpxrRD.png";
 	} else if (path.startsWith("/tfx/direct")) {
 		presenceData.details = document.querySelector(
 			".VideoSummary_programName_xXfYS"
@@ -61,12 +61,12 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLImageElement>(
 				"[class*=LiveShowCardsSlider_list__card_uOvlu] picture img"
 			).src
-		)
+		) {
 			presenceData.largeImageKey = document
 				.querySelectorAll(".LiveShowCardsSlider_list__card_uOvlu")[2]
 				.querySelector("picture")
 				.querySelector("img").src;
-		else presenceData.largeImageKey = "https://i.imgur.com/T7CEbod.png";
+		} else presenceData.largeImageKey = "https://i.imgur.com/T7CEbod.png";
 	} else if (path.startsWith("/tmc/direct")) {
 		presenceData.details = document.querySelector(
 			".VideoSummary_programName_xXfYS"
@@ -80,12 +80,12 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLImageElement>(
 				"[class*=LiveShowCardsSlider_list__card_uOvlu] picture img"
 			).src
-		)
+		) {
 			presenceData.largeImageKey = document
 				.querySelectorAll(".LiveShowCardsSlider_list__card_uOvlu")[1]
 				.querySelector("picture")
 				.querySelector("img").src;
-		else presenceData.largeImageKey = "https://i.imgur.com/0ywqrX9.png";
+		} else presenceData.largeImageKey = "https://i.imgur.com/0ywqrX9.png";
 	} else if (path.startsWith("/tf1-series-films/direct")) {
 		presenceData.details = document.querySelector(
 			".VideoSummary_programName_xXfYS"
@@ -99,12 +99,12 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLImageElement>(
 				"[class*=LiveShowCardsSlider_list__card_uOvlu] picture img"
 			).src
-		)
+		) {
 			presenceData.largeImageKey = document
 				.querySelectorAll(".LiveShowCardsSlider_list__card_uOvlu")[3]
 				.querySelector("picture")
 				.querySelector("img").src;
-		else presenceData.largeImageKey = "https://i.imgur.com/Ocu2g76.png";
+		} else presenceData.largeImageKey = "https://i.imgur.com/Ocu2g76.png";
 	} else if (path.startsWith("/lci/direct")) {
 		presenceData.details = "La Chaîne Info";
 		presenceData.state = document.querySelector(
