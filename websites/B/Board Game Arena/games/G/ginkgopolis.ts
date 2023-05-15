@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const ginkgopolis: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/w0dFYft.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const ghostathome: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/Kxnu4jL.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

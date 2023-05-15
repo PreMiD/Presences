@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const gogoa: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/AsnVYWj.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,143 +23,14 @@ const gogoa: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 5
-	}
-}
-					*/
-					break;
 				case "multiChoosePlans":
-					/*
-					{
-	"name": "multiChoosePlans",
-	"description": "Waiting for player(s) to select tour plans.",
-	"descriptionmyturn": "",
-	"type": "multipleactiveplayer",
-	"action": "st_multiChoosePlansStart",
-	"possibleactions": [
-		"chooseTourPlans",
-		"undoChooseTourPlans",
-		"zombiePass"
-	],
-	"transitions": {
-		"done": 6
-	}
-}
-					*/
-					break;
-				case "gameAfterChoosePlans":
-					/*
-					{
-	"name": "gameAfterChoosePlans",
-	"description": "",
-	"type": "game",
-	"action": "st_gameAfterChoosePlans",
-	"updateGameProgression": false,
-	"transitions": {
-		"continue": 10
-	}
-}
-					*/
-					break;
-				case "gameBeforeStartingPlayer":
-					/*
-					{
-	"name": "gameBeforeStartingPlayer",
-	"description": "",
-	"type": "game",
-	"action": "st_gameBeforeStartingPlayer",
-	"updateGameProgression": true,
-	"transitions": {
-		"continue": 11
-	}
-}
-					*/
+					data.state = "Choosing tour plans";
 					break;
 				case "startingPlayer":
-					/*
-					{
-	"name": "startingPlayer",
-	"description": "${actplayer} must play first",
-	"descriptionmyturn": "Choose a die for direction",
-	"type": "activeplayer",
-	"possibleactions": [
-		"drawPath",
-		"zombiePass"
-	],
-	"transitions": {
-		"done": 20,
-		"zombiePass": 20
-	}
-}
-					*/
-					break;
-				case "gameBeforeMultiTurn":
-					/*
-					{
-	"name": "gameBeforeMultiTurn",
-	"description": "",
-	"type": "game",
-	"action": "st_gameBeforeMultiTurn",
-	"updateGameProgression": false,
-	"transitions": {
-		"continue": 21
-	}
-}
-					*/
+					data.state = "Choosing a die for direction";
 					break;
 				case "multiTurn":
-					/*
-					{
-	"name": "multiTurn",
-	"description": "Waiting for player(s) to finish.",
-	"descriptionmyturn": "",
-	"type": "multipleactiveplayer",
-	"action": "st_multiTurnStart",
-	"possibleactions": [
-		"reserveDie",
-		"drawPath",
-		"undoDraw",
-		"zombiePass"
-	],
-	"transitions": {
-		"done": 22
-	}
-}
-					*/
-					break;
-				case "endRound":
-					/*
-					{
-	"name": "endRound",
-	"description": "",
-	"type": "game",
-	"action": "st_endRound",
-	"updateGameProgression": false,
-	"transitions": {
-		"nextRound": 10,
-		"endGame": 99
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Taking a turn";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

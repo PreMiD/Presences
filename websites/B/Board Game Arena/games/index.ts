@@ -196,8 +196,34 @@ import fourcolorcards from "./F/fourcolorcards";
 import fractal from "./F/fractal";
 import frenchtarot from "./F/frenchtarot";
 import fruitpicking from "./F/fruitpicking";
+import gaia from "./G/gaia";
+import gaiaproject from "./G/gaiaproject";
+import gangofdice from "./G/gangofdice";
+import gangsta from "./G/gangsta";
+import gardennation from "./G/gardennation";
+import gearnpiston from "./G/gearnpiston";
+import geekoutmasters from "./G/geekoutmasters";
+import getonboard from "./G/getonboard";
+import getthemacguffin from "./G/getthemacguffin";
+import ghostathome from "./G/ghostathome";
+import giftoftulips from "./G/giftoftulips";
+import ginkgopolis from "./G/ginkgopolis";
 import gizmos from "./G/gizmos";
+import glow from "./G/glow";
+import gofish from "./G/gofish";
+import gogoa from "./G/gogoa";
+import goldwest from "./G/goldwest";
+import gomoku from "./G/gomoku";
+import gonutsfordonuts from "./G/gonutsfordonuts";
+import goodcopbadcop from "./G/goodcopbadcop";
+import gopher from "./G/gopher";
+import gorami from "./G/gorami";
+import grandbazaar from "./G/grandbazaar";
 import greatwesterntrail from "./G/greatwesterntrail";
+import grosstarock from "./G/grosstarock";
+import guildes from "./G/guildes";
+import guile from "./G/guile";
+import gyges from "./G/gyges";
 import hanabi from "./H/hanabi";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import kingoftokyo from "./K/kingoftokyo";
@@ -422,8 +448,34 @@ const games: Record<string, GamePresence> = {
 	fractal,
 	frenchtarot,
 	fruitpicking,
+	gaia,
+	gaiaproject,
+	gangofdice,
+	gangsta,
+	gardennation,
+	gearnpiston,
+	geekoutmasters,
+	getonboard,
+	getthemacguffin,
+	ghostathome,
+	giftoftulips,
+	ginkgopolis,
 	gizmos,
+	glow,
+	gofish,
+	gogoa,
+	goldwest,
+	gomoku,
+	gonutsfordonuts,
+	goodcopbadcop,
+	gopher,
+	gorami,
+	grandbazaar,
 	greatwesterntrail,
+	grosstarock,
+	guildes,
+	guile,
+	gyges,
 	hanabi,
 	itsawonderfulworld,
 	kingoftokyo,
