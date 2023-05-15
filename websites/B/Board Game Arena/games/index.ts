@@ -266,6 +266,12 @@ import inventors from "./I/inventors";
 import isaac from "./I/isaac";
 import itsawonderfulworld from "./I/itsawonderfulworld";
 import iwari from "./I/iwari";
+import jaipur from "./J/jaipur";
+import jekyllvshide from "./J/jekyllvshide";
+import jumpdrive from "./J/jumpdrive";
+import jumpgate from "./J/jumpgate";
+import justdesserts from "./J/justdesserts";
+import justone from "./J/justone";
 import kingoftokyo from "./K/kingoftokyo";
 import luckynumbers from "./L/luckynumbers";
 import patchwork from "./P/patchwork";
@@ -558,6 +564,12 @@ const games: Record<string, GamePresence> = {
 	isaac,
 	itsawonderfulworld,
 	iwari,
+	jaipur,
+	jekyllvshide,
+	jumpdrive,
+	jumpgate,
+	justdesserts,
+	justone,
 	kingoftokyo,
 	luckynumbers,
 	patchwork,
