@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.startTimestamp = browsingTimestamp;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.location.pathname.includes("/app/")) {
 			if (document.location.pathname.includes("/workshop/")) {
 				AppName = document.querySelector(
@@ -329,7 +329,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.startTimestamp = browsingTimestamp;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

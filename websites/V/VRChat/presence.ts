@@ -2,6 +2,7 @@
 const presence = new Presence({
 	clientId: "772597423188082729",
 });
+
 let profile: string;
 
 function getUserName(): void {

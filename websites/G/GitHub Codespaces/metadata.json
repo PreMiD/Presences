@@ -12,7 +12,7 @@
 	},
 	"url": "github.dev",
 	"regExp": "(.*[.])?github.dev",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://i.imgur.com/JWaYQC8.png",
 	"thumbnail": "https://i.imgur.com/fLQ6JLS.png",
 	"color": "#000000",

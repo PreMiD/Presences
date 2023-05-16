@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			const video = document.querySelector("video");
 			if (video) {
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.details = "Watching";
 				presenceData.state = title.textContent;
 			} else {

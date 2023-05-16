@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 							presenceData.state = document.querySelector<HTMLInputElement>(
 								'[name="manga-name"]'
 							).value;
-							presenceData.smallImageKey = "search";
+							presenceData.smallImageKey = Assets.Search;
 						} else if (pathname.startsWith("/category")) {
 							presenceData.details = "Browsing category:";
 							presenceData.state = pathname.split("/")[2].replace("-", " ");
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 								document.querySelector(".page-title > a").textContent;
 							presenceData.state =
 								document.querySelector(".page-title > span").textContent;
-							presenceData.smallImageKey = "read";
+							presenceData.smallImageKey = Assets.Reading;
 							presenceData.buttons = [{ label: "Read manga", url: href }];
 						} else if (pathname.startsWith("/manga")) {
 							presenceData.details = "Reading:";

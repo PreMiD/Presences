@@ -15,7 +15,7 @@
 		"demo2.bigbluebutton.org"
 	],
 	"regExp": "[/](b|gl)[/][\\w]{3}-[\\d\\w]{3}-[\\d\\w]{3}|html5client[/]join[?]|client[/]guest-wait[.]html",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/qjmxCvj.png",
 	"thumbnail": "https://i.imgur.com/l4sjPpG.png",
 	"color": "#0F70D7",

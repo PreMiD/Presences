@@ -46,8 +46,8 @@ presence.on("UpdateData", async () => {
 				.querySelector("img[title='Play/Pause']")
 				.className.includes("bc-hidden")
 		)
-			presenceData.smallImageKey = "pause";
-		else presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Pause;
+		else presenceData.smallImageKey = Assets.Play;
 	} else {
 		presenceData.details = "Browsing";
 		delete presenceData.state;

@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = subtitle.textContent;
 
 			if (video.paused) {
-				presenceData.smallImageKey = "paused";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).paused;
 				delete presenceData.startTimestamp;
 			} else {
@@ -69,13 +69,13 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.startTimestamp = startTimestamp;
 				presenceData.endTimestamp = endTimestamp;
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = (await strings).playing;
 			}
 		} else if (video && !video.className.includes("tst")) {
 			if (title2 !== "") presenceData.details = title2;
 			if (video.paused) {
-				presenceData.smallImageKey = "paused";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).paused;
 				delete presenceData.startTimestamp;
 			} else {
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.startTimestamp = startTimestamp;
 				presenceData.endTimestamp = endTimestamp;
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = (await strings).playing;
 			}
 		} else if (title2) {
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 			.querySelector(".av-refine-bar-summaries")
 			.textContent.split(/["„]/)[1]
 			.split(/[”"]/);
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

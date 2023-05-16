@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 		if (dramaTitle) {
 			presenceData.details = "Viewing drama:";
 			presenceData.state = dramaTitle.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (!isNaN(video?.duration) && (videoTitle || selectEpisode)) {
 			delete presenceData.startTimestamp;
 			if (videoTitle) {
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 					.trim();
 				presenceData.state = selectEpisode.textContent.trim();
 			}
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.includes("/DramaList")) {
 		presenceData.details = "Viewing drama list";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("AreYouHuman"))
 		presenceData.details = "Completing a captcha...";
 

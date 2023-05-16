@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "636622538356686871",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
@@ -25,7 +26,7 @@ presence.on("UpdateData", async () => {
 			"body > main > section > div > div > div > div.col-2-3 > h1"
 		);
 		presenceData.state = title.textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/livefeed")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Browsing through";

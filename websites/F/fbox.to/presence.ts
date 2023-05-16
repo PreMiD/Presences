@@ -3,6 +3,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://i.imgur.com/HXOjyCu.png",
+}
+
 let iFrameData: {
 	currTime: number;
 	duration: number;
@@ -15,14 +19,6 @@ presence.on(
 		iFrameData = data;
 	}
 );
-
-enum Assets {
-	Logo = "https://i.imgur.com/HXOjyCu.png",
-	Play = "https://i.imgur.com/6s4WyWY.png",
-	Pause = "https://i.imgur.com/PrYtpQb.png",
-	Search = "https://i.imgur.com/wYVlwJX.png",
-}
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,

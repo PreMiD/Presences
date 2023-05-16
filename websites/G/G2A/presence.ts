@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "633805202868273153",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: string | HTMLElement | Element, title: string | HTMLElement | Element;
 
 presence.on("UpdateData", async () => {
@@ -21,7 +22,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = (title as HTMLElement).textContent
 					.replace('" - G2A.COM', "")
 					.replace('Search results - "', "");
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else if (document.location.pathname.includes("/category")) {
 				presenceData.details = "Viewing category:";
 				title = document.querySelector("head > title");
@@ -55,7 +56,7 @@ presence.on("UpdateData", async () => {
 				else {
 					presenceData.details = "News - Reading:";
 					presenceData.state = (title as HTMLElement).textContent;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				}
 			}
 

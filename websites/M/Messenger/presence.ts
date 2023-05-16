@@ -24,20 +24,20 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "videocall";
 			} else {
 				presenceData.details = "In a call with:";
-				presenceData.smallImageKey = "call";
+				presenceData.smallImageKey = Assets.Call;
 			}
 			presenceData.state = callRecipient ? users.join(", ") : "(Hidden)";
 		} else if (document.querySelector("span")?.textContent) {
 			presenceData.details = "In a Messenger room";
-			presenceData.smallImageKey = "call";
+			presenceData.smallImageKey = Assets.Call;
 		} else presenceData.details = "Joining a call...";
 	} else if (document.location.pathname.includes("/t/")) {
 		if (!document.querySelector('[data-text="true"]')?.textContent) {
 			presenceData.details = "Reading messages from:";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else {
 			presenceData.details = "Writing to:";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		}
 		presenceData.state = messageRecipient
 			? document.querySelector("div.t6p9ggj4.tkr6xdv7 span > span")
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 			: "(Hidden)";
 	} else if (document.location.pathname.includes("/new")) {
 		presenceData.details = "Composing a new message";
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 	} else if (document.location.pathname.includes("/about"))
 		presenceData.details = "Viewing the about page";
 

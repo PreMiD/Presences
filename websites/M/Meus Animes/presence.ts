@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 						Math.floor(video.currentTime),
 						Math.floor(video.duration)
 					);
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Assistindo";
 			}
 		}

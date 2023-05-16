@@ -14,7 +14,7 @@
 	},
 	"url": "www.google.com",
 	"regExp": "www[.]google([.][a-z]+)+[/]",
-	"version": "2.4.2",
+	"version": "2.4.3",
 	"logo": "https://i.imgur.com/ZZvx6Dq.png",
 	"thumbnail": "https://i.imgur.com/8Ayu4Re.png",
 	"color": "#ffffff",

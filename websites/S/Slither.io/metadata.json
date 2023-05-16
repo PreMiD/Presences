@@ -12,7 +12,7 @@
 	},
 	"url": "slither.io",
 	"regExp": "([a-z0-9-]+[.])*slither[.]io[/]",
-	"version": "1.6.13",
+	"version": "1.6.14",
 	"logo": "https://i.imgur.com/1afZuaP.png",
 	"thumbnail": "https://i.imgur.com/PeahIhY.png",
 	"color": "#319c2c",

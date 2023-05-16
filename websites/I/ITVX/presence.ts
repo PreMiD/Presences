@@ -52,11 +52,8 @@ interface ProgrammeNextData {
 	};
 }
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/XisKvdg.png",
-	Live = "https://i.imgur.com/WTcQZS7.png",
-	Paused = "https://i.imgur.com/T6jkHHy.png",
-	Playing = "https://i.imgur.com/1CbifM8.png",
 }
 
 const presence = new Presence({
@@ -167,10 +164,10 @@ presence.on("UpdateData", async () => {
 								Math.floor(video.duration)
 							);
 
-						presenceData.smallImageKey = Assets.Playing;
+						presenceData.smallImageKey = Assets.Play;
 						presenceData.smallImageText = "Playing";
 					} else {
-						presenceData.smallImageKey = Assets.Paused;
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = "Paused";
 					}
 				}

@@ -10,7 +10,7 @@
 	},
 	"url": "www.miraheze.org",
 	"regExp": "([a-z0-9-]+[.])?miraheze[.](org|wiki)[/]",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/LAkD3vB.png",
 	"thumbnail": "https://i.imgur.com/Yygo8FE.png",
 	"color": "#2F5782",

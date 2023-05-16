@@ -12,7 +12,7 @@
 	},
 	"url": "www.gamestar.de",
 	"regExp": "([a-z0-9-]+[.])*gamestar[.]de[/]",
-	"version": "1.2.14",
+	"version": "1.2.15",
 	"logo": "https://i.imgur.com/fQZETmM.png",
 	"thumbnail": "https://i.imgur.com/4Nwp1iV.png",
 	"color": "#162781",

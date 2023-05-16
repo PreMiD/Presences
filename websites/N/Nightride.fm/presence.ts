@@ -14,12 +14,12 @@ presence.on("UpdateData", async () => {
 	let state;
 	if (document.querySelector("body").className.includes("playing")) {
 		state = "Playing";
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Playing";
 		presenceData.startTimestamp = browsingTimestamp;
 	} else {
 		state = "Paused";
-		presenceData.smallImageKey = "pause";
+		presenceData.smallImageKey = Assets.Pause;
 		presenceData.smallImageText = "Paused";
 		presenceData.endTimestamp;
 	}

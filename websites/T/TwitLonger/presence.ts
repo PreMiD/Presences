@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 				"#user-info > div > h4 > a:nth-child(2)"
 			).textContent
 		})`;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/about")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "About";

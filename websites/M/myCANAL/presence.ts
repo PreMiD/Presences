@@ -1,10 +1,3 @@
-enum Assets {
-	Logo = "https://i.imgur.com/ZpDYxNn.png",
-	Pause = "https://i.imgur.com/noKfV57.png",
-	Play = "https://i.imgur.com/kmMmdW0.png",
-	Live = "https://i.imgur.com/wAc7YId.png",
-}
-
 const presence = new Presence({
 		clientId: "844106861711196179",
 	}),
@@ -15,6 +8,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	containsTerm = (term: string) => document.location.pathname.includes(term);
+
+const enum Assets {
+	Logo = "https://i.imgur.com/ZpDYxNn.png",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {

@@ -10,7 +10,7 @@
 	},
 	"url": "lambdageneration.com",
 	"regExp": "[a-z0-9.]+lambdageneration.com",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/XSPtxro.png",
 	"thumbnail": "https://i.imgur.com/CwVR4rW.png",
 	"color": "#f37b21",

@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing";
 				presenceData.state = "Recently Played";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Typing";
 				presenceData.state = "A Request";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing";
 				presenceData.state = "Timetable";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing";
 				presenceData.state = "Team Page";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing";
 				presenceData.state = "Apply to become a presenter";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing";
 				presenceData.state = "Contact Page";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;

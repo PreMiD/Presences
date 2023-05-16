@@ -6,6 +6,7 @@ const presence = new Presence({
 		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: string, title: string;
 
 presence.on("UpdateData", async () => {
@@ -87,7 +88,7 @@ presence.on("UpdateData", async () => {
 					);
 				}
 				if (time === true && !isNaN(duration) && live === false) {
-					presenceData.smallImageKey = paused ? "pause" : "play";
+					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 					presenceData.smallImageText = paused
 						? (await strings).pause
 						: (await strings).play;
@@ -132,7 +133,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#play_main-content > section > h2.play_search-page__header.play_search-page__header--match > span"
 			).textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

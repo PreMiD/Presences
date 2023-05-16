@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 			document.title && document.title.includes(" - Hepsiburada")
 				? document.title.replace(" - Hepsiburada", "")
 				: "";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (seller && seller.textContent !== "") {
 		presenceData.details = "Bir mağazaya göz atıyor:";
 		presenceData.state = seller.textContent.trim();

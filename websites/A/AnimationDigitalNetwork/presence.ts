@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 		);
 		if (!isNaN(video.duration)) {
 			presenceData.details = episode.partOfSeries.name;
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;

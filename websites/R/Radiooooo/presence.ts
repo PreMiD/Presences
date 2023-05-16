@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			strings = await getStrings();
 		}
 
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.pause : strings.play;
 
 		presenceData.details = songDetails

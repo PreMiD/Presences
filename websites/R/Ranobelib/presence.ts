@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 		case "": {
 			// Homepage
 			presenceData.smallImageText = "reading";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Главная";
 			presenceData.startTimestamp = 0;
 
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 		case "manga-list": {
 			// List of mangas
 			presenceData.smallImageText = "reading";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Каталог ранобэ";
 
 			if (!Array.isArray(Queries.types)) Queries.types = [Queries.types];
@@ -139,7 +139,7 @@ presence.on("UpdateData", async () => {
 				case "": {
 					// Main forum page
 					presenceData.smallImageText = "Читает";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 
 					if (Queries.subscription) presenceData.state = "Мои подписки";
 
@@ -195,7 +195,7 @@ presence.on("UpdateData", async () => {
 				case "discussion-create": {
 					// Discussion create
 					presenceData.smallImageText = "Пишет";
-					presenceData.smallImageKey = "writing";
+					presenceData.smallImageKey = Assets.Writing;
 					presenceData.state = "Создает новую тему";
 
 					break;
@@ -205,7 +205,7 @@ presence.on("UpdateData", async () => {
 					if (Routes[2] && !Routes[3]) {
 						// Opened discussion
 						presenceData.smallImageText = "Читает";
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 
 						const titleElement = document.querySelector(
 								".discussion .discussion__title"
@@ -222,7 +222,7 @@ presence.on("UpdateData", async () => {
 					} else if (Routes[3] && Routes[3] === "edit") {
 						// Editor discussion
 						presenceData.smallImageText = "Пишет";
-						presenceData.smallImageKey = "writing";
+						presenceData.smallImageKey = Assets.Writing;
 
 						presenceData.state = DiscussionTitle
 							? `Редактирует тему: ${DiscussionTitle}`
@@ -244,13 +244,13 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = "Faq";
 				presenceData.smallImageText = "Редактирует";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 				presenceData.state = `Редактирует: ${Queries.article} вопрос`;
 			} else {
 				// Faq Sections
 				presenceData.details = "Faq";
 				presenceData.smallImageText = "Читает";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				switch (Queries.section) {
 					case "1":
@@ -289,7 +289,7 @@ presence.on("UpdateData", async () => {
 			// News page
 			presenceData.details = "Новости";
 			presenceData.smallImageText = "Читает";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			if (Routes[1]) {
 				// Opened News
@@ -301,7 +301,7 @@ presence.on("UpdateData", async () => {
 				// News List
 				presenceData.details = "Новости";
 				presenceData.smallImageText = "Читает";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.state = "Список новостей";
 			}
 
@@ -311,7 +311,7 @@ presence.on("UpdateData", async () => {
 			// Notification list
 			presenceData.details = "Уведомления";
 			presenceData.smallImageText = "Читает";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			switch (Queries.type) {
 				case "chapter":
@@ -340,7 +340,7 @@ presence.on("UpdateData", async () => {
 			// Contact page
 			presenceData.details = "Контакты";
 			presenceData.smallImageText = "Пишет";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			presenceData.state = "info@mangalib.me";
 
 			break;
@@ -349,7 +349,7 @@ presence.on("UpdateData", async () => {
 			// Messages page
 			presenceData.details = "Личные сообщения";
 			presenceData.smallImageText = "Пишет";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			presenceData.startTimestamp = getTimeStamp();
 
 			break;
@@ -360,7 +360,7 @@ presence.on("UpdateData", async () => {
 			if (Routes[1] === "create") {
 				presenceData.details = "Добавляет автора";
 				presenceData.smallImageText = "Добавляет автора";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 
 				peopleName = (<HTMLInputElement>document.querySelector("#name")).value;
 
@@ -377,7 +377,7 @@ presence.on("UpdateData", async () => {
 				// Create New Team
 				presenceData.details = "Добавляет команду";
 				presenceData.smallImageText = "Добавляет команду";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 
 				teamName = (<HTMLInputElement>document.querySelector("#name")).value;
 
@@ -387,7 +387,7 @@ presence.on("UpdateData", async () => {
 				// Main Team Page
 				presenceData.details = "Команда перевода";
 				presenceData.smallImageText = "Смотрит переводчика";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				const title = document.querySelector(".team-profile__name");
 
@@ -397,7 +397,7 @@ presence.on("UpdateData", async () => {
 			} else if (Routes[2] === "edit") {
 				presenceData.details = "Команда перевода";
 				presenceData.smallImageText = "Редактирует переводчика";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 
 				switch (Queries.section) {
 					case "info":
@@ -416,7 +416,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Модерация";
 			presenceData.smallImageText = "Управляет сайтом";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			if (!Routes[1]) presenceData.state = "Модерация глав";
 			else {
@@ -472,7 +472,7 @@ presence.on("UpdateData", async () => {
 		case "user": {
 			// User page
 			presenceData.smallImageText = "Смотрит профиль пользователя";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			const username = document.querySelector(".profile-user__username span");
 
@@ -483,7 +483,7 @@ presence.on("UpdateData", async () => {
 			if (Routes[1] === "content") {
 				presenceData.details = "Мои добавления";
 				presenceData.smallImageText = "Пишет";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 				presenceData.startTimestamp = 0;
 
 				if (!Routes[2]) presenceData.state = "Добавленные тайтлы";
@@ -508,7 +508,7 @@ presence.on("UpdateData", async () => {
 			} else if (Routes[1] === "edit") {
 				presenceData.details = "Мои настройки";
 				presenceData.smallImageText = "Настраивает";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 				presenceData.startTimestamp = 0;
 
 				switch (Queries.section) {
@@ -543,7 +543,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Закладки ${UserName}`;
 				presenceData.state = `${BookmarkType.trim()}: ${BookmarkSize}`;
 				presenceData.smallImageText = "Читает";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.startTimestamp = 0;
 			} else {
 				switch (Routes[2]) {
@@ -608,7 +608,7 @@ presence.on("UpdateData", async () => {
 				// create new manga
 				presenceData.details = "Добавляет ранобэ";
 				presenceData.smallImageText = "Пишет";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 
 				const title = <HTMLInputElement>document.querySelector("#rus_name");
 
@@ -619,7 +619,7 @@ presence.on("UpdateData", async () => {
 					case "edit": {
 						// edit
 						presenceData.smallImageText = "Редактирует";
-						presenceData.smallImageKey = "writing";
+						presenceData.smallImageKey = Assets.Writing;
 						presenceData.details = document.querySelector(
 							".section__header .breadcrumb a"
 						).textContent;
@@ -642,7 +642,7 @@ presence.on("UpdateData", async () => {
 						// bulk create
 						presenceData.details = "Добавляет главы";
 						presenceData.smallImageText = "Добавляет";
-						presenceData.smallImageKey = "uploading";
+						presenceData.smallImageKey = Assets.Uploading;
 						presenceData.state = `Ранобэ: ${
 							document.querySelector(".section__header .breadcrumb a")
 								.textContent
@@ -654,7 +654,7 @@ presence.on("UpdateData", async () => {
 						// add chapter
 						presenceData.details = "Добавляет главу";
 						presenceData.smallImageText = "Добавляет";
-						presenceData.smallImageKey = "uploading";
+						presenceData.smallImageKey = Assets.Uploading;
 						presenceData.state = `Ранобэ: ${
 							document.querySelector(".section__header .breadcrumb a")
 								.textContent
@@ -665,7 +665,7 @@ presence.on("UpdateData", async () => {
 					default: {
 						presenceData.details = "Редактирует главу";
 						presenceData.smallImageText = "Пишет";
-						presenceData.smallImageKey = "writing";
+						presenceData.smallImageKey = Assets.Writing;
 						presenceData.state = `Ранобэ: ${
 							document.querySelector(".section__header .breadcrumb a")
 								.textContent
@@ -680,7 +680,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Читает ранобэ";
 				presenceData.state = document.title.split(" ").slice(2, -4).join(" ");
 				presenceData.smallImageText = "Читает";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.startTimestamp = getTimeStamp();
 			} else {
 				const { title } = document;
@@ -688,7 +688,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Смотрит ранобэ";
 				presenceData.state = title.split("/")[0].split(" ").slice(1).join(" ");
 				presenceData.smallImageText = "Читает";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 	}
 
