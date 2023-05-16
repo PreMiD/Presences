@@ -294,7 +294,38 @@ import krakenup from "./K/krakenup";
 import krosmasterarena from "./K/krosmasterarena";
 import krosmasterblast from "./K/krosmasterblast";
 import kulami from "./K/kulami";
+import ladyandthetiger from "./L/ladyandthetiger";
+import ladyschoice from "./L/ladyschoice";
+import lagranja from "./L/lagranja";
+import lama from "./L/lama";
+import lamarcheducrabe from "./L/lamarcheducrabe";
+import laserreflection from "./L/laserreflection";
+import lasvegan from "./L/lasvegan";
+import ledernierpeuple from "./L/ledernierpeuple";
+import legendraiders from "./L/legendraiders";
+import lettertycoon from "./L/lettertycoon";
+import lewisclark from "./L/lewisclark";
+import libertalia from "./L/libertalia";
+import lielow from "./L/lielow";
+import lifeline from "./L/lifeline";
+import lineae from "./L/lineae";
+import lineit from "./L/lineit";
+import linesofaction from "./L/linesofaction";
+import linkage from "./L/linkage";
+import littlefactory from "./L/littlefactory";
+import liverpoolrummy from "./L/liverpoolrummy";
+import livingforest from "./L/livingforest";
+import locomomo from "./L/locomomo";
+import logger from "./L/logger";
+import lookatthestars from "./L/lookatthestars";
+import lostcities from "./L/lostcities";
+import lostexplorers from "./L/lostexplorers";
+import lostseas from "./L/lostseas";
+import loveletter from "./L/loveletter";
+import lox from "./L/lox";
 import luckynumbers from "./L/luckynumbers";
+import lumen from "./L/lumen";
+import luxor from "./L/luxor";
 import patchwork from "./P/patchwork";
 import potionexplosion from "./P/potionexplosion";
 import raceforthegalaxy from "./R/raceforthegalaxy";
@@ -613,7 +644,38 @@ const games: Record<string, GamePresence> = {
 	krosmasterarena,
 	krosmasterblast,
 	kulami,
+	ladyandthetiger,
+	ladyschoice,
+	lagranja,
+	lama,
+	lamarcheducrabe,
+	laserreflection,
+	lasvegan,
+	ledernierpeuple,
+	legendraiders,
+	lettertycoon,
+	lewisclark,
+	libertalia,
+	lielow,
+	lifeline,
+	lineae,
+	lineit,
+	linesofaction,
+	linkage,
+	littlefactory,
+	liverpoolrummy,
+	livingforest,
+	locomomo,
+	logger,
+	lookatthestars,
+	lostcities,
+	lostexplorers,
+	lostseas,
+	loveletter,
+	lox,
 	luckynumbers,
+	lumen,
+	luxor,
 	patchwork,
 	potionexplosion,
 	raceforthegalaxy,

@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const linkage: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/V9938hR.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,61 +23,8 @@ const linkage: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
 				case "playerTurn":
-					/*
-					{
-	"name": "playerTurn",
-	"description": "${actplayer} must make a move",
-	"descriptionmyturn": "${you} must make a move",
-	"type": "activeplayer",
-	"args": "argPlayerTurn",
-	"possibleactions": [
-		"placePiece"
-	],
-	"transitions": {
-		"placePiece": 10,
-		"zombiePass": 10
-	}
-}
-					*/
-					break;
-				case "nextTurnOrEnd":
-					/*
-					{
-	"name": "nextTurnOrEnd",
-	"type": "game",
-	"action": "stNextTurnOrEnd",
-	"updateGameProgression": "true",
-	"transitions": {
-		"nextPlayer": 2,
-		"endGame": 99
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Making a move";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
