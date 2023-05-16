@@ -49,7 +49,7 @@ function setCacheTime(key: string, time: number) {
  * @param presence
  * @returns
  */
-function getPageVariable<E>(variable: string, presence: Presence) {
+function getPageVariable<T>(variable: string, presence: Presence) {
 	const variablePath = variable.split(".");
 
 	// convert into legacy format
@@ -59,7 +59,7 @@ function getPageVariable<E>(variable: string, presence: Presence) {
 	}
 	legacyVariable += `["${variablePath[variablePath.length - 1]}`;
 
-	return presence.getPageletiable<E>(legacyVariable);
+	return presence.getPageletiable<T>(legacyVariable);
 }
 
 /**
@@ -69,17 +69,17 @@ function getPageVariable<E>(variable: string, presence: Presence) {
  * @param key
  * @returns
  */
-export async function getMetadata<E>(
+export async function getMetadata<T>(
 	presence: Presence,
 	key: string
-): Promise<E> {
+): Promise<T> {
 	const now = Date.now();
 	if (now - getCacheTime(key) > 1000) {
 		setCacheTime(key, now);
-		const data = await getPageVariable<E>(`gameui.${key}`, presence);
+		const data = await getPageVariable<T>(`gameui.${key}`, presence);
 		setCachedItem(key, data);
 		return data;
-	} else return getCachedItem(key) as E;
+	} else return getCachedItem(key) as T;
 }
 
 /**
@@ -90,8 +90,8 @@ export async function getMetadata<E>(
  * @param key
  * @returns
  */
-export function getGameData<E>(presence: Presence, key: string) {
-	return getMetadata<E>(presence, `gamedatas.${key}`);
+export function getGameData<T>(presence: Presence, key: string) {
+	return getMetadata<T>(presence, `gamedatas.${key}`);
 }
 
 export interface PlayerData {
