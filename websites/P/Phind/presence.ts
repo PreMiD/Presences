@@ -31,11 +31,11 @@ presence.on("UpdateData", async () => {
 		searchResults = document.querySelectorAll("div.row[name^='answer-']"),
 		[displayTime, displaySearch, cycleSearch, shareSearch, privateMode] =
 			await Promise.all([
-				presence.getSetting("displayTime"), // shows/hides the time spent on the site
-				presence.getSetting("displaySearch"), // shows/hides your search query text
-				presence.getSetting("cycleSearch"), // cycles through all the search query on the page
-				presence.getSetting("shareSearch"), // shares your search with a button
-				presence.getSetting("privateMode"), // hides the querry, button and what exact page you are on
+				presence.getSetting("displayTime"),
+				presence.getSetting("displaySearch"),
+				presence.getSetting("cycleSearch"),
+				presence.getSetting("shareSearch"),
+				presence.getSetting("privateMode"),
 			]);
 
 	if (displayTime) presenceData.startTimestamp = browsingTimestamp;
@@ -45,13 +45,11 @@ presence.on("UpdateData", async () => {
 		presenceData.state = pathname; // display /path
 		slideshow.deleteAllSlides();
 	} else if (searchResults.length > 0 && !privateMode) {
-		// we must be on /search and arn't in private mode
-		// presenceData.details = "Searching";
+		// we must be on /search
 		presenceData.details = displaySearch ? "Searching for:" : "Searching";
 		presenceData.smallImageKey = assets.search;
 		presenceData.smallImageText = "Searching";
 		if (shareSearch) {
-			// share search query with button
 			presenceData.buttons = [
 				{
 					label: "Open Search Result",
@@ -60,7 +58,6 @@ presence.on("UpdateData", async () => {
 			];
 		}
 		if (displaySearch && cycleSearch) {
-			// share search query text using slideshow
 			for (const [i, result] of searchResults.entries()) {
 				const newPresenceData: PresenceData = { ...presenceData };
 				newPresenceData.state = `${i + 1}. ${
@@ -69,7 +66,6 @@ presence.on("UpdateData", async () => {
 				slideshow.addSlide(i.toString(), newPresenceData, 5000);
 			}
 		} else if (displaySearch) {
-			// share search query text
 			presenceData.state = searchResults[0].querySelector(
 				"span.fw-bold.fs-3.mb-3"
 			).textContent;
