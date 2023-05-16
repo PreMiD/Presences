@@ -272,7 +272,28 @@ import jumpdrive from "./J/jumpdrive";
 import jumpgate from "./J/jumpgate";
 import justdesserts from "./J/justdesserts";
 import justone from "./J/justone";
+import k2 from "./K/k2";
+import kabaleo from "./K/kabaleo";
+import kahuna from "./K/kahuna";
+import kalah from "./K/kalah";
+import kami from "./K/kami";
+import keyflower from "./K/keyflower";
+import khronos from "./K/khronos";
+import kingdombuilder from "./K/kingdombuilder";
+import kingdomino from "./K/kingdomino";
+import kingdoms from "./K/kingdoms";
+import kingofthepitch from "./K/kingofthepitch";
 import kingoftokyo from "./K/kingoftokyo";
+import kingsguild from "./K/kingsguild";
+import klaverjassen from "./K/klaverjassen";
+import kmakici from "./K/kmakici";
+import koikoi from "./K/koikoi";
+import konane from "./K/konane";
+import kqj from "./K/kqj";
+import krakenup from "./K/krakenup";
+import krosmasterarena from "./K/krosmasterarena";
+import krosmasterblast from "./K/krosmasterblast";
+import kulami from "./K/kulami";
 import luckynumbers from "./L/luckynumbers";
 import patchwork from "./P/patchwork";
 import potionexplosion from "./P/potionexplosion";
@@ -570,7 +591,28 @@ const games: Record<string, GamePresence> = {
 	jumpgate,
 	justdesserts,
 	justone,
+	k2,
+	kabaleo,
+	kahuna,
+	kalah,
+	kami,
+	keyflower,
+	khronos,
+	kingdombuilder,
+	kingdomino,
+	kingdoms,
+	kingofthepitch,
 	kingoftokyo,
+	kingsguild,
+	klaverjassen,
+	kmakici,
+	koikoi,
+	konane,
+	kqj,
+	krakenup,
+	krosmasterarena,
+	krosmasterblast,
+	kulami,
 	luckynumbers,
 	patchwork,
 	potionexplosion,
