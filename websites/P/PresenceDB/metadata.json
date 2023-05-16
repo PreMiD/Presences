@@ -14,7 +14,7 @@
 		"preview.presencedb.com"
 	],
 	"regExp": "(www|preview)[.]presencedb[.]com[/]",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/6SyDAmT.png",
 	"thumbnail": "https://i.imgur.com/P20KlQh.png",
 	"color": "#fff",

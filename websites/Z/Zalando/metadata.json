@@ -13,7 +13,7 @@
 	},
 	"url": "www.zalando.com",
 	"regExp": "([a-z0-9-]+[.])*zalando([.][a-z]+)+[/]",
-	"version": "1.2.17",
+	"version": "1.2.18",
 	"logo": "https://i.imgur.com/APLPI4i.png",
 	"thumbnail": "https://i.imgur.com/lFWmRc9.png",
 	"color": "#f47127",

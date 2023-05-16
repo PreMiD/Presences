@@ -9,7 +9,7 @@
 		"en": "Colab, or \"Colaboratory\", allows you to write and execute Python in your browser, with zero configuration required, access to GPUs free of charge, and easy sharing"
 	},
 	"url": "colab.research.google.com",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.imgur.com/2B69cLb.png",
 	"thumbnail": "https://i.imgur.com/qvR0PDm.png",
 	"color": "#f9ab00",

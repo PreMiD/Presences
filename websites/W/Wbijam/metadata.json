@@ -11,7 +11,7 @@
 	},
 	"url": "wbijam.pl",
 	"regExp": "([a-z0-9.]*)wbijam[.]pl",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/RRphyk6.png",
 	"thumbnail": "https://i.imgur.com/PhjCcuX.png",
 	"color": "#00b3ff",

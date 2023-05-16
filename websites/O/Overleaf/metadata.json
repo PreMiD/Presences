@@ -12,7 +12,7 @@
 	},
 	"url": "www.overleaf.com",
 	"regExp": "([a-z0-9-]+[.])*overleaf[.]com[/]",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/DcEM56x.png",
 	"thumbnail": "https://i.imgur.com/lWInfl3.png",
 	"color": "#138A07",

@@ -12,7 +12,7 @@
 	},
 	"url": "di.fm",
 	"regExp": "([a-z0-9-]+[.])*di[.]fm[/]",
-	"version": "1.5.1",
+	"version": "1.5.2",
 	"logo": "https://i.imgur.com/T1Zi3qF.png",
 	"thumbnail": "https://i.imgur.com/ZvBC7EG.png",
 	"color": "#3aa154",

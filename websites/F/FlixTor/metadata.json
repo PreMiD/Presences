@@ -27,7 +27,7 @@
 		"flixtor.cz"
 	],
 	"regExp": "flixtor[.](to|ch|se|vc|nu|sx|tk|cz)",
-	"version": "2.3.6",
+	"version": "2.3.7",
 	"logo": "https://i.imgur.com/FIXyNZo.png",
 	"thumbnail": "https://i.imgur.com/iaHbvZ7.png",
 	"color": "#1d3343",

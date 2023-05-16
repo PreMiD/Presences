@@ -12,7 +12,7 @@
 	},
 	"url": "www.pantip.com",
 	"regExp": "([a-z0-9-]+[.])*pantip[.]com[/]",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/pXOyBO5.png",
 	"thumbnail": "https://i.imgur.com/5ji4rGg.png",
 	"color": "#9d93f5",

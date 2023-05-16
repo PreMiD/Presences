@@ -18,7 +18,7 @@
 	},
 	"url": "ifttt.com",
 	"regExp": "(ift[.]tt|((help|platform|status)[.]|)ifttt[.]com)[/]",
-	"version": "2.0.7",
+	"version": "2.0.8",
 	"logo": "https://i.imgur.com/1d8TEw1.png",
 	"thumbnail": "https://i.imgur.com/oHMcwT3.png",
 	"color": "#0d99fd",

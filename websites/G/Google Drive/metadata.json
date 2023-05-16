@@ -21,7 +21,7 @@
 	},
 	"url": "drive.google.com",
 	"regExp": "drive[.]google([.][a-z]+)+[/]",
-	"version": "1.6.4",
+	"version": "1.6.5",
 	"logo": "https://i.imgur.com/WdNIJe8.png",
 	"thumbnail": "https://i.imgur.com/mZdtUw5.png",
 	"color": "#3aa154",

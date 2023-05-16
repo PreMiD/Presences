@@ -19,7 +19,7 @@
 		"nl": "Replit, voorheen Repl.it, is een in San Francisco gevestigde start-up en een online IDE (geïntegreerde ontwikkelomgeving) die 40 programmeertalen ondersteunt, waaronder Python, Lua, JavaScript, Julia, C++, C++11, C, C#, HTML/CSS/JS, Python met turtle en LOLCODE. Replit stelt gebruikers in staat om code te schrijven en apps te bouwen met behulp van een browser, zonder software te hoeven installeren op hun apparaten."
 	},
 	"url": "replit.com",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/jL7ohN5.png",
 	"thumbnail": "https://i.imgur.com/4AwIxoc.png",
 	"color": "#808080",

@@ -10,7 +10,7 @@
 	},
 	"url": "sonicretro.org",
 	"regExp": "((info|forums)+[.])*(sonicretro[.]org)[/]",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/m2ByWe1.png",
 	"thumbnail": "https://i.imgur.com/XSQE7IW.png",
 	"color": "#84846a",

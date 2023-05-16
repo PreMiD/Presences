@@ -15,7 +15,7 @@
 	},
 	"url": "9gag.com",
 	"regExp": "([a-z0-9-]+[.])*9gag[.]com[/]",
-	"version": "1.3.5",
+	"version": "1.3.6",
 	"logo": "https://i.imgur.com/t2BG2Fj.png",
 	"thumbnail": "https://i.imgur.com/CmOz6oG.png",
 	"color": "#ffffff",

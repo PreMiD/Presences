@@ -12,7 +12,7 @@
 	},
 	"url": "chaturbate.com",
 	"regExp": "([a-z0-9-]+[.])*chaturbate([.][a-z]+)+[/]",
-	"version": "1.2.23",
+	"version": "1.2.24",
 	"logo": "https://i.imgur.com/PjQ6k9n.png",
 	"thumbnail": "https://i.imgur.com/iszRY6f.png",
 	"color": "#f68a1a",

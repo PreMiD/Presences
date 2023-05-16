@@ -12,7 +12,7 @@
 	},
 	"url": "zoom.us",
 	"regExp": "(.*?)[.]?zoom.us",
-	"version": "1.1.13",
+	"version": "1.1.14",
 	"logo": "https://i.imgur.com/K1OGlrP.png",
 	"thumbnail": "https://i.imgur.com/MJptA60.jpg",
 	"color": "#0e71eb",

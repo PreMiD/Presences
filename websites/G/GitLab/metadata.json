@@ -12,7 +12,7 @@
 	},
 	"url": "gitlab.com",
 	"regExp": "([a-z0-9-]+[.])*gitlab[.]com[/]",
-	"version": "1.1.18",
+	"version": "1.1.19",
 	"logo": "https://i.imgur.com/R3DmkeK.png",
 	"thumbnail": "https://i.imgur.com/ISBVR2q.png",
 	"color": "#ff4400",

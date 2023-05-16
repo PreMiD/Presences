@@ -15,7 +15,7 @@
 	},
 	"url": "wikiversity.org",
 	"regExp": "([a-z0-9-]+[.])+wikiversity[.]org[/]",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://i.imgur.com/HU6hLSg.png",
 	"thumbnail": "https://i.imgur.com/FVkZ2gS.png",
 	"color": "#f9f9f9",

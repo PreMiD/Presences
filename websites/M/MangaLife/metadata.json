@@ -16,7 +16,7 @@
 		"manga4life.com"
 	],
 	"regExp": "([a-z0-9]+[.])?manga4life[.]com",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/mJTwQxZ.png",
 	"thumbnail": "https://i.imgur.com/7R0tE9U.png",
 	"color": "#6cabdf",

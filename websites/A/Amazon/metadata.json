@@ -15,7 +15,7 @@
 	},
 	"url": "www.amazon.com",
 	"regExp": "([a-z0-9-]+[.])*amazon([.][a-z]+)+[/](?!(-[/]([a-z0-9]+)[/])?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp[/]video))",
-	"version": "1.5.17",
+	"version": "1.5.18",
 	"logo": "https://i.imgur.com/qPBCqNA.png",
 	"thumbnail": "https://i.imgur.com/Y6njoa3.png",
 	"color": "#ff9900",
