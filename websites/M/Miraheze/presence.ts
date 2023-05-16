@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "900002010156400670",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let currentURL = new URL(document.location.href),
 	currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
 	presenceData: PresenceData = {

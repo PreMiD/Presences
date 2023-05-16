@@ -3,9 +3,8 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/KuPkyx2.png",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -31,7 +30,7 @@ presence.on("UpdateData", async () => {
 	else if (search?.value) {
 		presenceData.details = "Searching for";
 		presenceData.state = search?.value;
-		presenceData.smallImageKey = Assets.SearchImage;
+		presenceData.smallImageKey = Assets.Search;
 	} else if (
 		pathname === `/${document.querySelector("html").getAttribute("lang")}`
 	)

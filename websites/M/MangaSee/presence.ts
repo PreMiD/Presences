@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = "Searching: ";
 		presenceData.state = new URLSearchParams(search).get("name");
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname === "/directory/" || pathname === "/search/")
 		presenceData.details = "Browsing all manga";
 	else if (pathname === "/discussion/")
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 			.textContent.trim()
 			.split(" ")
 			.pop()}${page ? ` 📄 ${page.textContent.trim().split(" ").pop()}` : ""}`;
-		presenceData.smallImageKey = "read";
+		presenceData.smallImageKey = Assets.Reading;
 		if (buttons) {
 			presenceData.buttons = [
 				{ label: "View manga", url: window.location.href },

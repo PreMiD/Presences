@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
 				details: title && title.textContent ? title.textContent : "Belirsiz",
 				state:
 					episode && episode.textContent ? episode.textContent : "Belirsiz",
-				smallImageKey: _video.paused ? "pause" : "play",
+				smallImageKey: _video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: _video.paused
 					? (await strings).pause
 					: (await strings).play,
@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
 				details: title && title.textContent ? title.textContent : "Belirsiz",
 				state:
 					episode && episode.textContent ? episode.textContent : "Belirsiz",
-				smallImageKey: video.paused ? "pause" : "play",
+				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused
 					? (await strings).pause
 					: (await strings).play,

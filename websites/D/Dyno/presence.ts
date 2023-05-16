@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "633801594541965334",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
@@ -12,7 +13,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname.includes("/bot")) {
 		presenceData.details = "Reading about the bot";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/account"))
 		presenceData.details = "Viewing their account";
 	else if (document.location.pathname.includes("/manage/")) {
@@ -21,7 +22,7 @@ presence.on("UpdateData", async () => {
 			"#dashboard-mount > div > div.column.nav-sidebar > aside > div.guild-header > h3 > div > div"
 		);
 		presenceData.state = `server: ${title.textContent}`;
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 	} else if (document.location.pathname.includes("/servers")) {
 		presenceData.details = "Browsing through the";
 		presenceData.state = "server listings";
@@ -29,7 +30,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing all the commands";
 	else if (document.location.pathname.includes("faq")) {
 		presenceData.details = "Reading the FAQ";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/status"))
 		presenceData.details = "Viewing the status";
 	else if (document.location.pathname.includes("/upgrade"))

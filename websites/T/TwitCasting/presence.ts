@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (new URLSearchParams(search).has("genre")) {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = strings.browsing;
 		presenceData.details = strings.viewCategory;
 		if (!privacy) {
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 				.textContent.split(":")[1]
 				.trim();
 		}
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.search;
 	} else if (pathname.includes("/broadcaster"))
 		presenceData.details = strings.dashboardManage;
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 						Date.now() / 1000 + duration - currentTime;
 				}
 
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused ? strings.paused : strings.playing;
 				presenceData.buttons = [
 					{ label: strings.buttonWatchVideo, url: document.URL },

@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 			.querySelector("div.list-update-search-header h1")
 			.textContent.replace("SEARCH", "")
 			.replace(/\t|\n/g, "");
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.details = "Doing:";
 	}
 	if (!time) {

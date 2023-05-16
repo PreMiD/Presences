@@ -7,9 +7,13 @@ const presence = new Presence({
 		browsing: "general.browsing",
 	});
 
+const enum Assets {
+	Logo = "https://i.imgur.com/hAt97QK.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/hAt97QK.png",
+			largeImageKey: Assets.Logo,
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 
@@ -38,10 +42,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = ` ${
 				document.querySelector(".CPplayer-header-title span").textContent
 			}`;
-			(presenceData.smallImageKey = video.paused ? "pause" : "play"),
-				(presenceData.smallImageText = video.paused
-					? (await strings).pause
-					: (await strings).play);
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageText = video.paused
+				? (await strings).pause
+				: (await strings).play;
 			if (video.paused) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;

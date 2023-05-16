@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 				".mejs-mediaelement > mediaelementwrapper > video"
 			);
 			[presenceData.details] = pageTitle;
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;
@@ -80,14 +80,14 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.includes("/upload")) {
 		[presenceData.details] = pageTitle;
-		presenceData.smallImageKey = "uploading";
+		presenceData.smallImageKey = Assets.Uploading;
 	} else {
 		[presenceData.details] = pageTitle;
 		presenceData.state = (await strings).reading;
 		presenceData.startTimestamp = browsingTimestamp;
 	}
 	if (query) {
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).searching;
 		presenceData.details = `${(await strings).searching} : ${query}`;
 	}

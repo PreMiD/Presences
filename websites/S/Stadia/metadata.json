@@ -10,7 +10,7 @@
 		"nl": "Stadia is een door Google geëxploiteerde cloudgamingdienst. Er wordt geadverteerd dat het videogames kan streamen tot 4K-resolutie bij 60 frames per seconde met ondersteuning voor high-dynamic-range, naar spelers via de talrijke datacenters van het bedrijf over de hele wereld, op voorwaarde dat ze een internetverbinding met voldoende hoge snelheid gebruiken. Het is toegankelijk via de Google Chrome-webbrowser op desktopcomputers, Pixel-smartphones, ondersteunde smartphones van Samsung, OnePlus, Razer en Asus, evenals Chrome OS-tablets en Chromecast voor tv-ondersteuning."
 	},
 	"url": "stadia.google.com",
-	"version": "1.0.16",
+	"version": "1.0.18",
 	"logo": "https://i.imgur.com/beLx5ko.png",
 	"thumbnail": "https://i.imgur.com/CyujQo7.png",
 	"color": "#0081FF",

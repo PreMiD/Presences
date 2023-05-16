@@ -14,7 +14,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = (
 			document.querySelector(".navbar-form input") as HTMLInputElement
 		).value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else {
 		if (pathname.includes("emperors-domination"))
 			presenceData.largeImageKey = "emperor";
@@ -50,7 +50,7 @@ presence.on("UpdateData", () => {
 			presenceData.state = `📖 ${
 				document.querySelector("#chapter-outer .caption h4").textContent
 			} 🔸 ${progress}%`;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.buttons = [
 				{
 					label: "Visit Novel Page",

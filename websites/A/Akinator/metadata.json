@@ -21,7 +21,7 @@
 	},
 	"url": "en.akinator.com",
 	"regExp": "([a-z0-9-]+[.])*akinator[.]com[/]",
-	"version": "1.3.18",
+	"version": "1.3.20",
 	"logo": "https://i.imgur.com/mQreXyR.png",
 	"thumbnail": "https://i.imgur.com/CPWBwGM.png",
 	"color": "#0000ff",

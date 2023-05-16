@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 	if (search?.value) {
 		presenceData.details = "Searching for";
 		presenceData.state = search.value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (game) {
 		presenceData.buttons = [
 			{

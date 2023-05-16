@@ -15,13 +15,13 @@ presence.on("UpdateData", () => {
 			.textContent.replace("-", "");
 		presenceData.state =
 			document.querySelectorAll(".track-name")[0].textContent;
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			"div > section.track-region.col > div > div.artwork > div > img"
 		).src;
 	} else {
 		presenceData.state = "Browsing...";
-		presenceData.smallImageKey = "pause";
+		presenceData.smallImageKey = Assets.Pause;
 	}
 	presence.setActivity(presenceData);
 });

@@ -207,7 +207,7 @@ presence.on("UpdateData", async () => {
 					.replace(title.textContent, "")
 					.replace(" ", "")
 					.trim(),
-				smallImageKey: video.paused ? "pause" : "play",
+				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused
 					? (await strings).pause
 					: (await strings).play,
@@ -272,7 +272,7 @@ presence.on("UpdateData", async () => {
 						.replace(title.textContent, "")
 						.replace(" ", "")
 						.trim(),
-					smallImageKey: video.paused ? "pause" : "play",
+					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 					smallImageText: video.paused
 						? (await strings).pause
 						: (await strings).play,

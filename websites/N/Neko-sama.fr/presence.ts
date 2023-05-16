@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 						episodeImage === "https://neko-sama.fr/images/default_thumbnail.png"
 							? "nekosama-icon"
 							: episodeImage;
-					presenceData.smallImageKey = paused ? "pause" : "play";
+					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 					presenceData.smallImageText = paused
 						? "En pause"
 						: "Lecture en cours";

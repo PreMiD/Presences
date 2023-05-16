@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "635213174144237601",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title;
 const viewString = "Viewing ",
 	torrentString = "'s torrents";
@@ -15,17 +16,17 @@ presence.on("UpdateData", async () => {
 	if (new URLSearchParams(window.location.search).has("q")) {
 		presenceData.details = "Searching for:";
 		presenceData.state = document.querySelector("input").value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname === "/")
 		presenceData.details = "Viewing home page";
 	else if (document.location.pathname.includes("/rules")) {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.details = "Reading the rules";
 	} else if (document.location.pathname.includes("/help")) {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.details = "Reading the help section";
 	} else if (document.location.pathname.includes("/upload")) {
-		presenceData.smallImageKey = "upload";
+		presenceData.smallImageKey = Assets.Uploading;
 		presenceData.details = "Uploading a torrent";
 	} else if (document.location.pathname.includes("/view/")) {
 		presenceData.details = "Viewing torrent:";

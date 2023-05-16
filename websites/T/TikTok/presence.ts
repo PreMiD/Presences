@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector(".user-username")?.textContent ??
 				document.querySelector(".author-uniqueId")?.textContent
 			}`;
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			if (!video.paused)
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 			presenceData.buttons = [
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = detail;
 		presenceData.state = state;
 		presenceData.smallImageText = (await strings).browse;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	const buttons = await presence.getSetting<boolean>("buttons");

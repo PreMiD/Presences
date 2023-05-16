@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "802379096122196050",
 });
+
 let timestart = Math.round(Date.now() / 1000),
 	prevPage = "",
 	currPage = "";

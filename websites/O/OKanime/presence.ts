@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 				);
 		}
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData, !video.paused);
 	} else {
 		presenceData.details = (await strings).browsing;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).browsing;
 
 		presence.setActivity(presenceData);

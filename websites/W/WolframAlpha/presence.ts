@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 	if (path.includes("/input")) {
 		presenceData.details = "Searching for:";
 		presenceData.state = document.querySelector("._9CcbX").textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (path.includes("/examples")) {
 		const title = document.querySelector("#page-title").textContent;
 
@@ -43,13 +43,13 @@ presence.on("UpdateData", async () => {
 			case path.includes("/probability"):
 				presenceData.details = "Reading about:";
 				presenceData.state = `${title} examples`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Mathematics";
 				break;
 			default:
 				presenceData.details = "Looking at:";
 				presenceData.state = "Mathematics examples";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 		}
 		switch (path.includes("/science-and technology")) {
 			case path.includes("/physiscs"):
@@ -69,13 +69,13 @@ presence.on("UpdateData", async () => {
 			case path.includes("/food-science"):
 				presenceData.details = "Reading about:";
 				presenceData.state = `${title} examples`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Science & Technology";
 				break;
 			default:
 				presenceData.details = "Looking at:";
 				presenceData.state = "Science & technology examples";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 		}
 		switch (path.includes("/society-and-culture")) {
 			case path.includes("/people"):
@@ -95,13 +95,13 @@ presence.on("UpdateData", async () => {
 			case path.includes("/education"):
 				presenceData.details = "Reading about:";
 				presenceData.state = `${title} examples`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Society & Culture";
 				break;
 			default:
 				presenceData.details = "Looking at:";
 				presenceData.state = "Society & culture examples";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 		}
 		switch (path.includes("/every-life")) {
 			case path.includes("/personal-health"):
@@ -116,18 +116,18 @@ presence.on("UpdateData", async () => {
 			case path.includes("/hobbies"):
 				presenceData.details = "Reading about:";
 				presenceData.state = `${title} examples`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Everyday life";
 				break;
 			default:
 				presenceData.details = "Looking at:";
 				presenceData.state = "Everyday life examples";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (path.includes("/api")) {
 		presenceData.details = "Reading about:";
 		presenceData.state = "API documentation";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (path.includes("/login")) {
 		presenceData.details = "Viewing Page:";
 		presenceData.state = "Login page";
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.details = "Looking at:";
 			presenceData.state = "Maths problems";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (path.includes("/mobile")) {
 		presenceData.details = "Viewing Page:";

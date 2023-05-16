@@ -10,7 +10,7 @@
 	},
 	"url": "www.webnovel.com",
 	"regExp": "([a-z0-9]+[.])webnovel[.]com",
-	"version": "1.0.2",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/PcDEB6x.png",
 	"thumbnail": "https://i.imgur.com/NrbQ6Xa.jpeg",
 	"color": "#3F4DA5",

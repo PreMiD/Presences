@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 		const numLimit = parseFloat(document.querySelector(".line b").textContent);
 		presenceData.details = "Waiting";
 		presenceData.state = `Playing ${`(${players.length} of ${numLimit})`}`;
-		presenceData.smallImageKey = "playing";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "On game";
 
 		if (players.length > numLimit)

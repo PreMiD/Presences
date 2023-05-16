@@ -82,14 +82,14 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector(
 					".media-detail__title"
 				).textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.browsing;
 				break;
 			}
 			case "popular": {
 				presenceData.details = strings.viewCategory.replace(":", "");
 				presenceData.state = "Popular";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.browsing;
 				break;
 			}
@@ -106,20 +106,20 @@ presence.on("UpdateData", async () => {
 					document.querySelector(
 						"a.router-link-exact-active.router-link-active.anime-radio__tag.anime-radio__tag--active"
 					)?.textContent ?? strings.searchSomething;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = strings.browsing;
 				break;
 			}
 			default: {
 				presenceData.details = strings.viewHome;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.browsing;
 				break;
 			}
 		}
 		if (pathArray[2] === "video" || pathArray[2] === "play") {
 			presenceData.largeImageKey = thumbnail;
-			presenceData.smallImageKey = playing ? "play" : "pause";
+			presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 			if (playing) {
 				[, presenceData.endTimestamp] = presence.getTimestamps(
 					presence.timestampFromFormat(

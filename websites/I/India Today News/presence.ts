@@ -3,6 +3,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://i.imgur.com/JJHnTn3.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -42,15 +46,6 @@ presence.on(
 		video = data;
 	}
 );
-
-enum Assets {
-	Logo = "https://i.imgur.com/JJHnTn3.png",
-	Reading = "https://i.imgur.com/8vMPNni.png",
-	Searching = "https://i.imgur.com/oGQtnIY.png",
-	Pause = "https://i.imgur.com/NyZsbVO.png",
-	Play = "https://i.imgur.com/Y1m0KVP.png",
-	Live = "https://i.imgur.com/a1VVpnH.png",
-}
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
@@ -123,7 +118,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/search/")) {
 		presenceData.details = strings.search;
 		presenceData.state = pathname.split("/search/")[1];
-		presenceData.smallImageKey = Assets.Searching;
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 	} else if (pathname.includes(`/${topic}`)) {
 		presenceData.details = `Viewing ${capitaliseFirstLetter(topic)} news`;

@@ -20,9 +20,7 @@ interface LiveChannelNextData {
 	props: {
 		pageProps: {
 			channelSlug: string;
-			channelsMetaData: {
-				channels: ChannelMetadata[];
-			};
+			channels: ChannelMetadata[];
 		};
 	};
 }
@@ -52,11 +50,8 @@ interface ProgrammeNextData {
 	};
 }
 
-enum Assets {
-	Logo = "https://i.imgur.com/XisKvdg.png",
-	Live = "https://i.imgur.com/WTcQZS7.png",
-	Paused = "https://i.imgur.com/T6jkHHy.png",
-	Playing = "https://i.imgur.com/1CbifM8.png",
+const enum Assets {
+	Logo = "https://i.imgur.com/xUkE69G.png",
 }
 
 const presence = new Presence({
@@ -91,10 +86,9 @@ presence.on("UpdateData", async () => {
 			case "/watch": {
 				const nextData = fetchNextData<LiveChannelNextData>(),
 					// When you first go to watch a channel, the slug is null and the default channel is ITV1
-					currentChannelMetadata =
-						nextData.props.pageProps.channelsMetaData.channels.find(
-							x => x.slug === (nextData.props.pageProps.channelSlug || "itv")
-						);
+					currentChannelMetadata = nextData.props.pageProps.channels.find(
+						x => x.slug === (nextData.props.pageProps.channelSlug || "itv")
+					);
 
 				// At the moment, it doesn't seem the title of the current programme changes when it transitions from one programme
 				// to the next. Use the channel slot data start and end times to determine which title to show.
@@ -167,10 +161,10 @@ presence.on("UpdateData", async () => {
 								Math.floor(video.duration)
 							);
 
-						presenceData.smallImageKey = Assets.Playing;
+						presenceData.smallImageKey = Assets.Play;
 						presenceData.smallImageText = "Playing";
 					} else {
-						presenceData.smallImageKey = Assets.Paused;
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = "Paused";
 					}
 				}

@@ -5,6 +5,10 @@ const presence = new Presence({ clientId: "1035124482735607838" }),
 		listen: "general.buttonListenAlong",
 	});
 
+const enum Assets {
+	Logo = "https://i.imgur.com/L7WOrIG.png",
+}
+
 let title: string,
 	author: string,
 	songPath: string,
@@ -46,8 +50,8 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details: title,
 				state: author,
-				largeImageKey: "https://i.imgur.com/L7WOrIG.png",
-				smallImageKey: paused ? "pause" : "play",
+				largeImageKey: Assets.Logo,
+				smallImageKey: paused ? Assets.Pause : Assets.Play,
 				smallImageText: paused ? (await strings).pause : (await strings).play,
 				startTimestamp,
 				endTimestamp,

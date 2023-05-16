@@ -13,7 +13,7 @@
 	},
 	"url": "play.aidungeon.io",
 	"regExp": "([a-z0-9-]+[.])*aidungeon[.]io[/]",
-	"version": "1.1.14",
+	"version": "1.1.16",
 	"logo": "https://i.imgur.com/570X8KK.png",
 	"thumbnail": "https://i.imgur.com/LOh8Cbf.png",
 	"color": "#484848",

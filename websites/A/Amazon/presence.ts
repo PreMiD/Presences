@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "618138980273094695",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let item: HTMLElement,
 	dropdown: string,
 	dropdownplus1: number,
@@ -30,7 +31,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Searching for:"; //general.searchFor
 		presenceData.state = item.textContent;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.querySelector("#gc-asin-title")) {
 		item = document.querySelector("#gc-asin-title");
 

@@ -138,7 +138,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = animeName;
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? "Pauza" : "Odtwarzanie";
 
 			if (paused) {

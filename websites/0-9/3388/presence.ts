@@ -2,17 +2,14 @@ const presence = new Presence({
 	clientId: "1094931941616267344",
 });
 
-enum Icons {
+const enum Assets {
 	Logo = "https://i.imgur.com/h8N7txd.png",
-	Search = "https://i.imgur.com/5f3sdaH.png",
-	Pause = "https://i.imgur.com/aO2ZCME.png",
-	Play = "https://i.imgur.com/UG7M2Ho.png",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Icons.Logo,
-			smallImageKey: Icons.Search,
+			largeImageKey: Assets.Logo,
+			smallImageKey: Assets.Search,
 			smallImageText: "Browsing",
 		},
 		{ pathname } = document.location;
@@ -71,7 +68,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			".mbu-bg.blur-small img"
 		).src;
-		presenceData.smallImageKey = video.paused ? Icons.Pause : Icons.Play;
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 		if (!video.paused) {

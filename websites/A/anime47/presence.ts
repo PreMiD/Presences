@@ -6,6 +6,10 @@ const presence = new Presence({
 		pause: "general.paused",
 	});
 
+const enum Assets {
+	Logo = "https://i.imgur.com/Vmm3C6N.png",
+}
+
 let browsingTimestamp = Math.floor(Date.now() / 1000),
 	title: string,
 	iFrameVideo: boolean,
@@ -45,7 +49,7 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Vmm3C6N.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -58,14 +62,14 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"body > div.container > div:nth-child(3) > div > div.movie-info > div > div.block-wrapper.page-single > div > div.block-movie-info.movie-info-box > div > div.col-6.movie-detail > h1 > span.title-1"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (
 		document.querySelector(
 			"body > div.container > ol > li:nth-child(5) > a > span"
 		)
 	) {
 		if (iFrameVideo === true && !isNaN(duration)) {
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused
 				? (await strings).pause
 				: (await strings).play;
@@ -85,7 +89,7 @@ presence.on("UpdateData", async () => {
 			title = document.querySelector("head > title").textContent;
 
 			presenceData.state = title;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (document.location.pathname === "/")
 		presenceData.details = "Đang xem trang chủ";

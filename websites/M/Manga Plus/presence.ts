@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "923893773048619008",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let cacheMangaURL: string, cacheMangaChapter: string;
 
 presence.on("UpdateData", async () => {

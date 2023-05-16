@@ -3,6 +3,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://i.imgur.com/0gC8SLN.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -22,13 +26,6 @@ async function getStrings() {
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>;
-
-enum Assets {
-	Logo = "https://i.imgur.com/0gC8SLN.png",
-	Reading = "https://i.imgur.com/wPUmqu5.png",
-	Searching = "https://i.imgur.com/UhPgTRn.png",
-	Viewing = "https://i.imgur.com/RMg2Qgg.png",
-}
 
 enum NotTranslated {
 	Authors = "authors",
@@ -103,7 +100,7 @@ presence.on("UpdateData", async () => {
 				? strings.searchFor
 				: strings.searchSomething;
 			presenceData.state = textContent(".filter-list .current");
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
 			break;
 
@@ -118,7 +115,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = !privacy
 				? `${strings.searchFor} ${NotTranslated.Authors}`
 				: strings.searchSomething;
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
 			if (path[2] === "works") {
 				presenceData.details = `${strings.viewing} ${NotTranslated.WorksOfTheAuthor}`;
@@ -195,7 +192,7 @@ presence.on("UpdateData", async () => {
 				: strings.searchSomething;
 			presenceData.state =
 				document.querySelector<HTMLInputElement>("input")?.value;
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
 			if (path[2]) presenceData.state = textContent(".header-content h4 i");
 			break;

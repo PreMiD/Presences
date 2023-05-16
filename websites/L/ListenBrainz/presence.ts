@@ -4,14 +4,12 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Asset {
-	logo = "https://i.imgur.com/LDfzrVM.png",
-	pause = "https://i.imgur.com/bGEimlp.png",
-	play = "https://i.imgur.com/peI1PG7.png",
+	Logo = "https://i.imgur.com/LDfzrVM.png",
 }
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Asset.logo,
+			largeImageKey: Asset.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = window.location,
@@ -152,8 +150,8 @@ presence.on("UpdateData", () => {
 				document
 					.querySelector<HTMLDivElement>(".play")
 					.getAttribute("title") === "Play"
-					? Asset.pause
-					: Asset.play;
+					? Assets.Pause
+					: Assets.Play;
 		}
 	}
 

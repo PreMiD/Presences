@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
 				if (!search.textContent) {
 					presenceData.details = "Helpdesk searching for:";
 					presenceData.state = search.value;
-					presenceData.smallImageKey = "searching";
+					presenceData.smallImageKey = Assets.Search;
 				} else presenceData.details = "Checking out the helpdesk";
 			}
 			presenceData.buttons = [
