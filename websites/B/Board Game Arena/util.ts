@@ -42,6 +42,27 @@ function setCacheTime(key: string, time: number) {
 }
 
 /**
+ * Gets a page variable from the window.
+ * Note to future maintainers: Replace with newer API when available.
+ *
+ * @param variable
+ * @param presence
+ * @returns
+ */
+function getPageVariable<E>(variable: string, presence: Presence) {
+	const variablePath = variable.split(".");
+
+	// convert into legacy format
+	let legacyVariable = `${variablePath[0]}"]`;
+	for (let i = 1; i < variablePath.length - 1; i++) {
+		legacyVariable += `["${variablePath[i]}"]`;
+	}
+	legacyVariable += `["${variablePath[variablePath.length - 1]}`;
+
+	return presence.getPageletiable<E>(legacyVariable);
+}
+
+/**
  * Fetches metadata about the current game.
  *
  * @param presence
@@ -55,9 +76,9 @@ export async function getMetadata<E>(
 	const now = Date.now();
 	if (now - getCacheTime(key) > 1000) {
 		setCacheTime(key, now);
-		const data = await presence.getPageVariable(`gameui.${key}`);
+		const data = await getPageVariable<E>(`gameui.${key}`, presence);
 		setCachedItem(key, data);
-		return data as E;
+		return data;
 	} else return getCachedItem(key) as E;
 }
 
