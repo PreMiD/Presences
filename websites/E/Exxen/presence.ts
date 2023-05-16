@@ -28,12 +28,12 @@ presence.on("UpdateData", async () => {
 			.replace(`Episode ${episode}`, "");
 		presenceData.state = (await strings).episode.replace("{0}", episode);
 		if (!video.paused) {
-			presenceData.smallImageKey = "playing";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).playing;
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
 		} else {
-			presenceData.smallImageKey = "paused";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = (await strings).paused;
 		}
 	} else {

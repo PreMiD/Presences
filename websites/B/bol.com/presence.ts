@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Zoekt voor:";
 		presenceData.state =
 			document.querySelector<HTMLInputElement>("#searchfor").textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (
 		document.location.pathname === "/" ||
 		document.location.pathname === "/nl/"

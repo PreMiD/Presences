@@ -93,7 +93,9 @@ presence.on("UpdateData", async () => {
 						: `Trailer • ${videoTitle || title}`;
 
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 
 					presenceData.buttons = [
 						{
@@ -130,7 +132,9 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "Movie";
 
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 
 					presenceData.buttons = [
 						{

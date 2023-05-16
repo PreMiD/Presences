@@ -46,9 +46,9 @@ presence.on("UpdateData", async () => {
 				break;
 			case "whats-new":
 				presenceData.details = "มีอะไรใหม่ ?";
-				presenceData.smallImageKey = "question";
+				presenceData.smallImageKey = Assets.Question;
 				if (!privacy && pathArray[4]) {
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					switch (pathArray[4]) {
 						case "posts":
 							presenceData.smallImageText = "ดูโพสต์ใหม่";
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 			case "members":
 				presenceData.details = "สมาชิก";
 				if (!privacy && pathArray[5]) {
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					switch (pathArray[5]) {
 						case "#latest-activity":
 							presenceData.smallImageText = "เคลื่อนไหวล่าสุด";
@@ -94,14 +94,14 @@ presence.on("UpdateData", async () => {
 							"#top > div.p-body-header > div > div > div > h1 > a > em"
 						)?.textContent ?? "ไม่พบข้อมูล";
 				}
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				break;
 			default:
 				presenceData.details = "ฟอรั่ม";
 				break;
 		}
 		if (!privacy && pathArray[4] === "find-source") {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			switch (search) {
 				case "?order=reply_count":
 					presenceData.smallImageText = "ยอดนิยม";

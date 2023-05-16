@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 				}`,
 			},
 		];
-		presenceData.smallImageKey = stream.paused ? "pause" : "play";
+		presenceData.smallImageKey = stream.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = stream.paused ? "Durduruldu" : "Oynatılıyor";
 		if (!stream.paused) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =

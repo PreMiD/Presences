@@ -10,7 +10,7 @@
 	},
 	"url": "manacube.com",
 	"regExp": "([a-z0-9-]+[.])*manacube[.]com[/]",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://i.imgur.com/sBgHblJ.png",
 	"thumbnail": "https://i.imgur.com/D04YmVN.png",
 	"color": "#06D1DF",

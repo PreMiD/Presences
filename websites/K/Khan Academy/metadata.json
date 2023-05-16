@@ -12,7 +12,7 @@
 	},
 	"url": "www.khanacademy.org",
 	"regExp": "([a-z]+[.])+khanacademy[.]org[/]",
-	"version": "1.1.10",
+	"version": "1.1.11",
 	"logo": "https://i.imgur.com/747RYiz.png",
 	"thumbnail": "https://i.imgur.com/0oNkO8J.png",
 	"color": "#4de682",

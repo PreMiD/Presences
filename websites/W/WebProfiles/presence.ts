@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.includes("/search")) {
 		presenceData.details = "Searching for...";
 		presenceData.state = href.split("/search/")[1] ?? "Unknown";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname === "/@me") {
 		presenceData.details = "Viewing my profile";
 		presenceData.buttons = [

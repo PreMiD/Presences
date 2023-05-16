@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 		}`;
 		presenceData.largeImageKey =
 			document.querySelector<HTMLImageElement>("img.image").src;
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 		presenceData.smallImageText = `Translating to${
 			document.querySelector<HTMLDivElement>(
 				"div.og-multi-select__content__selection"

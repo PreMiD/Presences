@@ -165,7 +165,7 @@ presence.on("UpdateData", async () => {
 					const channel = channels.find(channel => channel.id === channelID);
 					({ track, artist, cover } = channel);
 
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = format3
 						.replace("%listeners%", `${channel.listeners}`)
 						.replace("%totalListeners%", `${totalListeners}`);
@@ -190,7 +190,7 @@ presence.on("UpdateData", async () => {
 							"#player > div.wrapper > div.cover > img#player-coverart"
 						)
 						.getAttribute("src");
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = "Loading statistics...";
 				}
 			} else {
@@ -205,7 +205,7 @@ presence.on("UpdateData", async () => {
 						"#player > div.wrapper > div.cover > img#player-coverart"
 					)
 					.getAttribute("src");
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = `Total Listeners: ${totalListeners}`;
 				delete presenceData.startTimestamp;
 			}

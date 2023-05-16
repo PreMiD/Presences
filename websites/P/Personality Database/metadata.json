@@ -10,7 +10,7 @@
 	},
 	"url": "personality-database.com",
 	"regExp": "([a-z0-9-]+[.])*personality-database[.]com[/]",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/hcw43Xf.png",
 	"thumbnail": "https://i.imgur.com/0pBs69u.png",
 	"color": "#2e96a5",

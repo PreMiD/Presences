@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
 				state:
 					videoInfo.subtitle ||
 					(location.pathname.includes(":feature:") ? "Movie" : "Extra"),
-				smallImageKey: video.paused ? "pause" : "play",
+				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused ? "Paused" : "Playing",
 			});
 

@@ -19,12 +19,12 @@ presence.on("UpdateData", async () => {
 					.textContent.replace("- ", "")}`;
 			} else if (document.location.pathname.includes("/changelog")) {
 				presenceData.details = "Reading the latest changelog";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/premium"))
 				presenceData.details = "Viewing Premium perks";
 			else if (document.location.pathname.includes("/about")) {
 				presenceData.details = "Reading about Erisly";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/fanart"))
 				presenceData.details = "Viewing Erisly's Fan Art Collection";
 			else if (document.location.pathname.includes("/team"))

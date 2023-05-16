@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Bir şey arıyor:";
 			presenceData.state =
 				query[0].toUpperCase() + query.slice(1).toLowerCase();
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else {
 			presenceData.details = "Bir sayfaya göz atıyor:";
 			presenceData.state = "Arşiv";
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = showName?.textContent || "Bilinmeyen Dizi";
 		presenceData.state = episode?.textContent || "Bilinmeyen Bölüm";
 
-		presenceData.smallImageKey = video?.paused ? "pause" : "play";
+		presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video?.paused
 			? (await strings).pause
 			: (await strings).play;

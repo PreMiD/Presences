@@ -17,7 +17,7 @@ presence.on("UpdateData", () => {
 		presenceData.state =
 			document.querySelectorAll(".result-count")[0].textContent;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (
 		document.location.pathname.startsWith("/images") &&
 		urlParams.has("q")
@@ -25,7 +25,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Ecosia Images";
 		presenceData.state = `Searching for ${urlParams.get("q")}`;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (
 		document.location.pathname.startsWith("/news") &&
 		urlParams.has("q")
@@ -33,7 +33,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Ecosia News";
 		presenceData.state = `Searching for ${urlParams.get("q")}`;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (
 		document.location.pathname.startsWith("/videos") &&
 		urlParams.has("q")
@@ -41,7 +41,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Ecosia Videos";
 		presenceData.state = `Searching for ${urlParams.get("q")}`;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	}
 	presence.setActivity(presenceData);
 });

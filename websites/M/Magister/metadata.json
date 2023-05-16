@@ -11,7 +11,7 @@
 	},
 	"url": "magister.net",
 	"regExp": "([a-z0-9-]+[.])*magister[.]net[/]",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://i.imgur.com/jk4XMSO.png",
 	"thumbnail": "https://i.imgur.com/TVjDmC4.png",
 	"color": "#1F97F9",

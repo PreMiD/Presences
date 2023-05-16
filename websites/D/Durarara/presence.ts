@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Username: ${
 			document.querySelector(".name").textContent
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/create_room"))
 		presenceData.details = "Creating a room";
 	else if (document.location.pathname.includes("/room/")) {

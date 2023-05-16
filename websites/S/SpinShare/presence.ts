@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = document.querySelector(".song-title").textContent;
 			presenceData.state = document.querySelector(".song-artist").textContent;
 			if (document.querySelector(".player-active"))
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 		} else if (pathname.startsWith("/user")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Browsing User Profile:";

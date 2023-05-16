@@ -219,6 +219,7 @@ presence.on("UpdateData", async () => {
 					// Set start timestamp after game has been created
 					if (timestampUpdateState === 0) {
 						browsingTimestamp = Math.floor(Date.now() / 1000);
+
 						presenceData.startTimestamp = browsingTimestamp;
 						timestampUpdateState = 1;
 					}

@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
 				)
 				.getAttribute("state")}` === "default"
 		) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.details = "Looking at";
 			presenceData.state = document.querySelector(
 				"body > div.page.page-score > div.container > div.row > main > article > div > div.score-right > h1"
@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
 			]);
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(time[0], time[1]);
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.details = "Listening to";
 			presenceData.state = document.querySelector(
 				"body > div.page.page-score > div.container > div.row > main > article > div > div.score-right > h1"

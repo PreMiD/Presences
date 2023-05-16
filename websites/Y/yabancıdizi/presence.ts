@@ -156,7 +156,7 @@ presence.on("UpdateData", async () => {
 					largeImageKey: "https://i.imgur.com/L51zWz0.png",
 					details: "Bir film izliyor:",
 					state: movieTitle.textContent,
-					smallImageKey: _video.paused ? "pause" : "play",
+					smallImageKey: _video.paused ? Assets.Pause : Assets.Play,
 					smallImageText: _video.paused
 						? (await strings).pause
 						: (await strings).play,
@@ -187,7 +187,7 @@ presence.on("UpdateData", async () => {
 					largeImageKey: "https://i.imgur.com/L51zWz0.png",
 					details: "Bir film izliyor:",
 					state: title.textContent,
-					smallImageKey: video.paused ? "pause" : "play",
+					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 					smallImageText: video.paused
 						? (await strings).pause
 						: (await strings).play,
@@ -224,7 +224,7 @@ presence.on("UpdateData", async () => {
 					largeImageKey: "https://i.imgur.com/L51zWz0.png",
 					details: "Bir film izliyor:",
 					state: movieTitle.textContent,
-					smallImageKey: video.paused ? "pause" : "play",
+					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 					smallImageText: video.paused
 						? (await strings).pause
 						: (await strings).play,
@@ -255,7 +255,7 @@ presence.on("UpdateData", async () => {
 					largeImageKey: "https://i.imgur.com/L51zWz0.png",
 					details: showName2.textContent,
 					state: episode.textContent,
-					smallImageKey: video.paused ? "pause" : "play",
+					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 					smallImageText: video.paused
 						? (await strings).pause
 						: (await strings).play,

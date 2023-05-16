@@ -11,7 +11,7 @@
 	},
 	"url": "pluto.tv",
 	"regExp": "([a-z0-9-]+[.])*pluto[.]tv[/]",
-	"version": "1.3.15",
+	"version": "1.3.16",
 	"logo": "https://i.imgur.com/oIasj8d.png",
 	"thumbnail": "https://i.imgur.com/ySBvYkV.png",
 	"color": "#ffffff",

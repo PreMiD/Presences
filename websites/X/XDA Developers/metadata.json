@@ -10,7 +10,7 @@
 	},
 	"url": "www.xda-developers.com",
 	"regExp": "([a-z0-9-_]+)[.]xda-developers[.]com",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/3IF5xqk.jpg",
 	"thumbnail": "https://i.imgur.com/JFoonlP.jpg",
 	"color": "#31035B",

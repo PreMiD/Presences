@@ -268,8 +268,8 @@ presence.on("UpdateData", async () => {
 			presence.getTimestampsfromMedia(videoElement);
 		if (paused) delete presenceData.endTimestamp;
 
-		presenceData.smallImageKey = paused ? "pause" : "play";
-		presenceData.smallImageText = strings[paused ? "pause" : "play"];
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+		presenceData.smallImageText = paused ? strings.pause : strings.play;
 
 		switch (videoMetadata.type) {
 			case "movie": {
@@ -476,7 +476,7 @@ presence.on("UpdateData", async () => {
 					.replace("=", "/")
 					.match(k)
 			) {
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.browse;
 				presenceData = { ...presenceData, ...v };
 			}

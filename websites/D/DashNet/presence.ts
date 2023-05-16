@@ -46,7 +46,7 @@ presence.on("UpdateData", () => {
 	} else if (document.location.pathname === "/") {
 		presenceData.details = "Browsing DashNet's";
 		presenceData.state = "video games and other fun things";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/legacy/"))
 		presenceData.details = "Playing Legacy";
 	else if (document.location.pathname.includes("/igm/"))

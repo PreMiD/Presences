@@ -15,7 +15,7 @@
 		"www.rocketleagueesports.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*rocketleague[.]com[/]",
-	"version": "1.2.13",
+	"version": "1.2.14",
 	"logo": "https://i.imgur.com/mW47NQQ.png",
 	"thumbnail": "https://i.imgur.com/rAqm5wD.jpg",
 	"color": "#0055ab",

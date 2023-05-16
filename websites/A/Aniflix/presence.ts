@@ -39,6 +39,10 @@ if (
 	});
 }
 
+const enum Assets {
+	Logo = "https://i.imgur.com/lza7ROE.png",
+}
+
 presence.on("UpdateData", async () => {
 	if (lastPlaybackState !== playback) {
 		lastPlaybackState = playback;
@@ -49,8 +53,8 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/lza7ROE.png",
-			smallImageKey: paused ? "pause" : "play",
+			largeImageKey: Assets.Logo,
+			smallImageKey: paused ? Assets.Pause : Assets.Play,
 			smallImageText: paused ? (await strings).pause : (await strings).play,
 			startTimestamp,
 			endTimestamp,
@@ -96,7 +100,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.state = `${title.textContent} (${views.textContent})`;
 			delete presenceData.smallImageText;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 		}
@@ -106,7 +110,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.endTimestamp;
 		presenceData.startTimestamp = browsingTimestamp;
 		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presence.setActivity(presenceData);
 	} else if (
 		document.location.pathname.includes("/show/") &&
@@ -167,7 +171,7 @@ presence.on("UpdateData", async () => {
 				delete presenceData.endTimestamp;
 				presenceData.startTimestamp = browsingTimestamp;
 				delete presenceData.smallImageText;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 
@@ -179,7 +183,7 @@ presence.on("UpdateData", async () => {
 				delete presenceData.endTimestamp;
 				presenceData.startTimestamp = browsingTimestamp;
 				delete presenceData.smallImageText;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 

@@ -62,13 +62,13 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/review/edit/")) {
 		book = document.querySelector("a.bookTitle").textContent;
 		presenceData.details = "Writing a book review...";
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 		presenceData.smallImageText = book;
 	} else if (document.location.pathname.includes("/review/list/"))
 		presenceData.details = "Browsing bookshelves";
 	else if (document.location.pathname.includes("/review/show")) {
 		presenceData.details = "Reading a review...";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "On Goodreads";
 	} else if (document.location.pathname.includes("/recommendations"))
 		presenceData.details = "Browsing recommendations";
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing quotes";
 	else if (document.location.pathname.includes("/search")) {
 		presenceData.details = "Searching for a book...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "On Goodreads";
 	}
 	presence.setActivity(presenceData);

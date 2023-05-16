@@ -9,7 +9,7 @@
 		"en": "Regular expression tester with syntax highlighting, explanation, cheat sheet for PHP/PCRE, Python, GO, JavaScript, Java, C#/.NET."
 	},
 	"url": "regex101.com",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/ZSHQyex.png",
 	"thumbnail": "https://i.imgur.com/qG3JsHn.png",
 	"color": "#1a2c42",

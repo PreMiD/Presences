@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 			} else if (typing) {
 				presenceData.details = `Typing... (#${puzzleNumber})`;
 				presenceData.state = `Guess ${i + 1} / 6`;
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 				break;
 			} else if (!guessed) {
 				if (i === 0) presenceData.details = `Warming up... (#${puzzleNumber})`;
