@@ -20,9 +20,7 @@ interface LiveChannelNextData {
 	props: {
 		pageProps: {
 			channelSlug: string;
-			channelsMetaData: {
-				channels: ChannelMetadata[];
-			};
+			channels: ChannelMetadata[];
 		};
 	};
 }
@@ -53,7 +51,7 @@ interface ProgrammeNextData {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/XisKvdg.png",
+	Logo = "https://i.imgur.com/xUkE69G.png",
 }
 
 const presence = new Presence({
@@ -88,10 +86,9 @@ presence.on("UpdateData", async () => {
 			case "/watch": {
 				const nextData = fetchNextData<LiveChannelNextData>(),
 					// When you first go to watch a channel, the slug is null and the default channel is ITV1
-					currentChannelMetadata =
-						nextData.props.pageProps.channelsMetaData.channels.find(
-							x => x.slug === (nextData.props.pageProps.channelSlug || "itv")
-						);
+					currentChannelMetadata = nextData.props.pageProps.channels.find(
+						x => x.slug === (nextData.props.pageProps.channelSlug || "itv")
+					);
 
 				// At the moment, it doesn't seem the title of the current programme changes when it transitions from one programme
 				// to the next. Use the channel slot data start and end times to determine which title to show.
