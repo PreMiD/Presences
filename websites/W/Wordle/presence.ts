@@ -6,7 +6,7 @@ const presence = new Presence({
 		(Date.now() - new Date("06/19/2021").getTime()) / (1000 * 3600 * 24)
 	);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/N19NFSF.png",
 }
 
