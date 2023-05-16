@@ -106,31 +106,38 @@ presence.on("UpdateData", async () => {
 			case document.querySelector('[class="title_name"]') !== null:
 			case document.querySelector('[class="anime_video_body_watch"]') !== null:
 			case document.querySelector('[class="anime_muti_link"]') !== null: {
-				const title =
-						document.querySelector('[class="anime-info"]')?.querySelector("a")
-							?.textContent ??
-						document.querySelector('[class="title_name"]')?.textContent ??
-						pathname.includes("/movie/")
-							? pathname
-									.split("/")[2]
-									.replace(/-/gm, " ")
-									.replace(/\(dub\)/gm, "")
-							: pathname
-									.split("/")[1]
-									.replace(/-/gm, " ")
-									.replace(/\(dub\)/gm, ""),
-					titleReplaced =
-						document
-							.querySelector('[class="each_episode active"]')
-							?.textContent?.trim() ??
-						document.querySelector('[class="active"]')?.textContent?.trim() ??
-						document
-							.querySelector('[class="anime_video_body"] > h1')
-							?.textContent?.toLowerCase()
-							?.replace(
-								/(for free on gogoanime at gogoanime)|(english subbed at gogoanime)|(watch)/gm,
-								""
-							);
+				let title =
+					document.querySelector('[class="anime-info"] > a')?.textContent ??
+					document.querySelector('[class="title_name"]')?.textContent;
+
+				if (!title) {
+					title = pathname.includes("/movie/")
+						? pathname
+								.split("/")?.[2]
+								?.replace(/-/gm, " ")
+								?.replace(/\(dub\)/gm, "")
+						: pathname
+								.split("/")?.[1]
+								?.replace(/-/gm, " ")
+								?.replace(/\(dub\)/gm, "");
+				}
+				const titleReplaced =
+					document
+						.querySelector('[id="episode_related"] > li > [class*="active"]')
+						?.textContent?.replace(/(DUB)|(dub)|(SUB)|(sub)|(\n)/gm, "")
+						?.replace("EP", "Episode")
+						?.trim() ??
+					document
+						.querySelector('[class="each_episode active"]')
+						?.textContent?.trim() ??
+					document.querySelector('[class="active"]')?.textContent?.trim() ??
+					document
+						.querySelector('[class="anime_video_body"] > h1')
+						?.textContent?.toLowerCase()
+						?.replace(
+							/(for free on gogoanime at gogoanime)|(english subbed at gogoanime)|(watch)/gm,
+							""
+						);
 				detail = detailed.WATCHING;
 				state = titleReplaced
 					? `${upperCaseFirstChar(title?.toLowerCase())} | ${upperCaseFirstChar(
