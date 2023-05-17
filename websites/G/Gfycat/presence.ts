@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 		if (searchText) presenceData.state = searchText;
 
 		presenceData.startTimestamp = Date.now();
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 
 		presence.setActivity(presenceData);
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				".gif-info .gif-views"
 			).textContent;
-			presenceData.smallImageKey = player.paused ? "pause" : "play";
+			presenceData.smallImageKey = player.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = player.paused
 				? (await strings).pause
 				: (await strings).play;

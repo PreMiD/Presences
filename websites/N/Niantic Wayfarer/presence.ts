@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 		const article = document.querySelector(
 			"#help-section-breadcrumbs > span.ng-binding"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		if (article !== "") {
 			presenceData.details = "Reading article:";
 			presenceData.state = article;

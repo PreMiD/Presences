@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.details = "Searching for:";
 				presenceData.state = s;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 			if (document.location.pathname.startsWith("/anime")) {
 				presenceData.details = "Viewing anime";

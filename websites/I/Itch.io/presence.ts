@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = gameName;
 				presenceData.state = devName;
 				if (document.querySelector(".game_loaded")) {
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = "Playing";
 				}
 				if (pathname.split("/")[2] === "devlog")

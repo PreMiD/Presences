@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
 							.toString(16)}.png`
 					: await shortenURL(pageIcon.src, "read")
 				: "read";
-		} else presenceData.smallImageKey = "read";
+		} else presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	}
 	presence.setActivity(presenceData);

@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 	if (new URLSearchParams(window.location.search).has("s")) {
 		presenceData.details = "Searching for:";
 		presenceData.state = document.title.split(" -").shift();
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).search;
 	} else if (document.location.pathname === "/")
 		presenceData.details = "Browsing Homepage";
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 				.split("/")[2]
 				.replaceAll("_", " ")}`;
 			presenceData.state = issueNumber;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else {
 			presenceData.details = comicName;
 			presenceData.state = issueNumber;

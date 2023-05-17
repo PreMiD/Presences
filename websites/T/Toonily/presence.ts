@@ -34,13 +34,13 @@ presence.on("UpdateData", async () => {
 		);
 		presenceData.details = "Searching";
 		if (searchBar && searchBar.value) presenceData.state = searchBar.value;
-		presenceData.smallImageText = presenceData.smallImageKey = "search";
+		presenceData.smallImageText = presenceData.smallImageKey = Assets.Search;
 	} else if (pathname === "/") {
 		if (search) {
 			const results = document.querySelector<HTMLHeadingElement>("h1.h4");
 			presenceData.details = "Looking at";
 			if (results) presenceData.state = results.textContent;
-			presenceData.smallImageText = presenceData.smallImageKey = "search";
+			presenceData.smallImageText = presenceData.smallImageKey = Assets.Search;
 		} else presenceData.details = "At homepage";
 	} else if (
 		pathname === "/manga/" ||
@@ -81,7 +81,8 @@ presence.on("UpdateData", async () => {
 					data.smallImageKey;
 			} else {
 				presenceData.state = chapter;
-				presenceData.smallImageText = presenceData.smallImageKey = "reading";
+				presenceData.smallImageText = presenceData.smallImageKey =
+					Assets.Reading;
 			}
 			if (buttons) {
 				presenceData.buttons = [
@@ -100,7 +101,8 @@ presence.on("UpdateData", async () => {
 					data.smallImageKey;
 			} else {
 				presenceData.state = "Reading Commments";
-				presenceData.smallImageText = presenceData.smallImageKey = "reading";
+				presenceData.smallImageText = presenceData.smallImageKey =
+					Assets.Reading;
 			}
 			if (buttons)
 				presenceData.buttons = [{ label: "See Comments", url: href }];

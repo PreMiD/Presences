@@ -12,7 +12,7 @@
 	},
 	"url": "eggsy.xyz",
 	"regExp": "eggsy[.]xyz(?![/]projects[/]premid[/]custom-status)",
-	"version": "1.2.17",
+	"version": "1.2.19",
 	"logo": "https://i.imgur.com/MziDVWO.png",
 	"thumbnail": "https://i.imgur.com/jy5yr4h.png",
 	"color": "#212121",

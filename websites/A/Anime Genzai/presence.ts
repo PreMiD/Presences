@@ -3,6 +3,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://i.imgur.com/dtmYEl8.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -24,15 +28,6 @@ async function getStrings() {
 		},
 		await presence.getSetting<string>("lang").catch(() => "es")
 	);
-}
-
-enum Assets {
-	Logo = "https://i.imgur.com/dtmYEl8.png",
-	Reading = "https://i.imgur.com/wPUmqu5.png",
-	Searching = "https://i.imgur.com/UhPgTRn.png",
-	Viewing = "https://i.imgur.com/RMg2Qgg.png",
-	Play = "https://i.imgur.com/juDzimk.png",
-	Pause = "https://i.imgur.com/GbAMPHI.png",
 }
 
 let video = {
@@ -107,7 +102,7 @@ presence.on("UpdateData", async () => {
 				? strings.searchSomething
 				: `${strings.search} ${strings.anime}`;
 			presenceData.state = textContent(".app-section > div > div");
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 			break;
 
@@ -159,7 +154,7 @@ presence.on("UpdateData", async () => {
 				? strings.searchSomething
 				: `${strings.searchFor} ${textContent(".subtext").split('"')[1]}`;
 			presenceData.state = textContent(".subtext").split('"')[0].slice(0, -3);
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 			break;
 

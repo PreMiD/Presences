@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			);
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? "Capítulo pausado"
 			: "Reproduciendo capítulo";

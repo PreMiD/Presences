@@ -30,6 +30,10 @@ let playerData: PlayerData,
 
 presence.info("PreMiD extension has loaded");
 
+const enum Assets {
+	Logo = "https://i.imgur.com/O99W6aY.png",
+}
+
 function updateData() {
 	if (/^watch$/i.test(page)) {
 		const player = <HTMLVideoElement>qs("div.ao-player-media video"),
@@ -57,7 +61,7 @@ setInterval(updateData, 1e3);
 presence.on("UpdateData", () => {
 	if (!pageLoaded) return;
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/O99W6aY.png",
+		largeImageKey: Assets.Logo,
 		smallImageKey: rpaImage.general.browse,
 		smallImageText: "Browsing",
 		details: "Browsing",
@@ -70,7 +74,8 @@ presence.on("UpdateData", () => {
 			episodeUrl.searchParams.set("episode", episode.toString());
 
 			presenceData.smallImageKey =
-				rpaImage.player[playbackState === "paused" ? "pause" : "play"];
+				playbackState === "paused" ? Assets.Pause : Assets.Play;
+
 			presenceData.smallImageText = `Watching - ${toProperCase(playbackState)}`;
 			presenceData.details = title;
 			presenceData.state = episodeName || "";

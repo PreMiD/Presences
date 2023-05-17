@@ -304,7 +304,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Searching for ${
 			document.querySelector(".current").textContent
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 		if (await presence.getSetting<boolean>("showsearchterm")) {
 			const query = new URLSearchParams(document.location.search).get("terms");

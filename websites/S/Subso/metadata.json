@@ -15,7 +15,7 @@
 		"creators.sub.so"
 	],
 	"regExp": "([a-z0-9-]+[.])*sub[.]so[/]",
-	"version": "1.0.10",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/4b8AEvp.png",
 	"thumbnail": "https://i.imgur.com/rbbMigG.jpg",
 	"color": "#32a852",

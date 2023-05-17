@@ -10,7 +10,7 @@
 	},
 	"url": "localhost",
 	"regExp": "192[.]168[.]1[.]([0-9]+)",
-	"version": "1.0.4",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/rLh25vA.png",
 	"thumbnail": "https://i.imgur.com/Xr5RBAm.png",
 	"color": "#0094CB",

@@ -220,7 +220,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector("#content > div.g_title").textContent
 		}profile`;
 	} else if (document.location.pathname.includes("/page/search")) {
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.details = document.querySelector(
 			"#content > div.g_title"
 		).textContent;

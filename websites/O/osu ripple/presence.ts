@@ -1,5 +1,6 @@
 const presence = new Presence({ clientId: "688752009079160852" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let customData = false,
 	title: HTMLElement,
 	user: HTMLElement,

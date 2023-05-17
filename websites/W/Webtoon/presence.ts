@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 	} else if (path.includes("search")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (path.includes("about")) {
 		presenceData.details = "Reading the about page";
 		delete presenceData.smallImageKey;

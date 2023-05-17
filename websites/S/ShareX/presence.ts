@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.buttons;
 	} else if (document.location.pathname.includes("/downloads")) {
 		presenceData.state = "Browsing Downloads Page";
-		presenceData.smallImageKey = "download";
+		presenceData.smallImageKey = Assets.Downloading;
 	} else if (document.location.pathname.includes("/screenshots")) {
 		presenceData.state = "Viewing Screenshots";
 		presenceData.smallImageKey = "screenshot";

@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 
 			if (title && artist) {
 				presenceData.details = `${title.textContent} by ${artist.textContent}`;
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Listening";
 			}
 			if (currentTime && duration) {

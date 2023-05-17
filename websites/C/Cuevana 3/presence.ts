@@ -10,6 +10,10 @@ async function getStrings() {
 	});
 }
 
+const enum Assets {
+	Logo = "https://i.imgur.com/uu5XX85.png",
+}
+
 let iFrameVideo: boolean,
 	videoPaused: boolean,
 	startTimestamp: number,
@@ -36,7 +40,7 @@ presence.on("UpdateData", async () => {
 	let strings = await getStrings();
 	if (document.location.hostname === "m4.cuevana3.me") {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/uu5XX85.png",
+			largeImageKey: Assets.Logo,
 		};
 
 		if (
@@ -73,12 +77,12 @@ presence.on("UpdateData", async () => {
 
 			if (iFrameVideo) {
 				strings = await getStrings();
-				(presenceData.smallImageKey = videoPaused ? "pause" : "play"),
-					(presenceData.smallImageText = videoPaused
-						? strings.pause
-						: strings.play),
-					(presenceData.startTimestamp = startTimestamp),
-					(presenceData.endTimestamp = endTimestamp);
+				presenceData.smallImageKey = videoPaused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageText = videoPaused
+					? strings.pause
+					: strings.play;
+				presenceData.startTimestamp = startTimestamp;
+				presenceData.endTimestamp = endTimestamp;
 
 				if (videoPaused) {
 					delete presenceData.startTimestamp;
@@ -135,12 +139,10 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (iFrameVideo) {
-			(presenceData.smallImageKey = videoPaused ? "pause" : "play"),
-				(presenceData.smallImageText = videoPaused
-					? strings.pause
-					: strings.play),
-				(presenceData.startTimestamp = startTimestamp),
-				(presenceData.endTimestamp = endTimestamp);
+			presenceData.smallImageKey = videoPaused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageText = videoPaused ? strings.pause : strings.play;
+			presenceData.startTimestamp = startTimestamp;
+			presenceData.endTimestamp = endTimestamp;
 
 			if (videoPaused) {
 				delete presenceData.startTimestamp;

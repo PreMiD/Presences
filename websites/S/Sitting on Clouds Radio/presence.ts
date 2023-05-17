@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 		slideshow.addSlide("slideAlbum", presenceDataSlide, 5000);
 	} else {
 		presenceData.details = "Not tuned in.";
-		presenceData.smallImageKey = "pause";
+		presenceData.smallImageKey = Assets.Pause;
 	}
 	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
 	else presence.setActivity(presenceData);

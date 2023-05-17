@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 	switch (pathname[0]) {
 		//Play Modes
 		case "":
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Ingame...";
 			if (queryString) {
 				const queryObj = parseQuery(queryString);

@@ -6,6 +6,7 @@ const presence = new Presence({
 		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: string, title: string;
 
 presence.on("UpdateData", async () => {
@@ -24,13 +25,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Navigerar program kategorier";
 		} else if (document.location.pathname.includes("/kanaler/")) {
 			const video = document.querySelector<HTMLVideoElement>(
-				"#play_main-content > article > div.play_channels-video--show > div > div > div.play_video-player.lp_video.play_channels__active-video > div > video"
+				'[data-rt="video-player-channels"]'
 			);
 			title = document.querySelector(
-				"#play_main-content > article > div.play_channels-video--show > div > div > div.play_channels__active-video-info > h2"
+				"#play_main-content > div > div > div > div > div > h2"
 			).textContent;
 			user = document.querySelector(
-				"#play_main-content > article > div.play_channels-video--show > div > div > div.play_channels__active-video-info > p.play_channels__active-subheader"
+				"#play_main-content > div > div > div > div > div > p"
 			).textContent;
 			if (video) {
 				presenceData.smallImageKey = "live";
@@ -64,14 +65,12 @@ presence.on("UpdateData", async () => {
 				live: boolean,
 				timestamps: number[];
 			const video = document.querySelector<HTMLVideoElement>(
-				"#js-play_video__fullscreen-container > div > div > video"
+				'[data-rt="video-player"]'
 			);
 			title = document.querySelector(
-				"#titel > h1 > span:nth-child(1)"
+				'[data-rt="program-info-title"] > a'
 			).textContent;
-			user = document.querySelector(
-				"#titel > h1 > span:nth-child(2)"
-			).textContent;
+			user = document.querySelector('[data-rt="episode-link"]').textContent;
 			if (video) {
 				if (!video.duration) {
 					time = false;
@@ -87,7 +86,7 @@ presence.on("UpdateData", async () => {
 					);
 				}
 				if (time === true && !isNaN(duration) && live === false) {
-					presenceData.smallImageKey = paused ? "pause" : "play";
+					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 					presenceData.smallImageText = paused
 						? (await strings).pause
 						: (await strings).play;
@@ -128,11 +127,11 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/sok")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Searching for:";
-			presenceData.details = " Söker på:";
+			presenceData.details = "Söker på:";
 			presenceData.state = document.querySelector(
-				"#play_main-content > section > h2.play_search-page__header.play_search-page__header--match > span"
+				'[data-rt="header-search-result"] > span:nth-child(1)'
 			).textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

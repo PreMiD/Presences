@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
 						timeEnd
 					);
 				}
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused ? "Pausiert" : "Wiedergabe";
 			}
 		}

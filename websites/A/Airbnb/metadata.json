@@ -10,7 +10,7 @@
 	},
 	"url": "www.airbnb.com",
 	"regExp": "([a-z0-9-]+[.])*airbnb([.][a-z]+)+[/]",
-	"version": "1.1.2",
+	"version": "1.1.4",
 	"logo": "https://i.imgur.com/Bffbxtu.png",
 	"thumbnail": "https://i.imgur.com/3ltXMdS.png",
 	"color": "#f9585e",

@@ -13,10 +13,14 @@ const presence = new Presence({
 	},
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://i.imgur.com/isuRsRF.png",
+}
+
 presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/isuRsRF.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		pluginHeader = document.querySelector(
@@ -79,7 +83,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [{ label: "View Plugin", url: location.href }];
 	} else if (page.includes("/wiki")) {
 		presenceData.details = "Blockbench Wiki";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 		presenceData.state =
 			document.querySelector(

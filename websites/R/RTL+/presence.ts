@@ -12,15 +12,13 @@ const presence = new Presence({
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://i.imgur.com/fMMsZfV.jpg",
+}
+
 let video: HTMLVideoElement,
 	vidTitle: string,
 	strings: Awaited<ReturnType<typeof getStrings>> = null;
-
-enum Assets {
-	Logo = "https://i.imgur.com/fMMsZfV.jpg",
-	Pause = "https://i.imgur.com/C6mbMYz.png",
-	Play = "https://i.imgur.com/crCKEaC.png",
-}
 
 presence.on("UpdateData", async () => {
 	const [startTimestamp, endTimestamp] = presence.getTimestamps(
