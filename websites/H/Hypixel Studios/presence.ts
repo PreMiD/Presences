@@ -17,20 +17,20 @@ presence.on("UpdateData", async () => {
 		case "/who-we-are": {
 			presenceData.details = "Learning more about";
 			presenceData.state = "Who they are";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			break;
 		}
 		case "/hytale": {
 			presenceData.details = "Learning more about";
 			presenceData.state = "Hytale";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			break;
 		}
 		case "/our-team": {
 			presenceData.details = "Getting to know";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			if (document.querySelector(".selected-member__container")) {
 				presenceData.state = document.querySelector(
 					".hy-heading-4.selected-member__name"
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "/jobs/": {
 			presenceData.details = "Viewing Job Openings";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			switch (document.location.hash) {
 				case "#our-process": {
 					presenceData.state = "Our process";
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 		case "/jobs/data-protection-statement": {
 			presenceData.details = "Reading the";
 			presenceData.state = "Data protection statement";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			break;
 		}
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document
 					.querySelector(".hy-title.job__title.hy-pad-t-2.hy-mar-t-6")
 					.textContent.trim();
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname === "/contact") {
 				presenceData.details = "Viewing the";
 				presenceData.state = "Contact information";
@@ -92,12 +92,12 @@ presence.on("UpdateData", async () => {
 					docName[i] = docName[i].charAt(0).toUpperCase() + docName[i].slice(1);
 				presenceData.details = "Reading the document";
 				presenceData.state = docName.join(" ");
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				switch (document.location.pathname) {
 					case "/cookie-policy": {
 						presenceData.details = "Reading the Cookie Policy";
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						switch (document.location.hash) {
 							case "#what-is-cookie": {
 								presenceData.state = "What is a Cookie?";
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 					case "/privacy": {
 						presenceData.details = "Viewing the";
 						presenceData.state = "Privacy Policy";
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 
 						break;
 					}
@@ -149,7 +149,7 @@ presence.on("UpdateData", async () => {
 					case "/corporate-governance": {
 						presenceData.details = "Reading about";
 						presenceData.state = "Corporate Governance";
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 
 						break;
 					}

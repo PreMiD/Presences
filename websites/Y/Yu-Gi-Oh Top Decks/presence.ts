@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "630550023133724692",
 });
+
 let deck;
 
 presence.on("UpdateData", async () => {

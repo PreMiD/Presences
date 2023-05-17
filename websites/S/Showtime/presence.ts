@@ -39,12 +39,7 @@ function logoCheck(logoNumber: number) {
 		? Logo.SkyShowtime
 		: Logo.RedShowtime; // Default (Red)
 }
-enum Assets {
-	Search = "https://i.imgur.com/oGQtnIY.png",
-	Read = "https://i.imgur.com/8vMPNni.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-}
+
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
 	pathSplit: string[];
@@ -152,7 +147,7 @@ presence.on("UpdateData", async () => {
 						[, presenceData.endTimestamp] =
 							presence.getTimestampsfromMedia(video);
 						presenceData.smallImageKey = video.paused
-							? Assets.Paused
+							? Assets.Pause
 							: Assets.Play;
 						presenceData.smallImageText = video.paused
 							? strings.paused
@@ -243,7 +238,7 @@ presence.on("UpdateData", async () => {
 										[, presenceData.endTimestamp] =
 											presence.getTimestampsfromMedia(video);
 										presenceData.smallImageKey = video.paused
-											? Assets.Paused
+											? Assets.Pause
 											: Assets.Play;
 										presenceData.smallImageText = video.paused
 											? strings.paused

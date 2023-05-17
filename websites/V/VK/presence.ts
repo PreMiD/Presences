@@ -108,10 +108,10 @@ presence.on("UpdateData", async () => {
 			".audio_page_player_title_performer a"
 		).textContent;
 		if (isPlaying) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = gstrings.pause;
 		} else {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = gstrings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 		}
@@ -142,10 +142,10 @@ presence.on("UpdateData", async () => {
 		presenceData.state =
 			document.querySelector<HTMLElement>(".mv_author_name a").textContent;
 		if (isPlaying) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = gstrings.pause;
 		} else {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = gstrings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 		}

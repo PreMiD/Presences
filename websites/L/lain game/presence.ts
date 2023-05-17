@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "index";
 	else if (document.location.pathname.includes("/about.html")) {
 		presenceData.details = "reading the about page";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/feedback.php"))
 		presenceData.details = "giving feedback";
 

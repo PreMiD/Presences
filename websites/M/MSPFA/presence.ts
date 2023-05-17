@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 	};
 	switch (document.location.pathname) {
 		case "/stories/":
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		case "/user/":
 			presenceData.state = `User: ${
@@ -41,19 +41,19 @@ presence.on("UpdateData", async () => {
 			}`;
 			break;
 		case "/my/profile/":
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			break;
 		case "/my/settings/":
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			break;
 		case "/my/stories/":
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			break;
 		case "/my/stories/info/":
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			break;
 		case "/my/stories/pages/":
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			presenceData.state =
 				document.querySelector("a#storyname.major").textContent;
 			break;
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = "Reading an adventure";
 		presenceData.state = document.querySelector("title").textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		let { search } = document.location;
 		search = new URLSearchParams(search).get("p");
 		presenceData.smallImageText = `On page ${search}`;

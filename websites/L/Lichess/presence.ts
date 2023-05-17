@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 	} else if (page.includes("/@/")) {
 		presenceData.details = "Searching for:";
 		presenceData.state = document.title.replace(" • lichess.org", "");
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (status && game) {
 		presenceData.details = game;
 		presenceData.state = status;

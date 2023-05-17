@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 	if (document.location.hostname === "flipanim.com") {
 		if (document.location.pathname === "/") {
 			presenceData.details = "Viewing home page";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.location.pathname.includes("/anim")) {
 			presenceData.details = "Viewing anim:";
 			presenceData.state = `${
@@ -23,13 +23,13 @@ presence.on("UpdateData", async () => {
 					"#mainDivActive > div:nth-child(10) > div:nth-child(2) > div.anim_author > a:nth-child(1)"
 				).textContent
 			}`;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/profile")) {
 			presenceData.details = "Viewing profile of:";
 			presenceData.state = document.querySelector(
 				"#mainDivActive > div:nth-child(4) > div.profileAvatar > div.text_normal"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	}
 

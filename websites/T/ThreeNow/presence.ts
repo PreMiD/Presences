@@ -41,10 +41,10 @@ presence.on("UpdateData", () => {
 				presenceData.details = "Watching a show";
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 			} else {
 				presenceData.details = "Watching a show";
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 			}
 		} else {
 			presenceData.details = "Viewing a show";

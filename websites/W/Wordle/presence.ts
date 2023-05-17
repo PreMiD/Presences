@@ -6,29 +6,24 @@ const presence = new Presence({
 		(Date.now() - new Date("06/19/2021").getTime()) / (1000 * 3600 * 24)
 	);
 
+const enum Assets {
+	Logo = "https://i.imgur.com/N19NFSF.png",
+}
+
 presence.on("UpdateData", async () => {
 	if (document.location.pathname.includes("/wordle")) {
 		const presenceData: PresenceData = {
-				largeImageKey: "https://i.imgur.com/N19NFSF.png",
+				largeImageKey: Assets.Logo,
 				startTimestamp: browsingTimestamp,
 			},
 			guess = await presence.getSetting<boolean>("guess");
 		for (let i = 0; i < 6; i++) {
-			const guessed = document
-					.querySelector("body > game-app")
-					.shadowRoot.querySelectorAll("#board > game-row")
-					[i].shadowRoot.querySelector("div > game-tile[evaluation]"),
+			const guessed = document.querySelector(
+					'[aria-label="Row 1"]'
+				).textContent,
 				correct = document
-					.querySelector("body > game-app")
-					.shadowRoot.querySelectorAll("#board > game-row")
-					[i].shadowRoot.querySelectorAll(
-						'div > game-tile[evaluation="correct"]'
-					).length,
-				typing = document
-					.querySelector("body > game-app")
-					.shadowRoot.querySelectorAll("#board > game-row")
-					[i].shadowRoot.querySelector("div > game-tile")
-					.shadowRoot.querySelector('div[data-state="tbd"]');
+					.querySelector('[aria-label="Row 1"]')
+					.parentElement.querySelectorAll("[class*='Row-module_win']").length;
 			if (correct === 5) {
 				presenceData.details = `Solved (#${puzzleNumber})`;
 				presenceData.state = `Guess ${i + 1} / 6`;
@@ -38,11 +33,6 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Failed (#${puzzleNumber})`;
 				presenceData.state = "Guess X / 6";
 				presenceData.smallImageKey = "fail";
-				break;
-			} else if (typing) {
-				presenceData.details = `Typing... (#${puzzleNumber})`;
-				presenceData.state = `Guess ${i + 1} / 6`;
-				presenceData.smallImageKey = "writing";
 				break;
 			} else if (!guessed) {
 				if (i === 0) presenceData.details = `Warming up... (#${puzzleNumber})`;

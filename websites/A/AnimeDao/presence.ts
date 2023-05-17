@@ -1,7 +1,11 @@
 const presence = new Presence({
 		clientId: "633637979952250881",
 	}),
-	browsingTimeStamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+const enum Assets {
+	Logo = "https://i.imgur.com/m1dumnr.png",
+}
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -22,12 +26,6 @@ async function imgPath(path: string, hostname: string) {
 		if (path.includes(hostname)) return `https://${path.replace("//", "")}`;
 		else return `https://${hostname}${path}`;
 	} else return Assets.Logo;
-}
-enum Assets {
-	Logo = "https://i.imgur.com/m1dumnr.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
@@ -51,7 +49,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
-			startTimestamp: browsingTimeStamp,
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,
 		[newLang, privacy, buttons, covers] = await Promise.all([
@@ -111,7 +109,7 @@ presence.on("UpdateData", async () => {
 					hostname
 				)) ?? Assets.Logo;
 			if (isVideo) {
-				presenceData.smallImageKey = paused ? Assets.Paused : Assets.Play;
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused ? strings.paused : strings.play;
 				if (!isNaN(duration) && !paused) {
 					[, presenceData.endTimestamp] = presence.getTimestamps(
@@ -141,7 +139,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "search": {
 			presenceData.details = "Searching";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
 			break;
 		}

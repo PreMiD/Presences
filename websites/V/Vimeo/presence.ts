@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = title;
 		presenceData.state = uploader;
 		presenceData.largeImageKey = "https://i.imgur.com/OJunR7n.png";
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 					? false
 					: true;
 			if (paused === true) {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "In pausa";
 			} else {
 				const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.startTimestamp = startTimestamp;
 				presenceData.endTimestamp = endTimestamp;
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Riproducendo";
 			}
 

@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector("div.wrapper > div > div > div.releases > h1")
 				.textContent
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.querySelector("div#readerarea")) {
 		const mangaName =
 				document.querySelector<HTMLHeadingElement>("h1.entry-title"),

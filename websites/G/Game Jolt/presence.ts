@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
 		}:`;
 		presenceData.state =
 			fixedSearchName[0].toUpperCase() + fixedSearchName.slice(1);
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (profile && profile.textContent !== "") {
 		presenceData.details = "Viewing a user:";
 		presenceData.state = profile.textContent;

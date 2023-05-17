@@ -13,7 +13,7 @@
 	},
 	"url": "www.radio.net",
 	"regExp": "((www|uk|au|nz|ie|za|ca|co|mx|br|nl|za)[.]radio[.]net|www[.]radio[.](de|dk|at|es|fr|it|pl|pt|se)|corporate[.]radio[.](net|de))[/]",
-	"version": "4.0.5",
+	"version": "4.0.7",
 	"logo": "https://i.imgur.com/3IBLlpc.png",
 	"thumbnail": "https://i.imgur.com/pYZzRDV.png",
 	"color": "#64e646",

@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "751285675277680811",
 });
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: Math.floor(Date.now() / 1000),

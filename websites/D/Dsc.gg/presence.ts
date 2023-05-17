@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${
 					document.querySelector("h2.text-lg")?.textContent
 				}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else {
 			switch (pathname) {

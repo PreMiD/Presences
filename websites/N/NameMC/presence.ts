@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "809067572061405246",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -163,7 +164,7 @@ presence.on("UpdateData", async () => {
 				.replace("?", "/")
 				.match(k)
 		) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = strings.browse;
 			presenceData = { ...presenceData, ...v };
 		}

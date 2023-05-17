@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = strings.profile.slice(0, -4);
 		} else if (pathname.startsWith("/search")) {
 			presenceData.details = strings.searchSomething;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.searching;
 		} else {
 			presenceData.details = strings.browsing;
@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
 		} else presenceData.details = strings.profile.slice(0, -4);
 	} else if (pathname.startsWith("/search")) {
 		presenceData.details = strings.searchSomething;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.searching;
 	} else if (pathname.startsWith("/rpan")) {
 		presenceData.details = `${strings.watching} (RPAN)`;

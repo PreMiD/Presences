@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector('[class="title"]').textContent
 		}`;
 		presenceData.buttons = [{ label: "View Novel", url: href }];
-		presenceData.smallImageKey = "read";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);

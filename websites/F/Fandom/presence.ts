@@ -1,3 +1,6 @@
+const enum Assets {
+	Logo = "https://i.imgur.com/sko4P3c.png",
+}
 if (
 	document.location.pathname.includes("/wiki/")
 		? document.querySelector(".skin-oasis") ||
@@ -15,7 +18,7 @@ if (
 			currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
 			presenceData: PresenceData = {
 				details: "Viewing an unsupported page",
-				largeImageKey: "https://i.imgur.com/sko4P3c.png",
+				largeImageKey: Assets.Logo,
 				startTimestamp: browsingTimestamp,
 			};
 		const updateCallback = {
@@ -36,7 +39,7 @@ if (
 			resetData = (
 				defaultData: PresenceData = {
 					details: "Viewing an unsupported page",
-					largeImageKey: "https://i.imgur.com/sko4P3c.png",
+					largeImageKey: Assets.Logo,
 					startTimestamp: browsingTimestamp,
 				}
 			): void => {

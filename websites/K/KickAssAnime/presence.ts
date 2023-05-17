@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 	) {
 		checkIfMovie();
 		if (playback && !isNaN(duration)) {
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
@@ -233,7 +233,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLHeadingElement>("h1.title").textContent;
 		presenceData.details = strings.viewing;
 		presenceData.state = `${currentAnimeTitle}`;
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.largeImageKey = cover
 			? document
 					.querySelector<HTMLElement>("div.poster")
@@ -251,25 +251,25 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("anime-list")) {
 		presenceData.details = strings.viewing;
 		presenceData.state = "Anime List";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("new-season")) {
 		presenceData.details = strings.viewing;
 		presenceData.state = "New Season";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("favorites")) {
 		presenceData.details = strings.viewing;
 		presenceData.state = "Their Favorites";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("watched")) {
 		presenceData.details = strings.viewing;
 		presenceData.state = "Watch History";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("search")) {
 		presenceData.details = strings.searching;
 		presenceData.state = document
 			.querySelector("#content > h1")
 			.textContent.split('"')[1];
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 		if (cover) {
 			presenceData.largeImageKey = document
 				.querySelector<HTMLElement>("#content > div > div:nth-child(1) > a")
@@ -279,7 +279,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname === "/") {
 		presenceData.details = strings.viewing;
 		presenceData.state = "Home Page";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else {
 		presenceData.details = strings.viewing;
 		presenceData.state = "An Unsupported Page";

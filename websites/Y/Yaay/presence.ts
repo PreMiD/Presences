@@ -65,7 +65,7 @@ presence.on("UpdateData", () => {
 
 		presence.setActivity(presenceData);
 	} else if (page.includes("/search")) {
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.details = "Bir şey arıyor:";
 		presenceData.state =
 			document.querySelector(".top .text b")?.textContent || "Bilinmeyen Arama";

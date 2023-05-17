@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
 					][presenceLogo - 2] || "viu_logo";
 			}
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 
 			presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
@@ -210,7 +210,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = strings.searchSomething;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.searching;
 	}
 

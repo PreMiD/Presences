@@ -15,7 +15,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 			{
 				play: "general.playing",
 				pause: "general.paused",
-				live: "general.live",
+				Live: "general.Live",
 				browse: "general.browsing",
 				searchFor: "general.searchFor",
 				viewTeam: "twitch.viewTeam",
@@ -56,10 +56,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 				});
 				return "bbc";
 		}
-	})(),
-	assets = {
-		LIVE: "https://i.imgur.com/vibO5wd.gif",
-	} as const;
+	})();
 
 let oldLang: string = null,
 	strings: Awaited<ReturnType<typeof getStrings>>,
@@ -100,7 +97,9 @@ presence.on("UpdateData", async () => {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(VideoMedia.currentTime, VideoMedia.duration);
 
-			presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
+			presenceData.smallImageKey = VideoMedia.paused
+				? Assets.Pause
+				: Assets.Play;
 			presenceData.smallImageText = VideoMedia.paused
 				? strings.pause
 				: strings.play;
@@ -137,14 +136,14 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.browse;
 
 		if (path.includes("/iplayer/episode")) {
-			if (!iPlayerVideo.duration || iPlayer.episode?.live) {
-				if (iPlayer.channel?.onAir || iPlayer.episode?.live) {
+			if (!iPlayerVideo.duration || iPlayer.episode?.Live) {
+				if (iPlayer.channel?.onAir || iPlayer.episode?.Live) {
 					presenceData.details = (iPlayer.channel ?? iPlayer.episode).title;
-					presenceData.state = strings.live;
+					presenceData.state = strings.Live;
 
 					setCover(iPlayer.episode?.images?.standard);
 
-					presenceData.smallImageKey = assets.LIVE;
+					presenceData.smallImageKey = Assets.Live;
 				} else if (!iPlayer.channel) {
 					setCover(
 						iPlayer.episode?.images?.promotional ??
@@ -188,7 +187,9 @@ presence.on("UpdateData", async () => {
 						iPlayerVideo.duration
 					);
 
-				presenceData.smallImageKey = iPlayerVideo.paused ? "pause" : "play";
+				presenceData.smallImageKey = iPlayerVideo.paused
+					? Assets.Pause
+					: Assets.Play;
 				presenceData.smallImageText = iPlayerVideo.paused
 					? strings.pause
 					: strings.play;
@@ -233,26 +234,28 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.browse;
 
 		if (path.includes("/play/")) {
-			const isLive = path.includes("live:");
+			const isLive = path.includes("Live:");
 			setCover(soundData.programmes.current.image_url);
 
 			if (isLive) {
 				presenceData.details =
 					SoundMedia.title ?? soundData.programmes.current.titles.primary;
 				presenceData.state = soundData.programmes.current.titles.secondary;
-				presenceData.smallImageKey = assets.LIVE;
+				presenceData.smallImageKey = Assets.Live;
 			} else {
 				presenceData.details =
 					SoundMedia.title ?? soundData.programmes.current.titles.primary;
 				presenceData.state = soundData.programmes.current.titles.secondary;
 				presenceData.smallImageKey =
-					SoundMedia.paused || !SoundMedia.duration ? "pause" : "play";
+					SoundMedia.paused || !SoundMedia.duration
+						? Assets.Pause
+						: Assets.Play;
 			}
 
 			presenceData.smallImageText =
 				SoundMedia.paused || !SoundMedia.duration
 					? isLive
-						? strings.live
+						? strings.Live
 						: strings.pause
 					: strings.play;
 
@@ -275,7 +278,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (path.includes("/sport")) {
 		presenceData.details = strings.browse;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 
 		const title = document.querySelector("h1")?.textContent;
 
@@ -431,7 +434,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.smallImageText = "Tennis";
 
-			if (path.includes("/live-scores")) {
+			if (path.includes("/Live-scores")) {
 				presenceData.details = strings.viewPage;
 				presenceData.state = title;
 			} else if (path.includes("/order-of-play")) {
@@ -601,7 +604,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (path.includes("/news")) {
 		presenceData.details = strings.browse;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 
 		const title = document.querySelector("h1")?.textContent,
 			newsPages: {
@@ -714,7 +717,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.searchFor;
 		presenceData.state =
 			document.querySelector<HTMLInputElement>("#search-input")?.value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	}
 
 	if (!buttons) delete presenceData.buttons;
@@ -731,7 +734,7 @@ interface IPlayerData {
 	episode?: {
 		title: string;
 		subtitle: string;
-		live: boolean;
+		Live: boolean;
 		images: {
 			portrait?: string;
 			standard: string;

@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "651145049811451924",
 });
+
 presence.on("UpdateData", async () => {
 	if (document.location.pathname.startsWith("/wiki/")) {
 		const [page] = document.querySelectorAll(".page-header__title");
