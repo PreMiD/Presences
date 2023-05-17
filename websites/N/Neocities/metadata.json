@@ -10,7 +10,7 @@
 	},
 	"url": "neocities.org",
 	"regExp": "([a-z0-9-_]+[.])?neocities[.]org",
-	"version": "1.0.5",
+	"version": "1.0.7",
 	"logo": "https://i.imgur.com/NQ9JwPd.png",
 	"thumbnail": "https://i.imgur.com/fH9vMF7.png",
 	"color": "#F59C32",

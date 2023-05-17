@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
 		)
 			presenceData.state = "No artist / No album";
 
-		presenceData.smallImageKey = playback ? "play" : "pause";
+		presenceData.smallImageKey = playback ? Assets.Play : Assets.Pause;
 
 		presenceData.smallImageText = playback
 			? (await strings).play

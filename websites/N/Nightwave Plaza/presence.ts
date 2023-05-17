@@ -39,12 +39,12 @@ presence.on("UpdateData", async () => {
 		if (playBackStatus) {
 			switch (playBackStatus.textContent) {
 				case "Play": {
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					if (listeners) presenceData.smallImageText = listeners.textContent;
 					break;
 				}
 				case "Stop": {
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 					if (listeners) presenceData.smallImageText = listeners.textContent;
 					break;
 				}

@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "814986239681626143",
 });
+
 let video: {
 	currentTime?: number;
 	duration?: number;
@@ -54,10 +55,10 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 			presenceData.smallImageText = "En pause";
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 		} else {
 			presenceData.smallImageText = "Lecture..";
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 		}
 	}
 	presence.setActivity(presenceData);

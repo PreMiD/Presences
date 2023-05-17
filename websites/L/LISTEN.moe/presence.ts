@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Searching for a music";
 		presenceData.state = track;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 		presenceData.startTimestamp = startTimestamp;
 	} else if (path.includes("u")) {

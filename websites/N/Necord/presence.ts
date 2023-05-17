@@ -1,7 +1,6 @@
-enum SmallImageKeys {
+const enum Assets {
+	Logo = "https://i.imgur.com/LY804vK.png",
 	Idle = "https://i.imgur.com/6A9pxAR.png",
-	Search = "https://i.imgur.com/T9NzckB.png",
-	Read = "https://i.imgur.com/ULFqucm.png",
 }
 
 const presence = new Presence({
@@ -22,7 +21,7 @@ let sidebar: string = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/LY804vK.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname, search } = document.location,
@@ -42,7 +41,7 @@ presence.on("UpdateData", async () => {
 
 	switch (true) {
 		case lastActivity + IDLE_TIMEOUT < Date.now() && isIdlingPublic: {
-			presenceData.smallImageKey = SmallImageKeys.Idle;
+			presenceData.smallImageKey = Assets.Idle;
 			presenceData.smallImageText = "Idling";
 			presenceData.details = "Idling at page: ";
 			presenceData.state = title;
@@ -52,7 +51,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		case pathname.startsWith("/search"): {
-			presenceData.smallImageKey = SmallImageKeys.Search;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
 			presenceData.details = "Searching for something";
 
@@ -78,7 +77,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		case !!sidebar && isSidebarPublic: {
-			presenceData.smallImageKey = SmallImageKeys.Search;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
 			presenceData.details = "Selecting a category:";
 			presenceData.state = sidebar;
@@ -93,7 +92,7 @@ presence.on("UpdateData", async () => {
 				) ??
 				document.querySelector<HTMLLinkElement>(".table-of-contents__link");
 
-			presenceData.smallImageKey = SmallImageKeys.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			presenceData.details = `Reading ${
 				isCurrentPagePublic ? title : "a"

@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		!document.querySelector("div#r4_audio_player.unselectable.playing")
 	) {
 		presenceData.details = "Not listening.";
-		presenceData.smallImageKey = "pause";
+		presenceData.smallImageKey = Assets.Pause;
 	} else {
 		presenceData.details = `${
 			document.querySelector<HTMLDivElement>(

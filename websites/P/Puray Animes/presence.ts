@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "972246349917610054",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", () => {
 	const { pathname } = window.location,
 		presenceData: PresenceData = {

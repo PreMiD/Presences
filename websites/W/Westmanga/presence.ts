@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("div.wrapper > div > div > div.releases > h1")
 						.textContent
 				}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 			if (document.location.pathname.startsWith("/manga")) {
 				const type = document.querySelector(

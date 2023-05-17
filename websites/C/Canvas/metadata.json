@@ -14,7 +14,7 @@
 		"www.canvas.net"
 	],
 	"regExp": "((learn|www)[.]canvas[.]net|canvas[.]\\w+?([.]\\w+)+)|(\\w+?[.]instructure[.]com)",
-	"version": "1.1.0",
+	"version": "1.1.2",
 	"logo": "https://i.imgur.com/Bqsnmop.png",
 	"thumbnail": "https://i.imgur.com/VkwHvay.png",
 	"color": "#e63d2f",

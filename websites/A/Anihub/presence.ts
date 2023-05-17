@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "715045665796915250",
 });
+
 function NotFound(): boolean {
 	const q = document.querySelector("#content>div>div>h1");
 	if (window.location.pathname === "/404") return true;

@@ -59,14 +59,14 @@ presence.on("UpdateData", async () => {
 			document.title.replace(`${author.textContent}-`, "");
 		presenceData.state = `by ${author.textContent}`;
 
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading a story...";
 	} else if (page.includes("/search")) {
 		presenceData.details = "Searching for:";
 		presenceData.state =
 			new URLSearchParams(location.search).get("q") ?? "Something...";
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else {
 		presenceData.details = "Viewing a page:";
 		presenceData.state = "Home";

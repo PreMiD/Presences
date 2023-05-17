@@ -16,7 +16,7 @@
 		"slackhq.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*slack[.]com[/]",
-	"version": "1.4.13",
+	"version": "1.4.15",
 	"logo": "https://i.imgur.com/wgUEowI.png",
 	"thumbnail": "https://i.imgur.com/cnx0MKh.png",
 	"color": "#611f69",

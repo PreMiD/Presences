@@ -20,18 +20,18 @@ presence.on("UpdateData", async () => {
 		if (pathname === "/") presenceData.details = "Home page";
 		else if (pathname === "/browse") {
 			presenceData.details = "Browsing sites";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (pathname.startsWith("/site/")) {
 			presenceData.details = "Viewing a site:";
 			presenceData.state =
 				document.querySelector<HTMLSpanElement>("h2 > span").textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.buttons = [{ label: "View site", url: document.URL }];
 		} else if (pathname === "/activity") {
 			presenceData.details = "Viewing Recent Activities";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (pathname.startsWith("/tutorial")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			if (pathname === "/tutorials" || pathname === "/tutorial")
 				presenceData.details = "Looking through tutorials";
 			else {
@@ -43,11 +43,11 @@ presence.on("UpdateData", async () => {
 		else if (pathname.includes("/text_editor")) {
 			presenceData.details = "In the Text Editor";
 			presenceData.state = shortTitle;
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		}
 	} else if (hostname === "blog.neocities.org") {
 		presenceData.details = "Reading blogs";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		if (pathname.startsWith("/blog")) {
 			presenceData.details = "Reading a blog:";
 			presenceData.state = document.title;

@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 			document.title && document.title.includes(" - n11.com")
 				? document.title.replace(" - n11.com", "")
 				: "";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.search === "?s=GOB2CGlobal") {
 		presenceData.details = "Bir sayfaya göz atıyor:";
 		presenceData.state = "Yurt Dışından Ürünler";

@@ -6,6 +6,7 @@ const presence = new Presence({
 		largeImageKey: "https://i.imgur.com/gqL7pDD.png",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let customData = false;
 
 presence.on("UpdateData", async () => {

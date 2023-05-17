@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 					.querySelector<HTMLTitleElement>(".title")
 					.textContent.replace(/\n|\t/g, "");
 				presenceData.smallImageText = strings.reading;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.startTimestamp = timestamp;
 
 				if (page === 0) {

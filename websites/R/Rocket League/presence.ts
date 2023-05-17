@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = "Reading article:";
 			presenceData.state = title.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else {
 			presenceData.details = "Browsing through";
 			presenceData.state = "latest news";

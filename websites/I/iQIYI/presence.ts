@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 
 			if (cover && coverImage) presenceData.largeImageKey = coverImage;
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 
 			presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
@@ -174,7 +174,7 @@ presence.on("UpdateData", async () => {
 				? decodeURI(new URLSearchParams(document.location.search).get("query"))
 				: "( Hidden )"
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		if (result) {
 			presenceData.state = `${result} matching ${

@@ -17,11 +17,8 @@ async function getStrings() {
 	);
 }
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/3gMd88s.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
@@ -158,7 +155,7 @@ presence.on("UpdateData", async () => {
 							/https:\/\/images[.]mubicdn[.]net\/images\/(film|show)\/[0-9]*\/cache-[0-9]*-[0-9]*\/image-w1280[.]jpg/
 						)
 						?.at(0) ?? Assets.Logo;
-				presenceData.smallImageKey = video.paused ? Assets.Paused : Assets.Play;
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? strings.paused
 					: strings.play;

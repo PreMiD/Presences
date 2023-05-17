@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 							?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ??
 						"ไม่ทราบสมาชิก";
 					presenceData.startTimestamp = browsingTimestamp;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				}
 			} else if (path.includes("queue_idpass")) {
 				presenceData.details = "การเติมเเบบหรัส";
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 							?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ??
 						"ไม่ทราบสมาชิก";
 					presenceData.startTimestamp = browsingTimestamp;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				}
 			} else if (path.includes("queue_wallet")) {
 				presenceData.details = "ตรวจสอบการโอนเงิน";
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 							?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ??
 						"ไม่ทราบสมาชิก";
 					presenceData.startTimestamp = browsingTimestamp;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				}
 			} else if (path.includes("man_user")) {
 				presenceData.details = "จัดการสมาชิก";
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 							?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ??
 						"ไม่ทราบสมาชิก";
 					presenceData.startTimestamp = browsingTimestamp;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				}
 			} else if (path.includes("man_random")) {
 				presenceData.details = "จัดการวงล้อ";
@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "ประวัติการเงิน";
 				presenceData.state = "หน้าหลัก";
 				presenceData.startTimestamp = browsingTimestamp;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		} else if (path.includes("robux_group")) {
 			presenceData.startTimestamp = browsingTimestamp;
@@ -144,15 +144,15 @@ presence.on("UpdateData", async () => {
 		} else if (path.includes("queue")) {
 			presenceData.details = "ตรวจสอบคิว";
 			presenceData.startTimestamp = browsingTimestamp;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (path.includes("history")) {
 			presenceData.details = "ตรวจสอบการใช้จ่าย";
 			presenceData.startTimestamp = browsingTimestamp;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (path.includes("profile")) {
 			presenceData.details = "หน้าโปรไฟล์";
 			presenceData.startTimestamp = browsingTimestamp;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (path.includes("login")) {
 			presenceData.details = "กำลังล็อกอิน..";
 			presenceData.startTimestamp = browsingTimestamp;

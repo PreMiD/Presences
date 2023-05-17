@@ -27,35 +27,35 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Searching for:";
 			presenceData.state =
 				inputSelected.value !== "" ? inputSelected.value : "Nothing";
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		} else {
 			presenceData.details = "Viewing...";
 			presenceData.state = "The Homepage";
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.startsWith("/home/download")) {
 		presenceData.details = "Viewing...";
 		presenceData.state = "The Download Page";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.startsWith("/home/news")) {
 		if (document.location.pathname.split("/")[3]) {
 			presenceData.details = "Reading...";
 			presenceData.state = "An osu! News Page";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else {
 			presenceData.details = "Viewing...";
 			presenceData.state = "The osu! News Feed";
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.startsWith("/home/support")) {
 		presenceData.details = "Viewing...";
 		presenceData.state = "The Support Page";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/beatmapsets")) {
 		if (document.location.pathname === "/beatmapsets") {
 			presenceData.details = "Browsing...";
 			presenceData.state = "Beatmap Listings";
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		} else {
 			title = document.querySelector(
 				".beatmapset-header__details-text--title"
@@ -67,21 +67,21 @@ presence.on("UpdateData", async () => {
 				(beatmapTitle = `${title} [${diffName}]`),
 					(presenceData.details = "Looking at the beatmap:");
 				presenceData.state = beatmapTitle;
-				presenceData.smallImageKey = "searching";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		}
 	} else if (document.location.pathname.startsWith("/beatmaps/packs")) {
 		presenceData.details = "Browsing...";
 		presenceData.state = "Beatmap Packs";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.startsWith("/beatmaps/artists")) {
 		presenceData.details = "Browsing...";
 		presenceData.state = "Featured Artists";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.startsWith("/store")) {
 		presenceData.details = "Browsing...";
 		presenceData.state = "The osu! Store";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.startsWith("/rankings")) {
 		gamemode = document.location.pathname.split("/")[2];
 		if (document.location.pathname.includes("/performance")) {
@@ -91,40 +91,40 @@ presence.on("UpdateData", async () => {
 				selected = document.querySelector("div.u-ellipsis-overflow");
 				presenceData.details = "Browsing...";
 				presenceData.state = `The Performance Rankings (for ${selected.textContent}) [${gamemode}]`;
-				presenceData.smallImageKey = "searching";
+				presenceData.smallImageKey = Assets.Search;
 			} else {
 				presenceData.details = "Browsing...";
 				presenceData.state = `The Performance Rankings [${gamemode}]`;
-				presenceData.smallImageKey = "searching";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else if (document.location.pathname.includes("/charts")) {
 			selected = document.querySelector("div.u-ellipsis-overflow");
 			presenceData.details = "Browsing...";
 			presenceData.state = `The ${gamemode} Spotlights (${selected.textContent})`;
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.location.pathname.includes("/score")) {
 			presenceData.details = "Browsing...";
 			presenceData.state = `The Score Rankings [${gamemode}]`;
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.location.pathname.includes("/country")) {
 			presenceData.details = "Browsing...";
 			presenceData.state = `The Country Rankings [${gamemode}]`;
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.includes("kudosu")) {
 		presenceData.details = "Browsing...";
 		presenceData.state = "The Kudosu Rankings";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.startsWith("/multiplayer/rooms")) {
 		selected = document.querySelector("div.u-ellipsis-overflow");
 		presenceData.details = "Browsing...";
 		presenceData.state = `${selected.textContent}`;
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.startsWith("/community/forums")) {
 		if (document.location.pathname.split("/")[3] === "topics") {
 			presenceData.details = "Reading...";
 			presenceData.state = "A Forum Post";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (
 			isNaN(parseInt(document.location.pathname.split("/")[3])) === false
 		) {
@@ -135,36 +135,36 @@ presence.on("UpdateData", async () => {
 				.trimEnd();
 			presenceData.details = "Browsing...";
 			presenceData.state = `Forums (${forumName})`;
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		} else {
 			presenceData.details = "Browsing...";
 			presenceData.state = "The Forums";
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.startsWith("/community/chat"))
 		presenceData.details = "Chatting...";
 	else if (document.location.pathname.startsWith("/community/contests")) {
 		presenceData.details = "Browsing...";
 		presenceData.state = "Contests";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.startsWith("/community/livestreams")) {
 		presenceData.details = "Browsing...";
 		presenceData.state = "Livestreams";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.startsWith("/community/tournaments")) {
 		presenceData.details = "Browsing...";
 		presenceData.state = "Tournaments";
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.startsWith("/home/search")) {
 		inputSelected = document.querySelector("#search-input");
 		if (inputSelected) {
 			presenceData.details = "Searching for:";
 			presenceData.state =
 				inputSelected.value !== "" ? inputSelected.value : "Nothing";
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		} else {
 			presenceData.details = "Searching...";
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.startsWith("/home/account/edit"))
 		presenceData.details = "Changing account settings...";
@@ -175,31 +175,31 @@ presence.on("UpdateData", async () => {
 		if (selected) {
 			presenceData.details = "Reading...";
 			presenceData.state = selected.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/Main_Page")) {
 			presenceData.details = "Reading...";
 			presenceData.state = "Main Page";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else {
 			selected = document.querySelector(
 				"body > div.osu-layout__section.osu-layout__section--full.js-content.help_sitemap > div.osu-page.osu-page--generic"
 			);
 			presenceData.details = "Reading...";
 			presenceData.state = selected.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (document.location.pathname.startsWith("/home/changelog")) {
 		presenceData.details = "Looking at...";
 		presenceData.state = "Changelog";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.startsWith("/home/friends")) {
 		presenceData.details = "Looking at...";
 		presenceData.state = "Their Friend List";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.startsWith("/home/follows")) {
 		presenceData.details = "Looking at...";
 		presenceData.state = "Their Watchlists";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.startsWith("/users")) {
 		profileName = document.querySelector<HTMLElement>(
 			"h1.profile-info__name  span.u-ellipsis-pre-overflow"
@@ -214,7 +214,7 @@ presence.on("UpdateData", async () => {
 				? `Looking at ${profileName}'s Profile (Their Own)`
 				: `Looking at ${profileName}'s Profile`;
 		presenceData.state = profileRanking;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else {
 		presenceData.details = "Viewing...";
 		presenceData.state = "An Unsupported Page";

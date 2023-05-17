@@ -9,7 +9,7 @@
 		"en": "Hack The Box is a massive, online cybersecurity training platform, allowing individuals, companies, universities and all kinds of organizations around the world to level up their hacking skills."
 	},
 	"url": "app.hackthebox.com",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/aMjnyic.png",
 	"thumbnail": "https://i.imgur.com/k66j7VF.jpeg",
 	"color": "#9fef00",

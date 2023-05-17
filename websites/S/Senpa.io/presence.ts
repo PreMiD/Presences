@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 			[, presenceData.details] = document
 				.querySelector("title")
 				.textContent.split("-");
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 
 		if (!presenceData.details) presence.setActivity();

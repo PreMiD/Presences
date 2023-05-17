@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 			? (uploader as HTMLElement).textContent
 			: "Uploader not found...";
 		presenceData.largeImageKey = "https://i.imgur.com/3qXaosP.png";
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

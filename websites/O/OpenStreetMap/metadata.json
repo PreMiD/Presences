@@ -11,7 +11,7 @@
 	},
 	"url": "openstreetmap.org",
 	"regExp": "([a-z0-9]+)[.]openstreetmap[.]org",
-	"version": "1.0.2",
+	"version": "1.0.4",
 	"logo": "https://i.imgur.com/mlLReW9.png",
 	"thumbnail": "https://i.imgur.com/2gZwZlU.png",
 	"color": "#7ebc6f",

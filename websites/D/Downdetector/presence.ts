@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
 	if (document.location.pathname.startsWith("/search/")) {
 		presenceData.details = "Searching for:";
 		[, presenceData.state] = document.location.href.split("?q=");
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/archive/")) {
 		presenceData.details = "Viewing an archive for:";
 		title = document.querySelector(

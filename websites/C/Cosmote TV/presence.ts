@@ -138,7 +138,7 @@ presence.on("UpdateData", async () => {
 						)
 					);
 
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused ? strings.pause : strings.play;
 			}
 			channel = presenceData.state;
@@ -193,7 +193,7 @@ presence.on("UpdateData", async () => {
 				.getTimestamps(Math.floor(currentTime), Math.floor(duration))
 				.pop();
 
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;
 		}
 

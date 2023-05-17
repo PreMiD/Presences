@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.hostname.includes("install")) {
 		presenceData.details = "Reading:";
 		presenceData.state = "Pixelmon Download & Installation Guide";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

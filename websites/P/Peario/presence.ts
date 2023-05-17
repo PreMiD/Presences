@@ -93,9 +93,9 @@ presence.on("UpdateData", async () => {
 			} Viewers`;
 			if (video.paused || isNaN(video.duration)) {
 				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 			} else {
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
 			}
 		} else {

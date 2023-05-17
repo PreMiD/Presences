@@ -15,7 +15,7 @@
 	},
 	"url": "wikisource.org",
 	"regExp": "([a-z0-9-]+[.])*wikisource[.]org[/]",
-	"version": "1.0.16",
+	"version": "1.0.18",
 	"logo": "https://i.imgur.com/HS37uGx.png",
 	"thumbnail": "https://i.imgur.com/K7f8lKG.png",
 	"color": "#f9f9f9",

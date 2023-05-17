@@ -27,17 +27,17 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing Contest Page";
 	else if (pathname.includes("/contest-rules")) {
 		presenceData.details = "Reading the contest rules";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	} else if (pathname.includes("/squad"))
 		presenceData.details = "Viewing the squad";
 	else if (pathname.includes("/terms-of-use")) {
 		presenceData.details = "Reading the Terms Of Service";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	} else if (pathname.includes("/privacy")) {
 		presenceData.details = "Reading the Privacy Policy";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	} else if (pathname.includes(`/profile/${IDs}`)) {
 		const name = document.querySelector(

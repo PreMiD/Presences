@@ -206,7 +206,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".ut-pinned-list-container.SearchResults")
 		) {
 			presenceData.details = "Transfers - Searching for new players";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (
 		document.querySelector(

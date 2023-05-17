@@ -17,7 +17,7 @@
 	},
 	"url": "jellyfin.org",
 	"regExp": "(jellyfin.org)|(.*[/]web[/]index[.]html)",
-	"version": "1.8.0",
+	"version": "1.8.2",
 	"logo": "https://i.imgur.com/nPzEemG.png",
 	"thumbnail": "https://i.imgur.com/J61378N.png",
 	"color": "#00698c",

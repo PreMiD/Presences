@@ -278,7 +278,7 @@ presence.on("UpdateData", async () => {
 			if (showBrowsing) {
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = strings.browse;
 						presenceData = { ...presenceData, ...v };
 					}
@@ -329,7 +329,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = strings.searchingFor;
 					presenceData.state =
 						document.querySelector<HTMLInputElement>("input").value;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 				}
 
 				if (path.includes("/drops/inventory/"))
@@ -500,7 +500,7 @@ presence.on("UpdateData", async () => {
 							.replace("%uploader%", uploader)
 							.replace("%game%", game);
 					}
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = strings.play;
 					if (pfp) {
 						presenceData.largeImageKey =
@@ -522,7 +522,7 @@ presence.on("UpdateData", async () => {
 				if (((showLive && live) || (showVideo && !live)) && video.paused) {
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = strings.pause;
 				}
 
@@ -613,7 +613,7 @@ presence.on("UpdateData", async () => {
 
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = strings.browse;
 						presenceData = { ...presenceData, ...v };
 					}
@@ -652,7 +652,7 @@ presence.on("UpdateData", async () => {
 
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = strings.browse;
 						presenceData = { ...presenceData, ...v };
 					}
@@ -663,7 +663,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector(".plyr").className.includes("plyr--playing")
 				) {
 					presenceData.details = strings.brandWatch;
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = strings.play;
 					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestamps(
@@ -705,7 +705,7 @@ presence.on("UpdateData", async () => {
 
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = strings.browse;
 						presenceData = { ...presenceData, ...v };
 					}
@@ -742,7 +742,7 @@ presence.on("UpdateData", async () => {
 
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = strings.browse;
 						presenceData = { ...presenceData, ...v };
 					}
@@ -762,7 +762,7 @@ presence.on("UpdateData", async () => {
 			if (showBrowsing) {
 				presenceData.details = strings.readingAbout;
 				presenceData.state = strings.affiliate;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.browse;
 
 				if (privacy) {
@@ -806,7 +806,7 @@ presence.on("UpdateData", async () => {
 
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = strings.browse;
 						presenceData = { ...presenceData, ...v };
 					}
@@ -845,7 +845,7 @@ presence.on("UpdateData", async () => {
 
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = strings.browse;
 						presenceData = { ...presenceData, ...v };
 					}
@@ -886,7 +886,7 @@ presence.on("UpdateData", async () => {
 
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = strings.browse;
 						presenceData = { ...presenceData, ...v };
 					}

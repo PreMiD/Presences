@@ -27,6 +27,10 @@ const pattern = "- Page",
 		return str.slice(0, str.indexOf(pattern));
 	};
 
+const enum Assets {
+	Logo = "https://i.imgur.com/o9joHZX.png",
+}
+
 if (lastPlaybackState !== reading) {
 	lastPlaybackState = reading;
 	browsingTimestamp = Math.floor(Date.now() / 1000);
@@ -34,7 +38,7 @@ if (lastPlaybackState !== reading) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/o9joHZX.png",
+		largeImageKey: Assets.Logo,
 	};
 
 	tabTitle = document.title;

@@ -1,4 +1,4 @@
-enum Assets {
+const enum Assets {
 	Header = "https://i.imgur.com/ffxJj5E.png",
 	Logo = "https://i.imgur.com/04gnehi.png",
 	Envelope = "https://i.imgur.com/6Hp3f7k.png",

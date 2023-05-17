@@ -1,5 +1,6 @@
 const presence = new Presence({ clientId: "714822481286004778" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let gameArea: HTMLElement, pauseMenu: HTMLElement;
 
 presence.on("UpdateData", () => {

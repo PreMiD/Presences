@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
 			.querySelector("p.player-bar-track.js-player-status")
 			?.getAttribute("title");
 
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? "Paused" : "Playing";
 
 		delete presenceData.startTimestamp;
