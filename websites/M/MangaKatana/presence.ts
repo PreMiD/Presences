@@ -28,11 +28,8 @@ async function getStrings() {
 	);
 }
 
-enum Assets {
-	Cover = "https://i.imgur.com/41vZ7bA.png",
-	Search = "https://i.imgur.com/MVpU1DJ.png",
-	Viewing = "https://i.imgur.com/jw8hU7y.png",
-	Reading = "https://i.imgur.com/YJBDFSZ.png",
+const enum Assets {
+	Logo = "https://i.imgur.com/41vZ7bA.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -59,7 +56,7 @@ const observer = new IntersectionObserver(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.Cover,
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		[newLang, privacy, cover, time, buttons, pages] = await Promise.all([
@@ -133,7 +130,7 @@ presence.on("UpdateData", async () => {
 					for (const page of document.querySelectorAll("#imgs img"))
 						observer.observe(page);
 					presenceData.largeImageKey = localStorage.getItem("currentMangaPage");
-				} else presenceData.largeImageKey = Assets.Cover;
+				} else presenceData.largeImageKey = Assets.Logo;
 
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.reading;
@@ -163,7 +160,7 @@ presence.on("UpdateData", async () => {
 		case "bookmarks":
 			presenceData.details = strings.editing;
 			presenceData.state = title;
-			presenceData.smallImageKey = Assets.Cover;
+			presenceData.smallImageKey = Assets.Logo;
 			break;
 	}
 
@@ -176,9 +173,10 @@ presence.on("UpdateData", async () => {
 		presenceData.state = searchInput;
 	}
 
-	if (!cover || privacy) presenceData.largeImageKey = Assets.Cover;
-	if (!buttons || privacy) delete presenceData.buttons;
-	if (!time) delete presenceData.startTimestamp;
-	if (privacy) delete presenceData.state;
+	if (!cover || privacy) presenceData.largeImageKey = Assets.Logo;
+	if ((!buttons || privacy) && presenceData.buttons)
+		delete presenceData.buttons;
+	if (!time && presenceData.startTimestamp) delete presenceData.startTimestamp;
+	if (privacy && presenceData.state) delete presenceData.state;
 	presence.setActivity(presenceData);
 });
