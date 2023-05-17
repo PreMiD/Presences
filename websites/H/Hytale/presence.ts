@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/news/")) {
 		presenceData.details = "Reading Blog Post";
 		presenceData.state = document.querySelector(".post__heading").textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else {
 		switch (document.location.pathname) {
 			case "/media": {
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 			case "/jobs/data-protection-statement": {
 				presenceData.details = "Reading the";
 				presenceData.state = "Data protection statement";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				break;
 			}
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 					switch (document.location.pathname) {
 						case "/signup": {
 							presenceData.details = "Signing up for the beta";
-							presenceData.smallImageKey = "writing";
+							presenceData.smallImageKey = Assets.Writing;
 
 							break;
 						}
@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
 						}
 						case "/cookie-policy": {
 							presenceData.details = "Reading the Cookie Policy";
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 							switch (document.location.hash) {
 								case "#what-is-cookie": {
 									presenceData.state = "What is a Cookie?";
@@ -131,21 +131,21 @@ presence.on("UpdateData", async () => {
 						case "/privacy": {
 							presenceData.details = "Viewing the";
 							presenceData.state = "Privacy Policy";
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 
 							break;
 						}
 						case "/legal": {
 							presenceData.details = "Viewing the";
 							presenceData.state = "Legal Information";
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 
 							break;
 						}
 						case "/corporate-governance": {
 							presenceData.details = "Reading about";
 							presenceData.state = "Corporate Governance";
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 
 							break;
 						}

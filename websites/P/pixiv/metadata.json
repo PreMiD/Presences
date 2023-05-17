@@ -27,7 +27,7 @@
 	},
 	"url": "www.pixiv.net",
 	"regExp": "([a-z0-9-]+[.])*pixiv[.]net[/]",
-	"version": "2.0.0",
+	"version": "2.0.2",
 	"logo": "https://i.imgur.com/D8Lf2t2.png",
 	"thumbnail": "https://i.imgur.com/Ggekra0.png",
 	"color": "#009cff",

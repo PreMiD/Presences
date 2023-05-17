@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 		case "www.caards.me": {
 			if (pathname === "/") presenceData.details = "Viewing home page";
 			else if (pathname.includes("/u/")) {
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.details = "Viewing profile";
 				presenceData.state = `${
 					document.querySelector("span.Name.text-3xl")?.textContent ?? "Unknown"

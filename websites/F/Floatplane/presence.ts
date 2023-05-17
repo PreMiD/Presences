@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = "Browsing";
 				presenceData.state = `${channelCount} Channels`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing";
 
 				if (searchTerm) {
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 
 					presenceData.details = `Searching: ${searchTerm}`;
 					presenceData.state = stringFormated;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Searching";
 				}
 
@@ -168,7 +168,7 @@ presence.on("UpdateData", async () => {
 
 									presenceData.details = `Searching FAQ: ${searchTerm}`;
 									presenceData.state = stringFormated;
-									presenceData.smallImageKey = "search";
+									presenceData.smallImageKey = Assets.Search;
 									presenceData.smallImageText = "Searching";
 								}
 
@@ -212,7 +212,9 @@ presence.on("UpdateData", async () => {
 									.slice(-1)[0];
 								[, presenceData.endTimestamp] =
 									presence.getTimestampsfromMedia(video);
-								presenceData.smallImageKey = video.paused ? "pause" : "play";
+								presenceData.smallImageKey = video.paused
+									? Assets.Pause
+									: Assets.Play;
 								presenceData.smallImageText = video.paused
 									? "Paused"
 									: "Playing";

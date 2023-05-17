@@ -2,6 +2,7 @@ const presence = new Presence({
 	clientId: "614386371532161054",
 	injectOnComplete: true,
 });
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -243,7 +244,7 @@ presence.on("UpdateData", async () => {
 
 		if (privacy) {
 			presenceData.details = strings.browse;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			delete presenceData.state;
 		}
 	}
@@ -294,7 +295,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.state;
 				} else if (showBrowsing && !showLive) {
 					presenceData.details = strings.browse;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					delete presenceData.state;
 				}
 			} else {
@@ -302,7 +303,9 @@ presence.on("UpdateData", async () => {
 				if (showVideo) {
 					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 					presenceData.smallImageText = video.paused
 						? strings.pause
 						: strings.play;
@@ -325,7 +328,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.state;
 				} else if (showBrowsing && !showVideo) {
 					presenceData.details = strings.browse;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					delete presenceData.state;
 				}
 			}
@@ -355,7 +358,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.smallImageText;
 				} else if (showBrowsing && !showLive) {
 					presenceData.details = strings.browse;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					delete presenceData.state;
 					delete presenceData.smallImageText;
 				}
@@ -368,7 +371,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = vidState
 						.replace("%title%", title)
 						.replace("%uploader%", channelPageChannelName);
-					presenceData.smallImageKey = "premiere";
+					presenceData.smallImageKey = Assets.Premiere;
 					presenceData.smallImageText = strings.waitingVidThe;
 				}
 
@@ -379,7 +382,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.smallImageText;
 				} else if (showBrowsing && !showVideo) {
 					presenceData.details = strings.browse;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					delete presenceData.state;
 					delete presenceData.smallImageText;
 				}
@@ -408,7 +411,7 @@ presence.on("UpdateData", async () => {
 			if (showVideo) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(video);
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? strings.pause
 					: strings.play;
@@ -437,7 +440,7 @@ presence.on("UpdateData", async () => {
 			//* Normal text post
 			presenceData.details = `${strings.readingPost} (${postPoster.textContent})`;
 			presenceData.state = postTitle.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	}
 

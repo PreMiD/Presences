@@ -24,41 +24,41 @@ presence.on("UpdateData", async () => {
 
 		if (document.querySelector("#message > div")) {
 			presenceData.details = "Requesting a song";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.location.pathname.includes("/about")) {
 			presenceData.details = "Reading about Reach Radio";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/timetable")) {
 			presenceData.details = "Viewing the timetable";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/team")) {
 			presenceData.details = "Viewing the team";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/privacy")) {
 			presenceData.details = "Reading Privacy Policy";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/alexa-terms")) {
 			presenceData.details = "Reading Alexa Policy";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/contact")) {
 			presenceData.details = "Writing to Reach Radio";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.location.pathname.includes("/all-news")) {
 			presenceData.details = "Viewing the news";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/news/")) {
 			presenceData.details = "Reading article:";
 			presenceData.state = document.querySelector(
 				"#news3 > section > div > div > div > h4"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/podcasts")) {
 			presenceData.details = "Viewing podcasts";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/podcast/")) {
 			presenceData.details = "Viewing podcast:";
 			presenceData.state = document.querySelector(".pod-name").textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/listen-to-podcast/")) {
 			presenceData.details = "Listening to podcast:";
 			presenceData.state = document.querySelector(".pod-name").textContent;
@@ -68,11 +68,11 @@ presence.on("UpdateData", async () => {
 					"#__layout > div > div.page > section > div > div.pod-player > div > div > div > button:nth-child(1)"
 				).className === "plyr__controls__item plyr__control"
 			) {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			} else {
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				let podcastDuration = 0;
 				const timeArray = document
 					.querySelector(".plyr__time")
@@ -108,17 +108,17 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (document.location.pathname === "/") {
 			presenceData.details = "Browsing...";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText =
 				document.querySelector("#current_song").textContent;
 		}
 	} else {
 		if (paused) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		} else {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			if (elapsed) presenceData.startTimestamp = browsingTimestamp;
 		}
 

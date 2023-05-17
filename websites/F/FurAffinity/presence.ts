@@ -1,6 +1,10 @@
 const presence = new Presence({ clientId: "760624576550928455" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://i.imgur.com/AYTzoMo.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -17,10 +21,6 @@ function imgPath(path: string, hostname: string) {
 	if (!path) return Assets.Logo;
 	if (path.includes(hostname)) return `https://${path.replace("//", "")}`;
 	else return `https://${hostname}${path}`;
-}
-enum Assets {
-	Logo = "https://i.imgur.com/AYTzoMo.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,

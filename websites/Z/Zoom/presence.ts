@@ -40,10 +40,10 @@ presence.on("UpdateData", async () => {
 		else {
 			if (videoEnabled()) {
 				presenceData.details = "In video meeting";
-				presenceData.smallImageKey = "vcall";
+				presenceData.smallImageKey = Assets.VideoCall;
 			} else {
 				presenceData.details = "In meeting";
-				presenceData.smallImageKey = "call";
+				presenceData.smallImageKey = Assets.Call;
 			}
 			if (memberCount()) {
 				presenceData.state = `${memberCount()} user${

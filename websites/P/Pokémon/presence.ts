@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 				if (title) {
 					presenceData.details = "Reading article:";
 					presenceData.state = title.textContent;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				} else {
 					presenceData.details = "Pokémon News";
 					presenceData.state = "Browsing...";
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 				if (title) {
 					presenceData.details = "Reading article:";
 					presenceData.state = title.textContent;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				} else {
 					presenceData.details = "Play! Pokémon";
 					presenceData.state = "Browsing...";
@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Searching something up...";
 					}
 					presenceData.largeImageKey = "pokeball";
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 				} else {
 					presenceData.details = "Pokédex";
 					presenceData.state = "Browsing...";
@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 				if (title) {
 					presenceData.details = "Viewing app:";
 					presenceData.state = title.textContent;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				} else presenceData.details = "Viewing Pokémon Apps";
 			} else if (
 				document.location.pathname.includes("/pokemon-video-games") ||
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 				document.location.pathname.includes("/videojuegos-pokemon")
 			) {
 				const title = document.querySelector(".full-article > h1");
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				if (title) {
 					presenceData.details = "Reading about game:";
 					presenceData.state = title.textContent;
@@ -135,7 +135,7 @@ presence.on("UpdateData", async () => {
 				document.location.pathname.includes("/gcc")
 			) {
 				presenceData.largeImageKey = "tcg";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				if (
 					document.location.pathname.includes("/pokemon-cards") ||
@@ -219,13 +219,13 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document
 					.querySelector(".ipsType_pageTitle")
 					.textContent.trim();
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/forum")) {
 				presenceData.details = "Viewing category:";
 				presenceData.state = document
 					.querySelector(".ipsType_pageTitle")
 					.textContent.trim();
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/leaderboard"))
 				presenceData.details = "Viewing the leaderboards";
 			else if (document.location.pathname.includes("/pastleaders"))
@@ -239,7 +239,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.state =
 					document.querySelector<HTMLInputElement>("#elMainSearchInput").value;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else presenceData.details = "Browsing the forums";
 
 			break;
@@ -284,7 +284,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = document.querySelector(
 							"#mainContent > section > div > div > div.boxStyle03 > div > h3"
 						).textContent;
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 					} else presenceData.details = "Viewing the articles";
 				} else if (document.URL.includes("access"))
 					presenceData.details = "Viewing the access points";
@@ -334,7 +334,9 @@ presence.on("UpdateData", async () => {
 									Math.floor(video.currentTime),
 									Math.floor(video.duration)
 								);
-							presenceData.smallImageKey = video.paused ? "pause" : "play";
+							presenceData.smallImageKey = video.paused
+								? Assets.Pause
+								: Assets.Play;
 							presenceData.smallImageText = video.paused
 								? (await strings).pause
 								: (await strings).play;
@@ -366,7 +368,7 @@ presence.on("UpdateData", async () => {
 					}
 					case "pokemonkorea.co.kr": {
 						if (document.location.pathname.includes("/news/")) {
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 							presenceData.details = "Reading article:";
 
 							const title = document.querySelector(".section-title"),
@@ -429,7 +431,7 @@ presence.on("UpdateData", async () => {
 									presenceData.state = "Searching something up...";
 								}
 								presenceData.largeImageKey = "pokeball";
-								presenceData.smallImageKey = "search";
+								presenceData.smallImageKey = Assets.Search;
 							} else {
 								presenceData.details = "Pokédex";
 								presenceData.state = "Browsing...";
@@ -439,7 +441,7 @@ presence.on("UpdateData", async () => {
 							if (title) {
 								presenceData.details = "Reading about animation:";
 								presenceData.state = title.textContent;
-								presenceData.smallImageKey = "reading";
+								presenceData.smallImageKey = Assets.Reading;
 							} else presenceData.details = "Viewing Pokémon's animations";
 						} else if (document.location.pathname.includes("/product")) {
 							presenceData.largeImageKey = "storekr";
@@ -460,7 +462,7 @@ presence.on("UpdateData", async () => {
 						if (document.location.pathname.includes("/main"))
 							presenceData.details = "Browsing...";
 						else if (document.location.pathname.includes("/news/")) {
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 							presenceData.details = "Reading article:";
 
 							const title = document.querySelector(".section-title"),
@@ -514,7 +516,7 @@ presence.on("UpdateData", async () => {
 										presenceData.state = input.value;
 									} else presenceData.details = "Searching up something...";
 
-									presenceData.smallImageKey = "search";
+									presenceData.smallImageKey = Assets.Search;
 								} else presenceData.details = "Browsing through the cards";
 							} else if (document.querySelector(".medium-title")) {
 								presenceData.details = "Viewing card:";
@@ -620,7 +622,7 @@ presence.on("UpdateData", async () => {
 						presenceData.largeImageKey = "pokemontv";
 						if (document.location.pathname.includes("/news/")) {
 							if (document.URL.includes("?p=")) {
-								presenceData.smallImageKey = "reading";
+								presenceData.smallImageKey = Assets.Reading;
 								presenceData.details = "Reading article:";
 								presenceData.state = document.querySelector(
 									"#pagemain_newbig > div > div.entry_header > h2 > a"
@@ -633,7 +635,7 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Pokémon Movie";
 							presenceData.state = "Viewing the characters";
 						} else if (document.location.pathname.includes("/story/")) {
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 							presenceData.details = "Pokémon Movies";
 							presenceData.state = "Reading the story";
 						} else if (document.location.pathname.includes("/tickets/")) {
@@ -715,14 +717,14 @@ presence.on("UpdateData", async () => {
 							} else {
 								presenceData.details = "Searching through";
 								presenceData.state = "the cards...";
-								presenceData.smallImageKey = "search";
+								presenceData.smallImageKey = Assets.Search;
 							}
 						} else if (document.location.pathname.includes("/info/")) {
 							presenceData.details = "Reading article:";
 							presenceData.state = document.querySelector(
 								"body > div.WrapperArea > div.MainArea > div > section > h1"
 							).textContent;
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 						} else if (document.location.pathname.includes("/deck/"))
 							presenceData.details = "Browsing decks...";
 
@@ -754,25 +756,25 @@ presence.on("UpdateData", async () => {
 								} else presenceData.details = "Viewing ongoing series";
 							} else if (document.location.pathname.includes("/topics")) {
 								if (document.location.pathname.includes("/movie")) {
-									presenceData.smallImageKey = "reading";
+									presenceData.smallImageKey = Assets.Reading;
 									presenceData.details = "Reading about movie:";
 									presenceData.state = document.querySelector(
 										".article-detail__title"
 									).textContent;
 								} else if (document.location.pathname.includes("/apps")) {
-									presenceData.smallImageKey = "reading";
+									presenceData.smallImageKey = Assets.Reading;
 									presenceData.details = "Reading about app:";
 									presenceData.state = document.querySelector(
 										".article-detail__title"
 									).textContent;
 								} else if (document.location.pathname.includes("/game")) {
-									presenceData.smallImageKey = "reading";
+									presenceData.smallImageKey = Assets.Reading;
 									presenceData.details = "Reading about game:";
 									presenceData.state = document.querySelector(
 										".article-detail__title"
 									).textContent;
 								} else if (document.location.pathname.includes("/event")) {
-									presenceData.smallImageKey = "reading";
+									presenceData.smallImageKey = Assets.Reading;
 									presenceData.details = "Reading about event:";
 									presenceData.state = document.querySelector(
 										".article-detail__title"
@@ -835,7 +837,7 @@ presence.on("UpdateData", async () => {
 										presenceData.state = "Searching something up...";
 									}
 									presenceData.largeImageKey = "pokeball";
-									presenceData.smallImageKey = "search";
+									presenceData.smallImageKey = Assets.Search;
 								} else {
 									presenceData.details = "Pokédex";
 									presenceData.state = "Browsing...";
@@ -859,7 +861,7 @@ presence.on("UpdateData", async () => {
 							) {
 								presenceData.details = "Reading about the";
 								presenceData.state = "Pokémon Center";
-								presenceData.smallImageKey = "reading";
+								presenceData.smallImageKey = Assets.Reading;
 							}
 						}
 				}

@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector(
 					"body > section > section > section > div > article.post.main-post.hide-blocker > header > h1"
 				).textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Reading";
 				break;
 			}
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector(
 					"body > section > section > section > div > section > section > div > a:nth-child(2)"
 				).textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Reading";
 				break;
 			}

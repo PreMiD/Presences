@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (url.includes("/find?")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (url.includes("/title/")) {
 		const tokens = document.title.split(" - ");
 		presenceData.details = tokens[0];

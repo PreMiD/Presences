@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "632013978608074764",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: HTMLElement | Element | string,
 	title: HTMLElement | Element | string,
 	search: HTMLElement | Element | string,
@@ -43,7 +44,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = (title as HTMLElement).textContent;
 			presenceData.state = `${progress}% progressed`;
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 		} else if (playing === true && paused === true) {
 			title = document.querySelector(
@@ -51,7 +52,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = (title as HTMLElement).textContent;
 			presenceData.state = `${progress}% progressed`;
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 		} else {
 			//If there is no song playing display site information
@@ -101,7 +102,7 @@ presence.on("UpdateData", async () => {
 					)}...`;
 				} else presenceData.state = (title as HTMLElement).textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/publishing"))
 				presenceData.details = "Viewing publishing";
 			else if (document.location.pathname.includes("/cotw"))
@@ -130,7 +131,7 @@ presence.on("UpdateData", async () => {
 						).textContent.substring(0, 125)}...`;
 					} else presenceData.state = (title as HTMLElement).textContent;
 
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				}
 			} else if (document.location.pathname.includes("/blog"))
 				presenceData.details = "Viewing blog posts";
@@ -140,7 +141,7 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.details = "Searching for:";
 				presenceData.state = (search as HTMLInputElement).value;
-				presenceData.smallImageKey = "searching";
+				presenceData.smallImageKey = Assets.Search;
 			} else if (document.location.pathname === "/")
 				presenceData.details = "Viewing homepage";
 		}

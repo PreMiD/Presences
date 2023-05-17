@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "767140375785111562",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let currentTime: number, duration: number, paused: boolean;
 
 presence.on(
@@ -39,14 +40,14 @@ presence.on("UpdateData", async () => {
 	} else if (path.includes("/article/")) {
 		presenceData.details = "Reading news article:";
 		presenceData.state = document.querySelector("div.title").textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (path.includes("/vods/")) {
 		presenceData.details = "VODS";
 		presenceData.state = "Looking at past matches";
 	} else if (path.includes("/vod/")) {
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		if (paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;

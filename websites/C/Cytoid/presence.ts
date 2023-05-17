@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 				presenceData.endTimestamp = presence.getTimestampsfromMedia(
 					previewedCard.querySelector("audio")
 				)[1];
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Playing Preview";
 				presenceData.buttons = [
 					{
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 			if (!document.querySelector("audio").paused) {
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Playing Preview";
 				presenceData.endTimestamp = presence.getTimestampsfromMedia(
 					document.querySelector("audio")

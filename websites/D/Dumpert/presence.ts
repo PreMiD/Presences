@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "840126038205923369",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: Element;
 
 presence.on("UpdateData", async () => {
@@ -55,10 +56,10 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			if (video.paused) {
 				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 			} else if (!video.paused) {
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 			}
 		} else {
 			presenceData.largeImageKey =

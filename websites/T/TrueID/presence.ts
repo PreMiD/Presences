@@ -149,7 +149,7 @@ presence.on("UpdateData", async () => {
 						lang === "th-th"
 							? "ผังรายการทีวีช่องทีวีทั้งหมด"
 							: "Program schedule of all channels";
-					presenceData.smallImageKey = "question";
+					presenceData.smallImageKey = Assets.Question;
 					break;
 				default:
 					presenceData.details = "Tv";

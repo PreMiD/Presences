@@ -69,9 +69,7 @@ const collection = client
 	.db("PreMiD" + (!process.env.GITHUB_ACTIONS ? "-DEV" : ""))
 	.collection("presences");
 
-await compiler.compilePresence(changedPresenceFolders, {
-	transpileOnly: true,
-});
+await compiler.compilePresence(changedPresenceFolders);
 
 let dbPresences: DbData[] = [];
 

@@ -15,7 +15,7 @@
 	},
 	"url": "wikiquote.org",
 	"regExp": "([a-z0-9-]+[.])+wikiquote[.]org[/]",
-	"version": "1.0.16",
+	"version": "1.0.18",
 	"logo": "https://i.imgur.com/WCkNcSb.png",
 	"thumbnail": "https://i.imgur.com/MZrut8J.png",
 	"color": "#f9f9f9",

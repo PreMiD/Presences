@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Searching for:";
 				presenceData.state = (item as HTMLInputElement).value;
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else if (document.location.pathname.includes("/sell")) {
 				presenceData.details = "Viewing page:";
 				presenceData.state = "Etsy Sell";
@@ -135,7 +135,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Reading DMs with:";
 					presenceData.state = item.textContent;
 
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				} else if (document.location.pathname.includes("/sent")) {
 					item = document.querySelector(
 						"#root > div > div > div > div > div > div > div > div > div > div > div > div > a"

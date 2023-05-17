@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state =
 				document.querySelector<HTMLHeadingElement>("h1").textContent;
 			presenceData.smallImageText = strings.search;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		// Privacy policy, Imprint
 		case "c":
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 						).children[0] as HTMLImageElement
 					).src;
 					presenceData.smallImageText = strings.play;
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.startTimestamp = timestamp;
 				} else {
 					// Radio is paused
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 						).children[0] as HTMLImageElement
 					).src;
 					presenceData.smallImageText = strings.pause;
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 				}
 			}
 			break;

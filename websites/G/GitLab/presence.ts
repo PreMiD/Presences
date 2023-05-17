@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "709526684428271687",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let owner, title, presenceprivate;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -84,7 +85,7 @@ presence.on("UpdateData", async () => {
 					) as HTMLTextAreaElement;
 					presenceData.details = "Searching";
 					presenceData.state = title.textContent;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Searching";
 
 					break;

@@ -6,10 +6,8 @@ const presence = new Presence({
 		document.querySelector<HTMLInputElement>('input[name="text"]'),
 	{ host, pathname } = document.location;
 
-enum Assets {
-	Cover = "https://i.imgur.com/SFXKtLF.png",
-	Search = "https://i.imgur.com/wYVlwJX.png",
-	View = "https://i.imgur.com/hxvvGUi.png",
+const enum Assets {
+	Logo = "https://i.imgur.com/SFXKtLF.png",
 }
 
 async function getStrings() {
@@ -35,7 +33,7 @@ function textContent(tags: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.Cover,
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		[newLang, privacy, logo, time] = await Promise.all([
@@ -116,7 +114,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document
 						.querySelector<HTMLTitleElement>("title")
 						.textContent.replace(" — Яндекс.Погода", "");
-					presenceData.smallImageKey = Assets.View;
+					presenceData.smallImageKey = Assets.Viewing;
 					presenceData.smallImageText = strings.view;
 					break;
 

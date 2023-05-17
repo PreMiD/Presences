@@ -168,11 +168,11 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browse;
 		}
 		if (presenceData.details.match("(Searching)")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = (await strings).search;
 		}
 		if (!showTimestamps) {

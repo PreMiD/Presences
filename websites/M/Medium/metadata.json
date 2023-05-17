@@ -12,7 +12,7 @@
 	},
 	"url": "medium.com",
 	"regExp": "([a-z0-9|-]+[.])*medium[.]com[/]",
-	"version": "1.2.8",
+	"version": "1.2.10",
 	"logo": "https://i.imgur.com/7bfJ5VM.png",
 	"thumbnail": "https://i.imgur.com/VozjgCY.png",
 	"color": "#141210",

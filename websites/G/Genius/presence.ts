@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "809133308604055622",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -48,7 +49,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = strings.article;
 		presenceData.state = article;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = strings.reading;
 	} else if (path.startsWith("/artists/")) {
 		presenceData.details = strings.profile;
@@ -118,7 +119,7 @@ presence.on("UpdateData", async () => {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestampsfromMedia(video);
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 
 			if (video.paused) {
@@ -131,7 +132,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"h2.search_results_page-header"
 		).textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.searching;
 	}
 

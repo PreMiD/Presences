@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "616940877042155531",
 });
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -411,7 +412,7 @@ presence.on("UpdateData", async () => {
 			) {
 				if (privacy) {
 					presenceData.details = strings.inCall;
-					presenceData.smallImageKey = "call";
+					presenceData.smallImageKey = Assets.Call;
 					presenceData.smallImageText = strings.calling;
 				} else {
 					const connectedTo = Array.from(
@@ -459,14 +460,14 @@ presence.on("UpdateData", async () => {
 									)
 								)
 								.replace("{2}", connectedTo.textContent.split(" / ").pop());
-					presenceData.smallImageKey = "call";
+					presenceData.smallImageKey = Assets.Call;
 					presenceData.smallImageText = strings.calling;
 				}
 				//* Normal browsing status
 			} else if (showBrowsing) {
 				if (privacy) {
 					presenceData.details = strings.browse;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = strings.browse;
 				} else if (
 					Array.from(document.querySelectorAll("div[aria-controls]")).find(c =>
@@ -476,7 +477,7 @@ presence.on("UpdateData", async () => {
 					)
 				) {
 					presenceData.details = strings.settings;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = strings.browse;
 				} else if (
 					Array.from(document.querySelectorAll("div[aria-controls]")).find(c =>
@@ -495,7 +496,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = strings.serverSettings
 						.split("{0}")[1]
 						?.replace("{1}", server);
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = strings.browse;
 				} else {
 					for (const [k, v] of Object.entries(statics)) {
@@ -509,7 +510,7 @@ presence.on("UpdateData", async () => {
 						) {
 							presenceData = { ...presenceData, ...v };
 							if (!presenceData.smallImageKey) {
-								presenceData.smallImageKey = "reading";
+								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = strings.browse;
 							}
 						}
@@ -544,7 +545,7 @@ presence.on("UpdateData", async () => {
 				if (privacy) {
 					presenceData.details = strings.status;
 					presenceData.state = strings.browse;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = strings.browse;
 				} else {
 					for (const [k, v] of Object.entries(statics)) {
@@ -558,7 +559,7 @@ presence.on("UpdateData", async () => {
 						) {
 							presenceData = { ...presenceData, ...v };
 							if (!presenceData.smallImageKey) {
-								presenceData.smallImageKey = "reading";
+								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = strings.browse;
 							}
 						}
@@ -603,7 +604,7 @@ presence.on("UpdateData", async () => {
 				if (privacy) {
 					presenceData.details = strings.helpCenter;
 					presenceData.state = strings.browse;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = strings.browse;
 				} else {
 					for (const [k, v] of Object.entries(statics)) {
@@ -617,7 +618,7 @@ presence.on("UpdateData", async () => {
 						) {
 							presenceData = { ...presenceData, ...v };
 							if (!presenceData.smallImageKey) {
-								presenceData.smallImageKey = "reading";
+								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = strings.browse;
 							}
 						}
@@ -665,7 +666,7 @@ presence.on("UpdateData", async () => {
 				if (privacy) {
 					presenceData.details = strings.blog;
 					presenceData.state = strings.browse;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = strings.browse;
 				} else {
 					for (const [k, v] of Object.entries(statics)) {
@@ -679,7 +680,7 @@ presence.on("UpdateData", async () => {
 						) {
 							presenceData = { ...presenceData, ...v };
 							if (!presenceData.smallImageKey) {
-								presenceData.smallImageKey = "reading";
+								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = strings.browse;
 							}
 						}
@@ -732,7 +733,7 @@ presence.on("UpdateData", async () => {
 				if (privacy) {
 					presenceData.details = strings.status;
 					presenceData.state = strings.browse;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = strings.browse;
 				} else {
 					for (const [k, v] of Object.entries(statics)) {
@@ -746,7 +747,7 @@ presence.on("UpdateData", async () => {
 						) {
 							presenceData = { ...presenceData, ...v };
 							if (!presenceData.smallImageKey) {
-								presenceData.smallImageKey = "reading";
+								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = strings.browse;
 							}
 						}

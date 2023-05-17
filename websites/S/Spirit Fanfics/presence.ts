@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".tituloPrincipal")
 					.textContent.replace("História ", "")
 					.split(" - ");
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 				presenceData.smallImageText = "Escrevendo";
 			}
 		} else if (pathname.startsWith("/historia/editar")) {
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.match(/\/historia\/(\w+-)+\d+\/\w+/)) {
 				[presenceData.details] = title;
 				presenceData.state = `${title[1]} - ${nav}`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = (await strings).reading;
 			} else {
 				presenceData.details = "Vendo uma história";
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.startsWith("/grupos")) presenceData.state = "Vendo grupos";
 	else if (pathname.startsWith("/busca")) {
 		presenceData.details = `${(await strings).searching}...`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).searching;
 	} else presenceData.state = nav;
 

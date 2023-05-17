@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing:";
 	} else if (path.includes("/search")) {
 		presenceData.details = "Searching";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).search;
 	} else if (path.includes("/account")) {
 		presenceData.details = "Viewing Account";
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${jsonData.partOfSeries.name}: ${jsonData.name}`;
 			}
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;

@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "808756700022702120",
 });
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -72,7 +73,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = navigator.mediaSession.metadata.title;
 		presenceData.state = navigator.mediaSession.metadata.artist;
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.pause : strings.play;
 		presenceData.endTimestamp =
 			Date.now() / 1000 +

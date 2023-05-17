@@ -18,11 +18,11 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname === "/") {
 		presenceData.details = "Viewing the homepage";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Browsing";
 	} else if (document.location.pathname.startsWith("/episode-calendar")) {
 		presenceData.details = "Viewing Upcomming Shows";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "MDL";
 	} else if (document.location.pathname.startsWith("/search")) {
 		let searchThing = decodeURIComponent(
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"#article > div.box-header > h1 > a"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading and article";
 	} else if (document.location.pathname === "/articles") {
 		presenceData.details = "Browsing articles";

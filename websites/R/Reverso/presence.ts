@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 					).textContent
 				}`;
 				presenceData.state = `pour "${input.value}"`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else if (hrefEn.includes("/conjugation")) {
 			const input = document.querySelector<HTMLInputElement>("#txtVerb");
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("#content-menu div.select-wrap > a > label")
 						.textContent
 				}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else if (hrefEn.includes("documents.reverso.net")) {
 			const langLabel = document.querySelectorAll(
@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
 		if (input.length !== 0) {
 			presenceData.details = `Recherche ${input}`;
 			presenceData.state = "dans Grammaire française";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.hostname === "grammar.reverso.net") {
 		const input =
@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
 		if (input.length !== 0) {
 			presenceData.details = `Recherche ${input}`;
 			presenceData.state = "dans Grammaire anglaise";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 
 	if (page.includes("/t/")) {
 		presenceData.details = reading;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.state = document.querySelector(
 			".title-wrapper .fancy-title"
 		).textContent;
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 	} else if (page.includes("/tag/")) {
 		presenceData.details = "Bir etikete göz atıyor:";
 		presenceData.state = `#${decodeURIComponent(page.split("/")[2])}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (!privacyMode && page.includes("/u/")) {
 		const username = document.querySelector(
 			".details .user-profile-names .username"

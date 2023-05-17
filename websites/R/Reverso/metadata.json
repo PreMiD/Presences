@@ -17,7 +17,7 @@
 	},
 	"url": "www.reverso.net",
 	"regExp": "([a-z0-9-_]+)[.]reverso[.]net",
-	"version": "1.0.4",
+	"version": "1.0.6",
 	"logo": "https://i.imgur.com/jRvhga7.png",
 	"thumbnail": "https://i.imgur.com/CpzjkaP.png",
 	"color": "#0970ac",

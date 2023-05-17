@@ -1,6 +1,10 @@
 const presence = new Presence({
 	clientId: "1078446138966954085",
 });
+
+const enum Assets {
+	Logo = "https://i.imgur.com/Wp8c2G4.png",
+}
 let browsingTimestamp = Math.floor(Date.now() / 1000),
 	oldPath: string = null;
 
@@ -11,7 +15,7 @@ presence.on("UpdateData", async () => {
 		oldPath = pathname;
 	}
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Wp8c2G4.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		pathList = pathname.split("/").filter(path => path !== "");

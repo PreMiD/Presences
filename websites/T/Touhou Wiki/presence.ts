@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "651135297756856339",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title;
 const actionURL = new URL(document.location.href),
 	title2URL = new URL(document.location.href);

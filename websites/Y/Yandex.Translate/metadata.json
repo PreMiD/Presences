@@ -17,7 +17,7 @@
 		"translate.yandex.ua"
 	],
 	"regExp": "(translate|ceviri).yandex([.][a-z]+)+[/]",
-	"version": "1.0.13",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/kAHbOW1.png",
 	"thumbnail": "https://i.imgur.com/iRYR5Rj.png",
 	"color": "#FF2222",

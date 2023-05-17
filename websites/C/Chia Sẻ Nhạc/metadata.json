@@ -14,7 +14,7 @@
 	},
 	"url": "chiasenhac.vn",
 	"regExp": "([a-z0-9]+[.])?chiasenhac[.]vn",
-	"version": "1.0.8",
+	"version": "1.0.10",
 	"logo": "https://i.imgur.com/VEQTygm.png",
 	"thumbnail": "https://i.imgur.com/Fz3UUv1.png",
 	"color": "#FB5B49",

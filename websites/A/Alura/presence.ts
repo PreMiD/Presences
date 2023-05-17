@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"span.task-body-header-title-text"
 		).textContent;
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Pausado" : "Reproduzindo";
 
 		delete presenceData.startTimestamp;
