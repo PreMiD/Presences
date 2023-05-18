@@ -8,7 +8,7 @@ const presence = new Presence({
 		search: "general.searching",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-	
+
 let title: string, seasonEpisode: string, liveTitle: string;
 
 function pathIncludes(path: string, str: string) {
