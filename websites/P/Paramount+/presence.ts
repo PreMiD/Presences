@@ -11,16 +11,6 @@ const presence = new Presence({
 
 let title: string, seasonEpisode: string, liveTitle: string;
 
-const enum Logos {
-	Paramount = "https://i.imgur.com/VWrl85V.jpg",
-	CBS = "https://i.imgur.com/BfxpVej.png",
-	BET = "https://i.imgur.com/SBl99Dz.png",
-	ComedyCentral = "https://i.imgur.com/936hLEE.png",
-	MTV = "https://i.imgur.com/uCpqd3d.png",
-	Nickelodeon = "https://i.imgur.com/SwkpkrM.png",
-	Smithsonian = "https://i.imgur.com/1TfaVpT.png",
-}
-
 function pathIncludes(path: string, str: string) {
 	return path.includes(str);
 }
@@ -29,7 +19,7 @@ presence.on("UpdateData", async () => {
 	let video: HTMLVideoElement = null;
 	const vidArea = document.querySelector(".video__player-area"),
 		presenceData: PresenceData = {
-			largeImageKey: Logos.Paramount,
+			largeImageKey: "https://i.imgur.com/VWrl85V.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname: path } = document.location;
@@ -66,7 +56,8 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
-				presenceData.largeImageKey = data.image || Logos.Paramount;
+				presenceData.largeImageKey =
+					data.image || "https://i.imgur.com/VWrl85V.jpg";
 
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(video);
@@ -143,27 +134,27 @@ presence.on("UpdateData", async () => {
 			if (path.includes("/cbs/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "CBS";
-				presenceData.largeImageKey = Logos.CBS;
+				presenceData.largeImageKey = "https://i.imgur.com/BfxpVej.png";
 			} else if (path.includes("/bet/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "BET";
-				presenceData.largeImageKey = Logos.BET;
+				presenceData.largeImageKey = "https://i.imgur.com/SBl99Dz.png";
 			} else if (path.includes("/comedy-central/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "Comedy Central";
-				presenceData.largeImageKey = Logos.ComedyCentral;
+				presenceData.largeImageKey = "https://i.imgur.com/936hLEE.png";
 			} else if (path.includes("/mtv/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "MTV";
-				presenceData.largeImageKey = Logos.MTV;
+				presenceData.largeImageKey = "https://i.imgur.com/uCpqd3d.png";
 			} else if (path.includes("/nickelodeon/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "Nickelodeon";
-				presenceData.largeImageKey = Logos.Nickelodeon;
+				presenceData.largeImageKey = "https://i.imgur.com/SwkpkrM.png";
 			} else if (path.includes("/smithsonian-channel/")) {
 				presenceData.details = "Browsing Brand:";
 				presenceData.state = "Smithsonian Channel";
-				presenceData.largeImageKey = Logos.Smithsonian;
+				presenceData.largeImageKey = "https://i.imgur.com/1TfaVpT.png";
 			} else {
 				presenceData.details = "Browsing Brands";
 				presenceData.state = "Viewing Brands";

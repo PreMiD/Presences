@@ -24,17 +24,16 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing program genres";
 			presenceData.details = "Navigerar program kategorier";
 		} else if (document.location.pathname.includes("/kanaler/")) {
+			
 			title = document.querySelector(
 				"#play_main-content > div > div > div > div > div > h2"
 			).textContent;
 			user = document.querySelector(
 				"#play_main-content > div > div > div > div > div > p"
 			).textContent;
-			if (
-				document.querySelector<HTMLVideoElement>(
-					'[data-rt="video-player-channels"]'
-				)
-			) {
+			if (document.querySelector<HTMLVideoElement>(
+				'[data-rt="video-player-channels"]'
+			)) {
 				presenceData.smallImageKey = "live";
 				presenceData.smallImageText = `Watching live on channel: ${
 					document.querySelector("head > title").textContent.split("|")[0]
