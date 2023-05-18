@@ -90,7 +90,6 @@ async function generateToken() {
 	return response.json().then(x => x.token);
 }
 
- 
 interface SeriesInfo {
 	is_movie: number;
 	series_id: string;
