@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "625795936286932993",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
 let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
@@ -63,7 +62,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Forums, searching for:";
 				presenceData.state = search.textContent;
 
-				presenceData.smallImageKey = Assets.Search;
+				presenceData.smallImageKey = "search";
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/members/")) {
@@ -114,7 +113,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Using SpigotSearchEngine:";
 						presenceData.state = search.textContent;
 
-						presenceData.smallImageKey = Assets.Search;
+						presenceData.smallImageKey = "search";
 
 						presence.setActivity(presenceData);
 					} else {
@@ -190,7 +189,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = `${title.textContent.substring(0, 125)}...`;
 					else presenceData.state = title.textContent;
 
-					presenceData.smallImageKey = Assets.Reading;
+					presenceData.smallImageKey = "reading";
 
 					presence.setActivity(presenceData);
 				} else {

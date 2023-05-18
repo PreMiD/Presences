@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 				);
 			}
 			if (!isNaN(duration)) {
-				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageKey = paused ? "pause" : "play";
 				presenceData.smallImageText = paused
 					? (await strings).pause
 					: (await strings).play;
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing class:";
 				presenceData.state = title;
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 			}
 		} else if (document.location.pathname.includes("/profile/")) {
 			presenceData.startTimestamp = browsingTimestamp;
@@ -80,43 +80,43 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing workshop:";
 			presenceData.state = document.querySelector(".header-text").textContent;
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/workshops")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Browsing for workshops...";
-			presenceData.smallImageKey = Assets.Search;
+			presenceData.smallImageKey = "search";
 		} else if (document.location.pathname.includes("/browse")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Browsing in type:";
 			presenceData.state = document.querySelector(".main-header").textContent;
-			presenceData.smallImageKey = Assets.Search;
+			presenceData.smallImageKey = "search";
 		} else if (document.location.pathname.includes("/search")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Searching for:";
 			presenceData.state = document.querySelector(
 				"#search-form > div > div > div.search-input-wrapper.clear > div.ellipsis.query-placeholder.left"
 			).textContent;
-			presenceData.smallImageKey = Assets.Search;
+			presenceData.smallImageKey = "search";
 		} else if (document.location.pathname.includes("/your-classes")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing their classes";
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/my-workshops")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing their workshops";
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/teach")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Writing their teacher application";
-			presenceData.smallImageKey = Assets.Writing;
+			presenceData.smallImageKey = "writing";
 		} else if (document.location.pathname.includes("/lists/saved-classes")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing their saved classes";
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/lists/watch-history")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing their watch history";
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/settings")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Changing their settings...";

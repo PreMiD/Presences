@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "626496186496450570",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
 let user: HTMLLinkElement, search: HTMLLinkElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
@@ -48,14 +47,14 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Forums, Searching for:";
 					presenceData.state = search.textContent;
 
-					presenceData.smallImageKey = Assets.Search;
+					presenceData.smallImageKey = "search";
 
 					presence.setActivity(presenceData);
 				} else {
 					presenceData.details = "Forums, Going to search";
 					presenceData.state = "something up";
 
-					presenceData.smallImageKey = Assets.Search;
+					presenceData.smallImageKey = "search";
 
 					presence.setActivity(presenceData);
 				}
@@ -95,7 +94,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Docs, reading:";
 				presenceData.state = title.textContent;
 
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 
 				presence.setActivity(presenceData);
 			} else {
@@ -197,7 +196,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Ore, searching for:";
 				presenceData.state = search.textContent;
 
-				presenceData.smallImageKey = Assets.Search;
+				presenceData.smallImageKey = "search";
 
 				presence.setActivity(presenceData);
 			} else {

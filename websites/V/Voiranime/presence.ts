@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 					.textContent.split("-")[1];
 				presenceData.startTimestamp = startTimestamp;
 				presenceData.endTimestamp = endTimestamp;
-				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageKey = video.paused ? "pause" : "play";
 				presenceData.smallImageText = video.paused
 					? strings.pause
 					: strings.play;
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = new URLSearchParams(document.location.search).get(
 					"s"
 				);
-				presenceData.smallImageKey = Assets.Search;
+				presenceData.smallImageKey = "search";
 			} else if (Object.keys(pages).includes(pathArr[1]))
 				presenceData = { ...presenceData, ...pages[pathArr[1]] };
 			break;

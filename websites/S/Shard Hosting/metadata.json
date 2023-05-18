@@ -21,7 +21,7 @@
 	},
 	"url": "shardhosting.co.uk",
 	"regExp": "([a-z0-9-]+[.])*shardhosting[.](co.uk)[/]|([a-z0-9-]+[.])*web-ore-01[.](co.uk)",
-	"version": "1.0.10",
+	"version": "1.0.8",
 	"logo": "https://i.imgur.com/LQ3lw8P.png",
 	"thumbnail": "https://i.imgur.com/U9eCt4s.png",
 	"color": "#f47c8c",

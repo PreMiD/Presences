@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 				.textContent.trim()
 				.replace('"', "")
 				.replace('"', "");
-			presenceData.smallImageKey = Assets.Play;
+			presenceData.smallImageKey = "play";
 
 			presence.setActivity(presenceData);
 		}
@@ -55,14 +55,14 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing the jobs";
 		else if (document.location.pathname.includes("/kontakt")) {
 			presenceData.details = "Writing to SimLiveRadio";
-			presenceData.smallImageKey = Assets.Writing;
+			presenceData.smallImageKey = "writing";
 		} else if (document.location.pathname.includes("/studiohotline"))
 			presenceData.details = "Viewing the Studio Hot Line";
 		else if (document.location.pathname.includes("/teamspeak"))
 			presenceData.details = "Viewing TeamSpeak";
 		else if (document.location.pathname.includes("/projektanfrage")) {
 			presenceData.details = "Reading about the interviews";
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/unterstuetzen"))
 			presenceData.details = "Viewing the support page";
 		else if (document.location.pathname.includes("/downloads"))
@@ -73,10 +73,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing the partner page";
 		else if (document.location.pathname.includes("/ueber-uns")) {
 			presenceData.details = "Reading about SimLiveRadio";
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/faq")) {
 			presenceData.details = "Reading the FAQs";
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		}
 
 		if (!presenceData.details) presence.setActivity();

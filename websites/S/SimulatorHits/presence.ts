@@ -34,31 +34,31 @@ presence.on("UpdateData", () => {
 		switch (document.location.pathname) {
 			case "/schedule": {
 				presenceData.details = "Viewing Schedule";
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 
 				break;
 			}
 			case "/news": {
 				presenceData.details = "Reading News";
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 
 				break;
 			}
 			case "/about/meet-the-team": {
 				presenceData.details = "Viewing Staff Team";
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 
 				break;
 			}
 			case "/request": {
 				presenceData.details = "Making a Request";
-				presenceData.smallImageKey = Assets.Writing;
+				presenceData.smallImageKey = "writing";
 
 				break;
 			}
 			case "/streamers": {
 				presenceData.details = "Viewing Streamers";
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 
 				break;
 			}

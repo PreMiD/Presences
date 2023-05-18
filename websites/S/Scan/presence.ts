@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Browsing";
 		presenceData.state = item.textContent;
-		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageKey = "search";
 
 		presence.setActivity(presenceData);
 	} else if (
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Browsing";
 		presenceData.state = item.textContent;
-		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageKey = "search";
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/products/")) {
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Viewing";
 		presenceData.state = item.textContent;
-		presenceData.smallImageKey = Assets.Reading;
+		presenceData.smallImageKey = "reading";
 
 		presence.setActivity(presenceData);
 	} else presence.setActivity();

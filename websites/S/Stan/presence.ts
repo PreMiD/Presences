@@ -108,9 +108,7 @@ presence.on("UpdateData", async () => {
 						.querySelector<HTMLElement>(".vjs-end-slate-image")
 						?.style?.backgroundImage?.match(/url\("(.*)"\)/)?.[1];
 
-					presenceData.smallImageKey = video.paused
-						? Assets.Pause
-						: Assets.Play;
+					presenceData.smallImageKey = video.paused ? "pause" : "play";
 					presenceData.smallImageText = video.paused
 						? data.strings.pause
 						: data.strings.play;

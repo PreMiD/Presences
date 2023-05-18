@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = subtitle || "Movie";
 			}
 
-			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageKey = video.paused ? "pause" : "play";
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;
@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = (await strings).watchLive;
 			} else if (privacy) presenceData.state = (await strings).watchingLive;
 
-			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageKey = video.paused ? "pause" : "play";
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;

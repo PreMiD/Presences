@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 			.querySelector("#pageSelect > option:checked")
 			.textContent.replace("\n", "")
 			.replace("SAYFA", "")}`;
-		presenceData.smallImageKey = Assets.Reading;
+		presenceData.smallImageKey = "read";
 		presenceData.buttons = [
 			{ label: "Sayfaya Git", url: window.location.href },
 		];
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 	} else if (pathname === "/mangalar" && search?.substr(0, 7) === "?search") {
 		presenceData.details = "Arıyor:";
 		presenceData.state = new URLSearchParams(search).get("search");
-		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageKey = "search";
 	} else if (pathname === "/mangalar")
 		presenceData.details = "Mangaya Göz Atıyor";
 	else if (pathname.startsWith("/kategori")) {

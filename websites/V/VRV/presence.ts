@@ -1,10 +1,13 @@
 const presence = new Presence({
-		clientId: "640150336547454976",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	clientId: "640150336547454976",
+});
 
-const enum Assets {
+enum Assets {
 	Logo = "https://i.imgur.com/p6Xv2Bv.png",
+	Searching = "https://i.imgur.com/OIgfjTG.png",
+	Playing = "https://i.imgur.com/KNneWuF.png",
+	Paused = "https://i.imgur.com/BtWUfrZ.png",
+	Reading = "https://i.imgur.com/53N4eY6.png",
 }
 
 async function getStrings() {
@@ -26,6 +29,7 @@ async function getStrings() {
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
+	browsingTimestamp = Math.floor(Date.now() / 1000),
 	iFrameVideo: boolean,
 	currentTime: number,
 	duration: number,
@@ -47,7 +51,10 @@ presence.on("iFrameData", (data: IFrameData) => {
 	if (playback)
 		({ iFrameVideo, currentTime, duration, paused } = data.iframeVideo);
 
-	if (lastPlaybackState !== playback) lastPlaybackState = playback;
+	if (lastPlaybackState !== playback) {
+		lastPlaybackState = playback;
+		browsingTimestamp = Math.floor(Date.now() / 1000);
+	}
 });
 
 presence.on("UpdateData", async () => {
@@ -89,7 +96,7 @@ presence.on("UpdateData", async () => {
 				: `${seriesName} - ${episode}`;
 
 			if (iFrameVideo && !isNaN(duration)) {
-				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageKey = paused ? Assets.Paused : Assets.Playing;
 				presenceData.smallImageText = paused ? strings.pause : strings.play;
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
@@ -138,7 +145,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = browsingTimestamp;
 		delete presenceData.endTimestamp;
 		presenceData.largeImageKey = Assets.Logo;
-		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageKey = Assets.Searching;
 		presenceData.smallImageText = strings.search;
 		delete presenceData.buttons;
 	}

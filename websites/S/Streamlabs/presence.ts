@@ -71,14 +71,14 @@ presence.on("UpdateData", async () => {
 				.textContent.split(" ");
 			switch (!video.paused) {
 				case true:
-					presenceData.smallImageKey = Assets.Play;
+					presenceData.smallImageKey = "play";
 					presenceData.smallImageText = strings.play;
 					presenceData.endTimestamp = new Date(
 						Date.now() + (video.duration - video.currentTime) * 1000
 					).getTime();
 					break;
 				case false:
-					presenceData.smallImageKey = Assets.Pause;
+					presenceData.smallImageKey = "pause";
 					presenceData.smallImageText = strings.pause;
 					presenceData.endTimestamp = null;
 					break;
@@ -134,14 +134,14 @@ presence.on("UpdateData", async () => {
 			.textContent.split(" ");
 		switch (!video.paused) {
 			case true:
-				presenceData.smallImageKey = Assets.Play;
+				presenceData.smallImageKey = "play";
 				presenceData.smallImageText = strings.play;
 				presenceData.endTimestamp = new Date(
 					Date.now() + (video.duration - video.currentTime) * 1000
 				).getTime();
 				break;
 			case false:
-				presenceData.smallImageKey = Assets.Pause;
+				presenceData.smallImageKey = "pause";
 				presenceData.smallImageText = strings.pause;
 				presenceData.endTimestamp = new Date(
 					Date.now() + (video.duration - video.currentTime) * 1000

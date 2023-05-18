@@ -90,7 +90,7 @@ async function generateToken() {
 	return response.json().then(x => x.token);
 }
 
- 
+/* eslint-disable camelcase */
 interface SeriesInfo {
 	is_movie: number;
 	series_id: string;
@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
 					][presenceLogo - 2] || "viu_logo";
 			}
 
-			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageKey = video.paused ? "pause" : "play";
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 
 			presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
@@ -210,7 +210,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = strings.searchSomething;
 
-		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = strings.searching;
 	}
 

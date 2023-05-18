@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "895742751944089600",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
 let gameName: HTMLElement,
 	storeName: HTMLElement,
 	gamePrice: HTMLElement,

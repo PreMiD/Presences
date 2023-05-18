@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 							.textContent,
 						""
 					);
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 			} else presenceData.details = "Viewing recent articles";
 		} else if (document.location.pathname.includes("/series")) {
 			if (document.querySelector(".page-title")) {
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
 					Math.floor(duration)
 				);
 
-				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageKey = paused ? "pause" : "play";
 				presenceData.smallImageText = paused
 					? (await strings).pause
 					: (await strings).play;

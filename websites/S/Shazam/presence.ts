@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 	if (showSong && songPlaying) {
 		presenceData.details = getElement(".track .heading");
 		presenceData.state = getElement(".track .subheading");
-		presenceData.smallImageKey = Assets.Play;
+		presenceData.smallImageKey = "play";
 		presenceData.smallImageText = (await strings).play;
 
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 			presenceData.smallImageText = (await strings).browse;
 		}
 		if (!showTimestamps) {

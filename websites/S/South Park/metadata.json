@@ -16,7 +16,7 @@
 		"southpark.cc.com"
 	],
 	"regExp": "([a-z]{2,}[.])?southpark(studios)?([.][a-z]{2,}){1,2}",
-	"version": "1.1.6",
+	"version": "1.1.4",
 	"logo": "https://i.imgur.com/h6b3eEW.jpg",
 	"thumbnail": "https://i.imgur.com/No75MzW.jpg",
 	"color": "#b6122a",

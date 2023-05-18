@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (!isNaN(duration)) {
-			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageKey = paused ? "pause" : "play";
 			presenceData.smallImageText = paused
 				? (await strings).pause
 				: (await strings).play;

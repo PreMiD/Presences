@@ -130,10 +130,10 @@ presence.on("UpdateData", async () => {
 				!document.querySelector("#loading-logo").className.includes("flashing")
 			) {
 				presenceData.endTimestamp = timestamp[1];
-				presenceData.smallImageKey = Assets.Play;
+				presenceData.smallImageKey = "play";
 			} else {
 				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = Assets.Pause;
+				presenceData.smallImageKey = "pause";
 			}
 			title = document
 				.querySelector("head > title")

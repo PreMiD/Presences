@@ -63,10 +63,10 @@ presence.on("UpdateData", async () => {
 						);
 						presenceData.startTimestamp = startTimestamp;
 						presenceData.endTimestamp = endTimestamp;
-						presenceData.smallImageKey = Assets.Play;
+						presenceData.smallImageKey = "play";
 						presenceData.smallImageText = (await strings).play;
 					} else {
-						presenceData.smallImageKey = Assets.Pause;
+						presenceData.smallImageKey = "pause";
 						presenceData.smallImageText = (await strings).pause;
 					}
 				} else {
@@ -97,10 +97,10 @@ presence.on("UpdateData", async () => {
 					);
 					presenceData.startTimestamp = startTimestamp;
 					presenceData.endTimestamp = endTimestamp;
-					presenceData.smallImageKey = Assets.Play;
+					presenceData.smallImageKey = "play";
 					presenceData.smallImageText = (await strings).play;
 				} else {
-					presenceData.smallImageKey = Assets.Pause;
+					presenceData.smallImageKey = "pause";
 					presenceData.smallImageText = (await strings).pause;
 				}
 			} else {
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/aplicativo"))
 		presenceData.details = "Vendo os aplicativos";
 	else if (document.location.pathname.includes("/pesquisar")) {
-		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageKey = "search";
 		presenceData.smallImageText = (await strings).search;
 
 		if (document.location.pathname.includes("/pesquisar/")) {

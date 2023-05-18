@@ -1,6 +1,5 @@
 const presence = new Presence({ clientId: "765261270814949417" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
 let oldLang: string = null,
 	strings: LangStrings;
 

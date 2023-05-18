@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "640146822257573928",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
 let user: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
@@ -26,21 +25,21 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.pathname.includes("/logistics")) {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "📰 Reading about the logistics";
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 			} else if (document.location.pathname.includes("/about")) {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "📰 Reading about Valtox";
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 			} else if (document.location.pathname.includes("/fivem")) {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "🌐 Reading about";
 				presenceData.state = "📰 Valtox FiveM";
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 			} else if (document.location.pathname.includes("/minecraft")) {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "🌐 Reading about";
 				presenceData.state = "📰 Valtox Minecraft";
-				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageKey = "reading";
 			}
 
 			break;

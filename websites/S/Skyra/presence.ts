@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "266624760782258186",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
 let title: Element;
 
 presence.on("UpdateData", async () => {
@@ -17,20 +16,20 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Managing server settings";
 			title = document.querySelector("[data-premid='server-title']");
 			presenceData.state = `server: ${title.textContent}`;
-			presenceData.smallImageKey = Assets.Writing;
+			presenceData.smallImageKey = "writing";
 		} else if (document.location.pathname.includes("/music/")) {
 			presenceData.details = "Spinning the turntables";
 			title = document.querySelector("[data-premid='music-title']");
 
 			if (title) presenceData.state = `Currently Playing: ${title.textContent}`;
 
-			presenceData.smallImageKey = Assets.Play;
+			presenceData.smallImageKey = "play";
 		} else if (document.location.pathname === "/commands") {
 			presenceData.details = "Browsing Skyra's commands";
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		} else {
 			presenceData.details = "Checking out Skyra";
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		}
 	}
 

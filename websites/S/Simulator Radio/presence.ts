@@ -28,7 +28,7 @@ function pushMusicPresence(presenceData: PresenceData): void {
 	presenceData.state = `Listening to ${currentDj}`;
 	presenceData.smallImageText =
 		currentListeners !== 0 ? `Listeners: ${currentListeners}` : "";
-	presenceData.smallImageKey = Assets.Play;
+	presenceData.smallImageKey = "play";
 
 	if (lastTitle !== currentTitle) {
 		lastTitle = currentTitle;
@@ -57,7 +57,7 @@ presence.on("UpdateData", function () {
 
 		if (document.location.pathname.includes("/request")) {
 			presenceData.details = "Requesting...";
-			presenceData.smallImageKey = Assets.Writing;
+			presenceData.smallImageKey = "writing";
 		} else if (document.location.pathname.includes("/timetable")) {
 			presenceData.details = "Viewing the Timetable";
 			presenceData.state = document.querySelector("#timetable-day").textContent;
@@ -76,12 +76,12 @@ presence.on("UpdateData", function () {
 			presenceData.state =
 				document.querySelector(".blog-title")?.textContent ??
 				document.querySelector(".blog-page-title").textContent;
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/team"))
 			presenceData.details = "Viewing the Team";
 		else if (document.location.pathname.includes("/changelog")) {
 			presenceData.details = "Reading the Changelog";
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 		}
 	} else pushMusicPresence(presenceData);
 

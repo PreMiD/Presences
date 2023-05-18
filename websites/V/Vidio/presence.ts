@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing live streaming video";
 			break;
 		case "/search":
-			presenceData.smallImageKey = Assets.Search;
+			presenceData.smallImageKey = "search";
 			presenceData.details = "Searching for";
 			presenceData.state = (
 				document.querySelector("#q") as HTMLInputElement
@@ -74,10 +74,10 @@ presence.on("UpdateData", async () => {
 					if (video.paused) {
 						delete presenceData.startTimestamp;
 						delete presenceData.endTimestamp;
-						presenceData.smallImageKey = Assets.Pause;
+						presenceData.smallImageKey = "pause";
 						presenceData.smallImageText = "Video Paused";
 					} else {
-						presenceData.smallImageKey = Assets.Play;
+						presenceData.smallImageKey = "play";
 						presenceData.smallImageText = "Playing";
 					}
 				}
@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
 						".b-livestreaming-user__name"
 					).textContent;
 					if (video.paused) {
-						presenceData.smallImageKey = Assets.Pause;
+						presenceData.smallImageKey = "pause";
 						presenceData.smallImageText = "Live Paused";
 					} else {
 						presenceData.smallImageKey = "live";

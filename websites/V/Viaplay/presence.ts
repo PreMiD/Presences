@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 		presenceData = {
 			details: capitalise(tokens[6].split("-")),
 			largeImageKey: "https://i.imgur.com/ChKRz5r.png",
-			smallImageKey: video.paused ? Assets.Pause : Assets.Play,
+			smallImageKey: video.paused ? "pause" : "play",
 			smallImageText: video.paused
 				? (await strings).pause
 				: (await strings).play,
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (url.includes("#search")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageKey = "search";
 	} else presenceData.details = "Browsing";
 
 	presence.setActivity(presenceData, true);

@@ -111,9 +111,7 @@ presence.on("UpdateData", async () => {
 						if (iFrameVideo && !isNaN(duration) && title && video) {
 							if (!paused) {
 								presenceData.details = "Watching:";
-								presenceData.smallImageKey = paused
-									? Assets.Pause
-									: Assets.Play;
+								presenceData.smallImageKey = paused ? "pause" : "play";
 								if (videoTime) {
 									presenceData.smallImageText = paused
 										? (await strings).pause
@@ -128,7 +126,7 @@ presence.on("UpdateData", async () => {
 								delete presenceData.startTimestamp;
 								delete presenceData.endTimestamp;
 								presenceData.details = "Paused:";
-								presenceData.smallImageKey = Assets.Pause;
+								presenceData.smallImageKey = "pause";
 								presenceData.smallImageText = (await strings).pause;
 							}
 						} else if (!iFrameVideo && isNaN(duration) && title) {
@@ -139,7 +137,7 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Error 03: Watching unknown show/movie.";
 							presenceData.state = "Can't tell if playing or not.";
 							presenceData.startTimestamp = browsingTimestamp;
-							presenceData.smallImageKey = Assets.Search;
+							presenceData.smallImageKey = "search";
 							presenceData.smallImageText = "Error 3";
 							presence.error(
 								"Can't tell what you are watching. Fix a variable or line of code."
@@ -149,7 +147,7 @@ presence.on("UpdateData", async () => {
 						//Can't get the basic site information
 						presenceData.startTimestamp = browsingTimestamp;
 						presenceData.details = "Error 02: Watching unknown show/movie.";
-						presenceData.smallImageKey = Assets.Search;
+						presenceData.smallImageKey = "search";
 						presence.error("Can't read page.");
 					}
 				} else if (
@@ -163,13 +161,13 @@ presence.on("UpdateData", async () => {
 						"https://vidcloud9.com/search.html?keyword=",
 						""
 					);
-					presenceData.smallImageKey = Assets.Search;
+					presenceData.smallImageKey = "search";
 					presenceData.smallImageText = "Searching";
 				} else {
 					//If it can't get the page it will output an error
 					presenceData.startTimestamp = browsingTimestamp;
 					presenceData.details = "Error 01: Can't Read Page";
-					presenceData.smallImageKey = Assets.Search;
+					presenceData.smallImageKey = "search";
 					presence.error("Can't read page. Set up a conditional.");
 				}
 		}

@@ -2,10 +2,12 @@ const presence = new Presence({
 		clientId: "1043638037042712637",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
-const enum Assets {
+enum Assets {
 	Logo = "https://i.imgur.com/wC4AkjI.png",
+	Play = "https://i.imgur.com/o4FaGfB.png",
+	Pause = "https://i.imgur.com/kK39yND.png",
 }
+
 presence.on("UpdateData", async () => {
 	const selector = document.querySelector,
 		presenceData: PresenceData = {

@@ -11,7 +11,7 @@
 	},
 	"url": "www.stoodi.com.br",
 	"regExp": "([a-z0-9]+)[.]stoodi[.]com[.]br",
-	"version": "1.0.3",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/gcfZTn4.png",
 	"thumbnail": "https://i.imgur.com/K35Q2iX.png",
 	"color": "#004EFF",

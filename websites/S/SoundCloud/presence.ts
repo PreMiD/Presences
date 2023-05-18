@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
 					.style.backgroundImage.match(/"(.*)"/)?.[1]
 					.replace("-t50x50.jpg", "-t500x500.jpg") ?? "soundcloud";
 		}
-		presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
+		presenceData.smallImageKey = playing ? "play" : "pause";
 		presenceData.smallImageText = strings[playing ? "play" : "pause"];
 
 		if (showButtons) {
@@ -262,13 +262,13 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing|Discovering)")) {
-			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageKey = "reading";
 			presenceData.smallImageText = strings.browse;
 		} else if (presenceData.details.match("(Searching)")) {
-			presenceData.smallImageKey = Assets.Search;
+			presenceData.smallImageKey = "search";
 			presenceData.smallImageText = strings.search;
 		} else if (presenceData.details.match("(Uploading)")) {
-			presenceData.smallImageKey = Assets.Uploading;
+			presenceData.smallImageKey = "uploading";
 			presenceData.smallImageText = "Uploading..."; // no string available
 		} else if (!showTimestamps || (!playing && !showBrowsing)) {
 			delete presenceData.startTimestamp;

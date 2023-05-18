@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document
 				.querySelector<HTMLMetaElement>('[property="og:image"]')
 				.content.split("?")[0];
-			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageKey = video.paused ? "pause" : "play";
 			presenceData.smallImageText = video.paused
 				? "Gepauzeerd"
 				: "Aan het afspelen";

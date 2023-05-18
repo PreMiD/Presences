@@ -3,10 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets {
-	Logo = "https://i.imgur.com/Q4myT8y.png",
-}
-
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -17,6 +13,12 @@ async function getStrings() {
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
+}
+
+enum Assets {
+	Logo = "https://i.imgur.com/Q4myT8y.png",
+	SearchImage = "https://i.imgur.com/oGQtnIY.png",
+	ReadingImage = "https://i.imgur.com/nese1O7.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
@@ -55,12 +57,12 @@ presence.on("UpdateData", async () => {
 			if (search?.value) {
 				presenceData.details = strings.search;
 				presenceData.state = search.value;
-				presenceData.smallImageKey = Assets.Search;
+				presenceData.smallImageKey = Assets.SearchImage;
 			} else if (user) {
 				if (typing?.textContent) presenceData.details = strings.typeDm;
 				else {
 					presenceData.details = strings.readDm;
-					presenceData.smallImageKey = Assets.Reading;
+					presenceData.smallImageKey = Assets.ReadingImage;
 				}
 				presenceData.state = user.textContent;
 			} else presenceData.details = strings.browse;

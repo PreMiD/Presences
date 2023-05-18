@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "714628886222209105",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
 let chapter, titlePage, title, subject;
 const path = document.location.pathname;
 presence.on("UpdateData", async () => {
