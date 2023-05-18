@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 	else if (search) {
 		presenceData.details = "Searching for";
 		presenceData.state = search.value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (video?.duration) {
 		const title = document.querySelector<HTMLMetaElement>(
 				'[property="og:title"]'
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 			.replace("Episode", ":E")
 			.replace(/ /gm, "")
 			.trim();
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestampsfromMedia(video);
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 			},
 		];
 		presenceData.details = strings.browse;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.browse;
 		presenceData.buttons = [
 			{

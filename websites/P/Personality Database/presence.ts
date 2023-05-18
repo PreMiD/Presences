@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname === "/search") {
 		const urlParams = new URLSearchParams(window.location.search);
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.details = "Searching:";
 		presenceData.state = urlParams.get("keyword") || urlParams.get("q");
 	} else if (document.location.pathname === "/vote") {

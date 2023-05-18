@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "714001239351885904",
 });
+
 enum ResourceNames {
 	logo = "logo",
 	reading = "reading",

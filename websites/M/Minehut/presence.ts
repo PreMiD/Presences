@@ -1,5 +1,6 @@
 const presence = new Presence({ clientId: "898448802829189172" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/FOvZNY6.png",
@@ -65,7 +66,7 @@ presence.on("UpdateData", async () => {
 			);
 			if (s) {
 				presenceData.state = `Searching for ${s}...`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = "Searching...";
 			}
 		}

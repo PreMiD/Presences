@@ -13,7 +13,7 @@
 	},
 	"url": "www.blockdit.com",
 	"regExp": "([a-z0-9-]+[.])*blockdit[.]com[/]",
-	"version": "1.0.13",
+	"version": "1.0.15",
 	"logo": "https://i.imgur.com/4zIl3O7.png",
 	"thumbnail": "https://i.imgur.com/s1U0Bq7.png",
 	"color": "#4a7fe0",

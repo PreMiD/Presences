@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.href.includes("keyword=")) {
 		/* ----- ARCHIVIO - ARCHIVE ----- */
 		/* Ricerca per nome - Search by name */
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Ricerca per nome";
 		presenceData.details = "Cercando:";
 		presenceData.state = `"${searchParams.get("keyword")}"`;

@@ -2,12 +2,11 @@ const presence = new Presence({
 		clientId: "978186598669758504",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: string;
-enum Assets {
+
+const enum Assets {
 	Logo = "https://i.imgur.com/4YN40As.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
-	Read = "https://i.imgur.com/wPUmqu5.png",
 }
+let title: string;
 
 async function getStrings() {
 	return presence.getStrings(
@@ -89,7 +88,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = title;
 			presenceData.smallImageKey = Assets.Search;
 		} else if (pathname.includes("wiki") && main !== "main page") {
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			const firstHeading = document
 				.querySelector("#firstHeading")
 				.textContent?.toLowerCase();

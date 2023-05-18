@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 					.className.includes("fa-play")
 			) {
 				presenceData.details = "Viewing the main page...";
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = format
 					.replace("%song%", document.querySelector(".stats-song").textContent)
 					.replace(
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 					djType = "AutoDJ - ";
 				else djType = "DJ: ";
 
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 
 				if (dj) {
 					presenceData.details = format
@@ -81,20 +81,20 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Written by: ${document
 				.querySelector("#newsInfo > a")
 				.textContent.trim()}`;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/Account.Profile")) {
 			presenceData.details = "Viewing profile of:";
 			presenceData.state = document.querySelector(
 				".profileName > span"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/Account.Settings")) {
 			presenceData.details = "Changing their settings...";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.location.pathname.includes("/Radio.RecentlyPlayed")) {
 			presenceData.details = "Viewing the";
 			presenceData.state = "recently played songs";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("Radio.SongProfile")) {
 			presenceData.details = "Viewing song";
 			presenceData.state = `${
@@ -108,11 +108,11 @@ presence.on("UpdateData", async () => {
 			}`;
 		} else if (document.location.pathname.includes("/UpBeat.AboutUs")) {
 			presenceData.details = "Reading about UpBeat";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/UpBeat.OurAffiliates")) {
 			presenceData.details = "Viewing the";
 			presenceData.state = "UpBeat affiliates";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/Community.Members")) {
 			let type = document
 				.querySelector("#mainContent > div.m-b-md.m-t-sm > ul > .active > a")
@@ -120,41 +120,41 @@ presence.on("UpdateData", async () => {
 			if (type === "vip's") type = "VIP";
 			presenceData.details = "Viewing the";
 			presenceData.state = `${type} members`;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.querySelector(".bigTitle")) {
 			let type = document.querySelector(".bigTitle").textContent.toLowerCase();
 			if (type === "faq's") type = "FAQ's";
 			if (type === "all media") type = "Articles List";
 			presenceData.details = "Viewing the";
 			presenceData.state = type;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 
 		if (document.querySelector("#modalrequestFormModal")) {
 			presenceData.details = "Sending in a request...";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.querySelector("#modalundefined")) {
 			presenceData.details = "Sending in feedback...";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.querySelector("#modaldjAppButton")) {
 			presenceData.details = "Applying for:";
 			presenceData.state = "Radio Presenter";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.querySelector("#modalmediaAppButton")) {
 			presenceData.details = "Applying for:";
 			presenceData.state = "News Reporter";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.querySelector("#accountBio")) {
 			presenceData.details = "Editing their bio";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.querySelector("#modalcontactUsButton")) {
 			presenceData.details = "Sending in a";
 			presenceData.state = "general enquiry";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.querySelector("#modalpartnerEnquiryButton")) {
 			presenceData.details = "Sending in a";
 			presenceData.state = "partner enquiry";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		}
 	} else {
 		if (document.querySelector(".stats-djName").textContent === "UpBeat")
@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
 				);
 		}
 
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

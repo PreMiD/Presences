@@ -24,10 +24,13 @@ presence.on(
 		video = data;
 	}
 );
+const enum Assets {
+	Logo = "https://i.imgur.com/ac0KCKY.png",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ac0KCKY.png",
+		largeImageKey: Assets.Logo,
 	};
 	if (
 		document.querySelector(".infoan2") &&
@@ -45,7 +48,7 @@ presence.on("UpdateData", async () => {
 			.querySelector("#main > div.now2 > div")
 			.textContent.split(" - ");
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;
@@ -57,45 +60,45 @@ presence.on("UpdateData", async () => {
 	} else if (document.querySelector(".infodes")) {
 		presenceData.details = "Viewing show:";
 		presenceData.state = document.querySelector(".infodes").textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/categories/")) {
 		presenceData.details = "Viewing category:";
 		[, presenceData.state] = document
 			.querySelector(".lisbg")
 			.textContent.split(": ");
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/categories")) {
 		presenceData.details = "Browsing through";
 		presenceData.state = "the categories";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/search")) {
 		presenceData.details = "Searching for some anime...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/popular")) {
 		presenceData.details = "Browsing through";
 		presenceData.state = "popular anime";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/movies")) {
 		presenceData.details = "Browsing through";
 		presenceData.state = "anime movies";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/alldubbed")) {
 		presenceData.details = "Browsing through";
 		presenceData.state = "dubbed anime";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/anime")) {
 		presenceData.details = "Browsing through";
 		presenceData.state = "anime archives";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/dubbed")) {
 		presenceData.details = "Browsing through";
 		presenceData.state = "dubbed anime";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	if (!presenceData.details) {
 		presenceData.details = (await strings).browsing;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = (await strings).browsing;
 	}
 	presence.setActivity(presenceData);

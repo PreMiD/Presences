@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/profiles/search")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Searching a profile";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/profiles/")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		title = document.querySelector(

@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				'[data-testid="page.title"]'
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (hostname === "discord.id") {
 		if (privacy) presenceData.details = "Browsing Lookup";

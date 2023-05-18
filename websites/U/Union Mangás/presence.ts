@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 
 	if (pathname.startsWith("/lista-mangas")) {
 		presenceData.details = "Procurando um mangá";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Procurando";
 	} else if (pathname.startsWith("/manga")) {
 		presenceData.details = "Olhando um mangá";
@@ -38,11 +38,11 @@ presence.on("UpdateData", async () => {
 			}`;
 		} else presenceData.state = mangaChapter;
 
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Lendo";
 	} else if (pathname.startsWith("/scans")) {
 		presenceData.details = "Procurando uma Scan";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Procurando";
 	} else presenceData.details = (await strings).browsing;
 

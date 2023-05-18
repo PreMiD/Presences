@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 		}
 		switch (document.querySelector("#play-button").getAttribute("class")) {
 			case "fas fa-pause":
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.endTimestamp =
 					Date.now() +
 					(parseInt(
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Playing";
 				break;
 			case "fas fa-play":
-				presenceData.smallImageKey = "paused";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
 				break;
 		}

@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 				"#content > div.results-info > h5 > span"
 			).textContent;
 			presenceData.details = `Searching: ${search}`;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "searching";
 			presenceData.state = "Movie";
 
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 				"#content > div.results-info > h5 > span"
 			).textContent;
 			presenceData.details = `Searching: ${search}`;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "searching";
 			presenceData.state = "Music Video";
 
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 				"#content > div.results-info > h5 > span"
 			).textContent;
 			presenceData.details = `Searching: ${search}`;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "searching";
 			presenceData.state = "Music Video Playlist";
 
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 				"#content > div.results-info > h5 > span"
 			).textContent;
 			presenceData.details = `Searching: ${search}`;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "searching";
 			presenceData.state = "Movie Clip";
 
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 				"#content > div.results-info > h5 > span"
 			).textContent;
 			presenceData.details = `Searching: ${search}`;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "searching";
 			presenceData.state = "Movie Clip Playlist";
 
@@ -114,20 +114,20 @@ presence.on("UpdateData", async () => {
 					);
 					presenceData.details = `${title} (${Name})`;
 					presenceData.state = director;
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = "playing";
 				} else if (video && end !== "--:--:--") {
 					presenceData.details = `${title} (${Name})`;
 					presenceData.state = director;
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = "paused";
 				} else {
 					presenceData.details = `${title} (${Name})`;
 
 					presenceData.state = director;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Browsing";
 				}
 			} else {
@@ -145,7 +145,7 @@ presence.on("UpdateData", async () => {
 					case "/adblocker/": {
 						presenceData.details = "Look at the adblock turn off page";
 
-						presenceData.smallImageKey = "search";
+						presenceData.smallImageKey = Assets.Search;
 						presenceData.smallImageText = "Turning off Adblock";
 
 						break;
@@ -173,7 +173,7 @@ presence.on("UpdateData", async () => {
 					case "/e500/": {
 						presenceData.details = "Logging a Bug.";
 
-						presenceData.smallImageKey = "search";
+						presenceData.smallImageKey = Assets.Search;
 						presenceData.smallImageText = "Logging a Bug";
 
 						break;

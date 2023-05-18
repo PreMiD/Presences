@@ -3,25 +3,22 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let iFrameVideo: boolean,
-	currentTime: number,
-	duration: number,
-	paused: boolean,
-	playback: boolean,
-	reproductor: string;
-
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/CyVxys5.jpg",
 	Home = "https://i.imgur.com/i2EEGId.jpg",
-	Pause = "https://i.imgur.com/V8aOlhf.jpg",
-	Play = "https://i.imgur.com/vS09FhM.jpg",
-	Search = "https://i.imgur.com/BSHGBn1.jpg",
 	Emitting = "https://i.imgur.com/TNrq2vU.jpg",
 	Login = "https://i.imgur.com/aY4bjzh.jpg",
 	Register = "https://i.imgur.com/hdtAwWr.jpg",
 	Settings = "https://i.imgur.com/T91Uhm5.jpg",
 	Preview = "https://i.imgur.com/1RLd82M.jpg",
 }
+
+let iFrameVideo: boolean,
+	currentTime: number,
+	duration: number,
+	paused: boolean,
+	playback: boolean,
+	reproductor: string;
 
 presence.on(
 	"iFrameData",

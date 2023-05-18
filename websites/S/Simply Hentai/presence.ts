@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "608043966285348944",
 });
+
 let lastPlaybackState = null,
 	reading,
 	browsingTimestamp = Math.floor(Date.now() / 1000);

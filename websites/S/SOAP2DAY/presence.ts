@@ -58,8 +58,8 @@ presence.on("UpdateData", async () => {
 			document.querySelector("video")
 		);
 		presenceData.endTimestamp = watchStamp;
-		presenceData.smallImageKey = "play";
-	} else presenceData.smallImageKey = "pause";
+		presenceData.smallImageKey = Assets.Play;
+	} else presenceData.smallImageKey = Assets.Pause;
 
 	presenceData.state = `${getStatus()} | ${getText(
 		"[class~=player-title-bar]"

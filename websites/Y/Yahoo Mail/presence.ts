@@ -12,12 +12,12 @@ presence.on("UpdateData", async () => {
 		{ pathname } = document.location;
 	if (document.querySelector('[data-test-id="message-group-subject-text"]')) {
 		presenceData.details = "Reading an email";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (
 		document.querySelector<HTMLInputElement>('[role="combobox"]')?.value
 	) {
 		presenceData.details = "Searching";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.querySelector('[data-test-id="recipient-input"]'))
 		presenceData.details = "Composing an email";
 	else if (privacy) {

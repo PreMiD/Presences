@@ -3,10 +3,8 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/tZ9OLRG.jpg",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
-	ReadingImage = "https://i.imgur.com/nese1O7.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -79,12 +77,12 @@ presence.on("UpdateData", async () => {
 			if (search?.value) {
 				presenceData.details = "Searching the docs for";
 				presenceData.state = search?.value;
-				presenceData.smallImageKey = Assets.SearchImage;
+				presenceData.smallImageKey = Assets.Search;
 			} else {
 				presenceData.details = `Reading the ${
 					document.querySelector('[data-testid="page.title"]')?.textContent
 				} page`;
-				presenceData.smallImageKey = Assets.ReadingImage;
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.buttons = [
 					{
 						label: "Read Docs",

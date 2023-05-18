@@ -8,14 +8,7 @@ const presence = new Presence({
 		search: "general.searching",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
-enum Assets {
-	Play = "https://i.imgur.com/q57RJjs.png",
-	Pause = "https://i.imgur.com/mcEXiZk.png",
-	Search = "https://i.imgur.com/B7FxcD4.png",
-	Live = "https://i.imgur.com/0HVm46z.png",
-}
-
+	
 let title: string, seasonEpisode: string, liveTitle: string;
 
 function pathIncludes(path: string, str: string) {

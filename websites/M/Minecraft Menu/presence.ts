@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 	else if (search.value) {
 		presenceData.details = "Searching for";
 		presenceData.state = search.value;
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname === "/") presenceData.details = "Homepathname";
 	else if (pathname.includes("/server")) {
 		presenceData.details = document

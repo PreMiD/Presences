@@ -80,10 +80,10 @@ presence.on("UpdateData", async () => {
 		delete presenceData.buttons;
 
 		if (document.querySelector(".icon-pause")) {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = strings.playing;
 		} else {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = strings.paused;
 			delete presenceData.endTimestamp;
 			delete presenceData.startTimestamp;

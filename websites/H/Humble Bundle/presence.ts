@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "633816611022962708",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
@@ -25,7 +26,7 @@ presence.on("UpdateData", async () => {
 				} else if (document.location.pathname.includes("/search")) {
 					presenceData.details = "Searching for something";
 					presenceData.state = "in the store";
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 				} else if (document.location.pathname.includes("/about"))
 					presenceData.details = "Viewing about section of the store";
 				else if (document.location.pathname.includes("/wishlist"))
@@ -61,7 +62,7 @@ presence.on("UpdateData", async () => {
 			if (search.value?.length >= 2) {
 				presenceData.details = "Searching for:";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 
 			break;
@@ -80,7 +81,7 @@ presence.on("UpdateData", async () => {
 			else {
 				presenceData.details = "Support - Reading:";
 				presenceData.state = title.textContent.replace(" – Humble Bundle", "");
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 
 			break;
@@ -92,7 +93,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Blog - Reading:";
 				title = document.querySelector("#main > article > header > h1");
 				presenceData.state = title.textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 
 			break;

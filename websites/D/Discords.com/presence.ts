@@ -220,7 +220,7 @@ presence.on("UpdateData", async () => {
 					// discord.bio
 				} else if (document.location.pathname.includes("/profiles")) {
 					presenceData.largeImageKey = "discordbio_logo";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = "Browsing...";
 					presenceData.details = "Browsing top bios";
 					presenceData.buttons = [
@@ -292,7 +292,7 @@ presence.on("UpdateData", async () => {
 				} else if (document.location.pathname.includes("/templates/id/top")) {
 					presenceData.largeImageKey = "discordtemplates_logo";
 					presenceData.details = "Viewing Top-10 templates";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = "Browsing...";
 					presenceData.buttons = [
 						{
@@ -333,7 +333,7 @@ presence.on("UpdateData", async () => {
 						document.location.pathname.split("/templates/search/")[1] ??
 						"Unknown"
 					}`;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Searching...";
 				} else if (document.location.pathname.includes("/templates/tags/")) {
 					presenceData.largeImageKey = "discordtemplates_logo";
@@ -341,7 +341,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${
 						document.location.pathname.split("/templates/tags/")[1] ?? "Unknown"
 					}`;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Searching...";
 				} else if (document.location.pathname.includes("/templates")) {
 					presenceData.largeImageKey = "discordtemplates_logo";

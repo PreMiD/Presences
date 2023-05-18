@@ -41,12 +41,12 @@ presence.on("UpdateData", async () => {
 	}
 
 	if ((songNameS === "None" && songArtistS === "None") || songArtistS === "") {
-		presenceData.smallImageKey = "paused";
+		presenceData.smallImageKey = Assets.Pause;
 		presenceData.smallImageText = "PauseChamp";
 
 		presenceData.details = (await strings).pause;
 	} else {
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Playing...";
 
 		presenceData.details = songNameS;

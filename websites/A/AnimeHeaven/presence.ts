@@ -48,7 +48,7 @@ const paths = {
 		if (iFrameVideo) {
 			const video = iFrameVideo;
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;
@@ -67,7 +67,7 @@ const paths = {
 	},
 	"/search"(presenceData: PresenceData) {
 		presenceData.state = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		let searchQuery = new URLSearchParams(window.location.search).get("q");
 

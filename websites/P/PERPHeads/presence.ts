@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Forums, searching for:";
 			presenceData.state = search.textContent;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 
 			presence.setActivity(presenceData);
 		}

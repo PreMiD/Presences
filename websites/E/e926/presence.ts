@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "969245744261390337",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: HTMLElement, mTitle: string, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
@@ -20,7 +21,7 @@ presence.on("UpdateData", async () => {
 			search = document.querySelector("#tags");
 			if (search?.value) {
 				presenceData.details = "Searching for";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.state = search?.value;
 			} else presenceData.details = "Viewing the homepage";
 		} else if (pathname.includes("posts")) {
@@ -44,7 +45,7 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else if (search?.value && search?.value !== mTitle) {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.buttons = [
 					{
 						label: "View Search",
@@ -83,13 +84,13 @@ presence.on("UpdateData", async () => {
 			search = document.querySelector("#quick_search_title");
 			if (search?.value) {
 				presenceData.details = "Searching Wiki for";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.state = search.value;
 			} else {
 				title = document.querySelector("#wiki-page-title > a");
 				presenceData.details = "Reading wiki";
 				presenceData.state = title?.textContent ?? "Wiki main page";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		} else if (pathname.includes("comments")) {
 			title = document.querySelector(
@@ -160,7 +161,7 @@ presence.on("UpdateData", async () => {
 
 			search = document.querySelector("#search_name_matches");
 			if (search?.value) {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "Searching Tags for";
 				presenceData.state = search?.value;
 			} else if (href.includes("&search%5Border%5D=")) {
@@ -199,7 +200,7 @@ presence.on("UpdateData", async () => {
 			search = document.querySelector("#search_name_matches");
 			if (search?.value) {
 				presenceData.details = "Searching Pools for";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.state = search?.value;
 			} else presenceData.details = "Viewing pools";
 		} else if (pathname.includes("post_sets"))
@@ -209,7 +210,7 @@ presence.on("UpdateData", async () => {
 			title = document.querySelector("#a-show > h1");
 			if (search?.value) {
 				presenceData.details = "Searching Forum for";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.state = search?.value;
 			} else if (title) {
 				presenceData.buttons = [
@@ -234,13 +235,13 @@ presence.on("UpdateData", async () => {
 			search = document.querySelector('[id="quick_search_message_matches"]');
 			if (search?.value) {
 				presenceData.details = "Searching messages for";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.state = search?.value;
 			} else {
 				presenceData.details = `Reading ${
 					document.querySelector("#a-index > h1").textContent
 				}`;
-				presenceData.smallImageKey = "read";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		} else if (pathname.includes("static/theme"))
 			presenceData.details = "Changing settings";

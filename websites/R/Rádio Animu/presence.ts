@@ -5,6 +5,7 @@ const presence = new Presence({
 		play: "general.playing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let artist: string, title: string, artwork: string, playing: boolean;
 
 presence.on(
@@ -29,36 +30,36 @@ presence.on("UpdateData", async () => {
 	if (playing) {
 		presenceData.details = artist;
 		presenceData.state = title;
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = (await strings).play;
 		presenceData.largeImageKey = artwork;
 	} else if (document.location.pathname.includes("/grade/")) {
 		presenceData.details = "Grade de Programação";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/pedidos/")) {
 		presenceData.details = "Pedidos";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/equipe/")) {
 		presenceData.details = "Equipe";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/sobre/")) {
 		presenceData.details = "Sobre";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/fazerparte/")) {
 		presenceData.details = "Faça Parte da Equipe";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/parceria/")) {
 		presenceData.details = "Parceria";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/suafansingaqui/")) {
 		presenceData.details = "Sua Fansing Aqui";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname === "/historia/") {
 		presenceData.details = "História";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname === "/") {
 		presenceData.details = "Página inicial";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	if (!presenceData.details) presence.setActivity();

@@ -6,6 +6,7 @@ const presence = new Presence({
 		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: HTMLElement | Element | string, title: HTMLElement | Element | string;
 
 presence.on("UpdateData", async () => {
@@ -42,7 +43,7 @@ presence.on("UpdateData", async () => {
 				);
 			}
 			if (!isNaN(duration)) {
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused
 					? (await strings).pause
 					: (await strings).play;
@@ -68,15 +69,15 @@ presence.on("UpdateData", async () => {
 					"body > div.container > div.genre > a.genre-item.activated"
 				).textContent
 			}`;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/bang-xep-hang")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Đang xem:";
 			presenceData.state = "Bảng xếp hạng anime";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/tim-kiem")) {
 			presenceData.startTimestamp = browsingTimestamp;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			[presenceData.details, presenceData.state] = document
 				.querySelector("body > div.container > section > div.tray-title")
 				.textContent.split(": ");

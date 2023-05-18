@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 		},
 		route = document.location.pathname.split("/");
 
-	presenceData.smallImageKey = "reading";
+	presenceData.smallImageKey = Assets.Reading;
 	presenceData.smallImageText = `Language : ${
 		document.querySelector("a.site-header-nav-item.bordered.lang-select-button")
 			.textContent

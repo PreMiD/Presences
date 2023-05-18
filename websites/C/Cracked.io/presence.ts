@@ -24,10 +24,8 @@ function capitalizeFirstLetter(string: string) {
 	);
 }
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/3dmXmx0.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
-	Eye = "https://i.imgur.com/RdYRilC.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -155,7 +153,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `Posted by: ${
 					document.querySelector('[class="post-username"]')?.textContent
 				}`;
-				presenceData.smallImageKey = Assets.Eye;
+				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = `${thread
 					.querySelector("span")
 					?.textContent.trim()} views`;

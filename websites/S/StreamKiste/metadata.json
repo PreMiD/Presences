@@ -12,7 +12,7 @@
 	},
 	"url": "streamkiste.tv",
 	"regExp": "([a-z0-9-]+[.])*streamkiste([.][a-z]+)+[/]",
-	"version": "1.0.15",
+	"version": "1.0.17",
 	"logo": "https://i.imgur.com/bdGvqBo.png",
 	"thumbnail": "https://i.imgur.com/TrhRNwT.jpg",
 	"color": "#4DB8C9",

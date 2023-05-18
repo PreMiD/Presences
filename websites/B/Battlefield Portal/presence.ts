@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "919182644296683520",
 });
+
 interface PlaygoundInfo {
 	playgroundId?: string;
 	type?: string;

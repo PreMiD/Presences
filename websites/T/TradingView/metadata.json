@@ -15,7 +15,7 @@
 		"status.tradingview.com"
 	],
 	"regExp": "([a-z0-9]+)[.]tradingview[.]com",
-	"version": "1.0.10",
+	"version": "1.0.12",
 	"logo": "https://i.imgur.com/1LFiAqv.png",
 	"thumbnail": "https://i.imgur.com/ow48UTD.png",
 	"color": "#2196f3",

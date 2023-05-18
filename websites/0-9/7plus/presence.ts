@@ -88,14 +88,14 @@ presence.on("UpdateData", async () => {
 					];
 					if (video.paused) {
 						delete presenceData.endTimestamp;
-						presenceData.smallImageKey = "paused";
+						presenceData.smallImageKey = Assets.Pause;
 					}
 					[, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
 					presenceData.details = document.querySelector(
 						'[class="vjs-top-bar-title"]'
 					).textContent;
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.largeImageKey =
 						video.getAttribute("poster") ?? "https://i.imgur.com/BamXC8h.png";
 				} else {

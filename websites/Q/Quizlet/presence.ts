@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 				actionTimestamp = null;
 				break;
 			case "Search":
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = "Searching";
 				presenceData.details = "Searching";
 				presenceData.state = qzData.searchLayer.search_term;
@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
 				break;
 			case "Learn": // Set > Write
 				actionTimestamp ??= Date.now();
-				presenceData.smallImageKey = "write";
+				presenceData.smallImageKey = Assets.Writing;
 				presenceData.smallImageText = "Writing";
 				presenceData.details = "Writing";
 				presenceData.state = `on ${qzData.layer.studyableTitle}`;

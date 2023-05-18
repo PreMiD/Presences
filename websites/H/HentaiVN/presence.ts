@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "942782020055089192",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let namekey, doukey, charkey, keystr, largebox;
 
 presence.on("UpdateData", async () => {
@@ -17,7 +18,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${
 			document.querySelector("input").value
 		} - Trang ${page}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.largeImageKey = "home";
 	} else if (
 		pathname.startsWith("/tim-kiem-tac-gia.html") &&
@@ -27,7 +28,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${
 			document.querySelector("input").value
 		} - Trang ${page}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.largeImageKey = "home";
 	} else if (
 		pathname.startsWith("/tim-kiem-doujinshi.html") &&
@@ -37,7 +38,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${
 			document.querySelector("input").value
 		} - Trang ${page}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.largeImageKey = "home";
 	} else if (
 		pathname.startsWith("/tim-kiem-charater.html") &&
@@ -45,7 +46,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = "Đang tìm kiếm truyện có nhân vật:";
 		presenceData.state = `${searchParams.get("key")} - Trang ${page}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.largeImageKey = "home";
 	} else if (pathname === "/") {
 		presenceData.details = "Đang duyệt trang chủ";
@@ -293,7 +294,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/forum/search-plus.php")) {
 		presenceData.details = "Đang tìm kiếm truyện nâng cao";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.largeImageKey = "home";
 		if (searchParams.has("search")) {
 			keystr = searchParams.getAll("tag[]");
@@ -515,7 +516,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/forum/search_member.php")) {
 		presenceData.details = "Đang tìm kiếm thành viên...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.largeImageKey = "forum";
 	} else if (pathname.startsWith("/forum/member.php")) {
 		presenceData.details = "Đang xem danh sách thành viên...";

@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 			Date.now() +
 			((parseFloat(endTime[0]) * 60 + parseFloat(endTime[1]) + 1) * 1000 -
 				currentTimeSec);
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused
 			? (await strings).pause
 			: (await strings).play;
