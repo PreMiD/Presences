@@ -4,10 +4,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/NPVqgsx.png",
-	},
-	 { pathname } = document.location,
-	pathnameLowerCase = pathname.toLowerCase();
+			largeImageKey: "https://i.imgur.com/NPVqgsx.png",
+		},
+		{ pathname } = document.location,
+		pathnameLowerCase = pathname.toLowerCase();
 	if (pathnameLowerCase === "/") {
 		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Anasayfa";
@@ -30,7 +30,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Bir ayar görüntülüyor:";
 		presenceData.state = "Bağlantılar";
 	} else if (pathnameLowerCase === "/help") {
-		presenceData.details = "Bir sayfa görüntülüyor:"; 
+		presenceData.details = "Bir sayfa görüntülüyor:";
 		presenceData.state = "Yardım Sayfası";
 	} else if (pathnameLowerCase.includes("/profile")) {
 		presenceData.details = "Bir kullanıcı profili görüntülüyor:";
@@ -39,9 +39,7 @@ presence.on("UpdateData", () => {
 				"body > div.main-wrapper > div.main-content > div > div > div > div.col-lg-12 > div > div.card-body.d-block.pt-4.text-center.position-relative > h4"
 			).textContent
 		}`;
-	} else if (
-		pathnameLowerCase.includes("/server-details")
-	) {
+	} else if (pathnameLowerCase.includes("/server-details")) {
 		presenceData.details = "Bir sunucu görüntülüyor:";
 		presenceData.state = `${
 			document.querySelector(
