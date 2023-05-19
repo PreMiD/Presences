@@ -5,7 +5,6 @@ const presence = new Presence({
 const enum Assets {
 	Logo = "https://i.imgur.com/njcb4Wp.png",
 	FediverseLogo = "https://i.imgur.com/B0HPMOQ.png",
-	Search = "https://i.imgur.com/WhzGXp1.png",
 }
 
 // checks if user is logged from textarea
