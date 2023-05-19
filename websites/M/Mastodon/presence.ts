@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 		},
-		{ pathname } = document.location;
+		{ pathname, hostname } = document.location;
 
 	if (pathname === "/home") {
 		presenceData.smallImageText = "Home";
@@ -85,7 +85,6 @@ presence.on("UpdateData", async () => {
 				} else {
 					switch (pathname) {
 						case "/about": {
-							const { hostname } = document.location;
 							presenceData.smallImageKey = document
 								.querySelectorAll(".account__avatar")
 								[checkPositionAccountAvatar()].querySelector("img")
