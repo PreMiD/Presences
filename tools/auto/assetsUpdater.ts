@@ -15,7 +15,7 @@ if (changedPresenceFolders.length) {
 	for (const folder of changedPresenceFolders) {
 		const assetsManager = new AssetsManager(folder),
 			{ toBeUploaded, toBeMoved, toBeDeleted } =
-				assetsManager.getAssetsChanges();
+				await assetsManager.getAssetsChanges();
 
 		if (!toBeUploaded.size && !toBeMoved.size && !toBeDeleted.size) {
 			actions.info(chalk.green(`No assets changes for ${folder}, skipping...`));
@@ -48,11 +48,14 @@ if (changedPresenceFolders.length) {
 if (deletedPresenceFolders.length) {
 	for (const folder of deletedPresenceFolders) {
 		const assetsManager = new AssetsManager(folder),
-			allAssets = assetsManager
-				.getAllAssets()
-				.filter(asset => !asset.startsWith(assetsManager.cdnBase));
+			allAssets = assetsManager.allAssets,
+			assets = [
+				allAssets.logo,
+				allAssets.thumbnail,
+				...allAssets.assets,
+			].filter(asset => asset.startsWith(assetsManager.assetBaseUrl));
 
-		if (!allAssets.length) {
+		if (!assets.length) {
 			actions.info(
 				chalk.green(`No assets to delete for ${folder}, skipping...`)
 			);
@@ -60,8 +63,8 @@ if (deletedPresenceFolders.length) {
 		}
 
 		actions.info(
-			chalk.green(`Deleting ${allAssets.length} asset(s) for ${folder}...`)
+			chalk.green(`Deleting ${assets.length} asset(s) for ${folder}...`)
 		);
-		await assetsManager.deleteAssets(allAssets);
+		await assetsManager.deleteAssets(assets);
 	}
 }

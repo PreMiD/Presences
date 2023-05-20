@@ -9,10 +9,10 @@ import { readFileSync } from "node:fs";
 import FormData from "form-data";
 
 const require = createRequire(import.meta.url),
-	rootPath = resolve(fileURLToPath(new URL(".", import.meta.url)), "../..");
+	rootPath = resolve(fileURLToPath(new URL(".", import.meta.url)), "../.."),
+	cdnBase = "https://cdn.rcd.gg";
 
 export default class AssetsManager {
-	cdnBase = "https://cdn.rcd.gg";
 	cwd: string;
 
 	constructor(
@@ -24,13 +24,13 @@ export default class AssetsManager {
 		this.cwd = options?.cwd ?? rootPath;
 	}
 
-	getAssetBaseUrl() {
-		return `${this.cdnBase}/PreMiD${encodeURI(
-			this.getPresenceFolder().replace(this.cwd, "")
+	get assetBaseUrl() {
+		return `${cdnBase}/PreMiD${encodeURI(
+			this.presenceFolder.replace(this.cwd, "")
 		).replace("#", "%23")}/assets`;
 	}
 
-	getPresenceFolder() {
+	get presenceFolder() {
 		return glob.sync(`{websites,programs}/**/${this.service}`, {
 			absolute: true,
 		})[0];
@@ -40,7 +40,7 @@ export default class AssetsManager {
 		return extname(url);
 	}
 
-	getAllTsFiles() {
+	get allTsFiles() {
 		return glob
 			.sync(`{websites,programs}/**/${this.service}/**/*.ts`, {
 				absolute: true,
@@ -48,8 +48,8 @@ export default class AssetsManager {
 			.filter(file => !file.endsWith(".d.ts"));
 	}
 
-	getMetadata(): Metadata {
-		return require(resolve(this.getPresenceFolder(), "metadata.json"));
+	get metadata(): Metadata {
+		return require(resolve(this.presenceFolder, "metadata.json"));
 	}
 
 	/**
@@ -61,13 +61,14 @@ export default class AssetsManager {
 	 *
 	 * @returns A list of all assets used in the presence
 	 */
-	getAllAssets(): string[] {
+	get allAssets(): {
+		logo: string;
+		thumbnail: string;
+		assets: Set<string>;
+	} {
 		const assets = new Set<string>(),
-			{ logo, thumbnail } = this.getMetadata(),
-			files = this.getAllTsFiles();
-
-		assets.add(logo);
-		assets.add(thumbnail);
+			{ logo, thumbnail } = this.metadata,
+			files = this.allTsFiles;
 
 		for (const tsfile of files) {
 			const file = readFileSync(tsfile, "utf-8");
@@ -85,11 +86,17 @@ export default class AssetsManager {
 				const regex2 = /(?<=\+ )["'`].*?["'`]/g;
 				if (regex2.test(match[1])) continue;
 
+				if (match[1] === logo || match[1] === thumbnail) continue;
+
 				assets.add(match[1]);
 			}
 		}
 
-		return [...assets];
+		return {
+			logo,
+			thumbnail,
+			assets,
+		};
 	}
 
 	/**
@@ -109,27 +116,96 @@ export default class AssetsManager {
 	 *
 	 * @todo
 	 * - [x] Get all assets from the presence
-	 * - [ ] Get all assets from the cdn
+	 * - [x] Get all assets from the cdn
 	 * - [ ] Compare the assets from the presence with the assets from the cdn
 	 *
 	 * The update process should be as follows:
 	 * - [ ] Delete all assets that are no longer used
-	 * - [ ] Move assets to their new index
+	 * - [ ] Move assets to their new index (Upload to their new index, and delete the old index)
 	 * - [ ] Upload all new assets
 	 *
 	 */
-	getAssetsChanges(): {
+	async getAssetsChanges(): Promise<{
 		toBeUploaded: Map<string, string>;
 		toBeMoved: Map<string, string>;
 		toBeDeleted: Set<string>;
-	} {
-		const assets = this.getAllAssets();
+	}> {
+		const assets = this.allAssets,
+			cdnAssets = await this.getCdnAssets(),
+			result = {
+				toBeUploaded: new Map<string, string>(),
+				toBeMoved: new Map<string, string>(),
+				toBeDeleted: new Set<string>(),
+			};
+
+		if (!cdnAssets.logo) {
+			const newLogo = `${this.assetBaseUrl}/logo${this.getFileExtension(
+				assets.logo
+			)}`;
+			result.toBeUploaded.set(assets.logo, newLogo);
+		} else if (assets.logo !== cdnAssets.logo) {
+			const newLogo = `${this.assetBaseUrl}/logo${this.getFileExtension(
+				assets.logo
+			)}`;
+
+			//* If the logo has a different extension, delete the old logo
+			if (!this.canBePut(cdnAssets.logo, newLogo))
+				result.toBeDeleted.add(cdnAssets.logo);
+
+			result.toBeUploaded.set(newLogo, cdnAssets.logo);
+		}
+
+		if (!cdnAssets.thumbnail) {
+			const newThumbnail = `${
+				this.assetBaseUrl
+			}/thumbnail${this.getFileExtension(assets.thumbnail)}`;
+			result.toBeUploaded.set(assets.thumbnail, newThumbnail);
+		} else if (assets.thumbnail !== cdnAssets.thumbnail) {
+			const newThumbnail = `${
+				this.assetBaseUrl
+			}/thumbnail${this.getFileExtension(assets.thumbnail)}`;
+
+			//* If the thumbnail has a different extension, delete the old thumbnail
+			if (!this.canBePut(cdnAssets.thumbnail, newThumbnail))
+				result.toBeDeleted.add(cdnAssets.thumbnail);
+
+			result.toBeUploaded.set(newThumbnail, cdnAssets.thumbnail);
+		}
+
+		return result;
+	}
+
+	async getCdnAssets(): Promise<{
+		logo: string | false;
+		thumbnail: string | false;
+		assets: Map<number, string> | false;
+	}> {
+		const assets = new Map<number, string>();
+		let assetFound = true,
+			index = 0;
+		while (assetFound) {
+			const asset = await this.doesAssetExistAnyExtension(
+				`${this.assetBaseUrl}/${index}`
+			);
+			if (asset) {
+				assets.set(index, asset);
+				index++;
+			} else {
+				assetFound = false;
+			}
+		}
 
 		return {
-			toBeUploaded: new Map(),
-			toBeMoved: new Map(),
-			toBeDeleted: new Set(),
+			logo: await this.doesAssetExistAnyExtension(`${this.assetBaseUrl}/logo`),
+			thumbnail: await this.doesAssetExistAnyExtension(
+				`${this.assetBaseUrl}/thumbnail`
+			),
+			assets: assets.size ? assets : false,
 		};
+	}
+
+	canBePut(oldUrl: string, newUrl: string): boolean {
+		return this.getFileExtension(oldUrl) === this.getFileExtension(newUrl);
 	}
 
 	async doesAssetExist(url: string): Promise<boolean> {
@@ -137,6 +213,15 @@ export default class AssetsManager {
 			.head(url)
 			.then(() => true)
 			.catch(() => false);
+	}
+
+	async doesAssetExistAnyExtension(url: string): Promise<string | false> {
+		const extensions = [".png", ".jpg", ".jpeg", ".gif", ".webp"];
+		for (const extension of extensions) {
+			const newUrl = `${url}${extension}`;
+			if (await this.doesAssetExist(newUrl)) return newUrl;
+		}
+		return false;
 	}
 
 	async uploadAssets(assets: Map<string, string>) {
