@@ -6,18 +6,17 @@
 	},
 	"service": "Ngewibu",
 	"description": {
-		"en": "Watch anime with Indonesian subtitles easily."
+		"en": "Watch anime, tv shows, and korean drama with ease. Subtitle available in bahasa indonesia, thai, vietnamese, chinese, and english."
 	},
 	"url": "ngewibu.tv",
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/ZmylEPM.png",
-	"thumbnail": "https://i.imgur.com/mEef0Q3.png",
+	"logo": "https://i.imgur.com/UMRqZDd.png",
+	"thumbnail": "https://i.imgur.com/H39Ryap.png",
 	"color": "#2780e3",
 	"category": "anime",
 	"tags": [
 		"anime",
 		"videos",
-		"streaming",
-		"indonesia"
+		"streaming"
 	]
 }
