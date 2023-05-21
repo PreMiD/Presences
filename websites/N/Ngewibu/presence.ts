@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing shorts videos";
 		presenceData.state = `Page ${pathname.split("/")[2] || 1}`;
 		presenceData.smallImageKey = Assets.Viewing;
-		presenceData.buttons = [{ label: "View page", url: href }];
+		presenceData.buttons = [{ label: "View Page", url: href }];
 	} else if (pathname.includes("/jadwal-tayang")) {
 		presenceData.details = "Viewing jadwal tayang";
 		presenceData.state = document.querySelector(
