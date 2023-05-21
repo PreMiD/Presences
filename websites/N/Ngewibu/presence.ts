@@ -54,7 +54,6 @@ presence.on("UpdateData", async () => {
 	} else if (pathname === "/") {
 		presenceData.details = "Viewing home page";
 		presenceData.smallImageKey = Assets.Viewing;
-		presenceData.buttons = [{ label: "Viewing home page", url: href }];
 	} else if (pathname.includes("/anime")) {
 		presenceData.details = `Viewing Anime category ${
 			pathname.split("/")[2] || "semua"
