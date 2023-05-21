@@ -16,20 +16,20 @@ function pathIncludes(path: string, str: string) {
 }
 
 const enum Logos {
-	Paramount = "https://i.imgur.com/VWrl85V.jpg",
-	CBS = "https://i.imgur.com/BfxpVej.png",
-	BET = "https://i.imgur.com/SBl99Dz.png",
-	ComedyCentral = "https://i.imgur.com/936hLEE.png",
-	MTV = "https://i.imgur.com/uCpqd3d.png",
-	Nickelodeon = "https://i.imgur.com/SwkpkrM.png",
-	Smithsonian = "https://i.imgur.com/1TfaVpT.png",
+	Paramount = "https://i.imgur.com/4Z2Dwvc.jpg",
+	CBS = "https://i.imgur.com/EhhoDIU.png",
+	BET = "https://i.imgur.com/w5Z4KgD.png",
+	ComedyCentral = "https://i.imgur.com/Meq43i5.png",
+	MTV = "https://i.imgur.com/GfVqh8i.png",
+	Nickelodeon = "https://i.imgur.com/2m75sAU.jpg",
+	Smithsonian = "https://i.imgur.com/8xy0AaS.png",
 }
 
 presence.on("UpdateData", async () => {
 	let video: HTMLVideoElement = null;
 	const vidArea = document.querySelector(".video__player-area"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/VWrl85V.jpg",
+			largeImageKey: Logos.Paramount,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname: path } = document.location;
@@ -66,8 +66,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
-				presenceData.largeImageKey =
-					data.image || "https://i.imgur.com/VWrl85V.jpg";
+				presenceData.largeImageKey = data.image || Logos.Paramount;
 
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(video);
