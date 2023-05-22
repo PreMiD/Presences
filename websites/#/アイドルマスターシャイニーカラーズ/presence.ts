@@ -10,53 +10,55 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	const pathMap: Record<string, string> = {
-		"/home": "ホーム画面",
-		"/present": "プレゼント",
-		"/shop": "ショップ",
-		"/shop/skin": "衣装ショップ",
-		"/shop/game_event": "イベントショップ",
-		"/shop/money": "マニーショップ",
-		"/shop/piece": "ピースショップ",
-		"/shop/staff_item_point": "シールショップ",
-		"/shop/trade": "リサイクルショップ",
-		"/shop/monthly_passport": "283パスショップ",
-		"/shop/shiny_passport": "シャイニーパスショップ",
-		"/item": "アイテム一覧",
-		"/album": "アルバムを閲覧中",
-		"/homeDeck": "ホームユニットを編集中",
-		"/comic": "4コマ漫画を閲覧中",
-		"/profile": "プロフィールを閲覧中",
-		"/gasha": "ガシャ",
-		"/idolPortal": "アイドル",
-		"/unit": "ユニット編成",
-		"/training": "トレーニング",
-		"/evolution": "特訓",
-		"/exSkill": "Exスキル",
-		"/idolRoad": "アイドルロード",
-		"/idolList": "アイドル一覧",
-		"/producerDesk": "Pデスク",
-		"/producerLevel": "Pレベル",
-		"/mission": "ミッションを閲覧中",
-		"/workActivity": "営業",
-		"/produceReady": "プロデュース準備中",
-		"/produce": "プロデュース中",
-		"/autoPlaySchedule": "オートスケジュール設定中",
-		"/matchLiveTop": "マッチライブ",
-		"/matchLiveReady": "マッチライブ準備中",
-		"/matchLiveConcert": "マッチライブをプレイ中",
-		"/fesTop": "フェス",
-		"/fesReady": "フェス準備中",
-		"/fesMatchConcert": "グレードフェスをプレイ中",
-		"/jewelCounter": "フェザージュエルミッション",
-		"/help": "ヘルプを閲覧中",
+	const pathMap: Record<string, PresenceData> = {
+		"/home": { details: "ホーム画面" },
+		"/present": { details: "プレゼント" },
+		"/shop": { details: "ショップ" },
+		"/shop/skin": { details: "衣装ショップ" },
+		"/shop/game_event": { details: "イベントショップ" },
+		"/shop/money": { details: "マニーショップ" },
+		"/shop/piece": { details: "ピースショップ" },
+		"/shop/staff_item_point": { details: "シールショップ" },
+		"/shop/trade": { details: "リサイクルショップ" },
+		"/shop/monthly_passport": { details: "283パスショップ" },
+		"/shop/shiny_passport": { details: "シャイニーパスショップ" },
+		"/item": { details: "アイテム一覧" },
+		"/album": { details: "アルバムを閲覧中" },
+		"/homeDeck": { details: "ホームユニットを編集中" },
+		"/comic": { details: "4コマ漫画を閲覧中" },
+		"/profile": { details: "プロフィールを閲覧中" },
+		"/gasha": { details: "ガシャ" },
+		"/idolPortal": { details: "アイドル" },
+		"/unit": { details: "ユニット編成" },
+		"/training": { details: "トレーニング" },
+		"/evolution": { details: "特訓" },
+		"/exSkill": { details: "Exスキル" },
+		"/idolRoad": { details: "アイドルロード" },
+		"/idolList": { details: "アイドル一覧" },
+		"/producerDesk": { details: "Pデスク" },
+		"/producerLevel": { details: "Pレベル" },
+		"/mission": { details: "ミッションを閲覧中" },
+		"/workActivity": { details: "営業" },
+		"/produceReady": { details: "プロデュース準備中" },
+		"/produce": { details: "プロデュース中" },
+		"/autoPlaySchedule": { details: "オートプロデュース設定中" },
+		"/matchLiveTop": { details: "マッチライブ" },
+		"/matchLiveReady": { details: "マッチライブ準備中" },
+		"/matchLiveConcert": { details: "マッチライブをプレイ中" },
+		"/fesTop": { details: "フェス" },
+		"/fesConcert": { details: "フェスリハーサルをプレイ中" },
+		"/fesReady": { details: "フェス準備中" },
+		"/fesMatchConcert": { details: "グレードフェスをプレイ中" },
+		"/jewelCounter": { details: "フェザージュエルミッション" },
+		"/help": { details: "ヘルプを閲覧中" },
+		// シャニマスをプレイ中のデフォルトの設定
+		default: { details: "シャニマスをプレイ中" },
 	};
 
-	const { pathname } = window.location;
+	const { pathname } = document.location;
 
-	presenceData.details = pathMap[pathname] || "シャニマスをプレイ中";
+	presenceData.details = pathMap[pathname]?.details || "シャニマスをプレイ中";
 	if (pathname.includes("/idolAlbum/")) {
-		const idolNumber = Number(pathname.split("/")[2]);
 		const idolNames = [
 			"真乃",
 			"灯織",
@@ -85,7 +87,9 @@ presence.on("UpdateData", async () => {
 			"美琴",
 			"ルカ",
 		];
-		presenceData.details = `${idolNames[idolNumber - 1]}のアルバムを閲覧中`;
+		presenceData.details = `${
+			idolNames[Number(pathname.split("/")[2]) - 1]
+		}のアルバムを閲覧中`;
 	}
 
 	presence.setActivity(presenceData);
