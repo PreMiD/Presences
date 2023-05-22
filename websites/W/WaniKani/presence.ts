@@ -137,8 +137,9 @@ presence.on("UpdateData", () => {
 				}
 				case "/subjects/extra_study": {
 					presenceData.details = `Doing ${
-						document.querySelector<HTMLDivElement>("#menu-bar-title")
-							.textContent
+						document.querySelector<HTMLDivElement>(
+							".character-header__menu-title"
+						).textContent
 					}`;
 					Object.assign(presenceData, getReviewPresence());
 					break;
