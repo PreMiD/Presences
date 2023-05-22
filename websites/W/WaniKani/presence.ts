@@ -157,9 +157,9 @@ presence.on("UpdateData", () => {
 				}
 				case (pathname.match(/^\/subjects\/\d+\/lesson$/) || {}).input: {
 					presenceData.details = "Learning Lessons";
-					const totalStats = document.querySelector<HTMLDivElement>(
-						'[data-controller="subject-count-statistics"]'
-					).children;
+					const totalStats = document.querySelectorAll<HTMLDivElement>(
+						'[data-controller="subject-count-statistics"] [data-subject-count-statistics-target="count"]'
+					);
 					presenceData.state = `${
 						document.querySelector<HTMLDivElement>(
 							'[data-quiz-header-target="characters"]'
