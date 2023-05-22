@@ -393,8 +393,33 @@ import oriflamme from "./O/oriflamme";
 import origin from "./O/origin";
 import oust from "./O/oust";
 import outlaws from "./O/outlaws";
+import painttheroses from "./P/painttheroses";
+import palace from "./P/palace";
+import pandemic from "./P/pandemic";
+import paniclab from "./P/paniclab";
+import papayoo from "./P/papayoo";
+import parisconnection from "./P/parisconnection";
+import parks from "./P/parks";
 import patchwork from "./P/patchwork";
+import pedro from "./P/pedro";
+import penaltychallenge from "./P/penaltychallenge";
+import pennypress from "./P/pennypress";
+import pente from "./P/pente";
+import phat from "./P/phat";
+import photosynthesis from "./P/photosynthesis";
+import pi from "./P/pi";
+import piereighteen from "./P/piereighteen";
+import pingimus from "./P/pingimus";
+import piratenkapern from "./P/piratenkapern";
+import polis from "./P/polis";
+import pontedeldiavolo from "./P/pontedeldiavolo";
 import potionexplosion from "./P/potionexplosion";
+import president from "./P/president";
+import puertorico from "./P/puertorico";
+import pugsinmugs from "./P/pugsinmugs";
+import pylos from "./P/pylos";
+import pyramidpoker from "./P/pyramidpoker";
+import pyrgos from "./P/pyrgos";
 import raceforthegalaxy from "./R/raceforthegalaxy";
 import sechsnimmt from "./S/sechsnimmt";
 import sevenwonders from "./S/sevenwonders";
@@ -810,8 +835,33 @@ const games: Record<string, GamePresence> = {
 	origin,
 	oust,
 	outlaws,
+	painttheroses,
+	palace,
+	pandemic,
+	paniclab,
+	papayoo,
+	parisconnection,
+	parks,
 	patchwork,
+	pedro,
+	penaltychallenge,
+	pennypress,
+	pente,
+	phat,
+	photosynthesis,
+	pi,
+	piereighteen,
+	pingimus,
+	piratenkapern,
+	polis,
+	pontedeldiavolo,
 	potionexplosion,
+	president,
+	puertorico,
+	pugsinmugs,
+	pylos,
+	pyramidpoker,
+	pyrgos,
 	raceforthegalaxy,
 	sechsnimmt,
 	sevenwonders,
