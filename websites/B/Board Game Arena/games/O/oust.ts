@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const oust: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/Q70AdBF.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,101 +23,11 @@ const oust: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
 				case "placeChecker":
-					/*
-					{
-	"name": "placeChecker",
-	"description": "${actplayer} must place a checker.",
-	"descriptionmyturn": "${you} must place a checker.",
-	"type": "activeplayer",
-	"args": "argPlaceChecker",
-	"possibleactions": [
-		"placeChecker"
-	],
-	"transitions": {
-		"placeNonCapturingChecker": 4,
-		"cantPlay": 4,
-		"placeCapturingChecker": 2,
-		"firstMoveChoice": 12,
-		"zombiePass": 4,
-		"endGame": 99
-	}
-}
-					*/
-					break;
-				case "nextPlayer":
-					/*
-					{
-	"name": "nextPlayer",
-	"type": "game",
-	"action": "stNextPlayer",
-	"updateGameProgression": true,
-	"transitions": {
-		"nextTurn": 2,
-		"cantPlay": 4,
-		"endGame": 99
-	}
-}
-					*/
-					break;
-				case "nextPlayerFirstMove":
-					/*
-					{
-	"name": "nextPlayerFirstMove",
-	"type": "game",
-	"action": "stNextPlayerFirstMove",
-	"updateGameProgression": true,
-	"transitions": {
-		"placeNonCapturingChecker": 4,
-		"firstMoveChoice": 13
-	}
-}
-					*/
+					data.state = "Placing a checker";
 					break;
 				case "firstMoveChoice":
-					/*
-					{
-	"name": "firstMoveChoice",
-	"description": "${actplayer} may choose to switch colors and keep your first move as their own.",
-	"descriptionmyturn": "${you} can switch colors and keep your opponents first move as your own.  Or just play on with your current color.",
-	"type": "activeplayer",
-	"args": "argPlaceChecker",
-	"possibleactions": [
-		"chooseFirstMove",
-		"placeChecker"
-	],
-	"transitions": {
-		"nextTurn": 4,
-		"placeCapturingChecker": 2,
-		"placeNonCapturingChecker": 4,
-		"endGame": 99
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Choosing to switch colors";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

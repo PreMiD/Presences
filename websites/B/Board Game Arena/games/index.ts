@@ -381,6 +381,18 @@ import novaluna from "./N/novaluna";
 import numberdrop from "./N/numberdrop";
 import nxs from "./N/nxs";
 import nylonppong from "./N/nylonppong";
+import oasis from "./O/oasis";
+import obsession from "./O/obsession";
+import offtherails from "./O/offtherails";
+import ohhell from "./O/ohhell";
+import ohseven from "./O/ohseven";
+import onceuponaforest from "./O/onceuponaforest";
+import one from "./O/one";
+import onitama from "./O/onitama";
+import oriflamme from "./O/oriflamme";
+import origin from "./O/origin";
+import oust from "./O/oust";
+import outlaws from "./O/outlaws";
 import patchwork from "./P/patchwork";
 import potionexplosion from "./P/potionexplosion";
 import raceforthegalaxy from "./R/raceforthegalaxy";
@@ -786,6 +798,18 @@ const games: Record<string, GamePresence> = {
 	numberdrop,
 	nxs,
 	nylonppong,
+	oasis,
+	obsession,
+	offtherails,
+	ohhell,
+	ohseven,
+	onceuponaforest,
+	one,
+	onitama,
+	oriflamme,
+	origin,
+	oust,
+	outlaws,
 	patchwork,
 	potionexplosion,
 	raceforthegalaxy,
