@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "https://i.imgur.com/ue8EatG.jpg",
   };
 
-  const { pathname } = window.location;
+  const { pathname } = document.location;
 
   if (pathname === "/home") {
     presenceData.details = "ホーム画面";
