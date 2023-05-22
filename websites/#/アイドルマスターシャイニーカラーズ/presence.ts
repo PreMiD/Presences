@@ -6,6 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "https://i.imgur.com/YfaIAPE.png",
+    startTimestamp: browsingTimestamp,
   };
 
   const { pathname } = document.location;
@@ -127,8 +128,6 @@ presence.on("UpdateData", async () => {
   } else {
     presenceData.details = "シャニマスをプレイ中";
   }
-
-  presenceData.startTimestamp = browsingTimestamp;
 
   presence.setActivity(presenceData);
 });
