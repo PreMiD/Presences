@@ -326,6 +326,38 @@ import lox from "./L/lox";
 import luckynumbers from "./L/luckynumbers";
 import lumen from "./L/lumen";
 import luxor from "./L/luxor";
+import machiavelli from "./M/machiavelli";
+import madeira from "./M/madeira";
+import mammalath from "./M/mammalath";
+import mapmaker from "./M/mapmaker";
+import marcopolo from "./M/marcopolo";
+import marcopolotwo from "./M/marcopolotwo";
+import marrakech from "./M/marrakech";
+import marram from "./M/marram";
+import martiandice from "./M/martiandice";
+import mascarade from "./M/mascarade";
+import mattock from "./M/mattock";
+import meadow from "./M/meadow";
+import mechadream from "./M/mechadream";
+import medina from "./M/medina";
+import megalomania from "./M/megalomania";
+import memoir from "./M/memoir";
+import mercadodelisboaste from "./M/mercadodelisboaste";
+import meridians from "./M/meridians";
+import metromaniab from "./M/metromaniab";
+import microdojo from "./M/microdojo";
+import mijnlieff from "./M/mijnlieff";
+import mindup from "./M/mindup";
+import minhwatu from "./M/minhwatu";
+import modten from "./M/modten";
+import monsterfactory from "./M/monsterfactory";
+import morocco from "./M/morocco";
+import mow from "./M/mow";
+import mrjack from "./M/mrjack";
+import murusgallicus from "./M/murusgallicus";
+import mycity from "./M/mycity";
+import myfirstcastlepanic from "./M/myfirstcastlepanic";
+import myshelfie from "./M/myshelfie";
 import patchwork from "./P/patchwork";
 import potionexplosion from "./P/potionexplosion";
 import raceforthegalaxy from "./R/raceforthegalaxy";
@@ -676,6 +708,38 @@ const games: Record<string, GamePresence> = {
 	luckynumbers,
 	lumen,
 	luxor,
+	machiavelli,
+	madeira,
+	mammalath,
+	mapmaker,
+	marcopolo,
+	marcopolotwo,
+	marrakech,
+	marram,
+	martiandice,
+	mascarade,
+	mattock,
+	meadow,
+	mechadream,
+	medina,
+	megalomania,
+	memoir,
+	mercadodelisboaste,
+	meridians,
+	metromaniab,
+	microdojo,
+	mijnlieff,
+	mindup,
+	minhwatu,
+	modten,
+	monsterfactory,
+	morocco,
+	mow,
+	mrjack,
+	murusgallicus,
+	mycity,
+	myfirstcastlepanic,
+	myshelfie,
 	patchwork,
 	potionexplosion,
 	raceforthegalaxy,
