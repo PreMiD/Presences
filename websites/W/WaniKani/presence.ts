@@ -149,31 +149,35 @@ presence.on("UpdateData", () => {
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
+				case "/subjectss/lesson/quiz": {
+					presenceData.details = "Practicing Lessons";
+					Object.assign(presenceData, getReviewPresence());
+					break;
+				}
 				case (pathname.match(/^\/subjects\/\d+\/lesson$/) || {}).input: {
-					try {
-						const totalStats = document.querySelectorAll("#stats li > span");
-						presenceData.details = "Learning Lessons";
-						presenceData.state = `${
-							document.querySelector<HTMLDivElement>("#character").textContent
-						} - ${
-							document.querySelector<HTMLDivElement>("#meaning").textContent
-						}`;
-						presenceData.smallImageKey = getTypeAsset(
-							document.querySelector<HTMLDivElement>("#main-info").className
-						);
-						presenceData.smallImageText = `${
-							totalStats[0].textContent
-						} radicals | ${totalStats[1].textContent} kanji | ${
-							totalStats[2].textContent
-						} vocab | ${
-							document.querySelector<HTMLSpanElement>("#completed-count")
-								.textContent
-						} complete`;
-					} catch (err) {
-						// Likely practicing
-						presenceData.details = "Practicing Lessons";
-						Object.assign(presenceData, getReviewPresence());
-					}
+					presenceData.details = "Learning Lessons";
+					const totalStats = document.querySelector<HTMLDivElement>(
+						'[data-controller="subject-count-statistics"]'
+					).children;
+					presenceData.state = `${
+						document.querySelector<HTMLDivElement>(
+							'[data-quiz-header-target="characters"]'
+						).textContent
+					} - ${
+						document.querySelector<HTMLDivElement>(
+							'[data-quiz-header-target="meaning"]'
+						).textContent
+					}`;
+					presenceData.smallImageKey = getTypeAsset(
+						[
+							...document.querySelector<HTMLDivElement>(
+								'[data-quiz-header-base-class="character-header"]'
+							).classList,
+						]
+							.find(cls => cls.startsWith("character-header--"))
+							.split("--")[1]
+					);
+					presenceData.smallImageText = `${totalStats[0].textContent} radicals | ${totalStats[1].textContent} kanji | ${totalStats[2].textContent} vocab`;
 					break;
 				}
 				case (pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/) || {})
