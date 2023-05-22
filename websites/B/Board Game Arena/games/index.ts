@@ -361,6 +361,26 @@ import myshelfie from "./M/myshelfie";
 import nangaparbat from "./N/nangaparbat";
 import narabi from "./N/narabi";
 import nautilus from "./N/nautilus";
+import neutreeko from "./N/neutreeko";
+import newfrontiers from "./N/newfrontiers";
+import nextstation from "./N/nextstation";
+import niagara from "./N/niagara";
+import nicodemus from "./N/nicodemus";
+import nidavellir from "./N/nidavellir";
+import ninemensmorris from "./N/ninemensmorris";
+import ninetynine from "./N/ninetynine";
+import ninetynineaddition from "./N/ninetynineaddition";
+import nippon from "./N/nippon";
+import noah from "./N/noah";
+import noirkvi from "./N/noirkvi";
+import noneshallpass from "./N/noneshallpass";
+import northwestpassage from "./N/northwestpassage";
+import notalone from "./N/notalone";
+import nothanks from "./N/nothanks";
+import novaluna from "./N/novaluna";
+import numberdrop from "./N/numberdrop";
+import nxs from "./N/nxs";
+import nylonppong from "./N/nylonppong";
 import patchwork from "./P/patchwork";
 import potionexplosion from "./P/potionexplosion";
 import raceforthegalaxy from "./R/raceforthegalaxy";
@@ -746,6 +766,26 @@ const games: Record<string, GamePresence> = {
 	nangaparbat,
 	narabi,
 	nautilus,
+	neutreeko,
+	newfrontiers,
+	nextstation,
+	niagara,
+	nicodemus,
+	nidavellir,
+	ninemensmorris,
+	ninetynine,
+	ninetynineaddition,
+	nippon,
+	noah,
+	noirkvi,
+	noneshallpass,
+	northwestpassage,
+	notalone,
+	nothanks,
+	novaluna,
+	numberdrop,
+	nxs,
+	nylonppong,
 	patchwork,
 	potionexplosion,
 	raceforthegalaxy,
