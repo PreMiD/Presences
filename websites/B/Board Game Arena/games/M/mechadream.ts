@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const mechadream: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/qu4yPah.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

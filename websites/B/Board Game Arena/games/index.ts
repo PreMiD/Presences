@@ -358,6 +358,9 @@ import murusgallicus from "./M/murusgallicus";
 import mycity from "./M/mycity";
 import myfirstcastlepanic from "./M/myfirstcastlepanic";
 import myshelfie from "./M/myshelfie";
+import nangaparbat from "./N/nangaparbat";
+import narabi from "./N/narabi";
+import nautilus from "./N/nautilus";
 import patchwork from "./P/patchwork";
 import potionexplosion from "./P/potionexplosion";
 import raceforthegalaxy from "./R/raceforthegalaxy";
@@ -740,6 +743,9 @@ const games: Record<string, GamePresence> = {
 	mycity,
 	myfirstcastlepanic,
 	myshelfie,
+	nangaparbat,
+	narabi,
+	nautilus,
 	patchwork,
 	potionexplosion,
 	raceforthegalaxy,
