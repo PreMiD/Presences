@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const rollandbump: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/ATXskg9.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,73 +23,8 @@ const rollandbump: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
-				case "initTurn":
-					/*
-					{
-	"name": "initTurn",
-	"type": "manager",
-	"action": "stInitTurn",
-	"transitions": {
-		"startTurn": 10,
-		"endGame": 99
-	}
-}
-					*/
-					break;
 				case "playerTurn":
-					/*
-					{
-	"name": "playerTurn",
-	"description": "${actplayer} has ${rerolls} reroll(s) left",
-	"descriptionmyturn": "",
-	"type": "activeplayer",
-	"args": "arg_playerTurn",
-	"possibleactions": [
-		"reroll",
-		"place"
-	],
-	"transitions": {
-		"reroll": 10,
-		"dicePlaced": 20
-	}
-}
-					*/
-					break;
-				case "afterPlay":
-					/*
-					{
-	"name": "afterPlay",
-	"type": "manager",
-	"action": "stAfterPlay",
-	"transitions": {
-		"nextPlayer": 2
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Rolling dice";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

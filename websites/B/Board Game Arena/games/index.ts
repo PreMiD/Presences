@@ -428,6 +428,37 @@ import quetzal from "./Q/quetzal";
 import quinque from "./Q/quinque";
 import quoridor from "./Q/quoridor";
 import raceforthegalaxy from "./R/raceforthegalaxy";
+import rage from "./R/rage";
+import railroadink from "./R/railroadink";
+import railwaysoftheworld from "./R/railwaysoftheworld";
+import rainbow from "./R/rainbow";
+import rainforest from "./R/rainforest";
+import rallymangt from "./R/rallymangt";
+import raubbau from "./R/raubbau";
+import rauha from "./R/rauha";
+import redsevengame from "./R/redsevengame";
+import redstone from "./R/redstone";
+import reflectionsinthelookingglass from "./R/reflectionsinthelookingglass";
+import regicide from "./R/regicide";
+import regidice from "./R/regidice";
+import rememberwhen from "./R/rememberwhen";
+import resarcana from "./R/resarcana";
+import restinpeace from "./R/restinpeace";
+import reversi from "./R/reversi";
+import riftvalleyreserve from "./R/riftvalleyreserve";
+import riichimahjong from "./R/riichimahjong";
+import rive from "./R/rive";
+import robotsateourpizza from "./R/robotsateourpizza";
+import rollandbump from "./R/rollandbump";
+import rolledwest from "./R/rolledwest";
+import rollforthegalaxy from "./R/rollforthegalaxy";
+import rollingpins from "./R/rollingpins";
+import rollintotown from "./R/rollintotown";
+import rolltothetopjourneys from "./R/rolltothetopjourneys";
+import roomtwentyfive from "./R/roomtwentyfive";
+import roppyakken from "./R/roppyakken";
+import ruhr from "./R/ruhr";
+import russianrailroads from "./R/russianrailroads";
 import sechsnimmt from "./S/sechsnimmt";
 import sevenwonders from "./S/sevenwonders";
 import sevenwondersarchitects from "./S/sevenwondersarchitects";
@@ -877,6 +908,37 @@ const games: Record<string, GamePresence> = {
 	quinque,
 	quoridor,
 	raceforthegalaxy,
+	rage,
+	railroadink,
+	railwaysoftheworld,
+	rainbow,
+	rainforest,
+	rallymangt,
+	raubbau,
+	rauha,
+	redsevengame,
+	redstone,
+	reflectionsinthelookingglass,
+	regicide,
+	regidice,
+	rememberwhen,
+	resarcana,
+	restinpeace,
+	reversi,
+	riftvalleyreserve,
+	riichimahjong,
+	rive,
+	robotsateourpizza,
+	rollandbump,
+	rolledwest,
+	rollforthegalaxy,
+	rollingpins,
+	rollintotown,
+	rolltothetopjourneys,
+	roomtwentyfive,
+	roppyakken,
+	ruhr,
+	russianrailroads,
 	sechsnimmt,
 	sevenwonders,
 	sevenwondersarchitects,
