@@ -42,6 +42,42 @@ function getTypeAsset(string: string) {
 	}
 }
 
+function getReviewPresence(): PresenceData {
+	const data: PresenceData = {},
+		characterType = [
+			...document.querySelector<HTMLDivElement>(
+				'[data-quiz-header-base-class="character-header"]'
+			).classList,
+		]
+			.find(cls => cls.startsWith("character-header--"))
+			.split("--")[1];
+
+	data.state = `${
+		document.querySelector<HTMLDivElement>(
+			'[data-quiz-header-target="characters"]'
+		).textContent
+	} | ${capitalize(characterType)} ${capitalize(
+		document.querySelector<HTMLDivElement>(
+			'[data-quiz-input-target="questionTypeContainer"]'
+		).dataset.questionType
+	)}`;
+	data.smallImageText = `${
+		document.querySelector<HTMLDivElement>(
+			'[data-quiz-statistics-target="completeCount"]'
+		).textContent
+	} complete, ${
+		document.querySelector<HTMLDivElement>(
+			'[data-quiz-statistics-target="remainingCount"]'
+		).textContent
+	} remaining. (${
+		document.querySelector<HTMLDivElement>(
+			'[data-quiz-statistics-target="percentCorrect"]'
+		).textContent
+	}%)`;
+	data.smallImageKey = getTypeAsset(characterType);
+	return data;
+}
+
 presence.on("UpdateData", () => {
 	const { hostname, pathname } = document.location,
 		presenceData: PresenceData = {
@@ -100,53 +136,19 @@ presence.on("UpdateData", () => {
 					break;
 				}
 				case "/subjects/extra_study": {
-					const characterElement =
-							document.querySelector<HTMLDivElement>("#character"),
-						characterType = characterElement.className;
 					presenceData.details = `Doing ${
 						document.querySelector<HTMLDivElement>("#menu-bar-title")
 							.textContent
 					}`;
-					presenceData.state = `${characterElement.textContent} | ${capitalize(
-						characterType
-					)} ${capitalize(
-						document.querySelector<HTMLDivElement>("#question-type").className
-					)}`;
-					presenceData.smallImageText = `${
-						document.querySelector<HTMLSpanElement>("#completed-count")
-							.textContent
-					} complete, ${
-						document.querySelector<HTMLSpanElement>("#available-count")
-							.textContent
-					} remaining. (${
-						document.querySelector<HTMLSpanElement>("#correct-rate").textContent
-					}%)`;
-					presenceData.smallImageKey = getTypeAsset(characterType);
+					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
 				case "/subjects/review": {
-					const characterElement =
-							document.querySelector<HTMLDivElement>("#character"),
-						characterType = characterElement.className;
 					presenceData.details = "Doing Reviews";
-					presenceData.state = `${characterElement.textContent} | ${capitalize(
-						characterType
-					)} ${capitalize(
-						document.querySelector<HTMLDivElement>("#question-type").className
-					)}`;
-					presenceData.smallImageText = `${
-						document.querySelector<HTMLSpanElement>("#completed-count")
-							.textContent
-					} complete, ${
-						document.querySelector<HTMLSpanElement>("#available-count")
-							.textContent
-					} remaining. (${
-						document.querySelector<HTMLSpanElement>("#correct-rate").textContent
-					}%)`;
-					presenceData.smallImageKey = getTypeAsset(characterType);
+					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
-				case "/subjects/lesson": {
+				case (pathname.match(/^\/subjects\/\d+\/lesson$/) || {}).input: {
 					try {
 						const totalStats = document.querySelectorAll("#stats li > span");
 						presenceData.details = "Learning Lessons";
@@ -168,24 +170,8 @@ presence.on("UpdateData", () => {
 						} complete`;
 					} catch (err) {
 						// Likely practicing
-						const characterType =
-								document.querySelector<HTMLDivElement>("#main-info").className,
-							totalStats = document.querySelectorAll("#stats li > span");
 						presenceData.details = "Practicing Lessons";
-						presenceData.state = `${
-							document.querySelector<HTMLDivElement>("#character").textContent
-						} | ${capitalize(characterType)} ${capitalize(
-							document.querySelector<HTMLDivElement>("#question-type").className
-						)}`;
-						presenceData.smallImageKey = getTypeAsset(characterType);
-						presenceData.smallImageText = `${
-							totalStats[0].textContent
-						} radicals | ${totalStats[1].textContent} kanji | ${
-							totalStats[2].textContent
-						} vocab | ${
-							document.querySelector<HTMLSpanElement>("#completed-count")
-								.textContent
-						} complete`;
+						Object.assign(presenceData, getReviewPresence());
 					}
 					break;
 				}
