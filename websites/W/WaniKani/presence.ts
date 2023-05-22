@@ -3,23 +3,6 @@ const presence: Presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-function capitalize(string: string) {
-	return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function getTypeAsset(string: string) {
-	switch (string.toLowerCase()) {
-		case "kanji":
-			return Assets.Kanji;
-		case "radical":
-			return Assets.Radical;
-		case "vocabulary":
-			return Assets.Vocabulary;
-		default:
-			return null;
-	}
-}
-
 const enum Assets {
 	Logo = "https://i.imgur.com/NdlB8M5.png",
 	Avatar = "https://i.imgur.com/WktQVUN.png",
@@ -40,6 +23,23 @@ const enum Assets {
 	Reviews250 = "https://i.imgur.com/t5bywqD.png",
 	Reviews500 = "https://i.imgur.com/5ZzUjZC.png",
 	Reviews1000 = "https://i.imgur.com/FANzfMN.png",
+}
+
+function capitalize(string: string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getTypeAsset(string: string) {
+	switch (string.toLowerCase()) {
+		case "kanji":
+			return Assets.Kanji;
+		case "radical":
+			return Assets.Radical;
+		case "vocabulary":
+			return Assets.Vocabulary;
+		default:
+			return null;
+	}
 }
 
 presence.on("UpdateData", () => {
