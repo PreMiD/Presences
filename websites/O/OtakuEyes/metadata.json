@@ -15,7 +15,11 @@
 	"thumbnail": "https://i.imgur.com/YghSpe1.png",
 	"color": "#065d51",
 	"category": "anime",
-	"tags": ["anime", "video", "streaming"],
+	"tags": [
+		"anime",
+		"video",
+		"streaming"
+	],
 	"settings": [
 		{
 			"id": "cover",
