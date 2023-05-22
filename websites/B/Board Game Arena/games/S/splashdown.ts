@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const splashdown: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/n0zhJlv.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,95 +23,8 @@ const splashdown: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
 				case "playerTurn":
-					/*
-					{
-	"name": "playerTurn",
-	"description": "${actplayer} must roll the dice.",
-	"descriptionmyturn": "${you} must roll the dice. Click the dice, or press the button.",
-	"possibleactions": [
-		"diceRoll",
-		"pickPad",
-		"dunk",
-		"pass"
-	],
-	"type": "activeplayer",
-	"transitions": {
-		"nextPlayer": 3,
-		"zombiePass": 97,
-		"finalise": 98
-	},
-	"args": "argPlayerTurn"
-}
-					*/
-					break;
-				case "nextPlayer":
-					/*
-					{
-	"name": "nextPlayer",
-	"type": "game",
-	"action": "stNextPlayer",
-	"updateGameProgression": true,
-	"transitions": {
-		"nextPlayer": 2,
-		"pass": 3,
-		"zombiePass": 97,
-		"finalise": 98
-	}
-}
-					*/
-					break;
-				case "zombiePass":
-					/*
-					{
-	"name": "zombiePass",
-	"description": "",
-	"type": "game",
-	"action": "stZombie",
-	"transitions": {
-		"nextPlayer": 3
-	}
-}
-					*/
-					break;
-				case "finalise":
-					/*
-					{
-	"name": "finalise",
-	"description": "",
-	"type": "game",
-	"action": "stFinalise",
-	"updateGameProgression": true,
-	"transitions": {
-		"gameEnd": 99
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"updateGameProgression": true,
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Rolling the dice";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const spiritsoftheforest: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/pXGb1hO.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,102 +23,14 @@ const spiritsoftheforest: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "Game setup",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 20
-	}
-}
-					*/
-					break;
 				case "take_tile":
-					/*
-					{
-	"name": "take_tile",
-	"description": "${actplayer} must take a spirit tile",
-	"descriptionmyturn": "${you} must take a spirit tile",
-	"args": "argsTakeTile",
-	"type": "activeplayer",
-	"possibleactions": [
-		"takeTile",
-		"passTile",
-		"playToken"
-	],
-	"transitions": {
-		"takeTile": 20,
-		"discardGemstone": 40,
-		"zombiePass": 50,
-		"checkFinish": 50
-	}
-}
-					*/
+					data.state = "Taking a spirit tile";
 					break;
 				case "place_gemstone":
-					/*
-					{
-	"name": "place_gemstone",
-	"description": "${actplayer} may place/move a gemstone, or end move",
-	"descriptionmyturn": "${you} may place/move a gemstone, or",
-	"args": "argsPlaceGemstone",
-	"type": "activeplayer",
-	"possibleactions": [
-		"placeGemstone",
-		"pass",
-		"playToken"
-	],
-	"transitions": {
-		"checkFinish": 50
-	}
-}
-					*/
+					data.state = "Placing a gemstone";
 					break;
 				case "discard_gemstone":
-					/*
-					{
-	"name": "discard_gemstone",
-	"description": "${actplayer} must discard a gemstone",
-	"descriptionmyturn": "${you} must discard a gemstone",
-	"args": "argsDiscardGemstone",
-	"type": "activeplayer",
-	"possibleactions": [
-		"discardGemstone"
-	],
-	"transitions": {
-		"checkFinish": 50
-	}
-}
-					*/
-					break;
-				case "check_finish":
-					/*
-					{
-	"name": "check_finish",
-	"type": "game",
-	"action": "stCheckFinish",
-	"updateGameProgression": true,
-	"transitions": {
-		"takeTile": 20,
-		"placeGemstone": 30,
-		"finish": 99
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Discarding a gemstone";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

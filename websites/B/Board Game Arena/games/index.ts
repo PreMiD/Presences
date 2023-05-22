@@ -459,14 +459,74 @@ import roomtwentyfive from "./R/roomtwentyfive";
 import roppyakken from "./R/roppyakken";
 import ruhr from "./R/ruhr";
 import russianrailroads from "./R/russianrailroads";
+import saboteur from "./S/saboteur";
+import saintpetersburg from "./S/saintpetersburg";
+import saintpoker from "./S/saintpoker";
+import sakura from "./S/sakura";
+import samarkand from "./S/samarkand";
+import santorini from "./S/santorini";
+import sapiens from "./S/sapiens";
+import sasaki from "./S/sasaki";
+import schroedingerscats from "./S/schroedingerscats";
+import scopa from "./S/scopa";
+import seasaltpaper from "./S/seasaltpaper";
+import seasons from "./S/seasons";
 import sechsnimmt from "./S/sechsnimmt";
+import secretmoon from "./S/secretmoon";
+import seikatsu from "./S/seikatsu";
+import senet from "./S/senet";
+import sensei from "./S/sensei";
+import senshi from "./S/senshi";
+import seotda from "./S/seotda";
+import setup from "./S/setup";
+import sevens from "./S/sevens";
 import sevenwonders from "./S/sevenwonders";
 import sevenwondersarchitects from "./S/sevenwondersarchitects";
 import sevenwondersduel from "./S/sevenwondersduel";
+import sheepboombah from "./S/sheepboombah";
+import shiftingstones from "./S/shiftingstones";
+import siam from "./S/siam";
+import signorie from "./S/signorie";
+import silo from "./S/silo";
+import similo from "./S/similo";
+import simplicity from "./S/simplicity";
+import sixtyone from "./S/sixtyone";
+import skat from "./S/skat";
+import skull from "./S/skull";
+import smallislands from "./S/smallislands";
+import sobek from "./S/sobek";
+import sobektwoplayers from "./S/sobektwoplayers";
+import solarstorm from "./S/solarstorm";
+import solo from "./S/solo";
+import solowhist from "./S/solowhist";
+import soluna from "./S/soluna";
+import soulaween from "./S/soulaween";
 import spacebase from "./S/spacebase";
+import spaceempires from "./S/spaceempires";
+import spacestationphoenix from "./S/spacestationphoenix";
+import spades from "./S/spades";
+import sparts from "./S/sparts";
+import spiritsoftheforest from "./S/spiritsoftheforest";
+import spiteandmalice from "./S/spiteandmalice";
+import splashdown from "./S/splashdown";
 import splendor from "./S/splendor";
+import splito from "./S/splito";
+import splits from "./S/splits";
 import spots from "./S/spots";
+import spyrium from "./S/spyrium";
+import squadro from "./S/squadro";
+import starfluxx from "./S/starfluxx";
+import steamrollers from "./S/steamrollers";
+import steamworks from "./S/steamworks";
+import stella from "./S/stella";
+import stirfryeighteen from "./S/stirfryeighteen";
+import stockpile from "./S/stockpile";
 import stoneage from "./S/stoneage";
+import strands from "./S/strands";
+import streets from "./S/streets";
+import superfantasybrawl from "./S/superfantasybrawl";
+import sushigo from "./S/sushigo";
+import sushigoparty from "./S/sushigoparty";
 import tickettoride from "./T/tickettoride";
 import welcometo from "./W/welcometo";
 import wingspan from "./W/wingspan";
@@ -939,14 +999,74 @@ const games: Record<string, GamePresence> = {
 	roppyakken,
 	ruhr,
 	russianrailroads,
+	saboteur,
+	saintpetersburg,
+	saintpoker,
+	sakura,
+	samarkand,
+	santorini,
+	sapiens,
+	sasaki,
+	schroedingerscats,
+	scopa,
+	seasaltpaper,
+	seasons,
 	sechsnimmt,
+	secretmoon,
+	seikatsu,
+	senet,
+	sensei,
+	senshi,
+	seotda,
+	setup,
+	sevens,
 	sevenwonders,
 	sevenwondersarchitects,
 	sevenwondersduel,
+	sheepboombah,
+	shiftingstones,
+	siam,
+	signorie,
+	silo,
+	similo,
+	simplicity,
+	sixtyone,
+	skat,
+	skull,
+	smallislands,
+	sobek,
+	sobektwoplayers,
+	solarstorm,
+	solo,
+	solowhist,
+	soluna,
+	soulaween,
 	spacebase,
+	spaceempires,
+	spacestationphoenix,
+	spades,
+	sparts,
+	spiritsoftheforest,
+	spiteandmalice,
+	splashdown,
 	splendor,
+	splito,
+	splits,
 	spots,
+	spyrium,
+	squadro,
+	starfluxx,
+	steamrollers,
+	steamworks,
+	stella,
+	stirfryeighteen,
+	stockpile,
 	stoneage,
+	strands,
+	streets,
+	superfantasybrawl,
+	sushigo,
+	sushigoparty,
 	tickettoride,
 	welcometo,
 	wingspan,
