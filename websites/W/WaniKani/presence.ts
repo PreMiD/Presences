@@ -50,7 +50,10 @@ function getReviewPresence(): PresenceData {
 			).classList,
 		]
 			.find(cls => cls.startsWith("character-header--"))
-			.split("--")[1];
+			.split("--")[1],
+		completeCount = document.querySelector<HTMLDivElement>(
+			'[data-quiz-statistics-target="completeCount"]'
+		);
 
 	data.state = `${
 		document.querySelector<HTMLDivElement>(
@@ -61,19 +64,17 @@ function getReviewPresence(): PresenceData {
 			'[data-quiz-input-target="questionTypeContainer"]'
 		).dataset.questionType
 	)}`;
-	data.smallImageText = `${
-		document.querySelector<HTMLDivElement>(
-			'[data-quiz-statistics-target="completeCount"]'
-		).textContent
-	} complete, ${
-		document.querySelector<HTMLDivElement>(
-			'[data-quiz-statistics-target="remainingCount"]'
-		).textContent
-	} remaining. (${
-		document.querySelector<HTMLDivElement>(
-			'[data-quiz-statistics-target="percentCorrect"]'
-		).textContent
-	}%)`;
+	if (completeCount) {
+		data.smallImageText = `${completeCount.textContent} complete, ${
+			document.querySelector<HTMLDivElement>(
+				'[data-quiz-statistics-target="remainingCount"]'
+			).textContent
+		} remaining. (${
+			document.querySelector<HTMLDivElement>(
+				'[data-quiz-statistics-target="percentCorrect"]'
+			).textContent
+		}%)`;
+	}
 	data.smallImageKey = getTypeAsset(characterType);
 	return data;
 }
@@ -149,7 +150,7 @@ presence.on("UpdateData", () => {
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
-				case "/subjectss/lesson/quiz": {
+				case "/subjects/lesson/quiz": {
 					presenceData.details = "Practicing Lessons";
 					Object.assign(presenceData, getReviewPresence());
 					break;
