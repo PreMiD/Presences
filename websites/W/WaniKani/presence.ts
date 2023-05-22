@@ -99,16 +99,7 @@ presence.on("UpdateData", () => {
 					}
 					break;
 				}
-				case "/review":
-				case "/lesson": {
-					presenceData.details = "Browsing";
-					presenceData.state =
-						pathname === "/lesson"
-							? "Viewing Lesson Summary"
-							: "Viewing Reviews Summary";
-					break;
-				}
-				case "/extra_study/session": {
+				case "/subjects/extra_study": {
 					const characterElement =
 							document.querySelector<HTMLDivElement>("#character"),
 						characterType = characterElement.className;
@@ -133,7 +124,7 @@ presence.on("UpdateData", () => {
 					presenceData.smallImageKey = getTypeAsset(characterType);
 					break;
 				}
-				case "/review/session": {
+				case "/subjects/review": {
 					const characterElement =
 							document.querySelector<HTMLDivElement>("#character"),
 						characterType = characterElement.className;
@@ -155,7 +146,7 @@ presence.on("UpdateData", () => {
 					presenceData.smallImageKey = getTypeAsset(characterType);
 					break;
 				}
-				case "/lesson/session": {
+				case "/subjects/lesson": {
 					try {
 						const totalStats = document.querySelectorAll("#stats li > span");
 						presenceData.details = "Learning Lessons";
