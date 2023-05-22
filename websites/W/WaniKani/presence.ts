@@ -4,7 +4,7 @@ const presence: Presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/NdlB8M5.png",
+	Logo = "https://i.imgur.com/xHaJdia.png",
 	Avatar = "https://i.imgur.com/WktQVUN.png",
 	Kanji = "https://i.imgur.com/3VQ6BhT.png",
 	Radical = "https://i.imgur.com/k9mTFJ6.png",
