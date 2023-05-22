@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const quantik: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/QS6Js6O.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,62 +23,8 @@ const quantik: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "Game setup",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 10
-	}
-}
-					*/
-					break;
 				case "playerTurn":
-					/*
-					{
-	"name": "playerTurn",
-	"description": "${actplayer} must select and play a token",
-	"descriptionmyturn": "${you} must select and play a token",
-	"type": "activeplayer",
-	"args": "argPlayerTurn",
-	"possibleactions": [
-		"playToken"
-	],
-	"transitions": {
-		"nextPlayer": 11,
-		"zombiePlayed": 11
-	}
-}
-					*/
-					break;
-				case "nextPlayer":
-					/*
-					{
-	"name": "nextPlayer",
-	"type": "game",
-	"action": "stCheckEndOfGame",
-	"updateGameProgression": true,
-	"transitions": {
-		"nextPlayer": 10,
-		"cantPlay": 11,
-		"endGame": 99
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Playing a token";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

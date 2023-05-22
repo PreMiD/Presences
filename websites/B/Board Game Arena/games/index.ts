@@ -420,6 +420,13 @@ import pugsinmugs from "./P/pugsinmugs";
 import pylos from "./P/pylos";
 import pyramidpoker from "./P/pyramidpoker";
 import pyrgos from "./P/pyrgos";
+import quantik from "./Q/quantik";
+import quantum from "./Q/quantum";
+import quarto from "./Q/quarto";
+import queenskings from "./Q/queenskings";
+import quetzal from "./Q/quetzal";
+import quinque from "./Q/quinque";
+import quoridor from "./Q/quoridor";
 import raceforthegalaxy from "./R/raceforthegalaxy";
 import sechsnimmt from "./S/sechsnimmt";
 import sevenwonders from "./S/sevenwonders";
@@ -862,6 +869,13 @@ const games: Record<string, GamePresence> = {
 	pylos,
 	pyramidpoker,
 	pyrgos,
+	quantik,
+	quantum,
+	quarto,
+	queenskings,
+	quetzal,
+	quinque,
+	quoridor,
 	raceforthegalaxy,
 	sechsnimmt,
 	sevenwonders,
