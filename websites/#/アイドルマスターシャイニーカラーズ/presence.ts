@@ -70,7 +70,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = `${idolNames[idolNumber - 1]}のアルバムを閲覧中`;
   } else if (pathname === "/homeDeck") {
     presenceData.details = "ホームユニットを編集中";
-    presenceData.startTimestamp = browsingTimestamp;
   } else if (pathname === "/comic") {
     presenceData.details = "4コマ漫画を閲覧中";
   } else if (pathname === "/profile") {
