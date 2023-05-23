@@ -33,7 +33,8 @@ const enum Assets {
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
-	oldLang: string = null;
+	oldLang: string = null,
+	currentMangaPage: string = null;
 
 function textContent(tags: string) {
 	return document.querySelector(tags)?.textContent?.trim();
@@ -44,10 +45,7 @@ const observer = new IntersectionObserver(
 		for (const entry of entries) {
 			if (entry.isIntersecting) {
 				observer.unobserve(entry.target);
-				localStorage.setItem(
-					"currentMangaPage",
-					(<HTMLImageElement>entry.target).src
-				);
+				currentMangaPage = (<HTMLImageElement>entry.target)?.src;
 			}
 		}
 	},
@@ -129,7 +127,7 @@ presence.on("UpdateData", async () => {
 				if (pages) {
 					for (const page of document.querySelectorAll("#imgs img"))
 						observer.observe(page);
-					presenceData.largeImageKey = localStorage.getItem("currentMangaPage");
+					presenceData.largeImageKey = currentMangaPage ?? Assets.Logo;
 				} else presenceData.largeImageKey = Assets.Logo;
 
 				presenceData.smallImageKey = Assets.Reading;
