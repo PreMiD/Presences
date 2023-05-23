@@ -88,10 +88,8 @@ presence.on("UpdateData", async () => {
 			"ルカ",
 		];
 		const albumIndex = Number(pathname.split("/")[2]) - 1;
-		if (albumIndex >= 0 && albumIndex < idolNames.length) {
+		if (albumIndex >= 0 && albumIndex < idolNames.length)
 			presenceData.details = `${idolNames[albumIndex]}のアルバムを閲覧中`;
-		}
 	}
-
 	presence.setActivity(presenceData);
 });
