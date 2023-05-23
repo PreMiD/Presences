@@ -591,6 +591,12 @@ import twentyfourseven from "./T/twentyfourseven";
 import twinpalms from "./T/twinpalms";
 import twintinbots from "./T/twintinbots";
 import tzolkin from "./T/tzolkin";
+import ultimaterailroads from "./U/ultimaterailroads";
+import ultimatetictactoe from "./U/ultimatetictactoe";
+import unclechestnuttablegype from "./U/unclechestnuttablegype";
+import unconditionalsurrender from "./U/unconditionalsurrender";
+import unitedsquare from "./U/unitedsquare";
+import uptown from "./U/uptown";
 import welcometo from "./W/welcometo";
 import wingspan from "./W/wingspan";
 import yatzy from "./Y/yatzy";
@@ -1194,6 +1200,12 @@ const games: Record<string, GamePresence> = {
 	twinpalms,
 	twintinbots,
 	tzolkin,
+	ultimaterailroads,
+	ultimatetictactoe,
+	unclechestnuttablegype,
+	unconditionalsurrender,
+	unitedsquare,
+	uptown,
 	welcometo,
 	wingspan,
 	yatzy,
