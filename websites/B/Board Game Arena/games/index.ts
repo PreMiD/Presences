@@ -616,6 +616,7 @@ import whisttwentytwo from "./W/whisttwentytwo";
 import wingspan from "./W/wingspan";
 import wizard from "./W/wizard";
 import worldwidetennis from "./W/worldwidetennis";
+import xiangqi from "./X/xiangqi";
 import yatzy from "./Y/yatzy";
 
 export interface GamePresence {
@@ -1242,6 +1243,7 @@ const games: Record<string, GamePresence> = {
 	wingspan,
 	wizard,
 	worldwidetennis,
+	xiangqi,
 	yatzy,
 };
 
