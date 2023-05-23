@@ -107,10 +107,7 @@ presence.on("UpdateData", async () => {
 				}
 				case "viewforum.php": {
 					presenceData.details = "Viewing a forum category";
-					presenceData.state =
-						document.querySelector<HTMLHeadingElement>(
-							".forum-title"
-						).textContent;
+					presenceData.state = forumTopic.title;
 					break;
 				}
 				default: {
