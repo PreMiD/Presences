@@ -623,6 +623,10 @@ import yinyang from "./Y/yinyang";
 import yokai from "./Y/yokai";
 import yokohama from "./Y/yokohama";
 import yoxii from "./Y/yoxii";
+import zefiria from "./Z/zefiria";
+import zener from "./Z/zener";
+import zola from "./Z/zola";
+import zooloretto from "./Z/zooloretto";
 
 export interface GamePresence {
 	logo: string;
@@ -1255,6 +1259,10 @@ const games: Record<string, GamePresence> = {
 	yokai,
 	yokohama,
 	yoxii,
+	zefiria,
+	zener,
+	zola,
+	zooloretto,
 };
 
 export default function getGame(key: string): {
