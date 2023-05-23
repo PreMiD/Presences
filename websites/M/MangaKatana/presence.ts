@@ -96,24 +96,6 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = strings.search;
 			presenceData.state = getSearchState();
 
-			if (path[2]) {
-				presenceData.details = privacy
-					? `${strings.viewPage} ${strings.manga}`
-					: strings.readingAbout;
-				presenceData.state = textContent("#single_book .info .heading");
-				presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-					"#single_book .cover img"
-				)?.src;
-				presenceData.smallImageKey = Assets.Viewing;
-				presenceData.smallImageText = strings.viewing;
-				presenceData.buttons = [
-					{
-						label: strings.buttonViewPage,
-						url: href,
-					},
-				];
-			}
-
 			if (path[3]) {
 				presenceData.details = `${strings.reading} ${
 					privacy
@@ -132,6 +114,22 @@ presence.on("UpdateData", async () => {
 
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.reading;
+				presenceData.buttons = [
+					{
+						label: strings.buttonViewPage,
+						url: href,
+					},
+				];
+			} else if (path[2]) {
+				presenceData.details = privacy
+					? `${strings.viewPage} ${strings.manga}`
+					: strings.readingAbout;
+				presenceData.state = textContent("#single_book .info .heading");
+				presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+					"#single_book .cover img"
+				)?.src;
+				presenceData.smallImageKey = Assets.Viewing;
+				presenceData.smallImageText = strings.viewing;
 				presenceData.buttons = [
 					{
 						label: strings.buttonViewPage,
