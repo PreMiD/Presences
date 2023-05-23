@@ -49,7 +49,8 @@ function setCacheTime(key: string, time: number) {
  * @param presence
  * @returns
  */
-function getPageVariable<T>(variable: string, presence: Presence) {
+async function getPageVariable<T>(variable: string, presence: Presence) {
+	// return (await presence.getPageVariable<Record<string, T>>(variable))[variable];
 	const variablePath = variable.split(".");
 
 	// convert into legacy format
@@ -122,7 +123,7 @@ export function getUserPlayerId(presence: Presence) {
 }
 
 export function getPlayerAvatar(id: number) {
-	return document.querySelector<HTMLImageElement>(`avatar_${id}`).src;
+	return document.querySelector<HTMLImageElement>(`#avatar_${id}`).src;
 }
 
 export function getPlayerScore(id: number) {
