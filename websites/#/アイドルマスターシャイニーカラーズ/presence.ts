@@ -55,9 +55,7 @@ presence.on("UpdateData", async () => {
 	};
 
 	const pathDetails = pathMap[pathname]?.details;
-	if (typeof pathDetails !== "undefined") {
-		presenceData.details = pathDetails;
-	}
+	if (typeof pathDetails !== "undefined") presenceData.details = pathDetails;
 	if (pathname.includes("/idolAlbum/")) {
 		const idolNames: string[] = [
 			"真乃",
