@@ -1,12 +1,6 @@
 const presence = new Presence({
 		clientId: "821433038335377418",
 	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		live: "general.live",
-		search: "general.searching",
-	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let title: string, seasonEpisode: string, liveTitle: string;
@@ -26,6 +20,11 @@ const enum Logos {
 }
 
 presence.on("UpdateData", async () => {
+	const strings = await presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
+	});
 	let video: HTMLVideoElement = null;
 	const vidArea = document.querySelector(".video__player-area"),
 		presenceData: PresenceData = {
@@ -43,7 +42,7 @@ presence.on("UpdateData", async () => {
 		case pathIncludes(path, "/search"):
 			presenceData.details = "Searching";
 			presenceData.smallImageKey = Assets.Search;
-			presenceData.smallImageText = "Looking for something good";
+			presenceData.smallImageText = "Searching";
 			break;
 
 		case pathIncludes(path, "/shows"): {
@@ -64,8 +63,8 @@ presence.on("UpdateData", async () => {
 
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
-					? (await strings).pause
-					: (await strings).play;
+					? strings.pause
+					: strings.play;
 				presenceData.largeImageKey = data.image || Logos.Paramount;
 
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -112,8 +111,8 @@ presence.on("UpdateData", async () => {
 
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
-					? (await strings).pause
-					: (await strings).play;
+					? strings.pause
+					: strings.play;
 
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(video);
@@ -136,7 +135,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Watching Live TV";
 			presenceData.state = liveTitle;
 			presenceData.smallImageKey = Assets.Live;
-
+			presenceData.smallImageText = strings.live;
 			break;
 
 		case pathIncludes(path, "/brands"):
