@@ -608,8 +608,14 @@ import villagers from "./V/villagers";
 import viticulture from "./V/viticulture";
 import volto from "./V/volto";
 import vultureculture from "./V/vultureculture";
+import warchest from "./W/warchest";
 import welcometo from "./W/welcometo";
+import welcometonewlasvegas from "./W/welcometonewlasvegas";
+import werewolves from "./W/werewolves";
+import whisttwentytwo from "./W/whisttwentytwo";
 import wingspan from "./W/wingspan";
+import wizard from "./W/wizard";
+import worldwidetennis from "./W/worldwidetennis";
 import yatzy from "./Y/yatzy";
 
 export interface GamePresence {
@@ -1228,8 +1234,14 @@ const games: Record<string, GamePresence> = {
 	viticulture,
 	volto,
 	vultureculture,
+	warchest,
 	welcometo,
+	welcometonewlasvegas,
+	werewolves,
+	whisttwentytwo,
 	wingspan,
+	wizard,
+	worldwidetennis,
 	yatzy,
 };
 
