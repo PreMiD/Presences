@@ -2,12 +2,13 @@ const presence = new Presence({
 	clientId: "1103931016525127792",
 });
 
-const browsingTimestamp = Math.floor(Date.now() / 1000);
-
 presence.on("UpdateData", async () => {
+	const browsingTimestamp = Math.floor(Date.now() / 1000);
+
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/ue8EatG.jpg",
 		startTimestamp: browsingTimestamp,
+		details: "シャニマスをプレイ中", // デフォルトの値を設定
 	};
 
 	const pathMap: Record<string, PresenceData> = {
@@ -51,13 +52,14 @@ presence.on("UpdateData", async () => {
 		"/fesMatchConcert": { details: "グレードフェスをプレイ中" },
 		"/jewelCounter": { details: "フェザージュエルミッション" },
 		"/help": { details: "ヘルプを閲覧中" },
-		// シャニマスをプレイ中のデフォルトの設定
-		default: { details: "シャニマスをプレイ中" },
 	};
 
 	const { pathname } = document.location;
 
-	presenceData.details = pathMap[pathname]?.details || "シャニマスをプレイ中";
+	const pathDetails = pathMap[pathname]?.details;
+	if (typeof pathDetails !== "undefined") {
+		presenceData.details = pathDetails;
+	}
 	if (pathname.includes("/idolAlbum/")) {
 		const idolNames = [
 			"真乃",
@@ -87,11 +89,13 @@ presence.on("UpdateData", async () => {
 			"美琴",
 			"ルカ",
 		];
-		presenceData.details = `${
-			idolNames[Number(pathname.split("/")[2]) - 1]
-		}のアルバムを閲覧中`;
+		const albumIndex = Number(pathname.split("/")[2]) - 1;
+		if (albumIndex >= 0 && albumIndex < idolNames.length) {
+			presenceData.details = `${idolNames[albumIndex]}のアルバムを閲覧中`;
+		}
 	}
 
 	presence.setActivity(presenceData);
 });
+
 
