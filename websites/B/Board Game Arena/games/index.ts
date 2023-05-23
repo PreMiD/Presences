@@ -597,6 +597,17 @@ import unclechestnuttablegype from "./U/unclechestnuttablegype";
 import unconditionalsurrender from "./U/unconditionalsurrender";
 import unitedsquare from "./U/unitedsquare";
 import uptown from "./U/uptown";
+import vaalbara from "./V/vaalbara";
+import vegetables from "./V/vegetables";
+import veggiegarden from "./V/veggiegarden";
+import vektorace from "./V/vektorace";
+import veletas from "./V/veletas";
+import veronatwist from "./V/veronatwist";
+import viamagica from "./V/viamagica";
+import villagers from "./V/villagers";
+import viticulture from "./V/viticulture";
+import volto from "./V/volto";
+import vultureculture from "./V/vultureculture";
 import welcometo from "./W/welcometo";
 import wingspan from "./W/wingspan";
 import yatzy from "./Y/yatzy";
@@ -1206,6 +1217,17 @@ const games: Record<string, GamePresence> = {
 	unconditionalsurrender,
 	unitedsquare,
 	uptown,
+	vaalbara,
+	vegetables,
+	veggiegarden,
+	vektorace,
+	veletas,
+	veronatwist,
+	viamagica,
+	villagers,
+	viticulture,
+	volto,
+	vultureculture,
 	welcometo,
 	wingspan,
 	yatzy,
