@@ -23,7 +23,8 @@ presence.on("UpdateData", async () => {
 			const game = getGame(await getGameTag(presence));
 			presenceData.details = `Playing tutorial for ${await getMetadata<string>(
 				presence,
-				"game_name_displayed"
+				"game_name_displayed",
+				true,
 			)}`;
 			presenceData.largeImageKey = game.logo;
 			Object.assign(presenceData, await game.getData(presence));
@@ -100,7 +101,8 @@ presence.on("UpdateData", async () => {
 				const game = getGame(await getGameTag(presence));
 				presenceData.details = `Playing ${await getMetadata<string>(
 					presence,
-					"game_name_displayed"
+					"game_name_displayed",
+					true,
 				)}`;
 				presenceData.largeImageKey = game.logo;
 				Object.assign(presenceData, await game.getData(presence));

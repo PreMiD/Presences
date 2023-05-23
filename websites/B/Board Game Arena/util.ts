@@ -22,7 +22,7 @@ const dataCache: GameMetadata = {} as GameMetadata,
 	dataCacheTime: Record<string, number> = {};
 
 export function getGameTag(presence: Presence) {
-	return getMetadata<string>(presence, "game_name");
+	return getMetadata<string>(presence, "game_name", true);
 }
 
 function getCachedItem(key: string) {
@@ -47,9 +47,10 @@ function setCacheTime(key: string, time: number) {
  *
  * @param variable
  * @param presence
+ * @param isString Whether the data is a string or not - this is a workaround for a bug in the API. Deprecate in the future.
  * @returns
  */
-async function getPageVariable<T>(variable: string, presence: Presence) {
+function getPageVariable<T>(variable: string, presence: Presence, isString = false) {
 	const variablePath = variable.split(".");
 
 	// convert into legacy format
@@ -59,6 +60,11 @@ async function getPageVariable<T>(variable: string, presence: Presence) {
 	}
 	legacyVariable += `["${variablePath[variablePath.length - 1]}`;
 
+	if (isString) {
+		// Hack to get around the bug with pageLetiable at the moment. (Add quotes around it)
+		legacyVariable += `"].replace(/(^|$)/g, '"').split()["0`;
+	}
+
 	return presence.getPageletiable<T>(legacyVariable);
 }
 
@@ -67,16 +73,18 @@ async function getPageVariable<T>(variable: string, presence: Presence) {
  *
  * @param presence
  * @param key
+ * @param isString
  * @returns
  */
 export async function getMetadata<T>(
 	presence: Presence,
-	key: string
+	key: string,
+	isString = false
 ): Promise<T> {
 	const now = Date.now();
 	if (now - getCacheTime(key) > 1000) {
 		setCacheTime(key, now);
-		const data = await getPageVariable<T>(`gameui.${key}`, presence);
+		const data = await getPageVariable<T>(`gameui.${key}`, presence, isString);
 		setCachedItem(key, data);
 		return data;
 	} else return getCachedItem(key) as T;
@@ -88,10 +96,11 @@ export async function getMetadata<T>(
  *
  * @param presence
  * @param key
+ * @param isString
  * @returns
  */
-export function getGameData<T>(presence: Presence, key: string) {
-	return getMetadata<T>(presence, `gamedatas.${key}`);
+export function getGameData<T>(presence: Presence, key: string, isString = false) {
+	return getMetadata<T>(presence, `gamedatas.${key}`, isString);
 }
 
 export interface PlayerData {
@@ -106,11 +115,11 @@ export function getPlayerData(presence: Presence, id: number) {
 }
 
 export function getCurrentGameState(presence: Presence) {
-	return getGameData<string>(presence, "gamestate.name");
+	return getGameData<string>(presence, "gamestate.name", true);
 }
 
 export function getCurrentGameStateType(presence: Presence) {
-	return getGameData<string>(presence, "gamestate.type");
+	return getGameData<string>(presence, "gamestate.type", true);
 }
 
 export function getActivePlayerId(presence: Presence) {
