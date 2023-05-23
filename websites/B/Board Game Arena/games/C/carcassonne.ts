@@ -38,9 +38,7 @@ const carcassonne: GamePresence = {
 					break;
 			}
 		} else data.state = `Waiting for ${activePlayerData.name}`;
-		if (gameState === "unachievedCount") {
-			data.state = "Calculating unachieved points";
-		}
+		if (gameState === "unachievedCount") data.state = "Calculating unachieved points";
 		return data;
 	},
 };

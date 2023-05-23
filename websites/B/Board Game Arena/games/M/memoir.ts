@@ -65,9 +65,6 @@ const memoir: GamePresence = {
 				case "battleBack":
 					data.state = "Battling back";
 					break;
-				case "moveUnits":
-					data.state = "Moving units";
-					break;
 				case "orderUnitsFinestHour":
 					data.state = "Ordering units (Finest Hour)";
 					break;
@@ -82,9 +79,6 @@ const memoir: GamePresence = {
 					break;
 				case "selectUnits":
 					data.state = "Selecting units";
-					break;
-				case "moveUnits":
-					data.state = "Moving units";
 					break;
 				case "attackUnit":
 					data.state = "Attacking units";

@@ -84,13 +84,9 @@ const throughtheagesnewstory: GamePresence = {
 				case "mustUpgradeBuilding":
 					data.state = "Upgrading a building";
 					break;
-				case "buildChoice":
-					data.state = "Choosing a build action";
-					break;
 				case "mustBuildMilitary":
 					data.state = "Building a military unit";
 					break;
-				case "wonderForFree":
 				case "wonderForFree":
 					data.state = "Building stages of Wonder";
 					break;
@@ -99,9 +95,6 @@ const throughtheagesnewstory: GamePresence = {
 					break;
 				case "freeFoodResourceCustom":
 					data.state = "Gaining food or resources";
-					break;
-				case "lossPopulation":
-					data.state = "Choosing which yellow token to lose";
 					break;
 				case "stealFoodResource5":
 				case "stealFoodResource7":
@@ -113,9 +106,6 @@ const throughtheagesnewstory: GamePresence = {
 					break;
 				case "payResourceFood":
 					data.state = "Paying food or resources";
-					break;
-				case "lossBlueToken":
-					data.state = "Choosing from where to take blue tokens";
 					break;
 				case "pickCardsFromRow":
 				case "pickCardsFromRowContinue":
@@ -150,12 +140,6 @@ const throughtheagesnewstory: GamePresence = {
 					break;
 				case "lossYellowToken":
 					data.state = "Choosing from where to take yellow tokens";
-					break;
-				case "lossBlueToken":
-					data.state = "Choosing from where to take blue tokens";
-					break;
-				case "playerTurnPolitic":
-					data.state = "Taking a political action (Julius Caesar)";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

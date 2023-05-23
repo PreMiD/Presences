@@ -68,7 +68,7 @@ const seasons: GamePresence = {
 					data.details = "Choosing energy to gain";
 					break;
 				case "discardIshtar":
-					data.details = "Discarding 4 identical energies (Ishtar)";
+					data.details = "Discarding identical energies (Ishtar)";
 					break;
 				case "discardKairn":
 					data.details = "Discarding an energy (Kairn)";
@@ -99,9 +99,6 @@ const seasons: GamePresence = {
 					break;
 				case "vampiricDiscard":
 					data.details = "Discarding a card (Vampire)";
-					break;
-				case "gainEnergy":
-					data.details = "Choosing energy to gain";
 					break;
 				case "amuletFireChoice":
 					data.details = "Choosing a card to add to your hand (Amulet of Fire)";
@@ -137,9 +134,6 @@ const seasons: GamePresence = {
 				case "orbChoice":
 				case "orbChoice2":
 					data.details = "Choosing a card (Orb of Time)";
-					break;
-				case "discardIshtar":
-					data.details = "Discarding 3 identical energies (Ishtar)";
 					break;
 				case "discardHornPlenty":
 					data.details = "Discarding an energy (Horn of Plenty)";
@@ -211,9 +205,6 @@ const seasons: GamePresence = {
 				case "potionOfAncientCardChoice":
 					data.details =
 						"Choosing a card to add to your hand (Potion of Ancient Choice)";
-					break;
-				case "gainEnergy":
-					data.details = "Choosing energy to gain";
 					break;
 				case "sepulchralAmuletChoice":
 				case "sepulchralAmuletChoice2":

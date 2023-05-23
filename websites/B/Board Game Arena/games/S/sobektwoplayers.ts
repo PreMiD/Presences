@@ -47,9 +47,6 @@ const sobektwoplayers: GamePresence = {
 				case "playerTurn2":
 					data.state = "Choosing a tile from the market";
 					break;
-				case "pickResource":
-					data.state = "Choosing a resource for the set";
-					break;
 				case "characterVizier":
 					data.state = "Choosing a tile from the opponent's Corruption board";
 					break;
