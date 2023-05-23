@@ -1,3 +1,4 @@
+/* deepscan-disable (ignore camelcase issues) */
 export interface GameMetadata extends Record<string, unknown> {
 	bRealtime: number;
 	bTutorial: boolean;
@@ -17,6 +18,7 @@ export interface GameMetadata extends Record<string, unknown> {
 	player_id: number;
 	gamedatas: Record<string, unknown>;
 }
+/* deepscan-enable */
 
 const dataCache: GameMetadata = {} as GameMetadata,
 	dataCacheTime: Record<string, number> = {};
@@ -107,7 +109,7 @@ export function getGameData<T>(
 	presence: Presence,
 	key: string,
 	isString = false
-) {
+): Promise<T> {
 	return getMetadata<T>(presence, `gamedatas.${key}`, isString);
 }
 
@@ -118,31 +120,34 @@ export interface PlayerData {
 	avatar: string;
 }
 
-export function getPlayerData(presence: Presence, id: number) {
+export function getPlayerData(
+	presence: Presence,
+	id: number
+): Promise<PlayerData> {
 	return getGameData<PlayerData>(presence, `players.${id}`);
 }
 
-export function getCurrentGameState(presence: Presence) {
+export function getCurrentGameState(presence: Presence): Promise<string> {
 	return getGameData<string>(presence, "gamestate.name", true);
 }
 
-export function getCurrentGameStateType(presence: Presence) {
+export function getCurrentGameStateType(presence: Presence): Promise<string> {
 	return getGameData<string>(presence, "gamestate.type", true);
 }
 
-export function getActivePlayerId(presence: Presence) {
+export function getActivePlayerId(presence: Presence): Promise<number> {
 	return getGameData<number>(presence, "gamestate.active_player");
 }
 
-export function getUserPlayerId(presence: Presence) {
+export function getUserPlayerId(presence: Presence): Promise<number> {
 	return getMetadata<number>(presence, "player_id");
 }
 
-export function getPlayerAvatar(id: number) {
+export function getPlayerAvatar(id: number): string {
 	return document.querySelector<HTMLImageElement>(`#avatar_${id}`).src;
 }
 
-export function getPlayerScore(id: number) {
+export function getPlayerScore(id: number): string {
 	return document.querySelector<HTMLSpanElement>(`#player_score_${id}`)
 		.textContent;
 }
