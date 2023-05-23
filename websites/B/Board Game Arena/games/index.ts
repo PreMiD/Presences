@@ -617,7 +617,12 @@ import wingspan from "./W/wingspan";
 import wizard from "./W/wizard";
 import worldwidetennis from "./W/worldwidetennis";
 import xiangqi from "./X/xiangqi";
+import yaniv from "./Y/yaniv";
 import yatzy from "./Y/yatzy";
+import yinyang from "./Y/yinyang";
+import yokai from "./Y/yokai";
+import yokohama from "./Y/yokohama";
+import yoxii from "./Y/yoxii";
 
 export interface GamePresence {
 	logo: string;
@@ -1244,7 +1249,12 @@ const games: Record<string, GamePresence> = {
 	wizard,
 	worldwidetennis,
 	xiangqi,
+	yaniv,
 	yatzy,
+	yinyang,
+	yokai,
+	yokohama,
+	yoxii,
 };
 
 export default function getGame(key: string): {

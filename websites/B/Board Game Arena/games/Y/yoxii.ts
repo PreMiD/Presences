@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const yoxii: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/CbzjbKV.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,77 +23,11 @@ const yoxii: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
 				case "playerTurn_Bis":
-					/*
-					{
-	"name": "playerTurn_Bis",
-	"description": "${actplayer} must play the totem",
-	"descriptionmyturn": "${you} must play the totem",
-	"type": "activeplayer",
-	"args": "argPlayerTurn",
-	"possibleactions": [
-		"playTotem"
-	],
-	"transitions": {
-		"playTotem": 3
-	}
-}
-					*/
+					data.state = "Playing the totem";
 					break;
 				case "playerTurn":
-					/*
-					{
-	"name": "playerTurn",
-	"description": "${actplayer} must play a token",
-	"descriptionmyturn": "${you} must play a token",
-	"type": "activeplayer",
-	"args": "argPlayerTurn",
-	"possibleactions": [
-		"playToken"
-	],
-	"transitions": {
-		"playToken": 4
-	}
-}
-					*/
-					break;
-				case "nextPlayer":
-					/*
-					{
-	"name": "nextPlayer",
-	"type": "game",
-	"action": "stNextPlayer",
-	"updateGameProgression": true,
-	"transitions": {
-		"endGame": 99,
-		"nextTurn": 2
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Playing a token";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";
