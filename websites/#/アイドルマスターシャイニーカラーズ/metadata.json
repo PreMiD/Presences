@@ -7,7 +7,7 @@
 	"service": "アイドルマスターシャイニーカラーズ",
 	"altnames": [
 		"THE iDOLM@STER SHINYCOLORS"
-		]
+	],
 	"description": {
 		"en": "Training simulation browser game in THE iDOLM@STER series. The game adopts BXD's HTML5 platform and is hosted by enza, a social platform made by Bandai Namco Entertainment.",
 		"ja_JP": "アイドルマスターシリーズ最新作。アイドル育成＆ライブ対戦ゲーム。ブラウザ版、アプリ版でサービス展開中。"
@@ -19,7 +19,7 @@
 	"color": "#8dbbff",
 	"category": "games",
 	"tags": [
-		"game"
+		"game",
 		"shinymas"
 	]
 }
