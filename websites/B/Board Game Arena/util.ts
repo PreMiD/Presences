@@ -50,19 +50,23 @@ function setCacheTime(key: string, time: number) {
  * @param isString Whether the data is a string or not - this is a workaround for a bug in the API. Deprecate/remove in the future.
  * @returns
  */
-function getPageVariable<T>(variable: string, presence: Presence, isString = false) {
+function getPageVariable<T>(
+	variable: string,
+	presence: Presence,
+	isString = false
+) {
 	const variablePath = variable.split(".");
 
 	// convert into legacy format
 	let legacyVariable = `${variablePath[0]}"]`;
-	for (let i = 1; i < variablePath.length - 1; i++) {
+	for (let i = 1; i < variablePath.length - 1; i++)
 		legacyVariable += `["${variablePath[i]}"]`;
-	}
+
 	legacyVariable += `["${variablePath[variablePath.length - 1]}`;
 
 	if (isString) {
 		// Hack to get around the bug with pageLetiable at the moment. (Add quotes around it)
-		legacyVariable += `"].replace(/(^|$)/g, '"').split()["0`;
+		legacyVariable += '"].replace(/(^|$)/g, \'"\').split()["0';
 	}
 
 	return presence.getPageletiable<T>(legacyVariable);
@@ -99,7 +103,11 @@ export async function getMetadata<T>(
  * @param isString
  * @returns
  */
-export function getGameData<T>(presence: Presence, key: string, isString = false) {
+export function getGameData<T>(
+	presence: Presence,
+	key: string,
+	isString = false
+) {
 	return getMetadata<T>(presence, `gamedatas.${key}`, isString);
 }
 

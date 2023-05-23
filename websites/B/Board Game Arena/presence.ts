@@ -6,6 +6,20 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+interface ForumTopic {
+	title: string;
+	url: string;
+}
+
+let forumTopic: ForumTopic = {
+	title: "",
+	url: "",
+};
+
+presence.on("iFrameData", (data: ForumTopic) => {
+	forumTopic = data;
+});
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/uCstmQE.png",
@@ -24,7 +38,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Playing tutorial for ${await getMetadata<string>(
 				presence,
 				"game_name_displayed",
-				true,
+				true
 			)}`;
 			presenceData.largeImageKey = game.logo;
 			Object.assign(presenceData, await game.getData(presence));
@@ -79,19 +93,28 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing lobby";
 			break;
 		}
+		case "headlines": {
+			presenceData.details = "Viewing news";
+			break;
+		}
 		case "forum": {
 			switch (pathList[1] ?? "") {
-				case "": {
-					presenceData.details = "Browsing the forum";
+				case "viewtopic.php": {
+					presenceData.details = "Viewing a forum topic";
+					presenceData.state = forumTopic.title;
+					presenceData.buttons = [{ label: "View Topic", url: forumTopic.url }];
 					break;
 				}
-				case "viewforum": {
+				case "viewforum.php": {
 					presenceData.details = "Viewing a forum category";
 					presenceData.state =
 						document.querySelector<HTMLHeadingElement>(
 							".forum-title"
 						).textContent;
 					break;
+				}
+				default: {
+					presenceData.details = "Browsing the forum";
 				}
 			}
 			break;
@@ -102,7 +125,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Playing ${await getMetadata<string>(
 					presence,
 					"game_name_displayed",
-					true,
+					true
 				)}`;
 				presenceData.largeImageKey = game.logo;
 				Object.assign(presenceData, await game.getData(presence));
