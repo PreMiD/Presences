@@ -50,7 +50,6 @@ function setCacheTime(key: string, time: number) {
  * @returns
  */
 async function getPageVariable<T>(variable: string, presence: Presence) {
-	// return (await presence.getPageVariable<Record<string, T>>(variable))[variable];
 	const variablePath = variable.split(".");
 
 	// convert into legacy format
