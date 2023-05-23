@@ -3,6 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
+	const { pathname } = document.location;
 	const browsingTimestamp = Math.floor(Date.now() / 1000);
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/ue8EatG.jpg",
@@ -10,7 +11,6 @@ presence.on("UpdateData", async () => {
 		details: "シャニマスをプレイ中", // デフォルトの値を設定
 	};
 
-	const { pathname } = document.location;
 	const pathMap: Record<string, PresenceData> = {
 		"/home": { details: "ホーム画面" },
 		"/present": { details: "プレゼント" },
@@ -55,7 +55,9 @@ presence.on("UpdateData", async () => {
 	};
 
 	const pathDetails = pathMap[pathname]?.details;
-	if (typeof pathDetails !== "undefined") presenceData.details = pathDetails;
+	if (typeof pathDetails !== "undefined") {
+		presenceData.details = pathDetails;
+	}
 	if (pathname.includes("/idolAlbum/")) {
 		const idolNames: string[] = [
 			"真乃",
@@ -93,6 +95,3 @@ presence.on("UpdateData", async () => {
 
 	presence.setActivity(presenceData);
 });
-
-
-
