@@ -47,7 +47,7 @@ function setCacheTime(key: string, time: number) {
  *
  * @param variable
  * @param presence
- * @param isString Whether the data is a string or not - this is a workaround for a bug in the API. Deprecate in the future.
+ * @param isString Whether the data is a string or not - this is a workaround for a bug in the API. Deprecate/remove in the future.
  * @returns
  */
 function getPageVariable<T>(variable: string, presence: Presence, isString = false) {

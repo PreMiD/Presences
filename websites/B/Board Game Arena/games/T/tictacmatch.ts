@@ -1,4 +1,3 @@
-// TODO
 import { GamePresence } from "..";
 import {
 	getActivePlayerId,
@@ -11,7 +10,7 @@ import {
 } from "../../util";
 
 const tictacmatch: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/MIgIkXz.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
@@ -24,79 +23,8 @@ const tictacmatch: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
-				case "gameSetup":
-					/*
-					{
-	"name": "gameSetup",
-	"description": "",
-	"type": "manager",
-	"action": "stGameSetup",
-	"transitions": {
-		"": 2
-	}
-}
-					*/
-					break;
 				case "playerTurn":
-					/*
-					{
-	"name": "playerTurn",
-	"description": "${actplayer} must play a card",
-	"descriptionmyturn": "${you} must play a card",
-	"type": "activeplayer",
-	"possibleactions": [
-		"playCard",
-		"playAction",
-		"skipAction"
-	],
-	"transitions": {
-		"playCard": 2,
-		"playAction": 2,
-		"skipAction": 2,
-		"nextPlayer": 3,
-		"zombiePass": 3
-	}
-}
-					*/
-					break;
-				case "nextPlayer":
-					/*
-					{
-	"name": "nextPlayer",
-	"description": "",
-	"type": "game",
-	"action": "stNextPlayer",
-	"updateGameProgression": false,
-	"transitions": {
-		"endScore": 4,
-		"playerTurn": 2
-	}
-}
-					*/
-					break;
-				case "endScore":
-					/*
-					{
-	"name": "endScore",
-	"description": "",
-	"type": "game",
-	"action": "stEndScore",
-	"transitions": {
-		"endGame": 99
-	}
-}
-					*/
-					break;
-				case "gameEnd":
-					/*
-					{
-	"name": "gameEnd",
-	"description": "End of game",
-	"type": "manager",
-	"action": "stGameEnd",
-	"args": "argGameEnd"
-}
-					*/
+					data.state = "Playing a card";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

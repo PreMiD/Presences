@@ -527,7 +527,70 @@ import streets from "./S/streets";
 import superfantasybrawl from "./S/superfantasybrawl";
 import sushigo from "./S/sushigo";
 import sushigoparty from "./S/sushigoparty";
+import tablut from "./T/tablut";
+import takaraisland from "./T/takaraisland";
+import takenoko from "./T/takenoko";
+import talon from "./T/talon";
+import taluva from "./T/taluva";
+import tanghulu from "./T/tanghulu";
+import tapestry from "./T/tapestry";
+import targi from "./T/targi";
+import tashkalar from "./T/tashkalar";
+import teatime from "./T/teatime";
+import teotihuacan from "./T/teotihuacan";
+import terramystica from "./T/terramystica";
+import thatslife from "./T/thatslife";
+import theboss from "./T/theboss";
+import thebuilders from "./T/thebuilders";
+import thebuildersantiquity from "./T/thebuildersantiquity";
+import thecrew from "./T/thecrew";
+import thecrewdeepsea from "./T/thecrewdeepsea";
+import thegnomesofzavandor from "./T/thegnomesofzavandor";
+import theisleofcats from "./T/theisleofcats";
+import thejellymonsterlab from "./T/thejellymonsterlab";
+import themotherroad from "./T/themotherroad";
+import theninedomains from "./T/theninedomains";
+import thermopyles from "./T/thermopyles";
+import thirteenclues from "./T/thirteenclues";
+import thirtyone from "./T/thirtyone";
+import thrive from "./T/thrive";
+import throneandthegrail from "./T/throneandthegrail";
+import throughtheages from "./T/throughtheages";
+import throughtheagesnewstory from "./T/throughtheagesnewstory";
+import thurnandtaxis from "./T/thurnandtaxis";
+import tichu from "./T/tichu";
 import tickettoride from "./T/tickettoride";
+import tictacmatch from "./T/tictacmatch";
+import tigriseuphrates from "./T/tigriseuphrates";
+import tiki from "./T/tiki";
+import timemasters from "./T/timemasters";
+import tinnerstrail from "./T/tinnerstrail";
+import tinyfarms from "./T/tinyfarms";
+import tiwanaku from "./T/tiwanaku";
+import tobago from "./T/tobago";
+import toc from "./T/toc";
+import toeshambo from "./T/toeshambo";
+import tokaido from "./T/tokaido";
+import tournay from "./T/tournay";
+import tranquility from "./T/tranquility";
+import tranquilitytheascent from "./T/tranquilitytheascent";
+import trekkingtheworld from "./T/trekkingtheworld";
+import trektwelve from "./T/trektwelve";
+import triatri from "./T/triatri";
+import trickoftherails from "./T/trickoftherails";
+import trio from "./T/trio";
+import troggu from "./T/troggu";
+import troyes from "./T/troyes";
+import troyesdice from "./T/troyesdice";
+import trusis from "./T/trusis";
+import tucano from "./T/tucano";
+import tumbleweed from "./T/tumbleweed";
+import turncoats from "./T/turncoats";
+import turnthetide from "./T/turnthetide";
+import twentyfourseven from "./T/twentyfourseven";
+import twinpalms from "./T/twinpalms";
+import twintinbots from "./T/twintinbots";
+import tzolkin from "./T/tzolkin";
 import welcometo from "./W/welcometo";
 import wingspan from "./W/wingspan";
 import yatzy from "./Y/yatzy";
@@ -1067,7 +1130,70 @@ const games: Record<string, GamePresence> = {
 	superfantasybrawl,
 	sushigo,
 	sushigoparty,
+	tablut,
+	takaraisland,
+	takenoko,
+	talon,
+	taluva,
+	tanghulu,
+	tapestry,
+	targi,
+	tashkalar,
+	teatime,
+	teotihuacan,
+	terramystica,
+	thatslife,
+	theboss,
+	thebuilders,
+	thebuildersantiquity,
+	thecrew,
+	thecrewdeepsea,
+	thegnomesofzavandor,
+	theisleofcats,
+	thejellymonsterlab,
+	themotherroad,
+	theninedomains,
+	thermopyles,
+	thirteenclues,
+	thirtyone,
+	thrive,
+	throneandthegrail,
+	throughtheages,
+	throughtheagesnewstory,
+	thurnandtaxis,
+	tichu,
 	tickettoride,
+	tictacmatch,
+	tigriseuphrates,
+	tiki,
+	timemasters,
+	tinnerstrail,
+	tinyfarms,
+	tiwanaku,
+	tobago,
+	toc,
+	toeshambo,
+	tokaido,
+	tournay,
+	tranquility,
+	tranquilitytheascent,
+	trekkingtheworld,
+	trektwelve,
+	triatri,
+	trickoftherails,
+	trio,
+	troggu,
+	troyes,
+	troyesdice,
+	trusis,
+	tucano,
+	tumbleweed,
+	turncoats,
+	turnthetide,
+	twentyfourseven,
+	twinpalms,
+	twintinbots,
+	tzolkin,
 	welcometo,
 	wingspan,
 	yatzy,
