@@ -1,4 +1,4 @@
-/* deepscan-disable (ignore camelcase issues) */
+/* deepscan-disable */
 export interface GameMetadata extends Record<string, unknown> {
 	bRealtime: number;
 	bTutorial: boolean;
@@ -23,7 +23,7 @@ export interface GameMetadata extends Record<string, unknown> {
 const dataCache: GameMetadata = {} as GameMetadata,
 	dataCacheTime: Record<string, number> = {};
 
-export function getGameTag(presence: Presence) {
+export function getGameTag(presence: Presence): Promise<string> {
 	return getMetadata<string>(presence, "game_name", true);
 }
 
@@ -43,15 +43,6 @@ function setCacheTime(key: string, time: number) {
 	dataCacheTime[key] = time;
 }
 
-/**
- * Gets a page variable from the window.
- * Note to future maintainers: Replace with newer API when available.
- *
- * @param variable
- * @param presence
- * @param isString Whether the data is a string or not - this is a workaround for a bug in the API. Deprecate/remove in the future.
- * @returns
- */
 function getPageVariable<T>(
 	variable: string,
 	presence: Presence,
@@ -74,14 +65,6 @@ function getPageVariable<T>(
 	return presence.getPageletiable<T>(legacyVariable);
 }
 
-/**
- * Fetches metadata about the current game.
- *
- * @param presence
- * @param key
- * @param isString
- * @returns
- */
 export async function getMetadata<T>(
 	presence: Presence,
 	key: string,
@@ -96,15 +79,6 @@ export async function getMetadata<T>(
 	} else return getCachedItem(key) as T;
 }
 
-/**
- * Fetches data from the game's data object.
- * This includes game-specific data.
- *
- * @param presence
- * @param key
- * @param isString
- * @returns
- */
 export function getGameData<T>(
 	presence: Presence,
 	key: string,
