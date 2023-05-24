@@ -54,10 +54,23 @@ presence.on("UpdateData", async () => {
 				""
 			);
 		}
+	} else if (document.location.pathname.includes("/photo/author/")) {
+		presenceData.details = "Viewing an author photo:";
+		presenceData.state = document.querySelector("h1 a").textContent;
+		presenceData.largeImageKey = document.querySelector(".profile a img").getAttribute("src");
+
 	} else if (document.location.pathname.includes("/author/show/")) {
 		presenceData.details = "Viewing an author:";
 		author = document.querySelector(".authorName span").textContent;
 		presenceData.state = author;
+
+		presenceData.largeImageKey = document.querySelector(".authorLeftContainer a img").getAttribute("src");
+		presenceData.buttons = [
+			{
+				label: "View Author",
+				url: document.location.href,
+			}
+		];
 	} else if (document.location.pathname.includes("/group/show/")) {
 		presenceData.details = "Viewing a group:";
 		presenceData.state = document.querySelector("h1").textContent;
