@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "437218658389983232",
+		"name": "𝒕𝒐𝒕𝒐𝒓𝒚"
+	},
+	"service": "MyTF1",
+	"description": {
+		"en": "MyTF1 is the online broadcasting service of the French television channels of the TF1 group. Watch live broadcasts and reruns!",
+		"fr": "MyTF1 est une plateforme en ligne de contenu en direct ou en streaming des chaînes du Groupe TF1, principale de la télévision en France."
+	},
+	"url": [
+		"tf1.fr",
+		"www.tf1.fr"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/k8jIoSZ.png",
+	"thumbnail": "https://i.imgur.com/RHTKC4B.png",
+	"color": "#0001e0",
+	"category": "videos",
+	"tags": [
+		"streaming",
+		"tv",
+		"show",
+		"films",
+		"television",
+		"videos"
+	],
+	"settings": [
+		{
+			"id": "time",
+			"title": "Show Timestamp",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		}
+	]
+}
