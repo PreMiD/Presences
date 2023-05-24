@@ -22,7 +22,9 @@ presence.on("UpdateData", async () => {
 
 		book = document.querySelector("h1").textContent;
 		author = document.querySelector("span.ContributorLink__name").textContent;
-		presenceData.largeImageKey = document.querySelector(".BookCover img.ResponsiveImage").getAttribute("src");
+		presenceData.largeImageKey = document
+			.querySelector(".BookCover img.ResponsiveImage")
+			.getAttribute("src");
 		presenceData.state = `${book}`;
 		presenceData.buttons = [
 			{
@@ -41,14 +43,15 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing a book series:";
 			presenceData.state = bookseries;
 
-			presenceData.largeImageKey = document.querySelector(".gr-box--withShadow.responsiveBook__img").getAttribute("src"); // get first book in series img
+			presenceData.largeImageKey = document
+				.querySelector(".gr-box--withShadow.responsiveBook__img")
+				.getAttribute("src"); // get first book in series img
 			presenceData.buttons = [
 				{
 					label: "View Series",
 					url: document.location.href,
-				}
+				},
 			];
-
 		}
 	} else if (document.location.pathname.includes("/user/show/")) {
 		presenceData.details = "Viewing a profile:";
@@ -64,37 +67,48 @@ presence.on("UpdateData", async () => {
 			);
 		}
 		try {
-			presenceData.largeImageKey = document.querySelector(".profilePictureIcon").getAttribute("src");
+			presenceData.largeImageKey = document
+				.querySelector(".profilePictureIcon")
+				.getAttribute("src");
 			presenceData.buttons = [
 				{
 					label: "View Profile",
 					url: document.location.href,
-				}
+				},
 			];
 		} catch {
 			// presenceData.largeImageKey = "https://i.imgur.com/DtHgzGt.png";
 			presenceData.details = "Trying to view a private profile:";
 		}
 	} else if (document.location.pathname.includes("/user/year_in_books/")) {
-		presenceData.details = `Viewing ${document.querySelector(".bannerYearText").textContent} year in books of:`;
-		presenceData.state = document.querySelector(".headerNameContainer .headerName").textContent;
-		presenceData.largeImageKey = document.querySelector(".headerImageContainer img").getAttribute("src");
-	}else if (document.location.pathname.includes("/photo/author/")) {
+		presenceData.details = `Viewing ${
+			document.querySelector(".bannerYearText").textContent
+		} year in books of:`;
+		presenceData.state = document.querySelector(
+			".headerNameContainer .headerName"
+		).textContent;
+		presenceData.largeImageKey = document
+			.querySelector(".headerImageContainer img")
+			.getAttribute("src");
+	} else if (document.location.pathname.includes("/photo/author/")) {
 		presenceData.details = "Viewing an author photo:";
 		presenceData.state = document.querySelector("h1 a").textContent;
-		presenceData.largeImageKey = document.querySelector(".profile a img").getAttribute("src");
-
+		presenceData.largeImageKey = document
+			.querySelector(".profile a img")
+			.getAttribute("src");
 	} else if (document.location.pathname.includes("/author/show/")) {
 		presenceData.details = "Viewing an author:";
 		author = document.querySelector(".authorName span").textContent;
 		presenceData.state = author;
 
-		presenceData.largeImageKey = document.querySelector(".leftContainer.authorLeftContainer img").getAttribute("src");
+		presenceData.largeImageKey = document
+			.querySelector(".leftContainer.authorLeftContainer img")
+			.getAttribute("src");
 		presenceData.buttons = [
 			{
 				label: "View Author",
 				url: document.location.href,
-			}
+			},
 		];
 	} else if (document.location.pathname.includes("/group/show/")) {
 		presenceData.details = "Viewing a group:";
