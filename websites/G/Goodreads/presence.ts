@@ -66,7 +66,11 @@ presence.on("UpdateData", async () => {
 			// presenceData.largeImageKey = "https://i.imgur.com/DtHgzGt.png";
 			presenceData.details = "Trying to view a private profile:";
 		}
-	} else if (document.location.pathname.includes("/photo/author/")) {
+	} else if (document.location.pathname.includes("/user/year_in_books/")) {
+		presenceData.details = `Viewing ${document.querySelector(".bannerYearText").textContent} year in books of:`;
+		presenceData.state = document.querySelector(".headerNameContainer .headerName").textContent;
+		presenceData.largeImageKey = document.querySelector(".headerImageContainer img").getAttribute("src");
+	}else if (document.location.pathname.includes("/photo/author/")) {
 		presenceData.details = "Viewing an author photo:";
 		presenceData.state = document.querySelector("h1 a").textContent;
 		presenceData.largeImageKey = document.querySelector(".profile a img").getAttribute("src");
