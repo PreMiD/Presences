@@ -54,6 +54,18 @@ presence.on("UpdateData", async () => {
 				""
 			);
 		}
+		try {
+			presenceData.largeImageKey = document.querySelector(".profilePictureIcon").getAttribute("src");
+			presenceData.buttons = [
+				{
+					label: "View Profile",
+					url: document.location.href,
+				}
+			];
+		} catch {
+			// presenceData.largeImageKey = "https://i.imgur.com/DtHgzGt.png";
+			presenceData.details = "Trying to view a private profile:";
+		}
 	} else if (document.location.pathname.includes("/photo/author/")) {
 		presenceData.details = "Viewing an author photo:";
 		presenceData.state = document.querySelector("h1 a").textContent;
