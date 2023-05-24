@@ -22,13 +22,17 @@ presence.on("UpdateData", async () => {
 
 		book = document.querySelector("h1").textContent;
 		author = document.querySelector("span.ContributorLink__name").textContent;
-		presenceData.state = `${book} | by: ${author}`;
+		presenceData.largeImageKey = document.querySelector(".BookCover img.ResponsiveImage").getAttribute("src");
+		presenceData.state = `${book}`;
 		presenceData.buttons = [
 			{
 				label: "View Book",
 				url: document.location.href,
 			},
 		];
+
+		presenceData.smallImageKey = Assets.Reading;
+		presenceData.smallImageText = `By: ${author}`;
 	} else if (document.location.pathname.includes("/series")) {
 		const bookseries: string = document.querySelector("h1").textContent;
 		if (bookseries === "Series")
