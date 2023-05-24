@@ -18,17 +18,17 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname === "/book")
 		presenceData.details = "Browsing books";
 	else if (document.location.pathname.includes("/book/show/")) {
-		// beta layout conditional
 		presenceData.details = "Viewing a book:";
-		if (document.querySelector("#bookTitle") === null) {
-			book = document.querySelector("h1").textContent;
-			author = document.querySelector("span.ContributorLink__name").textContent;
-			presenceData.state = `${book} | by: ${author}`;
-		} else {
-			book = document.querySelector("#bookTitle").textContent;
-			author = document.querySelector(".authorName").textContent;
-			presenceData.state = `${book} | by: ${author}`;
-		}
+
+		book = document.querySelector("h1").textContent;
+		author = document.querySelector("span.ContributorLink__name").textContent;
+		presenceData.state = `${book} | by: ${author}`;
+		presenceData.buttons = [
+			{
+				label: "View Book",
+				url: document.location.href,
+			},
+		];
 	} else if (document.location.pathname.includes("/series")) {
 		const bookseries: string = document.querySelector("h1").textContent;
 		if (bookseries === "Series")
