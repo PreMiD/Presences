@@ -57,7 +57,9 @@ presence.on("UpdateData", () => {
 			)
 				presenceData.details = "Logging in";
 			else if (
-				document.querySelector("#root > div.sc-inJWWq.lbdOVj > div > div > div.sc-iRKwDu.dGmAVd > div:nth-child(1) > div")
+				document.querySelector(
+					"#root > div.sc-inJWWq.lbdOVj > div > div > div.sc-iRKwDu.dGmAVd > div:nth-child(1) > div"
+				)
 			)
 				presenceData.details = "Choosing mode";
 		} else if (pathname.startsWith("/signup"))
