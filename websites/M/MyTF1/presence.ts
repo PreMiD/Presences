@@ -11,9 +11,20 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	myTf1 = "https://i.imgur.com/k8jIoSZ.png",
+	tf1 = "https://i.imgur.com/pFgnoUS.png",
+	tfx = "https://i.imgur.com/u5dTkHx.png",
+	tmc = "https://i.imgur.com/62uYw2r.png",
+	lci = "https://i.imgur.com/qrRgNgk.png",
+	tf1Series = "https://i.imgur.com/WOmFIm3.png",
+	live = "https://i.imgur.com/xuvR04J.png",
+	replay = "https://i.imgur.com/OZDAx9n.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/k8jIoSZ.png",
+			largeImageKey: Assets.myTf1,
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname,
@@ -26,9 +37,6 @@ presence.on("UpdateData", async () => {
 	if (path === "/") {
 		presenceData.details = (await strings).viewHome;
 		presenceData.state = browse;
-		delete presenceData.smallImageKey;
-		delete presenceData.smallImageText;
-		presenceData.largeImageKey = "https://i.imgur.com/k8jIoSZ.png";
 	} else if (path.startsWith("/tf1/direct")) {
 		presenceData.details = document.querySelector(
 			".VideoSummary_programName_xXfYS"
@@ -36,116 +44,109 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			".VideoSummary_title_o8ZzQ"
 		).textContent;
-		presenceData.smallImageKey = "https://i.imgur.com/xuvR04J.png";
+		presenceData.smallImageKey = Assets.live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
-				"[class*=LiveShowCardsSlider_list__card_uOvlu] picture img"
+				"[class*=VideoSummary_programLink_xY8sS] picture img"
 			).src
 		) {
-			presenceData.largeImageKey = document
-				.querySelectorAll(".LiveShowCardsSlider_list__card_uOvlu")[0]
-				.querySelector("picture")
-				.querySelector("img").src;
-		} else presenceData.largeImageKey = "https://i.imgur.com/kSpxrRD.png";
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"[class*=VideoSummary_programLink_xY8sS] picture img"
+			).src;
+		} else presenceData.largeImageKey = Assets.tf1;
 	} else if (path.startsWith("/tfx/direct")) {
 		presenceData.details = document.querySelector(
-			".VideoSummary_programName_xXfYS"
+			"[class*=VideoSummary_programName]"
 		).textContent;
 		presenceData.state = document.querySelector(
-			".VideoSummary_title_o8ZzQ"
+			"[class*=VideoSummary_title_o8ZzQ]"
 		).textContent;
-		presenceData.smallImageKey = "https://i.imgur.com/xuvR04J.png";
+		presenceData.smallImageKey = Assets.live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
-				"[class*=LiveShowCardsSlider_list__card_uOvlu] picture img"
+				"[class*=VideoSummary_programLink_xY8sS] picture img"
 			).src
 		) {
-			presenceData.largeImageKey = document
-				.querySelectorAll(".LiveShowCardsSlider_list__card_uOvlu")[2]
-				.querySelector("picture")
-				.querySelector("img").src;
-		} else presenceData.largeImageKey = "https://i.imgur.com/T7CEbod.png";
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"[class*=VideoSummary_programLink_xY8sS] picture img"
+			).src;
+		} else presenceData.largeImageKey = Assets.tfx;
 	} else if (path.startsWith("/tmc/direct")) {
 		presenceData.details = document.querySelector(
-			".VideoSummary_programName_xXfYS"
+			"[class*=VideoSummary_programName]"
 		).textContent;
 		presenceData.state = document.querySelector(
-			".VideoSummary_title_o8ZzQ"
+			"[class*=VideoSummary_title_o8ZzQ]"
 		).textContent;
-		presenceData.smallImageKey = "https://i.imgur.com/xuvR04J.png";
+		presenceData.smallImageKey = Assets.live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
-				"[class*=LiveShowCardsSlider_list__card_uOvlu] picture img"
+				"[class*=VideoSummary_programLink_xY8sS] picture img"
 			).src
 		) {
-			presenceData.largeImageKey = document
-				.querySelectorAll(".LiveShowCardsSlider_list__card_uOvlu")[1]
-				.querySelector("picture")
-				.querySelector("img").src;
-		} else presenceData.largeImageKey = "https://i.imgur.com/0ywqrX9.png";
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"[class*=VideoSummary_programLink_xY8sS] picture img"
+			).src;
+		} else presenceData.largeImageKey = Assets.tmc;
 	} else if (path.startsWith("/tf1-series-films/direct")) {
 		presenceData.details = document.querySelector(
-			".VideoSummary_programName_xXfYS"
+			"[class*=VideoSummary_programName]"
 		).textContent;
 		presenceData.state = document.querySelector(
-			".VideoSummary_title_o8ZzQ"
+			"[class*=VideoSummary_title_o8ZzQ]"
 		).textContent;
-		presenceData.smallImageKey = "https://i.imgur.com/xuvR04J.png";
+		presenceData.smallImageKey = Assets.live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
-				"[class*=LiveShowCardsSlider_list__card_uOvlu] picture img"
+				"[class*=VideoSummary_programLink_xY8sS] picture img"
 			).src
 		) {
-			presenceData.largeImageKey = document
-				.querySelectorAll(".LiveShowCardsSlider_list__card_uOvlu")[3]
-				.querySelector("picture")
-				.querySelector("img").src;
-		} else presenceData.largeImageKey = "https://i.imgur.com/Ocu2g76.png";
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"[class*=VideoSummary_programLink_xY8sS] picture img"
+			).src;
+		} else presenceData.largeImageKey = Assets.tf1Series;
 	} else if (path.startsWith("/lci/direct")) {
 		presenceData.details = "La Chaîne Info";
 		presenceData.state = document.querySelector(
-			".VideoSummary_title_o8ZzQ"
+			"[class*=VideoSummary_title_o8ZzQ]"
 		).textContent;
-		presenceData.smallImageKey = "https://i.imgur.com/xuvR04J.png";
+		presenceData.smallImageKey = Assets.live;
 		presenceData.smallImageText = live;
-		presenceData.largeImageKey = "https://i.imgur.com/zUhVSNY.png";
+		presenceData.largeImageKey = Assets.lci;
 	} else if (path.startsWith("/stream")) {
 		presenceData.details = `Stream : ${
-			document.querySelector(".VideoSummary_programName_xXfYS").textContent
+			document.querySelector("[class*=VideoSummary_programName_xXfYS")
+				.textContent
 		}`;
 		presenceData.state = document.querySelector(
-			".VideoSummary_title_o8ZzQ"
+			"[class*=VideoSummary_title_o8ZzQ]"
 		).textContent;
-		presenceData.smallImageKey = "https://i.imgur.com/xuvR04J.png";
+		presenceData.smallImageKey = Assets.live;
 		presenceData.smallImageText = live;
-		presenceData.largeImageKey = "https://i.imgur.com/k8jIoSZ.png";
 	} else if (path.includes("/programmes-tv")) {
 		presenceData.details = "Programmes TV";
 		presenceData.state = `${browse} Liste des programmes`;
-		delete presenceData.smallImageKey;
-		delete presenceData.smallImageText;
 		if (path.split("/")[1] === "programmes-tv")
-			presenceData.largeImageKey = "https://i.imgur.com/k8jIoSZ.png";
+			presenceData.largeImageKey = Assets.myTf1;
 		else presenceData.largeImageKey = path.split("/")[1];
 	} else if (path.startsWith("/mon-compte")) {
 		presenceData.details = (await strings).viewProfile;
 		presenceData.state = browse;
-		presenceData.largeImageKey = "https://i.imgur.com/k8jIoSZ.png";
 	} else if (
 		path.split("/")[3].includes("videos") &&
 		path.split("/")[4].includes("-")
 	) {
 		presenceData.details = document.querySelector(
-			".VideoSummary_programName_xXfYS"
+			"[class*=VideoSummary_programName_xXfYS"
 		).textContent;
 		presenceData.state = document.querySelector(
-			".VideoSummary_title_o8ZzQ"
+			"[class*=VideoSummary_title_o8ZzQ]"
 		).textContent;
-		presenceData.smallImageKey = "https://i.imgur.com/OZDAx9n.png";
+		presenceData.smallImageKey = Assets.replay;
 		presenceData.smallImageText = (await strings).watchingVid;
 		presenceData.largeImageKey = path.split("/")[1];
 	} else if (path.split("/")[2].includes("-")) {
@@ -153,17 +154,12 @@ presence.on("UpdateData", async () => {
 			.querySelector(".Tabs_tabs__list_FwTdR")
 			.querySelector("h1").textContent;
 		presenceData.state = `${browse} Liste des replays`;
-		presenceData.largeImageKey = "https://i.imgur.com/k8jIoSZ.png";
 	} else if (path.split("/")[3].includes("videos")) {
 		presenceData.details = document
 			.querySelector(".ProgramPageVideo_paddingMenu_cEuG_")
 			.querySelector("h1").textContent;
 		presenceData.state = `${browse} Liste des vidéos`;
-		presenceData.largeImageKey = "https://i.imgur.com/k8jIoSZ.png";
-	} else {
-		presenceData.details = browse;
-		presenceData.largeImageKey = "https://i.imgur.com/k8jIoSZ.png";
-	}
+	} else presenceData.details = browse;
 
 	presence.setActivity(presenceData);
 });
