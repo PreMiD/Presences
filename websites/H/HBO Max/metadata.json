@@ -11,13 +11,13 @@
 		"vi_VN": "Nền tảng phát trực tuyến đem tất cả của HBO với nhiều phim và chương trình truyền hình hơn nữa, thêm các bộ Max Originals."
 	},
 	"url": [
-		"hbomax.com",
-		"www.hbomax.com",
-		"play.hbomax.com",
-		"help.hbomax.com"
+		"max.com",
+		"www.max.com",
+		"play.max.com",
+		"help.max.com"
 	],
 	"version": "2.2.3",
-	"logo": "https://i.imgur.com/UxH7DDE.png",
+	"logo": "https://pbs.twimg.com/media/Fth6aQMXwQEb4NU?format=jpg&name=900x900",
 	"thumbnail": "https://i.imgur.com/d1bktD4.jpg",
 	"color": "#c600ff",
 	"category": "videos",
