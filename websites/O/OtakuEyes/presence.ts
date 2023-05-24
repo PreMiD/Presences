@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const [page, , episode] = document.location.pathname.split("/").slice(1, 4),
-		[showCover] = await Promise.all([presence.getSetting<boolean>("cover")]),
+		showCover = await presence.getSetting<boolean>("cover"),
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/b3H1vRU.png",
 			startTimestamp: browsingTimestamp,
