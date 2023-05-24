@@ -39,10 +39,10 @@ presence.on("UpdateData", async () => {
 		presenceData.state = browse;
 	} else if (path.startsWith("/tf1/direct")) {
 		presenceData.details = document.querySelector(
-			".VideoSummary_programName_xXfYS"
+			"[class*=VideoSummary_programName_xXfYS]"
 		).textContent;
 		presenceData.state = document.querySelector(
-			".VideoSummary_title_o8ZzQ"
+			"[class*=VideoSummary_title_o8ZzQ]"
 		).textContent;
 		presenceData.smallImageKey = Assets.live;
 		presenceData.smallImageText = live;
@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = Assets.lci;
 	} else if (path.startsWith("/stream")) {
 		presenceData.details = `Stream : ${
-			document.querySelector("[class*=VideoSummary_programName_xXfYS")
+			document.querySelector("[class*=VideoSummary_programName_xXfYS]")
 				.textContent
 		}`;
 		presenceData.state = document.querySelector(
@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 		path.split("/")[4].includes("-")
 	) {
 		presenceData.details = document.querySelector(
-			"[class*=VideoSummary_programName_xXfYS"
+			"[class*=VideoSummary_programName_xXfYS]"
 		).textContent;
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title_o8ZzQ]"
@@ -151,12 +151,12 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = path.split("/")[1];
 	} else if (path.split("/")[2].includes("-")) {
 		presenceData.details = document
-			.querySelector(".Tabs_tabs__list_FwTdR")
+			.querySelector("[class*=Tabs_tabs__list_FwTdR]")
 			.querySelector("h1").textContent;
 		presenceData.state = `${browse} Liste des replays`;
 	} else if (path.split("/")[3].includes("videos")) {
 		presenceData.details = document
-			.querySelector(".ProgramPageVideo_paddingMenu_cEuG_")
+			.querySelector("[class*=ProgramPageVideo_paddingMenu_cEuG_]")
 			.querySelector("h1").textContent;
 		presenceData.state = `${browse} Liste des vidéos`;
 	} else presenceData.details = browse;
