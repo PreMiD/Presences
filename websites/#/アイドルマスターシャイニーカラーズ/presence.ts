@@ -1,14 +1,14 @@
 const presence = new Presence({
-	clientId: "1103931016525127792",
-});
+		clientId: "1103931016525127792",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
-		browsingTimestamp = Math.floor(Date.now() / 1000),
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/ue8EatG.jpg",
 			startTimestamp: browsingTimestamp,
-			details: "シャニマスをプレイ中", // デフォルトの値を設定
+			details: "シャニマスをプレイ中",
 		},
 		pathMap: Record<string, PresenceData> = {
 			"/home": { details: "ホーム画面" },
