@@ -40,6 +40,15 @@ presence.on("UpdateData", async () => {
 		else {
 			presenceData.details = "Viewing a book series:";
 			presenceData.state = bookseries;
+
+			presenceData.largeImageKey = document.querySelector(".gr-box--withShadow.responsiveBook__img").getAttribute("src"); // get first book in series img
+			presenceData.buttons = [
+				{
+					label: "View Series",
+					url: document.location.href,
+				}
+			];
+
 		}
 	} else if (document.location.pathname.includes("/user/show/")) {
 		presenceData.details = "Viewing a profile:";
