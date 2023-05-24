@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 		author = document.querySelector(".authorName span").textContent;
 		presenceData.state = author;
 
-		presenceData.largeImageKey = document.querySelector(".authorLeftContainer a img").getAttribute("src");
+		presenceData.largeImageKey = document.querySelector(".leftContainer.authorLeftContainer img").getAttribute("src");
 		presenceData.buttons = [
 			{
 				label: "View Author",
