@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const bandido: GamePresence = {
-	logo: "https://i.imgur.com/06H3HnB.png",
+	logo: "https://i.imgur.com/9vZ20eK.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
