@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const castlesofcaleira: GamePresence = {
-	logo: "blob:https://imgur.com/0e86ea44-35d3-465f-a53e-57678e4db8fe",
+	logo: "https://i.imgur.com/J249SKd.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
