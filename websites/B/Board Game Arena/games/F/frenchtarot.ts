@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const frenchtarot: GamePresence = {
-	logo: "https://i.imgur.com/sZsmEzE.png",
+	logo: "https://i.imgur.com/TuwDUsw.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
