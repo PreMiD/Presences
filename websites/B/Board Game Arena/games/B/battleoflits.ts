@@ -25,7 +25,6 @@ const battleoflits: GamePresence = {
 			switch (gameState) {
 				case "firstTurn":
 					data.state = "Playing a piece";
-					data.state = "Playing a piece";
 					break;
 				case "pieRule":
 					data.state = "Choosing whether to go first or second";
