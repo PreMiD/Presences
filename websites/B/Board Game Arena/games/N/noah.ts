@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const noah: GamePresence = {
-	logo: "https://i.imgur.com/wFVbUzi.png",
+	logo: "https://i.imgur.com/xJ1V7dv.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
