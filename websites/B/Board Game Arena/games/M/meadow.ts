@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const meadow: GamePresence = {
-	logo: "https://i.imgur.com/bDezkEK.png",
+	logo: "https://i.imgur.com/jXtuYsW.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
