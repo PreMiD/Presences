@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "867525909204566056" }),
-	timeElapsed: number = Math.floor(Date.now() / 1000);
-
-let book: string, author: string;
+	timeElapsed: number = Math.floor(Date.now() / 1000),
+	{ pathname, href } = document.location;
+	let book: string, author: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -11,13 +11,13 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (
-		document.location.pathname === "/home" ||
-		document.location.pathname === "/"
+		pathname === "/home" ||
+		pathname === "/"
 	)
 		presenceData.details = "Browsing homepage";
-	else if (document.location.pathname === "/book")
+	else if (pathname === "/book")
 		presenceData.details = "Browsing books";
-	else if (document.location.pathname.includes("/book/show/")) {
+	else if (pathname.includes("/book/show/")) {
 		presenceData.details = "Viewing a book:";
 
 		book = document.querySelector("h1").textContent;
@@ -29,13 +29,13 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Book",
-				url: document.location.href,
+				url: href,
 			},
 		];
 
 		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = `By: ${author}`;
-	} else if (document.location.pathname.includes("/series")) {
+	} else if (pathname.includes("/series")) {
 		const bookseries: string = document.querySelector("h1").textContent;
 		if (bookseries === "Series")
 			presenceData.details = "Viewing all book series on Goodreads";
@@ -49,11 +49,11 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Series",
-					url: document.location.href,
+					url: href,
 				},
 			];
 		}
-	} else if (document.location.pathname.includes("/user/show/")) {
+	} else if (pathname.includes("/user/show/")) {
 		presenceData.details = "Viewing a profile:";
 		//Without reading ID for private profiles
 		const user: string = document.querySelector("h1").textContent;
@@ -73,13 +73,13 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Profile",
-					url: document.location.href,
+					url: href,
 				},
 			];
 		} catch {
 			presenceData.details = "Trying to view a private profile:";
 		}
-	} else if (document.location.pathname.includes("/user/year_in_books/")) {
+	} else if (pathname.includes("/user/year_in_books/")) {
 		presenceData.details = `Viewing ${
 			document.querySelector(".bannerYearText").textContent
 		} year in books of:`;
@@ -89,13 +89,13 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document
 			.querySelector(".headerImageContainer img")
 			.getAttribute("src");
-	} else if (document.location.pathname.includes("/photo/author/")) {
+	} else if (pathname.includes("/photo/author/")) {
 		presenceData.details = "Viewing an author photo:";
 		presenceData.state = document.querySelector("h1 a").textContent;
 		presenceData.largeImageKey = document
 			.querySelector(".profile a img")
 			.getAttribute("src");
-	} else if (document.location.pathname.includes("/author/show/")) {
+	} else if (pathname.includes("/author/show/")) {
 		presenceData.details = "Viewing an author:";
 		author = document.querySelector(".authorName span").textContent;
 		presenceData.state = author;
@@ -106,35 +106,35 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Author",
-				url: document.location.href,
+				url: href,
 			},
 		];
-	} else if (document.location.pathname.includes("/group/show/")) {
+	} else if (pathname.includes("/group/show/")) {
 		presenceData.details = "Viewing a group:";
 		presenceData.state = document.querySelector("h1").textContent;
-	} else if (document.location.pathname.includes("/topic"))
+	} else if (pathname.includes("/topic"))
 		presenceData.details = "Browsing discussions";
-	else if (document.location.pathname.includes("/review/edit/")) {
+	else if (pathname.includes("/review/edit/")) {
 		book = document.querySelector("a.bookTitle").textContent;
 		presenceData.details = "Writing a book review...";
 		presenceData.smallImageKey = Assets.Writing;
 		presenceData.smallImageText = book;
-	} else if (document.location.pathname.includes("/review/list/"))
+	} else if (pathname.includes("/review/list/"))
 		presenceData.details = "Browsing bookshelves";
-	else if (document.location.pathname.includes("/review/show")) {
+	else if (pathname.includes("/review/show")) {
 		presenceData.details = "Reading a review...";
 		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "On Goodreads";
-	} else if (document.location.pathname.includes("/recommendations"))
+	} else if (pathname.includes("/recommendations"))
 		presenceData.details = "Browsing recommendations";
 	else if (
-		document.location.pathname.includes("/challenges") ||
-		document.location.pathname.includes("/user_challenges")
+		pathname.includes("/challenges") ||
+		pathname.includes("/user_challenges")
 	)
 		presenceData.details = "Viewing reading challenge";
-	else if (document.location.pathname.includes("/quotes"))
+	else if (pathname.includes("/quotes"))
 		presenceData.details = "Browsing quotes";
-	else if (document.location.pathname.includes("/search")) {
+	else if (pathname.includes("/search")) {
 		presenceData.details = "Searching for a book...";
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "On Goodreads";
