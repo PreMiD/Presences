@@ -35,6 +35,7 @@ const viticulture: GamePresence = {
 				case "seasonWorkers":
 					data.state = "Placing a worker";
 					break;
+				case "chooseVisitorCardDraw":
 				case "fallChooseCard":
 					data.state = "Drawing a visitor card";
 					break;
@@ -52,9 +53,6 @@ const viticulture: GamePresence = {
 					break;
 				case "fillOrder":
 					data.state = "Filling a wine order";
-					break;
-				case "chooseVisitorCardDraw":
-					data.state = "Drawing a visitor card";
 					break;
 				case "chooseCards":
 					data.state = "Choosing cards";

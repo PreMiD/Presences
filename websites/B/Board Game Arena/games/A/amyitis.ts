@@ -33,6 +33,7 @@ const amyitis: GamePresence = {
 				case "recruitEngineerNoPoints":
 					data.state = "Building an irrigation";
 					break;
+				case "procession":
 				case "recruitPriest":
 					data.state = "Choosing a temple";
 					break;
@@ -60,9 +61,6 @@ const amyitis: GamePresence = {
 					break;
 				case "ishtarChoice":
 					data.state = "Choosing a talent or camel (Ishtar temple power)";
-					break;
-				case "procession":
-					data.state = "Choosing a temple";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

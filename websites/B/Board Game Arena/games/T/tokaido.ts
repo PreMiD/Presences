@@ -35,6 +35,7 @@ const tokaido: GamePresence = {
 				case "templeStop":
 					data.state = "Donating to the temple";
 					break;
+				case "innStopSatsuki":
 				case "innStop":
 					data.state = "Purchasing a meal";
 					break;
@@ -47,6 +48,7 @@ const tokaido: GamePresence = {
 				case "legendaryObjectStop":
 					data.state = "Purchasing a legendary object";
 					break;
+				case "innStopJirocho":
 				case "gamingRoomStop":
 					data.state = "Gambling";
 					break;
@@ -56,30 +58,20 @@ const tokaido: GamePresence = {
 				case "encounterStopPrepare":
 					data.state = "Choosing an encounter";
 					break;
+				case "innStopChuubeiPay":
 				case "encounterStopPay":
 					data.state = "Paying for an encounter";
 					break;
 				case "encounterStopKitoushi":
+				case "innStopHiroshige":
 				case "encounterStopPanoramaChoice":
 					data.state = "Choosing a free panorama";
 					break;
 				case "calligraphyStop":
 					data.state = "Purchasing a calligraphy";
 					break;
-				case "innStopSatsuki":
-					data.state = "Purchasing a meal";
-					break;
-				case "innStopHiroshige":
-					data.state = "Choosing a free panorama";
-					break;
-				case "innStopChuubeiPay":
-					data.state = "Paying for an encounter";
-					break;
 				case "innStopChuubei":
 					data.state = "Making an encounter";
-					break;
-				case "innStopJirocho":
-					data.state = "Gambling";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

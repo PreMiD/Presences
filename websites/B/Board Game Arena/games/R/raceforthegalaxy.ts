@@ -27,6 +27,8 @@ const raceforthegalaxy: GamePresence = {
 				case "initialDiscardHomeWorld":
 					data.state = "Discarding initial cards";
 					break;
+				case "breedingTube":
+				case "orbActionPlay":
 				case "initialOrb":
 					data.state = "Playing an Orb card";
 					break;
@@ -40,9 +42,6 @@ const raceforthegalaxy: GamePresence = {
 				case "orbActionMove":
 				case "orbActionMoveDest":
 					data.state = "Moving an Orb exploration team";
-					break;
-				case "orbActionPlay":
-					data.state = "Playing an Orb card";
 					break;
 				case "orbActionDraw":
 					data.state = "Drawing an Orb card";
@@ -84,9 +83,6 @@ const raceforthegalaxy: GamePresence = {
 					break;
 				case "draft":
 					data.state = "Choosing a card to keep";
-					break;
-				case "breedingTube":
-					data.state = "Playing an Orb card";
 					break;
 				case "invasionGameResolution":
 					data.state = "Using temporary Xeno powers";

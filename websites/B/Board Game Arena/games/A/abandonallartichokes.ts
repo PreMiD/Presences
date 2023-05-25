@@ -23,12 +23,14 @@ const abandonallartichokes: GamePresence = {
 			};
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
+				case "rhubarbHarvestCard":
 				case "harvest":
 					data.state = "Harvesting a card";
 					break;
 				case "playCard":
 					data.state = "Playing a card";
 					break;
+				case "beetChooseOpponent":
 				case "leekChooseOpponent":
 					data.state = "Choosing an opponent";
 					break;
@@ -52,12 +54,6 @@ const abandonallartichokes: GamePresence = {
 					break;
 				case "cornTakeCard":
 					data.state = "Picking a card";
-					break;
-				case "beetChooseOpponent":
-					data.state = "Choosing an opponent";
-					break;
-				case "rhubarbHarvestCard":
-					data.state = "Harvesting a card";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

@@ -79,9 +79,11 @@ const unconditionalsurrender: GamePresence = {
 				case "airCombat":
 					data.state = "Committing events for air combat";
 					break;
+				case "escort":
 				case "escortStrike":
 					data.state = "Choosing an escort";
 					break;
+				case "interceptionCombat2":
 				case "interceptionCombat":
 					data.state = "Committing events for interception";
 					break;
@@ -129,12 +131,6 @@ const unconditionalsurrender: GamePresence = {
 					break;
 				case "interception":
 					data.state = "Considering intercepting an action";
-					break;
-				case "escort":
-					data.state = "Choosing an escort";
-					break;
-				case "interceptionCombat2":
-					data.state = "Committing events for interception";
 					break;
 				case "abortInvasion":
 					data.state = "Aborting an amphibious invasion";

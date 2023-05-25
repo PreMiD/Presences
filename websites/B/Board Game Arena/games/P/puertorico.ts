@@ -41,6 +41,7 @@ const puertorico: GamePresence = {
 				case "playerCraftsmanPrivilege":
 					data.state = "Selecting a good to produce";
 					break;
+				case "playerBuilderBlackMarket":
 				case "playerBuilderBuildingSelection":
 					data.state = "Selecting a building to build";
 					break;
@@ -80,6 +81,7 @@ const puertorico: GamePresence = {
 				case "playerSettlerHacienda":
 					data.state = "Selecting a plantation from the deck";
 					break;
+				case "playerBuilderUniversity":
 				case "playerSettlerHospice":
 					data.state = "Selecting a colonist from the supply or ship";
 					break;
@@ -88,12 +90,6 @@ const puertorico: GamePresence = {
 					break;
 				case "playerSettlerHuntingLodge":
 					data.state = "Discarding a plantation";
-					break;
-				case "playerBuilderUniversity":
-					data.state = "Selecting a colonist from the supply or ship";
-					break;
-				case "playerBuilderBlackMarket":
-					data.state = "Selecting a building to build";
 					break;
 				case "playerMayorPrivilege":
 					data.state = "Selecting a colonist from the supply";

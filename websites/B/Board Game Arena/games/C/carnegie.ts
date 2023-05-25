@@ -48,14 +48,12 @@ const carnegie: GamePresence = {
 				case "playerRND":
 					data.state = "Using Research and Development Departments";
 					break;
+				case "multiActivateWorkers":
 				case "playerActivateWorkers":
 					data.state = "Activating workers";
 					break;
 				case "processWelfareDonation":
 					data.state = "Making Welfare donations";
-					break;
-				case "multiActivateWorkers":
-					data.state = "Activating workers";
 					break;
 				case "playerChooseTabs":
 					data.state = "Choosing project tabs";

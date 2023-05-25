@@ -39,6 +39,7 @@ const goodcopbadcop: GamePresence = {
 				case "askShootReaction":
 					data.state = "Reacting to a Shoot or Bite action";
 					break;
+				case "discardOutOfTurn":
 				case "discardEquipment":
 					data.state = "Discarding Equipment";
 					break;
@@ -64,9 +65,6 @@ const goodcopbadcop: GamePresence = {
 					break;
 				case "askAimOutOfTurn":
 					data.state = "Aiming a gun";
-					break;
-				case "discardOutOfTurn":
-					data.state = "Discarding Equipment";
 					break;
 				case "chooseIntegrityCards":
 				case "choosePlayer":

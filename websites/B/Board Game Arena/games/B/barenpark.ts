@@ -35,6 +35,7 @@ const barenpark: GamePresence = {
 				case "STATE_PRIVATE_CHOOSE_FROM_SUPPLY_BOARD":
 					data.state = "Selecting a tile from the supply board";
 					break;
+				case "STATE_PRIVATE_TRY_MODE_PLACE_PARK":
 				case "STATE_PRIVATE_PLACE_PLAYER_PARK":
 					data.state = "Placing a new park area";
 					break;
@@ -49,9 +50,6 @@ const barenpark: GamePresence = {
 					break;
 				case "STATE_PRIVATE_TRY_MODE_PLACE_TILE":
 					data.state = "Placing a tile";
-					break;
-				case "STATE_PRIVATE_TRY_MODE_PLACE_PARK":
-					data.state = "Placing a new park area";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

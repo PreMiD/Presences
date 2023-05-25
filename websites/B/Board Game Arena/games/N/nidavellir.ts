@@ -38,6 +38,7 @@ const nidavellir: GamePresence = {
 				case "transformCoin":
 					data.state = "Transforming a coin";
 					break;
+				case "discardTavernCard":
 				case "discardCard":
 					data.state = "Discarding a card";
 					break;
@@ -50,9 +51,6 @@ const nidavellir: GamePresence = {
 				case "chooseThrudColumn":
 				case "chooseYludColumn":
 					data.state = "Placing Thrud";
-					break;
-				case "discardTavernCard":
-					data.state = "Discarding a card";
 					break;
 				case "recruitCamp":
 					data.state = "Recruiting a mercenary or an artifact (Holda's effect)";

@@ -66,6 +66,8 @@ const throughtheagesnewstory: GamePresence = {
 				case "freeTemple":
 					data.state = "Building a temple";
 					break;
+				case "chooseReservesGain":
+				case "freeFoodResourceCustom":
 				case "freeFoodResource":
 					data.state = "Gaining food or resources";
 					break;
@@ -92,9 +94,6 @@ const throughtheagesnewstory: GamePresence = {
 					break;
 				case "christopherColumbus":
 					data.state = "Playing a territory card (Christopher Columbus)";
-					break;
-				case "freeFoodResourceCustom":
-					data.state = "Gaining food or resources";
 					break;
 				case "stealFoodResource5":
 				case "stealFoodResource7":
@@ -128,9 +127,6 @@ const throughtheagesnewstory: GamePresence = {
 					break;
 				case "homerGiveWonderHappyFace":
 					data.state = "Giving a wonder an extra happy face";
-					break;
-				case "chooseReservesGain":
-					data.state = "Gaining food or resources";
 					break;
 				case "infiltrate":
 					data.state = "Destroying a leader or wonder";

@@ -33,9 +33,12 @@ const abyss: GamePresence = {
 					data.state = "Purchasing an Ally";
 					break;
 				case "explore":
+				case "explore2":
+				case "explore3":
 					data.state = "Exploring";
 					break;
 				case "control":
+				case "controlPostDraw":
 					data.state = "Controlling a Location";
 					break;
 				case "chooseMonsterReward":
@@ -50,12 +53,13 @@ const abyss: GamePresence = {
 				case "lordEffect":
 					data.state = "Applying Lord effect";
 					break;
+				case "lord5":
+				case "postpurchaseDiscard":
 				case "cleanupDiscard":
 					data.state = "Discarding excess Allies";
 					break;
-				case "controlPostDraw":
-					data.state = "Controlling a Location";
-					break;
+				case "lord19":
+				case "lord19b":
 				case "locationEffectBlackSmokers":
 					data.state = "Swapping a Location";
 					break;
@@ -65,21 +69,11 @@ const abyss: GamePresence = {
 				case "secondStack":
 					data.state = "Taking a second stack from the Council";
 					break;
-				case "postpurchaseDiscard":
-					data.state = "Discarding excess Allies";
-					break;
-				case "explore2":
-				case "explore3":
-					data.state = "Exploring";
-					break;
 				case "lord2":
 					data.state = "Discarding an Ally";
 					break;
 				case "lord4":
 					data.state = "Disabling a Lord from each opponent";
-					break;
-				case "lord5":
-					data.state = "Discarding excess Allies";
 					break;
 				case "lord7":
 					data.state = "Stealing a Monster token";
@@ -93,9 +87,6 @@ const abyss: GamePresence = {
 				case "lord17":
 					data.state = "Discarding a Council stack";
 					break;
-				case "lord19":
-					data.state = "Swapping a Location";
-					break;
 				case "lord21":
 					data.state = "Discarding and replaceing a Lord";
 					break;
@@ -107,9 +98,6 @@ const abyss: GamePresence = {
 					break;
 				case "lord26":
 					data.state = "Discarding a Lord to gain one from the top of the deck";
-					break;
-				case "lord19b":
-					data.state = "Swapping a Location";
 					break;
 				case "lord23b":
 					data.state = "Swapping a Lord";

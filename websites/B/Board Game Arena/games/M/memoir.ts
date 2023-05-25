@@ -41,6 +41,7 @@ const memoir: GamePresence = {
 				case "moveUnits":
 					data.state = "Moving units";
 					break;
+				case "attackUnit":
 				case "attackUnits":
 					data.state = "Attacking units";
 					break;
@@ -79,9 +80,6 @@ const memoir: GamePresence = {
 					break;
 				case "selectUnits":
 					data.state = "Selecting units";
-					break;
-				case "attackUnit":
-					data.state = "Attacking units";
 					break;
 				case "airDrop":
 					data.state = "Air dropping units";

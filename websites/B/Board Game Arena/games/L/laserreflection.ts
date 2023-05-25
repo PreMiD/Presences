@@ -24,6 +24,8 @@ const laserreflection: GamePresence = {
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
 				case "puzzleCreationInit":
+				case "puzzleCreation":
+				case "puzzleCreationEnd":
 					data.state = "Creating a puzzle";
 					break;
 				case "puzzlePlayInit":
@@ -39,10 +41,6 @@ const laserreflection: GamePresence = {
 					break;
 				case "design":
 					data.state = "Sharing a puzzle";
-					break;
-				case "puzzleCreation":
-				case "puzzleCreationEnd":
-					data.state = "Creating a puzzle";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

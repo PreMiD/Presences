@@ -46,7 +46,6 @@ const eriantys: GamePresence = {
 					break;
 				case "character6_ability":
 					data.state = "Replacing students in their school";
-					data.state = "Replacing students in their school";
 					break;
 				case "character8_ability":
 				case "character11_ability":

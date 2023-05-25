@@ -32,6 +32,7 @@ const bigmonster: GamePresence = {
 				case "tileSelection":
 					data.state = "Selecting a tile";
 					break;
+				case "var_placeTile":
 				case "placeTile":
 					data.state = "Placing a tile";
 					break;
@@ -43,9 +44,6 @@ const bigmonster: GamePresence = {
 					break;
 				case "var_tileSelection":
 					data.state = "Selecting a tile to play/discard";
-					break;
-				case "var_placeTile":
-					data.state = "Placing a tile";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

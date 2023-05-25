@@ -38,14 +38,12 @@ const mascarade: GamePresence = {
 				case "powerOfFool":
 					data.state = "Exchanging cards";
 					break;
+				case "powerOfSpySwap":
 				case "powerOfSorceress":
 					data.state = "Choosing a card to swap";
 					break;
 				case "powerOfSpyLook":
 					data.state = "Choosing a card to look at";
-					break;
-				case "powerOfSpySwap":
-					data.state = "Choosing a card to swap";
 					break;
 				case "powerOfGuru":
 					data.state = "Choosing a player to point at";

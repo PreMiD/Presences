@@ -36,6 +36,7 @@ const krosmasterarena: GamePresence = {
 				case "changeDie":
 					data.state = "Choosing a die face";
 					break;
+				case "inspirationDiceNoReroll":
 				case "inspirationDice":
 					data.state = "Attributing inspiration dice to Krosmasters";
 					break;
@@ -45,6 +46,7 @@ const krosmasterarena: GamePresence = {
 				case "masterturn":
 					data.state = "Using Move Points and Action Points";
 					break;
+				case "selectSecondaryTargets":
 				case "spelltarget":
 					data.state = "Choosing a target for a spell";
 					break;
@@ -55,9 +57,11 @@ const krosmasterarena: GamePresence = {
 				case "boostChoice":
 					data.state = "Choosing a bonus";
 					break;
+				case "move_next_to_me":
 				case "move_next_to_target":
 					data.state = "Moving next to a target";
 					break;
+				case "place_next_to_target_square":
 				case "place_next_to_target":
 					data.state = "Placing a summon around a target";
 					break;
@@ -88,9 +92,7 @@ const krosmasterarena: GamePresence = {
 				case "changeDieOnDouble":
 					data.state = "Choosing to re-roll a die";
 					break;
-				case "inspirationDiceNoReroll":
-					data.state = "Attributing inspiration dice to Krosmasters";
-					break;
+				case "move_adjacent_ally_not_self_to_target":
 				case "move_adjacent_ally_to_target_then_move_next_to_target":
 					data.state = "Moving an ally next to a target";
 					break;
@@ -103,9 +105,6 @@ const krosmasterarena: GamePresence = {
 				case "masquerade":
 					data.state = "Replacing a Maskeman";
 					break;
-				case "selectSecondaryTargets":
-					data.state = "Choosing a target for a spell";
-					break;
 				case "move_adjacent_opponent_to_target":
 					data.state = "Moving an opponent next to a target";
 					break;
@@ -114,9 +113,6 @@ const krosmasterarena: GamePresence = {
 					break;
 				case "suckerstab":
 					data.state = "Choosing the number of AP to spend";
-					break;
-				case "move_next_to_me":
-					data.state = "Moving next to a target";
 					break;
 				case "cometomama":
 					data.state = "Choosing the number of Kama to spend";
@@ -127,14 +123,8 @@ const krosmasterarena: GamePresence = {
 				case "summon_place":
 					data.state = "Placing a summon on the board";
 					break;
-				case "move_adjacent_ally_not_self_to_target":
-					data.state = "Moving an ally next to a target";
-					break;
 				case "thrifty":
 					data.state = "Choosing to ignore the spell cost";
-					break;
-				case "place_next_to_target_square":
-					data.state = "Placing a summon around a target";
 					break;
 				case "gameEnd":
 					data.state = "Viewing game results";

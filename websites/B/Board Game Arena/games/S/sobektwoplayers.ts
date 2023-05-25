@@ -35,6 +35,7 @@ const sobektwoplayers: GamePresence = {
 				case "pickResource":
 					data.state = "Choosing a resource for the set";
 					break;
+				case "characterArchitect":
 				case "pirogue":
 					data.state = "Choosing a Pirogue token";
 					break;
@@ -44,6 +45,7 @@ const sobektwoplayers: GamePresence = {
 				case "pirogue07":
 					data.state = "Choosing a resource to add the Pirogue token to";
 					break;
+				case "characterMerchant":
 				case "playerTurn2":
 					data.state = "Choosing a tile from the market";
 					break;
@@ -53,17 +55,11 @@ const sobektwoplayers: GamePresence = {
 				case "characterThief":
 					data.state = "Choosing a tile from the opponent's hand";
 					break;
-				case "characterMerchant":
-					data.state = "Choosing a tile from the market";
-					break;
 				case "characterHighPriest":
 					data.state = "Choosing a type to remove from the Corruption board";
 					break;
 				case "characterCourtesan":
 					data.state = "Choosing a set to add tiles to";
-					break;
-				case "characterArchitect":
-					data.state = "Choosing a Pirogue token";
 					break;
 				case "characterScribe":
 					data.state = "Discarding tiles";

@@ -24,6 +24,7 @@ const feastforodin: GamePresence = {
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
 				case "pickAction":
+				case "command-clerk":
 				case "confirmTurn":
 					data.state = "Taking an action";
 					break;
@@ -32,6 +33,7 @@ const feastforodin: GamePresence = {
 				case "gameEnd-placegoods":
 					data.state = "Placing goods";
 					break;
+				case "command-personalfeast":
 				case "feast-placegoods":
 					data.state = "Placing goods on their feast board";
 					break;
@@ -39,51 +41,6 @@ const feastforodin: GamePresence = {
 					data.state = "Playing an occupation";
 					break;
 				case "command-exchange":
-					data.state = "Making an exchange";
-					break;
-				case "command-forge":
-					data.state = "Taking a special tile from the forge";
-					break;
-				case "command-forgebuy":
-					data.state = "Buying a special tile from the forge";
-					break;
-				case "command-mountain":
-					data.state = "Taking resources from a mountain strip";
-					break;
-				case "command-trade":
-					data.state = "Upgrading green goods";
-					break;
-				case "command-upgrade":
-					data.state = "Upgrading goods";
-					break;
-				case "command-hunt":
-					data.state = "Hunting";
-					break;
-				case "command-hunt-reward":
-					data.state = "Picking a hunting reward";
-					break;
-				case "command-emigrate":
-					data.state = "Emigrating";
-					break;
-				case "command-swapwhalingboatknarr":
-					data.state = "Swapping a whaling boat for a knarr";
-					break;
-				case "command-clone":
-					data.state = "Copying an action";
-					break;
-				case "command-personalfeast":
-					data.state = "Placing goods on their feast board";
-					break;
-				case "command-storeman":
-					data.state = "Taking a good";
-					break;
-				case "command-meatupgrade":
-					data.state = "Upgrading a meat good";
-					break;
-				case "command-inspector":
-				case "command-inspector2":
-					data.state = "Returning a viking to the Thing space";
-					break;
 				case "command-hornturner":
 				case "command-hornturner2":
 				case "command-wharfowner":
@@ -114,6 +71,57 @@ const feastforodin: GamePresence = {
 				case "command-bosporustraveller":
 					data.state = "Making an exchange";
 					break;
+				case "command-forge":
+					data.state = "Taking a special tile from the forge";
+					break;
+				case "command-forgebuy":
+					data.state = "Buying a special tile from the forge";
+					break;
+				case "command-armedfighter":
+				case "command-mountain":
+					data.state = "Taking resources from a mountain strip";
+					break;
+				case "command-trade":
+					data.state = "Upgrading green goods";
+					break;
+				case "command-upgrade":
+				case "command-sameupgrade":
+				case "command-nwupgrade":
+				case "command-payupgrade":
+					data.state = "Upgrading goods";
+					break;
+				case "command-hunt":
+				case "command-prehunt":
+					data.state = "Hunting";
+					break;
+				case "command-hunt-reward2":
+				case "command-hunt-reward":
+					data.state = "Picking a hunting reward";
+					break;
+				case "command-emigrate":
+					data.state = "Emigrating";
+					break;
+				case "command-swapwhalingboatknarr":
+					data.state = "Swapping a whaling boat for a knarr";
+					break;
+				case "command-follower":
+				case "command-clone":
+					data.state = "Copying an action";
+					break;
+				case "command-storeman":
+				case "command-disheartenedwarrior":
+				case "command-lancebearer":
+					data.state = "Taking a good";
+					break;
+				case "command-meatupgrade":
+					data.state = "Upgrading a meat good";
+					break;
+				case "command-inspector":
+				case "command-inspector2":
+				case "command-ironsmith":
+				case "command-snarespecialist":
+					data.state = "Returning a viking to the Thing space";
+					break;
 				case "command-fieldfarmer":
 					data.state = "Upgrading an orange good";
 					break;
@@ -123,32 +131,13 @@ const feastforodin: GamePresence = {
 				case "command-flip":
 					data.state = "Flipping goods";
 					break;
-				case "command-sameupgrade":
-					data.state = "Upgrading goods";
-					break;
 				case "command-quartermaster":
 				case "command-longshipbuilder":
 					data.state = "Buying a longship";
 					break;
 				case "command-harborguard":
-					data.state = "Picking a boat to emigrate";
-					break;
-				case "command-disheartenedwarrior":
-				case "command-lancebearer":
-					data.state = "Taking a good";
-					break;
-				case "command-ironsmith":
-				case "command-snarespecialist":
-					data.state = "Returning a viking to the Thing space";
-					break;
 				case "command-emigratepassable":
 					data.state = "Picking a boat to emigrate";
-					break;
-				case "command-payupgrade":
-					data.state = "Upgrading goods";
-					break;
-				case "command-armedfighter":
-					data.state = "Taking resources from a mountain strip";
 					break;
 				case "command-beforeorafter-draw":
 					data.state = "Choosing when to draw an occupation";
@@ -156,27 +145,12 @@ const feastforodin: GamePresence = {
 				case "command-beforeorafter-play":
 					data.state = "Choosing when to play an occupation";
 					break;
-				case "command-prehunt":
-					data.state = "Hunting";
-					break;
 				case "command-peacemaker":
 					data.state = "Taking a resource";
-					break;
-				case "command-hunt-reward2":
-					data.state = "Picking a hunting reward";
 					break;
 				case "command-swordfighter":
 				case "command-berserker":
 					data.state = "Removing an ore for a boost";
-					break;
-				case "command-follower":
-					data.state = "Copying an action";
-					break;
-				case "command-clerk":
-					data.state = "Taking an action";
-					break;
-				case "command-nwupgrade":
-					data.state = "Upgrading goods";
 					break;
 				case "command-latecomer":
 					data.state = "Using Latecomer";

@@ -37,7 +37,6 @@ const gonutsfordonuts: GamePresence = {
 					break;
 				case "actionFrenchCruller":
 					data.state = "Discarding donuts";
-					data.state = "Discarding donuts";
 					break;
 				case "actionCinnamonTwist":
 					data.state = "Passing a donut to the next player";

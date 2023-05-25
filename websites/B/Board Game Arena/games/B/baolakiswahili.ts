@@ -32,6 +32,7 @@ const baolakiswahili: GamePresence = {
 				case "kunamuaMoveExecution":
 					data.state = "Executing move";
 					break;
+				case "mtajiCaptureSelection":
 				case "kunamuaCaptureSelection":
 					data.state = "Selecting kichwa";
 					break;
@@ -43,9 +44,6 @@ const baolakiswahili: GamePresence = {
 					break;
 				case "mtajiMoveExecution":
 					data.state = "Executing mtaji move";
-					break;
-				case "mtajiCaptureSelection":
-					data.state = "Selecting kichwa";
 					break;
 				case "husMoveSelection":
 					data.state = "Making a move";
