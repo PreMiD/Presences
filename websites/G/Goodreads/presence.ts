@@ -110,14 +110,17 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing discussions";
 	else if (pathname.includes("/review/edit/")) {
 		presenceData.details = "Writing a book review...";
-		presenceData.state = document.querySelector("a.bookTitle").textContent;
-
-		presenceData.smallImageKey = document
-			.querySelector(".leftAlignedImage")
-			.getAttribute("src");
-		presenceData.smallImageText = `Rating for ${document
-			.querySelector(".stars")
-			.getAttribute("data-rating")}☆ stars`;
+		try {
+			presenceData.state = document.querySelector("a.bookTitle").textContent;
+			presenceData.smallImageKey = document
+				.querySelector(".leftAlignedImage")
+				.getAttribute("src");
+			presenceData.smallImageText = `Rating for ${document
+				.querySelector(".stars")
+				.getAttribute("data-rating")}☆ stars`;
+		} catch {
+			presenceData.state = "Trying to edit an unknow book...";
+		}
 
 		presenceData.largeImageKey = Assets.Writing;
 	} else if (pathname.includes("/review/list/"))
