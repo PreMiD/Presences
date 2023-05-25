@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.match(threadExportRegex)) {
 				presenceData.buttons = [
 					{
-						label: "Open thread",
+						label: "Open Thread",
 						url: href,
 					},
 				];
