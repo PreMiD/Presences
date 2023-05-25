@@ -47,6 +47,7 @@ function setCacheTime(key: string, time: number) {
 	dataCacheTime[key] = time;
 }
 
+// TODO: Remove or replace with newer function coming in v2.5
 function getPageVariable<T>(
 	variable: string,
 	presence: Presence,
