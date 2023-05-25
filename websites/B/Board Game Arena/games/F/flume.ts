@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const flume: GamePresence = {
-	logo: "https://i.imgur.com/nXCXyLO.png",
+	logo: "https://i.imgur.com/FZRLXAO.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
