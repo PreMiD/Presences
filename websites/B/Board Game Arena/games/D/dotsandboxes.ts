@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const dotsandboxes: GamePresence = {
-	logo: "https://i.imgur.com/wpsDpO7.png",
+	logo: "https://i.imgur.com/lSOhWTe.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
