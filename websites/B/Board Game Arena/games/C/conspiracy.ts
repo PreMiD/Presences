@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const conspiracy: GamePresence = {
-	logo: "https://i.imgur.com/zQCv2iy.png",
+	logo: "https://i.imgur.com/Qkr0Zso.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
