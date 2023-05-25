@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
 				.querySelector(".stars")
 				.getAttribute("data-rating")}☆ stars`;
 		} catch {
-			presenceData.state = "Trying to edit an unknow book...";
+			presenceData.state = "Trying to edit an unknown book...";
 		}
 
 		presenceData.largeImageKey = Assets.Writing;
