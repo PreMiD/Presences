@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
-		pathList = pathname.split("/").filter(x => x !== "");
+		pathList = pathname.split("/").filter(Boolean);
 
 	switch (pathList[0] ?? "welcome") {
 		case "welcome": {
