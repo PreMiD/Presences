@@ -1,13 +1,13 @@
 const presence = new Presence({ clientId: "867525909204566056" }),
-	timeElapsed: number = Math.floor(Date.now() / 1000),
-	{ pathname, href } = document.location;
+	timeElapsed: number = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/DtHgzGt.png",
-		details: "Browsing Goodreads",
-		startTimestamp: timeElapsed,
-	};
+			largeImageKey: "https://i.imgur.com/DtHgzGt.png",
+			details: "Browsing Goodreads",
+			startTimestamp: timeElapsed,
+		},
+		{ pathname, href } = document.location;
 
 	if (pathname === "/home" || pathname === "/")
 		presenceData.details = "Browsing homepage";
