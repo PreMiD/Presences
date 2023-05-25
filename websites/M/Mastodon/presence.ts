@@ -90,8 +90,7 @@ presence.on("UpdateData", async () => {
 								[checkPositionAccountAvatar()].querySelector("img")
 								.getAttribute("src");
 							presenceData.largeImageKey = document
-								.querySelector(".about__header__hero")
-								.querySelector("img")
+								.querySelector(".about__header__hero img")
 								.getAttribute("src");
 							presenceData.smallImageText = `About ${hostname}`;
 							presenceData.details = `About ${hostname}`;
