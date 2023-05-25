@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const sevenwondersduel: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/bCPjxxH.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
