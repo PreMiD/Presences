@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const eminentdomain: GamePresence = {
-	logo: "https://i.imgur.com/3UkS8Ot.png",
+	logo: "https://i.imgur.com/35YF35C.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
