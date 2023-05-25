@@ -31,7 +31,7 @@ const herrlof: GamePresence = {
 					break;
 				case "threeOptOut":
 				case "resolveThree":
-					data.state = "Using the 3 special ability";
+					data.state = "Using the 3 special abilities";
 					break;
 				case "chooseOneTarget":
 				case "chooseSixTarget":
