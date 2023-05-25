@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const metromaniab: GamePresence = {
-	logo: "https://i.imgur.com/9f0LvkN.png",
+	logo: "https://i.imgur.com/cPF5cbo.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
