@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 	switch (currentPage.toLowerCase()) {
 		case "search":
 			presenceData.details = privacy ? "Searching" : "Searching for";
-			presenceData.smallImageKey = "https://i.imgur.com/wYVlwJX.png";
+			presenceData.smallImageKey = Assets.Search;
 
 			if (pathname.match(threadExportRegex)) {
 				presenceData.buttons = [
