@@ -77,7 +77,6 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		} catch {
-			// presenceData.largeImageKey = "https://i.imgur.com/DtHgzGt.png";
 			presenceData.details = "Trying to view a private profile:";
 		}
 	} else if (document.location.pathname.includes("/user/year_in_books/")) {
