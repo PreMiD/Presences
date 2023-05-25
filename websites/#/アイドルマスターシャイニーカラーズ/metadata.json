@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "258380809172418570",
+		"name": "sino"
+	},
+	"service": "アイドルマスターシャイニーカラーズ",
+	"altnames": [
+		"THE iDOLM@STER SHINYCOLORS"
+	],
+	"description": {
+		"en": "Training simulation browser game in THE iDOLM@STER series. The game adopts BXD's HTML5 platform and is hosted by enza, a social platform made by Bandai Namco Entertainment.",
+		"ja_JP": "「アイドルマスター」シリーズ最新作が、スマートフォン向けブラウザゲームで登場！ 新たな事務所「283（ツバサ）プロダクション」を舞台に、アイドルを羽ばたかせよう！ ©BANDAI NAMCO Entertainment Inc."
+	},
+	"url": "shinycolors.enza.fun",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/YfaIAPE.png",
+	"thumbnail": "https://i.imgur.com/QsN77cM.png",
+	"color": "#8adfff",
+	"category": "games",
+	"tags": [
+		"game",
+		"shinymas"
+	]
+}
+
