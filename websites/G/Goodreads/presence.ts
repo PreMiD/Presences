@@ -9,18 +9,14 @@ presence.on("UpdateData", async () => {
 		startTimestamp: timeElapsed,
 	};
 
-	if (
-		pathname === "/home" ||
-		pathname === "/"
-	)
+	if (pathname === "/home" || pathname === "/")
 		presenceData.details = "Browsing homepage";
-	else if (pathname === "/book")
-		presenceData.details = "Browsing books";
+	else if (pathname === "/book") presenceData.details = "Browsing books";
 	else if (pathname.includes("/book/show/")) {
 		presenceData.details = "Viewing a book:";
 		presenceData.largeImageKey = document
-		.querySelector(".BookCover img.ResponsiveImage")
-		.getAttribute("src");
+			.querySelector(".BookCover img.ResponsiveImage")
+			.getAttribute("src");
 		presenceData.state = document.querySelector("h1").textContent;
 		presenceData.buttons = [
 			{
@@ -28,10 +24,12 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
-		
+
 		presenceData.smallImageKey = Assets.Reading;
 		// author
-		presenceData.smallImageText = `By: ${document.querySelector("span.ContributorLink__name").textContent}`;
+		presenceData.smallImageText = `By: ${
+			document.querySelector("span.ContributorLink__name").textContent
+		}`;
 	} else if (pathname.includes("/series")) {
 		const bookseries: string = document.querySelector("h1").textContent;
 		if (bookseries === "Series")
@@ -94,7 +92,7 @@ presence.on("UpdateData", async () => {
 			.getAttribute("src");
 	} else if (pathname.includes("/author/show/")) {
 		presenceData.details = "Viewing an author:";
-		presenceData.state = document.querySelector(".authorName span").textContent;;
+		presenceData.state = document.querySelector(".authorName span").textContent;
 
 		presenceData.largeImageKey = document
 			.querySelector(".leftContainer.authorLeftContainer img")
@@ -114,11 +112,14 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Writing a book review...";
 		presenceData.state = document.querySelector("a.bookTitle").textContent;
 
-		presenceData.smallImageKey = document.querySelector(".leftAlignedImage").getAttribute("src");
-		presenceData.smallImageText = `Rating for ${document.querySelector(".stars").getAttribute("data-rating")}☆ stars`;
+		presenceData.smallImageKey = document
+			.querySelector(".leftAlignedImage")
+			.getAttribute("src");
+		presenceData.smallImageText = `Rating for ${document
+			.querySelector(".stars")
+			.getAttribute("data-rating")}☆ stars`;
 
 		presenceData.largeImageKey = Assets.Writing;
-
 	} else if (pathname.includes("/review/list/"))
 		presenceData.details = "Browsing bookshelves";
 	else if (pathname.includes("/review/show")) {
