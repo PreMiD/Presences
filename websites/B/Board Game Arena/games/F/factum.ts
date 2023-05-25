@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const factum: GamePresence = {
-	logo: "https://i.imgur.com/s7EppM0.png",
+	logo: "https://i.imgur.com/7KwXpyt.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
