@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const dinnerinparis: GamePresence = {
-	logo: "https://i.imgur.com/QR0HEBa.png",
+	logo: "https://i.imgur.com/hA7RyOd.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
