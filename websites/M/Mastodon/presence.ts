@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 		case "/lists": {
 			const pathName = pathname.split("/")[1];
 			presenceData.smallImageText = pathName;
-			presenceData.details = `Looking their ${pathName}`;
+			presenceData.details = `Looking at their ${pathName}`;
 			break;
 		}
 		case "/search": {
