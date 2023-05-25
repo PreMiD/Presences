@@ -21,6 +21,7 @@ const crusadersthywillbedone: GamePresence = {
 				smallImageKey: getPlayerAvatar(userPlayer),
 				smallImageText: `Score: ${getPlayerScore(userPlayer)}`,
 			};
+		// TODO: This is a stub. Fill in the rest of the game states.
 		if (activePlayer === userPlayer || gameStateType !== "activeplayer") {
 			switch (gameState) {
 				case "gameEnd":
