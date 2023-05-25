@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const photosynthesis: GamePresence = {
-	logo: "https://i.imgur.com/TPdZOrK.png",
+	logo: "https://i.imgur.com/oiIyhNt.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
