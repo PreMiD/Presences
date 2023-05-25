@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const giftoftulips: GamePresence = {
-	logo: "https://i.imgur.com/PLWuuZL.png",
+	logo: "https://i.imgur.com/HsqVnVZ.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
