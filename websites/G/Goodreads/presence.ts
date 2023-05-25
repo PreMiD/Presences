@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document
 			.querySelector(".BookCover img.ResponsiveImage")
 			.getAttribute("src");
-		presenceData.state = `${book}`;
+		presenceData.state = book;
 		presenceData.buttons = [
 			{
 				label: "View Book",
