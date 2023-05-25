@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const beyondthesun: GamePresence = {
-	logo: "https://i.imgur.com/lQrA8mq.png",
+	logo: "https://i.imgur.com/lWQQZCw.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
