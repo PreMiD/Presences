@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 		default:
 			presenceData.details = "Looking for an anime to watch";
 			presenceData.state = "Home";
-			presenceData.smallImageKey = Assets.Search;
+			presenceData.smallImageKey = "https://i.imgur.com/poTatnI.png";
 	}
 
 	presence.setActivity(presenceData, true);
