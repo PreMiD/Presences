@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const abyss: GamePresence = {
-	logo: "https://i.imgur.com/MaFvHg5.png",
+	logo: "https://i.imgur.com/EAbauOL.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
