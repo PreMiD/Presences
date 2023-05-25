@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const akropolis: GamePresence = {
-	logo: "",
+	logo: "https://i.imgur.com/qcvx65Z.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
