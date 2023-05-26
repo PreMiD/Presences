@@ -18,7 +18,7 @@ const enum Assets {
 	TMC = "https://i.imgur.com/62uYw2r.png",
 	LCI = "https://i.imgur.com/qrRgNgk.png",
 	TF1Series = "https://i.imgur.com/WOmFIm3.png",
-	Live = "https://i.imgur.com/xuvR04J.png",
+	Stream = "https://i.imgur.com/xuvR04J.png",
 	Replay = "https://i.imgur.com/OZDAx9n.png",
 }
 
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Live;
+		presenceData.smallImageKey = Assets.Stream;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Live;
+		presenceData.smallImageKey = Assets.Stream;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Live;
+		presenceData.smallImageKey = Assets.Stream;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Live;
+		presenceData.smallImageKey = Assets.Stream;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
@@ -114,7 +114,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Live;
+		presenceData.smallImageKey = Assets.Stream;
 		presenceData.smallImageText = live;
 		presenceData.largeImageKey = Assets.LCI;
 	} else if (path.startsWith("/stream")) {
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Live;
+		presenceData.smallImageKey = Assets.Stream;
 		presenceData.smallImageText = live;
 	} else if (path.includes("/programmes-tv")) {
 		presenceData.details = "Programmes TV";
