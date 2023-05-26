@@ -22,13 +22,13 @@ presence.on("UpdateData", async () => {
 		details: "Sorryfield",
 		smallImageKey: Assets.LOGO
 	};
-	if (window.location.pathname === "/" || window.location.pathname === "/sorrygle" || window.location.pathname.startsWith("/song/")) {
+	if (document.location.pathname === "/" || document.location.pathname === "/sorrygle" || document.location.pathname.startsWith("/song/")) {
 		presenceData.largeImageKey = Assets.LOGO;
 		presenceData.smallImageKey = null;
 	}
-	if (window.location.pathname === "/") presenceData.details = "Viewing Homepage";
-	if (window.location.pathname === "/sorrygle") presenceData.details = "Sorrygle";
-	if (window.location.pathname.startsWith("/song/")) {
+	if (document.location.pathname === "/") presenceData.details = "Viewing Homepage";
+	if (document.location.pathname === "/sorrygle") presenceData.details = "Sorrygle";
+	if (document.location.pathname.startsWith("/song/")) {
 		presenceData.details = "Listening the song";
 		const songName = document.querySelector(".title").innerHTML
 						.replace("<i class=\"icon fa-fw fas fa-music\"></i>&nbsp;", "")
@@ -39,16 +39,16 @@ presence.on("UpdateData", async () => {
 		if (document.querySelector(".title").innerHTML.includes("fa-lock")) songArtist = `🔒 ${songArtist}`; // locked music
 		presenceData.state = `${songArtist} - ${songName}`;
 		presenceData.buttons = [
-			{ label: "Listen the song", url: window.location.href }
+			{ label: "Listen the song", url: document.location.href }
 		];
 	}
-	if (window.location.pathname === "/java") {
-		if (window.location.href.includes("?")) {
+	if (document.location.pathname === "/java") {
+		if (document.location.href.includes("?")) {
 			presenceData.details = "Java! Singleplay";
 			const chartHeader = document.querySelector(".chart-header");
 			presenceData.state = `${chartHeader.children[2].children[0].innerHTML} Lv.${document.querySelector(".level").innerHTML} / ${chartHeader.children[1].children[1].innerHTML} - ${chartHeader.children[1].children[0].innerHTML}`;
 			presenceData.buttons = [
-				{ label: "Play the chart", url: window.location.href }
+				{ label: "Play the chart", url: document.location.href }
 			];
 		} else {
 			presenceData.details = "Java!";
@@ -75,18 +75,18 @@ presence.on("UpdateData", async () => {
 
 			presenceData.largeImageKey = imageKey;
 			presenceData.buttons = [
-				{ label: "Play Java!", url: window.location.href }
+				{ label: "Play Java!", url: document.location.href }
 			];
 		}
 	}
-	if (window.location.pathname === "/java/multiplayer") {
+	if (document.location.pathname === "/java/multiplayer") {
 		presenceData.details = "Java! Multiplayer";
 		presenceData.largeImageKey = Assets.CHART_MULTIPLAYER;
 		if (document.querySelector(".room-header")) {
 			const roomUsers = document.querySelector(".room-header").children[1].innerHTML.replace("<i class=\"icon fa-fw fas fa-users\"></i>&nbsp;", "").replace("/", "of");
 			presenceData.state = `${document.querySelector(".room-header").children[0].innerHTML.split("</span>")[1]} (${roomUsers})`;
 			presenceData.buttons = [
-				{ label: "Join room", url: window.location.href }
+				{ label: "Join room", url: document.location.href }
 			];
 		}
 		if (document.querySelector(".chart-header")) {
