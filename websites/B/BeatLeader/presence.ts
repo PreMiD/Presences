@@ -5,7 +5,7 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://i.imgur.com/ogoDV1c.png",
-	Replay = "https://cdn.rcd.gg/PreMiD/resources/play.png",
+	Replay = "https://i.imgur.com/UxmT8G2.png",
 }
 
 enum OtherAssets {
@@ -139,21 +139,58 @@ enum OtherAssets {
 	RhythmGameStandardHard = "https://i.imgur.com/fGdRJFi.png",
 	RhythmGameStandardExpert = "https://i.imgur.com/cMSJmN2.png",
 	RhythmGameStandardExpertPlus = "https://i.imgur.com/I7C5hh5.png",
-	undefinedundefined = "https://i.imgur.com/TWPjaYR.png",
+	"Standard-PinkPlay_ControllableEasy" = "https://i.imgur.com/WUrtbJN.png",
+	"Standard-PinkPlay_ControllableNormal" = "https://i.imgur.com/qVrcnQm.png",
+	"Standard-PinkPlay_ControllableHard" = "https://i.imgur.com/IHojhMe.png",
+	"Standard-PinkPlay_ControllableExpert" = "https://i.imgur.com/WCDqLTy.png",
+	"Standard-PinkPlay_ControllableExpertPlus" = "https://i.imgur.com/b0s6gOI.png",
+	"OneSaber-PinkPlay_ControllableEasy" = "https://i.imgur.com/8FHZdoB.png",
+	"OneSaber-PinkPlay_ControllableNormal" = "https://i.imgur.com/lNKAD4R.png",
+	"OneSaber-PinkPlay_ControllableHard" = "https://i.imgur.com/U3JQ1AX.png",
+	"OneSaber-PinkPlay_ControllableExpert" = "https://i.imgur.com/T6LUmHs.png",
+	"OneSaber-PinkPlay_ControllableExpertPlus" = "https://i.imgur.com/2MX1H5S.png",
+	"Lawless-PinkPlay_ControllableEasy" = "https://i.imgur.com/r6YFLI2.png",
+	"Lawless-PinkPlay_ControllableNormal" = "https://i.imgur.com/61sOBdQ.png",
+	"Lawless-PinkPlay_ControllableHard" = "https://i.imgur.com/sj2rlLh.png",
+	"Lawless-PinkPlay_ControllableExpert" = "https://i.imgur.com/CR2vW7j.png",
+	"Lawless-PinkPlay_ControllableExpertPlus" = "https://i.imgur.com/RA4btcU.png",
+	"360Degree-PinkPlay_ControllableEasy" = "https://i.imgur.com/DVJ8DrX.png",
+	"360Degree-PinkPlay_ControllableExpert" = "https://i.imgur.com/TfqWdfp.png",
+	"360Degree-PinkPlay_ControllableExpertPlus" = "https://i.imgur.com/NA06k7F.png",
+	"360Degree-PinkPlay_ControllableHard" = "https://i.imgur.com/YPJtpLN.png",
+	"360Degree-PinkPlay_ControllableNormal" = "https://i.imgur.com/yQJMy15.png",
+	"90Degree-PinkPlay_ControllableEasy" = "https://i.imgur.com/Fo03ZyU.png",
+	"90Degree-PinkPlay_ControllableExpert" = "https://i.imgur.com/pQel27h.png",
+	"90Degree-PinkPlay_ControllableExpertPlus" = "https://i.imgur.com/VKgWOzs.png",
+	"90Degree-PinkPlay_ControllableHard" = "https://i.imgur.com/QG5xcsL.png",
+	"90Degree-PinkPlay_ControllableNormal" = "https://i.imgur.com/v6JkOai.png",
+	"Lightshow-PinkPlay_ControllableEasy" = "https://i.imgur.com/xc1Topa.png",
+	"Lightshow-PinkPlay_ControllableExpert" = "https://i.imgur.com/cJKkojn.png",
+	"Lightshow-PinkPlay_ControllableExpertPlus" = "https://i.imgur.com/rF4tn28.png",
+	"Lightshow-PinkPlay_ControllableHard" = "https://i.imgur.com/awviQ8Y.png",
+	"Lightshow-PinkPlay_ControllableNormal" = "https://i.imgur.com/J5qLp9b.png",
+	"NoArrows-PinkPlay_ControllableEasy" = "https://i.imgur.com/7fM9HNb.png",
+	"NoArrows-PinkPlay_ControllableExpert" = "https://i.imgur.com/aLfl2ix.png",
+	"NoArrows-PinkPlay_ControllableExpertPlus" = "https://i.imgur.com/WR2pnWY.png",
+	"NoArrows-PinkPlay_ControllableHard" = "https://i.imgur.com/tiIyXay.png",
+	"NoArrows-PinkPlay_ControllableNormal" = "https://i.imgur.com/k2t9Lac.png",
+	undefinedEasy = "https://i.imgur.com/2J4LtXj.png",
+	undefinedExpert = "https://i.imgur.com/HVzq27X.png",
+	undefinedExpertPlus = "https://i.imgur.com/wcL9Uar.png",
+	undefinedHard = "https://i.imgur.com/dxfOJXE.png",
+	undefinedNormal = "https://i.imgur.com/KOgMFdx.png",
 }
 
 presence.info("Presence loaded");
 
-let preview = {
+let replay = {
 	name: "",
 	subName: "",
 	currentTime: "",
-	difficulty: "",
-	customDifficulty: "",
 	playing: false,
 	duration: "",
-	gameMode: "",
 	playerName: "",
+	cover: "",
 };
 
 presence.on(
@@ -162,14 +199,12 @@ presence.on(
 		name: string;
 		subName: string;
 		currentTime: string;
-		difficulty: string;
-		customDifficulty: string;
-		gameMode: string;
 		playing: boolean;
 		duration: string;
 		playerName: string;
+		cover: string;
 	}) => {
-		preview = data;
+		replay = data;
 	}
 );
 
@@ -208,7 +243,7 @@ presence.on("UpdateData", async () => {
 			case "leaderboard": {
 				const previewURL = new URL(
 					document.querySelector<HTMLAnchorElement>(
-						'a[href^="https://skystudioapps.com"]'
+						'a[href^="https://allpoland.github.io"]'
 					)?.href
 				);
 				presenceData.details =
@@ -226,14 +261,23 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey =
 					OtherAssets[
 						`${previewURL.searchParams.get(
-							"charName"
+							"mode"
 						)}${previewURL.searchParams.get(
-							"diffName"
+							"difficulty"
+						)}` as keyof typeof OtherAssets
+					] ??
+					OtherAssets[
+						`undefined${previewURL.searchParams.get(
+							"difficulty"
 						)}` as keyof typeof OtherAssets
 					];
-				if (cover && document.querySelector<HTMLImageElement>("img.dummy")) {
-					presenceData.largeImageKey =
-						document.querySelector<HTMLImageElement>("img.dummy")?.src;
+				if (cover) {
+					presenceData.largeImageKey = document
+						.querySelector("header")
+						.style.backgroundImage.match(
+							/(https:\/\/.+\.((png)|(jpg)|(jpeg)))/g
+						)
+						?.toString();
 				}
 				presenceData.buttons = [
 					{
@@ -330,46 +374,26 @@ presence.on("UpdateData", async () => {
 			}
 		}
 		if (
-			(document
+			document
 				.querySelector<HTMLIFrameElement>("iframe")
 				?.src.includes("replay.beatleader.xyz") &&
-				preview.name) ||
-			(document
-				.querySelector<HTMLIFrameElement>("iframe")
-				?.src.includes("skystudioapps.com") &&
-				preview.name)
+			replay.name
 		) {
-			if (
-				document
-					.querySelector<HTMLIFrameElement>("iframe")
-					?.src.includes("replay.beatleader.xyz")
-			)
-				presenceData.largeImageKey = Assets.Replay;
-
-			if (
-				document
-					.querySelector<HTMLIFrameElement>("iframe")
-					?.src.includes("skystudioapps.com")
-			)
-				delete preview.playerName;
-			presenceData.details = `${preview.name} ${preview.subName}`;
-			presenceData.state =
-				preview.playerName ??
-				(preview.difficulty === preview.customDifficulty
-					? `${preview.gameMode} ${preview.difficulty}`
-					: `${preview.customDifficulty}`);
-			presenceData.smallImageKey = preview.playing ? Assets.Play : Assets.Pause;
-			presenceData.smallImageText = preview.playing ? "Playing" : "Paused";
-			if (preview.playing) {
+			presenceData.largeImageKey = cover ? replay.cover : Assets.Replay;
+			presenceData.details = replay.name;
+			presenceData.state = replay.playerName;
+			presenceData.smallImageKey = replay.playing ? Assets.Play : Assets.Pause;
+			presenceData.smallImageText = replay.playing ? "Playing" : "Paused";
+			if (replay.playing) {
 				const timestamps = presence.getTimestamps(
-					presence.timestampFromFormat(preview.currentTime),
-					presence.timestampFromFormat(preview.duration)
+					presence.timestampFromFormat(replay.currentTime),
+					presence.timestampFromFormat(replay.duration)
 				);
 				presenceData.endTimestamp = timestamps[1];
 			}
 			presenceData.buttons = [
 				{
-					label: `View ${preview.playerName ? "Replay" : "Preview"}`,
+					label: "View Replay",
 					url: document.querySelector<HTMLIFrameElement>("iframe").src,
 				},
 			];
