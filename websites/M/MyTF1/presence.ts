@@ -12,19 +12,19 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	myTf1 = "https://i.imgur.com/k8jIoSZ.png",
-	tf1 = "https://i.imgur.com/pFgnoUS.png",
-	tfx = "https://i.imgur.com/u5dTkHx.png",
-	tmc = "https://i.imgur.com/62uYw2r.png",
-	lci = "https://i.imgur.com/qrRgNgk.png",
-	tf1Series = "https://i.imgur.com/WOmFIm3.png",
-	live = "https://i.imgur.com/xuvR04J.png",
-	replay = "https://i.imgur.com/OZDAx9n.png",
+	MyTF1 = "https://i.imgur.com/k8jIoSZ.png",
+	TF1 = "https://i.imgur.com/pFgnoUS.png",
+	TFX = "https://i.imgur.com/u5dTkHx.png",
+	TMC = "https://i.imgur.com/62uYw2r.png",
+	LCI = "https://i.imgur.com/qrRgNgk.png",
+	TF1Series = "https://i.imgur.com/WOmFIm3.png",
+	Live = "https://i.imgur.com/xuvR04J.png",
+	Replay = "https://i.imgur.com/OZDAx9n.png",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.myTf1,
+			largeImageKey: Assets.MyTF1,
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname,
@@ -32,132 +32,131 @@ presence.on("UpdateData", async () => {
 
 	if (!time) delete presenceData.startTimestamp;
 
-	const { browse, live } = await strings;
+	const { browse, live, viewHome, viewProfile, watchingVid } = await strings;
 
 	if (path === "/") {
-		presenceData.details = (await strings).viewHome;
+		presenceData.details = viewHome;
 		presenceData.state = browse;
 	} else if (path.startsWith("/tf1/direct")) {
 		presenceData.details = document.querySelector(
-			"[class*=VideoSummary_programName_xXfYS]"
+			"[class*=VideoSummary_programName]"
 		).textContent;
 		presenceData.state = document.querySelector(
-			"[class*=VideoSummary_title_o8ZzQ]"
+			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.live;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
-				"[class*=VideoSummary_programLink_xY8sS] picture img"
+				"[class*=VideoSummary_programLink] picture img"
 			).src
 		) {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				"[class*=VideoSummary_programLink_xY8sS] picture img"
+				"[class*=VideoSummary_programLink] picture img"
 			).src;
-		} else presenceData.largeImageKey = Assets.tf1;
+		} else presenceData.largeImageKey = Assets.TF1;
 	} else if (path.startsWith("/tfx/direct")) {
 		presenceData.details = document.querySelector(
 			"[class*=VideoSummary_programName]"
 		).textContent;
 		presenceData.state = document.querySelector(
-			"[class*=VideoSummary_title_o8ZzQ]"
+			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.live;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
-				"[class*=VideoSummary_programLink_xY8sS] picture img"
+				"[class*=VideoSummary_programLink] picture img"
 			).src
 		) {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				"[class*=VideoSummary_programLink_xY8sS] picture img"
+				"[class*=VideoSummary_programLink] picture img"
 			).src;
-		} else presenceData.largeImageKey = Assets.tfx;
+		} else presenceData.largeImageKey = Assets.TFX;
 	} else if (path.startsWith("/tmc/direct")) {
 		presenceData.details = document.querySelector(
 			"[class*=VideoSummary_programName]"
 		).textContent;
 		presenceData.state = document.querySelector(
-			"[class*=VideoSummary_title_o8ZzQ]"
+			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.live;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
-				"[class*=VideoSummary_programLink_xY8sS] picture img"
+				"[class*=VideoSummary_programLink] picture img"
 			).src
 		) {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				"[class*=VideoSummary_programLink_xY8sS] picture img"
+				"[class*=VideoSummary_programLink] picture img"
 			).src;
-		} else presenceData.largeImageKey = Assets.tmc;
+		} else presenceData.largeImageKey = Assets.TMC;
 	} else if (path.startsWith("/tf1-series-films/direct")) {
 		presenceData.details = document.querySelector(
 			"[class*=VideoSummary_programName]"
 		).textContent;
 		presenceData.state = document.querySelector(
-			"[class*=VideoSummary_title_o8ZzQ]"
+			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.live;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
-				"[class*=VideoSummary_programLink_xY8sS] picture img"
+				"[class*=VideoSummary_programLink] picture img"
 			).src
 		) {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				"[class*=VideoSummary_programLink_xY8sS] picture img"
+				"[class*=VideoSummary_programLink] picture img"
 			).src;
-		} else presenceData.largeImageKey = Assets.tf1Series;
+		} else presenceData.largeImageKey = Assets.TF1Series;
 	} else if (path.startsWith("/lci/direct")) {
 		presenceData.details = "La Chaîne Info";
 		presenceData.state = document.querySelector(
-			"[class*=VideoSummary_title_o8ZzQ]"
+			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.live;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
-		presenceData.largeImageKey = Assets.lci;
+		presenceData.largeImageKey = Assets.LCI;
 	} else if (path.startsWith("/stream")) {
 		presenceData.details = `Stream : ${
-			document.querySelector("[class*=VideoSummary_programName_xXfYS]")
-				.textContent
+			document.querySelector("[class*=VideoSummary_programName]").textContent
 		}`;
 		presenceData.state = document.querySelector(
-			"[class*=VideoSummary_title_o8ZzQ]"
+			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.live;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
 	} else if (path.includes("/programmes-tv")) {
 		presenceData.details = "Programmes TV";
 		presenceData.state = `${browse} Liste des programmes`;
 		if (path.split("/")[1] === "programmes-tv")
-			presenceData.largeImageKey = Assets.myTf1;
+			presenceData.largeImageKey = Assets.MyTF1;
 		else presenceData.largeImageKey = path.split("/")[1];
 	} else if (path.startsWith("/mon-compte")) {
-		presenceData.details = (await strings).viewProfile;
+		presenceData.details = viewProfile;
 		presenceData.state = browse;
 	} else if (
 		path.split("/")[3].includes("videos") &&
 		path.split("/")[4].includes("-")
 	) {
 		presenceData.details = document.querySelector(
-			"[class*=VideoSummary_programName_xXfYS]"
+			"[class*=VideoSummary_programName]"
 		).textContent;
 		presenceData.state = document.querySelector(
-			"[class*=VideoSummary_title_o8ZzQ]"
+			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.replay;
-		presenceData.smallImageText = (await strings).watchingVid;
+		presenceData.smallImageKey = Assets.Replay;
+		presenceData.smallImageText = watchingVid;
 		presenceData.largeImageKey = path.split("/")[1];
 	} else if (path.split("/")[2].includes("-")) {
-		presenceData.details = document
-			.querySelector("[class*=Tabs_tabs__list_FwTdR]")
-			.querySelector("h1").textContent;
+		presenceData.details = document.querySelector(
+			"[class*=Tabs_tabs__list] h1"
+		).textContent;
 		presenceData.state = `${browse} Liste des replays`;
 	} else if (path.split("/")[3].includes("videos")) {
-		presenceData.details = document
-			.querySelector("[class*=ProgramPageVideo_paddingMenu_cEuG_]")
-			.querySelector("h1").textContent;
+		presenceData.details = document.querySelector(
+			"[class*=ProgramPageVideo_paddingMenu] h1"
+		).textContent;
 		presenceData.state = `${browse} Liste des vidéos`;
 	} else presenceData.details = browse;
 
