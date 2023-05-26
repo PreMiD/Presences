@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const mindup: GamePresence = {
-	logo: "https://i.imgur.com/M3Y4LQu.png",
+	logo: "https://i.imgur.com/9lOnEDP.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
