@@ -32,22 +32,40 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = Assets.LOGO;
 		delete presenceData.smallImageKey;
 	}
-	if (pathname === "/") presenceData.details = "Viewing Homepage";
-	if (pathname === "/sorrygle") presenceData.details = "Sorrygle";
+	if (pathname === "/") presenceData.details = "곡 선택 중";
+	if (pathname === "/sorrygle") presenceData.details = "쏘리글";
 	if (pathname.startsWith("/song/")) {
 		presenceData.details = "노래 듣는 중";
 		let songArtist = document
 			.querySelector(".song")
 			.children[2].innerHTML.split("&nbsp;")[0];
-		if (document.querySelector(".title").innerHTML.includes("fa-lock"))
-			songArtist = `🔒 ${songArtist}`; // locked music
+		/* Why innerHTML? 
+		 * Because removing another expression of artist.
+		 * Other expressions of artist name and song name are separated by '&nbsp;' in Sorryfield.
+		 * '.textContent' does not have '&nbsp;'.
+		 */
+		if (document.querySelector(".title").textContent.includes("fa-lock"))
+			songArtist = `🔒 ${songArtist}`; // Hidden song from the search.
 		presenceData.state = `${songArtist} - ${document
 			.querySelector(".title")
 			.textContent.trim()}`;
 		presenceData.buttons = [{ label: "Listen", url: href }];
 	}
-	if (pathname === "/java") {
-		if (href.includes("?")) {
+	if (pathname.startsWith("/java")) {
+		presenceData.details = "자바!";
+		presenceData.largeImageKey = Assets.LOGO;
+		delete presenceData.smallImageKey;
+		if (pathname.includes("/edit")) 
+			presenceData.state = `채보 수정 중 - ${document.querySelector("title").textContent.replace(" - 자바! - 쏘리들", "")}`;
+		 else if (pathname.includes("/studio")) 
+			presenceData.state = document.querySelector("title").textContent.replace(" - 자바! - 쏘리들", "");
+		 else if (pathname.includes("/shop")) 
+			presenceData.state = "상점";
+		 else if (pathname.includes("/sync")) 
+			presenceData.state = "환경 설정";
+		 else if (href.includes("/java/")) 
+			presenceData.state = document.querySelector(".title").children[1].firstChild.textContent.trim();
+		 else if (href.includes("?")) {
 			presenceData.details = "자바! 싱글플레이어";
 			const chartHeader = document.querySelector(".chart-header");
 			presenceData.state = `${
@@ -57,7 +75,6 @@ presence.on("UpdateData", async () => {
 			} - ${chartHeader.children[1].children[0].innerHTML}`;
 			presenceData.buttons = [{ label: "채보 플레이하기", url: href }];
 		} else {
-			presenceData.details = "자바!";
 			const image = document
 				.querySelector(".active>div>img")
 				.attributes[1].value.replace("/media/images/chart-", "")
@@ -65,11 +82,12 @@ presence.on("UpdateData", async () => {
 				.toUpperCase();
 			let imageKey = "",
 				menuName = "";
+			presenceData.smallImageKey = Assets.LOGO;
 
 			switch (image) {
 				case "SEARCH":
 					imageKey = Assets.CHART_SEARCH;
-					presenceData.state = "채보 검색 중";
+					presenceData.state = `채보 검색 중 - ${document.querySelector<HTMLInputElement>("#search").value}`;
 					break;
 				case "HYPORANKED":
 					imageKey = Assets.CHART_HYPORANKED;
