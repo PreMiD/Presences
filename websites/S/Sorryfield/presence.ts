@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 		let songArtist = document
 			.querySelector(".song")
 			.children[2].innerHTML.split("&nbsp;")[0];
-		/* Why innerHTML? 
+		/* Why innerHTML?
 		 * Because removing another expression of artist.
 		 * Other expressions of artist name and song name are separated by '&nbsp;' in Sorryfield.
 		 * '.textContent' does not have '&nbsp;'.
@@ -55,17 +55,21 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "자바!";
 		presenceData.largeImageKey = Assets.LOGO;
 		delete presenceData.smallImageKey;
-		if (pathname.includes("/edit")) 
-			presenceData.state = `채보 수정 중 - ${document.querySelector("title").textContent.replace(" - 자바! - 쏘리들", "")}`;
-		 else if (pathname.includes("/studio")) 
-			presenceData.state = document.querySelector("title").textContent.replace(" - 자바! - 쏘리들", "");
-		 else if (pathname.includes("/shop")) 
-			presenceData.state = "상점";
-		 else if (pathname.includes("/sync")) 
-			presenceData.state = "환경 설정";
-		 else if (href.includes("/java/")) 
-			presenceData.state = document.querySelector(".title").children[1].firstChild.textContent.trim();
-		 else if (href.includes("?")) {
+		if (pathname.includes("/edit")) {
+presenceData.state = `채보 수정 중 - ${document
+				.querySelector("title")
+				.textContent.replace(" - 자바! - 쏘리들", "")}`;
+} else if (pathname.includes("/studio")) {
+presenceData.state = document
+				.querySelector("title")
+				.textContent.replace(" - 자바! - 쏘리들", "");
+} else if (pathname.includes("/shop")) presenceData.state = "상점";
+		else if (pathname.includes("/sync")) presenceData.state = "환경 설정";
+		else if (href.includes("/java/")) {
+presenceData.state = document
+				.querySelector(".title")
+				.children[1].firstChild.textContent.trim();
+} else if (href.includes("?")) {
 			presenceData.details = "자바! 싱글플레이어";
 			const chartHeader = document.querySelector(".chart-header");
 			presenceData.state = `${
@@ -87,7 +91,9 @@ presence.on("UpdateData", async () => {
 			switch (image) {
 				case "SEARCH":
 					imageKey = Assets.CHART_SEARCH;
-					presenceData.state = `채보 검색 중 - ${document.querySelector<HTMLInputElement>("#search").value}`;
+					presenceData.state = `채보 검색 중 - ${
+						document.querySelector<HTMLInputElement>("#search").value
+					}`;
 					break;
 				case "HYPORANKED":
 					imageKey = Assets.CHART_HYPORANKED;
