@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const spiritsoftheforest: GamePresence = {
-	logo: "https://i.imgur.com/pXGb1hO.png",
+	logo: "https://i.imgur.com/XIhmJIg.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
