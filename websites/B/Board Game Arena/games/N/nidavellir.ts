@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const nidavellir: GamePresence = {
-	logo: "https://i.imgur.com/3n8YF6Y.png",
+	logo: "https://i.imgur.com/N0YqkYF.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
