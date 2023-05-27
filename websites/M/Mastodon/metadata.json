@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "533014724569333770",
+		"name": "Hikki"
+	},
+	"service": "Mastodon",
+	"description": {
+		"en": "From breaking news to entertainment, from technology to politics, mastodon is a social that empowers users without tracking them."
+	},
+	"url": [
+		"mastodon.social",
+		"mstdn.social",
+		"techhub.social",
+		"mastodon.uno",
+		"securitymastod.one",
+		"linuxrocks.online",
+		"universeodon.com",
+		"indieweb.social",
+		"infosec.exchange",
+		"aus.social",
+		"social.network.europa.eu"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/njcb4Wp.png",
+	"thumbnail": "https://i.imgur.com/y8dR5c8.png",
+	"color": "#6364ff",
+	"category": "socials",
+	"tags": [
+		"mastodon",
+		"social"
+	]
+}
