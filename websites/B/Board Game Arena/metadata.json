@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "Board Game Arena",
+	"description": {
+		"en": "Play board games online!"
+	},
+	"url": "boardgamearena.com",
+	"regExp": "[a-z]*[.]?boardgamearena[.]com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/uCstmQE.png",
+	"thumbnail": "https://i.imgur.com/VZOq3Fm.png",
+	"color": "#4871b6",
+	"category": "games",
+	"tags": [
+		"online",
+		"board",
+		"community"
+	],
+	"iframe": true,
+	"iFrameRegExp": "boardgamearena[.]com[/]"
+}
