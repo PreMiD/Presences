@@ -1,129 +1,132 @@
 const presence = new Presence({
 	clientId: "1016312551958642698",
-});
+	});
 
 const enum Assets {
-	LOGO = "large-image",
-	CHART_SEARCH = "chart-search",
-	CHART_HYPORANKED = "chart-hyporanked",
-	CHART_EXPONENTIAL = "chart-exponential",
-	CHART_HARD = "chart-hard",
-	CHART_INTERMEDIATE = "chart-intermediate",
-	CHART_EASY = "chart-easy",
-	CHART_HISTORY = "chart-history",
-	CHART_POSSESION = "chart-possesion",
-	CHART_HOT = "chart-hot",
-	CHART_COLD = "chart-cold",
-	CHART_MULTIPLAYER = "chart-multiplayer",
+	LOGO = "https://i.imgur.com/TxuMfTd.png",
+	CHART_SEARCH = "https://i.imgur.com/IyyYNPb.jpg",
+	CHART_HYPORANKED = "https://i.imgur.com/RDMG4bg.jpg",
+	CHART_EXPONENTIAL = "https://i.imgur.com/MAi9c8K.jpg",
+	CHART_HARD = "https://i.imgur.com/6NkL3hh.jpg",
+	CHART_INTERMEDIATE = "https://i.imgur.com/hRMaDwD.jpg",
+	CHART_EASY = "https://i.imgur.com/BLQqUN1.jpg",
+	CHART_NEW = "https://i.imgur.com/PpA5uhv.jpg",
+	CHART_HISTORY = "https://i.imgur.com/LxwfWhY.jpg",
+	CHART_POSSESSION = "https://i.imgur.com/C42Fbsi.jpg",
+	CHART_HOT = "https://i.imgur.com/xt6IZxO.jpg",
+	CHART_COLD = "https://i.imgur.com/E9xnBoS.jpg",
+	CHART_MULTIPLAYER = "https://i.imgur.com/fdGfvt2.jpg",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		details: "Sorryfield",
-		smallImageKey: Assets.LOGO,
-	};
+			details: "Sorryfield",
+			smallImageKey: Assets.LOGO,
+		},
+		{ pathname, href } = document.location;
 	if (
-		document.location.pathname === "/" ||
-		document.location.pathname === "/sorrygle" ||
-		document.location.pathname.startsWith("/song/")
+		pathname === "/" ||
+		pathname === "/sorrygle" ||
+		pathname.startsWith("/song/")
 	) {
 		presenceData.largeImageKey = Assets.LOGO;
-		presenceData.smallImageKey = null;
+		delete presenceData.smallImageKey;
 	}
-	if (document.location.pathname === "/")
-		presenceData.details = "Viewing Homepage";
-	if (document.location.pathname === "/sorrygle")
-		presenceData.details = "Sorrygle";
-	if (document.location.pathname.startsWith("/song/")) {
-		presenceData.details = "Listening the song";
-		const songName = document
-			.querySelector(".title")
-			.innerHTML.replace('<i class="icon fa-fw fas fa-music"></i>&nbsp;', "")
-			.replace('<i class="icon fa-fw fas fa-lock"></i>&nbsp;', "")
-			.replace('<span class="desc">&nbsp;', " ")
-			.replace("</span>", "")
-			.replace("&amp;", "&");
+	if (pathname === "/") presenceData.details = "Viewing Homepage";
+	if (pathname === "/sorrygle") presenceData.details = "Sorrygle";
+	if (pathname.startsWith("/song/")) {
+		presenceData.details = "노래 듣는 중";
 		let songArtist = document
 			.querySelector(".song")
 			.children[2].innerHTML.split("&nbsp;")[0];
 		if (document.querySelector(".title").innerHTML.includes("fa-lock"))
 			songArtist = `🔒 ${songArtist}`; // locked music
-		presenceData.state = `${songArtist} - ${songName}`;
-		presenceData.buttons = [
-			{ label: "Listen the song", url: document.location.href },
-		];
+		presenceData.state = `${songArtist} - ${document
+			.querySelector(".title")
+			.textContent.trim()}`;
+		presenceData.buttons = [{ label: "Listen", url: href }];
 	}
-	if (document.location.pathname === "/java") {
-		if (document.location.href.includes("?")) {
-			presenceData.details = "Java! Singleplay";
+	if (pathname === "/java") {
+		if (href.includes("?")) {
+			presenceData.details = "자바! 싱글플레이어";
 			const chartHeader = document.querySelector(".chart-header");
 			presenceData.state = `${
 				chartHeader.children[2].children[0].innerHTML
 			} Lv.${document.querySelector(".level").innerHTML} / ${
 				chartHeader.children[1].children[1].innerHTML
 			} - ${chartHeader.children[1].children[0].innerHTML}`;
-			presenceData.buttons = [
-				{ label: "Play the chart", url: document.location.href },
-			];
+			presenceData.buttons = [{ label: "채보 플레이하기", url: href }];
 		} else {
-			presenceData.details = "Java!";
-			presenceData.state = "Selecting chart";
+			presenceData.details = "자바!";
 			const image = document
-				.querySelector(".active")
-				.children[0].innerHTML.replace(
-					'<img class="disc" src="/media/images/chart-',
+				.querySelector(".active>div>img")
+				.attributes[1].value.replace(
+					"/media/images/chart-",
 					""
 				)
-				.replace('.jpg">', "")
+				.replace(".jpg", "")
 				.toUpperCase();
-			let imageKey = "";
+			let imageKey = "", menuName = "";
 
 			switch (image) {
 				case "SEARCH":
 					imageKey = Assets.CHART_SEARCH;
-					presenceData.state = "Searching charts";
+					presenceData.state = "채보 검색 중";
 					break;
 				case "HYPORANKED":
 					imageKey = Assets.CHART_HYPORANKED;
+					menuName = "내 순위가 아래인 채보";
 					break;
 				case "EXPONENTIAL":
 					imageKey = Assets.CHART_EXPONENTIAL;
+					menuName = "경지에 다다른 채보";
 					break;
 				case "HARD":
 					imageKey = Assets.CHART_HARD;
+					menuName = "어려운 채보";
 					break;
 				case "INTERMEDIATE":
 					imageKey = Assets.CHART_INTERMEDIATE;
+					menuName = "적당한 채보";
 					break;
 				case "EASY":
 					imageKey = Assets.CHART_EASY;
+					menuName = "쉬운 채보";
+					break;
+				case "NEW":
+					imageKey = Assets.CHART_NEW;
+					menuName = "신상 채보";
 					break;
 				case "HISTORY":
 					imageKey = Assets.CHART_HISTORY;
+					menuName = "내가 최근 완주한 채보";
 					break;
-				case "POSSESION":
-					imageKey = Assets.CHART_POSSESION;
+				case "POSSESSION":
+					imageKey = Assets.CHART_POSSESSION;
+					menuName = "내가 소장한 곡의 채보";
 					break;
 				case "HOT":
 					imageKey = Assets.CHART_HOT;
+					menuName = "요즘 북적이는 채보";
 					break;
 				case "COLD":
 					imageKey = Assets.CHART_COLD;
+					menuName = "요즘 안 북적이는 채보";
 					break;
 				case "MULTIPLAYER":
 					imageKey = Assets.CHART_MULTIPLAYER;
-					presenceData.state = "Selecting multiplayer room";
+					presenceData.state = "멀티플레이어 방 선택 중";
 					break;
 			}
+			if (menuName !== "")
+				presenceData.state = `채보 선택 중 - ${menuName}`;
 
 			presenceData.largeImageKey = imageKey;
-			presenceData.buttons = [
-				{ label: "Play Java!", url: document.location.href },
-			];
+			presenceData.buttons = [{ label: "자바! 플레이하기", url: href }];
 		}
 	}
-	if (document.location.pathname === "/java/multiplayer") {
-		presenceData.details = "Java! Multiplayer";
+	if (pathname === "/java/multiplayer") {
+		presenceData.details = "자바! 멀티플레이어";
 		presenceData.largeImageKey = Assets.CHART_MULTIPLAYER;
 		if (document.querySelector(".room-header")) {
 			const roomUsers = document
@@ -138,9 +141,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".room-header")
 					.children[0].innerHTML.split("</span>")[1]
 			} (${roomUsers})`;
-			presenceData.buttons = [
-				{ label: "Join room", url: document.location.href },
-			];
+			presenceData.buttons = [{ label: "방 참여하기", url: href }];
 		}
 		if (document.querySelector(".chart-header")) {
 			const chartHeader = document.querySelector(".chart-header");
