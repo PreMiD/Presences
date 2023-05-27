@@ -8,8 +8,9 @@ function checkFooterContent() {
 	return pElement && pElement.textContent.trim() === "OtakuEyes";
 }
 
+if (!checkFooterContent()) return;
+
 presence.on("UpdateData", async () => {
-	if (checkFooterContent()) {
 		const [page, , episode] = document.location.pathname.split("/").slice(1, 4),
 			showCover = await presence.getSetting<boolean>("cover"),
 			presenceData: PresenceData = {
@@ -39,5 +40,4 @@ presence.on("UpdateData", async () => {
 		}
 
 		presence.setActivity(presenceData, true);
-	}
 });
