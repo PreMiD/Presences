@@ -1,6 +1,6 @@
 const presence = new Presence({
 	clientId: "1016312551958642698",
-	});
+});
 
 const enum Assets {
 	LOGO = "https://i.imgur.com/TxuMfTd.png",
@@ -60,13 +60,11 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "자바!";
 			const image = document
 				.querySelector(".active>div>img")
-				.attributes[1].value.replace(
-					"/media/images/chart-",
-					""
-				)
+				.attributes[1].value.replace("/media/images/chart-", "")
 				.replace(".jpg", "")
 				.toUpperCase();
-			let imageKey = "", menuName = "";
+			let imageKey = "",
+				menuName = "";
 
 			switch (image) {
 				case "SEARCH":
@@ -118,8 +116,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "멀티플레이어 방 선택 중";
 					break;
 			}
-			if (menuName !== "")
-				presenceData.state = `채보 선택 중 - ${menuName}`;
+			if (menuName !== "") presenceData.state = `채보 선택 중 - ${menuName}`;
 
 			presenceData.largeImageKey = imageKey;
 			presenceData.buttons = [{ label: "자바! 플레이하기", url: href }];
