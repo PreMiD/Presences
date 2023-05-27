@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.7",
 	"author": {
-		"name": "IF6+",
+		"name": "Katsu",
 		"id": "713439286552297556"
 	},
 	"service": "Paramount+",
@@ -13,7 +13,7 @@
 		"www.paramountplus.com",
 		"paramountplus.com"
 	],
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"logo": "https://i.imgur.com/4Z2Dwvc.jpg",
 	"thumbnail": "https://i.imgur.com/s70veYl.png",
 	"color": "#6c8fd0",
