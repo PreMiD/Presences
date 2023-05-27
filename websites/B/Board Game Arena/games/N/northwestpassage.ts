@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const northwestpassage: GamePresence = {
-	logo: "https://i.imgur.com/QS7Tlt6.png",
+	logo: "https://i.imgur.com/gYIt9DH.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
