@@ -1,43 +1,54 @@
 const presence = new Presence({ clientId: "867525909204566056" }),
 	timeElapsed: number = Math.floor(Date.now() / 1000);
 
-let book: string, author: string;
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/DtHgzGt.png",
-		details: "Browsing Goodreads",
-		startTimestamp: timeElapsed,
-	};
+			largeImageKey: "https://i.imgur.com/DtHgzGt.png",
+			details: "Browsing Goodreads",
+			startTimestamp: timeElapsed,
+		},
+		{ pathname, href } = document.location;
 
-	if (
-		document.location.pathname === "/home" ||
-		document.location.pathname === "/"
-	)
+	if (pathname === "/home" || pathname === "/")
 		presenceData.details = "Browsing homepage";
-	else if (document.location.pathname === "/book")
-		presenceData.details = "Browsing books";
-	else if (document.location.pathname.includes("/book/show/")) {
-		// beta layout conditional
+	else if (pathname === "/book") presenceData.details = "Browsing books";
+	else if (pathname.includes("/book/show/")) {
 		presenceData.details = "Viewing a book:";
-		if (document.querySelector("#bookTitle") === null) {
-			book = document.querySelector("h1").textContent;
-			author = document.querySelector("span.ContributorLink__name").textContent;
-			presenceData.state = `${book} | by: ${author}`;
-		} else {
-			book = document.querySelector("#bookTitle").textContent;
-			author = document.querySelector(".authorName").textContent;
-			presenceData.state = `${book} | by: ${author}`;
-		}
-	} else if (document.location.pathname.includes("/series")) {
+		presenceData.largeImageKey = document
+			.querySelector(".BookCover img.ResponsiveImage")
+			.getAttribute("src");
+		presenceData.state = document.querySelector("h1").textContent;
+		presenceData.buttons = [
+			{
+				label: "View Book",
+				url: href,
+			},
+		];
+
+		presenceData.smallImageKey = Assets.Reading;
+		// author
+		presenceData.smallImageText = `By: ${
+			document.querySelector("span.ContributorLink__name").textContent
+		}`;
+	} else if (pathname.includes("/series")) {
 		const bookseries: string = document.querySelector("h1").textContent;
 		if (bookseries === "Series")
 			presenceData.details = "Viewing all book series on Goodreads";
 		else {
 			presenceData.details = "Viewing a book series:";
 			presenceData.state = bookseries;
+
+			presenceData.largeImageKey = document
+				.querySelector(".gr-box--withShadow.responsiveBook__img")
+				.getAttribute("src"); // get first book in series img
+			presenceData.buttons = [
+				{
+					label: "View Series",
+					url: href,
+				},
+			];
 		}
-	} else if (document.location.pathname.includes("/user/show/")) {
+	} else if (pathname.includes("/user/show/")) {
 		presenceData.details = "Viewing a profile:";
 		//Without reading ID for private profiles
 		const user: string = document.querySelector("h1").textContent;
@@ -50,36 +61,84 @@ presence.on("UpdateData", async () => {
 				""
 			);
 		}
-	} else if (document.location.pathname.includes("/author/show/")) {
+		try {
+			presenceData.largeImageKey = document
+				.querySelector(".profilePictureIcon")
+				.getAttribute("src");
+			presenceData.buttons = [
+				{
+					label: "View Profile",
+					url: href,
+				},
+			];
+		} catch {
+			presenceData.details = "Trying to view a private profile:";
+		}
+	} else if (pathname.includes("/user/year_in_books/")) {
+		presenceData.details = `Viewing ${
+			document.querySelector(".bannerYearText").textContent
+		} year in books of:`;
+		presenceData.state = document.querySelector(
+			".headerNameContainer .headerName"
+		).textContent;
+		presenceData.largeImageKey = document
+			.querySelector(".headerImageContainer img")
+			.getAttribute("src");
+	} else if (pathname.includes("/photo/author/")) {
+		presenceData.details = "Viewing an author photo:";
+		presenceData.state = document.querySelector("h1 a").textContent;
+		presenceData.largeImageKey = document
+			.querySelector(".profile a img")
+			.getAttribute("src");
+	} else if (pathname.includes("/author/show/")) {
 		presenceData.details = "Viewing an author:";
-		author = document.querySelector(".authorName span").textContent;
-		presenceData.state = author;
-	} else if (document.location.pathname.includes("/group/show/")) {
+		presenceData.state = document.querySelector(".authorName span").textContent;
+
+		presenceData.largeImageKey = document
+			.querySelector(".leftContainer.authorLeftContainer img")
+			.getAttribute("src");
+		presenceData.buttons = [
+			{
+				label: "View Author",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/group/show/")) {
 		presenceData.details = "Viewing a group:";
 		presenceData.state = document.querySelector("h1").textContent;
-	} else if (document.location.pathname.includes("/topic"))
+	} else if (pathname.includes("/topic"))
 		presenceData.details = "Browsing discussions";
-	else if (document.location.pathname.includes("/review/edit/")) {
-		book = document.querySelector("a.bookTitle").textContent;
+	else if (pathname.includes("/review/edit/")) {
 		presenceData.details = "Writing a book review...";
-		presenceData.smallImageKey = Assets.Writing;
-		presenceData.smallImageText = book;
-	} else if (document.location.pathname.includes("/review/list/"))
+		try {
+			presenceData.state = document.querySelector("a.bookTitle").textContent;
+			presenceData.smallImageKey = document
+				.querySelector(".leftAlignedImage")
+				.getAttribute("src");
+			presenceData.smallImageText = `Rating for ${document
+				.querySelector(".stars")
+				.getAttribute("data-rating")}☆ stars`;
+		} catch {
+			presenceData.state = "Trying to edit an unknown book...";
+		}
+
+		presenceData.largeImageKey = Assets.Writing;
+	} else if (pathname.includes("/review/list/"))
 		presenceData.details = "Browsing bookshelves";
-	else if (document.location.pathname.includes("/review/show")) {
+	else if (pathname.includes("/review/show")) {
 		presenceData.details = "Reading a review...";
 		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "On Goodreads";
-	} else if (document.location.pathname.includes("/recommendations"))
+	} else if (pathname.includes("/recommendations"))
 		presenceData.details = "Browsing recommendations";
 	else if (
-		document.location.pathname.includes("/challenges") ||
-		document.location.pathname.includes("/user_challenges")
+		pathname.includes("/challenges") ||
+		pathname.includes("/user_challenges")
 	)
 		presenceData.details = "Viewing reading challenge";
-	else if (document.location.pathname.includes("/quotes"))
+	else if (pathname.includes("/quotes"))
 		presenceData.details = "Browsing quotes";
-	else if (document.location.pathname.includes("/search")) {
+	else if (pathname.includes("/search")) {
 		presenceData.details = "Searching for a book...";
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "On Goodreads";
