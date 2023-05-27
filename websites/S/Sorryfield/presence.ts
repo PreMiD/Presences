@@ -56,20 +56,20 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = Assets.LOGO;
 		delete presenceData.smallImageKey;
 		if (pathname.includes("/edit")) {
-presenceData.state = `채보 수정 중 - ${document
+			presenceData.state = `채보 수정 중 - ${document
 				.querySelector("title")
 				.textContent.replace(" - 자바! - 쏘리들", "")}`;
-} else if (pathname.includes("/studio")) {
-presenceData.state = document
+		} else if (pathname.includes("/studio")) {
+			presenceData.state = document
 				.querySelector("title")
 				.textContent.replace(" - 자바! - 쏘리들", "");
-} else if (pathname.includes("/shop")) presenceData.state = "상점";
+		} else if (pathname.includes("/shop")) presenceData.state = "상점";
 		else if (pathname.includes("/sync")) presenceData.state = "환경 설정";
 		else if (href.includes("/java/")) {
-presenceData.state = document
+			presenceData.state = document
 				.querySelector(".title")
 				.children[1].firstChild.textContent.trim();
-} else if (href.includes("?")) {
+		} else if (href.includes("?")) {
 			presenceData.details = "자바! 싱글플레이어";
 			const chartHeader = document.querySelector(".chart-header");
 			presenceData.state = `${
