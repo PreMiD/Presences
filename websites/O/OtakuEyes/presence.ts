@@ -4,8 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 function checkFooterContent() {
-	const footer = document.querySelector("footer");
-	const pElement = footer.querySelector("p");
+	const pElement = document.querySelector("footer p");
 	return pElement && pElement.textContent.trim() === "OtakuEyes";
 }
 
