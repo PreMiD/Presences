@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const regicide: GamePresence = {
-	logo: "https://i.imgur.com/g40uvg4.png",
+	logo: "https://i.imgur.com/diUqNnw.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
