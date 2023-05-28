@@ -41,18 +41,16 @@ presence.on("UpdateData", async () => {
 		 * Other expressions of artist name and song name are separated by '&nbsp;' in Sorryfield.
 		 * '.textContent' does not have '&nbsp;'.
 		 */
-		presenceData.state = `${document
-			.querySelector(".song")
-			.children[2].innerHTML.split("&nbsp;")[0]} - ${document
-			.querySelector(".title")
-			.textContent.trim()}`;
+		presenceData.state = `${
+			document.querySelector(".song").children[2].innerHTML.split("&nbsp;")[0]
+		} - ${document.querySelector(".title").textContent.trim()}`;
 		presenceData.buttons = [{ label: "듣기", url: href }];
 	}
 	if (pathname.startsWith("/java")) {
 		presenceData.details = "자바!";
 		presenceData.largeImageKey = Assets.LOGO;
 		delete presenceData.smallImageKey;
-		if (pathname === "/java") {
+		if (pathname === "/java" && !href.includes("?")) {
 			presenceData.details = "자바! 싱글플레이어";
 			const image = document
 				.querySelector<HTMLImageElement>(".active>div>img")
@@ -162,5 +160,6 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: "채보 플레이하기", url: href }];
 		}
 	}
+	console.log(presenceData);
 	presence.setActivity(presenceData);
 });
