@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import got from "got";
 import glob from "glob";
 import { Metadata } from "./PresenceCompiler";
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import FormData from "form-data";
 
 const require = createRequire(import.meta.url),
@@ -25,15 +25,15 @@ export default class AssetsManager {
 	}
 
 	get assetBaseUrl() {
-		return `${cdnBase}/PreMiD${encodeURI(
+		return `${cdnBase}/PreMiD/${encodeURI(
 			this.presenceFolder.replace(this.cwd, "")
 		).replace("#", "%23")}/assets`;
 	}
 
 	get presenceFolder() {
-		return glob.sync(`{websites,programs}/**/${this.service}`, {
-			absolute: true,
-		})[0];
+		return glob
+			.sync(`{websites,programs}/**/${this.service}`)[0]
+			.replace(/\\/g, "/");
 	}
 
 	getFileExtension(url: string) {
@@ -71,7 +71,7 @@ export default class AssetsManager {
 			files = this.allTsFiles;
 
 		for (const tsfile of files) {
-			const file = readFileSync(tsfile, "utf-8");
+			const file = readFileSync(tsfile, "utf8");
 
 			//* A regex to match all image urls in the file
 			const regex =
@@ -152,7 +152,7 @@ export default class AssetsManager {
 			if (!this.canBePut(cdnAssets.logo, newLogo))
 				result.toBeDeleted.add(cdnAssets.logo);
 
-			result.toBeUploaded.set(newLogo, cdnAssets.logo);
+			result.toBeUploaded.set(assets.logo, newLogo);
 		}
 
 		if (!cdnAssets.thumbnail) {
@@ -169,7 +169,47 @@ export default class AssetsManager {
 			if (!this.canBePut(cdnAssets.thumbnail, newThumbnail))
 				result.toBeDeleted.add(cdnAssets.thumbnail);
 
-			result.toBeUploaded.set(newThumbnail, cdnAssets.thumbnail);
+			result.toBeUploaded.set(assets.thumbnail, newThumbnail);
+		}
+
+		const cdnAssetsInUse = new Map<number, string>(),
+			usedIndexes = new Set<number>();
+		if (cdnAssets.assets) {
+			for (const [index, asset] of cdnAssets.assets) {
+				if (assets.assets.has(asset)) {
+					cdnAssetsInUse.set(index, asset);
+					usedIndexes.add(index);
+				} else result.toBeDeleted.add(asset);
+			}
+		}
+
+		const newAssets = new Set<string>();
+		for (const asset of assets.assets)
+			if (!asset.startsWith(cdnBase)) newAssets.add(asset);
+
+		let index = 0;
+		for (const asset of newAssets) {
+			const newAsset = `${this.assetBaseUrl}/${index}${this.getFileExtension(
+				asset
+			)}`;
+			while (usedIndexes.has(index)) index++;
+			result.toBeUploaded.set(asset, newAsset);
+			usedIndexes.add(index);
+			index++;
+		}
+
+		const missingIndexes = this.findMissing([...usedIndexes]);
+		if (missingIndexes.length) {
+			const cdnAssetsInUseArray = [...cdnAssetsInUse].sort(([a], [b]) => b - a);
+			for (const index of missingIndexes) {
+				const last = cdnAssetsInUseArray.pop();
+				if (!last) break;
+				const [_, asset] = last,
+					newAsset = `${this.assetBaseUrl}/${index}${this.getFileExtension(
+						asset
+					)}`;
+				result.toBeMoved.set(asset, newAsset);
+			}
 		}
 
 		return result;
@@ -225,6 +265,7 @@ export default class AssetsManager {
 	}
 
 	async uploadAssets(assets: Map<string, string>) {
+		let errors: string[] = [];
 		for (const [url, newUrl] of assets) {
 			const extension = this.getFileExtension(url);
 			let mimeType: string;
@@ -243,7 +284,10 @@ export default class AssetsManager {
 					mimeType = "image/webp";
 					break;
 				default:
-					throw new Error(`Unknown file extension: ${extension}`);
+					errors.push(
+						`Tried to upload an asset with an invalid extension: ${url}`
+					);
+					continue;
 			}
 
 			await got(url)
@@ -254,36 +298,91 @@ export default class AssetsManager {
 						contentType: mimeType,
 					});
 
-					//* If the asset already exists, make a put request instead of a post request
-					if (await this.doesAssetExist(newUrl)) {
-						await got.put(newUrl, {
-							body: form,
-							headers: {
-								...form.getHeaders(),
-								Authorization: process.env.CDN_TOKEN,
-							},
-						});
-					} else {
-						await got.post(newUrl, {
-							body: form,
-							headers: {
-								...form.getHeaders(),
-								Authorization: process.env.CDN_TOKEN,
-							},
-						});
+					try {
+						//* If the asset already exists, make a put request instead of a post request
+						if (await this.doesAssetExist(newUrl)) {
+							await got.put(newUrl, {
+								body: form,
+								headers: {
+									...form.getHeaders(),
+									Authorization: process.env.CDN_TOKEN,
+								},
+							});
+						} else {
+							await got.post(newUrl, {
+								body: form,
+								headers: {
+									...form.getHeaders(),
+									Authorization: process.env.CDN_TOKEN,
+								},
+							});
+						}
+					} catch (error) {
+						errors.push(
+							`Failed to upload asset ${url}: ${
+								"message" in error ? error.message : error.toString()
+							}`
+						);
 					}
+				})
+				.catch(error => {
+					errors.push(
+						`Failed to download asset ${url}: ${
+							"message" in error ? error.message : error.toString()
+						}`
+					);
 				});
 		}
+		return errors;
 	}
 
 	async deleteAssets(assets: string[] | Set<string>) {
+		let errors: string[] = [];
 		for (const asset of assets) {
-			if (!(await this.doesAssetExist(asset))) continue;
-			await got.delete(asset, {
-				headers: {
-					Authorization: process.env.CDN_TOKEN,
-				},
-			});
+			try {
+				if (!(await this.doesAssetExist(asset))) continue;
+				await got.delete(asset, {
+					headers: {
+						Authorization: process.env.CDN_TOKEN,
+					},
+				});
+			} catch (error) {
+				errors.push(
+					`Failed to delete asset ${asset}: ${
+						"message" in error ? error.message : error.toString()
+					}`
+				);
+			}
+		}
+		return errors;
+	}
+
+	findMissing(numbers: number[]) {
+		numbers.push(-1); //? Make sure there is at least one number in the array
+		const max = Math.max(...numbers),
+			min = Math.min(...numbers),
+			missing = [];
+
+		for (let i = min; i <= max; i++) if (!numbers.includes(i)) missing.push(i);
+
+		return missing;
+	}
+
+	replaceInFiles(replacements: Map<string, string>) {
+		for (const tsfile of this.allTsFiles) {
+			const file = readFileSync(tsfile, "utf8");
+
+			let changed = false;
+			for (const [oldUrl, newUrl] of replacements) {
+				if (!file.includes(oldUrl)) continue;
+				file.replaceAll(oldUrl, newUrl);
+				changed = true;
+			}
+
+			if (changed)
+				writeFileSync(tsfile, file, {
+					encoding: "utf8",
+				});
 		}
 	}
 }

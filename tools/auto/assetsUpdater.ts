@@ -26,21 +26,33 @@ if (changedPresenceFolders.length) {
 			actions.info(
 				chalk.green(`Deleting ${toBeDeleted.size} asset(s) for ${folder}...`)
 			);
-			await assetsManager.deleteAssets(toBeDeleted);
+			const errors = await assetsManager.deleteAssets(toBeDeleted);
+			for (const error of errors) actions.error(error);
+			if (errors.length) actions.setFailed("Failed to delete assets");
 		}
 
 		if (toBeMoved.size) {
 			actions.info(
 				chalk.green(`Moving ${toBeMoved.size} asset(s) for ${folder}...`)
 			);
-			await assetsManager.uploadAssets(toBeMoved);
+			const errors: string[] = [];
+			errors.push(...(await assetsManager.uploadAssets(toBeMoved)));
+			errors.push(...(await assetsManager.deleteAssets([...toBeMoved.keys()])));
+			for (const error of errors) actions.error(error);
+			if (errors.length) actions.setFailed("Failed to move assets");
+
+			assetsManager.replaceInFiles(toBeMoved);
 		}
 
 		if (toBeUploaded.size) {
 			actions.info(
 				chalk.green(`Uploading ${toBeUploaded.size} asset(s) for ${folder}...`)
 			);
-			await assetsManager.uploadAssets(toBeUploaded);
+			const errors = await assetsManager.uploadAssets(toBeUploaded);
+			for (const error of errors) actions.error(error);
+			if (errors.length) actions.setFailed("Failed to upload assets");
+
+			assetsManager.replaceInFiles(toBeUploaded);
 		}
 	}
 }
@@ -65,6 +77,10 @@ if (deletedPresenceFolders.length) {
 		actions.info(
 			chalk.green(`Deleting ${assets.length} asset(s) for ${folder}...`)
 		);
-		await assetsManager.deleteAssets(assets);
+		const errors = await assetsManager.deleteAssets(assets);
+		for (const error of errors) actions.error(error);
+		if (errors.length) actions.setFailed("Failed to delete assets");
 	}
 }
+
+actions.info(chalk.green("Done!"));
