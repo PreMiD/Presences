@@ -36,52 +36,27 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/sorrygle") presenceData.details = "쏘리글";
 	if (pathname.startsWith("/song/")) {
 		presenceData.details = "노래 듣는 중";
-		let songArtist = document
-			.querySelector(".song")
-			.children[2].innerHTML.split("&nbsp;")[0];
 		/* Why innerHTML?
 		 * Because removing another expression of artist.
 		 * Other expressions of artist name and song name are separated by '&nbsp;' in Sorryfield.
 		 * '.textContent' does not have '&nbsp;'.
 		 */
-		if (document.querySelector(".title").textContent.includes("fa-lock"))
-			songArtist = `🔒 ${songArtist}`; // Hidden song from the search.
-		presenceData.state = `${songArtist} - ${document
+		presenceData.state = `${document
+			.querySelector(".song")
+			.children[2].innerHTML.split("&nbsp;")[0]} - ${document
 			.querySelector(".title")
 			.textContent.trim()}`;
-		presenceData.buttons = [{ label: "Listen", url: href }];
+		presenceData.buttons = [{ label: "듣기", url: href }];
 	}
 	if (pathname.startsWith("/java")) {
 		presenceData.details = "자바!";
 		presenceData.largeImageKey = Assets.LOGO;
 		delete presenceData.smallImageKey;
-		if (pathname.includes("/edit")) {
-			presenceData.state = `채보 수정 중 - ${document
-				.querySelector("title")
-				.textContent.replace(" - 자바! - 쏘리들", "")}`;
-		} else if (pathname.includes("/studio")) {
-			presenceData.state = document
-				.querySelector("title")
-				.textContent.replace(" - 자바! - 쏘리들", "");
-		} else if (pathname.includes("/shop")) presenceData.state = "상점";
-		else if (pathname.includes("/sync")) presenceData.state = "환경 설정";
-		else if (href.includes("/java/")) {
-			presenceData.state = document
-				.querySelector(".title")
-				.children[1].firstChild.textContent.trim();
-		} else if (href.includes("?")) {
+		if (pathname === "/java") {
 			presenceData.details = "자바! 싱글플레이어";
-			const chartHeader = document.querySelector(".chart-header");
-			presenceData.state = `${
-				chartHeader.children[2].children[0].innerHTML
-			} Lv.${document.querySelector(".level").innerHTML} / ${
-				chartHeader.children[1].children[1].innerHTML
-			} - ${chartHeader.children[1].children[0].innerHTML}`;
-			presenceData.buttons = [{ label: "채보 플레이하기", url: href }];
-		} else {
 			const image = document
-				.querySelector(".active>div>img")
-				.attributes[1].value.replace("/media/images/chart-", "")
+				.querySelector<HTMLImageElement>(".active>div>img")
+				.src.replace("https://sorry.daldal.so/media/images/chart-", "")
 				.replace(".jpg", "")
 				.toUpperCase();
 			let imageKey = "",
@@ -91,7 +66,7 @@ presence.on("UpdateData", async () => {
 			switch (image) {
 				case "SEARCH":
 					imageKey = Assets.CHART_SEARCH;
-					presenceData.state = `채보 검색 중 - ${
+					presenceData.state = `채보 검색 중: ${
 						document.querySelector<HTMLInputElement>("#search").value
 					}`;
 					break;
@@ -140,39 +115,52 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "멀티플레이어 방 선택 중";
 					break;
 			}
-			if (menuName !== "") presenceData.state = `채보 선택 중 - ${menuName}`;
+			if (menuName !== "") presenceData.state = `채보 선택 중: ${menuName}`;
 
 			presenceData.largeImageKey = imageKey;
 			presenceData.buttons = [{ label: "자바! 플레이하기", url: href }];
-		}
-	}
-	if (pathname === "/java/multiplayer") {
-		presenceData.details = "자바! 멀티플레이어";
-		presenceData.largeImageKey = Assets.CHART_MULTIPLAYER;
-		if (document.querySelector(".room-header")) {
-			const roomUsers = document
-				.querySelector(".room-header")
-				.children[1].innerHTML.replace(
-					'<i class="icon fa-fw fas fa-users"></i>&nbsp;',
-					""
-				)
-				.replace("/", "of");
-			presenceData.state = `${
-				document
+		} else if (pathname.includes("/edit")) {
+			presenceData.state = `채보 수정 중: ${document
+				.querySelector("title")
+				.textContent.replace(" - 자바! - 쏘리들", "")}`;
+		} else if (pathname.includes("/studio")) {
+			presenceData.state = document
+				.querySelector("title")
+				.textContent.replace(" - 자바! - 쏘리들", "");
+		} else if (pathname.includes("/shop")) presenceData.state = "상점";
+		else if (pathname.includes("/sync")) presenceData.state = "환경 설정";
+		else if (pathname === "/java/multiplayer") {
+			presenceData.details = "자바! 멀티플레이어";
+			presenceData.largeImageKey = Assets.CHART_MULTIPLAYER;
+			if (document.querySelector(".room-header")) {
+				presenceData.state = `${
+					document
+						.querySelector(".room-header")
+						.children[0].innerHTML.split("</span>")[1]
+				} (${document
 					.querySelector(".room-header")
-					.children[0].innerHTML.split("</span>")[1]
-			} (${roomUsers})`;
-			presenceData.buttons = [{ label: "방 참여하기", url: href }];
-		}
-		if (document.querySelector(".chart-header")) {
+					.children[1].textContent.trim()
+					.replace("/", " of ")})`;
+				presenceData.buttons = [{ label: "방 참여하기", url: href }];
+			}
+			if (document.querySelector(".chart-header")) {
+				const chartHeader = document.querySelector(".chart-header");
+				presenceData.state = `${
+					chartHeader.children[2].children[0].textContent
+				} Lv.${document.querySelector(".level").textContent} / ${
+					chartHeader.children[1].children[1].textContent
+				} - ${chartHeader.children[1].children[0].textContent}`;
+			}
+		} else if (href.includes("?")) {
+			presenceData.details = "자바! 싱글플레이어";
 			const chartHeader = document.querySelector(".chart-header");
 			presenceData.state = `${
-				chartHeader.children[2].children[0].innerHTML
-			} Lv.${document.querySelector(".level").innerHTML} / ${
-				chartHeader.children[1].children[1].innerHTML
-			} - ${chartHeader.children[1].children[0].innerHTML}`;
+				chartHeader.children[2].children[0].textContent
+			} Lv.${document.querySelector(".level").textContent} / ${
+				chartHeader.children[1].children[1].textContent
+			} - ${chartHeader.children[1].children[0].textContent}`;
+			presenceData.buttons = [{ label: "채보 플레이하기", url: href }];
 		}
 	}
-
 	presence.setActivity(presenceData);
 });
