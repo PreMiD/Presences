@@ -160,6 +160,5 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: "채보 플레이하기", url: href }];
 		}
 	}
-	console.log(presenceData);
 	presence.setActivity(presenceData);
 });
