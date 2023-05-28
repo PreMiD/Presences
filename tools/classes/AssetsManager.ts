@@ -14,6 +14,7 @@ const require = createRequire(import.meta.url),
 
 export default class AssetsManager {
 	cwd: string;
+	assetBaseUrl: string;
 
 	constructor(
 		public service: string,
@@ -22,10 +23,7 @@ export default class AssetsManager {
 		}
 	) {
 		this.cwd = options?.cwd ?? rootPath;
-	}
-
-	get assetBaseUrl() {
-		return `${cdnBase}/PreMiD/${encodeURI(
+		this.assetBaseUrl = `${cdnBase}/PreMiD/${encodeURI(
 			this.presenceFolder.replace(this.cwd, "")
 		).replace("#", "%23")}/assets`;
 	}
