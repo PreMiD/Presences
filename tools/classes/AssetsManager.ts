@@ -1,12 +1,20 @@
 import { createRequire } from "node:module";
-import { extname, resolve } from "node:path";
+import { extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { tmpdir } from "node:os";
+import {
+	createReadStream,
+	createWriteStream,
+	readFileSync,
+	writeFileSync,
+} from "node:fs";
+import { pipeline } from "node:stream/promises";
 
 import got from "got";
 import glob from "glob";
-import { Metadata } from "./PresenceCompiler";
-import { readFileSync, writeFileSync } from "node:fs";
 import FormData from "form-data";
+
+import { Metadata } from "./PresenceCompiler";
 
 const require = createRequire(import.meta.url),
 	rootPath = resolve(fileURLToPath(new URL(".", import.meta.url)), "../.."),
@@ -14,7 +22,7 @@ const require = createRequire(import.meta.url),
 
 export default class AssetsManager {
 	cwd: string;
-	assetBaseUrl: string;
+	presenceFolder: string;
 
 	constructor(
 		public service: string,
@@ -23,12 +31,16 @@ export default class AssetsManager {
 		}
 	) {
 		this.cwd = options?.cwd ?? rootPath;
-		this.assetBaseUrl = `${cdnBase}/PreMiD/${encodeURI(
+		this.presenceFolder = this.getPresenceFolder();
+	}
+
+	get assetBaseUrl() {
+		return `${cdnBase}/PreMiD/${encodeURI(
 			this.presenceFolder.replace(this.cwd, "")
 		).replace("#", "%23")}/assets`;
 	}
 
-	get presenceFolder() {
+	getPresenceFolder() {
 		return glob
 			.sync(`{websites,programs}/**/${this.service}`)[0]
 			.replace(/\\/g, "/");
@@ -176,10 +188,10 @@ export default class AssetsManager {
 
 		let index = 0;
 		for (const asset of newAssets) {
+			while (usedIndexes.has(index)) index++;
 			const newAsset = `${this.assetBaseUrl}/${index}${this.getFileExtension(
 				asset
 			)}`;
-			while (usedIndexes.has(index)) index++;
 			result.toBeUploaded.set(asset, newAsset);
 			usedIndexes.add(index);
 			index++;
@@ -277,48 +289,55 @@ export default class AssetsManager {
 					continue;
 			}
 
-			await got(url)
-				.buffer()
-				.then(async data => {
-					const form = new FormData();
-					form.append("file", data, {
-						contentType: mimeType,
-					});
+			const random = Math.random().toString(36).substring(2, 15),
+				fileLocation = join(tmpdir(), `asset${random}${extension}`);
 
-					try {
-						//* If the asset already exists, make a put request instead of a post request
-						if (await this.doesAssetExist(newUrl)) {
-							await got.put(newUrl, {
-								body: form,
-								headers: {
-									...form.getHeaders(),
-									Authorization: process.env.CDN_TOKEN,
-								},
-							});
-						} else {
-							await got.post(newUrl, {
-								body: form,
-								headers: {
-									...form.getHeaders(),
-									Authorization: process.env.CDN_TOKEN,
-								},
-							});
-						}
-					} catch (error) {
-						errors.push(
-							`Failed to upload asset ${url}: ${
-								"message" in error ? error.message : error.toString()
-							}`
-						);
-					}
-				})
-				.catch(error => {
-					errors.push(
-						`Failed to download asset ${url}: ${
-							"message" in error ? error.message : error.toString()
-						}`
-					);
-				});
+			try {
+				const stream = got.stream(url);
+				await pipeline(stream, createWriteStream(fileLocation));
+			} catch (error) {
+				errors.push(`Error while downloading asset ${url}: ${error.message}`);
+				continue;
+			}
+
+			const form = new FormData();
+			form.append("file", createReadStream(fileLocation), {
+				filename: `asset${random}${extension}`,
+				contentType: mimeType,
+			});
+
+			try {
+				//* If the asset already exists, make a put request instead of a post request
+				if (await this.doesAssetExist(newUrl)) {
+					await got.put(newUrl, {
+						body: form,
+						headers: {
+							...form.getHeaders(),
+							Authorization: process.env.CDN_TOKEN,
+						},
+						retry: {
+							limit: 0,
+						},
+					});
+				} else {
+					await got.post(newUrl, {
+						body: form,
+						headers: {
+							...form.getHeaders(),
+							Authorization: process.env.CDN_TOKEN,
+						},
+						retry: {
+							limit: 0,
+						},
+					});
+				}
+			} catch (error) {
+				errors.push(
+					`Failed to upload asset ${url} to ${newUrl} (${
+						"request" in error ? error.request.method : ""
+					}): ${"message" in error ? error.message : error.toString()}`
+				);
+			}
 		}
 		return errors;
 	}
@@ -357,19 +376,38 @@ export default class AssetsManager {
 
 	replaceInFiles(replacements: Map<string, string>) {
 		for (const tsfile of this.allTsFiles) {
-			const file = readFileSync(tsfile, "utf8");
+			let file = readFileSync(tsfile, "utf8"),
+				changed = false;
 
-			let changed = false;
 			for (const [oldUrl, newUrl] of replacements) {
 				if (!file.includes(oldUrl)) continue;
-				file.replaceAll(oldUrl, newUrl);
+				file = file.replaceAll(oldUrl, newUrl);
 				changed = true;
 			}
 
-			if (changed)
+			if (changed) {
 				writeFileSync(tsfile, file, {
 					encoding: "utf8",
 				});
+			}
+		}
+
+		let metadata = readFileSync(
+				resolve(this.presenceFolder, "metadata.json"),
+				"utf8"
+			),
+			changed = false;
+
+		for (const [oldUrl, newUrl] of replacements) {
+			if (!metadata.includes(oldUrl)) continue;
+			metadata = metadata.replaceAll(oldUrl, newUrl);
+			changed = true;
+		}
+
+		if (changed) {
+			writeFileSync(resolve(this.presenceFolder, "metadata.json"), metadata, {
+				encoding: "utf8",
+			});
 		}
 	}
 }
