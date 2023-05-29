@@ -108,20 +108,9 @@ export default class AssetsManager {
 	 * - getAssetBaseUrl()/1.<extension>
 	 * - getAssetBaseUrl()/2.<extension>
 	 *
-	 * Any no longer used assets should be deleted from the cdn, so the cdn doesn't get filled with unused assets, and the indexes don't get messed up.
-	 * So if there are 3 assets, and the 2nd one is no longer used, the 3rd asset should be moved to the 2nd index, and the 3rd index should be deleted.
-	 * If for example the 1st asset is no longer used, but a new asset is added, the new asset should be uploaded to the 1st index, so the 2nd and 3rd don't even have to be moved. (This is the ideal situation, you can just pass the new asset to the toBeUploaded map, since the sync process will use a PUT request if the asset already exists)
-	 *
-	 * @todo
-	 * - [x] Get all assets from the presence
-	 * - [x] Get all assets from the cdn
-	 * - [ ] Compare the assets from the presence with the assets from the cdn
-	 *
-	 * The update process should be as follows:
-	 * - [ ] Delete all assets that are no longer used
-	 * - [ ] Move assets to their new index (Upload to their new index, and delete the old index)
-	 * - [ ] Upload all new assets
-	 *
+	 * Any no longer used assets will be added to the toBeDeleted set
+	 * Any assets that have been uploaded already but will now be moved to a different index will be added to the toBeMoved map
+	 * Any assets that have not been uploaded yet will be added to the toBeUploaded map
 	 */
 	async getAssetsChanges(): Promise<{
 		toBeUploaded: Map<string, string>;
