@@ -290,7 +290,10 @@ export default class AssetsManager {
 			}
 
 			const random = Math.random().toString(36).substring(2, 15),
-				fileLocation = join(tmpdir(), `asset${random}${extension}`);
+				fileLocation = join(
+					tmpdir(),
+					`premid-assetmanager-${random}${extension}`
+				);
 
 			try {
 				const stream = got.stream(url);
