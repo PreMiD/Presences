@@ -36,13 +36,8 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/sorrygle") presenceData.details = "쏘리글";
 	if (pathname.startsWith("/song/")) {
 		presenceData.details = "노래 듣는 중";
-		/* Why innerHTML?
-		 * Because removing another expression of artist.
-		 * Other expressions of artist name and song name are separated by '&nbsp;' in Sorryfield.
-		 * '.textContent' does not have '&nbsp;'.
-		 */
 		presenceData.state = `${
-			document.querySelector(".song").children[2].innerHTML.split("&nbsp;")[0]
+			document.querySelector(".song").children[2].childNodes[0].textContent
 		} - ${document.querySelector(".title").textContent.trim()}`;
 		presenceData.buttons = [{ label: "듣기", url: href }];
 	}
@@ -134,7 +129,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${
 					document
 						.querySelector(".room-header")
-						.children[0].innerHTML.split("</span>")[1]
+						.children[0].childNodes[1].textContent
 				} (${document
 					.querySelector(".room-header")
 					.children[1].textContent.trim()
