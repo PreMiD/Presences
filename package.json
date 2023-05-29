@@ -13,6 +13,7 @@
 		"presenceValidator": "npm run compileTools && node --enable-source-maps tools/auto/presenceValidator.js",
 		"presenceUpdater": "npm run compileTools && node --enable-source-maps tools/auto/presenceUpdater.js",
 		"metadataSorter": "npm run compileTools && node --enable-source-maps tools/metadataSorter.js",
+		"assetsUpdater": "npm run compileTools && node --enable-source-maps tools/auto/assetsUpdater.js",
 		"compile": "npm run compileTools && node --enable-source-maps tools/auto/compileChanged.js",
 		"prepare": "husky install",
 		"changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
