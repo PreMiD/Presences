@@ -7,30 +7,52 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "https://i.imgur.com/MXQP0Lq.png",
 	};
 
-	if (document.location.pathname === "/") {
-		presenceData.details = "Searching";
-	} else if (document.location.pathname === "/a/wa/favorites") {
-		presenceData.details = "Viewing Favorite Tabs";
-	} else if (document.location.pathname === "/a/wa/mytabs") {
-		presenceData.details = "Viewing Owned Tabs";
-	} else if (document.location.pathname === "/a/wa/submit") {
-		presenceData.details = "Submitting Tabs";
-	} else if (document.location.pathname === "/a/wa/account") {
-		presenceData.details = "Editing Account Settings";
-	} else if (document.location.pathname === "/a/wa/plus") {
-		presenceData.details = "Viewing Plans";
-	} else if (document.location.pathname === "/a/wa/help") {
-		presenceData.details = "Viewing Q&A";
-	} else if (document.location.pathname === "/a/wa/account") {
-		presenceData.details = "Viewing Account Settings";
-	} else if (document.location.pathname.startsWith("/a/wsa/")) {
-		presenceData.details = document.querySelector(
-			'[aria-label="title"]'
-		).textContent;
+	switch (document.location.pathname) {
+		case "/": {
+			presenceData.details = "Searching";
 
-		presenceData.state = document.querySelector(
-			'[aria-label="artist"]'
-		).textContent;
+			break;
+		}
+		case "/a/wa/favorites": {
+			presenceData.details = "Viewing Favorite Tabs";
+
+			break;
+		}
+		case "/a/wa/mytabs": {
+			presenceData.details = "Viewing Owned Tabs";
+
+			break;
+		}
+		case "/a/wa/submit": {
+			presenceData.details = "Submitting Tabs";
+
+			break;
+		}
+		case "/a/wa/plus": {
+			presenceData.details = "Viewing Plans";
+
+			break;
+		}
+		case "/a/wa/help": {
+			presenceData.details = "Viewing Q&A";
+
+			break;
+		}
+		case "/a/wa/account": {
+			presenceData.details = "Viewing Account Settings";
+
+			break;
+		}
+		default:
+			if (document.location.pathname.startsWith("/a/wsa/")) {
+				presenceData.details = document.querySelector(
+					'[aria-label="title"]'
+				).textContent;
+
+				presenceData.state = document.querySelector(
+					'[aria-label="artist"]'
+				).textContent;
+			}
 	}
 
 	presence.setActivity(presenceData);
