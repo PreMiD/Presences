@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "293803241110503426",
+		"name": "weemizo"
+	},
+	"service": "Songsterr",
+	"description": {
+		"en": "Songsterr is also an online tab player which makes learning tabs easier. It accompanies each tab with a song audio and automatically scrolls through each tab, indicating exactly which note is being played."
+	},
+	"url": "www.songsterr.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/vKeC7jt.png",
+	"thumbnail": "https://i.imgur.com/8oPgs19.png",
+	"color": "#1E90FF",
+	"category": "music",
+	"tags": [
+		"music",
+		"tabs",
+		"learn"
+	]
+}
