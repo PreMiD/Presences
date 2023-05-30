@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = "Checking Revisions";
 		if (
-			(<HTMLInputElement>document.querySelector("#submitRevisionButton"))
+			(document.querySelector<HTMLInputElement>("#submitRevisionButton"))
 				?.textContent === "Submit a new revision"
 		) {
 			presenceData.details = "Checking Revisions";
