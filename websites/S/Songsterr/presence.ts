@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.endsWith("payment"))
 		presenceData.details = "Buying Songsterr Plus";
 	else if (
-		(<HTMLInputElement>document.querySelector("#revisions-toggle")).title ===
+		(document.querySelector<HTMLInputElement>("#revisions-toggle")).title ===
 		"Hide revisions"
 	) {
 		presenceData.details = "Checking Revisions";
