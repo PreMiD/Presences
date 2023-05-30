@@ -51,6 +51,6 @@ presence.on("UpdateData", async () => {
 		}`;
 	}
 
-	if (presenceData) presence.setActivity(presenceData);
-	else presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
