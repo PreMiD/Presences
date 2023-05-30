@@ -11,15 +11,15 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets {
+enum Assets {
 	MyTF1 = "https://i.imgur.com/k8jIoSZ.png",
 	TF1 = "https://i.imgur.com/pFgnoUS.png",
 	TFX = "https://i.imgur.com/u5dTkHx.png",
 	TMC = "https://i.imgur.com/62uYw2r.png",
 	LCI = "https://i.imgur.com/qrRgNgk.png",
 	TF1Series = "https://i.imgur.com/WOmFIm3.png",
-	Stream = "https://i.imgur.com/xuvR04J.png",
-	Replay = "https://i.imgur.com/OZDAx9n.png",
+	Live = "https://i.imgur.com/xuvR04J.png",
+	Repeat = "https://i.imgur.com/OZDAx9n.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -34,6 +34,13 @@ presence.on("UpdateData", async () => {
 
 	const { browse, live, viewHome, viewProfile, watchingVid } = await strings;
 
+	if (path.includes("tf1")) presenceData.largeImageKey = Assets.TF1;
+	else if (path.includes("tmc")) presenceData.largeImageKey = Assets.TMC;
+	else if (path.includes("tfx")) presenceData.largeImageKey = Assets.TFX;
+	else if (path.includes("lci")) presenceData.largeImageKey = Assets.LCI;
+	else if (path.includes("tf1-series-films"))
+		presenceData.largeImageKey = Assets.TF1Series;
+
 	if (path === "/") {
 		presenceData.details = viewHome;
 		presenceData.state = browse;
@@ -44,7 +51,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Stream;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
@@ -54,7 +61,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"[class*=VideoSummary_programLink] picture img"
 			).src;
-		} else presenceData.largeImageKey = Assets.TF1;
+		}
 	} else if (path.startsWith("/tfx/direct")) {
 		presenceData.details = document.querySelector(
 			"[class*=VideoSummary_programName]"
@@ -62,7 +69,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Stream;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
@@ -72,7 +79,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"[class*=VideoSummary_programLink] picture img"
 			).src;
-		} else presenceData.largeImageKey = Assets.TFX;
+		}
 	} else if (path.startsWith("/tmc/direct")) {
 		presenceData.details = document.querySelector(
 			"[class*=VideoSummary_programName]"
@@ -80,7 +87,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Stream;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
@@ -90,7 +97,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"[class*=VideoSummary_programLink] picture img"
 			).src;
-		} else presenceData.largeImageKey = Assets.TMC;
+		}
 	} else if (path.startsWith("/tf1-series-films/direct")) {
 		presenceData.details = document.querySelector(
 			"[class*=VideoSummary_programName]"
@@ -98,7 +105,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Stream;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
 		if (
 			document.querySelector<HTMLImageElement>(
@@ -108,15 +115,14 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"[class*=VideoSummary_programLink] picture img"
 			).src;
-		} else presenceData.largeImageKey = Assets.TF1Series;
+		}
 	} else if (path.startsWith("/lci/direct")) {
 		presenceData.details = "La Chaîne Info";
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Stream;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
-		presenceData.largeImageKey = Assets.LCI;
 	} else if (path.startsWith("/stream")) {
 		presenceData.details = `Stream : ${
 			document.querySelector("[class*=VideoSummary_programName]").textContent
@@ -124,14 +130,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Stream;
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = live;
 	} else if (path.includes("/programmes-tv")) {
 		presenceData.details = "Programmes TV";
 		presenceData.state = `${browse} Liste des programmes`;
 		if (path.split("/")[1] === "programmes-tv")
 			presenceData.largeImageKey = Assets.MyTF1;
-		else presenceData.largeImageKey = path.split("/")[1];
 	} else if (path.startsWith("/mon-compte")) {
 		presenceData.details = viewProfile;
 		presenceData.state = browse;
@@ -145,9 +150,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"[class*=VideoSummary_title]"
 		).textContent;
-		presenceData.smallImageKey = Assets.Replay;
+		presenceData.smallImageKey = Assets.Repeat;
 		presenceData.smallImageText = watchingVid;
-		presenceData.largeImageKey = path.split("/")[1];
 	} else if (path.split("/")[2].includes("-")) {
 		presenceData.details = document.querySelector(
 			"[class*=Tabs_tabs__list] h1"
