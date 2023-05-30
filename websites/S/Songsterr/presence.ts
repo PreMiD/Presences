@@ -10,37 +10,30 @@ presence.on("UpdateData", async () => {
 	switch (document.location.pathname) {
 		case "/": {
 			presenceData.details = "Searching";
-
 			break;
 		}
 		case "/a/wa/favorites": {
 			presenceData.details = "Viewing Favorite Tabs";
-
 			break;
 		}
 		case "/a/wa/mytabs": {
 			presenceData.details = "Viewing Owned Tabs";
-
 			break;
 		}
 		case "/a/wa/submit": {
 			presenceData.details = "Submitting Tabs";
-
 			break;
 		}
 		case "/a/wa/plus": {
 			presenceData.details = "Viewing Plans";
-
 			break;
 		}
 		case "/a/wa/help": {
 			presenceData.details = "Viewing Q&A";
-
 			break;
 		}
 		case "/a/wa/account": {
 			presenceData.details = "Viewing Account Settings";
-
 			break;
 		}
 		default:
