@@ -6,7 +6,8 @@
 	},
 	"service": "Songsterr",
 	"description": {
-		"en": "Songsterr is also an online tab player which makes learning tabs easier. It accompanies each tab with a song audio and automatically scrolls through each tab, indicating exactly which note is being played."
+		"en": "Songsterr is also an online tab player which makes learning tabs easier. It accompanies each tab with a song audio and automatically scrolls through each tab, indicating exactly which note is being played.",
+		"pl": "Songsterr to internetowy odtwarzacz tabów, który ułatwia naukę tabów. Towarzyszy każdemu tabowi z dźwiękiem utworu i automatycznie przewija każdy tab, wskazując dokładnie, która nuta jest odtwarzana"
 	},
 	"url": "www.songsterr.com",
 	"version": "1.0.0",
