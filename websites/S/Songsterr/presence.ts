@@ -5,11 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/vKeC7jt.png",
-			startTimestamp: browsingTimestamp,
-		}
-		
-		;
+		largeImageKey: "https://i.imgur.com/vKeC7jt.png",
+		startTimestamp: browsingTimestamp,
+	};
 
 	if (document.location.search.startsWith("?pattern=")) {
 		const searchvar = (<HTMLInputElement>(
@@ -32,13 +30,15 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Checking saved favorite songs";
 	else if (document.location.pathname.endsWith("payment"))
 		presenceData.details = "Buying Songsterr Plus";
-	else if ((<HTMLInputElement>(
-			document.querySelector("#revisions-toggle")
-		)).title === "Hide revisions") {
+	else if (
+		(<HTMLInputElement>document.querySelector("#revisions-toggle")).title ===
+		"Hide revisions"
+	) {
 		presenceData.details = "Checking Revisions";
-		if ((<HTMLInputElement>(
-			document.querySelector("#submitRevisionButton")
-		))?.textContent === "Submit a new revision") {
+		if (
+			(<HTMLInputElement>document.querySelector("#submitRevisionButton"))
+				?.textContent === "Submit a new revision"
+		) {
 			presenceData.details = "Checking Revisions";
 			presenceData.state = "Submitting a new revision";
 		}
