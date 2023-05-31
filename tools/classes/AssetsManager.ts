@@ -13,6 +13,7 @@ import { pipeline } from "node:stream/promises";
 import got from "got";
 import glob from "glob";
 import FormData from "form-data";
+import sharp from "sharp";
 
 import { Metadata } from "./PresenceCompiler";
 
@@ -290,10 +291,10 @@ export default class AssetsManager {
 			}
 
 			const random = Math.random().toString(36).substring(2, 15),
-				fileLocation = join(
-					tmpdir(),
-					`premid-assetmanager-${random}${extension}`
-				);
+				filename = `premid-assetmanager-${random}${extension}`,
+				fileLocation = join(tmpdir(), filename);
+
+			let finalFileLocation = fileLocation;
 
 			try {
 				const stream = got.stream(url);
@@ -303,9 +304,30 @@ export default class AssetsManager {
 				continue;
 			}
 
+			if (!newUrl.includes("thumbnail")) {
+				const file = sharp(fileLocation),
+					metadata = await file.metadata();
+
+				if (metadata.width !== 512 || metadata.height !== 512) {
+					try {
+						const newFileLocation = join(tmpdir(), `resized-${filename}`);
+						await file
+							.resize(512, 512, {
+								fit: "contain",
+								background: { r: 0, g: 0, b: 0, alpha: 0 },
+							})
+							.toFile(newFileLocation);
+						finalFileLocation = newFileLocation;
+					} catch (error) {
+						errors.push(`Error while resizing asset ${url}: ${error.message}`);
+						continue;
+					}
+				}
+			}
+
 			const form = new FormData();
-			form.append("file", createReadStream(fileLocation), {
-				filename: `asset${random}${extension}`,
+			form.append("file", createReadStream(finalFileLocation), {
+				filename,
 				contentType: mimeType,
 			});
 
