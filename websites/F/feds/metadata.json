@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "1105810827224809532",
+		"name": "for#4726"
+	},
+	"service": "feds",
+	"description": {
+		"en": "feds.lol is a freemium biolink service."
+	},
+	"url": "feds.lol",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/nBWzgJs.png",
+	"thumbnail": "https://i.imgur.com/Gh57ayn.jpg",
+	"color": "#000000",
+	"category": "socials",
+	"tags": [
+		"biolink",
+		"bio",
+		"link",
+		"linktree",
+		"socials",
+		"social"
+	]
+}
