@@ -36,8 +36,10 @@ if (changedPresenceFolders.length) {
 				chalk.green(`Moving ${toBeMoved.size} asset(s) for ${folder}...`)
 			);
 			const errors: string[] = [];
-			errors.push(...(await assetsManager.uploadAssets(toBeMoved)));
-			errors.push(...(await assetsManager.deleteAssets([...toBeMoved.keys()])));
+			errors.push(
+				...(await assetsManager.uploadAssets(toBeMoved)),
+				...(await assetsManager.deleteAssets([...toBeMoved.keys()]))
+			);
 			for (const error of errors) actions.error(error);
 			if (errors.length) actions.setFailed("Failed to move assets");
 

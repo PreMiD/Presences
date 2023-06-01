@@ -14,6 +14,7 @@ import got from "got";
 import glob from "glob";
 import FormData from "form-data";
 import sharp from "sharp";
+import { lookup as mimeLookup } from "mime-types";
 
 import { Metadata } from "./PresenceCompiler";
 
@@ -267,27 +268,14 @@ export default class AssetsManager {
 	async uploadAssets(assets: Map<string, string>) {
 		let errors: string[] = [];
 		for (const [url, newUrl] of assets) {
-			const extension = this.getFileExtension(url);
-			let mimeType: string;
-			switch (extension) {
-				case ".png":
-					mimeType = "image/png";
-					break;
-				case ".jpg":
-				case ".jpeg":
-					mimeType = "image/jpeg";
-					break;
-				case ".gif":
-					mimeType = "image/gif";
-					break;
-				case ".webp":
-					mimeType = "image/webp";
-					break;
-				default:
-					errors.push(
-						`Tried to upload an asset with an invalid extension: ${url}`
-					);
-					continue;
+			const extension = this.getFileExtension(url),
+				mimeType = mimeLookup(extension);
+
+			if (!mimeType || !mimeType.startsWith("image/")) {
+				errors.push(
+					`Tried to upload an asset with an invalid extension: ${url}`
+				);
+				continue;
 			}
 
 			const random = Math.random().toString(36).substring(2, 15),
