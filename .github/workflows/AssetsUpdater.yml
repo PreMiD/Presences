@@ -1,0 +1,37 @@
+name: Assets Updater
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**.ts"
+      - "**.json"
+jobs:
+  update:
+    if: github.repository_owner == 'PreMiD'
+    name: Update Assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 16
+          cache: npm
+      - name: Install dependencies
+        run: HUSKY=0 npm ci
+      - name: Start assets updater
+        env:
+          CDN_TOKEN: ${{ secrets.CDN_TOKEN }}
+        run: |
+          git config --global core.quotePath false
+          git config --global core.precomposeunicode true
+          npm run assetsUpdater push
+          npm run bumpChanged uncommitted
+      - name: Commit any changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "chore: update assets"
