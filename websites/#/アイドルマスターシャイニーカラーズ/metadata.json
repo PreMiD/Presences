@@ -13,7 +13,7 @@
 		"ja_JP": "「アイドルマスター」シリーズ最新作が、スマートフォン向けブラウザゲームで登場！ 新たな事務所「283（ツバサ）プロダクション」を舞台に、アイドルを羽ばたかせよう！ ©BANDAI NAMCO Entertainment Inc."
 	},
 	"url": "shinycolors.enza.fun",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/YfaIAPE.png",
 	"thumbnail": "https://i.imgur.com/QsN77cM.png",
 	"color": "#8adfff",
@@ -23,4 +23,3 @@
 		"shinymas"
 	]
 }
-

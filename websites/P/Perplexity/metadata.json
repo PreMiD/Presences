@@ -9,12 +9,15 @@
 		"en": "Perplexity AI is an AI chat tool that acts as a powerful search engine."
 	},
 	"url": "www.perplexity.ai",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/gdCcljx.png",
 	"thumbnail": "https://i.imgur.com/hkZPlxM.png",
 	"color": "#202025",
 	"category": "other",
-	"tags": ["search", "ai"],
+	"tags": [
+		"search",
+		"ai"
+	],
 	"settings": [
 		{
 			"id": "privacy",
