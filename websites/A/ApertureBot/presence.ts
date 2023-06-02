@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 			"#page-wrapper > div > div > div > div > div.panel-heading"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/0Tw3aDA.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/ApertureBot/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

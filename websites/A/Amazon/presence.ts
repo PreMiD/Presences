@@ -12,7 +12,7 @@ let item: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/qPBCqNA.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Amazon/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

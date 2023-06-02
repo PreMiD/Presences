@@ -5,7 +5,7 @@ const presence = new Presence({
 	slideshow = new Slideshow();
 
 const enum Assets {
-	Logo = "https://i.imgur.com/eABLEqd.jpg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Artfight/assets/logo.jpg",
 }
 
 presence.on("UpdateData", async () => {

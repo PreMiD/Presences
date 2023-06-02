@@ -9,7 +9,7 @@ const presence = new Presence({ clientId: "1016797607370162256" }),
 	};
 
 const enum Assets {
-	Logo = "https://i.imgur.com/BRpmbpT.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Sama/assets/logo.png",
 }
 
 interface IFrameData {

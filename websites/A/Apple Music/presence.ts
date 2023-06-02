@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/06HbqaF.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Apple%20Music/assets/logo.png",
 		},
 		[timestamps, cover] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),

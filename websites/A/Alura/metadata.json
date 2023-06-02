@@ -17,9 +17,9 @@
 	},
 	"url": "www.alura.com.br",
 	"regExp": "([a-z0-9]+)[.]alura.com.br",
-	"version": "1.1.4",
-	"logo": "https://i.imgur.com/PAVyL0E.png",
-	"thumbnail": "https://i.imgur.com/7IevIec.png",
+	"version": "1.1.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/thumbnail.png",
 	"color": "#051932",
 	"category": "other",
 	"tags": [

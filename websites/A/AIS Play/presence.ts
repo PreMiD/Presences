@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity({
 			details: "Searching for :",
 			state: document.location.search.replace("?q=", ""),
-			largeImageKey: "https://i.imgur.com/HQs4uPj.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AIS%20Play/assets/logo.png",
 			smallImageKey: "search",
 			smallImageText: "Searching...",
 		});
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity({
 			details: "Browsing for :",
 			state: document.querySelector(".default-title").textContent || "",
-			largeImageKey: "https://i.imgur.com/HQs4uPj.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AIS%20Play/assets/logo.png",
 		});
 	}
 

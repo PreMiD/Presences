@@ -11,9 +11,9 @@
 	},
 	"url": "www.artstation.com",
 	"regExp": "([a-z0-9-_]+)[.]artstation[.]com",
-	"version": "1.2.7",
-	"logo": "https://i.imgur.com/hHlsZac.png",
-	"thumbnail": "https://i.imgur.com/bQ4qzHO.jpg",
+	"version": "1.2.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/thumbnail.jpg",
 	"color": "#13AFF0",
 	"category": "socials",
 	"tags": [

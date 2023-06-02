@@ -24,7 +24,7 @@ function getGuildTitle(): string {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/hMk54q9.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AminoApps/assets/logo.png",
 		startTimestamp: Date.now(),
 	};
 	if (document.location.hostname === "aminoapps.com") {

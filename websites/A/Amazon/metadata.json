@@ -15,9 +15,9 @@
 	},
 	"url": "www.amazon.com",
 	"regExp": "([a-z0-9-]+[.])*amazon([.][a-z]+)+[/](?!(-[/]([a-z0-9]+)[/])?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp[/]video))",
-	"version": "1.5.18",
-	"logo": "https://i.imgur.com/qPBCqNA.png",
-	"thumbnail": "https://i.imgur.com/Y6njoa3.png",
+	"version": "1.5.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Amazon/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Amazon/assets/thumbnail.png",
 	"color": "#ff9900",
 	"category": "other",
 	"tags": [

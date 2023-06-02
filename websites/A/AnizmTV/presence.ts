@@ -16,7 +16,7 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/TZZcyOQ.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AnizmTV/assets/logo.png",
 		},
 		title = document.querySelector(
 			"html > body > main > #pageContent > div > h2 > a"

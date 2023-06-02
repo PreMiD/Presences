@@ -24,9 +24,9 @@
 		"animeworld.tv"
 	],
 	"regExp": "([a-z0-9-]+[.])*animeworld([.][a-z]+)+[/]",
-	"version": "4.0.17",
-	"logo": "https://i.imgur.com/UOy5uus.png",
-	"thumbnail": "https://i.imgur.com/mTlQ9up.png",
+	"version": "4.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeWorld/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeWorld/assets/thumbnail.png",
 	"color": "#165fa7",
 	"category": "anime",
 	"tags": [
