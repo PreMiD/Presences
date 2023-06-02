@@ -30,9 +30,8 @@ jobs:
           git config --global core.quotePath false
           git config --global core.precomposeunicode true
           npm run assetsUpdater push
+          npm run format
           npm run bumpChanged uncommitted
-      - name: Format files
-        run: npm run format
       - name: Commit any changes
         uses: EndBug/add-and-commit@v9
         with:
