@@ -22,7 +22,7 @@ oldTitle = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/oIasj8d.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/PlutoTV/assets/logo.png",
 	};
 
 	if (document.location.hostname === "pluto.tv") {

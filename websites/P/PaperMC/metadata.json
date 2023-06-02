@@ -16,9 +16,9 @@
 		"hangar.papermc.dev",
 		"forums.papermc.io"
 	],
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/R08CsA6.png",
-	"thumbnail": "https://i.imgur.com/0TPvY1q.png",
+	"version": "1.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PaperMC/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PaperMC/assets/thumbnail.png",
 	"color": "#FFC0CB",
 	"category": "games",
 	"tags": [

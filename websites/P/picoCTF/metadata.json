@@ -12,9 +12,9 @@
 		"picoctf.org",
 		"play.picoctf.org"
 	],
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/nrp0UQ8.png",
-	"thumbnail": "https://i.imgur.com/08xWjUl.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/picoCTF/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/picoCTF/assets/thumbnail.png",
 	"color": "#9b1e33",
 	"category": "other",
 	"tags": [

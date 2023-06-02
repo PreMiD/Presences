@@ -11,9 +11,9 @@
 		"nl": "puhutv is een Turkse service voor entertainment en video op aanvraag!"
 	},
 	"url": "puhutv.com",
-	"version": "1.1.20",
-	"logo": "https://i.imgur.com/Sgp6UhI.png",
-	"thumbnail": "https://i.imgur.com/PPc6zIe.png",
+	"version": "1.1.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/puhutv/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/puhutv/assets/thumbnail.png",
 	"color": "#232527",
 	"category": "videos",
 	"tags": [

@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/PWiUxFD.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/PyPi/assets/logo.png",
 		},
 		Path = document.location.pathname;
 	presenceData.startTimestamp = Math.floor(Date.now() / 1000);

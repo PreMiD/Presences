@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		pause: "general.paused",
 	});
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/f22N41q.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Peloton/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

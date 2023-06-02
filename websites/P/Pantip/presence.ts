@@ -25,7 +25,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/pXOyBO5.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Pantip/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
