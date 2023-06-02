@@ -7,7 +7,8 @@ let course, sub: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/yQiWgOw.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/E/Eldiru/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

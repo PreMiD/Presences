@@ -1,4 +1,4 @@
-const LOGO_URL = "https://i.imgur.com/i9pIvqR.png",
+const LOGO_URL = "https://cdn.rcd.gg/PreMiD/websites/T/Tidal/assets/logo.png",
 	presence = new Presence({ clientId: "901591802342150174" });
 
 async function getStrings() {
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 			Date.now() +
 			((parseFloat(endTime[0]) * 60 + parseFloat(endTime[1]) + 1) * 1000 -
 				currentTimeSec);
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused
 			? (await strings).pause
 			: (await strings).play;

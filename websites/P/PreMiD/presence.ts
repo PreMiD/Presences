@@ -55,7 +55,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/eYLI4hf.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/logo.png",
 		},
 		[newLang, time, showButtons] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
@@ -87,7 +88,7 @@ presence.on("UpdateData", async () => {
 			host.includes("beta")
 				? (presenceData.smallImageText = `BETA | ${strings.browsing}`)
 				: (presenceData.smallImageText = strings.browsing);
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 
 			let icon;
 
@@ -169,7 +170,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "docs.premid.app": {
 			presenceData.details = `${strings.docs} | ${strings.viewPage}`;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = strings.reading;
 
 			switch (true) {
@@ -248,7 +249,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "status.premid.app": {
 			presenceData.details = `Status page | ${strings.viewing}`;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.browsing;
 
 			switch (true) {

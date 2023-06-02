@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "ducc1",
 		"id": "242385294123335690"
@@ -13,9 +13,9 @@
 		"app.kosmi.io",
 		"kosmi.io"
 	],
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/RdGpMdg.png",
-	"thumbnail": "https://i.imgur.com/ZzMzc1l.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/kosmi.io/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/kosmi.io/assets/thumbnail.png",
 	"color": "#322484",
 	"category": "videos",
 	"tags": [

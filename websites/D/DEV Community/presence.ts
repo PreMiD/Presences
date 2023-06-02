@@ -90,7 +90,8 @@ function isPodcast(): boolean {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/dcx0aN7.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/DEV%20Community/assets/logo.png",
 			startTimestamp: timestamp,
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
@@ -117,7 +118,7 @@ presence.on("UpdateData", async () => {
 		case isArticle():
 			presenceData.details = articleTitle;
 			presenceData.state = authorName;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			if (buttons) {
 				presenceData.buttons = [
@@ -233,7 +234,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case pathIncludes("/new"):
 			presenceData.details = "Writing a Post";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			presenceData.smallImageText = "Writing";
 			break;
 		case pathIncludes("/readinglist"):
@@ -258,7 +259,7 @@ presence.on("UpdateData", async () => {
 			searchLength = document.querySelector("#substories").children.length;
 			presenceData.details = `Search: ${searchTerm}`;
 			presenceData.state = `${searchLength} Results`;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching...";
 			break;
 		case pathIncludes("/settings"):
@@ -275,37 +276,37 @@ presence.on("UpdateData", async () => {
 			break;
 		case pathIncludes("/code-of-conduct"):
 			presenceData.details = "Code of Conduct";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			break;
 		case pathIncludes("/faq"):
 			presenceData.details = "FAQ 🤔";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			break;
 		case pathIncludes("/sponsors"):
 			presenceData.details = "Sponsors";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			break;
 		case pathIncludes("/about"):
 			presenceData.details = "About";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			break;
 		case pathIncludes("/privacy"):
 			presenceData.details = "Privacy";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			break;
 		case pathIncludes("/terms"):
 			presenceData.details = "Terms and Conditions";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			break;
 		case pathIncludes("/contact"):
 			presenceData.details = "Contact";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			break;
 		case pathIncludes("/onboarding"):

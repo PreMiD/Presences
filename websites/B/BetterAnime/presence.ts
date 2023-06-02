@@ -66,7 +66,8 @@ const presence = new Presence({
 		oldLang: "",
 		startedSince: ~~(Date.now() / 1000),
 		presenceData: {
-			largeImageKey: "https://i.imgur.com/zIAmJZs.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BetterAnime/assets/logo.png",
 			smallImageKey: "browse",
 		},
 	};
@@ -127,7 +128,9 @@ presence.on("UpdateData", async () => {
 					.querySelector("div.anime-title")
 					.textContent.replace(data.meta.episode, "");
 
-				data.presenceData.smallImageKey = video.paused ? "pause" : "play";
+				data.presenceData.smallImageKey = video.paused
+					? Assets.Pause
+					: Assets.Play;
 				data.presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
@@ -182,7 +185,9 @@ presence.on("UpdateData", async () => {
 						""
 					);
 
-				data.presenceData.smallImageKey = video.paused ? "pause" : "play";
+				data.presenceData.smallImageKey = video.paused
+					? Assets.Pause
+					: Assets.Play;
 				data.presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;

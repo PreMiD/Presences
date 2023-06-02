@@ -50,7 +50,7 @@ const presence = new WeTV({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Browsing...",
-		largeImageKey: "https://i.imgur.com/Cjnky1h.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/logo.png",
 		smallImageKey: "browse",
 	};
 
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = presence.getTitle();
 			presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 			if (video.paused) delete presenceData.endTimestamp;

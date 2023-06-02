@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "fun",
 		"id": "217348698294714370"
@@ -25,9 +25,9 @@
 		"s2dfree.de",
 		"s2dfree.is"
 	],
-	"version": "3.0.2",
-	"logo": "https://i.imgur.com/WAOvAe6.png",
-	"thumbnail": "https://i.imgur.com/AEHBaRS.png",
+	"version": "3.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SOAP2DAY/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SOAP2DAY/assets/thumbnail.png",
 	"color": "#9eeae7",
 	"category": "videos",
 	"tags": [

@@ -1,5 +1,6 @@
 export const name = "Quixort";
-export const logo = "https://i.imgur.com/zqzsySL.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/41.png";
 
 export function getPresenceData({
 	playerState,

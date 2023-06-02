@@ -3,6 +3,10 @@ const presence = new Presence({
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/History%20Vault/assets/logo.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -22,12 +26,6 @@ async function imgPath(path: string) {
 	else return Assets.Logo;
 }
 
-enum Assets {
-	Logo = "https://i.imgur.com/nofcCPt.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
-}
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
@@ -124,7 +122,7 @@ presence.on("UpdateData", async () => {
 							presence.getTimestampsfromMedia(video)[1];
 					}
 					presenceData.smallImageKey = video.paused
-						? Assets.Paused
+						? Assets.Pause
 						: Assets.Play;
 					presenceData.smallImageText = video.paused
 						? strings.paused

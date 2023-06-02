@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Mitchellonii",
 		"id": "490664749315653642"
@@ -17,9 +17,9 @@
 		"no": "Et online gacha-spill som lar deg samle mystiske skapninger kjent som Vukkyer!"
 	},
 	"url": "vukkybox.com",
-	"version": "1.1.8",
-	"logo": "https://i.imgur.com/dIpE7wX.png",
-	"thumbnail": "https://i.imgur.com/uS5AFMi.png",
+	"version": "1.1.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vukkybox/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vukkybox/assets/thumbnail.png",
 	"color": "#5ea1c0",
 	"category": "games",
 	"tags": [

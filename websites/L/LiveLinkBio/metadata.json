@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -10,9 +10,9 @@
 		"nl": "LiveLinkBio is een geavanceerde URL Verkorter Platform, waar je makkelijk links kan verkorten, om jouw gekozen publiek te bereiken op basis van locatie en platform en het bied analytics aan voor de verkorte links."
 	},
 	"url": "livelinkbio.com",
-	"version": "1.2.0",
-	"logo": "https://i.imgur.com/mqJJ4p9.png",
-	"thumbnail": "https://i.imgur.com/U4DlHTe.png",
+	"version": "1.2.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LiveLinkBio/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LiveLinkBio/assets/thumbnail.png",
 	"color": "#41AAA5",
 	"category": "other",
 	"tags": [

@@ -37,7 +37,8 @@ presence.on("UpdateData", async () => {
 			)
 			?.textContent.trim(),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/dw8pZ1d.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/Lichess/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
@@ -50,7 +51,7 @@ presence.on("UpdateData", async () => {
 	} else if (page.includes("/@/")) {
 		presenceData.details = "Searching for:";
 		presenceData.state = document.title.replace(" • lichess.org", "");
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (status && game) {
 		presenceData.details = game;
 		presenceData.state = status;

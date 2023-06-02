@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/8E6QIMT.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Durarara/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -14,7 +15,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Username: ${
 			document.querySelector(".name").textContent
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/create_room"))
 		presenceData.details = "Creating a room";
 	else if (document.location.pathname.includes("/room/")) {

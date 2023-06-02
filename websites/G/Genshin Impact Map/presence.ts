@@ -103,7 +103,10 @@ const map: Maps[] = [
 			image: {
 				small: "emblem_sumeru",
 				default: "preview_sumeru",
-				preview: ["preview_sumeru", "https://i.imgur.com/23Sw1VR.png"],
+				preview: [
+					"preview_sumeru",
+					"https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/0.png",
+				],
 			},
 		},
 		{
@@ -131,7 +134,8 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Genshin Impact Map",
-			largeImageKey: "https://i.imgur.com/6XrkcZs.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/logo.png",
 			smallImageKey: "search",
 			startTimestamp: browsingTimestamp,
 		},

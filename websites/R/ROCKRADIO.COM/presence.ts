@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "639616115873546261",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: HTMLElement,
 	title: HTMLElement,
 	replace: HTMLElement,
@@ -9,7 +10,8 @@ let user: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/fEecbHy.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/ROCKRADIO.COM/assets/logo.png",
 	};
 
 	if (document.location.hostname === "www.rockradio.com") {

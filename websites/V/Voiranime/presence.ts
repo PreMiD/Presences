@@ -36,7 +36,8 @@ presence.on(
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		details: "Page d'accueil",
-		largeImageKey: "https://i.imgur.com/Db6EmSA.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
@@ -78,7 +79,7 @@ presence.on("UpdateData", async () => {
 					.textContent.split("-")[1];
 				presenceData.startTimestamp = startTimestamp;
 				presenceData.endTimestamp = endTimestamp;
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? strings.pause
 					: strings.play;
@@ -111,7 +112,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = new URLSearchParams(document.location.search).get(
 					"s"
 				);
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else if (Object.keys(pages).includes(pathArr[1]))
 				presenceData = { ...presenceData, ...pages[pathArr[1]] };
 			break;

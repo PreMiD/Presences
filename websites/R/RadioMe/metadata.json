@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "ACertainCoder",
 		"id": "320507572455079949"
@@ -17,9 +17,9 @@
 		"radiome.at",
 		"radiome.fr"
 	],
-	"version": "2.0.7",
-	"logo": "https://i.imgur.com/Fm5zIJW.png",
-	"thumbnail": "https://i.imgur.com/fym06a7.png",
+	"version": "2.0.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RadioMe/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RadioMe/assets/thumbnail.png",
 	"color": "#67e350",
 	"category": "music",
 	"tags": [

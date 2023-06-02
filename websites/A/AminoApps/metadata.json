@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "FelipeSazz",
 		"id": "326123612153053184"
@@ -13,9 +13,9 @@
 		"vi_VN": "Mạng lưới giao tiếp của Amino giúp bạn khám phá, tìm hiểu, và ám ảnh về những sở thích của bạn."
 	},
 	"url": "aminoapps.com",
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/hMk54q9.png",
-	"thumbnail": "https://i.imgur.com/3bOMfHi.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AminoApps/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AminoApps/assets/thumbnail.png",
 	"color": "#00FFA2",
 	"category": "socials",
 	"tags": [

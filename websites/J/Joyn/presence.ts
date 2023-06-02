@@ -25,7 +25,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async function () {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/SrAaJDz.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/J/Joyn/assets/logo.jpg",
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		setting = {
@@ -136,10 +137,10 @@ presence.on("UpdateData", async function () {
 									video.currentTime +
 									video.duration;
 							}
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = (await strings).play;
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = (await strings).pause;
 						}
 						if (setting.showButtons) {
@@ -163,10 +164,10 @@ presence.on("UpdateData", async function () {
 									video.currentTime +
 									video.duration;
 							}
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = (await strings).play;
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = (await strings).pause;
 						}
 
@@ -190,10 +191,10 @@ presence.on("UpdateData", async function () {
 									video.currentTime +
 									video.duration;
 							}
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = (await strings).play;
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = (await strings).pause;
 						}
 					} else if (urlpath[1] === "play" && urlpath[2] === "live-tv") {
@@ -225,10 +226,10 @@ presence.on("UpdateData", async function () {
 									video.currentTime +
 									video.duration;
 							}
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = (await strings).play;
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = (await strings).pause;
 						}
 
@@ -253,10 +254,10 @@ presence.on("UpdateData", async function () {
 									video.currentTime +
 									video.duration;
 							}
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = (await strings).play;
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = (await strings).pause;
 						}
 

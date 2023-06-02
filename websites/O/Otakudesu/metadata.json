@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Zen",
 		"id": "725331428962992131"
@@ -11,9 +11,9 @@
 		"id": "Download, nonton dan streaming anime subtitle Indonesia dengan resolusi 240p, 360p, 480p, & 720p dengan format MP4 & MKV bersama dengan batchnya"
 	},
 	"url": "otakudesu.bid",
-	"version": "2.0.11",
-	"logo": "https://i.imgur.com/OZNNQyi.png",
-	"thumbnail": "https://i.imgur.com/wHfvj2a.png",
+	"version": "2.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Otakudesu/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Otakudesu/assets/thumbnail.png",
 	"color": "#ffffff",
 	"category": "anime",
 	"tags": [

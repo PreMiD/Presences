@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -18,9 +18,9 @@
 		"ram.userbenchmark.com",
 		"usb.userbenchmark.com"
 	],
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/4TBit6H.png",
-	"thumbnail": "https://i.imgur.com/JOE2SVg.png",
+	"version": "1.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/thumbnail.png",
 	"color": "#FDA217",
 	"category": "other",
 	"tags": [

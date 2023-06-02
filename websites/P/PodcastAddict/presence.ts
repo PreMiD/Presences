@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/8toUcRE.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/PodcastAddict/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;
@@ -13,7 +14,7 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/" && search.substr(0, 2) === "?q") {
 		presenceData.details = "Searching:";
 		presenceData.state = document.querySelector(".caption").textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname === "/") presenceData.details = "Viewing the homepage";
 	else if (pathname.startsWith("/app"))
 		presenceData.details = "Reading the app page";
@@ -61,8 +62,8 @@ presence.on("UpdateData", async () => {
 					document.querySelector("#remainingTime").textContent.substr(1)
 				) + elapsedTime
 			);
-			presenceData.smallImageKey = "play";
-		} else presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Play;
+		} else presenceData.smallImageKey = Assets.Pause;
 	}
 	presence.setActivity(presenceData);
 });

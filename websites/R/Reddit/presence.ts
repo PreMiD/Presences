@@ -52,7 +52,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Yzr4SeJ.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/logo.png",
 			startTimestamp,
 		},
 		{ pathname } = window.location;
@@ -93,7 +94,7 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = strings.profile.slice(0, -4);
 		} else if (pathname.startsWith("/search")) {
 			presenceData.details = strings.searchSomething;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.searching;
 		} else {
 			presenceData.details = strings.browsing;
@@ -144,7 +145,7 @@ presence.on("UpdateData", async () => {
 		} else presenceData.details = strings.profile.slice(0, -4);
 	} else if (pathname.startsWith("/search")) {
 		presenceData.details = strings.searchSomething;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.searching;
 	} else if (pathname.startsWith("/rpan")) {
 		presenceData.details = `${strings.watching} (RPAN)`;

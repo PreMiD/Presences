@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "joerkig",
 		"id": "205984221859151873"
@@ -10,9 +10,9 @@
 		"nl": "Bekijk aangepaste Beat Saber levels in je browser"
 	},
 	"url": "skystudioapps.com",
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/FDP38pa.png",
-	"thumbnail": "https://i.imgur.com/wseLQzZ.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rabbit's%20BS%20Viewer/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rabbit's%20BS%20Viewer/assets/thumbnail.png",
 	"color": "#232325",
 	"category": "games",
 	"tags": [

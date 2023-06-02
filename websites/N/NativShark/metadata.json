@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Moka",
 		"id": "148892877253115904"
@@ -13,9 +13,9 @@
 		"nativshark.com",
 		"www.nativshark.com"
 	],
-	"version": "1.0.10",
-	"logo": "https://i.imgur.com/bnlBeoi.png",
-	"thumbnail": "https://i.imgur.com/fvIL7w3.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/NativShark/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/NativShark/assets/thumbnail.png",
 	"color": "#2c2c44",
 	"category": "other",
 	"tags": [

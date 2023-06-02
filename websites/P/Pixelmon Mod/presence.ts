@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/49VYHIM.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/Pixelmon%20Mod/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		title =
@@ -22,12 +23,12 @@ presence.on("UpdateData", async () => {
 			"#content > div.contentHeader"
 		)?.firstElementChild;
 		if (search.value) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Searching for";
 			presenceData.state = search.value;
 		} else if (firstChild.className.includes("firstHeading")) {
 			presenceData.state = firstChild.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.details = "Reading wiki page";
 		} else if (document.querySelector("#firstHeading-h2csdq87lb")) {
 			presenceData.details = "Search results for";
@@ -45,7 +46,7 @@ presence.on("UpdateData", async () => {
 		} Team`;
 	} else if (pathname.includes("ucp.php?mode=")) {
 		presenceData.details = title.textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (pathname.includes("downloads.php"))
 		presenceData.details = "Viewing mod downloads page";
 	else if (pathname.includes("donate.php"))

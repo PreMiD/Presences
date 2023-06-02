@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/SUZJZEX.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/Backloggd/assets/logo.png",
 		},
 		{ pathname } = document.location;
 	if (pathname === "/") presenceData.details = "Viewing the home page";
@@ -27,7 +28,8 @@ presence.on("UpdateData", async () => {
 			}`;
 		}
 	} else if (pathname.includes("/search/")) {
-		presenceData.smallImageKey = "https://i.imgur.com/UC6s55L.png";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/B/Backloggd/assets/0.png";
 		presenceData.details = "Searching";
 		presenceData.state = `${document
 			.querySelector("#search-title h1")

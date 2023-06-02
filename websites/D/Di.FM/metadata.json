@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -12,9 +12,9 @@
 	},
 	"url": "di.fm",
 	"regExp": "([a-z0-9-]+[.])*di[.]fm[/]",
-	"version": "1.5.0",
-	"logo": "https://i.imgur.com/T1Zi3qF.png",
-	"thumbnail": "https://i.imgur.com/ZvBC7EG.png",
+	"version": "1.5.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Di.FM/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Di.FM/assets/thumbnail.png",
 	"color": "#3aa154",
 	"category": "music",
 	"tags": [

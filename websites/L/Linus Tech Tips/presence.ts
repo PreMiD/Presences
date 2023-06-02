@@ -7,7 +7,8 @@ let item;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/qEbuRPv.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Linus%20Tech%20Tips/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -23,7 +24,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing Category";
 			presenceData.state = item.textContent;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/topic/")) {
 			item = document.querySelector("h1.ipsType_pageTitle") as HTMLElement;
@@ -31,7 +32,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Thread";
 			presenceData.state = item.textContent;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/profile/")) {
 			item = document.querySelector(

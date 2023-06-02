@@ -2,11 +2,13 @@ const presence = new Presence({
 		clientId: "860146992284958762",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let currentURL = new URL(document.location.href),
 	currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
-		largeImageKey: "https://i.imgur.com/M58Pucd.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 const updateCallback = {
@@ -27,7 +29,8 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "https://i.imgur.com/M58Pucd.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		}
 	): void => {
@@ -89,7 +92,7 @@ const updateCallback = {
 			case "diff.wikimedia.org":
 			case "techblog.wikimedia.org": {
 				let siteName: string;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				if (currentURL.hostname === "diff.wikimedia.org") siteName = "Diff";
 				else if (currentURL.hostname === "techblog.wikimedia.org")
 					siteName = "[[WM:TECHBLOG]]";

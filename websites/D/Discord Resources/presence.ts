@@ -2,9 +2,11 @@ const presence = new Presence({
 		clientId: "973710731549745152",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/LzdNPBJ.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Resources/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = window.location;
@@ -45,7 +47,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname === "/search": {
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching...";
 			if (search) {
 				presenceData.details = "Searching for:";

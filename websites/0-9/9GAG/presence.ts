@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "631566704648126503",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: HTMLElement,
 	title: HTMLElement,
 	replace: HTMLElement,
@@ -21,7 +22,8 @@ presence.on("UpdateData", async () => {
 			"top",
 		],
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/t2BG2Fj.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/0-9/9GAG/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -91,14 +93,14 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = "Searching for:";
 				presenceData.state = (search as HTMLInputElement).value;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 
 			break;
 		}
 		case "about.9gag.com": {
 			presenceData.details = "Reading all about 9GAG";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			break;
 		}
@@ -129,7 +131,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = "Shop - Searching for:";
 				presenceData.state = (search as HTMLInputElement).value;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 
 			break;

@@ -1,15 +1,15 @@
-enum Assets {
-	Header = "https://i.imgur.com/ffxJj5E.png",
-	Logo = "https://i.imgur.com/04gnehi.png",
-	Envelope = "https://i.imgur.com/6Hp3f7k.png",
-	Flag = "https://i.imgur.com/BAzbs0d.png",
-	Forum = "https://i.imgur.com/uDIj1ta.png",
-	Gift = "https://i.imgur.com/28eyl2A.png",
-	Globe = "https://i.imgur.com/hE7TN9d.png",
-	Page = "https://i.imgur.com/pArUzoy.png",
-	Person = "https://i.imgur.com/8pTlzJw.png",
-	WorldAssembly = "https://i.imgur.com/A09MAL2.png",
-	Target = "https://i.imgur.com/nksi1kH.png",
+const enum Assets {
+	Header = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/0.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/logo.png",
+	Envelope = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/1.png",
+	Flag = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/2.png",
+	Forum = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/3.png",
+	Gift = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/4.png",
+	Globe = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/5.png",
+	Page = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/6.png",
+	Person = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/7.png",
+	WorldAssembly = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/8.png",
+	Target = "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/9.png",
 }
 
 const browsingTimestamp = Math.floor(Date.now() / 1000),

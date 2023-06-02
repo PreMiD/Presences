@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -16,10 +16,10 @@
 		"vi_VN": "Xem anime online với phụ đề tiếng việt.",
 		"nl": "Bekijk jouw favoriete anime online met Vietnamese ondertiteling!"
 	},
-	"url": "animevietsub.cc",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/trQFagl.jpeg",
-	"thumbnail": "https://i.imgur.com/cSWQACH.png",
+	"url": "animevietsub.im",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Animevietsub/assets/logo.jpeg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Animevietsub/assets/thumbnail.png",
 	"color": "#8b0000",
 	"category": "anime",
 	"tags": [

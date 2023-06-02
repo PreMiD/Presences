@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "895742751944089600",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let gameName: HTMLElement,
 	storeName: HTMLElement,
 	gamePrice: HTMLElement,
@@ -9,7 +10,8 @@ let gameName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/beLx5ko.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stadia/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

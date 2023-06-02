@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const privacy = await presence.getSetting<boolean>("privacy"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Z8MBnw9.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/HegartyMaths/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 

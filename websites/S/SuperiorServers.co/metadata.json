@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Nick",
 		"id": "193909360219389952"
@@ -13,9 +13,9 @@
 		"forum.superiorservers.co",
 		"superiorservers.co"
 	],
-	"version": "1.0.10",
-	"logo": "https://i.imgur.com/uryXMgr.png",
-	"thumbnail": "https://i.imgur.com/vyjsudO.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SuperiorServers.co/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SuperiorServers.co/assets/thumbnail.png",
 	"color": "#273341",
 	"category": "other",
 	"tags": [

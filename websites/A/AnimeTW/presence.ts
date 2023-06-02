@@ -19,9 +19,13 @@ presence.on(
 	}
 );
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeTW/assets/logo.jpg",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/L1fhc3r.jpg",
+		largeImageKey: Assets.Logo,
 	};
 
 	if (
@@ -36,7 +40,7 @@ presence.on("UpdateData", async () => {
 			);
 
 		presenceData.details = document.querySelector("#head > title").textContent;
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;
@@ -49,7 +53,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData, !video.paused);
 	} else {
 		presenceData.details = (await strings).browsing;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).browsing;
 		presence.setActivity(presenceData);
 	}

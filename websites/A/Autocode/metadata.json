@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "CTK WARRIOR",
 		"id": "450634297871695896"
@@ -10,9 +10,9 @@
 		"vi_VN": "Thông báo người dùng mới. Cảnh báo giao dịch. Các công việc được lên kế hoạch. Bot cộng đồng. Các truy vấn SQL. Công cụ nội bộ. Tạo dựng bất cả những gì bạn muốn với JavaScript và API."
 	},
 	"url": "autocode.com",
-	"version": "1.1.4",
-	"logo": "https://i.imgur.com/KNLjAwu.jpg",
-	"thumbnail": "https://i.imgur.com/iojaJvv.jpg",
+	"version": "1.1.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/thumbnail.jpg",
 	"color": "#ffffff",
 	"category": "other",
 	"tags": [

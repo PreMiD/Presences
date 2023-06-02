@@ -2,6 +2,10 @@ const presence = new Presence({
 	clientId: "1055612773419196476",
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9flix/assets/logo.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -16,13 +20,6 @@ async function getStrings() {
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
-}
-
-enum Assets {
-	Logo = "https://i.imgur.com/cGjh8Tu.png",
-	Play = "https://i.imgur.com/vKd5zk4.png",
-	Pause = "https://i.imgur.com/GbAMPHI.png",
-	Search = "https://i.imgur.com/UhPgTRn.png",
 }
 
 let video = {

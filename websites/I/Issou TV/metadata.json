@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Deleted 7.12i",
 		"id": "591702135310385157"
@@ -14,9 +14,9 @@
 		"issoutv.com",
 		"www.issoutv.com"
 	],
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/eOauOMV.png",
-	"thumbnail": "https://i.imgur.com/MOwagyo.png",
+	"version": "1.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Issou%20TV/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Issou%20TV/assets/thumbnail.png",
 	"color": "#637076",
 	"category": "videos",
 	"tags": [

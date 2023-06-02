@@ -14,7 +14,8 @@ function getRow(row: number) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/EYWqVuf.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/taiga%20Bot/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	presenceData.details = getRow(1);

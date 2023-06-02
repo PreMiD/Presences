@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Hibanka",
 		"id": "467658348158779393"
@@ -13,9 +13,9 @@
 		"destinyitemmanager.com",
 		"app.destinyitemmanager.com"
 	],
-	"version": "1.0.11",
-	"logo": "https://i.imgur.com/OwMBJAm.png",
-	"thumbnail": "https://i.imgur.com/rKhKMNY.jpg",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/thumbnail.jpg",
 	"color": "#ee6d0d",
 	"category": "games",
 	"tags": [

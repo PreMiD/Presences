@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/cGgQb3G.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/N/NON-STOP%20NYAN%20CAT/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (

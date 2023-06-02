@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "N0chteil ^^",
 		"id": "495901098926669825"
@@ -10,9 +10,9 @@
 		"nl": "The Daily Wire is een Amerikaanse conservatieve nieuwswebsite en mediabedrijf opgericht in 2015 door politiek commentator Ben Shapiro en regisseur Jeremy Boreing. De site is gekritiseerd vanwege het promoten van valse informatie."
 	},
 	"url": "www.dailywire.com",
-	"version": "1.0.11",
-	"logo": "https://i.imgur.com/BevxEyq.png",
-	"thumbnail": "https://i.imgur.com/4eXamxn.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Wire/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Wire/assets/thumbnail.png",
 	"color": "#000",
 	"category": "other",
 	"tags": [

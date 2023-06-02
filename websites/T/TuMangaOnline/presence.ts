@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/1CYkKgl.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TuMangaOnline/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -17,7 +18,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#app > section > header > section > div > div > div:nth-child(3) > h1"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/library"))
 			presenceData.details = "Viewing the library";
 		else if (document.location.pathname.includes("/groups/")) {
@@ -36,7 +37,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing groups";
 		else if (document.location.pathname.includes("/viewer/")) {
 			presenceData.details = "Reading manga:";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.state = document.querySelector(
 				"#app > section:nth-child(2) > div > div > h1"
 			).textContent;

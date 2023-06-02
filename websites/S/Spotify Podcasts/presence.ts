@@ -22,12 +22,8 @@ async function getShortURL(url: string) {
 	}
 }
 
-enum Assets {
-	Logo = "https://i.imgur.com/q3tKDRA.png",
-	Reading = "https://i.imgur.com/8vMPNni.png",
-	Searching = "https://i.imgur.com/oGQtnIY.png",
-	Pause = "https://i.imgur.com/NyZsbVO.png",
-	Play = "https://i.imgur.com/Y1m0KVP.png",
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Spotify%20Podcasts/assets/logo.png",
 }
 
 async function getStrings() {
@@ -254,11 +250,11 @@ presence.on("UpdateData", async () => {
 					presenceData.details = strings.searchFor;
 					presenceData.state = search.value;
 					if (search.value.length <= 3) presenceData.state = "something...";
-					presenceData.smallImageKey = Assets.Searching;
+					presenceData.smallImageKey = Assets.Search;
 				} else if (pathname.includes("/search")) {
 					searching = true;
 					presenceData.details = strings.search;
-					presenceData.smallImageKey = Assets.Searching;
+					presenceData.smallImageKey = Assets.Search;
 				} else if (pathname.includes("/playlist/")) {
 					const playlistCover = await getShortURL(
 						document
@@ -350,7 +346,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.smallImageKey;
 				} else if (pathname.includes("/download")) {
 					presenceData.details = strings.download;
-					presenceData.smallImageKey = "downloading";
+					presenceData.smallImageKey = Assets.Downloading;
 				} else if (pathname.includes("/account")) {
 					presenceData.details = strings.account;
 					delete presenceData.smallImageKey;

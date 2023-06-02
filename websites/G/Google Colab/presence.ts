@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/2B69cLb.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Colab/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		notebookTitle =

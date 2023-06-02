@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Snazzah",
 		"id": "158049329150427136"
@@ -12,9 +12,9 @@
 	},
 	"url": "github.dev",
 	"regExp": "(.*[.])?github.dev",
-	"version": "1.0.18",
-	"logo": "https://i.imgur.com/JWaYQC8.png",
-	"thumbnail": "https://i.imgur.com/fLQ6JLS.png",
+	"version": "1.0.22",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GitHub%20Codespaces/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GitHub%20Codespaces/assets/thumbnail.png",
 	"color": "#000000",
 	"category": "other",
 	"tags": [

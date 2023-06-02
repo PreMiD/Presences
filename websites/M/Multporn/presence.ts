@@ -2,10 +2,12 @@ const presence = new Presence({
 		clientId: "791258115622305813",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const button = await presence.getSetting<boolean>("button"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/aBu33JP.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Multporn/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		title = document.querySelector(

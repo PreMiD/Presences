@@ -18,7 +18,8 @@ if (lastPlaybackState !== playback) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Unknown page",
-			largeImageKey: "https://i.imgur.com/FIXyNZo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/FlixTor/assets/logo.png",
 		},
 		video: HTMLVideoElement = document.querySelector(
 			"#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
@@ -48,7 +49,7 @@ presence.on("UpdateData", async () => {
 			.getAttribute("content")
 			.replace("https:https:", "https:");
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

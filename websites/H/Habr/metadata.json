@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "257151906038677504",
 		"name": "SHISEN"
@@ -10,9 +10,9 @@
 		"ru": "Русскоязычный веб-сайт в формате системы тематических коллективных блогов с элементами новостного сайта, созданный для публикации новостей, аналитических статей, мыслей, связанных с информационными технологиями, бизнесом и интернетом"
 	},
 	"url": "habr.com",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/DrxgYIA.png",
-	"thumbnail": "https://i.imgur.com/iD5pjKi.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Habr/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Habr/assets/thumbnail.png",
 	"color": "#77a2b5",
 	"category": "other",
 	"tags": [

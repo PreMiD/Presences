@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Brunooh",
 		"id": "698582921887481889"
@@ -11,9 +11,9 @@
 		"nl": "Platzi is een van de beste Spaanse online studieplatforms, het helpt je te verbeteren en op de hoogte te blijven van nieuwe trends in je carrière."
 	},
 	"url": "platzi.com",
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/TmaFMhm.jpg",
-	"thumbnail": "https://i.imgur.com/wVy2Pqc.png",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Platzi/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Platzi/assets/thumbnail.png",
 	"color": "#98CA3F",
 	"category": "videos",
 	"tags": [

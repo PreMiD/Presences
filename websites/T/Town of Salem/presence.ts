@@ -2,14 +2,14 @@ const presence = new Presence({
 	clientId: "754771926857285782",
 });
 
-enum Assets {
-	Day = "https://i.imgur.com/HfHbMyP.png",
-	Discussion = "https://i.imgur.com/jPqjrgn.png",
-	Night = "https://i.imgur.com/20YDTvV.png",
-	Voting = "https://i.imgur.com/QONtFlc.png",
-	Judgement = "https://i.imgur.com/6VbV24O.png",
-	Defense = "https://i.imgur.com/bsl0JU0.png",
-	Logo = "https://i.imgur.com/y7VYTQK.jpg",
+const enum Assets {
+	Day = "https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/0.png",
+	Discussion = "https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/1.png",
+	Night = "https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/2.png",
+	Voting = "https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/3.png",
+	Judgement = "https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/4.png",
+	Defense = "https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/5.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/logo.jpg",
 }
 
 enum GameState {

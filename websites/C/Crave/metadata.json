@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Avery<3",
 		"id": "787415934247108629"
@@ -9,9 +9,9 @@
 		"en": "The best series and movies including the latest Originals from Crave, HBO, HBO Max, Showtime, the entire HBO library and the biggest Hollywood blockbusters. Enjoy in English and French."
 	},
 	"url": "www.crave.ca",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/uMjBwfF.png",
-	"thumbnail": "https://i.imgur.com/YH15rRv.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Crave/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Crave/assets/thumbnail.png",
 	"color": "#00c1f3",
 	"category": "videos",
 	"tags": [

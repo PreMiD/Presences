@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "DayAndNight",
 		"id": "424072110647017482"
@@ -10,9 +10,9 @@
 		"nl": "Geniet van onze website, bekijk alle anime afleveringen en films"
 	},
 	"url": "genoanime.com",
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/44orW6Y.png",
-	"thumbnail": "https://i.imgur.com/lANOUyc.png",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Genoanime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Genoanime/assets/thumbnail.png",
 	"color": "#42b5f7",
 	"category": "anime",
 	"tags": [

@@ -9,7 +9,8 @@ let user: HTMLElement | string | Element,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/3V6FWir.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/CurseForge/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	function setStateGame(
@@ -153,7 +154,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading DMs";
 			delete presenceData.state;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/account")) {
 			presenceData.details = "Viewing account settings";
 			delete presenceData.state;
@@ -195,7 +196,7 @@ presence.on("UpdateData", async () => {
 					)}...`;
 				} else presenceData.state = (title as HTMLElement).textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				presenceData.details = "Forums, Browsing...";
 				delete presenceData.state;
@@ -206,11 +207,11 @@ presence.on("UpdateData", async () => {
 			if ((search as HTMLInputElement).value.length > 1) {
 				presenceData.details = "Forums, Searching for:";
 				presenceData.state = (search as HTMLInputElement).value;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else {
 				presenceData.details = "Forums, Going to search";
 				presenceData.state = "something up";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else if (document.location.pathname.includes("/account")) {
 			presenceData.details = "Forums, viewing:";

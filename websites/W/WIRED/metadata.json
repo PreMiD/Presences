@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "eaz",
 		"id": "234339792773578762"
@@ -11,9 +11,9 @@
 		"nl": "Een Amerikaans tijdschrift over wetenschap en technologie en een website."
 	},
 	"url": "www.wired.com",
-	"version": "1.2.16",
-	"logo": "https://i.imgur.com/gRExMjS.png",
-	"thumbnail": "https://i.imgur.com/YWSISdY.png",
+	"version": "1.2.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WIRED/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WIRED/assets/thumbnail.png",
 	"color": "#ffffff",
 	"category": "other",
 	"tags": [

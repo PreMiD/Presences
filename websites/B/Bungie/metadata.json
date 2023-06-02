@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "RedBird16.com",
 		"id": "444872133504663552"
@@ -16,9 +16,9 @@
 		"comics.bungie.net",
 		"bungiestore.com"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/QQWLe6D.png",
-	"thumbnail": "https://i.imgur.com/ivK2Uww.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bungie/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bungie/assets/thumbnail.png",
 	"color": "#12171C",
 	"category": "games",
 	"tags": [

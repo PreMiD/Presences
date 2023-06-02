@@ -13,9 +13,13 @@ const presence = new Presence({
 		buttonWatchStream: "general.buttonWatchStream",
 	});
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/baUokNs.png",
+			largeImageKey: Assets.Logo,
 		},
 		path = location.pathname.replace(/\/?$/, "/");
 
@@ -65,7 +69,7 @@ presence.on("UpdateData", async () => {
 		} else if (path.startsWith("/video/")) {
 			// Video-on-demand
 			presenceData.largeImageKey = "ard_mediathek";
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).play;
 			presenceData.details = videoTitle;
 
@@ -88,13 +92,13 @@ presence.on("UpdateData", async () => {
 
 		// Player paused ?
 		if (video.paused) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = (await strings).pause;
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
 	} else {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = (await strings).browsingThrough;
 		presenceData.details = (await strings).browsing;
 		presenceData.startTimestamp = elapsed;

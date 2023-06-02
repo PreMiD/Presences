@@ -9,7 +9,8 @@ const startTime: number = Date.now();
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/MVpfVss.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Desmos/assets/logo.jpg",
 		startTimestamp: startTime,
 	};
 	// Getting Data

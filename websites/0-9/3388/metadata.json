@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "356827694572503051",
 		"name": "xela"
@@ -12,9 +12,9 @@
 		"3388.to",
 		"www.3388.to"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/h8N7txd.png",
-	"thumbnail": "https://i.imgur.com/x3ZeXf5.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/3388/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/3388/assets/thumbnail.png",
 	"color": "#c13f34",
 	"category": "videos",
 	"tags": [

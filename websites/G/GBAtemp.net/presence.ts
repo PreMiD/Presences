@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "632110854543769601",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let threadName: HTMLElement,
 	authorName: HTMLElement,
 	newsAuthor: HTMLElement,
@@ -12,7 +13,8 @@ let threadName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Q8Jx76k.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/GBAtemp.net/assets/logo.jpg",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname.startsWith("/threads")) {

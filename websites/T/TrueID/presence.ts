@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
 		path = document.location,
 		lang = path.pathname.substring(1, 6),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/5975C9m.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TrueID/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -149,7 +150,7 @@ presence.on("UpdateData", async () => {
 						lang === "th-th"
 							? "ผังรายการทีวีช่องทีวีทั้งหมด"
 							: "Program schedule of all channels";
-					presenceData.smallImageKey = "question";
+					presenceData.smallImageKey = Assets.Question;
 					break;
 				default:
 					presenceData.details = "Tv";

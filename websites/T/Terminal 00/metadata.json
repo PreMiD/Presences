@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Pnfrl Enm",
 		"id": "419892518423887903"
@@ -10,9 +10,9 @@
 		"nl": "Nieuw leven ingeblazen door de eerste Arcent, Angus Nicneven. Sol onset."
 	},
 	"url": "angusnicneven.com",
-	"version": "1.1.13",
-	"logo": "https://i.imgur.com/ej7qrNi.png",
-	"thumbnail": "https://i.imgur.com/UeDZ4hi.png",
+	"version": "1.1.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Terminal%2000/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Terminal%2000/assets/thumbnail.png",
 	"color": "#D2738A",
 	"category": "other",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striter Alfa",
 		"id": "288834890772905984"
@@ -14,9 +14,9 @@
 		"mangahosted.com",
 		"www.mangahosted.com"
 	],
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/t04Xe6q.png",
-	"thumbnail": "https://i.imgur.com/b7YuC1M.png",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaHost/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaHost/assets/thumbnail.png",
 	"color": "#56e0ff",
 	"category": "anime",
 	"tags": [

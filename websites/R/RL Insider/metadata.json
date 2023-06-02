@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,9 +11,9 @@
 		"zh_CN": "火箭联盟在PC,PS4和XBOX的价格，每小时更新."
 	},
 	"url": "rl.insider.gg",
-	"version": "1.2.13",
-	"logo": "https://i.imgur.com/wO1hSQs.png",
-	"thumbnail": "https://i.imgur.com/Q33K0W3.png",
+	"version": "1.2.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RL%20Insider/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RL%20Insider/assets/thumbnail.png",
 	"color": "#b8b8b8",
 	"category": "games",
 	"tags": [

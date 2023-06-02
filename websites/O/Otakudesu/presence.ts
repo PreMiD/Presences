@@ -2,7 +2,8 @@ const presence = new Presence({
 		clientId: "794916348761210920",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/OZNNQyi.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/Otakudesu/assets/logo.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
@@ -41,7 +42,7 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.details = "Searching for:";
 				presenceData.state = s;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 			if (document.location.pathname.startsWith("/anime")) {
 				presenceData.details = "Viewing anime";

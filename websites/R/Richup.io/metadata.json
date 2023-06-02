@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "162969778699501569",
 		"name": "EGGSY"
@@ -9,9 +9,9 @@
 		"en": "A free online alternative to the board game Monopoly. Play with friends, strangers, or bots. No sign up or download is required!"
 	},
 	"url": "richup.io",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/4Nw3mle.png",
-	"thumbnail": "https://i.imgur.com/AfE20cd.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Richup.io/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Richup.io/assets/thumbnail.png",
 	"color": "#16101D",
 	"category": "games",
 	"tags": [

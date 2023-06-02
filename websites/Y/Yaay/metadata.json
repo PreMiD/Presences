@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -12,9 +12,9 @@
 		"nl": "Yaay, nieuwe Turkse sociale media met veel functies!"
 	},
 	"url": "yaay.com.tr",
-	"version": "1.0.11",
-	"logo": "https://i.imgur.com/KbcxoIV.png",
-	"thumbnail": "https://i.imgur.com/mgHnMIf.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yaay/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yaay/assets/thumbnail.png",
 	"color": "#0076f6",
 	"category": "socials",
 	"tags": [

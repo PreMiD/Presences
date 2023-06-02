@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "853932304257908746",
 		"name": "BigBoi"
@@ -9,9 +9,9 @@
 		"en": "The Quran translated into many languages in a simple and easy interface."
 	},
 	"url": "quran.com",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/9qpIurh.png",
-	"thumbnail": "https://i.imgur.com/sSdnCSv.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Q/Quran.com/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Q/Quran.com/assets/thumbnail.png",
 	"color": "#1c1c1c",
 	"category": "other",
 	"tags": [

@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/P3S7UhZ.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Worldhideaway/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		search = document.querySelector<HTMLInputElement>(
@@ -24,7 +25,7 @@ presence.on("UpdateData", async () => {
 				if (search?.value) {
 					presenceData.details = "Buscando";
 					presenceData.state = search.value;
-					presenceData.smallImageKey = "searching";
+					presenceData.smallImageKey = Assets.Search;
 				} else presenceData.details = "Viendo Inicio";
 
 				break;
@@ -56,7 +57,7 @@ presence.on("UpdateData", async () => {
 			case "activity": {
 				presenceData.details = "Leyendo sobre";
 				presenceData.state = "Actividad";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.buttons = [
 					{
 						label: "Ver Actividad",
@@ -127,7 +128,7 @@ presence.on("UpdateData", async () => {
 					},
 				];
 				presenceData.details = "Leyendo FAQ";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			}
 			case "contacto": {
@@ -156,7 +157,7 @@ presence.on("UpdateData", async () => {
 						},
 					];
 					presenceData.details = `Leyendo ${check.textContent}`;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				} else if (active) {
 					presenceData.buttons = [
 						{
@@ -172,7 +173,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!buttons) delete presenceData.buttons;
-	if (!covers) presenceData.largeImageKey = "https://i.imgur.com/P3S7UhZ.png";
+	if (!covers) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/W/Worldhideaway/assets/logo.png";
+	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

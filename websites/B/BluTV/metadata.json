@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Kabal",
 		"id": "269581360316940299"
@@ -15,9 +15,9 @@
 		"blutv.com",
 		"www.blutv.com"
 	],
-	"version": "1.1.19",
-	"logo": "https://i.imgur.com/THrSw57.png",
-	"thumbnail": "https://i.imgur.com/LDoVybq.jpg",
+	"version": "1.1.23",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BluTV/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BluTV/assets/thumbnail.jpg",
 	"color": "#2d2e42",
 	"category": "videos",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Cairo",
 		"id": "208105877838888960"
@@ -10,9 +10,9 @@
 		"nl": "Nieuws uit Nieuw-Zeeland en de wereld: het laatste nieuws, video's, sport, rugby, politiek, zaken, entertainment, lifestyle, reizen en onroerend goed."
 	},
 	"url": "www.stuff.co.nz",
-	"version": "1.2.16",
-	"logo": "https://i.imgur.com/g1ncFAD.png",
-	"thumbnail": "https://i.imgur.com/BvUwqSy.png",
+	"version": "1.2.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stuff.co.nz/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stuff.co.nz/assets/thumbnail.png",
 	"color": "#000000",
 	"category": "other",
 	"tags": [

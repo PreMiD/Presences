@@ -11,7 +11,8 @@ let stext;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/O2Xalve.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/J/Just%20Light%20Novels/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = elapsed;

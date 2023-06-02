@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "696341580096733185",
 		appMode: true,
 	}),
-	browsingTimeStamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let currentTime = 0,
 	currentTime2 = "00:00",
@@ -106,31 +106,38 @@ presence.on("UpdateData", async () => {
 			case document.querySelector('[class="title_name"]') !== null:
 			case document.querySelector('[class="anime_video_body_watch"]') !== null:
 			case document.querySelector('[class="anime_muti_link"]') !== null: {
-				const title =
-						document.querySelector('[class="anime-info"]')?.querySelector("a")
-							?.textContent ??
-						document.querySelector('[class="title_name"]')?.textContent ??
-						pathname.includes("/movie/")
-							? pathname
-									.split("/")[2]
-									.replace(/-/gm, " ")
-									.replace(/\(dub\)/gm, "")
-							: pathname
-									.split("/")[1]
-									.replace(/-/gm, " ")
-									.replace(/\(dub\)/gm, ""),
-					titleReplaced =
-						document
-							.querySelector('[class="each_episode active"]')
-							?.textContent?.trim() ??
-						document.querySelector('[class="active"]')?.textContent?.trim() ??
-						document
-							.querySelector('[class="anime_video_body"] > h1')
-							?.textContent?.toLowerCase()
-							?.replace(
-								/(for free on gogoanime at gogoanime)|(english subbed at gogoanime)|(watch)/gm,
-								""
-							);
+				let title =
+					document.querySelector('[class="anime-info"] > a')?.textContent ??
+					document.querySelector('[class="title_name"]')?.textContent;
+
+				if (!title) {
+					title = pathname.includes("/movie/")
+						? pathname
+								.split("/")?.[2]
+								?.replace(/-/gm, " ")
+								?.replace(/\(dub\)/gm, "")
+						: pathname
+								.split("/")?.[1]
+								?.replace(/-/gm, " ")
+								?.replace(/\(dub\)/gm, "");
+				}
+				const titleReplaced =
+					document
+						.querySelector('[id="episode_related"] > li > [class*="active"]')
+						?.textContent?.replace(/(DUB)|(dub)|(SUB)|(sub)|(\n)/gm, "")
+						?.replace("EP", "Episode")
+						?.trim() ??
+					document
+						.querySelector('[class="each_episode active"]')
+						?.textContent?.trim() ??
+					document.querySelector('[class="active"]')?.textContent?.trim() ??
+					document
+						.querySelector('[class="anime_video_body"] > h1')
+						?.textContent?.toLowerCase()
+						?.replace(
+							/(for free on gogoanime at gogoanime)|(english subbed at gogoanime)|(watch)/gm,
+							""
+						);
 				detail = detailed.WATCHING;
 				state = titleReplaced
 					? `${upperCaseFirstChar(title?.toLowerCase())} | ${upperCaseFirstChar(
@@ -318,14 +325,15 @@ presence.on("UpdateData", async () => {
 		}
 	}
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/OnaEYdo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/logo.png",
 		state,
 		details: detail[0],
 	};
 	if (usedSearchEl?.value) {
 		presenceData.details = "Searching for:";
 		presenceData.state = usedSearchEl.value.replace(/ /gm, "");
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 		return presence.setActivity(presenceData);
 	}
 	if (detail === detailed.NOTFOUND) presence.setActivity();
@@ -335,12 +343,12 @@ presence.on("UpdateData", async () => {
 			currentTime = presence.timestampFromFormat(currentTime2);
 		}
 		if (paused) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = `${
 				presence.getTimestamps(currentTime, duration)[1]
 			} left`;
 		} else {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			[, presenceData.endTimestamp] = presence.getTimestamps(
 				currentTime,
 				duration
@@ -354,7 +362,7 @@ presence.on("UpdateData", async () => {
 		];
 		presence.setActivity(presenceData);
 	} else {
-		presenceData.startTimestamp = browsingTimeStamp;
+		presenceData.startTimestamp = browsingTimestamp;
 		presence.setActivity(presenceData);
 		presenceData.buttons = [
 			{

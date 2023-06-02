@@ -2,6 +2,10 @@ const presence = new Presence({
 	clientId: "1071912828027535462",
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/Z/Zerion/assets/logo.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -19,14 +23,6 @@ async function getStrings() {
 		},
 		await presence.getSetting<string>("lang").catch(() => "pl")
 	);
-}
-
-enum Assets {
-	Logo = "https://i.imgur.com/MpeS5tp.png",
-	Searching = "https://i.imgur.com/UhPgTRn.png",
-	Viewing = "https://i.imgur.com/RMg2Qgg.png",
-	Play = "https://i.imgur.com/juDzimk.png",
-	Pause = "https://i.imgur.com/GbAMPHI.png",
 }
 
 let video = {
@@ -82,7 +78,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = strings.viewGenre;
 				presenceData.state = genres;
 			}
-			presenceData.smallImageKey = Assets.Searching;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 			break;
 

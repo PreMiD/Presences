@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "frnk",
 		"id": "232904284004548608"
@@ -10,9 +10,9 @@
 		"fr": "Leboncoin est un site français de petites annonces où des utilisateurs et des professionnels peuvent vendre ou acheter des produits en ligne et hors ligne."
 	},
 	"url": "www.leboncoin.fr",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/Eiyj8Lv.png",
-	"thumbnail": "https://i.imgur.com/mYzfhiy.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Leboncoin/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Leboncoin/assets/thumbnail.png",
 	"color": "#ff6e14",
 	"category": "other",
 	"tags": [

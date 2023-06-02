@@ -10,7 +10,8 @@ presence.on("UpdateData", async function () {
 		},
 		urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/BevxEyq.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Wire/assets/logo.png",
 		};
 
 	if (setting.timeElapsed) presenceData.startTimestamp = browsingTimestamp;

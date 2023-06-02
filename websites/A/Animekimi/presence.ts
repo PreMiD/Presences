@@ -71,7 +71,8 @@ presence.on("UpdateData", async () => {
 		playvdo = document.querySelector("#info > h1")?.textContent ?? "?",
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/tSmgmK1.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Animekimi/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 	if (oldLang !== newLang || !strings) {
@@ -88,7 +89,7 @@ presence.on("UpdateData", async () => {
 		)
 			.split("ผลการค้นหา:")
 			.pop();
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (!privacy && (pathArray[4] === "page" || pathArray[5] === "page")) {
 		presenceData.details = `${strings.viewPage} ${
 			pathArray[pathArray.indexOf("page") + 1]
@@ -101,35 +102,35 @@ presence.on("UpdateData", async () => {
 					? strings.viewGenre.replace(":", "")
 					: strings.viewGenre;
 				presenceData.state = title;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "catalog":
 				presenceData.details = privacy
 					? strings.viewCategory.replace(":", "")
 					: strings.viewList;
 				presenceData.state = title;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "category":
 				presenceData.details = privacy
 					? strings.viewCategory.replace(":", "")
 					: strings.viewCategory;
 				presenceData.state = title;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "tag":
 				presenceData.details = privacy
 					? strings.viewCategory.replace(":", "")
 					: strings.viewList;
 				presenceData.state = title.split("รวมอนิเมะ").pop();
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "release":
 				presenceData.details = privacy
 					? strings.viewCategory.replace(":", "")
 					: strings.viewList;
 				presenceData.state = title;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "movies":
 				if (!["เดอะมูฟวี่", "เดอะ", "มูฟวี่"].includes(titlemovies)) {
@@ -149,7 +150,7 @@ presence.on("UpdateData", async () => {
 						? strings.viewMovie.replace(":", "")
 						: strings.viewMovie;
 					presenceData.state = titlemovies;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				}
 				presenceData.smallImageKey = video.paused ? "pause" : "playing";
 				presenceData.smallImageText = video.paused
@@ -184,7 +185,7 @@ presence.on("UpdateData", async () => {
 						: strings.viewAnime;
 					presenceData.state = `${ep.split("ตอนที่")[0]}`;
 				} else presenceData.details = strings.browsing;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "ep":
 				if (playvdo.includes("ตอนที่")) {
@@ -232,7 +233,7 @@ presence.on("UpdateData", async () => {
 				break;
 			default:
 				presenceData.details = strings.viewHome;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 		}
 	}

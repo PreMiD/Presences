@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/ugI6cCC.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BitChute/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
@@ -47,7 +48,7 @@ presence.on("UpdateData", async () => {
 		}
 		if (time && video && !video.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
-			presenceData.smallImageText = presenceData.smallImageKey = "play";
+			presenceData.smallImageText = presenceData.smallImageKey = Assets.Play;
 		}
 	} else if (pathname.startsWith("/channel")) {
 		const name = document.querySelector<HTMLAnchorElement>(

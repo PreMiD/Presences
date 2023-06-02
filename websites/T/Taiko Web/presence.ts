@@ -65,7 +65,8 @@ async function getSong(id: number) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/YOBgufd.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Taiko%20Web/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		canvas = document.querySelector<HTMLCanvasElement>("canvas"),
@@ -151,7 +152,8 @@ presence.on("UpdateData", async () => {
 				slideshow.addSlide(
 					"slide2",
 					<PresenceData>{
-						largeImageKey: "https://i.imgur.com/YOBgufd.png",
+						largeImageKey:
+							"https://cdn.rcd.gg/PreMiD/websites/T/Taiko%20Web/assets/logo.png",
 						startTimestamp: browsingTimestamp,
 						smallImageKey: "taiko_logo",
 						smallImageText: selectedSong.title,

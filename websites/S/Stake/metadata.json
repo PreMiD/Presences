@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "RootK1d",
 		"id": "307473018597408768"
@@ -10,9 +10,9 @@
 		"de": "Stake.com ist die führende online Krypto-Casino und Sportwetten-Plattform."
 	},
 	"url": "stake.com",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/D4d2JSH.png",
-	"thumbnail": "https://i.imgur.com/ttxjIJA.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stake/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stake/assets/thumbnail.png",
 	"color": "#1a2c3a",
 	"category": "games",
 	"tags": [

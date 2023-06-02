@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -12,9 +12,9 @@
 		"weather.com",
 		"features.weather.com"
 	],
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/Zzh3YNq.png",
-	"thumbnail": "https://i.imgur.com/L52nvWT.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/The%20Weather%20Channel/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/The%20Weather%20Channel/assets/thumbnail.png",
 	"color": "#014F9D",
 	"category": "other",
 	"tags": [

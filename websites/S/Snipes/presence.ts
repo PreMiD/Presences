@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async function () {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/9HmTAOR.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/logo.png",
 		},
 		setTimeElapsed = await presence.getSetting<boolean>("timeElapsed"),
 		setShowButtons = await presence.getSetting<boolean>("showButtons"),

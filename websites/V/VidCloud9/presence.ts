@@ -57,7 +57,8 @@ presence.on("UpdateData", async () => {
 		presence.info("Elapsed Off");
 	}
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/AEOuBRB.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/V/VidCloud9/assets/logo.png",
 	};
 	if (videoTime) {
 		presence.info("Video Time is On");
@@ -111,7 +112,9 @@ presence.on("UpdateData", async () => {
 						if (iFrameVideo && !isNaN(duration) && title && video) {
 							if (!paused) {
 								presenceData.details = "Watching:";
-								presenceData.smallImageKey = paused ? "pause" : "play";
+								presenceData.smallImageKey = paused
+									? Assets.Pause
+									: Assets.Play;
 								if (videoTime) {
 									presenceData.smallImageText = paused
 										? (await strings).pause
@@ -126,7 +129,7 @@ presence.on("UpdateData", async () => {
 								delete presenceData.startTimestamp;
 								delete presenceData.endTimestamp;
 								presenceData.details = "Paused:";
-								presenceData.smallImageKey = "pause";
+								presenceData.smallImageKey = Assets.Pause;
 								presenceData.smallImageText = (await strings).pause;
 							}
 						} else if (!iFrameVideo && isNaN(duration) && title) {
@@ -137,7 +140,7 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Error 03: Watching unknown show/movie.";
 							presenceData.state = "Can't tell if playing or not.";
 							presenceData.startTimestamp = browsingTimestamp;
-							presenceData.smallImageKey = "search";
+							presenceData.smallImageKey = Assets.Search;
 							presenceData.smallImageText = "Error 3";
 							presence.error(
 								"Can't tell what you are watching. Fix a variable or line of code."
@@ -147,7 +150,7 @@ presence.on("UpdateData", async () => {
 						//Can't get the basic site information
 						presenceData.startTimestamp = browsingTimestamp;
 						presenceData.details = "Error 02: Watching unknown show/movie.";
-						presenceData.smallImageKey = "search";
+						presenceData.smallImageKey = Assets.Search;
 						presence.error("Can't read page.");
 					}
 				} else if (
@@ -161,13 +164,13 @@ presence.on("UpdateData", async () => {
 						"https://vidcloud9.com/search.html?keyword=",
 						""
 					);
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Searching";
 				} else {
 					//If it can't get the page it will output an error
 					presenceData.startTimestamp = browsingTimestamp;
 					presenceData.details = "Error 01: Can't Read Page";
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presence.error("Can't read page. Set up a conditional.");
 				}
 		}

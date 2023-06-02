@@ -18,11 +18,12 @@ function parseQueryString(queryString?: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/QjEGajr.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Electron/assets/logo.png",
 		},
 		route = document.location.pathname.split("/");
 
-	presenceData.smallImageKey = "reading";
+	presenceData.smallImageKey = Assets.Reading;
 	presenceData.smallImageText = `Language : ${
 		document.querySelector("a.site-header-nav-item.bordered.lang-select-button")
 			.textContent

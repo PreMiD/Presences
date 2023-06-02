@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -13,9 +13,9 @@
 		"vi_VN": "Dễ dàng phát lại các bản nhạc trên kho lưu trữ đám mây của bạn, trực tiếp từ trình duyệt hoặc điện thoại của bạn."
 	},
 	"url": "play.asti.ga",
-	"version": "2.6.16",
-	"logo": "https://i.imgur.com/5cNh7kv.png",
-	"thumbnail": "https://i.imgur.com/xcbh1rC.png",
+	"version": "2.6.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Astiga/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Astiga/assets/thumbnail.png",
 	"color": "#605da9",
 	"category": "music",
 	"tags": [

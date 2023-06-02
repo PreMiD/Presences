@@ -1,5 +1,5 @@
 export const name = "Fibbage XL";
-export const logo = "https://i.imgur.com/LxAtHuy.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/7.png";
 
 export function getPresenceData(): PresenceData {
 	const currentGamePage = document.querySelector<HTMLDivElement>(

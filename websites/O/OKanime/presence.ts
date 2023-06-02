@@ -25,7 +25,8 @@ presence.on("iFrameData", (data: VideoData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/mhjMnnU.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/OKanime/assets/logo.png",
 	};
 
 	if (video && !isNaN(video.duration) && video.duration > 0) {
@@ -47,7 +48,7 @@ presence.on("UpdateData", async () => {
 				);
 		}
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;
@@ -65,7 +66,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData, !video.paused);
 	} else {
 		presenceData.details = (await strings).browsing;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).browsing;
 
 		presence.setActivity(presenceData);

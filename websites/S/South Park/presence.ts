@@ -13,7 +13,8 @@ presence.on("UpdateData", async () => {
 	SouthParkData ??= await presence.getPageletiable<Data>("__DATA__");
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/h6b3eEW.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/South%20Park/assets/logo.jpg",
 		details: "Browsing...",
 		smallImageKey: "reading",
 		startTimestamp: startTime,
@@ -31,7 +32,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `S${season}:E${episode} ${EpTitle}`;
 
 			presenceData.smallImageKey =
-				video.paused || isNaN(video.duration) ? "pause" : "play";
+				video.paused || isNaN(video.duration) ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText =
 				video.paused || isNaN(video.duration) ? "Paused" : "Playing";
 
@@ -81,7 +82,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector("div.header > span").textContent
 			}`;
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 			[presenceData.startTimestamp, presenceData.endTimestamp] =

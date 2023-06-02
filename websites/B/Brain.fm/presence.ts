@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/eX5kOQU.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/Brain.fm/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = document.location;
@@ -56,9 +57,7 @@ presence.on("UpdateData", () => {
 				)
 			)
 				presenceData.details = "Logging in";
-			else if (
-				document.querySelector("#root > div > div > div > div.sc-jsNsAp.byZiWf")
-			)
+			else if (document.querySelector("div[data-testid='focusCard']"))
 				presenceData.details = "Choosing mode";
 		} else if (pathname.startsWith("/signup"))
 			presenceData.details = "Signing up";
@@ -66,10 +65,10 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Getting started";
 		else if (["/focus", "/relax", "/sleep"].includes(pathname)) {
 			const activity = document
-				.querySelector(
-					"#root > div > div > div.sc-sCrnh.fGBZrg > div.sc-gJLCiq.iGquue > div.sc-kBizdN.gGaVww > div.sc-jNpQCG.dAEozB > div > div > span"
-				)
-				.textContent.trim();
+				.evaluate('//span[text()="Activity"]', document)
+				?.iterateNext()
+				?.parentElement?.querySelectorAll("span")?.[1]
+				?.textContent.trim();
 			switch (pathname) {
 				case "/focus":
 					presenceData.state = `Focusing • ${activity}`;
@@ -83,22 +82,16 @@ presence.on("UpdateData", () => {
 			}
 
 			const songTypeInfo = document
-				.querySelector(
-					"#root > div > div > div.sc-VhGJa.kMMYFW > div.sc-jwBoPJ.glJHPW > div > div.sc-chbBtj.ciMhIb > div > div > div > div > div.sc-leFDRL.iaABgi"
-				)
+				.querySelector("div[data-testid='trackSubtitle']")
 				.textContent.trim()
 				.split(" • ");
 
 			presenceData.details = `${document
-				.querySelector(
-					"#root > div > div > div.sc-VhGJa.kMMYFW > div.sc-jwBoPJ.glJHPW > div > div.sc-chbBtj.ciMhIb > div > div > div > div > div.sc-hDjjHo.jwdsSo"
-				)
+				.querySelector("div[data-testid='currentTrackTitle']")
 				.textContent.trim()} • ${songTypeInfo[0]}`;
 
 			presenceData.largeImageKey = document
-				.querySelector(
-					"#root > div > div > div.sc-VhGJa.kMMYFW > div.sc-jwBoPJ.glJHPW > div > div.sc-chbBtj.ciMhIb > div > div > div > img"
-				)
+				.querySelector("div[data-testid='trackInformationCard'] > img")
 				.getAttribute("src");
 			presenceData.smallImageKey = "logo";
 			presenceData.smallImageText = songTypeInfo[1];

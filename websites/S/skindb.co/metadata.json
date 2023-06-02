@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Officer",
 		"id": "373913699943186432"
@@ -10,9 +10,9 @@
 		"nl": "skindb.co is een database voor fortnite, valorant en fall guys skins/items."
 	},
 	"url": "skindb.co",
-	"version": "1.1.11",
-	"logo": "https://i.imgur.com/F6LKEIl.jpg",
-	"thumbnail": "https://i.imgur.com/liASfLj.png",
+	"version": "1.1.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/thumbnail.png",
 	"color": "#60ACFF",
 	"category": "games",
 	"tags": [

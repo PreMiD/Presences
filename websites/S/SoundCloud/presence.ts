@@ -129,7 +129,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/KgOkfIz.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/logo.png",
 		startTimestamp: elapsed,
 	};
 
@@ -185,7 +186,7 @@ presence.on("UpdateData", async () => {
 					.style.backgroundImage.match(/"(.*)"/)?.[1]
 					.replace("-t50x50.jpg", "-t500x500.jpg") ?? "soundcloud";
 		}
-		presenceData.smallImageKey = playing ? "play" : "pause";
+		presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 		presenceData.smallImageText = strings[playing ? "play" : "pause"];
 
 		if (showButtons) {
@@ -262,13 +263,13 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing|Discovering)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = strings.browse;
 		} else if (presenceData.details.match("(Searching)")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 		} else if (presenceData.details.match("(Uploading)")) {
-			presenceData.smallImageKey = "uploading";
+			presenceData.smallImageKey = Assets.Uploading;
 			presenceData.smallImageText = "Uploading..."; // no string available
 		} else if (!showTimestamps || (!playing && !showBrowsing)) {
 			delete presenceData.startTimestamp;

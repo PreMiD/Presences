@@ -1,7 +1,7 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
-		"name": "ThiaudioTT3.2V6BITURBO",
+		"name": "Vaz",
 		"id": "258926263132094464"
 	},
 	"service": "Goodreads",
@@ -9,9 +9,9 @@
 		"en": "Goodreads is an American social cataloging website that allows individuals to search its database of books, annotations, quotes, and reviews."
 	},
 	"url": "www.goodreads.com",
-	"version": "1.0.11",
-	"logo": "https://i.imgur.com/DtHgzGt.png",
-	"thumbnail": "https://i.imgur.com/susc3Ij.png",
+	"version": "1.1.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Goodreads/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Goodreads/assets/thumbnail.png",
 	"color": "#b5ae84",
 	"category": "other",
 	"tags": [

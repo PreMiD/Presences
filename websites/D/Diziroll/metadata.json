@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "erdem",
 		"id": "292692556809109534"
@@ -14,9 +14,9 @@
 		"diziroll.com",
 		"www.diziroll.com"
 	],
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/PY7u54F.png",
-	"thumbnail": "https://i.imgur.com/YsL5RgB.jpg",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Diziroll/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Diziroll/assets/thumbnail.jpg",
 	"color": "#1a1d30",
 	"category": "videos",
 	"tags": [

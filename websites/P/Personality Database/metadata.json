@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "JustArya",
 		"id": "281770836283883530"
@@ -10,9 +10,9 @@
 	},
 	"url": "personality-database.com",
 	"regExp": "([a-z0-9-]+[.])*personality-database[.]com[/]",
-	"version": "1.0.9",
-	"logo": "https://i.imgur.com/hcw43Xf.png",
-	"thumbnail": "https://i.imgur.com/0pBs69u.png",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/thumbnail.png",
 	"color": "#2e96a5",
 	"category": "socials",
 	"tags": [

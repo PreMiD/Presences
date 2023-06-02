@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "CRUGG",
 		"id": "228965621478588416"
@@ -24,9 +24,9 @@
 		"vi_VN": "Một cách đơn giản, vui và sáng tạo để chụp, chỉnh sửa và chia sẻ các bức ảnh, video và tin nhắn với gia đình và bạn bè."
 	},
 	"url": "www.instagram.com",
-	"version": "2.2.7",
-	"logo": "https://i.imgur.com/iQtgKwj.png",
-	"thumbnail": "https://i.imgur.com/gcBDsYj.png",
+	"version": "2.2.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Instagram/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Instagram/assets/thumbnail.png",
 	"color": "#E1306C",
 	"category": "socials",
 	"tags": [

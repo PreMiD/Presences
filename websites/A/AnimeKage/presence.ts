@@ -36,13 +36,17 @@ presence.on("iFrameData", (data: IFrameData) => {
 	}
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeKage/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	if (lastPlaybackState !== playback) {
 		lastPlaybackState = playback;
 		browsingTimestamp = Math.floor(Date.now() / 1000);
 	}
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/zVbpanX.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -52,7 +56,7 @@ presence.on("UpdateData", async () => {
 		)
 	) {
 		if (iFrameVideo && !isNaN(duration)) {
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused
 				? (await strings).pause
 				: (await strings).play;
@@ -78,7 +82,7 @@ presence.on("UpdateData", async () => {
 			);
 
 			presenceData.state = title.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (document.location.pathname === "/")
 		presenceData.details = "Viewing main page";

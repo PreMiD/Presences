@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/f3zxOuL.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/J/jut.su/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
@@ -64,11 +65,11 @@ presence.on("UpdateData", async () => {
 
 			if (!video.paused && !isNaN(Number(video.duration))) {
 				presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Воспроизводится";
 			} else {
 				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Приостановлено";
 			}
 			const titles = name.textContent

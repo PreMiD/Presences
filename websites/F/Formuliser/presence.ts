@@ -7,7 +7,8 @@ let formula: HTMLInputElement, formulaName: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/rtkOdlB.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/Formuliser/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

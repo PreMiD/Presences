@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "257151906038677504",
 		"name": "SHISEN"
@@ -13,9 +13,9 @@
 		"ya.ru",
 		"yandex.ru"
 	],
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/SFXKtLF.png",
-	"thumbnail": "https://i.imgur.com/hHxU0xz.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex/assets/thumbnail.png",
 	"color": "#ff3333",
 	"category": "other",
 	"tags": [

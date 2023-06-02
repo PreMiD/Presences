@@ -21,7 +21,8 @@ presence.on("UpdateData", async () => {
 		pause: "general.paused",
 	});
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/LvPRxYG.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Streamlabs/assets/logo.png",
 	};
 
 	switch (window.location.hostname) {
@@ -71,14 +72,14 @@ presence.on("UpdateData", async () => {
 				.textContent.split(" ");
 			switch (!video.paused) {
 				case true:
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = strings.play;
 					presenceData.endTimestamp = new Date(
 						Date.now() + (video.duration - video.currentTime) * 1000
 					).getTime();
 					break;
 				case false:
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = strings.pause;
 					presenceData.endTimestamp = null;
 					break;
@@ -134,14 +135,14 @@ presence.on("UpdateData", async () => {
 			.textContent.split(" ");
 		switch (!video.paused) {
 			case true:
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = strings.play;
 				presenceData.endTimestamp = new Date(
 					Date.now() + (video.duration - video.currentTime) * 1000
 				).getTime();
 				break;
 			case false:
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = strings.pause;
 				presenceData.endTimestamp = new Date(
 					Date.now() + (video.duration - video.currentTime) * 1000

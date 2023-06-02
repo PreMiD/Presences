@@ -17,7 +17,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/PfvR7jD.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/logo.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".episode-number").lastChild.textContent
 		}`;
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Played";
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData, !video.paused);
 	} else if (location.pathname.startsWith("/search")) {
-		presenceData.smallImageKey = "searching";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 		presenceData.details = `Searching: ${document
 			.querySelector(".heading")
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 			}`;
 		} else presenceData.state = "Results: Nothing";
 	} else if (location.pathname.includes("/download")) {
-		presenceData.smallImageKey = "download";
+		presenceData.smallImageKey = Assets.Downloading;
 		presenceData.smallImageText = "Downloading";
 		presenceData.details = document.querySelector(".heading > a").textContent;
 		presenceData.state = "Downloading Anime";

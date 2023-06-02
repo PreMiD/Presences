@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "qwerty142",
 		"id": "455167347464863746"
@@ -13,9 +13,9 @@
 		"www.honeygain.com",
 		"dashboard.honeygain.com"
 	],
-	"version": "1.1.16",
-	"logo": "https://i.imgur.com/GUMs8VF.png",
-	"thumbnail": "https://i.imgur.com/pThjE43.png",
+	"version": "1.1.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Honeygain/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Honeygain/assets/thumbnail.png",
 	"color": "#fad63a",
 	"category": "other",
 	"tags": [

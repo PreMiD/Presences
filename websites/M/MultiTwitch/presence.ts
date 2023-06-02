@@ -11,7 +11,8 @@ presence.on("UpdateData", async () => {
 				return str !== "";
 			}),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/gJBDsCE.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/MultiTwitch/assets/0.png",
 		};
 
 	if (currentStreams.length === 0) {
@@ -30,7 +31,8 @@ presence.on("UpdateData", async () => {
 			slideshow.addSlide(
 				stream,
 				{
-					largeImageKey: "https://i.imgur.com/gJBDsCE.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/M/MultiTwitch/assets/0.png",
 					details: `Watching ${currentStreams.length} ${
 						currentStreams.length > 1 ? "streams" : "stream"
 					}`,

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "fantomitechno 🦊",
 		"id": "563749920683720709"
@@ -11,9 +11,9 @@
 		"vi_VN": "Chúng tôi đang xây dựng cả hành tinh trong Minecraft."
 	},
 	"url": "buildtheearth.net",
-	"version": "1.1.13",
-	"logo": "https://i.imgur.com/XvapvDX.png",
-	"thumbnail": "https://i.imgur.com/YzqC7ju.png",
+	"version": "1.1.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BuildTheEarth/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BuildTheEarth/assets/thumbnail.png",
 	"color": "#104D92",
 	"category": "games",
 	"tags": [

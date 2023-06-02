@@ -13,14 +13,15 @@ let title;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ba5AI1b.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Downdetector/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname.startsWith("/search/")) {
 		presenceData.details = "Searching for:";
 		[, presenceData.state] = document.location.href.split("?q=");
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/archive/")) {
 		presenceData.details = "Viewing an archive for:";
 		title = document.querySelector(

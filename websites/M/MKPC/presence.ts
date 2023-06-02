@@ -6,7 +6,7 @@ const presence = new Presence({
 let user;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/T2WTLEM.jpeg",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/MKPC/assets/logo.jpeg",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing home page";
 	else if (document.location.pathname === "/forum.php") {
 		presenceData.details = "Viewing the Forum's menu";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.buttons = [
 			{ label: "View Forum", url: document.location.href },
 		];
@@ -35,14 +35,14 @@ presence.on("UpdateData", async () => {
 		switch (document.location.pathname) {
 			case "/mariokart.php": {
 				presenceData.details = "browsing map's";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				break;
 			}
 			case "/category.php": {
 				user = document.querySelector("html > body > main > h1");
 				presenceData.details = `Viewing the following category: ${user.textContent}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.buttons = [
 					{ label: "View category", url: document.location.href },
 				];
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 			case "/topic.php": {
 				user = document.querySelector("html > body > main > h1");
 				presenceData.details = `Viewing: ${user.textContent}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.buttons = [
 					{ label: "View topic", url: document.location.href },
 				];
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 					"body > main > div > div.profile-summary > h1"
 				);
 				presenceData.details = `Viewing: ${user.textContent}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.buttons = [
 					{ label: "View profile", url: document.location.href },
 				];

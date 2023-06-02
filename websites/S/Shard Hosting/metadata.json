@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Rhbarber",
 		"id": "367779328940965898"
@@ -21,9 +21,9 @@
 	},
 	"url": "shardhosting.co.uk",
 	"regExp": "([a-z0-9-]+[.])*shardhosting[.](co.uk)[/]|([a-z0-9-]+[.])*web-ore-01[.](co.uk)",
-	"version": "1.0.8",
-	"logo": "https://i.imgur.com/LQ3lw8P.png",
-	"thumbnail": "https://i.imgur.com/U9eCt4s.png",
+	"version": "1.0.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Shard%20Hosting/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Shard%20Hosting/assets/thumbnail.png",
 	"color": "#f47c8c",
 	"category": "other",
 	"tags": [

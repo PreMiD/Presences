@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/f2U2Zd9.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/CodAre/assets/logo.png",
 		},
 		searchURL = new URL(document.location.href),
 		searchResult = searchURL.searchParams.get("q"),

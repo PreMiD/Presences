@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -9,9 +9,9 @@
 		"en": "Hacker News is a social news website focusing on computer science and entrepreneurship."
 	},
 	"url": "news.ycombinator.com",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/xWtIX5I.png",
-	"thumbnail": "https://i.imgur.com/WAdjBN5.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hacker%20News/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hacker%20News/assets/thumbnail.png",
 	"color": "#ff6600",
 	"category": "other",
 	"tags": [

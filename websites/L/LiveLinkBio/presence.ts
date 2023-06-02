@@ -3,6 +3,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/L/LiveLinkBio/assets/logo.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -10,12 +14,6 @@ async function getStrings() {
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
-}
-
-enum Assets {
-	Logo = "https://i.imgur.com/mqJJ4p9.png",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
-	ReadingImage = "https://i.imgur.com/nese1O7.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,

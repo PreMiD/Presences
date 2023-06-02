@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/GCpxrYu.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SimLiveRadio/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -27,7 +28,7 @@ presence.on("UpdateData", async () => {
 				.textContent.trim()
 				.replace('"', "")
 				.replace('"', "");
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 
 			presence.setActivity(presenceData);
 		}
@@ -55,14 +56,14 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing the jobs";
 		else if (document.location.pathname.includes("/kontakt")) {
 			presenceData.details = "Writing to SimLiveRadio";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.location.pathname.includes("/studiohotline"))
 			presenceData.details = "Viewing the Studio Hot Line";
 		else if (document.location.pathname.includes("/teamspeak"))
 			presenceData.details = "Viewing TeamSpeak";
 		else if (document.location.pathname.includes("/projektanfrage")) {
 			presenceData.details = "Reading about the interviews";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/unterstuetzen"))
 			presenceData.details = "Viewing the support page";
 		else if (document.location.pathname.includes("/downloads"))
@@ -73,10 +74,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing the partner page";
 		else if (document.location.pathname.includes("/ueber-uns")) {
 			presenceData.details = "Reading about SimLiveRadio";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/faq")) {
 			presenceData.details = "Reading the FAQs";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 
 		if (!presenceData.details) presence.setActivity();

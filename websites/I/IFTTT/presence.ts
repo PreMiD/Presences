@@ -9,7 +9,8 @@ let oldLang: string,
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/1d8TEw1.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/I/IFTTT/assets/logo.png",
 		};
 
 	oldLang = newLang;
@@ -75,7 +76,7 @@ presence.on("UpdateData", async () => {
 					if (chapter)
 						presenceData.state = `${chapter}${section ? ` - ${section}` : ""}`;
 					presenceData.smallImageText = strings.reading;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 				// Developer spotlight
@@ -162,7 +163,7 @@ presence.on("UpdateData", async () => {
 						document.querySelector<HTMLSpanElement>(".author").textContent
 					}`;
 					presenceData.smallImageText = strings.browsing;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				// Account settings
 				case "settings":
@@ -202,9 +203,10 @@ presence.on("UpdateData", async () => {
 
 					presenceData.details = "My Services";
 					if (category) presenceData.state = category;
-					presenceData.largeImageKey = "https://i.imgur.com/1d8TEw1.png";
+					presenceData.largeImageKey =
+						"https://cdn.rcd.gg/PreMiD/websites/I/IFTTT/assets/logo.png";
 					presenceData.smallImageText = strings.browsing;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 				// Explore, Blog entry, Search
@@ -220,16 +222,16 @@ presence.on("UpdateData", async () => {
 						presenceData.state =
 							document.querySelector<HTMLHeadingElement>("h1").textContent;
 						presenceData.smallImageText = strings.reading;
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 					} else if (search) {
 						presenceData.details = "Searching for Applets & Services";
 						presenceData.state = search;
 						presenceData.smallImageText = strings.search;
-						presenceData.smallImageKey = "search";
+						presenceData.smallImageKey = Assets.Search;
 					} else {
 						presenceData.details = "Exploring Applets & Services";
 						presenceData.smallImageText = strings.browsing;
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 					}
 					break;
 				}
@@ -241,7 +243,7 @@ presence.on("UpdateData", async () => {
 				case "blog":
 					presenceData.details = "Blog";
 					presenceData.smallImageText = strings.reading;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				// Developers
 				case "developers":
@@ -270,7 +272,7 @@ presence.on("UpdateData", async () => {
 						".large-service-logo"
 					).title;
 					presenceData.smallImageText = strings.browsing;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 			}
 		}

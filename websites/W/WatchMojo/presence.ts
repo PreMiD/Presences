@@ -71,7 +71,8 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector<HTMLVideoElement>("#myDiv_html5");
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/zQetOPX.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/WatchMojo/assets/logo.jpg",
 	};
 
 	if (document.location.href !== prevUrl) {
@@ -95,7 +96,7 @@ presence.on("UpdateData", async () => {
 			state: privacy
 				? null
 				: document.querySelector(".brid-poster-title")?.textContent,
-			smallImageKey: video?.paused ? "pause" : "play",
+			smallImageKey: video?.paused ? Assets.Pause : Assets.Play,
 			smallImageText: video?.paused
 				? (await strings).pause
 				: (await strings).play,
@@ -150,7 +151,7 @@ presence.on("UpdateData", async () => {
 								.querySelector(".scorequiz > b")
 								?.textContent.split("/")[1]
 						),
-			smallImageKey: iframePau ? "pause" : "play",
+			smallImageKey: iframePau ? Assets.Pause : Assets.Play,
 			smallImageText: iframePau ? (await strings).pause : (await strings).play,
 			startTimestamp: iframePau
 				? 0
@@ -203,7 +204,7 @@ presence.on("UpdateData", async () => {
 					.replace("=", "/")
 					.match(k)
 			) {
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = (await strings).browse;
 				presenceData = { ...presenceData, ...v };
 			}

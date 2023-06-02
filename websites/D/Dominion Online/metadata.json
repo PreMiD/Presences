@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Nep",
 		"id": "187577389419724800"
@@ -9,9 +9,9 @@
 		"en": "Dominion Online, developed by Shuffle iT, is the official platform to play Dominion, the award-winning deckbuilding card game created by Donald X. Vaccarino."
 	},
 	"url": "dominion.games",
-	"version": "1.0.9",
-	"logo": "https://i.imgur.com/qYm3qWs.jpg",
-	"thumbnail": "https://i.imgur.com/VS6HVeg.jpg",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dominion%20Online/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dominion%20Online/assets/thumbnail.jpg",
 	"color": "#468c01",
 	"category": "games",
 	"tags": [

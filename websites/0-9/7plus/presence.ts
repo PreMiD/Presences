@@ -6,7 +6,8 @@ let showName: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/BamXC8h.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png",
 		},
 		{ pathname, href } = document.location,
 		[privacy, buttons, covers] = await Promise.all([
@@ -56,7 +57,8 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.largeImageKey =
 					document.querySelector<HTMLMetaElement>('[property="og:image"]')
-						?.content ?? "https://i.imgur.com/BamXC8h.png";
+						?.content ??
+					"https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
 				presenceData.smallImageKey = "live";
 				presenceData.smallImageText = "Live";
 				presenceData.details = document
@@ -88,16 +90,17 @@ presence.on("UpdateData", async () => {
 					];
 					if (video.paused) {
 						delete presenceData.endTimestamp;
-						presenceData.smallImageKey = "paused";
+						presenceData.smallImageKey = Assets.Pause;
 					}
 					[, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
 					presenceData.details = document.querySelector(
 						'[class="vjs-top-bar-title"]'
 					).textContent;
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.largeImageKey =
-						video.getAttribute("poster") ?? "https://i.imgur.com/BamXC8h.png";
+						video.getAttribute("poster") ??
+						"https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
 				} else {
 					presenceData.buttons = [
 						{
@@ -111,7 +114,7 @@ presence.on("UpdateData", async () => {
 							?.getAttribute("src") ??
 						document.querySelector<HTMLMetaElement>('[property="og:image"]')
 							?.content ??
-						"https://i.imgur.com/BamXC8h.png";
+						"https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
 
 					presenceData.details = `Viewing "${
 						document.querySelector('[class="vjs-top-bar-title"]')
@@ -122,7 +125,10 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	}
-	if (!covers) presenceData.largeImageKey = "https://i.imgur.com/BamXC8h.png";
+	if (!covers) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
+	}
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

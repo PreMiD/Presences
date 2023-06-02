@@ -28,7 +28,8 @@ function getQuery() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/xGOEvzT.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Laftel/assets/logo.png",
 	};
 
 	if (window.location.pathname === "/") presenceData.details = "메인";
@@ -86,12 +87,12 @@ presence.on("UpdateData", async () => {
 						Math.floor(video.currentTime),
 						Math.floor(video.duration)
 					);
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 			} else {
 				presenceData.startTimestamp = null;
 				presenceData.endTimestamp = null;
 				presenceData.state = "일시 정지됨";
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 			}
 		}
 	}

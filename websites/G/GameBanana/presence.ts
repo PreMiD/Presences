@@ -3,7 +3,8 @@ const presence = new Presence({ clientId: "958520351158050887" }),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/sIjHqBm.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GameBanana/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		sections = [

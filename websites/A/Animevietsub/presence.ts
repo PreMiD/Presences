@@ -28,7 +28,8 @@ presence.on("UpdateData", async () => {
 		]),
 		splitPath = pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/trQFagl.jpeg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Animevietsub/assets/logo.jpeg",
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -146,7 +147,7 @@ presence.on("UpdateData", async () => {
 					? document.querySelector(".Title").textContent
 					: "Không tìm thấy còn cặc - Tập ?"
 			).split(" - ");
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 			presenceData.endTimestamp = presence.getTimestamps(
 				Math.floor(video.currentTime),

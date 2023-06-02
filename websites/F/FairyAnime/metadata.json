@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Yusaki",
 		"id": "439582316873121793"
@@ -12,9 +12,9 @@
 	},
 	"url": "fairyanime.com",
 	"regExp": "([a-z0-9-]+[.])*fairyanime[.]com[/]",
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/WBzbjlK.png",
-	"thumbnail": "https://i.imgur.com/QvrAmhs.png",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FairyAnime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FairyAnime/assets/thumbnail.png",
 	"color": "#f7a1f3",
 	"category": "anime",
 	"tags": [

@@ -7,7 +7,8 @@ let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/sBgHblJ.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/Manacube/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "manacube.com")
@@ -55,7 +56,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Forums, Searching For:";
 			presenceData.state = search.textContent;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.includes("/members/")) {
 		user = document.querySelector(

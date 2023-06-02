@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -12,9 +12,9 @@
 		"www.nytimes.com",
 		"www.powerlanguage.co.uk"
 	],
-	"version": "1.1.4",
-	"logo": "https://i.imgur.com/N19NFSF.png",
-	"thumbnail": "https://i.imgur.com/2nENqtm.png",
+	"version": "1.1.10",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/thumbnail.png",
 	"color": "#6AAA64",
 	"category": "games",
 	"tags": [

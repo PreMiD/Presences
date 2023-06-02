@@ -11,7 +11,8 @@ presence.on("UpdateData", async () => {
 			".vp-video-wrapper .vp-video video"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/OJunR7n.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/Vimeo/assets/logo.png",
 		};
 
 	if (document.location.pathname === "/") presenceData.details = "Browsing...";
@@ -25,8 +26,9 @@ presence.on("UpdateData", async () => {
 			);
 		presenceData.details = title;
 		presenceData.state = uploader;
-		presenceData.largeImageKey = "https://i.imgur.com/OJunR7n.png";
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/V/Vimeo/assets/logo.png";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

@@ -30,7 +30,8 @@ presence.on("iFrameData", (data: iframeData) => {
 const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/z1VZysP.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Sezonluk%20Dizi/assets/logo.jpg",
 			startTimestamp,
 		},
 		{ search, pathname: page } = document.location;
@@ -42,7 +43,7 @@ presence.on("UpdateData", async () => {
 			document.title.indexOf("Türündeki")
 		);
 	} else if (search.includes("?adi=") && !/\?.*?&/g.test(search)) {
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		presenceData.details = "Bir şey arıyor";
 		presenceData.state = search.replace("?adi=", "");
@@ -93,7 +94,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state =
 			document.querySelector(".ui.stackable.cards .card .content a.header")
 				?.textContent ?? "Bilinmeyen Dizi";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Bir tartışma okuyor";
 	} else if (Object.keys(video || {}).length > 0) {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -123,7 +124,7 @@ presence.on("UpdateData", async () => {
 			},
 		];
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

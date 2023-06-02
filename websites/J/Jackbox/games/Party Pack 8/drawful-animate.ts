@@ -1,5 +1,6 @@
 export const name = "Drawful Animate";
-export const logo = "https://i.imgur.com/7QPiNMv.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/34.png";
 
 export function getPresenceData({
 	playerState,

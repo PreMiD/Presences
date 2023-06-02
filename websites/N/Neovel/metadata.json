@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "RisingSunLight",
 		"id": "240521747852558347"
@@ -12,9 +12,9 @@
 	},
 	"url": "neovel.io",
 	"regExp": "([a-z]*[.])*(neovel|neopload.neovel)[.]io",
-	"version": "1.1.2",
-	"logo": "https://i.imgur.com/CYk2ZDX.jpg",
-	"thumbnail": "https://i.imgur.com/Ei5H8Zz.jpg",
+	"version": "1.1.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Neovel/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Neovel/assets/thumbnail.jpg",
 	"color": "#041a26",
 	"category": "other",
 	"tags": [

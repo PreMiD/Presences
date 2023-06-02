@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/dOqOUxw.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -35,7 +36,7 @@ presence.on("UpdateData", async () => {
 		const article = document.querySelector(
 			"#help-section-breadcrumbs > span.ng-binding"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		if (article !== "") {
 			presenceData.details = "Reading article:";
 			presenceData.state = article;

@@ -7,7 +7,8 @@ presence.on("UpdateData", async () => {
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/ODHNsqP.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/ShareX/assets/logo.png",
 			smallImageKey: "sharex-white-logo",
 			smallImageText: "Navigating on getsharex.com",
 			buttons: [
@@ -23,7 +24,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.buttons;
 	} else if (document.location.pathname.includes("/downloads")) {
 		presenceData.state = "Browsing Downloads Page";
-		presenceData.smallImageKey = "download";
+		presenceData.smallImageKey = Assets.Downloading;
 	} else if (document.location.pathname.includes("/screenshots")) {
 		presenceData.state = "Viewing Screenshots";
 		presenceData.smallImageKey = "screenshot";

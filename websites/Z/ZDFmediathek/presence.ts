@@ -16,7 +16,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/5mxv8gX.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/logo.png",
 		},
 		video = document.querySelector<HTMLVideoElement>(
 			"div.zdfplayer-video_wrapper video"
@@ -71,15 +72,16 @@ presence.on("UpdateData", async () => {
 					"div.item.livetv-item.js-livetv-scroller-cell.m-activated-done.m-activated.m-active.m-active-done div figure div video"
 				).paused
 			) {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).pause;
 				presenceData.startTimestamp = 0;
 				presenceData.endTimestamp = 0;
 			}
 		} else {
 			// Video-on-demand
-			presenceData.largeImageKey = "https://i.imgur.com/5mxv8gX.png";
-			presenceData.smallImageKey = "play";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/logo.png";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).play;
 
 			const videoInfoTag = document.querySelector(
@@ -107,14 +109,14 @@ presence.on("UpdateData", async () => {
 				{ label: (await strings).buttonWatchVideo, url: prevUrl },
 			];
 			if (video.paused) {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).pause;
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
 		}
 	} else {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = (await strings).browsingThrough;
 		presenceData.details = (await strings).browsing;
 		presenceData.startTimestamp = elapsed;

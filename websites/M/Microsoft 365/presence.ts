@@ -11,15 +11,15 @@ let microsoft = {
 	ExcelActiveTab: "",
 };
 
-enum Assets {
-	Excel = "https://i.imgur.com/Vm9mwZG.png",
-	Microsoft = "https://i.imgur.com/E2tzaTW.png",
-	OneNote = "https://i.imgur.com/LqrhRhD.png",
-	PowerPoint = "https://i.imgur.com/GAiZFPR.png",
-	Read = "https://i.imgur.com/wPUmqu5.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
-	Word = "https://i.imgur.com/Ec78aqz.png",
-	Writing = "https://i.imgur.com/RImaCYq.png",
+const enum Assets {
+	Microsoft = "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/logo.png",
+}
+
+enum OtherAssets {
+	Excel = "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/0.png",
+	OneNote = "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/1.png",
+	PowerPoint = "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/2.png",
+	Word = "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/3.png",
 }
 
 presence.on(
@@ -49,14 +49,14 @@ presence.on("UpdateData", async () => {
 			document.querySelector('[aria-pressed="true"]')
 		) {
 			presenceData.largeImageKey =
-				Assets[
+				OtherAssets[
 					document.querySelector('[aria-pressed="true"]')
-						?.textContent as keyof typeof Assets
+						?.textContent as keyof typeof OtherAssets
 				] ?? Assets.Microsoft;
 			presenceData.details = `Browsing ${
 				document.title.split("|")[0]
 			} documents`;
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Browsing";
 		} else if (pathname.startsWith("/search")) {
 			presenceData.smallImageKey = Assets.Search;
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 			.replace("word", "Word")
 			.replace("excel", "Excel");
 		presenceData.largeImageKey =
-			Assets[appName as keyof typeof Assets] ?? Assets.Microsoft;
+			OtherAssets[appName as keyof typeof OtherAssets] ?? Assets.Microsoft;
 		presenceData.smallImageKey = Assets.Writing;
 		presenceData.smallImageText = "Editing";
 		if (appName === "OneNote") {

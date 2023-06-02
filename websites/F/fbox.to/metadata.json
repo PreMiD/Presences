@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "वाह्य",
 		"id": "819696394180100106"
@@ -16,9 +16,9 @@
 	},
 	"url": "fbox.to",
 	"regExp": "(www([0-9]*)?[.])?fbox[.]to",
-	"version": "1.2.7",
-	"logo": "https://i.imgur.com/HXOjyCu.png",
-	"thumbnail": "https://i.imgur.com/bCuViFL.png",
+	"version": "1.2.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/thumbnail.png",
 	"color": "#565c67",
 	"category": "videos",
 	"tags": [

@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "675322225490001924",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let customData = false,
 	user: HTMLElement,
 	title: HTMLElement,
@@ -14,7 +15,8 @@ let customData = false,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/0PDmn78.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/osu%20kawata/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	customData = false;

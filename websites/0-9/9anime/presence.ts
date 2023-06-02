@@ -2,6 +2,10 @@ const presence = new Presence({
 	clientId: "934701636251680768",
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/0-9/9anime/assets/logo.png",
+}
+
 let video = {
 	exists: false,
 	duration: 0,
@@ -20,13 +24,6 @@ presence.on(
 		video = data;
 	}
 );
-
-enum Assets {
-	Logo = "https://i.imgur.com/jPl7EfZ.png",
-	Play = "https://i.imgur.com/6s4WyWY.png",
-	Pause = "https://i.imgur.com/PrYtpQb.png",
-	Search = "https://i.imgur.com/wYVlwJX.png",
-}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {

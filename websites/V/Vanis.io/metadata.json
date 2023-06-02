@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Mirax",
 		"id": "223355525826347018"
@@ -14,9 +14,9 @@
 		"vanis.io",
 		"skins.vanis.io"
 	],
-	"version": "1.0.11",
-	"logo": "https://i.imgur.com/V8Cerrx.png",
-	"thumbnail": "https://i.imgur.com/bNZOUoi.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vanis.io/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vanis.io/assets/thumbnail.png",
 	"color": "#ce3239",
 	"category": "games",
 	"tags": [

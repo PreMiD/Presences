@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "RisingSunLight",
 		"id": "240521747852558347"
@@ -14,9 +14,9 @@
 		"ja_JP": "Kickstarterは、映画、音楽、アート、シアター、ゲーム、コミック、デザイン、写真など、多種多様なクリエイティブプロジェクトを実現させるための場です。"
 	},
 	"url": "www.kickstarter.com",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/evUBiFh.png",
-	"thumbnail": "https://i.imgur.com/f2hPZZy.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kickstarter/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kickstarter/assets/thumbnail.png",
 	"color": "#05ce78",
 	"category": "other",
 	"tags": [

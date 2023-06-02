@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "BBQ",
 		"id": "298888568279924746"
@@ -12,9 +12,9 @@
 		"vi_VN": "CodAre là nền tảng chia sẻ mã đơn giản dành cho Discord bot và hơn nữa."
 	},
 	"url": "codare.fun",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/f2U2Zd9.png",
-	"thumbnail": "https://i.imgur.com/YZAHqu7.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CodAre/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CodAre/assets/thumbnail.png",
 	"color": "#3b1b8a",
 	"category": "other",
 	"tags": [

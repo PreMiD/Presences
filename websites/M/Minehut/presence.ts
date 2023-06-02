@@ -1,8 +1,10 @@
 const presence = new Presence({ clientId: "898448802829189172" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/FOvZNY6.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Minehut/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		f = document.location.pathname.split("/");
@@ -65,7 +67,7 @@ presence.on("UpdateData", async () => {
 			);
 			if (s) {
 				presenceData.state = `Searching for ${s}...`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = "Searching...";
 			}
 		}

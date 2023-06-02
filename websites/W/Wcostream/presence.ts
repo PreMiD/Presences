@@ -14,7 +14,8 @@ presence.on("iFrameData", (data: { timeLeft: string; paused: boolean }) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/mVWgkzs.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wcostream/assets/logo.png",
 			details: "Browsing...",
 			startTimestamp: browsingTimestamp,
 		},
@@ -48,13 +49,13 @@ presence.on("UpdateData", async () => {
 
 		if (!video.paused) presenceData.endTimestamp = Date.now() / 1000 + timeLeft;
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 		presenceData.buttons = [{ label: "Watch Episode", url: document.URL }];
 	} else if (pathname === "/") presenceData.details = "Home page";
 	else if (pathname.startsWith("/search")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.startsWith("/anime")) {
 		presenceData.details = "Viewing a Series:";
 		presenceData.state = document.querySelector<HTMLHeadingElement>(
@@ -63,7 +64,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			"#cat-img-desc > div:nth-child(1) > img"
 		).src;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.buttons = [{ label: "View Series", url: document.URL }];
 	} else if (
 		document.querySelector<HTMLAnchorElement>(
@@ -74,10 +75,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector<HTMLAnchorElement>(
 			"table > tbody > tr > td > h2 > a"
 		).textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 	}
-	if (!cover) presenceData.largeImageKey = "https://i.imgur.com/SDiZrOe.png";
+	if (!cover) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wcostream/assets/0.png";
+	}
 	if (!buttons) delete presenceData.buttons;
 	if (!timestamps) {
 		delete presenceData.startTimestamp;

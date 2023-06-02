@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/14BIbky.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/Caards/assets/logo.png",
 		details: "Viewing unsupported page",
 	};
 	const { pathname, href, host } = document.location,
@@ -37,7 +38,7 @@ presence.on("UpdateData", async () => {
 		case "www.caards.me": {
 			if (pathname === "/") presenceData.details = "Viewing home page";
 			else if (pathname.includes("/u/")) {
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.details = "Viewing profile";
 				presenceData.state = `${
 					document.querySelector("span.Name.text-3xl")?.textContent ?? "Unknown"

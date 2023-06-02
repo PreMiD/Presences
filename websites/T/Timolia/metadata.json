@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Lennart™",
 		"id": "398101340322136075"
@@ -11,9 +11,9 @@
 	},
 	"url": "timolia.de",
 	"regExp": "([a-z0-9-]+[.])*timolia[.]de[/]",
-	"version": "1.0.9",
-	"logo": "https://i.imgur.com/NkFEsHW.png",
-	"thumbnail": "https://i.imgur.com/6FY2UOz.png",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/thumbnail.png",
 	"color": "#6b6b6b",
 	"category": "games",
 	"tags": [

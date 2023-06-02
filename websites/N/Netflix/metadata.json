@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Timeraa",
 		"id": "223238938716798978"
@@ -55,9 +55,9 @@
 		"www.netflix.com",
 		"netflix.com"
 	],
-	"version": "5.1.8",
-	"logo": "https://i.imgur.com/LyG9Afx.png",
-	"thumbnail": "https://i.imgur.com/LWcRBZs.jpg",
+	"version": "5.1.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/thumbnail.jpg",
 	"color": "#db0000",
 	"category": "videos",
 	"tags": [

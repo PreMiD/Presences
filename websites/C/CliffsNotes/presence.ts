@@ -1,12 +1,14 @@
 const presence = new Presence({
 	clientId: "715667985267949649",
 });
+
 let title, subTitle, chapter, quiz, search;
 const browsingTimestamp = Math.floor(Date.now() / 1000),
 	path = document.location.pathname;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/t370zFk.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/CliffsNotes/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (path === "/") presenceData.details = "Viewing Home";
@@ -24,12 +26,12 @@ presence.on("UpdateData", async () => {
 		if (title && chapter) {
 			presenceData.details = title.textContent;
 			presenceData.state = chapter.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (title && subTitle) {
 			presenceData.details = title.textContent;
 			presenceData.state = subTitle.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (quiz) presenceData.details = "Taking a Quiz";
 		else {
@@ -52,12 +54,12 @@ presence.on("UpdateData", async () => {
 		if (title && chapter) {
 			presenceData.details = title.textContent;
 			presenceData.state = chapter.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (title && subTitle) {
 			presenceData.details = title.textContent;
 			presenceData.state = subTitle.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (quiz) presenceData.details = "Taking a Quiz";
 		else presenceData.details = "Viewing Test Prep";
@@ -75,12 +77,12 @@ presence.on("UpdateData", async () => {
 		if (title && chapter) {
 			presenceData.details = title.textContent;
 			presenceData.state = chapter.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (title && subTitle) {
 			presenceData.details = title.textContent;
 			presenceData.state = subTitle.textContent;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (quiz) presenceData.details = "Taking a Quiz";
 		else presenceData.details = "Viewing Study Guides";
@@ -91,7 +93,7 @@ presence.on("UpdateData", async () => {
 		if (search) {
 			presenceData.details = "Searching:";
 			presenceData.state = search.textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
 		}
 	} else if (path.includes("/discover-")) {

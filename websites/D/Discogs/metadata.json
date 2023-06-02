@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -9,9 +9,9 @@
 		"en": "Discover music on Discogs, the largest online music database. Buy and sell music with collectors in the Marketplace."
 	},
 	"url": "www.discogs.com",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/2LZSDR9.png",
-	"thumbnail": "https://i.imgur.com/E2ZZ2hV.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discogs/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discogs/assets/thumbnail.png",
 	"color": "#333",
 	"category": "music",
 	"tags": [

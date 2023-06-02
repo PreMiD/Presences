@@ -62,7 +62,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/0qpwOvt.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Planet/assets/logo.jpg",
 		details: strings.browse,
 		smallImageKey: "reading",
 		startTimestamp: startsTime,
@@ -246,7 +247,7 @@ presence.on("UpdateData", async () => {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(currentTime, duration);
 
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;
 
 			presenceData.buttons = [

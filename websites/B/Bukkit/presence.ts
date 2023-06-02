@@ -2,11 +2,13 @@ const presence = new Presence({
 		clientId: "626481021843669044",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: HTMLElement, search: HTMLInputElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/X785snB.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/Bukkit/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -46,14 +48,14 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Forums, Searching for:";
 					presenceData.state = search.value;
 
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 
 					presence.setActivity(presenceData);
 				} else {
 					presenceData.details = "Forums, Going to search";
 					presenceData.state = "something up";
 
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 
 					presence.setActivity(presenceData);
 				}
@@ -111,7 +113,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Help Center, reading:";
 				presenceData.state = title.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/pages/")) {
@@ -121,7 +123,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Forums, reading:";
 				presenceData.state = title.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else presence.setActivity();
@@ -134,7 +136,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Docs, reading:";
 				presenceData.state = title.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else {

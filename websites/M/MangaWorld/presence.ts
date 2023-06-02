@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/y53UAth.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/logo.png",
 		},
 		/* Query dell'URI - URI query */
 		searchParams = new URLSearchParams(
@@ -38,7 +39,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.href.includes("keyword=")) {
 		/* ----- ARCHIVIO - ARCHIVE ----- */
 		/* Ricerca per nome - Search by name */
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Ricerca per nome";
 		presenceData.details = "Cercando:";
 		presenceData.state = `"${searchParams.get("keyword")}"`;

@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/hHlsZac.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		shortTitle = document.title.split(/-(.+)/)[1],
@@ -123,7 +124,7 @@ presence.on("UpdateData", async () => {
 							.textContent.slice(13)
 					);
 			}
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? "Paused" : "Playing";
 			presenceData.buttons = [{ label: "View Course", url: document.URL }];
 		} else if (document.location.href.includes("/series")) {
@@ -151,7 +152,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = "Editing profile";
 	} else if (document.location.href.includes("project/new")) {
 		presenceData.details = "Uploading an artwork";
-		presenceData.smallImageKey = "upload";
+		presenceData.smallImageKey = Assets.Uploading;
 		presenceData.smallImageText = "Uploading artwork";
 	} else if (document.location.hostname === "magazine.artstation.com") {
 		presenceData.details = "Reading magazines";
@@ -171,7 +172,10 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "portfolio";
 		presenceData.smallImageText = "Viewing portfolio";
 	}
-	if (!image) presenceData.largeImageKey = "https://i.imgur.com/hHlsZac.png";
+	if (!image) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/logo.png";
+	}
 	if (!button) delete presenceData.buttons;
 	if (!time) {
 		delete presenceData.startTimestamp;

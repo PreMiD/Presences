@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -11,9 +11,9 @@
 		"vi_VN": "Google Domains là dịch vụ đăng ký tên miền được cung cấp bởi Google. Google Domains cung cấp đăng kí tên miền, tổ chức DNS, DNSSEC, DNS động, chuyển tên miền, và chuyển tiếp thư điện tử."
 	},
 	"url": "domains.google.com",
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/345qLaW.jpg",
-	"thumbnail": "https://i.imgur.com/5EXKSHI.png",
+	"version": "1.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Domains/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Domains/assets/thumbnail.png",
 	"color": "#FCBC03",
 	"category": "other",
 	"tags": [

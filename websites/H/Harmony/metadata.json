@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "marino!",
 		"id": "598953747963707409"
@@ -9,9 +9,9 @@
 		"en": "Harmony broadcasts from all over the world and we all have the same desire to play the biggest hits!"
 	},
 	"url": "weareharmony.net",
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/lI0bLxr.png",
-	"thumbnail": "https://i.imgur.com/MqPDsUl.png",
+	"version": "1.0.10",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Harmony/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Harmony/assets/thumbnail.png",
 	"color": "#4c1eff",
 	"category": "music",
 	"tags": [

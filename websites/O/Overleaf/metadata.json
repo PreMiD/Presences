@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Enevevet",
 		"id": "329669021043523594"
@@ -12,9 +12,9 @@
 	},
 	"url": "www.overleaf.com",
 	"regExp": "([a-z0-9-]+[.])*overleaf[.]com[/]",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/DcEM56x.png",
-	"thumbnail": "https://i.imgur.com/lWInfl3.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Overleaf/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Overleaf/assets/thumbnail.png",
 	"color": "#138A07",
 	"category": "other",
 	"tags": [

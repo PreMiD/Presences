@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "sexnine",
 		"id": "807958370887270400"
@@ -12,9 +12,9 @@
 		"educative.io",
 		"www.educative.io"
 	],
-	"version": "1.0.9",
-	"logo": "https://i.imgur.com/vYEoDm5.png",
-	"thumbnail": "https://i.imgur.com/VOUPf7V.png",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Educative/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Educative/assets/thumbnail.png",
 	"color": "#5553ff",
 	"category": "other",
 	"tags": [

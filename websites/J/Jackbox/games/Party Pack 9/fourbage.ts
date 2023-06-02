@@ -1,5 +1,6 @@
 export const name = "Fibbage 4";
-export const logo = "https://i.imgur.com/DnqcuUX.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/39.png";
 
 export function getPresenceData({
 	playerState,

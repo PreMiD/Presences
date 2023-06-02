@@ -16,7 +16,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/lpx1Af4.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Animea/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		pathnameArray = document.location.pathname.split("/"),
@@ -74,11 +75,11 @@ presence.on("UpdateData", async () => {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(video.current, video.duration);
 
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Lecture en cours";
 
 				if (video.paused) {
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = "En pause";
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
@@ -119,8 +120,10 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (!showCover)
-		presenceData.largeImageKey = "https://i.imgur.com/lpx1Af4.png";
+	if (!showCover) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/A/Animea/assets/logo.png";
+	}
 	if (!showButtons) delete presenceData.buttons;
 
 	if (presenceData.details) presence.setActivity(presenceData);

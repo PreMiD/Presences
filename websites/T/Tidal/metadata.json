@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "The Gamerzs",
 		"id": "730142125181894657"
@@ -22,9 +22,9 @@
 		"listen.tidal.com",
 		"tidal.com"
 	],
-	"version": "3.1.11",
-	"logo": "https://i.imgur.com/i9pIvqR.png",
-	"thumbnail": "https://i.imgur.com/xNeJ8oq.png",
+	"version": "3.1.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tidal/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tidal/assets/thumbnail.png",
 	"color": "#000000",
 	"category": "music",
 	"tags": [

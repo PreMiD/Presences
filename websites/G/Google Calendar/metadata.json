@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Tellen",
 		"id": "535214819520020510"
@@ -21,9 +21,9 @@
 		"calendar.google.com",
 		"www.calendar.google.com"
 	],
-	"version": "1.2.15",
-	"logo": "https://i.imgur.com/AxEDCqw.png",
-	"thumbnail": "https://i.imgur.com/yaq6y1d.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Calendar/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Calendar/assets/thumbnail.png",
 	"color": "#4689F4",
 	"category": "other",
 	"tags": [

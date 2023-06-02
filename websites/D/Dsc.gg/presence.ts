@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/6Nl9N2E.jpeg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Dsc.gg/assets/logo.jpeg",
 		details: "Viewing 📰 page:",
 		state: "🛑 Unsupported",
 	};
@@ -40,7 +41,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${
 					document.querySelector("h2.text-lg")?.textContent
 				}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else {
 			switch (pathname) {

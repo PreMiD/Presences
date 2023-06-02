@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/tU15qL1.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Webflow/assets/logo.png",
 	};
 
 	if (document.location.hostname.includes("preview.webflow.com")) {

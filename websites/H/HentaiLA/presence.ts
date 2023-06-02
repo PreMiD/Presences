@@ -18,7 +18,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/h2Jxbzn.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/H/HentaiLA/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/")
@@ -35,7 +36,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			);
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? "Capítulo pausado"
 			: "Reproduciendo capítulo";

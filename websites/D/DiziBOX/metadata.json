@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -14,9 +14,9 @@
 		"www.dizibox.tv",
 		"diziboxx.com"
 	],
-	"version": "1.1.20",
-	"logo": "https://i.imgur.com/OAkypjp.png",
-	"thumbnail": "https://i.imgur.com/xovoUp8.png",
+	"version": "1.1.24",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/thumbnail.png",
 	"color": "#212426",
 	"category": "videos",
 	"tags": [

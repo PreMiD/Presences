@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Northernside",
 		"id": "434417514332815370"
@@ -9,9 +9,9 @@
 		"en": "A modern & fast Minecraft profile search. Find skins, capes, servers, statistics and more on LABY.net"
 	},
 	"url": "laby.net",
-	"version": "1.1.4",
-	"logo": "https://i.imgur.com/VQVUkii.png",
-	"thumbnail": "https://i.imgur.com/E6AroOr.png",
+	"version": "1.1.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LABY.net/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LABY.net/assets/thumbnail.png",
 	"color": "#000000",
 	"category": "games",
 	"tags": [

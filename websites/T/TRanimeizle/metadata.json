@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -14,9 +14,9 @@
 		"www.tranimeizle.co",
 		"tranimeizle.co"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/BnMRZ49.png",
-	"thumbnail": "https://i.imgur.com/tvxzX3S.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TRanimeizle/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TRanimeizle/assets/thumbnail.png",
 	"color": "#eb0254",
 	"category": "anime",
 	"tags": [

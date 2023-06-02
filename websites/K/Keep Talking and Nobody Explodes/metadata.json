@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "ACertainCoder",
 		"id": "320507572455079949"
@@ -16,9 +16,9 @@
 		"bombmanual.com",
 		"www.bombmanual.com"
 	],
-	"version": "2.0.5",
-	"logo": "https://i.imgur.com/rrIWGBq.png",
-	"thumbnail": "https://i.imgur.com/9ohIvQW.png",
+	"version": "2.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Keep%20Talking%20and%20Nobody%20Explodes/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Keep%20Talking%20and%20Nobody%20Explodes/assets/thumbnail.png",
 	"color": "#222327",
 	"category": "games",
 	"tags": [

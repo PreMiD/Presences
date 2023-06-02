@@ -1,5 +1,6 @@
 export const name = "Trivia Murder Party";
-export const logo = "https://i.imgur.com/zHOvymB.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/12.png";
 
 export function getPresenceData(): PresenceData {
 	const { id } = document.querySelector<HTMLDivElement>(

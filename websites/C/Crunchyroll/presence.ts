@@ -2,6 +2,12 @@ const presence = new Presence({
 	clientId: "608065709741965327",
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Crunchyroll/assets/logo.png",
+
+	OpenBook = "https://cdn.rcd.gg/PreMiD/websites/C/Crunchyroll/assets/0.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -47,14 +53,6 @@ interface iFrameData {
 		dur: number;
 		paused: boolean;
 	};
-}
-
-enum Assets {
-	Logo = "https://i.imgur.com/yeWzAvq.png",
-	OpenBook = "https://i.imgur.com/vUGLDRM.png",
-	Pause = "https://i.imgur.com/0A75vqT.png",
-	Play = "https://i.imgur.com/Dj5dekr.png",
-	Search = "https://i.imgur.com/C3CetGw.png",
 }
 
 presence.on("iFrameData", (data: iFrameData) => {

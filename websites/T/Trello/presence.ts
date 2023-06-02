@@ -7,7 +7,8 @@ let board: HTMLElement, profile: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Yncl9Qc.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Trello/assets/logo.png",
 		},
 		displayPrivateBoards = await presence.getSetting<boolean>(
 			"displayPrivateBoards"
@@ -60,7 +61,7 @@ presence.on("UpdateData", async () => {
 						).textContent;
 					}
 				}
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/c/")) {
 				if (
 					document
@@ -79,7 +80,7 @@ presence.on("UpdateData", async () => {
 							".js-board-editing-target.board-header-btn-text"
 						).textContent
 					}`;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				}
 			} else if (document.location.pathname.includes("/activity")) {
 				[, profile] = document.location.pathname.split("/", 3);
@@ -126,12 +127,12 @@ presence.on("UpdateData", async () => {
 				board = document.querySelector("#fullArticle > h1");
 				presenceData.details = "Help Center, article:";
 				presenceData.state = board.textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/category/")) {
 				board = document.querySelector("#categoryHead > h1");
 				presenceData.details = "Help Center, category:";
 				presenceData.state = board.textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				presenceData.details = "Viewing Trello's";
 				presenceData.state = "Help Center";
@@ -156,13 +157,13 @@ presence.on("UpdateData", async () => {
 				profile = document.querySelector<HTMLInputElement>("#gsc-i-id1").value;
 				presenceData.details = "Blog, searching for:";
 				presenceData.state = profile;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else if (document.location.pathname.includes("/")) {
 				board = document.querySelector("#hs_cos_wrapper_name");
 				if (board) {
 					presenceData.details = "Blog, article:";
 					presenceData.state = board.textContent;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				} else {
 					presenceData.details = "Viewing Trello's";
 					presenceData.state = "Blog page";
@@ -176,10 +177,10 @@ presence.on("UpdateData", async () => {
 				[, profile] = document.URL.split("#", 2);
 				presenceData.details = "Developers, API Docs:";
 				presenceData.state = profile;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/docs")) {
 				presenceData.details = "Developers, Reading guide";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 
 			break;

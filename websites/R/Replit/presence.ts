@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			details: "Viewing unsupported page",
-			largeImageKey: "https://i.imgur.com/jL7ohN5.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Replit/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;

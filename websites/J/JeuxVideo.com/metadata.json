@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "jordanamr",
 		"id": "621796333669449749"
@@ -11,9 +11,9 @@
 		"nl": "JVC (jeuxvideo.com) is een beroemde Franse bord- en nieuwssite over videogames."
 	},
 	"url": "www.jeuxvideo.com",
-	"version": "1.2.15",
-	"logo": "https://i.imgur.com/EnEXs1P.jpg",
-	"thumbnail": "https://i.imgur.com/VRpec9o.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/JeuxVideo.com/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/JeuxVideo.com/assets/thumbnail.png",
 	"color": "#FF582E",
 	"category": "socials",
 	"tags": [

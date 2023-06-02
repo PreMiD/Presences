@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "skyhan",
 		"id": "949705281863032872"
@@ -10,9 +10,9 @@
 		"tr": "Raven Code gelişmeyi hedefleyen olağanüstü bir topluluktur. Discord sunucumuzda birileriyle sohbet edebileceğin güzel kanallar var. Bu sunucu, iyi arkadaşlıklar kurabileceğin sıcak bir ortamdır."
 	},
 	"url": "ravencode.live",
-	"version": "2.0.4",
-	"logo": "https://i.imgur.com/74Calja.png",
-	"thumbnail": "https://i.imgur.com/LabRRNC.png",
+	"version": "2.0.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Raven%20Code/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Raven%20Code/assets/thumbnail.png",
 	"color": "#121316",
 	"category": "other",
 	"tags": [

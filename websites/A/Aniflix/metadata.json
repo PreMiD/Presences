@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -16,9 +16,9 @@
 		"vi_VN": "Aniflix cung cấp hơn 1300 bộ anime thuyết minh và phụ đề Tiếng Đức hoàn toàn miễn phí. Tập mới được phát hành mỗi ngày ngay sau ngày công chiếu của chúng tại Nhật Bản."
 	},
 	"url": "www.aniflix.cc",
-	"version": "1.3.24",
-	"logo": "https://i.imgur.com/lza7ROE.png",
-	"thumbnail": "https://i.imgur.com/Io2fHvW.png",
+	"version": "1.3.28",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Aniflix/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Aniflix/assets/thumbnail.png",
 	"color": "#ff3645",
 	"category": "anime",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Emijor",
 		"id": "466885774621540372"
@@ -12,9 +12,9 @@
 		"vi_VN": "Xem ngay hơn 1,000+ bộ anime tại AniWorld hoàn toàn miễn phí. Anime theo nhu cầu: ✓ 100% miễn phí ✓ Trực tuyến ✓ Những bộ anime độc quyền"
 	},
 	"url": "aniworld.to",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/fM3E5Iv.png",
-	"thumbnail": "https://i.imgur.com/G1wy3w7.png",
+	"version": "1.0.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/thumbnail.png",
 	"color": "#637cf9",
 	"category": "anime",
 	"tags": [

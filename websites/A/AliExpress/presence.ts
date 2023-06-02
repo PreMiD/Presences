@@ -2,11 +2,13 @@ const presence = new Presence({
 		clientId: "618569989842010122",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let item, typing: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/2LONg2Y.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AliExpress/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -71,7 +73,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Searching for:";
 				presenceData.state = item.value;
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			} else presence.setActivity();

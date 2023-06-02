@@ -46,12 +46,16 @@ const presence = new Presence({
 		"ranking.php": { details: "Viewing novels ranking" },
 	};
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/pixiv/assets/logo.png",
+}
+
 let browsingTimestamp = Math.floor(Date.now() / 1000),
 	lastPath: string;
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/D8Lf2t2.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 	const { pathname, href, hostname } = document.location,
@@ -87,7 +91,7 @@ presence.on("UpdateData", async () => {
 		case "searchuser.php":
 			presenceData.details = "Searching for user:";
 			presenceData.state = typeURL.searchParams.get("nick");
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		case "dashboard":
 			if (arrPath[2] === "works") {
@@ -139,7 +143,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case "artworks":
 			presenceData.details = "Viewing artwork:";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.state = `${document.querySelector("h1").textContent} (${
 				document.querySelector("div:nth-child(2) > a > div").textContent
 			})`;
@@ -169,7 +173,8 @@ presence.on("UpdateData", async () => {
 				presenceData = { ...presenceData, ...staticPages[arrPath[1]] };
 	}
 
-	if (hostname === "sketch.pixiv.net") presenceData.smallImageKey = "writing";
+	if (hostname === "sketch.pixiv.net")
+		presenceData.smallImageKey = Assets.Writing;
 	if (
 		(pathname === "/" || pathname.includes("/public")) &&
 		hostname === "sketch.pixiv.net"
@@ -181,7 +186,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLElement>("div.name").textContent
 		}`;
 		presenceData.buttons = [{ label: "Watch Live", url: href }];
-		presenceData.smallImageKey = "live";
+		presenceData.smallImageKey = Assets.Live;
 	} else if (pathname.includes("/@")) {
 		presenceData.details = "Sketch- Viewing user:";
 		presenceData.state = document.querySelector("div.name").textContent;

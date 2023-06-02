@@ -41,7 +41,8 @@ presence.on("UpdateData", async () => {
 			)?.content as unknown as Element
 		)?.textContent,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/mmVwCu6.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/n11.com/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
@@ -62,7 +63,7 @@ presence.on("UpdateData", async () => {
 			document.title && document.title.includes(" - n11.com")
 				? document.title.replace(" - n11.com", "")
 				: "";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.search === "?s=GOB2CGlobal") {
 		presenceData.details = "Bir sayfaya göz atıyor:";
 		presenceData.state = "Yurt Dışından Ürünler";

@@ -7,7 +7,8 @@ presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
 			details: "Other",
-			largeImageKey: "https://i.imgur.com/TS5xvXb.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 			buttons: [
 				{

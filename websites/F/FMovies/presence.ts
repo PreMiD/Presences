@@ -19,7 +19,8 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/gnXTraq.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/logo.png",
 		},
 		{ pathname, href } = document.location,
 		[buttons, image] = await Promise.all([
@@ -49,8 +50,8 @@ presence.on("UpdateData", async () => {
 				iFrameData.currTime,
 				iFrameData.duration
 			);
-			presenceData.smallImageKey = "play";
-		} else presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Play;
+		} else presenceData.smallImageKey = Assets.Pause;
 		if (buttons) {
 			presenceData.buttons = [
 				{
@@ -74,8 +75,8 @@ presence.on("UpdateData", async () => {
 				iFrameData.currTime,
 				iFrameData.duration
 			);
-			presenceData.smallImageKey = "play";
-		} else presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Play;
+		} else presenceData.smallImageKey = Assets.Pause;
 		if (buttons) {
 			presenceData.buttons = [
 				{
@@ -92,7 +93,7 @@ presence.on("UpdateData", async () => {
 		const genre = document.querySelector<HTMLHeadingElement>("section.bl h1");
 		if (genre) {
 			presenceData.details = genre.textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

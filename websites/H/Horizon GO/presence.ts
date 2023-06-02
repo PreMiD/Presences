@@ -5,7 +5,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const path = window.location.hash.substr(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/h06H563.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Horizon%20GO/assets/logo.jpg",
 		};
 
 	if (path === "action=watch") {

@@ -1,29 +1,33 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "293913134748401674",
-		"name": "Vitu™#2002"
+		"name": "Vitu™"
 	},
 	"service": "YomuMangás",
-	"description": {
-		"en": "Read portuguese mangas and doujinshis online for free without ads at YomuMangás",
-		"pt_BR": "Leia mangás e doujinshis, de graça e sem anúncios na YomuMangás."
-	},
-	"url": [
-		"yomumangas.com",
-		"dev.yomumangas.com"
+	"altnames": [
+		"YomuMangas",
+		"Yomu Mangas",
+		"Yomu Mangás"
 	],
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/RBkqiAg.png",
-	"thumbnail": "https://i.imgur.com/EqYC4Qo.png",
+	"description": {
+		"en": "YomuMangás, your virtual library of manga, manhwa, manhua, novels, doujinshi, and hentai. (Portuguese Only)",
+		"pt": "YomuMangás, sua biblioteca virtual de mangás, manhwas, manhuas, novels, doujins e hentais. (PT-BR)",
+		"pt_BR": "YomuMangás, sua biblioteca virtual de mangás, manhwas, manhuas, novels, doujins e hentais."
+	},
+	"url": "yomumangas.com",
+	"version": "1.2.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/thumbnail.png",
 	"color": "#121212",
 	"category": "anime",
 	"tags": [
-		"anime",
+		"reader",
 		"manga",
-		"doushinji",
-		"geek",
-		"nsfw"
+		"manhwa",
+		"manhua",
+		"doujin",
+		"yomu"
 	],
 	"settings": [
 		{
@@ -33,50 +37,8 @@
 			"value": false
 		},
 		{
-			"id": "images",
-			"title": "Mostrar Imagens (Avatars & Covers)",
-			"icon": "fad fa-images",
-			"value": true,
-			"if": {
-				"privacy": false
-			}
-		},
-		{
-			"id": "manga",
-			"title": "Mostrar Manga",
-			"icon": "fad fa-book",
-			"value": true,
-			"if": {
-				"privacy": false
-			}
-		},
-		{
-			"id": "chapter",
-			"title": "Mostrar Capítulo",
-			"icon": "fad fa-clone",
-			"value": true,
-			"if": {
-				"privacy": false
-			}
-		},
-		{
-			"id": "user",
-			"title": "Mostrar Usuário",
-			"icon": "fad fa-user",
-			"value": true,
-			"if": {
-				"privacy": false
-			}
-		},
-		{
-			"id": "timestamp",
-			"title": "Mostrar Timestamp",
-			"icon": "fad fa-stopwatch",
-			"value": true
-		},
-		{
-			"id": "adult",
-			"title": "Mostrar NSFW (Nome)",
+			"id": "nsfw",
+			"title": "Mostrar NSFW",
 			"icon": "fad fa-exclamation-triangle",
 			"value": false,
 			"if": {

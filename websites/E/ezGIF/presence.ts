@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/lu1BuFT.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/ezGIF/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		pathSplit = window.location.pathname.split("/").slice(1),

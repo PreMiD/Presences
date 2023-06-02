@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Cairo",
 		"id": "208105877838888960"
@@ -13,9 +13,9 @@
 		"emojipedia.org",
 		"blog.emojipedia.org"
 	],
-	"version": "1.2.15",
-	"logo": "https://i.imgur.com/3ogkQzN.png",
-	"thumbnail": "https://i.imgur.com/H6zazLW.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Emojipedia/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Emojipedia/assets/thumbnail.png",
 	"color": "#EE7300",
 	"category": "other",
 	"tags": [

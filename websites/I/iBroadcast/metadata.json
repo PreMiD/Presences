@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "वाह्य",
 		"id": "819696394180100106"
@@ -10,9 +10,9 @@
 	},
 	"url": "www.ibroadcast.com",
 	"regExp": "(beta|media|edit).ibroadcast.com",
-	"version": "1.1.10",
-	"logo": "https://i.imgur.com/o9rFoCG.png",
-	"thumbnail": "https://i.imgur.com/HkLnasC.jpg",
+	"version": "1.1.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/iBroadcast/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/iBroadcast/assets/thumbnail.jpg",
 	"color": "#53abee",
 	"category": "music",
 	"tags": [

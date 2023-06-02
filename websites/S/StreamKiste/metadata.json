@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Cascade",
 		"id": "442612628104151040"
@@ -12,9 +12,9 @@
 	},
 	"url": "streamkiste.tv",
 	"regExp": "([a-z0-9-]+[.])*streamkiste([.][a-z]+)+[/]",
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/bdGvqBo.png",
-	"thumbnail": "https://i.imgur.com/TrhRNwT.jpg",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/thumbnail.jpg",
 	"color": "#4DB8C9",
 	"category": "videos",
 	"tags": [

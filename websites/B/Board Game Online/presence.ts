@@ -10,6 +10,10 @@ const presence = new Presence({
 		else return;
 	};
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Online/assets/logo.png",
+}
+
 function setObject(path: string) {
 	switch (path) {
 		case "/": {
@@ -104,7 +108,7 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/L6BgeAa.png",
+			largeImageKey: Assets.Logo,
 		},
 		path = location.pathname,
 		query = location.search,
@@ -142,7 +146,7 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browse;
 		}
 		presence.setActivity(presenceData);

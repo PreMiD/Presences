@@ -81,7 +81,8 @@ presence.on("UpdateData", async () => {
 	presence.setActivity({
 		details,
 		state,
-		largeImageKey: "https://i.imgur.com/gg4LsW0.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/CoolMathGames/assets/logo.png",
 		startTimestamp: elapsed,
 	});
 });

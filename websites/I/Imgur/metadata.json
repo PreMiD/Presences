@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -20,9 +20,9 @@
 		"apidocs.imgur.com",
 		"community.imgur.com"
 	],
-	"version": "1.1.15",
-	"logo": "https://i.imgur.com/eZf3wsO.png",
-	"thumbnail": "https://i.imgur.com/vTLBJYm.jpg",
+	"version": "1.1.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Imgur/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Imgur/assets/thumbnail.jpg",
 	"color": "#89c624",
 	"category": "other",
 	"tags": [

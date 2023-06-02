@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/O06B09v.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20ID/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ hostname, href } = document.location,
@@ -28,7 +29,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				'[data-testid="page.title"]'
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (hostname === "discord.id") {
 		if (privacy) presenceData.details = "Browsing Lookup";
@@ -50,7 +51,7 @@ presence.on("UpdateData", async () => {
 					}
 					presenceData.largeImageKey =
 						document.querySelector('[class="avyimg"]')?.getAttribute("src") ??
-						"https://i.imgur.com/O06B09v.png";
+						"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20ID/assets/logo.png";
 				}
 				if (idAndTag) {
 					if (!username) presenceData.details = "Viewing IDs";

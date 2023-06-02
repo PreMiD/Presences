@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -9,9 +9,9 @@
 		"en": "CritiqueBrainz is a repository for Creative Commons licensed music reviews. Here you can read what other people have written about an album or event and write your own review!"
 	},
 	"url": "critiquebrainz.org",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/LG31f5s.png",
-	"thumbnail": "https://i.imgur.com/7ACWqDu.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CritiqueBrainz/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CritiqueBrainz/assets/thumbnail.png",
 	"color": "#36b5b2",
 	"category": "music",
 	"tags": [

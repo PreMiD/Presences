@@ -2,11 +2,12 @@ const presence = new Presence({
 		clientId: "634032819915456552",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: HTMLElement, title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ATYXE8g.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/HLTV/assets/logo.png",
 	};
 
 	if (document.location.hostname === "www.hltv.org") {
@@ -17,7 +18,7 @@ presence.on("UpdateData", async () => {
 				"body > div.bgPadding > div > div.colCon > div.contentCol > article > h1"
 			);
 			presenceData.state = title.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/profile/")) {
 			title = document.querySelector(
 				"body > div.bgPadding > div > div.colCon > div.contentCol > div > div.top-info > div > div.info.col > div.headline"
@@ -31,7 +32,7 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.details = "Reading forum thread:";
 				presenceData.state = title.textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				title = document.querySelector(
 					"body > div.bgPadding > div > div.colCon > div.contentCol > div > span:nth-child(2)"
@@ -111,7 +112,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = "Searching for:";
 			presenceData.state = search.value;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

@@ -27,7 +27,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/IJ9ufN3.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Meus%20Animes/assets/logo.png",
 		},
 		path = document.location.pathname;
 
@@ -65,7 +66,7 @@ presence.on("UpdateData", async () => {
 						Math.floor(video.currentTime),
 						Math.floor(video.duration)
 					);
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Assistindo";
 			}
 		}

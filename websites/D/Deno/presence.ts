@@ -3,12 +3,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
-	Logo = "https://i.imgur.com/LF4eDYG.png",
-	NewsLogo = "https://i.imgur.com/aBbfq11.png",
-	MerchLogo = "https://i.imgur.com/GOPd2Ep.png",
-	SearchImage = "https://i.imgur.com/oGQtnIY.png",
-	ReadingImage = "https://i.imgur.com/nese1O7.png",
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/logo.png",
+	NewsLogo = "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/0.png",
+	MerchLogo = "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/1.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -34,7 +32,7 @@ presence.on("UpdateData", async () => {
 			if (search?.value) {
 				presenceData.details = "Searching for";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = Assets.SearchImage;
+				presenceData.smallImageKey = Assets.Search;
 			} else if (pathname.includes("/manual")) {
 				presenceData.buttons = [
 					{
@@ -43,8 +41,8 @@ presence.on("UpdateData", async () => {
 					},
 				];
 				presenceData.state = "Manual";
-				presenceData.smallImageKey = "reading";
-				presenceData.smallImageText = Assets.ReadingImage;
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageText = "Reading";
 				presenceData.details =
 					document.querySelector('[class="anchor"]').parentElement.textContent;
 			} else {
@@ -61,8 +59,8 @@ presence.on("UpdateData", async () => {
 							},
 						];
 						presenceData.details = "Reading the blog";
-						presenceData.smallImageKey = "reading";
-						presenceData.smallImageText = Assets.ReadingImage;
+						presenceData.smallImageKey = Assets.Reading;
+						presenceData.smallImageText = "Reading";
 						break;
 					}
 					case "x": {
@@ -79,8 +77,8 @@ presence.on("UpdateData", async () => {
 								.querySelector("title")
 								?.textContent.split("|")[0];
 						} else {
-							presenceData.smallImageKey = "reading";
-							presenceData.smallImageText = Assets.ReadingImage;
+							presenceData.smallImageKey = Assets.Reading;
+							presenceData.smallImageText = "Reading";
 							presenceData.details = "Reading about third party modules";
 						}
 						break;
@@ -114,8 +112,8 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
-					presenceData.smallImageKey = "reading";
-					presenceData.smallImageText = Assets.ReadingImage;
+					presenceData.smallImageKey = Assets.Reading;
+					presenceData.smallImageText = "Reading";
 					if (document.querySelector("article")) {
 						presenceData.details = "Reading an article about";
 						presenceData.state =
@@ -142,8 +140,8 @@ presence.on("UpdateData", async () => {
 									url: href,
 								},
 							];
-							presenceData.smallImageKey = "reading";
-							presenceData.smallImageText = Assets.ReadingImage;
+							presenceData.smallImageKey = Assets.Reading;
+							presenceData.smallImageText = "Reading";
 							presenceData.details = "Reading an article about";
 							presenceData.state =
 								document.querySelector("article").firstElementChild.textContent;

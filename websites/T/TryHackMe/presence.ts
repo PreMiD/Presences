@@ -3,9 +3,11 @@ const presence = new Presence({
 		//Enable use and detection of media key presses
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/gqL7pDD.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TryHackMe/assets/logo.png",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let customData = false;
 
 presence.on("UpdateData", async () => {
@@ -25,7 +27,8 @@ presence.on("UpdateData", async () => {
 			presence.setActivity({
 				details: "Completing room:",
 				state: title.textContent,
-				largeImageKey: "https://i.imgur.com/gqL7pDD.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/T/TryHackMe/assets/logo.png",
 				startTimestamp: browsingTimestamp,
 			});
 		} else presenceData.details = "Looking at rooms!";

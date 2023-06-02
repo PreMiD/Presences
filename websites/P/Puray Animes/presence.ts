@@ -2,10 +2,12 @@ const presence = new Presence({
 		clientId: "972246349917610054",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", () => {
 	const { pathname } = window.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/8MP205p.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/Puray%20Animes/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 	if (document.querySelector("input[id^=headlessui]"))

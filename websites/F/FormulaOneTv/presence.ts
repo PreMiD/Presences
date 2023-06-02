@@ -96,7 +96,7 @@ async function setWatchingVideoActivity(
 		"true"
 	) {
 		presenceData.startTimestamp = getEpochInSeconds();
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText =
 			videoMetadata.contentSubtype === "LIVE"
 				? "Watching Live"
@@ -116,7 +116,7 @@ async function setWatchingVideoActivity(
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 
-		presenceData.smallImageKey = "pause";
+		presenceData.smallImageKey = Assets.Pause;
 		presenceData.smallImageText = (await strings).pause;
 	}
 }
@@ -127,13 +127,14 @@ async function setBrowsingActivity(presenceData: PresenceData) {
 
 	presenceData.details = "Browsing...";
 	presenceData.startTimestamp = getEpochInSeconds();
-	presenceData.smallImageKey = "search";
+	presenceData.smallImageKey = Assets.Search;
 	presenceData.smallImageText = (await strings).browsing;
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/opuHbca.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/FormulaOneTv/assets/logo.png",
 	};
 	let contentId = "";
 

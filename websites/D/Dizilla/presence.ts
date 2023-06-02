@@ -44,7 +44,8 @@ presence.on("UpdateData", async () => {
 			"div.content > div > div.top-sticky-content span.text-white.text-small"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/EqxZ0d3.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dizilla/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
@@ -78,7 +79,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Bir şey arıyor:";
 			presenceData.state =
 				query[0].toUpperCase() + query.slice(1).toLowerCase();
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else {
 			presenceData.details = "Bir sayfaya göz atıyor:";
 			presenceData.state = "Arşiv";
@@ -100,7 +101,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = showName?.textContent || "Bilinmeyen Dizi";
 		presenceData.state = episode?.textContent || "Bilinmeyen Bölüm";
 
-		presenceData.smallImageKey = video?.paused ? "pause" : "play";
+		presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video?.paused
 			? (await strings).pause
 			: (await strings).play;

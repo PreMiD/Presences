@@ -46,7 +46,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timeLeft"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Vks89dr.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/logo.png",
 			startTimestamp: browsingStamp,
 		};
 
@@ -292,14 +293,14 @@ presence.on("UpdateData", async () => {
 									)
 									.textContent.split(":");
 								if (player.isPlaying) {
-									presenceData.smallImageKey = "playing";
+									presenceData.smallImageKey = Assets.Play;
 									presenceData.smallImageText = "Playing";
 									presenceData.endTimestamp =
 										Math.floor(Date.now() / 1000) +
 										(presence.timestampFromFormat(player.total) -
 											presence.timestampFromFormat(player.elapsed));
 								} else {
-									presenceData.smallImageKey = "paused";
+									presenceData.smallImageKey = Assets.Pause;
 									presenceData.smallImageText = "Paused";
 								}
 							} else if (
@@ -369,10 +370,10 @@ presence.on("UpdateData", async () => {
 								}
 								if (video.duration !== 0) {
 									if (video.paused) {
-										presenceData.smallImageKey = "paused";
+										presenceData.smallImageKey = Assets.Pause;
 										presenceData.smallImageText = "Paused";
 									} else {
-										presenceData.smallImageKey = "playing";
+										presenceData.smallImageKey = Assets.Play;
 										presenceData.smallImageText = "Playing";
 										presenceData.startTimestamp = timestamps[0];
 										presenceData.endTimestamp = timestamps[1];
@@ -381,10 +382,10 @@ presence.on("UpdateData", async () => {
 									if (
 										document.querySelector<HTMLMediaElement>("video").paused
 									) {
-										presenceData.smallImageKey = "paused";
+										presenceData.smallImageKey = Assets.Pause;
 										presenceData.smallImageText = "Paused";
 									} else {
-										presenceData.smallImageKey = "playing";
+										presenceData.smallImageKey = Assets.Play;
 										presenceData.smallImageText = "Playing";
 										presenceData.startTimestamp = timestamps[0];
 										presenceData.endTimestamp = timestamps[1];
@@ -531,7 +532,7 @@ presence.on("UpdateData", async () => {
 								document.querySelector<HTMLImageElement>(
 									".pnl-component.aircraft-image > a > img"
 								).src !==
-									"https://www.flightradar24.com/static/images/jp-promo.jpg"
+									"https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/0.jpg"
 							) {
 								presenceData.largeImageKey =
 									document.querySelector<HTMLImageElement>(

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "B.N",
 		"id": "259669086160551937"
@@ -9,9 +9,9 @@
 		"en": "Dribbble is where designers gain inspiration, feedback, community, and jobs and is your best resource to discover and connect with designers worldwide."
 	},
 	"url": "dribbble.com",
-	"version": "1.0.7",
-	"logo": "https://i.imgur.com/lZ0G2SL.png",
-	"thumbnail": "https://i.imgur.com/BfP9AEk.png",
+	"version": "1.0.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dribbble/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dribbble/assets/thumbnail.png",
 	"color": "#ea4c89",
 	"category": "other",
 	"tags": [

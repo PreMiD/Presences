@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/4UOKOMH.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/Novelfull/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		{ hostname, pathname, href } = window.location,
@@ -51,7 +52,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector('[class="title"]').textContent
 		}`;
 		presenceData.buttons = [{ label: "View Novel", url: href }];
-		presenceData.smallImageKey = "read";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);

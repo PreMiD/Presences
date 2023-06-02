@@ -21,13 +21,10 @@ async function capitalizeFirstLetter(string: string) {
 	const stringTrimmed = string.trim();
 	return stringTrimmed.charAt(0).toUpperCase() + stringTrimmed.slice(1);
 }
-enum Assets {
-	Loading = "https://i.imgur.com/uh6vSQm.gif",
-	LogoDiscoveryPlus = "https://i.imgur.com/BQ1MBwk.png",
-	LogoDiscovery = "https://i.imgur.com/ir2Ysr1.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
+const enum Assets {
+	Loading = "https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/0.gif",
+	LogoDiscoveryPlus = "https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/1.png",
+	LogoDiscovery = "https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/logo.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
@@ -152,7 +149,7 @@ presence.on("UpdateData", async () => {
 							?.getAttribute("src");
 						if (video && !isNaN(video.duration)) {
 							presenceData.smallImageKey = video.paused
-								? Assets.Paused
+								? Assets.Pause
 								: Assets.Play;
 							presenceData.smallImageText = video.paused
 								? strings.paused
@@ -257,7 +254,7 @@ presence.on("UpdateData", async () => {
 									presenceData.smallImageKey = Assets.Loading;
 								} else {
 									presenceData.smallImageKey = video.paused
-										? Assets.Paused
+										? Assets.Pause
 										: Assets.Play;
 									presenceData.smallImageText = video.paused
 										? strings.paused

@@ -37,7 +37,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/1dBCcdI.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BeatSaver/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -52,7 +53,7 @@ presence.on("UpdateData", async () => {
 				? `${preview.gameMode} ${preview.difficulty}`
 				: `${preview.customDifficulty}`;
 		if (preview.playing) {
-			presenceData.smallImageKey = "playing";
+			presenceData.smallImageKey = Assets.Play;
 			if (preview.duration) {
 				const timestamps = presence.getTimestamps(
 					presence.timestampFromFormat(preview.currentTime),
@@ -62,7 +63,7 @@ presence.on("UpdateData", async () => {
 			}
 			presenceData.smallImageText = "Playing";
 		} else {
-			presenceData.smallImageKey = "paused";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 		}
 		if (document.location.href.includes("/maps/")) {

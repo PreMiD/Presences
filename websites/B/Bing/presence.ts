@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/vyaJqJh.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Bing/assets/logo.png",
 	};
 
 	// Get search query from HTML form input.
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = setTimestamp();
 	} else if (document.location.href.includes("?q=")) {
 		presenceData.startTimestamp = setTimestamp();
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		if (document.location.href.includes("/images/"))
 			presenceData.details = await handleFormatting("imageSearch");

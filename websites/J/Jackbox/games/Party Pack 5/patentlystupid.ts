@@ -1,5 +1,6 @@
 export const name = "Patently Stupid";
-export const logo = "https://i.imgur.com/yGEE0Aw.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/18.png";
 
 export function getPresenceData({
 	playerState,

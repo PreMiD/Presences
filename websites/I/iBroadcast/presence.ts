@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/o9rFoCG.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/I/iBroadcast/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ hostname } = document.location;
@@ -31,7 +32,7 @@ presence.on("UpdateData", async () => {
 
 			if (title && artist) {
 				presenceData.details = `${title.textContent} by ${artist.textContent}`;
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Listening";
 			}
 			if (currentTime && duration) {

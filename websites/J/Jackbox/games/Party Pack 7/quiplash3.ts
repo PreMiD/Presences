@@ -1,5 +1,6 @@
 export const name = "Quiplash 3";
-export const logo = "https://i.imgur.com/Jds4R56.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/31.png";
 
 export function getPresenceData({
 	playerState,

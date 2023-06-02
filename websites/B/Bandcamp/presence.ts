@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "640561280800915456",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let min: number,
 	sec: number,
 	time: number,
@@ -11,7 +12,8 @@ let min: number,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/FozA4oY.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/Bandcamp/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		cover = await presence.getSetting<boolean>("cover");
@@ -88,7 +90,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 
 			if (cover) {
@@ -122,7 +124,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#content > div:nth-child(2) > h2"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else {
 			presenceData.details = "Bandcamp Daily";
 			presenceData.state = "Browsing...";
@@ -173,7 +175,7 @@ presence.on("UpdateData", async () => {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(time, time2);
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Playing";
 		if (cover) {
 			presenceData.largeImageKey =
@@ -242,7 +244,7 @@ presence.on("UpdateData", async () => {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(time, time2);
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Playing";
 		if (cover) {
 			presenceData.largeImageKey =

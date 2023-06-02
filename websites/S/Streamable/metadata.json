@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Lacking",
 		"id": "132693143173857281"
@@ -10,9 +10,9 @@
 		"nl": "Snelle en eenvoudige videostreaming voor bloggers en uitgevers."
 	},
 	"url": "streamable.com",
-	"version": "1.2.15",
-	"logo": "https://i.imgur.com/D38h5SR.png",
-	"thumbnail": "https://i.imgur.com/ErpMpF3.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Streamable/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Streamable/assets/thumbnail.png",
 	"color": "#0f90fa",
 	"category": "videos",
 	"tags": [

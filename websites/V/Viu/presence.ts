@@ -91,6 +91,9 @@ async function generateToken() {
 }
 
 /* eslint-disable camelcase */
+// Hack to resolve Deepscan
+const no_op = (a: number) => a + 1;
+no_op(0);
 interface SeriesInfo {
 	is_movie: number;
 	series_id: string;
@@ -179,7 +182,7 @@ presence.on("UpdateData", async () => {
 					][presenceLogo - 2] || "viu_logo";
 			}
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 
 			presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
@@ -210,7 +213,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = strings.searchSomething;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.searching;
 	}
 

@@ -7,9 +7,11 @@ const presence = new Presence({
 		search: "general.searching",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/UraU4Hh.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/Click%20Jogos/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -20,7 +22,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/busca/")) {
 		presenceData.details = "Pesquisando por:";
 		presenceData.state = document.querySelector("input").value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).search;
 	} else if (document.location.pathname.includes("/jogos/")) {
 		if (

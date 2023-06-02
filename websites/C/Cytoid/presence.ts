@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 				presenceData.endTimestamp = presence.getTimestampsfromMedia(
 					previewedCard.querySelector("audio")
 				)[1];
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Playing Preview";
 				presenceData.buttons = [
 					{
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 			if (!document.querySelector("audio").paused) {
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Playing Preview";
 				presenceData.endTimestamp = presence.getTimestampsfromMedia(
 					document.querySelector("audio")
@@ -154,7 +154,10 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (!cover) presenceData.largeImageKey = "https://i.imgur.com/3K3skPd.png";
+	if (!cover) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/C/Cytoid/assets/logo.png";
+	}
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	if (presenceData.details) presence.setActivity(presenceData);

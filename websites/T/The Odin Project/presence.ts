@@ -2,9 +2,11 @@ const presence = new Presence({
 		clientId: "1013489969379152022",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/gtBvHQH.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/The%20Odin%20Project/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		lesson = document.querySelector<HTMLHeadingElement>(

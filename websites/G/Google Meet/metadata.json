@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Drull",
 		"id": "244953147154366464"
@@ -13,9 +13,9 @@
 	},
 	"url": "meet.google.com",
 	"regExp": "meet[.]google([.][a-z]+)+[/]",
-	"version": "1.2.15",
-	"logo": "https://i.imgur.com/LyrRnRS.png",
-	"thumbnail": "https://i.imgur.com/6BRZ63d.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Meet/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Meet/assets/thumbnail.png",
 	"color": "#308574",
 	"category": "socials",
 	"tags": [

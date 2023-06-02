@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "MMDDKK",
 		"id": "259984855503339520"
@@ -10,9 +10,9 @@
 		"vi_VN": "AnimeSuge là trang web phát anime miễn phí cho phép bạn xem anime với phụ đề hoặc thuyết minh Tiếng Anh."
 	},
 	"url": "animesuge.to",
-	"version": "1.1.11",
-	"logo": "https://i.imgur.com/TQPRXrN.png",
-	"thumbnail": "https://i.imgur.com/stBappT.png",
+	"version": "1.1.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeSuge/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeSuge/assets/thumbnail.png",
 	"color": "#161616",
 	"category": "anime",
 	"tags": [

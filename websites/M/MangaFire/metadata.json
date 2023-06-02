@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "135058085386387457",
 		"name": "Extiriority"
@@ -13,9 +13,9 @@
 		"mangafire.to",
 		"www.mangafire.to"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/356Spon.png",
-	"thumbnail": "https://i.imgur.com/5m8Ddgq.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/thumbnail.png",
 	"color": "#007bff",
 	"category": "anime",
 	"tags": [

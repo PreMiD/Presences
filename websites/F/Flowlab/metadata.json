@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "rezarg",
 		"id": "383154096649142272"
@@ -9,9 +9,9 @@
 		"en": "Flowlab is an online game creator. Make your own games to share with friends."
 	},
 	"url": "flowlab.io",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/XpyDbbv.png",
-	"thumbnail": "https://i.imgur.com/gAHmasT.jpg",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Flowlab/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Flowlab/assets/thumbnail.jpg",
 	"color": "#88e6ec",
 	"category": "games",
 	"tags": [

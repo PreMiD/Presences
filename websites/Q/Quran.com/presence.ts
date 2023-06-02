@@ -2,6 +2,7 @@ const presence = new Presence({
 		clientId: "969064871310282813",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 function getElementByXpath(path: string) {
 	return document.evaluate(
 		path,
@@ -13,7 +14,8 @@ function getElementByXpath(path: string) {
 }
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/9qpIurh.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Q/Quran.com/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location;

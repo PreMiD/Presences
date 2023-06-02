@@ -15,7 +15,8 @@ presence.on("UpdateData", async () => {
 			"#root > div.story.story-container > h1"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/SyFFEUw.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/HackerNoon/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 

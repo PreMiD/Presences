@@ -9,7 +9,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/1HHTwaN.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/OpenSea/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search, href, hostname } = document.location,

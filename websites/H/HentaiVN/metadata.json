@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "nayumi#1111",
 		"id": "895438058621665331"
@@ -14,9 +14,9 @@
 		"hentaivn.site",
 		"hentaivn.run"
 	],
-	"version": "2.1.0",
-	"logo": "https://i.imgur.com/Ihee8C2.png",
-	"thumbnail": "https://i.imgur.com/TkWSqnL.png",
+	"version": "2.1.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiVN/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiVN/assets/thumbnail.png",
 	"color": "#299CEE",
 	"category": "anime",
 	"tags": [

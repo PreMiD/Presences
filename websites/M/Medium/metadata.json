@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -12,9 +12,9 @@
 	},
 	"url": "medium.com",
 	"regExp": "([a-z0-9|-]+[.])*medium[.]com[/]",
-	"version": "1.2.8",
-	"logo": "https://i.imgur.com/7bfJ5VM.png",
-	"thumbnail": "https://i.imgur.com/VozjgCY.png",
+	"version": "1.2.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Medium/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Medium/assets/thumbnail.png",
 	"color": "#141210",
 	"category": "socials",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Eren",
 		"id": "478937019758673931"
@@ -10,9 +10,9 @@
 		"nl": "Dank Memer zit boordevol memes, leuke en unieke ervaringen! Of je nu gokt, steelt van je vrienden, de laatste hete memes bekijkt, je vrienden roostert, je eigen memes maakt of een van onze andere 260+ commando's gebruikt."
 	},
 	"url": "dankmemer.lol",
-	"version": "1.2.14",
-	"logo": "https://i.imgur.com/MovN0IN.png",
-	"thumbnail": "https://i.imgur.com/jHWdjyU.png",
+	"version": "1.2.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dank%20Memer/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dank%20Memer/assets/thumbnail.png",
 	"color": "#555C56",
 	"category": "other",
 	"tags": [

@@ -16,9 +16,8 @@ const presence = new Presence({
 	},
 	slideshow = new Slideshow();
 
-enum Assets {
-	Logo = "https://i.imgur.com/oo2fig0.png",
-	Reading = "https://i.imgur.com/53N4eY6.png",
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Coup%20Critique/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

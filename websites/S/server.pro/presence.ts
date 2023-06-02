@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/EhKZen3.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/server.pro/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -23,7 +24,7 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Server Panel";
 			presenceData.state = "Server Details";
-			presenceData.smallImageKey = "viewing";
+			presenceData.smallImageKey = Assets.Viewing;
 		}
 		if (
 			document.querySelector(
@@ -32,7 +33,7 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Server Panel";
 			presenceData.state = "VPS Details";
-			presenceData.smallImageKey = "viewing";
+			presenceData.smallImageKey = Assets.Viewing;
 		}
 		if (
 			document.querySelector(
@@ -41,7 +42,7 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Server Panel:";
 			presenceData.state = "VPS Configuration";
-			presenceData.smallImageKey = "viewing";
+			presenceData.smallImageKey = Assets.Viewing;
 		}
 		if (
 			document.querySelector(
@@ -59,17 +60,17 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/files")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Server Files";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/console")) {
 		presenceData.details = "Server Panel:";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 		presenceData.state = "Server Console";
 	} else if (document.location.pathname.includes("/shell")) {
 		presenceData.details = "Server Panel Shell";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/players")) {
 		presenceData.details = "Server Panel:";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 		presenceData.state = "Server Players";
 	} else if (document.location.pathname.includes("/plugins")) {
 		presenceData.details = "Server Panel:";
@@ -81,7 +82,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/worlds")) {
 		presenceData.details = "Server Panel";
 		presenceData.state = "Viewing worlds";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/server-page")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Editing a server";
@@ -89,23 +90,23 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/ftp")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Viewing FTP Details";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/mysql")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Viewing MySQL Details";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/backups")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Viewing Server Backups";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/error-log")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Viewing Error Logs";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/reinstall")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Reinstalling Page";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/create-service")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Creating a Service";
@@ -116,30 +117,30 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/reset")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Viewing Reset Page";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/account")) {
 		presenceData.state = "Editing Account";
 		presenceData.smallImageKey = "editing";
 	} else if (document.location.pathname.includes("/support")) {
 		presenceData.smallImageText = "Viewing Support Page";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/contact"))
 		presenceData.details = "Contacting Support";
 	else if (document.location.pathname.includes("/about"))
 		presenceData.details = "Viewing About Us";
 	else if (document.location.pathname.includes("/pricing")) {
 		presenceData.state = "Viewing Pricing Plans";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/create"))
 		presenceData.details = "Creating a server";
 	else if (document.location.pathname.includes("/jobs")) {
 		presenceData.state = "Viewing Jobs Page";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/terms")) {
 		presenceData.state = "Terms of Service";
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/hytale")) {
-		presenceData.smallImageKey = "viewing";
+		presenceData.smallImageKey = Assets.Viewing;
 		presenceData.state = "Hytale Server Hosting";
 	}
 	if (!presenceData.details) presence.setActivity();

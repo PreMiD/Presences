@@ -24,7 +24,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Tnk23WJ.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/Vostfree/assets/logo.png",
 			startTimestamp: browsingStamp,
 		},
 		[privacy, button] = await Promise.all([
@@ -49,7 +50,7 @@ presence.on("UpdateData", async () => {
 				url: document.location.href,
 			},
 		];
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "En pause" : "En cours";
 
 		if (!button) delete presenceData.buttons;
@@ -65,32 +66,32 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Recherche :";
 		presenceData.state =
 			document.querySelector<HTMLInputElement>("#searchinput").value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Recherche";
 	} else if (path.includes("/anime-vf")) {
 		presenceData.details = "Navigue les animes VF";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Recherche";
 	} else if (path.includes("/animes-vostfr")) {
 		presenceData.details = "Navigue les animes VOSTFR";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Recherche";
 	} else if (path.includes("/films-vf-vostfr")) {
 		presenceData.details = "Navigue les films";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Recherche";
 	} else if (path.includes("/newposts")) {
 		presenceData.details = "Page des nouveautés";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Recherche";
 	} else if (path.includes("/info-streaming.html")) {
 		presenceData.details = "Explore la page F.A.Q";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Recherche";
 	} else if (path.includes("/genre")) {
 		presenceData.details = "Navigue les animes";
 		presenceData.state = `de type "${getGenreTitle(path)}"`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Recherche";
 	} else presenceData.details = "Page d'accueil";
 

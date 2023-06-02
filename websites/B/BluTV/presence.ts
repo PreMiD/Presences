@@ -47,7 +47,8 @@ presence.on("iFrameData", async (msg: Data | null) => {
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/THrSw57.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BluTV/assets/logo.png",
 		};
 
 	if (!path.includes("izle")) {
@@ -68,7 +69,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (video) {
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).paused
 				: (await strings).playing;

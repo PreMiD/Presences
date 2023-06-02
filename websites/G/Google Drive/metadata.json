@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -21,9 +21,9 @@
 	},
 	"url": "drive.google.com",
 	"regExp": "drive[.]google([.][a-z]+)+[/]",
-	"version": "1.6.3",
-	"logo": "https://i.imgur.com/WdNIJe8.png",
-	"thumbnail": "https://i.imgur.com/mZdtUw5.png",
+	"version": "1.6.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Drive/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Drive/assets/thumbnail.png",
 	"color": "#3aa154",
 	"category": "other",
 	"tags": [

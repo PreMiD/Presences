@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "a＠a",
 		"id": "405028899798384640"
@@ -10,9 +10,9 @@
 		"vi_VN": "PreMiD presence dành cho Backpack.tf! Backpack.tf là dịch vụ chính cập nhật giá trị vật phẩm mới nhất của trò chơi TF2!"
 	},
 	"url": "backpack.tf",
-	"version": "2.0.7",
-	"logo": "https://i.imgur.com/YtdujIW.png",
-	"thumbnail": "https://i.imgur.com/uQCICM4.png",
+	"version": "2.0.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Backpack.tf/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Backpack.tf/assets/thumbnail.png",
 	"color": "#757575",
 	"category": "other",
 	"tags": [

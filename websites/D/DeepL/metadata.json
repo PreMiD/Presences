@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "CRUGG",
 		"id": "228965621478588416"
@@ -11,9 +11,9 @@
 		"nl": "Met DeepL kunt u teksten naar andere talen vertalen met behulp van kunstmatige intelligentie. Een van de meest bijzondere kenmerken ervan is dat u op een woord kunt klikken om het te vervangen door een ander woord waarvan u denkt dat het beter past. Al met al is DeepL best handig voor het snel vertalen van grote teksten naar een taal die u al kent, maar niet te veel, voor talen die u niet kent."
 	},
 	"url": "www.deepl.com",
-	"version": "1.1.17",
-	"logo": "https://i.imgur.com/Jkb5SDd.png",
-	"thumbnail": "https://i.imgur.com/HEs5MAz.png",
+	"version": "1.1.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DeepL/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DeepL/assets/thumbnail.png",
 	"color": "#042B48",
 	"category": "other",
 	"tags": [

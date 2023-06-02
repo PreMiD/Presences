@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "unicornbetrayal",
 		"id": "377284540420587541"
@@ -9,9 +9,9 @@
 		"en": "Play Minesweeper online with over 5 million players from around the world!"
 	},
 	"url": "minesweeper.online",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/IVV8LJg.png",
-	"thumbnail": "https://i.imgur.com/ZsExngi.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Minesweeper/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Minesweeper/assets/thumbnail.png",
 	"color": "#666666",
 	"category": "games",
 	"tags": [

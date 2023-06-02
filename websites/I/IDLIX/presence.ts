@@ -1,7 +1,8 @@
 const presence = new Presence({
 		clientId: "1052119362015866882",
 	}),
-	browsingTimeStamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -20,12 +21,9 @@ async function getStrings() {
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
-enum Assets {
-	Ad = "https://i.imgur.com/woctRCn.png",
-	Logo = "https://i.imgur.com/nolTGp7.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
+const enum Assets {
+	Ad = "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/0.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/logo.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
@@ -60,7 +58,7 @@ presence.on("UpdateData", async () => {
 		return;
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
-			startTimestamp: browsingTimeStamp,
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
 		[newLang, privacy, buttons, covers] = await Promise.all([
@@ -133,7 +131,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = Assets.Ad;
 					presenceData.smallImageText = "Watching an ad";
 				} else {
-					presenceData.smallImageKey = paused ? Assets.Paused : Assets.Play;
+					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 					presenceData.smallImageText = paused ? strings.paused : strings.play;
 				}
 				if (!paused) {
@@ -188,7 +186,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = Assets.Ad;
 					presenceData.smallImageText = "Watching an ad";
 				} else {
-					presenceData.smallImageKey = paused ? Assets.Paused : Assets.Play;
+					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 					presenceData.smallImageText = paused ? strings.paused : strings.play;
 				}
 				if (!paused) {

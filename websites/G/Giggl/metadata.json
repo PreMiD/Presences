@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "CRUGG",
 		"id": "228965621478588416"
@@ -19,9 +19,9 @@
 		"canary.giggl.app",
 		"status.giggl.app"
 	],
-	"version": "2.0.9",
-	"logo": "https://i.imgur.com/k1TnUGL.jpg",
-	"thumbnail": "https://i.imgur.com/i5j8A6k.png",
+	"version": "2.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Giggl/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Giggl/assets/thumbnail.png",
 	"color": "#FF0099",
 	"category": "videos",
 	"tags": [

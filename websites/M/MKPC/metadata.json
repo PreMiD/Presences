@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Liechtenstein",
 		"id": "471586634899652611"
@@ -17,9 +17,9 @@
 		"nl": "Een computerversie van het beroemde racespel van Nintendo. Dit is volledig gratis en hoeft niet te worden gedownload. Het enige wat je nodig hebt is een webbrowser!"
 	},
 	"url": "mkpc.malahieude.net",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/T2WTLEM.jpeg",
-	"thumbnail": "https://i.imgur.com/LZwSRDe.jpeg",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MKPC/assets/logo.jpeg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MKPC/assets/thumbnail.jpeg",
 	"color": "#FF001B",
 	"category": "games",
 	"tags": [

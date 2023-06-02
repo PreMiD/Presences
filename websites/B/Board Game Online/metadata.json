@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -16,9 +16,9 @@
 		"boardgame-online.com",
 		"www.boardgame-online.com"
 	],
-	"version": "1.1.23",
-	"logo": "https://i.imgur.com/L6BgeAa.png",
-	"thumbnail": "https://i.imgur.com/QTDzIqh.png",
+	"version": "1.1.27",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Online/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Online/assets/thumbnail.png",
 	"color": "#EF3A26",
 	"category": "games",
 	"tags": [

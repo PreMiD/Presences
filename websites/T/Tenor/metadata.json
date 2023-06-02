@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Yelo",
 		"id": "425326889565945856"
@@ -18,9 +18,9 @@
 		"ga_IE": "Abair níos mó le Tenor. Faigh na GIFanna agus na físeáin beoite foirfe chun an méid atá i gceist agat i ngach comhrá a chur in iúl go díreach."
 	},
 	"url": "tenor.com",
-	"version": "1.0.8",
-	"logo": "https://i.imgur.com/8FcDsJt.png",
-	"thumbnail": "https://i.imgur.com/9sHEdj2.png",
+	"version": "1.0.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tenor/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tenor/assets/thumbnail.png",
 	"color": "#3297E9",
 	"category": "other",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "वाह्य",
 		"id": "819696394180100106"
@@ -8,10 +8,16 @@
 	"description": {
 		"en": "Zoro.to is a free site to watch anime and you can even download subbed or dubbed anime in ultra HD quality without any registration or payment"
 	},
-	"url": "zoro.to",
-	"version": "1.1.15",
-	"logo": "https://i.imgur.com/SPMSZxI.png",
-	"thumbnail": "https://i.imgur.com/T0O1fqU.png",
+	"url": [
+		"zoro.to",
+		"sanji.to",
+		"zoro.moe",
+		"zoro.sx",
+		"zoro.pm"
+	],
+	"version": "1.1.25",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/Zoro/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Z/Zoro/assets/thumbnail.png",
 	"color": "#cae962",
 	"category": "anime",
 	"tags": [

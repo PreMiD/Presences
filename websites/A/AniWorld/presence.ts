@@ -47,7 +47,8 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/fM3E5Iv.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 	if (page === "/") presenceData.details = "Betrachtet die Startseite";
@@ -88,7 +89,7 @@ presence.on("UpdateData", async () => {
 						timeEnd
 					);
 				}
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused ? "Pausiert" : "Wiedergabe";
 			}
 		}

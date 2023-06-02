@@ -1,10 +1,12 @@
 const presence = new Presence({ clientId: "714822481286004778" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let gameArea: HTMLElement, pauseMenu: HTMLElement;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/P95A0bS.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/osu%20online/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

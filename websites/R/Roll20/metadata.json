@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "MrBartusek",
 		"id": "212988300137463809"
@@ -17,9 +17,9 @@
 		"blog.roll20.net",
 		"wiki.roll20.net"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/x7iMqpv.png",
-	"thumbnail": "https://i.imgur.com/NfgSJAF.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Roll20/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Roll20/assets/thumbnail.png",
 	"color": "#af1f8e",
 	"category": "games",
 	"tags": [

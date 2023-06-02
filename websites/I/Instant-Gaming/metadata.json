@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Dekirai",
 		"id": "601560798409654292"
@@ -11,9 +11,9 @@
 		"nl": "Instant-Gaming.com - Al je favoriete games voor Steam-, Origin-, Battle.net-, Uplay- en Indie-games tot 70% korting! Digitale games, directe levering 24/7!"
 	},
 	"url": "www.instant-gaming.com",
-	"version": "1.1.16",
-	"logo": "https://i.imgur.com/3htcFSM.png",
-	"thumbnail": "https://i.imgur.com/N0SrNHb.jpg",
+	"version": "1.1.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Instant-Gaming/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Instant-Gaming/assets/thumbnail.jpg",
 	"color": "#e37d00",
 	"category": "games",
 	"tags": [

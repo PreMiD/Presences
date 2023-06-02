@@ -3,7 +3,8 @@ const presence: Presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Ickm2Yv.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Webtoon/assets/logo.jpg",
 		startTimestamp: browsingTimestamp,
 	},
 	strings = presence.getStrings({
@@ -42,7 +43,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 	} else if (path.includes("search")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (path.includes("about")) {
 		presenceData.details = "Reading the about page";
 		delete presenceData.smallImageKey;

@@ -45,7 +45,8 @@ const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/8JBfyCa.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Sinefy/assets/logo.jpg",
 			startTimestamp,
 		},
 		settings = {
@@ -87,7 +88,7 @@ presence.on("UpdateData", async () => {
 				];
 			}
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;

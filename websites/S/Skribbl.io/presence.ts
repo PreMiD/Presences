@@ -2,6 +2,11 @@ const presence = new Presence({
 	clientId: "808664560936026122",
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Skribbl.io/assets/logo.png",
+	Avatar = "https://cdn.rcd.gg/PreMiD/websites/S/Skribbl.io/assets/0.png",
+}
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -94,11 +99,6 @@ function getGamePhase() {
 	if (document.querySelector("#game-word .description.waiting"))
 		return GamePhase.WaitingForDrawer;
 	return GamePhase.Gameplay;
-}
-
-enum Assets {
-	Logo = "https://i.imgur.com/EYcWQmj.png",
-	Avatar = "https://i.imgur.com/Uunb9C6.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,

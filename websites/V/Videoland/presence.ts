@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/pDpvS9l.gif",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/Videoland/assets/0.gif",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href } = document.location,
@@ -27,7 +28,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document
 				.querySelector<HTMLMetaElement>('[property="og:image"]')
 				.content.split("?")[0];
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? "Gepauzeerd"
 				: "Aan het afspelen";
@@ -61,7 +62,10 @@ presence.on("UpdateData", async () => {
 	} else presenceData.details = "Aan het browsen";
 
 	if (!buttons) delete presenceData.buttons;
-	if (!covers) presenceData.largeImageKey = "https://i.imgur.com/pDpvS9l.gif";
+	if (!covers) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/V/Videoland/assets/0.gif";
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

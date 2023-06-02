@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Eren",
 		"id": "478937019758673931"
@@ -12,9 +12,9 @@
 		"vi_VN": "CHIP Online là cổng trang web độc lập của thương hiệu CHIP."
 	},
 	"url": "www.chip.com.tr",
-	"version": "1.4.15",
-	"logo": "https://i.imgur.com/e8B18gA.png",
-	"thumbnail": "https://i.imgur.com/r9jJ1vN.png",
+	"version": "1.4.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CHIP%20Online/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CHIP%20Online/assets/thumbnail.png",
 	"color": "#F10C0C",
 	"category": "other",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Rare Akuma ☆",
 		"id": "250044591686811669"
@@ -11,9 +11,9 @@
 		"vi_VN": "TETR.IO là trò chơi nhiều người chơi/một người chơi miễn phí trực tuyến"
 	},
 	"url": "tetr.io",
-	"version": "1.1.13",
-	"logo": "https://i.imgur.com/f2PMsG4.jpg",
-	"thumbnail": "https://i.imgur.com/n7wLG8i.jpg",
+	"version": "1.1.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TETR.IO/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TETR.IO/assets/thumbnail.jpg",
 	"color": "#142472",
 	"category": "games",
 	"tags": [

@@ -10,10 +10,8 @@ const presence = new Presence({ clientId: "1013183483750907904" }),
 		login: "Log in Patreon",
 	},
 	slideshow = presence.createSlideshow();
-
-enum Assets {
-	Logo = "https://i.imgur.com/XIq6vjx.png",
-	Searching = "https://i.imgur.com/OIgfjTG.png",
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Patreon/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -73,7 +71,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `Query: ${document
 					.querySelector("input")
 					.getAttribute("value")}`;
-				presenceData.smallImageKey = Assets.Searching;
+				presenceData.smallImageKey = Assets.Search;
 			} else presenceData.details = "On searching page";
 			break;
 		case "posts":

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "RisingSunLight",
 		"id": "240521747852558347"
@@ -10,9 +10,9 @@
 		"fr": "Une communauté pour collaborer dans la création et l'échange de personnages, le worldbuilding et le roleplay."
 	},
 	"url": "toyhou.se",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/3ltOcr0.png",
-	"thumbnail": "https://i.imgur.com/KPSN06b.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Toyhouse/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Toyhouse/assets/thumbnail.png",
 	"color": "#5ab5d1",
 	"category": "other",
 	"tags": [

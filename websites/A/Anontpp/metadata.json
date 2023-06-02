@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -12,9 +12,9 @@
 		"vi_VN": "Anontpp là nơi để xem anime trực tuyến, GoPlay. Bạn có thể xem các chương trình miễn phí, không bị gián đoạn bởi các quảng cáo."
 	},
 	"url": "goplay.ml",
-	"version": "1.1.4",
-	"logo": "https://i.imgur.com/Sr0u6MC.png",
-	"thumbnail": "https://i.imgur.com/ViBgH8i.png",
+	"version": "1.1.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anontpp/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anontpp/assets/thumbnail.png",
 	"color": "#F4ADEE",
 	"category": "videos",
 	"tags": [

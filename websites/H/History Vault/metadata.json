@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "638080361179512853",
 		"name": "Dark_Ville"
@@ -12,9 +12,9 @@
 		"www.historyvault.com",
 		"watch.historyvault.com"
 	],
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/nofcCPt.png",
-	"thumbnail": "https://i.imgur.com/ucMjWHa.jpg",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/History%20Vault/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/History%20Vault/assets/thumbnail.jpg",
 	"color": "#DC9533",
 	"category": "videos",
 	"tags": [

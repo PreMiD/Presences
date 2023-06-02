@@ -44,8 +44,10 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	if (isHostDP) presenceData.largeImageKey = "https://i.imgur.com/KIZSYhc.png";
-	else if (isHostHS) presenceData.largeImageKey = "disneyplus-hotstar-logo";
+	if (isHostDP) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png";
+	} else if (isHostHS) presenceData.largeImageKey = "disneyplus-hotstar-logo";
 
 	// Disney+ video
 	if (isHostDP && location.pathname.includes("/video/")) {
@@ -85,7 +87,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = subtitle || "Movie";
 			}
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;
@@ -195,7 +197,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = title;
 				presenceData.state = subtitle || "Movie";
 			}
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "건유1019",
 		"id": "340373909339635725"
@@ -13,9 +13,9 @@
 		"en": "My own FLO that resembles me more and more the more I listen to music. Now, your music"
 	},
 	"url": "www.music-flo.com",
-	"version": "1.0.9",
-	"logo": "https://i.imgur.com/1EEUg5a.png",
-	"thumbnail": "https://i.imgur.com/EgI8zOz.png",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FLO/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FLO/assets/thumbnail.png",
 	"color": "#3f3fff",
 	"category": "music",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -9,9 +9,9 @@
 		"en": "Unicode web service for character search. Find, copy and paste your favorite characters: 😎 Emoji, ❤ Hearts, 💲 Currencies, → Arrows, ★ Stars and many others 🚩"
 	},
 	"url": "unicode-table.com",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/oDtbM69.png",
-	"thumbnail": "https://i.imgur.com/0N8QkBo.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/Unicode%20Character%20Table/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/Unicode%20Character%20Table/assets/thumbnail.png",
 	"color": "#894d9a",
 	"category": "other",
 	"tags": [

@@ -9,7 +9,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const video: HTMLVideoElement = document.querySelector("video.vjs-tech"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/JnLqL7n.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/AnimationDigitalNetwork/assets/logo.png",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 
@@ -23,7 +24,7 @@ presence.on("UpdateData", async () => {
 		);
 		if (!isNaN(video.duration)) {
 			presenceData.details = episode.partOfSeries.name;
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;

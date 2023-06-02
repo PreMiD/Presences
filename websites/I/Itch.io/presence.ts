@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Sv0IpMI.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/I/Itch.io/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = document.location;
@@ -20,7 +21,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = gameName;
 				presenceData.state = devName;
 				if (document.querySelector(".game_loaded")) {
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = "Playing";
 				}
 				if (pathname.split("/")[2] === "devlog")

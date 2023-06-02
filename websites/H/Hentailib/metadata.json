@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Mirax",
 		"id": "223355525826347018"
@@ -11,9 +11,9 @@
 		"nl": "Website voor het lezen van hentai-manga in het Russisch"
 	},
 	"url": "hentailib.me",
-	"version": "1.1.13",
-	"logo": "https://i.imgur.com/5II032W.png",
-	"thumbnail": "https://i.imgur.com/1lXZCVd.png",
+	"version": "1.1.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hentailib/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hentailib/assets/thumbnail.png",
 	"color": "#ff0048",
 	"category": "other",
 	"tags": [

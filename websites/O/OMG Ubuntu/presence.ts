@@ -13,7 +13,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/hI4bcJC.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/OMG%20Ubuntu/assets/logo.png",
 			startTimestamp,
 		},
 		header = document
@@ -40,14 +41,14 @@ presence.on("UpdateData", async () => {
 		}`;
 	} else if (page === "/" && location.search?.includes("?s=")) {
 		presenceData.details = "Searching for:";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 		presenceData.state =
 			decodeURI(location.search).replace("?s=", "").replaceAll("+", " ") ||
 			"Unknown Search";
 	} else if (page.includes("/") && articleHeader) {
 		presenceData.details = "Reading an article:";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 		presenceData.state = articleHeader;
 		presenceData.buttons = [{ label: "Read Article", url: location.href }];

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Anaxes",
 		"id": "567885938160697377"
@@ -9,9 +9,9 @@
 		"en": "Track, discover, share and watch high quality anime with YugenAnime."
 	},
 	"url": "yugen.to",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/m5UhwNJ.png",
-	"thumbnail": "https://i.imgur.com/Cok059a.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yugen%20Anime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yugen%20Anime/assets/thumbnail.png",
 	"color": "#07bf67",
 	"category": "anime",
 	"tags": [
