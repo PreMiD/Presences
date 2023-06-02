@@ -10,7 +10,7 @@ let oldLang: string,
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Fm5zIJW.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/RadioMe/assets/logo.png",
 		};
 
 	oldLang = newLang;

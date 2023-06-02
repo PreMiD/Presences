@@ -10,9 +10,9 @@
 		"nl": "Ryou Flashcards is een web app voor het leren van Japans en het bestuderen van kanji en woordenschat woorden."
 	},
 	"url": "www.ryouflashcards.com",
-	"version": "1.1.12",
-	"logo": "https://i.imgur.com/snEsbAL.png",
-	"thumbnail": "https://i.imgur.com/tWNhZxF.png",
+	"version": "1.1.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Ryou%20Flashcards/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Ryou%20Flashcards/assets/thumbnail.png",
 	"color": "#4C8FFB",
 	"category": "other",
 	"tags": [

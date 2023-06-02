@@ -11,9 +11,9 @@
 	},
 	"url": "readthedocs.io",
 	"regExp": "([a-z0-9-]+[.])*readthedocs[.](io|org)[/]?",
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/imTvu2G.png",
-	"thumbnail": "https://i.imgur.com/i7xxsx3.png",
+	"version": "1.0.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Read%20the%20Docs/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Read%20the%20Docs/assets/thumbnail.png",
 	"color": "#404A50",
 	"category": "other",
 	"tags": [

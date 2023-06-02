@@ -25,9 +25,9 @@
 		"jp.redtube.com",
 		"fr.redtube.com"
 	],
-	"version": "2.2.18",
-	"logo": "https://i.imgur.com/YrWWEZC.png",
-	"thumbnail": "https://i.imgur.com/6DD83q7.png",
+	"version": "2.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RedTube/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RedTube/assets/thumbnail.png",
 	"color": "#af181f",
 	"category": "videos",
 	"tags": [

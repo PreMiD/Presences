@@ -9,9 +9,9 @@
 		"en": "Regular expression tester with syntax highlighting, explanation, cheat sheet for PHP/PCRE, Python, GO, JavaScript, Java, C#/.NET."
 	},
 	"url": "regex101.com",
-	"version": "1.0.5",
-	"logo": "https://i.imgur.com/ZSHQyex.png",
-	"thumbnail": "https://i.imgur.com/qG3JsHn.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/regex101/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/regex101/assets/thumbnail.png",
 	"color": "#1a2c42",
 	"category": "other",
 	"tags": [

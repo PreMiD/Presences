@@ -17,9 +17,9 @@
 	},
 	"url": "www.reverso.net",
 	"regExp": "([a-z0-9-_]+)[.]reverso[.]net",
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/jRvhga7.png",
-	"thumbnail": "https://i.imgur.com/CpzjkaP.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Reverso/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Reverso/assets/thumbnail.png",
 	"color": "#0970ac",
 	"category": "other",
 	"tags": [

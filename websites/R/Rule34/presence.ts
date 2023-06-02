@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const urlParams = new URLSearchParams(window.location.search),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/3jHxZJW.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Rule34/assets/logo.png",
 		};
 	if (document.location.href.includes("rule34.xxx")) {
 		if (document.location.pathname === "/")

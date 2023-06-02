@@ -20,7 +20,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/o6JjbtH.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/R-a-d.io/assets/logo.png",
 		};
 	if (pathname.includes("/news")) {
 		presenceData.details = "Reading news";
