@@ -12,9 +12,9 @@
 		"uktvplay.uktv.co.uk",
 		"uktvplay.co.uk"
 	],
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/wjqmEQY.png",
-	"thumbnail": "https://i.imgur.com/mPSBoXK.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/UKTV/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/UKTV/assets/thumbnail.png",
 	"color": "#00BAC6",
 	"category": "videos",
 	"tags": [
