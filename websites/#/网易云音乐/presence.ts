@@ -6,7 +6,7 @@ const presence = new Presence({ clientId: "1035124482735607838" }),
 	});
 
 const enum Assets {
-	Logo = "https://i.imgur.com/L7WOrIG.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/%23/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90/assets/logo.png",
 }
 
 let title: string,
