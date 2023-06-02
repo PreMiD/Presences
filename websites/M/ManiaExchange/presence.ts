@@ -7,7 +7,8 @@ let currentURL = new URL(document.location.href),
 	currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 const updateCallback = {
@@ -28,7 +29,8 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		}
 	): void => {

@@ -17,7 +17,8 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details,
 				state,
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Radio%20Garden/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/R/Radio%20Garden/assets/logo.png",
 				startTimestamp: elapsed,
 			};
 		currentState = document

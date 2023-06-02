@@ -21,7 +21,8 @@ presence.on("UpdateData", async () => {
 		pause: "general.paused",
 	});
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Streamlabs/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Streamlabs/assets/logo.png",
 	};
 
 	switch (window.location.hostname) {

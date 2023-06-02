@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Kijk/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/K/Kijk/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		search = document.querySelector<HTMLInputElement>(
@@ -148,7 +149,10 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (!covers) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/K/Kijk/assets/logo.png";
+	if (!covers) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/K/Kijk/assets/logo.png";
+	}
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

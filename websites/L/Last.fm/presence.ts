@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png",
 		smallImageKey: "browse",
 		startTimestamp: browsingTimestamp,
 	};
@@ -154,7 +155,10 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = artwork.includes("player_default_album")
 				? "lastfm"
 				: artwork.replace("/174s/", "/1024s/");
-		} else presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png";
+		} else {
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png";
+		}
 
 		presenceData.details = "Listening to:";
 		presenceData.state = document

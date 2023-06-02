@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Tim",
 		"id": "277043432063631360"
@@ -12,7 +12,7 @@
 	},
 	"url": "lexx.app",
 	"regExp": "([a-z0-9-]+[.])*lexx[.]app[/]",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LeXx/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LeXx/assets/thumbnail.png",
 	"color": "#FF7D00",

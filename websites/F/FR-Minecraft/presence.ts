@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/FR-Minecraft/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/FR-Minecraft/assets/logo.png",
 		},
 		browsingTimestamp = Math.floor(Date.now() / 1000),
 		privacy = await presence.getSetting<boolean>("privacy"),

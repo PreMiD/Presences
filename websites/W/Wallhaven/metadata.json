@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Cascade",
 		"id": "442612628104151040"
@@ -11,7 +11,7 @@
 		"nl": "Uw bron voor de beste wallpapers van hoge kwaliteit op het net!"
 	},
 	"url": "wallhaven.cc",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wallhaven/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wallhaven/assets/thumbnail.jpg",
 	"color": "#0E6288",

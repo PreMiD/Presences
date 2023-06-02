@@ -1,5 +1,6 @@
 export const name = "Civic Doodle";
-export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/16.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/16.png";
 
 export function getPresenceData({
 	playerState,

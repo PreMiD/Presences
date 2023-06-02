@@ -6,7 +6,8 @@ const presence = new Presence({
 		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Picarto/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Picarto/assets/logo.png",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -23,7 +24,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = uploader
 			? uploader.textContent
 			: "Uploader not found...";
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/P/Picarto/assets/logo.png";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/P/Picarto/assets/logo.png";
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
@@ -39,7 +41,8 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Picarto/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/Picarto/assets/logo.png",
 		});
 	}
 });

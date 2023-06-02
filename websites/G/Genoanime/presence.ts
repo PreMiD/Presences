@@ -35,7 +35,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Genoanime/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Genoanime/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	}; //title of the page
 	if (document.location.pathname === "/")

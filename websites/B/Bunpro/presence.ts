@@ -59,7 +59,8 @@ presence.on("UpdateData", () => {
 	const { pathname, hostname, href } = window.location,
 		pathSplit = pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 

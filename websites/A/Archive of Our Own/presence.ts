@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Archive%20of%20Our%20Own/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Archive%20of%20Our%20Own/assets/logo.png",
 		},
 		[work, tag] = await Promise.all([
 			presence.getSetting<string>("work"),

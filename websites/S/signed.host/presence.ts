@@ -84,7 +84,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	presence.setActivity({
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/signed.host/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/signed.host/assets/logo.png",
 		state,
 		startTimestamp: lastTimestamp,
 		details,

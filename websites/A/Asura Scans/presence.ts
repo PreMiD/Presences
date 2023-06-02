@@ -7,7 +7,8 @@ presence.on("UpdateData", () => {
 	const { pathname, href } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Asura%20Scans/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Asura%20Scans/assets/logo.png",
 		};
 
 	if (/^\/(page\/\d+\/?)?$/.test(pathname))

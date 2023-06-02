@@ -12,7 +12,8 @@ presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		title = document.querySelector("#question-header > h1"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AskUbuntu/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/AskUbuntu/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

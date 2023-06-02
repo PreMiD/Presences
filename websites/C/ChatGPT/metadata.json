@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "135058085386387457",
 		"name": "Extiriority"
@@ -9,7 +9,7 @@
 		"en": "ChatGPT is a natural language processing tool driven by AI technology that allows you to have human-like conversations and much more with the chatbot. The language model can answer questions and assist you with tasks, such as composing emails, essays, and code."
 	},
 	"url": "chat.openai.com",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/thumbnail.png",
 	"color": "#75AC9D",

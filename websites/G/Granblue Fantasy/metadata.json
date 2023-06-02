@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Morrays",
 		"id": "156190372354064384"
@@ -21,7 +21,7 @@
 		"vi_VN": "Trò chơi đóng vai Nhật Bản"
 	},
 	"url": "game.granbluefantasy.jp",
-	"version": "1.4.8",
+	"version": "1.4.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/thumbnail.jpg",
 	"color": "#2F4F7A",

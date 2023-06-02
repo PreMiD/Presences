@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -14,7 +14,7 @@
 		"ga_IE": "Is ardán siamsaíochta domhanda é V LIVE a nascann réaltaí na Cóiré agus a lucht leanúna."
 	},
 	"url": "www.vlive.tv",
-	"version": "2.0.19",
+	"version": "2.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/V%20LIVE/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/V%20LIVE/assets/thumbnail.png",
 	"color": "#54f7ff",

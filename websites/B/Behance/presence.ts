@@ -24,7 +24,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Behance/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/Behance/assets/logo.png",
 			details: "Browsing",
 			startTimestamp: browsingTimestamp,
 		},
@@ -170,7 +171,10 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Reading;
 		}
 	}
-	if (!image) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/B/Behance/assets/logo.png";
+	if (!image) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/B/Behance/assets/logo.png";
+	}
 	if (!buttons) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });

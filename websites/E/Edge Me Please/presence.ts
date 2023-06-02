@@ -105,7 +105,8 @@ presence.on("UpdateData", async () => {
 				details: "Preparing to Edge",
 				state: "choosing settings ",
 				//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 				startTimestamp: elapsed,
 			});
 		} else {
@@ -116,7 +117,8 @@ presence.on("UpdateData", async () => {
 				presenceData = {
 					details: cr[2],
 					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 					endTimestamp: setTime(cr[1]),
 				};
 				presence.setActivity(presenceData);
@@ -129,7 +131,8 @@ presence.on("UpdateData", async () => {
 				presenceData = {
 					details: cr[2],
 					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 					endTimestamp: setTime(cr[1]),
 				};
 				presence.setActivity(presenceData);
@@ -138,7 +141,8 @@ presence.on("UpdateData", async () => {
 				presenceData = {
 					details: cr[2],
 					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 					endTimestamp: setTime(cr[1]),
 				};
 
@@ -151,7 +155,8 @@ presence.on("UpdateData", async () => {
 				presence.setActivity({
 					details: "jerking of slowly for edging",
 					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 					startTimestamp: elapsed,
 				});
 			}

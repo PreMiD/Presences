@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Angelo II",
 		"id": "698966790356729907"
@@ -11,7 +11,7 @@
 	},
 	"url": "play.google.com",
 	"regExp": "play|google",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Play/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Play/assets/thumbnail.png",
 	"color": "#F0464B",

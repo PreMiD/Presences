@@ -15,7 +15,8 @@ lastState = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/Monstercat/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/Monstercat/assets/logo.png",
 	};
 
 	if (document.location.hostname === "www.monstercat.com") {

@@ -48,7 +48,8 @@ presence.on("UpdateData", async () => {
 		songPlaying = song ? !song.paused : false;
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Shazam/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Shazam/assets/logo.png",
 		startTimestamp: elapsed,
 	};
 

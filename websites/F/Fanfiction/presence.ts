@@ -19,7 +19,8 @@ for (let i = 0; i < tags.length; i++) crossover.push([`/crossovers${tags[i]}`]);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Fanfiction/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/Fanfiction/assets/logo.png",
 		startTimestamp: browsingTimetsamp,
 	};
 

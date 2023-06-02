@@ -26,7 +26,8 @@ let strings: Awaited<ReturnType<typeof getStrings>> = null,
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TruckStopRadio/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TruckStopRadio/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

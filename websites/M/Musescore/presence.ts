@@ -23,7 +23,8 @@ function getTimeLeft(Time: string[]): number[] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/Musescore/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/Musescore/assets/logo.png",
 	};
 
 	// ALL ON THE .ORG website

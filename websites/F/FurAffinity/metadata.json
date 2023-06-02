@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Keenora",
 		"id": "527819157320761344"
@@ -11,7 +11,7 @@
 		"nl": "FurAffinity is een furry kunst- en mediawebsite, waar je je eigen profiel kunt aanmaken en kunst van duizenden gebruikers kunt delen, liken en becommentariëren."
 	},
 	"url": "www.furaffinity.net",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FurAffinity/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FurAffinity/assets/thumbnail.jpg",
 	"color": "#353b45",

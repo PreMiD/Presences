@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "194914323787808771",
 		"name": "Snowwy"
@@ -15,7 +15,7 @@
 		"en": "Cracked.io is a cracking forum and community. We offer free premium accounts to everyone and we have a variation of cracked and leaked programs to choose from!"
 	},
 	"url": "cracked.io",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Cracked.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Cracked.io/assets/thumbnail.png",
 	"color": "#3F7192",

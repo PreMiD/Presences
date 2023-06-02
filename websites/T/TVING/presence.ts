@@ -37,7 +37,8 @@ presence.on("UpdateData", async () => {
 		> = {
 			"/(vod|movie)/player/": async video => {
 				const data: PresenceData = {
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TVING/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/T/TVING/assets/logo.png",
 				};
 
 				if (video) {
@@ -79,7 +80,8 @@ presence.on("UpdateData", async () => {
 				}
 			},
 			"/live/player/": video => ({
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TVING/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/T/TVING/assets/logo.png",
 				details: document.querySelector(".live-title__channel").textContent,
 				state: "라이브",
 				smallImageKey: video.paused ? Assets.Pause : Assets.Play,

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,7 +11,7 @@
 	},
 	"url": "kisscartoon.nz",
 	"regExp": "([a-z0-9-]+[.])*kisscartoon([.][a-z]+)+[/]",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KissCartoon/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KissCartoon/assets/thumbnail.png",
 	"color": "#f5d80b",

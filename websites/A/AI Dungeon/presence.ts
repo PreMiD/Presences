@@ -52,7 +52,8 @@ const path = document.location.pathname,
 	});
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AI%20Dungeon/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AI%20Dungeon/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "aidungeon.io") {

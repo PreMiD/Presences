@@ -38,7 +38,8 @@ async function getShortURL(url: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/DALL-E/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/DALL-E/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = window.location,

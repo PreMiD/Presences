@@ -9,7 +9,8 @@ const actionURL = new URL(document.location.href),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/U/Uncyclopedia/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/U/Uncyclopedia/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

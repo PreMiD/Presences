@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "456298243618504707",
 		"name": "sinkaroid"
@@ -9,7 +9,7 @@
 		"en": "Watch anime, tv shows, and korean drama with ease. Subtitle available in bahasa indonesia, thai, vietnamese, chinese, and english."
 	},
 	"url": "ngewibu.tv",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Ngewibu/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Ngewibu/assets/thumbnail.png",
 	"color": "#2780e3",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -22,7 +22,7 @@
 		"www.pornhubpremium.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*pornhub[.]com[/]|([a-z0-9-]+[.])*pornhubpremium[.]com[/]",
-	"version": "2.2.22",
+	"version": "2.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PornHub/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PornHub/assets/thumbnail.png",
 	"color": "#ff9801",

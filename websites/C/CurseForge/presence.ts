@@ -9,7 +9,8 @@ let user: HTMLElement | string | Element,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/CurseForge/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/CurseForge/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	function setStateGame(

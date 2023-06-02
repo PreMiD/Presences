@@ -40,7 +40,8 @@ presence.on("UpdateData", async () => {
 	path.pop();
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/Letterboxd/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Letterboxd/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

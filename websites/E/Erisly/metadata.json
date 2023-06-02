@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -15,7 +15,7 @@
 		"translate.erisly.com",
 		"wiki.erisly.com"
 	],
-	"version": "1.1.14",
+	"version": "1.1.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Erisly/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Erisly/assets/thumbnail.png",
 	"color": "#FF6394",

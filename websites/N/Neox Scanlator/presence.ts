@@ -168,8 +168,10 @@ presence.on("UpdateData", async () => {
 	else if (
 		window.getComputedStyle(bodyWrap).getPropertyValue("background-color") !==
 		"rgb(38, 38, 38)"
-	)
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/N/Neox%20Scanlator/assets/logo.png";
+	) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/N/Neox%20Scanlator/assets/logo.png";
+	}
 
 	const UsuarioTexto = document.querySelector<HTMLElement>(
 		"body > div.wrap > div > header > div.c-sub-header-nav.with-border.hide-sticky-menu > div > div > div.c-modal_item > div > span"

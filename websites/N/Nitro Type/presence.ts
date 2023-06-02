@@ -14,7 +14,8 @@ presence.on("UpdateData", () => {
 		//log("UpdateData called")
 		const loggedIn = !!document.querySelector(".dropdown--account span"),
 			presenceData: PresenceData = {
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png",
 				smallImageKey: loggedIn ? "user" : "guest",
 				smallImageText: loggedIn
 					? document.querySelector(".dropdown--account span").textContent

@@ -8,7 +8,8 @@ let title, video, timestamps, chapter, blog;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/Otaku-Streamers/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/Otaku-Streamers/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "otaku-streamers.com") {
@@ -67,7 +68,8 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = "Unable to Read Page";
 		}
 	} else if (window.location.hostname === "beta.otaku-streamers.com") {
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/O/Otaku-Streamers/assets/logo.png";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/O/Otaku-Streamers/assets/logo.png";
 		switch (path) {
 			case "/":
 			case "/index.php":

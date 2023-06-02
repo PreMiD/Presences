@@ -22,7 +22,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Toonily/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Toonily/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search, hostname } = document.location,

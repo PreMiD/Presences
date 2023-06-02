@@ -7,8 +7,10 @@ presence.on("UpdateData", async () => {
 			.replace("/book/", "")
 			.replace(".html", ""),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Rust%20Lang%20Book/assets/logo.png", // rust logo 512x512
-			smallImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Rust%20Lang%20Book/assets/0.png", // ferris 512x512
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Rust%20Lang%20Book/assets/logo.png", // rust logo 512x512
+			smallImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Rust%20Lang%20Book/assets/0.png", // ferris 512x512
 			buttons: [
 				{
 					label: "Read Book",

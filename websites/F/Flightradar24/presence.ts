@@ -46,7 +46,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timeLeft"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/logo.png",
 			startTimestamp: browsingStamp,
 		};
 

@@ -15,7 +15,8 @@ let search: HTMLInputElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/piapro/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/piapro/assets/logo.png",
 	};
 
 	if (document.location.hostname === "piapro.jp") {

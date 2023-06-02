@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Animeflix/assets/0.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Animeflix/assets/0.png",
 		},
 		{ pathname } = document.location;
 

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -15,7 +15,7 @@
 		"kickassanime.ro"
 	],
 	"regExp": "(([a-z0-9-]+[.])*kickassanime([.][a-z]+)+[/])|((www[0-9]*[.])?(kickassanime[.][a-z]+))",
-	"version": "1.1.7",
+	"version": "1.1.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/thumbnail.png",
 	"color": "#c7c95b",

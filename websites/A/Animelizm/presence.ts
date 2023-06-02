@@ -22,7 +22,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Animelizm/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Animelizm/assets/logo.png",
 	};
 
 	if (isNaN(video.duration) || video.duration <= 0) {

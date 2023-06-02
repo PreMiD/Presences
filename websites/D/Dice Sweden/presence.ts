@@ -11,7 +11,8 @@ let articleTitle: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Dice%20Sweden/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dice%20Sweden/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		showButtons = await presence.getSetting<boolean>("buttons"),

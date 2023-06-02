@@ -30,14 +30,16 @@ presence.on("UpdateData", async () => {
 			if (!listeningCheck) {
 				presence.setActivity({
 					details: stationStatus,
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
 					smallImageKey: "pause",
 				});
 			} else {
 				const presenceData: PresenceData = {
 					details: stationStatus,
 					state: `On air: ${onAir.textContent}`,
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
 					smallImageKey: "play",
 					startTimestamp: timeElapsed,
 				};
@@ -67,14 +69,16 @@ presence.on("UpdateData", async () => {
 			if (!listeningCheck) {
 				presence.setActivity({
 					details: stationStatus,
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
 					smallImageKey: "pause",
 				});
 			} else {
 				const presenceData: PresenceData = {
 					details: stationStatus,
 					state: `On air: ${onAir.textContent}`,
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
 					smallImageKey: "play",
 					startTimestamp: timeElapsed,
 				};
@@ -104,14 +108,16 @@ presence.on("UpdateData", async () => {
 			if (!listeningCheck) {
 				presence.setActivity({
 					details: stationStatus,
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
 					smallImageKey: "pause",
 				});
 			} else {
 				const presenceData: PresenceData = {
 					details: stationStatus,
 					state: `On air: ${onAir.textContent}`,
-					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/P/PonyvilleFM/assets/logo.png",
 					smallImageKey: "play",
 					startTimestamp: timeElapsed,
 				};

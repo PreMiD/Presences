@@ -7,7 +7,8 @@ let search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Armorgames/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Armorgames/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = window.location,

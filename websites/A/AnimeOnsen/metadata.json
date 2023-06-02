@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Mist8kenGAS",
 		"id": "275272170807099399"
@@ -11,7 +11,7 @@
 	},
 	"url": "animeonsen.xyz",
 	"regExp": "(www.)?(animeonsen.xyz)",
-	"version": "1.1.6",
+	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/thumbnail.png",
 	"color": "#1a1a1a",

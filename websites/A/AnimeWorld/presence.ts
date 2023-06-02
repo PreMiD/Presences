@@ -29,7 +29,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AnimeWorld/assets/logo.png", // Bas has been here
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AnimeWorld/assets/logo.png", // Bas has been here
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

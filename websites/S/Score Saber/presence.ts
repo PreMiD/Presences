@@ -9,7 +9,8 @@ presence.on("UpdateData", async () => {
 		buttons = await presence.getSetting<boolean>("buttons"),
 		cover = await presence.getSetting<boolean>("cover"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 	if (document.querySelector("[class*='is-visible']")) {

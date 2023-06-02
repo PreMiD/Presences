@@ -186,7 +186,8 @@ presence.on("UpdateData", async () => {
 			]
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TheSite/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TheSite/assets/logo.png",
 		};
 
 	if (oldUrl !== path) {

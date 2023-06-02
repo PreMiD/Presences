@@ -42,7 +42,8 @@ async function fetchWithVideo(video: HTMLMediaElement) {
 }
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Peario/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/Peario/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		video = document.querySelector<HTMLVideoElement>(

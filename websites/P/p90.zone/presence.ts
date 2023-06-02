@@ -20,7 +20,8 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				state: document.querySelector("body > div.menu.main > div > h2")
 					.textContent,
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/p90.zone/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/P/p90.zone/assets/logo.png",
 				startTimestamp: timestamps[0],
 				endTimestamp: timestamps[1],
 				smallImageKey: video.paused ? Assets.Pause : Assets.Play,

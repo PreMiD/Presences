@@ -34,7 +34,8 @@ presence.on("UpdateData", async () => {
 		allH2 = document.querySelectorAll("h2.header-title,h2.header-subtitle"),
 		{ pathname, href, hostname } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -53,7 +54,8 @@ presence.on("UpdateData", async () => {
 				if (searchText?.value) {
 					presenceData.details = "Searching for";
 					presenceData.state = searchText.value;
-					presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/0.png";
+					presenceData.smallImageKey =
+						"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/0.png";
 					return presence.setActivity(presenceData);
 				}
 				switch (pathname.split("/")[1]) {

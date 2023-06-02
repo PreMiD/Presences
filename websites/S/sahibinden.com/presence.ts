@@ -98,7 +98,8 @@ presence.on("UpdateData", async () => {
 		(category && category.textContent !== "")
 	) {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir kategoriye göz atıyor:",
 			state: category.textContent.trim() || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -108,7 +109,8 @@ presence.on("UpdateData", async () => {
 		(searchingFor && searchingFor.textContent !== "")
 	) {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir şey arıyor:",
 			state:
 				searchingFor && searchingFor.textContent
@@ -126,7 +128,8 @@ presence.on("UpdateData", async () => {
 			);
 
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir ilana göz atıyor:",
 			state:
 				stuff && stuff.textContent !== ""
@@ -140,7 +143,8 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -150,14 +154,16 @@ presence.on("UpdateData", async () => {
 		document.location.pathname === "/"
 	) {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Bana Özel",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
 			startTimestamp: Math.floor(Date.now() / 1000),

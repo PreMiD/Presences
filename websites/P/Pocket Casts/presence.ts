@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Pocket%20Casts/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Pocket%20Casts/assets/logo.png",
 	};
 
 	if (document.querySelector(".controls").ariaLabel.includes("Playing")) {

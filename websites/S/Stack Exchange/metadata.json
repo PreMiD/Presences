@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "AcidEpicice",
 		"id": "249992970235936768"
@@ -14,7 +14,7 @@
 		"superuser.com"
 	],
 	"regExp": "(.*\\.)*(stackexchange\\.com|superuser\\.com|serverfault\\.com)",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/thumbnail.png",
 	"color": "#1E5397",

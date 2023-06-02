@@ -11,7 +11,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/cda.pl/assets/logo.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/cda.pl/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		pathname = document.location.pathname.toLowerCase();

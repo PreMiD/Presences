@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "gala",
 		"id": "338947895665360898"
@@ -10,7 +10,7 @@
 		"vi_VN": "Battlefield Portal là nền tảng nơi bạn khám phá các trận đấu bất ngờ và thay đổi luật lệ của chiến tranh. Tham gia các chế độ tuỳ chọn hoặc tự xây dựng trải nghiệm của riêng mình bằng các công cụ đa năng."
 	},
 	"url": "portal.battlefield.com",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Battlefield%20Portal/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Battlefield%20Portal/assets/thumbnail.png",
 	"color": "#FF2C10",

@@ -7,7 +7,8 @@ const presence = new Presence({
 		live: "general.live",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/logo.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/logo.jpg",
 	};
 
 presence.on("UpdateData", async () => {
@@ -27,7 +28,8 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = title ? title.textContent : "Title not found...";
 		presenceData.state = game ? game.textContent : "Game not found...";
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/logo.jpg";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/logo.jpg";
 		presenceData.smallImageKey = live
 			? "live"
 			: video.paused
@@ -53,7 +55,8 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/logo.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/logo.jpg",
 		});
 	}
 });

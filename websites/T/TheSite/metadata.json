@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -13,7 +13,7 @@
 		"relx.site",
 		"calmx.site"
 	],
-	"version": "1.0.23",
+	"version": "1.0.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TheSite/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TheSite/assets/thumbnail.png",
 	"color": "#00A0EC",

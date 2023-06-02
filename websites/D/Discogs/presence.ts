@@ -45,7 +45,8 @@ async function createImageSlideshow(type: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Discogs/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Discogs/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname, hash } = window.location,

@@ -21,7 +21,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Tellingtone/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Tellingtone/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
@@ -94,8 +95,10 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (!showCover)
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/T/Tellingtone/assets/logo.png";
+	if (!showCover) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/T/Tellingtone/assets/logo.png";
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

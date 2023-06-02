@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "rushia",
 		"id": "398752205043400724"
@@ -9,7 +9,7 @@
 		"en": "Play games, get tickets and WIN $$$. More tickets, more chances to WIN!"
 	},
 	"url": "www.gamee.com",
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GAMEE/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GAMEE/assets/thumbnail.png",
 	"color": "#afee70",

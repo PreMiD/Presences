@@ -90,7 +90,8 @@ function setActivity(state: string) {
 	presence.setActivity({
 		details: formatDetails(),
 		state,
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Kingdom%20of%20Loathing/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/K/Kingdom%20of%20Loathing/assets/logo.png",
 		buttons: generateButtons(),
 	} as PresenceData);
 }

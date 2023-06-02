@@ -46,7 +46,8 @@ let lastTitle = "",
 
 presence.on("UpdateData", function () {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Simulator%20Radio/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Simulator%20Radio/assets/logo.png",
 	};
 
 	if (

@@ -9,7 +9,8 @@ let user: Element | HTMLElement | string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png",
 	};
 	presenceData.startTimestamp = browsingTimestamp;
 	if (document.location.hostname === "help.pinterest.com") {

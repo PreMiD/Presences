@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -16,7 +16,7 @@
 		"nl": "e621 is een volwassen imageboardvervanger voor het imageboard Sidechan. Een image board voor algemeen publiek, e926 (voorheen e961) vult deze site aan. E621 draait op het Ouroboros platform, een danbooru-achtige software speciaal ontworpen voor de site."
 	},
 	"url": "e621.net",
-	"version": "2.3.4",
+	"version": "2.3.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/e621/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/e621/assets/thumbnail.png",
 	"color": "#284A81",

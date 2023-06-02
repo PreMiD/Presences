@@ -7,7 +7,8 @@ let user: HTMLElement | Element, thread: HTMLElement | Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Central/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Central/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

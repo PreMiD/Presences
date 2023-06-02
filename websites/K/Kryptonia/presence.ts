@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Kryptonia/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/K/Kryptonia/assets/logo.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	// Landing Site - kryptonia.fr

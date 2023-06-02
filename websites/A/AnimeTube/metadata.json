@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Drakonir",
 		"id": "469868455902969866"
@@ -12,7 +12,7 @@
 		"vi_VN": "Cộng đồng Anime với hàng trăm bản Anime được phát trực tuyến."
 	},
 	"url": "anime-tube.tv",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeTube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeTube/assets/thumbnail.png",
 	"color": "#9b403f",

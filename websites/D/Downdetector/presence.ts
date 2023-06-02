@@ -13,7 +13,8 @@ let title;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Downdetector/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Downdetector/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

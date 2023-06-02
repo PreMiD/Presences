@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -10,7 +10,7 @@
 		"en": "Here at CDKeys.com, we specialise in providing you with the best digital codes for the hottest games. There’s no need to pay full price or wait for a game again. We combine the lowest prices with rapid digital delivery, so you can start playing your favourite games, fast."
 	},
 	"url": "www.cdkeys.com",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CDKeys/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CDKeys/assets/thumbnail.png",
 	"color": "#1F143D",

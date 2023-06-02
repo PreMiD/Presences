@@ -36,7 +36,8 @@ presence.on(
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		details: "Page d'accueil",
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en");

@@ -162,8 +162,11 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		largeImage =
-			["https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/0.gif", "nflix_lg", "noback"][logo] ||
-			"nflix_lg";
+			[
+				"https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/0.gif",
+				"nflix_lg",
+				"noback",
+			][logo] || "nflix_lg";
 
 	let presenceData: PresenceData = {
 			largeImageKey: largeImage,

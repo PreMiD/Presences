@@ -17,7 +17,8 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AnimeWho/assets/logo.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AnimeWho/assets/logo.jpg",
 		details: "Ana Sayfada Anime Arıyor",
 		startTimestamp: browsingTimestamp,
 	};

@@ -29,7 +29,8 @@ function getGenre(code: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/logo.png",
 		},
 		{ location } = window;
 	// If player

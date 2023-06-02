@@ -2,7 +2,8 @@ const presence = new Presence({
 		clientId: "776113876605337660",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/MojeVideo/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/MojeVideo/assets/logo.png",
 	};
 
 presence.on("UpdateData", async () => {
@@ -63,7 +64,8 @@ function RefreshData() {
 				presenceData.state = `${extraPageNumber}.strana`;
 		}
 	}
-	presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/M/MojeVideo/assets/logo.png";
+	presenceData.largeImageKey =
+		"https://cdn.rcd.gg/PreMiD/websites/M/MojeVideo/assets/logo.png";
 }
 
 setInterval(RefreshData, 1000);

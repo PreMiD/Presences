@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Snazzah",
 		"id": "158049329150427136"
@@ -19,7 +19,7 @@
 		"jetsetradio.live",
 		"jetsetradiofuture.live"
 	],
-	"version": "2.2.8",
+	"version": "2.2.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Jet%20Set%20Radio%20Live/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Jet%20Set%20Radio%20Live/assets/thumbnail.jpg",
 	"color": "#FFE222",

@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Podcasts/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Podcasts/assets/logo.png",
 		},
 		podcastTitle =
 			document.querySelectorAll(".Ut8Gr").length > 0 &&

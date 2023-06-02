@@ -19,7 +19,8 @@ presence.on("UpdateData", async () => {
 	if (page.includes("/kategori/") && category && category.textContent !== "") {
 		if (page.includes("/page/")) {
 			presence.setActivity({
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
 				details: "Bir kategoriyi inceliyor:",
 				state: `${category.textContent
 					.slice(0, category.textContent.length - 27)
@@ -32,7 +33,8 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.href.includes("?s=") && searchingFor) {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
 			details: "Bir şey arıyor:",
 			state: searchingFor.textContent
 				? searchingFor.textContent.slice(17, searchingFor.textContent.length)
@@ -46,7 +48,8 @@ presence.on("UpdateData", async () => {
 			document.location.pathname.length
 		);
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
 			details: "Sayfalar arasında geziniyor:",
 			state: pgnum ? `Ana Sayfa: ${pgnum}` : "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -59,7 +62,8 @@ presence.on("UpdateData", async () => {
 				"#icerik > div > div.yazi-alt > ul > li.yazar > a"
 			);
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
 			details:
 				document
 					.querySelector("#icerik-yazi > div.icerik-baslik > h1 > a")
@@ -76,14 +80,16 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
 			startTimestamp: Math.floor(Date.now() / 1000),

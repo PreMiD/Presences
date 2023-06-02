@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Reverso/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Reverso/assets/logo.png",
 		},
 		showTime = await presence.getSetting<boolean>("stamp"),
 		langLabel = document.querySelectorAll(

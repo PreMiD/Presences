@@ -6,7 +6,8 @@ let matchStart: number = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Z/ZombsRoyale.io/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Z/ZombsRoyale.io/assets/logo.png",
 		},
 		currentGameState = await getPageletiable("game.currentGameState");
 

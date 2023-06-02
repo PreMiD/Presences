@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Harold",
 		"id": "141206144264699904"
@@ -15,7 +15,7 @@
 		"en": "Read Comics and Novels on Reaper Scans."
 	},
 	"url": "reaperscans.com",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Reaper%20Scans/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Reaper%20Scans/assets/thumbnail.jpg",
 	"color": "#6E3CAA",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -11,7 +11,7 @@
 		"nl": "Ekşi Şeyler is de andere website van ekşi sozluk voor wereldwijd en lokaal nieuws."
 	},
 	"url": "seyler.eksisozluk.com",
-	"version": "1.1.18",
+	"version": "1.1.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/thumbnail.png",
 	"color": "#54c7e0",

@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Extreme%20List/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Extreme%20List/assets/logo.png",
 	};
 
 	if ((await presence.getSetting<boolean>("incognito")) === false) {

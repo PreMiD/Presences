@@ -2,7 +2,8 @@ const presence = new Presence({
 		clientId: "967447688687779920",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Doronime/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Doronime/assets/logo.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 

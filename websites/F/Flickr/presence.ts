@@ -9,7 +9,8 @@ let author: string,
 	username: string;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Flickr/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/Flickr/assets/logo.png",
 		startTimestamp: startTimeStamp,
 		smallImageKey: "flickr_logo",
 		smallImageText: "Viewing Images or videos on Flickr",

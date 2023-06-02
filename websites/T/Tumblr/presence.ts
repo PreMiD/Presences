@@ -7,7 +7,8 @@ let user: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Tumblr/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/Tumblr/assets/logo.png",
 	};
 
 	if (document.location.hostname === "www.tumblr.com") {

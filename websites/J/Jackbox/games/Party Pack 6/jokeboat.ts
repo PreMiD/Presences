@@ -1,5 +1,6 @@
 export const name = "Joke Boat";
-export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/23.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/23.png";
 
 export function getPresenceData({
 	playerState,

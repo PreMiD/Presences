@@ -49,7 +49,8 @@ presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
 			details: title,
 			state: author,
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/logo.png",
 			smallImageKey: isPlaying ? "play" : "pause",
 			smallImageText: isPlaying ? (await strings).play : (await strings).pause,
 			buttons: [{ label: openUrlText, url }],

@@ -2,7 +2,8 @@ const presence = new Presence({
 		clientId: "642393312392904705",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/osu%20gatari/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/osu%20gatari/assets/logo.png",
 	};
 
 presence.on("UpdateData", async () => {

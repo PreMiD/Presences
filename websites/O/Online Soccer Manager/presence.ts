@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/Online%20Soccer%20Manager/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/Online%20Soccer%20Manager/assets/logo.png",
 			startTimestamp: browseTimestamp,
 		},
 		{ pathname } = document.location;

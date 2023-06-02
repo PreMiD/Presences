@@ -1,5 +1,6 @@
 export const name = "Quiplash XL";
-export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/11.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/11.png";
 
 export function getPresenceData(): PresenceData {
 	const { id } = document.querySelector<HTMLDivElement>(

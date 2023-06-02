@@ -16,7 +16,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showReading"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,
@@ -136,7 +137,10 @@ presence.on("UpdateData", async () => {
 							"body > div.main > div > div > div.col-content > div.m-info > div.m-book1 > div.m-imgtxt > div.pic > img"
 						).src
 					}`;
-				} else presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/logo.png";
+				} else {
+					presenceData.largeImageKey =
+						"https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/logo.png";
+				}
 				if (showReading) presenceData.details = "Viewing a novel";
 				if (showBook) presenceData.state = document.title.split("-")[0];
 				presenceData.buttons = [
@@ -152,7 +156,10 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 						"head > meta:nth-child(4)"
 					).content;
-				} else presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/logo.png";
+				} else {
+					presenceData.largeImageKey =
+						"https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/logo.png";
+				}
 				if (showBook) {
 					presenceData.details = `Reading ${document.title.split("-")[0]}`;
 					presenceData.state =

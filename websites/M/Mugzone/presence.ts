@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const privacy = await presence.getSetting<boolean>("privacy"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/Mugzone/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Mugzone/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 	if (privacy) presenceData.details = "Browsing Malody Website";

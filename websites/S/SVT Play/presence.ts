@@ -11,7 +11,8 @@ let user: string, title: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/SVT%20Play/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SVT%20Play/assets/logo.png",
 	};
 
 	if (document.location.hostname === "www.svtplay.se") {

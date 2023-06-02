@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Dawkin Nguyen",
 		"id": "414274321779916800"
@@ -10,7 +10,7 @@
 		"nl": "Durarara!! fan gemeenschap, DOLLARS chatroom."
 	},
 	"url": "drrr.com",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Durarara/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Durarara/assets/thumbnail.png",
 	"color": "#696969",

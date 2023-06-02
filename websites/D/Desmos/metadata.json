@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Anshroid",
 		"id": "434312233023963137"
@@ -9,7 +9,7 @@
 		"en": "Desmos Graphing Calculator lets you graph functions, plot data, evaluate equations, explore transformations, and much more— all for free. "
 	},
 	"url": "www.desmos.com",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Desmos/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Desmos/assets/thumbnail.png",
 	"color": "#158f47",

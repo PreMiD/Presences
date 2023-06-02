@@ -1,7 +1,8 @@
 import { uploadFile } from "../../util";
 
 export const name = "Champ'd Up";
-export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/32.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/32.png";
 
 export async function getPresenceData({
 	playerState,

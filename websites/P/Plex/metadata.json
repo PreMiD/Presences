@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -12,7 +12,7 @@
 	},
 	"url": "www.plex.tv",
 	"regExp": "(([a-z0-9-]+[.])*plex[.]tv[/])|( *[/]web[/]index[.]html#)",
-	"version": "1.9.5",
+	"version": "1.9.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/thumbnail.png",
 	"color": "#d78c14",

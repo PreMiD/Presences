@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Apodemus",
 		"id": "223817321695674371"
@@ -10,7 +10,7 @@
 		"nl": "Vlieg met je helikopter en schiet op vijanden. Bouw muren om jezelf te beschermen en verover zo veel mogelijk grondgebied."
 	},
 	"url": "defly.io",
-	"version": "1.2.16",
+	"version": "1.2.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Defly.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Defly.io/assets/thumbnail.png",
 	"color": "#3D5DFF",

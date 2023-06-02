@@ -37,7 +37,8 @@ setInterval(setCourseInfo, 2000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Educative/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/E/Educative/assets/logo.png",
 		startTimestamp: time,
 	};
 

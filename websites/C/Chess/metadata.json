@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Funeoz",
 		"id": "256093420206948352"
@@ -13,7 +13,7 @@
 		"vi_VN": "Chess.com là máy chủ cờ vua chính trên Internet. Nó cũng là một diễn đàn và mạng xã hội dành riêng cho bộ môn cờ vua."
 	},
 	"url": "www.chess.com",
-	"version": "1.2.16",
+	"version": "1.2.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Chess/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Chess/assets/thumbnail.png",
 	"color": "#4d7737",

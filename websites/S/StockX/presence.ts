@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/StockX/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/StockX/assets/logo.png",
 			details: "Browsing...",
 			startTimestamp: browsingTimestamp,
 		},
@@ -79,7 +80,10 @@ presence.on("UpdateData", async () => {
 		).textContent;
 		presenceData.smallImageKey = Assets.Reading;
 	}
-	if (!image) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/S/StockX/assets/logo.png";
+	if (!image) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/S/StockX/assets/logo.png";
+	}
 	if (!buttons) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });

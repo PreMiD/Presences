@@ -6,7 +6,8 @@ let showName: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png",
 		},
 		{ pathname, href } = document.location,
 		[privacy, buttons, covers] = await Promise.all([
@@ -56,7 +57,8 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.largeImageKey =
 					document.querySelector<HTMLMetaElement>('[property="og:image"]')
-						?.content ?? "https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
+						?.content ??
+					"https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
 				presenceData.smallImageKey = "live";
 				presenceData.smallImageText = "Live";
 				presenceData.details = document
@@ -97,7 +99,8 @@ presence.on("UpdateData", async () => {
 					).textContent;
 					presenceData.smallImageKey = Assets.Play;
 					presenceData.largeImageKey =
-						video.getAttribute("poster") ?? "https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
+						video.getAttribute("poster") ??
+						"https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
 				} else {
 					presenceData.buttons = [
 						{
@@ -122,7 +125,10 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	}
-	if (!covers) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
+	if (!covers) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
+	}
 	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

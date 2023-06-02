@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/Localizor/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/Localizor/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		page = document.location.pathname,
@@ -98,8 +99,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!time) delete presenceData.startTimestamp;
-	if (!images && presenceData.largeImageKey)
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/L/Localizor/assets/logo.png";
+	if (!images && presenceData.largeImageKey) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/L/Localizor/assets/logo.png";
+	}
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

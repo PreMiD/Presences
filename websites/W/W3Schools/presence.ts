@@ -18,7 +18,8 @@ presence.on("UpdateData", () => {
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/W3Schools/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/W3Schools/assets/logo.png",
 			startTimestamp: elapsed,
 		},
 		language = document.querySelector(".w3-bar-item.w3-button.active"),

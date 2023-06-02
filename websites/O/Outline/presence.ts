@@ -28,7 +28,8 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/Outline/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/Outline/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		}
 	): void => {

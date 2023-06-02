@@ -18,7 +18,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/My%20Nintendo/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/My%20Nintendo/assets/logo.png",
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	oldLang = newLang;
