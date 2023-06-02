@@ -24,7 +24,8 @@ function getTitleText() {
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Explain%20xkcd/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Explain%20xkcd/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		path = window.location.pathname.split("/wiki/index.php/")[1] ?? "";

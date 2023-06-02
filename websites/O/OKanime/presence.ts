@@ -25,7 +25,8 @@ presence.on("iFrameData", (data: VideoData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/OKanime/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/OKanime/assets/logo.png",
 	};
 
 	if (video && !isNaN(video.duration) && video.duration > 0) {

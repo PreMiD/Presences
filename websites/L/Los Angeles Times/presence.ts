@@ -15,7 +15,8 @@ presence.on("UpdateData", async () => {
 		{ pathname, href, search } = window.location,
 		path = pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/Los%20Angeles%20Times/assets/logo.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/Los%20Angeles%20Times/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 

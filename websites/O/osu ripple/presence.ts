@@ -11,7 +11,8 @@ let customData = false,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/osu%20ripple/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/osu%20ripple/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	customData = false;

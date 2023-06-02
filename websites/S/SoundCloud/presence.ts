@@ -129,7 +129,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/logo.png",
 		startTimestamp: elapsed,
 	};
 

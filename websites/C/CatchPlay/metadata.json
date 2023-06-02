@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "fjar",
 		"id": "334358518570287104"
@@ -14,7 +14,7 @@
 		"www.catchplay.com",
 		"catchplay.com"
 	],
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CatchPlay/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CatchPlay/assets/thumbnail.png",
 	"color": "#F26F21",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Ghaith M. AlHallak",
 		"id": "448318357540962314"
@@ -13,7 +13,7 @@
 		"gmanga.io",
 		"gmanga.me"
 	],
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/thumbnail.png",
 	"color": "#428bca",

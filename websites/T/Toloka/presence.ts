@@ -7,7 +7,8 @@ let title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/logo.png",
 		},
 		showUseramePM = await presence.getSetting<boolean>("name"),
 		showSearchQuery = await presence.getSetting<boolean>("search");

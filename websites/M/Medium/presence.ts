@@ -34,7 +34,8 @@ presence.on("UpdateData", async () => {
 		[, ...hrefRest] = document.location.href.split("//"),
 		href = hrefRest.join(""),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/Medium/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Medium/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

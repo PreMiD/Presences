@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Hans5958",
 		"id": "850759953718575224"
@@ -10,7 +10,7 @@
 	},
 	"url": "www.miraheze.org",
 	"regExp": "([a-z0-9-]+[.])?miraheze[.](org|wiki)[/]",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/thumbnail.png",
 	"color": "#2F5782",

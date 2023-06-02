@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Ticketer/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Ticketer/assets/logo.png",
 		},
 		{ pathname } = document.location;
 	let title: HTMLElement, logo: HTMLElement, dashboardInfo: HTMLElement;

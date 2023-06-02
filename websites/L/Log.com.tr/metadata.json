@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Arda",
 		"id": "403225819222245377"
@@ -14,7 +14,7 @@
 		"www.log.com.tr",
 		"log.com.tr"
 	],
-	"version": "1.2.19",
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Log.com.tr/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Log.com.tr/assets/thumbnail.png",
 	"color": "#FFFFFF",

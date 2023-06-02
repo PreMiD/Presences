@@ -11,7 +11,8 @@ let user: HTMLElement | Element | string, title: HTMLElement | Element | string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/Vui%20Gh%C3%AA/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/V/Vui%20Gh%C3%AA/assets/logo.png",
 	};
 
 	if (document.location.hostname === "vuighe.net") {

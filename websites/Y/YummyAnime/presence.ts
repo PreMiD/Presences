@@ -47,7 +47,8 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Y/YummyAnime/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Y/YummyAnime/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 

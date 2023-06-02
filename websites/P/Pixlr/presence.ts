@@ -11,20 +11,24 @@ presence.on("UpdateData", async () => {
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the home page";
 	else if (document.location.pathname.includes("remove-background")) {
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/P/Pixlr/assets/0.png";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/P/Pixlr/assets/0.png";
 		presenceData.details = "Using Remove Background";
 	} else if (document.location.pathname.includes("mobile")) {
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/P/Pixlr/assets/1.png";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/P/Pixlr/assets/1.png";
 		presenceData.details = "Viewing Pixlr Stories";
 	} else if (document.location.pathname.includes("myaccount"))
 		presenceData.details = "Editing account settings";
 	else if (document.location.pathname.startsWith("/photomash/")) {
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/P/Pixlr/assets/2.png";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/P/Pixlr/assets/2.png";
 		if (document.location.hash.endsWith("#editor"))
 			presenceData.details = "Editing a photo in Photomash";
 		else presenceData.details = "Browing Photomash";
 	} else if (document.location.pathname.startsWith("/x/")) {
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/P/Pixlr/assets/3.png";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/P/Pixlr/assets/3.png";
 		if (document.location.hash.endsWith("#editor")) {
 			presenceData.details = `Editing a photo at ${
 				document.querySelector("#zoom-level").textContent
@@ -39,7 +43,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing their history";
 		else presenceData.details = "Browsing Pixlr X";
 	} else if (document.location.pathname.startsWith("/e/")) {
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/P/Pixlr/assets/4.png";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/P/Pixlr/assets/4.png";
 		if (document.location.hash.endsWith("#editor")) {
 			presenceData.details = "Editing a photo in";
 			presenceData.state = `${

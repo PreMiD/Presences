@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 	presenceData.details = document.location.pathname.split("/")[1];

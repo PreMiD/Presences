@@ -12,7 +12,8 @@ presence.on("UpdateData", async () => {
 		presence.setActivity({
 			details: "Viewing a page...",
 			state: pageText,
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/BanG%20Dream%20Wikia/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BanG%20Dream%20Wikia/assets/logo.png",
 		});
 	}
 });

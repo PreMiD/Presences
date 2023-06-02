@@ -46,7 +46,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/Void%20Bots/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/V/Void%20Bots/assets/logo.png",
 	};
 
 	if (showTimestamp === true) presenceData.startTimestamp = browsingTimestamp;

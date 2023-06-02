@@ -48,7 +48,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/NameMC/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/N/NameMC/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

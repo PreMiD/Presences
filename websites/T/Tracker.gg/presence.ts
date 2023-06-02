@@ -3,7 +3,8 @@ const presence = new Presence({ clientId: "929349462365704222" }),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,

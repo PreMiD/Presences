@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/J/Jummbox/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/J/Jummbox/assets/logo.png",
 		details: "Using Jummbox",
 		state: "Making a Beep",
 	};

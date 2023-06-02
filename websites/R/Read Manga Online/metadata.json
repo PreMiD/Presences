@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Harold",
 		"id": "141206144264699904"
@@ -12,7 +12,7 @@
 		"www.readm.org",
 		"readm.org"
 	],
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Read%20Manga%20Online/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Read%20Manga%20Online/assets/thumbnail.png",
 	"color": "#2d2f33",

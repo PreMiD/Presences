@@ -13,7 +13,8 @@ let threadName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/GBAtemp.net/assets/logo.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/GBAtemp.net/assets/logo.jpg",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname.startsWith("/threads")) {

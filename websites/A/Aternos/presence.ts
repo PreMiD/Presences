@@ -2,7 +2,8 @@ const presence = new Presence({
 		clientId: "631166262881550359",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Aternos/assets/logo.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Aternos/assets/logo.jpg",
 	},
 	paths = {
 		":": "Home Page",

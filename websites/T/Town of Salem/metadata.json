@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -13,7 +13,7 @@
 		"blankmediagames.com",
 		"www.blankmediagames.com"
 	],
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/thumbnail.jpg",
 	"color": "#F0B450",

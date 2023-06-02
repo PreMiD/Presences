@@ -9,7 +9,8 @@ let currentURL = new URL(document.location.href),
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
 	details: "Viewing an unsupported page",
-	largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/GeoGuessr/assets/logo.png",
+	largeImageKey:
+		"https://cdn.rcd.gg/PreMiD/websites/G/GeoGuessr/assets/logo.png",
 	startTimestamp: browsingTimestamp,
 };
 const updateCallback = {
@@ -30,7 +31,8 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/GeoGuessr/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GeoGuessr/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		}
 	): void => {

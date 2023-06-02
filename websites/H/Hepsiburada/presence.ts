@@ -36,7 +36,8 @@ presence.on("UpdateData", async () => {
 			"#productResult > div > div > div > div.col.lg-1.md-1.sm-1.filter-content > section > div > div.title-wrapper.with-bg.for-desktop.brand > h1"
 		) as HTMLElement,
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Hepsiburada/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Hepsiburada/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Font%20Awesome/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Font%20Awesome/assets/logo.png",
 			startTimestamp: pBrowsing,
 		},
 		pPage = window.location.pathname;

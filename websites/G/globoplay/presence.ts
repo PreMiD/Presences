@@ -11,7 +11,8 @@ let user: HTMLElement, title: HTMLElement | string, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

@@ -7,7 +7,8 @@ let title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Humble%20Bundle/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/H/Humble%20Bundle/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

@@ -14,7 +14,8 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/surviv.io/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/surviv.io/assets/logo.png",
 		},
 		broadcasttc = await presence.getSetting<boolean>("broadcasttc"),
 		active =

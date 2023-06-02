@@ -22,7 +22,8 @@ presence.on("UpdateData", async () => {
 					? ` (${date.textContent.replace("Updated: ", "")})`
 					: ""
 			} `,
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
 			smallImageKey: "logo",
 			smallImageText: decodeURIComponent(document.location.href),
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -33,7 +34,8 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity({
 			details: "Viewing a category:",
 			state: category.textContent,
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
 			smallImageKey: "logo",
 			smallImageText: decodeURIComponent(document.location.href),
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -49,7 +51,8 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity({
 			details: "Editing/Writing How to",
 			state: `Topic: ${newTopic ?? "Unknown."} `,
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
 			smallImageKey: "logo",
 			smallImageText: decodeURIComponent(document.location.href),
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -65,7 +68,8 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity({
 			details: "Searching for:",
 			state: `${searching[0].toUpperCase() + searching.slice(1).toLowerCase()}`,
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
 			smallImageKey: "logo",
 			smallImageText: "Searching...",
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -75,7 +79,8 @@ presence.on("UpdateData", async () => {
 	return presence.setActivity({
 		details: "Viewing a page:",
 		state: "Homepage",
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
 		smallImageKey: "logo",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	});

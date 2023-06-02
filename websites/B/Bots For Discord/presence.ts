@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Bots%20For%20Discord/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/Bots%20For%20Discord/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "botsfordiscord.com") {

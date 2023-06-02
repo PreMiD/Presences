@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -9,7 +9,7 @@
 		"en": "Read, hear, and study Scripture at the world's most-visited Christian website. Grow your faith with devotionals, Bible reading plans, and mobile apps."
 	},
 	"url": "www.biblegateway.com",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BibleGateway/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BibleGateway/assets/thumbnail.png",
 	"color": "#952004",

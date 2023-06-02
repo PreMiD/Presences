@@ -1,5 +1,6 @@
 export const name = "Bracketeering";
-export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/13.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/13.png";
 
 export function getPresenceData({
 	playerState,

@@ -16,7 +16,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/logo.png",
 		},
 		video = document.querySelector<HTMLVideoElement>(
 			"div.zdfplayer-video_wrapper video"
@@ -78,7 +79,8 @@ presence.on("UpdateData", async () => {
 			}
 		} else {
 			// Video-on-demand
-			presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/logo.png";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/logo.png";
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).play;
 

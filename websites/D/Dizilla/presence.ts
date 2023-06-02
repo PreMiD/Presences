@@ -44,7 +44,8 @@ presence.on("UpdateData", async () => {
 			"div.content > div > div.top-sticky-content span.text-white.text-small"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Dizilla/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dizilla/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

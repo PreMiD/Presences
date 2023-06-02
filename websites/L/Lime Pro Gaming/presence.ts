@@ -7,7 +7,8 @@ let productName, productBrand, blogTitle, blogAuthor;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/Lime%20Pro%20Gaming/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Lime%20Pro%20Gaming/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

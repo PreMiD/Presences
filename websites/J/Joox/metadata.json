@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Yusaki",
 		"id": "439582316873121793"
@@ -12,7 +12,7 @@
 	},
 	"url": "www.joox.com",
 	"regExp": "([a-z0-9-]+[.])*joox[.]com[/]",
-	"version": "1.2.8",
+	"version": "1.2.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Joox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Joox/assets/thumbnail.jpg",
 	"color": "#5abf77",

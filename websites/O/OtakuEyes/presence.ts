@@ -13,7 +13,8 @@ if (checkFooterContent()) {
 		const [page, , episode] = document.location.pathname.split("/").slice(1, 4),
 			showCover = await presence.getSetting<boolean>("cover"),
 			presenceData: PresenceData = {
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/OtakuEyes/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/O/OtakuEyes/assets/logo.png",
 				startTimestamp: browsingTimestamp,
 			};
 

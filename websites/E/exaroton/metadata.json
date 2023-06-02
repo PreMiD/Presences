@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "AyamDobhal",
 		"id": "379269487532310530"
@@ -13,7 +13,7 @@
 		"exaroton.com",
 		"support.exaroton.com"
 	],
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/exaroton/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/exaroton/assets/thumbnail.png",
 	"color": "#17f013",

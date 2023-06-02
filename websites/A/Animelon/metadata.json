@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -13,7 +13,7 @@
 	},
 	"url": "animelon.com",
 	"regExp": "([a-z0-9-]+[.])*animelon([.][a-z]+)+[/]",
-	"version": "1.0.21",
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Animelon/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Animelon/assets/thumbnail.jpg",
 	"color": "#D34344",

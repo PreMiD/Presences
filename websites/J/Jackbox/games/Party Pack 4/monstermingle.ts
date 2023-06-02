@@ -1,5 +1,6 @@
 export const name = "Monster Seeking Monster";
-export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/15.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/15.png";
 
 export function getPresenceData({
 	playerState,

@@ -62,7 +62,8 @@ const hitomiTypeMapping: interfaceMapping = {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Hitomi/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/H/Hitomi/assets/logo.png",
 	};
 
 	presenceData.details = "Viewing recently added list";

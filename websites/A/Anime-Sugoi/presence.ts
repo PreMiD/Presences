@@ -32,7 +32,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Anime-Sugoi/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Anime-Sugoi/assets/logo.png",
 	};
 
 	// Presence

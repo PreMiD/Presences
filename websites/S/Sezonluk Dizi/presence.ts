@@ -30,7 +30,8 @@ presence.on("iFrameData", (data: iframeData) => {
 const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Sezonluk%20Dizi/assets/logo.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Sezonluk%20Dizi/assets/logo.jpg",
 			startTimestamp,
 		},
 		{ search, pathname: page } = document.location;

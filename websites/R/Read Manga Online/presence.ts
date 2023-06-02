@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Read%20Manga%20Online/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Read%20Manga%20Online/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;

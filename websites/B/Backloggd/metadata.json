@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Lavenderleaff",
 		"id": "988801425196867644"
@@ -10,7 +10,7 @@
 		"fr": "Gardez un backlog virtuel de votre collection de jeux vidéo, puis évaluez et passez en revue ceux auxquels vous avez joué pour les partager avec vos amis !"
 	},
 	"url": "backloggd.com",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Backloggd/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Backloggd/assets/thumbnail.png",
 	"color": "#4a5e8d",

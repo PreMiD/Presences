@@ -17,7 +17,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Q/Q-dance/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Q/Q-dance/assets/logo.png",
 		},
 		[newLang, privacy, buttons, covers] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
@@ -65,7 +66,10 @@ presence.on("UpdateData", async () => {
 		}`;
 	}
 	if (!buttons) delete presenceData.buttons;
-	if (!covers) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/Q/Q-dance/assets/logo.png";
+	if (!covers) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/Q/Q-dance/assets/logo.png";
+	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

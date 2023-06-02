@@ -59,7 +59,8 @@ function applySubPathState(
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/BookBrainz/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BookBrainz/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,

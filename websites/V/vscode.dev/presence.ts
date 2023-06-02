@@ -529,7 +529,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/vscode.dev/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/vscode.dev/assets/logo.png",
 			smallImageKey: "vscode",
 			startTimestamp,
 		},

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Giingu",
 		"id": "156481332652802048"
@@ -13,7 +13,7 @@
 		"vi_VN": "AnimeTW là trang phát trực tuyến nơi bạn có thể xem anime với phụ đề Tiếng Tây Ban Nha."
 	},
 	"url": "animetw.net",
-	"version": "1.0.19",
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeTW/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeTW/assets/thumbnail.png",
 	"color": "#00468b",

@@ -11,7 +11,8 @@ presence.on("UpdateData", async () => {
 	const host = window.location.hostname.split("."),
 		path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Radio.net/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Radio.net/assets/logo.png",
 		};
 
 	oldLang = newLang;

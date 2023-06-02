@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Aizuu",
 		"id": "271576733168173057"
@@ -11,7 +11,7 @@
 		"nl": "Nekopoi is een Indonesische hentai- en jav-streaming-site"
 	},
 	"url": "nekopoi.care",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/NekoPoi/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/NekoPoi/assets/thumbnail.png",
 	"color": "#f7a2b4",

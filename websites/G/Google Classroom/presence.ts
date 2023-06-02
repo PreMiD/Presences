@@ -27,7 +27,8 @@ let strings: Awaited<ReturnType<typeof getStrings>> = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Classroom/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Classroom/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname.split("/"),

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "787787652644601857",
 		"name": "tsoxas#8008"
@@ -12,7 +12,7 @@
 		"e-z.host",
 		"e-z.bio"
 	],
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/e-z/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/e-z/assets/thumbnail.png",
 	"color": "#558dd2",

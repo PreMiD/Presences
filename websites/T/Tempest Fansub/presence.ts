@@ -7,7 +7,8 @@ presence.on("UpdateData", async () => {
 	const { pathname, hostname, href } = document.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
 		},
 		searchParams = new URLSearchParams(location.search);
 	//manga domain changed 2 times so i added both

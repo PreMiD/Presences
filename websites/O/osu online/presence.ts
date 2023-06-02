@@ -5,7 +5,8 @@ let gameArea: HTMLElement, pauseMenu: HTMLElement;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/osu%20online/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/osu%20online/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

@@ -2,7 +2,8 @@ const presence = new Presence({ clientId: "869377195682983957" });
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/0.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/0.png",
 	};
 	const { pathname, href } = document.location,
 		[privacy, nsfw] = await Promise.all([
@@ -39,8 +40,11 @@ presence.on("UpdateData", async () => {
 					? chapter
 					: `Capítulo ${chapter}`;
 				presenceData.largeImageKey =
-					isNsfw || !image ? "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/1.png" : image;
-				presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png";
+					isNsfw || !image
+						? "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/1.png"
+						: image;
+				presenceData.smallImageKey =
+					"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png";
 				if (!isNsfw) {
 					presenceData.buttons = [
 						{ label: "Acessar Obra", url: href.split("/chapter/")[0] },
@@ -62,7 +66,8 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("#premid-user-avatar")?.src ||
 				"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/2.png";
-			presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png";
 			presenceData.buttons = [
 				{
 					label: "Ver Perfil",

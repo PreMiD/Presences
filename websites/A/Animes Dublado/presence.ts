@@ -18,7 +18,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Dublado/assets/0.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Dublado/assets/0.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search, href } = document.location;

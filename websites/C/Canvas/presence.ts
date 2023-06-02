@@ -255,7 +255,8 @@ function getNavigationPath(): string[] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/Canvas/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/Canvas/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, search } = document.location,

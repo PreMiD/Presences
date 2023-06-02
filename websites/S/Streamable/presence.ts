@@ -8,7 +8,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Streamable/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Streamable/assets/logo.png",
 		},
 		player = document.querySelector<HTMLVideoElement>(".video-player-tag");
 

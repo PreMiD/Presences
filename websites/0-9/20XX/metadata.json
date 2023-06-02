@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Snazzah",
 		"id": "158049329150427136"
@@ -12,7 +12,7 @@
 		"vi_VN": "20XX là nền tảng MOBA độc nhất với đa dạng các nhân vật và bản đồ để tham gia."
 	},
 	"url": "20xx.io",
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/thumbnail.jpg",
 	"color": "#9AD1FD",

@@ -2,7 +2,8 @@ const presence = new Presence({
 		clientId: "612042450785271811",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/Change/assets/logo.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/Change/assets/logo.jpg",
 	};
 
 presence.on("UpdateData", async () => {
@@ -15,7 +16,8 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".mbxs span strong") ??
 			document.querySelector<HTMLElement>("p.type-weak")
 		).textContent;
-		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/C/Change/assets/logo.jpg";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/C/Change/assets/logo.jpg";
 		presenceData.buttons = [
 			{
 				label: "View Petition",
@@ -26,7 +28,8 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/Change/assets/logo.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/Change/assets/logo.jpg",
 		});
 	}
 });

@@ -14,7 +14,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Soul/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Soul/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	const { pathname } = window.location;

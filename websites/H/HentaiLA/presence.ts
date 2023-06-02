@@ -18,7 +18,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/HentaiLA/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/H/HentaiLA/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/")

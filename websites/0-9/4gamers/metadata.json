@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "蒟蒻",
 		"id": "276337222196658178"
@@ -13,7 +13,7 @@
 		"nl": "Een geïntegreerd bedrijf voor de planning, uitvoering, marketing en uitzending van e-sports in Taiwan."
 	},
 	"url": "www.4gamers.com.tw",
-	"version": "1.4.19",
+	"version": "1.4.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/4gamers/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/4gamers/assets/thumbnail.png",
 	"color": "#2E93A5",

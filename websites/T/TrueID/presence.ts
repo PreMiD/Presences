@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
 		path = document.location,
 		lang = path.pathname.substring(1, 6),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TrueID/assets/logo.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TrueID/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 

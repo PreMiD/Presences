@@ -30,7 +30,8 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Unknown page",
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,

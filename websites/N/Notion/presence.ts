@@ -19,7 +19,8 @@ async function shortenURL(url: string, fallback?: string): Promise<string> {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/Notion/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/Notion/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname,

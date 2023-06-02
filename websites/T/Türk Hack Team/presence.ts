@@ -22,7 +22,8 @@ presence.on("UpdateData", async () => {
 			"body > div:nth-child(5) > form > table > tbody > tr:nth-child(1) > td"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/T%C3%BCrk%20Hack%20Team/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/T%C3%BCrk%20Hack%20Team/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

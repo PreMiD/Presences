@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Tellen",
 		"id": "535214819520020510"
@@ -21,7 +21,7 @@
 		"canva.com",
 		"www.canva.com"
 	],
-	"version": "1.2.16",
+	"version": "1.2.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Canva/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Canva/assets/thumbnail.png",
 	"color": "#4075DB",

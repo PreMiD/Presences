@@ -9,11 +9,13 @@ presence.on("UpdateData", async () => {
 				document.querySelectorAll(".translate_from")[0].parentNode.textContent,
 			state:
 				document.querySelectorAll(".translate_to")[0].parentNode.textContent,
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/DeepL/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/DeepL/assets/logo.png",
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/DeepL/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/DeepL/assets/logo.png",
 		});
 	}
 });

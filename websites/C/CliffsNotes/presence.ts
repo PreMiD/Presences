@@ -7,7 +7,8 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 	path = document.location.pathname;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/CliffsNotes/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/CliffsNotes/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (path === "/") presenceData.details = "Viewing Home";

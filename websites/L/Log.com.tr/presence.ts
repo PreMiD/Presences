@@ -3,7 +3,8 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/Log.com.tr/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Log.com.tr/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

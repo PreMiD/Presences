@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "qwerty142",
 		"id": "455167347464863746"
@@ -10,7 +10,7 @@
 		"nl": "Rooster Teeth is een baanbrekend media- en entertainmentbedrijf dat verantwoordelijk is voor enkele van de grootste online series in de geschiedenis, zoals de bekroonde en langstlopende webserie, Red vs. Blue"
 	},
 	"url": "roosterteeth.com",
-	"version": "1.1.22",
+	"version": "1.1.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rooster%20Teeth/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rooster%20Teeth/assets/thumbnail.png",
 	"color": "#2c2420",

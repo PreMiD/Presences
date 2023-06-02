@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Deconreconstruction/assets/0.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Deconreconstruction/assets/0.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname } = document.location,
@@ -32,7 +33,8 @@ presence.on("UpdateData", async () => {
 
 				default:
 					presenceData.details = "Reading Vast Error";
-					presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/D/Deconreconstruction/assets/1.png";
+					presenceData.smallImageKey =
+						"https://cdn.rcd.gg/PreMiD/websites/D/Deconreconstruction/assets/1.png";
 					presenceData.state = `Page ${pathArr[2]} of ${vePages}`;
 					presenceData.smallImageText =
 						document.querySelector("#command").textContent;
@@ -50,7 +52,8 @@ presence.on("UpdateData", async () => {
 			switch (pathArr[2]) {
 				case "syzygy":
 					presenceData.details = "Reading Thaumatrope: Syzygy";
-					presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/D/Deconreconstruction/assets/2.png";
+					presenceData.smallImageKey =
+						"https://cdn.rcd.gg/PreMiD/websites/D/Deconreconstruction/assets/2.png";
 					presenceData.state = `Page ${pathArr[3]} of 162`;
 					presenceData.smallImageText =
 						document.querySelector("#command").textContent;
@@ -64,7 +67,8 @@ presence.on("UpdateData", async () => {
 
 				case "haustoria":
 					presenceData.details = "Reading Thaumatrope: Haustoria";
-					presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/D/Deconreconstruction/assets/2.png";
+					presenceData.smallImageKey =
+						"https://cdn.rcd.gg/PreMiD/websites/D/Deconreconstruction/assets/2.png";
 					presenceData.state = `Page ${pathArr[3]} of ${htPages}`;
 					presenceData.smallImageText =
 						document.querySelector("#command").textContent;
@@ -90,7 +94,8 @@ presence.on("UpdateData", async () => {
 			switch (pathArr[2]) {
 				case "april-fools-day-2017":
 					presenceData.details = "Reading April Fools 2017";
-					presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/D/Deconreconstruction/assets/3.png";
+					presenceData.smallImageKey =
+						"https://cdn.rcd.gg/PreMiD/websites/D/Deconreconstruction/assets/3.png";
 					presenceData.state = `Page ${pathArr[3]} of 4`;
 					presenceData.smallImageText =
 						document.querySelector("#command").textContent;

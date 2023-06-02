@@ -3,7 +3,8 @@ const presence = new Presence({ clientId: "991160367629750372" }),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Flowlab/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Flowlab/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = document.location;

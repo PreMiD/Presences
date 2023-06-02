@@ -7,7 +7,8 @@ let board: HTMLElement, profile: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Trello/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Trello/assets/logo.png",
 		},
 		displayPrivateBoards = await presence.getSetting<boolean>(
 			"displayPrivateBoards"

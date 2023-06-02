@@ -17,7 +17,8 @@ const stripPlatziProfileFlags = (url: string) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Platzi/assets/logo.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/Platzi/assets/logo.jpg",
 		},
 		{ pathname } = document.location,
 		pathNameSplit = pathname.split("/").filter(Boolean);

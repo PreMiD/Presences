@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Roll20/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Roll20/assets/logo.png",
 			startTimestamp: websiteLoadTimestamp,
 		},
 		hideDetails = await presence.getSetting<boolean>("hideDetails");

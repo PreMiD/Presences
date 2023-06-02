@@ -13,7 +13,8 @@ presence.on("UpdateData", async () => {
 		]),
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Hareshi/assets/logo.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Hareshi/assets/logo.jpg",
 			details: "หน้าแรก",
 			startTimestamp: browsingTimestamp,
 		},

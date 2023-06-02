@@ -11,7 +11,8 @@ let prevTitle: string, prevEpisode: string, strings: Awaited<typeof getStrings>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Funimation/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Funimation/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		showPoster = await presence.getSetting("poster"),

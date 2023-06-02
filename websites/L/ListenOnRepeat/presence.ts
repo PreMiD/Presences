@@ -35,7 +35,8 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/ListenOnRepeat/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/ListenOnRepeat/assets/logo.png",
 		},
 		[sGlobalRepeat, sFormatRepeat, sFormatGlobalRepeat] = await Promise.all([
 			presence.getSetting<boolean>("sGlobalRepeat"),

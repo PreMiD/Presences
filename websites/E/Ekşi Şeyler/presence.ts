@@ -17,7 +17,8 @@ presence.on("UpdateData", async () => {
 				.toLowerCase();
 
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
 			details: "Bir kategoriye göz atıyor:",
 			state: category || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -31,7 +32,8 @@ presence.on("UpdateData", async () => {
 				.toLowerCase();
 
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
 			details: "Bir kanala göz atıyor:",
 			state: channel || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -42,7 +44,8 @@ presence.on("UpdateData", async () => {
 		);
 
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
 			details: "Bir şey arıyor:",
 			state:
 				searchingFor && searchingFor.textContent !== ""
@@ -52,14 +55,16 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (postTitle && postTitle.textContent !== "") {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
 			details: "Bir gönderiyi okuyor:",
 			state: postTitle.textContent || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Ek%C5%9Fi%20%C5%9Eeyler/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
 			startTimestamp: Math.floor(Date.now() / 1000),

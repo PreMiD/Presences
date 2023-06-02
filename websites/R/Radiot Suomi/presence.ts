@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Radiot%20Suomi/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/Radiot%20Suomi/assets/logo.png",
 	};
 	if (document.location.hostname === "www.radio-suomi.com") {
 		if (document.location.pathname === "/") {

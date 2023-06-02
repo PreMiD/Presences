@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "bakzkndd",
 		"id": "343103632453009408"
@@ -11,7 +11,7 @@
 	},
 	"url": "tomshardware.com",
 	"regExp": "([a-z0-9-]+[.])*tomshardware[.]com[/]",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TomsHardware/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TomsHardware/assets/thumbnail.png",
 	"color": "#e03c3c",

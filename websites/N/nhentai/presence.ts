@@ -31,7 +31,8 @@ if (lastPlaybackState !== reading) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/nhentai/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/N/nhentai/assets/logo.png",
 	};
 
 	tabTitle = document.title;

@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Gelbooru/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Gelbooru/assets/logo.png",
 		},
 		urlParams = new URLSearchParams(window.location.search);
 	if (document.location.pathname === "/")

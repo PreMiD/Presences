@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -29,7 +29,7 @@
 		"www.mangadex.org",
 		"mangadex.cc"
 	],
-	"version": "3.0.6",
+	"version": "3.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaDex/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaDex/assets/thumbnail.png",
 	"color": "#F18F1E",

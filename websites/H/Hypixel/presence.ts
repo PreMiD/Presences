@@ -7,7 +7,8 @@ let user: HTMLElement, search: HTMLInputElement, title: HTMLElement | string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Hypixel/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/H/Hypixel/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	switch (document.location.hostname) {

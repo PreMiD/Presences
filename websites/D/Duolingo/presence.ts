@@ -62,7 +62,8 @@ const presence = new Presence({
 		"vocabulary",
 	],
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	},
 	language = {

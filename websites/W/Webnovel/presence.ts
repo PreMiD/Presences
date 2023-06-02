@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Browsing",
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/Webnovel/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Webnovel/assets/logo.png",
 		},
 		[privacy, timestamp, cover, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),

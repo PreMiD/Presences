@@ -7,7 +7,8 @@ let ui: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/splix.io/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/splix.io/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/") {

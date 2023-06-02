@@ -7,7 +7,8 @@ let user: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/Valtox%20Gaming%20Group/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/V/Valtox%20Gaming%20Group/assets/logo.png",
 	};
 
 	switch (document.location.hostname) {

@@ -7,7 +7,8 @@ let title: Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname } = window.location,
@@ -46,7 +47,8 @@ presence.on("UpdateData", async () => {
 		if (video) {
 			presenceData.largeImageKey =
 				document.querySelector<HTMLMetaElement>('[property="og:image" ]')
-					?.content ?? "https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png";
+					?.content ??
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png";
 			presenceData.buttons = [
 				{
 					label: "Bekijk Video",
@@ -104,7 +106,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!buttons || privacy) delete presenceData.buttons;
-	if (!covers) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png";
+	if (!covers) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png";
+	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

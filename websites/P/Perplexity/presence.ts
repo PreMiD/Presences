@@ -16,9 +16,11 @@ presence.on("UpdateData", async () => {
 		pageInput = document.querySelector<HTMLInputElement>(".md\\:mb-md"),
 		currentPage = pathname.split("/")[1],
 		largeImage =
-			["https://cdn.rcd.gg/PreMiD/websites/P/Perplexity/assets/logo.png", "https://cdn.rcd.gg/PreMiD/websites/P/Perplexity/assets/0.png"][
-				iconType
-			] || "https://cdn.rcd.gg/PreMiD/websites/P/Perplexity/assets/logo.png",
+			[
+				"https://cdn.rcd.gg/PreMiD/websites/P/Perplexity/assets/logo.png",
+				"https://cdn.rcd.gg/PreMiD/websites/P/Perplexity/assets/0.png",
+			][iconType] ||
+			"https://cdn.rcd.gg/PreMiD/websites/P/Perplexity/assets/logo.png",
 		presenceData: PresenceData = {
 			largeImageKey: largeImage,
 			startTimestamp: browsingTimestamp,
@@ -55,7 +57,8 @@ presence.on("UpdateData", async () => {
 
 		case "threads":
 			presenceData.details = "Searching threads";
-			presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/P/Perplexity/assets/1.png";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/P/Perplexity/assets/1.png";
 			break;
 
 		case "about":

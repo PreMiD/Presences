@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Beckrs",
 		"id": "777552923177386025"
@@ -13,7 +13,7 @@
 		"kickassfingers.com",
 		"www.kickassfingers.com"
 	],
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssFingers/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssFingers/assets/thumbnail.png",
 	"color": "#976398",

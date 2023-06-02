@@ -15,7 +15,8 @@ presence.on("UpdateData", async () => {
 	// code
 	const preStrings = await _preStrings,
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Radiko/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Radiko/assets/logo.png",
 		};
 
 	// In Radio

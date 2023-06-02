@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Anaxes",
 		"id": "567885938160697377"
@@ -19,7 +19,7 @@
 		"en": "Find discord servers using the most advanced public index."
 	},
 	"url": "discords.com",
-	"version": "1.1.14",
+	"version": "1.1.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discords.com/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discords.com/assets/thumbnail.png",
 	"color": "#23283B",

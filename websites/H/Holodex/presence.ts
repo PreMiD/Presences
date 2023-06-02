@@ -356,7 +356,8 @@ presence.on("UpdateData", async () => {
 	dataUpdater.updateAll();
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
 		smallImageKey: data.smallimage.image,
 		smallImageText: data.smallimage.hover,
 		details: data.details,

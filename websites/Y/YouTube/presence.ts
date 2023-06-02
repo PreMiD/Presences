@@ -415,7 +415,8 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (YoutubeShorts) {
-			presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/1.png";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/1.png";
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 			delete presenceData.endTimestamp;

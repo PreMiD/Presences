@@ -1,5 +1,6 @@
 export const name = "Dictionarium";
-export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/25.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/25.png";
 
 export function getPresenceData({
 	playerState,

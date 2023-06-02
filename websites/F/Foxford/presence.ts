@@ -19,7 +19,8 @@ const routes = {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Foxford/assets/logo.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/Foxford/assets/logo.jpg",
 	};
 
 	switch (true) {

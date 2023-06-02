@@ -59,7 +59,8 @@ presence.on("UpdateData", async () => {
 			);
 
 			presence.setActivity({
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: "Bir diziye göz atıyor:",
 				state:
 					showName && showName.textContent !== ""
@@ -69,7 +70,8 @@ presence.on("UpdateData", async () => {
 			});
 		} else if (document.location.search.includes("?s=")) {
 			presence.setActivity({
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: "Bir dizi arıyor:",
 				state:
 					document.querySelector(
@@ -91,14 +93,16 @@ presence.on("UpdateData", async () => {
 			);
 
 			presence.setActivity({
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: "Bir üyenin profiline bakıyor:",
 				state: user && user.textContent ? user.textContent : "Belirsiz",
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (pages[page] || pages[page.slice(0, -1)]) {
 			presence.setActivity({
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: "Bir sayfaya göz atıyor:",
 				state: pages[page] || pages[page.slice(0, -1)],
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -116,7 +120,8 @@ presence.on("UpdateData", async () => {
 				Math.floor(_video.duration)
 			),
 			presenceData: PresenceData = {
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: title && title.textContent ? title.textContent : "Belirsiz",
 				state:
 					episode && episode.textContent ? episode.textContent : "Belirsiz",
@@ -147,7 +152,8 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			),
 			presenceData: PresenceData = {
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: title && title.textContent ? title.textContent : "Belirsiz",
 				state:
 					episode && episode.textContent ? episode.textContent : "Belirsiz",

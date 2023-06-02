@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Y/Yahoo%20Mail/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Y/Yahoo%20Mail/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting("privacy"),

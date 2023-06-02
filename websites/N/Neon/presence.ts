@@ -11,7 +11,8 @@ function findElement(tagName: string, className: string): Element {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/Neon/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/Neon/assets/logo.png",
 			details: "Browsing...",
 			startTimestamp: browsingTimestamp,
 		},

@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/FIFA%20Web%20App/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/FIFA%20Web%20App/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

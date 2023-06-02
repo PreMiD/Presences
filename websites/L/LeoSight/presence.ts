@@ -6,7 +6,8 @@ const presence = new Presence({
 let item, item2;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/logo.png",
 			smallImageKey: "lsminilogo",
 			smallImageText: "leosight.cz",
 			startTimestamp: browsingTimestamp,

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "892219412302671913",
 		"name": "Ao"
@@ -13,7 +13,7 @@
 		"aodesu.com",
 		"www.aodesu.com"
 	],
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/thumbnail.png",
 	"color": "#4169e1",

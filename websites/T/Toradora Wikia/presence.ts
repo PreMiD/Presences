@@ -28,7 +28,8 @@ presence.on("UpdateData", async () => {
 		presence.setActivity({
 			details: "Viewing a page...",
 			state: page,
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Toradora%20Wikia/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Toradora%20Wikia/assets/logo.png",
 		});
 	}
 	germanPresence.on("UpdateData", async () => {
@@ -49,7 +50,8 @@ presence.on("UpdateData", async () => {
 			germanPresence.setActivity({
 				details: "Schaut eine Seite an...",
 				state: page,
-				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Toradora%20Wikia/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/T/Toradora%20Wikia/assets/logo.png",
 			});
 		}
 	});

@@ -9,7 +9,8 @@ const actionURL = new URL(document.location.href),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Touhou%20Wiki/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/Touhou%20Wiki/assets/logo.png",
 	};
 
 	title = document.querySelector("h1#firstHeading");

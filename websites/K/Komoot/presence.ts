@@ -10,7 +10,8 @@ presence.on("UpdateData", async function () {
 		},
 		urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Komoot/assets/logo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/K/Komoot/assets/logo.png",
 		};
 
 	if (setting.timeElapsed) presenceData.startTimestamp = browsingTimestamp;

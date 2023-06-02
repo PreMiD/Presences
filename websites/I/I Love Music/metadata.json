@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "MauriceX",
 		"id": "268768664411439115"
@@ -17,7 +17,7 @@
 		"nl": "De beste webradio van Duitsland - de beste muziek voor iedereen!"
 	},
 	"url": "ilovemusic.de",
-	"version": "2.0.5",
+	"version": "2.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/I%20Love%20Music/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/I%20Love%20Music/assets/thumbnail.png",
 	"color": "#F7C516",

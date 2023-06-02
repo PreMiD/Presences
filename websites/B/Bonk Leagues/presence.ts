@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Bonk%20Leagues/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/Bonk%20Leagues/assets/logo.png",
 	};
 
 	if (document.location.pathname.startsWith("/skins.html")) {
