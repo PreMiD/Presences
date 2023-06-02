@@ -17,9 +17,9 @@
 	},
 	"url": "www.daum.net",
 	"regExp": "(top[.])?([a-z]+)([.]v)?[.]daum[.]([a-z0-9]+)",
-	"version": "1.0.16",
-	"logo": "https://i.imgur.com/UFpDEUR.png",
-	"thumbnail": "https://i.imgur.com/OF0PaMd.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/thumbnail.png",
 	"color": "#f4f7fb",
 	"category": "other",
 	"tags": [

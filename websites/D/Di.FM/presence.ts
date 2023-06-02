@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/T1Zi3qF.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Di.FM/assets/logo.png",
 	};
 	if (
 		document.querySelector("#webplayer-region").getAttribute("data-state") ===

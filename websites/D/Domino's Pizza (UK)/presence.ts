@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/GYkNfcY.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Domino's%20Pizza%20(UK)/assets/logo.png",
 			startTimestamp: Date.now(),
 		},
 		path = document.location.pathname;

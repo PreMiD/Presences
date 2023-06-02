@@ -11,9 +11,9 @@
 		"nl": "Discord.js is een krachtige node.js module die je toelaat om zeer eenvoudig te interageren met de Discord API."
 	},
 	"url": "discord.js.org",
-	"version": "1.2.16",
-	"logo": "https://i.imgur.com/v4Qb6IT.png",
-	"thumbnail": "https://i.imgur.com/lXDvidg.png",
+	"version": "1.2.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discord.js/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discord.js/assets/thumbnail.png",
 	"color": "#8dd6f1",
 	"category": "other",
 	"tags": [

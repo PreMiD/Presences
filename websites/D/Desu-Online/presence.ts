@@ -10,8 +10,8 @@ let video = {
 };
 
 const enum Assets {
-	Logo = "https://i.imgur.com/KEkxfKO.png",
-	Home = "https://i.imgur.com/xVhTZcB.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/logo.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/0.png",
 }
 
 presence.on(

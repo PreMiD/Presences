@@ -10,9 +10,9 @@
 		"nl": "100% gratis muziek. Meer afwisseling. Geen reclames. De beste dj's en stations. Geen BS"
 	},
 	"url": "dashradio.com",
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/o4Ea2f9.png",
-	"thumbnail": "https://i.imgur.com/WrEODCb.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dash%20Radio/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dash%20Radio/assets/thumbnail.png",
 	"color": "#55effa",
 	"category": "music",
 	"tags": [

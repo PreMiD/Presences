@@ -11,9 +11,9 @@
 	},
 	"url": "dramacool.vc",
 	"regExp": "[0-9w]{0,6}.*dramacool.[a-z]+",
-	"version": "1.2.5",
-	"logo": "https://i.imgur.com/Bn5qNZO.png",
-	"thumbnail": "https://i.imgur.com/f3AIc30.png",
+	"version": "1.2.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DramaCool/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DramaCool/assets/thumbnail.png",
 	"color": "#26bdc6",
 	"category": "videos",
 	"tags": [
