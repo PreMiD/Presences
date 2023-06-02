@@ -20,9 +20,9 @@
 		"apidocs.imgur.com",
 		"community.imgur.com"
 	],
-	"version": "1.1.17",
-	"logo": "https://i.imgur.com/eZf3wsO.png",
-	"thumbnail": "https://i.imgur.com/vTLBJYm.jpg",
+	"version": "1.1.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Imgur/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Imgur/assets/thumbnail.jpg",
 	"color": "#89c624",
 	"category": "other",
 	"tags": [

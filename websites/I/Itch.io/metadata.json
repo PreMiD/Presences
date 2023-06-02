@@ -11,9 +11,9 @@
 	},
 	"url": "itch.io",
 	"regExp": "([a-z0-9-]+[.])*itch[.]io[/]",
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/Sv0IpMI.png",
-	"thumbnail": "https://i.imgur.com/f3PK8Y5.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Itch.io/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Itch.io/assets/thumbnail.png",
 	"color": "#e22c78",
 	"category": "games",
 	"tags": [

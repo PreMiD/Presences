@@ -10,9 +10,9 @@
 	},
 	"url": "idlix.com",
 	"regExp": "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[/]",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/nolTGp7.png",
-	"thumbnail": "https://i.imgur.com/173YUNV.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/thumbnail.png",
 	"color": "#e50914",
 	"category": "videos",
 	"tags": [
