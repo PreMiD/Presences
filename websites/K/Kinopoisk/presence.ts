@@ -30,8 +30,8 @@ function pageTitle(string: string) {
 }
 
 const enum Assets {
-	Library = "https://i.imgur.com/FzNE1zD.png",
-	Movies = "https://i.imgur.com/EzwByrT.png",
+	Library = "https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/logo.png",
+	Movies = "https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/0.png",
 }
 
 presence.on(

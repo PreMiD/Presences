@@ -75,7 +75,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/yrWMYRs.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Kahoot/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[buttons, newLang] = await Promise.all([

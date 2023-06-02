@@ -30,7 +30,7 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/aEsTuLn.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Kayoanime/assets/logo.png",
 		startTimestamp: Date.now(),
 	};
 

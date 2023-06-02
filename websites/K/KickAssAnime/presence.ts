@@ -93,7 +93,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/TGgZkKQ.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[buttons, newLang, cover] = await Promise.all([

@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/9eu1lO1.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/KickAssFingers/assets/logo.png",
 			startTimestamp: time,
 		},
 		data = document.querySelector("#premIdVars"),

@@ -10,9 +10,9 @@
 		"ru": "Сайт для онлайн просмотра фильмов, сериалов, спортивных трансляций и концертов"
 	},
 	"url": "kinopub.net",
-	"version": "1.0.5",
-	"logo": "https://i.imgur.com/HAvvvj7.png",
-	"thumbnail": "https://i.imgur.com/TFaoJbL.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kinopub/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kinopub/assets/thumbnail.png",
 	"color": "#1c202b",
 	"category": "videos",
 	"tags": [

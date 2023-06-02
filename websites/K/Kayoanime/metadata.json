@@ -9,9 +9,9 @@
 		"en": "Kayoanime is a website where you can download anime in dual audio 1080p through Google drive."
 	},
 	"url": "kayoanime.com",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/aEsTuLn.png",
-	"thumbnail": "https://i.imgur.com/z7BnqDr.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kayoanime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kayoanime/assets/thumbnail.png",
 	"color": "#FFFFFF",
 	"category": "anime",
 	"tags": [
