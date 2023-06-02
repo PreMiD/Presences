@@ -1,10 +1,8 @@
 const presence = new Presence({ clientId: "1095377958241304586" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-enum Assets {
+const enum Assets {
 	Logo = "https://i.imgur.com/emLcjZT.png",
-	Searching = "https://i.imgur.com/OIgfjTG.png",
-	Reviewing = "https://i.imgur.com/53N4eY6.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -46,7 +44,7 @@ function getPageData(
 			return {
 				details: `Viewing their ${page}...`,
 				state: document.querySelector("h1").textContent,
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "course":
 			return {
@@ -63,13 +61,11 @@ function getPageData(
 			};
 		case "aprender": {
 			const translate = document.querySelector(
-					"#__next > div > div > div > div > div > div > div > div > div > div > div > h2"
+					'div[data-testid="testLearnableCard"] > div > div > div'
 				),
-				points = document.querySelector(
-					"#__next > div > div > div > div > div > div > div > div > div > span > div"
-				),
+				points = document.querySelector("span > div > span"),
 				completed = document.querySelector(
-					"#__next > div > div > div > div > div > div > div > h2"
+					'div[data-testid="endOfSession"] h2'
 				);
 			let state = "";
 			if (translate?.textContent && points?.textContent)
@@ -78,14 +74,14 @@ function getPageData(
 			return {
 				details: document.querySelector("header > div > a").textContent,
 				state,
-				smallImageKey: Assets.Reviewing,
+				smallImageKey: Assets.Reading,
 			};
 		}
 		case "courses":
 			return {
 				details: "Browsing...",
 				state: document.querySelector(".category-header").textContent,
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "dictionary": {
 			const lang = pageDetail.charAt(0).toUpperCase() + pageDetail.slice(1);
@@ -96,11 +92,11 @@ function getPageData(
 							document.querySelector("mark:nth-child(1)").textContent
 						} = 
 				${document.querySelector("h2").textContent}`,
-						smallImageKey: Assets.Reviewing,
+						smallImageKey: Assets.Reading,
 				  }
 				: {
 						details: `Looking up ${lang} phrases...`,
-						smallImageKey: Assets.Searching,
+						smallImageKey: Assets.Search,
 				  };
 		}
 		case "user":
@@ -120,31 +116,31 @@ function getPageData(
 			return {
 				details: "Browsing Community forums...",
 				state: "All categories",
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "top":
 			return {
 				details: "Browsing Community forums...",
 				state: "Top posted",
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "latest":
 			return {
 				details: "Browsing Community forums...",
 				state: "Latest posts",
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "badges":
 			return {
 				details: "Browsing Community forums...",
 				state: "All badges",
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "tags":
 			return {
 				details: "Browsing Community forums...",
 				state: "Filter tags",
-				smallImageKey: Assets.Searching,
+				smallImageKey: Assets.Search,
 			};
 		case "c": {
 			// category, topic and post forum level
@@ -152,12 +148,12 @@ function getPageData(
 				? {
 						details: `Forum: ${pageDetail.replaceAll("-", " ")}`,
 						state: `Topic: ${title.replaceAll("-", " ")}`,
-						smallImageKey: Assets.Searching,
+						smallImageKey: Assets.Search,
 				  }
 				: {
 						details: "Browsing forum category...",
 						state: pageDetail.replaceAll("-", " "),
-						smallImageKey: Assets.Searching,
+						smallImageKey: Assets.Search,
 				  };
 		}
 		case "t": {
@@ -172,7 +168,7 @@ function getPageData(
 					).textContent
 				}`,
 				state: `Post: ${document.querySelector(".fancy-title").textContent}`,
-				smallImageKey: Assets.Reviewing,
+				smallImageKey: Assets.Reading,
 			};
 		}
 		case "about": // general memrise domain
@@ -187,7 +183,7 @@ function getPageData(
 			return {
 				details: `Reading Memrise ${page}s...`,
 				state: document.querySelector("#hs_cos_wrapper_name").textContent, //blog title
-				smallImageKey: Assets.Reviewing,
+				smallImageKey: Assets.Reading,
 			};
 		case "contact":
 			return { details: `Viewing Memrise ${page} page` };
@@ -198,7 +194,7 @@ function getPageData(
 		case "cookies":
 			return { details: `Reading Memrise ${page} policy` };
 		default:
-			return { details: "Browsing...", smallImageKey: Assets.Searching };
+			return { details: "Browsing...", smallImageKey: Assets.Search };
 	}
 }
 function getHomeDetail(pageDetail: string) {
