@@ -28,7 +28,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/hC6q0vV.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/megastudy/assets/logo.png",
 	};
 
 	if (document.location.pathname.includes("Player")) {

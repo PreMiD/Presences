@@ -12,14 +12,14 @@ let microsoft = {
 };
 
 const enum Assets {
-	Microsoft = "https://i.imgur.com/E2tzaTW.png",
+	Microsoft = "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/logo.png",
 }
 
 enum OtherAssets {
-	Excel = "https://i.imgur.com/Vm9mwZG.png",
-	OneNote = "https://i.imgur.com/LqrhRhD.png",
-	PowerPoint = "https://i.imgur.com/GAiZFPR.png",
-	Word = "https://i.imgur.com/Ec78aqz.png",
+	Excel = "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/0.png",
+	OneNote = "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/1.png",
+	PowerPoint = "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/2.png",
+	Word = "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/3.png",
 }
 
 presence.on(

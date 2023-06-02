@@ -16,9 +16,9 @@
 		"manga4life.com"
 	],
 	"regExp": "([a-z0-9]+[.])?manga4life[.]com",
-	"version": "1.0.8",
-	"logo": "https://i.imgur.com/mJTwQxZ.png",
-	"thumbnail": "https://i.imgur.com/7R0tE9U.png",
+	"version": "1.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/thumbnail.png",
 	"color": "#6cabdf",
 	"category": "anime",
 	"tags": [

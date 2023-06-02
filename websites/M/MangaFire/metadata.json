@@ -13,9 +13,9 @@
 		"mangafire.to",
 		"www.mangafire.to"
 	],
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/356Spon.png",
-	"thumbnail": "https://i.imgur.com/5m8Ddgq.png",
+	"version": "1.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/thumbnail.png",
 	"color": "#007bff",
 	"category": "anime",
 	"tags": [

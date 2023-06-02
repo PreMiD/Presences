@@ -26,8 +26,8 @@ function capitalizeFirstLetter(string: string) {
 }
 
 const enum Assets {
-	Loading = "https://i.imgur.com/Sn6KCPG.gif",
-	Logo = "https://i.imgur.com/I499MN5.png",
+	Loading = "https://cdn.rcd.gg/PreMiD/websites/M/MEE6/assets/0.gif",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/MEE6/assets/1.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;

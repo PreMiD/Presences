@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const entries = await presence.getSetting<boolean>("entries"),
 		buttons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/E8zTeX8.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/MangaSee/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = document.location;

@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: Math.floor(Date.now() / 1000),
-			largeImageKey: "https://i.imgur.com/yDmQsYg.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/Mark%20Scans/assets/logo.png",
 		},
 		path = document.location.pathname,
 		title: HTMLElement = document.querySelector("head title"),

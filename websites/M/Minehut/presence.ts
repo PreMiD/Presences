@@ -3,7 +3,7 @@ const presence = new Presence({ clientId: "898448802829189172" }),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/FOvZNY6.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/Minehut/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		f = document.location.pathname.split("/");

@@ -11,9 +11,9 @@
 		"nl": "De webdocumenten van MDN, hier vind je JS-documenten en meer..."
 	},
 	"url": "developer.mozilla.org",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/SmC65Yu.png",
-	"thumbnail": "https://i.imgur.com/TkKC4bK.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/thumbnail.png",
 	"color": "#84d4f4",
 	"category": "other",
 	"tags": [
