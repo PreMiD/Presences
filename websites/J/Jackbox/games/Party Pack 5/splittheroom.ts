@@ -1,5 +1,5 @@
 export const name = "Split the Room";
-export const logo = "https://i.imgur.com/YyhOPAp.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/21.png";
 
 export function getPresenceData({
 	playerState,

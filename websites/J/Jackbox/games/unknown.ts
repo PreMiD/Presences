@@ -1,6 +1,6 @@
 export const tag = "unknown";
 export const name = "Unknown Game";
-export const logo = "https://i.imgur.com/SXfEdnL.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/logo.png";
 
 export function getPresenceData(info: GameCallbackParams): PresenceData {
 	return {

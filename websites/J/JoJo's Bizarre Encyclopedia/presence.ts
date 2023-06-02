@@ -11,8 +11,8 @@ presence.on("UpdateData", async () => {
 
 	if (hostname === "jojowiki.com") {
 		presenceData = {
-			largeImageKey: "https://i.imgur.com/iBLgETb.png",
-			smallImageKey: "https://i.imgur.com/h5EZ0JB.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/J/JoJo's%20Bizarre%20Encyclopedia/assets/0.png",
+			smallImageKey: "https://cdn.rcd.gg/PreMiD/websites/J/JoJo's%20Bizarre%20Encyclopedia/assets/1.png",
 			smallImageText: "jojowiki.com",
 		};
 		presenceData.details = "Browsing JoJoWiki";
@@ -144,8 +144,8 @@ presence.on("UpdateData", async () => {
 	}
 	if (hostname === "jojo-news.com") {
 		presenceData = {
-			largeImageKey: "https://i.imgur.com/iBLgETb.png",
-			smallImageKey: "https://i.imgur.com/lLWbSBd.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/J/JoJo's%20Bizarre%20Encyclopedia/assets/0.png",
+			smallImageKey: "https://cdn.rcd.gg/PreMiD/websites/J/JoJo's%20Bizarre%20Encyclopedia/assets/2.png",
 			smallImageText: "jojo-news.com",
 		};
 		presenceData.details = "Browsing News";

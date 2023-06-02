@@ -1,5 +1,5 @@
 export const name = "Survive the Internet";
-export const logo = "https://i.imgur.com/eXCzZ2e.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/17.png";
 
 export function getPresenceData(): PresenceData {
 	const presenceData: PresenceData = {},

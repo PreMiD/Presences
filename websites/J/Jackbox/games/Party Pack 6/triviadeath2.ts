@@ -1,5 +1,5 @@
 export const name = "Trivia Murder Party 2";
-export const logo = "https://i.imgur.com/9MmGVGD.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/27.png";
 
 export function getPresenceData({
 	playerState,

@@ -1,5 +1,5 @@
 export const name = "Nonsensory";
-export const logo = "https://i.imgur.com/JH3JgaM.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/42.png";
 
 export function getPresenceData({
 	playerState,

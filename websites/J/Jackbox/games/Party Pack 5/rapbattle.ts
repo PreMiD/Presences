@@ -1,5 +1,5 @@
 export const name = "Mad Verse City";
-export const logo = "https://i.imgur.com/Up8Paw8.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/19.png";
 
 export function getPresenceData({
 	playerState,

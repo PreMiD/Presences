@@ -1,5 +1,5 @@
 export const name = "Word Spud";
-export const logo = "https://i.imgur.com/gFUB4EX.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/2.png";
 
 export function getPresenceData(): PresenceData {
 	const { classList } = document.querySelector<HTMLDivElement>(

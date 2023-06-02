@@ -1,5 +1,5 @@
 export const name = "Role Models";
-export const logo = "https://i.imgur.com/Utg6Fow.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/26.png";
 
 export function getPresenceData({
 	playerState,
