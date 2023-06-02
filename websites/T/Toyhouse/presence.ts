@@ -7,7 +7,7 @@ const presence = new Presence({ clientId: "1014873319419424869" }),
 		"~account": "Managing their account",
 	};
 const enum Assets {
-	Logo = "https://i.imgur.com/3ltOcr0.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Toyhouse/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

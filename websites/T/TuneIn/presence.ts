@@ -11,7 +11,7 @@ let title, author;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/mcwhb4p.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TuneIn/assets/logo.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	if (

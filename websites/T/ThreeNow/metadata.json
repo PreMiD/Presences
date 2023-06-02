@@ -10,9 +10,9 @@
 		"nl": "Bekijk de nieuwste TV On Demand-afleveringen van al uw favoriete programma's van Three met ThreeNow. Bekijk Three livestream, Newshub, Three Movies en Three shows."
 	},
 	"url": "www.threenow.co.nz",
-	"version": "1.2.19",
-	"logo": "https://i.imgur.com/t7j0bcF.png",
-	"thumbnail": "https://i.imgur.com/N8CRfMJ.png",
+	"version": "1.2.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/ThreeNow/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/ThreeNow/assets/thumbnail.png",
 	"color": "#FF0050",
 	"category": "videos",
 	"tags": [

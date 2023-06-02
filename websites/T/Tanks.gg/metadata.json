@@ -9,9 +9,9 @@
 		"en": "World of Tanks tank info and models."
 	},
 	"url": "tanks.gg",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/jjvJi16.png",
-	"thumbnail": "https://i.imgur.com/sIHTwlj.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tanks.gg/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tanks.gg/assets/thumbnail.png",
 	"color": "#481109",
 	"category": "games",
 	"tags": [

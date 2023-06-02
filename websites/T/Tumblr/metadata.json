@@ -11,9 +11,9 @@
 	},
 	"url": "www.tumblr.com",
 	"regExp": "([a-z0-9-]+[.])*tumblr[.]com[/]",
-	"version": "1.2.15",
-	"logo": "https://i.imgur.com/AE5bq1T.png",
-	"thumbnail": "https://i.imgur.com/FZ3Zrxb.png",
+	"version": "1.2.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tumblr/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tumblr/assets/thumbnail.png",
 	"color": "#395976",
 	"category": "other",
 	"tags": [

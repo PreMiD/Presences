@@ -10,9 +10,9 @@
 		"nl": "TryHackMe haalt de pijn uit het leren en onderwijzen van cyberbeveiliging."
 	},
 	"url": "tryhackme.com",
-	"version": "1.1.18",
-	"logo": "https://i.imgur.com/gqL7pDD.png",
-	"thumbnail": "https://i.imgur.com/jojxLOU.png",
+	"version": "1.1.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TryHackMe/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TryHackMe/assets/thumbnail.png",
 	"color": "#343C42",
 	"category": "other",
 	"tags": [
