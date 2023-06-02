@@ -13,9 +13,9 @@
 	},
 	"url": "quora.com",
 	"regExp": "([a-z0-9]+)[.]quora[.]com",
-	"version": "1.0.16",
-	"logo": "https://i.imgur.com/WBwFUzx.png",
-	"thumbnail": "https://i.imgur.com/rrhEpI3.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Q/Quora/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Q/Quora/assets/thumbnail.png",
 	"color": "#A70000",
 	"category": "socials",
 	"tags": [

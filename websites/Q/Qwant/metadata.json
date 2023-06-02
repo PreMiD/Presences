@@ -14,9 +14,9 @@
 		"www.qwant.com",
 		"www.qwantjunior.com"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/peAp6sZ.png",
-	"thumbnail": "https://i.imgur.com/nEMCic5.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Q/Qwant/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Q/Qwant/assets/thumbnail.png",
 	"color": "#4BA2EA",
 	"category": "other",
 	"tags": [
