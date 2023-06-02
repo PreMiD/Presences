@@ -14,9 +14,9 @@
 		"simliveradio.net",
 		"laut.fm"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/GCpxrYu.png",
-	"thumbnail": "https://i.imgur.com/d8J0v3O.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SimLiveRadio/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SimLiveRadio/assets/thumbnail.png",
 	"color": "#f87d04",
 	"category": "games",
 	"tags": [

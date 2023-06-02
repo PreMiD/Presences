@@ -12,9 +12,9 @@
 	},
 	"url": "slither.io",
 	"regExp": "([a-z0-9-]+[.])*slither[.]io[/]",
-	"version": "1.6.15",
-	"logo": "https://i.imgur.com/1afZuaP.png",
-	"thumbnail": "https://i.imgur.com/PeahIhY.png",
+	"version": "1.6.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Slither.io/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Slither.io/assets/thumbnail.png",
 	"color": "#319c2c",
 	"category": "games",
 	"tags": [

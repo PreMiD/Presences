@@ -16,9 +16,9 @@
 		"content.something.host",
 		"files.something.host"
 	],
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/il2R4FQ.png",
-	"thumbnail": "https://i.imgur.com/m7Av02S.png",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Something.Host/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Something.Host/assets/thumbnail.png",
 	"color": "#7A64EF",
 	"category": "other",
 	"tags": [

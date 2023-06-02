@@ -10,7 +10,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/RDZSlTX.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Spirit%20Fanfics/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 			details: (await strings).browsing,
 		},

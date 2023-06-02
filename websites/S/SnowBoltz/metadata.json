@@ -15,9 +15,9 @@
 		"shop.snowboltz.net"
 	],
 	"regExp": "([a-z0-9-]+[.])*snowboltz[.]net[/]",
-	"version": "1.1.12",
-	"logo": "https://i.imgur.com/xMeXqcE.png",
-	"thumbnail": "https://i.imgur.com/yYdlVDA.png",
+	"version": "1.1.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SnowBoltz/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SnowBoltz/assets/thumbnail.png",
 	"color": "#00ccff",
 	"category": "other",
 	"tags": [

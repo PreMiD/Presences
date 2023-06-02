@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/8ENJO3c.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Scratch/assets/logo.png",
 	};
 
 	if (window.location.href.toLowerCase().includes("scratch.mit.edu")) {

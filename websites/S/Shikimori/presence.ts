@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/7tlc7or.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png",
 			details: "Где-то на сайте",
 		},
 		title = document
@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 		isImageExist = (tags: string) => {
 			return document.querySelector<HTMLImageElement>(tags) && !privacy && logo
 				? document.querySelector<HTMLImageElement>(tags)?.src
-				: "https://i.imgur.com/7tlc7or.png";
+				: "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png";
 		},
 		textContent = (tags: string) => {
 			return document.querySelector(tags)?.textContent;

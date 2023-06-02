@@ -15,9 +15,9 @@
 		"en": "Enter a new dimension of music by getting unique insights into your music taste."
 	},
 	"url": "stats.fm",
-	"version": "1.0.5",
-	"logo": "https://i.imgur.com/WkUe5aL.png",
-	"thumbnail": "https://i.imgur.com/LeTdJCM.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stats.fm/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stats.fm/assets/thumbnail.png",
 	"color": "#1ed760",
 	"category": "music",
 	"tags": [

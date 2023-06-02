@@ -26,11 +26,11 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${b.textContent} [Page: ${
 			document.querySelector<HTMLInputElement>(".page-jump.text-center").value
 		}]`;
-		presenceData.largeImageKey = "https://i.imgur.com/rs9kEod.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/S/Simply%20Hentai/assets/logo.png";
 		presenceData.startTimestamp = browsingTimestamp;
 	} else {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/rs9kEod.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Simply%20Hentai/assets/logo.png",
 		};
 
 		presenceData.details = "Browsing...";

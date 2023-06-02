@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/il2R4FQ.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Something.Host/assets/logo.png",
 	};
 
 	// Support - support.something.host

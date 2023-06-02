@@ -13,9 +13,9 @@
 		"simulator.fm",
 		"panel.simulator.fm"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/yKFc2V1.png",
-	"thumbnail": "https://i.imgur.com/71zEPjv.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SimulatorFM/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SimulatorFM/assets/thumbnail.png",
 	"color": "#65B6FF",
 	"category": "music",
 	"tags": [

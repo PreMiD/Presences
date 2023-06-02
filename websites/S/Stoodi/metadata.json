@@ -11,9 +11,9 @@
 	},
 	"url": "www.stoodi.com.br",
 	"regExp": "([a-z0-9]+)[.]stoodi[.]com[.]br",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/gcfZTn4.png",
-	"thumbnail": "https://i.imgur.com/K35Q2iX.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stoodi/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stoodi/assets/thumbnail.png",
 	"color": "#004EFF",
 	"category": "other",
 	"tags": [

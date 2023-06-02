@@ -12,7 +12,7 @@ let group: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/wgUEowI.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Slack/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
