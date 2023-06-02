@@ -25,7 +25,7 @@ function capitalizeFirstLetter(string: string) {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/3dmXmx0.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Cracked.io/assets/logo.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,

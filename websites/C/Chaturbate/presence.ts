@@ -10,7 +10,7 @@ const presence = new Presence({
 let prev: string, elapsed: number, path: string, gender: string;
 
 const enum Assets {
-	Logo = "https://i.imgur.com/PjQ6k9n.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Chaturbate/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

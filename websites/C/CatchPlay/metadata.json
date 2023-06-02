@@ -14,9 +14,9 @@
 		"www.catchplay.com",
 		"catchplay.com"
 	],
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/hAt97QK.png",
-	"thumbnail": "https://i.imgur.com/vaaItvT.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CatchPlay/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CatchPlay/assets/thumbnail.png",
 	"color": "#F26F21",
 	"category": "videos",
 	"tags": [

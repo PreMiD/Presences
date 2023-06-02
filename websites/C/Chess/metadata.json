@@ -13,9 +13,9 @@
 		"vi_VN": "Chess.com là máy chủ cờ vua chính trên Internet. Nó cũng là một diễn đàn và mạng xã hội dành riêng cho bộ môn cờ vua."
 	},
 	"url": "www.chess.com",
-	"version": "1.2.15",
-	"logo": "https://i.imgur.com/LEtYrKg.png",
-	"thumbnail": "https://i.imgur.com/boFdmKN.png",
+	"version": "1.2.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Chess/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Chess/assets/thumbnail.png",
 	"color": "#4d7737",
 	"category": "games",
 	"tags": [

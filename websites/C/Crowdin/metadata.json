@@ -26,9 +26,9 @@
 		"status.crowdin.com",
 		"blog.crowdin.com"
 	],
-	"version": "4.0.4",
-	"logo": "https://i.imgur.com/rtkC4kS.png",
-	"thumbnail": "https://i.imgur.com/dJnnzqd.png",
+	"version": "4.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Crowdin/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Crowdin/assets/thumbnail.png",
 	"color": "#2e3340",
 	"category": "other",
 	"tags": [

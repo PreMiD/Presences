@@ -29,7 +29,7 @@ let lastlobbyName = "",
 	lastName = "Unnamed";
 
 const presenceData: PresenceData = {
-	largeImageKey: "https://i.imgur.com/Qdjm4j8.png",
+	largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/logo.png",
 	startTimestamp: Date.now(),
 	details: "Main Menu",
 	state: "Just Started Playing",

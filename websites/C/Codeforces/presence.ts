@@ -5,7 +5,7 @@ const presence = new Presence({
 	timeElapsed = ~~(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/2S8IXoa.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Codeforces/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

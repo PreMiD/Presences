@@ -2,8 +2,8 @@ const presence = new Presence({ clientId: "1102935778570547282" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/qw4f6EN.png",
-	Talking = "https://i.imgur.com/hSv055V.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/logo.png",
+	Talking = "https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/0.png",
 }
 
 presence.on("UpdateData", async () => {
