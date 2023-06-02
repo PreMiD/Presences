@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 	// default settings
 	const presenceData: PresenceData = {
 		details: document.title,
-		largeImageKey: "https://i.imgur.com/v6f2jQA.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/LeetCode/assets/logo.png",
 		startTimestamp: timeElapsed,
 	};
 

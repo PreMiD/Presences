@@ -17,9 +17,9 @@
 	},
 	"url": "www.labymod.net",
 	"regExp": "([a-z0-9-]+[.])*labymod[.]net[/]",
-	"version": "1.2.18",
-	"logo": "https://i.imgur.com/PHdC5bf.png",
-	"thumbnail": "https://i.imgur.com/SDMxfEg.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/thumbnail.png",
 	"color": "#008fe8",
 	"category": "games",
 	"tags": [

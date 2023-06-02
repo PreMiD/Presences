@@ -10,9 +10,9 @@
 	},
 	"url": "lambdageneration.com",
 	"regExp": "[a-z0-9.]+lambdageneration.com",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/XSPtxro.png",
-	"thumbnail": "https://i.imgur.com/CwVR4rW.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LambdaGeneration/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LambdaGeneration/assets/thumbnail.png",
 	"color": "#f37b21",
 	"category": "socials",
 	"tags": [
