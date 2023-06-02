@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/MmTi5zJ.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/Nodejs.org/assets/logo.png",
 		smallImageKey: "reading",
 		smallImageText: "Reading Node.js Doc's",
 		startTimestamp: browsingTimestamp,

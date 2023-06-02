@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://i.imgur.com/h9AaSGw.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Nettruyen/assets/logo.png",
 }
 let lastPath: string,
 	browsingTimestamp = Math.floor(Date.now() / 1000);

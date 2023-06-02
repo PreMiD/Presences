@@ -11,9 +11,9 @@
 	},
 	"url": "newgrounds.com",
 	"regExp": "([a-z0-9]+)[.]newgrounds[.]com",
-	"version": "1.1.14",
-	"logo": "https://i.imgur.com/OfHFd5Q.jpeg",
-	"thumbnail": "https://i.imgur.com/xBnaql3.jpg",
+	"version": "1.1.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/logo.jpeg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/thumbnail.jpg",
 	"color": "#f58a2f",
 	"category": "socials",
 	"tags": [

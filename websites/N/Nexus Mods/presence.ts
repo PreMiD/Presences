@@ -1015,7 +1015,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 	const path = window.location.pathname.split("/").slice(1);
 	presenceData = {
-		largeImageKey: "https://i.imgur.com/1C3hyW0.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/Nexus%20Mods/assets/logo.png",
 		smallImageKey: "reading",
 		startTimestamp: browsingTimestamp,
 	};
