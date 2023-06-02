@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const mammalath: GamePresence = {
-	logo: "https://i.imgur.com/6fSzCmh.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/330.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

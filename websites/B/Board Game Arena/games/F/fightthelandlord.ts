@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const fightthelandlord: GamePresence = {
-	logo: "https://i.imgur.com/TfG1cBS.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/182.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

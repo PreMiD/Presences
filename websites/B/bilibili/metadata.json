@@ -23,9 +23,9 @@
 		"biligame.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com[/]",
-	"version": "2.3.13",
-	"logo": "https://i.imgur.com/w7q6IS0.png",
-	"thumbnail": "https://i.imgur.com/wKnEEei.jpg",
+	"version": "2.3.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/thumbnail.jpg",
 	"color": "#05acff",
 	"category": "anime",
 	"tags": [

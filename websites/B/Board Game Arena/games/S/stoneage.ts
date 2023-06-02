@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const stoneage: GamePresence = {
-	logo: "https://i.imgur.com/iY3ZIhP.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/523.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -13,9 +13,9 @@
 	},
 	"url": "bladefm.com.au",
 	"regExp": "([a-z0-9-]+[.])*(bladefm[.]com[.]au)[/]",
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/Sjj3gx6.png",
-	"thumbnail": "https://i.imgur.com/DWa62sw.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BladeFM/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BladeFM/assets/thumbnail.png",
 	"color": "#203391",
 	"category": "music",
 	"tags": [

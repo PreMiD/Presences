@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const seikatsu: GamePresence = {
-	logo: "https://i.imgur.com/Sa3JKn8.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/475.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

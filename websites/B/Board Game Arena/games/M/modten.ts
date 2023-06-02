@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const modten: GamePresence = {
-	logo: "https://i.imgur.com/Re6T0sT.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/351.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

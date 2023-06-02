@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const notalone: GamePresence = {
-	logo: "https://i.imgur.com/1yy0sC0.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/377.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const tumbleweed: GamePresence = {
-	logo: "https://i.imgur.com/56C7SwM.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/586.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

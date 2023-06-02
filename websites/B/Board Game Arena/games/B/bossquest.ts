@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const bossquest: GamePresence = {
-	logo: "https://i.imgur.com/lSP15PG.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/58.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const zola: GamePresence = {
-	logo: "https://i.imgur.com/6BHRTV5.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/627.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

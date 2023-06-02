@@ -9,7 +9,7 @@ import {
 } from "../../util";
 
 const carcassonne: GamePresence = {
-	logo: "https://i.imgur.com/QDG9D5h.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/73.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

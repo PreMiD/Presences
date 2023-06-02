@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const dicethemepark: GamePresence = {
-	logo: "https://i.imgur.com/mQL5e47.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/138.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -11,9 +11,9 @@
 		"vi_VN": "Bing là công cụ tìm kiếm nơi bạn có thể đưa ra các quyết định sáng suốt hơn từ các câu trả lời đã được chọn lọc."
 	},
 	"url": "www.bing.com",
-	"version": "1.2.20",
-	"logo": "https://i.imgur.com/vyaJqJh.png",
-	"thumbnail": "https://i.imgur.com/ds4icXO.png",
+	"version": "1.2.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bing/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bing/assets/thumbnail.png",
 	"color": "#00809D",
 	"category": "other",
 	"tags": [

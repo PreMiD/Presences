@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const chinesecheckers: GamePresence = {
-	logo: "https://i.imgur.com/BEhmiy1.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/94.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

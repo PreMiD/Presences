@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const alhambra: GamePresence = {
-	logo: "https://i.imgur.com/fgX582D.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/8.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

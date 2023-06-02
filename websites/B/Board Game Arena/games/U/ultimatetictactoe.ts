@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const ultimatetictactoe: GamePresence = {
-	logo: "https://i.imgur.com/Hl4dNUZ.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/594.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

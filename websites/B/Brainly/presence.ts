@@ -36,7 +36,7 @@ function setPathName() {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "https://i.imgur.com/vbRAvej.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Brainly/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		page = document.location.pathname,

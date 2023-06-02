@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const nangaparbat: GamePresence = {
-	logo: "https://i.imgur.com/rVFj2yS.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/360.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

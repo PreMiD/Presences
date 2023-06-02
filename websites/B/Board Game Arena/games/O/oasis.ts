@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const oasis: GamePresence = {
-	logo: "https://i.imgur.com/cJtEu9D.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/383.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const kulami: GamePresence = {
-	logo: "https://i.imgur.com/UDsf5zP.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/295.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

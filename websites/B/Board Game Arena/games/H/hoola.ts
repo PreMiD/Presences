@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const hoola: GamePresence = {
-	logo: "https://i.imgur.com/admRFW9.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/249.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

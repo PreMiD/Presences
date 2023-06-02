@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData = {
-		largeImageKey: "https://i.imgur.com/zeeZUb0.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Brick%20Hill/assets/logo.png",
 		details: "Viewing Page:",
 		state: "404",
 		startTimestamp: browsingTimestamp,

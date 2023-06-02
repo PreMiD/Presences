@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const butterfly: GamePresence = {
-	logo: "https://i.imgur.com/MbgQzjR.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/64.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

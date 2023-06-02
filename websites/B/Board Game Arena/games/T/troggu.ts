@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const troggu: GamePresence = {
-	logo: "https://i.imgur.com/UMmoZB4.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/581.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),
