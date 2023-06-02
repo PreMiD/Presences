@@ -10,9 +10,9 @@
 		"nl": "Krijg informatie over chemische formules."
 	},
 	"url": "formuliser.oojmed.com",
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/rtkOdlB.png",
-	"thumbnail": "https://i.imgur.com/nEJz6j6.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Formuliser/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Formuliser/assets/thumbnail.png",
 	"color": "#1f1f1f",
 	"category": "other",
 	"tags": [

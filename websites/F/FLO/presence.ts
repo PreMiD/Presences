@@ -13,7 +13,7 @@ function getQuery() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/1EEUg5a.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/FLO/assets/logo.png",
 		},
 		player = document.querySelector(".playbar_wrap");
 	if (!(player.querySelector("input.progress") as HTMLInputElement).disabled) {

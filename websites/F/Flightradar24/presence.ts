@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timeLeft"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Vks89dr.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/logo.png",
 			startTimestamp: browsingStamp,
 		};
 
@@ -531,7 +531,7 @@ presence.on("UpdateData", async () => {
 								document.querySelector<HTMLImageElement>(
 									".pnl-component.aircraft-image > a > img"
 								).src !==
-									"https://www.flightradar24.com/static/images/jp-promo.jpg"
+									"https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/0.jpg"
 							) {
 								presenceData.largeImageKey =
 									document.querySelector<HTMLImageElement>(

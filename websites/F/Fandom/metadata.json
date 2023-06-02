@@ -12,9 +12,9 @@
 	},
 	"url": "fandom.com",
 	"regExp": "[a-z0-9-]+[.]fandom[.]com[/]",
-	"version": "1.2.19",
-	"logo": "https://i.imgur.com/sko4P3c.png",
-	"thumbnail": "https://i.imgur.com/VrVSD2b.png",
+	"version": "1.2.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Fandom/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Fandom/assets/thumbnail.png",
 	"color": "#002A32",
 	"category": "other",
 	"tags": [

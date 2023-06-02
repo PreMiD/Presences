@@ -10,9 +10,9 @@
 		"pl": "Polska strona oferująca linki do seriali i filmów z innych źródeł."
 	},
 	"url": "filman.cc",
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/NHoj4QX.png",
-	"thumbnail": "https://i.imgur.com/Fx7f5BM.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/filman.cc/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/filman.cc/assets/thumbnail.png",
 	"color": "#00b3ff",
 	"category": "videos",
 	"tags": [

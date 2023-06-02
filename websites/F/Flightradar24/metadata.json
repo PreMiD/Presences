@@ -14,9 +14,9 @@
 		"my.flightradar24.com",
 		"careers.flightradar24.com"
 	],
-	"version": "1.0.8",
-	"logo": "https://i.imgur.com/Vks89dr.png",
-	"thumbnail": "https://i.imgur.com/tYzgiW8.png",
+	"version": "1.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/thumbnail.png",
 	"color": "#f15a23",
 	"category": "other",
 	"tags": [
