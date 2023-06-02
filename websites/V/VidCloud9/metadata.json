@@ -11,9 +11,9 @@
 		"nl": "VidCloud9 is een geweldige plek om shows te vinden die je hebt gemist of films die je graag wilt zien."
 	},
 	"url": "vidcloud9.com",
-	"version": "2.0.24",
-	"logo": "https://i.imgur.com/AEOuBRB.png",
-	"thumbnail": "https://i.imgur.com/IeqotZd.png",
+	"version": "2.0.25",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VidCloud9/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VidCloud9/assets/thumbnail.png",
 	"color": "#00050C",
 	"category": "videos",
 	"tags": [

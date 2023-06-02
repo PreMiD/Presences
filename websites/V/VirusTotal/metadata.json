@@ -12,9 +12,9 @@
 		"nl": "Controleer elke software op uw veiligheid"
 	},
 	"url": "www.virustotal.com",
-	"version": "1.4.18",
-	"logo": "https://i.imgur.com/QPKWLTc.png",
-	"thumbnail": "https://i.imgur.com/HE2xzdF.png",
+	"version": "1.4.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VirusTotal/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VirusTotal/assets/thumbnail.png",
 	"color": "#397eff",
 	"category": "other",
 	"tags": [

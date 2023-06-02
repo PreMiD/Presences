@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/pDpvS9l.gif",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/Videoland/assets/0.gif",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href } = document.location,
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 	} else presenceData.details = "Aan het browsen";
 
 	if (!buttons) delete presenceData.buttons;
-	if (!covers) presenceData.largeImageKey = "https://i.imgur.com/pDpvS9l.gif";
+	if (!covers) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/V/Videoland/assets/0.gif";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

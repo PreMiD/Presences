@@ -15,9 +15,9 @@
 		"hello.vrchat.com",
 		"feedback.vrchat.com"
 	],
-	"version": "1.0.20",
-	"logo": "https://i.imgur.com/J54T2Wn.png",
-	"thumbnail": "https://i.imgur.com/PdmE1EK.png",
+	"version": "1.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VRChat/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VRChat/assets/thumbnail.png",
 	"color": "#0B5286",
 	"category": "games",
 	"tags": [

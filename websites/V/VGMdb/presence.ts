@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/mKSqsgJ.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		cover = await presence.getSetting<boolean>("cover"),
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 					"meta[property='og:image']"
 				).content;
 				presenceData.smallImageKey = "logo";
-			} else presenceData.largeImageKey = "https://i.imgur.com/mKSqsgJ.png";
+			} else presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png";
 		}
 		presenceData.buttons = [{ label: "View Album", url: document.URL }];
 	} else if (pathname.startsWith("/artist")) {
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 					"#innermain > div > a"
 				).href;
 				presenceData.smallImageKey = "logo";
-			} else presenceData.largeImageKey = "https://i.imgur.com/mKSqsgJ.png";
+			} else presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png";
 		}
 		presenceData.buttons = [{ label: "View Artist", url: document.URL }];
 	} else if (pathname.startsWith("/org") || pathname.startsWith("/product")) {
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 					"#innermain > div > a"
 				).href;
 				presenceData.smallImageKey = "logo";
-			} else presenceData.largeImageKey = "https://i.imgur.com/mKSqsgJ.png";
+			} else presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png";
 		}
 	} else if (pathname.startsWith("/event")) {
 		presenceData.details = "Viewing an event:";

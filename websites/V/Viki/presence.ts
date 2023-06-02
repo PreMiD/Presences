@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 
 	if (!video) {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/J9AyT9N.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/Viki/assets/logo.png",
 		};
 
 		presenceData.startTimestamp = browsingTimestamp;
@@ -417,7 +417,7 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details: "",
 				state: "",
-				largeImageKey: "https://i.imgur.com/J9AyT9N.png",
+				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/Viki/assets/logo.png",
 				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused
 					? (await strings).pause

@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 		presence.info("Elapsed Off");
 	}
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/AEOuBRB.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/VidCloud9/assets/logo.png",
 	};
 	if (videoTime) {
 		presence.info("Video Time is On");

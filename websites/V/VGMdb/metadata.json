@@ -10,9 +10,9 @@
 		"vi_VN": "VGMdb là dự án cộng đồng dành riêng cho việc lưu trữ âm nhạc và tranh ảnh của trò chơi điện tử."
 	},
 	"url": "vgmdb.net",
-	"version": "1.0.10",
-	"logo": "https://i.imgur.com/mKSqsgJ.png",
-	"thumbnail": "https://i.imgur.com/n3L2Bom.png",
+	"version": "1.0.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/thumbnail.png",
 	"color": "#B90000",
 	"category": "music",
 	"tags": [
