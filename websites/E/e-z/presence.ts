@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/3r515eO.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/e-z/assets/logo.png",
 		},
 		username = document.querySelector("p[id=premid-username]")?.textContent,
 		uid = document.querySelector("p[id=premid-uid]")?.textContent,

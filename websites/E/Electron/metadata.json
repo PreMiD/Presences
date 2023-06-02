@@ -22,9 +22,9 @@
 		"electronjs.org",
 		"www.electronjs.org"
 	],
-	"version": "1.2.17",
-	"logo": "https://i.imgur.com/QjEGajr.png",
-	"thumbnail": "https://i.imgur.com/jXKMM75.png",
+	"version": "1.2.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Electron/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Electron/assets/thumbnail.png",
 	"color": "#74b1be",
 	"category": "other",
 	"tags": [

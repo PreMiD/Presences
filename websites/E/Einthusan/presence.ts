@@ -20,7 +20,7 @@ function getSeconds(videoTime: string, videoDuration: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/63yIrXo.jpg",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Einthusan/assets/logo.jpg",
 		startTimestamp: browsingTimestamp,
 	};
 	switch (document.location.pathname) {

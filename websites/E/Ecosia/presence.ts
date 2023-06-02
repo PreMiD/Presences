@@ -5,7 +5,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 presence.on("UpdateData", () => {
 	const urlParams = new URLSearchParams(window.location.search),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/zBVf68p.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Ecosia/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 	if (document.location.pathname === "/") presenceData.details = "Home";
