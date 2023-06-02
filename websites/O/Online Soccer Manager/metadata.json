@@ -14,9 +14,9 @@
 		"en.onlinesoccermanager.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*onlinesoccermanager[.](com|nl)[/]",
-	"version": "1.0.16",
-	"logo": "https://i.imgur.com/SZFDa07.png",
-	"thumbnail": "https://i.imgur.com/G9nRkaR.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Online%20Soccer%20Manager/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Online%20Soccer%20Manager/assets/thumbnail.png",
 	"color": "#FF971B",
 	"category": "games",
 	"tags": [

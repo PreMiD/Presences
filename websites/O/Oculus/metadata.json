@@ -20,9 +20,9 @@
 		"support.oculus.com",
 		"secure.oculus.com"
 	],
-	"version": "1.2.10",
-	"logo": "https://i.imgur.com/jzoFzDA.jpg",
-	"thumbnail": "https://i.imgur.com/E2oERhP.png",
+	"version": "1.2.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Oculus/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Oculus/assets/thumbnail.png",
 	"color": "#ffffff",
 	"category": "games",
 	"tags": [

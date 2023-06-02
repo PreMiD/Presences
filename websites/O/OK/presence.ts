@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 	if (!strings) strings = await getStrings();
 	const presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey: "https://i.imgur.com/CTUW5vP.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/OK/assets/logo.png",
 		},
 		[musicMode, privacy, time, logo] = await Promise.all([
 			presence.getSetting<boolean>("musicMode"),

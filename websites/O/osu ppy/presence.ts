@@ -16,7 +16,7 @@ let beatmapTitle: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/IWWqSYR.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/osu%20ppy/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/home") {

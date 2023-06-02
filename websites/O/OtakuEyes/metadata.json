@@ -10,9 +10,9 @@
 		"fr": "Otaku Eyes est une application web qui vous permet de regarder des anime en ligne. Otaku Eyes a les sources d'anime les plus différentes."
 	},
 	"url": "127.0.0.1",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/b3H1vRU.png",
-	"thumbnail": "https://i.imgur.com/YghSpe1.png",
+	"version": "1.0.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OtakuEyes/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OtakuEyes/assets/thumbnail.png",
 	"color": "#065d50",
 	"category": "anime",
 	"tags": [

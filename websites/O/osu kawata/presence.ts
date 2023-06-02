@@ -15,7 +15,7 @@ let customData = false,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/0PDmn78.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/osu%20kawata/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	customData = false;

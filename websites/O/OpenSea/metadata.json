@@ -12,9 +12,9 @@
 		"opensea.io",
 		"docs.opensea.io"
 	],
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/1HHTwaN.png",
-	"thumbnail": "https://i.imgur.com/4r4s8wS.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OpenSea/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OpenSea/assets/thumbnail.png",
 	"color": "#1868B7",
 	"category": "other",
 	"tags": [

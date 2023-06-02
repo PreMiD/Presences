@@ -11,9 +11,9 @@
 		"tr": "OMGUbuntu!, Ubuntu ve ilgili faaliyetleri kapsayan çevrimiçi bir haber sitesidir."
 	},
 	"url": "www.omgubuntu.co.uk",
-	"version": "1.1.12",
-	"logo": "https://i.imgur.com/hI4bcJC.png",
-	"thumbnail": "https://i.imgur.com/PknGVGT.png",
+	"version": "1.1.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OMG%20Ubuntu/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OMG%20Ubuntu/assets/thumbnail.png",
 	"color": "#FF9900",
 	"category": "other",
 	"tags": [
