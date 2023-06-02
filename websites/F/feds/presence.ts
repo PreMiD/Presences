@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 
 	if (reservedPaths[pathname]) presenceData.details = reservedPaths[pathname];
 	else {
-		presenceData.details = `Viewing ${pathname.slice(1)}'s page on feds.lol`;
+		presenceData.details = `Viewing ${pathname.slice(1)}'s page`;
 		presenceData.buttons = [
 			{
 				label: "View Page",
