@@ -50,7 +50,7 @@ const presence = new WeTV({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Browsing...",
-		largeImageKey: "https://i.imgur.com/Cjnky1h.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/logo.png",
 		smallImageKey: "browse",
 	};
 

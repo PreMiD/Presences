@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/cjnISR9.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/WayBack%20Machine/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = window.location,
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 				// if on site
 				presenceData.largeImageKey =
 					document.querySelector<HTMLMetaElement>('[property="og:image"]')
-						?.content ?? "https://i.imgur.com/cjnISR9.png";
+						?.content ?? "https://cdn.rcd.gg/PreMiD/websites/W/WayBack%20Machine/assets/logo.png";
 				presenceData.details = document.location.pathname
 					.split("/")[5]
 					.replace("www.", "");

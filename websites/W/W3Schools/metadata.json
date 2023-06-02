@@ -11,9 +11,9 @@
 		"nl": "W3Schools is een educatieve website voor het online leren van webtechnologieën. Inhoud omvat tutorials en referenties met betrekking tot HTML, CSS, JavaScript, JSON, PHP, Python, AngularJS, React.js, SQL, Bootstrap, Sass, Node.js, jQuery, XQuery, AJAX, XML, Raspberry Pi, C ++ en Java ."
 	},
 	"url": "www.w3schools.com",
-	"version": "1.2.21",
-	"logo": "https://i.imgur.com/gTv6Nu3.png",
-	"thumbnail": "https://i.imgur.com/E31fDeI.png",
+	"version": "1.2.22",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/W3Schools/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/W3Schools/assets/thumbnail.png",
 	"color": "#4CAF50",
 	"category": "other",
 	"tags": [

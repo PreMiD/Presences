@@ -11,9 +11,9 @@
 	},
 	"url": "wbijam.pl",
 	"regExp": "([a-z0-9.]*)wbijam[.]pl",
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/RRphyk6.png",
-	"thumbnail": "https://i.imgur.com/PhjCcuX.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wbijam/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wbijam/assets/thumbnail.png",
 	"color": "#00b3ff",
 	"category": "videos",
 	"tags": [

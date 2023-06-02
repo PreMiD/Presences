@@ -20,9 +20,9 @@
 		"ga_IE": "Seol agus faigh teachtaireachtaí WhatsApp go tapa ó do ríomhaire."
 	},
 	"url": "web.whatsapp.com",
-	"version": "2.2.3",
-	"logo": "https://i.imgur.com/iI0LOkF.png",
-	"thumbnail": "https://i.imgur.com/Gk23OEd.jpg",
+	"version": "2.2.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WhatsApp/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WhatsApp/assets/thumbnail.jpg",
 	"color": "#0dc143",
 	"category": "socials",
 	"tags": [

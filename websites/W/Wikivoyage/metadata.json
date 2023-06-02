@@ -15,9 +15,9 @@
 	},
 	"url": "wikivoyage.org",
 	"regExp": "([a-z0-9-]+[.])+wikivoyage[.]org[/]",
-	"version": "1.0.18",
-	"logo": "https://i.imgur.com/rvZf7UA.png",
-	"thumbnail": "https://i.imgur.com/LnIR7ny.png",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikivoyage/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikivoyage/assets/thumbnail.png",
 	"color": "#f9f9f9",
 	"category": "other",
 	"tags": [

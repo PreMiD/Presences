@@ -582,7 +582,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Game is starting...";
 			presenceData.state = "Getting a role";
 			presenceData.smallImageText = "Waiting";
-			presenceData.smallImageKey = "https://i.imgur.com/sdGcq14.gif";
+			presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/0.gif";
 		}
 
 		if (

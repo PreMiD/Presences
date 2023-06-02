@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/P3S7UhZ.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/Worldhideaway/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		search = document.querySelector<HTMLInputElement>(
@@ -172,7 +172,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!buttons) delete presenceData.buttons;
-	if (!covers) presenceData.largeImageKey = "https://i.imgur.com/P3S7UhZ.png";
+	if (!covers) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/W/Worldhideaway/assets/logo.png";
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

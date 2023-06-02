@@ -11,9 +11,9 @@
 		"nl": "Wikiwand is een moderne reader voor web en mobiel, die de geweldige inhoud van Wikipedia optimaliseert voor een aanzienlijk verbeterde leeservaring."
 	},
 	"url": "www.wikiwand.com",
-	"version": "1.0.16",
-	"logo": "https://i.imgur.com/8QkIyOM.png",
-	"thumbnail": "https://i.imgur.com/vLXp14J.jpg",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikiwand/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikiwand/assets/thumbnail.jpg",
 	"color": "#F7F6F5",
 	"category": "other",
 	"tags": [

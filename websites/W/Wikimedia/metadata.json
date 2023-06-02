@@ -46,9 +46,9 @@
 		"donate.wikimedia.org",
 		"wikispore.wmflabs.org"
 	],
-	"version": "1.0.11",
-	"logo": "https://i.imgur.com/M58Pucd.png",
-	"thumbnail": "https://i.imgur.com/keAOFru.png",
+	"version": "1.0.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/thumbnail.png",
 	"color": "#000000",
 	"category": "other",
 	"tags": [

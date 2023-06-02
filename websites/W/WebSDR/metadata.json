@@ -14,9 +14,9 @@
 		"websdr.ewi.utwente.nl",
 		"etgd1.ewi.utwente.nl"
 	],
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/duTGqD6.png",
-	"thumbnail": "https://i.imgur.com/zaZSyjD.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WebSDR/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WebSDR/assets/thumbnail.png",
 	"color": "#1f38de",
 	"category": "other",
 	"tags": [
