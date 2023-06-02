@@ -12,9 +12,9 @@
 	},
 	"url": "gitlab.com",
 	"regExp": "([a-z0-9-]+[.])*gitlab[.]com[/]",
-	"version": "1.1.19",
-	"logo": "https://i.imgur.com/R3DmkeK.png",
-	"thumbnail": "https://i.imgur.com/ISBVR2q.png",
+	"version": "1.1.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GitLab/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GitLab/assets/thumbnail.png",
 	"color": "#ff4400",
 	"category": "other",
 	"tags": [

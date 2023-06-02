@@ -14,9 +14,9 @@
 	},
 	"url": "www.google.com",
 	"regExp": "www[.]google([.][a-z]+)+[/]",
-	"version": "2.4.4",
-	"logo": "https://i.imgur.com/ZZvx6Dq.png",
-	"thumbnail": "https://i.imgur.com/8Ayu4Re.png",
+	"version": "2.4.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/thumbnail.png",
 	"color": "#ffffff",
 	"category": "other",
 	"tags": [

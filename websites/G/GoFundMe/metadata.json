@@ -10,9 +10,9 @@
 	},
 	"url": "gofundme.com",
 	"regExp": "([a-z0-9]+)[.]gofundme[.]com",
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/5z37NtP.png",
-	"thumbnail": "https://i.imgur.com/EytuDmf.png",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GoFundMe/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GoFundMe/assets/thumbnail.png",
 	"color": "#00b640",
 	"category": "other",
 	"tags": [

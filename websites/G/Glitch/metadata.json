@@ -16,9 +16,9 @@
 		"status.glitch.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*glitch([.][a-z]+)+[/]",
-	"version": "1.8.18",
-	"logo": "https://i.imgur.com/YFnN57M.png",
-	"thumbnail": "https://i.imgur.com/mnilDhS.png",
+	"version": "1.8.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Glitch/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Glitch/assets/thumbnail.png",
 	"color": "#f003fc",
 	"category": "other",
 	"tags": [

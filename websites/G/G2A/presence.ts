@@ -7,7 +7,7 @@ let user: string | HTMLElement | Element, title: string | HTMLElement | Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/TJO23bI.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/G2A/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

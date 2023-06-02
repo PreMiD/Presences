@@ -11,9 +11,9 @@
 		"nl": "NSFW Anime Afbeeldingen bord loopt op Gelbooru"
 	},
 	"url": "gelbooru.com",
-	"version": "1.2.15",
-	"logo": "https://i.imgur.com/CgGzxXy.png",
-	"thumbnail": "https://i.imgur.com/T7ge6JO.png",
+	"version": "1.2.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gelbooru/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gelbooru/assets/thumbnail.png",
 	"color": "#0773FB",
 	"category": "anime",
 	"tags": [

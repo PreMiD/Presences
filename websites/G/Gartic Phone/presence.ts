@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/jT44n8u.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Gartic%20Phone/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		privacyDraw = await presence.getSetting<boolean>("privacyDraw"),

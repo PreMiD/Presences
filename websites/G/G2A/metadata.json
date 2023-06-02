@@ -11,9 +11,9 @@
 	},
 	"url": "www.g2a.com",
 	"regExp": "([a-z0-9-]+[.])*g2a[.]com[/]",
-	"version": "1.2.16",
-	"logo": "https://i.imgur.com/TJO23bI.png",
-	"thumbnail": "https://i.imgur.com/z6IBeG6.png",
+	"version": "1.2.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/G2A/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/G2A/assets/thumbnail.png",
 	"color": "#f05f00",
 	"category": "games",
 	"tags": [

@@ -13,9 +13,9 @@
 	},
 	"url": "meet.google.com",
 	"regExp": "meet[.]google([.][a-z]+)+[/]",
-	"version": "1.2.17",
-	"logo": "https://i.imgur.com/LyrRnRS.png",
-	"thumbnail": "https://i.imgur.com/6BRZ63d.png",
+	"version": "1.2.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Meet/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Meet/assets/thumbnail.png",
 	"color": "#308574",
 	"category": "socials",
 	"tags": [

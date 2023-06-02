@@ -11,9 +11,9 @@
 	},
 	"url": "play.google.com",
 	"regExp": "play|google",
-	"version": "1.0.10",
-	"logo": "https://i.imgur.com/5pg4mIv.png",
-	"thumbnail": "https://i.imgur.com/mqTRapM.png",
+	"version": "1.0.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Play/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Play/assets/thumbnail.png",
 	"color": "#F0464B",
 	"category": "socials",
 	"tags": [

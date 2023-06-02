@@ -55,7 +55,7 @@ addEventListener(eventId, (data: CustomEvent) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/XyHgDQX.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href } = document.location,
