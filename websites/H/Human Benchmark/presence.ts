@@ -12,7 +12,7 @@ let details: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/vTQeYvH.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Human%20Benchmark/assets/logo.png",
 		},
 		showTime = await presence.getSetting<boolean>("stamp");
 

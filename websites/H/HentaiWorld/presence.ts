@@ -30,7 +30,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 });
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/2DEdIVo.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/HentaiWorld/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

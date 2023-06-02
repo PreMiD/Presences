@@ -181,7 +181,7 @@ presence.on("UpdateData", async () => {
 		{
 			details,
 			state,
-			largeImageKey: "https://i.imgur.com/kJKqfdw.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Hulu/assets/logo.png",
 			smallImageKey,
 			smallImageText,
 			startTimestamp,
