@@ -13,12 +13,19 @@ const changedPresenceFolders = getDiff(),
 
 if (changedPresenceFolders.length) {
 	for (const folder of changedPresenceFolders) {
-		const assetsManager = new AssetsManager(folder),
+		const start = Date.now(),
+			assetsManager = new AssetsManager(folder),
 			{ toBeUploaded, toBeMoved, toBeDeleted } =
 				await assetsManager.getAssetsChanges();
 
 		if (!toBeUploaded.size && !toBeMoved.size && !toBeDeleted.size) {
-			actions.info(chalk.green(`No assets changes for ${folder}, skipping...`));
+			actions.info(
+				chalk.green(
+					`No assets changes for ${folder}, skipping... (took ${
+						Date.now() - start
+					}ms)`
+				)
+			);
 			continue;
 		}
 
@@ -56,13 +63,18 @@ if (changedPresenceFolders.length) {
 
 			assetsManager.replaceInFiles(toBeUploaded);
 		}
+
+		actions.info(
+			chalk.green(`Done for ${folder}! (took ${Date.now() - start}ms)`)
+		);
 	}
 }
 
 if (deletedPresenceFolders.length) {
 	for (const folder of deletedPresenceFolders) {
-		const assetsManager = new AssetsManager(folder),
-			allAssets = assetsManager.allAssets,
+		const start = Date.now(),
+			assetsManager = new AssetsManager(folder),
+			allAssets = await assetsManager.allAssets(),
 			assets = [
 				allAssets.logo,
 				allAssets.thumbnail,
@@ -71,7 +83,11 @@ if (deletedPresenceFolders.length) {
 
 		if (!assets.length) {
 			actions.info(
-				chalk.green(`No assets to delete for ${folder}, skipping...`)
+				chalk.green(
+					`No assets to delete for ${folder}, skipping... (took ${
+						Date.now() - start
+					}ms)`
+				)
 			);
 			continue;
 		}
@@ -82,6 +98,10 @@ if (deletedPresenceFolders.length) {
 		const errors = await assetsManager.deleteAssets(assets);
 		for (const error of errors) actions.error(error);
 		if (errors.length) actions.setFailed("Failed to delete assets");
+
+		actions.info(
+			chalk.green(`Done for ${folder}! (took ${Date.now() - start}ms)`)
+		);
 	}
 }
 

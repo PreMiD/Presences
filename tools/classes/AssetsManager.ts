@@ -2,13 +2,10 @@ import { createRequire } from "node:module";
 import { extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
-import {
-	createReadStream,
-	createWriteStream,
-	readFileSync,
-	writeFileSync,
-} from "node:fs";
+import { createReadStream, createWriteStream } from "node:fs";
+import { readFile, writeFile } from "node:fs/promises";
 import { pipeline } from "node:stream/promises";
+import { promisify } from "node:util";
 
 import got from "got";
 import glob from "glob";
@@ -20,7 +17,8 @@ import { Metadata } from "./PresenceCompiler";
 
 const require = createRequire(import.meta.url),
 	rootPath = resolve(fileURLToPath(new URL(".", import.meta.url)), "../.."),
-	cdnBase = "https://cdn.rcd.gg";
+	cdnBase = "https://cdn.rcd.gg",
+	globAsync = promisify(glob);
 
 export default class AssetsManager {
 	cwd: string;
@@ -52,12 +50,12 @@ export default class AssetsManager {
 		return extname(url);
 	}
 
-	get allTsFiles() {
-		return glob
-			.sync(`{websites,programs}/**/${this.service}/**/*.ts`, {
+	async allTsFiles() {
+		return (
+			await globAsync(`{websites,programs}/**/${this.service}/**/*.ts`, {
 				absolute: true,
 			})
-			.filter(file => !file.endsWith(".d.ts"));
+		).filter(file => !file.endsWith(".d.ts"));
 	}
 
 	get metadata(): Metadata {
@@ -73,36 +71,38 @@ export default class AssetsManager {
 	 *
 	 * @returns A list of all assets used in the presence
 	 */
-	get allAssets(): {
+	async allAssets(): Promise<{
 		logo: string;
 		thumbnail: string;
 		assets: Set<string>;
-	} {
+	}> {
 		const assets = new Set<string>(),
 			{ logo, thumbnail } = this.metadata,
-			files = this.allTsFiles;
+			files = await this.allTsFiles();
 
-		for (const tsfile of files) {
-			const file = readFileSync(tsfile, "utf8");
+		await Promise.all(
+			files.map(async tsfile => {
+				const file = await readFile(tsfile, "utf8");
 
-			//* A regex to match all image urls in the file
-			const regex =
-				/(?<=["'`])(https?:\/\/.*?\.(?:png|jpg|jpeg|gif|webp))(?=["'`])/g;
-			let match: RegExpExecArray | null;
+				//* A regex to match all image urls in the file
+				const regex =
+					/(?<=["'`])(https?:\/\/.*?\.(?:png|jpg|jpeg|gif|webp))(?=["'`])/g;
+				let match: RegExpExecArray | null;
 
-			while ((match = regex.exec(file)) !== null) {
-				//* If the url contains a template literal, skip it
-				if (match[1].includes(`\${`)) continue;
+				while ((match = regex.exec(file)) !== null) {
+					//* If the url contains a template literal, skip it
+					if (match[1].includes(`\${`)) continue;
 
-				//* Regex to check if the url contains + " or + ' or + `
-				const regex2 = /(?<=\+ )["'`].*?["'`]/g;
-				if (regex2.test(match[1])) continue;
+					//* Regex to check if the url contains + " or + ' or + `
+					const regex2 = /(?<=\+ )["'`].*?["'`]/g;
+					if (regex2.test(match[1])) continue;
 
-				if (match[1] === logo || match[1] === thumbnail) continue;
+					if (match[1] === logo || match[1] === thumbnail) continue;
 
-				assets.add(match[1]);
-			}
-		}
+					assets.add(match[1]);
+				}
+			})
+		);
 
 		return {
 			logo,
@@ -131,8 +131,10 @@ export default class AssetsManager {
 		toBeMoved: Map<string, string>;
 		toBeDeleted: Set<string>;
 	}> {
-		const assets = this.allAssets,
-			cdnAssets = await this.getCdnAssets(),
+		const [assets, cdnAssets] = await Promise.all([
+				this.allAssets(),
+				this.getCdnAssets(),
+			]),
 			result = {
 				toBeUploaded: new Map<string, string>(),
 				toBeMoved: new Map<string, string>(),
@@ -236,11 +238,14 @@ export default class AssetsManager {
 			}
 		}
 
+		const [logo, thumbnail] = await Promise.all([
+			this.doesAssetExistAnyExtension(`${this.assetBaseUrl}/logo`),
+			this.doesAssetExistAnyExtension(`${this.assetBaseUrl}/thumbnail`),
+		]);
+
 		return {
-			logo: await this.doesAssetExistAnyExtension(`${this.assetBaseUrl}/logo`),
-			thumbnail: await this.doesAssetExistAnyExtension(
-				`${this.assetBaseUrl}/thumbnail`
-			),
+			logo,
+			thumbnail,
 			assets: assets.size ? assets : false,
 		};
 	}
@@ -267,116 +272,122 @@ export default class AssetsManager {
 
 	async uploadAssets(assets: Map<string, string>) {
 		let errors: string[] = [];
-		for (const [url, newUrl] of assets) {
-			const extension = this.getFileExtension(url),
-				mimeType = mimeLookup(extension);
+		await Promise.all(
+			[...assets.entries()].map(async ([url, newUrl]) => {
+				const extension = this.getFileExtension(url),
+					mimeType = mimeLookup(extension);
 
-			if (!mimeType || !mimeType.startsWith("image/")) {
-				errors.push(
-					`Tried to upload an asset with an invalid extension: ${url}`
-				);
-				continue;
-			}
-
-			const random = Math.random().toString(36).substring(2, 15),
-				filename = `premid-assetmanager-${random}${extension}`,
-				fileLocation = join(tmpdir(), filename);
-
-			let finalFileLocation = fileLocation;
-
-			try {
-				const stream = got.stream(url);
-				await pipeline(stream, createWriteStream(fileLocation));
-				if (stream.response?.url.split("/")[3].split(".")[0] === "removed") {
-					errors.push(`Asset ${url} was removed from the server`);
-					continue;
+				if (!mimeType || !mimeType.startsWith("image/")) {
+					errors.push(
+						`Tried to upload an asset with an invalid extension: ${url}`
+					);
+					return;
 				}
-			} catch (error) {
-				errors.push(`Error while downloading asset ${url}: ${error.message}`);
-				continue;
-			}
 
-			if (!newUrl.includes("thumbnail")) {
-				const file = sharp(fileLocation),
-					metadata = await file.metadata();
+				const random = Math.random().toString(36).substring(2, 15),
+					filename = `premid-assetmanager-${random}${extension}`,
+					fileLocation = join(tmpdir(), filename);
 
-				if (metadata.width !== 512 || metadata.height !== 512) {
-					try {
-						const newFileLocation = join(tmpdir(), `resized-${filename}`);
-						await file
-							.resize(512, 512, {
-								fit: "contain",
-								background: { r: 0, g: 0, b: 0, alpha: 0 },
-							})
-							.toFile(newFileLocation);
-						finalFileLocation = newFileLocation;
-					} catch (error) {
-						errors.push(`Error while resizing asset ${url}: ${error.message}`);
-						continue;
+				let finalFileLocation = fileLocation;
+
+				try {
+					const stream = got.stream(url);
+					await pipeline(stream, createWriteStream(fileLocation));
+					if (stream.response?.url.split("/")[3].split(".")[0] === "removed") {
+						errors.push(`Asset ${url} was removed from the server`);
+						return;
+					}
+				} catch (error) {
+					errors.push(`Error while downloading asset ${url}: ${error.message}`);
+					return;
+				}
+
+				if (!newUrl.includes("thumbnail")) {
+					const file = sharp(fileLocation),
+						metadata = await file.metadata();
+
+					if (metadata.width !== 512 || metadata.height !== 512) {
+						try {
+							const newFileLocation = join(tmpdir(), `resized-${filename}`);
+							await file
+								.resize(512, 512, {
+									fit: "contain",
+									background: { r: 0, g: 0, b: 0, alpha: 0 },
+								})
+								.toFile(newFileLocation);
+							finalFileLocation = newFileLocation;
+						} catch (error) {
+							errors.push(
+								`Error while resizing asset ${url}: ${error.message}`
+							);
+							return;
+						}
 					}
 				}
-			}
 
-			const form = new FormData();
-			form.append("file", createReadStream(finalFileLocation), {
-				filename,
-				contentType: mimeType,
-			});
+				const form = new FormData();
+				form.append("file", createReadStream(finalFileLocation), {
+					filename,
+					contentType: mimeType,
+				});
 
-			try {
-				//* If the asset already exists, make a put request instead of a post request
-				if (await this.doesAssetExist(newUrl)) {
-					await got.put(newUrl, {
-						body: form,
-						headers: {
-							...form.getHeaders(),
-							Authorization: process.env.CDN_TOKEN,
-						},
-						retry: {
-							limit: 0,
-						},
-					});
-				} else {
-					await got.post(newUrl, {
-						body: form,
-						headers: {
-							...form.getHeaders(),
-							Authorization: process.env.CDN_TOKEN,
-						},
-						retry: {
-							limit: 0,
-						},
-					});
+				try {
+					//* If the asset already exists, make a put request instead of a post request
+					if (await this.doesAssetExist(newUrl)) {
+						await got.put(newUrl, {
+							body: form,
+							headers: {
+								...form.getHeaders(),
+								Authorization: process.env.CDN_TOKEN,
+							},
+							retry: {
+								limit: 0,
+							},
+						});
+					} else {
+						await got.post(newUrl, {
+							body: form,
+							headers: {
+								...form.getHeaders(),
+								Authorization: process.env.CDN_TOKEN,
+							},
+							retry: {
+								limit: 0,
+							},
+						});
+					}
+				} catch (error) {
+					errors.push(
+						`Failed to upload asset ${url} to ${newUrl} (${
+							"request" in error ? error.request.method : ""
+						}): ${"message" in error ? error.message : error.toString()}`
+					);
 				}
-			} catch (error) {
-				errors.push(
-					`Failed to upload asset ${url} to ${newUrl} (${
-						"request" in error ? error.request.method : ""
-					}): ${"message" in error ? error.message : error.toString()}`
-				);
-			}
-		}
+			})
+		);
 		return errors;
 	}
 
 	async deleteAssets(assets: string[] | Set<string>) {
 		let errors: string[] = [];
-		for (const asset of assets) {
-			try {
-				if (!(await this.doesAssetExist(asset))) continue;
-				await got.delete(asset, {
-					headers: {
-						Authorization: process.env.CDN_TOKEN,
-					},
-				});
-			} catch (error) {
-				errors.push(
-					`Failed to delete asset ${asset}: ${
-						"message" in error ? error.message : error.toString()
-					}`
-				);
-			}
-		}
+		await Promise.all(
+			[...assets].map(async asset => {
+				try {
+					if (!(await this.doesAssetExist(asset))) return;
+					await got.delete(asset, {
+						headers: {
+							Authorization: process.env.CDN_TOKEN,
+						},
+					});
+				} catch (error) {
+					errors.push(
+						`Failed to delete asset ${asset}: ${
+							"message" in error ? error.message : error.toString()
+						}`
+					);
+				}
+			})
+		);
 		return errors;
 	}
 
@@ -391,25 +402,28 @@ export default class AssetsManager {
 		return missing;
 	}
 
-	replaceInFiles(replacements: Map<string, string>) {
-		for (const tsfile of this.allTsFiles) {
-			let file = readFileSync(tsfile, "utf8"),
-				changed = false;
+	async replaceInFiles(replacements: Map<string, string>) {
+		const allFiles = await this.allTsFiles();
+		await Promise.all(
+			allFiles.map(async tsfile => {
+				let file = await readFile(tsfile, "utf8"),
+					changed = false;
 
-			for (const [oldUrl, newUrl] of replacements) {
-				if (!file.includes(oldUrl)) continue;
-				file = file.replaceAll(oldUrl, newUrl);
-				changed = true;
-			}
+				for (const [oldUrl, newUrl] of replacements) {
+					if (!file.includes(oldUrl)) continue;
+					file = file.replaceAll(oldUrl, newUrl);
+					changed = true;
+				}
 
-			if (changed) {
-				writeFileSync(tsfile, file, {
-					encoding: "utf8",
-				});
-			}
-		}
+				if (changed) {
+					await writeFile(tsfile, file, {
+						encoding: "utf8",
+					});
+				}
+			})
+		);
 
-		let metadata = readFileSync(
+		let metadata = await readFile(
 				resolve(this.presenceFolder, "metadata.json"),
 				"utf8"
 			),
@@ -422,7 +436,7 @@ export default class AssetsManager {
 		}
 
 		if (changed) {
-			writeFileSync(resolve(this.presenceFolder, "metadata.json"), metadata, {
+			await writeFile(resolve(this.presenceFolder, "metadata.json"), metadata, {
 				encoding: "utf8",
 			});
 		}
