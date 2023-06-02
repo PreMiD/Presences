@@ -9,9 +9,9 @@
 		"en": "ListenBrainz keeps track of music you listen to and provides you with insights into your listening habits."
 	},
 	"url": "listenbrainz.org",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/LDfzrVM.png",
-	"thumbnail": "https://i.imgur.com/prXFkkP.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/ListenBrainz/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/ListenBrainz/assets/thumbnail.png",
 	"color": "#353070",
 	"category": "music",
 	"tags": [

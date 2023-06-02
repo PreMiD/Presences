@@ -12,9 +12,9 @@
 	},
 	"url": "neovel.io",
 	"regExp": "([a-z]*[.])*(neovel|neopload.neovel)[.]io",
-	"version": "1.1.4",
-	"logo": "https://i.imgur.com/CYk2ZDX.jpg",
-	"thumbnail": "https://i.imgur.com/Ei5H8Zz.jpg",
+	"version": "1.1.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Neovel/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Neovel/assets/thumbnail.jpg",
 	"color": "#041a26",
 	"category": "other",
 	"tags": [

@@ -10,7 +10,7 @@ function lettersOnly(str: string) {
 presence.on("UpdateData", async () => {
 	const privacy = await presence.getSetting("privacy"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/RI6Wn79.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Maps/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 	if (document.location.pathname.includes("/place")) {

@@ -11,9 +11,9 @@
 	},
 	"url": "kisscartoon.nz",
 	"regExp": "([a-z0-9-]+[.])*kisscartoon([.][a-z]+)+[/]",
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/RDkTKRh.png",
-	"thumbnail": "https://i.imgur.com/48Y2kFC.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KissCartoon/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KissCartoon/assets/thumbnail.png",
 	"color": "#f5d80b",
 	"category": "videos",
 	"tags": [

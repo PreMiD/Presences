@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 		{
 			details,
 			state,
-			largeImageKey: "https://i.imgur.com/vAozqPN.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/Metastream/assets/logo.png",
 			smallImageKey,
 			smallImageText,
 			startTimestamp,

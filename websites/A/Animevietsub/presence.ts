@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 		]),
 		splitPath = pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/trQFagl.jpeg",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Animevietsub/assets/logo.jpeg",
 			startTimestamp: browsingTimestamp,
 		};
 

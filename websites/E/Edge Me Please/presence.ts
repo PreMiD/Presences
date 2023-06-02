@@ -104,8 +104,8 @@ presence.on("UpdateData", async () => {
 			presence.setActivity({
 				details: "Preparing to Edge",
 				state: "choosing settings ",
-				//largeImageKey: "https://i.imgur.com/scJSNj1.png",
-				largeImageKey: "https://i.imgur.com/scJSNj1.png",
+				//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 				startTimestamp: elapsed,
 			});
 		} else {
@@ -115,8 +115,8 @@ presence.on("UpdateData", async () => {
 				const cr = findParents(messages.go, msg) as [string, number, string];
 				presenceData = {
 					details: cr[2],
-					//largeImageKey: "https://i.imgur.com/scJSNj1.png",
-					largeImageKey: "https://i.imgur.com/scJSNj1.png",
+					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 					endTimestamp: setTime(cr[1]),
 				};
 				presence.setActivity(presenceData);
@@ -128,8 +128,8 @@ presence.on("UpdateData", async () => {
 				];
 				presenceData = {
 					details: cr[2],
-					//largeImageKey: "https://i.imgur.com/scJSNj1.png",
-					largeImageKey: "https://i.imgur.com/scJSNj1.png",
+					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 					endTimestamp: setTime(cr[1]),
 				};
 				presence.setActivity(presenceData);
@@ -137,8 +137,8 @@ presence.on("UpdateData", async () => {
 				const cr = findParents(messages.stop, msg) as [string, number, string];
 				presenceData = {
 					details: cr[2],
-					//largeImageKey: "https://i.imgur.com/scJSNj1.png",
-					largeImageKey: "https://i.imgur.com/scJSNj1.png",
+					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 					endTimestamp: setTime(cr[1]),
 				};
 
@@ -150,8 +150,8 @@ presence.on("UpdateData", async () => {
 				elapsed = Math.floor(Date.now() / 1000);
 				presence.setActivity({
 					details: "jerking of slowly for edging",
-					//largeImageKey: "https://i.imgur.com/scJSNj1.png",
-					largeImageKey: "https://i.imgur.com/scJSNj1.png",
+					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 					startTimestamp: elapsed,
 				});
 			}

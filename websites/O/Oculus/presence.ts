@@ -38,7 +38,7 @@ function isInViewport(ele: HTMLElement) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/jzoFzDA.jpg",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/Oculus/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		hostName = document.location.hostname.replace("www.", ""),

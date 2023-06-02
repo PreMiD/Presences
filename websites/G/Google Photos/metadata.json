@@ -10,9 +10,9 @@
 		"vi_VN": "Google Photos là nơi cho tất cả các bức ảnh và video của bạn, được tự động sắp xếp và dễ dàng chia sẻ"
 	},
 	"url": "photos.google.com",
-	"version": "1.0.8",
-	"logo": "https://i.imgur.com/H4jjKhD.png",
-	"thumbnail": "https://i.imgur.com/bDLIxDm.jpg",
+	"version": "1.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Photos/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Photos/assets/thumbnail.jpg",
 	"color": "#FFFFFF",
 	"category": "socials",
 	"tags": [

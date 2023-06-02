@@ -11,7 +11,7 @@ const presence = new Presence({
 	};
 
 const enum Assets {
-	Logo = "https://i.imgur.com/L6BgeAa.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Online/assets/logo.png",
 }
 
 function setObject(path: string) {

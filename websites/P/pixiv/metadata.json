@@ -27,9 +27,9 @@
 	},
 	"url": "www.pixiv.net",
 	"regExp": "([a-z0-9-]+[.])*pixiv[.]net[/]",
-	"version": "2.0.2",
-	"logo": "https://i.imgur.com/D8Lf2t2.png",
-	"thumbnail": "https://i.imgur.com/Ggekra0.png",
+	"version": "2.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/pixiv/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/pixiv/assets/thumbnail.png",
 	"color": "#009cff",
 	"category": "socials",
 	"tags": [

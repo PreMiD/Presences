@@ -10,9 +10,9 @@
 	},
 	"url": "www.webnovel.com",
 	"regExp": "([a-z0-9]+[.])webnovel[.]com",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/PcDEB6x.png",
-	"thumbnail": "https://i.imgur.com/NrbQ6Xa.jpeg",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Webnovel/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Webnovel/assets/thumbnail.jpeg",
 	"color": "#3F4DA5",
 	"category": "socials",
 	"tags": [

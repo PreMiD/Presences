@@ -9,7 +9,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const video: HTMLVideoElement = document.querySelector("video.vjs-tech"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/JnLqL7n.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AnimationDigitalNetwork/assets/logo.png",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 

@@ -15,9 +15,9 @@
 	},
 	"url": "wikisource.org",
 	"regExp": "([a-z0-9-]+[.])*wikisource[.]org[/]",
-	"version": "1.0.18",
-	"logo": "https://i.imgur.com/HS37uGx.png",
-	"thumbnail": "https://i.imgur.com/K7f8lKG.png",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikisource/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikisource/assets/thumbnail.png",
 	"color": "#f9f9f9",
 	"category": "other",
 	"tags": [

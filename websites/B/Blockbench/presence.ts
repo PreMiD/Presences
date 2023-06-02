@@ -14,7 +14,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.round(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/isuRsRF.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

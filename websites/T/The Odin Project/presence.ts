@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/gtBvHQH.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/The%20Odin%20Project/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		lesson = document.querySelector<HTMLHeadingElement>(

@@ -7,7 +7,7 @@ let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/mJC39Kz.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/0.png",
 			details: "Vendo a Alura",
 			startTimestamp: browsingTimestamp,
 		},
@@ -39,32 +39,32 @@ presence.on("UpdateData", async () => {
 				.getAttribute("aria-label")
 		) {
 			case "Front-end": {
-				presenceData.largeImageKey = "https://i.imgur.com/D42AEvv.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/1.png";
 				break;
 			}
 			case "Programação": {
-				presenceData.largeImageKey = "https://i.imgur.com/p57IsEa.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/2.png";
 				break;
 			}
 			case "DevOps": {
-				presenceData.largeImageKey = "https://i.imgur.com/RRyEvvR.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/3.png";
 				break;
 			}
 			case "UX & Design": {
-				presenceData.largeImageKey = "https://i.imgur.com/dIKn6Wz.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/4.png";
 				break;
 			}
 			case "Data Science": {
-				presenceData.largeImageKey = "https://i.imgur.com/4AQNRB1.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/5.png";
 				break;
 			}
 			case "Mobile": {
-				presenceData.largeImageKey = "https://i.imgur.com/mLpf7Yz.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/6.png";
 				break;
 			}
 			case "Inovação & Gestão":
 				{
-					presenceData.largeImageKey = "https://i.imgur.com/RrC0z8A.png";
+					presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/7.png";
 				}
 				break;
 		}
@@ -96,32 +96,32 @@ presence.on("UpdateData", async () => {
 			document.querySelector("div.formacao__info-categoria > a").textContent
 		) {
 			case "Front-end": {
-				presenceData.largeImageKey = "https://i.imgur.com/D42AEvv.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/1.png";
 				break;
 			}
 			case "Programação": {
-				presenceData.largeImageKey = "https://i.imgur.com/p57IsEa.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/2.png";
 				break;
 			}
 			case "DevOps": {
-				presenceData.largeImageKey = "https://i.imgur.com/RRyEvvR.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/3.png";
 				break;
 			}
 			case "UX & Design": {
-				presenceData.largeImageKey = "https://i.imgur.com/dIKn6Wz.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/4.png";
 				break;
 			}
 			case "Data Science": {
-				presenceData.largeImageKey = "https://i.imgur.com/4AQNRB1.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/5.png";
 				break;
 			}
 			case "Mobile": {
-				presenceData.largeImageKey = "https://i.imgur.com/mLpf7Yz.png";
+				presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/6.png";
 				break;
 			}
 			case "Inovação & Gestão":
 				{
-					presenceData.largeImageKey = "https://i.imgur.com/RrC0z8A.png";
+					presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/7.png";
 				}
 				break;
 		}
@@ -142,46 +142,46 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Vendo o ranking da comunidade";
 		}
 	} else if (document.location.pathname.includes("/aluraflix")) {
-		presenceData.largeImageKey = "https://i.imgur.com/43iG62U.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/8.png";
 		presenceData.details = "Vendo o Aluraflix";
 	} else if (document.location.pathname.includes("/carreirasemfronteiras")) {
 		title = document.querySelector(".podcast-header-title");
-		presenceData.largeImageKey = "https://i.imgur.com/XbsVEFV.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/9.png";
 		presenceData.details = 'Ouvindo o "Carreiras sem Fronteiras"';
 		if (title && !document.querySelector(".--margin-left-image"))
 			presenceData.state = `"${title.textContent}"`;
 	} else if (document.location.pathname.includes("/scubadev")) {
 		title = document.querySelector(".podcast-header-title");
-		presenceData.largeImageKey = "https://i.imgur.com/SMQfe3Y.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/10.png";
 		presenceData.details = 'Ouvindo o "ScubaDev"';
 		if (title && !document.querySelector(".--margin-left-image"))
 			presenceData.state = `"${title.textContent}"`;
 	} else if (document.location.pathname.includes("/layerstech")) {
 		title = document.querySelector(".podcast-header-title");
-		presenceData.largeImageKey = "https://i.imgur.com/xpUDQWR.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/11.png";
 		presenceData.details = 'Ouvindo o "Layers.Tech"';
 		if (title && !document.querySelector(".--margin-left-image"))
 			presenceData.state = `"${title.textContent}"`;
 	} else if (document.location.pathname.includes("/likeaboss")) {
 		title = document.querySelector(".podcast-header-title");
-		presenceData.largeImageKey = "https://i.imgur.com/96xQTpM.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/12.png";
 		presenceData.details = 'Ouvindo o "Like a Boss"';
 		if (title && !document.querySelector(".--margin-left-image"))
 			presenceData.state = `"${title.textContent}"`;
 	} else if (document.location.pathname.includes("/hipsterstech")) {
 		title = document.querySelector(".podcast-header-title");
-		presenceData.largeImageKey = "https://i.imgur.com/T7SMsQU.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/13.png";
 		presenceData.details = 'Ouvindo o "Hipsters.Tech"';
 		if (title && !document.querySelector(".--margin-left-image"))
 			presenceData.state = `"${title.textContent}"`;
 	} else if (document.location.pathname.includes("/cases")) {
 		title = document.querySelector(".intro__title");
-		presenceData.largeImageKey = "https://i.imgur.com/rtevoAV.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/14.png";
 		presenceData.details = "Assistindo um case";
 		if (title && document.location.pathname.includes("/extra"))
 			presenceData.state = `"${title.textContent}"`;
 	} else if (document.location.pathname.includes("/alura-mais")) {
-		presenceData.largeImageKey = "https://i.imgur.com/KrviSfF.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/15.png";
 		presenceData.details = "Vendo Alura+";
 	} else if (document.location.pathname.includes("/formacoes"))
 		presenceData.details = "Vendo formações";

@@ -12,9 +12,9 @@
 		"www.explainxkcd.com",
 		"explainxkcd.com"
 	],
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/mZSiamM.png",
-	"thumbnail": "https://i.imgur.com/MUuSnky.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Explain%20xkcd/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Explain%20xkcd/assets/thumbnail.png",
 	"color": "#ffffff",
 	"category": "other",
 	"tags": [

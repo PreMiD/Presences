@@ -14,7 +14,7 @@ let startTimestamp: number;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/1I3O248.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Richup.io/assets/0.png",
 		},
 		{ pathname, href } = location,
 		[showJoinRoomButton, showProfileButton] = await Promise.all([

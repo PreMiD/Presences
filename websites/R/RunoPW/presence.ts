@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/0ZL1dXI.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/RunoPW/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "runo.pw") {

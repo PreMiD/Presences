@@ -10,9 +10,9 @@
 		"nl": "p90.zone is een website die willekeurige WebM's (meestal memes) laat zien die door hun gebruikers zijn geüpload"
 	},
 	"url": "p90.zone",
-	"version": "1.2.16",
-	"logo": "https://i.imgur.com/YOmF0LY.png",
-	"thumbnail": "https://i.imgur.com/otlm8c2.png",
+	"version": "1.2.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/p90.zone/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/p90.zone/assets/thumbnail.png",
 	"color": "#000084",
 	"category": "videos",
 	"tags": [

@@ -276,7 +276,7 @@ interface Server {
 
 // #endregion
 const enum Assets {
-	logo = "https://i.imgur.com/nPzEemG.png",
+	logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jellyfin/assets/logo.png",
 }
 const JELLYFIN_URL = "jellyfin.org",
 	// all the presence art assets uploaded to discord

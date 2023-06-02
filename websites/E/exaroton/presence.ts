@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "792696743686307861",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/DTVwtiN.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/exaroton/assets/logo.png",
 	},
 	paths = {
 		":": "Home Page",

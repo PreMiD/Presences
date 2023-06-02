@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
 	const urlParams = new URLSearchParams(window.location.search);
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/g09SOs0.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 	};
 	if (document.location.pathname === "/") presence.setActivity(presenceData);
 	else if (
@@ -18,13 +18,13 @@ presence.on("UpdateData", () => {
 				presenceData = {
 					details: "Searching...",
 					state: urlParams.get("tags").replace(" ", ", "),
-					largeImageKey: "https://i.imgur.com/g09SOs0.png",
+					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 				};
 				presence.setActivity(presenceData);
 			} else {
 				presenceData = {
 					details: "Viewing Posts List...",
-					largeImageKey: "https://i.imgur.com/g09SOs0.png",
+					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 				};
 				presence.setActivity(presenceData);
 			}
@@ -32,18 +32,18 @@ presence.on("UpdateData", () => {
 			presenceData = {
 				details: "Viewing a Post...",
 				state: `Post ${urlParams.get("id")}`,
-				largeImageKey: "https://i.imgur.com/g09SOs0.png",
+				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 			};
 			presence.setActivity(presenceData);
 		} else {
 			presenceData = {
-				largeImageKey: "https://i.imgur.com/g09SOs0.png",
+				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 			};
 			presence.setActivity(presenceData);
 		}
 	} else {
 		presenceData = {
-			largeImageKey: "https://i.imgur.com/g09SOs0.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 		};
 		presence.setActivity(presenceData);
 	}

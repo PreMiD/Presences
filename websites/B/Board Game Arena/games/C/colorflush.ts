@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const colorflush: GamePresence = {
-	logo: "https://i.imgur.com/N37V2uA.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/108.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

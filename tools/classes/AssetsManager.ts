@@ -287,6 +287,10 @@ export default class AssetsManager {
 			try {
 				const stream = got.stream(url);
 				await pipeline(stream, createWriteStream(fileLocation));
+				if (stream.response?.url.split("/")[3].split(".")[0] === "removed") {
+					errors.push(`Asset ${url} was removed from the server`);
+					continue;
+				}
 			} catch (error) {
 				errors.push(`Error while downloading asset ${url}: ${error.message}`);
 				continue;

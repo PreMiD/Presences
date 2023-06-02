@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/vyaJqJh.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Bing/assets/logo.png",
 	};
 
 	// Get search query from HTML form input.

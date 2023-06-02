@@ -9,9 +9,9 @@
 		"en": "Formerly known as MSPaintAdventures, Homestuck.com hosts webcomics created by Andrew Hussie."
 	},
 	"url": "www.homestuck.com",
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/r6Hyf4D.png",
-	"thumbnail": "https://i.imgur.com/fgZQAYZ.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/thumbnail.png",
 	"color": "#0fff00",
 	"category": "other",
 	"tags": [

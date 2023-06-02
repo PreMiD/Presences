@@ -11,7 +11,7 @@ let user: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/fQZETmM.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/GameStar/assets/logo.png",
 	};
 
 	if (document.location.hostname === "www.gamestar.de") {

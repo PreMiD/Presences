@@ -14,7 +14,7 @@ presence.on("iFrameData", (data: { timeLeft: string; paused: boolean }) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/mVWgkzs.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/Wcostream/assets/logo.png",
 			details: "Browsing...",
 			startTimestamp: browsingTimestamp,
 		},
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 	}
-	if (!cover) presenceData.largeImageKey = "https://i.imgur.com/SDiZrOe.png";
+	if (!cover) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/W/Wcostream/assets/0.png";
 	if (!buttons) delete presenceData.buttons;
 	if (!timestamps) {
 		delete presenceData.startTimestamp;

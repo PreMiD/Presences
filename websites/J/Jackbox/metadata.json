@@ -21,9 +21,9 @@
 		"www.jackboxgames.com",
 		"shop.jackboxgames.com"
 	],
-	"version": "2.0.3",
-	"logo": "https://i.imgur.com/SXfEdnL.png",
-	"thumbnail": "https://i.imgur.com/poY2KNc.png",
+	"version": "2.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/thumbnail.png",
 	"color": "#4254f4",
 	"category": "games",
 	"tags": [

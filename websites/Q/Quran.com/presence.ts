@@ -14,7 +14,7 @@ function getElementByXpath(path: string) {
 }
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/9qpIurh.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Q/Quran.com/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location;

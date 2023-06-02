@@ -26,7 +26,7 @@ const presence = new Presence({
 	};
 
 const enum Assets {
-	Logo = "https://i.imgur.com/TQPRXrN.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeSuge/assets/logo.png",
 }
 
 let timeEnd: number, currentTime: number, paused: boolean;

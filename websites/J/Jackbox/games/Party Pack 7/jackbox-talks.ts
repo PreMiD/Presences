@@ -1,5 +1,5 @@
 export const name = "Talking Points";
-export const logo = "https://i.imgur.com/NMsM7Uo.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/30.png";
 
 export function getPresenceData({
 	playerState,

@@ -7,7 +7,7 @@ let question, taxonomy, account: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/WBwFUzx.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Q/Quora/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

@@ -15,9 +15,9 @@
 		"kickassanime.ro"
 	],
 	"regExp": "(([a-z0-9-]+[.])*kickassanime([.][a-z]+)+[/])|((www[0-9]*[.])?(kickassanime[.][a-z]+))",
-	"version": "1.1.6",
-	"logo": "https://i.imgur.com/TGgZkKQ.png",
-	"thumbnail": "https://i.imgur.com/c2vGXuN.png",
+	"version": "1.1.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/thumbnail.png",
 	"color": "#c7c95b",
 	"category": "videos",
 	"tags": [

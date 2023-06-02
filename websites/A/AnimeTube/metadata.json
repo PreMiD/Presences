@@ -12,9 +12,9 @@
 		"vi_VN": "Cộng đồng Anime với hàng trăm bản Anime được phát trực tuyến."
 	},
 	"url": "anime-tube.tv",
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/9MxXOK3.png",
-	"thumbnail": "https://i.imgur.com/gz0tYlg.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeTube/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeTube/assets/thumbnail.png",
 	"color": "#9b403f",
 	"category": "anime",
 	"tags": [

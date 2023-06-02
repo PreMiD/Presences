@@ -10,9 +10,9 @@
 	},
 	"url": "archlinux.org",
 	"regExp": "([a-z0-9-]+[.])*archlinux[.]org[/]",
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/GiMACbc.png",
-	"thumbnail": "https://i.imgur.com/DXVGQFR.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/ArchLinux/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/ArchLinux/assets/thumbnail.png",
 	"color": "#1793d1",
 	"category": "other",
 	"tags": [

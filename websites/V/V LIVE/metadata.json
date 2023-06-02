@@ -14,9 +14,9 @@
 		"ga_IE": "Is ardán siamsaíochta domhanda é V LIVE a nascann réaltaí na Cóiré agus a lucht leanúna."
 	},
 	"url": "www.vlive.tv",
-	"version": "2.0.18",
-	"logo": "https://i.imgur.com/K6z2UeE.png",
-	"thumbnail": "https://i.imgur.com/dLde4Ko.png",
+	"version": "2.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/V%20LIVE/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/V%20LIVE/assets/thumbnail.png",
 	"color": "#54f7ff",
 	"category": "videos",
 	"tags": [

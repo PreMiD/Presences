@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/kQsG9xv.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/MetaBrainz/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ hostname, pathname, search } = window.location;
@@ -64,7 +64,7 @@ presence.on("UpdateData", () => {
 		}
 		case "community.metabrainz.org": {
 			presenceData.details = "Browsing forum";
-			presenceData.largeImageKey = "https://i.imgur.com/AtrEqxF.png";
+			presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/M/MetaBrainz/assets/0.png";
 			if (pathname === "/") presenceData.state = "Home page";
 			else if (pathname.startsWith("/c/") || /^\/tags\/c\/.+/.test(pathname)) {
 				presenceData.state = `Viewing category '${

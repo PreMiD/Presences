@@ -19,9 +19,9 @@
 		"player.siriusxm.com",
 		"player.siriusxm.ca"
 	],
-	"version": "1.2.11",
-	"logo": "https://i.imgur.com/WKHpLxp.jpg",
-	"thumbnail": "https://i.imgur.com/kqez7xt.png",
+	"version": "1.2.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SiriusXM/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SiriusXM/assets/thumbnail.png",
 	"color": "#0081FF",
 	"category": "music",
 	"tags": [

@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/1SIuzpu.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/CDKeys/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/wishlist")) presenceData.details = "Wishlist";
 
 	if (!buttons) delete presenceData.buttons;
-	if (!covers) presenceData.largeImageKey = "https://i.imgur.com/1SIuzpu.png";
+	if (!covers) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/C/CDKeys/assets/logo.png";
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/vDGvohb.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Keymash/assets/logo.png",
 		},
 		[, path, query] = document.location.pathname.split("/");
 

@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			details: "Browsing...",
-			largeImageKey: "https://i.imgur.com/1jY4wvb.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		shortTitle = document.title.substring(

@@ -143,7 +143,7 @@ const pages: PageContext[] = [
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/SsIZl80.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/Wallhaven/assets/logo.png",
 	};
 	if (document.location.hostname === "wallhaven.cc") {
 		const query: { [key: string]: unknown } = getQuery(),

@@ -8,7 +8,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/GQF8Kiq.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/0-9/8muses/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (new URLSearchParams(window.location.search).has("s")) {

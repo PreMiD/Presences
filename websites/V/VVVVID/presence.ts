@@ -15,7 +15,7 @@ let hour: number,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/XwEUxO4.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/VVVVID/assets/logo.png",
 	};
 
 	if (document.location.hostname === "www.vvvvid.it") {

@@ -19,15 +19,15 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/6IUf3O6.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/Vodafone%20FM/assets/logo.png",
 			details: strings.listeningMusic,
 		};
 
 	if (document.querySelector("#play").classList.contains("hidden")) {
-		presenceData.smallImageKey = "https://i.imgur.com/xiZprpt.png";
+		presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/V/Vodafone%20FM/assets/0.png";
 		presenceData.smallImageText = strings.live;
 	} else {
-		presenceData.smallImageKey = "https://i.imgur.com/w1jwJTh.png";
+		presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/V/Vodafone%20FM/assets/1.png";
 		presenceData.smallImageText = strings.pause;
 	}
 

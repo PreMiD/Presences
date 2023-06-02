@@ -11,9 +11,9 @@
 		"nl": "JVC (jeuxvideo.com) is een beroemde Franse bord- en nieuwssite over videogames."
 	},
 	"url": "www.jeuxvideo.com",
-	"version": "1.2.17",
-	"logo": "https://i.imgur.com/EnEXs1P.jpg",
-	"thumbnail": "https://i.imgur.com/VRpec9o.png",
+	"version": "1.2.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/JeuxVideo.com/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/JeuxVideo.com/assets/thumbnail.png",
 	"color": "#FF582E",
 	"category": "socials",
 	"tags": [

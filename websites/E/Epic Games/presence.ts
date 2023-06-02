@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/CAsgHOc.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Epic%20Games/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ hostname, href, pathname } = document.location,
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 	else if (search?.value) {
 		presenceData.details = "Searching for";
 		presenceData.state = search.value;
-		presenceData.smallImageKey = "https://i.imgur.com/oGQtnIY.png";
+		presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/E/Epic%20Games/assets/0.png";
 	} else if (hostname === "store.epicgames.com") {
 		if (
 			pathname ===
@@ -39,11 +39,11 @@ presence.on("UpdateData", async () => {
 						delete presenceData.startTimestamp;
 						presenceData.details = "Viewing trailer of";
 						if (!video.paused) {
-							presenceData.smallImageKey = "https://i.imgur.com/OLaz6JN.png";
+							presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/E/Epic%20Games/assets/1.png";
 							[, presenceData.endTimestamp] =
 								presence.getTimestampsfromMedia(video);
 						} else
-							presenceData.smallImageKey = "https://i.imgur.com/4iyMINk.png";
+							presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/E/Epic%20Games/assets/2.png";
 					}
 					presenceData.state =
 						JSON.parse(
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 				case "news": {
 					if (document.querySelector('[id="storeNews"]')) {
 						presenceData.details = "Reading about";
-						presenceData.smallImageKey = "https://i.imgur.com/nese1O7.png";
+						presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/E/Epic%20Games/assets/3.png";
 						presenceData.state = document.querySelector("title").textContent;
 					} else presenceData.details = "Browsing all news";
 					presenceData.buttons = [
@@ -116,12 +116,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				'[class*="ArticleAnchorLink--active"]'
 			).textContent;
-			presenceData.smallImageKey = "https://i.imgur.com/nese1O7.png";
+			presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/E/Epic%20Games/assets/3.png";
 		} else {
 			switch (pathname.split("/")[3]) {
 				case "epic-games-store-faq": {
 					presenceData.details = "Reading the FAQ";
-					presenceData.smallImageKey = "https://i.imgur.com/nese1O7.png";
+					presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/E/Epic%20Games/assets/3.png";
 					break;
 				}
 				default: {
@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 		}
 	}
 	if (!buttons) delete presenceData.buttons;
-	if (!covers) presenceData.largeImageKey = "https://i.imgur.com/CAsgHOc.png";
+	if (!covers) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/E/Epic%20Games/assets/logo.png";
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

@@ -10,9 +10,9 @@
 		"nl": "TrueSteamAchievements is de plaats voor Steam nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer."
 	},
 	"url": "truesteamachievements.com",
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/8EEEcoh.png",
-	"thumbnail": "https://i.imgur.com/emAb1iF.jpg",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TrueSteamAchievements/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TrueSteamAchievements/assets/thumbnail.jpg",
 	"color": "#FFF",
 	"category": "other",
 	"tags": [

@@ -18,7 +18,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "An overview of the Trackmania Live Services.",
-		largeImageKey: "https://i.imgur.com/W99K52i.jpg",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Trackmania.io/assets/logo.jpg",
 		state: `Unsupported page (${window.location.hash})`,
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};

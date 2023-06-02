@@ -14,7 +14,7 @@ function getUserName(): void {
 async function getProfileDetails() {
 	// Gets profile from the user you're viewing.
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/J54T2Wn.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/VRChat/assets/logo.png",
 		},
 		privacymode = await presence.getSetting<boolean>("privacy"),
 		viewingprofilename =
@@ -43,7 +43,7 @@ async function getProfileDetails() {
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/J54T2Wn.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/VRChat/assets/logo.png",
 		},
 		privacymode = await presence.getSetting<boolean>("privacy");
 

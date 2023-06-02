@@ -9,9 +9,9 @@
 		"en": "GameBanana is a community of PC and console gamers who love to discuss, download, and share user-created game content."
 	},
 	"url": "gamebanana.com",
-	"version": "1.0.5",
-	"logo": "https://i.imgur.com/sIjHqBm.png",
-	"thumbnail": "https://i.imgur.com/RDlk1vD.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GameBanana/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GameBanana/assets/thumbnail.png",
 	"color": "#1c272e",
 	"category": "games",
 	"tags": [

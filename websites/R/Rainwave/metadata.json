@@ -11,9 +11,9 @@
 		"nl": "Videogamemuziek online radio, inclusief remixen en originele soundtracks! Stem op de liedjes die je wilt horen!"
 	},
 	"url": "rainwave.cc",
-	"version": "1.1.17",
-	"logo": "https://i.imgur.com/XJb9wAx.png",
-	"thumbnail": "https://i.imgur.com/popvf2S.png",
+	"version": "1.1.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rainwave/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rainwave/assets/thumbnail.png",
 	"color": "#D17C2B",
 	"category": "music",
 	"tags": [

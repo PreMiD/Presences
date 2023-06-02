@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const fluxx: GamePresence = {
-	logo: "https://i.imgur.com/VpE5Cqr.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/189.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

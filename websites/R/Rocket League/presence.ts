@@ -7,7 +7,7 @@ let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/mW47NQQ.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Rocket%20League/assets/logo.png",
 	};
 
 	title = document.querySelector("#offer-balance");

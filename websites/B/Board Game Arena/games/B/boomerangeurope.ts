@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const boomerangeurope: GamePresence = {
-	logo: "https://i.imgur.com/KQjNBh7.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/55.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

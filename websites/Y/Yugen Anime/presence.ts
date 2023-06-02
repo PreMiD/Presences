@@ -48,7 +48,7 @@ let video = {
 	oldLang: string = null;
 
 const enum Assets {
-	Logo = "https://i.imgur.com/m5UhwNJ.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/Y/Yugen%20Anime/assets/logo.png",
 }
 
 presence.on(

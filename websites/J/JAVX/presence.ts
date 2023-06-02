@@ -59,7 +59,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/0Jwz0Ct.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/J/JAVX/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		{ pathname, search } = location,

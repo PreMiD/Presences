@@ -13,14 +13,14 @@ presence.on("UpdateData", async () => {
 		showcon = await presence.getSetting<boolean>("showContact");
 	// Home Page
 	if (path === "/" || path.includes("/intl/")) {
-		presenceData.largeImageKey = "https://i.imgur.com/lkQjuwL.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Messages/assets/logo.png";
 		presenceData.details = "Home page";
 	} else if (path === "/web/authentication") {
-		presenceData.largeImageKey = "https://i.imgur.com/lkQjuwL.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Messages/assets/logo.png";
 		presenceData.details = "Authentication page";
 	} else if (path === "/web/conversations") {
 		presenceData.details = "Browsing conversations";
-		presenceData.largeImageKey = "https://i.imgur.com/lkQjuwL.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Messages/assets/logo.png";
 	} else if (
 		path.includes("/web/conversations/") &&
 		path !== "/web/conversations/new"
@@ -34,15 +34,15 @@ presence.on("UpdateData", async () => {
 				.querySelector("div > span > h2").textContent;
 		}
 		presenceData.details = "Reading messages from:";
-		presenceData.largeImageKey = "https://i.imgur.com/lkQjuwL.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Messages/assets/logo.png";
 	} else if (path === "/web/conversations/new") {
-		presenceData.largeImageKey = "https://i.imgur.com/lkQjuwL.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Messages/assets/logo.png";
 		presenceData.details = "New conversation page";
 	} else if (path === "/web/settings") {
-		presenceData.largeImageKey = "https://i.imgur.com/lkQjuwL.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Messages/assets/logo.png";
 		presenceData.details = "Browsing settings";
 	} else {
-		presenceData.largeImageKey = "https://i.imgur.com/lkQjuwL.png";
+		presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Messages/assets/logo.png";
 		presenceData.details = "Browsing on Google Messages";
 	}
 	if (presenceData.details) presence.setActivity(presenceData);

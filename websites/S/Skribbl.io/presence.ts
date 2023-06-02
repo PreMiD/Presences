@@ -3,8 +3,8 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://i.imgur.com/EYcWQmj.png",
-	Avatar = "https://i.imgur.com/Uunb9C6.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Skribbl.io/assets/logo.png",
+	Avatar = "https://cdn.rcd.gg/PreMiD/websites/S/Skribbl.io/assets/0.png",
 }
 
 async function getStrings() {

@@ -13,9 +13,9 @@
 		"my.brain.fm",
 		"try.brain.fm"
 	],
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/eX5kOQU.png",
-	"thumbnail": "https://i.imgur.com/mBXVqed.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Brain.fm/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Brain.fm/assets/thumbnail.png",
 	"color": "#952fc0",
 	"category": "music",
 	"tags": [

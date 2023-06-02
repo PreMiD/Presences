@@ -10,9 +10,9 @@
 		"ru": "AnimeGO — смотреть аниме онлайн бесплатно."
 	},
 	"url": "animego.org",
-	"version": "1.0.5",
-	"logo": "https://i.imgur.com/B32aOhi.jpg",
-	"thumbnail": "https://i.imgur.com/xwYpmDF.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeGO/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeGO/assets/thumbnail.png",
 	"color": "#ff5c57",
 	"category": "anime",
 	"tags": [

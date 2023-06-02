@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/pL1fgAo.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AniTube.in/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		search: HTMLInputElement = document.querySelector(

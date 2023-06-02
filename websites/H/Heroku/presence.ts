@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/V7ZULKG.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Heroku/assets/logo.png",
 		},
 		{ hostname, pathname, search } = window.location,
 		showNames = await presence.getSetting<boolean>("showNames");

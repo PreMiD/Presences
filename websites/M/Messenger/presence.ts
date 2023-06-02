@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Ij0u52Z.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/Messenger/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[messageRecipient, callRecipient] = await Promise.all([

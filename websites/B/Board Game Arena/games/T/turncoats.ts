@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const turncoats: GamePresence = {
-	logo: "https://i.imgur.com/V1S7cpa.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/587.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

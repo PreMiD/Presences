@@ -22,8 +22,8 @@ async function getStrings() {
 	);
 }
 const enum Assets {
-	Ad = "https://i.imgur.com/woctRCn.png",
-	Logo = "https://i.imgur.com/nolTGp7.png",
+	Ad = "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/0.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/logo.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,

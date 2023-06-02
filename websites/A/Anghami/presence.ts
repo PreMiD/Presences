@@ -8,7 +8,7 @@ const presence = new Presence({
 	});
 
 const enum Assets {
-	Logo = "https://i.imgur.com/PzxFsAZ.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Anghami/assets/logo.png",
 }
 
 function getTime(list: string[]): number {

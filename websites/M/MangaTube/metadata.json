@@ -11,9 +11,9 @@
 		"nl": "Uw Duitse mangagemeenschap. Praat met Manga-fans en blader door onze enorme database met meer dan 600 Manga"
 	},
 	"url": "manga-tube.me",
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/roeUqz0.png",
-	"thumbnail": "https://i.imgur.com/l6i0Jeo.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaTube/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaTube/assets/thumbnail.png",
 	"color": "#000000",
 	"category": "anime",
 	"tags": [

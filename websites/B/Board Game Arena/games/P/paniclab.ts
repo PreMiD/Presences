@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const paniclab: GamePresence = {
-	logo: "https://i.imgur.com/jL4IQSD.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/398.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

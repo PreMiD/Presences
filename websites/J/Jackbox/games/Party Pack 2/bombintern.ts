@@ -1,5 +1,5 @@
 export const name = "Bomb Corp";
-export const logo = "https://i.imgur.com/1srbKlq.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/5.png";
 
 export function getPresenceData(): PresenceData {
 	const { classList } = document.querySelector<HTMLDivElement>(

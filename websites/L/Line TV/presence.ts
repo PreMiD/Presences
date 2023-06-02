@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/F2sWIqN.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/Line%20TV/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 		details: strings.browse,
 	};

@@ -23,7 +23,7 @@ let lastGameChange: number = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/OfHFd5Q.jpeg",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/logo.jpeg",
 		},
 		itemName = document.querySelector('[itemprop="name"]')
 			? document.querySelector('[itemprop="name"]').textContent

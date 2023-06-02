@@ -11,9 +11,9 @@
 		"nl": "Top 10-lijsten voor muziek, tv, film en videogames."
 	},
 	"url": "watchmojo.com",
-	"version": "1.0.16",
-	"logo": "https://i.imgur.com/zQetOPX.jpg",
-	"thumbnail": "https://i.imgur.com/X2KmnaF.jpg",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WatchMojo/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WatchMojo/assets/thumbnail.jpg",
 	"color": "#01ffff",
 	"category": "videos",
 	"tags": [

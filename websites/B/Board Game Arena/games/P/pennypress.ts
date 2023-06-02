@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const pennypress: GamePresence = {
-	logo: "https://i.imgur.com/cAmQ08z.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/405.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

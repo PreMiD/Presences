@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Fty4eZ8.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/MusicBrainz/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = window.location,
@@ -378,7 +378,7 @@ presence.on("UpdateData", () => {
 			} else {
 				const recordingName = document.querySelector("bdi").textContent;
 				presenceData.details = "Viewing recording";
-				presenceData.smallImageKey = "https://i.imgur.com/ybpozZ6.png";
+				presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/M/MusicBrainz/assets/0.png";
 				presenceData.smallImageText = `Artist: '${
 					document.querySelector(".artist bdi")?.textContent
 				}' Length: ${

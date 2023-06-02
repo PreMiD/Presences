@@ -11,9 +11,9 @@
 		"nl": "U kunt op internet naar Finse radiokanalen luisteren!"
 	},
 	"url": "www.radio-suomi.com",
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/nhxjVmG.png",
-	"thumbnail": "https://i.imgur.com/POhcIvd.png",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Radiot%20Suomi/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Radiot%20Suomi/assets/thumbnail.png",
 	"color": "#002F6C",
 	"category": "music",
 	"tags": [

@@ -1,5 +1,5 @@
 export const name = "Fakin' It";
-export const logo = "https://i.imgur.com/hYcvY7w.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/9.png";
 
 export function getPresenceData(): PresenceData {
 	const currentGamePage = document.querySelector<HTMLDivElement>(

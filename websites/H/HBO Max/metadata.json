@@ -16,9 +16,9 @@
 		"play.hbomax.com",
 		"help.hbomax.com"
 	],
-	"version": "2.2.3",
-	"logo": "https://i.imgur.com/UxH7DDE.png",
-	"thumbnail": "https://i.imgur.com/d1bktD4.jpg",
+	"version": "2.2.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/thumbnail.jpg",
 	"color": "#c600ff",
 	"category": "videos",
 	"tags": [

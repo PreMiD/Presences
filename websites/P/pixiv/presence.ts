@@ -47,7 +47,7 @@ const presence = new Presence({
 	};
 
 const enum Assets {
-	Logo = "https://i.imgur.com/D8Lf2t2.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/pixiv/assets/logo.png",
 }
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),

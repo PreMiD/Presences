@@ -19,7 +19,7 @@
 						document.querySelector(".backInfoTxt2").textContent
 					}`,
 					state: document.querySelector(".backInfoTxt3").textContent,
-					largeImageKey: "https://i.imgur.com/6sp3k8m.png",
+					largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/d%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%B9%E3%83%88%E3%82%A2/assets/logo.png",
 					smallImageKey: isPlaying ? "play" : "pause",
 					smallImageText: isPlaying
 						? (await strings).play

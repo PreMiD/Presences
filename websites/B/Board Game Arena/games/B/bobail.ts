@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const bobail: GamePresence = {
-	logo: "https://i.imgur.com/9jm5Cvk.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/52.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

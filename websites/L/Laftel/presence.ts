@@ -28,7 +28,7 @@ function getQuery() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/xGOEvzT.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/Laftel/assets/logo.png",
 	};
 
 	if (window.location.pathname === "/") presenceData.details = "메인";

@@ -1,7 +1,7 @@
 import { uploadFile } from "../../util";
 
 export const name = "Champ'd Up";
-export const logo = "https://i.imgur.com/KnAS7yD.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/32.png";
 
 export async function getPresenceData({
 	playerState,
@@ -47,7 +47,7 @@ export async function getPresenceData({
 				if (imageLink) {
 					presenceData.largeImageKey = await uploadFile(
 						imageLink,
-						"https://i.imgur.com/KnAS7yD.png",
+						"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/32.png",
 						presence
 					);
 				}

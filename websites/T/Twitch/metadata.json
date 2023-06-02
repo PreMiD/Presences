@@ -41,9 +41,9 @@
 		"devstatus.twitch.tv",
 		"status.twitch.tv"
 	],
-	"version": "3.2.5",
-	"logo": "https://i.imgur.com/So7h3G0.png",
-	"thumbnail": "https://i.imgur.com/OAcBmwW.png",
+	"version": "3.2.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/thumbnail.png",
 	"color": "#9146FF",
 	"category": "videos",
 	"tags": [

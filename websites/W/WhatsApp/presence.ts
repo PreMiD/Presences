@@ -30,13 +30,13 @@ presence.on("UpdateData", async () => {
 	if (!name && !typing) {
 		if (!document.querySelector('[data-testid="conversation-info-header"]')) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/iI0LOkF.png",
+				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/WhatsApp/assets/logo.png",
 				details: "Browsing...",
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/iI0LOkF.png",
+				largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/WhatsApp/assets/logo.png",
 				details: "Texting with someone",
 				state: "Just reading...",
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else {
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/iI0LOkF.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/WhatsApp/assets/logo.png",
 			details: `Texting with ${name || "someone"}`,
 			state: (typing?.textContent && "Typing...") || "Just reading...",
 			startTimestamp: Math.floor(Date.now() / 1000),

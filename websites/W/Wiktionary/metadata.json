@@ -15,9 +15,9 @@
 	},
 	"url": "wiktionary.org",
 	"regExp": "([a-z0-9-]+[.])+wiktionary[.]org[/]",
-	"version": "1.0.18",
-	"logo": "https://i.imgur.com/veGwn6G.png",
-	"thumbnail": "https://i.imgur.com/dqjnnV8.png",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wiktionary/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wiktionary/assets/thumbnail.png",
 	"color": "#f9f9f9",
 	"category": "other",
 	"tags": [

@@ -10,7 +10,7 @@ let gameName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/beLx5ko.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Stadia/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

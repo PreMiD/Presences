@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "854718080433520661",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/H814ZfW.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/Waze/assets/logo.png",
 		startTimestamp: ~~(Date.now() / 1000),
 	},
 	pages: { [key: string]: string } = {

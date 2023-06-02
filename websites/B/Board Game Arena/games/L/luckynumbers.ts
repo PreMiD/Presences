@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const luckynumbers: GamePresence = {
-	logo: "https://i.imgur.com/KvAF4ua.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/325.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

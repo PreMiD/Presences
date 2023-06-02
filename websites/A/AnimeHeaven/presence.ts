@@ -120,7 +120,7 @@ const paths = {
 presence.on("UpdateData", async () => {
 	const buttons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/K5IdObW.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/AnimeHeaven/assets/logo.png",
 			state: "Browsing...",
 			startTimestamp: browsingTimestamp,
 		};

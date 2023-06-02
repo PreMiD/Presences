@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 
 	if (!playback) {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/pScqtTz.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/dlive/assets/logo.png",
 		};
 
 		presenceData.details = "Browsing...";
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.querySelector("video.dplayer-video.dplayer-video-current")) {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/pScqtTz.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/dlive/assets/logo.png",
 			smallImageKey: "live",
 		};
 

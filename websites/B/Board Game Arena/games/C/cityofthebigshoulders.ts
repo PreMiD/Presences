@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const cityofthebigshoulders: GamePresence = {
-	logo: "https://i.imgur.com/zGlAzZd.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/99.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

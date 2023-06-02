@@ -1,5 +1,5 @@
 export const name = "The Wheel of Enormous Proportions";
-export const logo = "https://i.imgur.com/hoWsjON.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/37.png";
 
 export function getPresenceData({
 	playerState,

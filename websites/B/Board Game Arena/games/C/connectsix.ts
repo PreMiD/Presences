@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const connectsix: GamePresence = {
-	logo: "https://i.imgur.com/x5DNywB.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/114.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

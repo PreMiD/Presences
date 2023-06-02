@@ -6,8 +6,8 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/o5injgg.png",
-	Studio = "https://i.imgur.com/T2uW4AB.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
+	Studio = "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/0.png",
 }
 
 function truncateAfter(str: string, pattern: string): string {
@@ -415,7 +415,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (YoutubeShorts) {
-			presenceData.largeImageKey = "https://i.imgur.com/c0W8Na8.png";
+			presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/1.png";
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 			delete presenceData.endTimestamp;

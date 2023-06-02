@@ -10,9 +10,9 @@
 	},
 	"url": "boardgamearena.com",
 	"regExp": "[a-z]*[.]?boardgamearena[.]com",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/uCstmQE.png",
-	"thumbnail": "https://i.imgur.com/VZOq3Fm.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/thumbnail.png",
 	"color": "#4871b6",
 	"category": "games",
 	"tags": [

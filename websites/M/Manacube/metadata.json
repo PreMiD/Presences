@@ -10,9 +10,9 @@
 	},
 	"url": "manacube.com",
 	"regExp": "([a-z0-9-]+[.])*manacube[.]com[/]",
-	"version": "1.0.10",
-	"logo": "https://i.imgur.com/sBgHblJ.png",
-	"thumbnail": "https://i.imgur.com/D04YmVN.png",
+	"version": "1.0.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Manacube/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Manacube/assets/thumbnail.png",
 	"color": "#06D1DF",
 	"category": "games",
 	"tags": [

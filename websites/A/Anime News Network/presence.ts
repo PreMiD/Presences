@@ -11,7 +11,7 @@ let data;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/xA03grT.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20News%20Network/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

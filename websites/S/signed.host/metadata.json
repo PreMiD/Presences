@@ -16,9 +16,9 @@
 		"signed.host",
 		"bio.signed.host"
 	],
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/lpLWPa4.png",
-	"thumbnail": "https://i.imgur.com/6F2gWZR.png",
+	"version": "1.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/signed.host/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/signed.host/assets/thumbnail.png",
 	"color": "#37b2eb",
 	"category": "socials",
 	"tags": [

@@ -15,7 +15,7 @@ let title: HTMLAnchorElement,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Unknown page",
-			largeImageKey: "https://i.imgur.com/iTWct8S.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Overflow/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		showButtons = await presence.getSetting<boolean>("buttons");

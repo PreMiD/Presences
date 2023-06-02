@@ -25,7 +25,7 @@ const editingStamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/kEnCDvm.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Battlefield%20Portal/assets/logo.png",
 		},
 		[block, time, buttons, name, description] = await Promise.all([
 			presence.getSetting<boolean>("block"),

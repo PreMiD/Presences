@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const forbiddenisland: GamePresence = {
-	logo: "https://i.imgur.com/rF4qcYB.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/190.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

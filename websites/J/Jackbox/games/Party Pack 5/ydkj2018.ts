@@ -1,5 +1,5 @@
 export const name = "You Don't Know Jack: Full Stream";
-export const logo = "https://i.imgur.com/Li8TLXI.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/22.png";
 
 export function getPresenceData({
 	playerState,

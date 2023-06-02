@@ -16,9 +16,9 @@
 		"www.komoot.es",
 		"www.komoot.nl"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/G8vn23a.png",
-	"thumbnail": "https://i.imgur.com/mbb326e.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Komoot/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Komoot/assets/thumbnail.png",
 	"color": "#FFFFFF",
 	"category": "other",
 	"tags": [

@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 			"top",
 		],
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/t2BG2Fj.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/0-9/9GAG/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 

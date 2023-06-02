@@ -38,7 +38,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Jd4Pyyx.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TwitCasting/assets/logo.png",
 			startTimestamp: elapsed,
 		},
 		[

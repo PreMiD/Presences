@@ -9,9 +9,9 @@
 		"en": "The dictionary by Merriam-Webster is America's most trusted online dictionary for English word definitions, meanings, and pronunciation."
 	},
 	"url": "www.merriam-webster.com",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/Iw9ZHAJ.png",
-	"thumbnail": "https://i.imgur.com/0gUOyxz.jpg",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Merriam-Webster/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Merriam-Webster/assets/thumbnail.jpg",
 	"color": "#d8121b",
 	"category": "other",
 	"tags": [

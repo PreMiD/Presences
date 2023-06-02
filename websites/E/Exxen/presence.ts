@@ -11,7 +11,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/6ZtGZ8v.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Exxen/assets/logo.png",
 	};
 	if (document.location.pathname.includes("watch")) {
 		const video: HTMLVideoElement = document.querySelector(".rmp-video"),

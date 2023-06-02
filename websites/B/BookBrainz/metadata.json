@@ -9,9 +9,9 @@
 		"en": "BookBrainz is a project to create an online database of information about every single book, magazine, journal and other publication ever written."
 	},
 	"url": "bookbrainz.org",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/ja94dWW.png",
-	"thumbnail": "https://i.imgur.com/pE0F58r.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BookBrainz/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BookBrainz/assets/thumbnail.png",
 	"color": "#754e37",
 	"category": "other",
 	"tags": [

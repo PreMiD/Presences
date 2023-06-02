@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const hokito: GamePresence = {
-	logo: "https://i.imgur.com/v6AHnrt.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/246.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

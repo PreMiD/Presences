@@ -3,7 +3,7 @@ const presence: Presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Ickm2Yv.jpg",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/Webtoon/assets/logo.jpg",
 		startTimestamp: browsingTimestamp,
 	},
 	strings = presence.getStrings({

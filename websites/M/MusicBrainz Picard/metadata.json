@@ -12,9 +12,9 @@
 		"picard.musicbrainz.org",
 		"picard-docs.musicbrainz.org"
 	],
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/hkrB6W8.png",
-	"thumbnail": "https://i.imgur.com/Z9vaF29.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MusicBrainz%20Picard/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MusicBrainz%20Picard/assets/thumbnail.png",
 	"color": "#771b85",
 	"category": "music",
 	"tags": [

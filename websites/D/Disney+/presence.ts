@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	if (isHostDP) presenceData.largeImageKey = "https://i.imgur.com/KIZSYhc.png";
+	if (isHostDP) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png";
 	else if (isHostHS) presenceData.largeImageKey = "disneyplus-hotstar-logo";
 
 	// Disney+ video

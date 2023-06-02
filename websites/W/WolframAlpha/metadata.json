@@ -14,9 +14,9 @@
 		"www.wolframalpha.com",
 		"products.wolframalpha.com"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/vrmnHwZ.png",
-	"thumbnail": "https://i.imgur.com/M8EhvsC.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WolframAlpha/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WolframAlpha/assets/thumbnail.png",
 	"color": "#c24802",
 	"category": "other",
 	"tags": [

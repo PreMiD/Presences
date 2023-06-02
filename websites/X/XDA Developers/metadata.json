@@ -10,9 +10,9 @@
 	},
 	"url": "www.xda-developers.com",
 	"regExp": "([a-z0-9-_]+)[.]xda-developers[.]com",
-	"version": "1.0.7",
-	"logo": "https://i.imgur.com/3IF5xqk.jpg",
-	"thumbnail": "https://i.imgur.com/JFoonlP.jpg",
+	"version": "1.0.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/X/XDA%20Developers/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/X/XDA%20Developers/assets/thumbnail.jpg",
 	"color": "#31035B",
 	"category": "socials",
 	"tags": [

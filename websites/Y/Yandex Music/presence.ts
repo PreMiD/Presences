@@ -37,7 +37,7 @@ setInterval(async () => {
 	}
 
 	presenceData = {
-		largeImageKey: "https://i.imgur.com/d1za28M.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex%20Music/assets/logo.png",
 		smallImageKey: playing ? "play" : "pause",
 		smallImageText: playing ? (await strings).playing : (await strings).pause,
 		details: (document.querySelectorAll(".track__title")[0] as HTMLElement)

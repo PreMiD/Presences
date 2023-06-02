@@ -10,9 +10,9 @@
 		"vi_VN": "Outlook.com là ứng dụng quản lý thông tin cá nhân của Microsoft bao gồm thư điện tử, quản lý lịch, danh bạ và các nhiệm vụ."
 	},
 	"url": "outlook.live.com",
-	"version": "1.0.8",
-	"logo": "https://i.imgur.com/nwBDM8Q.png",
-	"thumbnail": "https://i.imgur.com/9IKy3ax.png",
+	"version": "1.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Outlook/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Outlook/assets/thumbnail.png",
 	"color": "#0F78D4",
 	"category": "socials",
 	"tags": [

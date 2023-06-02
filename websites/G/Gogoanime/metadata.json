@@ -21,9 +21,9 @@
 		"gogoanime.news"
 	],
 	"regExp": "((w)?ww([0-9]*)?[.])?(gogoanime[s]?)([0-9]+)?([.].*)",
-	"version": "2.1.7",
-	"logo": "https://i.imgur.com/OnaEYdo.png",
-	"thumbnail": "https://i.imgur.com/RZwilwc.png",
+	"version": "2.1.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/thumbnail.png",
 	"color": "#FFC119",
 	"category": "anime",
 	"tags": [

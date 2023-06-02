@@ -11,9 +11,9 @@
 	},
 	"url": "twitcasting.tv",
 	"regExp": "([a-z0-9]+[.])?twitcasting[.]tv",
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/Jd4Pyyx.png",
-	"thumbnail": "https://i.imgur.com/3P8di7c.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TwitCasting/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TwitCasting/assets/thumbnail.png",
 	"color": "#0280FC",
 	"category": "socials",
 	"tags": [

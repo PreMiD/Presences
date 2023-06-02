@@ -16,9 +16,9 @@
 		"southpark.cc.com"
 	],
 	"regExp": "([a-z]{2,}[.])?southpark(studios)?([.][a-z]{2,}){1,2}",
-	"version": "1.1.6",
-	"logo": "https://i.imgur.com/h6b3eEW.jpg",
-	"thumbnail": "https://i.imgur.com/No75MzW.jpg",
+	"version": "1.1.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/South%20Park/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/South%20Park/assets/thumbnail.jpg",
 	"color": "#b6122a",
 	"category": "videos",
 	"tags": [

@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/4OAAc9O.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/R/Reach%20Radio/assets/logo.png",
 		},
 		[info, elapsed, format1, format2] = await Promise.all([
 			presence.getSetting<boolean>("sInfo"),

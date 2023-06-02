@@ -9,7 +9,7 @@ import {
 } from "../../util";
 
 const wingspan: GamePresence = {
-	logo: "https://i.imgur.com/r49yEME.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/615.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

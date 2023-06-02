@@ -11,9 +11,9 @@
 		"nl": "Een gids gemaakt door de gemeenschap van discord.js voor haar gebruikers."
 	},
 	"url": "discordjs.guide",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/Zt4i2l3.png",
-	"thumbnail": "https://i.imgur.com/ojmsp7f.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DiscordJS%20Guide/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DiscordJS%20Guide/assets/thumbnail.png",
 	"color": "#20f856",
 	"category": "other",
 	"tags": [

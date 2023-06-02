@@ -14,9 +14,9 @@
 		"www.nutaku.net"
 	],
 	"regExp": "([a-z]+[.])nutaku.net[/]",
-	"version": "1.0.18",
-	"logo": "https://i.imgur.com/fvSnqjK.png",
-	"thumbnail": "https://i.imgur.com/ypxOFV9.jpg",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/thumbnail.jpg",
 	"color": "#E53155",
 	"category": "games",
 	"tags": [

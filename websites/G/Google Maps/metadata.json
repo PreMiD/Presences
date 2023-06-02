@@ -10,9 +10,9 @@
 	},
 	"url": "www.google.com",
 	"regExp": "www\\.google\\.com\\/maps",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/RI6Wn79.png",
-	"thumbnail": "https://i.imgur.com/u7oLYw6.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Maps/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Maps/assets/thumbnail.png",
 	"color": "#4e85f2",
 	"category": "other",
 	"tags": [

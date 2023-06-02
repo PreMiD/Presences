@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/3ogkQzN.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Emojipedia/assets/logo.png",
 	};
 
 	if (

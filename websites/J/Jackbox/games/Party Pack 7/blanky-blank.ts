@@ -1,5 +1,5 @@
 export const name = "Blather 'Round";
-export const logo = "https://i.imgur.com/qLW2Fft.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/28.png";
 
 export function getPresenceData({
 	playerState,

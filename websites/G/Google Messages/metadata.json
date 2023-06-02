@@ -11,9 +11,9 @@
 		"vi_VN": "Google Messages là ứng dụng nhắn tin đơn giản giúp bạn kết nối với những người quan trong nhất. Nhắn tin cho bất kì ai từ mọi nơi xuyên các thiết bị."
 	},
 	"url": "messages.google.com",
-	"version": "1.0.16",
-	"logo": "https://i.imgur.com/lkQjuwL.png",
-	"thumbnail": "https://i.imgur.com/ja7iISJ.jpg",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Messages/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Messages/assets/thumbnail.jpg",
 	"color": "#1a73e8",
 	"category": "socials",
 	"tags": [

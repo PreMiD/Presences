@@ -10,9 +10,9 @@
 		"nl": "Undercards is een online turn-based kaartspel."
 	},
 	"url": "undercards.net",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/xahtF8Y.png",
-	"thumbnail": "https://i.imgur.com/D9bWiXU.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/Undercards/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/Undercards/assets/thumbnail.png",
 	"color": "#FF0000",
 	"category": "games",
 	"tags": [

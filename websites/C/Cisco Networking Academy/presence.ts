@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 	else details = "Browsing";
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/pvz4KSf.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/Cisco%20Networking%20Academy/assets/logo.png",
 		details,
 		state,
 		startTimestamp: timestamp,

@@ -10,9 +10,9 @@
 		"nl": "Bekijk alle online functies van Geometry Dash, direct vanaf deze handige kleine website! Levels, profielen, klassementen, commentaar, en meer!"
 	},
 	"url": "gdbrowser.com",
-	"version": "1.3.19",
-	"logo": "https://i.imgur.com/pEYBPbO.png",
-	"thumbnail": "https://i.imgur.com/QLxFxIm.png",
+	"version": "1.3.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/thumbnail.png",
 	"color": "#FFFF00",
 	"category": "games",
 	"tags": [

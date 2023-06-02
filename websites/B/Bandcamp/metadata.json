@@ -12,9 +12,9 @@
 	},
 	"url": "bandcamp.com",
 	"regExp": "([a-z0-9-]+[.])*bandcamp([.][a-z]+)+[/]",
-	"version": "1.3.3",
-	"logo": "https://i.imgur.com/FozA4oY.png",
-	"thumbnail": "https://i.imgur.com/OcNBvvP.png",
+	"version": "1.3.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bandcamp/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bandcamp/assets/thumbnail.png",
 	"color": "#61929c",
 	"category": "music",
 	"tags": [

@@ -40,9 +40,9 @@
 		"cafe.naver.com"
 	],
 	"regExp": "((section)[.])?([a-z]+)[.]naver[.]([a-z0-9]+)",
-	"version": "1.2.15",
-	"logo": "https://i.imgur.com/jhOVwwe.png",
-	"thumbnail": "https://i.imgur.com/QZs7QHH.png",
+	"version": "1.2.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/thumbnail.png",
 	"color": "#03d05a",
 	"category": "other",
 	"tags": [

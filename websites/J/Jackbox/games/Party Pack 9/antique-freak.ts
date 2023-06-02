@@ -1,5 +1,5 @@
 export const name = "Junktopia";
-export const logo = "https://i.imgur.com/5vqvCuK.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/38.png";
 
 export function getPresenceData({
 	playerState,

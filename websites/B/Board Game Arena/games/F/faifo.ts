@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const faifo: GamePresence = {
-	logo: "https://i.imgur.com/yQ6oeUo.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/177.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

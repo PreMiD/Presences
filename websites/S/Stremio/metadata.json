@@ -13,9 +13,9 @@
 		"www.stremio.com",
 		"app.strem.io"
 	],
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/6bm1P3r.png",
-	"thumbnail": "https://i.imgur.com/frIQq2C.jpg",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/thumbnail.jpg",
 	"color": "#8A5AAB",
 	"category": "videos",
 	"tags": [

@@ -11,9 +11,9 @@
 		"ga_IE": "Is raidió ar líne saor in aisce, faoi thiomáint ag an bpobal é UpBeat."
 	},
 	"url": "upbeatradio.net",
-	"version": "3.2.23",
-	"logo": "https://i.imgur.com/xFz6AU3.png",
-	"thumbnail": "https://i.imgur.com/CvdIcM8.png",
+	"version": "3.2.24",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/UpBeatRadio/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/UpBeatRadio/assets/thumbnail.png",
 	"color": "#212121",
 	"category": "music",
 	"tags": [

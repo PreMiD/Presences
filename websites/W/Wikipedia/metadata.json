@@ -164,9 +164,9 @@
 	},
 	"url": "wikipedia.org",
 	"regExp": "([a-z0-9-]+[.])+wikipedia[.]org[/]",
-	"version": "2.7.22",
-	"logo": "https://i.imgur.com/4OX6OZi.png",
-	"thumbnail": "https://i.imgur.com/vJiuzZy.png",
+	"version": "2.7.23",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikipedia/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikipedia/assets/thumbnail.png",
 	"color": "#f9f9f9",
 	"category": "other",
 	"tags": [

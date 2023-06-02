@@ -23,9 +23,9 @@
 		"nl": "Luister gratis naar de beste DJ's en radiopresentatoren ter wereld."
 	},
 	"url": "www.mixcloud.com",
-	"version": "1.2.19",
-	"logo": "https://i.imgur.com/I3yX6NQ.png",
-	"thumbnail": "https://i.imgur.com/x4W3FoT.jpg",
+	"version": "1.2.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/thumbnail.jpg",
 	"color": "#5000ff",
 	"category": "music",
 	"tags": [

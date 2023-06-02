@@ -17,9 +17,9 @@
 		"radiome.at",
 		"radiome.fr"
 	],
-	"version": "2.0.9",
-	"logo": "https://i.imgur.com/Fm5zIJW.png",
-	"thumbnail": "https://i.imgur.com/fym06a7.png",
+	"version": "2.0.10",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RadioMe/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RadioMe/assets/thumbnail.png",
 	"color": "#67e350",
 	"category": "music",
 	"tags": [

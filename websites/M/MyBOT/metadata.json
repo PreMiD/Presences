@@ -17,9 +17,9 @@
 		"nl": "MyBOT is een platform met verschillende handleidingen en tools in het Spaans, gericht op de ontwikkeling van apps / bots en inhoud voor gemeenschappen van Discord."
 	},
 	"url": "portalmybot.com",
-	"version": "1.3.19",
-	"logo": "https://i.imgur.com/u2f93Bf.png",
-	"thumbnail": "https://i.imgur.com/B8x9D6k.png",
+	"version": "1.3.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MyBOT/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MyBOT/assets/thumbnail.png",
 	"color": "#00fef4",
 	"category": "other",
 	"tags": [

@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/WKHpLxp.jpg",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/SiriusXM/assets/logo.jpg",
 	};
 
 	switch (document.location.pathname) {

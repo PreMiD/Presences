@@ -22,9 +22,9 @@ async function capitalizeFirstLetter(string: string) {
 	return stringTrimmed.charAt(0).toUpperCase() + stringTrimmed.slice(1);
 }
 const enum Assets {
-	Loading = "https://i.imgur.com/uh6vSQm.gif",
-	LogoDiscoveryPlus = "https://i.imgur.com/BQ1MBwk.png",
-	LogoDiscovery = "https://i.imgur.com/ir2Ysr1.png",
+	Loading = "https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/0.gif",
+	LogoDiscoveryPlus = "https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/1.png",
+	LogoDiscovery = "https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/logo.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;

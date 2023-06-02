@@ -13,9 +13,9 @@
 		"www.songsterr.com",
 		"songsterr.com"
 	],
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/FbLdpEW.png",
-	"thumbnail": "https://i.imgur.com/GXVbnX5.png",
+	"version": "1.0.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Songsterr/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Songsterr/assets/thumbnail.png",
 	"color": "#138CF6",
 	"category": "music",
 	"tags": [

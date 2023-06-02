@@ -31,7 +31,7 @@ let playerData: PlayerData,
 presence.info("PreMiD extension has loaded");
 
 const enum Assets {
-	Logo = "https://i.imgur.com/O99W6aY.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/logo.png",
 }
 
 function updateData() {

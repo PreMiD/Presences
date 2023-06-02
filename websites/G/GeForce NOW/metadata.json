@@ -10,9 +10,9 @@
 		"vi_VN": "GeForce Now là thương hiệu của Nvidia cho dịch vụ game trên đám mây của họ."
 	},
 	"url": "play.geforcenow.com",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/a1L2Mi2.png",
-	"thumbnail": "https://i.imgur.com/JCyb4zk.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GeForce%20NOW/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GeForce%20NOW/assets/thumbnail.png",
 	"color": "#76B918",
 	"category": "games",
 	"tags": [

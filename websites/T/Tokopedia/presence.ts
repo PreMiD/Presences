@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/oR93cDm.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Tokopedia/assets/logo.png",
 		},
 		elapsed = Math.floor(Date.now() / 1000);
 	if (document.location.hostname === "www.tokopedia.com") {

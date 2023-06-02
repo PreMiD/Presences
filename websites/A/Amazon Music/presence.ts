@@ -19,7 +19,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/AUKbzxX.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Music/assets/logo.png",
 		},
 		[buttons, newLang, showPlaylist, cover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),

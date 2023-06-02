@@ -10,9 +10,9 @@
 		"nl": "Marktleidend technisch interviewplatform om ontwikkelaars met de juiste vaardigheden te identificeren en in te huren."
 	},
 	"url": "www.hackerrank.com",
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/4Q8nbiR.png",
-	"thumbnail": "https://i.imgur.com/eBvlYZU.png",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HackerRank/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HackerRank/assets/thumbnail.png",
 	"color": "#23BB5B",
 	"category": "other",
 	"tags": [

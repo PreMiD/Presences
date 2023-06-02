@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/hHlsZac.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		shortTitle = document.title.split(/-(.+)/)[1],
@@ -171,7 +171,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = "portfolio";
 		presenceData.smallImageText = "Viewing portfolio";
 	}
-	if (!image) presenceData.largeImageKey = "https://i.imgur.com/hHlsZac.png";
+	if (!image) presenceData.largeImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/logo.png";
 	if (!button) delete presenceData.buttons;
 	if (!time) {
 		delete presenceData.startTimestamp;

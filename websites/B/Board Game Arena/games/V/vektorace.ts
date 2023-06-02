@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const vektorace: GamePresence = {
-	logo: "https://i.imgur.com/5H4rLoQ.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/602.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

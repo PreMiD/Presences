@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 			events: "Events",
 		},
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/NtPeZ9u.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Hoyolab/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ location } = document,

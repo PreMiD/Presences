@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const redstone: GamePresence = {
-	logo: "https://i.imgur.com/cqnKQYg.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/439.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -21,7 +21,7 @@ async function getShortURL(url: string) {
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/7Y2qTl9.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Gaia/assets/logo.png",
 		smallImageKey: "browse",
 		startTimestamp: browsingTimestamp,
 	};

@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 		{ pathname, hostname, href, search } = window.location,
 		path = pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/e5xEpfu.jpg",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/The%20New%20York%20Times/assets/logo.jpg",
 			startTimestamp: time,
 		};
 
