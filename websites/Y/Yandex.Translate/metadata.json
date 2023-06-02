@@ -17,9 +17,9 @@
 		"translate.yandex.ua"
 	],
 	"regExp": "(translate|ceviri).yandex([.][a-z]+)+[/]",
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/kAHbOW1.png",
-	"thumbnail": "https://i.imgur.com/iRYR5Rj.png",
+	"version": "1.0.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex.Translate/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex.Translate/assets/thumbnail.png",
 	"color": "#FF2222",
 	"category": "other",
 	"tags": [
