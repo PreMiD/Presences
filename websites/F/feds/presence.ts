@@ -8,7 +8,7 @@ const presence = new Presence({
 		"/join": "Thinking about joining",
 		"/tos": "Viewing the terms of service",
 		"/policy": "Viewing the privacy policy",
-		"/dash": "Viewing the dashboard"
+		"/dash": "Viewing the dashboard",
 	};
 
 presence.on("UpdateData", async () => {
