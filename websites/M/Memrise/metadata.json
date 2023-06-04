@@ -15,9 +15,9 @@
 		"www.memrise.com",
 		"community.memrise.com"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/emLcjZT.png",
-	"thumbnail": "https://i.imgur.com/JcDjRfn.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Memrise/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Memrise/assets/thumbnail.png",
 	"color": "#ffda3e",
 	"category": "other",
 	"tags": [
