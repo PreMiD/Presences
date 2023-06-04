@@ -55,6 +55,8 @@ presence.on("UpdateData", async () => {
 				playing: "general.playing",
 				searching: "general.search",
 				searchFor: "general.searchFor",
+				play: "general.playing",
+				pause: "general.paused",
 			},
 			newLang
 		);
@@ -62,12 +64,15 @@ presence.on("UpdateData", async () => {
 	switch (pathArr[1]) {
 		case "anime": {
 			const title = document.querySelector("ol > li:nth-child(2) > a");
-
 			presenceData.details = "Visite la page de l'anime :";
 			presenceData.state = document.querySelector(
 				"div.post-title > h1"
 			)?.textContent;
-			if (!isNaN(video.duration) && title) {
+			if (
+				!isNaN(video.duration) &&
+				title &&
+				!!document.querySelector("li.active")
+			) {
 				const [startTimestamp, endTimestamp] = presence.getTimestamps(
 					video.currentTime,
 					video.duration
