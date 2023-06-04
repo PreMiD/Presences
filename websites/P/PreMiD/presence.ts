@@ -55,7 +55,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/eYLI4hf.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/logo.png",
 		},
 		[newLang, time, showButtons] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),

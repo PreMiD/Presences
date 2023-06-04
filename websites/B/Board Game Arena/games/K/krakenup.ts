@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const krakenup: GamePresence = {
-	logo: "https://i.imgur.com/ZFQiy7k.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/292.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

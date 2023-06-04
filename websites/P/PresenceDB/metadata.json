@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "vasc",
 		"id": "346977366569910274"
@@ -14,9 +14,9 @@
 		"preview.presencedb.com"
 	],
 	"regExp": "(www|preview)[.]presencedb[.]com[/]",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/6SyDAmT.png",
-	"thumbnail": "https://i.imgur.com/P20KlQh.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PresenceDB/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PresenceDB/assets/thumbnail.png",
 	"color": "#fff",
 	"category": "other",
 	"tags": [

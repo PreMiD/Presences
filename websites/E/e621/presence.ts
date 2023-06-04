@@ -7,7 +7,8 @@ let title: HTMLElement, mTitle: string, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/NrwboRR.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/e621/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
@@ -118,7 +119,8 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey =
 						document
 							.querySelector('[class="post-thumbnail-img"]')
-							?.getAttribute("src") ?? "https://i.imgur.com/NrwboRR.png";
+							?.getAttribute("src") ??
+						"https://cdn.rcd.gg/PreMiD/websites/E/e621/assets/logo.png";
 				}
 				title = document.querySelector("head > title");
 				presenceData.details = `Viewing ${title.textContent.slice(

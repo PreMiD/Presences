@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Mist8kenGAS",
 		"id": "275272170807099399"
@@ -11,9 +11,9 @@
 	},
 	"url": "animeonsen.xyz",
 	"regExp": "(www.)?(animeonsen.xyz)",
-	"version": "1.1.5",
-	"logo": "https://i.imgur.com/O99W6aY.png",
-	"thumbnail": "https://i.imgur.com/HicKlV4.png",
+	"version": "1.1.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/thumbnail.png",
 	"color": "#1a1a1a",
 	"category": "anime",
 	"tags": [

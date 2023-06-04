@@ -20,7 +20,8 @@ let channel: string,
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/JhRi5x4.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/Cosmote%20TV/assets/logo.png",
 	};
 
 	const pages: Record<string, PresenceData> = {

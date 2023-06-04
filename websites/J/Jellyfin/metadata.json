@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "alexbcberio",
 		"id": "202915432175239169"
@@ -17,9 +17,9 @@
 	},
 	"url": "jellyfin.org",
 	"regExp": "(jellyfin.org)|(.*[/]web[/]index[.]html)",
-	"version": "1.8.2",
-	"logo": "https://i.imgur.com/nPzEemG.png",
-	"thumbnail": "https://i.imgur.com/J61378N.png",
+	"version": "1.8.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Jellyfin/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Jellyfin/assets/thumbnail.png",
 	"color": "#00698c",
 	"category": "videos",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "FelipeSazz",
 		"id": "326123612153053184"
@@ -11,9 +11,9 @@
 		"nl": "Loritta is een Discord-bot voor nut, plezier, entertainment, moderatie en meer!"
 	},
 	"url": "loritta.website",
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/Smoq0Ty.png",
-	"thumbnail": "https://i.imgur.com/24HdLNN.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Loritta/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Loritta/assets/thumbnail.png",
 	"color": "#00FFDA",
 	"category": "other",
 	"tags": [

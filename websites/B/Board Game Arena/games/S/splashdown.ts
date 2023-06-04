@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const splashdown: GamePresence = {
-	logo: "https://i.imgur.com/n0zhJlv.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/510.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

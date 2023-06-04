@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -15,9 +15,9 @@
 	},
 	"url": "ak151.anime-kage.eu",
 	"regExp": "([a-z0-9-]+[.])*anime-kage[.]eu[/]",
-	"version": "1.2.22",
-	"logo": "https://i.imgur.com/zVbpanX.png",
-	"thumbnail": "https://i.imgur.com/0pir8CX.png",
+	"version": "1.2.24",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeKage/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeKage/assets/thumbnail.png",
 	"color": "#2bb4ba",
 	"category": "anime",
 	"tags": [

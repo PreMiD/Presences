@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "fror",
 		"id": "515668127829458945"
@@ -12,9 +12,9 @@
 	},
 	"url": "chaturbate.com",
 	"regExp": "([a-z0-9-]+[.])*chaturbate([.][a-z]+)+[/]",
-	"version": "1.2.24",
-	"logo": "https://i.imgur.com/PjQ6k9n.png",
-	"thumbnail": "https://i.imgur.com/iszRY6f.png",
+	"version": "1.2.26",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Chaturbate/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Chaturbate/assets/thumbnail.png",
 	"color": "#f68a1a",
 	"category": "videos",
 	"tags": [

@@ -13,7 +13,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/fMMsZfV.jpg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/RTL+/assets/0.jpg",
 }
 
 let video: HTMLVideoElement,

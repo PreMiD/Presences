@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Jackelele",
 		"id": "377175513372033024"
@@ -11,9 +11,9 @@
 	},
 	"url": "perpheads.com",
 	"regExp": "([a-z0-9-]+[.])*perpheads[.]com[/]",
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/Zbr5ofa.png",
-	"thumbnail": "https://i.imgur.com/xeeFig2.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PERPHeads/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PERPHeads/assets/thumbnail.png",
 	"color": "#FFA500",
 	"category": "games",
 	"tags": [

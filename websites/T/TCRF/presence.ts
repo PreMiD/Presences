@@ -8,7 +8,7 @@ let x: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/huRGBxt.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TCRF/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/The_Cutting_Room_Floor") {

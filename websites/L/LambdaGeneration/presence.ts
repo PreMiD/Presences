@@ -86,7 +86,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/XSPtxro.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/LambdaGeneration/assets/logo.png",
 		details: page[0],
 		state: page[1],
 	};

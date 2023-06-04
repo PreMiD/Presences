@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Dekirai",
 		"id": "601560798409654292"
@@ -10,9 +10,9 @@
 		"nl": "Overbuff is een website die is bedoeld om Overwatch-spelers te helpen hun spel te verbeteren. Je kunt je voortgang op helden volgen, zien wat je vrienden hebben gespeeld en professionele spelers in de gaten houden."
 	},
 	"url": "www.overbuff.com",
-	"version": "1.1.17",
-	"logo": "https://i.imgur.com/ceCTdEn.png",
-	"thumbnail": "https://i.imgur.com/AvUP9R2.png",
+	"version": "1.1.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Overbuff/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Overbuff/assets/thumbnail.png",
 	"color": "#FF8D00",
 	"category": "games",
 	"tags": [

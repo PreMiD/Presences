@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -9,9 +9,9 @@
 		"en": "An official digital toolset for Fifth Edition (5e) Dungeons & Dragons (D&D)."
 	},
 	"url": "www.dndbeyond.com",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/Phdro5V.png",
-	"thumbnail": "https://i.imgur.com/XQrIZ9K.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/D&D%20Beyond/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/D&D%20Beyond/assets/thumbnail.png",
 	"color": "#E40712",
 	"category": "games",
 	"tags": [

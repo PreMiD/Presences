@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/9iQgDdN.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/GTAForums/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "SaidBySolo",
 		"id": "345265069132742657"
@@ -10,9 +10,9 @@
 		"ko_KR": "Hitomi.la는 무료 헨타이 동인지, 만화, 아티스트 CG 그리고 애니메이션의 최고의 소스입니다."
 	},
 	"url": "hitomi.la",
-	"version": "1.0.10",
-	"logo": "https://i.imgur.com/sQZ65FE.png",
-	"thumbnail": "https://i.imgur.com/648ECEg.png",
+	"version": "1.0.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hitomi/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hitomi/assets/thumbnail.png",
 	"color": "#242d3c",
 	"category": "other",
 	"tags": [

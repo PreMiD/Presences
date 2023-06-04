@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "nut1414",
 		"id": "179876009615556609"
@@ -9,9 +9,9 @@
 		"en": "Powerful Japanese dictionary and an all-in-one learning system for kanji and vocabulary."
 	},
 	"url": "jpdb.io",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/6BRVubq.png",
-	"thumbnail": "https://i.imgur.com/X6tShYX.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/jpdb/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/jpdb/assets/thumbnail.png",
 	"color": "#fe0000",
 	"category": "other",
 	"tags": [

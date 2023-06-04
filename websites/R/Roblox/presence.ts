@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "612416330003382314",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-	dfLgImage = "https://i.imgur.com/76AO77L.png";
+	dfLgImage = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/0.png";
 let profileName,
 	profileId: string,
 	profileImg: string,
@@ -30,7 +30,8 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Unknown page",
-			largeImageKey: "https://i.imgur.com/75dFVYB.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,

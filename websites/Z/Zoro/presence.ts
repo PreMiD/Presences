@@ -22,7 +22,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/SPMSZxI.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Z/Zoro/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = document.location,

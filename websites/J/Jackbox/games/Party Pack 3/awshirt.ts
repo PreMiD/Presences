@@ -1,5 +1,5 @@
 export const name = "Tee K.O.";
-export const logo = "https://i.imgur.com/wGbJhoR.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/8.png";
 
 export function getPresenceData(): PresenceData {
 	const { id } = document.querySelector<HTMLDivElement>(

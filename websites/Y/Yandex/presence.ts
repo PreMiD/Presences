@@ -7,7 +7,7 @@ const presence = new Presence({
 	{ host, pathname } = document.location;
 
 const enum Assets {
-	Logo = "https://i.imgur.com/SFXKtLF.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex/assets/logo.png",
 }
 
 async function getStrings() {

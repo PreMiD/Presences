@@ -16,7 +16,8 @@ const multiUploader = document.querySelector("div.members-info");
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/w7q6IS0.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/logo.png",
 	};
 
 	async function getTimestamps() {

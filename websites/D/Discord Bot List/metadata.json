@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Eren",
 		"id": "478937019758673931"
@@ -11,9 +11,9 @@
 		"nl": "Discord Bot List is een lijst van discord bots."
 	},
 	"url": "discordbotlist.com",
-	"version": "1.2.19",
-	"logo": "https://i.imgur.com/Nh2SWRD.png",
-	"thumbnail": "https://i.imgur.com/s9urIYH.png",
+	"version": "1.2.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Bot%20List/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Bot%20List/assets/thumbnail.png",
 	"color": "#10C0E7",
 	"category": "other",
 	"tags": [

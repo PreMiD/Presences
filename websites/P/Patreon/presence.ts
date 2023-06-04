@@ -11,7 +11,7 @@ const presence = new Presence({ clientId: "1013183483750907904" }),
 	},
 	slideshow = presence.createSlideshow();
 const enum Assets {
-	Logo = "https://i.imgur.com/XIq6vjx.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Patreon/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

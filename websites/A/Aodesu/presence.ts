@@ -4,13 +4,13 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/CyVxys5.jpg",
-	Home = "https://i.imgur.com/i2EEGId.jpg",
-	Emitting = "https://i.imgur.com/TNrq2vU.jpg",
-	Login = "https://i.imgur.com/aY4bjzh.jpg",
-	Register = "https://i.imgur.com/hdtAwWr.jpg",
-	Settings = "https://i.imgur.com/T91Uhm5.jpg",
-	Preview = "https://i.imgur.com/1RLd82M.jpg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/logo.jpg",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/0.jpg",
+	Emitting = "https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/1.jpg",
+	Login = "https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/2.jpg",
+	Register = "https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/3.jpg",
+	Settings = "https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/4.jpg",
+	Preview = "https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/5.jpg",
 }
 
 let iFrameVideo: boolean,

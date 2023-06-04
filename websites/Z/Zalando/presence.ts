@@ -79,7 +79,8 @@ function getTranslation(stringName: string): string {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/APLPI4i.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/Z/Zalando/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

@@ -24,7 +24,7 @@ const presence = new Presence({ clientId: "1014441192106229790" }),
 	};
 
 const enum Assets {
-	Logo = "https://i.imgur.com/evUBiFh.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/K/Kickstarter/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

@@ -13,7 +13,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/hI4bcJC.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/OMG%20Ubuntu/assets/logo.png",
 			startTimestamp,
 		},
 		header = document

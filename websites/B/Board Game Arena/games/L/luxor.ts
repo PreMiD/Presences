@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const luxor: GamePresence = {
-	logo: "https://i.imgur.com/u4WGmrh.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/327.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

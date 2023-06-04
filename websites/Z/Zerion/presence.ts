@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://i.imgur.com/MpeS5tp.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/Z/Zerion/assets/logo.png",
 }
 
 async function getStrings() {

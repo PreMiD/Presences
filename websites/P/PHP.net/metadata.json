@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "iLazlow",
 		"id": "132835232289259520"
@@ -12,9 +12,9 @@
 		"php.net",
 		"www.php.net"
 	],
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/cC2n2S6.png",
-	"thumbnail": "https://i.imgur.com/MYTegAn.png",
+	"version": "1.0.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PHP.net/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PHP.net/assets/thumbnail.png",
 	"color": "#8892BF",
 	"category": "other",
 	"tags": [

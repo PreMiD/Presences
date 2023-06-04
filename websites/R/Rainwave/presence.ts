@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/XJb9wAx.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/Rainwave/assets/logo.png",
 	};
 	if (document.location.pathname.startsWith("/pages/playback_history"))
 		presenceData.details = "Looking at playback history...";

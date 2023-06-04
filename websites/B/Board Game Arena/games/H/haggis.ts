@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const haggis: GamePresence = {
-	logo: "https://i.imgur.com/C0OEvWg.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/229.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -421,7 +421,8 @@ let lastFileChange: number = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/VrYlcrQ.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/logo.png",
 		},
 		docsSelector =
 			".current.tsd-kind-namespace > a, .current.tsd-parent-kind-namespace > a";

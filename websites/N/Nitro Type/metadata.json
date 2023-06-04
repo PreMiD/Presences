@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "theLMGN",
 		"id": "158311402677731328"
@@ -13,9 +13,9 @@
 		"nitrotype.com",
 		"www.nitrotype.com"
 	],
-	"version": "1.2.17",
-	"logo": "https://i.imgur.com/CCu7nqD.png",
-	"thumbnail": "https://i.imgur.com/6MjQV86.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/thumbnail.png",
 	"color": "#D62F3A",
 	"category": "games",
 	"tags": [

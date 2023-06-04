@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -32,9 +32,9 @@
 		"vi_VN": "Crunchyroll là điểm đến lớn nhất thế giới dành cho anime và manga, với một cộng đồng trực tuyến với hơn 45 triệu người dùng đã đăng ký và 2 triệu người dùng đang theo dõi."
 	},
 	"url": "www.crunchyroll.com",
-	"version": "3.0.5",
-	"logo": "https://i.imgur.com/yeWzAvq.png",
-	"thumbnail": "https://i.imgur.com/hzM7YCb.png",
+	"version": "3.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Crunchyroll/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Crunchyroll/assets/thumbnail.png",
 	"color": "#f47521",
 	"category": "anime",
 	"tags": [

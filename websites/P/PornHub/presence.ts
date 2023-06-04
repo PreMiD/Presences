@@ -24,7 +24,8 @@ presence.on("UpdateData", async () => {
 				presenceData: PresenceData = {
 					details: title ? title.textContent : "Title not found...",
 					state: uploader ? uploader.textContent : "Uploader not found...",
-					largeImageKey: "https://i.imgur.com/ey3BiTYl.jpg",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/P/PornHub/assets/logo.jpg",
 					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 					smallImageText: video.paused
 						? (await strings).pause

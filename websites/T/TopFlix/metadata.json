@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,9 +11,9 @@
 		"pt_BR": "TopFlix - Assistir filmes online grátis HD"
 	},
 	"url": "topflix.tv",
-	"version": "1.0.18",
-	"logo": "https://i.imgur.com/GA1Vftf.png",
-	"thumbnail": "https://i.imgur.com/an3xoQw.png",
+	"version": "1.0.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TopFlix/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TopFlix/assets/thumbnail.png",
 	"color": "#df003f",
 	"category": "videos",
 	"tags": [

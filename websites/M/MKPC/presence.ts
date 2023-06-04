@@ -6,7 +6,7 @@ const presence = new Presence({
 let user;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/T2WTLEM.jpeg",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/MKPC/assets/logo.jpeg",
 		startTimestamp: browsingTimestamp,
 	};
 

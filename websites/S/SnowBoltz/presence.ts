@@ -6,7 +6,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/xMeXqcE.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SnowBoltz/assets/logo.png",
 	};
 
 	if (

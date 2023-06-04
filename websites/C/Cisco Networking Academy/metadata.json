@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "YJJcoolcool",
 		"id": "300929818231308288"
@@ -10,9 +10,9 @@
 		"vi_VN": "Cisco Networking Academy là nền tảng giáo dục an ninh mạng và IT toàn cầu."
 	},
 	"url": "www.netacad.com",
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/pvz4KSf.png",
-	"thumbnail": "https://i.imgur.com/wSSBD5e.png",
+	"version": "1.0.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Cisco%20Networking%20Academy/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Cisco%20Networking%20Academy/assets/thumbnail.png",
 	"color": "#005073",
 	"category": "other",
 	"tags": [

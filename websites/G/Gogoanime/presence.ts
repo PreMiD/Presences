@@ -325,7 +325,8 @@ presence.on("UpdateData", async () => {
 		}
 	}
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/OnaEYdo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/logo.png",
 		state,
 		details: detail[0],
 	};

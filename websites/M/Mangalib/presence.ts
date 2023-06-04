@@ -22,7 +22,8 @@ let Routes: string[],
 presence.on("UpdateData", async () => {
 	// Presence Data
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/bQPdsZ1.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/Mangalib/assets/logo.png",
 	};
 
 	// Setup Routes & Query

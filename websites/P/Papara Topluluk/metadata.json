@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "162969778699501569",
 		"name": "EGGSY#3388"
@@ -10,9 +10,9 @@
 		"tr": "Diğer kullanıcılara soru sorabileceğiniz, anında yanıt alabileceğiniz ve uygulama ile ilgili fikirlerinizi paylaşabileceğiniz Papara Topluluğu, Papara'nın geleceğini şekillendiriyor."
 	},
 	"url": "topluluk.papara.com",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/qTl09A1.png",
-	"thumbnail": "https://i.imgur.com/PWJiszf.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Papara%20Topluluk/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Papara%20Topluluk/assets/thumbnail.png",
 	"color": "#8C00A1",
 	"category": "socials",
 	"tags": [

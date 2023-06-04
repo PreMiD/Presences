@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "326694667003363328",
 		"name": "Micotsu"
@@ -12,9 +12,9 @@
 		"animeflix.live",
 		"www.animeflix.live"
 	],
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/LxIgMzf.png",
-	"thumbnail": "https://i.imgur.com/XoKtZCC.jpg",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Animeflix/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Animeflix/assets/thumbnail.jpg",
 	"color": "#E50914",
 	"category": "anime",
 	"tags": [

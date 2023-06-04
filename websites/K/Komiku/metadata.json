@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Ashtrath",
 		"id": "354831939099688962"
@@ -10,9 +10,9 @@
 		"id": "Komiku adalah platform baca komik dengan daftar komik paling lengkap di Indonesia."
 	},
 	"url": "komiku.id",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/zP76GVO.png",
-	"thumbnail": "https://i.imgur.com/d0l7u4C.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Komiku/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Komiku/assets/thumbnail.png",
 	"color": "#4165b3",
 	"category": "anime",
 	"tags": [

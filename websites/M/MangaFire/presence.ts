@@ -2,7 +2,7 @@ const presence = new Presence({ clientId: "1080885668248559648" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/356Spon.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

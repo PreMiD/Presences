@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Nanashin",
 		"id": "330030557457022986"
@@ -14,9 +14,9 @@
 		"vi_VN": "Một trong những trang xem anime thoải mái nhất Brazil."
 	},
 	"url": "animeshouse.net",
-	"version": "1.0.22",
-	"logo": "https://i.imgur.com/dv1nn7J.png",
-	"thumbnail": "https://i.imgur.com/1YqKDfY.png",
+	"version": "1.0.24",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20House/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20House/assets/thumbnail.png",
 	"color": "#079ac7",
 	"category": "anime",
 	"tags": [

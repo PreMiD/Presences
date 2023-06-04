@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Kedi",
 		"id": "238668511222693888"
@@ -10,9 +10,9 @@
 		"nl": "Starz is een Amerikaans premium kabel- en satelliettelevisienetwerk dat fungeert als vlaggenschip van Starz Inc., dat uiteindelijk eigendom is van Lionsgate. De programmering van Starz omvat speelfilms en originele televisieseries die in de bioscoop worden uitgebracht."
 	},
 	"url": "www.starz.com",
-	"version": "1.2.17",
-	"logo": "https://i.imgur.com/qssGc1m.png",
-	"thumbnail": "https://i.imgur.com/jPv0Zw1.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Starz/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Starz/assets/thumbnail.png",
 	"color": "#000",
 	"category": "videos",
 	"tags": [

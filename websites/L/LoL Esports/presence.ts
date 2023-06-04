@@ -19,7 +19,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/BGc0jtj.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/LoL%20Esports/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;

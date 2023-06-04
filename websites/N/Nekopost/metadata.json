@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "NPC_B",
 		"id": "424565046748643328"
@@ -10,9 +10,9 @@
 		"en": "Nekopost.net was founded to promote spending time with the things I love. And benefit In terms of art, culture and language, our ultimate aim is to develop a culture that meets the ideals of the future."
 	},
 	"url": "www.nekopost.net",
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/uoFY9IP.png",
-	"thumbnail": "https://i.imgur.com/iZcmtnY.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nekopost/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nekopost/assets/thumbnail.png",
 	"color": "#e7dca5",
 	"category": "other",
 	"tags": [

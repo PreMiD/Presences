@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "DanielKrasny",
 		"id": "443791027158122496"
@@ -15,9 +15,9 @@
 		"www.mall.tv",
 		"sk.mall.tv"
 	],
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/0WHU4T5.png",
-	"thumbnail": "https://i.imgur.com/pwksPCw.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MALL.TV/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MALL.TV/assets/thumbnail.png",
 	"color": "#C70716",
 	"category": "videos",
 	"tags": [

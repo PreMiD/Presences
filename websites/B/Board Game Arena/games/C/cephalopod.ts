@@ -11,7 +11,7 @@ import {
 } from "../../util";
 
 const cephalopod: GamePresence = {
-	logo: "https://i.imgur.com/U1BPUac.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/87.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

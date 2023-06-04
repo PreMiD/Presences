@@ -1,5 +1,5 @@
 export const name = "Earwax";
-export const logo = "https://i.imgur.com/oEidNn6.png";
+export const logo = "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/6.png";
 
 export function getPresenceData(): PresenceData {
 	const { id, classList } = document.querySelector<HTMLDivElement>(

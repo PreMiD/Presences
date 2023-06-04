@@ -23,7 +23,7 @@ async function getShortURL(url: string) {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/q3tKDRA.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Spotify%20Podcasts/assets/logo.png",
 }
 
 async function getStrings() {

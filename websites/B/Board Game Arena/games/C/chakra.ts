@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const chakra: GamePresence = {
-	logo: "https://i.imgur.com/yvpHRDk.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/88.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

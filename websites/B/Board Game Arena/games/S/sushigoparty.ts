@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const sushigoparty: GamePresence = {
-	logo: "https://i.imgur.com/CswMnkY.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/528.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

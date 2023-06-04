@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const santorini: GamePresence = {
-	logo: "https://i.imgur.com/DP2fdnk.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/466.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

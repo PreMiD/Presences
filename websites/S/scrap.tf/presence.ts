@@ -4,7 +4,8 @@ const presence = new Presence({
 	browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/36tsgMq.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/scrap.tf/assets/logo.png",
 		startTimestamp: browsingStamp,
 	};
 

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Ninja",
 		"id": "150987570715688960"
@@ -16,9 +16,9 @@
 		"nl": "Truckers.FM is de nummer 1 Hit Music Station zoals gestemd door de TruckersMP Community 5 jaar, en biedt 24 uur per dag entertainment met een verscheidenheid aan shows, variërend van de Top 40 tot de grootste erfenis."
 	},
 	"url": "truckers.fm",
-	"version": "1.4.13",
-	"logo": "https://i.imgur.com/O6EaBmv.png",
-	"thumbnail": "https://i.imgur.com/vMj6Rcz.png",
+	"version": "1.4.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TruckersFM/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TruckersFM/assets/thumbnail.png",
 	"color": "#C82372",
 	"category": "music",
 	"tags": [

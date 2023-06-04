@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "TONi_C137#1757",
 		"id": "328213965299515393"
@@ -11,9 +11,9 @@
 		"vi_VN": "ARD Mediathek là dịch vụ phát video trực tuyến theo nhu cầu của các đài truyền hình công Tiếng Đức của ARD."
 	},
 	"url": "www.ardmediathek.de",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/baUokNs.png",
-	"thumbnail": "https://i.imgur.com/mix2mJC.jpg",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/thumbnail.jpg",
 	"color": "#000f2d",
 	"category": "videos",
 	"tags": [

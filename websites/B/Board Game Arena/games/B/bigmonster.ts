@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const bigmonster: GamePresence = {
-	logo: "https://i.imgur.com/f7F07rq.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/43.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

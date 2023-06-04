@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const fractal: GamePresence = {
-	logo: "https://i.imgur.com/sZsmEzE.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/195.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Asset {
-	Logo = "https://i.imgur.com/LDfzrVM.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/L/ListenBrainz/assets/logo.png",
 }
 
 presence.on("UpdateData", () => {

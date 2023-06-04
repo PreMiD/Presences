@@ -23,7 +23,8 @@ presence.on("iFrameData", async (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/xg4r7tM.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/AniT%C3%BCrk/assets/logo.png",
 		},
 		title = document.querySelector(
 			"html > body > div.konter > a > div.icerik-bilgi"

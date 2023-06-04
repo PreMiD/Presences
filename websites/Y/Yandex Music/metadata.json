@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "D3rise",
 		"id": "253913831896645632"
@@ -12,9 +12,9 @@
 		"nl": "Yandex-streamingdienst waarmee u naar muziektracks, albums en verzamelingen muziektracks kunt luisteren en persoonlijke aanbevelingen kunt krijgen."
 	},
 	"url": "music.yandex.ru",
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/d1za28M.png",
-	"thumbnail": "https://i.imgur.com/JohXxhi.png",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex%20Music/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex%20Music/assets/thumbnail.png",
 	"color": "#FDCD01",
 	"category": "music",
 	"tags": [

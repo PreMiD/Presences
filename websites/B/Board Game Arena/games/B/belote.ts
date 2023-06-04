@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const belote: GamePresence = {
-	logo: "https://i.imgur.com/OXoXjIc.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/39.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

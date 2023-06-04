@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Drull",
 		"id": "244953147154366464"
@@ -12,9 +12,9 @@
 		"vi_VN": "Champion.gg cung cấp thông số tướng, hướng dẫn, cách lên đồ, bảng ngọc, thông thạo, thứ tự lên kỹ năng và khắc chế trong Liên Minh Huyền Thoại - kèm theo Tỉ Lệ Thắng, Tỉ Lệ Cấm Chọn..."
 	},
 	"url": "champion.gg",
-	"version": "1.0.19",
-	"logo": "https://i.imgur.com/xsFD9kI.png",
-	"thumbnail": "https://i.imgur.com/td3BVmm.png",
+	"version": "1.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Championgg/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Championgg/assets/thumbnail.jpg",
 	"color": "#02442F",
 	"category": "games",
 	"tags": [

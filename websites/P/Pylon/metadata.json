@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Snazzah",
 		"id": "158049329150427136"
@@ -16,9 +16,9 @@
 		"nl": "Bouw en implementeer Discord-bots in enkele minuten met behulp van onze eenvoudige online studio."
 	},
 	"url": "pylon.bot",
-	"version": "2.0.16",
-	"logo": "https://i.imgur.com/VrYlcrQ.png",
-	"thumbnail": "https://i.imgur.com/hPkh9Br.png",
+	"version": "2.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/thumbnail.png",
 	"color": "#3961DD",
 	"category": "other",
 	"tags": [

@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const roppyakken: GamePresence = {
-	logo: "https://i.imgur.com/c69rDVS.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/458.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const viamagica: GamePresence = {
-	logo: "https://i.imgur.com/OJWj2cd.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/605.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

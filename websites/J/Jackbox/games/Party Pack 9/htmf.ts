@@ -1,5 +1,6 @@
 export const name = "Roomerang";
-export const logo = "https://i.imgur.com/jZAqMNf.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/40.png";
 
 export function getPresenceData({
 	playerState,

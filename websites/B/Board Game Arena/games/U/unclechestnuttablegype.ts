@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const unclechestnuttablegype: GamePresence = {
-	logo: "https://i.imgur.com/fYVjCsj.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/595.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

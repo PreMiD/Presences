@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const pyrgos: GamePresence = {
-	logo: "https://i.imgur.com/gbchE3z.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/421.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

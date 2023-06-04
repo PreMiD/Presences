@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const oriflamme: GamePresence = {
-	logo: "https://i.imgur.com/Wx8p0EK.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/391.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Luis Gabriel",
 		"id": "403648338286870529"
@@ -11,9 +11,9 @@
 		"vi_VN": "Trò chơi trực tuyến nơi bạn có thể vẽ, đoán và gửi từ ngữ cho bạn bè của mình đoán."
 	},
 	"url": "www.brokenpicturephone.com",
-	"version": "1.1.14",
-	"logo": "https://i.imgur.com/34NoyFW.png",
-	"thumbnail": "https://i.imgur.com/kzYyxMn.png",
+	"version": "1.1.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Broken%20Picturephone/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Broken%20Picturephone/assets/thumbnail.png",
 	"color": "#FC6807",
 	"category": "games",
 	"tags": [

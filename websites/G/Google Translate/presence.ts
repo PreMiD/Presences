@@ -489,7 +489,8 @@ presence.on("UpdateData", async () => {
 		tDetail = await presence.getSetting<string>("tDetail"),
 		tState = await presence.getSetting<string>("tState"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/TblAuvW.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Translate/assets/logo.png",
 		};
 
 	if (document.location.href.includes("about")) {

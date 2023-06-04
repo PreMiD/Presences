@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const chocolatefactory: GamePresence = {
-	logo: "https://i.imgur.com/HdrY46W.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/95.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -4,7 +4,8 @@ presence.on("UpdateData", async () => {
 	const path = location.pathname,
 		[subdomain] = location.host.split("."),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/gUxU2Oh.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Tailwind%20CSS/assets/logo.png",
 			startTimestamp: Math.round(Date.now() / 1000),
 		};
 

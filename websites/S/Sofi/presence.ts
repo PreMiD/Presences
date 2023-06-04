@@ -4,11 +4,11 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Buy = "https://i.imgur.com/JKLNlvT.png",
-	Submit = "https://i.imgur.com/wDDm0VX.png",
-	Edit = "https://i.imgur.com/TCJe2xJ.png",
-	Browse = "https://i.imgur.com/0tmziN8.png",
-	Logo = "https://i.imgur.com/IlUpO2s.png",
+	Buy = "https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/0.png",
+	Submit = "https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/1.png",
+	Edit = "https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/2.png",
+	Browse = "https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/3.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

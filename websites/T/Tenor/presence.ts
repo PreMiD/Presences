@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/8FcDsJt.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Tenor/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/") presenceData.details = "In home page";

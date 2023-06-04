@@ -15,7 +15,8 @@ presence.on("iFrameData", (data: { iframeVideo: HTMLVideoElement }) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/B8evsEL.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/K/KissAsian/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

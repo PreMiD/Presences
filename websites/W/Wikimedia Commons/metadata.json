@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Hans5958",
 		"id": "279855717203050496"
@@ -14,9 +14,9 @@
 		"nl": "Wikimedia Commons is 's werelds grootste gratis te gebruiken bibliotheek met illustraties, foto's, tekeningen, video's en muziek."
 	},
 	"url": "commons.wikimedia.org",
-	"version": "1.0.19",
-	"logo": "https://i.imgur.com/5Ko07gf.png",
-	"thumbnail": "https://i.imgur.com/SRU3R9d.png",
+	"version": "1.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia%20Commons/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia%20Commons/assets/thumbnail.png",
 	"color": "#f9f9f9",
 	"category": "other",
 	"tags": [

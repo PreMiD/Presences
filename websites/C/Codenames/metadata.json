@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,9 +11,9 @@
 		"vi_VN": "Hai tổ chức mật thám kình địch biết danh tính của 25 đặc vụ. Các đồng đội của họ chỉ biết đến nhau qua biệt danh. Các đội tranh đấu để xem các có thể liên lạc được với tất cả các đặc vụ của họ trước. Các tổ chức mật thám được phép đưa ra một từ gợi ý trên bàn đấu. Các thành viên trong đội phải đoán các từ thuộc đúng màu trong khi tránh các từ của đối phương."
 	},
 	"url": "codenames.game",
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/Bf7TsWG.png",
-	"thumbnail": "https://i.imgur.com/vihPw8r.jpg",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/thumbnail.jpg",
 	"color": "#fcd611",
 	"category": "games",
 	"tags": [

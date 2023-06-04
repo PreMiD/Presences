@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const xiangqi: GamePresence = {
-	logo: "https://i.imgur.com/apreO5G.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/618.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

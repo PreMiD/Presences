@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Kif7kro.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Doordash/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[hideSearch, hideFood] = await Promise.all([

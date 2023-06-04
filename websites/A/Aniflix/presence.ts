@@ -40,7 +40,7 @@ if (
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/lza7ROE.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Aniflix/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

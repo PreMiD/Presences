@@ -37,7 +37,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 });
 
 const enum Assets {
-	Logo = "https://i.imgur.com/zVbpanX.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeKage/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/nAtEXHe.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/J/Jisho/assets/logo.png",
 		smallImageText: "Jisho Japanese Dictionary",
 		startTimestamp: browsingTimestamp,
 	};

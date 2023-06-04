@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const ekonos: GamePresence = {
-	logo: "https://i.imgur.com/DHYdQ8g.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/164.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

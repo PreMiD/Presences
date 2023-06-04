@@ -6,7 +6,8 @@ presence.on("UpdateData", async () => {
 			".content__viewer--floating"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/GEL8nqd.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/Odysee/assets/logo.png",
 		};
 	if (document.location.pathname === "/" && !floatingViewer)
 		presenceData.details = "Browsing homepage";

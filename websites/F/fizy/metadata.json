@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -11,9 +11,9 @@
 		"nl": "fizy is een online muziekzoekmachine, gevestigd in Turkije en beschikbaar in Turkije en Oekraïne."
 	},
 	"url": "play.fizy.com",
-	"version": "1.1.18",
-	"logo": "https://i.imgur.com/hObvLZB.png",
-	"thumbnail": "https://i.imgur.com/e8fJNdk.png",
+	"version": "1.1.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/fizy/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/fizy/assets/thumbnail.png",
 	"color": "#fed200",
 	"category": "music",
 	"tags": [

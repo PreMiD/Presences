@@ -18,7 +18,8 @@ presence.on("UpdateData", () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/LCjuLjp.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TVNZ%20OnDemand/assets/logo.png",
 		};
 
 	if (document.location.href.includes("login.tech.tvnz.co.nz")) {

@@ -11,7 +11,7 @@ import {
 } from "../../util";
 
 const cacao: GamePresence = {
-	logo: "https://i.imgur.com/mO2uk6m.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/67.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

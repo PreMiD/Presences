@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const nylonppong: GamePresence = {
-	logo: "https://i.imgur.com/1hAfB1b.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/382.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -7,7 +7,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/4zIl3O7.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/Blockdit/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

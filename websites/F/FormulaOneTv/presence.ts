@@ -133,7 +133,8 @@ async function setBrowsingActivity(presenceData: PresenceData) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/opuHbca.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/FormulaOneTv/assets/logo.png",
 	};
 	let contentId = "";
 

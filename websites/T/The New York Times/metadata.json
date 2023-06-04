@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "John Smith",
 		"id": "233950379065212938"
@@ -19,9 +19,9 @@
 		"www.nytimes.com",
 		"myaccount.nytimes.com"
 	],
-	"version": "2.0.7",
-	"logo": "https://i.imgur.com/e5xEpfu.jpg",
-	"thumbnail": "https://i.imgur.com/p8luyGx.png",
+	"version": "2.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/The%20New%20York%20Times/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/The%20New%20York%20Times/assets/thumbnail.png",
 	"color": "#ffffff",
 	"category": "other",
 	"tags": [

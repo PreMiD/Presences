@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const haiclue: GamePresence = {
-	logo: "https://i.imgur.com/cV6nkCP.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/230.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

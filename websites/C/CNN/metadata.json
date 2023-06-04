@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "N0chteil ^^",
 		"id": "495901098926669825"
@@ -14,9 +14,9 @@
 		"edition.cnn.com",
 		"us.cnn.com"
 	],
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/BVSUjL7.png",
-	"thumbnail": "https://i.imgur.com/xAufghg.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CNN/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CNN/assets/thumbnail.png",
 	"color": "#CC1417",
 	"category": "other",
 	"tags": [

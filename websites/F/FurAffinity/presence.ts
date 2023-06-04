@@ -2,7 +2,7 @@ const presence = new Presence({ clientId: "760624576550928455" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/AYTzoMo.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/FurAffinity/assets/logo.png",
 }
 
 async function getStrings() {

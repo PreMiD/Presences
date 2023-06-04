@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/zg32aGw.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/AnkiWeb/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -9,9 +9,9 @@
 		"en": "A suite of browser-based tools for 5th Edition  Dungeons &amp; Dragons players and Dungeon Masters."
 	},
 	"url": "5e.tools",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/HBcKcfS.png",
-	"thumbnail": "https://i.imgur.com/LlrbrrQ.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/5etools/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/5etools/assets/thumbnail.png",
 	"color": "#1e90ff",
 	"category": "games",
 	"tags": [

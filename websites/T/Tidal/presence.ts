@@ -1,4 +1,4 @@
-const LOGO_URL = "https://i.imgur.com/i9pIvqR.png",
+const LOGO_URL = "https://cdn.rcd.gg/PreMiD/websites/T/Tidal/assets/logo.png",
 	presence = new Presence({ clientId: "901591802342150174" });
 
 async function getStrings() {

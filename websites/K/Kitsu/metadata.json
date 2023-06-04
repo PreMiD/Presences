@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Dream",
 		"id": "257521982021566464"
@@ -10,9 +10,9 @@
 		"nl": "Deel anime- en manga-ervaringen, ontvang aanbevelingen en kijk wat vrienden kijken of lezen."
 	},
 	"url": "kitsu.io",
-	"version": "1.3.18",
-	"logo": "https://i.imgur.com/LlascQj.png",
-	"thumbnail": "https://i.imgur.com/0yjRrph.png",
+	"version": "1.3.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kitsu/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kitsu/assets/thumbnail.png",
 	"color": "#FD755C",
 	"category": "anime",
 	"tags": [

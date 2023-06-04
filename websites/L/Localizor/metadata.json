@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "sryo",
 		"id": "467693206226862080"
@@ -9,9 +9,9 @@
 		"en": "Localizor is an innovative crowd translation platform built to translate your game with the help of your own and our community"
 	},
 	"url": "www.localizor.com",
-	"version": "1.0.7",
-	"logo": "https://i.imgur.com/b7Go6NC.png",
-	"thumbnail": "https://i.imgur.com/WQkfFet.png",
+	"version": "1.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Localizor/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Localizor/assets/thumbnail.png",
 	"color": "#000000",
 	"category": "other",
 	"tags": [

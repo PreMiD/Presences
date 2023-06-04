@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/LI4SUhs.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/flyte%20scribe/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

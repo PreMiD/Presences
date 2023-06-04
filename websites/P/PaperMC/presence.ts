@@ -1,7 +1,7 @@
 const presence = new Presence({
 		clientId: "1088185685682430002",
 	}),
-	logoURL = "https://i.imgur.com/R08CsA6.png",
+	logoURL = "https://cdn.rcd.gg/PreMiD/websites/P/PaperMC/assets/logo.png",
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	// https://stackoverflow.com/a/7224605
 	// to always return type string event when s may be falsy other than empty-string

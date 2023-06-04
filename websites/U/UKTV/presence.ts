@@ -18,7 +18,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/wjqmEQY.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/U/UKTV/assets/logo.png",
 		},
 		video = document.querySelector<HTMLVideoElement>("video"),
 		{ href, pathname } = document.location,

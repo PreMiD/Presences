@@ -5,7 +5,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const { pathname, href } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/AoF1JnY.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/MyAnimeList/assets/logo.png",
 		};
 	if (pathname === "/") presenceData.details = "Viewing the homepage";
 	else if (

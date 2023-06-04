@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const seasaltpaper: GamePresence = {
-	logo: "https://i.imgur.com/yO7AE4B.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/471.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

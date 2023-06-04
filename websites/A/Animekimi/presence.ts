@@ -71,7 +71,8 @@ presence.on("UpdateData", async () => {
 		playvdo = document.querySelector("#info > h1")?.textContent ?? "?",
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/tSmgmK1.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Animekimi/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 	if (oldLang !== newLang || !strings) {

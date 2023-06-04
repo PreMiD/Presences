@@ -6,7 +6,8 @@ const presence = new Presence({
 let owner, title, presenceprivate;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/R3DmkeK.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GitLab/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		lock = await presence.getSetting<boolean>("lock");

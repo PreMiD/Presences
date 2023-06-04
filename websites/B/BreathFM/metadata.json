@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "482621190519914506",
 		"name": "Optischa"
@@ -10,9 +10,9 @@
 		"de": "BreathFM ist ein Webradio aus der Schweiz, welches in die ganze Welt streamt"
 	},
 	"url": "breathfm.de",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/8R5ycgm.jpg",
-	"thumbnail": "https://i.imgur.com/4eV6G0N.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BreathFM/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BreathFM/assets/thumbnail.png",
 	"color": "#2A2929",
 	"category": "music",
 	"tags": [

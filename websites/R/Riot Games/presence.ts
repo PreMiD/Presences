@@ -9,7 +9,8 @@ presence.on("UpdateData", async () => {
 		.replace(`https://${location.hostname}`, "")
 		.replace("?", "/");
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ren8U6k.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/logo.png",
 		startTimestamp: time,
 	};
 	if (location.hostname.includes("riotgames.com")) {

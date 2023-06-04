@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
 	const info = await presence.getSetting<boolean>("eSI"),
 		classInfo = await presence.getSetting<boolean>("eCI"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/FDv2y9V.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Edgenuity/assets/logo.png",
 		};
 	if (info) {
 		if (document.location.pathname === "/")

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Kinue",
 		"id": "634246091293851649"
@@ -12,9 +12,9 @@
 	},
 	"url": "yoake.moe",
 	"regExp": "([a-z0-9-]+[.])*yoake.moe",
-	"version": "1.1.16",
-	"logo": "https://i.imgur.com/eL8ARU0.png",
-	"thumbnail": "https://i.imgur.com/un3I1sl.jpeg",
+	"version": "1.1.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yoake/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yoake/assets/thumbnail.jpeg",
 	"color": "#ffb6c1",
 	"category": "anime",
 	"tags": [

@@ -3,7 +3,8 @@ const presence = new Presence({
 });
 
 let presenceData: PresenceData = {
-	largeImageKey: "https://i.imgur.com/UR8jlF9.png",
+	largeImageKey:
+		"https://cdn.rcd.gg/PreMiD/websites/L/Legends%20of%20Equestria/assets/logo.png",
 };
 
 presence.on("UpdateData", async () => {
@@ -24,7 +25,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Looking at the download page";
 	else {
 		presenceData = {
-			largeImageKey: "https://i.imgur.com/UR8jlF9.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/Legends%20of%20Equestria/assets/logo.png",
 		};
 	}
 	presence.setActivity(presenceData);

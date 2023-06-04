@@ -16,7 +16,8 @@ presence.on("UpdateData", async () => {
 		return str;
 	}
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/imTvu2G.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/Read%20the%20Docs/assets/logo.png",
 		startTimestamp: Date.now(),
 	};
 	let loc = window.location.href;

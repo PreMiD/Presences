@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Eren",
 		"id": "478937019758673931"
@@ -12,9 +12,9 @@
 		"vi_VN": "Bots on Discord là danh sách các Discord bot."
 	},
 	"url": "bots.ondiscord.xyz",
-	"version": "1.2.17",
-	"logo": "https://i.imgur.com/5nbGMhE.png",
-	"thumbnail": "https://i.imgur.com/TZOWrzr.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bots%20on%20Discord/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bots%20on%20Discord/assets/thumbnail.png",
 	"color": "#089BEF",
 	"category": "other",
 	"tags": [

@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/V8TuIHR.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20BotList/assets/logo.jpg",
 			startTimestamp: botBrowsing,
 		},
 		botPage = document.location.pathname,
