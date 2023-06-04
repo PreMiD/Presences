@@ -54,13 +54,12 @@ presence.on("UpdateData", async () => {
 	// Detect if the client is on an anime page
 	if (href.split("/").includes("anime")) {
 		// Get the scriptElement that contains the episode info
-		const jsonLD = JSON.parse(
-			(
-				document.querySelector(
-					'script[type="application/ld+json"]'
-				) as HTMLScriptElement
-			).textContent!
-		);
+		const scriptElement = document.querySelector(
+				'script[type="application/ld+json"]'
+			) as HTMLScriptElement,
+			jsonLD = scriptElement
+				? JSON.parse(scriptElement.textContent || "")
+				: null;
 
 		// Set the anime page presence
 		presenceData.details = `${presenceStrings.onPage} ${jsonLD.name}`;
@@ -84,7 +83,6 @@ presence.on("UpdateData", async () => {
 			}, EP${href.split("=")[2].split("&")[0]}`;
 			presenceData.state = presenceStrings.branding;
 			presenceData.smallImageText = presenceStrings.websiteName;
-			presenceData.largeImageKey = jsonLD.thumbnailUrl;
 			presenceData.smallImageKey = playerAssets.pause;
 			presenceData.buttons = [
 				{
@@ -107,7 +105,6 @@ presence.on("UpdateData", async () => {
 			}, EP${href.split("=")[2].split("&")[0]}`;
 			presenceData.state = presenceStrings.branding;
 			presenceData.smallImageText = presenceStrings.websiteName;
-			presenceData.largeImageKey = jsonLD.thumbnailUrl;
 
 			// Get the timestamp
 			presenceData.startTimestamp = presence.getTimestampsfromMedia(video)[0];
