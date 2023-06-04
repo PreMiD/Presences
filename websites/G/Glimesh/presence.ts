@@ -8,7 +8,8 @@ presence.on("UpdateData", async () => {
 	const locationHref = document.location.href,
 		locationPath = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/YqIpqg4.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Glimesh/assets/logo.png",
 		};
 
 	switch (document.location.host) {

@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const roomtwentyfive: GamePresence = {
-	logo: "https://i.imgur.com/L4K6Nx2.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/457.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

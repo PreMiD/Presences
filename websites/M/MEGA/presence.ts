@@ -7,7 +7,8 @@ let menu: Element, file: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/ybsqV7R.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/MEGA/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[privacy, buttons] = await Promise.all([

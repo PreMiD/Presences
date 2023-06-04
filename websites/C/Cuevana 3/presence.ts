@@ -11,7 +11,7 @@ async function getStrings() {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/uu5XX85.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Cuevana%203/assets/logo.png",
 }
 
 let iFrameVideo: boolean,
@@ -106,7 +106,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/uu5XX85.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/Cuevana%203/assets/logo.png",
 	};
 
 	if (

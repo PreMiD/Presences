@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Nathaniel.",
 		"id": "147891648628654082"
@@ -15,9 +15,9 @@
 		"blog.glimesh.tv",
 		"glim.shop"
 	],
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/YqIpqg4.png",
-	"thumbnail": "https://i.imgur.com/aALh7B4.jpg",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Glimesh/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Glimesh/assets/thumbnail.jpg",
 	"color": "#2c409b",
 	"category": "videos",
 	"tags": [

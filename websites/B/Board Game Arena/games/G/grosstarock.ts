@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const grosstarock: GamePresence = {
-	logo: "https://i.imgur.com/I7NW0F8.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/222.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -11,7 +11,7 @@ let lastPlaybackState = null,
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/x5yDUF9.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Aniyan/assets/logo.png",
 }
 
 if (lastPlaybackState !== playback) {

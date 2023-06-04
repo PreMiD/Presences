@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Chihiro Fujisaki",
 		"id": "560183438393737264"
@@ -12,9 +12,9 @@
 		"picoctf.org",
 		"play.picoctf.org"
 	],
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/nrp0UQ8.png",
-	"thumbnail": "https://i.imgur.com/08xWjUl.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/picoCTF/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/picoCTF/assets/thumbnail.png",
 	"color": "#9b1e33",
 	"category": "other",
 	"tags": [

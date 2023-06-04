@@ -37,7 +37,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/1dBCcdI.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BeatSaver/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 

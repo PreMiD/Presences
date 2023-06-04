@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Kedi",
 		"id": "238668511222693888"
@@ -13,9 +13,9 @@
 		"sling.com",
 		"watch.sling.com"
 	],
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/iTHexWR.png",
-	"thumbnail": "https://i.imgur.com/5q37Xgd.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sling%20TV/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sling%20TV/assets/thumbnail.png",
 	"color": "#008FCE",
 	"category": "videos",
 	"tags": [

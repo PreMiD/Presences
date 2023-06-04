@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -16,9 +16,9 @@
 		"slackhq.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*slack[.]com[/]",
-	"version": "1.4.15",
-	"logo": "https://i.imgur.com/wgUEowI.png",
-	"thumbnail": "https://i.imgur.com/cnx0MKh.png",
+	"version": "1.4.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Slack/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Slack/assets/thumbnail.png",
 	"color": "#611f69",
 	"category": "socials",
 	"tags": [

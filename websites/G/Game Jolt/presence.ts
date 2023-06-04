@@ -40,7 +40,8 @@ presence.on("UpdateData", async () => {
 			"#content > div > div > header > section > div > div.row > div > div > h1 > small"
 		) as HTMLElement,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/R8qwQfC.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Game%20Jolt/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 

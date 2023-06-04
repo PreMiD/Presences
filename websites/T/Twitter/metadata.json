@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -54,9 +54,9 @@
 		"twitter.com",
 		"tweetdeck.twitter.com"
 	],
-	"version": "2.0.19",
-	"logo": "https://i.imgur.com/sm7Qccu.png",
-	"thumbnail": "https://i.imgur.com/0RULzdw.png",
+	"version": "2.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Twitter/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Twitter/assets/thumbnail.png",
 	"color": "#48C0EB",
 	"category": "socials",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Aya-San",
 		"id": "256422547556401152"
@@ -11,9 +11,9 @@
 		"nl": "MangasPROJECT - Lees online en organiseer je reads in mangasPROJECT. Lees in Portugese manga's en webtoons, de meeste leest in actie, romantiek, fantasie, isekai en anderen!"
 	},
 	"url": "leitor.net",
-	"version": "1.2.19",
-	"logo": "https://i.imgur.com/LSo5STJ.png",
-	"thumbnail": "https://i.imgur.com/PGvPuOd.png",
+	"version": "1.2.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangasPROJECT/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangasPROJECT/assets/thumbnail.png",
 	"color": "#d4c196",
 	"category": "anime",
 	"tags": [

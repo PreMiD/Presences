@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Non Serviam",
 		"id": "154651965022928896"
@@ -10,9 +10,9 @@
 		"nl": "Docker Hub is een dienst van Docker om container images te vinden en te delen met je team."
 	},
 	"url": "hub.docker.com",
-	"version": "1.1.18",
-	"logo": "https://i.imgur.com/xr2Gulz.png",
-	"thumbnail": "https://i.imgur.com/n3Ox5DQ.png",
+	"version": "1.1.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DockerHub/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DockerHub/assets/thumbnail.png",
 	"color": "#099CEC",
 	"category": "other",
 	"tags": [

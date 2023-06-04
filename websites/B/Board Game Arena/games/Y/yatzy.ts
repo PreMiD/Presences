@@ -9,7 +9,7 @@ import {
 } from "../../util";
 
 const yatzy: GamePresence = {
-	logo: "https://i.imgur.com/cOG3G3P.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/620.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

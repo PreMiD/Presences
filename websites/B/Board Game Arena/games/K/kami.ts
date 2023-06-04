@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const kami: GamePresence = {
-	logo: "https://i.imgur.com/vtp8ZjN.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/278.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

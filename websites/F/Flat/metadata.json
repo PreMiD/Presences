@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "969650307464298636",
 		"name": "PiggyPlex"
@@ -9,9 +9,9 @@
 		"en": "Create, compose, collaborate, play, and print your sheet music using the world's most simple and intuitive web-based music writing and composition software."
 	},
 	"url": "flat.io",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/pFfJvOZ.png",
-	"thumbnail": "https://i.imgur.com/WpLa25O.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Flat/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Flat/assets/thumbnail.png",
 	"color": "#3981FF",
 	"category": "music",
 	"tags": [

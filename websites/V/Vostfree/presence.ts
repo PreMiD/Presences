@@ -24,7 +24,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Tnk23WJ.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/Vostfree/assets/logo.png",
 			startTimestamp: browsingStamp,
 		},
 		[privacy, button] = await Promise.all([

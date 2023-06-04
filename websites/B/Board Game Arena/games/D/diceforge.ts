@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const diceforge: GamePresence = {
-	logo: "https://i.imgur.com/tbA2lFZ.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/134.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

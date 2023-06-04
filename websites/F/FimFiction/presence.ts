@@ -7,7 +7,8 @@ let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/DctO7hH.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/FimFiction/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

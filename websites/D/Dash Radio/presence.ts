@@ -13,7 +13,8 @@ let songName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/o4Ea2f9.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Dash%20Radio/assets/logo.png",
 	};
 
 	songName = document.querySelector(

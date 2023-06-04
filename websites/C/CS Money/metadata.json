@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -14,9 +14,9 @@
 	},
 	"url": "cs.money",
 	"regExp": "([a-z0-9]+[.])?cs[.]money",
-	"version": "1.0.11",
-	"logo": "https://i.imgur.com/y7THfIx.png",
-	"thumbnail": "https://i.imgur.com/Ob8gt4E.png",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CS%20Money/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CS%20Money/assets/thumbnail.png",
 	"color": "#4214AC",
 	"category": "games",
 	"tags": [

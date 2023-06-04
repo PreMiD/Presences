@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -11,9 +11,9 @@
 	},
 	"url": "www.sololearn.com",
 	"regExp": "([a-z0-9-]+[.])*sololearn[.]com[/]",
-	"version": "2.0.19",
-	"logo": "https://i.imgur.com/MPEOcif.png",
-	"thumbnail": "https://i.imgur.com/k7Mi8zh.png",
+	"version": "2.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SoloLearn/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SoloLearn/assets/thumbnail.png",
 	"color": "#1ABC9C",
 	"category": "other",
 	"tags": [

@@ -7,7 +7,8 @@ presence.on("UpdateData", () => {
 	let video: HTMLVideoElement, live;
 	const path = window.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Z2on4c9.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Rooster%20Teeth/assets/logo.png",
 			details: "Browsing Rooster Teeth",
 			startTimestamp: elapsed,
 		};

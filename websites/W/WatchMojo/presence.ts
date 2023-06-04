@@ -71,7 +71,8 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector<HTMLVideoElement>("#myDiv_html5");
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/zQetOPX.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/WatchMojo/assets/logo.jpg",
 	};
 
 	if (document.location.href !== prevUrl) {

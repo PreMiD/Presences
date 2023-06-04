@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -9,9 +9,9 @@
 		"en": "Colab, or \"Colaboratory\", allows you to write and execute Python in your browser, with zero configuration required, access to GPUs free of charge, and easy sharing"
 	},
 	"url": "colab.research.google.com",
-	"version": "1.0.5",
-	"logo": "https://i.imgur.com/2B69cLb.png",
-	"thumbnail": "https://i.imgur.com/qvR0PDm.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Colab/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Colab/assets/thumbnail.png",
 	"color": "#f9ab00",
 	"category": "other",
 	"tags": [

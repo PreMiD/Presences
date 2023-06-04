@@ -7,7 +7,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/3htcFSM.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/I/Instant-Gaming/assets/logo.png",
 	};
 	try {
 		let productPlatform = document.querySelector(

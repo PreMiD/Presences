@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/dIpE7wX.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/V/Vukkybox/assets/logo.png",
 		smallImageKey: "vukky",
 		smallImageText: "Playing Vukkybox",
 		startTimestamp: browsingTimestamp,
@@ -94,7 +95,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Redeeming a coupon!";
 					if (
 						document.body.style.backgroundImage ===
-						'url("https://i.imgur.com/NlGok01.png")'
+						'url("https://cdn.rcd.gg/PreMiD/websites/V/Vukkybox/assets/0.png")'
 					)
 						presenceData.state = "Yay, it's a valid coupon!";
 					else presenceData.state = "Uh oh, the coupon is invalid!";

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "QkeleQ10",
 		"id": "807917674477649943"
@@ -14,9 +14,9 @@
 		"roulette.hitmaps.com"
 	],
 	"regExp": "([a-z0-9]+)[.]hitmaps[.]com",
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/CgaXYn2.png",
-	"thumbnail": "https://i.imgur.com/S6DAuSR.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HITMAPS/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HITMAPS/assets/thumbnail.png",
 	"color": "#fb0111",
 	"category": "games",
 	"tags": [

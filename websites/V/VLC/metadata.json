@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "fror",
 		"id": "515668127829458945"
@@ -15,9 +15,9 @@
 		"localhost",
 		"127.0.0.1"
 	],
-	"version": "1.4.34",
-	"logo": "https://i.imgur.com/WuzLOQu.png",
-	"thumbnail": "https://i.imgur.com/Bg2AFYN.png",
+	"version": "1.4.36",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VLC/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VLC/assets/thumbnail.png",
 	"color": "#ff7c00",
 	"category": "videos",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "BobsterJS 💗",
 		"id": "359755774873960450"
@@ -15,9 +15,9 @@
 		"socialclub.rockstargames.com",
 		"signin.rockstargames.com"
 	],
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/EYSTLt6.png",
-	"thumbnail": "https://i.imgur.com/1pthcL3.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/thumbnail.png",
 	"color": "#fbff00",
 	"category": "games",
 	"tags": [

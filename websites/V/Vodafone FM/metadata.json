@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "180867904135233536",
 		"name": "AnOmniMoose"
@@ -10,9 +10,9 @@
 		"pt": "A Vodafone FM é uma rádio portuguesa fundada em parceria com a Vodafone. Aquando do seu lançamento esta estação emitiu essencialmente música Indie e Rock Alternativo, apoiando também a nova música portuguesa, direccionada para um público jovem adulto. Começando em 2021, a Vodafone FM assumiu um novo repertório musical, com música composta por R&B, Indie Pop, Soft Hip-Hop e Soul."
 	},
 	"url": "vodafone.fm",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/6IUf3O6.png",
-	"thumbnail": "https://i.imgur.com/nhRns9W.png",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vodafone%20FM/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vodafone%20FM/assets/thumbnail.png",
 	"color": "#e60000",
 	"category": "music",
 	"tags": [

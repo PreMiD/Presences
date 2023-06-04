@@ -22,7 +22,8 @@ setInterval(() => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/gr29ZQz.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Hero%20Forge/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,

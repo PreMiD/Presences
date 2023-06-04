@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/wYCAFtE.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Homestuck%5E2/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -15,9 +15,9 @@
 		"secure.sahibinden.com",
 		"banaozel.sahibinden.com"
 	],
-	"version": "1.1.15",
-	"logo": "https://i.imgur.com/lutK4xu.png",
-	"thumbnail": "https://i.imgur.com/slIYKIe.png",
+	"version": "1.1.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/thumbnail.png",
 	"color": "#ffe800",
 	"category": "other",
 	"tags": [

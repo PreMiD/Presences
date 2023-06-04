@@ -19,7 +19,8 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/gnXTraq.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/logo.png",
 		},
 		{ pathname, href } = document.location,
 		[buttons, image] = await Promise.all([

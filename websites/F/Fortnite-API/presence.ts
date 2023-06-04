@@ -2,7 +2,8 @@ const presence = new Presence({
 		clientId: "622163652207706122",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/uhKW8e0.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/Fortnite-API/assets/logo.png",
 		startTimestamp: Date.now(),
 	};
 

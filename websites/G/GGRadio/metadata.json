@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,9 +10,9 @@
 		"nl": "Welkom bij GGRadio, de #1 internationale eSports gaming radio. 24 uur per dag, 7 dagen per week, beschikbaar op al je favoriete games en apparaten."
 	},
 	"url": "ggradio.net",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/IOmdiIb.png",
-	"thumbnail": "https://i.imgur.com/7pjD8sv.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GGRadio/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GGRadio/assets/thumbnail.png",
 	"color": "#ff6101",
 	"category": "music",
 	"tags": [

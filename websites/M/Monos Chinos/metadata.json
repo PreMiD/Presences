@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "white",
 		"id": "289710422112731138"
@@ -10,9 +10,9 @@
 		"nl": "Monos Chinos is een streamingwebsite waar je anime kunt kijken met Spaanse ondertitels."
 	},
 	"url": "monoschinos2.com",
-	"version": "1.0.22",
-	"logo": "https://i.imgur.com/urgEiF7.png",
-	"thumbnail": "https://i.imgur.com/togvEtr.png",
+	"version": "1.0.24",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/thumbnail.png",
 	"color": "#ff6348",
 	"category": "anime",
 	"tags": [

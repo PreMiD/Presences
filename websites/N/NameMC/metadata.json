@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,9 +11,9 @@
 	},
 	"url": "namemc.com",
 	"regExp": "([a-z0-9-]+[.])*namemc[.]com[/]",
-	"version": "2.0.15",
-	"logo": "https://i.imgur.com/9JDmZaF.png",
-	"thumbnail": "https://i.imgur.com/XIZsGTQ.png",
+	"version": "2.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/NameMC/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/NameMC/assets/thumbnail.png",
 	"color": "#000000",
 	"category": "games",
 	"tags": [

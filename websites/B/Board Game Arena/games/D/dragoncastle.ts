@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const dragoncastle: GamePresence = {
-	logo: "https://i.imgur.com/4bqDaV3.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/151.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

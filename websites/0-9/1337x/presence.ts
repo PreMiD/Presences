@@ -7,7 +7,8 @@ let title: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/zc7kuDN.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/0-9/1337x/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

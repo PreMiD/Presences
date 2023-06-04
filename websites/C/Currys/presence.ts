@@ -5,8 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData = {
-		smallImageKey: "https://i.imgur.com/B5iUj20.png",
-		largeImageKey: "https://i.imgur.com/yOolF4f.png",
+		smallImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/Currys/assets/0.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/Currys/assets/logo.png",
 		largeImageText: "Browsing Currys",
 		startTimestamp: browsingTimestamp,
 		details: "Browsing",
@@ -59,7 +60,8 @@ presence.on("UpdateData", async () => {
 	if (search?.value) {
 		presenceData.details = "Searching for:";
 		presenceData.state = search.value;
-		presenceData.smallImageKey = "https://i.imgur.com/B5iUj20.png";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/C/Currys/assets/0.png";
 		return presence.setActivity(presenceData);
 	}
 
@@ -68,7 +70,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document
 			.querySelector('[class="breadcrumb"]')
 			.lastElementChild?.textContent?.trim();
-		presenceData.smallImageKey = "https://i.imgur.com/B5iUj20.png";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/C/Currys/assets/0.png";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

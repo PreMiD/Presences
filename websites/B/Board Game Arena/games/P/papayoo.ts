@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const papayoo: GamePresence = {
-	logo: "https://i.imgur.com/55QOIJr.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/399.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

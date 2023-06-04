@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/oSw7qlV.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/logo.png",
 			startTimestamp: timestampe,
 		},
 		pathnames = location.pathname,

@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const lagranja: GamePresence = {
-	logo: "https://i.imgur.com/FK0ZP1m.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/298.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

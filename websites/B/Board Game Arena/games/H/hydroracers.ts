@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const hydroracers: GamePresence = {
-	logo: "https://i.imgur.com/Lp6KQue.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/251.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

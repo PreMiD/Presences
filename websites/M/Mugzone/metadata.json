@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Himori",
 		"id": "350602512044261386"
@@ -10,9 +10,9 @@
 		"nl": "Malody, platformonafhankelijke muziekgame-community."
 	},
 	"url": "m.mugzone.net",
-	"version": "2.0.13",
-	"logo": "https://i.imgur.com/5phtiVk.png",
-	"thumbnail": "https://i.imgur.com/LiUGZxS.png",
+	"version": "2.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mugzone/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mugzone/assets/thumbnail.png",
 	"color": "#b1b8cd",
 	"category": "games",
 	"tags": [

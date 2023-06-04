@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "TheDjRider",
 		"id": "149202464590004224"
@@ -20,9 +20,9 @@
 		"dev.eternalnetworktm.com",
 		"shortener.etrnltm.com"
 	],
-	"version": "1.2.3",
-	"logo": "https://i.imgur.com/Saq6ADh.png",
-	"thumbnail": "https://i.imgur.com/8pBRB2e.png",
+	"version": "1.2.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/thumbnail.png",
 	"color": "#c005e6",
 	"category": "other",
 	"tags": [

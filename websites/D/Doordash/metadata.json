@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "astrid",
 		"id": "852656702037164053"
@@ -9,9 +9,9 @@
 		"en": "Delivery & takeout from the best local restaurants. Breakfast, lunch, dinner and more, delivered safely to your door."
 	},
 	"url": "www.doordash.com",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/Kif7kro.png",
-	"thumbnail": "https://i.imgur.com/Sc5sj8U.jpg",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Doordash/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Doordash/assets/thumbnail.jpg",
 	"color": "#ff3008",
 	"category": "other",
 	"tags": [

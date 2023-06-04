@@ -8,7 +8,8 @@ let lastPath: string,
 presence.on("UpdateData", async () => {
 	const curPath = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/rkmqU73.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Hako/assets/logo.png",
 		};
 	if (lastPath !== curPath) {
 		lastPath = curPath;

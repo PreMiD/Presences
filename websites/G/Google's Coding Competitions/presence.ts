@@ -23,7 +23,8 @@ setPresence();
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/kmABIM3.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Google's%20Coding%20Competitions/assets/logo.png",
 		details: "Home page",
 		startTimestamp: timeElapsed,
 	};

@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/7JEHmcz.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Discohook/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		webhookCount = document.querySelectorAll(".evedhr > .dWrjaT").length,

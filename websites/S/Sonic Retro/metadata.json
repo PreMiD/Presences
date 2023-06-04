@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "BigBoi",
 		"id": "853932304257908746"
@@ -10,9 +10,9 @@
 	},
 	"url": "sonicretro.org",
 	"regExp": "((info|forums)+[.])*(sonicretro[.]org)[/]",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/m2ByWe1.png",
-	"thumbnail": "https://i.imgur.com/XSQE7IW.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/thumbnail.png",
 	"color": "#84846a",
 	"category": "other",
 	"tags": [

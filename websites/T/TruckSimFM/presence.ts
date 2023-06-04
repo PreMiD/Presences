@@ -10,7 +10,8 @@ let title: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/X7rXtq7.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TruckSimFM/assets/logo.png",
 	};
 	//presenceData.startTimestamp = browsingTimestamp;
 	player = document.querySelector("#player");

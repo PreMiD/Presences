@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -15,9 +15,9 @@
 		"mcforge.readthedocs.io",
 		"forgedev.flocker.tv"
 	],
-	"version": "1.2.16",
-	"logo": "https://i.imgur.com/yPLG6pu.png",
-	"thumbnail": "https://i.imgur.com/xsz3eWv.png",
+	"version": "1.2.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MinecraftForge/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MinecraftForge/assets/thumbnail.png",
 	"color": "#d7a664",
 	"category": "games",
 	"tags": [

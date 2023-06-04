@@ -20,7 +20,7 @@ presence.on(
 );
 
 const enum Assets {
-	Logo = "https://i.imgur.com/L1fhc3r.jpg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeTW/assets/logo.jpg",
 }
 
 presence.on("UpdateData", async () => {

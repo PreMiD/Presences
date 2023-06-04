@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/jk4XMSO.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/Magister/assets/logo.png",
 	};
 
 	if (document.location.href.includes("account/login"))

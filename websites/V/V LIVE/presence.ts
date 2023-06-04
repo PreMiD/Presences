@@ -84,7 +84,8 @@ presence.on("UpdateData", async () => {
 	]);
 
 	let presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/K6z2UeE.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/V%20LIVE/assets/logo.png",
 			startTimestamp: elapsed,
 		},
 		searchPageValue: string;

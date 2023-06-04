@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Alexx",
 		"id": "604182077088202784"
@@ -13,9 +13,9 @@
 		"localhost",
 		"127.0.0.1"
 	],
-	"version": "1.0.19",
-	"logo": "https://i.imgur.com/PKrgfd3.png",
-	"thumbnail": "https://i.imgur.com/TlpZA7D.png",
+	"version": "1.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kodi/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kodi/assets/thumbnail.png",
 	"color": "#ff7c00",
 	"category": "videos",
 	"tags": [

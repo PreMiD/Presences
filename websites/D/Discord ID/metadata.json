@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -12,9 +12,9 @@
 		"wiki.discord.id",
 		"discord.id"
 	],
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/O06B09v.png",
-	"thumbnail": "https://i.imgur.com/Y8sQNb9.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20ID/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20ID/assets/thumbnail.png",
 	"color": "#7289da",
 	"category": "other",
 	"tags": [

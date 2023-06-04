@@ -10,7 +10,8 @@ presence.on("UpdateData", async function () {
 		},
 		urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/vvHuXVu.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wizarding%20World/assets/logo.jpg",
 		};
 
 	if (setting.timeElapsed) presenceData.startTimestamp = browsingTimestamp;

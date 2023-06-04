@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "AlbaySIMSEK",
 		"id": "432476132609228800"
@@ -22,9 +22,9 @@
 		"aperturebot.science",
 		"dashboard.aperturebot.science"
 	],
-	"version": "1.2.16",
-	"logo": "https://i.imgur.com/0Tw3aDA.png",
-	"thumbnail": "https://i.imgur.com/LOClCfu.png",
+	"version": "1.2.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/ApertureBot/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/ApertureBot/assets/thumbnail.png",
 	"color": "#2c2834",
 	"category": "other",
 	"tags": [

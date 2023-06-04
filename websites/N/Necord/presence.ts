@@ -1,6 +1,6 @@
 const enum Assets {
-	Logo = "https://i.imgur.com/LY804vK.png",
-	Idle = "https://i.imgur.com/6A9pxAR.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Necord/assets/0.png",
+	Idle = "https://cdn.rcd.gg/PreMiD/websites/N/Necord/assets/1.png",
 }
 
 const presence = new Presence({

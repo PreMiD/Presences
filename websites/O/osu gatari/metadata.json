@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "MoeKotoki",
 		"id": "276627005280092162"
@@ -14,9 +14,9 @@
 		"osu.gatari.pw",
 		"sig.gatari.pw"
 	],
-	"version": "1.4.17",
-	"logo": "https://i.imgur.com/yVkDTh4.png",
-	"thumbnail": "https://i.imgur.com/y8IrnYg.png",
+	"version": "1.4.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/osu%20gatari/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/osu%20gatari/assets/thumbnail.png",
 	"color": "#B21964",
 	"category": "games",
 	"tags": [

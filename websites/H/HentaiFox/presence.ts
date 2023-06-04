@@ -28,7 +28,7 @@ const pattern = "- Page",
 	};
 
 const enum Assets {
-	Logo = "https://i.imgur.com/o9joHZX.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/HentaiFox/assets/logo.png",
 }
 
 if (lastPlaybackState !== reading) {

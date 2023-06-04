@@ -23,10 +23,10 @@ async function getStrings() {
 }
 
 enum Logo {
-	RedShowtime = "https://i.imgur.com/u1ASDz8.png",
-	WhiteShowtime = "https://i.imgur.com/a0ls8Jh.png",
-	BlackShowtime = "https://i.imgur.com/JJjrlfR.png",
-	SkyShowtime = "https://i.imgur.com/x32sZlD.png",
+	RedShowtime = "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/0.png",
+	WhiteShowtime = "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/1.png",
+	BlackShowtime = "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/2.png",
+	SkyShowtime = "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/3.png",
 }
 function logoCheck(logoNumber: number) {
 	return logoNumber === 0 // Red

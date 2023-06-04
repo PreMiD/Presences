@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -10,9 +10,9 @@
 	},
 	"url": "www.webnovel.com",
 	"regExp": "([a-z0-9]+[.])webnovel[.]com",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/PcDEB6x.png",
-	"thumbnail": "https://i.imgur.com/NrbQ6Xa.jpeg",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Webnovel/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Webnovel/assets/thumbnail.jpeg",
 	"color": "#3F4DA5",
 	"category": "socials",
 	"tags": [

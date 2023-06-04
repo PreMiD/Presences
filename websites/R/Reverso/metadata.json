@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Kozou",
 		"id": "379362415428632576"
@@ -17,9 +17,9 @@
 	},
 	"url": "www.reverso.net",
 	"regExp": "([a-z0-9-_]+)[.]reverso[.]net",
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/jRvhga7.png",
-	"thumbnail": "https://i.imgur.com/CpzjkaP.png",
+	"version": "1.0.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Reverso/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Reverso/assets/thumbnail.png",
 	"color": "#0970ac",
 	"category": "other",
 	"tags": [

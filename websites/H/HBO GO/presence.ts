@@ -8,7 +8,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/TTHQtBH.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/HBO%20GO/assets/logo.png",
 		},
 		video: HTMLVideoElement = document.querySelector(
 			"#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api"

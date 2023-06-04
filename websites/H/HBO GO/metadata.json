@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "PreMiD",
 		"id": "503557087041683458"
@@ -26,9 +26,9 @@
 		"www.hbogoasia.id",
 		"www.hbogoasia.ph"
 	],
-	"version": "2.3.3",
-	"logo": "https://i.imgur.com/TTHQtBH.png",
-	"thumbnail": "https://i.imgur.com/vvAp3GI.png",
+	"version": "2.3.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20GO/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20GO/assets/thumbnail.png",
 	"color": "#011921",
 	"category": "videos",
 	"tags": [

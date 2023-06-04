@@ -12,7 +12,8 @@ function refreshTime() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/E4dzY6x.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/Online%20Sequencer/assets/logo.png",
 		startTimestamp: timestart,
 	};
 	if (document.querySelectorAll(".fas.fa-stop")[0]) {

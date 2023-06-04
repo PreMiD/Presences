@@ -2,7 +2,7 @@ const presence = new Presence({ clientId: "870727282405306368" });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/4b8AEvp.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Subso/assets/logo.png",
 	};
 
 	switch (window.location.host) {

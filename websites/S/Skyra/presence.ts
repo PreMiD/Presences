@@ -7,7 +7,7 @@ let title: Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/vUk6eWg.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Skyra/assets/logo.png",
 	};
 
 	if (document.location.hostname === "skyra.pw") {

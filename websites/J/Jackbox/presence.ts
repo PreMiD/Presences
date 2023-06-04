@@ -85,7 +85,8 @@ if (window.location.hostname === "jackbox.tv") {
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/SXfEdnL.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/logo.png",
 	};
 	const [useName, useTime, useDetails] = await Promise.all([
 			presence.getSetting<boolean>("useName"),

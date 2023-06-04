@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -27,9 +27,9 @@
 	},
 	"url": "translate.google.com",
 	"regExp": "translate.google([.][a-z]+)+[/]",
-	"version": "3.0.11",
-	"logo": "https://i.imgur.com/TblAuvW.png",
-	"thumbnail": "https://i.imgur.com/HSrkJq0.png",
+	"version": "3.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Translate/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Translate/assets/thumbnail.png",
 	"color": "#4c8bf5",
 	"category": "other",
 	"tags": [

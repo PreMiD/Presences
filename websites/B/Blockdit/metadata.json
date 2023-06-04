@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Yusaki",
 		"id": "439582316873121793"
@@ -13,9 +13,9 @@
 	},
 	"url": "www.blockdit.com",
 	"regExp": "([a-z0-9-]+[.])*blockdit[.]com[/]",
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/4zIl3O7.png",
-	"thumbnail": "https://i.imgur.com/s1U0Bq7.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Blockdit/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Blockdit/assets/thumbnail.png",
 	"color": "#4a7fe0",
 	"category": "socials",
 	"tags": [

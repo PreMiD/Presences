@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "257151906038677504",
 		"name": "SHISEN"
@@ -10,9 +10,9 @@
 		"es": "Descubre las mejores series y peliculas de Anime subtituladas y dobladas con filtros avanzados y míralas en HD."
 	},
 	"url": "animegenzai.net",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/dtmYEl8.png",
-	"thumbnail": "https://i.imgur.com/irueb07.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Genzai/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Genzai/assets/thumbnail.png",
 	"color": "#f5c518",
 	"category": "anime",
 	"tags": [

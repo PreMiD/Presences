@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"id": "533014724569333770",
 		"name": "Hikki"
@@ -21,9 +21,9 @@
 		"aus.social",
 		"social.network.europa.eu"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/njcb4Wp.png",
-	"thumbnail": "https://i.imgur.com/y8dR5c8.png",
+	"version": "1.0.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/thumbnail.png",
 	"color": "#6364ff",
 	"category": "socials",
 	"tags": [

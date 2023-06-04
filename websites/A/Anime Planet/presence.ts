@@ -62,7 +62,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/0qpwOvt.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Planet/assets/logo.jpg",
 		details: strings.browse,
 		smallImageKey: "reading",
 		startTimestamp: startsTime,

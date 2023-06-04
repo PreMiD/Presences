@@ -3,9 +3,9 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://i.imgur.com/yeWzAvq.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Crunchyroll/assets/logo.png",
 
-	OpenBook = "https://i.imgur.com/H4ZhsMF.png",
+	OpenBook = "https://cdn.rcd.gg/PreMiD/websites/C/Crunchyroll/assets/0.png",
 }
 
 async function getStrings() {

@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Yb4CWnm.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Musixmatch/assets/0.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = document.location;
@@ -25,7 +26,8 @@ presence.on("UpdateData", () => {
 					"#site > div > div > div > main > .mxm-page > .mxm-user-header > .container > .row > div > div > div > span"
 				)
 			) {
-				presenceData.smallImageKey = "https://i.imgur.com/Bl7BSIW.png";
+				presenceData.smallImageKey =
+					"https://cdn.rcd.gg/PreMiD/websites/M/Musixmatch/assets/1.png";
 				presenceData.smallImageText = "Curator";
 			}
 			if (pathname === "/profile/me")
@@ -45,7 +47,8 @@ presence.on("UpdateData", () => {
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 				'[property="og:image"]'
 			).content;
-			presenceData.smallImageKey = "https://i.imgur.com/Yb4CWnm.png";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/M/Musixmatch/assets/0.png";
 			presenceData.details = `Reading ${pathname.split("/")[5]} translation`;
 			presenceData.state = `${
 				document.querySelector("#site h2 > span > a")?.textContent ||
@@ -55,7 +58,8 @@ presence.on("UpdateData", () => {
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 				'[property="og:image"]'
 			).content;
-			presenceData.smallImageKey = "https://i.imgur.com/Yb4CWnm.png";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/M/Musixmatch/assets/0.png";
 			presenceData.details = "Reading lyrics";
 			presenceData.state = `${
 				document.querySelector("#site h2 > span > a")?.textContent ||
@@ -67,7 +71,8 @@ presence.on("UpdateData", () => {
 			).content;
 			if (!avatar.includes("avatar-placeholder.png")) {
 				presenceData.largeImageKey = avatar;
-				presenceData.smallImageKey = "https://i.imgur.com/Yb4CWnm.png";
+				presenceData.smallImageKey =
+					"https://cdn.rcd.gg/PreMiD/websites/M/Musixmatch/assets/0.png";
 			}
 			presenceData.details = "Browsing artist";
 			presenceData.state = document.querySelector(

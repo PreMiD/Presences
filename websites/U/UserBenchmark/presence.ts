@@ -56,7 +56,8 @@ presence.on("UpdateData", async () => {
 		showTimestamps = await presence.getSetting<boolean>("timestamp");
 
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/4TBit6H.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/logo.png",
 		startTimestamp: elapsed,
 	};
 

@@ -38,7 +38,8 @@ presence.on("UpdateData", async () => {
 		);
 
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/ONnE8dp.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
 			details: "Bir yazara göz atıyor:",
 			state:
 				author && author.textContent !== "" ? author.textContent : "Belirsiz",
@@ -46,7 +47,8 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (title && title.textContent !== "") {
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/ONnE8dp.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
 			details: `${title.textContent}`,
 			state: `Yazar: ${
 				document.querySelector(
@@ -71,7 +73,8 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (videoTitle && videoTitle.textContent !== "") {
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/ONnE8dp.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
 			details: `${videoTitle.textContent}`,
 			state: `Yazar: ${
 				document.querySelector(
@@ -96,7 +99,8 @@ presence.on("UpdateData", async () => {
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/ONnE8dp.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)] || "Ana Sayfa",
 			smallImageKey:

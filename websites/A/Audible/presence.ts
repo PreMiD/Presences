@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/TTg4B0Q.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Audible/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname.includes("/account"))

@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/xFz6AU3.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/U/UpBeatRadio/assets/logo.png",
 		},
 		[format1, format2, elapsed, format, info, dj] = await Promise.all([
 			presence.getSetting<string>("sFormatNoDj1"),

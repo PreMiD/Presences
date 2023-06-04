@@ -13,7 +13,7 @@ const presence = new Presence({
 		else return "Loading...";
 	};
 const enum Assets {
-	Logo = "https://i.imgur.com/Sr0u6MC.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Anontpp/assets/logo.png",
 }
 
 let oldUrl: string, elapsed: number, strings: Awaited<typeof newStrings>;

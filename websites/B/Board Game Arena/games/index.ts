@@ -1272,7 +1272,7 @@ export default function getGame(key: string): {
 	if (games[key]) return games[key];
 	else {
 		return {
-			logo: "https://i.imgur.com/uCstmQE.png",
+			logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/logo.png",
 			async getData() {
 				return {};
 			},

@@ -1,5 +1,6 @@
 export const name = "Job Job";
-export const logo = "https://i.imgur.com/FfZYRGL.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/33.png";
 
 export function getPresenceData({
 	playerState,

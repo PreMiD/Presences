@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Hans5958",
 		"id": "279855717203050496"
@@ -13,9 +13,9 @@
 		"play.typeracer.com",
 		"data.typeracer.com"
 	],
-	"version": "1.1.22",
-	"logo": "https://i.imgur.com/tms4xbr.png",
-	"thumbnail": "https://i.imgur.com/HEhUuhF.png",
+	"version": "1.1.24",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Typeracer/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Typeracer/assets/thumbnail.png",
 	"color": "#007ec5",
 	"category": "games",
 	"tags": [

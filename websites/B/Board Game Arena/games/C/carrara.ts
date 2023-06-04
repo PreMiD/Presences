@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const carrara: GamePresence = {
-	logo: "https://i.imgur.com/vUHhHnN.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/78.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

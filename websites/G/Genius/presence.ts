@@ -37,7 +37,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/C2J5rrN.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Genius/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;

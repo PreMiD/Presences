@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Bashiku",
 		"id": "531417292446105620"
@@ -31,9 +31,9 @@
 		"turkanime.fun",
 		"turkceanimeizle.org"
 	],
-	"version": "2.0.6",
-	"logo": "https://i.imgur.com/TZZcyOQ.png",
-	"thumbnail": "https://i.imgur.com/o4P1a0J.png",
+	"version": "2.0.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnizmTV/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnizmTV/assets/thumbnail.png",
 	"color": "#fc9003",
 	"category": "videos",
 	"tags": [

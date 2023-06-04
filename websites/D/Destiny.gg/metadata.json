@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "PreMiD",
 		"id": "503557087041683458"
@@ -10,9 +10,9 @@
 		"nl": "Streaming website voor de streamer Steven \"Destiny\" Bonnell II"
 	},
 	"url": "www.destiny.gg",
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/pSEZ2Cm.png",
-	"thumbnail": "https://i.imgur.com/UAGQHuC.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/thumbnail.png",
 	"color": "#568FCA",
 	"category": "socials",
 	"tags": [

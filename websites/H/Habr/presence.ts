@@ -25,7 +25,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 const enum Assets {
-	Logo = "https://i.imgur.com/DrxgYIA.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Habr/assets/logo.png",
 }
 
 function textContent(tags: string) {

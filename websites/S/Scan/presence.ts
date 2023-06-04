@@ -7,7 +7,7 @@ let item;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/14KOuEk.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Scan/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

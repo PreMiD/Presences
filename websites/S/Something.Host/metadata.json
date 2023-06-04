@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Amaury",
 		"id": "239487545791086592"
@@ -16,9 +16,9 @@
 		"content.something.host",
 		"files.something.host"
 	],
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/il2R4FQ.png",
-	"thumbnail": "https://i.imgur.com/m7Av02S.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Something.Host/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Something.Host/assets/thumbnail.png",
 	"color": "#7A64EF",
 	"category": "other",
 	"tags": [

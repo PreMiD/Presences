@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -16,9 +16,9 @@
 		"nl": "Folding@home is een project gericht op onderzoek naar ziektes. De problemen die we oplossen vereisen zo veel computerberekeningen - en we hebben jouw hulp nodig om de remedies te vinden! Bestrijd ziekten samen met ons."
 	},
 	"url": "client.foldingathome.org",
-	"version": "1.1.13",
-	"logo": "https://i.imgur.com/V6FvA5I.png",
-	"thumbnail": "https://i.imgur.com/5TNqcl6.png",
+	"version": "1.1.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Folding@home/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Folding@home/assets/thumbnail.png",
 	"color": "#581919",
 	"category": "other",
 	"tags": [

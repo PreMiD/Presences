@@ -9,7 +9,8 @@ let user: Element | HTMLElement | string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/yPLG6pu.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/MinecraftForge/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

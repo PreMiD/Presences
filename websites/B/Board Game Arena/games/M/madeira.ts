@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const madeira: GamePresence = {
-	logo: "https://i.imgur.com/305yTAT.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/329.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

@@ -20,7 +20,8 @@ let elapsed: number, oldUrl: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/qssGc1m.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Starz/assets/logo.png",
 		},
 		{ href, pathname: path } = window.location;
 

@@ -10,13 +10,13 @@ function pathIncludes(path: string, str: string) {
 }
 
 const enum Logos {
-	Paramount = "https://i.imgur.com/4Z2Dwvc.jpg",
-	CBS = "https://i.imgur.com/EhhoDIU.png",
-	BET = "https://i.imgur.com/w5Z4KgD.png",
-	ComedyCentral = "https://i.imgur.com/Meq43i5.png",
-	MTV = "https://i.imgur.com/GfVqh8i.png",
-	Nickelodeon = "https://i.imgur.com/2m75sAU.jpg",
-	Smithsonian = "https://i.imgur.com/8xy0AaS.png",
+	Paramount = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/logo.jpg",
+	CBS = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/0.png",
+	BET = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/1.png",
+	ComedyCentral = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/2.png",
+	MTV = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/3.png",
+	Nickelodeon = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/4.jpg",
+	Smithsonian = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/5.png",
 }
 
 presence.on("UpdateData", async () => {

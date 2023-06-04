@@ -11,7 +11,7 @@ async function getStrings() {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/fqyhsZ5.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AniList/assets/logo.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>;

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -16,9 +16,9 @@
 		"pokemonshowdown.com",
 		"play.pokemonshowdown.com"
 	],
-	"version": "1.1.22",
-	"logo": "https://i.imgur.com/p3ZpoFY.png",
-	"thumbnail": "https://i.imgur.com/q4nY8bG.png",
+	"version": "1.1.24",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon%20Showdown/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon%20Showdown/assets/thumbnail.png",
 	"color": "#FFF942",
 	"category": "games",
 	"tags": [

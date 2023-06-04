@@ -10,7 +10,7 @@ const presence = new Presence({
 	containsTerm = (term: string) => document.location.pathname.includes(term);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/ZpDYxNn.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/myCANAL/assets/0.png",
 }
 
 presence.on("UpdateData", async () => {

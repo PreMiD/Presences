@@ -66,7 +66,8 @@ const presence = new Presence({
 		oldLang: "",
 		startedSince: ~~(Date.now() / 1000),
 		presenceData: {
-			largeImageKey: "https://i.imgur.com/zIAmJZs.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BetterAnime/assets/logo.png",
 			smallImageKey: "browse",
 		},
 	};

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.8",
 	"author": {
 		"name": "Harold",
 		"id": "141206144264699904"
@@ -12,9 +12,9 @@
 		"www.wuxiaworld.com",
 		"wuxiaworld.com"
 	],
-	"version": "1.0.10",
-	"logo": "https://i.imgur.com/5tfjCTi.png",
-	"thumbnail": "https://i.imgur.com/yWh6rb5.png",
+	"version": "1.0.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wuxiaworld/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wuxiaworld/assets/thumbnail.png",
 	"color": "#000000",
 	"category": "other",
 	"tags": [

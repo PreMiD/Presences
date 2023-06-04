@@ -1,5 +1,5 @@
 const enum Assets {
-	Logo = "https://i.imgur.com/sko4P3c.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/Fandom/assets/logo.png",
 }
 if (
 	document.location.pathname.includes("/wiki/")

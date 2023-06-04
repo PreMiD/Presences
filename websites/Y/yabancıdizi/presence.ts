@@ -60,7 +60,8 @@ presence.on("UpdateData", async () => {
 	if (!isVideoData && !_video) {
 		if (page.includes("/kesfet")) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/L51zWz0.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 				details: "Bir sayfaya göz atıyor:",
 				state: "Keşfet",
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -71,7 +72,8 @@ presence.on("UpdateData", async () => {
 			);
 
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/L51zWz0.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 				details: "Bir aktöre göz atıyor:",
 				state: actorName ? actorName.textContent.trim() : "Belirsiz",
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -82,7 +84,8 @@ presence.on("UpdateData", async () => {
 			categoryTitle.textContent !== ""
 		) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/L51zWz0.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 				details: "Bir kategoriye göz atıyor:",
 				state: categoryTitle.textContent,
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -93,7 +96,8 @@ presence.on("UpdateData", async () => {
 			categoryTitle.textContent !== ""
 		) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/L51zWz0.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 				details: "Bir kategoriye göz atıyor:",
 				state: categoryTitle.textContent,
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -104,7 +108,8 @@ presence.on("UpdateData", async () => {
 			categoryTitle2.textContent !== ""
 		) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/L51zWz0.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 				details: "Bir kategoriye göz atıyor:",
 				state: categoryTitle2.textContent,
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -115,7 +120,8 @@ presence.on("UpdateData", async () => {
 			showName.textContent !== ""
 		) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/L51zWz0.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 				details: "Bir diziye göz atıyor:",
 				state: showName.textContent,
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -126,14 +132,16 @@ presence.on("UpdateData", async () => {
 			userName.textContent !== ""
 		) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/L51zWz0.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 				details: "Bir profile göz atıyor:",
 				state: userName.textContent,
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (pages[page] || pages[page.slice(0, -1)]) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/L51zWz0.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 				details: "Bir sayfaya göz atıyor:",
 				state: pages[page] || pages[page.slice(0, -1)],
 				startTimestamp: Math.floor(Date.now() / 1000),
@@ -153,7 +161,8 @@ presence.on("UpdateData", async () => {
 					Math.floor(_video.duration)
 				),
 				presenceData: PresenceData = {
-					largeImageKey: "https://i.imgur.com/L51zWz0.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 					details: "Bir film izliyor:",
 					state: movieTitle.textContent,
 					smallImageKey: _video.paused ? Assets.Pause : Assets.Play,
@@ -184,7 +193,8 @@ presence.on("UpdateData", async () => {
 					Math.floor(video.duration)
 				),
 				presenceData: PresenceData = {
-					largeImageKey: "https://i.imgur.com/L51zWz0.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 					details: "Bir film izliyor:",
 					state: title.textContent,
 					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
@@ -221,7 +231,8 @@ presence.on("UpdateData", async () => {
 					Math.floor(video.duration)
 				),
 				presenceData: PresenceData = {
-					largeImageKey: "https://i.imgur.com/L51zWz0.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 					details: "Bir film izliyor:",
 					state: movieTitle.textContent,
 					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
@@ -252,7 +263,8 @@ presence.on("UpdateData", async () => {
 					Math.floor(video.duration)
 				),
 				presenceData: PresenceData = {
-					largeImageKey: "https://i.imgur.com/L51zWz0.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 					details: showName2.textContent,
 					state: episode.textContent,
 					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
@@ -274,7 +286,8 @@ presence.on("UpdateData", async () => {
 		}
 	} else {
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/L51zWz0.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Bilinmeyen Sayfa",
 			startTimestamp: Math.floor(Date.now() / 1000),

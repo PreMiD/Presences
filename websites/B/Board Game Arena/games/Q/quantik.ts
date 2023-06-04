@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const quantik: GamePresence = {
-	logo: "https://i.imgur.com/QS6Js6O.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/422.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

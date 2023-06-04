@@ -10,7 +10,7 @@ import {
 } from "../../util";
 
 const nautilus: GamePresence = {
-	logo: "https://i.imgur.com/fp5ou4i.png",
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/362.png",
 	async getData(presence: Presence) {
 		const gameState = await getCurrentGameState(presence),
 			activePlayer = await getActivePlayerId(presence),

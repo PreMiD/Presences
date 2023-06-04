@@ -3,8 +3,8 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://i.imgur.com/njcb4Wp.png",
-	FediverseLogo = "https://i.imgur.com/B0HPMOQ.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/logo.png",
+	FediverseLogo = "https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/0.png",
 }
 
 // checks if user is logged from textarea
