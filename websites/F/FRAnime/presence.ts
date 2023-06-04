@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 	];
 
 	// Detect if the client is on an anime page
-	if (pathname.split("/").includes("anime")) {
+	if (href.split("/").includes("anime")) {
 		// Get the scriptElement that contains the episode info
 		const jsonLD = JSON.parse(
 			(
