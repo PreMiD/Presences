@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	LOGO = "https://i.imgur.com/TxuMfTd.png",
+	LOGO = "https://i.imgur.com/Rysn3ig.png",
 	CHART_SEARCH = "https://i.imgur.com/IyyYNPb.jpg",
 	CHART_HYPORANKED = "https://i.imgur.com/RDMG4bg.jpg",
 	CHART_EXPONENTIAL = "https://i.imgur.com/MAi9c8K.jpg",
