@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "YJJcoolcool",
 		"id": "300929818231308288"
@@ -10,7 +10,7 @@
 		"nl": "Maak muziek in uw browser en deel ze met vrienden!"
 	},
 	"url": "onlinesequencer.net",
-	"version": "1.1.17",
+	"version": "1.1.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Online%20Sequencer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Online%20Sequencer/assets/thumbnail.png",
 	"color": "#2C5AA1",

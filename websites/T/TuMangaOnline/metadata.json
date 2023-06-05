@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -13,7 +13,7 @@
 		"lectortmo.com",
 		"tmocommunity.com"
 	],
-	"version": "1.2.18",
+	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TuMangaOnline/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TuMangaOnline/assets/thumbnail.png",
 	"color": "#3366cc",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Dominik",
 		"id": "594491170248458250"
@@ -10,7 +10,7 @@
 		"nl": "Fraudepreventie, zwendelpreventie en Discord-veiligheid aangeboden door UserCord."
 	},
 	"url": "usercord.org",
-	"version": "1.3.18",
+	"version": "1.3.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/Usercord.org/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/Usercord.org/assets/thumbnail.png",
 	"color": "#00ff00",

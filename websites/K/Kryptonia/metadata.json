@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Amaury",
 		"id": "239487545791086592"
@@ -14,7 +14,7 @@
 		"kryptonia.fr",
 		"forum.kryptonia.fr"
 	],
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kryptonia/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kryptonia/assets/thumbnail.png",
 	"color": "#12d968",

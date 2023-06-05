@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "993170607841746974",
 		"name": "பில்லி கசாப்புக்காரன்"
@@ -9,7 +9,7 @@
 		"en": "ZEE5 is the largest streaming platform where you can watch your favorite TV show before it is aired on ZEE5. Stream blockbuster movies, latest originals, music videos, live TV channels and news in HD quality & in a language of your choice."
 	},
 	"url": "www.zee5.com",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/Zee5/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Z/Zee5/assets/thumbnail.png",
 	"color": "#8230c6",

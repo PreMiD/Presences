@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Samm-Cheese",
 		"id": "372148345894076416"
@@ -11,7 +11,7 @@
 	},
 	"url": "www.multporn.net",
 	"regExp": "multporn[.]net",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Multporn/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Multporn/assets/thumbnail.png",
 	"color": "#cc0000",

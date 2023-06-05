@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -21,7 +21,7 @@
 		"preview.web.skype.com",
 		"www.skype.com"
 	],
-	"version": "1.6.6",
+	"version": "1.6.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Skype/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Skype/assets/thumbnail.png",
 	"color": "#00acf0",

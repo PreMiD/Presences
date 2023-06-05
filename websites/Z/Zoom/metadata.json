@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "MrBartusek",
 		"id": "212988300137463809"
@@ -12,7 +12,7 @@
 	},
 	"url": "zoom.us",
 	"regExp": "(.*?)[.]?zoom.us",
-	"version": "1.1.16",
+	"version": "1.1.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/Zoom/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Z/Zoom/assets/thumbnail.jpg",
 	"color": "#0e71eb",

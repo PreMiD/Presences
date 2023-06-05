@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -29,7 +29,7 @@
 		"github.com",
 		"gist.github.com"
 	],
-	"version": "2.11.6",
+	"version": "2.11.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GitHub/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GitHub/assets/thumbnail.png",
 	"color": "#000000",

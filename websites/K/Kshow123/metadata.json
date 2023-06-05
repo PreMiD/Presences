@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +10,7 @@
 		"nl": "Bekijk online Koreaanse shows met Engelse ondertiteling in hoge kwaliteit."
 	},
 	"url": "kshow123.net",
-	"version": "2.2.21",
+	"version": "2.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kshow123/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kshow123/assets/thumbnail.png",
 	"color": "#2daae1",

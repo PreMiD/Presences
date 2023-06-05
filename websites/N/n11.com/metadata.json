@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -14,7 +14,7 @@
 		"www.n11.com",
 		"urun.n11.com"
 	],
-	"version": "1.2.18",
+	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/n11.com/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/n11.com/assets/thumbnail.png",
 	"color": "#bb2025",

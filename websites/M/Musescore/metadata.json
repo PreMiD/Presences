@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Owen",
 		"id": "246778942323818506"
@@ -14,7 +14,7 @@
 		"help.musescore.com",
 		"musescore.org"
 	],
-	"version": "1.2.19",
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Musescore/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Musescore/assets/thumbnail.png",
 	"color": "#2e86e8",

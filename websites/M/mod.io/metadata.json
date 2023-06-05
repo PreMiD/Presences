@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -15,7 +15,7 @@
 		"old.mod.io"
 	],
 	"regExp": "((([\\w-]+\\.)?old|blog|docs)\\.)?mod\\.io",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/mod.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/mod.io/assets/thumbnail.jpg",
 	"color": "#07C1D8",

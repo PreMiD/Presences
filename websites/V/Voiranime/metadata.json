@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Kozou",
 		"id": "379362415428632576"
@@ -23,7 +23,7 @@
 	},
 	"url": "voiranime.com",
 	"regExp": "([a-z0-9-]+[.])*voiranime[.]com[/]",
-	"version": "2.1.7",
+	"version": "2.1.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/thumbnail.png",
 	"color": "#1a1920",

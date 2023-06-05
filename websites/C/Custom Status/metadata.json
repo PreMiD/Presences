@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -18,7 +18,7 @@
 		"eggsy-tailwind.netlify.app"
 	],
 	"regExp": "(new[.]eggsy[.]xyz|eggsy[.]xyz|eggsy-tailwind[.]netlify[.]app)[/]projects[/]premid[/]custom-status",
-	"version": "1.3.18",
+	"version": "1.3.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Custom%20Status/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Custom%20Status/assets/thumbnail.jpg",
 	"color": "#6c82cf",

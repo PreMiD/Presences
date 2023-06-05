@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Voknehzyr",
 		"id": "213305189657083905"
@@ -22,7 +22,7 @@
 		"ga_IE": "Beidh an láithreacht seo ag taispeáint rudaí a dhéanann tú de ghnáth i VK. Taispeánann sé eolas ceoil (má tá tú ar an leathanach Ceoil), faisnéis físe (agus tú ag féachaint ar fhíseán) agus faisnéis má tá tú ag féachaint ar phróifíl pobail nó úsáideora."
 	},
 	"url": "vk.com",
-	"version": "2.3.13",
+	"version": "2.3.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VK/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VK/assets/thumbnail.png",
 	"color": "#0077FF",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "293913134748401674",
 		"name": "Vitu™"
@@ -16,7 +16,7 @@
 		"pt_BR": "YomuMangás, sua biblioteca virtual de mangás, manhwas, manhuas, novels, doujins e hentais."
 	},
 	"url": "yomumangas.com",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/thumbnail.png",
 	"color": "#121212",

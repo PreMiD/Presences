@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,7 +11,7 @@
 		"nl": "Top 10-lijsten voor muziek, tv, film en videogames."
 	},
 	"url": "watchmojo.com",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WatchMojo/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WatchMojo/assets/thumbnail.jpg",
 	"color": "#01ffff",

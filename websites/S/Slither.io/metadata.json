@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -12,7 +12,7 @@
 	},
 	"url": "slither.io",
 	"regExp": "([a-z0-9-]+[.])*slither[.]io[/]",
-	"version": "1.6.17",
+	"version": "1.6.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Slither.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Slither.io/assets/thumbnail.png",
 	"color": "#319c2c",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Kazaii",
 		"id": "308054416538206217"
@@ -10,7 +10,7 @@
 		"nl": "Grailed is de one-stop-bestemming voor het kopen, verkopen en ontdekken van herenkleding."
 	},
 	"url": "www.grailed.com",
-	"version": "1.0.19",
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Grailed/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Grailed/assets/thumbnail.jpg",
 	"color": "#666666",

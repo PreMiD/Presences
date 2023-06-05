@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "theLMGN",
 		"id": "158311402677731328"
@@ -13,7 +13,7 @@
 		"nitrotype.com",
 		"www.nitrotype.com"
 	],
-	"version": "1.2.19",
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/thumbnail.png",
 	"color": "#D62F3A",

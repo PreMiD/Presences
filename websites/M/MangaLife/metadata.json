@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "youka",
 		"id": "239381559482777600"
@@ -16,7 +16,7 @@
 		"manga4life.com"
 	],
 	"regExp": "([a-z0-9]+[.])?manga4life[.]com",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/thumbnail.png",
 	"color": "#6cabdf",
