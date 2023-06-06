@@ -3,19 +3,19 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	LOGO = "https://i.imgur.com/Rysn3ig.png",
-	CHART_SEARCH = "https://i.imgur.com/IyyYNPb.jpg",
-	CHART_HYPORANKED = "https://i.imgur.com/RDMG4bg.jpg",
-	CHART_EXPONENTIAL = "https://i.imgur.com/MAi9c8K.jpg",
-	CHART_HARD = "https://i.imgur.com/6NkL3hh.jpg",
-	CHART_INTERMEDIATE = "https://i.imgur.com/hRMaDwD.jpg",
-	CHART_EASY = "https://i.imgur.com/BLQqUN1.jpg",
-	CHART_NEW = "https://i.imgur.com/PpA5uhv.jpg",
-	CHART_HISTORY = "https://i.imgur.com/LxwfWhY.jpg",
-	CHART_POSSESSION = "https://i.imgur.com/C42Fbsi.jpg",
-	CHART_HOT = "https://i.imgur.com/xt6IZxO.jpg",
-	CHART_COLD = "https://i.imgur.com/E9xnBoS.jpg",
-	CHART_MULTIPLAYER = "https://i.imgur.com/fdGfvt2.jpg",
+	LOGO = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/logo.png",
+	CHART_SEARCH = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/0.jpg",
+	CHART_HYPORANKED = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/1.jpg",
+	CHART_EXPONENTIAL = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/2.jpg",
+	CHART_HARD = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/3.jpg",
+	CHART_INTERMEDIATE = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/4.jpg",
+	CHART_EASY = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/5.jpg",
+	CHART_NEW = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/6.jpg",
+	CHART_HISTORY = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/7.jpg",
+	CHART_POSSESSION = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/8.jpg",
+	CHART_HOT = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/9.jpg",
+	CHART_COLD = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/10.jpg",
+	CHART_MULTIPLAYER = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/11.jpg",
 }
 
 presence.on("UpdateData", async () => {
