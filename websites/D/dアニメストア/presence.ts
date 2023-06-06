@@ -1,11 +1,7 @@
 {
 	const presence = new Presence({
-			clientId: "611012705306017792",
-		}),
-		strings = presence.getStrings({
-			play: "general.playing",
-			pause: "general.paused",
-		});
+		clientId: "611012705306017792",
+	});
 
 	presence.on("UpdateData", async () => {
 		if (
@@ -22,9 +18,7 @@
 					largeImageKey:
 						"https://cdn.rcd.gg/PreMiD/websites/D/d%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%B9%E3%83%88%E3%82%A2/assets/logo.png",
 					smallImageKey: isPlaying ? "play" : "pause",
-					smallImageText: isPlaying
-						? (await strings).play
-						: (await strings).pause,
+					smallImageText: isPlaying ? "playing" : "paused",
 					startTimestamp:
 						Math.floor(Date.now() / 1000) - Math.floor(video.currentTime),
 				};
