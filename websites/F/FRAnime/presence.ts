@@ -48,9 +48,9 @@ presence.on("UpdateData", async () => {
 	// Detect if the client is on an anime page
 	if (href.split("/").includes("anime")) {
 		// Get the scriptElement that contains the episode info
-		const scriptElement = document.querySelector(
+		const scriptElement = document.querySelector<HTMLScriptElement>(
 				'script[type="application/ld+json"]'
-			) as HTMLScriptElement,
+			),
 			jsonLD = scriptElement
 				? JSON.parse(scriptElement.textContent || "")
 				: null;
