@@ -1,6 +1,7 @@
 const presence = new Presence({
-	clientId: "1107321415243415574",
-});
+		clientId: "1107321415243415574",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/logo.png",
@@ -18,7 +19,13 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 		},
+		[time, privacy] = await Promise.all([
+			presence.getSetting<boolean>("time"),
+			presence.getSetting<boolean>("privacy"),
+		]),
 		{ pathname, hostname } = document.location;
+
+	if (time) presenceData.startTimestamp = browsingTimestamp;
 
 	switch (pathname) {
 		case "/home": {
@@ -52,9 +59,11 @@ presence.on("UpdateData", async () => {
 		}
 		case "/search": {
 			presenceData.smallImageText = "Search";
-			presenceData.details = `Searching ${document
-				.querySelector(".search__input")
-				.getAttribute("value")}`;
+			presenceData.details = !privacy
+				? `Searching ${document
+						.querySelector(".search__input")
+						.getAttribute("value")}`
+				: "Searching up something";
 			break;
 		}
 		case "/relationships": {
@@ -84,6 +93,11 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading Privacy and Policy";
 			break;
 		}
+		case "/follow_requests": {
+			presenceData.smallImageText = "follow_requests";
+			presenceData.details = "Looking at their follow requests";
+			break;
+		}
 	}
 
 	if (pathname.startsWith("/explore")) {
@@ -91,19 +105,25 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = "Explore";
 		presenceData.details = "On the explore";
 	} else if (pathname.startsWith("/@")) {
-		presenceData.smallImageKey = document
-			.querySelectorAll(".account__avatar")
-			[checkPositionAccountAvatar()].querySelector("img")
-			.getAttribute("src");
-		presenceData.smallImageText = `${document.location}`;
+		if (!privacy) {
+			presenceData.smallImageKey = document
+				.querySelectorAll(".account__avatar")
+				[checkPositionAccountAvatar()].querySelector("img")
+				.getAttribute("src");
+			presenceData.smallImageText = `${document.location}`;
+		}
 
-		presenceData.details = `Viewing ${pathname.split(/[@,/]+/)[1]}'s profile`;
+		presenceData.details = `Viewing ${
+			!privacy ? `${pathname.split(/[@,/]+/)[1]}'s` : "a"
+		} profile`;
 	} else if (pathname.startsWith("/settings")) {
 		presenceData.smallImageText = "Settings";
 		presenceData.details = "Viewing their settings";
 	} else if (pathname.startsWith("/tags")) {
 		presenceData.smallImageText = "tags";
-		presenceData.details = `Searching ${pathname.split("/")[2]} tag`;
+		presenceData.details = !privacy
+			? `Searching ${pathname.split("/")[2]} tag`
+			: "Searching for: tags";
 	}
 
 	presence.setActivity(presenceData);
