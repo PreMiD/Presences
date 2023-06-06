@@ -44,12 +44,6 @@ presence.on("UpdateData", async () => {
 	presenceData.largeImageKey = playerAssets.logoBg;
 	presenceData.smallImageKey = playerAssets.search;
 	presenceData.startTimestamp = animeBrowsingTimestamp;
-	presenceData.buttons = [
-		{
-			label: `🔗 ${presenceStrings.websiteName}`,
-			url: "https://franime.fr",
-		},
-	];
 
 	// Detect if the client is on an anime page
 	if (href.split("/").includes("anime")) {
