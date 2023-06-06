@@ -4,7 +4,7 @@ const presence = new Presence({
 	}),
 	// Define playerAssets
 	playerAssets = {
-		logo: "https://i.imgur.com/Fe6SuHW.png",
+		logo: "https://i.imgur.com/YKxUCs3.png",
 		logoBg: "https://i.imgur.com/byFtXWd.png",
 		pause: "https://i.imgur.com/0A75vqT.png",
 		play: "https://i.imgur.com/Dj5dekr.png",
