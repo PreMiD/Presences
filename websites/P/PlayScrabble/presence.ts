@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "",
+		clientId: "1115852112224604160",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "",
+	Logo = "https://i.imgur.com/EQMqoQD.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -69,7 +69,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Checking if ${input.value} is a word`;
 				if (
 					document.querySelector("[class*='Dictionary'] [class*='IcoMoon'].sad")
-				) presenceData.state = "It's not a word";
+				)
+					presenceData.state = "It's not a word";
 				else {
 					const definition = document.querySelector<HTMLSpanElement>(
 						"[class*='Dictionary'] > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) [class*='Textstyle']"
