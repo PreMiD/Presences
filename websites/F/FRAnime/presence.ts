@@ -23,11 +23,11 @@ const presence = new Presence({
 	},
 	// Define the strings that will be used
 	presenceStrings = {
-		browsing: "🗺️ Parcours le catalogue",
-		branding: "🍜 Animes gratuit & sans pub",
+		browsing: "Parcours le catalogue",
+		branding: "Animes gratuit & sans pub",
 		websiteName: "FRAnime.fr",
-		onPage: "📺 Sur la page",
-		watchOn: "🔗 Regarder sur FRAnime.fr",
+		onPage: "Sur la page",
+		watchOn: "Regarder sur FRAnime.fr",
 	},
 	// Define the animeBrowsingTimestamp that will be used for the elapsed time
 	animeBrowsingTimestamp = Math.floor(Date.now() / 1000);
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 		// Detect if the client is on the watching page
 		if (document.querySelector(Selectors.watching)) {
 			// Set the episode info as presence
-			presenceData.details = `📺 ${jsonLD.name} - S${
+			presenceData.details = `${jsonLD.name} - S${
 				href.split("=")[1].split("&")[0]
 			}, EP${href.split("=")[2].split("&")[0]}`;
 			presenceData.state = presenceStrings.branding;
@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
 			const video = document.querySelector("video");
 
 			// Set the playing presence
-			presenceData.details = `📺 ${jsonLD.name} - S${
+			presenceData.details = `${jsonLD.name} - S${
 				href.split("=")[1].split("&")[0]
 			}, EP${href.split("=")[2].split("&")[0]}`;
 			presenceData.state = presenceStrings.branding;
