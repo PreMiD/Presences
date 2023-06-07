@@ -12,9 +12,9 @@
 		"www.playscrabble.com",
 		"playscrabble.com"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/EQMqoQD.png",
-	"thumbnail": "https://i.imgur.com/nN0qR2H.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PlayScrabble/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PlayScrabble/assets/thumbnail.png",
 	"color": "#F04930",
 	"category": "games",
 	"tags": [
