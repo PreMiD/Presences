@@ -148,10 +148,10 @@ async function uploadImage(urltoupload: string): Promise<string> {
 	formData.append("file", file, "file");
 
 	const response = await fetch("https://pd.premid.app/create/image", {
-		method: "POST",
-		body: formData,
-	}),
-	 filename = await response.text();
+			method: "POST",
+			body: formData,
+		}),
+		filename = await response.text();
 
 	isUploading = false;
 	uploadedImages[urltoupload] = filename;
