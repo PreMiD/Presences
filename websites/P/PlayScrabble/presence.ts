@@ -62,6 +62,25 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "dictionary": {
+			const input =
+				document.querySelector<HTMLInputElement>(".dictionary-input");
+			if (input.value) {
+				presenceData.details = `Checking if ${input.value} is a word`;
+				if (
+					document.querySelector("[class*='Dictionary'] [class*='IcoMoon'].sad")
+				) {
+					presenceData.state = "It's not a word";
+				} else {
+					const definition = document.querySelector<HTMLSpanElement>(
+						"[class*='Dictionary'] > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) [class*='Textstyle']"
+					).textContent;
+					presenceData.state = "It's a word";
+					presenceData.smallImageKey = Assets.Question;
+					presenceData.smallImageText = definition.length < 256 ? definition : `${definition.slice(0, 253)}...`;
+				}
+			} else presenceData.details = "Viewing the dictionary";
+		}
 	}
 
 	presence.setActivity(presenceData);
