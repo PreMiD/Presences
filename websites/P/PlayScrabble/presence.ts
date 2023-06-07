@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location,
+		{ pathname, href } = document.location,
 		pathList = pathname.split("/").filter(Boolean);
 
 	switch (pathList[0]) {
@@ -91,6 +91,34 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLInputElement>("[class*='WordFinderSearch']")
 					.value ?? "(none)"
 			)}`;
+			break;
+		}
+		case "news-blog": {
+			if (pathList[1] === "category") {
+				presenceData.details = "Viewing blog category";
+				presenceData.state = document.querySelector<HTMLSpanElement>(
+					"[class*='NewsBlogHeader'] [class*='CategoryContent'] span:nth-child(2)"
+				).textContent;
+			} else if (pathList[1] === "author") {
+				presenceData.details = "Viewing blog author";
+				presenceData.state = document.querySelector<HTMLSpanElement>(
+					"[class*='NewsBlogHeader'] [class*='AuthorContent'] span:nth-child(2)"
+				).textContent;
+			} else if (pathList[1]) {
+				const image = document.querySelector<HTMLImageElement>(
+					"[class*='AuthorBlogAvatar']"
+				);
+				presenceData.details = "Reading a blog post";
+				presenceData.state =
+					document.querySelector<HTMLSpanElement>(
+						".individual-title"
+					).textContent;
+				presenceData.smallImageKey = image.src;
+				presenceData.smallImageText = image.nextElementSibling.textContent;
+				presenceData.buttons = [{ label: "Read Post", url: href }];
+			} else {
+				presenceData.details = "Viewing the blog";
+			}
 			break;
 		}
 	}
