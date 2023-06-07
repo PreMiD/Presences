@@ -15,7 +15,11 @@ presence.on("UpdateData", async () => {
 		{ pathname, href } = document.location,
 		pathList = pathname.split("/").filter(Boolean);
 
-	switch (pathList[0]) {
+	switch (pathList[0] ?? "") {
+		case "": {
+			presenceData.details = "Browsing the homepage";
+			break;
+		}
 		case "play": {
 			const gameElement = document.querySelector<HTMLDivElement>(
 				"[class*='ScrabbleGame_rightGamePanel'] > div > div:nth-child(2)"
@@ -42,9 +46,11 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
 						"[class*='switched_active'] [class*='Avatar'] img"
 					).src;
-					presenceData.smallImageText = document.querySelector<HTMLSpanElement>(
-						".game_player_info.switched_active_text"
-					).textContent;
+					presenceData.smallImageText = `Current player: ${
+						document.querySelector<HTMLSpanElement>(
+							".game_player_info.switched_active_text"
+						).textContent
+					}`;
 				}
 			} else {
 				presenceData.details = "Setting up a game";
@@ -87,10 +93,10 @@ presence.on("UpdateData", async () => {
 		}
 		case "word-finder": {
 			presenceData.details = "Finding words";
-			presenceData.state = `Letters: ${document.querySelector<HTMLInputElement>(
+			presenceData.state = `Letters: ${
 				document.querySelector<HTMLInputElement>("[class*='WordFinderSearch']")
-					.value ?? "(none)"
-			)}`;
+					.value || "(none)"
+			}`;
 			break;
 		}
 		case "news-blog": {
