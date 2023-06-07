@@ -69,9 +69,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Checking if ${input.value} is a word`;
 				if (
 					document.querySelector("[class*='Dictionary'] [class*='IcoMoon'].sad")
-				) {
-					presenceData.state = "It's not a word";
-				} else {
+				) presenceData.state = "It's not a word";
+				else {
 					const definition = document.querySelector<HTMLSpanElement>(
 						"[class*='Dictionary'] > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) [class*='Textstyle']"
 					).textContent;
@@ -116,10 +115,15 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = image.src;
 				presenceData.smallImageText = image.nextElementSibling.textContent;
 				presenceData.buttons = [{ label: "Read Post", url: href }];
-			} else {
-				presenceData.details = "Viewing the blog";
-			}
+			} else presenceData.details = "Viewing the blog";
 			break;
+		}
+		case "user": {
+			presenceData.details = "Viewing a user's profile";
+			presenceData.state = document.querySelector("h1").textContent;
+			presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+				"#profile-component [class*='Avatar'] img"
+			).src;
 		}
 	}
 
