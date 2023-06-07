@@ -136,25 +136,27 @@ function getTranslation(stringName: string): string {
 let isUploading = false;
 
 const uploadedImages: Record<string, string> = {};
-async function uploadImage(url: string): Promise<string> {
+async function uploadImage(urltoupload: string): Promise<string> {
 	if (isUploading) return "plex";
 
-	if (uploadedImages[url]) return uploadedImages[url];
+	if (uploadedImages[urltoupload]) return uploadedImages[urltoupload];
 	isUploading = true;
 
-	const file = await fetch(url).then(x => x.arrayBuffer()),
-		outputUrl = await fetch("https://bashupload.com", {
-			method: "POST",
-			body: file,
-		})
-			.then(x => x.text())
-			.then(x => x.match(/https(.*)/)?.[0]);
+	const file = await fetch(urltoupload).then(x => x.blob()),
+		formData = new FormData();
+
+	formData.append("file", file, "file");
+
+	const response = await fetch("https://pd.premid.app/create/image", {
+		method: "POST",
+		body: formData,
+	}),
+	 filename = await response.text();
 
 	isUploading = false;
-	uploadedImages[url] = outputUrl;
-	return outputUrl;
+	uploadedImages[urltoupload] = filename;
+	return filename;
 }
-
 function isPrivateIp(ip = location.hostname) {
 	return /^(?:(?:10|127|192(\.|-)168|172(\.|-)(?:1[6-9]|2\d|3[01]))(\.|-)|localhost)/.test(
 		ip
@@ -181,7 +183,7 @@ async function getShortURL(url: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/logo.png",
+		largeImageKey: "https://i.imgur.com/FPxlGGE.png",
 		startTimestamp: browsingTimestamp,
 	};
 
