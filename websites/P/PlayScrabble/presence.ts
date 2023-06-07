@@ -77,9 +77,21 @@ presence.on("UpdateData", async () => {
 					).textContent;
 					presenceData.state = "It's a word";
 					presenceData.smallImageKey = Assets.Question;
-					presenceData.smallImageText = definition.length < 256 ? definition : `${definition.slice(0, 253)}...`;
+					presenceData.smallImageText =
+						definition.length < 256
+							? definition
+							: `${definition.slice(0, 253)}...`;
 				}
 			} else presenceData.details = "Viewing the dictionary";
+			break;
+		}
+		case "word-finder": {
+			presenceData.details = "Finding words";
+			presenceData.state = `Letters: ${document.querySelector<HTMLInputElement>(
+				document.querySelector<HTMLInputElement>("[class*='WordFinderSearch']")
+					.value ?? "(none)"
+			)}`;
+			break;
 		}
 	}
 
