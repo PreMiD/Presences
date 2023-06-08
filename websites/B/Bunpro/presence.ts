@@ -36,24 +36,17 @@ function applyGrammarPointDetails(presenceData: PresenceData) {
 }
 
 function applyGrammarReviewDetails(presenceData: PresenceData) {
-	const detailsContainer = document.querySelector<HTMLUListElement>(
-			"header ul:nth-child(2)"
-		),
-		srsLevel = detailsContainer.children[0].textContent,
-		percent = detailsContainer.children[1].textContent,
-		reviewsRemaining = detailsContainer.children[2].textContent;
-
-	presenceData.state = `${srsLevel} | ${percent} correct | ${reviewsRemaining} remaining`;
+	const details = document.querySelector<HTMLUListElement>(
+		"header ul:nth-child(2)"
+	).children;
+	presenceData.state = `${details[0].textContent} | ${details[1].textContent} correct | ${details[2].textContent} remaining`;
 }
 
 function removeRubyCharacters(element: HTMLElement) {
 	let text = "";
 	for (const child of element.childNodes) {
-		if (child.nodeName === "RUBY") {
-			text += child.childNodes[0].textContent;
-		} else {
-			text += child.textContent;
-		}
+		if (child.nodeName === "RUBY") text += child.childNodes[0].textContent;
+		else text += child.textContent;
 	}
 	return text;
 }
