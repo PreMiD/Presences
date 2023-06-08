@@ -28,13 +28,9 @@ function getLevelIcon(level: number) {
 }
 
 function applyGrammarPointDetails(presenceData: PresenceData) {
-	const { pathname, href } = window.location;
+	const { pathname, href } = document.location;
 	presenceData.details = "Viewing a grammar point";
-	presenceData.state = (
-		document.querySelector(".grammar-point-study[style*='block']") ?? document
-	)
-		.querySelector<HTMLDivElement>(".grammar-point__text--main-kanji-new")
-		.textContent.trim();
+	presenceData.state = removeRubyCharacters(document.querySelector("h1 > div"));
 	if (!pathname.startsWith("/learn"))
 		presenceData.buttons = [{ label: "View Grammar Point", url: href }];
 }
@@ -55,8 +51,20 @@ function applyGrammarReviewDetails(presenceData: PresenceData) {
 		presenceData.state = `${percent} correct | ${reviewsRemaining} remaining`;
 }
 
+function removeRubyCharacters(element: HTMLElement) {
+	let text = "";
+	for (const child of element.childNodes) {
+		if (child.nodeName === "RUBY") {
+			text += child.childNodes[0].textContent;
+		} else {
+			text += child.textContent;
+		}
+	}
+	return text;
+}
+
 presence.on("UpdateData", () => {
-	const { pathname, hostname, href } = window.location,
+	const { pathname, hostname, href } = document.location,
 		pathSplit = pathname.split("/").slice(1),
 		presenceData: PresenceData = {
 			largeImageKey:
@@ -137,9 +145,13 @@ presence.on("UpdateData", () => {
 			}
 		}
 	} else {
-		const level = +document
-			.querySelector<HTMLParagraphElement>(".header-user-level")
-			?.textContent.match(/\d+/)[0];
+		const level = +(
+			document.querySelector<HTMLParagraphElement>(".header-user-level") ||
+			document
+				.querySelector<HTMLImageElement>("header li > button img")
+				?.closest<HTMLDivElement>("button > div")
+				.querySelector<HTMLParagraphElement>("div:nth-child(2) p:last-child")
+		)?.textContent.match(/\d+/)[0];
 		if (level) {
 			presenceData.smallImageKey = getLevelIcon(level);
 			presenceData.smallImageText = `Level ${level}`;
