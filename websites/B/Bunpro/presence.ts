@@ -36,19 +36,14 @@ function applyGrammarPointDetails(presenceData: PresenceData) {
 }
 
 function applyGrammarReviewDetails(presenceData: PresenceData) {
-	const SRSLevel = document
-			.querySelector<HTMLDivElement>(".review__stats.srs-tracker")
-			?.textContent.trim(),
-		percent = document
-			.querySelector<HTMLDivElement>(".review__stats.review-percent")
-			.textContent.trim(),
-		[reviewsRemaining] = document
-			.querySelector<HTMLDivElement>("#reviews")
-			.textContent.match(/\d+/);
-	if (SRSLevel)
-		presenceData.state = `${SRSLevel} | ${percent} correct | ${reviewsRemaining} remaining`;
-	else
-		presenceData.state = `${percent} correct | ${reviewsRemaining} remaining`;
+	const detailsContainer = document.querySelector<HTMLUListElement>(
+			"header ul:nth-child(2)"
+		),
+		srsLevel = detailsContainer.children[0].textContent,
+		percent = detailsContainer.children[1].textContent,
+		reviewsRemaining = detailsContainer.children[2].textContent;
+
+	presenceData.state = `${srsLevel} | ${percent} correct | ${reviewsRemaining} remaining`;
 }
 
 function removeRubyCharacters(element: HTMLElement) {
@@ -146,7 +141,7 @@ presence.on("UpdateData", () => {
 		}
 	} else {
 		const level = +(
-			document.querySelector<HTMLParagraphElement>(".header-user-level") ||
+			document.querySelector<HTMLParagraphElement>(".header-user-level") ??
 			document
 				.querySelector<HTMLImageElement>("header li > button img")
 				?.closest<HTMLDivElement>("button > div")
@@ -192,12 +187,10 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "learn": {
-				if (document.querySelector(".grammar-point-study"))
-					applyGrammarPointDetails(presenceData);
-				else {
+				if (document.querySelector("#js-quiz")) {
 					presenceData.details = "Learning new grammar";
 					applyGrammarReviewDetails(presenceData);
-				}
+				} else applyGrammarPointDetails(presenceData);
 				break;
 			}
 			case "lessons": {
