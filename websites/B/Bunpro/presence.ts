@@ -207,9 +207,7 @@ presence.on("UpdateData", () => {
 					if (pathSplit[2]) applyGrammarPointDetails(presenceData);
 					else {
 						presenceData.details = "Viewing a grammar path";
-						presenceData.state = document
-							.querySelector<HTMLHeadingElement>("h1")
-							.childNodes[0].textContent.trim();
+						presenceData.state = document.querySelector("h2").textContent;
 						presenceData.buttons = [{ label: "View Grammar Path", url: href }];
 					}
 				} else presenceData.details = "Browsing grammar paths";
