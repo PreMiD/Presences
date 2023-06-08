@@ -229,11 +229,17 @@ presence.on("UpdateData", () => {
 			}
 			case "summary": {
 				presenceData.details = "Viewing review summary";
-				presenceData.state = `${
-					document
-						.querySelector<HTMLDivElement>(".tab-highlight")
-						.textContent.match(/\w+(?=:)/)[0]
-				} - ${document.querySelector("h1").textContent}`;
+				const correctElement = document.querySelector<HTMLHeadingElement>(
+					"h4.text-quiz-correct"
+				);
+				if (correctElement) {
+					presenceData.state = `${correctElement.textContent} correct / ${
+						document.querySelector<HTMLHeadingElement>("h4.text-quiz-incorrect")
+							.textContent
+					} incorrect (${
+						document.querySelector<HTMLHeadingElement>("aside h3").textContent
+					})`;
+				}
 				break;
 			}
 			case "user": {
