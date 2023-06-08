@@ -263,7 +263,7 @@ presence.on("UpdateData", () => {
 						}
 						case "badges": {
 							for (const [i, badgeContainer] of document
-								.querySelectorAll<HTMLDivElement>(".bunpro-badge.user-badge")
+								.querySelectorAll<HTMLDivElement>(".user-profile-badge--earned")
 								.entries()) {
 								slideshow.addSlide(
 									i.toString(),
@@ -274,16 +274,16 @@ presence.on("UpdateData", () => {
 											badgeContainer.querySelector("h3").textContent
 										} - ${
 											badgeContainer.querySelector<HTMLDivElement>(
-												".badge-requirement"
+												".user-profile-badge--requirement"
 											).textContent
 										}`,
 										largeImageKey:
 											badgeContainer.querySelector<HTMLImageElement>(
-												".badge-icon"
+												".user-profile-badge--icon"
 											).src,
 										smallImageText:
 											badgeContainer.querySelector<HTMLDivElement>(
-												".badge-flavor-text"
+												".user-profile-badge--flavor-text"
 											).textContent,
 									},
 									5000
