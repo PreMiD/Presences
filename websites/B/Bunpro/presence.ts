@@ -222,7 +222,7 @@ presence.on("UpdateData", () => {
 				presenceData.details = "Browsing practice reading passages";
 				break;
 			}
-			case "study": {
+			case "reviews": {
 				presenceData.details = "Doing reviews";
 				applyGrammarReviewDetails(presenceData);
 				break;
