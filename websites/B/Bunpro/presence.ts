@@ -158,9 +158,7 @@ presence.on("UpdateData", () => {
 			}
 			case "cram": {
 				presenceData.details = "Cramming";
-				if (
-					document.querySelector<HTMLDivElement>("#new-cram")
-				)
+				if (document.querySelector<HTMLDivElement>("#new-cram"))
 					presenceData.state = "Selecting grammar to cram";
 				else applyGrammarReviewDetails(presenceData);
 				break;
@@ -310,9 +308,9 @@ presence.on("UpdateData", () => {
 			case "vocabs": {
 				if (pathSplit[1]) {
 					presenceData.details = "Viewing a vocabulary";
-					presenceData.state = `${document.querySelector("h2").textContent} - ${
-						document.querySelector("h6").textContent
-					}`;
+					presenceData.state = `${removeRubyCharacters(
+						document.querySelector<HTMLDivElement>("h1 > div")
+					)} - ${document.querySelector("h2").textContent}`;
 					presenceData.buttons = [{ label: "View Vocabulary", url: href }];
 				} else {
 					presenceData.details = "Searching for vocabulary";
