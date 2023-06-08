@@ -159,8 +159,7 @@ presence.on("UpdateData", () => {
 			case "cram": {
 				presenceData.details = "Cramming";
 				if (
-					document.querySelector<HTMLDivElement>(".cram-start").style
-						.display !== "none"
+					document.querySelector<HTMLDivElement>("#new-cram")
 				)
 					presenceData.state = "Selecting grammar to cram";
 				else applyGrammarReviewDetails(presenceData);
