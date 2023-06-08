@@ -245,20 +245,16 @@ presence.on("UpdateData", () => {
 						case "": {
 							presenceData.details = "Viewing their profile";
 							const [daysStudied, studyStreak, level, xp] =
-								document.querySelector<HTMLDivElement>(
-									"h2 + div + div"
-								).children;
-							presenceData.state = `${
-								daysStudied.querySelector<HTMLDivElement>("h3 + div")
-									.textContent
-							} days studied | ${
-								studyStreak.querySelector<HTMLDivElement>("h3 + div")
-									.textContent
-							} streak | Level ${
-								level.querySelector<HTMLDivElement>("h3 + div").textContent
-							} (${
-								xp.querySelector<HTMLDivElement>("h3 + div").textContent
-							} XP)`;
+								document.querySelector<HTMLDivElement>("h2 + div").children;
+							presenceData.state = `${daysStudied
+								.querySelector("p")
+								.textContent.trim()} days studied | ${studyStreak
+								.querySelector("p")
+								.textContent.trim()} streak | Level ${level
+								.querySelector("p")
+								.textContent.trim()} (${xp
+								.querySelector("p")
+								.textContent.trim()} XP)`;
 							break;
 						}
 						case "badges": {
