@@ -35,7 +35,7 @@ const presence = new Presence({
 // Main function
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {},
-		{ href } = window.location;
+		{ href } = document.location;
 
 	// Home screen presence
 	presenceData.details = presenceStrings.browsing;
