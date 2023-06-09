@@ -51,6 +51,8 @@ presence.on("UpdateData", async () => {
 			"/fesMatchConcert": { details: "グレードフェスをプレイ中" },
 			"/jewelCounter": { details: "フェザージュエルミッション" },
 			"/help": { details: "ヘルプを閲覧中" },
+			"/fesTours": { details: "フェスツアーズをプレイ中" },
+		        "/fesToursConcert": "/fesTours",
 		},
 		pathDetails = pathMap[pathname]?.details;
 	if (typeof pathDetails !== "undefined") presenceData.details = pathDetails;
