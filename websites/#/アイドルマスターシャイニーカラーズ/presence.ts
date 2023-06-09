@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 			"/jewelCounter": { details: "フェザージュエルミッション" },
 			"/help": { details: "ヘルプを閲覧中" },
 			"/fesTours": { details: "フェスツアーズをプレイ中" },
-		        "/fesToursConcert": "/fesTours",
+		        "/fesToursConcert": { details: "フェスツアーズをプレイ中" },
 		},
 		pathDetails = pathMap[pathname]?.details;
 	if (typeof pathDetails !== "undefined") presenceData.details = pathDetails;
