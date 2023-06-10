@@ -1,8 +1,7 @@
-// Init the client
 const presence = new Presence({
 		clientId: "1102272266278027296",
 	}),
-	// Define playerAssets
+      
 	playerAssets = {
 		logo: "https://i.imgur.com/YKxUCs3.png",
 		logoBg: "https://i.imgur.com/byFtXWd.png",
@@ -10,7 +9,7 @@ const presence = new Presence({
 		play: "https://i.imgur.com/Dj5dekr.png",
 		search: "https://i.imgur.com/C3CetGw.png",
 	},
-	// Define the player selector, that will be used to detect the correct player
+      
 	Selectors = {
 		watching:
 			'div[class="aspect-video border-[1.5px] border-gray-700 rounded-lg flex w-full justify-center align-items-center"]',
@@ -21,7 +20,7 @@ const presence = new Presence({
 			FRAnime: 'video[class="art-video"]',
 		},
 	},
-	// Define the strings that will be used
+      
 	presenceStrings = {
 		browsing: "Parcours le catalogue",
 		branding: "Animes gratuit & sans pub",
@@ -29,15 +28,14 @@ const presence = new Presence({
 		onPage: "Sur la page",
 		watchOn: "Regarder sur FRAnime.fr",
 	},
-	// Define the animeBrowsingTimestamp that will be used for the elapsed time
+      
 	animeBrowsingTimestamp = Math.floor(Date.now() / 1000);
 
-// Main function
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {},
 		{ href } = document.location;
 
-	// Home screen presence
+	// Home page
 	presenceData.details = presenceStrings.browsing;
 	presenceData.state = presenceStrings.branding;
 	presenceData.smallImageText = presenceStrings.websiteName;
@@ -45,7 +43,7 @@ presence.on("UpdateData", async () => {
 	presenceData.smallImageKey = playerAssets.search;
 	presenceData.startTimestamp = animeBrowsingTimestamp;
 
-	// Detect if the client is on an anime page
+	// Anime page
 	if (href.split("/").includes("anime")) {
 		// Get the scriptElement that contains the episode info
 		const scriptElement = document.querySelector<HTMLScriptElement>(
@@ -55,7 +53,6 @@ presence.on("UpdateData", async () => {
 				? JSON.parse(scriptElement.textContent || "")
 				: null;
 
-		// Set the anime page presence
 		presenceData.details = `${presenceStrings.onPage} ${jsonLD.name}`;
 		presenceData.state = presenceStrings.branding;
 		presenceData.smallImageText = presenceStrings.websiteName;
@@ -69,9 +66,9 @@ presence.on("UpdateData", async () => {
 			},
 		];
 
-		// Detect if the client is on the watching page
+		// watching page
 		if (document.querySelector(Selectors.watching)) {
-			// Set the episode info as presence
+			
 			presenceData.details = `${jsonLD.name} - S${
 				href.split("=")[1].split("&")[0]
 			}, EP${href.split("=")[2].split("&")[0]}`;
@@ -89,21 +86,18 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 
-			// Detect if a player is loaded
+			// player is loaded
 		} else if (document.querySelectorAll("video")) {
 			const video = document.querySelector("video");
-
-			// Set the playing presence
+			
 			presenceData.details = `${jsonLD.name} - S${
 				href.split("=")[1].split("&")[0]
 			}, EP${href.split("=")[2].split("&")[0]}`;
 			presenceData.state = presenceStrings.branding;
 			presenceData.smallImageText = presenceStrings.websiteName;
 
-			// Get the timestamp
 			presenceData.startTimestamp = presence.getTimestampsfromMedia(video)[0];
 
-			// Get the remaining timestamp
 			presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
 			presenceData.buttons = [
 				{
@@ -121,6 +115,5 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	}
-	// Update the presence
 	presence.setActivity(presenceData);
 });
