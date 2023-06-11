@@ -1,14 +1,10 @@
 const presence = new Presence({
 	clientId: "1090817608154108046",
-}),
-strings = presence.getStrings({
-	play: "presence.playback.playing",
-	pause: "presence.playback.paused",
 });
 
 const enum Assets {
 Rumble = "https://i.imgur.com/97X6RHQ.png",
-Live = "https://i.imgur.com/LOh4SHJ.png",
+LiveDot = "https://i.imgur.com/LOh4SHJ.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -16,10 +12,10 @@ const [privacy, buttons, channelPic] = await Promise.all([
 	presence.getSetting<boolean>("privacy"),
 	presence.getSetting<boolean>("buttons"),
 	presence.getSetting<boolean>("channelPic"),
-]);
-const { pathname } = document.location;
+]),
+ { pathname } = document.location,
 
-const presenceData: PresenceData = {
+ presenceData: PresenceData = {
 	largeImageKey: Assets.Rumble,
 };
 
@@ -30,7 +26,7 @@ if (
 	!pathname.startsWith("/videos")
 ) {
 	if (document.querySelector(".chat--header")) {
-		(presenceData.smallImageKey = Assets.Live),
+		(presenceData.smallImageKey = Assets.LiveDot),
 			(presenceData.smallImageText = "Live");
 	}
 
@@ -126,7 +122,7 @@ if (
 	}
 	if (channelPic)
 		presenceData.largeImageKey = document.querySelector("img").src;
-} else if (pathname == "/") {
+} else if (pathname === "/") {
 	presenceData.details = "Browsing";
 	presenceData.state = "Home";
 } else if (
@@ -138,10 +134,10 @@ if (
 ) {
 	presenceData.details = "Browsing";
 	presenceData.state = document.querySelector("h1").textContent;
-} else if (pathname.startsWith("/upload")) {
+} else if (pathname.startsWith("/upload")) 
 	presenceData.details = "Uploading a video";
-} else if (pathname.startsWith("/account")) {
+ else if (pathname.startsWith("/account")) 
 	presenceData.details = "Managing their account";
-}
+
 presence.setActivity(presenceData);
 });
