@@ -4,7 +4,6 @@ const presence = new Presence({
 
 const enum Assets {
 	Rumble = "https://i.imgur.com/97X6RHQ.png",
-	LiveDot = "https://i.imgur.com/LOh4SHJ.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -19,13 +18,14 @@ presence.on("UpdateData", async () => {
 		};
 
 	if (
+		document.querySelector<HTMLMetaElement>("meta[property='og:url']") &&
 		document
 			.querySelector<HTMLMetaElement>("meta[property='og:url']")
 			.content.startsWith("https://rumble.com/v") &&
 		!pathname.startsWith("/videos")
 	) {
 		if (document.querySelector(".chat--header")) {
-			(presenceData.smallImageKey = Assets.LiveDot),
+			(presenceData.smallImageKey = Assets.Live),
 				(presenceData.smallImageText = "Live");
 		}
 
@@ -42,7 +42,9 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch",
-					url: document.querySelectorAll("meta")[5].content,
+					url: document.querySelector<HTMLMetaElement>(
+						"meta[property='og:url']"
+					).content,
 				},
 			];
 			if (presenceData.smallImageKey) presenceData.buttons[0].label += " Live";
@@ -68,9 +70,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector<HTMLVideoElement>(
 			".media-heading-name"
 		).textContent;
-
-		presence.setActivity(presenceData);
 	} else if (
+		document.querySelector<HTMLMetaElement>("meta[property='og:url']") &&
 		document
 			.querySelector<HTMLMetaElement>("meta[property='og:url']")
 			.content.startsWith("https://rumble.com/c/")
@@ -88,16 +89,19 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Channel",
-					url: document.querySelectorAll("meta")[4].content,
+					url: document.querySelector<HTMLMetaElement>(
+						"meta[property='og:url']"
+					).content,
 				},
 			];
 		}
-		if (channelPic && document.querySelectorAll("img")[1].currentSrc) {
-			// extract src url from '.listing-header--thumb' element
-			presenceData.largeImageKey =
-				document.querySelectorAll("img")[1].currentSrc;
+		if (channelPic && document.querySelector(".channel-header--thumb")) {
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				".channel-header--thumb"
+			).currentSrc;
 		}
 	} else if (
+		document.querySelector<HTMLMetaElement>("meta[property='og:url']") &&
 		document
 			.querySelector<HTMLMetaElement>("meta[property='og:url']")
 			.content.startsWith("https://rumble.com/user/")
@@ -115,7 +119,9 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View User",
-					url: document.querySelectorAll("meta")[8].content,
+					url: document.querySelector<HTMLMetaElement>(
+						"meta[property='og:url']"
+					).content,
 				},
 			];
 		}
@@ -125,8 +131,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing";
 		presenceData.state = "Home";
 	} else if (
-		(pathname.startsWith("/editor-picks") &&
-			pathname.startsWith("/subscriptions")) ||
+		pathname.startsWith("/editor-picks") ||
+		pathname.startsWith("/subscriptions") ||
 		pathname.startsWith("/videos") ||
 		pathname.startsWith("/watch-history") ||
 		pathname.startsWith("/category/")
@@ -137,6 +143,12 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Uploading a video";
 	else if (pathname.startsWith("/account"))
 		presenceData.details = "Managing their account";
+	else if (pathname.startsWith("/browse")) {
+		presenceData.details = "Browsing";
+		presenceData.state = document.querySelector(
+			".links__title--active"
+		).textContent;
+	}
 
 	presence.setActivity(presenceData);
 });
