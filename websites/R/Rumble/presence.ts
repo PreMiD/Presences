@@ -13,15 +13,20 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("channelPic"),
 		]),
 		{ pathname } = document.location,
+		standardPathname = document.querySelector<HTMLMetaElement>(
+			"meta[property='og:url']"
+		)
+			? document
+					.querySelector<HTMLMetaElement>("meta[property='og:url']")
+					.content.slice(18)
+			: null,
 		presenceData: PresenceData = {
 			largeImageKey: Assets.Rumble,
 		};
 
 	if (
-		document.querySelector<HTMLMetaElement>("meta[property='og:url']") &&
-		document
-			.querySelector<HTMLMetaElement>("meta[property='og:url']")
-			.content.startsWith("https://rumble.com/v") &&
+		standardPathname &&
+		standardPathname.startsWith("/v") &&
 		!pathname.startsWith("/videos")
 	) {
 		if (document.querySelector(".chat--header")) {
@@ -42,9 +47,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch",
-					url: document.querySelector<HTMLMetaElement>(
-						"meta[property='og:url']"
-					).content,
+					url: `https://rumble.com${standardPathname}`,
 				},
 			];
 			if (presenceData.smallImageKey) presenceData.buttons[0].label += " Live";
@@ -70,12 +73,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector<HTMLVideoElement>(
 			".media-heading-name"
 		).textContent;
-	} else if (
-		document.querySelector<HTMLMetaElement>("meta[property='og:url']") &&
-		document
-			.querySelector<HTMLMetaElement>("meta[property='og:url']")
-			.content.startsWith("https://rumble.com/c/")
-	) {
+	} else if (standardPathname && standardPathname.startsWith("/c/")) {
 		presenceData.details = "Viewing channel";
 
 		if (privacy) {
@@ -89,9 +87,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Channel",
-					url: document.querySelector<HTMLMetaElement>(
-						"meta[property='og:url']"
-					).content,
+					url: `https://rumble.com${standardPathname}`,
 				},
 			];
 		}
@@ -100,12 +96,7 @@ presence.on("UpdateData", async () => {
 				".channel-header--thumb"
 			).currentSrc;
 		}
-	} else if (
-		document.querySelector<HTMLMetaElement>("meta[property='og:url']") &&
-		document
-			.querySelector<HTMLMetaElement>("meta[property='og:url']")
-			.content.startsWith("https://rumble.com/user/")
-	) {
+	} else if (standardPathname && standardPathname.startsWith("/user/")) {
 		presenceData.details = "Viewing user";
 
 		if (privacy) {
@@ -119,9 +110,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View User",
-					url: document.querySelector<HTMLMetaElement>(
-						"meta[property='og:url']"
-					).content,
+					url: `https://rumble.com${standardPathname}`,
 				},
 			];
 		}
