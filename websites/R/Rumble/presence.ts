@@ -30,8 +30,8 @@ presence.on("UpdateData", async () => {
 		!pathname.startsWith("/videos")
 	) {
 		if (document.querySelector(".chat--header")) {
-			(presenceData.smallImageKey = Assets.Live),
-				(presenceData.smallImageText = "Live");
+			presenceData.smallImageKey = Assets.Live;
+			presenceData.smallImageText = "Live";
 		}
 
 		if (privacy) {
