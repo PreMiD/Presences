@@ -1,14 +1,12 @@
 const presence1 = new Presence({ clientId: "1112901248421732462" });
-const browsingStamp1 = Math.floor(Date.now() / 1000);
 
 presence1.on("UpdateData", () => {
 const presenceData: PresenceData = {
 	largeImageKey: "app_icon",
-	startTimestamp: browsingStamp1
+	startTimestamp: Math.floor(Date.now() / 1000)
 	};
 
-	const pathParts = document.location.pathname.split("/");
-	const username = pathParts.pop();
+	const username = document.location.pathname.split("/").pop();
   
   if (document.location.pathname === "/") {
     presenceData.details = "Viewing:";
