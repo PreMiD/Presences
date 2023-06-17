@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "642807365695176724",
+		"name": "ipexa"
+	},
+	"service": "Kick",
+	"description": {
+		"en": "Presence for the Kick Streaming Platform"
+	},
+	"url": "kick.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/kVabJjN.png",
+	"thumbnail": "https://i.imgur.com/kVabJjN.png",
+	"color": "#52fb18",
+	"category": "socials",
+	"tags": [
+		"kick",
+		"streaming",
+		"gaming",
+		"livestreaming",
+		"live",
+		"stream",
+		"community"
+	]
+}
