@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "562755652921982986",
+		"name": "PrimeMinus"
+	},
+	"service": "Rumble",
+	"description": {
+		"en": "Rumble is an alternate online video sharing platform for people with something to say and something to share, who believe in authentic expression, and want to control the value of their own creations."
+	},
+	"url": "rumble.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/97X6RHQ.png",
+	"thumbnail": "https://i.imgur.com/HbW16kR.jpg",
+	"color": "#85c742",
+	"category": "videos",
+	"tags": [
+		"video",
+		"media"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Buttons",
+			"icon": "fas fa-link",
+			"value": true
+		},
+		{
+			"id": "channelPic",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Channel's Picture",
+			"icon": "fas fa-user-circle",
+			"value": true
+		}
+	]
+}
