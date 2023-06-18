@@ -95,9 +95,7 @@ presence.on("UpdateData", () => {
 	  presenceData.details = pathDetails[1].details;
 	  presenceData.state = pathDetails[1].state;
     //slideshow.deleteAllSlides();
-    if (pathDetails[1].largeImageKey) {
-      presenceData.largeImageKey = pathDetails[1].largeImageKey;
-    }
+    if (pathDetails[1].largeImageKey) presenceData.largeImageKey = pathDetails[1].largeImageKey;
 	} else { // could check the pathname (There shouldn't be anything after the username)
 	  const username = document.location.pathname.split("/").pop();
 	  if (username) {
@@ -107,10 +105,7 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 		  { label: "Watch Stream", url: `https://kick.com/${username}` }
 		];
-	  } else {
-		presenceData.details = "Viewing Kick.com";
-		//presenceData.state = "Kick";
-	  }
+	  } else presenceData.details = "Viewing Kick.com";
 	} 
   presence.setActivity(presenceData);
  });
