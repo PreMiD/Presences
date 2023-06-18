@@ -95,13 +95,11 @@ presence.on("UpdateData", () => {
 	  presenceData.details = pathDetails[1].details;
 	  presenceData.state = pathDetails[1].state;
     //slideshow.deleteAllSlides();
-    if(pathDetails[1].largeImageKey){
+    if (pathDetails[1].largeImageKey) {
       presenceData.largeImageKey = pathDetails[1].largeImageKey;
     }
 	} else { // could check the pathname (There shouldn't be anything after the username)
 	  const username = document.location.pathname.split("/").pop();
-	  const pagePath = document.location.pathname;
-    console.log(pagePath)
 	  if (username) {
 	    // could get the streamer profile image to display.
 		presenceData.details = "Watching";
@@ -113,9 +111,6 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Viewing Kick.com";
 		//presenceData.state = "Kick";
 	  }
-	} // could add an else for /categories/*/{topic} and also display the cover image
-	// <img class="w-full object-cover h-full">
-	// Specifically the alt contains a nicely formatted form of the game/topic
-
+	} 
   presence.setActivity(presenceData);
- })
+ });
