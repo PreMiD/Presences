@@ -97,7 +97,7 @@ presence.on("UpdateData", () => {
     //slideshow.deleteAllSlides();
     if (pathDetails[1].largeImageKey) presenceData.largeImageKey = pathDetails[1].largeImageKey;
 	} else { // could check the pathname (There shouldn't be anything after the username)
-	  const username = document.location.pathname.split("/").pop();
+	  const username = pathname.split("/").pop();
 	  if (username) {
 	    // could get the streamer profile image to display.
 		presenceData.details = "Watching";
