@@ -1,26 +1,26 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
-		"id": "642807365695176724",
-		"name": "ipexa"
+		"name": "IPEXA",
+		"id": "642807365695176724"
 	},
+	"contributors": [],
 	"service": "Kick",
-	"description": {
-		"en": "Presence for the Kick Streaming Platform"
-	},
-	"url": "kick.com",
-	"version": "1.0.0",
+	"description": {"en": "Kick: The new Streaming service, that offers you many different Streaming Content"},
+	"url": [
+		"kick.com",
+		"help.kick.com"
+	],
+	"version": "1.1.0",
 	"logo": "https://i.imgur.com/kVabJjN.png",
 	"thumbnail": "https://i.imgur.com/kVabJjN.png",
-	"color": "#52fb18",
-	"category": "socials",
+	"color": "#53fc18",
+	"category": "games",
 	"tags": [
-		"kick",
+		"games",
 		"streaming",
-		"gaming",
-		"livestreaming",
-		"live",
 		"stream",
-		"community"
+		"livestream",
+		"stream"
 	]
 }
