@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Rumble = "https://i.imgur.com/97X6RHQ.png",
+	Rumble = "https://cdn.rcd.gg/PreMiD/websites/R/Rumble/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
