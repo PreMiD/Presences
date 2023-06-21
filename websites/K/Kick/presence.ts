@@ -2,23 +2,20 @@ const presence = new Presence({ clientId: "1112901248421732462" });
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/kVabJjN.png",
-			startTimestamp: Date.now(),
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		pathDetailsMap = {
 			"/terms-of-service": {
 				details: "Reading",
 				state: "Terms of Service",
-				largeImageKey: "",
 			},
 			"/privacy-policy": {
 				details: "Reading",
 				state: "Privacy Policy",
-				largeImageKey: "",
 			},
 			"/dmca-policy": {
 				details: "Reading",
 				state: "DMCA Policy",
-				largeImageKey: "",
 			},
 		},
 		{ pathname } = document.location,
@@ -49,8 +46,6 @@ presence.on("UpdateData", () => {
 	} else if (pathDetails) {
 		presenceData.details = pathDetails[1].details;
 		presenceData.state = pathDetails[1].state;
-		if (pathDetails[1].largeImageKey)
-			presenceData.largeImageKey = pathDetails[1].largeImageKey;
 	} else {
 		const username = pathname.split("/").pop();
 		if (username) {
