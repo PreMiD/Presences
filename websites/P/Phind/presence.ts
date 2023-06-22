@@ -5,12 +5,12 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const assets = {
-			phindLogo: "https://i.imgur.com/fakWcYA.png",
-			search: "https://i.imgur.com/a5qsEbL.png",
+	const Assets = {
+			PhindLogo: "https://i.imgur.com/fakWcYA.png",
+			Search: "https://i.imgur.com/a5qsEbL.png",
 		},
 		presenceData: PresenceData = {
-			largeImageKey: assets.phindLogo,
+			largeImageKey: Assets.PhindLogo,
 			details: "Browsing Phind",
 		},
 		pathDetailsMap = {
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 	} else if (searchResults.length > 0 && !privateMode) {
 		// we must be on /search
 		presenceData.details = displaySearch ? "Searching for:" : "Searching";
-		presenceData.smallImageKey = assets.search;
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 		if (shareSearch) {
 			presenceData.buttons = [
