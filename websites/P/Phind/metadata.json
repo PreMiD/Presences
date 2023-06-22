@@ -5,13 +5,16 @@
 		"name": "GreenMan36"
 	},
 	"service": "Phind",
-	"description": {
+  "description": {
 		"en": "Phind is an AI-powered search engine that provides immediate, detailed answers to various questions. Drawing from multiple internet sources, it ensures up-to-date and accurate information, making the search for answers as simple and interactive as having a conversation with a friend.",
-		"fr": "Phind est un moteur de recherche alimenté par l'IA qui fournit des réponses immédiates et détaillées à diverses questions. En puisant dans plusieurs sources internet, il garantit une information précise et à jour, rendant la recherche de réponses aussi simple et interactive qu'une conversation avec un ami.",
+    "fr": "Phind est un moteur de recherche alimenté par l'IA qui fournit des réponses immédiates et détaillées à diverses questions. En puisant dans plusieurs sources internet, il garantit une information précise et à jour, rendant la recherche de réponses aussi simple et interactive qu'une conversation avec un ami.",
 		"nl": "Phind is een door AI aangedreven zoekmachine die directe, gedetailleerde antwoorden geeft op verschillende vragen. Door informatie te halen uit meerdere internetbronnen, zorgt het voor actuele en nauwkeurige informatie, waardoor het zoeken naar antwoorden zo eenvoudig en interactief is als een gesprek met een vriend.",
 		"de": "Phind ist eine KI-betriebene Suchmaschine, die sofortige, detaillierte Antworten auf verschiedene Fragen liefert. Sie zieht Informationen aus verschiedenen Internetquellen heran und gewährleistet so aktuelle und genaue Informationen, sodass die Suche nach Antworten so einfach und interaktiv ist wie ein Gespräch mit einem Freund.",
-		"es": "Phind es un motor de búsqueda impulsado por IA que proporciona respuestas inmediatas y detalladas a diversas preguntas. Extrayendo información de múltiples fuentes de internet, asegura información precisa y actualizada, haciendo que la búsqueda de respuestas sea tan simple e interactiva como tener una conversación con un amigo."
-	},
+		"es": "Phind es un motor de búsqueda impulsado por IA que proporciona respuestas inmediatas y detalladas a diversas preguntas. Extrayendo información de múltiples fuentes de internet, asegura información precisa y actualizada, haciendo que la búsqueda de respuestas sea tan simple e interactiva como tener una conversación con un amigo.",
+		"ar_SA": "Phind هو محرك بحث مدعوم بالذكاء الصناعي يوفر إجابات فورية ومفصلة على مختلف الأسئلة. باستخدام مصادر متعددة من الإنترنت، يضمن معلومات حديثة ودقيقة، مما يجعل البحث عن الإجابات بسيطًا وتفاعليًا كما لو كنت تجري محادثة مع صديق.",
+		"ru": "Phind - это поисковая система, работающая на основе искусственного интеллекта, которая предоставляет мгновенные подробные ответы на различные вопросы. Используя множество интернет-источников, она обеспечивает актуальную и точную информацию, делая поиск ответов таким простым и интерактивным, как беседа с другом.",
+		"it": "Phind è un motore di ricerca alimentato da IA che fornisce risposte immediate e dettagliate a varie domande. Attingendo da molteplici fonti internet, assicura informazioni aggiornate e accurate, rendendo la ricerca di risposte semplice e interattiva come avere una conversazione con un amico."
+  },
 	"url": "www.phind.com",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/6fdQsQJ.png",
