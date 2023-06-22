@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Chihiro Fujisaki",
 		"id": "560183438393737264"
@@ -9,9 +9,9 @@
 		"en": "HegartyMaths is an educational tool used by schools in the United Kingdom to set mathematics homework tasks."
 	},
 	"url": "hegartymaths.com",
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/Z8MBnw9.jpg",
-	"thumbnail": "https://i.imgur.com/67EEyre.png",
+	"version": "1.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HegartyMaths/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HegartyMaths/assets/thumbnail.png",
 	"color": "#33a7e0",
 	"category": "other",
 	"tags": [

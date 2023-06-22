@@ -20,7 +20,8 @@ function capitalise(splitStr: string[]): string {
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/ChKRz5r.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/V/Viaplay/assets/logo.png",
 		startTimestamp,
 	};
 	const url = window.location.href;
@@ -33,8 +34,9 @@ presence.on("UpdateData", async () => {
 			tokens = url.split("/");
 		presenceData = {
 			details: capitalise(tokens[6].split("-")),
-			largeImageKey: "https://i.imgur.com/ChKRz5r.png",
-			smallImageKey: video.paused ? "pause" : "play",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/Viaplay/assets/logo.png",
+			smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 			smallImageText: video.paused
 				? (await strings).pause
 				: (await strings).play,
@@ -54,7 +56,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (url.includes("#search")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else presenceData.details = "Browsing";
 
 	presence.setActivity(presenceData, true);

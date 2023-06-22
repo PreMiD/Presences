@@ -24,7 +24,8 @@ presence.on("UpdateData", async () => {
 	} else {
 		presenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/C8eRVDU.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BreathFM/assets/0.jpg",
 		};
 		switch (location.pathname.replace("/", "")) {
 			case "history":

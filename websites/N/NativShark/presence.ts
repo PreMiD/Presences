@@ -22,7 +22,8 @@ const presence: Presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/bnlBeoi.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/NativShark/assets/logo.png",
 			startTimestamp,
 		},
 		{ pathname } = window.location;

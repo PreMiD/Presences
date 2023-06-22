@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -13,9 +13,9 @@
 		"nl": "yabancıdizi is een van de grootste Turkse buitenlandse tv-showproviders op internet."
 	},
 	"url": "yabancidizi.pro",
-	"version": "1.1.22",
-	"logo": "https://i.imgur.com/L51zWz0.png",
-	"thumbnail": "https://i.imgur.com/G8um9Ng.png",
+	"version": "1.1.27",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/yabanc%C4%B1dizi/assets/thumbnail.png",
 	"color": "#14161d",
 	"category": "videos",
 	"tags": [

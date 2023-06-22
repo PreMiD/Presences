@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -10,9 +10,9 @@
 		"nl": "Pixelmon voegt veel aspecten van Pokémon toe aan Minecraft, zoals Pokémon zelf, vechten, ruilen en fokken."
 	},
 	"url": "pixelmonmod.com",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/49VYHIM.png",
-	"thumbnail": "https://i.imgur.com/TdkLc6t.jpg",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pixelmon%20Mod/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pixelmon%20Mod/assets/thumbnail.jpg",
 	"color": "#F27635",
 	"category": "games",
 	"tags": [

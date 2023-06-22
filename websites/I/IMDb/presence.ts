@@ -9,7 +9,8 @@ const presence: Presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/OCAWBbv.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/I/IMDb/assets/logo.png",
 			startTimestamp,
 		},
 		url = document.URL;
@@ -19,7 +20,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = (
 			document.querySelectorAll(".primary-relation-name")[0] as HTMLElement
 		).textContent;
-		presenceData.largeImageKey = "https://i.imgur.com/OCAWBbv.png";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/I/IMDb/assets/logo.png";
 		presenceData.smallImageKey = video.paused ? "paused" : "playing";
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
@@ -35,7 +37,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (url.includes("/find?")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (url.includes("/title/")) {
 		const tokens = document.title.split(" - ");
 		presenceData.details = tokens[0];

@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/EOjQZQe.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/LeXx/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -15,25 +15,25 @@ presence.on("UpdateData", () => {
 				presenceData.details = "Viewing the homepage";
 			else if (document.location.pathname.includes("/legal")) {
 				presenceData.details = "Viewing the legal notice";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/privacy")) {
 				presenceData.details = "Viewing the privacy policy";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/premium")) {
 				presenceData.details = "Reading about premium";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/login")) {
 				presenceData.details = "Logging in";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 			} else if (document.location.pathname.endsWith("/events")) {
 				presenceData.details = "Editing some events";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 			} else if (
 				!document.location.pathname.endsWith("/events") &&
 				document.location.pathname.includes("/")
 			) {
 				presenceData.details = "Viewing the dashboard";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 			} else if (document.location.pathname !== "/")
 				presenceData.details = "Viewing the homepage";
 

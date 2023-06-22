@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "xFutuxe",
 		"id": "299406904344576000"
@@ -12,9 +12,9 @@
 		"currys.co.uk",
 		"www.currys.co.uk"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/yOolF4f.png",
-	"thumbnail": "https://i.imgur.com/SjcX89F.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Currys/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Currys/assets/thumbnail.png",
 	"color": "#4b0ba3",
 	"category": "other",
 	"tags": [

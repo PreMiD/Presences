@@ -47,7 +47,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/F2sWIqN.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Line%20TV/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 		details: strings.browse,
 	};
@@ -74,7 +75,7 @@ presence.on("UpdateData", async () => {
 				  )
 				: "linetv_logo";
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? strings.paused
 				: strings.play;
@@ -98,7 +99,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname.includes("/search")) {
 		presenceData.details = strings.searchSomething;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	}
 
 	presence.setActivity(presenceData);

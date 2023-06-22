@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Verify.",
 		"id": "297961554673008641"
@@ -18,9 +18,9 @@
 		"www.stips.co.il",
 		"stipscdn-stips.netdna-ssl.com"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/xARdqan.png",
-	"thumbnail": "https://i.imgur.com/JwKSAnv.png",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/thumbnail.png",
 	"color": "#04d09d",
 	"category": "socials",
 	"tags": [

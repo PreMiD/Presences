@@ -1,4 +1,4 @@
-interface Assets {
+interface Assets2 {
 	logo: string;
 	play: string;
 	pause: string;
@@ -7,7 +7,7 @@ interface Assets {
 
 interface SetDataParams {
 	data: PresenceData;
-	assets: Assets;
+	Assets2: Assets2;
 	noStartTime?: boolean;
 }
 
@@ -71,7 +71,7 @@ class Watcha extends Presence {
 		];
 	}
 
-	async getAssets(): Promise<Assets> {
+	async getAssets2(): Promise<Assets2> {
 		const setting = await this.getSetting<number>("logo"),
 			images: Record<string, string> = {
 				"logo-0": "logo",
@@ -93,8 +93,8 @@ class Watcha extends Presence {
 	}
 
 	async setData(params: SetDataParams) {
-		params.data.largeImageKey ??= params.assets.logo;
-		params.data.smallImageKey ??= params.assets.browse;
+		params.data.largeImageKey ??= params.Assets2.logo;
+		params.data.smallImageKey ??= params.Assets2.browse;
 
 		if (!params.noStartTime) params.data.startTimestamp = this.startedAt;
 
@@ -133,7 +133,7 @@ app.on("UpdateData", async () => {
 				app.getSetting<string>("seriesState"),
 				app.getSetting<string>("movieState"),
 			]),
-		assets = await app.getAssets(),
+		Assets2 = await app.getAssets2(),
 		pages: Pages = {
 			"/home": {
 				presenceData: {
@@ -196,7 +196,7 @@ app.on("UpdateData", async () => {
 								details: "보기:",
 								state: title,
 							},
-							assets,
+							Assets2,
 						});
 					}
 				},
@@ -210,7 +210,7 @@ app.on("UpdateData", async () => {
 							data: {
 								details: `${name}의 작품 탐색`,
 							},
-							assets,
+							Assets2,
 						});
 					}
 				},
@@ -248,7 +248,7 @@ app.on("UpdateData", async () => {
 						else delete app.meta.episodeTitle;
 
 						const data: PresenceData = {
-							smallImageKey: video.paused ? assets.pause : assets.play,
+							smallImageKey: video.paused ? Assets2.pause : Assets2.play,
 							endTimestamp: app.getTimestampsfromMedia(video).pop(),
 						};
 
@@ -256,7 +256,7 @@ app.on("UpdateData", async () => {
 
 						app.setData({
 							data,
-							assets,
+							Assets2,
 							noStartTime: true,
 						});
 					}
@@ -314,7 +314,7 @@ app.on("UpdateData", async () => {
 
 	for (const [path, data] of Object.entries(pages)) {
 		if (document.location.pathname.match(path) && !data.disabled) {
-			if (data.presenceData) app.setData({ data: data.presenceData, assets });
+			if (data.presenceData) app.setData({ data: data.presenceData, Assets2 });
 			else if (data.setPresenceData) data.setPresenceData();
 
 			if (data.presenceSettings) {

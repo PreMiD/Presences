@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "https://i.imgur.com/b7Go6NC.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/Localizor/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		page = document.location.pathname,
@@ -83,7 +84,7 @@ presence.on("UpdateData", async () => {
 		}`;
 		presenceData.largeImageKey =
 			document.querySelector<HTMLImageElement>("img.image").src;
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 		presenceData.smallImageText = `Translating to${
 			document.querySelector<HTMLDivElement>(
 				"div.og-multi-select__content__selection"
@@ -98,8 +99,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!time) delete presenceData.startTimestamp;
-	if (!images && presenceData.largeImageKey)
-		presenceData.largeImageKey = "https://i.imgur.com/b7Go6NC.png";
+	if (!images && presenceData.largeImageKey) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/L/Localizor/assets/logo.png";
+	}
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

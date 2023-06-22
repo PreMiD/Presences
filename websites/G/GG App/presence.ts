@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/CNuxDx2.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GG%20App/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname,
@@ -73,7 +74,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#root > div > div.css-1dbjc4n > div > div > h1 > a"
 			).textContent;
-			presenceData.smallImageKey = "write";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (path.endsWith("/lists")) {
 			presenceData.details = "Browsing lists containing:";
 			presenceData.state = document
@@ -106,7 +107,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector<HTMLSpanElement>(
 			"#root > div > div.css-1dbjc4n > div > div.w-full.xl\\:max-w-max.mx-auto > div > div:nth-child(1) > p > span.text-2xl.font-bold.pl-2"
 		).textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (path.endsWith("/lists")) {
 		presenceData.details = `Viewing ${document.title.match(/(.*) -/)[1]}`;
 		if (cover) {

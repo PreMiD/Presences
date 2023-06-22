@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -15,9 +15,9 @@
 		"tss.warthunder.com",
 		"wiki.warthunder.com"
 	],
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/LWQZ2xQ.png",
-	"thumbnail": "https://i.imgur.com/M0BOK9r.jpg",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/War%20Thunder/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/War%20Thunder/assets/thumbnail.jpg",
 	"color": "#e53935",
 	"category": "games",
 	"tags": [

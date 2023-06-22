@@ -2,9 +2,11 @@ const presence = new Presence({
 		clientId: "850295838361649153",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/YtdujIW.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/Backpack.tf/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/")

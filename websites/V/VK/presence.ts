@@ -78,7 +78,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/4s4Zbf6.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/VK/assets/logo.png",
 		},
 		gstrings = await presence.getStrings({
 			play: "general.playing",
@@ -108,10 +108,10 @@ presence.on("UpdateData", async () => {
 			".audio_page_player_title_performer a"
 		).textContent;
 		if (isPlaying) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = gstrings.pause;
 		} else {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = gstrings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 		}
@@ -142,10 +142,10 @@ presence.on("UpdateData", async () => {
 		presenceData.state =
 			document.querySelector<HTMLElement>(".mv_author_name a").textContent;
 		if (isPlaying) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = gstrings.pause;
 		} else {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = gstrings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 		}

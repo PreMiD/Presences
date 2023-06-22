@@ -7,7 +7,8 @@ let user: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/AE5bq1T.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/Tumblr/assets/logo.png",
 	};
 
 	if (document.location.hostname === "www.tumblr.com") {
@@ -38,7 +39,7 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/new")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Making a new post...";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.location.pathname.includes("/trending")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing what's trending";
@@ -63,7 +64,7 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/text")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Reading texts";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/recommended-for-you")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing recommendations";
@@ -73,15 +74,15 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/asks")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Reading questions";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/quotes")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Reading quotes";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/chats")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Reading chats";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/search")) {
 			search = document.querySelector(
 				"#search_actions_search > div.l-container.l-container--flex > div > div > div.search_sub_header > h1"
@@ -89,7 +90,7 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Searching for:";
 			presenceData.state = search.textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (
 		document.querySelector(

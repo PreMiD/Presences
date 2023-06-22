@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/5TOMgkl.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TrueAchievements/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -71,7 +72,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = "Viewing acheievement:";
 		presenceData.state = document.querySelector(".title").textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = `Game: ${
 			document.querySelector("div.panel-header.w > h3 > a").textContent
 		}`;
@@ -172,12 +173,12 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document.querySelector(
 						".newsitem > header > h1"
 					).textContent;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				} else {
 					switch (document.location.pathname) {
 						case "/suggestnews.aspx": {
 							presenceData.details = "Suggesting new news";
-							presenceData.smallImageKey = "writing";
+							presenceData.smallImageKey = Assets.Writing;
 
 							break;
 						}
@@ -237,7 +238,7 @@ presence.on("UpdateData", async () => {
 								presenceData.details = "Viewing solution for achievement:";
 								presenceData.state =
 									document.querySelector(".title").textContent;
-								presenceData.smallImageKey = "reading";
+								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = `Game: ${
 									document.querySelector("div.panel-header.w > h3 > a")
 										.textContent
@@ -271,7 +272,7 @@ presence.on("UpdateData", async () => {
 											document.querySelector<HTMLInputElement>(
 												"#txtSearchFor"
 											).value;
-										presenceData.smallImageKey = "search";
+										presenceData.smallImageKey = Assets.Search;
 
 										break;
 									}
@@ -291,7 +292,7 @@ presence.on("UpdateData", async () => {
 													.trim();
 											}
 										} else if (document.location.pathname.includes("/forum/")) {
-											presenceData.smallImageKey = "reading";
+											presenceData.smallImageKey = Assets.Reading;
 											if (
 												document.location.pathname.includes("/viewthreads.aspx")
 											) {
@@ -326,7 +327,7 @@ presence.on("UpdateData", async () => {
 													document.querySelector<HTMLInputElement>(
 														"#txtSearchFor"
 													).value;
-												presenceData.smallImageKey = "search";
+												presenceData.smallImageKey = Assets.Search;
 											}
 										} else if (
 											document.location.pathname.includes("/leaderboard")

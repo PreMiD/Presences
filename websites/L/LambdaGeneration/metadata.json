@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Vallee152",
 		"id": "473562596310646805"
@@ -10,9 +10,9 @@
 	},
 	"url": "lambdageneration.com",
 	"regExp": "[a-z0-9.]+lambdageneration.com",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/XSPtxro.png",
-	"thumbnail": "https://i.imgur.com/CwVR4rW.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LambdaGeneration/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LambdaGeneration/assets/thumbnail.png",
 	"color": "#f37b21",
 	"category": "socials",
 	"tags": [

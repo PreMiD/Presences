@@ -15,7 +15,7 @@ let AppName: HTMLElement,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Unknown page",
-		largeImageKey: "https://i.imgur.com/cek4hGt.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Steam/assets/logo.png",
 	};
 
 	if (document.location.hostname === "steamcommunity.com") {
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.startTimestamp = browsingTimestamp;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.location.pathname.includes("/app/")) {
 			if (document.location.pathname.includes("/workshop/")) {
 				AppName = document.querySelector(
@@ -329,7 +329,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.startTimestamp = browsingTimestamp;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

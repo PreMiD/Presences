@@ -23,7 +23,8 @@ setPresence();
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/kmABIM3.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Google's%20Coding%20Competitions/assets/logo.png",
 		details: "Home page",
 		startTimestamp: timeElapsed,
 	};
@@ -35,7 +36,7 @@ presence.on("UpdateData", async () => {
 			switch (location.pathname.split("/")[2]) {
 				case "about": {
 					presenceData.details = "Reading about Kick Start";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 
@@ -46,13 +47,13 @@ presence.on("UpdateData", async () => {
 
 				case "faq": {
 					presenceData.details = "Reading FAQ";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 
 				case "rulesandterms": {
 					presenceData.details = "Reading Rules and Terms";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 
@@ -86,7 +87,7 @@ presence.on("UpdateData", async () => {
 						} else {
 							presenceData.details = `Reading Analysis: ${round}`;
 							presenceData.state = problem;
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 						}
 					}
 					break;
@@ -111,7 +112,7 @@ presence.on("UpdateData", async () => {
 			switch (location.pathname.split("/")[2]) {
 				case "about": {
 					presenceData.details = "Reading about Code Jam";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 
@@ -122,13 +123,13 @@ presence.on("UpdateData", async () => {
 
 				case "faq": {
 					presenceData.details = "Reading FAQ";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 
 				case "rulesandterms": {
 					presenceData.details = "Reading Rules and Terms";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 
@@ -162,7 +163,7 @@ presence.on("UpdateData", async () => {
 						} else {
 							presenceData.details = `Reading Analysis: ${round}`;
 							presenceData.state = problem;
-							presenceData.smallImageKey = "reading";
+							presenceData.smallImageKey = Assets.Reading;
 						}
 					}
 					break;
@@ -187,7 +188,7 @@ presence.on("UpdateData", async () => {
 			switch (location.pathname.split("/")[2]) {
 				case "about": {
 					presenceData.details = "Reading about Hash Code";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 
@@ -203,13 +204,13 @@ presence.on("UpdateData", async () => {
 
 				case "rulesandterms": {
 					presenceData.details = "Reading Rules and Terms";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 
 				case "faq": {
 					presenceData.details = "Reading FAQ";
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					break;
 				}
 

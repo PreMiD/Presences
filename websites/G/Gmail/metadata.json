@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "RisingSunLight",
 		"id": "240521747852558347"
@@ -23,9 +23,9 @@
 		"vi_VN": "Gmail là dịch vụ thư điện tử miễn phí được phát triển bởi Google. Người dùng có thể truy cập Gmail trên web và sử dụng phần mềm bên thứ ba để đồng bộ nội dung thư qua phương thức POP hoặc IMAP. Gmail phát hành bản beta đóng kín vào 1 Tháng 4 2004 và kết thúc quá trình thử nghiệm vào 7 Tháng 7 năm 2009."
 	},
 	"url": "mail.google.com",
-	"version": "2.0.3",
-	"logo": "https://i.imgur.com/ZvjZHER.png",
-	"thumbnail": "https://i.imgur.com/zLejTHm.png",
+	"version": "2.0.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gmail/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gmail/assets/thumbnail.png",
 	"color": "#DD4B3E",
 	"category": "other",
 	"tags": [

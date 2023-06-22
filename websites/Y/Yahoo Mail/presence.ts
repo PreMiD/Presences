@@ -5,19 +5,20 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/1uePEgT.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Y/Yahoo%20Mail/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting("privacy"),
 		{ pathname } = document.location;
 	if (document.querySelector('[data-test-id="message-group-subject-text"]')) {
 		presenceData.details = "Reading an email";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (
 		document.querySelector<HTMLInputElement>('[role="combobox"]')?.value
 	) {
 		presenceData.details = "Searching";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.querySelector('[data-test-id="recipient-input"]'))
 		presenceData.details = "Composing an email";
 	else if (privacy) {

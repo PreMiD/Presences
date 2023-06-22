@@ -1,7 +1,6 @@
 const presence = new Presence({
 	clientId: "1096792677888053308",
 });
-
 async function getStrings() {
 	return presence.getStrings({
 		play: "general.watchingVid",
@@ -55,39 +54,40 @@ const animetypes: { [key: string]: string } = {
 		etti: "Эччи",
 	};
 
-enum Assets {
-	vostlogo = "https://i.imgur.com/wStmaRE.png",
-	play = "https://i.imgur.com/JmYolkt.png",
-	pause = "https://i.imgur.com/cElKgU7.png",
-	ongoing = "https://i.imgur.com/bdSukvD.png",
-	anons = "https://i.imgur.com/8vJY6ok.png",
-	"boyevyye-iskusstva" = "https://i.imgur.com/fIFC4Bn.png",
-	"voyna" = "https://i.imgur.com/6wcT9gr.png",
-	"drama" = "https://i.imgur.com/FGNTKQ1.png",
-	"detektiv" = "https://i.imgur.com/BKwNjnY.png",
-	"istoriya" = "https://i.imgur.com/JOsx01C.png",
-	"komediya" = "https://i.imgur.com/rRRyu7f.png",
-	"mekha" = "https://i.imgur.com/9fdLLtU.png",
-	"mistika" = "https://i.imgur.com/X1eLf8t.png",
-	"makho-sedze" = "https://i.imgur.com/9sY7vjV.png",
-	"muzykalnyy" = "https://i.imgur.com/666pMbJ.png",
-	"povsednevnost" = "https://i.imgur.com/RZZu69w.png",
-	"priklyucheniya" = "https://i.imgur.com/K2wO9ee.png",
-	"parodiya" = "https://i.imgur.com/mY2G4I0.png",
-	"romantika" = "https://i.imgur.com/OHBxChU.png",
-	"senen" = "https://i.imgur.com/MAAaPUs.png",
-	"sedze" = "https://i.imgur.com/iFPQWgg.png",
-	"sport" = "https://i.imgur.com/DuiA8DC.png",
-	"skazka" = "https://i.imgur.com/83cdZB7.png",
-	"sedze-ay" = "https://i.imgur.com/iFPQWgg.png",
-	"senen-ay" = "https://i.imgur.com/MAAaPUs.png",
-	"samurai" = "https://i.imgur.com/3ylfSzz.png",
-	"triller" = "https://i.imgur.com/SgicPul.png",
-	"uzhasy" = "https://i.imgur.com/HGQntrC.png",
-	"fantastika" = "https://i.imgur.com/taH6syX.png",
-	"fentezi" = "https://i.imgur.com/15VWbYX.png",
-	"shkola" = "https://i.imgur.com/mk3INxH.png",
-	"etti" = "https://i.imgur.com/CyjLJJj.png",
+const enum Assets {
+	VostLogo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/logo.png",
+	Ongoing = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/0.png",
+	Anons = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/1.png",
+}
+
+enum otherAssets {
+	"boyevyye-iskusstva" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/2.png",
+	"voyna" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/3.png",
+	"drama" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/4.png",
+	"detektiv" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/5.png",
+	"istoriya" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/6.png",
+	"komediya" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/7.png",
+	"mekha" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/8.png",
+	"mistika" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/9.png",
+	"makho-sedze" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/10.png",
+	"muzykalnyy" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/11.png",
+	"povsednevnost" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/12.png",
+	"priklyucheniya" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/13.png",
+	"parodiya" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/14.png",
+	"romantika" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/15.png",
+	"senen" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/16.png",
+	"sedze" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/17.png",
+	"sport" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/18.png",
+	"skazka" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/19.png",
+	"sedze-ay" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/17.png",
+	"senen-ay" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/16.png",
+	"samurai" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/20.png",
+	"triller" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/21.png",
+	"uzhasy" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/22.png",
+	"fantastika" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/23.png",
+	"fentezi" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/24.png",
+	"shkola" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/25.png",
+	"etti" = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/26.png",
 }
 
 let strtstamp = Math.floor(Date.now() / 1000),
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey: Assets.vostlogo,
+			largeImageKey: Assets.VostLogo,
 			smallImageText: "🏴‍☠️ AnimeVost",
 		},
 		websiteloc = document.location.pathname.split("/");
@@ -119,19 +119,20 @@ presence.on("UpdateData", async () => {
 		if (websiteloc[1] === "zhanr") {
 			const animegenre = animegenres[websiteloc[2]];
 			presenceData.details = `🔎 В поисках аниме жанра ${animegenre}`;
-			presenceData.smallImageKey = Assets[websiteloc[2] as keyof typeof Assets];
+			presenceData.smallImageKey =
+				otherAssets[websiteloc[2] as keyof typeof otherAssets];
 			presenceData.smallImageText = `🔎 В поисках аниме жанра ${animegenre}`;
 		}
 		if (websiteloc[1] === "god")
 			presenceData.details = `🔎 В поисках аниме ${websiteloc[2]} года`;
 		if (websiteloc[1] === "ongoing") {
 			presenceData.details = "🔎 В поисках онгоинга";
-			presenceData.smallImageKey = Assets.ongoing;
+			presenceData.smallImageKey = Assets.Ongoing;
 			presenceData.smallImageText = "🔎 В поисках Онгоинга";
 		}
 		if (websiteloc[1] === "preview") {
 			presenceData.details = "🔎 В поисках анонса";
-			presenceData.smallImageKey = Assets.anons;
+			presenceData.smallImageKey = Assets.Anons;
 			presenceData.smallImageText = "🔎 В поисках Анонса";
 		}
 		if (websiteloc[1] === "user") {
@@ -142,12 +143,12 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document
 					.querySelector(".userinfoCenterAva")
 					.querySelector("img").src;
-				presenceData.smallImageKey = Assets.vostlogo;
+				presenceData.smallImageKey = Assets.VostLogo;
 				presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 			}
 		}
 	} else {
-		presenceData.largeImageKey = Assets.vostlogo;
+		presenceData.largeImageKey = Assets.VostLogo;
 		presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 		presenceData.details = "Где-то на сайте";
 		delete presenceData.startTimestamp;
@@ -165,18 +166,18 @@ presence.on("UpdateData", async () => {
 			if (!privacy && logo) {
 				presenceData.largeImageKey =
 					document.querySelector<HTMLImageElement>(".imgRadius").src;
-				presenceData.smallImageKey = Assets.vostlogo;
+				presenceData.smallImageKey = Assets.VostLogo;
 				presenceData.smallImageText = "🏴‍☠️ AnimeVost";
 			} else {
 				delete presenceData.smallImageKey;
-				presenceData.largeImageKey = Assets.vostlogo;
+				presenceData.largeImageKey = Assets.VostLogo;
 			}
 			if (video.duration) {
 				presenceData.details = `Смотрит ${animetype} ${
 					!privacy ? animename : ""
 				}`;
 				presenceData.state = document.querySelector(".active").textContent;
-				presenceData.smallImageKey = video.paused ? Assets.pause : Assets.play;
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? strings.pause
 					: strings.play;

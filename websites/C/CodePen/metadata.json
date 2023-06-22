@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Chezzer",
 		"id": "195979856733929472"
@@ -14,9 +14,9 @@
 		"codepen.io",
 		"www.codepen.io"
 	],
-	"version": "1.2.17",
-	"logo": "https://i.imgur.com/fAkYGNA.png",
-	"thumbnail": "https://i.imgur.com/4cRd5t5.png",
+	"version": "1.2.22",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CodePen/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CodePen/assets/thumbnail.png",
 	"color": "#0ebeff",
 	"category": "other",
 	"tags": [

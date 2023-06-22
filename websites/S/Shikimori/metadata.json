@@ -1,18 +1,18 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "SHISEN",
 		"id": "257151906038677504"
 	},
 	"service": "Shikimori",
 	"description": {
-		"en": "Shikimori is online encyclopedia of anime and manga. The full list of popular manga in Russian. Shikimori.one is the best anime forum to communicate in.",
-		"ru": "Шикимори — онлайн энциклопедия аниме и манги. Полный список популярной манги на русском. Shikimori.one — лучший аниме-форум для общения."
+		"en": "Shikimori is online encyclopedia of anime and manga. The full list of popular manga in Russian. Shikimori is the best anime forum to communicate in.",
+		"ru": "Шикимори — онлайн энциклопедия аниме и манги. Полный список популярной манги на русском. Shikimori — лучший аниме-форум для общения."
 	},
-	"url": "shikimori.one",
-	"version": "1.1.2",
-	"logo": "https://i.imgur.com/7tlc7or.png",
-	"thumbnail": "https://i.imgur.com/jS5LyDW.png",
+	"url": "shikimori.me",
+	"version": "1.1.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/thumbnail.png",
 	"color": "#4f4f4f",
 	"category": "anime",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Encrypted",
 		"id": "564434085708038144"
@@ -21,9 +21,9 @@
 		"stats.truckersmp.com",
 		"map.truckersmp.com"
 	],
-	"version": "3.0.9",
-	"logo": "https://i.imgur.com/ptddTU8.png",
-	"thumbnail": "https://i.imgur.com/Z8CxsNw.png",
+	"version": "3.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TruckersMP/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TruckersMP/assets/thumbnail.png",
 	"color": "#B92025",
 	"category": "games",
 	"tags": [

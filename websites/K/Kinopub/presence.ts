@@ -2,13 +2,8 @@ const presence = new Presence({
 	clientId: "1054755173198737458",
 });
 
-enum Assets {
-	Logo = "https://i.imgur.com/HAvvvj7.png",
-	Play = "https://i.imgur.com/6s4WyWY.png",
-	Pause = "https://i.imgur.com/PrYtpQb.png",
-	Read = "https://i.imgur.com/wPUmqu5.png",
-	View = "https://i.imgur.com/hxvvGUi.png",
-	Search = "https://i.imgur.com/wYVlwJX.png",
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/K/Kinopub/assets/logo.png",
 }
 
 enum Strings {
@@ -100,7 +95,7 @@ presence.on("UpdateData", async () => {
 
 		case "sport":
 			presenceData.details = `${Strings.View} ${Strings.Sports}`;
-			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = Strings.View;
 			break;
 
@@ -109,14 +104,14 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document
 				.querySelector(".page-content h3")
 				?.childNodes[1]?.textContent.split(": ")[1];
-			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = Strings.View;
 			break;
 
 		case "history":
 			presenceData.details = `${Strings.View} ${Strings.History}`;
 			presenceData.state = textContent(".nav-link.active");
-			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = Strings.View;
 			break;
 
@@ -126,7 +121,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Обновления ${
 				pathname.split("/")[1] === "media" ? "сайта" : "просмотренного"
 			}`;
-			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = Strings.View;
 			break;
 
@@ -139,7 +134,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `${Strings.View} ${Strings.SelectionOne}`;
 				presenceData.state = textContent(".page-content h3:first-child");
 			}
-			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = Strings.View;
 			break;
 
@@ -148,26 +143,26 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `${textContent(".page-content h4")} (${
 				textContent(".page-content h5").split(": ")[1]
 			})`;
-			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = Strings.View;
 			break;
 
 		case "kinoblog":
 			presenceData.details = `${Strings.View} ${Strings.Kinoblog}`;
 			presenceData.state = textContent(".nav-link.active");
-			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = Strings.View;
 			if (pathname.split("/")[2] === "view") {
 				presenceData.details = `${Strings.Read} ${Strings.Post}`;
 				presenceData.state = textContent(".text-success");
-				presenceData.smallImageKey = Assets.Read;
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = Strings.Read;
 			}
 			break;
 
 		case "plugin":
 			presenceData.details = `${Strings.Read} ${Strings.Instructions}`;
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = Strings.Read;
 			break;
 
@@ -176,21 +171,21 @@ presence.on("UpdateData", async () => {
 				!privacy ? textContent(".page-title span") : Strings.User
 			}`;
 			presenceData.state = textContent(".nav-link.active");
-			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = Strings.View;
 			break;
 
 		case "user":
 			presenceData.details = Strings.Settings;
 			presenceData.state = textContent(".nav-item.active");
-			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = Strings.View;
 			break;
 
 		case "notification":
 			presenceData.details = `${Strings.View} ${Strings.Notifications}`;
 			presenceData.state = textContent(".nav-link.active");
-			presenceData.smallImageKey = Assets.View;
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = Strings.View;
 			break;
 
@@ -214,7 +209,7 @@ presence.on("UpdateData", async () => {
 						".item-poster-relative"
 					).src;
 				}
-				presenceData.smallImageKey = Assets.View;
+				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = Strings.View;
 				presenceData.buttons = [
 					{

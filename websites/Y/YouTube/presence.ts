@@ -5,6 +5,11 @@ const presence = new Presence({
 	pattern = "•",
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
+	Studio = "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/0.png",
+}
+
 function truncateAfter(str: string, pattern: string): string {
 	return str.slice(0, str.indexOf(pattern));
 }
@@ -117,19 +122,6 @@ async function getStrings() {
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
-}
-
-enum Assets {
-	Logo = "https://i.imgur.com/o5injgg.png",
-	Repeat = "https://i.imgur.com/yb5dxsB.png",
-	RepeatOne = "https://i.imgur.com/ehcoy72.png",
-	Play = "https://i.imgur.com/6s4WyWY.png",
-	Live = "https://i.imgur.com/xHn9QgH.png",
-	Pause = "https://i.imgur.com/PrYtpQb.png",
-	Read = "https://i.imgur.com/wPUmqu5.png",
-	Search = "https://i.imgur.com/wYVlwJX.png",
-	Studio = "https://i.imgur.com/T2uW4AB.png",
-	Write = "https://i.imgur.com/yIseBVu.png",
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -423,7 +415,8 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (YoutubeShorts) {
-			presenceData.largeImageKey = "https://i.imgur.com/c0W8Na8.png";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/1.png";
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 			delete presenceData.endTimestamp;
@@ -563,7 +556,7 @@ presence.on("UpdateData", async () => {
 			} else if (pathname.includes("/about")) {
 				presenceData.details = strings.readChannel;
 				presenceData.state = user;
-				presenceData.smallImageKey = Assets.Read;
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.startTimestamp = browsingTimestamp;
 			} else if (pathname.includes("/search")) {
 				searching = true;
@@ -634,12 +627,12 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("/premium")) {
 			presenceData.details = strings.readAbout;
 			presenceData.state = "Youtube Premium";
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/gaming")) {
 			presenceData.details = strings.browsingThrough;
 			presenceData.state = "Youtube Gaming";
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/account")) {
 			presenceData.details = strings.viewAccount;
@@ -653,12 +646,12 @@ presence.on("UpdateData", async () => {
 				0,
 				document.title.lastIndexOf(" - YouTube")
 			);
-			presenceData.smallImageKey = Assets.Read;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.startTimestamp = browsingTimestamp;
 		} else if (pathname.includes("/upload")) {
 			presenceData.details = strings.upload;
 			presenceData.startTimestamp = browsingTimestamp;
-			presenceData.smallImageKey = Assets.Write;
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (pathname.includes("/view_all_playlists")) {
 			presenceData.details = strings.viewAllPlayL;
 			presenceData.startTimestamp = browsingTimestamp;

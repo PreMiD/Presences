@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "802379096122196050",
 });
+
 let timestart = Math.round(Date.now() / 1000),
 	prevPage = "",
 	currPage = "";
@@ -11,7 +12,8 @@ function refreshTime() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/E4dzY6x.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/Online%20Sequencer/assets/logo.png",
 		startTimestamp: timestart,
 	};
 	if (document.querySelectorAll(".fas.fa-stop")[0]) {

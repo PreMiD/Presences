@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -11,9 +11,9 @@
 		"nl": "Vimeo is een advertentievrij videoplatform met hoofdkantoor in New York City en biedt gratis videoweergavediensten als concurrent van YouTube. In 2007 werd Vimeo de eerste site voor het delen van video's die high-definition video ondersteunt."
 	},
 	"url": "vimeo.com",
-	"version": "1.1.19",
-	"logo": "https://i.imgur.com/OJunR7n.png",
-	"thumbnail": "https://i.imgur.com/tA7kbca.png",
+	"version": "1.1.24",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vimeo/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vimeo/assets/thumbnail.png",
 	"color": "#18B3E2",
 	"category": "videos",
 	"tags": [

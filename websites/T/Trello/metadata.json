@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -15,9 +15,9 @@
 		"blog.trello.com",
 		"developers.trello.com"
 	],
-	"version": "2.1.20",
-	"logo": "https://i.imgur.com/Yncl9Qc.png",
-	"thumbnail": "https://i.imgur.com/YnAyvct.png",
+	"version": "2.1.25",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Trello/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Trello/assets/thumbnail.png",
 	"color": "#0080cb",
 	"category": "other",
 	"tags": [

@@ -151,7 +151,8 @@ presence.on("UpdateData", async () => {
 	for (const [path, data] of Object.entries(presences)) {
 		presenceData = {
 			...presenceData,
-			largeImageKey: "https://i.imgur.com/aMjnyic.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/HackTheBox/assets/logo.png",
 			buttons: [
 				{
 					label: "View Profile",

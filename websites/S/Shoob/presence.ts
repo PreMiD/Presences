@@ -69,7 +69,7 @@ function convertNumberToSuffixed(amount: number): string {
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/aI1Qn8s.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Shoob/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 	const { pathname, href } = window.location,

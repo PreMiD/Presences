@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "296716315547402240",
 		"name": "ZebroUnion"
@@ -17,9 +17,9 @@
 		"www.animevost.org",
 		"v2.vost.pw"
 	],
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/wStmaRE.png",
-	"thumbnail": "https://i.imgur.com/MeWpyAW.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/thumbnail.png",
 	"color": "#ffb84d",
 	"category": "anime",
 	"tags": [

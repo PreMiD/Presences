@@ -10,7 +10,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/RDZSlTX.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Spirit%20Fanfics/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 			details: (await strings).browsing,
 		},
@@ -38,7 +39,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".tituloPrincipal")
 					.textContent.replace("História ", "")
 					.split(" - ");
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 				presenceData.smallImageText = "Escrevendo";
 			}
 		} else if (pathname.startsWith("/historia/editar")) {
@@ -59,7 +60,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.match(/\/historia\/(\w+-)+\d+\/\w+/)) {
 				[presenceData.details] = title;
 				presenceData.state = `${title[1]} - ${nav}`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = (await strings).reading;
 			} else {
 				presenceData.details = "Vendo uma história";
@@ -87,7 +88,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.startsWith("/grupos")) presenceData.state = "Vendo grupos";
 	else if (pathname.startsWith("/busca")) {
 		presenceData.details = `${(await strings).searching}...`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).searching;
 	} else presenceData.state = nav;
 

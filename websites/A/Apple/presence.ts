@@ -1010,10 +1010,10 @@ presence.on("UpdateData", async () => {
 										1;
 
 									if (!vid.paused) {
-										presenceData.smallImageKey = "play";
+										presenceData.smallImageKey = Assets.Play;
 										presenceData.smallImageText = strings.statePlaying;
 									} else {
-										presenceData.smallImageKey = "pause";
+										presenceData.smallImageKey = Assets.Pause;
 										presenceData.smallImageText = strings.statePaused;
 									}
 								}

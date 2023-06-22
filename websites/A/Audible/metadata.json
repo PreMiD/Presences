@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Tofuine",
 		"id": "734631480541708291"
@@ -10,9 +10,9 @@
 	},
 	"url": "www.audible.com",
 	"regExp": "www[.]audible([.][a-z]+)",
-	"version": "1.1.2",
-	"logo": "https://i.imgur.com/TTg4B0Q.png",
-	"thumbnail": "https://i.imgur.com/6X2aW6B.png",
+	"version": "1.1.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Audible/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Audible/assets/thumbnail.png",
 	"color": "#f7991c",
 	"category": "other",
 	"tags": [

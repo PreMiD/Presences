@@ -30,7 +30,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/GA1Vftf.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TopFlix/assets/logo.png",
 	};
 
 	let title;
@@ -65,10 +66,10 @@ presence.on("UpdateData", async () => {
 						);
 						presenceData.startTimestamp = startTimestamp;
 						presenceData.endTimestamp = endTimestamp;
-						presenceData.smallImageKey = "play";
+						presenceData.smallImageKey = Assets.Play;
 						presenceData.smallImageText = (await strings).play;
 					} else {
-						presenceData.smallImageKey = "pause";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = (await strings).pause;
 					}
 				} else {
@@ -102,10 +103,10 @@ presence.on("UpdateData", async () => {
 					);
 					presenceData.startTimestamp = startTimestamp;
 					presenceData.endTimestamp = endTimestamp;
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = (await strings).play;
 				} else {
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = (await strings).pause;
 				}
 			} else {

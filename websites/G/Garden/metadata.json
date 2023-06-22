@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Uhevela",
 		"id": "616969786718683167"
@@ -10,9 +10,9 @@
 		"nl": "Een Franse Minecraft server gecultiveerd door toegewijde spelers."
 	},
 	"url": "gardenmc.fr",
-	"version": "1.1.13",
-	"logo": "https://i.imgur.com/PNc2c41.png",
-	"thumbnail": "https://i.imgur.com/3L4UHk9.png",
+	"version": "1.1.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Garden/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Garden/assets/thumbnail.png",
 	"color": "#0f7e49",
 	"category": "games",
 	"tags": [

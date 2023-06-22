@@ -11,7 +11,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/6ZtGZ8v.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Exxen/assets/logo.png",
 	};
 	if (document.location.pathname.includes("watch")) {
 		const video: HTMLVideoElement = document.querySelector(".rmp-video"),
@@ -28,12 +28,12 @@ presence.on("UpdateData", async () => {
 			.replace(`Episode ${episode}`, "");
 		presenceData.state = (await strings).episode.replace("{0}", episode);
 		if (!video.paused) {
-			presenceData.smallImageKey = "playing";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).playing;
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
 		} else {
-			presenceData.smallImageKey = "paused";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = (await strings).paused;
 		}
 	} else {

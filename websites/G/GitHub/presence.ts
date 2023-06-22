@@ -6,7 +6,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/cr3bzXB.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/GitHub/assets/logo.png",
 	};
 	const pages: Record<string, PresenceData> = {
 			login: {
@@ -249,22 +250,22 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${repository.owner}/${repository.name}`;
 				}
 				break;
-			case !!document.querySelector<HTMLHeadingElement>(
-				"#js-pjax-container > div > header > div.container-xl.pt-4.pt-lg-0.p-responsive.clearfix > div > div.flex-1 > h1"
+			case !!document.querySelector<HTMLMetaElement>(
+				'meta[name="hovercard-subject-tag"]'
 			):
+				presenceData.details = "Viewing an organization";
+
 				if (privacy) {
-					presenceData.details = "Viewing an organization";
 					delete presenceData.state;
 					delete presenceData.buttons;
 					break;
 				}
-				presenceData.details = "Viewing an organization";
-				presenceData.state =
-					document.querySelector<HTMLHeadingElement>("h1")?.textContent;
+				presenceData.state = document.title;
 				if (cover) {
-					presenceData.largeImageKey = `${
-						document.querySelector<HTMLImageElement>("div > img").src
-					}`;
+					presenceData.largeImageKey = `${(presenceData.largeImageKey =
+						document.querySelector<HTMLMetaElement>(
+							'meta[property~="og:image"]'
+						).content)}`;
 				}
 				break;
 			case pathname.includes("/features"):

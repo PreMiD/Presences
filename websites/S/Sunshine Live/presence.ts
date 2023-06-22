@@ -1,6 +1,11 @@
 const presence = new Presence({
 	clientId: "624914025247146000",
 });
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Sunshine%20Live/assets/logo.png",
+}
+
 presence.on("UpdateData", () => {
 	let paused = true;
 	const { children } = document.querySelector("#audioPlayer-controls-buttons");
@@ -8,8 +13,8 @@ presence.on("UpdateData", () => {
 		if (children[i].id === "stopButton") paused = false;
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/EHQLUof.png",
-		smallImageKey: paused ? "pause" : "play",
+		largeImageKey: Assets.Logo,
+		smallImageKey: paused ? Assets.Pause : Assets.Play,
 		smallImageText: paused ? "Pausiert" : "Spielt",
 		details: `Channel: ${
 			document.querySelectorAll(".trackInfos-stream")[0].textContent

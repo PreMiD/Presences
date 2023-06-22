@@ -6,7 +6,8 @@ presence.on("UpdateData", async () => {
 	const browsingTimestamp = Math.floor(Date.now() / 1000),
 		presenceData: PresenceData = {
 			details: "Rustlabs",
-			largeImageKey: "https://i.imgur.com/Yp2IGUO.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Rustlabs/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 

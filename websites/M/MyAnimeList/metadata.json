@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "CRUGG",
 		"id": "228965621478588416"
@@ -26,9 +26,9 @@
 		"zh_CN": "世界上最活跃的在线动漫和漫画社区。加入在线社区，创建属于您的动漫和漫画列表！"
 	},
 	"url": "myanimelist.net",
-	"version": "1.2.0",
-	"logo": "https://i.imgur.com/AoF1JnY.png",
-	"thumbnail": "https://i.imgur.com/VyAAcEN.png",
+	"version": "1.2.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MyAnimeList/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MyAnimeList/assets/thumbnail.png",
 	"color": "#2e51a2",
 	"category": "anime",
 	"tags": [

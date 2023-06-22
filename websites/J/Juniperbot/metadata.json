@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "MrLivixx",
 		"id": "502948927809781763"
@@ -15,9 +15,9 @@
 		"feedback.juniper.bot",
 		"juniper.bot"
 	],
-	"version": "2.0.13",
-	"logo": "https://i.imgur.com/YYk1v1F.png",
-	"thumbnail": "https://i.imgur.com/XOcpBkV.png",
+	"version": "2.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/thumbnail.png",
 	"color": "#C27C0E",
 	"category": "other",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "CRUGG",
 		"id": "228965621478588416"
@@ -11,9 +11,9 @@
 		"nl": "Gitea is een Open-Source Git Platform, sterk geïnspireerd door GitHub"
 	},
 	"url": "gitea.com",
-	"version": "1.2.17",
-	"logo": "https://i.imgur.com/GB1X0V7.png",
-	"thumbnail": "https://i.imgur.com/2c5syAi.png",
+	"version": "1.2.22",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gitea/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gitea/assets/thumbnail.png",
 	"color": "#5aa509",
 	"category": "other",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Yelo",
 		"id": "425326889565945856"
@@ -11,9 +11,9 @@
 		"vi_VN": "Thử và cải thiện tốc độ đánh máy của bạn với các trò chơi đánh máy miễn phí của chúng tôi."
 	},
 	"url": "10fastfingers.com",
-	"version": "1.0.10",
-	"logo": "https://i.imgur.com/OE0fMrX.png",
-	"thumbnail": "https://i.imgur.com/Z8sPB3q.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/10fastfingers/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/10fastfingers/assets/thumbnail.png",
 	"color": "#082333",
 	"category": "other",
 	"tags": [

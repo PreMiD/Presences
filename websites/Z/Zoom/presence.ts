@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/K1OGlrP.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Z/Zoom/assets/logo.png",
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing home page";
@@ -40,10 +40,10 @@ presence.on("UpdateData", async () => {
 		else {
 			if (videoEnabled()) {
 				presenceData.details = "In video meeting";
-				presenceData.smallImageKey = "vcall";
+				presenceData.smallImageKey = Assets.VideoCall;
 			} else {
 				presenceData.details = "In meeting";
-				presenceData.smallImageKey = "call";
+				presenceData.smallImageKey = Assets.Call;
 			}
 			if (memberCount()) {
 				presenceData.state = `${memberCount()} user${

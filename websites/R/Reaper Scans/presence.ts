@@ -3,11 +3,8 @@ const presence = new Presence({
 	}),
 	elapsed = Math.floor(Date.now() / 1e3);
 
-enum Assets {
-	Logo = "https://i.imgur.com/tPMtbjL.png",
-	Search = "https://i.imgur.com/08wjeL0.png",
-	Reading = "https://i.imgur.com/Gglu4Tk.png",
-	Viewing = "https://i.imgur.com/BMzYEcO.png",
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Reaper%20Scans/assets/logo.png",
 }
 
 function capitalize(str: string) {

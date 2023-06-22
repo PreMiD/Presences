@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Hans5958",
 		"id": "279855717203050496"
@@ -15,9 +15,9 @@
 	},
 	"url": "wikiversity.org",
 	"regExp": "([a-z0-9-]+[.])+wikiversity[.]org[/]",
-	"version": "1.0.17",
-	"logo": "https://i.imgur.com/HU6hLSg.png",
-	"thumbnail": "https://i.imgur.com/FVkZ2gS.png",
+	"version": "1.0.22",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikiversity/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikiversity/assets/thumbnail.png",
 	"color": "#f9f9f9",
 	"category": "other",
 	"tags": [

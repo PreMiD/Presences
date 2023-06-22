@@ -34,19 +34,13 @@ async function getStrings() {
 	);
 }
 
-enum Assets {
-	MessengerLogo = "https://i.imgur.com/AwwqHgg.png",
-	WatchLogo = "https://i.imgur.com/qrU1IRd.png",
-	ReelLogo = "https://i.imgur.com/5hLDaM3.png",
-	Logo = "https://i.imgur.com/nS9sZn6.png",
-	Play = "https://i.imgur.com/6s4WyWY.png",
-	Live = "https://i.imgur.com/xHn9QgH.png",
-	Pause = "https://i.imgur.com/PrYtpQb.png",
-	Read = "https://i.imgur.com/wPUmqu5.png",
-	GamingLogo = "https://i.imgur.com/yhPO44a.png",
-	Search = "https://i.imgur.com/wYVlwJX.png",
-	Write = "https://i.imgur.com/yIseBVu.png",
-	MarketplaceLogo = "https://i.imgur.com/3AbfNnr.png",
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/logo.png",
+	MessengerLogo = "https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/0.png",
+	WatchLogo = "https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/1.png",
+	ReelLogo = "https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/2.png",
+	GamingLogo = "https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/3.png",
+	MarketplaceLogo = "https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/4.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	cached: { id: string; element: HTMLVideoElement },

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Viruz",
 		"id": "158973226465230848"
@@ -13,9 +13,9 @@
 		"vi_VN": "Xem các tập và bộ phim anime phụ đề Tiếng Anh nhiều chất lượng trên mọi thiết bị: PC, máy tính bảng, điện thoại."
 	},
 	"url": "animedao.to",
-	"version": "2.0.3",
-	"logo": "https://i.imgur.com/m1dumnr.png",
-	"thumbnail": "https://i.imgur.com/v6iZTmq.png",
+	"version": "2.0.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeDao/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeDao/assets/thumbnail.png",
 	"color": "#0ab4fc",
 	"category": "anime",
 	"tags": [

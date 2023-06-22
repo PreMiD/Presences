@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Amalia",
 		"id": "73026412281344000"
@@ -12,9 +12,9 @@
 		"en": "On Archive of Our Own (AO3), users can make profiles, create works and other Content, post comments, give Kudos, create Collections and Bookmarks."
 	},
 	"url": "archiveofourown.org",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/2ewm9Gc.png",
-	"thumbnail": "https://i.imgur.com/iifmL5d.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Archive%20of%20Our%20Own/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Archive%20of%20Our%20Own/assets/thumbnail.png",
 	"color": "#970000",
 	"category": "other",
 	"tags": [

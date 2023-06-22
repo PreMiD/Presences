@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Timeraa",
 		"id": "223238938716798978"
@@ -17,9 +17,9 @@
 		"vi_VN": "Arena of Kings là trò chơi Arena thế hệ tiếp theo có nhịp độ nhanh được chơi ngay trên trình duyệt. Tham gia với các anh hùng để lấy ngôi vương!"
 	},
 	"url": "arenaofkings.com",
-	"version": "2.3.16",
-	"logo": "https://i.imgur.com/WLS3BqZ.png",
-	"thumbnail": "https://i.imgur.com/2K6n54H.png",
+	"version": "2.3.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Arena%20of%20Kings/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Arena%20of%20Kings/assets/thumbnail.png",
 	"color": "#4a4a4a",
 	"category": "games",
 	"tags": [

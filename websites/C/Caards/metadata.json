@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Anaxes",
 		"id": "567885938160697377"
@@ -14,9 +14,9 @@
 		"help.caards.me",
 		"status.caards.me"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/14BIbky.png",
-	"thumbnail": "https://i.imgur.com/J5MWuay.jpg",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Caards/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Caards/assets/thumbnail.jpg",
 	"color": "#0F1225",
 	"category": "socials",
 	"tags": [

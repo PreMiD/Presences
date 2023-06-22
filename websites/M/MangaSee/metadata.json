@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Harold",
 		"id": "141206144264699904"
@@ -13,9 +13,9 @@
 		"www.mangasee123.com",
 		"mangasee123.com"
 	],
-	"version": "1.0.14",
-	"logo": "https://i.imgur.com/E8zTeX8.png",
-	"thumbnail": "https://i.imgur.com/sMOaa2x.png",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaSee/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaSee/assets/thumbnail.png",
 	"color": "#6488be",
 	"category": "anime",
 	"tags": [

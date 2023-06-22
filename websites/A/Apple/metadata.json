@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "N0chteil ^^",
 		"id": "495901098926669825"
@@ -28,9 +28,9 @@
 		"developer.apple.com",
 		"www.icloud.com"
 	],
-	"version": "2.3.6",
-	"logo": "https://i.imgur.com/w84AMlL.png",
-	"thumbnail": "https://i.imgur.com/MZecshr.jpg",
+	"version": "2.3.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/thumbnail.jpg",
 	"color": "#606C80",
 	"category": "other",
 	"tags": [

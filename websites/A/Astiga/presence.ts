@@ -36,7 +36,8 @@ let musicTitle: HTMLElement,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Unknown page",
-		largeImageKey: "https://i.imgur.com/5cNh7kv.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Astiga/assets/logo.png",
 	};
 
 	currentUser = document.querySelector(
@@ -125,7 +126,7 @@ presence.on("UpdateData", async () => {
 		)
 			presenceData.state = "No artist / No album";
 
-		presenceData.smallImageKey = playback ? "play" : "pause";
+		presenceData.smallImageKey = playback ? Assets.Play : Assets.Pause;
 
 		presenceData.smallImageText = playback
 			? (await strings).play

@@ -22,7 +22,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/zgNeFww.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Animelizm/assets/logo.png",
 	};
 
 	if (isNaN(video.duration) || video.duration <= 0) {
@@ -48,7 +49,7 @@ presence.on("UpdateData", async () => {
 		[presenceData.details] = info;
 	} else presenceData.details = Info;
 
-	presenceData.smallImageKey = video.paused ? "pause" : "play";
+	presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 	presenceData.smallImageText = video.paused
 		? (await strings).pause
 		: (await strings).play;

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Nekolen",
 		"id": "270125856679002113"
@@ -20,9 +20,9 @@
 		"nl": "duelingnexus.com is een gratis online Yu-Gi-Oh-simulator voor browsers"
 	},
 	"url": "duelingnexus.com",
-	"version": "1.5.15",
-	"logo": "https://i.imgur.com/zE6MjUq.png",
-	"thumbnail": "https://i.imgur.com/7NXj9ih.jpg",
+	"version": "1.5.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dueling%20Nexus/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dueling%20Nexus/assets/thumbnail.jpg",
 	"color": "#FF4500",
 	"category": "games",
 	"tags": [

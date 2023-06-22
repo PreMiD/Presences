@@ -7,7 +7,8 @@ let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/lhabxX8.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/RLTracker.pro/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/") {
@@ -16,7 +17,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/profiles/search")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Searching a profile";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/profiles/")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		title = document.querySelector(

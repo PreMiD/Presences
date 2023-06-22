@@ -21,7 +21,7 @@ async function getShortURL(url: string) {
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/7Y2qTl9.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Gaia/assets/logo.png",
 		smallImageKey: "browse",
 		startTimestamp: browsingTimestamp,
 	};
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 					data.details = title.find(Boolean);
 					data.state = title[0] ? `${title[2]} ${title[1]}` : "Film";
 
-					data.smallImageKey = video.paused ? "pause" : "play";
+					data.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 					data.smallImageText = video.paused ? "Paused" : "Playing";
 
 					if (cover && coverUrl)

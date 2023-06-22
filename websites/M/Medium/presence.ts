@@ -34,7 +34,8 @@ presence.on("UpdateData", async () => {
 		[, ...hrefRest] = document.location.href.split("//"),
 		href = hrefRest.join(""),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/7bfJ5VM.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Medium/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
@@ -59,14 +60,14 @@ presence.on("UpdateData", async () => {
 			document.title.replace(`${author.textContent}-`, "");
 		presenceData.state = `by ${author.textContent}`;
 
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading a story...";
 	} else if (page.includes("/search")) {
 		presenceData.details = "Searching for:";
 		presenceData.state =
 			new URLSearchParams(location.search).get("q") ?? "Something...";
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else {
 		presenceData.details = "Viewing a page:";
 		presenceData.state = "Home";

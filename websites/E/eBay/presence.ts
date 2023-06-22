@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/FuSdtYk.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/eBay/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[, page] = location.pathname.split("/");
@@ -50,7 +51,7 @@ presence.on("UpdateData", async () => {
 							document.querySelector(".srp-controls__count-heading .BOLD")
 								?.textContent
 						} Results`;
-						presenceData.smallImageKey = "search";
+						presenceData.smallImageKey = Assets.Search;
 					} else if (location.pathname.includes("/m.html")) {
 						const seller = document.querySelector(".mbid") as HTMLAnchorElement;
 

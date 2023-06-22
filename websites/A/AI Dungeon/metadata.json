@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "GURRMAN375D",
 		"id": "446528923535278082"
@@ -13,9 +13,9 @@
 	},
 	"url": "play.aidungeon.io",
 	"regExp": "([a-z0-9-]+[.])*aidungeon[.]io[/]",
-	"version": "1.1.14",
-	"logo": "https://i.imgur.com/570X8KK.png",
-	"thumbnail": "https://i.imgur.com/LOh8Cbf.png",
+	"version": "1.1.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AI%20Dungeon/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AI%20Dungeon/assets/thumbnail.png",
 	"color": "#484848",
 	"category": "games",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Amaury",
 		"id": "239487545791086592"
@@ -14,9 +14,9 @@
 		"kryptonia.fr",
 		"forum.kryptonia.fr"
 	],
-	"version": "1.0.10",
-	"logo": "https://i.imgur.com/mWyID87.png",
-	"thumbnail": "https://i.imgur.com/EsJ99aG.png",
+	"version": "1.0.15",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kryptonia/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kryptonia/assets/thumbnail.png",
 	"color": "#12d968",
 	"category": "games",
 	"tags": [

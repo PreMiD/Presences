@@ -16,7 +16,8 @@ let oldLang: string = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/EktlHNP.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Radiooooo/assets/logo.png",
 			details: "Idling",
 			startTimestamp: browsingTimestamp,
 		},
@@ -41,7 +42,7 @@ presence.on("UpdateData", async () => {
 			strings = await getStrings();
 		}
 
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.pause : strings.play;
 
 		presenceData.details = songDetails

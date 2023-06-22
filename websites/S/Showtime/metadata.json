@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -20,9 +20,9 @@
 		"www.sho.com",
 		"www.showtime.com"
 	],
-	"version": "1.4.1",
-	"logo": "https://i.imgur.com/NF61OBJ.png",
-	"thumbnail": "https://i.imgur.com/PrH5IJL.png",
+	"version": "1.4.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/thumbnail.png",
 	"color": "#B20000",
 	"category": "videos",
 	"tags": [

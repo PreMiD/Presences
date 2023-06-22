@@ -9,7 +9,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/ZZvx6Dq.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy");
@@ -31,14 +32,14 @@ presence.on("UpdateData", async () => {
 		} else if (doodleResult && document.location.pathname === "/doodles/") {
 			presenceData.details = "Searching for a doodle:";
 			presenceData.state = doodleResult;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else {
 			presenceData.details = "Current page:";
 			presenceData.state = "Doodles";
 		}
 	} else if (document.location.pathname.startsWith("/search")) {
 		const searchTab = new URL(document.location.href).searchParams.get("tbm");
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		if (!searchTab) {
 			presenceData.details = `Searching for ${homepageInput.value}`;

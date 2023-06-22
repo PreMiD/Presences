@@ -37,7 +37,8 @@ let elapsed = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/VhqYveJ.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png",
 	};
 	if (!document.querySelector('[data-test="player-container"]')) {
 		const playerText = document.querySelector('[data-test="player-text"]');
@@ -89,7 +90,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = title;
 			subtitle = checkLength(subtitle);
 			presenceData.state = subtitle;
-			(presenceData.smallImageKey = paused ? "pause" : "play"),
+			(presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play),
 				(presenceData.smallImageText = paused
 					? (await strings).pause
 					: (await strings).play),

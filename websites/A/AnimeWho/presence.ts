@@ -17,7 +17,8 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/y0RA8SX.jpg",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AnimeWho/assets/logo.jpg",
 		details: "Ana Sayfada Anime Arıyor",
 		startTimestamp: browsingTimestamp,
 	};
@@ -76,7 +77,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (video) {
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).paused
 			: (await strings).playing;

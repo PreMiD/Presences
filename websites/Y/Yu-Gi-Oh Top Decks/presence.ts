@@ -1,11 +1,13 @@
 const presence = new Presence({
 	clientId: "630550023133724692",
 });
+
 let deck;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/RPjfGtz.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/Y/Yu-Gi-Oh%20Top%20Decks/assets/logo.png",
 		smallImageKey: "icon",
 	};
 

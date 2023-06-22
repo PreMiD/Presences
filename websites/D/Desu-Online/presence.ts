@@ -9,12 +9,9 @@ let video = {
 	paused: true,
 };
 
-enum Assets {
-	Search = "https://i.imgur.com/1VwDv4D.png",
-	Home = "https://i.imgur.com/xVhTZcB.png",
-	Play = "https://i.imgur.com/Zd2WTR1.png",
-	Pause = "https://i.imgur.com/LV9xIjD.png",
-	Logo = "https://i.imgur.com/KEkxfKO.png",
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/logo.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/0.png",
 }
 
 presence.on(

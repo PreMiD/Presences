@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "The Gamerzs",
 		"id": "730142125181894657"
@@ -9,9 +9,9 @@
 		"en": "Help us remove 30 million pounds of trash by January 1st, 2022."
 	},
 	"url": "teamseas.org",
-	"version": "1.0.8",
-	"logo": "https://i.imgur.com/nTbCh82.png",
-	"thumbnail": "https://i.imgur.com/WFMYlxq.png",
+	"version": "1.0.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TeamSeas/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TeamSeas/assets/thumbnail.png",
 	"color": "#0095c3",
 	"category": "other",
 	"tags": [

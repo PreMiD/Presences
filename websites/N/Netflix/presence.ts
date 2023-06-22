@@ -162,8 +162,11 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		largeImage =
-			["https://i.imgur.com/Wf8G0mk.gif", "nflix_lg", "noback"][logo] ||
-			"nflix_lg";
+			[
+				"https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/0.gif",
+				"nflix_lg",
+				"noback",
+			][logo] || "nflix_lg";
 
 	let presenceData: PresenceData = {
 			largeImageKey: largeImage,
@@ -268,8 +271,8 @@ presence.on("UpdateData", async () => {
 			presence.getTimestampsfromMedia(videoElement);
 		if (paused) delete presenceData.endTimestamp;
 
-		presenceData.smallImageKey = paused ? "pause" : "play";
-		presenceData.smallImageText = strings[paused ? "pause" : "play"];
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+		presenceData.smallImageText = paused ? strings.pause : strings.play;
 
 		switch (videoMetadata.type) {
 			case "movie": {
@@ -476,7 +479,7 @@ presence.on("UpdateData", async () => {
 					.replace("=", "/")
 					.match(k)
 			) {
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.browse;
 				presenceData = { ...presenceData, ...v };
 			}

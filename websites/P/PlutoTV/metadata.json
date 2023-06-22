@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,9 +11,9 @@
 	},
 	"url": "pluto.tv",
 	"regExp": "([a-z0-9-]+[.])*pluto[.]tv[/]",
-	"version": "1.3.15",
-	"logo": "https://i.imgur.com/oIasj8d.png",
-	"thumbnail": "https://i.imgur.com/ySBvYkV.png",
+	"version": "1.3.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PlutoTV/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PlutoTV/assets/thumbnail.png",
 	"color": "#ffffff",
 	"category": "videos",
 	"tags": [

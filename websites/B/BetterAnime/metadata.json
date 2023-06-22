@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "SlowLife",
 		"id": "374905512661221377"
@@ -12,9 +12,9 @@
 		"vi_VN": "Xem các tập anime và phim mới nhất với chất lượng lên tới FullHD! Xem nhiều anime trực tuyến miễn phí trên BetterAnime!"
 	},
 	"url": "betteranime.net",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/zIAmJZs.png",
-	"thumbnail": "https://i.imgur.com/lpAk9DH.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BetterAnime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BetterAnime/assets/thumbnail.png",
 	"color": "#ffffff",
 	"category": "anime",
 	"tags": [

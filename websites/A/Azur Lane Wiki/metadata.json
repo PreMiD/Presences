@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -12,9 +12,9 @@
 		"vi_VN": "Wiki Azur Lane bằng Tiếng Anh!"
 	},
 	"url": "azurlane.koumakan.jp",
-	"version": "1.2.13",
-	"logo": "https://i.imgur.com/GjwdD5u.png",
-	"thumbnail": "https://i.imgur.com/0VKKu3G.png",
+	"version": "1.2.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Azur%20Lane%20Wiki/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Azur%20Lane%20Wiki/assets/thumbnail.png",
 	"color": "#eae0ed",
 	"category": "anime",
 	"tags": [

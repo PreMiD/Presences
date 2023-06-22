@@ -37,7 +37,8 @@ presence.on("iFrameData", (data: Data) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Bn5qNZO.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/DramaCool/assets/logo.png",
 			details: "Browsing",
 			smallImageText: "Browsing",
 			smallImageKey: "reading",
@@ -71,7 +72,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.searchFor;
 		presenceData.state = search.includes("movies") ? "Movies" : "Stars";
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.searching;
 	} else if (pathname.match("/([a-z0-9-]+)-episode-([0-9]+)")) {
 		ShowData.title =
@@ -89,7 +90,7 @@ presence.on("UpdateData", async () => {
 				""
 			);
 
-			presenceData.smallImageKey = ShowData.paused ? "pause" : "play";
+			presenceData.smallImageKey = ShowData.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = ShowData.paused
 				? strings.paused
 				: strings.play;

@@ -18,7 +18,8 @@ function parseQueryString(queryString?: string): { [key: string]: string } {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/RqcY9ZL.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/RootMe/assets/logo.png",
 		},
 		route = document.location.pathname.split("/");
 
@@ -48,7 +49,7 @@ presence.on("UpdateData", async () => {
 		else if (parseQueryString(document.location.hash).page === "faq")
 			presenceData.state = document.querySelector("h1.crayon").textContent;
 
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		switch (
 			document.querySelector("img.grayscale").getAttribute("alt") ||
 			document.querySelector("img.grayscale").getAttribute("title")

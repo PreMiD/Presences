@@ -23,7 +23,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/KBAjCOX.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TikTok/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
@@ -57,7 +58,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector(".user-username")?.textContent ??
 				document.querySelector(".author-uniqueId")?.textContent
 			}`;
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			if (!video.paused)
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 			presenceData.buttons = [
@@ -109,7 +110,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = detail;
 		presenceData.state = state;
 		presenceData.smallImageText = (await strings).browse;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	const buttons = await presence.getSetting<boolean>("buttons");

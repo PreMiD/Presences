@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "SinecKers",
 		"id": "380411952666640385"
@@ -14,9 +14,9 @@
 		"www.letgo.com",
 		"letgo.com"
 	],
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/6vPSsMf.png",
-	"thumbnail": "https://i.imgur.com/WiqOZh3.png",
+	"version": "1.0.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/letgo/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/letgo/assets/thumbnail.png",
 	"color": "#FF3F56",
 	"category": "other",
 	"tags": [

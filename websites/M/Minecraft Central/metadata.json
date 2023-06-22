@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "hi_feeeh",
 		"id": "160923526277103617"
@@ -13,9 +13,9 @@
 		"mccentral.org",
 		"buy.mccentral.org"
 	],
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/W7XIUCd.png",
-	"thumbnail": "https://i.imgur.com/yTWQ5RJ.png",
+	"version": "1.0.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Central/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Central/assets/thumbnail.png",
 	"color": "#da8a00",
 	"category": "games",
 	"tags": [

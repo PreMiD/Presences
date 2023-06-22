@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -12,9 +12,9 @@
 	},
 	"url": "dizilla4.com",
 	"regExp": "(dizilla[0-9][.][a-z]{3})",
-	"version": "1.1.5",
-	"logo": "https://i.imgur.com/EqxZ0d3.png",
-	"thumbnail": "https://i.imgur.com/aqrhBjE.png",
+	"version": "1.1.10",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dizilla/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dizilla/assets/thumbnail.png",
 	"color": "#d32028",
 	"category": "videos",
 	"tags": [

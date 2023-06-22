@@ -1,13 +1,15 @@
 const presence = new Presence({
 	clientId: "825888886285795329",
 });
+
 let elapsedTime: number = null;
 
 presence.on("UpdateData", async () => {
 	const locationHref = document.location.href,
 		locationPath = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/YqIpqg4.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Glimesh/assets/logo.png",
 		};
 
 	switch (document.location.host) {
@@ -124,13 +126,13 @@ presence.on("UpdateData", async () => {
 						if (elapsedTime === null)
 							elapsedTime = Math.floor(Date.now() / 1000);
 
-						presenceData.smallImageKey = "playing";
+						presenceData.smallImageKey = Assets.Play;
 						presenceData.smallImageText = "Live!";
 
 						if (await presence.getSetting<boolean>("show_timestamps"))
 							presenceData.startTimestamp = elapsedTime;
 					} else {
-						presenceData.smallImageKey = "paused";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = "Paused";
 
 						if (await presence.getSetting<boolean>("show_timestamps"))

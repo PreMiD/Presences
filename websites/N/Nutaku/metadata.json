@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Cascade",
 		"id": "442612628104151040"
@@ -14,9 +14,9 @@
 		"www.nutaku.net"
 	],
 	"regExp": "([a-z]+[.])nutaku.net[/]",
-	"version": "1.0.16",
-	"logo": "https://i.imgur.com/fvSnqjK.png",
-	"thumbnail": "https://i.imgur.com/ypxOFV9.jpg",
+	"version": "1.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/thumbnail.jpg",
 	"color": "#E53155",
 	"category": "games",
 	"tags": [

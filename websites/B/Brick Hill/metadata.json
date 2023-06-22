@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Dragonism",
 		"id": "694943372720341045"
@@ -15,9 +15,9 @@
 		"blog.brick-hill.com",
 		"api.brick-hill.com"
 	],
-	"version": "1.0.15",
-	"logo": "https://i.imgur.com/zeeZUb0.png",
-	"thumbnail": "https://i.imgur.com/Gy5U4QK.png",
+	"version": "1.0.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Brick%20Hill/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Brick%20Hill/assets/thumbnail.png",
 	"color": "#00A9FE",
 	"category": "games",
 	"tags": [

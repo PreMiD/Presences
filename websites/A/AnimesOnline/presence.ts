@@ -30,7 +30,8 @@ presence.on("UpdateData", async () => {
 			document.querySelector("#info > h1")?.textContent ?? "desconhecido",
 		path = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/5U9jD9W.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/AnimesOnline/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -44,7 +45,7 @@ presence.on("UpdateData", async () => {
 				"#contenedor > div.module > div.content.rigth.csearch > header > h1"
 			)?.textContent ?? "pesquisa não encontrada"
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (path.pathname.includes("legendados")) {
 		presenceData.details = "Vendo Legendados";
 		presenceData.state = "Lista de Animes Legendados";
@@ -89,7 +90,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = playvdo;
 			presenceData.state = "Assistir Anime";
 		}
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

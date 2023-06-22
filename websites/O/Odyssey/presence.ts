@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/VD9G5DE.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/Odyssey/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		page = window.location.pathname,
@@ -40,7 +41,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.hostname.includes("install")) {
 		presenceData.details = "Reading:";
 		presenceData.state = "Pixelmon Download & Installation Guide";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

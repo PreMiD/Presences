@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -12,9 +12,9 @@
 	},
 	"url": "eggsy.xyz",
 	"regExp": "eggsy[.]xyz(?![/]projects[/]premid[/]custom-status)",
-	"version": "1.2.17",
-	"logo": "https://i.imgur.com/MziDVWO.png",
-	"thumbnail": "https://i.imgur.com/jy5yr4h.png",
+	"version": "1.2.22",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/eggsy.codes/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/eggsy.codes/assets/thumbnail.png",
 	"color": "#212121",
 	"category": "other",
 	"tags": [

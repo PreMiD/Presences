@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "638080361179512853",
 		"name": "Dark_Ville#2756"
@@ -9,9 +9,9 @@
 		"en": "Discover +2M top ebooks and audiobooks on the leading digital library. Free for 30 days! Access millions of ebooks, audiobooks, magazines, and more. All in one simple subscription. Explore Documents. Personal Growth. Non-Fiction Titles. Explore Magazines."
 	},
 	"url": "www.scribd.com",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/T4XfJhX.png",
-	"thumbnail": "https://i.imgur.com/ivc0FV2.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Scribd/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Scribd/assets/thumbnail.png",
 	"color": "#00858E",
 	"category": "other",
 	"tags": [

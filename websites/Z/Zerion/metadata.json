@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "257151906038677504",
 		"name": "SHISEN"
@@ -10,9 +10,9 @@
 		"pl": "Zerion.cc zapewnia dostęp do treści online, dzięki czemu możesz oglądać swoje ulubione seriale i programy telewizyjne, gdziekolwiek masz dostęp do Internetu."
 	},
 	"url": "zerion.cc",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/MpeS5tp.png",
-	"thumbnail": "https://i.imgur.com/OGI2WEB.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/Zerion/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Z/Zerion/assets/thumbnail.png",
 	"color": "#aa1717",
 	"category": "videos",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "impsy",
 		"id": "114894715106623491"
@@ -18,9 +18,9 @@
 		"lazy-life.ddo.jp",
 		"crawl.kelbi.org"
 	],
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/eGKg2B0.png",
-	"thumbnail": "https://i.imgur.com/9QXAATX.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dungeon%20Crawl%20Stone%20Soup/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dungeon%20Crawl%20Stone%20Soup/assets/thumbnail.png",
 	"color": "#f00f0f",
 	"category": "games",
 	"tags": [

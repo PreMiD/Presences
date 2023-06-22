@@ -11,7 +11,8 @@ presence.on("UpdateData", async () => {
 	const host = window.location.hostname.split("."),
 		path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/3IBLlpc.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Radio.net/assets/logo.png",
 		};
 
 	oldLang = newLang;
@@ -68,7 +69,7 @@ presence.on("UpdateData", async () => {
 							.children[1].firstChild.firstChild.firstChild as HTMLImageElement
 					).src;
 					presenceData.smallImageText = strings.play;
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.startTimestamp = timestamp;
 				} else {
 					// Radio is paused
@@ -81,7 +82,7 @@ presence.on("UpdateData", async () => {
 							.children[1].firstChild.firstChild.firstChild as HTMLImageElement
 					).src;
 					presenceData.smallImageText = strings.pause;
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 				}
 				break;
 			// Podcast
@@ -109,7 +110,7 @@ presence.on("UpdateData", async () => {
 							.children[1].firstChild.firstChild.firstChild as HTMLImageElement
 					).src;
 					presenceData.smallImageText = strings.play;
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 				} else {
 					// Podcast is paused
@@ -122,7 +123,7 @@ presence.on("UpdateData", async () => {
 							.children[1].firstChild.firstChild.firstChild as HTMLImageElement
 					).src;
 					presenceData.smallImageText = strings.pause;
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 				}
 				break;
 			// Search
@@ -133,7 +134,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state =
 					document.querySelector<HTMLHeadingElement>("h1").textContent;
 				presenceData.smallImageText = strings.search;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				break;
 			// Genre, Topic, Country, City, Local stations, Top stations
 			case "genre":
@@ -145,7 +146,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details =
 					document.querySelector<HTMLHeadingElement>("h1").textContent;
 				presenceData.smallImageText = strings.browsing;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			// Choose your country, Contact, App, Terms and conditions, Privacy policy, Imprint
 			case "country-selector":

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "SlowLife",
 		"id": "374905512661221377"
@@ -10,9 +10,9 @@
 		"nl": "Een community-site voor tieners en jongvolwassenen met focus op creativiteit!"
 	},
 	"url": "everskies.com",
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/MnsPDQu.png",
-	"thumbnail": "https://i.imgur.com/scedVmN.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Everskies/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Everskies/assets/thumbnail.png",
 	"color": "#c9bfff",
 	"category": "socials",
 	"tags": [

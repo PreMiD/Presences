@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -12,9 +12,9 @@
 		"territorial.io",
 		"www.territorial.io"
 	],
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/8vXevly.png",
-	"thumbnail": "https://i.imgur.com/cAQAQkB.jpg",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Territorial/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Territorial/assets/thumbnail.jpg",
 	"color": "#07283C",
 	"category": "games",
 	"tags": [

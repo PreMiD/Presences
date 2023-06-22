@@ -23,7 +23,8 @@ let lastGameChange: number = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/OfHFd5Q.jpeg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/logo.jpeg",
 		},
 		itemName = document.querySelector('[itemprop="name"]')
 			? document.querySelector('[itemprop="name"]').textContent
@@ -304,7 +305,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Searching for ${
 			document.querySelector(".current").textContent
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 		if (await presence.getSetting<boolean>("showsearchterm")) {
 			const query = new URLSearchParams(document.location.search).get("terms");

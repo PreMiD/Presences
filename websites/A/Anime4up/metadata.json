@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Ghaith M. AlHallak",
 		"id": "448318357540962314"
@@ -12,9 +12,9 @@
 		"vi_VN": "Anime4up - Trang web Ả Rập để xem và tải về những bộ anime được phụ đề Tiếng Ả Rập từ nhiều máy chủ."
 	},
 	"url": "anime4up.art",
-	"version": "2.0.15",
-	"logo": "https://i.imgur.com/qwOsx7u.png",
-	"thumbnail": "https://i.imgur.com/FfzRGF1.png",
+	"version": "2.0.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anime4up/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anime4up/assets/thumbnail.png",
 	"color": "#38b5eb",
 	"category": "anime",
 	"tags": [

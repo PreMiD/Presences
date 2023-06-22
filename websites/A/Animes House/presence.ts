@@ -44,7 +44,8 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/dv1nn7J.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Animes%20House/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;

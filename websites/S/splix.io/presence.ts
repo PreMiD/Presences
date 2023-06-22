@@ -2,11 +2,13 @@ const presence = new Presence({
 		clientId: "640321591108042762",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let ui: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/rD9lZrN.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/splix.io/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/") {

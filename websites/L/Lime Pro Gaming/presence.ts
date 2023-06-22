@@ -7,7 +7,8 @@ let productName, productBrand, blogTitle, blogAuthor;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/IZlOaJU.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Lime%20Pro%20Gaming/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -95,7 +96,7 @@ presence.on("UpdateData", async () => {
 			).textContent
 		} Results`;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else {
 		switch (window.location.pathname) {
 			case "/cart": {
@@ -126,7 +127,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = blogTitle;
 					if (blogAuthor) presenceData.state = blogAuthor;
 
-					if (blogAuthor) presenceData.smallImageKey = "reading";
+					if (blogAuthor) presenceData.smallImageKey = Assets.Reading;
 				} else presence.setActivity();
 		}
 	}

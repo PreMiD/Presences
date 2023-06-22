@@ -10,7 +10,8 @@ let oldLang: string,
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Fm5zIJW.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/RadioMe/assets/logo.png",
 		};
 
 	oldLang = newLang;
@@ -26,7 +27,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state =
 				document.querySelector<HTMLHeadingElement>("h1").textContent;
 			presenceData.smallImageText = strings.search;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		// Privacy policy, Imprint
 		case "c":
@@ -61,7 +62,7 @@ presence.on("UpdateData", async () => {
 						).children[0] as HTMLImageElement
 					).src;
 					presenceData.smallImageText = strings.play;
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.startTimestamp = timestamp;
 				} else {
 					// Radio is paused
@@ -74,7 +75,7 @@ presence.on("UpdateData", async () => {
 						).children[0] as HTMLImageElement
 					).src;
 					presenceData.smallImageText = strings.pause;
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 				}
 			}
 			break;

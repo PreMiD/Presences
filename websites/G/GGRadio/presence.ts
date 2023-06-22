@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/IOmdiIb.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GGRadio/assets/logo.png",
 		},
 		[format1, format2, elapsed, format, info, dj] = await Promise.all([
 			presence.getSetting<string>("sFormatNoDj1"),
@@ -46,7 +47,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presenceData.smallImageKey =
-			document.querySelector("#play") !== null ? "pause" : "play";
+			document.querySelector("#play") !== null ? Assets.Pause : Assets.Play;
 
 		if (title === "Welcome back!") {
 			presenceData.details = "Loading player...";
@@ -72,16 +73,16 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#top > div.p-body > div > div.p-body-header > div.p-title"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/members")) {
 			presenceData.details = "Forums - Viewing member:";
 			presenceData.state = document.querySelector(
 				"#top > div.p-body > div > div.p-body-main > div > div > div > div > div > div > div.memberHeader-main > div > h1"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/account")) {
 			presenceData.details = "Viewing their account";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname === "/")
 			presenceData.details = "Browsing...";
 	} else presenceData.details = "Browsing...";

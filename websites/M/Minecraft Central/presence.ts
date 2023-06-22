@@ -2,11 +2,13 @@ const presence = new Presence({
 		clientId: "693097839424831489",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: HTMLElement | Element, thread: HTMLElement | Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/W7XIUCd.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Central/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

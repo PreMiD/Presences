@@ -48,7 +48,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/dXRRZoM.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/Nimo/assets/logo.png",
 			startTimestamp: elapsed,
 		},
 		{ pathname, href } = document.location,
@@ -93,7 +94,7 @@ presence.on("UpdateData", async () => {
 
 	if (pathname === "/") presenceData.details = strings.viewHome;
 	else if (pathname.startsWith("/game")) {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = strings.browse;
 		presenceData.details = strings.browse;
 		if (!privacy) {
@@ -103,13 +104,13 @@ presence.on("UpdateData", async () => {
 			).textContent;
 		}
 	} else if (pathname.startsWith("/esports")) {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = strings.browse;
 		presenceData.details = strings.browse;
 		if (!privacy) presenceData.details = strings.esport;
 	} else if (pathname.startsWith("/search")) {
 		presenceData.details = strings.searchingSomething;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.search;
 		if (!privacy) {
 			presenceData.details = strings.searchingFor;
@@ -118,7 +119,7 @@ presence.on("UpdateData", async () => {
 				.textContent.replaceAll('"', "");
 		}
 	} else if (pathname.startsWith("/i")) {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = strings.browse;
 		presenceData.details = strings.browse;
 		if (!privacy) {
@@ -128,7 +129,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = strings.channelSettings;
 			if (pathname.includes("/streamercamp")) {
 				presenceData.details = strings.camp;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.browse;
 				delete presenceData.state;
 				if (pathname.includes("/quickstart"))
@@ -188,7 +189,7 @@ presence.on("UpdateData", async () => {
 					{ label: strings.watchVideo, url: document.URL },
 				];
 			} else presenceData.details = strings.watchingVid;
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;
 		} else {
 			if (!privacy) {

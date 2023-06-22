@@ -154,7 +154,8 @@ async function fetchVideoInfo() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/UxH7DDE.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/logo.png",
 		},
 		video = document.querySelector("video"),
 		path = document.location.pathname;
@@ -185,7 +186,7 @@ presence.on("UpdateData", async () => {
 				state:
 					videoInfo.subtitle ||
 					(location.pathname.includes(":feature:") ? "Movie" : "Extra"),
-				smallImageKey: video.paused ? "pause" : "play",
+				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused ? "Paused" : "Playing",
 			});
 

@@ -3,7 +3,8 @@ const presence = new Presence({ clientId: "890757020393816064" }),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/soQZ7fc.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Turkiye/assets/logo.png",
 			details: "Geziniyor",
 			startTimestamp,
 		},
@@ -12,12 +13,14 @@ presence.on("UpdateData", async () => {
 
 	if (document.querySelector('[href="/login/"]')) {
 		presenceData.smallImageText = "Misafir Modu";
-		presenceData.smallImageKey = "https://i.hizliresim.com/385dt7x.png";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Turkiye/assets/0.png";
 	} else if (document.querySelector("span.avatar.avatar--xxs > img")) {
 		presenceData.smallImageText = document
 			.querySelector("span.avatar.avatar--xxs > img")
 			.getAttribute("alt");
-		presenceData.smallImageKey = "https://i.hizliresim.com/385dt7x.png";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Turkiye/assets/0.png";
 	}
 
 	switch (pathname) {

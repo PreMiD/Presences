@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -16,9 +16,9 @@
 		"changes.ankiweb.net",
 		"forums.ankiweb.net"
 	],
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/zg32aGw.png",
-	"thumbnail": "https://i.imgur.com/Tbg47wu.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnkiWeb/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnkiWeb/assets/thumbnail.png",
 	"color": "#0059b1",
 	"category": "other",
 	"tags": [

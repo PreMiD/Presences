@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "651145049811451924",
 });
+
 presence.on("UpdateData", async () => {
 	if (document.location.pathname.startsWith("/wiki/")) {
 		const [page] = document.querySelectorAll(".page-header__title");
@@ -11,7 +12,8 @@ presence.on("UpdateData", async () => {
 		presence.setActivity({
 			details: "Viewing a page...",
 			state: pageText,
-			largeImageKey: "https://i.imgur.com/pDL6BY7.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BanG%20Dream%20Wikia/assets/logo.png",
 		});
 	}
 });

@@ -29,7 +29,8 @@ function getGenre(code: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/A9rYYB4.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/logo.png",
 		},
 		{ location } = window;
 	// If player
@@ -53,10 +54,10 @@ presence.on("UpdateData", async () => {
 					.querySelector("span#ArtistNameArea").textContent
 			}`;
 			if (playButton === "재생") {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "일시 정지";
 			} else if (playButton === "일시정지") {
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "재생";
 			}
 
@@ -75,13 +76,13 @@ presence.on("UpdateData", async () => {
 				document.querySelector("h2.videoTitle").textContent
 			}`;
 			if (video.paused) {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "일시 정지";
 			} else if (video.ended) {
-				presenceData.smallImageKey = "stop";
+				presenceData.smallImageKey = Assets.Stop;
 				presenceData.smallImageText = "정지";
 			} else {
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "재생";
 			}
 
@@ -93,7 +94,7 @@ presence.on("UpdateData", async () => {
 		}
 		default:
 			if (location.pathname.indexOf("/search") === 0) {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "검색";
 				presenceData.state = getQuery().query;
 				switch (location.pathname) {

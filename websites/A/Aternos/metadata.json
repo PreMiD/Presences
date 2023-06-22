@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "allvzx",
 		"id": "369507341973979136"
@@ -16,9 +16,9 @@
 		"support.aternos.org",
 		"board.aternos.org"
 	],
-	"version": "1.1.20",
-	"logo": "https://i.imgur.com/Hjd1K2V.jpg",
-	"thumbnail": "https://i.imgur.com/ESxRzaB.png",
+	"version": "1.1.25",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Aternos/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Aternos/assets/thumbnail.png",
 	"color": "#2d87d3",
 	"category": "games",
 	"tags": [

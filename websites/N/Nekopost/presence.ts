@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/uoFY9IP.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/N/Nekopost/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -19,16 +20,16 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document
 					.querySelector("head > title")
 					.textContent.split(" ")[0];
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				presenceData.details = `Manga :${
 					document.querySelector("head > title").textContent
 				}!`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else {
 			presenceData.details = "กำลังเลือก Manga";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.includes("/novel")) {
 		if (document.location.pathname.includes("/novel/")) {
@@ -40,16 +41,16 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document
 					.querySelector("head > title")
 					.textContent.split(" ")[0];
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				presenceData.details = `Novel :${
 					document.querySelector("head > title").textContent
 				}!`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else {
 			presenceData.details = "กำลังเลือก Novel";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.includes("/comic")) {
 		if (document.location.pathname.includes("/comic/")) {
@@ -61,16 +62,16 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document
 					.querySelector("head > title")
 					.textContent.split(" ")[0];
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				presenceData.details = `Comic :${
 					document.querySelector("head > title").textContent
 				}!`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else {
 			presenceData.details = "กำลังเลือก Original Comic";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.includes("/fiction")) {
 		if (document.location.pathname.includes("/fiction/")) {
@@ -82,23 +83,23 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document
 					.querySelector("head > title")
 					.textContent.split(" ")[0];
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				presenceData.details = `ONovel :${
 					document.querySelector("head > title").textContent
 				}!`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else {
 			presenceData.details = "กำลังเลือก Original Novel";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.pathname.includes("/explore")) {
 		presenceData.details = "กำลังเลือก Project";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname === "/") {
 		presenceData.details = "กำลังหา...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	}
 	presence.setActivity(presenceData);
 });

@@ -2,16 +2,16 @@ const presence: Presence = new Presence({
 		clientId: "833430731816173669",
 	}),
 	levelImages: Record<string, string> = {
-		10: "https://i.imgur.com/nQvo9Wo.png",
-		20: "https://i.imgur.com/ag1vZVv.png",
-		30: "https://i.imgur.com/FvJN63W.png",
-		40: "https://i.imgur.com/pN5cZxs.png",
-		50: "https://i.imgur.com/ETRB7TM.png",
-		60: "https://i.imgur.com/WGCbykC.png",
-		70: "https://i.imgur.com/7J4mGPp.png",
-		80: "https://i.imgur.com/JOek4w6.png",
-		90: "https://i.imgur.com/4s0tT5G.png",
-		100: "https://i.imgur.com/VQHYuGy.png",
+		10: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/0.png",
+		20: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/1.png",
+		30: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/2.png",
+		40: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/3.png",
+		50: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/4.png",
+		60: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/5.png",
+		70: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/6.png",
+		80: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/7.png",
+		90: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/8.png",
+		100: "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/9.png",
 	},
 	slideshow = presence.createSlideshow();
 
@@ -28,38 +28,35 @@ function getLevelIcon(level: number) {
 }
 
 function applyGrammarPointDetails(presenceData: PresenceData) {
-	const { pathname, href } = window.location;
+	const { pathname, href } = document.location;
 	presenceData.details = "Viewing a grammar point";
-	presenceData.state = (
-		document.querySelector(".grammar-point-study[style*='block']") ?? document
-	)
-		.querySelector<HTMLDivElement>(".grammar-point__text--main-kanji-new")
-		.textContent.trim();
+	presenceData.state = removeRubyCharacters(document.querySelector("h1 > div"));
 	if (!pathname.startsWith("/learn"))
 		presenceData.buttons = [{ label: "View Grammar Point", url: href }];
 }
 
 function applyGrammarReviewDetails(presenceData: PresenceData) {
-	const SRSLevel = document
-			.querySelector<HTMLDivElement>(".review__stats.srs-tracker")
-			?.textContent.trim(),
-		percent = document
-			.querySelector<HTMLDivElement>(".review__stats.review-percent")
-			.textContent.trim(),
-		[reviewsRemaining] = document
-			.querySelector<HTMLDivElement>("#reviews")
-			.textContent.match(/\d+/);
-	if (SRSLevel)
-		presenceData.state = `${SRSLevel} | ${percent} correct | ${reviewsRemaining} remaining`;
-	else
-		presenceData.state = `${percent} correct | ${reviewsRemaining} remaining`;
+	const details = document.querySelector<HTMLUListElement>(
+		"header ul:nth-child(2)"
+	).children;
+	presenceData.state = `${details[0].textContent} | ${details[1].textContent} correct | ${details[2].textContent} remaining`;
+}
+
+function removeRubyCharacters(element: HTMLElement) {
+	let text = "";
+	for (const child of element.childNodes) {
+		if (child.nodeName === "RUBY") text += child.childNodes[0].textContent;
+		else text += child.textContent;
+	}
+	return text;
 }
 
 presence.on("UpdateData", () => {
-	const { pathname, hostname, href } = window.location,
+	const { pathname, hostname, href } = document.location,
 		pathSplit = pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/NkfEDwV.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -136,9 +133,13 @@ presence.on("UpdateData", () => {
 			}
 		}
 	} else {
-		const level = +document
-			.querySelector<HTMLParagraphElement>(".header-user-level")
-			?.textContent.match(/\d+/)[0];
+		const level = +(
+			document.querySelector<HTMLParagraphElement>(".header-user-level") ??
+			document
+				.querySelector<HTMLImageElement>("header li > button img")
+				?.closest<HTMLDivElement>("button > div")
+				.querySelector<HTMLParagraphElement>("div:nth-child(2) p:last-child")
+		)?.textContent.match(/\d+/)[0];
 		if (level) {
 			presenceData.smallImageKey = getLevelIcon(level);
 			presenceData.smallImageText = `Level ${level}`;
@@ -150,10 +151,7 @@ presence.on("UpdateData", () => {
 			}
 			case "cram": {
 				presenceData.details = "Cramming";
-				if (
-					document.querySelector<HTMLDivElement>(".cram-start").style
-						.display !== "none"
-				)
+				if (document.querySelector<HTMLDivElement>("#new-cram"))
 					presenceData.state = "Selecting grammar to cram";
 				else applyGrammarReviewDetails(presenceData);
 				break;
@@ -179,12 +177,10 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "learn": {
-				if (document.querySelector(".grammar-point-study"))
-					applyGrammarPointDetails(presenceData);
-				else {
+				if (document.querySelector("#js-quiz")) {
 					presenceData.details = "Learning new grammar";
 					applyGrammarReviewDetails(presenceData);
-				}
+				} else applyGrammarPointDetails(presenceData);
 				break;
 			}
 			case "lessons": {
@@ -204,9 +200,7 @@ presence.on("UpdateData", () => {
 					if (pathSplit[2]) applyGrammarPointDetails(presenceData);
 					else {
 						presenceData.details = "Viewing a grammar path";
-						presenceData.state = document
-							.querySelector<HTMLHeadingElement>("h1")
-							.childNodes[0].textContent.trim();
+						presenceData.state = document.querySelector("h2").textContent;
 						presenceData.buttons = [{ label: "View Grammar Path", url: href }];
 					}
 				} else presenceData.details = "Browsing grammar paths";
@@ -216,18 +210,24 @@ presence.on("UpdateData", () => {
 				presenceData.details = "Browsing practice reading passages";
 				break;
 			}
-			case "study": {
+			case "reviews": {
 				presenceData.details = "Doing reviews";
 				applyGrammarReviewDetails(presenceData);
 				break;
 			}
 			case "summary": {
 				presenceData.details = "Viewing review summary";
-				presenceData.state = `${
-					document
-						.querySelector<HTMLDivElement>(".tab-highlight")
-						.textContent.match(/\w+(?=:)/)[0]
-				} - ${document.querySelector("h1").textContent}`;
+				const correctElement = document.querySelector<HTMLHeadingElement>(
+					"h4.text-quiz-correct"
+				);
+				if (correctElement) {
+					presenceData.state = `${correctElement.textContent} correct / ${
+						document.querySelector<HTMLHeadingElement>("h4.text-quiz-incorrect")
+							.textContent
+					} incorrect (${
+						document.querySelector<HTMLHeadingElement>("aside h3").textContent
+					})`;
+				}
 				break;
 			}
 			case "user": {
@@ -238,25 +238,21 @@ presence.on("UpdateData", () => {
 						case "": {
 							presenceData.details = "Viewing their profile";
 							const [daysStudied, studyStreak, level, xp] =
-								document.querySelector<HTMLDivElement>(
-									"h2 + div + div"
-								).children;
-							presenceData.state = `${
-								daysStudied.querySelector<HTMLDivElement>("h3 + div")
-									.textContent
-							} days studied | ${
-								studyStreak.querySelector<HTMLDivElement>("h3 + div")
-									.textContent
-							} streak | Level ${
-								level.querySelector<HTMLDivElement>("h3 + div").textContent
-							} (${
-								xp.querySelector<HTMLDivElement>("h3 + div").textContent
-							} XP)`;
+								document.querySelector<HTMLDivElement>("h2 + div").children;
+							presenceData.state = `${daysStudied
+								.querySelector("p")
+								.textContent.trim()} days studied | ${studyStreak
+								.querySelector("p")
+								.textContent.trim()} streak | Level ${level
+								.querySelector("p")
+								.textContent.trim()} (${xp
+								.querySelector("p")
+								.textContent.trim()} XP)`;
 							break;
 						}
 						case "badges": {
 							for (const [i, badgeContainer] of document
-								.querySelectorAll<HTMLDivElement>(".bunpro-badge.user-badge")
+								.querySelectorAll<HTMLDivElement>(".user-profile-badge--earned")
 								.entries()) {
 								slideshow.addSlide(
 									i.toString(),
@@ -267,16 +263,16 @@ presence.on("UpdateData", () => {
 											badgeContainer.querySelector("h3").textContent
 										} - ${
 											badgeContainer.querySelector<HTMLDivElement>(
-												".badge-requirement"
+												".user-profile-badge--requirement"
 											).textContent
 										}`,
 										largeImageKey:
 											badgeContainer.querySelector<HTMLImageElement>(
-												".badge-icon"
+												".user-profile-badge--icon"
 											).src,
 										smallImageText:
 											badgeContainer.querySelector<HTMLDivElement>(
-												".badge-flavor-text"
+												".user-profile-badge--flavor-text"
 											).textContent,
 									},
 									5000
@@ -299,9 +295,9 @@ presence.on("UpdateData", () => {
 			case "vocabs": {
 				if (pathSplit[1]) {
 					presenceData.details = "Viewing a vocabulary";
-					presenceData.state = `${document.querySelector("h2").textContent} - ${
-						document.querySelector("h6").textContent
-					}`;
+					presenceData.state = `${removeRubyCharacters(
+						document.querySelector<HTMLDivElement>("h1 > div")
+					)} - ${document.querySelector("h2").textContent}`;
 					presenceData.buttons = [{ label: "View Vocabulary", url: href }];
 				} else {
 					presenceData.details = "Searching for vocabulary";

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Jake.",
 		"id": "480407581085532180"
@@ -10,9 +10,9 @@
 		"nl": "Photopea online afbeeldingseditor is een gratis Photoshop-kloon met geavanceerde tools"
 	},
 	"url": "www.photopea.com",
-	"version": "1.4.14",
-	"logo": "https://i.imgur.com/myBgo2K.png",
-	"thumbnail": "https://i.imgur.com/ZshuEoP.jpg",
+	"version": "1.4.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Photopea/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Photopea/assets/thumbnail.jpg",
 	"color": "#42b3f5",
 	"category": "other",
 	"tags": [

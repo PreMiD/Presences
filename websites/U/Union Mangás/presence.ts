@@ -9,13 +9,14 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/6J5Zxx5.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/U/Union%20Mang%C3%A1s/assets/logo.png",
 		startTimestamp,
 	};
 
 	if (pathname.startsWith("/lista-mangas")) {
 		presenceData.details = "Procurando um mangá";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Procurando";
 	} else if (pathname.startsWith("/manga")) {
 		presenceData.details = "Olhando um mangá";
@@ -38,11 +39,11 @@ presence.on("UpdateData", async () => {
 			}`;
 		} else presenceData.state = mangaChapter;
 
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Lendo";
 	} else if (pathname.startsWith("/scans")) {
 		presenceData.details = "Procurando uma Scan";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Procurando";
 	} else presenceData.details = (await strings).browsing;
 

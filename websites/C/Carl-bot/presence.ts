@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/2yPwE4a.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/Carl-bot/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -28,7 +29,7 @@ presence.on("UpdateData", () => {
 	}
 
 	if (document.location.hostname === "docs.carl.gg") {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.details = "Documentation";
 
 		presenceData.state = document.querySelector("h1").textContent;

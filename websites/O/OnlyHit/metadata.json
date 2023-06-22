@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "a6d",
 		"id": "523890815291097129"
@@ -19,9 +19,9 @@
 		"onlyhit.us",
 		"onlyhit.merchforall.com"
 	],
-	"version": "1.1.13",
-	"logo": "https://i.imgur.com/vyiCjQz.png",
-	"thumbnail": "https://i.imgur.com/x5Jpq7I.png",
+	"version": "1.1.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OnlyHit/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OnlyHit/assets/thumbnail.png",
 	"color": "#C1272D",
 	"category": "music",
 	"tags": [

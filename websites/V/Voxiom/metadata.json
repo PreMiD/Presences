@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Meow",
 		"id": "521701910609133570"
@@ -9,9 +9,9 @@
 		"en": "Play the best browser multiplayer voxel first person shooter inspired by minecraft, fortnite, counter-strike, and call of duty!"
 	},
 	"url": "voxiom.io",
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/AJ9gTe1.png",
-	"thumbnail": "https://i.imgur.com/jWDLaoK.png",
+	"version": "1.0.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Voxiom/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Voxiom/assets/thumbnail.png",
 	"color": "#e67e22",
 	"category": "games",
 	"tags": [

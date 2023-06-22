@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "808756700022702120",
 });
+
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -18,7 +19,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/AUKbzxX.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Music/assets/logo.png",
 		},
 		[buttons, newLang, showPlaylist, cover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
@@ -72,7 +74,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = navigator.mediaSession.metadata.title;
 		presenceData.state = navigator.mediaSession.metadata.artist;
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.pause : strings.play;
 		presenceData.endTimestamp =
 			Date.now() / 1000 +

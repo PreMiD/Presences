@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "N0chteil ^^",
 		"id": "495901098926669825"
@@ -12,9 +12,9 @@
 	},
 	"url": "www.snipes.com",
 	"regExp": "www[.]snipes(usa)?[.]([a-z]+)",
-	"version": "1.1.14",
-	"logo": "https://i.imgur.com/9HmTAOR.png",
-	"thumbnail": "https://i.imgur.com/bKZ2EQH.png",
+	"version": "1.1.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/thumbnail.png",
 	"color": "#DF632F",
 	"category": "other",
 	"tags": [

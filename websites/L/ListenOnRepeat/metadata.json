@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,9 +10,9 @@
 		"nl": "Ontdek muziek, bekijk de nieuwste trending video's en 24/7 samengestelde inhoud! Probeer ListenOnRepeat vandaag nog."
 	},
 	"url": "listenonrepeat.com",
-	"version": "2.0.16",
-	"logo": "https://i.imgur.com/F7W7Vnn.png",
-	"thumbnail": "https://i.imgur.com/jhah8BE.png",
+	"version": "2.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/ListenOnRepeat/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/ListenOnRepeat/assets/thumbnail.png",
 	"color": "#ff0066",
 	"category": "videos",
 	"tags": [

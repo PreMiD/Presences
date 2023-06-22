@@ -70,7 +70,8 @@ const presence = new AppleTV({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/9yI21cv.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Apple%20TV+/assets/logo.png",
 		details: "Browsing...",
 		smallImageKey: "browse",
 		startTimestamp: data.startedSince,
@@ -93,7 +94,9 @@ presence.on("UpdateData", async () => {
 						: `Trailer • ${videoTitle || title}`;
 
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 
 					presenceData.buttons = [
 						{
@@ -130,7 +133,9 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "Movie";
 
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 
 					presenceData.buttons = [
 						{

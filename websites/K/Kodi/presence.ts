@@ -6,7 +6,7 @@ let Name: Element, Artist: Element, timeDuration: Element, timeElapsed: Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/PKrgfd3.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Kodi/assets/logo.png",
 	};
 
 	if (

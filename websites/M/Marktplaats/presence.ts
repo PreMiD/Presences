@@ -2,11 +2,13 @@ const presence = new Presence({
 		clientId: "811572600294735902",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let search: HTMLInputElement, title: Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/K0yeNeC.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Marktplaats/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[privacy, buttons] = await Promise.all([
@@ -28,12 +30,12 @@ presence.on("UpdateData", async () => {
 			} else {
 				presenceData.details = "Zoekt naar:";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = "searching";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else if (pathname === "/") presenceData.details = "Homepagina";
 		else if (pathname.includes("/plaats")) {
 			presenceData.state = "Verkoop een Artikel";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (pathname.includes("/auto-kopen"))
 			presenceData.details = `Bekijkt ${active.textContent}`;
 		else if (pathname.includes("/cp/")) {
@@ -82,10 +84,10 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLInputElement>('[data-sem="sendMessageText"]')
 					?.textContent
 			) {
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 				presenceData.details = "Schrijft bericht naar verkoper over";
 			} else {
-				presenceData.smallImageKey = "read";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.details = "Leest berichten over";
 			}
 			if (adCheck) {
@@ -119,7 +121,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector<HTMLMetaElement>(
 				'meta[name="description"]'
 			).content;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.buttons = [
 				{
 					label: "Lees Artikel",
@@ -152,13 +154,13 @@ presence.on("UpdateData", async () => {
 			if (search.textContent) {
 				presenceData.details = "Zoekt in de Helpdesk naar";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = "searching";
+				presenceData.smallImageKey = Assets.Search;
 			} else presenceData.details = "Bekijkt de Helpdesk";
 		}
 		if (pathname.includes("/topic/") || pathname.includes("/article/")) {
 			presenceData.details = "Leest een artikel over";
 			presenceData.state = title.textContent.replace(" | Helpdesk", "");
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	}
 

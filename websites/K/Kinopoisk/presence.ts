@@ -29,9 +29,9 @@ function pageTitle(string: string) {
 		.textContent.split(string);
 }
 
-enum Assets {
-	Library = "https://i.imgur.com/FzNE1zD.png",
-	Movies = "https://i.imgur.com/EzwByrT.png",
+const enum Assets {
+	Library = "https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/logo.png",
+	Movies = "https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/0.png",
 }
 
 presence.on(
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
 				case "afisha":
 					if (!privacy) {
 						presenceData.details = "Ищет билеты в кино";
-						presenceData.smallImageKey = "search";
+						presenceData.smallImageKey = Assets.Search;
 					}
 					break;
 				case "chance":
@@ -158,7 +158,7 @@ presence.on("UpdateData", async () => {
 					break;
 				case "s":
 					presenceData.details = "Ищет фильмы";
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					break;
 				case "special":
 					presenceData.details = "Смотрит спецпроект";
@@ -166,7 +166,7 @@ presence.on("UpdateData", async () => {
 					break;
 				case "top":
 					presenceData.details = "Ищет фильм через навигатор";
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					break;
 				case "user":
 					presenceData.details = "Смотрит профиль";
@@ -210,7 +210,7 @@ presence.on("UpdateData", async () => {
 						: "фильм"
 				}`;
 				presenceData.state = textContent(".Meta_subtitle__jnooi");
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? strings.pause
 					: strings.play;

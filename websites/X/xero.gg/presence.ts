@@ -11,7 +11,8 @@ function getTimeStamp() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/opZJy1Y.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/X/xero.gg/assets/logo.png",
 		},
 		showChat = await presence.getSetting<boolean>("showchat"),
 		showProfile = await presence.getSetting<boolean>("showprofile");

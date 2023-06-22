@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "MaaKoo",
 		"id": "243728573624614912"
@@ -10,9 +10,9 @@
 		"id": "Unduh anime, anime musik, anime ongoing, atau anime batch dengan subtitle Indonesia"
 	},
 	"url": "doronime.id",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/vLys7Ng.png",
-	"thumbnail": "https://i.imgur.com/IbgeB5v.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Doronime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Doronime/assets/thumbnail.png",
 	"color": "#b11415",
 	"category": "anime",
 	"tags": [

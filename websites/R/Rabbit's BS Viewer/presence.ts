@@ -9,7 +9,8 @@ presence.on("UpdateData", async () => {
 		privacy = await presence.getSetting<boolean>("privacy"),
 		buttons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/FDP38pa.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Rabbit's%20BS%20Viewer/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -38,7 +39,7 @@ presence.on("UpdateData", async () => {
 		}
 		switch (document.querySelector("#play-button").getAttribute("class")) {
 			case "fas fa-pause":
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.endTimestamp =
 					Date.now() +
 					(parseInt(
@@ -62,7 +63,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Playing";
 				break;
 			case "fas fa-play":
-				presenceData.smallImageKey = "paused";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
 				break;
 		}

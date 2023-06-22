@@ -34,9 +34,13 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 	lastTeamLog: availableColors = "beige",
 	currentlySetColor: availableColors = "beige";
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Bf7TsWG.png",
+		largeImageKey: Assets.Logo,
 	};
 
 	const buttons = await presence.getSetting<boolean>("buttons");

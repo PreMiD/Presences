@@ -35,7 +35,8 @@ const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const page: string = location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/BnMRZ49.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TRanimeizle/assets/logo.png",
 			startTimestamp,
 		};
 
@@ -44,7 +45,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document
 			.querySelector(".post-head .title strong")
 			?.textContent.replaceAll('"', "");
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (page.includes("/harfler/")) {
 		const letter = document.querySelector(
 			".post-head .title strong"
@@ -66,7 +67,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details =
 			document.querySelector(".post-header h1")?.textContent ??
 			"Bilinmeyen Gönderi";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Bir gönderi okuyor";
 	} else if (page.includes("/BanaOzel/")) {
 		presenceData.details = "Bir listeye göz atıyor:";
@@ -96,7 +97,7 @@ presence.on("UpdateData", async () => {
 		];
 
 		// Set playing/paused text
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

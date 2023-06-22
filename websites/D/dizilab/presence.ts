@@ -60,14 +60,16 @@ presence.on("UpdateData", async () => {
 			(document.location.search !== "" && genre === "" && showName === "")
 		) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: "Bir sayfaya göz atıyor:",
 				state: "Arşiv",
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if ((genre && !showName) || (genre && showName === "")) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: "Bir kategoriye göz atıyor:",
 				state: genre,
 				smallImageKey: "search",
@@ -75,7 +77,8 @@ presence.on("UpdateData", async () => {
 			});
 		} else if (genre && showName) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: "Bir dizi arıyor:",
 				state: `${showName} (${genre})`,
 				smallImageKey: "search",
@@ -86,7 +89,8 @@ presence.on("UpdateData", async () => {
 			(genre === "" && showName && showName !== "")
 		) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: "Bir dizi arıyor:",
 				state: showName,
 				smallImageKey: "search",
@@ -99,21 +103,24 @@ presence.on("UpdateData", async () => {
 		);
 
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 			details: "Bir üyenin profiline bakıyor:",
 			state: user && user.textContent ? user.textContent.trim() : "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (!isVideoData && showTitle && showTitle.textContent !== "") {
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 			details: "Bir diziyi inceliyor:",
 			state: showTitle.textContent,
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (!isVideoData && actorName && actorName.textContent !== "") {
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 			details: "Bir aktörü inceliyor:",
 			state: actorName.textContent,
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -128,7 +135,8 @@ presence.on("UpdateData", async () => {
 
 		if (page.slice(page.indexOf("/forum") + 6).length <= 0) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: `${
 					forumTitle && forumTitle.textContent !== ""
 						? forumTitle.textContent.replace(" tartışma forumu", "")
@@ -139,7 +147,8 @@ presence.on("UpdateData", async () => {
 			});
 		} else {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: `${
 					forumTitle && forumTitle.textContent !== ""
 						? forumTitle.textContent.replace(" tartışma forumu", "")
@@ -154,7 +163,8 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
-			largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
 			startTimestamp: Math.floor(Date.now() / 1000),
@@ -199,7 +209,8 @@ presence.on("UpdateData", async () => {
 				Math.floor(_video.duration)
 			),
 			data: { [k: string]: boolean | string | number } = {
-				largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: title.textContent,
 				state: episodeX
 					.replace(/\n/g, "")
@@ -207,7 +218,7 @@ presence.on("UpdateData", async () => {
 					.replace(title.textContent, "")
 					.replace(" ", "")
 					.trim(),
-				smallImageKey: video.paused ? "pause" : "play",
+				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused
 					? (await strings).pause
 					: (await strings).play,
@@ -264,7 +275,8 @@ presence.on("UpdateData", async () => {
 					Math.floor(video.duration)
 				),
 				presenceData: PresenceData = {
-					largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 					details: title.textContent,
 					state: episodeX
 						.replace(/\n/g, "")
@@ -272,7 +284,7 @@ presence.on("UpdateData", async () => {
 						.replace(title.textContent, "")
 						.replace(" ", "")
 						.trim(),
-					smallImageKey: video.paused ? "pause" : "play",
+					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 					smallImageText: video.paused
 						? (await strings).pause
 						: (await strings).play,
@@ -288,7 +300,8 @@ presence.on("UpdateData", async () => {
 			presence.setActivity(presenceData);
 		} else {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/GjvOgOB.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: "Bir sayfaya göz atıyor:",
 				state: "Bilinmeyen Sayfa",
 				startTimestamp: Math.floor(Date.now() / 1000),

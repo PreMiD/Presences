@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Tepiloxtl",
 		"id": "085733181730332672"
@@ -10,9 +10,9 @@
 		"nl": "Door verre stemmen dichtbij te brengen, verbindt radio mensen en plaatsen. Met Radio Garden kunnen luisteraars afstemmen op live-radio over de hele wereld."
 	},
 	"url": "radio.garden",
-	"version": "3.0.4",
-	"logo": "https://i.imgur.com/Q2l6Bw8.png",
-	"thumbnail": "https://i.imgur.com/4Zzi2Lv.png",
+	"version": "3.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Radio%20Garden/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Radio%20Garden/assets/thumbnail.png",
 	"color": "#0DF675",
 	"category": "music",
 	"tags": [

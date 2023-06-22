@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Yhvr",
 		"id": "255757013122809856"
@@ -10,9 +10,9 @@
 		"nl": "MSPFA is een website die wordt gebruikt voor het hosten van webcomics, meestal in de stijl van de strips op mspaintadventures.com, maar niet uitsluitend."
 	},
 	"url": "mspfa.com",
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/GWzbcj0.png",
-	"thumbnail": "https://i.imgur.com/UhTbTSy.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MSPFA/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MSPFA/assets/thumbnail.png",
 	"color": "#00FF2D",
 	"category": "other",
 	"tags": [

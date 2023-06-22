@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Gurrman375D",
 		"id": "446528923535278082"
@@ -11,9 +11,9 @@
 		"vi_VN": "CliffsNotes cung cấp hướng dẫn được viết bởi các giáo viên và giáo sư thật, nên không kể bạn đang học gì, CliffsNotes có thể giúp bạn nhẹ đi các cơn đau đầu khi làm bài tập và giúp bạn đạt điểm cao trong các bài kiểm tra."
 	},
 	"url": "www.cliffsnotes.com",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/t370zFk.png",
-	"thumbnail": "https://i.imgur.com/XFCwrCc.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CliffsNotes/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CliffsNotes/assets/thumbnail.png",
 	"color": "#FFE500",
 	"category": "other",
 	"tags": [

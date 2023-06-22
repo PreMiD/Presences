@@ -128,7 +128,7 @@ function resolveLanguage(lang: string): keyof typeof waitingString {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/TFduNvD.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/logo.png",
 	};
 
 	path = document.location.pathname.split("/");
@@ -164,7 +164,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (path.includes("articles") && path[1]) {
 		presenceData.details = "Lis l'article ⤵️";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Lis un article";
 		presenceData.state = document.querySelector("body h1").textContent;
 	} else if (path.includes("game") && path[1]) {
@@ -255,7 +255,7 @@ presence.on("UpdateData", async () => {
 				break;
 			case "articles":
 				presenceData.state = "Consulte les dernières actualités";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "En train de lire";
 				break;
 			default:

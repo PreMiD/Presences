@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Other",
-			largeImageKey: "https://i.imgur.com/zvX0TaN.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/Video%20Game%20Mods/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 			buttons: [
 				{
@@ -141,7 +142,8 @@ presence.on("UpdateData", async () => {
 						presenceData.largeImageKey =
 							document
 								.querySelector<HTMLImageElement>("div.post-thumbnail img")
-								?.getAttribute("src") ?? "https://i.imgur.com/zvX0TaN.png";
+								?.getAttribute("src") ??
+							"https://cdn.rcd.gg/PreMiD/websites/V/Video%20Game%20Mods/assets/logo.png";
 						presenceData.state =
 							document.querySelector<HTMLHeadingElement>(
 								"h1.entry-title"

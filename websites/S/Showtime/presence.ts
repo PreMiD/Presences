@@ -23,10 +23,10 @@ async function getStrings() {
 }
 
 enum Logo {
-	RedShowtime = "https://i.imgur.com/u1ASDz8.png",
-	WhiteShowtime = "https://i.imgur.com/a0ls8Jh.png",
-	BlackShowtime = "https://i.imgur.com/JJjrlfR.png",
-	SkyShowtime = "https://i.imgur.com/x32sZlD.png",
+	RedShowtime = "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/0.png",
+	WhiteShowtime = "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/1.png",
+	BlackShowtime = "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/2.png",
+	SkyShowtime = "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/3.png",
 }
 function logoCheck(logoNumber: number) {
 	return logoNumber === 0 // Red
@@ -39,12 +39,7 @@ function logoCheck(logoNumber: number) {
 		? Logo.SkyShowtime
 		: Logo.RedShowtime; // Default (Red)
 }
-enum Assets {
-	Search = "https://i.imgur.com/oGQtnIY.png",
-	Read = "https://i.imgur.com/8vMPNni.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-}
+
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
 	pathSplit: string[];
@@ -152,7 +147,7 @@ presence.on("UpdateData", async () => {
 						[, presenceData.endTimestamp] =
 							presence.getTimestampsfromMedia(video);
 						presenceData.smallImageKey = video.paused
-							? Assets.Paused
+							? Assets.Pause
 							: Assets.Play;
 						presenceData.smallImageText = video.paused
 							? strings.paused
@@ -243,7 +238,7 @@ presence.on("UpdateData", async () => {
 										[, presenceData.endTimestamp] =
 											presence.getTimestampsfromMedia(video);
 										presenceData.smallImageKey = video.paused
-											? Assets.Paused
+											? Assets.Pause
 											: Assets.Play;
 										presenceData.smallImageText = video.paused
 											? strings.paused

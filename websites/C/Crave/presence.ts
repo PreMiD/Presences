@@ -1,10 +1,14 @@
 const presence = new Presence({
 		clientId: "1001288215388495953",
 	}),
-	browsingStamp = Date.now();
+	browsingStamp = Math.floor(Date.now() / 1000);
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Crave/assets/logo.png",
+}
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = { largeImageKey: "crave_logo" };
+	const presenceData: PresenceData = { largeImageKey: Assets.Logo };
 
 	if (document.querySelector(".jw-video")) {
 		// if contains video
@@ -24,10 +28,10 @@ presence.on("UpdateData", async () => {
 			)[0];
 			presenceData.endTimestamp = presence.getTimestamps(elapsed, duration)[1];
 
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 		} else {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 		}
 

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -25,9 +25,9 @@
 		"www.facebook.com",
 		"web.facebook.com"
 	],
-	"version": "3.7.0",
-	"logo": "https://i.imgur.com/nS9sZn6.png",
-	"thumbnail": "https://i.imgur.com/iftQq6r.jpg",
+	"version": "3.7.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/thumbnail.jpg",
 	"color": "#4267B2",
 	"category": "socials",
 	"tags": [

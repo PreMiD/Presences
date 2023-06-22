@@ -1,9 +1,11 @@
 const presence = new Presence({
 	clientId: "821810069733376022",
 });
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/mWyID87.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/K/Kryptonia/assets/logo.png",
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	// Landing Site - kryptonia.fr

@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/u2f93Bf.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/MyBOT/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 

@@ -6,7 +6,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/0Ewrhd9.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/lain%20game/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -28,7 +29,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "index";
 	else if (document.location.pathname.includes("/about.html")) {
 		presenceData.details = "reading the about page";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/feedback.php"))
 		presenceData.details = "giving feedback";
 

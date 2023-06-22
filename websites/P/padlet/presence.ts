@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/sxpYxcR.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/padlet/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		pathnames = location.pathname.split("/");
@@ -52,7 +53,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Creating a Padlet";
 		presenceData.state = "Choosing a template";
 
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 		presenceData.smallImageText = "Creating";
 	} else if (document.querySelector("#wall-container")) {
 		//Padlet
@@ -63,7 +64,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = padletData.name;
 		presenceData.state = `By: ${padletData.author.name}`;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 
 		presenceData.buttons = [

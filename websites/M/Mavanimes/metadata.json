@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Adrien",
 		"id": "256458960666624003"
@@ -10,9 +10,9 @@
 		"en": "Mavanimes is a streaming website where you can watch VF and VOSTFR anime."
 	},
 	"url": "www.mavanimes.co",
-	"version": "1.0.13",
-	"logo": "https://i.imgur.com/o4qNo1n.png",
-	"thumbnail": "https://i.imgur.com/oeUAnJ2.png",
+	"version": "1.0.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mavanimes/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mavanimes/assets/thumbnail.png",
 	"color": "#0f61b8",
 	"category": "anime",
 	"tags": [

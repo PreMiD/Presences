@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Gurr",
 		"id": "446528923535278082"
@@ -11,9 +11,9 @@
 		"nl": "Vidstreaming is een website waar je de nieuwste anime kunt vinden die is uitgebracht."
 	},
 	"url": "gogoplay1.com",
-	"version": "2.0.25",
-	"logo": "https://i.imgur.com/bEtLVB2.png",
-	"thumbnail": "https://i.imgur.com/xRsdose.png",
+	"version": "2.0.30",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vidstreaming/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vidstreaming/assets/thumbnail.png",
 	"color": "#ff9200",
 	"category": "anime",
 	"tags": [

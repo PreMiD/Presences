@@ -7,14 +7,15 @@ presence.on("UpdateData", () => {
 	const { pathname, origin } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/5tfjCTi.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wuxiaworld/assets/logo.png",
 		};
 	if (document.querySelector(".navbar-form input") === document.activeElement) {
 		presenceData.details = "Searching:";
 		presenceData.state = (
 			document.querySelector(".navbar-form input") as HTMLInputElement
 		).value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else {
 		if (pathname.includes("emperors-domination"))
 			presenceData.largeImageKey = "emperor";
@@ -50,7 +51,7 @@ presence.on("UpdateData", () => {
 			presenceData.state = `📖 ${
 				document.querySelector("#chapter-outer .caption h4").textContent
 			} 🔸 ${progress}%`;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.buttons = [
 				{
 					label: "Visit Novel Page",

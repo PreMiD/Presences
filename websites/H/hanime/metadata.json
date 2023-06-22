@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -19,9 +19,9 @@
 		"hanime.tv",
 		"members.hanime.tv"
 	],
-	"version": "1.2.11",
-	"logo": "https://i.imgur.com/LXjbZoN.png",
-	"thumbnail": "https://i.imgur.com/zeoWi1W.png",
+	"version": "1.2.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/hanime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/hanime/assets/thumbnail.png",
 	"color": "#000000",
 	"category": "anime",
 	"tags": [

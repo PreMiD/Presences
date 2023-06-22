@@ -35,7 +35,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/44orW6Y.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Genoanime/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	}; //title of the page
 	if (document.location.pathname === "/")
@@ -101,7 +102,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (!isNaN(duration)) {
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused
 				? (await strings).pause
 				: (await strings).play;

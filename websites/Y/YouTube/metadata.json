@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Timeraa",
 		"id": "223238938716798978"
@@ -67,9 +67,9 @@
 		"www.youtube.com",
 		"studio.youtube.com"
 	],
-	"version": "5.4.1",
-	"logo": "https://i.imgur.com/o5injgg.png",
-	"thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
+	"version": "5.4.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/thumbnail.jpg",
 	"color": "#E40813",
 	"category": "videos",
 	"tags": [

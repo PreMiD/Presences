@@ -21,7 +21,7 @@ async function getShortURL(url: string) {
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/QZ1wTBF.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TVING/assets/logo.png",
 		smallImageKey: "browse",
 		startTimestamp: browsingTimestamp,
 	};
@@ -37,7 +37,8 @@ presence.on("UpdateData", async () => {
 		> = {
 			"/(vod|movie)/player/": async video => {
 				const data: PresenceData = {
-					largeImageKey: "https://i.imgur.com/QZ1wTBF.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/T/TVING/assets/logo.png",
 				};
 
 				if (video) {
@@ -55,7 +56,7 @@ presence.on("UpdateData", async () => {
 						? title[0].replace(title[1], "").trim()
 						: "영화";
 
-					data.smallImageKey = video.paused ? "pause" : "play";
+					data.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 					data.smallImageText = video.paused ? "Paused" : "Playing";
 
 					if (cover && coverUrl) {
@@ -79,10 +80,11 @@ presence.on("UpdateData", async () => {
 				}
 			},
 			"/live/player/": video => ({
-				largeImageKey: "https://i.imgur.com/QZ1wTBF.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/T/TVING/assets/logo.png",
 				details: document.querySelector(".live-title__channel").textContent,
 				state: "라이브",
-				smallImageKey: video.paused ? "pause" : "play",
+				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused ? "일시 정지" : "재생 중",
 				endTimestamp: (() => {
 					if (!video.paused)

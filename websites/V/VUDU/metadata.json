@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Autumn",
 		"id": "374245143655612428"
@@ -11,9 +11,9 @@
 		"nl": "Vudu distribueert lange films en tv-programma's naar apparaten met internetverbinding in de Verenigde Staten van Amerika."
 	},
 	"url": "www.vudu.com",
-	"version": "1.1.17",
-	"logo": "https://i.imgur.com/8mVkCk3.png",
-	"thumbnail": "https://i.imgur.com/4z07lus.png",
+	"version": "1.1.22",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VUDU/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VUDU/assets/thumbnail.png",
 	"color": "#236cba",
 	"category": "videos",
 	"tags": [

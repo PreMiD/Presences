@@ -12,7 +12,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/747RYiz.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/logo.png",
 		details: (await strings).watching,
 	};
 

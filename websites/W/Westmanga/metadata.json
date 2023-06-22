@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Watambeee",
 		"id": "338418945620967434"
@@ -10,9 +10,9 @@
 		"id": "Westmanga adalah sebuah website scanlation manga berbahasa indonesia dengan banyak genre manga isekai"
 	},
 	"url": "westmanga.info",
-	"version": "1.0.9",
-	"logo": "https://i.imgur.com/yB1GENx.png",
-	"thumbnail": "https://i.imgur.com/dX2CJ8p.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Westmanga/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Westmanga/assets/thumbnail.png",
 	"color": "#7d1217",
 	"category": "other",
 	"tags": [

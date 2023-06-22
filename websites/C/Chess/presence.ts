@@ -9,7 +9,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/LEtYrKg.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/Chess/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -301,16 +301,16 @@ presence.on("UpdateData", async () => {
 											Math.floor(video.duration)
 										);
 									presenceData.largeImageKey =
-										"https://i.imgur.com/LEtYrKg.png";
+										"https://cdn.rcd.gg/PreMiD/websites/C/Chess/assets/logo.png";
 									presenceData.details = "Watching video";
 									presenceData.state = document.title;
 									if (video.paused) {
-										presenceData.smallImageKey = "pause";
+										presenceData.smallImageKey = Assets.Pause;
 										presenceData.smallImageText = (await strings).pause;
 										delete presenceData.startTimestamp;
 										delete presenceData.endTimestamp;
 									} else {
-										presenceData.smallImageKey = "play";
+										presenceData.smallImageKey = Assets.Play;
 										presenceData.smallImageText = (await strings).play;
 									}
 								}

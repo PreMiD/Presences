@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -11,9 +11,9 @@
 		"nl": "Lichess is een open-source internet-schaakserver. Iedereen kan anoniem spelen, hoewel spelers een account op de site kunnen registreren om beoordeelde spellen te spelen."
 	},
 	"url": "lichess.org",
-	"version": "1.2.13",
-	"logo": "https://i.imgur.com/dw8pZ1d.png",
-	"thumbnail": "https://i.imgur.com/kXZgHJS.png",
+	"version": "1.2.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Lichess/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Lichess/assets/thumbnail.png",
 	"color": "#c5c5c5",
 	"category": "games",
 	"tags": [

@@ -29,7 +29,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/UOy5uus.png", // Bas has been here
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AnimeWorld/assets/logo.png", // Bas has been here
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -100,12 +101,12 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/genre")) {
 		// Genre
 		if (document.location.href.includes("?page=")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = `Genere: ${document.title.split('"')[1]}`;
 			presenceData.details = `Nel genere: ${document.title.split('"')[1]}`;
 			presenceData.state = `Pagina: ${document.location.href.split("=")[1]}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = `Nel genere: ${
 				document.title.split('"')[1]
 			}`;
@@ -184,7 +185,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "anime";
 	} else if (document.location.pathname.startsWith("/search")) {
 		// Search
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = `Cerca : ${document.title.replace(
 			"AnimeWorld - ",
 			""
@@ -217,21 +218,21 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.href.includes("filter")) {
 		// Accurate Research
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Ricerca avanzata";
 		presenceData.details = "Sta facendo una ricerca";
 		presenceData.state = "avanzata";
 	} else if (document.location.pathname.startsWith("/animes")) {
 		// TV-Series
 		if (document.location.href.includes("tv-series?page=")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: Anime";
 			presenceData.details = "Nella categoria: Anime";
 			presenceData.state = `Pagina: ${
 				document.location.href.split("/animes")[1]
 			}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: Anime";
 			presenceData.details = "Nella categoria: Anime";
 			presenceData.state = "Pagina: 1";
@@ -239,14 +240,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/movies")) {
 		// Movies
 		if (document.location.href.includes("movies?page=")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: Film";
 			presenceData.details = "Nella categoria: Film";
 			presenceData.state = `Pagina: ${
 				document.location.href.split("movies?page=")[1]
 			}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: Film";
 			presenceData.details = "Nella categoria: Film";
 			presenceData.state = "Pagina: 1";
@@ -254,14 +255,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/ova")) {
 		// OVA
 		if (document.location.href.includes("ova?page=")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: OVA";
 			presenceData.details = "Nella categoria: OVA";
 			presenceData.state = `Pagina: ${
 				document.location.href.split("ova?page=")[1]
 			}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: OVA";
 			presenceData.details = "Nella categoria: OVA";
 			presenceData.state = "Pagina: 1";
@@ -269,14 +270,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/ona")) {
 		// ONA
 		if (document.location.href.includes("ona?page=")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: ONA";
 			presenceData.details = "Nella categoria: ONA";
 			presenceData.state = `Pagina: ${
 				document.location.href.split("ona?page=")[1]
 			}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: ONA";
 			presenceData.details = "Nella categoria: ONA";
 			presenceData.state = "Pagina: 1";
@@ -284,14 +285,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/specials")) {
 		// Specials
 		if (document.location.href.includes("specials?page=")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: Specials";
 			presenceData.details = "Nella categoria: Specials";
 			presenceData.state = `Pagina: ${
 				document.location.href.split("specials?page=")[1]
 			}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: Specials";
 			presenceData.details = "Nella categoria: Specials";
 			presenceData.state = "Pagina: 1";
@@ -299,14 +300,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/music")) {
 		// Specials
 		if (document.location.href.includes("music?page=")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: Musicali";
 			presenceData.details = "Nella categoria: Musicali";
 			presenceData.state = `Pagina: ${
 				document.location.href.split("specials?page=")[1]
 			}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: Musicali";
 			presenceData.details = "Nella categoria: Musicali";
 			presenceData.state = "Pagina: 1";
@@ -314,14 +315,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/preview")) {
 		// Preview
 		if (document.location.href.includes("preview?page=")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: Preview";
 			presenceData.details = "Nella categoria: Preview";
 			presenceData.state = `Pagina: ${
 				document.location.href.split("preview?page=")[1]
 			}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Categoria: Preview";
 			presenceData.details = "Nella categoria: Preview";
 			presenceData.state = "Pagina: 1";
@@ -385,12 +386,12 @@ presence.on("UpdateData", async () => {
 					);
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
-						presenceData.smallImageKey = "pause";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = `${animename}｜Episodio: ${animenumber}`;
 						presenceData.details = `Guardando: ${animename}`;
 						presenceData.state = `Ep. ${animenumber}｜Finito`;
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = `${animename}｜Episodio: ${animenumber}`;
 						presenceData.details = `Guardando: ${animename}`;
 						presenceData.startTimestamp = paused ? null : timestamps[0];
@@ -429,12 +430,12 @@ presence.on("UpdateData", async () => {
 				);
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
-						presenceData.smallImageKey = "pause";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = moviename;
 						presenceData.details = `Guardando: ${moviename}`;
 						presenceData.state = "Film ｜Finito";
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = moviename;
 						presenceData.details = `Guardando: ${moviename}`;
 						presenceData.state = paused
@@ -475,12 +476,12 @@ presence.on("UpdateData", async () => {
 					);
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
-						presenceData.smallImageKey = "pause";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = `${oavname}｜${oavnumber}° OAV`;
 						presenceData.details = `Guardando: ${oavname}`;
 						presenceData.state = `${oavnumber}° OAV｜Finito`;
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = `${oavname}｜${oavnumber}° OAV`;
 						presenceData.details = `Guardando: ${oavname}`;
 						presenceData.startTimestamp = paused ? null : timestamps[0];
@@ -522,12 +523,12 @@ presence.on("UpdateData", async () => {
 					);
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
-						presenceData.smallImageKey = "pause";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = `${onaname}｜${onanumber}° ONA`;
 						presenceData.details = `Guardando: ${onaname}`;
 						presenceData.state = `${onanumber}° ONA｜Finito`;
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = `${onaname}｜${onanumber}° ONA`;
 						presenceData.details = `Guardando: ${onaname}`;
 						presenceData.state = paused
@@ -570,12 +571,12 @@ presence.on("UpdateData", async () => {
 					);
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
-						presenceData.smallImageKey = "pause";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = `${specialname}｜${specialnumber}° Special`;
 						presenceData.details = `Guardando: ${specialname}`;
 						presenceData.state = `${specialnumber}° Special｜Finito`;
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = `${specialname}｜${specialnumber}° Special`;
 						presenceData.details = `Guardando: ${specialname}`;
 						presenceData.state = paused
@@ -615,12 +616,12 @@ presence.on("UpdateData", async () => {
 				);
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
-						presenceData.smallImageKey = "pause";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = previewname;
 						presenceData.details = `Guardando: ${previewname}`;
 						presenceData.state = "Preview｜Finito";
 					} else if (currentTime !== duration) {
-						presenceData.smallImageKey = paused ? "pause" : "play";
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = previewname;
 						presenceData.details = `Guardando: ${previewname}`;
 						presenceData.state = paused
@@ -649,7 +650,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "AnimeWorld";
 	} else {
 		presenceData.largeImageKey = "pokemonlogo";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Navigando...";
 		presenceData.details = "Navigando...";
 	}

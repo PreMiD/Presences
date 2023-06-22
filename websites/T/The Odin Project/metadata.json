@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "dogukan",
 		"id": "351309620918091776"
@@ -9,9 +9,9 @@
 		"en": "The Odin Project is one of those \"What I wish I had when I was learning\" resources. Not everyone has access to a computer science education or the funds to attend an intensive coding school and neither of those is right for everyone anyway. This project is designed to fill in the gap for people who are trying to hack it on their own but still want a high quality education."
 	},
 	"url": "www.theodinproject.com",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/gtBvHQH.png",
-	"thumbnail": "https://i.imgur.com/5rm6BZ6.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/The%20Odin%20Project/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/The%20Odin%20Project/assets/thumbnail.png",
 	"color": "#e3b261",
 	"category": "other",
 	"tags": [

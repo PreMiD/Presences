@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "DubStepMad",
 		"id": "118810952530395136"
@@ -10,9 +10,9 @@
 		"nl": "Officiële Scan computeronderdelen, computerdiensten en zaken."
 	},
 	"url": "www.scan.co.uk",
-	"version": "1.0.9",
-	"logo": "https://i.imgur.com/14KOuEk.png",
-	"thumbnail": "https://i.imgur.com/egAfDfZ.png",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Scan/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Scan/assets/thumbnail.png",
 	"color": "#4085bc",
 	"category": "other",
 	"tags": [

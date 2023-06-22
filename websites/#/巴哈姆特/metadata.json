@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "蒟蒻",
 		"id": "276337222196658178"
@@ -14,9 +14,9 @@
 		"vi_VN": "Cộng đồng game và hoạt hình lớn nhất Trung Quốc, cung cấp tin tức ACG hằng ngày, xếp hạng phổ biến, không gian giao tiếp và bàn luận phong phú, cũng như các bài viết về video và âm thanh đặc sắc."
 	},
 	"url": "forum.gamer.com.tw",
-	"version": "1.1.19",
-	"logo": "https://i.imgur.com/k5XqKom.png",
-	"thumbnail": "https://i.imgur.com/WM3Rhii.png",
+	"version": "1.1.24",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/%23/%E5%B7%B4%E5%93%88%E5%A7%86%E7%89%B9/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/%23/%E5%B7%B4%E5%93%88%E5%A7%86%E7%89%B9/assets/thumbnail.png",
 	"color": "#2E93A5",
 	"category": "socials",
 	"tags": [

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Hans5958",
 		"id": "279855717203050496"
@@ -30,9 +30,9 @@
 		"trackmania.exchange",
 		"blog.mania.exchange"
 	],
-	"version": "1.1.12",
-	"logo": "https://i.imgur.com/KPcs9y1.png",
-	"thumbnail": "https://i.imgur.com/NYitprM.png",
+	"version": "1.1.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/thumbnail.png",
 	"color": "#7ad5ff",
 	"category": "games",
 	"tags": [

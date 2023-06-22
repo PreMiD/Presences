@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -13,9 +13,9 @@
 		"lectortmo.com",
 		"tmocommunity.com"
 	],
-	"version": "1.2.14",
-	"logo": "https://i.imgur.com/1CYkKgl.png",
-	"thumbnail": "https://i.imgur.com/SKXMHAG.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TuMangaOnline/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TuMangaOnline/assets/thumbnail.png",
 	"color": "#3366cc",
 	"category": "anime",
 	"tags": [

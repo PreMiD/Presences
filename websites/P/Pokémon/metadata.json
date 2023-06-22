@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -19,9 +19,9 @@
 	},
 	"url": "www.pokemon.com",
 	"regExp": "([a-z0-9-]+[.])*(pokemon|portal-pokemon|pokemontcg|pokemoncenter|pokemoncenter-online|pokemon-cafe|pokemonkorea|pokemoncard|pokemonstore|pokemon-movie|pokemon-card)([.][a-z]+)+[/]",
-	"version": "1.1.19",
-	"logo": "https://i.imgur.com/1BcRgET.png",
-	"thumbnail": "https://i.imgur.com/WBJfQkW.jpg",
+	"version": "1.1.24",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/thumbnail.jpg",
 	"color": "#ffcb05",
 	"category": "games",
 	"tags": [

@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "1015402986534608948",
 	}),
 	slideshow = presence.createSlideshow(),
-	logo = "https://i.imgur.com/uCqmcTv.png";
+	logo = "https://cdn.rcd.gg/PreMiD/websites/C/Craiyon/assets/logo.png";
 
 type State = "start" | "generation" | "results";
 

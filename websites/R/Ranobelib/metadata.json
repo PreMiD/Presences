@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Mirax",
 		"id": "223355525826347018"
@@ -11,9 +11,9 @@
 		"nl": "Website voor het lezen van ranobe in het Russisch"
 	},
 	"url": "ranobelib.me",
-	"version": "1.1.13",
-	"logo": "https://i.imgur.com/a0XPpFb.png",
-	"thumbnail": "https://i.imgur.com/SXMD2Qw.png",
+	"version": "1.1.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Ranobelib/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Ranobelib/assets/thumbnail.png",
 	"color": "#0099ff",
 	"category": "other",
 	"tags": [

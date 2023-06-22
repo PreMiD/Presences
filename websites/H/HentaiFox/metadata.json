@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas1C",
 		"id": "303603391941050370"
@@ -11,9 +11,9 @@
 		"nl": "HentaiFox is een van de meest populaire gratis hentai-sites voor Engels vertaalde hentai-manga en doujinshi."
 	},
 	"url": "hentaifox.com",
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/o9joHZX.png",
-	"thumbnail": "https://i.imgur.com/aTgT0rO.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiFox/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiFox/assets/thumbnail.png",
 	"color": "#ff9f08",
 	"category": "other",
 	"tags": [

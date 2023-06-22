@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Kedi",
 		"id": "238668511222693888"
@@ -13,9 +13,9 @@
 		"www.peacocktv.com",
 		"peacocktv.com"
 	],
-	"version": "1.0.12",
-	"logo": "https://i.imgur.com/6t52fkP.png",
-	"thumbnail": "https://i.imgur.com/63bMEv5.png",
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Peacock/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Peacock/assets/thumbnail.png",
 	"color": "#FCCC12",
 	"category": "videos",
 	"tags": [

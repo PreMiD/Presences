@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "youka",
 		"id": "239381559482777600"
@@ -16,9 +16,9 @@
 		"manga4life.com"
 	],
 	"regExp": "([a-z0-9]+[.])?manga4life[.]com",
-	"version": "1.0.6",
-	"logo": "https://i.imgur.com/mJTwQxZ.png",
-	"thumbnail": "https://i.imgur.com/7R0tE9U.png",
+	"version": "1.0.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/thumbnail.png",
 	"color": "#6cabdf",
 	"category": "anime",
 	"tags": [

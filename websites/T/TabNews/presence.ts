@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Outros",
-			largeImageKey: "https://i.imgur.com/pQeO9sn.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TabNews/assets/0.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[topLevelPath, secondLevelPath, thirdLevelPath, fourLevelPath] =

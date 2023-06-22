@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "hunterelele",
 		"id": "381196713626697729"
@@ -16,9 +16,9 @@
 		"nl": "MyDramaList is de enige tool die je nodig hebt om je te helpen bij het bijhouden van alle Aziatische drama's [tv-shows], Aziatische films en Aziatische variétéshows waar je van houdt!"
 	},
 	"url": "mydramalist.com",
-	"version": "1.1.8",
-	"logo": "https://i.imgur.com/EmAGyTj.png",
-	"thumbnail": "https://i.imgur.com/1yEErjU.jpg",
+	"version": "1.1.13",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MyDramaList/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MyDramaList/assets/thumbnail.jpg",
 	"color": "#0006FF",
 	"category": "other",
 	"tags": [

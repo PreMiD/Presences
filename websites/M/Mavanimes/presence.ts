@@ -1,6 +1,7 @@
 const presence = new Presence({
 	clientId: "814986239681626143",
 });
+
 let video: {
 	currentTime?: number;
 	duration?: number;
@@ -14,7 +15,8 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/o4qNo1n.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Mavanimes/assets/logo.png",
 		},
 		params = new URLSearchParams(new URL(window.location.href).search);
 	if (document.location.pathname === "/") {
@@ -54,10 +56,10 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 			presenceData.smallImageText = "En pause";
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 		} else {
 			presenceData.smallImageText = "Lecture..";
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 		}
 	}
 	presence.setActivity(presenceData);

@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const [pages, state] = document.location.pathname.split("/").filter(p => p),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/BpF8tPx.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/Codewars/assets/logo.png",
 			startTimestamp: timebrowsed,
 			details: "Browsing ...",
 		},

@@ -12,9 +12,8 @@ const presence = new Presence({
 		privacy: { details: "Privacy Policy" },
 		installapp: { details: "ComicK App" },
 	};
-
-enum Assets {
-	Logo = "https://i.imgur.com/DeNqLCB.png",
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/ComicK/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

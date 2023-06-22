@@ -32,11 +32,8 @@ function removePlural(string: string) {
 	else if (string.slice(-1) === "s") return string.slice(0, -1);
 	else return string;
 }
-enum Assets {
-	Logo = "https://i.imgur.com/T4XfJhX.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Paused = "https://i.imgur.com/4iyMINk.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Scribd/assets/logo.png",
 }
 let strings: Awaited<ReturnType<typeof getStrings>>;
 

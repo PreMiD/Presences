@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -25,9 +25,9 @@
 		"jp.redtube.com",
 		"fr.redtube.com"
 	],
-	"version": "2.2.16",
-	"logo": "https://i.imgur.com/YrWWEZC.png",
-	"thumbnail": "https://i.imgur.com/6DD83q7.png",
+	"version": "2.2.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RedTube/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RedTube/assets/thumbnail.png",
 	"color": "#af181f",
 	"category": "videos",
 	"tags": [

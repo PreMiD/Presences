@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "xKubson_",
 		"id": "404217213873029120"
@@ -9,9 +9,9 @@
 		"en": "Track what you watch and when. Discover what's hot and where you can watch it. Share comments, ratings and recommendations."
 	},
 	"url": "trakt.tv",
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/7V0kxEb.png",
-	"thumbnail": "https://i.imgur.com/4EMZftJ.png",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Trakt/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Trakt/assets/thumbnail.png",
 	"color": "#ff0000",
 	"category": "videos",
 	"tags": [

@@ -2,11 +2,13 @@ const presence = new Presence({
 		clientId: "840126038205923369",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/uAjw09t.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname } = window.location,
@@ -45,7 +47,8 @@ presence.on("UpdateData", async () => {
 		if (video) {
 			presenceData.largeImageKey =
 				document.querySelector<HTMLMetaElement>('[property="og:image" ]')
-					?.content ?? "https://i.imgur.com/uAjw09t.png";
+					?.content ??
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png";
 			presenceData.buttons = [
 				{
 					label: "Bekijk Video",
@@ -55,15 +58,15 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			if (video.paused) {
 				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 			} else if (!video.paused) {
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 			}
 		} else {
 			presenceData.largeImageKey =
 				document.querySelectorAll("img")[1]?.getAttribute("src") ??
-				"https://i.imgur.com/uAjw09t.png";
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png";
 			presenceData.buttons = [
 				{
 					label: "Bekijk Foto",
@@ -103,7 +106,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!buttons || privacy) delete presenceData.buttons;
-	if (!covers) presenceData.largeImageKey = "https://i.imgur.com/uAjw09t.png";
+	if (!covers) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png";
+	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "a＠a",
 		"id": "405028899798384640"
@@ -9,9 +9,9 @@
 		"en": "ScrapTF is the largest bot-based TF2 item trading, raffle, and auction website. Buy and sell hats, keys, unusuals, stranges, skins, and more."
 	},
 	"url": "scrap.tf",
-	"version": "1.1.5",
-	"logo": "https://i.imgur.com/36tsgMq.png",
-	"thumbnail": "https://i.imgur.com/kdYqwy5.png",
+	"version": "1.1.10",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/scrap.tf/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/scrap.tf/assets/thumbnail.png",
 	"color": "#e74c3c",
 	"category": "other",
 	"tags": [

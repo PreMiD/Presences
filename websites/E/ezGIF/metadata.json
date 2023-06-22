@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -9,9 +9,9 @@
 		"en": "Ezgif.com is a simple online GIF maker and toolset for basic animated GIF editing. Here you can create, resize, crop, reverse, optimize, and apply some effects to GIFs."
 	},
 	"url": "ezgif.com",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/lu1BuFT.png",
-	"thumbnail": "https://i.imgur.com/BbvXq2a.png",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/ezGIF/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/ezGIF/assets/thumbnail.png",
 	"color": "#222",
 	"category": "other",
 	"tags": [

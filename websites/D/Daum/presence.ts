@@ -92,7 +92,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/UFpDEUR.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/logo.png",
 		startTimestamp: startTime,
 	};
 
@@ -129,7 +129,9 @@ presence.on("UpdateData", async () => {
 					presenceData.state =
 						video.title ?? document.querySelector("h3.tit_view")?.textContent;
 
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 					[, presenceData.endTimestamp] = presence.getTimestamps(
@@ -173,7 +175,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state =
 					document.querySelector("strong.tit_vod")?.textContent;
 
-				presenceData.smallImageKey = video?.paused ? "pause" : "play";
+				presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -245,7 +247,9 @@ presence.on("UpdateData", async () => {
 					presenceData.state =
 						document.querySelector("strong.tit_player")?.textContent;
 
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 					[, presenceData.endTimestamp] = presence.getTimestamps(
@@ -274,7 +278,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state =
 					document.querySelector("strong.tit_vod")?.textContent;
 
-				presenceData.smallImageKey = video?.paused ? "pause" : "play";
+				presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
 				[, presenceData.endTimestamp] = presence.getTimestamps(
@@ -305,7 +309,7 @@ presence.on("UpdateData", async () => {
 					.querySelector("a.link_txt")
 					?.textContent.trim();
 
-				presenceData.smallImageKey = video?.paused ? "pause" : "play";
+				presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
 				[, presenceData.endTimestamp] = presence.getTimestamps(

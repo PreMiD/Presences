@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "NMW03",
 		"id": "534099893979971584"
@@ -10,9 +10,9 @@
 		"nl": "Real-time probleem- en uitvalbewaking"
 	},
 	"url": "downdetector.com",
-	"version": "1.2.14",
-	"logo": "https://i.imgur.com/ba5AI1b.png",
-	"thumbnail": "https://i.imgur.com/Qy1lbXE.png",
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Downdetector/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Downdetector/assets/thumbnail.png",
 	"color": "#FF160A",
 	"category": "other",
 	"tags": [

@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/kJCKhkE.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GAMEE/assets/logo.png",
 			startTimestamp: timer,
 		},
 		{ pathname, href } = document.location,
@@ -27,17 +28,17 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing Contest Page";
 	else if (pathname.includes("/contest-rules")) {
 		presenceData.details = "Reading the contest rules";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	} else if (pathname.includes("/squad"))
 		presenceData.details = "Viewing the squad";
 	else if (pathname.includes("/terms-of-use")) {
 		presenceData.details = "Reading the Terms Of Service";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	} else if (pathname.includes("/privacy")) {
 		presenceData.details = "Reading the Privacy Policy";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	} else if (pathname.includes(`/profile/${IDs}`)) {
 		const name = document.querySelector(

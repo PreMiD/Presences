@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Dominik",
 		"id": "594491170248458250"
@@ -10,9 +10,9 @@
 		"nl": "MultiPlatform Games Netwerk"
 	},
 	"url": "enthix.net",
-	"version": "1.2.13",
-	"logo": "https://i.imgur.com/pFmxUh4.png",
-	"thumbnail": "https://i.imgur.com/QnDRaNN.png",
+	"version": "1.2.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/enthix.net/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/enthix.net/assets/thumbnail.png",
 	"color": "#ff0000",
 	"category": "games",
 	"tags": [

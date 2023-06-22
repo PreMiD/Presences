@@ -29,7 +29,8 @@ String.prototype.capitalize = function (d = /[ -]/): string {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/ey6oFrP.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/Nookazon/assets/logo.png",
 			startTimestamp: elapsed,
 		},
 		useChatNames = await presence.getSetting<boolean>("useChatNames");

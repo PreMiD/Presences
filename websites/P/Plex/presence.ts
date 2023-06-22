@@ -136,25 +136,27 @@ function getTranslation(stringName: string): string {
 let isUploading = false;
 
 const uploadedImages: Record<string, string> = {};
-async function uploadImage(url: string): Promise<string> {
+async function uploadImage(urlToUpload: string): Promise<string> {
 	if (isUploading) return "plex";
 
-	if (uploadedImages[url]) return uploadedImages[url];
+	if (uploadedImages[urlToUpload]) return uploadedImages[urlToUpload];
 	isUploading = true;
 
-	const file = await fetch(url).then(x => x.arrayBuffer()),
-		outputUrl = await fetch("https://bashupload.com", {
+	const file = await fetch(urlToUpload).then(x => x.blob()),
+		formData = new FormData();
+
+	formData.append("file", file, "file");
+
+	const response = await fetch("https://pd.premid.app/create/image", {
 			method: "POST",
-			body: file,
-		})
-			.then(x => x.text())
-			.then(x => x.match(/https(.*)/)?.[0]);
+			body: formData,
+		}),
+		responseUrl = await response.text();
 
 	isUploading = false;
-	uploadedImages[url] = outputUrl;
-	return outputUrl;
+	uploadedImages[urlToUpload] = responseUrl;
+	return responseUrl;
 }
-
 function isPrivateIp(ip = location.hostname) {
 	return /^(?:(?:10|127|192(\.|-)168|172(\.|-)(?:1[6-9]|2\d|3[01]))(\.|-)|localhost)/.test(
 		ip
@@ -181,7 +183,7 @@ async function getShortURL(url: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/FPxlGGE.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -209,7 +211,7 @@ presence.on("UpdateData", async () => {
 				);
 			}
 
-			presenceData.smallImageKey = media.paused ? "pause" : "play";
+			presenceData.smallImageKey = media.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = media.paused ? "Paused" : "Playing";
 
 			const title = document.querySelector(
@@ -266,7 +268,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = getTranslation("Search");
 			presenceData.state = search.textContent.split('"')[1].replace('"', "");
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.URL.includes("/com.plexapp.plugins.library")) {
 			presenceData.details = getTranslation("Library");
 			presenceData.state = document.querySelector(

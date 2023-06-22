@@ -14,10 +14,9 @@ async function getStrings() {
 }
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
-enum Assets {
-	Logo = "https://i.imgur.com/jO86Aqk.png",
-	Play = "https://i.imgur.com/OLaz6JN.png",
-	Search = "https://i.imgur.com/oGQtnIY.png",
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/I%20Love%20Music/assets/logo.png",
 }
 
 async function imgPath(path: string, hostname: string) {

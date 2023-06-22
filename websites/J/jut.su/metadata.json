@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "stavzdev",
 		"id": "291568379423096832"
@@ -21,9 +21,9 @@
 		"nl": "Jut.su is een Russische anime-website"
 	},
 	"url": "jut.su",
-	"version": "3.0.0",
-	"logo": "https://i.imgur.com/f3zxOuL.png",
-	"thumbnail": "https://i.imgur.com/NlBgvR0.png",
+	"version": "3.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/jut.su/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/jut.su/assets/thumbnail.png",
 	"color": "#c9e58b",
 	"category": "anime",
 	"tags": [

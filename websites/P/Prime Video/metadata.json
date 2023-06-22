@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -18,9 +18,9 @@
 	},
 	"url": "www.primevideo.com",
 	"regExp": "(([a-z0-9-]+[.])*amazon([.][a-z]+)+[/](-[/]([a-z0-9]+)[/])?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp[/]video))|([a-z0-9-]+[.])*primevideo([.][a-z]+)+[/]",
-	"version": "2.1.15",
-	"logo": "https://i.imgur.com/OgbBS7a.png",
-	"thumbnail": "https://i.imgur.com/AkSVbml.jpg",
+	"version": "2.1.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Prime%20Video/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Prime%20Video/assets/thumbnail.jpg",
 	"color": "#FFFFFF",
 	"category": "videos",
 	"tags": [

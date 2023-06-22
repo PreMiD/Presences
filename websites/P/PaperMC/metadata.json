@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "387062216030945281",
 		"name": "Romvnly"
@@ -16,9 +16,9 @@
 		"hangar.papermc.dev",
 		"forums.papermc.io"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/R08CsA6.png",
-	"thumbnail": "https://i.imgur.com/0TPvY1q.png",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PaperMC/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PaperMC/assets/thumbnail.png",
 	"color": "#FFC0CB",
 	"category": "games",
 	"tags": [

@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/uxbPLH1.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Stan/assets/logo.png",
 		details: data.strings.browse,
 		smallImageKey: "browse",
 		startTimestamp: data.startedSince,
@@ -108,7 +108,9 @@ presence.on("UpdateData", async () => {
 						.querySelector<HTMLElement>(".vjs-end-slate-image")
 						?.style?.backgroundImage?.match(/url\("(.*)"\)/)?.[1];
 
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 					presenceData.smallImageText = video.paused
 						? data.strings.pause
 						: data.strings.play;

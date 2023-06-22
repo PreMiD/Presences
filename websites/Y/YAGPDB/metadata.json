@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -15,9 +15,9 @@
 		"yagpdb.xyz",
 		"docs.yagpdb.xyz"
 	],
-	"version": "1.2.16",
-	"logo": "https://i.imgur.com/yQShI1r.png",
-	"thumbnail": "https://i.imgur.com/7vDKD0t.png",
+	"version": "1.2.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YAGPDB/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YAGPDB/assets/thumbnail.png",
 	"color": "#ec7760",
 	"category": "other",
 	"tags": [

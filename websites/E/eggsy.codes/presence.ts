@@ -22,7 +22,8 @@ presence.on("UpdateData", async () => {
 
 		if (state && details) {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/MziDVWO.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/E/eggsy.codes/assets/logo.png",
 				details,
 				state,
 				smallImageKey: smallImage ?? "SOMETHING-SKETCHY",
@@ -30,7 +31,8 @@ presence.on("UpdateData", async () => {
 			});
 		} else {
 			presence.setActivity({
-				largeImageKey: "https://i.imgur.com/MziDVWO.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/E/eggsy.codes/assets/logo.png",
 				details: "Viewing a page:",
 				state: "Homepage",
 				startTimestamp: Math.floor(Date.now() / 1000),

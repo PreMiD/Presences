@@ -51,7 +51,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/ZiIN6t9.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/J/Jet%20Set%20Radio%20Live/assets/logo.png",
 		},
 		audio = document.querySelector<HTMLAudioElement>("#audioPlayer"),
 		songName = document.querySelector(
@@ -61,7 +62,7 @@ presence.on("UpdateData", async () => {
 
 	if (songName.textContent.length < 1 || !audio) {
 		presenceData.details = "Not tuned in.";
-		presenceData.smallImageKey = "pause";
+		presenceData.smallImageKey = Assets.Pause;
 		presenceData.smallImageText = (await strings).pause;
 	} else {
 		const stationID = document
@@ -82,11 +83,11 @@ presence.on("UpdateData", async () => {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(audio);
 			}
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).play;
 		} else {
 			presenceData.details = "Paused";
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = (await strings).pause;
 		}
 
