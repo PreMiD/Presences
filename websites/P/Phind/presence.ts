@@ -71,7 +71,6 @@ presence.on("UpdateData", async () => {
 				slideshow.addSlide(i.toString(), newPresenceData, 5000);
 			}
 		} else if (displaySearch) {
-			slideshow.deleteAllSlides();
 			presenceData.state = searchResults[0].querySelector(
 				"span.fw-bold.fs-3.mb-3"
 			).textContent;
@@ -90,6 +89,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.endTimestamp;
 		slideshow.deleteAllSlides();
 	}
+	if (!cycleSearch || !displaySearch) slideshow.deleteAllSlides();
 	if (slideshow.getSlides().length > 1) presence.setActivity(slideshow);
 	else presence.setActivity(presenceData);
 });
