@@ -14,6 +14,7 @@ presence.on("UpdateData", async () => {
 			details: "Browsing Phind",
 		},
 		pathDetailsMap = {
+			"/filters": "Viewing Filters",
 			"/default": "Viewing how to set Phind as default",
 			"/bangs": "Viewing !Bangs",
 			"/mobile": "Viewing Mobile Page",
