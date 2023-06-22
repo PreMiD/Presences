@@ -51,13 +51,17 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 		if (shareSearch) {
+			// cached result (exact same GPT output) : brand new search (different GPT output)
 			presenceData.buttons = [
 				{
-					label: "Open Search Result",
+					label: href.includes("?cache=")
+						? "Open Search Result"
+						: "Open Search",
 					url: href,
 				},
 			];
 		}
+
 		if (displaySearch && cycleSearch && searchResults.length > 1) {
 			for (const [i, result] of searchResults.entries()) {
 				const newPresenceData: PresenceData = { ...presenceData };
