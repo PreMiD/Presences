@@ -5,12 +5,12 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const Assets = {
+	const assets = {
 			PhindLogo: "https://i.imgur.com/fakWcYA.png",
-			Search: "https://i.imgur.com/a5qsEbL.png",
+			Search: Assets.Search,
 		},
 		presenceData: PresenceData = {
-			largeImageKey: Assets.PhindLogo,
+			largeImageKey: assets.PhindLogo,
 			details: "Browsing Phind",
 		},
 		pathDetailsMap = {
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 	} else if (searchResults.length > 0 && !privateMode) {
 		// we must be on /search
 		presenceData.details = displaySearch ? "Searching for:" : "Searching";
-		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageKey = assets.Search;
 		presenceData.smallImageText = "Searching";
 		if (shareSearch) {
 			// cached result (exact same GPT output) : brand new search (different GPT output)
