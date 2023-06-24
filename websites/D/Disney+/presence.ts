@@ -22,8 +22,7 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
 	title: string,
-	subtitle: string,
-	groupWatchCount: number;
+	subtitle: string;
 
 presence.on("UpdateData", async () => {
 	const [newLang, privacy, time, buttons, groupWatchBtn] = await Promise.all([
@@ -39,7 +38,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData & {
 			partySize?: number;
 			partyMax?: number;
-		} = {},
+		} = { startTimestamp: browsingTimestamp },
 		video = document.querySelector<HTMLVideoElement>("video");
 
 	if (oldLang !== newLang || !strings) {
@@ -53,6 +52,7 @@ presence.on("UpdateData", async () => {
 				"https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png";
 			switch (true) {
 				case pathname.includes("video"): {
+					if (presenceData.startTimestamp) delete presenceData.startTimestamp;
 					presenceData.details = document.querySelector(
 						"[class='title-field body-copy']"
 					)?.textContent;
@@ -222,8 +222,6 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	console.log(time);
-	console.log(presenceData);
 	if (privacy && presenceData.state) delete presenceData.state;
 	if ((!buttons || privacy) && presenceData.buttons)
 		delete presenceData.buttons;
