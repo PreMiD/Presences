@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 				case !!document.querySelector('[data-gv2containerkey="contentMeta"]'): {
 					if (pathname.includes("series")) {
 						presenceData.details = privacy
-							? "Viewing a serie"
+							? "Viewing a series"
 							: "Viewing series";
 						presenceData.buttons = [
 							{
