@@ -420,7 +420,8 @@ presence.on("UpdateData", async () => {
 
 			if (path.includes("/moderator/")) {
 				presenceData.details = strings.modStreamer;
-				presenceData.state = path.match(/moderator\/([a-z\d][\w]{2,24})$/i)?.[1] ?? "Not selected";
+				presenceData.state =
+					path.match(/moderator\/([a-z\d][\w]{2,24})$/i)?.[1] ?? "Not selected";
 
 				if (getElement(".modview-dock-widget p") !== "Offline") {
 					presenceData.smallImageKey = "live";
