@@ -32,9 +32,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<number>("buttons"),
 			presence.getSetting<boolean>("groupWatchBtn"),
 		]),
-		{ href, pathname } = document.location,
-		isHostDP = /(www\.)?disneyplus\.com/.test(location.hostname),
-		isHostHS = /(www\.)?hotstar\.com/.test(location.hostname),
+		{ hostname, href, pathname } = document.location,
 		presenceData: PresenceData & {
 			partySize?: number;
 			partyMax?: number;
@@ -47,7 +45,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	switch (true) {
-		case isHostDP: {
+		case /(www\.)?disneyplus\.com/.test(hostname): {
 			presenceData.largeImageKey =
 				"https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png";
 			switch (true) {
@@ -172,7 +170,7 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
-		case isHostHS: {
+		case /(www\.)?hotstar\.com/.test(hostname): {
 			presenceData.largeImageKey = "https://i.imgur.com/717snoF.png";
 
 			if (video && !isNaN(video.duration)) {
