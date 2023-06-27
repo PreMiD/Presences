@@ -34,8 +34,7 @@ presence.on("UpdateData", () => {
 	else if (checkIfHomepage)
 		presenceData.details = site[pathname.split("/").at(-1)];
 	else if (
-		document.querySelector("body > section > div.container > div > div.row") !==
-		null
+		document.querySelector("body > section > div.container > div > div.row")
 	) {
 		presenceData.details =
 			typeof animeCheckTitle !== "undefined"
