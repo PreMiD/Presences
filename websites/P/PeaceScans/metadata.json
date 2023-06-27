@@ -9,7 +9,10 @@
 		"en": "Read Manga Online For Free",
 		"pl": "Czytaj mangę online za darmo"
 	},
-	"url": "peacescans.life",
+	"url": [
+		"peacescans.life",
+		"www.peacescans.life"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/dOIzDiM.png",
 	"thumbnail": "https://i.imgur.com/8mytDUz.png",
