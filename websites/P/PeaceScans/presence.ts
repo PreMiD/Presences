@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.querySelector("body > iframe") !== null)
 		presenceData.details = `Currently reading ${animeTitle}`;
-	else if (checkIfHomepage !== null)
+	else if (checkIfHomepage)
 		presenceData.details = site[pathname.split("/").at(-1)];
 	else if (
 		document.querySelector("body > section > div.container > div > div.row") !==
