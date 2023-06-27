@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", async () => {
+presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/dOIzDiM.png",
 			startTimestamp: browsingTimestamp,
