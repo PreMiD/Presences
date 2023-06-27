@@ -171,7 +171,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case /(www\.)?hotstar\.com/.test(hostname): {
-			presenceData.largeImageKey = "https://i.imgur.com/717snoF.png";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/0.png";
 
 			if (video && !isNaN(video.duration)) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
