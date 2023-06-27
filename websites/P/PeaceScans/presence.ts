@@ -16,12 +16,7 @@ presence.on("UpdateData", () => {
 			Recruitment: "Considering recruitment",
 			Donate: "Donating",
 		},
-		animeCheckTitle = document.querySelector(
-			"body > section > div.container > div > div > div.anime__details__text > a > div > h3"
-		)?.textContent,
-		animeCheckTitleV2 = document.querySelector(
-			"body > section > div > div.anime__details__content > div > div.col-lg-9 > div > a > div > h3" // website isnt dynamic enough and certain subsites have different dom layout
-		)?.textContent,
+		animeCheckTitle = document.querySelector("body > section h3")?.textContent,
 		animeTitle = document.querySelector(
 			"body > section > div > div > div.anime__details__episodes > div > h5"
 		)?.textContent,
@@ -39,7 +34,7 @@ presence.on("UpdateData", () => {
 		presenceData.details =
 			typeof animeCheckTitle !== "undefined"
 				? `Checking "${animeCheckTitle}"`
-				: `Checking "${animeCheckTitleV2}"`;
+				: "Reading a manga";
 	} else presenceData.details = "Viewing website";
 
 	if (presenceData.details) presence.setActivity(presenceData);
