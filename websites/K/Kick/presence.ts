@@ -1,8 +1,10 @@
+const start = Math.floor(Date.now() / 1000);
 const presence = new Presence({ clientId: "1112901248421732462" });
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/7pAQJgm.png"
-		},
+		largeImageKey: "https://i.imgur.com/7pAQJgm.png",
+ startTimestamp: start
+		}
 		pathDetailsMap = {
 			"/terms-of-service": {
 				details: "Reading",
