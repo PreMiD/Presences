@@ -5,7 +5,7 @@ presence.on("UpdateData", () => {
 		largeImageKey: "https://i.imgur.com/7pAQJgm.png",
  startTimestamp: start
 		}
-		pathDetailsMap = {
+		const pathDetailsMap = {
 			"/terms-of-service": {
 				details: "Reading",
 				state: "Terms of Service",
