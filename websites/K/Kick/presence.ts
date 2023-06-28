@@ -4,7 +4,7 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/7pAQJgm.png",
  startTimestamp: start
-		}
+		};
 		const pathDetailsMap = {
 			"/terms-of-service": {
 				details: "Reading",
