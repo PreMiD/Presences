@@ -8,13 +8,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/KQvYGoh.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ host, pathname } = document.location,
+		{ href, pathname } = document.location,
 		path = pathname.slice(1).split("/"),
 		[showTimestamp, showButtons] = await Promise.all([
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<boolean>("buttons"),
-		]),
-		makeURL = (p: string) => `https://${host}${p}`;
+		]);
 
 	switch (path[0]) {
 		case "": {
@@ -23,8 +22,7 @@ presence.on("UpdateData", async () => {
 		}
 		// Game pages
 		case "play": {
-			const gameId = path[1];
-			if (gameId) {
+			if (path[1]) {
 				const gameName =
 						document.querySelector<HTMLHeadingElement>(
 							"#game-title"
@@ -48,15 +46,14 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Play game",
-						url: makeURL(`/play/${gameId}`),
+						url: href,
 					},
 				];
 			}
 			break;
 		}
 		case "edit": {
-			const gameId = path[1];
-			if (gameId) {
+			if (path[1]) {
 				const gameName = document.querySelector<HTMLAnchorElement>(
 					"#container > h1 > a"
 				)?.textContent;
@@ -67,7 +64,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Play game",
-						url: makeURL(`/play/${gameId}`),
+						url: href,
 					},
 				];
 			}
@@ -87,26 +84,24 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "comments": {
-			const gameId = path[1];
-			if (gameId) {
+			if (path[1]) {
 				presenceData.details = "Reading game comments";
 				presenceData.buttons = [
 					{
 						label: "Read comments",
-						url: makeURL(`/comments/${gameId}`),
+						url: href,
 					},
 				];
 			}
 			break;
 		}
 		case "updates": {
-			const gameId = path[1];
-			if (gameId) {
+			if (path[1]) {
 				presenceData.details = "Reading game updates";
 				presenceData.buttons = [
 					{
 						label: "Read updates",
-						url: makeURL(`/updates/${gameId}`),
+						url: href,
 					},
 				];
 			}
@@ -114,8 +109,7 @@ presence.on("UpdateData", async () => {
 		}
 		// User pages
 		case "user": {
-			const userId = path[1];
-			if (userId) {
+			if (path[1]) {
 				const username =
 					document.querySelector<HTMLParagraphElement>(
 						"#big-username"
@@ -127,7 +121,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View profile",
-						url: makeURL(`/user/${userId}`),
+						url: href,
 					},
 				];
 			}
@@ -204,7 +198,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Join chat",
-						url: makeURL(`/chat/${channel}`),
+						url: href,
 					},
 				];
 			} else presenceData.details = "Finding a channel to chat in";
@@ -221,15 +215,14 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View category",
-								url: makeURL(`/forum/category/${categorySlug}`),
+								url: href,
 							},
 						];
 					}
 					break;
 				}
 				case "thread": {
-					const threadId = path[2];
-					if (threadId) {
+					if (path[2]) {
 						const threadName =
 								document.querySelector<HTMLHeadingElement>(
 									".thread-title"
@@ -252,7 +245,7 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Read thread",
-								url: makeURL(`/forum/thread/${threadId}`),
+								url: href,
 							},
 						];
 					}
@@ -269,7 +262,7 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View category",
-								url: makeURL(`/forum/category/${categorySlug}`),
+								url: href,
 							},
 						];
 					}
@@ -289,27 +282,25 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Search games",
-					url: makeURL("/search"),
+					url: href,
 				},
 			];
 			break;
 		}
 		case "explore": {
 			const categories: Record<string, string> = {
-					top: "Browsing the top-rated games",
-					faves: "Browsing the most favorited games",
-					recent: "Browsing the most recently updated games",
-					playtime: "Browsing the most grinded games",
-					new: "Browsing the newest games",
-					random: "Browsing random games",
-				},
-				category = path[1];
-
-			presenceData.details = categories[category] || "Browsing for games";
+				top: "Browsing the top-rated games",
+				faves: "Browsing the most favorited games",
+				recent: "Browsing the most recently updated games",
+				playtime: "Browsing the most grinded games",
+				new: "Browsing the newest games",
+				random: "Browsing random games",
+			};
+			presenceData.details = categories[path[1]] || "Browsing for games";
 			presenceData.buttons = [
 				{
 					label: "Explore games",
-					url: makeURL(`/explore/${category}`),
+					url: href,
 				},
 			];
 			break;
@@ -329,7 +320,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Request game",
-					url: makeURL("/request"),
+					url: href,
 				},
 			];
 			break;
@@ -339,7 +330,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View stats",
-					url: makeURL("/stats"),
+					url: href,
 				},
 			];
 			break;
@@ -349,7 +340,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Galaxy cluster",
-					url: makeURL("/cluster"),
+					url: href,
 				},
 			];
 			break;
@@ -359,7 +350,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View page",
-					url: makeURL("/dev"),
+					url: href,
 				},
 			];
 			break;
@@ -369,7 +360,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read the docs",
-					url: makeURL(`${path.map(p => `/${p}`).join("")}`),
+					url: href,
 				},
 			];
 			break;
@@ -379,7 +370,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View page",
-					url: makeURL("/about"),
+					url: href,
 				},
 			];
 			break;
@@ -389,7 +380,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View page",
-					url: makeURL("/rules"),
+					url: href,
 				},
 			];
 			break;
@@ -399,7 +390,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View page",
-					url: makeURL("/terms"),
+					url: href,
 				},
 			];
 			break;
@@ -409,7 +400,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View page",
-					url: makeURL("/privacy"),
+					url: href,
 				},
 			];
 			break;
@@ -419,7 +410,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View page",
-					url: makeURL("/cookies"),
+					url: href,
 				},
 			];
 			break;
