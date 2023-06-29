@@ -1,4 +1,3 @@
-/* eslint-disable no-one-time-vars/no-one-time-vars */
 const presence = new Presence({
 		clientId: "1122404044829380739",
 	}),
@@ -11,19 +10,15 @@ presence.on("UpdateData", async () => {
 		},
 		{ host, pathname } = document.location,
 		path = pathname.slice(1).split("/"),
-		showTimestamp = await presence.getSetting<boolean>("timestamp"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
+		[showTimestamp, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("buttons"),
+		]),
 		makeURL = (p: string) => `https://${host}${p}`;
 
 	switch (path[0]) {
 		case "": {
 			presenceData.details = "viewing the front page";
-			presenceData.buttons = [
-				{
-					label: "view page",
-					url: makeURL(""),
-				},
-			];
 			break;
 		}
 		// Game pages
@@ -126,7 +121,9 @@ presence.on("UpdateData", async () => {
 						"#big-username"
 					)?.textContent;
 
-				presenceData.details = `viewing ${username}'s profile`;
+				presenceData.details = username
+					? `viewing ${username}'s profile`
+					: "viewing a profile";
 				presenceData.buttons = [
 					{
 						label: "view profile",
@@ -162,17 +159,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "level": {
-			/*
 			// NOTE: The level and XP counters are animated to rise to their actual values once the page is opened.
-			//       This doesn't look very good in the status, so it's commented out for now.
-			const currentLevel = document.querySelector<HTMLDivElement>("#level > div")?.textContent,
-				xpRatio = document.querySelector<HTMLSpanElement>("#big-xp-progress")?.textContent,
-				totalXP = document.querySelector<HTMLDivElement>("#xp > div")?.textContent;
-			if (currentLevel && xpRatio && totalXP) {
-				const [currentXP, neededXP] = xpRatio.split("/").map(n => n.trim());
-				presenceData.state = `level ${currentLevel} | ${currentXP}/${neededXP} xp | ${totalXP} total xp`;
-			}
-			*/
+			//       which doesn't look good when shown in the presence.
 
 			presenceData.details = "viewing their level progression";
 			break;
@@ -200,17 +188,19 @@ presence.on("UpdateData", async () => {
 			const channel = path[1];
 
 			if (channel) {
-				const onlineUsers = document.querySelectorAll<HTMLDivElement>(
-						"#rightbar > div > a"
-					).length,
-					onlineAnonsElem =
-						document.querySelector<HTMLButtonElement>("#anon-count"),
-					onlineAnons = onlineAnonsElem
-						? parseInt(onlineAnonsElem.textContent.split(" ")[0].trim())
-						: 0;
+				const onlineAnonsElem =
+					document.querySelector<HTMLButtonElement>("#anon-count");
 
 				presenceData.details = `chatting in #${channel}`;
-				presenceData.state = `${onlineUsers + onlineAnons} online`;
+				presenceData.state = `${
+					// Online user count
+					document.querySelectorAll<HTMLDivElement>("#rightbar > div > a")
+						.length +
+					// Online anon count
+					(onlineAnonsElem
+						? parseInt(onlineAnonsElem.textContent.split(" ")[0].trim())
+						: 0)
+				} online`;
 				presenceData.buttons = [
 					{
 						label: "join chat",
@@ -313,10 +303,9 @@ presence.on("UpdateData", async () => {
 					new: "browsing the newest games",
 					random: "browsing random games",
 				},
-				category = path[1],
-				categoryName = categories[category];
+				category = path[1];
 
-			presenceData.details = categoryName || "browsing for games";
+			presenceData.details = categories[category] || "browsing for games";
 			presenceData.buttons = [
 				{
 					label: "explore games",
