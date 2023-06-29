@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 
 	switch (path[0]) {
 		case "": {
-			presenceData.details = "viewing the front page";
+			presenceData.details = "Viewing the front page";
 			break;
 		}
 		// Game pages
@@ -38,16 +38,16 @@ presence.on("UpdateData", async () => {
 					)?.textContent;
 
 				presenceData.details = gameName
-					? `playing ${gameName}`
-					: "playing a game";
+					? `Playing ${gameName}`
+					: "Playing a game";
 				if (currentLevel && xpRatio) {
 					const [currentXP, neededXP] = xpRatio.split("/").map(n => n.trim());
 
-					presenceData.state = `level ${currentLevel} | ${currentXP}/${neededXP} xp`;
+					presenceData.state = `Level ${currentLevel} | ${currentXP}/${neededXP} XP`;
 				}
 				presenceData.buttons = [
 					{
-						label: "play game",
+						label: "Play game",
 						url: makeURL(`/play/${gameId}`),
 					},
 				];
@@ -62,11 +62,11 @@ presence.on("UpdateData", async () => {
 				)?.textContent;
 
 				presenceData.details = gameName
-					? `editing ${gameName}`
-					: "editing a game";
+					? `Editing ${gameName}`
+					: "Editing a game";
 				presenceData.buttons = [
 					{
-						label: "play game",
+						label: "Play game",
 						url: makeURL(`/play/${gameId}`),
 					},
 				];
@@ -78,21 +78,21 @@ presence.on("UpdateData", async () => {
 				'div[data-label="game name"] > input'
 			)?.value;
 
-			presenceData.details = "publishing a new game";
+			presenceData.details = "Publishing a new game";
 			if (gameName) presenceData.state = `"${gameName}"`;
 			break;
 		}
 		case "manage": {
-			presenceData.details = "managing their games";
+			presenceData.details = "Managing their games";
 			break;
 		}
 		case "comments": {
 			const gameId = path[1];
 			if (gameId) {
-				presenceData.details = "reading game comments";
+				presenceData.details = "Reading game comments";
 				presenceData.buttons = [
 					{
-						label: "read comments",
+						label: "Read comments",
 						url: makeURL(`/comments/${gameId}`),
 					},
 				];
@@ -102,10 +102,10 @@ presence.on("UpdateData", async () => {
 		case "updates": {
 			const gameId = path[1];
 			if (gameId) {
-				presenceData.details = "reading game updates";
+				presenceData.details = "Reading game updates";
 				presenceData.buttons = [
 					{
-						label: "read updates",
+						label: "Read updates",
 						url: makeURL(`/updates/${gameId}`),
 					},
 				];
@@ -122,11 +122,11 @@ presence.on("UpdateData", async () => {
 					)?.textContent;
 
 				presenceData.details = username
-					? `viewing ${username}'s profile`
-					: "viewing a profile";
+					? `Viewing ${username}'s profile`
+					: "Viewing a profile";
 				presenceData.buttons = [
 					{
-						label: "view profile",
+						label: "View profile",
 						url: makeURL(`/user/${userId}`),
 					},
 				];
@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "you": {
-			presenceData.details = "editing their profile";
+			presenceData.details = "Editing their profile";
 			break;
 		}
 		case "themes": {
@@ -145,39 +145,39 @@ presence.on("UpdateData", async () => {
 					'#t-dark > button[disabled=""]'
 				)?.textContent;
 
-			presenceData.details = "choosing themes";
+			presenceData.details = "Choosing themes";
 			if (lightTheme && darkTheme)
 				presenceData.state = `☀️ ${lightTheme} 🌙 ${darkTheme}`;
 			break;
 		}
 		case "theme-preview": {
-			presenceData.details = "previewing a theme";
+			presenceData.details = "Previewing a theme";
 			break;
 		}
 		case "filters": {
-			presenceData.details = "choosing site-wide filters";
+			presenceData.details = "Choosing site-wide filters";
 			break;
 		}
 		case "level": {
 			// NOTE: The level and XP counters are animated to rise to their actual values once the page is opened.
 			//       which doesn't look good when shown in the presence.
 
-			presenceData.details = "viewing their level progression";
+			presenceData.details = "Viewing their level progression";
 			break;
 		}
 		case "playtime": {
-			presenceData.details = "viewing their total playtime";
+			presenceData.details = "Viewing their total playtime";
 			break;
 		}
 		case "favorites": {
-			presenceData.details = "viewing their favorite games";
+			presenceData.details = "Viewing their favorite games";
 			break;
 		}
 		case "inbox": {
 			const unreadMessageCount =
 				document.querySelectorAll<HTMLDivElement>("#sidebar > .unread").length;
 
-			presenceData.details = "checking their inbox";
+			presenceData.details = "Checking their inbox";
 			presenceData.state = `${unreadMessageCount} unread message${
 				unreadMessageCount === 1 ? "" : "s"
 			}`;
@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
 				const onlineAnonsElem =
 					document.querySelector<HTMLButtonElement>("#anon-count");
 
-				presenceData.details = `chatting in #${channel}`;
+				presenceData.details = `Chatting in #${channel}`;
 				presenceData.state = `${
 					// Online user count
 					document.querySelectorAll<HTMLDivElement>("#rightbar > div > a")
@@ -203,24 +203,24 @@ presence.on("UpdateData", async () => {
 				} online`;
 				presenceData.buttons = [
 					{
-						label: "join chat",
+						label: "Join chat",
 						url: makeURL(`/chat/${channel}`),
 					},
 				];
-			} else presenceData.details = "finding a channel to chat in";
+			} else presenceData.details = "Finding a channel to chat in";
 			break;
 		}
 		case "forum": {
-			presenceData.details = "browsing the forums";
+			presenceData.details = "Browsing the forums";
 
 			switch (path[1]) {
 				case "category": {
 					const categorySlug = path[2];
 					if (categorySlug) {
-						presenceData.details = `browsing #${categorySlug}`;
+						presenceData.details = `Browsing #${categorySlug}`;
 						presenceData.buttons = [
 							{
-								label: "view category",
+								label: "View category",
 								url: makeURL(`/forum/category/${categorySlug}`),
 							},
 						];
@@ -244,14 +244,14 @@ presence.on("UpdateData", async () => {
 								).length > 0;
 
 						presenceData.details = threadName
-							? `reading a thread: "${threadName}"`
-							: "reading a thread";
-						if (currentlyReplying) presenceData.state = "writing a reply";
+							? `Reading a thread: "${threadName}"`
+							: "Reading a thread";
+						if (currentlyReplying) presenceData.state = "Writing a reply";
 						else if (currentlyEditing)
-							presenceData.state = "editing their post";
+							presenceData.state = "Editing their post";
 						presenceData.buttons = [
 							{
-								label: "read thread",
+								label: "Read thread",
 								url: makeURL(`/forum/thread/${threadId}`),
 							},
 						];
@@ -264,11 +264,11 @@ presence.on("UpdateData", async () => {
 						const threadName =
 							document.querySelector<HTMLInputElement>("#input-title")?.value;
 
-						presenceData.details = `making a thread in #${categorySlug}`;
+						presenceData.details = `Making a thread in #${categorySlug}`;
 						if (threadName) presenceData.state = `"${threadName}"`;
 						presenceData.buttons = [
 							{
-								label: "view category",
+								label: "View category",
 								url: makeURL(`/forum/category/${categorySlug}`),
 							},
 						];
@@ -284,11 +284,11 @@ presence.on("UpdateData", async () => {
 				'#container input[type="search"]'
 			)?.value;
 
-			presenceData.details = "searching for games";
+			presenceData.details = "Searching for games";
 			if (query) presenceData.state = `"${query}"`;
 			presenceData.buttons = [
 				{
-					label: "search games",
+					label: "Search games",
 					url: makeURL("/search"),
 				},
 			];
@@ -296,19 +296,19 @@ presence.on("UpdateData", async () => {
 		}
 		case "explore": {
 			const categories: Record<string, string> = {
-					top: "browsing the top-rated games",
-					faves: "browsing the most favorited games",
-					recent: "browsing the most recently updated games",
-					playtime: "browsing the most grinded games",
-					new: "browsing the newest games",
-					random: "browsing random games",
+					top: "Browsing the top-rated games",
+					faves: "Browsing the most favorited games",
+					recent: "Browsing the most recently updated games",
+					playtime: "Browsing the most grinded games",
+					new: "Browsing the newest games",
+					random: "Browsing random games",
 				},
 				category = path[1];
 
-			presenceData.details = categories[category] || "browsing for games";
+			presenceData.details = categories[category] || "Browsing for games";
 			presenceData.buttons = [
 				{
-					label: "explore games",
+					label: "Explore games",
 					url: makeURL(`/explore/${category}`),
 				},
 			];
@@ -316,7 +316,7 @@ presence.on("UpdateData", async () => {
 		}
 		// Other pages
 		case "signup": {
-			presenceData.details = "signing up";
+			presenceData.details = "Signing up";
 			break;
 		}
 		case "request": {
@@ -324,108 +324,108 @@ presence.on("UpdateData", async () => {
 				'div[data-label="game name"] > input'
 			)?.value;
 
-			presenceData.details = "requesting a game";
+			presenceData.details = "Requesting a game";
 			if (gameName) presenceData.state = `"${gameName}"`;
 			presenceData.buttons = [
 				{
-					label: "request game",
+					label: "Request game",
 					url: makeURL("/request"),
 				},
 			];
 			break;
 		}
 		case "stats": {
-			presenceData.details = "viewing site statistics";
+			presenceData.details = "Viewing site statistics";
 			presenceData.buttons = [
 				{
-					label: "view stats",
+					label: "View stats",
 					url: makeURL("/stats"),
 				},
 			];
 			break;
 		}
 		case "cluster": {
-			presenceData.details = "trying out galaxy cluster";
+			presenceData.details = "Trying out galaxy cluster";
 			presenceData.buttons = [
 				{
-					label: "galaxy cluster",
+					label: "Galaxy cluster",
 					url: makeURL("/cluster"),
 				},
 			];
 			break;
 		}
 		case "dev": {
-			presenceData.details = "becoming a developer";
+			presenceData.details = "Becoming a developer";
 			presenceData.buttons = [
 				{
-					label: "view page",
+					label: "View page",
 					url: makeURL("/dev"),
 				},
 			];
 			break;
 		}
 		case "docs": {
-			presenceData.details = "reading the documentation";
+			presenceData.details = "Reading the documentation";
 			presenceData.buttons = [
 				{
-					label: "read the docs",
+					label: "Read the docs",
 					url: makeURL(`${path.map(p => `/${p}`).join("")}`),
 				},
 			];
 			break;
 		}
 		case "about": {
-			presenceData.details = "reading about galaxy";
+			presenceData.details = "Reading about galaxy";
 			presenceData.buttons = [
 				{
-					label: "view page",
+					label: "View page",
 					url: makeURL("/about"),
 				},
 			];
 			break;
 		}
 		case "rules": {
-			presenceData.details = "reviewing the site rules";
+			presenceData.details = "Reviewing the site rules";
 			presenceData.buttons = [
 				{
-					label: "view page",
+					label: "View page",
 					url: makeURL("/rules"),
 				},
 			];
 			break;
 		}
 		case "terms": {
-			presenceData.details = "reading the terms of service";
+			presenceData.details = "Reading the terms of service";
 			presenceData.buttons = [
 				{
-					label: "view page",
+					label: "View page",
 					url: makeURL("/terms"),
 				},
 			];
 			break;
 		}
 		case "privacy": {
-			presenceData.details = "reading the privacy policy";
+			presenceData.details = "Reading the privacy policy";
 			presenceData.buttons = [
 				{
-					label: "view page",
+					label: "View page",
 					url: makeURL("/privacy"),
 				},
 			];
 			break;
 		}
 		case "cookies": {
-			presenceData.details = "reading the cookie policy";
+			presenceData.details = "Reading the cookie policy";
 			presenceData.buttons = [
 				{
-					label: "view page",
+					label: "View page",
 					url: makeURL("/cookies"),
 				},
 			];
 			break;
 		}
 		case "banned": {
-			presenceData.details = "banned";
+			presenceData.details = "Banned";
 			break;
 		}
 		case "pogger": {
