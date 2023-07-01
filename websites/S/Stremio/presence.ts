@@ -6,12 +6,48 @@ const presence = new Presence({
 let timestamp: [number, number],
 	pauseCheck: boolean,
 	search: HTMLInputElement,
-	title: string;
+	title: string,
+	cached: { id: string; name: string };
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			browsing: "general.browsing",
+			searchFor: "general.searchFor",
+			searchSomething: "general.searchSomething",
+			genre: "general.genre",
+			buttonWatchVideo: "general.buttonWatchVideo",
+			viewHome: "general.viewHome",
+		},
+		"en"
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>;
+
+async function cacheIt(type: string, contentID: string) {
+	if (!cached || !cached.id || cached.id != contentID) {
+		const fetched = await fetch(
+			`https://v3-cinemeta.strem.io/meta/${type.toLowerCase()}/${contentID}.json`
+		).then(x => x.json());
+		cached = { id: await fetched.meta.id, name: await fetched.meta.name };
+		console.log(fetched.meta);
+		return cached;
+	} else return cached;
+}
+function lowerCaseIt(str: string | null) {
+	if (str) return str.toLowerCase();
+}
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/logo.png",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ hash, hostname, href } = document.location,
@@ -20,133 +56,166 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("thumbnails"),
 			presence.getSetting<boolean>("buttons"),
 		]),
-		active = document.querySelector(
-			"[class='ng-binding ng-scope selected']"
-		)?.textContent;
+		active = document.querySelector('[title="Select type"]')?.textContent,
+		sorted = document.querySelector('[title="Select catalog"]')?.textContent;
 
-	if (hostname.includes("app.strem.io")) {
-		search = document.querySelector("#global-search-field");
-		const video = document.querySelector<HTMLMediaElement>("#videoPlayer");
-		if (privacy && !video) presenceData.details = "Browsing...";
-		else if (privacy && video) presenceData.details = "Watching...";
-		else if (search?.value) {
-			presenceData.details = "Searching For:";
+	if (!strings) strings = await getStrings();
+
+	if (hostname === "web.stremio.com") {
+		search =
+			document.querySelector('[title="search videos"] > input') ||
+			document.querySelector('[placeholder="Search or paste link"]');
+		if (search?.value) {
+			presenceData.details = !privacy
+				? strings.searchFor
+				: strings.searchSomething;
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.state = search.value;
-		} else if (hash.includes("/detail/")) {
-			title = document.querySelector(
-				"#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div"
-			).textContent;
-			presenceData.details = title;
-			presenceData.buttons = [
-				{
-					label: "Watch Video",
-					url: href,
-				},
-			];
-			if (thumbnails) {
-				presenceData.largeImageKey =
-					document
-						.querySelector(
-							"#detail > div.details-less-info > div.details-top > div:nth-child(1)"
-						)
-						?.firstElementChild.getAttribute("src") ?? "logo";
+			presence.setActivity(presenceData);
+			return;
+		}
+		switch (hash.split("/")[1]) {
+			case "addons": {
+				const type = lowerCaseIt(
+					document.querySelector('[title="Select type"]')?.textContent
+				);
+				presenceData.details = !privacy
+					? `Browsing ${lowerCaseIt(sorted).replace(" addons", "")} addons`
+					: "Browsing addons";
+				presenceData.state = type == "all" ? "" : `For ${type}`;
+				break;
 			}
-		} else if (hash.includes("addons")) {
-			search = document.querySelector(
-				"#addons > div.filter > form > div.addon-search-input > input"
-			);
-			if (search?.value) {
-				presenceData.details = "Searching addons for:";
-				presenceData.state = search.value;
-			} else {
-				presenceData.state = active ?? "All";
-				title = document.querySelector(
-					"[class='ng-scope selected']"
+			case "settings": {
+				presenceData.details = !privacy
+					? `Viewing ${lowerCaseIt(
+							document.querySelector(
+								'[class*="side-menu-button-vbkJ1 selected-"]'
+							)?.textContent
+					  )} settings`
+					: "Viewing their settings";
+				break;
+			}
+			case "library": {
+				presenceData.details = "Viewing their library";
+				break;
+			}
+			case "discover": {
+				const genre = document.querySelector(
+					'[title="Select genre"]'
 				)?.textContent;
-
-				presenceData.buttons = [
-					{
-						label: "Browse Addons",
-						url: href,
-					},
-				];
-				presenceData.details = `Browsing ${title}`;
-			}
-		} else if (hash.includes("settings")) {
-			presenceData.details = `${
-				document.querySelector("[class='ng-scope ng-binding active']")
-					?.textContent ?? "General"
-			} settings`;
-		} else if (hash.includes("/discover/")) {
-			if (active) {
+				presenceData.details = !privacy
+					? `Browsing ${lowerCaseIt(active)}s`
+					: "Browsing content";
+				presenceData.state =
+					sorted && genre !== "Select genre"
+						? `Sorted by: ${lowerCaseIt(sorted)} | ${
+								strings.genre
+						  }: ${lowerCaseIt(genre)}`
+						: sorted
+						? `Sorted by: ${lowerCaseIt(sorted)}`
+						: `${strings.genre}: ${lowerCaseIt(genre)}`;
 				presenceData.buttons = [
 					{
 						label: "Browse",
 						url: href,
 					},
 				];
-				presenceData.details = `Browsing: ${active}`;
-			} else presenceData.state = "Browsing Movies";
-		} else if (hash.includes("/library")) {
-			if (active) presenceData.details = `${active} Library`;
-			else presenceData.details = "Library";
-
-			presenceData.buttons = [
-				{
-					label: "View Library",
-					url: href,
-				},
-			];
-		} else if (hash.includes("/calendar")) {
-			presenceData.buttons = [
-				{
-					label: "View Calendar",
-					url: href,
-				},
-			];
-			presenceData.details = "Calendar";
-		} else if (hash.includes("player")) {
-			if (video?.duration) {
-				timestamp = presence.getTimestampsfromMedia(video);
-				pauseCheck = video?.paused ?? true;
-			} else if (!video.duration && document.querySelector("#controlbar-top")) {
-				let split = document
-					.querySelector("#play-progress-text")
-					?.textContent.split("/");
-				if (split?.[0]) {
-					split = split.map(s => s.trim());
-					timestamp = presence.getTimestamps(
-						presence.timestampFromFormat(split[0]),
-						presence.timestampFromFormat(split[1])
-					);
+				break;
+			}
+			case "detail": {
+				if (!href.includes("yt_id")) {
+					presenceData.largeImageKey = document
+						.querySelector('[class*="logo-"]')
+						?.getAttribute("src");
 				}
-
-				pauseCheck = !document
-					.querySelector("#controlbar-top")
-					?.firstElementChild.className.includes("pause");
+				const type = hash.match(/(movie(s)?)|(serie(s)?)|(channel(s)?)/gm)?.[0];
+				presenceData.details = !privacy
+					? `Viewing a ${type ?? "unknown"}`
+					: `Browsing a ${type ?? "unknown"}`;
+				presenceData.state =
+					document
+						.querySelector("[class*='selected meta-item-container-']")
+						?.getAttribute("title") ??
+					document.querySelector('[class*="logo-"]')?.getAttribute("title") ??
+					(await cacheIt(type, hash.split("/")[3])).name;
+				presenceData.buttons = [
+					{
+						label: "View Content",
+						url: href,
+					},
+				];
+				break;
 			}
-			delete presenceData.startTimestamp;
-			if (
-				!pauseCheck &&
-				!document.querySelector("#loading-logo").className.includes("flashing")
-			) {
-				presenceData.endTimestamp = timestamp[1];
-				presenceData.smallImageKey = Assets.Play;
-			} else {
-				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = Assets.Pause;
+			case "player": {
+				delete presenceData.startTimestamp;
+				const title = document.querySelector('[class*="title-"]')?.textContent;
+				if (!href.includes("yt_id")) {
+					const video = document.querySelector<HTMLVideoElement>("video");
+					presenceData.details = !privacy ? title : "Watching a video";
+					presenceData.largeImageKey = document
+						.querySelector('[class*="logo-"]')
+						?.getAttribute("src");
+					if (video && !isNaN(video.duration)) {
+						presenceData.smallImageKey = video.paused
+							? Assets.Pause
+							: Assets.Play;
+						presenceData.smallImageText = video.paused
+							? strings.pause
+							: strings.play;
+						if (!video.paused) {
+							[, presenceData.endTimestamp] =
+								presence.getTimestampsfromMedia(video);
+						}
+					}
+				} else {
+					presenceData.smallImageKey =
+						document.querySelector('[icon="ic_play"]') ??
+						document.querySelector('[title="Play"]')
+							? Assets.Pause
+							: Assets.Play;
+					presenceData.smallImageText =
+						document.querySelector('[icon="ic_play"]') ??
+						document.querySelector('[title="Play"]')
+							? strings.pause
+							: strings.play;
+					if (
+						!document.querySelector('[icon="ic_play"]') ||
+						!document.querySelector('[title="Play"]')
+					) {
+						[, presenceData.endTimestamp] = presence.getTimestamps(
+							Number(
+								presence.timestampFromFormat(
+									document.querySelector('[class*="seek-bar-container-"]')
+										?.firstElementChild?.textContent
+								)
+							),
+							Number(
+								presence.timestampFromFormat(
+									document.querySelector('[class*="seek-bar-container-"]')
+										?.lastElementChild?.textContent
+								)
+							)
+						);
+					}
+					presenceData.details = !privacy
+						? title.split(" - ")[1]
+						: "Watching a video";
+					presenceData.state = title.split(" - ")[0];
+				}
+				presenceData.buttons = [
+					{
+						label: strings.buttonWatchVideo,
+						url: href,
+					},
+				];
+				break;
 			}
-			title = document
-				.querySelector("head > title")
-				?.textContent.replace("Stremio -", "");
-			presenceData.details = title;
-			presenceData.buttons = [
-				{
-					label: "Join View Party",
-					url: href,
-				},
-			];
-		} else if (hash === "#/") presenceData.details = "Viewing the homepage";
+			default: {
+				if (hash === "#" || hash === "#/")
+					presenceData.details = strings.viewHome;
+				break;
+			}
+		}
 	} else if (hostname === "stremio.com") {
 		if (hash.includes("addon-sdk")) presenceData.details = "Viewing Addon SDK";
 		else if (hash.includes("contribute"))
@@ -164,11 +233,14 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details =
 				document.querySelector("[class='active']")?.textContent ??
-				"Browsing...";
+				strings.browsing;
 		}
 	}
 
-	if (!buttons) delete presenceData.buttons;
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
+	if (privacy && presenceData.state) delete presenceData.state;
+	if (!thumbnails && presenceData.largeImageKey !== Assets.Logo)
+		presenceData.largeImageKey = Assets.Logo;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
