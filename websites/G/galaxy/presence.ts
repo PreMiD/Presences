@@ -424,7 +424,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "pogger button",
-					url: "https://save418.com",
+					url: href,
 				},
 			];
 			break;
