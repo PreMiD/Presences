@@ -3,11 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let timestamp: [number, number],
-	pauseCheck: boolean,
-	search: HTMLInputElement,
-	title: string,
-	cached: { id: string; name: string };
+let search: HTMLInputElement, cached: { id: string; name: string };
 
 async function getStrings() {
 	return presence.getStrings(
@@ -28,12 +24,11 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>;
 
 async function cacheIt(type: string, contentID: string) {
-	if (!cached || !cached.id || cached.id != contentID) {
+	if (!cached || !cached.id || cached.id !== contentID) {
 		const fetched = await fetch(
 			`https://v3-cinemeta.strem.io/meta/${type.toLowerCase()}/${contentID}.json`
 		).then(x => x.json());
 		cached = { id: await fetched.meta.id, name: await fetched.meta.name };
-		console.log(fetched.meta);
 		return cached;
 	} else return cached;
 }
@@ -56,7 +51,6 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("thumbnails"),
 			presence.getSetting<boolean>("buttons"),
 		]),
-		active = document.querySelector('[title="Select type"]')?.textContent,
 		sorted = document.querySelector('[title="Select catalog"]')?.textContent;
 
 	if (!strings) strings = await getStrings();
@@ -82,7 +76,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = !privacy
 					? `Browsing ${lowerCaseIt(sorted).replace(" addons", "")} addons`
 					: "Browsing addons";
-				presenceData.state = type == "all" ? "" : `For ${type}`;
+				presenceData.state = type === "all" ? "" : `For ${type}`;
 				break;
 			}
 			case "settings": {
@@ -104,7 +98,9 @@ presence.on("UpdateData", async () => {
 					'[title="Select genre"]'
 				)?.textContent;
 				presenceData.details = !privacy
-					? `Browsing ${lowerCaseIt(active)}s`
+					? `Browsing ${lowerCaseIt(
+							document.querySelector('[title="Select type"]')?.textContent
+					  )}s`
 					: "Browsing content";
 				presenceData.state =
 					sorted && genre !== "Select genre"
