@@ -419,16 +419,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Banned";
 			break;
 		}
-		case "pogger": {
-			// https://galaxy.click/pogger
-			presenceData.buttons = [
-				{
-					label: "pogger button",
-					url: href,
-				},
-			];
-			break;
-		}
 	}
 
 	if (!showTimestamp) {
