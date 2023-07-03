@@ -8,7 +8,7 @@ const enum Assets {
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
 		pathArr = pathname.split("/"),
-		{ details, largeImageKey, state } = getPageData(
+		{ details, smallImageKey, largeImageKey, state } = getPageData(
 			pathArr[1],
 			pathArr[2],
 			pathArr[3]
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details,
 		};
-
+	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 	if (state) presenceData.state = state;
 
 	if (details) presence.setActivity(presenceData);
@@ -58,6 +58,26 @@ function getPageData(page: string, pageDetail: string, title: string) {
 				details: "Viewing categories...",
 				state,
 				largeImageKey,
+				smallImageKey: Assets.Search,
+			};
+		}
+		default: {
+			let smallImageKey = "",
+				details = "";
+			const streamer = document.querySelector(".stream-username").textContent;
+			if (document.querySelector(".odometer-value")) {
+				details = `Watching: ${streamer}`;
+				smallImageKey = Assets.Live;
+			} else {
+				details = `Viewing: ${streamer}`;
+				smallImageKey = Assets.Viewing;
+			}
+			return {
+				details,
+				state: document.querySelector(".stream-title").textContent,
+				largeImageKey:
+					document.querySelector<HTMLImageElement>(".owner-avatar img")?.src,
+				smallImageKey,
 			};
 		}
 	}
