@@ -6,12 +6,13 @@ const enum Assets {
 }
 
 presence.on("UpdateData", async () => {
-	const { pathname } = document.location,
+	const { pathname, hostname } = document.location,
 		pathArr = pathname.split("/"),
 		{ details, smallImageKey, largeImageKey, state } = getPageData(
 			pathArr[1],
 			pathArr[2],
-			pathArr[3]
+			pathArr[3],
+			hostname
 		),
 		presenceData: PresenceData = {
 			largeImageKey: largeImageKey || Assets.Logo,
@@ -24,61 +25,109 @@ presence.on("UpdateData", async () => {
 	if (details) presence.setActivity(presenceData);
 });
 
-function getPageData(page: string, pageDetail: string, title: string) {
-	switch (page) {
-		case "":
-			return { details: "Viewing home..." };
-		case "categories": {
-			const activeMainCategory = document.querySelector(
-				"a.category-tile-active"
-			)?.textContent;
-			let state = "",
-				largeImageKey = "";
+function getPageData(
+	page: string,
+	pageDetail: string,
+	title: string,
+	hostname: string
+) {
+	switch (hostname) {
+		case "kick.com": {
+			switch (page) {
+				case "":
+					return { details: "Viewing home...", smallImageKey: Assets.Search };
+				case "categories": {
+					const activeMainCategory = document.querySelector(
+						"a.category-tile-active"
+					)?.textContent;
+					let state = "",
+						largeImageKey = "";
 
-			if (activeMainCategory) {
-				state = activeMainCategory;
-				// Replace .gif with .png on main category image
-				const imageElement = document.querySelector(
-						'a.category-tile-active [src$=".gif"]'
-					),
-					newSrc = imageElement.getAttribute("src").replace(".gif", ".png");
-				imageElement.setAttribute("src", newSrc);
-				largeImageKey = newSrc;
+					if (activeMainCategory) {
+						state = activeMainCategory;
+						// Replace .gif with .png on main category image
+						const imageElement = document.querySelector(
+								'a.category-tile-active [src$=".gif"]'
+							),
+							newSrc = imageElement.getAttribute("src").replace(".gif", ".png");
+						imageElement.setAttribute("src", newSrc);
+						largeImageKey = newSrc;
+					}
+					// If there is a subcategory
+					if (pageDetail && title) {
+						state += ` > ${formatText(pageDetail)} > ${formatText(title)}`;
+						largeImageKey =
+							document.querySelector<HTMLImageElement>("div.h-full > img")?.src;
+					}
+					return {
+						details: "Viewing categories...",
+						state,
+						largeImageKey,
+						smallImageKey: Assets.Search,
+					};
+				}
+				case "community-guidelines":
+				case "dmca-policy":
+				case "privacy-policy":
+				case "terms-of-service":
+					return {
+						details: `Reading ${formatText(page)}...`,
+						smallImageKey: Assets.Reading,
+					};
+				default:
+					// watching/viewing a stream
+					if (document.querySelector(".stream-username")) {
+						let smallImageKey = "",
+							state = "";
+						const streamer =
+							document.querySelector(".stream-username").textContent;
+						if (document.querySelector(".odometer-value")) {
+							state = `Watching: ${streamer}`;
+							smallImageKey = Assets.Live;
+						} else {
+							state = `Viewing: ${streamer}`;
+							smallImageKey = Assets.Viewing;
+						}
+						return {
+							details: document.querySelector(".stream-title").textContent,
+							state,
+							largeImageKey:
+								document.querySelector<HTMLImageElement>(".owner-avatar img")
+									?.src,
+							smallImageKey,
+						};
+					} else {
+						return {
+							details: "Browsing Kick...",
+						};
+					}
 			}
-			if (pageDetail && title) {
-				state += ` > ${pageDetail
-					.replace(/-/g, " ")
-					.replace(/\b\w/g, match => match.toUpperCase())} > ${title
-					.replace(/-/g, " ")
-					.replace(/\b\w/g, match => match.toUpperCase())}`;
-				largeImageKey =
-					document.querySelector<HTMLImageElement>("div.h-full > img")?.src;
-			}
-			return {
-				details: "Viewing categories...",
-				state,
-				largeImageKey,
-				smallImageKey: Assets.Search,
-			};
 		}
-		default: {
-			let smallImageKey = "",
-				details = "";
-			const streamer = document.querySelector(".stream-username").textContent;
-			if (document.querySelector(".odometer-value")) {
-				details = `Watching: ${streamer}`;
-				smallImageKey = Assets.Live;
-			} else {
-				details = `Viewing: ${streamer}`;
-				smallImageKey = Assets.Viewing;
+		case "help.kick.com": {
+			switch (pageDetail) {
+				case "collections": {
+					return {
+						details: document.querySelector("header.text-2xl").textContent,
+						state: "Searching resource category...",
+						smallImageKey: Assets.Search,
+					};
+				}
+				case "articles": {
+					return {
+						details: document.querySelector("header.text-2xl").textContent,
+						state: "Reading article...",
+						smallImageKey: Assets.Reading,
+					};
+				}
+				default: {
+					return { details: "Browsing Kick Help..." };
+				}
 			}
-			return {
-				details,
-				state: document.querySelector(".stream-title").textContent,
-				largeImageKey:
-					document.querySelector<HTMLImageElement>(".owner-avatar img")?.src,
-				smallImageKey,
-			};
 		}
 	}
+}
+function formatText(text: string) {
+	return text
+		.replace(/-/g, " ")
+		.replace(/\b\w/g, (match: string) => match.toUpperCase());
 }
