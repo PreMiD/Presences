@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +10,7 @@
 		"nl": "Het station gemaakt voor gaming - 24/7 alle hits spelen!"
 	},
 	"url": "reachradio.co.uk",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Reach%20Radio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Reach%20Radio/assets/thumbnail.png",
 	"color": "#003d91",

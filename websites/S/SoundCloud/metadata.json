@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -26,7 +26,7 @@
 		"vi_VN": "SoundCloud là nền tảng phát nhạc và podcast trực tuyến nơi bạn có thể nghe hàng triệu bài hát từ khắp thế giới, hoặc tự đăng tải tác phẩm của riêng mình."
 	},
 	"url": "soundcloud.com",
-	"version": "2.4.6",
+	"version": "2.4.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/thumbnail.jpg",
 	"color": "#FF7E30",

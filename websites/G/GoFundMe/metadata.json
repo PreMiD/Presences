@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "rushia",
 		"id": "398752205043400724"
@@ -10,7 +10,7 @@
 	},
 	"url": "gofundme.com",
 	"regExp": "([a-z0-9]+)[.]gofundme[.]com",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GoFundMe/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GoFundMe/assets/thumbnail.png",
 	"color": "#00b640",

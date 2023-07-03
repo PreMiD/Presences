@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "1105810827224809532",
 		"name": "for"
@@ -9,9 +9,9 @@
 		"en": "feds.lol is a freemium biolink service."
 	},
 	"url": "feds.lol",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/TzIxLtq.png",
-	"thumbnail": "https://i.imgur.com/Gh57ayn.jpg",
+	"version": "1.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/feds/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/feds/assets/thumbnail.jpg",
 	"color": "#000000",
 	"category": "socials",
 	"tags": [

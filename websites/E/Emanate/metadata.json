@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "SlowLife",
 		"id": "374905512661221377"
@@ -12,7 +12,7 @@
 		"dashboard.emanate.live",
 		"emanate.live"
 	],
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Emanate/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Emanate/assets/thumbnail.png",
 	"color": "#1e1e1e",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Hibanka",
 		"id": "467658348158779393"
@@ -11,7 +11,7 @@
 		"nl": "Bekijk en vergelijk je Rainbow Six: Siege-statistieken met miljoenen andere spelers over de hele wereld!"
 	},
 	"url": "r6stats.com",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/R6Stats/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/R6Stats/assets/thumbnail.png",
 	"color": "#ffda0c",

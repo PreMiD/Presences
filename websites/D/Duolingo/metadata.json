@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Luke",
 		"id": "279622919242514432"
@@ -42,7 +42,7 @@
 	},
 	"url": "www.duolingo.com",
 	"regExp": "(www|(\\w{2}-)?\\w{2})\\.duolingo\\.(com|cn)",
-	"version": "2.0.11",
+	"version": "2.0.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/thumbnail.png",
 	"color": "#58cc02",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "SlowLife",
 		"id": "374905512661221377"
@@ -17,7 +17,7 @@
 		"teams.live.com",
 		"teams.microsoft.com"
 	],
-	"version": "1.1.16",
+	"version": "1.1.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20Teams/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20Teams/assets/thumbnail.png",
 	"color": "#4A51BA",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,7 +11,7 @@
 	},
 	"url": "www.easports.com",
 	"regExp": "([a-z0-9-]+[.])*easports[.]com[/]([a-z0-9]+)[/]fifa[/]ultimate-team[/]web-app[/]",
-	"version": "1.2.19",
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FIFA%20Web%20App/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FIFA%20Web%20App/assets/thumbnail.png",
 	"color": "#FFFFFF",

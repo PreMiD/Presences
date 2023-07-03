@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Kabal",
 		"id": "269581360316940299"
@@ -15,7 +15,7 @@
 		"blutv.com",
 		"www.blutv.com"
 	],
-	"version": "1.1.23",
+	"version": "1.1.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BluTV/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BluTV/assets/thumbnail.jpg",
 	"color": "#2d2e42",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -11,7 +11,7 @@
 	},
 	"url": "www.sololearn.com",
 	"regExp": "([a-z0-9-]+[.])*sololearn[.]com[/]",
-	"version": "2.0.21",
+	"version": "2.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SoloLearn/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SoloLearn/assets/thumbnail.png",
 	"color": "#1ABC9C",

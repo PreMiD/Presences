@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Greep",
 		"id": "330030648456642562"
@@ -14,7 +14,7 @@
 		"trackmania.io",
 		"www.trackmania.io"
 	],
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Trackmania.io/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Trackmania.io/assets/thumbnail.jpg",
 	"color": "#0A7FB4",

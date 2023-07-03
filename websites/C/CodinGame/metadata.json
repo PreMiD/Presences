@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "LighTender",
 		"id": "338768773865537536"
@@ -10,7 +10,7 @@
 		"fr": "CodinGame est un site pour apprendre la programmation"
 	},
 	"url": "www.codingame.com",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CodinGame/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CodinGame/assets/thumbnail.png",
 	"color": "#c4bf1c",

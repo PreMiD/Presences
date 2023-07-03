@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Mirax",
 		"id": "223355525826347018"
@@ -11,7 +11,7 @@
 		"nl": "Website voor het lezen van manga in het Russisch"
 	},
 	"url": "mangalib.me",
-	"version": "1.4.17",
+	"version": "1.4.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mangalib/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mangalib/assets/thumbnail.png",
 	"color": "#ff8c00",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -13,7 +13,7 @@
 		"www.stremio.com",
 		"app.strem.io"
 	],
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/thumbnail.jpg",
 	"color": "#8A5AAB",

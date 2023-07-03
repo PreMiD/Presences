@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Striter Alfa",
 		"id": "288834890772905984"
@@ -14,7 +14,7 @@
 		"mangahosted.com",
 		"www.mangahosted.com"
 	],
-	"version": "1.0.19",
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaHost/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaHost/assets/thumbnail.png",
 	"color": "#56e0ff",

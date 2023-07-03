@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,7 +11,7 @@
 		"fr": "En participant à Niantic Wayfarer vous pouvez aider à créer de nouvelles aventures pour vous et les autres joueurs en passant en revue des points d'intérêt intéressants autour du monde."
 	},
 	"url": "wayfarer.nianticlabs.com",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/thumbnail.jpg",
 	"color": "#fc4513",

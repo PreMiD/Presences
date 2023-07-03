@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -12,7 +12,7 @@
 	},
 	"url": "www.gamestar.de",
 	"regExp": "([a-z0-9-]+[.])*gamestar[.]de[/]",
-	"version": "1.2.18",
+	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GameStar/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GameStar/assets/thumbnail.png",
 	"color": "#162781",

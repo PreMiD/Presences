@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -12,7 +12,7 @@
 		"weather.com",
 		"features.weather.com"
 	],
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/The%20Weather%20Channel/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/The%20Weather%20Channel/assets/thumbnail.png",
 	"color": "#014F9D",

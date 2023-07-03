@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Nekolen",
 		"id": "270125856679002113"
@@ -20,7 +20,7 @@
 		"vi_VN": "alltheflavors.com và trang web cung cấp các công thức và nguyên liệu có thể tự làm."
 	},
 	"url": "alltheflavors.com",
-	"version": "1.4.18",
+	"version": "1.4.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/All%20The%20Flavors/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/All%20The%20Flavors/assets/thumbnail.png",
 	"color": "#FF6347",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "joerkig",
 		"id": "205984221859151873"
@@ -22,7 +22,7 @@
 		"steamdb.info",
 		"steamstat.us"
 	],
-	"version": "1.1.6",
+	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/thumbnail.png",
 	"color": "#3871C8",

@@ -13,7 +13,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/TzIxLtq.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/feds/assets/logo.png",
 		},
 		{ pathname, href } = document.location;
 

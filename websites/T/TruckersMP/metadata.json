@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Encrypted",
 		"id": "564434085708038144"
@@ -21,7 +21,7 @@
 		"stats.truckersmp.com",
 		"map.truckersmp.com"
 	],
-	"version": "3.0.13",
+	"version": "3.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TruckersMP/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TruckersMP/assets/thumbnail.png",
 	"color": "#B92025",

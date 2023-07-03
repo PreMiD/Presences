@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "SHISEN",
 		"id": "257151906038677504"
@@ -10,7 +10,7 @@
 		"ru": "Шикимори — онлайн энциклопедия аниме и манги. Полный список популярной манги на русском. Shikimori — лучший аниме-форум для общения."
 	},
 	"url": "shikimori.me",
-	"version": "1.1.8",
+	"version": "1.1.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/thumbnail.png",
 	"color": "#4f4f4f",

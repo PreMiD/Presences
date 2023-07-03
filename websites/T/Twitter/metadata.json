@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -54,7 +54,7 @@
 		"twitter.com",
 		"tweetdeck.twitter.com"
 	],
-	"version": "2.0.21",
+	"version": "2.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Twitter/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Twitter/assets/thumbnail.png",
 	"color": "#48C0EB",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "257151906038677504",
 		"name": "SHISEN"
@@ -13,7 +13,7 @@
 		"www.kinopoisk.ru",
 		"hd.kinopoisk.ru"
 	],
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/thumbnail.png",
 	"color": "#ff5900",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "ACertainCoder",
 		"id": "320507572455079949"
@@ -17,7 +17,7 @@
 		"radiome.at",
 		"radiome.fr"
 	],
-	"version": "2.0.11",
+	"version": "2.0.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RadioMe/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RadioMe/assets/thumbnail.png",
 	"color": "#67e350",

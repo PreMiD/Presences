@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +10,7 @@
 		"nl": "Verover zoveel mogelijk land en probeer de grootste van allemaal te worden."
 	},
 	"url": "splix.io",
-	"version": "1.2.18",
+	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/splix.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/splix.io/assets/thumbnail.png",
 	"color": "#a42925",

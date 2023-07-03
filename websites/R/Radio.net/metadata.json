@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "ACertainCoder",
 		"id": "320507572455079949"
@@ -13,7 +13,7 @@
 	},
 	"url": "www.radio.net",
 	"regExp": "((www|uk|au|nz|ie|za|ca|co|mx|br|nl|za)[.]radio[.]net|www[.]radio[.](de|dk|at|es|fr|it|pl|pt|se)|corporate[.]radio[.](net|de))[/]",
-	"version": "4.0.9",
+	"version": "4.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Radio.net/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Radio.net/assets/thumbnail.png",
 	"color": "#64e646",

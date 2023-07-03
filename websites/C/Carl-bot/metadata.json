@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "NMW03",
 		"id": "534099893979971584"
@@ -14,7 +14,7 @@
 		"carl.gg",
 		"docs.carl.gg"
 	],
-	"version": "1.4.23",
+	"version": "1.4.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Carl-bot/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Carl-bot/assets/thumbnail.png",
 	"color": "#757F3F",

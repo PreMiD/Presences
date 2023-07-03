@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Cairo",
 		"id": "208105877838888960"
@@ -11,7 +11,7 @@
 		"vi_VN": "Bing là công cụ tìm kiếm nơi bạn có thể đưa ra các quyết định sáng suốt hơn từ các câu trả lời đã được chọn lọc."
 	},
 	"url": "www.bing.com",
-	"version": "1.2.22",
+	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bing/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bing/assets/thumbnail.png",
 	"color": "#00809D",

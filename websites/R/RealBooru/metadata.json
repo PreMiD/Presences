@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "CRUGG",
 		"id": "228965621478588416"
@@ -11,7 +11,7 @@
 		"nl": "NSFW Porno Beeld bord draait op Gelbooru"
 	},
 	"url": "realbooru.com",
-	"version": "1.2.17",
+	"version": "1.2.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/thumbnail.png",
 	"color": "#171717",

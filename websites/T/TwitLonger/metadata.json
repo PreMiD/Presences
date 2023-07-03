@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "fror",
 		"id": "515668127829458945"
@@ -10,7 +10,7 @@
 		"nl": "Als je teveel praat voor Twitter."
 	},
 	"url": "www.twitlonger.com",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TwitLonger/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TwitLonger/assets/thumbnail.png",
 	"color": "#428BCA",

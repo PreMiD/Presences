@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -13,7 +13,7 @@
 		"novelfull.com",
 		"www.novelfull.com"
 	],
-	"version": "1.1.5",
+	"version": "1.1.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Novelfull/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Novelfull/assets/thumbnail.jpg",
 	"color": "#0093c9",
