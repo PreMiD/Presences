@@ -8,7 +8,7 @@ const enum Assets {
 presence.on("UpdateData", async () => {
 	const { pathname, hostname } = document.location,
 		pathArr = pathname.split("/"),
-		{ details, smallImageKey, largeImageKey, state } = getPageData(
+		{ details, smallImageKey, largeImageKey, state, buttons } = getPageData(
 			pathArr[1],
 			pathArr[2],
 			pathArr[3],
@@ -19,8 +19,17 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details,
 		};
+	if (buttons) presenceData.buttons = buttons;
 	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 	if (state) presenceData.state = state;
+
+	if (!(await presence.getSetting<boolean>("details"))) {
+		presenceData.details = "Browsing Kick...";
+		presenceData.state = null;
+		presenceData.largeImageKey = Assets.Logo;
+		presenceData.smallImageKey = null;
+		presenceData.buttons = null;
+	}
 
 	if (details) presence.setActivity(presenceData);
 });
@@ -30,7 +39,13 @@ function getPageData(
 	pageDetail: string,
 	title: string,
 	hostname: string
-) {
+): {
+	details?: string;
+	smallImageKey?: string;
+	largeImageKey?: string;
+	state?: string;
+	buttons?: [ButtonData, ButtonData?];
+} {
 	switch (hostname) {
 		case "kick.com": {
 			switch (page) {
@@ -78,27 +93,37 @@ function getPageData(
 					// watching/viewing a stream
 					if (document.querySelector(".stream-username")) {
 						let smallImageKey = "",
-							state = "";
+							state = "",
+							buttons: [ButtonData, ButtonData?];
 						const streamer =
 							document.querySelector(".stream-username").textContent;
 						if (document.querySelector(".odometer-value")) {
 							state = `Watching: ${streamer}`;
 							smallImageKey = Assets.Live;
+							buttons = [{
+								label: "Watch stream",
+								url: document.location.href
+							}];
 						} else {
 							state = `Viewing: ${streamer}`;
 							smallImageKey = Assets.Viewing;
+							buttons = [{
+								label: "View streamer",
+								url: document.location.href
+							}];
 						}
 						return {
 							details: document.querySelector(".stream-title").textContent,
 							state,
 							largeImageKey:
-								document.querySelector<HTMLImageElement>(".owner-avatar img")
-									?.src,
+							document.querySelector<HTMLImageElement>(".owner-avatar img")
+								?.src,
 							smallImageKey,
+							buttons
 						};
 					} else {
 						return {
-							details: "Browsing Kick...",
+							details: "Browsing Kick..."
 						};
 					}
 			}

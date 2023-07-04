@@ -22,5 +22,13 @@
 		"streaming",
 		"entertainment",
 		"livestreaming"
+	],
+	"settings": [
+		{
+			"id": "details",
+			"title": "Show details",
+			"icon": "fas fa-eye-slash",
+			"value": true
+		}
 	]
 }
