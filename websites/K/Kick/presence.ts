@@ -103,7 +103,7 @@ function getPageData(
 							buttons = [
 								{
 									label: "Watch stream",
-									url: document.location.href,
+									url: `https://kick.com/${streamer}`,
 								},
 							];
 						} else {
@@ -112,7 +112,7 @@ function getPageData(
 							buttons = [
 								{
 									label: "View streamer",
-									url: document.location.href,
+									url: `https://kick.com/${streamer}`,
 								},
 							];
 						}
