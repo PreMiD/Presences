@@ -100,30 +100,34 @@ function getPageData(
 						if (document.querySelector(".odometer-value")) {
 							state = `Watching: ${streamer}`;
 							smallImageKey = Assets.Live;
-							buttons = [{
-								label: "Watch stream",
-								url: document.location.href
-							}];
+							buttons = [
+								{
+									label: "Watch stream",
+									url: document.location.href,
+								},
+							];
 						} else {
 							state = `Viewing: ${streamer}`;
 							smallImageKey = Assets.Viewing;
-							buttons = [{
-								label: "View streamer",
-								url: document.location.href
-							}];
+							buttons = [
+								{
+									label: "View streamer",
+									url: document.location.href,
+								},
+							];
 						}
 						return {
 							details: document.querySelector(".stream-title").textContent,
 							state,
 							largeImageKey:
-							document.querySelector<HTMLImageElement>(".owner-avatar img")
-								?.src,
+								document.querySelector<HTMLImageElement>(".owner-avatar img")
+									?.src,
 							smallImageKey,
-							buttons
+							buttons,
 						};
 					} else {
 						return {
-							details: "Browsing Kick..."
+							details: "Browsing Kick...",
 						};
 					}
 			}
