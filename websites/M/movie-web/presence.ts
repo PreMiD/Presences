@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1120627624377589820"
-}),
+		clientId: "1120627624377589820",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 interface MovieMedia {
@@ -14,7 +14,7 @@ interface MovieMedia {
 		};
 		imdbId: string;
 		tmdbId: string;
-	},
+	};
 	captions: {
 		langIso: string;
 		url: string;
@@ -83,42 +83,44 @@ interface DevMetaData {
 }
 
 interface ProdMetaData {
-	meta: {
-		meta: {
-			title: string;
-			id: string;
-			year: string;
-			poster: string;
-			type: "movie";
-		};
-		imdbId: string;
-		tmdbId: string;
-	} | {
-		meta: {
-			title: string;
-			id: string;
-			year: string;
-			poster: string;
-			type: "series";
-			seasons: {
-				id: string;
-				number: number;
-				title: string;
-			}[];
-			seasonData: {
-				id: string;
-				number: number;
-				title: string;
-				episodes: {
-					id: string;
-					number: number;
+	meta:
+		| {
+				meta: {
 					title: string;
-				}[];
-			};
-		};
-		imdbId: string;
-		tmdbId: string;
-	};
+					id: string;
+					year: string;
+					poster: string;
+					type: "movie";
+				};
+				imdbId: string;
+				tmdbId: string;
+		  }
+		| {
+				meta: {
+					title: string;
+					id: string;
+					year: string;
+					poster: string;
+					type: "series";
+					seasons: {
+						id: string;
+						number: number;
+						title: string;
+					}[];
+					seasonData: {
+						id: string;
+						number: number;
+						title: string;
+						episodes: {
+							id: string;
+							number: number;
+							title: string;
+						}[];
+					};
+				};
+				imdbId: string;
+				tmdbId: string;
+		  };
 	episode?: {
 		episodeId: string;
 		seasonId: string;
@@ -132,26 +134,31 @@ interface ProdMetaData {
 presence.on("UpdateData", async () => {
 	const { pathname, href, host } = window.location,
 		subdomain = host.split(".")[0],
-		[showTimestamp, showWatchButton, showProgressBar, barLengthString, barTrack, barFill, showLabel] = await Promise.all([
+		[
+			showTimestamp,
+			showWatchButton,
+			showProgressBar,
+			barLengthString,
+			barTrack,
+			barFill,
+			showLabel,
+		] = await Promise.all([
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<boolean>("watch"),
 			presence.getSetting<boolean>("progress"),
 			presence.getSetting<string>("barLength"),
 			presence.getSetting<string>("barTrack"),
 			presence.getSetting<string>("barFill"),
-			presence.getSetting<boolean>("showLabel")
+			presence.getSetting<boolean>("showLabel"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey:
-				"https://i.imgur.com/QLshPfl.png",
+			largeImageKey: "https://i.imgur.com/QLshPfl.png",
 		};
 
 	if (subdomain === "dev") {
 		if (pathname === "" || pathname.startsWith("/search"))
 			presenceData.startTimestamp = browsingTimestamp;
-
 		else if (pathname.startsWith("/media")) {
-
 			const metaObj = await presence.getPageletiable("meta"),
 				metaData: DevMetaData | undefined = Object.values(metaObj ?? {})[0];
 			if (!metaData) return;
@@ -161,12 +168,16 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = media.meta.meta.poster;
 
 			if ((state.progress.time && state.progress.duration) !== 0) {
-				presenceData.state = createProgressBar(state.progress.time, state.progress.duration, {
-					barLengthString,
-					barFill,
-					barTrack,
-					showLabel
-				});
+				presenceData.state = createProgressBar(
+					state.progress.time,
+					state.progress.duration,
+					{
+						barLengthString,
+						barFill,
+						barTrack,
+						showLabel,
+					}
+				);
 			}
 
 			const title = `${media.meta.meta.title} (${media.meta.meta.year})`;
@@ -177,7 +188,6 @@ presence.on("UpdateData", async () => {
 					);
 
 				presenceData.details = `S${media.meta.meta.seasonData.number}E${episode.number} — ${title}`;
-
 			} else presenceData.details = title;
 
 			if (state.mediaPlaying.isFirstLoading) {
@@ -185,7 +195,9 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Loading";
 			} else if (state.mediaPlaying.isPlaying) {
 				const now = new Date();
-				presenceData.endTimestamp = now.setSeconds(now.getSeconds() + state.progress.duration - state.progress.time);
+				presenceData.endTimestamp = now.setSeconds(
+					now.getSeconds() + state.progress.duration - state.progress.time
+				);
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Playing";
 			} else if (state.mediaPlaying.isPaused) {
@@ -193,7 +205,6 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Paused";
 			}
 		}
-
 	} else if (subdomain) {
 		if (pathname === "" || pathname.startsWith("/search"))
 			presenceData.startTimestamp = browsingTimestamp;
@@ -205,37 +216,42 @@ presence.on("UpdateData", async () => {
 			const { progress, meta, episode } = metaData,
 				mediaPlaying = {
 					isFirstLoading: (progress.time && progress.duration) === 0,
-					isLoading: progress.duration === 0
+					isLoading: progress.duration === 0,
 				};
 
 			presenceData.largeImageKey = meta.meta.poster;
 
 			if (!mediaPlaying.isLoading && progress.time && progress.duration) {
-				presenceData.state = createProgressBar(progress.time, progress.duration, {
-					barLengthString,
-					barFill,
-					barTrack,
-					showLabel
-				});
+				presenceData.state = createProgressBar(
+					progress.time,
+					progress.duration,
+					{
+						barLengthString,
+						barFill,
+						barTrack,
+						showLabel,
+					}
+				);
 			}
 
 			const title = `${meta.meta.title} (${meta.meta.year})`;
 			if (meta.meta.type === "series" && episode) {
-				presenceData.details = `S${meta.meta.seasonData.number}E${meta.meta.seasonData.episodes.find(
-					episode => episode.id === episode.id
-				).number} — ${title}`;
-
+				presenceData.details = `S${meta.meta.seasonData.number}E${
+					meta.meta.seasonData.episodes.find(
+						episode => episode.id === episode.id
+					).number
+				} — ${title}`;
 			} else presenceData.details = title;
-
 
 			if (mediaPlaying.isFirstLoading) {
 				presenceData.smallImageKey = "https://i.imgur.com/lBCZWIB.gif";
 				presenceData.smallImageText = "Loading";
 			} else {
 				const now = new Date();
-				presenceData.endTimestamp = now.setSeconds(now.getSeconds() + progress.duration - progress.time);
+				presenceData.endTimestamp = now.setSeconds(
+					now.getSeconds() + progress.duration - progress.time
+				);
 			}
-
 		}
 	}
 
@@ -243,8 +259,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Watch",
-				url: href
-			}
+				url: href,
+			},
 		];
 	}
 
@@ -255,16 +271,24 @@ presence.on("UpdateData", async () => {
 	presence.setActivity(presenceData);
 });
 
-function createProgressBar(time: number, duration: number, barOptions: {
-	barLengthString: string,
-	barTrack: string,
-	barFill: string,
-	showLabel: boolean
-}): string {
+function createProgressBar(
+	time: number,
+	duration: number,
+	barOptions: {
+		barLengthString: string;
+		barTrack: string;
+		barFill: string;
+		showLabel: boolean;
+	}
+): string {
 	const { barLengthString, barTrack, barFill, showLabel } = barOptions,
 		progress = Math.floor((time / duration) * 100),
-		barLength = isNaN(parseInt(barLengthString, 10)) ? 10 : parseInt(barLengthString, 10),
+		barLength = isNaN(parseInt(barLengthString, 10))
+			? 10
+			: parseInt(barLengthString, 10),
 		numChars = Math.floor((progress / 100) * barLength);
 
-	return `${barFill.repeat(numChars)}${barTrack.repeat(barLength - numChars)}  ${showLabel ? `${progress}%` : ""}`.trimEnd();
+	return `${barFill.repeat(numChars)}${barTrack.repeat(
+		barLength - numChars
+	)}  ${showLabel ? `${progress}%` : ""}`.trimEnd();
 }
