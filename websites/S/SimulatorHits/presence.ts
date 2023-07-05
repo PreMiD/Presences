@@ -7,7 +7,7 @@ let title = "Loading SimulatorHits",
 	presenter = "AutoDJ";
 
 function getSongData(): void {
-	fetch("https://api.simulatorhits.dev/now-playing?override").then(response => {
+	fetch("https://api.simulatorhits.com/now-playing?override").then(response => {
 		if (response.status === 200) {
 			response.json().then(data => {
 				({ title, artist } = data.song);
