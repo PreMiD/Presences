@@ -152,7 +152,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showLabel"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/QLshPfl.png",
+			largeImageKey: "https://i.imgur.com/Ggwzwcv.png",
 		};
 
 	if (subdomain === "dev") {
