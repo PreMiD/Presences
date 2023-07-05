@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 				}
 				presenceData.buttons = [
 					{
-						label: "Play game",
+						label: "Play Game",
 						url: href,
 					},
 				];
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 					: "Editing a game";
 				presenceData.buttons = [
 					{
-						label: "Play game",
+						label: "Play Game",
 						url: href,
 					},
 				];
@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Reading game comments";
 				presenceData.buttons = [
 					{
-						label: "Read comments",
+						label: "Read Comments",
 						url: href,
 					},
 				];
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Reading game updates";
 				presenceData.buttons = [
 					{
-						label: "Read updates",
+						label: "Read Updates",
 						url: href,
 					},
 				];
@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
 					: "Viewing a profile";
 				presenceData.buttons = [
 					{
-						label: "View profile",
+						label: "View Profile",
 						url: href,
 					},
 				];
@@ -197,7 +197,7 @@ presence.on("UpdateData", async () => {
 				} online`;
 				presenceData.buttons = [
 					{
-						label: "Join chat",
+						label: "Join Chat",
 						url: href,
 					},
 				];
@@ -214,7 +214,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Browsing #${categorySlug}`;
 						presenceData.buttons = [
 							{
-								label: "View category",
+								label: "View Category",
 								url: href,
 							},
 						];
@@ -244,7 +244,7 @@ presence.on("UpdateData", async () => {
 							presenceData.state = "Editing their post";
 						presenceData.buttons = [
 							{
-								label: "Read thread",
+								label: "Read Thread",
 								url: href,
 							},
 						];
@@ -261,7 +261,7 @@ presence.on("UpdateData", async () => {
 						if (threadName) presenceData.state = `"${threadName}"`;
 						presenceData.buttons = [
 							{
-								label: "View category",
+								label: "View Category",
 								url: href,
 							},
 						];
@@ -281,7 +281,7 @@ presence.on("UpdateData", async () => {
 			if (query) presenceData.state = `"${query}"`;
 			presenceData.buttons = [
 				{
-					label: "Search games",
+					label: "Search Games",
 					url: href,
 				},
 			];
@@ -299,7 +299,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = categories[path[1]] || "Browsing for games";
 			presenceData.buttons = [
 				{
-					label: "Explore games",
+					label: "Explore Games",
 					url: href,
 				},
 			];
@@ -319,7 +319,7 @@ presence.on("UpdateData", async () => {
 			if (gameName) presenceData.state = `"${gameName}"`;
 			presenceData.buttons = [
 				{
-					label: "Request game",
+					label: "Request Game",
 					url: href,
 				},
 			];
@@ -329,7 +329,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing site statistics";
 			presenceData.buttons = [
 				{
-					label: "View stats",
+					label: "View Stats",
 					url: href,
 				},
 			];
@@ -339,7 +339,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Trying out galaxy cluster";
 			presenceData.buttons = [
 				{
-					label: "Galaxy cluster",
+					label: "Galaxy Cluster",
 					url: href,
 				},
 			];
@@ -349,7 +349,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Becoming a developer";
 			presenceData.buttons = [
 				{
-					label: "View page",
+					label: "View Page",
 					url: href,
 				},
 			];
@@ -359,7 +359,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading the documentation";
 			presenceData.buttons = [
 				{
-					label: "Read the docs",
+					label: "Read Docs",
 					url: href,
 				},
 			];
@@ -369,7 +369,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading about galaxy";
 			presenceData.buttons = [
 				{
-					label: "View page",
+					label: "View Page",
 					url: href,
 				},
 			];
@@ -379,7 +379,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reviewing the site rules";
 			presenceData.buttons = [
 				{
-					label: "View page",
+					label: "View Page",
 					url: href,
 				},
 			];
@@ -389,7 +389,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading the terms of service";
 			presenceData.buttons = [
 				{
-					label: "View page",
+					label: "View Page",
 					url: href,
 				},
 			];
@@ -399,7 +399,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading the privacy policy";
 			presenceData.buttons = [
 				{
-					label: "View page",
+					label: "View Page",
 					url: href,
 				},
 			];
@@ -409,7 +409,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading the cookie policy";
 			presenceData.buttons = [
 				{
-					label: "View page",
+					label: "View Page",
 					url: href,
 				},
 			];
