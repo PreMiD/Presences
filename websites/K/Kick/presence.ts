@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 	if (state) presenceData.state = state;
 
-	if (!await presence.getSetting<boolean>("details")) {
+	if (!(await presence.getSetting<boolean>("details"))) {
 		presenceData.details = "Browsing Kick...";
 		presenceData.state = null;
 		presenceData.largeImageKey = Assets.Logo;
@@ -33,7 +33,6 @@ presence.on("UpdateData", async () => {
 
 	if (await presence.getSetting<boolean>("logo"))
 		presenceData.largeImageKey = Assets.Logo;
-
 
 	if (details) presence.setActivity(presenceData);
 });
@@ -83,6 +82,42 @@ function getPageData(
 						state,
 						largeImageKey,
 						smallImageKey: Assets.Search,
+					};
+				}
+				case "following": {
+					return {
+						details: "Viewing following...",
+						state: `${
+							document.querySelector(".\\!border-primary\\/100").textContent
+						} section`,
+						smallImageKey: Assets.Search,
+					};
+				}
+				case "dashboard": {
+					let state = document.querySelector(
+						".router-link-active .item-title"
+					).textContent;
+					const isContentExpanded = document.querySelector(
+						".content-expanded .item-title"
+					);
+
+					if (isContentExpanded) {
+						state = `${isContentExpanded.textContent} >
+							${
+								document.querySelector(
+									".content-expanded .router-link-active .item-title"
+								).textContent
+							}`;
+					}
+					return {
+						details: `Viewing ${formatText(page)}...`,
+						state,
+					};
+				}
+				case "transactions": {
+					return {
+						details: `Viewing ${formatText(page)}...`,
+						state: formatText(pageDetail),
 					};
 				}
 				case "community-guidelines":
@@ -159,6 +194,7 @@ function getPageData(
 		}
 	}
 }
+
 function formatText(text: string) {
 	return text
 		.replace(/-/g, " ")
