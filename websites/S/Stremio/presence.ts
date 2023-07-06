@@ -147,60 +147,36 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Calendar";
 					break;
 				case "player": {
-					let timestamp: [number, number],
-					 pauseCheck: boolean;
-
-					if (video?.duration) {
-						timestamp = presence.getTimestampsfromMedia(video);
-						pauseCheck = video.paused ?? true;
-					} else if (appVersion === AppVersion.V4 && document.querySelector("#controlbar-top")) {
-							let split = document
-								.querySelector("#play-progress-text")
-								?.textContent.split("/");
-							if (split?.[0]) {
-								split = split.map(s => s.trim());
-								timestamp = presence.getTimestamps(
-									presence.timestampFromFormat(split[0]),
-									presence.timestampFromFormat(split[1])
-								);
-							}
-		
-							pauseCheck = !document
-								.querySelector("#controlbar-top")
-								?.firstElementChild.className.includes("pause");
-					} else if (appVersion === AppVersion.V5) {
-						const start = document.querySelector("div[class|='seek-bar'] > div:first-child")?.textContent,
-							end = document.querySelector("div[class|='seek-bar'] > div:last-child")?.textContent;
-						
-						if (start && end) {
-							timestamp = presence.getTimestamps(
-								presence.timestampFromFormat(start),
-								presence.timestampFromFormat(end)
-							);
-						}
-
-						pauseCheck = !!document.querySelector("svg[icon='ic_play']");
-					}
-
-					delete presenceData.startTimestamp;
-
-					if (
-						!pauseCheck &&
-						!(appVersion === AppVersion.V4 ? document.querySelector("#loading-logo").className.includes("flashing") : !!document.querySelector("div[class*='buffering-loader-container']"))
-					) {
-						presenceData.endTimestamp = timestamp[1];
-						presenceData.smallImageKey = Assets.Play;
-					} else {
-						delete presenceData.endTimestamp;
-						presenceData.smallImageKey = Assets.Pause;
-					}
-
 					title = appVersion === AppVersion.V4 ? document
 						.querySelector("head > title")
-						?.textContent.replace("Stremio -", "") : document.querySelector("[class|='title']").textContent ;
+						?.textContent.replace("Stremio -", "") : document.querySelector("nav[class*='horizontal-nav-bar-container'] > h2[class|='title']")?.textContent;
+					title = title?.replace(/[\r\n\t]+/g, " ").trim();
 
-					presenceData.details = title;
-					presenceData.state = pauseCheck ? "Paused" : "Watching";
+					let endTimestamp: number,
+					 isPaused = true;
+
+					if (!isNaN(video?.duration)) {
+						// eslint-disable-next-line no-one-time-vars/no-one-time-vars
+						const [, ts] = presence.getTimestampsfromMedia(video);
+						endTimestamp = ts;
+						isPaused = video.paused;
+					}
+					
+					delete presenceData.startTimestamp;
+					if (endTimestamp) 
+						presenceData.endTimestamp = endTimestamp;
+					else
+						delete presenceData.endTimestamp;
+
+					if (
+						(isPaused || (appVersion === AppVersion.V4 ? document.querySelector("#loading-logo").className.includes("flashing") : !!document.querySelector("div[class*='buffering-loader-container']")))
+					) 
+						presenceData.smallImageKey = Assets.Pause;
+					 else 
+						presenceData.smallImageKey = Assets.Play;
+					
+					presenceData.details = title ?? "Player";
+					presenceData.state = isPaused ? "Paused" : "Watching";
 					presenceData.buttons = [
 						{
 							label: "Watch",
