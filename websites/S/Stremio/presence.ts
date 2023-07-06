@@ -208,19 +208,26 @@ presence.on("UpdateData", async () => {
 						if (thumbnails) presenceData.largeImageKey = document.querySelector("#loading-logo")?.getAttribute("data-image") ?? "logo";
 					} else {
 						const playerState = await _eval("core.transport.getState('player')");
-						title = playerState.title as string;
-						metaUrl = `${window.location.origin}/#/detail/${playerState.metaItem.content.type}/${playerState.metaItem.content.id}/${playerState.libraryItem.state.video_id}`;
-						if (thumbnails) presenceData.largeImageKey = playerState.metaItem?.content?.logo ?? "logo";
+						if (playerState.metaItem.type.toLowerCase() === "ready") {
+							// eslint-disable-next-line prefer-destructuring
+							const content = playerState.metaItem.content;
+							// eslint-disable-next-line prefer-destructuring
+							title = playerState.title;
+							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}/${playerState.libraryItem.state.video_id}`;
+							if (thumbnails) presenceData.largeImageKey = content?.logo ?? "logo";
+						}
 					}
 					
-					presenceData.details = title ?? "Player";
+					presenceData.details = (title as string) ?? "Player";
 					presenceData.state = isPaused ? "Paused" : "Watching";
-					presenceData.buttons = [
-						{
-							label: "Watch",
-							url: metaUrl,
-						},
-					];
+					if (metaUrl) {
+						presenceData.buttons = [
+							{
+								label: "Watch",
+								url: metaUrl,
+							},
+						];
+					}
 					break;
 				}
 			}
