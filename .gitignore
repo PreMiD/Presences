@@ -35,6 +35,9 @@ lerna-debug.log*
 !.yarn/sdks
 !.yarn/versions
 
+# Cache files
+.eslintcache
+
 # local VSCode files
 **/.vscode/*
 **/.history

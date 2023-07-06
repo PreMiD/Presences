@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "293803241110503426",
+		"name": "weemizo"
+	},
+	"service": "PeaceScans",
+	"description": {
+		"en": "Read Manga Online For Free",
+		"pl": "Czytaj mangę online za darmo"
+	},
+	"url": [
+		"peacescans.life",
+		"www.peacescans.life"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/Y2Vhq31.jpg",
+	"thumbnail": "https://i.imgur.com/8mytDUz.png",
+	"color": "#154360",
+	"category": "anime",
+	"tags": [
+		"manga"
+	]
+}
