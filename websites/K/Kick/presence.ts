@@ -143,7 +143,7 @@ function getPageData(
 							buttons = [
 								{
 									label: "Watch stream",
-									url: document.location.href,
+									url: href,
 								},
 							];
 						} else {
