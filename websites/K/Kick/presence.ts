@@ -12,7 +12,8 @@ presence.on("UpdateData", async () => {
 			pathArr[1],
 			pathArr[2],
 			pathArr[3],
-			hostname
+			hostname,
+			href
 		),
 		presenceData: PresenceData = {
 			largeImageKey: largeImageKey || Assets.Logo,
@@ -41,7 +42,8 @@ function getPageData(
 	page: string,
 	pageDetail: string,
 	title: string,
-	hostname: string
+	hostname: string,
+	link: string
 ): {
 	details?: string;
 	smallImageKey?: string;
@@ -143,7 +145,7 @@ function getPageData(
 							buttons = [
 								{
 									label: "Watch stream",
-									url: href,
+									url: link,
 								},
 							];
 						} else {
@@ -152,7 +154,7 @@ function getPageData(
 							buttons = [
 								{
 									label: "View streamer",
-									url: href,
+									url: link,
 								},
 							];
 						}
