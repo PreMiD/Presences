@@ -29,6 +29,12 @@
 			"title": "Show details",
 			"icon": "fas fa-eye-slash",
 			"value": true
+		},
+		{
+			"id": "logo",
+			"title": "Show only logo",
+			"icon": "fas fa-image",
+			"value": false
 		}
 	]
 }
