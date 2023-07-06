@@ -112,6 +112,7 @@ function getPageData(
 					return {
 						details: `Viewing ${formatText(page)}...`,
 						state,
+						smallImageKey: Assets.Viewing,
 					};
 				}
 				case "transactions": {
