@@ -4,6 +4,12 @@
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
 	},
+	"contributors": [
+		{
+			"name": "Sleeyax",
+			"id": "226037514954080257"
+		}
+	],
 	"service": "Stremio",
 	"description": {
 		"en": "Freedom To Stream. Stremio is a modern media center that's a one-stop solution for your video entertainment. Discover, watch and organize video content from easy to install addons.",
@@ -11,16 +17,26 @@
 	},
 	"url": [
 		"www.stremio.com",
-		"app.strem.io"
+		"stremio.com",
+		"app.strem.io",
+		"web.strem.io",
+		"web.stremio.com"
 	],
-	"version": "1.0.6",
+	"version": "2.0.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/thumbnail.jpg",
 	"color": "#8A5AAB",
 	"category": "videos",
 	"tags": [
+		"streaming",
+		"channels",
 		"cartoons",
-		"stream"
+		"movies",
+		"series",
+		"stream",
+		"shows",
+		"iptv",
+		"tv"
 	],
 	"settings": [
 		{

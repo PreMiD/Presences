@@ -5,6 +5,24 @@ const presence = new Presence({
 
 let	title: string;
 
+enum AppVersion {
+	Website = -1,
+	V4 = 4,
+	V5 = 5,
+}
+
+function getApVersion(hostname: string) {
+	switch (hostname) {
+		case "web.strem.io":
+		case "web.stremio.com":
+			return AppVersion.V5;
+		case "app.strem.io":
+			return AppVersion.V4;
+		default:
+			return AppVersion.Website;
+	}
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -17,28 +35,42 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("thumbnails"),
 			presence.getSetting<boolean>("buttons"),
 		]),
-		active = document.querySelector(
-			"[class='ng-binding ng-scope selected']"
-		)?.textContent;
+		appVersion = getApVersion(hostname);
 
-	switch (hostname) {
-		case "app.strem.io": {			
-			const video = document.querySelector<HTMLMediaElement>("#videoPlayer");
+	switch (appVersion) {
+		case AppVersion.V4:
+		case AppVersion.V5:{
+			const video = document.querySelector<HTMLMediaElement>("video");
 
 			if (privacy) {
-				presenceData.details = !video ? "Browsing..." : "Watching...";
+				presenceData.details = "Privacy Mode";
+				presenceData.state = !video ? "Browsing" : "Watching";
 				break;
 			}
 
-			switch (hash.replace("#/", "").split("/").shift()) {
+			switch (hash.replace("#/", "").split("/").shift().split("?").shift()) {
 				case "":
 					presenceData.details = "Board";
 					break;
-				case "detail":
-					title = document.querySelector(
-						"#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div"
-					)?.textContent;
-					presenceData.details = title;
+				case "detail": {
+					if (appVersion === AppVersion.V4) {
+						title = document.querySelector("#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div")?.textContent;
+						presenceData.details = title;
+						if (thumbnails) {
+							presenceData.largeImageKey =
+								document
+									.querySelector(
+										"#detail > div.details-less-info > div.details-top > div:nth-child(1)"
+									)
+									?.firstElementChild.getAttribute("src") ?? "logo";
+						}
+					} else {
+						const imgElement = document.querySelector<HTMLImageElement>("div[class|='meta-info-container'] > img[class|='logo']");
+						title = imgElement?.title;
+						presenceData.details = title;
+						if (thumbnails) presenceData.largeImageKey = imgElement?.src ?? "logo";
+					}
+
 					presenceData.state = "Viewing Metadata";
 					presenceData.buttons = [
 						{
@@ -47,22 +79,18 @@ presence.on("UpdateData", async () => {
 						},
 					];
 
-					if (thumbnails) {
-						presenceData.largeImageKey =
-							document
-								.querySelector(
-									"#detail > div.details-less-info > div.details-top > div:nth-child(1)"
-								)
-								?.firstElementChild.getAttribute("src") ?? "logo";
-					}
-
 					break;
-				case "addons":
+				}
+				case "addons": {
 					title = document.querySelector(
-						"[class='ng-scope selected']"
-						)?.textContent;
+						appVersion === AppVersion.V4 ? "[class='ng-scope selected']" : "div[class|='selectable-inputs-container'] > div:nth-child(2) > div"
+					)?.textContent;
+
+					const type = document.querySelector(
+						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class|='selectable-inputs-container'] > div:nth-child(3) > div"
+					)?.textContent;
 						
-					presenceData.state = active ?? "All";
+					presenceData.state = type ?? "All";
 					presenceData.buttons = [
 						{
 							label: "Browse Addons",
@@ -71,25 +99,36 @@ presence.on("UpdateData", async () => {
 					];
 					presenceData.details = `Browsing ${title}`;
 					break;
-				case "settings":
-					// eslint-disable-next-line no-case-declarations, no-one-time-vars/no-one-time-vars
-					const section = document.querySelector("[class='ng-scope ng-binding active']")?.textContent ?? "General";
-					presenceData.details = `${section} settings`;
+				}
+				case "settings": {
+					const section = document.querySelector(appVersion === AppVersion.V4 ? "[class='ng-scope ng-binding active']" : "div[class|='settings-content'] div[class*='selected']")?.textContent ?? "General";
+					presenceData.details = `${section} Settings`;
 					break;
-				case "discover":
-					if (active) {
-						presenceData.buttons = [
-							{
-								label: "Browse",
-								url: href,
-							},
-						];
-					}
-					presenceData.details = `Browsing ${active ?? "Content"}`;
+				}
+				case "discover": {
+					const type = document.querySelector(
+						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class|='selectable-inputs-container'] > div > div"
+					)?.textContent,
+					 category = document.querySelector(appVersion === AppVersion.V4 ? "ul.sort > li.selected" : "div[class|='selectable-inputs-container'] > div:nth-child(2) > div")?.textContent;
+
+					presenceData.buttons = [
+						{
+							label: "Browse",
+							url: href,
+						},
+					];
+					presenceData.details = `Discovering ${type ?? "Content"}`;
+					presenceData.state = category ?? "All";
+
 					break;
-				case "library":
+				}
+				case "library": {
+					const type = document.querySelector(
+						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class|='selectable-inputs-container'] > div > div"
+					)?.textContent;
+
 					presenceData.details = "Library";
-					if (active) presenceData.details = `${active} ${presenceData.details}`;
+					presenceData.state = type ?? "All";
 					presenceData.buttons = [
 						{
 							label: "View Library",
@@ -97,6 +136,7 @@ presence.on("UpdateData", async () => {
 						},
 					];
 					break;
+				}
 				case "calendar":
 					presenceData.buttons = [
 						{
@@ -113,28 +153,40 @@ presence.on("UpdateData", async () => {
 					if (video?.duration) {
 						timestamp = presence.getTimestampsfromMedia(video);
 						pauseCheck = video.paused ?? true;
-					} else if (document.querySelector("#controlbar-top")) {
-						let split = document
-							.querySelector("#play-progress-text")
-							?.textContent.split("/");
-						if (split?.[0]) {
-							split = split.map(s => s.trim());
+					} else if (appVersion === AppVersion.V4 && document.querySelector("#controlbar-top")) {
+							let split = document
+								.querySelector("#play-progress-text")
+								?.textContent.split("/");
+							if (split?.[0]) {
+								split = split.map(s => s.trim());
+								timestamp = presence.getTimestamps(
+									presence.timestampFromFormat(split[0]),
+									presence.timestampFromFormat(split[1])
+								);
+							}
+		
+							pauseCheck = !document
+								.querySelector("#controlbar-top")
+								?.firstElementChild.className.includes("pause");
+					} else if (appVersion === AppVersion.V5) {
+						const start = document.querySelector("div[class|='seek-bar'] > div:first-child")?.textContent,
+							end = document.querySelector("div[class|='seek-bar'] > div:last-child")?.textContent;
+						
+						if (start && end) {
 							timestamp = presence.getTimestamps(
-								presence.timestampFromFormat(split[0]),
-								presence.timestampFromFormat(split[1])
+								presence.timestampFromFormat(start),
+								presence.timestampFromFormat(end)
 							);
 						}
-	
-						pauseCheck = !document
-							.querySelector("#controlbar-top")
-							?.firstElementChild.className.includes("pause");
+
+						pauseCheck = !!document.querySelector("svg[icon='ic_play']");
 					}
 
 					delete presenceData.startTimestamp;
 
 					if (
 						!pauseCheck &&
-						!document.querySelector("#loading-logo").className.includes("flashing")
+						!(appVersion === AppVersion.V4 ? document.querySelector("#loading-logo").className.includes("flashing") : !!document.querySelector("div[class*='buffering-loader-container']"))
 					) {
 						presenceData.endTimestamp = timestamp[1];
 						presenceData.smallImageKey = Assets.Play;
@@ -143,9 +195,9 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageKey = Assets.Pause;
 					}
 
-					title = document
+					title = appVersion === AppVersion.V4 ? document
 						.querySelector("head > title")
-						?.textContent.replace("Stremio -", "");
+						?.textContent.replace("Stremio -", "") : document.querySelector("[class|='title']").textContent ;
 
 					presenceData.details = title;
 					presenceData.state = pauseCheck ? "Paused" : "Watching";
@@ -160,8 +212,7 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
-		case "www.stremio.com":
-		case "stremio.com":
+		case AppVersion.Website:
 			presenceData.details = "Visiting stremio.com";
 
 			switch (pathname) {
