@@ -6,7 +6,7 @@ const enum Assets {
 }
 
 presence.on("UpdateData", async () => {
-	const { pathname, hostname } = document.location,
+	const { pathname, hostname, href } = document.location,
 		pathArr = pathname.split("/"),
 		{ details, smallImageKey, largeImageKey, state, buttons } = getPageData(
 			pathArr[1],
