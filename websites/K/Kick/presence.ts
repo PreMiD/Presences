@@ -158,5 +158,6 @@ function getPageData(
 function formatText(text: string) {
 	return text
 		.replace(/-/g, " ")
-		.replace(/\b\w/g, (match: string) => match.toUpperCase());
+		.replace(/\b\w/g, (match: string) => match.toUpperCase())
+		.replace(/%C2%A0$/, "");
 }
