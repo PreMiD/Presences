@@ -205,6 +205,7 @@ presence.on("UpdateData", async () => {
 					if (appVersion === AppVersion.V4) {
 						title = document.querySelector("head > title")?.textContent?.replace("Stremio -", "")?.trim();
 						metaUrl = href.substring(0, href.lastIndexOf("/")).replace("player", "detail");
+						if (thumbnails) presenceData.largeImageKey = document.querySelector("#loading-logo")?.getAttribute("data-image") ?? "logo";
 					} else {
 						const playerState = await _eval("core.transport.getState('player')");
 						title = playerState.title as string;
