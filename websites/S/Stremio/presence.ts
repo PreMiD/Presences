@@ -23,6 +23,36 @@ function getApVersion(hostname: string) {
 	}
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function _eval(js: string): Promise<any> {
+	return new Promise((resolve, reject) => {
+		try {
+			const eventName = "PreMiD_Stremio",
+			 script = document.createElement("script");
+	
+			window.addEventListener(eventName, (data: CustomEvent) => {
+				script.remove();
+				resolve(data.detail);
+			}, {once: true});
+			script.id = eventName;
+			script.appendChild(
+				document.createTextNode(`
+			 var core = window.services.core;
+			 var pmdEvent = new CustomEvent("${eventName}", {detail: ${js}});
+			 window.dispatchEvent(pmdEvent);
+			 `)
+			);
+	
+			document.head.appendChild(
+				script
+			);
+
+		} catch (err) {
+			reject(err);
+		}
+	});
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -147,11 +177,6 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Calendar";
 					break;
 				case "player": {
-					title = appVersion === AppVersion.V4 ? document
-						.querySelector("head > title")
-						?.textContent.replace("Stremio -", "") : document.querySelector("nav[class*='horizontal-nav-bar-container'] > h2[class|='title']")?.textContent;
-					title = title?.replace(/[\r\n\t]+/g, " ").trim();
-
 					let endTimestamp: number,
 					 isPaused = true;
 
@@ -175,12 +200,24 @@ presence.on("UpdateData", async () => {
 					 else 
 						presenceData.smallImageKey = Assets.Play;
 					
+					let metaUrl: string;
+
+					if (appVersion === AppVersion.V4) {
+						title = document.querySelector("head > title")?.textContent?.replace("Stremio -", "")?.trim();
+						metaUrl = href.substring(0, href.lastIndexOf("/")).replace("player", "detail");
+					} else {
+						const playerState = await _eval("core.transport.getState('player')");
+						title = playerState.title as string;
+						metaUrl = `${window.location.origin}/#/detail/${playerState.metaItem.content.type}/${playerState.metaItem.content.id}/${playerState.libraryItem.state.video_id}`;
+						if (thumbnails) presenceData.largeImageKey = playerState.metaItem?.content?.logo ?? "logo";
+					}
+					
 					presenceData.details = title ?? "Player";
 					presenceData.state = isPaused ? "Paused" : "Watching";
 					presenceData.buttons = [
 						{
 							label: "Watch",
-							url: href,
+							url: metaUrl,
 						},
 					];
 					break;
