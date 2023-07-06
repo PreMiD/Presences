@@ -176,6 +176,9 @@ presence.on("UpdateData", async () => {
 					];
 					presenceData.details = "Calendar";
 					break;
+				case "search":
+					presenceData.details = "Search";
+					break;
 				case "player": {
 					let endTimestamp: number,
 					 isPaused = true;
