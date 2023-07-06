@@ -216,7 +216,9 @@ presence.on("UpdateData", async () => {
 							const content = playerState.metaItem.content;
 							// eslint-disable-next-line prefer-destructuring
 							title = playerState.title;
-							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}/${playerState.libraryItem.state.video_id}`;
+							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}`;
+							if (content.type === "series")
+								metaUrl += `/${content.id}:${playerState.seriesInfo.season}:${playerState.seriesInfo.episode}`;
 							if (thumbnails) presenceData.largeImageKey = content?.logo ?? "logo";
 						}
 					}
