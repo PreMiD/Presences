@@ -113,11 +113,11 @@ presence.on("UpdateData", async () => {
 				}
 				case "addons": {
 					title = document.querySelector(
-						appVersion === AppVersion.V4 ? "[class='ng-scope selected']" : "div[class|='selectable-inputs-container'] > div:nth-child(2) > div"
+						appVersion === AppVersion.V4 ? "[class='ng-scope selected']" : "div[class|='addons-content'] > div[class|='selectable-inputs-container'] > div:nth-child(2) > div"
 					)?.textContent;
 
 					const type = document.querySelector(
-						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class|='selectable-inputs-container'] > div:nth-child(3) > div"
+						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class|='addons-content'] > div[class|='selectable-inputs-container'] > div:nth-child(3) > div"
 					)?.textContent;
 						
 					presenceData.state = type ?? "All";
