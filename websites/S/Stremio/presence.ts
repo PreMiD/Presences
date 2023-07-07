@@ -83,8 +83,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = !privacy
 					? `Viewing ${lowerCaseIt(
 							document.querySelector(
-								'[class*="side-menu-button-vbkJ1 selected-"]'
-							)?.textContent
+								'[class*="side-menu-container"] > [class*="selected"]')
+							?.textContent
 					  )} settings`
 					: "Viewing their settings";
 				break;
