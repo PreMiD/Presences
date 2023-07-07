@@ -11,6 +11,10 @@ enum AppVersion {
 	V5 = 5,
 }
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/logo.png",
+}
+
 function getApVersion(hostname: string) {
 	switch (hostname) {
 		case "web.strem.io":
@@ -55,8 +59,7 @@ function _eval(js: string): Promise<any> {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ hash, hostname, pathname, href } = document.location,
@@ -92,11 +95,11 @@ presence.on("UpdateData", async () => {
 									.querySelector(
 										"#detail > div.details-less-info > div.details-top > div:nth-child(1)"
 									)
-									?.firstElementChild.getAttribute("src") ?? "logo";
+									?.firstElementChild.getAttribute("src") ?? Assets.Logo;
 						}
 					} else {
 						const imgElement = document.querySelector("div[class*='meta-info-container'] > img[class*='logo']") ?? document.querySelector("div[class*='poster-container'] img");
-						if (thumbnails) presenceData.largeImageKey = imgElement?.getAttribute("src") ?? "logo";
+						if (thumbnails) presenceData.largeImageKey = imgElement?.getAttribute("src") ?? Assets.Logo;
 						presenceData.details = imgElement?.getAttribute("title") ?? document.querySelector("div[class*='logo-placeholder']:last-child")?.textContent;
 					}
 
@@ -212,7 +215,7 @@ presence.on("UpdateData", async () => {
 					if (appVersion === AppVersion.V4) {
 						title = document.querySelector("head > title")?.textContent?.replace("Stremio -", "")?.trim();
 						metaUrl = href.substring(0, href.lastIndexOf("/")).replace("player", "detail");
-						if (thumbnails) presenceData.largeImageKey = document.querySelector("#loading-logo")?.getAttribute("data-image") ?? "logo";
+						if (thumbnails) presenceData.largeImageKey = document.querySelector("#loading-logo")?.getAttribute("data-image") ?? Assets.Logo;
 					} else {
 						const playerState = await _eval("core.transport.getState('player')");
 						if (playerState.metaItem.type.toLowerCase() === "ready") {
@@ -223,7 +226,7 @@ presence.on("UpdateData", async () => {
 							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}`;
 							if (content.type === "series")
 								metaUrl += `/${content.id}:${playerState.seriesInfo.season}:${playerState.seriesInfo.episode}`;
-							if (thumbnails) presenceData.largeImageKey = content?.logo ?? "logo";
+							if (thumbnails) presenceData.largeImageKey = content?.logo ?? Assets.Logo;
 						}
 					}
 					
