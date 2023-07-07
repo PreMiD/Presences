@@ -112,11 +112,11 @@ presence.on("UpdateData", async () => {
 				}
 				case "addons": {
 					title = document.querySelector(
-						appVersion === AppVersion.V4 ? "[class='ng-scope selected']" : "div[class|='addons-content'] > div[class|='selectable-inputs-container'] > div:nth-child(2) > div"
+						appVersion === AppVersion.V4 ? "[class='ng-scope selected']" : "div[class*='addons-content'] > div[class*='selectable-inputs-container'] > div:nth-child(2) > div"
 					)?.textContent;
 
 					const type = document.querySelector(
-						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class|='addons-content'] > div[class|='selectable-inputs-container'] > div:nth-child(3) > div"
+						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class*='addons-content'] > div[class*='selectable-inputs-container'] > div:nth-child(3) > div"
 					)?.textContent;
 						
 					presenceData.state = type ?? "All";
@@ -130,15 +130,15 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "settings": {
-					const section = document.querySelector(appVersion === AppVersion.V4 ? "[class='ng-scope ng-binding active']" : "div[class|='settings-content'] div[class*='selected']")?.textContent ?? "General";
+					const section = document.querySelector(appVersion === AppVersion.V4 ? "[class='ng-scope ng-binding active']" : "div[class*='settings-content'] div[class*='selected']")?.textContent ?? "General";
 					presenceData.details = `${section} settings`;
 					break;
 				}
 				case "discover": {
 					const type = document.querySelector(
-						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class|='selectable-inputs-container'] > div > div"
+						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class*='selectable-inputs-container'] > div > div"
 					)?.textContent?.toLowerCase(),
-					 category = document.querySelector(appVersion === AppVersion.V4 ? "ul.sort > li.selected" : "div[class|='selectable-inputs-container'] > div:nth-child(2) > div")?.textContent;
+					 category = document.querySelector(appVersion === AppVersion.V4 ? "ul.sort > li.selected" : "div[class*='selectable-inputs-container'] > div:nth-child(2) > div")?.textContent;
 
 					presenceData.buttons = [
 						{
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 				}
 				case "library": {
 					const type = document.querySelector(
-						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class|='selectable-inputs-container'] > div > div"
+						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class*='selectable-inputs-container'] > div > div"
 					)?.textContent;
 
 					presenceData.details = "Library";
