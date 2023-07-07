@@ -179,22 +179,27 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Search";
 					break;
 				case "player": {
-					let endTimestamp: number,
-					 isPaused = true;
+					 let isPaused = true;
 
 					if (!isNaN(video?.duration)) {
-						// eslint-disable-next-line no-one-time-vars/no-one-time-vars
-						const [, ts] = presence.getTimestampsfromMedia(video);
-						endTimestamp = ts;
+						[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 						isPaused = video.paused;
+					} else if (video === null) {
+						isPaused = !!document.querySelector("div[class*='control-bar-button'] > svg[icon='ic_play']");
+						const seekBar = document.querySelector('[class*="seek-bar-container"]');
+						[, presenceData.endTimestamp] = presence.getTimestamps(
+							Number(
+								presence.timestampFromFormat(seekBar?.firstElementChild?.textContent)
+							),
+							Number(
+								presence.timestampFromFormat(seekBar?.lastElementChild?.textContent)
+							)
+						);
+						if (privacy) presenceData.state = "Watching";
 					}
 					
 					delete presenceData.startTimestamp;
-					if (endTimestamp) 
-						presenceData.endTimestamp = endTimestamp;
-					else
-						delete presenceData.endTimestamp;
-
+						
 					if (
 						(isPaused || (appVersion === AppVersion.V4 ? document.querySelector("#loading-logo").className.includes("flashing") : !!document.querySelector("div[class*='buffering-loader-container']")))
 					) 
