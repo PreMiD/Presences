@@ -95,10 +95,9 @@ presence.on("UpdateData", async () => {
 									?.firstElementChild.getAttribute("src") ?? "logo";
 						}
 					} else {
-						const imgElement = document.querySelector<HTMLImageElement>("div[class|='meta-info-container'] > img[class|='logo']");
-						title = imgElement?.title;
-						presenceData.details = title;
-						if (thumbnails) presenceData.largeImageKey = imgElement?.src ?? "logo";
+						const imgElement = document.querySelector("div[class*='meta-info-container'] > img[class*='logo']") ?? document.querySelector("div[class*='poster-container'] img");
+						if (thumbnails) presenceData.largeImageKey = imgElement?.getAttribute("src") ?? "logo";
+						presenceData.details = imgElement?.getAttribute("title") ?? document.querySelector("div[class*='logo-placeholder']:last-child")?.textContent;
 					}
 
 					presenceData.state = "Viewing metadata";
