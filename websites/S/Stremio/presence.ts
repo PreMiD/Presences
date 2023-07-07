@@ -205,11 +205,14 @@ presence.on("UpdateData", async () => {
 						
 					if (
 						(isPaused || (appVersion === AppVersion.V4 ? document.querySelector("#loading-logo").className.includes("flashing") : !!document.querySelector("div[class*='buffering-loader-container']")))
-					) 
+					) {
 						presenceData.smallImageKey = Assets.Pause;
-					 else 
+						presenceData.smallImageText = "Player is paused";
+					} else { 
 						presenceData.smallImageKey = Assets.Play;
-					
+						presenceData.smallImageText = "Player is playing";
+					}
+
 					let metaUrl: string;
 
 					if (appVersion === AppVersion.V4) {
