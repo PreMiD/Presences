@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 			const video = document.querySelector<HTMLMediaElement>("video");
 
 			if (privacy) {
-				presenceData.details = "Privacy Mode";
+				presenceData.details = "Privacy mode";
 				presenceData.state = !video ? "Browsing" : "Watching";
 				break;
 			}
@@ -101,10 +101,10 @@ presence.on("UpdateData", async () => {
 						if (thumbnails) presenceData.largeImageKey = imgElement?.src ?? "logo";
 					}
 
-					presenceData.state = "Viewing Metadata";
+					presenceData.state = "Viewing metadata";
 					presenceData.buttons = [
 						{
-							label: "View Metadata",
+							label: "View metadata",
 							url: href,
 						},
 					];
@@ -123,22 +123,22 @@ presence.on("UpdateData", async () => {
 					presenceData.state = type ?? "All";
 					presenceData.buttons = [
 						{
-							label: "Browse Addons",
+							label: "Browse addons",
 							url: href,
 						},
 					];
-					presenceData.details = `Browsing ${title}`;
+					presenceData.details = `Browsing ${title?.toLowerCase()?.replace(" addons", "")} addons`;
 					break;
 				}
 				case "settings": {
 					const section = document.querySelector(appVersion === AppVersion.V4 ? "[class='ng-scope ng-binding active']" : "div[class|='settings-content'] div[class*='selected']")?.textContent ?? "General";
-					presenceData.details = `${section} Settings`;
+					presenceData.details = `${section} settings`;
 					break;
 				}
 				case "discover": {
 					const type = document.querySelector(
 						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class|='selectable-inputs-container'] > div > div"
-					)?.textContent,
+					)?.textContent?.toLowerCase(),
 					 category = document.querySelector(appVersion === AppVersion.V4 ? "ul.sort > li.selected" : "div[class|='selectable-inputs-container'] > div:nth-child(2) > div")?.textContent;
 
 					presenceData.buttons = [
@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
-					presenceData.details = `Discovering ${type ?? "Content"}`;
+					presenceData.details = `Discovering ${type ?? "content"}${type === "series" ? "" : "s"}`;
 					presenceData.state = category ?? "All";
 
 					break;
@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = type ?? "All";
 					presenceData.buttons = [
 						{
-							label: "View Library",
+							label: "View library",
 							url: href,
 						},
 					];
@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
 				case "calendar":
 					presenceData.buttons = [
 						{
-							label: "View Calendar",
+							label: "View calendar",
 							url: href,
 						},
 					];
