@@ -76,8 +76,7 @@ presence.on("UpdateData", async () => {
 			const video = document.querySelector<HTMLMediaElement>("video");
 
 			if (privacy) {
-				presenceData.details = "Privacy mode";
-				presenceData.state = !video ? "Browsing" : "Watching";
+				presenceData.details = !video ? "Browsing" : "Watching";
 				break;
 			}
 
@@ -88,7 +87,7 @@ presence.on("UpdateData", async () => {
 				case "detail": {
 					if (appVersion === AppVersion.V4) {
 						title = document.querySelector("#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div")?.textContent;
-						presenceData.details = title;
+						presenceData.state = title;
 						if (thumbnails) {
 							presenceData.largeImageKey =
 								document
@@ -100,10 +99,10 @@ presence.on("UpdateData", async () => {
 					} else {
 						const imgElement = document.querySelector("div[class*='meta-info-container'] > img[class*='logo']") ?? document.querySelector("div[class*='poster-container'] img");
 						if (thumbnails) presenceData.largeImageKey = imgElement?.getAttribute("src") ?? Assets.Logo;
-						presenceData.details = imgElement?.getAttribute("title") ?? document.querySelector("div[class*='logo-placeholder']:last-child")?.textContent;
+						presenceData.state = imgElement?.getAttribute("title") ?? document.querySelector("div[class*='logo-placeholder']:last-child")?.textContent;
 					}
 
-					presenceData.state = `Viewing a ${hash.split("/")[2]}`;
+					presenceData.details = `Viewing a ${hash.split("/")[2]}`;
 					presenceData.buttons = [
 						{
 							label: "View metadata",
@@ -122,6 +121,7 @@ presence.on("UpdateData", async () => {
 						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class*='addons-content'] > div[class*='selectable-inputs-container'] > div:nth-child(3) > div"
 					)?.textContent;
 						
+					presenceData.details = `Browsing ${title?.toLowerCase()?.replace(" addons", "")} addons`;
 					presenceData.state = type ?? "All";
 					presenceData.buttons = [
 						{
@@ -129,7 +129,6 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
-					presenceData.details = `Browsing ${title?.toLowerCase()?.replace(" addons", "")} addons`;
 					break;
 				}
 				case "settings": {
@@ -198,7 +197,7 @@ presence.on("UpdateData", async () => {
 								presence.timestampFromFormat(seekBar?.lastElementChild?.textContent)
 							)
 						);
-						if (privacy) presenceData.state = "Watching";
+						if (privacy) presenceData.details = "Watching";
 					}
 					
 					delete presenceData.startTimestamp;
@@ -233,7 +232,7 @@ presence.on("UpdateData", async () => {
 						}
 					}
 					
-					presenceData.details = (title as string) ?? "Player";
+					presenceData.details = title ?? "Player";
 					presenceData.state = isPaused ? "Paused" : "Watching";
 					if (metaUrl) {
 						presenceData.buttons = [
