@@ -30,12 +30,16 @@ function _eval(js: string): Promise<any> {
 	return new Promise((resolve, reject) => {
 		try {
 			const eventName = "PreMiD_Stremio",
-			 script = document.createElement("script");
-	
-			window.addEventListener(eventName, (data: CustomEvent) => {
-				script.remove();
-				resolve(data.detail);
-			}, {once: true});
+				script = document.createElement("script");
+
+			window.addEventListener(
+				eventName,
+				(data: CustomEvent) => {
+					script.remove();
+					resolve(data.detail);
+				},
+				{ once: true }
+			);
 			script.id = eventName;
 			script.appendChild(
 				document.createTextNode(`
@@ -44,32 +48,41 @@ function _eval(js: string): Promise<any> {
 			 window.dispatchEvent(pmdEvent);
 			 `)
 			);
-	
-			document.head.appendChild(
-				script
-			);
 
+			document.head.appendChild(script);
 		} catch (err) {
 			reject(err);
 		}
 	});
 }
 
-type Video = { isEmbed: boolean; isPaused: boolean; startTimestamp?: number; endTimestamp?: number };
+type Video = {
+	isEmbed: boolean;
+	isPaused: boolean;
+	startTimestamp?: number;
+	endTimestamp?: number;
+};
 
 function findVideo(presence: Presence): Video | null {
 	const videoElement = document.querySelector<HTMLMediaElement>("video");
 
 	if (videoElement) {
-		const result: Video = {isEmbed: false, isPaused: videoElement.paused};
-		
+		const result: Video = { isEmbed: false, isPaused: videoElement.paused };
+
 		if (!isNaN(videoElement?.duration))
-			[result.startTimestamp, result.endTimestamp] = presence.getTimestampsfromMedia(videoElement);
-		
+			// eslint-disable-next-line curly
+			[result.startTimestamp, result.endTimestamp] =
+				presence.getTimestampsfromMedia(videoElement);
+
 		return result;
 	} else if (document.querySelector("div[class*='player-container']")) {
-		const result: Video = {isEmbed: true, isPaused: !!document.querySelector("div[class*='control-bar-button'] > svg[icon='ic_play']")},
-		 seekBar = document.querySelector('[class*="seek-bar-container"]');
+		const result: Video = {
+				isEmbed: true,
+				isPaused: !!document.querySelector(
+					"div[class*='control-bar-button'] > svg[icon='ic_play']"
+				),
+			},
+			seekBar = document.querySelector('[class*="seek-bar-container"]');
 		[result.startTimestamp, result.endTimestamp] = presence.getTimestamps(
 			Number(
 				presence.timestampFromFormat(seekBar?.firstElementChild?.textContent)
@@ -80,8 +93,7 @@ function findVideo(presence: Presence): Video | null {
 		);
 
 		return result;
-	} else 
-		return null;
+	} else return null;
 }
 
 presence.on("UpdateData", async () => {
@@ -98,30 +110,29 @@ presence.on("UpdateData", async () => {
 		]),
 		appVersion = getApVersion(hostname);
 
-		if (!privacy && search) {
-			let searchInput: HTMLInputElement;
+	if (!privacy && search) {
+		let searchInput: HTMLInputElement;
 
-			if (appVersion === AppVersion.V4)
-				searchInput = document.querySelector("#global-search-field");
-			else
-				searchInput = document.querySelector("input[class*='search-input']");
-		
-			const searchValue = searchInput?.value;
+		if (appVersion === AppVersion.V4)
+			searchInput = document.querySelector("#global-search-field");
+		else searchInput = document.querySelector("input[class*='search-input']");
 
-			if (searchValue) {
-				presenceData.details = `Searching for ${searchValue}`;
-				presenceData.smallImageKey = Assets.Search;
-				presence.setActivity(presenceData);
-				return;
-			};
+		const searchValue = searchInput?.value;
+
+		if (searchValue) {
+			presenceData.details = `Searching for ${searchValue}`;
+			presenceData.smallImageKey = Assets.Search;
+			presence.setActivity(presenceData);
+			return;
 		}
+	}
 
 	switch (appVersion) {
 		case AppVersion.V4:
-		case AppVersion.V5:{
+		case AppVersion.V5: {
 			const video = findVideo(presence);
 
-			if (privacy) { 
+			if (privacy) {
 				presenceData.details = video !== null ? "Watching" : "Browsing";
 				break;
 			}
@@ -132,7 +143,9 @@ presence.on("UpdateData", async () => {
 					break;
 				case "detail": {
 					if (appVersion === AppVersion.V4) {
-						const title = document.querySelector("#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div")?.textContent;
+						const title = document.querySelector(
+							"#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div"
+						)?.textContent;
 						presenceData.state = title;
 						presenceData.largeImageKey =
 							document
@@ -141,9 +154,16 @@ presence.on("UpdateData", async () => {
 								)
 								?.firstElementChild.getAttribute("src") ?? Assets.Logo;
 					} else {
-						const imgElement = document.querySelector("div[class*='meta-info-container'] > img[class*='logo']");
-						presenceData.largeImageKey = imgElement?.getAttribute("src") ?? Assets.Logo;
-						presenceData.state = imgElement?.getAttribute("title") ?? document.querySelector("div[class*='logo-placeholder']:last-child")?.textContent;
+						const imgElement = document.querySelector(
+							"div[class*='meta-info-container'] > img[class*='logo']"
+						);
+						presenceData.largeImageKey =
+							imgElement?.getAttribute("src") ?? Assets.Logo;
+						presenceData.state =
+							imgElement?.getAttribute("title") ??
+							document.querySelector(
+								"div[class*='logo-placeholder']:last-child"
+							)?.textContent;
 					}
 
 					presenceData.details = `Viewing a ${hash.split("/")[2]}`;
@@ -158,13 +178,19 @@ presence.on("UpdateData", async () => {
 				}
 				case "addons": {
 					const title = document.querySelector(
-						appVersion === AppVersion.V4 ? "[class='ng-scope selected']" : "div[class*='addons-content'] > div[class*='selectable-inputs-container'] > div:nth-child(2) > div"
-					)?.textContent,
-					 type = document.querySelector(
-						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class*='addons-content'] > div[class*='selectable-inputs-container'] > div:nth-child(3) > div"
-					)?.textContent;
-						
-					presenceData.details = `Browsing ${title?.toLowerCase()?.replace(" addons", "")} addons`;
+							appVersion === AppVersion.V4
+								? "[class='ng-scope selected']"
+								: "div[class*='addons-content'] > div[class*='selectable-inputs-container'] > div:nth-child(2) > div"
+						)?.textContent,
+						type = document.querySelector(
+							appVersion === AppVersion.V4
+								? "[class='ng-binding ng-scope selected']"
+								: "div[class*='addons-content'] > div[class*='selectable-inputs-container'] > div:nth-child(3) > div"
+						)?.textContent;
+
+					presenceData.details = `Browsing ${title
+						?.toLowerCase()
+						?.replace(" addons", "")} addons`;
 					presenceData.state = type ?? "All";
 					presenceData.buttons = [
 						{
@@ -175,15 +201,28 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "settings": {
-					const section = document.querySelector(appVersion === AppVersion.V4 ? "[class='ng-scope ng-binding active']" : "div[class*='settings-content'] div[class*='selected']")?.textContent ?? "General";
+					const section =
+						document.querySelector(
+							appVersion === AppVersion.V4
+								? "[class='ng-scope ng-binding active']"
+								: "div[class*='settings-content'] div[class*='selected']"
+						)?.textContent ?? "General";
 					presenceData.details = `${section} settings`;
 					break;
 				}
 				case "discover": {
-					const type = document.querySelector(
-						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class*='selectable-inputs-container'] > div > div"
-					)?.textContent?.toLowerCase(),
-					 category = document.querySelector(appVersion === AppVersion.V4 ? "ul.sort > li.selected" : "div[class*='selectable-inputs-container'] > div:nth-child(2) > div")?.textContent;
+					const type = document
+							.querySelector(
+								appVersion === AppVersion.V4
+									? "[class='ng-binding ng-scope selected']"
+									: "div[class*='selectable-inputs-container'] > div > div"
+							)
+							?.textContent?.toLowerCase(),
+						category = document.querySelector(
+							appVersion === AppVersion.V4
+								? "ul.sort > li.selected"
+								: "div[class*='selectable-inputs-container'] > div:nth-child(2) > div"
+						)?.textContent;
 
 					presenceData.buttons = [
 						{
@@ -191,14 +230,18 @@ presence.on("UpdateData", async () => {
 							url: href,
 						},
 					];
-					presenceData.details = `Discovering ${type ?? "content"}${type === "series" ? "" : "s"}`;
+					presenceData.details = `Discovering ${type ?? "content"}${
+						type === "series" ? "" : "s"
+					}`;
 					presenceData.state = category ?? "All";
 
 					break;
 				}
 				case "library": {
 					const type = document.querySelector(
-						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class*='selectable-inputs-container'] > div > div"
+						appVersion === AppVersion.V4
+							? "[class='ng-binding ng-scope selected']"
+							: "div[class*='selectable-inputs-container'] > div > div"
 					)?.textContent;
 
 					presenceData.details = "Library";
@@ -228,13 +271,20 @@ presence.on("UpdateData", async () => {
 
 					presenceData.endTimestamp = video.endTimestamp;
 					delete presenceData.startTimestamp;
-						
+
 					if (
-						(video.isPaused || (appVersion === AppVersion.V4 ? document.querySelector("#loading-logo").className.includes("flashing") : !!document.querySelector("div[class*='buffering-loader-container']")))
+						video.isPaused ||
+						(appVersion === AppVersion.V4
+							? document
+									.querySelector("#loading-logo")
+									.className.includes("flashing")
+							: !!document.querySelector(
+									"div[class*='buffering-loader-container']"
+							  ))
 					) {
 						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = "Player is paused";
-					} else { 
+					} else {
 						presenceData.smallImageKey = Assets.Play;
 						presenceData.smallImageText = "Player is playing";
 					}
@@ -242,11 +292,21 @@ presence.on("UpdateData", async () => {
 					let metaUrl: string, title: string;
 
 					if (appVersion === AppVersion.V4) {
-						title = document.querySelector("head > title")?.textContent?.replace("Stremio -", "")?.trim();
-						metaUrl = href.substring(0, href.lastIndexOf("/")).replace("player", "detail");
-						presenceData.largeImageKey = document.querySelector("#loading-logo")?.getAttribute("data-image") ?? Assets.Logo;
+						title = document
+							.querySelector("head > title")
+							?.textContent?.replace("Stremio -", "")
+							?.trim();
+						metaUrl = href
+							.substring(0, href.lastIndexOf("/"))
+							.replace("player", "detail");
+						presenceData.largeImageKey =
+							document
+								.querySelector("#loading-logo")
+								?.getAttribute("data-image") ?? Assets.Logo;
 					} else {
-						const playerState = await _eval("core.transport.getState('player')");
+						const playerState = await _eval(
+							"core.transport.getState('player')"
+						);
 						if (playerState.metaItem.type.toLowerCase() === "ready") {
 							// eslint-disable-next-line prefer-destructuring
 							const content = playerState.metaItem.content;
@@ -258,7 +318,7 @@ presence.on("UpdateData", async () => {
 							presenceData.largeImageKey = content?.logo ?? Assets.Logo;
 						}
 					}
-					
+
 					presenceData.details = title ?? "Player";
 					presenceData.state = video.isPaused ? "Paused" : "Watching";
 					if (metaUrl) {
@@ -281,11 +341,11 @@ presence.on("UpdateData", async () => {
 				case "/addon-sdk":
 					presenceData.state = "Addon SDK";
 					break;
-				
+
 				case "/contribute":
 					presenceData.state = "Contribute";
 					break;
-			
+
 				case "/community":
 					presenceData.state = " Community";
 					break;
@@ -293,7 +353,7 @@ presence.on("UpdateData", async () => {
 				case "/technology":
 					presenceData.state = "Technology";
 					break;
-			
+
 				case "/competition":
 					presenceData.state = "Competition";
 					break;
@@ -302,13 +362,17 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "Careers";
 					break;
 
-				default: 
+				default:
 					// eslint-disable-next-line no-case-declarations
 					const activeTab = document.querySelector("[class='active']");
-					if (activeTab === null || activeTab.parentElement?.className === "langs") break;
+					if (
+						activeTab === null ||
+						activeTab.parentElement?.className === "langs"
+					)
+						break;
 					presenceData.state = activeTab.textContent;
 			}
-			
+
 			break;
 	}
 
