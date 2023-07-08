@@ -105,17 +105,15 @@ presence.on("UpdateData", async () => {
 					if (appVersion === AppVersion.V4) {
 						const title = document.querySelector("#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div")?.textContent;
 						presenceData.state = title;
-						if (thumbnails) {
-							presenceData.largeImageKey =
-								document
-									.querySelector(
-										"#detail > div.details-less-info > div.details-top > div:nth-child(1)"
-									)
-									?.firstElementChild.getAttribute("src") ?? Assets.Logo;
-						}
+						presenceData.largeImageKey =
+							document
+								.querySelector(
+									"#detail > div.details-less-info > div.details-top > div:nth-child(1)"
+								)
+								?.firstElementChild.getAttribute("src") ?? Assets.Logo;
 					} else {
 						const imgElement = document.querySelector("div[class*='meta-info-container'] > img[class*='logo']") ?? document.querySelector("div[class*='poster-container'] img");
-						if (thumbnails) presenceData.largeImageKey = imgElement?.getAttribute("src") ?? Assets.Logo;
+						presenceData.largeImageKey = imgElement?.getAttribute("src") ?? Assets.Logo;
 						presenceData.state = imgElement?.getAttribute("title") ?? document.querySelector("div[class*='logo-placeholder']:last-child")?.textContent;
 					}
 
@@ -233,7 +231,7 @@ presence.on("UpdateData", async () => {
 					if (appVersion === AppVersion.V4) {
 						title = document.querySelector("head > title")?.textContent?.replace("Stremio -", "")?.trim();
 						metaUrl = href.substring(0, href.lastIndexOf("/")).replace("player", "detail");
-						if (thumbnails) presenceData.largeImageKey = document.querySelector("#loading-logo")?.getAttribute("data-image") ?? Assets.Logo;
+						presenceData.largeImageKey = document.querySelector("#loading-logo")?.getAttribute("data-image") ?? Assets.Logo;
 					} else {
 						const playerState = await _eval("core.transport.getState('player')");
 						if (playerState.metaItem.type.toLowerCase() === "ready") {
@@ -244,7 +242,7 @@ presence.on("UpdateData", async () => {
 							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}`;
 							if (content.type === "series")
 								metaUrl += `/${content.id}:${playerState.seriesInfo.season}:${playerState.seriesInfo.episode}`;
-							if (thumbnails) presenceData.largeImageKey = content?.logo ?? Assets.Logo;
+							presenceData.largeImageKey = content?.logo ?? Assets.Logo;
 						}
 					}
 					
@@ -302,7 +300,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!buttons) delete presenceData.buttons;
-	
+	if (!thumbnails) delete presenceData.largeImageKey;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
