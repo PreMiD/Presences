@@ -313,7 +313,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!buttons) delete presenceData.buttons;
-	if (!thumbnails) delete presenceData.largeImageKey;
+	if (!thumbnails) presenceData.largeImageKey = Assets.Logo;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
