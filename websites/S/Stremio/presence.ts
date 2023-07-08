@@ -69,10 +69,10 @@ function findVideo(presence: Presence): Video | null {
 	if (videoElement) {
 		const result: Video = { isEmbed: false, isPaused: videoElement.paused };
 
-		if (!isNaN(videoElement?.duration))
-			// eslint-disable-next-line curly
+		if (!isNaN(videoElement?.duration)) {
 			[result.startTimestamp, result.endTimestamp] =
 				presence.getTimestampsfromMedia(videoElement);
+		}
 
 		return result;
 	} else if (document.querySelector("div[class*='player-container']")) {
@@ -253,8 +253,9 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `Discovering ${type ?? "content"}${
 						type === "series" ? "" : "s"
 					}`;
-					presenceData.state =
-						`${category}${genre ? ` | ${genre}` : ""}` ?? "All";
+					presenceData.state = `${category ?? "All"}${
+						genre ? ` | ${genre}` : ""
+					}`;
 
 					break;
 				}
@@ -338,7 +339,7 @@ presence.on("UpdateData", async () => {
 							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}`;
 							if (content.type === "series")
 								metaUrl += `/${content.id}:${playerState.seriesInfo.season}:${playerState.seriesInfo.episode}`;
-							presenceData.largeImageKey = content?.logo ?? Assets.Logo;
+							presenceData.largeImageKey = content.logo ?? Assets.Logo;
 						}
 					}
 
@@ -384,8 +385,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "Careers";
 					break;
 
-				default:
-					// eslint-disable-next-line no-case-declarations
+				default: {
 					const activeTab = document.querySelector("[class='active']");
 					if (
 						activeTab === null ||
@@ -393,6 +393,7 @@ presence.on("UpdateData", async () => {
 					)
 						break;
 					presenceData.state = activeTab.textContent;
+				}
 			}
 
 			break;
