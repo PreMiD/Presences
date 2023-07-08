@@ -235,11 +235,14 @@ presence.on("UpdateData", async () => {
 								? "ul.sort > li.selected"
 								: "div[class*='selectable-inputs-container'] > div:nth-child(2) > div"
 						)?.textContent,
-						genre = document.querySelector(
-							appVersion === AppVersion.V4
-								? "ul.genre-select > li.selected"
-								: "div[class*='selectable-inputs-container'] > div:nth-child(3) > div"
-						)?.textContent?.replace("Select genre", "") || null;
+						genre =
+							document
+								.querySelector(
+									appVersion === AppVersion.V4
+										? "ul.genre-select > li.selected"
+										: "div[class*='selectable-inputs-container'] > div:nth-child(3) > div"
+								)
+								?.textContent?.replace("Select genre", "") || null;
 
 					presenceData.buttons = [
 						{
@@ -250,7 +253,8 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `Discovering ${type ?? "content"}${
 						type === "series" ? "" : "s"
 					}`;
-					presenceData.state = `${category}${genre ? ` | ${genre}` : ""}` ?? "All";
+					presenceData.state =
+						`${category}${genre ? ` | ${genre}` : ""}` ?? "All";
 
 					break;
 				}
