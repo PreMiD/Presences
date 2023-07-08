@@ -63,12 +63,31 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ hash, hostname, pathname, href } = document.location,
-		[privacy, thumbnails, buttons] = await Promise.all([
+		[privacy, thumbnails, buttons, search] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("thumbnails"),
 			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("search"),
 		]),
 		appVersion = getApVersion(hostname);
+
+		if (!privacy && search) {
+			let searchInput: HTMLInputElement;
+
+			if (appVersion === AppVersion.V4)
+				searchInput = document.querySelector("#global-search-field");
+			else
+				searchInput = document.querySelector("input[class*='search-input']");
+		
+			const searchValue = searchInput?.value;
+
+			if (searchValue) {
+				presenceData.details = `Searching for ${searchValue}`;
+				presenceData.smallImageKey = Assets.Search;
+				presence.setActivity(presenceData);
+				return;
+			};
+		}
 
 	switch (appVersion) {
 		case AppVersion.V4:

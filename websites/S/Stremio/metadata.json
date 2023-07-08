@@ -62,6 +62,15 @@
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
+		},
+		{
+			"id": "search",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Search",
+			"icon": "fas fa-search",
+			"value": false
 		}
 	]
 }
