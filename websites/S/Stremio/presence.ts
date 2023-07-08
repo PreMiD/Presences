@@ -347,7 +347,7 @@ presence.on("UpdateData", async () => {
 					break;
 
 				case "/community":
-					presenceData.state = " Community";
+					presenceData.state = "Community";
 					break;
 
 				case "/technology":
