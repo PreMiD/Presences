@@ -3,8 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let	title: string;
-
 enum AppVersion {
 	Website = -1,
 	V4 = 4,
@@ -105,7 +103,7 @@ presence.on("UpdateData", async () => {
 					break;
 				case "detail": {
 					if (appVersion === AppVersion.V4) {
-						title = document.querySelector("#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div")?.textContent;
+						const title = document.querySelector("#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div")?.textContent;
 						presenceData.state = title;
 						if (thumbnails) {
 							presenceData.largeImageKey =
@@ -132,11 +130,10 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "addons": {
-					title = document.querySelector(
+					const title = document.querySelector(
 						appVersion === AppVersion.V4 ? "[class='ng-scope selected']" : "div[class*='addons-content'] > div[class*='selectable-inputs-container'] > div:nth-child(2) > div"
-					)?.textContent;
-
-					const type = document.querySelector(
+					)?.textContent,
+					 type = document.querySelector(
 						appVersion === AppVersion.V4 ? "[class='ng-binding ng-scope selected']" : "div[class*='addons-content'] > div[class*='selectable-inputs-container'] > div:nth-child(3) > div"
 					)?.textContent;
 						
@@ -231,7 +228,7 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageText = "Player is playing";
 					}
 
-					let metaUrl: string;
+					let metaUrl: string, title: string;
 
 					if (appVersion === AppVersion.V4) {
 						title = document.querySelector("head > title")?.textContent?.replace("Stremio -", "")?.trim();
