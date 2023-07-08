@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 								)
 								?.firstElementChild.getAttribute("src") ?? Assets.Logo;
 					} else {
-						const imgElement = document.querySelector("div[class*='meta-info-container'] > img[class*='logo']") ?? document.querySelector("div[class*='poster-container'] img");
+						const imgElement = document.querySelector("div[class*='meta-info-container'] > img[class*='logo']");
 						presenceData.largeImageKey = imgElement?.getAttribute("src") ?? Assets.Logo;
 						presenceData.state = imgElement?.getAttribute("title") ?? document.querySelector("div[class*='logo-placeholder']:last-child")?.textContent;
 					}
