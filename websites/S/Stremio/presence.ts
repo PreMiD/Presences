@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = imgElement?.getAttribute("title") ?? document.querySelector("div[class*='logo-placeholder']:last-child")?.textContent;
 					}
 
-					presenceData.state = "Viewing metadata";
+					presenceData.state = `Viewing a ${hash.split("/")[2]}`;
 					presenceData.buttons = [
 						{
 							label: "View metadata",
