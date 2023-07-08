@@ -55,6 +55,35 @@ function _eval(js: string): Promise<any> {
 	});
 }
 
+type Video = { isEmbed: boolean; isPaused: boolean; startTimestamp?: number; endTimestamp?: number };
+
+function findVideo(presence: Presence): Video | null {
+	const videoElement = document.querySelector<HTMLMediaElement>("video");
+
+	if (videoElement) {
+		const result: Video = {isEmbed: false, isPaused: videoElement.paused};
+		
+		if (!isNaN(videoElement?.duration))
+			[result.startTimestamp, result.endTimestamp] = presence.getTimestampsfromMedia(videoElement);
+		
+		return result;
+	} else if (document.querySelector("div[class*='player-container']")) {
+		const result: Video = {isEmbed: true, isPaused: !!document.querySelector("div[class*='control-bar-button'] > svg[icon='ic_play']")},
+		 seekBar = document.querySelector('[class*="seek-bar-container"]');
+		[result.startTimestamp, result.endTimestamp] = presence.getTimestamps(
+			Number(
+				presence.timestampFromFormat(seekBar?.firstElementChild?.textContent)
+			),
+			Number(
+				presence.timestampFromFormat(seekBar?.lastElementChild?.textContent)
+			)
+		);
+
+		return result;
+	} else 
+		return null;
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
@@ -90,10 +119,10 @@ presence.on("UpdateData", async () => {
 	switch (appVersion) {
 		case AppVersion.V4:
 		case AppVersion.V5:{
-			const video = document.querySelector<HTMLMediaElement>("video");
+			const video = findVideo(presence);
 
-			if (privacy) {
-				presenceData.details = !video ? "Browsing" : "Watching";
+			if (privacy) { 
+				presenceData.details = video !== null ? "Watching" : "Browsing";
 				break;
 			}
 
@@ -195,29 +224,13 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Search";
 					break;
 				case "player": {
-					 let isPaused = true;
+					if (video === null) break;
 
-					if (!isNaN(video?.duration)) {
-						[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
-						isPaused = video.paused;
-					} else if (video === null) {
-						isPaused = !!document.querySelector("div[class*='control-bar-button'] > svg[icon='ic_play']");
-						const seekBar = document.querySelector('[class*="seek-bar-container"]');
-						[, presenceData.endTimestamp] = presence.getTimestamps(
-							Number(
-								presence.timestampFromFormat(seekBar?.firstElementChild?.textContent)
-							),
-							Number(
-								presence.timestampFromFormat(seekBar?.lastElementChild?.textContent)
-							)
-						);
-						if (privacy) presenceData.details = "Watching";
-					}
-					
+					presenceData.endTimestamp = video.endTimestamp;
 					delete presenceData.startTimestamp;
 						
 					if (
-						(isPaused || (appVersion === AppVersion.V4 ? document.querySelector("#loading-logo").className.includes("flashing") : !!document.querySelector("div[class*='buffering-loader-container']")))
+						(video.isPaused || (appVersion === AppVersion.V4 ? document.querySelector("#loading-logo").className.includes("flashing") : !!document.querySelector("div[class*='buffering-loader-container']")))
 					) {
 						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = "Player is paused";
@@ -247,7 +260,7 @@ presence.on("UpdateData", async () => {
 					}
 					
 					presenceData.details = title ?? "Player";
-					presenceData.state = isPaused ? "Paused" : "Watching";
+					presenceData.state = video.isPaused ? "Paused" : "Watching";
 					if (metaUrl) {
 						presenceData.buttons = [
 							{
