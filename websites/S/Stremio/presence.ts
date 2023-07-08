@@ -285,20 +285,22 @@ presence.on("UpdateData", async () => {
 					delete presenceData.startTimestamp;
 
 					if (
-						video.isPaused ||
 						(appVersion === AppVersion.V4
 							? document
 									.querySelector("#loading-logo")
 									.className.includes("flashing")
 							: !!document.querySelector(
 									"div[class*='buffering-loader-container']"
-							  ))
+							  )) ||
+						video.isPaused
 					) {
 						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = "Player is paused";
+						presenceData.state = "Paused";
 					} else {
 						presenceData.smallImageKey = Assets.Play;
 						presenceData.smallImageText = "Player is playing";
+						presenceData.state = "Watching";
 					}
 
 					let metaUrl: string, title: string;
@@ -332,7 +334,6 @@ presence.on("UpdateData", async () => {
 					}
 
 					presenceData.details = title ?? "Player";
-					presenceData.state = video.isPaused ? "Paused" : "Watching";
 					if (metaUrl) {
 						presenceData.buttons = [
 							{
