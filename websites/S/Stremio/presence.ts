@@ -140,6 +140,12 @@ presence.on("UpdateData", async () => {
 			switch (hash.replace("#/", "").split("/").shift().split("?").shift()) {
 				case "":
 					presenceData.details = "Board";
+					presenceData.buttons = [
+						{
+							label: "View board",
+							url: href,
+						},
+					];
 					break;
 				case "detail": {
 					if (appVersion === AppVersion.V4) {
@@ -208,6 +214,12 @@ presence.on("UpdateData", async () => {
 								: "div[class*='settings-content'] div[class*='selected']"
 						)?.textContent ?? "General";
 					presenceData.details = `${section} settings`;
+					presenceData.buttons = [
+						{
+							label: "View settings",
+							url: href,
+						},
+					];
 					break;
 				}
 				case "discover": {
@@ -255,13 +267,13 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "calendar":
+					presenceData.details = "Calendar";
 					presenceData.buttons = [
 						{
 							label: "View calendar",
 							url: href,
 						},
 					];
-					presenceData.details = "Calendar";
 					break;
 				case "search":
 					presenceData.details = "Search";
