@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 	) {
 		//Manga-----------------------------------------------------------------------
 		if (hostname.startsWith("ecchi")) presenceData.largeImageKey = Assets.EcchiLogo;
-		else presenceData.largeImageKey = defaultLogo;
+		else presenceData.largeImageKey = Assets.Logo;
 		//Manga arama
 		if (searchParams.get("s")) {
 			if (hostname.startsWith("ecchi"))
