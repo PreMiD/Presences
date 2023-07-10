@@ -2,16 +2,15 @@ const presence = new Presence({
 		clientId: "1047102386478534727",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-	
-	const enum Assets {
+const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
 	EcchiLogo = "https://imgur.com/BtQLEdY.png",
-
+}
 presence.on("UpdateData", async () => {
 	const { pathname, hostname, href } = document.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: defaultLogo,
+			largeImageKey: Assets.Logo,
 		},
 		searchParams = new URLSearchParams(location.search);
 	if (
@@ -19,7 +18,8 @@ presence.on("UpdateData", async () => {
 		hostname === "ecchi.tempestfansub.com"
 	) {
 		//Manga-----------------------------------------------------------------------
-		if (hostname.startsWith("ecchi")) presenceData.largeImageKey = Assets.EcchiLogo;
+		if (hostname.startsWith("ecchi"))
+			presenceData.largeImageKey = Assets.EcchiLogo;
 		else presenceData.largeImageKey = Assets.Logo;
 		//Manga arama
 		if (searchParams.get("s")) {
