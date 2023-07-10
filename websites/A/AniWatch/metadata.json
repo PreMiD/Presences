@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "819696394180100106",
+		"name": ".vahya"
+	},
+	"service": "AniWatch",
+	"description": {
+		"en": "AniWatch.to - A site to watch anime online for Free"
+	},
+	"url": "aniwatch.to",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/qT3G10y.png",
+	"thumbnail": "https://i.imgur.com/TAc6lvS.png",
+	"color": "#ffdd95",
+	"category": "anime",
+	"tags": [
+		"anime"
+	],"iframe": true,
+	"iFrameRegExp": ".*",
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}
