@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 		hostname === "ecchi.tempestfansub.com"
 	) {
 		//Manga-----------------------------------------------------------------------
-		if (hostname.startsWith("ecchi")) presenceData.largeImageKey = ecchilogo;
+		if (hostname.startsWith("ecchi")) presenceData.largeImageKey = Assets.EcchiLogo;
 		else presenceData.largeImageKey = defaultLogo;
 		//Manga arama
 		if (searchParams.get("s")) {
