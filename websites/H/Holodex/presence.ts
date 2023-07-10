@@ -360,7 +360,7 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 			largeImageKey:
-				iFrameVideo.thumnail ??
+				iFrameVideo.thumbnail ??
 				"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
 			smallImageKey: data.smallimage.image,
 			smallImageText: data.smallimage.hover,
@@ -402,9 +402,10 @@ presence.on("UpdateData", async () => {
 		!cover &&
 		presenceData.largeImageKey !==
 			"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png"
-	)
+	) {
 		presenceData.largeImageKey =
 			"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png";
+	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
