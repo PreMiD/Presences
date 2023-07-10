@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 
 		const timestamps = presence.getTimestamps(
 			presence.timestampFromFormat(
-				document.querySelectorAll(".current-time")[0].innerHTML
+				document.querySelectol(".current-time").innerHTML
 			),
 			presence.timestampFromFormat(
 				document.querySelectorAll(".duration")[0].innerHTML
