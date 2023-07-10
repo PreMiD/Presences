@@ -6,11 +6,14 @@ const presence = new Presence({
 		pause: "general.paused",
 	});
 
-let iFrameVideo: { isPaused: boolean };
+let iFrameVideo: { isPaused: boolean; thumbnail: string };
 
-presence.on("iFrameData", (data: { video: { isPaused: boolean } }) => {
-	iFrameVideo = data.video;
-});
+presence.on(
+	"iFrameData",
+	(data: { video: { isPaused: boolean; thumbnail: string } }) => {
+		iFrameVideo = data.video;
+	}
+);
 
 const getInfo = {
 		generic: () => {
@@ -356,13 +359,15 @@ presence.on("UpdateData", async () => {
 	dataUpdater.updateAll();
 
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
-		smallImageKey: data.smallimage.image,
-		smallImageText: data.smallimage.hover,
-		details: data.details,
-		startTimestamp: data.startTime,
-	};
+			largeImageKey:
+				iFrameVideo.thumnail ??
+				"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
+			smallImageKey: data.smallimage.image,
+			smallImageText: data.smallimage.hover,
+			details: data.details,
+			startTimestamp: data.startTime,
+		},
+		cover = await presence.getSetting<boolean>("cover");
 
 	if (data.state) presenceData.state = data.state;
 
@@ -393,6 +398,13 @@ presence.on("UpdateData", async () => {
 			}
 	}
 
+	if (
+		!cover &&
+		presenceData.largeImageKey !==
+			"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png"
+	)
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png";
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
