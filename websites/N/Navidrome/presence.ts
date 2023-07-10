@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 				document.querySelectol(".current-time").innerHTML
 			),
 			presence.timestampFromFormat(
-				document.querySelectorAll(".duration")[0].innerHTML
+				document.querySelector(".duration").innerHTML
 			)
 		);
 		// Set gathered data
