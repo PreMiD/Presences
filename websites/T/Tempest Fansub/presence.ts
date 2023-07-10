@@ -1,10 +1,11 @@
 const presence = new Presence({
 		clientId: "1047102386478534727",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	defaultLogo =
-		"https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
-	ecchilogo = "https://imgur.com/BtQLEdY.png";
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+	
+	const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
+	EcchiLogo = "https://imgur.com/BtQLEdY.png",
 
 presence.on("UpdateData", async () => {
 	const { pathname, hostname, href } = document.location,
