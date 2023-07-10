@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "logo",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href} = document.location,
+		{ pathname, href } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (pathname === "/" || pathname === "/home")
@@ -98,7 +98,12 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Looking for anime rooms";
 		else {
 			const filmName =
-				document.querySelector<HTMLHeadingElement>("h2.film-name");
+					document.querySelector<HTMLHeadingElement>("h2.film-name"),
+				thumbnail = document.querySelector<HTMLImageElement>(
+					".anis-watch-detail > .anis-content > .anisc-poster > .film-poster > img.film-poster-img"
+				)?.src;
+
+			presenceData.largeImageKey = thumbnail;
 			presenceData.details = "In a room";
 			if (filmName) presenceData.state = `Watching ${filmName.textContent}`;
 			if (data && !data.paused) {
@@ -122,7 +127,12 @@ presence.on("UpdateData", async () => {
 			),
 			episode = document.querySelector<HTMLSpanElement>(
 				"a.ep-item.active div.ssli-order"
-			);
+			),
+			thumbnail = document.querySelector<HTMLImageElement>(
+				".anis-watch-detail > .anis-content > .anisc-poster > .film-poster > img.film-poster-img"
+			)?.src;
+
+		presenceData.largeImageKey = thumbnail;
 		if (title) presenceData.details = title.textContent;
 		if (episode) presenceData.state = `Episode ${episode.textContent}`;
 		if (data && !data.paused) {
@@ -158,7 +168,7 @@ presence.on("UpdateData", async () => {
 				const query = document.querySelector(
 					"#main-content > section > div.block_area-header.block_area-header-tabs > div.float-left.bah-heading.mr-4 > h2 > i"
 				)?.textContent;
-				
+
 				presenceData.state = query;
 				presenceData.smallImageKey = Assets.Search;
 				break;
@@ -229,6 +239,11 @@ presence.on("UpdateData", async () => {
 					"h2.film-name.dynamic-name"
 				);
 				if (title) {
+					const thumbnail = document.querySelector<HTMLImageElement>(
+						"#ani_detail > div > div > div.anis-content > div.anisc-poster > div > img"
+					)?.src;
+
+					presenceData.largeImageKey = thumbnail;
 					presenceData.details = "Checking Synopsis";
 					presenceData.state = title.textContent;
 					if (buttons) {
