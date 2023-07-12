@@ -22,7 +22,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://i.imgur.com/0x3NWRV.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 		if (buttons) {
 			presenceData.buttons = [
 				{
-					label: "Go to Page",
+					label: "Go to Production Page",
 					url: href,
 				},
 			];
@@ -67,10 +67,11 @@ presence.on("UpdateData", async () => {
 		pathname.startsWith("/people") ||
 		pathname.startsWith("/character")
 	) {
-		const name = document.querySelector<HTMLHeadingElement>("h4.name");
+		const name = document.querySelector<HTMLHeadingElement>("h4.name"),
+			isCharacterPage = pathname.startsWith("/character");
 		if (name) {
 			presenceData.details = `Looking at ${
-				pathname.startsWith("/people") ? "people" : "characters"
+				!isCharacterPage ? "people" : "characters"
 			}`;
 			presenceData.state = name.textContent;
 		}
@@ -78,7 +79,7 @@ presence.on("UpdateData", async () => {
 		if (buttons) {
 			presenceData.buttons = [
 				{
-					label: "Go to Page",
+					label: `Go to ${name || isCharacterPage ? "character" : "people"} Page`,
 					url: href,
 				},
 			];
@@ -202,13 +203,13 @@ presence.on("UpdateData", async () => {
 			}
 			case "/user/settings": {
 				presenceData.details = "Changing Settings";
-				presenceData.smallImageKey = "settings";
+				presenceData.smallImageKey = "https://i.imgur.com/AuOsdzi.png";
 
 				break;
 			}
 			case "/user/notification": {
 				presenceData.details = "Looking at Notifications";
-				presenceData.smallImageKey = "notification";
+				presenceData.smallImageKey = "https://i.imgur.com/TjzBYj9.png";
 
 				break;
 			}
