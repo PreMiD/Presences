@@ -8,7 +8,10 @@
 	"description": {
 		"en": "Navidrome is a self-hosted, open source music server and streamer. It gives you freedom to listen to your music collection from any browser or mobile device."
 	},
-	"url": "navidrome.org",
+	"url": [
+		"navidrome.org",
+		"www.navidrome.org"
+	],
 	"regExp": "navidrome[.]([a-z0-9]+)[.]([a-z0-9]+)",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/mhD2eIr.png",
