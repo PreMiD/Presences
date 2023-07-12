@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 	if (state) presenceData.state = state;
 
-	if (!(await presence.getSetting<boolean>("details"))) {
+	if (!await presence.getSetting<boolean>("details")) {
 		presenceData.details = "Browsing Kick...";
 		delete presenceData.state;
 		presenceData.largeImageKey = Assets.Logo;
