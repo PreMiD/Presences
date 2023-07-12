@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
-	EcchiLogo = "https://imgur.com/BtQLEdY.png",
+	EcchiLogo = "https://i.imgur.com/BZ6HvrC.png",
 }
 presence.on("UpdateData", async () => {
 	const { pathname, hostname, href } = document.location,
@@ -97,13 +97,13 @@ presence.on("UpdateData", async () => {
 				if (panels) presenceData.largeImageKey = panels[0].getAttribute("src");
 			} catch {
 				presenceData.details = "Bilinmeyen Adres.";
-				presenceData.state = null;
-				presenceData.buttons = null;
+				delete presenceData.state;
+				delete presenceData.buttons;
 			}
 		} else {
 			presenceData.details = "Bilinmeyen Adres.";
-			presenceData.state = null;
-			presenceData.buttons = null;
+			delete presenceData.state;
+			delete presenceData.buttons;
 		}
 	} else if (hostname === "anime.tempestfansub.com") {
 		//Anime-----------------------------------------------------------------------
@@ -146,13 +146,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Anime ekip başvurusuna bakıyor.";
 		else {
 			presenceData.details = "Bilinmeyen Adres.";
-			presenceData.state = null;
-			presenceData.buttons = null;
+			delete presenceData.state;
+			delete presenceData.buttons;
 		}
 	} else {
 		presenceData.details = "Bilinmeyen Adres.";
-		presenceData.state = null;
-		presenceData.buttons = null;
+		delete presenceData.state;
+		delete presenceData.buttons;
 	}
 	presence.setActivity(presenceData);
 });
