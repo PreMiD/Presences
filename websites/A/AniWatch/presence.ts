@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 		const name = document.querySelector<HTMLHeadingElement>("h4.name");
 		if (name) {
 			presenceData.details = `Looking at ${
-				pathname.startsWith("/people") ? "People" : "Character"
+				pathname.startsWith("/people") ? "people" : "characters"
 			}`;
 			presenceData.state = name.textContent;
 		}
