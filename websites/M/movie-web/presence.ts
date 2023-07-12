@@ -132,7 +132,7 @@ interface ProdMetaData {
 }
 
 presence.on("UpdateData", async () => {
-	const { pathname, href, host } = window.location,
+	const { pathname, href, host } = document.location,
 		subdomain = host.split(".")[0],
 		[
 			showTimestamp,
@@ -194,9 +194,8 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "https://i.imgur.com/lBCZWIB.gif";
 				presenceData.smallImageText = "Loading";
 			} else if (state.mediaPlaying.isPlaying) {
-				const now = new Date();
-				presenceData.endTimestamp = now.setSeconds(
-					now.getSeconds() + state.progress.duration - state.progress.time
+				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
+					document.querySelector("video")
 				);
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Playing";
@@ -247,9 +246,8 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "https://i.imgur.com/lBCZWIB.gif";
 				presenceData.smallImageText = "Loading";
 			} else {
-				const now = new Date();
-				presenceData.endTimestamp = now.setSeconds(
-					now.getSeconds() + progress.duration - progress.time
+				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
+					document.querySelector("video")
 				);
 			}
 		}
