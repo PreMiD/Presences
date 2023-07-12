@@ -10,8 +10,8 @@ presence.on("UpdateData", async () => {
 	// Determine player state
 	let playerState;
 	// Check if audio-title has any content
-	if (document.querySelectorAll(".audio-title")[0].innerHTML !== "") {
-		if (document.querySelectorAll(".react-jinke-music-player-pause-icon")[0])
+	if (document.querySelector(".audio-title").textContent) {
+		if (document.querySelector(".react-jinke-music-player-pause-icon"))
 			playerState = "playing";
 		else playerState = "paused";
 	} else playerState = "notInitialized";
