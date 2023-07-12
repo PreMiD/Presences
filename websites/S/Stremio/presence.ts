@@ -13,7 +13,7 @@ const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/logo.png",
 }
 
-function getApVersion(hostname: string) {
+function getAppVersion(hostname: string) {
 	switch (hostname) {
 		case "web.strem.io":
 		case "web.stremio.com":
@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("search"),
 		]),
-		appVersion = getApVersion(hostname);
+		appVersion = getAppVersion(hostname);
 
 	if (!privacy && search) {
 		let searchInput: HTMLInputElement;
