@@ -26,10 +26,10 @@ presence.on("UpdateData", async () => {
 
 	if (!(await presence.getSetting<boolean>("details"))) {
 		presenceData.details = "Browsing Kick...";
-		presenceData.state = null;
+		delete presenceData.state;
 		presenceData.largeImageKey = Assets.Logo;
-		presenceData.smallImageKey = null;
-		presenceData.buttons = null;
+		delete presenceData.smallImageKey;
+		delete presenceData.buttons;
 	}
 
 	if (await presence.getSetting<boolean>("logo"))
@@ -43,7 +43,7 @@ function getPageData(
 	pageDetail: string,
 	title: string,
 	hostname: string,
-	link: string
+	url: string
 ): {
 	details?: string;
 	smallImageKey?: string;
@@ -144,8 +144,8 @@ function getPageData(
 							smallImageKey = Assets.Live;
 							buttons = [
 								{
-									label: "Watch stream",
-									url: link,
+									label: "Watch Stream",
+									url,
 								},
 							];
 						} else {
@@ -153,8 +153,8 @@ function getPageData(
 							smallImageKey = Assets.Viewing;
 							buttons = [
 								{
-									label: "View streamer",
-									url: link,
+									label: "View Streamer",
+									url,
 								},
 							];
 						}
