@@ -10,8 +10,8 @@ presence.on("UpdateData", async () => {
 	// Determine player state
 	let playerState;
 	// Check if audio-title has any content
-	if (document.querySelector(".audio-title").textContent) {
-		if (document.querySelector(".react-jinke-music-player-pause-icon"))
+	if (document.querySelectorAll(".audio-title")[0].innerHTML !== "") {
+		if (document.querySelectorAll(".react-jinke-music-player-pause-icon")[0])
 			playerState = "playing";
 		else playerState = "paused";
 	} else playerState = "notInitialized";
@@ -22,15 +22,15 @@ presence.on("UpdateData", async () => {
 
 		const timestamps = presence.getTimestamps(
 			presence.timestampFromFormat(
-				document.querySelector(".current-time").innerHTML
+				document.querySelector(".current-time").textContent
 			),
 			presence.timestampFromFormat(
-				document.querySelector(".duration").innerHTML
+				document.querySelector(".duration").textContent
 			)
 		);
 		// Set gathered data
-		presenceData.details = document.querySelectorAll(".songTitle")[0].innerHTML;
-		presenceData.state = document.querySelectorAll(".songArtist")[0].innerHTML;
+		presenceData.details = document.querySelector(".songTitle").textContent;
+		presenceData.state = document.querySelector(".songArtist").textContent;
 		// Set timestamp if playing
 		if (playerState === "playing")
 			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
