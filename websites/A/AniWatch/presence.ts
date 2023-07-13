@@ -9,6 +9,12 @@ let data: {
 	paused: boolean;
 } = null;
 
+const enum Assets {
+	aniWatchLogo = "https://i.imgur.com/0x3NWRV.png",
+	settings = "https://i.imgur.com/AuOsdzi.png",
+	notifications = "https://i.imgur.com/TjzBYj9.png",
+}
+
 presence.on(
 	"iFrameData",
 	async (recievedData: {
@@ -22,7 +28,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/0x3NWRV.png",
+			largeImageKey: Assets.aniWatchLogo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
@@ -79,7 +85,9 @@ presence.on("UpdateData", async () => {
 		if (buttons) {
 			presenceData.buttons = [
 				{
-					label: `Go to ${name || isCharacterPage ? "Character" : "People"} Page`,
+					label: `Go to ${
+						name || isCharacterPage ? "Character" : "People"
+					} Page`,
 					url: href,
 				},
 			];
@@ -203,13 +211,13 @@ presence.on("UpdateData", async () => {
 			}
 			case "/user/settings": {
 				presenceData.details = "Changing Settings";
-				presenceData.smallImageKey = "https://i.imgur.com/AuOsdzi.png";
+				presenceData.smallImageKey = Assets.settings;
 
 				break;
 			}
 			case "/user/notification": {
 				presenceData.details = "Looking at Notifications";
-				presenceData.smallImageKey = "https://i.imgur.com/TjzBYj9.png";
+				presenceData.smallImageKey = Assets.notifications;
 
 				break;
 			}
