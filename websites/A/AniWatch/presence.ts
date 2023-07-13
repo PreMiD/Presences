@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
 		if (buttons) {
 			presenceData.buttons = [
 				{
-					label: `Go to ${name || isCharacterPage ? "character" : "people"} Page`,
+					label: `Go to ${name || isCharacterPage ? "Character" : "People"} Page`,
 					url: href,
 				},
 			];
