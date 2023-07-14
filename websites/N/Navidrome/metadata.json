@@ -13,9 +13,9 @@
 		"www.navidrome.org"
 	],
 	"regExp": "navidrome[.]([a-z0-9]+)[.]([a-z0-9]+)",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/mhD2eIr.png",
-	"thumbnail": "https://i.imgur.com/Fff0Xgp.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Navidrome/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Navidrome/assets/thumbnail.png",
 	"color": "#2979ff",
 	"category": "music",
 	"tags": [
