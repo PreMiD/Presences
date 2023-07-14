@@ -9,7 +9,7 @@
 		"en": "The place for your favorite movies & shows"
 	},
 	"url": "movie-web.app",
-	"regExp": "(dev.)?(movie-web.app)",
+	"regExp": "(dev[.])?(movie-web[.]app)",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/Ggwzwcv.png",
 	"thumbnail": "https://i.imgur.com/dbbJSUH.png",
