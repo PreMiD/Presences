@@ -332,13 +332,14 @@ presence.on("UpdateData", async () => {
 							"core.transport.getState('player')"
 						);
 						if (playerState.metaItem.type.toLowerCase() === "ready") {
-							// eslint-disable-next-line prefer-destructuring
-							const content = playerState.metaItem.content;
-							// eslint-disable-next-line prefer-destructuring
-							title = playerState.title;
+							const {
+								metaItem: { content },
+								seriesInfo: { season, episode },
+							} = playerState;
+							({ title } = playerState);
 							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}`;
 							if (content.type === "series")
-								metaUrl += `/${content.id}:${playerState.seriesInfo.season}:${playerState.seriesInfo.episode}`;
+								metaUrl += `/${content.id}:${season}:${episode}`;
 							presenceData.largeImageKey = content.logo ?? Assets.Logo;
 						}
 					}
