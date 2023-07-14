@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Board";
 					presenceData.buttons = [
 						{
-							label: "View board",
+							label: "View Board",
 							url: href,
 						},
 					];
@@ -175,7 +175,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `Viewing a ${hash.split("/")[2]}`;
 					presenceData.buttons = [
 						{
-							label: "View metadata",
+							label: "View Metadata",
 							url: href,
 						},
 					];
@@ -200,7 +200,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = type ?? "All";
 					presenceData.buttons = [
 						{
-							label: "Browse addons",
+							label: "Browse Addons",
 							url: href,
 						},
 					];
@@ -216,7 +216,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `${section} settings`;
 					presenceData.buttons = [
 						{
-							label: "View settings",
+							label: "View Settings",
 							url: href,
 						},
 					];
@@ -270,7 +270,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = type ?? "All";
 					presenceData.buttons = [
 						{
-							label: "View library",
+							label: "View Library",
 							url: href,
 						},
 					];
@@ -280,7 +280,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Calendar";
 					presenceData.buttons = [
 						{
-							label: "View calendar",
+							label: "View Calendar",
 							url: href,
 						},
 					];
