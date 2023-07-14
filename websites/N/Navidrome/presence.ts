@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/mhD2eIr.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/N/Navidrome/assets/logo.png",
 	};
 
 	// Determine player state
