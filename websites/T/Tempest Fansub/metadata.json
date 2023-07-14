@@ -11,17 +11,18 @@
 	},
 	"url": [
 		"tempestfansub.com",
-		"manga.tempestfansub.com",
-		"tempestscans.com"
+		"anime.tempestfansub.com",
+		"ecchi.tempestfansub.com"
 	],
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/thumbnail.png",
+	"thumbnail": "https://imgur.com/24lwu3M.png",
 	"color": "#349eeb",
 	"category": "anime",
 	"tags": [
 		"anime",
 		"manga",
+		"ecchi",
 		"turk",
 		"türk",
 		"türkçe",
