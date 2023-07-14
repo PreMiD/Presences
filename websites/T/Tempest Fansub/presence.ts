@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
-	EcchiLogo = "https://i.imgur.com/BZ6HvrC.png",
+	EcchiLogo = "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/0.png",
 }
 presence.on("UpdateData", async () => {
 	const { pathname, hostname, href } = document.location,
