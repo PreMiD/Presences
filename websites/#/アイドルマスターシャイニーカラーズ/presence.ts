@@ -54,11 +54,10 @@ presence.on("UpdateData", async () => {
 			"/help": { details: "ヘルプを閲覧中" },
 			"/fesTours": { details: "フェスツアーズをプレイ中" },
 			"/fesToursConcert": { details: "フェスツアーズをプレイ中" },
-		};
-	const pathDetails = pathMap[pathname]?.details;
-	if (typeof pathDetails !== "undefined") {
-		presenceData.details = pathDetails;
-	} else if (pathname.includes("/idolAlbum/")) {
+		},
+		pathDetails = pathMap[pathname]?.details;
+	if (typeof pathDetails !== "undefined") presenceData.details = pathDetails;
+	else if (pathname.includes("/idolAlbum/")) {
 		const idolNames: string[] = [
 				"真乃",
 				"灯織",
