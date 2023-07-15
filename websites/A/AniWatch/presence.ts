@@ -28,7 +28,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.aniWatchLogo,
+			largeImageKey: Assets.AniWatchLogo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
@@ -211,13 +211,13 @@ presence.on("UpdateData", async () => {
 			}
 			case "/user/settings": {
 				presenceData.details = "Changing Settings";
-				presenceData.smallImageKey = Assets.settings;
+				presenceData.smallImageKey = Assets.Settings;
 
 				break;
 			}
 			case "/user/notification": {
 				presenceData.details = "Looking at Notifications";
-				presenceData.smallImageKey = Assets.notifications;
+				presenceData.smallImageKey = Assets.Notifications;
 
 				break;
 			}
