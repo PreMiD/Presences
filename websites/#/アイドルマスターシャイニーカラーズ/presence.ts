@@ -93,9 +93,8 @@ presence.on("UpdateData", async () => {
 	}
 	["ルビー", "有馬かな", "MEMちょ"].forEach((idolName, index) => {
 		const key = `/idolAlbum/${801 + index}`;
-		if (pathname === key) {
+		if (pathname === key)
 			presenceData.details = `${idolName}のアルバムを閲覧中`;
-		}
 	});
 	presence.setActivity(presenceData);
 });
