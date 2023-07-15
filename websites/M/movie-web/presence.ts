@@ -180,6 +180,15 @@ presence.on("UpdateData", async () => {
 				);
 			}
 
+			if (showWatchButton && !pathname.startsWith("/search")) {
+				presenceData.buttons = [
+					{
+						label: `Watch ${capitalize(media.meta.meta.type)}`,
+						url: href,
+					},
+				];
+			}
+
 			const title = `${media.meta.meta.title} (${media.meta.meta.year})`;
 			if (media.meta.meta.type === "series") {
 				const episodeData = media.episode,
@@ -233,6 +242,15 @@ presence.on("UpdateData", async () => {
 				);
 			}
 
+			if (showWatchButton && !pathname.startsWith("/search")) {
+				presenceData.buttons = [
+					{
+						label: `Watch ${capitalize(meta.meta.type)}`,
+						url: href,
+					},
+				];
+			}
+
 			const title = `${meta.meta.title} (${meta.meta.year})`;
 			if (meta.meta.type === "series" && episode) {
 				presenceData.details = `S${meta.meta.seasonData.number}E${
@@ -251,15 +269,6 @@ presence.on("UpdateData", async () => {
 				);
 			}
 		}
-	}
-
-	if (showWatchButton && !pathname.startsWith("/search")) {
-		presenceData.buttons = [
-			{
-				label: "Watch",
-				url: href,
-			},
-		];
 	}
 
 	if (!showTimestamp) delete presenceData.endTimestamp;
@@ -289,4 +298,8 @@ function createProgressBar(
 	return `${barFill.repeat(numChars)}${barTrack.repeat(
 		barLength - numChars
 	)}  ${showLabel ? `${progress}%` : ""}`.trimEnd();
+}
+
+function capitalize(str: string): string {
+	return str.charAt(0).toUpperCase() + str.slice(1);
 }
