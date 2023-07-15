@@ -91,8 +91,7 @@ presence.on("UpdateData", async () => {
 							.content
 					}`;
 					presenceData.largeImageKey =
-						episodeImage ===
-						"https://neko-sama.fr/images/default_thumbnail.png"
+						episodeImage === "https://neko-sama.fr/images/default_thumbnail.png"
 							? "nekosama-icon"
 							: episodeImage;
 					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
@@ -115,8 +114,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state =
 						document.querySelector("h1").firstChild.textContent;
 					presenceData.largeImageKey =
-						animeImage ===
-						"https://neko-sama.fr/images/default_thumbnail.png"
+						animeImage === "https://neko-sama.fr/images/default_thumbnail.png"
 							? "nekosama-icon"
 							: animeImage;
 					presenceData.buttons = [
