@@ -90,10 +90,9 @@ presence.on("UpdateData", async () => {
 		if (albumIndex >= 0 && albumIndex < idolNames.length)
 			presenceData.details = `${idolNames[albumIndex]}のアルバムを閲覧中`;
 	}
-	["ルビー", "有馬かな", "MEMちょ"].forEach((idolName, index) => {
-		const key = `/idolAlbum/${801 + index}`;
-		if (pathname === key)
+	for (const [index, idolName] of ["ルビー", "有馬かな", "MEMちょ"].entries()) {
+		if (pathname === `/idolAlbum/${801 + index}`)
 			presenceData.details = `${idolName}のアルバムを閲覧中`;
-	});
+	}
 	presence.setActivity(presenceData);
 });
