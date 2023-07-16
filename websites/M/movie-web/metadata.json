@@ -1,0 +1,80 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "705490775932403795",
+		"name": "jordaar"
+	},
+	"service": "movie-web",
+	"description": {
+		"en": "The place for your favorite movies & shows"
+	},
+	"url": "movie-web.app",
+	"regExp": "(dev[.])?(movie-web[.]app)",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/Ggwzwcv.png",
+	"thumbnail": "https://i.imgur.com/dbbJSUH.png",
+	"color": "#533670",
+	"category": "videos",
+	"tags": [
+		"movies",
+		"shows",
+		"anime",
+		"streaming",
+		"movie-web"
+	],
+	"settings": [
+		{
+			"id": "watch",
+			"title": "Show Watch Button",
+			"icon": "fad fa-eye",
+			"value": true
+		},
+		{
+			"id": "timestamp",
+			"title": "Show Timestamp",
+			"icon": "fad fa-timer",
+			"value": true
+		},
+		{
+			"id": "progress",
+			"title": "Show Progress Bar",
+			"icon": "fad fa-bars-progress",
+			"value": true
+		},
+		{
+			"id": "barLength",
+			"if": {
+				"progress" : true
+			},
+			"title": "Bar Length",
+			"value": "8",
+			"placeholder": "8"
+		},
+		{
+			"id": "barTrack",
+			"if": {
+				"progress" : true
+			},
+			"title": "Track Character",
+			"value": "▱",
+			"placeholder": "▱"
+		},
+		{
+			"id": "barFill",
+			"if": {
+				"progress" : true
+			},
+			"title": "Fill Character",
+			"value": "▰",
+			"placeholder": "▰"
+		},
+		{
+			"id": "showLabel",
+			"if": {
+				"progress" : true
+			},
+			"title": "Show Label",
+			"value": true
+		}
+	]
+}
