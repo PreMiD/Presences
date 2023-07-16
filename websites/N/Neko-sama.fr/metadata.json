@@ -4,7 +4,7 @@
 		"name": "Mokocchi",
 		"id": "503568040001273877"
 	},
-	"service": "Neko-sama",
+	"service": "Neko-sama.fr",
 	"description": {
 		"en": "Neko-sama is a VOSTFR and VF anime streaming website",
 		"fr": "Neko-sama est un site de streaming d'animes en VOSTFR et VF"
@@ -14,8 +14,8 @@
 		"neko-sama.fr"
 	],
 	"version": "1.0.8",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama/assets/thumbnail.png",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/thumbnail.png",
 	"color": "#1CB9F4",
 	"category": "anime",
 	"tags": [
