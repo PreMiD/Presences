@@ -10,9 +10,9 @@
 	},
 	"url": "movie-web.app",
 	"regExp": "(dev[.])?(movie-web[.]app)",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/Ggwzwcv.png",
-	"thumbnail": "https://i.imgur.com/dbbJSUH.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/thumbnail.png",
 	"color": "#533670",
 	"category": "videos",
 	"tags": [
@@ -44,7 +44,7 @@
 		{
 			"id": "barLength",
 			"if": {
-				"progress" : true
+				"progress": true
 			},
 			"title": "Bar Length",
 			"value": "8",
@@ -53,7 +53,7 @@
 		{
 			"id": "barTrack",
 			"if": {
-				"progress" : true
+				"progress": true
 			},
 			"title": "Track Character",
 			"value": "▱",
@@ -62,7 +62,7 @@
 		{
 			"id": "barFill",
 			"if": {
-				"progress" : true
+				"progress": true
 			},
 			"title": "Fill Character",
 			"value": "▰",
@@ -71,7 +71,7 @@
 		{
 			"id": "showLabel",
 			"if": {
-				"progress" : true
+				"progress": true
 			},
 			"title": "Show Label",
 			"value": true
