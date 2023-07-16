@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -21,7 +21,7 @@
 	},
 	"url": "music.amazon.com",
 	"regExp": "music[.]amazon([.][a-z]+)+[/]",
-	"version": "2.1.11",
+	"version": "2.1.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Music/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Music/assets/thumbnail.png",
 	"color": "#21293C",

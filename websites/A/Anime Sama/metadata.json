@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "RisingSunLight",
 		"id": "240521747852558347"
@@ -10,7 +10,7 @@
 		"fr": "Votre site de streaming préféré pour vos animes et scans sans pubs."
 	},
 	"url": "anime-sama.fr",
-	"version": "1.1.5",
+	"version": "1.1.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Sama/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Sama/assets/thumbnail.png",
 	"color": "#0063c0",

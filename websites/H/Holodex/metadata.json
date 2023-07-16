@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "creeperkafasipw",
 		"id": "442685489833705483"
@@ -12,7 +12,7 @@
 		"staging.holodex.net",
 		"holodex.net"
 	],
-	"version": "1.0.18",
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/thumbnail.png",
 	"color": "#64b5f6",
@@ -22,11 +22,17 @@
 		"hololive"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*",
+	"iFrameRegExp": "(.*[.])?(youtube)([.].*)",
 	"settings": [
 		{
 			"id": "lang",
 			"multiLanguage": "true"
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
 		}
 	]
 }

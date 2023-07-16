@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "marzeq",
 		"id": "500669086947344384"
@@ -11,7 +11,7 @@
 	},
 	"url": "readthedocs.io",
 	"regExp": "([a-z0-9-]+[.])*readthedocs[.](io|org)[/]?",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Read%20the%20Docs/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Read%20the%20Docs/assets/thumbnail.png",
 	"color": "#404A50",

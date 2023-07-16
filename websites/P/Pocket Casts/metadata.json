@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "ry",
 		"id": "421371986824921109"
@@ -10,7 +10,7 @@
 		"nl": "Alle functies die je nodig hebt in een podcasting-app zonder een opgeblazen gevoel. Podcast luisteren is op 11 gezet."
 	},
 	"url": "play.pocketcasts.com",
-	"version": "1.2.21",
+	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pocket%20Casts/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pocket%20Casts/assets/thumbnail.png",
 	"color": "#F43E37",

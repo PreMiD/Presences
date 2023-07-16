@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "tuhana",
 		"id": "852582281112715284"
@@ -11,7 +11,7 @@
 		"tr": "OMGUbuntu!, Ubuntu ve ilgili faaliyetleri kapsayan çevrimiçi bir haber sitesidir."
 	},
 	"url": "www.omgubuntu.co.uk",
-	"version": "1.1.14",
+	"version": "1.1.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OMG%20Ubuntu/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OMG%20Ubuntu/assets/thumbnail.png",
 	"color": "#FF9900",

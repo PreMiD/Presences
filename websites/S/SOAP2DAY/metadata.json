@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "fun",
 		"id": "217348698294714370"
@@ -25,7 +25,7 @@
 		"s2dfree.de",
 		"s2dfree.is"
 	],
-	"version": "3.0.6",
+	"version": "3.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SOAP2DAY/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SOAP2DAY/assets/thumbnail.png",
 	"color": "#9eeae7",

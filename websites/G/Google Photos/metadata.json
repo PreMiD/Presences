@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -10,7 +10,7 @@
 		"vi_VN": "Google Photos là nơi cho tất cả các bức ảnh và video của bạn, được tự động sắp xếp và dễ dàng chia sẻ"
 	},
 	"url": "photos.google.com",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Photos/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Photos/assets/thumbnail.jpg",
 	"color": "#FFFFFF",

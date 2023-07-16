@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "RisingSunLight",
 		"id": "240521747852558347"
@@ -27,7 +27,7 @@
 	},
 	"url": "www.pixiv.net",
 	"regExp": "([a-z0-9-]+[.])*pixiv[.]net[/]",
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/pixiv/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/pixiv/assets/thumbnail.png",
 	"color": "#009cff",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -17,7 +17,7 @@
 		"vi_VN": "TikTok - xu hướng bắt đầu tại đây. Trên thiết bị hay trên web, người dùng có thể xem và khám phá hàng triệu các video ngắn được cá nhân hoá."
 	},
 	"url": "www.tiktok.com",
-	"version": "2.2.16",
+	"version": "2.2.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TikTok/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TikTok/assets/thumbnail.png",
 	"color": "#000000",

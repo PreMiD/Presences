@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Tellen",
 		"id": "535214819520020510"
@@ -18,7 +18,7 @@
 	},
 	"url": "www.hentaiworld.eu",
 	"regExp": "([a-z0-9-]+[.])*hentaiworld([.][a-z]+)+[/]",
-	"version": "2.4.18",
+	"version": "2.4.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiWorld/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiWorld/assets/thumbnail.png",
 	"color": "#dd1f26",

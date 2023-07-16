@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Vasilis",
 		"id": "241929388403195914"
@@ -11,7 +11,7 @@
 		"vi_VN": "Dịch vụ COSMOTE TV OTT mới nhất nâng cấp trải nghiệm TV của bạn với các tính năng mới, lật mở lượng nội dung không thể địch nổi của COSMOTE TV."
 	},
 	"url": "www.cosmotetvott.gr",
-	"version": "2.0.5",
+	"version": "2.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Cosmote%20TV/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Cosmote%20TV/assets/thumbnail.png",
 	"color": "#14D900",

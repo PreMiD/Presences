@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Giingu",
 		"id": "156481332652802048"
@@ -24,7 +24,7 @@
 		"animeflv.ac",
 		"animeflv.ru"
 	],
-	"version": "1.1.27",
+	"version": "1.1.28",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeFLV/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeFLV/assets/thumbnail.png",
 	"color": "#694ba1",

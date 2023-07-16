@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "272665050672660501",
 		"name": "Shiroko"
@@ -11,10 +11,10 @@
 	},
 	"url": [
 		"tempestfansub.com",
-		"manga.tempestfansub.com",
-		"tempestscans.com"
+		"anime.tempestfansub.com",
+		"ecchi.tempestfansub.com"
 	],
-	"version": "1.0.7",
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/thumbnail.png",
 	"color": "#349eeb",
@@ -22,6 +22,7 @@
 	"tags": [
 		"anime",
 		"manga",
+		"ecchi",
 		"turk",
 		"türk",
 		"türkçe",

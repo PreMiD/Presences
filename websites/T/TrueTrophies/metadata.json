@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +10,7 @@
 		"nl": "TrueTrophies is de plaats voor Playstation nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer."
 	},
 	"url": "www.truetrophies.com",
-	"version": "1.0.19",
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TrueTrophies/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TrueTrophies/assets/thumbnail.png",
 	"color": "#2e94d8",

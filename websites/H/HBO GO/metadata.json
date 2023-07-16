@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "PreMiD",
 		"id": "503557087041683458"
@@ -26,7 +26,7 @@
 		"www.hbogoasia.id",
 		"www.hbogoasia.ph"
 	],
-	"version": "2.3.5",
+	"version": "2.3.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20GO/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20GO/assets/thumbnail.png",
 	"color": "#011921",

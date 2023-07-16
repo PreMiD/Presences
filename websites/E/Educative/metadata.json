@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "sexnine",
 		"id": "807958370887270400"
@@ -12,7 +12,7 @@
 		"educative.io",
 		"www.educative.io"
 	],
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Educative/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Educative/assets/thumbnail.png",
 	"color": "#5553ff",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Slowftw",
 		"id": "325046217904226306"
@@ -17,7 +17,7 @@
 		"vi_VN": "Anihub và trang web Brazil cung cấp nội dung anime miễn phí, cả trực tuyến lẫn ngoại tuyến mà không kèm quảng cáo gây khó chịu."
 	},
 	"url": "anihub.tv",
-	"version": "1.2.17",
+	"version": "1.2.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anihub/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anihub/assets/thumbnail.png",
 	"color": "#1997C6",

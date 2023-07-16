@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -18,7 +18,7 @@
 		"nl": "Yahoo! Mail is een e-maildienst die in 1997 werd gelanceerd via het Amerikaanse moederbedrijf Yahoo !. Yahoo Mail biedt vier verschillende e-mailplannen: drie voor persoonlijk gebruik en één voor bedrijven. In december 2011 was Yahoo! Mail had 281 miljoen gebruikers en is daarmee de op twee na grootste webgebaseerde e-maildienst ter wereld."
 	},
 	"url": "mail.yahoo.com",
-	"version": "1.2.6",
+	"version": "1.2.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yahoo%20Mail/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yahoo%20Mail/assets/thumbnail.png",
 	"color": "#6923D1",

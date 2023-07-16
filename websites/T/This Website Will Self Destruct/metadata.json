@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -9,7 +9,7 @@
 		"en": "A place to write what you're feeling. If no new messages are received for 24 hours, the site will go away."
 	},
 	"url": "www.thiswebsitewillselfdestruct.com",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/This%20Website%20Will%20Self%20Destruct/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/This%20Website%20Will%20Self%20Destruct/assets/thumbnail.png",
 	"color": "#222222",

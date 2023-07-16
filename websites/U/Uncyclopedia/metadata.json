@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "fror",
 		"id": "515668127829458945"
@@ -94,7 +94,7 @@
 		"uncyclopedia.ca",
 		"desciclopedia.ws"
 	],
-	"version": "1.4.19",
+	"version": "1.4.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/Uncyclopedia/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/Uncyclopedia/assets/thumbnail.png",
 	"color": "#A1825C",

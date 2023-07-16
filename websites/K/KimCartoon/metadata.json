@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +10,7 @@
 		"nl": "Officiële website van KimCartoon. Bekijk cartoon gratis online in HD."
 	},
 	"url": "kimcartoon.si",
-	"version": "1.1.21",
+	"version": "1.1.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KimCartoon/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KimCartoon/assets/thumbnail.png",
 	"color": "#fdf5ad",

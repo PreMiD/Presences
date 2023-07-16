@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "Tellen",
 		"id": "535214819520020510"
@@ -20,7 +20,7 @@
 		"mangaworld.in",
 		"www.mangaworld.in"
 	],
-	"version": "3.0.16",
+	"version": "3.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/thumbnail.png",
 	"color": "#EE6C4D",

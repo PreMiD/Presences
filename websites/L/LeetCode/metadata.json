@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "54skyxenon",
 		"id": "272870098031869964"
@@ -10,7 +10,7 @@
 		"nl": "Verbeter uw codeervaardigheden en krijg snel een baan. Dit is de beste plek om uw kennis uit te breiden en u voor te bereiden op uw volgende sollicitatiegesprek."
 	},
 	"url": "leetcode.com",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LeetCode/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LeetCode/assets/thumbnail.png",
 	"color": "#f1a21a",

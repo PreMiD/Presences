@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "SlowLife",
 		"id": "374905512661221377"
@@ -10,7 +10,7 @@
 		"nl": "Radiooooo - De muzikale tijdmachine."
 	},
 	"url": "radiooooo.com",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Radiooooo/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Radiooooo/assets/thumbnail.jpg",
 	"color": "#108cb4",

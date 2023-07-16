@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.8",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "263735224221827072",
 		"name": "AlperShal"
@@ -7,13 +7,14 @@
 	"service": "Songsterr",
 	"description": {
 		"en": "Songsterr is one of the most popular sites to find and play guitar or any instrument's tabs.",
-		"tr": "Songsterr gitar ya da herhangi bir çalgının tablarını bulmak ya da çalmak için en popüler sitelerden birisi."
+		"tr": "Songsterr gitar ya da herhangi bir çalgının tablarını bulmak ya da çalmak için en popüler sitelerden birisi.",
+		"pl": "Songsterr to jedna z najpopularniejszych witryn do znajdowania i grania na gitarze lub tabsy dla dowolnego instrumentu"
 	},
 	"url": [
 		"www.songsterr.com",
 		"songsterr.com"
 	],
-	"version": "1.0.3",
+	"version": "1.0.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Songsterr/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Songsterr/assets/thumbnail.png",
 	"color": "#138CF6",
