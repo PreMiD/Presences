@@ -206,19 +206,16 @@ presence.on("UpdateData", async () => {
 					.textContent.substring(3);
 				presenceData.details = `Viewing profile ${username}`;
 				presenceData.smallImageKey = Assets.Viewing;
-
 				break;
 			}
 			case "/user/settings": {
 				presenceData.details = "Changing Settings";
 				presenceData.smallImageKey = Assets.Settings;
-
 				break;
 			}
 			case "/user/notification": {
 				presenceData.details = "Looking at Notifications";
 				presenceData.smallImageKey = Assets.Notifications;
-
 				break;
 			}
 			case "/user/watch-list": {
@@ -230,7 +227,6 @@ presence.on("UpdateData", async () => {
 				);
 
 				presenceData.state = title.textContent;
-
 				break;
 			}
 			case "/user/continue-watching": {
