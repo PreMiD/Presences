@@ -293,11 +293,15 @@ presence.on("UpdateData", async () => {
 		const finalPlaylistTitle = document.querySelector(
 				"#header-description > h3:nth-child(1) > yt-formatted-string > a"
 			).textContent,
-			finalPlaylistQueue = `${document.querySelector(
-				"#publisher-container > div > yt-formatted-string > span:nth-child(1)"
-			)} / ${document.querySelector(
-				"#publisher-container > div > yt-formatted-string > span:nth-child(3)"
-			)}`;
+			finalPlaylistQueue = `${
+				document.querySelector(
+					"#publisher-container > div > yt-formatted-string > span:nth-child(1)"
+				).textContent
+			} / ${
+				document.querySelector(
+					"#publisher-container > div > yt-formatted-string > span:nth-child(3)"
+				).textContent
+			}`;
 
 		//* YouTube Movies
 		if (
