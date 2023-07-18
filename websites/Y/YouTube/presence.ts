@@ -290,8 +290,14 @@ presence.on("UpdateData", async () => {
 				!title || title.textContent.replace(/\s+/g, "") === ""
 					? document.querySelector("div.ytp-title-text > a").textContent
 					: title.textContent;
-		const finalPlaylistTitle = document.querySelector("#header-description > h3:nth-child(1) > yt-formatted-string > a").textContent,
-			finalPlaylistQueue = `${document.querySelector("#publisher-container > div > yt-formatted-string > span:nth-child(1)")} / ${document.querySelector("#publisher-container > div > yt-formatted-string > span:nth-child(3)")}`;
+		const finalPlaylistTitle = document.querySelector(
+				"#header-description > h3:nth-child(1) > yt-formatted-string > a"
+			).textContent,
+			finalPlaylistQueue = `${document.querySelector(
+				"#publisher-container > div > yt-formatted-string > span:nth-child(1)"
+			)} / ${document.querySelector(
+				"#publisher-container > div > yt-formatted-string > span:nth-child(3)"
+			)}`;
 
 		//* YouTube Movies
 		if (
@@ -339,8 +345,8 @@ presence.on("UpdateData", async () => {
 				details: vidDetail
 					.replace("%title%", finalTitle.trim())
 					.replace("%uploader%", finalUploader.trim())
-					.replace("%playlistTitle%", finalPlaylistTitle?.trim())
-					.replace("%playlistQueue%", finalPlaylistQueue?.trim()),
+					.replace("%playlistTitle%", finalPlaylistTitle.trim())
+					.replace("%playlistQueue%", finalPlaylistQueue.trim()),
 				state: vidState
 					.replace("%title%", finalTitle.trim())
 					.replace("%uploader%", finalUploader.trim()),
