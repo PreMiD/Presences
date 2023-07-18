@@ -1,6 +1,7 @@
 const presence = new Presence({
-	clientId: "804448815942860821",
-});
+		clientId: "804448815942860821",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
 	return presence.getStrings(
@@ -38,10 +39,7 @@ function fullURL(cover: string, hostname: string) {
 	else return Assets.Logo;
 }
 
-let iFrameVideo: boolean,
-	videoPaused: boolean,
-	startTimestamp: number,
-	endTimestamp: number;
+let iFrameVideo: boolean, videoPaused: boolean, endTimestamp: number;
 
 presence.on(
 	"iFrameData",
@@ -60,14 +58,15 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,
 		[privacy, thumbnails, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("thumbnails"),
 			presence.getSetting<boolean>("buttons"),
-		]);
-	let strings = await getStrings();
+		]),
+		strings = await getStrings();
 
 	switch (true) {
 		case pathname === "/": {
@@ -81,7 +80,7 @@ presence.on("UpdateData", async () => {
 		case pathname.includes("/series-online/"): {
 			const isSeries = pathname.includes("/series-online/")
 					? true
-					: !!document.querySelector('[class="select-season"]')
+					: document.querySelector('[class="select-season"]')
 					? true
 					: false,
 				title = document.querySelector('[class="Title"]')?.textContent,
@@ -112,6 +111,7 @@ presence.on("UpdateData", async () => {
 					hostname
 				);
 			if (iFrameVideo) {
+				delete presenceData.startTimestamp;
 				presenceData.details = !privacy
 					? title.replace(episodeNumber, "")
 					: isSeries
@@ -126,9 +126,8 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = videoPaused
 					? strings.pause
 					: strings.play;
-				if (!videoPaused) {
-					presenceData.endTimestamp = endTimestamp;
-				}
+				if (!videoPaused) presenceData.endTimestamp = endTimestamp;
+
 				if (buttons) {
 					presenceData.buttons = isSeries
 						? [{ label: strings.buttonViewEpisode, url: href }]
