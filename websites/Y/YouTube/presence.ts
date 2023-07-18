@@ -349,7 +349,9 @@ presence.on("UpdateData", async () => {
 					.replace("%playlistQueue%", finalPlaylistQueue.trim()),
 				state: vidState
 					.replace("%title%", finalTitle.trim())
-					.replace("%uploader%", finalUploader.trim()),
+					.replace("%uploader%", finalUploader.trim())
+					.replace("%playlistTitle%", finalPlaylistTitle.trim())
+					.replace("%playlistQueue%", finalPlaylistQueue.trim()),
 				largeImageKey:
 					unlistedVideo || logo === 0 || pfp === ""
 						? Assets.Logo
