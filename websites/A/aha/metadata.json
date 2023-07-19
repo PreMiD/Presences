@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "993170607841746974",
+		"name": "பில்லி கசாப்புக்காரன்"
+	},
+	"service": "aha",
+	"description": {
+		"en": "aha is an Indian over-the-top streaming service which offers Telugu and Tamil-language content. It is owned by Arha Media & Broadcasting Private Limited, a joint venture between Geetha Arts and My Home Group"
+	},
+	"url": "www.aha.video",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/GJC1qSm.png",
+	"thumbnail": "https://i.imgur.com/0pCatIT.png",
+	"color": "#ffa500",
+	"category": "videos",
+	"tags": [
+		"aha",
+		"tamil",
+		"telungu",
+		"ott",
+		"ahaott"
+	]
+}
