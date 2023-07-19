@@ -9,14 +9,15 @@
 		"en": "AniWatch.to - A site to watch anime online for Free"
 	},
 	"url": "aniwatch.to",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/LvFXasi.png",
 	"thumbnail": "https://i.imgur.com/TAc6lvS.png",
 	"color": "#ffdd95",
 	"category": "anime",
 	"tags": [
 		"anime"
-	],"iframe": true,
+	],
+	"iframe": true,
 	"iFrameRegExp": ".*",
 	"settings": [
 		{
