@@ -58,6 +58,13 @@ presence.on("UpdateData", async () => {
 							document.querySelector(".seasons.swiper-wrapper").children
 						).findIndex(x => x.className.includes(" active")) + 1
 				  )
+				: document
+						.querySelector('[class="inner active"]')
+						.querySelector('[class="title"]')?.textContent
+				? document
+						.querySelector('[class="inner active"]')
+						.querySelector('[class="title"]')
+						?.textContent.match(/[0-9]*/gm)[0]
 				: "",
 			episodeNumber =
 				document
@@ -68,15 +75,16 @@ presence.on("UpdateData", async () => {
 					?.textContent?.match(/[1-9]{1}[0-9]{0,}/)?.[0] ??
 				document
 					.querySelector('[class="item ep-item active"]')
-					?.textContent?.match(/[1-9]{1}[0-9]{0,}/)?.[0],
+					?.textContent?.match(/[1-9]{1}[0-9]{0,}/)?.[0] ??
+				pathname.split("-")[1],
 			episodeName = document.querySelector(
 				"li > a.active > .d-title"
 			)?.textContent;
 
 		presenceData.details =
+			document.querySelector('h1[class="title"]')?.textContent ??
 			document.querySelector("#w-info .title")?.textContent ??
 			document.querySelector('[class="film-name dynamic-name"]')?.textContent ??
-			document.querySelector('[class="title"]')?.textContent ??
 			"Undefined";
 		presenceData.state =
 			seasonNumber && episodeNumber
