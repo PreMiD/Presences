@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/GJC1qSm.png",
+	Logo = "https://i.imgur.com/h4dMiyw.png",
 }
 const getVideoStatus = (
 		presenceData: PresenceData,
@@ -44,60 +44,60 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname } = document.location;
 
-	switch (pathname) {
-		case "/": {
+	switch (true) {
+		case pathname === "/": {
 			presenceData.details = "Viewing home page";
 			break;
 		}
-		case "/movies": {
+		case pathname === "/movies": {
 			presenceData.details = "Browsing movies";
 			break;
 		}
-		case "/shows": {
+		case pathname === "/shows": {
 			presenceData.details = "Browsing shows";
 			break;
 		}
-		case "/my-aha": {
+		case pathname === "/my-aha": {
 			presenceData.details = "Viewing watch list";
 			break;
 		}
-		default:
-			if (pathname.startsWith("/movie")) {
-				presenceData.details = `Viewing ${
-					document.querySelector("h1.title").textContent
-				}`;
-			} else if (pathname.startsWith("/player/movie"))
-				setPresenceStatus(presenceData);
-			else if (pathname.startsWith("/player/trailer"))
-				setPresenceStatus(presenceData);
-			else if (
-				pathname.startsWith("/webepisode") ||
-				pathname.startsWith("/webseries")
-			) {
-				presenceData.details = `Viewing ${
-					document.querySelector("h1.title").textContent
-				}`;
-			} else if (
-				pathname.startsWith("/player/webepisode") ||
-				pathname.startsWith("/player/webseries")
-			) {
-				const currentPresenceData = getVideoStatus(
-						presenceData,
-						document.querySelector<HTMLVideoElement>("video")
-					),
-					title = document.querySelector(
-						"div.player-title > span.player-label-title"
-					).textContent,
-					subtitle = document.querySelector(
-						"div.player-title > span.player-label-title__subtitle"
-					).textContent;
-				currentPresenceData.details = "Watching";
+		case pathname.startsWith("/movie"): {
+			presenceData.details = `Viewing ${
+				document.querySelector("h1.title").textContent
+			}`;
+			break;
+		}
+		case pathname.startsWith("/player/movie"):
+			setPresenceStatus(presenceData);
+			break;
+		case pathname.startsWith("/webepisode") ||
+			pathname.startsWith("/webseries"): {
+			presenceData.details = `Viewing ${
+				document.querySelector("h1.title").textContent
+			}`;
+			break;
+		}
+		case pathname.startsWith("/player/webepisode") ||
+			pathname.startsWith("/player/webseries"): {
+			const currentPresenceData = getVideoStatus(
+					presenceData,
+					document.querySelector<HTMLVideoElement>("video")
+				),
+				title = document.querySelector(
+					"div.player-title > span.player-label-title"
+				).textContent,
+				subtitle = document.querySelector(
+					"div.player-title > span.player-label-title__subtitle"
+				).textContent;
+			currentPresenceData.details = "Watching";
 
-				currentPresenceData.state = subtitle ? `${title} | ${subtitle}` : title;
-			} else if (pathname.includes("/account"))
-				presenceData.details = "Viewing account details";
+			currentPresenceData.state = subtitle ? `${title} | ${subtitle}` : title;
+			break;
+		}
+		case pathname.includes("/account"):
+			presenceData.details = "Viewing account details";
+			break;
 	}
-
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
