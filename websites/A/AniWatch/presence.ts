@@ -10,9 +10,9 @@ let data: {
 } = null;
 
 const enum Assets {
-	AniWatchLogo = "https://i.imgur.com/0x3NWRV.png",
-	Settings = "https://i.imgur.com/AuOsdzi.png",
-	Notifications = "https://i.imgur.com/TjzBYj9.png",
+	AniWatchLogo = "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/0.png",
+	Settings = "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/1.png",
+	Notifications = "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/2.png",
 }
 
 presence.on(
