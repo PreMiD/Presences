@@ -290,18 +290,21 @@ presence.on("UpdateData", async () => {
 				!title || title.textContent.replace(/\s+/g, "") === ""
 					? document.querySelector("div.ytp-title-text > a").textContent
 					: title.textContent;
-		const finalPlaylistTitle = document.querySelector(
-				"#header-description > h3:nth-child(1) > yt-formatted-string > a"
-			).textContent,
-			finalPlaylistQueue = `${
+		const finalPlaylistTitle =
 				document.querySelector(
-					"#publisher-container > div > yt-formatted-string > span:nth-child(1)"
-				).textContent
-			} / ${
-				document.querySelector(
-					"#publisher-container > div > yt-formatted-string > span:nth-child(3)"
-				).textContent
-			}`;
+					"#content #header-description > h3:nth-child(1) > yt-formatted-string > a"
+				)?.textContent ?? "",
+			finalPlaylistQueue = finalPlaylistTitle
+				? `${
+						document.querySelector(
+							"#content #publisher-container > div > yt-formatted-string > span:nth-child(1)"
+						).textContent
+				  } / ${
+						document.querySelector(
+							"#content #publisher-container > div > yt-formatted-string > span:nth-child(3)"
+						).textContent
+				  }`
+				: "";
 
 		//* YouTube Movies
 		if (
