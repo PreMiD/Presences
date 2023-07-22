@@ -152,7 +152,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showLabel"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/Ggwzwcv.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
 		};
 
 	if (subdomain === "dev") {
@@ -200,7 +201,8 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = title;
 
 			if (state.mediaPlaying.isFirstLoading) {
-				presenceData.smallImageKey = "https://i.imgur.com/lBCZWIB.gif";
+				presenceData.smallImageKey =
+					"https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/0.gif";
 				presenceData.smallImageText = "Loading";
 			} else if (state.mediaPlaying.isPlaying) {
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
@@ -261,7 +263,8 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = title;
 
 			if (mediaPlaying.isFirstLoading) {
-				presenceData.smallImageKey = "https://i.imgur.com/lBCZWIB.gif";
+				presenceData.smallImageKey =
+					"https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/0.gif";
 				presenceData.smallImageText = "Loading";
 			} else {
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
