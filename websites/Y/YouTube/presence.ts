@@ -290,18 +290,6 @@ presence.on("UpdateData", async () => {
 				!title || title.textContent.replace(/\s+/g, "") === ""
 					? document.querySelector("div.ytp-title-text > a").textContent
 					: title.textContent;
-		const finalPlaylistTitle = document.querySelector(
-				"#header-description > h3:nth-child(1) > yt-formatted-string > a"
-			).textContent,
-			finalPlaylistQueue = `${
-				document.querySelector(
-					"#publisher-container > div > yt-formatted-string > span:nth-child(1)"
-				).textContent
-			} / ${
-				document.querySelector(
-					"#publisher-container > div > yt-formatted-string > span:nth-child(3)"
-				).textContent
-			}`;
 
 		//* YouTube Movies
 		if (
@@ -348,14 +336,10 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details: vidDetail
 					.replace("%title%", finalTitle.trim())
-					.replace("%uploader%", finalUploader.trim())
-					.replace("%playlistTitle%", finalPlaylistTitle.trim())
-					.replace("%playlistQueue%", finalPlaylistQueue.trim()),
+					.replace("%uploader%", finalUploader.trim()),
 				state: vidState
 					.replace("%title%", finalTitle.trim())
-					.replace("%uploader%", finalUploader.trim())
-					.replace("%playlistTitle%", finalPlaylistTitle.trim())
-					.replace("%playlistQueue%", finalPlaylistQueue.trim()),
+					.replace("%uploader%", finalUploader.trim()),
 				largeImageKey:
 					unlistedVideo || logo === 0 || pfp === ""
 						? Assets.Logo
