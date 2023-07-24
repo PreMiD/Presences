@@ -52,7 +52,11 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey =
 				document
 					.querySelector("meta[property='og:image']")
-					?.getAttribute("content") ?? Assets.Logo;
+					?.getAttribute("content") ??
+				document
+					.querySelector('[class="poster"] > [itemprop="image"]')
+					?.getAttribute("src") ??
+				Assets.Logo;
 		}
 		if (iFrameData && !iFrameData.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestamps(
@@ -78,7 +82,11 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey =
 				document
 					.querySelector("meta[property='og:image']")
-					?.getAttribute("content") ?? Assets.Logo;
+					?.getAttribute("content") ??
+				document
+					.querySelector('[class="poster"] > [itemprop="image"]')
+					?.getAttribute("src") ??
+				Assets.Logo;
 		}
 		if (iFrameData && !iFrameData.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestamps(
