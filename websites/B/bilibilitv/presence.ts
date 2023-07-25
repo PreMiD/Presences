@@ -41,12 +41,9 @@ presence.on("UpdateData", async () => {
 		),
 		thumbnail =
 			document
-				.querySelector(".player-mobile-video-wrap > video")
-				?.getAttribute("poster")
-				?.split("@")[0] ||
-			document
 				.querySelector<HTMLMetaElement>('meta[property="og:image"]')
-				.content.split("?")[0];
+				?.content?.split("?")?.[0] ??
+			"https://cdn.rcd.gg/PreMiD/websites/B/bilibilitv/assets/logo.png";
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
