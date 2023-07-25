@@ -1,12 +1,6 @@
 const presence = new Presence({
-		clientId: "802964241179082822",
-	}),
-	nextEpisodeElement = document.querySelector<HTMLDivElement>(
-		"div#sidebar-anime-info > div.border.rounded.mb-3.p-3:nth-child(2) > div:nth-child(1) > a.ka-url-wrapper"
-	),
-	previousEpisodeElement = document.querySelector<HTMLDivElement>(
-		"div#sidebar-anime-info > div.border.rounded.mb-3.p-3:nth-child(2) > div:nth-child(2) > a.ka-url-wrapper"
-	);
+	clientId: "802964241179082822",
+});
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/logo.png",
 }
@@ -53,8 +47,6 @@ presence.on(
 	}) => {
 		video = data;
 		playback = video.duration !== null ? true : false;
-
-		if (playback) ({ currentTime, duration, paused } = video);
 
 		if (lastPlaybackState !== playback) {
 			lastPlaybackState = playback;
