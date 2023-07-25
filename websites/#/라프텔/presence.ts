@@ -6,7 +6,7 @@ let prevData = "";
 
 let AnimeData: Detail = {};
 
-let AnimeDataEpisode: Episode | any = {};
+let AnimeDataEpisode: Episode = {};
 
 type Detail = {
 	id?: string;
@@ -22,8 +22,10 @@ type Detail = {
 };
 
 type Episode = {
+	id?: string;
 	title?: string;
 	subject?: string;
+	episode_num?: string;
 };
 
 function getQuery() {
@@ -118,7 +120,9 @@ presence.on("UpdateData", async () => {
 				).json();
 			}
 
-			if ((AnimeData = {})) {
+			console.log(AnimeData);
+
+			if (!AnimeData.id) {
 				AnimeData = await (
 					await fetch(
 						`https://laftel.net/api/v1.0/items/${
