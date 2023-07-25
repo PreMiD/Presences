@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "868016688090710067",
+		"name": "remuring_"
+	},
+	"service": "라프텔",
+	"description": {
+		"en": "Korean animation OTT streaming service."
+	},
+	"url": "laftel.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/2ew5h9U.jpg",
+	"thumbnail": "https://i.imgur.com/u227QRb.jpg",
+	"color": "#816BFF",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"videos"
+	]
+}
