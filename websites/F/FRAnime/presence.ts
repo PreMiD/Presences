@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.endTimestamp;
 
 		// player is loaded
-	} else if (document.querySelector("video")) {
+	} else if (document.querySelectorAll("video")) {
 		const video = document.querySelector("video"),
 			[startTimestamp, endTimestamp] = presence.getTimestampsfromMedia(video);
 
