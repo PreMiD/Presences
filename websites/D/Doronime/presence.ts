@@ -8,13 +8,14 @@ const presence = new Presence({
 	};
 
 presence.on("UpdateData", async () => {
-	const capitalize = (str: string[]) =>
-		str.map(x => x[0].toUpperCase() + x.slice(1)).join(" ");
+	const trim = (str: string) => str.trim();
 
 	if (document.location.search.startsWith("?s"))
 		presenceData.details = "Searching Anime";
 
-	const [base, ...data] = document.location.pathname.slice(1).split("/");
+	const { href, pathname } = document.location,
+		[base, ...data] = pathname.slice(1).split("/");
+
 	switch (base) {
 		case "batch":
 			presenceData.details = "Viewing Anime Batch List";
@@ -27,25 +28,21 @@ presence.on("UpdateData", async () => {
 			break;
 		case "anime":
 			if (data.length) {
-				const title = document
-					.querySelector(".Content__title")
-					.textContent.replace(/\[Batch\]|Subtitle Indonesia/g, "")
-					.split("Episode")[0]
-					.trim();
-				presenceData.details =
-					document.location.pathname.slice(1).split("/").length === 2
-						? "Viewing Anime Info"
-						: title;
+				presenceData.details = trim(
+					document.querySelector("[aria-current='page']")
+						?.previousElementSibling?.textContent ??
+						document
+							.querySelector("h5[class='Content__title']")
+							?.textContent?.replace(
+								/(Episode [0-9]+)|(Subtitle Indonesia)/gm,
+								""
+							)
+				);
 				presenceData.state =
-					document.location.pathname.slice(1).split("/").length === 2
-						? title
-						: capitalize(
-								document.location.pathname
-									.slice(1)
-									.split("/")[2]
-									.replace("bd-", "")
-									.split("-")
-						  );
+					document.querySelector('[aria-current="page"]')?.textContent ??
+					document
+						.querySelector('h5[class="Content__title"]')
+						?.textContent?.match(/Episode [0-9]+/gm)?.[0];
 			} else presenceData.details = "Viewing Anime List";
 			break;
 		case "ost":
@@ -69,41 +66,41 @@ presence.on("UpdateData", async () => {
 		case "genre":
 			if (data.length) {
 				presenceData.details = "Viewing Anime Genre";
-				presenceData.state = document.querySelector(
-					".Content__tabs > div > span"
-				).textContent;
+				presenceData.state = trim(
+					document.querySelector('[aria-current="page"]')?.textContent
+				);
 			} else presenceData.details = "Viewing Anime Genre List";
 			break;
 		case "season":
 			if (data.length) {
 				presenceData.details = "Viewing Anime Season";
-				presenceData.state = document.querySelector(
-					".Content__tabs > div > span"
-				).textContent;
+				presenceData.state = trim(
+					document.querySelector('[aria-current="page"]')?.textContent
+				);
 			} else presenceData.details = "Viewing Anime Season List";
 			break;
 		case "artist":
 			if (data.length) {
 				presenceData.details = "Viewing OST Artist";
-				presenceData.state = document.querySelector(
-					".Content__tabs > div > span"
-				).textContent;
+				presenceData.state = trim(
+					document.querySelector('[aria-current="page"]')?.textContent
+				);
 			} else presenceData.details = "Viewing Artist List";
 			break;
 		case "producer":
 			if (data.length) {
 				presenceData.details = "Viewing Anime Producer";
-				presenceData.state = document.querySelector(
-					".Content__tabs > div > span"
-				).textContent;
+				presenceData.state = trim(
+					document.querySelector('[aria-current="page"]')?.textContent
+				);
 			} else presenceData.details = "Viewing Anime Producer List";
 			break;
 		case "studio":
 			if (data.length) {
 				presenceData.details = "Viewing Anime Studio";
-				presenceData.state = document.querySelector(
-					".Content__tabs > div > span"
-				).textContent;
+				presenceData.state = trim(
+					document.querySelector('[aria-current="page"]')?.textContent
+				);
 			} else presenceData.details = "Viewing Anime Studio List";
 			break;
 		default:
@@ -119,7 +116,7 @@ presence.on("UpdateData", async () => {
 					? "View OST"
 					: "Visit Doronime"
 				: "Visit Doronime",
-			url: document.location.href,
+			url: href,
 		},
 	];
 	presence.setActivity(presenceData);
