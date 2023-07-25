@@ -2,8 +2,8 @@ const presence = new Presence({
 	clientId: "1133347072200949770",
 });
 
-let prevData = "";
-let AnimeData: Detail = {},
+let prevData = "",
+	AnimeData: Detail = {},
 	AnimeDataEpisode: Episode = {};
 
 type Detail = {
