@@ -15,10 +15,10 @@ type Detail = {
 	is_ending?: boolean;
 	animation_info?: {
 		air_year_quarter?: string;
-	},
+	};
 	meta_info?: {
 		avg_rating?: string;
-	},
+	};
 };
 
 type Episode = {
@@ -37,26 +37,25 @@ function getQuery() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:"https://i.imgur.com/PDh4ncE.jpg",
+		largeImageKey: "https://i.imgur.com/PDh4ncE.jpg",
 	};
 
 	if (window.location.pathname === "/") {
 		presenceData.smallImageKey = Assets.Search;
-		presenceData.smallImageText = "둘러보는중"
+		presenceData.smallImageText = "둘러보는중";
 		presenceData.details = "홈";
-	}
-	else if (window.location.pathname.startsWith("/search")) {
+	} else if (window.location.pathname.startsWith("/search")) {
 		presenceData.details = "라프텔 검색";
 		presenceData.smallImageKey = Assets.Search;
-		presenceData.smallImageText = "검색중"
+		presenceData.smallImageText = "검색중";
 		presenceData.state = `"${getQuery().keyword}"`;
 	} else if (window.location.pathname.match(/^\/item\/\d/)) {
 		if (prevData === window.location.pathname && AnimeData.name) {
 			presenceData.details = AnimeData.name;
 			presenceData.largeImageKey = AnimeData.img;
 			presenceData.smallImageKey = Assets.VideoCall;
-			presenceData.smallImageText = AnimeData.is_ending ? "완결작품" : "방영중"
-			presenceData.state = AnimeData.animation_info.air_year_quarter
+			presenceData.smallImageText = AnimeData.is_ending ? "완결작품" : "방영중";
+			presenceData.state = AnimeData.animation_info.air_year_quarter;
 
 			presenceData.buttons = [
 				{
@@ -66,8 +65,8 @@ presence.on("UpdateData", async () => {
 				{
 					label: `별점 ${AnimeData.meta_info.avg_rating}점`,
 					url: `https://laftel.net/item/${AnimeData.id}/review`,
-				}
-			]
+				},
+			];
 		} else {
 			prevData = window.location.pathname;
 			AnimeData = await (
@@ -86,8 +85,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = AnimeData.name;
 			presenceData.largeImageKey = AnimeData.img;
 			presenceData.smallImageKey = Assets.VideoCall;
-			presenceData.smallImageText = AnimeData.is_ending ? "완결작품" : "방영중"
-			presenceData.state = AnimeData.animation_info.air_year_quarter
+			presenceData.smallImageText = AnimeData.is_ending ? "완결작품" : "방영중";
+			presenceData.state = AnimeData.animation_info.air_year_quarter;
 
 			presenceData.buttons = [
 				{
@@ -97,8 +96,8 @@ presence.on("UpdateData", async () => {
 				{
 					label: `별점 ${AnimeData.meta_info.avg_rating}점`,
 					url: `https://laftel.net/item/${AnimeData.id}/review`,
-				}
-			]
+				},
+			];
 		}
 	} else if (location.pathname.match(/\/player\/\d*\/\d/)) {
 		const video: HTMLVideoElement = document.querySelector("video");
@@ -119,7 +118,7 @@ presence.on("UpdateData", async () => {
 				).json();
 			}
 
-			if (AnimeData = {})  {
+			if ((AnimeData = {})) {
 				AnimeData = await (
 					await fetch(
 						`https://laftel.net/api/v1.0/items/${
@@ -142,11 +141,12 @@ presence.on("UpdateData", async () => {
 				{
 					label: "자세히 보기",
 					url: `https://laftel.net/item/${AnimeData.id}`,
-				}, {
+				},
+				{
 					label: `${AnimeDataEpisode.episode_num}화 감상하기`,
 					url: `https://laftel.net/player/${AnimeData.id}/${AnimeDataEpisode.id}`,
-				}
-			]
+				},
+			];
 			if (
 				video.currentTime > 0 &&
 				!video.paused &&
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
 						Math.floor(video.duration)
 					);
 				presenceData.smallImageKey = Assets.Play;
-				presenceData.smallImageText = "재생중"
+				presenceData.smallImageText = "재생중";
 			} else {
 				presenceData.startTimestamp = null;
 				presenceData.endTimestamp = null;
