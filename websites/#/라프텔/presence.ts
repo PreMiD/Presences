@@ -3,8 +3,8 @@ const presence = new Presence({
 });
 
 let prevData = "";
-let AnimeData: Detail = {};
-let AnimeDataEpisode: Episode = {};
+let AnimeData: Detail = {},
+	AnimeDataEpisode: Episode = {};
 
 type Detail = {
 	id?: string;
