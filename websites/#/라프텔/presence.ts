@@ -3,9 +3,7 @@ const presence = new Presence({
 });
 
 let prevData = "";
-
 let AnimeData: Detail = {};
-
 let AnimeDataEpisode: Episode = {};
 
 type Detail = {
@@ -120,8 +118,6 @@ presence.on("UpdateData", async () => {
 				).json();
 			}
 
-			console.log(AnimeData);
-
 			if (!AnimeData.id) {
 				AnimeData = await (
 					await fetch(
@@ -165,8 +161,6 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "재생중";
 			} else {
-				presenceData.startTimestamp = null;
-				presenceData.endTimestamp = null;
 				presenceData.state = "일시 정지됨";
 				presenceData.smallImageKey = Assets.Pause;
 			}
