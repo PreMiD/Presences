@@ -37,7 +37,7 @@ function getQuery() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:"https://i.imgur.com/2ew5h9U.jpg",
+		largeImageKey:"https://i.imgur.com/PDh4ncE.jpg",
 	};
 
 	if (window.location.pathname === "/") {
