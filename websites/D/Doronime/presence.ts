@@ -8,7 +8,7 @@ const presence = new Presence({
 	};
 
 presence.on("UpdateData", async () => {
-	const trim = (str: string) => str.trim();
+	const trim = (str?: string) => str?.trim();
 
 	if (document.location.search.startsWith("?s"))
 		presenceData.details = "Searching Anime";
