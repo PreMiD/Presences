@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "135058085386387457",
+		"name": "giang."
+	},
+	"service": "Kick",
+	"description": {
+		"en": "Kick is the most rewarding gaming and livestreaming platform."
+	},
+	"url": [
+		"kick.com",
+		"help.kick.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/7pAQJgm.png",
+	"thumbnail": "https://i.imgur.com/DrveDUP.png",
+	"color": "#53fc18",
+	"category": "videos",
+	"tags": [
+		"videos",
+		"streaming",
+		"entertainment",
+		"livestreaming"
+	],
+	"settings": [
+		{
+			"id": "details",
+			"title": "Show details",
+			"icon": "fas fa-eye-slash",
+			"value": true
+		},
+		{
+			"id": "logo",
+			"title": "Show only logo",
+			"icon": "fas fa-image",
+			"value": false
+		}
+	]
+}
