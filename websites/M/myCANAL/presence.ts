@@ -53,15 +53,15 @@ presence.on("UpdateData", async () => {
 				).textContent;
 				presenceData.state = `sur ${
 					document.querySelector<HTMLImageElement>(
-						`#\\3${channelID}_toFocus > div[class*="cardLogoChannel"] > div > img`
-					).alt
+						`#\\3${channelID}_onclick > div > div.card__content_0dae1b.cardContent___DuNAN.ratio--169 > div[class*="cardLogoChannel"] > div > img`
+					)?.alt
 				}`;
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(video.currentTime, video.duration);
 				presenceData.largeImageKey = showCover
 					? document.querySelector<HTMLImageElement>(
-							`#\\3${channelID}_toFocus > div[class*="cardLogoChannel"] > div > img`
-					  ).src
+							`#\\3${channelID}_onclick > div > div.card__content_0dae1b.cardContent___DuNAN.ratio--169 > div[class*="cardLogoChannel"] > div > img`
+					  )?.src
 					: Assets.Logo;
 				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = "En direct";

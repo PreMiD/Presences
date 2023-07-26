@@ -36,6 +36,8 @@ function timeToString(nbr: number): string {
 	return nbrString;
 }
 
+const websiteDomain = "https://neko-sama.fr";
+
 let video: Video = null;
 
 presence.on("iFrameData", (data: Video) => {
@@ -65,8 +67,7 @@ presence.on("UpdateData", async () => {
 							).content
 						}`;
 						presenceData.largeImageKey =
-							episodeImage ===
-							"https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/0.png"
+							episodeImage === `${websiteDomain}/images/default_thumbnail.png`
 								? "nekosama-icon"
 								: episodeImage;
 						presenceData.buttons = [
@@ -91,8 +92,7 @@ presence.on("UpdateData", async () => {
 							.content
 					}`;
 					presenceData.largeImageKey =
-						episodeImage ===
-						"https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/0.png"
+						episodeImage === `${websiteDomain}/images/default_thumbnail.png`
 							? "nekosama-icon"
 							: episodeImage;
 					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
@@ -115,8 +115,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state =
 						document.querySelector("h1").firstChild.textContent;
 					presenceData.largeImageKey =
-						animeImage ===
-						"https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/0.png"
+						animeImage === `${websiteDomain}/images/default_thumbnail.png`
 							? "nekosama-icon"
 							: animeImage;
 					presenceData.buttons = [
