@@ -3,10 +3,10 @@ const presence = new Presence({
 });
 
 let prevData = "",
-	AnimeData: Detail = {},
-	AnimeDataEpisode: Episode = {};
+	animeData: detail = {},
+	animeDataEpisode: episode = {};
 
-type Detail = {
+type detail = {
 	id?: string;
 	name?: string;
 	img?: string;
@@ -19,7 +19,7 @@ type Detail = {
 	};
 };
 
-type Episode = {
+type episode = {
 	id?: string;
 	title?: string;
 	subject?: string;
@@ -42,26 +42,26 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = "검색중";
 		presenceData.state = `"${getQuery().keyword}"`;
 	} else if (pathname.match(/^\/item\/\d/)) {
-		if (prevData === pathname && AnimeData.name) {
-			presenceData.details = AnimeData.name;
-			presenceData.largeImageKey = AnimeData.img;
+		if (prevData === pathname && animeData.name) {
+			presenceData.details = animeData.name;
+			presenceData.largeImageKey = animeData.img;
 			presenceData.smallImageKey = Assets.VideoCall;
-			presenceData.smallImageText = AnimeData.is_ending ? "완결작품" : "방영중";
-			presenceData.state = AnimeData.animation_info.air_year_quarter;
+			presenceData.smallImageText = animeData.is_ending ? "완결작품" : "방영중";
+			presenceData.state = animeData.animation_info.air_year_quarter;
 
 			presenceData.buttons = [
 				{
 					label: "감상하기",
-					url: `https://laftel.net/item/${AnimeData.id}`,
+					url: `https://laftel.net/item/${animeData.id}`,
 				},
 				{
-					label: `별점 ${AnimeData.meta_info.avg_rating}점`,
-					url: `https://laftel.net/item/${AnimeData.id}/review`,
+					label: `별점 ${animeData.meta_info.avg_rating}점`,
+					url: `https://laftel.net/item/${animeData.id}/review`,
 				},
 			];
 		} else {
 			prevData = pathname;
-			AnimeData = await (
+			animeData = await (
 				await fetch(
 					`https://laftel.net/api/v1.0/items/${pathname.split("/")[2]}/detail/`,
 					{
@@ -72,20 +72,20 @@ presence.on("UpdateData", async () => {
 				)
 			).json();
 
-			presenceData.details = AnimeData.name;
-			presenceData.largeImageKey = AnimeData.img;
+			presenceData.details = animeData.name;
+			presenceData.largeImageKey = animeData.img;
 			presenceData.smallImageKey = Assets.VideoCall;
-			presenceData.smallImageText = AnimeData.is_ending ? "완결작품" : "방영중";
-			presenceData.state = AnimeData.animation_info.air_year_quarter;
+			presenceData.smallImageText = animeData.is_ending ? "완결작품" : "방영중";
+			presenceData.state = animeData.animation_info.air_year_quarter;
 
 			presenceData.buttons = [
 				{
 					label: "감상하기",
-					url: `https://laftel.net/item/${AnimeData.id}`,
+					url: `https://laftel.net/item/${animeData.id}`,
 				},
 				{
-					label: `별점 ${AnimeData.meta_info.avg_rating}점`,
-					url: `https://laftel.net/item/${AnimeData.id}/review`,
+					label: `별점 ${animeData.meta_info.avg_rating}점`,
+					url: `https://laftel.net/item/${animeData.id}/review`,
 				},
 			];
 		}
@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
 		if (video && !isNaN(video.duration)) {
 			if (prevData !== pathname) {
 				prevData = pathname;
-				AnimeDataEpisode = await (
+				animeDataEpisode = await (
 					await fetch(
 						`https://laftel.net/api/episodes/v1/${pathname.split("/")[3]}`,
 						{
@@ -106,8 +106,8 @@ presence.on("UpdateData", async () => {
 				).json();
 			}
 
-			if (!AnimeData.id) {
-				AnimeData = await (
+			if (!animeData.id) {
+				animeData = await (
 					await fetch(
 						`https://laftel.net/api/v1.0/items/${
 							pathname.split("/")[2]
@@ -121,18 +121,18 @@ presence.on("UpdateData", async () => {
 				).json();
 			}
 
-			presenceData.details = `${AnimeDataEpisode.title}`;
-			presenceData.state = `${AnimeDataEpisode.episode_num}화 ${AnimeDataEpisode.subject}`;
-			presenceData.largeImageKey = AnimeData.img;
+			presenceData.details = `${animeDataEpisode.title}`;
+			presenceData.state = `${animeDataEpisode.episode_num}화 ${animeDataEpisode.subject}`;
+			presenceData.largeImageKey = animeData.img;
 
 			presenceData.buttons = [
 				{
 					label: "자세히 보기",
-					url: `https://laftel.net/item/${AnimeData.id}`,
+					url: `https://laftel.net/item/${animeData.id}`,
 				},
 				{
-					label: `${AnimeDataEpisode.episode_num}화 감상하기`,
-					url: `https://laftel.net/player/${AnimeData.id}/${AnimeDataEpisode.id}`,
+					label: `${animeDataEpisode.episode_num}화 감상하기`,
+					url: `https://laftel.net/player/${animeData.id}/${animeDataEpisode.id}`,
 				},
 			];
 			if (
