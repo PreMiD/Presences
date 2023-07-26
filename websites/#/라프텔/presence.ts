@@ -27,10 +27,10 @@ type episode = {
 };
 
 presence.on("UpdateData", async () => {
-	const { pathname, search } = document.location;
-	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/PDh4ncE.jpg",
-	};
+	const { pathname, search } = document.location,
+		presenceData: PresenceData = {
+			largeImageKey: "https://i.imgur.com/PDh4ncE.jpg",
+		};
 
 	if (pathname === "/") {
 		presenceData.smallImageKey = Assets.Search;
