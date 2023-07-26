@@ -26,22 +26,39 @@ type episode = {
 	episodeNum?: string;
 };
 
-function convertCamel(obj: any): any {
-	if (obj === null || typeof obj !== "object") {
-		return obj;
+type Obj<T> = {
+	[key: string]: T;
+};
+
+function convertCamel<T>(obj: Obj<unknown>): Obj<T> {
+	if (obj === null || typeof obj !== "object") return obj as Obj<T>;
+
+	if (Array.isArray(obj)) return obj.map(convertCamel) as unknown as Obj<T>;
+
+	function convertCamel<T extends Record<string, unknown>>(
+		obj: T
+	): Record<string, unknown> {
+		if (obj === null || typeof obj !== "object")
+			return obj as Record<string, unknown>;
+
+		if (Array.isArray(obj))
+			return obj.map(convertCamel) as unknown as Record<string, unknown>;
+
+		return Object.keys(obj).reduce(
+			(camelObj: Record<string, unknown>, key: string) => {
+				camelObj[
+					key.replace(/_(\w)/g, (_match, letter) => letter.toUpperCase())
+				] = convertCamel(obj[key] as Obj<unknown>) as unknown as Record<
+					string,
+					unknown
+				>[string];
+				return camelObj;
+			},
+			{} as Record<string, unknown>
+		) as Record<string, unknown>;
 	}
 
-	if (Array.isArray(obj)) {
-		return obj.map(convertCamel);
-	}
-
-	return Object.keys(obj).reduce((camelObj: any, key) => {
-		const camelKey = key.replace(/_(\w)/g, (_match, letter) =>
-			letter.toUpperCase()
-		);
-		camelObj[camelKey] = convertCamel(obj[key]);
-		return camelObj;
-	}, {});
+	return convertCamel(obj) as Obj<T>;
 }
 
 presence.on("UpdateData", async () => {
