@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
-		"name": "MaaKoo",
+		"name": "noxzym",
 		"id": "243728573624614912"
 	},
 	"service": "Doronime",
@@ -9,8 +9,8 @@
 		"en": "Download anime, anime music, anime ongoing, or anime batch with Indonesian subtitle",
 		"id": "Unduh anime, anime musik, anime ongoing, atau anime batch dengan subtitle Indonesia"
 	},
-	"url": "doronime.id",
-	"version": "1.0.7",
+	"url": "doroni.me",
+	"version": "1.1.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Doronime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Doronime/assets/thumbnail.png",
 	"color": "#b11415",
