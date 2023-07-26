@@ -8,7 +8,10 @@ const enum Assets {
 	Logo = "https://cdn.discordapp.com/attachments/459040398527037441/1133604869589180436/feh.png",
 }
 
-function applyMainHostDetails(presenceData: PresenceData, pathList: string[]): void {
+function applyMainHostDetails(
+	presenceData: PresenceData,
+	pathList: string[]
+): void {
 	switch (pathList[0] ?? "") {
 		case "": {
 			activateMainIntersectionObservers(pathList);
@@ -19,15 +22,22 @@ function applyMainHostDetails(presenceData: PresenceData, pathList: string[]): v
 				}
 				case "cont2": {
 					presenceData.details = "Reading FEH Lore";
-					presenceData.state = document.querySelector<HTMLImageElement>("#storySlide .on").alt;
+					presenceData.state =
+						document.querySelector<HTMLImageElement>("#storySlide .on").alt;
 					break;
 				}
 				case "cont4": {
-					const heroName = document.querySelector<HTMLHeadingElement>(".characterSlide-summery-item.active h3").textContent;
+					const heroName = document.querySelector<HTMLHeadingElement>(
+						".characterSlide-summery-item.active h3"
+					).textContent;
 					presenceData.details = "Meeting the Heroes";
 					presenceData.state = heroName;
-					presenceData.largeImageKey = document.querySelector<HTMLImageElement>("#characterSlide .flex-active-slide img").src;
-					presenceData.smallImageKey = document.querySelector<HTMLImageElement>(".characterSlide-thumb-item.flex-active").src;
+					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+						"#characterSlide .flex-active-slide img"
+					).src;
+					presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+						".characterSlide-thumb-item.flex-active"
+					).src;
 					presenceData.smallImageText = heroName;
 				}
 			}
@@ -38,7 +48,11 @@ function applyMainHostDetails(presenceData: PresenceData, pathList: string[]): v
 			break;
 		}
 		case "illustrations": {
-			const images = [...document.querySelectorAll<HTMLImageElement>("#topics-detail-content img")];
+			const images = [
+				...document.querySelectorAll<HTMLImageElement>(
+					"#topics-detail-content img"
+				),
+			];
 			for (const image of images) {
 				const tmpData: PresenceData = Object.assign({}, presenceData);
 				tmpData.details = "Browsing illustrations";
@@ -50,7 +64,9 @@ function applyMainHostDetails(presenceData: PresenceData, pathList: string[]): v
 		case "manga": {
 			if (pathList[1]) {
 				presenceData.details = "Reading A Day in the Life";
-				presenceData.buttons = [{label: "Read Manga", url: document.location.href}];
+				presenceData.buttons = [
+					{ label: "Read Manga", url: document.location.href },
+				];
 			} else {
 				presenceData.details = "Browsing manga";
 			}
@@ -64,13 +80,27 @@ function applyMainHostDetails(presenceData: PresenceData, pathList: string[]): v
 			activateMainIntersectionObservers(pathList);
 			presenceData.details = "Browsing articles";
 			if (section) {
-				const articleContainer = document.querySelector<HTMLDivElement>(`${section}`),
-					articleDate = articleContainer.querySelector<HTMLSpanElement>(".date").textContent,
-					articleTitle = articleContainer.querySelector<HTMLParagraphElement>(".heading").textContent,
-					articleImage = articleContainer.querySelector<HTMLImageElement>(".img > img").src;
+				const articleContainer = document.querySelector<HTMLDivElement>(
+						`${section}`
+					),
+					articleDate =
+						articleContainer.querySelector<HTMLSpanElement>(
+							".date"
+						).textContent,
+					articleTitle =
+						articleContainer.querySelector<HTMLParagraphElement>(
+							".heading"
+						).textContent,
+					articleImage =
+						articleContainer.querySelector<HTMLImageElement>(".img > img").src;
 				presenceData.state = `${articleTitle} - ${articleDate}`;
 				presenceData.largeImageKey = articleImage;
-				presenceData.buttons = [{label: "Read Article", url: `${document.location.href}#${section}`}];
+				presenceData.buttons = [
+					{
+						label: "Read Article",
+						url: `${document.location.href}#${section}`,
+					},
+				];
 			}
 			break;
 		}
@@ -79,18 +109,21 @@ function applyMainHostDetails(presenceData: PresenceData, pathList: string[]): v
 
 let section = "",
 	intersectionObserversActivated = false;
-const observer = new IntersectionObserver((entries) => {
-	let visibleSection = "";
-	for (const entry of entries) {
-		if (entry.intersectionRatio > 0) {
-			visibleSection = entry.target.id;
-			break;
+const observer = new IntersectionObserver(
+	entries => {
+		let visibleSection = "";
+		for (const entry of entries) {
+			if (entry.intersectionRatio > 0) {
+				visibleSection = entry.target.id;
+				break;
+			}
 		}
+		if (visibleSection !== section) section = visibleSection;
+	},
+	{
+		threshold: [0.0, 0.05],
 	}
-	if (visibleSection !== section) section = visibleSection;
-}, {
-	threshold: [0.0, 0.05],
-});
+);
 function activateMainIntersectionObservers(pathList: string[]): void {
 	if (intersectionObserversActivated) return;
 	switch (pathList[0] ?? "") {
@@ -112,7 +145,10 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = document.location,
-		pathList = pathname.split("/").filter((path) => path).slice(1);
+		pathList = pathname
+			.split("/")
+			.filter(path => path)
+			.slice(1);
 
 	switch (hostname) {
 		case "fire-emblem-heroes.com":
