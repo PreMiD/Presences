@@ -26,31 +26,23 @@ type Episode = {
 	episode_num?: string;
 };
 
-function getQuery() {
-	return JSON.parse(
-		`{"${decodeURI(location.search.substring(1))
-			.replaceAll('"', '\\"')
-			.replaceAll("&", '","')
-			.replaceAll("=", '":"')}"}`
-	);
-}
-
 presence.on("UpdateData", async () => {
+	const { pathname, search } = document.location;
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.imgur.com/PDh4ncE.jpg",
 	};
 
-	if (document.location.pathname === "/") {
+	if (pathname === "/") {
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "둘러보는중";
 		presenceData.details = "홈";
-	} else if (document.location.pathname.startsWith("/search")) {
+	} else if (pathname.startsWith("/search")) {
 		presenceData.details = "라프텔 검색";
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "검색중";
 		presenceData.state = `"${getQuery().keyword}"`;
-	} else if (document.location.pathname.match(/^\/item\/\d/)) {
-		if (prevData === document.location.pathname && AnimeData.name) {
+	} else if (pathname.match(/^\/item\/\d/)) {
+		if (prevData === pathname && AnimeData.name) {
 			presenceData.details = AnimeData.name;
 			presenceData.largeImageKey = AnimeData.img;
 			presenceData.smallImageKey = Assets.VideoCall;
@@ -68,12 +60,10 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		} else {
-			prevData = document.location.pathname;
+			prevData = pathname;
 			AnimeData = await (
 				await fetch(
-					`https://laftel.net/api/v1.0/items/${
-						document.location.pathname.split("/")[2]
-					}/detail/`,
+					`https://laftel.net/api/v1.0/items/${pathname.split("/")[2]}/detail/`,
 					{
 						headers: {
 							laftel: "TeJava",
@@ -99,16 +89,14 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
-	} else if (location.pathname.match(/\/player\/\d*\/\d/)) {
+	} else if (pathname.match(/\/player\/\d*\/\d/)) {
 		const video: HTMLVideoElement = document.querySelector("video");
 		if (video && !isNaN(video.duration)) {
-			if (prevData !== document.location.pathname) {
-				prevData = document.location.pathname;
+			if (prevData !== pathname) {
+				prevData = pathname;
 				AnimeDataEpisode = await (
 					await fetch(
-						`https://laftel.net/api/episodes/v1/${
-							document.location.pathname.split("/")[3]
-						}`,
+						`https://laftel.net/api/episodes/v1/${pathname.split("/")[3]}`,
 						{
 							headers: {
 								laftel: "TeJava",
@@ -122,7 +110,7 @@ presence.on("UpdateData", async () => {
 				AnimeData = await (
 					await fetch(
 						`https://laftel.net/api/v1.0/items/${
-							document.location.pathname.split("/")[2]
+							pathname.split("/")[2]
 						}/detail/`,
 						{
 							headers: {
@@ -168,4 +156,13 @@ presence.on("UpdateData", async () => {
 	}
 
 	presence.setActivity(presenceData);
+
+	function getQuery() {
+		return JSON.parse(
+			`{"${decodeURI(search.substring(1))
+				.replaceAll('"', '\\"')
+				.replaceAll("&", '","')
+				.replaceAll("=", '":"')}"}`
+		);
+	}
 });
