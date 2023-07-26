@@ -92,7 +92,6 @@ presence.on("UpdateData", async () => {
 			},
 		];
 
-		// If the video is playing, display the "Play" small Image. Else, display the pause one and delete the timestamp
 		if (!video.paused) presenceData.smallImageKey = playerAssets.play;
 		else {
 			presenceData.smallImageKey = playerAssets.pause;
