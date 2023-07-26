@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.9",
+  "author": {
+    "id": "193714715631812608",
+    "name": "theusaf"
+  },
+  "service": "Fire Emblem Heroes",
+  "description": {
+    "en": "Nintendo's hit strategy-RPG Fire Emblem series, which has been going strong for more than 30 years."
+  },
+  "url": [
+    "fire-emblem-heroes.com",
+    "faq.fire-emblem-heroes.com",
+    "fehpass.fire-emblem-heroes.com",
+    "guide.fire-emblem-heroes.com",
+    "new-guide.fire-emblem-heroes.com"
+  ],
+  "regExp": "vote\\d+[.]campaigns[.]fire-emblem-heroes[.]com[/]",
+  "version": "1.0.0",
+  "logo": "https://cdn.discordapp.com/attachments/459040398527037441/1133604869589180436/feh.png",
+  "thumbnail": "https://cdn.discordapp.com/attachments/459040398527037441/1133604869945704588/feh2.jpg",
+  "color": "#f8d230",
+  "category": "games",
+  "tags": [
+    "fire",
+    "emblem",
+    "heroes",
+    "gacha",
+    "anime",
+    "manga"
+  ]
+}
