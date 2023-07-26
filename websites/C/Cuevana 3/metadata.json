@@ -10,21 +10,40 @@
 		"es": "Cuevana 3 es una pagina web donde puedes ver y descargar películas y series en latino, español, ingles y subtitulado.",
 		"nl": "Cuevana 3 is een streamingwebsite waar je films en series in het Spaans, Engels en ondertiteld kunt bekijken en downloaden."
 	},
-	"url": [
-		"m4.cuevana3.me",
-		"ww3.cuevana.pro"
-	],
-	"version": "3.0.9",
+	"url": "cuevana3.nu",
+	"regExp": "((www)?(wvw)?(ww)?([0-9]?[0-9])?[.])?(cuevana).*[.].*",
+	"version": "3.1.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Cuevana%203/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Cuevana%203/assets/thumbnail.png",
 	"color": "#007AFF",
 	"category": "videos",
-	"tags": [
-		"cuevana",
-		"streaming",
-		"movies",
-		"series"
-	],
+	"tags": ["cuevana", "streaming", "movies", "series"],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "thumbnails",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Thumbnail",
+			"icon": "fad fa-album",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
 }
