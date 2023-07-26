@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/h4dMiyw.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/aha/assets/logo.png",
 }
 const getVideoStatus = (
 		presenceData: PresenceData,
