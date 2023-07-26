@@ -108,7 +108,8 @@ function applyMainHostDetails(
 }
 
 let section = "",
-	intersectionObserversActivated = false;
+	intersectionObserversActivated = false,
+	oldPath = "";
 const observer = new IntersectionObserver(
 	entries => {
 		let visibleSection = "";
@@ -143,9 +144,27 @@ function applyCYLDetails(presenceData: PresenceData, pathList: string[]): void {
 	const campaignTitle =
 			document.querySelector<HTMLDivElement>(".campaigns-title").textContent,
 		search = new URLSearchParams(document.location.search);
+
+	presenceData.buttons = [
+		{ label: "View Campaign", url: document.location.href },
+	];
 	switch (pathList[0] ?? "") {
 		case "": {
 			presenceData.details = `Viewing ${campaignTitle}`;
+			break;
+		}
+		case "about": {
+			presenceData.details = `Reading about ${campaignTitle}`;
+			break;
+		}
+		case "mypage": {
+			presenceData.details = `Viewing ${campaignTitle}`;
+			presenceData.state = "Viewing their votes";
+			break;
+		}
+		case "random": {
+			presenceData.details = `Voting for ${campaignTitle}`;
+			presenceData.state = "Choosing a random character";
 			break;
 		}
 		case "result":
@@ -213,6 +232,34 @@ function applyCYLDetails(presenceData: PresenceData, pathList: string[]): void {
 			}
 			break;
 		}
+		case "series": {
+			presenceData.details = `Voting for ${campaignTitle}`;
+			if (pathList[1]) {
+				if (pathList[pathList.length - 1] === "heroes") {
+					const seriesTitle = document.title.split(":")[1]?.trim();
+					presenceData.state = seriesTitle
+						? `Selecting a character from ${seriesTitle}`
+						: "Selecting a character from a series";
+					presenceData.buttons = [
+						{ label: "View Series", url: document.location.href },
+					];
+				} else {
+					const characterName =
+						document.querySelector<HTMLParagraphElement>(
+							".hero-vote-name"
+						)?.textContent;
+					presenceData.state = characterName
+						? `Voting for ${characterName}`
+						: "Voting for a character";
+					presenceData.buttons = [
+						{ label: "Vote Character", url: document.location.href },
+					];
+				}
+			} else {
+				presenceData.state = "Selecting a series";
+			}
+			break;
+		}
 	}
 }
 
@@ -232,6 +279,14 @@ presence.on("UpdateData", async () => {
 			.filter(path => path)
 			.slice(1);
 
+	if (oldPath !== pathname) {
+		oldPath = pathname;
+		section = "";
+		intersectionObserversActivated = false;
+		slideshow.deleteAllSlides();
+		observer.disconnect();
+	}
+
 	switch (true) {
 		case hostname === "fire-emblem-heroes.com":
 			applyMainHostDetails(presenceData, pathList);
@@ -240,15 +295,12 @@ presence.on("UpdateData", async () => {
 		case /vote\d+[.]campaigns[.]fire-emblem-heroes[.]com/.test(hostname):
 		case hostname === "support.fire-emblem-heroes.com": {
 			if (hostname.startsWith("support")) {
-				if (pathList[0] === "vote") {
+				if (pathList[0] === "vote" || pathList[0] === "vote2") {
 					applyCYLDetails(presenceData, pathList.slice(1));
 				} else {
 					applySupportDetails(presenceData, pathList);
 				}
-			} else if (
-				hostname.startsWith("events") ||
-				hostname.startsWith("vote3")
-			) {
+			} else if (hostname.startsWith("vote3")) {
 				applyCYLDetails(presenceData, pathList);
 			} else {
 				applyCYLDetails(presenceData, pathList.slice(1));
