@@ -8,7 +8,7 @@
 	"altnames": ["laftel"],
 	"description": {
 		"en": "Korean animation OTT streaming service.",
-		"ko_KR": "한국에서 서비스하는 애니 OTT 스트리밍 서비스"
+		"ko": "한국에서 서비스하는 애니 OTT 스트리밍 서비스"
 	},
 	"url": "laftel.net",
 	"version": "1.0.0",
