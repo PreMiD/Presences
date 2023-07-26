@@ -40,17 +40,17 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "https://i.imgur.com/PDh4ncE.jpg",
 	};
 
-	if (window.location.pathname === "/") {
+	if (document.location.pathname === "/") {
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "둘러보는중";
 		presenceData.details = "홈";
-	} else if (window.location.pathname.startsWith("/search")) {
+	} else if (document.location.pathname.startsWith("/search")) {
 		presenceData.details = "라프텔 검색";
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "검색중";
 		presenceData.state = `"${getQuery().keyword}"`;
-	} else if (window.location.pathname.match(/^\/item\/\d/)) {
-		if (prevData === window.location.pathname && AnimeData.name) {
+	} else if (document.location.pathname.match(/^\/item\/\d/)) {
+		if (prevData === document.location.pathname && AnimeData.name) {
 			presenceData.details = AnimeData.name;
 			presenceData.largeImageKey = AnimeData.img;
 			presenceData.smallImageKey = Assets.VideoCall;
@@ -68,11 +68,11 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		} else {
-			prevData = window.location.pathname;
+			prevData = document.location.pathname;
 			AnimeData = await (
 				await fetch(
 					`https://laftel.net/api/v1.0/items/${
-						window.location.pathname.split("/")[2]
+						document.location.pathname.split("/")[2]
 					}/detail/`,
 					{
 						headers: {
@@ -102,12 +102,12 @@ presence.on("UpdateData", async () => {
 	} else if (location.pathname.match(/\/player\/\d*\/\d/)) {
 		const video: HTMLVideoElement = document.querySelector("video");
 		if (video && !isNaN(video.duration)) {
-			if (prevData !== window.location.pathname) {
-				prevData = window.location.pathname;
+			if (prevData !== document.location.pathname) {
+				prevData = document.location.pathname;
 				AnimeDataEpisode = await (
 					await fetch(
 						`https://laftel.net/api/episodes/v1/${
-							window.location.pathname.split("/")[3]
+							document.location.pathname.split("/")[3]
 						}`,
 						{
 							headers: {
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
 				AnimeData = await (
 					await fetch(
 						`https://laftel.net/api/v1.0/items/${
-							window.location.pathname.split("/")[2]
+							document.location.pathname.split("/")[2]
 						}/detail/`,
 						{
 							headers: {
