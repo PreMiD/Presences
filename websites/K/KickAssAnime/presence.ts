@@ -29,9 +29,6 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 		currentTime: 0,
 		paused: true,
 	},
-	currentTime: number,
-	duration: number,
-	paused = true,
 	lastPlaybackState: boolean = null,
 	playback: boolean,
 	strings: Awaited<ReturnType<typeof getStrings>>,
@@ -73,7 +70,6 @@ presence.on("UpdateData", async () => {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
-	// if (document.querySelector('v-chip__content')?.textContent == "Beta") {
 	switch (true) {
 		case video.exists: {
 			if (playback && !isNaN(video.duration)) {
