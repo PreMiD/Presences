@@ -1,14 +1,11 @@
 const presence = new Presence({
-		clientId: "1102272266278027296",
-	}),
-	playerAssets = {
-		logo: "https://i.imgur.com/YKxUCs3.png",
-		logoBg: "https://i.imgur.com/byFtXWd.png",
-		pause: "https://i.imgur.com/0A75vqT.png",
-		play: "https://i.imgur.com/Dj5dekr.png",
-		search: "https://i.imgur.com/C3CetGw.png",
-	},
-	presenceStrings = {
+	clientId: "1102272266278027296",
+});
+const enum Assets {
+	FRAnimeLogo = "https://i.imgur.com/YKxUCs3.png",
+	FRAnimeLogoBg = "https://i.imgur.com/byFtXWd.png",
+}
+const presenceStrings = {
 		browsing: "Parcours le catalogue",
 		branding: "Animes gratuit & sans pub",
 		websiteName: "FRAnime.fr",
@@ -31,8 +28,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = presenceStrings.browsing;
 		presenceData.state = presenceStrings.branding;
 		presenceData.smallImageText = presenceStrings.websiteName;
-		presenceData.largeImageKey = playerAssets.logoBg;
-		presenceData.smallImageKey = playerAssets.search;
+		presenceData.largeImageKey = Assets.FRAnimeLogoBg;
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.startTimestamp = animeBrowsingTimestamp;
 
 		// Anime page
@@ -41,7 +38,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = presenceStrings.branding;
 		presenceData.smallImageText = presenceStrings.websiteName;
 		presenceData.largeImageKey = jsonLD.thumbnailUrl;
-		presenceData.smallImageKey = playerAssets.search;
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.startTimestamp = animeBrowsingTimestamp;
 		presenceData.buttons = [
 			{
@@ -58,7 +55,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.state = presenceStrings.branding;
 		presenceData.smallImageText = presenceStrings.websiteName;
-		presenceData.smallImageKey = playerAssets.pause;
+		presenceData.smallImageKey = Assets.Pause;
 		presenceData.largeImageKey = jsonLD.thumbnailUrl;
 		presenceData.buttons = [
 			{
@@ -92,9 +89,10 @@ presence.on("UpdateData", async () => {
 			},
 		];
 
-		if (!video.paused) presenceData.smallImageKey = playerAssets.play;
+		// If the video is playing, display the "Play" small Image. Else, display the pause one and delete the timestamp
+		if (!video.paused) presenceData.smallImageKey = Assets.Play;
 		else {
-			presenceData.smallImageKey = playerAssets.pause;
+			presenceData.smallImageKey = Assets.Pause;
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
