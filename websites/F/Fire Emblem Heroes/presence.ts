@@ -139,6 +139,88 @@ function activateMainIntersectionObservers(pathList: string[]): void {
 	intersectionObserversActivated = true;
 }
 
+function applyCYLDetails(presenceData: PresenceData, pathList: string[]): void {
+	const campaignTitle =
+			document.querySelector<HTMLDivElement>(".campaigns-title").textContent,
+		search = new URLSearchParams(document.location.search);
+	switch (pathList[0] ?? "") {
+		case "": {
+			presenceData.details = `Viewing ${campaignTitle}`;
+			break;
+		}
+		case "result":
+		case "result-detail":
+		case "result_detail":
+		case "results": {
+			if (
+				search.get("overall") ||
+				pathList[0] !== "result" ||
+				(pathList[0] === "result" && pathList[1])
+			) {
+				presenceData.details = `Viewing ${campaignTitle} results`;
+			} else {
+				// Note to future maintainers: The pages for each event look the same, but seem to keep changing
+				// the class names for the elements between events.
+				// I've tried to make this as future-proof as possible, but if it breaks, this is probably why.
+				const winners = [
+						...document.querySelectorAll<HTMLDivElement>(
+							".result-special-character [class*=result-special-character-wrap], .HeroItem.-golden"
+						),
+					],
+					winnerData = winners.map<PresenceData>(winner => {
+						let mainImage = winner.querySelector<HTMLImageElement>(
+							".result-stand > img, .hero-image, .HeroItem__Image"
+						)?.src;
+						if (!mainImage)
+							mainImage = getComputedStyle(
+								winner.querySelector<HTMLParagraphElement>(
+									"[class*=result-stand]"
+								)
+							)?.backgroundImage.match(/url\((.+)\)/)[1];
+						let rankImage = winner.querySelector<HTMLImageElement>(
+							".star > img, .icon-rank, .HeroItem__Rank"
+						).src;
+						if (!rankImage)
+							rankImage = getComputedStyle(
+								winner,
+								"::after"
+							).backgroundImage.match(/url\((.+)\)/)[1];
+						return {
+							...presenceData,
+							details: `Viewing winners of ${campaignTitle}`,
+							state: `${
+								winner.querySelector(
+									".hero-result-hero-name, .hero-name, .HeroItem__Name"
+								).textContent
+							} - ${
+								winner.querySelector(
+									".hero-result-series-name, .series-name, .HeroItem__SeriesName"
+								).textContent
+							}`,
+							largeImageKey: mainImage,
+							smallImageKey: rankImage,
+							smallImageText: `${
+								winner.querySelector(
+									".hero-result-vote-count, .HeroItem__VoteCount, .vote-count"
+								).textContent
+							} votes}`,
+							buttons: [{ label: "View Results", url: document.location.href }],
+						};
+					});
+				for (const winner of winnerData) {
+					slideshow.addSlide(winner.largeImageKey, winner, 5e3);
+				}
+			}
+			break;
+		}
+	}
+}
+
+function applySupportDetails(
+	presenceData: PresenceData,
+	pathList: string[]
+): void {}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
@@ -150,10 +232,29 @@ presence.on("UpdateData", async () => {
 			.filter(path => path)
 			.slice(1);
 
-	switch (hostname) {
-		case "fire-emblem-heroes.com":
+	switch (true) {
+		case hostname === "fire-emblem-heroes.com":
 			applyMainHostDetails(presenceData, pathList);
 			break;
+		case hostname === "events.fire-emblem-heroes.com":
+		case /vote\d+[.]campaigns[.]fire-emblem-heroes[.]com/.test(hostname):
+		case hostname === "support.fire-emblem-heroes.com": {
+			if (hostname.startsWith("support")) {
+				if (pathList[0] === "vote") {
+					applyCYLDetails(presenceData, pathList.slice(1));
+				} else {
+					applySupportDetails(presenceData, pathList);
+				}
+			} else if (
+				hostname.startsWith("events") ||
+				hostname.startsWith("vote3")
+			) {
+				applyCYLDetails(presenceData, pathList);
+			} else {
+				applyCYLDetails(presenceData, pathList.slice(1));
+			}
+			break;
+		}
 	}
 
 	if (slideshow.getSlides().length) presence.setActivity(slideshow);

@@ -13,7 +13,9 @@
     "faq.fire-emblem-heroes.com",
     "fehpass.fire-emblem-heroes.com",
     "guide.fire-emblem-heroes.com",
-    "new-guide.fire-emblem-heroes.com"
+    "new-guide.fire-emblem-heroes.com",
+    "events.fire-emblem-heroes.com",
+    "support.fire-emblem-heroes.com"
   ],
   "regExp": "vote\\d+[.]campaigns[.]fire-emblem-heroes[.]com[/]",
   "version": "1.0.0",
