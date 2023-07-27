@@ -7,9 +7,10 @@ const presence = new Presence({
 	});
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {},Path = document.location.pathname;
+	const presenceData: PresenceData = {
+		largeImageKey:"phy",
+	},Path = document.location.pathname;
 
-	presenceData.largeImageKey = "pw";
 
 	if (Path === "/") {
 		console.log("working");
