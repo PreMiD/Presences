@@ -55,11 +55,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/suafansingaqui/")) {
 		presenceData.details = "Sua Fansing Aqui";
 		presenceData.smallImageKey = Assets.Reading;
-	} else if (document.location.pathname === "/historia/") {
+	} else if (document.location.pathname.includes("/historia/")) {
 		presenceData.details = "História";
 		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname === "/") {
 		presenceData.details = "Página inicial";
+		presenceData.smallImageKey = Assets.Reading;
+	} else {
+		presenceData.details = "Algures por aqui...";
 		presenceData.smallImageKey = Assets.Reading;
 	}
 
