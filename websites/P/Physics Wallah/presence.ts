@@ -16,9 +16,14 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (Path.startsWith("/study")) {
+		presenceData.details = "Browsing...";
+		presenceData.state = "In website";
+		presenceData.smallImageKey = "scroll";
+		presenceData.smallImageText = "Browsing the website";
+
 		if (Path.endsWith("/my-batches")) {
 			presenceData.details = "Studying...";
-			presenceData.state = "Viewing Batches";
+			presenceData.state = "My Batches";
 			presenceData.smallImageKey = "studying";
 			presenceData.smallImageText = "Studying";
 		}
@@ -34,47 +39,42 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (Path.includes("batch-video-player")) {
-			presenceData.details = "Studying...";
+			presenceData.details =
+				"Watching Lecture " + `| ${localStorage.getItem("dpp_subject")}`;
 
-			const subjective = Path.split("/")[5].split("-");
-			let subject = "";
-
-			if (subjective.length > 2) {
-				const subjectives = subjective.slice(0, -1);
-				for (let i = 0; i < subjectives.length; i++)
-					subject += `${subjectives[i]} `;
-			}
-
-			if (subjective.length <= 2) subject = subjective[0];
-			presenceData.state = `Watching ${subject}`;
+			presenceData.state = `${
+				JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
+			}`;
 			presenceData.smallImageKey = "watching";
 			presenceData.smallImageText = "Watching a lecture";
 		}
 	}
 
 	if (Path.startsWith("/watch")) {
-		presenceData.details = "Studying...";
+		presenceData.details =
+			"Watching Lecture " + `| ${localStorage.getItem("dpp_subject")}`;
 
-		const subjective = Path.split("subjectSlug=")[1].split("-");
-		let subject = "";
-
-		if (subjective.length > 2) {
-			const subjectives = subjective.slice(0, -1);
-			for (let i = 0; i < subjectives.length; i++)
-				subject += `${subjectives[i]} `;
-		}
-
-		if (subjective.length <= 2) subject = subjective[0];
-		presenceData.state = `Watching ${subject} lecture`;
+		presenceData.state = `${
+			JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
+		}`;
 		presenceData.smallImageKey = "watching";
 		presenceData.smallImageText = "Watching a lecture";
 	}
 
 	if (Path.includes("subject-topics")) {
-		presenceData.details = "Studying...";
-		presenceData.state = "Browing Lectures";
-		presenceData.smallImageKey = "studying";
-		presenceData.smallImageText = "Browing Lectures";
+		const urlParams = new URLSearchParams(window.location.search);
+
+		if (urlParams.has("chapterId") === true) {
+			presenceData.details = urlParams.get("subject");
+			presenceData.state = urlParams.get("topic");
+			presenceData.smallImageKey = "studying";
+			presenceData.smallImageText = "Browsing Resources";
+		} else if (urlParams.has("chapterId") === false) {
+			presenceData.details = urlParams.get("subject");
+			presenceData.state = "Browsing Resources...";
+			presenceData.smallImageKey = "studying";
+			presenceData.smallImageText = "Browsing Resources";
+		}
 	}
 
 	presence.setActivity(presenceData);
