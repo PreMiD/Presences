@@ -432,63 +432,54 @@ presence.on("UpdateData", async () => {
 									.childElementCount.toString()} Flights`;
 							}
 						}
-					} else if (document.querySelector("body[id='map']")) {
+					} else if (
+						document.querySelector(
+							"[data-testid='view-selector-toggle'] > span:nth-child(2)"
+						).textContent === "Map"
+					) {
 						presenceData.details = `Viewing ${
-							document.querySelector("button > span.selected").textContent
+							document.querySelector(
+								"[data-testid='view-selector-toggle'] > span:nth-child(2)"
+							).textContent
 						} Mode`;
-						if (document.querySelector("[class*='show-left-overlay']")) {
+						if (document.querySelector("[data-testid='aircraft-panel']")) {
 							if (
-								document.querySelector("[class*='airline-info__callsign']")
-									.textContent === "NO CALLSIGN"
+								document.querySelector(
+									"[data-testid='aircraft-panel__header__callsign']"
+								).textContent === "N/A"
 							) {
 								presenceData.details = `Tracking ${
 									document.querySelector(
-										"div[title='Aircraft Registration Number']"
-									).childNodes[3].textContent
+										"[data-testid='aircraft-panel__registration']"
+									).textContent
 								}`;
 							} else {
 								presenceData.details = `Tracking ${
-									document.querySelector(".airline-info__head > h2 ")
-										.textContent
-								} ${
-									document.querySelector(".airline-info__head > h3 ")
-										.textContent
-								}`;
-							}
-							if (
-								document.querySelector(
-									".pnl-component.flight-info.appear > div > div > div > h3 > span "
-								).innerHTML !== "&nbsp;"
-							) {
-								presenceData.state = `${
 									document.querySelector(
-										".pnl-component.flight-info.appear > div > div > div > h3 > span "
-									).textContent
-								} to ${
-									document.querySelector(
-										".pnl-component.flight-info.appear > div > div > div:nth-of-type(2) > h3 > span "
+										"[data-testid='aircraft-panel__header__callsign']"
 									).textContent
 								}`;
 							}
-							presenceData.smallImageKey = document.querySelector(
-								"svg[class^='active']"
-							).id;
-							presenceData.smallImageText =
-								document.querySelector<HTMLOrSVGImageElement>(
-									"svg[class^='active']"
-								).dataset.tooltipValue;
+							presenceData.smallImageKey = document
+								.querySelector(
+									"[data-testid='aircraft-panel'] [data-testid='base-tooltip__content']"
+								)
+								.textContent.toLocaleLowerCase()
+								.replaceAll(" ", "");
+							presenceData.smallImageText = document.querySelector(
+								"[data-testid='base-tooltip__content']"
+							).textContent;
 							if (
-								document.querySelector(".flight-progress.appear") &&
 								document.querySelector(
-									".time-distance > div:nth-of-type(2) > span:nth-of-type(2)"
-								).className !== "hidden"
+									"[data-testid='aircraft-panel__flight-time-remaining'] > span"
+								)
 							) {
 								if (
 									remaining !==
 									parseInt(
 										document
 											.querySelector(
-												".time-distance > div:nth-of-type(2) > span:nth-of-type(2)"
+												"[data-testid='aircraft-panel__flight-time-remaining'] > span"
 											)
 											.textContent.slice(5)
 											.split(":")[0]
@@ -497,7 +488,7 @@ presence.on("UpdateData", async () => {
 										parseInt(
 											document
 												.querySelector(
-													".time-distance > div:nth-of-type(2) > span:nth-of-type(2)"
+													"[data-testid='aircraft-panel__flight-time-remaining'] > span"
 												)
 												.textContent.slice(5)
 												.split(":")[1]
@@ -508,7 +499,7 @@ presence.on("UpdateData", async () => {
 										parseInt(
 											document
 												.querySelector(
-													".time-distance > div:nth-of-type(2) > span:nth-of-type(2)"
+													"[data-testid='aircraft-panel__flight-time-remaining'] > span"
 												)
 												.textContent.slice(5)
 												.split(":")[0]
@@ -517,7 +508,7 @@ presence.on("UpdateData", async () => {
 										parseInt(
 											document
 												.querySelector(
-													".time-distance > div:nth-of-type(2) > span:nth-of-type(2)"
+													"[data-testid='aircraft-panel__flight-time-remaining'] > span"
 												)
 												.textContent.slice(5)
 												.split(":")[1]
@@ -699,6 +690,9 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.location.hostname;
 			break;
 	}
+
+	presenceData.details = "Doing";
+	presenceData.state = "ur mom";
 
 	if (!elapsed) delete presenceData.startTimestamp;
 	if (!timeLeft) delete presenceData.endTimestamp;
