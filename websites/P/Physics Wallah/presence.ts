@@ -8,6 +8,10 @@ presence.on("UpdateData", async () => {
 		},
 		Path = document.location.pathname;
 
+	presenceData.buttons = [
+		{ label: "Open Website", url: document.location.href },
+	];
+
 	if (Path === "/") {
 		presenceData.details = "Home";
 		presenceData.state = "Browsing...";
@@ -36,6 +40,9 @@ presence.on("UpdateData", async () => {
 			}`;
 			presenceData.smallImageKey = "studying";
 			presenceData.smallImageText = "Studying";
+			presenceData.buttons = [
+				{ label: "View Batch", url: document.location.href },
+			];
 		}
 
 		if (Path.includes("batch-video-player")) {
@@ -47,6 +54,9 @@ presence.on("UpdateData", async () => {
 			}`;
 			presenceData.smallImageKey = "watching";
 			presenceData.smallImageText = "Watching a lecture";
+			presenceData.buttons = [
+				{ label: "Watch Lecture", url: document.location.href },
+			];
 		}
 	}
 
@@ -59,6 +69,9 @@ presence.on("UpdateData", async () => {
 		}`;
 		presenceData.smallImageKey = "watching";
 		presenceData.smallImageText = "Watching a lecture";
+		presenceData.buttons = [
+			{ label: "Watch Lecture", url: document.location.href },
+		];
 	}
 
 	if (Path.includes("subject-topics")) {
@@ -76,6 +89,5 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Browsing Resources";
 		}
 	}
-
 	presence.setActivity(presenceData);
 });
