@@ -2,6 +2,9 @@ const presence = new Presence({
 	clientId: "1134044987277975616",
 });
 
+let mediaTimestamps: [number, number];
+const time = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "phy",
@@ -11,6 +14,8 @@ presence.on("UpdateData", async () => {
 	presenceData.buttons = [
 		{ label: "Open Website", url: document.location.href },
 	];
+
+	presenceData.startTimestamp = time;
 
 	if (Path === "/") {
 		presenceData.details = "Home";
@@ -46,23 +51,45 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (Path.includes("batch-video-player")) {
-			presenceData.details =
-				"Watching Lecture " + `| ${localStorage.getItem("dpp_subject")}`;
+			const deta = localStorage.getItem("dpp_subject");
+			let detal = ` | ${deta}`;
+
+			if (deta === null) detal = "";
+
+			presenceData.details = `Watching Lecture${detal}`;
 
 			presenceData.state = `${
 				JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
 			}`;
-			presenceData.smallImageKey = "watching";
-			presenceData.smallImageText = "Watching a lecture";
 			presenceData.buttons = [
 				{ label: "Watch Lecture", url: document.location.href },
 			];
+
+			updateVideoTimestamps();
+			presenceData.startTimestamp = mediaTimestamps[0];
+			presenceData.endTimestamp = mediaTimestamps[1];
+
+			const video = document.querySelectorAll(".vjs-paused");
+
+			if (video.length > 1) {
+				presenceData.smallImageKey = "paused";
+				presenceData.smallImageText = "Paused";
+			}
+
+			if (video.length === 0) {
+				presenceData.smallImageKey = "watching";
+				presenceData.smallImageText = "Watching a lecture";
+			}
 		}
 	}
 
 	if (Path.startsWith("/watch")) {
-		presenceData.details =
-			"Watching Lecture " + `| ${localStorage.getItem("dpp_subject")}`;
+		const deta = localStorage.getItem("dpp_subject");
+		let detal = ` | ${deta}`;
+
+		if (deta === null) detal = "";
+
+		presenceData.details = `Watching Lecture${detal}`;
 
 		presenceData.state = `${
 			JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
@@ -72,6 +99,22 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{ label: "Watch Lecture", url: document.location.href },
 		];
+
+		updateVideoTimestamps();
+		presenceData.startTimestamp = mediaTimestamps[0];
+		presenceData.endTimestamp = mediaTimestamps[1];
+
+		const video = document.querySelectorAll(".vjs-paused");
+
+		if (video.length > 0) {
+			presenceData.smallImageKey = "paused";
+			presenceData.smallImageText = "Paused";
+		}
+
+		if (video.length === 0) {
+			presenceData.smallImageKey = "watching";
+			presenceData.smallImageText = "Watching a lecture";
+		}
 	}
 
 	if (Path.includes("subject-topics")) {
@@ -91,3 +134,14 @@ presence.on("UpdateData", async () => {
 	}
 	presence.setActivity(presenceData);
 });
+
+function updateVideoTimestamps() {
+	mediaTimestamps = presence.getTimestamps(
+		presence.timestampFromFormat(
+			document.querySelector(".vjs-current-time-display").innerHTML
+		),
+		presence.timestampFromFormat(
+			document.querySelector(".vjs-duration-display").innerHTML
+		)
+	);
+}
