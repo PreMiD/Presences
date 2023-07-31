@@ -1,9 +1,9 @@
 const presence = new Presence({
 	clientId: "1134044987277975616",
-});
+}),
+browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let mediaTimestamps: [number, number];
-const time = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
