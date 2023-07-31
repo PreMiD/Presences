@@ -12,9 +12,6 @@ presence.on("UpdateData", async () => {
 		},
 		Path = document.location.pathname;
 
-	presenceData.buttons = [
-		{ label: "Open Website", url: document.location.href },
-	];
 
 
 	if (Path === "/") {
