@@ -7,7 +7,8 @@ let mediaTimestamps: [number, number];
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "phy",
+			largeImageKey: "https://i.imgur.com/OxQKsGm.png",
+			startTimestamp: browsingTimestamp,
 		},
 		Path = document.location.pathname;
 
