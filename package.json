@@ -43,7 +43,6 @@
 	"dependencies": {
 		"@commitlint/cli": "17.3.0",
 		"@commitlint/config-angular": "17.3.0",
-		"@pmd/root": "github:PreMid/pmd",
 		"@types/chrome": "0.0.204",
 		"@types/node": "18.11.15",
 		"@typescript-eslint/eslint-plugin": "5.46.1",

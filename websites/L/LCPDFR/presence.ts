@@ -9,17 +9,17 @@ let profilePictureLink: HTMLAnchorElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/WDOURvX.png",
+			largeImageKey: "https://i.imgur.com/XAgWtZw.png",
 			startTimestamp: browsingTimestamp,
 		},
-		privacy = await presence.getSetting<boolean>("privacy");
+		privacy = await presence.getSetting<boolean>("privacy"),
+		{ search, pathname, hostname } = document.location;
 
-	switch (document.location.hostname) {
+	switch (hostname) {
 		case "www.lcpdfr.com": {
-			if (document.location.pathname === "/")
-				presenceData.details = "Patrolling the Home Page";
-			else if (document.location.pathname.includes("/downloads/")) {
-				const path = document.location.pathname.split("/");
+			if (pathname === "/") presenceData.details = "Patrolling the Home Page";
+			else if (pathname.includes("/downloads/")) {
+				const path = pathname.split("/");
 				presenceData.smallImageKey = Assets.Viewing;
 				if (path.includes("essential-mods"))
 					presenceData.details = "Inspecting Essential Mods";
@@ -38,43 +38,41 @@ presence.on("UpdateData", async () => {
 				else if (path.includes("misc"))
 					presenceData.details = "Keeping an eye out for miscelaneous";
 				else presenceData.details = "Inspecting the Download Page";
-			} else if (document.location.pathname.includes("/forums/"))
+			} else if (pathname.includes("/forums/"))
 				presenceData.details = "Engaging in Discussions";
-			else if (document.location.pathname.includes("/discover/"))
+			else if (pathname.includes("/discover/"))
 				presenceData.details = "Investigating Recent Activity";
-			else if (document.location.pathname.includes("/contact-us/"))
+			else if (pathname.includes("/contact-us/"))
 				presenceData.details = "Contacting the staff";
-			else if (document.location.pathname.includes("/wiki/"))
+			else if (pathname.includes("/wiki/"))
 				presenceData.details = "Studying the Wiki";
-			else if (document.location.pathname.includes("/login/"))
+			else if (pathname.includes("/login/"))
 				presenceData.details = "Going on Duty";
-			else if (document.location.pathname.includes("/register/"))
+			else if (pathname.includes("/register/"))
 				presenceData.details = "Signing Up for Duty";
-			else if (document.location.pathname.includes("/search/")) {
-				urlParams = new URLSearchParams(window.location.search);
+			else if (pathname.includes("/search/")) {
+				urlParams = new URLSearchParams(search);
 				searchQuery = urlParams.get("q");
 				presenceData.details = "Searching for:";
 				presenceData.state = searchQuery;
 				presenceData.smallImageKey = Assets.Search;
-			} else if (document.location.pathname.includes("/profile/")) {
-				profilePictureLink = document.querySelector<HTMLAnchorElement>(
-					"a.ipsUserPhoto.ipsUserPhoto_xlarge"
-				);
+			} else if (pathname.includes("/profile/")) {
 				presenceData.details = "Viewing Officer:";
 				presenceData.state = document.querySelector(
 					"h1[class='ipsType_reset ipsPageHead_barText']"
 				).textContent;
-				presenceData.largeImageKey =
-					profilePictureLink.querySelector<HTMLImageElement>("img").src;
+				presenceData.largeImageKey = document
+					.querySelector('[class="ipsUserPhoto ipsUserPhoto_xlarge"]')
+					?.getAttribute("href");
 				presenceData.smallImageKey = Assets.Viewing;
-			} else if (document.location.pathname.includes("/settings/"))
+			} else if (pathname.includes("/settings/"))
 				presenceData.details = "Viewing Settings";
-			else if (document.location.pathname.includes("/guideline-hub/")) {
+			else if (pathname.includes("/guideline-hub/")) {
 				presenceData.details = "Reading the guidelines";
 				presenceData.smallImageKey = Assets.Reading;
-			} else if (document.location.pathname.includes("/staff/"))
+			} else if (pathname.includes("/staff/"))
 				presenceData.details = "Viewing the Staff";
-			else if (document.location.pathname.includes("/gallery/")) {
+			else if (pathname.includes("/gallery/")) {
 				presenceData.details = "Looking through the Gallery";
 				presenceData.smallImageKey = Assets.Viewing;
 			} else presenceData.details = "Just browsing...";
@@ -83,11 +81,11 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (privacy) {
-		presenceData.details = "Browsing under cover";
+		presenceData.details = "Browsing undercover...";
 		delete presenceData.state;
 		delete presenceData.smallImageKey;
-		if (document.location.pathname.includes("/profile/"))
-			presenceData.largeImageKey = "https://i.imgur.com/WDOURvX.png";
+		if (presenceData.largeImageKey !== "https://i.imgur.com/XAgWtZw.png")
+			presenceData.largeImageKey = "https://i.imgur.com/XAgWtZw.png";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
