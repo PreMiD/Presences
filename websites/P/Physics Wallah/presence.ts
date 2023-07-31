@@ -16,7 +16,6 @@ presence.on("UpdateData", async () => {
 		{ label: "Open Website", url: document.location.href },
 	];
 
-	presenceData.startTimestamp = time;
 
 	if (Path === "/") {
 		presenceData.details = "Home";
