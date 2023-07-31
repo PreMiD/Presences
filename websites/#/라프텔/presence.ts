@@ -6,7 +6,6 @@ let prevData = "",
 	animeData: detail = {},
 	animeDataEpisode: episode = {};
 
-/* eslint-disable camelcase */
 type detail = {
 	id?: string;
 	name?: string;
@@ -31,7 +30,8 @@ type episode = {
 presence.on("UpdateData", async () => {
 	const { pathname, search } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/PDh4ncE.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/%23/%EB%9D%BC%ED%94%84%ED%85%94/assets/logo.jpg",
 		};
 
 	if (pathname === "/") {
