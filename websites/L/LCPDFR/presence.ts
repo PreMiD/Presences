@@ -3,8 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let profilePictureLink: HTMLAnchorElement,
-	urlParams: URLSearchParams,
+let	urlParams: URLSearchParams,
 	searchQuery: string;
 
 presence.on("UpdateData", async () => {
