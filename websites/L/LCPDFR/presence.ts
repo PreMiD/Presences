@@ -3,7 +3,7 @@ const presence = new Presence({
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let urlParams: URLSearchParams, searchQuery: string;
+let urlParameters: URLSearchParams, searchQuery: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -49,8 +49,8 @@ presence.on("UpdateData", async () => {
       else if (pathname.includes("/register/"))
         presenceData.details = "Signing Up for Duty";
       else if (pathname.includes("/search/")) {
-        urlParams = new URLSearchParams(search);
-        searchQuery = urlParams.get("q");
+        urlParameters = new URLSearchParams(search);
+        searchQuery = urlParameters.get("q");
         presenceData.details = "Searching for:";
         presenceData.state = searchQuery;
         presenceData.smallImageKey = Assets.Search;
