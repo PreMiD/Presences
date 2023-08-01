@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 	if (pathname.includes("subject-topics")) {
 		const urlParams = new URLSearchParams(search);
 
-		if (urlParams.has("chapterId") === true) {
+		if (urlParams.has("chapterId")) {
 			presenceData.details = urlParams.get("subject");
 			presenceData.state = urlParams.get("topic");
 			presenceData.smallImageKey = Assets.Reading;
