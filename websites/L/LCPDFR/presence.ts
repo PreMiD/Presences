@@ -11,31 +11,54 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
-		{ search, pathname, hostname } = document.location;
+		{ search, pathname, hostname } = document.location,
+		activeTab = document
+			.querySelectorAll(
+				'[class="ipsTabs_item ipsTabs_activeItem ipsTabs_active"]'
+			)[0]
+			?.textContent?.trim();
 
 	switch (hostname) {
 		case "www.lcpdfr.com": {
 			if (pathname === "/") presenceData.details = "Patrolling the Home Page";
 			else if (pathname.includes("/downloads/")) {
-				const path = pathname.split("/");
 				presenceData.smallImageKey = Assets.Viewing;
-				if (path.includes("essential-mods"))
-					presenceData.details = "Inspecting Essential Mods";
-				else if (path.includes("vehiclemodels"))
-					presenceData.details = "Analyzing Vehicle Models";
-				else if (path.includes("vehiclestextures"))
-					presenceData.details = "Examining Vehicle Textures";
-				else if (path.includes("scripts"))
-					presenceData.details = "Investigating Scripts & Plugins";
-				else if (path.includes("character"))
-					presenceData.details = "Reviewing Character Mods";
-				else if (path.includes("audio"))
-					presenceData.details = "Exploring Audio Mods";
-				else if (path.includes("datafile"))
-					presenceData.details = "Examining Data Files";
-				else if (path.includes("misc"))
-					presenceData.details = "Keeping an eye out for miscelaneous";
-				else presenceData.details = "Inspecting the Download Page";
+				switch (activeTab) {
+					case "Essential Mods": {
+						presenceData.details = "Inspecting Essential Mods";
+						break;
+					}
+					case "Vehicle Models": {
+						presenceData.details = "Analyzing Vehicle Models";
+						break;
+					}
+					case "Vehicle Textures": {
+						presenceData.details = "Examining Vehicle Textures";
+						break;
+					}
+					case "Scripts & Plugins": {
+						presenceData.details = "Investigating Scripts & Plugins";
+						break;
+					}
+					case "Character": {
+						presenceData.details = "Reviewing Character Mods";
+						break;
+					}
+					case "Audio": {
+						presenceData.details = "Exploring Audio Mods";
+						break;
+					}
+					case "Visual & Data File": {
+						presenceData.details = "Examining Data Files";
+						break;
+					}
+					case "Misc": {
+						presenceData.details = "Keeping an eye out for miscelaneous";
+						break;
+					}
+					default:
+						presenceData.details = "Inspecting the Download Page";
+				}
 			} else if (pathname.includes("/forums/"))
 				presenceData.details = "Engaging in Discussions";
 			else if (pathname.includes("/discover/"))
