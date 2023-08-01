@@ -93,7 +93,6 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = mediaTimestamps[0];
 		presenceData.endTimestamp = mediaTimestamps[1];
 
-
 		if (document.querySelectorAll(".vjs-paused").length < 1) {
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageKey = "Watching a lecture";
