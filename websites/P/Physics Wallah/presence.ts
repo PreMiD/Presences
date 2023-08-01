@@ -65,12 +65,12 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = mediaTimestamps[0];
 			presenceData.endTimestamp = mediaTimestamps[1];
 
-			if (document.querySelectorAll(".vjs-paused")) {
-				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText = "Paused";
-			} else {
+			if (document.querySelectorAll(".vjs-paused").length < 1) {
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageKey = "Watching a lecture";
+			} else {
+				presenceData.smallImageKey = Assets.Pause;
+				presenceData.smallImageText = "Paused";
 			}
 		}
 	}
@@ -93,16 +93,13 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = mediaTimestamps[0];
 		presenceData.endTimestamp = mediaTimestamps[1];
 
-		const video = document.querySelectorAll(".vjs-paused");
 
-		if (video.length > 0) {
-			presenceData.smallImageKey = Assets.Pause;
-			presenceData.smallImageText = "Paused";
-		}
-
-		if (video.length === 0) {
+		if (document.querySelectorAll(".vjs-paused").length < 1) {
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageKey = "Watching a lecture";
+		} else {
+			presenceData.smallImageKey = Assets.Pause;
+			presenceData.smallImageText = "Paused";
 		}
 	}
 
