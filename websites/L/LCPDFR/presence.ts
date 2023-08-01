@@ -13,9 +13,7 @@ presence.on("UpdateData", async () => {
 		privacy = await presence.getSetting<boolean>("privacy"),
 		{ search, pathname, hostname } = document.location,
 		activeTab = document
-			.querySelectorAll(
-				'[class="ipsTabs_item.ipsTabs_activeItem"]'
-			)[0]
+			.querySelectorAll('[class="ipsTabs_item.ipsTabs_activeItem"]')[0]
 			?.textContent?.trim();
 
 	switch (hostname) {
