@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 		{ search, pathname, hostname } = document.location,
 		activeTab = document
 			.querySelectorAll(
-				'[class="ipsTabs_item ipsTabs_activeItem ipsTabs_active"]'
+				'[class="ipsTabs_item.ipsTabs_activeItem"]'
 			)[0]
 			?.textContent?.trim();
 
