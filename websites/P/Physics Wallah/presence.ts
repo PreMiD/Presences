@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/OxQKsGm.png",
 			startTimestamp: browsingTimestamp,
 		},
-		Path = document.location.pathname;
+		{ pathname, href, search } = document.location;
 
 	if (Path === "/") {
 		presenceData.details = "Home";
