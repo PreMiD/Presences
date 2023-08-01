@@ -14,8 +14,8 @@
 		"kickassanime.lol",
 		"kickassanime.ro"
 	],
-	"regExp": "(([a-z0-9-]+[.])*kickassanime([.][a-z]+)+[/])|((www[0-9]*[.])?(kickassanime[.][a-z]+))",
-	"version": "1.1.9",
+	"regExp": "(([a-z0-9-]+[.])*kickassanime([.][a-z]+)+)|(kaas[.].*)|((www[0-9]*[.])?(kickassanime[.][a-z]+))",
+	"version": "1.2.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/thumbnail.png",
 	"color": "#c7c95b",
@@ -39,10 +39,10 @@
 			"value": true
 		},
 		{
-			"id": "cover",
-			"title": "Show Cover",
+			"id": "episode-cover",
+			"title": "Show Episode Thumbnail",
 			"icon": "fad fa-images",
-			"value": true
+			"value": false
 		}
 	]
 }
