@@ -36,9 +36,15 @@ setInterval(async () => {
 			.textContent;
 	}
 
+	// https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset
+	const coverImage = `https:${(document.querySelector(".track").querySelector(".entity-cover__image") as HTMLImageElement)
+			.srcset // get all images of all sizes
+			.split(", ").at(-1) // get the last one (the best one)
+			.split(" ").at(0)}`; // get the URL of the image
+
 	presenceData = {
 		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/Y/Yandex%20Music/assets/logo.png",
+			coverImage ?? "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex%20Music/assets/logo.png",
 		smallImageKey: playing ? "play" : "pause",
 		smallImageText: playing ? (await strings).playing : (await strings).pause,
 		details: (document.querySelectorAll(".track__title")[0] as HTMLElement)
