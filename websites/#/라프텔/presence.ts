@@ -6,7 +6,6 @@ let prevData = "",
 	animeData: detail = {},
 	animeDataEpisode: episode = {};
 
-/* eslint-disable camelcase */
 type detail = {
 	id?: string;
 	name?: string;
