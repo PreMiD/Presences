@@ -3,8 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let title: Element;
-
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png",
 }
