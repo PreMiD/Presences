@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = urlParams.get("topic");
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Browsing Resources";
-		} else if (urlParams.has("chapterId") === false) {
+		} else if (!urlParams.has("chapterId")) {
 			presenceData.details = urlParams.get("subject");
 			presenceData.state = "Browsing Resources...";
 			presenceData.smallImageKey = Assets.Reading;
