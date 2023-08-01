@@ -2,8 +2,8 @@ const presence = new Presence({
 	clientId: "1102272266278027296",
 });
 const enum Assets {
-	FRAnimeLogo = "https://i.imgur.com/YKxUCs3.png",
-	FRAnimeLogoBg = "https://i.imgur.com/byFtXWd.png",
+	FRAnimeLogo = "https://cdn.rcd.gg/PreMiD/websites/F/FRAnime/assets/logo.png",
+	FRAnimeLogoBg = "https://cdn.rcd.gg/PreMiD/websites/F/FRAnime/assets/0.png",
 }
 const presenceStrings = {
 		browsing: "Parcours le catalogue",
