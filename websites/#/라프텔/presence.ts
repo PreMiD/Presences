@@ -7,10 +7,10 @@ let prevData = "",
 	animeDataEpisode: episode = {};
 
 /* eslint-disable camelcase */
-// This is just to make sure that the above line is not removed by eslint 
-// while at the same time passing Deepscan issues. 
-const unused_variable = (a: number, b: number) => a + b; 
-unused_variable(1, 2); 
+// This is just to make sure that the above line is not removed by eslint
+// while at the same time passing Deepscan issues.
+const unused_variable = (a: number, b: number) => a + b;
+unused_variable(1, 2);
 type detail = {
 	id?: string;
 	name?: string;
