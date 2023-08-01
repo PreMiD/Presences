@@ -6,53 +6,49 @@ const presence = new Presence({
 let mediaTimestamps: [number, number];
 
 const enum Assets {
-	Paused = "https://i.imgur.com/nR0HSqz.png",
 	HomePage = "https://i.imgur.com/pIrO5z2.png",
-	Studying = "https://i.imgur.com/2ZFNWje.png",
-	Playing = "https://i.imgur.com/7tDTtPC.png",
 	Scrolling = "https://i.imgur.com/klh7wd3.png",
+	Logo = "https://i.imgur.com/OxQKsGm.png",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/OxQKsGm.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = document.location;
 
-	if (Path === "/") {
+	if (pathname === "/") {
 		presenceData.details = "Home";
 		presenceData.state = "Browsing...";
 		presenceData.smallImageKey = Assets.HomePage;
 		presenceData.smallImageText = "Browsing Home Page";
 	}
 
-	if (Path.startsWith("/study")) {
+	if (pathname.startsWith("/study")) {
 		presenceData.details = "Browsing...";
 		presenceData.state = "In website";
 		presenceData.smallImageKey = Assets.Scrolling;
 		presenceData.smallImageText = "Browsing the website";
 
-		if (Path.endsWith("/my-batches")) {
+		if (pathname.endsWith("/my-batches")) {
 			presenceData.details = "Studying...";
 			presenceData.state = "My Batches";
-			presenceData.smallImageKey = Assets.Studying;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Studying";
 		}
 
-		if (Path.includes("batch-overview")) {
+		if (pathname.includes("batch-overview")) {
 			presenceData.details = "Studying...";
 			presenceData.state = `Viewing ${
-				document.querySelector(".bold.text-white").innerHTML
+				document.querySelector(".bold.text-white").textContent
 			}`;
-			presenceData.smallImageKey = Assets.Studying;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Studying";
-			presenceData.buttons = [
-				{ label: "View Batch", url: document.location.href },
-			];
+			presenceData.buttons = [{ label: "View Batch", url: href }];
 		}
 
-		if (Path.includes("batch-video-player")) {
+		if (pathname.includes("batch-video-player")) {
 			const deta = localStorage.getItem("dpp_subject");
 			let detal = ` | ${deta}`;
 
@@ -63,25 +59,23 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `${
 				JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
 			}`;
-			presenceData.buttons = [
-				{ label: "Watch Lecture", url: document.location.href },
-			];
+			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
 
 			updateVideoTimestamps();
 			presenceData.startTimestamp = mediaTimestamps[0];
 			presenceData.endTimestamp = mediaTimestamps[1];
 
 			if (document.querySelectorAll(".vjs-paused")) {
-				presenceData.smallImageKey = Assets.Paused;
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
 			} else {
-				presenceData.smallImageKey = Assets.Playing;
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageKey = "Watching a lecture";
 			}
 		}
 	}
 
-	if (Path.startsWith("/watch")) {
+	if (pathname.startsWith("/watch")) {
 		const deta = localStorage.getItem("dpp_subject");
 		let detal = ` | ${deta}`;
 
@@ -93,9 +87,7 @@ presence.on("UpdateData", async () => {
 			JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
 		}`;
 
-		presenceData.buttons = [
-			{ label: "Watch Lecture", url: document.location.href },
-		];
+		presenceData.buttons = [{ label: "Watch Lecture", url: href }];
 
 		updateVideoTimestamps();
 		presenceData.startTimestamp = mediaTimestamps[0];
@@ -104,28 +96,28 @@ presence.on("UpdateData", async () => {
 		const video = document.querySelectorAll(".vjs-paused");
 
 		if (video.length > 0) {
-			presenceData.smallImageKey = Assets.Paused;
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 		}
 
 		if (video.length === 0) {
-			presenceData.smallImageKey = Assets.Playing;
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageKey = "Watching a lecture";
 		}
 	}
 
-	if (Path.includes("subject-topics")) {
-		const urlParams = new URLSearchParams(window.location.search);
+	if (pathname.includes("subject-topics")) {
+		const urlParams = new URLSearchParams(search);
 
 		if (urlParams.has("chapterId") === true) {
 			presenceData.details = urlParams.get("subject");
 			presenceData.state = urlParams.get("topic");
-			presenceData.smallImageKey = Assets.Studying;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Browsing Resources";
 		} else if (urlParams.has("chapterId") === false) {
 			presenceData.details = urlParams.get("subject");
 			presenceData.state = "Browsing Resources...";
-			presenceData.smallImageKey = Assets.Studying;
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Browsing Resources";
 		}
 	}
@@ -135,10 +127,10 @@ presence.on("UpdateData", async () => {
 function updateVideoTimestamps() {
 	mediaTimestamps = presence.getTimestamps(
 		presence.timestampFromFormat(
-			document.querySelector(".vjs-current-time-display").innerHTML
+			document.querySelector(".vjs-current-time-display").textContent
 		),
 		presence.timestampFromFormat(
-			document.querySelector(".vjs-duration-display").innerHTML
+			document.querySelector(".vjs-duration-display").textContent
 		)
 	);
 }
