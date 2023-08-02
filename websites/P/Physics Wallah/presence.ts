@@ -23,9 +23,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Browsing...";
 		presenceData.smallImageKey = Assets.HomePage;
 		presenceData.smallImageText = "Browsing Home Page";
-	}
-
-	else if (pathname.startsWith("/study")) {
+	} else if (pathname.startsWith("/study")) {
 		presenceData.details = "Browsing...";
 		presenceData.state = "In website";
 		presenceData.smallImageKey = Assets.Scrolling;
@@ -36,9 +34,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "My Batches";
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Studying";
-		}
-
-		else if (pathname.includes("batch-overview")) {
+		} else if (pathname.includes("batch-overview")) {
 			presenceData.details = "Studying...";
 			presenceData.state = `Viewing ${
 				document.querySelector(".bold.text-white").textContent
@@ -46,9 +42,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Studying";
 			presenceData.buttons = [{ label: "View Batch", url: href }];
-		}
-
-		else if (pathname.includes("batch-video-player")) {
+		} else if (pathname.includes("batch-video-player")) {
 			const deta = localStorage.getItem("dpp_subject");
 			let detal = ` | ${deta}`;
 
@@ -73,9 +67,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Paused";
 			}
 		}
-	}
-
-	else if (pathname.startsWith("/watch")) {
+	} else if (pathname.startsWith("/watch")) {
 		const deta = localStorage.getItem("dpp_subject");
 		let detal = ` | ${deta}`;
 
@@ -100,9 +92,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 		}
-	}
-
-	else if (pathname.includes("subject-topics")) {
+	} else if (pathname.includes("subject-topics")) {
 		const urlParams = new URLSearchParams(search);
 
 		if (urlParams.has("chapterId")) {
