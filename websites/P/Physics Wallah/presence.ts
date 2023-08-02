@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = "Browsing Home Page";
 	}
 
-	if (pathname.startsWith("/study")) {
+	else if (pathname.startsWith("/study")) {
 		presenceData.details = "Browsing...";
 		presenceData.state = "In website";
 		presenceData.smallImageKey = Assets.Scrolling;
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Studying";
 		}
 
-		if (pathname.includes("batch-overview")) {
+		else if (pathname.includes("batch-overview")) {
 			presenceData.details = "Studying...";
 			presenceData.state = `Viewing ${
 				document.querySelector(".bold.text-white").textContent
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: "View Batch", url: href }];
 		}
 
-		if (pathname.includes("batch-video-player")) {
+		else if (pathname.includes("batch-video-player")) {
 			const deta = localStorage.getItem("dpp_subject");
 			let detal = ` | ${deta}`;
 
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (pathname.startsWith("/watch")) {
+	else if (pathname.startsWith("/watch")) {
 		const deta = localStorage.getItem("dpp_subject");
 		let detal = ` | ${deta}`;
 
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (pathname.includes("subject-topics")) {
+	else if (pathname.includes("subject-topics")) {
 		const urlParams = new URLSearchParams(search);
 
 		if (urlParams.has("chapterId")) {
