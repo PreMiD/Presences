@@ -27,15 +27,12 @@ presence.on("UpdateData", async () => {
 			videoPaused = video.paused;
 			timestamps = presence.getTimestampsfromMedia(video);
 		} else {
-			videoPaused =
-				document
-					.querySelector(".bpx-state-paused") === null;
+			videoPaused = document.querySelector(".bpx-state-paused") === null;
 			(currentTime = presence.timestampFromFormat(
 				document.querySelector(".bpx-player-ctrl-time-current").textContent
 			)),
 				(duration = presence.timestampFromFormat(
-					document.querySelector(".bpx-player-ctrl-time-duration")
-						.textContent
+					document.querySelector(".bpx-player-ctrl-time-duration").textContent
 				)),
 				(timestamps = presence.getTimestamps(currentTime, duration));
 		}
@@ -58,14 +55,16 @@ presence.on("UpdateData", async () => {
 
 					if (multiUploader) {
 						uploader = document.querySelector(".staff-name");
-						
+
 						uploaderName = `${uploader.textContent.trim()} + ${
-							parseInt(document.querySelector(".staff-amt").textContent
-							.trim().replaceAll("人","")
-							) - 1 
+							parseInt(
+								document
+									.querySelector(".staff-amt")
+									.textContent.trim()
+									.replaceAll("人", "")
+							) - 1
 						} more`;
 					} else {
-						
 						uploader = document.querySelector(".up-name");
 						// "\n      <USERNAME>\n      " -> "<USERNAME>"
 						uploaderName = uploader.textContent.trim();
