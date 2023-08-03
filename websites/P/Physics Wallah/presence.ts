@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 
 			if (document.querySelectorAll(".vjs-paused").length < 1) {
 				presenceData.smallImageKey = Assets.Play;
-				presenceData.smallImageKey = "Watching a lecture";
+				presenceData.smallImageText = "Watching a lecture";
 			} else {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
