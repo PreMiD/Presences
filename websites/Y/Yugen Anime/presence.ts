@@ -106,6 +106,15 @@ presence.on("UpdateData", async () => {
 				},
 			],
 		},
+		"/trending": {
+			details: "Viewing trending anime",
+			buttons: [
+				{
+					label: strings.buttonViewPage,
+					url: href,
+				},
+			],
+		},
 		"/history": {
 			details: "Viewing watch history",
 			buttons: [
@@ -153,17 +162,18 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			),
+			jsonIt = JSON.parse(
+				document.querySelector('script[id="syncData"]')?.innerHTML
+			),
 			isMovie = pathname.includes("movie");
-		presenceData.details = isMovie
-			? strings.watchingMovie
-			: document
-					.querySelector("div.col.justify-center.m-15-l > a > h1.text-accent")
-					?.textContent.trim();
-		presenceData.state = document
-			.querySelector("div.box.m-10-b > h1.m-5-b")
-			?.textContent.trim();
+		presenceData.details = isMovie ? strings.watchingMovie : jsonIt?.name;
+		presenceData.state =
+			document.querySelector("div.box.m-10-b > h1.m-5-b")?.textContent.trim() ??
+			document.querySelector('[class="ep-title"]')?.textContent ??
+			`Episode ${jsonIt.episode}`;
 		presenceData.largeImageKey = await getShortURL(
-			document.querySelector("div.img-icon > img")?.getAttribute("src")
+			document.querySelector("div.img-icon > img")?.getAttribute("src") ??
+				Assets.Logo
 		);
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? strings.pause : strings.play;
