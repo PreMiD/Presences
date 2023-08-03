@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("covers"),
 		]),
-		search = document.querySelector<HTMLInputElement>('[class="searchfield"]'),
+		search = document.querySelector<HTMLInputElement>(".searchfield"),
 		sortElement = document
 			.querySelector('[class*="dropdown--"] > div')
 			?.textContent?.toLowerCase(),
