@@ -106,9 +106,10 @@ presence.on("UpdateData", async () => {
 		if (
 			presenceData.largeImageKey !==
 			"https://cdn.rcd.gg/PreMiD/websites/L/LCPDFR/assets/0.png"
-		)
+		) {
 			presenceData.largeImageKey =
 				"https://cdn.rcd.gg/PreMiD/websites/L/LCPDFR/assets/0.png";
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
