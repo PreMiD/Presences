@@ -84,14 +84,14 @@ presence.on("UpdateData", async () => {
 			if (localStorage.getItem("dpp_subject")) {
 				presenceData.details = "Solving DPP (PDF)";
 				presenceData.state = localStorage.getItem("dpp_subject");
-				presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = "Viewing DPP";
 			}
 		} else if (pathname.includes("q-bank-exercise")) {
 			presenceData.details = "Solving DPP (MCQ)";
 			presenceData.state = localStorage.getItem("dpp_subject");
-			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing DPP";
 		}
