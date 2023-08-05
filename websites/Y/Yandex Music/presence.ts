@@ -21,7 +21,7 @@ setInterval(async () => {
 	const startedAt =
 			Date.now() -
 			getMillisecondsFromString(
-				(document.querySelectorAll(".progress__left")[0] as HTMLElement)
+				document.querySelectorAll<HTMLElement>(".progress__left")[0]
 					.textContent
 			),
 		playing =
@@ -29,17 +29,17 @@ setInterval(async () => {
 
 	let artists;
 	if (isPodcast()) {
-		artists = (document.querySelectorAll(".track__podcast")[0] as HTMLElement)
+		artists = document.querySelectorAll<HTMLElement>(".track__podcast")[0]
 			.textContent;
 	} else {
-		artists = (document.querySelectorAll(".track__artists")[0] as HTMLElement)
+		artists = document.querySelectorAll<HTMLElement>(".track__artists")[0]
 			.textContent;
 	}
 
 	const coverImageSizes = (
 			document
 				.querySelector(".track")
-				.querySelector(".entity-cover__image") as HTMLImageElement
+				.querySelector<HTMLImageElement>(".entity-cover__image")
 		).srcset // get all images of all sizes
 			.split(", "),
 		coverImage = coverImageSizes
@@ -48,21 +48,20 @@ setInterval(async () => {
 			.at(0),
 		largeImageKey = coverImage
 			? `https:${coverImage}`
-			: null ??
-			  "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex%20Music/assets/logo.png";
+			: "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex%20Music/assets/logo.png";
 
 	presenceData = {
 		largeImageKey,
 		smallImageKey: playing ? "play" : "pause",
 		smallImageText: playing ? (await strings).playing : (await strings).pause,
-		details: (document.querySelectorAll(".track__title")[0] as HTMLElement)
+		details: document.querySelectorAll<HTMLElement>(".track__title")[0]
 			.textContent,
 		state: artists,
 		startTimestamp: startedAt,
 		endTimestamp:
 			startedAt +
 			getMillisecondsFromString(
-				(document.querySelectorAll(".progress__right")[0] as HTMLElement)
+				document.querySelectorAll<HTMLElement>(".progress__right")[0]
 					.textContent
 			),
 	};
