@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Slowlife",
+		"id": "374905512661221377"
+	},
+	"service": "aniwave",
+	"description": {
+		"en": "Aniwave, formerly known as 9anime, is the best website to watch anime online for free, watch anime with DUB, SUB in HD. Wactch now! No Ads Guaranteed!.",
+		"nl": "Aniwave, eerder bekend als 9anime, is de beste website om gratis online anime te bekijken, bekijk anime nagesynchroniseerd, Ondertiteld en in HD! Kijk nu! Gegarandeerd Geen Advertenties!"
+	},
+	"url": "aniwave.to",
+	"regExp": "([a-z0-9-]+[.*])?(aniwave(.*)?[.][a-z]+)",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/akfxN5c.png",
+	"thumbnail": "https://i.imgur.com/dgxPb4E.png",
+	"color": "#694ba1",
+	"category": "anime",
+	"tags": [
+		"aniwave",
+		"streaming"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*",
+	"settings": [
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "timestamps",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "watch2getherJoinRoomButton",
+			"title": "Show Watch2gether \"Join Room\" Button",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacyMode": false
+			}
+		}
+	]
+}
