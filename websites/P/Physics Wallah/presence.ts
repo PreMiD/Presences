@@ -66,6 +66,34 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
 			}
+		} else if (pathname.includes("subject-topics")) {
+			const urlParams = new URLSearchParams(search);
+
+			if (urlParams.has("chapterId")) {
+				presenceData.details = urlParams.get("subject");
+				presenceData.state = urlParams.get("topic");
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageText = "Browsing Resources";
+			} else if (!urlParams.has("chapterId")) {
+				presenceData.details = urlParams.get("subject");
+				presenceData.state = "Browsing Resources...";
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageText = "Browsing Resources";
+			}
+		} else if (pathname.includes("open-pdf")) {
+			if (localStorage.getItem("dpp_subject")) {
+				presenceData.details = "Solving DPP (PDF)";
+				presenceData.state = localStorage.getItem("dpp_subject");
+				presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+				presenceData.smallImageKey = Assets.Viewing;
+				presenceData.smallImageText = "Viewing DPP";
+			}
+		} else if (pathname.includes("q-bank-exercise")) {
+			presenceData.details = "Solving DPP (MCQ)";
+			presenceData.state = localStorage.getItem("dpp_subject");
+			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+			presenceData.smallImageKey = Assets.Viewing;
+			presenceData.smallImageText = "Viewing DPP";
 		}
 	} else if (pathname.startsWith("/watch")) {
 		const deta = localStorage.getItem("dpp_subject");
@@ -91,20 +119,6 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
-		}
-	} else if (pathname.includes("subject-topics")) {
-		const urlParams = new URLSearchParams(search);
-
-		if (urlParams.has("chapterId")) {
-			presenceData.details = urlParams.get("subject");
-			presenceData.state = urlParams.get("topic");
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = "Browsing Resources";
-		} else if (!urlParams.has("chapterId")) {
-			presenceData.details = urlParams.get("subject");
-			presenceData.state = "Browsing Resources...";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = "Browsing Resources";
 		}
 	}
 	presence.setActivity(presenceData);
