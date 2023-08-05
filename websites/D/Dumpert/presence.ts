@@ -21,11 +21,7 @@ presence.on("UpdateData", async () => {
 		search = document.querySelector<HTMLInputElement>(".searchfield"),
 		sortElement = document
 			.querySelector('[class*="dropdown--"] > div')
-			?.textContent?.toLowerCase(),
-		metaElement = document.querySelector<HTMLMetaElement>(
-			'meta[property~="og:title"]'
-		);
-
+			?.textContent?.toLowerCase();
 	if (pathname.includes("/zoek/")) {
 		presenceData.details = privacy
 			? "Bekijkt zoekresultaten"
@@ -78,7 +74,9 @@ presence.on("UpdateData", async () => {
 				];
 			}
 
-			presenceData.details = metaElement?.content ?? "Onbekende titel";
+			presenceData.details =
+				document.querySelector<HTMLMetaElement>('meta[property~="og:title"]')
+					?.content ?? "Onbekende titel";
 			break;
 		}
 		case pathname.includes("toppers"): {
