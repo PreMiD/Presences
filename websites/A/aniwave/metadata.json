@@ -11,9 +11,9 @@
 	},
 	"url": "aniwave.to",
 	"regExp": "([a-z0-9-]+[.*])?(aniwave(.*)?[.][a-z]+)",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/akfxN5c.png",
-	"thumbnail": "https://i.imgur.com/dgxPb4E.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/aniwave/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/aniwave/assets/thumbnail.png",
 	"color": "#694ba1",
 	"category": "anime",
 	"tags": [
