@@ -7,7 +7,7 @@ let urlParameters: URLSearchParams, searchQuery: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/XAgWtZw.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/LCPDFR/assets/0.png",
 			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
@@ -103,8 +103,13 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing undercover...";
 		delete presenceData.state;
 		delete presenceData.smallImageKey;
-		if (presenceData.largeImageKey !== "https://i.imgur.com/XAgWtZw.png")
-			presenceData.largeImageKey = "https://i.imgur.com/XAgWtZw.png";
+		if (
+			presenceData.largeImageKey !==
+			"https://cdn.rcd.gg/PreMiD/websites/L/LCPDFR/assets/0.png"
+		) {
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/L/LCPDFR/assets/0.png";
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
