@@ -24,13 +24,13 @@
 	"settings": [
 		{
 			"id": "privacy",
-			"title": "Privacy Mode",
+			"title": "Prywatny Tryb",
 			"icon": "fas fa-user-secret",
 			"value": false
 		},
 		{
 			"id": "buttons",
-			"title": "Show Buttons",
+			"title": "Pokaż Przyciski",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true,
 			"if": {

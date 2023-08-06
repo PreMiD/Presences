@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 
 	switch (true) {
 		case pathname === "/": {
-			presenceData.details = "Viewing the homepage";
+			presenceData.details = "Przegląda stronę główną";
 			presenceData.state =
 				document.querySelector('[class*="current-menu-item current_page_item"]')
 					?.textContent !== "Strona główna"
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname.includes("/me/anime/"): {
-			presenceData.details = "Viewing their anime list";
+			presenceData.details = "Przegląda listę anime";
 			break;
 		}
 		case pathname.includes("/anime/"): {
@@ -60,20 +60,20 @@ presence.on("UpdateData", async () => {
 						document.querySelector('[type="application/ld+json"]')?.innerHTML
 				  )?.["@graph"]?.[2]?.itemListElement?.[1]?.name ??
 				  document.querySelector(".page-header")?.textContent
-				: "Watching an anime";
+				: "Ogląda anime";
 			presenceData.state = pathname.split("/")?.[3]
-				? `Episode ${pathname.split("/")?.[3]}`
+				? `Odcinek ${pathname.split("/")?.[3]}`
 				: "";
 			if (video?.exists) {
 				delete presenceData.startTimestamp;
 				presenceData.buttons = [
 					{
-						label: "Watch Video",
+						label: "Ogląda Wideo",
 						url: href,
 					},
 				];
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = video.paused ? "Paused" : "Playing";
+				presenceData.smallImageText = video.paused ? "Pauza" : "Wstrzymane";
 				if (!video.paused) {
 					[, presenceData.endTimestamp] = presence.getTimestamps(
 						video.currentTime,
@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 			} else {
 				presenceData.buttons = [
 					{
-						label: "View Anime",
+						label: "Zobacz Anime",
 						url: href,
 					},
 				];
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		default: {
-			presenceData.details = "Browsing";
+			presenceData.details = "Przegląda";
 			break;
 		}
 	}
