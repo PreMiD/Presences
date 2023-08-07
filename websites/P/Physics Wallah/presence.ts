@@ -6,9 +6,9 @@ const presence = new Presence({
 let mediaTimestamps: [number, number];
 
 const enum Assets {
-	HomePage = "https://i.imgur.com/pIrO5z2.png",
-	Scrolling = "https://i.imgur.com/klh7wd3.png",
-	Logo = "https://i.imgur.com/OxQKsGm.png",
+	HomePage = "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/0.png",
+	Scrolling = "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/1.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
