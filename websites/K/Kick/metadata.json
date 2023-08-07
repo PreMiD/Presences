@@ -12,9 +12,9 @@
 		"kick.com",
 		"help.kick.com"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/7pAQJgm.png",
-	"thumbnail": "https://i.imgur.com/DrveDUP.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kick/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kick/assets/thumbnail.png",
 	"color": "#53fc18",
 	"category": "videos",
 	"tags": [
