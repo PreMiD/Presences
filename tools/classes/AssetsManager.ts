@@ -14,7 +14,7 @@ import sharp from "sharp";
 import { lookup as mimeLookup } from "mime-types";
 
 import { Metadata } from "./PresenceCompiler";
-import { getFolderLetter } from "../util";
+import { getFolderLetter } from "../util.js";
 
 const require = createRequire(import.meta.url),
 	rootPath = resolve(fileURLToPath(new URL(".", import.meta.url)), "../.."),
