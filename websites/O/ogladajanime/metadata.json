@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "954843951297351771",
+		"name": "_eki"
+	},
+	"service": "ogladajanime",
+	"description": {
+		"en": "ogladajanime rpc service"
+	},
+	"url": "ogladajanime.pl",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/VlvXfrp.png",
+	"thumbnail": "https://i.imgur.com/oI9te4V.png",
+	"color": "#29C5F6",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"ogladajanime",
+		"ogladajanimepl"
+	]
+}
