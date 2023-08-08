@@ -9,7 +9,7 @@ let anime: HTMLElement,
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         startTimestamp: browsingTimestamp,
-		largeImageKey: "https://i.imgur.com/TKVukXW.png"
+		largeImageKey: "https://i.imgur.com/xHce23t.png"
     };
 
     if (document.location.pathname === "/main2") {
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
         anime = document.querySelector("#anime_name_id");
         if (anime) {
             presenceData.details = anime.innerText;
-            presenceData.smallImageKey = "https://i.imgur.com/TKVukXW.png";
+            presenceData.smallImageKey = "https://i.imgur.com/xHce23t.png";
             const animeLink = document.location.href;
             presenceData.buttons = [
                 { label: "Watch Now", url: animeLink },
