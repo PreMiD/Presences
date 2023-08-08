@@ -3,13 +3,12 @@ const presence = new Presence({
 });
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let anime: HTMLElement,
-    animeicon = document.querySelector(".img-fluid.lozad");
+const animeicon = document.querySelector(".img-fluid.lozad");
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         startTimestamp: browsingTimestamp,
-		largeImageKey: "https://i.imgur.com/xHce23t.png"
+        largeImageKey: "https://i.imgur.com/xHce23t.png",
     };
 
     if (document.location.pathname === "/main2") {
@@ -25,7 +24,7 @@ presence.on("UpdateData", async () => {
             { label: "Anime List", url: listlink },
         ];
     } else if (document.location.pathname.includes("/anime")) {
-        anime = document.querySelector("#anime_name_id");
+        const anime = document.querySelector("#anime_name_id") as HTMLElement;
         if (anime) {
             presenceData.details = anime.innerText;
             presenceData.smallImageKey = "https://i.imgur.com/xHce23t.png";
