@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [{ label: "Anime List", url: listlink }];
 	} else if (document.location.pathname.includes("/anime")) {
 		if (anime) {
-			presenceData.details = anime.textContent || "";
+			presenceData.details = anime.textContent;
 			presenceData.smallImageKey = "https://i.imgur.com/xHce23t.png";
 			const animeLink = document.location.href;
 			presenceData.buttons = [{ label: "Watch Now", url: animeLink }];
