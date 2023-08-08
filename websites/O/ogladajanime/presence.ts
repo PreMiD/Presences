@@ -33,14 +33,14 @@ presence.on("UpdateData", async () => {
                 { label: "Watch Now", url: animeLink },
             ];
 
-            const episodeNumber = parseInt(animeLink.split('/').pop()) || 1;
+            const episodeNumber = parseInt(animeLink.split('/').pop() || "1");
             presenceData.state = `Episode ${episodeNumber}`;
         }
 
         if (animeicon) {
             presenceData.largeImageKey = animeicon
                 .getAttribute("data-srcset")
-                .split(" ")[0];
+                ?.split(" ")[0];
         }
     }
     
