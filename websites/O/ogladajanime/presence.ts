@@ -9,7 +9,7 @@ const animeicon = document.querySelector(".img-fluid.lozad");
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         startTimestamp: browsingTimestamp,
-        largeImageKey: "https://i.imgur.com/xHce23t.png"
+        largeImageKey: "https://i.imgur.com/xHce23t.png",
     };
 
     if (document.location.pathname === "/main2") {
@@ -26,24 +26,24 @@ presence.on("UpdateData", async () => {
         ];
     } else if (document.location.pathname.includes("/anime")) {
         if (anime) {
-            presenceData.details = anime.textContent;
+            presenceData.details = anime.textContent || "";
             presenceData.smallImageKey = "https://i.imgur.com/xHce23t.png";
             const animeLink = document.location.href;
             presenceData.buttons = [
                 { label: "Watch Now", url: animeLink },
             ];
 
-            const episodeNumber = parseInt(animeLink.split('/').pop() || '1');
+            const episodeNumber =
+                parseInt(animeLink.split('/').pop() || "1", 10) || 1;
             presenceData.state = `Episode ${episodeNumber}`;
         }
 
         if (animeicon) {
-            presenceData.largeImageKey = animeicon
-                .getAttribute("data-srcset")
-                .split(" ")[0];
+            presenceData.largeImageKey =
+                animeicon.getAttribute("data-srcset").split(" ")[0];
         }
     }
-    
+
     // Set the activity
     presence.setActivity(presenceData);
 });
