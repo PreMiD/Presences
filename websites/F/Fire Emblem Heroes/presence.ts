@@ -8,6 +8,11 @@ const enum Assets {
 	Logo = "https://cdn.discordapp.com/attachments/459040398527037441/1133604869589180436/feh.png",
 }
 
+function truncateText(text: string) {
+	if (text.length > 127) return text.slice(0, 124) + "...";
+	return text;
+}
+
 function applyMainHostDetails(
 	presenceData: PresenceData,
 	pathList: string[]
@@ -348,6 +353,42 @@ function applySupportDetails(
 	}
 }
 
+function applyFehPassDetails(presenceData: PresenceData, pathList: string[]) {
+	switch (pathList[0] ?? "") {
+		case "faq": {
+			presenceData.details = "Reading FEH Pass FAQ";
+			break;
+		}
+		case "talk": {
+			if (pathList[1]) {
+				const activeText =
+					document.querySelector<HTMLLIElement>(".text.active");
+				presenceData.details = "Reading FEH Pass Talk";
+				presenceData.state = `${
+					document.querySelector<HTMLLIElement>(".chara_name.anime").textContent
+				}: ${
+					[...activeText.classList].find(c => /\d$/.test(c)).match(/\d+/)[0]
+				} / ${
+					[
+						...document.querySelector<HTMLLIElement>(".text:last-of-type")
+							.classList,
+					]
+						.find(c => /\d$/.test(c))
+						.match(/\d+/)[0]
+				}`;
+				presenceData.smallImageKey = Assets.Question;
+				presenceData.smallImageText = truncateText(activeText.textContent);
+				presenceData.buttons = [
+					{ label: "View Talk", url: document.location.href },
+				];
+			} else {
+				presenceData.details = "Browsing FEH Pass Talk";
+			}
+			break;
+		}
+	}
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
@@ -381,6 +422,10 @@ presence.on("UpdateData", async () => {
 			} else if (hostname.startsWith("vote3"))
 				applyCYLDetails(presenceData, pathList);
 			else applyCYLDetails(presenceData, pathList.slice(1));
+			break;
+		}
+		case hostname === "fehpass.fire-emblem-heroes.com": {
+			applyFehPassDetails(presenceData, pathList.slice(1));
 			break;
 		}
 	}
