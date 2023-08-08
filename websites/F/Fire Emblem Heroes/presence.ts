@@ -260,7 +260,93 @@ function applyCYLDetails(presenceData: PresenceData, pathList: string[]): void {
 function applySupportDetails(
 	presenceData: PresenceData,
 	pathList: string[]
-): void {}
+): void {
+	switch (pathList[0]) {
+		case "mjolnir": {
+			switch (pathList[1] ?? "") {
+				case "": {
+					presenceData.details = "Reading about Mjölnir's Strike";
+					break;
+				}
+				case "archives": {
+					presenceData.details = "Viewing Mjölnir's Strike archives";
+					break;
+				}
+				case "terms": {
+					presenceData.details = `Viewing Mjölnir's Strike: ${
+						document.querySelector<HTMLDivElement>(".subtitle-section-white")
+							.textContent
+					}`;
+					presenceData.state = `Askr: ${
+						document.querySelector(".battle-left .battle-score").textContent
+					} vs. Strike: ${
+						document.querySelector(".battle-right .battle-score").textContent
+					}`;
+					presenceData.buttons = [
+						{ label: "View Situation", url: document.location.href },
+					];
+					break;
+				}
+			}
+			break;
+		}
+		case "voting_gauntlet": {
+			switch (pathList[1]) {
+				case "howtoplay": {
+					presenceData.details = "Reading about Voting Gauntlet";
+					break;
+				}
+				case "archives": {
+					presenceData.details = "Viewing Voting Gauntlet archives";
+					break;
+				}
+				case "tournaments": {
+					presenceData.details = `Viewing Gauntlet: ${
+						document.querySelector<HTMLSpanElement>("h4 > span").textContent
+					}`;
+					presenceData.buttons = [
+						{ label: "View Gauntlet", url: document.location.href },
+					];
+					const roundSections = [
+						...document.querySelectorAll(".body-section-tournament"),
+					].filter(section => !!section.querySelector("h2"));
+					for (let i = roundSections.length - 1; i >= 0; i--) {
+						const section = roundSections[i],
+							title =
+								section.querySelector<HTMLHeadingElement>("h2").textContent,
+							battles = [
+								...section.querySelectorAll<HTMLDivElement>(
+									".tournaments-battle"
+								),
+							];
+						for (let j = 0; j < battles.length; j++) {
+							const battle = battles[j],
+								nameElements = [
+									...battle.querySelectorAll<HTMLParagraphElement>(".name"),
+								],
+								names = nameElements.map(name => name.textContent),
+								scores = nameElements.map(
+									name => name.nextElementSibling.textContent
+								),
+								winningImage = getComputedStyle(
+									battle.querySelector<HTMLDivElement>(".tournaments-art-win"),
+									"::after"
+								).backgroundImage.match(/url\((.+)\)/)[1],
+								tmpData: PresenceData = Object.assign({}, presenceData),
+								id = `round${i}battle${j}`;
+							tmpData.state = `${title}: ${names[0]} vs. ${names[1]}`;
+							tmpData.smallImageKey = winningImage;
+							tmpData.smallImageText = `${scores[0]} vs. ${scores[1]}`;
+							slideshow.addSlide(id, tmpData, 5e3);
+						}
+					}
+					break;
+				}
+			}
+			break;
+		}
+	}
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
