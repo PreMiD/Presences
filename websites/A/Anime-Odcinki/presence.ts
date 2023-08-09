@@ -4,8 +4,8 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	"Logo0" = "https://i.imgur.com/PhkhX1t.png",
-	"Logo1" = "https://i.imgur.com/RMZE8N8.png",
+	"Logo0" = "https://cdn.rcd.gg/PreMiD//websites/A/Anime-Odcinki/assets/logo.png",
+	"Logo1" = "https://cdn.rcd.gg/PreMiD//websites/A/Anime-Odcinki/assets/0.png",
 }
 let video = {
 	exists: false,
