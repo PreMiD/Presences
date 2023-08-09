@@ -1,7 +1,8 @@
 const presence = new Presence({ clientId: "1137362720254074972" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	anime: HTMLElement = document.querySelector("#anime_name_id"),
-	animeicon = document.querySelector(".img-fluid.lozad");
+	animeicon = document.querySelector(".img-fluid.lozad"),
+	{ pathname, href } = document.location;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -10,25 +11,22 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.location.pathname === "/main2")
-		presenceData.details = "Viewing the home page";
+		presenceData.details = "Przegląda stronę główną";
 	else if (document.location.pathname.includes("/search/name/"))
-		presenceData.details = "Searching anime";
+		presenceData.details = "Szuka Anime";
 	else if (document.location.pathname.includes("/chat"))
-		presenceData.details = "Writing in the chat";
+		presenceData.details = "Rozmawia na chacie";
 	else if (document.location.pathname.includes("/anime_list/")) {
-		presenceData.details = "Browsing the anime list";
-		const listlink = document.location.href;
-		presenceData.buttons = [{ label: "Anime List", url: listlink }];
+		presenceData.details = "Przegląda listę Anime";
+		presenceData.buttons = [{ label: "Lista Anime", url: href }];
 	} else if (document.location.pathname.includes("/anime")) {
 		if (anime) {
 			presenceData.details = anime.textContent;
 			presenceData.smallImageKey = "https://i.imgur.com/xHce23t.png";
-			const animeLink = document.location.href;
-			presenceData.buttons = [{ label: "Watch Now", url: animeLink }];
+			presenceData.buttons = [{ label: "Obejrzyj teraz", url: href }];
 
-			const episodeNumber =
-				parseInt(animeLink.split("/").pop() || "1", 10) || 1;
-			presenceData.state = `Episode ${episodeNumber}`;
+			const episodeNumber = parseInt(href.split("/").pop() || "1", 10) || 1;
+			presenceData.state = `Odcinek : ${episodeNumber}`;
 		}
 
 		if (animeicon) {
@@ -37,7 +35,5 @@ presence.on("UpdateData", async () => {
 				.split(" ")[0];
 		}
 	}
-
-	// Set the activity
 	presence.setActivity(presenceData);
 });

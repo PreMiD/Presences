@@ -6,9 +6,13 @@
 	},
 	"service": "ogladajanime",
 	"description": {
-		"en": "ogladajanime rpc service"
+		"en": "Watch anime with Polish subtitles. All free and no ads.",
+		"pl": "Oglądaj anime z polskimi napisami. Wszystko za darmo i bez reklam."
 	},
-	"url": "ogladajanime.pl",
+	"url": [
+		"ogladajanime.pl",
+		"www.ogladajanime.pl"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/9bardgu.png",
 	"thumbnail": "https://i.imgur.com/oI9te4V.png",
