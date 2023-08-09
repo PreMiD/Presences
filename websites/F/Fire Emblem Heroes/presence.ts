@@ -312,9 +312,8 @@ async function applyCYLDetails(
 						};
 					})
 				);
-				for (const [i, winnerDatum] of winnerData.entries()) {
+				for (const [i, winnerDatum] of winnerData.entries())
 					slideshow.addSlide(`${i}`, winnerDatum, 5e3);
-				}
 			}
 			break;
 		}
