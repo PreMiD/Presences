@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 		case pathname === "/top-imdb": {
 			presenceData.details = privacy
 				? "Viewing content"
-				: "Viewing top imdb content";
+				: "Viewing top IMDb content";
 			presenceData.buttons = [
 				{
 					label: "View Content",
@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
 				episodeNumberTitle = document.querySelector(
 					'[class*="eps-item active"]'
 				)?.textContent;
-			presenceData.details = privacy ? "Watching a tv series" : tvSplit?.[0];
+			presenceData.details = privacy ? "Watching a TV series" : tvSplit?.[0];
 			presenceData.state =
 				episodeNumberTitle?.includes("Eps") && tvSplit?.[1]?.includes("Season")
 					? `${tvSplit?.[1].replace("Season ", "S")}:${episodeNumberTitle
@@ -205,7 +205,7 @@ presence.on("UpdateData", async () => {
 		case pathname.includes("/watch-movie/"): {
 			delete presenceData.startTimestamp;
 			presenceData.details = privacy
-				? "Watching a tv series"
+				? "Watching a movie"
 				: document.querySelector("img.film-poster-img")?.getAttribute("title");
 			presenceData.buttons = [
 				{
