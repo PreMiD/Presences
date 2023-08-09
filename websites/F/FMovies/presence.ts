@@ -49,7 +49,7 @@ function setCommonData(
 }
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/logo.png",
+	Logo = "https://cdn.rcd.gg/PreMiD//websites/F/FMovies/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
