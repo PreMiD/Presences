@@ -63,24 +63,14 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("image"),
 		]);
 
-	if (pathname.includes("/series/") || pathname.includes("/tv/")) {
-		const season =
-				document
-					.querySelector(".watch[data-season]")
-					?.getAttribute("data-season") || null,
-			episode =
-				document.querySelector(".watch[data-ep]")?.getAttribute("data-ep") ||
-				null;
-
-		if (season !== null || episode !== null) {
-			presenceData.state =
-				episode && season
-					? `S${season}:E${episode}`
-					: episode && !season
-					? `Episode ${episode}`
-					: !episode && season
-					? `Season ${season}`
-					: "";
+		if (pathname.includes("/series/") || pathname.includes("/tv/")) {
+			const matches = href.match(/\/(\d+-\d+)/);
+			if (matches) {
+				const [season, episode] = matches[1].split('-');
+				presenceData.state = `S${season}:E${episode}`;
+			} else {
+				presenceData.state = "";
+			}
 		}
 		setCommonData(presenceData, document, iFrameData, href);
 	} else if (pathname.startsWith("/movie/"))
