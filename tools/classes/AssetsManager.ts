@@ -35,7 +35,7 @@ export default class AssetsManager {
 
 	get assetBaseUrl() {
 		return `${cdnBase}/PreMiD/${encodeURI(
-			this.presenceFolder.replace(this.cwd, "")
+			this.presenceFolder.replace(`${this.cwd}/`, "")
 		).replace("#", "%23")}/assets`;
 	}
 
