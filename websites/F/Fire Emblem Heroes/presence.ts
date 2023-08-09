@@ -386,6 +386,24 @@ function applyFehPassDetails(presenceData: PresenceData, pathList: string[]) {
 			}
 			break;
 		}
+		default: {
+			presenceData.details = "Viewing a Resplendent Hero";
+			presenceData.state = `${
+				document.querySelector<HTMLParagraphElement>(".chara_name").textContent
+			}: ${
+				document.querySelector<HTMLParagraphElement>(".chara_catch").textContent
+			}`;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>(".chara_icon > img").src;
+			presenceData.smallImageKey =
+				document.querySelector<HTMLImageElement>(".mini_img > img").src;
+			presenceData.smallImageText = truncateText(
+				document.querySelector(".chara_wrap > p:last-child").textContent
+			);
+			presenceData.buttons = [
+				{ label: "View Hero", url: document.location.href },
+			];
+		}
 	}
 }
 
