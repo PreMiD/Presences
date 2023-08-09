@@ -418,13 +418,10 @@ function applySupportDetails(
 									name => name.nextElementSibling.textContent
 								),
 								winningImage = getComputedStyle(
-									battle.querySelector<HTMLDivElement>(".tournaments-art-win"),
-									"::after"
+									battle.querySelector<HTMLDivElement>(".tournaments-art-win").parentElement
 								).backgroundImage.match(/url\(['"]?(.+?)["']?\)/)[1],
 								tmpData: PresenceData = Object.assign({}, presenceData);
-							tmpData.state = `${
-								section.querySelector<HTMLHeadingElement>("h2").textContent
-							}: ${names[0]} vs. ${names[1]}`;
+							tmpData.state = `Round ${roundSections.length - i}: ${names[0]} vs. ${names[1]}`;
 							tmpData.smallImageKey = winningImage;
 							tmpData.smallImageText = `${scores[0]} vs. ${scores[1]}`;
 							slideshow.addSlide(`round${i}battle${j}`, tmpData, 5e3);
