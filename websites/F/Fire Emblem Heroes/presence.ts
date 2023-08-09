@@ -418,10 +418,13 @@ function applySupportDetails(
 									name => name.nextElementSibling.textContent
 								),
 								winningImage = getComputedStyle(
-									battle.querySelector<HTMLDivElement>(".tournaments-art-win").parentElement
+									battle.querySelector<HTMLDivElement>(".tournaments-art-win")
+										.parentElement
 								).backgroundImage.match(/url\(['"]?(.+?)["']?\)/)[1],
 								tmpData: PresenceData = Object.assign({}, presenceData);
-							tmpData.state = `Round ${roundSections.length - i}: ${names[0]} vs. ${names[1]}`;
+							tmpData.state = `Round ${roundSections.length - i}: ${
+								names[0]
+							} vs. ${names[1]}`;
 							tmpData.smallImageKey = winningImage;
 							tmpData.smallImageText = `${scores[0]} vs. ${scores[1]}`;
 							slideshow.addSlide(`round${i}battle${j}`, tmpData, 5e3);
@@ -562,7 +565,7 @@ function applyGuideDetails(
 			slideshow.addSlide(characterImage, presenceData, 5e3);
 			for (const description of characterDescriptions) {
 				const tmpData: PresenceData = Object.assign({}, presenceData);
-				tmpData.state = truncateText(description.text);
+				tmpData.smallImageText = truncateText(description.text);
 				tmpData.smallImageKey = description.image;
 				slideshow.addSlide(description.image, tmpData, 5e3);
 			}
