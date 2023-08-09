@@ -160,7 +160,7 @@ for (const presence of changedPresences) {
 		warnings.push({
 			presence,
 			message:
-				"Presence has metadata.iFrameRegExp set to '.*', pleaase change this if possible",
+				"Presence has metadata.iFrameRegExp set to '.*', please change this if possible",
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("iFrameRegExp"),
