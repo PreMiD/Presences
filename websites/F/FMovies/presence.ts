@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("image"),
 		]);
 
-		if (pathname.includes("/series/") || pathname.includes("/tv/")) {
+	if (pathname.includes("/series/") || pathname.includes("/tv/")) {
 			const matches = href.match(/\/(\d+-\d+)/);
 			if (matches) {
 				const [season, episode] = matches[1].split('-');
