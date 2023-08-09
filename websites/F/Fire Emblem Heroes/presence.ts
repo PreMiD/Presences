@@ -180,15 +180,13 @@ const observer = new IntersectionObserver(
 	entries => {
 		let visibleSection = section;
 		for (const entry of entries) {
-			const id = entry.target.id,
+			const { id } = entry.target,
 				ratio = entry.intersectionRatio;
 			if (ratio > 0.05) {
 				visibleSection = id;
 				break;
 			}
-			if (visibleSection === id && ratio < 0.05) {
-				visibleSection = "";
-			}
+			if (visibleSection === id && ratio < 0.05) visibleSection = "";
 		}
 		if (visibleSection !== section) section = visibleSection;
 	},
@@ -249,7 +247,7 @@ async function applyCYLDetails(
 		case "results": {
 			if (
 				new URLSearchParams(document.location.search).get("overall") ||
-				pathList[0].indexOf("detail") !== -1 ||
+				pathList[0].includes("detail") ||
 				(pathList[0] === "result" && pathList[1])
 			)
 				presenceData.details = `Viewing ${campaignTitle} results`;
@@ -314,8 +312,8 @@ async function applyCYLDetails(
 						};
 					})
 				);
-				for (let i = 0; i < winnerData.length; i++) {
-					slideshow.addSlide(`${i}`, winnerData[i], 5e3);
+				for (const [i, winnerDatum] of winnerData.entries()) {
+					slideshow.addSlide(`${i}`, winnerDatum, 5e3);
 				}
 			}
 			break;
@@ -403,10 +401,8 @@ function applySupportDetails(
 						...document.querySelectorAll(".body-section-tournament"),
 					].filter(section => !!section.querySelector("h2"));
 					for (let i = roundSections.length - 1; i >= 0; i--) {
-						const section = roundSections[i];
-
 						for (const [j, battle] of [
-							...section.querySelectorAll<HTMLDivElement>(
+							...roundSections[i].querySelectorAll<HTMLDivElement>(
 								".tournaments-battle"
 							),
 						].entries()) {
@@ -625,18 +621,7 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	debugData = presenceData;
-	debugCount++;
-
 	if (slideshow.getSlides().length) presence.setActivity(slideshow);
 	else if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
-
-let debugData: PresenceData = {};
-let debugCount = 0;
-
-setInterval(() => {
-	console.log(debugData, debugCount);
-	console.log(slideshow.currentSlide);
-}, 2500);
