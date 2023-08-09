@@ -91,8 +91,9 @@ function applyMainHostDetails(
 				}
 				case "cont2": {
 					presenceData.details = "Reading FEH Lore";
-					presenceData.state =
-						document.querySelector<HTMLImageElement>("#storySlide .flex-active .on").alt;
+					presenceData.state = document.querySelector<HTMLImageElement>(
+						"#storySlide .flex-active .on"
+					).alt;
 					break;
 				}
 				case "cont4": {
@@ -149,7 +150,7 @@ function applyMainHostDetails(
 			presenceData.details = "Browsing articles";
 			if (section) {
 				const articleContainer = document.querySelector<HTMLDivElement>(
-					`${section}`
+					`#${section}`
 				);
 
 				presenceData.state = `${
