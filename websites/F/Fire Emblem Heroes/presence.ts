@@ -443,6 +443,10 @@ function applyFehPassDetails(
 	pathList: string[]
 ): void {
 	switch (pathList[0] ?? "") {
+		case "": {
+			presenceData.details = "Browsing FEH Pass";
+			break;
+		}
 		case "faq": {
 			presenceData.details = "Reading FEH Pass FAQ";
 			break;
